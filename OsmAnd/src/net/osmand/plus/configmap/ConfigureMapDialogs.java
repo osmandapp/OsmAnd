@@ -262,7 +262,7 @@ public class ConfigureMapDialogs {
 	}
 
 	// FK-TODO: DRY with CustomAlert.SingleSelectionDialogFragment
-	public static class MapLanguageDialog extends DialogFragment implements SettingHighlighterProvider  {
+	public static class MapLanguageDialog extends DialogFragment implements SettingHighlighterProvider {
 
 		private final AlertDialog alertDialog;
 		private final Map<String, String> mapLanguageNameById;
@@ -294,7 +294,16 @@ public class ConfigureMapDialogs {
 		}
 
 		private View getView(final Setting setting) {
-			return getListView().getChildAt(getIndexedOf(setting));
+			return getViewByPosition(getListView(), getIndexedOf(setting));
+		}
+
+		// aapted from https://stackoverflow.com/a/24864536
+		public static View getViewByPosition(final ListView listView, final int pos) {
+			final int firstListItemPosition = listView.getFirstVisiblePosition();
+			final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+			return firstListItemPosition <= pos && pos <= lastListItemPosition ?
+					listView.getChildAt(pos - firstListItemPosition) :
+					listView.getAdapter().getView(pos, null, listView);
 		}
 
 		private ListView getListView() {

@@ -1,6 +1,7 @@
 package net.osmand.plus.widgets.alert;
 
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE;
+import static net.osmand.plus.configmap.ConfigureMapDialogs.MapLanguageDialog.getViewByPosition;
 import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
 import android.app.Dialog;
@@ -185,7 +186,7 @@ public class CustomAlert {
 		}
 
 		private View getView(final Setting setting) {
-			return getListView().getChildAt(getIndexedOf(setting));
+			return getViewByPosition(getListView(), getIndexedOf(setting));
 		}
 
 		private ListView getListView() {

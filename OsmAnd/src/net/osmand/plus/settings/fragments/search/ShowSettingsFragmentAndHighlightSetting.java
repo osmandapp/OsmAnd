@@ -101,10 +101,10 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 			mapLanguageDialog.showNow(mapActivity.getSupportFragmentManager(), null);
 			mapLanguageDialog.executeOnShown(() -> {
 				mapLanguageDialog.scrollToSetting(setting);
-				// FK-FIXME: wrong language is highlighted or crash
-//				mapLanguageDialog
-//						.getSettingHighlighter()
-//						.highlightSetting(mapLanguageDialog, setting);
+				// FK-FIXME: language is sometimes not highlighted
+				mapLanguageDialog
+						.getSettingHighlighter()
+						.highlightSetting(mapLanguageDialog, setting);
 			});
 			return true;
 		}
