@@ -155,8 +155,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		void onDrawOverMap();
 	}
 
-	public interface ManualZoomListener {
-		void onManualZoomChange();
+	public interface MapZoomChangeListener {
+		void onMapZoomChanged(boolean manual);
 	}
 
 	public interface ViewportListener {
@@ -173,7 +173,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private List<IMapLocationListener> locationListeners = new ArrayList<>();
 	private List<ElevationListener> elevationListeners = new ArrayList<>();
-	private List<ManualZoomListener> manualZoomListeners = new ArrayList<>();
+	private List<MapZoomChangeListener> manualZoomListeners = new ArrayList<>();
 	private List<ViewportListener> viewportListeners = new ArrayList<>();
 	private List<TouchListener> touchListeners = new ArrayList<>();
 
@@ -237,6 +237,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private long multiTouchEndTime;
 	private boolean wasZoomInMultiTouch;
 	private float elevationAngle;
+	private double fullZoom;
 	private boolean targetChanged;
 	private int targetPixelX;
 	private int targetPixelY;
@@ -635,10 +636,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (app.accessibilityEnabled()) {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
-		app.getGridHelper().updateGridSettings();
 
-		for (ManualZoomListener listener : manualZoomListeners) {
-			listener.onManualZoomChange();
+		for (MapZoomChangeListener listener : manualZoomListeners) {
+			listener.onMapZoomChanged(true);
 		}
 	}
 
@@ -888,13 +888,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		locationListeners = CollectionUtils.removeFromList(locationListeners, listener);
 	}
 
-	public void addManualZoomChangeListener(@NonNull ManualZoomListener listener) {
+	public void addManualZoomChangeListener(@NonNull MapZoomChangeListener listener) {
 		if (!manualZoomListeners.contains(listener)) {
 			manualZoomListeners = CollectionUtils.addToList(manualZoomListeners, listener);
 		}
 	}
 
-	public void removeManualZoomListener(@NonNull ManualZoomListener listener) {
+	public void removeManualZoomListener(@NonNull MapZoomChangeListener listener) {
 		manualZoomListeners = CollectionUtils.removeFromList(manualZoomListeners, listener);
 	}
 
@@ -1079,6 +1079,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				|| currentViewport.getPixHeight() != view.getHeight();
 		boolean centerChanged = currentViewport.getCenterPixelY() != cy
 				|| currentViewport.getCenterPixelX() != cx;
+
+		double fullZoom = currentViewport.getFullZoom();
+		if (Math.abs(fullZoom - this.fullZoom) >= 0.0001f) {
+			this.fullZoom = fullZoom;
+			notifyMapZoomChanged();
+		}
 
 		if (updateMapRenderer || viewportChanged || centerChanged) {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratio.x, ratio.y);
@@ -2407,6 +2413,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private void notifyViewportChanged() {
 		for (ViewportListener listener : viewportListeners) {
 			listener.onViewportChanged();
+		}
+	}
+
+	private void notifyMapZoomChanged() {
+		for (MapZoomChangeListener listener : manualZoomListeners) {
+			listener.onMapZoomChanged(false);
 		}
 	}
 

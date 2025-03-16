@@ -21,7 +21,6 @@ import net.osmand.data.RotatedTileBox
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
@@ -43,7 +42,7 @@ import kotlin.math.abs
 
 class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener,
 	OsmAndLocationListener, OsmAndCompassListener, IMapLocationListener,
-	OsmandMapTileView.ManualZoomListener {
+	OsmandMapTileView.MapZoomChangeListener {
 
 	private val COMPASS_UPDATE_PERIOD = 300
 	private var visiblePlacesRect = QuadRect()
@@ -301,7 +300,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		updatePointsList()
 	}
 
-	override fun onManualZoomChange() {
+	override fun onMapZoomChanged(manual: Boolean) {
 		updatePointsList()
 	}
 

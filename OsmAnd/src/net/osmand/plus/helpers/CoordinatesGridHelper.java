@@ -31,6 +31,7 @@ public class CoordinatesGridHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final OsmandMapTileView mapTileView;
 
 	private GridConfiguration gridConfig;
 	private GridMarksProvider marksProvider;
@@ -46,7 +47,8 @@ public class CoordinatesGridHelper {
 
 	public CoordinatesGridHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.settings = app.getSettings();
+		settings = app.getSettings();
+		mapTileView = app.getOsmandMap().getMapView();
 
 		settingsListener = this::updateGridSettings;
 		settings.SHOW_COORDINATES_GRID.addListener(settingsListener);
@@ -58,7 +60,6 @@ public class CoordinatesGridHelper {
 	}
 
 	public void updateGridSettings() {
-		OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
 		MapRendererView mapRenderer = mapTileView.getMapRenderer();
 		if (mapRenderer != null) {
 			updateGridSettings(mapRenderer);
@@ -71,6 +72,7 @@ public class CoordinatesGridHelper {
 		if (gridConfig == null) {
 			gridConfig = new GridConfiguration();
 			initVariables(appMode);
+			setupMapZoomListener();
 			updateAppearance = true;
 		} else {
 			updateAppearance = updateVariables(appMode);
@@ -92,6 +94,10 @@ public class CoordinatesGridHelper {
 		cachedHaloColor = getHaloColor(appMode);
 		cachedTextScale = getTextScale(appMode);
 		cachedGridShow = shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
+	}
+
+	private void setupMapZoomListener() {
+		mapTileView.addManualZoomChangeListener(manual -> updateGridSettings());
 	}
 
 	private boolean updateVariables(@NonNull ApplicationMode appMode) {
@@ -186,7 +192,7 @@ public class CoordinatesGridHelper {
 	}
 
 	private int getCurrentZoom() {
-		return app.getOsmandMap().getMapView().getZoom();
+		return mapTileView.getZoom();
 	}
 
 	private float getTextScale(@NonNull ApplicationMode appMode) {

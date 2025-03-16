@@ -29,7 +29,7 @@ import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.OsmandMapTileView.ManualZoomListener;
+import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener;
 import net.osmand.plus.views.OsmandMapTileView.TouchListener;
 import net.osmand.plus.views.Zoom.ComplexZoom;
 import net.osmand.shared.gpx.PointAttributes;
@@ -46,7 +46,7 @@ import static net.osmand.shared.gpx.PointAttributes.DEV_ANIMATED_ZOOM;
 import static net.osmand.shared.gpx.PointAttributes.DEV_INTERPOLATION_OFFSET_N;
 import static net.osmand.shared.gpx.PointAttributes.DEV_RAW_ZOOM;
 
-public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener {
+public class AutoZoomBySpeedHelper implements MapZoomChangeListener, TouchListener {
 
 	public static final float ZOOM_PER_SECOND = 0.1f;
 	public static final float ZOOM_PER_MILLIS = ZOOM_PER_SECOND / 1000f;
@@ -265,7 +265,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 	}
 
 	@Override
-	public void onManualZoomChange() {
+	public void onMapZoomChanged(boolean manual) {
 		nextTurnInFocus = null;
 	}
 

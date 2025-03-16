@@ -22,12 +22,12 @@ import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener;
 
 import java.util.List;
 
 public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements NearbyPlacesAdapter.NearbyItemClickListener, IMapLocationListener,
-		OsmandMapTileView.ManualZoomListener {
+		MapZoomChangeListener {
 
 	public static final int TITLE = R.string.shared_string_explore;
 
@@ -144,7 +144,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	}
 
 	@Override
-	public void onManualZoomChange() {
+	public void onMapZoomChanged(boolean manual) {
 		updatePointsList();
 	}
 
