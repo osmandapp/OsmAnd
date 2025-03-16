@@ -1571,7 +1571,7 @@
     <string name="rendering_value_default13_name">Predefinido (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
     <string name="rendering_attr_currentTrackColor_name">Color del GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Ancho del GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Anchura del GPX</string>
     <string name="rendering_value_red_name">Rojo</string>
     <string name="rendering_value_translucent_red_name">Rojo translúcido</string>
     <string name="rendering_value_translucent_orange_name">Anaranjado translúcido</string>
@@ -1751,7 +1751,7 @@
     <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
     <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
-    <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Anchura del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
     <string name="osm_save_offline">Guardar sin conexión</string>
     <string name="copied_to_clipboard">Copiado al portapapeles</string>
@@ -2775,7 +2775,7 @@
     <string name="cubic_m">m³</string>
     <string name="metric_ton">ton</string>
     <string name="shared_string_capacity">Capacidad</string>
-    <string name="shared_string_width">Ancho</string>
+    <string name="shared_string_width">Anchura</string>
     <string name="shared_string_height">Altura</string>
     <string name="routeInfo_roadClass_name">Tipo de camino</string>
     <string name="routeInfo_surface_name">Superficie</string>
@@ -3143,7 +3143,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificultad de la pista</string>
-    <string name="routing_attr_width_name">Ancho</string>
+    <string name="routing_attr_width_name">Anchura</string>
     <string name="routing_attr_width_description">Especifica el límite de anchura permitida del vehículo en rutas.</string>
     <string name="release_3_5">• Ajustes de la aplicación y del perfil actualizados. Cómoda distribución de los ajustes por tipo y posibilidad de personalizar cada perfil
 \n
