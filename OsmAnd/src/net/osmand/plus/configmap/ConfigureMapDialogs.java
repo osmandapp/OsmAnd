@@ -1,6 +1,8 @@
 package net.osmand.plus.configmap;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -8,9 +10,11 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.DialogFragment;
 
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
@@ -156,10 +160,10 @@ public class ConfigureMapDialogs {
 		});
 	}
 
-	protected static void showMapLanguageDialog(
-			@NonNull MapActivity activity, boolean nightMode,
-			@NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter uiAdapter
-	) {
+	protected static void showMapLanguageDialog(final @NonNull MapActivity activity,
+												final boolean nightMode,
+												final @NonNull ContextMenuItem item,
+												final @NonNull OnDataChangeUiAdapter uiAdapter) {
 
 		int[] selectedLanguageIndex = new int[1];
 		boolean[] transliterateNames = new boolean[1];
@@ -244,7 +248,25 @@ public class ConfigureMapDialogs {
 			item.setDescription(localeDescr);
 			uiAdapter.onDataSetInvalidated();
 		});
-		b.show();
+		final AlertDialog dialog = b.create();
+		final SingleSelectionDialogFragment singleSelectionDialogFragment = new SingleSelectionDialogFragment(dialog);
+		singleSelectionDialogFragment.show(activity.getSupportFragmentManager(), null);
+	}
+
+	// FK-TODO: DRY with CustomAlert.SingleSelectionDialogFragment
+	public static class SingleSelectionDialogFragment extends DialogFragment {
+
+		private final AlertDialog alertDialog;
+
+		public SingleSelectionDialogFragment(final AlertDialog alertDialog) {
+			this.alertDialog = alertDialog;
+		}
+
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+			return alertDialog;
+		}
 	}
 
 	public static CustomAlert.SingleSelectionDialogFragment createRenderingPropertyDialog(
