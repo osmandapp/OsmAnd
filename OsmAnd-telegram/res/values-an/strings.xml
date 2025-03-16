@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="last_update_from_telegram_date"></string>
+    <string name="last_update_from_telegram_date"/>
+    <string name="shared_string_connection">Connexión</string>
 </resources>
