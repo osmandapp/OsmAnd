@@ -1503,7 +1503,7 @@
     <string name="search_poi_category_hint">Escribe para buscar</string>
     <string name="index_name_netherlands">Europa - Países Bajos</string>
     <string name="rendering_value__name">Predefinido</string>
-    <string name="rendering_value_highContrastRoads_name">Caminos en alto contraste</string>
+    <string name="rendering_value_highContrastRoads_name">Caminos en contraste alto</string>
     <string name="specified_directiory_not_writeable">No se pueden crear mapas en el directorio indicado</string>
     <string name="copying_osmand_file_failed">Fallo al mover archivos</string>
     <string name="storage_directory_external">Almacenamiento externo</string>
@@ -5983,4 +5983,14 @@
     <string name="popular_places_nearby">Lugares populares cercanos</string>
     <string name="recently_visited">Recientemente visitado</string>
     <string name="hmd_promo_description">Acceso gratuito a funciones, incluidas descargas ilimitadas de mapas, relieve 3D, etc., durante %1$s / mes</string>
+    <string name="show_image_previews">Mostrar previsualizaciones de imágenes</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Acción para controlar la visibilidad de la retícula de coordenadas sobre el mapa.</string>
+    <string name="layer_coordinates_grid">Retícula de coordenadas</string>
+    <string name="choose_location">Elija una ubicación</string>
+    <string name="point_location">Ubicación de punto</string>
+    <string name="shared_string_manual">Manual</string>
+    <string name="shared_string_map_center">Centro del mapa</string>
+    <string name="choose_location_on_map">Elija una ubicación en el mapa.</string>
+    <string name="popular_places">Lugares populares</string>
+    <string name="show_list">Mostrar lista</string>
 </resources>
