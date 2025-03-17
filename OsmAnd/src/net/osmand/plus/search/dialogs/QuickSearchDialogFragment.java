@@ -1,6 +1,5 @@
 package net.osmand.plus.search.dialogs;
 
-import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
 import static net.osmand.plus.search.dialogs.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
 import static net.osmand.plus.search.dialogs.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
@@ -25,13 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -89,7 +82,6 @@ import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
-import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.HistorySource;
@@ -100,18 +92,10 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
-import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchCoreAPI;
-import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.*;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
-import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
-import net.osmand.search.core.SearchWord;
-import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -122,7 +106,6 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
@@ -261,10 +244,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.search_dialog_fragment, container, false);
 
-		toolbarController = new QuickSearchToolbarController();
-		toolbarController.setOnBackButtonClickListener(v -> mapActivity.getFragmentsHelper().showQuickSearch(CURRENT, false));
-		toolbarController.setOnTitleClickListener(v -> mapActivity.getFragmentsHelper().showQuickSearch(CURRENT, false));
-		toolbarController.setOnCloseButtonClickListener(v -> mapActivity.getFragmentsHelper().closeQuickSearch());
+		toolbarController = new QuickSearchToolbarController(mapActivity);
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
@@ -355,6 +335,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
 					PoiUIFilter searchListFilter = ((QuickSearchListAdapter)mainSearchFragment.getAdapter()).getPoiUIFilter();
 					if (searchListFilter != null) {
+						showToolbar(getString(R.string.popular_places));
 						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
 					} else if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
@@ -2170,11 +2151,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		return null;
 	}
 
-	public void showResult(PoiUIFilter filter) {
+	public void showResult(@NonNull PoiUIFilter filter) {
 		buttonToolbarText.setText(R.string.shared_string_show_on_map);
 		mainSearchFragment.getAdapter().clear();
 		updateSearchResult(createSearchResultCollection(filter), true);
-		((QuickSearchListAdapter)mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
+		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
 		updateTabBarVisibility(false);
 		toolbarEdit.setVisibility(View.GONE);
 		searchEditText.setHint(R.string.popular_places);

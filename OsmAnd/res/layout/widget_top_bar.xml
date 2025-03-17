@@ -84,7 +84,7 @@
 			</LinearLayout>
 
 			<ImageButton
-				android:id="@+id/widget_top_bar_refresh_button"
+				android:id="@+id/widget_top_bar_action_button"
 				style="@style/Widget.AppCompat.ActionButton"
 				android:layout_width="48dp"
 				android:layout_height="@dimen/toolbar_height"
