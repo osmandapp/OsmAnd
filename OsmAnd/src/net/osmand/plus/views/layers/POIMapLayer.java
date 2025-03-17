@@ -712,7 +712,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					if (tileBox.containsPoint(x, y, iconSize)) {
 						String id = o.getGpxIcon();
 						if (id == null) {
-							id = RenderingIcons.getIconNameForAmenity(o);
+							id = RenderingIcons.getIconNameForAmenity(app, o);
 						}
 						if (id != null) {
 							PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(

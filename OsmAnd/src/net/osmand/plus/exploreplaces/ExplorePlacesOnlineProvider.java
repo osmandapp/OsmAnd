@@ -152,7 +152,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 			if (tileWidth * tileHeight <= MAX_TILES_PER_QUAD_RECT) {
 				break;
 			}
-			zoom -= 1;
+			zoom -= 3;
 		}
 		zoom = Math.max(zoom, 1);
 		// Calculate tile bounds for the QuadRect as float values

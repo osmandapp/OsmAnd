@@ -94,7 +94,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			if (isFullSize) {
 				String id = amenity.getGpxIcon();
 				if (id == null) {
-					id = RenderingIcons.getIconNameForAmenity(amenity);
+					id = RenderingIcons.getIconNameForAmenity(ctx, amenity);
 				}
 				if (id != null) {
 					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, getColor(),
