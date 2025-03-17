@@ -50,6 +50,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -64,6 +65,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -219,9 +221,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		String transparency = transparencyValue + "%";
 		visibilityTv.setText(transparency);
 
-		int minZoom = srtmPlugin.getTerrainMinZoom();
-		int maxZoom = srtmPlugin.getTerrainMaxZoom();
-		String zoomLevels = minZoom + " - " + maxZoom;
+		NumberFormat numberFormat = OsmAndFormatter.getNumberFormat(app);
+		String minZoom = numberFormat.format(srtmPlugin.getTerrainMinZoom());
+		String maxZoom = numberFormat.format(srtmPlugin.getTerrainMaxZoom());
+		String zoomLevels = getString(R.string.ltr_or_rtl_combine_via_dash, minZoom, maxZoom);
 		zoomLevelsTv.setText(zoomLevels);
 		coloSchemeTv.setText(mode.getType().getName(app));
 	}

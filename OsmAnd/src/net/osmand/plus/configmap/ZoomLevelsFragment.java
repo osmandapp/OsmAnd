@@ -16,8 +16,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
@@ -85,8 +87,9 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 
 	private void updateLabels() {
 		Limits<Integer> selectedLimits = controller.getSelectedLimits();
-		minText.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_min), String.valueOf(selectedLimits.min())));
-		maxText.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_max), String.valueOf(selectedLimits.max())));
+		NumberFormat numberFormat = OsmAndFormatter.getNumberFormat(app);
+		minText.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_min), numberFormat.format(selectedLimits.min())));
+		maxText.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_max), numberFormat.format(selectedLimits.max())));
 	}
 
 	@Override

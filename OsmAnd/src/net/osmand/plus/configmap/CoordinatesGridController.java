@@ -20,11 +20,13 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.CoordinatesGridHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.GridFormat;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,8 +92,9 @@ public class CoordinatesGridController extends BaseDialogController {
 	@NonNull
 	public String getFormattedZoomLevels() {
 		Limits<Integer> zoomLevels = getZoomLevels();
-		String min = String.valueOf(zoomLevels.min());
-		String max = String.valueOf(zoomLevels.max());
+		NumberFormat numberFormat = OsmAndFormatter.getNumberFormat(app);
+		String min = numberFormat.format(zoomLevels.min());
+		String max = numberFormat.format(zoomLevels.max());
 		return getString(R.string.ltr_or_rtl_combine_via_dash, min, max);
 	}
 
