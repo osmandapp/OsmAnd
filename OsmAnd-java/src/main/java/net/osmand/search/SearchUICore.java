@@ -16,6 +16,7 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
@@ -996,6 +997,7 @@ public class SearchUICore {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
+		COMPARE_POI_TYPE_OR_ADDITIONAL_ORDER,
 		COMPARE_AMENITY_TYPE_ADDITIONAL,
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
@@ -1054,6 +1056,13 @@ public class SearchUICore {
 				int st2 = Algorithms.extractFirstIntegerNumber(localeName2);
 				if (st1 != st2) {
 					return Algorithms.compare(st1, st2);
+				}
+				break;
+			}
+			case COMPARE_POI_TYPE_OR_ADDITIONAL_ORDER: {
+				int compared = comparePoiTypeOrAdditionalByOrder(o1, o2);
+				if (compared != 0) {
+					return compared;
 				}
 				break;
 			}
@@ -1126,6 +1135,39 @@ public class SearchUICore {
 			}
 			}
 			return 0;
+		}
+
+		private int comparePoiTypeOrAdditionalByOrder(SearchResult o1, SearchResult o2) {
+			int order1 = PoiType.DEFAULT_ORDER;
+			int order2 = PoiType.DEFAULT_ORDER;
+
+			if (o1.object instanceof PoiType that) {
+				order1 = that.getOrder();
+			} else if (o1.object instanceof SearchCoreFactory.PoiAdditionalCustomFilter that) {
+				if (!that.additionalPoiTypes.isEmpty()) {
+					for (PoiType additionalPoiType : that.additionalPoiTypes) {
+						order1 = additionalPoiType.getOrder();
+						if (order1 != PoiType.DEFAULT_ORDER) {
+							break;
+						}
+					}
+				}
+			}
+
+			if (o2.object instanceof PoiType that) {
+				order2 = that.getOrder();
+			} else if (o2.object instanceof SearchCoreFactory.PoiAdditionalCustomFilter that) {
+				if (!that.additionalPoiTypes.isEmpty()) {
+					for (PoiType additionalPoiType : that.additionalPoiTypes) {
+						order2 = additionalPoiType.getOrder();
+						if (order2 != PoiType.DEFAULT_ORDER) {
+							break;
+						}
+					}
+				}
+			}
+
+			return -Algorithms.compare(order1, order2);
 		}
 	}
 	
