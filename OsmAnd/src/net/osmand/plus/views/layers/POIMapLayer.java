@@ -129,7 +129,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public CustomMapObjects<Amenity> customObjectsDelegate;
 
 	private static final int IMAGE_ICON_BORDER_DP = 2;
-	private static final int IMAGE_ICON_SIZE_DP = 40;
+	private static final int IMAGE_ICON_SIZE_DP = 50;
 	private static final int IMAGE_ICON_OUTER_COLOR = 0xffffffff;
 	private static Bitmap imageCircleBitmap;
 	private NetworkImageLoader imageLoader;
@@ -354,6 +354,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		int right = MapUtils.get31TileNumberX(latLonBounds.right);
 		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
 		QuadTree<QuadRect> boundIntersections = initBoundIntersections(left, top, right, bottom);
+		int i = 0;
 		for (Amenity place : places) {
 			double lat = place.getLocation().getLatitude();
 			double lon = place.getLocation().getLongitude();
@@ -365,7 +366,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (!intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
 				res.put(place.getId(), place);
 			}
-			if (res.size() >= TOP_PLACES_LIMIT) {
+			if (i++ > TOP_PLACES_LIMIT) {
 				break;
 			}
 		}
@@ -974,7 +975,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private Bitmap getCircle() {
 		if (imageCircleBitmap == null) {
-			imageCircleBitmap = RenderingIcons.getBitmapFromVectorDrawable(getContext(), R.drawable.bg_point_circle);
+			imageCircleBitmap = RenderingIcons.getBitmapFromVectorDrawable(getContext(),
+					R.drawable.bg_point_circle, 1.25f * getTextScale());
 		}
 		return imageCircleBitmap;
 	}
@@ -988,6 +990,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private int getBigIconSize() {
-		return AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP);
+		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale());
 	}
 }
