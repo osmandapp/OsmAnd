@@ -1963,8 +1963,10 @@
     <string name="poi_activities_kayak">Vannsport</string>
     <string name="poi_activities_running">Løping</string>
     <string name="poi_activities_trekking">Fotturer</string>
+    <string name="poi_route_activity_type_mountain_biking">Terrengsykling</string>
     <string name="poi_route_activity_type_e_mountain_bike">El-terrengsykkel</string>
     <string name="poi_route_activity_type_gravel_biking">Grusveisykling</string>
+    <string name="poi_route_activity_type_road_cycling">Landeveissykling</string>
     <string name="poi_cafe_yes">Ja</string>
     <string name="poi_route_activity_type_e_biking">El-sykling</string>
     <string name="poi_cafe_filter">Kafé</string>

@@ -4080,6 +4080,8 @@
     <string name="poi_us_maps_recreation_area_activity_scenic_driving">Naturskøn kørsel</string>
     <string name="poi_route_activity_type_cross_country_skiing">Langrend</string>
     <string name="poi_route_activity_type_backpacking">Rygsækvandring</string>
+    <string name="poi_route_activity_type_walking">Spadsere</string>
+    <string name="poi_route_activity_type_skiing">Skiløb</string>
     <string name="poi_route_activity_type_snowshoeing">Snesko</string>
     <string name="poi_route_activity_type_e_biking">El-cykling</string>
     <string name="poi_route_activity_type_e_mountain_bike">El-mountainbike</string>
@@ -4097,9 +4099,11 @@
     <string name="poi_route_activity_type_kayak">Kajak</string>
     <string name="poi_route_activity_type_swimming_outdoor">Svømning i det fri</string>
     <string name="poi_route_activity_type_car">Bil</string>
+    <string name="poi_route_activity_type_hiking">Vandring</string>
     <string name="poi_route_activity_type_snowmobiling">Snescooter</string>
     <string name="poi_route_activity_type_trekking">Trekking</string>
     <string name="poi_route_activity_type_ski_touring">Turski</string>
+    <string name="poi_route_activity_type_road_cycling">Landevejscykling</string>
     <string name="poi_route_activity_type_parachuting_skydiving">Faldskærmsudspring</string>
     <string name="poi_cafe_filter">Cafe</string>
     <string name="poi_climbing_area">Klatreområde</string>

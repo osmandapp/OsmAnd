@@ -4921,14 +4921,19 @@
     <string name="poi_route_activity_type_cross_country_skiing">Skijanje kroz prirodu</string>
     <string name="poi_route_activity_type_ice_skating">Klizanje na ledu</string>
     <string name="poi_route_activity_type_ski_touring">Turističko skijanje</string>
+    <string name="poi_route_activity_type_skiing">Skijanje</string>
     <string name="poi_route_activity_type_snowboarding">Snoubording</string>
     <string name="poi_route_activity_type_snowmobiling">Motorno sankanje</string>
     <string name="poi_route_activity_type_snowshoeing">Nameštanje obuće za sneg</string>
+    <string name="poi_route_activity_type_hiking">Planinarenje</string>
     <string name="poi_route_activity_type_hill_climbing">Brdsko penjanje</string>
+    <string name="poi_route_activity_type_walking">Pešačenje</string>
     <string name="poi_route_activity_type_road_running">Trčanje putem</string>
     <string name="poi_route_activity_type_e_biking">E- biciklizam</string>
     <string name="poi_route_activity_type_e_mountain_bike">E-brdski biciklizam</string>
     <string name="poi_route_activity_type_gravel_biking">Biciklizam po šljunku</string>
+    <string name="poi_route_activity_type_mountain_biking">Planinski biciklizam</string>
+    <string name="poi_route_activity_type_road_cycling">Drumski biciklizam</string>
     <string name="poi_route_activity_type_touring">Touring</string>
     <string name="poi_route_activity_type_aviation">Avijacija</string>
     <string name="poi_route_activity_type_drone_flying">Letenje dronom</string>
@@ -4974,12 +4979,14 @@
     <string name="poi_piste_type">Tip staze</string>
     <string name="poi_piste_oneway">Staza je jednosmerna</string>
     <string name="poi_lit">Osvetljenje</string>
+    <string name="poi_network_cycling">Mreža</string>
     <string name="poi_network_nwn">Nacionalna pešačka ruta</string>
     <string name="poi_network_lwn">Lokalna pešačka ruta</string>
     <string name="poi_network_icn">Međunarodna biciklistička ruta</string>
     <string name="poi_network_ncn">Nacionalna biciklistička ruta</string>
     <string name="poi_network_rcn">Regionalna biciklistička ruta</string>
     <string name="poi_network_rwn">Regionalna pešačka ruta</string>
+    <string name="poi_network_foot">Mreža</string>
     <string name="poi_network_iwn">Međunarodna pešačka ruta</string>
     <string name="poi_network_lcn">Lokalna biciklistička ruta</string>
 </resources>

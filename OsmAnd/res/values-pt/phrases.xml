@@ -4909,9 +4909,11 @@
     <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Motociclismo todo-o-terreno</string>
     <string name="poi_route_activity_type_touring_motorcycling">Motociclismo de turismo</string>
     <string name="poi_route_activity_type_sport_motorcycling">Motociclismo desportivo</string>
+    <string name="poi_route_activity_type_hiking">Caminhada</string>
     <string name="poi_route_activity_type_track_racing">Corrida em pista</string>
     <string name="poi_route_activity_type_backpacking">Viajem de mochila às costas</string>
     <string name="poi_route_activity_type_road_running">Corrida em estrada</string>
+    <string name="poi_route_activity_type_walking">A pé</string>
     <string name="poi_cafe_filter">Café</string>
     <string name="poi_route_activity_type_motocross">Motocrosse</string>
     <string name="poi_route_activity_type_trail_running">Corrida em trilhos</string>
@@ -4920,9 +4922,12 @@
     <string name="poi_route_activity_type_enduro_motorcycling">Motociclismo enduro</string>
     <string name="poi_route_activity_type_motor_scooter">Trotinete a motor</string>
     <string name="poi_route_activity_type_hill_climbing">Escalada</string>
+    <string name="poi_route_activity_type_road_cycling">Ciclismo de estrada</string>
     <string name="poi_route_activity_type_e_mountain_bike">Bicicleta de montanha elétrica</string>
     <string name="poi_route_activity_type_ski_touring">Esqui de turismo</string>
     <string name="poi_route_activity_type_tree_climbing">Escalada de árvores</string>
+    <string name="poi_route_activity_type_mountain_biking">Ciclismo de montanha</string>
+    <string name="poi_route_activity_type_skiing">Esquiar</string>
     <string name="poi_route_activity_type_diving">Mergulho</string>
     <string name="poi_route_activity_type_gravel_biking">Bicicleta em gravilha</string>
     <string name="poi_route_activity_type_ice_skating">Patinagem no gelo</string>
