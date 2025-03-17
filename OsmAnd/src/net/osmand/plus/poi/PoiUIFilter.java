@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -386,7 +387,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public List<Amenity> searchAmenities(double top, double left, double bottom, double right, int zoom, ResultMatcher<Amenity> matcher) {
-		List<Amenity> results = new ArrayList<>();
+		Set<Amenity> results = new HashSet<>();
 		List<Amenity> tempResults = currentSearchResult;
 		if (tempResults != null) {
 			for (Amenity a : tempResults) {
@@ -401,12 +402,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		}
 		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
 				top, bottom, left, right, zoom, matcher);
-		for(Amenity amenity: amenities) {
-			if(!results.contains(amenity)) {
-				results.add(amenity);
-			}
-		}
-		return results;
+		results.addAll(amenities);
+		return new ArrayList<>(results);
 	}
 
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locs, int poiSearchDeviationRadius) {
