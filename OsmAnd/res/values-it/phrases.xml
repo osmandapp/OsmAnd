@@ -4575,4 +4575,26 @@
     <string name="poi_us_maps_recreation_area_activity_winter_sports">Sport invernali</string>
     <string name="poi_us_maps_recreation_area_open_status_unreachable">Irraggiungibile</string>
     <string name="poi_routes_cycling">Ciclismo</string>
+    <string name="poi_routes_water_sport">Sport acquatici</string>
+    <string name="poi_route_activity_type_swimming_outdoor">Nuoto all\'aperto</string>
+    <string name="poi_route_activity_type_car">Automobile</string>
+    <string name="poi_route_activity_type_hiking">Escursionismo</string>
+    <string name="poi_route_activity_type_skiing">Sci</string>
+    <string name="poi_route_activity_type_snowboarding">Snowboard</string>
+    <string name="poi_route_activity_type_canoe">Canottaggio</string>
+    <string name="poi_route_activity_type_windsurfing">Windsurf</string>
+    <string name="poi_route_activity_type_fitness">Fitness</string>
+    <string name="poi_name_etymology">Etimologia del nome</string>
+    <string name="poi_camp_site_standard">Standard</string>
+    <string name="poi_route_activity_type_ice_skating">Pattinaggio sul Ghiaccio</string>
+    <string name="poi_route_activity_type_kayak">Kayak</string>
+    <string name="poi_route_activity_type_surfing">Surf</string>
+    <string name="poi_route_activity_type_waterskiing">Sci nautico</string>
+    <string name="poi_route_activity_type_aviation">Aviazione</string>
+    <string name="poi_route_activity_type_road_motorcycling">Motociclismo su strada</string>
+    <string name="poi_route_activity_type_trekking">Trekking</string>
+    <string name="poi_route_activity_type_walking">Camminata</string>
+    <string name="poi_route_activity_type_motocross">Motocross</string>
+    <string name="poi_cafe_yes">Sì</string>
+    <string name="poi_contact_website">Sito web</string>
 </resources>
