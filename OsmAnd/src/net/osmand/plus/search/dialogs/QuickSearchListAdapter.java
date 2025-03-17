@@ -252,7 +252,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			return bindBottomShadowItem(convertView);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
 				poiUIFilter != null && poiUIFilter.isWikiFilter()) {
-			return bindWikiItem(position, convertView, listItem);
+			return bindWikiItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.DISABLED_HISTORY) {
 			view = bindDisabledHistoryItem(listItem, convertView);
 		} else {
@@ -447,7 +447,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		return getLinearLayout(convertView, R.layout.list_shadow_footer);
 	}
 
-	private LinearLayout bindWikiItem(int position, @Nullable View convertView, @NonNull QuickSearchListItem listItem) {
+	private LinearLayout bindWikiItem(@Nullable View convertView, @NonNull QuickSearchListItem listItem) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
 		TextView title = view.findViewById(R.id.item_title);
 		TextView description = view.findViewById(R.id.item_description);
