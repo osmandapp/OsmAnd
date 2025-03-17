@@ -52,6 +52,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS
 import static net.osmand.data.Amenity.DESCRIPTION;
 import static net.osmand.data.Amenity.NAME;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SEGMENT_INDEX;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SHORTLINK_TILES;
 import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
 
@@ -59,7 +60,7 @@ import org.apache.commons.logging.Log;
 
 public class RouteInfoCard extends MapBaseCard {
 	public static final Set<String> HIDDEN_GPX_TAGS = Set.of(ACTIVITY_TYPE, NAME, DESCRIPTION,
-			ROUTE_BBOX_RADIUS, ROUTE_SHORTLINK_TILES, "translucent_line_colors");
+			ROUTE_BBOX_RADIUS, ROUTE_SHORTLINK_TILES, ROUTE_SEGMENT_INDEX, "translucent_line_colors");
 	private static final String HIDDEN_SHIELD_TAGS_PREFIX = "shield_";
 	private static final String HIDDEN_OSMC_TAGS_PREFIX = "osmc_";
 	public static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";

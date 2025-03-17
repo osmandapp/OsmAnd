@@ -155,7 +155,9 @@ public class TravelArticle {
 
 	public boolean hasOsmRouteId() {
 		String routeId = getRouteId();
-		return routeId != null && routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX);
+		return routeId != null &&
+				(routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX_LEGACY)
+						|| routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX));
 	}
 
 	@NonNull

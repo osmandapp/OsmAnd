@@ -5490,7 +5490,7 @@
     <string name="open_in_browser">Apri nel browser</string>
     <string name="shared_string_source">Sorgente</string>
     <string name="no_internet_descr">Per favore controlla nuovamente la connessione a internet</string>
-    <string name="no_photos_available_descr">Nessuna foto è stata ancora aggiunta per questa posizione</string>
+    <string name="no_photos_available_descr">Nessuna foto è stata ancora aggiunta dagli utenti per questa posizione</string>
     <string name="no_photos_available">Nessuna foto disponibile</string>
     <string name="shared_string_no_internet_connection">Nessuna connessione</string>
     <string name="unit_volt">V</string>
@@ -5743,6 +5743,6 @@
     <string name="shared_string_map_center">Centro della mappa</string>
     <string name="shared_string_manual">Manuale</string>
     <string name="show_image_previews">Mostra l\' immagine precedente</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Azione per il controllo della visibilità della Griglia delle coordinate sulla mappa.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Azione per il controllo della visibilità della griglia delle coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
 </resources>

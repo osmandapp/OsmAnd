@@ -1661,7 +1661,7 @@
     <string name="poi_internet_access_type_public">Tipo de conexión a Internet: público</string>
     <string name="poi_internet_access_type_service">Tipo de conexión a Internet: servicio</string>
     <string name="poi_internet_access_type_no">Conexión a Internet: no</string>
-    <string name="poi_maxwidth">Ancho máximo</string>
+    <string name="poi_maxwidth">Anchura máxima</string>
     <string name="poi_iata">Código IATA</string>
     <string name="poi_icao">Código ICAO</string>
     <string name="poi_faa">Código FAA</string>
@@ -1678,7 +1678,7 @@
     <string name="poi_artwork_type_graffiti">Tipo de obra: graffiti</string>
     <string name="poi_artwork_type_stele">Tipo de obra: estela</string>
     <string name="poi_artwork_type_fountain">Tipo de obra: fuente</string>
-    <string name="poi_width">Ancho</string>
+    <string name="poi_width">Anchura</string>
     <string name="poi_architect_name">Arquitecto/a;Arquitecta</string>
     <string name="poi_architecture_modern">Arquitectura: moderna</string>
     <string name="poi_architecture_stalinist_neoclassicism">Arquitectura: neoclasista stalinista</string>

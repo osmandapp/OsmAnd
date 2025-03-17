@@ -5786,4 +5786,9 @@
     <string name="recently_visited">Ostatnio odwiedzone</string>
     <string name="shared_string_road_exit">Wyjdź</string>
     <string name="hmd_promo">Promocja HMD na %1$s miesięcy</string>
+    <string name="show_image_previews">Pokaż podgląd obrazu</string>
+    <string name="choose_location">Wybierz lokalizację</string>
+    <string name="point_location">Położenie punktu</string>
+    <string name="layer_coordinates_grid">Siatka współrzędnych</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Akcja kontrolująca widoczność siatki współrzędnych na mapie.</string>
 </resources>
