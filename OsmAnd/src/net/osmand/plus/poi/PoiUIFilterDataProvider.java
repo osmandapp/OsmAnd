@@ -1,6 +1,7 @@
 package net.osmand.plus.poi;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
@@ -8,8 +9,10 @@ import net.osmand.data.DataSourceType;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
+import net.osmand.plus.views.layers.POIMapLayer.PoiUIFilterResultMatcher;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PoiUIFilterDataProvider {
@@ -37,9 +40,10 @@ public class PoiUIFilterDataProvider {
     List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
                                   double bottomLatitude, double leftLongitude,
                                   double rightLongitude, int zoom,
-                                  ResultMatcher<Amenity> matcher) {
+                                  @Nullable ResultMatcher<Amenity> matcher) {
         if (filter.isTopWikiFilter() && getDataSourceType() == DataSourceType.ONLINE) {
-            return searchWikiOnline(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude);
+            return searchWikiOnline(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude,
+                    filter.wrapResultMatcher(matcher));
         } else {
             return app.getResourceManager().searchAmenities(filter, filter.additionalFilter, topLatitude, leftLongitude,
                     bottomLatitude, rightLongitude, zoom, true, filter.wrapResultMatcher(matcher));
@@ -49,22 +53,38 @@ public class PoiUIFilterDataProvider {
     @NonNull
     private List<Amenity> searchWikiOnline(double lat, double lon, double topLatitude,
                                            double bottomLatitude, double leftLongitude,
-                                           double rightLongitude) {
+                                           double rightLongitude, @Nullable ResultMatcher<Amenity> matcher) {
         QuadRect rect = new QuadRect(leftLongitude, topLatitude, rightLongitude, bottomLatitude);
-        List<Amenity> res = explorePlacesProvider.getDataCollection(rect, 0);
-        boolean loaded = false;
-        while (explorePlacesProvider.isLoading()) {
+        List<Amenity> data = explorePlacesProvider.getDataCollection(rect, 0);
+        boolean loading = false;
+        boolean cancelled = matcher != null && matcher.isCancelled();
+        PoiUIFilterResultMatcher<?> uiFilterResultMatcher = matcher != null ? (PoiUIFilterResultMatcher<?>) matcher : null;
+        while (explorePlacesProvider.isLoading() && !cancelled) {
+            if (uiFilterResultMatcher != null) {
+                uiFilterResultMatcher.defferedResults();
+            }
             try {
                 Thread.sleep(100);
             } catch (InterruptedException ignore) {
             }
-            loaded = true;
+            loading = true;
+            cancelled = matcher != null && matcher.isCancelled();
         }
-        if (loaded) {
-            res = explorePlacesProvider.getDataCollection(rect);
+        if (cancelled) {
+            return new ArrayList<>();
         }
-
-        MapUtils.sortListOfMapObject(res, lat, lon);
-        return res;
+        if (loading) {
+            data = explorePlacesProvider.getDataCollection(rect, 0);
+        }
+        List<Amenity> result = matcher == null ? data : new ArrayList<>();
+        if (matcher != null) {
+            for (Amenity a : data) {
+                if (matcher.publish(a)) {
+                    result.add(a);
+                }
+            }
+        }
+        MapUtils.sortListOfMapObject(result, lat, lon);
+        return data;
     }
 }

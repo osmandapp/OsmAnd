@@ -38,7 +38,6 @@ abstract class KAsyncTask<Params, Progress, Result>(
 	}
 
 	fun execute(vararg params: Params) {
-		start()
 		mainScope.launch {
 			if (!isCancelled()) {
 				onPreExecute()
@@ -46,6 +45,7 @@ abstract class KAsyncTask<Params, Progress, Result>(
 			var result: Result? = null
 			if (!isCancelled()) {
 				result = withContext(backgroundContext) {
+					start()
 					doInBackground(*params)
 				}
 			}
@@ -64,9 +64,7 @@ abstract class KAsyncTask<Params, Progress, Result>(
 
 	fun isRunning() = running.value
 
-	fun cancel() {
-		cancelled.value = true
-	}
+	fun cancel() = cancelled.compareAndSet(expected = false, new = true)
 
 	private fun start() {
 		running.value = true

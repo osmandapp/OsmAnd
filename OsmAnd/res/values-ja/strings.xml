@@ -2223,15 +2223,7 @@ POIの更新は利用できません</string>
 \n • 旅程上の経由地点をサポートします。 
 \n • GPX経路を自分で使う為の記録や、アップロードしたり等の機能も備えています
 \n</string>
-    <string name="osmand_extended_description_part3">マップ機能
-\n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます
-\n • 進行方向に応じてマップの表示向きの変更も出来ます(コンパスを基本にも出来ます)
-\n • あなたがいる場所やあなたが見ている場所も表示できます
-\n • 友人があなたを見つけることが出来るように、あなたの場所を共有することができます
-\n • 大事な場所は『お気に入り』として保存できます
-\n • 地図上の名前(地名)を表示する方法を英語、現地語、または表音のつづりで選択できます
-\n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定できます
-\n</string>
+    <string name="osmand_extended_description_part3">マップ機能 \n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます \n • 進行方向に応じてマップの表示向きの変更も出来ます(コンパスを基本にも出来ます) \n • あなたがいる場所やあなたが見ている場所も表示できます \n • 友人があなたを見つけることが出来るように、あなたの場所を共有することができます \n • 大事な場所は『お気に入り』として保存できます \n • 地図上の名前(地名)を表示する方法を英語、現地語、または表音のつづりで選択できます \n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定できます</string>
     <string name="osmand_extended_description_part4">"
  スキー
  OsmAndスキーマッププラグインを使用すると、難度も含めたスキー用経路や、リフトや他の施設の場所などの追加情報を確認することができます。
@@ -3718,21 +3710,7 @@ POIの更新は利用できません</string>
     <string name="open_saved_track">保存された経路を開く</string>
     <string name="one_point_error">少なくとも2つの地点を追加してください。</string>
     <string name="shared_string_redo">繰り返し</string>
-    <string name="release_3_8">• ルート計画機能を更新 : 区分ごとに異なるナビゲーションタイプを使用し、経路として反映することが可能に
-\n
-\n• 経路の新しい外観オプション : 色、太さ、表示方向矢印、開始と終了アイコンの選択
-\n
-\n• 自転車ノードの視認性を向上
-\n
-\n• 経路のタップで、基本情報を含むコンテキストメニューの表示
-\n
-\n• 検索アルゴリズムの改善
-\n
-\n• ナビゲーションの追跡オプションの改善
-\n
-\n• プロファイル設定のインポート/エクスポートに関する問題を修正
-\n
-\n</string>
+    <string name="release_3_8">• ルート計画機能を更新 : 区分ごとに異なるナビゲーションタイプを使用し、経路として反映することが可能に \n \n• 経路の新しい外観オプション : 色、太さ、表示方向矢印、開始と終了アイコンの選択 \n \n• 自転車ノードの視認性を向上 \n \n• 経路のタップで、基本情報を含むコンテキストメニューの表示 \n \n• 検索アルゴリズムの改善 \n \n• ナビゲーションの追跡オプションの改善 \n \n• プロファイル設定のインポート/エクスポートに関する問題を修正</string>
     <string name="simplified_track">簡略化された経路</string>
     <string name="simplified_track_description">ルートの線のみが保存され、経由地点はは削除されます。</string>
     <string name="number_of_gpx_files_selected_pattern">%s個の経路ファイルが選択されました</string>
@@ -4214,31 +4192,7 @@ POIの更新は利用できません</string>
     <string name="internal_app_storage_description">すべてのユーザーや他のアプリから内部ストレージが見えなくなりました、したがってOsmAndのみがデータにアクセスできるようになります。</string>
     <string name="use_external_timestamps_description">オンラインルート計算機能のタイムスタンプを利用して、推定時間と平均速度を調整します</string>
     <string name="use_external_timestamps">外部タイムスタンプを使用</string>
-    <string name="release_4_1">• Android Autoに対する初歩的な補助機能を追加
-\n
-\n• UTM座標検索のユーザーインターフェイスの更新
-\n
-\n• GPX経路用のGPSフィルターを追加
-\n
-\n• エレベーションウィジェットの追加 (Pro用)
-\n
-\n• お気に入り:最近使用したアイコンを表示する機能の追加
-\n
-\n• ルートプランニング:起動後に選択したプロファイルを使用
-\n
-\n• Mapillaryレイヤーの修正、プラグインは標準状態では無効へと変更
-\n
-\n• アプリのすべての履歴を管理するための画面を追加
-\n
-\n• アプリを再起動した後、マップの向きがリセットされないように変更
-\n
-\n• SRTMでの高さを示すマーカーのレンダリング改善
-\n
-\n• アラビア語のマップキャプションを修正
-\n
-\n• さまざまなルーティングの問題を修正
-\n
-\n</string>
+    <string name="release_4_1">• Android Autoに対する初歩的な補助機能を追加 \n \n• UTM座標検索のユーザーインターフェイスの更新 \n \n• GPX経路用のGPSフィルターを追加 \n \n• エレベーションウィジェットの追加 (Pro用) \n \n• お気に入り:最近使用したアイコンを表示する機能の追加 \n \n• ルートプランニング:起動後に選択したプロファイルを使用 \n \n• Mapillaryレイヤーの修正、プラグインは標準状態では無効へと変更 \n \n• アプリのすべての履歴を管理するための画面を追加 \n \n• アプリを再起動した後、マップの向きがリセットされないように変更 \n \n• SRTMでの高さを示すマーカーのレンダリング改善 \n \n• アラビア語のマップキャプションを修正 \n \n• さまざまなルーティングの問題を修正</string>
     <string name="exit_pan_mode_descr">[選択]を押してパンモードを終了します</string>
     <string name="routing_attr_prefer_tactile_paving_name">触覚舗装を優先</string>
     <string name="routing_attr_allow_gate_name">ゲートの使用を許可</string>
@@ -4650,31 +4604,7 @@ POIの更新は利用できません</string>
     <string name="rendering_engine_failed">直近でOsmAndのマップレンダリングがクラッシュしました。</string>
     <string name="map_rendering_engine_v2">バージョン2 (OpenGL)</string>
     <string name="map_rendering_engine_descr">バージョン2 (OpenGL)は、より高速なマップレンダリングエンジンとなっており、2.5次元表示も可能です。ちなみにバージョン1はOsmAnd 4.3以前の標準エンジンで、古い端末で動かす場合に適しています。</string>
-    <string name="release_4_3">• 新しく高速なバージョン2 (OpenGL) マップレンダリング エンジン、2.5Dビューにも対応
-\n
-\n• 移動中の場所の変化時におけるスムーズなアニメーション
-\n
-\n• マップの中心座標とジオロケーションの高度に関する新しいウィジェット
-\n
-\n• \"タップまでの距離”:テキストサイズに関するオプションを追加
-\n
-\n• \"マップ マーカー\"ウィジェット:クリック動作を変更するオプションを追加
-\n
-\n• \"位置配置\"オプションを修正
-\n
-\n• GPX:\"link\"、\"cmt\"、\"desc\"タグ、およびカスタム拡張子のサポートを追加
-\n
-\n• \"海図\"リストを再編成
-\n
-\n• ANT+センサーのサポートを追加
-\n
-\n• ダウンロード時UUIDを無効にするオプションを追加
-\n
-\n• 標高に依存するウォーキング/ハイキング/ランニングトリップなどで、デフォルト速度を調整可能にした上での時間予測を採用
-\n
-\n• 音声出力と音量スライダーの動作を修正
-\n
-\n</string>
+    <string name="release_4_3">• 新しく高速なバージョン2 (OpenGL) マップレンダリング エンジン、2.5Dビューにも対応 \n \n• 移動中の場所の変化時におけるスムーズなアニメーション \n \n• マップの中心座標とジオロケーションの高度に関する新しいウィジェット \n \n• \"タップまでの距離”:テキストサイズに関するオプションを追加 \n \n• \"マップ マーカー\"ウィジェット:クリック動作を変更するオプションを追加 \n \n• \"位置配置\"オプションを修正 \n \n• GPX:\"link\"、\"cmt\"、\"desc\"タグ、およびカスタム拡張子のサポートを追加 \n \n• \"海図\"リストを再編成 \n \n• ANT+センサーのサポートを追加 \n \n• ダウンロード時UUIDを無効にするオプションを追加 \n \n• 標高に依存するウォーキング/ハイキング/ランニングトリップなどで、デフォルト速度を調整可能にした上での時間予測を採用 \n \n• 音声出力と音量スライダーの動作を修正</string>
     <string name="speak_gps_signal_status">GPS信号を見失ったときと再検出を通知する</string>
     <string name="rendering_attr_showMtbScale_name">MTBスケールを表示</string>
     <string name="rendering_attr_showMtbScale_description">MTBスケールに従ってトレイルを表示します。</string>
@@ -5174,49 +5104,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_glide_target_desc">目標点に到達するために必要な滑空比を表示します。</string>
     <string name="key_event_action_open_navigation_view">ナビゲーション画面を開く</string>
     <string name="rendering_value_sacScale_description">スイス・アルペン・クラブ(スイス山岳会)</string>
-    <string name="release_4_5">• BLE/ANT+ センサー:接続を再構築し、受信したデータをGPXに書き込み表示するように
-\n
-\n • お気に入りや設定を\"OsmAnd Cloud\"に無料バックアップ出来るように
-\n
-\n • 3D形状を含む地形マップに対応した新しいフォーマットに対応
-\n
-\n • 経路管理: UIの刷新、ソート機能の追加、入れ子フォルダーのサポート
-\n
-\n • Android Auto: お気に入り、経路、POIカテゴリにアクセスするための新しいスタートメニュー
-\n
-\n • 上部/下部パネルウィジェットの統合化
-\n
-\n • 新しい\"電車\"プロファイルにより、鉄道のルートを計算できるように
-\n
-\n • 等高線はどのマップソースでも機能するように
-\n
-\n • 外部キーボードのデフォルトショートカットをリスト化しかつ変更可能に
-\n
-\n • カスタムルートファイルの削除または上書きのオプションを追加
-\n
-\n • \"ルートからの逸脱を案内する\"オプションを追加
-\n
-\n • スタート画面: ファイルからOsmAndの状態を復元するオプションを追加
-\n
-\n • 北米のトラック用ナビゲーション向けに\"危険物\"クラスを追加
-\n
-\n • 歩行者用ルートに\"Via ferrata\"のサポートを追加
-\n
-\n • ハイキングルートの難易度分類に\"CAI\"スケールを追加
-\n
-\n • アプリごとの言語選択を修正
-\n
-\n • テーマアイコンのサポートを追加
-\n
-\n • OsmAnd Cloud: アカウントを削除するオプションを追加
-\n
-\n • アクセシビリティ: ボタンのタッチターゲットサイズを48dpに変更。スクリーンリーダーに表示されるマップUIに関する問題を修正
-\n
-\n • 日本語音声案内プロンプトの一新
-\n
-\n • 標高の変更と傾斜の評価を再調整
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+ センサー:接続を再構築し、受信したデータをGPXに書き込み表示するように \n \n • お気に入りや設定を\"OsmAnd Cloud\"に無料バックアップ出来るように \n \n • 3D形状を含む地形マップに対応した新しいフォーマットに対応 \n \n • 経路管理: UIの刷新、ソート機能の追加、入れ子フォルダーのサポート \n \n • Android Auto: お気に入り、経路、POIカテゴリにアクセスするための新しいスタートメニュー \n \n • 上部/下部パネルウィジェットの統合化 \n \n • 新しい\"電車\"プロファイルにより、鉄道のルートを計算できるように \n \n • 等高線はどのマップソースでも機能するように \n \n • 外部キーボードのデフォルトショートカットをリスト化しかつ変更可能に \n \n • カスタムルートファイルの削除または上書きのオプションを追加 \n \n • \"ルートからの逸脱を案内する\"オプションを追加 \n \n • スタート画面: ファイルからOsmAndの状態を復元するオプションを追加 \n \n • 北米のトラック用ナビゲーション向けに\"危険物\"クラスを追加 \n \n • 歩行者用ルートに\"Via ferrata\"のサポートを追加 \n \n • ハイキングルートの難易度分類に\"CAI\"スケールを追加 \n \n • アプリごとの言語選択を修正 \n \n • テーマアイコンのサポートを追加 \n \n • OsmAnd Cloud: アカウントを削除するオプションを追加 \n \n • アクセシビリティ: ボタンのタッチターゲットサイズを48dpに変更。スクリーンリーダーに表示されるマップUIに関する問題を修正 \n \n • 日本語音声案内プロンプトの一新 \n \n • 標高の変更と傾斜の評価を再調整</string>
     <string name="external_input_device_title">外部入力機器</string>
     <string name="key_bindings">キーバインド</string>
     <string name="key_event_action_move_to_my_location">現在地に移動</string>
@@ -5297,4 +5185,26 @@ POIの更新は利用できません</string>
     <string name="cache_size">キャッシュサイズ</string>
     <string name="map_3d_mode_action">3Dモード</string>
     <string name="map_2d_mode_action">2Dモード</string>
+    <string name="shared_string_interpolation">補完率</string>
+    <string name="location_interpolation_percent">位置補間率</string>
+    <string name="location_interpolation_percent_desc">ルートナビゲーション中の位置補間の割合を設定します。このパラメータにより、移動中にマップ上での表示位置の遅れを軽減できます。</string>
+    <string name="show_debug_info">デバッグ情報の表示</string>
+    <string name="write_heading_description">各経路地点の記録中、その時の向きも含めて保存します</string>
+    <string name="allow_display_on_top">重ね合わせ表示を許可</string>
+    <string name="disable_map_layers_descr">ベクターマップより上位のすべてのマップレイヤーを無効にします。（要再起動）</string>
+    <string name="battery_saving_mode">省電力モード</string>
+    <string name="show_grids_description">マップ上にグリッドを表示できるようにします</string>
+    <string name="write_bearing_description">各経路地点の記録中、その時の方位も含めて保存します</string>
+    <string name="write_bearing">方位の書き込み</string>
+    <string name="simulate_obd">OBDデータのシミュレート</string>
+    <string name="disable_map_layers">マップレイヤーの無効化</string>
+    <string name="allow_display_on_top_description">マップテキストを重ねて表示できるようにします</string>
+    <string name="show_debug_info_description">各マップテキストの配置に関するグラフィカルな情報を表示します</string>
+    <string name="write_heading">方向を書き込む</string>
+    <string name="free_settings_backup">設定の無料バックアップ</string>
+    <string name="litres">リットル</string>
+    <string name="unit_of_volume_description">選択された単位は、現在のプロファイルのすべての液量関連データに適用されます。</string>
+    <string name="imperial_gallons">英ガロン</string>
+    <string name="unit_of_volume">量の単位</string>
+    <string name="us_gallons">米ガロン</string>
 </resources>
