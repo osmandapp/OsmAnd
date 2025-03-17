@@ -479,7 +479,7 @@ public class MapSelectionHelper {
 		return amenity;
 	}
 
-	private boolean addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId) {
+	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId) {
 		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(result.pointLatLon, routeId);
 		if (travelGpx != null && isUniqueTravelGpx(result.selectedObjects, travelGpx)) {
 			WptPt selectedPoint = new WptPt();
@@ -487,11 +487,9 @@ public class MapSelectionHelper {
 			selectedPoint.setLon(result.pointLatLon.getLongitude());
 			SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
 			result.selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getTravelSelectionLayer());
-			return true;
 		} else if (travelGpx == null) {
 			log.error("addTravelGpx() searchTravelGpx() travelGpx is null");
 		}
-		return false;
 	}
 
 	private boolean addClickableWay(@NonNull MapSelectionResult result, @Nullable ClickableWay clickableWay) {

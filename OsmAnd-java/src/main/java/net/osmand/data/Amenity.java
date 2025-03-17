@@ -671,7 +671,12 @@ public class Amenity extends MapObject {
 	}
 
 	public boolean isRouteTrack() {
-		return subType != null && (subType.equals(ROUTE_TRACK) || subType.startsWith(ROUTES_PREFIX));
+		if (subType == null) {
+			return false;
+		} else {
+			boolean hasRouteTrackSubtype = subType.startsWith(ROUTES_PREFIX) || subType.equals(ROUTE_TRACK);
+			return hasRouteTrackSubtype && !Algorithms.isEmpty(getRouteId());
+		}
 	}
 
 	public boolean isRoutePoint() {
