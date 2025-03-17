@@ -207,11 +207,12 @@ public class TravelObfHelper implements TravelHelper {
 					continue;
 				}
 				int previousFoundSize = foundAmenities.size();
-				if (searchRadius == TRAVEL_GPX_SEARCH_RADIUS) {
-					// try search indexed route_id but skip when radius has doubled
-					searchTravelGpxAmenityByRouteId(foundAmenities, repo, routeId, location, searchRadius);
+				boolean firstSearchCycle = searchRadius == TRAVEL_GPX_SEARCH_RADIUS;
+				if (firstSearchCycle) {
+					searchTravelGpxAmenityByRouteId(foundAmenities, repo, routeId, location, searchRadius); // indexed
 				}
-				if (previousFoundSize == foundAmenities.size()) {
+				boolean nothingFound = previousFoundSize == foundAmenities.size();
+				if (nothingFound) {
 					// fallback to non-indexed route_id (compatibility with old files)
 					searchAmenity(foundAmenities, location, repo, searchRadius, 15, ROUTE_TRACK, null);
 				}
