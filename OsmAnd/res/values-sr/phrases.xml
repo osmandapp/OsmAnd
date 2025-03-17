@@ -4987,9 +4987,7 @@
     <string name="poi_network_ncn">Национална бициклистичка рута</string>
     <string name="poi_network_lcn">Локална бициклистичка рута</string>
     <string name="poi_network_iwn">Међународна пешачка рута</string>
-    <string name="poi_network_cycling">Мрежа</string>
     <string name="poi_network_rwn">Регионална пешачка рута</string>
     <string name="poi_network_rcn">Регионална бициклистичка рута</string>
     <string name="poi_network_nwn">Национална пешачка рута</string>
-    <string name="poi_network_foot">Мрежа</string>
 </resources>
