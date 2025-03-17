@@ -1144,8 +1144,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
+				PoiCategory routesCategory = app.getPoiTypes().getRoutes();
 				for (SearchResult sr : res.getCurrentSearchResults()) {
-					rows.add(new QuickSearchListItem(app, sr));
+					if (sr.object != routesCategory) {
+						rows.add(new QuickSearchListItem(app, sr));
+					}
 				}
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark, app.getString(R.string.search_online_address), view -> {
 					OsmandSettings settings = app.getSettings();

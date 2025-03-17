@@ -217,11 +217,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			if (amenity.isRouteTrack()) {
 				TravelHelper travelHelper = app.getTravelHelper();
 				TravelGpx travelGpx = new TravelGpx(amenity);
-
-				SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-				historyHelper.addNewItemToHistory(searchResult.location.getLatitude(),
-						searchResult.location.getLongitude(), pair.first, HistorySource.SEARCH);
-
 				travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
 				return; // TravelGpx
 			}
