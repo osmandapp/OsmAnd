@@ -47,7 +47,7 @@ import kotlin.math.abs
 
 class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener,
 	OsmAndLocationListener, OsmAndCompassListener, IMapLocationListener,
-	OsmandMapTileView.ManualZoomListener {
+	OsmandMapTileView.MapZoomChangeListener {
 
 	private val COMPASS_UPDATE_PERIOD = 300
 	private var visiblePlacesRect = QuadRect()
@@ -189,7 +189,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
-		app.osmandMap.mapView.addManualZoomChangeListener(this)
+		app.osmandMap.mapView.addMapZoomChangeListener(this)
 	}
 
 	private fun updatePointsList() {
@@ -222,7 +222,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
-		app.osmandMap.mapView.removeManualZoomListener(this)
+		app.osmandMap.mapView.removeMapZoomChangeListener(this)
 	}
 
 	override fun updateLocation(location: Location?) {
@@ -308,8 +308,10 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		updatePointsList()
 	}
 
-	override fun onManualZoomChange() {
-		updatePointsList()
+	override fun onMapZoomChanged(manual: Boolean) {
+		if (manual) {
+			updatePointsList()
+		}
 	}
 
 	fun toggleState() {
