@@ -4574,4 +4574,5 @@
     <string name="poi_us_maps_recreation_area_open_status_temporarily_closed">Temporaneamente chiuso</string>
     <string name="poi_us_maps_recreation_area_activity_winter_sports">Sport invernali</string>
     <string name="poi_us_maps_recreation_area_open_status_unreachable">Irraggiungibile</string>
+    <string name="poi_routes_cycling">Ciclismo</string>
 </resources>
