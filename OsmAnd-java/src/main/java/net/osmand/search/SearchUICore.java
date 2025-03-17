@@ -16,6 +16,7 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
@@ -1060,9 +1061,10 @@ public class SearchUICore {
 				break;
 			}
 			case COMPARE_POI_TYPE_OR_ADDITIONAL_ORDER: {
-				int compared = comparePoiTypeOrAdditionalByOrder(o1, o2);
-				if (compared != 0) {
-					return compared;
+				int order1 = getPoiOrderValueFromSearchResult(o1);
+				int order2 = getPoiOrderValueFromSearchResult(o2);
+				if (order1 != order2) {
+					return -Algorithms.compare(order1, order2);
 				}
 				break;
 			}
@@ -1137,37 +1139,38 @@ public class SearchUICore {
 			return 0;
 		}
 
-		private int comparePoiTypeOrAdditionalByOrder(SearchResult o1, SearchResult o2) {
-			int order1 = PoiType.DEFAULT_ORDER;
-			int order2 = PoiType.DEFAULT_ORDER;
+		private int getPoiOrderValueFromSearchResult(SearchResult sr) {
 
-			if (o1.object instanceof PoiType that) {
-				order1 = that.getOrder();
-			} else if (o1.object instanceof SearchCoreFactory.PoiAdditionalCustomFilter that) {
-				if (!that.additionalPoiTypes.isEmpty()) {
-					for (PoiType additionalPoiType : that.additionalPoiTypes) {
-						order1 = additionalPoiType.getOrder();
-						if (order1 != PoiType.DEFAULT_ORDER) {
-							break;
-						}
+			final int LEVEL_CATEGORY = +0;
+			final int LEVEL_POI_TYPE = +0;
+			final int LEVEL_POI_ADDITIONAL = +0;
+
+			if (sr.object instanceof PoiType that) {
+				// <poi_type ... order="N">
+				return that.getOrder() + LEVEL_POI_TYPE;
+			} else if (sr.object instanceof SearchCoreFactory.PoiAdditionalCustomFilter that) {
+				// <poi_additional ... order="N">
+				int order = PoiType.DEFAULT_ORDER;
+				for (PoiType additionalPoiType : that.additionalPoiTypes) {
+					order = additionalPoiType.getOrder();
+					if (order != PoiType.DEFAULT_ORDER) {
+						break; // prefer 1st non-default
 					}
 				}
-			}
-
-			if (o2.object instanceof PoiType that) {
-				order2 = that.getOrder();
-			} else if (o2.object instanceof SearchCoreFactory.PoiAdditionalCustomFilter that) {
-				if (!that.additionalPoiTypes.isEmpty()) {
-					for (PoiType additionalPoiType : that.additionalPoiTypes) {
-						order2 = additionalPoiType.getOrder();
-						if (order2 != PoiType.DEFAULT_ORDER) {
-							break;
-						}
+				return order + LEVEL_POI_ADDITIONAL;
+			} else if (sr.object instanceof PoiCategory that) {
+				// <poi_category> with <poi_type ... order="N"> = N+LEVEL
+				int order = PoiType.DEFAULT_ORDER;
+				for (PoiType additionalPoiType : that.getPoiTypes()) {
+					order = additionalPoiType.getOrder();
+					if (order != PoiType.DEFAULT_ORDER) {
+						break; // prefer 1st non-default
 					}
 				}
+				return order + LEVEL_CATEGORY; // PoiCategory is higher than its poiTypes (even having default order)
 			}
 
-			return -Algorithms.compare(order1, order2);
+			return PoiType.DEFAULT_ORDER;
 		}
 	}
 	
