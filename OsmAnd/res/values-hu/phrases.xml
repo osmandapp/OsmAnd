@@ -4891,7 +4891,6 @@
     <string name="poi_route_activity_type_sport_motorcycling">Sportmotorozás</string>
     <string name="poi_route_activity_type_backpacking">Hátizsákos utazás</string>
     <string name="poi_route_activity_type_hill_climbing">Hegymászás</string>
-    <string name="poi_route_activity_type_skiing">Síelés</string>
     <string name="poi_route_activity_type_snowboarding">Snowboardozás</string>
     <string name="poi_route_activity_type_e_mountain_bike">Elektromos hegyi kerékpározás</string>
     <string name="poi_route_activity_type_touring">Túrázás</string>
@@ -4917,7 +4916,6 @@
     <string name="poi_name_left">A bal oldal neve</string>
     <string name="poi_name_right">A jobb oldal neve</string>
     <string name="poi_route_activity_type_fitness">Fitness</string>
-    <string name="poi_route_activity_type_walking">Sétálás</string>
     <string name="poi_routes_driving">Vezetés</string>
     <string name="poi_route_activity_type_kayak">Kajakozás</string>
     <string name="poi_routes_winter_sport">Téli sportok</string>
@@ -4927,11 +4925,8 @@
     <string name="poi_route_activity_type_road_motorcycling">Országúti motorozás</string>
     <string name="poi_route_activity_type_adventure_motorcycling"/>
     <string name="poi_route_activity_type_ice_skating">Jégkorcsolyázás</string>
-    <string name="poi_route_activity_type_road_cycling">Országúti kerékpározás</string>
     <string name="poi_route_activity_type_touring_motorcycling">Túramotorozás</string>
     <string name="poi_route_activity_type_motor_scooter">Motoros robogó</string>
-    <string name="poi_route_activity_type_hiking">Túrázás</string>
-    <string name="poi_route_activity_type_mountain_biking">Hegyi kerékpározás</string>
     <string name="poi_route_activity_type_drone_flying">Drón repülés</string>
     <string name="poi_camp_site_deluxe">Luxus</string>
     <string name="poi_route_activity_type_inline_skates">Görkorcsolyázás</string>

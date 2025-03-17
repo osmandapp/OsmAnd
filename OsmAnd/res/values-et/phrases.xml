@@ -4930,12 +4930,9 @@
     <string name="poi_climbing_area">Ronimisraja piirkond</string>
     <string name="poi_route_activity_type_sport_motorcycling">Mootorrattasport</string>
     <string name="poi_route_activity_type_road_motorcycling">Mootorrattasõit teedel</string>
-    <string name="poi_route_activity_type_hiking">Matkamine</string>
     <string name="poi_route_activity_type_backpacking">Matkamine kõnnumaal</string>
-    <string name="poi_route_activity_type_walking">Kõndimine</string>
     <string name="poi_route_activity_type_trekking">Keerukas matkamine</string>
     <string name="poi_route_activity_type_gravel_biking">Rattasõit kruusateedel</string>
-    <string name="poi_route_activity_type_mountain_biking">Mägirattasõit</string>
     <string name="poi_route_article">Reisiakrtiklid</string>
     <string name="poi_route_article_point">Reisiartiklite vahepunktid</string>
     <string name="poi_route_activity_type_adventure_motorcycling">Seiklusmatkamine mootorrattal</string>
@@ -4958,7 +4955,6 @@
     <string name="poi_route_activity_type_snowshoeing">Räätsamatkad</string>
     <string name="poi_route_activity_type_snowmobiling">Mootorsaanisõit</string>
     <string name="poi_route_activity_type_snowboarding">Lumelauasõit</string>
-    <string name="poi_route_activity_type_skiing">Suusatamine</string>
     <string name="poi_route_activity_type_ski_touring">Suusamatkamine</string>
     <string name="poi_route_activity_type_ice_skating">Uisutamine</string>
     <string name="poi_route_activity_type_cross_country_skiing">Murdmaasuusatamine</string>
@@ -4970,7 +4966,6 @@
     <string name="poi_dog_sled_yes">Koerterakend: jah</string>
     <string name="poi_sled_no">Kelk/regi: ei</string>
     <string name="poi_sled_yes">Kelk/regi: jah</string>
-    <string name="poi_route_activity_type_road_cycling">Rattasõit teedel</string>
     <string name="poi_barrier_tyres">Rehvidest tõke</string>
     <string name="poi_sinkhole_ponor">Karst: pugem</string>
     <string name="poi_sinkhole_estavelle">Karst: pugem/neeluauk</string>
