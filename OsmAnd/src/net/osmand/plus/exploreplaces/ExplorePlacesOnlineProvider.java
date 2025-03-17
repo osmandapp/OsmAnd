@@ -6,16 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.search.GetExplorePlacesImagesTask;
 import net.osmand.plus.search.GetExplorePlacesImagesTask.GetImageCardsListener;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.KAsyncTask;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -63,11 +61,11 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	private static final double LOAD_ALL_TINY_RECT = 0.5;
 
 	private final OsmandApplication app;
-	private volatile int startedTasks = 0;
-	private volatile int finishedTasks = 0;
+	private final PlacesDatabaseHelper dbHelper;
 
-	private final Map<TileKey, QuadRect> loadingTiles = new HashMap<>(); // Track tiles being loaded
+	private final Map<TileKey, GetExplorePlacesImagesTask> loadingTasks = new HashMap<>();
 	private final Map<TileKey, List<Amenity>> tilesCache = new HashMap<>(); // Memory cache for recent tiles
+
 
 	private static class TileKey {
 		int zoom;
@@ -97,6 +95,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	public ExplorePlacesOnlineProvider(OsmandApplication app) {
 		this.app = app;
+		this.dbHelper = new PlacesDatabaseHelper(app);
 	}
 
 	private List<ExplorePlacesListener> listeners = Collections.emptyList();
@@ -121,10 +120,8 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
             for (ExplorePlacesListener listener : listeners) {
                 if (isPartial) {
                     listener.onPartialExplorePlacesDownloaded(); // Notify for partial updates
-                    //LOG.info(">>>> onPartialExplorePlacesDownloaded");
                 } else {
                     listener.onNewExplorePlacesDownloaded(); // Notify for full updates
-                    //LOG.info(">>>> onNewExplorePlacesDownloaded");
                 }
             }
         });
@@ -145,8 +142,14 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	@NonNull
     public List<Amenity> getDataCollection(QuadRect rect, int limit) {
-		if (rect == null) {
-			return Collections.emptyList();
+		synchronized (loadingTasks) {
+			if (rect == null) {
+				loadingTasks.values().removeIf(KAsyncTask::cancel);
+				return Collections.emptyList();
+			}
+			KQuadRect kRect = SharedUtil.kQuadRect(rect);
+			loadingTasks.values().removeIf(task -> (!task.isRunning()
+					|| !kRect.contains(task.getMapRect()) && !KQuadRect.Companion.intersects(kRect, task.getMapRect())) && task.cancel());
 		}
 		// Calculate the initial zoom level
 		int zoom = MAX_LEVEL_ZOOM_CACHE;
@@ -158,7 +161,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 			if (tileWidth * tileHeight <= MAX_TILES_PER_QUAD_RECT) {
 				break;
 			}
-			zoom -= 3;
+			zoom -= 1;
 		}
 		zoom = Math.max(zoom, 1);
 		// Calculate tile bounds for the QuadRect as float values
@@ -170,7 +173,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 				Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT;
 
 		// Fetch data for all tiles within the bounds
-		PlacesDatabaseHelper dbHelper = new PlacesDatabaseHelper(app);
 		List<Amenity> filteredAmenities = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
 		final String queryLang = getLang();
@@ -280,62 +282,53 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		double top;
 		double bottom;
 
-		//LOG.info(">>>> loadTile zoom=" + zoom + " tileX=" + tileX + " tileY=" + tileY);
-
 		TileKey tileKey = new TileKey(zoom, tileX, tileY);
-		synchronized (loadingTiles) {
-			if (loadingTiles.containsKey(tileKey)) {
+		synchronized (loadingTasks) {
+			if (loadingTasks.containsKey(tileKey)) {
 				return;
 			}
 			left = MapUtils.getLongitudeFromTile(zoom, tileX);
 			right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
 			top = MapUtils.getLatitudeFromTile(zoom, tileY);
 			bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
-			loadingTiles.put(tileKey, new QuadRect(left, top, right, bottom));
 		}
 
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
-		// Increment the task counter
-		synchronized (this) {
-			startedTasks++;
-		}
-		// Create and execute a task for the current tile
-        new GetExplorePlacesImagesTask(app, tileRect, zoom, queryLang, new GetImageCardsListener() {
-			@Override
-			public void onTaskStarted() {
-			}
+		synchronized (loadingTasks) {
+			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(app, tileRect, zoom, queryLang,
+					new GetImageCardsListener() {
+				@Override
+				public void onTaskStarted() {
+				}
 
-			@Override
-			public void onFinish(@Nullable List<? extends OsmandApiFeatureData> result) {
-				synchronized (ExplorePlacesOnlineProvider.this) {
-					finishedTasks++; // Increment the finished task counter
-					notifyListeners(startedTasks != finishedTasks);
+				@Override
+				public void onFinish(@Nullable List<? extends OsmandApiFeatureData> result) {
+					synchronized (ExplorePlacesOnlineProvider.this) {
+						notifyListeners(isLoading());
+					}
+					if (result != null) {
+						dbHelper.insertPlaces(zoom, tileX, tileY, queryLang, result);
+					}
+					synchronized (loadingTasks) {
+						loadingTasks.remove(tileKey);
+					}
 				}
-				// Store the data in the database for the current tile
-				dbHelper.insertPlaces(zoom, tileX, tileY, queryLang, result);
-				// Remove the tile from the loading set
-				synchronized (loadingTiles) {
-					loadingTiles.remove(tileKey);
-				}
-			}
-		}).execute();
+			});
+			loadingTasks.put(tileKey, task);
+			task.execute();
+		}
 	}
 
 	@Override
 	public boolean isLoading() {
-		return startedTasks > finishedTasks; // Return true if any task is running
-	}
-
-	@Override
-	public int getDataVersion() {
-		// data version is increased once new data is downloaded
-		return finishedTasks;
+		return !loadingTasks.isEmpty();
 	}
 
 	public boolean isLoadingRect(@NonNull QuadRect rect) {
-		synchronized (loadingTiles) {
-			for (QuadRect loadingRect : loadingTiles.values()) {
-				if (loadingRect.contains(rect)) {
+		KQuadRect kRect = SharedUtil.kQuadRect(rect);
+		synchronized (loadingTasks) {
+			for (GetExplorePlacesImagesTask task : loadingTasks.values()) {
+				if (task.getMapRect().contains(kRect)) {
 					return true;
 				}
 			}

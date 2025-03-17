@@ -329,17 +329,17 @@ public class WikiCoreHelper {
 	}
 
 	public static class WikiDataProperties {
-		private String id;
-		private String photoId;
+		public String id;
+		public String photoId;
 		public String photoTitle;
 		public String wikiTitle;
 		public String poitype;
 		public String poisubtype;
-		private String catId;
-		private String catTitle;
-		private String depId;
-		private String depTitle;
-		private String wikiLang;
+		public String catId;
+		public String catTitle;
+		public String depId;
+		public String depTitle;
+		public String wikiLang;
 		public String wikiDesc;
 		public Long osmid;
 

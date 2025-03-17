@@ -7,29 +7,29 @@ import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.wiki.WikiCoreHelper
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
-import java.util.Collections
 
 class GetExplorePlacesImagesTask(
 	val app: OsmandApplication,
 	val mapRect: KQuadRect,
 	val zoom: Int,
 	val locale: String,
-	val listener: GetImageCardsListener) :
-	KAsyncTask<Unit, Unit, List<OsmandApiFeatureData>?>(true) {
+	val listener: GetImageCardsListener)
+	: KAsyncTask<Unit, Unit, List<OsmandApiFeatureData>?>(true) {
+
 	private val LOG = LoggerFactory.getLogger("GetNearbyImagesTask")
 
 	private val GET_NEARBY_IMAGES_CARD_THREAD_ID = 10105
 
 	override suspend fun doInBackground(vararg params: Unit): List<OsmandApiFeatureData>? {
 		TrafficStats.setThreadStatsTag(GET_NEARBY_IMAGES_CARD_THREAD_ID)
-		var wikimediaImageList = Collections.emptyList<OsmandApiFeatureData>()
+		var wikimediaImageList: List<OsmandApiFeatureData>? = null
 		LOG.debug("Start loading nearby places")
 		try {
 			wikimediaImageList = WikiCoreHelper.getExploreImageList(mapRect, zoom, locale)
 		} catch (error: Exception) {
 			LOG.debug("Load nearby images error $error")
 		}
-		LOG.debug("Finish loading nearby places. Found ${wikimediaImageList.size} items")
+		LOG.debug("Finish loading nearby places. Found ${wikimediaImageList?.size} items")
 		return wikimediaImageList
 	}
 

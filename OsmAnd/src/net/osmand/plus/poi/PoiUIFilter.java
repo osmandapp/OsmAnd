@@ -18,6 +18,7 @@ import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.data.Amenity;
+import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -27,10 +28,10 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiFilterUtils.AmenityNameFilter;
-import net.osmand.data.DataSourceType;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.layers.POIMapLayer.PoiUIFilterResultMatcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
@@ -621,7 +622,14 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public ResultMatcher<Amenity> wrapResultMatcher(@Nullable ResultMatcher<Amenity> matcher) {
 		PoiFilterUtils.AmenityNameFilter nm = getNameFilter();
 		Set<String> searchedPois = new TreeSet<>();
-		return new ResultMatcher<Amenity>() {
+		return new PoiUIFilterResultMatcher<Amenity>() {
+
+			@Override
+			public void defferedResults() {
+				if (matcher instanceof PoiUIFilterResultMatcher) {
+					((PoiUIFilterResultMatcher<?>) matcher).defferedResults();
+				}
+			}
 
 			@Override
 			public boolean publish(Amenity a) {

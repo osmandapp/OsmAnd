@@ -138,12 +138,18 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private Map<Long, Bitmap> topPlacesBitmaps;
 	private DataSourceType wikiDataSource;
 	private boolean showTopPlacesPreviews;
+	private PoiUIFilter topPlacesFilter;
+	private RotatedTileBox topPlacesBox;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private final MapLayerData<List<Amenity>> data;
 
 	private record MapTopPlace(@NonNull PointI position, @Nullable Bitmap imageBitmap, boolean alreadyExists) {
+	}
+
+	public interface PoiUIFilterResultMatcher<T> extends ResultMatcher<T> {
+		void defferedResults();
 	}
 
 	public POIMapLayer(@NonNull Context context) {
@@ -165,8 +171,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		data = new MapLayerData<List<Amenity>>() {
 
             Set<PoiUIFilter> calculatedFilters;
-			PoiUIFilter topPlacesFilter;
-			boolean showImagePreview = false;
 
             {
                 ZOOM_THRESHOLD = 0;
@@ -180,11 +184,15 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
             @Override
             public void layerOnPreExecute() {
                 calculatedFilters = collectFilters();
-				showImagePreview = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
             }
 
             @Override
             public void layerOnPostExecute() {
+				if (isDefferedResults()) {
+					clearPoiTileProvider();
+					setDefferedResults(false);
+				}
+				topPlacesBox = null;
                 app.getOsmandMap().refreshMap();
             }
 
@@ -194,9 +202,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
                     return customObjectsDelegate.getMapObjects();
                 }
                 if (calculatedFilters.isEmpty()) {
-					if (topPlacesFilter != null) {
-						cancelLoadingImages();
-					}
+					topPlacesFilter = null;
                     return new ArrayList<>();
                 }
                 int z = (int) Math.floor(zoom + Math.log(getMapDensity()) / Math.log(2));
@@ -212,9 +218,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
                 PoiFilterUtils.combineStandardPoiFilters(calculatedFilters, app);
                 for (PoiUIFilter filter : calculatedFilters) {
                     List<Amenity> amenities = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
-                            latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<>() {
+							latLonBounds.bottom, latLonBounds.right, z, new PoiUIFilterResultMatcher<>() {
 
-                                @Override
+								@Override
+								public void defferedResults() {
+									setDefferedResults(true);
+								}
+
+								@Override
                                 public boolean publish(Amenity object) {
                                     return true;
                                 }
@@ -241,86 +252,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
                     return a1.getId() < a2.getId() ? -1 : (a1.getId().longValue() == a2.getId().longValue() ? 0 : 1);
                 });
 
-				Collection<Amenity> topPlacesList = null;
-				if (topPlacesFilter != null) {
-					synchronized (this) {
-						topPlaces = obtainTopPlacesToDisplay(res, latLonBounds, zoom);
-						topPlacesBitmaps = new HashMap<>();
-						topPlacesList = topPlaces.values();
-					}
-				}
-				if (topPlacesList != null) {
-					if (!topPlacesList.isEmpty() && showImagePreview) {
-						fetchImages(topPlacesList);
-					} else {
-						cancelLoadingImages();
-					}
-				}
-
-                return res;
+				return res;
             }
-
-			private synchronized void fetchImages(@NonNull Collection<Amenity> places) {
-				if (imageLoader == null) {
-					imageLoader = new NetworkImageLoader(context, true);
-				}
-				if (loadingImages == null) {
-					loadingImages = new HashMap<>();
-				}
-				Set<String> imagesToLoad = places.stream()
-						.map(Amenity::getWikiIconUrl).collect(Collectors.toSet());
-				loadingImages.entrySet().removeIf(entry -> {
-					if (!imagesToLoad.contains(entry.getKey())) {
-						entry.getValue().cancel();
-						return true;
-					}
-					return false;
-				});
-
-				for (Amenity place : places) {
-					Long placeId = place.getId();
-					String url = place.getWikiIconUrl();
-					if (getTopPlaceBitmap(place) != null || loadingImages.containsKey(url) || Algorithms.isEmpty(url)) {
-						continue;
-					}
-					loadingImages.put(url, imageLoader.loadImage(url, new ImageLoaderCallback() {
-						@Override
-						public void onStart(@Nullable Bitmap bitmap) {
-						}
-
-						@Override
-						public void onSuccess(@NonNull Bitmap bitmap) {
-							synchronized (data) {
-								loadingImages.remove(url);
-								if (topPlaces != null && topPlacesBitmaps != null) {
-									Amenity p = topPlaces.get(placeId);
-									if (p != null) {
-										topPlacesBitmaps.put(placeId, bitmap);
-										updateTopPlacesCollection();
-									}
-								}
-							}
-						}
-
-						@Override
-						public void onError() {
-							synchronized (data) {
-								loadingImages.remove(url);
-							}
-							LOG.error(String.format("Coil failed to load %s", url));
-						}
-					}, false));
-				}
-			}
-
-			private synchronized void cancelLoadingImages() {
-				if (loadingImages != null) {
-					loadingImages.values().forEach(LoadingImage::cancel);
-					loadingImages = null;
-					topPlaces = null;
-					topPlacesBitmaps = null;
-				}
-			}
 		};
 	}
 
@@ -330,13 +263,85 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Nullable
 	private Bitmap getTopPlaceBitmap(@NonNull Amenity place) {
-		synchronized (data) {
-			return topPlacesBitmaps != null ? topPlacesBitmaps.get(place.getId()) : null;
+		return topPlacesBitmaps != null ? topPlacesBitmaps.get(place.getId()) : null;
+	}
+
+	private void updateTopPlaces(@NonNull List<Amenity> places, @NonNull QuadRect latLonBounds, int zoom) {
+		Collection<Amenity> topPlacesList = null;
+		if (topPlacesFilter != null) {
+			topPlaces = obtainTopPlacesToDisplay(places, latLonBounds, zoom);
+			topPlacesBitmaps = new HashMap<>();
+			topPlacesList = topPlaces.values();
+		}
+		if (topPlacesList != null) {
+			if (!topPlacesList.isEmpty()) {
+				fetchImages(topPlacesList);
+			} else {
+				cancelLoadingImages();
+			}
+		}
+	}
+
+	private void fetchImages(@NonNull Collection<Amenity> places) {
+		if (imageLoader == null) {
+			imageLoader = new NetworkImageLoader(app, true);
+		}
+		if (loadingImages == null) {
+			loadingImages = new HashMap<>();
+		}
+		Set<String> imagesToLoad = places.stream()
+				.map(Amenity::getWikiIconUrl).collect(Collectors.toSet());
+		loadingImages.entrySet().removeIf(entry -> {
+			if (!imagesToLoad.contains(entry.getKey())) {
+				entry.getValue().cancel();
+				return true;
+			}
+			return false;
+		});
+
+		for (Amenity place : places) {
+			Long placeId = place.getId();
+			String url = place.getWikiIconUrl();
+			if (getTopPlaceBitmap(place) != null || loadingImages.containsKey(url) || Algorithms.isEmpty(url)) {
+				continue;
+			}
+			loadingImages.put(url, imageLoader.loadImage(url, new ImageLoaderCallback() {
+				@Override
+				public void onStart(@Nullable Bitmap bitmap) {
+				}
+
+				@Override
+				public void onSuccess(@NonNull Bitmap bitmap) {
+					loadingImages.remove(url);
+					if (topPlaces != null && topPlacesBitmaps != null) {
+						Amenity p = topPlaces.get(placeId);
+						if (p != null) {
+							topPlacesBitmaps.put(placeId, bitmap);
+							updateTopPlacesCollection();
+						}
+					}
+				}
+
+				@Override
+				public void onError() {
+					loadingImages.remove(url);
+					LOG.error(String.format("Coil failed to load %s", url));
+				}
+			}, false));
+		}
+	}
+
+	private void cancelLoadingImages() {
+		if (loadingImages != null) {
+			loadingImages.values().forEach(LoadingImage::cancel);
+			loadingImages = null;
+			topPlaces = null;
+			topPlacesBitmaps = null;
 		}
 	}
 
 	@NonNull
-	private Map<Long, Amenity> obtainTopPlacesToDisplay(@NonNull List<Amenity> points, @NonNull QuadRect latLonBounds, int zoom) {
+	private Map<Long, Amenity> obtainTopPlacesToDisplay(@NonNull List<Amenity> places, @NonNull QuadRect latLonBounds, int zoom) {
 		Map<Long, Amenity> res = new HashMap<>();
 
 		long tileSize31 = (1L << (31 - zoom));
@@ -349,14 +354,16 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		int right = MapUtils.get31TileNumberX(latLonBounds.right);
 		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
 		QuadTree<QuadRect> boundIntersections = initBoundIntersections(left, top, right, bottom);
-		for (Amenity point : points) {
-			if (Algorithms.isEmpty(point.getWikiIconUrl())) {
+		for (Amenity place : places) {
+			double lat = place.getLocation().getLatitude();
+			double lon = place.getLocation().getLongitude();
+			if (!latLonBounds.contains(lon, lat, lon, lat) || Algorithms.isEmpty(place.getWikiIconUrl())) {
 				continue;
 			}
-			int x31 = MapUtils.get31TileNumberX(point.getLocation().getLongitude());
-			int y31 = MapUtils.get31TileNumberY(point.getLocation().getLatitude());
+			int x31 = MapUtils.get31TileNumberX(lon);
+			int y31 = MapUtils.get31TileNumberY(lat);
 			if (!intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
-				res.put(point.getId(), point);
+				res.put(place.getId(), place);
 			}
 			if (res.size() >= TOP_PLACES_LIMIT) {
 				break;
@@ -372,10 +379,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return;
 		}
 
-		List<Amenity> places;
-		synchronized (data) {
-			places = topPlaces != null ? new ArrayList<>(topPlaces.values()) : null;
-		}
+		List<Amenity> places= topPlaces != null ? new ArrayList<>(topPlaces.values()) : null;
 		if (places == null) {
 			clearMapMarkersCollections();
 			return;
@@ -586,11 +590,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		Set<PoiUIFilter> routeTrackFilters = travelRendererHelper.getRouteTrackFilters();
 		String routeArticlePointsFilterByName = routeArticlePointsFilter != null ? routeArticlePointsFilter.getFilterByName() : null;
 		DataSourceType wikiDataSource = app.getSettings().WIKI_DATA_SOURCE_TYPE.get();
-		boolean showTopPlacesPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
 		boolean dataChanged = false;
 		if (this.filters != selectedPoiFilters
 				|| this.wikiDataSource != wikiDataSource
-				|| this.showTopPlacesPreviews != showTopPlacesPreviews
 				|| this.showTravel != showTravel
 				|| this.routeArticleFilterEnabled != routeArticleFilterEnabled
 				|| this.routeArticlePointsFilterEnabled != routeArticlePointsFilterEnabled
@@ -603,7 +605,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				|| !Algorithms.stringsEqual(this.routeArticlePointsFilterByName, routeArticlePointsFilterByName)) {
 			this.filters = selectedPoiFilters;
 			this.wikiDataSource = wikiDataSource;
-			this.showTopPlacesPreviews = showTopPlacesPreviews;
 			this.showTravel = showTravel;
 			this.routeArticleFilterEnabled = routeArticleFilterEnabled;
 			this.routeArticlePointsFilterEnabled = routeArticlePointsFilterEnabled;
@@ -630,6 +631,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				boolean textVisible = isTextVisible();
 				boolean textVisibleChanged = this.textVisible != textVisible;
 				this.textVisible = textVisible;
+				boolean updated = false;
 				if (poiTileProvider == null || dataChanged || textScaleChanged || nightModeChanged
 						|| textVisibleChanged || mapActivityInvalidated) {
 					clearPoiTileProvider();
@@ -641,12 +643,30 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 						poiTileProvider = new POITileProvider(getContext(), data, getPointsOrder(), textVisible,
 								textStyle, textScale, density);
 						poiTileProvider.drawSymbols(mapRenderer);
-						updateTopPlacesCollection();
 					}
+					updated = true;
 				}
+				boolean showTopPlacesPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
+				boolean showTopPlacesPreviewsChanged = this.showTopPlacesPreviews != showTopPlacesPreviews;
+				this.showTopPlacesPreviews = showTopPlacesPreviews;
+				if (updated || showTopPlacesPreviewsChanged || topPlacesBox == null || !topPlacesBox.containsTileBox(tileBox)) {
+					List<Amenity> places = data.getResults();
+                    if (showTopPlacesPreviews && places != null) {
+                        RotatedTileBox extendedBox = tileBox.copy();
+                        int bigIconSize = getBigIconSize();
+                        extendedBox.increasePixelDimensions(bigIconSize * 2, bigIconSize * 2);
+                        topPlacesBox = extendedBox;
+						updateTopPlaces(places, tileBox.getLatLonBounds(), zoom);
+						updateTopPlacesCollection();
+                    } else {
+                        clearMapMarkersCollections();
+						cancelLoadingImages();
+                    }
+                }
 			} else {
 				clearPoiTileProvider();
 				clearMapMarkersCollections();
+				cancelLoadingImages();
 			}
 			mapActivityInvalidated = false;
 			return;
@@ -708,15 +728,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		}
 		mapTextLayer.putData(this, fullObjects);
 		mapActivityInvalidated = false;
-	}
-
-	@Override
-	protected void clearMapMarkersCollections() {
-		super.clearMapMarkersCollections();
-		synchronized (data) {
-			topPlaces = null;
-			topPlacesBitmaps = null;
-		}
 	}
 
 	private void clearPoiTileProvider() {

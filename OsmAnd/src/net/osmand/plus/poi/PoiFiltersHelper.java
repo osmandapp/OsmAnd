@@ -51,7 +51,6 @@ public class PoiFiltersHelper {
 	private PoiUIFilter customPOIFilter;
 	private PoiUIFilter showAllPOIFilter;
 	private PoiUIFilter topWikiPoiFilter;
-	private PoiUIFilter topWikiOnlinePoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters = null;
 	private Set<PoiUIFilter> overwrittenSelectedPoiFilters = new TreeSet<>();
 	private Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
