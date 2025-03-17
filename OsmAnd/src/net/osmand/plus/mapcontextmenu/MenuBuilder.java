@@ -1345,7 +1345,7 @@ public class MenuBuilder {
 			PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
 			poiFiltersHelper.clearGeneralSelectedPoiFilters();
 			poiFiltersHelper.addSelectedPoiFilter(filter);
-			QuickSearchToolbarController controller = new QuickSearchToolbarController();
+			QuickSearchToolbarController controller = new QuickSearchToolbarController(mapActivity);
 			controller.setTitle(filter.getName());
 
 			controller.setOnBackButtonClickListener(v1 -> {
