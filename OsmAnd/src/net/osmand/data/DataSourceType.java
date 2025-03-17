@@ -1,14 +1,18 @@
 package net.osmand.data;
 
+import androidx.annotation.StringRes;
+
 import net.osmand.plus.R;
 
 public enum DataSourceType {
-    OFFLINE(R.string.shared_string_offline),
-    ONLINE(R.string.shared_string_online);
 
-    public final int name;
+	OFFLINE(R.string.shared_string_offline),
+	ONLINE(R.string.shared_string_online);
 
-    DataSourceType(int name) {
-        this.name = name;
-    }
+	@StringRes
+	public final int nameId;
+
+	DataSourceType(@StringRes int nameId) {
+		this.nameId = nameId;
+	}
 }
