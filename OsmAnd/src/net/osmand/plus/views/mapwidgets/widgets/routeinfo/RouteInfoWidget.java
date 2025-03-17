@@ -323,8 +323,18 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	public void setDisplayMode(@NonNull ApplicationMode appMode,
-			@NonNull RouteInfoDisplayMode displayMode) {
+	                           @NonNull RouteInfoDisplayMode displayMode) {
 		widgetState.setDisplayMode(appMode, displayMode);
+	}
+
+	@NonNull
+	public DisplayPriority getDisplayPriority(@NonNull ApplicationMode appMode) {
+		return widgetState.getDisplayPriority(appMode);
+	}
+
+	public void setDisplayPriority(@NonNull ApplicationMode appMode,
+	                               @NonNull DisplayPriority displayPriority) {
+		widgetState.setDisplayPriority(appMode, displayPriority);
 	}
 
 	@NonNull

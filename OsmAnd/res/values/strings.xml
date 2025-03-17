@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="intermediate_first">Intermediate first</string>
+    <string name="destination_first">Destination first</string>
+    <string name="display_priority">Display priority</string>
     <string name="show_image_previews">Show image previews</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Action to control the visibility of the Coordinates grid on the map.</string>
     <string name="layer_coordinates_grid">Coordinates grid</string>

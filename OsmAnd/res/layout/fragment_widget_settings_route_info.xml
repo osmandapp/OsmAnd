@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <net.osmand.plus.widgets.TextViewEx
@@ -18,25 +18,87 @@
         android:id="@+id/default_view_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/content_padding"
-        android:paddingVertical="@dimen/content_padding_small"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <net.osmand.plus.widgets.TextViewEx
-            style="@style/TitleStyle"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/default_view_icon"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/content_padding"
+            android:tint="?attr/colorAccent"
+            tools:src="@drawable/ic_action_clock" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/shared_string_default_view"
-            android:textColor="?android:textColorPrimary" />
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/content_padding"
+            android:paddingVertical="@dimen/content_padding_small">
 
-        <TextView
-            android:id="@+id/default_view_description"
-            style="@style/DescStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorSecondary"
-            tools:text="@string/side_marker_eta" />
+            <net.osmand.plus.widgets.TextViewEx
+                style="@style/TitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shared_string_default_view"
+                android:textColor="?android:textColorPrimary" />
+
+            <TextView
+                android:id="@+id/default_view_description"
+                style="@style/DescStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorSecondary"
+                tools:text="@string/side_marker_eta" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/display_priority_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/display_priority_icon"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/content_padding"
+            android:tint="?attr/colorAccent"
+            tools:src="@drawable/ic_action_point_destination" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/content_padding"
+            android:paddingVertical="@dimen/content_padding_small">
+
+            <net.osmand.plus.widgets.TextViewEx
+                style="@style/TitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/display_priority"
+                android:textColor="?android:textColorPrimary" />
+
+            <TextView
+                android:id="@+id/display_priority_description"
+                style="@style/DescStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorSecondary"
+                tools:text="@string/side_marker_eta" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/divider_color" />
 
 </LinearLayout>
