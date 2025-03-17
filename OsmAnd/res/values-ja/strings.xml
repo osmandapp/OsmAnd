@@ -5297,4 +5297,7 @@ POIの更新は利用できません</string>
     <string name="cache_size">キャッシュサイズ</string>
     <string name="map_3d_mode_action">3Dモード</string>
     <string name="map_2d_mode_action">2Dモード</string>
+    <string name="shared_string_interpolation">補完率</string>
+    <string name="location_interpolation_percent">位置補間率</string>
+    <string name="location_interpolation_percent_desc">ルートナビゲーション中の位置補間の割合を設定します。このパラメータにより、移動中にマップ上での表示位置の遅れを軽減できます。</string>
 </resources>
