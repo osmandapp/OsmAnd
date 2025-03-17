@@ -67,6 +67,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -88,6 +89,7 @@ import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
+import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.HistorySource;
@@ -98,10 +100,12 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
+import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -118,6 +122,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
@@ -348,7 +353,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarMap.setOnClickListener(v -> {
 					cancelSearch();
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
-					if (foundPartialLocation) {
+					PoiUIFilter searchListFilter = ((QuickSearchListAdapter)mainSearchFragment.getAdapter()).getPoiUIFilter();
+					if (searchListFilter != null) {
+						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
+					} else if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 						PoiUIFilter filter;
@@ -1018,6 +1026,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateClearButtonAndHint() {
+		searchEditText.setEnabled(true);
 		if (useMapCenter && location != null && searchEditText.length() == 0) {
 			LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
 			double d = MapUtils.getDistance(latLon, location.getLatitude(), location.getLongitude());
@@ -2159,5 +2168,34 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		processTopIndexAfterLoad = processAfter;
 		return null;
+	}
+
+	public void showResult(PoiUIFilter filter) {
+		buttonToolbarText.setText(R.string.shared_string_show_on_map);
+		mainSearchFragment.getAdapter().clear();
+		updateSearchResult(createSearchResultCollection(filter), true);
+		((QuickSearchListAdapter)mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
+		updateTabBarVisibility(false);
+		toolbarEdit.setVisibility(View.GONE);
+		searchEditText.setHint(R.string.popular_places);
+		searchEditText.setEnabled(false);
+		toolbar.setVisibility(View.VISIBLE);
+	}
+
+	private SearchResultCollection createSearchResultCollection(@NonNull PoiUIFilter filter) {
+		SearchUICore core = app.getSearchUICore().getCore();
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(core.getSearchSettings());
+		SearchUICore.SearchResultCollection resCollection = new SearchUICore.SearchResultCollection(phrase);
+		List<SearchResult> results = new ArrayList<>();
+		for (Amenity pt : filter.getCurrentSearchResult()) {
+			SearchResult res = new SearchResult(phrase);
+			res.localeName = pt.getName();
+			res.object = pt;
+			res.objectType = ObjectType.POI;
+			res.location = pt.getLocation();
+			results.add(res);
+		}
+		resCollection.addSearchResults(results, false, false);
+		return resCollection;
 	}
 }

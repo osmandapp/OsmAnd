@@ -249,8 +249,9 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		a.setName(featureData.properties.wikiTitle);
 		a.setEnName(TransliterationHelper.transliterate(a.getName()));
 		a.setDescription(featureData.properties.wikiDesc);
-		a.setWikiPhoto(featureData.properties.photoTitle);
 		WikiImage wikiIMage = WikiHelper.INSTANCE.getImageData(featureData.properties.photoTitle);
+		a.setWikiPhoto(featureData.properties.photoTitle);
+		a.setWikiPhoto(wikiIMage == null ? featureData.properties.photoTitle : wikiIMage.getImageHiResUrl());
 		a.setWikiIconUrl(wikiIMage == null ? "" : wikiIMage.getImageIconUrl());
 		a.setWikiImageStubUrl(wikiIMage == null ? "" : wikiIMage.getImageStubUrl());
 		a.setLocation(featureData.geometry.coordinates[1], featureData.geometry.coordinates[0]);
