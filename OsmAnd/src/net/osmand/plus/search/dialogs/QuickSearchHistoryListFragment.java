@@ -22,7 +22,6 @@ import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener;
@@ -124,7 +123,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		super.onResume();
 		nearbyPlacesCard.onResume();
 		app.getOsmandMap().getMapView().addMapLocationListener(this);
-		app.getOsmandMap().getMapView().addManualZoomChangeListener(this);
+		app.getOsmandMap().getMapView().addMapZoomChangeListener(this);
 	}
 
 	@Override
@@ -132,7 +131,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		super.onPause();
 		nearbyPlacesCard.onPause();
 		app.getOsmandMap().getMapView().removeMapLocationListener(this);
-		app.getOsmandMap().getMapView().removeManualZoomListener(this);
+		app.getOsmandMap().getMapView().removeMapZoomChangeListener(this);
 	}
 
 	@Override
@@ -142,7 +141,9 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 
 	@Override
 	public void onMapZoomChanged(boolean manual) {
-		updatePointsList();
+		if (manual) {
+			updatePointsList();
+		}
 	}
 
 	private void updatePointsList() {

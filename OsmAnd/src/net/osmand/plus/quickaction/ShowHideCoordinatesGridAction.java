@@ -33,7 +33,7 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		mapActivity.getMyApplication().getGridHelper().toggleEnable();
+		mapActivity.getMapView().getGridHelper().toggleEnable();
 		mapActivity.refreshMap();
 	}
 
@@ -57,6 +57,6 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
-		return app.getGridHelper().isEnabled();
+		return app.getOsmandMap().getMapView().getGridHelper().isEnabled();
 	}
 }

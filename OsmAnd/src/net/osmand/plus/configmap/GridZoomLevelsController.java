@@ -22,7 +22,7 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 	public GridZoomLevelsController(@NonNull OsmandApplication app) {
 		super(app, createInitialLimits(app), createAvailableLimits(app));
 		appMode = app.getSettings().getApplicationMode();
-		gridHelper = app.getGridHelper();
+		gridHelper = app.getOsmandMap().getMapView().getGridHelper();
 	}
 
 	@Override
@@ -57,12 +57,12 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 
 	@NonNull
 	private static Limits<Integer> createInitialLimits(@NonNull OsmandApplication app) {
-		return app.getGridHelper().getZoomLevelsWithRestrictions();
+		return app.getOsmandMap().getMapView().getGridHelper().getZoomLevels();
 	}
 
 	@NonNull
 	private static Limits<Integer> createAvailableLimits(@NonNull OsmandApplication app) {
-		return app.getGridHelper().getSupportedZoomLevels();
+		return app.getOsmandMap().getMapView().getGridHelper().getSupportedZoomLevels();
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity) {

@@ -39,7 +39,7 @@ public class CoordinatesGridController extends BaseDialogController {
 
 	public CoordinatesGridController(@NonNull OsmandApplication app) {
 		super(app);
-		gridHelper = app.getGridHelper();
+		gridHelper = app.getOsmandMap().getMapView().getGridHelper();
 	}
 
 	public void bindScreen(@NonNull ICoordinatesGridScreen screen) {
@@ -86,6 +86,7 @@ public class CoordinatesGridController extends BaseDialogController {
 		setGridFormat(format);
 		if (screen != null) {
 			screen.updateFormatButton();
+			screen.updateZoomLevelsButton();
 		}
 	}
 

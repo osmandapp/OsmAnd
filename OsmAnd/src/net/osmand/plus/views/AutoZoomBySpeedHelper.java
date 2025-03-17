@@ -75,12 +75,12 @@ public class AutoZoomBySpeedHelper implements MapZoomChangeListener, TouchListen
 
 	public void setMapView(@Nullable OsmandMapTileView tileView) {
 		if (this.tileView != null) {
-			this.tileView.removeManualZoomListener(this);
+			this.tileView.removeMapZoomChangeListener(this);
 			this.tileView.removeTouchListener(this);
 		}
 		this.tileView = tileView;
 		if (tileView != null) {
-			tileView.addManualZoomChangeListener(this);
+			tileView.addMapZoomChangeListener(this);
 			tileView.addTouchListener(this);
 		}
 	}
@@ -266,7 +266,9 @@ public class AutoZoomBySpeedHelper implements MapZoomChangeListener, TouchListen
 
 	@Override
 	public void onMapZoomChanged(boolean manual) {
-		nextTurnInFocus = null;
+		if (manual) {
+			nextTurnInFocus = null;
+		}
 	}
 
 	@Override

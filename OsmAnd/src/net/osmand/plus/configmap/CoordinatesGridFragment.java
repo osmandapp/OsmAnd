@@ -137,7 +137,8 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 		setupSelectableBackground(button);
 	}
 
-	private void updateZoomLevelsButton() {
+	@Override
+	public void updateZoomLevelsButton() {
 		View button = view.findViewById(R.id.zoom_levels_button);
 		TextView tvZoomValue = button.findViewById(R.id.zoom_value);
 		tvZoomValue.setText(controller.getFormattedZoomLevels());

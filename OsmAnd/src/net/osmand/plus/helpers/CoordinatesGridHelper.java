@@ -29,6 +29,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 public class CoordinatesGridHelper {
 
+	public static final int MAX_SUPPORTED_ZOOM = 22;
+
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final OsmandMapTileView mapTileView;
@@ -97,7 +99,7 @@ public class CoordinatesGridHelper {
 	}
 
 	private void setupMapZoomListener() {
-		mapTileView.addManualZoomChangeListener(manual -> updateGridSettings());
+		mapTileView.addMapZoomChangeListener(manual -> updateGridSettings());
 	}
 
 	private boolean updateVariables(@NonNull ApplicationMode appMode) {
@@ -268,6 +270,11 @@ public class CoordinatesGridHelper {
 	}
 
 	@NonNull
+	public Limits<Integer> getZoomLevels() {
+		return getZoomLevels(settings.getApplicationMode());
+	}
+
+	@NonNull
 	public Limits<Integer> getZoomLevels(@NonNull ApplicationMode appMode) {
 		int min = settings.COORDINATE_GRID_MIN_ZOOM.getModeValue(appMode);
 		int max = settings.COORDINATE_GRID_MAX_ZOOM.getModeValue(appMode);
@@ -300,13 +307,14 @@ public class CoordinatesGridHelper {
 		Projection projection = gridFormat.getProjection();
 		config.setPrimaryProjection(projection);
 		config.setSecondaryProjection(projection);
+
 		Format format = gridFormat.getFormat();
 		config.setPrimaryFormat(format);
 		config.setSecondaryFormat(format);
+		config.setProjectionParameters();
 
 		GridParameters params = config.getGridParameters();
 		ZoomLevel min = params.getMinZoom();
-		ZoomLevel max = params.getMaxZoomForMixed();
-		return new Limits<>(min.swigValue(), max.swigValue());
+		return new Limits<>(min.swigValue(), MAX_SUPPORTED_ZOOM);
 	}
 }

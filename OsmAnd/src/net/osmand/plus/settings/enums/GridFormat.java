@@ -14,7 +14,7 @@ public enum GridFormat {
 
 	DMS(LocationConvert.FORMAT_SECONDS, R.string.dd_mm_ss_format),
 	DM(LocationConvert.FORMAT_MINUTES, R.string.dd_mm_mmm_format),
-	DECIMAL(LocationConvert.FORMAT_DEGREES, R.string.dd_ddddd_format),
+	DIGITAL(LocationConvert.FORMAT_DEGREES, R.string.dd_ddddd_format),
 	UTM(LocationConvert.UTM_FORMAT, R.string.navigate_point_format_utm);
 
 	private final int id;
@@ -33,7 +33,7 @@ public enum GridFormat {
 	@NonNull
 	public Projection getProjection() {
 		return switch (this) {
-			case DMS, DM, DECIMAL -> Projection.WGS84;
+			case DMS, DM, DIGITAL -> Projection.WGS84;
 			case UTM -> Projection.UTM;
 			default -> throw new IllegalArgumentException("Unknown GridFormat: " + this);
 		};
@@ -44,7 +44,7 @@ public enum GridFormat {
 		return switch (this) {
 			case DMS -> Format.DMS;
 			case DM -> Format.DM;
-			case DECIMAL -> Format.Decimal;
+			case DIGITAL -> Format.Decimal;
 			case UTM -> Format.values()[0];
 			default -> throw new IllegalArgumentException("Unknown GridFormat: " + this);
 		};

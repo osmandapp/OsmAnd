@@ -52,6 +52,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.CoordinatesGridHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
@@ -123,6 +124,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	protected OsmandSettings settings;
+	private CoordinatesGridHelper coordinatesGridHelper;
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
 
 	private CanvasColors canvasColors;
@@ -259,6 +261,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void init(@NonNull Context ctx, int width, int height) {
 		app = (OsmandApplication) ctx.getApplicationContext();
 		settings = app.getSettings();
+		coordinatesGridHelper = new CoordinatesGridHelper(app);
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 
 		paintGrayFill = new Paint();
@@ -888,13 +891,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		locationListeners = CollectionUtils.removeFromList(locationListeners, listener);
 	}
 
-	public void addManualZoomChangeListener(@NonNull MapZoomChangeListener listener) {
+	public void addMapZoomChangeListener(@NonNull MapZoomChangeListener listener) {
 		if (!manualZoomListeners.contains(listener)) {
 			manualZoomListeners = CollectionUtils.addToList(manualZoomListeners, listener);
 		}
 	}
 
-	public void removeManualZoomListener(@NonNull MapZoomChangeListener listener) {
+	public void removeMapZoomChangeListener(@NonNull MapZoomChangeListener listener) {
 		manualZoomListeners = CollectionUtils.removeFromList(manualZoomListeners, listener);
 	}
 
@@ -2556,7 +2559,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void applyGridSettings(AtlasMapRendererView mapRenderer) {
-		app.getGridHelper().updateGridSettings(mapRenderer);
+		coordinatesGridHelper.updateGridSettings(mapRenderer);
+	}
+
+	@NonNull
+	public CoordinatesGridHelper getGridHelper() {
+		return coordinatesGridHelper;
 	}
 
 	public void applyDebugSettings(MapRendererView mapRenderer) {

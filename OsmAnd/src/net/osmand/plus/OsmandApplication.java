@@ -211,7 +211,6 @@ public class OsmandApplication extends MultiDexApplication {
 	Model3dHelper model3dHelper;
 	TrackSortModesHelper trackSortModesHelper;
 	ExplorePlacesOnlineProvider explorePlacesProvider;
-	CoordinatesGridHelper coordinatesGridHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -669,11 +668,6 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public TrackSortModesHelper getTrackSortModesHelper() {
 		return trackSortModesHelper;
-	}
-
-	@NonNull
-	public CoordinatesGridHelper getGridHelper() {
-		return coordinatesGridHelper;
 	}
 
 	public CommandPlayer getPlayer() {

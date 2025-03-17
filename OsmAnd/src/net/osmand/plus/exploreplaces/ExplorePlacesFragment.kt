@@ -190,7 +190,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
-		app.osmandMap.mapView.addManualZoomChangeListener(this)
+		app.osmandMap.mapView.addMapZoomChangeListener(this)
 		showToolbar()
 	}
 
@@ -221,7 +221,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
-		app.osmandMap.mapView.removeManualZoomListener(this)
+		app.osmandMap.mapView.removeMapZoomChangeListener(this)
 	}
 
 	override fun updateLocation(location: Location?) {
@@ -323,7 +323,9 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	}
 
 	override fun onMapZoomChanged(manual: Boolean) {
-		updatePointsList()
+		if (manual) {
+			updatePointsList()
+		}
 	}
 
 	private fun getToolbar(): ExplorePlacesNearbyToolbarController? {
