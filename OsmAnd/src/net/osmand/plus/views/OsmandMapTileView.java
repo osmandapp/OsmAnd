@@ -261,7 +261,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void init(@NonNull Context ctx, int width, int height) {
 		app = (OsmandApplication) ctx.getApplicationContext();
 		settings = app.getSettings();
-		coordinatesGridHelper = new CoordinatesGridHelper(app);
+		coordinatesGridHelper = new CoordinatesGridHelper(app, this);
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 
 		paintGrayFill = new Paint();

@@ -6,7 +6,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.SimpleStateChangeListener;
+import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.FColorARGB;
@@ -29,7 +29,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 public class CoordinatesGridHelper {
 
-	public static final int MAX_SUPPORTED_ZOOM = 22;
+	public static final int MAX_ZOOM = 22;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -45,20 +45,25 @@ public class CoordinatesGridHelper {
 	private int cachedHaloColor;
 	private Float cachedTextScale;
 	private Boolean cachedGridShow;
-	private SimpleStateChangeListener settingsListener;
+	private StateChangedListener settingsListener;
 
-	public CoordinatesGridHelper(@NonNull OsmandApplication app) {
+	public CoordinatesGridHelper(@NonNull OsmandApplication app,
+	                             @NonNull OsmandMapTileView mapTileView) {
 		this.app = app;
-		settings = app.getSettings();
-		mapTileView = app.getOsmandMap().getMapView();
+		this.mapTileView = mapTileView;
+		this.settings = app.getSettings();
 
-		settingsListener = this::updateGridSettings;
+		settingsListener = this::onPreferenceChange;
 		settings.SHOW_COORDINATES_GRID.addListener(settingsListener);
 		settings.COORDINATE_GRID_FORMAT.addListener(settingsListener);
 		settings.COORDINATE_GRID_MIN_ZOOM.addListener(settingsListener);
 		settings.COORDINATE_GRID_MAX_ZOOM.addListener(settingsListener);
 		settings.COORDINATES_FORMAT.addListener(settingsListener);
 		settings.TEXT_SCALE.addListener(settingsListener);
+	}
+
+	private <T> void onPreferenceChange(@Nullable T newValue) {
+		updateGridSettings();
 	}
 
 	public void updateGridSettings() {
@@ -315,6 +320,6 @@ public class CoordinatesGridHelper {
 
 		GridParameters params = config.getGridParameters();
 		ZoomLevel min = params.getMinZoom();
-		return new Limits<>(min.swigValue(), MAX_SUPPORTED_ZOOM);
+		return new Limits<>(min.swigValue(), MAX_ZOOM);
 	}
 }

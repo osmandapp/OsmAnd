@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.backend.preferences;
 
-import net.osmand.IStateChangeListener;
-import net.osmand.SimpleStateChangeListener;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
@@ -27,9 +25,7 @@ public interface OsmandPreference<T> {
 
 	void addListener(StateChangedListener<T> listener);
 
-	void addListener(SimpleStateChangeListener listener);
-
-	void removeListener(IStateChangeListener listener);
+	void removeListener(StateChangedListener<T> listener);
 
 	boolean isSet();
 

@@ -7,7 +7,7 @@ package net.osmand;
  *
  * @param <T> The type of the change being tracked (e.g., String, Boolean, custom object).
  */
-public interface StateChangedListener<T> extends IStateChangeListener {
+public interface StateChangedListener<T> {
 	/**
 	 * Called when a state change occurs with additional information about the change.
 	 *
