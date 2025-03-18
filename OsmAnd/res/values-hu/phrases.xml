@@ -4869,7 +4869,7 @@
     <string name="poi_diet_pescetarian_no">Peszketáriánus étel nincs</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Alagút használata kerékpárosoknak tilos</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Alagút használata gyalogosoknak tilos</string>
-    <string name="poi_barrier_coupure">Gátbevágás (elzárható)</string>
+    <string name="poi_barrier_coupure">Gátátjáró (árvíz esetén elzárható)</string>
     <string name="poi_us_maps_recreation_area_facility_fire_lookout">Tűztorony</string>
     <string name="poi_us_maps_recreation_area_facility_horse_stanchion">Lótámasz</string>
     <string name="poi_osmand_access_main_tag">Használat</string>
@@ -4956,4 +4956,10 @@
     <string name="poi_network_rcn">Regionális kerékpáros útvonal</string>
     <string name="poi_network_lcn">Helyi kerékpáros útvonal</string>
     <string name="poi_contact_website">Weboldal</string>
+    <string name="poi_route_activity_type_truck_hgv">Nehéz tehergépkocsi</string>
+    <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Terepmotorozás (krosszmotorozás)</string>
+    <string name="poi_route_activity_type_hiking">Turistautak</string>
+    <string name="poi_network_cycling">Hálózat (kerékpározás)</string>
+    <string name="poi_route_article"></string>
+    <string name="poi_network_foot">Hálózat (túrázás)</string>
 </resources>
