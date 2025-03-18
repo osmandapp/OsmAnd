@@ -4960,6 +4960,20 @@
     <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Terepmotorozás (krosszmotorozás)</string>
     <string name="poi_route_activity_type_hiking">Turistautak</string>
     <string name="poi_network_cycling">Hálózat (kerékpározás)</string>
-    <string name="poi_route_article"></string>
+    <string name="poi_route_article"/>
     <string name="poi_network_foot">Hálózat (túrázás)</string>
+    <string name="poi_piste_oneway">Egyirányú pálya</string>
+    <string name="poi_climbing_area">Mászóterület</string>
+    <string name="poi_climbing_route">Mászóút</string>
+    <string name="poi_climbing_route_bottom">Mászóút alja</string>
+    <string name="poi_cafe_yes">van</string>
+    <string name="poi_piste_type">Pályatípus</string>
+    <string name="poi_routes_air_sports">Légi sportok</string>
+    <string name="poi_dog_sled_no">Kutyaszánnal nem használható</string>
+    <string name="poi_dog_sled_yes">Kutyaszánnal használható</string>
+    <string name="poi_sled_no">Szánkóval nem használható</string>
+    <string name="poi_sled_yes">Szánkóval használható</string>
+    <string name="poi_atv_yes">Terepjáróval használható</string>
+    <string name="poi_atv_no">Terepjáróval nem használható</string>
+    <string name="poi_access_notes">Megjegyzés a használathoz</string>
 </resources>
