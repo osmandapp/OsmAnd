@@ -5141,9 +5141,9 @@
     <string name="terrain_maps">خرائط التضاريس</string>
     <string name="smart_folder_name_present">هذا المجلد الذكي موجود بالفعل</string>
     <string name="smart_folder_saved">تم حفظ الملف الذكي</string>
-    <string name="add_smart_folder">أضف ملف ذكي</string>
+    <string name="add_smart_folder">أضف مجلد ذكي</string>
     <string name="empty_name">اسم فارغ</string>
-    <string name="save_as_smart_folder">احفظ كملف ذكي</string>
+    <string name="save_as_smart_folder">حفظ كمجلد ذكي</string>
     <string name="delete_smart_folder_dialog_message">سيؤدي هذا إلى إزالة المجلد الذكي \"%1$s\". (لن يتم حذف أي مسارات.)</string>
     <string name="empty_smart_folder_title">لا يوجد مسار مطابق</string>
     <string name="empty_smart_folder_description">المسارات المطابقة تظهر هنا</string>
@@ -5506,7 +5506,7 @@
     <string name="no_photos_available">لا توجد صور متاحة</string>
     <string name="shared_string_decrease">نقصان</string>
     <string name="map_3d_mode_action_descr">تغيير إمالة الخريطة.</string>
-    <string name="no_photos_available_descr">لم يتم إضافة صور المستخدم إلى هذا الموقع بعد</string>
+    <string name="no_photos_available_descr">لم تتم إضافة صور المستخدم إلى هذا الموقع بعد</string>
     <string name="shared_string_increase">زيادة</string>
     <string name="drawer_button_description">يفتح القائمة الرئيسية.</string>
     <string name="obd_fuel_type_not_provided">لم يتم توفير نوع الوقود</string>
