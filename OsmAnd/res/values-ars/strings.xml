@@ -1749,7 +1749,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">علامات أصلحني</string>
     <string name="unit_of_length_descr">تغيير وحدات قياس المسافة.</string>
     <string name="subscription_payment_issue_title">اضغط على الزر لإعداد طريقة دفع على Google Play لإصلاح اشتراكك.</string>
-    <string name="shared_string_show_less">عرض أقل</string>
+    <string name="shared_string_show_less">إظهار أقل</string>
     <string name="delete_history_items">حذف %1$s عنصر سجل؟</string>
     <string name="shared_string_hide_all">أخف الكل</string>
     <string name="record_plugin_description">سجل رحلاتك أو تدريباتك ، وقم بتحليل البيانات من حيث السرعة ، والصعود والهبوط المتراكم ، وملف الارتفاع ، وما إلى ذلك. يمكن أرشفة المسارات المسجلة ومشاركتها مع الأصدقاء وتحريرها ومعالجتها لاحقًا.
