@@ -5758,4 +5758,7 @@
     <string name="quick_action_showhide_coordinates_grid_descr">Handling til at styre synligheden af koordinatnettet på kortet.</string>
     <string name="layer_coordinates_grid">Koordinatnet</string>
     <string name="release_5_0">• Opdag de bedst bedømte interessepunkter med den nye Udforsk-tilstand\n\n • Alle OSM-ruter, nu søgbare! Vandring, cykling, MTB og meget mere\n\n •Nyt navigations modul kombinerer svingpil og navigationsinstruktioner\n\n • Modul med aktuel ruteinfo: viser ETA, ankomsttid og afstand\n\n • Vælg skiløjper og MTB-spor på kortet for at få detaljerede oplysninger\n\n • Mulighed for at vælge modulstørrelse for venstre og højre panel\n\n • Tilføjet koordinatnet med geografiske koordinater\n\n • Tilføjet mulighed for at tilpasse standardudseendet for favoritgrupper\n\n • Android Auto: se ETA og afstand til næste rutepunkt; bynavne vises nu i søgeresultater\n\n • Fremtrædende bjergtoppe kan nu findes via kort og søgning\n\n • Bjergtoppes højde i meter\n\n • Tilføjet: Klipper og klatreområder på kortet\n\n • Adressesøgning i USA er blevet forbedret\n\n • Tilføjet hebraisk TTS til navigation</string>
+    <string name="prime_meridian">Nulmeridianen</string>
+    <string name="meridian_180">180. længdekreds</string>
+    <string name="equator">Ækvator</string>
 </resources>
