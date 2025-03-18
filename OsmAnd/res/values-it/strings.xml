@@ -5489,7 +5489,7 @@
     <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Apri nel browser</string>
     <string name="shared_string_source">Sorgente</string>
-    <string name="no_internet_descr">Per favore controlla nuovamente la connessione a internet</string>
+    <string name="no_internet_descr">Per favore controlla nuovamente la connessione a internet.</string>
     <string name="no_photos_available_descr">Nessuna foto è stata ancora aggiunta dagli utenti per questa posizione</string>
     <string name="no_photos_available">Nessuna foto disponibile</string>
     <string name="shared_string_no_internet_connection">Nessuna connessione</string>
@@ -5745,4 +5745,8 @@
     <string name="show_image_previews">Mostra l\' immagine precedente</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Azione per il controllo della visibilità della griglia delle coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
+    <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETÀ, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETÀ e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
+    <string name="equator">Equatore</string>
+    <string name="prime_meridian">Meridiano fondamentale</string>
+    <string name="meridian_180">180° meridiano</string>
 </resources>
