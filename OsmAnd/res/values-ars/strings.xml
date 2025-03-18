@@ -5553,4 +5553,15 @@
     <string name="auto_zoom">التكبير التلقائي</string>
     <string name="auto_zoom_discrete">منفصلة</string>
     <string name="navigation_position_icon">رمز موضع التنقل</string>
+    <string name="quick_action_first_intermediate">المستوى المتوسط الأول</string>
+    <string name="quick_action_track_waypoint">تتبع نقطة الطريق</string>
+    <string name="quick_action_verb_show_hide">إظهار/إخفاء</string>
+    <string name="quick_action_verb_pause_resume">توقف/تشغيل</string>
+    <string name="quick_action_verb_start_pause">بدء / إيقاف مؤقت</string>
+    <string name="quick_action_directions_from">نقطة البداية</string>
+    <string name="quick_action_verb_start_stop">بدء / توقف</string>
+    <string name="quick_action_verb_turn_on_off">تشغيل / ايقاف</string>
+    <string name="new_trip_segment">جزء جديد من الرحلة</string>
+    <string name="quick_action_parking_place">مكان وقوف السيارات</string>
+    <string name="quick_action_destination">الوجهة</string>
 </resources>
