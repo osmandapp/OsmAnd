@@ -5952,4 +5952,7 @@
     <string name="shared_string_manual">Руководство</string>
     <string name="layer_coordinates_grid">Координатная сетка</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Действие управляет видимостью сетки координат на карте.</string>
+    <string name="show_image_previews">Предварительный просмотр изображений</string>
+    <string name="prime_meridian">Нулевой меридиан</string>
+    <string name="equator">Экватор</string>
 </resources>
