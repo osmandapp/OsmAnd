@@ -5215,4 +5215,17 @@ POIの更新は利用できません</string>
     <string name="layer_coordinates_grid">座標グリッド</string>
     <string name="quick_action_showhide_osm_edits_descr">ローカルのOSM編集をマップ上での表示/非表示を切り替えるボタンです。</string>
     <string name="quick_action_finish_trip_recording_summary">GPX経路を保存し、旅程の記録を終了するボタンです。</string>
+    <string name="quick_action_previous_screen_desc">前の画面に移動するためのボタンです。</string>
+    <string name="quick_action_search_view_title">検索画面</string>
+    <string name="quick_action_verb_start_pause">開始/一時停止</string>
+    <string name="quick_action_new_trip_segment">進行中のGPX経路記録の新しい区分を開始するボタンです。</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">現在記録されている旅程をGPXファイルとして保存し、中断することなく新しい経路の記録を継続するためのボタンです。</string>
+    <string name="quick_action_save_recorded_trip_and_continue">旅程の保存と継続</string>
+    <string name="quick_action_verb_navigate">ナビゲート</string>
+    <string name="quick_action_search_view_desc">検索画面を開閉するボタンです。</string>
+    <string name="quick_action_drawer_desc">サイドメニューの表示/非表示を切り替えるボタンです。</string>
+    <string name="quick_action_drawer_title">サイドメニュー</string>
+    <string name="quick_action_start_pause_recording">GPX経路の記録を開始、一時停止、再開するためのボタンです。</string>
+    <string name="quick_action_previous_screen_title">前に戻る</string>
+    <string name="release_5_0">• 新しい探索モードでトップランクのPOIを発見しましょう\n\n • すべてのOSMルートが検索可能に！ハイキング、サイクリング、MTB、その他多数\n\n • ターン矢印とナビゲーション指示を組み合わせた新しいナビゲーションウィジェット\n\n • 現在のルート情報ウィジェット：ETA、到着時間、距離を表示\n\n • マップ上でスキー場やMTBコースを選択すると、詳細情報が表示されます。\n\n • 左右パネルのウィジェットサイズを選択可能\n\n • 地理座標の座標グリッドを追加\n\n • お気に入りグループのデフォルトの外観をカスタマイズする機能を追加\n\n • アンドロイドオート：次のウェイポイントまでのETAと距離を表示、検索結果に都市名が表示されるようになりました。\n\n • 著名な山頂をマップと検索で発見できるようになりました。\n\n • 山頂の高さをフィートで表示\n\n • 追加：マップ上の岩場とクライミングエリア\n\n • アメリカでの住所検索が改善されました\n\n • ナビゲーションにヘブライ語TTSを追加</string>
 </resources>
