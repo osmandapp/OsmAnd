@@ -4912,8 +4912,6 @@
     <string name="poi_route_activity_type_ski_touring">Skiado ekskursa</string>
     <string name="poi_route_activity_type_snowmobiling">Motorsledado</string>
     <string name="poi_route_activity_type_gravel_biking">Kampvoja biciklado</string>
-    <string name="poi_route_activity_type_mountain_biking">Montara biciklado</string>
-    <string name="poi_route_activity_type_road_cycling">Ŝosea biciklado</string>
     <string name="poi_route_activity_type_gliding_sailplane">Glisado</string>
     <string name="poi_route_activity_type_horse_riding">Ĉevalrajdado</string>
     <string name="poi_route_activity_type_golfing">Golfludado</string>
@@ -4931,12 +4929,9 @@
     <string name="poi_route_activity_type_track_racing">Spidveja motorciklado</string>
     <string name="poi_route_activity_type_motor_scooter">Skotera motorciklado</string>
     <string name="poi_route_activity_type_backpacking">Dorssak-turismo</string>
-    <string name="poi_route_activity_type_hiking">Marŝado</string>
     <string name="poi_route_activity_type_trekking">Sovaĝa marŝado (trekking)</string>
-    <string name="poi_route_activity_type_walking">Promenado</string>
     <string name="poi_route_activity_type_ice_skating">Glitkurado</string>
     <string name="poi_route_activity_type_cross_country_skiing">Skiado nordia</string>
-    <string name="poi_route_activity_type_skiing">Skiado</string>
     <string name="poi_route_activity_type_snowboarding">Neĝtabulado</string>
     <string name="poi_route_activity_type_snowshoeing">Skimarŝado</string>
     <string name="poi_route_activity_type_e_biking">Elektrobiciklado</string>
