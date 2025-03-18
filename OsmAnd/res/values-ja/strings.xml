@@ -5211,4 +5211,8 @@ POIの更新は利用できません</string>
     <string name="distance_during_navigation">ナビゲーション中の距離表示</string>
     <string name="distance_during_navigation_description">ナビゲーションウィジェットでの距離情報の表示方法(地点までの距離、次の曲がり角、車線)を選択します。\n\n正確な数値を表示するには『%1$s』を、読みやすくするには『%2$s』を選択してください。</string>
     <string name="release_4_7">• Android Autoに対応した新しい\"スピードメーター\"ウィジェット\n\n • 複数の\"クイックアクション\"ボタンを追加して地図画面を設定\n\n • グラフデータの見やすさ向上\n\n • 経路のセンサーデータによるフィルタを追加\n\n • 経路グループの外観カスタマイズを改善\n\n • GPXタグのサポートを追加\n\n • ナビゲーション中の距離表示をカスタマイズ可能に：正確な数値か切り上げ数値かを選択可能\n\n • 経路選択のUIを統一\n\n • OpenStreetMapログインをOAuth 2.0に変更</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">マップ上の座標グリッドの表示をコントロールするアクションです。</string>
+    <string name="layer_coordinates_grid">座標グリッド</string>
+    <string name="quick_action_showhide_osm_edits_descr">ローカルのOSM編集をマップ上での表示/非表示を切り替えるボタンです。</string>
+    <string name="quick_action_finish_trip_recording_summary">GPX経路を保存し、旅程の記録を終了するボタンです。</string>
 </resources>
