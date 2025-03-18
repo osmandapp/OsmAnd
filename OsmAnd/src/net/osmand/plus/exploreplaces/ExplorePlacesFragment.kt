@@ -30,6 +30,7 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
 import net.osmand.plus.search.ShowQuickSearchMode
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment
@@ -58,6 +59,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	private val plugin = PluginsHelper.requirePlugin(WikipediaPlugin::class.java)
 
+	private lateinit var poiUIFilter: PoiUIFilter
 	private lateinit var adapter: ExplorePlacesAdapter
 
 	private var location: Location? = null
@@ -131,7 +133,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun setupRecyclerView(view: View) {
-		val poiUIFilter = app.osmandMap.mapLayers.poiMapLayer.filters.firstOrNull()
 		adapter = ExplorePlacesAdapter(view.context, poiUIFilter, this, nightMode)
 
 		recyclerView = view.findViewById(R.id.vertical_nearby_list)
@@ -215,9 +216,8 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 		val rows = ArrayList<QuickSearchListItem>()
 		if (!Algorithms.isEmpty(collection.currentSearchResults)) {
-			val poiUIFilter = app.osmandMap.mapLayers.poiMapLayer.filters.firstOrNull()
 			for (searchResult in collection.currentSearchResults) {
-				if (poiUIFilter != null && poiUIFilter.isTopImagesFilter) {
+				if (poiUIFilter.isTopImagesFilter) {
 					rows.add(QuickSearchWikiItem(app, searchResult))
 				} else {
 					rows.add(QuickSearchListItem(app, searchResult))
@@ -374,11 +374,12 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		private const val COMPASS_UPDATE_PERIOD = 300
 		private const val LIST_UPDATE_PERIOD = 1000
 
-		fun showInstance(manager: FragmentManager) {
+		fun showInstance(manager: FragmentManager, poiUIFilter: PoiUIFilter) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = ExplorePlacesFragment()
+				fragment.poiUIFilter = poiUIFilter
+				fragment.retainInstance = true
 				manager.beginTransaction()
-					.addToBackStack(null)
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss()
 			}

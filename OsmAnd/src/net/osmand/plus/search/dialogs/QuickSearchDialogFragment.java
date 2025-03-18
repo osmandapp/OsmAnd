@@ -601,7 +601,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			activity.updateStatusBarColor();
 			activity.refreshMap();
 
-			ExplorePlacesFragment.Companion.showInstance(activity.getSupportFragmentManager());
+			if (filter != null) {
+				FragmentManager manager = activity.getSupportFragmentManager();
+				ExplorePlacesFragment.Companion.showInstance(manager, filter);
+			}
 
 			hide();
 		}
