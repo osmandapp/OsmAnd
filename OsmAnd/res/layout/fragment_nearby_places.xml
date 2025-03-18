@@ -7,24 +7,6 @@
 	android:orientation="vertical"
 	android:paddingTop="@dimen/toolbar_height">
 
-	<com.google.android.material.appbar.AppBarLayout
-		android:id="@+id/appbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/app_bar_secondary_color"
-		android:visibility="gone"
-		app:elevation="2dp">
-
-		<androidx.appcompat.widget.Toolbar
-			android:id="@+id/toolbar"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/toolbar_height"
-			android:fitsSystemWindows="false"
-			android:gravity="center_vertical"
-			android:visibility="visible"
-			app:title="@string/popular_places_nearby" />
-	</com.google.android.material.appbar.AppBarLayout>
-
 	<androidx.coordinatorlayout.widget.CoordinatorLayout
 		android:id="@+id/frame_layout"
 		android:layout_width="match_parent"

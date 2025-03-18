@@ -10,7 +10,6 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.ColorRes
-import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +20,6 @@ import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.Amenity
 import net.osmand.data.PointDescription
-import net.osmand.data.QuadRect
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
@@ -32,12 +30,10 @@ import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
-import net.osmand.plus.search.ShowQuickSearchMode
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.search.listitems.QuickSearchWikiItem
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
@@ -54,7 +50,6 @@ import kotlin.math.abs
 class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	OsmAndLocationListener, OsmAndCompassListener, IMapLocationListener, MapZoomChangeListener {
 
-	private var visibleRect = QuadRect()
 	private val log: Log = PlatformUtil.getLog(ExplorePlacesFragment::class.java)
 
 	private val plugin = PluginsHelper.requirePlugin(WikipediaPlugin::class.java)
@@ -62,6 +57,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private lateinit var poiUIFilter: PoiUIFilter
 	private lateinit var adapter: ExplorePlacesAdapter
 
+	private var amenities: List<Amenity>? = null
 	private var location: Location? = null
 	private var mainContent: LinearLayout? = null
 	private var recyclerView: RecyclerView? = null
@@ -84,6 +80,15 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		return if (nightMode) R.color.status_bar_main_dark else R.color.status_bar_main_light
 	}
 
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+
+		savedInstanceState?.let {
+			val filterId = savedInstanceState.getString(POI_UI_FILTER_ID)
+			poiUIFilter = app.poiFilters.getFilterById(filterId)
+		}
+	}
+
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
 	): View? {
@@ -91,7 +96,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		AndroidUiHelper.updateVisibility(showOnMapContainer, false)
 
 		val view = themedInflater.inflate(R.layout.fragment_nearby_places, container, false)
-
 		if (!AndroidUiHelper.isOrientationPortrait(view.context)) {
 			val rtl = AndroidUtils.isLayoutRtl(mapActivity)
 			val attrId = if (rtl) R.attr.right_menu_view_bg else R.attr.left_menu_view_bg
@@ -105,8 +109,8 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		mainContent = view.findViewById(R.id.main_content)
 		showListContainer = view.findViewById(R.id.show_list_container)
 		frameLayout = view.findViewById(R.id.frame_layout)
+
 		setupShowAll(view)
-		setupToolBar(view)
 		setupRecyclerView(view)
 		buildZoomButtons(view)
 		updatePoints()
@@ -119,17 +123,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		bottomSheetBehavior.isDraggable = true
 
 		return view
-	}
-
-	private fun setupToolBar(view: View) {
-		val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-		toolbar.setTitleTextColor(app.getColor(ColorUtilities.getPrimaryTextColorId(nightMode)))
-		toolbar.navigationIcon =
-			getIcon(R.drawable.ic_arrow_back, ColorUtilities.getPrimaryIconColorId(nightMode))
-		toolbar.setNavigationContentDescription(R.string.shared_string_close)
-		toolbar.setNavigationOnClickListener { v: View? ->
-			requireActivity().onBackPressed()
-		}
 	}
 
 	private fun setupRecyclerView(view: View) {
@@ -229,17 +222,9 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	private fun updatePoints() {
 		val now = System.currentTimeMillis()
-		val tileBox = app.osmandMap.mapView.rotatedTileBox
-		val rect = tileBox.latLonBounds
-		val extended = tileBox.copy()
-		extended.increasePixelDimensions(tileBox.pixWidth / 4, tileBox.pixHeight / 4)
-		val extendedRect = extended.latLonBounds
-		if (!extendedRect.contains(visibleRect)
-			&& now - lastPointListRectUpdate > LIST_UPDATE_PERIOD
-			&& app.osmandMap.mapLayers.poiMapLayer.currentResults != null
-		) {
+		val results = app.osmandMap.mapLayers.poiMapLayer.currentResults
+		if (results != null && results != amenities) {
 			lastPointListRectUpdate = now
-			visibleRect = rect
 			app.runInUIThread {
 				if (isAdded) {
 					updateAdapter()
@@ -270,6 +255,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
 		app.osmandMap.mapView.removeMapZoomChangeListener(this)
+	}
+
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
+		outState.putString(POI_UI_FILTER_ID, poiUIFilter.filterId)
 	}
 
 	override fun updateLocation(location: Location?) {
@@ -345,13 +335,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		}
 	}
 
-	fun onBackPressed() {
-		mapActivity?.let { activity ->
-			activity.fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false)
-			closeFragment()
-		}
-	}
-
 	fun closeFragment() {
 		app.getPoiFilters().restoreSelectedPoiFilters()
 		mapActivity?.let { activity ->
@@ -373,13 +356,14 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 		private const val COMPASS_UPDATE_PERIOD = 300
 		private const val LIST_UPDATE_PERIOD = 1000
+		private const val POI_UI_FILTER_ID = "poi_ui_filter_id"
 
 		fun showInstance(manager: FragmentManager, poiUIFilter: PoiUIFilter) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = ExplorePlacesFragment()
 				fragment.poiUIFilter = poiUIFilter
-				fragment.retainInstance = true
 				manager.beginTransaction()
+					.addToBackStack(null)
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss()
 			}
