@@ -2181,12 +2181,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		List<SearchResult> results = new ArrayList<>();
 		for (Amenity amenity : amenities) {
-			SearchResult res = new SearchResult(phrase);
-			res.localeName = amenity.getName();
-			res.object = amenity;
-			res.objectType = ObjectType.POI;
-			res.location = amenity.getLocation();
-			results.add(res);
+			SearchResult result = SearchCoreFactory.createSearchResult(amenity, phrase, core.getPoiTypes());
+			results.add(result);
 		}
 		collection.addSearchResults(results, false, false);
 		return collection;

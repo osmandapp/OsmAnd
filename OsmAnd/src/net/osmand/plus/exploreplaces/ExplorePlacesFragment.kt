@@ -21,6 +21,7 @@ import net.osmand.PlatformUtil
 import net.osmand.data.Amenity
 import net.osmand.data.PointDescription
 import net.osmand.map.IMapLocationListener
+import net.osmand.osm.MapPoiTypes
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
 import net.osmand.plus.R
@@ -295,7 +296,10 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private fun showPointInContextMenu(mapActivity: MapActivity, point: Amenity) {
 		val latitude = point.location.latitude
 		val longitude = point.location.longitude
-		val sr = SearchCoreFactory.createAmenitySearchResult(SearchPhrase.emptyPhrase(), point)
+		val sr = SearchCoreFactory.createSearchResult(
+			point, SearchPhrase.emptyPhrase(),
+			MapPoiTypes.getDefault()
+		)
 		val pair = QuickSearchListItem.getPointDescriptionObject(app, sr)
 		app.settings.setMapLocationToShow(
 			latitude,
@@ -341,7 +345,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		mapActivity?.let { activity ->
 			val fragment = activity.fragmentsHelper.explorePlacesFragment
 			if (fragment != null) {
-				activity.fragmentsHelper.dismissFragment(null)
+				activity.fragmentsHelper.dismissFragment(TAG)
 			}
 		}
 	}
@@ -364,7 +368,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 				val fragment = ExplorePlacesFragment()
 				fragment.poiUIFilter = poiUIFilter
 				manager.beginTransaction()
-					.addToBackStack(null)
+					.addToBackStack(TAG)
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss()
 			}
