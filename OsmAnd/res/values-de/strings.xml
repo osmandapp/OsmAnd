@@ -5741,4 +5741,5 @@
     <string name="quick_action_showhide_coordinates_grid_descr">Aktion zur Steuerung der Sichtbarkeit des Koordinatengitters auf der Karte.</string>
     <string name="layer_coordinates_grid">Koordinatennetz</string>
     <string name="show_image_previews">Bildvorschauen anzeigen</string>
+    <string name="equator">Äquator</string>
 </resources>
