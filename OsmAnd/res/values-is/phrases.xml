@@ -5038,4 +5038,22 @@
     <string name="poi_healthcare_speciality_proctology">Endaþarmslækningar</string>
     <string name="poi_healthcare_speciality_systemic">Kerfisbundin meðferð</string>
     <string name="poi_contact_website">Vefsvæði</string>
+    <string name="poi_piste_type">Gerð brautar</string>
+    <string name="poi_piste_oneway">Einstefna</string>
+    <string name="poi_network_foot">Leiðakerfi (ganga)</string>
+    <string name="poi_route_activity_type_mountain_biking">Fjallahjólaleiðir</string>
+    <string name="poi_route_activity_type_road_cycling">Götuhjólaleiðir</string>
+    <string name="poi_lit">Lýsing</string>
+    <string name="poi_network_iwn">Alþjóðleg gönguleið</string>
+    <string name="poi_network_nwn">Gönguleið í landskerfi</string>
+    <string name="poi_network_rwn">Gönguleið í héraðskerfi</string>
+    <string name="poi_network_lwn">Gönguleið innansveitar</string>
+    <string name="poi_network_icn">Alþjóðleg hjólaleið</string>
+    <string name="poi_network_ncn">Hjólaleið í landskerfi</string>
+    <string name="poi_network_rcn">Hjólaleið í héraðskerfi</string>
+    <string name="poi_network_lcn">Hjólaleið innansveitar</string>
+    <string name="poi_route_activity_type_hiking">Gönguleiðir</string>
+    <string name="poi_route_activity_type_walking">Léttar gönguleiðir</string>
+    <string name="poi_route_activity_type_skiing">Skíðaleiðir</string>
+    <string name="poi_network_cycling">Leiðakerfi (hjólreiðar)</string>
 </resources>
