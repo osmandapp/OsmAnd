@@ -314,7 +314,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				@Override
 				public void onSuccess(@NonNull Bitmap bitmap) {
 					app.runInUIThread(() -> {
-						loadingImages.remove(url);
+						if (loadingImages != null) {
+							loadingImages.remove(url);
+						}
 						if (topPlaces != null && topPlacesBitmaps != null) {
 							Amenity p = topPlaces.get(placeId);
 							if (p != null) {
@@ -327,7 +329,11 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 				@Override
 				public void onError() {
-					app.runInUIThread(() -> loadingImages.remove(url));
+					app.runInUIThread(() -> {
+						if (loadingImages != null) {
+							loadingImages.remove(url);
+						}
+					});
 					LOG.error(String.format("Coil failed to load %s", url));
 				}
 			}, false));
