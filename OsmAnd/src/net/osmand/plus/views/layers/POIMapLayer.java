@@ -129,7 +129,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public CustomMapObjects<Amenity> customObjectsDelegate;
 
 	private static final int IMAGE_ICON_BORDER_DP = 2;
-	private static final int IMAGE_ICON_SIZE_DP = 50;
+	private static final int IMAGE_ICON_SIZE_DP = 40;
 	private static final int IMAGE_ICON_OUTER_COLOR = 0xffffffff;
 	private static Bitmap imageCircleBitmap;
 	private NetworkImageLoader imageLoader;
@@ -974,7 +974,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private Bitmap getCircle() {
 		if (imageCircleBitmap == null) {
 			imageCircleBitmap = RenderingIcons.getBitmapFromVectorDrawable(getContext(),
-					R.drawable.bg_point_circle, 1.25f * getTextScale());
+					R.drawable.bg_point_circle, getBigIconSize(), getBigIconSize());
 		}
 		return imageCircleBitmap;
 	}
