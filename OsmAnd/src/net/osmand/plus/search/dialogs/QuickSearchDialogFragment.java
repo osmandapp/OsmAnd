@@ -92,7 +92,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
-import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.*;
@@ -334,11 +333,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarMap.setOnClickListener(v -> {
 					cancelSearch();
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
-					PoiUIFilter searchListFilter = ((QuickSearchListAdapter) mainSearchFragment.getAdapter()).getPoiUIFilter();
-					if (searchListFilter != null) {
-						showToolbar(getString(R.string.popular_places));
-						PluginsHelper.requirePlugin(WikipediaPlugin.class).toggleWikipediaPoi(true, null);
-						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
+					PoiUIFilter poiUIFilter = ((QuickSearchListAdapter) mainSearchFragment.getAdapter()).getPoiUIFilter();
+					if (poiUIFilter != null) {
+						showFilterOnMap(poiUIFilter, getString(R.string.popular_places));
 					} else if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
@@ -355,17 +352,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else {
 							filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
 						}
-						app.getPoiFilters().replaceSelectedPoiFilters(filter);
-						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
-
-						MapContextMenu contextMenu = mapActivity.getContextMenu();
-						contextMenu.close();
-						contextMenu.closeActiveToolbar();
-
-						showToolbar();
-						mapActivity.updateStatusBarColor();
-						mapActivity.refreshMap();
-						hide();
+						showFilterOnMap(filter, getText());
 					} else {
 						SearchWord word = searchPhrase.getLastSelectedWord();
 						if (word != null) {
@@ -599,6 +586,25 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		updateFab();
 
 		return view;
+	}
+
+	private void showFilterOnMap(@Nullable PoiUIFilter filter, @Nullable String title) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			app.getPoiFilters().replaceSelectedPoiFilters(filter);
+
+			MapContextMenu contextMenu = activity.getContextMenu();
+			contextMenu.close();
+			contextMenu.closeActiveToolbar();
+
+			showToolbar(title);
+			activity.updateStatusBarColor();
+			activity.refreshMap();
+
+			ExplorePlacesFragment.Companion.showInstance(activity.getSupportFragmentManager());
+
+			hide();
+		}
 	}
 
 	@Override

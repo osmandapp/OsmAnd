@@ -1001,13 +1001,13 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		}
 	}
 
+	public boolean showLayoutWithImages() {
+		return isTopImagesFilter() && app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
+	}
+
 	@NonNull
 	@Override
 	public String toString() {
 		return getFilterId();
-	}
-
-	public boolean showLayoutWithImages() {
-		return app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
 	}
 }
