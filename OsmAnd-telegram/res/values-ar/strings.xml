@@ -87,7 +87,7 @@
     <string name="please_update_osmand">يرجى تحديث OsmAnd لعرض البيانات على الخريطة</string>
     <string name="gps_points_in_buffer">أرسلت (%1$d في المخزن المؤقت)</string>
     <string name="points_size">%1$d من النقاط</string>
-    <string name="shared_string_date">تاريخ</string>
+    <string name="shared_string_date">التاريخ</string>
     <string name="shared_string_collected">جمع</string>
     <string name="gps_points">نقاط GPS</string>
     <string name="shared_string_sent">إرسال</string>
