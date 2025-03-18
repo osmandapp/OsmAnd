@@ -5711,4 +5711,7 @@
     <string name="layer_coordinates_grid">Mreža koordinata</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Akcija za kontrolu vidljivosti mreže koordinata na mapi.</string>
     <string name="show_image_previews">Prikaži pregled slika</string>
+    <string name="meridian_180">180. meridijan</string>
+    <string name="prime_meridian">Nulti meridijan</string>
+    <string name="equator">Ekvator</string>
 </resources>
