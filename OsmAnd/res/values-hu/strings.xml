@@ -3052,7 +3052,7 @@
     <string name="rendering_attr_piste_type_hike_name">Túrázás</string>
     <string name="rendering_attr_piste_type_connection_name">Kapcsolat</string>
     <string name="rendering_attr_piste_type_skitour_name">Sítúra</string>
-    <string name="rendering_attr_piste_type_nordic_name">Északi sí</string>
+    <string name="rendering_attr_piste_type_nordic_name">Sífutás</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Kezdő</string>
     <string name="rendering_attr_piste_difficulty_easy_name">Könnyű</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Kapcsolat</string>
