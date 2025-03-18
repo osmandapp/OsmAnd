@@ -14,6 +14,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.R.drawable;
 import net.osmand.util.Algorithms;
@@ -118,6 +119,21 @@ public class RenderingIcons {
 
 	@Nullable
 	public static String getIconNameForAmenity(@NonNull Amenity amenity) {
+		String subType = amenity.getSubType();
+		String[] subtypes = subType.split(";");//multivalued
+		PoiType poiType = amenity.getType().getPoiTypeByKeyName(subtypes[0]);
+		return poiType != null ? getIconNameForPoiType(poiType) : null;
+	}
+
+	@Nullable
+	public static String getIconNameForAmenity(@NonNull Context ctx, @NonNull Amenity amenity) {
+		String osmandPoiKey = amenity.getOsmandPoiKey();
+		if (!Algorithms.isEmpty(osmandPoiKey)) {
+			PoiType poiType = ((OsmandApplication) ctx).getPoiTypes().getPoiTypeByKey(osmandPoiKey);
+			if (poiType != null) {
+				return getIconNameForPoiType(poiType);
+			}
+		}
 		String subType = amenity.getSubType();
 		String[] subtypes = subType.split(";");//multivalued
 		PoiType poiType = amenity.getType().getPoiTypeByKeyName(subtypes[0]);

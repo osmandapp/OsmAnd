@@ -90,6 +90,7 @@ import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.render.RenderingClass;
 
@@ -304,7 +305,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (isCurrentType(RELIEF_3D)) {
 			tv.setText(R.string.relief_3d);
 		} else if (isCurrentType(WIKIPEDIA)) {
-			tv.setText(R.string.shared_string_wikipedia);
+			WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
+			tv.setText(plugin.getPopularPlacesTitle());
 		} else if (isCurrentType(TRAVEL_ROUTES)) {
 			tv.setText(R.string.travel_routes);
 		} else if (isCurrentType(TRANSPORT_LINES)) {

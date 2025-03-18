@@ -22,12 +22,14 @@ import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener;
 
 import java.util.List;
 
 public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements NearbyPlacesAdapter.NearbyItemClickListener, IMapLocationListener,
-		OsmandMapTileView.ManualZoomListener {
+		MapZoomChangeListener {
 
 	public static final int TITLE = R.string.shared_string_explore;
 
@@ -36,14 +38,8 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private QuadRect visiblePlacesRect = new QuadRect();
 	private long lastPointListRectUpdate = 0;
 
-	public void onNearbyItemClicked(@NonNull Amenity point) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			// TODO: Fix
-			//getMyApplication().getExplorePlacesProvider().showPointInContextMenu(mapActivity, point);
-			getDialogFragment().hideToolbar();
-			getDialogFragment().hide();
-		}
+	public void onNearbyItemClicked(@NonNull Amenity amenity) {
+		showResult(SearchCoreFactory.createAmenitySearchResult(SearchPhrase.emptyPhrase(), amenity));
 	}
 
 	@Override
@@ -127,7 +123,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		super.onResume();
 		nearbyPlacesCard.onResume();
 		app.getOsmandMap().getMapView().addMapLocationListener(this);
-		app.getOsmandMap().getMapView().addManualZoomChangeListener(this);
+		app.getOsmandMap().getMapView().addMapZoomChangeListener(this);
 	}
 
 	@Override
@@ -135,7 +131,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		super.onPause();
 		nearbyPlacesCard.onPause();
 		app.getOsmandMap().getMapView().removeMapLocationListener(this);
-		app.getOsmandMap().getMapView().removeManualZoomListener(this);
+		app.getOsmandMap().getMapView().removeMapZoomChangeListener(this);
 	}
 
 	@Override
@@ -144,8 +140,10 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	}
 
 	@Override
-	public void onManualZoomChange() {
-		updatePointsList();
+	public void onMapZoomChanged(boolean manual) {
+		if (manual) {
+			updatePointsList();
+		}
 	}
 
 	private void updatePointsList() {

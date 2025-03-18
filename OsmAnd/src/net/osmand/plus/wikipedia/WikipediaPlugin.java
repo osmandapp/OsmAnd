@@ -180,7 +180,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter,
+			@NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		if (isEnabled()) {
 			if (isLocked()) {
 				PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WIKIPEDIA,
@@ -194,12 +195,12 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	private void createWikipediaItem(ContextMenuAdapter adapter,
-	                                 MapActivity mapActivity) {
+			MapActivity mapActivity) {
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
 			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
-			                              @NonNull View view, @NonNull ContextMenuItem item) {
+					@NonNull View view, @NonNull ContextMenuItem item) {
 				mapActivity.getDashboard().setDashboardVisibility(true,
 						DashboardType.WIKIPEDIA,
 						AndroidUtils.getCenterViewCoordinates(view));
@@ -208,8 +209,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
-			                                  @Nullable View view, @NotNull ContextMenuItem item,
-			                                  boolean isChecked) {
+					@Nullable View view, @NotNull ContextMenuItem item,
+					boolean isChecked) {
 				toggleWikipediaPoi(isChecked, selected -> {
 					item.setSelected(selected);
 					item.setColor(app, selected ?
@@ -224,13 +225,20 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 		boolean selected = app.getPoiFilters().isPoiFilterSelected(TOP_WIKI_FILTER_ID);
 		adapter.addItem(new ContextMenuItem(WIKIPEDIA_ID)
-				.setTitleId(R.string.shared_string_wikipedia, mapActivity)
+				.setTitle(getPopularPlacesTitle())
 				.setDescription(selected ? getLanguagesSummary() : null)
 				.setSelected(selected)
 				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener));
+	}
+
+	@NonNull
+	public String getPopularPlacesTitle() {
+		String popularPlaces = app.getString(R.string.popular_places);
+		String wikipedia = "(" + app.getString(R.string.shared_string_wikipedia) + ")";
+		return app.getString(R.string.ltr_or_rtl_combine_via_space, popularPlaces, wikipedia);
 	}
 
 	@Override
@@ -273,7 +281,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder, @NonNull JSONObject imageObject) {
+	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
+			@NonNull JSONObject imageObject) {
 		ImageCard imageCard = null;
 		if (mapActivity != null) {
 			try {
@@ -446,7 +455,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 		return null;
 	}
 
-	public String getWikiArticleLanguage(@NonNull Set<String> availableArticleLangs, String preferredLanguage) {
+	public String getWikiArticleLanguage(@NonNull Set<String> availableArticleLangs,
+			String preferredLanguage) {
 		if (!hasCustomSettings()) {
 			// Wikipedia with default settings
 			return preferredLanguage;
@@ -494,7 +504,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean searchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
+	protected boolean searchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase,
+			boolean isResultEmpty) {
 		if (isResultEmpty && isSearchByWiki(phrase)) {
 			if (!Version.isPaidVersion(app)) {
 				searchFragment.addSearchListItem(new QuickSearchFreeBannerListItem(app));

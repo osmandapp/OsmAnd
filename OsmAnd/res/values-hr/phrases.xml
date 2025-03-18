@@ -2070,8 +2070,6 @@
     <string name="poi_smoking_isolated">U izoliranoj prostoriji</string>
     <string name="poi_full_service_yes">Sveobuhvatna usluga</string>
     <string name="poi_route_activity_type_trekking">Treking</string>
-    <string name="poi_route_activity_type_walking">Pješačenje</string>
-    <string name="poi_route_activity_type_skiing">Skijanje</string>
     <string name="poi_route_activity_type_harvesting">Žetva</string>
     <string name="poi_route_activity_type_tree_climbing">Penjanje po drvetu</string>
     <string name="poi_route_activity_type_fitness">Fitnes</string>
@@ -2131,7 +2129,6 @@
     <string name="poi_diaper_table_count">Broj stolova za mijenjanje pelena</string>
     <string name="poi_animal_shelter_purpose_release_no">Puštanje u divljinu: ne</string>
     <string name="poi_us_maps_recreation_area_activity_hunting">Lov</string>
-    <string name="poi_route_activity_type_hiking">Planinarenje</string>
     <string name="poi_route_activity_type_ice_skating">Klizanje</string>
     <string name="poi_route_activity_type_mushrooms_picking">Branje gljiva</string>
     <string name="poi_name_etymology">Etimologija imena</string>

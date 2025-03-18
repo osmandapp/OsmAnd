@@ -1,6 +1,5 @@
 package net.osmand.plus.search.dialogs;
 
-import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
 import static net.osmand.plus.search.dialogs.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
 import static net.osmand.plus.search.dialogs.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
@@ -25,13 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,6 +60,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -100,14 +94,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchCoreAPI;
+import net.osmand.search.core.*;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
-import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
-import net.osmand.search.core.SearchWord;
-import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -256,10 +244,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.search_dialog_fragment, container, false);
 
-		toolbarController = new QuickSearchToolbarController();
-		toolbarController.setOnBackButtonClickListener(v -> mapActivity.getFragmentsHelper().showQuickSearch(CURRENT, false));
-		toolbarController.setOnTitleClickListener(v -> mapActivity.getFragmentsHelper().showQuickSearch(CURRENT, false));
-		toolbarController.setOnCloseButtonClickListener(v -> mapActivity.getFragmentsHelper().closeQuickSearch());
+		toolbarController = new QuickSearchToolbarController(mapActivity);
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
@@ -348,7 +333,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarMap.setOnClickListener(v -> {
 					cancelSearch();
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
-					if (foundPartialLocation) {
+					PoiUIFilter searchListFilter = ((QuickSearchListAdapter)mainSearchFragment.getAdapter()).getPoiUIFilter();
+					if (searchListFilter != null) {
+						showToolbar(getString(R.string.popular_places));
+						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
+					} else if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 						PoiUIFilter filter;
@@ -1018,6 +1007,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateClearButtonAndHint() {
+		searchEditText.setEnabled(true);
 		if (useMapCenter && location != null && searchEditText.length() == 0) {
 			LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
 			double d = MapUtils.getDistance(latLon, location.getLatitude(), location.getLongitude());
@@ -1144,11 +1134,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
-				PoiCategory routesCategory = app.getPoiTypes().getRoutes();
 				for (SearchResult sr : res.getCurrentSearchResults()) {
-					if (sr.object != routesCategory) {
-						rows.add(new QuickSearchListItem(app, sr));
-					}
+					rows.add(new QuickSearchListItem(app, sr));
 				}
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark, app.getString(R.string.search_online_address), view -> {
 					OsmandSettings settings = app.getSettings();
@@ -2159,5 +2146,34 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		processTopIndexAfterLoad = processAfter;
 		return null;
+	}
+
+	public void showResult(@NonNull PoiUIFilter filter) {
+		buttonToolbarText.setText(R.string.shared_string_show_on_map);
+		mainSearchFragment.getAdapter().clear();
+		updateSearchResult(createSearchResultCollection(filter), true);
+		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
+		updateTabBarVisibility(false);
+		toolbarEdit.setVisibility(View.GONE);
+		searchEditText.setHint(R.string.popular_places);
+		searchEditText.setEnabled(false);
+		toolbar.setVisibility(View.VISIBLE);
+	}
+
+	private SearchResultCollection createSearchResultCollection(@NonNull PoiUIFilter filter) {
+		SearchUICore core = app.getSearchUICore().getCore();
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(core.getSearchSettings());
+		SearchUICore.SearchResultCollection resCollection = new SearchUICore.SearchResultCollection(phrase);
+		List<SearchResult> results = new ArrayList<>();
+		for (Amenity pt : filter.getCurrentSearchResult()) {
+			SearchResult res = new SearchResult(phrase);
+			res.localeName = pt.getName();
+			res.object = pt;
+			res.objectType = ObjectType.POI;
+			res.location = pt.getLocation();
+			results.add(res);
+		}
+		resCollection.addSearchResults(results, false, false);
+		return resCollection;
 	}
 }

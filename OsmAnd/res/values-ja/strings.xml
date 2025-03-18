@@ -5104,49 +5104,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_glide_target_desc">目標点に到達するために必要な滑空比を表示します。</string>
     <string name="key_event_action_open_navigation_view">ナビゲーション画面を開く</string>
     <string name="rendering_value_sacScale_description">スイス・アルペン・クラブ(スイス山岳会)</string>
-    <string name="release_4_5">• BLE/ANT+ センサー:接続を再構築し、受信したデータをGPXに書き込み表示するように
-\n
-\n • お気に入りや設定を\"OsmAnd Cloud\"に無料バックアップ出来るように
-\n
-\n • 3D形状を含む地形マップに対応した新しいフォーマットに対応
-\n
-\n • 経路管理: UIの刷新、ソート機能の追加、入れ子フォルダーのサポート
-\n
-\n • Android Auto: お気に入り、経路、POIカテゴリにアクセスするための新しいスタートメニュー
-\n
-\n • 上部/下部パネルウィジェットの統合化
-\n
-\n • 新しい\"電車\"プロファイルにより、鉄道のルートを計算できるように
-\n
-\n • 等高線はどのマップソースでも機能するように
-\n
-\n • 外部キーボードのデフォルトショートカットをリスト化しかつ変更可能に
-\n
-\n • カスタムルートファイルの削除または上書きのオプションを追加
-\n
-\n • \"ルートからの逸脱を案内する\"オプションを追加
-\n
-\n • スタート画面: ファイルからOsmAndの状態を復元するオプションを追加
-\n
-\n • 北米のトラック用ナビゲーション向けに\"危険物\"クラスを追加
-\n
-\n • 歩行者用ルートに\"Via ferrata\"のサポートを追加
-\n
-\n • ハイキングルートの難易度分類に\"CAI\"スケールを追加
-\n
-\n • アプリごとの言語選択を修正
-\n
-\n • テーマアイコンのサポートを追加
-\n
-\n • OsmAnd Cloud: アカウントを削除するオプションを追加
-\n
-\n • アクセシビリティ: ボタンのタッチターゲットサイズを48dpに変更。スクリーンリーダーに表示されるマップUIに関する問題を修正
-\n
-\n • 日本語音声案内プロンプトの一新
-\n
-\n • 標高の変更と傾斜の評価を再調整
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+ センサー:接続を再構築し、受信したデータをGPXに書き込み表示するように \n \n • お気に入りや設定を\"OsmAnd Cloud\"に無料バックアップ出来るように \n \n • 3D形状を含む地形マップに対応した新しいフォーマットに対応 \n \n • 経路管理: UIの刷新、ソート機能の追加、入れ子フォルダーのサポート \n \n • Android Auto: お気に入り、経路、POIカテゴリにアクセスするための新しいスタートメニュー \n \n • 上部/下部パネルウィジェットの統合化 \n \n • 新しい\"電車\"プロファイルにより、鉄道のルートを計算できるように \n \n • 等高線はどのマップソースでも機能するように \n \n • 外部キーボードのデフォルトショートカットをリスト化しかつ変更可能に \n \n • カスタムルートファイルの削除または上書きのオプションを追加 \n \n • \"ルートからの逸脱を案内する\"オプションを追加 \n \n • スタート画面: ファイルからOsmAndの状態を復元するオプションを追加 \n \n • 北米のトラック用ナビゲーション向けに\"危険物\"クラスを追加 \n \n • 歩行者用ルートに\"Via ferrata\"のサポートを追加 \n \n • ハイキングルートの難易度分類に\"CAI\"スケールを追加 \n \n • アプリごとの言語選択を修正 \n \n • テーマアイコンのサポートを追加 \n \n • OsmAnd Cloud: アカウントを削除するオプションを追加 \n \n • アクセシビリティ: ボタンのタッチターゲットサイズを48dpに変更。スクリーンリーダーに表示されるマップUIに関する問題を修正 \n \n • 日本語音声案内プロンプトの一新 \n \n • 標高の変更と傾斜の評価を再調整</string>
     <string name="external_input_device_title">外部入力機器</string>
     <string name="key_bindings">キーバインド</string>
     <string name="key_event_action_move_to_my_location">現在地に移動</string>
@@ -5243,4 +5201,14 @@ POIの更新は利用できません</string>
     <string name="allow_display_on_top_description">マップテキストを重ねて表示できるようにします</string>
     <string name="show_debug_info_description">各マップテキストの配置に関するグラフィカルな情報を表示します</string>
     <string name="write_heading">方向を書き込む</string>
+    <string name="free_settings_backup">設定の無料バックアップ</string>
+    <string name="litres">リットル</string>
+    <string name="unit_of_volume_description">選択された単位は、現在のプロファイルのすべての液量関連データに適用されます。</string>
+    <string name="imperial_gallons">英ガロン</string>
+    <string name="unit_of_volume">量の単位</string>
+    <string name="us_gallons">米ガロン</string>
+    <string name="route_guidance_desc">次の曲がり角までの距離、道路名、現在の道路名、車線情報を含むリアルタイムのルート案内を提供します。ウィジェットはナビゲーション中にアクティブになります。</string>
+    <string name="distance_during_navigation">ナビゲーション中の距離表示</string>
+    <string name="distance_during_navigation_description">ナビゲーションウィジェットでの距離情報の表示方法(地点までの距離、次の曲がり角、車線)を選択します。\n\n正確な数値を表示するには『%1$s』を、読みやすくするには『%2$s』を選択してください。</string>
+    <string name="release_4_7">• Android Autoに対応した新しい\"スピードメーター\"ウィジェット\n\n • 複数の\"クイックアクション\"ボタンを追加して地図画面を設定\n\n • グラフデータの見やすさ向上\n\n • 経路のセンサーデータによるフィルタを追加\n\n • 経路グループの外観カスタマイズを改善\n\n • GPXタグのサポートを追加\n\n • ナビゲーション中の距離表示をカスタマイズ可能に：正確な数値か切り上げ数値かを選択可能\n\n • 経路選択のUIを統一\n\n • OpenStreetMapログインをOAuth 2.0に変更</string>
 </resources>

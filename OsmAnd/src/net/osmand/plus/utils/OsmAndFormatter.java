@@ -114,9 +114,7 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDuration(long seconds, @NonNull OsmandApplication app) {
-		LocaleHelper localeHelper = app.getLocaleHelper();
-		Locale locale = localeHelper.getPreferredLocale() != null ? localeHelper.getPreferredLocale() : localeHelper.getDefaultLocale();
-		NumberFormat numberFormat = NumberFormat.getInstance(locale);
+		NumberFormat numberFormat = getNumberFormat(app);
 		long hours = seconds / (60 * 60);
 		long minutes = (seconds / 60) % 60;
 		if (hours > 0) {
@@ -129,6 +127,14 @@ public class OsmAndFormatter {
 		} else {
 			return "<" + numberFormat.format(1) + " " + app.getString(R.string.shared_string_minute_lowercase);
 		}
+	}
+
+	@NonNull
+	public static NumberFormat getNumberFormat(@NonNull OsmandApplication app) {
+		LocaleHelper localeHelper = app.getLocaleHelper();
+		Locale locale = localeHelper.getPreferredLocale() != null
+				? localeHelper.getPreferredLocale() : localeHelper.getDefaultLocale();
+		return NumberFormat.getInstance(locale);
 	}
 
 	public static String getFormattedDurationShort(int seconds) {

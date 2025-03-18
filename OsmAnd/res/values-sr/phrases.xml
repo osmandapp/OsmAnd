@@ -4918,11 +4918,9 @@
     <string name="poi_route_activity_type_track_racing">Трке на стазама</string>
     <string name="poi_route_activity_type_motor_scooter">Мотор скутер</string>
     <string name="poi_route_activity_type_backpacking">Пешачење са ранцем</string>
-    <string name="poi_route_activity_type_hiking">Планинарење</string>
     <string name="poi_route_activity_type_hill_climbing">Брдско пењање</string>
     <string name="poi_route_activity_type_road_running">Трчање путем</string>
     <string name="poi_route_activity_type_trail_running">Трчање на стази</string>
-    <string name="poi_route_activity_type_walking">Пешачење</string>
     <string name="poi_route_activity_type_cross_country_skiing">Скијање кроз природу</string>
     <string name="poi_route_activity_type_ice_skating">Клизање на леду</string>
     <string name="poi_route_activity_type_ski_touring">Туристичко скијање</string>
@@ -4931,7 +4929,6 @@
     <string name="poi_route_activity_type_e_biking">Е-бициклизам</string>
     <string name="poi_route_activity_type_e_mountain_bike">Е-брдски бицикл</string>
     <string name="poi_route_activity_type_gravel_biking">Бициклизам по шљунку</string>
-    <string name="poi_route_activity_type_mountain_biking">Планински бициклизам</string>
     <string name="poi_route_activity_type_aviation">Авијација</string>
     <string name="poi_route_activity_type_drone_flying">Летење дроном</string>
     <string name="poi_route_activity_type_hang_gliding">Летење змајем</string>
@@ -4953,14 +4950,12 @@
     <string name="poi_route_activity_type_touring">Тоуринг</string>
     <string name="poi_route_activity_type_gliding_sailplane">Једричарење (Једрилица)</string>
     <string name="poi_route_activity_type_surfing">Сурфовање</string>
-    <string name="poi_route_activity_type_road_cycling">Друмски бициклизам</string>
     <string name="poi_route_activity_type_scuba_diving">Роњење са опремом</string>
     <string name="poi_route_activity_type_snowmobiling">Моторно санкање</string>
     <string name="poi_route_activity_type_mushrooms_picking">Брање гљива</string>
     <string name="poi_route_activity_type_train_riding">Вожња возом</string>
     <string name="poi_route_activity_type_ultralight_aviation">Ултралака авијација</string>
     <string name="poi_route_activity_type_motorboat">Моторни чамац</string>
-    <string name="poi_route_activity_type_skiing">Скијање</string>
     <string name="poi_route_activity_type_rafting">Сплаварење</string>
     <string name="poi_route_activity_type_harvesting">Жетва</string>
     <string name="poi_route_activity_type_trekking">Напорно путовање</string>
@@ -4987,9 +4982,7 @@
     <string name="poi_network_ncn">Национална бициклистичка рута</string>
     <string name="poi_network_lcn">Локална бициклистичка рута</string>
     <string name="poi_network_iwn">Међународна пешачка рута</string>
-    <string name="poi_network_cycling">Мрежа</string>
     <string name="poi_network_rwn">Регионална пешачка рута</string>
     <string name="poi_network_rcn">Регионална бициклистичка рута</string>
     <string name="poi_network_nwn">Национална пешачка рута</string>
-    <string name="poi_network_foot">Мрежа</string>
 </resources>

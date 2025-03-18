@@ -56,6 +56,13 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected void buildNearestPoiRow(ViewGroup view) {
 	}
 
+	protected void buildMainImage(View view) {
+		if (amenity.getWikiPhoto() != null) {
+			AppCompatImageView imageView = inflateAndGetMainImageView(view);
+			PicassoUtils.setupImageViewByUrl(app, imageView, amenity.getWikiPhoto(), false);
+		}
+	}
+
 	@Override
 	public void buildInternal(View view) {
 		if (amenity.isRoutePoint()) {

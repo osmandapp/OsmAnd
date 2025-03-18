@@ -4879,8 +4879,6 @@
     <string name="poi_route_activity_type_motocross">Motocross</string>
     <string name="poi_route_activity_type_snowboarding">Snowboarding</string>
     <string name="poi_route_activity_type_snowmobiling">Snowmobiling</string>
-    <string name="poi_route_activity_type_mountain_biking">Ciclism montan</string>
-    <string name="poi_route_activity_type_road_cycling">Ciclism rutier</string>
     <string name="poi_route_activity_type_hot_air_ballooning">Zborul cu balon cu aer cald</string>
     <string name="poi_route_activity_type_swimming_outdoor">Înot în aer liber</string>
     <string name="poi_route_activity_type_mushrooms_picking">Cules ciuperci</string>
@@ -4929,16 +4927,13 @@
     <string name="poi_route_activity_type_track_racing">Circuit moto</string>
     <string name="poi_route_activity_type_motor_scooter">Scuter cu motor</string>
     <string name="poi_route_activity_type_backpacking">Backpacking</string>
-    <string name="poi_route_activity_type_hiking">Drumeție</string>
     <string name="poi_route_activity_type_hill_climbing">Urcat dealuri</string>
     <string name="poi_route_activity_type_road_running">Alergat rutier</string>
     <string name="poi_route_activity_type_trail_running">Alergare pe poteci</string>
     <string name="poi_route_activity_type_trekking">Trekking</string>
-    <string name="poi_route_activity_type_walking">Umblat</string>
     <string name="poi_route_activity_type_ice_skating">Patinaj</string>
     <string name="poi_route_activity_type_cross_country_skiing">Schi cross-country</string>
     <string name="poi_route_activity_type_ski_touring">Schi de tură</string>
-    <string name="poi_route_activity_type_skiing">Schiat</string>
     <string name="poi_route_activity_type_snowshoeing">Rachete de zăpadă</string>
     <string name="poi_route_activity_type_e_biking">E-Biking</string>
     <string name="poi_route_activity_type_e_mountain_bike">E-mountain bike</string>

@@ -4904,7 +4904,6 @@
     <string name="poi_route_activity_type_touring_motorcycling">Gluaisrothar Camchuairte</string>
     <string name="poi_route_activity_type_track_racing">Rásaíocht Rian</string>
     <string name="poi_route_activity_type_backpacking">Taisteal le mála droma</string>
-    <string name="poi_route_activity_type_hiking">Sléibhteoireacht</string>
     <string name="poi_route_activity_type_hill_climbing">Cnocadóireacht</string>
     <string name="poi_route_activity_type_trail_running">Conaire Rith</string>
     <string name="poi_route_activity_type_trekking">Turas sléibhteoireachta</string>
@@ -4912,7 +4911,6 @@
     <string name="poi_route_activity_type_ice_skating">Scátáil Oighir</string>
     <string name="poi_route_activity_type_snowshoeing">Ag cruadhadh sneachta</string>
     <string name="poi_route_activity_type_e_biking">R-Rothar</string>
-    <string name="poi_route_activity_type_road_cycling">Rothaíocht bóthair</string>
     <string name="poi_route_activity_type_touring">Camchuairt</string>
     <string name="poi_route_activity_type_kayak">Cadhc</string>
     <string name="poi_route_activity_type_surfing">Surfáil</string>
@@ -4922,9 +4920,7 @@
     <string name="poi_route_activity_type_snowboarding">Clár sneachta</string>
     <string name="poi_route_activity_type_ultralight_aviation">Eitlíochta Ultralight</string>
     <string name="poi_route_activity_type_parachuting_skydiving">Paraisiútáil (Spítumadóireacht)</string>
-    <string name="poi_route_activity_type_skiing">Ag sciáil</string>
     <string name="poi_route_activity_type_hang_gliding">Croch gliding</string>
-    <string name="poi_route_activity_type_walking">Ag siúl</string>
     <string name="poi_route_activity_type_rafting">Raftáil</string>
     <string name="poi_route_activity_type_swimming_outdoor">Snámh amuigh</string>
     <string name="poi_route_activity_type_motorboat">Bád mótair</string>
@@ -4938,7 +4934,6 @@
     <string name="poi_route_activity_type_road_motorcycling">Gluaisrothair Bóthair</string>
     <string name="poi_route_activity_type_inline_skates">Scátaí inlíne</string>
     <string name="poi_route_activity_type_adventure_motorcycling">Cluiche Gluaisrothar Eachtraíochta</string>
-    <string name="poi_route_activity_type_mountain_biking">Rothaíocht sléibhe</string>
     <string name="poi_route_activity_type_gravel_biking">Rothaíocht Ghairbhéal</string>
     <string name="poi_route_activity_type_aviation">Eitlíocht</string>
     <string name="poi_route_activity_type_snowmobiling">Gluaiseacht sneachta</string>
@@ -4975,8 +4970,6 @@
     <string name="poi_contact_website">Suíomh Gréasáin</string>
     <string name="poi_piste_type">Cineál piste</string>
     <string name="poi_lit">Soilsiú</string>
-    <string name="poi_network_foot">Líonra</string>
-    <string name="poi_network_cycling">Líonra</string>
     <string name="poi_piste_oneway">Piste ar aon nós</string>
     <string name="poi_network_iwn">Bealach siúlóide idirnáisiúnta</string>
     <string name="poi_network_icn">Bealach rothaíochta idirnáisiúnta</string>

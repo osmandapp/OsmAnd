@@ -61,7 +61,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
 	public static final String TOP_WIKI_FILTER_ID = STD_PREFIX + OSM_WIKI_CATEGORY;
 	public static final int INVALID_ORDER = -1;
-	public static final int TOP_PLACES_LIMIT = 25;
+	public static final int TOP_PLACES_LIMIT = 15;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();
@@ -183,6 +183,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		filterByName = filter.filterByName;
 		savedFilterByName = filter.savedFilterByName;
 		updateAcceptedTypeOrigins();
+	}
+
+	@NonNull
+	public List<Amenity> getCurrentSearchResult() {
+		return currentSearchResult == null ? Collections.emptyList() : new ArrayList<>(currentSearchResult);
 	}
 
 	public DataSourceType getDataSourceType() {
@@ -396,7 +401,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		}
 		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
 				top, bottom, left, right, zoom, matcher);
-		results.addAll(amenities);
+		for(Amenity amenity: amenities) {
+			if(!results.contains(amenity)) {
+				results.add(amenity);
+			}
+		}
 		return results;
 	}
 
@@ -408,7 +417,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double bottomLatitude, double leftLongitude,
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
-		return dataProvider.searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
+		currentSearchResult = dataProvider.searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
+		return currentSearchResult;
 	}
 
 	public PoiFilterUtils.AmenityNameFilter getNameFilter() {
@@ -995,5 +1005,9 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	@Override
 	public String toString() {
 		return getFilterId();
+	}
+
+	public boolean showLayoutWithImages() {
+		return app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
 	}
 }
