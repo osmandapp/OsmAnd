@@ -44,6 +44,8 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.util.List;
 
@@ -564,5 +566,11 @@ public class QuickSearchListItem {
 			iconId = RenderingIcons.getBigIconResourceId(iconName);
 		}
 		return iconId > 0 ? iconId : R.drawable.mx_special_custom_category;
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

@@ -22,6 +22,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
+import net.osmand.plus.search.SearchResultViewHolder;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.track.data.GPXInfo;
@@ -33,14 +34,7 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -70,7 +64,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	private final int defaultColorId;
 	private final boolean nightMode;
 
-	public HistoryAdapter(@NonNull MapActivity activity, @Nullable OnItemSelectedListener listener, boolean nightMode) {
+	public HistoryAdapter(@NonNull MapActivity activity, @Nullable OnItemSelectedListener listener,
+			boolean nightMode) {
 		this.app = activity.getMyApplication();
 		this.listener = listener;
 		this.nightMode = nightMode;
@@ -82,8 +77,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	}
 
 	public void updateSettingsItems(@NonNull List<Object> items,
-									@NonNull Map<Integer, List<?>> markerGroups,
-									@NonNull Set<?> selectedItems) {
+			@NonNull Map<Integer, List<?>> markerGroups,
+			@NonNull Set<?> selectedItems) {
 		this.items = items;
 		this.itemsGroups = markerGroups;
 		this.selectedItems = selectedItems;
@@ -138,7 +133,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 			if (holder instanceof SearchItemViewHolder) {
 				SearchResult searchResult = (SearchResult) getItem(position);
 				QuickSearchListItem listItem = new QuickSearchListItem(app, searchResult);
-				QuickSearchListAdapter.bindSearchResult((LinearLayout) viewHolder.itemView, listItem);
+				SearchResultViewHolder.bindSearchResult((LinearLayout) viewHolder.itemView, listItem);
 
 				int iconColor = ContextCompat.getColor(app, selected ? activeColorId : defaultColorId);
 				viewHolder.icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
@@ -248,7 +243,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 	}
 
-	public static <T> void createHistoryGroups(List<Pair<Long, T>> pairs, Map<Integer, List<T>> groups, List<Object> items) {
+	public static <T> void createHistoryGroups(List<Pair<Long, T>> pairs,
+			Map<Integer, List<T>> groups, List<Object> items) {
 		int previousHeader = -1;
 		int monthsDisplayed = 0;
 
@@ -292,7 +288,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 		}
 	}
 
-	private static <T> void addMarkerToGroup(Map<Integer, List<T>> markerGroups, Integer groupHeader, T marker) {
+	private static <T> void addMarkerToGroup(Map<Integer, List<T>> markerGroups,
+			Integer groupHeader, T marker) {
 		List<T> group = markerGroups.get(groupHeader);
 		if (group != null) {
 			group.add(marker);

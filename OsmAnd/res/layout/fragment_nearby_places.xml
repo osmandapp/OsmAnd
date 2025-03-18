@@ -89,7 +89,9 @@
 					android:layout_height="match_parent"
 					android:clipToPadding="false"
 					android:paddingTop="@dimen/content_padding" />
+
 			</LinearLayout>
+
 		</LinearLayout>
 
 		<!-- Show list button -->

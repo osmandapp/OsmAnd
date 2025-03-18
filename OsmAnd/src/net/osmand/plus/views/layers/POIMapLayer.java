@@ -257,6 +257,12 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		};
 	}
 
+	@NonNull
+	public Set<PoiUIFilter> getFilters() {
+		return filters;
+	}
+
+	@Nullable
 	public List<Amenity> getCurrentResults() {
 		return data.getResults();
 	}

@@ -92,6 +92,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.*;
@@ -333,9 +334,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarMap.setOnClickListener(v -> {
 					cancelSearch();
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
-					PoiUIFilter searchListFilter = ((QuickSearchListAdapter)mainSearchFragment.getAdapter()).getPoiUIFilter();
+					PoiUIFilter searchListFilter = ((QuickSearchListAdapter) mainSearchFragment.getAdapter()).getPoiUIFilter();
 					if (searchListFilter != null) {
 						showToolbar(getString(R.string.popular_places));
+						PluginsHelper.requirePlugin(WikipediaPlugin.class).toggleWikipediaPoi(true, null);
 						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
 					} else if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
@@ -354,6 +356,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
 						}
 						app.getPoiFilters().replaceSelectedPoiFilters(filter);
+						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
 
 						MapContextMenu contextMenu = mapActivity.getContextMenu();
 						contextMenu.close();
@@ -2154,7 +2157,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void showResult(@NonNull PoiUIFilter filter) {
 		buttonToolbarText.setText(R.string.shared_string_show_on_map);
 		mainSearchFragment.getAdapter().clear();
-		updateSearchResult(createSearchResultCollection(filter), true);
+		updateSearchResult(createSearchResultCollection(app, filter.getCurrentSearchResult()), true);
 		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
 		updateTabBarVisibility(false);
 		toolbarEdit.setVisibility(View.GONE);
@@ -2163,20 +2166,23 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		toolbar.setVisibility(View.VISIBLE);
 	}
 
-	private SearchResultCollection createSearchResultCollection(@NonNull PoiUIFilter filter) {
+	@NonNull
+	public static SearchResultCollection createSearchResultCollection(
+			@NonNull OsmandApplication app, @NonNull List<Amenity> amenities) {
 		SearchUICore core = app.getSearchUICore().getCore();
 		SearchPhrase phrase = SearchPhrase.emptyPhrase(core.getSearchSettings());
-		SearchUICore.SearchResultCollection resCollection = new SearchUICore.SearchResultCollection(phrase);
+		SearchResultCollection collection = new SearchResultCollection(phrase);
+
 		List<SearchResult> results = new ArrayList<>();
-		for (Amenity pt : filter.getCurrentSearchResult()) {
+		for (Amenity amenity : amenities) {
 			SearchResult res = new SearchResult(phrase);
-			res.localeName = pt.getName();
-			res.object = pt;
+			res.localeName = amenity.getName();
+			res.object = amenity;
 			res.objectType = ObjectType.POI;
-			res.location = pt.getLocation();
+			res.location = amenity.getLocation();
 			results.add(res);
 		}
-		resCollection.addSearchResults(results, false, false);
-		return resCollection;
+		collection.addSearchResults(results, false, false);
+		return collection;
 	}
 }

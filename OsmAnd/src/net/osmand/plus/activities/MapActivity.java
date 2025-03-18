@@ -513,9 +513,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
 			return;
 		}
-		ExplorePlacesFragment nearbyPlacesFragment = fragmentsHelper.getExplorePlacesFragment();
-		if (nearbyPlacesFragment != null) {
-			nearbyPlacesFragment.onBackPressed();
+		ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
+		if (explorePlacesFragment != null) {
+			explorePlacesFragment.onBackPressed();
 			return;
 		}
 		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();

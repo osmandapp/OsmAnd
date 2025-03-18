@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.ColorRes
@@ -19,7 +20,6 @@ import net.osmand.PlatformUtil
 import net.osmand.data.Amenity
 import net.osmand.data.PointDescription
 import net.osmand.data.QuadRect
-import net.osmand.data.RotatedTileBox
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
@@ -28,34 +28,36 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.search.NearbyPlacesAdapter
+import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
 import net.osmand.plus.search.ShowQuickSearchMode
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment
 import net.osmand.plus.search.listitems.QuickSearchListItem
+import net.osmand.plus.search.listitems.QuickSearchWikiItem
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.views.OsmandMapTileView
+import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.search.core.SearchCoreFactory
 import net.osmand.search.core.SearchPhrase
+import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 import java.util.Collections
 import kotlin.math.abs
 
-class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener,
-	OsmAndLocationListener, OsmAndCompassListener, IMapLocationListener,
-	OsmandMapTileView.MapZoomChangeListener {
+class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
+	OsmAndLocationListener, OsmAndCompassListener, IMapLocationListener, MapZoomChangeListener {
 
-	private val COMPASS_UPDATE_PERIOD = 300
-	private var visiblePlacesRect = QuadRect()
+	private var visibleRect = QuadRect()
 	private val log: Log = PlatformUtil.getLog(ExplorePlacesFragment::class.java)
 
 	private val plugin = PluginsHelper.requirePlugin(WikipediaPlugin::class.java)
 
-	private lateinit var verticalNearbyAdapter: NearbyPlacesAdapter
+	private lateinit var adapter: ExplorePlacesAdapter
+
 	private var location: Location? = null
 	private var mainContent: LinearLayout? = null
 	private var verticalNearbyList: RecyclerView? = null
@@ -82,11 +84,21 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
 	): View? {
-		location = app.locationProvider.lastKnownLocation
 		updateNightMode()
 		AndroidUiHelper.updateVisibility(showOnMapContainer, false)
 
-		return themedInflater.inflate(R.layout.fragment_nearby_places, container, false)
+		val view = themedInflater.inflate(R.layout.fragment_nearby_places, container, false)
+
+		if (!AndroidUiHelper.isOrientationPortrait(view.context)) {
+			val rtl = AndroidUtils.isLayoutRtl(mapActivity)
+			val attrId = if (rtl) R.attr.right_menu_view_bg else R.attr.left_menu_view_bg
+			val width = resources.getDimensionPixelSize(R.dimen.dashboard_land_width)
+
+			view.setBackgroundResource(AndroidUtils.resolveAttribute(view.context, attrId))
+			view.layoutParams = LinearLayout.LayoutParams(width, MATCH_PARENT)
+		}
+
+		return view
 	}
 
 	private fun buildZoomButtons(view: View) {
@@ -145,19 +157,25 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		setupVerticalNearbyList(view)
 		buildZoomButtons(view)
 		updatePointsList()
-		val dialogFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
-		dialogFragment?.hide()
+
+		val fragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
+		fragment?.hide()
+
 		bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
 		bottomSheetBehavior.state = STATE_HIDDEN
 		bottomSheetBehavior.peekHeight =
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
 		bottomSheetBehavior.isHideable = true
 		bottomSheetBehavior.isDraggable = true
+
 		updateMapControls()
 	}
 
 	private fun toggleWikipediaLayer(enable: Boolean) {
-		plugin.toggleWikipediaPoi(enable, null)
+		val poiUIFilter = app.osmandMap.mapLayers.poiMapLayer.filters.firstOrNull()
+		if (poiUIFilter != null && poiUIFilter.isTopImagesFilter) {
+			plugin.toggleWikipediaPoi(enable, null)
+		}
 	}
 
 	private fun setupShowAll(view: View) {
@@ -192,24 +210,38 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		app.osmandMap.mapView.addMapZoomChangeListener(this)
 	}
 
+	private fun updateAdapter() {
+		val items = app.osmandMap.mapLayers.poiMapLayer.currentResults ?: Collections.emptyList()
+		val col = QuickSearchDialogFragment.createSearchResultCollection(app, items)
+
+		val rows = ArrayList<QuickSearchListItem>()
+		if (!Algorithms.isEmpty(col.currentSearchResults)) {
+			val poiUIFilter = app.osmandMap.mapLayers.poiMapLayer.filters.firstOrNull()
+			for (searchResult in col.currentSearchResults) {
+				if (poiUIFilter != null && poiUIFilter.isTopImagesFilter) {
+					rows.add(QuickSearchWikiItem(app, searchResult))
+				} else {
+					rows.add(QuickSearchListItem(app, searchResult))
+				}
+			}
+		}
+		adapter.setItems(rows)
+	}
+
 	private fun updatePointsList() {
-		mapActivity?.let {
-			val now = System.currentTimeMillis()
-			val tileBox = it.mapView.rotatedTileBox
-			val rect = tileBox.latLonBounds
-			val extended: RotatedTileBox = tileBox.copy()
-			extended.increasePixelDimensions(tileBox.pixWidth / 4, tileBox.pixHeight / 4)
-			val extendedRect = extended.latLonBounds
-			if (!extendedRect.contains(visiblePlacesRect) && now - lastPointListRectUpdate > 1000) {
-				lastPointListRectUpdate = now
-				visiblePlacesRect = rect
-				verticalNearbyAdapter.items =
-					app.osmandMap.mapLayers.poiMapLayer.currentResults ?: Collections.emptyList()
-				app.runInUIThread {
-					if (isAdded) {
-						verticalNearbyAdapter.notifyDataSetChanged()
-						updateMapControls()
-					}
+		val now = System.currentTimeMillis()
+		val tileBox = app.osmandMap.mapView.rotatedTileBox
+		val rect = tileBox.latLonBounds
+		val extended = tileBox.copy()
+		extended.increasePixelDimensions(tileBox.pixWidth / 4, tileBox.pixHeight / 4)
+		val extendedRect = extended.latLonBounds
+		if (!extendedRect.contains(visibleRect) && now - lastPointListRectUpdate > 1000) {
+			lastPointListRectUpdate = now
+			visibleRect = rect
+			app.runInUIThread {
+				if (isAdded) {
+					updateAdapter()
+					updateMapControls()
 				}
 			}
 		}
@@ -228,7 +260,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	override fun updateLocation(location: Location?) {
 		if (!MapUtils.areLatLonEqual(this.location, location)) {
 			this.location = location
-			verticalNearbyAdapter.updateLocation(location)
+			adapter.notifyDataSetChanged()
 		}
 	}
 
@@ -240,7 +272,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		) {
 			lastHeading = heading
 			lastCompassUpdate = now
-			updateLocation(location)
+			adapter.notifyDataSetChanged()
 		}
 	}
 
@@ -256,25 +288,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	}
 
 	private fun setupVerticalNearbyList(view: View) {
+		val poiUIFilter = app.osmandMap.mapLayers.poiMapLayer.filters.firstOrNull()
+		adapter = ExplorePlacesAdapter(view.context, poiUIFilter, this, nightMode)
+
 		verticalNearbyList = view.findViewById(R.id.vertical_nearby_list)
-		val nearbyData =
-			app.osmandMap.mapLayers.poiMapLayer.currentResults ?: Collections.emptyList()
-		verticalNearbyAdapter = NearbyPlacesAdapter(view.context, nearbyData, true, this)
-		verticalNearbyList?.layoutManager = LinearLayoutManager(requireContext())
-		verticalNearbyList?.adapter = verticalNearbyAdapter
-		verticalNearbyAdapter.notifyDataSetChanged()
+		verticalNearbyList?.layoutManager = LinearLayoutManager(view.context)
+		verticalNearbyList?.adapter = adapter
 	}
-
-	val mapActivity: MapActivity?
-		get() {
-			val activity = activity
-			return if (activity is MapActivity) {
-				activity
-			} else {
-				null
-			}
-		}
-
 
 	private fun showPointInContextMenu(mapActivity: MapActivity, point: Amenity) {
 		val latitude = point.location.latitude
@@ -338,8 +358,17 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		}
 	}
 
+	val mapActivity: MapActivity?
+		get() {
+			return activity as? MapActivity
+		}
+
 	companion object {
+
 		val TAG: String = ExplorePlacesFragment::class.java.simpleName
+
+		private const val COMPASS_UPDATE_PERIOD = 300
+
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = ExplorePlacesFragment()
