@@ -5702,4 +5702,15 @@
     <string name="show_dms_grids_description">Birta hnitanet í gráður, mínútur, sekúndur í staðinn fyrir gráður</string>
     <string name="show_dm_grids">Nota DM í staðinn fyrir gráður eða DMS</string>
     <string name="show_list">Birta lista</string>
+    <string name="choose_location">Veldu staðsetningu</string>
+    <string name="point_location">Staðsetning punkts</string>
+    <string name="shared_string_manual">Handvirkt</string>
+    <string name="shared_string_map_center">Miðja korts</string>
+    <string name="choose_location_on_map">Veldu staðsetningu á kortinu.</string>
+    <string name="popular_places">Vinsælir staðir</string>
+    <string name="show_image_previews">Birta forskoðun mynda</string>
+    <string name="layer_coordinates_grid">Hnitanet</string>
+    <string name="prime_meridian">Núllbaugur</string>
+    <string name="equator">Miðbaugur</string>
+    <string name="meridian_180">180. lengdarbaugur</string>
 </resources>
