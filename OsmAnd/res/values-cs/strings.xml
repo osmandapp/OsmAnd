@@ -5726,4 +5726,7 @@
     <string name="quick_action_showhide_coordinates_grid_descr">Akce pro ovládání viditelnosti souřadnicové sítě na mapě.</string>
     <string name="layer_coordinates_grid">Souřadnicová síť</string>
     <string name="release_5_0">• Objevte nejlépe hodnocené body zájmu pomocí nového režimu Prozkoumat\n\n • Všechny trasy OSM, nyní s možností vyhledávání! Pěší turistika, cyklistika, MTB a další\n\n • Nový navigační widget kombinuje směrovou šipku a navigační pokyny\n\n • Widget s informacemi o aktuální trase: zobrazuje odhadovaný čas, čas příjezdu a vzdálenost\n\n • Výběr lyžařských sjezdovek a MTB tras na mapě pro podrobné informace\n\n • Možnost výběru velikosti widgetu pro levý a pravý panel\n\n • Přidána mřížka souřadnic se zeměpisnými souřadnicemi\n\n • Přidána možnost přizpůsobit výchozí vzhled oblíbených skupin\n\n • Android Auto: zobrazení odhadovaného času a vzdálenosti k dalšímu bodu trasy; ve výsledcích vyhledávání se nyní zobrazují názvy měst\n\n • Významné vrcholy jsou nyní objevitelné prostřednictvím mapy a vyhledávání\n\n • Výšky horských vrcholů ve stopách (ft)\n\n • Přidáno: skalní útvary a horolezecké oblasti na mapě\n\n • Vylepšeno vyhledávání adres v USA\n\n • Přidáno hebrejské TTS pro navigaci</string>
+    <string name="prime_meridian">Nultý poledník</string>
+    <string name="equator">Rovník</string>
+    <string name="meridian_180">180. poledník</string>
 </resources>
