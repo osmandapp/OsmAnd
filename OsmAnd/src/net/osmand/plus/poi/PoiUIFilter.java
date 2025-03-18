@@ -403,7 +403,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
 				top, bottom, left, right, zoom, matcher);
 		results.addAll(amenities);
-		return new ArrayList<>(results);
+		ArrayList<Amenity> resultList = new ArrayList<>(results);
+		if(isTopWikiFilter()) {
+			Collections.sort(resultList, (p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
+		}
+		return resultList;
 	}
 
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locs, int poiSearchDeviationRadius) {
@@ -415,6 +419,9 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
 		currentSearchResult = dataProvider.searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
+		if (isTopWikiFilter()) {
+			Collections.sort(currentSearchResult, (p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
+		}
 		return currentSearchResult;
 	}
 
