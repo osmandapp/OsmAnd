@@ -112,7 +112,7 @@
 					android:ellipsize="end"
 					android:maxLines="1"
 					android:textColor="@color/text_color_primary_light"
-					android:textSize="24sp"
+					android:textSize="30sp"
 					tools:text="Street" />
 
 			</LinearLayout>
