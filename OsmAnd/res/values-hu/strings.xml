@@ -1233,7 +1233,7 @@
     <string name="shared_string_waypoints">Útpontok</string>
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
     <string name="speak_favorites">Közeli kedvencek</string>
-    <string name="speak_poi">Közeli érdekes helyek (POI)</string>
+    <string name="speak_poi">Közeli érdekes helyek (POI-k)</string>
     <string name="download_additional_maps">Letöltia hiányzó térképeket %1$s (%2$d MB)\?</string>
     <string name="rendering_value_browse_map_name">Térképböngészés</string>
     <string name="rendering_value_car_name">Személyautó</string>
@@ -4277,14 +4277,14 @@
     <string name="arrival_time_widget_desc">Az úti célhoz való megérkezés időpontja.</string>
     <string name="time_to_go_desc">A célpont eléréséhez szükséges időtartam percben vagy órában kifejezve.</string>
     <string name="magnetic_bearing_widget_desc">A mágneses észak és a célpont közötti, az Ön tartózkodási helyéről megfigyelt szög.</string>
-    <string name="coordinates_widget_secondary_desc">A koordinátaformátumot módosíthatja a következőre: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">A koordinátaformátumot itt módosíthatja: %1$s &gt; %2$s &gt; %3$s.</string>
     <string name="shared_string_widget">Modul</string>
     <string name="audio_video_notes_desc">Gyors hozzáférést biztosít hang- vagy videófelvétel elindításához/leállításához, illetve képjegyzet készítéséhez.</string>
     <string name="coordinates_widget_desc">Megjeleníti a jelenlegi pozíció földrajzi koordinátáit.</string>
     <string name="get_altitude_information">Magassági adatok lekérése</string>
     <string name="calculating_altitude">Magasság kiszámítása</string>
     <string name="calculate_online">Online kiszámítás</string>
-    <string name="bearing_secondary_desc">A felhasznált adatformátumot módosíthatja a következőre: %1$s – %2$s – %3$s.</string>
+    <string name="bearing_secondary_desc">A felhasznált adatformátumot itt módosíthatja: %1$s &gt; %2$s &gt; %3$s.</string>
     <string name="widget_secondary_desc_part_of">A(z) %1$s bővítmény része.</string>
     <string name="gps_info_widget_desc">Megjeleníti a jelenleg látható, illetve használt műholdak számát.</string>
     <string name="elevation_profile_widget_desc">Megjeleníti a jelenlegi útvonal magassági és lejtésprofilját.</string>
