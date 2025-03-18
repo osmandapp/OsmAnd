@@ -387,4 +387,12 @@
     <string name="shared_string_memory">Cuimhne</string>
     <string name="amenity_type_education">Foghlam</string>
     <string name="shared_string_travelbooks">Leabhraichean-siubhail</string>
+    <string name="app_mode_scooter">Sgùtair</string>
+    <string name="message_server_error">Mearachd fhrithealaiche: %1$s</string>
+    <string name="routing_engine_vehicle_type_mtb">Rothair-beinne</string>
+    <string name="delete_waypoints">Dubh às puingean-thurais</string>
+    <string name="context_menu_read_full">Leugh air fad</string>
+    <string name="routing_engine_vehicle_type_scooter">Sgùtair</string>
+    <string name="context_menu_edit_descr">Deasaich tuairisgeul</string>
+    <string name="routing_engine_vehicle_type_racingbike">Rothair-rèisidh</string>
 </resources>
