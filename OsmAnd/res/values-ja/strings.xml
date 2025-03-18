@@ -5228,4 +5228,19 @@ POIの更新は利用できません</string>
     <string name="quick_action_start_pause_recording">GPX経路の記録を開始、一時停止、再開するためのボタンです。</string>
     <string name="quick_action_previous_screen_title">前に戻る</string>
     <string name="release_5_0">• 新しい探索モードでトップランクのPOIを発見してみよう\n\n • すべてのOSMルートが検索可能に！ハイキング、サイクリング、MTB、その他多数\n\n • ターン矢印とナビゲーション指示を組み合わせた新しいナビゲーションウィジェット\n\n • 現在のルート情報ウィジェット：到着予想時刻、到着までの時間、距離を表示\n\n • マップ上でスキー場やMTBコースを選択すると、詳細情報が表示\n\n • 左右パネルのウィジェットサイズを選択可能\n\n • 地理座標の座標グリッドを追加\n\n • お気に入りグループのデフォルトの外観をカスタマイズする機能を追加\n\n • Android Auto：次の経由地点までの到着予想時刻と距離を表示、検索結果に都市名が表示されるように\n\n • 著名な山頂をマップと検索で発見できるように\n\n • 山頂の高さをフィートで表示\n\n • 追加：マップ上の岩場とクライミングエリア\n\n • アメリカでの住所検索を改善\n\n • ナビゲーションにヘブライ語TTSを追加</string>
+    <string name="quick_action_move_map_down">マップを下に</string>
+    <string name="quick_action_destination">目的地</string>
+    <string name="quick_action_to_my_location">現在地を表示</string>
+    <string name="quick_action_routes_summary">マップ上の%1$sの表示/非表示を切り替えます。</string>
+    <string name="quick_action_move_map_up">マップを上に</string>
+    <string name="quick_action_directions_from">出発地</string>
+    <string name="quick_action_move_map_left">マップを左に</string>
+    <string name="quick_action_location_by_gpx">GPXによるロケーション</string>
+    <string name="quick_action_navigation_view_desc">ナビゲーション画面の開閉ボタンです。</string>
+    <string name="quick_action_remove_next_destination">次の目的地</string>
+    <string name="quick_action_new_route">新しいルート</string>
+    <string name="quick_action_switch_compass_desc">マップの向きを切り替えるボタンです。</string>
+    <string name="quick_action_navigation_view_title">ナビゲーション画面</string>
+    <string name="quick_action_terrain_color_scheme">地形の配色</string>
+    <string name="quick_action_move_map_right">マップを右に</string>
 </resources>
