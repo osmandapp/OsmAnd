@@ -59,6 +59,18 @@ public class RenderingIcons {
 		}
 		int width = (int) (drawable.getIntrinsicWidth() * scale);
 		int height = (int) (drawable.getIntrinsicHeight() * scale);
+		return getBitmapFromVectorDrawable(width, height, drawable);
+	}
+
+	public static synchronized Bitmap getBitmapFromVectorDrawable(@NonNull Context context, int drawableId, int width, int height) {
+		Drawable drawable = AppCompatResources.getDrawable(context, drawableId);
+		if (drawable == null) {
+			return null;
+		}
+		return getBitmapFromVectorDrawable(width, height, drawable);
+	}
+
+	private static Bitmap getBitmapFromVectorDrawable(int width, int height, Drawable drawable) {
 		if (cacheBmp == null || cacheBmp.getWidth() != width || cacheBmp.getHeight() != height) {
 			cacheBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		}

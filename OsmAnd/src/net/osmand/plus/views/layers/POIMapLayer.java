@@ -129,7 +129,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public CustomMapObjects<Amenity> customObjectsDelegate;
 
 	private static final int IMAGE_ICON_BORDER_DP = 2;
-	private static final int IMAGE_ICON_SIZE_DP = 50;
+	private static final int IMAGE_ICON_SIZE_DP = 45;
 	private static final int IMAGE_ICON_OUTER_COLOR = 0xffffffff;
 	private static Bitmap imageCircleBitmap;
 	private NetworkImageLoader imageLoader;
@@ -948,8 +948,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		OsmandApplication app = getApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int borderWidth = AndroidUtils.dpToPxAuto(app, IMAGE_ICON_BORDER_DP);
-		Bitmap circle = getCircle();
 		int bigIconSize = getBigIconSize();
+		Bitmap circle = getCircle(bigIconSize);
 		Bitmap bitmapResult = Bitmap.createBitmap(bigIconSize, bigIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapResult);
 		Paint bitmapPaint = createBitmapPaint();
@@ -972,10 +972,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return bitmapResult;
 	}
 
-	private Bitmap getCircle() {
+	private Bitmap getCircle(int size) {
 		if (imageCircleBitmap == null) {
 			imageCircleBitmap = RenderingIcons.getBitmapFromVectorDrawable(getContext(),
-					R.drawable.bg_point_circle, 1.25f * getTextScale());
+					R.drawable.bg_point_circle, size, size);
 		}
 		return imageCircleBitmap;
 	}
