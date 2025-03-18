@@ -14,6 +14,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
@@ -22,9 +23,9 @@ import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
-import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private long lastPointListRectUpdate = 0;
 
 	public void onNearbyItemClicked(@NonNull Amenity amenity) {
-		showResult(SearchCoreFactory.createAmenitySearchResult(SearchPhrase.emptyPhrase(), amenity));
+		showResult(SearchCoreFactory.createSearchResult(amenity, SearchPhrase.emptyPhrase(), MapPoiTypes.getDefault()));
 	}
 
 	@Override

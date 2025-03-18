@@ -25,14 +25,12 @@ public class QuickSearchToolbarController extends TopToolbarController {
 
 		setOnBackButtonClickListener(v -> showQuickSearch());
 		setOnTitleClickListener(v -> showQuickSearch());
-		setOnCloseButtonClickListener(v -> fragmentsHelper.closeQuickSearch());
-
-		setOnCloseToolbarListener(() -> {
-			ExplorePlacesFragment fragment = getExplorePlacesFragment();
-			if (fragment != null) {
-				fragment.closeFragment();
-			}
+		setOnCloseButtonClickListener(v -> {
+			fragmentsHelper.closeExplore();
+			fragmentsHelper.closeQuickSearch();
 		});
+
+		setOnCloseToolbarListener(fragmentsHelper::closeExplore);
 		setOnActionButtonClickListener(v -> {
 			ExplorePlacesFragment fragment = getExplorePlacesFragment();
 			if (fragment != null) {
@@ -44,6 +42,7 @@ public class QuickSearchToolbarController extends TopToolbarController {
 	}
 
 	private void showQuickSearch() {
+		fragmentsHelper.closeExplore();
 		fragmentsHelper.showQuickSearch(CURRENT, false);
 	}
 

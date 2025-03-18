@@ -257,6 +257,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		};
 	}
 
+	@Nullable
 	public List<Amenity> getCurrentResults() {
 		return data.getResults();
 	}

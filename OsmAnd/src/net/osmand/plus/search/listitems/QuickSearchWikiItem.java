@@ -3,6 +3,7 @@ package net.osmand.plus.search.listitems;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.DataSourceType;
@@ -16,6 +17,8 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 public class QuickSearchWikiItem extends QuickSearchListItem {
+
+	private final Amenity amenity;
 	private final String title;
 	private final String description;
 	private final String type;
@@ -23,13 +26,10 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 	private final String imageUrl;
 	private final LatLon location;
 
-	public QuickSearchWikiItem(@NonNull OsmandApplication app, @NonNull QuickSearchListItem quickSearchListItem) {
-		this(app, quickSearchListItem.getSearchResult());
-	}
-
 	public QuickSearchWikiItem(@NonNull OsmandApplication app, @NonNull SearchResult searchResult) {
 		super(app, searchResult);
-		Amenity amenity = (Amenity) searchResult.object;
+
+		amenity = (Amenity) searchResult.object;
 		String preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (Algorithms.isEmpty(preferredMapLang)) {
 			preferredMapLang = app.getLanguage();
@@ -47,6 +47,11 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 	}
 
 	@NonNull
+	public Amenity getAmenity() {
+		return amenity;
+	}
+
+	@NonNull
 	private String getPoiTypeTranslation(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
 		PoiType subType = app.getPoiTypes().getPoiTypeByKey(amenity.getSubType());
 		return subType != null ? subType.getTranslation() : "";
@@ -54,16 +59,16 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 
 	@NonNull
 	private Drawable getPoiTypeIcon(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
-		Drawable resIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark, app.getDaynightHelper().isNightMode());
-		;
+		boolean nightMode = app.getDaynightHelper().isNightMode();
+		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark, nightMode);
 		PoiType subType = app.getPoiTypes().getPoiTypeByKey(amenity.getSubType());
 		if (subType != null) {
-			Drawable renderingIcon = app.getUIUtilities().getRenderingIcon(app, subType.getKeyName(), app.getDaynightHelper().isNightMode());
+			Drawable renderingIcon = app.getUIUtilities().getRenderingIcon(app, subType.getKeyName(), nightMode);
 			if (renderingIcon != null) {
-				resIcon = renderingIcon;
+				drawable = renderingIcon;
 			}
 		}
-		return resIcon;
+		return drawable;
 	}
 
 	@NonNull
@@ -86,7 +91,7 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 		return icon;
 	}
 
-	@NonNull
+	@Nullable
 	public String getImage() {
 		return imageUrl;
 	}

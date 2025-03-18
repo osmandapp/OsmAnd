@@ -8,7 +8,6 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
-import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -1952,14 +1951,28 @@ public class SearchCoreFactory {
 				p.isLastWord(ObjectType.VILLAGE);
 	}
 
-	public static SearchResult createAmenitySearchResult(SearchPhrase phrase, Amenity amenity) {
-		SearchResult sr = new SearchResult(phrase);
-		sr.localeName = amenity.getName();
-		sr.object = amenity;
-		sr.objectType = ObjectType.POI;
-		sr.location = amenity.getLocation();
-		sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
-		return sr;
+	public static SearchResult createSearchResult(Amenity amenity, SearchPhrase phrase,
+			MapPoiTypes poiTypes) {
+		SearchResult result = new SearchResult(phrase);
+		result.object = amenity;
+		result.objectType = POI;
+		result.location = amenity.getLocation();
+		result.preferredZoom = PREFERRED_POI_ZOOM;
+
+		SearchSettings settings = phrase.getSettings();
+		result.otherNames = amenity.getOtherNames(true);
+		result.alternateName = amenity.getCityFromTagGroups(settings.getLang());
+		result.localeName = amenity.getName(settings.getLang(), settings.isTransliterate());
+		if (Algorithms.isEmpty(result.localeName)) {
+			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());
+			if (poiType != null) {
+				result.localeName = poiType.getTranslation();
+			} else {
+				result.localeName = amenity.getSubType();
+			}
+		}
+
+		return result;
 	}
 
 	private static class TopIndexMatch {

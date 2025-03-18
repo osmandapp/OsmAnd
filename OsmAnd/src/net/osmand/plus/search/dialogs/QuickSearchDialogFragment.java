@@ -333,10 +333,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarMap.setOnClickListener(v -> {
 					cancelSearch();
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
-					PoiUIFilter searchListFilter = ((QuickSearchListAdapter)mainSearchFragment.getAdapter()).getPoiUIFilter();
-					if (searchListFilter != null) {
-						showToolbar(getString(R.string.popular_places));
-						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
+					PoiUIFilter poiUIFilter = ((QuickSearchListAdapter) mainSearchFragment.getAdapter()).getPoiUIFilter();
+					if (poiUIFilter != null) {
+						showFilterOnMap(poiUIFilter, getString(R.string.popular_places));
 					} else if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
@@ -353,16 +352,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else {
 							filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
 						}
-						app.getPoiFilters().replaceSelectedPoiFilters(filter);
-
-						MapContextMenu contextMenu = mapActivity.getContextMenu();
-						contextMenu.close();
-						contextMenu.closeActiveToolbar();
-
-						showToolbar();
-						mapActivity.updateStatusBarColor();
-						mapActivity.refreshMap();
-						hide();
+						showFilterOnMap(filter, getText());
 					} else {
 						SearchWord word = searchPhrase.getLastSelectedWord();
 						if (word != null) {
@@ -596,6 +586,28 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		updateFab();
 
 		return view;
+	}
+
+	private void showFilterOnMap(@Nullable PoiUIFilter filter, @Nullable String title) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			app.getPoiFilters().replaceSelectedPoiFilters(filter);
+
+			MapContextMenu contextMenu = activity.getContextMenu();
+			contextMenu.close();
+			contextMenu.closeActiveToolbar();
+
+			showToolbar(title);
+			activity.updateStatusBarColor();
+			activity.refreshMap();
+
+			if (filter != null) {
+				FragmentManager manager = activity.getSupportFragmentManager();
+				ExplorePlacesFragment.Companion.showInstance(manager, filter);
+			}
+
+			hide();
+		}
 	}
 
 	@Override
@@ -2151,7 +2163,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void showResult(@NonNull PoiUIFilter filter) {
 		buttonToolbarText.setText(R.string.shared_string_show_on_map);
 		mainSearchFragment.getAdapter().clear();
-		updateSearchResult(createSearchResultCollection(filter), true);
+		updateSearchResult(createSearchResultCollection(app, filter.getCurrentSearchResult()), true);
 		((QuickSearchListAdapter) mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
 		updateTabBarVisibility(false);
 		toolbarEdit.setVisibility(View.GONE);
@@ -2160,20 +2172,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		toolbar.setVisibility(View.VISIBLE);
 	}
 
-	private SearchResultCollection createSearchResultCollection(@NonNull PoiUIFilter filter) {
+	@NonNull
+	public static SearchResultCollection createSearchResultCollection(
+			@NonNull OsmandApplication app, @NonNull List<Amenity> amenities) {
 		SearchUICore core = app.getSearchUICore().getCore();
 		SearchPhrase phrase = SearchPhrase.emptyPhrase(core.getSearchSettings());
-		SearchUICore.SearchResultCollection resCollection = new SearchUICore.SearchResultCollection(phrase);
+		SearchResultCollection collection = new SearchResultCollection(phrase);
+
 		List<SearchResult> results = new ArrayList<>();
-		for (Amenity pt : filter.getCurrentSearchResult()) {
-			SearchResult res = new SearchResult(phrase);
-			res.localeName = pt.getName();
-			res.object = pt;
-			res.objectType = ObjectType.POI;
-			res.location = pt.getLocation();
-			results.add(res);
+		for (Amenity amenity : amenities) {
+			SearchResult result = SearchCoreFactory.createSearchResult(amenity, phrase, core.getPoiTypes());
+			results.add(result);
 		}
-		resCollection.addSearchResults(results, false, false);
-		return resCollection;
+		collection.addSearchResults(results, false, false);
+		return collection;
 	}
 }
