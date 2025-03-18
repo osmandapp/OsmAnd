@@ -234,20 +234,29 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			return new QListMapTiledCollectionPoint();
 		}
 		AreaI tileBBox31 = Utilities.tileBoundingBox31(tileId, zoom);
+		AreaI extTileBBox31 = tileBBox31.getEnlargedBy(new PointI(tileBBox31.width() / 2, tileBBox31.height() / 2));
 		QuadRect latLonBounds = new QuadRect(
 				MapUtils.get31LongitudeX(tileBBox31.getTopLeft().getX()),
 				MapUtils.get31LatitudeY(tileBBox31.getTopLeft().getY()),
 				MapUtils.get31LongitudeX(tileBBox31.getBottomRight().getX()),
 				MapUtils.get31LatitudeY(tileBBox31.getBottomRight().getY()));
+		QuadRect extLatLonBounds = new QuadRect(
+				MapUtils.get31LongitudeX(extTileBBox31.getTopLeft().getX()),
+				MapUtils.get31LatitudeY(extTileBBox31.getTopLeft().getY()),
+				MapUtils.get31LongitudeX(extTileBBox31.getBottomRight().getX()),
+				MapUtils.get31LatitudeY(extTileBBox31.getBottomRight().getY()));
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
 		int i = 0;
 		for (Amenity amenity : results) {
 			LatLon latLon = amenity.getLocation();
-			if (latLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
+			if (extLatLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
 					latLon.getLongitude(), latLon.getLatitude())) {
-				POICollectionPoint point = new POICollectionPoint(ctx, amenity, textScale);
-				res.add(point.instantiateProxy(true));
-				point.swigReleaseOwnership();
+				if (latLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
+						latLon.getLongitude(), latLon.getLatitude())) {
+					POICollectionPoint point = new POICollectionPoint(ctx, amenity, textScale);
+					res.add(point.instantiateProxy(true));
+					point.swigReleaseOwnership();
+				}
 				if (i++ > TILE_POINTS_LIMIT) {
 					break;
 				}
