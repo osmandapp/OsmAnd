@@ -5526,4 +5526,5 @@
     <string name="tile_source_already_installed">الخريطة مثبتة بالفعل.</string>
     <string name="speech_rate">معدل الكلام</string>
     <string name="help_article_map_tracks_name">المسارات</string>
+    <string name="help_article_map_routes_name">المسارات الرياضية</string>
 </resources>
