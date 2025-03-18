@@ -45,7 +45,7 @@ import java.util.List;
 
 public class POITileProvider extends interface_MapTiledCollectionProvider {
 
-	private static final int TILE_POINTS_LIMIT = 50;
+	private static final int TILE_POINTS_LIMIT = 20;
 
 	private final Context ctx;
 	private final int baseOrder;
