@@ -112,8 +112,7 @@
 					android:includeFontPadding="false"
 					android:ellipsize="end"
 					android:maxLines="1"
-					android:textColor="@color/text_color_primary_light"
-					android:textSize="18sp"
+					android:textSize="22sp"
 					tools:text="Street" />
 
 			</LinearLayout>
