@@ -947,8 +947,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		OsmandApplication app = getApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int borderWidth = AndroidUtils.dpToPxAuto(app, IMAGE_ICON_BORDER_DP);
-		Bitmap circle = getCircle(getBigIconSize());
 		int bigIconSize = getBigIconSize();
+		Bitmap circle = getCircle(bigIconSize);
 		Bitmap bitmapResult = Bitmap.createBitmap(bigIconSize, bigIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapResult);
 		Paint bitmapPaint = createBitmapPaint();
