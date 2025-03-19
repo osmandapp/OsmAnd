@@ -2116,11 +2116,11 @@ POIの更新は利用できません</string>
     <string name="quick_action_add_category">カテゴリーを追加</string>
     <string name="quick_action_add_create_items">アイテムを作成</string>
     <string name="quick_action_add_configure_map">マップ設定</string>
-    <string name="quick_action_fav_name_descr">住所または場所の名前を利用する場合は空白のままにします</string>
+    <string name="quick_action_fav_name_descr">住所または地名を使用する場合は空白にしてください。</string>
     <string name="quick_action_bug_descr">このメッセージはコメント欄に自動入力されます。</string>
     <string name="quick_action_bug_message">メッセージ</string>
     <string name="quick_action_category_descr">お気に入りを保存するカテゴリーを選択:</string>
-    <string name="quick_action_gpx_category_descr">オプションのカテゴリーを選択してください｡</string>
+    <string name="quick_action_gpx_category_descr">任意のカテゴリーを選択してください。</string>
     <string name="quick_action_poi_list">POI一覧</string>
     <string name="quick_action_sh_poi_descr">マップ上に表示される1つまたは複数のPOIカテゴリーを追加できます。</string>
     <string name="quick_action_map_style_action">マップスタイルを追加します</string>
