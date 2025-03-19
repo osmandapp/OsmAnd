@@ -5266,4 +5266,6 @@ POIの更新は利用できません</string>
     <string name="lang_zh_hant">繁体字中国語</string>
     <string name="release_4_8">• 新しい地形カラー化オプション \"高度\"\n\n • 地形、経路、ルートのカスタムカラーパレット\n\n • 3Dの異なる位置アイコン\n\n • クイックアクションを外部キーボードに割り当て可能に\n\n • 天気: UIの刷新、風アニメーションの追加\n\n • 3D経路の改善:新しい視覚化とカラー化オプション\n\n • マップ上の観光ルートの選択肢を拡大\n\n • マップモードをフォローするアプリテーマオプションを追加\n\n • 経路統計、ソート、検索を修正\n\n • OSM編集:ログイン/パスワード認証方法の削除\n\n • Android 14からシステム共有シートに切り替え</string>
     <string name="help_article_personal_color_palette_schemes_name">配色</string>
+    <string name="daynight_mode_app_theme">アプリテーマ</string>
+    <string name="daynight_mode_app_theme_summary">マップの表示は､アプリ全体のテーマに合わせて､明るいテーマには昼モード､暗いテーマには夜モードで表示されます｡</string>
 </resources>
