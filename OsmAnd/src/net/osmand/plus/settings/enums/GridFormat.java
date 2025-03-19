@@ -9,13 +9,15 @@ import net.osmand.LocationConvert;
 import net.osmand.core.jni.GridConfiguration.Format;
 import net.osmand.core.jni.GridConfiguration.Projection;
 import net.osmand.plus.R;
+import net.osmand.util.CollectionUtils;
 
 public enum GridFormat {
 
 	DMS(LocationConvert.FORMAT_SECONDS, R.string.dd_mm_ss_format),
 	DM(LocationConvert.FORMAT_MINUTES, R.string.dd_mm_mmm_format),
 	DIGITAL(LocationConvert.FORMAT_DEGREES, R.string.dd_ddddd_format),
-	UTM(LocationConvert.UTM_FORMAT, R.string.navigate_point_format_utm);
+	UTM(LocationConvert.UTM_FORMAT, R.string.navigate_point_format_utm),
+	MGRS(LocationConvert.MGRS_FORMAT, R.string.navigate_point_format_mgrs);
 
 	private final int id;
 	private final int titleId;
@@ -35,6 +37,7 @@ public enum GridFormat {
 		return switch (this) {
 			case DMS, DM, DIGITAL -> Projection.WGS84;
 			case UTM -> Projection.UTM;
+			case MGRS -> Projection.MGRS;
 			default -> throw new IllegalArgumentException("Unknown GridFormat: " + this);
 		};
 	}
@@ -45,9 +48,13 @@ public enum GridFormat {
 			case DMS -> Format.DMS;
 			case DM -> Format.DM;
 			case DIGITAL -> Format.Decimal;
-			case UTM -> Format.values()[0];
+			case UTM, MGRS -> Format.values()[0];
 			default -> throw new IllegalArgumentException("Unknown GridFormat: " + this);
 		};
+	}
+
+	public boolean needSuffixes() {
+		return !CollectionUtils.equalsToAny(this, UTM, MGRS);
 	}
 
 	@NonNull
