@@ -56,6 +56,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private final RouteInfoCalculator calculator;
 	private List<DestinationInfo> cachedRouteInfo;
 	private RouteInfoDisplayMode cachedDisplayMode;
+	private DisplayPriority cachedDisplayPriority;
 	private int cachedContentLayoutId;
 	private Integer cachedMetricSystem;
 	private boolean forceUpdate = false;
@@ -73,7 +74,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private View blocksDivider;
 
 	public RouteInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
-			@Nullable WidgetsPanel panel) {
+	                       @Nullable WidgetsPanel panel) {
 		super(mapActivity, ROUTE_INFO, customId, panel);
 		widgetState = new RouteInfoWidgetState(app, customId);
 		calculator = new RouteInfoCalculator(mapActivity);
@@ -196,7 +197,10 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void updateRouteInformation() {
-		List<DestinationInfo> calculatedRouteInfo = calculator.calculateRouteInformation();
+		ApplicationMode appMode = settings.getApplicationMode();
+		DisplayPriority priority = getDisplayPriority(appMode);
+
+		List<DestinationInfo> calculatedRouteInfo = calculator.calculateRouteInformation(priority);
 		if (Algorithms.isEmpty(calculatedRouteInfo)) {
 			updateVisibility(false);
 			return;
@@ -208,7 +212,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		}
 		cachedRouteInfo = calculatedRouteInfo;
 
-		RouteInfoDisplayMode primaryDisplayMode = getDisplayMode(settings.getApplicationMode());
+		RouteInfoDisplayMode primaryDisplayMode = getDisplayMode(appMode);
 		RouteInfoDisplayMode[] orderedDisplayModes = RouteInfoDisplayMode.values(primaryDisplayMode);
 
 		updatePrimaryBlock(cachedRouteInfo.get(0), orderedDisplayModes);
@@ -225,7 +229,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void updatePrimaryBlock(@NonNull DestinationInfo destinationInfo,
-			@NonNull RouteInfoDisplayMode[] modes) {
+	                                @NonNull RouteInfoDisplayMode[] modes) {
 		Map<RouteInfoDisplayMode, String> displayData = prepareDisplayData(destinationInfo);
 
 		tvPrimaryValue1.setText(displayData.get(modes[0]));
@@ -234,7 +238,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void updateSecondaryBlock(@NonNull DestinationInfo destinationInfo,
-			@NonNull RouteInfoDisplayMode[] modes) {
+	                                  @NonNull RouteInfoDisplayMode[] modes) {
 		Map<RouteInfoDisplayMode, String> displayData = prepareDisplayData(destinationInfo);
 
 		tvPrimaryValue2.setText(displayData.get(modes[0]));
@@ -261,6 +265,11 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		RouteInfoDisplayMode displayMode = widgetState.getDisplayMode();
 		if (cachedDisplayMode != displayMode) {
 			cachedDisplayMode = displayMode;
+			return true;
+		}
+		DisplayPriority displayPriority = widgetState.getDisplayPriority();
+		if (cachedDisplayPriority != displayPriority) {
+			cachedDisplayPriority = displayPriority;
 			return true;
 		}
 		if (Algorithms.isEmpty(cachedRouteInfo) || isDataChanged(cachedRouteInfo.get(0), routeInfo.get(0))) {
