@@ -131,7 +131,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="daynight_mode_day">昼固定</string>
     <string name="daynight_mode_night">夜固定</string>
     <string name="daynight_mode_auto">日出/日没</string>
-    <string name="daynight_mode_sensor">ライトセンサー</string>
+    <string name="daynight_mode_sensor">照度センサー</string>
     <string name="daynight_descr">昼/夜モード切替ルールを選択します</string>
     <string name="daynight">昼/夜モード切替</string>
     <string name="download_files_question">{0} 件のファイル({1}
@@ -2211,18 +2211,7 @@ POIの更新は利用できません</string>
     <string name="route_is_too_long_v2">このルートは長すぎて計算できません。 10分以内にルート検索が終わらない場合は、出発地点と目的地の間に経由地点をいくつか追加してみてください。</string>
     <string name="osmand_extended_description_part1">OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOSMデータ』を使用した、地図＆ナビゲーションアプリです。 
 \n音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。</string>
-    <string name="osmand_extended_description_part2">GPSナビゲーション 
-\n • オフライン(海外の場合はローミング料金が不要に)、またはオンライン(高速)モードのいずれかを選択できます 
-\n • ターンバイターン形式の音声案内が、道中のあなたを案内します(録音された音声とリアルタイムで合成される音声を選択できます） 
-\n • 予定のルートから大きく外れるとルートが再検索されます 
-\n • 車線案内、道路名、到着予定時刻が道中の助けになります 
-\n • 旅行をより安全にするために、昼/夜モードが自動的に切り替わります 
-\n • 速度制限の表示選択の他に、それを超えた場合に警告を表示するように選択できます 
-\n • 移動速度に伴ったマップのズームを行えます 
-\n • 目的地を住所、種類(駐車場、レストラン、ホテル、ガソリンスタンド、博物館など)、座標の数値でも検索することもできます 
-\n • 旅程上の経由地点をサポートします。 
-\n • GPX経路を自分で使う為の記録や、アップロードしたり等の機能も備えています
-\n</string>
+    <string name="osmand_extended_description_part2">GPSナビゲーション \n • オフライン(海外の場合はローミング料金が不要に)、またはオンライン(高速)モードのいずれかを選択できます \n • ターンバイターン形式の音声案内が、道中のあなたを案内します(録音された音声とリアルタイムで合成される音声を選択できます） \n • 予定のルートから大きく外れるとルートが再検索されます \n • 車線案内、道路名、到着予定時刻が道中の助けになります \n • 旅行をより安全にするために、昼/夜モードが自動的に切り替わります \n • 速度制限の表示選択の他に、それを超えた場合に警告を表示するように選択できます \n • 移動速度に伴ったマップのズームを行えます \n • 目的地を住所、種類(駐車場、レストラン、ホテル、ガソリンスタンド、博物館など)、座標の数値でも検索することもできます \n • 旅程上の経由地点をサポートします。 \n • GPX経路を自分で使う為の記録や、アップロードしたり等の機能も備えています</string>
     <string name="osmand_extended_description_part3">マップ機能 \n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます \n • 進行方向に応じてマップの表示向きの変更も出来ます(コンパスを基本にも出来ます) \n • あなたがいる場所やあなたが見ている場所も表示できます \n • 友人があなたを見つけることが出来るように、あなたの場所を共有することができます \n • 大事な場所は『お気に入り』として保存できます \n • 地図上の名前(地名)を表示する方法を英語、現地語、または表音のつづりで選択できます \n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定できます</string>
     <string name="osmand_extended_description_part4">"
  スキー
@@ -5268,4 +5257,13 @@ POIの更新は利用できません</string>
     <string name="help_article_personal_color_palette_schemes_name">配色</string>
     <string name="daynight_mode_app_theme">アプリテーマ</string>
     <string name="daynight_mode_app_theme_summary">マップの表示は､アプリ全体のテーマに合わせて､明るいテーマには昼モード､暗いテーマには夜モードで表示されます｡</string>
+    <string name="daynight_mode_night_summary">常に暗いテーマでマップを表示し、夜間や暗い場所での使用に適しています。</string>
+    <string name="daynight_mode_sunrise_sunset_summary">現地の日の出と日の入の時間に合わせて、昼と夜のテーマを自動的に切り替えます。</string>
+    <string name="rendering_attr_alpineHiking_name">ハイキングコースの難易度</string>
+    <string name="daynight_mode_day_summary">常に明るいテーマでマップを表示するので、日中の視認性に最適です。</string>
+    <string name="shared_string_automatically">自動</string>
+    <string name="daynight_mode_sensor_summary">端末が照度センサーを備えている場合それを使用し、周囲の明るさに応じて明るいテーマと暗いテーマを切り替えます。</string>
+    <string name="release_4_9">• Wikimedia画像のフルスクリーンギャラリービューアを追加\n\n • OBD•IIプロトコルを使用して車両性能を監視するための新しいプラグイン\"Vehicle Metrics\"を導入\n\n • アクティビティを経路に割り当て、それに応じてフィルタリングする機能を追加\n\n • 旅程記録とタッチスクリーンロックのための新しいクイックアクションを実装\n\n • カスタマイズ可能なマップボタンの外観と正確なグリッドを導入\n\n • ウィジェットにコンテキストメニューと\"平均速度をリセット\"アクションを追加\n\n • 新しいルートレイヤー \"Dirt Bike trails\"を追加\n\n • \"ナビゲーション中の経路の自動記録\"を修正\n\n • RTLで座標が反転していた問題を修正\n\n • 現在記録されている経路のセンサーデータが欠落していた問題を修正\n\n • 選択した地点の周辺情報を追加\n\n • OSM編集の可視性をコントロールするクイックアクションを追加\n\n • 地形配色オプションの可視性パラメータを分離\n\n • タップ可能なアイコンを追加し、アクセスやその他の道路やパスの属性を表示するように</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">ダートバイク用コース</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">ダートバイクのコースを表示</string>
 </resources>
