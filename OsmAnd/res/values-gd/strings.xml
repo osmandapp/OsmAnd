@@ -408,4 +408,7 @@
     <string name="shared_string_address">Seòladh</string>
     <string name="update_existing">Cuir an àite</string>
     <string name="shared_string_replace">Cuir an àite</string>
+    <string name="display_route_tracks">Taisbean frith-rathadan</string>
+    <string name="display_route_tracks_as_poi">Taisbean frith-rathadan mar POI</string>
+    <string name="mapillary_menu_title_pano">Taisbean ìomhaighean 360° a-mhàin</string>
 </resources>
