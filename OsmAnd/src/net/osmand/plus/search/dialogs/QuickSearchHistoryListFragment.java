@@ -24,6 +24,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener;
+import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
 
@@ -40,7 +41,9 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private long lastPointListRectUpdate = 0;
 
 	public void onNearbyItemClicked(@NonNull Amenity amenity) {
-		showResult(SearchCoreFactory.createSearchResult(amenity, SearchPhrase.emptyPhrase(), MapPoiTypes.getDefault()));
+		SearchUICore core = app.getSearchUICore().getCore();
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(core.getSearchSettings());
+		showResult(SearchCoreFactory.createSearchResult(amenity, phrase, MapPoiTypes.getDefault()));
 	}
 
 	@Override
