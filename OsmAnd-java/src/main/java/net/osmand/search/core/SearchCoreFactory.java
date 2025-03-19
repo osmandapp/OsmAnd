@@ -805,7 +805,7 @@ public class SearchCoreFactory {
 				}
 				for (PoiFilter pf : c.getPoiFilters()) {
 					PoiTypeResult filtRes = checkPoiType(nm, pf);
-					if(filtRes != null) {
+					if (filtRes != null) {
 						results.put(filtRes.pt.getKeyName(), filtRes);
 					}
 				}
