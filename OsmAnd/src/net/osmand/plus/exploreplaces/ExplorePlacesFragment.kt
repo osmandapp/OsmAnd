@@ -296,10 +296,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private fun showPointInContextMenu(mapActivity: MapActivity, point: Amenity) {
 		val latitude = point.location.latitude
 		val longitude = point.location.longitude
-		val sr = SearchCoreFactory.createSearchResult(
-			point, SearchPhrase.emptyPhrase(),
-			MapPoiTypes.getDefault()
-		)
+
+		val core = app.getSearchUICore().getCore()
+		val phrase = SearchPhrase.emptyPhrase(core.searchSettings)
+
+		val sr = SearchCoreFactory.createSearchResult(point, phrase, MapPoiTypes.getDefault())
 		val pair = QuickSearchListItem.getPointDescriptionObject(app, sr)
 		app.settings.setMapLocationToShow(
 			latitude,
