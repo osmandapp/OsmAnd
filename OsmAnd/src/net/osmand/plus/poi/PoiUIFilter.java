@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -386,7 +387,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public List<Amenity> searchAmenities(double top, double left, double bottom, double right, int zoom, ResultMatcher<Amenity> matcher) {
-		List<Amenity> results = new ArrayList<>();
+		Set<Amenity> results = new HashSet<>();
 		List<Amenity> tempResults = currentSearchResult;
 		if (tempResults != null) {
 			for (Amenity a : tempResults) {
@@ -401,12 +402,12 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		}
 		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
 				top, bottom, left, right, zoom, matcher);
-		for(Amenity amenity: amenities) {
-			if(!results.contains(amenity)) {
-				results.add(amenity);
-			}
+		results.addAll(amenities);
+		ArrayList<Amenity> resultList = new ArrayList<>(results);
+		if(isTopWikiFilter()) {
+			Collections.sort(resultList, (p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
 		}
-		return results;
+		return resultList;
 	}
 
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locs, int poiSearchDeviationRadius) {
@@ -418,6 +419,9 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
 		currentSearchResult = dataProvider.searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
+		if (isTopWikiFilter()) {
+			Collections.sort(currentSearchResult, (p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
+		}
 		return currentSearchResult;
 	}
 
@@ -1001,13 +1005,13 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		}
 	}
 
+	public boolean showLayoutWithImages() {
+		return isTopImagesFilter() && app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
+	}
+
 	@NonNull
 	@Override
 	public String toString() {
 		return getFilterId();
-	}
-
-	public boolean showLayoutWithImages() {
-		return app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
 	}
 }

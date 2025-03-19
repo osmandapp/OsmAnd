@@ -150,7 +150,7 @@ public class CoordinatesGridHelper {
 		TextRasterizer.Style primaryStyle = createMarksStyle(color, haloColor, TextAlignment.Under);
 		TextRasterizer.Style secondaryStyle = createMarksStyle(color, haloColor, null);
 
-		marksProvider.setPrimaryStyle(primaryStyle, 2.0f * cachedTextScale);
+		marksProvider.setPrimaryStyle(primaryStyle, 2.0f * cachedTextScale, true);
 		String equator = app.getString(R.string.equator);
 		String primeMeridian = app.getString(R.string.prime_meridian);
 		String meridian180 = app.getString(R.string.meridian_180);

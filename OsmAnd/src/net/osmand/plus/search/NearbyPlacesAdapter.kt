@@ -88,7 +88,9 @@ class NearbyPlacesAdapter(
 			layoutParams.height = context.resources.getDimensionPixelSize(heightResId)
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
-			val subType = poiTypes.getPoiTypeByKey(item.subType)
+			val osmanPoiType = item.osmandPoiKey
+			val itemType = osmanPoiType ?: item.subType
+			val subType = poiTypes.getPoiTypeByKey(itemType)
 			val poiIcon =
 				if (subType == null) null else RenderingIcons.getBigIcon(app, subType.keyName)
 			val uiUtilities = app.uiUtilities

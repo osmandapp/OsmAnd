@@ -84,14 +84,11 @@ public class NearbyPlacesCard extends FrameLayout {
 
 	private void setupShowAllNearbyPlacesBtn() {
 		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
-			MapActivity activity = getMapActivity();
-			if (activity != null) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
-					if (dialogFragment != null) {
-						dialogFragment.showResult(wikiFilter);
-					}
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
+				if (dialogFragment != null) {
+					dialogFragment.showResult(wikiFilter);
 				}
 			}
 		});
@@ -111,7 +108,7 @@ public class NearbyPlacesCard extends FrameLayout {
 	}
 
 	public void update() {
-		startLoadingNearbyPlaces();
+		app.runInUIThread(this::startLoadingNearbyPlaces);
 	}
 
 	private void updateExpandState() {
@@ -193,7 +190,7 @@ public class NearbyPlacesCard extends FrameLayout {
 		});
 		onNearbyPlacesCollapseChanged();
 	}
-	
+
 	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 
 		private final LatLon latLon;

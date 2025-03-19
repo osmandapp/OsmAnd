@@ -327,6 +327,13 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 		}
 	}
 
+	public void closeExplore() {
+		ExplorePlacesFragment fragment = getExplorePlacesFragment();
+		if (fragment != null) {
+			fragment.closeFragment();
+		}
+	}
+
 	public void showQuickSearch(double latitude, double longitude) {
 		hideVisibleMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();

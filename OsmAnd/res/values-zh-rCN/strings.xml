@@ -2716,7 +2716,7 @@
     <string name="rendering_attr_smoothness_horrible_name">极端</string>
     <string name="rendering_attr_smoothness_very_horrible_name">超极端</string>
     <string name="rendering_attr_smoothness_impassable_name">无法通行</string>
-    <string name="rendering_attr_highway_class_motorway_name">机动车道</string>
+    <string name="rendering_attr_highway_class_motorway_name">高速公路</string>
     <string name="rendering_attr_highway_class_road_name">道路</string>
     <string name="rendering_attr_highway_class_street_name">街道</string>
     <string name="rendering_attr_highway_class_service_name">服务道路</string>

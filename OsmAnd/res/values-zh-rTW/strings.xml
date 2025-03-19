@@ -2646,7 +2646,7 @@
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">付款週期：</string>
     <string name="osm_live_payment_contribute_descr">捐款資助 OSM 的製圖者。</string>
-    <string name="powered_by_osmand">威力本源 OsmAnd</string>
+    <string name="powered_by_osmand">OsmAnd 技術提供</string>
     <string name="osm_live_subscriptions">訂閱</string>
     <string name="mapillary_menu_title_pano">只顯示 360° 圖片</string>
     <string name="shared_string_launch">啟動</string>
