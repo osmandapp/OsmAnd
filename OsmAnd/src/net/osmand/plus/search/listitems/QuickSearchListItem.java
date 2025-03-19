@@ -212,20 +212,7 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				String res = "";
 				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
-					if (abstractPoiType instanceof PoiCategory) {
-						res = "";
-					} else if (abstractPoiType instanceof PoiFilter that) {
-						res = that.getPoiCategory() != null ? that.getPoiCategory().getTranslation() : "";
-					} else if (abstractPoiType instanceof PoiType that) {
-						res = getPoiTypeTypeName(that);
-					} else if (abstractPoiType instanceof SearchCoreFactory.PoiAdditionalCustomFilter that) {
-						for (PoiType additionalPoiType : that.additionalPoiTypes) {
-							if (that.getKeyName().equals(additionalPoiType.getKeyName())) {
-								res = getPoiTypeTypeName(additionalPoiType);
-								break;
-							}
-						}
-					}
+					res = abstractPoiType.getParentTypeName();
 				} else if (searchResult.object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
 					res = customSearchPoiFilter.getName();
 				} else if (searchResult.object instanceof SearchPoiAdditionalFilter searchPoiAdditionalFilter) {
@@ -293,15 +280,6 @@ public class QuickSearchListItem {
 				break;
 		}
 		return searchResult.objectType.name();
-	}
-
-	@NonNull
-	private static String getPoiTypeTypeName(@NonNull PoiType poiType) {
-		String res = poiType.getParentType() != null ? poiType.getParentType().getTranslation() : null;
-		if (res == null) {
-			res = poiType.getCategory() != null ? poiType.getCategory().getTranslation() : null;
-		}
-		return res == null ? "" : res;
 	}
 
 	public Drawable getTypeIcon() {
