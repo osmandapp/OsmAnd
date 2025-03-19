@@ -78,15 +78,14 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private final Map<Integer, View> views = new HashMap<>();
 
 	private boolean useAnimation;
-	private Optional<CustomAlert.SingleSelectionDialogFragment> roadStyleDialog = Optional.empty();
-	private ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog;
+	private ConfigureMapMenu.Dialogs dialogs;
 
 	public Optional<CustomAlert.SingleSelectionDialogFragment> getRoadStyleDialog() {
-		return roadStyleDialog;
+		return dialogs.roadStyleDialog();
 	}
 
 	public ConfigureMapDialogs.MapLanguageDialog getMapLanguageDialog() {
-		return mapLanguageDialog;
+		return dialogs.mapLanguageDialog().orElseThrow();
 	}
 
 	@Override
@@ -177,14 +176,13 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	private void updateItemsData() {
 		final ConfigureMapMenu menu = new ConfigureMapMenu(app);
-		// FK-TODO: make createListAdapter() return adapter, roadStyleDialog and mapLanguageDialog
-		adapter =
+		final ConfigureMapMenu.DialogsAndAdapter dialogsAndAdapter =
 				menu.createListAdapter(
 						mapActivity,
 						Optional.of(this),
 						app.getRendererRegistry().getRenderer(settings.RENDERER.getModeValue(appMode)));
-		roadStyleDialog = menu.getRoadStyleDialog();
-		mapLanguageDialog = menu.getMapLanguageDialog().orElseThrow();
+		adapter = dialogsAndAdapter.adapter();
+		dialogs = dialogsAndAdapter.dialogs();
 		ContextMenuUtils.removeHiddenItems(adapter);
 		ContextMenuUtils.hideExtraDividers(adapter);
 		items = ContextMenuUtils.collectItemsByCategories(adapter.getItems());
