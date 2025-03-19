@@ -1097,13 +1097,13 @@ POIの更新は利用できません</string>
     <string name="routing_attr_prefer_motorway_name">高速道路を優先する</string>
     <string name="routing_attr_prefer_motorway_description">高速道路を優先する</string>
     <string name="routing_attr_avoid_toll_name">有料道路を使わない</string>
-    <string name="routing_attr_avoid_toll_description">移動時に有料道路を使用しません</string>
+    <string name="routing_attr_avoid_toll_description">移動時に有料道路を避けます</string>
     <string name="routing_attr_avoid_unpaved_name">未舗装道路を使わない</string>
-    <string name="routing_attr_avoid_unpaved_description">移動時に未舗装道路を使用しません。</string>
+    <string name="routing_attr_avoid_unpaved_description">移動時に未舗装道路を避けます</string>
     <string name="routing_attr_avoid_ferries_name">フェリーを使わない</string>
-    <string name="routing_attr_avoid_ferries_description">移動手段にフェリーを使用しません</string>
+    <string name="routing_attr_avoid_ferries_description">移動手段としてフェリーを避けます</string>
     <string name="routing_attr_avoid_motorway_name">高速道路を使わない</string>
-    <string name="routing_attr_avoid_motorway_description">移動時に高速道路を使用しません</string>
+    <string name="routing_attr_avoid_motorway_description">移動時に高速道路を避けます</string>
     <string name="routing_attr_weight_name">重量制限</string>
     <string name="routing_attr_weight_description">ルート上で通行可能な車両重量を指定します。</string>
     <string name="android_19_location_disabled">Androidのバージョン4.4(KitKat)以降では古いデータ格納フォルダ(%s)は使えなくなりました。すべてのOsmAndファイルを新しいストレージの場所にコピーしますか？
@@ -1529,7 +1529,7 @@ POIの更新は利用できません</string>
     <string name="osm_edit_context_menu_delete">OSM編集データを削除</string>
     <string name="rendering_value_disabled_name">無効</string>
     <string name="shared_string_logoff">ログオフ</string>
-    <string name="routing_attr_avoid_borders_description">国境を越えて別の国に入るようなルート設定を避けます。</string>
+    <string name="routing_attr_avoid_borders_description">国境を越えて別の国に入るようなルート設定を避けます</string>
     <string name="routing_attr_height_name">高さ制限</string>
     <string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定します。</string>
     <string name="use_fast_recalculation">スマートなルート再計算</string>
@@ -1616,7 +1616,7 @@ POIの更新は利用できません</string>
     <string name="error_message_pattern">エラー: {0}</string>
     <string name="plugin_settings">プラグイン</string>
     <string name="routing_attr_avoid_shuttle_train_name">カートレインを使わない</string>
-    <string name="routing_attr_avoid_shuttle_train_description">移動手段にカートレインを使用しません</string>
+    <string name="routing_attr_avoid_shuttle_train_description">移動手段としてカートレインを避けます</string>
     <string name="dahboard_options_dialog_title">ダッシュボード設定</string>
     <string name="shared_string_undo">元に戻す</string>
     <string name="shared_string_skip">スキップ</string>
@@ -1770,7 +1770,7 @@ POIの更新は利用できません</string>
     <string name="dashboard_or_drawer_title">ダッシュ ボードまたはメニュー</string>
     <string name="dashboard_or_drawer_description">よく扱う項目を簡単に呼び出せるダッシュボード、または従来のメニューの好きな方を優先設定できます。どちらを優先させるかはダッシュボード設定からいつでも変更できます。</string>
     <string name="routing_attr_avoid_stairs_name">階段を避ける</string>
-    <string name="routing_attr_avoid_stairs_description">移動時に階段を避けるようにします</string>
+    <string name="routing_attr_avoid_stairs_description">移動時として階段を避けるようにします</string>
     <string name="routing_attr_avoid_borders_name">国境検問所を通らない</string>
     <string name="shared_string_status">ステータス</string>
     <string name="shared_string_save_changes">変更の保存</string>
@@ -1860,7 +1860,7 @@ POIの更新は利用できません</string>
     <string name="available_maps">利用可能なマップ</string>
     <string name="select_voice_provider">音声案内を選択</string>
     <string name="select_voice_provider_descr">任意の音声案内を選択または、ダウンロードしてください</string>
-    <string name="impassable_road_desc">ルート検索やナビゲーション中に避けたい道路を選択します</string>
+    <string name="impassable_road_desc">ルート検索やナビゲーション中に避けたい道路を選択します。</string>
     <string name="shared_string_sound">サウンド</string>
     <string name="no_location_permission">位置データへのアクセスを許可します。</string>
     <string name="no_camera_permission">カメラへのアクセスを許可します。</string>
@@ -2382,7 +2382,7 @@ POIの更新は利用できません</string>
     <string name="use_system_keyboard">システムで設定されたキーボードを使用</string>
     <string name="fast_coordinates_input_descr">座標の入力形式を選択します。\'設定\'をタップして変更します。</string>
     <string name="fast_coordinates_input">高速座標入力</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">氷の道、川の浅瀬は避ける</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">氷の道、川の浅瀬は使わない</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">川や貯水池などが凍ってできた道、通常ならば渡れる川の浅瀬部分などを避けます。</string>
     <string name="add_location_as_first_point_descr">現在地を出発地点として追加することで、より完璧なルートプランが立てられます。</string>
     <string name="my_location">現在地</string>
@@ -2782,17 +2782,17 @@ POIの更新は利用できません</string>
     <string name="add_work">勤務先を追加</string>
     <string name="work_button">職場</string>
     <string name="routing_attr_avoid_tram_name">路面電車を使わない</string>
-    <string name="routing_attr_avoid_tram_description">移動手段に路面電車を使いません</string>
+    <string name="routing_attr_avoid_tram_description">移動手段に路面電車を避けるようにします</string>
     <string name="routing_attr_avoid_bus_name">バスを使わない</string>
-    <string name="routing_attr_avoid_bus_description">移動手段にバスおよびトロリーバスを使いません</string>
+    <string name="routing_attr_avoid_bus_description">移動手段としてのバスおよびトロリーバスを避けます</string>
     <string name="routing_attr_avoid_share_taxi_name">乗合タクシーを使わない</string>
-    <string name="routing_attr_avoid_share_taxi_description">移動手段に乗り合いタクシーを使いません</string>
+    <string name="routing_attr_avoid_share_taxi_description">移動手段として乗り合いタクシーを避けます</string>
     <string name="routing_attr_avoid_train_name">鉄道を使わない</string>
-    <string name="routing_attr_avoid_train_description">移動手段に鉄道を使いません</string>
+    <string name="routing_attr_avoid_train_description">移動手段として鉄道を避けます</string>
     <string name="routing_attr_avoid_subway_name">地下鉄を使わない</string>
-    <string name="routing_attr_avoid_subway_description">移動手段に地下鉄や軽量軌道交通(LRT)などを使いません</string>
+    <string name="routing_attr_avoid_subway_description">移動手段として地下鉄や軽量軌道交通(LRT)などを避けます</string>
     <string name="routing_attr_avoid_ferry_name">フェリーを使わない</string>
-    <string name="routing_attr_avoid_ferry_description">移動手段にフェリーを使いません</string>
+    <string name="routing_attr_avoid_ferry_description">移動手段としてフェリーを避けます</string>
     <string name="shared_string_degrees">角度(°)</string>
     <string name="shared_string_milliradians">ミリラジアン</string>
     <string name="angular_measeurement">角度の単位</string>
@@ -3015,7 +3015,7 @@ POIの更新は利用できません</string>
     <string name="temporary_conditional_routing">一時的な制限の検討</string>
     <string name="quick_action_need_to_add_item_to_list">『クイックアクション』のリストに最低ひとつは項目を設定する必要があります</string>
     <string name="routing_attr_piste_type_downhill_name">アルペンスキーとダウンヒルスキー</string>
-    <string name="routing_attr_piste_type_downhill_description">アルペンスキーまたはダウンヒルスキーに用の斜面(ゲレンデ)やスキーリフトへの道</string>
+    <string name="routing_attr_piste_type_downhill_description">アルペンスキーまたはダウンヒルスキーに用の斜面(ゲレンデ)やスキーリフトへの道です。</string>
     <string name="routing_attr_piste_type_nordic_name">クロスカントリースキーとノルディックスキー</string>
     <string name="routing_attr_piste_type_nordic_description">ノルディックスキーやクロスカントリースキー用コースやそれらに用いられる小道などです。</string>
     <string name="routing_attr_piste_type_skitour_name">スキーツーリング</string>
@@ -3119,23 +3119,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_prefer_unpaved_description">未舗装道路を好んで進みたい場合の設定です。</string>
     <string name="update_all_maps">すべてのマップを更新</string>
     <string name="update_all_maps_q">すべてのマップ(%1$d個)を更新しますか？</string>
-    <string name="release_3_5">• アプリとプロファイルの設定を更新: 設定はタイプごとに整理され、各プロファイルは個別カスタマイズ可能に。 
-\n 
-\n• ブラウジング中にダウンロードすべきマップを提案する新しいマップダウンロードダイアログの採用 
-\n 
-\n• 暗色テーマの修正 
-\n 
-\n• 各国においていくつかのルーティングに関する問題の修正 
-\n 
-\n• ベースマップをより詳細な道路網のものに更新 
-\n 
-\n• 各国の浸水地域を修正 
-\n 
-\n• スキー用ルーティング: ルートの詳細に標高プロファイルとルートの複雑さを追加しました 
-\n 
-\n• その他バグ修正など
-\n
-\n</string>
+    <string name="release_3_5">• アプリとプロファイルの設定を更新: 設定はタイプごとに整理され、各プロファイルは個別カスタマイズ可能に。 \n \n• ブラウジング中にダウンロードすべきマップを提案する新しいマップダウンロードダイアログの採用 \n \n• 暗色テーマの修正 \n \n• 各国においていくつかのルーティングに関する問題の修正 \n \n• ベースマップをより詳細な道路網のものに更新 \n \n• 各国の浸水地域を修正 \n \n• スキー用ルーティング: ルートの詳細に標高プロファイルとルートの複雑さを追加しました \n \n• その他バグ修正など</string>
     <string name="day">日</string>
     <string name="days_2_4">日</string>
     <string name="days_5">日</string>
@@ -3715,7 +3699,7 @@ POIの更新は利用できません</string>
     <string name="perform_oauth_authorization">OAuthでログイン</string>
     <string name="clear_osm_token">OpenStreetMapOAuthトークンを消去する</string>
     <string name="osm_edit_logout_success">ログアウトしました</string>
-    <string name="routing_attr_avoid_footways_description">歩道を使わないようにします</string>
+    <string name="routing_attr_avoid_footways_description">歩道を避けるようにします</string>
     <string name="routing_attr_avoid_footways_name">歩道を避ける</string>
     <string name="development">開発</string>
     <string name="use_live_public_transport">OsmAnd Liveデータ</string>
@@ -4828,10 +4812,10 @@ POIの更新は利用できません</string>
     <string name="map_widget_trip_recording_uphill">上り坂</string>
     <string name="routing_attr_hazmat_category_name">危険物のカテゴリ</string>
     <string name="routing_attr_hazmat_category_description">危険物のカテゴリ／危険物のアクセス許可を考慮</string>
-    <string name="routing_attr_avoid_fords_description">浅瀬を避ける</string>
+    <string name="routing_attr_avoid_fords_description">浅瀬を避けます</string>
     <string name="colour_of_circles">円の色</string>
     <string name="circle_settings">サークル設定</string>
-    <string name="routing_attr_avoid_4wd_only_description">4WD車が推奨されるような道路を避ける</string>
+    <string name="routing_attr_avoid_4wd_only_description">4WD車が推奨されるような道路を避けます</string>
     <string name="parking_widget_desc">画面の中心から駐車場までの距離を表示します。</string>
     <string name="map_widget_trip_recording_duration">間隔</string>
     <string name="routing_attr_avoid_fords_name">浅瀬を避ける</string>
@@ -4899,7 +4883,7 @@ POIの更新は利用できません</string>
     <string name="configure_screen_widgets_descr">ウィジェットの追加や配置換えを行う画面ページを選択します。</string>
     <string name="simulation_real_mode_title">現実的なシミュレーション</string>
     <string name="routing_attr_avoid_highway_name">高速道路を避ける</string>
-    <string name="routing_attr_avoid_highway_description">高速道路を避ける</string>
+    <string name="routing_attr_avoid_highway_description">高速道路を避けます</string>
     <string name="average_speed_skip_stops">停留所を考慮する</string>
     <string name="average_speed_time_interval_desc">速度平均化の時間間隔を指定します。</string>
     <string name="average_speed_widget_desc">現在の旅程の平均速度を表示します。</string>
@@ -5274,4 +5258,18 @@ POIの更新は利用できません</string>
     <string name="ant_plus_pair_new_sensor_ble">Bluetooth LEセンサーのペアリング</string>
     <string name="clear_all_key_shortcuts_summary">選択したタイプのすべてのキー割り当てが削除されます。</string>
     <string name="learn_more_about_obd_sensors">センサーについて詳しくはこちら。</string>
+    <string name="gpx_approximation_java">ルーティングベース(Java)</string>
+    <string name="special_routing_cpp">特殊ルーティングタイプ</string>
+    <string name="routing_type_a_star_2_phase">A* 2-phase</string>
+    <string name="shared_string_avoid">避ける</string>
+    <string name="may_be_used_if_there_is_shortcut">ショートカットがある場合に使用します</string>
+    <string name="routing_attr_avoid_cobblestone_description">石畳を避けます</string>
+    <string name="routing_attr_avoid_cobblestone_name">石畳を避ける</string>
+    <string name="routing_type_a_star_classic">A* classic</string>
+    <string name="routing_attr_allow_via_ferrata_name">山岳ルート(ビアフェラータ)</string>
+    <string name="routing_attr_allow_via_ferrata_description">固定ケーブル、アイゼン、はしご、橋などを備えた山岳ルートです。</string>
+    <string name="routing_type">ルーティングの種類</string>
+    <string name="gpx_approximation_cpp">ルーティングベース(C++)</string>
+    <string name="gpx_approximation_geo_cpp">ジオメトリーベース(C++, fast)</string>
+    <string name="gpx_approximation_geo_java">ジオメトリーベース(Java, fast)</string>
 </resources>
