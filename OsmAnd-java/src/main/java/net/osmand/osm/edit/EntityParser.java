@@ -198,7 +198,7 @@ public class EntityParser {
 	private static void addAmenity(Entity entity, List<Amenity> amenitiesList, Map<String, String> ts, Amenity am) {
 		if (am != null && checkAmenitiesToAdd(am, amenitiesList)) {
 			parseMapObject(am, entity, ts);
-			setWebsiteUrl(am, ts);
+			// setWebsiteUrl(am, ts) - replaced with contact:website (Issue #21788) commit af3f1378
 			setWikipediaUrl(am, ts);
 			amenitiesList.add(am);
 		}
@@ -208,13 +208,6 @@ public class EntityParser {
 		String wbs = getWikipediaURL(ts);
 		if (wbs != null) {
 			am.setAdditionalInfo("wikipedia", wbs);
-		}
-	}
-
-	private static void setWebsiteUrl(Amenity am, Map<String, String> ts) {
-		String wbs = getWebSiteURL(ts);
-		if (wbs != null) {
-			am.setSite(wbs);
 		}
 	}
 
