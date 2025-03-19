@@ -108,7 +108,7 @@ public class NearbyPlacesCard extends FrameLayout {
 	}
 
 	public void update() {
-		startLoadingNearbyPlaces();
+		app.runInUIThread(this::startLoadingNearbyPlaces);
 	}
 
 	private void updateExpandState() {
