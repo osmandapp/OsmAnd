@@ -157,10 +157,10 @@ public class CoordinatesGridHelper {
 		marksProvider.setPrimary(false, equator, "", primeMeridian, meridian180);
 
 		marksProvider.setSecondaryStyle(secondaryStyle, 2.0f * cachedTextScale);
-		if (projection == Projection.UTM) {
-			marksProvider.setSecondary(true, "", "", "", "");
-		} else {
+		if (cachedGridFormat.needSuffixes()) {
 			marksProvider.setSecondary(true, "N", "S", "E", "W");
+		} else {
+			marksProvider.setSecondary(true, "", "", "", "");
 		}
 	}
 
