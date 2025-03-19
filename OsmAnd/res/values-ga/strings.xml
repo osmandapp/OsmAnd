@@ -3908,7 +3908,7 @@
     <string name="region_maps">Léarscáileanna ar fud an réigiúin</string>
     <string name="default_speed_system_descr">Sainmhínigh aonad luais.</string>
     <string name="default_speed_system">Aonad luais</string>
-    <string name="si_nm_h">Muirmhíle san uair (snaidhmeanna)</string>
+    <string name="si_nm_h">Míle farraige san uair (snaidhmeanna)</string>
     <string name="shared_string_trip_recording">Taifeadadh turas</string>
     <string name="simulate_your_location_stop_descr">Stop ag insamhladh do sheasamh.</string>
     <string name="looking_up_address">Seoladh á chuardach</string>
@@ -5529,4 +5529,8 @@
     <string name="show_image_previews">Taispeáin réamhamhairc íomhá</string>
     <string name="layer_coordinates_grid">Greille comhordanáidí</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Gníomh chun infheictheacht na heangaí Comhordanáidí ar an léarscáil a rialú.</string>
+    <string name="prime_meridian">Príomh-fhadlíne</string>
+    <string name="equator">Meánchiorcal</string>
+    <string name="release_5_0">• Faigh amach POIs barr-rangaithe leis an modh nua Explore\n\n • Gach bealach OSM, inchuardaithe anois! Hiking, rothaíocht, MTB, agus go leor eile\n\n • Nascann giuirléid nascleanúna nua saighead cas agus treoracha nascleanúna\n\n • Giuirléid faisnéise bealaigh reatha: taispeánann sé MTE, am teachta, agus fad\n\n • Roghnaigh fánaí sciála agus cosáin MTB ar an léarscáil le haghaidh mioneolas\n\n • Cumas a roghnú méid ghiuirléid do phainéil chlé agus ar dheis\n\n • Greille Comhordanáidí Cuireadh leis le comhordanáidí geografacha\n\n • Cumas breise chun cuma réamhshocraithe na ngrúpaí is fearr leat a shaincheapadh\n\n • Android Auto: féach ar ETA agus fad go dtí an chéad pointe bealaigh eile; Tá ainmneacha cathracha le feiceáil anois sna torthaí cuardaigh\n\n • Is féidir beanna suntasacha a aimsiú anois trí léarscáileanna agus cuardach\n\n • Airde buaic sléibhe ina gcosa\n\n • Curtha leis: Claiseanna agus limistéir dreapadóireachta ar an léarscáil\n\n • Feabhsaíodh cuardach seoltaí i SAM\n\n • Cuireadh TTS Eabhrais leis le haghaidh loingseoireachta</string>
+    <string name="meridian_180">180ú fhadlíne</string>
 </resources>
