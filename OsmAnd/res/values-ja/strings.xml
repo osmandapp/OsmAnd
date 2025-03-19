@@ -2157,7 +2157,7 @@ POIの更新は利用できません</string>
     <string name="nearest_cities">最寄りの市町村名</string>
     <string name="select_city">市町村名を選択</string>
     <string name="select_postcode">郵便番号検索</string>
-    <string name="quick_action_auto_zoom">マップの自動ズームをON/OFF</string>
+    <string name="quick_action_auto_zoom">マップの自動ズーム</string>
     <string name="quick_action_auto_zoom_desc">移動速度に応じたマップの自動ズーム機能のON/OFFを切り替えるボタンです。</string>
     <string name="quick_action_auto_zoom_on">マップの自動ズームをONにする</string>
     <string name="quick_action_auto_zoom_off">マップの自動ズームをOFFにする</string>
@@ -3199,7 +3199,7 @@ POIの更新は利用できません</string>
     <string name="lang_oc">オック語</string>
     <string name="layer_osm_edits">OSM編集データ</string>
     <string name="quick_action_contour_lines_descr">マップ上の等高線の表示/非表示を切り替えられるボタンです。</string>
-    <string name="quick_action_hillshade_descr">マップ上の陰影起伏図の表示/非表示を切り替えられるボタンです。</string>
+    <string name="quick_action_hillshade_descr">マップ上の陰影起伏図の表示/非表示を切り替えるボタンです。</string>
     <string name="tts_initialization_error">テキスト読み上げエンジンを起動できません。</string>
     <string name="export_profile">プロファイルのエクスポート</string>
     <string name="exported_osmand_profile">OsmAndプロファイル:%1$s</string>
@@ -4244,7 +4244,7 @@ POIの更新は利用できません</string>
     <string name="horseback_riding">乗馬</string>
     <string name="delete_history_items_descr">選択した履歴アイテムを削除しますか？</string>
     <string name="delete_history_items">%1$sの履歴項目を削除しますか？</string>
-    <string name="quick_action_toggle_preference">設定を変更するためのトグルボタンです。</string>
+    <string name="quick_action_toggle_preference">設定を変更するためのボタンです。</string>
     <string name="display_route_tracks_as_poi">経路ををPOIとして表示</string>
     <string name="search_history_is_disabled_descr">設定で検索履歴を有効にできます。</string>
     <string name="markers_history_is_disabled_descr">訪問したマップマーカーのリストを履歴に残すようにします。</string>
@@ -5243,4 +5243,21 @@ POIの更新は利用できません</string>
     <string name="quick_action_navigation_view_title">ナビゲーション画面</string>
     <string name="quick_action_terrain_color_scheme">地形の配色</string>
     <string name="quick_action_move_map_right">マップを右に</string>
+    <string name="quick_action_video_note">動画メモ</string>
+    <string name="quick_action_map_overlay">オーバーレイ</string>
+    <string name="quick_action_display_position_in_center">表示位置は常に中央に</string>
+    <string name="quick_action_next_app_profile">次のアプリプロファイルへ</string>
+    <string name="quick_action_terrain">地形のカラータイプ</string>
+    <string name="quick_action_track_waypoint">経由地点の経路</string>
+    <string name="quick_action_map_underlay">アンダーレイ</string>
+    <string name="quick_action_first_intermediate">最初の中間経由地点</string>
+    <string name="quick_action_audio_note">音声メモ</string>
+    <string name="quick_action_photo_note">写真メモ</string>
+    <string name="quick_action_parking_place">駐車場</string>
+    <string name="quick_action_verb_start_stop">開始/停止</string>
+    <string name="quick_action_verb_pause_resume">一時停止/再開</string>
+    <string name="quick_action_map_style">マップスタイル</string>
+    <string name="quick_action_previous_app_profile">前のアプリプロファイルへ</string>
+    <string name="quick_action_verb_show_hide">表示/非表示</string>
+    <string name="quick_action_verb_turn_on_off">ON/OFF</string>
 </resources>
