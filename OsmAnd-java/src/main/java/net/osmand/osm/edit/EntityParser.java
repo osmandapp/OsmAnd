@@ -198,7 +198,7 @@ public class EntityParser {
 	private static void addAmenity(Entity entity, List<Amenity> amenitiesList, Map<String, String> ts, Amenity am) {
 		if (am != null && checkAmenitiesToAdd(am, amenitiesList)) {
 			parseMapObject(am, entity, ts);
-			setWebsiteUrl(am, ts);
+//			setWebsiteUrl(am, ts);
 			setWikipediaUrl(am, ts);
 			amenitiesList.add(am);
 		}
@@ -211,12 +211,12 @@ public class EntityParser {
 		}
 	}
 
-	private static void setWebsiteUrl(Amenity am, Map<String, String> ts) {
-		String wbs = getWebSiteURL(ts);
-		if (wbs != null) {
-			am.setSite(wbs);
-		}
-	}
+//	private static void setWebsiteUrl(Amenity am, Map<String, String> ts) {
+//		String wbs = getWebSiteURL(ts);
+//		if (wbs != null) {
+//			am.setSite(wbs);
+//		}
+//	}
 
 	private static boolean checkAmenitiesToAdd(Amenity a, List<Amenity> amenitiesList){
 		// check amenity for duplication
