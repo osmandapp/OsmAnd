@@ -22,12 +22,9 @@ import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
-import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -44,8 +41,6 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.List;
