@@ -5260,4 +5260,5 @@ POIの更新は利用できません</string>
     <string name="quick_action_previous_app_profile">前のアプリプロファイルへ</string>
     <string name="quick_action_verb_show_hide">表示/非表示</string>
     <string name="quick_action_verb_turn_on_off">ON/OFF</string>
+    <string name="lang_zh_hans">簡体中国語</string>
 </resources>
