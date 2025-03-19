@@ -395,4 +395,17 @@
     <string name="routing_engine_vehicle_type_scooter">Sgùtair</string>
     <string name="context_menu_edit_descr">Deasaich tuairisgeul</string>
     <string name="routing_engine_vehicle_type_racingbike">Rothair-rèisidh</string>
+    <string name="activity_type_walking_name">A\' coiseachd</string>
+    <string name="address">Seòladh</string>
+    <string name="only_show">Taisbean slighe</string>
+    <string name="app_mode_pedestrian">A\' coiseachd</string>
+    <string name="navigate_point_longitude">Domhan-fhad</string>
+    <string name="navigate_point_latitude">Domhan-leud</string>
+    <string name="search_address_top_text">Seòladh</string>
+    <string name="position_on_map_center">Meadhan</string>
+    <string name="position_on_map_bottom">Bonn</string>
+    <string name="routing_engine_vehicle_type_walking">A\' coiseachd</string>
+    <string name="shared_string_address">Seòladh</string>
+    <string name="update_existing">Cuir an àite</string>
+    <string name="shared_string_replace">Cuir an àite</string>
 </resources>
