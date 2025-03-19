@@ -840,10 +840,9 @@ public class SearchCoreFactory {
 						existingResult.pt = f;
 					} else {
 						String enTranslation = a.getEnTranslation().toLowerCase();
-						if (!"no".equals(enTranslation) // && !"yes".equals(enTranslation)
-						) {
+						if (!"no".equals(enTranslation) ) {
 							PoiTypeResult ptr = checkPoiType(nm, a);
-							if (ptr != null) {
+							if (ptr != null && ptr.pt != null && ptr.pt.isTopVisible()) {
 								results.put(a.getKeyName(), ptr);
 							}
 						}
