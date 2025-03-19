@@ -53,15 +53,25 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 
 	@NonNull
 	private String getPoiTypeTranslation(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
-		PoiType subType = app.getPoiTypes().getPoiTypeByKey(amenity.getSubType());
+		String itemType = getPoiTypeKey(amenity);
+		PoiType subType = app.getPoiTypes().getPoiTypeByKey(itemType);
 		return subType != null ? subType.getTranslation() : "";
+	}
+
+	@NonNull
+	private String getPoiTypeKey(@NonNull Amenity amenity) {
+		String itemType = amenity.getOsmandPoiKey();
+		if(itemType == null) {
+			itemType = amenity.getSubType();
+		}
+		return itemType;
 	}
 
 	@NonNull
 	private Drawable getPoiTypeIcon(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
 		boolean nightMode = app.getDaynightHelper().isNightMode();
 		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark, nightMode);
-		PoiType subType = app.getPoiTypes().getPoiTypeByKey(amenity.getSubType());
+		PoiType subType = app.getPoiTypes().getPoiTypeByKey(getPoiTypeKey(amenity));
 		if (subType != null) {
 			Drawable renderingIcon = app.getUIUtilities().getRenderingIcon(app, subType.getKeyName(), nightMode);
 			if (renderingIcon != null) {
