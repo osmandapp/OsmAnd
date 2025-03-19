@@ -210,7 +210,9 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				String res = "";
 				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
-					if (abstractPoiType instanceof PoiFilter that) {
+					if (abstractPoiType instanceof PoiCategory) {
+						res = "";
+					} else if (abstractPoiType instanceof PoiFilter that) {
 						res = that.getPoiCategory() != null ? that.getPoiCategory().getTranslation() : "";
 					} else if (abstractPoiType instanceof PoiType that) {
 						res = getPoiTypeTypeName(that);
