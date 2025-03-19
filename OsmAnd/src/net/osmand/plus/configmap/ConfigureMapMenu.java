@@ -64,6 +64,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.SunriseSunset;
 
@@ -108,6 +109,15 @@ public class ConfigureMapMenu {
 	@NonNull
 	public ContextMenuAdapter createListAdapter(final @NonNull MapActivity mapActivity,
 												final Optional<OnDataChangeUiAdapter> uiAdapter) {
+		return createListAdapter(
+				mapActivity,
+				uiAdapter,
+				app.getRendererRegistry().getCurrentSelectedRenderer());
+	}
+
+	public ContextMenuAdapter createListAdapter(final @NonNull MapActivity mapActivity,
+												final Optional<OnDataChangeUiAdapter> uiAdapter,
+												final RenderingRulesStorage renderer) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
@@ -116,8 +126,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.app_modes_choose, mapActivity)
 				.setLayout(R.layout.mode_toggles));
 
-		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
-				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
+		final List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(renderer, UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
 		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);

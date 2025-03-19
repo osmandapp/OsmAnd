@@ -1,6 +1,7 @@
 package net.osmand.plus.configmap;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -77,10 +78,10 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private final Map<Integer, View> views = new HashMap<>();
 
 	private boolean useAnimation;
-	private CustomAlert.SingleSelectionDialogFragment roadStyleDialog;
+	private Optional<CustomAlert.SingleSelectionDialogFragment> roadStyleDialog = Optional.empty();
 	private ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog;
 
-	public CustomAlert.SingleSelectionDialogFragment getRoadStyleDialog() {
+	public Optional<CustomAlert.SingleSelectionDialogFragment> getRoadStyleDialog() {
 		return roadStyleDialog;
 	}
 
@@ -96,6 +97,11 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		appMode =
+				Optional
+						.ofNullable(getArguments())
+						.map(arguments -> ApplicationMode.valueOfStringKey(arguments.getString(APP_MODE_KEY), null))
+						.orElseGet(settings::getApplicationMode);
 		mapActivity = (MapActivity) getMyActivity();
 		collapsedIds = settings.COLLAPSED_CONFIGURE_MAP_CATEGORIES;
 	}
@@ -152,7 +158,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private void recreateView() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			appMode = settings.getApplicationMode();
 			useAnimation = !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode);
 
 			updateNightMode();
@@ -171,9 +176,14 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	}
 
 	private void updateItemsData() {
-		ConfigureMapMenu menu = new ConfigureMapMenu(app);
-		adapter = menu.createListAdapter(mapActivity, Optional.of(this));
-		roadStyleDialog = menu.getRoadStyleDialog().orElseThrow();
+		final ConfigureMapMenu menu = new ConfigureMapMenu(app);
+		// FK-TODO: make createListAdapter() return adapter, roadStyleDialog and mapLanguageDialog
+		adapter =
+				menu.createListAdapter(
+						mapActivity,
+						Optional.of(this),
+						app.getRendererRegistry().getRenderer(settings.RENDERER.getModeValue(appMode)));
+		roadStyleDialog = menu.getRoadStyleDialog();
 		mapLanguageDialog = menu.getMapLanguageDialog().orElseThrow();
 		ContextMenuUtils.removeHiddenItems(adapter);
 		ContextMenuUtils.hideExtraDividers(adapter);
@@ -470,24 +480,26 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
-				case ROAD_STYLE_ID -> Optional.of(
-						new PreferenceFragmentHandler() {
+				case ROAD_STYLE_ID -> configureMapFragment.getRoadStyleDialog().isPresent() ?
+						Optional.of(
+								new PreferenceFragmentHandler() {
 
-							@Override
-							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
-								return CustomAlert.SingleSelectionDialogFragment.PreferenceFragment.class;
-							}
+									@Override
+									public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+										return CustomAlert.SingleSelectionDialogFragment.PreferenceFragment.class;
+									}
 
-							@Override
-							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
-								return new CustomAlert.SingleSelectionDialogFragment.PreferenceFragment();
-							}
+									@Override
+									public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+										return new CustomAlert.SingleSelectionDialogFragment.PreferenceFragment();
+									}
 
-							@Override
-							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
-								return false;
-							}
-						});
+									@Override
+									public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+										return false;
+									}
+								}) :
+						Optional.empty();
 				case MAP_LANGUAGE_ID -> Optional.of(
 						new PreferenceFragmentHandler() {
 

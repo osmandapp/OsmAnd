@@ -45,7 +45,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		if (CustomAlert.SingleSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
-				return Optional.of((T) _srcProxy.getPrincipal().getRoadStyleDialog());
+				return Optional.of((T) _srcProxy.getPrincipal().getRoadStyleDialog().orElseThrow());
 			} else if (srcProxy instanceof final CustomAlert.SingleSelectionDialogFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}

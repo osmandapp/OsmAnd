@@ -81,7 +81,12 @@ public class ConfigureMapUtils {
 	}
 
 	public static List<RenderingRuleProperty> getCustomRules(@NonNull OsmandApplication app, String... skipCategories) {
-		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		return getCustomRules(
+				app.getRendererRegistry().getCurrentSelectedRenderer(),
+				skipCategories);
+	}
+
+	public static List<RenderingRuleProperty> getCustomRules(final RenderingRulesStorage renderer, final String... skipCategories) {
 		if (renderer == null) {
 			return new ArrayList<>();
 		}

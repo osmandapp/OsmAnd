@@ -250,7 +250,6 @@ public class ConfigureMapDialogs {
 						view.getSettings().MAP_PREFERRED_LOCALE.set(mapLanguagesIds.get(index));
 						activity.refreshMapComplete();
 						// FK-FIXME: 1. search for "Afrikaans", 2. click search result to open dialog, 3. click Afrikaans, 4. click Apply to close the dialog, then the following item erroneously does not show af (for Afrikaans) in it's description, but displays the "old" description.
-						// FK-FIXME: 1. search for "Afrikaans", 2. click search result for Skiing => crash
 						item.setDescription(getLocaleDescr(index));
 						uiAdapter.onDataSetInvalidated();
 					}
