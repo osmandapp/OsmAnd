@@ -164,11 +164,11 @@ public class NearbyPlacesCard extends FrameLayout {
 
 	private void startLoadingNearbyPlaces() {
 		if (!isLoadingItems) {
-			app.runInUIThread(() -> AndroidUiHelper.updateVisibility(progressBar, true));
 			isLoadingItems = true;
 			LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 			loadTask = new SearchAmenitiesTask(getFilter(), latLon);
 			loadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			AndroidUiHelper.updateVisibility(progressBar, true);
 		}
 	}
 
