@@ -852,6 +852,35 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Override
+	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
+		Map<Long, Amenity> topPlacesMap = topPlaces;
+		if (topPlacesMap != null) {
+			List<Amenity> places = new ArrayList<>(topPlacesMap.values());
+			if (places.contains(o)) {
+				Amenity amenity = (Amenity) o;
+				showPointInContextMenu(getMapActivity(), amenity);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void showPointInContextMenu(MapActivity mapActivity, Amenity point) {
+		double latitude = point.getLocation().getLatitude();
+		double longitude = point.getLocation().getLongitude();
+//		SearchResult sr = SearchCoreFactory.createSearchResult(point);
+//		Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, sr);
+//		app.getSettings().setMapLocationToShow(
+//				latitude,
+//				longitude,
+//				SearchCoreFactory.PREFERRED_NEARBY_POINT_ZOOM,
+//				pair.first,
+//				true,
+//				point);
+//		MapActivity.launchMapActivityMoveToTop(mapActivity);
+	}
+
+	@Override
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof Amenity) {
 			return ((Amenity) o).getLocation();
@@ -865,7 +894,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		MapActivity mapActivity = view.getMapActivity();
 		if (mapActivity != null && object instanceof Amenity amenity) {
 			TravelHelper travelHelper = app.getTravelHelper();
-            String subType = amenity.getSubType();
+			String subType = amenity.getSubType();
 			if (amenity.getType().getKeyName().equals(ROUTES)) {
 				if (subType.equals(ROUTE_ARTICLE)) {
 					String lang = app.getLanguage();
