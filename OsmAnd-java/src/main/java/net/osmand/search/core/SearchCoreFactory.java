@@ -783,7 +783,7 @@ public class SearchCoreFactory {
 			}
 		}
 
-		public Map<String, PoiTypeResult> getPoiTypeResults(NameStringMatcher nm, NameStringMatcher nmAdditional, boolean allFilters) {
+		public Map<String, PoiTypeResult> getPoiTypeResults(NameStringMatcher nm, NameStringMatcher nmAdditional) {
 			Map<String, PoiTypeResult> results = new LinkedHashMap<>();
 			for (AbstractPoiType pf : topVisibleFilters) {
 				PoiTypeResult res = checkPoiType(nm, pf);
@@ -803,12 +803,10 @@ public class SearchCoreFactory {
 				if (nmAdditional != null) {
 					addAditonals(nmAdditional, results, c);
 				}
-				if (allFilters) {
-					for (PoiFilter pf : c.getPoiFilters()) {
-						PoiTypeResult filtRes = checkPoiType(nm, pf);
-						if(filtRes != null) {
-							results.put(filtRes.pt.getKeyName(), filtRes);
-						}
+				for (PoiFilter pf : c.getPoiFilters()) {
+					PoiTypeResult filtRes = checkPoiType(nm, pf);
+					if(filtRes != null) {
+						results.put(filtRes.pt.getKeyName(), filtRes);
 					}
 				}
 			}
@@ -961,7 +959,7 @@ public class SearchCoreFactory {
 				boolean includeAdditional = !phrase.hasMoreThanOneUnknownSearchWord();
 				NameStringMatcher nmAdditional = includeAdditional ?
 						new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE) : null;
-				Map<String, PoiTypeResult> poiTypes = getPoiTypeResults(nm, nmAdditional, false);
+				Map<String, PoiTypeResult> poiTypes = getPoiTypeResults(nm, nmAdditional);
 				poiTypes = filterTypes(poiTypes);
 				PoiTypeResult wikiCategory = poiTypes.get(OSM_WIKI_CATEGORY);
 				PoiTypeResult wikiType = poiTypes.get(WIKI_PLACE);
@@ -1255,7 +1253,7 @@ public class SearchCoreFactory {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
 				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				searchAmenityTypesAPI.initPoiTypes();
-				Map<String, PoiTypeResult> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, nmAdditional, true);
+				Map<String, PoiTypeResult> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, nmAdditional);
 				// find first full match only
 				for (PoiTypeResult poiTypeResult : poiTypeResults.values()) {
 					for (String foundName : poiTypeResult.foundWords) {
