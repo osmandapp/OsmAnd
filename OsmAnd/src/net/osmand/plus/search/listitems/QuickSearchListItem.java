@@ -22,6 +22,7 @@ import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
+import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
@@ -209,23 +210,17 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				String res = "";
 				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
-					if (abstractPoiType instanceof PoiCategory) {
-						res = "";
-					} else if (abstractPoiType instanceof PoiFilter) {
-						PoiFilter poiFilter = (PoiFilter) abstractPoiType;
-						res = poiFilter.getPoiCategory() != null ? poiFilter.getPoiCategory().getTranslation() : "";
-
-					} else if (abstractPoiType instanceof PoiType) {
-						PoiType poiType = (PoiType) abstractPoiType;
-						res = poiType.getParentType() != null ? poiType.getParentType().getTranslation() : null;
-						if (res == null) {
-							res = poiType.getCategory() != null ? poiType.getCategory().getTranslation() : null;
+					if (abstractPoiType instanceof PoiFilter that) {
+						res = that.getPoiCategory() != null ? that.getPoiCategory().getTranslation() : "";
+					} else if (abstractPoiType instanceof PoiType that) {
+						res = getPoiTypeTypeName(that);
+					} else if (abstractPoiType instanceof SearchCoreFactory.PoiAdditionalCustomFilter that) {
+						for (PoiType additionalPoiType : that.additionalPoiTypes) {
+							if (that.getKeyName().equals(additionalPoiType.getKeyName())) {
+								res = getPoiTypeTypeName(additionalPoiType);
+								break;
+							}
 						}
-						if (res == null) {
-							res = "";
-						}
-					} else {
-						res = "";
 					}
 				} else if (searchResult.object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
 					res = customSearchPoiFilter.getName();
@@ -294,6 +289,15 @@ public class QuickSearchListItem {
 				break;
 		}
 		return searchResult.objectType.name();
+	}
+
+	@NonNull
+	private static String getPoiTypeTypeName(@NonNull PoiType poiType) {
+		String res = poiType.getParentType() != null ? poiType.getParentType().getTranslation() : null;
+		if (res == null) {
+			res = poiType.getCategory() != null ? poiType.getCategory().getTranslation() : null;
+		}
+		return res == null ? "" : res;
 	}
 
 	public Drawable getTypeIcon() {
