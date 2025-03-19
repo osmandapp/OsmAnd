@@ -5167,7 +5167,7 @@ POIの更新は利用できません</string>
     <string name="clear_key_assignment_desc">選択したアクションのキー割り当てが消去され\"なし\"に設定されます。</string>
     <string name="key_assignments_already_cleared_message">すべてのキー割り当てはすでに初期化されています</string>
     <string name="camera_app">カメラアプリ</string>
-    <string name="use_v1_auto_zoom">不連続オートズーム（旧バージョン）</string>
+    <string name="use_v1_auto_zoom">個別オートズーム（旧バージョン）</string>
     <string name="get_osmand_cloud">OsmAnd Cloudを入手</string>
     <string name="speedometer_description">GPSを基にあなたの現在の速度を表示します</string>
     <string name="shared_string_speedometer">スピードメーター</string>
@@ -5266,4 +5266,12 @@ POIの更新は利用できません</string>
     <string name="release_4_9">• Wikimedia画像のフルスクリーンギャラリービューアを追加\n\n • OBD•IIプロトコルを使用して車両性能を監視するための新しいプラグイン\"Vehicle Metrics\"を導入\n\n • アクティビティを経路に割り当て、それに応じてフィルタリングする機能を追加\n\n • 旅程記録とタッチスクリーンロックのための新しいクイックアクションを実装\n\n • カスタマイズ可能なマップボタンの外観と正確なグリッドを導入\n\n • ウィジェットにコンテキストメニューと\"平均速度をリセット\"アクションを追加\n\n • 新しいルートレイヤー \"Dirt Bike trails\"を追加\n\n • \"ナビゲーション中の経路の自動記録\"を修正\n\n • RTLで座標が反転していた問題を修正\n\n • 現在記録されている経路のセンサーデータが欠落していた問題を修正\n\n • 選択した地点の周辺情報を追加\n\n • OSM編集の可視性をコントロールするクイックアクションを追加\n\n • 地形配色オプションの可視性パラメータを分離\n\n • タップ可能なアイコンを追加し、アクセスやその他の道路やパスの属性を表示するように</string>
     <string name="rendering_attr_showDirtbikeTrails_name">ダートバイク用コース</string>
     <string name="rendering_attr_showDirtbikeTrails_description">ダートバイクのコースを表示</string>
+    <string name="obd_device_forget_sensor_description">スキャナはリストから削除されます。このスキャナはいつでも再ペアリングできます。</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">ANT+センサーのペアリング</string>
+    <string name="learn_more_about_sensors_link">センサーについて詳しくはこちら。</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Bluetooth LEとANT+センサーをOsmAndとペアリングできます。</string>
+    <string name="ant_plus_pair_new_sensor">新しいセンサーのペアリング</string>
+    <string name="ant_plus_pair_new_sensor_ble">Bluetooth LEセンサーのペアリング</string>
+    <string name="clear_all_key_shortcuts_summary">選択したタイプのすべてのキー割り当てが削除されます。</string>
+    <string name="learn_more_about_obd_sensors">センサーについて詳しくはこちら。</string>
 </resources>
