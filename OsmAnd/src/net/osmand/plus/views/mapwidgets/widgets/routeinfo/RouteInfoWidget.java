@@ -94,15 +94,15 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		return switch (selectedSize) {
 			case SMALL -> isFullRow
 					? isSecondaryDataAvailable()
-					? R.layout.widget_route_information_small_duo
-					: R.layout.widget_route_information_small
-					: R.layout.widget_route_information_small_half;
+					? R.layout.outdated_widget_route_information_small_duo
+					: R.layout.outdated_widget_route_information_small
+					: R.layout.outdated_widget_route_information_small_half;
 			case MEDIUM -> isFullRow
-					? R.layout.widget_route_information_medium
-					: R.layout.widget_route_information_medium_half;
+					? R.layout.outdated_widget_route_information_medium
+					: R.layout.outdated_widget_route_information_medium_half;
 			case LARGE -> isFullRow
-					? R.layout.widget_route_information_large
-					: R.layout.widget_route_information_large_half;
+					? R.layout.outdated_widget_route_information_large
+					: R.layout.outdated_widget_route_information_large_half;
 		};
 	}
 
