@@ -145,7 +145,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private final MapLayerData<List<Amenity>> data;
 
-	private record MapTopPlace(int placeId, @NonNull PointI position, @Nullable Bitmap imageBitmap, boolean alreadyExists) {
+	private record MapTopPlace(int placeId, @NonNull PointI position, @Nullable Bitmap imageBitmap,
+	                           boolean alreadyExists) {
 	}
 
 	public interface PoiUIFilterResultMatcher<T> extends ResultMatcher<T> {
@@ -389,7 +390,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return;
 		}
 
-		List<Amenity> places= topPlaces != null ? new ArrayList<>(topPlaces.values()) : null;
+		List<Amenity> places = topPlaces != null ? new ArrayList<>(topPlaces.values()) : null;
 		if (places == null) {
 			clearMapMarkersCollections();
 			return;
@@ -398,7 +399,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			mapMarkersCollection = new MapMarkersCollection();
 		}
 		QListMapMarker existingMapPoints = mapMarkersCollection.getMarkers();
-		int[] existingIds = new int[(int)existingMapPoints.size()];
+		int[] existingIds = new int[(int) existingMapPoints.size()];
 		for (int i = 0; i < existingMapPoints.size(); i++) {
 			MapMarker mapPoint = existingMapPoints.get(i);
 			existingIds[i] = mapPoint.getMarkerId();
@@ -557,7 +558,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private boolean shouldDraw(@NonNull RotatedTileBox tileBox, @NonNull Amenity amenity) {
-		if(customObjectsDelegate != null){
+		if (customObjectsDelegate != null) {
 			return true;
 		} else {
 			boolean routeArticle = ROUTE_ARTICLE_POINT.equals(amenity.getSubType())
@@ -565,7 +566,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			boolean routeTrack = amenity.isRouteTrack();
 			if (routeArticle) {
 				return tileBox.getZoom() >= START_ZOOM;
-			}  else if (routeTrack) {
+			} else if (routeTrack) {
 				if (travelRendererHelper.getRouteTracksProperty().get()) {
 					return tileBox.getZoom() >= START_ZOOM && tileBox.getZoom() <= END_ZOOM_ROUTE_TRACK;
 				} else {
@@ -870,7 +871,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		MapActivity mapActivity = view.getMapActivity();
 		if (mapActivity != null && object instanceof Amenity amenity) {
 			TravelHelper travelHelper = app.getTravelHelper();
-            String subType = amenity.getSubType();
+			String subType = amenity.getSubType();
 			if (amenity.getType().getKeyName().equals(ROUTES)) {
 				if (subType.equals(ROUTE_ARTICLE)) {
 					String lang = app.getLanguage();
