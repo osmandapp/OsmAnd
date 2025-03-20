@@ -5220,4 +5220,5 @@ POIの更新は利用できません</string>
     <string name="default_buttons_opacity_original_description">各ボタンはそれぞれの背景の不透明度を維持します。</string>
     <string name="lock_screen_description">誤ってタップするのを防ぐため、タッチスクリーン機能を有効または無効にします</string>
     <string name="default_buttons">デフォルトボタン</string>
+    <string name="lock_screen">画面ロック</string>
 </resources>
