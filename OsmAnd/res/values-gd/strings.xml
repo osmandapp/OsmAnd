@@ -419,4 +419,5 @@
     <string name="create_edit_poi">Cruthaich no deasaich POI</string>
     <string name="edit_category">Deasaich roinn-seòrsa</string>
     <string name="edit_track">Deasaich frith-rathad</string>
+    <string name="shared_string_map_center">Meadhan a\' mhapa</string>
 </resources>
