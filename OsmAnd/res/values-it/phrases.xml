@@ -4535,7 +4535,7 @@
     <string name="poi_playground_ball_pool">Vasca delle palline</string>
     <string name="poi_us_maps_recreation_area_activity_picnicking">Picnic</string>
     <string name="poi_route_article">Articoli da viaggio</string>
-    <string name="poi_nfs_yes">Gestito dal Servizio Forestale degli Stati Uniti</string>
+    <string name="poi_nfs_yes">Gestito da United States Forest Service</string>
     <string name="poi_generator_type_solar_photovoltaic_panel">Tipo di generatore: pannello fotovoltaico</string>
     <string name="poi_lifeguard">Bagnino</string>
     <string name="poi_recycling_electrical_appliances">Elettrodomestici</string>
@@ -4582,7 +4582,7 @@
     <string name="poi_route_activity_type_snowboarding">Snowboard</string>
     <string name="poi_route_activity_type_canoe">Canottaggio</string>
     <string name="poi_route_activity_type_windsurfing">Windsurf</string>
-    <string name="poi_route_activity_type_fitness"></string>
+    <string name="poi_route_activity_type_fitness"/>
     <string name="poi_name_etymology">Etimologia del nome</string>
     <string name="poi_camp_site_standard">Standard</string>
     <string name="poi_route_activity_type_ice_skating">Pattinaggio sul Ghiaccio</string>
