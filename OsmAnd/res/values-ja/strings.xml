@@ -2936,27 +2936,7 @@ POIの更新は利用できません</string>
     <string name="minmax_speed_dialog_title">最低/最高速度を設定</string>
     <string name="new_profile">新規プロファイル</string>
     <string name="app_mode_ufo">UFO(未確認飛行物体)</string>
-    <string name="release_3_4">• アプリプロファイル機能:数種類のアイコンと色を使い、利用者のニーズに合ったカスタムプロファイルを作成可能に 
-\n 
-\n• すべてのプロファイルで標準速度および最低/最高速度を任意設定可能に 
-\n 
-\n• 座標用ウィジェットの追加 
-\n 
-\n• マップ上にコンパスと半径定規を表示するオプションの追加 
-\n 
-\n• バックグラウンドで動く経路記録機能を修正 
-\n 
-\n• マップのバックグラウンドダウンロードの改善 
-\n 
-\n• 方向転換時の画面ON機能の復活 
-\n 
-\n• ウィキペディアの言語選択を修正 
-\n 
-\n• ナビゲーション中のコンパスボタンの動作を修正 
-\n 
-\n• その他のバグ修正
-\n
-\n</string>
+    <string name="release_3_4">• アプリプロファイル機能:数種類のアイコンと色を使い、利用者のニーズに合ったカスタムプロファイルを作成可能に \n \n• すべてのプロファイルで標準速度および最低/最高速度を任意設定可能に \n \n• 座標用ウィジェットの追加 \n \n• マップ上にコンパスと半径定規を表示するオプションの追加 \n \n• バックグラウンドで動く経路記録機能を修正 \n \n• マップのバックグラウンドダウンロードの改善 \n \n• 方向転換時の画面ON機能の復活 \n \n• ウィキペディアの言語選択を修正 \n \n• ナビゲーション中のコンパスボタンの動作を修正 \n \n• その他のバグ修正</string>
     <string name="app_mode_personal_transporter">個人輸送業者</string>
     <string name="app_mode_monowheel">モノホイール</string>
     <string name="app_mode_scooter">スクーター</string>
@@ -3994,27 +3974,7 @@ POIの更新は利用できません</string>
     <string name="redeem_promo_code">プロモーションコードを利用</string>
     <string name="osmand_maps_plus_tagline">より拡張された機能を手に入れる</string>
     <string name="osmand_pro_tagline">全ての機能を手に入れる</string>
-    <string name="release_4_0">• クラウドバックアップの実装
-\n
-\n• \"Topo\"マップスタイルにナイトモードを追加
-\n
-\n• 等高線をフィート単位でダウンロードするオプションを追加
-\n
-\n• 経路は、高度、速度、または傾斜によって色付け可能に
-\n
-\n• \"トリップ記録\"ダイアログを更新
-\n
-\n• タップによる距離測定が半径定規から独立したオプションに
-\n
-\n• ルート計画：ルート計画画面から離れずに、ナビゲーションオプションの変更やマップ構成にアクセスしたり、検索できるように変更
-\n
-\n• 購入に関する詳細情報がを含む新しい\"購入\"画面の採用
-\n
-\n• ルートラインの外観を変更するオプションを追加
-\n
-\n• OsmAndLiveのアップデートは\"マップダウンロード\"の\"アップデート\"タブに移動
-\n
-\n</string>
+    <string name="release_4_0">• クラウドバックアップの実装 \n \n• \"Topo\"マップスタイルにナイトモードを追加 \n \n• 等高線をフィート単位でダウンロードするオプションを追加 \n \n• 経路は、高度、速度、または傾斜によって色付け可能に \n \n• \"トリップ記録\"ダイアログを更新 \n \n• タップによる距離測定が半径定規から独立したオプションに \n \n• ルート計画：ルート計画画面から離れずに、ナビゲーションオプションの変更やマップ構成にアクセスしたり、検索できるように変更 \n \n• 購入に関する詳細情報がを含む新しい\"購入\"画面の採用 \n \n• ルートラインの外観を変更するオプションを追加 \n \n• OsmAndLiveのアップデートは\"マップダウンロード\"の\"アップデート\"タブに移動</string>
     <string name="shared_string_learn_more">詳細を見る</string>
     <string name="cancel_anytime_in_gplay">GooglePlayからいつでもキャンセル可能です</string>
     <string name="cancel_anytime_in_huawei_appgallery">HuaweiAppGalleryでいつでもキャンセル可能です</string>
@@ -5221,4 +5181,16 @@ POIの更新は利用できません</string>
     <string name="lock_screen_description">誤ってタップするのを防ぐため、タッチスクリーン機能を有効または無効にします</string>
     <string name="default_buttons">デフォルトボタン</string>
     <string name="lock_screen">画面ロック</string>
+    <string name="location_radius">位置の半径</string>
+    <string name="type_of_activity">アクティビティの種類</string>
+    <string name="background_opacity">背景の不透明度</string>
+    <string name="corner_radius">コーナー半径</string>
+    <string name="search_action_descr">検索を開きます。</string>
+    <string name="configure_map_description">マップスタイル、レイヤー、その他の設定を変更します。</string>
+    <string name="help_article_widgets_radius_ruler_name">半径定規と定規</string>
+    <string name="dynamic_icon_type_summary">アイコンはアクションの状態によって変化します。</string>
+    <string name="shared_string_dynamic">動的</string>
+    <string name="location_radius_description">現在地の精度を表す円形のエリアを表示します。</string>
+    <string name="shared_string_activity">アクティビティ</string>
+    <string name="change_activity">アクティビティの変更</string>
 </resources>
