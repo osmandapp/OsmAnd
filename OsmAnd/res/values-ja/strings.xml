@@ -2222,14 +2222,7 @@ POIの更新は利用できません</string>
 \n • 旅程上の中間経由地点をサポートしています
 \n • ルートから大きく外れると自動的に再ルート検索します
 \n • 住所別、種類別（例：レストラン、ホテル、ガソリンスタンド、博物館）、または座標の数値で場所を検索可能です</string>
-    <string name="osmand_plus_extended_description_part3">マップ表示
-\n • 現在地と現在の方向を表示可能
-\n • オプションで、コンパスまたは動きの方向に応じてマップの向きを変更可能
-\n • 大事な場所は『お気に入り』として保存可能
-\n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示可能
-\n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定可能
-\n • オプションで、地名を英語、現地語、または表音つづりで表示可能
-\n</string>
+    <string name="osmand_plus_extended_description_part3">マップ表示 \n • 現在地と現在の方向を表示可能 \n • オプションで、コンパスまたは動きの方向に応じてマップの向きを変更可能 \n • 大事な場所は『お気に入り』として保存可能 \n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示可能 \n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定可能 \n • オプションで、地名を英語、現地語、または表音つづりで表示可能</string>
     <string name="osmand_plus_extended_description_part4">OSMとWikipediaデータを使用 
 \n• 世界最高峰の共有プロジェクトからの高品質な情報を得られます
 \n• 国または地域ごとにOSMデータが利用できます
@@ -4931,7 +4924,7 @@ POIの更新は利用できません</string>
     <string name="change_key_binding">キーバインドを変更</string>
     <string name="average_glide_ratio">平均滑空比</string>
     <string name="key_event_action_take_media_note">メディアでメモをとる</string>
-    <string name="key_event_action_activity_back_pressed">Activity back pressed</string>
+    <string name="key_event_action_activity_back_pressed">戻るボタンを押したときの動作</string>
     <string name="release_4_6">• 外部入力デバイス使用時のキーバインドを変更する機能を追加
 \n
 \n • \"滑空比\"ウィジェットを追加
@@ -5190,7 +5183,18 @@ POIの更新は利用できません</string>
     <string name="help_article_widgets_radius_ruler_name">半径定規と定規</string>
     <string name="dynamic_icon_type_summary">アイコンはアクションの状態によって変化します。</string>
     <string name="shared_string_dynamic">動的</string>
-    <string name="location_radius_description">現在地の精度を表す円形のエリアを表示します。</string>
+    <string name="location_radius_description">現在地の精度を表す円形のエリアを表示します</string>
     <string name="shared_string_activity">アクティビティ</string>
     <string name="change_activity">アクティビティの変更</string>
+    <string name="navigation_position_icon">ナビゲーション位置アイコン</string>
+    <string name="resting_position_icon">停止時アイコン</string>
+    <string name="resting_navigation_position">停止時&amp;ナビゲーション時位置</string>
+    <string name="view_angle_description">現在地と方向を円錐状に表示します</string>
+    <string name="navigation_position">ナビゲーション時位置</string>
+    <string name="resting_position">停止時位置</string>
+    <string name="profile_icon">プロファイルのアイコン</string>
+    <string name="resting_position_icon_summary">動いていないときに表示されるアイコンです。</string>
+    <string name="navigation_position_icon_summary">ナビゲーション中や移動中に表示されるアイコンです。</string>
+    <string name="shared_string_all_icons">全てのアイコンを表示</string>
+    <string name="view_angle">視点表示</string>
 </resources>
