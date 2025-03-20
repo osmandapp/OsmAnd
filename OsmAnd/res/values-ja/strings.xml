@@ -4931,7 +4931,7 @@ POIの更新は利用できません</string>
     <string name="change_key_binding">キーバインドを変更</string>
     <string name="average_glide_ratio">平均滑空比</string>
     <string name="key_event_action_take_media_note">メディアでメモをとる</string>
-    <string name="key_event_action_activity_back_pressed"/>
+    <string name="key_event_action_activity_back_pressed">Activity back pressed</string>
     <string name="release_4_6">• 外部入力デバイス使用時のキーバインドを変更する機能を追加
 \n
 \n • \"滑空比\"ウィジェットを追加
