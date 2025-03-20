@@ -72,7 +72,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 			QuickSearchDialogFragment dialogFragment = getDialogFragment();
 			FragmentManager fragmentManager = dialogFragment.getFragmentManager();
 			if (fragmentManager != null) {
-				QuickSearchListItem item = getListAdapter().getItem(position);
+				QuickSearchListItem item = getListAdapter().getItem((int) id);
 				if (item != null && item.getSearchResult().object instanceof HistoryEntry) {
 					HistoryEntry entry = (HistoryEntry) item.getSearchResult().object;
 					HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), dialogFragment);
