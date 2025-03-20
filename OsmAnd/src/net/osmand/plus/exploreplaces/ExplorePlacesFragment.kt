@@ -1,5 +1,6 @@
 package net.osmand.plus.exploreplaces
 
+import android.os.AsyncTask.Status.RUNNING
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
+import net.osmand.CallbackWithObject
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.Amenity
@@ -31,9 +33,7 @@ import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
-import net.osmand.plus.search.dialogs.QuickSearchDialogFragment
 import net.osmand.plus.search.listitems.QuickSearchListItem
-import net.osmand.plus.search.listitems.QuickSearchWikiItem
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
@@ -42,10 +42,9 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.search.core.SearchCoreFactory
 import net.osmand.search.core.SearchPhrase
-import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
-import java.util.Collections
+import java.util.concurrent.Executors
 import kotlin.math.abs
 
 class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
@@ -54,6 +53,9 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private val log: Log = PlatformUtil.getLog(ExplorePlacesFragment::class.java)
 
 	private val plugin = PluginsHelper.requirePlugin(WikipediaPlugin::class.java)
+
+	private val singleThreadExecutor = Executors.newSingleThreadExecutor()
+	private var convertAmenitiesTask: ConvertAmenitiesTask? = null
 
 	private lateinit var poiUIFilter: PoiUIFilter
 	private lateinit var adapter: ExplorePlacesAdapter
@@ -197,28 +199,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		AndroidUiHelper.updateVisibility(
 			showListContainer, state == STATE_HIDDEN || state == STATE_COLLAPSED
 		)
-		val lp = zoomButtonsView?.layoutParams as ViewGroup.MarginLayoutParams
-		lp.bottomMargin =
+		val params = zoomButtonsView?.layoutParams as ViewGroup.MarginLayoutParams
+		params.bottomMargin =
 			if (state == STATE_COLLAPSED) resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height) else 0
-		zoomButtonsView?.layoutParams = lp
+		zoomButtonsView?.layoutParams = params
 		zoomButtonsView?.requestLayout()
-	}
-
-	private fun updateAdapter() {
-		val items = app.osmandMap.mapLayers.poiMapLayer.currentResults ?: Collections.emptyList()
-		val collection = QuickSearchDialogFragment.createSearchResultCollection(app, items)
-
-		val rows = ArrayList<QuickSearchListItem>()
-		if (!Algorithms.isEmpty(collection.currentSearchResults)) {
-			for (searchResult in collection.currentSearchResults) {
-				if (poiUIFilter.isTopImagesFilter) {
-					rows.add(QuickSearchWikiItem(app, searchResult))
-				} else {
-					rows.add(QuickSearchListItem(app, searchResult))
-				}
-			}
-		}
-		adapter.setItems(rows)
 	}
 
 	private fun updatePoints() {
@@ -227,19 +212,32 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		if (results != null && results != amenities) {
 			lastPointListRectUpdate = now
 			amenities = results
-			app.runInUIThread {
-				if (isAdded) {
-					updateAdapter()
-					updateMapControls()
+
+			val callback = object : CallbackWithObject<List<QuickSearchListItem>> {
+				override fun processResult(result: List<QuickSearchListItem>): Boolean {
+					if (isAdded) {
+						adapter.setItems(result)
+						updateMapControls()
+					}
+					return true
 				}
 			}
+			stopConvertAmenitiesTask()
+			convertAmenitiesTask = ConvertAmenitiesTask(app, results, poiUIFilter.isTopImagesFilter, callback)
+			convertAmenitiesTask?.executeOnExecutor(singleThreadExecutor)
+		}
+	}
+
+	private fun stopConvertAmenitiesTask() {
+		if (convertAmenitiesTask?.status == RUNNING) {
+			convertAmenitiesTask?.cancel(false)
 		}
 	}
 
 	override fun onResume() {
 		super.onResume()
 
-		startHandler();
+		startHandler()
 		bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback)
 
 		app.locationProvider.addLocationListener(this)
@@ -251,6 +249,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	override fun onPause() {
 		super.onPause()
 
+		stopConvertAmenitiesTask()
 		bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallback)
 
 		app.locationProvider.removeLocationListener(this)

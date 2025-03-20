@@ -295,7 +295,7 @@ public class SearchUICore {
 							}
 							if (Algorithms.stringsEqual(a1.getAdditionalInfo(ROUTE_ID), a2.getAdditionalInfo(ROUTE_ID))
 								&& (subType1.startsWith(ROUTES_PREFIX) || subType1.equals(ROUTE_TRACK))) {
-								similarityRadius = 50000;
+								similarityRadius = 1_000_000; // conceal redundant "5km" TravelGpx points
 							}
 						}
 					} else if (ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {

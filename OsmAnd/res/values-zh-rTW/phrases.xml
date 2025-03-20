@@ -4982,4 +4982,11 @@
     <string name="poi_network_nwn">國家登山路線</string>
     <string name="poi_network_iwn">國際登山路線</string>
     <string name="poi_network_icn">國際單車路線</string>
+    <string name="poi_route_activity_type_road_cycling">公路腳踏車路線</string>
+    <string name="poi_network_foot">遠足路網</string>
+    <string name="poi_network_cycling">腳踏車路網</string>
+    <string name="poi_route_activity_type_hiking">遠足路線</string>
+    <string name="poi_route_activity_type_walking">步行路線</string>
+    <string name="poi_route_activity_type_skiing">滑雪路線</string>
+    <string name="poi_route_activity_type_mountain_biking">山地雙輪車路線</string>
 </resources>

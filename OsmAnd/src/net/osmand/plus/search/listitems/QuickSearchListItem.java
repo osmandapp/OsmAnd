@@ -25,8 +25,6 @@ import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -43,8 +41,6 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.List;
@@ -211,24 +207,7 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				String res = "";
 				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
-					if (abstractPoiType instanceof PoiCategory) {
-						res = "";
-					} else if (abstractPoiType instanceof PoiFilter) {
-						PoiFilter poiFilter = (PoiFilter) abstractPoiType;
-						res = poiFilter.getPoiCategory() != null ? poiFilter.getPoiCategory().getTranslation() : "";
-
-					} else if (abstractPoiType instanceof PoiType) {
-						PoiType poiType = (PoiType) abstractPoiType;
-						res = poiType.getParentType() != null ? poiType.getParentType().getTranslation() : null;
-						if (res == null) {
-							res = poiType.getCategory() != null ? poiType.getCategory().getTranslation() : null;
-						}
-						if (res == null) {
-							res = "";
-						}
-					} else {
-						res = "";
-					}
+					res = abstractPoiType.getParentTypeName();
 				} else if (searchResult.object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
 					res = customSearchPoiFilter.getName();
 				} else if (searchResult.object instanceof SearchPoiAdditionalFilter searchPoiAdditionalFilter) {

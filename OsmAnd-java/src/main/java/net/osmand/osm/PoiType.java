@@ -201,7 +201,18 @@ public class PoiType extends AbstractPoiType {
 		return acceptedTypes;
 	}
 
-    public void setAdditional(AbstractPoiType parentType) {
+	@Override
+	public String getParentTypeName() {
+		if (parentType != null) {
+			return parentType.getTranslation();
+		} else if (category != null) {
+			return category.getTranslation();
+		} else {
+			return "";
+		}
+	}
+
+	public void setAdditional(AbstractPoiType parentType) {
         this.parentType = parentType;
     }
 

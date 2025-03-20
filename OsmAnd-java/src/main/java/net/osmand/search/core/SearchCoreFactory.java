@@ -1664,11 +1664,13 @@ public class SearchCoreFactory {
 
 	public static class PoiAdditionalCustomFilter extends AbstractPoiType {
 
+		private final PoiType poiType;
 		public List<PoiType> additionalPoiTypes = new ArrayList<>();
 
 		public PoiAdditionalCustomFilter(MapPoiTypes registry, PoiType pt) {
 			super(pt.getKeyName(), registry);
 			additionalPoiTypes.add(pt);
+			poiType = pt;
 		}
 
 		@Override
@@ -1688,6 +1690,11 @@ public class SearchCoreFactory {
 
 			}
 			return acceptedTypes;
+		}
+
+		@Override
+		public String getParentTypeName() {
+			return poiType.getParentTypeName();
 		}
 
 		@Override
