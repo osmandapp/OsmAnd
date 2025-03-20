@@ -5211,4 +5211,13 @@ POIの更新は利用できません</string>
     <string name="osmand_cloud_deletion_account_warning">あなたのアカウントとすべてのアカウント詳細が%1$sになります。</string>
     <string name="preview_next_turn">次の方向転換のプレビュー</string>
     <string name="ask_every_time">毎回尋ねる</string>
+    <string name="screen_is_locked_by_action_button">タッチスクリーンがロックされています。ボタンをタップしてロックを解除してください。</string>
+    <string name="custom_buttons">カスタムボタン</string>
+    <string name="default_buttons_size_original_description">各ボタンはそれぞれのサイズを維持します。</string>
+    <string name="screen_is_locked_by_external_button">タッチスクリーンがロックされています。ロックを解除するには、%1$sボタンを押すか、画面上のボタンをタップします。</string>
+    <string name="screen_is_unlocked">タッチスクリーンのロックが解除されます。</string>
+    <string name="default_buttons_corners_original_description">各ボタンはそれぞれのコーナー半径を維持します。</string>
+    <string name="default_buttons_opacity_original_description">各ボタンはそれぞれの背景の不透明度を維持します。</string>
+    <string name="lock_screen_description">誤ってタップするのを防ぐため、タッチスクリーン機能を有効または無効にします</string>
+    <string name="default_buttons">デフォルトボタン</string>
 </resources>
