@@ -5740,4 +5740,6 @@
     <string name="prime_meridian">Початковий меридіан</string>
     <string name="meridian_180">180-й меридіан</string>
     <string name="equator">Екватор</string>
+    <string name="shared_string_offline_only">Тільки офлайн</string>
+    <string name="shared_string_online_only">Тільки онлайн</string>
 </resources>
