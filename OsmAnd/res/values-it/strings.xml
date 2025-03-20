@@ -4366,7 +4366,7 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Nessuna restrizione)</string>
     <string name="routing_attr_avoid_fords_name">Evita i guadi</string>
     <string name="routing_attr_avoid_fords_description">Evita i guadi</string>
-    <string name="map_widget_trip_recording_downhill">Disceesa</string>
+    <string name="map_widget_trip_recording_downhill">Discesa</string>
     <string name="map_widget_trip_recording_uphill">Salita</string>
     <string name="map_widget_trip_recording_duration">Durata</string>
     <string name="map_widget_distance">Distanza</string>
