@@ -4978,4 +4978,15 @@
     <string name="poi_route_activity_type_hiking">Turistické trasy</string>
     <string name="poi_route_activity_type_skiing">Trasy pro lyžování</string>
     <string name="poi_route_activity_type_road_cycling">Silniční cyklistické trasy</string>
+    <string name="poi_network_rcn">Regionální cyklotrasy (RCN)</string>
+    <string name="poi_network_ncn">Národní cyklotrasy (NCN)</string>
+    <string name="poi_network_nwn">Národní turistické trasy (NWN)</string>
+    <string name="poi_network_iwn">Mezinárodní turistické trasy (IWN)</string>
+    <string name="poi_network_foot">Síť tras (turistika)</string>
+    <string name="poi_network_rwn">Regionální turistické trasy (RWN)</string>
+    <string name="poi_network_lwn">Místní turistické trasy (LWN)</string>
+    <string name="poi_network_icn">Mezinárodní cyklotrasy (ICN)</string>
+    <string name="poi_network_lcn">Místní cyklotrasy (LCN)</string>
+    <string name="poi_route_activity_type_mountain_biking">Trasy pro MTB (horská kola)</string>
+    <string name="poi_network_cycling">Síť tras (cyklistika)</string>
 </resources>
