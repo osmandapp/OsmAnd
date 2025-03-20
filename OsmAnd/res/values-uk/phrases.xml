@@ -4978,4 +4978,15 @@
     <string name="poi_route_activity_type_walking">Піші маршрути</string>
     <string name="poi_route_activity_type_skiing">Лижні траси</string>
     <string name="poi_route_activity_type_road_cycling">Шосейні велосипедні маршрути</string>
+    <string name="poi_network_foot">Мережа маршрутів (пішохідні)</string>
+    <string name="poi_network_iwn">Міжнародні пішохідні маршрути (IWN)</string>
+    <string name="poi_network_nwn">Національні пішохідні маршрути (NWN)</string>
+    <string name="poi_network_rwn">Регіональні пішохідні маршрути (RWN)</string>
+    <string name="poi_network_lwn">Місцеві пішохідні маршрути (LWN)</string>
+    <string name="poi_network_icn">Міжнародні велосипедні маршрути (ICN)</string>
+    <string name="poi_network_ncn">Національні велосипедні маршрути (NCN)</string>
+    <string name="poi_network_rcn">Регіональні велосипедні маршрути (RCN)</string>
+    <string name="poi_network_lcn">Місцеві велосипедні маршрути (LCN)</string>
+    <string name="poi_network_cycling">Мережа маршрутів (велосипедний)</string>
+    <string name="poi_route_activity_type_mountain_biking">MTB маршрути (маунтінбайк)</string>
 </resources>
