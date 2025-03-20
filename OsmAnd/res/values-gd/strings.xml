@@ -423,4 +423,5 @@
     <string name="popular_places">Àitichean ainmeil</string>
     <string name="original_shape_description">Chumadh a cruth fhèin aig gach puing.</string>
     <string name="show_list">Seall liosta</string>
+    <string name="popular_places_nearby">Àitichean ainmeil faisg air làimh</string>
 </resources>
