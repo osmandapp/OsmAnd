@@ -5201,4 +5201,6 @@ POIの更新は利用できません</string>
     <string name="record_obd_data">車両データの記録</string>
     <string name="help_article_navigation_routing_car_based_routing_name">車のルーティング(トラック、オートバイ)</string>
     <string name="av_audio_sample_rate">音声のサンプリング周波数</string>
+    <string name="ant_plus_help_title">所持しているセンサーの種類がわからない</string>
+    <string name="av_audio_sample_rate_descr">音声のサンプリング周波数を選択します。</string>
 </resources>
