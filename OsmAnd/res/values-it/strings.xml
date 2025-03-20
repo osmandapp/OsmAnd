@@ -45,7 +45,7 @@
     <string name="download_files_question_space">Scaricare {0} file\?
 \n {1} MB (di {2} MB) saranno usati.</string>
     <string name="use_transparent_map_theme">Tema trasparente</string>
-    <string name="native_library_not_supported">Libreria Nativa non supportata da questo dispositivo.</string>
+    <string name="native_library_not_supported">Libreria nativa non supportata da questo dispositivo.</string>
     <string name="init_native_library">Inizializzazione libreria nativa…</string>
     <string name="choose_auto_follow_route">Centra automaticamente la mappa</string>
     <string name="choose_auto_follow_route_descr">Tempo fino a quando la visualizzazione della mappa si sincronizza con la posizione corrente.</string>
