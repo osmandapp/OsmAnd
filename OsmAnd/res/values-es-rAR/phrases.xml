@@ -4974,12 +4974,4 @@
     <string name="poi_piste_type">Tipo de pista</string>
     <string name="poi_lit">Iluminación</string>
     <string name="poi_piste_oneway">Pista de sentido único</string>
-    <string name="poi_network_nwn">Ruta nacional de senderismo</string>
-    <string name="poi_network_icn">Ruta internacional de ciclismo</string>
-    <string name="poi_network_ncn">Ruta nacional de ciclismo</string>
-    <string name="poi_network_iwn">Ruta internacional de senderismo</string>
-    <string name="poi_network_rwn">Ruta regional de senderismo</string>
-    <string name="poi_network_lwn">Ruta local de senderismo</string>
-    <string name="poi_network_rcn">Ruta regional de ciclismo</string>
-    <string name="poi_network_lcn">Ruta local de ciclismo</string>
 </resources>
