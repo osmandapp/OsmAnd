@@ -5197,4 +5197,7 @@ POIの更新は利用できません</string>
     <string name="navigation_position_icon_summary">ナビゲーション中や移動中に表示されるアイコンです。</string>
     <string name="shared_string_all_icons">全てのアイコンを表示</string>
     <string name="view_angle">視点表示</string>
+    <string name="vehicle_metrics_recording_description">GPXファイルに記録するパラメータを選択します。</string>
+    <string name="record_obd_data">車両データの記録</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">車のルーティング(トラック、オートバイ)</string>
 </resources>
