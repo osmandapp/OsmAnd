@@ -86,7 +86,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	private void initFromBundle(@NonNull Bundle bundle) {
@@ -199,9 +199,12 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		((TextView) view.findViewById(R.id.title)).setText(title);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), showDivider);
 
-		view.setOnClickListener(v -> {
-			closeFragment();
+		View selectableBackground = view.findViewById(R.id.container);
+		int color = appMode.getProfileColor(nightMode);
+		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
+		AndroidUtils.setBackground(selectableBackground, drawable);
 
+		view.setOnClickListener(v -> {
 			Fragment target = getTargetFragment();
 			if (target instanceof AddWidgetListener) {
 				WidgetsPanel widgetsPanel = widgetsDataHolder.getWidgetsPanel();
@@ -318,7 +321,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	private static void showFragment(@NonNull FragmentManager manager, @NonNull AddWidgetFragment fragment) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}

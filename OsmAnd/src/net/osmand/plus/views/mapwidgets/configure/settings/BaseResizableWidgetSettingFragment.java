@@ -27,16 +27,10 @@ import java.util.Set;
 
 public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 	private static final String SELECTED_WIDGET_SIZE_ID_KEY = "selected_widget_id_size";
-	protected static final String WIDGET_TYPE_KEY = "widget_type_key";
 
 	protected OsmandPreference<WidgetSize> widgetSizePref;
-	protected WidgetType widgetType;
 
 	private WidgetSize selectedWidgetSize;
-
-	public void setWidgetType(@NonNull WidgetType widgetType) {
-		this.widgetType = widgetType;
-	}
 
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
@@ -45,23 +39,12 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 			widgetSizePref = resizableWidget.getWidgetSizePref();
 			selectedWidgetSize = bundle.containsKey(SELECTED_WIDGET_SIZE_ID_KEY) ? WidgetSize.values()[bundle.getInt(SELECTED_WIDGET_SIZE_ID_KEY)] : widgetSizePref.get();
 		}
-		String type = bundle.getString(WIDGET_TYPE_KEY);
-		if (widgetType == null && type != null) {
-			widgetType = WidgetType.getById(type);
-		}
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(SELECTED_WIDGET_SIZE_ID_KEY, selectedWidgetSize.ordinal());
-		outState.putString(WIDGET_TYPE_KEY, getWidget().name());
-	}
-
-	@NonNull
-	@Override
-	public WidgetType getWidget() {
-		return widgetType;
 	}
 
 	@Override
@@ -70,7 +53,7 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 			themedInflater.inflate(R.layout.resizable_widget_setting, container);
 
 			TextView height = container.findViewById(R.id.height);
-			height.setText(isVerticalPanel ? R.string.row_height : R.string.shared_string_height);
+			height.setText(R.string.row_height);
 			setupToggleButtons(view);
 		}
 	}

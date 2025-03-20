@@ -20,7 +20,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -59,24 +58,27 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 	public static final String TAG = SearchWidgetsFragment.class.getSimpleName();
 
+	public static final String KEY_SELECTED_PANEL = "key_selected_panel";
+	public static final String KEY_SEARCH_MODE = "key_search_mode";
+	public static final int PAYLOAD_SEPARATOR_UPDATE = 1;
+
 	private ApplicationMode selectedAppMode;
 	private MapWidgetRegistry widgetRegistry;
 	private WidgetIconsHelper iconsHelper;
 	private WidgetsPanel selectedPanel;
 
-	private List<WidgetType> allWidgetTypes = new ArrayList<>();
-	private List<MapWidgetInfo> externalWidgets = new ArrayList<>();
-	private final Map<WidgetGroup, List<WidgetType>> allGroupedWidgets = new HashMap<>();
+	private final List<Object> widgetItems = new ArrayList<>();
+	private final List<Object> allWidgetItems = new ArrayList<>();
 	private SearchWidgetsAdapter adapter;
 
 	private ImageButton actionButton;
 	private ImageView backButton;
 	private TextView title;
 	private EditText editText;
-	private Toolbar appBarLayout;
 
-	private boolean searchMode;
+	private boolean searchMode = false;
 	private String searchQuery = "";
+	private OnBackPressedCallback onBackPressedCallback;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,39 +89,29 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 		nightMode = !settings.isLightContent();
 		selectedAppMode = settings.getApplicationMode();
 		iconsHelper = new WidgetIconsHelper(app, selectedAppMode.getProfileColor(nightMode), nightMode);
+
+		if (savedInstanceState != null) {
+			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(KEY_SELECTED_PANEL));
+			searchMode = savedInstanceState.getBoolean(KEY_SEARCH_MODE);
+		}
+
+		onBackPressedCallback = new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				closeFragment();
+			}
+		};
 	}
 
 	@Override
 	public int getStatusBarColorId() {
-		if (searchMode) {
-			AndroidUiHelper.setStatusBarContentColor(getView(), true);
-			return ColorUtilities.getStatusBarColorId(nightMode);
-		} else {
-			AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-			return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
-		}
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	@Override
 	public boolean getContentStatusBarNightMode() {
-		if (searchMode) {
-			return true;
-		} else {
-			return nightMode;
-		}
-	}
-
-	public int getToolbarColorId() {
-		return searchMode
-				? ColorUtilities.getAppBarColor(app, nightMode)
-				: ColorUtilities.getListBgColor(app, nightMode);
-	}
-
-	private void updateToolbarColor() {
-		updateStatusBar();
-
-		appBarLayout.setBackground(null);
-		appBarLayout.setBackgroundColor(getToolbarColorId());
+		return nightMode;
 	}
 
 	@Nullable
@@ -133,17 +125,18 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 		backButton = view.findViewById(R.id.back_button);
 		title = view.findViewById(R.id.toolbar_title);
 		editText = view.findViewById(R.id.searchEditText);
-		appBarLayout = view.findViewById(R.id.toolbar);
+
+		loadWidgets();
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		adapter = new SearchWidgetsAdapter(app, this, new ArrayList<>(), iconsHelper, nightMode);
+		adapter = new SearchWidgetsAdapter(app, selectedAppMode, this, new ArrayList<>(), iconsHelper, nightMode);
 		recyclerView.setAdapter(adapter);
 
 		setupButtonListeners();
 		setupToolbar();
 
-		toggleSearchMode(false);
+		toggleSearchMode(searchMode);
 
 		return view;
 	}
@@ -162,7 +155,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				searchQuery = s.toString().toLowerCase();
+				searchQuery = s.toString().toLowerCase().trim();
 				updateSearchResults(searchQuery);
 			}
 		});
@@ -170,23 +163,28 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 		title.setVisibility(View.VISIBLE);
 		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 		editText.setVisibility(View.INVISIBLE);
-		editText.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
-		editText.setHintTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
 	}
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				closeFragment(false);
-			}
-		});
+		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), onBackPressedCallback);
 	}
 
-	private void closeFragment(boolean forceClose) {
-		if (!searchMode || forceClose) {
+	@Override
+	public void onResume() {
+		super.onResume();
+		onBackPressedCallback.setEnabled(true);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		onBackPressedCallback.setEnabled(false);
+	}
+
+	private void closeFragment() {
+		if (!searchMode) {
 			requireActivity().getSupportFragmentManager().popBackStack();
 		} else {
 			toggleSearchMode(false);
@@ -196,7 +194,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 	private void setupButtonListeners() {
 		backButton.setOnClickListener(v -> {
 			AndroidUtils.hideSoftKeyboard(requireActivity(), editText);
-			closeFragment(false);
+			closeFragment();
 		});
 
 		actionButton.setOnClickListener(v -> {
@@ -212,7 +210,6 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 	private void toggleSearchMode(boolean searchMode) {
 		this.searchMode = searchMode;
 		if (searchMode) {
-			updateToolbarColor();
 			swapViews(title, editText);
 
 			Drawable actionIcon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_close, getIconColor());
@@ -220,14 +217,14 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 			Drawable backIcon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_arrow_back, getIconColor());
 			backButton.setImageDrawable(backIcon);
 
-			loadAllWidgetsForSearch();
+			setWidgetList(true);
 
 			editText.requestFocus();
 			AndroidUtils.showSoftKeyboard(requireActivity(), editText);
 		} else {
 			editText.clearFocus();
+			editText.setText("");
 
-			updateToolbarColor();
 			swapViews(editText, title);
 
 			Drawable actionIcon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_search_dark, getIconColor());
@@ -235,7 +232,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 			Drawable backIcon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_close, getIconColor());
 			backButton.setImageDrawable(backIcon);
 
-			loadWidgets();
+			setWidgetList(false);
 		}
 	}
 
@@ -274,30 +271,38 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
 
 		if (hasAvailableWidgets) {
+			List<WidgetType> allWidgetTypes;
+			List<MapWidgetInfo> externalWidgets;
+			Map<WidgetGroup, List<WidgetType>> groupedWidgets = new HashMap<>();
+
 			allWidgetTypes = listDefaultWidgets(availableWidgets);
 			externalWidgets = getExternalWidgets(availableWidgets);
-			allGroupedWidgets.clear();
 
-			List<Object> sortedItems = new ArrayList<>();
-			Map<WidgetGroup, List<WidgetType>> groupedWidgets = new HashMap<>();
 
 			for (WidgetType widgetType : allWidgetTypes) {
 				if (widgetType.getGroup() != null) {
 					groupedWidgets.computeIfAbsent(widgetType.getGroup(), k -> new ArrayList<>()).add(widgetType);
-				} else {
-					sortedItems.add(widgetType);
 				}
 			}
-
-			allGroupedWidgets.putAll(groupedWidgets);
+			widgetItems.clear();
+			widgetItems.addAll(externalWidgets);
+			allWidgetItems.clear();
+			allWidgetItems.addAll(allWidgetTypes);
+			allWidgetItems.addAll(externalWidgets);
 
 			for (Map.Entry<WidgetGroup, List<WidgetType>> entry : groupedWidgets.entrySet()) {
-				sortedItems.add(new GroupItem(entry.getKey(), entry.getValue().size()));
+				GroupItem groupItem = new GroupItem(entry.getKey(), entry.getValue().size());
+				allWidgetItems.add(groupItem);
+				widgetItems.add(groupItem);
 			}
+			sortWidgetsItems(app, allWidgetItems);
 
-			sortedItems.addAll(externalWidgets);
-			sortWidgetsItems(app, sortedItems);
-			updateWidgetItems(sortedItems);
+			for (WidgetType widgetType : allWidgetTypes) {
+				if (widgetType.getGroup() == null) {
+					widgetItems.add(widgetType);
+				}
+			}
+			sortWidgetsItems(app, widgetItems);
 		}
 	}
 
@@ -335,22 +340,16 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 		return externalWidgets;
 	}
 
-	private void loadAllWidgetsForSearch() {
-		List<Object> searchItems = new ArrayList<>();
-
-		searchItems.addAll(allWidgetTypes);
-		searchItems.addAll(externalWidgets);
-
-		for (Map.Entry<WidgetGroup, List<WidgetType>> entry : allGroupedWidgets.entrySet()) {
-			searchItems.add(new GroupItem(entry.getKey(), entry.getValue().size()));
+	private void setWidgetList(boolean allWidgets) {
+		if (allWidgets) {
+			updateWidgetItems(allWidgetItems);
+		} else {
+			updateWidgetItems(widgetItems);
 		}
-
-		sortWidgetsItems(app, searchItems);
-
-		updateWidgetItems(searchItems);
 	}
 
-	private void updateWidgetItems(@NonNull List<Object> newItems) {
+	private void updateWidgetItems(@NonNull List<Object> items) {
+		List<Object> newItems = new ArrayList<>(items);
 		SearchWidgetsDiffCallback diffCallback = new SearchWidgetsDiffCallback(adapter.getItems(), newItems);
 		DiffResult diffRes = calculateDiff(diffCallback);
 		adapter.setItems(newItems);
@@ -362,47 +361,43 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 			return;
 		}
 
-		List<Object> searchResults = new ArrayList<>();
-
 		if (query.isEmpty()) {
-			loadAllWidgetsForSearch();
+			setWidgetList(true);
 			return;
 		}
 
-		for (WidgetType widgetType : allWidgetTypes) {
-			String widgetTitle = getString(widgetType.titleId).toLowerCase();
-			if (widgetTitle.contains(query.toLowerCase())) {
-				searchResults.add(widgetType);
+		List<Object> searchResults = new ArrayList<>();
+
+		for (Object object : allWidgetItems) {
+			if (object instanceof WidgetType widgetType) {
+				String widgetTitle = getString(widgetType.titleId).toLowerCase();
+				if (widgetTitle.contains(query.toLowerCase())) {
+					searchResults.add(widgetType);
+				}
+			} else if (object instanceof MapWidgetInfo widgetInfo) {
+				String widgetTitle = widgetInfo.key.toLowerCase();
+				if (widgetTitle.contains(query.toLowerCase())) {
+					searchResults.add(widgetInfo);
+				}
+			} else if (object instanceof GroupItem groupItem) {
+				WidgetGroup group = groupItem.group;
+				String groupTitle = getString(group.titleId).toLowerCase();
+
+				if (groupTitle.contains(query.toLowerCase())) {
+					searchResults.add(groupItem);
+				}
 			}
 		}
-
-		for (MapWidgetInfo widgetInfo : externalWidgets) {
-			String widgetTitle = widgetInfo.key.toLowerCase();
-			if (widgetTitle.contains(query.toLowerCase())) {
-				searchResults.add(widgetInfo);
-			}
-		}
-
-		for (Map.Entry<WidgetGroup, List<WidgetType>> entry : allGroupedWidgets.entrySet()) {
-			WidgetGroup group = entry.getKey();
-			String groupTitle = getString(group.titleId).toLowerCase();
-
-			if (groupTitle.contains(query.toLowerCase())) {
-				searchResults.add(new GroupItem(group, entry.getValue().size()));
-			}
-		}
-
-		sortWidgetsItems(app, searchResults);
 
 		updateWidgetItems(searchResults);
 	}
 
 	@Override
 	public void widgetSelected(@NonNull WidgetType widgetType) {
+		editText.clearFocus();
+
 		Fragment target = getTargetFragment();
 		if (widgetType.isPurchased(app)) {
-			closeFragment(true);
-
 			if (target instanceof AddWidgetFragment.AddWidgetListener) {
 				((AddWidgetFragment.AddWidgetListener) target).onWidgetSelectedToAdd(widgetType.id, selectedPanel, true);
 			}
@@ -416,7 +411,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 	@Override
 	public void externalWidgetSelected(@NonNull MapWidgetInfo widgetInfo) {
-		closeFragment(true);
+		editText.clearFocus();
 
 		FragmentActivity activity = getActivity();
 		Fragment target = getTargetFragment();
@@ -431,7 +426,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 	@Override
 	public void groupSelected(@NonNull WidgetGroup group) {
-		closeFragment(true);
+		editText.clearFocus();
 
 		FragmentActivity activity = getActivity();
 		Fragment target = getTargetFragment();
@@ -442,13 +437,20 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 		}
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(KEY_SELECTED_PANEL, selectedPanel.name());
+		outState.putBoolean(KEY_SEARCH_MODE, searchMode);
+	}
+
 	private static class SearchWidgetsDiffCallback extends Callback {
 
 		private final List<Object> oldItems;
 		private final List<Object> newItems;
 
 		SearchWidgetsDiffCallback(@NonNull List<Object> oldItems, @NonNull List<Object> newItems) {
-			this.oldItems = oldItems;
+			this.oldItems = new ArrayList<>(oldItems);
 			this.newItems = newItems;
 		}
 
@@ -479,7 +481,28 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 		@Override
 		public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-			return areItemsTheSame(oldItemPosition, newItemPosition);
+			Object oldItem = oldItems.get(oldItemPosition);
+			Object newItem = newItems.get(newItemPosition);
+
+			boolean isSameContent = oldItem.equals(newItem);
+
+			boolean wasLastOld = oldItemPosition == oldItems.size() - 1;
+			boolean isLastNew = newItemPosition == newItems.size() - 1;
+
+			return isSameContent && wasLastOld == isLastNew;
+		}
+
+		@Nullable
+		@Override
+		public Object getChangePayload(int oldItemPosition, int newItemPosition) {
+			boolean wasLastOld = oldItemPosition == oldItems.size() - 1;
+			boolean isLastNew = newItemPosition == newItems.size() - 1;
+
+			if (wasLastOld != isLastNew) {
+				return PAYLOAD_SEPARATOR_UPDATE;
+			}
+
+			return super.getChangePayload(oldItemPosition, newItemPosition);
 		}
 	}
 
@@ -494,9 +517,9 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 			fragment.selectedPanel = selectedPanel;
 			fragment.setTargetFragment(target, 0);
 			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 }

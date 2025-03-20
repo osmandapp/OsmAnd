@@ -26,18 +26,8 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 	protected ExternalSensorsPlugin plugin;
 	private UiUtilities uiUtils;
 
-	private WidgetType widgetType;
 	private String sourceDeviceId;
 	private AppCompatImageView deviceIcon;
-
-	@NonNull
-	@Override
-	public WidgetType getWidget() {
-		if (widgetType == null) {
-			throw new IllegalArgumentException("widgetType should be initialized prior to call to getWidget()");
-		}
-		return widgetType;
-	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +43,6 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 			widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		}
 		if (widgetInfo != null) {
-			widgetType = widgetInfo.getWidgetType();
 			sensorWidget = ((SensorTextWidget) widgetInfo.widget);
 			setupDataSource();
 		} else {
@@ -74,7 +63,6 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 		view.findViewById(R.id.widget_source_card).setOnClickListener((v) ->
 				SelectExternalDeviceFragment.showInstance(requireActivity().getSupportFragmentManager(),
 						this, sensorWidget.getFieldType(), getSourceDeviceId(), false));
-		themedInflater.inflate(R.layout.divider, container);
 		updateSourceDeviceUI();
 	}
 

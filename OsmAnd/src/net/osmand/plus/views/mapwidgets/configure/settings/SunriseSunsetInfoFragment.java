@@ -36,7 +36,6 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 	@Nullable
 	private OsmandPreference<SunPositionMode> sunPositionPreference;
 	private SunriseSunsetWidget widget;
-	private WidgetType widgetType;
 	private TextView timeDescription;
 	private TextView sunPositionDescription;
 
@@ -44,21 +43,12 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 	private boolean showTimeToLeft;
 	private boolean updateEnable;
 
-	@NonNull
-	@Override
-	public WidgetType getWidget() {
-		if (widgetType != null) {
-			return widgetType;
-		}
-		return WidgetType.SUNSET;
-	}
 
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
 		if (widgetInfo != null) {
 			widget = (SunriseSunsetWidget) widgetInfo.widget;
-			widgetType = widget.getWidgetType();
 			preference = widget.getPreference();
 			sunPositionPreference = widget.getSunPositionPreference();
 		}
@@ -77,11 +67,9 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 		View preferenceButton = container.findViewById(R.id.preference_container);
 		preferenceButton.setOnClickListener(v -> showPreferenceDialog());
 		preferenceButton.setBackground(getPressedStateDrawable());
-		themedInflater.inflate(R.layout.divider, container);
-		if (widgetType == WidgetType.SUN_POSITION) {
+		if (getWidget() == WidgetType.SUN_POSITION) {
 			setupSunPositionMode();
 		}
-
 	}
 
 	private void setupSunPositionMode() {
@@ -175,15 +163,11 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 	}
 
 	private int getNextEventStringId() {
-		switch (getWidget()) {
-			case SUN_POSITION:
-				return R.string.shared_string_next_event;
-			case SUNSET:
-				return R.string.shared_string_next_sunset;
-			case SUNRISE:
-			default:
-				return R.string.shared_string_next_sunrise;
-		}
+		return switch (getWidget()) {
+			case SUN_POSITION -> R.string.shared_string_next_event;
+			case SUNSET -> R.string.shared_string_next_sunset;
+			default -> R.string.shared_string_next_sunrise;
+		};
 	}
 
 	@Override

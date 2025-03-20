@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -42,16 +44,26 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
-	public void bind(@NonNull MapActivity mapActivity, @NonNull WidgetsAdapterListener listener,
+	public void bind(@NonNull MapActivity mapActivity, @NonNull ApplicationMode selectedAppMode, @NonNull WidgetsAdapterListener listener,
 	                 @NonNull ItemTouchHelper itemTouchHelper, @NonNull MapWidgetInfo widgetInfo,
 	                 @NonNull WidgetIconsHelper iconsHelper, int position, boolean nightMode, boolean showDivider) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean editMode = listener.isEditMode();
-
-		Drawable drawable = editMode ? null : UiUtilities.getSelectableDrawable(app);
+		int color = selectedAppMode.getProfileColor(nightMode);
+		Drawable drawable = editMode ? null : UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
 		AndroidUtils.setBackground(selectableBackground, drawable);
 
 		title.setText(widgetInfo.getTitle(app));
+
+		int startMargin;
+		if (editMode) {
+			startMargin = app.getResources().getDimensionPixelSize(R.dimen.fab_margin_bottom_big);
+		} else {
+			startMargin = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
+		}
+		LinearLayout.LayoutParams titleParams = (LinearLayout.LayoutParams) title.getLayoutParams();
+		titleParams.setMargins(startMargin, titleParams.topMargin, titleParams.rightMargin, titleParams.bottomMargin);
+		title.setLayoutParams(titleParams);
 
 		iconsHelper.updateWidgetIcon(icon, widgetInfo);
 		moveIcon.setVisibility(View.VISIBLE);
@@ -75,7 +87,7 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder {
 			moveIcon.setImageDrawable(app.getUIUtilities().getIcon(iconId));
 		}
 		moveIcon.setOnTouchListener((v, event) -> {
-			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+			if (editMode && event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 				listener.onMoveStarted();
 				itemTouchHelper.startDrag(this);
 			}

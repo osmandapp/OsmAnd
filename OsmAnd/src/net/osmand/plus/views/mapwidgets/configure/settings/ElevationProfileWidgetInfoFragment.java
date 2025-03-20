@@ -61,7 +61,7 @@ public class ElevationProfileWidgetInfoFragment extends WidgetInfoBaseFragment {
 		});
 
 		content.setOnClickListener(v -> slopeSwitch.setChecked(!showSlope));
-		container.setBackground(getPressedStateDrawable());
+		content.setBackground(getPressedStateDrawable());
 	}
 
 	private void updateIcon(boolean showSlope) {

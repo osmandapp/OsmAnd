@@ -56,7 +56,6 @@ class RemainingFuelSettingFragment : BaseSimpleWidgetInfoFragment() {
 		selectedAppMode = settings.applicationMode
 
 		setupConfigButtons()
-		themedInflater.inflate(R.layout.divider, container)
 	}
 
 	private fun setupConfigButtons() {

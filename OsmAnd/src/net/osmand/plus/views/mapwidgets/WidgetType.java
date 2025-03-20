@@ -380,14 +380,10 @@ public enum WidgetType {
 				return OBDSettingFragment;
 			}
 
-			BaseSimpleWidgetInfoFragment settingsFragment = new BaseSimpleWidgetInfoFragment();
-			settingsFragment.setWidgetType(this);
-			return settingsFragment;
+			return new BaseSimpleWidgetInfoFragment();
 		} else if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing) {
 			if (widgetInfo.widgetPanel.isPanelVertical()) {
-				BaseResizableWidgetSettingFragment settingFragment = new BaseResizableWidgetSettingFragment();
-				settingFragment.setWidgetType(this);
-				return settingFragment;
+				return new BaseResizableWidgetSettingFragment();
 			}
 		}
 		return new WidgetInfoBaseFragment();
@@ -400,17 +396,11 @@ public enum WidgetType {
 			return null;
 		}
 		if (widgetInfo.widget instanceof OBDFuelConsumptionWidget) {
-			FuelConsumptionSettingFragment settingFragment = new FuelConsumptionSettingFragment();
-			settingFragment.setWidgetType(this);
-			return settingFragment;
+			return new FuelConsumptionSettingFragment();
 		} else if (widgetInfo.widget instanceof OBDRemainingFuelWidget) {
-			RemainingFuelSettingFragment settingFragment = new RemainingFuelSettingFragment();
-			settingFragment.setWidgetType(this);
-			return settingFragment;
+			return new RemainingFuelSettingFragment();
 		} else if (widgetInfo.widget instanceof OBDTextWidget obdTextWidget && (obdTextWidget.supportsAverageMode() || obdTextWidget.isTemperatureWidget())) {
-			OBDWidgetSettingFragment settingFragment = new OBDWidgetSettingFragment();
-			settingFragment.setWidgetType(this);
-			return settingFragment;
+			return new OBDWidgetSettingFragment();
 		}
 		return null;
 	}

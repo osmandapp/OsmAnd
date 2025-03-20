@@ -54,7 +54,6 @@ public class TimeToNavigationPointInfoFragment extends BaseSimpleWidgetInfoFragm
 	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.time_to_navigation_point_widget_settings_fragment, container);
 		setupTimeModeSelector();
-		themedInflater.inflate(R.layout.divider, container);
 	}
 
 	private void setupTimeModeSelector() {

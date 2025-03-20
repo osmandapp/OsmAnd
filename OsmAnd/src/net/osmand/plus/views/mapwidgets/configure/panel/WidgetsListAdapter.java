@@ -46,6 +46,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	private final List<Object> items = new ArrayList<>();
 	private final List<Object> itemsBeforeAction = new ArrayList<>();
 	private final OsmandApplication app;
+	private final ApplicationMode selectedAppMode;
 	private final MapActivity mapActivity;
 	private final boolean nightMode;
 	private final WidgetsAdapterListener listener;
@@ -73,6 +74,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	                          @NonNull WidgetsAdapterListener listener, boolean isVerticalPanel, @NonNull ApplicationMode selectedAppMode) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
+		this.selectedAppMode = selectedAppMode;
 		this.nightMode = nightMode;
 		this.listener = listener;
 		this.isVerticalPanel = isVerticalPanel;
@@ -244,10 +246,10 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			items.add(VIEW_TYPE_SPACE);
 		} else {
 			items.clear();
+			items.add(VIEW_TYPE_DIVIDER);
 
 			int pageNumber = 1;
 			for (List<MapWidgetInfo> widgetsOnPage : pagedWidgets) {
-				items.add(VIEW_TYPE_DIVIDER);
 
 				PageItem pageItem = new PageItem(pageNumber);
 				items.add(pageItem);
@@ -344,7 +346,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			if (items.size() > nextItemIndex && items.get(nextItemIndex) instanceof MapWidgetInfo) {
 				showDivider = true;
 			}
-			widgetViewHolder.bind(mapActivity, listener, itemTouchHelper, (MapWidgetInfo) item, iconsHelper, position, nightMode, showDivider);
+			widgetViewHolder.bind(mapActivity, selectedAppMode, listener, itemTouchHelper, (MapWidgetInfo) item, iconsHelper, position, nightMode, showDivider);
 		} else if (holder instanceof AddPageViewHolder addPageViewHolder) {
 			addPageViewHolder.bind(listener);
 		} else if (holder instanceof SpaceViewHolder spaceViewHolder) {

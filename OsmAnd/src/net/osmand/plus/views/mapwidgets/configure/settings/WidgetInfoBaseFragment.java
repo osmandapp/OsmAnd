@@ -43,6 +43,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsController;
+import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -319,6 +320,9 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 		if (addNewWidgetMode) {
 			buttonsContainer.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 			DialogButton applyButton = view.findViewById(R.id.dismiss_button);
+			applyButton.setButtonType(DialogButtonType.PRIMARY);
+			applyButton.setTitleId(addNewWidgetMode ? R.string.add_widget : R.string.shared_string_apply);
+
 			applyButton.setOnClickListener(v -> {
 				Fragment target = getTargetFragment();
 				if (target instanceof WidgetsConfigurationChangeListener configurationChangeListener) {
@@ -326,10 +330,18 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 						configurationChangeListener.onWidgetAdded(widgetInfo);
 					}
 				}
-				dismiss();
+				FragmentManager fragmentManager = requireMyActivity().getSupportFragmentManager();
+				int backStackCount = fragmentManager.getBackStackEntryCount();
+
+				if (backStackCount == 0) return;
+				Fragment fragment = fragmentManager.findFragmentByTag(ConfigureWidgetsFragment.TAG);
+
+				if (fragment != null) {
+					fragmentManager.popBackStack(ConfigureWidgetsFragment.TAG, 0);
+				} else {
+					dismiss();
+				}
 			});
-			applyButton.setButtonType(DialogButtonType.PRIMARY);
-			applyButton.setTitleId(addNewWidgetMode ? R.string.add_widget : R.string.shared_string_apply);
 		}
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.apply_button_container), addNewWidgetMode);
 	}
@@ -359,12 +371,13 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 		outState.putString(KEY_WIDGET_ID, widgetId);
 		outState.putBoolean(KEY_ADD_MODE, addNewWidgetMode);
 		outState.putBoolean(IS_VERTICAL_PANEL_KEY, isVerticalPanel);
+		outState.putString(KEY_SELECTED_PANEL, widgetPanel.name());
 	}
 
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	public boolean getContentStatusBarNightMode() {
@@ -397,7 +410,7 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 			fragment.setTargetFragment(target, 0);
 
 			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, tag)
+					.replace(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(tag)
 					.commitAllowingStateLoss();
 		}

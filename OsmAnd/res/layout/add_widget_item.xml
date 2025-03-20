@@ -4,7 +4,6 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
-	android:layout_marginBottom="@dimen/content_padding_small"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -13,7 +12,6 @@
 		android:layout_height="match_parent"
 		android:orientation="horizontal"
 		android:minHeight="@dimen/card_row_min_height"
-		android:background="?attr/ripple_solid_6dp"
 		tools:ignore="UselessParent">
 
 		<androidx.appcompat.widget.AppCompatImageView
@@ -27,7 +25,7 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:layout_marginStart="@dimen/title_padding"
+			android:layout_marginStart="@dimen/list_content_padding_large"
 			android:gravity="center_vertical"
 			android:orientation="vertical">
 

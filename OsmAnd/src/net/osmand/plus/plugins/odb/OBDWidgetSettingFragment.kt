@@ -67,7 +67,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 		selectedAverageMode = averageValueModePref?.getModeValue(appMode) ?: selectedAverageMode
 
 		setupConfigButtons()
-		themedInflater.inflate(R.layout.divider, container)
 	}
 
 	private fun getModeName(averageMode: Boolean): String {

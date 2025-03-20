@@ -97,7 +97,6 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 		selectedIntervalMillis = averageSpeedIntervalPref.getModeValue(appMode);
 
 		setupConfigButtons();
-		themedInflater.inflate(R.layout.divider, container);
 	}
 
 	private void setupConfigButtons() {

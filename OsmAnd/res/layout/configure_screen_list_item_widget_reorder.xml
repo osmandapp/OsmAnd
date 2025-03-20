@@ -22,6 +22,7 @@
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
 			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
 			tools:ignore="ContentDescription"
 			tools:src="@drawable/ic_action_remove"
 			tools:tint="@color/color_osm_edit_delete" />
@@ -43,7 +44,7 @@
 					android:layout_width="@dimen/standard_icon_size"
 					android:layout_height="@dimen/standard_icon_size"
 					android:layout_gravity="center"
-					android:layout_marginStart="@dimen/list_content_padding_large"
+					android:layout_marginStart="@dimen/content_padding"
 					tools:src="@drawable/mm_air_transport"
 					tools:tint="@color/poi_background" />
 
@@ -52,7 +53,7 @@
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
-					android:layout_marginStart="@dimen/title_padding"
+					android:layout_marginStart="@dimen/list_content_padding_large"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_weight="1"
 					android:ellipsize="marquee"

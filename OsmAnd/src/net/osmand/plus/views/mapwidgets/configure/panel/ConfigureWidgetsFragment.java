@@ -74,6 +74,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private static final String CONTEXT_SELECTED_PANEL = "context_selected_panel";
 	private static final String ADD_TO_NEXT = "widget_order";
 	private static final String EDIT_MODE_KEY = "edit_mode_key";
+	private static final String ADD_NEW_WIDGET_MENU_KEY = "add_new_widget_menu";
 	private static final int ANIMATION_DURATION = 300;
 
 	private DialogManager dialogManager;
@@ -95,6 +96,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private View view;
 
 	public boolean isEditMode = false;
+	public boolean newWidgetAdded = false;
 
 	public void setSelectedPanel(@NonNull WidgetsPanel panel) {
 		this.selectedPanel = panel;
@@ -118,6 +120,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			selectedAppMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
 			isEditMode = savedInstanceState.getBoolean(EDIT_MODE_KEY, false);
+			newWidgetAdded = savedInstanceState.getBoolean(ADD_NEW_WIDGET_MENU_KEY, false);
 		}
 	}
 
@@ -158,9 +161,11 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			}
 		});
 
-		if (savedInstanceState != null && (savedInstanceState.containsKey(CONTEXT_SELECTED_WIDGET)
-				|| savedInstanceState.containsKey(CONTEXT_SELECTED_PANEL)
-				|| savedInstanceState.containsKey(ADD_TO_NEXT))) {
+		Bundle args = getArguments();
+		if (!newWidgetAdded && args != null && (args.containsKey(CONTEXT_SELECTED_WIDGET)
+				|| args.containsKey(CONTEXT_SELECTED_PANEL)
+				|| args.containsKey(ADD_TO_NEXT))) {
+			newWidgetAdded = true;
 			addNewWidget();
 		}
 	}
@@ -344,6 +349,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		outState.putString(APP_MODE_ATTR, selectedAppMode.getStringKey());
 		outState.putString(SELECTED_GROUP_ATTR, selectedPanel.name());
 		outState.putBoolean(EDIT_MODE_KEY, isEditMode);
+		outState.putBoolean(ADD_NEW_WIDGET_MENU_KEY, newWidgetAdded);
 	}
 
 	private void setupTabLayout() {

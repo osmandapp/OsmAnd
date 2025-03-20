@@ -63,8 +63,6 @@ public class ZoomLevelInfoFragment extends BaseSimpleWidgetInfoFragment {
 		zoomLevelTypeContainer.setOnClickListener(v -> showZoomLevelTypeSelectionDialog());
 		zoomLevelTypeContainer.setBackground(getPressedStateDrawable());
 		updateSelectedZoomLevelTypeText();
-		themedInflater.inflate(R.layout.divider, container);
-
 	}
 
 	private void showZoomLevelTypeSelectionDialog() {

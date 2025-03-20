@@ -72,7 +72,6 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 		defViewContainer.setBackground(getPressedStateDrawable());
 		TextView defViewDesc = container.findViewById(R.id.default_view_description);
 		defViewDesc.setText(getString(selectedDisplayMode.getTitleId()));
-
 	}
 
 	private void showDefaultValueDialog(@NonNull View container) {

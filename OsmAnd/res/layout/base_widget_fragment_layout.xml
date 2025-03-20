@@ -69,6 +69,12 @@
 					android:background="?attr/list_background_color"
 					android:orientation="vertical" />
 
+				<androidx.appcompat.widget.AppCompatImageView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:scaleType="fitXY"
+					app:srcCompat="@drawable/bg_shadow_list_bottom" />
+
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/list_content_padding_large" />
