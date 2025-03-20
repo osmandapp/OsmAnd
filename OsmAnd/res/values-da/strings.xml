@@ -5761,4 +5761,6 @@
     <string name="prime_meridian">Nulmeridianen</string>
     <string name="meridian_180">180. længdekreds</string>
     <string name="equator">Ækvator</string>
+    <string name="shared_string_offline_only">Kun offline</string>
+    <string name="shared_string_online_only">Kun online</string>
 </resources>
