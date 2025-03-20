@@ -5200,4 +5200,5 @@ POIの更新は利用できません</string>
     <string name="vehicle_metrics_recording_description">GPXファイルに記録するパラメータを選択します。</string>
     <string name="record_obd_data">車両データの記録</string>
     <string name="help_article_navigation_routing_car_based_routing_name">車のルーティング(トラック、オートバイ)</string>
+    <string name="av_audio_sample_rate">音声のサンプリング周波数</string>
 </resources>
