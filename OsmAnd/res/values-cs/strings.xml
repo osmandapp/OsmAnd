@@ -5729,4 +5729,6 @@
     <string name="prime_meridian">Nultý poledník</string>
     <string name="equator">Rovník</string>
     <string name="meridian_180">180. poledník</string>
+    <string name="shared_string_offline_only">Pouze offline</string>
+    <string name="shared_string_online_only">Pouze online</string>
 </resources>
