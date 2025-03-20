@@ -36,7 +36,6 @@ import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import org.threeten.bp.Duration;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
@@ -196,12 +195,10 @@ public class CustomAlert {
 		public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<SingleSelectionDialogFragment> {
 
 			private SingleSelectionDialogFragment singleSelectionDialogFragment;
-			private Map<String, CharSequence> itemByKey;
 
 			@Override
 			public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final SingleSelectionDialogFragment singleSelectionDialogFragment) {
 				this.singleSelectionDialogFragment = singleSelectionDialogFragment;
-				itemByKey = singleSelectionDialogFragment.itemByKey;
 			}
 
 			public SingleSelectionDialogFragment getPrincipal() {
@@ -210,30 +207,15 @@ public class CustomAlert {
 
 			@Override
 			public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
-				final Context context = getPreferenceManager().getContext();
-				final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
-				screen.setTitle("screen title");
-				screen.setSummary("screen summary");
-				PreferenceFragment
-						.asPreferences(itemByKey, context)
-						.forEach(screen::addPreference);
-				setPreferenceScreen(screen);
+				setPreferenceScreen(asPreferenceScreen(asPreferences(singleSelectionDialogFragment.itemByKey)));
 			}
 
-			private static Collection<Preference> asPreferences(final Map<String, CharSequence> itemByKey,
-																final Context context) {
-				return itemByKey
-						.entrySet()
-						.stream()
-						.map(key_item_entry -> asPreference(key_item_entry.getKey(), key_item_entry.getValue(), context))
-						.collect(Collectors.toUnmodifiableList());
+			private Collection<Preference> asPreferences(final Map<String, CharSequence> itemByKey) {
+				return new TitleByKey2PreferencesConverter(getContext()).asPreferences(itemByKey);
 			}
 
-			private static Preference asPreference(final String key, final CharSequence item, final Context context) {
-				final Preference preference = new Preference(context);
-				preference.setKey(key);
-				preference.setTitle(item);
-				return preference;
+			private PreferenceScreen asPreferenceScreen(final Collection<Preference> preferences) {
+				return new PreferenceScreenFactory(this).asPreferenceScreen(preferences);
 			}
 		}
 	}

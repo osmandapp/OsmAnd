@@ -35,6 +35,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.PreferenceScreenFactory;
+import net.osmand.plus.widgets.alert.TitleByKey2PreferencesConverter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
@@ -43,7 +45,6 @@ import net.osmand.util.Algorithms;
 import org.threeten.bp.Duration;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
@@ -275,7 +276,6 @@ public class ConfigureMapDialogs {
 		return -1;
 	}
 
-	// FK-TODO: DRY with CustomAlert.SingleSelectionDialogFragment
 	public static class MapLanguageDialog extends DialogFragment implements SettingHighlighterProvider {
 
 		public static class DialogState {
@@ -353,12 +353,10 @@ public class ConfigureMapDialogs {
 		public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<MapLanguageDialog> {
 
 			private MapLanguageDialog mapLanguageDialog;
-			private Map<String, String> mapLanguageNameById;
 
 			@Override
 			public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final MapLanguageDialog mapLanguageDialog) {
 				this.mapLanguageDialog = mapLanguageDialog;
-				mapLanguageNameById = mapLanguageDialog.mapLanguageNameById;
 			}
 
 			public MapLanguageDialog getPrincipal() {
@@ -367,30 +365,15 @@ public class ConfigureMapDialogs {
 
 			@Override
 			public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
-				final Context context = getPreferenceManager().getContext();
-				final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
-				screen.setTitle("screen title");
-				screen.setSummary("screen summary");
-				PreferenceFragment
-						.asPreferences(mapLanguageNameById, context)
-						.forEach(screen::addPreference);
-				setPreferenceScreen(screen);
+				setPreferenceScreen(asPreferenceScreen(asPreferences(mapLanguageDialog.mapLanguageNameById)));
 			}
 
-			private static Collection<Preference> asPreferences(final Map<String, String> mapLanguageNameById,
-																final Context context) {
-				return mapLanguageNameById
-						.entrySet()
-						.stream()
-						.map(id_mapLanguageName_entry -> asPreference(id_mapLanguageName_entry.getKey(), id_mapLanguageName_entry.getValue(), context))
-						.collect(Collectors.toUnmodifiableList());
+			private Collection<Preference> asPreferences(final Map<String, String> mapLanguageNameById) {
+				return new TitleByKey2PreferencesConverter(getContext()).asPreferences(mapLanguageNameById);
 			}
 
-			private static Preference asPreference(final String id, final String mapLanguageName, final Context context) {
-				final Preference preference = new Preference(context);
-				preference.setKey(id);
-				preference.setTitle(mapLanguageName);
-				return preference;
+			private PreferenceScreen asPreferenceScreen(final Collection<Preference> preferences) {
+				return new PreferenceScreenFactory(this).asPreferenceScreen(preferences);
 			}
 		}
 	}
