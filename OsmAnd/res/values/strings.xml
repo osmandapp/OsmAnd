@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_online_only">Online Only</string>
+    <string name="shared_string_offline_only">Offline Only</string>
     <string name="meridian_180">180th meridian</string>
     <string name="prime_meridian">Prime meridian</string>
     <string name="equator">Equator</string>

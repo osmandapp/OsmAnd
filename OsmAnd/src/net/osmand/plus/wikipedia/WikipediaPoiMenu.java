@@ -1,6 +1,7 @@
 package net.osmand.plus.wikipedia;
 
 import static net.osmand.data.DataSourceType.ONLINE;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.view.View;
 
@@ -79,7 +80,9 @@ public class WikipediaPoiMenu {
 				} else if (itemId == R.string.show_image_previews) {
 					app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.set(isChecked);
 					item.setSelected(isChecked);
-					item.setColor(app, isChecked ? ColorUtilities.getActiveColorId(nightMode) : ContextMenuItem.INVALID_ID);
+					item.setColor(app, isChecked ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID);
+					item.setIcon(isChecked ? R.drawable.ic_action_photo : R.drawable.ic_action_image_disabled);
+
 					if (uiAdapter != null) {
 						uiAdapter.onDataSetChanged();
 					}
@@ -90,12 +93,12 @@ public class WikipediaPoiMenu {
 			}
 		};
 
-		int toggleIconId = R.drawable.ic_plugin_wikipedia;
+		int toggleIconId = R.drawable.ic_action_popular_places;
 		int toggleIconColorId;
 		if (enabled) {
 			toggleIconColorId = ColorUtilities.getActiveColorId(nightMode);
 		} else {
-			toggleIconColorId = ContextMenuItem.INVALID_ID;
+			toggleIconColorId = INVALID_ID;
 		}
 		String summary = activity.getString(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 		adapter.addItem(new ContextMenuItem(null)
@@ -121,24 +124,24 @@ public class WikipediaPoiMenu {
 			adapter.addItem(new ContextMenuItem(null)
 					.setLayout(R.layout.list_item_divider));
 
-			boolean onlineDataSource = app.getSettings().WIKI_DATA_SOURCE_TYPE.get() == ONLINE;
-			summary = onlineDataSource
-					? activity.getString(R.string.shared_string_online)
-					: activity.getString(R.string.shared_string_offline);
+			DataSourceType sourceType = app.getSettings().WIKI_DATA_SOURCE_TYPE.get();
+			boolean online = sourceType == ONLINE;
+			summary = app.getString(online ? R.string.shared_string_online : R.string.shared_string_offline);
 			adapter.addItem(new ContextMenuItem(null)
 					.setTitleId(R.string.data_source, activity)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow)
-					.setIcon(R.drawable.ic_world_globe_dark)
-					.setColor(app, onlineDataSource ? ColorUtilities.getActiveColorId(nightMode) : ContextMenuItem.INVALID_ID)
+					.setIcon(sourceType.iconId)
+					.setColor(app, online ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID)
 					.setDescription(summary)
 					.setListener(listener));
-			Boolean showImagePreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
+
+			boolean showPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
 			adapter.addItem(new ContextMenuItem(null)
 					.setTitleId(R.string.show_image_previews, activity)
-					.setIcon(R.drawable.ic_type_img)
-					.setColor(app, showImagePreviews ? ColorUtilities.getActiveColorId(nightMode) : ContextMenuItem.INVALID_ID)
+					.setIcon(showPreviews ? R.drawable.ic_action_photo : R.drawable.ic_action_image_disabled)
+					.setColor(app, showPreviews ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID)
 					.setListener(listener)
-					.setSelected(showImagePreviews));
+					.setSelected(showPreviews));
 		}
 
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -185,12 +188,12 @@ public class WikipediaPoiMenu {
 								.setListener((uiAdapter, view, item, isChecked) -> {
 									if (downloadThread.isDownloading(indexItem)) {
 										downloadThread.cancelDownload(indexItem);
-										item.setProgress(ContextMenuItem.INVALID_ID);
+										item.setProgress(INVALID_ID);
 										item.setLoading(false);
 										item.setSecondaryIcon(R.drawable.ic_action_import);
 									} else {
 										new DownloadValidationManager(app).startDownload(activity, indexItem);
-										item.setProgress(ContextMenuItem.INVALID_ID);
+										item.setProgress(INVALID_ID);
 										item.setLoading(true);
 										item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
 									}
@@ -255,8 +258,13 @@ public class WikipediaPoiMenu {
 				.setSelected(app.getSettings().WIKI_DATA_SOURCE_TYPE.get() == sourceType)
 				.showCompoundBtn(ColorUtilities.getActiveColor(activity, nightMode))
 				.setOnClickListener(v -> {
+					boolean online = sourceType == ONLINE;
 					app.getSettings().WIKI_DATA_SOURCE_TYPE.set(sourceType);
+
+					item.setIcon(sourceType.iconId);
 					item.setDescription(app.getString(sourceType.nameId));
+					item.setColor(app, online ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID);
+
 					if (uiAdapter != null) {
 						uiAdapter.onDataSetChanged();
 					}
