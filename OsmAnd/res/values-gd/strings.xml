@@ -420,4 +420,7 @@
     <string name="edit_category">Deasaich roinn-seòrsa</string>
     <string name="edit_track">Deasaich frith-rathad</string>
     <string name="shared_string_map_center">Meadhan a\' mhapa</string>
+    <string name="popular_places">Àitichean ainmeil</string>
+    <string name="original_shape_description">Chumadh a cruth fhèin aig gach puing.</string>
+    <string name="show_list">Seall liosta</string>
 </resources>
