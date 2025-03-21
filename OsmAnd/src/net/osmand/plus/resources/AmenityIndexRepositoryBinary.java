@@ -275,4 +275,10 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		String fileName = getFile().getName().toLowerCase();
 		return fileName.startsWith(WorldRegion.WORLD + "_") || fileName.contains("basemap");
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getFile().getName();
+	}
 }
