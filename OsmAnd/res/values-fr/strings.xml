@@ -5723,4 +5723,8 @@
     <string name="show_image_previews">Afficher les aperçus des images</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Action permettant de contrôler la visibilité de la grille de coordonnées sur la carte.</string>
     <string name="layer_coordinates_grid">Grille de coordonnées</string>
+    <string name="prime_meridian">Méridien d\'origine</string>
+    <string name="equator">Équateur</string>
+    <string name="meridian_180">180e méridien</string>
+    <string name="release_5_0">• Découvrez les PI les mieux classés avec le nouveau mode Explorer\n\n• Tous les itinéraires OSM, désormais consultables ! Randonnée, vélo, VTT, et plus encore\n\n• Le nouveau widget de navigation combine la flèche de virage et les instructions de navigation\n\n• Widget d\'information sur l\'itinéraire actuel : affiche le temps restant, l\'heure d\'arrivée et la distance\n\n• Sélectionnez les pistes de ski et de VTT sur la carte pour obtenir des informations détaillées\n\n• Possibilité de sélectionner la taille du widget pour les panneaux gauche et droit\n\n• Ajout d\'une grille de coordonnées avec les coordonnées géographiques\n\n• Ajout de la possibilité de personnaliser l\'apparence par défaut des groupes favoris\n\n• Android Auto : affichage de l\'heure d\'arrivée et de la distance jusqu\'au prochain point de passage ; les noms de ville apparaissent désormais dans les résultats de la recherche\n\n• Les sommets les plus importants peuvent désormais être découverts via la carte et la recherche\n\n• Hauteur des sommets en pieds\n\n• Ajout de falaises et de zones d\'escalade sur la carte\n\n• La recherche d\'adresses aux États-Unis a été améliorée\n\n• Ajout de l\'hébreu TTS pour la navigation</string>
 </resources>

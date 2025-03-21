@@ -41,7 +41,7 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
             + "PRIMARY KEY (" + COLUMN_ZOOM + ", " + COLUMN_TILE_X + ", " + COLUMN_TILE_Y + ", " + COLUMN_LANG + ")"
             + ")";
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     public PlacesDatabaseHelper(Context context) {
         super(context, context.getCacheDir() + File.separator + DATABASE_NAME, null, DATABASE_VERSION);

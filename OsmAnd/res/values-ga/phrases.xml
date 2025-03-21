@@ -486,7 +486,7 @@
     <string name="poi_recycling_rubble">Spallaí</string>
     <string name="poi_recycling_cds">Dlúthdhioscaí</string>
     <string name="poi_recycling_waste_oil">Dramh-ola</string>
-    <string name="poi_recycling_styrofoam">Styrofoam</string>
+    <string name="poi_recycling_styrofoam">Styrocúr</string>
     <string name="poi_recycling_drugs">Drugaí</string>
     <string name="poi_recycling_compost">Múirín</string>
     <string name="poi_recycling_hardcore">Crua lárnach</string>
@@ -496,7 +496,7 @@
     <string name="poi_recycling_animal_waste">Dramhaíl ainmhithe</string>
     <string name="poi_recycling_fridge_and_freezer">Cuisneoir agus reoiteoir</string>
     <string name="poi_recycling_furniture">Troscán</string>
-    <string name="poi_recycling_diapers">Diapers</string>
+    <string name="poi_recycling_diapers">Clúidín</string>
     <string name="poi_recycling_bicycles">Rothair</string>
     <string name="poi_landfill">Líonadh Talún</string>
     <string name="poi_meadow">Móinéar</string>
@@ -531,12 +531,12 @@
     <string name="poi_nursing_home">Teach altranais</string>
     <string name="poi_baby_hatch">Haiste leanbh</string>
     <string name="poi_veterinary">Tréidliacht</string>
-    <string name="poi_sanatorium">Sanatorium</string>
+    <string name="poi_sanatorium">Sanatóir</string>
     <string name="poi_healthcare_alternative">Leigheas malartach</string>
-    <string name="poi_audiologist">Audiologist</string>
+    <string name="poi_audiologist">Éisteolaí</string>
     <string name="poi_blood_bank">Banc fola</string>
     <string name="poi_midwife">Cnáimhseach</string>
-    <string name="poi_podiatrist">Podiatrist</string>
+    <string name="poi_podiatrist">Péidiatraí</string>
     <string name="poi_healthcare_rehabilitation">Athshlánú</string>
     <string name="poi_speech_therapist">Teiripeoir urlabhra</string>
     <string name="poi_healthcare_yes">Saoráid leighis</string>
@@ -579,7 +579,7 @@
     <string name="poi_horse_racing">Rásaíocht capall</string>
     <string name="poi_ice_skating">Scátáil oighir</string>
     <string name="poi_paddle_tennis">Leadóg paddle</string>
-    <string name="poi_paragliding">Paragliding</string>
+    <string name="poi_paragliding">Parafaoileoireacht</string>
     <string name="poi_pelota">Liathróid</string>
     <string name="poi_rugby_union">Aontas rugbaí</string>
     <string name="poi_rugby_league">Sraith rugbaí</string>
@@ -626,9 +626,9 @@
     <string name="poi_religion_christian">Críostaíocht</string>
     <string name="poi_religion_unitarian_universalist">Uilíochas Úinitéireach</string>
     <string name="poi_religion_multifaith">MultifaithName</string>
-    <string name="poi_religion_jain">Jainism</string>
+    <string name="poi_religion_jain">Jaineachas</string>
     <string name="poi_religion_spiritualist">Spioradáltacht</string>
-    <string name="poi_religion_bahai">Bahaism</string>
+    <string name="poi_religion_bahai">Bahachas</string>
     <string name="poi_religion_tenrikyo">TenrikyoName</string>
     <string name="poi_denomination_orthodox">Ceartchreidmheach</string>
     <string name="poi_denomination_sunni">SunniName</string>
@@ -2116,7 +2116,7 @@
     <string name="poi_historic_ship">Long stairiúil</string>
     <string name="poi_historic_mine">Mianach stairiúil</string>
     <string name="poi_attraction_amusement_ride">Turas siamsaíochta</string>
-    <string name="poi_religion_zoroastrian">Zoroastrism</string>
+    <string name="poi_religion_zoroastrian">Zoroastrianism</string>
     <string name="poi_denomination_catholic">Caitliceach</string>
     <string name="poi_denomination_mennonite">Mennonite</string>
     <string name="poi_denomination_quaker">An Cheathrú Rua</string>
@@ -2915,7 +2915,7 @@
     <string name="poi_bicycle_transport">Iompar rothar</string>
     <string name="poi_aerialway_transport">Iompar ón aer</string>
     <string name="poi_node_networks">Nóid líonra siúil / rothaíochta</string>
-    <string name="poi_hiking_routes">Bealaí siúil</string>
+    <string name="poi_hiking_routes">Bealaí fánaíochta</string>
     <string name="poi_traffic_enforcement">Forfheidhmiú tráchta</string>
     <string name="poi_man_made">Fear déanta</string>
     <string name="poi_transport_construction">Tógáil iompair</string>
@@ -3041,7 +3041,7 @@
     <string name="poi_customs">Custaim</string>
     <string name="poi_locality">Ceantar</string>
     <string name="poi_occupational_therapist">Teiripeoir saothair</string>
-    <string name="poi_optometrist">Optometrist</string>
+    <string name="poi_optometrist">Radharceolaí</string>
     <string name="poi_psychotherapist">Síciteiripeoir</string>
     <string name="poi_petroleum_well">Tobar peitriliam</string>
     <string name="poi_courthouse">Teach na Cúirte</string>
@@ -3066,11 +3066,11 @@
     <string name="poi_lean_to">Lean-go; Foscadh</string>
     <string name="poi_religion_jewish">Giúdachas</string>
     <string name="poi_religion_muslim">Ioslam</string>
-    <string name="poi_religion_sikh">Sikhism</string>
+    <string name="poi_religion_sikh">Suíceachas</string>
     <string name="poi_religion_buddhist">Búdachas</string>
     <string name="poi_religion_hindu">Hiondúchas</string>
     <string name="poi_religion_shinto">ShintoName</string>
-    <string name="poi_religion_taoist">Taoism</string>
+    <string name="poi_religion_taoist">Taochas</string>
     <string name="poi_denomination_roman_catholic">Caitliceach Rómhánach</string>
     <string name="poi_denomination_protestant">Protastúnach</string>
     <string name="poi_denomination_evangelical">Soiscéalach</string>
@@ -4904,7 +4904,6 @@
     <string name="poi_route_activity_type_touring_motorcycling">Gluaisrothar Camchuairte</string>
     <string name="poi_route_activity_type_track_racing">Rásaíocht Rian</string>
     <string name="poi_route_activity_type_backpacking">Taisteal le mála droma</string>
-    <string name="poi_route_activity_type_hiking">Sléibhteoireacht</string>
     <string name="poi_route_activity_type_hill_climbing">Cnocadóireacht</string>
     <string name="poi_route_activity_type_trail_running">Conaire Rith</string>
     <string name="poi_route_activity_type_trekking">Turas sléibhteoireachta</string>
@@ -4912,7 +4911,6 @@
     <string name="poi_route_activity_type_ice_skating">Scátáil Oighir</string>
     <string name="poi_route_activity_type_snowshoeing">Ag cruadhadh sneachta</string>
     <string name="poi_route_activity_type_e_biking">R-Rothar</string>
-    <string name="poi_route_activity_type_road_cycling">Rothaíocht bóthair</string>
     <string name="poi_route_activity_type_touring">Camchuairt</string>
     <string name="poi_route_activity_type_kayak">Cadhc</string>
     <string name="poi_route_activity_type_surfing">Surfáil</string>
@@ -4922,9 +4920,7 @@
     <string name="poi_route_activity_type_snowboarding">Clár sneachta</string>
     <string name="poi_route_activity_type_ultralight_aviation">Eitlíochta Ultralight</string>
     <string name="poi_route_activity_type_parachuting_skydiving">Paraisiútáil (Spítumadóireacht)</string>
-    <string name="poi_route_activity_type_skiing">Ag sciáil</string>
     <string name="poi_route_activity_type_hang_gliding">Croch gliding</string>
-    <string name="poi_route_activity_type_walking">Ag siúl</string>
     <string name="poi_route_activity_type_rafting">Raftáil</string>
     <string name="poi_route_activity_type_swimming_outdoor">Snámh amuigh</string>
     <string name="poi_route_activity_type_motorboat">Bád mótair</string>
@@ -4938,7 +4934,6 @@
     <string name="poi_route_activity_type_road_motorcycling">Gluaisrothair Bóthair</string>
     <string name="poi_route_activity_type_inline_skates">Scátaí inlíne</string>
     <string name="poi_route_activity_type_adventure_motorcycling">Cluiche Gluaisrothar Eachtraíochta</string>
-    <string name="poi_route_activity_type_mountain_biking">Rothaíocht sléibhe</string>
     <string name="poi_route_activity_type_gravel_biking">Rothaíocht Ghairbhéal</string>
     <string name="poi_route_activity_type_aviation">Eitlíocht</string>
     <string name="poi_route_activity_type_snowmobiling">Gluaiseacht sneachta</string>
@@ -4975,15 +4970,9 @@
     <string name="poi_contact_website">Suíomh Gréasáin</string>
     <string name="poi_piste_type">Cineál piste</string>
     <string name="poi_lit">Soilsiú</string>
-    <string name="poi_network_foot">Líonra</string>
-    <string name="poi_network_cycling">Líonra</string>
     <string name="poi_piste_oneway">Piste ar aon nós</string>
-    <string name="poi_network_iwn">Bealach siúlóide idirnáisiúnta</string>
-    <string name="poi_network_icn">Bealach rothaíochta idirnáisiúnta</string>
-    <string name="poi_network_lcn">Bealach rothaíochta áitiúil</string>
-    <string name="poi_network_rcn">Bealach rothaíochta réigiúnach</string>
-    <string name="poi_network_ncn">Bealach náisiúnta rothaíochta</string>
-    <string name="poi_network_nwn">Bealach náisiúnta siúlóide</string>
-    <string name="poi_network_lwn">Bealach fánaíochta áitiúil</string>
-    <string name="poi_network_rwn">Bealach siúlóide réigiúnach</string>
+    <string name="poi_route_activity_type_road_cycling">Bealaí rothaíochta bóthair</string>
+    <string name="poi_route_activity_type_walking">Bealaí siúil</string>
+    <string name="poi_route_activity_type_skiing">Bealaí sciála</string>
+    <string name="poi_route_activity_type_hiking">Bealaí fánaíochta</string>
 </resources>

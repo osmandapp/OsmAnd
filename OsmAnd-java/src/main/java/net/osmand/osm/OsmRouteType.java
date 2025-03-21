@@ -83,11 +83,6 @@ public class OsmRouteType {
 		return name;
 	}
 
-	public String getNameToSearchRules() {
-		// Use HIKING as default rendering rules source for UNKNOWN.
-		return this == UNKNOWN ? OsmRouteType.HIKING.getName() : name;
-	}
-
 	public String getColor() {
 		return color;
 	}
@@ -420,6 +415,9 @@ public class OsmRouteType {
 	public static List<NetworkRouteSelector.RouteKey> getRouteKeys(Map<String, String> tags) {
 		List<NetworkRouteSelector.RouteKey> lst = new ArrayList<>();
 		for (OsmRouteType routeType : OsmRouteType.values) {
+			if (routeType == OsmRouteType.ROAD) {
+				continue; // unsupported
+			}
 			int rq = getRouteQuantity(tags, routeType);
 			for (int routeIdx = 1; routeIdx <= rq; routeIdx++) {
 				String prefix = routeType.tagPrefix + routeIdx;

@@ -330,11 +330,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			}
 		} else if (selectedGpxFile != null) {
 			onSelectedGpxFileAvailable();
-			if (FileUtils.isTempFile(app, getGpx().getPath())) {
-				GpxSelectionParams params = GpxSelectionParams.newInstance()
-						.selectedByUser().syncGroup().addToMarkers().addToHistory().saveSelection();
-				selectedGpxFile = gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), params);
-			}
 		}
 
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {

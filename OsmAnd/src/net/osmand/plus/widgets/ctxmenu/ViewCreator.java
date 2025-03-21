@@ -418,5 +418,4 @@ public class ViewCreator {
 			AndroidUiHelper.updateVisibility(tvDesc, false);
 		}
 	}
-
 }

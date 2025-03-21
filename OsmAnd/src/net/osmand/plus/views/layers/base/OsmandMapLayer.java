@@ -2,11 +2,19 @@ package net.osmand.plus.views.layers.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.MotionEvent;
@@ -35,7 +43,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -46,7 +53,16 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public abstract class OsmandMapLayer implements MapRendererViewListener {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
@@ -683,6 +699,8 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		public RotatedTileBox queriedBox;
 		public TileBoxRequest queriedRequest;
 		protected T results;
+		protected Map<QuadRect, T> displayedResults = new HashMap<>();
+		protected boolean defferedResults;
 		protected Task currentTask;
 		protected Task pendingTask;
 		private List<WeakReference<DataReadyCallback>> callbacks = new LinkedList<>();
@@ -735,6 +753,47 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 			return results;
 		}
 
+		protected T concatenateResults(@NonNull Collection<T> results) {
+			throw new UnsupportedOperationException();
+		}
+
+		@NonNull
+		public synchronized T getDisplayedResults() {
+			return concatenateResults(displayedResults.values());
+		}
+
+		public synchronized void appendDisplayedResults(@NonNull QuadRect rect, @NonNull T results) {
+			displayedResults.put(rect, results);
+		}
+
+		private synchronized void clearDisplayedResults() {
+			if (queriedBox == null && queriedRequest == null) {
+				return;
+			}
+			QuadRect boxBounds = queriedBox != null ? queriedBox.getLatLonBounds() : queriedRequest.getLatLonBounds();
+			Iterator<Map.Entry<QuadRect, T>> iterator = displayedResults.entrySet().iterator();
+			while (iterator.hasNext()) {
+				Map.Entry<QuadRect, T> entry = iterator.next();
+				QuadRect tileBounds = entry.getKey();
+				if (!tileBounds.contains(boxBounds) && !QuadRect.intersects(boxBounds, tileBounds)) {
+					iterator.remove();
+				}
+			}
+		}
+
+		public boolean isDefferedResults() {
+			return defferedResults;
+		}
+
+		public void setDefferedResults(boolean defferedResults) {
+			this.defferedResults = defferedResults;
+			if (defferedResults) {
+				getApplication().runInUIThread(() -> {
+					fireDataReadyCallback(results);
+				});
+			}
+		}
+
 		public DataReadyCallback getDataReadyCallback(@NonNull TileBoxRequest request) {
 			return new DataReadyCallback(request);
 		}
@@ -758,6 +817,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 
 		public synchronized void fireDataReadyCallback(@Nullable T results) {
+			clearDisplayedResults();
 			for (WeakReference<DataReadyCallback> callback : callbacks) {
 				DataReadyCallback c = callback.get();
 				if (c != null) {

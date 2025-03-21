@@ -3,9 +3,11 @@ package net.osmand.plus.wikivoyage.data;
 import static net.osmand.data.Amenity.REF;
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ELE_GRAPH;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SEGMENT_INDEX;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.START_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.EXTENSIONS_EXTRA_TAGS;
@@ -84,7 +86,6 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private final TravelArticle article;
     private final TravelHelper.GpxReadCallback callback;
     private final List<AmenityIndexRepository> repos;
-    private final String SEGMENT_INDEX_TAG = "route_segment_index";
 
     public TravelObfGpxFileReader(@NonNull MapActivity mapActivity,
                                   @NonNull TravelArticle article,
@@ -282,14 +283,12 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             mapRequestFilter = new BinaryMapIndexReader.SearchFilter() {
                 @Override
                 public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex mapIndex) {
-                    if ("other".equals(routeType)) {
-                        Integer routeSegment = mapIndex.getRule("route", "segment");
-                        if (routeSegment != null && types.contains(routeSegment)) {
-                            return true; // allow filter to read User GPX files
-                        }
+                    Integer osmRouteType = mapIndex.getRule(ROUTE_TYPE, routeType);
+                    if (osmRouteType != null && types.contains(osmRouteType)) {
+                        return true;
                     }
-                    Integer type = mapIndex.getRule("route_type", routeType);
-                    return type != null && types.contains(type);
+                    Integer userGpxType = mapIndex.getRule("route", "segment");
+                    return userGpxType != null && types.contains(userGpxType);
                 }
             };
         }
@@ -300,7 +299,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
                 @Override
                 public boolean accept(PoiCategory poiCategory, String s) {
-                    return subType.equals(s) || ROUTE_TRACK_POINT.equals(s);
+                    return subType.equals(s) || ROUTE_TRACK.equals(s) || ROUTE_TRACK_POINT.equals(s);
                 }
 
                 @Override
@@ -347,10 +346,11 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 continue;
             }
 
-            if (travelGpx.hasNonIndexedOsmRouteId()) {
-                repo.searchPoi(pointRequest);
-            } else {
-                repo.searchPoiByName(pointRequest);
+            if (!Algorithms.isEmpty(travelGpx.routeId)) {
+                repo.searchPoiByName(pointRequest); // indexed route_id
+            }
+            if (currentAmenities.isEmpty()) {
+                repo.searchPoi(pointRequest); // try non-indexed route_id
             }
             if (currentAmenities.isEmpty()) {
                 continue;
@@ -378,7 +378,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
             int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
-            String group = am.getAdditionalInfo(SEGMENT_INDEX_TAG);
+            String group = am.getAdditionalInfo(ROUTE_SEGMENT_INDEX);
             if (group == null) {
                 result.add(new QuadRect(x31, y31, x31, y31));
             } else {

@@ -4910,7 +4910,6 @@
     <string name="poi_route_activity_type_ultralight_aviation">Надлегка Авіація</string>
     <string name="poi_route_activity_type_inline_skates">Роликові ковзани</string>
     <string name="poi_route_activity_type_off_road">бздоріжжя</string>
-    <string name="poi_route_activity_type_hiking">Піші прогулянки</string>
     <string name="poi_route_activity_type_all_terrain_vehicle">ATV (Всюдихід)</string>
     <string name="poi_route_activity_type_truck_hgv">Вантажівка (HGV)</string>
     <string name="poi_route_activity_type_karting">картинг</string>
@@ -4920,9 +4919,7 @@
     <string name="poi_route_activity_type_motor_scooter">Моторолер</string>
     <string name="poi_route_activity_type_backpacking">Задня упаковка</string>
     <string name="poi_route_activity_type_trekking">Трекінг</string>
-    <string name="poi_route_activity_type_walking">ходьба</string>
     <string name="poi_route_activity_type_cross_country_skiing">Лижні гонки</string>
-    <string name="poi_route_activity_type_skiing">Катання на лижах</string>
     <string name="poi_route_activity_type_snowmobiling">Катання на снігоходах</string>
     <string name="poi_route_activity_type_paragliding">Політ на параплані</string>
     <string name="poi_route_activity_type_powered_paragliding_paramotoring">Моторний параплан (парамотор)</string>
@@ -4942,7 +4939,6 @@
     <string name="poi_route_activity_type_hot_air_ballooning">Політ на повітряній кулі</string>
     <string name="poi_route_activity_type_hang_gliding">Дельтапланеризм</string>
     <string name="poi_route_activity_type_fitness">Фітнес</string>
-    <string name="poi_route_activity_type_road_cycling">Шосейний велосипед</string>
     <string name="poi_route_activity_type_car">автомобіль</string>
     <string name="poi_route_activity_type_ski_touring">Лижний Туризм</string>
     <string name="poi_route_activity_type_e_biking">Електричний Велосипед</string>
@@ -4956,7 +4952,6 @@
     <string name="poi_route_activity_type_kayak">Байдарка</string>
     <string name="poi_route_activity_type_surfing">Серфінг</string>
     <string name="poi_route_activity_type_hill_climbing">Підйом на гору</string>
-    <string name="poi_route_activity_type_mountain_biking">Катання на гірських велосипедах</string>
     <string name="poi_route_activity_type_tree_climbing">Лазіння по деревах</string>
     <string name="poi_route_activity_type_drone_flying">Польоти дронів</string>
     <string name="poi_route_activity_type_parachuting_skydiving">Стрибки з парашутом</string>
@@ -4979,14 +4974,19 @@
     <string name="poi_piste_type">Типовий трек</string>
     <string name="poi_piste_oneway">Траса в один бік</string>
     <string name="poi_lit">Освітлення</string>
-    <string name="poi_network_foot">Мережа</string>
-    <string name="poi_network_iwn">Міжнародний туристичний маршрут</string>
-    <string name="poi_network_nwn">Національний туристичний маршрут</string>
-    <string name="poi_network_rwn">Обласний пішохідний маршрут</string>
-    <string name="poi_network_lwn">Місцевий пішохідний маршрут</string>
-    <string name="poi_network_icn">Міжнародний велосипедний маршрут</string>
-    <string name="poi_network_lcn">Місцевий велосипедний маршрут</string>
-    <string name="poi_network_cycling">Мережа</string>
-    <string name="poi_network_ncn">Національний веломаршрут</string>
-    <string name="poi_network_rcn">Регіональний веломаршрут</string>
+    <string name="poi_route_activity_type_hiking">Піші маршрути</string>
+    <string name="poi_route_activity_type_walking">Піші маршрути</string>
+    <string name="poi_route_activity_type_skiing">Лижні траси</string>
+    <string name="poi_route_activity_type_road_cycling">Шосейні велосипедні маршрути</string>
+    <string name="poi_network_foot">Мережа маршрутів (пішохідні)</string>
+    <string name="poi_network_iwn">Міжнародні пішохідні маршрути (IWN)</string>
+    <string name="poi_network_nwn">Національні пішохідні маршрути (NWN)</string>
+    <string name="poi_network_rwn">Регіональні пішохідні маршрути (RWN)</string>
+    <string name="poi_network_lwn">Місцеві пішохідні маршрути (LWN)</string>
+    <string name="poi_network_icn">Міжнародні велосипедні маршрути (ICN)</string>
+    <string name="poi_network_ncn">Національні велосипедні маршрути (NCN)</string>
+    <string name="poi_network_rcn">Регіональні велосипедні маршрути (RCN)</string>
+    <string name="poi_network_lcn">Місцеві велосипедні маршрути (LCN)</string>
+    <string name="poi_network_cycling">Мережа маршрутів (велосипедний)</string>
+    <string name="poi_route_activity_type_mountain_biking">MTB маршрути (маунтінбайк)</string>
 </resources>

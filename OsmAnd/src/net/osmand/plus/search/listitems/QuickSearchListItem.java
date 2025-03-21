@@ -20,14 +20,11 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
-import net.osmand.plus.utils.OsmAndFormatterParams;
-import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -131,7 +128,7 @@ public class QuickSearchListItem {
 		if (searchResult.object instanceof Amenity amenity) {
 			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
 			if (amenity.isRouteTrack()) {
-				String distance = getAmenityDistanceFormatted(amenity, app);
+				String distance = AmenityExtensionsHelper.getAmenityDistanceFormatted(amenity, app);
 				if (distance != null) {
 					if (alternateName == null) {
 						alternateName = distance;
@@ -147,23 +144,6 @@ public class QuickSearchListItem {
 		} else {
 			return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, typeName, alternateName);
 		}
-	}
-
-	@Nullable
-	public static String getAmenityDistanceFormatted(Amenity amenity, OsmandApplication app) {
-		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
-		float km = Algorithms.parseFloatSilently(distanceTag, 0);
-
-		if (km > 0) {
-			if (!distanceTag.contains(".")) {
-				// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
-				// Since 1 Apr 2025 format has been fixed to KM.D (km, with 1 fractional digit).
-				km /= 1000;
-			}
-			return OsmAndFormatter.getFormattedDistance(km * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
-		}
-
-		return null;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
@@ -227,24 +207,7 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				String res = "";
 				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
-					if (abstractPoiType instanceof PoiCategory) {
-						res = "";
-					} else if (abstractPoiType instanceof PoiFilter) {
-						PoiFilter poiFilter = (PoiFilter) abstractPoiType;
-						res = poiFilter.getPoiCategory() != null ? poiFilter.getPoiCategory().getTranslation() : "";
-
-					} else if (abstractPoiType instanceof PoiType) {
-						PoiType poiType = (PoiType) abstractPoiType;
-						res = poiType.getParentType() != null ? poiType.getParentType().getTranslation() : null;
-						if (res == null) {
-							res = poiType.getCategory() != null ? poiType.getCategory().getTranslation() : null;
-						}
-						if (res == null) {
-							res = "";
-						}
-					} else {
-						res = "";
-					}
+					res = abstractPoiType.getParentTypeName();
 				} else if (searchResult.object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
 					res = customSearchPoiFilter.getName();
 				} else if (searchResult.object instanceof SearchPoiAdditionalFilter searchPoiAdditionalFilter) {
@@ -339,8 +302,8 @@ public class QuickSearchListItem {
 		return getIcon(app, searchResult);
 	}
 
-	public static String getAmenityIconName(@NonNull Amenity amenity) {
-		return RenderingIcons.getIconNameForAmenity(amenity);
+	public static String getAmenityIconName(@NonNull Context ctx, @NonNull Amenity amenity) {
+		return RenderingIcons.getIconNameForAmenity(ctx, amenity);
 	}
 
 	@Nullable
@@ -399,7 +362,7 @@ public class QuickSearchListItem {
 						return shieldIcon;
 					}
 				}
-				String id = getAmenityIconName(amenity);
+				String id = getAmenityIconName(app, amenity);
 				Drawable icon = null;
 				if (id != null) {
 					iconId = RenderingIcons.getBigIconResourceId(id);
@@ -488,7 +451,7 @@ public class QuickSearchListItem {
 				Amenity a = (Amenity) object;
 				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
-				pointDescription.setIconName(getAmenityIconName(a));
+				pointDescription.setIconName(getAmenityIconName(app, a));
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
@@ -499,7 +462,7 @@ public class QuickSearchListItem {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
 								OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
-						pointDescription.setIconName(getAmenityIconName(amenity));
+						pointDescription.setIconName(getAmenityIconName(app, amenity));
 					}
 				} else if (pointDescription.isFavorite()) {
 					LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
@@ -582,5 +545,11 @@ public class QuickSearchListItem {
 			iconId = RenderingIcons.getBigIconResourceId(iconName);
 		}
 		return iconId > 0 ? iconId : R.drawable.mx_special_custom_category;
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

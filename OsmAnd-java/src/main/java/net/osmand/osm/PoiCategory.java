@@ -100,5 +100,10 @@ public class PoiCategory extends PoiFilter {
 		result = 88 * result + (defaultTag != null ? defaultTag.hashCode() : 0);
 		return result;
 	}
+
+	@Override
+	public String getParentTypeName() {
+		return "";
+	}
 	
 }

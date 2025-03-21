@@ -449,7 +449,8 @@ public class AmenityUIHelper extends MenuBuilder {
 			textPrefix = app.getString(R.string.poi_cuisine);
 			vl = sb.toString();
 		} else if (key.contains(Amenity.ROUTE)
-				|| key.equals(Amenity.WIKIDATA)
+				|| key.equals(Amenity.WIKI_PHOTO)
+//				|| key.equals(Amenity.WIKIDATA)  //todo approve if it is correct
 				|| key.equals(Amenity.WIKIMEDIA_COMMONS)) {
 			return null;
 		} else {
@@ -589,7 +590,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				Locale locale = new Locale(key);
 				String name = mapNames.get(key);
 
-				View amenitiesRow = createRowContainer(app, null);
+				View amenitiesRow = createRowContainer(mapActivity, null);
 				buildDetailsRow(amenitiesRow, null, name,
 						app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, locale.getDisplayLanguage()),
 						null, null, false, null);
@@ -643,6 +644,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		urls.put("ok", "https://ok.ru/%s");
 		urls.put("telegram", "https://t.me/%s");
 		urls.put("flickr", "https://flickr.com/%s");
+		urls.put("wikidata", "https://www.wikidata.org/wiki/%s");
 
 		String url = urls.get(key);
 		if (url != null) {

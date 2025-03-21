@@ -113,7 +113,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected List<OpeningHours.Info> openingHoursInfo;
 
-	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
+	public MenuController(MenuBuilder builder, PointDescription pointDescription, @NonNull MapActivity mapActivity) {
 		super(mapActivity);
 		this.pointDescription = pointDescription;
 		this.builder = builder;
@@ -188,8 +188,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				}
 			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
 				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
-			} else if (object instanceof ExploreTopPlacePoint point) {
-				menuController = new ExplorePlacesMenuController(mapActivity, pointDescription, (ExploreTopPlacePoint) object);
 			} else if (object instanceof TargetPoint) {
 				menuController = new TargetPointMenuController(mapActivity, pointDescription, (TargetPoint) object);
 			} else if (object instanceof Recording) {

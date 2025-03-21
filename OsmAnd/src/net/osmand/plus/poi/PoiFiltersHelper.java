@@ -51,12 +51,9 @@ public class PoiFiltersHelper {
 	private PoiUIFilter customPOIFilter;
 	private PoiUIFilter showAllPOIFilter;
 	private PoiUIFilter topWikiPoiFilter;
-	private PoiUIFilter topWikiOnlinePoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters = null;
-	private Set<PoiUIFilter> overwrittenSelectedPoiFilters = new TreeSet<>();
 	private Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
-	private boolean useOverwrittenFilters;
-
+	private Set<PoiUIFilter> overwrittenPoiFilters = null;
 
 	public PoiFiltersHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -469,32 +466,15 @@ public class PoiFiltersHelper {
 
 	@NonNull
 	public Set<PoiUIFilter> getSelectedPoiFilters() {
-		return useOverwrittenFilters ? overwrittenSelectedPoiFilters : selectedPoiFilters;
+		return overwrittenPoiFilters != null ? overwrittenPoiFilters : selectedPoiFilters;
 	}
 
-	public void replaceSelectedPoiFilters(PoiUIFilter filter) {
-		Set<PoiUIFilter> overwrittenSelectedPoiFilters = new TreeSet<>();
-		overwrittenSelectedPoiFilters.add(filter);
-		PoiUIFilter wiki = getTopWikiPoiFilter();
-		if (isPoiFilterSelected(wiki)) {
-			overwrittenSelectedPoiFilters.add(wiki);
-		}
-		this.overwrittenSelectedPoiFilters = overwrittenSelectedPoiFilters;
-		useOverwrittenFilters = true;
+	public void replaceSelectedPoiFilters(@NonNull PoiUIFilter filter) {
+		overwrittenPoiFilters = new TreeSet<>(Set.of(filter));
 	}
 
 	public void restoreSelectedPoiFilters() {
-		PoiUIFilter wiki = getTopWikiPoiFilter();
-		if (wiki != null) {
-			Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
-			if (isPoiFilterSelected(wiki)) {
-				selectedPoiFilters.add(wiki);
-			} else {
-				selectedPoiFilters.remove(wiki);
-			}
-			this.selectedPoiFilters = selectedPoiFilters;
-		}
-		useOverwrittenFilters = false;
+		overwrittenPoiFilters = null;
 	}
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
@@ -548,8 +528,8 @@ public class PoiFiltersHelper {
 	}
 
 	private void setSelectedPoiFilters(@NonNull Set<PoiUIFilter> filters) {
-		if (useOverwrittenFilters) {
-			overwrittenSelectedPoiFilters = filters;
+		if (overwrittenPoiFilters != null) {
+			overwrittenPoiFilters = filters;
 		} else {
 			selectedPoiFilters = filters;
 			saveSelectedPoiFilters(selectedPoiFilters);

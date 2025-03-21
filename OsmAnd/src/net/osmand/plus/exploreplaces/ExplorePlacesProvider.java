@@ -23,9 +23,6 @@ public interface ExplorePlacesProvider {
 
 	boolean isLoading();
 
-	// data version is increased once new data is downloaded
-	int getDataVersion();
-
 	boolean isLoadingRect(@NonNull QuadRect rect);
 
 	interface ExplorePlacesListener {

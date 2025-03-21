@@ -125,6 +125,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	public void updateWidgetView() {
 		if (verticalWidget) {
 			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
+			int streetNameColor = ColorUtilities.getColor(app, nightMode ? R.color.text_color_tertiary_light : R.color.icon_color_secondary_dark);
+			streetView.setTextColor(streetNameColor);
 		}
 	}
 
@@ -342,7 +344,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 		TurnType turnType = getTurnType();
 		if (turnType != null) {
-			setContentDescription(distance + " " + RouteCalculationResult.toString(turnType, app, false));
+			setContentDescription(distance + " " + RouteCalculationResult.toString(turnType, app, true));
 		} else {
 			setContentDescription(distance);
 		}
@@ -381,10 +383,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 		distanceView.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
 		distanceSubView.setTextColor(ColorUtilities.getSecondaryTextColor(mapActivity, nightMode));
-		streetView.setTextColor(ColorUtilities.getSecondaryTextColor(mapActivity, nightMode));
+
 		distanceView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 		distanceSubView.setTypeface(Typeface.DEFAULT, typefaceStyle);
-		streetView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 
 		turnDrawable.updateColors(isNightMode());
 		bg.setBackgroundResource(textState.widgetBackgroundId);

@@ -24,7 +24,9 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 		super(app);
 		this.initialLimits = initialLimits;
 		this.supportedLimits = supportedLimits;
-		this.selectedLimits = new Limits<>(initialLimits.min(), initialLimits.max());
+		int min = Math.max(initialLimits.min(), supportedLimits.min());
+		int max = Math.min(initialLimits.max(), supportedLimits.max());
+		this.selectedLimits = new Limits<>(min, max);
 	}
 
 	@NonNull
