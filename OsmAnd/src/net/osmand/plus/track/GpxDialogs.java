@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -26,7 +25,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -407,7 +405,7 @@ public class GpxDialogs {
 			if (System.currentTimeMillis() - lastUpdateTime > MIN_UPDATE_INTERVAL) {
 				updateItemsProc.run();
 			}
-			app.runMessageInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
+			app.runInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
 		}
 	}
 }
