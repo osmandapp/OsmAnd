@@ -38,8 +38,10 @@ public class SettingsSearchIntegrationTest extends AndroidTest {
 	@Rule
 	public ActivityScenarioRule<MapActivity> mActivityScenarioRule = new ActivityScenarioRule<>(MapActivity.class);
 
+	// FK-TODO: add test shouldAdaptMapStyleAfterSearch(), use "winter and ski"
+	// FK-TODO: add test shouldAdaptRoadStyleAfterSearch(), use "american road"
 	@Test
-	public void search_clickResult_selectValue_then_descriptionAdapted() {
+	public void shouldAdaptMapLanguageAfterSearch() {
 		clickSearchButton(app);
 		onView(searchView()).perform(replaceText("Afrikaans"), closeSoftKeyboard());
 		// click Driving result
