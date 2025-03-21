@@ -4977,4 +4977,19 @@
     <string name="poi_piste_type">Тип писте</string>
     <string name="poi_lit">Осветљење</string>
     <string name="poi_piste_oneway">Једносмерна писта</string>
+    <string name="poi_route_activity_type_hiking">Планинске руте</string>
+    <string name="poi_route_activity_type_mountain_biking">МТБ руте (брдски бицикл)</string>
+    <string name="poi_route_activity_type_road_cycling">Друмске бициклистичке руте</string>
+    <string name="poi_network_icn">Међународне бициклистичке руте (ИЦН)</string>
+    <string name="poi_network_lwn">Локалне пешачке руте (ЛВН)</string>
+    <string name="poi_network_lcn">Локалне бициклистичке руте (ЛЦН)</string>
+    <string name="poi_network_iwn">Међународне пешачке руте (ИВН)</string>
+    <string name="poi_network_cycling">Мрежа рута (бициклизам)</string>
+    <string name="poi_network_rwn">Регионалне пешачке руте (РВН)</string>
+    <string name="poi_network_ncn">Националне бициклистичке руте (НЦН)</string>
+    <string name="poi_network_rcn">Регионалне бициклистичке руте (РЦН)</string>
+    <string name="poi_network_nwn">Националне пешачке руте (НВН)</string>
+    <string name="poi_network_foot">Мрежа рута (пјешачење)</string>
+    <string name="poi_route_activity_type_skiing">Скијашке руте</string>
+    <string name="poi_route_activity_type_walking">Пешачке руте</string>
 </resources>
