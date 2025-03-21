@@ -21,9 +21,8 @@ import net.osmand.CallbackWithObject
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.Amenity
-import net.osmand.data.PointDescription
 import net.osmand.map.IMapLocationListener
-import net.osmand.osm.MapPoiTypes
+import net.osmand.plus.OsmAndConstants.EXPLORE_PLACES_UPDATE
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
 import net.osmand.plus.R
@@ -42,7 +41,6 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.search.core.SearchCoreFactory
-import net.osmand.search.core.SearchPhrase
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 import java.util.concurrent.Executors
@@ -68,7 +66,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private var showListContainer: View? = null
 	private var frameLayout: CoordinatorLayout? = null
 	private var lastCompassUpdate = 0L
-	private var lastPointListRectUpdate = 0L
 	private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 	private var lastHeading = 0f
 	private var showOnMapContainer: View? = null
@@ -208,10 +205,8 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun updatePoints() {
-		val now = System.currentTimeMillis()
 		val results = app.osmandMap.mapLayers.poiMapLayer.currentDisplayedResults
 		if (results != null && results != amenities) {
-			lastPointListRectUpdate = now
 			amenities = results
 
 			val callback = object : CallbackWithObject<List<QuickSearchListItem>> {
@@ -224,7 +219,8 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 				}
 			}
 			stopConvertAmenitiesTask()
-			convertAmenitiesTask = ConvertAmenitiesTask(app, results, poiUIFilter.isTopImagesFilter, callback)
+			convertAmenitiesTask =
+				ConvertAmenitiesTask(app, results, poiUIFilter.isTopImagesFilter, callback)
 			convertAmenitiesTask?.executeOnExecutor(singleThreadExecutor)
 		}
 	}
@@ -267,7 +263,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	override fun updateLocation(location: Location?) {
 		if (!MapUtils.areLatLonEqual(this.location, location)) {
 			this.location = location
-			adapter.notifyDataSetChanged()
+			updateAdapter()
 		}
 	}
 
@@ -279,8 +275,14 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		) {
 			lastHeading = heading
 			lastCompassUpdate = now
-			adapter.notifyDataSetChanged()
+			updateAdapter()
 		}
+	}
+
+	private fun updateAdapter() {
+		app.runInUIThreadAndCancelPrevious(REFRESH_UI_ID, {
+			adapter.notifyDataSetChanged()
+		}, 0)
 	}
 
 	private fun startHandler() {
@@ -351,6 +353,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 		private const val COMPASS_UPDATE_PERIOD = 300
 		private const val LIST_UPDATE_PERIOD = 1000
+		private const val REFRESH_UI_ID = EXPLORE_PLACES_UPDATE + 1
 		private const val POI_UI_FILTER_ID = "poi_ui_filter_id"
 
 		fun showInstance(manager: FragmentManager, poiUIFilter: PoiUIFilter) {

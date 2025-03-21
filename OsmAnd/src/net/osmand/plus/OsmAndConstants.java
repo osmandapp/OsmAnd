@@ -10,4 +10,5 @@ public interface OsmAndConstants {
 	int UI_HANDLER_GPS_FILTER = 8000;
 	int UI_HANDLER_WEATHER_WIDGET = 9000;
 	int UI_HANDLER_MAP_HUD = 10000;
+	int EXPLORE_PLACES_UPDATE = 11000;
 }
