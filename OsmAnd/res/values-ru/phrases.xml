@@ -2406,7 +2406,7 @@
     <string name="poi_shuffleboard">Шаффлборд</string>
     <string name="poi_lacrosse">Лакросс</string>
     <string name="poi_boxing">Бокс</string>
-    <string name="poi_official_name">Официальное имя</string>
+    <string name="poi_official_name">Официальное название</string>
     <string name="poi_dyke">Насыпь для сдерживания потока воды</string>
     <string name="poi_forestry_compartment">Указатель: квартальный столб</string>
     <string name="poi_forestry_allotment">Указатель: деляночный столб</string>
@@ -4517,4 +4517,6 @@
     <string name="poi_recycling_gas_bottles">Газовые баллоны</string>
     <string name="poi_recycling_glass_bottles_colour">Цветные стеклянные бутылки</string>
     <string name="poi_self_checkout_no">Самостоятельный выход: нет</string>
+    <string name="poi_bridge_name">Название моста</string>
+    <string name="poi_tunnel_name">Название тоннеля</string>
 </resources>
