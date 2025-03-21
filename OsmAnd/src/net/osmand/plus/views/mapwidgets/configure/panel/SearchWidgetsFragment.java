@@ -430,20 +430,9 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 	}
 
 	@Override
-	public void onStop() {
-		super.onStop();
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-	}
-
-	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
-
 	}
 
 	@Override
