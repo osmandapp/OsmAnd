@@ -209,7 +209,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	private fun updatePoints() {
 		val now = System.currentTimeMillis()
-		val results = app.osmandMap.mapLayers.poiMapLayer.currentResults
+		val results = app.osmandMap.mapLayers.poiMapLayer.currentDisplayedResults
 		if (results != null && results != amenities) {
 			lastPointListRectUpdate = now
 			amenities = results
