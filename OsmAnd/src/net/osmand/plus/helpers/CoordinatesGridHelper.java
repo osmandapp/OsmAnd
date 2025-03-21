@@ -26,6 +26,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 public class CoordinatesGridHelper {
 
@@ -269,8 +270,8 @@ public class CoordinatesGridHelper {
 	                                                     @NonNull GridFormat gridFormat) {
 		Limits<Integer> selected = getZoomLevels(appMode);
 		Limits<Integer> supported = getSupportedZoomLevels(gridFormat);
-		int min = Math.max(supported.min(), selected.min());
-		int max = Math.min(supported.max(), selected.max());
+		int min = Algorithms.clamp(selected.min(), supported.min(), supported.max());
+		int max = Algorithms.clamp(selected.max(), supported.min(), supported.max());
 		return new Limits<>(min, max);
 	}
 

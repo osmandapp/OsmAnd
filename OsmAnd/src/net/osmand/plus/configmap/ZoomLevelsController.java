@@ -9,6 +9,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.util.Algorithms;
 
 public abstract class ZoomLevelsController extends BaseDialogController {
 
@@ -24,8 +25,8 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 		super(app);
 		this.initialLimits = initialLimits;
 		this.supportedLimits = supportedLimits;
-		int min = Math.max(initialLimits.min(), supportedLimits.min());
-		int max = Math.min(initialLimits.max(), supportedLimits.max());
+		int min = Algorithms.clamp(initialLimits.min(), supportedLimits.min(), supportedLimits.max());
+		int max = Algorithms.clamp(initialLimits.max(), supportedLimits.min(), supportedLimits.max());
 		this.selectedLimits = new Limits<>(min, max);
 	}
 
