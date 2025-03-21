@@ -255,6 +255,15 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 				return res;
             }
+
+			@Override
+			protected List<Amenity> concatenateResults(@NonNull Collection<List<Amenity>> results) {
+				List<Amenity> res = new ArrayList<>();
+				for (List<Amenity> list : results) {
+					res.addAll(list);
+				}
+				return res;
+			}
 		};
 	}
 
@@ -475,7 +484,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> result) {
-		List<Amenity> objects = data.getResults();
+		List<Amenity> objects = data.getDisplayedResults();
 		if (tb.getZoom() >= START_ZOOM && !Algorithms.isEmpty(objects)) {
 			MapRendererView mapRenderer = getMapRenderer();
 			float radius = getScaledTouchRadius(view.getApplication(), getRadiusPoi(tb)) * TOUCH_RADIUS_MULTIPLIER;

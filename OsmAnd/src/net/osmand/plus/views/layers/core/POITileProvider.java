@@ -41,6 +41,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.TileBoxRequest;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class POITileProvider extends interface_MapTiledCollectionProvider {
@@ -246,6 +247,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 				MapUtils.get31LongitudeX(extTileBBox31.getBottomRight().getX()),
 				MapUtils.get31LatitudeY(extTileBBox31.getBottomRight().getY()));
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
+		List<Amenity> displayedPoints = new ArrayList<>();
 		int i = 0;
 		for (Amenity amenity : results) {
 			LatLon latLon = amenity.getLocation();
@@ -256,12 +258,14 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 					POICollectionPoint point = new POICollectionPoint(ctx, amenity, textScale);
 					res.add(point.instantiateProxy(true));
 					point.swigReleaseOwnership();
+					displayedPoints.add(amenity);
 				}
 				if (i++ > TILE_POINTS_LIMIT) {
 					break;
 				}
 			}
 		}
+		layerData.appendDisplayedResults(latLonBounds, displayedPoints);
 		return res;
 	}
 
