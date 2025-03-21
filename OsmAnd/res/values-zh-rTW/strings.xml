@@ -5716,4 +5716,6 @@
     <string name="meridian_180">180度經線</string>
     <string name="release_5_0">• 使用新的探索模式發現排名最高的 POI\n\n • 所有 OSM 路線，現在都可搜尋！遠足、腳踏車、山地雙輪車等等\n\n • 新導航小工具結合轉彎箭頭與導航指示\n\n • 目前路線資訊小工具：預計抵達時間、抵達時間與距離\n\n • 在地圖上選擇滑雪場與山地雙輪車賽道，以取得詳細資訊\n\n • 可選擇左右面板的小工具大小\n\n • 新增有地理座標的座標網格\n\n • 新增自訂最愛群組預設外觀的功能\n\n • Android Auto：檢視到下一個航點的的預計抵達時間與距離；城市名稱現在會顯示在搜尋結果中\n\n • 現在可透過地圖與搜尋發現著名的山峰\n\n • 以英呎為單位的山峰高度\n\n • 新增：地圖上的峭壁與攀登區域\n\n • 改進了在美國的地址搜尋\n\n • 新增希伯來語文字轉語音導航功能</string>
     <string name="equator">赤道</string>
+    <string name="shared_string_online_only">僅線上</string>
+    <string name="shared_string_offline_only">僅離線</string>
 </resources>
