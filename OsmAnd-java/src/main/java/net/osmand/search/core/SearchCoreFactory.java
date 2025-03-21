@@ -33,6 +33,7 @@ import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
@@ -802,6 +803,12 @@ public class SearchCoreFactory {
 				if (nmAdditional != null) {
 					addAditonals(nmAdditional, results, c);
 				}
+				for (PoiFilter pf : c.getPoiFilters()) {
+					PoiTypeResult filtRes = checkPoiType(nm, pf);
+					if (filtRes != null) {
+						results.put(filtRes.pt.getKeyName(), filtRes);
+					}
+				}
 			}
 			Map<String, PoiTypeResult> additionals = new LinkedHashMap<>();
 			Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
@@ -840,10 +847,9 @@ public class SearchCoreFactory {
 						existingResult.pt = f;
 					} else {
 						String enTranslation = a.getEnTranslation().toLowerCase();
-						if (!"no".equals(enTranslation) // && !"yes".equals(enTranslation)
-						) {
+						if (!"no".equals(enTranslation) ) {
 							PoiTypeResult ptr = checkPoiType(nm, a);
-							if (ptr != null) {
+							if (ptr != null && ptr.pt != null && ptr.pt.isTopVisible()) {
 								results.put(a.getKeyName(), ptr);
 							}
 						}
