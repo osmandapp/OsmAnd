@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -158,8 +159,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 		setupToolbar();
 		setupTabLayout();
-		toggleEditMode(isEditMode);
 		setupApplyButton();
+		updateScreen();
 
 		return view;
 	}
@@ -301,104 +302,80 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		SearchWidgetsFragment.showInstance(requireMapActivity(), selectedPanel, ConfigureWidgetsFragment.this);
 	}
 
-	private void toggleEditMode(boolean editMode) {
-		isEditMode = editMode;
-		adjustViewPagerHeight();
-
+	private void updateScreen() {
 		AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
 		params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
 		if (isEditMode) {
-			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
-			appBar.setExpanded(true, true);
 			bottomButtons.setVisibility(View.VISIBLE);
 			bottomButtonsShadow.setVisibility(View.VISIBLE);
 
-			if (isDisableAnimations()) {
-				tabLayout.setVisibility(View.GONE);
-			} else {
-				bottomButtons.setTranslationY(bottomButtons.getHeight());
-				bottomButtonsShadow.setTranslationY(bottomButtons.getHeight() - bottomButtonsShadow.getHeight());
-				appBar.setElevation(0f);
-				tabLayout.animate()
-						.translationY(-tabLayout.getHeight())
-						.alpha(0f)
-						.setDuration(ANIMATION_DURATION)
-						.withEndAction(() -> tabLayout.setVisibility(View.INVISIBLE))
-						.start();
+			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
+			appBar.setExpanded(true, true);
 
-				viewPager.animate()
-						.translationY(-tabLayout.getHeight())
-						.setDuration(ANIMATION_DURATION)
-						.start();
-
-				shadowView.animate()
-						.translationY(-tabLayout.getHeight())
-						.setDuration(ANIMATION_DURATION)
-						.start();
-
-				bottomButtons.animate()
-						.translationY(0)
-						.alpha(1f)
-						.setDuration(ANIMATION_DURATION)
-						.withEndAction(() -> bottomButtons.setVisibility(View.VISIBLE))
-						.start();
-
-				bottomButtonsShadow.animate()
-						.translationY(0)
-						.alpha(1f)
-						.setDuration(ANIMATION_DURATION)
-						.withEndAction(() -> bottomButtonsShadow.setVisibility(View.VISIBLE))
-						.start();
-			}
+			tabLayout.setClickable(false);
+			tabLayout.setFocusable(false);
 		} else {
-			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
 			tabLayout.setVisibility(View.VISIBLE);
-			if (!isDisableAnimations()) {
-				tabLayout.animate()
-						.translationY(0)
-						.alpha(1f)
-						.setDuration(ANIMATION_DURATION)
-						.withEndAction(() -> appBar.setElevation(getResources().getDimension(R.dimen.abp__shadow_height)))
-						.start();
-				viewPager.animate()
-						.translationY(0)
-						.setDuration(ANIMATION_DURATION)
-						.start();
 
-				shadowView.animate()
-						.translationY(0)
-						.setDuration(ANIMATION_DURATION)
-						.start();
-
-				bottomButtons.animate()
-						.translationY(bottomButtons.getHeight())
-						.alpha(0f)
-						.setDuration(ANIMATION_DURATION)
-						.withEndAction(() -> bottomButtons.setVisibility(View.INVISIBLE))
-						.start();
-
-				bottomButtonsShadow.animate()
-						.translationY(bottomButtons.getHeight() - bottomButtonsShadow.getHeight())
-						.alpha(0f)
-						.setDuration(ANIMATION_DURATION)
-						.withEndAction(() -> bottomButtonsShadow.setVisibility(View.INVISIBLE))
-						.start();
-			} else {
-				bottomButtons.setVisibility(View.GONE);
-				bottomButtonsShadow.setVisibility(View.GONE);
-			}
+			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
+			tabLayout.setClickable(true);
+			tabLayout.setFocusable(true);
 		}
 
-		AndroidUiHelper.updateVisibility(bottomButtonsShadow, isEditMode);
 		updateFabPosition(isEditMode);
 		viewPager.setUserInputEnabled(!isEditMode);
 		updateToolbar();
 	}
 
-	private void adjustViewPagerHeight() {
-		ViewGroup.LayoutParams params = viewPager.getLayoutParams();
-		params.height = params.height + tabLayout.getHeight();
-		viewPager.setLayoutParams(params);
+	private void animateOnUpdateEditMode() {
+		if (isEditMode) {
+			if (isDisableAnimations()) {
+				tabLayout.setVisibility(View.GONE);
+				shadowView.setVisibility(View.GONE);
+			} else {
+				bottomButtons.setTranslationY(bottomButtons.getHeight());
+				bottomButtonsShadow.setTranslationY(bottomButtons.getHeight() - bottomButtonsShadow.getHeight());
+				appBar.setElevation(0f);
+
+				animateView(tabLayout, -tabLayout.getHeight(), false, () -> tabLayout.setVisibility(View.INVISIBLE));
+				animateView(viewPager, -tabLayout.getHeight(), null, null);
+				animateView(shadowView, -tabLayout.getHeight(), null, null);
+				animateView(bottomButtons, 0, true, () -> bottomButtons.setVisibility(View.VISIBLE));
+				animateView(bottomButtonsShadow, 0, true, () -> bottomButtonsShadow.setVisibility(View.VISIBLE));
+			}
+		} else {
+			if (isDisableAnimations()) {
+				shadowView.setVisibility(View.VISIBLE);
+				bottomButtons.setVisibility(View.GONE);
+				bottomButtonsShadow.setVisibility(View.GONE);
+			} else {
+				animateView(tabLayout, 0, true, () -> appBar.setElevation(getResources().getDimension(R.dimen.abp__shadow_height)));
+				animateView(viewPager, 0, null, null);
+				animateView(shadowView, 0, null, null);
+				animateView(bottomButtons, bottomButtons.getHeight(), false, () -> bottomButtons.setVisibility(View.INVISIBLE));
+				animateView(bottomButtonsShadow, bottomButtons.getHeight() - bottomButtonsShadow.getHeight(), false, () -> bottomButtonsShadow.setVisibility(View.INVISIBLE));
+			}
+		}
+	}
+
+	private void toggleEditMode(boolean editMode) {
+		isEditMode = editMode;
+		updateScreen();
+		animateOnUpdateEditMode();
+	}
+
+	private void animateView(View view, int translationY, @Nullable Boolean show, @Nullable Runnable endAction) {
+		ViewPropertyAnimator propertyAnimator = view.animate();
+		propertyAnimator.translationY(translationY)
+				.setDuration(ANIMATION_DURATION);
+
+		if (show != null) {
+			propertyAnimator.alpha(show ? 1f : 0f);
+		}
+		if (endAction != null) {
+			propertyAnimator.withEndAction(endAction);
+		}
+		propertyAnimator.start();
 	}
 
 	private void updateFabPosition(boolean isEditing) {

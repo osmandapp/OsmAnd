@@ -34,7 +34,6 @@ import net.osmand.plus.views.mapwidgets.configure.panel.holders.AddPageViewHolde
 import net.osmand.plus.views.mapwidgets.configure.panel.holders.DividerViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.panel.holders.EmptyStateViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.panel.holders.PageViewHolder;
-import net.osmand.plus.views.mapwidgets.configure.panel.holders.ShadowViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.panel.holders.SpaceViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.panel.holders.WidgetViewHolder;
 
@@ -50,7 +49,6 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	public static final int VIEW_TYPE_ADD_PAGE = 3;
 	public static final int VIEW_TYPE_SPACE = 4;
 	public static final int VIEW_TYPE_EMPTY_STATE = 5;
-	public static final int VIEW_TYPE_SHADOW = 6;
 
 	private final List<Object> items = new ArrayList<>();
 	private final List<Object> itemsBeforeAction = new ArrayList<>();
@@ -287,10 +285,6 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 				yield new AddPageViewHolder(addPageView);
 			}
 			case VIEW_TYPE_SPACE -> new SpaceViewHolder(new View(mapActivity));
-			case VIEW_TYPE_SHADOW -> {
-				View shadowViewHolder = inflater.inflate(R.layout.card_bottom_divider, parent, false);
-				yield new ShadowViewHolder(shadowViewHolder);
-			}
 			case VIEW_TYPE_EMPTY_STATE -> {
 				View emptyStateView = inflater.inflate(R.layout.widgets_list_empty_state, parent, false);
 				yield new EmptyStateViewHolder(emptyStateView);
@@ -495,6 +489,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	public static class WidgetItem {
 		public MapWidgetInfo mapWidgetInfo;
 		public boolean showBottomDivider = false;
+		public boolean showBottomShadow = false;
 
 		public WidgetItem(@NonNull MapWidgetInfo mapWidgetInfo) {
 			this.mapWidgetInfo = mapWidgetInfo;
@@ -508,12 +503,13 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			WidgetItem that = (WidgetItem) obj;
 
 			return showBottomDivider == that.showBottomDivider &&
+					showBottomShadow == that.showBottomShadow &&
 					Objects.equals(mapWidgetInfo, that.mapWidgetInfo);
 		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(mapWidgetInfo, showBottomDivider);
+			return Objects.hash(mapWidgetInfo, showBottomDivider, showBottomShadow);
 		}
 	}
 }

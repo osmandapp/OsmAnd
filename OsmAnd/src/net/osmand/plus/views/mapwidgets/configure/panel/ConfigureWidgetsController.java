@@ -4,6 +4,7 @@ import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetInfoBase
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetInfoBaseFragment.KEY_WIDGET_ID;
 
 import android.os.Bundle;
+import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +29,7 @@ public class ConfigureWidgetsController implements IDialogController {
 	public static final String PROCESS_ID = "configure_widgets_controller";
 
 	private MapWidgetInfo addedWidget;
-	private List<Object> reorderList;
+	private final SparseArray<List<Object>> reorderList = new SparseArray<>();
 
 	@Nullable
 	public MapWidgetInfo getAddedWidget() {
@@ -68,12 +69,12 @@ public class ConfigureWidgetsController implements IDialogController {
 		}
 	}
 
-	public List<Object> getReorderList() {
-		return reorderList;
+	public List<Object> getReorderList(int panelIndex) {
+		return reorderList.get(panelIndex);
 	}
 
-	public void setReorderList(@NonNull List<Object> reorderList) {
-		this.reorderList = reorderList;
+	public void setReorderList(@NonNull List<Object> reorderList, int panelIndex) {
+		this.reorderList.put(panelIndex, reorderList);
 	}
 
 }

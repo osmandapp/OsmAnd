@@ -32,6 +32,7 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder {
 	private final AppCompatImageView moveIcon;
 	private final View bottomDivider;
 	private final View selectableBackground;
+	private final View bottomShadow;
 
 	public WidgetViewHolder(@NonNull OsmandApplication app, @NonNull ApplicationMode selectedAppMode, @NonNull View itemView) {
 		super(itemView);
@@ -41,6 +42,7 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder {
 		moveIcon = itemView.findViewById(R.id.move_icon);
 		bottomDivider = itemView.findViewById(R.id.bottom_divider);
 		selectableBackground = itemView.findViewById(R.id.selectable_widget_background);
+		bottomShadow = itemView.findViewById(R.id.bottom_shadow);
 
 		boolean disableAnimation = app.getSettings().DO_NOT_USE_ANIMATIONS.getModeValue(selectedAppMode);
 		if (disableAnimation) {
@@ -74,6 +76,7 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder {
 
 	public void updateDivider(@NonNull WidgetItem widgetItem) {
 		bottomDivider.setVisibility(widgetItem.showBottomDivider ? View.VISIBLE : View.INVISIBLE);
+		bottomShadow.setVisibility(widgetItem.showBottomShadow ? View.VISIBLE : View.GONE);
 	}
 
 	@SuppressLint("ClickableViewAccessibility")

@@ -8,7 +8,6 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.isComplexWidget;
 import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.VIEW_TYPE_ADD_PAGE;
 import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.VIEW_TYPE_DIVIDER;
 import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.VIEW_TYPE_EMPTY_STATE;
-import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.VIEW_TYPE_SHADOW;
 import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.VIEW_TYPE_SPACE;
 
 import android.os.Bundle;
@@ -117,7 +116,14 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 			recyclerView.setItemAnimator(null);
 		}
 
-		updateWidgetItems(originalWidgetsData);
+		if (isEditMode()) {
+			List<Object> savedList = controller.getReorderList(selectedPanel.ordinal());
+			if (!Algorithms.isEmpty(savedList)) {
+				updateAdapter(new ArrayList<>(savedList), false);
+			}
+		} else {
+			updateWidgetItems(originalWidgetsData);
+		}
 	}
 
 	@Override
@@ -133,7 +139,9 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 	@Override
 	public void onPause() {
 		super.onPause();
-
+		if (isEditMode()) {
+			controller.setReorderList(adapter.getItems(), selectedPanel.ordinal());
+		}
 		Fragment fragment = getParentFragment();
 		if (fragment instanceof ConfigureWidgetsFragment) {
 			((ConfigureWidgetsFragment) fragment).setSelectedFragment(null);
@@ -232,9 +240,6 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(SELECTED_PANEL_KEY, selectedPanel.name());
-		if (isEditMode()) {
-			controller.setReorderList(adapter.getItems());
-		}
 	}
 
 	@NonNull
@@ -396,7 +401,6 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 		if (isEmpty) {
 			items.add(VIEW_TYPE_DIVIDER);
 			items.add(VIEW_TYPE_EMPTY_STATE);
-			items.add(VIEW_TYPE_SHADOW);
 			return items;
 		}
 
@@ -415,7 +419,6 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 			}
 
 			items.add(VIEW_TYPE_ADD_PAGE);
-			items.add(VIEW_TYPE_SHADOW);
 			items.add(VIEW_TYPE_SPACE);
 		} else {
 			items.add(VIEW_TYPE_DIVIDER);
@@ -431,7 +434,6 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 				pageNumber++;
 			}
 
-			items.add(VIEW_TYPE_SHADOW);
 			items.add(VIEW_TYPE_SPACE);
 		}
 		return items;
@@ -476,11 +478,18 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 
 			} else if (object instanceof WidgetItem widgetItem) {
 				boolean showDivider = false;
+				boolean showBottomShadow = false;
 				int nextItemIndex = position + 1;
-				if (newItems.size() > nextItemIndex && newItems.get(nextItemIndex) instanceof WidgetItem) {
-					showDivider = true;
+				if (newItems.size() > nextItemIndex) {
+					if (newItems.get(nextItemIndex) instanceof WidgetItem) {
+						showDivider = true;
+					} else if (newItems.get(nextItemIndex) instanceof Integer integer
+							&& integer == VIEW_TYPE_SPACE) {
+						showBottomShadow = true;
+					}
 				}
 				widgetItem.showBottomDivider = showDivider;
+				widgetItem.showBottomShadow = showBottomShadow;
 			}
 		}
 		return newItems;
@@ -657,7 +666,8 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 				if (!Objects.equals(oldWidget.mapWidgetInfo, newWidget.mapWidgetInfo)) {
 					payloads.add(PAYLOAD_UPDATE_ALL);
 				}
-				if (oldWidget.showBottomDivider != newWidget.showBottomDivider) {
+				if ((oldWidget.showBottomDivider != newWidget.showBottomDivider)
+						|| (oldWidget.showBottomShadow != newWidget.showBottomShadow)) {
 					payloads.add(PAYLOAD_DIVIDER_STATE_CHANGED);
 				}
 			}
