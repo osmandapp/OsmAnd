@@ -128,6 +128,10 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		if (!::filter.isInitialized) {
+			dismiss()
+			return
+		}
 		setupToolbar(view)
 		setupList(view)
 		setupBottomMenu(view)
@@ -290,7 +294,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	private fun updateUI() {
-		app.runInUIThread{
+		app.runInUIThread {
 			resetAllButton?.isEnabled = filter.appliedFiltersCount > 0
 			var filteredItemsCount = 0
 			if (filter.filteredTrackItems?.size != null) {
@@ -298,7 +302,9 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			}
 			showButton?.setTitle(
 				app.getString(R.string.shared_string_show) + " " +
-						String.format(app.getString(R.string.number_in_breckets), filteredItemsCount))
+						String.format(
+							app.getString(R.string.number_in_breckets),
+							filteredItemsCount))
 		}
 	}
 
@@ -334,7 +340,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	private fun updateProgressVisibility(visible: Boolean) {
-		app.runInUIThread{
+		app.runInUIThread {
 			AndroidUiHelper.setVisibility(
 				if (visible) View.VISIBLE else View.GONE, progressBar)
 		}
