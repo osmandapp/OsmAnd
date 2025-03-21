@@ -142,7 +142,7 @@
     <string name="upload_all">Luchdaich suas uile</string>
     <string name="import_export">Steach-ghluais/mach-ghluais</string>
     <string name="shared_string_open">Fosgail</string>
-    <string name="open_weather_action">Fosgail aimsir</string>
+    <string name="open_weather_action">Fosgail sìde</string>
     <string name="map_widget_group_sunrise_sunset">Èiridh / dol fodha na grèine</string>
     <string name="temperature_layer">Filleadh teòthachd</string>
     <string name="pressure_layer">Filleadh bruthaidh</string>
@@ -446,4 +446,17 @@
     <string name="backup_do_not_have_any">Chan eil lethbhreac-glèidhidh agad fhathast</string>
     <string name="open_wikipedia_link_online">Fosgail ceangal na h-Uicipeid air-loidhne</string>
     <string name="poi_filter_namefinder">NameFinder air-loidhne</string>
+    <string name="offline_cache">Tasgadan far-loidhne</string>
+    <string name="offline_wikipeadia">Uicipeid far-loidhne</string>
+    <string name="wikipedia_and_wikivoyage_offline">Uicipeid agus Wikivoyage far-loidhne</string>
+    <string name="osm_editing_prefs_descr">Log a-steach, facal-faire, deasaichadh far-loidhne</string>
+    <string name="routing_profile_broutrer">BRouter (far-loidhne)</string>
+    <string name="meridian_180">180mh meadhan-loidhne</string>
+    <string name="calculate_offline">Obraich a-mach far-loidhne</string>
+    <string name="read_wikipedia_offline">Leugh Uicipeid far-loidhne</string>
+    <string name="explore_wikipedia_offline">Rannsaich Uicipeid far-loidhne.</string>
+    <string name="wikivoyage_offline">Wikivoyage far-loidhne</string>
+    <string name="offline_weather_forecast">Tuairmse sìde far-loidhne</string>
+    <string name="offline_wikivoyage">Wikivoyage far-loidhne</string>
+    <string name="wikipedia_offline">Uicipeid far-loidhne</string>
 </resources>
