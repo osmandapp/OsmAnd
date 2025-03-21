@@ -71,7 +71,7 @@
     <string name="shared_string_hour_short">ч</string>
     <string name="shared_string_minute_short">мин</string>
     <string name="shared_string_second_short">сек</string>
-    <string name="shared_string_name">Имя</string>
+    <string name="shared_string_name">Название</string>
     <string name="by_distance">По расстоянию</string>
     <string name="by_name">По имени</string>
     <string name="by_group">По группе</string>
