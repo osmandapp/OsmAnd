@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
 public class SettingsSearchIntegrationTest extends AndroidTest {
 
 	@Rule
-	public ActivityScenarioRule<MapActivity> mActivityScenarioRule = new ActivityScenarioRule<>(MapActivity.class);
+	public ActivityScenarioRule<MapActivity> activityScenarioRule = new ActivityScenarioRule<>(MapActivity.class);
 
 	// FK-TODO: add test shouldAdaptMapStyleAfterSearch(), use "winter and ski"
 	// FK-TODO: add test shouldAdaptRoadStyleAfterSearch(), use "american road"
@@ -45,6 +45,7 @@ public class SettingsSearchIntegrationTest extends AndroidTest {
 		clickSearchButton(app);
 		onView(searchView()).perform(replaceText("Afrikaans"), closeSoftKeyboard());
 		// click Driving result
+		// FK-TODO: refactor usage of 2
 		onView(searchResultsView()).perform(actionOnItemAtPosition(2, click()));
 		afrikaansItem().perform(click());
 		applyButton().perform(scrollTo(), click());

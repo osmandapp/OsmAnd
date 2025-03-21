@@ -1038,7 +1038,7 @@ public class SettingsSearchTest extends AndroidTest {
 	}
 
 	@Rule
-	public ActivityScenarioRule<MapActivity> mActivityScenarioRule = new ActivityScenarioRule<>(MapActivity.class);
+	public ActivityScenarioRule<MapActivity> activityScenarioRule = new ActivityScenarioRule<>(MapActivity.class);
 
 	@Test
 	public void testSearchAndFind() {
