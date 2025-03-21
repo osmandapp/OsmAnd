@@ -5418,8 +5418,8 @@
     <string name="hugerock_promo_description">Accès gratuit à des fonctionnalités comme les téléchargements illimités de cartes, le relief 3D, etc. pendant %1$s mois</string>
     <string name="shared_string_automatically">Automatiquement</string>
     <string name="ask_every_time">Demander à chaque fois</string>
-    <string name="detailed_track_guidance">Navigation détaillée sur la trace</string>
-    <string name="detailed_track_guidance_description">Pour améliorer votre navigation, OsmAnd va déplacer la trace sur les routes.</string>
+    <string name="detailed_track_guidance">Guide détaillé du parcours</string>
+    <string name="detailed_track_guidance_description">OsmAnd associe votre itinéraire aux routes voisines pour un meilleur guidage virage par virage.</string>
     <string name="quick_action_routes_summary">Un interrupteur pour afficher ou masquer %1$s sur la carte.</string>
     <string name="compass_click_north_is_up">Pour modifier le mode d\'orientation, faites un appui long</string>
     <string name="route_roundabout_exit">Prendre la sortie %1$d</string>
