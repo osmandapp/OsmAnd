@@ -179,7 +179,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		final ConfigureMapMenu.DialogsAndAdapter dialogsAndAdapter =
 				menu.createListAdapter(
 						mapActivity,
-						Optional.of(this),
 						app.getRendererRegistry().getRenderer(settings.RENDERER.getModeValue(appMode)));
 		adapter = dialogsAndAdapter.adapter();
 		dialogs = dialogsAndAdapter.dialogs();

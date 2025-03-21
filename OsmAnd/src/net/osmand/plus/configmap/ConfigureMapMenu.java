@@ -73,7 +73,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.util.*;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ConfigureMapMenu {
@@ -112,15 +111,13 @@ public class ConfigureMapMenu {
 	}
 
 	@NonNull
-	public ContextMenuAdapter createListAdapter(final @NonNull MapActivity mapActivity,
-												final Optional<OnDataChangeUiAdapter> uiAdapter) {
+	public ContextMenuAdapter createListAdapter(final @NonNull MapActivity mapActivity) {
 		return this
-				.createListAdapter(mapActivity, uiAdapter, app.getRendererRegistry().getCurrentSelectedRenderer())
+				.createListAdapter(mapActivity, app.getRendererRegistry().getCurrentSelectedRenderer())
 				.adapter();
 	}
 
 	public DialogsAndAdapter createListAdapter(final @NonNull MapActivity mapActivity,
-											   final Optional<OnDataChangeUiAdapter> uiAdapter,
 											   final RenderingRulesStorage renderer) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
@@ -134,7 +131,7 @@ public class ConfigureMapMenu {
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
 		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
-		final Dialogs dialogs = createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode, uiAdapter);
+		final Dialogs dialogs = createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
 		return new DialogsAndAdapter(dialogs, adapter);
 	}
 
@@ -481,8 +478,7 @@ public class ConfigureMapMenu {
 	private Dialogs createRenderingAttributeItems(final List<RenderingRuleProperty> customRules,
 												  final ContextMenuAdapter adapter,
 												  final MapActivity activity,
-												  final boolean nightMode,
-												  final Optional<OnDataChangeUiAdapter> uiAdapter) {
+												  final boolean nightMode) {
 		adapter.addItem(new ContextMenuItem(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true)
 				.setLayout(R.layout.list_group_title_with_switch)
@@ -555,8 +551,7 @@ public class ConfigureMapMenu {
 						R.drawable.ic_action_intersection,
 						ROAD_STYLE_ATTR,
 						ROAD_STYLE_ID,
-						nightMode,
-						uiAdapter);
+						nightMode);
 		ContextMenuItem props =
 				roadStyleItemAndDialog
 						.map(ItemAndDialog::item)
@@ -578,7 +573,7 @@ public class ConfigureMapMenu {
 				})
 				.setItemDeleteAction(settings.TEXT_SCALE));
 
-		final MapLanguageItemAndDialog mapLanguageItemAndDialog = createMapLanguageItemAndDialog(activity, nightMode, uiAdapter);
+		final MapLanguageItemAndDialog mapLanguageItemAndDialog = createMapLanguageItemAndDialog(activity, nightMode);
 		adapter.addItem(mapLanguageItemAndDialog.item);
 
 		props = createProperties(customRules, R.string.rendering_category_details, R.drawable.ic_action_layers,
@@ -612,9 +607,7 @@ public class ConfigureMapMenu {
 		return str != null && !str.isEmpty() ? str : defaultSupplier.get();
 	}
 
-	private MapLanguageItemAndDialog createMapLanguageItemAndDialog(final MapActivity activity,
-																	final boolean nightMode,
-																	final Optional<OnDataChangeUiAdapter> uiAdapter) {
+	private MapLanguageItemAndDialog createMapLanguageItemAndDialog(final MapActivity activity, final boolean nightMode) {
 		final ContextMenuItem mapLanguageItem =
 				new ContextMenuItem(MAP_LANGUAGE_ID)
 						.setTitleId(R.string.map_locale, activity)
@@ -732,7 +725,7 @@ public class ConfigureMapMenu {
 			if (isPropertyAccepted(p)) {
 				adapter.addItem(
 						ConfigureMapMenu
-								.createRenderingProperty(activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode, Optional.empty())
+								.createRenderingProperty(activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode)
 								.item());
 			}
 		}
@@ -753,11 +746,10 @@ public class ConfigureMapMenu {
 															final @DrawableRes int icon,
 															final String attrName,
 															final String id,
-															final boolean nightMode,
-															final Optional<OnDataChangeUiAdapter> uiAdapter) {
+															final boolean nightMode) {
 		for (final RenderingRuleProperty property : customRules) {
 			if (property.getAttrName().equals(attrName)) {
-				return Optional.of(ConfigureMapMenu.createRenderingProperty(activity, icon, property, id, nightMode, uiAdapter));
+				return Optional.of(ConfigureMapMenu.createRenderingProperty(activity, icon, property, id, nightMode));
 			}
 		}
 		return Optional.empty();
@@ -767,8 +759,7 @@ public class ConfigureMapMenu {
 														final @DrawableRes int icon,
 														final RenderingRuleProperty property,
 														final String id,
-														final boolean nightMode,
-														final Optional<OnDataChangeUiAdapter> uiAdapter) {
+														final boolean nightMode) {
 		if (property.isBoolean()) {
 			return new ItemAndDialog(
 					createBooleanRenderingProperty(
@@ -788,15 +779,7 @@ public class ConfigureMapMenu {
 							.setDescription(getDescription(property, activity.getMyApplication()))
 							.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
 							.setLayout(R.layout.list_item_single_line_descrition_narrow);
-			final Function<OnDataChangeUiAdapter, CustomAlert.SingleSelectionDialogFragment> createDialog =
-					_uiAdapter ->
-							ConfigureMapDialogs.createRenderingPropertyDialog(
-									activity,
-									property,
-									item,
-									_uiAdapter,
-									nightMode);
-			final Optional<CustomAlert.SingleSelectionDialogFragment> dialog = uiAdapter.map(createDialog);
+			final CustomAlert.SingleSelectionDialogFragment dialog = ConfigureMapDialogs.createRenderingPropertyDialog(activity, property, item, nightMode);
 			item.setListener(
 					new ItemClickListener() {
 
@@ -805,27 +788,21 @@ public class ConfigureMapMenu {
 														  final View view,
 														  final ContextMenuItem _item,
 														  final boolean isChecked) {
-							// FK-FIXME: Description wird nicht angepasst nach einer Suche (z.B. american road) und anschließender Änderung
 							if (AndroidUtils.isActivityNotDestroyed(activity)) {
-								showDialog(uiAdapter);
+								showDialog();
 							}
 							return false;
 						}
 
-						private void showDialog(final OnDataChangeUiAdapter uiAdapter) {
-							final CustomAlert.SingleSelectionDialogFragment dialog = getDialog(uiAdapter);
+						private void showDialog() {
 							dialog.setSelectedIndex(ConfigureMapDialogs.getSelectedIndex(activity, property));
 							dialog.show(activity.getSupportFragmentManager());
-						}
-
-						private CustomAlert.SingleSelectionDialogFragment getDialog(final OnDataChangeUiAdapter uiAdapter) {
-							return dialog.orElseGet(() -> createDialog.apply(uiAdapter));
 						}
 					});
 			if (icon != INVALID_ID) {
 				item.setIcon(icon);
 			}
-			return new ItemAndDialog(item, dialog);
+			return new ItemAndDialog(item, Optional.of(dialog));
 		}
 	}
 

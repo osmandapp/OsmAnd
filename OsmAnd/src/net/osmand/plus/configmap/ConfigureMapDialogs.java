@@ -380,7 +380,6 @@ public class ConfigureMapDialogs {
 			final @NonNull MapActivity activity,
 			final @NonNull RenderingRuleProperty property,
 			final @NonNull ContextMenuItem item,
-			final @NonNull OnDataChangeUiAdapter uiAdapter,
 			final boolean nightMode) {
 		return CustomAlert
 				.createSingleSelectionDialogFragment(
@@ -396,18 +395,14 @@ public class ConfigureMapDialogs {
 							preference.set(which == 0 ? "" : property.getPossibleValues()[which - 1]);
 							activity.refreshMapComplete();
 							item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, preference.get()));
-							// activity.getDashboard().refreshContent(false);
-							final String id = item.getId();
-							if (!Algorithms.isEmpty(id)) {
-								uiAdapter.onRefreshItem(id);
-							} else {
-								uiAdapter.onDataSetChanged();
-							}
+							activity.getDashboard().refreshContent(false);
 						});
 	}
 
 	public static int getSelectedIndex(final MapActivity activity, final RenderingRuleProperty property) {
-		return getSelectedIndex(Arrays.asList(property.getPossibleValues()), getCustomRenderProperty(activity, property).get());
+		return getSelectedIndex(
+				Arrays.asList(property.getPossibleValues()),
+				getCustomRenderProperty(activity, property).get());
 	}
 
 	private static CommonPreference<String> getCustomRenderProperty(final MapActivity activity,

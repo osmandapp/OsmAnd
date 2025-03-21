@@ -471,7 +471,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				String id = OPEN_STREET_MAP_ITEMS_ID_SCHEME + property.getAttrName();
 				adapter.addItem(
 						ConfigureMapMenu
-								.createRenderingProperty(mapActivity, INVALID_ID, property, id, nightMode, Optional.empty())
+								.createRenderingProperty(mapActivity, INVALID_ID, property, id, nightMode)
 								.item());
 			}
 		}
