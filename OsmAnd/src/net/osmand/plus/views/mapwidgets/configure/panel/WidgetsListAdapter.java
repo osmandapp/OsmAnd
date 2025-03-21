@@ -1,6 +1,14 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.isComplexWidget;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_DIVIDER_STATE_CHANGED;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_EDIT_MODE_CHANGED;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_MOVE_STATE_CHANGED;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_UPDATE_ALL;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_UPDATE_POSITION;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.getRowWidgetIds;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.isFirstPage;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.rowHasComplexWidget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -32,16 +40,17 @@ import net.osmand.plus.views.mapwidgets.configure.panel.holders.WidgetViewHolder
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements OnItemMoveCallback {
 
-	private static final int VIEW_TYPE_PAGE = 0;
-	private static final int VIEW_TYPE_WIDGET = 1;
-	private static final int VIEW_TYPE_DIVIDER = 2;
-	private static final int VIEW_TYPE_ADD_PAGE = 3;
-	private static final int VIEW_TYPE_SPACE = 4;
-	private static final int VIEW_TYPE_EMPTY_STATE = 5;
-	private static final int VIEW_TYPE_SHADOW = 6;
+	public static final int VIEW_TYPE_PAGE = 0;
+	public static final int VIEW_TYPE_WIDGET = 1;
+	public static final int VIEW_TYPE_DIVIDER = 2;
+	public static final int VIEW_TYPE_ADD_PAGE = 3;
+	public static final int VIEW_TYPE_SPACE = 4;
+	public static final int VIEW_TYPE_EMPTY_STATE = 5;
+	public static final int VIEW_TYPE_SHADOW = 6;
 
 	private final List<Object> items = new ArrayList<>();
 	private final List<Object> itemsBeforeAction = new ArrayList<>();
@@ -53,6 +62,8 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	private final ItemTouchHelper itemTouchHelper;
 	private final boolean isVerticalPanel;
 	private final WidgetIconsHelper iconsHelper;
+
+	private boolean isEditMode;
 
 	public interface WidgetsAdapterListener {
 		void onPageDeleted(int position, Object item);
@@ -68,6 +79,10 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		boolean isEditMode();
 
 		void onMoveStarted();
+
+		void refreshAll();
+
+		void restoreBackup();
 	}
 
 	public WidgetsListAdapter(@NonNull MapActivity mapActivity, boolean nightMode,
@@ -88,13 +103,27 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		itemTouchHelper.attachToRecyclerView(recyclerView);
 	}
 
+	@NonNull
 	public List<Object> getItems() {
 		return items;
 	}
 
+	public void setEditMode(boolean editMode) {
+		this.isEditMode = editMode;
+	}
+
+	public boolean isCurrentlyInEditMode() {
+		return isEditMode;
+	}
+
+	@NonNull
+	public List<Object> getBackupItems() {
+		return itemsBeforeAction;
+	}
+
 	@Override
 	public boolean onItemMove(int fromPosition, int toPosition) {
-		if (isFirstPage(toPosition)) {
+		if (isFirstPage(toPosition, items)) {
 			return false;
 		}
 
@@ -148,8 +177,8 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			if (item instanceof PageItem) {
 				hasComplexWidgetInCurrentPage = false;
 				hasRegularWidgetInCurrentPage = false;
-			} else if (item instanceof MapWidgetInfo widget) {
-				if (isComplexWidget(widget.key)) {
+			} else if (item instanceof WidgetItem widgetItem) {
+				if (isComplexWidget(widgetItem.mapWidgetInfo.key)) {
 					if (hasComplexWidgetInCurrentPage) {
 						return false;
 					}
@@ -176,12 +205,11 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			Integer multipleComplexIndex = multipleComplexWidgetsInRowIndex(items);
 			if (multipleComplexIndex != null) {
 				app.showToastMessage(app.getString(R.string.complex_widget_alert, getComplexWidgetName(multipleComplexIndex, items)));
-				items.clear();
-				items.addAll(itemsBeforeAction);
+				listener.restoreBackup();
+				return;
 			}
 		}
-		updatePageIndexes();
-		notifyDataSetChanged();
+		listener.refreshAll();
 	}
 
 	@Nullable
@@ -206,73 +234,10 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		return null;
 	}
 
-	private void updatePageIndexes() {
-		int pageNumber = 1;
-		for (Object item : items) {
-			if (item instanceof PageItem pageItem) {
-				pageItem.pageNumber = pageNumber;
-				pageNumber++;
-			}
-		}
-	}
-
-	@SuppressLint("NotifyDataSetChanged")
-	private void updateItemsForEditMode(List<List<MapWidgetInfo>> pagedWidgets) {
-		boolean isEmpty = pagedWidgets.stream().allMatch(List::isEmpty);
-		if (isEmpty) {
-			items.clear();
-			items.add(VIEW_TYPE_DIVIDER);
-			items.add(VIEW_TYPE_EMPTY_STATE);
-			items.add(VIEW_TYPE_SHADOW);
-			notifyDataSetChanged();
-			return;
-		}
-
-		if (listener.isEditMode()) {
-			items.clear();
-			items.add(VIEW_TYPE_DIVIDER);
-
-			int pageNumber = 1;
-			for (List<MapWidgetInfo> widgetsOnPage : pagedWidgets) {
-				PageItem pageItem = new PageItem(pageNumber);
-				items.add(pageItem);
-				items.addAll(widgetsOnPage);
-
-				pageNumber++;
-			}
-
-			items.add(VIEW_TYPE_ADD_PAGE);
-			items.add(VIEW_TYPE_SHADOW);
-			items.add(VIEW_TYPE_SPACE);
-		} else {
-			items.clear();
-			items.add(VIEW_TYPE_DIVIDER);
-
-			int pageNumber = 1;
-			for (List<MapWidgetInfo> widgetsOnPage : pagedWidgets) {
-
-				PageItem pageItem = new PageItem(pageNumber);
-				items.add(pageItem);
-				items.addAll(widgetsOnPage);
-
-				pageNumber++;
-			}
-
-			items.add(VIEW_TYPE_SHADOW);
-			items.add(VIEW_TYPE_SPACE);
-		}
-		notifyDataSetChanged();
-	}
-
-	public void setData(List<List<MapWidgetInfo>> pagedWidgets) {
-		updateItemsForEditMode(pagedWidgets);
-	}
-
 	@SuppressLint("NotifyDataSetChanged")
 	public void setItems(@NonNull List<Object> items) {
 		this.items.clear();
 		this.items.addAll(items);
-		notifyDataSetChanged();
 	}
 
 	@NonNull
@@ -286,9 +251,9 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 					result.add(currentPage);
 				}
 				currentPage = new ArrayList<>();
-			} else if (item instanceof MapWidgetInfo widgetInfo && currentPage != null) {
-				widgetInfo.priority = 0;
-				currentPage.add(widgetInfo);
+			} else if (item instanceof WidgetItem widgetItem && currentPage != null) {
+				widgetItem.mapWidgetInfo.priority = 0;
+				currentPage.add(widgetItem.mapWidgetInfo);
 			}
 		}
 
@@ -307,11 +272,11 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		return switch (viewType) {
 			case VIEW_TYPE_PAGE -> {
 				View pageView = inflater.inflate(R.layout.configure_screen_list_item_page_reorder, parent, false);
-				yield new PageViewHolder(pageView);
+				yield new PageViewHolder(app, selectedAppMode, pageView);
 			}
 			case VIEW_TYPE_WIDGET -> {
 				View widgetView = inflater.inflate(R.layout.configure_screen_list_item_widget_reorder, parent, false);
-				yield new WidgetViewHolder(widgetView);
+				yield new WidgetViewHolder(app, selectedAppMode, widgetView);
 			}
 			case VIEW_TYPE_DIVIDER -> {
 				View dividerView = inflater.inflate(R.layout.list_item_divider, parent, false);
@@ -341,12 +306,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		if (holder instanceof PageViewHolder pageViewHolder) {
 			pageViewHolder.bind(mapActivity, listener, itemTouchHelper, this, position, (PageItem) item, isVerticalPanel, nightMode);
 		} else if (holder instanceof WidgetViewHolder widgetViewHolder) {
-			boolean showDivider = false;
-			int nextItemIndex = position + 1;
-			if (items.size() > nextItemIndex && items.get(nextItemIndex) instanceof MapWidgetInfo) {
-				showDivider = true;
-			}
-			widgetViewHolder.bind(mapActivity, selectedAppMode, listener, itemTouchHelper, (MapWidgetInfo) item, iconsHelper, position, nightMode, showDivider);
+			widgetViewHolder.bind(mapActivity, selectedAppMode, listener, itemTouchHelper, (WidgetItem) item, iconsHelper, position, nightMode);
 		} else if (holder instanceof AddPageViewHolder addPageViewHolder) {
 			addPageViewHolder.bind(listener);
 		} else if (holder instanceof SpaceViewHolder spaceViewHolder) {
@@ -356,41 +316,81 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		}
 	}
 
-	@NonNull
-	public ArrayList<MapWidgetInfo> getRowWidgetIds(int rowPosition, @Nullable List<Object> searchItems) {
-		List<Object> list = searchItems != null ? searchItems : items;
-		ArrayList<MapWidgetInfo> rowWidgetIds = new ArrayList<>();
-		Object item = list.get(++rowPosition);
-
-		while (rowPosition < list.size() && item instanceof MapWidgetInfo) {
-			item = list.get(rowPosition);
-			if (item instanceof MapWidgetInfo) {
-				rowWidgetIds.add((MapWidgetInfo) item);
-			}
-			rowPosition++;
+	@Override
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
+		if (payloads.isEmpty()) {
+			super.onBindViewHolder(holder, position, payloads);
+			return;
 		}
-		return rowWidgetIds;
+		for (Object payload : payloads) {
+			if (payload instanceof List<?> changes) {
+				onPayload(changes, holder, position);
+
+				return;
+			}
+		}
+		super.onBindViewHolder(holder, position, payloads);
 	}
 
-	public int getPreviousRowPosition(int currentRowPosition) {
-		currentRowPosition--;
-		while (currentRowPosition >= 0) {
-			if (items.get(currentRowPosition) instanceof PageItem) {
-				return currentRowPosition;
+	private void onPayload(List<?> changes, @NonNull RecyclerView.ViewHolder holder, int position){
+		Object item = items.get(position);
+
+		boolean editModeChanged = changes.contains(PAYLOAD_EDIT_MODE_CHANGED);
+		boolean moveStateChanged = changes.contains(PAYLOAD_MOVE_STATE_CHANGED);
+		boolean dividerChanged = changes.contains(PAYLOAD_DIVIDER_STATE_CHANGED);
+		boolean updateAll = changes.contains(PAYLOAD_UPDATE_ALL);
+		boolean updatePosition = changes.contains(PAYLOAD_UPDATE_POSITION);
+
+		if (holder instanceof PageViewHolder pageViewHolder) {
+			if (updateAll) {
+				pageViewHolder.bind(mapActivity, listener, itemTouchHelper, this, position, (PageItem) item, isVerticalPanel, nightMode);
+				return;
 			}
-			currentRowPosition--;
+			if (moveStateChanged || updatePosition) {
+				pageViewHolder.updateButtons(app, listener, (PageItem) item, position, nightMode);
+			}
+			if (editModeChanged) {
+				pageViewHolder.updateEditMode(listener, itemTouchHelper);
+			}
+			if (updatePosition) {
+				pageViewHolder.updateTitle(app, (PageItem) item, isVerticalPanel);
+			}
+
+		} else if (holder instanceof WidgetViewHolder widgetViewHolder) {
+			if (updateAll) {
+				widgetViewHolder.bind(mapActivity, selectedAppMode, listener, itemTouchHelper, (WidgetItem) item, iconsHelper, position, nightMode);
+				return;
+			}
+			if (updatePosition) {
+				widgetViewHolder.updatePosition(listener, position, (WidgetItem) item);
+			}
+			if (dividerChanged) {
+				widgetViewHolder.updateDivider((WidgetItem) item);
+			}
+			if (editModeChanged) {
+				widgetViewHolder.updateEditMode(app, listener, itemTouchHelper, selectedAppMode, (WidgetItem) item, nightMode);
+			}
 		}
+	}
+
+	@Override
+	public int getItemCount() {
+		return items.size();
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+		Object item = items.get(position);
+
+		if (item instanceof PageItem) {
+			return VIEW_TYPE_PAGE;
+		} else if (item instanceof WidgetItem) {
+			return VIEW_TYPE_WIDGET;
+		} else if (item instanceof Integer integer) {
+			return integer;
+		}
+
 		return -1;
-	}
-
-	public boolean rowHasComplexWidget(int rowPosition, @Nullable List<Object> searchItems) {
-		ArrayList<MapWidgetInfo> rowWidgetIds = getRowWidgetIds(rowPosition, searchItems != null ? searchItems : items);
-		for (MapWidgetInfo widgetUiInfo : rowWidgetIds) {
-			if (isComplexWidget(widgetUiInfo.key)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public void actionStarted() {
@@ -398,15 +398,6 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			itemsBeforeAction.clear();
 			itemsBeforeAction.addAll(items);
 		}
-	}
-
-	public boolean isFirstPage(int position) {
-		for (int i = 0; i < position; i++) {
-			if (items.get(i) instanceof PageItem) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public void removeItem(int position) {
@@ -422,8 +413,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			}
 			items.remove(position);
 			notifyItemRemoved(position);
-			updatePageIndexes();
-			notifyItemRangeChanged(0, items.size());
+			listener.refreshAll();
 		}
 	}
 
@@ -440,7 +430,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			insertToEndOfAddedWidgets(new PageItem(page));
 		}
 
-		insertToEndOfAddedWidgets(widgetInfo);
+		insertToEndOfAddedWidgets(new WidgetItem(widgetInfo));
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
@@ -448,7 +438,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		int insertIndex = getIndexOfLastWidgetOrPageItem() + 1;
 		items.add(insertIndex, listItem);
 		notifyItemInserted(insertIndex);
-		notifyDataSetChanged();
+		listener.refreshAll();
 	}
 
 	private int getIndexOfLastWidgetOrPageItem() {
@@ -456,7 +446,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		for (int i = 0; i < items.size(); i++) {
 			Object item = items.get(i);
 			boolean suitableIndex = (index == -1 && item instanceof Integer integer && VIEW_TYPE_DIVIDER == integer)
-					|| item instanceof PageItem || item instanceof MapWidgetInfo;
+					|| item instanceof PageItem || item instanceof WidgetItem;
 			if (suitableIndex) {
 				index = i;
 			}
@@ -475,31 +465,55 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		return maximumPageIndex;
 	}
 
-	@Override
-	public int getItemCount() {
-		return items.size();
-	}
-
-	@Override
-	public int getItemViewType(int position) {
-		Object item = items.get(position);
-
-		if (item instanceof PageItem) {
-			return VIEW_TYPE_PAGE;
-		} else if (item instanceof MapWidgetInfo) {
-			return VIEW_TYPE_WIDGET;
-		} else if (item instanceof Integer integer) {
-			return integer;
-		}
-
-		return -1;
-	}
-
 	public static class PageItem {
 		public int pageNumber;
+		public boolean movable = false;
+		public String deleteMessage = null;
 
 		public PageItem(int pageNumber) {
 			this.pageNumber = pageNumber;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) return true;
+			if (obj == null || getClass() != obj.getClass()) return false;
+
+			PageItem that = (PageItem) obj;
+
+			return pageNumber == that.pageNumber &&
+					movable == that.movable &&
+					Objects.equals(deleteMessage, that.deleteMessage);
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(pageNumber, movable, deleteMessage);
+		}
+	}
+
+	public static class WidgetItem {
+		public MapWidgetInfo mapWidgetInfo;
+		public boolean showBottomDivider = false;
+
+		public WidgetItem(@NonNull MapWidgetInfo mapWidgetInfo) {
+			this.mapWidgetInfo = mapWidgetInfo;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) return true;
+			if (obj == null || getClass() != obj.getClass()) return false;
+
+			WidgetItem that = (WidgetItem) obj;
+
+			return showBottomDivider == that.showBottomDivider &&
+					Objects.equals(mapWidgetInfo, that.mapWidgetInfo);
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(mapWidgetInfo, showBottomDivider);
 		}
 	}
 }

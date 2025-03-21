@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -20,8 +20,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
+import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.WidgetItem;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.WidgetsAdapterListener;
 import net.osmand.plus.widgets.TextViewEx;
 
@@ -33,7 +33,7 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder {
 	private final View bottomDivider;
 	private final View selectableBackground;
 
-	public WidgetViewHolder(@NonNull View itemView) {
+	public WidgetViewHolder(@NonNull OsmandApplication app, @NonNull ApplicationMode selectedAppMode, @NonNull View itemView) {
 		super(itemView);
 		title = itemView.findViewById(R.id.title);
 		icon = itemView.findViewById(R.id.icon);
@@ -41,59 +41,71 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder {
 		moveIcon = itemView.findViewById(R.id.move_icon);
 		bottomDivider = itemView.findViewById(R.id.bottom_divider);
 		selectableBackground = itemView.findViewById(R.id.selectable_widget_background);
+
+		boolean disableAnimation = app.getSettings().DO_NOT_USE_ANIMATIONS.getModeValue(selectedAppMode);
+		if (disableAnimation) {
+			((ViewGroup) itemView).setLayoutTransition(null);
+			((ViewGroup) itemView.findViewById(R.id.animated_layout)).setLayoutTransition(null);
+		}
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	public void bind(@NonNull MapActivity mapActivity, @NonNull ApplicationMode selectedAppMode, @NonNull WidgetsAdapterListener listener,
-	                 @NonNull ItemTouchHelper itemTouchHelper, @NonNull MapWidgetInfo widgetInfo,
-	                 @NonNull WidgetIconsHelper iconsHelper, int position, boolean nightMode, boolean showDivider) {
+	                 @NonNull ItemTouchHelper itemTouchHelper, @NonNull WidgetItem widgetItem,
+	                 @NonNull WidgetIconsHelper iconsHelper, int position, boolean nightMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
+
+		title.setText(widgetItem.mapWidgetInfo.getTitle(app));
+
+		iconsHelper.updateWidgetIcon(icon, widgetItem.mapWidgetInfo);
+		moveIcon.setVisibility(View.VISIBLE);
+
+		deleteButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete));
+		updatePosition(listener, position, widgetItem);
+		updateDivider(widgetItem);
+		updateEditMode(app, listener, itemTouchHelper, selectedAppMode, widgetItem, nightMode);
+	}
+
+	public void updatePosition(@NonNull WidgetsAdapterListener listener, int position, @NonNull WidgetItem widgetItem) {
+		deleteButton.setOnClickListener(v -> {
+			listener.onWidgetDeleted(position, widgetItem.mapWidgetInfo);
+		});
+	}
+
+	public void updateDivider(@NonNull WidgetItem widgetItem) {
+		bottomDivider.setVisibility(widgetItem.showBottomDivider ? View.VISIBLE : View.INVISIBLE);
+	}
+
+	@SuppressLint("ClickableViewAccessibility")
+	public void updateEditMode(@NonNull OsmandApplication app, @NonNull WidgetsAdapterListener listener,
+	                           @NonNull ItemTouchHelper itemTouchHelper, @NonNull ApplicationMode selectedAppMode,
+	                           @NonNull WidgetItem widgetItem, boolean nightMode) {
 		boolean editMode = listener.isEditMode();
+
+		deleteButton.setVisibility(editMode ? View.VISIBLE : View.GONE);
+
+		if (editMode) {
+
+			moveIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_item_move, ColorUtilities.getDefaultIconColor(app, nightMode)));
+			moveIcon.setOnTouchListener((v, event) -> {
+				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+					listener.onMoveStarted();
+					itemTouchHelper.startDrag(this);
+				}
+				return false;
+			});
+			itemView.setOnClickListener(null);
+		} else {
+
+			moveIcon.setOnTouchListener(null);
+			int iconId = nightMode ? R.drawable.ic_action_info_dark : R.drawable.ic_action_info;
+			moveIcon.setImageDrawable(app.getUIUtilities().getIcon(iconId));
+			itemView.setOnClickListener(view -> {
+				listener.onWidgetClick(widgetItem.mapWidgetInfo);
+			});
+		}
 		int color = selectedAppMode.getProfileColor(nightMode);
 		Drawable drawable = editMode ? null : UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
 		AndroidUtils.setBackground(selectableBackground, drawable);
-
-		title.setText(widgetInfo.getTitle(app));
-
-		int startMargin;
-		if (editMode) {
-			startMargin = app.getResources().getDimensionPixelSize(R.dimen.fab_margin_bottom_big);
-		} else {
-			startMargin = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
-		}
-		LinearLayout.LayoutParams titleParams = (LinearLayout.LayoutParams) title.getLayoutParams();
-		titleParams.setMargins(startMargin, titleParams.topMargin, titleParams.rightMargin, titleParams.bottomMargin);
-		title.setLayoutParams(titleParams);
-
-		iconsHelper.updateWidgetIcon(icon, widgetInfo);
-		moveIcon.setVisibility(View.VISIBLE);
-
-		deleteButton.setVisibility(editMode ? View.VISIBLE : View.GONE);
-		deleteButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete));
-		deleteButton.setOnClickListener(v -> {
-			listener.onWidgetDeleted(position, widgetInfo);
-		});
-
-		itemView.setOnClickListener(view -> {
-			if (!editMode) {
-				listener.onWidgetClick(widgetInfo);
-			}
-		});
-
-		if (editMode) {
-			moveIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_item_move, ColorUtilities.getDefaultIconColor(app, nightMode)));
-		} else {
-			int iconId = nightMode ? R.drawable.ic_action_info_dark : R.drawable.ic_action_info;
-			moveIcon.setImageDrawable(app.getUIUtilities().getIcon(iconId));
-		}
-		moveIcon.setOnTouchListener((v, event) -> {
-			if (editMode && event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-				listener.onMoveStarted();
-				itemTouchHelper.startDrag(this);
-			}
-			return false;
-		});
-
-		bottomDivider.setVisibility(showDivider ? View.VISIBLE : View.INVISIBLE);
 	}
 }

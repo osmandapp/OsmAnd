@@ -321,7 +321,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	private static void showFragment(@NonNull FragmentManager manager, @NonNull AddWidgetFragment fragment) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
+					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}

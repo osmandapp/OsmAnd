@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -75,7 +76,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 	private ImageView backButton;
 	private TextView title;
 	private EditText editText;
-
+	private FragmentLifecycleCallbacks lifecycleCallbacks;
 	private boolean searchMode = false;
 	private String searchQuery = "";
 	private OnBackPressedCallback onBackPressedCallback;
@@ -135,6 +136,26 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 		setupButtonListeners();
 		setupToolbar();
+			lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
+			@Override
+			public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+				super.onFragmentDestroyed(fm, f);
+				Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.fragmentContainer);
+				if (currentFragment instanceof SearchWidgetsFragment) {
+					onBackPressedCallback.setEnabled(true);
+				}
+			}
+
+			@Override
+			public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+				super.onFragmentResumed(fm, f);
+				onBackPressedCallback.setEnabled(false);
+				if (editText.hasFocus()) {
+					AndroidUtils.hideSoftKeyboard(requireMapActivity(), editText);
+				}
+			}
+		};
+		getParentFragmentManager().registerFragmentLifecycleCallbacks(lifecycleCallbacks, false);
 
 		toggleSearchMode(searchMode);
 
@@ -394,7 +415,6 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 	@Override
 	public void widgetSelected(@NonNull WidgetType widgetType) {
-		editText.clearFocus();
 
 		Fragment target = getTargetFragment();
 		if (widgetType.isPurchased(app)) {
@@ -410,8 +430,24 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 	}
 
 	@Override
+	public void onStop() {
+		super.onStop();
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+
+	}
+
+	@Override
 	public void externalWidgetSelected(@NonNull MapWidgetInfo widgetInfo) {
-		editText.clearFocus();
 
 		FragmentActivity activity = getActivity();
 		Fragment target = getTargetFragment();
@@ -426,7 +462,6 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 	@Override
 	public void groupSelected(@NonNull WidgetGroup group) {
-		editText.clearFocus();
 
 		FragmentActivity activity = getActivity();
 		Fragment target = getTargetFragment();
@@ -517,7 +552,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 			fragment.selectedPanel = selectedPanel;
 			fragment.setTargetFragment(target, 0);
 			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
+					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}

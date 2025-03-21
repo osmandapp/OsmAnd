@@ -6,13 +6,15 @@
 	android:background="?attr/activity_background_color"
 	android:clickable="true"
 	android:fitsSystemWindows="true"
+	android:clipChildren="false"
+	android:clipToPadding="false"
 	android:focusable="true">
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/list_background_color"
+		android:background="@android:color/transparent"
 		app:elevation="0dp"
 		app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -20,6 +22,7 @@
 			android:id="@+id/toolbar_layout"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
 			app:collapsedTitleTextAppearance="@style/AppBarTitle"
 			app:expandedTitleGravity="start|bottom"
 			app:expandedTitleMarginBottom="@dimen/content_padding_small"
@@ -41,7 +44,6 @@
 					android:id="@+id/toolbar_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="@color/color_transparent"
 					android:minHeight="@dimen/toolbar_height"
 					android:orientation="horizontal">
 
@@ -52,7 +54,7 @@
 						android:layout_height="@dimen/toolbar_height"
 						android:layout_gravity="center"
 						android:contentDescription="@string/shared_string_back"
-						android:tint="@color/icon_color_default_light"
+						app:tint="@color/icon_color_default_light"
 						app:srcCompat="@drawable/ic_arrow_back" />
 
 					<LinearLayout
@@ -106,6 +108,7 @@
 			android:background="?attr/list_background_color"
 			app:tabGravity="fill"
 			app:tabMaxWidth="0dp"
+			android:translationZ="-1dp"
 			app:tabMode="fixed">
 
 			<com.google.android.material.tabs.TabItem
@@ -141,11 +144,15 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:clipChildren="false"
+		android:clipToPadding="false"
 		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+			android:clipChildren="false"
+			android:clipToPadding="false"
 			android:orientation="vertical">
 
 			<androidx.viewpager2.widget.ViewPager2
@@ -153,11 +160,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="0dp"
 				android:layout_weight="1" />
-
-			<View
-				android:id="@+id/compensation_view"
-				android:layout_width="match_parent"
-				android:layout_height="0dp" />
 
 		</LinearLayout>
 

@@ -11,10 +11,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -74,7 +72,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private static final String CONTEXT_SELECTED_PANEL = "context_selected_panel";
 	private static final String ADD_TO_NEXT = "widget_order";
 	private static final String EDIT_MODE_KEY = "edit_mode_key";
-	private static final String ADD_NEW_WIDGET_MENU_KEY = "add_new_widget_menu";
 	private static final int ANIMATION_DURATION = 300;
 
 	private DialogManager dialogManager;
@@ -90,13 +87,13 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private TabLayout tabLayout;
 	private ViewPager2 viewPager;
 	private View bottomButtons;
+	private View shadowView;
 	private View bottomButtonsShadow;
 	private FloatingActionButton fabNewWidget;
 	private TextView toolbarTitleView;
 	private View view;
 
 	public boolean isEditMode = false;
-	public boolean newWidgetAdded = false;
 
 	public void setSelectedPanel(@NonNull WidgetsPanel panel) {
 		this.selectedPanel = panel;
@@ -120,7 +117,12 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			selectedAppMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
 			isEditMode = savedInstanceState.getBoolean(EDIT_MODE_KEY, false);
-			newWidgetAdded = savedInstanceState.getBoolean(ADD_NEW_WIDGET_MENU_KEY, false);
+		}
+
+		Bundle args = getArguments();
+		if (args != null && (args.containsKey(CONTEXT_SELECTED_WIDGET)
+				|| args.containsKey(ADD_TO_NEXT))) {
+			addNewWidget();
 		}
 	}
 
@@ -142,6 +144,17 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		bottomButtonsShadow = view.findViewById(R.id.buttons_shadow);
 		toolbarTitleView = toolbar.findViewById(R.id.toolbar_title);
 		bottomButtons = view.findViewById(R.id.buttons_container);
+		shadowView = view.findViewById(R.id.shadow_view);
+
+		bottomButtons.setVisibility(View.GONE);
+		bottomButtonsShadow.setVisibility(View.GONE);
+
+		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				closeFragment();
+			}
+		});
 
 		setupToolbar();
 		setupTabLayout();
@@ -151,28 +164,10 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		return view;
 	}
 
-	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				closeFragment();
-			}
-		});
-
-		Bundle args = getArguments();
-		if (!newWidgetAdded && args != null && (args.containsKey(CONTEXT_SELECTED_WIDGET)
-				|| args.containsKey(CONTEXT_SELECTED_PANEL)
-				|| args.containsKey(ADD_TO_NEXT))) {
-			newWidgetAdded = true;
-			addNewWidget();
-		}
-	}
-
 	private void closeFragment() {
 		if (isEditMode) {
 			toggleEditMode(false);
+			selectedFragment.updateEditMode();
 		} else {
 			requireActivity().getSupportFragmentManager().popBackStack();
 		}
@@ -188,8 +183,9 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		infoButton.setOnClickListener(v -> {
 			if (!isEditMode) {
 				toggleEditMode(true);
+				selectedFragment.updateEditMode();
 			} else if (selectedFragment != null) {
-				selectedFragment.updateAdapter();
+				selectedFragment.resetToOriginal();
 			}
 		});
 
@@ -261,7 +257,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			if (isEditMode && selectedFragment != null) {
 				selectedFragment.onApplyChanges();
 				toggleEditMode(false);
-				selectedFragment.updateContent();
+				selectedFragment.reloadWidgets();
 			}
 		});
 		AndroidUiHelper.updateVisibility(applyButton, true);
@@ -307,27 +303,102 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	private void toggleEditMode(boolean editMode) {
 		isEditMode = editMode;
+		adjustViewPagerHeight();
 
 		AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
 		params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
 		if (isEditMode) {
 			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
 			appBar.setExpanded(true, true);
-			tabLayout.setVisibility(View.GONE);
+			bottomButtons.setVisibility(View.VISIBLE);
+			bottomButtonsShadow.setVisibility(View.VISIBLE);
+
+			if (isDisableAnimations()) {
+				tabLayout.setVisibility(View.GONE);
+			} else {
+				bottomButtons.setTranslationY(bottomButtons.getHeight());
+				bottomButtonsShadow.setTranslationY(bottomButtons.getHeight() - bottomButtonsShadow.getHeight());
+				appBar.setElevation(0f);
+				tabLayout.animate()
+						.translationY(-tabLayout.getHeight())
+						.alpha(0f)
+						.setDuration(ANIMATION_DURATION)
+						.withEndAction(() -> tabLayout.setVisibility(View.INVISIBLE))
+						.start();
+
+				viewPager.animate()
+						.translationY(-tabLayout.getHeight())
+						.setDuration(ANIMATION_DURATION)
+						.start();
+
+				shadowView.animate()
+						.translationY(-tabLayout.getHeight())
+						.setDuration(ANIMATION_DURATION)
+						.start();
+
+				bottomButtons.animate()
+						.translationY(0)
+						.alpha(1f)
+						.setDuration(ANIMATION_DURATION)
+						.withEndAction(() -> bottomButtons.setVisibility(View.VISIBLE))
+						.start();
+
+				bottomButtonsShadow.animate()
+						.translationY(0)
+						.alpha(1f)
+						.setDuration(ANIMATION_DURATION)
+						.withEndAction(() -> bottomButtonsShadow.setVisibility(View.VISIBLE))
+						.start();
+			}
 		} else {
 			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
 			tabLayout.setVisibility(View.VISIBLE);
-		}
-		if (selectedFragment != null) {
-			selectedFragment.updateAdapter();
+			if (!isDisableAnimations()) {
+				tabLayout.animate()
+						.translationY(0)
+						.alpha(1f)
+						.setDuration(ANIMATION_DURATION)
+						.withEndAction(() -> appBar.setElevation(getResources().getDimension(R.dimen.abp__shadow_height)))
+						.start();
+				viewPager.animate()
+						.translationY(0)
+						.setDuration(ANIMATION_DURATION)
+						.start();
+
+				shadowView.animate()
+						.translationY(0)
+						.setDuration(ANIMATION_DURATION)
+						.start();
+
+				bottomButtons.animate()
+						.translationY(bottomButtons.getHeight())
+						.alpha(0f)
+						.setDuration(ANIMATION_DURATION)
+						.withEndAction(() -> bottomButtons.setVisibility(View.INVISIBLE))
+						.start();
+
+				bottomButtonsShadow.animate()
+						.translationY(bottomButtons.getHeight() - bottomButtonsShadow.getHeight())
+						.alpha(0f)
+						.setDuration(ANIMATION_DURATION)
+						.withEndAction(() -> bottomButtonsShadow.setVisibility(View.INVISIBLE))
+						.start();
+			} else {
+				bottomButtons.setVisibility(View.GONE);
+				bottomButtonsShadow.setVisibility(View.GONE);
+			}
 		}
 
-		AndroidUiHelper.updateVisibility(bottomButtons, isEditMode);
 		AndroidUiHelper.updateVisibility(bottomButtonsShadow, isEditMode);
-		updateCompensationView();
 		updateFabPosition(isEditMode);
 		viewPager.setUserInputEnabled(!isEditMode);
 		updateToolbar();
+	}
+
+	private void adjustViewPagerHeight() {
+		ViewGroup.LayoutParams params = viewPager.getLayoutParams();
+		params.height = params.height + tabLayout.getHeight();
+		viewPager.setLayoutParams(params);
 	}
 
 	private void updateFabPosition(boolean isEditing) {
@@ -349,7 +420,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		outState.putString(APP_MODE_ATTR, selectedAppMode.getStringKey());
 		outState.putString(SELECTED_GROUP_ATTR, selectedPanel.name());
 		outState.putBoolean(EDIT_MODE_KEY, isEditMode);
-		outState.putBoolean(ADD_NEW_WIDGET_MENU_KEY, newWidgetAdded);
 	}
 
 	private void setupTabLayout() {
@@ -416,17 +486,10 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		}
 	}
 
-	private void updateCompensationView() {
-		int height = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
-		View compensationView = view.findViewById(R.id.compensation_view);
-		compensationView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height));
-		AndroidUiHelper.updateVisibility(compensationView, isEditMode);
-	}
-
 	@Override
 	public void onWidgetsConfigurationChanged() {
 		if (selectedFragment != null && !isEditMode) {
-			selectedFragment.updateContent();
+			selectedFragment.reloadWidgets();
 		}
 	}
 
@@ -448,15 +511,12 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		for (MapWidgetInfo widgetInfo : newWidgetInfos) {
 			Bundle args = getArguments();
 			if (args != null) {
-				int contextPanelIndex = args.getInt(CONTEXT_SELECTED_PANEL, -1);
-				if (contextPanelIndex != -1 && WidgetsPanel.values()[contextPanelIndex] == selectedPanel) {
-					String selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
-					boolean addToNext = args.getBoolean(ADD_TO_NEXT);
-					if (selectedWidget != null) {
-						createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode, true, selectedWidget, addToNext);
-						onWidgetsConfigurationChanged();
-						return;
-					}
+				String selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
+				boolean addToNext = args.getBoolean(ADD_TO_NEXT);
+				if (selectedWidget != null) {
+					createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode, true, selectedWidget, addToNext);
+					onWidgetsConfigurationChanged();
+					return;
 				}
 			}
 			createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode, true);
@@ -515,7 +575,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		helper.resetWidgetsForPanel(selectedPanel);
 
 		if (selectedFragment != null) {
-			selectedFragment.updateContent();
+			selectedFragment.reloadWidgets();
 		}
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
@@ -537,17 +597,20 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 				mapInfoLayer.recreateAllControls(requireMapActivity());
 			}
 			if (selectedFragment != null) {
-				selectedFragment.updateContent();
+				selectedFragment.reloadWidgets();
 			}
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode, @Nullable Bundle args) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
 			fragment.setSelectedPanel(panel);
 			fragment.setSelectedAppMode(appMode);
+			if (args != null) {
+				fragment.setArguments(args);
+			}
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
@@ -556,20 +619,11 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode, @NonNull String selectedWidget, boolean addNext) {
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
-			fragment.setSelectedPanel(panel);
-			fragment.setSelectedAppMode(appMode);
-			Bundle args = new Bundle();
-			args.putString(CONTEXT_SELECTED_WIDGET, selectedWidget);
-			args.putInt(CONTEXT_SELECTED_PANEL, panel.ordinal());
-			args.putBoolean(ADD_TO_NEXT, addNext);
-			fragment.setArguments(args);
-			fragmentManager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-		}
+		Bundle args = new Bundle();
+		args.putString(CONTEXT_SELECTED_WIDGET, selectedWidget);
+		args.putInt(CONTEXT_SELECTED_PANEL, panel.ordinal());
+		args.putBoolean(ADD_TO_NEXT, addNext);
+
+		ConfigureWidgetsFragment.showInstance(activity, panel, appMode, args);
 	}
 }
