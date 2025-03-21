@@ -639,6 +639,7 @@ public class ConfigureMapMenu {
 															  final View view,
 															  final ContextMenuItem item,
 															  final boolean isChecked) {
+								// FK-FIXME: update
 								if (AndroidUtils.isActivityNotDestroyed(activity)) {
 									final ConfigureMapDialogs.MapLanguageDialog dialog = getDialog(uiAdapter);
 									dialog.updateDialogStateFromPreferences();
@@ -813,6 +814,7 @@ public class ConfigureMapMenu {
 														  final View view,
 														  final ContextMenuItem _item,
 														  final boolean isChecked) {
+							// FK-FIXME: update
 							if (AndroidUtils.isActivityNotDestroyed(activity)) {
 								showDialog(uiAdapter);
 							}

@@ -55,7 +55,7 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 																				final Setting setting) {
 		if (settingsFragment instanceof ConfigureMapFragment) {
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
-			final ConfigureMapFragment configureMapFragment = getConfigureMapFragment(mapActivity);
+			final ConfigureMapFragment configureMapFragment = Objects.requireNonNull(ConfigureMapFragment.getVisibleInstance(mapActivity));
 			scrollDashboardOnMapToSettingOfConfigureMapFragment(
 					mapActivity.getDashboard(),
 					setting,
@@ -139,10 +139,6 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 				return preference.hasPreferenceMatchWithinSearchableInfo();
 			}
 		};
-	}
-
-	private static ConfigureMapFragment getConfigureMapFragment(final MapActivity mapActivity) {
-		return Objects.requireNonNull(ConfigureMapFragment.getVisibleInstance(mapActivity));
 	}
 
 	private static void scrollDashboardOnMapToSettingOfConfigureMapFragment(final DashboardOnMap dashboardOnMap,
