@@ -5715,4 +5715,6 @@
     <string name="prime_meridian">Nulti meridijan</string>
     <string name="equator">Ekvator</string>
     <string name="release_5_0">• Otkrijte najbolje rangirane tačke interesa pomoću novog režima istraživanja\n\n • Sve OSM rute, sada se mogu pretraživati! Planinarenje, biciklizam, MTB i još mnogo toga\n\n • Novi vidžet za navigaciju kombinuje strelicu za skretanje i uputstva za navigaciju\n\n • Vidžet sa informacijama o trenutnoj ruti: prikazuje ETA, vreme dolaska i udaljenost\n\n • Izaberite ski staze i MTB staze na mapi za detaljne informacije\n\n • Mogućnost izbora veličine vidžeta za levi i desni panel\n\n • Dodata koordinatna mreža sa geografskim koordinatama\n\n • Dodata mogućnost prilagođavanja podrazumevanog izgleda omiljenih grupa\n\n • Android Auto: pogledajte ETA i udaljenost do sledeće tačke; imena gradova se sada pojavljuju u rezultatima pretrage\n\n • Istaknuti vrhovi se sada mogu otkriti putem mape i pretrage\n\n • Visina planinskih vrhova u stopama\n\n • Dodato: stene i penjališta na mapi\n\n • Pretraga adresa u SAD je poboljšana\n\n • Dodat je hebrejski TTS za navigaciju</string>
+    <string name="shared_string_offline_only">Samo van mreže</string>
+    <string name="shared_string_online_only">Samo mrežno</string>
 </resources>
