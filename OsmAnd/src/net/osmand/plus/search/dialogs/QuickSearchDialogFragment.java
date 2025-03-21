@@ -2103,11 +2103,17 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		PluginsHelper.onNewDownloadIndexes(this);
 		updateContent(heading);
+		if (historySearchFragment != null) {
+			historySearchFragment.onUpdatedIndexesList();
+		}
 	}
 
 	@Override
 	public void downloadInProgress() {
 		updateContent(heading);
+		if (historySearchFragment != null) {
+			historySearchFragment.downloadInProgress();
+		}
 	}
 
 	@Override
