@@ -71,7 +71,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		getListView().setOnItemLongClickListener((parent, view, position, id) -> {
 			QuickSearchDialogFragment dialogFragment = getDialogFragment();
 			FragmentManager fragmentManager = dialogFragment.getFragmentManager();
-			if (fragmentManager != null) {
+			if (fragmentManager != null && id >= 0) {
 				QuickSearchListItem item = getListAdapter().getItem((int) id);
 				if (item != null && item.getSearchResult().object instanceof HistoryEntry) {
 					HistoryEntry entry = (HistoryEntry) item.getSearchResult().object;
