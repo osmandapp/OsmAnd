@@ -2254,7 +2254,7 @@
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
-    <string name="mapillary_action_descr">Partagez vos photos de rue via Mapillary.</string>
+    <string name="mapillary_action_descr">Partagez votre vue de la rue via Mapillary.</string>
     <string name="mapillary_widget">Widget Mapillary</string>
     <string name="mapillary_widget_descr">Permet de contribuer facilement à Mapillary.</string>
     <string name="mapillary_descr">Des photos détaillées en ligne pour tous. Découvrez des lieux, collaborez, capturez le monde.</string>
@@ -3950,7 +3950,7 @@
     <string name="backup_version_history_delete_descr">Supprimer du Cloud OsmAnd le journal des modifications pour les données obsolètes \?</string>
     <string name="backup_delete_types">Supprimer les types de données désactivés</string>
     <string name="shared_string_discussion">Discussion</string>
-    <string name="shared_string_view_all">Tout afficher</string>
+    <string name="shared_string_view_all">Voir tout</string>
     <string name="backup_error_subscription_was_expired">Abonnement expiré</string>
     <string name="backup_error_subscription_was_used">L\'abonnement ou la promo a été utilisé par un autre compte %1$s</string>
     <string name="backup_error_no_valid_subscription">Aucun abonnement n\'est valide</string>
@@ -4434,8 +4434,8 @@
     <string name="auto_25_chars_route_tl_kr">Tournez à gauche puis restez à droite</string>
     <string name="auto_25_chars_route_tr_kl">Tournez à droite puis restez à gauche</string>
     <string name="auto_25_chars_route_tr_kr">Tournez à droite puis restez à droite</string>
-    <string name="auto_25_chars_route_tu_kl">Faites demi-tour puis restez à gauche</string>
-    <string name="auto_25_chars_route_tu_kr">Faites demi-tour puis restez à droite</string>
+    <string name="auto_25_chars_route_tu_kl">Faites demi-tour et restez à gauche</string>
+    <string name="auto_25_chars_route_tu_kr">Faites demi-tour et restez à droite</string>
     <string name="auto_25_chars_route_roundabout_kl">Prenez la sortie %1$d puis restez à gauche</string>
     <string name="auto_25_chars_route_roundabout_kr">Prenez la sortie %1$d puis restez à droite</string>
     <string name="trip_recording_distance_widget_desc">Affiche la distance du trajet en cours d’enregistrement.</string>
@@ -4879,7 +4879,7 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
     <string name="relief_3d">Relief 3D</string>
-    <string name="terrain_map">Carte du relief (3D)</string>
+    <string name="terrain_map">Carte du terrain (3D)</string>
     <string name="relief_3d_description">Possédez et observez la maquette de votre quartier ou du continent tout entier.</string>
     <string name="terrain_category_description">Courbes de niveaux, ombrage du relief par des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les plaines.</string>
     <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l\'inclinaison du terrain. Pour en savoir plus sur les pentes, consultez %1$s.</string>
@@ -5043,7 +5043,7 @@
     <string name="app_mode_hang_gliding">Deltaplane</string>
     <string name="with_waypoints">Avec points de passage</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
-    <string name="max_altitude">Altitude maxi</string>
+    <string name="max_altitude">Altitude max</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="filter_by_name">Filtrer par nom</string>
     <string name="shared_string_reset_all">Tout réinitialiser</string>
@@ -5205,7 +5205,7 @@
     <string name="default_buttons">Boutons par défaut</string>
     <string name="sort_subfolders">Trier les sous-dossiers</string>
     <string name="battery_optimization">Optimisation de la batterie</string>
-    <string name="avg_sensor_temperature">Température moyenne</string>
+    <string name="avg_sensor_temperature">Température, moyenne</string>
     <string name="max_sensor_speed">Vitesse du capteur, max</string>
     <string name="max_sensor_temperature">Température, max</string>
     <string name="avg_sensor_bycicle_power">Puissance du cycle, moyenne</string>
@@ -5392,9 +5392,9 @@
     <string name="shared_string_all_icons">Toutes les icônes</string>
     <string name="resting_position_icon_summary">Icône affichée lorsque vous ne bougez pas.</string>
     <string name="rendering_value_pale_name">Pâle</string>
-    <string name="auto_25_chars_route_tr">Tourner à droite</string>
-    <string name="auto_25_chars_route_tshr">Tourner en épingle à droite</string>
-    <string name="auto_25_chars_route_tl">Tourner à gauche</string>
+    <string name="auto_25_chars_route_tr">Tournez à droite</string>
+    <string name="auto_25_chars_route_tshr">Tournez franchement à droite</string>
+    <string name="auto_25_chars_route_tl">Tournez à gauche</string>
     <string name="resting_position">Position de repos</string>
     <string name="navigation_position">Position de guidage</string>
     <string name="resting_navigation_position">Positions de repos et de guidage</string>
@@ -5402,12 +5402,12 @@
     <string name="view_angle">Angle de vue</string>
     <string name="location_radius_description">Affiche un rond représentant la précision de votre position actuelle</string>
     <string name="location_radius">Rayon de position</string>
-    <string name="auto_25_chars_route_tu">Faire demi-tour</string>
-    <string name="auto_25_chars_route_kl">Rester à gauche</string>
-    <string name="auto_25_chars_route_kr">Rester à droite</string>
-    <string name="auto_25_chars_route_tslr">Tourner légèrement à droite</string>
-    <string name="auto_25_chars_route_tshl">Tourner en épingle à gauche</string>
-    <string name="auto_25_chars_route_tsll">Tourner légèrement à gauche</string>
+    <string name="auto_25_chars_route_tu">Faites demi-tour</string>
+    <string name="auto_25_chars_route_kl">Continuez à gaucher</string>
+    <string name="auto_25_chars_route_kr">Continuez à droite</string>
+    <string name="auto_25_chars_route_tslr">Tournez légèrement à droite</string>
+    <string name="auto_25_chars_route_tshl">Tournez franchement à gauche</string>
+    <string name="auto_25_chars_route_tsll">Tournez légèrement à gauche</string>
     <string name="rendering_avg_info_details">Images par sec. sur les 1 000 dernières images : %1$s
 \nProcesseur (tuiles) : %2$s
 \nProcesseur (durée d\'inactivité) : %3$s
@@ -5466,10 +5466,10 @@
     <string name="shared_string_decrease">Réduire</string>
     <string name="shared_string_source">Source</string>
     <string name="shared_string_no_internet_connection">Aucune connexion Internet</string>
-    <string name="no_photos_available_descr">Aucune image d\'utilisateur n\'a été ajoutée pour ce lieu</string>
-    <string name="no_photos_available">Aucune image disponible</string>
-    <string name="no_internet_descr">Veuillez vérifier votre connexion et réessayez.</string>
-    <string name="wikimedia">Wikimédia</string>
+    <string name="no_photos_available_descr">Aucune photo n\'a été ajoutée à cet endroit pour le moment</string>
+    <string name="no_photos_available">Aucune photo disponible</string>
+    <string name="no_internet_descr">Vérifier votre connexion et réessayez.</string>
+    <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Ouvrir dans le navigateur</string>
     <string name="obd_fuel_type_diesel">Diésel</string>
     <string name="obd_fuel_type_lpg">GPL</string>
