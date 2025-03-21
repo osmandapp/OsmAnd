@@ -459,4 +459,5 @@
     <string name="offline_weather_forecast">Tuairmse sìde far-loidhne</string>
     <string name="offline_wikivoyage">Wikivoyage far-loidhne</string>
     <string name="wikipedia_offline">Uicipeid far-loidhne</string>
+    <string name="osm_save_offline">Sàbhail far-loidhne</string>
 </resources>
