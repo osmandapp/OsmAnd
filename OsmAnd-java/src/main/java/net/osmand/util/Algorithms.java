@@ -1130,12 +1130,6 @@ public class Algorithms {
         return str1.compareTo(str2);
     }
 
-	public static <T extends Comparable<T>> T clamp(T value, T min, T max) {
-		if (value.compareTo(min) < 0) return min;
-		if (value.compareTo(max) > 0) return max;
-		return value;
-	}
-
 	public static String getFileAsString(File file) {
 		try {
 			FileInputStream fin = new FileInputStream(file);

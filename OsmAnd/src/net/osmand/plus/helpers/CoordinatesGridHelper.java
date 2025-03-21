@@ -5,6 +5,7 @@ import android.graphics.Color;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.math.MathUtils;
 
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
@@ -26,7 +27,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.Algorithms;
 
 public class CoordinatesGridHelper {
 
@@ -270,8 +270,8 @@ public class CoordinatesGridHelper {
 	                                                     @NonNull GridFormat gridFormat) {
 		Limits<Integer> selected = getZoomLevels(appMode);
 		Limits<Integer> supported = getSupportedZoomLevels(gridFormat);
-		int min = Algorithms.clamp(selected.min(), supported.min(), supported.max());
-		int max = Algorithms.clamp(selected.max(), supported.min(), supported.max());
+		int min = MathUtils.clamp(selected.min(), supported.min(), supported.max());
+		int max = MathUtils.clamp(selected.max(), supported.min(), supported.max());
 		return new Limits<>(min, max);
 	}
 

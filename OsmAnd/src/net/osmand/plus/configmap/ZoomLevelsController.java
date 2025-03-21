@@ -2,6 +2,7 @@ package net.osmand.plus.configmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.math.MathUtils;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,8 +26,8 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 		super(app);
 		this.initialLimits = initialLimits;
 		this.supportedLimits = supportedLimits;
-		int min = Algorithms.clamp(initialLimits.min(), supportedLimits.min(), supportedLimits.max());
-		int max = Algorithms.clamp(initialLimits.max(), supportedLimits.min(), supportedLimits.max());
+		int min = MathUtils.clamp(initialLimits.min(), supportedLimits.min(), supportedLimits.max());
+		int max = MathUtils.clamp(initialLimits.max(), supportedLimits.min(), supportedLimits.max());
 		this.selectedLimits = new Limits<>(min, max);
 	}
 
