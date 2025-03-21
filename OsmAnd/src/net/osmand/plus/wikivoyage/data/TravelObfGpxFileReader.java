@@ -39,7 +39,6 @@ import net.osmand.binary.HeightDataLoader;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.TravelObfGpxTrackOptimizer;
-import net.osmand.map.WorldRegion;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -393,7 +392,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     }
 
     private boolean shouldSkipRepository(AmenityIndexRepository repo, TravelArticle article) {
-        if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
+        if (repo.isWorldMap()) {
             return true; // World (basemap) files have huge bbox but never contain GPX data
         }
         if (article.hasOsmRouteId()) {

@@ -32,6 +32,8 @@ public interface AmenityIndexRepository {
 
 	File getFile();
 
+	boolean isWorldMap();
+
 	List<BinaryMapPoiReaderAdapter.PoiRegion> getReaderPoiIndexes();
 
 	void searchMapIndex(BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr);
