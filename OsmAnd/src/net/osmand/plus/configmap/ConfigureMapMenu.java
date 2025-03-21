@@ -95,7 +95,7 @@ public class ConfigureMapMenu {
 	}
 
 	public record Dialogs(Optional<CustomAlert.SingleSelectionDialogFragment> roadStyleDialog,
-						  Optional<ConfigureMapDialogs.MapLanguageDialog> mapLanguageDialog) {
+						  ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog) {
 	}
 
 	public record ItemAndDialog(ContextMenuItem item,
@@ -103,7 +103,7 @@ public class ConfigureMapMenu {
 	}
 
 	private record MapLanguageItemAndDialog(ContextMenuItem item,
-											Optional<ConfigureMapDialogs.MapLanguageDialog> dialog) {
+											ConfigureMapDialogs.MapLanguageDialog dialog) {
 	}
 
 	public ConfigureMapMenu(@NonNull OsmandApplication app) {
@@ -622,14 +622,11 @@ public class ConfigureMapMenu {
 						.setLayout(R.layout.list_item_single_line_descrition_narrow)
 						.setIcon(R.drawable.ic_action_map_language)
 						.setItemDeleteAction(settings.MAP_PREFERRED_LOCALE);
-		final Function<OnDataChangeUiAdapter, ConfigureMapDialogs.MapLanguageDialog> createDialog =
-				_uiAdapter ->
-						ConfigureMapDialogs.createMapLanguageDialog(
-								activity,
-								nightMode,
-								mapLanguageItem,
-								_uiAdapter);
-		final Optional<ConfigureMapDialogs.MapLanguageDialog> dialog = uiAdapter.map(createDialog);
+		final ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog =
+				ConfigureMapDialogs.createMapLanguageDialog(
+						activity,
+						nightMode,
+						mapLanguageItem);
 		mapLanguageItem
 				.setListener(
 						new ItemClickListener() {
@@ -639,20 +636,14 @@ public class ConfigureMapMenu {
 															  final View view,
 															  final ContextMenuItem item,
 															  final boolean isChecked) {
-								// FK-FIXME: Description wird nicht angepasst nach einer Suche (z.B. Afrikaans) und anschließender Änderung
 								if (AndroidUtils.isActivityNotDestroyed(activity)) {
-									final ConfigureMapDialogs.MapLanguageDialog dialog = getDialog(uiAdapter);
-									dialog.updateDialogStateFromPreferences();
-									dialog.show(activity.getSupportFragmentManager(), null);
+									mapLanguageDialog.updateDialogStateFromPreferences();
+									mapLanguageDialog.show(activity.getSupportFragmentManager(), null);
 								}
 								return false;
 							}
-
-							private ConfigureMapDialogs.MapLanguageDialog getDialog(final OnDataChangeUiAdapter uiAdapter) {
-								return dialog.orElseGet(() -> createDialog.apply(uiAdapter));
-							}
 						});
-		return new MapLanguageItemAndDialog(mapLanguageItem, dialog);
+		return new MapLanguageItemAndDialog(mapLanguageItem, mapLanguageDialog);
 	}
 
 	private ContextMenuItem createProperties(List<RenderingRuleProperty> customRules,

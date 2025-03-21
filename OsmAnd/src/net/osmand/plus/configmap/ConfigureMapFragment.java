@@ -85,7 +85,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	}
 
 	public ConfigureMapDialogs.MapLanguageDialog getMapLanguageDialog() {
-		return dialogs.mapLanguageDialog().orElseThrow();
+		return dialogs.mapLanguageDialog();
 	}
 
 	@Override

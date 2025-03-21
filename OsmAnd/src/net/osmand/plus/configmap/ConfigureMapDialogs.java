@@ -175,9 +175,7 @@ public class ConfigureMapDialogs {
 
 	public static MapLanguageDialog createMapLanguageDialog(final @NonNull MapActivity activity,
 															final boolean nightMode,
-															final @NonNull ContextMenuItem item,
-															// FK-TODO: remove uiAdapter
-															final @NonNull OnDataChangeUiAdapter uiAdapter) {
+															final @NonNull ContextMenuItem item) {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
@@ -251,11 +249,8 @@ public class ConfigureMapDialogs {
 						final int index = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
 						view.getSettings().MAP_PREFERRED_LOCALE.set(mapLanguagesIds.get(index));
 						activity.refreshMapComplete();
-						// FK-FIXME: 1. search for "Afrikaans", 2. click search result to open dialog, 3. click Afrikaans, 4. click Apply to close the dialog, then the following item erroneously does not show af (for Afrikaans) in it's description, but displays the "old" description.
 						item.setDescription(getLocaleDescr(index));
-						uiAdapter.onDataSetInvalidated();
-						// FK-TODO: reactivate?
-						// activity.getDashboard().refreshContent(false);
+						activity.getDashboard().refreshContent(false);
 					}
 
 					private String getLocaleDescr(final int index) {
