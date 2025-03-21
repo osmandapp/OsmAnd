@@ -108,6 +108,11 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		this.selectedFragment = fragment;
 	}
 
+	@NonNull
+	public WidgetsPanel getSelectedPanel() {
+		return selectedPanel;
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -117,7 +117,7 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 		}
 
 		if (isEditMode()) {
-			List<Object> savedList = controller.getReorderList(selectedPanel.ordinal());
+			List<Object> savedList = controller.getReorderList();
 			if (!Algorithms.isEmpty(savedList)) {
 				updateAdapter(new ArrayList<>(savedList), false);
 			}
@@ -139,9 +139,6 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (isEditMode()) {
-			controller.setReorderList(adapter.getItems(), selectedPanel.ordinal());
-		}
 		Fragment fragment = getParentFragment();
 		if (fragment instanceof ConfigureWidgetsFragment) {
 			((ConfigureWidgetsFragment) fragment).setSelectedFragment(null);
@@ -240,6 +237,12 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(SELECTED_PANEL_KEY, selectedPanel.name());
+		Fragment parent = getParentFragment();
+		if (parent instanceof ConfigureWidgetsFragment configureWidgetsFragment) {
+			if (isEditMode() && selectedPanel == configureWidgetsFragment.getSelectedPanel()) {
+				controller.setReorderList(adapter.getItems());
+			}
+		}
 	}
 
 	@NonNull
