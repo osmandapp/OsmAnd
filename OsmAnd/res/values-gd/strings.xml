@@ -424,4 +424,8 @@
     <string name="original_shape_description">Chumadh a cruth fhèin aig gach puing.</string>
     <string name="show_list">Seall liosta</string>
     <string name="popular_places_nearby">Àitichean ainmeil faisg air làimh</string>
+    <string name="shared_string_offline_only">Far-loidhne a-mhàin</string>
+    <string name="weather_online">Sìde air-loidhne</string>
+    <string name="shared_string_online_only">Air-loidhne a-mhàin</string>
+    <string name="help_article_map_raster_maps_name">Mapaichean Raster (Air-loidhne / Far-loidhne)</string>
 </resources>
