@@ -460,4 +460,14 @@
     <string name="offline_wikivoyage">Wikivoyage far-loidhne</string>
     <string name="wikipedia_offline">Uicipeid far-loidhne</string>
     <string name="osm_save_offline">Sàbhail far-loidhne</string>
+    <string name="search_offline_address">Lorg far-loidhne</string>
+    <string name="router_service_descr">Seirbheis seòladaireachd air-loidhne no far-loidhne.</string>
+    <string name="offline_edition">Deasachadh far-loidhne</string>
+    <string name="offline_maps_and_navigation">Mapaichean far-loidhne\n⁊ Seòladaireachd</string>
+    <string name="dash_download_msg_none">Luchdaich a-nuas mapaichean far-loidhne?</string>
+    <string name="amenity_type_osmwiki">Uicipeid (far-loidhne)</string>
+    <string name="search_osm_offline">Lorg le geò-lorgadh</string>
+    <string name="vector_data">Mapaichean-bheactor far-loidhne</string>
+    <string name="search_offline_clear_search">Lorg ùr</string>
+    <string name="internet_connection_required_for_online_route">Chan obraich seòladaireachd far-loidhne.</string>
 </resources>
