@@ -20,7 +20,7 @@ public class Matchers {
 
 	@NonNull
 	public static Matcher<View> hasOnClickListener() {
-		return new TypeSafeMatcher<View>() {
+		return new TypeSafeMatcher<>() {
 
 			@Override
 			protected boolean matchesSafely(View item) {
@@ -36,7 +36,8 @@ public class Matchers {
 
 	@NonNull
 	public static Matcher<View> childAtPosition(@NonNull Matcher<View> parentMatcher, int position) {
-		return new TypeSafeMatcher<View>() {
+		return new TypeSafeMatcher<>() {
+
 			@Override
 			public void describeTo(Description description) {
 				description.appendText("Child at position " + position + " in parent ");
@@ -45,16 +46,17 @@ public class Matchers {
 
 			@Override
 			public boolean matchesSafely(View view) {
-				ViewParent parent = view.getParent();
-				return parent instanceof ViewGroup && parentMatcher.matches(parent)
-						&& view.equals(((ViewGroup) parent).getChildAt(position));
+				final ViewParent parent = view.getParent();
+				return parent instanceof final ViewGroup _parent
+						&& parentMatcher.matches(parent)
+						&& view.equals(_parent.getChildAt(position));
 			}
 		};
 	}
 
 	@NonNull
 	public static Matcher<QuickSearchListItem> searchItemWithLocaleName(@NonNull String localeName) {
-		return new TypeSafeMatcher<QuickSearchListItem>() {
+		return new TypeSafeMatcher<>() {
 			@Override
 			protected boolean matchesSafely(QuickSearchListItem item) {
 				return item.getSearchResult() != null && localeName.equals(item.getSearchResult().localeName);

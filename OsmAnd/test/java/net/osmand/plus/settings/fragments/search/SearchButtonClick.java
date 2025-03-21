@@ -52,7 +52,8 @@ class SearchButtonClick {
 		return allOf(
 				withId(R.id.action_button),
 				childAtPosition(
-						allOf(withId(R.id.actions_container),
+						allOf(
+								withId(R.id.actions_container),
 								childAtPosition(
 										withClassName(is("android.widget.LinearLayout")),
 										2)),
