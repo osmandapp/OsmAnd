@@ -21,6 +21,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.text.util.Linkify;
 import android.util.Base64;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +46,14 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapMarker;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.Amenity;
+import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -64,6 +67,8 @@ import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.render.TravelRendererHelper.OnFileVisibilityChangeListener;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
@@ -75,10 +80,12 @@ import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.POITileProvider;
 import net.osmand.plus.widgets.WebViewEx;
-import net.osmand.data.DataSourceType;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
 import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 import net.osmand.shared.util.NetworkImageLoader;
@@ -89,6 +96,7 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -127,6 +135,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private String routeArticlePointsFilterByName;
 	private boolean fileVisibilityChanged;
 	public CustomMapObjects<Amenity> customObjectsDelegate;
+
 
 	private static final int IMAGE_ICON_BORDER_DP = 2;
 	private static final int IMAGE_ICON_SIZE_DP = 45;
@@ -497,17 +506,22 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			}
 
 			try {
+				List<Amenity> res = new ArrayList<>();
 				for (int i = 0; i < objects.size(); i++) {
 					Amenity amenity = objects.get(i);
 					LatLon latLon = amenity.getLocation();
-
 					boolean add = mapRenderer != null
 							? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
 							: tb.isLatLonNearPixel(latLon, point.x, point.y, radius);
 					if (add) {
-						result.add(amenity);
+						if (topPlaces != null && topPlaces.containsValue(amenity)) {
+							res = Collections.singletonList(amenity);
+							break;
+						}
+						res.add(amenity);
 					}
 				}
+				result.addAll(res);
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
@@ -859,6 +873,17 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Override
+	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && topPlaces != null && o instanceof Amenity && topPlaces.containsValue(o)) {
+			showTopPlaceContextMenu((Amenity) o);
+			return true;
+		} else {
+			return IContextMenuProvider.super.runExclusiveAction(o, unknownLocation);
+		}
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (tileBox.getZoom() >= START_ZOOM) {
@@ -958,6 +983,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			customObjectsDelegate.setCustomMapObjects(amenities);
 			getApplication().getOsmandMap().refreshMap();
 		}
+	}
+
+	private void showTopPlaceContextMenu(@NonNull Amenity topPlace) {
+		app.getSettings().setMapLocationToShow(
+				topPlace.getLocation().getLatitude(), topPlace.getLocation().getLongitude(),
+				SearchCoreFactory.PREFERRED_NEARBY_POINT_ZOOM,
+				QuickSearchWikiItem.getPointDescription(app, topPlace), true, topPlace);
+		MapActivity.launchMapActivityMoveToTop(requireMapActivity());
 	}
 
 	private Bitmap createImageBitmap(Bitmap bitmap, boolean isSelected) {

@@ -34,6 +34,7 @@ import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
 import net.osmand.plus.search.listitems.QuickSearchListItem
+import net.osmand.plus.search.listitems.QuickSearchWikiItem
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
@@ -293,21 +294,10 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun showPointInContextMenu(mapActivity: MapActivity, point: Amenity) {
-		val latitude = point.location.latitude
-		val longitude = point.location.longitude
-
-		val core = app.getSearchUICore().getCore()
-		val phrase = SearchPhrase.emptyPhrase(core.searchSettings)
-
-		val sr = SearchCoreFactory.createSearchResult(point, phrase, MapPoiTypes.getDefault())
-		val pair = QuickSearchListItem.getPointDescriptionObject(app, sr)
 		app.settings.setMapLocationToShow(
-			latitude,
-			longitude,
+			point.location.latitude, point.location.longitude,
 			SearchCoreFactory.PREFERRED_NEARBY_POINT_ZOOM,
-			pair.first as PointDescription,
-			true,
-			point
+			QuickSearchWikiItem.getPointDescription(app, point), true, point
 		)
 		MapActivity.launchMapActivityMoveToTop(mapActivity)
 	}
