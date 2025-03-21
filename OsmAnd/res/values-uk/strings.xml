@@ -5742,4 +5742,6 @@
     <string name="equator">Екватор</string>
     <string name="shared_string_offline_only">Тільки офлайн</string>
     <string name="shared_string_online_only">Тільки онлайн</string>
+    <string name="row_height">Висота рядка</string>
+    <string name="add_widget">Додати віджет</string>
 </resources>
