@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
