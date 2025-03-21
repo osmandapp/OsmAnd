@@ -772,38 +772,37 @@ public class ConfigureMapMenu {
 							nightMode,
 							null),
 					Optional.empty());
-		} else {
-			final ContextMenuItem item =
-					new ContextMenuItem(id)
-							.setTitle(getPropertyName(property, activity))
-							.setDescription(getDescription(property, activity.getMyApplication()))
-							.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
-							.setLayout(R.layout.list_item_single_line_descrition_narrow);
-			final CustomAlert.SingleSelectionDialogFragment dialog = ConfigureMapDialogs.createRenderingPropertyDialog(activity, property, item, nightMode);
-			item.setListener(
-					new ItemClickListener() {
-
-						@Override
-						public boolean onContextMenuClick(final OnDataChangeUiAdapter uiAdapter,
-														  final View view,
-														  final ContextMenuItem _item,
-														  final boolean isChecked) {
-							if (AndroidUtils.isActivityNotDestroyed(activity)) {
-								showDialog();
-							}
-							return false;
-						}
-
-						private void showDialog() {
-							dialog.setSelectedIndex(ConfigureMapDialogs.getSelectedIndex(activity, property));
-							dialog.show(activity.getSupportFragmentManager());
-						}
-					});
-			if (icon != INVALID_ID) {
-				item.setIcon(icon);
-			}
-			return new ItemAndDialog(item, Optional.of(dialog));
 		}
+		final ContextMenuItem item =
+				new ContextMenuItem(id)
+						.setTitle(getPropertyName(property, activity))
+						.setDescription(getDescription(property, activity.getMyApplication()))
+						.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
+						.setLayout(R.layout.list_item_single_line_descrition_narrow);
+		final CustomAlert.SingleSelectionDialogFragment dialog = ConfigureMapDialogs.createRenderingPropertyDialog(activity, property, item, nightMode);
+		item.setListener(
+				new ItemClickListener() {
+
+					@Override
+					public boolean onContextMenuClick(final OnDataChangeUiAdapter uiAdapter,
+													  final View view,
+													  final ContextMenuItem _item,
+													  final boolean isChecked) {
+						if (AndroidUtils.isActivityNotDestroyed(activity)) {
+							showDialog();
+						}
+						return false;
+					}
+
+					private void showDialog() {
+						dialog.setSelectedIndex(ConfigureMapDialogs.getSelectedIndex(activity, property));
+						dialog.show(activity.getSupportFragmentManager());
+					}
+				});
+		if (icon != INVALID_ID) {
+			item.setIcon(icon);
+		}
+		return new ItemAndDialog(item, Optional.of(dialog));
 	}
 
 	private static String getPropertyName(final RenderingRuleProperty property, final Context context) {

@@ -292,11 +292,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final DetailsBottomSheet detailsBottomSheet) {
-			setProperties(detailsBottomSheet.properties);
-		}
-
-		public void setProperties(final List<RenderingRuleProperty> properties) {
-			this.properties = properties;
+			properties = detailsBottomSheet.properties;
 		}
 
 		@Override

@@ -379,10 +379,12 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<ConfigureMapFragment>, PreferenceFragmentHandlerProvider {
 
 		private ConfigureMapFragment configureMapFragment;
+		private List<ContextMenuItem> items;
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final ConfigureMapFragment configureMapFragment) {
 			this.configureMapFragment = configureMapFragment;
+			items = configureMapFragment.adapter.getItems();
 		}
 
 		public ConfigureMapFragment getPrincipal() {
@@ -396,13 +398,9 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			screen.setTitle("screen title");
 			screen.setSummary("screen summary");
 			PreferenceFragment
-					.asPreferences(getItems(), context)
+					.asPreferences(items, context)
 					.forEach(screen::addPreference);
 			setPreferenceScreen(screen);
-		}
-
-		private List<ContextMenuItem> getItems() {
-			return configureMapFragment.adapter.getItems();
 		}
 
 		private static List<Preference> asPreferences(final List<ContextMenuItem> contextMenuItems, final Context context) {
@@ -477,26 +475,24 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
-				case ROAD_STYLE_ID -> configureMapFragment.getRoadStyleDialog().isPresent() ?
-						Optional.of(
-								new PreferenceFragmentHandler() {
+				case ROAD_STYLE_ID -> Optional.of(
+						new PreferenceFragmentHandler() {
 
-									@Override
-									public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
-										return CustomAlert.SingleSelectionDialogFragment.PreferenceFragment.class;
-									}
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return CustomAlert.SingleSelectionDialogFragment.PreferenceFragment.class;
+							}
 
-									@Override
-									public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
-										return new CustomAlert.SingleSelectionDialogFragment.PreferenceFragment();
-									}
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return new CustomAlert.SingleSelectionDialogFragment.PreferenceFragment();
+							}
 
-									@Override
-									public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
-										return false;
-									}
-								}) :
-						Optional.empty();
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return false;
+							}
+						});
 				case MAP_LANGUAGE_ID -> Optional.of(
 						new PreferenceFragmentHandler() {
 
