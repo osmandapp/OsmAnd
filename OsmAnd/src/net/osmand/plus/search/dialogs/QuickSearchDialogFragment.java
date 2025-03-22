@@ -32,6 +32,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -2103,22 +2104,34 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		PluginsHelper.onNewDownloadIndexes(this);
 		updateContent(heading);
-		if (historySearchFragment != null) {
-			historySearchFragment.onUpdatedIndexesList();
+		List<Fragment> childFragment = getChildFragmentManager().getFragments();
+		for(Fragment fragment : childFragment) {
+			if(fragment instanceof DownloadEvents downloadEventsFragment) {
+				downloadEventsFragment.onUpdatedIndexesList();
+			}
 		}
 	}
 
 	@Override
 	public void downloadInProgress() {
 		updateContent(heading);
-		if (historySearchFragment != null) {
-			historySearchFragment.downloadInProgress();
+		List<Fragment> childFragment = getChildFragmentManager().getFragments();
+		for(Fragment fragment : childFragment) {
+			if(fragment instanceof DownloadEvents downloadEventsFragment) {
+				downloadEventsFragment.downloadInProgress();
+			}
 		}
 	}
 
 	@Override
 	public void downloadHasFinished() {
 		updateContent(heading);
+		List<Fragment> childFragment = getChildFragmentManager().getFragments();
+		for(Fragment fragment : childFragment) {
+			if(fragment instanceof DownloadEvents downloadEventsFragment) {
+				downloadEventsFragment.downloadHasFinished();
+			}
+		}
 	}
 
 	public void reloadIndexFiles() {

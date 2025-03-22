@@ -49,6 +49,13 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	}
 
 	@Override
+	public void downloadHasFinished() {
+		if(nearbyPlacesCard != null) {
+			nearbyPlacesCard.downloadHasFinished();
+		}
+	}
+
+	@Override
 	public void downloadInProgress() {
 		if(nearbyPlacesCard != null) {
 			nearbyPlacesCard.downloadInProgress();
@@ -132,7 +139,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 
 	private void setupNearByCard(@NonNull View view) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), !app.getSettings().isLightContent());
-		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this);
+		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this, ((QuickSearchDialogFragment) getParentFragment()).isNightMode());
 		getListView().addHeaderView(nearbyPlacesCard, null, false);
 		getListView().addHeaderView(themedInflater.inflate(R.layout.recently_visited_header, getListView(), false));
 	}

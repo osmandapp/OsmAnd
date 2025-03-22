@@ -18,12 +18,13 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.RequestMapThemeParams;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class DownloadItemsAdapter extends RecyclerView.Adapter<DownloadItemsAdapter.ViewHolder> {
+	public static final Integer DOWNLOADING_WIKI_MAPS_TYPE = 0;
 
 	public interface OnItemClickListener {
 		void onItemClick(IndexItem item);
@@ -31,14 +32,16 @@ class DownloadItemsAdapter extends RecyclerView.Adapter<DownloadItemsAdapter.Vie
 
 	private final OsmandApplication app;
 	private final OnItemClickListener listener;
-	private List<IndexItem> items = new ArrayList<>();
+	private List<Object> items = new ArrayList<>();
+	private boolean nightMode;
 
-	DownloadItemsAdapter(@NonNull OsmandApplication app, @NonNull OnItemClickListener listener) {
+	DownloadItemsAdapter(@NonNull OsmandApplication app, @NonNull OnItemClickListener listener, boolean nightMode) {
 		this.app = app;
 		this.listener = listener;
+		this.nightMode = nightMode;
 	}
 
-	public void setItems(List<IndexItem> items) {
+	public void setItems(List<Object> items) {
 		this.items = items;
 		notifyDataSetChanged();
 	}
@@ -46,17 +49,18 @@ class DownloadItemsAdapter extends RecyclerView.Adapter<DownloadItemsAdapter.Vie
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_icon_and_download, parent, false);
+		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
+		View view = inflater.inflate(R.layout.list_item_icon_and_download, parent, false);
 		return new ViewHolder(view);
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		IndexItem item = items.get(position);
-		if (item == null) {
+		Object item = items.get(position);
+		if (item == DOWNLOADING_WIKI_MAPS_TYPE) {
 			holder.bindLoading();
 		} else {
-			holder.bind(item, position == getItemCount() - 1);
+			holder.bind((IndexItem) item, position == getItemCount() - 1);
 		}
 	}
 
@@ -116,11 +120,6 @@ class DownloadItemsAdapter extends RecyclerView.Adapter<DownloadItemsAdapter.Vie
 	}
 
 	private Drawable getIconDrawable(@DrawableRes int resId) {
-		return app.getUIUtilities().getIcon(resId, isNightMode());
-	}
-
-	protected boolean isNightMode() {
-		RequestMapThemeParams params = new RequestMapThemeParams().markIgnoreExternalProvider();
-		return app.getDaynightHelper().isNightMode(true, params);
+		return app.getUIUtilities().getIcon(resId, nightMode);
 	}
 }
