@@ -776,6 +776,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			addMoreButton(true);
 			interruptedSearch = false;
 		}
+		visibilityChanged(true);
 	}
 
 	public void hide() {
@@ -792,6 +793,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			dialog.hide();
 		}
 		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
+		visibilityChanged(false);
+	}
+
+	private void visibilityChanged(boolean visible) {
+		for (Fragment fragment : getChildFragmentManager().getFragments()) {
+			if (fragment instanceof SearchVisibilityListener listener && fragment.isAdded()) {
+				listener.onVisibilityChanged(visible);
+			}
+		}
 	}
 
 	public void closeSearch() {
@@ -950,6 +960,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			runSearch();
 		}
 		pausedSearch = false;
+		visibilityChanged(true);
 	}
 
 	@Override
@@ -960,6 +971,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		hideTimeMs = System.currentTimeMillis();
 		stopLocationUpdate();
 		hideProgressBar();
+		visibilityChanged(false);
 	}
 
 	@Override
@@ -2154,7 +2166,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		boolean searchFinished(SearchPhrase phrase);
 	}
 
-	private PoiUIFilter initPoiUIFilter(TopIndexFilter topIndexFilter, ProcessTopIndex processAfter) {
+	public interface SearchVisibilityListener {
+		void onVisibilityChanged(boolean visible);
+	}
+
+	private PoiUIFilter initPoiUIFilter(TopIndexFilter topIndexFilter,
+			ProcessTopIndex processAfter) {
 		PoiUIFilter poiUIFilter = app.getPoiFilters().getFilterById(topIndexFilter.getFilterId());
 		if (poiUIFilter != null) {
 			// use saved filter

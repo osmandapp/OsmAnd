@@ -19,12 +19,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
 
-public class TimeToNavigationPointSettingsFragment extends BaseSimpleWidgetSettingsFragment {
+public class TimeToNavigationPointInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String KEY_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO = "arrival_time_otherwise_time_to_go";
 
@@ -41,7 +40,6 @@ public class TimeToNavigationPointSettingsFragment extends BaseSimpleWidgetSetti
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null) {
 			TimeToNavigationPointWidget navigationPointWidget = (TimeToNavigationPointWidget) widgetInfo.widget;
 			intermediate = navigationPointWidget.isIntermediate();
@@ -53,12 +51,9 @@ public class TimeToNavigationPointSettingsFragment extends BaseSimpleWidgetSetti
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.time_to_navigation_point_widget_settings_fragment, container);
-		updateToolbarIcon();
 		setupTimeModeSelector();
-		themedInflater.inflate(R.layout.divider, container);
-		super.setupContent(themedInflater, container);
 	}
 
 	private void setupTimeModeSelector() {
@@ -74,7 +69,6 @@ public class TimeToNavigationPointSettingsFragment extends BaseSimpleWidgetSetti
 			} else {
 				arrivalTimeButton.setChecked(false);
 			}
-			updateToolbarIcon();
 		};
 
 		TimeToNavigationPointState timeToGoState = getWidgetState(false);
@@ -105,12 +99,6 @@ public class TimeToNavigationPointSettingsFragment extends BaseSimpleWidgetSetti
 
 		container.setOnClickListener(v -> compoundButton.setChecked(true));
 		container.setBackground(getPressedStateDrawable());
-	}
-
-	private void updateToolbarIcon() {
-		ImageView icon = view.findViewById(R.id.icon);
-		int iconId = getWidgetState(arrivalTimeOtherwiseTimeToGo).getIconId(nightMode);
-		icon.setImageDrawable(getIcon(iconId));
 	}
 
 	@NonNull

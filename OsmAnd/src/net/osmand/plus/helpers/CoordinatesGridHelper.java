@@ -5,6 +5,7 @@ import android.graphics.Color;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.math.MathUtils;
 
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
@@ -269,8 +270,8 @@ public class CoordinatesGridHelper {
 	                                                     @NonNull GridFormat gridFormat) {
 		Limits<Integer> selected = getZoomLevels(appMode);
 		Limits<Integer> supported = getSupportedZoomLevels(gridFormat);
-		int min = Math.max(supported.min(), selected.min());
-		int max = Math.min(supported.max(), selected.max());
+		int min = MathUtils.clamp(selected.min(), supported.min(), supported.max());
+		int max = MathUtils.clamp(selected.max(), supported.min(), supported.max());
 		return new Limits<>(min, max);
 	}
 

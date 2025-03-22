@@ -771,7 +771,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void showAndHideMapPosition() {
 		setShowMapPosition(true);
-		getApplication().runMessageInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, () -> {
+		getApplication().runInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, () -> {
 			if (isShowMapPosition()) {
 				setShowMapPosition(false);
 				refreshMap();

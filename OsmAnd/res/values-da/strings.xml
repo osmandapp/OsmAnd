@@ -5763,4 +5763,6 @@
     <string name="equator">Ækvator</string>
     <string name="shared_string_offline_only">Kun offline</string>
     <string name="shared_string_online_only">Kun online</string>
+    <string name="add_widget">Tilføj modul</string>
+    <string name="row_height">Rækkehøjde</string>
 </resources>

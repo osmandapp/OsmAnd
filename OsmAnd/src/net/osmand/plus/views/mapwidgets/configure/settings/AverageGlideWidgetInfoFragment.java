@@ -7,11 +7,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.GlideAverageWidget;
 
-public class AverageGlideWidgetSettingsFragment extends BaseSimpleWidgetSettingsFragment {
+public class AverageGlideWidgetInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String KEY_TIME_INTERVAL = "time_interval";
 
@@ -30,7 +29,6 @@ public class AverageGlideWidgetSettingsFragment extends BaseSimpleWidgetSettings
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null) {
 			widget = ((GlideAverageWidget) widgetInfo.widget);
 			long defaultInterval = widget.getMeasuredInterval(appMode);
@@ -41,14 +39,12 @@ public class AverageGlideWidgetSettingsFragment extends BaseSimpleWidgetSettings
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.fragment_widget_settings_average_glide_ratio, container);
 
 		timeIntervalCard = new TimeIntervalCard(requireMyActivity(), initialIntervalMillis);
 		ViewGroup cardContainer = view.findViewById(R.id.time_interval_card_container);
 		cardContainer.addView(timeIntervalCard.build(cardContainer.getContext()));
-		themedInflater.inflate(R.layout.divider, container);
-		super.setupContent(themedInflater, container);
 	}
 
 	@Override

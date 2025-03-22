@@ -11,7 +11,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.widget.ZoomLevelWidget;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgetstates.ZoomLevelWidgetState.ZoomLevelType;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -19,7 +18,7 @@ import net.osmand.plus.widgets.alert.CustomAlert;
 
 import androidx.annotation.NonNull;
 
-public class ZoomLevelSettingsFragment extends BaseSimpleWidgetSettingsFragment {
+public class ZoomLevelInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String ZOOM_LEVEL_TYPE_KEY = "zoom_level_type";
 
@@ -35,7 +34,6 @@ public class ZoomLevelSettingsFragment extends BaseSimpleWidgetSettingsFragment 
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null) {
 			ZoomLevelWidget widget = (ZoomLevelWidget) widgetInfo.widget;
 			zoomLevelTypePref = widget.getZoomLevelTypePref();
@@ -58,16 +56,13 @@ public class ZoomLevelSettingsFragment extends BaseSimpleWidgetSettingsFragment 
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.fragment_widget_settings_zoom_level, container);
 
 		View zoomLevelTypeContainer = container.findViewById(R.id.zoom_level_type_container);
 		zoomLevelTypeContainer.setOnClickListener(v -> showZoomLevelTypeSelectionDialog());
 		zoomLevelTypeContainer.setBackground(getPressedStateDrawable());
 		updateSelectedZoomLevelTypeText();
-		themedInflater.inflate(R.layout.divider, container);
-
-		super.setupContent(themedInflater, container);
 	}
 
 	private void showZoomLevelTypeSelectionDialog() {

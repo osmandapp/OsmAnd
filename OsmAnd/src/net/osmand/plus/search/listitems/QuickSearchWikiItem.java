@@ -7,11 +7,15 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
@@ -109,5 +113,11 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 	@NonNull
 	public LatLon getLocation() {
 		return location;
+	}
+
+	public static PointDescription getPointDescription(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(app.getSearchUICore().getCore().getSearchSettings());
+		SearchResult sr = SearchCoreFactory.createSearchResult(amenity, phrase, MapPoiTypes.getDefault());
+		return getPointDescriptionObject(app, sr).first;
 	}
 }

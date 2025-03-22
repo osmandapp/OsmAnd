@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
@@ -155,17 +156,17 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public int getRightIconId() {
-		return getRightIconId(amenity);
+		return getRightIconId(getApplication(), amenity);
 	}
 
-	public static int getRightIconId(Amenity amenity) {
+	public static int getRightIconId(@NonNull Context ctx, @NonNull Amenity amenity) {
 		String iconName = amenity.getGpxIcon();
 		if (iconName == null) {
 			String mapIconName = amenity.getMapIconName();
 			if (!Algorithms.isEmpty(mapIconName) && (RenderingIcons.containsBigIcon(mapIconName))) {
 				iconName = mapIconName;
 			} else {
-				iconName = RenderingIcons.getBigIconNameForAmenity(amenity);
+				iconName = RenderingIcons.getBigIconNameForAmenity(ctx, amenity);
 			}
 		}
 		return iconName == null ? 0 : RenderingIcons.getBigIconResourceId(iconName);
@@ -239,7 +240,7 @@ public class AmenityMenuController extends MenuController {
 		}
 	}
 
-	public static String getTypeStr(Amenity amenity) {
+	public static String getTypeStr(@NonNull Amenity amenity) {
 		return amenity.getSubTypeStr();
 	}
 
@@ -270,10 +271,10 @@ public class AmenityMenuController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 	}
 
-	public static void addTypeMenuItem(Amenity amenity, MenuBuilder builder) {
+	public static void addTypeMenuItem(@NonNull Amenity amenity, @NonNull MenuBuilder builder) {
 		String typeStr = getTypeStr(amenity);
 		if (!Algorithms.isEmpty(typeStr)) {
-			int resId = getRightIconId(amenity);
+			int resId = getRightIconId(builder.getApplication(), amenity);
 			if (resId == 0) {
 				PoiCategory pc = amenity.getType();
 				resId = RenderingIcons.getBigIconResourceId(pc.getIconKeyName());

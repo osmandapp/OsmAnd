@@ -60,7 +60,7 @@ public class LocationPointWrapper {
 	public Drawable getDrawable(@NonNull Context context, @NonNull OsmandApplication app, boolean nightMode) {
 		if (type == WaypointHelper.POI) {
 			Amenity amenity = ((AmenityLocationPoint) point).getAmenity();
-			String iconName = RenderingIcons.getBigIconNameForAmenity(amenity);
+			String iconName = RenderingIcons.getBigIconNameForAmenity(app, amenity);
 			return iconName == null ? null : AppCompatResources.getDrawable(context,
 					RenderingIcons.getBigIconResourceId(iconName));
 		} else if (type == WaypointHelper.TARGETS) {
