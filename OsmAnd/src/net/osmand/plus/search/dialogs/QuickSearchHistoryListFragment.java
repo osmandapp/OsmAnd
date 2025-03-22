@@ -17,6 +17,7 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.SearchVisibilityListener;
@@ -32,7 +33,7 @@ import net.osmand.search.core.SearchPhrase;
 import java.util.List;
 
 public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements IMapLocationListener,
-		MapZoomChangeListener, SearchVisibilityListener, NearbyItemClickListener {
+		MapZoomChangeListener, SearchVisibilityListener, NearbyItemClickListener, DownloadIndexesThread.DownloadEvents {
 
 	public static final int TITLE = R.string.shared_string_explore;
 
@@ -40,6 +41,27 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private NearbyPlacesCard nearbyPlacesCard;
 	private QuadRect visiblePlacesRect = new QuadRect();
 	private long lastPointListRectUpdate = 0;
+
+	@Override
+	public void onUpdatedIndexesList() {
+		if(nearbyPlacesCard != null) {
+			nearbyPlacesCard.onUpdatedIndexesList();
+		}
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		if(nearbyPlacesCard != null) {
+			nearbyPlacesCard.downloadHasFinished();
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+		if(nearbyPlacesCard != null) {
+			nearbyPlacesCard.downloadInProgress();
+		}
+	}
 
 	public void onNearbyItemClicked(@NonNull Amenity amenity) {
 		SearchUICore core = app.getSearchUICore().getCore();
@@ -119,7 +141,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 
 	private void setupNearByCard(@NonNull View view) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), !app.getSettings().isLightContent());
-		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this);
+		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this, ((QuickSearchDialogFragment) getParentFragment()).isNightMode());
 		getListView().addHeaderView(nearbyPlacesCard, null, false);
 		getListView().addHeaderView(themedInflater.inflate(R.layout.recently_visited_header, getListView(), false));
 	}
