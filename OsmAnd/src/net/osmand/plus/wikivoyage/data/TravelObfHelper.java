@@ -22,7 +22,6 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.resources.AmenityIndexRepository;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -200,7 +199,7 @@ public class TravelObfHelper implements TravelHelper {
 		TravelGpx travelGpx = null;
 		do {
 			for (AmenityIndexRepository repo : getTravelGpxRepositories()) {
-				if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
+				if (repo.isWorldMap()) {
 					continue;
 				}
 				if (!isLocationIntersectsWithRepo(repo, location)) {

@@ -35,6 +35,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -807,7 +808,7 @@ public class ResourceManager {
 			double leftLongitude, double bottomLatitude,
 			double rightLongitude, int zoom, boolean includeTravel,
 			ResultMatcher<Amenity> matcher) {
-		List<Amenity> amenities = new ArrayList<>();
+		Map<Long, Amenity> liveAmenities = new HashMap<>(); // live-updates
 		searchAmenitiesInProgress = true;
 		try {
 			boolean isEmpty = filter.isEmpty();
@@ -819,24 +820,57 @@ public class ResourceManager {
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
 				int right31 = MapUtils.get31TileNumberX(rightLongitude);
-				for (AmenityIndexRepository index : getAmenityRepositories(includeTravel)) {
+
+				List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel);
+
+				// Read World base maps before regions.
+				for (AmenityIndexRepository repo : repos) {
+					if (repo.isWorldMap()) {
+						List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
+								zoom, filter, additionalFilter, matcher);
+						if (foundAmenities != null) {
+							iterateLiveAmenities(foundAmenities, liveAmenities);
+						}
+					}
+				}
+
+				// ResourceManager.getAmenityRepositories() returns OBF files list in Z-A order.
+				// Live updates require A-Z order, so use reverted iterator as the easiest way.
+				ListIterator<AmenityIndexRepository> reversedRepos = repos.listIterator(repos.size());
+				while (reversedRepos.hasPrevious()) {
+					AmenityIndexRepository repo = reversedRepos.previous();
+					if (repo.isWorldMap()) {
+						continue;
+					}
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;
 					}
-					if (index != null && index.checkContainsInt(top31, left31, bottom31, right31)) {
-						List<Amenity> r = index.searchAmenities(top31,
-								left31, bottom31, right31, zoom, filter, additionalFilter, matcher);
-						if (r != null) {
-							amenities.addAll(r);
+					if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
+						List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
+								zoom, filter, additionalFilter, matcher);
+						if (foundAmenities != null) {
+							iterateLiveAmenities(foundAmenities, liveAmenities);
 						}
 					}
+
 				}
 			}
 		} finally {
 			searchAmenitiesInProgress = false;
 		}
-		return amenities;
+		return new ArrayList<>(liveAmenities.values());
+	}
+
+	private void iterateLiveAmenities(@NonNull List<Amenity> foundAmenities,
+	                                  @NonNull Map<Long, Amenity> liveAmenities) {
+		for (Amenity amenity : foundAmenities) {
+			if (amenity.isClosed()) {
+				liveAmenities.remove(amenity.getId());
+			} else {
+				liveAmenities.put(amenity.getId(), amenity);
+			}
+		}
 	}
 
 	@NonNull
