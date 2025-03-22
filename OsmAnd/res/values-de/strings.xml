@@ -5743,4 +5743,8 @@
     <string name="show_image_previews">Bildvorschauen anzeigen</string>
     <string name="equator">Äquator</string>
     <string name="add_widget">Widget hinzufügen</string>
+    <string name="shared_string_online_only">Nur online</string>
+    <string name="shared_string_offline_only">Nur offline</string>
+    <string name="prime_meridian">Nullmeridian</string>
+    <string name="meridian_180">180. Meridian</string>
 </resources>
