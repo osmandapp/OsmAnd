@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
-public class LanesWidgetSettingsFragment extends WidgetSettingsBaseFragment {
+public class LanesWidgetInfoFragment extends WidgetInfoBaseFragment {
 
 	private static final String SHOW_MINOR_TURNS = "show_minor_turns";
 
@@ -35,7 +35,7 @@ public class LanesWidgetSettingsFragment extends WidgetSettingsBaseFragment {
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		View view = themedInflater.inflate(R.layout.widget_preference_with_switch, container);
 		setupShowMinorTurnsPref(view);
 	}

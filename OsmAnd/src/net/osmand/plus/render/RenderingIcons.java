@@ -130,14 +130,6 @@ public class RenderingIcons {
 	}
 
 	@Nullable
-	public static String getIconNameForAmenity(@NonNull Amenity amenity) {
-		String subType = amenity.getSubType();
-		String[] subtypes = subType.split(";");//multivalued
-		PoiType poiType = amenity.getType().getPoiTypeByKeyName(subtypes[0]);
-		return poiType != null ? getIconNameForPoiType(poiType) : null;
-	}
-
-	@Nullable
 	public static String getIconNameForAmenity(@NonNull Context ctx, @NonNull Amenity amenity) {
 		String osmandPoiKey = amenity.getOsmandPoiKey();
 		if (!Algorithms.isEmpty(osmandPoiKey)) {
@@ -175,8 +167,15 @@ public class RenderingIcons {
 	}
 
 	@Nullable
-	public static String getBigIconNameForAmenity(@NonNull Amenity amenity) {
-		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+	public static String getBigIconNameForAmenity(@NonNull Context ctx, @NonNull Amenity amenity) {
+		PoiType poiType = null;
+		String osmandPoiKey = amenity.getOsmandPoiKey();
+		if (!Algorithms.isEmpty(osmandPoiKey)) {
+			poiType = ((OsmandApplication) ctx).getPoiTypes().getPoiTypeByKey(osmandPoiKey);
+		}
+		if (poiType == null) {
+			poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		}
 		if (poiType == null) {
 			return null;
 		} else if (containsBigIcon(poiType.getIconKeyName())) {
@@ -288,9 +287,9 @@ public class RenderingIcons {
 		}
 	}
 
-	public static int getPreselectedIconId(@NonNull Amenity amenity) {
+	public static int getPreselectedIconId(@NonNull Context ctx, @NonNull Amenity amenity) {
 		String gpxIconId = amenity.getGpxIcon();
-		String preselectedIconName = Algorithms.isEmpty(gpxIconId) ? getIconNameForAmenity(amenity) : gpxIconId;
+		String preselectedIconName = Algorithms.isEmpty(gpxIconId) ? getIconNameForAmenity(ctx, amenity) : gpxIconId;
 		return Algorithms.isEmpty(preselectedIconName) ? 0 : getBigIconResourceId(preselectedIconName);
 	}
 }

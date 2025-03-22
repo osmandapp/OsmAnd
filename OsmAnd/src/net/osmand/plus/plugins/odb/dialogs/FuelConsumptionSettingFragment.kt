@@ -16,11 +16,11 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
-import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetSettingsFragment
+import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetInfoFragment
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.CustomAlert
 
-class FuelConsumptionSettingFragment : BaseSimpleWidgetSettingsFragment() {
+class FuelConsumptionSettingFragment : BaseSimpleWidgetInfoFragment() {
 	private var selectedFuelConsumptionMode: Int = 0
 
 	private lateinit var inflater: LayoutInflater
@@ -36,10 +36,9 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	override fun initParams(bundle: Bundle) {
 		super.initParams(bundle)
-		val widgetInfo = widgetRegistry.getWidgetInfoById(widgetId)
-		if (widgetInfo != null && widgetInfo.widget is OBDFuelConsumptionWidget
+		if (widgetInfo != null && widgetInfo?.widget is OBDFuelConsumptionWidget
 		) {
-			widget = widgetInfo.widget
+			widget = widgetInfo?.widget as OBDFuelConsumptionWidget
 			fuelConsumptionPref = widget.fuelConsumptionMode
 			selectedFuelConsumptionMode = bundle.getInt(
 				FUEL_CONSUMPTION_MODE,
@@ -50,16 +49,13 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetSettingsFragment() {
 		}
 	}
 
-	override fun setupContent(themedInflater: LayoutInflater, container: ViewGroup) {
+	override fun setupMainContent(themedInflater: LayoutInflater, container: ViewGroup) {
 		inflater = themedInflater
 		themedInflater.inflate(R.layout.map_marker_side_widget_settings_fragment, container)
 		buttonsCard = view.findViewById(R.id.items_container)
 		selectedAppMode = settings.applicationMode
 
-		updateToolbarIcon()
 		setupConfigButtons()
-		themedInflater.inflate(R.layout.divider, container)
-		super.setupContent(themedInflater, container)
 	}
 
 	private fun setupConfigButtons() {
@@ -117,12 +113,6 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetSettingsFragment() {
 		val color = selectedAppMode.getProfileColor(nightMode)
 		val background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f)
 		AndroidUtils.setBackground(button, background)
-	}
-
-	private fun updateToolbarIcon() {
-		val icon = view.findViewById<ImageView>(R.id.icon)
-		val iconId = widget.widgetType?.getIconId(nightMode)
-		icon.setImageDrawable(iconId?.let { getIcon(it) })
 	}
 
 	override fun onSaveInstanceState(outState: Bundle) {

@@ -18,7 +18,8 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.search.NearbyPlacesAdapter;
+import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.SearchVisibilityListener;
 import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
@@ -30,8 +31,8 @@ import net.osmand.search.core.SearchPhrase;
 
 import java.util.List;
 
-public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements NearbyPlacesAdapter.NearbyItemClickListener, IMapLocationListener,
-		MapZoomChangeListener {
+public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements IMapLocationListener,
+		MapZoomChangeListener, SearchVisibilityListener, NearbyItemClickListener {
 
 	public static final int TITLE = R.string.shared_string_explore;
 
@@ -69,10 +70,11 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		getListView().setOnItemLongClickListener((parent, view, position, id) -> {
+			int index = position - ((ListView) parent).getHeaderViewsCount();
 			QuickSearchDialogFragment dialogFragment = getDialogFragment();
 			FragmentManager fragmentManager = dialogFragment.getFragmentManager();
-			if (fragmentManager != null) {
-				QuickSearchListItem item = getListAdapter().getItem(position);
+			if (fragmentManager != null && index >= 0 && index < getListAdapter().getCount()) {
+				QuickSearchListItem item = getListAdapter().getItem(index);
 				if (item != null && item.getSearchResult().object instanceof HistoryEntry) {
 					HistoryEntry entry = (HistoryEntry) item.getSearchResult().object;
 					HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), dialogFragment);
@@ -123,34 +125,31 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		nearbyPlacesCard.onResume();
-		app.getOsmandMap().getMapView().addMapLocationListener(this);
-		app.getOsmandMap().getMapView().addMapZoomChangeListener(this);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		nearbyPlacesCard.onPause();
-		app.getOsmandMap().getMapView().removeMapLocationListener(this);
-		app.getOsmandMap().getMapView().removeMapZoomChangeListener(this);
+	public void onVisibilityChanged(boolean visible) {
+		if (visible) {
+			nearbyPlacesCard.onResume();
+			app.getOsmandMap().getMapView().addMapLocationListener(this);
+			app.getOsmandMap().getMapView().addMapZoomChangeListener(this);
+		} else {
+			nearbyPlacesCard.onPause();
+			app.getOsmandMap().getMapView().removeMapLocationListener(this);
+			app.getOsmandMap().getMapView().removeMapZoomChangeListener(this);
+		}
 	}
 
 	@Override
 	public void locationChanged(double v, double v1, Object o) {
-		updatePointsList();
+		updateNearbyCard();
 	}
 
 	@Override
 	public void onMapZoomChanged(boolean manual) {
 		if (manual) {
-			updatePointsList();
+			updateNearbyCard();
 		}
 	}
 
-	private void updatePointsList() {
+	private void updateNearbyCard() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			long now = System.currentTimeMillis();
@@ -161,7 +160,12 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 			if (!extendedRect.contains(visiblePlacesRect) && now - lastPointListRectUpdate > 1000) {
 				lastPointListRectUpdate = now;
 				visiblePlacesRect = rect;
-				nearbyPlacesCard.update();
+
+				app.runInUIThread(() -> {
+					if (isAdded() && nearbyPlacesCard != null) {
+						nearbyPlacesCard.update();
+					}
+				});
 			}
 		}
 	}

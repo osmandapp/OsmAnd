@@ -2254,7 +2254,7 @@
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
-    <string name="mapillary_action_descr">Partagez vos photos de rue via Mapillary.</string>
+    <string name="mapillary_action_descr">Partagez votre vue de la rue via Mapillary.</string>
     <string name="mapillary_widget">Widget Mapillary</string>
     <string name="mapillary_widget_descr">Permet de contribuer facilement à Mapillary.</string>
     <string name="mapillary_descr">Des photos détaillées en ligne pour tous. Découvrez des lieux, collaborez, capturez le monde.</string>
@@ -3950,7 +3950,7 @@
     <string name="backup_version_history_delete_descr">Supprimer du Cloud OsmAnd le journal des modifications pour les données obsolètes \?</string>
     <string name="backup_delete_types">Supprimer les types de données désactivés</string>
     <string name="shared_string_discussion">Discussion</string>
-    <string name="shared_string_view_all">Tout afficher</string>
+    <string name="shared_string_view_all">Voir tout</string>
     <string name="backup_error_subscription_was_expired">Abonnement expiré</string>
     <string name="backup_error_subscription_was_used">L\'abonnement ou la promo a été utilisé par un autre compte %1$s</string>
     <string name="backup_error_no_valid_subscription">Aucun abonnement n\'est valide</string>
@@ -4434,8 +4434,8 @@
     <string name="auto_25_chars_route_tl_kr">Tournez à gauche puis restez à droite</string>
     <string name="auto_25_chars_route_tr_kl">Tournez à droite puis restez à gauche</string>
     <string name="auto_25_chars_route_tr_kr">Tournez à droite puis restez à droite</string>
-    <string name="auto_25_chars_route_tu_kl">Faites demi-tour puis restez à gauche</string>
-    <string name="auto_25_chars_route_tu_kr">Faites demi-tour puis restez à droite</string>
+    <string name="auto_25_chars_route_tu_kl">Faites demi-tour et restez à gauche</string>
+    <string name="auto_25_chars_route_tu_kr">Faites demi-tour et restez à droite</string>
     <string name="auto_25_chars_route_roundabout_kl">Prenez la sortie %1$d puis restez à gauche</string>
     <string name="auto_25_chars_route_roundabout_kr">Prenez la sortie %1$d puis restez à droite</string>
     <string name="trip_recording_distance_widget_desc">Affiche la distance du trajet en cours d’enregistrement.</string>
@@ -4879,7 +4879,7 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
     <string name="relief_3d">Relief 3D</string>
-    <string name="terrain_map">Carte du relief (3D)</string>
+    <string name="terrain_map">Carte du terrain (3D)</string>
     <string name="relief_3d_description">Possédez et observez la maquette de votre quartier ou du continent tout entier.</string>
     <string name="terrain_category_description">Courbes de niveaux, ombrage du relief par des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les plaines.</string>
     <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l\'inclinaison du terrain. Pour en savoir plus sur les pentes, consultez %1$s.</string>
@@ -5043,7 +5043,7 @@
     <string name="app_mode_hang_gliding">Deltaplane</string>
     <string name="with_waypoints">Avec points de passage</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
-    <string name="max_altitude">Altitude maxi</string>
+    <string name="max_altitude">Altitude max</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="filter_by_name">Filtrer par nom</string>
     <string name="shared_string_reset_all">Tout réinitialiser</string>
@@ -5068,14 +5068,14 @@
     <string name="delete_map_description">Effacer la carte %1$s ?</string>
     <string name="maps_and_resources">Cartes et Téléchargements</string>
     <string name="shared_string_show_icon">Afficher l\'icône</string>
-    <string name="smart_folder_name_present">Ce dossier intelligent existe déjà</string>
+    <string name="smart_folder_name_present">Ce dossier intelligent est déjà présent</string>
     <string name="smart_folder_saved">Dossier intelligent enregistré</string>
     <string name="add_smart_folder">Ajouter un dossier intelligent</string>
-    <string name="save_as_smart_folder">Enregistrer en tant que dossier intelligent</string>
+    <string name="save_as_smart_folder">Enregistre en tant que dossier intelligent</string>
     <string name="delete_smart_folder_dialog_message">Le dossier intelligent \"%1$s\" va être supprimé. (Aucune trace ne sera supprimée)</string>
     <string name="empty_name">Sans nom</string>
     <string name="edit_filter">Modifier le filtre</string>
-    <string name="empty_smart_folder_title">Aucune trace trouvée</string>
+    <string name="empty_smart_folder_title">Aucun itinéraire correspondant</string>
     <string name="empty_smart_folder_description">Les traces correspondantes apparaissent ici</string>
     <string name="configure_filter">Paramétrer le filtre</string>
     <string name="no_config_smart_folder_title">Non paramétré</string>
@@ -5110,7 +5110,7 @@
     <string name="key_event_action_move_left">Déplacer ver la gauche</string>
     <string name="all_folders">Tous les dossiers</string>
     <string name="key_event_action_move_right">Déplacer vers la droite</string>
-    <string name="shared_string_show_less">Réduire</string>
+    <string name="shared_string_show_less">Montrer moins</string>
     <string name="shared_string_button">Bouton</string>
     <string name="folder">Dossier</string>
     <string name="remove_type_q">Supprimer le type \"%1$s\" ?</string>
@@ -5205,7 +5205,7 @@
     <string name="default_buttons">Boutons par défaut</string>
     <string name="sort_subfolders">Trier les sous-dossiers</string>
     <string name="battery_optimization">Optimisation de la batterie</string>
-    <string name="avg_sensor_temperature">Température moyenne</string>
+    <string name="avg_sensor_temperature">Température, moyenne</string>
     <string name="max_sensor_speed">Vitesse du capteur, max</string>
     <string name="max_sensor_temperature">Température, max</string>
     <string name="avg_sensor_bycicle_power">Puissance du cycle, moyenne</string>
@@ -5392,9 +5392,9 @@
     <string name="shared_string_all_icons">Toutes les icônes</string>
     <string name="resting_position_icon_summary">Icône affichée lorsque vous ne bougez pas.</string>
     <string name="rendering_value_pale_name">Pâle</string>
-    <string name="auto_25_chars_route_tr">Tourner à droite</string>
-    <string name="auto_25_chars_route_tshr">Tourner en épingle à droite</string>
-    <string name="auto_25_chars_route_tl">Tourner à gauche</string>
+    <string name="auto_25_chars_route_tr">Tournez à droite</string>
+    <string name="auto_25_chars_route_tshr">Tournez franchement à droite</string>
+    <string name="auto_25_chars_route_tl">Tournez à gauche</string>
     <string name="resting_position">Position de repos</string>
     <string name="navigation_position">Position de guidage</string>
     <string name="resting_navigation_position">Positions de repos et de guidage</string>
@@ -5402,12 +5402,12 @@
     <string name="view_angle">Angle de vue</string>
     <string name="location_radius_description">Affiche un rond représentant la précision de votre position actuelle</string>
     <string name="location_radius">Rayon de position</string>
-    <string name="auto_25_chars_route_tu">Faire demi-tour</string>
-    <string name="auto_25_chars_route_kl">Rester à gauche</string>
-    <string name="auto_25_chars_route_kr">Rester à droite</string>
-    <string name="auto_25_chars_route_tslr">Tourner légèrement à droite</string>
-    <string name="auto_25_chars_route_tshl">Tourner en épingle à gauche</string>
-    <string name="auto_25_chars_route_tsll">Tourner légèrement à gauche</string>
+    <string name="auto_25_chars_route_tu">Faites demi-tour</string>
+    <string name="auto_25_chars_route_kl">Continuez à gaucher</string>
+    <string name="auto_25_chars_route_kr">Continuez à droite</string>
+    <string name="auto_25_chars_route_tslr">Tournez légèrement à droite</string>
+    <string name="auto_25_chars_route_tshl">Tournez franchement à gauche</string>
+    <string name="auto_25_chars_route_tsll">Tournez légèrement à gauche</string>
     <string name="rendering_avg_info_details">Images par sec. sur les 1 000 dernières images : %1$s
 \nProcesseur (tuiles) : %2$s
 \nProcesseur (durée d\'inactivité) : %3$s
@@ -5418,8 +5418,8 @@
     <string name="hugerock_promo_description">Accès gratuit à des fonctionnalités comme les téléchargements illimités de cartes, le relief 3D, etc. pendant %1$s mois</string>
     <string name="shared_string_automatically">Automatiquement</string>
     <string name="ask_every_time">Demander à chaque fois</string>
-    <string name="detailed_track_guidance">Navigation détaillée sur la trace</string>
-    <string name="detailed_track_guidance_description">Pour améliorer votre navigation, OsmAnd va déplacer la trace sur les routes.</string>
+    <string name="detailed_track_guidance">Guide détaillé du parcours</string>
+    <string name="detailed_track_guidance_description">OsmAnd associe votre itinéraire aux routes voisines pour un meilleur guidage virage par virage.</string>
     <string name="quick_action_routes_summary">Un interrupteur pour afficher ou masquer %1$s sur la carte.</string>
     <string name="compass_click_north_is_up">Pour modifier le mode d\'orientation, faites un appui long</string>
     <string name="route_roundabout_exit">Prendre la sortie %1$d</string>
@@ -5466,9 +5466,9 @@
     <string name="shared_string_decrease">Réduire</string>
     <string name="shared_string_source">Source</string>
     <string name="shared_string_no_internet_connection">Aucune connexion Internet</string>
-    <string name="no_photos_available_descr">Aucune image d\'utilisateur n\'a été ajoutée pour ce lieu</string>
-    <string name="no_photos_available">Aucune image disponible</string>
-    <string name="no_internet_descr">Veuillez vérifier votre connexion et réessayez.</string>
+    <string name="no_photos_available_descr">Aucune photo n\'a été ajoutée à cet endroit pour le moment</string>
+    <string name="no_photos_available">Aucune photo disponible</string>
+    <string name="no_internet_descr">Vérifier votre connexion et réessayez.</string>
     <string name="wikimedia">Wikimédia</string>
     <string name="open_in_browser">Ouvrir dans le navigateur</string>
     <string name="obd_fuel_type_diesel">Diésel</string>
@@ -5527,12 +5527,12 @@
     <string name="quick_action_finish_trip_recording_summary">Bouton pour terminer l\'enregistrement et sauvegarder le fichier GPX de la trace.</string>
     <string name="new_segment_started_m">Enregistrement d’un nouveau segment de trace démarré.</string>
     <string name="quick_action_new_trip_segment">Bouton pour démarrer un nouveau segment dans l\'enregistrement GPX en cours.</string>
-    <string name="quick_action_save_recorded_trip_and_continue">Trace enregistrée, Continuer</string>
-    <string name="quick_action_verb_start_pause">Démarrer / Suspendre</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Trajet enregistré et Continuer</string>
+    <string name="quick_action_verb_start_pause">Démarrer / Faire une pause</string>
     <string name="movies_list">Liste de films</string>
     <string name="track_does_not_contain_data_to_save">La trace ne contient aucune donnée.</string>
     <string name="start_trip_recording_first_m">Veuillez commencer par démarrer l\'enregistrement de la trace.</string>
-    <string name="new_trip_segment">Nouveau segment de trace</string>
+    <string name="new_trip_segment">Nouveau tronçon de trajet</string>
     <string name="quick_action_start_pause_recording">Bouton pour démarrer, suspendre ou reprendre l\'enregistrement de la trace GPX.</string>
     <string name="third_links">Liens tiers</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Bouton pour sauvegarder la trace en cours dans un fichier GPX et démarrer l’enregistrement d’une nouvelle trace sans interruption.</string>
@@ -5727,4 +5727,8 @@
     <string name="equator">Équateur</string>
     <string name="meridian_180">180e méridien</string>
     <string name="release_5_0">• Découvrez les PI les mieux classés avec le nouveau mode Explorer\n\n• Tous les itinéraires OSM, désormais consultables ! Randonnée, vélo, VTT, et plus encore\n\n• Le nouveau widget de navigation combine la flèche de virage et les instructions de navigation\n\n• Widget d\'information sur l\'itinéraire actuel : affiche le temps restant, l\'heure d\'arrivée et la distance\n\n• Sélectionnez les pistes de ski et de VTT sur la carte pour obtenir des informations détaillées\n\n• Possibilité de sélectionner la taille du widget pour les panneaux gauche et droit\n\n• Ajout d\'une grille de coordonnées avec les coordonnées géographiques\n\n• Ajout de la possibilité de personnaliser l\'apparence par défaut des groupes favoris\n\n• Android Auto : affichage de l\'heure d\'arrivée et de la distance jusqu\'au prochain point de passage ; les noms de ville apparaissent désormais dans les résultats de la recherche\n\n• Les sommets les plus importants peuvent désormais être découverts via la carte et la recherche\n\n• Hauteur des sommets en pieds\n\n• Ajout de falaises et de zones d\'escalade sur la carte\n\n• La recherche d\'adresses aux États-Unis a été améliorée\n\n• Ajout de l\'hébreu TTS pour la navigation</string>
+    <string name="shared_string_online_only">Uniquement en ligne</string>
+    <string name="row_height">Hauteur de la ligne</string>
+    <string name="shared_string_offline_only">Uniquement hors ligne</string>
+    <string name="add_widget">Ajouter un gadget</string>
 </resources>

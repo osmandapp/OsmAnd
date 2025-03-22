@@ -567,7 +567,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location != null && routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
 				&& simulatePosition == null) {
 			long fixTime = location.getTime();
-			app.runMessageInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, () -> {
+			app.runInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, () -> {
 				net.osmand.Location lastKnown = getLastKnownLocation();
 				if (lastKnown != null && lastKnown.getTime() > fixTime) {
 					// false positive case, still strange how we got here with removeMessages
@@ -580,7 +580,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					setLocation(null);
 				}
 			}, LOST_LOCATION_CHECK_DELAY);
-			app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, () -> {
+			app.runInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, () -> {
 				net.osmand.Location lastKnown = getLastKnownLocation();
 				if (lastKnown != null && lastKnown.getTime() > fixTime) {
 					// false positive case, still strange how we got here with removeMessages
@@ -598,7 +598,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void simulatePosition() {
-		app.runMessageInUIThreadAndCancelPrevious(RUN_SIMULATE_LOCATION_MSG_ID, this::simulatePositionImpl, 600);
+		app.runInUIThreadAndCancelPrevious(RUN_SIMULATE_LOCATION_MSG_ID, this::simulatePositionImpl, 600);
 	}
 
 	private void simulatePositionImpl() {

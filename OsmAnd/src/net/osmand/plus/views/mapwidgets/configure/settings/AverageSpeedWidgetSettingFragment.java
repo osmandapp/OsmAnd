@@ -12,11 +12,10 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 
-public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsFragment {
+public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String KEY_TIME_INTERVAL = "time_interval";
 	private static final String KEY_COUNT_STOPS = "count_stops";
@@ -37,7 +36,6 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null) {
 			speedWidget = ((AverageSpeedWidget) widgetInfo.widget);
 
@@ -52,13 +50,12 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.average_speed_widget_settings_fragment, container);
 
 		setupIntervalSliderCard();
 		setupSkipStopsSetting();
 		themedInflater.inflate(R.layout.divider, container);
-		super.setupContent(themedInflater, container);
 		setupSettingAction(themedInflater, container);
 	}
 

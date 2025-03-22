@@ -5731,4 +5731,6 @@
     <string name="meridian_180">180. poledník</string>
     <string name="shared_string_offline_only">Pouze offline</string>
     <string name="shared_string_online_only">Pouze online</string>
+    <string name="add_widget">Přidat widget</string>
+    <string name="row_height">Výška řádku</string>
 </resources>

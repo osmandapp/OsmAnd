@@ -833,7 +833,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.postDelayed(run, delay);
 	}
 
-	public void runMessageInUIThreadAndCancelPrevious(int messageId, Runnable run, long delay) {
+	public void runInUIThreadAndCancelPrevious(int messageId, Runnable run, long delay) {
 		Message msg = Message.obtain(uiHandler, () -> {
 			if (!uiHandler.hasMessages(messageId)) {
 				run.run();
