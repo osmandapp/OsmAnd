@@ -826,10 +826,12 @@ public class ResourceManager {
 				// Read World base maps before regions.
 				for (AmenityIndexRepository repo : repos) {
 					if (repo.isWorldMap()) {
-						List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
-								zoom, filter, additionalFilter, matcher);
-						if (foundAmenities != null) {
-							iterateLiveAmenities(foundAmenities, liveAmenities);
+						if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
+							List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
+									zoom, filter, additionalFilter, matcher);
+							if (foundAmenities != null) {
+								iterateLiveAmenities(foundAmenities, liveAmenities);
+							}
 						}
 					}
 				}
