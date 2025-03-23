@@ -5283,4 +5283,6 @@ POIの更新は利用できません</string>
     <string name="obd_fuel_pressure_desc">燃料系統の圧力を表示します</string>
     <string name="obd_throttle_position">スロットル位置</string>
     <string name="obd_engine_runtime_desc">エンジンが始動してからの運転時間を示します。</string>
+    <string name="obd_calculated_engine_load">計算上のエンジン負荷</string>
+    <string name="obd_engine_coolant_temp_desc">エンジン冷却水の温度を表示します</string>
 </resources>
