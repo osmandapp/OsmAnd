@@ -37,7 +37,6 @@ public class AdaptMapLanguageAfterSearchTest extends AndroidTest {
 	@Rule
 	public NonClosingActivityScenarioRule<MapActivity> nonClosingActivityScenarioRule = new NonClosingActivityScenarioRule<>(MapActivity.class);
 
-	// FK-TODO: add test shouldAdaptRoadStyleAfterSearch(), use "american road"
 	@Test
 	public void shouldAdaptMapLanguageAfterSearch() {
 		clickSearchButton(app);

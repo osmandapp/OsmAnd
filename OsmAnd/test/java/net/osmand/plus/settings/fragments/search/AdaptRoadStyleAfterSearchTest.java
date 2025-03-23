@@ -14,7 +14,6 @@ import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchView;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -31,54 +30,39 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AdaptMapStyleAfterSearchTest extends AndroidTest {
+public class AdaptRoadStyleAfterSearchTest extends AndroidTest {
 
 	@Rule
 	public NonClosingActivityScenarioRule<MapActivity> nonClosingActivityScenarioRule = new NonClosingActivityScenarioRule<>(MapActivity.class);
 
 	@Test
-	public void shouldAdaptMapStyleAfterSearch() {
+	public void shouldAdaptRoadStyleAfterSearch() {
 		clickSearchButton(app);
 		// When
-		final String mapStyle = "Desert";
-		onView(searchView()).perform(replaceText(mapStyle), closeSoftKeyboard());
+		final String roadStyle = "American road atlas";
+		onView(searchView()).perform(replaceText(roadStyle), closeSoftKeyboard());
 		onView(searchResultsView()).perform(actionOnItemAtPosition(0, click()));
 
 		// And
-		desertItem().perform(scrollTo(), click());
-		applyButton().perform(click());
+		americanRoadAtlasItem().perform(click());
 
 		// Then
-		final var mapStyleSetting = mapStyleSettingHavingDescription(mapStyle);
-		mapStyleSetting.perform(scrollTo());
-		mapStyleSetting.check(matches(isDisplayed()));
+		final var roadStyleSetting = roadStyleSettingHavingDescription(roadStyle);
+		roadStyleSetting.perform(scrollTo());
+		roadStyleSetting.check(matches(isDisplayed()));
 	}
 
-	private static ViewInteraction desertItem() {
-		final int indexOfDesertItem = 1;
-		return onView(
-				childAtPosition(
-						childAtPosition(
-								withClassName(is("androidx.core.widget.NestedScrollView")),
-								0),
-						indexOfDesertItem));
-	}
-
-	private static ViewInteraction applyButton() {
+	private static ViewInteraction americanRoadAtlasItem() {
 		return onView(
 				allOf(
-						withId(R.id.button_wrapper),
+						withId(R.id.button),
 						childAtPosition(
-								allOf(
-										withId(R.id.right_bottom_button),
-										childAtPosition(
-												withId(R.id.buttons_container),
-												2)),
-								0),
+								withParent(withId(me.zhanghai.android.materialprogressbar.R.id.select_dialog_listview)),
+								1),
 						isDisplayed()));
 	}
 
-	private static ViewInteraction mapStyleSettingHavingDescription(final String description) {
+	private static ViewInteraction roadStyleSettingHavingDescription(final String description) {
 		return onView(
 				allOf(
 						withId(R.id.description),
