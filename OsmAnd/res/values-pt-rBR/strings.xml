@@ -5246,7 +5246,7 @@
     <string name="delete_account">Excluir conta</string>
     <string name="action_cannot_be_undone">Essa ação não pode ser desfeita.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Os aparelhos secundários serão desconectados do OsmAnd Cloud e perderão o acesso aos recursos pagos.</string>
-    <string name="free_ride">Passeio gratuito</string>
+    <string name="free_ride">Passeio livre</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Substâncias tóxicas e infecciosas</string>
     <string name="routing_attr_hazmat_category_usa_7_name">Substâncias tóxicas e infecciosas</string>
     <string name="routing_attr_hazmat_category_usa_4_name">Sólidos inflamáveis</string>
@@ -6009,4 +6009,8 @@
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Selecione os parâmetros que serão registrados no arquivo GPX.</string>
     <string name="current_temperature">Temperatura atual</string>
+    <string name="show_list">Mostrar lista</string>
+    <string name="popular_places">Lugares populares</string>
+    <string name="apply_to_all_points">Aplicar a todos os pontos</string>
+    <string name="equator">Equador</string>
 </resources>
