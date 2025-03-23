@@ -5257,5 +5257,12 @@ POIの更新は利用できません</string>
     <string name="hmd_promo_description">無制限のマップダウンロード、3Dレリーフなどの機能を%1$sヶ月間無料で利用できます。</string>
     <string name="shared_string_road_exit">出口</string>
     <string name="ais_load_data">ファイルからAISデータを読み込む</string>
-    <string name="ais_address_settings_description">NMEAプロトコル(UDP/TCP)を選択し、アドレスを定義します</string>
+    <string name="ais_address_settings_description">NMEAプロトコル(UDP/TCP)を選択し、アドレスを指定します</string>
+    <string name="ais_nmea_protocol_description">NMEAデータ受信のプロトコルを選択します</string>
+    <string name="ais_nmea_protocol">NMEAデータ受信プロトコル</string>
+    <string name="ais_address_nmea_server">NMEAデータソースのIPアドレス</string>
+    <string name="ais_address_nmea_server_description">NMEAデータソースのIPアドレスの指定をします(TCPを使用する場合)</string>
+    <string name="ais_port_nmea_server_description">NMEAデータソースのTCPポート番号を指定します。</string>
+    <string name="ais_port_nmea_server">NMEAデータソースのTCPポート</string>
+    <string name="rendering_attr_showClimbingRoutes_name">登山ルート</string>
 </resources>
