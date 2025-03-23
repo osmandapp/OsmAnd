@@ -5285,4 +5285,5 @@ POIの更新は利用できません</string>
     <string name="obd_engine_runtime_desc">エンジンが始動してからの運転時間を示します。</string>
     <string name="obd_calculated_engine_load">計算上のエンジン負荷</string>
     <string name="obd_engine_coolant_temp_desc">エンジン冷却水の温度を表示します</string>
+    <string name="obd_speed_desc">車速センサー(VSS)からの車速を表示します。</string>
 </resources>
