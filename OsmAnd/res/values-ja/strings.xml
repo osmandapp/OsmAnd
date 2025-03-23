@@ -5218,4 +5218,10 @@ POIの更新は利用できません</string>
     <string name="shared_string_map_center">マップ中心</string>
     <string name="choose_location_on_map">マップ上で場所を選びます。</string>
     <string name="meridian_180">180度子午線</string>
+    <string name="original_shape_description">各地点はそれぞれの形を維持します。</string>
+    <string name="save_favorite_default_appearance">フォルダ内の既存アイテムに変更を適用しますか、それとも新しいアイテムにのみ適用しますか？</string>
+    <string name="original_icon_description">各地点はそれぞれのアイコンを維持します。</string>
+    <string name="apply_to_all_points">全地点に適用</string>
+    <string name="ais_port_nmea_local">ローカルNMEAデータ受信機のUDPポート</string>
+    <string name="original_color_description">各地点はそれぞれの色を維持します。</string>
 </resources>
