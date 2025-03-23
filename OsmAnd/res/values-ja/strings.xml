@@ -5268,11 +5268,19 @@ POIの更新は利用できません</string>
     <string name="connect_new_scanner">新しいスキャナーを接続</string>
     <string name="vehicle_metrics_obd_ii">車両データ(OBD-II)</string>
     <string name="calculating_indication_message">計算中…</string>
-    <string name="ltr_or_rtl_combine_via_per">2$s あたり %1$s</string>
+    <string name="ltr_or_rtl_combine_via_per">%2$sあたり%1$s</string>
     <string name="shared_string_engine">エンジン</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">OBD-IIプロトコルを使用して重要な車両データを追跡します。速度、エンジン回転数、燃料消費量などの主要な指標を監視します。</string>
     <string name="selected_delayed_profile">選択されたプロファイル \"%s\"</string>
     <string name="calculate_size">サイズを計算</string>
     <string name="shared_string_hour">時間</string>
     <string name="rendering_attr_showClimbingRoutes_description">登山ルートを表示します</string>
+    <string name="obd_battery_voltage_desc">車両バッテリーの電圧レベルを表示</string>
+    <string name="obd_throttle_position_desc">スロットルボディ内のスロットルバルブの角度を示します。</string>
+    <string name="shared_string_volume">ボリューム</string>
+    <string name="obd_calculated_engine_load_desc">ある瞬間に使用可能なエンジンのパワーの割合を示します。</string>
+    <string name="obd_engine_runtime">モーター作動時間</string>
+    <string name="obd_fuel_pressure_desc">燃料系統の圧力を表示します</string>
+    <string name="obd_throttle_position">スロットル位置</string>
+    <string name="obd_engine_runtime_desc">エンジンが始動してからの運転時間を示します。</string>
 </resources>
