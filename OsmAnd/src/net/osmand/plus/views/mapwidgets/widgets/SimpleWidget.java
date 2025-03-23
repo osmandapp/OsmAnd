@@ -341,7 +341,9 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		return isVerticalWidget() ? view : container;
 	}
 
-	public void updateFullRowState(boolean fullRow) {
+	@Override
+	public void updateFullRowState(int widgetsCount) {
+		boolean fullRow = widgetsCount <= 1;
 		if (isFullRow != fullRow) {
 			isFullRow = fullRow;
 			recreateView();

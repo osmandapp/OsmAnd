@@ -391,7 +391,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	@Override
-	public void updateFullRowState(boolean fullRow) {
+	public void updateFullRowState(int widgetsCount) {
+		boolean fullRow = widgetsCount <= 1;
 		if (isFullRow != fullRow) {
 			isFullRow = fullRow;
 			recreateView();
@@ -449,10 +450,6 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		if (oldWidgetOrientation != verticalWidget) {
 			recreateView();
 		}
-	}
-
-	@Override
-	public void updateValueAlign(boolean fullRow) {
 	}
 
 	@Override

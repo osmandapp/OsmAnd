@@ -291,4 +291,17 @@
 		<attr name="minTextSize" format="dimension" />
 		<attr name="maxTextSize" format="dimension" />
 	</declare-styleable>
+
+	<declare-styleable name="MultiTextViewEx">
+		<attr name="separator" format="string" />
+		<attr name="separatorColor" format="reference" />
+
+		<attr name="primaryText" format="string" />
+		<attr name="secondaryText" format="string" />
+		<attr name="tertiaryText" format="string" />
+
+		<attr name="primaryTextColor" format="reference" />
+		<attr name="secondaryTextColor" format="reference" />
+		<attr name="tertiaryTextColor" format="reference" />
+	</declare-styleable>
 </resources>
