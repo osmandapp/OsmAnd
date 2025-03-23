@@ -4877,7 +4877,7 @@
     <string name="open_weather_action">Abrir el tiempo</string>
     <string name="shared_string_purchased_on">Comprado el</string>
     <string name="shared_string_expires">Caduca en</string>
-    <string name="cloud_sync_progress">Sincronizando...%1$s</string>
+    <string name="cloud_sync_progress">Sincronizar… %1$s</string>
     <string name="checking_progress">Comprobando…</string>
     <string name="shared_string_modified">Modificado</string>
     <string name="res_unknown">Desconocido</string>
@@ -5996,4 +5996,17 @@
     <string name="shared_string_length">Longitud</string>
     <string name="shared_string_avg_altitude">Alt. promedio</string>
     <string name="shared_string_avg_speed">Vel. mínima</string>
+    <string name="release_5_0">• Descubre los PDI mejor clasificados con el nuevo modo «Explorar»\n\n• Todas las rutas de OSM, ¡ahora con opción de búsqueda! Senderismo, ciclismo, BTT y mucho más\n\n• El nuevo widget de navegación combina la flecha de giro y las idicaciones de navegación\n\n• Widget de información de la ruta actual: muestra el tiempo estimado, la hora y la distancia de llegada\n\n• Marca pistas de esquí y BTT en el mapa para obtener información detallada\n\n• Posibilidad de cambiar el tamaño del widget para los paneles izquierdo y derecho\n\n• Se ha añadido la cuadrícula de coordenadas con coordenadas geográficas\n\n• Se ha añadido la posibilidad de personalizar el aspecto predefinido de los grupos favoritos\n\n• Android Auto: visualización del tiempo estimado de llegada y de la distancia hasta el siguiente punto de ruta; los nombres de las ciudades aparecen ahora en los resultados de búsqueda\n\n• Los picos prominentes ahora se pueden descubrir a través del mapa y la búsqueda\n\n• Alturas de picos de montaña en pies\n\n• Se añadieron peñascos y zonas de escalada en el mapa\n\n• Se ha mejorado la búsqueda de direcciones en EE.UU\n\n• Se ha añadido la voz sintetizada al hebreo para la navegación</string>
+    <string name="show_dm_grids">Usar DM en lugar de grados o DMS</string>
+    <string name="shared_string_online_only">Solo en línea</string>
+    <string name="shared_string_offline_only">Solo sin conexión</string>
+    <string name="equator">Ecuador</string>
+    <string name="apply_to_all_points">Aplicar a todos los puntos</string>
+    <string name="show_mercator_grids">Usar Mercator en lugar de WGS84 o UTM</string>
+    <string name="row_height">Altura de fila</string>
+    <string name="save_favorite_default_appearance">¿Quiere aplicar los cambios a los puntos existentes de la carpeta o solo a los nuevos?</string>
+    <string name="show_utm_grids">Usar UTM en lugar de WGS84</string>
+    <string name="show_dms_grids">Usar DMS en lugar de grados</string>
+    <string name="shared_string_default_view">Vista predeterminada</string>
+    <string name="no_photo_for_location_desc">Aún no se han añadido fotos a esta ubicación</string>
 </resources>

@@ -1,5 +1,8 @@
 package net.osmand.plus.search.listitems;
 
+import static android.os.AsyncTask.Status.RUNNING;
+
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -11,43 +14,58 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
-import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.NearbyPlacesAdapter;
+import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.util.Collections;
 import java.util.List;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvider.ExplorePlacesListener {
+public class NearbyPlacesCard extends FrameLayout {
 
 	private static final int DISPLAY_ITEMS = 25;
+	private static final int SEARCH_POI_RADIUS = 15000;
+
+	private static final Log log = LogFactory.getLog(NearbyPlacesCard.class);
+
+	private final OsmandApplication app;
+	private final WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
+	private final PoiUIFilter wikiFilter = plugin.getTopWikiPoiFilter();
+
+	private SearchAmenitiesTask searchAmenitiesTask;
+
 	private boolean collapsed;
 	private ImageView explicitIndicator;
 	private View titleContainer;
 	private RecyclerView nearByList;
 	private MaterialProgressBar progressBar;
 	private NearbyPlacesAdapter adapter;
-	private OsmandApplication app;
 	private NearbyPlacesAdapter.NearbyItemClickListener clickListener;
-	private MapActivity mapActivity;
 	private View noInternetCard;
 	private View emptyView;
 	private View cardContent;
 	private boolean isLoadingItems;
-	private QuadRect visiblePlacesRect;
 
-	public NearbyPlacesCard(@NonNull MapActivity mapActivity, @NonNull NearbyPlacesAdapter.NearbyItemClickListener clickListener) {
-		super(mapActivity);
-		app = (OsmandApplication) mapActivity.getApplicationContext();
-		this.mapActivity = mapActivity;
-		this.clickListener = clickListener;
+	public NearbyPlacesCard(@NonNull MapActivity activity,
+			@NonNull NearbyItemClickListener listener) {
+		super(activity);
+		app = (OsmandApplication) activity.getApplicationContext();
+		this.clickListener = listener;
 		init();
 	}
 
@@ -75,15 +93,11 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 
 	private void setupShowAllNearbyPlacesBtn() {
 		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
-			MapActivity activity = getMapActivity();
-			if (activity != null) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					ExplorePlacesFragment.Companion.showInstance(activity.getSupportFragmentManager());
-					QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
-					if (dialogFragment != null) {
-						dialogFragment.hide();
-					}
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
+				if (dialogFragment != null) {
+					dialogFragment.showResult(wikiFilter);
 				}
 			}
 		});
@@ -98,15 +112,12 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 		LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
 		nearByList.setLayoutManager(layoutManager);
 		nearByList.setItemAnimator(null);
-		visiblePlacesRect = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds();
-		adapter = new NearbyPlacesAdapter(getContext(), app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS), false, clickListener);
+		adapter = new NearbyPlacesAdapter(getContext(), Collections.emptyList(), false, clickListener);
 		nearByList.setAdapter(adapter);
 	}
 
 	public void update() {
-		visiblePlacesRect = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds();
-		adapter.setItems(app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS));
-		app.runInUIThread(() -> adapter.notifyDataSetChanged());
+		startLoadingNearbyPlaces();
 	}
 
 	private void updateExpandState() {
@@ -121,27 +132,34 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 
 	private NearbyPlacesAdapter getNearbyAdapter() {
 		if (adapter == null) {
-			List<Amenity> nearbyData = app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS);
-			adapter = new NearbyPlacesAdapter(getContext(), nearbyData, false, clickListener);
+			adapter = new NearbyPlacesAdapter(getContext(), Collections.emptyList(), false, clickListener);
 		}
 		return adapter;
 	}
 
-	@Override
-	public void onNewExplorePlacesDownloaded() {
+	public void onLoadingFinished() {
+		searchAmenitiesTask = null;
 		isLoadingItems = false;
-		AndroidUiHelper.updateVisibility(progressBar, app.getExplorePlacesProvider().isLoading());
-		adapter.setItems(app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS));
+		AndroidUiHelper.updateVisibility(progressBar, false);
+		updateExpandState();
+	}
+
+	private void updateItems(List<Amenity> amenities) {
+		adapter.setItems(amenities);
 		adapter.notifyDataSetChanged();
 		updateExpandState();
 	}
 
 	public void onResume() {
-		app.getExplorePlacesProvider().addListener(this);
+		if (!collapsed) {
+			startLoadingNearbyPlaces();
+		}
 	}
 
 	public void onPause() {
-		app.getExplorePlacesProvider().removeListener(this);
+		if (searchAmenitiesTask != null) {
+			searchAmenitiesTask.cancel(false);
+		}
 	}
 
 	private void onNearbyPlacesCollapseChanged() {
@@ -153,12 +171,13 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 	}
 
 	private void startLoadingNearbyPlaces() {
-		isLoadingItems = true;
-		app.getExplorePlacesProvider().getDataCollection(
-				app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds(),
-				DISPLAY_ITEMS
-		);
-		AndroidUiHelper.updateVisibility(progressBar, app.getExplorePlacesProvider().isLoading());
+		if (!isLoadingItems) {
+			isLoadingItems = true;
+			LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+			searchAmenitiesTask = new SearchAmenitiesTask(wikiFilter, latLon);
+			searchAmenitiesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			AndroidUiHelper.updateVisibility(progressBar, true);
+		}
 	}
 
 	private void setupExpandNearbyPlacesIndicator() {
@@ -172,4 +191,32 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 		onNearbyPlacesCollapseChanged();
 	}
 
+	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
+
+		private final LatLon latLon;
+		private final PoiUIFilter filter;
+
+		protected SearchAmenitiesTask(@NonNull PoiUIFilter filter, @NonNull LatLon latLon) {
+			this.filter = filter;
+			this.latLon = latLon;
+		}
+
+		@Override
+		protected List<Amenity> doInBackground(Void... params) {
+			QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), SEARCH_POI_RADIUS);
+			List<Amenity> amenities = getAmenities(rect);
+			return amenities.subList(0, Math.min(DISPLAY_ITEMS, amenities.size()));
+		}
+
+		@NonNull
+		private List<Amenity> getAmenities(@NonNull QuadRect rect) {
+			return filter.searchAmenities(rect.top, rect.left, rect.bottom, rect.right, -1, null);
+		}
+
+		@Override
+		protected void onPostExecute(List<Amenity> amenities) {
+			updateItems(amenities);
+			onLoadingFinished();
+		}
+	}
 }

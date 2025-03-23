@@ -81,7 +81,7 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 
 		updateWidgetsCount(view, count);
 
-		view.findViewById(R.id.button_container).setOnClickListener(v -> ConfigureWidgetsFragment.showInstance(getMapActivity(), panel, appMode));
+		view.findViewById(R.id.button_container).setOnClickListener(v -> ConfigureWidgetsFragment.showInstance(getMapActivity(), panel, appMode, null));
 
 		setupListItemBackground(view, appMode);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), panel == RIGHT);

@@ -21,11 +21,6 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.wikivoyage.data.TravelGpx;
-import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.plus.wikivoyage.data.TravelObfHelper;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -47,8 +42,12 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -82,7 +81,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), !app.getSettings().isLightContent());
 		return themedInflater.inflate(getLayoutId(), container, false);
 	}
@@ -217,6 +216,11 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			if (amenity.isRouteTrack()) {
 				TravelHelper travelHelper = app.getTravelHelper();
 				TravelGpx travelGpx = new TravelGpx(amenity);
+
+				SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+				historyHelper.addNewItemToHistory(searchResult.location.getLatitude(),
+						searchResult.location.getLongitude(), pair.first, HistorySource.SEARCH);
+
 				travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
 				return; // TravelGpx
 			}
@@ -334,7 +338,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean append, boolean addShadows) {
 		if (listAdapter != null) {
 			List<QuickSearchListItem> list = new ArrayList<>(listItems);
-			if (list.size() > 0) {
+			if (!list.isEmpty()) {
 				showResult = false;
 				if (addShadows) {
 					list.add(0, new QuickSearchTopShadowListItem(app));

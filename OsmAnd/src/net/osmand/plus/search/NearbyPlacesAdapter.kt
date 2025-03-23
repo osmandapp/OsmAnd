@@ -16,11 +16,13 @@ import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.render.RenderingIcons
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.PicassoUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
+import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.util.Algorithms
 
 class NearbyPlacesAdapter(
@@ -80,9 +82,15 @@ class NearbyPlacesAdapter(
 
 		fun bind(item: Amenity, position: Int) {
 			this.item = item
+			val layoutParams = itemView.layoutParams
+			val heightResId =
+				if (shouldShowImage()) R.dimen.nearby_place_item_height else R.dimen.nearby_place_item_height_non_image
+			layoutParams.height = context.resources.getDimensionPixelSize(heightResId)
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
-			val subType = poiTypes.getPoiTypeByKey(item.subType)
+			val osmanPoiType = item.osmandPoiKey
+			val itemType = osmanPoiType ?: item.subType
+			val subType = poiTypes.getPoiTypeByKey(itemType)
 			val poiIcon =
 				if (subType == null) null else RenderingIcons.getBigIcon(app, subType.keyName)
 			val uiUtilities = app.uiUtilities
@@ -97,23 +105,27 @@ class NearbyPlacesAdapter(
 				uiUtilities.getIcon(R.drawable.ic_action_info_dark, nightMode)
 			}
 			iconImageView.setImageDrawable(coloredIcon)
-			val picasso = PicassoUtils.getPicasso(app)
+			if (shouldShowImage()) {
+				AndroidUiHelper.updateVisibility(imageView, true)
+				val picasso = PicassoUtils.getPicasso(app)
+				item.wikiImageStubUrl?.let {
+					val creator = Picasso.get()
+						.load(it)
+					if (coloredIcon != null) {
+						creator.error(coloredIcon)
+					}
+					creator.into(imageView, object : Callback {
+						override fun onSuccess() {
+							picasso.setResultLoaded(it, true)
+						}
 
-			item.wikiImageStubUrl?.let {
-				val creator = Picasso.get()
-					.load(it)
-				if (coloredIcon != null) {
-					creator.error(coloredIcon)
+						override fun onError(e: Exception?) {
+							picasso.setResultLoaded(it, true)
+						}
+					})
 				}
-				creator.into(imageView, object : Callback {
-					override fun onSuccess() {
-						picasso.setResultLoaded(it, true)
-					}
-
-					override fun onError(e: Exception?) {
-						picasso.setResultLoaded(it, true)
-					}
-				})
+			} else {
+				AndroidUiHelper.updateVisibility(imageView, false)
 			}
 
 			// Add row number to the title
@@ -173,4 +185,10 @@ class NearbyPlacesAdapter(
 			return null
 		}
 	}
+
+	private fun shouldShowImage(): Boolean {
+		val plugin = PluginsHelper.getPlugin(WikipediaPlugin::class.java)
+		return plugin?.topWikiPoiFilter?.showLayoutWithImages() == true
+	}
+
 }

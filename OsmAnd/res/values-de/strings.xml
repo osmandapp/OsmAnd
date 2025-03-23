@@ -5741,4 +5741,10 @@
     <string name="quick_action_showhide_coordinates_grid_descr">Aktion zur Steuerung der Sichtbarkeit des Koordinatengitters auf der Karte.</string>
     <string name="layer_coordinates_grid">Koordinatennetz</string>
     <string name="show_image_previews">Bildvorschauen anzeigen</string>
+    <string name="equator">Äquator</string>
+    <string name="add_widget">Widget hinzufügen</string>
+    <string name="shared_string_online_only">Nur online</string>
+    <string name="shared_string_offline_only">Nur offline</string>
+    <string name="prime_meridian">Nullmeridian</string>
+    <string name="meridian_180">180. Meridian</string>
 </resources>

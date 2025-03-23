@@ -5747,4 +5747,12 @@
     <string name="no_photo_for_location_desc">K tejto polohe zatiaľ neboli pridané žiadne fotografie používateľov</string>
     <string name="show_dms_grids">Použiť SMS namiesto stupňov</string>
     <string name="map_grid">Mapové mriežky</string>
+    <string name="meridian_180">180. poludník</string>
+    <string name="prime_meridian">Nultý poludník</string>
+    <string name="equator">Rovník</string>
+    <string name="shared_string_online_only">Len online</string>
+    <string name="shared_string_offline_only">Len offline</string>
+    <string name="release_5_0">• Objavte najlepšie hodnotené body záujmu v novom režime Prieskumu\n\n • Všetky trasy v OSM sú teraz vyhľadateľné! Turistické, cyklistické, horské bicykle a ďalšie\n\n • Nový navigačný nástroj kombinuje navigačné inštrukcie a šípky zabočenia\n\n • Nový nástroj pre aktuálnu trasu: zobrazuje odhadovaný čas trvania, príjazdu a vzdialenosti\n\n • Zvoľte lyžiarske svahy a cesty pre horské bicykle na mape pre podrobné informácie\n\n • Možnosť zvoliť veľkosť nástrojov pre ľavý a pravý panel\n\n • Pridaná súradnicová sieť pre geografické súradnice\n\n • Pridaná možnosť nastavenia predvoleného vzhľadu pre skupiny obľúbených bodov\n\n • Android Auto: zobrazte odhadovaný čas príjazdu a vzdialenosť k ďalšiemu bodu trasy; vo výsledkoch vyhľadávania sa zobrazujú aj názvy miest\n\n • Výrazné vrchy je teraz možné nájsť pomocou mapy a vyhľadávania\n\n • Výšky vrcholov hôr v stopách\n\n • Pridané: Skalné steny a oblasti na horolezectvo na mape\n\n • Vyhľadávanie adries v USA bolo vylepšené\n\n • Pridané navigačné hlasové pokyny vo formáte TTS v hebrejčine</string>
+    <string name="add_widget">Pridať nástroj</string>
+    <string name="row_height">Výška riadka</string>
 </resources>

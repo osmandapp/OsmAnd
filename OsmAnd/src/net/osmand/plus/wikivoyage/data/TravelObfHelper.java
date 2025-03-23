@@ -7,21 +7,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
-import static net.osmand.plus.wikivoyage.data.TravelArticle.TRAVEL_GPX_DEFAULT_SEARCH_RADIUS;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SHORTLINK_TILES;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
-import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
-import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
-import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_1;
-import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_2;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -36,6 +22,7 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.resources.AmenityIndexRepository;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -88,6 +75,7 @@ public class TravelObfHelper implements TravelHelper {
 	private static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
 	private static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
 	private static final int MAX_SEARCH_RADIUS = 800 * 1000;
+	private static final int TRAVEL_GPX_SEARCH_RADIUS = 10 * 1000; // Ref: POI_SEARCH_POINTS_INTERVAL_M in tools
 
 	private final OsmandApplication app;
 	private final Collator collator;
@@ -197,28 +185,43 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public boolean isTravelGpxTags(@NonNull Map<String, String> tags) {
-		return tags.containsKey(ROUTE_ID) && "segment".equals(tags.get(ROUTE));
+		return tags.containsKey(ROUTE_ID)
+				&& ("segment".equals(tags.get(ROUTE)) || tags.containsKey(ROUTE_TYPE));
 	}
 
 	@Nullable
 	public synchronized TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId) {
-		final String lcSearchRouteId = routeId != null ? routeId.toLowerCase() : null;
-		if (Algorithms.isEmpty(lcSearchRouteId)) {
+		if (Algorithms.isEmpty(routeId)) {
 			LOG.error(String.format("searchTravelGpx(%s, null) failed due to empty routeId", location));
 			return null;
 		}
 		List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
-		int searchRadius = ARTICLE_SEARCH_RADIUS;
+		int searchRadius = TRAVEL_GPX_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
 		do {
 			for (AmenityIndexRepository repo : getTravelGpxRepositories()) {
-				searchAmenity(foundAmenities, location, repo, searchRadius, 15, ROUTE_TRACK, null);
+				if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
+					continue;
+				}
+				if (!isLocationIntersectsWithRepo(repo, location)) {
+					continue;
+				}
+				int previousFoundSize = foundAmenities.size();
+				boolean firstSearchCycle = searchRadius == TRAVEL_GPX_SEARCH_RADIUS;
+				if (firstSearchCycle) {
+					searchTravelGpxAmenityByRouteId(foundAmenities, repo, routeId, location, searchRadius); // indexed
+				}
+				boolean nothingFound = previousFoundSize == foundAmenities.size();
+				if (nothingFound) {
+					// fallback to non-indexed route_id (compatibility with old files)
+					searchAmenity(foundAmenities, location, repo, searchRadius, 15, ROUTE_TRACK, null);
+				}
 			}
 			for (Pair<File, Amenity> foundGpx : foundAmenities) {
 				Amenity amenity = foundGpx.second;
 				final String aRouteId = amenity.getRouteId();
 				final String lcRouteId = aRouteId != null ? aRouteId.toLowerCase() : null;
-				if (lcSearchRouteId.equals(lcRouteId)) {
+				if (routeId.toLowerCase().equals(lcRouteId)) {
 					travelGpx = getTravelGpx(foundGpx.first, amenity);
 					break;
 				}
@@ -229,6 +232,53 @@ public class TravelObfHelper implements TravelHelper {
 			LOG.error(String.format("searchTravelGpx(%s, %s) failed", location, routeId));
 		}
 		return travelGpx;
+	}
+
+	private void searchTravelGpxAmenityByRouteId(@NonNull List<Pair<File, Amenity>> amenitiesList,
+	                                             @NonNull AmenityIndexRepository repo, @NonNull String routeId,
+	                                             @NonNull LatLon location, int searchRadius) {
+		int left = 0, right = Integer.MAX_VALUE, top = 0, bottom = Integer.MAX_VALUE;
+		SearchPoiTypeFilter poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
+			@Override
+			public boolean accept(PoiCategory poiCategory, String subType) {
+				return subType.startsWith(ROUTES_PREFIX) || ROUTE_TRACK.equals(subType);
+			}
+
+			@Override
+			public boolean isEmpty() {
+				return false;
+			}
+		};
+		SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
+				0, 0, routeId, left, right, top, bottom, poiTypeFilter,
+				new ResultMatcher<Amenity>() {
+					@Override
+					public boolean publish(Amenity amenity) {
+						if (amenity.getRouteId() != null && amenity.getRouteId().equals(routeId)) {
+							amenitiesList.add(new Pair<>(repo.getFile(), amenity));
+						}
+						return false;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				}, null);
+		pointRequest.setBBoxRadius(location.getLatitude(), location.getLongitude(), searchRadius);
+		repo.searchPoiByName(pointRequest);
+	}
+
+	private boolean isLocationIntersectsWithRepo(AmenityIndexRepository repo, @NonNull LatLon location) {
+		int x31 = MapUtils.get31TileNumberX(location.getLongitude());
+		int y31 = MapUtils.get31TileNumberY(location.getLatitude());
+		for (BinaryMapPoiReaderAdapter.PoiRegion poiIndex : repo.getReaderPoiIndexes()) {
+			QuadRect bbox = new QuadRect(poiIndex.getLeft31(), poiIndex.getTop31(), poiIndex.getRight31(), poiIndex.getBottom31());
+			if (bbox.contains(x31, y31, x31, y31)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void searchAmenity(@NonNull List<Pair<File, Amenity>> amenitiesList, @NonNull LatLon location,

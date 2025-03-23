@@ -5596,4 +5596,12 @@
     <string name="quick_action_showhide_coordinates_grid_descr">Acción para controlar la visibilidad de la red de coordenadas en el mapa.</string>
     <string name="show_image_previews">Mostrar vistas previas de imagen</string>
     <string name="layer_coordinates_grid">Cuadrícula de coordenadas</string>
+    <string name="prime_meridian">Meridiano cero</string>
+    <string name="equator">Ecuador</string>
+    <string name="meridian_180">Meridiano 180</string>
+    <string name="release_5_0">• Descubrí los PDI mejor clasificados con el nuevo modo «Explorar»\n\n• Todas las rutas de OSM, ¡ahora con opción de búsqueda! Senderismo, ciclismo, BTT y mucho más\n\n• El nuevo widget de navegación combina la flecha de giro y las idicaciones de navegación\n\n• Widget de información de la ruta actual: muestra el tiempo estimado, la hora y la distancia de llegada\n\n• Marcá pistas de esquí y BTT en el mapa para obtener información detallada\n\n• Posibilidad de cambiar el tamaño del widget para los paneles izquierdo y derecho\n\n• Se añadió la cuadrícula de coordenadas con coordenadas geográficas\n\n• Se añadió la posibilidad de personalizar el aspecto predefinido de los grupos favoritos\n\n• Android Auto: visualización del tiempo estimado de llegada y de la distancia hasta el siguiente punto de ruta; los nombres de las ciudades aparecen ahora en los resultados de búsqueda\n\n• Los picos prominentes ahora se pueden descubrir a través del mapa y la búsqueda\n\n• Alturas de picos de montaña en pies\n\n• Se añadieron peñascos y zonas de escalada en el mapa\n\n• Se mejoró la búsqueda de direcciones en EE.UU\n\n• Se añadió la voz sintetizada al hebreo para la navegación</string>
+    <string name="add_widget">Añadir widget</string>
+    <string name="shared_string_online_only">Sólo en línea</string>
+    <string name="shared_string_offline_only">Sólo desconectado</string>
+    <string name="row_height">Altura de la fila</string>
 </resources>

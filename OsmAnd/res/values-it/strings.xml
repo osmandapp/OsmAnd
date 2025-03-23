@@ -45,7 +45,7 @@
     <string name="download_files_question_space">Scaricare {0} file\?
 \n {1} MB (di {2} MB) saranno usati.</string>
     <string name="use_transparent_map_theme">Tema trasparente</string>
-    <string name="native_library_not_supported">Libreria Nativa non supportata da questo dispositivo.</string>
+    <string name="native_library_not_supported">Libreria nativa non supportata da questo dispositivo.</string>
     <string name="init_native_library">Inizializzazione libreria nativa…</string>
     <string name="choose_auto_follow_route">Centra automaticamente la mappa</string>
     <string name="choose_auto_follow_route_descr">Tempo fino a quando la visualizzazione della mappa si sincronizza con la posizione corrente.</string>
@@ -4170,7 +4170,7 @@
     <string name="exit_without_saving_warning">Uscire senza salvare le modifiche\?</string>
     <string name="shared_string_show_slope">Mostra pendenza</string>
     <string name="shared_string_hide_slope">Nascondi pendenza</string>
-    <string name="shared_string_uphill">Uphill</string>
+    <string name="shared_string_uphill">Salita</string>
     <string name="shared_string_downhill">Downhill</string>
     <string name="elevation_profile">Profilo elevazione</string>
     <string name="shared_string_precision">Precisione</string>
@@ -4366,7 +4366,7 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Nessuna restrizione)</string>
     <string name="routing_attr_avoid_fords_name">Evita i guadi</string>
     <string name="routing_attr_avoid_fords_description">Evita i guadi</string>
-    <string name="map_widget_trip_recording_downhill">Downhill</string>
+    <string name="map_widget_trip_recording_downhill">Discesa</string>
     <string name="map_widget_trip_recording_uphill">Salita</string>
     <string name="map_widget_trip_recording_duration">Durata</string>
     <string name="map_widget_distance">Distanza</string>
@@ -5489,7 +5489,7 @@
     <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Apri nel browser</string>
     <string name="shared_string_source">Sorgente</string>
-    <string name="no_internet_descr">Per favore controlla nuovamente la connessione a internet</string>
+    <string name="no_internet_descr">Per favore controlla nuovamente la connessione a internet.</string>
     <string name="no_photos_available_descr">Nessuna foto è stata ancora aggiunta dagli utenti per questa posizione</string>
     <string name="no_photos_available">Nessuna foto disponibile</string>
     <string name="shared_string_no_internet_connection">Nessuna connessione</string>
@@ -5745,4 +5745,12 @@
     <string name="show_image_previews">Mostra l\' immagine precedente</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Azione per il controllo della visibilità della griglia delle coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
+    <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
+    <string name="equator">Equatore</string>
+    <string name="prime_meridian">Meridiano fondamentale</string>
+    <string name="meridian_180">180° meridiano</string>
+    <string name="shared_string_online_only">Solo online</string>
+    <string name="shared_string_offline_only">Solo offline</string>
+    <string name="add_widget">Aggiungi widget</string>
+    <string name="row_height">Altezza riga</string>
 </resources>

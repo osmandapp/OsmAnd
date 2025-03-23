@@ -475,7 +475,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	@Override
 	public void onFinishFiltering(@NonNull GpxFile filteredGpxFile) {
-		app.runMessageInUIThreadAndCancelPrevious(REFRESH_UI_MESSAGE_ID, () -> {
+		app.runInUIThreadAndCancelPrevious(REFRESH_UI_MESSAGE_ID, () -> {
 			gpsFilterScreensAdapter.onFinishFiltering();
 			Fragment target = getTargetFragment();
 			if (target instanceof GpsFilterFragmentLister) {

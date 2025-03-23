@@ -139,7 +139,7 @@ public class WptPtEditor extends PointEditor {
 		wpt.setName(title);
 
 		if (amenity != null) {
-			int preselectedIconId = RenderingIcons.getPreselectedIconId(amenity);
+			int preselectedIconId = RenderingIcons.getPreselectedIconId(app, amenity);
 			String preselectedIconName = RenderingIcons.getBigIconName(preselectedIconId);
 			if (!Algorithms.isEmpty(preselectedIconName)) {
 				wpt.setIconName(preselectedIconName);

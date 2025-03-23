@@ -131,18 +131,6 @@ public class EntityParser {
 		}
 	}
 
-	private static String getWebSiteURL(Map<String, String> tagValues) {
-		String siteUrl = tagValues.get(OSMTagKey.WEBSITE.getValue());
-		String url = tagValues.get(OSMTagKey.URL.getValue());
-		if (siteUrl == null && url == null) {
-			siteUrl = tagValues.get(OSMTagKey.CONTACT_WEBSITE.getValue());
-		}
-		if (siteUrl != null && !siteUrl.startsWith("http://") && !siteUrl.startsWith("https://")) {
-			siteUrl = "http://" + siteUrl;
-		}
-		return siteUrl;
-	}
-
 	private static String getWikipediaURL(Map<String, String> tagValues) {
 		String wikiUrl = tagValues.get(OSMTagKey.WIKIPEDIA.getValue());
 		if (wikiUrl != null) {
@@ -198,7 +186,6 @@ public class EntityParser {
 	private static void addAmenity(Entity entity, List<Amenity> amenitiesList, Map<String, String> ts, Amenity am) {
 		if (am != null && checkAmenitiesToAdd(am, amenitiesList)) {
 			parseMapObject(am, entity, ts);
-			setWebsiteUrl(am, ts);
 			setWikipediaUrl(am, ts);
 			amenitiesList.add(am);
 		}
@@ -208,13 +195,6 @@ public class EntityParser {
 		String wbs = getWikipediaURL(ts);
 		if (wbs != null) {
 			am.setAdditionalInfo("wikipedia", wbs);
-		}
-	}
-
-	private static void setWebsiteUrl(Amenity am, Map<String, String> ts) {
-		String wbs = getWebSiteURL(ts);
-		if (wbs != null) {
-			am.setSite(wbs);
 		}
 	}
 

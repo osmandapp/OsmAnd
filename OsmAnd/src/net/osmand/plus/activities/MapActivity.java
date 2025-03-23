@@ -513,9 +513,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
 			return;
 		}
-		ExplorePlacesFragment nearbyPlacesFragment = fragmentsHelper.getExplorePlacesFragment();
-		if (nearbyPlacesFragment != null) {
-			nearbyPlacesFragment.onBackPressed();
+		ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
+		if (explorePlacesFragment != null) {
+			explorePlacesFragment.closeFragment();
 			return;
 		}
 		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
@@ -1103,7 +1103,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		updateNavigationBarColor();
 		//mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
 		mapView.setMapDensity(mapView.getSettingsMapDensity());
-		mapView.updateGridSettings();
+		mapView.getGridHelper().updateGridSettings();
 		app.getDaynightHelper().startSensorIfNeeded(change -> app.runInUIThread(() -> getMapView().refreshMap(true)));
 		getMapView().refreshMap(true);
 		applyScreenOrientation();

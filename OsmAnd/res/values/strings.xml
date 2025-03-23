@@ -14,6 +14,13 @@
     <string name="intermediate_first">Intermediate first</string>
     <string name="destination_first">Destination first</string>
     <string name="display_priority">Display priority</string>
+	<string name="row_height">Row height</string>
+	<string name="add_widget">Add widget</string>
+    <string name="shared_string_online_only">Online Only</string>
+    <string name="shared_string_offline_only">Offline Only</string>
+    <string name="meridian_180">180th meridian</string>
+    <string name="prime_meridian">Prime meridian</string>
+    <string name="equator">Equator</string>
     <string name="show_image_previews">Show image previews</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Action to control the visibility of the Coordinates grid on the map.</string>
     <string name="layer_coordinates_grid">Coordinates grid</string>

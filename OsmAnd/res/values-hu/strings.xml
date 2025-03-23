@@ -1233,7 +1233,7 @@
     <string name="shared_string_waypoints">Útpontok</string>
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
     <string name="speak_favorites">Közeli kedvencek</string>
-    <string name="speak_poi">Közeli érdekes helyek (POI)</string>
+    <string name="speak_poi">Közeli érdekes helyek (POI-k)</string>
     <string name="download_additional_maps">Letöltia hiányzó térképeket %1$s (%2$d MB)\?</string>
     <string name="rendering_value_browse_map_name">Térképböngészés</string>
     <string name="rendering_value_car_name">Személyautó</string>
@@ -3570,7 +3570,7 @@
     <string name="icon_group_special">Különleges</string>
     <string name="icon_group_transport">Közlekedés</string>
     <string name="icon_group_service">Szolgáltatás</string>
-    <string name="icon_group_symbols">Jelképek</string>
+    <string name="icon_group_symbols">Szimbólumok</string>
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Vészhelyzet</string>
     <string name="icon_group_travel">Utazás</string>
@@ -4277,14 +4277,14 @@
     <string name="arrival_time_widget_desc">Az úti célhoz való megérkezés időpontja.</string>
     <string name="time_to_go_desc">A célpont eléréséhez szükséges időtartam percben vagy órában kifejezve.</string>
     <string name="magnetic_bearing_widget_desc">A mágneses észak és a célpont közötti, az Ön tartózkodási helyéről megfigyelt szög.</string>
-    <string name="coordinates_widget_secondary_desc">A koordinátaformátumot módosíthatja a következőre: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">A koordinátaformátumot itt módosíthatja: %1$s &gt; %2$s &gt; %3$s.</string>
     <string name="shared_string_widget">Modul</string>
     <string name="audio_video_notes_desc">Gyors hozzáférést biztosít hang- vagy videófelvétel elindításához/leállításához, illetve képjegyzet készítéséhez.</string>
     <string name="coordinates_widget_desc">Megjeleníti a jelenlegi pozíció földrajzi koordinátáit.</string>
     <string name="get_altitude_information">Magassági adatok lekérése</string>
     <string name="calculating_altitude">Magasság kiszámítása</string>
     <string name="calculate_online">Online kiszámítás</string>
-    <string name="bearing_secondary_desc">A felhasznált adatformátumot módosíthatja a következőre: %1$s – %2$s – %3$s.</string>
+    <string name="bearing_secondary_desc">A felhasznált adatformátumot itt módosíthatja: %1$s &gt; %2$s &gt; %3$s.</string>
     <string name="widget_secondary_desc_part_of">A(z) %1$s bővítmény része.</string>
     <string name="gps_info_widget_desc">Megjeleníti a jelenleg látható, illetve használt műholdak számát.</string>
     <string name="elevation_profile_widget_desc">Megjeleníti a jelenlegi útvonal magassági és lejtésprofilját.</string>
@@ -5682,4 +5682,12 @@
     <string name="layer_coordinates_grid">Koordinátarács</string>
     <string name="show_image_previews">Képelőnézetek megjelenítése</string>
     <string name="quick_action_showhide_coordinates_grid_descr">A koordinátarács láthatóságának beállítása a térképen.</string>
+    <string name="prime_meridian">Kiinduló (0 fok) meridián</string>
+    <string name="equator">Egyenlítő</string>
+    <string name="meridian_180">180. hosszúsági fok</string>
+    <string name="release_5_0">- Fedezze fel a legmagasabban rangsorolt POI-kat az új Felfedező móddal\n\n - Az összes OSM útvonal mostantól kereshető! Túra-, kerékpár-, MTB-útvonalak és még sok minden más is\n\n - Az új navigációs widget egyesíti a kanyarodást jelző nyilat és a navigációs utasításokat\n\n - Aktuális útinformációs widget: megjeleníti a becsült érkezési időt és a távolságot.\n\n - Sípályák és MTB-útvonalak kiválasztása a térképen a részletes információkhoz\n\n - Lehetőség a widget méretének kiválasztására a bal és jobb oldali paneleken\n\n - Hozzáadott koordinátarács földrajzi koordinátákkal\n\n - Hozzáadva a kedvenc csoportok alapértelmezett megjelenésének testreszabási lehetősége\n\n - Android Auto: becsült érkezési idő és a következő úticél távolságának megtekintése; a városnevek mostantól megjelennek a keresési eredményekben\n\n - A kiemelkedő csúcsok mostantól térképen és keresésen keresztül is felfedezhetők\n\n - Hegycsúcsok magassága lábban\n\n - Hozzáadva: sziklák és mászóterületek a térképen\n\n - Javult a címkeresés az USA-ban\n\n - Hozzáadva héber felolvasó a navigációhoz</string>
+    <string name="shared_string_offline_only">Csak offline</string>
+    <string name="shared_string_online_only">Csak online</string>
+    <string name="add_widget">Widget hozzáadása</string>
+    <string name="row_height">Sormagasság</string>
 </resources>

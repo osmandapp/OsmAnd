@@ -76,7 +76,7 @@ public class TopToolbarController {
 	int closeBtnIconClrLightId = R.color.icon_color_default_light;
 	@ColorRes
 	int closeBtnIconClrDarkId;
-	boolean closeBtnVisible = true;
+	boolean closeButtonVisible = true;
 
 	@DrawableRes
 	int refreshBtnIconLightId = R.drawable.ic_action_refresh_dark;
@@ -87,7 +87,7 @@ public class TopToolbarController {
 	@ColorRes
 	int refreshBtnIconClrDarkId;
 
-	boolean refreshBtnVisible;
+	boolean actionButtonVisible;
 	boolean saveViewVisible;
 	boolean textBtnVisible;
 	protected boolean topBarSwitchVisible;
@@ -127,7 +127,7 @@ public class TopToolbarController {
 	OnClickListener onBackButtonClickListener;
 	OnClickListener onTitleClickListener;
 	OnClickListener onCloseButtonClickListener;
-	OnClickListener onRefreshButtonClickListener;
+	OnClickListener onActionButtonClickListener;
 	OnClickListener onSaveViewClickListener;
 	OnClickListener onTextBtnClickListener;
 	OnCheckedChangeListener onSwitchCheckedChangeListener;
@@ -140,10 +140,11 @@ public class TopToolbarController {
 
 	private boolean bottomViewAdded;
 
-	public TopToolbarController(TopToolbarControllerType type) {
+	public TopToolbarController(@NonNull TopToolbarControllerType type) {
 		this.type = type;
 	}
 
+	@NonNull
 	public TopToolbarControllerType getType() {
 		return type;
 	}
@@ -228,7 +229,7 @@ public class TopToolbarController {
 		this.closeBtnIconClrDarkId = closeBtnIconClrDarkId;
 	}
 
-	public void setRefreshBtnIconIds(int refreshBtnIconLightId, int refreshBtnIconDarkId) {
+	public void setActionButtonIcons(@DrawableRes int refreshBtnIconLightId,@DrawableRes int refreshBtnIconDarkId) {
 		this.refreshBtnIconLightId = refreshBtnIconLightId;
 		this.refreshBtnIconDarkId = refreshBtnIconDarkId;
 	}
@@ -238,12 +239,12 @@ public class TopToolbarController {
 		this.refreshBtnIconClrDarkId = refreshBtnIconClrDarkId;
 	}
 
-	public void setCloseBtnVisible(boolean closeBtnVisible) {
-		this.closeBtnVisible = closeBtnVisible;
+	public void setCloseButtonVisible(boolean closeButtonVisible) {
+		this.closeButtonVisible = closeButtonVisible;
 	}
 
-	public void setRefreshBtnVisible(boolean visible) {
-		this.refreshBtnVisible = visible;
+	public void setActionButtonVisible(boolean visible) {
+		this.actionButtonVisible = visible;
 	}
 
 	public void setSaveViewVisible(boolean visible) {
@@ -319,8 +320,8 @@ public class TopToolbarController {
 		this.onSwitchCheckedChangeListener = onSwitchCheckedChangeListener;
 	}
 
-	public void setOnRefreshButtonClickListener(OnClickListener onRefreshButtonClickListener) {
-		this.onRefreshButtonClickListener = onRefreshButtonClickListener;
+	public void setOnActionButtonClickListener(OnClickListener onActionButtonClickListener) {
+		this.onActionButtonClickListener = onActionButtonClickListener;
 	}
 
 	public void setOnCloseToolbarListener(Runnable onCloseToolbarListener) {

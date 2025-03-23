@@ -503,7 +503,7 @@ public class MenuBuilder {
 
 					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_POI_KEY);
 					firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
-					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(amenity), text, NEAREST_POI_KEY);
+					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(app, amenity), text, NEAREST_POI_KEY);
 					viewGroup.addView(amenitiesRow, insertIndex);
 
 					buildNearestRowDividerIfMissing(viewGroup, insertIndex);
@@ -1345,7 +1345,7 @@ public class MenuBuilder {
 			PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
 			poiFiltersHelper.clearGeneralSelectedPoiFilters();
 			poiFiltersHelper.addSelectedPoiFilter(filter);
-			QuickSearchToolbarController controller = new QuickSearchToolbarController();
+			QuickSearchToolbarController controller = new QuickSearchToolbarController(mapActivity);
 			controller.setTitle(filter.getName());
 
 			controller.setOnBackButtonClickListener(v1 -> {

@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -115,7 +116,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			}
 
 			@Override
-			protected List<TransportStop> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+			protected Pair<List<TransportStop>, List<TransportStop>> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
 				try {
 					List<TransportStop> res = view.getApplication().getResourceManager().searchTransportSync(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, new ResultMatcher<TransportStop>() {
@@ -132,9 +133,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 							});
 					Collections.sort(res, (lhs, rhs) -> lhs.getId() < rhs.getId()
 							? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1));
-					return res;
+					return new Pair<>(res, res);
 				} catch (IOException e) {
-					return new ArrayList<>();
+					return new Pair<>(Collections.emptyList(), Collections.emptyList());
 				}
 			}
 		};

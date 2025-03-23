@@ -65,7 +65,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		view.setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, getWidgetActions(), isVerticalWidget(), nightMode);
+			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, getWidgetActions(), panel, nightMode);
 			return true;
 		});
 	}
