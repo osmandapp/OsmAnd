@@ -18,7 +18,6 @@ import static org.hamcrest.Matchers.anything;
 
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
@@ -36,7 +35,7 @@ import org.junit.runner.RunWith;
 public class SettingsSearchIntegrationTest extends AndroidTest {
 
 	@Rule
-	public ActivityScenarioRule<MapActivity> activityScenarioRule = new ActivityScenarioRule<>(MapActivity.class);
+	public NonClosingActivityScenarioRule<MapActivity> nonClosingActivityScenarioRule = new NonClosingActivityScenarioRule<>(MapActivity.class);
 
 	// FK-TODO: add test shouldAdaptMapStyleAfterSearch(), use "winter and ski"
 	// FK-TODO: add test shouldAdaptRoadStyleAfterSearch(), use "american road"
@@ -61,7 +60,6 @@ public class SettingsSearchIntegrationTest extends AndroidTest {
 												withParent(IsInstanceOf.instanceOf(android.widget.FrameLayout.class))))));
 		textView.perform(scrollTo());
 		textView.check(matches(isDisplayed()));
-		// FK-FIXME: Activity never becomes requested state "[DESTROYED]" (last lifecycle transition = "PAUSED")
 	}
 
 	private static DataInteraction afrikaansItem() {
