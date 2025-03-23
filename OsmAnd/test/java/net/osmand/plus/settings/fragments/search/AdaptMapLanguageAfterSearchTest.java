@@ -50,9 +50,9 @@ public class AdaptMapLanguageAfterSearchTest extends AndroidTest {
 		applyButton().perform(scrollTo(), click());
 
 		// Then
-		final var mapLanguageItem = mapLanguageItemHavingDescription("af");
-		mapLanguageItem.perform(scrollTo());
-		mapLanguageItem.check(matches(isDisplayed()));
+		final var mapLanguageSetting = mapLanguageSettingHavingDescription("af");
+		mapLanguageSetting.perform(scrollTo());
+		mapLanguageSetting.check(matches(isDisplayed()));
 	}
 
 	private static DataInteraction afrikaansItem() {
@@ -78,7 +78,7 @@ public class AdaptMapLanguageAfterSearchTest extends AndroidTest {
 								3)));
 	}
 
-	private static ViewInteraction mapLanguageItemHavingDescription(final String description) {
+	private static ViewInteraction mapLanguageSettingHavingDescription(final String description) {
 		return onView(
 				allOf(
 						withId(R.id.description),

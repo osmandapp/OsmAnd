@@ -49,9 +49,9 @@ public class AdaptMapStyleAfterSearchTest extends AndroidTest {
 		applyButton().perform(click());
 
 		// Then
-		final var mapStyleItem = mapStyleItemHavingDescription(mapStyle);
-		mapStyleItem.perform(scrollTo());
-		mapStyleItem.check(matches(withText(mapStyle)));
+		final var mapStyleSetting = mapStyleSettingHavingDescription(mapStyle);
+		mapStyleSetting.perform(scrollTo());
+		mapStyleSetting.check(matches(withText(mapStyle)));
 	}
 
 	private static ViewInteraction desertItem() {
@@ -78,7 +78,7 @@ public class AdaptMapStyleAfterSearchTest extends AndroidTest {
 						isDisplayed()));
 	}
 
-	private static ViewInteraction mapStyleItemHavingDescription(final String description) {
+	private static ViewInteraction mapStyleSettingHavingDescription(final String description) {
 		return onView(
 				allOf(
 						withId(R.id.description),
