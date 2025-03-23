@@ -5286,4 +5286,27 @@ POIの更新は利用できません</string>
     <string name="obd_calculated_engine_load">計算上のエンジン負荷</string>
     <string name="obd_engine_coolant_temp_desc">エンジン冷却水の温度を表示します</string>
     <string name="obd_speed_desc">車速センサー(VSS)からの車速を表示します。</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">燃料消費率 %/h</string>
+    <string name="obd_widget_vehicle_speed">車速</string>
+    <string name="obd_nothing_found_text">スキャナーが見つかりません</string>
+    <string name="obd_searching_text_description">端末をスキャナーに近づけてください。車両のエンジンがかかっていることを確認してください。</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">燃料消費率</string>
+    <string name="obd_widget_engine_speed">エンジン回転数</string>
+    <string name="obd_nothing_found_description">以下をご確認ください:\n - BluetoothがONになっていること\n - 車のエンジンがかかっている\n - お使いの端末がスキャナーの範囲内にあることを確認してください。</string>
+    <string name="obd_ambient_air_temp_desc">車外の温度を表示します。</string>
+    <string name="obd_engine_oil_temperature_desc">エンジンオイルの温度を表示します。</string>
+    <string name="route_guidance">ルート案内</string>
+    <string name="obd_engine_oil_temperature">エンジンオイル温度</string>
+    <string name="obd_bluetooth_off_description">BluetoothをONにしてスキャナーを検索・接続してください。</string>
+    <string name="obd_searching_text">スキャナーの検索</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="obd_device_forget_sensor">スキャナーの解除</string>
+    <string name="obd_fuel_consumption_rate_sensor">燃料消費率(センサー)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">センサーに基づいた車両の燃料消費率(L/h)を表示します</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">計算による車両の燃料消費率(L/h)を表示します</string>
+    <string name="obd_fuel_level_liter">燃料レベル(リットル)</string>
+    <string name="obd_fuel_level_percent">燃料レベル(%)</string>
+    <string name="obd_fuel_left_km">燃料残量(km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">燃料消費率(OBD)</string>
+    <string name="obd_vehicle_info">車両情報</string>
 </resources>
