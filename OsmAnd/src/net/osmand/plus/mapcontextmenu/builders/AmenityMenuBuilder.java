@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
@@ -105,7 +106,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	private void buildNearestRows(ViewGroup viewGroup) {
 		buildNearestWiki(viewGroup);
-		buildNearestPoi(viewGroup);
+		if (!OSMSettings.OSMTagKey.ADMINISTRATIVE.getValue().equals(amenity.getType().getKeyName())) {
+			buildNearestPoi(viewGroup);
+		}
 	}
 
 	private void buildNearestWiki(ViewGroup viewGroup) {
