@@ -42,24 +42,18 @@ public class SettingsSearchIntegrationTest extends AndroidTest {
 	@Test
 	public void shouldAdaptMapLanguageAfterSearch() {
 		clickSearchButton(app);
+		// When
 		onView(searchView()).perform(replaceText("Afrikaans"), closeSoftKeyboard());
-		// click Driving result
-		// FK-TODO: refactor usage of 2
-		onView(searchResultsView()).perform(actionOnItemAtPosition(2, click()));
+		onView(searchResultsView()).perform(actionOnItemAtPosition(0, click()));
+
+		// And
 		afrikaansItem().perform(click());
 		applyButton().perform(scrollTo(), click());
-		// description of Map Language item is "af"
-		final ViewInteraction textView =
-				onView(
-						allOf(
-								withId(R.id.description),
-								withText("af"),
-								withParent(
-										allOf(
-												withId(R.id.text_container),
-												withParent(IsInstanceOf.instanceOf(android.widget.FrameLayout.class))))));
-		textView.perform(scrollTo());
-		textView.check(matches(isDisplayed()));
+
+		// Then
+		final ViewInteraction mapLanguageItem = mapLanguageItemHavingDescription("af");
+		mapLanguageItem.perform(scrollTo());
+		mapLanguageItem.check(matches(isDisplayed()));
 	}
 
 	private static DataInteraction afrikaansItem() {
@@ -83,5 +77,16 @@ public class SettingsSearchIntegrationTest extends AndroidTest {
 										withId(me.zhanghai.android.materialprogressbar.R.id.buttonPanel),
 										0),
 								3)));
+	}
+
+	private static ViewInteraction mapLanguageItemHavingDescription(final String description) {
+		return onView(
+				allOf(
+						withId(R.id.description),
+						withText(description),
+						withParent(
+								allOf(
+										withId(R.id.text_container),
+										withParent(IsInstanceOf.instanceOf(android.widget.FrameLayout.class))))));
 	}
 }
