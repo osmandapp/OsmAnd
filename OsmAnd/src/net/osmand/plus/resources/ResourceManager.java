@@ -4,6 +4,7 @@ package net.osmand.plus.resources;
 import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.AppInitEvents.ASSETS_COPIED;
 import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SEGMENT_INDEX;
 
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
