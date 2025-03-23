@@ -32,12 +32,11 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SettingsSearchIntegrationTest extends AndroidTest {
+public class AdaptMapLanguageAfterSearchTest extends AndroidTest {
 
 	@Rule
 	public NonClosingActivityScenarioRule<MapActivity> nonClosingActivityScenarioRule = new NonClosingActivityScenarioRule<>(MapActivity.class);
 
-	// FK-TODO: add test shouldAdaptMapStyleAfterSearch(), use "winter and ski"
 	// FK-TODO: add test shouldAdaptRoadStyleAfterSearch(), use "american road"
 	@Test
 	public void shouldAdaptMapLanguageAfterSearch() {
