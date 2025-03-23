@@ -5203,4 +5203,8 @@ POIの更新は利用できません</string>
     <string name="av_audio_sample_rate">音声のサンプリング周波数</string>
     <string name="ant_plus_help_title">所持しているセンサーの種類がわからない</string>
     <string name="av_audio_sample_rate_descr">音声のサンプリング周波数を選択します。</string>
+    <string name="add_widget">ウィジェットの追加</string>
+    <string name="shared_string_online_only">オンラインのみ</string>
+    <string name="shared_string_offline_only">オフラインのみ</string>
+    <string name="row_height">列の高さ</string>
 </resources>
