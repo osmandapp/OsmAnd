@@ -49,9 +49,9 @@ public class AdaptMapStyleAfterSearchTest extends AndroidTest {
 		applyButton().perform(click());
 
 		// Then
-		final ViewInteraction item = mapStyleItemHavingDescription(mapStyle);
-		item.perform(scrollTo());
-		item.check(matches(withText(mapStyle)));
+		final var mapStyleItem = mapStyleItemHavingDescription(mapStyle);
+		mapStyleItem.perform(scrollTo());
+		mapStyleItem.check(matches(withText(mapStyle)));
 	}
 
 	private static ViewInteraction desertItem() {

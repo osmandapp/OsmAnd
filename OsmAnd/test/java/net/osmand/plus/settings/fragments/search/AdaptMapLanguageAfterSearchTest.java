@@ -50,7 +50,7 @@ public class AdaptMapLanguageAfterSearchTest extends AndroidTest {
 		applyButton().perform(scrollTo(), click());
 
 		// Then
-		final ViewInteraction mapLanguageItem = mapLanguageItemHavingDescription("af");
+		final var mapLanguageItem = mapLanguageItemHavingDescription("af");
 		mapLanguageItem.perform(scrollTo());
 		mapLanguageItem.check(matches(isDisplayed()));
 	}
