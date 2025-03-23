@@ -12,7 +12,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickSearchButton;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchResultsView;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchView;
-import static net.osmand.test.common.Matchers.childAtPosition;
 import static org.hamcrest.Matchers.allOf;
 
 import androidx.test.espresso.ViewInteraction;
@@ -44,7 +43,7 @@ public class AdaptRoadStyleAfterSearchTest extends AndroidTest {
 		onView(searchResultsView()).perform(actionOnItemAtPosition(0, click()));
 
 		// And
-		americanRoadAtlasItem().perform(click());
+		roadStyleItemNamed(roadStyle).perform(click());
 
 		// Then
 		final var roadStyleSetting = roadStyleSettingHavingDescription(roadStyle);
@@ -52,13 +51,15 @@ public class AdaptRoadStyleAfterSearchTest extends AndroidTest {
 		roadStyleSetting.check(matches(isDisplayed()));
 	}
 
-	private static ViewInteraction americanRoadAtlasItem() {
+	private static ViewInteraction roadStyleItemNamed(final String roadStyle) {
 		return onView(
 				allOf(
-						withId(R.id.button),
-						childAtPosition(
-								withParent(withId(me.zhanghai.android.materialprogressbar.R.id.select_dialog_listview)),
-								1),
+						withId(R.id.text),
+						withText(roadStyle),
+						withParent(
+								allOf(
+										withId(R.id.button),
+										withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout.class)))),
 						isDisplayed()));
 	}
 
