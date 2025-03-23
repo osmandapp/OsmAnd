@@ -5207,4 +5207,15 @@ POIの更新は利用できません</string>
     <string name="shared_string_online_only">オンラインのみ</string>
     <string name="shared_string_offline_only">オフラインのみ</string>
     <string name="row_height">列の高さ</string>
+    <string name="show_list">リストを表示</string>
+    <string name="prime_meridian">本初子午線</string>
+    <string name="equator">赤道</string>
+    <string name="popular_places">人気スポット</string>
+    <string name="choose_location">場所を選択</string>
+    <string name="point_location">地点の位置</string>
+    <string name="show_image_previews">画像のプレビューを表示</string>
+    <string name="shared_string_manual">マニュアル</string>
+    <string name="shared_string_map_center">マップ中心</string>
+    <string name="choose_location_on_map">マップ上で場所を選びます。</string>
+    <string name="meridian_180">180度子午線</string>
 </resources>
