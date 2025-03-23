@@ -24,6 +24,8 @@ import androidx.annotation.Nullable;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.android.MapRendererView;
@@ -62,6 +64,7 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.resources.AmenityIndexRepository;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.clickable.ClickableWay;
@@ -83,18 +86,24 @@ import net.osmand.plus.track.clickable.ClickableWayHelper;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+
+import gnu.trove.list.array.TIntArrayList;
 
 public class MapSelectionHelper {
 
 	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
 	private static final int AMENITY_SEARCH_RADIUS = 50;
 	private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
+
+	private static final int AMENITY_SEARCH_BY_ROUTE_ID = 50000;
 	private static final int TILE_SIZE = 256;
 
 	private static final String TAG_POI_LAT_LON = "osmand_poi_lat_lon";
@@ -462,7 +471,7 @@ public class MapSelectionHelper {
 	}
 
 	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject, Map<String, String> tags) {
-		Amenity amenity;
+		Amenity amenity = null;
 		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
 		String caption = obfMapObject.getCaptionInNativeLanguage();
 		if (!caption.isEmpty()) {
@@ -471,8 +480,13 @@ public class MapSelectionHelper {
 		if (!Algorithms.isEmpty(tags) && tags.containsKey(TRAVEL_MAP_TO_POI_TAG) && "point".equals(tags.get(ROUTE))) {
 			names.add(tags.get(TRAVEL_MAP_TO_POI_TAG)); // additional attribute for TravelGpx points (route_id)
 		}
-		long id = obfMapObject.getId().getId().longValue();
-		amenity = findAmenity(app, latLon, names, id);
+		if (tags.containsKey(ROUTE_ID)) {
+			amenity = findAmenityByRouteId(latLon, tags);
+		}
+		if (amenity == null) {
+			long id = obfMapObject.getId().getId().longValue();
+			amenity = findAmenity(app, latLon, names, id);
+		}
 		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
 			for (int k = 0; k < points31.size(); k++) {
@@ -737,6 +751,80 @@ public class MapSelectionHelper {
 			amenity = findAmenityByName(amenities, names);
 		}
 		return amenity;
+	}
+
+	@Nullable
+	public Amenity findAmenityByRouteId(LatLon latLon, Map<String, String> tags) {
+		Amenity amenity = null;
+		String routeId = tags.get(ROUTE_ID);
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_BY_ROUTE_ID);
+		List<Amenity> amenities = app.getResourceManager().searchAmenitiesByName(routeId, rect.top, rect.left, rect.bottom, rect.right,
+				latLon.getLatitude(), latLon.getLongitude(), new ResultMatcher<>() {
+
+					@Override
+					public boolean publish(Amenity object) {
+						return true;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				});
+		if (!amenities.isEmpty()) {
+			amenity = amenities.get(0);
+			if (amenities.size() > 1) {
+				for (int i = 1; i < amenities.size(); i++) {
+					Amenity a = amenities.get(i);
+					if (amenity.getType().equals(a.getType())) {
+						amenity.addRelatedAmenity(a);
+					}
+				}
+			}
+		}
+
+		List<BinaryMapDataObject> result = new ArrayList<>();
+		if (amenity != null) {
+			List<AmenityIndexRepository> repos = app.getResourceManager().getAmenityRepositories();
+			BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> mapRequest = getMapRequest(latLon, routeId, result);
+			ListIterator<AmenityIndexRepository> li = repos.listIterator(repos.size());
+			while (li.hasPrevious() && amenity.getRelatedAmenity() != null) {
+				AmenityIndexRepository repo = li.previous();
+				if (!repo.isPoiSectionIntersects(repo, mapRequest)) {
+					continue;
+				}
+				mapRequest.clearSearchBoxes();
+				mapRequest.setSearchBoxes(repo.getGroupedPoints(amenity.getRelatedAmenity()));
+				repo.searchMapIndex(mapRequest);
+			}
+		}
+		return amenity;
+	}
+
+	@NonNull
+	private static BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> getMapRequest(LatLon latLon, String routeId, List<BinaryMapDataObject> result) {
+		BinaryMapIndexReader.SearchFilter mapRequestFilter = null;
+		mapRequestFilter = (types, mapIndex) -> {
+            Integer type = mapIndex.getRule(ROUTE_ID, routeId);
+            return type != null && types.contains(type);
+        };
+		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader
+				.buildSearchRequest(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, mapRequestFilter,
+						new ResultMatcher<>() {
+							@Override
+							public boolean publish(BinaryMapDataObject binaryMapDataObject) {
+								result.add(binaryMapDataObject);
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+
+		mapRequest.setBBoxRadius(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_BY_ROUTE_ID);
+		return mapRequest;
 	}
 
 	@Nullable

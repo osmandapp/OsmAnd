@@ -94,6 +94,8 @@ public class Amenity extends MapObject {
 	private String wikiImageStubUrl;
 	private int travelElo = 0;
 
+	private Collection<Amenity> relatedAmenity;
+
 	public int getOrder() {
 		return order;
 	}
@@ -125,7 +127,18 @@ public class Amenity extends MapObject {
 		return regionName;
 	}
 
-	public static class AmenityRoutePoint {
+    public Collection<Amenity> getRelatedAmenity() {
+        return relatedAmenity;
+    }
+
+	public void addRelatedAmenity(Amenity amenity) {
+		if (relatedAmenity == null) {
+			relatedAmenity = new ArrayList<>();
+		}
+		relatedAmenity.add(amenity);
+	}
+
+    public static class AmenityRoutePoint {
 		public double deviateDistance;
 		public boolean deviationDirectionRight;
 		public Location pointA;
