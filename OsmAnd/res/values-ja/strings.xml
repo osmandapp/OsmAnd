@@ -5250,4 +5250,12 @@ POIの更新は利用できません</string>
     <string name="ais_port_nmea_local_description">OsmAndがNMEAデータを受信するUPDポートの定義です</string>
     <string name="ais_object_lost_timeouts">AIS信号受信のタイムアウト設定</string>
     <string name="ais_cpa_warning_distance">クローズ・ポイント・オブ・アプローチ(CPA)の警告距離</string>
+    <string name="popular_places_nearby">近隣の人気スポット</string>
+    <string name="hmd_promo">HMDプロモ %1$sヶ月分</string>
+    <string name="recently_visited">最近訪れた場所</string>
+    <string name="ais_address_settings">IPアドレス設定</string>
+    <string name="hmd_promo_description">無制限のマップダウンロード、3Dレリーフなどの機能を%1$sヶ月間無料で利用できます。</string>
+    <string name="shared_string_road_exit">出口</string>
+    <string name="ais_load_data">ファイルからAISデータを読み込む</string>
+    <string name="ais_address_settings_description">NMEAプロトコル(UDP/TCP)を選択し、アドレスを定義します</string>
 </resources>
