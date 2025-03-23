@@ -157,7 +157,7 @@ public class NearbyPlacesCard extends FrameLayout {
 	}
 
 	public void onPause() {
-		if (searchAmenitiesTask != null && searchAmenitiesTask.getStatus() == RUNNING) {
+		if (searchAmenitiesTask != null) {
 			searchAmenitiesTask.cancel(false);
 		}
 	}
