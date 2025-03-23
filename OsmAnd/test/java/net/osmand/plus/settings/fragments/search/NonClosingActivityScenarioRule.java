@@ -11,7 +11,7 @@ import org.junit.rules.ExternalResource;
 import java.util.function.Supplier;
 
 // adapted from androidx.test.ext.junit.rules.ActivityScenarioRule
-public class NonClosingActivityScenarioRule<A extends Activity> extends ExternalResource {
+class NonClosingActivityScenarioRule<A extends Activity> extends ExternalResource {
 
 	private final Supplier<ActivityScenario<A>> scenarioSupplier;
 
