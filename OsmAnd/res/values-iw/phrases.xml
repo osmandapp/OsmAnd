@@ -41,7 +41,6 @@
     <string name="poi_natural">טבע</string>
     <string name="poi_seamark">נקודת ציון ימית</string>
     <string name="poi_military">צבא</string>
-    <string name="poi_osmwiki">ויקיפדיה</string>
     <string name="poi_user_defined_other">אחר (מוגדר על ידי המשתמש)</string>
     <string name="poi_palaeontological_site">אתר פליאונטולוגי</string>
     <string name="poi_bakery">מאפיה</string>

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -111,7 +110,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		showListContainer = view.findViewById(R.id.show_list_container)
 		frameLayout = view.findViewById(R.id.frame_layout)
 
-		setupShowAll(view)
 		setupRecyclerView(view)
 		buildZoomButtons(view)
 		updatePoints()
@@ -121,7 +119,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		bottomSheetBehavior.peekHeight =
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
 		bottomSheetBehavior.isHideable = true
-		bottomSheetBehavior.isDraggable = true
+		bottomSheetBehavior.isDraggable = AndroidUiHelper.isOrientationPortrait(view.context)
 
 		return view
 	}
@@ -182,16 +180,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		updateMapControls()
 	}
 
-	private fun setupShowAll(view: View) {
-		showOnMapContainer = view.findViewById(R.id.show_on_map_container)
-		AndroidUiHelper.updateVisibility(showOnMapContainer, false)
-		view.findViewById<ImageView>(R.id.location_icon)
-			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
-		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
-			hideList()
-		}
-	}
-
 	fun updateMapControls() {
 		val state = bottomSheetBehavior.state
 		AndroidUiHelper.updateVisibility(
@@ -238,6 +226,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		super.onResume()
 
 		startHandler()
+		mapActivity?.disableDrawer()
 		bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback)
 
 		app.locationProvider.addLocationListener(this)
@@ -250,6 +239,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		super.onPause()
 
 		stopConvertAmenitiesTask()
+		mapActivity?.enableDrawer()
 		bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallback)
 
 		app.locationProvider.removeLocationListener(this)
