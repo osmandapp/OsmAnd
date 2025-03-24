@@ -241,7 +241,7 @@
 	<string name="poi_natural">Natural</string>
 	<string name="poi_seamark">Nautical</string>
 	<string name="poi_military">Military</string>
-	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_osmwiki">Popular places (Wikipedia)</string>
 	<string name="poi_water_filter">Water;Drinking water</string>
 	<string name="poi_user_defined_other">User defined</string>
 
@@ -5561,5 +5561,27 @@
 	<string name="poi_network_ncn">National cycling routes (NCN)</string>
 	<string name="poi_network_rcn">Regional cycling routes (RCN)</string>
 	<string name="poi_network_lcn">Local cycling routes (LCN)</string>
+
+	<string name="poi_mosque">Mosque</string>
+	<string name="poi_buddhist_temple">Buddhist temple</string>
+	<string name="poi_hindu_temple">Hindu temple</string>
+	<string name="poi_shinto_shrine">Shinto shrine</string>
+	<string name="poi_synagogue">Synagogue</string>
+	<string name="poi_jehovahs_witness_kingdom_hall">Jehovahs Witness Kingdom Hall</string>
+	<string name="poi_catholic_church">Catholic church</string>
+	<string name="poi_roman_catholic_church">Roman catholic church</string>
+	<string name="poi_baptist_church">Baptist church</string>
+	<string name="poi_lutheran_church">Lutheran church</string>
+	<string name="poi_orthodox_church">Orthodox church</string>
+	<string name="poi_protestant_church">Protestant church</string>
+	<string name="poi_anglican_church">Anglican church</string>
+	<string name="poi_methodist_church">Methodist church</string>
+	<string name="poi_greek_orthodox_church">Greek orthodox church</string>
+	<string name="poi_russian_orthodox_church">Russian orthodox church</string>
+	<string name="poi_pentecostal_church">Pentecostal church</string>
+	<string name="poi_evangelical_church">Evangelical church</string>
+	<string name="poi_presbyterian_church">Presbyterian church</string>
+	<string name="poi_access_main_tag">Access</string>
+
 
 </resources>

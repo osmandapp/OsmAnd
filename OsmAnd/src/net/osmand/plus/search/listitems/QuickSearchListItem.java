@@ -1,5 +1,7 @@
 package net.osmand.plus.search.listitems;
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
@@ -12,24 +14,16 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
-import net.osmand.data.Amenity;
-import net.osmand.data.City;
+import net.osmand.data.*;
 import net.osmand.data.City.CityType;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.Street;
-import net.osmand.data.WptLocationPoint;
-import net.osmand.plus.helpers.AmenityExtensionsHelper;
-import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.poi.PoiFilterUtils;
@@ -40,6 +34,8 @@ import net.osmand.plus.views.PointImageUtils;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -122,7 +118,8 @@ public class QuickSearchListItem {
 		return getExtendedTypeName(app, searchResult);
 	}
 
-	public static String getExtendedTypeName(OsmandApplication app, SearchResult searchResult) {
+	public static String getExtendedTypeName(@NonNull OsmandApplication app,
+			@NonNull SearchResult searchResult) {
 		String typeName = getTypeName(app, searchResult);
 		String alternateName = searchResult.alternateName;
 		if (searchResult.object instanceof Amenity amenity) {
@@ -138,6 +135,9 @@ public class QuickSearchListItem {
 					}
 				}
 			}
+		}
+		if (searchResult.object instanceof PoiUIFilter filter && filter.isTopWikiFilter()) {
+			return app.getString(R.string.shared_string_wikipedia);
 		}
 		if (alternateName == null) {
 			return typeName;
@@ -338,14 +338,12 @@ public class QuickSearchListItem {
 					if (!Algorithms.isEmpty(iconName)) {
 						iconId = RenderingIcons.getBigIconResourceId(iconName);
 					}
-				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
-					CustomSearchPoiFilter searchPoiFilter = (CustomSearchPoiFilter) searchResult.object;
+				} else if (searchResult.object instanceof CustomSearchPoiFilter searchPoiFilter) {
 					PoiUIFilter filter = app.getPoiFilters().getFilterById(searchPoiFilter.getFilterId());
 					if (filter != null) {
 						iconId = getCustomFilterIconRes(filter);
 					}
-				} else if (searchResult.object instanceof SearchPoiAdditionalFilter) {
-					SearchPoiAdditionalFilter filter = (SearchPoiAdditionalFilter) searchResult.object;
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter filter) {
 					iconId = RenderingIcons.getBigIconResourceId(filter.getIconResource());
 				}
 				if (iconId > 0) {
@@ -415,7 +413,8 @@ public class QuickSearchListItem {
 		return null;
 	}
 
-	public static int getHistoryIconId(@NonNull OsmandApplication app, @NonNull HistoryEntry entry) {
+	public static int getHistoryIconId(@NonNull OsmandApplication app,
+			@NonNull HistoryEntry entry) {
 		int iconId = -1;
 		PointDescription name = entry.getName();
 		if (name != null && !Algorithms.isEmpty(name.getIconName())) {
@@ -433,7 +432,8 @@ public class QuickSearchListItem {
 	}
 
 	@NonNull
-	public static Pair<PointDescription, Object> getPointDescriptionObject(@NonNull OsmandApplication app, @NonNull SearchResult searchResult) {
+	public static Pair<PointDescription, Object> getPointDescriptionObject(
+			@NonNull OsmandApplication app, @NonNull SearchResult searchResult) {
 		SearchSettings settings = searchResult.requiredSearchPhrase.getSettings();
 		String lang;
 		boolean transliterate;
@@ -542,7 +542,7 @@ public class QuickSearchListItem {
 		return new Pair<>(pointDescription, object);
 	}
 
-	private static Drawable getIcon(OsmandApplication app, int iconId) {
+	private static Drawable getIcon(@NonNull OsmandApplication app, @DrawableRes int iconId) {
 		return app.getUIUtilities().getIcon(iconId,
 				app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 	}
@@ -551,8 +551,13 @@ public class QuickSearchListItem {
 	public static int getCustomFilterIconRes(@Nullable PoiUIFilter filter) {
 		int iconId = 0;
 		String iconName = PoiFilterUtils.getCustomFilterIconName(filter);
-		if (iconName != null && RenderingIcons.containsBigIcon(iconName)) {
-			iconId = RenderingIcons.getBigIconResourceId(iconName);
+
+		if (iconName != null) {
+			if (OSM_WIKI_CATEGORY.equals(iconName)) {
+				iconId = R.drawable.ic_action_popular_places;
+			} else if (RenderingIcons.containsBigIcon(iconName)) {
+				iconId = RenderingIcons.getBigIconResourceId(iconName);
+			}
 		}
 		return iconId > 0 ? iconId : R.drawable.mx_special_custom_category;
 	}

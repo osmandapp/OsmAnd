@@ -2135,16 +2135,34 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		PluginsHelper.onNewDownloadIndexes(this);
 		updateContent(heading);
+		List<Fragment> childFragment = getChildFragmentManager().getFragments();
+		for(Fragment fragment : childFragment) {
+			if(fragment instanceof DownloadEvents downloadEventsFragment) {
+				downloadEventsFragment.onUpdatedIndexesList();
+			}
+		}
 	}
 
 	@Override
 	public void downloadInProgress() {
 		updateContent(heading);
+		List<Fragment> childFragment = getChildFragmentManager().getFragments();
+		for(Fragment fragment : childFragment) {
+			if(fragment instanceof DownloadEvents downloadEventsFragment) {
+				downloadEventsFragment.downloadInProgress();
+			}
+		}
 	}
 
 	@Override
 	public void downloadHasFinished() {
 		updateContent(heading);
+		List<Fragment> childFragment = getChildFragmentManager().getFragments();
+		for(Fragment fragment : childFragment) {
+			if(fragment instanceof DownloadEvents downloadEventsFragment) {
+				downloadEventsFragment.downloadHasFinished();
+			}
+		}
 	}
 
 	public void reloadIndexFiles() {

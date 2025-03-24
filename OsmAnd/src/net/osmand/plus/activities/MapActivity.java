@@ -5,6 +5,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 import android.Manifest;
@@ -515,7 +516,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
 		if (explorePlacesFragment != null) {
-			explorePlacesFragment.closeFragment();
+			fragmentsHelper.closeExplore();
+			fragmentsHelper.showQuickSearch(CURRENT, false);
 			return;
 		}
 		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
