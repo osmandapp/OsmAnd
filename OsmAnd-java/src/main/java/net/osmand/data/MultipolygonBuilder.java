@@ -175,6 +175,12 @@ public class MultipolygonBuilder {
 			}
 		}
 	}
+	
+	
+	public static boolean isClimbingMultipolygon(Entity relation) {
+		return "area".equals(relation.getTag(OSMSettings.OSMTagKey.CLIMBING.getValue()))
+				|| "crag".equals(relation.getTag(OSMSettings.OSMTagKey.CLIMBING.getValue()));
+	}
 
 	public void createClimbingOuterWay(Entity e, List<Node> nodes) throws SQLException {
 		nodes = JarvisAlgorithm.createConvexPolygon(nodes);
