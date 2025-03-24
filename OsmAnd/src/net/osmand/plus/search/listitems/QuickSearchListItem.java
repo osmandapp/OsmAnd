@@ -465,8 +465,9 @@ public class QuickSearchListItem {
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
 				pointDescription = entry.getName();
-				if (pointDescription.isPoi()) {
-					Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang, transliterate);
+				if (pointDescription.isPoi() || pointDescription.isAddressTypeCity()) {
+					Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(),
+							entry.getLat(), entry.getLon(), lang, transliterate);
 					if (amenity != null) {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,

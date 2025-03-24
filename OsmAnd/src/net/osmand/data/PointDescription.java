@@ -271,6 +271,11 @@ public class PointDescription {
 		return POINT_TYPE_ADDRESS.equals(type);
 	}
 
+	public boolean isAddressTypeCity() {
+		return POINT_TYPE_ADDRESS.equals(type) &&
+				("City".equals(typeName) || "Town".equals(typeName) || "Village".equals(typeName));
+	}
+
 	public boolean isWpt() {
 		return POINT_TYPE_WPT.equals(type);
 	}
