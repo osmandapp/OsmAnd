@@ -452,6 +452,15 @@ public class QuickSearchListItem {
 				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 				pointDescription.setIconName(getAmenityIconName(app, a));
+
+				if ("basemap".equals(a.getRegionName())) {
+					Amenity freshAmenity = app.getSearchUICore().findAmenity(a.getName(lang),
+							a.getLocation().getLatitude(), a.getLocation().getLongitude(), lang, transliterate);
+					if (freshAmenity != null) {
+						object = freshAmenity;
+					}
+				}
+
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
