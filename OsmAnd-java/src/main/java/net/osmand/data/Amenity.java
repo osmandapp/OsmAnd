@@ -73,6 +73,7 @@ public class Amenity extends MapObject {
 	public static final String SEPARATOR = ";";
 	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
+	public static final String ROUTE_MEMBERS_IDS = "route_members_ids";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
 	public static final int DEFAULT_ELO = 900;
 
