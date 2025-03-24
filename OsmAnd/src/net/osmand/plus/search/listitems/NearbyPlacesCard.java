@@ -19,24 +19,32 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.NearbyPlacesAdapter;
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class NearbyPlacesCard extends FrameLayout {
+public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapter.OnItemClickListener {
 
 	private static final int DISPLAY_ITEMS = 25;
 	private static final int SEARCH_POI_RADIUS = 15000;
@@ -58,26 +66,43 @@ public class NearbyPlacesCard extends FrameLayout {
 	private NearbyPlacesAdapter.NearbyItemClickListener clickListener;
 	private View noInternetCard;
 	private View emptyView;
+	private View noCardsFound;
 	private View cardContent;
 	private boolean isLoadingItems;
 
+	private RecyclerView downloadRecyclerView;
+	private View downloadMapsCard;
+	private DownloadItemsAdapter downloadItemsAdapter;
+	private List<Object> items = new ArrayList<>();
+	private DownloadIndexesThread downloadThread;
+	private boolean nightMode;
+
 	public NearbyPlacesCard(@NonNull MapActivity activity,
-			@NonNull NearbyItemClickListener listener) {
+			@NonNull NearbyItemClickListener listener, boolean nightMode) {
 		super(activity);
 		app = (OsmandApplication) activity.getApplicationContext();
 		this.clickListener = listener;
+		this.nightMode = nightMode;
 		init();
 	}
 
 	private void init() {
-		LayoutInflater.from(getContext()).inflate(R.layout.nearby_places_card, this, true);
+		downloadThread = app.getDownloadThread();
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
+		inflater.inflate(R.layout.nearby_places_card, this, true);
 		progressBar = findViewById(R.id.progress_bar);
 		nearByList = findViewById(R.id.nearByList);
 		explicitIndicator = findViewById(R.id.explicit_indicator);
 		titleContainer = findViewById(R.id.nearby_title_container);
 		noInternetCard = findViewById(R.id.no_internet);
 		emptyView = findViewById(R.id.empty_nearby_places);
+		noCardsFound = findViewById(R.id.no_cards_found);
 		cardContent = findViewById(R.id.card_content);
+		downloadMapsCard = findViewById(R.id.download_maps_card);
+		downloadRecyclerView = emptyView.findViewById(R.id.download_recycler_view);
+		downloadRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		downloadItemsAdapter = new DownloadItemsAdapter(app, this, nightMode); // Pass 'this' as the listener
+		downloadRecyclerView.setAdapter(downloadItemsAdapter);
 		noInternetCard.findViewById(R.id.try_again_button).setOnClickListener((v) -> {
 			if (app.getSettings().isInternetConnectionAvailable(true)) {
 				startLoadingNearbyPlaces();
@@ -128,6 +153,9 @@ public class NearbyPlacesCard extends FrameLayout {
 		AndroidUiHelper.updateVisibility(cardContent, !collapsed && nearbyPointFound && internetAvailable);
 		AndroidUiHelper.updateVisibility(noInternetCard, !collapsed && !internetAvailable);
 		AndroidUiHelper.updateVisibility(emptyView, !collapsed && internetAvailable && !nearbyPointFound && !isLoadingItems);
+		if (!collapsed && !nearbyPointFound && !isLoadingItems) {
+			populateDownloadItems();
+		}
 	}
 
 	private NearbyPlacesAdapter getNearbyAdapter() {
@@ -189,6 +217,57 @@ public class NearbyPlacesCard extends FrameLayout {
 			onNearbyPlacesCollapseChanged();
 		});
 		onNearbyPlacesCollapseChanged();
+	}
+
+	private void populateDownloadItems() {
+		boolean haveWikiMapsToDownload = false;
+		items.clear();
+		if (downloadThread.shouldDownloadIndexes()) {
+			items.add(DownloadItemsAdapter.DOWNLOADING_WIKI_MAPS_TYPE);
+			downloadThread.runReloadIndexFiles();
+			downloadItemsAdapter.setItems(items);
+		} else {
+			try {
+				items.addAll(DownloadResources.findIndexItemsAt(
+						app, getMapActivity().getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
+						false, -1, true));
+				haveWikiMapsToDownload = !items.isEmpty();
+				if (haveWikiMapsToDownload) {
+					downloadItemsAdapter.setItems(items);
+				} else {
+					downloadItemsAdapter.setItems(Collections.emptyList());
+				}
+			} catch (IOException e) {
+				log.error(e);
+				downloadItemsAdapter.setItems(Collections.emptyList());
+			}
+		}
+		AndroidUiHelper.updateVisibility(downloadMapsCard, downloadThread.shouldDownloadIndexes() || haveWikiMapsToDownload);
+		AndroidUiHelper.updateVisibility(noCardsFound, !downloadThread.shouldDownloadIndexes() && !haveWikiMapsToDownload);
+	}
+
+	@Override
+	public void onItemClick(IndexItem item) {
+		if (downloadThread.isDownloading(item)) {
+			downloadThread.cancelDownload(item);
+		} else {
+			new DownloadValidationManager(app).startDownload(getMapActivity(), item);
+		}
+		populateDownloadItems();
+	}
+
+	public void onUpdatedIndexesList() {
+		populateDownloadItems();
+		downloadItemsAdapter.notifyDataSetChanged();
+	}
+
+	public void downloadInProgress() {
+		downloadItemsAdapter.notifyDataSetChanged();
+	}
+
+	public void downloadHasFinished() {
+		onNearbyPlacesCollapseChanged();
+		downloadItemsAdapter.notifyDataSetChanged();
 	}
 
 	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
