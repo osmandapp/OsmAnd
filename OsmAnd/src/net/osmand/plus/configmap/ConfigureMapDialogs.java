@@ -421,12 +421,13 @@ public class ConfigureMapDialogs {
 		}
 	}
 
-	protected static void showPreferencesDialog(
-			@NonNull OnDataChangeUiAdapter uiAdapter, @NonNull ContextMenuItem item,
-			@NonNull MapActivity activity, @NonNull String category,
-			@NonNull List<RenderingRuleProperty> properties,
-			@NonNull List<CommonPreference<Boolean>> prefs, boolean nightMode
-	) {
+	protected static void showPreferencesDialog(final @NonNull OnDataChangeUiAdapter uiAdapter,
+												final @NonNull ContextMenuItem item,
+												final @NonNull MapActivity activity,
+												final @NonNull String category,
+												final @NonNull List<RenderingRuleProperty> properties,
+												final @NonNull List<CommonPreference<Boolean>> prefs,
+												final boolean nightMode) {
 		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
 			return;
 		}
@@ -468,9 +469,14 @@ public class ConfigureMapDialogs {
 					activity.getMapLayers().updateLayers(activity);
 				});
 
-		CustomAlert.showMultiSelection(dialogData, propertyNames, checkedItems, v -> {
-			int which = (int) v.getTag();
-			checkedItems[which] = !checkedItems[which];
-		});
+		CustomAlert.showMultiSelection(
+				dialogData,
+				propertyNames,
+				checkedItems,
+				v -> {
+					final int which = (int) v.getTag();
+					checkedItems[which] = !checkedItems[which];
+				},
+				activity.getSupportFragmentManager());
 	}
 }

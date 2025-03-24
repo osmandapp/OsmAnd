@@ -36,6 +36,8 @@ import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import org.threeten.bp.Duration;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
@@ -232,6 +234,123 @@ public class CustomAlert {
 		AlertDialog dialog = builder.show();
 		applyAdditionalParameters(dialog, data);
 		adapter.setDialog(dialog);
+	}
+
+	public static void showMultiSelection(final @NonNull AlertDialogData data,
+										  final @NonNull CharSequence[] items,
+										  final @Nullable boolean[] checkedItems,
+										  final @Nullable View.OnClickListener itemClickListener,
+										  final FragmentManager fragmentManager) {
+		AlertDialog.Builder builder = createAlertDialogBuilder(data);
+		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
+				data.getContext(), items, INVALID_ID, checkedItems,
+				data.getControlsColor(), data.isNightMode(), itemClickListener, true
+		);
+		builder.setAdapter(adapter, null);
+
+		final AlertDialog dialog = builder.create();
+		adapter.setDialog(dialog);
+		final MultiSelectionDialogFragment multiSelectionDialogFragment =
+				new MultiSelectionDialogFragment(
+						dialog,
+						data,
+						Arrays
+								.stream(items)
+								.collect(
+										Collectors.toMap(
+												CharSequence::toString,
+												Function.identity())),
+						adapter);
+		multiSelectionDialogFragment.show(fragmentManager);
+	}
+
+	// FK-TODO: DRY with SingleSelectionDialogFragment
+	public static class MultiSelectionDialogFragment extends DialogFragment implements SettingHighlighterProvider {
+
+		private final AlertDialog alertDialog;
+		private final AlertDialogData alertDialogData;
+		private final Map<String, CharSequence> itemByKey;
+		private final SelectionDialogAdapter adapter;
+
+		public MultiSelectionDialogFragment(final AlertDialog alertDialog,
+											final AlertDialogData alertDialogData,
+											final Map<String, CharSequence> itemByKey,
+											final SelectionDialogAdapter adapter) {
+			this.alertDialog = alertDialog;
+			this.alertDialogData = alertDialogData;
+			this.itemByKey = itemByKey;
+			this.adapter = adapter;
+		}
+
+		public void show(final FragmentManager fragmentManager) {
+			show(fragmentManager, null);
+			applyAdditionalParameters(alertDialog, alertDialogData);
+		}
+
+		public void showNow(final FragmentManager fragmentManager) {
+			showNow(fragmentManager, null);
+			applyAdditionalParameters(alertDialog, alertDialogData);
+		}
+
+		public void setSelectedIndex(final int selectedIndex) {
+			adapter.setSelectedIndex(selectedIndex);
+		}
+
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+			return alertDialog;
+		}
+
+		@Override
+		public SettingHighlighter getSettingHighlighter() {
+			return new ViewOfSettingHighlighter(
+					this::getView,
+					Duration.ofSeconds(1));
+		}
+
+		private View getView(final Setting setting) {
+			return getViewByPosition(getListView(), getIndexedOf(setting));
+		}
+
+		public ListView getListView() {
+			return ((AlertDialog) getDialog()).getListView();
+		}
+
+		public int getIndexedOf(final Setting setting) {
+			return getKeys().indexOf(setting.getKey());
+		}
+
+		private List<String> getKeys() {
+			return new ArrayList<>(itemByKey.keySet());
+		}
+
+		public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<MultiSelectionDialogFragment> {
+
+			private MultiSelectionDialogFragment multiSelectionDialogFragment;
+
+			@Override
+			public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final MultiSelectionDialogFragment multiSelectionDialogFragment) {
+				this.multiSelectionDialogFragment = multiSelectionDialogFragment;
+			}
+
+			public MultiSelectionDialogFragment getPrincipal() {
+				return multiSelectionDialogFragment;
+			}
+
+			@Override
+			public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
+				setPreferenceScreen(asPreferenceScreen(asPreferences(multiSelectionDialogFragment.itemByKey)));
+			}
+
+			private Collection<Preference> asPreferences(final Map<String, CharSequence> itemByKey) {
+				return new TitleByKey2PreferencesConverter(getContext()).asPreferences(itemByKey);
+			}
+
+			private PreferenceScreen asPreferenceScreen(final Collection<Preference> preferences) {
+				return new PreferenceScreenFactory(this).asPreferenceScreen(preferences);
+			}
+		}
 	}
 
 	private static AlertDialog.Builder createAlertDialogBuilder(@NonNull AlertDialogData data) {
