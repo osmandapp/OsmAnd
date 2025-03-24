@@ -241,7 +241,7 @@
 	<string name="poi_natural">Natural</string>
 	<string name="poi_seamark">Nautical</string>
 	<string name="poi_military">Military</string>
-	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_osmwiki">Popular places (Wikipedia)</string>
 	<string name="poi_water_filter">Water;Drinking water</string>
 	<string name="poi_user_defined_other">User defined</string>
 
