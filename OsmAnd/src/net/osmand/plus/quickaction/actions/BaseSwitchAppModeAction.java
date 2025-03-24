@@ -53,7 +53,7 @@ public abstract class BaseSwitchAppModeAction extends QuickAction {
 		delayedSwitchProfileToast = Toast.makeText(mapActivity, messageDelayedSwitch, Toast.LENGTH_SHORT);
 		delayedSwitchProfileToast.show();
 
-		mapActivity.getMyApplication().runMessageInUIThreadAndCancelPrevious(UI_HANDLER_MAP_CONTROLS + 1, () -> {
+		mapActivity.getMyApplication().runInUIThreadAndCancelPrevious(UI_HANDLER_MAP_CONTROLS + 1, () -> {
 			if (delayedSwitchProfile != null && appMode != delayedSwitchProfile && settings.setApplicationMode(delayedSwitchProfile)) {
 				cancelDelayedToast();
 				String pattern = mapActivity.getString(R.string.application_profile_changed);

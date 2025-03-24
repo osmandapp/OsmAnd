@@ -283,14 +283,12 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             mapRequestFilter = new BinaryMapIndexReader.SearchFilter() {
                 @Override
                 public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex mapIndex) {
-                    if ("other".equals(routeType)) {
-                        Integer routeSegment = mapIndex.getRule("route", "segment");
-                        if (routeSegment != null && types.contains(routeSegment)) {
-                            return true; // allow filter to read User GPX files
-                        }
+                    Integer osmRouteType = mapIndex.getRule(ROUTE_TYPE, routeType);
+                    if (osmRouteType != null && types.contains(osmRouteType)) {
+                        return true;
                     }
-                    Integer type = mapIndex.getRule("route_type", routeType);
-                    return type != null && types.contains(type);
+                    Integer userGpxType = mapIndex.getRule("route", "segment");
+                    return userGpxType != null && types.contains(userGpxType);
                 }
             };
         }

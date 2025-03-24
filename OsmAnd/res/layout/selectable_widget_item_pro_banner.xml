@@ -2,15 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="@dimen/list_item_height"
-	android:layout_marginBottom="@dimen/content_padding_small"
-	android:background="@drawable/bg_selectable_widget_item">
+	android:layout_height="@dimen/list_item_height">
 
 	<LinearLayout
 		android:id="@+id/container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/ripple_solid_6dp"
+		android:background="?attr/selectableItemBackground"
 		android:minHeight="@dimen/card_row_min_height"
 		android:orientation="horizontal"
 		android:paddingHorizontal="@dimen/content_padding"
@@ -29,7 +27,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
-			android:layout_marginStart="@dimen/title_padding"
+			android:layout_marginStart="@dimen/list_content_padding_large"
 			android:layout_weight="1"
 			android:ellipsize="end"
 			android:maxLines="1"

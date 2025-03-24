@@ -251,6 +251,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float secondTouchLocationHeight;
 	private float scrollDistanceX;
 	private float scrollDistanceY;
+	private boolean touchActive;
 
 	public OsmandMapTileView(@NonNull Context ctx, int width, int height) {
 		this.ctx = ctx;
@@ -771,7 +772,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void showAndHideMapPosition() {
 		setShowMapPosition(true);
-		getApplication().runMessageInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, () -> {
+		getApplication().runInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, () -> {
 			if (isShowMapPosition()) {
 				setShowMapPosition(false);
 				refreshMap();
@@ -860,6 +861,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public float getElevationAngle() {
 		return elevationAngle;
+	}
+
+	public boolean isMapInteractionActive() {
+		return touchActive || animatedDraggingThread.isAnimating();
 	}
 
 	public float getZoomFloatPart() {
@@ -1918,9 +1923,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				mapRenderer.suspendSymbolsUpdate();
 				targetChanged = false;
+				touchActive = true;
 			} else if (event.getAction() == MotionEvent.ACTION_UP
 					|| event.getAction() == MotionEvent.ACTION_CANCEL) {
 				mapRenderer.resumeSymbolsUpdate();
+				touchActive = false;
 				if (targetChanged) {
 					targetChanged = false;
 					// Restore previous target screen position after map gesture

@@ -107,7 +107,7 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	private void refresh() {
-		app.runMessageInUIThreadAndCancelPrevious(REFRESH_UI_ID, this::updateButtons, UI_REFRESH_INTERVAL_MILLIS);
+		app.runInUIThreadAndCancelPrevious(REFRESH_UI_ID, this::updateButtons, UI_REFRESH_INTERVAL_MILLIS);
 	}
 
 	public void addMapButton(@NonNull MapButton button) {

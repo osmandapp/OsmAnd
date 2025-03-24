@@ -5245,7 +5245,7 @@
     <string name="distance_during_navigation_description">Zvolte, jakým způsobem se bude zobrazovat informace o vzdálenosti v navigačních nástrojích (vzdálenost k bodu, příští odbočka, jízdní pruhy).
 \n
 \nVyberte “%1$s” pro přesná čísla nebo “%2$s” pro lepší čitelnost.</string>
-    <string name="shared_string_unchanged">Nezměněné</string>
+    <string name="shared_string_unchanged">Nezměněno</string>
     <string name="map_widget_map_scale">Měřítko mapy</string>
     <string name="precise">Přesná</string>
     <string name="round_up">Zaokrouhlená</string>
@@ -5731,4 +5731,6 @@
     <string name="meridian_180">180. poledník</string>
     <string name="shared_string_offline_only">Pouze offline</string>
     <string name="shared_string_online_only">Pouze online</string>
+    <string name="add_widget">Přidat widget</string>
+    <string name="row_height">Výška řádku</string>
 </resources>

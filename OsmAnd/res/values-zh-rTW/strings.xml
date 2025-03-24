@@ -5718,4 +5718,6 @@
     <string name="equator">赤道</string>
     <string name="shared_string_online_only">僅線上</string>
     <string name="shared_string_offline_only">僅離線</string>
+    <string name="add_widget">新增小工具</string>
+    <string name="row_height">列高</string>
 </resources>

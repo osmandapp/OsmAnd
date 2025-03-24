@@ -3589,7 +3589,7 @@
     <string name="plan_route_add_new_segment">Tilføj et nyt segment</string>
     <string name="start_recording">Start optagelse</string>
     <string name="routing_engine_vehicle_type_wheelchair">Kørestol</string>
-    <string name="routing_engine_vehicle_type_walking">Gå</string>
+    <string name="routing_engine_vehicle_type_walking">Gang</string>
     <string name="routing_engine_vehicle_type_small_truck">Varevogn</string>
     <string name="routing_engine_vehicle_type_hgv">Tung gods transport</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Elektrisk cykling</string>
@@ -5763,4 +5763,6 @@
     <string name="equator">Ækvator</string>
     <string name="shared_string_offline_only">Kun offline</string>
     <string name="shared_string_online_only">Kun online</string>
+    <string name="add_widget">Tilføj modul</string>
+    <string name="row_height">Rækkehøjde</string>
 </resources>

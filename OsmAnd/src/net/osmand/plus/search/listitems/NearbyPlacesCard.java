@@ -1,5 +1,7 @@
 package net.osmand.plus.search.listitems;
 
+import static android.os.AsyncTask.Status.RUNNING;
+
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.NearbyPlacesAdapter;
+import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.MapUtils;
@@ -37,26 +40,32 @@ public class NearbyPlacesCard extends FrameLayout {
 
 	private static final int DISPLAY_ITEMS = 25;
 	private static final int SEARCH_POI_RADIUS = 15000;
+
 	private static final Log log = LogFactory.getLog(NearbyPlacesCard.class);
+
+	private final OsmandApplication app;
+	private final WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
+	private final PoiUIFilter wikiFilter = plugin.getTopWikiPoiFilter();
+
+	private SearchAmenitiesTask searchAmenitiesTask;
+
 	private boolean collapsed;
 	private ImageView explicitIndicator;
 	private View titleContainer;
 	private RecyclerView nearByList;
 	private MaterialProgressBar progressBar;
 	private NearbyPlacesAdapter adapter;
-	private OsmandApplication app;
 	private NearbyPlacesAdapter.NearbyItemClickListener clickListener;
 	private View noInternetCard;
 	private View emptyView;
 	private View cardContent;
 	private boolean isLoadingItems;
-	private SearchAmenitiesTask loadTask;
-	private PoiUIFilter wikiFilter;
 
-	public NearbyPlacesCard(@NonNull MapActivity mapActivity, @NonNull NearbyPlacesAdapter.NearbyItemClickListener clickListener) {
-		super(mapActivity);
-		app = (OsmandApplication) mapActivity.getApplicationContext();
-		this.clickListener = clickListener;
+	public NearbyPlacesCard(@NonNull MapActivity activity,
+			@NonNull NearbyItemClickListener listener) {
+		super(activity);
+		app = (OsmandApplication) activity.getApplicationContext();
+		this.clickListener = listener;
 		init();
 	}
 
@@ -108,7 +117,7 @@ public class NearbyPlacesCard extends FrameLayout {
 	}
 
 	public void update() {
-		app.runInUIThread(this::startLoadingNearbyPlaces);
+		startLoadingNearbyPlaces();
 	}
 
 	private void updateExpandState() {
@@ -129,7 +138,7 @@ public class NearbyPlacesCard extends FrameLayout {
 	}
 
 	public void onLoadingFinished() {
-		loadTask = null;
+		searchAmenitiesTask = null;
 		isLoadingItems = false;
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		updateExpandState();
@@ -148,9 +157,8 @@ public class NearbyPlacesCard extends FrameLayout {
 	}
 
 	public void onPause() {
-		AsyncTask task = loadTask;
-		if (task != null) {
-			task.cancel(false);
+		if (searchAmenitiesTask != null) {
+			searchAmenitiesTask.cancel(false);
 		}
 	}
 
@@ -166,18 +174,10 @@ public class NearbyPlacesCard extends FrameLayout {
 		if (!isLoadingItems) {
 			isLoadingItems = true;
 			LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-			loadTask = new SearchAmenitiesTask(getFilter(), latLon);
-			loadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			searchAmenitiesTask = new SearchAmenitiesTask(wikiFilter, latLon);
+			searchAmenitiesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			AndroidUiHelper.updateVisibility(progressBar, true);
 		}
-	}
-
-	private PoiUIFilter getFilter() {
-		if (wikiFilter == null) {
-			WikipediaPlugin plugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
-			wikiFilter = plugin.getTopWikiPoiFilter();
-		}
-		return wikiFilter;
 	}
 
 	private void setupExpandNearbyPlacesIndicator() {
@@ -215,9 +215,6 @@ public class NearbyPlacesCard extends FrameLayout {
 
 		@Override
 		protected void onPostExecute(List<Amenity> amenities) {
-			if (isCancelled()) {
-				return;
-			}
 			updateItems(amenities);
 			onLoadingFinished();
 		}

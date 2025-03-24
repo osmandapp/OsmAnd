@@ -5230,7 +5230,7 @@
     <string name="apply_only_to_new">Застосовувати лише до нових</string>
     <string name="shared_string_changes">Зміни</string>
     <string name="change_default_tracks_appearance_confirmation">Застосувати зміни до наявних треків у теці чи лише до нових?</string>
-    <string name="unchanged_parameter_summary">Кожен трек збереже свої параметри.</string>
+    <string name="unchanged_parameter_summary">Кожен трек збереже власні параметри.</string>
     <string name="shared_string_unchanged">Без змін</string>
     <string name="map_widget_map_scale">Масштаб карти</string>
     <string name="max_sensor_speed">Швидкість датчика, макс</string>
@@ -5742,4 +5742,6 @@
     <string name="equator">Екватор</string>
     <string name="shared_string_offline_only">Тільки офлайн</string>
     <string name="shared_string_online_only">Тільки онлайн</string>
+    <string name="row_height">Висота рядка</string>
+    <string name="add_widget">Додати віджет</string>
 </resources>

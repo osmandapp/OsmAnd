@@ -116,7 +116,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		return false;
 	}
 
-	@Nullable
+	@NonNull
 	public WidgetType getWidgetType() {
 		return widget.getWidgetType();
 	}

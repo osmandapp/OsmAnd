@@ -2834,7 +2834,7 @@
     <string name="rendering_attr_highway_class_motorway_name">آزادراه</string>
     <string name="rendering_attr_highway_class_street_name">خیابان</string>
     <string name="public_transport_warning_descr_blog">در وبلاگ ما دربارهٔ مسیریابی OsmAnd بیشتر بخوانید.</string>
-    <string name="public_transport_warning_title">ناوبری حمل‌ونقل عمومی هم‌اکنون آزمایش بتا را سپری می‌کند و بعید نیست که خطاها و نقایصی داشته باشد.</string>
+    <string name="public_transport_warning_title">ناوبری حمل‌ونقل عمومی هم‌اکنون آزمایش بتا را سپری می‌کند و شاید خطا یا ایرادهایی داشته باشد.</string>
     <string name="add_intermediate">افزودن نقطهٔ میانی</string>
     <string name="rendering_attr_surface_sand_name">ماسه</string>
     <string name="rendering_attr_surface_ground_name">زمین</string>
@@ -3900,15 +3900,7 @@
     <string name="shared_string_subtype">زیرنوع</string>
     <string name="use_native_pt">پیاده‌سازی Native حمل‌ونقل عمومی</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="release_3_9">• گزینه‌ای برای برون‌برد و درون‌برد همهٔ داده‌ها شامل تنظیمات، منابع و مکان‌های من اضافه شد.
-\n
-\n • طراحی مسیر: برای پاره‌هایی از رد که مسیر دارند نمودار رسم می‌شود. امکان ساخت و ویرایش چندین پارهٔ رد اضافه شد.
-\n
-\n • شیوهٔ احراز هویت OAuth برای OpenStreetMap اضافه شد، رابط کاربری کادرهای OSM بهبود یافت.
-\n
-\n • پشتیبانی از رنگ‌های دلخواه برای علاقه‌مندی‌ها (favorites) و راه‌نشان‌های رد (track waypoints)
-\n
-\n</string>
+    <string name="release_3_9">• گزینه‌ای برای برون‌برد و درون‌برد همهٔ داده‌ها شامل تنظیمات، منابع و مکان‌های من اضافه شد. \n \n • طراحی مسیر: برای پاره‌هایی از رد که مسیر دارند نمودار رسم می‌شود. امکان ساخت و ویرایش چندین پارهٔ رد اضافه شد. \n \n • شیوهٔ احراز هویت OAuth برای OpenStreetMap اضافه شد، رابط کاربری کادرهای OSM بهبود یافت. \n \n • پشتیبانی از رنگ‌های دلخواه برای علاقه‌مندی‌ها (favorites) و راه‌نشان‌های رد (track waypoints)</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="routing_attr_prefer_hiking_routes_description">ترجیح مسیرهای پیاده‌گردی</string>
     <string name="routing_attr_prefer_hiking_routes_name">ترجیح مسیرهای پیاده‌گردی</string>
@@ -4411,4 +4403,12 @@
     <string name="shared_string_automatically">خودکار</string>
     <string name="ask_every_time">همیشه بپرس</string>
     <string name="quick_action_routes_summary">کلیدی برای نمایش یا پنهان‌سازی %1$s روی نقشه.</string>
+    <string name="maps_and_resources">نقشه‌ها و منابع</string>
+    <string name="map_settings_weather_air_pressure">فشار هوا</string>
+    <string name="map_settings_weather_precip">بارش</string>
+    <string name="empty_screen_weather_precipitation_layer">برای نمایش لایه بارش در نقشه روشن کنید.</string>
+    <string name="quick_action_precipitation_layer">یک کلید برای نمایش یا پنهان کردن لایه بارش در نقشه.</string>
+    <string name="precipitation_widget_desc">نمایش بارش کنونی در مرکز نقشه.</string>
+    <string name="send_uuid_preference_desc">از یک UUID تصادفی برای بارگیری نقشه های آفلاین از سرورهای OSMAND برای نظارت بر به‌کارگیری عادلانه منابع سرور ، پیش‌بینی الگوهای ترافیک و تولید گزارش نقشه ماهانه ناشناس استفاده می شود.</string>
+    <string name="precipitation_layer">لایه بارش</string>
 </resources>

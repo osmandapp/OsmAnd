@@ -46,7 +46,7 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	private Integer cachedAngularUnits;
 
 
-	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType,
+	public TextInfoWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
 		container = view.findViewById(R.id.container);
