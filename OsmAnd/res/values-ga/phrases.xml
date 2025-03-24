@@ -3083,7 +3083,7 @@
     <string name="poi_denomination_congregational">Pobal</string>
     <string name="poi_denomination_old_believers">Sean-chreidmhigh</string>
     <string name="poi_denomination_serbian_orthodox">Ceartchreidmheach Seirbis</string>
-    <string name="poi_denomination_spiritist">Spiritist</string>
+    <string name="poi_denomination_spiritist">Spioradóir</string>
     <string name="poi_denomination_armenian_apostolic">Aspalda Airméinis</string>
     <string name="poi_denomination_dutch_reformed">Athchóiriú na hÍsiltíre</string>
     <string name="poi_denomination_reform">Athchóiriú</string>
@@ -4975,4 +4975,15 @@
     <string name="poi_route_activity_type_walking">Bealaí siúil</string>
     <string name="poi_route_activity_type_skiing">Bealaí sciála</string>
     <string name="poi_route_activity_type_hiking">Bealaí fánaíochta</string>
+    <string name="poi_route_activity_type_mountain_biking">Bealaí MTB (rothar sléibhe)</string>
+    <string name="poi_network_icn">Bealaí rothaíochta idirnáisiúnta (ICN)</string>
+    <string name="poi_network_lcn">Bealaí áitiúla rothaíochta (LCN)</string>
+    <string name="poi_network_iwn">Bealaí siúlóide idirnáisiúnta (IWN)</string>
+    <string name="poi_network_foot">Líonra bealaí (siúlóid)</string>
+    <string name="poi_network_cycling">Líonra bealaí (rothaíocht)</string>
+    <string name="poi_network_nwn">Bealaí Náisiúnta Hiking (NWN)</string>
+    <string name="poi_network_rwn">Bealaí fánaíochta réigiúnacha (RWN)</string>
+    <string name="poi_network_lwn">Bealaí fánaíochta áitiúla (LWN)</string>
+    <string name="poi_network_ncn">Bealaí náisiúnta rothaíochta (NCN)</string>
+    <string name="poi_network_rcn">Bealaí réigiúnacha rothaíochta (RCN)</string>
 </resources>

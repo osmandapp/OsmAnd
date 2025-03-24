@@ -122,7 +122,7 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 				updateAdapter(new ArrayList<>(savedList), false);
 			}
 		} else {
-			updateWidgetItems(originalWidgetsData);
+			updateWidgetItems(originalWidgetsData, false);
 		}
 	}
 
@@ -359,12 +359,12 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 		if (adapter != null) {
 			List<List<MapWidgetInfo>> newData = getPagedWidgets();
 			originalWidgetsData = newData;
-			updateWidgetItems(newData);
+			updateWidgetItems(newData, true);
 		}
 	}
 
 	public void resetToOriginal() {
-		updateWidgetItems(originalWidgetsData);
+		updateWidgetItems(originalWidgetsData, true);
 	}
 
 	public void updateEditMode() {
@@ -385,7 +385,7 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
 		WidgetsSettingsHelper helper = new WidgetsSettingsHelper(requireMapActivity(), appMode);
 		List<List<MapWidgetInfo>> widgetsOrder = helper.getWidgetInfoPagedOrder(appMode, selectedAppMode, selectedPanel, filter);
-		updateWidgetItems(widgetsOrder);
+		updateWidgetItems(widgetsOrder, false);
 	}
 
 	@Override
@@ -393,12 +393,12 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 
 	}
 
-	private void updateWidgetItems(@NonNull List<List<MapWidgetInfo>> pagedWidgets) {
+	private void updateWidgetItems(@NonNull List<List<MapWidgetInfo>> pagedWidgets, boolean updatePosition) {
 		List<Object> newItems = getUpdatedItems(pagedWidgets);
-		updateAdapter(newItems, false);
+		updateAdapter(newItems, updatePosition);
 	}
 
-	private List<Object> getUpdatedItems(List<List<MapWidgetInfo>> pagedWidgets) {
+	private List<Object> getUpdatedItems(@NonNull List<List<MapWidgetInfo>> pagedWidgets) {
 		List<Object> items = new ArrayList<>();
 		boolean isEmpty = pagedWidgets.stream().allMatch(List::isEmpty);
 		if (isEmpty) {
@@ -543,7 +543,7 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 		return -1;
 	}
 
-	private void updateAdapter(@NonNull List<Object> items, boolean shouldUpdateAll) {
+	private void updateAdapter(@NonNull List<Object> items, boolean updatePosition) {
 		boolean editMode = isEditMode();
 		List<Object> newItems = updateItemsState(items);
 		WidgetsListDiffCallback diffCallback = new WidgetsListDiffCallback(
@@ -551,7 +551,7 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 				newItems,
 				adapter.isCurrentlyInEditMode(),
 				editMode,
-				shouldUpdateAll);
+				updatePosition);
 		DiffResult diffRes = calculateDiff(diffCallback);
 
 		adapter.setEditMode(editMode);

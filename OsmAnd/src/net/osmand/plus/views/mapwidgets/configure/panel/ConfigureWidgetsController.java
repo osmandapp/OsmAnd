@@ -74,6 +74,7 @@ public class ConfigureWidgetsController implements IDialogController {
 	}
 
 	public void setReorderList(@NonNull List<Object> reorderList) {
+		this.reorderList.clear();
 		this.reorderList.addAll(reorderList);
 	}
 
