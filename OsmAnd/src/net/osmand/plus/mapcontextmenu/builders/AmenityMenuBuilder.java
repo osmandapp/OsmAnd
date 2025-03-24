@@ -57,9 +57,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	protected void buildMainImage(View view) {
-		if (amenity.getWikiPhoto() != null) {
+		if (amenity.getWikiImageStubUrl() != null) {
 			AppCompatImageView imageView = inflateAndGetMainImageView(view);
-			PicassoUtils.setupImageViewByUrl(app, imageView, amenity.getWikiPhoto(), false);
+			PicassoUtils.setupImageViewByUrl(app, imageView, amenity.getWikiImageStubUrl(), false);
 		}
 	}
 

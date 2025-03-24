@@ -7,6 +7,7 @@ import static net.osmand.data.Amenity.COLLAPSABLE_PREFIX;
 import static net.osmand.data.Amenity.OPENING_HOURS;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
+import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
@@ -121,6 +122,9 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
 		Map<String, Object> filteredInfo = additionalInfo.getFilteredLocalizedInfo();
+		if (filteredInfo.containsKey(Amenity.CONTENT) && filteredInfo.containsKey(Amenity.SHORT_DESCRIPTION)) {
+			filteredInfo.remove(Amenity.SHORT_DESCRIPTION);
+		}
 
 		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
 			String key = entry.getKey();
@@ -357,6 +361,10 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 		}
 
+		if(key.equals(WIKIDATA)) {
+			isWikipediaLink = true;
+		}
+
 		if (pType != null && !pType.isText()) {
 			String categoryName = pType.getPoiAdditionalCategory();
 			if (!Algorithms.isEmpty(categoryName)) {
@@ -398,10 +406,9 @@ public class AmenityUIHelper extends MenuBuilder {
 				needLinks = false;
 				hiddenUrl = null;
 				isUrl = false;
-			} else {
-				return null;
 			}
-		} else if (MapObject.isNameLangTag(key)) {
+		}
+		if (MapObject.isNameLangTag(key)) {
 			return null;
 		} else if (Amenity.COLLECTION_TIMES.equals(baseKey) || Amenity.SERVICE_TIMES.equals(baseKey)) {
 			iconId = R.drawable.ic_action_time;
