@@ -421,22 +421,34 @@ public class ConfigureMapDialogs {
 		}
 	}
 
-	protected static void showPreferencesDialog(final @NonNull OnDataChangeUiAdapter uiAdapter,
-												final @NonNull ContextMenuItem item,
-												final @NonNull MapActivity activity,
-												final @NonNull String category,
-												final @NonNull List<RenderingRuleProperty> properties,
-												final @NonNull List<CommonPreference<Boolean>> prefs,
-												final boolean nightMode) {
-		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
-			return;
-		}
-		OsmandApplication app = activity.getMyApplication();
-		boolean[] checkedItems = new boolean[prefs.size()];
+	public static Optional<CustomAlert.MultiSelectionDialogFragment> createPreferencesDialogIfActivityNotDestroyed(
+			final OnDataChangeUiAdapter uiAdapter,
+			final ContextMenuItem item,
+			final MapActivity activity,
+			final String category,
+			final List<RenderingRuleProperty> properties,
+			final List<CommonPreference<Boolean>> prefs,
+			final boolean nightMode) {
+		return AndroidUtils.isActivityNotDestroyed(activity) ?
+				Optional.of(createPreferencesDialog(uiAdapter, item, activity, category, properties, prefs, nightMode)) :
+				Optional.empty();
+	}
+
+	// FK-TODO: refactor
+	private static CustomAlert.MultiSelectionDialogFragment createPreferencesDialog(
+			final OnDataChangeUiAdapter uiAdapter,
+			final ContextMenuItem item,
+			final MapActivity activity,
+			final String category,
+			final List<RenderingRuleProperty> properties,
+			final List<CommonPreference<Boolean>> prefs,
+			final boolean nightMode) {
+		final OsmandApplication app = activity.getMyApplication();
+		final boolean[] checkedItems = new boolean[prefs.size()];
 		for (int i = 0; i < prefs.size(); i++) {
 			checkedItems[i] = prefs.get(i).get();
 		}
-		String[] propertyNames = new String[properties.size()];
+		final String[] propertyNames = new String[properties.size()];
 		for (int i = 0; i < properties.size(); i++) {
 			RenderingRuleProperty p = properties.get(i);
 			String propertyName = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(),
@@ -444,39 +456,43 @@ public class ConfigureMapDialogs {
 			propertyNames[i] = propertyName;
 		}
 
-		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
-				.setTitle(category)
-				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
-				.setNegativeButton(R.string.shared_string_cancel, (dialog, whichButton) -> {
-					boolean selected = false;
-					for (int i = 0; i < prefs.size(); i++) {
-						selected |= prefs.get(i).get();
-					}
-					item.setSelected(selected);
-					item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					uiAdapter.onDataSetInvalidated();
-				})
-				.setPositiveButton(R.string.shared_string_ok, (dialog, whichButton) -> {
-					boolean selected = false;
-					for (int i = 0; i < prefs.size(); i++) {
-						prefs.get(i).set(checkedItems[i]);
-						selected |= checkedItems[i];
-					}
-					item.setSelected(selected);
-					item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					uiAdapter.onDataSetInvalidated();
-					activity.refreshMapComplete();
-					activity.getMapLayers().updateLayers(activity);
-				});
+		final AlertDialogData dialogData =
+				new AlertDialogData(activity, nightMode)
+						.setTitle(category)
+						.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+						.setNegativeButton(
+								R.string.shared_string_cancel,
+								(dialog, whichButton) -> {
+									boolean selected = false;
+									for (int i = 0; i < prefs.size(); i++) {
+										selected |= prefs.get(i).get();
+									}
+									item.setSelected(selected);
+									item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									uiAdapter.onDataSetInvalidated();
+								})
+						.setPositiveButton(
+								R.string.shared_string_ok,
+								(dialog, whichButton) -> {
+									boolean selected = false;
+									for (int i = 0; i < prefs.size(); i++) {
+										prefs.get(i).set(checkedItems[i]);
+										selected |= checkedItems[i];
+									}
+									item.setSelected(selected);
+									item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									uiAdapter.onDataSetInvalidated();
+									activity.refreshMapComplete();
+									activity.getMapLayers().updateLayers(activity);
+								});
 
-		CustomAlert.showMultiSelection(
+		return CustomAlert.createMultiSelectionDialogFragment(
 				dialogData,
 				propertyNames,
 				checkedItems,
 				v -> {
 					final int which = (int) v.getTag();
 					checkedItems[which] = !checkedItems[which];
-				},
-				activity.getSupportFragmentManager());
+				});
 	}
 }

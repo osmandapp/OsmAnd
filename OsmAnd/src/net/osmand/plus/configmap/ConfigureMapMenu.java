@@ -665,8 +665,16 @@ public class ConfigureMapMenu {
 							.createInstance(properties, preferences, uiAdapter, item)
 							.show(activity.getSupportFragmentManager());
 				} else {
-					ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
-							activity.getString(strId), properties, preferences, nightMode);
+					ConfigureMapDialogs
+							.createPreferencesDialogIfActivityNotDestroyed(
+									uiAdapter,
+									item,
+									activity,
+									activity.getString(strId),
+									properties,
+									preferences,
+									nightMode)
+							.ifPresent(preferencesDialog -> preferencesDialog.show(activity.getSupportFragmentManager()));
 				}
 				return false;
 			};

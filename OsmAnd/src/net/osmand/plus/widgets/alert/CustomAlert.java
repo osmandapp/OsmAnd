@@ -236,32 +236,39 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
-	public static void showMultiSelection(final @NonNull AlertDialogData data,
-										  final @NonNull CharSequence[] items,
-										  final @Nullable boolean[] checkedItems,
-										  final @Nullable View.OnClickListener itemClickListener,
-										  final FragmentManager fragmentManager) {
-		AlertDialog.Builder builder = createAlertDialogBuilder(data);
-		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
-				data.getContext(), items, INVALID_ID, checkedItems,
-				data.getControlsColor(), data.isNightMode(), itemClickListener, true
-		);
+	public static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
+			final AlertDialogData data,
+			final CharSequence[] items,
+			final boolean[] checkedItems,
+			final View.OnClickListener itemClickListener) {
+		final Builder builder = createAlertDialogBuilder(data);
+		final SelectionDialogAdapter adapter =
+				new SelectionDialogAdapter(
+						data.getContext(),
+						items,
+						INVALID_ID,
+						checkedItems,
+						data.getControlsColor(),
+						data.isNightMode(),
+						itemClickListener,
+						true);
 		builder.setAdapter(adapter, null);
-
 		final AlertDialog dialog = builder.create();
 		adapter.setDialog(dialog);
-		final MultiSelectionDialogFragment multiSelectionDialogFragment =
-				new MultiSelectionDialogFragment(
-						dialog,
-						data,
-						Arrays
-								.stream(items)
-								.collect(
-										Collectors.toMap(
-												CharSequence::toString,
-												Function.identity())),
-						adapter);
-		multiSelectionDialogFragment.show(fragmentManager);
+		return new MultiSelectionDialogFragment(
+				dialog,
+				data,
+				getItemByKey(items),
+				adapter);
+	}
+
+	private static Map<String, CharSequence> getItemByKey(final CharSequence[] items) {
+		return Arrays
+				.stream(items)
+				.collect(
+						Collectors.toMap(
+								CharSequence::toString,
+								Function.identity()));
 	}
 
 	// FK-TODO: DRY with SingleSelectionDialogFragment
