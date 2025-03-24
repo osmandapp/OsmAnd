@@ -74,6 +74,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowsBuilder.setLatLon(getLatLon());
 		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
 		rowsBuilder.buildInternal(view);
+		rowsBuilder.buildWikiDataRow(view);
 
 		buildNearestRows((ViewGroup) view);
 		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getAltNamesMap(), true);

@@ -123,7 +123,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
 		Map<String, Object> filteredInfo = additionalInfo.getFilteredLocalizedInfo();
 		if (filteredInfo.containsKey(Amenity.CONTENT) && filteredInfo.containsKey(Amenity.SHORT_DESCRIPTION)) {
-			filteredInfo.remove(Amenity.SHORT_DESCRIPTION);
+			filteredInfo.remove(Amenity.CONTENT);
 		}
 
 		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
@@ -221,6 +221,24 @@ public class AmenityUIHelper extends MenuBuilder {
 		sortDescriptionRows(descriptions);
 		for (AmenityInfoRow info : descriptions) {
 			buildAmenityRow(view, info);
+		}
+	}
+
+	public void buildWikiDataRow(@NonNull View view) {
+		String wikidataValue = additionalInfo.get(WIKIDATA);
+		if (wikidataValue != null) {
+			int iconId = R.drawable.ic_plugin_wikipedia;
+			PoiType pType;
+			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(WIKIDATA);
+			if (pt != null) {
+				pType = (PoiType) pt;
+				String textPrefix = pType.getTranslation();
+				String hiddenUrl = getSocialMediaUrl(WIKIDATA, wikidataValue);
+				AmenityInfoRow infoRow = new AmenityInfoRow(WIKIDATA, iconId, textPrefix, wikidataValue, hiddenUrl, false,
+						null, 0, false, true, true, pType.getOrder(),
+						pType.getKeyName(), false, true, matchWidthDivider, 0);
+				buildAmenityRow(view, infoRow);
+			}
 		}
 	}
 
@@ -361,10 +379,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 		}
 
-		if(key.equals(WIKIDATA)) {
-			isWikipediaLink = true;
-		}
-
 		if (pType != null && !pType.isText()) {
 			String categoryName = pType.getPoiAdditionalCategory();
 			if (!Algorithms.isEmpty(categoryName)) {
@@ -406,9 +420,10 @@ public class AmenityUIHelper extends MenuBuilder {
 				needLinks = false;
 				hiddenUrl = null;
 				isUrl = false;
+			} else {
+				return null;
 			}
-		}
-		if (MapObject.isNameLangTag(key)) {
+		} else if (MapObject.isNameLangTag(key)) {
 			return null;
 		} else if (Amenity.COLLECTION_TIMES.equals(baseKey) || Amenity.SERVICE_TIMES.equals(baseKey)) {
 			iconId = R.drawable.ic_action_time;
@@ -457,7 +472,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			vl = sb.toString();
 		} else if (key.contains(Amenity.ROUTE)
 				|| key.equals(Amenity.WIKI_PHOTO)
-//				|| key.equals(Amenity.WIKIDATA)  //todo approve if it is correct
+				|| key.equals(Amenity.WIKIDATA)
 				|| key.equals(Amenity.WIKIMEDIA_COMMONS)) {
 			return null;
 		} else {
