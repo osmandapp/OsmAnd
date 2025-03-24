@@ -5264,7 +5264,7 @@
     <string name="upload_local_versions">Carica le versioni locali</string>
     <string name="round_up">Arrotondato</string>
     <string name="map_widget_map_scale">Scala della mappa</string>
-    <string name="unchanged_parameter_summary">Ogni traccia manterrà i propri parametri.</string>
+    <string name="unchanged_parameter_summary">Oggi traccia manterrà i suoi parametri.</string>
     <string name="shared_string_unchanged">Invariato</string>
     <string name="use_3d_track_visualization">Visualizzazione 3D</string>
     <string name="fix_north_up">Abilita il Nord fisso in alto</string>
