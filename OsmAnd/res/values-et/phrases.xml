@@ -5003,4 +5003,25 @@
     <string name="poi_network_lwn">Kohalik matkatee (LWN)</string>
     <string name="poi_network_foot">Matkateede võrgustik</string>
     <string name="poi_network_rwn">Piirkondlik matkatee (RWN)</string>
+    <string name="poi_methodist_church">Metodisti kirik</string>
+    <string name="poi_jehovahs_witness_kingdom_hall">Jehoova tunnistajate kuningriigisaal</string>
+    <string name="poi_catholic_church">Katoliiklik kirik</string>
+    <string name="poi_roman_catholic_church">Roomakatoliiklik kirik</string>
+    <string name="poi_baptist_church">Baptistlik kirik</string>
+    <string name="poi_lutheran_church">Luterlik kirik</string>
+    <string name="poi_orthodox_church">Õigeusu kirik</string>
+    <string name="poi_protestant_church">Protestantlik kirik</string>
+    <string name="poi_anglican_church">Anglikaani kirik</string>
+    <string name="poi_greek_orthodox_church">Kreeka õigeusu kirik</string>
+    <string name="poi_pentecostal_church">Nelipühilaste kirik</string>
+    <string name="poi_evangelical_church">Evangeelne kirik</string>
+    <string name="poi_presbyterian_church">Presbüterlik kirik</string>
+    <string name="poi_hindu_temple">Hindu tempel</string>
+    <string name="poi_mosque">Mošee</string>
+    <string name="poi_russian_orthodox_church">Vene õigeusu kirik</string>
+    <string name="poi_synagogue">Sünagoog</string>
+    <string name="poi_buddhist_temple">Budistlik tempel</string>
+    <string name="poi_shinto_shrine">Šinto tempel</string>
+    <string name="poi_access_main_tag">Ligipääs</string>
+    <string name="poi_osmwiki">Populaarsed paigad (Vikipeedia)</string>
 </resources>
