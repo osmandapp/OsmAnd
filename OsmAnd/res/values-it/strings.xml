@@ -5749,4 +5749,8 @@
     <string name="equator">Equatore</string>
     <string name="prime_meridian">Meridiano fondamentale</string>
     <string name="meridian_180">180° meridiano</string>
+    <string name="shared_string_online_only">Solo online</string>
+    <string name="shared_string_offline_only">Solo offline</string>
+    <string name="add_widget">Aggiungi widget</string>
+    <string name="row_height">Altezza riga</string>
 </resources>

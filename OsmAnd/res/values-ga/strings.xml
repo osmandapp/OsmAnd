@@ -5533,4 +5533,8 @@
     <string name="equator">Meánchiorcal</string>
     <string name="release_5_0">• Faigh amach POIs barr-rangaithe leis an modh nua Explore\n\n • Gach bealach OSM, inchuardaithe anois! Hiking, rothaíocht, MTB, agus go leor eile\n\n • Nascann giuirléid nascleanúna nua saighead cas agus treoracha nascleanúna\n\n • Giuirléid faisnéise bealaigh reatha: taispeánann sé MTE, am teachta, agus fad\n\n • Roghnaigh fánaí sciála agus cosáin MTB ar an léarscáil le haghaidh mioneolas\n\n • Cumas a roghnú méid ghiuirléid do phainéil chlé agus ar dheis\n\n • Greille Comhordanáidí Cuireadh leis le comhordanáidí geografacha\n\n • Cumas breise chun cuma réamhshocraithe na ngrúpaí is fearr leat a shaincheapadh\n\n • Android Auto: féach ar ETA agus fad go dtí an chéad pointe bealaigh eile; Tá ainmneacha cathracha le feiceáil anois sna torthaí cuardaigh\n\n • Is féidir beanna suntasacha a aimsiú anois trí léarscáileanna agus cuardach\n\n • Airde buaic sléibhe ina gcosa\n\n • Curtha leis: Claiseanna agus limistéir dreapadóireachta ar an léarscáil\n\n • Feabhsaíodh cuardach seoltaí i SAM\n\n • Cuireadh TTS Eabhrais leis le haghaidh loingseoireachta</string>
     <string name="meridian_180">180ú fhadlíne</string>
+    <string name="shared_string_online_only">Ar Líne Amháin</string>
+    <string name="add_widget">Cuir giuirléid leis</string>
+    <string name="shared_string_offline_only">As Líne amháin</string>
+    <string name="row_height">Airde na sraithe</string>
 </resources>

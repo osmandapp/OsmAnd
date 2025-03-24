@@ -5,6 +5,7 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.util.Pair;
 import android.util.Xml;
 import android.view.View;
 import android.widget.EditText;
@@ -100,8 +101,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			}
 
 			@Override
-			protected List<OpenStreetNote> calculateResult(@NonNull QuadRect bounds, int zoom) {
-				return loadingBugs(bounds.top, bounds.left, bounds.bottom, bounds.right);
+			protected Pair<List<OpenStreetNote>, List<OpenStreetNote>> calculateResult(@NonNull QuadRect bounds, int zoom) {
+				List<OpenStreetNote> notes = loadingBugs(bounds.top, bounds.left, bounds.bottom, bounds.right);
+				return new Pair<>(notes, notes);
 			}
 		};
 	}

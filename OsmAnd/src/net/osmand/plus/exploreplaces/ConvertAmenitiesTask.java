@@ -19,6 +19,7 @@ import net.osmand.search.core.SearchResult;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ConvertAmenitiesTask extends AsyncTask<Void, Void, List<QuickSearchListItem>> {
@@ -34,7 +35,7 @@ public class ConvertAmenitiesTask extends AsyncTask<Void, Void, List<QuickSearch
 			boolean topImagesFilter,
 			@Nullable CallbackWithObject<List<QuickSearchListItem>> callback) {
 		this.app = app;
-		this.amenities = amenities;
+		this.amenities = new ArrayList<>(amenities);
 		this.topImagesFilter = topImagesFilter;
 		this.callback = callback;
 	}
@@ -43,6 +44,11 @@ public class ConvertAmenitiesTask extends AsyncTask<Void, Void, List<QuickSearch
 	protected List<QuickSearchListItem> doInBackground(Void... params) {
 		SearchUICore core = app.getSearchUICore().getCore();
 		SearchPhrase phrase = SearchPhrase.emptyPhrase(core.getSearchSettings());
+
+		if (topImagesFilter) {
+			amenities.sort((o1, o2) ->
+					Integer.compare(o2.getTravelEloNumber(), o1.getTravelEloNumber()));
+		}
 
 		List<QuickSearchListItem> items = new ArrayList<>();
 		for (Amenity amenity : amenities) {

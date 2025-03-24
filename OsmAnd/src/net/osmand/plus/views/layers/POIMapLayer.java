@@ -5,6 +5,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.plus.poi.PoiUIFilter.TOP_PLACES_LIMIT;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+import static net.osmand.plus.views.layers.core.POITileProvider.TILE_POINTS_LIMIT;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.text.util.Linkify;
 import android.util.Base64;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,6 +143,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private Map<String, LoadingImage> loadingImages;
 	private Map<Long, Amenity> topPlaces;
 	private Map<Long, Bitmap> topPlacesBitmaps;
+	private List<Amenity> visiblePlaces;
 	private DataSourceType wikiDataSource;
 	private boolean showTopPlacesPreviews;
 	private PoiUIFilter topPlacesFilter;
@@ -205,13 +208,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
             }
 
             @Override
-            protected List<Amenity> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+            protected Pair<List<Amenity>, List<Amenity>> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
                 if (customObjectsDelegate != null) {
-                    return customObjectsDelegate.getMapObjects();
+					List<Amenity> mapObjects = customObjectsDelegate.getMapObjects();
+					return new Pair<>(mapObjects, mapObjects);
                 }
                 if (calculatedFilters.isEmpty()) {
 					topPlacesFilter = null;
-                    return new ArrayList<>();
+                    return new Pair<>(Collections.emptyList(), Collections.emptyList());
                 }
                 int z = (int) Math.floor(zoom + Math.log(getMapDensity()) / Math.log(2));
 
@@ -260,16 +264,58 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
                     return a1.getId() < a2.getId() ? -1 : (a1.getId().longValue() == a2.getId().longValue() ? 0 : 1);
                 });
 
-				return res;
+				Set<Amenity> displayedPoints = new HashSet<>();
+				int i = 0;
+				for (Amenity amenity : res) {
+					displayedPoints.add(amenity);
+					if (i++ > TOP_PLACES_LIMIT) {
+						break;
+					}
+				}
+				float minTileX = (float) MapUtils.getTileNumberX(zoom, latLonBounds.left);
+				float maxTileX = (float) MapUtils.getTileNumberX(zoom, latLonBounds.right);
+				float minTileY = (float) MapUtils.getTileNumberY(zoom, latLonBounds.top);
+				float maxTileY = (float) MapUtils.getTileNumberY(zoom, latLonBounds.bottom);
+				for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
+					for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
+						QuadRect tileLatLonBounds = new QuadRect(
+								MapUtils.getLongitudeFromTile(zoom, alignTile(zoom, tileX)),
+								MapUtils.getLatitudeFromTile(zoom, alignTile(zoom, tileY)),
+								MapUtils.getLongitudeFromTile(zoom, alignTile(zoom, tileX + 1.0)),
+								MapUtils.getLatitudeFromTile(zoom, alignTile(zoom, tileY + 1.0)));
+						QuadRect extTileLatLonBounds = new QuadRect(
+								MapUtils.getLongitudeFromTile(zoom, alignTile(zoom, tileX - 0.5)),
+								MapUtils.getLatitudeFromTile(zoom, alignTile(zoom, tileY - 0.5)),
+								MapUtils.getLongitudeFromTile(zoom, alignTile(zoom, tileX + 1.5)),
+								MapUtils.getLatitudeFromTile(zoom, alignTile(zoom, tileY + 1.5)));
+
+						i = 0;
+						for (Amenity amenity : res) {
+							LatLon latLon = amenity.getLocation();
+							if (extTileLatLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
+									latLon.getLongitude(), latLon.getLatitude())) {
+								if (tileLatLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
+										latLon.getLongitude(), latLon.getLatitude())) {
+									displayedPoints.add(amenity);
+								}
+								if (i++ > TILE_POINTS_LIMIT) {
+									break;
+								}
+							}
+						}
+					}
+				}
+				return new Pair<>(res, new ArrayList<>(displayedPoints));
             }
 
-			@Override
-			protected List<Amenity> concatenateResults(@NonNull Collection<List<Amenity>> results) {
-				List<Amenity> res = new ArrayList<>();
-				for (List<Amenity> list : results) {
-					res.addAll(list);
+			private double alignTile(double zoom, double tile) {
+				if (tile < 0) {
+					return 0;
 				}
-				return res;
+				if (tile >= MapUtils.getPowZoom(zoom)) {
+					return MapUtils.getPowZoom(zoom) - .000001;
+				}
+				return tile;
 			}
 		};
 	}
@@ -279,13 +325,38 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return data.getResults();
 	}
 
+	@Nullable
 	public List<Amenity> getCurrentDisplayedResults() {
 		return data.getDisplayedResults();
 	}
 
 	@Nullable
+	public Map<Long, Amenity> getTopPlaces() {
+		return topPlaces;
+	}
+
+	public List<Amenity> getVisiblePlaces() {
+		return visiblePlaces;
+	}
+
+	@Nullable
 	private Bitmap getTopPlaceBitmap(@NonNull Amenity place) {
 		return topPlacesBitmaps != null ? topPlacesBitmaps.get(place.getId()) : null;
+	}
+
+	private void updateVisiblePlaces(@Nullable List<Amenity> places, @NonNull QuadRect latLonBounds) {
+		if (places == null) {
+			visiblePlaces = null;
+			return;
+		}
+		List<Amenity> res = new ArrayList<>();
+		for (Amenity place : places) {
+			LatLon location = place.getLocation();
+			if (latLonBounds.contains(location.getLongitude(), location.getLatitude(), location.getLongitude(), location.getLatitude())) {
+				res.add(place);
+			}
+		}
+		visiblePlaces = res;
 	}
 
 	private void updateTopPlaces(@NonNull List<Amenity> places, @NonNull QuadRect latLonBounds, int zoom) {
@@ -367,6 +438,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			loadingImages = null;
 			topPlaces = null;
 			topPlacesBitmaps = null;
+			visiblePlaces = null;
 		}
 	}
 
@@ -690,6 +762,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
                         topPlacesBox = extendedBox;
 						updateTopPlaces(places, tileBox.getLatLonBounds(), zoom);
 						updateTopPlacesCollection();
+						updateVisiblePlaces(data.getDisplayedResults(), tileBox.getLatLonBounds());
                     } else {
                         clearMapMarkersCollections();
 						cancelLoadingImages();

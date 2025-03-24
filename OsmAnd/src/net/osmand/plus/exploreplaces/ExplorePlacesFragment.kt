@@ -59,7 +59,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private lateinit var poiUIFilter: PoiUIFilter
 	private lateinit var adapter: ExplorePlacesAdapter
 
-	private var amenities: List<Amenity>? = null
+	private var visiblePlaces: List<Amenity>? = null
 	private var location: Location? = null
 	private var mainContent: LinearLayout? = null
 	private var recyclerView: RecyclerView? = null
@@ -205,9 +205,12 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun updatePoints() {
-		val results = app.osmandMap.mapLayers.poiMapLayer.currentDisplayedResults
-		if (results != null && results != amenities) {
-			amenities = results
+		if (app.osmandMap.mapView.isMapInteractionActive) {
+			return;
+		}
+		val visiblePlaces = app.osmandMap.mapLayers.poiMapLayer.visiblePlaces
+		if (visiblePlaces != null && visiblePlaces != this.visiblePlaces) {
+			this.visiblePlaces = visiblePlaces
 
 			val callback = object : CallbackWithObject<List<QuickSearchListItem>> {
 				override fun processResult(result: List<QuickSearchListItem>): Boolean {
@@ -220,7 +223,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			}
 			stopConvertAmenitiesTask()
 			convertAmenitiesTask =
-				ConvertAmenitiesTask(app, results, poiUIFilter.isTopImagesFilter, callback)
+				ConvertAmenitiesTask(app, visiblePlaces, poiUIFilter.isTopImagesFilter, callback)
 			convertAmenitiesTask?.executeOnExecutor(singleThreadExecutor)
 		}
 	}

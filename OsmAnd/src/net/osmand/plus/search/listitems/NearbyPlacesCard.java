@@ -185,7 +185,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	}
 
 	public void onPause() {
-		if (searchAmenitiesTask != null && searchAmenitiesTask.getStatus() == RUNNING) {
+		if (searchAmenitiesTask != null) {
 			searchAmenitiesTask.cancel(false);
 		}
 	}

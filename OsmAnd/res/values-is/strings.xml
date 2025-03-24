@@ -5713,4 +5713,9 @@
     <string name="prime_meridian">Núllbaugur</string>
     <string name="equator">Miðbaugur</string>
     <string name="meridian_180">180. lengdarbaugur</string>
+    <string name="shared_string_online_only">Einungis nettengt</string>
+    <string name="shared_string_offline_only">Einungis ónettengt</string>
+    <string name="add_widget">Bæta við viðmótshluta</string>
+    <string name="row_height">Hæð raða</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Aðgerð sem stýrir sýnileika hnitanets á landakortinu.</string>
 </resources>

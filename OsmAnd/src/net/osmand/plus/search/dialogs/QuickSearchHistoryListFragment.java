@@ -11,9 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.Amenity;
-import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,22 +22,20 @@ import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
 
 import java.util.List;
 
-public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements IMapLocationListener,
-		MapZoomChangeListener, SearchVisibilityListener, NearbyItemClickListener, DownloadIndexesThread.DownloadEvents {
+
+public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements SearchVisibilityListener,
+		NearbyItemClickListener, DownloadIndexesThread.DownloadEvents {
 
 	public static final int TITLE = R.string.shared_string_explore;
 
 	private boolean selectionMode;
 	private NearbyPlacesCard nearbyPlacesCard;
-	private QuadRect visiblePlacesRect = new QuadRect();
-	private long lastPointListRectUpdate = 0;
 
 	@Override
 	public void onUpdatedIndexesList() {
@@ -150,45 +145,8 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	public void onVisibilityChanged(boolean visible) {
 		if (visible) {
 			nearbyPlacesCard.onResume();
-			app.getOsmandMap().getMapView().addMapLocationListener(this);
-			app.getOsmandMap().getMapView().addMapZoomChangeListener(this);
 		} else {
 			nearbyPlacesCard.onPause();
-			app.getOsmandMap().getMapView().removeMapLocationListener(this);
-			app.getOsmandMap().getMapView().removeMapZoomChangeListener(this);
-		}
-	}
-
-	@Override
-	public void locationChanged(double v, double v1, Object o) {
-		updateNearbyCard();
-	}
-
-	@Override
-	public void onMapZoomChanged(boolean manual) {
-		if (manual) {
-			updateNearbyCard();
-		}
-	}
-
-	private void updateNearbyCard() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			long now = System.currentTimeMillis();
-			RotatedTileBox tileBox = mapActivity.getMapView().getRotatedTileBox();
-			QuadRect rect = tileBox.getLatLonBounds();
-			tileBox.increasePixelDimensions(tileBox.getPixWidth() / 4, tileBox.getPixHeight() / 4);
-			QuadRect extendedRect = tileBox.getLatLonBounds();
-			if (!extendedRect.contains(visiblePlacesRect) && now - lastPointListRectUpdate > 1000) {
-				lastPointListRectUpdate = now;
-				visiblePlacesRect = rect;
-
-				app.runInUIThread(() -> {
-					if (isAdded() && nearbyPlacesCard != null) {
-						nearbyPlacesCard.update();
-					}
-				});
-			}
 		}
 	}
 }

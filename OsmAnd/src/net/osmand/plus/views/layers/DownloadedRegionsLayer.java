@@ -12,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -207,8 +208,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 
 			@Override
-			protected List<BinaryMapDataObject> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
-				return queryData(latLonBounds, zoom);
+			protected Pair<List<BinaryMapDataObject>, List<BinaryMapDataObject>> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				List<BinaryMapDataObject> dataObjects = queryData(latLonBounds, zoom);
+				return new Pair<>(dataObjects, dataObjects);
 			}
 		};
 		addMapsInitializedListener();
