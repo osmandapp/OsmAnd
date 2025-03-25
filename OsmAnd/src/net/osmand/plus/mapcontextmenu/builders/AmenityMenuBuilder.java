@@ -57,9 +57,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	protected void buildMainImage(View view) {
-		if (amenity.getWikiPhoto() != null) {
+		if (amenity.getWikiImageStubUrl() != null) {
 			AppCompatImageView imageView = inflateAndGetMainImageView(view);
-			PicassoUtils.setupImageViewByUrl(app, imageView, amenity.getWikiPhoto(), false);
+			PicassoUtils.setupImageViewByUrl(app, imageView, amenity.getWikiImageStubUrl(), false);
 		}
 	}
 
@@ -74,6 +74,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowsBuilder.setLatLon(getLatLon());
 		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
 		rowsBuilder.buildInternal(view);
+		rowsBuilder.buildWikiDataRow(view);
 
 		buildNearestRows((ViewGroup) view);
 		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getAltNamesMap(), true);

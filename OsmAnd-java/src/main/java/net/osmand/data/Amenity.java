@@ -33,6 +33,7 @@ public class Amenity extends MapObject {
 	public static final String PHONE = "phone";
 	public static final String MOBILE = "mobile";
 	public static final String DESCRIPTION = "description";
+	public static final String SHORT_DESCRIPTION = "short_description";
 	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
 	public static final String SERVICE_TIMES = "service_times";
