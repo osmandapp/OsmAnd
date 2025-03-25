@@ -3,6 +3,7 @@ package net.osmand.osm;
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.data.Amenity;
+import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -992,8 +993,9 @@ public class MapPoiTypes {
 			return null;
 		}
 		boolean multy = "multipolygon".equals(otherTags.get("type")) || "site".equals(otherTags.get("type"));
+		boolean superroute = OsmMapUtils.isSuperRoute(otherTags);
 		// example of site is scottish parliament POI
-		if (!multy && relation && !pt.isRelation()) {
+		if (!multy && relation && !pt.isRelation() && !superroute) {
 			return null;
 		}
 
