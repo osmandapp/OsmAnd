@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets.widgets.routeinfo;
 import static net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DESTINATION_REACHED_THRESHOLD;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -14,6 +15,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class RouteInfoCalculator {
@@ -33,43 +36,93 @@ public class RouteInfoCalculator {
 		this.targetPointsHelper = app.getTargetPointsHelper();
 	}
 
+	/**
+	 * Calculates route information with a priority setting.
+	 *
+	 * @param priority The display priority (intermediate first or final destination first).
+	 * @return A list of DestinationInfo objects representing route points.
+	 */
 	@NonNull
-	public List<DestinationInfo> calculateRouteInformation() {
-		List<DestinationInfo> intermediateInfos = collectNotPassedIntermediatePoints();
-		List<DestinationInfo> destinationInfos = new ArrayList<>(intermediateInfos);
-
-		if (destinationInfos.size() < POINTS_LIMIT) {
-			TargetPoint finalDestination = mapActivity.getPointToNavigate();
-			if (finalDestination != null) {
-				int distance = getDistanceToDestination(finalDestination.getLatLon());
-				int leftTime = getEstimatedTimeToDestination();
-				if (isPointNotPassed(distance, leftTime)) {
-					destinationInfos.add(createDestinationInfo(distance, leftTime));
-				}
-			}
+	public List<DestinationInfo> calculateRouteInformation(@NonNull DisplayPriority priority) {
+		DestinationInfo currentIntermediate = getCurrentIntermediateInfo();
+		DestinationInfo finalDestination = getFinalDestinationInfo();
+		if (currentIntermediate != null && finalDestination != null) {
+			return priority == DisplayPriority.INTERMEDIATE_FIRST
+					? Arrays.asList(currentIntermediate, finalDestination)
+					: Arrays.asList(finalDestination, currentIntermediate);
+		} else if (finalDestination != null) {
+			return Collections.singletonList(finalDestination);
 		}
-		return destinationInfos;
+		return Collections.emptyList();
 	}
 
+	/**
+	 * Calculates route information, considering intermediate and final destination points.
+	 *
+	 * @return A list of DestinationInfo objects representing the upcoming route points.
+	 */
 	@NonNull
-	private List<DestinationInfo> collectNotPassedIntermediatePoints() {
-		List<DestinationInfo> result = new ArrayList<>();
+	public List<DestinationInfo> calculateRouteInformation() {
+		List<DestinationInfo> intermediates = collectNotPassedIntermediatePoints(POINTS_LIMIT);
+		List<DestinationInfo> result = new ArrayList<>(intermediates);
 
+		if (result.size() < POINTS_LIMIT) {
+			DestinationInfo finalDestination = getFinalDestinationInfo();
+			if (finalDestination != null) {
+				result.add(finalDestination);
+			}
+		}
+		return result;
+	}
+
+	@Nullable
+	private DestinationInfo getCurrentIntermediateInfo() {
+		List<DestinationInfo> intermediateInfos = collectNotPassedIntermediatePoints(1);
+		return !intermediateInfos.isEmpty() ? intermediateInfos.get(0) : null;
+	}
+
+	/**
+	 * Collects unpassed intermediate route points, limited by the specified count.
+	 *
+	 * @param pointsLimit The maximum number of intermediate points to return.
+	 * @return A list of DestinationInfo objects for upcoming intermediate points.
+	 */
+	@NonNull
+	private List<DestinationInfo> collectNotPassedIntermediatePoints(int pointsLimit) {
+		List<DestinationInfo> result = new ArrayList<>();
 		TargetPoint intermediate;
-		int intermediatePointIndex = 0;
-		while ((intermediate = targetPointsHelper.getIntermediatePoint(intermediatePointIndex)) != null) {
-			int distance = getDistanceToIntermediate(intermediate.getLatLon(), intermediatePointIndex);
-			int estimatedTime = getEstimatedTimeToIntermediate(intermediatePointIndex);
+		int index = 0;
+		while ((intermediate = targetPointsHelper.getIntermediatePoint(index)) != null) {
+			int distance = getDistanceToIntermediate(intermediate.getLatLon(), index);
+			int estimatedTime = getEstimatedTimeToIntermediate(index);
 
 			if (isPointNotPassed(distance, estimatedTime)) {
 				result.add(createDestinationInfo(distance, estimatedTime));
-				if (result.size() == POINTS_LIMIT) {
+				if (result.size() >= pointsLimit) {
 					break;
 				}
 			}
-			intermediatePointIndex++;
+			index++;
 		}
 		return result;
+	}
+
+	/**
+	 * Retrieves the final destination information if available.
+	 *
+	 * @return The final DestinationInfo or null if the destination has been reached.
+	 */
+	@Nullable
+	private DestinationInfo getFinalDestinationInfo() {
+		TargetPoint destination = mapActivity.getPointToNavigate();
+		if (destination != null) {
+			int distance = getDistanceToDestination(destination.getLatLon());
+			int leftTime = getEstimatedTimeToDestination();
+			if (isPointNotPassed(distance, leftTime)) {
+				return createDestinationInfo(distance, leftTime);
+			}
+		}
+		return null;
 	}
 
 	private int getDistanceToIntermediate(@NonNull LatLon location, int intermediateIndexOffset) {
