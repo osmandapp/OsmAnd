@@ -434,7 +434,6 @@ public class ConfigureMapDialogs {
 				Optional.empty();
 	}
 
-	// FK-TODO: refactor
 	private static CustomAlert.MultiSelectionDialogFragment createPreferencesDialog(
 			final ContextMenuItem item,
 			final MapActivity activity,

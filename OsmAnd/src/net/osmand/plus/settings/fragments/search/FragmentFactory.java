@@ -45,7 +45,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		if (CustomAlert.SingleSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
-				return Optional.of((T) _srcProxy.getPrincipal().getRoadStyleDialog().orElseThrow());
+				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().roadStyleDialog().orElseThrow());
 			} else if (srcProxy instanceof final CustomAlert.SingleSelectionDialogFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
@@ -53,7 +53,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		if (CustomAlert.MultiSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
-				return Optional.of((T) _srcProxy.getPrincipal().getHideDialog().orElseThrow());
+				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().hideDialog().orElseThrow());
 			} else if (srcProxy instanceof final CustomAlert.MultiSelectionDialogFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
@@ -61,7 +61,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		if (ConfigureMapDialogs.MapLanguageDialog.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
-				return Optional.of((T) _srcProxy.getPrincipal().getMapLanguageDialog());
+				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().mapLanguageDialog());
 			} else if (srcProxy instanceof final ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}

@@ -80,19 +80,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private boolean useAnimation;
 	private ConfigureMapMenu.Dialogs dialogs;
 
-	// FK-TODO: inline method?
-	public Optional<CustomAlert.SingleSelectionDialogFragment> getRoadStyleDialog() {
-		return dialogs.roadStyleDialog();
-	}
-
-	// FK-TODO: inline method?
-	public ConfigureMapDialogs.MapLanguageDialog getMapLanguageDialog() {
-		return dialogs.mapLanguageDialog();
-	}
-
-	// FK-TODO: inline method?
-	public Optional<CustomAlert.MultiSelectionDialogFragment> getHideDialog() {
-		return dialogs.hideDialog();
+	public ConfigureMapMenu.Dialogs getDialogs() {
+		return dialogs;
 	}
 
 	@Override
