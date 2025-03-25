@@ -22,6 +22,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ConfigureMapUtils {
@@ -35,7 +36,7 @@ public class ConfigureMapUtils {
 						.stream(MAP_LANGUAGES_IDS)
 						.collect(
 								Collectors.toMap(
-										mapLanguageId -> mapLanguageId,
+										Function.identity(),
 										mapLanguageId -> {
 											final boolean localNames = Algorithms.isEmpty(mapLanguageId);
 											return localNames
@@ -119,7 +120,7 @@ public class ConfigureMapUtils {
 	}
 
 	protected static String getDescription(@NonNull OsmandSettings settings,
-	                                       @NonNull List<CommonPreference<Boolean>> prefs) {
+										   @NonNull List<CommonPreference<Boolean>> prefs) {
 		int count = 0;
 		int enabled = 0;
 
