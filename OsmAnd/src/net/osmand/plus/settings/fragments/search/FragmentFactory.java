@@ -50,6 +50,12 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
+		if (CustomAlert.MultiSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
+				return Optional.of((T) _srcProxy.getPrincipal().getHideDialog().orElseThrow());
+			}
+		}
 		if (ConfigureMapDialogs.MapLanguageDialog.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {

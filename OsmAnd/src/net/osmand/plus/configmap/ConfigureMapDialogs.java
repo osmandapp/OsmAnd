@@ -422,7 +422,6 @@ public class ConfigureMapDialogs {
 	}
 
 	public static Optional<CustomAlert.MultiSelectionDialogFragment> createPreferencesDialogIfActivityNotDestroyed(
-			final OnDataChangeUiAdapter uiAdapter,
 			final ContextMenuItem item,
 			final MapActivity activity,
 			final String category,
@@ -430,13 +429,12 @@ public class ConfigureMapDialogs {
 			final List<CommonPreference<Boolean>> prefs,
 			final boolean nightMode) {
 		return AndroidUtils.isActivityNotDestroyed(activity) ?
-				Optional.of(createPreferencesDialog(uiAdapter, item, activity, category, properties, prefs, nightMode)) :
+				Optional.of(createPreferencesDialog(item, activity, category, properties, prefs, nightMode)) :
 				Optional.empty();
 	}
 
 	// FK-TODO: refactor
 	private static CustomAlert.MultiSelectionDialogFragment createPreferencesDialog(
-			final OnDataChangeUiAdapter uiAdapter,
 			final ContextMenuItem item,
 			final MapActivity activity,
 			final String category,
@@ -469,7 +467,7 @@ public class ConfigureMapDialogs {
 									}
 									item.setSelected(selected);
 									item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-									uiAdapter.onDataSetInvalidated();
+									activity.getDashboard().refreshContent(false);
 								})
 						.setPositiveButton(
 								R.string.shared_string_ok,
@@ -481,9 +479,9 @@ public class ConfigureMapDialogs {
 									}
 									item.setSelected(selected);
 									item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-									uiAdapter.onDataSetInvalidated();
 									activity.refreshMapComplete();
 									activity.getMapLayers().updateLayers(activity);
+									activity.getDashboard().refreshContent(false);
 								});
 
 		return CustomAlert.createMultiSelectionDialogFragment(

@@ -80,12 +80,19 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private boolean useAnimation;
 	private ConfigureMapMenu.Dialogs dialogs;
 
+	// FK-TODO: inline method?
 	public Optional<CustomAlert.SingleSelectionDialogFragment> getRoadStyleDialog() {
 		return dialogs.roadStyleDialog();
 	}
 
+	// FK-TODO: inline method?
 	public ConfigureMapDialogs.MapLanguageDialog getMapLanguageDialog() {
 		return dialogs.mapLanguageDialog();
+	}
+
+	// FK-TODO: inline method?
+	public Optional<CustomAlert.MultiSelectionDialogFragment> getHideDialog() {
+		return dialogs.hideDialog();
 	}
 
 	@Override
@@ -504,6 +511,29 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
 								return new ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment();
+							}
+
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return false;
+							}
+						});
+				case HIDE_ID -> Optional.of(
+						new PreferenceFragmentHandler() {
+
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return createPreferenceFragment().getClass();
+							}
+
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return createPreferenceFragment();
+							}
+
+							// FK-TODO: use this scheme in almost all PreferenceFragmentHandlers
+							private static CustomAlert.MultiSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
+								return new CustomAlert.MultiSelectionDialogFragment.PreferenceFragment();
 							}
 
 							@Override

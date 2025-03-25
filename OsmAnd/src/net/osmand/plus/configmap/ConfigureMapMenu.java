@@ -94,11 +94,16 @@ public class ConfigureMapMenu {
 	}
 
 	public record Dialogs(Optional<CustomAlert.SingleSelectionDialogFragment> roadStyleDialog,
-						  ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog) {
+						  ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog,
+						  Optional<CustomAlert.MultiSelectionDialogFragment> hideDialog) {
 	}
 
 	public record ItemAndDialog(ContextMenuItem item,
 								Optional<CustomAlert.SingleSelectionDialogFragment> dialog) {
+	}
+
+	public record ItemAndHideDialog(ContextMenuItem item,
+									Optional<CustomAlert.MultiSelectionDialogFragment> hideDialog) {
 	}
 
 	private record MapLanguageItemAndDialog(ContextMenuItem item,
@@ -576,13 +581,34 @@ public class ConfigureMapMenu {
 		final MapLanguageItemAndDialog mapLanguageItemAndDialog = createMapLanguageItemAndDialog(activity, nightMode);
 		adapter.addItem(mapLanguageItemAndDialog.item);
 
-		props = createProperties(customRules, R.string.rendering_category_details, R.drawable.ic_action_layers,
-				UI_CATEGORY_DETAILS, activity, DETAILS_ID, nightMode);
+		props =
+				this
+						.createProperties(
+								customRules,
+								R.string.rendering_category_details,
+								R.drawable.ic_action_layers,
+								UI_CATEGORY_DETAILS,
+								activity,
+								DETAILS_ID,
+								nightMode)
+						.map(ItemAndHideDialog::item)
+						.orElse(null);
 		if (props != null) {
 			adapter.addItem(props);
 		}
-		props = createProperties(customRules, R.string.rendering_category_hide, R.drawable.ic_action_hide,
-				UI_CATEGORY_HIDE, activity, HIDE_ID, nightMode);
+		final Optional<ItemAndHideDialog> itemAndHideDialog =
+				createProperties(
+						customRules,
+						R.string.rendering_category_hide,
+						R.drawable.ic_action_hide,
+						UI_CATEGORY_HIDE,
+						activity,
+						HIDE_ID,
+						nightMode);
+		props =
+				itemAndHideDialog
+						.map(ItemAndHideDialog::item)
+						.orElse(null);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -596,7 +622,8 @@ public class ConfigureMapMenu {
 		}
 		return new Dialogs(
 				roadStyleItemAndDialog.flatMap(ItemAndDialog::dialog),
-				mapLanguageItemAndDialog.dialog);
+				mapLanguageItemAndDialog.dialog,
+				itemAndHideDialog.flatMap(ItemAndHideDialog::hideDialog));
 	}
 
 	private String getLocaleDescr(final Context context) {
@@ -639,13 +666,14 @@ public class ConfigureMapMenu {
 		return new MapLanguageItemAndDialog(mapLanguageItem, mapLanguageDialog);
 	}
 
-	private ContextMenuItem createProperties(List<RenderingRuleProperty> customRules,
-											 @StringRes int strId,
-											 @DrawableRes int icon,
-											 String category,
-											 MapActivity activity,
-											 String id,
-											 boolean nightMode) {
+	// FK-TODO: refactor
+	private Optional<ItemAndHideDialog> createProperties(final List<RenderingRuleProperty> customRules,
+														 final @StringRes int strId,
+														 final @DrawableRes int icon,
+														 final String category,
+														 final MapActivity activity,
+														 final String id,
+														 final boolean nightMode) {
 		List<RenderingRuleProperty> properties = new ArrayList<>();
 		List<CommonPreference<Boolean>> preferences = new ArrayList<>();
 		Iterator<RenderingRuleProperty> it = customRules.iterator();
@@ -659,28 +687,24 @@ public class ConfigureMapMenu {
 			}
 		}
 		if (!preferences.isEmpty()) {
-			ItemClickListener clickListener = (uiAdapter, view, item, isChecked) -> {
-				if (UI_CATEGORY_DETAILS.equals(category)) {
-					DetailsBottomSheet
-							.createInstance(properties, preferences, uiAdapter, item)
-							.show(activity.getSupportFragmentManager());
-				} else {
-					ConfigureMapDialogs
-							.createPreferencesDialogIfActivityNotDestroyed(
-									uiAdapter,
-									item,
-									activity,
-									activity.getString(strId),
-									properties,
-									preferences,
-									nightMode)
-							.ifPresent(preferencesDialog -> preferencesDialog.show(activity.getSupportFragmentManager()));
-				}
-				return false;
-			};
-			ContextMenuItem item = new ContextMenuItem(id)
-					.setTitleId(strId, activity)
-					.setIcon(icon).setListener(clickListener);
+			final ContextMenuItem item =
+					new ContextMenuItem(id)
+							.setTitleId(strId, activity)
+							.setIcon(icon);
+			final ItemClickListener clickListener =
+					(uiAdapter, view, _item, isChecked) -> {
+						if (UI_CATEGORY_DETAILS.equals(category)) {
+							DetailsBottomSheet
+									.createInstance(properties, preferences, uiAdapter, item)
+									.show(activity.getSupportFragmentManager());
+						} else {
+							ConfigureMapMenu
+									.createMultiSelectionDialogFragment(strId, activity, nightMode, item, properties, preferences)
+									.ifPresent(preferencesDialog -> preferencesDialog.show(activity.getSupportFragmentManager()));
+						}
+						return false;
+					};
+			item.setListener(clickListener);
 			item.setRefreshCallback(refreshableItem -> {
 				boolean selected = false;
 				for (CommonPreference<Boolean> p : preferences) {
@@ -695,9 +719,31 @@ public class ConfigureMapMenu {
 			item.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			OsmandPreference<?>[] prefArray = new OsmandPreference[preferences.size()];
 			item.setItemDeleteAction(preferences.toArray(prefArray));
-			return item;
+			return Optional.of(
+					new ItemAndHideDialog(
+							item,
+							UI_CATEGORY_HIDE.equals(category) ?
+									createMultiSelectionDialogFragment(strId, activity, nightMode, item, properties, preferences) :
+									Optional.empty()));
 		}
-		return null;
+		return Optional.empty();
+	}
+
+	private static Optional<CustomAlert.MultiSelectionDialogFragment> createMultiSelectionDialogFragment(
+			final @StringRes int strId,
+			final MapActivity activity,
+			final boolean nightMode,
+			final ContextMenuItem item,
+			final List<RenderingRuleProperty> properties,
+			final List<CommonPreference<Boolean>> preferences) {
+		return ConfigureMapDialogs
+				.createPreferencesDialogIfActivityNotDestroyed(
+						item,
+						activity,
+						activity.getString(strId),
+						properties,
+						preferences,
+						nightMode);
 	}
 
 	private boolean isPropertyAccepted(RenderingRuleProperty property) {

@@ -112,6 +112,7 @@ public class SettingsSearchButtonHelper {
 						new PrincipalAndProxy<>(TransportLinesFragment.class, TransportLinesFragment.PreferenceFragment.class),
 						new PrincipalAndProxy<>(SelectMapStyleBottomSheetDialogFragment.class, SelectMapStyleBottomSheetDialogFragment.PreferenceFragment.class),
 						new PrincipalAndProxy<>(CustomAlert.SingleSelectionDialogFragment.class, CustomAlert.SingleSelectionDialogFragment.PreferenceFragment.class),
+						new PrincipalAndProxy<>(CustomAlert.MultiSelectionDialogFragment.class, CustomAlert.MultiSelectionDialogFragment.PreferenceFragment.class),
 						new PrincipalAndProxy<>(ConfigureMapDialogs.MapLanguageDialog.class, ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment.class)));
 	}
 
