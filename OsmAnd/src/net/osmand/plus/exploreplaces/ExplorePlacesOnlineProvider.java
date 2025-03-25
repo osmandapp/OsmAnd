@@ -10,6 +10,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.search.GetExplorePlacesImagesTask;
 import net.osmand.plus.search.GetExplorePlacesImagesTask.GetImageCardsListener;
 import net.osmand.plus.shared.SharedUtil;
@@ -245,6 +246,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	@Nullable
 	private Amenity createAmenity(@NonNull OsmandApiFeatureData featureData) {
 		Amenity a = new Amenity();
+		a.setAdditionalInfo(Amenity.WIKIDATA, String.format(app.getString(R.string.wikidata_id_pattern), featureData.properties.id));
 		a.setId(featureData.properties.osmid);
 		a.setName(featureData.properties.wikiTitle);
 		a.setEnName(TransliterationHelper.transliterate(a.getName()));

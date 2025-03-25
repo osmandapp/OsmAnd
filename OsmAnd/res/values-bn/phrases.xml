@@ -35,7 +35,6 @@
     <string name="poi_finance">অর্থ</string>
     <string name="poi_natural">প্রাকৃতিক</string>
     <string name="poi_military">সামরিক</string>
-    <string name="poi_osmwiki">উইকিপিডিয়া</string>
     <string name="poi_user_defined_other">ব্যবহারকারী কর্তৃক নির্ধারিত</string>
     <string name="poi_bakery">বেকারি</string>
     <string name="poi_alcohol">চায়ের দোকান</string>
