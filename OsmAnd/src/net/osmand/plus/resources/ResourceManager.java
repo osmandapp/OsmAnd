@@ -35,6 +35,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -80,6 +81,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -771,8 +774,11 @@ public class ResourceManager {
 
 	public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
 		List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
-		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
-		List<AmenityIndexRepository> res = new ArrayList<>();
+		List<AmenityIndexRepository> baseMaps = new ArrayList<>();
+		List<AmenityIndexRepository> result = new ArrayList<>();
+
+		fileNames.sort(Algorithms.getStringVersionComparator());
+
 		for (String fileName : fileNames) {
 			if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
 				if (!includeTravel || !app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()) {
@@ -780,11 +786,15 @@ public class ResourceManager {
 				}
 			}
 			AmenityIndexRepository r = amenityRepositories.get(fileName);
-			if (r != null) {
-				res.add(r);
+			if (r != null && r.isWorldMap()) {
+				baseMaps.add(r);
+			} else if (r != null) {
+				result.add(r);
 			}
 		}
-		return res;
+
+		result.addAll(baseMaps);
+		return result;
 	}
 
 	@NonNull
@@ -807,7 +817,11 @@ public class ResourceManager {
 			double leftLongitude, double bottomLatitude,
 			double rightLongitude, int zoom, boolean includeTravel,
 			ResultMatcher<Amenity> matcher) {
-		List<Amenity> amenities = new ArrayList<>();
+
+		Set<Long> openAmenities = new HashSet<>();
+		Set<Long> closedAmenities = new HashSet<>();
+		List<Amenity> actualAmenities = new ArrayList<>();
+
 		searchAmenitiesInProgress = true;
 		try {
 			boolean isEmpty = filter.isEmpty();
@@ -819,16 +833,28 @@ public class ResourceManager {
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
 				int right31 = MapUtils.get31TileNumberX(rightLongitude);
-				for (AmenityIndexRepository index : getAmenityRepositories(includeTravel)) {
+
+				List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel);
+
+				for (AmenityIndexRepository repo : repos) {
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;
 					}
-					if (index != null && index.checkContainsInt(top31, left31, bottom31, right31)) {
-						List<Amenity> r = index.searchAmenities(top31,
-								left31, bottom31, right31, zoom, filter, additionalFilter, matcher);
-						if (r != null) {
-							amenities.addAll(r);
+					if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
+						List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
+								zoom, filter, additionalFilter, matcher);
+						if (foundAmenities != null) {
+							for (Amenity amenity : foundAmenities) {
+								Long id = amenity.getId();
+								if (amenity.isClosed()) {
+									closedAmenities.add(id);
+								} else if (!closedAmenities.contains(id)) {
+									if (openAmenities.add(id)) {
+										actualAmenities.add(amenity);
+									}
+								}
+							}
 						}
 					}
 				}
@@ -836,7 +862,7 @@ public class ResourceManager {
 		} finally {
 			searchAmenitiesInProgress = false;
 		}
-		return amenities;
+		return actualAmenities;
 	}
 
 	@NonNull
