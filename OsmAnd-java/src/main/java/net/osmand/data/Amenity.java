@@ -33,6 +33,7 @@ public class Amenity extends MapObject {
 	public static final String PHONE = "phone";
 	public static final String MOBILE = "mobile";
 	public static final String DESCRIPTION = "description";
+	public static final String SHORT_DESCRIPTION = "short_description";
 	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
 	public static final String SERVICE_TIMES = "service_times";
@@ -73,6 +74,7 @@ public class Amenity extends MapObject {
 	public static final String SEPARATOR = ";";
 	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
+	public static final String ROUTE_MEMBERS_IDS = "route_members_ids";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
 	public static final int DEFAULT_ELO = 900;
 

@@ -214,7 +214,6 @@
     <string name="poi_tourism">Turistika</string>
     <string name="poi_entertainment">Volný čas</string>
     <string name="poi_sustenance">Občerstvení</string>
-    <string name="poi_osmwiki">Wikipedie</string>
     <string name="poi_user_defined_other">Uživatelsky definovaný</string>
     <string name="poi_wine">Vinotéka</string>
     <string name="poi_shop">Obchod/služby</string>
@@ -4989,4 +4988,25 @@
     <string name="poi_network_lcn">Místní cyklotrasy (LCN)</string>
     <string name="poi_route_activity_type_mountain_biking">Trasy pro MTB (horská kola)</string>
     <string name="poi_network_cycling">Síť tras (cyklistika)</string>
+    <string name="poi_osmwiki">Populární místa (Wikipedie)</string>
+    <string name="poi_mosque">Mešita</string>
+    <string name="poi_buddhist_temple">Buddhistický chrám</string>
+    <string name="poi_synagogue">Synagoga</string>
+    <string name="poi_jehovahs_witness_kingdom_hall">Síň Království svědků Jehovových</string>
+    <string name="poi_baptist_church">Baptistický kostel</string>
+    <string name="poi_lutheran_church">Luteránský kostel</string>
+    <string name="poi_protestant_church">Protestantský kostel</string>
+    <string name="poi_anglican_church">Anglikánský kostel</string>
+    <string name="poi_orthodox_church">Pravoslavný kostel</string>
+    <string name="poi_catholic_church">Katolický kostel</string>
+    <string name="poi_shinto_shrine">Šintoistická svatyně</string>
+    <string name="poi_greek_orthodox_church">Řecký pravoslavný kostel</string>
+    <string name="poi_evangelical_church">Evangelický kostel</string>
+    <string name="poi_hindu_temple">Hinduistický chrám</string>
+    <string name="poi_presbyterian_church">Presbyteriánský kostel</string>
+    <string name="poi_access_main_tag">Přístup</string>
+    <string name="poi_roman_catholic_church">Římskokatolický kostel</string>
+    <string name="poi_methodist_church">Metodistický kostel</string>
+    <string name="poi_russian_orthodox_church">Ruský pravoslavný kostel</string>
+    <string name="poi_pentecostal_church">Letniční kostel</string>
 </resources>

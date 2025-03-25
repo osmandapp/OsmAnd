@@ -401,44 +401,35 @@ public class AisObject {
             case AIS_VESSEL_SAR:
             case AIS_VESSEL_OTHER:
             case AIS_INVALID:
-                return R.drawable.ais_vessel;
+                return R.drawable.mm_ais_vessel;
             case AIS_LANDSTATION:
-                return R.drawable.ais_land;
+                return R.drawable.mm_ais_land;
             case AIS_AIRPLANE:
-                return R.drawable.ais_plane;
+                return R.drawable.mm_ais_plane;
             case AIS_SART:
-                return R.drawable.ais_sar;
+                return R.drawable.mm_ais_sar;
             case AIS_ATON:
-                return R.drawable.ais_aton;
+                return R.drawable.mm_ais_aton;
             case AIS_ATON_VIRTUAL:
-                return R.drawable.ais_aton_virt;
+                return R.drawable.mm_ais_aton_virt;
         }
         return -1;
     }
 
     public static int selectColor(AisObjType objType) {
-        switch (objType) {
-            case AIS_VESSEL:
-                return Color.GREEN;
-            case AIS_VESSEL_SPORT:
-                return Color.YELLOW;
-            case AIS_VESSEL_FAST:
-                return Color.BLUE;
-            case AIS_VESSEL_PASSENGER:
-                return Color.CYAN;
-            case AIS_VESSEL_FREIGHT:
-                return Color.GRAY;
-            case AIS_VESSEL_COMMERCIAL:
-                return Color.LTGRAY;
-            case AIS_VESSEL_AUTHORITIES:
-                return Color.argb(0xff, 0x55, 0x6b, 0x2f); // 0x556b2f: darkolivegreen
-            case AIS_VESSEL_SAR:
-                return Color.argb(0xff, 0xfa, 0x80, 0x72); // 0xfa8072: salmon
-            case AIS_VESSEL_OTHER:
-                return Color.argb(0xff, 0x00, 0xbf, 0xff); // 0x00bfff: deepskyblue
-            default:
-                return 0; // transparent
-        }
+	    return switch (objType) {
+		    case AIS_VESSEL -> Color.GREEN;
+		    case AIS_VESSEL_SPORT -> Color.YELLOW;
+		    case AIS_VESSEL_FAST -> Color.BLUE;
+		    case AIS_VESSEL_PASSENGER -> Color.CYAN;
+		    case AIS_VESSEL_FREIGHT -> Color.GRAY;
+		    case AIS_VESSEL_COMMERCIAL -> Color.LTGRAY;
+		    case AIS_VESSEL_AUTHORITIES ->
+				    Color.argb(0xff, 0x55, 0x6b, 0x2f); // 0x556b2f: darkolivegreen
+		    case AIS_VESSEL_SAR -> Color.argb(0xff, 0xfa, 0x80, 0x72); // 0xfa8072: salmon
+		    case AIS_VESSEL_OTHER -> Color.argb(0xff, 0x00, 0xbf, 0xff); // 0x00bfff: deepskyblue
+		    default -> 0; // transparent
+	    };
     }
 
     private void setBitmap(@NonNull AisTrackerLayer mapLayer) {
@@ -446,7 +437,7 @@ public class AisObject {
         vesselAtRest = isVesselAtRest();
         if (isLost(vesselLostTimeoutInMinutes) && !vesselAtRest) {
             if (isMovable()) {
-                this.bitmap = mapLayer.getBitmap(R.drawable.ais_vessel_cross);
+                this.bitmap = mapLayer.getBitmap(R.drawable.mm_ais_vessel_cross);
                 this.bitmapValid = true;
             }
         } else {
@@ -522,34 +513,23 @@ public class AisObject {
                 canvas.drawBitmap(this.bitmap, Math.round(fx), Math.round(fy), paint);
             }
             if ((speedFactor > 0) && (!isLost(vesselLostTimeoutInMinutes)) && !vesselAtRest) {
-                float lineStartX = locationX;
-                float lineLength = (float)this.bitmap.getHeight() * speedFactor;
+	            float lineLength = (float)this.bitmap.getHeight() * speedFactor;
                 float lineStartY = locationY - this.bitmap.getHeight() / 4.0f;
                 float lineEndY = lineStartY - lineLength;
-                canvas.drawLine(lineStartX, lineStartY, lineStartX, lineEndY, paint);
+                canvas.drawLine((float) locationX, lineStartY, (float) locationX, lineEndY, paint);
             }
             canvas.restore();
         }
     }
 
     public boolean isMovable() {
-        switch (this.objectClass) {
-            case AIS_VESSEL:
-            case AIS_VESSEL_SPORT:
-            case AIS_VESSEL_FAST:
-            case AIS_VESSEL_PASSENGER:
-            case AIS_VESSEL_FREIGHT:
-            case AIS_VESSEL_COMMERCIAL:
-            case AIS_VESSEL_AUTHORITIES:
-            case AIS_VESSEL_SAR:
-            case AIS_VESSEL_OTHER:
-            case AIS_AIRPLANE:
-                return true;
-            case AIS_INVALID:
-                return (this.ais_sog != INVALID_SOG) && (this.ais_sog > 0.0d);
-            default:
-                return false;
-        }
+	    return switch (objectClass) {
+		    case AIS_VESSEL, AIS_VESSEL_SPORT, AIS_VESSEL_FAST, AIS_VESSEL_PASSENGER,
+		         AIS_VESSEL_FREIGHT, AIS_VESSEL_COMMERCIAL, AIS_VESSEL_AUTHORITIES, AIS_VESSEL_SAR,
+		         AIS_VESSEL_OTHER, AIS_AIRPLANE -> true;
+		    case AIS_INVALID -> (ais_sog != INVALID_SOG) && (ais_sog > 0.0d);
+		    default -> false;
+	    };
     }
     /*
     for AIS objects that are moving, return a value that is taken as multiple of bitmap

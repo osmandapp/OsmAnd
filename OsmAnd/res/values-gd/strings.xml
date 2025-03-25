@@ -470,4 +470,22 @@
     <string name="vector_data">Mapaichean-bheactor far-loidhne</string>
     <string name="search_offline_clear_search">Lorg ùr</string>
     <string name="internet_connection_required_for_online_route">Chan obraich seòladaireachd far-loidhne.</string>
+    <string name="row_height">Àirde-sreatha</string>
+    <string name="choose_location">Roghnaich àite</string>
+    <string name="equator">Crios-meadhain</string>
+    <string name="prime_meridian">Prìomh-mheadhan-loidhne</string>
+    <string name="point_location">Àite na puinge</string>
+    <string name="quick_action_directions_from">Àite-tòiseachaidh</string>
+    <string name="quick_action_track_waypoint">Puing-thurais frith-rathaid</string>
+    <string name="with_waypoints">Le puingean-thurais</string>
+    <string name="points_selection_descr">Dùin agus caill na h-atharraidhean air fad?</string>
+    <string name="waypoint_template">Templaid phuinge-thurais</string>
+    <string name="favorite_confirm_delete_group">Dubh-às buidheann \"%1$s\" agus na puingean air fad (%2$d)?</string>
+    <string name="waypoint_appearance">Coltas dhen phuing-thurais</string>
+    <string name="av_def_action_choose">Air iarrtas</string>
+    <string name="shared_string_widget">Cleas-uidheam</string>
+    <string name="add_widget">Cuir cleas-uidheam</string>
+    <string name="map_widget_route_information">Fiosrachadh slighe</string>
+    <string name="obd_widget_group">Meatraigean a\' charbaid</string>
+    <string name="obd_plugin_name">Meatraigean a\' charbaid</string>
 </resources>

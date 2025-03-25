@@ -38,6 +38,10 @@ public class OsmMapUtils {
 				"crag".equals(tags.get(OSMSettings.OSMTagKey.OSMAND_CLIMBING.getValue()));
 	}
 
+	public static boolean isSuperRoute(Map<String, String> tags) {
+		return "superroute".equals(tags.get(OSMSettings.OSMTagKey.TYPE.getValue()));
+	}
+
 	public static LatLon getCenter(Entity e) {
 		if (e instanceof Node) {
 			return ((Node) e).getLatLon();

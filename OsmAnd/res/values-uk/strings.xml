@@ -5744,4 +5744,7 @@
     <string name="shared_string_online_only">Тільки онлайн</string>
     <string name="row_height">Висота рядка</string>
     <string name="add_widget">Додати віджет</string>
+    <string name="intermediate_first">Перший проміжний</string>
+    <string name="destination_first">Перше місце призначення</string>
+    <string name="display_priority">Пріоритет відображення</string>
 </resources>
