@@ -476,4 +476,9 @@
     <string name="prime_meridian">Prìomh-mheadhan-loidhne</string>
     <string name="point_location">Àite na puinge</string>
     <string name="quick_action_directions_from">Àite-tòiseachaidh</string>
+    <string name="quick_action_track_waypoint">Puing-thurais frith-rathaid</string>
+    <string name="with_waypoints">Le puingean-thurais</string>
+    <string name="points_selection_descr">Dùin agus caill na h-atharraidhean air fad?</string>
+    <string name="waypoint_template">Templaid phuinge-thurais</string>
+    <string name="favorite_confirm_delete_group">Dubh-às buidheann \"%1$s\" agus na puingean air fad (%2$d)?</string>
 </resources>
