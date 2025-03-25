@@ -81,6 +81,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -772,8 +774,11 @@ public class ResourceManager {
 
 	public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
 		List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
-		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
-		List<AmenityIndexRepository> res = new ArrayList<>();
+		List<AmenityIndexRepository> regionalMaps = new ArrayList<>();
+		List<AmenityIndexRepository> baseMaps = new ArrayList<>();
+
+		fileNames.sort(Algorithms.getStringVersionComparator());
+
 		for (String fileName : fileNames) {
 			if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
 				if (!includeTravel || !app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()) {
@@ -781,11 +786,14 @@ public class ResourceManager {
 				}
 			}
 			AmenityIndexRepository r = amenityRepositories.get(fileName);
-			if (r != null) {
-				res.add(r);
+			if (r != null && r.isWorldMap()) {
+				baseMaps.add(r);
+			} else if (r != null) {
+				regionalMaps.add(r);
 			}
 		}
-		return res;
+
+		return Stream.concat(regionalMaps.stream(), baseMaps.stream()).collect(Collectors.toList());
 	}
 
 	@NonNull
