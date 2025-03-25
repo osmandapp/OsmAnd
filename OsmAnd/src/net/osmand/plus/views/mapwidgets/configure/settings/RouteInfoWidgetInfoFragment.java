@@ -15,12 +15,14 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayPriority;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoDisplayMode;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -35,6 +37,7 @@ import java.util.Objects;
 public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragment {
 
 	private static final String KEY_PRIMARY_VALUE = "primary_display_value";
+	private static final String KEY_PRIORITY_VALUE = "primary_display_priority";
 
 	private static final long HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 	private static final long ONE_HUNDRED_KM_IN_METERS = 100_000;
@@ -42,6 +45,7 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 	private RouteInfoWidget widget;
 
 	private RouteInfoDisplayMode selectedDisplayMode;
+	private DisplayPriority selectedDisplayPriority;
 
 	@NonNull
 	@Override
@@ -58,6 +62,10 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 			selectedDisplayMode = displayModeKey != null
 					? RouteInfoDisplayMode.valueOf(displayModeKey)
 					: widget.getDisplayMode(appMode);
+			String displayPriorityKey = bundle.getString(KEY_PRIORITY_VALUE);
+			selectedDisplayPriority = displayPriorityKey != null
+					? DisplayPriority.valueOf(displayPriorityKey)
+					: widget.getDisplayPriority(appMode);
 		} else {
 			dismiss();
 		}
@@ -67,11 +75,15 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.fragment_widget_settings_route_info, container);
 
-		View defViewContainer = container.findViewById(R.id.default_view_container);
-		defViewContainer.setOnClickListener(v -> showDefaultValueDialog(container));
-		defViewContainer.setBackground(getPressedStateDrawable());
-		TextView defViewDesc = container.findViewById(R.id.default_view_description);
-		defViewDesc.setText(getString(selectedDisplayMode.getTitleId()));
+		View defaultValueButton = container.findViewById(R.id.default_view_container);
+		defaultValueButton.setOnClickListener(v -> showDefaultValueDialog(container));
+		defaultValueButton.setBackground(getPressedStateDrawable());
+		updateDefaultValueButton(defaultValueButton);
+
+		View displayPriorityButton = container.findViewById(R.id.display_priority_container);
+		displayPriorityButton.setOnClickListener(v -> showDisplayPriorityDialog(container));
+		displayPriorityButton.setBackground(getPressedStateDrawable());
+		updateDisplayPriorityButton(displayPriorityButton);
 	}
 
 	private void showDefaultValueDialog(@NonNull View container) {
@@ -98,9 +110,44 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
 			int which = (int) v.getTag();
 			selectedDisplayMode = displayModes[which];
-			TextView defValueDesc = container.findViewById(R.id.default_view_description);
-			defValueDesc.setText(getString(selectedDisplayMode.getTitleId()));
+			updateDefaultValueButton(container);
 		});
+	}
+
+	private void updateDefaultValueButton(@NonNull View container) {
+		ImageView ivIcon = container.findViewById(R.id.default_view_icon);
+		ivIcon.setImageResource(selectedDisplayMode.getIconId());
+		TextView tvDescription = container.findViewById(R.id.default_view_description);
+		tvDescription.setText(getString(selectedDisplayMode.getTitleId()));
+	}
+
+	private void showDisplayPriorityDialog(@NonNull View container) {
+		DisplayPriority[] priorities = DisplayPriority.values();
+		SelectionDialogItem[] items = new SelectionDialogItem[priorities.length];
+		int selected = 0;
+		for (int i = 0; i < priorities.length; i++) {
+			DisplayPriority priority = priorities[i];
+			CharSequence title = getString(priority.getTitleId());
+			items[i] = new SelectionDialogItem(title, "");
+			selected = selectedDisplayPriority == priority ? i : selected;
+		}
+
+		AlertDialogData dialogData = new AlertDialogData(container.getContext(), nightMode)
+				.setTitle(R.string.display_priority)
+				.setItemsLayoutRes(R.layout.dialog_list_item_with_compound_button);
+
+		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
+			int which = (int) v.getTag();
+			selectedDisplayPriority = priorities[which];
+			updateDisplayPriorityButton(container);
+		});
+	}
+
+	private void updateDisplayPriorityButton(@NonNull View container) {
+		ImageView ivIcon = container.findViewById(R.id.display_priority_icon);
+		ivIcon.setImageResource(selectedDisplayPriority.getIconId());
+		TextView tvDescription = container.findViewById(R.id.display_priority_description);
+		tvDescription.setText(getString(selectedDisplayPriority.getTitleId()));
 	}
 
 	@NonNull
@@ -141,12 +188,13 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(KEY_PRIMARY_VALUE, selectedDisplayMode.name());
+		outState.putString(KEY_PRIORITY_VALUE, selectedDisplayPriority.name());
 	}
 
 	@Override
 	protected void applySettings() {
 		super.applySettings();
 		widget.setDisplayMode(appMode, selectedDisplayMode);
+		widget.setDisplayPriority(appMode, selectedDisplayPriority);
 	}
-
 }

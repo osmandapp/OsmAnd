@@ -8,6 +8,8 @@ import static net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidg
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -17,10 +19,12 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.widget.TextViewCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.containers.PaintedText;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -40,40 +44,38 @@ import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoCalculator.DestinationInfo;
 import net.osmand.plus.views.mapwidgets.widgetstates.RouteInfoWidgetState;
+import net.osmand.plus.widgets.MultiTextViewEx;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel, ISupportWidgetResizing, ISupportMultiRow {
 
 	private final RouteInfoWidgetState widgetState;
 
-	private boolean isFullRow;
 	private TextState textState;
 	private final RouteInfoCalculator calculator;
 	private List<DestinationInfo> cachedRouteInfo;
 	private RouteInfoDisplayMode cachedDisplayMode;
-	private int cachedContentLayoutId;
+	private DisplayPriority cachedDisplayPriority;
 	private Integer cachedMetricSystem;
 	private boolean forceUpdate = false;
+	private boolean hasEnoughWidth;
+	private boolean hasSecondaryData;
 
 	// views
-	private View buttonTappableArea;
-	private View buttonBody;
-	private TextView tvPrimaryValue1;
-	private TextView tvSecondaryValue1;
-	private TextView tvTertiaryValue1;
-	private View secondaryBlock;
-	private TextView tvPrimaryValue2;
-	private TextView tvSecondaryValue2;
-	private TextView tvTertiaryValue2;
-	private View blocksDivider;
+	private MultiTextViewEx tvPrimaryLine1;
+	private MultiTextViewEx tvSecondaryLine1;
+	private TextView tvPrimaryLine2;
+	private TextView tvSecondaryLine2;
 
 	public RouteInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
-			@Nullable WidgetsPanel panel) {
+	                       @Nullable WidgetsPanel panel) {
 		super(mapActivity, ROUTE_INFO, customId, panel);
 		widgetState = new RouteInfoWidgetState(app, customId);
 		calculator = new RouteInfoCalculator(mapActivity);
@@ -89,19 +91,10 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	@LayoutRes
 	protected int getContentLayoutId() {
-		WidgetSize selectedSize = widgetState.getWidgetSizePref().get();
-		return switch (selectedSize) {
-			case SMALL -> isFullRow
-					? isSecondaryDataAvailable()
-					? R.layout.widget_route_information_small_duo
-					: R.layout.widget_route_information_small
-					: R.layout.widget_route_information_small_half;
-			case MEDIUM -> isFullRow
-					? R.layout.widget_route_information_medium
-					: R.layout.widget_route_information_medium_half;
-			case LARGE -> isFullRow
-					? R.layout.widget_route_information_large
-					: R.layout.widget_route_information_large_half;
+		return switch (getWidgetSize()) {
+			case SMALL -> R.layout.widget_route_information_small;
+			case MEDIUM -> R.layout.widget_route_information_medium;
+			case LARGE -> R.layout.widget_route_information_large;
 		};
 	}
 
@@ -109,48 +102,60 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		LinearLayout container = (LinearLayout) view;
 		container.removeAllViews();
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
-		cachedContentLayoutId = getContentLayoutId();
-		inflater.inflate(cachedContentLayoutId, container);
+		inflater.inflate(getContentLayoutId(), container);
 		collectViews();
 		if (textState != null) {
 			view.setBackgroundResource(textState.widgetBackgroundId);
 			updateNavigationButtonBg();
 		}
-		updateWidgetView();
+		updateWidgetRow();
 
+		View buttonTappableArea = view.findViewById(R.id.button_tappable_area);
 		buttonTappableArea.setOnClickListener(v -> mapActivity.getMapActions().doRoute());
 
 		view.setOnLongClickListener(v -> {
 			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode);
 			return true;
 		});
+
+		WidgetSize size = getWidgetSize();
+		boolean useSingleLine = (hasEnoughWidth && !hasSecondaryData) || size == WidgetSize.SMALL;
+		tvPrimaryLine1.setGravity(Gravity.START | (useSingleLine ? Gravity.CENTER_VERTICAL : Gravity.TOP));
+
+		int stepSize = AndroidUtils.spToPx(app, 1);
+		int minTextSize = AndroidUtils.spToPx(app, 16);
+		int maxTextSize = AndroidUtils.spToPx(app, switch (size) {
+			case LARGE -> useSingleLine ? 60 : 36;
+			case MEDIUM -> useSingleLine ? 36 : 30;
+			case SMALL -> hasEnoughWidth ? 24 : 20;
+		});
+		TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+				tvPrimaryLine1, minTextSize, maxTextSize, stepSize, TypedValue.COMPLEX_UNIT_PX
+		);
+
+		AndroidUiHelper.setVisibility(!useSingleLine, tvSecondaryLine1);
+
+		boolean secondaryBlockVisible = hasSecondaryData && hasEnoughWidth;
+		View blocksDivider = view.findViewById(R.id.blocks_divider);
+		View secondaryBlock = view.findViewById(R.id.secondary_block);
+		AndroidUiHelper.setVisibility(secondaryBlockVisible, blocksDivider, secondaryBlock);
 	}
 
 	private void collectViews() {
-		buttonTappableArea = view.findViewById(R.id.button_tappable_area);
-		buttonBody = view.findViewById(R.id.button_body);
-		blocksDivider = view.findViewById(R.id.blocks_divider);
-
-		// Initialization of primary block elements
-		tvPrimaryValue1 = view.findViewById(R.id.primary_value_1);
-		tvSecondaryValue1 = view.findViewById(R.id.secondary_value_1);
-		tvTertiaryValue1 = view.findViewById(R.id.tertiary_value_1);
-
-		// Initialization of secondary block elements
-		secondaryBlock = view.findViewById(R.id.secondary_block);
-		tvPrimaryValue2 = view.findViewById(R.id.primary_value_2);
-		tvSecondaryValue2 = view.findViewById(R.id.secondary_value_2);
-		tvTertiaryValue2 = view.findViewById(R.id.tertiary_value_2);
+		tvPrimaryLine1 = view.findViewById(R.id.primary_line_1);
+		tvSecondaryLine1 = view.findViewById(R.id.secondary_line_1);
+		tvPrimaryLine2 = view.findViewById(R.id.primary_line_2);
+		tvSecondaryLine2 = view.findViewById(R.id.secondary_line_2);
 	}
 
 	@Override
-	public void updateValueAlign(boolean fullRow) {
-	}
-
-	@Override
-	public void updateFullRowState(boolean fullRow) {
-		if (isFullRow != fullRow) {
-			isFullRow = fullRow;
+	public void updateFullRowState(int widgetsCount) {
+		if (widgetsCount == 0) return;
+		int screenWidth = AndroidUtils.getScreenWidth(mapActivity);
+		int widgetWidth = screenWidth / widgetsCount;
+		boolean hasEnoughWidth = widgetWidth >= AndroidUtils.dpToPx(app, 240);
+		if (this.hasEnoughWidth != hasEnoughWidth) {
+			this.hasEnoughWidth = hasEnoughWidth;
 			recreateView();
 			if (textState != null) {
 				updateColors(textState);
@@ -166,7 +171,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		Drawable selected = AppCompatResources.getDrawable(app, rippleDrawableId);
 
 		Drawable drawable = UiUtilities.getLayeredIcon(normal, selected);
-		AndroidUtils.setBackground(buttonBody, drawable);
+		AndroidUtils.setBackground(view.findViewById(R.id.button_body), drawable);
 	}
 
 	@Override
@@ -175,9 +180,10 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void updateInfoInternal() {
-		if (cachedContentLayoutId != getContentLayoutId()) {
-			// Recreating the widget is necessary because small widget size uses
-			// different layouts depending on the number of route points.
+		boolean hasSecondaryData = hasSecondaryData();
+		if (this.hasSecondaryData != hasSecondaryData) {
+			this.hasSecondaryData = hasSecondaryData;
+			// Call recreate view to trigger layout changes
 			recreateView();
 			return;
 		}
@@ -196,50 +202,77 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void updateRouteInformation() {
-		List<DestinationInfo> calculatedRouteInfo = calculator.calculateRouteInformation();
-		if (Algorithms.isEmpty(calculatedRouteInfo)) {
+		ApplicationMode appMode = settings.getApplicationMode();
+		DisplayPriority priority = getDisplayPriority(appMode);
+
+		List<DestinationInfo> routeInfo = calculator.calculateRouteInformation(priority);
+		if (Algorithms.isEmpty(routeInfo)) {
 			updateVisibility(false);
 			return;
 		}
 		boolean visibilityChanged = updateVisibility(true);
 
-		if (!forceUpdate && !visibilityChanged && !isUpdateNeeded(calculatedRouteInfo)) {
+		if (!forceUpdate && !visibilityChanged && !isUpdateNeeded(routeInfo)) {
 			return;
 		}
-		cachedRouteInfo = calculatedRouteInfo;
+		cachedRouteInfo = routeInfo;
 
-		RouteInfoDisplayMode primaryDisplayMode = getDisplayMode(settings.getApplicationMode());
-		RouteInfoDisplayMode[] orderedDisplayModes = RouteInfoDisplayMode.values(primaryDisplayMode);
+		RouteInfoDisplayMode primaryMode = getDisplayMode(appMode);
+		RouteInfoDisplayMode[] orderedModes = RouteInfoDisplayMode.values(primaryMode);
 
-		updatePrimaryBlock(cachedRouteInfo.get(0), orderedDisplayModes);
+		updatePrimaryBlock(cachedRouteInfo.get(0), orderedModes);
 
-		if (secondaryBlock != null) {
-			boolean isSecondaryDataAvailable = isSecondaryDataAvailable();
-			AndroidUiHelper.setVisibility(isSecondaryDataAvailable, blocksDivider, secondaryBlock);
-
-			if (isSecondaryDataAvailable) {
-				updateSecondaryBlock(cachedRouteInfo.get(1), orderedDisplayModes);
-			}
+		if (hasSecondaryData) {
+			updateSecondaryBlock(cachedRouteInfo.get(1), orderedModes);
 		}
 		forceUpdate = false;
 	}
 
 	private void updatePrimaryBlock(@NonNull DestinationInfo destinationInfo,
-			@NonNull RouteInfoDisplayMode[] modes) {
-		Map<RouteInfoDisplayMode, String> displayData = prepareDisplayData(destinationInfo);
+	                                @NonNull RouteInfoDisplayMode[] modes) {
+		WidgetSize size = getWidgetSize();
+		int primaryColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+		int secondaryColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
 
-		tvPrimaryValue1.setText(displayData.get(modes[0]));
-		tvSecondaryValue1.setText(displayData.get(modes[1]));
-		tvTertiaryValue1.setText(displayData.get(modes[2]));
+		Map<RouteInfoDisplayMode, String> data = prepareDisplayData(destinationInfo);
+		String value1 = Objects.requireNonNull(data.get(modes[0]));
+		String value2 = Objects.requireNonNull(data.get(modes[1]));
+		String value3 = Objects.requireNonNull(data.get(modes[2]));
+
+		List<PaintedText> primaryLineText = new ArrayList<>();
+		List<PaintedText> secondaryLineText = new ArrayList<>();
+		primaryLineText.add(new PaintedText(value1, primaryColor));
+		if (!hasEnoughWidth) {
+			if (size == WidgetSize.SMALL) {
+				primaryLineText.add(new PaintedText(value2, primaryColor));
+				primaryLineText.add(new PaintedText(value3, secondaryColor));
+			} else {
+				secondaryLineText.add(new PaintedText(value2, primaryColor));
+				secondaryLineText.add(new PaintedText(value3, secondaryColor));
+			}
+		} else if (hasSecondaryData) {
+			primaryLineText.add(new PaintedText(value2, primaryColor));
+			if (size == WidgetSize.SMALL) {
+				primaryLineText.add(new PaintedText(value3, secondaryColor));
+			} else {
+				secondaryLineText.add(new PaintedText(value3, secondaryColor));
+			}
+		} else {
+			primaryLineText.add(new PaintedText(value2, primaryColor));
+			primaryLineText.add(new PaintedText(value3, secondaryColor));
+		}
+		tvPrimaryLine1.setMultiText(primaryLineText);
+		if (tvSecondaryLine1 != null) {
+			tvSecondaryLine1.setMultiText(secondaryLineText);
+		}
 	}
 
 	private void updateSecondaryBlock(@NonNull DestinationInfo destinationInfo,
-			@NonNull RouteInfoDisplayMode[] modes) {
-		Map<RouteInfoDisplayMode, String> displayData = prepareDisplayData(destinationInfo);
+	                                  @NonNull RouteInfoDisplayMode[] modes) {
+		Map<RouteInfoDisplayMode, String> data = prepareDisplayData(destinationInfo);
 
-		tvPrimaryValue2.setText(displayData.get(modes[0]));
-		tvSecondaryValue2.setText(displayData.get(modes[1]));
-		tvTertiaryValue2.setText(displayData.get(modes[2]));
+		tvPrimaryLine2.setText(data.get(modes[0]));
+		tvSecondaryLine2.setText(data.get(modes[1]));
 	}
 
 	@NonNull
@@ -263,10 +296,21 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 			cachedDisplayMode = displayMode;
 			return true;
 		}
-		if (Algorithms.isEmpty(cachedRouteInfo) || isDataChanged(cachedRouteInfo.get(0), routeInfo.get(0))) {
+		DisplayPriority displayPriority = widgetState.getDisplayPriority();
+		if (cachedDisplayPriority != displayPriority) {
+			cachedDisplayPriority = displayPriority;
 			return true;
 		}
-		return cachedRouteInfo.size() > 1 && isDataChanged(cachedRouteInfo.get(1), routeInfo.get(1));
+
+		if (Algorithms.isEmpty(cachedRouteInfo) || cachedRouteInfo.size() != routeInfo.size()) {
+			return true;
+		}
+		for (int i = 0; i < routeInfo.size(); i++) {
+			if (isDataChanged(cachedRouteInfo.get(i), routeInfo.get(i))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean isDataChanged(@NonNull DestinationInfo i1, @NonNull DestinationInfo i2) {
@@ -285,19 +329,24 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	@Override
 	public boolean updateVisibility(boolean visible) {
 		if (super.updateVisibility(visible)) {
-			updateWidgetView();
+			updateWidgetRow();
 			return true;
 		}
 		return false;
 	}
 
-	public void updateWidgetView() {
+	public void updateWidgetRow() {
 		app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
 	}
 
 	@Override
 	public boolean allowResize() {
 		return true;
+	}
+
+	@NonNull
+	public WidgetSize getWidgetSize() {
+		return getWidgetSizePref().get();
 	}
 
 	@NonNull
@@ -313,7 +362,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		updateInfoInternal();
 	}
 
-	private boolean isSecondaryDataAvailable() {
+	private boolean hasSecondaryData() {
 		return cachedRouteInfo != null && cachedRouteInfo.size() > 1;
 	}
 
@@ -323,8 +372,18 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	public void setDisplayMode(@NonNull ApplicationMode appMode,
-			@NonNull RouteInfoDisplayMode displayMode) {
+	                           @NonNull RouteInfoDisplayMode displayMode) {
 		widgetState.setDisplayMode(appMode, displayMode);
+	}
+
+	@NonNull
+	public DisplayPriority getDisplayPriority(@NonNull ApplicationMode appMode) {
+		return widgetState.getDisplayPriority(appMode);
+	}
+
+	public void setDisplayPriority(@NonNull ApplicationMode appMode,
+	                               @NonNull DisplayPriority displayPriority) {
+		widgetState.setDisplayPriority(appMode, displayPriority);
 	}
 
 	@NonNull
