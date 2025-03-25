@@ -4988,4 +4988,25 @@
     <string name="poi_network_rcn">Rutas regionales de ciclismo (RCN)</string>
     <string name="poi_network_lcn">Rutas locales de ciclismo (LCN)</string>
     <string name="poi_network_ncn">Rutas nacionales de ciclismo (NCN)</string>
+    <string name="poi_osmwiki">Sitios populares (Wikipedia)</string>
+    <string name="poi_hindu_temple">Templo hindú</string>
+    <string name="poi_synagogue">Sinagoga</string>
+    <string name="poi_catholic_church">Iglesia católica</string>
+    <string name="poi_lutheran_church">Iglesia luterana</string>
+    <string name="poi_protestant_church">Iglesia protestante</string>
+    <string name="poi_anglican_church">Iglesia anglicana</string>
+    <string name="poi_presbyterian_church">Iglesia presbiteriana</string>
+    <string name="poi_access_main_tag">Acceso</string>
+    <string name="poi_orthodox_church">Iglesia ortodoxa</string>
+    <string name="poi_pentecostal_church">Iglesia pentecostal</string>
+    <string name="poi_shinto_shrine">Santuario de Shinto</string>
+    <string name="poi_mosque">Mezquita</string>
+    <string name="poi_methodist_church">Iglesia metodista</string>
+    <string name="poi_roman_catholic_church">Iglesia católica romana</string>
+    <string name="poi_jehovahs_witness_kingdom_hall">Salón del Reino de los Testigos de Jehová</string>
+    <string name="poi_greek_orthodox_church">Iglesia ortodoxa griega</string>
+    <string name="poi_evangelical_church">Iglesia evangélica</string>
+    <string name="poi_russian_orthodox_church">Iglesia ortodoxa rusa</string>
+    <string name="poi_baptist_church">Iglesia Bautista</string>
+    <string name="poi_buddhist_temple">Templo budista</string>
 </resources>
