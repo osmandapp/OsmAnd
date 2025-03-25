@@ -816,7 +816,11 @@ public class ResourceManager {
 			double leftLongitude, double bottomLatitude,
 			double rightLongitude, int zoom, boolean includeTravel,
 			ResultMatcher<Amenity> matcher) {
-		Map<Long, Amenity> liveAmenities = new HashMap<>(); // live-updates
+
+		Set<Long> openAmenities = new HashSet<>();
+		Set<Long> closedAmenities = new HashSet<>();
+		List<Amenity> actualAmenities = new ArrayList<>();
+
 		searchAmenitiesInProgress = true;
 		try {
 			boolean isEmpty = filter.isEmpty();
@@ -831,27 +835,7 @@ public class ResourceManager {
 
 				List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel);
 
-				// Read World base maps before regions.
 				for (AmenityIndexRepository repo : repos) {
-					if (repo.isWorldMap()) {
-						if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
-							List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
-									zoom, filter, additionalFilter, matcher);
-							if (foundAmenities != null) {
-								iterateLiveAmenities(foundAmenities, liveAmenities);
-							}
-						}
-					}
-				}
-
-				// ResourceManager.getAmenityRepositories() returns OBF files list in Z-A order.
-				// Live updates require A-Z order, so use reverted iterator as the easiest way.
-				ListIterator<AmenityIndexRepository> reversedRepos = repos.listIterator(repos.size());
-				while (reversedRepos.hasPrevious()) {
-					AmenityIndexRepository repo = reversedRepos.previous();
-					if (repo.isWorldMap()) {
-						continue;
-					}
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;
@@ -860,27 +844,24 @@ public class ResourceManager {
 						List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
 								zoom, filter, additionalFilter, matcher);
 						if (foundAmenities != null) {
-							iterateLiveAmenities(foundAmenities, liveAmenities);
+							for (Amenity amenity : foundAmenities) {
+								Long id = amenity.getId();
+								if (amenity.isClosed()) {
+									closedAmenities.add(id);
+								} else if (!closedAmenities.contains(id)) {
+									if (openAmenities.add(id)) {
+										actualAmenities.add(amenity);
+									}
+								}
+							}
 						}
 					}
-
 				}
 			}
 		} finally {
 			searchAmenitiesInProgress = false;
 		}
-		return new ArrayList<>(liveAmenities.values());
-	}
-
-	private void iterateLiveAmenities(@NonNull List<Amenity> foundAmenities,
-	                                  @NonNull Map<Long, Amenity> liveAmenities) {
-		for (Amenity amenity : foundAmenities) {
-			if (amenity.isClosed()) {
-				liveAmenities.remove(amenity.getId());
-			} else {
-				liveAmenities.put(amenity.getId(), amenity);
-			}
-		}
+		return actualAmenities;
 	}
 
 	@NonNull
