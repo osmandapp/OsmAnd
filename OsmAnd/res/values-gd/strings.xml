@@ -470,4 +470,8 @@
     <string name="vector_data">Mapaichean-bheactor far-loidhne</string>
     <string name="search_offline_clear_search">Lorg ùr</string>
     <string name="internet_connection_required_for_online_route">Chan obraich seòladaireachd far-loidhne.</string>
+    <string name="row_height">Àirde-sreatha</string>
+    <string name="choose_location">Roghnaich àite</string>
+    <string name="equator">Crios-meadhain</string>
+    <string name="prime_meridian">Prìomh-mheadhan-loidhne</string>
 </resources>
