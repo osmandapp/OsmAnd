@@ -5008,4 +5008,8 @@
     <string name="poi_protestant_church">Протестантска црква</string>
     <string name="poi_anglican_church">Англиканска црква</string>
     <string name="poi_methodist_church">Методистичка црква</string>
+    <string name="poi_pentecostal_church">Пентекостална црква</string>
+    <string name="poi_access_main_tag">Приступ</string>
+    <string name="poi_evangelical_church">Евангелистичка црква</string>
+    <string name="poi_presbyterian_church">Презбитеријанска црква</string>
 </resources>
