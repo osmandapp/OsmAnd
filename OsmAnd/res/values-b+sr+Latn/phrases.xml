@@ -4988,4 +4988,25 @@
     <string name="poi_route_activity_type_hiking">Planinarske rute</string>
     <string name="poi_route_activity_type_walking">Pešačke rute</string>
     <string name="poi_route_activity_type_mountain_biking">MTB rute (brdski bicikl)</string>
+    <string name="poi_osmwiki">Popularna mesta (Vikipedija)</string>
+    <string name="poi_baptist_church">Baptistička crkva</string>
+    <string name="poi_catholic_church">Katolička crkva</string>
+    <string name="poi_greek_orthodox_church">Grčka pravoslavna crkva</string>
+    <string name="poi_methodist_church">Metodistička crkva</string>
+    <string name="poi_buddhist_temple">Budistički hram</string>
+    <string name="poi_roman_catholic_church">Rimokatolička crkva</string>
+    <string name="poi_lutheran_church">Luteranska crkva</string>
+    <string name="poi_jehovahs_witness_kingdom_hall">Dvorana Kraljevstva Jehovinih svedoka</string>
+    <string name="poi_hindu_temple">Hinduistički hram</string>
+    <string name="poi_russian_orthodox_church">Ruska pravoslavna crkva</string>
+    <string name="poi_mosque">Džamija</string>
+    <string name="poi_access_main_tag">Pristup</string>
+    <string name="poi_orthodox_church">Pravoslavna crkva</string>
+    <string name="poi_shinto_shrine">Šintoistički hram</string>
+    <string name="poi_anglican_church">Anglikanska crkva</string>
+    <string name="poi_synagogue">Sinagoga</string>
+    <string name="poi_pentecostal_church">Pentekostalna crkva</string>
+    <string name="poi_presbyterian_church">Prezbiterijanska crkva</string>
+    <string name="poi_protestant_church">Protestantska crkva</string>
+    <string name="poi_evangelical_church">Evangelistička crkva</string>
 </resources>
