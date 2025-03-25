@@ -448,19 +448,11 @@ public class QuickSearchListItem {
 		Object object = searchResult.object;
 		switch (searchResult.objectType) {
 			case POI:
-				Amenity a = (Amenity) object;
-				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
+				Amenity freshAmenity = getFreshAmenity((Amenity) object, app, lang, transliterate);
+				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(freshAmenity, lang, transliterate);
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
-				pointDescription.setIconName(getAmenityIconName(app, a));
-
-				if ("basemap".equals(a.getRegionName())) {
-					Amenity freshAmenity = app.getSearchUICore().findAmenity(a.getName(lang),
-							a.getLocation().getLatitude(), a.getLocation().getLongitude(), lang, transliterate);
-					if (freshAmenity != null) {
-						object = freshAmenity;
-					}
-				}
-
+				pointDescription.setIconName(getAmenityIconName(app, freshAmenity));
+				object = freshAmenity;
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
@@ -540,6 +532,19 @@ public class QuickSearchListItem {
 				break;
 		}
 		return new Pair<>(pointDescription, object);
+	}
+
+	@NonNull
+	private static Amenity getFreshAmenity(@NonNull Amenity amenity, @NonNull OsmandApplication app,
+	                                       @NonNull String lang, boolean transliterate) {
+		if ("basemap".equals(amenity.getRegionName())) {
+			Amenity freshAmenity = app.getSearchUICore().findAmenity(amenity.getName(lang),
+					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), lang, transliterate);
+			if (freshAmenity != null) {
+				return freshAmenity;
+			}
+		}
+		return amenity;
 	}
 
 	private static Drawable getIcon(@NonNull OsmandApplication app, @DrawableRes int iconId) {
