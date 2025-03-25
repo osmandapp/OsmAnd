@@ -5604,4 +5604,8 @@
     <string name="shared_string_online_only">Sólo en línea</string>
     <string name="shared_string_offline_only">Sólo desconectado</string>
     <string name="row_height">Altura de la fila</string>
+    <string name="intermediate_first">Primer intermedio</string>
+    <string name="destination_first">Primer destino</string>
+    <string name="display_priority">Prioridad de vista</string>
+    <string name="poi_source">Orígen del PDI</string>
 </resources>
