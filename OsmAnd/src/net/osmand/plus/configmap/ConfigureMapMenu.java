@@ -666,7 +666,6 @@ public class ConfigureMapMenu {
 		return new MapLanguageItemAndDialog(mapLanguageItem, mapLanguageDialog);
 	}
 
-	// FK-TODO: refactor
 	private Optional<ItemAndHideDialog> createProperties(final List<RenderingRuleProperty> customRules,
 														 final @StringRes int strId,
 														 final @DrawableRes int icon,

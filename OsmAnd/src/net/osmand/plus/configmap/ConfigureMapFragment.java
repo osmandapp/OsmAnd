@@ -422,11 +422,15 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 							@Override
 							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
-								return DetailsBottomSheet.PreferenceFragment.class;
+								return createPreferenceFragment().getClass();
 							}
 
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return createPreferenceFragment();
+							}
+
+							private static DetailsBottomSheet.PreferenceFragment createPreferenceFragment() {
 								return new DetailsBottomSheet.PreferenceFragment();
 							}
 
@@ -440,11 +444,15 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 							@Override
 							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
-								return TransportLinesFragment.PreferenceFragment.class;
+								return createPreferenceFragment().getClass();
 							}
 
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return createPreferenceFragment();
+							}
+
+							private static TransportLinesFragment.PreferenceFragment createPreferenceFragment() {
 								return new TransportLinesFragment.PreferenceFragment();
 							}
 
@@ -458,11 +466,15 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 							@Override
 							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
-								return SelectMapStyleBottomSheetDialogFragment.PreferenceFragment.class;
+								return createPreferenceFragment().getClass();
 							}
 
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return createPreferenceFragment();
+							}
+
+							private static SelectMapStyleBottomSheetDialogFragment.PreferenceFragment createPreferenceFragment() {
 								return new SelectMapStyleBottomSheetDialogFragment.PreferenceFragment();
 							}
 
@@ -476,11 +488,15 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 							@Override
 							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
-								return CustomAlert.SingleSelectionDialogFragment.PreferenceFragment.class;
+								return createPreferenceFragment().getClass();
 							}
 
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return createPreferenceFragment();
+							}
+
+							private static CustomAlert.SingleSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
 								return new CustomAlert.SingleSelectionDialogFragment.PreferenceFragment();
 							}
 
@@ -494,11 +510,15 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 							@Override
 							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
-								return ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment.class;
+								return createPreferenceFragment().getClass();
 							}
 
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return createPreferenceFragment();
+							}
+
+							private static ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment createPreferenceFragment() {
 								return new ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment();
 							}
 
@@ -520,7 +540,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							// FK-TODO: use this scheme in almost all PreferenceFragmentHandlers
 							private static CustomAlert.MultiSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
 								return new CustomAlert.MultiSelectionDialogFragment.PreferenceFragment();
 							}
