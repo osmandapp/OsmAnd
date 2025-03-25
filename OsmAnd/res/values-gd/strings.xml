@@ -490,4 +490,5 @@
     <string name="obd_plugin_name">Meatraigean a\' charbaid</string>
     <string name="add_widget_below">Cuir cleas-uidheam gu h-ìosal</string>
     <string name="delete_widget">Dubh às a\' chleas-uidheam?</string>
+    <string name="add_widget_above">Cuir cleas-uidheam gu h-àrd</string>
 </resources>
