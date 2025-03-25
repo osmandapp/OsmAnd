@@ -5765,4 +5765,8 @@
     <string name="shared_string_online_only">Kun online</string>
     <string name="add_widget">Tilføj modul</string>
     <string name="row_height">Rækkehøjde</string>
+    <string name="intermediate_first">Mellemliggende først</string>
+    <string name="destination_first">Destination først</string>
+    <string name="display_priority">Prioritet for visning</string>
+    <string name="poi_source">IP-kilde</string>
 </resources>
