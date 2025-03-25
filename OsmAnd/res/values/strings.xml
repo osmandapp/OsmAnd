@@ -10,7 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="poi_source">POI Source</string>
     <string name="intermediate_first">Intermediate first</string>
     <string name="destination_first">Destination first</string>
     <string name="display_priority">Display priority</string>

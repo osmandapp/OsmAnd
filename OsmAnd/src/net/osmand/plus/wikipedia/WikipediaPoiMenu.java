@@ -75,7 +75,7 @@ public class WikipediaPoiMenu {
 					app.runInUIThread(() -> plugin.toggleWikipediaPoi(!enabled, null));
 				} else if (itemId == languageActionStringId) {
 					SelectWikiLanguagesBottomSheet.showInstance(activity, true);
-				} else if (itemId == R.string.data_source) {
+				} else if (itemId == R.string.poi_source) {
 					showDataSourceDialog(uiAdapter, view, item);
 				} else if (itemId == R.string.show_image_previews) {
 					app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.set(isChecked);
@@ -100,7 +100,7 @@ public class WikipediaPoiMenu {
 		} else {
 			toggleIconColorId = INVALID_ID;
 		}
-		String summary = activity.getString(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
+		String summary = activity.getString(enabled ? R.string.shared_string_on : R.string.shared_string_off);
 		adapter.addItem(new ContextMenuItem(null)
 				.setTitle(toggleAction)
 				.setDescription(summary)
@@ -126,11 +126,12 @@ public class WikipediaPoiMenu {
 
 			DataSourceType sourceType = app.getSettings().WIKI_DATA_SOURCE_TYPE.get();
 			boolean online = sourceType == ONLINE;
-			summary = app.getString(online ? R.string.shared_string_online : R.string.shared_string_offline);
+			summary = app.getString(online ? R.string.shared_string_online_only : R.string.shared_string_offline_only);
 			adapter.addItem(new ContextMenuItem(null)
-					.setTitleId(R.string.data_source, activity)
-					.setLayout(R.layout.list_item_single_line_descrition_narrow)
+					.setTitleId(R.string.poi_source, activity)
+					.setLayout(R.layout.list_item_with_selector)
 					.setIcon(sourceType.iconId)
+					.setSecondaryIcon(R.drawable.ic_action_arrow_down)
 					.setColor(app, online ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID)
 					.setDescription(summary)
 					.setListener(listener));
