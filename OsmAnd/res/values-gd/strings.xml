@@ -486,4 +486,6 @@
     <string name="shared_string_widget">Cleas-uidheam</string>
     <string name="add_widget">Cuir cleas-uidheam</string>
     <string name="map_widget_route_information">Fiosrachadh slighe</string>
+    <string name="obd_widget_group">Meatraigean a\' charbaid</string>
+    <string name="obd_plugin_name">Meatraigean a\' charbaid</string>
 </resources>
