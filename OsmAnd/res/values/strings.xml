@@ -10,7 +10,6 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-	<string name="wikidata_id_pattern">Q%s</string>
 	<string name="row_height">Row height</string>
 	<string name="add_widget">Add widget</string>
     <string name="shared_string_online_only">Online Only</string>
