@@ -268,7 +268,11 @@ public class CustomAlert {
 				.collect(
 						Collectors.toMap(
 								CharSequence::toString,
-								Function.identity()));
+								Function.identity(),
+								(item1, item2) -> {
+									throw new IllegalStateException();
+								},
+								LinkedHashMap::new));
 	}
 
 	// FK-TODO: DRY with SingleSelectionDialogFragment
