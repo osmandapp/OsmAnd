@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
@@ -634,7 +635,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	@Override
 	public ResultMatcher<Amenity> wrapResultMatcher(@Nullable ResultMatcher<Amenity> matcher) {
 		PoiFilterUtils.AmenityNameFilter nm = getNameFilter();
-		Set<String> closedAmenities = new HashSet<>();
+		Set<String> searchedPois = new TreeSet<>();
 		return new PoiUIFilterResultMatcher<Amenity>() {
 
 			@Override
@@ -648,13 +649,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			public boolean publish(Amenity a) {
 				if (nm.accept(a)) {
 					if (matcher == null || matcher.publish(a)) {
-						String amenityTypeId = a.getType().getKeyName() + a.getId();
-						if (a.isClosed()) {
-							closedAmenities.add(amenityTypeId);
+						String poiID = a.getType().getKeyName() + "_" + a.getId();
+						if (!searchedPois.add(poiID)) {
 							return false;
-						} else {
-							return !closedAmenities.contains(amenityTypeId);
 						}
+						return !a.isClosed();
 					}
 				}
 				return false;
