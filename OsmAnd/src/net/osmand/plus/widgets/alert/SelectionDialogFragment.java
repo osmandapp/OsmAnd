@@ -12,15 +12,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import net.osmand.plus.configmap.ViewOfSettingHighlighter;
 
 import org.threeten.bp.Duration;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
@@ -83,5 +88,32 @@ class SelectionDialogFragment extends DialogFragment implements SettingHighlight
 
 	private List<String> getKeys() {
 		return new ArrayList<>(itemByKey.keySet());
+	}
+
+	public static class PreferenceFragment<F extends SelectionDialogFragment> extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<F> {
+
+		private F selectionDialogFragment;
+
+		public F getPrincipal() {
+			return selectionDialogFragment;
+		}
+
+		@Override
+		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final F selectionDialogFragment) {
+			this.selectionDialogFragment = selectionDialogFragment;
+		}
+
+		@Override
+		public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
+			setPreferenceScreen(asPreferenceScreen(asPreferences(selectionDialogFragment.itemByKey)));
+		}
+
+		private Collection<Preference> asPreferences(final Map<String, CharSequence> itemByKey) {
+			return new TitleByKey2PreferencesConverter(getContext()).asPreferences(itemByKey);
+		}
+
+		private PreferenceScreen asPreferenceScreen(final Collection<Preference> preferences) {
+			return new PreferenceScreenFactory(this).asPreferenceScreen(preferences);
+		}
 	}
 }
