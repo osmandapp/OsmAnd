@@ -33,10 +33,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
-import net.osmand.plus.widgets.alert.PreferenceScreenFactory;
-import net.osmand.plus.widgets.alert.TitleByKey2PreferencesConverter;
+import net.osmand.plus.widgets.alert.*;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
@@ -377,7 +374,7 @@ public class ConfigureMapDialogs {
 		}
 	}
 
-	public static CustomAlert.SingleSelectionDialogFragment createRenderingPropertyDialog(
+	public static SingleSelectionDialogFragment createRenderingPropertyDialog(
 			final @NonNull MapActivity activity,
 			final @NonNull RenderingRuleProperty property,
 			final @NonNull ContextMenuItem item,
@@ -422,7 +419,7 @@ public class ConfigureMapDialogs {
 		}
 	}
 
-	public static Optional<CustomAlert.MultiSelectionDialogFragment> createPreferencesDialogIfActivityNotDestroyed(
+	public static Optional<MultiSelectionDialogFragment> createPreferencesDialogIfActivityNotDestroyed(
 			final ContextMenuItem item,
 			final MapActivity activity,
 			final String category,
@@ -434,7 +431,7 @@ public class ConfigureMapDialogs {
 				Optional.empty();
 	}
 
-	private static CustomAlert.MultiSelectionDialogFragment createPreferencesDialog(
+	private static MultiSelectionDialogFragment createPreferencesDialog(
 			final ContextMenuItem item,
 			final MapActivity activity,
 			final String category,

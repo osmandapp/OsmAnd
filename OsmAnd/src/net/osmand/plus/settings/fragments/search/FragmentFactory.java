@@ -10,7 +10,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 import java.util.Optional;
 
@@ -42,19 +43,19 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 
 	private static <T extends Fragment> Optional<T> getExistingInstance(final Class<T> fragmentClass, final Optional<PreferenceWithHost> src) {
 		// FK-TODO: folgendes ist absolut unklar programmiert!!!
-		if (CustomAlert.SingleSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
+		if (SingleSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().roadStyleDialog().orElseThrow());
-			} else if (srcProxy instanceof final CustomAlert.SingleSelectionDialogFragment.PreferenceFragment _srcProxy) {
+			} else if (srcProxy instanceof final SingleSelectionDialogFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
-		if (CustomAlert.MultiSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
+		if (MultiSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().hideDialog().orElseThrow());
-			} else if (srcProxy instanceof final CustomAlert.MultiSelectionDialogFragment.PreferenceFragment _srcProxy) {
+			} else if (srcProxy instanceof final MultiSelectionDialogFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}

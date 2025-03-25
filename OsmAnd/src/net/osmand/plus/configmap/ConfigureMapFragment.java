@@ -40,7 +40,8 @@ import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -496,8 +497,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static CustomAlert.SingleSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
-								return new CustomAlert.SingleSelectionDialogFragment.PreferenceFragment();
+							private static SingleSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
+								return new SingleSelectionDialogFragment.PreferenceFragment();
 							}
 
 							@Override
@@ -540,8 +541,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static CustomAlert.MultiSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
-								return new CustomAlert.MultiSelectionDialogFragment.PreferenceFragment();
+							private static MultiSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
+								return new MultiSelectionDialogFragment.PreferenceFragment();
 							}
 
 							@Override

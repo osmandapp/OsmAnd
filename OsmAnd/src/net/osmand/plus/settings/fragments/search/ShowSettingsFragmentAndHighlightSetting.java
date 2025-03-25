@@ -17,7 +17,8 @@ import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.transport.TransportLinesFragment;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -89,7 +90,7 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 					.highlightSetting(selectMapStyleBottomSheetDialogFragment, setting);
 			return true;
 		}
-		if (settingsFragment instanceof final CustomAlert.SingleSelectionDialogFragment singleSelectionDialogFragment) {
+		if (settingsFragment instanceof final SingleSelectionDialogFragment singleSelectionDialogFragment) {
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 			singleSelectionDialogFragment.showNow(mapActivity.getSupportFragmentManager());
 			execute(
@@ -98,7 +99,7 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 					listView -> singleSelectionDialogFragment.getSettingHighlighter().highlightSetting(singleSelectionDialogFragment, setting));
 			return true;
 		}
-		if (settingsFragment instanceof final CustomAlert.MultiSelectionDialogFragment multiSelectionDialogFragment) {
+		if (settingsFragment instanceof final MultiSelectionDialogFragment multiSelectionDialogFragment) {
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 			multiSelectionDialogFragment.showNow(mapActivity.getSupportFragmentManager());
 			execute(

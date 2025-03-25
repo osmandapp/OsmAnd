@@ -57,7 +57,8 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -93,17 +94,17 @@ public class ConfigureMapMenu {
 	public record DialogsAndAdapter(Dialogs dialogs, ContextMenuAdapter adapter) {
 	}
 
-	public record Dialogs(Optional<CustomAlert.SingleSelectionDialogFragment> roadStyleDialog,
+	public record Dialogs(Optional<SingleSelectionDialogFragment> roadStyleDialog,
 						  ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog,
-						  Optional<CustomAlert.MultiSelectionDialogFragment> hideDialog) {
+						  Optional<MultiSelectionDialogFragment> hideDialog) {
 	}
 
 	public record ItemAndDialog(ContextMenuItem item,
-								Optional<CustomAlert.SingleSelectionDialogFragment> dialog) {
+								Optional<SingleSelectionDialogFragment> dialog) {
 	}
 
 	public record ItemAndHideDialog(ContextMenuItem item,
-									Optional<CustomAlert.MultiSelectionDialogFragment> hideDialog) {
+									Optional<MultiSelectionDialogFragment> hideDialog) {
 	}
 
 	private record MapLanguageItemAndDialog(ContextMenuItem item,
@@ -728,7 +729,7 @@ public class ConfigureMapMenu {
 		return Optional.empty();
 	}
 
-	private static Optional<CustomAlert.MultiSelectionDialogFragment> createMultiSelectionDialogFragment(
+	private static Optional<MultiSelectionDialogFragment> createMultiSelectionDialogFragment(
 			final @StringRes int strId,
 			final MapActivity activity,
 			final boolean nightMode,
@@ -832,7 +833,7 @@ public class ConfigureMapMenu {
 						.setDescription(getDescription(property, activity.getMyApplication()))
 						.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
 						.setLayout(R.layout.list_item_single_line_descrition_narrow);
-		final CustomAlert.SingleSelectionDialogFragment dialog = ConfigureMapDialogs.createRenderingPropertyDialog(activity, property, item, nightMode);
+		final SingleSelectionDialogFragment dialog = ConfigureMapDialogs.createRenderingPropertyDialog(activity, property, item, nightMode);
 		item.setListener(
 				new ItemClickListener() {
 
