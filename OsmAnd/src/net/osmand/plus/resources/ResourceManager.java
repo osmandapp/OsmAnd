@@ -774,8 +774,8 @@ public class ResourceManager {
 
 	public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
 		List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
-		List<AmenityIndexRepository> regionalMaps = new ArrayList<>();
 		List<AmenityIndexRepository> baseMaps = new ArrayList<>();
+		List<AmenityIndexRepository> result = new ArrayList<>();
 
 		fileNames.sort(Algorithms.getStringVersionComparator());
 
@@ -789,11 +789,12 @@ public class ResourceManager {
 			if (r != null && r.isWorldMap()) {
 				baseMaps.add(r);
 			} else if (r != null) {
-				regionalMaps.add(r);
+				result.add(r);
 			}
 		}
 
-		return Stream.concat(regionalMaps.stream(), baseMaps.stream()).collect(Collectors.toList());
+		result.addAll(baseMaps);
+		return result;
 	}
 
 	@NonNull

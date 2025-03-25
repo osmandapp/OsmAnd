@@ -448,11 +448,11 @@ public class QuickSearchListItem {
 		Object object = searchResult.object;
 		switch (searchResult.objectType) {
 			case POI:
-				Amenity freshAmenity = getFreshAmenity((Amenity) object, app, lang, transliterate);
-				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(freshAmenity, lang, transliterate);
+				Amenity detailedAmenity = getDetailedAmenity((Amenity) object, app, lang, transliterate);
+				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(detailedAmenity, lang, transliterate);
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
-				pointDescription.setIconName(getAmenityIconName(app, freshAmenity));
-				object = freshAmenity;
+				pointDescription.setIconName(getAmenityIconName(app, detailedAmenity));
+				object = detailedAmenity;
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
@@ -535,8 +535,8 @@ public class QuickSearchListItem {
 	}
 
 	@NonNull
-	private static Amenity getFreshAmenity(@NonNull Amenity amenity, @NonNull OsmandApplication app,
-	                                       @NonNull String lang, boolean transliterate) {
+	private static Amenity getDetailedAmenity(@NonNull Amenity amenity, @NonNull OsmandApplication app,
+	                                          @NonNull String lang, boolean transliterate) {
 		if ("basemap".equals(amenity.getRegionName())) {
 			Amenity freshAmenity = app.getSearchUICore().findAmenity(amenity.getName(lang),
 					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), lang, transliterate);
