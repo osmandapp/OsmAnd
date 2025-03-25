@@ -45,6 +45,7 @@ import net.osmand.util.Algorithms;
 import org.threeten.bp.Duration;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
@@ -446,14 +447,6 @@ public class ConfigureMapDialogs {
 		for (int i = 0; i < prefs.size(); i++) {
 			checkedItems[i] = prefs.get(i).get();
 		}
-		final String[] propertyNames = new String[properties.size()];
-		for (int i = 0; i < properties.size(); i++) {
-			RenderingRuleProperty p = properties.get(i);
-			String propertyName = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(),
-					p.getName());
-			propertyNames[i] = propertyName;
-		}
-
 		final AlertDialogData dialogData =
 				new AlertDialogData(activity, nightMode)
 						.setTitle(category)
@@ -486,11 +479,29 @@ public class ConfigureMapDialogs {
 
 		return CustomAlert.createMultiSelectionDialogFragment(
 				dialogData,
-				propertyNames,
+				getOrderedItemByKey(properties, activity),
 				checkedItems,
 				v -> {
 					final int which = (int) v.getTag();
 					checkedItems[which] = !checkedItems[which];
 				});
+	}
+
+	private static Map<String, CharSequence> getOrderedItemByKey(final List<RenderingRuleProperty> properties,
+																 final Context context) {
+		return properties
+				.stream()
+				.collect(
+						Collectors.toMap(
+								RenderingRuleProperty::getAttrName,
+								property ->
+										AndroidUtils.getRenderingStringPropertyName(
+												context,
+												property.getAttrName(),
+												property.getName()),
+								(item1, item2) -> {
+									throw new IllegalStateException();
+								},
+								LinkedHashMap::new));
 	}
 }

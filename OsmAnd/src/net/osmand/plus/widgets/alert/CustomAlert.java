@@ -36,8 +36,6 @@ import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import org.threeten.bp.Duration;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
@@ -238,14 +236,14 @@ public class CustomAlert {
 
 	public static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
 			final AlertDialogData data,
-			final CharSequence[] items,
+			final Map<String, CharSequence> itemByKey,
 			final boolean[] checkedItems,
 			final View.OnClickListener itemClickListener) {
 		final Builder builder = createAlertDialogBuilder(data);
 		final SelectionDialogAdapter adapter =
 				new SelectionDialogAdapter(
 						data.getContext(),
-						items,
+						itemByKey.values().toArray(new CharSequence[0]),
 						INVALID_ID,
 						checkedItems,
 						data.getControlsColor(),
@@ -255,24 +253,7 @@ public class CustomAlert {
 		builder.setAdapter(adapter, null);
 		final AlertDialog dialog = builder.create();
 		adapter.setDialog(dialog);
-		return new MultiSelectionDialogFragment(
-				dialog,
-				data,
-				getItemByKey(items),
-				adapter);
-	}
-
-	private static Map<String, CharSequence> getItemByKey(final CharSequence[] items) {
-		return Arrays
-				.stream(items)
-				.collect(
-						Collectors.toMap(
-								CharSequence::toString,
-								Function.identity(),
-								(item1, item2) -> {
-									throw new IllegalStateException();
-								},
-								LinkedHashMap::new));
+		return new MultiSelectionDialogFragment(dialog, data, itemByKey, adapter);
 	}
 
 	// FK-TODO: DRY with SingleSelectionDialogFragment
