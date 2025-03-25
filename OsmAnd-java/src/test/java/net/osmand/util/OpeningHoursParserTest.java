@@ -602,7 +602,27 @@ public class OpeningHoursParserTest {
 		System.out.println(hours);
 
 		testAmPm();
+		testComma();
 	}
+	
+	private void testComma() throws ParseException {
+		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.US);
+
+		OpeningHours hours = parseOpenedHours("Mo-Fr 09:00-13:00,Tu 14:00-18:00, Th 14:00-17:00; We \"Nach Vereinbarung\"; Sa,Su,PH closed");
+		System.out.println(hours);
+		testOpened("24.03.2025 10:00", hours, true); // Mo
+		testOpened("24.03.2025 13:30", hours, false);
+		testOpened("24.03.2025 17:50", hours, false);
+		testOpened("25.03.2025 10:00", hours, true); // Tu
+		testOpened("25.03.2025 13:30", hours, false);
+		testOpened("25.03.2025 17:50", hours, true);
+		testInfo("24.03.2025 16:00", hours, "Will open tomorrow at 9:00 AM"); // Mo
+		testInfo("25.03.2025 10:00", hours, "Open till 1:00 PM"); // Tu
+		testInfo("25.03.2025 13:30", hours, "Will open at 2:00 PM");
+		testInfo("25.03.2025 17:50", hours, "Will close at 6:00 PM");
+		testInfo("25.03.2025 18:50", hours, "Will open on 9:00 AM Thu."); // not ok
+	}
+
 
 	private void testAmPm() throws ParseException {
 		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.US);
