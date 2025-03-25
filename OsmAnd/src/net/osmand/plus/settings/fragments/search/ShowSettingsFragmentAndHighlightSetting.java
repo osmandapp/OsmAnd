@@ -98,6 +98,15 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 					listView -> singleSelectionDialogFragment.getSettingHighlighter().highlightSetting(singleSelectionDialogFragment, setting));
 			return true;
 		}
+		if (settingsFragment instanceof final CustomAlert.MultiSelectionDialogFragment multiSelectionDialogFragment) {
+			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
+			multiSelectionDialogFragment.showNow(mapActivity.getSupportFragmentManager());
+			execute(
+					multiSelectionDialogFragment.getListView(),
+					listView -> listView.setSelection(multiSelectionDialogFragment.getIndexedOf(setting)),
+					listView -> multiSelectionDialogFragment.getSettingHighlighter().highlightSetting(multiSelectionDialogFragment, setting));
+			return true;
+		}
 		if (settingsFragment instanceof final ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog) {
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 			mapLanguageDialog.showNow(mapActivity.getSupportFragmentManager(), null);
