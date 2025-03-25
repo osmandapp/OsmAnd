@@ -30,7 +30,7 @@ import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 
-class SelectionDialogFragment extends DialogFragment implements SettingHighlighterProvider {
+public class SelectionDialogFragment extends DialogFragment implements SettingHighlighterProvider {
 
 	private final AlertDialog alertDialog;
 	private final AlertDialogData alertDialogData;
