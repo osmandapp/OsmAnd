@@ -494,4 +494,14 @@
     <string name="show_image_previews">Seall ro-sheallaidhean na h-ìomhaigh</string>
     <string name="shared_string_manual">Leabhar-làimhe</string>
     <string name="choose_location_on_map">Tagh àite air a\' mhapa.</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Slighean sreap</string>
+    <string name="selected_delayed_profile">Pròfil thaghta \"%s\"</string>
+    <string name="connect_new_scanner">Ceangal sganair ùr</string>
+    <string name="ais_address_settings">Seatadh seòlaidh IP</string>
+    <string name="ais_cpa_settings">Seatadh co-cheangailte ri CPA</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Seall slighean sreap</string>
+    <string name="shared_string_default_view">Sealladh bunaiteach</string>
+    <string name="ais_load_data">Luchdaich dàta AIS bho fhaidhle</string>
+    <string name="shared_string_avg_altitude">Àirde cuibheasach</string>
+    <string name="shared_string_avg_speed">Luaths as lugha</string>
 </resources>
