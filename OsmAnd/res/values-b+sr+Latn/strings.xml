@@ -5068,7 +5068,7 @@
     <string name="shared_string_only_missing">Samo nedostajuće</string>
     <string name="auto_25_chars_route_tl_kl">Skreni levo i drži levo</string>
     <string name="auto_25_chars_route_tr_kl">Skreni desno i drži levo</string>
-    <string name="auto_25_chars_route_tu_kr">Uradi polukružno i drži desno</string>
+    <string name="auto_25_chars_route_tu_kr">Uradi polukružno okretanje i drži desno</string>
     <string name="auto_25_chars_route_roundabout_kr">Izađi na %1$d izlaz i drži desno</string>
     <string name="av_notes_photo_widget_desc">Tapni na vidžez za slikanje.</string>
     <string name="av_notes_video_widget_desc">Tapni na vidžet za snimanje videa.</string>
