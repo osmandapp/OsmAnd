@@ -215,7 +215,7 @@
     <string name="compass_on_circles">Combaist air cearcaill</string>
     <string name="circle_settings">Seatadh cearcaill</string>
     <string name="routing_attr_avoid_4wd_only_name">Seachain rathaidean 4x4</string>
-    <string name="av_notes_choose_action_widget_desc">Roghnaich gnìomh.</string>
+    <string name="av_notes_choose_action_widget_desc">Tagh gnìomh.</string>
     <string name="navigation_points">Puingean seòladaireachd</string>
     <string name="calculating_altitude">Ag obrachadh a-mach àrdachadh</string>
     <string name="calculate_online">Obraich a-mach air-loidhne</string>
@@ -471,7 +471,7 @@
     <string name="search_offline_clear_search">Lorg ùr</string>
     <string name="internet_connection_required_for_online_route">Chan obraich seòladaireachd far-loidhne.</string>
     <string name="row_height">Àirde-sreatha</string>
-    <string name="choose_location">Roghnaich àite</string>
+    <string name="choose_location">Tagh àite</string>
     <string name="equator">Crios-meadhain</string>
     <string name="prime_meridian">Prìomh-mheadhan-loidhne</string>
     <string name="point_location">Àite na puinge</string>
@@ -493,4 +493,5 @@
     <string name="add_widget_above">Cuir cleas-uidheam gu h-àrd</string>
     <string name="show_image_previews">Seall ro-sheallaidhean na h-ìomhaigh</string>
     <string name="shared_string_manual">Leabhar-làimhe</string>
+    <string name="choose_location_on_map">Tagh àite air a\' mhapa.</string>
 </resources>
