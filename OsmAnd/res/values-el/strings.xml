@@ -4561,4 +4561,12 @@
     <string name="routing_attr_difficulty_preference_advanced_name">Προηγμένα</string>
     <string name="select_backup_data_descr">Επιλέξτε δεδομένα και φακέλους για δημιουργία αντιγράφων ασφαλείας.</string>
     <string name="backup_now">Αντίγραφο ασφαλείας τώρα</string>
+    <string name="help_article_map_raster_maps_name">Χάρτες Raster (Online / Offline)</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Φωνητικές υποδείξεις / Ειδοποιήσεις</string>
+    <string name="simulation_constant_mode_desc">Η προσομοίωση θα πραγματοποιηθεί με σταθερή επιλεγμένη ταχύτητα.</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Πλοήγηση μέσω δεικτών</string>
+    <string name="simulation_real_mode_desc">Στα ευθύγραμμα τμήματα του δρόμου, η ταχύτητα θα είναι κατά προσέγγιση η μέγιστη επιτρεπόμενη ταχύτητα.\nΣτις διασταυρώσεις, η προσομοίωση θα επιβραδύνει.\nΕπιπλέον κυρώσεις θα εφαρμόζονται σε σήματα κυκλοφορίας, πινακίδες στοπ κ.λπ.</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Οθόνη χάρτη κατά τη διάρκεια της πλοήγησης</string>
+    <string name="simulation_preview_mode_desc">Η ταχύτητα της προσομοίωσης θα είναι μέγιστη σε ευθείες και θα επιβραδύνεται μόνο σε διασταυρώσεις.</string>
+    <string name="help_article_navigation_guidance_name">Καθοδήγηση πλοήγησης</string>
 </resources>
