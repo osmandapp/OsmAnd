@@ -960,6 +960,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		PointDescription getObjectName(Object o);
 
+		default boolean isSecondaryProvider() {
+			return false;
+		}
+
 		default boolean disableSingleTap() {
 			return false;
 		}
