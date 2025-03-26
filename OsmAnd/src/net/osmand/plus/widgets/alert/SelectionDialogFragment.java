@@ -109,7 +109,7 @@ public class SelectionDialogFragment extends DialogFragment implements SettingHi
 		}
 
 		private Collection<Preference> asPreferences(final Map<String, CharSequence> itemByKey) {
-			return new TitleByKey2PreferencesConverter(getContext()).asPreferences(itemByKey);
+			return new TitleByKey2PreferencesConverter(requireContext()).asPreferences(itemByKey);
 		}
 
 		private PreferenceScreen asPreferenceScreen(final Collection<Preference> preferences) {
