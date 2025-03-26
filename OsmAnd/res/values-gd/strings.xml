@@ -491,4 +491,6 @@
     <string name="add_widget_below">Cuir cleas-uidheam gu h-ìosal</string>
     <string name="delete_widget">Dubh às a\' chleas-uidheam?</string>
     <string name="add_widget_above">Cuir cleas-uidheam gu h-àrd</string>
+    <string name="show_image_previews">Seall ro-sheallaidhean na h-ìomhaigh</string>
+    <string name="shared_string_manual">Leabhar-làimhe</string>
 </resources>
