@@ -15,6 +15,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.test.common.AndroidTest;
 
 import org.junit.Rule;
@@ -1041,6 +1042,21 @@ public class SettingsSearchTest extends AndroidTest {
 									@Override
 									protected String getSearchQuery(final Context context) {
 										return context.getString(R.string.rendering_attr_hideHouseNumbers_name);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapMode_sunrise",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return DayNightMode.AUTO.toHumanString(context);
 									}
 
 									@Override
