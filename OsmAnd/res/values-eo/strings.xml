@@ -5665,4 +5665,23 @@
     <string name="popular_places_nearby">Proksimaj popularaj ejoj</string>
     <string name="recently_visited">Historio</string>
     <string name="shared_string_avg_altitude">Mezuma altitudo</string>
+    <string name="meridian_180">180-a meridiano</string>
+    <string name="shared_string_online_only">Nur enrete</string>
+    <string name="choose_location">Elekti lokon</string>
+    <string name="point_location">Pozicio de punkto</string>
+    <string name="shared_string_manual">elektebla</string>
+    <string name="shared_string_map_center">map-centro</string>
+    <string name="choose_location_on_map">Elektu lokon sur la mapo.</string>
+    <string name="intermediate_first">Intercelo unue</string>
+    <string name="destination_first">Fincelo unue</string>
+    <string name="display_priority">Prioritato de montrado</string>
+    <string name="row_height">Alto de vico</string>
+    <string name="add_widget">Aldoni fenestraĵon</string>
+    <string name="shared_string_offline_only">Nur malkonekte</string>
+    <string name="prime_meridian">1-a meridiano</string>
+    <string name="equator">Ekvatoro</string>
+    <string name="layer_coordinates_grid">Krado de koordinatoj</string>
+    <string name="show_image_previews">Antaŭvidi bildojn</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Butono por montri/kaŝi kradon de koordinatoj sur la mapo.</string>
+    <string name="poi_source">Fonto de interesejo</string>
 </resources>
