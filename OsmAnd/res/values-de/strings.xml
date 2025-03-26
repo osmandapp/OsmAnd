@@ -5747,4 +5747,8 @@
     <string name="shared_string_offline_only">Nur offline</string>
     <string name="prime_meridian">Nullmeridian</string>
     <string name="meridian_180">180. Meridian</string>
+    <string name="intermediate_first">Zwischenziel zuerst</string>
+    <string name="destination_first">Endziel zuerst</string>
+    <string name="display_priority">Anzeigepriorität</string>
+    <string name="poi_source">POI-Quelle</string>
 </resources>
