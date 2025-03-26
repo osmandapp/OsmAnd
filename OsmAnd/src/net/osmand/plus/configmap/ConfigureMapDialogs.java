@@ -365,7 +365,7 @@ public class ConfigureMapDialogs {
 			}
 
 			private Collection<Preference> asPreferences(final Map<String, String> mapLanguageNameById) {
-				return new TitleByKey2PreferencesConverter(getContext()).asPreferences(mapLanguageNameById);
+				return new TitleByKey2PreferencesConverter(requireContext()).asPreferences(mapLanguageNameById);
 			}
 
 			private PreferenceScreen asPreferenceScreen(final Collection<Preference> preferences) {
