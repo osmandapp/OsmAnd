@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.ROUTE_ID;
+import static net.osmand.data.Amenity.ROUTE_MEMBERS_IDS;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.OsmRouteType.HIKING;
@@ -86,7 +87,9 @@ import net.osmand.plus.track.clickable.ClickableWayHelper;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -481,11 +484,20 @@ public class MapSelectionHelper {
 			names.add(tags.get(TRAVEL_MAP_TO_POI_TAG)); // additional attribute for TravelGpx points (route_id)
 		}
 		if (tags.containsKey(ROUTE_ID)) {
-			amenity = findAmenityByRouteId(latLon, tags);
+			amenity = findAmenityByRouteId(latLon, tags.get(ROUTE_ID));
 		}
 		if (amenity == null) {
 			long id = obfMapObject.getId().getId().longValue();
 			amenity = findAmenity(app, latLon, names, id);
+		}
+		List<String> members = amenity.getRouteMembersIds();
+		if (members != null) {
+			for (String m : members) {
+				Amenity member = findAmenityByRouteId(amenity.getLocation(), m);
+				if (member != null) {
+					amenity.addMember(member);
+				}
+			}
 		}
 		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
@@ -754,77 +766,38 @@ public class MapSelectionHelper {
 	}
 
 	@Nullable
-	public Amenity findAmenityByRouteId(LatLon latLon, Map<String, String> tags) {
-		Amenity amenity = null;
-		String routeId = tags.get(ROUTE_ID);
+	public Amenity findAmenityByRouteId(LatLon latLon, String routeId) {
+		Amenity mainAmenity = null;
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_BY_ROUTE_ID);
 		List<Amenity> amenities = app.getResourceManager().searchAmenitiesByName(routeId, rect.top, rect.left, rect.bottom, rect.right,
-				latLon.getLatitude(), latLon.getLongitude(), new ResultMatcher<>() {
-
-					@Override
-					public boolean publish(Amenity object) {
-						return true;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
-				});
+				latLon.getLatitude(), latLon.getLongitude(), null);
+		Collection<Amenity> relatedAmenity = new ArrayList<>();
+		Collection<Amenity> partOfAmenity = new ArrayList<>();
 		if (!amenities.isEmpty()) {
-			amenity = amenities.get(0);
-			if (amenities.size() > 1) {
-				for (int i = 1; i < amenities.size(); i++) {
-					Amenity a = amenities.get(i);
-					if (amenity.getType().equals(a.getType())) {
-						amenity.addRelatedAmenity(a);
+			for (Amenity am : amenities) {
+				if (routeId.equals(am.getRouteId())) {
+					if (mainAmenity == null && MapUtils.areLatLonEqual(latLon, am.getLocation(), 0.0001)) {
+						mainAmenity = am;
+					} else {
+						relatedAmenity.add(am);
+					}
+				} else {
+					List<String> membersIds = am.getRouteMembersIds();
+					if (membersIds.contains(routeId)) {
+						partOfAmenity.add(am);
 					}
 				}
 			}
-		}
-
-		List<BinaryMapDataObject> result = new ArrayList<>();
-		if (amenity != null) {
-			List<AmenityIndexRepository> repos = app.getResourceManager().getAmenityRepositories();
-			BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> mapRequest = getMapRequest(latLon, routeId, result);
-			ListIterator<AmenityIndexRepository> li = repos.listIterator(repos.size());
-			while (li.hasPrevious() && amenity.getRelatedAmenity() != null) {
-				AmenityIndexRepository repo = li.previous();
-				if (!repo.isPoiSectionIntersects(repo, mapRequest)) {
-					continue;
+			if (mainAmenity != null) {
+				for (Amenity rel : relatedAmenity) {
+					if (rel.getType().equals(mainAmenity.getType())) {
+						mainAmenity.addRelated(rel);
+					}
 				}
-				mapRequest.clearSearchBoxes();
-				mapRequest.setSearchBoxes(repo.getGroupedPoints(amenity.getRelatedAmenity()));
-				repo.searchMapIndex(mapRequest);
+				mainAmenity.setPartOf(!partOfAmenity.isEmpty() ? partOfAmenity : null);
 			}
 		}
-		return amenity;
-	}
-
-	@NonNull
-	private static BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> getMapRequest(LatLon latLon, String routeId, List<BinaryMapDataObject> result) {
-		BinaryMapIndexReader.SearchFilter mapRequestFilter = null;
-		mapRequestFilter = (types, mapIndex) -> {
-            Integer type = mapIndex.getRule(ROUTE_ID, routeId);
-            return type != null && types.contains(type);
-        };
-		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader
-				.buildSearchRequest(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, mapRequestFilter,
-						new ResultMatcher<>() {
-							@Override
-							public boolean publish(BinaryMapDataObject binaryMapDataObject) {
-								result.add(binaryMapDataObject);
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-						});
-
-		mapRequest.setBBoxRadius(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_BY_ROUTE_ID);
-		return mapRequest;
+		return mainAmenity;
 	}
 
 	@Nullable
