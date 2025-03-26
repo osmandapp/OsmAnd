@@ -21,6 +21,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
+import com.google.common.collect.ImmutableList;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -62,6 +64,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 
 	private OsmandApplication app;
 	private List<RenderingRuleProperty> properties;
+	private List<RenderingRuleProperty> propertiesRepresentingMenuItems = List.of();
 	private List<CommonPreference<Boolean>> preferences;
 	private OnDataChangeUiAdapter uiAdapter;
 	private ContextMenuItem item;
@@ -144,6 +147,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 		linearLayout.addView(description);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(linearLayout).create());
 		if (preferences != null && properties != null) {
+			final ImmutableList.Builder<RenderingRuleProperty> propertiesRepresentingMenuItemsBuilder = ImmutableList.builder();
 			RenderingRuleProperty streetLightNightProp = getStreetLightNightProp();
 			for (int i = 0; i < properties.size(); i++) {
 				RenderingRuleProperty property = properties.get(i);
@@ -173,6 +177,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 							.setTag(property.getAttrName())
 							.create();
 					items.add(item[0]);
+					propertiesRepresentingMenuItemsBuilder.add(property);
 				} else if (!STREET_LIGHTING_NIGHT.equals(property.getAttrName())) {
 					BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 					item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -189,6 +194,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 							.setTag(property.getAttrName())
 							.create();
 					items.add(item[0]);
+					propertiesRepresentingMenuItemsBuilder.add(property);
 				}
 				String attrName = property.getAttrName();
 				if (MORE_DETAILED.equals(attrName) || SHOW_SURFACE_GRADE.equals(attrName)
@@ -198,6 +204,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 					items.add(divider);
 				}
 			}
+			propertiesRepresentingMenuItems = propertiesRepresentingMenuItemsBuilder.build();
 		}
 	}
 
@@ -292,7 +299,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final DetailsBottomSheet detailsBottomSheet) {
-			properties = detailsBottomSheet.properties;
+			properties = detailsBottomSheet.propertiesRepresentingMenuItems;
 		}
 
 		@Override
