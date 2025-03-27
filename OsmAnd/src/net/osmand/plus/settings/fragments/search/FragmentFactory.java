@@ -7,8 +7,13 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.MapModeController;
+import net.osmand.plus.configmap.MapModeFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
@@ -64,6 +69,22 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().mapLanguageDialog());
 			} else if (srcProxy instanceof final ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment _srcProxy) {
+				return Optional.of((T) _srcProxy.getPrincipal());
+			}
+		}
+		if (MapModeFragment.class.equals(fragmentClass) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
+				// FK-TODO: hole analog zu den anderen Fällen hier eine bestehende Instanz aus den getDialogs()?
+				final ConfigureMapFragment configureMapFragment = _srcProxy.getPrincipal();
+				final MapActivity activity = configureMapFragment.getMapActivity();
+				// FK-TODO: DRY with MapModeController.showDialog():
+				final OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+				final MapModeController controller = new MapModeController(app);
+				final DialogManager dialogManager = app.getDialogManager();
+				dialogManager.register(MapModeController.PROCESS_ID, controller);
+				return Optional.of((T) new MapModeFragment());
+			} else if (srcProxy instanceof final MapModeFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}

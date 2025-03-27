@@ -35,6 +35,11 @@ public enum DayNightMode {
 		this.selectedIcon = selectedIcon;
 	}
 
+	@StringRes
+	public int getKey() {
+		return key;
+	}
+
 	public String toHumanString(Context ctx) {
 		return ctx.getString(key);
 	}

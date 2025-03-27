@@ -12,6 +12,9 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -19,11 +22,16 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.alert.PreferenceScreenFactory;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 
 public class MapModeFragment extends ConfigureMapOptionFragment implements IDialog {
 
@@ -65,13 +73,17 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 
 	private void setupToggleButton(@NonNull View view) {
 		List<IconRadioItem> items = new ArrayList<>();
-		for (DayNightMode mode : DayNightMode.values()) {
+		for (DayNightMode mode : getMapModes()) {
 			items.add(createRadioItem(mode));
 		}
 		LinearLayout container = view.findViewById(R.id.custom_radio_buttons);
 		toggleButton = new IconToggleButton(app, container, nightMode);
 		toggleButton.setItems(items);
 		toggleButton.setSelectedItemByTag(controller.getMapTheme());
+	}
+
+	protected List<DayNightMode> getMapModes() {
+		return List.of(DayNightMode.values());
 	}
 
 	@NonNull
@@ -169,6 +181,44 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 					.replace(R.id.fragmentContainer, new MapModeFragment(), TAG)
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
+		}
+	}
+
+	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<MapModeFragment> {
+
+		private MapModeFragment mapModeFragment;
+
+		@Override
+		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final MapModeFragment mapModeFragment) {
+			this.mapModeFragment = mapModeFragment;
+		}
+
+		public MapModeFragment getPrincipal() {
+			return mapModeFragment;
+		}
+
+		@Override
+		public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
+			setPreferenceScreen(asPreferenceScreen(asPreferences(mapModeFragment.getMapModes())));
+		}
+
+		private Collection<Preference> asPreferences(final List<DayNightMode> dayNightModes) {
+			return dayNightModes
+					.stream()
+					.map(this::asPreference)
+					.collect(Collectors.toUnmodifiableList());
+		}
+
+		private Preference asPreference(final DayNightMode dayNightMode) {
+			final Preference preference = new Preference(requireContext());
+			preference.setKey(dayNightMode.name());
+			preference.setTitle(dayNightMode.getKey());
+			preference.setSummary(dayNightMode.getSummaryRes());
+			return preference;
+		}
+
+		private PreferenceScreen asPreferenceScreen(final Collection<Preference> preferences) {
+			return new PreferenceScreenFactory(this).asPreferenceScreen(preferences);
 		}
 	}
 }

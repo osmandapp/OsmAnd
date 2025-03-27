@@ -61,7 +61,6 @@ import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 
 /* FK-TODO: make all items and dependent Fragments of ConfigureMapFragment searchable:
-- Map Mode -> Day, Night ...
 - Tracks?
 - Map source -> Weather
 - Wikipedia -> Weather
@@ -106,6 +105,11 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 						.orElseGet(settings::getApplicationMode);
 		mapActivity = (MapActivity) getMyActivity();
 		collapsedIds = settings.COLLAPSED_CONFIGURE_MAP_CATEGORIES;
+	}
+
+	// FK-TODO: remove method
+	public MapActivity getMapActivity() {
+		return mapActivity;
 	}
 
 	@Nullable
@@ -549,6 +553,28 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 							private static MultiSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
 								return new MultiSelectionDialogFragment.PreferenceFragment();
+							}
+
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return false;
+							}
+						});
+				case MAP_MODE_ID -> Optional.of(
+						new PreferenceFragmentHandler() {
+
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return createPreferenceFragment().getClass();
+							}
+
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return createPreferenceFragment();
+							}
+
+							private static MapModeFragment.PreferenceFragment createPreferenceFragment() {
+								return new MapModeFragment.PreferenceFragment();
 							}
 
 							@Override
