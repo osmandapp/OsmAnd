@@ -78,12 +78,6 @@ object GpxUtilities {
 	const val TRAVEL_GPX_CONVERT_MULT_1 = 2
 	const val TRAVEL_GPX_CONVERT_MULT_2 = 5
 
-	// Track Appearance
-	const val GPX_EXT_SHOW_ARROWS = "show_arrows"
-	const val GPX_EXT_SHOW_START_FINISH = "show_start_finish"
-	const val GPX_EXT_COLOR = "color"
-	const val GPX_EXT_WIDTH = "width"
-
 	private var oneOffLogParseTimeErrors = true
 	private const val GPX_TIME_FORMATTER = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 
@@ -651,7 +645,7 @@ object GpxUtilities {
 			if (i > 0) {
 				newPath = newPath.substring(0, i)
 			}
-			if (path?.contains(XML_COLON) == true) {
+			if (newPath.contains(XML_COLON)) {
 				newPath = newPath.replace(XML_COLON, ":");
 			}
 		}
