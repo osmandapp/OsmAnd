@@ -107,11 +107,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		collapsedIds = settings.COLLAPSED_CONFIGURE_MAP_CATEGORIES;
 	}
 
-	// FK-TODO: remove method
-	public MapActivity getMapActivity() {
-		return mapActivity;
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
