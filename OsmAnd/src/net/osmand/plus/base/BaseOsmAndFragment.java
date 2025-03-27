@@ -47,6 +47,10 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		updateNightMode();
 	}
 
+	public OsmandApplication getApp() {
+		return app;
+	}
+
 	protected void updateNightMode() {
 		nightMode = isNightMode(isUsedOnMap());
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);

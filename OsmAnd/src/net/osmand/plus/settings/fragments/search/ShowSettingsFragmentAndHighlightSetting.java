@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.MapModeController;
+import net.osmand.plus.configmap.MapModeFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
@@ -105,6 +107,13 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 					mapLanguageDialog.getListView(),
 					listView -> listView.setSelection(mapLanguageDialog.getIndexedOf(setting)),
 					listView -> mapLanguageDialog.getSettingHighlighter().highlightSetting(mapLanguageDialog, setting));
+			return true;
+		}
+		if (settingsFragment instanceof final MapModeFragment mapModeFragment) {
+			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
+			MapModeController.registerNewInstance(mapActivity.getMyApplication());
+			mapModeFragment.show(mapActivity.getSupportFragmentManager());
+			mapActivity.getDashboard().hideDashboard();
 			return true;
 		}
 		return false;

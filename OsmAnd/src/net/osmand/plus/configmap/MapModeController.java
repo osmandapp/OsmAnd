@@ -117,7 +117,7 @@ public class MapModeController extends BaseDialogController implements MapThemeP
 		app.getDialogManager().register(PROCESS_ID, new MapModeController(app));
 	}
 
-	public static Optional<MapModeController> findRegisteredInstance(@NonNull OsmandApplication app) {
+	public static Optional<MapModeController> findRegisteredInstance(final OsmandApplication app) {
 		return Optional.ofNullable((MapModeController) app.getDialogManager().findController(PROCESS_ID));
 	}
 }

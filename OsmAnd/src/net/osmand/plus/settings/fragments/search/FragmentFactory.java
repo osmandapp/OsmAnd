@@ -68,13 +68,13 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
+		// FK-TODO: move to instantiateFromPreferenceFragmentHandlerProvider()?
 		if (MapModeFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
-				// FK-TODO: hole analog zu den anderen Fällen hier eine bestehende Instanz aus den getDialogs()?
-				return Optional.of((T) MapModeFragment.createInstanceAndRegisterMapModeController(_srcProxy.getPrincipal().getMapActivity().getMyApplication()));
+				return Optional.of((T) MapModeFragment.createInstanceAndRegisterMapModeController(_srcProxy.getPrincipal().getApp()));
 			} else if (srcProxy instanceof final MapModeFragment.MapModeFragmentProxy _srcProxy) {
-				return Optional.of((T) _srcProxy.getPrincipal());
+				return Optional.of((T) MapModeFragment.createInstanceAndRegisterMapModeController(_srcProxy.getPrincipal().getApp()));
 			}
 		}
 		return Optional.empty();
