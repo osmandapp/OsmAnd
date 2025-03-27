@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
-import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
@@ -18,6 +17,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.SunriseSunset;
 
 import java.text.DateFormat;
+import java.util.Optional;
 
 public class MapModeController extends BaseDialogController implements MapThemeProvider {
 
@@ -113,18 +113,11 @@ public class MapModeController extends BaseDialogController implements MapThemeP
 		return selectedTheme;
 	}
 
-	@Nullable
-	public static MapModeController getExistedInstance(@NonNull OsmandApplication app) {
-		DialogManager dialogManager = app.getDialogManager();
-		return (MapModeController) dialogManager.findController(PROCESS_ID);
-	}
-
-	public static MapModeFragment createMapModeFragmentAndRegisterController(final FragmentActivity activity) {
-		createAndRegisterController((OsmandApplication) activity.getApplicationContext());
-		return MapModeFragment.createInstance();
-	}
-
-	private static void createAndRegisterController(final OsmandApplication app) {
+	public static void registerNewInstance(final OsmandApplication app) {
 		app.getDialogManager().register(PROCESS_ID, new MapModeController(app));
+	}
+
+	public static Optional<MapModeController> findRegisteredInstance(@NonNull OsmandApplication app) {
+		return Optional.ofNullable((MapModeController) app.getDialogManager().findController(PROCESS_ID));
 	}
 }

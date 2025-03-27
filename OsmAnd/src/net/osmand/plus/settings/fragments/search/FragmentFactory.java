@@ -9,7 +9,6 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
-import net.osmand.plus.configmap.MapModeController;
 import net.osmand.plus.configmap.MapModeFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
@@ -73,7 +72,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				// FK-TODO: hole analog zu den anderen Fällen hier eine bestehende Instanz aus den getDialogs()?
-				return Optional.of((T) MapModeController.createMapModeFragmentAndRegisterController(_srcProxy.getPrincipal().getMapActivity()));
+				return Optional.of((T) MapModeFragment.createInstanceAndRegisterMapModeController(_srcProxy.getPrincipal().getMapActivity().getMyApplication()));
 			} else if (srcProxy instanceof final MapModeFragment.MapModeFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}

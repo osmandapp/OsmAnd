@@ -16,6 +16,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
@@ -38,10 +39,18 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 	private MapModeController controller;
 	private IconToggleButton toggleButton;
 
+	public static MapModeFragment createInstanceAndRegisterMapModeController(final OsmandApplication app) {
+		MapModeController.registerNewInstance(app);
+		return new MapModeFragment();
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		controller = MapModeController.getExistedInstance(app);
+		controller =
+				MapModeController
+						.findRegisteredInstance(app)
+						.orElse(null);
 		if (controller != null) {
 			controller.registerDialog(this);
 		} else {
@@ -173,10 +182,6 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 	public void onDestroy() {
 		super.onDestroy();
 		controller.finishProcessIfNeeded(getActivity());
-	}
-
-	public static MapModeFragment createInstance() {
-		return new MapModeFragment();
 	}
 
 	public void show(final FragmentManager manager) {
