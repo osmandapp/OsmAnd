@@ -504,4 +504,13 @@
     <string name="ais_load_data">Luchdaich dàta AIS bho fhaidhle</string>
     <string name="shared_string_avg_altitude">Àirde cuibheasach</string>
     <string name="shared_string_avg_speed">Luaths as lugha</string>
+    <string name="shared_strings_dimensions">Meudachd</string>
+    <string name="reset_average_value">Ath-shuidhich luach cuibheasach</string>
+    <string name="current_temperature">Teòthachd làithreach</string>
+    <string name="average_temperature">Teòthachd chuibheasach</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
+    <string name="shared_string_volume">Àirde fuaime</string>
+    <string name="obd_fuel_consumption">Caitheamh connaidh</string>
+    <string name="fuel_tank_capacity">Comas-lìonaidh tanca-connaidh</string>
+    <string name="obd_engine_oil_temperature">Teòthachd na h-ola einnsein</string>
 </resources>
