@@ -6,7 +6,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
-public enum RouteInfoDisplayMode {
+public enum DefaultView {
 	ARRIVAL_TIME(R.drawable.ic_action_clock, R.string.side_marker_eta),
 	TIME_TO_GO(R.drawable.ic_action_timer, R.string.map_widget_time),
 	DISTANCE(R.drawable.ic_action_distance, R.string.map_widget_distance);
@@ -16,7 +16,7 @@ public enum RouteInfoDisplayMode {
 	@StringRes
 	private final int titleId;
 
-	RouteInfoDisplayMode(@DrawableRes int iconId, @StringRes int titleId) {
+	DefaultView(@DrawableRes int iconId, @StringRes int titleId) {
 		this.iconId = iconId;
 		this.titleId = titleId;
 	}
@@ -32,11 +32,11 @@ public enum RouteInfoDisplayMode {
 	}
 
 	@NonNull
-	public static RouteInfoDisplayMode[] values(@NonNull RouteInfoDisplayMode primary) {
+	public static DefaultView[] values(@NonNull DefaultView primary) {
 		return switch (primary) {
-			case ARRIVAL_TIME -> new RouteInfoDisplayMode[]{ARRIVAL_TIME, DISTANCE, TIME_TO_GO};
-			case TIME_TO_GO -> new RouteInfoDisplayMode[]{TIME_TO_GO, DISTANCE, ARRIVAL_TIME};
-			case DISTANCE -> new RouteInfoDisplayMode[]{DISTANCE, ARRIVAL_TIME, TIME_TO_GO};
+			case ARRIVAL_TIME -> new DefaultView[]{ARRIVAL_TIME, DISTANCE, TIME_TO_GO};
+			case TIME_TO_GO -> new DefaultView[]{TIME_TO_GO, DISTANCE, ARRIVAL_TIME};
+			case DISTANCE -> new DefaultView[]{DISTANCE, ARRIVAL_TIME, TIME_TO_GO};
 			default -> throw new IllegalArgumentException("Unexpected value: " + primary);
 		};
 	}

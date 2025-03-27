@@ -61,7 +61,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private TextState textState;
 	private final RouteInfoCalculator calculator;
 	private List<DestinationInfo> cachedRouteInfo;
-	private RouteInfoDisplayMode cachedDisplayMode;
+	private DefaultView cachedDefaultView;
 	private DisplayPriority cachedDisplayPriority;
 	private Integer cachedMetricSystem;
 	private boolean forceUpdate = false;
@@ -108,7 +108,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 			view.setBackgroundResource(textState.widgetBackgroundId);
 			updateNavigationButtonBg();
 		}
-		updateWidgetRow();
+		updateWidgetRowView();
 
 		View buttonTappableArea = view.findViewById(R.id.button_tappable_area);
 		buttonTappableArea.setOnClickListener(v -> mapActivity.getMapActions().doRoute());
@@ -217,27 +217,27 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		}
 		cachedRouteInfo = routeInfo;
 
-		RouteInfoDisplayMode primaryMode = getDisplayMode(appMode);
-		RouteInfoDisplayMode[] orderedModes = RouteInfoDisplayMode.values(primaryMode);
+		DefaultView defaultView = getDefaultView(appMode);
+		DefaultView[] orderedDefaultViews = DefaultView.values(defaultView);
 
-		updatePrimaryBlock(cachedRouteInfo.get(0), orderedModes);
+		updatePrimaryBlock(cachedRouteInfo.get(0), orderedDefaultViews);
 
 		if (hasSecondaryData) {
-			updateSecondaryBlock(cachedRouteInfo.get(1), orderedModes);
+			updateSecondaryBlock(cachedRouteInfo.get(1), orderedDefaultViews);
 		}
 		forceUpdate = false;
 	}
 
 	private void updatePrimaryBlock(@NonNull DestinationInfo destinationInfo,
-	                                @NonNull RouteInfoDisplayMode[] modes) {
+	                                @NonNull DefaultView[] defaultViews) {
 		WidgetSize size = getWidgetSize();
 		int primaryColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int secondaryColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
 
-		Map<RouteInfoDisplayMode, String> data = prepareDisplayData(destinationInfo);
-		String value1 = Objects.requireNonNull(data.get(modes[0]));
-		String value2 = Objects.requireNonNull(data.get(modes[1]));
-		String value3 = Objects.requireNonNull(data.get(modes[2]));
+		Map<DefaultView, String> data = prepareDisplayData(destinationInfo);
+		String value1 = Objects.requireNonNull(data.get(defaultViews[0]));
+		String value2 = Objects.requireNonNull(data.get(defaultViews[1]));
+		String value3 = Objects.requireNonNull(data.get(defaultViews[2]));
 
 		List<PaintedText> primaryLineText = new ArrayList<>();
 		List<PaintedText> secondaryLineText = new ArrayList<>();
@@ -268,19 +268,19 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void updateSecondaryBlock(@NonNull DestinationInfo destinationInfo,
-	                                  @NonNull RouteInfoDisplayMode[] modes) {
-		Map<RouteInfoDisplayMode, String> data = prepareDisplayData(destinationInfo);
+	                                  @NonNull DefaultView[] defaultViews) {
+		Map<DefaultView, String> data = prepareDisplayData(destinationInfo);
 
-		tvPrimaryLine2.setText(data.get(modes[0]));
-		tvSecondaryLine2.setText(data.get(modes[1]));
+		tvPrimaryLine2.setText(data.get(defaultViews[0]));
+		tvSecondaryLine2.setText(data.get(defaultViews[1]));
 	}
 
 	@NonNull
-	private Map<RouteInfoDisplayMode, String> prepareDisplayData(@NonNull DestinationInfo info) {
-		Map<RouteInfoDisplayMode, String> displayData = new HashMap<>();
-		displayData.put(RouteInfoDisplayMode.ARRIVAL_TIME, formatArrivalTime(app, info.arrivalTime()));
-		displayData.put(RouteInfoDisplayMode.TIME_TO_GO, formatDuration(app, info.timeToGo()));
-		displayData.put(RouteInfoDisplayMode.DISTANCE, formatDistance(app, info.distance()));
+	private Map<DefaultView, String> prepareDisplayData(@NonNull DestinationInfo info) {
+		Map<DefaultView, String> displayData = new HashMap<>();
+		displayData.put(DefaultView.ARRIVAL_TIME, formatArrivalTime(app, info.arrivalTime()));
+		displayData.put(DefaultView.TIME_TO_GO, formatDuration(app, info.timeToGo()));
+		displayData.put(DefaultView.DISTANCE, formatDistance(app, info.distance()));
 		return displayData;
 	}
 
@@ -291,9 +291,9 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		if (metricSystemChanged) {
 			return true;
 		}
-		RouteInfoDisplayMode displayMode = widgetState.getDisplayMode();
-		if (cachedDisplayMode != displayMode) {
-			cachedDisplayMode = displayMode;
+		DefaultView defaultView = widgetState.getDefaultView();
+		if (cachedDefaultView != defaultView) {
+			cachedDefaultView = defaultView;
 			return true;
 		}
 		DisplayPriority displayPriority = widgetState.getDisplayPriority();
@@ -329,13 +329,13 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	@Override
 	public boolean updateVisibility(boolean visible) {
 		if (super.updateVisibility(visible)) {
-			updateWidgetRow();
+			updateWidgetRowView();
 			return true;
 		}
 		return false;
 	}
 
-	public void updateWidgetRow() {
+	public void updateWidgetRowView() {
 		app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
 	}
 
@@ -367,13 +367,13 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	@NonNull
-	public RouteInfoDisplayMode getDisplayMode(@NonNull ApplicationMode appMode) {
-		return widgetState.getDisplayMode(appMode);
+	public DefaultView getDefaultView(@NonNull ApplicationMode appMode) {
+		return widgetState.getDefaultView(appMode);
 	}
 
-	public void setDisplayMode(@NonNull ApplicationMode appMode,
-	                           @NonNull RouteInfoDisplayMode displayMode) {
-		widgetState.setDisplayMode(appMode, displayMode);
+	public void setDefaultView(@NonNull ApplicationMode appMode,
+	                           @NonNull DefaultView defaultView) {
+		widgetState.setDefaultView(appMode, defaultView);
 	}
 
 	@NonNull
