@@ -1083,7 +1083,7 @@
     <string name="poi_free_flying">自由飞行用品店</string>
     <string name="poi_garden_furniture">园艺器具店</string>
     <string name="poi_gas">液化气店</string>
-    <string name="poi_shop_yes">杂货店</string>
+    <string name="poi_shop_yes">商店</string>
     <string name="poi_hearing_aids">助听器</string>
     <string name="poi_hifi">音响店</string>
     <string name="poi_houseware">家居用品店</string>
@@ -3165,4 +3165,9 @@
     <string name="poi_fuel_jeta1">Jet A-1 航空燃油</string>
     <string name="poi_cash_in">存入现金</string>
     <string name="poi_camp_site_type">营地类型</string>
+    <string name="poi_osmwiki">热门地点（维基百科）</string>
+    <string name="poi_network_foot">路线网（徒步）</string>
+    <string name="poi_network_cycling">路线网（骑行）</string>
+    <string name="poi_impromptu">即兴</string>
+    <string name="poi_cafe_filter">咖啡馆</string>
 </resources>
