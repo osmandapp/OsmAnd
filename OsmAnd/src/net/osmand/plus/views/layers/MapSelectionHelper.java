@@ -360,8 +360,8 @@ public class MapSelectionHelper {
 							boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
 							boolean isClickableWay = clickableWayHelper.isClickableWay(obfMapObject, tags);
 
-							if (!isOsmRoute && tags.containsKey("route_road")) {
-								continue; // ignore unsupported road shields (if no other OSM routes found)
+							if (!isOsmRoute && OsmRouteType.containsUnsupportedRouteTags(tags)) {
+								continue;
 							}
 
 							if (isOsmRoute && !osmRoutesAlreadyAdded) {
