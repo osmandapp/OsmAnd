@@ -184,7 +184,14 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 		controller.finishProcessIfNeeded(getActivity());
 	}
 
-	public void show(final FragmentManager manager) {
+	public void show(final MapActivity mapActivity, final boolean registerMapModeController) {
+		if (registerMapModeController) {
+			MapModeController.registerNewInstance(mapActivity.getMyApplication());
+		}
+		show(mapActivity.getSupportFragmentManager());
+	}
+
+	private void show(final FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, this, TAG)

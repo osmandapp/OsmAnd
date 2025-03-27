@@ -37,13 +37,12 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 													   final Context context,
 													   final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
 		return FragmentFactory
-				.getExistingInstance(fragmentClass, src)
-				.or(() -> instantiateFromPreferenceFragmentHandlerProvider(fragmentClass, src, context))
+				.instantiateFragment(fragmentClass, src)
+				.or(() -> instantiatePreferenceFragmentUsingPreferenceFragmentHandler(fragmentClass, src, context))
 				.orElseGet(() -> createDefaultInstance(fragmentClass, src, context, instantiateAndInitializeFragment));
 	}
 
-	private static <T extends Fragment> Optional<T> getExistingInstance(final Class<T> fragmentClass, final Optional<PreferenceWithHost> src) {
-		// FK-TODO: folgendes ist absolut unklar programmiert!!!
+	private static <T extends Fragment> Optional<T> instantiateFragment(final Class<T> fragmentClass, final Optional<PreferenceWithHost> src) {
 		if (SingleSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
@@ -68,7 +67,6 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
-		// FK-TODO: move to instantiateFromPreferenceFragmentHandlerProvider()?
 		if (MapModeFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
@@ -80,7 +78,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		return Optional.empty();
 	}
 
-	private static <T extends Fragment> Optional<T> instantiateFromPreferenceFragmentHandlerProvider(
+	private static <T extends Fragment> Optional<T> instantiatePreferenceFragmentUsingPreferenceFragmentHandler(
 			final Class<T> fragmentClass,
 			final Optional<PreferenceWithHost> src,
 			final Context context) {

@@ -532,7 +532,7 @@ public class ConfigureMapMenu {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						MapModeFragment
 								.createInstanceAndRegisterMapModeController(activity.getMyApplication())
-								.show(activity.getSupportFragmentManager());
+								.show(activity, false);
 					}
 					return true;
 				})
