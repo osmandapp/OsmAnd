@@ -3170,4 +3170,11 @@
     <string name="poi_network_cycling">路线网（骑行）</string>
     <string name="poi_impromptu">即兴</string>
     <string name="poi_cafe_filter">咖啡馆</string>
+    <string name="poi_aerialway_j_bar">J-bar拖牵</string>
+    <string name="poi_aerialway_t_bar">T-bar拖牵</string>
+    <string name="poi_religion_voodoo">伏都教</string>
+    <string name="poi_religion_sikh">锡克教</string>
+    <string name="poi_recycling_hardcore">建筑垃圾</string>
+    <string name="poi_quarter">地区</string>
+    <string name="poi_aerialway_platter">圆盘拖牵</string>
 </resources>
