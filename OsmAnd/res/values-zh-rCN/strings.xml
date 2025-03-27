@@ -28,7 +28,7 @@
     <string name="poi_filter_sightseeing">观光</string>
     <string name="poi_filter_car_aid">汽车援助</string>
     <string name="poi_filter_food_shop">食品店</string>
-    <string name="poi_filter_for_tourists">对于游客</string>
+    <string name="poi_filter_for_tourists">针对游客</string>
     <string name="poi_filter_fuel">燃料</string>
     <string name="use_compass_navigation">使用指南针</string>
     <string name="avoid_motorway">避开高速公路</string>
@@ -5993,4 +5993,8 @@
     <string name="kpa_unit">千帕</string>
     <string name="obd_fuel_pressure">燃料压力</string>
     <string name="unit_volt">伏特</string>
+    <string name="show_list">显示列表</string>
+    <string name="popular_places">热门地点</string>
+    <string name="poi_source">兴趣点来源</string>
+    <string name="point_location">点位置</string>
 </resources>
