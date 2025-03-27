@@ -3177,4 +3177,10 @@
     <string name="poi_recycling_hardcore">建筑垃圾</string>
     <string name="poi_quarter">地区</string>
     <string name="poi_aerialway_platter">圆盘拖牵</string>
+    <string name="poi_aerialway_rope_tow">绳索拖牵</string>
+    <string name="poi_religion_unitarian_universalist">一神论普遍主义</string>
+    <string name="poi_aerialway_mixed_lift">混合型索道</string>
+    <string name="poi_aerialway_magic_carpet">魔毯</string>
+    <string name="poi_bowls">草地滚球</string>
+    <string name="poi_rugby_union">橄榄球联盟</string>
 </resources>

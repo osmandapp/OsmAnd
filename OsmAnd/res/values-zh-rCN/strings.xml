@@ -1658,7 +1658,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">无轨电车路线</string>
     <string name="rendering_category_transport">公共交通</string>
     <string name="map_widget_appearance_rem">剩余的元素</string>
-    <string name="search_radius_proximity">之间</string>
+    <string name="search_radius_proximity">在此之内</string>
     <string name="speed_limit_exceed_message">选择限速容许幅度，超过限速容许幅度将收到语音警告。</string>
     <string name="fav_point_emoticons_message">收藏已重命名为\"%1$s\"，以将包含表情符号的字符串保存到文件中。</string>
     <string name="fav_point_dublicate">指定的收藏名称重复</string>
@@ -2755,7 +2755,7 @@
     <string name="shared_string_max_speed">最高速度</string>
     <string name="default_speed_setting_title">默认速度</string>
     <string name="shared_string_default">默认</string>
-    <string name="transport_nearby_routes">之间</string>
+    <string name="transport_nearby_routes">在此之内</string>
     <string name="shared_string_privacy_policy">隐私政策</string>
     <string name="help_us_make_osmand_better">帮助我们让 OsmAnd 变得更好</string>
     <string name="shared_string_no_thank_you">不，谢谢</string>
@@ -4328,7 +4328,7 @@
     <string name="auto_25_chars_route_tu_kr">掉头并靠右</string>
     <string name="auto_25_chars_route_roundabout_kl">从第%1$d 出口离开并靠左</string>
     <string name="auto_25_chars_route_roundabout_kr">从第 %1$d 出口离开并靠右</string>
-    <string name="attach_roads_descr">粗略计算您的轨迹，以便在各点之间确定路线，并关联精确的转弯指示和路线属性。</string>
+    <string name="attach_roads_descr">将轨迹附加到道路上，即可获得详细的路线信息，包括转弯指示和道路属性。</string>
     <string name="duplacate_widget_added_snackbar">正在将重复的小工具添加到列表中。</string>
     <string name="shared_string_duplicate">重复</string>
     <string name="av_notes_photo_widget_desc">点击小部件可以让你拍下照片。</string>
@@ -5332,7 +5332,7 @@
 \n设备上的所有数据仍保持不变。</string>
     <string name="shared_string_close_the_dialog">关闭对话框</string>
     <string name="no_visible_tracks_description">选择轨迹以在地图上显示。</string>
-    <string name="display_position_automatic_descr">取决于地图方向：底部表示移动方向，中间表示所有其他方向。</string>
+    <string name="display_position_automatic_descr">取决于地图方向：底部为移动方向，中心为所有其他方向。</string>
     <string name="sound_beep_complex">蜂鸣：复杂</string>
     <string name="sound_beep_complex_loud">蜂鸣：复杂响亮</string>
     <string name="sound_beep_simple">蜂鸣：简单</string>
@@ -5443,7 +5443,7 @@
     <string name="lang_ta_in">泰米尔语（印度）</string>
     <string name="shared_string_colors">颜色</string>
     <string name="relief_3d_download_description">需要额外的地图数据才能在地图上查看地形。</string>
-    <string name="vertical_exaggeration_description">通过改变比例值，可以突出三维地形的效果。</string>
+    <string name="vertical_exaggeration_description">通过改变比例值，您可以加强三维地形的显示效果。</string>
     <string name="vertical_exaggeration">垂直夸大</string>
     <string name="fix_north_up">启用固定北方朝上</string>
     <string name="use_3d_track_visualization">3D 可视化</string>
@@ -5525,7 +5525,7 @@
     <string name="target_elevation">目标海拔</string>
     <string name="max_sensor_heartrate">最大心率</string>
     <string name="clear_key_assignment">清除按键分配</string>
-    <string name="tripltek_promo_description">免费使用无限下载地图、3D 浮雕等功能 %1$s 个月</string>
+    <string name="tripltek_promo_description">免费使用无限地图下载、三维地形等功能 %1$s 个月</string>
     <string name="remove_widget_first">请先移除小工具</string>
     <string name="trash_is_empty_banner_desc">从 OsmAnd Cloud 中删除的文件将在 %1$s 天后在此处可用。</string>
     <string name="shared_string_delete_immediately">立即删除</string>
@@ -5627,7 +5627,7 @@
     <string name="quick_action_remove_next_destination">下一个目的地点</string>
     <string name="daynight_mode_sunrise_sunset_summary">根据当地日出和日落时间，自动切换日间和夜间主题。</string>
     <string name="auto_25_chars_route_tl">左转</string>
-    <string name="hugerock_promo_description">在 %1$s 个月内免费使用包括无限制地图下载、3D 地形等功能</string>
+    <string name="hugerock_promo_description">免费使用无限地图下载、三维地形等功能 %1$s 个月</string>
     <string name="auto_25_chars_route_kl">保持在左侧</string>
     <string name="auto_25_chars_route_kr">保持在右侧</string>
     <string name="auto_25_chars_route_tshr">向右急转</string>
@@ -6022,4 +6022,15 @@
     <string name="clear_key_assignment_summary">所选操作的按键分配将被清除。</string>
     <string name="clear_all_key_shortcuts_summary">将删除所选类型的所有按键分配。</string>
     <string name="shared_string_manual">手册</string>
+    <string name="rendering_attr_showClimbingRoutes_name">攀岩路线</string>
+    <string name="ais_object_lost_timeout_description">设置 AIS 对象的可见性超时： 在这段时间内未接收到信号，屏幕上的 AIS 对象将被删除。</string>
+    <string name="shared_string_map_center">地图中心</string>
+    <string name="show_toast_about_key_pressed">显示关于已按下按键的浮动式消息</string>
+    <string name="hmd_promo_description">免费使用无限地图下载、三维地形等功能 %1$s 个月</string>
+    <string name="plugin_ais_tracker_name">AIS 船只追踪器</string>
+    <string name="help_article_personal_color_palette_schemes_name">颜色方案</string>
+    <string name="ais_ship_lost_timeout">未收到信号时，船舶的可见性超时时间</string>
+    <string name="choose_location_on_map">在地图上选择一个位置。</string>
+    <string name="ais_ship_lost_timeout_description">设置船只可见性超时： 在此时间内没有接收到信号后，屏幕上的船只符号将改变状态： 它会被标记为划掉。</string>
+    <string name="ais_object_lost_timeout">对象丢失时的可见性超时</string>
 </resources>
