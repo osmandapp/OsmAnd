@@ -6021,4 +6021,5 @@
     <string name="key_event_action_continuous_zoom_out">连续缩小</string>
     <string name="clear_key_assignment_summary">所选操作的按键分配将被清除。</string>
     <string name="clear_all_key_shortcuts_summary">将删除所选类型的所有按键分配。</string>
+    <string name="shared_string_manual">手册</string>
 </resources>
