@@ -293,7 +293,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 				.orElse(OptionalInt.empty());
 	}
 
-	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<DetailsBottomSheet> {
+	public static class DetailsBottomSheetProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<DetailsBottomSheet> {
 
 		private List<RenderingRuleProperty> properties;
 
@@ -308,7 +308,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 			final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
 			screen.setTitle("screen title");
 			screen.setSummary("screen summary");
-			PreferenceFragment
+			DetailsBottomSheetProxy
 					.asPreferences(properties, context)
 					.forEach(screen::addPreference);
 			setPreferenceScreen(screen);

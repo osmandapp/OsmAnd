@@ -346,7 +346,7 @@ public class ConfigureMapDialogs {
 			return new ArrayList<>(mapLanguageNameById.keySet());
 		}
 
-		public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<MapLanguageDialog> {
+		public static class MapLanguageDialogProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<MapLanguageDialog> {
 
 			private MapLanguageDialog mapLanguageDialog;
 

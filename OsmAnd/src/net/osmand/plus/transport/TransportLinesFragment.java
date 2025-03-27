@@ -240,7 +240,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment implements Settin
 		return viewByAttrName.get(setting.getKey());
 	}
 
-	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<TransportLinesFragment> {
+	public static class TransportLinesFragmentProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<TransportLinesFragment> {
 
 		private Set<String> attrNames;
 

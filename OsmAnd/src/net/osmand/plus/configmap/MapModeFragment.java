@@ -184,7 +184,7 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 		}
 	}
 
-	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<MapModeFragment> {
+	public static class MapModeFragmentProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<MapModeFragment> {
 
 		private MapModeFragment mapModeFragment;
 

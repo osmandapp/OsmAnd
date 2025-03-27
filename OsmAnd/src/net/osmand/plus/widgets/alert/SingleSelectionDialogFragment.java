@@ -13,6 +13,6 @@ public class SingleSelectionDialogFragment extends SelectionDialogFragment {
 		super(alertDialog, alertDialogData, itemByKey, adapter);
 	}
 
-	public static class PreferenceFragment extends SelectionDialogFragment.PreferenceFragment<SingleSelectionDialogFragment> {
+	public static class SingleSelectionDialogFragmentProxy extends SelectionDialogFragment.PreferenceFragment<SingleSelectionDialogFragment> {
 	}
 }

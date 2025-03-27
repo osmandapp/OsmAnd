@@ -50,31 +50,31 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		// FK-TODO: folgendes ist absolut unklar programmiert!!!
 		if (SingleSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
-			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
+			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().roadStyleDialog().orElseThrow());
-			} else if (srcProxy instanceof final SingleSelectionDialogFragment.PreferenceFragment _srcProxy) {
+			} else if (srcProxy instanceof final SingleSelectionDialogFragment.SingleSelectionDialogFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
 		if (MultiSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
-			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
+			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().hideDialog().orElseThrow());
-			} else if (srcProxy instanceof final MultiSelectionDialogFragment.PreferenceFragment _srcProxy) {
+			} else if (srcProxy instanceof final MultiSelectionDialogFragment.MultiSelectionDialogFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
 		if (ConfigureMapDialogs.MapLanguageDialog.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
-			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
+			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().mapLanguageDialog());
-			} else if (srcProxy instanceof final ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment _srcProxy) {
+			} else if (srcProxy instanceof final ConfigureMapDialogs.MapLanguageDialog.MapLanguageDialogProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}
 		if (MapModeFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
-			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
+			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				// FK-TODO: hole analog zu den anderen Fällen hier eine bestehende Instanz aus den getDialogs()?
 				final ConfigureMapFragment configureMapFragment = _srcProxy.getPrincipal();
 				final MapActivity activity = configureMapFragment.getMapActivity();
@@ -84,7 +84,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 				final DialogManager dialogManager = app.getDialogManager();
 				dialogManager.register(MapModeController.PROCESS_ID, controller);
 				return Optional.of((T) new MapModeFragment());
-			} else if (srcProxy instanceof final MapModeFragment.PreferenceFragment _srcProxy) {
+			} else if (srcProxy instanceof final MapModeFragment.MapModeFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}

@@ -107,16 +107,16 @@ public class SettingsSearchButtonHelper {
 
 	private static ActivitySearchDatabaseConfigs createActivitySearchDatabaseConfigs() {
 		return new ActivitySearchDatabaseConfigs(
-				Map.of(MapActivity.class, ConfigureMapFragment.PreferenceFragment.class),
+				Map.of(MapActivity.class, ConfigureMapFragment.ConfigureMapFragmentProxy.class),
 				Set.of(
-						new PrincipalAndProxy<>(ConfigureMapFragment.class, ConfigureMapFragment.PreferenceFragment.class),
-						new PrincipalAndProxy<>(DetailsBottomSheet.class, DetailsBottomSheet.PreferenceFragment.class),
-						new PrincipalAndProxy<>(TransportLinesFragment.class, TransportLinesFragment.PreferenceFragment.class),
-						new PrincipalAndProxy<>(SelectMapStyleBottomSheetDialogFragment.class, SelectMapStyleBottomSheetDialogFragment.PreferenceFragment.class),
-						new PrincipalAndProxy<>(SingleSelectionDialogFragment.class, SingleSelectionDialogFragment.PreferenceFragment.class),
-						new PrincipalAndProxy<>(MultiSelectionDialogFragment.class, MultiSelectionDialogFragment.PreferenceFragment.class),
-						new PrincipalAndProxy<>(ConfigureMapDialogs.MapLanguageDialog.class, ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment.class),
-						new PrincipalAndProxy<>(MapModeFragment.class, MapModeFragment.PreferenceFragment.class)));
+						new PrincipalAndProxy<>(ConfigureMapFragment.class, ConfigureMapFragment.ConfigureMapFragmentProxy.class),
+						new PrincipalAndProxy<>(DetailsBottomSheet.class, DetailsBottomSheet.DetailsBottomSheetProxy.class),
+						new PrincipalAndProxy<>(TransportLinesFragment.class, TransportLinesFragment.TransportLinesFragmentProxy.class),
+						new PrincipalAndProxy<>(SelectMapStyleBottomSheetDialogFragment.class, SelectMapStyleBottomSheetDialogFragment.SelectMapStyleBottomSheetDialogFragmentProxy.class),
+						new PrincipalAndProxy<>(SingleSelectionDialogFragment.class, SingleSelectionDialogFragment.SingleSelectionDialogFragmentProxy.class),
+						new PrincipalAndProxy<>(MultiSelectionDialogFragment.class, MultiSelectionDialogFragment.MultiSelectionDialogFragmentProxy.class),
+						new PrincipalAndProxy<>(ConfigureMapDialogs.MapLanguageDialog.class, ConfigureMapDialogs.MapLanguageDialog.MapLanguageDialogProxy.class),
+						new PrincipalAndProxy<>(MapModeFragment.class, MapModeFragment.MapModeFragmentProxy.class)));
 	}
 
 	private static Map<Class<? extends Activity>, ActivityInitializer<?>> getActivityInitializerByActivity(final FragmentManager fragmentManager) {

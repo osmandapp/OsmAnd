@@ -383,7 +383,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 				.orElseThrow();
 	}
 
-	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<ConfigureMapFragment>, PreferenceFragmentHandlerProvider {
+	public static class ConfigureMapFragmentProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<ConfigureMapFragment>, PreferenceFragmentHandlerProvider {
 
 		private ConfigureMapFragment configureMapFragment;
 		private List<ContextMenuItem> items;
@@ -404,7 +404,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
 			screen.setTitle("screen title");
 			screen.setSummary("screen summary");
-			PreferenceFragment
+			ConfigureMapFragmentProxy
 					.asPreferences(items, context)
 					.forEach(screen::addPreference);
 			setPreferenceScreen(screen);
@@ -441,8 +441,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static DetailsBottomSheet.PreferenceFragment createPreferenceFragment() {
-								return new DetailsBottomSheet.PreferenceFragment();
+							private static DetailsBottomSheet.DetailsBottomSheetProxy createPreferenceFragment() {
+								return new DetailsBottomSheet.DetailsBottomSheetProxy();
 							}
 
 							@Override
@@ -463,8 +463,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static TransportLinesFragment.PreferenceFragment createPreferenceFragment() {
-								return new TransportLinesFragment.PreferenceFragment();
+							private static TransportLinesFragment.TransportLinesFragmentProxy createPreferenceFragment() {
+								return new TransportLinesFragment.TransportLinesFragmentProxy();
 							}
 
 							@Override
@@ -485,8 +485,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static SelectMapStyleBottomSheetDialogFragment.PreferenceFragment createPreferenceFragment() {
-								return new SelectMapStyleBottomSheetDialogFragment.PreferenceFragment();
+							private static SelectMapStyleBottomSheetDialogFragment.SelectMapStyleBottomSheetDialogFragmentProxy createPreferenceFragment() {
+								return new SelectMapStyleBottomSheetDialogFragment.SelectMapStyleBottomSheetDialogFragmentProxy();
 							}
 
 							@Override
@@ -507,8 +507,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static SingleSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
-								return new SingleSelectionDialogFragment.PreferenceFragment();
+							private static SingleSelectionDialogFragment.SingleSelectionDialogFragmentProxy createPreferenceFragment() {
+								return new SingleSelectionDialogFragment.SingleSelectionDialogFragmentProxy();
 							}
 
 							@Override
@@ -529,8 +529,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment createPreferenceFragment() {
-								return new ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment();
+							private static ConfigureMapDialogs.MapLanguageDialog.MapLanguageDialogProxy createPreferenceFragment() {
+								return new ConfigureMapDialogs.MapLanguageDialog.MapLanguageDialogProxy();
 							}
 
 							@Override
@@ -551,8 +551,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static MultiSelectionDialogFragment.PreferenceFragment createPreferenceFragment() {
-								return new MultiSelectionDialogFragment.PreferenceFragment();
+							private static MultiSelectionDialogFragment.MultiSelectionDialogFragmentProxy createPreferenceFragment() {
+								return new MultiSelectionDialogFragment.MultiSelectionDialogFragmentProxy();
 							}
 
 							@Override
@@ -573,8 +573,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static MapModeFragment.PreferenceFragment createPreferenceFragment() {
-								return new MapModeFragment.PreferenceFragment();
+							private static MapModeFragment.MapModeFragmentProxy createPreferenceFragment() {
+								return new MapModeFragment.MapModeFragmentProxy();
 							}
 
 							@Override

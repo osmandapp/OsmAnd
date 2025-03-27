@@ -297,7 +297,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		return stylesContainer.findViewWithTag(setting.getKey());
 	}
 
-	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<SelectMapStyleBottomSheetDialogFragment> {
+	public static class SelectMapStyleBottomSheetDialogFragmentProxy extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<SelectMapStyleBottomSheetDialogFragment> {
 
 		private Map<String, String> mapStyleByTranslation;
 
@@ -312,7 +312,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
 			screen.setTitle("screen title");
 			screen.setSummary("screen summary");
-			PreferenceFragment
+			SelectMapStyleBottomSheetDialogFragmentProxy
 					.asPreferences(mapStyleByTranslation, context)
 					.forEach(screen::addPreference);
 			setPreferenceScreen(screen);
