@@ -17,14 +17,12 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.fragments.configureitems.viewholders.PositionAnimationSettingCard;
+import net.osmand.plus.settings.preferences.PositionAnimationPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 public class PositionAnimationFragment extends BaseSettingsFragment {
-
-	private static final String PREF_ID_TYPE = "position_animation_card";
 
 	@Override
 	protected void setupPreferences() {
@@ -46,7 +44,7 @@ public class PositionAnimationFragment extends BaseSettingsFragment {
 
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(v -> {
 			boolean newState = !isPositionAnimationEnabled();
-			settings.ANIMATE_MY_LOCATION.set(newState);
+			settings.ANIMATE_MY_LOCATION.setModeValue(getSelectedAppMode(), newState);
 			updateToolbarSwitch(view);
 			updateAllSettings();
 		});
@@ -79,19 +77,16 @@ public class PositionAnimationFragment extends BaseSettingsFragment {
 	}
 
 	private Preference createPositionAnimationCard(@NonNull Context context) {
-		Preference uiPreference = new Preference(context);
-		uiPreference.setKey(PREF_ID_TYPE);
-		uiPreference.setLayoutResource(R.layout.position_animation_settings_card);
-		return uiPreference;
+		return new PositionAnimationPreference(context, null, getSelectedAppMode(), isNightMode());
 	}
 
 	@Override
 	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
-		String key = preference.getKey();
-		if (PREF_ID_TYPE.equals(key)) {
-			new PositionAnimationSettingCard(app, holder.itemView, settings.LOCATION_INTERPOLATION_PERCENT, isNightMode()).bind();
-		}
 		super.onBindPreferenceViewHolder(preference, holder);
+
+		if (preference instanceof PositionAnimationPreference positionAnimationPreference) {
+			positionAnimationPreference.updateView();
+		}
 	}
 
 	@NonNull
@@ -103,17 +98,6 @@ public class PositionAnimationFragment extends BaseSettingsFragment {
 	}
 
 	private boolean isPositionAnimationEnabled() {
-		return settings.ANIMATE_MY_LOCATION.get();
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		boolean nightMode = isNightMode();
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
-	}
-
-	public boolean getContentStatusBarNightMode() {
-		return isNightMode();
+		return settings.ANIMATE_MY_LOCATION.getModeValue(getSelectedAppMode());
 	}
 }

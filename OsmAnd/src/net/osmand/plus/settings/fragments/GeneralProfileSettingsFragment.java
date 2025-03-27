@@ -299,8 +299,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Preference uiPreference = findPreference(settings.ANIMATE_MY_LOCATION.getId());
 
 		if (uiPreference != null) {
-			int interpolationValue = settings.LOCATION_INTERPOLATION_PERCENT.get();
-			boolean animationEnabled = settings.ANIMATE_MY_LOCATION.get();
+			int interpolationValue = settings.LOCATION_INTERPOLATION_PERCENT.getModeValue(getSelectedAppMode());
+			boolean animationEnabled = settings.ANIMATE_MY_LOCATION.getModeValue(getSelectedAppMode());
 
 			String summary;
 			Drawable icon;
