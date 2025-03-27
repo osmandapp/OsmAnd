@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.LocaleList;
 import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
@@ -21,12 +22,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.TreeMap;
+import java.util.*;
 
 public class LocaleHelper {
 
@@ -201,11 +197,28 @@ public class LocaleHelper {
 
 	@NonNull
 	public String getLanguage() {
-		String lang = preferredLocale != null ? preferredLocale.getLanguage() : Locale.getDefault().getLanguage();
+		return getLanguage(preferredLocale != null ? preferredLocale : Locale.getDefault());
+	}
+
+	@NonNull
+	public String getLanguage(@NonNull Locale locale) {
+		String lang = locale.getLanguage();
 		if (lang.length() > 3) {
 			lang = lang.substring(0, 2).toLowerCase();
 		}
 		return lang;
+	}
+
+	@NonNull
+	public List<String> getSupportedLanguages() {
+		List<String> languages = new ArrayList<>();
+		Configuration config = app.getBaseContext().getResources().getConfiguration();
+		LocaleList localeList = config.getLocales();
+		for (int i = 0; i < localeList.size(); i++) {
+			Locale locale = localeList.get(i);
+			languages.add(getLanguage(locale));
+		}
+		return languages;
 	}
 
 	public void updateTimeFormatting() {
@@ -234,7 +247,8 @@ public class LocaleHelper {
 	}
 
 	@Nullable
-	public static Locale getPreferredNameLocale(@NonNull OsmandApplication app, @NonNull Collection<String> localeIds) {
+	public static Locale getPreferredNameLocale(@NonNull OsmandApplication app,
+			@NonNull Collection<String> localeIds) {
 		String preferredLocaleId = app.getSettings().PREFERRED_LOCALE.get();
 		Locale availablePreferredLocale = getAvailablePreferredLocale(localeIds);
 

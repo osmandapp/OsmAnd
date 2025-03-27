@@ -49,7 +49,7 @@ public class WikiCoreHelper {
 	private static final List<String> IMAGE_EXTENSIONS = new ArrayList<>(Arrays.asList(".jpeg", ".jpg", ".png", ".gif"));
 
 
-	public static List<OsmandApiFeatureData> getExploreImageList(KQuadRect mapRect, int zoom, String lang) {
+	public static List<OsmandApiFeatureData> getExploreImageList(KQuadRect mapRect, int zoom, String langs) {
 		List<OsmandApiFeatureData> wikiImages = new ArrayList<>();
 		StringBuilder url = new StringBuilder();
 		String baseApiActionUrl = OSMAND_SEARCH_ENDPOINT + GET_WIKI_DATA_ACTION;
@@ -63,10 +63,9 @@ public class WikiCoreHelper {
 			url.append("&");
 			url.append(String.format(Locale.US, "zoom=%d", zoom));
 			url.append("&");
-			url.append(String.format(Locale.US, "lang=%s", lang));
+			url.append(String.format(Locale.US, "lang=%s", langs));
 			url.append("&");
 			url.append(String.format(Locale.US, "filters="));
-
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
@@ -302,6 +301,8 @@ public class WikiCoreHelper {
 		public String depTitle;
 		public String wikiLang;
 		public String wikiDesc;
+		public String wikiLangs;
+		public String wikiLangViews;
 		public Long osmid;
 
 		public Double elo;

@@ -116,15 +116,19 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
                     listener.onNewExplorePlacesDownloaded(); // Notify for full updates
                 }
             }
-        });
+		});
 	}
 
-	private String getLang() {
+	@NonNull
+	private String getLangs() {
+		Set<String> languages = new LinkedHashSet<>();
 		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (Algorithms.isEmpty(preferredLang)) {
 			preferredLang = app.getLanguage();
 		}
-		return preferredLang;
+		languages.add(preferredLang);
+		languages.addAll(app.getLocaleHelper().getSupportedLanguages());
+		return String.join(",", languages);
 	}
 
 	@NonNull
@@ -167,12 +171,12 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		// Fetch data for all tiles within the bounds
 		List<Amenity> filteredAmenities = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
-		final String queryLang = getLang();
+		String langs = getLangs();
 
 		// Iterate over the tiles and load data
 		for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
 			for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
-				if (!dbHelper.isDataExpired(zoom, tileX, tileY, queryLang)) {
+				if (!dbHelper.isDataExpired(zoom, tileX, tileY, langs)) {
 					TileKey tileKey = new TileKey(zoom, tileX, tileY);
 					List<Amenity> cachedPlaces = tilesCache.get(tileKey);
 					if (cachedPlaces != null) {
@@ -184,7 +188,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 							}
 						}
 					} else {
-						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, queryLang);
+						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, langs);
 						cachedPlaces = new ArrayList<>();
 						for (OsmandApiFeatureData item : places) {
 							if (Algorithms.isEmpty(item.properties.photoTitle)) {
@@ -203,7 +207,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 						tilesCache.put(tileKey, cachedPlaces);
 					}
 				} else {
-					loadTile(zoom, tileX, tileY, queryLang, dbHelper);
+					loadTile(zoom, tileX, tileY, langs, dbHelper);
 				}
 			}
 		}
@@ -269,7 +273,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	}
 
 	@SuppressLint("DefaultLocale")
-	private void loadTile(int zoom, int tileX, int tileY, String queryLang, PlacesDatabaseHelper dbHelper) {
+	private void loadTile(int zoom, int tileX, int tileY, String langs, PlacesDatabaseHelper dbHelper) {
 		double left;
 		double right;
 		double top;
@@ -288,7 +292,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
 		synchronized (loadingTasks) {
-			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(app, tileRect, zoom, queryLang,
+			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(app, tileRect, zoom, langs,
 					new GetImageCardsListener() {
 				@Override
 				public void onTaskStarted() {
@@ -300,7 +304,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 						notifyListeners(isLoading());
 					}
 					if (result != null) {
-						dbHelper.insertPlaces(zoom, tileX, tileY, queryLang, result);
+						dbHelper.insertPlaces(zoom, tileX, tileY, langs, result);
 					}
 					synchronized (loadingTasks) {
 						loadingTasks.remove(tileKey);
