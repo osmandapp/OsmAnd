@@ -1,5 +1,8 @@
 package net.osmand.plus.exploreplaces;
 
+import static net.osmand.data.Amenity.DEFAULT_ELO;
+import static net.osmand.data.Amenity.WIKIDATA;
+
 import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,7 @@ import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
+import net.osmand.wiki.WikiCoreHelper.WikiDataProperties;
 
 import org.apache.commons.logging.Log;
 
@@ -76,7 +80,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 			if (!(o instanceof TileKey tileKey)) {
 				return false;
 			}
-            return zoom == tileKey.zoom && tileX == tileKey.tileX && tileY == tileKey.tileY;
+			return zoom == tileKey.zoom && tileX == tileKey.tileX && tileY == tileKey.tileY;
 		}
 
 		@Override
@@ -109,18 +113,18 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	 */
 	public void notifyListeners(boolean isPartial) {
 		app.runInUIThread(() -> {
-            for (ExplorePlacesListener listener : listeners) {
-                if (isPartial) {
-                    listener.onPartialExplorePlacesDownloaded(); // Notify for partial updates
-                } else {
-                    listener.onNewExplorePlacesDownloaded(); // Notify for full updates
-                }
-            }
+			for (ExplorePlacesListener listener : listeners) {
+				if (isPartial) {
+					listener.onPartialExplorePlacesDownloaded(); // Notify for partial updates
+				} else {
+					listener.onNewExplorePlacesDownloaded(); // Notify for full updates
+				}
+			}
 		});
 	}
 
 	@NonNull
-	private String getLangs() {
+	private List<String> getPreferredLangs() {
 		Set<String> languages = new LinkedHashSet<>();
 		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (Algorithms.isEmpty(preferredLang)) {
@@ -128,7 +132,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		}
 		languages.add(preferredLang);
 		languages.addAll(app.getLocaleHelper().getSupportedLanguages());
-		return String.join(",", languages);
+		return new ArrayList<>(languages);
 	}
 
 	@NonNull
@@ -137,7 +141,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	}
 
 	@NonNull
-    public List<Amenity> getDataCollection(QuadRect rect, int limit) {
+	public List<Amenity> getDataCollection(QuadRect rect, int limit) {
 		synchronized (loadingTasks) {
 			if (rect == null) {
 				loadingTasks.values().removeIf(KAsyncTask::cancel);
@@ -171,12 +175,13 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		// Fetch data for all tiles within the bounds
 		List<Amenity> filteredAmenities = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
-		String langs = getLangs();
+		List<String> languages = getPreferredLangs();
+		String preferredLang = languages.get(0);
 
 		// Iterate over the tiles and load data
 		for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
 			for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
-				if (!dbHelper.isDataExpired(zoom, tileX, tileY, langs)) {
+				if (!dbHelper.isDataExpired(zoom, tileX, tileY, preferredLang)) {
 					TileKey tileKey = new TileKey(zoom, tileX, tileY);
 					List<Amenity> cachedPlaces = tilesCache.get(tileKey);
 					if (cachedPlaces != null) {
@@ -188,7 +193,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 							}
 						}
 					} else {
-						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, langs);
+						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, preferredLang);
 						cachedPlaces = new ArrayList<>();
 						for (OsmandApiFeatureData item : places) {
 							if (Algorithms.isEmpty(item.properties.photoTitle)) {
@@ -207,7 +212,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 						tilesCache.put(tileKey, cachedPlaces);
 					}
 				} else {
-					loadTile(zoom, tileX, tileY, langs, dbHelper);
+					loadTile(zoom, tileX, tileY, languages);
 				}
 			}
 		}
@@ -249,36 +254,46 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	@Nullable
 	private Amenity createAmenity(@NonNull OsmandApiFeatureData featureData) {
-		Amenity a = new Amenity();
-		a.setAdditionalInfo(Amenity.WIKIDATA, String.format(app.getString(R.string.wikidata_id_pattern), featureData.properties.id));
-		a.setId(featureData.properties.osmid);
-		a.setName(featureData.properties.wikiTitle);
-		a.setEnName(TransliterationHelper.transliterate(a.getName()));
-		a.setDescription(featureData.properties.wikiDesc);
-		WikiImage wikiIMage = WikiHelper.INSTANCE.getImageData(featureData.properties.photoTitle);
-		a.setWikiPhoto(wikiIMage == null ? featureData.properties.photoTitle : wikiIMage.getImageHiResUrl());
-		a.setWikiIconUrl(wikiIMage == null ? "" : wikiIMage.getImageIconUrl());
-		a.setWikiImageStubUrl(wikiIMage == null ? "" : wikiIMage.getImageStubUrl());
-		a.setLocation(featureData.geometry.coordinates[1], featureData.geometry.coordinates[0]);
-		String poitype = featureData.properties.poitype;
+		Amenity amenity = new Amenity();
+		WikiDataProperties properties = featureData.properties;
+
+		amenity.setAdditionalInfo(WIKIDATA, app.getString(R.string.wikidata_id_pattern, properties.id));
+		amenity.setId(properties.osmid);
+		amenity.setName(properties.wikiTitle);
+		amenity.setEnName(TransliterationHelper.transliterate(amenity.getName()));
+		amenity.setDescription(properties.wikiDesc);
+
+		if (!Algorithms.isEmpty(properties.wikiLangs)) {
+			amenity.updateContentLocales(Set.of(properties.wikiLangs.split(",")));
+		}
+
+		WikiImage imageData = WikiHelper.INSTANCE.getImageData(properties.photoTitle);
+		amenity.setWikiPhoto(imageData.getImageHiResUrl());
+		amenity.setWikiIconUrl(imageData.getImageIconUrl());
+		amenity.setWikiImageStubUrl(imageData.getImageStubUrl());
+		amenity.setLocation(featureData.geometry.coordinates[1], featureData.geometry.coordinates[0]);
+
+		String poitype = properties.poitype;
 		if (!Algorithms.isEmpty(poitype)) {
 			PoiCategory category = app.getPoiTypes().getPoiCategoryByName(poitype);
-			a.setType(category != null ? category : app.getPoiTypes().getOtherPoiCategory());
+			amenity.setType(category != null ? category : app.getPoiTypes().getOtherPoiCategory());
 		}
-		a.setSubType(featureData.properties.poisubtype);
-		//a.setTravelTopic(featureData.properties.wikiTitle);
-		//a.setWikiCategory(featureData.properties.wikiDesc);
-		a.setTravelEloNumber(featureData.properties.elo != null ? featureData.properties.elo.intValue() : Amenity.DEFAULT_ELO);
-		return a.getType() != null ? a : null;
+		amenity.setSubType(properties.poisubtype);
+		//amenity.setTravelTopic(properties.wikiTitle);
+		//amenity.setWikiCategory(properties.wikiDesc);
+		amenity.setTravelEloNumber(properties.elo != null ? properties.elo.intValue() : DEFAULT_ELO);
+		return amenity.getType() != null ? amenity : null;
 	}
 
 	@SuppressLint("DefaultLocale")
-	private void loadTile(int zoom, int tileX, int tileY, String langs, PlacesDatabaseHelper dbHelper) {
+	private void loadTile(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
 		double left;
 		double right;
 		double top;
 		double bottom;
 
+		String preferredLang = languages.get(0);
+		String langs = String.join(",", languages);
 		TileKey tileKey = new TileKey(zoom, tileX, tileY);
 		synchronized (loadingTasks) {
 			if (loadingTasks.containsKey(tileKey)) {
@@ -292,8 +307,8 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
 		synchronized (loadingTasks) {
-			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(app, tileRect, zoom, langs,
-					new GetImageCardsListener() {
+			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(app, tileRect, zoom,
+					langs, new GetImageCardsListener() {
 				@Override
 				public void onTaskStarted() {
 				}
@@ -304,7 +319,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 						notifyListeners(isLoading());
 					}
 					if (result != null) {
-						dbHelper.insertPlaces(zoom, tileX, tileY, langs, result);
+						dbHelper.insertPlaces(zoom, tileX, tileY, preferredLang, result);
 					}
 					synchronized (loadingTasks) {
 						loadingTasks.remove(tileKey);
