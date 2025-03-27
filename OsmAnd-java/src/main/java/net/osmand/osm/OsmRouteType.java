@@ -415,7 +415,7 @@ public class OsmRouteType {
 	public static List<NetworkRouteSelector.RouteKey> getRouteKeys(Map<String, String> tags) {
 		List<NetworkRouteSelector.RouteKey> lst = new ArrayList<>();
 		for (OsmRouteType routeType : OsmRouteType.values) {
-			if (routeType == OsmRouteType.ROAD) {
+			if (routeType.renderingPropertyAttr == null) {
 				continue; // unsupported
 			}
 			int rq = getRouteQuantity(tags, routeType);
@@ -433,6 +433,17 @@ public class OsmRouteType {
 			}
 		}
 		return lst;
+	}
+
+	public static boolean containsUnsupportedRouteTags(Map<String, String> tags) {
+		for (OsmRouteType routeType : OsmRouteType.values) {
+			if (routeType.renderingPropertyAttr == null) {
+				if (tags.containsKey("route_" + routeType.getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static class RouteActivityTypeBuilder {
