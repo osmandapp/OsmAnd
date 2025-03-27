@@ -5753,4 +5753,8 @@
     <string name="shared_string_offline_only">Solo offline</string>
     <string name="add_widget">Aggiungi widget</string>
     <string name="row_height">Altezza riga</string>
+    <string name="poi_source">Sorgente PDI</string>
+    <string name="display_priority">Priorità del display</string>
+    <string name="intermediate_first">Intermedi prima</string>
+    <string name="destination_first">Destinazione prima</string>
 </resources>
