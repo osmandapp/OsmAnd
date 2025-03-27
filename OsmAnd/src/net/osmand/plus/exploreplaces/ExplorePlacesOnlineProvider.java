@@ -14,9 +14,11 @@ import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.search.GetExplorePlacesImagesTask;
 import net.osmand.plus.search.GetExplorePlacesImagesTask.GetImageCardsListener;
 import net.osmand.plus.shared.SharedUtil;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.shared.KAsyncTask;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.wiki.WikiHelper;
@@ -124,15 +126,23 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	}
 
 	@NonNull
-	private List<String> getPreferredLangs() {
-		Set<String> languages = new LinkedHashSet<>();
+	private Set<String> getPreferredLangs() {
 		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (Algorithms.isEmpty(preferredLang)) {
 			preferredLang = app.getLanguage();
 		}
-		languages.add(preferredLang);
-		languages.addAll(app.getLocaleHelper().getSupportedLanguages());
-		return new ArrayList<>(languages);
+		Set<String> languages = new LinkedHashSet<>();
+		WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
+		if (plugin.hasCustomSettings()) {
+			List<String> langs = plugin.getLanguagesToShow();
+			if (langs.contains(preferredLang)) {
+				languages.add(preferredLang);
+			}
+			languages.addAll(langs);
+		} else {
+			languages.add(preferredLang);
+		}
+		return languages;
 	}
 
 	@NonNull
@@ -175,25 +185,20 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		// Fetch data for all tiles within the bounds
 		List<Amenity> filteredAmenities = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
-		List<String> languages = getPreferredLangs();
-		String preferredLang = languages.get(0);
+		Set<String> languages = getPreferredLangs();
 
 		// Iterate over the tiles and load data
 		for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
 			for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
-				if (!dbHelper.isDataExpired(zoom, tileX, tileY, preferredLang)) {
+				if (!isDataExpired(zoom, tileX, tileY, languages)) {
 					TileKey tileKey = new TileKey(zoom, tileX, tileY);
 					List<Amenity> cachedPlaces = tilesCache.get(tileKey);
 					if (cachedPlaces != null) {
 						for (Amenity amenity : cachedPlaces) {
-							double lat = amenity.getLocation().getLatitude();
-							double lon = amenity.getLocation().getLongitude();
-							if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(amenity.getId())) {
-								filteredAmenities.add(amenity);
-							}
+							filterAmenity(amenity, filteredAmenities, rect, uniqueIds, loadAll);
 						}
 					} else {
-						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, preferredLang);
+						List<OsmandApiFeatureData> places = getPlaces(zoom, tileX, tileY, languages);
 						cachedPlaces = new ArrayList<>();
 						for (OsmandApiFeatureData item : places) {
 							if (Algorithms.isEmpty(item.properties.photoTitle)) {
@@ -201,11 +206,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 							}
 							Amenity amenity = createAmenity(item);
 							if (amenity != null) {
-								double lat = amenity.getLocation().getLatitude();
-								double lon = amenity.getLocation().getLongitude();
-								if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(amenity.getId())) {
-									filteredAmenities.add(amenity);
-								}
+								filterAmenity(amenity, filteredAmenities, rect, uniqueIds, loadAll);
 								cachedPlaces.add(amenity);
 							}
 						}
@@ -227,6 +228,34 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		}
 
 		return filteredAmenities;
+	}
+
+	private boolean isDataExpired(int zoom, int tileX, int tileY, Set<String> languages) {
+		for (String lang : languages) {
+			if (dbHelper.isDataExpired(zoom, tileX, tileY, lang)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	private List<OsmandApiFeatureData> getPlaces(int zoom, int tileX, int tileY,
+			@NonNull Set<String> languages) {
+		List<OsmandApiFeatureData> places = new ArrayList<>();
+		for (String lang : languages) {
+			places.addAll(dbHelper.getPlaces(zoom, tileX, tileY, lang));
+		}
+		return places;
+	}
+
+	private void filterAmenity(@NonNull Amenity amenity, @NonNull List<Amenity> filteredAmenities,
+			@NonNull QuadRect rect, @NonNull Set<Long> uniqueIds, boolean loadAll) {
+		double lat = amenity.getLocation().getLatitude();
+		double lon = amenity.getLocation().getLongitude();
+		if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(amenity.getId())) {
+			filteredAmenities.add(amenity);
+		}
 	}
 
 	private void clearCache(int zoom, int minTileX, int maxTileX, int minTileY, int maxTileY) {
@@ -286,14 +315,12 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	}
 
 	@SuppressLint("DefaultLocale")
-	private void loadTile(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
+	private void loadTile(int zoom, int tileX, int tileY, @NonNull Set<String> languages) {
 		double left;
 		double right;
 		double top;
 		double bottom;
 
-		String preferredLang = languages.get(0);
-		String langs = String.join(",", languages);
 		TileKey tileKey = new TileKey(zoom, tileX, tileY);
 		synchronized (loadingTasks) {
 			if (loadingTasks.containsKey(tileKey)) {
@@ -308,7 +335,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
 		synchronized (loadingTasks) {
 			GetExplorePlacesImagesTask task = new GetExplorePlacesImagesTask(app, tileRect, zoom,
-					langs, new GetImageCardsListener() {
+					languages, new GetImageCardsListener() {
 				@Override
 				public void onTaskStarted() {
 				}
@@ -319,7 +346,17 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 						notifyListeners(isLoading());
 					}
 					if (result != null) {
-						dbHelper.insertPlaces(zoom, tileX, tileY, preferredLang, result);
+						Map<String, List<OsmandApiFeatureData>> map = new HashMap<>();
+						for (OsmandApiFeatureData data : result) {
+							List<OsmandApiFeatureData> list = map.computeIfAbsent(
+									data.properties.wikiLang, k -> new ArrayList<>());
+							list.add(data);
+						}
+						for (Map.Entry<String, List<OsmandApiFeatureData>> entry : map.entrySet()) {
+							String lang = entry.getKey();
+							List<? extends OsmandApiFeatureData> list = entry.getValue();
+							dbHelper.insertPlaces(zoom, tileX, tileY, lang, list);
+						}
 					}
 					synchronized (loadingTasks) {
 						loadingTasks.remove(tileKey);
