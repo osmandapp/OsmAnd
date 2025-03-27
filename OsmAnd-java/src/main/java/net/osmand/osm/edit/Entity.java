@@ -5,12 +5,7 @@ import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public abstract class Entity implements Serializable {
@@ -110,6 +105,7 @@ public abstract class Entity implements Serializable {
 	private int version;
 	private double latitude;
 	private double longitude;
+	private Collection<Integer> partOf;
 	public static final int MODIFY_UNKNOWN = 0;
 	public static final int MODIFY_DELETED = -1;
 	public static final int MODIFY_MODIFIED = 1;
@@ -351,5 +347,20 @@ public abstract class Entity implements Serializable {
 					Math.abs(longitude - thatObj.longitude) < 0.00001 &&
 					Algorithms.objectEquals(this.tags, thatObj.tags);
 		}
+	}
+
+	public Collection<Integer> getPartOf() {
+		return partOf;
+	}
+
+	public void setPartOf(Collection<Integer> partOf) {
+		this.partOf = partOf;
+	}
+
+	public void addPartOf(int relation) {
+		if (partOf == null) {
+			partOf = new ArrayList<>();
+		}
+		partOf.add(relation);
 	}
 }

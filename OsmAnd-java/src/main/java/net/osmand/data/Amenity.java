@@ -56,6 +56,7 @@ public class Amenity extends MapObject {
 	public static final String IS_AGGR_PART = "is_aggr_part";
 	public static final String CONTENT_JSON = "content_json";
 	public static final String ROUTE_ID = "route_id";
+	public static final String ROUTE_PART_OF = "route_part_of";
 	public static final String ROUTE_ID_OSM_PREFIX_LEGACY = "OSM"; // non-indexed
 	public static final String ROUTE_ID_OSM_PREFIX = "O"; // indexed in POI-section
 	public static final String ROUTE_SOURCE = "route_source";
@@ -74,7 +75,6 @@ public class Amenity extends MapObject {
 	public static final String SEPARATOR = ";";
 	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
-	public static final String ROUTE_MEMBERS_IDS = "route_members_ids";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
 	public static final int DEFAULT_ELO = 900;
 
