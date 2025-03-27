@@ -3,7 +3,6 @@ package net.osmand.plus.configmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -120,14 +119,12 @@ public class MapModeController extends BaseDialogController implements MapThemeP
 		return (MapModeController) dialogManager.findController(PROCESS_ID);
 	}
 
-	public static void showDialog(@NonNull FragmentActivity activity) {
-		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		MapModeController controller = new MapModeController(app);
+	public static MapModeFragment createMapModeFragmentAndRegisterController(final FragmentActivity activity) {
+		createAndRegisterController((OsmandApplication) activity.getApplicationContext());
+		return MapModeFragment.createInstance();
+	}
 
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(PROCESS_ID, controller);
-
-		FragmentManager manager = activity.getSupportFragmentManager();
-		MapModeFragment.showInstance(manager);
+	private static void createAndRegisterController(final OsmandApplication app) {
+		app.getDialogManager().register(PROCESS_ID, new MapModeController(app));
 	}
 }

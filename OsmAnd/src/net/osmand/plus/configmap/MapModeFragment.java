@@ -175,10 +175,14 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 		controller.finishProcessIfNeeded(getActivity());
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
+	public static MapModeFragment createInstance() {
+		return new MapModeFragment();
+	}
+
+	public void show(final FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, new MapModeFragment(), TAG)
+					.replace(R.id.fragmentContainer, this, TAG)
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 		}

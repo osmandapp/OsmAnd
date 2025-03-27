@@ -7,9 +7,6 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.configmap.MapModeController;
@@ -76,14 +73,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				// FK-TODO: hole analog zu den anderen Fällen hier eine bestehende Instanz aus den getDialogs()?
-				final ConfigureMapFragment configureMapFragment = _srcProxy.getPrincipal();
-				final MapActivity activity = configureMapFragment.getMapActivity();
-				// FK-TODO: DRY with MapModeController.showDialog():
-				final OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-				final MapModeController controller = new MapModeController(app);
-				final DialogManager dialogManager = app.getDialogManager();
-				dialogManager.register(MapModeController.PROCESS_ID, controller);
-				return Optional.of((T) new MapModeFragment());
+				return Optional.of((T) MapModeController.createMapModeFragmentAndRegisterController(_srcProxy.getPrincipal().getMapActivity()));
 			} else if (srcProxy instanceof final MapModeFragment.MapModeFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}

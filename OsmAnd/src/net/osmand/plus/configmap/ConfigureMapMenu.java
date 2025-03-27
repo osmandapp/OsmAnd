@@ -530,7 +530,9 @@ public class ConfigureMapMenu {
 				.setIcon(ConfigureMapUtils.getDayNightIcon(activity))
 				.setListener((_uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						MapModeController.showDialog(activity);
+						MapModeController
+								.createMapModeFragmentAndRegisterController(activity)
+								.show(activity.getSupportFragmentManager());
 					}
 					return true;
 				})
