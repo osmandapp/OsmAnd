@@ -4,6 +4,7 @@ package net.osmand.router.network;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.OsmRouteType;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -137,6 +139,99 @@ public class NetworkRouteSelector {
 			}
 		}
 		return gpxFileMap;
+	}
+
+	public static List<NetworkRouteSelector.RouteKey> getRouteKeys(RouteDataObject obj) {
+		Map<String, String> tags = new TreeMap<>();
+		for (int i = 0; obj.nameIds != null && i < obj.nameIds.length; i++) {
+			int nameId = obj.nameIds[i];
+			String value = obj.names.get(nameId);
+			BinaryMapRouteReaderAdapter.RouteTypeRule rt = obj.region.quickGetEncodingRule(nameId);
+			if (rt != null) {
+				tags.put(rt.getTag(), value);
+			}
+		}
+		for (int i = 0; obj.types != null && i < obj.types.length; i++) {
+			BinaryMapRouteReaderAdapter.RouteTypeRule rt = obj.region.quickGetEncodingRule(obj.types[i]);
+			if (rt != null) {
+				tags.put(rt.getTag(), rt.getValue());
+			}
+		}
+		return getRouteKeys(tags);
+	}
+
+	public static List<NetworkRouteSelector.RouteKey> getRouteKeys(BinaryMapDataObject bMdo) {
+		Map<String, String> tags = new TreeMap<>();
+		for (int i = 0; i < bMdo.getObjectNames().keys().length; i++) {
+			int keyInd = bMdo.getObjectNames().keys()[i];
+			BinaryMapIndexReader.TagValuePair tp = bMdo.getMapIndex().decodeType(keyInd);
+			String value = bMdo.getObjectNames().get(keyInd);
+			if (tp != null) {
+				tags.put(tp.tag, value);
+			}
+		}
+		int[] tps = bMdo.getAdditionalTypes();
+		for (int i = 0; i < tps.length; i++) {
+			BinaryMapIndexReader.TagValuePair tp = bMdo.getMapIndex().decodeType(tps[i]);
+			if (tp != null) {
+				tags.put(tp.tag, tp.value);
+			}
+		}
+		tps = bMdo.getTypes();
+		for (int i = 0; i < tps.length; i++) {
+			BinaryMapIndexReader.TagValuePair tp = bMdo.getMapIndex().decodeType(tps[i]);
+			if (tp != null) {
+				tags.put(tp.tag, tp.value);
+			}
+		}
+		return getRouteKeys(tags);
+	}
+
+	private static int getRouteQuantity(Map<String, String> tags, OsmRouteType rType) {
+		int q = 0;
+		for (String tag : tags.keySet()) {
+			if (tag.startsWith(rType.getTagPrefix())) {
+				int num = Algorithms.extractIntegerNumber(tag);
+				if (num > 0 && tag.equals(rType.getTagPrefix() + num)) {
+					q = Math.max(q, num);
+				}
+			}
+		}
+		return q;
+	}
+
+	public static List<NetworkRouteSelector.RouteKey> getRouteKeys(Map<String, String> tags) {
+		List<NetworkRouteSelector.RouteKey> lst = new ArrayList<>();
+		for (OsmRouteType routeType : OsmRouteType.getAllValues()) {
+			if (routeType.getRenderingPropertyAttr() == null) {
+				continue; // unsupported
+			}
+			int rq = getRouteQuantity(tags, routeType);
+			for (int routeIdx = 1; routeIdx <= rq; routeIdx++) {
+				String prefix = routeType.getTagPrefix() + routeIdx;
+				NetworkRouteSelector.RouteKey routeKey = new NetworkRouteSelector.RouteKey(routeType);
+				for (Map.Entry<String, String> e : tags.entrySet()) {
+					String tag = e.getKey();
+					if (tag.startsWith(prefix) && tag.length() > prefix.length()) {
+						String key = tag.substring(prefix.length() + 1);
+						routeKey.addTag(key, e.getValue());
+					}
+				}
+				lst.add(routeKey);
+			}
+		}
+		return lst;
+	}
+
+	public static boolean containsUnsupportedRouteTags(Map<String, String> tags) {
+		for (OsmRouteType routeType : OsmRouteType.getAllValues()) {
+			if (routeType.getRenderingPropertyAttr() == null) {
+				if (tags.containsKey("route_" + routeType.getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static class NetworkRouteSegmentChain {
@@ -696,11 +791,11 @@ public class NetworkRouteSelector {
 		public Set<OsmRouteType> typeFilter = null; // null -  all
 
 		public List<RouteKey> convert(BinaryMapDataObject obj) {
-			return filterKeys(OsmRouteType.getRouteKeys(obj));
+			return filterKeys(getRouteKeys(obj));
 		}
 
 		public List<RouteKey> convert(RouteDataObject obj) {
-			return filterKeys(OsmRouteType.getRouteKeys(obj));
+			return filterKeys(getRouteKeys(obj));
 		}
 
 

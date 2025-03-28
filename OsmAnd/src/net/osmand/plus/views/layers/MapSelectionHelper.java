@@ -237,7 +237,7 @@ public class MapSelectionHelper {
 				String travelGpxFilter = renderedObject.getRouteID();
 
 				boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
-				boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
+				boolean isOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
 				boolean isClickableWay = clickableWayHelper.isClickableWay(renderedObject);
 
 				if (!isClickableWay && !isTravelGpx && !isOsmRoute && (renderedObject.getId() == null
@@ -357,10 +357,10 @@ public class MapSelectionHelper {
 							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
-							boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
+							boolean isOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
 							boolean isClickableWay = clickableWayHelper.isClickableWay(obfMapObject, tags);
 
-							if (!isOsmRoute && OsmRouteType.containsUnsupportedRouteTags(tags)) {
+							if (!isOsmRoute && NetworkRouteSelector.containsUnsupportedRouteTags(tags)) {
 								continue;
 							}
 
