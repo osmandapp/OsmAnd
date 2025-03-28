@@ -407,10 +407,14 @@ public class Amenity extends MapObject {
 	}
 
 	public Set<String> getSupportedContentLocales() {
-		Set<String> supported = contentLocales != null ? contentLocales : new TreeSet<>();
-		supported.addAll(getNames(CONTENT, "en"));
-		supported.addAll(getNames(DESCRIPTION, "en"));
-		return supported;
+		if (contentLocales != null) {
+			return contentLocales;
+		} else {
+			Set<String> supported = new TreeSet<>();
+			supported.addAll(getNames(CONTENT, "en"));
+			supported.addAll(getNames(DESCRIPTION, "en"));
+			return supported;
+		}
 	}
 
 	public void updateContentLocales(Set<String> locales) {
