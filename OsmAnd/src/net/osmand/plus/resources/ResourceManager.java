@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.Location;
@@ -936,6 +937,87 @@ public class ResourceManager {
 			}
 		}
 		return false;
+	}
+
+
+	private List<Amenity> searchRouteByName(String multipleSearch, double lat, double lon, boolean force, ResultMatcher<Amenity> matcher) {
+		List<AmenityIndexRepositoryBinary> list = new ArrayList<>();
+		List<Amenity> result = new ArrayList<>();
+		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
+			if (index instanceof AmenityIndexRepositoryBinary) {
+				if (index.getFile().getName().contains("World")) {
+					continue;
+				}
+				if (index.checkContains(lat, lon)) {
+					list.add(0, (AmenityIndexRepositoryBinary) index);
+				}
+			}
+		}
+		BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+				MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat), multipleSearch,
+				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher
+		);
+		req.setMatcherMode(CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS);
+		req.force = force;
+		for (AmenityIndexRepositoryBinary index : list) {
+			List<Amenity> amenities = index.searchPoiByName(req);
+			if (!Algorithms.isEmpty(amenities)) {
+				result.addAll(amenities);
+			}
+		}
+		return result;
+	}
+
+	public List<Amenity> searchRoutePartOf(String routeId, double lat, double lon) {
+		ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+			@Override
+			public boolean publish(Amenity amenity) {
+				String members = amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS);
+				if (members != null) {
+					HashSet<String> ids = new HashSet<>();
+					Collections.addAll(ids, members.split(","));
+					return ids.contains(routeId);
+				}
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		return searchRouteByName(routeId, lat, lon, false, matcher);
+	}
+
+	public Map<String, List<Amenity>> searchRouteMembers(String multipleSearch, double lat, double lon, boolean force) {
+		HashSet<String> ids = new HashSet<>();
+		Collections.addAll(ids, multipleSearch.split(","));
+		ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+			@Override
+			public boolean publish(Amenity amenity) {
+				String routeId = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+				return routeId != null && ids.contains(routeId);
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+
+		Map<String, List<Amenity>> map = new HashMap<>();
+		List<Amenity> result = searchRouteByName(multipleSearch, lat, lon, force, matcher);
+		for (Amenity am : result) {
+			String routeId = am.getAdditionalInfo(Amenity.ROUTE_ID);
+			List<Amenity> amenities = map.computeIfAbsent(routeId, l -> new ArrayList<>());
+			amenities.add(am);
+		}
+		for (String id : ids) {
+			if (!map.containsKey(id)) {
+				map.put(id, null);
+			}
+		}
+		return map;
 	}
 
 	public List<Amenity> searchAmenitiesByName(String searchQuery,

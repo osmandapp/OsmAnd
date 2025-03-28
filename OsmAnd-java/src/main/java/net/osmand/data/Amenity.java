@@ -96,10 +96,6 @@ public class Amenity extends MapObject {
 	private String wikiImageStubUrl;
 	private int travelElo = 0;
 
-	private Collection<Amenity> related;
-	private Collection<Amenity> partOf;
-	private Collection<Amenity> members;
-
 	public int getOrder() {
 		return order;
 	}
@@ -129,40 +125,6 @@ public class Amenity extends MapObject {
 
 	public String getRegionName() {
 		return regionName;
-	}
-
-    public Collection<Amenity> getRelated() {
-        return related;
-    }
-
-    public void setRelated(Collection<Amenity> related) {
-        this.related = related;
-    }
-
-	public void addRelated(Amenity amenity) {
-		if (related == null) {
-			related = new ArrayList<>();
-		}
-		related.add(amenity);
-	}
-
-    public Collection<Amenity> getPartOf() {
-        return partOf;
-    }
-
-    public void setPartOf(Collection<Amenity> partOf) {
-        this.partOf = partOf;
-    }
-
-    public Collection<Amenity> getMembers() {
-        return members;
-    }
-
-	public void addMember(Amenity amenity) {
-		if (members == null) {
-			members = new ArrayList<>();
-		}
-		members.add(amenity);
 	}
 
     public static class AmenityRoutePoint {
@@ -505,16 +467,6 @@ public class Amenity extends MapObject {
 
 	public String getRouteId() {
 		return getAdditionalInfo(ROUTE_ID);
-	}
-
-	public List<String> getRouteMembersIds() {
-		List<String> memSet = null;
-		String m = getAdditionalInfo(ROUTE_MEMBERS_IDS);
-		if (m != null) {
-			memSet = new ArrayList<>();
-			Collections.addAll(memSet, m.split(","));
-		}
-		return memSet;
 	}
 
 	public String getWikiPhoto() {

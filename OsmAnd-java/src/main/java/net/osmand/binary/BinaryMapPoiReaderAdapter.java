@@ -313,8 +313,7 @@ public class BinaryMapPoiReaderAdapter {
 	protected void searchPoiByName(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		String query = normalizeSearchPoiByNameQuery(req.nameQuery);
-		CollatorStringMatcher matcher = new CollatorStringMatcher(query,
-				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		CollatorStringMatcher matcher = new CollatorStringMatcher(query, req.matcherMode);
 		long indexOffset = codedIS.getTotalBytesRead();
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		List<Integer> nameIndexCoordinates = new ArrayList<>();
@@ -452,8 +451,17 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				if (listOfSepOffsets.size() > 0) {
-					offsets.putAll(listOfSepOffsets.get(0));
-					for (int j = 1; j < listOfSepOffsets.size(); j++) {
+					if (req.force) {
+						for (TIntLongHashMap m : listOfSepOffsets) {
+							int[] k = m.keys();
+							offsets.put(k[0], m.get(k[0]));
+						}
+					} else {
+						for (TIntLongHashMap m : listOfSepOffsets) {
+							offsets.putAll(m);
+						}
+					}
+					/*for (int j = 1; j < listOfSepOffsets.size(); j++) {
 						TIntLongHashMap mp = listOfSepOffsets.get(j);
 						// offsets.retainAll(mp); -- calculate intresection of mp & offsets
 						for (int chKey : offsets.keys()) {
@@ -461,7 +469,7 @@ public class BinaryMapPoiReaderAdapter {
 								offsets.remove(chKey);
 							}
 						}
-					}
+					}*/
 				}
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return offsets;
@@ -648,7 +656,8 @@ public class BinaryMapPoiReaderAdapter {
 						if (!matches) {
 							for (String key : am.getAdditionalInfoKeys()) {
 								if (!key.contains("_name") && !key.equals("brand") &&
-										!key.contains("wikidata") && !key.equals("route_id")) {
+										!key.contains("wikidata") && !key.equals("route_id") &&
+										!key.equals("route_members_ids")) {
 									continue;
 								}
 								matches = matcher.matches(am.getAdditionalInfo(key));
@@ -660,7 +669,10 @@ public class BinaryMapPoiReaderAdapter {
 					}
 					if (matches) {
 						req.collectRawData(am);
-						req.publish(am);
+						boolean publish = req.publish(am);
+						if (req.force && publish) {
+							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+						}
 					}
 				}
 				break;

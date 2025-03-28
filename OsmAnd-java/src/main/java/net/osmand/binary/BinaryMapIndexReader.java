@@ -1837,6 +1837,7 @@ public class BinaryMapIndexReader {
 		int numberOfReadSubtrees = 0;
 		int numberOfAcceptedSubtrees = 0;
 		boolean interrupted = false;
+		public boolean force = false;
 
 		public MapObjectStat getStat() {
 			return stat;
@@ -1992,6 +1993,10 @@ public class BinaryMapIndexReader {
         public void setSearchBoxes(Collection<QuadRect> searchBboxes) {
             this.searchBoxes = searchBboxes;
         }
+
+		public void setMatcherMode(StringMatcherMode mode) {
+			matcherMode = mode;
+		}
     }
 
 
