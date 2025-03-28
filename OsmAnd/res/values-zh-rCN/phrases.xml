@@ -3183,4 +3183,6 @@
     <string name="poi_aerialway_magic_carpet">魔毯</string>
     <string name="poi_bowls">草地滚球</string>
     <string name="poi_rugby_union">橄榄球联盟</string>
+    <string name="poi_religion_jain">耆那教</string>
+    <string name="poi_religion_multifaith">多信仰</string>
 </resources>
