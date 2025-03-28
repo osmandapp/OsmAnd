@@ -475,7 +475,7 @@
     <string name="notes">Sonaj/videaj notoj</string>
     <string name="online_map">Enreta mapo</string>
     <string name="roads_only">Nur vojoj</string>
-    <string name="rendering_attr_pisteRoutes_name">Descendejoj</string>
+    <string name="rendering_attr_pisteRoutes_name">Skiaj kursoj</string>
     <string name="free">Libera %1$s</string>
     <string name="gps_status">Stato de GPS</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapoj kaj Navigado</string>
@@ -4434,7 +4434,7 @@
     <string name="auto_25_chars_route_roundabout_kr">Elektu la %1$d-an elveturejon kaj veturu ĉe dekstra flanko</string>
     <string name="relative_bearing_widget_desc">Angulo inter direkto de via movado kaj la alcela loko.</string>
     <string name="connect_with_straight_line">Konekti per rekta linio</string>
-    <string name="attach_roads_descr">Alproksimigi vian spuron al vojoj por difini kurson inter punktoj kaj por akiri precizajn informojn pri kurbiĝoj kaj ŝoseo.</string>
+    <string name="attach_roads_descr">Alproksimigi vian spuron al vojoj por akiri precizajn informojn pri kurso, inkluzivante instrukciojn kurbiĝo-post-kurbiĝo kaj atributojn de ŝoseoj.</string>
     <string name="auto_25_chars_route_tl_kr">Turniĝu maldekstren kaj veturu ĉe dekstra flanko</string>
     <string name="auto_25_chars_route_tu_kl">Turniĝu malantaŭen kaj veturu ĉe maldekstra flanko</string>
     <string name="auto_backup_preference_desc">Implicite Android konservas sekurkopiojn de ŝatataj punktoj, map-ĵetonoj kaj agordoj de la aplikaĵo por restarigi ilin en novaj aparatoj post reinstali. Tiu sekurkopio estas limigita al 25 MB.
@@ -5292,7 +5292,7 @@
     <string name="change_default_tracks_appearance_confirmation">Ĉu apliki ŝanĝojn al ekzistaj spuroj en tiu ĉi dosierujo aŭ nur al novaj?</string>
     <string name="allow_display_on_top">Permesi kovri tekston per teksto</string>
     <string name="allow_display_on_top_description">Permesi al etikedoj sur la mapo kovri unu al la alia</string>
-    <string name="show_debug_info">Montri senerarigaj informoj</string>
+    <string name="show_debug_info">Montri senerarigajn informojn</string>
     <string name="show_debug_info_description">Montri grafikajn informojn pri lokiĝo de ĉiu teksto sur la mapo</string>
     <string name="map_text">Etikedoj sur la mapo</string>
     <string name="routing_attr_avoid_cobblestone_name">Eviti rulŝtonajn kahelojn</string>
@@ -5730,4 +5730,9 @@
     <string name="ais_object_lost_timeout_description">Agordi templimon por videblo de AIS-objektoj: post tiu tempo sen ricevi signalon, la AIS-objekto foriĝos de la ekrano.</string>
     <string name="ais_cpa_settings_description">Valoroj difinantaj kiel vidigi AIS-objektojn, kiu povas esti tro proksimaj al via pozicio.</string>
     <string name="plugin_ais_tracker_description">Montri poziciojn kaj informojn de AIS pri ĉirkaŭaj ŝipoj. La AIS-datumoj estas ricevataj el ekstera AIS-ricevilo.</string>
+    <string name="show_dm_grids_description">Montri la kradon en gradoj kaj minutoj, anstataŭ nur en gradoj aŭ en gradoj, minutoj, sekundoj</string>
+    <string name="map_grid">Koordinataj kradoj</string>
+    <string name="show_dms_grids">Uzi gradojn, minutojn kaj sekundojn</string>
+    <string name="show_dm_grids">Uzi gradojn kaj minutojn</string>
+    <string name="show_dms_grids_description">Montri la kradon en gradoj, minutoj kaj sekundoj anstataŭ nur en gradoj</string>
 </resources>
