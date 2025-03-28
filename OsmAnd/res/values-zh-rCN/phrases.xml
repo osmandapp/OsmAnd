@@ -1023,8 +1023,8 @@
     <string name="poi_museum_type">博物馆主题</string>
     <string name="poi_post_office_type">类型</string>
     <string name="poi_butcher_type">主要肉类</string>
-    <string name="poi_agrarian_type">农业投入（品）</string>
-    <string name="poi_service_fleurop_filter">Fleurop 服务</string>
+    <string name="poi_agrarian_type">农业用品</string>
+    <string name="poi_service_fleurop_filter">Fleurop 鲜花配送服务</string>
     <string name="poi_furniture_filter">家具</string>
     <string name="poi_fridge_filter">冰箱</string>
     <string name="poi_heating_filter">暖气</string>
