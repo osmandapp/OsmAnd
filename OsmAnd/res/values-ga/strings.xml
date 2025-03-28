@@ -5537,4 +5537,8 @@
     <string name="add_widget">Cuir giuirléid leis</string>
     <string name="shared_string_offline_only">As Líne amháin</string>
     <string name="row_height">Airde na sraithe</string>
+    <string name="display_priority">Taispeáin tosaíocht</string>
+    <string name="intermediate_first">Idirmheánach ar dtús</string>
+    <string name="destination_first">Ceann scríbe ar dtús</string>
+    <string name="poi_source">Foinse POI</string>
 </resources>

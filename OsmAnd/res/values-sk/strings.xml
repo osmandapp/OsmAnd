@@ -5755,4 +5755,8 @@
     <string name="release_5_0">• Objavte najlepšie hodnotené body záujmu v novom režime Prieskumu\n\n • Všetky trasy v OSM sú teraz vyhľadateľné! Turistické, cyklistické, horské bicykle a ďalšie\n\n • Nový navigačný nástroj kombinuje navigačné inštrukcie a šípky zabočenia\n\n • Nový nástroj pre aktuálnu trasu: zobrazuje odhadovaný čas trvania, príjazdu a vzdialenosti\n\n • Zvoľte lyžiarske svahy a cesty pre horské bicykle na mape pre podrobné informácie\n\n • Možnosť zvoliť veľkosť nástrojov pre ľavý a pravý panel\n\n • Pridaná súradnicová sieť pre geografické súradnice\n\n • Pridaná možnosť nastavenia predvoleného vzhľadu pre skupiny obľúbených bodov\n\n • Android Auto: zobrazte odhadovaný čas príjazdu a vzdialenosť k ďalšiemu bodu trasy; vo výsledkoch vyhľadávania sa zobrazujú aj názvy miest\n\n • Výrazné vrchy je teraz možné nájsť pomocou mapy a vyhľadávania\n\n • Výšky vrcholov hôr v stopách\n\n • Pridané: Skalné steny a oblasti na horolezectvo na mape\n\n • Vyhľadávanie adries v USA bolo vylepšené\n\n • Pridané navigačné hlasové pokyny vo formáte TTS v hebrejčine</string>
     <string name="add_widget">Pridať nástroj</string>
     <string name="row_height">Výška riadka</string>
+    <string name="intermediate_first">Najprv prechodný bod</string>
+    <string name="poi_source">Zdroj bodu záujmu</string>
+    <string name="destination_first">Najprv cieľ</string>
+    <string name="display_priority">Priorita zobrazenia</string>
 </resources>

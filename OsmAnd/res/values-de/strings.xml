@@ -429,10 +429,10 @@
     <string name="si_mi_feet">Meilen/Fuß</string>
     <string name="si_mi_yard">Meilen/Yards</string>
     <string name="si_km_m">Kilometer/Meter</string>
-    <string name="yard">yd</string>
-    <string name="foot">ft</string>
+    <string name="yard">Yard</string>
+    <string name="foot">Foot</string>
     <string name="mile_per_hour">mph</string>
-    <string name="mile">mi</string>
+    <string name="mile">Meile</string>
     <string name="send_location_way_choose_title">Standort mitteilen mittels</string>
     <string name="send_location_sms_pattern">Standort: %1$s
 \n%2$s</string>
@@ -1300,7 +1300,7 @@
     <string name="home">Übersichtsseite</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
     <string name="record_plugin_name">Streckenaufzeichnung</string>
-    <string name="int_hour">h</string>
+    <string name="int_hour">std</string>
     <string name="duration">Dauer</string>
     <string name="distance">Entfernung</string>
     <string name="index_tours">Touren</string>
@@ -2273,9 +2273,9 @@
     <string name="mapillary_widget_descr">Ermöglicht schnelle Beiträge zu Mapillary.</string>
     <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jeden. Orte entdecken, mitwirken und die Welt in Bildern festhalten.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="mapillary_action_descr">Mit Mapillary Bilder von diesem Ort beisteuern.</string>
+    <string name="mapillary_action_descr">Straßen-Anzeige teilen via Mapillary.</string>
     <string name="shared_string_install">Installieren</string>
-    <string name="online_photos">Online-Fotos</string>
+    <string name="online_photos">Online Bilder</string>
     <string name="no_photos_descr">Keine Fotos hier.</string>
     <string name="plugin_mapillary_descr">Bildmaterial von Straßenansichten. Sie können auch selbst einen Beitrag leisten. Um die vorhandenen Daten als Kartenebene zu sehen, aktivieren Sie „Bilder auf Straßenebene“ im Menü „Karte konfigurieren“.</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
@@ -2533,7 +2533,7 @@
     <string name="waypoints_removed_from_map_markers">Wegpunkte aus Kartenmarkierungen entfernt</string>
     <string name="nothing_found_in_radius">Nichts gefunden:</string>
     <string name="select_waypoints_category_description">Fügen Sie alle Wegpunkte des Tracks hinzu oder wählen Sie einzelne Kategorien aus.</string>
-    <string name="shared_string_total">Total</string>
+    <string name="shared_string_total">Insgesamt</string>
     <string name="use_two_digits_longitude">Zweistelligen Längengrad verwenden</string>
     <string name="wikivoyage_search_hint">Suche nach Land, Stadt oder Provinz</string>
     <string name="shared_string_read">Lesen</string>
@@ -3043,7 +3043,7 @@
     <string name="rendering_attr_piste_type_hike_name">Wandern</string>
     <string name="rendering_attr_piste_type_connection_name">Verbindung</string>
     <string name="rendering_attr_piste_type_skitour_name">Skitour</string>
-    <string name="rendering_attr_piste_type_downhill_name">Downhill</string>
+    <string name="rendering_attr_piste_type_downhill_name">Bergab</string>
     <string name="rendering_attr_piste_type_nordic_name">Nordisch</string>
     <string name="routeInfo_piste_type_name">Pistentyp</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Anfänger</string>
@@ -3051,7 +3051,7 @@
     <string name="rendering_attr_piste_difficulty_intermediate_name">Mittel</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Fortgeschritten</string>
     <string name="rendering_attr_piste_difficulty_expert_name">Experte</string>
-    <string name="rendering_attr_piste_difficulty_freeride_name">Freeride</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Freifahren</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Extrem</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Undefiniert</string>
     <string name="routeInfo_piste_difficulty_name">Pisten-Schwierigkeitsgrad</string>
@@ -3315,7 +3315,7 @@
     <string name="reset_items_descr">Das Ausblenden von Einstellungen setzt sie auf ihren ursprünglichen Zustand zurück.</string>
     <string name="main_actions">Hauptaktionen</string>
     <string name="move_inside_category">Elemente können nur innerhalb dieser Kategorie verschoben werden.</string>
-    <string name="shared_string_items">Elemente</string>
+    <string name="shared_string_items">Gegenstände</string>
     <string name="some_articles_may_not_available_in_lang">Einige Wikipedia-Artikel sind möglicherweise nicht in Ihrer Sprache verfügbar.</string>
     <string name="lang_zhyue">Kantonesisch</string>
     <string name="lang_zhminnan">Minnan</string>
@@ -4434,12 +4434,12 @@
     <string name="goods_delivery_desc_4">Verwenden Sie das Lkw-Profil für Fahrzeuggewichte von mehr als 3,5 Tonnen.</string>
     <string name="routing_attr_goods_restrictions_name">Lieferverkehr</string>
     <string name="download_complete">Download abgeschlossen</string>
-    <string name="auto_25_chars_route_tl_kr">Links abbiegen und rechts halten</string>
-    <string name="auto_25_chars_route_tr_kr">Rechts abbiegen und rechts halten</string>
-    <string name="auto_25_chars_route_tr_kl">Rechts abbiegen und links halten</string>
-    <string name="auto_25_chars_route_tl_kl">Links abbiegen und links halten</string>
-    <string name="auto_25_chars_route_tu_kl">Wenden und links halten</string>
-    <string name="auto_25_chars_route_tu_kr">Wenden und rechts halten</string>
+    <string name="auto_25_chars_route_tl_kr">Links abbiegen und auf der rechten Seite bleiben</string>
+    <string name="auto_25_chars_route_tr_kr">Rechts abbiegen und rechts bleiben</string>
+    <string name="auto_25_chars_route_tr_kl">Rechts abbiegen und links bleiben</string>
+    <string name="auto_25_chars_route_tl_kl">Links abbiegen und auf der linken Seite bleiben</string>
+    <string name="auto_25_chars_route_tu_kl">Wenden und links bleiben</string>
+    <string name="auto_25_chars_route_tu_kr">Wenden und rechts bleiben</string>
     <string name="auto_25_chars_route_roundabout_kl">Die %1$d Ausfahrt nehmen und links halten</string>
     <string name="auto_25_chars_route_roundabout_kr">Die %1$d Ausfahrt nehmen und rechts halten</string>
     <string name="auto_backup_preference_desc">Standardmäßig speichert Android Backups von Favoriten, Karten-Tokens und OsmAnd-Einstellungen, um sie auf neuen Geräten oder nach einer Neuinstallation wiederherzustellen. Dieses Backup ist auf 25 MB begrenzt.
@@ -4658,7 +4658,7 @@
     <string name="rendering_attr_showMtbScale_name">MTB-Skala anzeigen</string>
     <string name="rendering_attr_showMtbScale_description">Wege nach MTB-Skala anzeigen.</string>
     <string name="mtb_scale">MTB-Skala</string>
-    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
+    <string name="mtb_imba_full">Internationale Vereinigung für Mountainbiking</string>
     <string name="mtb_segment_classification">Abschnittsklassifizierung</string>
     <string name="mtb_imba">IMBA</string>
     <string name="open_weather_action_description">Ermöglicht es Ihnen, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
@@ -4756,7 +4756,7 @@
     <string name="sort_distance_ascending">Kürzeste Entfernung zuerst</string>
     <string name="selected_value">Ausgewählter Wert</string>
     <string name="shared_string_nearest">Am nächsten</string>
-    <string name="app_mode_moped">Moped</string>
+    <string name="app_mode_moped">Mofa</string>
     <string name="generate_slope_from_3d_maps">Erzeugen von Hangrasterkarten aus 3D-Karten</string>
     <string name="disable_vertex_hillshade_3d">Eckpunkt-Schummerung in 3D deaktivieren</string>
     <string name="enable_3d_maps">3D-Karten aktivieren</string>
@@ -4851,7 +4851,7 @@
     <string name="beats_per_minute_short">HF</string>
     <string name="shared_string_chest">Brust</string>
     <string name="shared_string_wrist">Handgelenk</string>
-    <string name="shared_string_finger">Finger</string>
+    <string name="shared_string_finger">Hinweis</string>
     <string name="shared_string_hand">Hand</string>
     <string name="shared_string_ear_lobe">Ohrläppchen</string>
     <string name="number_of_tracks">%1$s Tracks</string>
@@ -5070,7 +5070,7 @@
     <string name="rendering_styles">Darstellungsstile</string>
     <string name="app_mode_hang_gliding">Drachenfliegen</string>
     <string name="weather_online">Online-Wetter</string>
-    <string name="smart_folder_name_present">Solch ein intelligenter Ordner ist bereits vorhanden</string>
+    <string name="smart_folder_name_present">Dieser Smart Folder existiert bereits</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Geradlinige Streckenführung (Flugzeug)</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
@@ -5080,12 +5080,12 @@
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Punkt-zu-Punkt-Routing (Boot)</string>
     <string name="app_mode_baby_transport">Kindertransport</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigieren nach Track</string>
-    <string name="add_smart_folder">Intelligenten Ordner hinzufügen</string>
+    <string name="add_smart_folder">Smart Folder hinzufügen</string>
     <string name="empty_name">Leerer Name</string>
     <string name="edit_filter">Filter bearbeiten</string>
     <string name="help_article_widgets_radius_ruler_name">Radius-Maßstab und Lineal</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Trackaufzeichnung</string>
-    <string name="save_as_smart_folder">Als intelligenten Ordner speichern</string>
+    <string name="save_as_smart_folder">Speichern als Smart Folder</string>
     <string name="help_article_widgets_map_buttons_name">Schaltflächen der Karte</string>
     <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“. (Tracks werden nicht gelöscht.)</string>
     <string name="help_article_widgets_info_widgets_name">Informations-Widgets</string>
@@ -5097,7 +5097,7 @@
     <string name="no_config_smart_folder_title">Nicht konfiguriert</string>
     <string name="discard_filter_changes">Filteränderungen verwerfen</string>
     <string name="discard_filter_changes_prompt">Alle Filter zurücksetzen?</string>
-    <string name="empty_smart_folder_title">Keine übereinstimmenden Tracks</string>
+    <string name="empty_smart_folder_title">Kein passender Track gefunden</string>
     <string name="empty_smart_folder_description">Übereinstimmende Tracks werden hier angezeigt</string>
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d Track)</item>
@@ -5241,7 +5241,7 @@
     <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
     <string name="auto_zoom_smooth">Glatt</string>
     <string name="auto_zoom_discrete">Schrittweise</string>
-    <string name="auto_zoom">Autozoom</string>
+    <string name="auto_zoom">Auto Zoom</string>
     <string name="java_safe">Java (sicher)</string>
     <string name="gpx_approximation">GPX-Annäherung</string>
     <string name="routing_type">Routing-Typ</string>
@@ -5425,9 +5425,9 @@
     <string name="auto_25_chars_route_tshr">Scharf rechts abbiegen</string>
     <string name="auto_25_chars_route_tslr">Leicht rechts abbiegen</string>
     <string name="auto_25_chars_route_tl">Links abbiegen</string>
-    <string name="auto_25_chars_route_tshl">Scharf links abbiegen</string>
-    <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
-    <string name="auto_25_chars_route_tu">Bitte wenden</string>
+    <string name="auto_25_chars_route_tshl">Scharf Links abbiegen</string>
+    <string name="auto_25_chars_route_tsll">Leicht Links abbiegen</string>
+    <string name="auto_25_chars_route_tu">Wenden</string>
     <string name="driving_region_india">Indien</string>
     <string name="driving_region_uk">UK und andere</string>
     <string name="hugerock_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
@@ -5484,9 +5484,9 @@
     <string name="open_in_browser">Im Browser öffnen</string>
     <string name="shared_string_source">Quelle</string>
     <string name="shared_string_no_internet_connection">Keine Internetverbindung</string>
-    <string name="no_internet_descr">Bitte Internetverbindung überprüfen und erneut versuchen.</string>
-    <string name="no_photos_available_descr">Noch keine Benutzerfotos zu diesem Standort hinzugefügt</string>
-    <string name="no_photos_available">Keine Fotos verfügbar</string>
+    <string name="no_internet_descr">Bitte Verbindung prüfen und erneut versuchen.</string>
+    <string name="no_photos_available_descr">Keine Bilder wurden für diesen Standort hinzugefügt</string>
+    <string name="no_photos_available">Keine Bilder verfügbar</string>
     <string name="obd_fuel_type_not_provided">Keine Kraftstoffart angegeben</string>
     <string name="obd_fuel_type_gasoline">Benzin</string>
     <string name="obd_fuel_type_methanol">Methanol</string>
@@ -5553,7 +5553,7 @@
     <string name="quick_action_finish_trip_recording_summary">Eine Schaltfläche zum Speichern des GPX-Tracks und Beenden der Reiseaufzeichnung.</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Eine Schaltfläche zum Speichern der aktuell aufgezeichneten Reise als GPX-Datei und zum Fortsetzen der Aufzeichnung eines neuen Tracks ohne Unterbrechung.</string>
     <string name="quick_action_save_recorded_trip_and_continue">Aufgezeichnete Reise &amp; Weiter</string>
-    <string name="new_trip_segment">Neuer Reiseabschnitt</string>
+    <string name="new_trip_segment">Neues Reisesegment</string>
     <string name="quick_action_start_pause_recording">Eine Schaltfläche zum Starten, Anhalten oder Fortsetzen der Aufzeichnung des GPX-Tracks.</string>
     <string name="third_links">Externe Links</string>
     <string name="new_segment_started_m">Die Aufzeichnung eines neuen Tracksegments wurde gestartet.</string>
