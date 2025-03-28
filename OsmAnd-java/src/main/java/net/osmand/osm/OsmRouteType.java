@@ -53,7 +53,7 @@ public class OsmRouteType {
 	public static final OsmRouteType RAILWAY = createType("railway").reg();
 	public static final OsmRouteType SKI = createType("piste").renderingPropertyAttr(PISTE_ROUTES).reg();
 	public static final OsmRouteType ALPINE = createType("alpine").renderingPropertyAttr(ALPINE_HIKING).reg();
-	public static final OsmRouteType FITNESS = createType("fitness").renderingPropertyAttr(FITNESS_TRAILS).reg();
+	public static final OsmRouteType FITNESS = createType("fitness_trail").renderingPropertyAttr(FITNESS_TRAILS).reg();
 	public static final OsmRouteType INLINE_SKATES = createType("inline_skates").reg();
 	public static final OsmRouteType SUBWAY = createType("subway").reg();
 	public static final OsmRouteType TRAIN = createType("train").reg();
