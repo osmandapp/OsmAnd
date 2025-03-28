@@ -513,4 +513,20 @@
     <string name="obd_fuel_consumption">Caitheamh connaidh</string>
     <string name="fuel_tank_capacity">Comas-lìonaidh tanca-connaidh</string>
     <string name="obd_engine_oil_temperature">Teòthachd na h-ola einnsein</string>
+    <string name="lock_screen">Glas sgrion</string>
+    <string name="obd_connected_to_device">Ceangailte ri %s</string>
+    <string name="obd_fuel_pressure">Bruthadh a\' chonnaidh</string>
+    <string name="quick_action_verb_start_pause">Tòisich / Sòr</string>
+    <string name="unknown_bt_device">Inneal neo-aithnichte</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">Còd VIN thar OBD</string>
+    <string name="open_in_browser">Fosgail ann am brabhsair</string>
+    <string name="shared_string_no_internet_connection">Gun ceangal eadar-lin</string>
+    <string name="obd_searching_text">A\' lorg sganairean</string>
+    <string name="obd_device_forget_sensor">Dìochuimhnich sganair</string>
+    <string name="obd_vehicle_info">Fiosrachadh carbaid</string>
+    <string name="obd_how_to_connect">Ciamar a cheangal:</string>
+    <string name="no_inet_connection">Chan eil ceangal eadar-lin ann</string>
+    <string name="reset_average_speed">Ath-shuidhich luths cuibheasach</string>
+    <string name="obd_connecting_to_device">A\' ceangal ri %s</string>
 </resources>
