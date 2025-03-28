@@ -25,8 +25,6 @@ import androidx.annotation.Nullable;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.android.MapRendererView;
@@ -65,7 +63,6 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.resources.AmenityIndexRepository;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.clickable.ClickableWay;
@@ -87,26 +84,19 @@ import net.osmand.plus.track.clickable.ClickableWayHelper;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
-import gnu.trove.list.array.TIntArrayList;
 
 public class MapSelectionHelper {
 
 	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
 	private static final int AMENITY_SEARCH_RADIUS = 50;
 	private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
-
-	private static final int AMENITY_SEARCH_BY_ROUTE_ID = 50000;
 	private static final int TILE_SIZE = 256;
 
 	private static final String TAG_POI_LAT_LON = "osmand_poi_lat_lon";
@@ -484,21 +474,26 @@ public class MapSelectionHelper {
 		if (!Algorithms.isEmpty(tags) && tags.containsKey(TRAVEL_MAP_TO_POI_TAG) && "point".equals(tags.get(ROUTE))) {
 			names.add(tags.get(TRAVEL_MAP_TO_POI_TAG)); // additional attribute for TravelGpx points (route_id)
 		}
-		if (tags.containsKey(ROUTE_ID)) {
-			amenity = findAmenityByRouteId(latLon, tags.get(ROUTE_ID));
+		/* --- */
+		String routeId = tags.get(ROUTE_ID);
+		if (routeId != null) {
+			// find all
+			Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(routeId, latLon.getLatitude(), latLon.getLongitude(), false);
+			List<Amenity> list = map.get(routeId);
+			amenity = list == null ? null : list.get(0);
+			System.out.println("For test only");
 		}
 		if (amenity == null) {
 			long id = obfMapObject.getId().getId().longValue();
 			amenity = findAmenity(app, latLon, names, id);
 		}
-		List<String> members = amenity.getRouteMembersIds();
-		if (members != null) {
-			for (String m : members) {
-				Amenity member = findAmenityByRouteId(amenity.getLocation(), m);
-				if (member != null) {
-					amenity.addMember(member);
-				}
+		if (amenity != null) {
+			/* --- */
+			String membersTag = amenity.getAdditionalInfo(ROUTE_MEMBERS_IDS);
+			if (membersTag != null) {
+				Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(membersTag, latLon.getLatitude(), latLon.getLongitude(), true);
 			}
+			System.out.println("For test only");
 		}
 		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
@@ -764,41 +759,6 @@ public class MapSelectionHelper {
 			amenity = findAmenityByName(amenities, names);
 		}
 		return amenity;
-	}
-
-	@Nullable
-	public Amenity findAmenityByRouteId(LatLon latLon, String routeId) {
-		Amenity mainAmenity = null;
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_BY_ROUTE_ID);
-		List<Amenity> amenities = app.getResourceManager().searchAmenitiesByName(routeId, rect.top, rect.left, rect.bottom, rect.right,
-				latLon.getLatitude(), latLon.getLongitude(), null);
-		Collection<Amenity> relatedAmenity = new ArrayList<>();
-		Collection<Amenity> partOfAmenity = new ArrayList<>();
-		if (!amenities.isEmpty()) {
-			for (Amenity am : amenities) {
-				if (routeId.equals(am.getRouteId())) {
-					if (mainAmenity == null && MapUtils.areLatLonEqual(latLon, am.getLocation(), 0.0001)) {
-						mainAmenity = am;
-					} else {
-						relatedAmenity.add(am);
-					}
-				} else {
-					List<String> membersIds = am.getRouteMembersIds();
-					if (membersIds.contains(routeId)) {
-						partOfAmenity.add(am);
-					}
-				}
-			}
-			if (mainAmenity != null) {
-				for (Amenity rel : relatedAmenity) {
-					if (rel.getType().equals(mainAmenity.getType())) {
-						mainAmenity.addRelated(rel);
-					}
-				}
-				mainAmenity.setPartOf(!partOfAmenity.isEmpty() ? partOfAmenity : null);
-			}
-		}
-		return mainAmenity;
 	}
 
 	@Nullable
