@@ -247,7 +247,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 	private void updateFullRowState(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
 			if (widgetInfo.widget instanceof ISupportMultiRow supportMultiRow) {
-				supportMultiRow.updateFullRowState(visibleViewsInRowCount <= 1);
+				supportMultiRow.updateFullRowState(visibleViewsInRowCount);
 			}
 		}
 	}

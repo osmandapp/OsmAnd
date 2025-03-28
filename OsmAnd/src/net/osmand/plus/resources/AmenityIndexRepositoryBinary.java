@@ -19,6 +19,7 @@ import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
@@ -305,5 +306,16 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 			}
 		}
 		return false;
+	}
+
+	public boolean isWorldMap() {
+		String fileName = getFile().getName().toLowerCase();
+		return fileName.startsWith(WorldRegion.WORLD + "_") || fileName.contains("basemap");
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getFile().getName();
 	}
 }

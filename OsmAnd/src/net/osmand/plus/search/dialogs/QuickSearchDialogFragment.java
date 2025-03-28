@@ -363,10 +363,29 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								}
 							} else if (word.getLocation() != null) {
 								SearchResult searchResult = word.getResult();
+								Object object = searchResult.object;
+
+								if (word.getType() == ObjectType.CITY || word.getType() == ObjectType.VILLAGE) {
+									SearchSettings settings = searchResult.requiredSearchPhrase.getSettings();
+									String lang = settings != null ?
+											settings.getLang() : app.getSettings().MAP_PREFERRED_LOCALE.get();
+									boolean transliterate = settings != null ?
+											settings.isTransliterate() : app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+									Amenity amenity = app.getSearchUICore().findAmenity(searchResult.localeName,
+											searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+											lang, transliterate);
+									if (amenity != null) {
+										object = amenity;
+									}
+								}
+
 								String name = QuickSearchListItem.getName(app, searchResult);
 								String typeName = QuickSearchListItem.getTypeName(app, searchResult);
-								PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
-								app.getSettings().setMapLocationToShow(searchResult.location.getLatitude(), searchResult.location.getLongitude(), searchResult.preferredZoom, pointDescription, true, searchResult.object);
+								PointDescription pointDescription = new PointDescription(
+										PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+								app.getSettings().setMapLocationToShow(
+										searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+										searchResult.preferredZoom, pointDescription, true, object);
 
 								hideToolbar();
 								MapActivity.launchMapActivityMoveToTop(getActivity());

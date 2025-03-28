@@ -5236,7 +5236,7 @@
     <string name="upload_local_versions">Отпреми местна издања</string>
     <string name="download_cloud_versions">Преузми издања из облака</string>
     <string name="map_widget_map_scale">Размера мапе</string>
-    <string name="unchanged_parameter_summary">Сваки траг задржаће своје сопствене одреднице.</string>
+    <string name="unchanged_parameter_summary">Свака путања задржаће своје сопствене параметре.</string>
     <string name="shared_string_unchanged">Непромењено</string>
     <string name="gpx_approximation_cpp">Рутирање-базирано (C++)</string>
     <string name="gpx_approximation_geo_java">Рутирање-базирано (Јава, брзо)</string>
@@ -5723,4 +5723,8 @@
     <string name="shared_string_offline_only">Само ван мреже</string>
     <string name="row_height">Висина реда</string>
     <string name="add_widget">Додај виџет</string>
+    <string name="poi_source">Извор ТОИ-а</string>
+    <string name="intermediate_first">Прво међуодредиште</string>
+    <string name="display_priority">Приоритет приказа</string>
+    <string name="destination_first">Прва дестинација</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/simple_widget_large_height"
@@ -25,103 +26,100 @@
     </FrameLayout>
 
     <!-- Primary block -->
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/primary_block"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_marginVertical="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1">
 
-        <net.osmand.plus.widgets.TextViewEx
-            android:id="@+id/primary_value_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+        <net.osmand.plus.widgets.MultiTextViewEx
+            android:id="@+id/primary_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start|top"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:lineSpacingMultiplier="1"
+            android:maxLines="1"
             android:textColor="?android:textColorPrimary"
-            android:textSize="36sp"
-            tools:text="20:33" />
+            app:autoSizeMaxTextSize="36sp"
+            app:autoSizeMinTextSize="16sp"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeTextType="uniform"
+            app:primaryText="20:33"
+            app:secondaryText="13 h 2 m"
+            app:separator=" • "
+            app:separatorColor="?android:textColorSecondary" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
+        <net.osmand.plus.widgets.MultiTextViewEx
+            android:id="@+id/secondary_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start|bottom"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:lineSpacingMultiplier="1"
+            android:maxLines="1"
+            android:textColor="?android:textColorPrimary"
+            app:autoSizeMaxTextSize="24sp"
+            app:autoSizeMinTextSize="16sp"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeTextType="uniform"
+            app:separator=" • "
+            app:separatorColor="?android:textColorSecondary"
+            tools:primaryText="331 km"
+            tools:primaryTextColor="?android:textColorSecondary" />
 
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/secondary_value_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="20sp"
-                android:scrollbars="none"
-                tools:text="13 h 27 m" />
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="6dp"
-                android:text="•"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="20sp"
-                android:scrollbars="none"
-                tools:ignore="HardcodedText" />
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/tertiary_value_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="20sp"
-                android:scrollbars="none"
-                tools:text="331 km" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+    </FrameLayout>
 
     <View
         android:id="@+id/blocks_divider"
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:layout_margin="16dp"
+        android:layout_marginVertical="16dp"
         android:background="?android:listDivider" />
 
     <!-- Secondary block -->
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/secondary_block"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|end"
-        android:layout_marginEnd="16dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="12dp">
 
-        <net.osmand.plus.widgets.TextViewEx
-            android:id="@+id/primary_value_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="18sp"
+        <net.osmand.plus.widgets.MultiTextViewEx
+            android:id="@+id/primary_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start|top"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:lineSpacingMultiplier="1"
+            android:maxLines="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="36sp"
+            app:separator=" • "
+            app:separatorColor="?android:textColorSecondary"
             tools:text="01:27" />
 
-        <TextView
-            android:id="@+id/secondary_value_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="18sp"
+        <net.osmand.plus.widgets.MultiTextViewEx
+            android:id="@+id/secondary_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start|bottom"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:lineSpacingMultiplier="1"
+            android:maxLines="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="24sp"
+            app:separator=" • "
+            app:separatorColor="?android:textColorSecondary"
             tools:text="9 h 23 m" />
 
-        <TextView
-            android:id="@+id/tertiary_value_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="18sp"
-            tools:text="629 km" />
-
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

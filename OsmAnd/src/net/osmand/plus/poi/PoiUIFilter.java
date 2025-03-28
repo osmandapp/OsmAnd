@@ -634,8 +634,12 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	@Override
 	public ResultMatcher<Amenity> wrapResultMatcher(@Nullable ResultMatcher<Amenity> matcher) {
+		// Deduplication might break live-updates consistency in case of multiple maps.
+		// Ensure correct readers order, such as returned by getAmenityRepositories()
+		Set<String> distinctAmenities = new TreeSet<>();
+
 		PoiFilterUtils.AmenityNameFilter nm = getNameFilter();
-		Set<String> searchedPois = new TreeSet<>();
+
 		return new PoiUIFilterResultMatcher<Amenity>() {
 
 			@Override
@@ -649,8 +653,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			public boolean publish(Amenity a) {
 				if (nm.accept(a)) {
 					if (matcher == null || matcher.publish(a)) {
-						String poiID = a.getType().getKeyName() + "_" + a.getId();
-						if (!searchedPois.add(poiID)) {
+						String amenityDistinctId = a.getType().getKeyName() + a.getId();
+						if (!distinctAmenities.add(amenityDistinctId)) {
 							return false;
 						}
 						return !a.isClosed();

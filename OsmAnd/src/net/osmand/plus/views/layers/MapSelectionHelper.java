@@ -151,11 +151,11 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	protected MapSelectionResult selectObjectsFromMap(@NonNull PointF point, @NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
+	MapSelectionResult selectObjectsFromMap(@NonNull PointF point, @NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
 		LatLon pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(view.getMapRenderer(), tileBox, point);
 		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
-		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsFromMap(tileBox, point, showUnknownLocation);
-
+		Map<Object, IContextMenuProvider> selectedObjects =
+				selectObjectsFromMap(tileBox, point, showUnknownLocation, false);
 		MapSelectionResult result = new MapSelectionResult(selectedObjects, pointLatLon);
 		if (app.useOpenGlRenderer()) {
 			selectObjectsFromOpenGl(result, tileBox, point);
@@ -163,18 +163,20 @@ public class MapSelectionHelper {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
 		}
 		processTransportStops(selectedObjects);
+		if (selectedObjects.isEmpty()) {
+			selectedObjects.putAll(selectObjectsFromMap(tileBox, point, showUnknownLocation, true));
+		}
 		return result;
 	}
 
 	@NonNull
 	protected Map<Object, IContextMenuProvider> selectObjectsFromMap(@NonNull RotatedTileBox tileBox,
 	                                                                 @NonNull PointF point,
-	                                                                 boolean unknownLocation) {
+	                                                                 boolean unknownLocation, boolean secondaryObjects) {
 		Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
 		for (OsmandMapLayer layer : view.getLayers()) {
-			if (layer instanceof IContextMenuProvider) {
+			if (layer instanceof IContextMenuProvider provider && (!provider.isSecondaryProvider() || secondaryObjects)) {
 				List<Object> objects = new ArrayList<>();
-				IContextMenuProvider provider = (IContextMenuProvider) layer;
 				provider.collectObjectsFromPoint(point, tileBox, objects, unknownLocation, false);
 				for (Object o : objects) {
 					selectedObjects.put(o, provider);
@@ -188,8 +190,7 @@ public class MapSelectionHelper {
 		Map<LatLon, BackgroundType> touchedMapObjectsFull = new HashMap<>();
 		Map<LatLon, BackgroundType> touchedMapObjectsSmall = new HashMap<>();
 		for (OsmandMapLayer layer : view.getLayers()) {
-			if (layer instanceof IContextMenuProvider) {
-				IContextMenuProvider provider = (IContextMenuProvider) layer;
+			if (layer instanceof IContextMenuProvider provider) {
 				List<Object> collectedObjects = new ArrayList<>();
 				provider.collectObjectsFromPoint(point, tileBox, collectedObjects, unknownLocation, true);
 				for (Object o : collectedObjects) {
@@ -371,8 +372,8 @@ public class MapSelectionHelper {
 							boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
 							boolean isClickableWay = clickableWayHelper.isClickableWay(obfMapObject, tags);
 
-							if (!isOsmRoute && tags.containsKey("route_road")) {
-								continue; // ignore unsupported road shields (if no other OSM routes found)
+							if (!isOsmRoute && OsmRouteType.containsUnsupportedRouteTags(tags)) {
+								continue;
 							}
 
 							if (isOsmRoute && !osmRoutesAlreadyAdded) {

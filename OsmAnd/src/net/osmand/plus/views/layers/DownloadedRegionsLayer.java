@@ -599,6 +599,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	@Override
+	public boolean isSecondaryProvider() {
+		return true;
+	}
+
+	@Override
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof DownloadMapObject) {
 			DownloadMapObject mapObject = ((DownloadMapObject) o);

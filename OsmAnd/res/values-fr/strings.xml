@@ -5731,4 +5731,8 @@
     <string name="row_height">Hauteur de la ligne</string>
     <string name="shared_string_offline_only">Uniquement hors ligne</string>
     <string name="add_widget">Ajouter un gadget</string>
+    <string name="intermediate_first">Étape en premier</string>
+    <string name="destination_first">Destination en premier</string>
+    <string name="display_priority">Priorité d\'affichage</string>
+    <string name="poi_source">Source des PI</string>
 </resources>
