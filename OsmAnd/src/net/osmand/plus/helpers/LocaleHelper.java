@@ -209,18 +209,6 @@ public class LocaleHelper {
 		return lang;
 	}
 
-	@NonNull
-	public List<String> getSupportedLanguages() {
-		List<String> languages = new ArrayList<>();
-		Configuration config = app.getBaseContext().getResources().getConfiguration();
-		LocaleList localeList = config.getLocales();
-		for (int i = 0; i < localeList.size(); i++) {
-			Locale locale = localeList.get(i);
-			languages.add(getLanguage(locale));
-		}
-		return languages;
-	}
-
 	public void updateTimeFormatting() {
 		updateTimeFormatting(Locale.getDefault());
 	}

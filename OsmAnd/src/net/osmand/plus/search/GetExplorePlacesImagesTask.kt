@@ -12,7 +12,7 @@ class GetExplorePlacesImagesTask(
 	val app: OsmandApplication,
 	val mapRect: KQuadRect,
 	val zoom: Int,
-	val languages: Collection<String>,
+	val languages: List<String>,
 	val listener: GetImageCardsListener
 ) : KAsyncTask<Unit, Unit, List<OsmandApiFeatureData>?>(true) {
 

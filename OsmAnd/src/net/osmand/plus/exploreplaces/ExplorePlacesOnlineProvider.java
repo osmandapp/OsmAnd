@@ -126,7 +126,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	}
 
 	@NonNull
-	private Set<String> getPreferredLangs() {
+	private List<String> getPreferredLangs() {
 		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (Algorithms.isEmpty(preferredLang)) {
 			preferredLang = app.getLanguage();
@@ -142,7 +142,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		} else {
 			languages.add(preferredLang);
 		}
-		return languages;
+		return new ArrayList<>(languages);
 	}
 
 	@NonNull
@@ -185,12 +185,12 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		// Fetch data for all tiles within the bounds
 		List<Amenity> filteredAmenities = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
-		Set<String> languages = getPreferredLangs();
+		List<String> languages = getPreferredLangs();
 
 		// Iterate over the tiles and load data
 		for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
 			for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
-				if (!isDataExpired(zoom, tileX, tileY, languages)) {
+				if (!dbHelper.isDataExpired(zoom, tileX, tileY, languages)) {
 					TileKey tileKey = new TileKey(zoom, tileX, tileY);
 					List<Amenity> cachedPlaces = tilesCache.get(tileKey);
 					if (cachedPlaces != null) {
@@ -198,7 +198,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 							filterAmenity(amenity, filteredAmenities, rect, uniqueIds, loadAll);
 						}
 					} else {
-						List<OsmandApiFeatureData> places = getPlaces(zoom, tileX, tileY, languages);
+						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, languages);
 						cachedPlaces = new ArrayList<>();
 						for (OsmandApiFeatureData item : places) {
 							if (Algorithms.isEmpty(item.properties.photoTitle)) {
@@ -228,25 +228,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		}
 
 		return filteredAmenities;
-	}
-
-	private boolean isDataExpired(int zoom, int tileX, int tileY, Set<String> languages) {
-		for (String lang : languages) {
-			if (dbHelper.isDataExpired(zoom, tileX, tileY, lang)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@NonNull
-	private List<OsmandApiFeatureData> getPlaces(int zoom, int tileX, int tileY,
-			@NonNull Set<String> languages) {
-		List<OsmandApiFeatureData> places = new ArrayList<>();
-		for (String lang : languages) {
-			places.addAll(dbHelper.getPlaces(zoom, tileX, tileY, lang));
-		}
-		return places;
 	}
 
 	private void filterAmenity(@NonNull Amenity amenity, @NonNull List<Amenity> filteredAmenities,
@@ -315,7 +296,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	}
 
 	@SuppressLint("DefaultLocale")
-	private void loadTile(int zoom, int tileX, int tileY, @NonNull Set<String> languages) {
+	private void loadTile(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
 		double left;
 		double right;
 		double top;
@@ -352,11 +333,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 									data.properties.wikiLang, k -> new ArrayList<>());
 							list.add(data);
 						}
-						for (Map.Entry<String, List<OsmandApiFeatureData>> entry : map.entrySet()) {
-							String lang = entry.getKey();
-							List<? extends OsmandApiFeatureData> list = entry.getValue();
-							dbHelper.insertPlaces(zoom, tileX, tileY, lang, list);
-						}
+						dbHelper.insertPlaces(zoom, tileX, tileY, map);
 					}
 					synchronized (loadingTasks) {
 						loadingTasks.remove(tileKey);
