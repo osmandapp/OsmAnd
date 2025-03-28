@@ -341,7 +341,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             currentAmenities.clear();
 
-            if (!repo.isPoiSectionIntersects(repo, pointRequest)) {
+            if (!isPoiSectionIntersects(repo, pointRequest)) {
                 continue;
             }
 
@@ -356,13 +356,37 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
 
             mapRequest.clearSearchBoxes();
-            mapRequest.setSearchBoxes(repo.getGroupedPoints(currentAmenities));
+            mapRequest.setSearchBoxes(getGroupedPoints(currentAmenities));
             repo.searchMapIndex(mapRequest);
         }
 
         pointList.addAll(getPointList(amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds));
         segmentList.addAll(geometryMap.values());
         return !isCancelled.isCancelled();
+    }
+
+    private List<QuadRect> getGroupedPoints(List<Amenity> amenities) {
+        if (Algorithms.isEmpty(amenities)) {
+            return null;
+        }
+        Map<String, QuadRect> groups = new HashMap<>();
+        List<QuadRect> result = new ArrayList<>();
+        for (Amenity am : amenities) {
+            if (!am.isRouteTrack()) {
+                continue;
+            }
+            int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
+            int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
+            String group = am.getAdditionalInfo(ROUTE_SEGMENT_INDEX);
+            if (group == null) {
+                result.add(new QuadRect(x31, y31, x31, y31));
+            } else {
+                QuadRect qr = groups.computeIfAbsent(group, s -> new QuadRect(x31, y31, x31, y31));
+                qr.expand(x31, y31, x31, y31);
+            }
+        }
+        result.addAll(groups.values());
+        return result;
     }
 
     private boolean shouldSkipRepository(AmenityIndexRepository repo, TravelArticle article) {
@@ -379,6 +403,17 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             if (!repo.getReaderPoiIndexes().isEmpty() && !Algorithms.objectEquals(
                     repo.getReaderPoiIndexes().get(0).getName(), that.getAmenityRegionName())) {
                 return true; // skip inappropriate RegionName
+            }
+        }
+        return false;
+    }
+
+    private boolean isPoiSectionIntersects(AmenityIndexRepository repo,
+                                           BinaryMapIndexReader.SearchRequest<Amenity> pointRequest) {
+        for (BinaryMapPoiReaderAdapter.PoiRegion poiIndex : repo.getReaderPoiIndexes()) {
+            if (pointRequest.intersects(
+                    poiIndex.getLeft31(), poiIndex.getTop31(), poiIndex.getRight31(), poiIndex.getBottom31())) {
+                return true;
             }
         }
         return false;

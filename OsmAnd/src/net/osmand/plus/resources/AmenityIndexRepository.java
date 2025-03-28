@@ -1,7 +1,6 @@
 package net.osmand.plus.resources;
 
 import java.io.File;
-import java.util.Collection;
 import java.util.List;
 
 import net.osmand.Location;
@@ -12,7 +11,6 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.data.Amenity;
-import net.osmand.data.QuadRect;
 
 public interface AmenityIndexRepository {
 
@@ -43,8 +41,4 @@ public interface AmenityIndexRepository {
 	void searchPoi(BinaryMapIndexReader.SearchRequest<Amenity> amenitySearchRequest);
 
 	List<Amenity> searchPoiByName(BinaryMapIndexReader.SearchRequest<Amenity> searchRequest);
-
-	List<QuadRect> getGroupedPoints(Collection<Amenity> amenities);
-
-	boolean isPoiSectionIntersects(AmenityIndexRepository repo, BinaryMapIndexReader.SearchRequest<?> request);
 }
