@@ -1,7 +1,5 @@
 package net.osmand.plus.resources;
 
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SEGMENT_INDEX;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
@@ -18,14 +16,12 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.data.Amenity;
-import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -33,7 +29,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -276,38 +271,6 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 
 	@Override
-	public List<QuadRect> getGroupedPoints(Collection<Amenity> amenities) {
-		if (Algorithms.isEmpty(amenities)) {
-			return null;
-		}
-		Map<String, QuadRect> groups = new HashMap<>();
-		List<QuadRect> result = new ArrayList<>();
-		for (Amenity am : amenities) {
-			int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
-			int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
-			String group = am.getAdditionalInfo(ROUTE_SEGMENT_INDEX);
-			if (group == null) {
-				result.add(new QuadRect(x31, y31, x31, y31));
-			} else {
-				QuadRect qr = groups.computeIfAbsent(group, s -> new QuadRect(x31, y31, x31, y31));
-				qr.expand(x31, y31, x31, y31);
-			}
-		}
-		result.addAll(groups.values());
-		return result;
-	}
-
-	@Override
-	public boolean isPoiSectionIntersects(AmenityIndexRepository repo, SearchRequest<?> request) {
-		for (BinaryMapPoiReaderAdapter.PoiRegion poiIndex : repo.getReaderPoiIndexes()) {
-			if (request.intersects(
-					poiIndex.getLeft31(), poiIndex.getTop31(), poiIndex.getRight31(), poiIndex.getBottom31())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public boolean isWorldMap() {
 		String fileName = getFile().getName().toLowerCase();
 		return fileName.startsWith(WorldRegion.WORLD + "_") || fileName.contains("basemap");
