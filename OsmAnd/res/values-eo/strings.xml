@@ -5684,4 +5684,15 @@
     <string name="show_image_previews">Antaŭvidi bildojn</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Butono por montri/kaŝi kradon de koordinatoj sur la mapo.</string>
     <string name="poi_source">Fonto de interesejo</string>
+    <string name="ais_load_data">Enlegi AIS-datumojn el dosiero</string>
+    <string name="hmd_promo">Promocio HMD por %1$s monatoj</string>
+    <string name="hmd_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
+    <string name="shared_string_road_exit">Elveturejo</string>
+    <string name="popular_places">Popularaj lokoj</string>
+    <string name="show_list">Montri liston</string>
+    <string name="save_favorite_default_appearance">Ĉu apliki ŝanĝojn al ekzistaj punktoj en tiu ĉi dosierujo aŭ nur al novaj punktoj?</string>
+    <string name="original_icon_description">Ĉiu punkto havos sian propran emblemon.</string>
+    <string name="original_shape_description">Ĉiu punkto havos sian propran formon.</string>
+    <string name="apply_to_all_points">Apliki al ĉiuj punktoj</string>
+    <string name="original_color_description">Ĉiu punkto havos sian propran koloron.</string>
 </resources>
