@@ -1237,6 +1237,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					geometryWay.vectorLineArrowsProvider = renderableSegment.getGeometryWay().vectorLineArrowsProvider;
 					geometryWay.updateCustomWidth(renderableSegment.getGeometryWay().getCustomWidth());
 					geometryWay.updateDrawDirectionArrows(renderableSegment.getGeometryWay().getDrawDirectionArrows());
+					resetSymbolProviders(oldSegments.get(0));
 					oldSegments.remove(0);
 				}
 				geometryWay.baseOrder = baseOrder--;
