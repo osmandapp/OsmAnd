@@ -5751,4 +5751,5 @@
     <string name="destination_first">Endziel zuerst</string>
     <string name="display_priority">Anzeigepriorität</string>
     <string name="poi_source">POI-Quelle</string>
+    <string name="row_height">Zeilenhöhe</string>
 </resources>
