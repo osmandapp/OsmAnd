@@ -129,7 +129,7 @@ public class Amenity extends MapObject {
 		return regionName;
 	}
 
-	public static class AmenityRoutePoint {
+    public static class AmenityRoutePoint {
 		public double deviateDistance;
 		public boolean deviationDirectionRight;
 		public Location pointA;
