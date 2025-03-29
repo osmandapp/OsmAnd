@@ -926,7 +926,7 @@
     <string name="poi_brand">Márka</string>
     <string name="poi_fee_yes">van;fizetős</string>
     <string name="poi_fee_no">nincs</string>
-    <string name="poi_drinking_water_yes">van;ivóvíz</string>
+    <string name="poi_drinking_water_yes">Van; ivóvíz</string>
     <string name="poi_drinking_water_no">nincs</string>
     <string name="poi_supervised_yes">Felügyelt</string>
     <string name="poi_supervised_no">Felügyelet nincs</string>
@@ -3785,7 +3785,7 @@
     <string name="poi_fire_hydrant_type_pipe">Cső</string>
     <string name="poi_drinking_water_refill_network">Ivóvíz-utántöltő hálózat</string>
     <string name="poi_drinking_water_refill_no">Ivóvíz-utántöltés nincs</string>
-    <string name="poi_drinking_water_refill_yes">van;ivóvíz-utántöltés;utántöltés</string>
+    <string name="poi_drinking_water_refill_yes">Van; ivóvíz-utántöltés; utántöltés</string>
     <string name="poi_seamark_water_level_below_mwl">Vízszint: közepes vízszint alatt</string>
     <string name="poi_seamark_water_level_above_mwl">Vízszint: közepes vízszint fölött</string>
     <string name="poi_seamark_water_level_floating">Vízszint: lebegő</string>
@@ -4494,7 +4494,7 @@
     <string name="poi_lifeguard">Vízimentő</string>
     <string name="poi_lifeguard_tower">Vízimentőtorony</string>
     <string name="poi_aboriginal_lands">Őslakosok területe</string>
-    <string name="poi_water_filter">víz;ivóvíz</string>
+    <string name="poi_water_filter">Víz; ivóvíz</string>
     <string name="poi_antenna">Antenna</string>
     <string name="poi_toy_library">Játékkölcsönző</string>
     <string name="poi_vending_machine_fuel_filter">Automatikus üzemanyag-adagolók;Üzemanyag-árusító automaták</string>
