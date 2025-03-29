@@ -192,7 +192,7 @@
     <string name="shared_string_move_down">Movi ↓</string>
     <string name="finish_navigation">Fini navigadon</string>
     <string name="avoid_road">Eviti vojon</string>
-    <string name="storage_directory_readonly_desc">Baskulis al interna konservejo, ĉar la elektita dosierujo por konservi datumojn estas nurlega. Bonvolu elekti skribeblan dosierujon.</string>
+    <string name="storage_directory_readonly_desc">Ŝanĝis al interna konservejo, ĉar la elektita dosierujo por konservi datumojn estas nurlega. Elektu skribeblan dosierujon.</string>
     <string name="storage_directory_shared">Komuna memoro</string>
     <string name="osm_live_month_cost_desc">Monata elspezo</string>
     <string name="map_marker_1st">Unua map-marko</string>
@@ -427,7 +427,7 @@
     <string name="local_recordings_delete_all_confirm">Ĉu forigi %1$d notojn\?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu alŝuti %1$d ŝanĝo(j)n al OSM\?</string>
     <string name="confirmation_to_clear_history">Ĉu forviŝi la historion?</string>
-    <string name="delay_to_start_navigation">Ekigi gvidadon turno-post-turno post…</string>
+    <string name="delay_to_start_navigation">Ekigi gvidadon kurbiĝo-post-kurbiĝo post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difini tempon de montrado de la kurs-plana ekrano.</string>
     <string name="osmand_parking_overdue">posttempa</string>
@@ -713,7 +713,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \nPremtenu por vidigi sur la mapo"</string>
-    <string name="delay_navigation_start">Ekigi gvidadon turno-post-turno aŭtomate</string>
+    <string name="delay_navigation_start">Ekigi gvidadon kurbiĝo-post-kurbiĝo aŭtomate</string>
     <string name="local_index_gpx_info_show">\n\nPremtenu por montri agordojn</string>
     <string name="gpx_info_waypoints">Navigadpunktoj: %1$s</string>
     <string name="gpx_info_subtracks">Subspuroj: %1$s</string>
@@ -1445,7 +1445,7 @@
     <string name="daynight_mode_auto">Sunleviĝa/sunsubira</string>
     <string name="daynight_mode_sensor">Lum-sentilo</string>
     <string name="daynight">Taga/nokta reĝimo</string>
-    <string name="daynight_descr">Alĝustigi kiam baskuli inter nokta kaj taga reĝimoj.</string>
+    <string name="daynight_descr">Alĝustigi kiam baskuligi inter nokta kaj taga reĝimoj.</string>
     <string name="download_files_question">Ĉu elŝuti {0} dosiero(j)n ({1} MB)?</string>
     <string name="filter_existing_indexes">Elŝutitaj</string>
     <string name="shared_string_download_map">Elŝuti mapon</string>
@@ -2413,7 +2413,7 @@
     <string name="import_as_gpx">Enporti kiel GPX-dosieron</string>
     <string name="import_as_favorites">Enporti kiel ŝatatajn</string>
     <string name="import_file">Enporti dosieron</string>
-    <string name="tap_on_map_to_hide_interface_descr">Frapetu la mapon por baskuli kontrol-butonojn kaj fenestraĵojn.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Frapetu la mapon por (mal)montri regilojn kaj fenestraĵojn.</string>
     <string name="tap_on_map_to_hide_interface">Plenekrana reĝimo</string>
     <string name="mark_passed">Marki kiel pasigitan</string>
     <string name="rename_marker">Alinomi markon</string>
@@ -2514,7 +2514,7 @@
     <string name="dd_dddddd_format">GG,GGGGGG°</string>
     <string name="dd_ddddd_format">GG,GGGGG°</string>
     <string name="dd_mm_mmmm_format">GG°MM,MMMM′</string>
-    <string name="dd_mm_mmm_format">GG°MM.MMM′</string>
+    <string name="dd_mm_mmm_format">GG°MM,MMM′</string>
     <string name="east_abbreviation">Or</string>
     <string name="west_abbreviation">Ok</string>
     <string name="south_abbreviation">S</string>
@@ -2667,7 +2667,7 @@
     <string name="run_full_osmand_msg">Vi uzas mapon {0}, kiu estas povigata de OsmAnd. Ĉu lanĉi la plenan version de OsmAnd\?</string>
     <string name="run_full_osmand_header">Ĉu lanĉi OsmAnd\?</string>
     <string name="lang_gn_py">Gvarania</string>
-    <string name="quick_action_switch_day_night_descr">Butono por baskuli inter nokta kaj taga reĝimoj.</string>
+    <string name="quick_action_switch_day_night_descr">Butono por baskuligi inter nokta kaj taga reĝimoj.</string>
     <string name="quick_action_switch_day_mode">Taga reĝimo</string>
     <string name="quick_action_switch_night_mode">Nokta reĝimo</string>
     <string name="quick_action_day_night_switch_mode">Taga/nokta reĝimo</string>
@@ -2707,7 +2707,7 @@
     <string name="tracks_on_map">Montrataj kursoj</string>
     <string name="time_of_day">Tagtempo</string>
     <string name="by_transport_type">Per %1$s</string>
-    <string name="step_by_step">Turno-post-turno</string>
+    <string name="step_by_step">Kurbiĝo-post-kurbiĝo</string>
     <string name="routeInfo_road_types_name">Specoj de vojoj</string>
     <string name="exit_at">Eliru ĉe</string>
     <string name="sit_on_the_stop">Atendu ĉe haltejo</string>
@@ -3175,7 +3175,7 @@
     <string name="permission_is_required">Permeso estas necesa por uzi tiun ĉi eblaĵon.</string>
     <string name="monitoring_min_speed_descr">Tiu ĉi filtrilo preventas registri punktojn sub difinita rapidlimo. Tiel registritaj spuroj aspektos pli glate dum vidiĝi sur la mapo.</string>
     <string name="monitoring_min_speed_descr_side_effect">Kromefiko: en via spuro mankos fragmentoj, en kiuj la minimuma rapido ne estis atingita (ekz. kiam vi puŝis vian biciklon ĉe kruta deklivo). Ankaŭ estos neniuj informoj pri paŭzoj. Tio ĉi efikos sur analizo aŭ pritraktado: por determini tutan tempon de via ekskurso, tempon de movado aŭ mezuman rapidon.</string>
-    <string name="monitoring_min_accuracy_descr_remark">Rimarko: se GPS estos malaktiva tuj antaŭ registri spuron, la unua mezurita punkto povos havi etigitan precizon. (Eble estontece la aplikaĵo atendos sekundon aŭ pli antaŭ registri punkton (aŭ registros la plej bonan el 3 sekvantaj punktoj).)</string>
+    <string name="monitoring_min_accuracy_descr_remark">Rimarko: se GPS estos malaktiva tuj antaŭ ol registri spuron, la unua mezurita punkto povos havi etigitan precizon. (Eble estontece la aplikaĵo atendos sekundon aŭ pli antaŭ ol registri punkton (aŭ registros la plej bonan el 3 sekvantaj punktoj).)</string>
     <string name="monitoring_min_distance_descr">Tiu ĉi filtrilo ebligas al vi ne preterpasi aldoni datumojn al registrata spuro, kiam preskaŭ neniu movo registriĝas. Tio ĉi ankaŭ plibonigas aspekton de spuro sen aldona pritraktado.</string>
     <string name="monitoring_min_distance_descr_side_effect">Kromefiko: periodoj de ripozoj ne estos registritaj aŭ estos registritaj nur per unuopaj punktoj. Etaj movoj (ekzemple al moviĝo alia vojflanko, kiu estus registrita kiel turniĝo) povos esti forfiltritaj. Rimarku, ke via spur-dosiero enhavos malpliajn datumojn por posttrakti kaj havos la saman ekzaktecon (ĝustecon): mezureraroj kaŭzitaj pro misricevoj aŭ difektoj de GPS-cirkvitaro plue aperos.</string>
     <string name="live_monitoring_adress">Retadreso</string>
@@ -3326,7 +3326,7 @@
     <string name="hidden_items_descr">La jenaj elementoj estas kaŝitaj el la menuo, sed la rilataj eblaĵoj kaj kromprogramoj plue funkcios.</string>
     <string name="shared_string_hidden">Kaŝita</string>
     <string name="reset_items_descr">Per kaŝi agordojn, ili revenos al la implicitaj valoroj.</string>
-    <string name="select_wikipedia_article_langs">Elektu lingvojn por artikoloj de Vikipedio montrataj sur la mapo. Eblos baskuli inter ĉiuj disponeblaj lingvoj dum legi artikolon.</string>
+    <string name="select_wikipedia_article_langs">Elektu lingvojn por artikoloj de Vikipedio montrataj sur la mapo. Eblos elekti ĉiun disponeblan lingvon dum legi artikolon.</string>
     <string name="some_articles_may_not_available_in_lang">Iuj artikoloj de Vikipedio povas ne esti disponeblaj en via lingvo.</string>
     <string name="lang_zhyue">Kantona</string>
     <string name="lang_zhminnan">Minnana</string>
@@ -3387,7 +3387,7 @@
     <string name="reset_deafult_order">Restarigi implicitan ordigon de elementoj</string>
     <string name="back_to_editing">Reen al redaktado</string>
     <string name="shared_string_resume">Pluigi</string>
-    <string name="quick_action_switch_profile_descr">Butono por baskuli inter elektitaj profiloj.</string>
+    <string name="quick_action_switch_profile_descr">Butono por baskuligi inter elektitaj profiloj.</string>
     <string name="shared_string_add_profile">Aldoni profilon</string>
     <string name="change_application_profile">Ŝanĝi aplikaĵan profilon</string>
     <string name="profiles_for_action_not_found">Ne trovis tiajn profilojn.</string>
@@ -3656,7 +3656,7 @@
     <string name="add_to_mapillary">Aldoni al Mapillary</string>
     <string name="select_groups_for_import">Elektu grupojn por enporti.</string>
     <string name="select_items_for_import">Elektu elementojn por enporti.</string>
-    <string name="use_dev_url_descr">Baskuli al dev.openstreetmap.org anstataŭ openstreetmap.org por testi alŝuti OSM‑rimarkojn, interesejojn, GPX‑spurojn.</string>
+    <string name="use_dev_url_descr">Baskuligi al dev.openstreetmap.org anstataŭ openstreetmap.org por testi alŝuti OSM‑rimarkojn, interesejojn, GPX‑spurojn.</string>
     <string name="use_dev_url">Uzi dev.openstreetmap.org</string>
     <string name="cannot_upload_image">Ne povas alŝuti la bildon, reprovu poste</string>
     <string name="select_picture">Elektu bildon</string>
@@ -3729,7 +3729,7 @@
     <string name="announcement_time_prepare">Preparado</string>
     <string name="announcement_time_off_route">Devojiĝo de kurso</string>
     <string name="announcement_time_arrive">Atingo al celo</string>
-    <string name="shared_string_turn">Turno</string>
+    <string name="shared_string_turn">Kurbiĝo</string>
     <string name="announcement_time_intervals">Interspacoj distancaj kaj tempaj</string>
     <string name="announcement_time_descr">La tempo de anonco de diversaj voĉaj sciigoj dependas de iliaj specoj, nuna kaj implicita navigaj rapidoj.</string>
     <string name="announcement_time_title">Tempo de anonco</string>
@@ -3835,9 +3835,9 @@
     <string name="shared_string_min_height">Minimuma alto</string>
     <string name="shared_string_max_height">Maksimuma alto</string>
     <string name="language_description">Elektu preferatan lingvon kaj specon de voĉo por navigaj gvidiloj.</string>
-    <string name="tts_description">Uzante parolsintezitajn voĉojn la aplikaĵo povas elparoli ĉiujn specojn de instrukcioj: gvidiloj pri turnoj, nomoj de stratoj kaj interesejoj, ktp.</string>
+    <string name="tts_description">Uzante parolsintezitajn voĉojn la aplikaĵo povas elparoli ĉiujn specojn de instrukcioj: gvidiloj pri kurbiĝoj, nomoj de stratoj kaj interesejoj, ktp.</string>
     <string name="tts_title">Parolsintezita</string>
-    <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas elparoli nomojn de stratoj aŭ de interesejoj.</string>
+    <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri kurbiĝoj. Ĝi ne povas elparoli nomojn de stratoj aŭ de interesejoj.</string>
     <string name="use_system_language">Uzi sisteman lingvon</string>
     <string name="shared_string_itinerary">Kurso</string>
     <string name="route_line_use_map_style_width">Uzi implicitan larĝon de la map‑stilo %1$s.</string>
@@ -4483,7 +4483,7 @@
     <string name="map_markers_desc">Fenestraĵo montranta distancon aŭ antaŭkalkulitan tempon de alveno por la du unuaj map-markoj.</string>
     <string name="map_marker_interval_dialog_desc">Enigu la tempodaŭron por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
     <string name="go_to_marker_location">Iri al la map-marko</string>
-    <string name="shared_string_switch_mode">Baskuli reĝimon</string>
+    <string name="shared_string_switch_mode">Baskuligi reĝimon</string>
     <string name="map_widget_zoom_level">Skal-nivelo</string>
     <string name="map_widget_camera_distance_desc">Fenestraĵo montranta altecon de la fotilo super la tero.</string>
     <string name="map_widget_camera_distance">Alteco de fotilo</string>
@@ -4638,9 +4638,7 @@
     <string name="precipitation_widget_desc">Fenestraĵo montranta precipitaĵojn por la nuna map-centro.</string>
     <string name="weather_pressure_hectopascals">Hektopaskaloj</string>
     <string name="weather_pressure_millimeters_of_mercury">Milimetroj da hidrargo</string>
-    <string name="rendering_engine_failed_descr">OsmAnd retropaŝis al la map-bildigilo en versio 1. Provu rebaskuli al la nova map-bildigilo “Versio 2 (OpenGL)” en agordoj de la aplikaĵo.
-\n
-\nBonvolu subteni ripari erarojn per liveri erar-protokolojn.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd retropaŝis al la map-bildigilo en versio 1. Provu rebaskuligi al la nova map-bildigilo “Versio 2 (OpenGL)” en agordoj de la aplikaĵo. \n \nBonvolu subteni ripari erarojn per liveri erar-protokolojn.</string>
     <string name="weather_widget_group_desc">Fenestraĵoj montrantaj diversajn informojn pri vetero.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="weather_pressure_inhg">inHg</string>
@@ -4894,9 +4892,7 @@
 \n
 \nTiu ĉi ago estas neinversigebla.</string>
     <string name="backup_error_delete_account_email_match">Retpoŝta adreso ne kongruas kun uzantnomo</string>
-    <string name="verify_account_deletion_descr">Ni devas verigi vian konton antaŭ forigi ĝin.
-\n
-\nEnigu la retpoŝtan adreson, per kiu ĝi registriĝis. Sekve unufoja pasvorto estos sendita al ĝi.</string>
+    <string name="verify_account_deletion_descr">Ni devas verigi vian konton antaŭ ol forigi ĝin. \n \nEnigu la retpoŝtan adreson, per kiu ĝi registriĝis. Sekve unufoja pasvorto estos sendita al ĝi.</string>
     <string name="osmand_cloud_deleting_account_descr">Baldaŭ ĉiuj viaj datumoj kaj via konto estos forigitaj el OsmAnd-Nubo.
 \n
 \nĈiuj datumoj en la aparato ne perdiĝos.</string>
@@ -5419,7 +5415,7 @@
     <string name="driving_region_uk">Britujo kaj similaj</string>
     <string name="shared_string_automatically">Aŭtomate</string>
     <string name="detailed_track_guidance">Detala gvidado laŭ spuro</string>
-    <string name="detailed_track_guidance_description">OsmAnd alproksimigos vian spuron al proksimaj vojoj por liveri avertojn pri ĉiu turno.</string>
+    <string name="detailed_track_guidance_description">OsmAnd alproksimigos vian spuron al proksimaj vojoj por liveri avertojn pri ĉiu kurbiĝo.</string>
     <string name="quick_action_routes_summary">Butono por montri/kaŝi “%1$s” sur la mapo.</string>
     <string name="hugerock_promo">Promocio Hugerock por %1$s monatoj</string>
     <string name="hugerock_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
@@ -5712,7 +5708,7 @@
     <string name="ais_ship_lost_timeout_description">Agordi templimon por videblo de ŝipo: post tiu tempo sen ricevi signalon, la emblemo de ŝipo sur la ekrano estos trastrekita.</string>
     <string name="ais_cpa_warning_time_description">Se la tempo por atingi CPA kun alia ŝipo (TCPA) estas malpli granda ol tiu valoro, la ŝipo estos markita ruĝe.</string>
     <string name="no_photo_for_location_desc">Neniu foto de uzanto aldonita al tiu ĉi loko</string>
-    <string name="show_utm_grids_description">Montri kradon en metroj laŭ UTM anstataŭ laŭ WGS84</string>
+    <string name="show_utm_grids_description">Montri la kradon en metroj laŭ UTM anstataŭ laŭ WGS84</string>
     <string name="ais_address_settings_description">Elekti protokolon por NMEA (UDP/TCP) kaj difini adresojn</string>
     <string name="ais_nmea_protocol_description">Elekti protokolon por ricevi NMEA-datumojn</string>
     <string name="ais_address_nmea_server">IP-adreso de NMEA-datum-fonto</string>
@@ -5735,4 +5731,6 @@
     <string name="show_dms_grids">Uzi gradojn, minutojn kaj sekundojn</string>
     <string name="show_dm_grids">Uzi gradojn kaj minutojn</string>
     <string name="show_dms_grids_description">Montri la kradon en gradoj, minutoj kaj sekundoj anstataŭ nur en gradoj</string>
+    <string name="show_mercator_grids">Uzi Merkator anstataŭ WGS aŭ UTM</string>
+    <string name="show_mercator_grids_description">Montri la kradon en kilometroj laŭ merkatora projekcio anstataŭ laŭ WGS84 aŭ UTM</string>
 </resources>
