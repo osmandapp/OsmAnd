@@ -8,7 +8,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DefaultView;
+import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayValue;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayPriority;
 import net.osmand.util.Algorithms;
 
@@ -17,7 +17,7 @@ public class RouteInfoWidgetState extends ResizableWidgetState {
 	private static final String DEFAULT_VALUE_PREF_ID = "route_info_widget_display_mode";
 	private static final String DISPLAY_PRIORITY_PREF_ID = "route_info_widget_display_priority";
 
-	private final CommonPreference<DefaultView> defaultViewPref;
+	private final CommonPreference<DisplayValue> defaultViewPref;
 	private final CommonPreference<DisplayPriority> displayPriorityPref;
 
 	public RouteInfoWidgetState(@NonNull OsmandApplication app, @Nullable String customId) {
@@ -27,16 +27,16 @@ public class RouteInfoWidgetState extends ResizableWidgetState {
 	}
 
 	@NonNull
-	public DefaultView getDefaultView() {
+	public DisplayValue getDefaultView() {
 		return getDefaultView(settings.getApplicationMode());
 	}
 
 	@NonNull
-	public DefaultView getDefaultView(@NonNull ApplicationMode appMode) {
+	public DisplayValue getDefaultView(@NonNull ApplicationMode appMode) {
 		return defaultViewPref.getModeValue(appMode);
 	}
 
-	public void setDefaultView(@NonNull ApplicationMode appMode, @NonNull DefaultView defaultView) {
+	public void setDefaultView(@NonNull ApplicationMode appMode, @NonNull DisplayValue defaultView) {
 		defaultViewPref.setModeValue(appMode, defaultView);
 	}
 
@@ -68,14 +68,14 @@ public class RouteInfoWidgetState extends ResizableWidgetState {
 	}
 
 	@NonNull
-	private CommonPreference<DefaultView> registerDefaultViewPreference(@Nullable String customId) {
+	private CommonPreference<DisplayValue> registerDefaultViewPreference(@Nullable String customId) {
 		String prefId = DEFAULT_VALUE_PREF_ID;
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += "_" + customId;
 		}
-		DefaultView defView = DefaultView.ARRIVAL_TIME;
-		DefaultView[] defViews = DefaultView.values();
-		return settings.registerEnumStringPreference(prefId, defView, defViews, DefaultView.class).makeProfile().cache();
+		DisplayValue defaultValue = DisplayValue.ARRIVAL_TIME;
+		DisplayValue[] values = DisplayValue.values();
+		return settings.registerEnumStringPreference(prefId, defaultValue, values, DisplayValue.class).makeProfile().cache();
 	}
 
 	@NonNull

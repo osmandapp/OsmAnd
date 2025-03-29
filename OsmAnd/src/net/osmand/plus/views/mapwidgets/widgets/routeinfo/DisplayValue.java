@@ -6,7 +6,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
-public enum DefaultView {
+public enum DisplayValue {
 	ARRIVAL_TIME(R.drawable.ic_action_clock, R.string.side_marker_eta),
 	TIME_TO_GO(R.drawable.ic_action_timer, R.string.map_widget_time),
 	DISTANCE(R.drawable.ic_action_distance, R.string.map_widget_distance);
@@ -16,7 +16,7 @@ public enum DefaultView {
 	@StringRes
 	private final int titleId;
 
-	DefaultView(@DrawableRes int iconId, @StringRes int titleId) {
+	DisplayValue(@DrawableRes int iconId, @StringRes int titleId) {
 		this.iconId = iconId;
 		this.titleId = titleId;
 	}
@@ -32,12 +32,12 @@ public enum DefaultView {
 	}
 
 	@NonNull
-	public static DefaultView[] values(@NonNull DefaultView primary) {
-		return switch (primary) {
-			case ARRIVAL_TIME -> new DefaultView[]{ARRIVAL_TIME, DISTANCE, TIME_TO_GO};
-			case TIME_TO_GO -> new DefaultView[]{TIME_TO_GO, DISTANCE, ARRIVAL_TIME};
-			case DISTANCE -> new DefaultView[]{DISTANCE, ARRIVAL_TIME, TIME_TO_GO};
-			default -> throw new IllegalArgumentException("Unexpected value: " + primary);
+	public static DisplayValue[] values(@NonNull DisplayValue defaultView) {
+		return switch (defaultView) {
+			case ARRIVAL_TIME -> new DisplayValue[]{ARRIVAL_TIME, DISTANCE, TIME_TO_GO};
+			case TIME_TO_GO -> new DisplayValue[]{TIME_TO_GO, DISTANCE, ARRIVAL_TIME};
+			case DISTANCE -> new DisplayValue[]{DISTANCE, ARRIVAL_TIME, TIME_TO_GO};
+			default -> throw new IllegalArgumentException("Unexpected value: " + defaultView);
 		};
 	}
 }

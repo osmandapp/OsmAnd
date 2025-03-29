@@ -1,8 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
-import static net.osmand.plus.views.mapwidgets.widgets.routeinfo.DefaultView.ARRIVAL_TIME;
-import static net.osmand.plus.views.mapwidgets.widgets.routeinfo.DefaultView.DISTANCE;
-import static net.osmand.plus.views.mapwidgets.widgets.routeinfo.DefaultView.TIME_TO_GO;
+import static net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayValue.ARRIVAL_TIME;
+import static net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayValue.DISTANCE;
+import static net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayValue.TIME_TO_GO;
 import static net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget.formatArrivalTime;
 import static net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget.formatDistance;
 import static net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget.formatDuration;
@@ -22,7 +22,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DefaultView;
+import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayValue;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayPriority;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -44,7 +44,7 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 
 	private RouteInfoWidget widget;
 
-	private DefaultView selectedDefaultView;
+	private DisplayValue selectedDefaultView;
 	private DisplayPriority selectedDisplayPriority;
 
 	@NonNull
@@ -58,9 +58,9 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 		super.initParams(bundle);
 		if (widgetInfo != null) {
 			widget = ((RouteInfoWidget) widgetInfo.widget);
-			String defViewKey = bundle.getString(KEY_DEFAULT_VIEW);
-			selectedDefaultView = defViewKey != null
-					? DefaultView.valueOf(defViewKey)
+			String defaultViewKey = bundle.getString(KEY_DEFAULT_VIEW);
+			selectedDefaultView = defaultViewKey != null
+					? DisplayValue.valueOf(defaultViewKey)
 					: widget.getDefaultView(appMode);
 			String displayPriorityKey = bundle.getString(KEY_PRIORITY_VALUE);
 			selectedDisplayPriority = displayPriorityKey != null
@@ -87,20 +87,20 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 	}
 
 	private void showDefaultViewDialog(@NonNull View container) {
-		Map<DefaultView, String> previewData = new HashMap<>();
+		Map<DisplayValue, String> previewData = new HashMap<>();
 		previewData.put(ARRIVAL_TIME, getFormattedPreviewArrivalTime());
 		previewData.put(TIME_TO_GO, formatDuration(app, HOUR_IN_MILLISECONDS));
 		previewData.put(DISTANCE, formatDistance(app, ONE_HUNDRED_KM_IN_METERS));
 
 		int selected = 0;
-		DefaultView[] defaultViews = DefaultView.values();
-		SelectionDialogItem[] items = new SelectionDialogItem[defaultViews.length];
-		for (int i = 0; i < defaultViews.length; i++) {
-			DefaultView defaultView = defaultViews[i];
-			CharSequence title = getString(defaultView.getTitleId());
-			CharSequence description = getDefaultViewSummary(defaultView, previewData);
+		DisplayValue[] displayValues = DisplayValue.values();
+		SelectionDialogItem[] items = new SelectionDialogItem[displayValues.length];
+		for (int i = 0; i < displayValues.length; i++) {
+			DisplayValue displayValue = displayValues[i];
+			CharSequence title = getString(displayValue.getTitleId());
+			CharSequence description = getDefaultViewSummary(displayValue, previewData);
 			items[i] = new SelectionDialogItem(title, description);
-			selected = selectedDefaultView == defaultView ? i : selected;
+			selected = selectedDefaultView == displayValue ? i : selected;
 		}
 
 		AlertDialogData dialogData = new AlertDialogData(container.getContext(), nightMode)
@@ -109,7 +109,7 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 
 		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
 			int which = (int) v.getTag();
-			selectedDefaultView = defaultViews[which];
+			selectedDefaultView = displayValues[which];
 			updateDefaultViewButton(container);
 		});
 	}
@@ -151,12 +151,12 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 	}
 
 	@NonNull
-	private CharSequence getDefaultViewSummary(@NonNull DefaultView primaryView,
-	                                           @NonNull Map<DefaultView, String> previewData) {
+	private CharSequence getDefaultViewSummary(@NonNull DisplayValue defaultView,
+	                                           @NonNull Map<DisplayValue, String> previewData) {
 		String fullText = "";
 		String pattern = getString(R.string.ltr_or_rtl_combine_via_bold_point);
-		for (DefaultView defaultView : DefaultView.values(primaryView)) {
-			String value = Objects.requireNonNull(previewData.get(defaultView));
+		for (DisplayValue displayValue : DisplayValue.values(defaultView)) {
+			String value = Objects.requireNonNull(previewData.get(displayValue));
 			if (fullText.isEmpty()) {
 				fullText = value;
 			} else {
@@ -165,7 +165,7 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 		}
 
 		SpannableString spannable = new SpannableString(fullText);
-		String primaryValue = previewData.get(primaryView);
+		String primaryValue = previewData.get(defaultView);
 		if (primaryValue != null) {
 			int startIndex = 0;
 			int endIndex = primaryValue.length();
