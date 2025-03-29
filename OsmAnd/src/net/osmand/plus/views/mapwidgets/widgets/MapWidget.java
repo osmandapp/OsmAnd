@@ -8,6 +8,8 @@ import android.view.ViewParent;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DimenRes;
+import androidx.annotation.Dimension;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -178,6 +180,11 @@ public abstract class MapWidget {
 		} else {
 			return app.getString(stringId);
 		}
+	}
+
+	@Dimension
+	protected int getDimensionPixelSize(@DimenRes int resId) {
+		return getMyApplication().getResources().getDimensionPixelSize(resId);
 	}
 
 	@NonNull

@@ -1520,9 +1520,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private int getMinBadgeWidth(List<TransportStopRoute> transportStopRoutes) {
 		try {
-			int minBadgeWidth = getResources().getDimensionPixelSize(R.dimen.context_menu_transport_grid_item_width);
-			int textPadding = getResources().getDimensionPixelSize(R.dimen.context_menu_subtitle_margin);
-			float textSizeSmall = getResources().getDimensionPixelSize(R.dimen.default_sub_text_size_small);
+			int minBadgeWidth = getDimensionPixelSize(R.dimen.context_menu_transport_grid_item_width);
+			int textPadding = getDimensionPixelSize(R.dimen.context_menu_subtitle_margin);
+			float textSizeSmall = getDimensionPixelSize(R.dimen.default_sub_text_size_small);
 
 			for (TransportStopRoute transportStopRoute : transportStopRoutes) {
 				String routeRef = transportStopRoute.route.getAdjustedRouteRef(false);
