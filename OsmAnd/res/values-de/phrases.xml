@@ -4903,7 +4903,7 @@
     <string name="poi_route_activity_type_car">Auto</string>
     <string name="poi_route_activity_type_e_biking">E-Biken</string>
     <string name="poi_route_activity_type_off_road">Offroad</string>
-    <string name="poi_route_activity_type_all_terrain_vehicle">ATV (All-Terrain Vehicle)</string>
+    <string name="poi_route_activity_type_all_terrain_vehicle">ATV (Quad)</string>
     <string name="poi_route_activity_type_truck_hgv">Lkw</string>
     <string name="poi_route_activity_type_adventure_motorcycling">Abenteuer-Motorradsport</string>
     <string name="poi_route_activity_type_enduro_motorcycling">Enduro-Motorradsport</string>
