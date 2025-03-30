@@ -28,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.fragments.search.Collectors;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -42,7 +43,6 @@ import net.osmand.util.Algorithms;
 import org.threeten.bp.Duration;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
@@ -488,16 +488,12 @@ public class ConfigureMapDialogs {
 		return properties
 				.stream()
 				.collect(
-						Collectors.toMap(
+						Collectors.toOrderedMap(
 								RenderingRuleProperty::getAttrName,
 								property ->
 										AndroidUtils.getRenderingStringPropertyName(
 												context,
 												property.getAttrName(),
-												property.getName()),
-								(item1, item2) -> {
-									throw new IllegalStateException();
-								},
-								LinkedHashMap::new));
+												property.getName())));
 	}
 }

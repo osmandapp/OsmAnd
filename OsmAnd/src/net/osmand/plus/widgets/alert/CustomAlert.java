@@ -15,9 +15,11 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.fragments.search.Collectors;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -92,8 +94,28 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
+	public static void showSelectMapLayerDialog(final AlertDialogData data,
+												final List<Map.Entry<String, String>> entriesMapList,
+												final int selectedEntryIndex,
+												final View.OnClickListener itemClickListener,
+												final FragmentManager fragmentManager) {
+		// FK-TODO: introduce new class MapLayerDialogFragment
+		CustomAlert
+				.createSingleSelectionDialogFragment(
+						data,
+						entriesMapList
+								.stream()
+								.collect(
+										Collectors.toOrderedMap(
+												Map.Entry::getKey,
+												Map.Entry::getValue)),
+						selectedEntryIndex,
+						itemClickListener)
+				.show(fragmentManager);
+	}
+
 	public static RoadStyleSelectionDialogFragment createSingleSelectionDialogFragment(
-			final @NonNull AlertDialogData data,
+			final AlertDialogData data,
 			final Map<String, CharSequence> itemByKey,
 			final int selectedEntryIndex,
 			final View.OnClickListener itemClickListener) {

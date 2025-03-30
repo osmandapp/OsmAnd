@@ -450,10 +450,10 @@ public class MapLayers {
 	}
 
 	public void selectMapLayer(
-			@NonNull MapActivity mapActivity, boolean includeOfflineMaps,
+			@NonNull MapActivity mapActivity,
+			boolean includeOfflineMaps,
 			@NonNull CommonPreference<String> targetLayer,
-			@Nullable CallbackWithObject<String> callback
-	) {
+			@Nullable CallbackWithObject<String> callback) {
 		if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			return;
@@ -487,22 +487,22 @@ public class MapLayers {
 				entriesMapList.add(0, selectedEntry);
 			}
 		}
-		String[] items = new String[entriesMapList.size()];
-		int i = 0;
-		for (Entry<String, String> entry : entriesMapList) {
-			items[i++] = entry.getValue();
-		}
-
 		boolean nightMode = isNightMode();
-		AlertDialogData dialogData = new AlertDialogData(mapActivity, nightMode)
-				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
-				.setNegativeButton(R.string.shared_string_dismiss, null);
+		final AlertDialogData dialogData =
+				new AlertDialogData(mapActivity, nightMode)
+						.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+						.setNegativeButton(R.string.shared_string_dismiss, null);
 
-		CustomAlert.showSingleSelection(dialogData, items, selectedItem, v -> {
-			int which = (int) v.getTag();
-			String layerKey = entriesMapList.get(which).getKey();
-			onMapLayerSelected(mapActivity, includeOfflineMaps, targetLayer, callback, layerKey);
-		});
+		CustomAlert.showSelectMapLayerDialog(
+				dialogData,
+				entriesMapList,
+				selectedItem,
+				v -> {
+					final int which = (int) v.getTag();
+					String layerKey = entriesMapList.get(which).getKey();
+					onMapLayerSelected(mapActivity, includeOfflineMaps, targetLayer, callback, layerKey);
+				},
+				mapActivity.getSupportFragmentManager());
 	}
 
 	private void onMapLayerSelected(
