@@ -1078,7 +1078,7 @@
     <string name="poi_wheelchair_no">ne</string>
     <string name="poi_wheelchair_limited">parta</string>
     <string name="poi_wholesale">Pogranda komerco</string>
-    <string name="poi_access_private">Privata aliro</string>
+    <string name="poi_access_private">nur laŭ privata permeso</string>
     <string name="poi_access_no">ne</string>
     <string name="poi_access_customers">nur por klientoj</string>
     <string name="poi_access_destination">nur al celo</string>
