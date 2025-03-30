@@ -21,7 +21,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
-import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
+import net.osmand.plus.widgets.alert.RoadStyleSelectionDialogFragment;
 
 import java.util.Map;
 import java.util.Optional;
@@ -113,7 +113,7 @@ public class SettingsSearchButtonHelper {
 						new PrincipalAndProxy<>(DetailsBottomSheet.class, DetailsBottomSheet.DetailsBottomSheetProxy.class),
 						new PrincipalAndProxy<>(TransportLinesFragment.class, TransportLinesFragment.TransportLinesFragmentProxy.class),
 						new PrincipalAndProxy<>(SelectMapStyleBottomSheetDialogFragment.class, SelectMapStyleBottomSheetDialogFragment.SelectMapStyleBottomSheetDialogFragmentProxy.class),
-						new PrincipalAndProxy<>(SingleSelectionDialogFragment.class, SingleSelectionDialogFragment.SingleSelectionDialogFragmentProxy.class),
+						new PrincipalAndProxy<>(RoadStyleSelectionDialogFragment.class, RoadStyleSelectionDialogFragment.RoadStyleSelectionDialogFragmentProxy.class),
 						new PrincipalAndProxy<>(MultiSelectionDialogFragment.class, MultiSelectionDialogFragment.MultiSelectionDialogFragmentProxy.class),
 						new PrincipalAndProxy<>(ConfigureMapDialogs.MapLanguageDialog.class, ConfigureMapDialogs.MapLanguageDialog.MapLanguageDialogProxy.class),
 						new PrincipalAndProxy<>(MapModeFragment.class, MapModeFragment.MapModeFragmentProxy.class)));

@@ -374,7 +374,7 @@ public class ConfigureMapDialogs {
 		}
 	}
 
-	public static SingleSelectionDialogFragment createRenderingPropertyDialog(
+	public static RoadStyleSelectionDialogFragment createRenderingPropertyDialog(
 			final @NonNull MapActivity activity,
 			final @NonNull RenderingRuleProperty property,
 			final @NonNull ContextMenuItem item,

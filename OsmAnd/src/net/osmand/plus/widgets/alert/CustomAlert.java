@@ -92,7 +92,7 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
-	public static SingleSelectionDialogFragment createSingleSelectionDialogFragment(
+	public static RoadStyleSelectionDialogFragment createSingleSelectionDialogFragment(
 			final @NonNull AlertDialogData data,
 			final Map<String, CharSequence> itemByKey,
 			final int selectedEntryIndex,
@@ -113,7 +113,7 @@ public class CustomAlert {
 						.setAdapter(adapter, null)
 						.create();
 		adapter.setDialog(alertDialog);
-		return new SingleSelectionDialogFragment(alertDialog, data, itemByKey, adapter);
+		return new RoadStyleSelectionDialogFragment(alertDialog, data, itemByKey, adapter);
 	}
 
 	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,

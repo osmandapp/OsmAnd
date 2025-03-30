@@ -58,7 +58,7 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
-import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
+import net.osmand.plus.widgets.alert.RoadStyleSelectionDialogFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -94,13 +94,13 @@ public class ConfigureMapMenu {
 	public record DialogsAndAdapter(Dialogs dialogs, ContextMenuAdapter adapter) {
 	}
 
-	public record Dialogs(Optional<SingleSelectionDialogFragment> roadStyleDialog,
+	public record Dialogs(Optional<RoadStyleSelectionDialogFragment> roadStyleDialog,
 						  ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog,
 						  Optional<MultiSelectionDialogFragment> hideDialog) {
 	}
 
-	public record ItemAndDialog(ContextMenuItem item,
-								Optional<SingleSelectionDialogFragment> dialog) {
+	public record ItemAndRoadStyleDialog(ContextMenuItem item,
+										 Optional<RoadStyleSelectionDialogFragment> roadStyleDialog) {
 	}
 
 	public record ItemAndHideDialog(ContextMenuItem item,
@@ -552,7 +552,7 @@ public class ConfigureMapMenu {
 				})
 				.setItemDeleteAction(settings.MAP_DENSITY));
 
-		final Optional<ItemAndDialog> roadStyleItemAndDialog =
+		final Optional<ItemAndRoadStyleDialog> roadStyleItemAndDialog =
 				createRenderingProperty(
 						customRules,
 						activity,
@@ -562,7 +562,7 @@ public class ConfigureMapMenu {
 						nightMode);
 		ContextMenuItem props =
 				roadStyleItemAndDialog
-						.map(ItemAndDialog::item)
+						.map(ItemAndRoadStyleDialog::item)
 						.orElse(null);
 		if (props != null) {
 			adapter.addItem(props);
@@ -624,7 +624,7 @@ public class ConfigureMapMenu {
 			createCustomRenderingProperties(adapter, activity, customRules, nightMode);
 		}
 		return new Dialogs(
-				roadStyleItemAndDialog.flatMap(ItemAndDialog::dialog),
+				roadStyleItemAndDialog.flatMap(ItemAndRoadStyleDialog::roadStyleDialog),
 				mapLanguageItemAndDialog.dialog,
 				itemAndHideDialog.flatMap(ItemAndHideDialog::hideDialog));
 	}
@@ -797,12 +797,12 @@ public class ConfigureMapMenu {
 		return size;
 	}
 
-	private Optional<ItemAndDialog> createRenderingProperty(final List<RenderingRuleProperty> customRules,
-															final MapActivity activity,
-															final @DrawableRes int icon,
-															final String attrName,
-															final String id,
-															final boolean nightMode) {
+	private Optional<ItemAndRoadStyleDialog> createRenderingProperty(final List<RenderingRuleProperty> customRules,
+																	 final MapActivity activity,
+																	 final @DrawableRes int icon,
+																	 final String attrName,
+																	 final String id,
+																	 final boolean nightMode) {
 		for (final RenderingRuleProperty property : customRules) {
 			if (property.getAttrName().equals(attrName)) {
 				return Optional.of(ConfigureMapMenu.createRenderingProperty(activity, icon, property, id, nightMode));
@@ -811,13 +811,13 @@ public class ConfigureMapMenu {
 		return Optional.empty();
 	}
 
-	public static ItemAndDialog createRenderingProperty(final MapActivity activity,
-														final @DrawableRes int icon,
-														final RenderingRuleProperty property,
-														final String id,
-														final boolean nightMode) {
+	public static ItemAndRoadStyleDialog createRenderingProperty(final MapActivity activity,
+																 final @DrawableRes int icon,
+																 final RenderingRuleProperty property,
+																 final String id,
+																 final boolean nightMode) {
 		if (property.isBoolean()) {
-			return new ItemAndDialog(
+			return new ItemAndRoadStyleDialog(
 					createBooleanRenderingProperty(
 							activity,
 							property.getAttrName(),
@@ -835,7 +835,7 @@ public class ConfigureMapMenu {
 						.setDescription(getDescription(property, activity.getMyApplication()))
 						.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
 						.setLayout(R.layout.list_item_single_line_descrition_narrow);
-		final SingleSelectionDialogFragment dialog = ConfigureMapDialogs.createRenderingPropertyDialog(activity, property, item, nightMode);
+		final RoadStyleSelectionDialogFragment dialog = ConfigureMapDialogs.createRenderingPropertyDialog(activity, property, item, nightMode);
 		item.setListener(
 				new ItemClickListener() {
 
@@ -858,7 +858,7 @@ public class ConfigureMapMenu {
 		if (icon != INVALID_ID) {
 			item.setIcon(icon);
 		}
-		return new ItemAndDialog(item, Optional.of(dialog));
+		return new ItemAndRoadStyleDialog(item, Optional.of(dialog));
 	}
 
 	private static String getPropertyName(final RenderingRuleProperty property, final Context context) {

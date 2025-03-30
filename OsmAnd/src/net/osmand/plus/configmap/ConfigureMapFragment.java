@@ -41,7 +41,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
-import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
+import net.osmand.plus.widgets.alert.RoadStyleSelectionDialogFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -500,8 +500,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return createPreferenceFragment();
 							}
 
-							private static SingleSelectionDialogFragment.SingleSelectionDialogFragmentProxy createPreferenceFragment() {
-								return new SingleSelectionDialogFragment.SingleSelectionDialogFragmentProxy();
+							private static RoadStyleSelectionDialogFragment.RoadStyleSelectionDialogFragmentProxy createPreferenceFragment() {
+								return new RoadStyleSelectionDialogFragment.RoadStyleSelectionDialogFragmentProxy();
 							}
 
 							@Override
