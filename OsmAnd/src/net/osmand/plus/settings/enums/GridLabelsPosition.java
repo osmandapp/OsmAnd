@@ -5,7 +5,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
-public enum GridLabelsPosition {
+public enum GridLabelsPosition implements EnumWithTitleId {
 
 	EDGES(R.drawable.ic_action_grid_label_edges, R.string.shared_string_edges),
 	CENTER(R.drawable.ic_action_grid_label_center, R.string.position_on_map_center);
@@ -26,6 +26,7 @@ public enum GridLabelsPosition {
 		return iconId;
 	}
 
+	@Override
 	@StringRes
 	public int getTitleId() {
 		return titleId;
