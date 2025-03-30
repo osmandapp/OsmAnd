@@ -4,6 +4,7 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -48,10 +49,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -459,19 +457,45 @@ public class MapLayers {
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			return;
 		}
-		OsmandSettings settings = app.getSettings();
+		final boolean nightMode = isNightMode();
+		final AlertDialogData dialogData =
+				new AlertDialogData(mapActivity, nightMode)
+						.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+						.setNegativeButton(R.string.shared_string_dismiss, null);
+		final ItemByKeyAndSelectedItem itemByKeyAndSelectedItem =
+				getItemByKeyAndSelectedItem(
+						includeOfflineMaps,
+						targetLayer);
+		CustomAlert
+				.createMapLayerSelectionDialogFragment(
+						dialogData,
+						itemByKeyAndSelectedItem.itemByKey(),
+						itemByKeyAndSelectedItem.selectedItem(),
+						new View.OnClickListener() {
 
-		Map<String, String> entriesMap = new LinkedHashMap<>();
-		if (includeOfflineMaps) {
-			entriesMap.put(LAYER_OSM_VECTOR, app.getString(R.string.vector_data));
-		}
-		entriesMap.putAll(settings.getTileSourceEntries());
-		entriesMap.put(LAYER_INSTALL_MORE, app.getString(R.string.install_more));
-		entriesMap.put(LAYER_ADD, app.getString(R.string.shared_string_add_manually));
-		List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
+							private final List<String> keys = new ArrayList<>(itemByKeyAndSelectedItem.itemByKey().keySet());
 
-		String selectedTileSourceKey = targetLayer.get();
+							@Override
+							public void onClick(final View v) {
+								final int which = (int) v.getTag();
+								onMapLayerSelected(
+										mapActivity,
+										includeOfflineMaps,
+										targetLayer,
+										callback,
+										keys.get(which));
+							}
+						})
+				.show(mapActivity.getSupportFragmentManager());
+	}
+
+	private ItemByKeyAndSelectedItem getItemByKeyAndSelectedItem(final boolean includeOfflineMaps,
+																 final CommonPreference<String> targetLayer) {
+		final Map<String, String> entriesMap = getEntriesMap(includeOfflineMaps);
+		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
+		final String selectedTileSourceKey = targetLayer.get();
 		int selectedItem = -1;
+		final OsmandSettings settings = app.getSettings();
 		if (!settings.MAP_ONLINE_DATA.get() && targetLayer == settings.MAP_TILE_SOURCES) {
 			selectedItem = 0;
 		} else {
@@ -488,28 +512,32 @@ public class MapLayers {
 				entriesMapList.add(0, selectedEntry);
 			}
 		}
-		boolean nightMode = isNightMode();
-		final AlertDialogData dialogData =
-				new AlertDialogData(mapActivity, nightMode)
-						.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
-						.setNegativeButton(R.string.shared_string_dismiss, null);
+		return new ItemByKeyAndSelectedItem(
+				getItemByKey(entriesMapList),
+				selectedItem);
+	}
 
-		CustomAlert
-				.createMapLayerSelectionDialogFragment(
-						dialogData,
-						entriesMapList
-								.stream()
-								.collect(
-										Collectors.toOrderedMap(
-												Entry::getKey,
-												Entry::getValue)),
-						selectedItem,
-						v -> {
-							final int which = (int) v.getTag();
-							String layerKey = entriesMapList.get(which).getKey();
-							onMapLayerSelected(mapActivity, includeOfflineMaps, targetLayer, callback, layerKey);
-						})
-				.show(mapActivity.getSupportFragmentManager());
+	private Map<String, String> getEntriesMap(final boolean includeOfflineMaps) {
+		final Map<String, String> entriesMap = new LinkedHashMap<>();
+		if (includeOfflineMaps) {
+			entriesMap.put(LAYER_OSM_VECTOR, app.getString(R.string.vector_data));
+		}
+		entriesMap.putAll(app.getSettings().getTileSourceEntries());
+		entriesMap.put(LAYER_INSTALL_MORE, app.getString(R.string.install_more));
+		entriesMap.put(LAYER_ADD, app.getString(R.string.shared_string_add_manually));
+		return entriesMap;
+	}
+
+	private record ItemByKeyAndSelectedItem(Map<String, CharSequence> itemByKey, int selectedItem) {
+	}
+
+	private static LinkedHashMap<String, CharSequence> getItemByKey(final List<Entry<String, String>> entries) {
+		return entries
+				.stream()
+				.collect(
+						Collectors.toOrderedMap(
+								Entry::getKey,
+								Entry::getValue));
 	}
 
 	private void onMapLayerSelected(
