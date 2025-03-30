@@ -1066,6 +1066,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
+						// FK-TODO: add MapSource test for !PluginsHelper.isActive(OsmandRasterMapsPlugin.class)
 						{
 								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_OfflineVectorMaps",
 								new SettingsSearchTestTemplate() {

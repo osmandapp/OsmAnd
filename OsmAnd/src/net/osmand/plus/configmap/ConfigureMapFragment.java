@@ -575,6 +575,29 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
+				// FK-TODO: reactivate:
+//				case MAP_SOURCE_ID -> Optional.of(
+//						new PreferenceFragmentHandler() {
+//
+//							@Override
+//							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+//								return createPreferenceFragment().getClass();
+//							}
+//
+//							@Override
+//							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+//								return createPreferenceFragment();
+//							}
+//
+//							private static PluginsFragment.PluginsFragmentProxy createPreferenceFragment() {
+//								return new PluginsFragment.PluginsFragmentProxy();
+//							}
+//
+//							@Override
+//							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+//								return false;
+//							}
+//						});
 				default -> Optional.empty();
 			};
 		}
