@@ -4,4 +4,5 @@ public interface ICoordinatesGridScreen {
 	void updateFormatButton();
 	void updateZoomLevelsButton();
 	void updateLabelsPositionButton();
+	void updateGridColorPreview();
 }

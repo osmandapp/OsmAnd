@@ -18,12 +18,17 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
-public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoordinatesGridScreen {
+public class CoordinatesGridFragment extends BaseOsmAndFragment
+		implements ICoordinatesGridScreen, InAppPurchaseListener {
 
 	public static final String TAG = CoordinatesGridFragment.class.getSimpleName();
 
@@ -58,6 +63,7 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 			setupFormatButton();
 			setupZoomLevelsButton();
 			setupLabelsPositionButton();
+			setupGridColorButton();
 		} else {
 			dismiss();
 		}
@@ -162,6 +168,43 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 		tvValue.setText(controller.getSelectedLabelsPositionName());
 	}
 
+	private void setupGridColorButton() {
+		boolean purchased = isColorFeaturePurchased();
+		View button = view.findViewById(R.id.grid_color_button);
+		View btnGet = view.findViewById(R.id.button_get);
+		ImageView ivIcon = view.findViewById(R.id.grid_color_feature_icon);
+		if (purchased) {
+			ivIcon.setColorFilter(ColorUtilities.getActiveColor(app, nightMode));
+			ivIcon.setImageResource(R.drawable.ic_action_appearance);
+			updateGridColorPreview();
+		} else {
+			ivIcon.clearColorFilter();
+			ivIcon.setImageResource(R.drawable.ic_action_grid_colored);
+			UiUtilities.setupDialogButton(nightMode, btnGet, DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
+		}
+
+		button.setOnClickListener(v -> {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				if (purchased) {
+					controller.onSelectGridColorClicked(mapActivity);
+				} else {
+					ChoosePlanFragment.showDefaultInstance(mapActivity);
+				}
+			}
+		});
+
+		setupSelectableBackground(button);
+		AndroidUiHelper.setVisibility(!purchased, btnGet, view.findViewById(R.id.grid_color_summary));
+		AndroidUiHelper.setVisibility(purchased, view.findViewById(R.id.color_preview_icon));
+	}
+
+	@Override
+	public void updateGridColorPreview() {
+		ImageView ivColorPreview = view.findViewById(R.id.color_preview_icon);
+		ivColorPreview.setColorFilter(controller.getGridColor());
+	}
+
 	private void updateScreenMode(boolean enabled) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.content_container), enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.titleBottomDivider), !enabled);
@@ -170,6 +213,10 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 	private void setupSelectableBackground(@NonNull View view) {
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
 		AndroidUtils.setBackground(view, background);
+	}
+
+	private boolean isColorFeaturePurchased() {
+		return InAppPurchaseUtils.isGridColorAvailable(app);
 	}
 
 	@Override
@@ -185,6 +232,11 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 		if (mapActivity != null) {
 			mapActivity.getDashboard().onBackPressed();
 		}
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		setupGridColorButton();
 	}
 
 	@Nullable

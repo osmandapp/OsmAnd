@@ -109,6 +109,11 @@ public class CoordinatesGridController extends BaseDialogController {
 		}
 	}
 
+	public void onSelectGridColorClicked(@NonNull MapActivity mapActivity) {
+		//TODO: open Grid Color screen
+		app.showToastMessage("Select grid color");
+	}
+
 	private <T extends Enum<T> & EnumWithTitleId> void showPopUpMenu(
 			@NonNull View anchorView, @NonNull T[] values, @NonNull T selectedValue,
 			@NonNull OnResultCallback<T> callback, @ColorInt int controlsColor, boolean nightMode
@@ -166,6 +171,11 @@ public class CoordinatesGridController extends BaseDialogController {
 
 	public void setLabelsPosition(@NonNull GridLabelsPosition position) {
 		gridHelper.setGridLabelsPosition(getSelectedAppMode(), position);
+	}
+
+	@ColorInt
+	public int getGridColor() {
+		return gridHelper.getGridColor(getSelectedAppMode());
 	}
 
 	@NonNull

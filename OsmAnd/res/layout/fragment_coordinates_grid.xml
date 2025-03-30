@@ -250,11 +250,11 @@
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/grid_color_feature_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/content_padding"
-                            android:src="@drawable/ic_action_appearance"
-                            app:tint="?attr/default_icon_color" />
+                            android:src="@drawable/ic_action_appearance" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -293,34 +293,43 @@
                             app:srcCompat="@drawable/bg_point_circle" />
 
                         <LinearLayout
-                            android:id="@+id/get_btn"
+                            android:id="@+id/button_get"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|end"
-                            android:background="@drawable/ui_button_pro"
-                            android:layout_marginEnd="@dimen/content_padding"
-                            android:gravity="bottom"
-                            android:orientation="horizontal"
-                            android:paddingHorizontal="@dimen/content_padding_half"
-                            android:paddingVertical="@dimen/text_margin_small">
+                            android:layout_marginEnd="@dimen/content_padding_small"
+                            android:orientation="vertical">
 
-                            <net.osmand.plus.widgets.TextViewEx
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:lineSpacingExtra="0sp"
-                                android:textStyle="bold"
-                                android:text="@string/shared_string_get"
-                                android:textColor="@color/active_color_primary_light"
-                                android:textSize="@dimen/default_list_text_size" />
-
-                            <androidx.appcompat.widget.AppCompatImageView
+                            <LinearLayout
+                                android:id="@+id/button_container"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/content_padding_small_half"
-                                android:src="@drawable/ic_action_plus"
-                                app:tint="@color/active_color_primary_light" />
+                                android:paddingHorizontal="@dimen/content_padding_medium"
+                                android:duplicateParentState="true">
+
+                                <net.osmand.plus.widgets.TextViewEx
+                                    android:id="@+id/button_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical|start"
+                                    android:drawablePadding="@dimen/content_padding_half"
+                                    android:duplicateParentState="true"
+                                    android:layout_marginEnd="@dimen/content_padding_small_half"
+                                    android:gravity="center_vertical|start"
+                                    android:textStyle="bold"
+                                    android:text="@string/shared_string_get"
+                                    android:textColor="?attr/active_color_basic"
+                                    android:textSize="@dimen/default_desc_text_size"
+                                    app:typefaceWeight="medium" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/standard_icon_size"
+                                    android:layout_height="@dimen/standard_icon_size"
+                                    android:layout_gravity="center_vertical|end"
+                                    android:layout_marginVertical="@dimen/content_padding_half"
+                                    android:src="@drawable/ic_action_plus"
+                                    android:tint="?attr/active_color_basic" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
