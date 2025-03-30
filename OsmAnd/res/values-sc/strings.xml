@@ -4989,4 +4989,7 @@
     <string name="sound_beep_simple">Bip: simpre</string>
     <string name="last_synchronized">Ùrtima sincronizatzione</string>
     <string name="display_position_automatic_descr">Dipendet dae s\'orientamentu de sa mapa. In bassu pro sa diretzione de su movimentu, in tzentru pro totu su restu.</string>
+    <string name="poi_source">Fonte de sos PDI</string>
+    <string name="maps_and_resources">Mapas e Resursas</string>
+    <string name="help_article_troubleshooting_maps_data_name">Mapas e datos</string>
 </resources>
