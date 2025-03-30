@@ -25,6 +25,7 @@ import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.GridFormat;
+import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -40,6 +41,7 @@ public class CoordinatesGridHelper {
 	private GridMarksProvider marksProvider;
 
 	private GridFormat cachedGridFormat;
+	private GridLabelsPosition cachedLabelsPosition;
 	@ColorInt
 	private int cachedGridColor;
 	@ColorInt
@@ -60,6 +62,7 @@ public class CoordinatesGridHelper {
 		settings.COORDINATE_GRID_MIN_ZOOM.addListener(settingsListener);
 		settings.COORDINATE_GRID_MAX_ZOOM.addListener(settingsListener);
 		settings.COORDINATES_FORMAT.addListener(settingsListener);
+		settings.COORDINATES_GRID_LABELS_POSITION.addListener(settingsListener);
 		settings.TEXT_SCALE.addListener(settingsListener);
 	}
 
@@ -98,6 +101,7 @@ public class CoordinatesGridHelper {
 
 	private void initVariables(@NonNull ApplicationMode appMode) {
 		cachedGridFormat = getGridFormat(appMode);
+		cachedLabelsPosition = getGridLabelsPosition(appMode);
 		cachedGridColor = getGridColor(appMode);
 		cachedHaloColor = getHaloColor(appMode);
 		cachedTextScale = getTextScale(appMode);
@@ -130,6 +134,11 @@ public class CoordinatesGridHelper {
 			cachedTextScale = newTextScale;
 			updated = true;
 		}
+		GridLabelsPosition newLabelsPosition = getGridLabelsPosition(appMode);
+		if (cachedLabelsPosition != newLabelsPosition) {
+			cachedLabelsPosition = newLabelsPosition;
+			updated = true;
+		}
 		return updated;
 	}
 
@@ -157,7 +166,8 @@ public class CoordinatesGridHelper {
 		String meridian180 = app.getString(R.string.meridian_180);
 		marksProvider.setPrimary(false, equator, "", primeMeridian, meridian180);
 
-		marksProvider.setSecondaryStyle(secondaryStyle, 2.0f * cachedTextScale);
+		boolean drawLabelsInCenter = cachedLabelsPosition == GridLabelsPosition.CENTER;
+		marksProvider.setSecondaryStyle(secondaryStyle, 2.0f * cachedTextScale, drawLabelsInCenter);
 		if (cachedGridFormat.needSuffixes()) {
 			marksProvider.setSecondary(true, "N", "S", "E", "W");
 		} else {
@@ -253,6 +263,15 @@ public class CoordinatesGridHelper {
 	public int getHaloColor(@NonNull ApplicationMode appMode) {
 		// temporally use predefined color, it will be set from the preferences in the future
 		return Color.parseColor("#80FFFFFF");
+	}
+
+	@NonNull
+	public GridLabelsPosition getGridLabelsPosition(@NonNull ApplicationMode appMode) {
+		return settings.COORDINATES_GRID_LABELS_POSITION.getModeValue(appMode);
+	}
+
+	public void setGridLabelsPosition(@NonNull ApplicationMode appMode, @NonNull GridLabelsPosition position) {
+		settings.COORDINATES_GRID_LABELS_POSITION.setModeValue(appMode, position);
 	}
 
 	@NonNull

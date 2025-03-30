@@ -57,6 +57,7 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 			setupMainToggle();
 			setupFormatButton();
 			setupZoomLevelsButton();
+			setupLabelsPositionButton();
 		} else {
 			dismiss();
 		}
@@ -142,6 +143,23 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 		View button = view.findViewById(R.id.zoom_levels_button);
 		TextView tvZoomValue = button.findViewById(R.id.zoom_value);
 		tvZoomValue.setText(controller.getFormattedZoomLevels());
+	}
+
+	private void setupLabelsPositionButton() {
+		View button = view.findViewById(R.id.labels_position_button);
+		View selector = button.findViewById(R.id.labels_position_selector);
+		button.setOnClickListener(v -> controller.onLabelsPositionSelectorClicked(selector, profileColor, nightMode));
+		setupSelectableBackground(button);
+		updateLabelsPositionButton();
+	}
+
+	@Override
+	public void updateLabelsPositionButton() {
+		View button = view.findViewById(R.id.labels_position_button);
+		ImageView ivIcon = view.findViewById(R.id.labels_position_icon);
+		ivIcon.setImageResource(controller.getSelectedLabelsPositionIcon());
+		TextView tvValue = button.findViewById(R.id.labels_position_value);
+		tvValue.setText(controller.getSelectedLabelsPositionName());
 	}
 
 	private void updateScreenMode(boolean enabled) {

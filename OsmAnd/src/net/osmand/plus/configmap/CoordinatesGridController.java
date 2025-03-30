@@ -20,6 +20,7 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.CoordinatesGridHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.GridFormat;
+import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -103,6 +104,48 @@ public class CoordinatesGridController extends BaseDialogController {
 		GridZoomLevelsController.showDialog(activity);
 	}
 
+	@DrawableRes
+	public int getSelectedLabelsPositionIcon() {
+		GridLabelsPosition position = getLabelsPosition();
+		return position.getIconId();
+	}
+
+	@NonNull
+	public String getSelectedLabelsPositionName() {
+		GridLabelsPosition position = getLabelsPosition();
+		return app.getString(position.getTitleId());
+	}
+
+	public void onLabelsPositionSelectorClicked(@NonNull View anchorView,
+	                                            @ColorInt int activeColor, boolean nightMode) {
+		GridLabelsPosition current = getLabelsPosition();
+		List<PopUpMenuItem> items = new ArrayList<>();
+		for (GridLabelsPosition pos : GridLabelsPosition.values()) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(app.getString(pos.getTitleId()))
+					.setTitleColor(getPrimaryTextColor(app, nightMode))
+					.setSelected(pos == current)
+					.showCompoundBtn(activeColor)
+					.setTag(pos)
+					.create()
+			);
+		}
+		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
+		data.widthMode = PopUpMenuWidthMode.STANDARD;
+		data.anchorView = anchorView;
+		data.menuItems = items;
+		data.nightMode = nightMode;
+		data.onItemClickListener = item -> onSelectLabelsPosition((GridLabelsPosition) item.getTag());
+		PopUpMenu.show(data);
+	}
+
+	private void onSelectLabelsPosition(@NonNull GridLabelsPosition position) {
+		setLabelsPosition(position);
+		if (screen != null) {
+			screen.updateLabelsPositionButton();
+		}
+	}
+
 	public boolean isEnabled() {
 		return gridHelper.isEnabled(getSelectedAppMode());
 	}
@@ -123,6 +166,15 @@ public class CoordinatesGridController extends BaseDialogController {
 	@NonNull
 	public Limits<Integer> getZoomLevels() {
 		return gridHelper.getZoomLevelsWithRestrictions(getSelectedAppMode());
+	}
+
+	@NonNull
+	public GridLabelsPosition getLabelsPosition() {
+		return gridHelper.getGridLabelsPosition(getSelectedAppMode());
+	}
+
+	public void setLabelsPosition(@NonNull GridLabelsPosition position) {
+		gridHelper.setGridLabelsPosition(getSelectedAppMode(), position);
 	}
 
 	@NonNull

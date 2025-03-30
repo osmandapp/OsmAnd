@@ -64,7 +64,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/content_padding"
-                            android:src="@drawable/ic_action_layers"
+                            android:src="@drawable/ic_action_coordinates_longitude"
                             app:tint="?attr/default_icon_color" />
 
                         <TextView
@@ -156,6 +156,173 @@
                             android:textColor="?android:textColorSecondary"
                             android:textSize="@dimen/default_list_text_size"
                             tools:text="25%" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <include layout="@layout/card_bottom_divider" />
+
+                <include layout="@layout/card_top_divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/bg_color"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/labels_position_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_sheet_large_list_item_height"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/labels_position_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/content_padding"
+                            android:src="@drawable/ic_action_grid_label_center"
+                            app:tint="?attr/active_color_basic" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingHorizontal="@dimen/content_padding"
+                            android:text="@string/labels_position"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="@dimen/default_list_text_size"
+                            android:textStyle="normal" />
+
+                        <LinearLayout
+                            android:id="@+id/labels_position_selector"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/bottom_sheet_list_item_height"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/text_margin_small"
+                            android:duplicateParentState="true"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/content_padding_small">
+
+                            <net.osmand.plus.widgets.TextViewEx
+                                android:id="@+id/labels_position_value"
+                                style="@style/TitleStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:textColor="?android:textColorSecondary"
+                                tools:text="Center" />
+
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                style="@style/Widget.AppCompat.ActionButton"
+                                android:layout_width="@dimen/standard_icon_size"
+                                android:layout_height="@dimen/standard_icon_size"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/dashFavIconMargin"
+                                android:clickable="false"
+                                android:duplicateParentState="true"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_action_arrow_down"
+                                android:tint="?attr/default_icon_color" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="72dp"
+                        android:background="?attr/dashboard_divider"
+                        android:focusable="false" />
+
+                    <LinearLayout
+                        android:id="@+id/grid_color_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_sheet_large_list_item_height"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/content_padding"
+                            android:src="@drawable/ic_action_appearance"
+                            app:tint="?attr/default_icon_color" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingHorizontal="@dimen/content_padding"
+                            android:orientation="vertical">
+
+                            <net.osmand.plus.widgets.TextViewEx
+                                style="@style/TitleStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:text="@string/grid_color"
+                                android:textColor="?android:textColorPrimary"
+                                android:textStyle="normal" />
+
+                            <net.osmand.plus.widgets.TextViewEx
+                                android:id="@+id/grid_color_summary"
+                                style="@style/DescStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:text="@string/customize_grid_color"
+                                android:textColor="?android:textColorSecondary"
+                                android:textStyle="normal" />
+
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/color_preview_icon"
+                            android:layout_width="@dimen/standard_icon_size"
+                            android:layout_height="@dimen/standard_icon_size"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="@dimen/content_padding"
+                            app:srcCompat="@drawable/bg_point_circle" />
+
+                        <LinearLayout
+                            android:id="@+id/get_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|end"
+                            android:background="@drawable/ui_button_pro"
+                            android:layout_marginEnd="@dimen/content_padding"
+                            android:gravity="bottom"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/content_padding_half"
+                            android:paddingVertical="@dimen/text_margin_small">
+
+                            <net.osmand.plus.widgets.TextViewEx
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:lineSpacingExtra="0sp"
+                                android:textStyle="bold"
+                                android:text="@string/shared_string_get"
+                                android:textColor="@color/active_color_primary_light"
+                                android:textSize="@dimen/default_list_text_size" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/content_padding_small_half"
+                                android:src="@drawable/ic_action_plus"
+                                app:tint="@color/active_color_primary_light" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

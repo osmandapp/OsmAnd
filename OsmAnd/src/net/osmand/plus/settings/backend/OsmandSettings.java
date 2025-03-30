@@ -3350,6 +3350,9 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> COORDINATE_GRID_MAX_ZOOM =
 			new IntPreference(this, "coordinate_grid_max_zoom", 31).makeProfile();
 
+	public final OsmandPreference<GridLabelsPosition> COORDINATES_GRID_LABELS_POSITION =
+			new EnumStringPreference<>(this, "coordinates_grid_labels_position", GridLabelsPosition.EDGES, GridLabelsPosition.values()).makeProfile();
+
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();
 		StringTokenizer toks = new StringTokenizer(appModesKeys, ",");
