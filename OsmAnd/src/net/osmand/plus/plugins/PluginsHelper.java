@@ -502,6 +502,10 @@ public class PluginsHelper {
 		return getActivePlugin(clz) != null;
 	}
 
+	public static boolean isOnlineMapsPluginActive() {
+		return isActive(OsmandRasterMapsPlugin.class);
+	}
+
 	public static boolean isPluginDisabledManually(OsmandApplication app, OsmandPlugin plugin) {
 		return app.getSettings().getPlugins().contains("-" + plugin.getId());
 	}

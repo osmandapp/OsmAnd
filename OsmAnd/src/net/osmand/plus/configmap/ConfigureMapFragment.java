@@ -1,6 +1,7 @@
 package net.osmand.plus.configmap;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
+import static net.osmand.plus.plugins.PluginsHelper.isOnlineMapsPluginActive;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 import android.content.Context;
@@ -30,6 +31,7 @@ import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
@@ -577,28 +579,30 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
-				case MAP_SOURCE_ID -> Optional.of(
-						new PreferenceFragmentHandler() {
+				case MAP_SOURCE_ID -> isOnlineMapsPluginActive() ?
+						Optional.of(
+								new PreferenceFragmentHandler() {
 
-							@Override
-							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
-								return createPreferenceFragment().getClass();
-							}
+									@Override
+									public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+										return createPreferenceFragment().getClass();
+									}
 
-							@Override
-							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
-								return createPreferenceFragment();
-							}
+									@Override
+									public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+										return createPreferenceFragment();
+									}
 
-							private static MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy createPreferenceFragment() {
-								return new MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy();
-							}
+									private static MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy createPreferenceFragment() {
+										return new MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy();
+									}
 
-							@Override
-							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
-								return false;
-							}
-						});
+									@Override
+									public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+										return false;
+									}
+								}) :
+						Optional.empty();
 				default -> Optional.empty();
 			};
 		}

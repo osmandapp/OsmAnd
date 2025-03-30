@@ -45,6 +45,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 
 	private static <T extends Fragment> Optional<T> instantiateFragment(final Class<T> fragmentClass, final Optional<PreferenceWithHost> src) {
 		if (MapLayerSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
+			// FK-TODO: zweite Stufe des MapLayerSelectionDialogFragment berücksichtigen für die Suche
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().mapLayerDialog().orElseThrow());

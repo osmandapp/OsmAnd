@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.plus.plugins.PluginsHelper.isOnlineMapsPluginActive;
+
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -11,8 +13,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.plugins.PluginsFragment;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -94,7 +94,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.map_markers) {
 			settings.SHOW_MAP_MARKERS.set(isChecked);
 		} else if (itemId == R.string.layer_map) {
-			if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
+			if (!isOnlineMapsPluginActive()) {
 				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 				app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			} else if (uiAdapter != null) {
