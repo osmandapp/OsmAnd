@@ -15,11 +15,9 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.fragments.search.Collectors;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -94,24 +92,29 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
-	public static void showSelectMapLayerDialog(final AlertDialogData data,
-												final List<Map.Entry<String, String>> entriesMapList,
-												final int selectedEntryIndex,
-												final View.OnClickListener itemClickListener,
-												final FragmentManager fragmentManager) {
-		// FK-TODO: introduce new class MapLayerDialogFragment
-		CustomAlert
-				.createSingleSelectionDialogFragment(
-						data,
-						entriesMapList
-								.stream()
-								.collect(
-										Collectors.toOrderedMap(
-												Map.Entry::getKey,
-												Map.Entry::getValue)),
+	// FK-TODO: DRY with createSingleSelectionDialogFragment()
+	public static MapLayerSelectionDialogFragment createMapLayerSelectionDialogFragment(
+			final AlertDialogData data,
+			final Map<String, CharSequence> itemByKey,
+			final int selectedEntryIndex,
+			final View.OnClickListener itemClickListener) {
+		final SelectionDialogAdapter adapter =
+				new SelectionDialogAdapter(
+						data.getContext(),
+						itemByKey.values().toArray(new CharSequence[0]),
 						selectedEntryIndex,
-						itemClickListener)
-				.show(fragmentManager);
+						null,
+						data.getControlsColor(),
+						data.isNightMode(),
+						itemClickListener,
+						false);
+		final AlertDialog alertDialog =
+				CustomAlert
+						.createAlertDialogBuilder(data)
+						.setAdapter(adapter, null)
+						.create();
+		adapter.setDialog(alertDialog);
+		return new MapLayerSelectionDialogFragment(alertDialog, data, itemByKey, adapter);
 	}
 
 	public static RoadStyleSelectionDialogFragment createSingleSelectionDialogFragment(

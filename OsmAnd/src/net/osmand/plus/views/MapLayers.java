@@ -33,6 +33,7 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.fragments.search.Collectors;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.*;
@@ -493,16 +494,22 @@ public class MapLayers {
 						.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
 						.setNegativeButton(R.string.shared_string_dismiss, null);
 
-		CustomAlert.showSelectMapLayerDialog(
-				dialogData,
-				entriesMapList,
-				selectedItem,
-				v -> {
-					final int which = (int) v.getTag();
-					String layerKey = entriesMapList.get(which).getKey();
-					onMapLayerSelected(mapActivity, includeOfflineMaps, targetLayer, callback, layerKey);
-				},
-				mapActivity.getSupportFragmentManager());
+		CustomAlert
+				.createMapLayerSelectionDialogFragment(
+						dialogData,
+						entriesMapList
+								.stream()
+								.collect(
+										Collectors.toOrderedMap(
+												Entry::getKey,
+												Entry::getValue)),
+						selectedItem,
+						v -> {
+							final int which = (int) v.getTag();
+							String layerKey = entriesMapList.get(which).getKey();
+							onMapLayerSelected(mapActivity, includeOfflineMaps, targetLayer, callback, layerKey);
+						})
+				.show(mapActivity.getSupportFragmentManager());
 	}
 
 	private void onMapLayerSelected(
