@@ -31,7 +31,6 @@ import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
