@@ -57,6 +57,7 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.RoadStyleSelectionDialogFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -94,9 +95,16 @@ public class ConfigureMapMenu {
 	public record DialogsAndAdapter(Dialogs dialogs, ContextMenuAdapter adapter) {
 	}
 
+	private record RenderingAttributeDialogs(
+			Optional<RoadStyleSelectionDialogFragment> roadStyleDialog,
+			ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog,
+			Optional<MultiSelectionDialogFragment> hideDialog) {
+	}
+
 	public record Dialogs(Optional<RoadStyleSelectionDialogFragment> roadStyleDialog,
 						  ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog,
-						  Optional<MultiSelectionDialogFragment> hideDialog) {
+						  Optional<MultiSelectionDialogFragment> hideDialog,
+						  Optional<MapLayerSelectionDialogFragment> mapLayerDialog) {
 	}
 
 	public record ItemAndRoadStyleDialog(ContextMenuItem item,
@@ -117,14 +125,19 @@ public class ConfigureMapMenu {
 	}
 
 	@NonNull
-	public ContextMenuAdapter createListAdapter(final @NonNull MapActivity mapActivity) {
+	public ContextMenuAdapter createListAdapter(final @NonNull MapActivity mapActivity,
+												final Optional<OnDataChangeUiAdapter> uiAdapter) {
 		return this
-				.createListAdapter(mapActivity, app.getRendererRegistry().getCurrentSelectedRenderer())
+				.createListAdapter(
+						mapActivity,
+						app.getRendererRegistry().getCurrentSelectedRenderer(),
+						uiAdapter)
 				.adapter();
 	}
 
 	public DialogsAndAdapter createListAdapter(final @NonNull MapActivity mapActivity,
-											   final RenderingRulesStorage renderer) {
+											   final RenderingRulesStorage renderer,
+											   final Optional<OnDataChangeUiAdapter> uiAdapter) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
@@ -134,17 +147,24 @@ public class ConfigureMapMenu {
 				.setLayout(R.layout.mode_toggles));
 
 		final List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(renderer, UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
-		createLayersItems(customRules, adapter, mapActivity, nightMode);
+		final Optional<MapLayerSelectionDialogFragment> mapLayerDialog = createLayersItems(customRules, adapter, mapActivity, nightMode, uiAdapter);
 		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
-		final Dialogs dialogs = createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
-		return new DialogsAndAdapter(dialogs, adapter);
+		final RenderingAttributeDialogs renderingAttributeDialogs = createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
+		return new DialogsAndAdapter(
+				new Dialogs(
+						renderingAttributeDialogs.roadStyleDialog(),
+						renderingAttributeDialogs.mapLanguageDialog(),
+						renderingAttributeDialogs.hideDialog(),
+						mapLayerDialog),
+				adapter);
 	}
 
-	private void createLayersItems(@NonNull List<RenderingRuleProperty> customRules,
-								   @NonNull ContextMenuAdapter adapter,
-								   @NonNull MapActivity activity,
-								   boolean nightMode) {
+	private Optional<MapLayerSelectionDialogFragment> createLayersItems(@NonNull List<RenderingRuleProperty> customRules,
+																		@NonNull ContextMenuAdapter adapter,
+																		@NonNull MapActivity activity,
+																		boolean nightMode,
+																		final Optional<OnDataChangeUiAdapter> uiAdapter) {
 		int selectedProfileColor = settings.getApplicationMode().getProfileColor(nightMode);
 		MapLayerMenuListener listener = new MapLayerMenuListener(activity);
 
@@ -219,12 +239,19 @@ public class ConfigureMapMenu {
 				.setListener(listener));
 
 		String mapSourceTitle = settings.getSelectedMapSourceTitle();
-		adapter.addItem(new ContextMenuItem(MAP_SOURCE_ID)
-				.setTitleId(R.string.layer_map, activity)
-				.setIcon(R.drawable.ic_world_globe_dark)
-				.setDescription(mapSourceTitle)
-				.setItemDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES)
-				.setListener(listener));
+		final ContextMenuItem mapSourceItem =
+				new ContextMenuItem(MAP_SOURCE_ID)
+						.setTitleId(R.string.layer_map, activity)
+						.setIcon(R.drawable.ic_world_globe_dark)
+						.setDescription(mapSourceTitle)
+						.setItemDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES)
+						.setListener(listener);
+		adapter.addItem(mapSourceItem);
+		final Optional<MapLayerSelectionDialogFragment> mapLayerSelectionDialogFragment =
+				activity.getMapLayers().createMapLayerSelectionDialogFragment(
+						activity,
+						mapSourceItem,
+						uiAdapter);
 
 		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
@@ -237,6 +264,7 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_download)
 				.setItemDeleteAction(settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS)
 				.setListener(listener));
+		return mapLayerSelectionDialogFragment;
 	}
 
 	private void createRouteAttributeItems(@NonNull List<RenderingRuleProperty> customRules,
@@ -481,10 +509,10 @@ public class ConfigureMapMenu {
 				});
 	}
 
-	private Dialogs createRenderingAttributeItems(final List<RenderingRuleProperty> customRules,
-												  final ContextMenuAdapter adapter,
-												  final MapActivity activity,
-												  final boolean nightMode) {
+	private RenderingAttributeDialogs createRenderingAttributeItems(final List<RenderingRuleProperty> customRules,
+																	final ContextMenuAdapter adapter,
+																	final MapActivity activity,
+																	final boolean nightMode) {
 		adapter.addItem(new ContextMenuItem(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true)
 				.setLayout(R.layout.list_group_title_with_switch)
@@ -623,7 +651,7 @@ public class ConfigureMapMenu {
 					.setLayout(R.layout.list_group_title_with_switch));
 			createCustomRenderingProperties(adapter, activity, customRules, nightMode);
 		}
-		return new Dialogs(
+		return new RenderingAttributeDialogs(
 				roadStyleItemAndDialog.flatMap(ItemAndRoadStyleDialog::roadStyleDialog),
 				mapLanguageItemAndDialog.dialog,
 				itemAndHideDialog.flatMap(ItemAndHideDialog::hideDialog));
@@ -799,8 +827,11 @@ public class ConfigureMapMenu {
 
 	private Optional<ItemAndRoadStyleDialog> createRenderingProperty(final List<RenderingRuleProperty> customRules,
 																	 final MapActivity activity,
+																	 // FK-TODO: inline icon, rename method to createRoadStyleRenderingProperty()?
 																	 final @DrawableRes int icon,
+																	 // FK-TODO: inline attrName
 																	 final String attrName,
+																	 // FK-TODO: inline id
 																	 final String id,
 																	 final boolean nightMode) {
 		for (final RenderingRuleProperty property : customRules) {
@@ -835,7 +866,7 @@ public class ConfigureMapMenu {
 						.setDescription(getDescription(property, activity.getMyApplication()))
 						.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
 						.setLayout(R.layout.list_item_single_line_descrition_narrow);
-		final RoadStyleSelectionDialogFragment dialog = ConfigureMapDialogs.createRenderingPropertyDialog(activity, property, item, nightMode);
+		final RoadStyleSelectionDialogFragment dialog = ConfigureMapDialogs.createRoadStyleSelectionDialogFragment(activity, property, item, nightMode);
 		item.setListener(
 				new ItemClickListener() {
 

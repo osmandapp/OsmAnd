@@ -42,6 +42,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -412,9 +413,9 @@ public class MapLayers {
 	}
 
 	private void addFilterToList(ContextMenuAdapter adapter,
-	                             List<PoiUIFilter> list,
-	                             PoiUIFilter f,
-	                             boolean multiChoice) {
+								 List<PoiUIFilter> list,
+								 PoiUIFilter f,
+								 boolean multiChoice) {
 		list.add(f);
 		ContextMenuItem item = new ContextMenuItem(null);
 		if (multiChoice) {
@@ -435,27 +436,47 @@ public class MapLayers {
 		adapter.addItem(item);
 	}
 
-	public void selectMapSourceLayer(
-			@NonNull MapActivity mapActivity,
-			@NonNull ContextMenuItem item,
-			@NonNull OnDataChangeUiAdapter uiAdapter
-	) {
-		selectMapLayer(mapActivity, true, app.getSettings().MAP_TILE_SOURCES, mapSourceName -> {
-			OsmandSettings settings = app.getSettings();
-			item.setDescription(settings.getSelectedMapSourceTitle());
-			uiAdapter.onDataSetChanged();
-			return true;
-		});
+	public void selectMapSourceLayer(@NonNull MapActivity mapActivity,
+									 @NonNull ContextMenuItem item,
+									 @NonNull OnDataChangeUiAdapter uiAdapter) {
+		this
+				.createMapLayerSelectionDialogFragment(mapActivity, item, Optional.of(uiAdapter))
+				.ifPresent(mapLayerSelectionDialog -> mapLayerSelectionDialog.show(mapActivity.getSupportFragmentManager()));
 	}
 
-	public void selectMapLayer(
-			@NonNull MapActivity mapActivity,
-			boolean includeOfflineMaps,
-			@NonNull CommonPreference<String> targetLayer,
-			@Nullable CallbackWithObject<String> callback) {
+	public Optional<MapLayerSelectionDialogFragment> createMapLayerSelectionDialogFragment(
+			final MapActivity mapActivity,
+			final ContextMenuItem item,
+			final Optional<OnDataChangeUiAdapter> uiAdapter) {
+		return createMapLayerSelectionDialogFragment(
+				mapActivity,
+				true,
+				app.getSettings().MAP_TILE_SOURCES,
+				mapSourceName -> {
+					OsmandSettings settings = app.getSettings();
+					item.setDescription(settings.getSelectedMapSourceTitle());
+					uiAdapter.ifPresent(OnDataChangeUiAdapter::onDataSetChanged);
+					return true;
+				});
+	}
+
+	public void selectMapLayer(@NonNull MapActivity mapActivity,
+							   boolean includeOfflineMaps,
+							   @NonNull CommonPreference<String> targetLayer,
+							   @Nullable CallbackWithObject<String> callback) {
+		this
+				.createMapLayerSelectionDialogFragment(mapActivity, includeOfflineMaps, targetLayer, callback)
+				.ifPresent(dialog -> dialog.show(mapActivity.getSupportFragmentManager()));
+	}
+
+	private Optional<MapLayerSelectionDialogFragment> createMapLayerSelectionDialogFragment(
+			final @NonNull MapActivity mapActivity,
+			final boolean includeOfflineMaps,
+			final @NonNull CommonPreference<String> targetLayer,
+			final @Nullable CallbackWithObject<String> callback) {
 		if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
-			return;
+			return Optional.empty();
 		}
 		final boolean nightMode = isNightMode();
 		final AlertDialogData dialogData =
@@ -466,8 +487,8 @@ public class MapLayers {
 				getItemByKeyAndSelectedItem(
 						includeOfflineMaps,
 						targetLayer);
-		CustomAlert
-				.createMapLayerSelectionDialogFragment(
+		return Optional.of(
+				CustomAlert.createMapLayerSelectionDialogFragment(
 						dialogData,
 						itemByKeyAndSelectedItem.itemByKey(),
 						itemByKeyAndSelectedItem.selectedItem(),
@@ -485,14 +506,14 @@ public class MapLayers {
 										callback,
 										keys.get(which));
 							}
-						})
-				.show(mapActivity.getSupportFragmentManager());
+						}));
 	}
 
-	private ItemByKeyAndSelectedItem getItemByKeyAndSelectedItem(final boolean includeOfflineMaps,
-																 final CommonPreference<String> targetLayer) {
+	public ItemByKeyAndSelectedItem getItemByKeyAndSelectedItem(final boolean includeOfflineMaps,
+																final CommonPreference<String> targetLayer) {
 		final Map<String, String> entriesMap = getEntriesMap(includeOfflineMaps);
 		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
+		// FK-FIXME: if selectedTileSourceKey changes through user selection of another map source then entriesMapList also changes and the search database needs to be rebuilt.
 		final String selectedTileSourceKey = targetLayer.get();
 		int selectedItem = -1;
 		final OsmandSettings settings = app.getSettings();

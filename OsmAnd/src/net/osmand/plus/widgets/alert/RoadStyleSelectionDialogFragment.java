@@ -13,6 +13,6 @@ public class RoadStyleSelectionDialogFragment extends SelectionDialogFragment {
 		super(alertDialog, alertDialogData, itemByKey, adapter);
 	}
 
-	public static class RoadStyleSelectionDialogFragmentProxy extends SelectionDialogFragment.PreferenceFragment<RoadStyleSelectionDialogFragment> {
+	public static class RoadStyleSelectionDialogFragmentProxy extends SelectionDialogFragmentProxy<RoadStyleSelectionDialogFragment> {
 	}
 }

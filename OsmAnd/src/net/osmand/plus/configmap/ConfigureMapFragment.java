@@ -40,6 +40,7 @@ import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.RoadStyleSelectionDialogFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -179,7 +180,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		final ConfigureMapMenu.DialogsAndAdapter dialogsAndAdapter =
 				menu.createListAdapter(
 						mapActivity,
-						app.getRendererRegistry().getRenderer(settings.RENDERER.getModeValue(appMode)));
+						app.getRendererRegistry().getRenderer(settings.RENDERER.getModeValue(appMode)),
+						Optional.of(this));
 		adapter = dialogsAndAdapter.adapter();
 		dialogs = dialogsAndAdapter.dialogs();
 		ContextMenuUtils.removeHiddenItems(adapter);
@@ -575,29 +577,28 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
-				// FK-TODO: reactivate:
-//				case MAP_SOURCE_ID -> Optional.of(
-//						new PreferenceFragmentHandler() {
-//
-//							@Override
-//							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
-//								return createPreferenceFragment().getClass();
-//							}
-//
-//							@Override
-//							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
-//								return createPreferenceFragment();
-//							}
-//
-//							private static PluginsFragment.PluginsFragmentProxy createPreferenceFragment() {
-//								return new PluginsFragment.PluginsFragmentProxy();
-//							}
-//
-//							@Override
-//							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
-//								return false;
-//							}
-//						});
+				case MAP_SOURCE_ID -> Optional.of(
+						new PreferenceFragmentHandler() {
+
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return createPreferenceFragment().getClass();
+							}
+
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return createPreferenceFragment();
+							}
+
+							private static MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy createPreferenceFragment() {
+								return new MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy();
+							}
+
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return false;
+							}
+						});
 				default -> Optional.empty();
 			};
 		}

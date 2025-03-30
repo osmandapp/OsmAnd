@@ -90,7 +90,7 @@ public class SelectionDialogFragment extends DialogFragment implements SettingHi
 		return new ArrayList<>(itemByKey.keySet());
 	}
 
-	public static class PreferenceFragment<F extends SelectionDialogFragment> extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<F> {
+	public static class SelectionDialogFragmentProxy<F extends SelectionDialogFragment> extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<F> {
 
 		private F selectionDialogFragment;
 

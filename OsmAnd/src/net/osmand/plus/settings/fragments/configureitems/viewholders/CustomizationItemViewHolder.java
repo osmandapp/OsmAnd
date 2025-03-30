@@ -29,6 +29,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 public class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -95,7 +96,7 @@ public class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 				return ((MapActivity) activity).getMapActions().createNormalOptionsMenu();
 			case CONFIGURE_MAP:
 				ConfigureMapMenu configureMenu = new ConfigureMapMenu(app);
-				return configureMenu.createListAdapter((MapActivity) activity);
+				return configureMenu.createListAdapter((MapActivity) activity, Optional.empty());
 			case CONTEXT_MENU_ACTIONS:
 				MapContextMenu contextMenu = ((MapActivity) activity).getContextMenu();
 				return contextMenu.getActionsContextMenuAdapter(true);

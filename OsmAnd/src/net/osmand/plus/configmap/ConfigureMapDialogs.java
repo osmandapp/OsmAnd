@@ -374,13 +374,13 @@ public class ConfigureMapDialogs {
 		}
 	}
 
-	public static RoadStyleSelectionDialogFragment createRenderingPropertyDialog(
+	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
 			final @NonNull MapActivity activity,
 			final @NonNull RenderingRuleProperty property,
 			final @NonNull ContextMenuItem item,
 			final boolean nightMode) {
 		return CustomAlert
-				.createSingleSelectionDialogFragment(
+				.createRoadStyleSelectionDialogFragment(
 						new AlertDialogData(activity, nightMode)
 								.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
 								.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))

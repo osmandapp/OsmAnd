@@ -13,6 +13,6 @@ public class MultiSelectionDialogFragment extends SelectionDialogFragment {
 		super(alertDialog, alertDialogData, itemByKey, adapter);
 	}
 
-	public static class MultiSelectionDialogFragmentProxy extends SelectionDialogFragment.PreferenceFragment<MultiSelectionDialogFragment> {
+	public static class MultiSelectionDialogFragmentProxy extends SelectionDialogFragmentProxy<MultiSelectionDialogFragment> {
 	}
 }

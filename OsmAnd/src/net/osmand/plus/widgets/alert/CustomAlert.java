@@ -117,7 +117,7 @@ public class CustomAlert {
 		return new MapLayerSelectionDialogFragment(alertDialog, data, itemByKey, adapter);
 	}
 
-	public static RoadStyleSelectionDialogFragment createSingleSelectionDialogFragment(
+	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
 			final AlertDialogData data,
 			final Map<String, CharSequence> itemByKey,
 			final int selectedEntryIndex,

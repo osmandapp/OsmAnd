@@ -13,6 +13,6 @@ public class MapLayerSelectionDialogFragment extends SelectionDialogFragment {
 		super(alertDialog, alertDialogData, itemByKey, adapter);
 	}
 
-	public static class MapLayerSelectionDialogFragmentProxy extends PreferenceFragment<MapLayerSelectionDialogFragment> {
+	public static class MapLayerSelectionDialogFragmentProxy extends SelectionDialogFragmentProxy<MapLayerSelectionDialogFragment> {
 	}
 }
