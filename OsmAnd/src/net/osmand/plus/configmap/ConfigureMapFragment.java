@@ -578,7 +578,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
-				case MAP_SOURCE_ID -> isOnlineMapsPluginActive() ?
+				case MAP_SOURCE_ID -> configureMapFragment.dialogs.mapLayerDialog().isPresent() ?
 						Optional.of(
 								new PreferenceFragmentHandler() {
 
