@@ -1,7 +1,6 @@
 package net.osmand.plus.configmap;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
-import static net.osmand.plus.plugins.PluginsHelper.isOnlineMapsPluginActive;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 import android.content.Context;
