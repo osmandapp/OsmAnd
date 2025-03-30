@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments.search;
 
 import android.content.Context;
 
+import androidx.annotation.StringRes;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
@@ -1057,6 +1058,22 @@ public class SettingsSearchTest extends AndroidTest {
 									@Override
 									protected String getSearchQuery(final Context context) {
 										return DayNightMode.AUTO.toHumanString(context);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_OfflineVectorMaps",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										final @StringRes int offlineVectorMaps = R.string.vector_data;
+										return context.getString(offlineVectorMaps);
 									}
 
 									@Override
