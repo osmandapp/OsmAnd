@@ -5258,7 +5258,7 @@
     <string name="wall_color">Koloro de muro</string>
     <string name="track_line">Linio de spuro</string>
     <string name="route_line_use_coloring_altitude">Kolorigi linion de kurso laŭ altitudo.</string>
-    <string name="delete_actions_button_confirmation">Ĉu forigi “%1$s” kun ĉiuj aldonitaj agoj?</string>
+    <string name="delete_actions_button_confirmation">Ĉu forigi “%1$s” kun ĉiujn aldonitajn agojn?</string>
     <string name="fixed_height">Konstanta alto</string>
     <string name="downward_gradient">Gradiento malsupren</string>
     <string name="upward_gradient">Gradiento supren</string>
