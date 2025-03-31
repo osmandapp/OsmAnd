@@ -5960,4 +5960,8 @@
     <string name="shared_string_offline_only">Только офлайн</string>
     <string name="add_widget">Добавить виджет</string>
     <string name="row_height">Высота строки</string>
+    <string name="display_priority">Приоритет отображения</string>
+    <string name="destination_first">Сначала пункт назначения</string>
+    <string name="intermediate_first">Сначала промежуточный пункт</string>
+    <string name="poi_source">Источник POI</string>
 </resources>

@@ -12,6 +12,12 @@
 -->
 	<string name="wikidata">Wikidata</string>
 	<string name="read_on_wiki">Read on Wikipedia</string>
+    <string name="prediction_time_description">Position icon in OsmAnd animates with each received GPS data point (once per second). A slight delay in its movement may be noticeable, especially when the user is moving quickly or the GPS signal fluctuates.</string>
+    <string name="prediction_time_advanced_description">Adjust the prediction time to minimize delay.</string>
+    <string name="prediction_time">Prediction time</string>
+    <string name="shared_string_no_animation">No animation</string>
+    <string name="position_animation_empty_banner_description">Position icon moves to each new received location without animation.</string>
+    <string name="position_animation">Position animation</string>
     <string name="poi_source">POI Source</string>
     <string name="intermediate_first">Intermediate first</string>
     <string name="destination_first">Destination first</string>

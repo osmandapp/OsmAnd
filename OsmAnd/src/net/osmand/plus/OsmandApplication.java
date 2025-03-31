@@ -56,8 +56,8 @@ import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
@@ -922,6 +922,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return service;
 	}
 
+	@NonNull
 	public String getLanguage() {
 		String appLang = localeHelper.getLanguage();
 		// assume english is default though it's not correct

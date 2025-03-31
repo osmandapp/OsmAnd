@@ -96,6 +96,8 @@ public class Amenity extends MapObject {
 	private String wikiImageStubUrl;
 	private int travelElo = 0;
 
+	private Set<String> contentLocales;
+
 	public int getOrder() {
 		return order;
 	}
@@ -269,12 +271,13 @@ public class Amenity extends MapObject {
 		} else if (isNameLangTag(tag)) {
 			setName(tag.substring("name:".length()), value);
 		} else {
-			if (this.additionalInfo == null) {
-				this.additionalInfo = new LinkedHashMap<String, String>();
+			if (additionalInfo == null) {
+				additionalInfo = new LinkedHashMap<String, String>();
 			}
-			this.additionalInfo.put(tag, value);
+			additionalInfo.put(tag, value);
+
 			if (OPENING_HOURS.equals(tag)) {
-				this.openingHours = unzipContent(value);
+				openingHours = unzipContent(value);
 			}
 		}
 	}
@@ -404,10 +407,21 @@ public class Amenity extends MapObject {
 	}
 
 	public Set<String> getSupportedContentLocales() {
-		Set<String> supported = new TreeSet<>();
-		supported.addAll(getNames("content", "en"));
-		supported.addAll(getNames("description", "en"));
-		return supported;
+		if (contentLocales != null) {
+			return contentLocales;
+		} else {
+			Set<String> supported = new TreeSet<>();
+			supported.addAll(getNames(CONTENT, "en"));
+			supported.addAll(getNames(DESCRIPTION, "en"));
+			return supported;
+		}
+	}
+
+	public void updateContentLocales(Set<String> locales) {
+		if (contentLocales == null) {
+			contentLocales = new TreeSet<>();
+		}
+		contentLocales.addAll(locales);
 	}
 
 	public List<String> getNames(String tag, String defTag) {
@@ -544,8 +558,8 @@ public class Amenity extends MapObject {
 		String wikiPhoto = getWikiPhoto();
 		if (!Algorithms.isEmpty(wikiPhoto)) {
 			WikiImage wikiIMage = WikiHelper.INSTANCE.getImageData(wikiPhoto);
-			setWikiIconUrl(wikiIMage == null ? "" : wikiIMage.getImageIconUrl());
-			setWikiImageStubUrl(wikiIMage == null ? "" : wikiIMage.getImageStubUrl());
+			setWikiIconUrl(wikiIMage.getImageIconUrl());
+			setWikiImageStubUrl(wikiIMage.getImageStubUrl());
 		}
 	}
 
@@ -702,32 +716,31 @@ public class Amenity extends MapObject {
 	}
 
 	public static Amenity parseJSON(JSONObject json) {
-		Amenity a = new Amenity();
-		MapObject.parseJSON(json, a);
+		Amenity amenity = new Amenity();
+		MapObject.parseJSON(json, amenity);
 
 		if (json.has("subType")) {
-			a.subType = json.getString("subType");
+			amenity.subType = json.getString("subType");
 		}
 		if (json.has("type")) {
 			String categoryName = json.getString("type");
-			a.setType(MapPoiTypes.getDefault().getPoiCategoryByName(categoryName));
+			amenity.setType(MapPoiTypes.getDefault().getPoiCategoryByName(categoryName));
 		} else {
-			a.setType(MapPoiTypes.getDefault().getOtherPoiCategory());
+			amenity.setType(MapPoiTypes.getDefault().getOtherPoiCategory());
 		}
 		if (json.has("openingHours")) {
-			a.openingHours = json.getString("openingHours");
+			amenity.openingHours = json.getString("openingHours");
 		}
 		if (json.has("additionalInfo")) {
 			JSONObject namesObj = json.getJSONObject("additionalInfo");
-			a.additionalInfo = new HashMap<>();
 			Iterator<String> iterator = namesObj.keys();
 			while (iterator.hasNext()) {
 				String key = iterator.next();
 				String value = namesObj.getString(key);
-				a.additionalInfo.put(key, value);
+				amenity.setAdditionalInfo(key, value);
 			}
 		}
-		return a;
+		return amenity;
 	}
 
 	public Map<String, String> getAmenityExtensions() {
