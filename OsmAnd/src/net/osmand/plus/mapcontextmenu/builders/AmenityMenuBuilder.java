@@ -25,7 +25,7 @@ import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.widgets.TextViewEx;
@@ -96,9 +96,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				description = amenity.getFlattenedNames();
 			}
 			if (!Algorithms.isEmpty(description)) {
-				View view12 = buildRow(view, 0, null, description, 0, true,
+				View rowView = buildRow(view, 0, null, description, 0, true,
 						null, false, 0, false, null, false);
-				TextViewEx textView = view12.findViewById(R.id.text);
+				TextViewEx textView = rowView.findViewById(R.id.text);
 				final String descriptionToSet = description;
 				textView.setOnClickListener(v -> {
 					descriptionCollapsed = !descriptionCollapsed;
@@ -119,7 +119,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if(descriptionCollapsed) {
 			text = description.substring(0, Math.min(description.length(), 200));
 			if(description.length() > text.length()) {
-				text += "...";
+				text += app.getString(R.string.shared_string_ellipsis);
 			}
 		}
 		textView.setText(text);
@@ -136,7 +136,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowsBuilder.setLatLon(getLatLon());
 		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
 		rowsBuilder.buildInternal(view);
-		if (PluginsHelper.getActivePlugin(OsmandPlugin.class) != null) {
+		if (PluginsHelper.getActivePlugin(OsmEditingPlugin.class) != null) {
 			rowsBuilder.buildWikiDataRow(view);
 		}
 

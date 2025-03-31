@@ -2050,7 +2050,6 @@
     <string name="route_roundabout_short">Збочце на %1$d з’ездзе</string>
     <string name="upload_poi">Запампаваць POI</string>
     <string name="search_map_hint">Горад ці краіна</string>
-    <string name="wiki_around">Блізкія артыкулы ў Вікіпедыі</string>
     <string name="rendering_value_fine_name">Вельмі тонкі</string>
     <string name="rendering_attr_contourColorScheme_description">Каляровая схема гарызанталяў</string>
     <string name="save_track_min_speed">Мінімальная хуткасць для запісу</string>

@@ -340,7 +340,6 @@
     <string name="routing_attr_allow_motorway_name">Gunakan jalan bebas hambatan</string>
     <string name="routing_attr_allow_motorway_description">Mengizinkan jalan bebas hambatan.</string>
     <string name="upload_osm_note_description">Unggah Catatan OSM Anda secara anonim atau dengan menggunakan profil OpenStreetMap.org Anda.</string>
-    <string name="wiki_around">Artikel Wikipedia terdekat</string>
     <string name="search_map_hint">Kota atau daerah</string>
     <string name="route_roundabout_short">Ambil %1$d keluar dan pergi</string>
     <string name="upload_poi">Unggah POI</string>

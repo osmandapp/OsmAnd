@@ -2041,7 +2041,6 @@
     <string name="upload_poi">Puja PDI</string>
     <string name="route_roundabout_short">Agafeu la %1$d sortida i continueu</string>
     <string name="search_map_hint">Ciutat o regió</string>
-    <string name="wiki_around">Articles de la zona a la Viquipèdia</string>
     <string name="routing_attr_allow_motorway_name">Utilitza les autopistes</string>
     <string name="routing_attr_allow_motorway_description">Admet autopistes.</string>
     <string name="lang_sr_latn">Serbi (llatí)</string>

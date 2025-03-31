@@ -2172,7 +2172,6 @@
     <string name="rendering_attr_hideWaterPolygons_name">הסתרת מים</string>
     <string name="routing_attr_allow_motorway_name">להשתמש בדרכים סלולות</string>
     <string name="routing_attr_allow_motorway_description">מאפשר דרכים סלולות.</string>
-    <string name="wiki_around">ערכי ויקיפדיה בקרבת מקום</string>
     <string name="search_map_hint">עיר או מחוז</string>
     <string name="route_roundabout_short">יש לצאת ביציאה מס׳ %1$d ולהמשיך</string>
     <string name="upload_poi">העלאת נקודות עניין</string>

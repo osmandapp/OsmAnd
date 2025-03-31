@@ -197,7 +197,6 @@
     <string name="rendering_attr_hideWaterPolygons_name">Водные объекты</string>
     <string name="routing_attr_allow_motorway_name">Разрешить магистрали</string>
     <string name="routing_attr_allow_motorway_description">Разрешает движение по автомагистралям.</string>
-    <string name="wiki_around">Статьи Википедии рядом</string>
     <string name="search_map_hint">Город или регион</string>
     <string name="route_roundabout_short">Сверните на %1$d съезд</string>
     <string name="upload_poi">Отправить POI</string>

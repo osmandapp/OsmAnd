@@ -1552,7 +1552,6 @@
     <string name="update_all">Päivitä kaikki (%1$s MB)</string>
     <string name="enter_country_name">Anna maan nimi</string>
     <string name="upload_osm_note_description">Lataa OSM-huomautuksesi anonyymisti tai käyttämällä OpenStreetMap.org-profiiliasi.</string>
-    <string name="wiki_around">Lähimmät Wikipedia-artikkelit</string>
     <string name="upload_poi">Lataa (vie) KP:t</string>
     <string name="lang_pms">Piemonte</string>
     <string name="lang_bn">Bengali</string>

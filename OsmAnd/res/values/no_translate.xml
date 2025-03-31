@@ -8,7 +8,6 @@
     <string name="app_store_name">OsmAnd Maps</string>
     
     <!-- Not translatable -->
-    <string name="flattened_names">%s (%s)</string>
     <string name="wikidata_id_pattern">Q%s</string>
     <string name="hmd">HMD</string>
     <string name="hugerock">Hugerock</string>

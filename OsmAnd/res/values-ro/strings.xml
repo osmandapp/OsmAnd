@@ -3701,7 +3701,6 @@
     <string name="gpx_no_tracks_title_folder">De asemenea, puteți adăuga fișiere de traseu în folder</string>
     <string name="gpx_no_tracks_title">Nu aveți încă niciun fișier track</string>
     <string name="route_roundabout_short">Alegeți ieșirea %1$d și continuați</string>
-    <string name="wiki_around">Articole Wikipedia din apropiere</string>
     <string name="rendering_attr_contourWidth_name">Lățime linie de contur</string>
     <string name="rendering_attr_contourWidth_description">Lățime linie de contur</string>
     <string name="rendering_value_low_name">Scăzut</string>

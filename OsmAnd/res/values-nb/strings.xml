@@ -1590,7 +1590,6 @@
     <string name="rendering_value_low_name">Lav</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vann</string>
     <string name="rendering_attr_hideWaterPolygons_name">Skjul vann</string>
-    <string name="wiki_around">Wikipedia-artikler i nærheten</string>
     <string name="route_roundabout_short">Ta avkjøring %1$d og fortsett</string>
     <string name="route_calculation">Ruteberegning</string>
     <string name="shared_string_appearance">Utseende</string>

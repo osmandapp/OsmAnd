@@ -2,7 +2,6 @@
 <resources>
     <string name="shared_string_add_manually">Manuell hinzufügen …</string>
     <string name="distance_moving">Korrigierte Distanz</string>
-    <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     <string name="shared_string_remove">Entfernen</string>
     <string name="item_removed">Eintrag entfernt</string>
     <string name="n_items_removed">Einträge entfernt</string>
