@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.google.android.material.slider.Slider;
@@ -16,24 +16,19 @@ import com.google.android.material.slider.Slider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class PositionAnimationPreference extends BaseCustomPreference {
+public class PositionAnimationPreference extends Preference {
 
 	private final static int MIN_VALUE = 0;
 	private final static int MAX_VALUE = 100;
 	private final static int VALUE_STEP = 10;
 
-	private OsmandApplication app;
-	private final boolean nightMode;
-	private final ApplicationMode selectedAppMode;
+	private final OsmandApplication app;
+	private boolean nightMode;
 
-	private int currentValue;
-	private CommonPreference<Integer> preference;
 	private boolean isSliderVisible;
 
 	private TextView title;
@@ -44,14 +39,33 @@ public class PositionAnimationPreference extends BaseCustomPreference {
 	private ImageView advancedItemIcon;
 	private View sliderContainer;
 	private Slider slider;
+	private SliderPreferenceListener listener;
 
-	public PositionAnimationPreference(Context context, AttributeSet attrs, @NonNull ApplicationMode selectedAppMode, boolean nightMode) {
-		super(context, attrs);
-		this.nightMode = nightMode;
-		this.selectedAppMode = selectedAppMode;
+	public PositionAnimationPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+		super(context, attrs, defStyleAttr, defStyleRes);
+		setLayoutResource(getLayoutId());
+		app = AndroidUtils.getApp(context);
 	}
 
-	@Override
+	public PositionAnimationPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+		this(context, attrs, defStyleAttr, 0);
+	}
+
+	public PositionAnimationPreference(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		setLayoutResource(getLayoutId());
+		app = AndroidUtils.getApp(context);
+	}
+
+	public PositionAnimationPreference(Context context) {
+		this(context, null);
+	}
+
+	public void setupPreference(boolean nightMode, SliderPreferenceListener listener) {
+		this.nightMode = nightMode;
+		this.listener = listener;
+	}
+
 	protected int getLayoutId() {
 		return R.layout.position_animation_settings_card;
 	}
@@ -59,8 +73,6 @@ public class PositionAnimationPreference extends BaseCustomPreference {
 	@Override
 	public void onBindViewHolder(PreferenceViewHolder holder) {
 		super.onBindViewHolder(holder);
-		this.app = AndroidUtils.getApp(holder.itemView.getContext());
-		this.preference = app.getSettings().LOCATION_INTERPOLATION_PERCENT;
 
 		View view = holder.itemView;
 		title = view.findViewById(R.id.title);
@@ -72,10 +84,8 @@ public class PositionAnimationPreference extends BaseCustomPreference {
 		sliderContainer = view.findViewById(R.id.slider_container);
 		advancedItemIcon = view.findViewById(R.id.advanced_item_icon);
 
-		isSliderVisible = preference.getModeValue(selectedAppMode) > 0;
-	}
+		isSliderVisible = listener.getValue() > 0;
 
-	public void updateView() {
 		setupSliderView();
 		setupAdvancedButton();
 		updateContent();
@@ -96,7 +106,7 @@ public class PositionAnimationPreference extends BaseCustomPreference {
 	}
 
 	private void setupSliderView() {
-		currentValue = preference.getModeValue(selectedAppMode);
+		int currentValue = listener.getValue();
 
 		title.setText(app.getString(R.string.prediction_time));
 		summary.setText(getFormattedPredictionTime(app, currentValue));
@@ -112,10 +122,16 @@ public class PositionAnimationPreference extends BaseCustomPreference {
 
 		slider.addOnChangeListener((sl, value, fromUser) -> {
 			if (fromUser) {
-				currentValue = (int) value;
-				preference.setModeValue(selectedAppMode, currentValue);
-				summary.setText(getFormattedPredictionTime(app, currentValue));
+				listener.onValueChanged(value, fromUser);
+				notifyChanged();
+				summary.setText(getFormattedPredictionTime(app, listener.getValue()));
 			}
 		});
+	}
+
+	public interface SliderPreferenceListener {
+		int getValue();
+
+		void onValueChanged(float value, boolean fromUser);
 	}
 }

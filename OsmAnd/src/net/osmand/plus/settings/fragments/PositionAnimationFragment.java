@@ -8,33 +8,65 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.preferences.PositionAnimationPreference;
+import net.osmand.plus.settings.preferences.PositionAnimationPreference.SliderPreferenceListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 public class PositionAnimationFragment extends BaseSettingsFragment {
 
+	private final static String LOCATION_INTERPOLATION_EMPTY_BANNER = "location_interpolation_empty_banner";
+
+	private int sliderValue;
+	private CommonPreference<Integer> preference;
+
 	@Override
 	protected void setupPreferences() {
+		preference = settings.LOCATION_INTERPOLATION_PERCENT;
+		sliderValue = preference.getModeValue(getSelectedAppMode());
 		Context context = getContext();
 		PreferenceScreen screen = getPreferenceScreen();
 		if (context != null && screen != null) {
-			if (isPositionAnimationEnabled()) {
-				screen.addPreference(createPositionAnimationCard(context));
-			} else {
-				screen.addPreference(createPreference(context,
-						R.layout.card_position_animation_empty_banner));
-			}
+			setupPositionAnimationPref(screen);
+			setupEmptyBannerPreference(screen);
+		}
+	}
+
+	private void setupPositionAnimationPref(@NonNull PreferenceScreen screen) {
+		PositionAnimationPreference positionAnimationPreference = screen.findPreference(preference.getId());
+		if (positionAnimationPreference != null) {
+			positionAnimationPreference.setVisible(isPositionAnimationEnabled());
+			positionAnimationPreference.setupPreference(isNightMode(), new SliderPreferenceListener() {
+
+				@Override
+				public int getValue() {
+					return sliderValue;
+				}
+
+				@Override
+				public void onValueChanged(float value, boolean fromUser) {
+					if (fromUser) {
+						sliderValue = (int) value;
+						onPreferenceChange(positionAnimationPreference, sliderValue);
+					}
+				}
+			});
+		}
+	}
+
+	private void setupEmptyBannerPreference(@NonNull PreferenceScreen screen) {
+		Preference emptyBannerPRef = screen.findPreference(LOCATION_INTERPOLATION_EMPTY_BANNER);
+		if (emptyBannerPRef != null) {
+			emptyBannerPRef.setVisible(!isPositionAnimationEnabled());
 		}
 	}
 
@@ -74,27 +106,6 @@ public class PositionAnimationFragment extends BaseSettingsFragment {
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_enabled : R.string.shared_string_disabled);
-	}
-
-	private Preference createPositionAnimationCard(@NonNull Context context) {
-		return new PositionAnimationPreference(context, null, getSelectedAppMode(), isNightMode());
-	}
-
-	@Override
-	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
-		super.onBindPreferenceViewHolder(preference, holder);
-
-		if (preference instanceof PositionAnimationPreference positionAnimationPreference) {
-			positionAnimationPreference.updateView();
-		}
-	}
-
-	@NonNull
-	private Preference createPreference(@NonNull Context context, @LayoutRes int layoutResId) {
-		Preference preference = new Preference(context);
-		preference.setLayoutResource(layoutResId);
-		preference.setSelectable(false);
-		return preference;
 	}
 
 	private boolean isPositionAnimationEnabled() {
