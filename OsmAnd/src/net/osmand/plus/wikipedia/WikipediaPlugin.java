@@ -230,7 +230,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 				.setDescription(selected ? getLanguagesSummary() : null)
 				.setSelected(selected)
 				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_plugin_wikipedia)
+				.setIcon(R.drawable.ic_action_popular_places)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener));
 	}
