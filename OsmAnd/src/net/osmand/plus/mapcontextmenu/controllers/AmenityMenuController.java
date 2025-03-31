@@ -92,18 +92,6 @@ public class AmenityMenuController extends MenuController {
 			openTrackButtonController.startIconId = R.drawable.ic_action_polygom_dark;
 			openTrackButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
 			leftTitleButtonController = openTrackButtonController;
-		} else if (amenity.getType().isWiki()) {
-			leftTitleButtonController = new TitleButtonController(this) {
-				@Override
-				public void buttonPressed() {
-					MapActivity activity = getMapActivity();
-					if (activity != null) {
-						WikipediaDialogFragment.showInstance(activity, amenity, null);
-					}
-				}
-			};
-			leftTitleButtonController.caption = mapActivity.getString(R.string.context_menu_read_article);
-			leftTitleButtonController.startIconId = R.drawable.ic_action_read_text;
 		}
 
 		openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());

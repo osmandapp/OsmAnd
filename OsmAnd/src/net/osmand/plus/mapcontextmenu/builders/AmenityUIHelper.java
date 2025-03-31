@@ -122,26 +122,24 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
 		Map<String, Object> filteredInfo = additionalInfo.getFilteredLocalizedInfo();
-		if (filteredInfo.containsKey(Amenity.CONTENT) && filteredInfo.containsKey(Amenity.SHORT_DESCRIPTION)) {
-			filteredInfo.remove(Amenity.CONTENT);
-		}
-
-		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-			AmenityInfoRow infoRow = null;
-			if (value instanceof String strValue) {
-				infoRow = createAmenityInfoRow(context, key, strValue, null);
-			} else if (value != null) {
-				infoRow = createLocalizedAmenityInfoRow(context, key, value);
-			}
-			if (infoRow != null) {
-				if (lastBuiltRowIsDescription) {
-					descriptions.add(infoRow);
-				} else if (Amenity.CUISINE.equals(key)) {
-					cuisineRow = infoRow;
-				} else if (poiType == null) {
-					infoRows.add(infoRow);
+		if (!poiCategory.isWiki()) {
+			for (Entry<String, Object> entry : filteredInfo.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+				AmenityInfoRow infoRow = null;
+				if (value instanceof String strValue) {
+					infoRow = createAmenityInfoRow(context, key, strValue, null);
+				} else if (value != null) {
+					infoRow = createLocalizedAmenityInfoRow(context, key, value);
+				}
+				if (infoRow != null) {
+					if (lastBuiltRowIsDescription) {
+						descriptions.add(infoRow);
+					} else if (Amenity.CUISINE.equals(key)) {
+						cuisineRow = infoRow;
+					} else if (poiType == null) {
+						infoRows.add(infoRow);
+					}
 				}
 			}
 		}
@@ -227,7 +225,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	public void buildWikiDataRow(@NonNull View view) {
 		String wikidataValue = additionalInfo.get(WIKIDATA);
 		if (wikidataValue != null) {
-			int iconId = R.drawable.ic_plugin_wikipedia;
+			int iconId = R.drawable.ic_action_logo_wikidata;
 			PoiType pType;
 			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(WIKIDATA);
 			if (pt != null) {
@@ -313,7 +311,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			collapsableView = new CollapsableView(llv, this, true);
 		}
-		hasWiki = false; // allow another hasWiki try for infoRow at return
 		return createAmenityInfoRow(context, headerKey, headerValue, collapsableView);
 	}
 
@@ -392,38 +389,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 		}
 
-		if (poiCategory.isWiki()) {
-			if (!hasWiki) {
-				Map<String, String> additionalInfoFiltered = additionalInfo.getFilteredInfo();
-				wikiAmenity = new Amenity();
-				wikiAmenity.setType(poiCategory);
-				wikiAmenity.setSubType(subtype);
-				wikiAmenity.setAdditionalInfo(additionalInfoFiltered);
-				wikiAmenity.setLocation(getLatLon());
-				String name = additionalInfoFiltered.get("name");
-				if (!Algorithms.isEmpty(name)) {
-					wikiAmenity.setName(name);
-				}
-
-				String articleLang = PluginsHelper.onGetMapObjectsLocale(wikiAmenity, this.preferredLang);
-				String lng = wikiAmenity.getContentLanguage("content", articleLang, "en");
-				if (Algorithms.isEmpty(lng)) {
-					lng = "en";
-				}
-
-				String langSelected = lng;
-				String content = wikiAmenity.getDescription(langSelected);
-				vl = (content != null) ? WikiArticleHelper.getPartialContent(content) : "";
-				vl = vl == null ? "" : vl;
-				hasWiki = true;
-				isWiki = true;
-				needLinks = false;
-				hiddenUrl = null;
-				isUrl = false;
-			} else {
-				return null;
-			}
-		} else if (MapObject.isNameLangTag(key)) {
+		if (MapObject.isNameLangTag(key)) {
 			return null;
 		} else if (Amenity.COLLECTION_TIMES.equals(baseKey) || Amenity.SERVICE_TIMES.equals(baseKey)) {
 			iconId = R.drawable.ic_action_time;
@@ -1043,7 +1009,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	@NonNull
-	private Set<String> collectAvailableLocalesFromTags(@NonNull Collection<String> tags) {
+	public static Set<String> collectAvailableLocalesFromTags(@NonNull Collection<String> tags) {
 		Set<String> result = new HashSet<>();
 		for (String tag : tags) {
 			String[] parts = tag.split(":");
