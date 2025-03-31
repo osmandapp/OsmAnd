@@ -7,19 +7,23 @@ class PluginsHelper {
 
 	public static OsmandPlugin enablePlugin(final Class<? extends OsmandPlugin> plugin,
 											final OsmandApplication app) {
-		return setPlugin(plugin, app, true);
+		return getPluginAndSetState(plugin, State.ENABLED, app);
 	}
 
 	public static OsmandPlugin disablePlugin(final Class<? extends OsmandPlugin> plugin,
 											 final OsmandApplication app) {
-		return setPlugin(plugin, app, false);
+		return getPluginAndSetState(plugin, State.DISABLED, app);
 	}
 
-	private static OsmandPlugin setPlugin(final Class<? extends OsmandPlugin> plugin,
-										  final OsmandApplication app,
-										  final boolean enable) {
+	private enum State {
+		ENABLED, DISABLED
+	}
+
+	private static OsmandPlugin getPluginAndSetState(final Class<? extends OsmandPlugin> plugin,
+													 final State state,
+													 final OsmandApplication app) {
 		final OsmandPlugin osmandPlugin = getPlugin(plugin);
-		setPlugin(app, osmandPlugin, enable);
+		setPluginState(osmandPlugin, state, app);
 		return osmandPlugin;
 	}
 
@@ -33,7 +37,13 @@ class PluginsHelper {
 				.orElseThrow();
 	}
 
-	private static void setPlugin(final OsmandApplication app, final OsmandPlugin plugin, final boolean enable) {
-		net.osmand.plus.plugins.PluginsHelper.enablePlugin(null, app, plugin, enable);
+	private static void setPluginState(final OsmandPlugin plugin,
+									   final State state,
+									   final OsmandApplication app) {
+		net.osmand.plus.plugins.PluginsHelper.enablePlugin(
+				null,
+				app,
+				plugin,
+				state == State.ENABLED);
 	}
 }
