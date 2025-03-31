@@ -283,7 +283,6 @@ public class GpxUtils {
 
 	@Nullable
 	public static LatLon calculateProjectionOnRoute(@NonNull RoutingHelper routingHelper, @NonNull RotatedTileBox tileBox) {
-		LatLon latLon = null;
 		Location lastLocation = routingHelper.getLastFixedLocation();
 		RouteCalculationResult route = routingHelper.getRoute();
 		List<Location> locations = route.getImmutableAllLocations();
@@ -295,26 +294,37 @@ public class GpxUtils {
 		}
 		if (lastLocation != null && currentRoute > 0 && currentRoute < locations.size()
 				&& locIndex >= 0 && locIndex < locations.size()) {
-			Location loc1 = locations.get(currentRoute - 1);
-			Location loc2 = locations.get(currentRoute);
 			Location target = locations.get(locIndex);
-
-			double segmentLength = loc1.distanceTo(loc2);
-			if (segmentLength > 0) {
-				double loc1ToTarget = loc1.distanceTo(target);
-				double loc2ToTarget = loc2.distanceTo(target);
-				double dTarget = lastLocation.distanceTo(target);
-				double CF = (loc1ToTarget - dTarget) / (loc1ToTarget - loc2ToTarget);
-				if (CF >= 0.0 && CF <= 1.0) {
-					latLon = MapUtils.calculateIntermediatePoint(loc1.getLatitude(), loc1.getLongitude(),
-							loc2.getLatitude(), loc2.getLongitude(), CF);
-				}
+			double targetDistance = lastLocation.distanceTo(target);
+			LatLon latLon = calculateProjectionOnSegment(locations, target, currentRoute - 1, targetDistance);
+			if (latLon == null) {
+				latLon = calculateProjectionOnSegment(locations, target, currentRoute, targetDistance);
 			}
+			return latLon != null && tileBox.containsLatLon(latLon) ? latLon : null;
 		}
-		if (latLon != null) {
-			boolean visible = tileBox.containsLatLon(latLon);
-			if (visible) {
-				return latLon;
+		return null;
+	}
+
+	@Nullable
+	private static LatLon calculateProjectionOnSegment(@NonNull List<Location> locations,
+			@NonNull Location target, int index, double targetDistance) {
+		if (index < 0 || index + 1 >= locations.size()) {
+			return null;
+		}
+		Location loc1 = locations.get(index);
+		Location loc2 = locations.get(index + 1);
+		if (loc1.distanceTo(loc2) == 0) {
+			return null;
+		}
+		double distance1 = loc1.distanceTo(target);
+		double distance2 = loc2.distanceTo(target);
+		double deltaDistance = distance1 - distance2;
+		if (deltaDistance != 0) {
+			double coeff = (distance1 - targetDistance) / deltaDistance;
+			if (coeff >= 0.0 && coeff <= 1.0) {
+				return MapUtils.calculateIntermediatePoint(
+						loc1.getLatitude(), loc1.getLongitude(),
+						loc2.getLatitude(), loc2.getLongitude(), coeff);
 			}
 		}
 		return null;
