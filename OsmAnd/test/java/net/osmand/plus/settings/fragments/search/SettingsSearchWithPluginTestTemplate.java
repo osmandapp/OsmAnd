@@ -15,6 +15,7 @@ import android.content.Context;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -51,11 +52,19 @@ abstract class SettingsSearchWithPluginTestTemplate implements ISettingsSearchTe
 
 	protected abstract String getSearchQuery(final Context context);
 
-	protected abstract Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses();
+	protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+		return Collections.emptySet();
+	}
 
-	protected abstract Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses();
+	protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+		return Collections.emptySet();
+	}
 
-	protected abstract List<String> getExpectedSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins);
+	protected List<String> getExpectedSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins) {
+		return Collections.emptyList();
+	}
 
-	protected abstract List<String> getForbiddenSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins);
+	protected List<String> getForbiddenSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins) {
+		return Collections.emptyList();
+	}
 }
