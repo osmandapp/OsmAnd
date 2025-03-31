@@ -134,7 +134,8 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 					}
 				}
 			}
-			saveButton.setEnabled(filtersChanged);
+			final boolean enableSaveButton = filtersChanged;
+			app.runInUIThread(() -> saveButton.setEnabled(enableSaveButton));
 		}
 	}
 
