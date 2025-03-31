@@ -31,30 +31,17 @@ abstract class SettingsSearchTestTemplate implements ISettingsSearchTest {
 	@Override
 	public void testSearchAndFind(final OsmandApplication app) {
 		// Given
-		// FK-TODO: refactor
 		initializeTest(app);
-		final Set<OsmandPlugin> enabledOsmandPlugins =
-				getEnabledPluginClasses()
-						.stream()
-						.map(enabledPluginClass -> PluginsHelper.enablePlugin(enabledPluginClass, app))
-						.collect(Collectors.toUnmodifiableSet());
-		final Set<OsmandPlugin> disabledOsmandPlugins =
-				getDisabledPluginClasses()
-						.stream()
-						.map(disabledPluginClass -> PluginsHelper.disablePlugin(disabledPluginClass, app))
-						.collect(Collectors.toUnmodifiableSet());
+		final Set<OsmandPlugin> enabledPlugins = enablePlugins(app);
+		final Set<OsmandPlugin> disabledPlugins = disablePlugins(app);
 		clickSearchButton(app);
 
 		// When
 		onView(searchView()).perform(replaceText(getSearchQuery(app)), closeSoftKeyboard());
 
 		// Then
-		checkSearchResultsViewMatchesSearchResults(
-				getExpectedSearchResults(app, enabledOsmandPlugins, disabledOsmandPlugins),
-				SettingsSearchTestHelper::hasSearchResultWithSubstring);
-		checkSearchResultsViewMatchesSearchResults(
-				getForbiddenSearchResults(app, enabledOsmandPlugins, disabledOsmandPlugins),
-				forbidden -> not(hasSearchResultWithSubstring(forbidden)));
+		checkExpectedSearchResults(app, enabledPlugins, disabledPlugins);
+		checkForbiddenSearchResults(app, enabledPlugins, disabledPlugins);
 	}
 
 	protected void initializeTest(final OsmandApplication app) {
@@ -70,12 +57,38 @@ abstract class SettingsSearchTestTemplate implements ISettingsSearchTest {
 		return Collections.emptySet();
 	}
 
-	protected List<String> getExpectedSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins) {
+	protected List<String> getExpectedSearchResults(final Context context, final Set<OsmandPlugin> enabledPlugins, final Set<OsmandPlugin> disabledPlugins) {
 		return Collections.emptyList();
 	}
 
-	protected List<String> getForbiddenSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins) {
+	protected List<String> getForbiddenSearchResults(final Context context, final Set<OsmandPlugin> enabledPlugins, final Set<OsmandPlugin> disabledPlugins) {
 		return Collections.emptyList();
+	}
+
+	private Set<OsmandPlugin> enablePlugins(final OsmandApplication app) {
+		return getEnabledPluginClasses()
+				.stream()
+				.map(enabledPluginClass -> PluginsHelper.enablePlugin(enabledPluginClass, app))
+				.collect(Collectors.toUnmodifiableSet());
+	}
+
+	private Set<OsmandPlugin> disablePlugins(final OsmandApplication app) {
+		return getDisabledPluginClasses()
+				.stream()
+				.map(disabledPluginClass -> PluginsHelper.disablePlugin(disabledPluginClass, app))
+				.collect(Collectors.toUnmodifiableSet());
+	}
+
+	private void checkExpectedSearchResults(final OsmandApplication app, final Set<OsmandPlugin> enabledPlugins, final Set<OsmandPlugin> disabledPlugins) {
+		checkSearchResultsViewMatchesSearchResults(
+				getExpectedSearchResults(app, enabledPlugins, disabledPlugins),
+				SettingsSearchTestHelper::hasSearchResultWithSubstring);
+	}
+
+	private void checkForbiddenSearchResults(final OsmandApplication app, final Set<OsmandPlugin> enabledPlugins, final Set<OsmandPlugin> disabledPlugins) {
+		checkSearchResultsViewMatchesSearchResults(
+				getForbiddenSearchResults(app, enabledPlugins, disabledPlugins),
+				forbidden -> not(hasSearchResultWithSubstring(forbidden)));
 	}
 
 	private static void checkSearchResultsViewMatchesSearchResults(final List<String> searchResults,

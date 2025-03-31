@@ -55,8 +55,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -72,8 +72,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -89,8 +89,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -106,8 +106,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -123,8 +123,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -140,8 +140,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -157,8 +157,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -174,8 +174,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -191,8 +191,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -208,8 +208,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -225,8 +225,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -242,8 +242,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -259,8 +259,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -276,8 +276,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -293,8 +293,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -310,8 +310,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -327,8 +327,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -344,8 +344,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -361,8 +361,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -378,8 +378,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -395,8 +395,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -412,8 +412,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -429,8 +429,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -446,8 +446,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -463,8 +463,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -480,8 +480,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -497,8 +497,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -514,8 +514,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -531,8 +531,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -548,8 +548,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -565,8 +565,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -582,8 +582,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -599,8 +599,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -616,8 +616,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -633,8 +633,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -650,8 +650,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -667,8 +667,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -684,8 +684,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(context.getString(R.string.map_rendering_engine));
 									}
 								}
@@ -701,8 +701,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(context.getString(R.string.map_rendering_engine));
 									}
 								}
@@ -718,8 +718,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s",
@@ -743,9 +743,9 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledOsmandPlugins).getName()));
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledPlugins).getName()));
 									}
 								}
 						},
@@ -765,9 +765,9 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledOsmandPlugins).getName()));
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledPlugins).getName()));
 									}
 								}
 						},
@@ -787,9 +787,9 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledOsmandPlugins).getName()));
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledPlugins).getName()));
 									}
 								}
 						},
@@ -809,9 +809,9 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledOsmandPlugins).getName()));
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledPlugins).getName()));
 									}
 								}
 						},
@@ -831,12 +831,12 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														Iterables.getOnlyElement(enabledOsmandPlugins).getName(),
+														Iterables.getOnlyElement(enabledPlugins).getName(),
 														context.getString(R.string.copy_from_other_profile)));
 									}
 								}
@@ -857,12 +857,12 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														Iterables.getOnlyElement(enabledOsmandPlugins).getName(),
+														Iterables.getOnlyElement(enabledPlugins).getName(),
 														context.getString(R.string.copy_from_other_profile)));
 									}
 								}
@@ -883,12 +883,12 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														Iterables.getOnlyElement(enabledOsmandPlugins).getName(),
+														Iterables.getOnlyElement(enabledPlugins).getName(),
 														context.getString(R.string.copy_from_other_profile)));
 									}
 								}
@@ -909,12 +909,12 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														Iterables.getOnlyElement(enabledOsmandPlugins).getName(),
+														Iterables.getOnlyElement(enabledPlugins).getName(),
 														context.getString(R.string.copy_from_other_profile)));
 									}
 								}
@@ -935,8 +935,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(context.getString(R.string.location_interpolation_percent));
 									}
 								}
@@ -957,8 +957,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(context.getString(R.string.location_interpolation_percent_desc));
 									}
 								}
@@ -981,8 +981,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return Stream
 												.of("Driving", "Moped")
 												.map(applicationMode -> String.format("Path: %s > Profile appearance", applicationMode))
@@ -1006,8 +1006,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getForbiddenSearchResults(final Context context,
-																					 final Set<OsmandPlugin> enabledOsmandPlugins,
-																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					 final Set<OsmandPlugin> enabledPlugins,
+																					 final Set<OsmandPlugin> disabledPlugins) {
 										return List.of("Path: Driving > Profile appearance");
 									}
 								}
@@ -1030,8 +1030,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return Stream
 												.of("Driving", "Truck")
 												.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
@@ -1050,8 +1050,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -1067,8 +1067,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -1084,8 +1084,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -1101,8 +1101,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -1118,8 +1118,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -1135,8 +1135,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -1152,8 +1152,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -1169,8 +1169,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -1186,8 +1186,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 								}
@@ -1208,8 +1208,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getExpectedSearchResults(final Context context,
-																					final Set<OsmandPlugin> enabledOsmandPlugins,
-																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 
@@ -1234,8 +1234,8 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected List<String> getForbiddenSearchResults(final Context context,
-																					 final Set<OsmandPlugin> enabledOsmandPlugins,
-																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+																					 final Set<OsmandPlugin> enabledPlugins,
+																					 final Set<OsmandPlugin> disabledPlugins) {
 										return List.of(getSearchQuery(context));
 									}
 
