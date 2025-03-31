@@ -5724,4 +5724,10 @@
     <string name="display_priority">Prioritet prikaza</string>
     <string name="read_on_wiki">Pročitajte na Wikipediji</string>
     <string name="wikidata">Wikidata</string>
+    <string name="prediction_time">Vreme predviđanja</string>
+    <string name="shared_string_no_animation">Nema animacije</string>
+    <string name="position_animation_empty_banner_description">Ikona pozicije se kreće na svaku novu primljenu lokaciju bez animacije.</string>
+    <string name="prediction_time_description">Ikona pozicije u OsmAnd animira se svakim promenom GPS tačke (jednom u sekundi). Blago kašnjenje u njegovom kretanju može biti primetno, posebno kada se korisnik brzo kreće ili GPS signal varira.</string>
+    <string name="prediction_time_advanced_description">Podesite vreme predviđanja kako biste smanjili kašnjenje.</string>
+    <string name="position_animation">Animacija pozicije</string>
 </resources>
