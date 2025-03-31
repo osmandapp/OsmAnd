@@ -510,8 +510,8 @@ public class MapLayers {
 						}));
 	}
 
-	public ItemByKeyAndSelectedItem getItemByKeyAndSelectedItem(final boolean includeOfflineMaps,
-																final CommonPreference<String> targetLayer) {
+	private ItemByKeyAndSelectedItem getItemByKeyAndSelectedItem(final boolean includeOfflineMaps,
+																 final CommonPreference<String> targetLayer) {
 		final Map<String, String> entriesMap = getEntriesMap(includeOfflineMaps);
 		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 		// FK-FIXME: if selectedTileSourceKey changes through user selection of another map source then entriesMapList also changes and the search database needs to be rebuilt.
