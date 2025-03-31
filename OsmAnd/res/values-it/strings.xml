@@ -2020,7 +2020,6 @@
     <string name="rendering_value_fine_name">Sottile</string>
     <string name="upload_poi">Carica i PDI</string>
     <string name="route_roundabout_short">Prendere la %1$d uscita e proseguire</string>
-    <string name="wiki_around">Articoli Wikipedia vicini</string>
     <string name="search_map_hint">Città o regione</string>
     <string name="routing_attr_allow_motorway_name">Usa autostrade</string>
     <string name="routing_attr_allow_motorway_description">Permette autostrade.</string>

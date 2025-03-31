@@ -4606,7 +4606,6 @@
     <string name="turn_screen_on_sensor">Úsáid braiteoir cóngarachta</string>
     <string name="off_road_render_descr">Le haghaidh tiomáint easbhóthair bunaithe ar stíl \'Topo\' agus lena n-úsáid le híomhánna satailíte glasa mar underlay. Tiús príomhbhóthair laghdaithe, tiús méadaithe rianta, cosáin, rothar agus bealaí eile.</string>
     <string name="context_menu_item_modify_note">Mionathraigh nóta OSM</string>
-    <string name="wiki_around">Ailt Vicipéide in aice láimhe</string>
     <string name="download_files_question_space_with_temp">Íoslódáil {0} comhad(anna)?\n Úsáidtear {3} MB go sealadach, {1} MB go buan. (As {2} MB.)</string>
     <string name="osmand_extended_description_part7">Cur le OSM\n • Tuairiscigh fabhtanna sonraí\n • Uaslódáil rianta GPX chuig OSM go díreach ón aip\n • Cuir POIanna leis agus iad a uaslódáil go díreach chuig OSM (nó níos déanaí má tá siad as líne)</string>
     <string name="osmand_plus_extended_description_part5">Gnéithe Sábháilteachta\n • Athrú roghnach uathoibrithe amhairc lae / oíche\n • Taispeáint roghnach luasteorainn luais, le meabhrúchán má sháraíonn tú é\n • Zúmáil roghnach luas-spleách\n • Roinn do shuíomh ionas gur féidir le do chairde tú a aimsiú</string>

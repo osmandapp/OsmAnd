@@ -2,7 +2,6 @@
 <resources>
     <string name="shared_string_add_manually">Manuell hinzufügen …</string>
     <string name="distance_moving">Korrigierte Distanz</string>
-    <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     <string name="shared_string_remove">Entfernen</string>
     <string name="item_removed">Eintrag entfernt</string>
     <string name="n_items_removed">Einträge entfernt</string>
@@ -529,7 +528,7 @@
     <string name="download_type_to_filter">Nach Typ filtern</string>
     <string name="use_high_res_maps">Hochauflösende Anzeige</string>
     <string name="use_high_res_maps_descr">Unterdrückt Streckung (Unschärfe) von Kartenkacheln auf Bildschirmen mit hoher Dichte.</string>
-    <string name="unknown_location">Position noch nicht bekannt</string>
+    <string name="unknown_location">Position noch nicht bekannt.</string>
     <string name="context_menu_item_search_transport">Suche ÖPNV</string>
     <string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
     <string name="transport_searching_route">ÖPNV-Ergebnisse ({0} bis zum Ziel):</string>
@@ -3491,7 +3490,7 @@
     <string name="use_volume_buttons_as_zoom">Lautstärketasten als Zoom</string>
     <string name="lenght_limit_description">Bitte geben Sie Ihre Fahrzeuglänge an. Für lange Fahrzeuge können einige Streckenabschnitte nicht befahrbar sein.</string>
     <string name="please_provide_point_name_error">Bitte geben Sie einen Namen für den Favoriten an</string>
-    <string name="quick_action_remove_next_destination_descr">Löscht das nächste Ziel auf Ihrer Route. Wenn dies das endgültige Ziel ist, wird die Navigation gestoppt.</string>
+    <string name="quick_action_remove_next_destination_descr">Löscht das nächste Ziel auf Ihrer Route. Wenn dies das letzte Ziel ist, wird die Navigation angehalten.</string>
     <string name="search_download_wikipedia_maps">Wikipedia-Karten herunterladen</string>
     <string name="plugin_wikipedia_description">Holen Sie sich Informationen über Sehenswürdigkeiten aus Wikipedia, einem Offline-Reiseführer für die Hosentasche mit Artikeln über Orte und Ziele.</string>
     <string name="app_mode_enduro_motorcycle">Enduro</string>
@@ -5739,7 +5738,7 @@
     <string name="popular_places">Beliebte Orte</string>
     <string name="point_location">Punktortung</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Aktion zur Steuerung der Sichtbarkeit des Koordinatengitters auf der Karte.</string>
-    <string name="layer_coordinates_grid">Koordinatennetz</string>
+    <string name="layer_coordinates_grid">Koordinatenraster</string>
     <string name="show_image_previews">Bildvorschauen anzeigen</string>
     <string name="equator">Äquator</string>
     <string name="add_widget">Widget hinzufügen</string>
@@ -5751,4 +5750,5 @@
     <string name="destination_first">Endziel zuerst</string>
     <string name="display_priority">Anzeigepriorität</string>
     <string name="poi_source">POI-Quelle</string>
+    <string name="row_height">Zeilenhöhe</string>
 </resources>

@@ -2048,7 +2048,6 @@
     <string name="upload_poi">Wysyłanie użytecznego miejsca</string>
     <string name="route_roundabout_short">Zjedź %1$d zjazdem</string>
     <string name="search_map_hint">Miasto lub region</string>
-    <string name="wiki_around">Artykuły Wikipedii w pobliżu</string>
     <string name="routing_attr_allow_motorway_name">Używanie autostrad</string>
     <string name="routing_attr_allow_motorway_description">Zezwala na autostrady.</string>
     <string name="lang_sr_latn">Serbski (łaciński)</string>

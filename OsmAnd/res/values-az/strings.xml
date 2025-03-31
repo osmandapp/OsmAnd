@@ -773,7 +773,6 @@
     <string name="rendering_attr_contourWidth_description">Kontur xəttinin genişliyi</string>
     <string name="rendering_attr_contourWidth_name">Kontur xəttinin genişliyi</string>
     <string name="upload_osm_note_description">OSM qeydinizi anonim və ya OpenStreetMap.org profilinizi istifadə edərək yükləyin.</string>
-    <string name="wiki_around">Yaxındakı Vikipediya məqalələri</string>
     <string name="search_map_hint">Şəhər və ya region</string>
     <string name="upload_poi">POI yüklə</string>
     <string name="route_calculation">Marşrut hesablanması</string>

@@ -2015,7 +2015,6 @@
     <string name="upload_poi">上傳 POI</string>
     <string name="route_roundabout_short">利用 %1$d 退出並離開</string>
     <string name="search_map_hint">城市或地區</string>
-    <string name="wiki_around">附近維基百科條目</string>
     <string name="routing_attr_allow_motorway_name">使用高速公路</string>
     <string name="routing_attr_allow_motorway_description">允許進高速公路。</string>
     <string name="lang_sr_latn">塞爾維亞語（拉丁文）</string>

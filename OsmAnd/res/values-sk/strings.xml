@@ -2025,7 +2025,6 @@
     <string name="route_roundabout_short">Použite výjazd %1$d a pokračujte</string>
     <string name="upload_poi">Odoslať POI</string>
     <string name="search_map_hint">Mesto alebo región</string>
-    <string name="wiki_around">Články Wikipédie v okolí</string>
     <string name="routing_attr_allow_motorway_name">Použiť diaľnice</string>
     <string name="routing_attr_allow_motorway_description">Povoliť použiť diaľnice.</string>
     <string name="lang_sr_latn">Srbsky (Latinka)</string>

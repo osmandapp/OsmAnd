@@ -87,6 +87,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + "cuisine";
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + "dish";
 	private static final String US_MAPS_RECREATION_AREA = "us_maps_recreation_area";
+	private static final String WIKI_DATA_BASE_URL = "https://www.wikidata.org/wiki/";
 
 	private final MetricsConstants metricSystem;
 	private final AdditionalInfoBundle additionalInfo;
@@ -122,26 +123,24 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
 		Map<String, Object> filteredInfo = additionalInfo.getFilteredLocalizedInfo();
-		if (filteredInfo.containsKey(Amenity.CONTENT) && filteredInfo.containsKey(Amenity.SHORT_DESCRIPTION)) {
-			filteredInfo.remove(Amenity.CONTENT);
-		}
-
-		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-			AmenityInfoRow infoRow = null;
-			if (value instanceof String strValue) {
-				infoRow = createAmenityInfoRow(context, key, strValue, null);
-			} else if (value != null) {
-				infoRow = createLocalizedAmenityInfoRow(context, key, value);
-			}
-			if (infoRow != null) {
-				if (lastBuiltRowIsDescription) {
-					descriptions.add(infoRow);
-				} else if (Amenity.CUISINE.equals(key)) {
-					cuisineRow = infoRow;
-				} else if (poiType == null) {
-					infoRows.add(infoRow);
+		if (!poiCategory.isWiki()) {
+			for (Entry<String, Object> entry : filteredInfo.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+				AmenityInfoRow infoRow = null;
+				if (value instanceof String strValue) {
+					infoRow = createAmenityInfoRow(context, key, strValue, null);
+				} else if (value != null) {
+					infoRow = createLocalizedAmenityInfoRow(context, key, value);
+				}
+				if (infoRow != null) {
+					if (lastBuiltRowIsDescription) {
+						descriptions.add(infoRow);
+					} else if (Amenity.CUISINE.equals(key)) {
+						cuisineRow = infoRow;
+					} else if (poiType == null) {
+						infoRows.add(infoRow);
+					}
 				}
 			}
 		}
@@ -227,7 +226,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	public void buildWikiDataRow(@NonNull View view) {
 		String wikidataValue = additionalInfo.get(WIKIDATA);
 		if (wikidataValue != null) {
-			int iconId = R.drawable.ic_plugin_wikipedia;
+			int iconId = R.drawable.ic_action_logo_wikidata;
 			PoiType pType;
 			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(WIKIDATA);
 			if (pt != null) {
@@ -313,7 +312,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			collapsableView = new CollapsableView(llv, this, true);
 		}
-		hasWiki = false; // allow another hasWiki try for infoRow at return
 		return createAmenityInfoRow(context, headerKey, headerValue, collapsableView);
 	}
 
@@ -392,38 +390,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 		}
 
-		if (poiCategory.isWiki()) {
-			if (!hasWiki) {
-				Map<String, String> additionalInfoFiltered = additionalInfo.getFilteredInfo();
-				wikiAmenity = new Amenity();
-				wikiAmenity.setType(poiCategory);
-				wikiAmenity.setSubType(subtype);
-				wikiAmenity.setAdditionalInfo(additionalInfoFiltered);
-				wikiAmenity.setLocation(getLatLon());
-				String name = additionalInfoFiltered.get("name");
-				if (!Algorithms.isEmpty(name)) {
-					wikiAmenity.setName(name);
-				}
-
-				String articleLang = PluginsHelper.onGetMapObjectsLocale(wikiAmenity, this.preferredLang);
-				String lng = wikiAmenity.getContentLanguage("content", articleLang, "en");
-				if (Algorithms.isEmpty(lng)) {
-					lng = "en";
-				}
-
-				String langSelected = lng;
-				String content = wikiAmenity.getDescription(langSelected);
-				vl = (content != null) ? WikiArticleHelper.getPartialContent(content) : "";
-				vl = vl == null ? "" : vl;
-				hasWiki = true;
-				isWiki = true;
-				needLinks = false;
-				hiddenUrl = null;
-				isUrl = false;
-			} else {
-				return null;
-			}
-		} else if (MapObject.isNameLangTag(key)) {
+		if (MapObject.isNameLangTag(key)) {
 			return null;
 		} else if (Amenity.COLLECTION_TIMES.equals(baseKey) || Amenity.SERVICE_TIMES.equals(baseKey)) {
 			iconId = R.drawable.ic_action_time;
@@ -666,7 +633,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		urls.put("ok", "https://ok.ru/%s");
 		urls.put("telegram", "https://t.me/%s");
 		urls.put("flickr", "https://flickr.com/%s");
-		urls.put("wikidata", "https://www.wikidata.org/wiki/%s");
+		urls.put("wikidata", WIKI_DATA_BASE_URL + "%s");
 
 		String url = urls.get(key);
 		if (url != null) {
@@ -800,6 +767,8 @@ public class AmenityUIHelper extends MenuBuilder {
 			String textToCopy;
 			if (hiddenUrl != null && hiddenUrl.contains(WIKI_LINK)) {
 				textToCopy = hiddenUrl;
+			} else if (hiddenUrl != null && hiddenUrl.contains(WIKI_DATA_BASE_URL)) {
+				textToCopy = text;
 			} else {
 				textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + text : text;
 			}
@@ -1043,7 +1012,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	@NonNull
-	private Set<String> collectAvailableLocalesFromTags(@NonNull Collection<String> tags) {
+	public static Set<String> collectAvailableLocalesFromTags(@NonNull Collection<String> tags) {
 		Set<String> result = new HashSet<>();
 		for (String tag : tags) {
 			String[] parts = tag.split(":");

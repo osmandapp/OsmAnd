@@ -5,15 +5,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.wiki.WikiCoreHelper;
+import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class PlacesDatabaseHelper extends SQLiteOpenHelper {
@@ -71,51 +78,105 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void insertPlaces(int zoom, int tileX, int tileY, String lang, List<? extends OsmandApiFeatureData> places) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_ZOOM, zoom);
-        values.put(COLUMN_TILE_X, tileX);
-        values.put(COLUMN_TILE_Y, tileY);
-        values.put(COLUMN_LANG, lang);
-        values.put(COLUMN_DATA, gson.toJson(places));
-        values.put(COLUMN_TIMESTAMP, System.currentTimeMillis());
-        db.insertWithOnConflict(TABLE_PLACES, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+    public void insertPlaces(int zoom, int tileX, int tileY,
+            Map<String, List<OsmandApiFeatureData>> placesByLang) {
+        SQLiteDatabase db = getWritableDatabase();
+        try {
+            db.beginTransaction();
+            for (Map.Entry<String, List<OsmandApiFeatureData>> entry : placesByLang.entrySet()) {
+                String lang = entry.getKey();
+                List<OsmandApiFeatureData> places = entry.getValue();
+
+                ContentValues values = new ContentValues();
+                values.put(COLUMN_ZOOM, zoom);
+                values.put(COLUMN_TILE_X, tileX);
+                values.put(COLUMN_TILE_Y, tileY);
+                values.put(COLUMN_LANG, lang);
+                values.put(COLUMN_DATA, gson.toJson(places));
+                values.put(COLUMN_TIMESTAMP, System.currentTimeMillis());
+                db.insertWithOnConflict(TABLE_PLACES, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
     }
 
-    public List<OsmandApiFeatureData> getPlaces(int zoom, int tileX, int tileY, String lang) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_PLACES, new String[]{COLUMN_DATA, COLUMN_TIMESTAMP},
-                COLUMN_ZOOM + "=? AND " + COLUMN_TILE_X + "=? AND " + COLUMN_TILE_Y + "=? AND " + COLUMN_LANG + "=?",
-                new String[]{String.valueOf(zoom), String.valueOf(tileX), String.valueOf(tileY), lang},
-                null, null, null);
+    @NonNull
+    public List<OsmandApiFeatureData> getPlaces(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
+        SQLiteDatabase db = getReadableDatabase();
+        Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY, languages);
+        Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_DATA, COLUMN_TIMESTAMP},
+                pair.first, pair.second, null, null, null);
 
         List<OsmandApiFeatureData> places = new ArrayList<>();
         if (cursor.moveToFirst()) {
             int c = cursor.getColumnIndex(COLUMN_DATA);
-            String json = cursor.getString(c);
             int t = cursor.getColumnIndex(COLUMN_TIMESTAMP);
-            long timestamp = cursor.getLong(t);
-            places = gson.fromJson(json, new TypeToken<List<WikiCoreHelper.OsmandApiFeatureData>>(){}.getType());
+            do {
+                String json = cursor.getString(c);
+                long timestamp = cursor.getLong(t);
+                List<OsmandApiFeatureData> parsed = gson.fromJson(json,
+                        new TypeToken<List<OsmandApiFeatureData>>() {}.getType());
+                if (parsed != null) {
+                    places.addAll(parsed);
+                }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return places;
     }
 
-    public boolean isDataExpired(int zoom, int tileX, int tileY, String lang) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        try (Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_TIMESTAMP},
-                COLUMN_ZOOM + "=? AND " + COLUMN_TILE_X + "=? AND " + COLUMN_TILE_Y + "=? AND " + COLUMN_LANG + "=?",
-                new String[] {String.valueOf(zoom), String.valueOf(tileX), String.valueOf(tileY), lang},
-                null, null, null)) {
+    public boolean isDataExpired(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
+        SQLiteDatabase db = getReadableDatabase();
+        boolean filterByLang = !Algorithms.isEmpty(languages);
+        Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY, languages);
 
+        try (Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_LANG, COLUMN_TIMESTAMP},
+                pair.first, pair.second, null, null, null)) {
             if (cursor.moveToFirst()) {
-                int tc = cursor.getColumnIndex(COLUMN_TIMESTAMP);
-                long timestamp = cursor.getLong(tc);
+                Set<String> foundLangs = new HashSet<>();
                 long currentTime = System.currentTimeMillis();
-                return (currentTime - timestamp) > DATA_EXPIRATION_TIME; // 1 month expiration
+                do {
+                    int timestampIndex = cursor.getColumnIndex(COLUMN_TIMESTAMP);
+                    long timestamp = cursor.getLong(timestampIndex);
+                    if ((currentTime - timestamp) > DATA_EXPIRATION_TIME) {
+                        return true; // 1 month expiration
+                    }
+                    int langIndex = cursor.getColumnIndex(COLUMN_LANG);
+                    String lang = cursor.getString(langIndex);
+                    foundLangs.add(lang);
+                } while (cursor.moveToNext());
+
+                return filterByLang && foundLangs.size() < languages.size();
             }
             return true; // Data is expired if it doesn't exist
         }
+    }
+
+    @NonNull
+    private Pair<String, String[]> getSelectionWithArgs(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
+        List<String> list = new ArrayList<>();
+        list.add(String.valueOf(zoom));
+        list.add(String.valueOf(tileX));
+        list.add(String.valueOf(tileY));
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(COLUMN_ZOOM).append("=? AND ")
+                .append(COLUMN_TILE_X).append("=? AND ")
+                .append(COLUMN_TILE_Y).append("=?");
+
+        if (!Algorithms.isEmpty(languages)) {
+            StringBuilder placeholders = new StringBuilder();
+            for (int i = 0; i < languages.size(); i++) {
+                placeholders.append("?");
+                if (i < languages.size() - 1) {
+                    placeholders.append(",");
+                }
+            }
+            builder.append(" AND ").append(COLUMN_LANG).append(" IN (").append(placeholders).append(")");
+            list.addAll(languages);
+        }
+        return Pair.create(builder.toString(), list.toArray(new String[0]));
     }
 }

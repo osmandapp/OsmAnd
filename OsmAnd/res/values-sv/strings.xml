@@ -1992,7 +1992,6 @@
     <string name="trip_rec_notification_settings_desc">Visa ett systemmeddelande som gör det möjligt att starta trippinspelning.</string>
     <string name="routing_attr_allow_motorway_name">Använd motorvägar</string>
     <string name="routing_attr_allow_motorway_description">Tillåter motorvägar.</string>
-    <string name="wiki_around">Närliggande Wikipedia-artiklar</string>
     <string name="search_map_hint">Stad eller region</string>
     <string name="route_roundabout_short">Tag den %1$d avfarten och kör</string>
     <string name="upload_poi">Ladda upp POI</string>

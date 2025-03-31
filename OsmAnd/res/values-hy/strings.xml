@@ -346,7 +346,6 @@
     <string name="routing_attr_allow_motorway_name">Օգտագործել մայրուղի</string>
     <string name="routing_attr_allow_motorway_description">Թույլատրում է ավտոմայրուղիներ։</string>
     <string name="upload_osm_note_description">Վերբեռնել ձեր OSM նշումը անանուն կամ ձեր OpenStreetMap.org պրոֆիլի միջոցով:</string>
-    <string name="wiki_around">Վիքիպեդիայի հոդվածներ</string>
     <string name="search_map_hint">Քաղաք կամ երկիր</string>
     <string name="route_roundabout_short">Վերցրեք %1$d ելքը</string>
     <string name="upload_poi">Վերբեռնեք POI</string>

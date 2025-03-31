@@ -2035,7 +2035,6 @@
     <string name="search_map_hint">Stad of regio</string>
     <string name="route_roundabout_short">Neem %1$de afslag</string>
     <string name="upload_poi">POI Uploaden</string>
-    <string name="wiki_around">Wikipedia artikelen in de buurt</string>
     <string name="routing_attr_allow_motorway_name">Autosnelwegen gebruiken</string>
     <string name="routing_attr_allow_motorway_description">Staat autosnelwegen toe.</string>
     <string name="lang_sr_latn">Servisch (Latijns schrift)</string>

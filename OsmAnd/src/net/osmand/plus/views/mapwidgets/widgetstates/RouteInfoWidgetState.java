@@ -8,36 +8,36 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayValue;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayPriority;
-import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoDisplayMode;
 import net.osmand.util.Algorithms;
 
 public class RouteInfoWidgetState extends ResizableWidgetState {
 
-	private static final String DISPLAY_MODE_PREF_ID = "route_info_widget_display_mode";
+	private static final String DEFAULT_VALUE_PREF_ID = "route_info_widget_display_mode";
 	private static final String DISPLAY_PRIORITY_PREF_ID = "route_info_widget_display_priority";
 
-	private final CommonPreference<RouteInfoDisplayMode> displayModePref;
+	private final CommonPreference<DisplayValue> defaultViewPref;
 	private final CommonPreference<DisplayPriority> displayPriorityPref;
 
 	public RouteInfoWidgetState(@NonNull OsmandApplication app, @Nullable String customId) {
 		super(app, customId, WidgetType.ROUTE_INFO, WidgetSize.MEDIUM);
-		displayModePref = registerDisplayModePreference(customId);
+		defaultViewPref = registerDefaultViewPreference(customId);
 		displayPriorityPref = registerDisplayPriorityPreference(customId);
 	}
 
 	@NonNull
-	public RouteInfoDisplayMode getDisplayMode() {
-		return getDisplayMode(settings.getApplicationMode());
+	public DisplayValue getDefaultView() {
+		return getDefaultView(settings.getApplicationMode());
 	}
 
 	@NonNull
-	public RouteInfoDisplayMode getDisplayMode(@NonNull ApplicationMode appMode) {
-		return displayModePref.getModeValue(appMode);
+	public DisplayValue getDefaultView(@NonNull ApplicationMode appMode) {
+		return defaultViewPref.getModeValue(appMode);
 	}
 
-	public void setDisplayMode(@NonNull ApplicationMode appMode, @NonNull RouteInfoDisplayMode displayMode) {
-		displayModePref.setModeValue(appMode, displayMode);
+	public void setDefaultView(@NonNull ApplicationMode appMode, @NonNull DisplayValue defaultView) {
+		defaultViewPref.setModeValue(appMode, defaultView);
 	}
 
 	@NonNull
@@ -63,19 +63,19 @@ public class RouteInfoWidgetState extends ResizableWidgetState {
 	@Override
 	public void copyPrefsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
 		super.copyPrefsFromMode(sourceAppMode, appMode, customId);
-		registerDisplayModePreference(customId).setModeValue(appMode, displayModePref.getModeValue(sourceAppMode));
+		registerDefaultViewPreference(customId).setModeValue(appMode, defaultViewPref.getModeValue(sourceAppMode));
 		registerDisplayPriorityPreference(customId).setModeValue(appMode, displayPriorityPref.getModeValue(sourceAppMode));
 	}
 
 	@NonNull
-	private CommonPreference<RouteInfoDisplayMode> registerDisplayModePreference(@Nullable String customId) {
-		String prefId = DISPLAY_MODE_PREF_ID;
+	private CommonPreference<DisplayValue> registerDefaultViewPreference(@Nullable String customId) {
+		String prefId = DEFAULT_VALUE_PREF_ID;
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += "_" + customId;
 		}
-		RouteInfoDisplayMode defValue = RouteInfoDisplayMode.ARRIVAL_TIME;
-		RouteInfoDisplayMode[] values = RouteInfoDisplayMode.values();
-		return settings.registerEnumStringPreference(prefId, defValue, values, RouteInfoDisplayMode.class).makeProfile().cache();
+		DisplayValue defaultValue = DisplayValue.ARRIVAL_TIME;
+		DisplayValue[] values = DisplayValue.values();
+		return settings.registerEnumStringPreference(prefId, defaultValue, values, DisplayValue.class).makeProfile().cache();
 	}
 
 	@NonNull

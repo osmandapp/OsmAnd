@@ -1782,7 +1782,6 @@
     <string name="rendering_attr_contourWidth_name">ضخامت منحنی میزان</string>
     <string name="routing_attr_allow_motorway_name">استفاده از آزادراه</string>
     <string name="routing_attr_allow_motorway_description">مسیردهی از آزادراه مجاز می‌شود.</string>
-    <string name="wiki_around">مقالات ویکی‌پدیا دربارهٔ این حوالی</string>
     <string name="search_map_hint">شهر یا منطقه</string>
     <string name="upload_poi">بارگذاری POI</string>
     <string name="route_calculation">محاسبهٔ مسیر</string>
