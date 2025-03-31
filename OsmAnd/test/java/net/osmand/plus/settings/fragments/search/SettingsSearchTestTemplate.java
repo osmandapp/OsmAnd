@@ -56,7 +56,7 @@ abstract class SettingsSearchTestTemplate implements ISettingsSearchTest {
 		return Collections.emptyList();
 	}
 
-	private static void checkSearchResultsViewMatchesSearchResults(final List<String> searchResults,
+	static void checkSearchResultsViewMatchesSearchResults(final List<String> searchResults,
 																   final Function<String, Matcher<View>> getMatcherForSearchResult) {
 		for (final String searchResult : searchResults) {
 			onView(searchResultsView()).check(matches(getMatcherForSearchResult.apply(searchResult)));

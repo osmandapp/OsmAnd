@@ -2,10 +2,12 @@ package net.osmand.plus.settings.fragments.search;
 
 import android.content.Context;
 
-import androidx.annotation.StringRes;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
+import com.google.common.collect.Iterables;
+
+import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -14,6 +16,7 @@ import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.DayNightMode;
@@ -24,8 +27,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 @LargeTest
@@ -655,13 +657,27 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return AccessibilityPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(AccessibilityPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.getName()));
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledOsmandPlugins).getName()));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -675,13 +691,23 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return AudioVideoNotesPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(AudioVideoNotesPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.getName()));
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledOsmandPlugins).getName()));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -695,13 +721,27 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return OsmandMonitoringPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(OsmandMonitoringPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.getName()));
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledOsmandPlugins).getName()));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -715,13 +755,27 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return WeatherPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(WeatherPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.getName()));
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", Iterables.getOnlyElement(enabledOsmandPlugins).getName()));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -735,17 +789,31 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return OsmandMonitoringPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(OsmandMonitoringPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														osmandPlugin.getName(),
+														Iterables.getOnlyElement(enabledOsmandPlugins).getName(),
 														context.getString(R.string.copy_from_other_profile)));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -759,17 +827,31 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return AccessibilityPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(AccessibilityPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														osmandPlugin.getName(),
+														Iterables.getOnlyElement(enabledOsmandPlugins).getName(),
 														context.getString(R.string.copy_from_other_profile)));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -783,17 +865,31 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return AudioVideoNotesPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(AudioVideoNotesPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														osmandPlugin.getName(),
+														Iterables.getOnlyElement(enabledOsmandPlugins).getName(),
 														context.getString(R.string.copy_from_other_profile)));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -807,17 +903,29 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return WeatherPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(WeatherPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														osmandPlugin.getName(),
+														Iterables.getOnlyElement(enabledOsmandPlugins).getName(),
 														context.getString(R.string.copy_from_other_profile)));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -831,13 +939,27 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return OsmandDevelopmentPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(OsmandDevelopmentPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
 										return List.of(context.getString(R.string.location_interpolation_percent));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -851,13 +973,25 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									@Override
-									protected Class<? extends OsmandPlugin> getPluginClass() {
-										return OsmandDevelopmentPlugin.class;
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(OsmandDevelopmentPlugin.class);
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Collections.emptySet();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
 										return List.of(context.getString(R.string.location_interpolation_percent_desc));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context, final Set<OsmandPlugin> enabledOsmandPlugins, final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return Collections.emptyList();
 									}
 								}
 						},
@@ -1066,20 +1200,79 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						// FK-TODO: add MapSource test for !PluginsHelper.isActive(OsmandRasterMapsPlugin.class)
 						{
-								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_OfflineVectorMaps",
-								new SettingsSearchTestTemplate() {
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_onlineTiles_onlineMapsPluginActive",
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
-										final @StringRes int offlineVectorMaps = R.string.vector_data;
-										return context.getString(offlineVectorMaps);
+										return getOnlineTiles();
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context) {
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(OsmandRasterMapsPlugin.class);
+									}
+
+									@Override
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Set.of();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
 										return List.of(getSearchQuery(context));
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return List.of();
+									}
+
+									private static String getOnlineTiles() {
+										return TileSourceManager.getMapnikSource().getName();
+									}
+								}
+						},
+						{
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_onlineTiles_onlineMapsPluginInactive",
+								new SettingsSearchWithPluginTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return getOnlineTiles();
+									}
+
+									@Override
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of();
+									}
+
+									@Override
+									protected Set<Class<? extends OsmandPlugin>> getDisabledPluginClasses() {
+										return Set.of(OsmandRasterMapsPlugin.class);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledOsmandPlugins,
+																					final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return List.of();
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context,
+																					 final Set<OsmandPlugin> enabledOsmandPlugins,
+																					 final Set<OsmandPlugin> disabledOsmandPlugins) {
+										return List.of(getSearchQuery(context));
+									}
+
+									private static String getOnlineTiles() {
+										return TileSourceManager.getMapnikSource().getName();
 									}
 								}
 						},

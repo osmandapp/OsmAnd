@@ -475,6 +475,7 @@ public class MapLayers {
 			final @NonNull CommonPreference<String> targetLayer,
 			final @Nullable CallbackWithObject<String> callback) {
 		if (!PluginsHelper.isOnlineMapsPluginActive()) {
+			// FK-TODO: disable showToastMessage() when building search database
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			return Optional.empty();
 		}
