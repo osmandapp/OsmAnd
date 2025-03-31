@@ -323,11 +323,11 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 	}
 
-	private void setProjectedPointMarkerLocation(double lat, double lon) {
+	private void setProjectedPointMarkerLocation(@NonNull LatLon latLon) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && projectedPointMarker != null) {
-			projectedPointMarker.setPosition(new PointI(MapUtils.get31TileNumberX(lon),
-					MapUtils.get31TileNumberY(lat)));
+			projectedPointMarker.setPosition(new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
+					MapUtils.get31TileNumberY(latLon.getLatitude())));
 		}
 	}
 
@@ -444,15 +444,20 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 	}
 
-	private void drawProjectionPoint(@NonNull Canvas canvas, double[] projectionXY) {
+	private void drawProjectionPoint(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @NonNull LatLon latLon) {
 		if (projectionIcon == null) {
 			helper.getSettings().getApplicationMode().getLocationIcon();
 			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(getContext(), STATIC_DEFAULT.getIconId());
 		}
 		if (projectionIcon != null) {
-			int locationX = (int) projectionXY[0];
-			int locationY = (int) projectionXY[1];
-			drawIcon(canvas, projectionIcon, locationX, locationY);
+			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+			int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+
+			QuadRect rect = calculateRect(x, y, projectionIcon.getIntrinsicWidth(), projectionIcon.getIntrinsicHeight());
+			projectionIcon.setBounds((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom);
+			projectionIcon.draw(canvas);
+			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		}
 	}
 
@@ -597,23 +602,18 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				}
 			}
 			if (directTo) {
+				LatLon latLon = GpxUtils.calculateProjectionOnRoute(helper, tileBox);
 				MapRendererView mapRenderer = getMapRenderer();
 				if (mapRenderer != null) {
 					if (projectionPointCollection == null || mapActivityInvalidated || mapRendererChanged) {
 						recreateProjectedPointCollection();
 					}
-					double[] projectionOnRoute = GpxUtils.calculateProjectionOnRoutePoint(helper, tileBox, false);
-					//double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper);
-					if (projectionOnRoute != null) {
-						setProjectedPointMarkerLocation(projectionOnRoute[0], projectionOnRoute[1]);
+					if (latLon != null) {
+						setProjectedPointMarkerLocation(latLon);
 					}
-					setProjectedPointMarkerVisibility(projectionOnRoute != null);
-				} else {
-					//add projection point on original route
-					double[] projectionOnRoute = GpxUtils.calculateProjectionOnRoutePoint(helper, tileBox, true);
-					if (projectionOnRoute != null && canvas != null) {
-						drawProjectionPoint(canvas, projectionOnRoute);
-					}
+					setProjectedPointMarkerVisibility(latLon != null);
+				} else if (latLon != null && canvas != null) {
+					drawProjectionPoint(canvas, tileBox, latLon);
 				}
 			} else {
 				removeProjectedPointCollection();
@@ -796,7 +796,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		return helper.isPublicTransportMode() ? publicTransportRouteGeometry.getDrawer().getRouteTransportStops() : null;
 	}
 
-	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res, @NonNull List<TransportStop> routeTransportStops) {
+	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res,
+			@NonNull List<TransportStop> routeTransportStops) {
 		MapRendererView mapRenderer = getMapRenderer();
 		float radius = getRadiusPoi(tb) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
