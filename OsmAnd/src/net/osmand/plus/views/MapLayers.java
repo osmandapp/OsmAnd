@@ -1,6 +1,5 @@
 package net.osmand.plus.views;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -438,7 +437,9 @@ public class MapLayers {
 	public void selectMapSourceLayer(@NonNull MapActivity mapActivity, @NonNull ContextMenuItem item) {
 		this
 				.createMapLayerSelectionDialogFragment(mapActivity, item)
-				.ifPresent(mapLayerSelectionDialog -> mapLayerSelectionDialog.show(mapActivity.getSupportFragmentManager()));
+				.ifPresentOrElse(
+						mapLayerSelectionDialog -> mapLayerSelectionDialog.show(mapActivity.getSupportFragmentManager()),
+						() -> app.showToastMessage(R.string.map_online_plugin_is_not_installed));
 	}
 
 	public Optional<MapLayerSelectionDialogFragment> createMapLayerSelectionDialogFragment(
@@ -462,7 +463,9 @@ public class MapLayers {
 							   @Nullable CallbackWithObject<String> callback) {
 		this
 				.createMapLayerSelectionDialogFragment(mapActivity, includeOfflineMaps, targetLayer, callback)
-				.ifPresent(dialog -> dialog.show(mapActivity.getSupportFragmentManager()));
+				.ifPresentOrElse(
+						dialog -> dialog.show(mapActivity.getSupportFragmentManager()),
+						() -> app.showToastMessage(R.string.map_online_plugin_is_not_installed));
 	}
 
 	private Optional<MapLayerSelectionDialogFragment> createMapLayerSelectionDialogFragment(
@@ -471,8 +474,6 @@ public class MapLayers {
 			final @NonNull CommonPreference<String> targetLayer,
 			final @Nullable CallbackWithObject<String> callback) {
 		if (!PluginsHelper.isOnlineMapsPluginActive()) {
-			// FK-TODO: disable showToastMessage() when building search database
-			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			return Optional.empty();
 		}
 		final boolean nightMode = isNightMode();
