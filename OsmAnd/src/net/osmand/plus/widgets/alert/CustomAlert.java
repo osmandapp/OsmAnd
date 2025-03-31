@@ -92,29 +92,17 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
-	// FK-TODO: DRY with createSingleSelectionDialogFragment()
 	public static MapLayerSelectionDialogFragment createMapLayerSelectionDialogFragment(
 			final AlertDialogData data,
 			final Map<String, CharSequence> itemByKey,
 			final int selectedEntryIndex,
 			final View.OnClickListener itemClickListener) {
-		final SelectionDialogAdapter adapter =
-				new SelectionDialogAdapter(
-						data.getContext(),
-						itemByKey.values().toArray(new CharSequence[0]),
-						selectedEntryIndex,
-						null,
-						data.getControlsColor(),
-						data.isNightMode(),
-						itemClickListener,
-						false);
-		final AlertDialog alertDialog =
-				CustomAlert
-						.createAlertDialogBuilder(data)
-						.setAdapter(adapter, null)
-						.create();
-		adapter.setDialog(alertDialog);
-		return new MapLayerSelectionDialogFragment(alertDialog, data, itemByKey, adapter);
+		return SelectionDialogFragmentFactory.createMapLayerSelectionDialogFragment(
+				data,
+				itemByKey,
+				selectedEntryIndex,
+				itemClickListener,
+				CustomAlert::createAlertDialogBuilder);
 	}
 
 	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
@@ -122,23 +110,12 @@ public class CustomAlert {
 			final Map<String, CharSequence> itemByKey,
 			final int selectedEntryIndex,
 			final View.OnClickListener itemClickListener) {
-		final SelectionDialogAdapter adapter =
-				new SelectionDialogAdapter(
-						data.getContext(),
-						itemByKey.values().toArray(new CharSequence[0]),
-						selectedEntryIndex,
-						null,
-						data.getControlsColor(),
-						data.isNightMode(),
-						itemClickListener,
-						false);
-		final AlertDialog alertDialog =
-				CustomAlert
-						.createAlertDialogBuilder(data)
-						.setAdapter(adapter, null)
-						.create();
-		adapter.setDialog(alertDialog);
-		return new RoadStyleSelectionDialogFragment(alertDialog, data, itemByKey, adapter);
+		return SelectionDialogFragmentFactory.createRoadStyleSelectionDialogFragment(
+				data,
+				itemByKey,
+				selectedEntryIndex,
+				itemClickListener,
+				CustomAlert::createAlertDialogBuilder);
 	}
 
 	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
