@@ -80,7 +80,17 @@ public abstract class MapObject implements Comparable<MapObject> {
 			names.putAll(name);
 		}
 	}
-	
+
+	public String getFlattenedNames() {
+		Map<String, String> names = getNamesMap(true);
+		StringJoiner joiner = new StringJoiner(", ");
+		for (Map.Entry<String, String> entry : names.entrySet()) {
+			String name = String.format("%s (%s)", entry.getValue(), entry.getKey());
+			joiner.add(name);
+		}
+		return joiner.toString();
+	}
+
 	public Map<String, String> getNamesMap(boolean includeEn) {
 		if ((!includeEn || Algorithms.isEmpty(enName)) && names == null) {
 			return Collections.emptyMap();

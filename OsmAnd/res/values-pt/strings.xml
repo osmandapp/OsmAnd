@@ -1988,7 +1988,6 @@
     <string name="rendering_attr_hideWaterPolygons_name">Corpos de água largos</string>
     <string name="routing_attr_allow_motorway_name">Utilizar autoestradas</string>
     <string name="routing_attr_allow_motorway_description">Permitir autoestradas.</string>
-    <string name="wiki_around">Artigos da Wikipédia próximos</string>
     <string name="search_map_hint">Cidade ou região</string>
     <string name="route_roundabout_short">Saia na %1$d saída para</string>
     <string name="upload_poi">Enviar pontos de interesse (POI)</string>

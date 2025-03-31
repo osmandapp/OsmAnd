@@ -1837,7 +1837,6 @@
     <string name="routing_attr_allow_motorway_name">Empregar autoestradas</string>
     <string name="routing_attr_allow_motorway_description">Permite autoestradas.</string>
     <string name="upload_osm_note_description">Subir notas do OSM de xeito anónimo ou empregando o teu perfil do OpenStreetMap.org.</string>
-    <string name="wiki_around">Artigos da Wikipedia pretos</string>
     <string name="search_map_hint">Cidade ou rexión</string>
     <string name="route_roundabout_short">Colla a %1$d saída e siga</string>
     <string name="upload_poi">Enviar PDI</string>

@@ -2190,7 +2190,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_attr_contourWidth_description">Kontūrų linijos plotis</string>
     <string name="rendering_attr_contourWidth_name">Kontūrų linijos plotis</string>
     <string name="routing_attr_allow_motorway_description">Leisti greitkelius.</string>
-    <string name="wiki_around">Šalia esantys Vikipedijos straipsniai</string>
     <string name="route_roundabout_short">Sukite į %1$d išvažiavimą ir keliaukite</string>
     <string name="gpx_no_tracks_title">Jūs dar neturite išsaugotų GPX failų</string>
     <string name="gpx_no_tracks_title_folder">Jūs taip pat galite išsaugoti GPX failus segtuve</string>

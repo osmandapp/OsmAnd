@@ -1996,7 +1996,6 @@
     <string name="search_hint">Város, cím, érdekes pont (POI) nevének megadása</string>
     <string name="translit_names">Nevek átírása</string>
     <string name="rendering_value_fine_name">Finom</string>
-    <string name="wiki_around">Közeli Wikipédia-cikkek</string>
     <string name="search_map_hint">Város vagy régió</string>
     <string name="routing_attr_allow_motorway_name">Autópálya használata</string>
     <string name="routing_attr_allow_motorway_description">Engedélyezi az autópályákat.</string>

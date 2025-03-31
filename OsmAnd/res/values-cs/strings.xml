@@ -2023,7 +2023,6 @@
     <string name="upload_poi">Nahrát POI</string>
     <string name="routing_attr_allow_motorway_name">Použít dálnice</string>
     <string name="routing_attr_allow_motorway_description">Povolí jízdu po dálnicích.</string>
-    <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="search_map_hint">Město nebo oblast</string>
     <string name="lang_sr_latn">Srbština (latinka)</string>
     <string name="lang_zh_hk">Čínština (Hong Kong)</string>

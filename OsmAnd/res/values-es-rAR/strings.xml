@@ -1991,7 +1991,6 @@
     <string name="upload_poi">Subir PDI</string>
     <string name="route_roundabout_short">Tomá la %1$dª salida y continuá</string>
     <string name="search_map_hint">Ciudad o región</string>
-    <string name="wiki_around">Artículos de Wikipedia cerca</string>
     <string name="routing_attr_allow_motorway_name">Usar autopistas</string>
     <string name="routing_attr_allow_motorway_description">Permite usar autopistas.</string>
     <string name="lang_sr_latn">Serbio (latino)</string>

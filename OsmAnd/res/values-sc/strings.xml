@@ -2048,7 +2048,6 @@
     <string name="upload_poi">Càrriga PDI</string>
     <string name="route_roundabout_short">Piga sa %1$d essida e sighi</string>
     <string name="search_map_hint">Tzitade o regione</string>
-    <string name="wiki_around">Artìculos de Wikipedia a curtzu</string>
     <string name="routing_attr_allow_motorway_name">Imprea sas autostradas</string>
     <string name="routing_attr_allow_motorway_description">Permitit s\'impreu de sas autostradas.</string>
     <string name="lang_sr_latn">Serbu (latinu)</string>

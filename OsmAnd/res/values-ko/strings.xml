@@ -3968,7 +3968,6 @@
     <string name="rendering_attr_surface_ground_name">흙</string>
     <string name="rendering_attr_horseRoutes_name">경마 노선</string>
     <string name="max_sensor_heartrate">심박수, 최대</string>
-    <string name="wiki_around">가까운 위키백과 기사</string>
     <string name="avg_sensor_heartrate">심박수, 평균</string>
     <string name="max_sensor_cadence">자전거 Cadence, 최대</string>
     <string name="avg_sensor_cadence">자전거 Cadence, 평균</string>

@@ -2193,7 +2193,6 @@
     <string name="rendering_attr_hideWaterPolygons_name">Ocultar água</string>
     <string name="routing_attr_allow_motorway_name">Usar autoestradas</string>
     <string name="routing_attr_allow_motorway_description">Permite autoestradas.</string>
-    <string name="wiki_around">Artigos do Wikipédia próximos</string>
     <string name="search_map_hint">Cidade ou região</string>
     <string name="route_roundabout_short">Tome %1$d sair e ir</string>
     <string name="upload_poi">Subir POI</string>
