@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="@string/position_animation">
+
+	<net.osmand.plus.settings.preferences.PositionAnimationPreference
+		android:key="location_interpolation_percent"/>
+
+	<Preference
+		android:key="location_interpolation_empty_banner"
+		android:layout="@layout/card_position_animation_empty_banner"
+		android:selectable="false"/>
+
+</PreferenceScreen>

@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet.*;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INPUT_DEVICE;
+import static net.osmand.plus.settings.fragments.SettingsScreenType.POSITION_ANIMATION;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -36,6 +37,7 @@ import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
@@ -70,8 +72,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
-		setupAnimatePositionPref();
 		setupExternalInputDevicePref();
+		setupPositionAnimation();
 		setupTrackballForMovementsPref();
 
 		updateDialogControllerCallbacks();
@@ -285,16 +287,38 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.tap_on_map_to_hide_interface_descr));
 	}
 
-	private void setupAnimatePositionPref() {
-		SwitchPreferenceEx animateMyLocation = findPreference(settings.ANIMATE_MY_LOCATION.getId());
-		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
-	}
-
 	private void setupExternalInputDevicePref() {
 		Preference uiPreference = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
 		if (uiPreference != null) {
 			uiPreference.setSummary(getExternalInputDeviceSummary());
 			uiPreference.setIcon(getExternalInputDeviceIcon());
+		}
+	}
+
+	private void setupPositionAnimation() {
+		Preference uiPreference = findPreference(settings.ANIMATE_MY_LOCATION.getId());
+
+		if (uiPreference != null) {
+			int interpolationValue = settings.LOCATION_INTERPOLATION_PERCENT.getModeValue(getSelectedAppMode());
+			boolean animationEnabled = settings.ANIMATE_MY_LOCATION.getModeValue(getSelectedAppMode());
+
+			String summary;
+			Drawable icon;
+			if (animationEnabled) {
+				icon = getActiveIcon(R.drawable.ic_action_location_animation);
+				String enabled = app.getString(R.string.shared_string_enabled);
+				if (interpolationValue > 0) {
+					String formattedInterpolateValue = OsmAndFormatter.getFormattedPredictionTime(app, interpolationValue);
+					summary = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, enabled, formattedInterpolateValue);
+				} else {
+					summary = enabled;
+				}
+			} else {
+				icon = getContentIcon(R.drawable.ic_action_location_no_animation);
+				summary = app.getString(R.string.shared_string_disabled);
+			}
+			uiPreference.setSummary(summary);
+			uiPreference.setIcon(icon);
 		}
 	}
 
@@ -426,6 +450,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			return true;
 		} else if (key.equals(settings.EXTERNAL_INPUT_DEVICE.getId())) {
 			BaseSettingsFragment.showInstance(requireActivity(), EXTERNAL_INPUT_DEVICE, appMode, new Bundle(), this);
+			return true;
+		} else if (key.equals(settings.ANIMATE_MY_LOCATION.getId())) {
+			BaseSettingsFragment.showInstance(requireActivity(), POSITION_ANIMATION, appMode, new Bundle(), this);
 			return true;
 		} else if (key.equals(settings.PRECISE_DISTANCE_NUMBERS.getId())) {
 			FragmentManager fragmentManager = getFragmentManager();

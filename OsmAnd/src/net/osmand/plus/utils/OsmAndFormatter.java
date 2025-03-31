@@ -255,6 +255,12 @@ public class OsmAndFormatter {
 		return getFormattedDistance((float) roundedDist, app, pms);
 	}
 
+	public static String getFormattedPredictionTime(@NonNull OsmandApplication app, double interpolationValue) {
+		double seconds = interpolationValue / 100.0;
+		String formattedValue = String.format(seconds % 1 == 0 ? "%.0f" : "%.1f", seconds);
+		return app.getString(R.string.ltr_or_rtl_combine_via_space, formattedValue, app.getString(R.string.shared_string_sec));
+	}
+
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
