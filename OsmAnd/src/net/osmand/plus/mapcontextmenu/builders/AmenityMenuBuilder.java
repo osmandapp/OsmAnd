@@ -25,6 +25,8 @@ import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -128,7 +130,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowsBuilder.setLatLon(getLatLon());
 		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
 		rowsBuilder.buildInternal(view);
-		rowsBuilder.buildWikiDataRow(view);
+		if (PluginsHelper.getActivePlugin(OsmandPlugin.class) != null) {
+			rowsBuilder.buildWikiDataRow(view);
+		}
 
 		buildNearestRows((ViewGroup) view);
 		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getAltNamesMap(), true);

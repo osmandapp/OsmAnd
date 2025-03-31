@@ -87,6 +87,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + "cuisine";
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + "dish";
 	private static final String US_MAPS_RECREATION_AREA = "us_maps_recreation_area";
+	private static final String WIKI_DATA_BASE_URL = "https://www.wikidata.org/wiki/";
 
 	private final MetricsConstants metricSystem;
 	private final AdditionalInfoBundle additionalInfo;
@@ -632,7 +633,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		urls.put("ok", "https://ok.ru/%s");
 		urls.put("telegram", "https://t.me/%s");
 		urls.put("flickr", "https://flickr.com/%s");
-		urls.put("wikidata", "https://www.wikidata.org/wiki/%s");
+		urls.put("wikidata", WIKI_DATA_BASE_URL + "%s");
 
 		String url = urls.get(key);
 		if (url != null) {
@@ -766,6 +767,8 @@ public class AmenityUIHelper extends MenuBuilder {
 			String textToCopy;
 			if (hiddenUrl != null && hiddenUrl.contains(WIKI_LINK)) {
 				textToCopy = hiddenUrl;
+			} else if (hiddenUrl != null && hiddenUrl.contains(WIKI_DATA_BASE_URL)) {
+				textToCopy = text;
 			} else {
 				textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + text : text;
 			}
