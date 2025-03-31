@@ -52,9 +52,7 @@ public class PositionAnimationPreference extends Preference {
 	}
 
 	public PositionAnimationPreference(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		setLayoutResource(getLayoutId());
-		app = AndroidUtils.getApp(context);
+		this(context, attrs, 0);
 	}
 
 	public PositionAnimationPreference(Context context) {
