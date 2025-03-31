@@ -47,7 +47,6 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
-import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.*;
@@ -436,18 +435,15 @@ public class MapLayers {
 		adapter.addItem(item);
 	}
 
-	public void selectMapSourceLayer(@NonNull MapActivity mapActivity,
-									 @NonNull ContextMenuItem item,
-									 @NonNull OnDataChangeUiAdapter uiAdapter) {
+	public void selectMapSourceLayer(@NonNull MapActivity mapActivity, @NonNull ContextMenuItem item) {
 		this
-				.createMapLayerSelectionDialogFragment(mapActivity, item, Optional.of(uiAdapter))
+				.createMapLayerSelectionDialogFragment(mapActivity, item)
 				.ifPresent(mapLayerSelectionDialog -> mapLayerSelectionDialog.show(mapActivity.getSupportFragmentManager()));
 	}
 
 	public Optional<MapLayerSelectionDialogFragment> createMapLayerSelectionDialogFragment(
 			final MapActivity mapActivity,
-			final ContextMenuItem item,
-			final Optional<OnDataChangeUiAdapter> uiAdapter) {
+			final ContextMenuItem item) {
 		return createMapLayerSelectionDialogFragment(
 				mapActivity,
 				true,
@@ -455,7 +451,7 @@ public class MapLayers {
 				mapSourceName -> {
 					OsmandSettings settings = app.getSettings();
 					item.setDescription(settings.getSelectedMapSourceTitle());
-					uiAdapter.ifPresent(OnDataChangeUiAdapter::onDataSetChanged);
+					mapActivity.getDashboard().refreshContent(false);
 					return true;
 				});
 	}

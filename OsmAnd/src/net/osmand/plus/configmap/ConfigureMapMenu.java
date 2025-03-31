@@ -125,19 +125,16 @@ public class ConfigureMapMenu {
 	}
 
 	@NonNull
-	public ContextMenuAdapter createListAdapter(final @NonNull MapActivity mapActivity,
-												final Optional<OnDataChangeUiAdapter> uiAdapter) {
+	public ContextMenuAdapter createListAdapter(final @NonNull MapActivity mapActivity) {
 		return this
 				.createListAdapter(
 						mapActivity,
-						app.getRendererRegistry().getCurrentSelectedRenderer(),
-						uiAdapter)
+						app.getRendererRegistry().getCurrentSelectedRenderer())
 				.adapter();
 	}
 
 	public DialogsAndAdapter createListAdapter(final @NonNull MapActivity mapActivity,
-											   final RenderingRulesStorage renderer,
-											   final Optional<OnDataChangeUiAdapter> uiAdapter) {
+											   final RenderingRulesStorage renderer) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
@@ -147,7 +144,7 @@ public class ConfigureMapMenu {
 				.setLayout(R.layout.mode_toggles));
 
 		final List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(renderer, UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
-		final Optional<MapLayerSelectionDialogFragment> mapLayerDialog = createLayersItems(customRules, adapter, mapActivity, nightMode, uiAdapter);
+		final Optional<MapLayerSelectionDialogFragment> mapLayerDialog = createLayersItems(customRules, adapter, mapActivity, nightMode);
 		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
 		final RenderingAttributeDialogs renderingAttributeDialogs = createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
@@ -163,8 +160,7 @@ public class ConfigureMapMenu {
 	private Optional<MapLayerSelectionDialogFragment> createLayersItems(@NonNull List<RenderingRuleProperty> customRules,
 																		@NonNull ContextMenuAdapter adapter,
 																		@NonNull MapActivity activity,
-																		boolean nightMode,
-																		final Optional<OnDataChangeUiAdapter> uiAdapter) {
+																		boolean nightMode) {
 		int selectedProfileColor = settings.getApplicationMode().getProfileColor(nightMode);
 		MapLayerMenuListener listener = new MapLayerMenuListener(activity);
 
@@ -250,8 +246,7 @@ public class ConfigureMapMenu {
 		final Optional<MapLayerSelectionDialogFragment> mapLayerSelectionDialogFragment =
 				activity.getMapLayers().createMapLayerSelectionDialogFragment(
 						activity,
-						mapSourceItem,
-						uiAdapter);
+						mapSourceItem);
 
 		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
