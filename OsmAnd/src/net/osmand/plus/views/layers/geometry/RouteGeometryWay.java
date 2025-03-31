@@ -21,7 +21,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.layers.RouteLayer.ActionPoint;
+import net.osmand.plus.views.layers.RouteActionPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
@@ -115,10 +115,10 @@ public class RouteGeometryWay extends
 		return false;
 	}
 
-	public void setForceIncludedPointIndexesFromActionPoints(@Nullable List<ActionPoint> actionPoints) {
+	public void setForceIncludedPointIndexesFromActionPoints(@Nullable List<RouteActionPoint> actionPoints) {
 		List<Integer> indexes = new ArrayList<>();
 		if (actionPoints != null) {
-			for (ActionPoint actionPoint : actionPoints) {
+			for (RouteActionPoint actionPoint : actionPoints) {
 				if (actionPoint != null) {
 					indexes.add(actionPoint.index);
 					if (actionPoint.normalizedOffset > 0) {
@@ -298,12 +298,12 @@ public class RouteGeometryWay extends
 		}
 	}
 
-	public List<List<ActionPoint>> getActionArrows(List<ActionPoint> actionPoints) {
-		List<List<ActionPoint>> ll = new ArrayList<>();
+	public List<List<RouteActionPoint>> getActionArrows(List<RouteActionPoint> actionPoints) {
+		List<List<RouteActionPoint>> ll = new ArrayList<>();
 		ll.add(new ArrayList<>());
 		int index = 0;
 		for (int i = 0; i < actionPoints.size(); i++) {
-			ActionPoint actionPoint = actionPoints.get(i);
+			RouteActionPoint actionPoint = actionPoints.get(i);
 			if (actionPoint != null) {
 				ll.get(index).add(actionPoint);
 			} else if (i < actionPoints.size() - 1) {
@@ -314,23 +314,23 @@ public class RouteGeometryWay extends
 		return ll;
 	}
 
-	public void buildActionArrows(@NonNull List<ActionPoint> actionPoints, int customTurnArrowColor) {
+	public void buildActionArrows(@NonNull List<RouteActionPoint> actionPoints, int customTurnArrowColor) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
 		}
 		int baseOrder = this.baseOrder - 1000;
-		List<List<ActionPoint>> actionArrows = getActionArrows(actionPoints);
+		List<List<RouteActionPoint>> actionArrows = getActionArrows(actionPoints);
 		if (!actionArrows.isEmpty()) {
 			int lineIdx = 0;
 			if (actionLinesCollection == null) {
 				actionLinesCollection = new VectorLinesCollection();
 			}
 			long initialLinesCount = actionLinesCollection.getLines().size();
-			for (List<ActionPoint> line : actionArrows) {
+			for (List<RouteActionPoint> line : actionArrows) {
 				int arrowColor = getContrastArrowColor(line, customTurnArrowColor);
 				QVectorPointI points = new QVectorPointI();
-				for (ActionPoint point : line) {
+				for (RouteActionPoint point : line) {
 					int x = MapUtils.get31TileNumberX(point.location.getLongitude());
 					int y = MapUtils.get31TileNumberY(point.location.getLatitude());
 					points.add(new PointI(x, y));
@@ -364,7 +364,7 @@ public class RouteGeometryWay extends
 	}
 
 	@ColorInt
-	public int getContrastArrowColor(@NonNull List<ActionPoint> line, @ColorInt int originalArrowColor) {
+	public int getContrastArrowColor(@NonNull List<RouteActionPoint> line, @ColorInt int originalArrowColor) {
 		Context context = getContext().getCtx();
 
 		int lightColor = ColorUtilities.getSecondaryIconColor(context, false);
@@ -375,7 +375,7 @@ public class RouteGeometryWay extends
 		lowDistanceCounts.put(lightColor, 0);
 		lowDistanceCounts.put(darkColor, 0);
 
-		for (ActionPoint actionPoint : line) {
+		for (RouteActionPoint actionPoint : line) {
 			Integer lineColor = getActionPointColor(actionPoint);
 			if (lineColor == null) {
 				return originalArrowColor;
@@ -410,7 +410,7 @@ public class RouteGeometryWay extends
 	}
 
 	@ColorInt
-	private Integer getActionPointColor(@NonNull ActionPoint actionPoint) {
+	private Integer getActionPointColor(@NonNull RouteActionPoint actionPoint) {
 		if (styleMap.isEmpty()) {
 			return getDefaultWayStyle().getColor();
 		}

@@ -9,12 +9,15 @@ import net.osmand.Location;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -277,5 +280,63 @@ public class GpxUtils {
 		intermediatePoint.setLat(prevPoint.getLat() + dLat);
 		intermediatePoint.setLon(prevPoint.getLon() + dLon);
 		return intermediatePoint;
+	}
+
+	@Nullable
+	public static double[] calculateProjectionOnRoutePoint(@NonNull RoutingHelper helper,
+			@NonNull RotatedTileBox box, boolean outPixel) {
+		double[] projectionXY = null;
+		Location ll = helper.getLastFixedLocation();
+		RouteCalculationResult route = helper.getRoute();
+		List<Location> locs = route.getImmutableAllLocations();
+		int cr = route.getCurrentRoute();
+		int locIndex = locs.size() - 1;
+		if (route.getIntermediatePointsToPass() > 0) {
+			locIndex = route.getIndexOfIntermediate(route.getIntermediatePointsToPass() - 1);
+		}
+		if (ll != null && cr > 0 && cr < locs.size() && locIndex >= 0 && locIndex < locs.size()) {
+			Location loc1 = locs.get(cr - 1);
+			Location loc2 = locs.get(cr);
+			double distLeft = route.getDistanceFromPoint(cr) - route.getDistanceFromPoint(locIndex);
+			double baDist = route.getDistanceFromPoint(cr - 1) - route.getDistanceFromPoint(cr);
+			Location target = locs.get(locIndex);
+			double dTarget = ll.distanceTo(target);
+			if (outPixel) {
+				int aX = box.getPixXFromLonNoRot(loc1.getLongitude());
+				int aY = box.getPixYFromLatNoRot(loc1.getLatitude());
+				int bX = box.getPixXFromLonNoRot(loc2.getLongitude());
+				int bY = box.getPixYFromLatNoRot(loc2.getLatitude());
+				if (baDist != 0) {
+					double CF = (dTarget - distLeft) / baDist;
+					double rX = bX - CF * (bX - aX);
+					double rY = bY - CF * (bY - aY);
+					projectionXY = new double[] {rX, rY};
+				}
+			} else {
+				double l1Lon = loc1.getLongitude();
+				double l1Lat = loc1.getLatitude();
+				double l2Lon = loc2.getLongitude();
+				double l2Lat = loc2.getLatitude();
+				if (baDist != 0) {
+					double CF = (dTarget - distLeft) / baDist;
+					double lon = l2Lon - CF * (l2Lon - l1Lon);
+					double lat = l2Lat - CF * (l2Lat - l1Lat);
+					return new double[] {l2Lat, l2Lon};
+				} else {
+					return null;
+				}
+			}
+		}
+		if (projectionXY != null) {
+
+			double distanceLoc2Proj = MapUtils.getSqrtDistance((int) projectionXY[0], (int) projectionXY[1],
+					box.getPixXFromLonNoRot(ll.getLongitude()), box.getPixYFromLatNoRot(ll.getLatitude()));
+			boolean visible = box.containsPoint((float) projectionXY[0], (float) projectionXY[1], 20.0f)
+					&& distanceLoc2Proj > AndroidUtils.dpToPx(helper.getApplication(), 52) / 2.0;
+			if (visible) {
+				return projectionXY;
+			}
+		}
+		return null;
 	}
 }
