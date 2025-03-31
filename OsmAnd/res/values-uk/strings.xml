@@ -5747,4 +5747,13 @@
     <string name="destination_first">Перше місце призначення</string>
     <string name="display_priority">Пріоритет відображення</string>
     <string name="poi_source">Джерело POI</string>
+    <string name="read_on_wiki">Прочитайте у Вікіпедії</string>
+    <string name="wikidata">Вікідані</string>
+    <string name="prediction_time_description">Значок положення в OsmAnd анімується з кожною отриманою точкою GPS-даних (раз на секунду). Невелика затримка в її русі може бути помітна, особливо коли користувач швидко рухається або коли сигнал GPS коливається.</string>
+    <string name="prediction_time_advanced_description">Налаштуйте час передбачення, щоб мінімізувати затримку.</string>
+    <string name="prediction_time">Час передбачення</string>
+    <string name="shared_string_no_animation">Без анімація</string>
+    <string name="position_animation_empty_banner_description">Піктограма позиції переміщується до кожного нового отриманого місця без анімації.</string>
+    <string name="position_animation">Анімація позиції</string>
+    <string name="wiki_around">Популярні місця поруч</string>
 </resources>
