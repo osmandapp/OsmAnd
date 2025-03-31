@@ -94,18 +94,17 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			if(Algorithms.isEmpty(description)) {
 				hasData = false;
 				description = amenity.getFlattenedNames();
-			}else {
-				description = description.substring(0, Math.min(description.length(), 400));
 			}
 			if (!Algorithms.isEmpty(description)) {
 				View view12 = buildRow(view, 0, null, description, 0, true,
-						null, false, 1, false, null, false);
+						null, false, 0, false, null, false);
 				TextViewEx textView = view12.findViewById(R.id.text);
+				final String descriptionToSet = description;
 				textView.setOnClickListener(v -> {
 					descriptionCollapsed = !descriptionCollapsed;
-					updateDescriptionState(textView);
+					updateDescriptionState(textView, descriptionToSet);
 				});
-				updateDescriptionState(textView);
+				updateDescriptionState(textView, descriptionToSet);
 				String btnText = app.getString(hasData ? R.string.context_menu_read_full_article : R.string.read_on_wiki);
 				buildReadFullButton((LinearLayout) view, btnText, (v) -> {
 					WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
@@ -115,8 +114,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		buildNearestPhotos((ViewGroup) view, amenity);
 	}
 
-	private void updateDescriptionState(TextViewEx textView) {
-		textView.setMaxLines(descriptionCollapsed ? 4 : Integer.MAX_VALUE);
+	private void updateDescriptionState(TextViewEx textView, String description) {
+		String text = description;
+		if(descriptionCollapsed) {
+			text = description.substring(0, Math.min(description.length(), 200));
+			if(description.length() > text.length()) {
+				text += "...";
+			}
+		}
+		textView.setText(text);
 	}
 
 	@Override
