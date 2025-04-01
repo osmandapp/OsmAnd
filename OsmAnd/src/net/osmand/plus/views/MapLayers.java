@@ -42,6 +42,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment;
+import net.osmand.plus.widgets.alert.SelectionDialogFragmentFactory;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -481,6 +482,7 @@ public class MapLayers {
 				new AlertDialogData(mapActivity, nightMode)
 						.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
 						.setNegativeButton(R.string.shared_string_dismiss, null);
+		// FK-TODO: directly use SelectionDialogFragmentFactory.DialogData instead of ItemByKeyAndSelectedItem
 		final ItemByKeyAndSelectedItem itemByKeyAndSelectedItem =
 				getItemByKeyAndSelectedItem(
 						includeOfflineMaps,
@@ -488,8 +490,11 @@ public class MapLayers {
 		return Optional.of(
 				CustomAlert.createMapLayerSelectionDialogFragment(
 						dialogData,
-						itemByKeyAndSelectedItem.itemByKey(),
-						itemByKeyAndSelectedItem.selectedItem(),
+						new SelectionDialogFragmentFactory.DialogData(
+								new ArrayList<>(itemByKeyAndSelectedItem.itemByKey().keySet()),
+								new ArrayList<>(itemByKeyAndSelectedItem.itemByKey().values()),
+								Optional.empty(),
+								itemByKeyAndSelectedItem.selectedItem()),
 						new View.OnClickListener() {
 
 							private final List<String> keys = new ArrayList<>(itemByKeyAndSelectedItem.itemByKey().keySet());

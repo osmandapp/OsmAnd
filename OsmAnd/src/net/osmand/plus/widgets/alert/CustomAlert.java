@@ -94,25 +94,21 @@ public class CustomAlert {
 
 	public static MapLayerSelectionDialogFragment createMapLayerSelectionDialogFragment(
 			final AlertDialogData data,
-			final Map<String, CharSequence> itemByKey,
-			final int selectedEntryIndex,
+			final SelectionDialogFragmentFactory.DialogData dialogData,
 			final View.OnClickListener itemClickListener) {
 		return SelectionDialogFragmentFactory.createMapLayerSelectionDialogFragment(
 				data,
-				itemByKey,
-				selectedEntryIndex,
+				dialogData,
 				itemClickListener);
 	}
 
 	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
 			final AlertDialogData data,
-			final Map<String, CharSequence> itemByKey,
-			final int selectedEntryIndex,
+			final SelectionDialogFragmentFactory.DialogData dialogData,
 			final View.OnClickListener itemClickListener) {
 		return SelectionDialogFragmentFactory.createRoadStyleSelectionDialogFragment(
 				data,
-				itemByKey,
-				selectedEntryIndex,
+				dialogData,
 				itemClickListener);
 	}
 
@@ -131,6 +127,7 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
+	// FK-TODO: move to SelectionDialogFragmentFactory
 	public static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
 			final AlertDialogData data,
 			final Map<String, CharSequence> itemByKey,

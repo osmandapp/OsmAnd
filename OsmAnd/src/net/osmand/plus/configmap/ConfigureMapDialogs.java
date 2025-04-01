@@ -379,14 +379,22 @@ public class ConfigureMapDialogs {
 			final @NonNull RenderingRuleProperty property,
 			final @NonNull ContextMenuItem item,
 			final boolean nightMode) {
+		// FK-TODO: directly use SelectionDialogFragmentFactory.DialogData
+		final Map<String, CharSequence> sortedItemByKey =
+				ConfigureMapUtils.getSortedItemByKey(
+						property,
+						activity.getMyApplication());
 		return CustomAlert
 				.createRoadStyleSelectionDialogFragment(
 						new AlertDialogData(activity, nightMode)
 								.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
 								.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
 								.setNegativeButton(R.string.shared_string_dismiss, null),
-						ConfigureMapUtils.getSortedItemByKey(property, activity.getMyApplication()),
-						getSelectedIndex(activity, property),
+						new SelectionDialogFragmentFactory.DialogData(
+								sortedItemByKey.keySet().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
+								sortedItemByKey.values().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
+								Optional.empty(),
+								getSelectedIndex(activity, property)),
 						v -> {
 							final int which = (int) v.getTag();
 							final CommonPreference<String> preference = getCustomRenderProperty(activity, property);
