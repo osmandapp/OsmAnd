@@ -81,7 +81,9 @@ public class WikipediaPoiMenu {
 				} else if (itemId == R.string.show_image_previews) {
 					boolean online = settings.WIKI_DATA_SOURCE_TYPE.get() == ONLINE;
 					isChecked = isChecked && online;
-					settings.WIKI_SHOW_IMAGE_PREVIEWS.set(isChecked);
+					if (online) {
+						settings.WIKI_SHOW_IMAGE_PREVIEWS.set(isChecked);
+					}
 					item.setSelected(isChecked);
 					item.setColor(app, isChecked ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID);
 					item.setIcon(isChecked ? R.drawable.ic_action_photo : R.drawable.ic_action_image_disabled);
