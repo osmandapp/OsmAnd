@@ -583,7 +583,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 								new SelectionDialogFragmentData(
 										Arrays.stream(names).collect(Collectors.toUnmodifiableList()),
 										Arrays.stream(names).collect(Collectors.toUnmodifiableList()),
-										Optional.ofNullable(selected),
+										Optional.of(selected),
 										INVALID_ID),
 								v -> {
 									Activity _activity = activityRef.get();
