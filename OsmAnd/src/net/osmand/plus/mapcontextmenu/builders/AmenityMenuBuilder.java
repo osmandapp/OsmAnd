@@ -48,6 +48,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected Amenity amenity;
 	private AmenityUIHelper rowsBuilder;
 	protected Map<String, String> additionalInfo;
+	boolean descriptionCollapsed = true;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
@@ -56,7 +57,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
 		additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
-		setCustomOnlinePhotosPosition(true);
+		if (amenity.getType().isWiki()) {
+			setCustomOnlinePhotosPosition(true);
+		}
 	}
 
 	@Override
@@ -67,14 +70,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected void buildNearestPoiRow(ViewGroup view) {
 	}
 
-	boolean descriptionCollapsed = true;
-	boolean hasData = false;
 	@Override
 	protected void buildDescription(View view) {
-		if (amenity != null) {
-			hasData = true;
+		if (amenity != null && amenity.getType().isWiki()) {
+			boolean hasData = true;
 			String description = amenity.getAdditionalInfo(Amenity.SHORT_DESCRIPTION);
-			if(description == null) {
+			if (description == null) {
 				AdditionalInfoBundle additionalInfoBundle = new AdditionalInfoBundle(app, amenity.getAmenityExtensions(app.getPoiTypes(), false));
 				Map<String, Object> filteredInfo = additionalInfoBundle.getFilteredLocalizedInfo();
 				Object descriptionMapObject = filteredInfo.get(Amenity.SHORT_DESCRIPTION);
@@ -91,7 +92,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					}
 				}
 			}
-			if(Algorithms.isEmpty(description)) {
+			if (Algorithms.isEmpty(description)) {
 				hasData = false;
 				description = amenity.getFlattenedNames();
 			}
@@ -110,15 +111,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
 				});
 			}
+			buildNearestPhotos((ViewGroup) view, amenity);
 		}
-		buildNearestPhotos((ViewGroup) view, amenity);
 	}
 
 	private void updateDescriptionState(TextViewEx textView, String description) {
 		String text = description;
-		if(descriptionCollapsed) {
+		if (descriptionCollapsed) {
 			text = description.substring(0, Math.min(description.length(), 200));
-			if(description.length() > text.length()) {
+			if (description.length() > text.length()) {
 				text += app.getString(R.string.shared_string_ellipsis);
 			}
 		}
