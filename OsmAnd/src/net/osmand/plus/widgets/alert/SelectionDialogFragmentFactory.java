@@ -4,49 +4,17 @@ import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.plus.settings.fragments.search.Collectors;
-
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
-import de.KnollFrank.lib.settingssearch.common.Lists;
 
 public class SelectionDialogFragmentFactory {
 
-	public record DialogData(List<String> keys,
-							 List<CharSequence> items,
-							 Optional<boolean[]> checkedItems,
-							 int selectedItemIndex) {
-
-		public DialogData {
-			if (keys.size() != items.size()) {
-				throw new IllegalArgumentException("keys and items must have the same size");
-			}
-			if (checkedItems.isPresent() && checkedItems.orElseThrow().length != keys.size()) {
-				throw new IllegalArgumentException("checkedItems must have the same size as keys");
-			}
-		}
-
-		public Map<String, CharSequence> orderedItemByKey() {
-			return Lists
-					.zip(keys(), items())
-					.stream()
-					.collect(
-							Collectors.toOrderedMap(
-									keyItemPair -> keyItemPair.first,
-									keyItemPair -> keyItemPair.second));
-
-		}
-	}
-
 	public static MapLayerSelectionDialogFragment createMapLayerSelectionDialogFragment(
 			final AlertDialogData data,
-			final DialogData dialogData,
+			final SelectionDialogFragmentData selectionDialogFragmentData,
 			final View.OnClickListener itemClickListener) {
 		return createSelectionDialogFragment(
 				data,
-				dialogData,
+				selectionDialogFragmentData,
 				itemClickListener,
 				false,
 				MapLayerSelectionDialogFragment::new);
@@ -54,11 +22,11 @@ public class SelectionDialogFragmentFactory {
 
 	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
 			final AlertDialogData data,
-			final DialogData dialogData,
+			final SelectionDialogFragmentData selectionDialogFragmentData,
 			final View.OnClickListener itemClickListener) {
 		return createSelectionDialogFragment(
 				data,
-				dialogData,
+				selectionDialogFragmentData,
 				itemClickListener,
 				false,
 				RoadStyleSelectionDialogFragment::new);
@@ -66,11 +34,11 @@ public class SelectionDialogFragmentFactory {
 
 	public static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
 			final AlertDialogData data,
-			final DialogData dialogData,
+			final SelectionDialogFragmentData selectionDialogFragmentData,
 			final View.OnClickListener itemClickListener) {
 		return createSelectionDialogFragment(
 				data,
-				dialogData,
+				selectionDialogFragmentData,
 				itemClickListener,
 				true,
 				MultiSelectionDialogFragment::new);
@@ -87,16 +55,16 @@ public class SelectionDialogFragmentFactory {
 
 	private static <F extends SelectionDialogFragment> F createSelectionDialogFragment(
 			final AlertDialogData data,
-			final DialogData dialogData,
+			final SelectionDialogFragmentData selectionDialogFragmentData,
 			final View.OnClickListener itemClickListener,
 			final boolean useMultiSelection,
 			final _SelectionDialogFragmentFactory<F> selectionDialogFragmentFactory) {
 		final SelectionDialogAdapter adapter =
 				new SelectionDialogAdapter(
 						data.getContext(),
-						dialogData.items().toArray(new CharSequence[0]),
-						dialogData.selectedItemIndex(),
-						dialogData.checkedItems().orElse(null),
+						selectionDialogFragmentData.items().toArray(new CharSequence[0]),
+						selectionDialogFragmentData.selectedItemIndex(),
+						selectionDialogFragmentData.checkedItems().orElse(null),
 						data.getControlsColor(),
 						data.isNightMode(),
 						itemClickListener,
@@ -110,7 +78,7 @@ public class SelectionDialogFragmentFactory {
 		return selectionDialogFragmentFactory.create(
 				alertDialog,
 				data,
-				dialogData.orderedItemByKey(),
+				selectionDialogFragmentData.orderedItemByKey(),
 				adapter);
 	}
 }

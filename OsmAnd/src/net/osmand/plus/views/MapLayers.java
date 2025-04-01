@@ -39,10 +39,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.*;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
-import net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment;
-import net.osmand.plus.widgets.alert.SelectionDialogFragmentFactory;
+import net.osmand.plus.widgets.alert.*;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -490,7 +487,7 @@ public class MapLayers {
 		return Optional.of(
 				CustomAlert.createMapLayerSelectionDialogFragment(
 						dialogData,
-						new SelectionDialogFragmentFactory.DialogData(
+						new SelectionDialogFragmentData(
 								new ArrayList<>(itemByKeyAndSelectedItem.itemByKey().keySet()),
 								new ArrayList<>(itemByKeyAndSelectedItem.itemByKey().values()),
 								Optional.empty(),

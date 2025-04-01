@@ -391,7 +391,7 @@ public class ConfigureMapDialogs {
 								.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
 								.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
 								.setNegativeButton(R.string.shared_string_dismiss, null),
-						new SelectionDialogFragmentFactory.DialogData(
+						new SelectionDialogFragmentData(
 								sortedItemByKey.keySet().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
 								sortedItemByKey.values().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
 								Optional.empty(),
@@ -485,7 +485,7 @@ public class ConfigureMapDialogs {
 		final Map<String, CharSequence> orderedItemByKey = getOrderedItemByKey(properties, activity);
 		return CustomAlert.createMultiSelectionDialogFragment(
 				dialogData,
-				new SelectionDialogFragmentFactory.DialogData(
+				new SelectionDialogFragmentData(
 						orderedItemByKey.keySet().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
 						orderedItemByKey.values().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
 						Optional.of(checkedItems),

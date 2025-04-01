@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import java.util.Map;
 
+// FK-FIXME: suche nach CyclOSM, klicke auf eines der Suchergebnisse, dann wird der Dialog fehlerhafterweise nicht geöffnet und folglich wird auch CyclOSM nicht gehighlightet, vielleicht weil CyclOSM ein Fahrradsymbol hat?
 public class MapLayerSelectionDialogFragment extends SelectionDialogFragment {
 
 	public MapLayerSelectionDialogFragment(final AlertDialog alertDialog,

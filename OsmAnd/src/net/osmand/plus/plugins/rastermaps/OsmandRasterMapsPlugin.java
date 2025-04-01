@@ -7,6 +7,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.resources.ResourceManager.ResourceListener;
+import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -47,8 +48,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.*;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -58,9 +58,8 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -521,8 +520,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return overlayLayerMapSource != null && overlayLayerMapSource.couldBeDownloadedFromInternet();
 	}
 
-	public static void installMapLayers(@NonNull Activity activity, ResultMatcher<TileSourceTemplate> result) {
-		WeakReference<Activity> activityRef = new WeakReference<>(activity);
+	public static void installMapLayers(@NonNull FragmentActivity activity, ResultMatcher<TileSourceTemplate> result) {
+		WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		OsmandSettings settings = app.getSettings();
 		if (!settings.isInternetConnectionAvailable(true)) {
@@ -535,8 +534,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app), true);
 			}
 
-			protected void onPostExecute(java.util.List<TileSourceTemplate> downloaded) {
-				Activity activity = activityRef.get();
+			protected void onPostExecute(final List<TileSourceTemplate> downloaded) {
+				FragmentActivity activity = activityRef.get();
 				if (activity == null || activity.isFinishing()) {
 					return;
 				}
@@ -578,18 +577,26 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 								}
 							}
 						});
-
-				CustomAlert.showMultiSelection(dialogData, names, selected, v -> {
-					Activity _activity = activityRef.get();
-					if (_activity != null && !_activity.isFinishing()) {
-						Map<String, String> entriesMap = settings.getTileSourceEntries();
-						int which = (int) v.getTag();
-						selected[which] = !selected[which];
-						if (entriesMap.containsKey(downloaded.get(which).getName()) && selected[which]) {
-							Toast.makeText(_activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
-						}
-					}
-				});
+				CustomAlert
+						.createMultiSelectionDialogFragment(
+								dialogData,
+								new SelectionDialogFragmentData(
+										Arrays.stream(names).collect(Collectors.toUnmodifiableList()),
+										Arrays.stream(names).collect(Collectors.toUnmodifiableList()),
+										Optional.ofNullable(selected),
+										INVALID_ID),
+								v -> {
+									Activity _activity = activityRef.get();
+									if (_activity != null && !_activity.isFinishing()) {
+										Map<String, String> entriesMap = settings.getTileSourceEntries();
+										final int which = (int) v.getTag();
+										selected[which] = !selected[which];
+										if (entriesMap.containsKey(downloaded.get(which).getName()) && selected[which]) {
+											Toast.makeText(_activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+										}
+									}
+								})
+						.show(activity.getSupportFragmentManager());
 			}
 		};
 		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

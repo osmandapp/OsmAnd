@@ -1,7 +1,6 @@
 package net.osmand.plus.widgets.alert;
 
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE;
-import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -92,46 +91,31 @@ public class CustomAlert {
 
 	public static MapLayerSelectionDialogFragment createMapLayerSelectionDialogFragment(
 			final AlertDialogData data,
-			final SelectionDialogFragmentFactory.DialogData dialogData,
+			final SelectionDialogFragmentData selectionDialogFragmentData,
 			final View.OnClickListener itemClickListener) {
 		return SelectionDialogFragmentFactory.createMapLayerSelectionDialogFragment(
 				data,
-				dialogData,
+				selectionDialogFragmentData,
 				itemClickListener);
 	}
 
 	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
 			final AlertDialogData data,
-			final SelectionDialogFragmentFactory.DialogData dialogData,
+			final SelectionDialogFragmentData selectionDialogFragmentData,
 			final View.OnClickListener itemClickListener) {
 		return SelectionDialogFragmentFactory.createRoadStyleSelectionDialogFragment(
 				data,
-				dialogData,
+				selectionDialogFragmentData,
 				itemClickListener);
-	}
-
-	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
-										  @Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener) {
-		// FK-TODO: use method createMultiSelectionDialogFragment()
-		AlertDialog.Builder builder = createAlertDialogBuilder(data);
-		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
-				data.getContext(), items, INVALID_ID, checkedItems,
-				data.getControlsColor(), data.isNightMode(), itemClickListener, true
-		);
-		builder.setAdapter(adapter, null);
-
-		AlertDialog dialog = builder.show();
-		applyAdditionalParameters(dialog, data);
-		adapter.setDialog(dialog);
 	}
 
 	public static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
 			final AlertDialogData data,
-			final SelectionDialogFragmentFactory.DialogData dialogData,
+			final SelectionDialogFragmentData selectionDialogFragmentData,
 			final View.OnClickListener itemClickListener) {
 		return SelectionDialogFragmentFactory.createMultiSelectionDialogFragment(
 				data,
-				dialogData,
+				selectionDialogFragmentData,
 				itemClickListener);
 	}
 
