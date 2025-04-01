@@ -136,7 +136,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 		setupButtonListeners();
 		setupToolbar();
-			lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
+		lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
 			@Override
 			public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
 				super.onFragmentDestroyed(fm, f);

@@ -302,11 +302,13 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		} else if (holder instanceof WidgetViewHolder widgetViewHolder) {
 			widgetViewHolder.bind(mapActivity, selectedAppMode, listener, itemTouchHelper, (WidgetItem) item, iconsHelper, position, nightMode);
 		} else if (holder instanceof AddPageViewHolder addPageViewHolder) {
-			addPageViewHolder.bind(listener);
+			addPageViewHolder.bind(app, listener, isVerticalPanel, selectedAppMode, nightMode);
 		} else if (holder instanceof SpaceViewHolder spaceViewHolder) {
 			spaceViewHolder.bind(mapActivity);
 		} else if (holder instanceof EmptyStateViewHolder emptyStateViewHolder) {
 			emptyStateViewHolder.bind(app, listener, nightMode);
+		} else if(holder instanceof DividerViewHolder dividerViewHolder){
+			dividerViewHolder.bind();
 		}
 	}
 

@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
-import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.settings.bottomsheets.WidgetsResetConfirmationBottomSheet.*;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.utils.WidgetUtils.createNewWidget;
 
@@ -21,8 +21,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
@@ -81,6 +83,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private WidgetsPanel selectedPanel;
 	private ApplicationMode selectedAppMode;
 	private WidgetsListFragment selectedFragment;
+	private OnBackPressedCallback onBackPressedCallback;
+	private FragmentLifecycleCallbacks lifecycleCallbacks;
 
 	private Toolbar toolbar;
 	private AppBarLayout appBar;
@@ -130,6 +134,12 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 				|| args.containsKey(ADD_TO_NEXT))) {
 			addNewWidget();
 		}
+		onBackPressedCallback = new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				closeFragment();
+			}
+		};
 	}
 
 	@Nullable
@@ -162,12 +172,36 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			}
 		});
 
+		lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
+			@Override
+			public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+				super.onFragmentDestroyed(fm, f);
+				Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.fragmentContainer);
+				if (currentFragment instanceof ConfigureWidgetsFragment) {
+					onBackPressedCallback.setEnabled(true);
+				}
+			}
+
+			@Override
+			public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+				super.onFragmentResumed(fm, f);
+				onBackPressedCallback.setEnabled(false);
+			}
+		};
+		getParentFragmentManager().registerFragmentLifecycleCallbacks(lifecycleCallbacks, false);
+
 		setupToolbar();
 		setupTabLayout();
 		setupApplyButton();
 		updateScreen();
 
 		return view;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), onBackPressedCallback);
 	}
 
 	private void closeFragment() {
@@ -191,7 +225,9 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 				toggleEditMode(true);
 				selectedFragment.updateEditMode();
 			} else if (selectedFragment != null) {
-				selectedFragment.resetToOriginal();
+				v.postDelayed(() -> {
+					selectedFragment.resetToOriginal();
+				}, 200);
 			}
 		});
 
@@ -511,6 +547,13 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		super.onResume();
 		setupController();
 		updateStatusBar();
+		onBackPressedCallback.setEnabled(true);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		onBackPressedCallback.setEnabled(false);
 	}
 
 	@Override
@@ -521,6 +564,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		if (activity != null && !activity.isChangingConfigurations()) {
 			dialogManager.unregister(ConfigureWidgetsController.PROCESS_ID);
 		}
+		getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 	private String title;
 	private String description;
 	private DialogButtonType buttonType;
-	private int actionId;
+	protected int actionId;
 	@StringRes
 	private int buttonTitleId;
 
