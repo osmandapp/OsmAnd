@@ -55,7 +55,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	private static final Log LOG = PlatformUtil.getLog(QuickSearchListFragment.class);
@@ -215,12 +214,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 		if (pair.second instanceof Amenity amenity) {
 			if (amenity.isRouteTrack()) {
-				String membersTag = amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS);
-				if (membersTag != null) {
-					Map<String, List<Amenity>> members = app.getResourceManager().searchRouteMembers(membersTag, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true);
-					List<Amenity> patOf = app.getResourceManager().searchRoutePartOf("O1773067", amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
-					System.out.println("For test only");
-				}
 				TravelHelper travelHelper = app.getTravelHelper();
 				TravelGpx travelGpx = new TravelGpx(amenity);
 

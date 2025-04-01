@@ -4,7 +4,6 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.ROUTE_ID;
-import static net.osmand.data.Amenity.ROUTE_MEMBERS_IDS;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.OsmRouteType.HIKING;
@@ -474,26 +473,15 @@ public class MapSelectionHelper {
 		if (!Algorithms.isEmpty(tags) && tags.containsKey(TRAVEL_MAP_TO_POI_TAG) && "point".equals(tags.get(ROUTE))) {
 			names.add(tags.get(TRAVEL_MAP_TO_POI_TAG)); // additional attribute for TravelGpx points (route_id)
 		}
-		/* --- */
 		String routeId = tags.get(ROUTE_ID);
 		if (routeId != null) {
-			// find all
 			Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(routeId, latLon.getLatitude(), latLon.getLongitude());
 			List<Amenity> list = map.get(routeId);
-			amenity = list == null ? null : list.get(0);
-			System.out.println("For test only");
+			amenity = Algorithms.isEmpty(list) ? null : list.get(0);
 		}
 		if (amenity == null) {
 			long id = obfMapObject.getId().getId().longValue();
 			amenity = findAmenity(app, latLon, names, id);
-		}
-		if (amenity != null) {
-			/* --- */
-			String membersTag = amenity.getAdditionalInfo(ROUTE_MEMBERS_IDS);
-			if (membersTag != null) {
-				Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(membersTag, latLon.getLatitude(), latLon.getLongitude());
-			}
-			System.out.println("For test only");
 		}
 		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
