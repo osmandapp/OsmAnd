@@ -382,14 +382,13 @@ public class ConfigureMapDialogs {
 			final @NonNull RenderingRuleProperty property,
 			final @NonNull ContextMenuItem item,
 			final boolean nightMode) {
-		return CustomAlert
-				.createRoadStyleSelectionDialogFragment(
-						new AlertDialogData(activity, nightMode)
-								.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
-								.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
-								.setNegativeButton(R.string.shared_string_dismiss, null),
-						getSelectionDialogFragmentData(property, activity),
-						v -> {
+		return SelectionDialogFragmentFactory.createRoadStyleSelectionDialogFragment(
+				new AlertDialogData(activity, nightMode)
+						.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
+						.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
+						.setNegativeButton(R.string.shared_string_dismiss, null),
+				getSelectionDialogFragmentData(property, activity),
+				v -> {
 							final int which = (int) v.getTag();
 							final CommonPreference<String> preference = getCustomRenderProperty(activity, property);
 							preference.set(which == 0 ? "" : property.getPossibleValues()[which - 1]);
@@ -500,7 +499,7 @@ public class ConfigureMapDialogs {
 									activity.getMapLayers().updateLayers(activity);
 									activity.getDashboard().refreshContent(false);
 								});
-		return CustomAlert.createMultiSelectionDialogFragment(
+		return SelectionDialogFragmentFactory.createMultiSelectionDialogFragment(
 				dialogData,
 				getSelectionDialogFragmentData(activity, properties, checkedItems),
 				v -> {

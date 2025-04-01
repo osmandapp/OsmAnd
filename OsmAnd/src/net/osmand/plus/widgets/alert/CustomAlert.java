@@ -89,36 +89,6 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
-	public static MapLayerSelectionDialogFragment createMapLayerSelectionDialogFragment(
-			final AlertDialogData data,
-			final SelectionDialogFragmentData selectionDialogFragmentData,
-			final View.OnClickListener itemClickListener) {
-		return SelectionDialogFragmentFactory.createMapLayerSelectionDialogFragment(
-				data,
-				selectionDialogFragmentData,
-				itemClickListener);
-	}
-
-	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
-			final AlertDialogData data,
-			final SelectionDialogFragmentData selectionDialogFragmentData,
-			final View.OnClickListener itemClickListener) {
-		return SelectionDialogFragmentFactory.createRoadStyleSelectionDialogFragment(
-				data,
-				selectionDialogFragmentData,
-				itemClickListener);
-	}
-
-	public static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
-			final AlertDialogData data,
-			final SelectionDialogFragmentData selectionDialogFragmentData,
-			final View.OnClickListener itemClickListener) {
-		return SelectionDialogFragmentFactory.createMultiSelectionDialogFragment(
-				data,
-				selectionDialogFragmentData,
-				itemClickListener);
-	}
-
 	protected static AlertDialog.Builder createAlertDialogBuilder(@NonNull AlertDialogData data) {
 		Context ctx = data.getContext();
 		AlertDialog.Builder builder = new Builder(ctx);

@@ -484,7 +484,7 @@ public class MapLayers {
 						includeOfflineMaps,
 						targetLayer);
 		return Optional.of(
-				CustomAlert.createMapLayerSelectionDialogFragment(
+				SelectionDialogFragmentFactory.createMapLayerSelectionDialogFragment(
 						dialogData,
 						selectionDialogFragmentData,
 						new View.OnClickListener() {

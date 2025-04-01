@@ -12,10 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
-import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
-import net.osmand.plus.widgets.alert.SelectionDialogFragmentData;
+import net.osmand.plus.widgets.alert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +45,7 @@ class MultiSelectionDialogFragmentFactory {
 		}
 		final boolean[] selected = new boolean[downloaded.size()];
 		return Optional.of(
-				CustomAlert.createMultiSelectionDialogFragment(
+				SelectionDialogFragmentFactory.createMultiSelectionDialogFragment(
 						getAlertDialogData(downloaded, selected, activity),
 						createSelectionDialogFragmentData(downloaded, selected),
 						v -> {
