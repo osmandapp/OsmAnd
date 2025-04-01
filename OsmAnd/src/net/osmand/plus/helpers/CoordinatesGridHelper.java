@@ -26,6 +26,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -44,7 +45,6 @@ public class CoordinatesGridHelper {
 	private GridLabelsPosition cachedLabelsPosition;
 	@ColorInt private int cachedGridColorDay;
 	@ColorInt private int cachedGridColorNight;
-	@ColorInt private int cachedHaloColor;
 	private Float cachedTextScale;
 	private Boolean cachedGridShow;
 	private boolean cachedNightMode;
@@ -106,7 +106,6 @@ public class CoordinatesGridHelper {
 		cachedLabelsPosition = getGridLabelsPosition(appMode);
 		cachedGridColorDay = getGridColor(appMode, false);
 		cachedGridColorNight = getGridColor(appMode, true);
-		cachedHaloColor = getHaloColor(appMode);
 		cachedTextScale = getTextScale(appMode);
 		cachedNightMode = isNightMode(appMode);
 		cachedGridShow = shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
@@ -133,11 +132,6 @@ public class CoordinatesGridHelper {
 			cachedGridColorNight = newGridColorNight;
 			updated = true;
 		}
-		int newHaloColor = getHaloColor(appMode);
-		if (cachedHaloColor != newHaloColor) {
-			cachedHaloColor = newHaloColor;
-			updated = true;
-		}
 		float newTextScale = getTextScale(appMode);
 		if (Math.abs(cachedTextScale - newTextScale) >= 0.0001f) {
 			cachedTextScale = newTextScale;
@@ -162,7 +156,8 @@ public class CoordinatesGridHelper {
 
 		int colorInt = cachedNightMode ? cachedGridColorNight : cachedGridColorDay;
 		FColorARGB color = NativeUtilities.createFColorARGB(colorInt);
-		FColorARGB haloColor = NativeUtilities.createFColorARGB(cachedHaloColor);
+		int haloColorInt = ColorUtilities.getContrastColor(app, colorInt, true);
+		FColorARGB haloColor = NativeUtilities.createFColorARGB(haloColorInt);
 
 		gridConfig.setPrimaryProjection(projection);
 		gridConfig.setPrimaryFormat(format);
@@ -287,11 +282,6 @@ public class CoordinatesGridHelper {
 	public void resetGridColors(@NonNull ApplicationMode appMode) {
 		settings.COORDINATES_GRID_COLOR_DAY.resetModeToDefault(appMode);
 		settings.COORDINATES_GRID_COLOR_NIGHT.resetModeToDefault(appMode);
-	}
-
-	@ColorInt
-	public int getHaloColor(@NonNull ApplicationMode appMode) {
-		return Color.parseColor("#80FFFFFF");
 	}
 
 	@NonNull
