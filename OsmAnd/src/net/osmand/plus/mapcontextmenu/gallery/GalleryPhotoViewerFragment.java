@@ -72,7 +72,7 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 		imageView.setOnDoubleTapListener(new SimpleOnGestureListener() {
 			@Override
 			public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
-				Fragment target = getTargetFragment();
+				Fragment target = getParentFragment();
 				if (target instanceof GalleryPhotoPagerFragment fragment) {
 					fragment.toggleUi();
 					return true;
@@ -124,13 +124,12 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 	}
 
 	@NonNull
-	public static Fragment newInstance(int selectedPosition, Fragment target) {
+	public static Fragment newInstance(int selectedPosition) {
 		Bundle bundle = new Bundle();
 		bundle.putInt(SELECTED_POSITION_KEY, selectedPosition);
 
 		GalleryPhotoViewerFragment fragment = new GalleryPhotoViewerFragment();
 		fragment.setArguments(bundle);
-		fragment.setTargetFragment(target, 0);
 		return fragment;
 	}
 }
