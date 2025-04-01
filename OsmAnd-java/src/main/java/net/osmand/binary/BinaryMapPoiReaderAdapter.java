@@ -642,10 +642,6 @@ public class BinaryMapPoiReaderAdapter {
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
 				codedIS.popLimit(oldLim);
 				if (am != null) {
-					String mem = am.getAdditionalInfo("route_members_ids");
-					if (!Algorithms.isEmpty(mem)) {
-						System.out.println("---");
-					}
 					boolean matches = matcher.matches(am.getName().toLowerCase())
 							|| matcher.matches(am.getEnName(true).toLowerCase());
 					if (!matches) {
