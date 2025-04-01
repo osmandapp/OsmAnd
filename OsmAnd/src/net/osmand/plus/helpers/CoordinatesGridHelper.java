@@ -82,7 +82,7 @@ public class CoordinatesGridHelper {
 	public void updateGridSettings(@NonNull MapRendererView mapRenderer) {
 		boolean updateAppearance;
 		ApplicationMode appMode = settings.getApplicationMode();
-		if (gridConfig == null) {
+		if (gridConfig == null || !mapRenderer.hasSymbolsProvider(marksProvider)) {
 			gridConfig = new GridConfiguration();
 			initVariables(appMode);
 			setupMapZoomListener();
