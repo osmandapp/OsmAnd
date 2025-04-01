@@ -33,7 +33,6 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.fragments.search.Collectors;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.*;
@@ -48,6 +47,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * Object is responsible to maintain layers using by map activity
@@ -479,22 +479,15 @@ public class MapLayers {
 				new AlertDialogData(mapActivity, nightMode)
 						.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
 						.setNegativeButton(R.string.shared_string_dismiss, null);
-		// FK-TODO: directly use SelectionDialogFragmentFactory.DialogData instead of ItemByKeyAndSelectedItem
-		final ItemByKeyAndSelectedItem itemByKeyAndSelectedItem =
-				getItemByKeyAndSelectedItem(
+		final SelectionDialogFragmentData selectionDialogFragmentData =
+				getSelectionDialogFragmentData(
 						includeOfflineMaps,
 						targetLayer);
 		return Optional.of(
 				CustomAlert.createMapLayerSelectionDialogFragment(
 						dialogData,
-						new SelectionDialogFragmentData(
-								new ArrayList<>(itemByKeyAndSelectedItem.itemByKey().keySet()),
-								new ArrayList<>(itemByKeyAndSelectedItem.itemByKey().values()),
-								Optional.empty(),
-								itemByKeyAndSelectedItem.selectedItem()),
+						selectionDialogFragmentData,
 						new View.OnClickListener() {
-
-							private final List<String> keys = new ArrayList<>(itemByKeyAndSelectedItem.itemByKey().keySet());
 
 							@Override
 							public void onClick(final View v) {
@@ -504,13 +497,13 @@ public class MapLayers {
 										includeOfflineMaps,
 										targetLayer,
 										callback,
-										keys.get(which));
+										selectionDialogFragmentData.keys().get(which));
 							}
 						}));
 	}
 
-	private ItemByKeyAndSelectedItem getItemByKeyAndSelectedItem(final boolean includeOfflineMaps,
-																 final CommonPreference<String> targetLayer) {
+	private SelectionDialogFragmentData getSelectionDialogFragmentData(final boolean includeOfflineMaps,
+																	   final CommonPreference<String> targetLayer) {
 		final Map<String, String> entriesMap = getEntriesMap(includeOfflineMaps);
 		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 		final String selectedTileSourceKey = targetLayer.get();
@@ -520,7 +513,7 @@ public class MapLayers {
 			selectedItem = 0;
 		} else {
 			Entry<String, String> selectedEntry = null;
-			for (Entry<String, String> entry : entriesMap.entrySet()) {
+			for (final Entry<String, String> entry : entriesMap.entrySet()) {
 				if (entry.getKey().equals(selectedTileSourceKey)) {
 					selectedEntry = entry;
 					break;
@@ -532,8 +525,16 @@ public class MapLayers {
 				entriesMapList.add(0, selectedEntry);
 			}
 		}
-		return new ItemByKeyAndSelectedItem(
-				getItemByKey(entriesMapList),
+		return new SelectionDialogFragmentData(
+				entriesMapList
+						.stream()
+						.map(Entry::getKey)
+						.collect(Collectors.toUnmodifiableList()),
+				entriesMapList
+						.stream()
+						.map(Entry::getValue)
+						.collect(Collectors.toUnmodifiableList()),
+				Optional.empty(),
 				selectedItem);
 	}
 
@@ -549,15 +550,6 @@ public class MapLayers {
 	}
 
 	private record ItemByKeyAndSelectedItem(Map<String, CharSequence> itemByKey, int selectedItem) {
-	}
-
-	private static LinkedHashMap<String, CharSequence> getItemByKey(final List<Entry<String, String>> entries) {
-		return entries
-				.stream()
-				.collect(
-						Collectors.toOrderedMap(
-								Entry::getKey,
-								Entry::getValue));
 	}
 
 	private void onMapLayerSelected(
