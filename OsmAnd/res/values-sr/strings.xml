@@ -5726,4 +5726,13 @@
     <string name="intermediate_first">Прво међуодредиште</string>
     <string name="display_priority">Приоритет приказа</string>
     <string name="destination_first">Прва дестинација</string>
+    <string name="position_animation_empty_banner_description">Икона позиције се помера на сваку нову примљену локацију без анимације.</string>
+    <string name="wikidata">Викидата</string>
+    <string name="shared_string_no_animation">Без анимације</string>
+    <string name="read_on_wiki">Прочитајте на Википедији</string>
+    <string name="prediction_time_description">Икона позиције у ОсмАнд анимира са сваком примљеном тачком ГПС података (једном у секунди). Мало кашњење у његовом кретању може бити приметно, посебно када се корисник брзо креће или ГПС сигнал флуктуира.</string>
+    <string name="prediction_time_advanced_description">Подесите време предвиђања да бисте смањили кашњење.</string>
+    <string name="prediction_time">Време предвиђања</string>
+    <string name="position_animation">Анимација позиције</string>
+    <string name="wiki_around">Популарна места у близини</string>
 </resources>

@@ -5540,4 +5540,13 @@
     <string name="intermediate_first">Idirmheánach ar dtús</string>
     <string name="destination_first">Ceann scríbe ar dtús</string>
     <string name="poi_source">Foinse POI</string>
+    <string name="wikidata">Vicísonraí</string>
+    <string name="read_on_wiki">Léigh ar Vicipéid</string>
+    <string name="prediction_time_description">Beochan deilbhín suímh in OsmAnd le gach pointe sonraí GPS faighte (uair sa soicind). D\'fhéadfadh go mbeadh moill bheag ar a ghluaiseacht faoi deara, go háirithe nuair a bhíonn an t-úsáideoir ag bogadh go tapa nó nuair a athraíonn an comhartha GPS.</string>
+    <string name="prediction_time_advanced_description">Coigeartaigh an t-am tuartha chun moill a laghdú.</string>
+    <string name="prediction_time">Am tuar</string>
+    <string name="shared_string_no_animation">Uimh beochan</string>
+    <string name="position_animation_empty_banner_description">Bogann deilbhín an tsuímh chuig gach suíomh nua faighte gan beochan.</string>
+    <string name="position_animation">Beochan seasamh</string>
+    <string name="wiki_around">Áiteanna coitianta in aice láimhe</string>
 </resources>
