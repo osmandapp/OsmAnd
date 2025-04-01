@@ -1,10 +1,11 @@
 package net.osmand.plus.resources;
 
 
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE;
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.MULTISEARCH;
 import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.AppInitEvents.ASSETS_COPIED;
 import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SEGMENT_INDEX;
 
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
@@ -37,7 +38,6 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -83,8 +83,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -940,14 +938,11 @@ public class ResourceManager {
 	}
 
 
-	private List<Amenity> searchRouteByName(String multipleSearch, double lat, double lon, boolean force, ResultMatcher<Amenity> matcher) {
+	private List<Amenity> searchRouteByName(String multipleSearch, double lat, double lon, CollatorStringMatcher.StringMatcherMode mode, ResultMatcher<Amenity> matcher) {
 		List<AmenityIndexRepositoryBinary> list = new ArrayList<>();
 		List<Amenity> result = new ArrayList<>();
 		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
 			if (index instanceof AmenityIndexRepositoryBinary) {
-				if (index.getFile().getName().contains("World")) {
-					continue;
-				}
 				if (index.checkContains(lat, lon)) {
 					list.add(0, (AmenityIndexRepositoryBinary) index);
 				}
@@ -957,8 +952,7 @@ public class ResourceManager {
 				MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat), multipleSearch,
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher
 		);
-		req.setMatcherMode(CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS);
-		req.force = force;
+		req.setMatcherMode(mode);
 		for (AmenityIndexRepositoryBinary index : list) {
 			List<Amenity> amenities = index.searchPoiByName(req);
 			if (!Algorithms.isEmpty(amenities)) {
@@ -975,7 +969,7 @@ public class ResourceManager {
 				String members = amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS);
 				if (members != null) {
 					HashSet<String> ids = new HashSet<>();
-					Collections.addAll(ids, members.split(","));
+					Collections.addAll(ids, members.split(" "));
 					return ids.contains(routeId);
 				}
 				return false;
@@ -986,12 +980,12 @@ public class ResourceManager {
 				return false;
 			}
 		};
-		return searchRouteByName(routeId, lat, lon, false, matcher);
+		return searchRouteByName(routeId, lat, lon, CHECK_EQUALS_FROM_SPACE, matcher);
 	}
 
-	public Map<String, List<Amenity>> searchRouteMembers(String multipleSearch, double lat, double lon, boolean force) {
+	public Map<String, List<Amenity>> searchRouteMembers(String multipleSearch, double lat, double lon) {
 		HashSet<String> ids = new HashSet<>();
-		Collections.addAll(ids, multipleSearch.split(","));
+		Collections.addAll(ids, multipleSearch.split(" "));
 		ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 			@Override
 			public boolean publish(Amenity amenity) {
@@ -1006,7 +1000,7 @@ public class ResourceManager {
 		};
 
 		Map<String, List<Amenity>> map = new HashMap<>();
-		List<Amenity> result = searchRouteByName(multipleSearch, lat, lon, force, matcher);
+		List<Amenity> result = searchRouteByName(multipleSearch, lat, lon, MULTISEARCH, matcher);
 		for (Amenity am : result) {
 			String routeId = am.getAdditionalInfo(Amenity.ROUTE_ID);
 			List<Amenity> amenities = map.computeIfAbsent(routeId, l -> new ArrayList<>());

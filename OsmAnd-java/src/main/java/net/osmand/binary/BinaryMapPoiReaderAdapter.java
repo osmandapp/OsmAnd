@@ -5,6 +5,7 @@ import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
+import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -451,25 +452,22 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				if (listOfSepOffsets.size() > 0) {
-					if (req.force) {
-						for (TIntLongHashMap m : listOfSepOffsets) {
-							int[] k = m.keys();
-							offsets.put(k[0], m.get(k[0]));
-						}
-					} else {
+					if (req.matcherMode == StringMatcherMode.MULTISEARCH) {
 						for (TIntLongHashMap m : listOfSepOffsets) {
 							offsets.putAll(m);
 						}
-					}
-					/*for (int j = 1; j < listOfSepOffsets.size(); j++) {
-						TIntLongHashMap mp = listOfSepOffsets.get(j);
-						// offsets.retainAll(mp); -- calculate intresection of mp & offsets
-						for (int chKey : offsets.keys()) {
-							if (!mp.containsKey(chKey)) {
-								offsets.remove(chKey);
+					} else {
+						offsets.putAll(listOfSepOffsets.get(0));
+						for (int j = 1; j < listOfSepOffsets.size(); j++) {
+							TIntLongHashMap mp = listOfSepOffsets.get(j);
+							// offsets.retainAll(mp); -- calculate intresection of mp & offsets
+							for (int chKey : offsets.keys()) {
+								if (!mp.containsKey(chKey)) {
+									offsets.remove(chKey);
+								}
 							}
 						}
-					}*/
+					}
 				}
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return offsets;
@@ -644,6 +642,10 @@ public class BinaryMapPoiReaderAdapter {
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
 				codedIS.popLimit(oldLim);
 				if (am != null) {
+					String mem = am.getAdditionalInfo("route_members_ids");
+					if (!Algorithms.isEmpty(mem)) {
+						System.out.println("---");
+					}
 					boolean matches = matcher.matches(am.getName().toLowerCase())
 							|| matcher.matches(am.getEnName(true).toLowerCase());
 					if (!matches) {
@@ -669,10 +671,7 @@ public class BinaryMapPoiReaderAdapter {
 					}
 					if (matches) {
 						req.collectRawData(am);
-						boolean publish = req.publish(am);
-						if (req.force && publish) {
-							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-						}
+						req.publish(am);
 					}
 				}
 				break;

@@ -478,7 +478,7 @@ public class MapSelectionHelper {
 		String routeId = tags.get(ROUTE_ID);
 		if (routeId != null) {
 			// find all
-			Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(routeId, latLon.getLatitude(), latLon.getLongitude(), false);
+			Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(routeId, latLon.getLatitude(), latLon.getLongitude());
 			List<Amenity> list = map.get(routeId);
 			amenity = list == null ? null : list.get(0);
 			System.out.println("For test only");
@@ -491,7 +491,7 @@ public class MapSelectionHelper {
 			/* --- */
 			String membersTag = amenity.getAdditionalInfo(ROUTE_MEMBERS_IDS);
 			if (membersTag != null) {
-				Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(membersTag, latLon.getLatitude(), latLon.getLongitude(), true);
+				Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(membersTag, latLon.getLatitude(), latLon.getLongitude());
 			}
 			System.out.println("For test only");
 		}

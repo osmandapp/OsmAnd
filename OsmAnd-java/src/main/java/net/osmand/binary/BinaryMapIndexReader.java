@@ -1837,7 +1837,6 @@ public class BinaryMapIndexReader {
 		int numberOfReadSubtrees = 0;
 		int numberOfAcceptedSubtrees = 0;
 		boolean interrupted = false;
-		public boolean force = false;
 
 		public MapObjectStat getStat() {
 			return stat;
