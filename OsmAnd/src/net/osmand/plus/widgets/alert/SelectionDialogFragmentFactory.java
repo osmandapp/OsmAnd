@@ -5,7 +5,6 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.Map;
-import java.util.function.Function;
 
 public class SelectionDialogFragmentFactory {
 
@@ -13,50 +12,43 @@ public class SelectionDialogFragmentFactory {
 			final AlertDialogData data,
 			final Map<String, CharSequence> itemByKey,
 			final int selectedEntryIndex,
-			final View.OnClickListener itemClickListener,
-			final Function<AlertDialogData, AlertDialog.Builder> createAlertDialogBuilder) {
-		final DialogAndAdapter dialogAndAdapter =
-				createDialogAndAdapter(
-						data,
-						itemByKey,
-						selectedEntryIndex,
-						itemClickListener,
-						createAlertDialogBuilder);
-		return new MapLayerSelectionDialogFragment(
-				dialogAndAdapter.dialog(),
+			final View.OnClickListener itemClickListener) {
+		return createSelectionDialogFragment(
 				data,
 				itemByKey,
-				dialogAndAdapter.adapter());
+				selectedEntryIndex,
+				itemClickListener,
+				MapLayerSelectionDialogFragment::new);
 	}
 
 	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
 			final AlertDialogData data,
 			final Map<String, CharSequence> itemByKey,
 			final int selectedEntryIndex,
-			final View.OnClickListener itemClickListener,
-			final Function<AlertDialogData, AlertDialog.Builder> createAlertDialogBuilder) {
-		final DialogAndAdapter dialogAndAdapter =
-				createDialogAndAdapter(
-						data,
-						itemByKey,
-						selectedEntryIndex,
-						itemClickListener,
-						createAlertDialogBuilder);
-		return new RoadStyleSelectionDialogFragment(
-				dialogAndAdapter.dialog(),
+			final View.OnClickListener itemClickListener) {
+		return createSelectionDialogFragment(
 				data,
 				itemByKey,
-				dialogAndAdapter.adapter());
+				selectedEntryIndex,
+				itemClickListener,
+				RoadStyleSelectionDialogFragment::new);
 	}
 
-	private record DialogAndAdapter(AlertDialog dialog, SelectionDialogAdapter adapter) {
+	@FunctionalInterface
+	private interface _SelectionDialogFragmentFactory<F extends SelectionDialogFragment> {
+
+		F create(AlertDialog alertDialog,
+				 AlertDialogData alertDialogData,
+				 Map<String, CharSequence> itemByKey,
+				 SelectionDialogAdapter adapter);
 	}
 
-	private static DialogAndAdapter createDialogAndAdapter(final AlertDialogData data,
-														   final Map<String, CharSequence> itemByKey,
-														   final int selectedEntryIndex,
-														   final View.OnClickListener itemClickListener,
-														   final Function<AlertDialogData, AlertDialog.Builder> createAlertDialogBuilder) {
+	private static <F extends SelectionDialogFragment> F createSelectionDialogFragment(
+			final AlertDialogData data,
+			final Map<String, CharSequence> itemByKey,
+			final int selectedEntryIndex,
+			final View.OnClickListener itemClickListener,
+			final _SelectionDialogFragmentFactory<F> selectionDialogFragmentFactory) {
 		final SelectionDialogAdapter adapter =
 				new SelectionDialogAdapter(
 						data.getContext(),
@@ -68,11 +60,11 @@ public class SelectionDialogFragmentFactory {
 						itemClickListener,
 						false);
 		final AlertDialog alertDialog =
-				createAlertDialogBuilder
-						.apply(data)
+				CustomAlert
+						.createAlertDialogBuilder(data)
 						.setAdapter(adapter, null)
 						.create();
 		adapter.setDialog(alertDialog);
-		return new DialogAndAdapter(alertDialog, adapter);
+		return selectionDialogFragmentFactory.create(alertDialog, data, itemByKey, adapter);
 	}
 }

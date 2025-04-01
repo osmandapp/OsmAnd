@@ -101,8 +101,7 @@ public class CustomAlert {
 				data,
 				itemByKey,
 				selectedEntryIndex,
-				itemClickListener,
-				CustomAlert::createAlertDialogBuilder);
+				itemClickListener);
 	}
 
 	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
@@ -114,10 +113,10 @@ public class CustomAlert {
 				data,
 				itemByKey,
 				selectedEntryIndex,
-				itemClickListener,
-				CustomAlert::createAlertDialogBuilder);
+				itemClickListener);
 	}
 
+	// FK-TODO: move to SelectionDialogFragmentFactory
 	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
 										  @Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
@@ -154,7 +153,7 @@ public class CustomAlert {
 		return new MultiSelectionDialogFragment(dialog, data, itemByKey, adapter);
 	}
 
-	private static AlertDialog.Builder createAlertDialogBuilder(@NonNull AlertDialogData data) {
+	protected static AlertDialog.Builder createAlertDialogBuilder(@NonNull AlertDialogData data) {
 		Context ctx = data.getContext();
 		AlertDialog.Builder builder = new Builder(ctx);
 
