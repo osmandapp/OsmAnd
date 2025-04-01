@@ -9,12 +9,14 @@ import net.osmand.Location;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -277,5 +279,54 @@ public class GpxUtils {
 		intermediatePoint.setLat(prevPoint.getLat() + dLat);
 		intermediatePoint.setLon(prevPoint.getLon() + dLon);
 		return intermediatePoint;
+	}
+
+	@Nullable
+	public static LatLon calculateProjectionOnRoute(@NonNull RoutingHelper routingHelper, @NonNull RotatedTileBox tileBox) {
+		Location lastLocation = routingHelper.getLastFixedLocation();
+		RouteCalculationResult route = routingHelper.getRoute();
+		List<Location> locations = route.getImmutableAllLocations();
+
+		int currentRoute = route.getCurrentRoute();
+		int locIndex = locations.size() - 1;
+		if (route.getIntermediatePointsToPass() > 0) {
+			locIndex = route.getIndexOfIntermediate(route.getIntermediatePointsToPass() - 1);
+		}
+		if (lastLocation != null && currentRoute > 0 && currentRoute < locations.size()
+				&& locIndex >= 0 && locIndex < locations.size()) {
+			Location target = locations.get(locIndex);
+			double targetDistance = lastLocation.distanceTo(target);
+			LatLon latLon = calculateProjectionOnSegment(locations, target, currentRoute - 1, targetDistance);
+			if (latLon == null) {
+				latLon = calculateProjectionOnSegment(locations, target, currentRoute, targetDistance);
+			}
+			return latLon != null && tileBox.containsLatLon(latLon) ? latLon : null;
+		}
+		return null;
+	}
+
+	@Nullable
+	private static LatLon calculateProjectionOnSegment(@NonNull List<Location> locations,
+			@NonNull Location target, int index, double targetDistance) {
+		if (index < 0 || index + 1 >= locations.size()) {
+			return null;
+		}
+		Location loc1 = locations.get(index);
+		Location loc2 = locations.get(index + 1);
+		if (loc1.distanceTo(loc2) == 0) {
+			return null;
+		}
+		double distance1 = loc1.distanceTo(target);
+		double distance2 = loc2.distanceTo(target);
+		double deltaDistance = distance1 - distance2;
+		if (deltaDistance != 0) {
+			double coeff = (distance1 - targetDistance) / deltaDistance;
+			if (coeff >= 0.0 && coeff <= 1.0) {
+				return MapUtils.calculateIntermediatePoint(
+						loc1.getLatitude(), loc1.getLongitude(),
+						loc2.getLatitude(), loc2.getLongitude(), coeff);
+			}
+		}
+		return null;
 	}
 }

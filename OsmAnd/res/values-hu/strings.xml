@@ -699,8 +699,8 @@
     <string name="osmand_parking_warning">Figyelmeztetés</string>
     <string name="osmand_parking_warning_text">Az autó felvételére be lett állítva a naptárban egy emlékeztető, amely ott szerkeszthető vagy eltávolítható.</string>
     <string name="osmand_parking_time_limit_title">Parkolási időkorlát beállítása</string>
-    <string name="osmand_parking_delete_confirm">Törli a parkolóhely jelölőjét\?</string>
-    <string name="osmand_parking_delete">Parkolóhely jelölőjének törlése</string>
+    <string name="osmand_parking_delete_confirm">Törli az itt parkolok jelölőt?</string>
+    <string name="osmand_parking_delete">Itt parkolok jelölő törlése</string>
     <string name="osmand_parking_choose_type">Parkolótípus kiválasztása</string>
     <string name="osmand_parking_lim_text">Időkorlátos</string>
     <string name="osmand_parking_no_lim_text">Korlátlan idejű</string>
@@ -714,7 +714,7 @@
     <string name="osmand_parking_position_name">Parkolóhely</string>
     <string name="osmand_parking_plugin_description">Jelölje meg, hol parkol az autója, és kapjon értesítést naptárából a parkolási idő lejártáról. A jelölés elhelyezéséhez válasszon egy helyet a térképen, menjen a Műveletek menüpontra, és koppintson a Parkolóhely hozzáadása lehetőségre.</string>
     <string name="osmand_parking_plugin_name">Parkolási pozíció</string>
-    <string name="context_menu_item_add_parking_point">Megjelölés parkolóhelyként</string>
+    <string name="context_menu_item_add_parking_point">Itt parkolok</string>
     <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
     <string name="starting_point_too_far">A kezdőpont túl messze van a legközelebbi úttól.</string>
     <string name="shared_location">Megosztott hely</string>
@@ -1996,7 +1996,6 @@
     <string name="search_hint">Város, cím, érdekes pont (POI) nevének megadása</string>
     <string name="translit_names">Nevek átírása</string>
     <string name="rendering_value_fine_name">Finom</string>
-    <string name="wiki_around">Közeli Wikipédia-cikkek</string>
     <string name="search_map_hint">Város vagy régió</string>
     <string name="routing_attr_allow_motorway_name">Autópálya használata</string>
     <string name="routing_attr_allow_motorway_description">Engedélyezi az autópályákat.</string>

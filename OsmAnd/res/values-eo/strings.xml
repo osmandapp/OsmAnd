@@ -2024,7 +2024,6 @@
     <string name="upload_poi">Alŝuti interesejo(j)n</string>
     <string name="route_roundabout_short">Elektu la %1$d-an elveturejon</string>
     <string name="search_map_hint">Urbo aŭ regiono</string>
-    <string name="wiki_around">Pri ĉirkaŭaĵo en Vikipedio</string>
     <string name="routing_attr_allow_motorway_name">Uzi aŭtovojojn</string>
     <string name="routing_attr_allow_motorway_description">Uzi aŭtoŝoseojn.</string>
     <string name="lang_sr_latn">Serba (latina)</string>
@@ -5258,7 +5257,7 @@
     <string name="wall_color">Koloro de muro</string>
     <string name="track_line">Linio de spuro</string>
     <string name="route_line_use_coloring_altitude">Kolorigi linion de kurso laŭ altitudo.</string>
-    <string name="delete_actions_button_confirmation">Ĉu forigi “%1$s” kun ĉiuj aldonitaj agoj?</string>
+    <string name="delete_actions_button_confirmation">Ĉu forigi “%1$s” kun ĉiujn aldonitajn agojn?</string>
     <string name="fixed_height">Konstanta alto</string>
     <string name="downward_gradient">Gradiento malsupren</string>
     <string name="upward_gradient">Gradiento supren</string>

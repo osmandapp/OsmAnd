@@ -700,7 +700,6 @@
     <string name="night">Nótt</string>
     <string name="routing_attr_allow_motorway_name">Nota hraðbrautir</string>
     <string name="routing_attr_allow_motorway_description">Leyfa hraðbrautir.</string>
-    <string name="wiki_around">Wikipedia-greinar í nágrenninu</string>
     <string name="route_calculation">Útreikningur leiðar</string>
     <string name="gpx_no_tracks_title">Þú ert ekki ennþá með neina ferla</string>
     <string name="gpx_no_tracks_title_folder">Þú getur líka bætt ferilskrám í möppuna</string>

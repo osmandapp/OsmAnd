@@ -818,7 +818,7 @@
     <string name="poi_horse_stile">Pas per a cavalls</string>
     <string name="poi_kissing_gate">porta laberíntica</string>
     <string name="poi_sally_port">Porta llevadissa</string>
-    <string name="poi_swing_gate">Barrera griratòria</string>
+    <string name="poi_swing_gate">Barrera giratòria</string>
     <string name="poi_turnstile">Torn de pas</string>
     <string name="poi_kent_carriage_gap">Pas exclusiu per a carruatges</string>
     <string name="poi_breakwater">Escullera</string>
@@ -3052,4 +3052,22 @@
     <string name="poi_cash_in">Dipòsit en efectiu</string>
     <string name="poi_access_permit">Permís requerit</string>
     <string name="poi_shop_general">Botiga generalista</string>
+    <string name="poi_evangelical_church">Església evangèlica</string>
+    <string name="poi_presbyterian_church">Església presbiteriana</string>
+    <string name="poi_vending_sweets">Llaminadures</string>
+    <string name="poi_vending_milk">Llet</string>
+    <string name="poi_vending_drinks">Begudes</string>
+    <string name="poi_synagogue">Sinagoga</string>
+    <string name="poi_roman_catholic_church">Església catòlica romana</string>
+    <string name="poi_methodist_church">Església metodista</string>
+    <string name="poi_anglican_church">Església anglicana</string>
+    <string name="poi_baptist_church">Església baptista</string>
+    <string name="poi_pentecostal_church">Església pentecostal</string>
+    <string name="poi_orthodox_church">Església ortodoxa</string>
+    <string name="poi_catholic_church">Església catòlica</string>
+    <string name="poi_greek_orthodox_church">Església ortodoxa grega</string>
+    <string name="poi_access_main_tag">Accés</string>
+    <string name="poi_lutheran_church">Església luterana</string>
+    <string name="poi_russian_orthodox_church">Església ortodoxa russa</string>
+    <string name="poi_protestant_church">Església protestant</string>
 </resources>

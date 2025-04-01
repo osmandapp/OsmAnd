@@ -1852,7 +1852,6 @@
     <string name="routing_attr_allow_motorway_name">Να χρησιμοποιήσεις τους αυτοκινητόδρομους</string>
     <string name="routing_attr_allow_motorway_description">Να επιτρέψεις τους αυτοκινητόδρομους.</string>
     <string name="upload_osm_note_description">Ανεβάσετε την OSM σημείωσή σας ανώνυμα ή χρησιμοποιήσετε την κατατομή (προφίλ) σας στο OpenStreetMap.org.</string>
-    <string name="wiki_around">Πλησιέστερα άρθρα της βικιπαίδειας</string>
     <string name="search_map_hint">Πόλη ή περιοχή</string>
     <string name="route_roundabout_short">Πάρτε την %1$d έξοδο και πηγαίνετε</string>
     <string name="upload_poi">Ανεβάστε ΣΕ</string>

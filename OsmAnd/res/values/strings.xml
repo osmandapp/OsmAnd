@@ -10,10 +10,18 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="customize_grid_color">Customize grid color</string>
-    <string name="grid_color">Grid color</string>
-    <string name="shared_string_edges">Edges</string>
-    <string name="labels_position">Labels position</string>
+	<string name="customize_grid_color">Customize grid color</string>
+	<string name="grid_color">Grid color</string>
+	<string name="shared_string_edges">Edges</string>
+	<string name="labels_position">Labels position</string>
+	<string name="wikidata">Wikidata</string>
+	<string name="read_on_wiki">Read on Wikipedia</string>
+    <string name="prediction_time_description">Position icon in OsmAnd animates with each received GPS data point (once per second). A slight delay in its movement may be noticeable, especially when the user is moving quickly or the GPS signal fluctuates.</string>
+    <string name="prediction_time_advanced_description">Adjust the prediction time to minimize delay.</string>
+    <string name="prediction_time">Prediction time</string>
+    <string name="shared_string_no_animation">No animation</string>
+    <string name="position_animation_empty_banner_description">Position icon moves to each new received location without animation.</string>
+    <string name="position_animation">Position animation</string>
     <string name="poi_source">POI Source</string>
     <string name="intermediate_first">Intermediate first</string>
     <string name="destination_first">Destination first</string>
@@ -3689,7 +3697,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="routing_attr_allow_motorway_name">Use motorways</string>
     <string name="routing_attr_allow_motorway_description">Allows motorways.</string>
     <string name="upload_osm_note_description">Upload your OSM note anonymously or by using your OpenStreetMap.org profile.</string>
-    <string name="wiki_around">Nearby Wikipedia articles</string>
+    <string name="wiki_around">Nearby popular places</string>
     <string name="search_map_hint">City or region</string>
     <string name="route_roundabout_short">Take %1$d exit and go</string>
     <string name="upload_poi">Upload POI</string>

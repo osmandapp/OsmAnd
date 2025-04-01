@@ -449,7 +449,12 @@ public class QuickSearchListItem {
 		switch (searchResult.objectType) {
 			case POI:
 				Amenity detailedAmenity = getDetailedAmenity((Amenity) object, app, lang, transliterate);
-				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(detailedAmenity, lang, transliterate);
+				String poiSimpleFormat;
+				if (detailedAmenity.getType().isWiki()) {
+					poiSimpleFormat = detailedAmenity.getName(lang, transliterate);
+				} else {
+					poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(detailedAmenity, lang, transliterate);
+				}
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 				pointDescription.setIconName(getAmenityIconName(app, detailedAmenity));
 				object = detailedAmenity;

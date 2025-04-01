@@ -2102,7 +2102,6 @@
     <string name="select_city">Izberi grad</string>
     <string name="rendering_attr_depthContours_description">Prikaži dlabočinski konturi i točki.</string>
     <string name="rendering_attr_depthContours_name">Nauticki dlabinski konturi</string>
-    <string name="wiki_around">Blisku do statiite na Wikipedia</string>
     <string name="christmas_desc_q">Da se prikažat božiḱnite praznični točki\?</string>
     <string name="rendering_value_light_brown_name">Svetlo kafeno</string>
     <string name="save_filter">Zacuvaj go filterot</string>

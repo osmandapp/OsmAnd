@@ -751,7 +751,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					}
 					updated = true;
 				}
-				boolean showTopPlacesPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
+				boolean isOnline = app.getSettings().WIKI_DATA_SOURCE_TYPE.get() == DataSourceType.ONLINE;
+				boolean showTopPlacesPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get() && isOnline;
 				boolean showTopPlacesPreviewsChanged = this.showTopPlacesPreviews != showTopPlacesPreviews;
 				this.showTopPlacesPreviews = showTopPlacesPreviews;
 				if (updated || showTopPlacesPreviewsChanged || topPlacesBox == null || !topPlacesBox.containsTileBox(tileBox)) {

@@ -2149,7 +2149,6 @@
     <string name="do_not_show_startup_messages">Başlangıç mesajlarını gösterme</string>
     <string name="routing_attr_driving_style_speed_name">daha kısa rotalar</string>
     <string name="points_delete_multiple">%1$d nokta silinsin mi\?</string>
-    <string name="wiki_around">Yakındaki Wikipedia makaleleri</string>
     <string name="route_calculation">Rota hesaplama</string>
     <string name="shared_string_notifications">Bildirimler</string>
     <string name="shared_string_continue">Devam et</string>

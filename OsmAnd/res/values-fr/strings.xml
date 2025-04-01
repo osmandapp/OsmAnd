@@ -2033,7 +2033,6 @@
     <string name="search_map_hint">Ville ou région</string>
     <string name="routing_attr_allow_motorway_description">Autoriser les trajets sur autoroute.</string>
     <string name="routing_attr_allow_motorway_name">Autoriser les autoroutes</string>
-    <string name="wiki_around">Articles Wikipédia à proximité</string>
     <string name="lang_sr_latn">Serbe (latin)</string>
     <string name="lang_zh_hk">Chinois (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Eau</string>

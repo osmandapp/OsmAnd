@@ -103,19 +103,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 
 	@Override
 	protected void updateButtonsState() {
-		AndroidUiHelper.setVisibility(selectionMode ? View.VISIBLE : View.GONE, selectButton, actionButton, selectedCountTv);
-		AndroidUiHelper.setVisibility(!selectionMode ? View.VISIBLE : View.GONE, searchContainer);
-		if (selectionMode) {
-			boolean allTracksSelected = areAllTracksSelected();
-
-			int iconId = allTracksSelected ? R.drawable.ic_action_deselect_all : R.drawable.ic_action_select_all;
-			selectButton.setImageDrawable(getIcon(iconId));
-			selectButton.setContentDescription(getString(allTracksSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all));
-
-			String count = String.valueOf(selectionHelper.getSelectedItems().size());
-			selectedCountTv.setText(count);
-		}
-		AndroidUiHelper.setVisibility(smartFolder == null ? View.GONE : View.VISIBLE, bottomButtonsContainer);
+		boolean enableSaveButton = false;
 		if (saveButton != null && smartFolder != null) {
 			boolean filtersChanged = false;
 			TracksSearchFilter searchFilter = (TracksSearchFilter) adapter.getFilter();
@@ -134,8 +122,30 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 					}
 				}
 			}
-			saveButton.setEnabled(filtersChanged);
+			enableSaveButton = filtersChanged;
 		}
+		updateButtonsStateUI(enableSaveButton);
+	}
+
+	private void updateButtonsStateUI(boolean enableSaveButton) {
+		app.runInUIThread(() -> {
+			if (saveButton != null) {
+				saveButton.setEnabled(enableSaveButton);
+			}
+			AndroidUiHelper.setVisibility(selectionMode ? View.VISIBLE : View.GONE, selectButton, actionButton, selectedCountTv);
+			AndroidUiHelper.setVisibility(!selectionMode ? View.VISIBLE : View.GONE, searchContainer);
+			if (selectionMode) {
+				boolean allTracksSelected = areAllTracksSelected();
+
+				int iconId = allTracksSelected ? R.drawable.ic_action_deselect_all : R.drawable.ic_action_select_all;
+				selectButton.setImageDrawable(getIcon(iconId));
+				selectButton.setContentDescription(getString(allTracksSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all));
+
+				String count = String.valueOf(selectionHelper.getSelectedItems().size());
+				selectedCountTv.setText(count);
+			}
+			AndroidUiHelper.setVisibility(smartFolder == null ? View.GONE : View.VISIBLE, bottomButtonsContainer);
+		});
 	}
 
 	@Override
@@ -169,6 +179,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		if (dialogClosedListener != null) {
 			dialogClosedListener.onDialogClosed();
 		}
+		removeListeners();
 	}
 
 	private void reloadTracks() {
@@ -347,9 +358,15 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void onPause() {
 		super.onPause();
+		removeListeners();
+	}
+
+	private void removeListeners() {
 		app.getSelectedGpxHelper().removeListener(this);
 		app.getSmartFolderHelper().removeUpdateListener(this);
-		((TracksSearchFilter) adapter.getFilter()).removeFiltersChangedListener(this);
+		if (adapter != null) {
+			((TracksSearchFilter) adapter.getFilter()).removeFiltersChangedListener(this);
+		}
 	}
 
 	@NonNull

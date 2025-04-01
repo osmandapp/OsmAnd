@@ -49,6 +49,7 @@ public class WikipediaPoiMenu {
 	private final OsmandSettings settings;
 	private final MapActivity activity;
 	private final boolean nightMode;
+	private ContextMenuItem showImagePreviewsItem;
 
 	public WikipediaPoiMenu(@NonNull MapActivity activity) {
 		this.activity = activity;
@@ -78,7 +79,9 @@ public class WikipediaPoiMenu {
 				} else if (itemId == R.string.poi_source) {
 					showDataSourceDialog(uiAdapter, view, item);
 				} else if (itemId == R.string.show_image_previews) {
-					app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.set(isChecked);
+					boolean online = settings.WIKI_DATA_SOURCE_TYPE.get() == ONLINE;
+					isChecked = isChecked && online;
+					settings.WIKI_SHOW_IMAGE_PREVIEWS.set(isChecked);
 					item.setSelected(isChecked);
 					item.setColor(app, isChecked ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID);
 					item.setIcon(isChecked ? R.drawable.ic_action_photo : R.drawable.ic_action_image_disabled);
@@ -136,13 +139,15 @@ public class WikipediaPoiMenu {
 					.setDescription(summary)
 					.setListener(listener));
 
-			boolean showPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
-			adapter.addItem(new ContextMenuItem(null)
+			boolean isOnline = settings.WIKI_DATA_SOURCE_TYPE.get() == ONLINE;
+			boolean showPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get() && isOnline;
+			showImagePreviewsItem = new ContextMenuItem(null)
 					.setTitleId(R.string.show_image_previews, activity)
 					.setIcon(showPreviews ? R.drawable.ic_action_photo : R.drawable.ic_action_image_disabled)
 					.setColor(app, showPreviews ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID)
 					.setListener(listener)
-					.setSelected(showPreviews));
+					.setSelected(showPreviews);
+			adapter.addItem(showImagePreviewsItem);
 		}
 
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -261,7 +266,14 @@ public class WikipediaPoiMenu {
 				.setOnClickListener(v -> {
 					boolean online = sourceType == ONLINE;
 					app.getSettings().WIKI_DATA_SOURCE_TYPE.set(sourceType);
-
+					boolean showImagesPreview = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
+					if (showImagePreviewsItem != null) {
+						showImagePreviewsItem.setClickable(online);
+						boolean showImagePreviewsSelected = online && showImagesPreview;
+						showImagePreviewsItem.setSelected(showImagePreviewsSelected);
+						showImagePreviewsItem.setColor(app, showImagePreviewsSelected ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID);
+						showImagePreviewsItem.setIcon(showImagePreviewsSelected ? R.drawable.ic_action_photo : R.drawable.ic_action_image_disabled);
+					}
 					item.setIcon(sourceType.iconId);
 					item.setDescription(app.getString(sourceType.nameId));
 					item.setColor(app, online ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID);
