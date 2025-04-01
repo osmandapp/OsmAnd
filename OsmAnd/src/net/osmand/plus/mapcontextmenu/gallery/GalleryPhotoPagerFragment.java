@@ -460,9 +460,9 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	private void setupViewPager(@NonNull View view) {
 		ViewPager pager = view.findViewById(R.id.photo_pager);
 		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
-		FragmentManager manager = requireActivity().getSupportFragmentManager();
+		FragmentManager manager = getChildFragmentManager();
 
-		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, imageCards, this);
+		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, imageCards);
 		pager.setAdapter(adapter);
 		pager.setCurrentItem(selectedPosition);
 		pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -559,19 +559,16 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	private static class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
 		private final List<ImageCard> pictures;
-		private final Fragment targetFragment;
 
-		public ViewPagerAdapter(@NonNull FragmentManager manager, @NonNull List<ImageCard> pictures,
-				Fragment target) {
+		public ViewPagerAdapter(@NonNull FragmentManager manager, @NonNull List<ImageCard> pictures) {
 			super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			this.pictures = pictures;
-			this.targetFragment = target;
 		}
 
 		@NonNull
 		@Override
 		public Fragment getItem(int position) {
-			return GalleryPhotoViewerFragment.newInstance(position, targetFragment);
+			return GalleryPhotoViewerFragment.newInstance(position);
 		}
 
 		@Override
