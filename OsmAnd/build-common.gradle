@@ -198,13 +198,6 @@ tasks.register('collectFonts', Copy) {
 	include "*.ttf"
 }
 
-tasks.register('collectHelpContentsStyle', Copy) {
-	from("../../help/website/help/") {
-		include "style.css"
-	}
-	into "assets"
-}
-
 tasks.register('copyBundledAssets', Copy) {
 	from("../../resources/bundled_assets.json") {
 		include "bundled_assets.json"
@@ -292,7 +285,6 @@ tasks.register('copy3DModels', Copy) {
 tasks.register('collectExternalResources') {
 	dependsOn collectVoiceAssets,
 			collectFonts,
-			collectHelpContentsStyle,
 			copyMapShaderIcons,
 			copyMapPOIIcons,
 			copyLargePOIIcons,
