@@ -3070,4 +3070,13 @@
     <string name="poi_lutheran_church">Església luterana</string>
     <string name="poi_russian_orthodox_church">Església ortodoxa russa</string>
     <string name="poi_protestant_church">Església protestant</string>
+    <string name="poi_route_activity_type_kayak">Caiac</string>
+    <string name="poi_tactile_paving_incorrect">Incorrecte</string>
+    <string name="poi_clothes_costumes">Disfrassos</string>
+    <string name="poi_osmwiki">Llocs populars (Viquipèdia)</string>
+    <string name="poi_sms_no">No</string>
+    <string name="poi_seamark_water_level_part_submerged">Nivell de l\'aigua: parcialment submergit</string>
+    <string name="poi_cafe_yes">Sí</string>
+    <string name="poi_video_no">No</string>
+    <string name="poi_seamark_water_level_submerged">Nivell de l\'aigua: submergit</string>
 </resources>
