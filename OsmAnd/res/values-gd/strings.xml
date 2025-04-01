@@ -534,4 +534,18 @@
     <string name="destination_first">Ceann-uidhe an tòiseach</string>
     <string name="intermediate_first">Eadar-mheadhanach an tòiseach</string>
     <string name="display_priority">Taisbean prìomhachas</string>
+    <string name="obd_fuel_type_methanol">Meatanol</string>
+    <string name="obd_fuel_type_ethanol">Eatanol</string>
+    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_type_propane">Pròpan</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Bifuel a\' ruith peatral</string>
+    <string name="obd_fuel_type_bifuel_methanol">Bifuel a\' ruith meatanol</string>
+    <string name="obd_fuel_type_bifuel_electricity">Bifuel a\' ruith dealan</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Bifuel a\' ruith dealan agus einnsean-losgaidh</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Eatanol haibrid</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Eatanol haibrid agus einnsean-losgaidh</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Bifuel a\' ruith eatanol</string>
+    <string name="obd_fuel_type_bifuel_lpg">Bifuel a\' ruith LPG</string>
+    <string name="obd_fuel_type_bifuel_cng">Bifuel a\' ruith CNG</string>
+    <string name="obd_fuel_type_bifuel_propane">Bifuel a\' ruith pròpan</string>
 </resources>
