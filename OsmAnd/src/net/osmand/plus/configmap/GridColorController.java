@@ -12,6 +12,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteMode;
+import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
 import net.osmand.plus.helpers.CoordinatesGridHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -47,6 +49,16 @@ public class GridColorController extends MapColorPaletteController {
 	public void onResetToDefault() {
 		gridHelper.resetGridColors(appMode);
 		loadSavedColors();
+		refreshSelectedPaletteColor();
+	}
+
+	private void refreshSelectedPaletteColor() {
+		ModedColorsPaletteController paletteController = getColorsPaletteController();
+		PaletteMode selectedMode = paletteController.getSelectedPaletteMode();
+		PaletteColor newPaletteColor = paletteController.provideSelectedColorForPaletteMode(selectedMode);
+		if (newPaletteColor != null) {
+			paletteController.onSelectColorFromPalette(newPaletteColor, false);
+		}
 	}
 
 	@Override

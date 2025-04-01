@@ -61,7 +61,6 @@ public class MapColorPaletteFragment extends ConfigureMapOptionFragment implemen
 	@Override
 	protected void resetToDefault() {
 		controller.onResetToDefault();
-		colorsPaletteCard.update();
 		updateApplyButton(controller.hasChanges());
 	}
 
