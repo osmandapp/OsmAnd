@@ -58,7 +58,7 @@ public class GridColorController extends MapColorPaletteController {
 
 	@Override
 	protected void onColorsPaletteModeChanged() {
-//		gridHelper.updateGridSettings(); // todo do we need this?
+		gridHelper.updateGridSettings();
 		externalListener.onColorsPaletteModeChanged();
 	}
 
@@ -82,6 +82,12 @@ public class GridColorController extends MapColorPaletteController {
 	@ColorInt
 	protected int getSavedColor(boolean nightMode) {
 		return gridHelper.getGridColor(appMode, nightMode);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		gridHelper.updateGridSettings();
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity) {
