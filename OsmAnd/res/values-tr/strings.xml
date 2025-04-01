@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="release_5_0">
+    • Yeni Keşfet moduyla en beğenilen İÇN\'leri (POI) keşfedin\n\n
+    • Tüm OSM rotaları artık aranabilir! Yürüyüş, bisiklet, MTB ve daha fazlası\n\n
+    • Yeni navigasyon widget\'ı dönüş okunu ve navigasyon talimatlarını birleştirir\n\n
+    • Mevcut rota bilgi widget\'ı: ETA, varış zamanı ve mesafeyi gösterir\n\n
+    • Ayrıntılı bilgi için haritada kayak pistlerini ve MTB parkurlarını seçin\n\n
+    • Sol ve sağ paneller için widget boyutunu seçme yeteneği\n\n
+    • Coğrafi koordinatlarla "Koordinat ızgarası" eklendi\n\n
+    • Favori grupların varsayılan görünümünü özelleştirme yeteneği eklendi\n\n
+    • Android Auto: Bir sonraki ara noktaya olan ETA ve mesafeyi görüntüleyin; şehir adları artık arama sonuçlarında görünüyor\n\n
+    • Önemli zirveler artık harita ve arama yoluyla keşfedilebilir\n\n
+    • Dağ zirvesi yükseklikleri fit cinsinden\n\n
+    • Eklendi: Haritada Kayalıklar ve tırmanma alanları\n\n
+    • ABD\'de adres araması iyileştirildi\n\n
+    • Navigasyon için İbranice TTS eklendi\n\n
+</string>
     <string name="close_changeset">Değişiklik listesini kapat</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması yüklü değil. Google Play\'de ara\?</string>
     <string name="rendering_attr_roadColors_description">Bir yol rengi şeması seçin:</string>

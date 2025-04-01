@@ -102,17 +102,21 @@
     <string name="av_audio_sample_rate">Audio sample rate</string>
     <string name="av_audio_sample_rate_descr">Select audio sample rate.</string>
     <string name="connect_new_scanner">Connect new scanner</string>
-    <string name="release_5_0" translatable="false">
+    <string name="release_5_0">
+        • Discover top-ranked POIs with the new Explore mode\n\n
+        • All OSM routes, now searchable! Hiking, cycling, MTB, and more\n\n
         • New navigation widget combines turn arrow and navigation instructions\n\n
         • Current route info widget: displays ETA, arrival time, and distance\n\n
+        • Select ski slopes and MTB trails on the map for detailed information\n\n
         • Ability to select widget size for left and right panels\n\n
-        • Added ability to change and set the default appearance for favorite groups\n\n
-        • Android Auto: view ETA and distance to next waypoint; city names now appear in search results\n\n
-        • Geographical grid overlay: with customizable appearance and formats.\n\n
+        • Added "Coordinates grid" with geographical coordinates\n\n
+        • Added ability to customize the default appearance of favorite groups\n\n
+        • Android Auto: view ETA and distance to next waypoint; city names now appear in search results\n\
         • Prominent peaks are now discoverable via map and search\n\n
         • Mountain peak heights in feet\n\n
+        • Added: Crags and climbing areas on the map\n\n
+        • Address search in the USA has been improved\n\n
         • Added Hebrew TTS for navigation\n\n
-        • AIS Vessel Tracking Plugin: for nautical navigation\n\n
     </string>
     <string name="preview_next_turn">Preview next turn</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Track vital vehicle data using the OBD-II protocol. Monitor key metrics like speed, engine RPM, fuel consumption, and more.</string>
