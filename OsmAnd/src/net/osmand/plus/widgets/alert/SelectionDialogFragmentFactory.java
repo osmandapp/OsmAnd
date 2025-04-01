@@ -17,8 +17,16 @@ public class SelectionDialogFragmentFactory {
 	public record DialogData(List<String> keys,
 							 List<CharSequence> items,
 							 Optional<boolean[]> checkedItems,
-							 // FK-TODO: replace int with OptionalInt?
 							 int selectedItemIndex) {
+
+		public DialogData {
+			if (keys.size() != items.size()) {
+				throw new IllegalArgumentException("keys and items must have the same size");
+			}
+			if (checkedItems.isPresent() && checkedItems.orElseThrow().length != keys.size()) {
+				throw new IllegalArgumentException("checkedItems must have the same size as keys");
+			}
+		}
 
 		public Map<String, CharSequence> orderedItemByKey() {
 			return Lists
