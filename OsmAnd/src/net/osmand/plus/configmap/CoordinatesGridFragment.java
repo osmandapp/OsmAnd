@@ -187,6 +187,7 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				if (purchased) {
+					mapActivity.getDashboard().hideDashboard();
 					controller.onSelectGridColorClicked(mapActivity);
 				} else {
 					ChoosePlanFragment.showDefaultInstance(mapActivity);

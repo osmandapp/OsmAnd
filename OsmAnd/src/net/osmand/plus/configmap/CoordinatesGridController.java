@@ -110,8 +110,7 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public void onSelectGridColorClicked(@NonNull MapActivity mapActivity) {
-		//TODO: open Grid Color screen
-		app.showToastMessage("Select grid color");
+		GridColorController.showDialog(mapActivity);
 	}
 
 	private <T extends Enum<T> & EnumWithTitleId> void showPopUpMenu(
@@ -175,7 +174,7 @@ public class CoordinatesGridController extends BaseDialogController {
 
 	@ColorInt
 	public int getGridColor() {
-		return gridHelper.getGridColor(getSelectedAppMode());
+		return gridHelper.getGridColor(getSelectedAppMode(), isNightMode());
 	}
 
 	@NonNull
