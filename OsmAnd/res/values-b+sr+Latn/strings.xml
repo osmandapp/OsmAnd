@@ -5730,4 +5730,5 @@
     <string name="prediction_time_description">Ikona pozicije u OsmAnd animira se svakim promenom GPS tačke (jednom u sekundi). Blago kašnjenje u njegovom kretanju može biti primetno, posebno kada se korisnik brzo kreće ili GPS signal varira.</string>
     <string name="prediction_time_advanced_description">Podesite vreme predviđanja kako biste smanjili kašnjenje.</string>
     <string name="position_animation">Animacija pozicije</string>
+    <string name="wiki_around">U blizini popularna mesta</string>
 </resources>
