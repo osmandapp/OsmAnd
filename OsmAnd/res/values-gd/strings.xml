@@ -548,4 +548,10 @@
     <string name="obd_fuel_type_bifuel_lpg">Bifuel a\' ruith LPG</string>
     <string name="obd_fuel_type_bifuel_cng">Bifuel a\' ruith CNG</string>
     <string name="obd_fuel_type_bifuel_propane">Bifuel a\' ruith pròpan</string>
+    <string name="obd_engine_coolant_temp">Teòthachd lionna-fuarachaidh</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Ath-ghineach haibrid</string>
+    <string name="obd_fuel_level">Èifeachdas connaidh (%)</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Bifuel a\' ruith hàidhdeaidean</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="rpm_unit">rpm</string>
 </resources>
