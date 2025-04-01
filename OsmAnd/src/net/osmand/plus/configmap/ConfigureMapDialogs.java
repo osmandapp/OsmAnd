@@ -1,6 +1,7 @@
 package net.osmand.plus.configmap;
 
 import static net.osmand.plus.configmap.ConfigureMapMenu.nonEmptyStringOrDefault;
+import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -480,11 +481,15 @@ public class ConfigureMapDialogs {
 									activity.getMapLayers().updateLayers(activity);
 									activity.getDashboard().refreshContent(false);
 								});
-
+		// FK-TODO: directly create DialogData
+		final Map<String, CharSequence> orderedItemByKey = getOrderedItemByKey(properties, activity);
 		return CustomAlert.createMultiSelectionDialogFragment(
 				dialogData,
-				getOrderedItemByKey(properties, activity),
-				checkedItems,
+				new SelectionDialogFragmentFactory.DialogData(
+						orderedItemByKey.keySet().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
+						orderedItemByKey.values().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
+						Optional.of(checkedItems),
+						INVALID_ID),
 				v -> {
 					final int which = (int) v.getTag();
 					checkedItems[which] = !checkedItems[which];

@@ -23,8 +23,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
-import java.util.*;
-
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class CustomAlert {
@@ -112,9 +110,9 @@ public class CustomAlert {
 				itemClickListener);
 	}
 
-	// FK-TODO: move to SelectionDialogFragmentFactory
 	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
 										  @Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener) {
+		// FK-TODO: use method createMultiSelectionDialogFragment()
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
 				data.getContext(), items, INVALID_ID, checkedItems,
@@ -127,27 +125,14 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
-	// FK-TODO: move to SelectionDialogFragmentFactory
 	public static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
 			final AlertDialogData data,
-			final Map<String, CharSequence> itemByKey,
-			final boolean[] checkedItems,
+			final SelectionDialogFragmentFactory.DialogData dialogData,
 			final View.OnClickListener itemClickListener) {
-		final Builder builder = createAlertDialogBuilder(data);
-		final SelectionDialogAdapter adapter =
-				new SelectionDialogAdapter(
-						data.getContext(),
-						itemByKey.values().toArray(new CharSequence[0]),
-						INVALID_ID,
-						checkedItems,
-						data.getControlsColor(),
-						data.isNightMode(),
-						itemClickListener,
-						true);
-		builder.setAdapter(adapter, null);
-		final AlertDialog dialog = builder.create();
-		adapter.setDialog(dialog);
-		return new MultiSelectionDialogFragment(dialog, data, itemByKey, adapter);
+		return SelectionDialogFragmentFactory.createMultiSelectionDialogFragment(
+				data,
+				dialogData,
+				itemClickListener);
 	}
 
 	protected static AlertDialog.Builder createAlertDialogBuilder(@NonNull AlertDialogData data) {

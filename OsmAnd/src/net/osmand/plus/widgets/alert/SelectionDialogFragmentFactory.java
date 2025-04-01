@@ -40,6 +40,7 @@ public class SelectionDialogFragmentFactory {
 				data,
 				dialogData,
 				itemClickListener,
+				false,
 				MapLayerSelectionDialogFragment::new);
 	}
 
@@ -51,7 +52,20 @@ public class SelectionDialogFragmentFactory {
 				data,
 				dialogData,
 				itemClickListener,
+				false,
 				RoadStyleSelectionDialogFragment::new);
+	}
+
+	public static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
+			final AlertDialogData data,
+			final DialogData dialogData,
+			final View.OnClickListener itemClickListener) {
+		return createSelectionDialogFragment(
+				data,
+				dialogData,
+				itemClickListener,
+				true,
+				MultiSelectionDialogFragment::new);
 	}
 
 	@FunctionalInterface
@@ -67,6 +81,7 @@ public class SelectionDialogFragmentFactory {
 			final AlertDialogData data,
 			final DialogData dialogData,
 			final View.OnClickListener itemClickListener,
+			final boolean useMultiSelection,
 			final _SelectionDialogFragmentFactory<F> selectionDialogFragmentFactory) {
 		final SelectionDialogAdapter adapter =
 				new SelectionDialogAdapter(
@@ -77,7 +92,7 @@ public class SelectionDialogFragmentFactory {
 						data.getControlsColor(),
 						data.isNightMode(),
 						itemClickListener,
-						false);
+						useMultiSelection);
 		final AlertDialog alertDialog =
 				CustomAlert
 						.createAlertDialogBuilder(data)
