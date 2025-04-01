@@ -205,7 +205,7 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment
 	public void updateGridColorPreview() {
 		View preview = view.findViewById(R.id.color_preview_icon);
 		ColorsPaletteElements paletteElements = new ColorsPaletteElements(view.getContext(), nightMode);
-		paletteElements.updateColorItemView(preview, controller.getGridColor(), nightMode);
+		paletteElements.updateColorItemView(preview, controller.getGridColor(), false);
 	}
 
 	private void updateScreenMode(boolean enabled) {
