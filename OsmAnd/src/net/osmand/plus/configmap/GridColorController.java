@@ -43,6 +43,7 @@ public class GridColorController extends MapColorPaletteController {
 		setSavedColors(applyChanges);
 		activity.getSupportFragmentManager().popBackStack();
 		activity.getDashboard().setDashboardVisibility(true, COORDINATE_GRID, false);
+		askUpdateGridColor();
 	}
 
 	@Override
@@ -70,8 +71,8 @@ public class GridColorController extends MapColorPaletteController {
 
 	@Override
 	protected void onColorsPaletteModeChanged() {
-		gridHelper.updateGridSettings();
 		externalListener.onColorsPaletteModeChanged();
+		askUpdateGridColor();
 	}
 
 	@Override
@@ -99,7 +100,11 @@ public class GridColorController extends MapColorPaletteController {
 	@Override
 	public void onResume() {
 		super.onResume();
-		gridHelper.updateGridSettings();
+		askUpdateGridColor();
+	}
+
+	private void askUpdateGridColor() {
+		app.runInUIThread(gridHelper::updateGridSettings, 50);
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity) {
