@@ -4,8 +4,6 @@ import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
 import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
 import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
 
-import android.content.Context;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -107,16 +105,6 @@ public class ConfigureMapUtils {
 			}
 		}
 		return customRules;
-	}
-
-	protected static Map<String, CharSequence> getSortedItemByKey(final RenderingRuleProperty property,
-																  final Context context) {
-		final Map<String, CharSequence> itemByKey = new LinkedHashMap<>();
-		itemByKey.put(property.getDefaultValueDescription(), AndroidUtils.getRenderingStringPropertyValue(context, property.getDefaultValueDescription()));
-		for (final String possibleValue : property.getPossibleValues()) {
-			itemByKey.put(possibleValue, AndroidUtils.getRenderingStringPropertyValue(context, possibleValue));
-		}
-		return itemByKey;
 	}
 
 	protected static String getDescription(@NonNull OsmandSettings settings,

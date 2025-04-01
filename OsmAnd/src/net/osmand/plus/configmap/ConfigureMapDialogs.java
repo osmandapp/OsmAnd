@@ -22,6 +22,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
+import com.google.common.collect.ImmutableList;
+
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -380,22 +382,13 @@ public class ConfigureMapDialogs {
 			final @NonNull RenderingRuleProperty property,
 			final @NonNull ContextMenuItem item,
 			final boolean nightMode) {
-		// FK-TODO: directly use SelectionDialogFragmentFactory.DialogData
-		final Map<String, CharSequence> sortedItemByKey =
-				ConfigureMapUtils.getSortedItemByKey(
-						property,
-						activity.getMyApplication());
 		return CustomAlert
 				.createRoadStyleSelectionDialogFragment(
 						new AlertDialogData(activity, nightMode)
 								.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
 								.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
 								.setNegativeButton(R.string.shared_string_dismiss, null),
-						new SelectionDialogFragmentData(
-								sortedItemByKey.keySet().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
-								sortedItemByKey.values().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
-								Optional.empty(),
-								getSelectedIndex(activity, property)),
+						getSelectionDialogFragmentData(property, activity),
 						v -> {
 							final int which = (int) v.getTag();
 							final CommonPreference<String> preference = getCustomRenderProperty(activity, property);
@@ -404,6 +397,32 @@ public class ConfigureMapDialogs {
 							item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, preference.get()));
 							activity.getDashboard().refreshContent(false);
 						});
+	}
+
+	private static SelectionDialogFragmentData getSelectionDialogFragmentData(final RenderingRuleProperty property,
+																			  final MapActivity activity) {
+		final KeysAndItems keysAndItems = getKeysAndItems(property, activity.getMyApplication());
+		return new SelectionDialogFragmentData(
+				keysAndItems.keys(),
+				keysAndItems.items(),
+				Optional.empty(),
+				getSelectedIndex(activity, property));
+	}
+
+	private record KeysAndItems(List<String> keys, List<CharSequence> items) {
+	}
+
+	private static KeysAndItems getKeysAndItems(final RenderingRuleProperty property,
+												final Context context) {
+		final ImmutableList.Builder<String> keys = ImmutableList.builder();
+		final ImmutableList.Builder<CharSequence> items = ImmutableList.builder();
+		keys.add(property.getDefaultValueDescription());
+		items.add(AndroidUtils.getRenderingStringPropertyValue(context, property.getDefaultValueDescription()));
+		for (final String possibleValue : property.getPossibleValues()) {
+			keys.add(possibleValue);
+			items.add(AndroidUtils.getRenderingStringPropertyValue(context, possibleValue));
+		}
+		return new KeysAndItems(keys.build(), items.build());
 	}
 
 	public static int getSelectedIndex(final MapActivity activity, final RenderingRuleProperty property) {
