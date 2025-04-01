@@ -31,7 +31,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.fragments.search.Collectors;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -46,6 +45,7 @@ import net.osmand.util.Algorithms;
 import org.threeten.bp.Duration;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.results.Setting;
@@ -500,32 +500,40 @@ public class ConfigureMapDialogs {
 									activity.getMapLayers().updateLayers(activity);
 									activity.getDashboard().refreshContent(false);
 								});
-		// FK-TODO: directly create DialogData
-		final Map<String, CharSequence> orderedItemByKey = getOrderedItemByKey(properties, activity);
 		return CustomAlert.createMultiSelectionDialogFragment(
 				dialogData,
-				new SelectionDialogFragmentData(
-						orderedItemByKey.keySet().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
-						orderedItemByKey.values().stream().collect(java.util.stream.Collectors.toUnmodifiableList()),
-						Optional.of(checkedItems),
-						INVALID_ID),
+				getSelectionDialogFragmentData(activity, properties, checkedItems),
 				v -> {
 					final int which = (int) v.getTag();
 					checkedItems[which] = !checkedItems[which];
 				});
 	}
 
-	private static Map<String, CharSequence> getOrderedItemByKey(final List<RenderingRuleProperty> properties,
-																 final Context context) {
-		return properties
-				.stream()
-				.collect(
-						Collectors.toOrderedMap(
-								RenderingRuleProperty::getAttrName,
-								property ->
-										AndroidUtils.getRenderingStringPropertyName(
-												context,
-												property.getAttrName(),
-												property.getName())));
+	private static SelectionDialogFragmentData getSelectionDialogFragmentData(final MapActivity activity,
+																			  final List<RenderingRuleProperty> properties,
+																			  final boolean[] checkedItems) {
+		final KeysAndItems keysAndItems = getKeysAndItems(properties, activity);
+		return new SelectionDialogFragmentData(
+				keysAndItems.keys(),
+				keysAndItems.items(),
+				Optional.of(checkedItems),
+				INVALID_ID);
+	}
+
+	private static KeysAndItems getKeysAndItems(final List<RenderingRuleProperty> properties,
+												final Context context) {
+		return new KeysAndItems(
+				properties
+						.stream()
+						.map(RenderingRuleProperty::getAttrName)
+						.collect(Collectors.toUnmodifiableList()),
+				properties
+						.stream()
+						.map(property ->
+								AndroidUtils.getRenderingStringPropertyName(
+										context,
+										property.getAttrName(),
+										property.getName()))
+						.collect(Collectors.toUnmodifiableList()));
 	}
 }
