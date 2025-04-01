@@ -574,37 +574,39 @@ public class MapLayers {
 				OsmandRasterMapsPlugin.defineNewEditLayer(mapActivity, null, null);
 				break;
 			case LAYER_INSTALL_MORE:
-				OsmandRasterMapsPlugin.installMapLayers(mapActivity, new ResultMatcher<TileSourceTemplate>() {
-					TileSourceTemplate template;
-					int count;
+				OsmandRasterMapsPlugin.installMapLayers(
+						mapActivity,
+						new ResultMatcher<>() {
+							TileSourceTemplate template;
+							int count;
 
-					@Override
-					public boolean publish(TileSourceTemplate object) {
-						if (object == null) {
-							if (count == 1) {
-								targetLayer.set(template.getName());
-								if (targetLayer == settings.MAP_TILE_SOURCES) {
-									settings.MAP_ONLINE_DATA.set(true);
+							@Override
+							public boolean publish(TileSourceTemplate object) {
+								if (object == null) {
+									if (count == 1) {
+										targetLayer.set(template.getName());
+										if (targetLayer == settings.MAP_TILE_SOURCES) {
+											settings.MAP_ONLINE_DATA.set(true);
+										}
+										updateLayers(mapActivity);
+										if (callback != null) {
+											callback.processResult(template.getName());
+										}
+									} else {
+										selectMapLayer(mapActivity, includeOfflineMaps, targetLayer, callback);
+									}
+								} else {
+									count++;
+									template = object;
 								}
-								updateLayers(mapActivity);
-								if (callback != null) {
-									callback.processResult(template.getName());
-								}
-							} else {
-								selectMapLayer(mapActivity, includeOfflineMaps, targetLayer, callback);
+								return false;
 							}
-						} else {
-							count++;
-							template = object;
-						}
-						return false;
-					}
 
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
-				});
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
 				break;
 			default:
 				targetLayer.set(layerKey);

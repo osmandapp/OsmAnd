@@ -7,7 +7,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.resources.ResourceManager.ResourceListener;
-import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -43,12 +42,11 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.widgets.alert.*;
+import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -59,7 +57,7 @@ import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.concurrent.ExecutionException;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -520,102 +518,38 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return overlayLayerMapSource != null && overlayLayerMapSource.couldBeDownloadedFromInternet();
 	}
 
-	public static void installMapLayers(@NonNull FragmentActivity activity, ResultMatcher<TileSourceTemplate> result) {
-		WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		OsmandSettings settings = app.getSettings();
+	public static Optional<MultiSelectionDialogFragment> installMapLayers(final FragmentActivity activity,
+																		  final ResultMatcher<TileSourceTemplate> result) {
+		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final OsmandSettings settings = app.getSettings();
 		if (!settings.isInternetConnectionAvailable(true)) {
 			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
-			return;
+			return Optional.empty();
 		}
-		AsyncTask<Void, Void, List<TileSourceTemplate>> t = new AsyncTask<Void, Void, List<TileSourceTemplate>>() {
+		final var downloadTileSourceTemplatesTask = createDownloadTileSourceTemplatesTask(app);
+		downloadTileSourceTemplatesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		final List<TileSourceTemplate> downloaded = waitFor(downloadTileSourceTemplatesTask);
+		final Optional<MultiSelectionDialogFragment> multiSelectionDialogFragment = new MultiSelectionDialogFragmentFactory(activity, result).createMultiSelectionDialogFragment(downloaded);
+		multiSelectionDialogFragment.ifPresent(_multiSelectionDialogFragment -> _multiSelectionDialogFragment.show(activity.getSupportFragmentManager()));
+		return multiSelectionDialogFragment;
+	}
+
+	private static AsyncTask<Void, Void, List<TileSourceTemplate>> createDownloadTileSourceTemplatesTask(final OsmandApplication app) {
+		return new AsyncTask<>() {
+
 			@Override
 			protected List<TileSourceTemplate> doInBackground(Void... params) {
 				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app), true);
 			}
-
-			protected void onPostExecute(final List<TileSourceTemplate> downloaded) {
-				FragmentActivity activity = activityRef.get();
-				if (activity == null || activity.isFinishing()) {
-					return;
-				}
-				if (downloaded == null || downloaded.isEmpty()) {
-					Toast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
-					return;
-				}
-				final boolean[] selected = new boolean[downloaded.size()];
-				CustomAlert
-						.createMultiSelectionDialogFragment(
-								getAlertDialogData(downloaded, selected, activity),
-								createSelectionDialogFragmentData(downloaded, selected),
-								v -> {
-									Activity _activity = activityRef.get();
-									if (_activity != null && !_activity.isFinishing()) {
-										final int which = (int) v.getTag();
-										selected[which] = !selected[which];
-										if (settings.getTileSourceEntries().containsKey(downloaded.get(which).getName()) && selected[which]) {
-											Toast.makeText(_activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
-										}
-									}
-								})
-						.show(activity.getSupportFragmentManager());
-			}
-
-			private AlertDialogData getAlertDialogData(final List<TileSourceTemplate> downloaded,
-													   final boolean[] selected,
-													   final FragmentActivity activity) {
-				final boolean nightMode = isNightMode(activity);
-				return new AlertDialogData(activity, nightMode)
-						.setTitle(R.string.select_tile_source_to_install)
-						.setControlsColor(ColorUtilities.getAppModeColor((OsmandApplication) activity.getApplication(), nightMode))
-						.setNegativeButton(R.string.shared_string_cancel, null)
-						.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
-							Activity _activity = activityRef.get();
-							if (_activity != null && !_activity.isFinishing()) {
-								List<TileSourceTemplate> toInstall = new ArrayList<>();
-								for (int i = 0; i < selected.length; i++) {
-									if (selected[i]) {
-										toInstall.add(downloaded.get(i));
-									}
-								}
-								for (TileSourceTemplate ts : toInstall) {
-									if (settings.installTileSource(ts)) {
-										if (result != null) {
-											result.publish(ts);
-										}
-									}
-								}
-								// at the end publish null to show end of process
-								if (!toInstall.isEmpty() && result != null) {
-									result.publish(null);
-								}
-							}
-						});
-			}
-
-			private static SelectionDialogFragmentData createSelectionDialogFragmentData(
-					final List<TileSourceTemplate> downloaded,
-					final boolean[] selected) {
-				final List<String> names = getNames(downloaded);
-				return new SelectionDialogFragmentData(
-						names,
-						asCharSequences(names),
-						Optional.of(selected),
-						INVALID_ID);
-			}
-
-			private static List<String> getNames(final List<TileSourceTemplate> downloaded) {
-				return downloaded
-						.stream()
-						.map(TileSourceTemplate::getName)
-						.collect(Collectors.toUnmodifiableList());
-			}
-
-			private static List<CharSequence> asCharSequences(final List<String> strs) {
-				return strs.stream().collect(Collectors.toUnmodifiableList());
-			}
 		};
-		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private static <Params, Progress, Result> Result waitFor(final AsyncTask<Params, Progress, Result> task) {
+		try {
+			return task.get();
+		} catch (final ExecutionException | InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public static void defineNewEditLayer(@NonNull FragmentActivity activity, @Nullable Fragment targetFragment, @Nullable String editedFileName) {
@@ -668,7 +602,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 	}
 
-	private static boolean isNightMode(Context context) {
+	public static boolean isNightMode(Context context) {
 		if (context == null) {
 			return false;
 		}
