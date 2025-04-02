@@ -5024,4 +5024,6 @@
     <string name="poi_shinto_shrine">Šinto tempel</string>
     <string name="poi_access_main_tag">Ligipääs</string>
     <string name="poi_osmwiki">Populaarsed paigad (Vikipeedia)</string>
+    <string name="poi_consulate">Konsulaat</string>
+    <string name="poi_aerodrome_type_airfield">Lennuväli</string>
 </resources>
