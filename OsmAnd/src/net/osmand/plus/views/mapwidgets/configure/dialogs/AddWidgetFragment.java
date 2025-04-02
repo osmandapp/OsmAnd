@@ -124,7 +124,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 			descriptionText.setText(description);
 		}
 
-		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
+		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList(appMode);
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		if (widgets != null) {
 			Collator collator = OsmAndCollator.primaryCollator();
