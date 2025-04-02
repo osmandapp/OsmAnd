@@ -503,7 +503,7 @@
     <string name="poi_water_characteristic">Характеристика на водата</string>
     <string name="poi_seasonal">Сезонен</string>
     <string name="poi_fireplace">Огнище</string>
-    <string name="poi_site_type_fortification">Форт</string>
+    <string name="poi_archaeological_site_fortification">Форт</string>
     <string name="poi_laundry_service_yes">Да</string>
     <string name="poi_fish_pass">Рибопропускателни съоръжения</string>
     <string name="poi_food_no">Храна: не</string>

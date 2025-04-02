@@ -1569,11 +1569,11 @@
     <string name="poi_material_limestone">Matière : calcaire</string>
     <string name="poi_material_marble">Matière : marbre</string>
     <string name="poi_material_aluminium">Matière : aluminium</string>
-    <string name="poi_site_type_megalith">Mégalithe</string>
-    <string name="poi_site_type_tumulus">Tumulus</string>
-    <string name="poi_site_type_fortification">Fortification</string>
-    <string name="poi_site_type_city">Ville</string>
-    <string name="poi_site_type_necropolis">Nécropole</string>
+    <string name="poi_archaeological_site_megalith">Mégalithe</string>
+    <string name="poi_archaeological_site_tumulus">Tumulus</string>
+    <string name="poi_archaeological_site_fortification">Fortification</string>
+    <string name="poi_archaeological_site_city">Ville</string>
+    <string name="poi_archaeological_site_necropolis">Nécropole</string>
     <string name="poi_megalith_type_menhir">Type de mégalithe : menhir</string>
     <string name="poi_megalith_type_dolmen">Type de mégalithe : dolmen</string>
     <string name="poi_historic_farm">Ferme historique</string>
@@ -2391,7 +2391,7 @@
     <string name="poi_historic_era_mesolithic">Période historique : mésolithique</string>
     <string name="poi_historic_era_neolithic">Période historique : néolithique</string>
     <string name="poi_historic_era_chalcolithic">Période historique : chalcolithique (4ème–3ème millénaire av. J.C.)</string>
-    <string name="poi_site_type_petroglyph">Pétroglyphe</string>
+    <string name="poi_archaeological_site_petroglyph">Pétroglyphe</string>
     <string name="poi_megalith_type_nuraghe">Type de mégalithe : nuraghe</string>
     <string name="poi_megalith_type_stone_circle">Type de mégalithe : cercle de pierres</string>
     <string name="poi_megalith_type_passage_grave">Type de mégalithe : tombe à couloir</string>
@@ -2794,7 +2794,7 @@
     <string name="poi_historic_period_classical">Période historique : classique (époque IV, 374 ap. JC - 900 ap. JC)</string>
     <string name="poi_historic_period_imperial">Période historique : impériale (époque V, 900 ap. JC - 1200 ap. JC)</string>
     <string name="poi_stone_type_conciliation_cross">Type : croix de conciliation</string>
-    <string name="poi_site_type_earthwork">Terrassement</string>
+    <string name="poi_archaeological_site_earthwork">Terrassement</string>
     <string name="poi_nuclear_explosion_date_utc">Date de l\'explosion (UTC)</string>
     <string name="poi_nuclear_explosion_time_utc">Heure de l\'explosion (UTC)</string>
     <string name="poi_medical_system_chinese_yes">Chinois traditionnel</string>
@@ -2857,7 +2857,7 @@
     <string name="poi_water_purification_none">Aucune</string>
     <string name="poi_water_purification_reverse_osmosis">Osmose inverse</string>
     <string name="poi_water_supply_pump">Pompe</string>
-    <string name="poi_site_type_settlement">Implantation</string>
+    <string name="poi_archaeological_site_settlement">Implantation</string>
     <string name="poi_fortification_type_sconce">Type de fortification : rempart</string>
     <string name="poi_bridge_ref">Référence du pont</string>
     <string name="poi_tunnel_ref">Référence du tunnel</string>
@@ -2970,7 +2970,7 @@
     <string name="poi_socket_type3_output_filter">Nombre de câbles avec prises Type 3</string>
     <string name="poi_socket_cee_blue_output_filter">Nombre de câbles avec prises CEE bleues</string>
     <string name="poi_socket_schuko_output_filter">Nombre de câbles avec prises Schuko</string>
-    <string name="poi_site_type_hut_circle">Dépression circulaire</string>
+    <string name="poi_archaeological_site_hut_circle">Dépression circulaire</string>
     <string name="poi_medical_system_western_yes">Occidental</string>
     <string name="poi_socket_type2_output_high">Élevé</string>
     <string name="poi_socket_type2_output_medium">Moyen</string>

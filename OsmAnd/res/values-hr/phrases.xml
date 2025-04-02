@@ -888,8 +888,8 @@
     <string name="poi_defibrillator">Defibrilator</string>
     <string name="poi_defibrillator_yes">Defibrilator: da</string>
     <string name="poi_animal_training_dog">Pas</string>
-    <string name="poi_site_type_settlement">Naselje</string>
-    <string name="poi_site_type_city">Grad</string>
+    <string name="poi_archaeological_site_settlement">Naselje</string>
+    <string name="poi_archaeological_site_city">Grad</string>
     <string name="poi_square">Kvadrat</string>
     <string name="poi_artist_name">Umjetnik</string>
     <string name="poi_sculptor">Kipar</string>
@@ -2029,7 +2029,7 @@
     <string name="poi_palm">Palma</string>
     <string name="poi_us_maps_recreation_area_activity_surfing">Surfing</string>
     <string name="poi_cypress">Čempres</string>
-    <string name="poi_site_type_hut_circle">Krug kolibe</string>
+    <string name="poi_archaeological_site_hut_circle">Krug kolibe</string>
     <string name="poi_volcano_type_mud">Blato</string>
     <string name="poi_animal_shelter_mammal">Sisavci</string>
     <string name="poi_water_characteristic_mineral">Mineralna</string>

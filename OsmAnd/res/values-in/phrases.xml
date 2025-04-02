@@ -981,7 +981,7 @@
     <string name="poi_phone">Telepon</string>
     <string name="poi_description">Keterangan</string>
     <string name="poi_opening_hours">Jam buka</string>
-    <string name="poi_site_type_city">Kota</string>
+    <string name="poi_archaeological_site_city">Kota</string>
     <string name="poi_material_aluminium">Bahan: alumunium</string>
     <string name="poi_material_bronze">Bahan: perunggu</string>
     <string name="poi_material_glass">Bahan: kaca</string>
@@ -1219,7 +1219,7 @@
     <string name="poi_permanent_camping_no">Tidak</string>
     <string name="poi_permanent_camping_yes">Ya;Perkemahan permanen</string>
     <string name="poi_authentication_none_yes">Ya;Tidak ada otentikasi</string>
-    <string name="poi_site_type_fortification">Benteng</string>
+    <string name="poi_archaeological_site_fortification">Benteng</string>
     <string name="poi_board_type_art">Seni</string>
     <string name="poi_landuse_education">Pendidikan</string>
     <string name="poi_faculty_law">Hukum</string>
