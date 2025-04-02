@@ -61,7 +61,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -353,7 +352,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else {
 							filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
 						}
-						showFilterOnMap(filter, getText());
+						if (filter != null) {
+							showFilterOnMap(filter, getText());
+						}
 					} else {
 						SearchWord word = searchPhrase.getLastSelectedWord();
 						if (word != null) {
@@ -608,7 +609,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		return view;
 	}
 
-	private void showFilterOnMap(@Nullable PoiUIFilter filter, @Nullable String title) {
+	private void showFilterOnMap(@NonNull PoiUIFilter filter, @Nullable String title) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			app.getPoiFilters().replaceSelectedPoiFilters(filter);
@@ -620,11 +621,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			showToolbar(title);
 			activity.updateStatusBarColor();
 			activity.refreshMap();
-
-			if (filter != null) {
-				FragmentManager manager = activity.getSupportFragmentManager();
-				ExplorePlacesFragment.Companion.showInstance(manager, filter);
-			}
 
 			hide();
 		}
