@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -534,7 +535,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return dialog;
 	}
 
-	private static AsyncTask<Void, Void, List<TileSourceTemplate>> createDownloadTileSourceTemplatesTask(final OsmandApplication app) {
+	@VisibleForTesting
+	public static AsyncTask<Void, Void, List<TileSourceTemplate>> createDownloadTileSourceTemplatesTask(final OsmandApplication app) {
 		return new AsyncTask<>() {
 
 			@Override
@@ -544,7 +546,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		};
 	}
 
-	private static <Params, Progress, Result> Result waitFor(final AsyncTask<Params, Progress, Result> task) {
+	@VisibleForTesting
+	public static <Params, Progress, Result> Result waitFor(final AsyncTask<Params, Progress, Result> task) {
 		try {
 			return task.get();
 		} catch (final ExecutionException | InterruptedException e) {

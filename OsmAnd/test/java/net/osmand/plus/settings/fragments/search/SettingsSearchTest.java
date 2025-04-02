@@ -1,13 +1,20 @@
 package net.osmand.plus.settings.fragments.search;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 import net.osmand.map.TileSourceManager;
+
+import static net.osmand.map.TileSourceManager.TileSourceTemplate;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.createDownloadTileSourceTemplatesTask;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.waitFor;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -28,6 +35,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @LargeTest
@@ -1241,6 +1249,64 @@ public class SettingsSearchTest extends AndroidTest {
 
 									private static String getOnlineTiles() {
 										return TileSourceManager.getMapnikSource().getName();
+									}
+								}
+						},
+						{
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapSource_nonInstalledTileSource",
+								new SettingsSearchTestTemplate() {
+
+									private String nonInstalledTileSource;
+
+									@Override
+									protected void initializeTest(final OsmandApplication app) {
+										nonInstalledTileSource = getAnyNonInstalledTileSource(app);
+									}
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return nonInstalledTileSource;
+									}
+
+									@Override
+									protected Set<Class<? extends OsmandPlugin>> getEnabledPluginClasses() {
+										return Set.of(OsmandRasterMapsPlugin.class);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context,
+																					final Set<OsmandPlugin> enabledPlugins,
+																					final Set<OsmandPlugin> disabledPlugins) {
+										return List.of(getSearchQuery(context));
+									}
+
+									private String getAnyNonInstalledTileSource(final OsmandApplication app) {
+										return getAny(getNonInstalledTileSources(app));
+									}
+
+									private Set<String> getNonInstalledTileSources(final OsmandApplication app) {
+										return Sets.difference(getAllTileSources(app), getInstalledTileSources(app));
+									}
+
+									private static Set<String> getAllTileSources(final OsmandApplication app) {
+										return getTileSourceTemplates(app)
+												.stream()
+												.map(TileSourceTemplate::getName)
+												.collect(Collectors.toUnmodifiableSet());
+									}
+
+									private static List<TileSourceTemplate> getTileSourceTemplates(final OsmandApplication app) {
+										final var downloadTask = createDownloadTileSourceTemplatesTask(app);
+										downloadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+										return waitFor(downloadTask);
+									}
+
+									private static Set<String> getInstalledTileSources(final OsmandApplication app) {
+										return app.getSettings().getTileSourceEntries().keySet();
+									}
+
+									private static <T> T getAny(final Collection<T> ts) {
+										return ts.stream().findAny().orElseThrow();
 									}
 								}
 						},
