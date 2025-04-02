@@ -90,16 +90,16 @@ public class SelectionDialogFragment extends DialogFragment implements SettingHi
 		return new ArrayList<>(itemByKey.keySet());
 	}
 
-	public static class SelectionDialogFragmentProxy<F extends SelectionDialogFragment> extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<F> {
+	public static class SelectionDialogFragmentProxy<Principal extends SelectionDialogFragment> extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<Principal> {
 
-		private F selectionDialogFragment;
+		private Principal selectionDialogFragment;
 
-		public F getPrincipal() {
+		public Principal getPrincipal() {
 			return selectionDialogFragment;
 		}
 
 		@Override
-		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final F selectionDialogFragment) {
+		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final Principal selectionDialogFragment) {
 			this.selectionDialogFragment = selectionDialogFragment;
 		}
 

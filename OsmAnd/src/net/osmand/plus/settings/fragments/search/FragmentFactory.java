@@ -11,6 +11,7 @@ import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.configmap.MapModeFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.widgets.alert.InstallMapLayersDialogFragment;
 import net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.RoadStyleSelectionDialogFragment;
@@ -44,8 +45,15 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 	}
 
 	private static <T extends Fragment> Optional<T> instantiateFragment(final Class<T> fragmentClass, final Optional<PreferenceWithHost> src) {
+		if (InstallMapLayersDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+			if (srcProxy instanceof final MapLayerSelectionDialogFragment.MapLayerSelectionDialogFragmentProxy _srcProxy) {
+				return (Optional<T>) _srcProxy.getPrincipal().installMapLayersDialogFragment;
+			} else if (srcProxy instanceof final InstallMapLayersDialogFragment.InstallMapLayersDialogFragmentProxy _srcProxy) {
+				return Optional.of((T) _srcProxy.getPrincipal());
+			}
+		}
 		if (MapLayerSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
-			// FK-TODO: zweite Stufe des MapLayerSelectionDialogFragment berücksichtigen für die Suche
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getDialogs().mapLayerDialog().orElseThrow());

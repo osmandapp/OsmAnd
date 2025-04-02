@@ -58,7 +58,7 @@ import java.util.stream.Collectors;
 public class MapLayers {
 
 	private final static String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
-	private final static String LAYER_INSTALL_MORE = "LAYER_INSTALL_MORE";
+	public final static String LAYER_INSTALL_MORE = "LAYER_INSTALL_MORE";
 	private final static String LAYER_ADD = "LAYER_ADD";
 
 	private final OsmandApplication app;
@@ -488,6 +488,12 @@ public class MapLayers {
 						targetLayer);
 		return Optional.of(
 				SelectionDialogFragmentFactory.createMapLayerSelectionDialogFragment(
+						createInstallMapLayersDialogFragment(
+								mapActivity,
+								includeOfflineMaps,
+								targetLayer,
+								callback,
+								false),
 						dialogData,
 						selectionDialogFragmentData,
 						new View.OnClickListener() {
@@ -552,9 +558,6 @@ public class MapLayers {
 		return entriesMap;
 	}
 
-	private record ItemByKeyAndSelectedItem(Map<String, CharSequence> itemByKey, int selectedItem) {
-	}
-
 	private void onMapLayerSelected(
 			@NonNull MapActivity mapActivity,
 			boolean includeOfflineMaps,
@@ -578,40 +581,12 @@ public class MapLayers {
 				OsmandRasterMapsPlugin.defineNewEditLayer(mapActivity, null, null);
 				break;
 			case LAYER_INSTALL_MORE:
-				OsmandRasterMapsPlugin.installMapLayers(
+				createInstallMapLayersDialogFragment(
 						mapActivity,
-						new ResultMatcher<>() {
-							TileSourceTemplate template;
-							int count;
-
-							@Override
-							public boolean publish(TileSourceTemplate object) {
-								if (object == null) {
-									if (count == 1) {
-										targetLayer.set(template.getName());
-										if (targetLayer == settings.MAP_TILE_SOURCES) {
-											settings.MAP_ONLINE_DATA.set(true);
-										}
-										updateLayers(mapActivity);
-										if (callback != null) {
-											callback.processResult(template.getName());
-										}
-									} else {
-										selectMapLayer(mapActivity, includeOfflineMaps, targetLayer, callback);
-									}
-								} else {
-									count++;
-									template = object;
-								}
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-						});
-				break;
+						includeOfflineMaps,
+						targetLayer,
+						callback,
+						true);
 			default:
 				targetLayer.set(layerKey);
 				if (targetLayer == settings.MAP_TILE_SOURCES) {
@@ -623,6 +598,49 @@ public class MapLayers {
 				}
 				break;
 		}
+	}
+
+	private Optional<InstallMapLayersDialogFragment> createInstallMapLayersDialogFragment(
+			final MapActivity mapActivity,
+			final boolean includeOfflineMaps,
+			final CommonPreference<String> targetLayer,
+			final CallbackWithObject<String> callback,
+			final boolean showUI) {
+		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		return OsmandRasterMapsPlugin.createInstallMapLayersDialogFragment(
+				mapActivity,
+				new ResultMatcher<>() {
+					TileSourceTemplate template;
+					int count;
+
+					@Override
+					public boolean publish(TileSourceTemplate object) {
+						if (object == null) {
+							if (count == 1) {
+								targetLayer.set(template.getName());
+								if (targetLayer == settings.MAP_TILE_SOURCES) {
+									settings.MAP_ONLINE_DATA.set(true);
+								}
+								updateLayers(mapActivity);
+								if (callback != null) {
+									callback.processResult(template.getName());
+								}
+							} else {
+								selectMapLayer(mapActivity, includeOfflineMaps, targetLayer, callback);
+							}
+						} else {
+							count++;
+							template = object;
+						}
+						return false;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				},
+				showUI);
 	}
 
 	private void updateRoutingPoiFiltersIfNeeded() {

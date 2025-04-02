@@ -269,41 +269,44 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						return;
 					}
 					if (which == items.length - 1) {
-						installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
-							TileSourceTemplate template;
-							int count;
-							boolean cancel;
+						createInstallMapLayersDialogFragment(
+								activity,
+								new ResultMatcher<>() {
+									TileSourceTemplate template;
+									int count;
+									boolean cancel;
 
-							@Override
-							public boolean publish(TileSourceTemplate object) {
-								MapActivity mapActv = mapActivityRef.get();
-								if (mapActv == null || mapActv.isFinishing()) {
-									cancel = true;
-									return false;
-								}
-								if (object == null) {
-									if (count == 1) {
-										mapPref.set(template.getName());
-										exMapPref.set(template.getName());
-										updateMapLayers(mapActv, mapActv, mapPref);
-										if (callback != null) {
-											callback.onMapSelected(false);
+									@Override
+									public boolean publish(TileSourceTemplate object) {
+										MapActivity mapActv = mapActivityRef.get();
+										if (mapActv == null || mapActv.isFinishing()) {
+											cancel = true;
+											return false;
 										}
-									} else {
-										selectMapOverlayLayer(mapPref, exMapPref, false, mapActv, null);
+										if (object == null) {
+											if (count == 1) {
+												mapPref.set(template.getName());
+												exMapPref.set(template.getName());
+												updateMapLayers(mapActv, mapActv, mapPref);
+												if (callback != null) {
+													callback.onMapSelected(false);
+												}
+											} else {
+												selectMapOverlayLayer(mapPref, exMapPref, false, mapActv, null);
+											}
+										} else {
+											count++;
+											template = object;
+										}
+										return false;
 									}
-								} else {
-									count++;
-									template = object;
-								}
-								return false;
-							}
 
-							@Override
-							public boolean isCancelled() {
-								return cancel;
-							}
-						});
+									@Override
+									public boolean isCancelled() {
+										return cancel;
+									}
+								},
+								true);
 					} else {
 						mapPref.set(keys.get(which));
 						exMapPref.set(keys.get(which));
@@ -519,11 +522,15 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return overlayLayerMapSource != null && overlayLayerMapSource.couldBeDownloadedFromInternet();
 	}
 
-	public static Optional<InstallMapLayersDialogFragment> installMapLayers(final FragmentActivity activity,
-																			final ResultMatcher<TileSourceTemplate> result) {
+	public static Optional<InstallMapLayersDialogFragment> createInstallMapLayersDialogFragment(
+			final FragmentActivity activity,
+			final ResultMatcher<TileSourceTemplate> result,
+			final boolean showUI) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (!app.getSettings().isInternetConnectionAvailable(true)) {
-			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			if (showUI) {
+				Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			}
 			return Optional.empty();
 		}
 		final var downloadTask = createDownloadTileSourceTemplatesTask(app);
@@ -531,7 +538,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final List<TileSourceTemplate> tileSourceTemplates = waitFor(downloadTask);
 		final Optional<InstallMapLayersDialogFragment> dialog =
 				new InstallMapLayersDialogFragmentFactory(activity, result).createInstallMapLayersDialogFragment(tileSourceTemplates);
-		dialog.ifPresent(_dialog -> _dialog.show(activity.getSupportFragmentManager()));
+		if (showUI) {
+			dialog.ifPresent(_dialog -> _dialog.show(activity.getSupportFragmentManager()));
+		}
 		return dialog;
 	}
 

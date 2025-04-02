@@ -5,10 +5,12 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class SelectionDialogFragmentFactory {
 
 	public static MapLayerSelectionDialogFragment createMapLayerSelectionDialogFragment(
+			final Optional<InstallMapLayersDialogFragment> installMapLayersDialogFragment,
 			final AlertDialogData data,
 			final SelectionDialogFragmentData selectionDialogFragmentData,
 			final View.OnClickListener itemClickListener) {
@@ -17,7 +19,13 @@ public class SelectionDialogFragmentFactory {
 				selectionDialogFragmentData,
 				itemClickListener,
 				false,
-				MapLayerSelectionDialogFragment::new);
+				(alertDialog, alertDialogData, itemByKey, adapter) ->
+						new MapLayerSelectionDialogFragment(
+								installMapLayersDialogFragment,
+								alertDialog,
+								alertDialogData,
+								itemByKey,
+								adapter));
 	}
 
 	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
