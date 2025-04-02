@@ -127,7 +127,7 @@
     <string name="poi_clothes_schoolwear">Skólaföt</string>
     <string name="poi_social_facility_shelter">Skýli</string>
     <string name="poi_social_facility_for_disabled">Fatlaðir</string>
-    <string name="poi_site_type_city">Borg</string>
+    <string name="poi_archaeological_site_city">Borg</string>
     <string name="poi_water_source_stream">Lækur</string>
     <string name="poi_aerodrome_type_public">Opinbert</string>
     <string name="poi_aerodrome_type_military">Hernaðar</string>
@@ -1034,7 +1034,7 @@
     <string name="poi_defibrillator_yes">Hjartastuðtæki: já</string>
     <string name="poi_animal_training_dog">Hundar</string>
     <string name="poi_animal_training_horse">Hestar</string>
-    <string name="poi_site_type_fortification">Virki</string>
+    <string name="poi_archaeological_site_fortification">Virki</string>
     <string name="poi_artist_name">Listamaður</string>
     <string name="poi_sculptor">Myndhöggvari</string>
     <string name="poi_aerialway_length">Lengd</string>
@@ -1316,7 +1316,7 @@
     <string name="poi_material_limestone">Efni: kalksteinn</string>
     <string name="poi_material_marble">Efni: marmari</string>
     <string name="poi_material_aluminium">Efni: ál</string>
-    <string name="poi_site_type_settlement">Landnám</string>
+    <string name="poi_archaeological_site_settlement">Landnám</string>
     <string name="poi_historic_farm">Sögulegt býli</string>
     <string name="poi_historic_railway_station">Söguleg járnbrautarstöð</string>
     <string name="poi_historic_railway">Söguleg járnbraut</string>
@@ -1407,10 +1407,10 @@
     <string name="poi_historic_period_alexander_the_great">Sögutími: Alexander mikli</string>
     <string name="poi_historic_stone">Sögulegur steinn</string>
     <string name="poi_stone_type_conciliation_cross">Tegund: steinkross</string>
-    <string name="poi_site_type_tumulus">Hörgur</string>
-    <string name="poi_site_type_hut_circle">Kofahringur</string>
-    <string name="poi_site_type_petroglyph">Steinristur</string>
-    <string name="poi_site_type_earthwork">Landmótun</string>
+    <string name="poi_archaeological_site_tumulus">Hörgur</string>
+    <string name="poi_archaeological_site_hut_circle">Kofahringur</string>
+    <string name="poi_archaeological_site_petroglyph">Steinristur</string>
+    <string name="poi_archaeological_site_earthwork">Landmótun</string>
     <string name="poi_historic_threshing_floor">Sögulegt þreskigólf</string>
     <string name="poi_building_type_basilica">Tegund byggingar: basilíka</string>
     <string name="poi_building_type_shrine">Tegund byggingar: skrín</string>
@@ -3148,8 +3148,8 @@
     <string name="poi_historic_period_first_persian_period">Sögutími: fyrra persneska tímabilið</string>
     <string name="poi_historic_period_second_persian_period">Sögutími: seinna persneska tímabilið</string>
     <string name="poi_historic_period_persian_occupation">Sögutími: persneska hernámið</string>
-    <string name="poi_site_type_megalith">Stórsteinn</string>
-    <string name="poi_site_type_necropolis">Grafhýsaþyrping</string>
+    <string name="poi_archaeological_site_megalith">Stórsteinn</string>
+    <string name="poi_archaeological_site_necropolis">Grafhýsaþyrping</string>
     <string name="poi_megalith_type_menhir">Tegund steins: bautasteinn</string>
     <string name="poi_megalith_type_dolmen">Tegund steins: dolmen</string>
     <string name="poi_megalith_type_nuraghe">Tegund steins: hringhleðsla (nuraghe)</string>

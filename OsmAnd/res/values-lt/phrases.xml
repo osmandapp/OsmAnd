@@ -1605,7 +1605,7 @@
     <string name="poi_surface_pebblestone">Paviršius: žvirgždas</string>
     <string name="poi_resource_mineral_oil">Mineralinė alyva</string>
     <string name="poi_resource_lead">Švinas</string>
-    <string name="poi_site_type_fortification">Fortas</string>
+    <string name="poi_archaeological_site_fortification">Fortas</string>
     <string name="poi_direction_northeast">Šiaurės rytų kryptis</string>
     <string name="poi_direction_west">Vakarų kryptis</string>
     <string name="poi_direction_south">Pietų kryptis</string>
