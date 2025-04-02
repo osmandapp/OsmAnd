@@ -5009,4 +5009,6 @@
     <string name="poi_methodist_church">Metodistický kostel</string>
     <string name="poi_russian_orthodox_church">Ruský pravoslavný kostel</string>
     <string name="poi_pentecostal_church">Letniční kostel</string>
+    <string name="poi_consulate">Konzulát</string>
+    <string name="poi_aerodrome_type_airfield">Letiště</string>
 </resources>
