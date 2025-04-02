@@ -5,18 +5,14 @@ import static net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarCo
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
-import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
-import net.osmand.util.Algorithms;
-
-import java.util.Set;
+import net.osmand.plus.views.mapwidgets.TopToolbarView;
 
 public class QuickSearchToolbarController extends TopToolbarController {
 
@@ -39,23 +35,24 @@ public class QuickSearchToolbarController extends TopToolbarController {
 			ExplorePlacesFragment fragment = getExplorePlacesFragment();
 			if (fragment != null) {
 				fragment.toggleState();
-			} else {
-				OsmandApplication app = activity.getMyApplication();
-				Set<PoiUIFilter> filters = app.getPoiFilters().getOverwrittenPoiFilters();
-				if (!Algorithms.isEmpty(filters)) {
-					PoiUIFilter filter = filters.iterator().next();
-					FragmentManager manager = activity.getSupportFragmentManager();
-					ExplorePlacesFragment.Companion.showInstance(manager, filter);
-				}
 			}
 		});
 		setActionButtonIcons(R.drawable.ic_flat_list_dark, R.drawable.ic_flat_list_dark);
-		setActionButtonVisible(true);
+		setActionButtonVisible(getExplorePlacesFragment() != null);
 	}
 
 	private void showQuickSearch() {
 		fragmentsHelper.closeExplore();
 		fragmentsHelper.showQuickSearch(CURRENT, false);
+	}
+
+	@Override
+	public void updateToolbar(@NonNull TopToolbarView toolbarView) {
+		super.updateToolbar(toolbarView);
+
+		boolean visible = getExplorePlacesFragment() != null;
+		setActionButtonVisible(visible);
+		AndroidUiHelper.updateVisibility(toolbarView.getActionButton(), visible);
 	}
 
 	@Nullable

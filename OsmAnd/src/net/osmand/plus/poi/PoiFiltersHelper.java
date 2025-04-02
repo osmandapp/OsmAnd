@@ -469,11 +469,6 @@ public class PoiFiltersHelper {
 		return overwrittenPoiFilters != null ? overwrittenPoiFilters : selectedPoiFilters;
 	}
 
-	@Nullable
-	public Set<PoiUIFilter> getOverwrittenPoiFilters() {
-		return overwrittenPoiFilters;
-	}
-
 	public void replaceSelectedPoiFilters(@NonNull PoiUIFilter filter) {
 		overwrittenPoiFilters = new TreeSet<>(Set.of(filter));
 	}
