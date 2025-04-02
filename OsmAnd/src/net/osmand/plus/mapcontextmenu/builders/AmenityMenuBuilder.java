@@ -6,11 +6,13 @@ import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.WPT_EXTRA_TAGS;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.google.gson.Gson;
@@ -25,8 +27,9 @@ import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -40,14 +43,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
+import java.util.StringJoiner;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
+	public static final String WIKIPEDIA_ORG_WIKI_URL_PART = ".wikipedia.org/wiki/";
 
 	protected Amenity amenity;
 	private AmenityUIHelper rowsBuilder;
 	protected Map<String, String> additionalInfo;
+	boolean descriptionCollapsed = true;
+	boolean hasDescriptionData;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
@@ -56,7 +63,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
 		additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
-		setCustomOnlinePhotosPosition(true);
+		if (additionalInfo.containsKey(Amenity.WIKIDATA)) {
+			setCustomOnlinePhotosPosition(true);
+		}
 	}
 
 	@Override
@@ -67,22 +76,21 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected void buildNearestPoiRow(ViewGroup view) {
 	}
 
-	boolean descriptionCollapsed = true;
-	boolean hasData = false;
 	@Override
 	protected void buildDescription(View view) {
 		if (amenity != null) {
-			hasData = true;
+			hasDescriptionData = true;
+			Locale prefferedLocale = null;
+			AdditionalInfoBundle additionalInfoBundle = new AdditionalInfoBundle(app, amenity.getAmenityExtensions(app.getPoiTypes(), false));
+			Map<String, Object> filteredInfo = additionalInfoBundle.getFilteredLocalizedInfo();
 			String description = amenity.getAdditionalInfo(Amenity.SHORT_DESCRIPTION);
-			if(description == null) {
-				AdditionalInfoBundle additionalInfoBundle = new AdditionalInfoBundle(app, amenity.getAmenityExtensions(app.getPoiTypes(), false));
-				Map<String, Object> filteredInfo = additionalInfoBundle.getFilteredLocalizedInfo();
+			if (description == null) {
 				Object descriptionMapObject = filteredInfo.get(Amenity.SHORT_DESCRIPTION);
 				if (descriptionMapObject instanceof Map<?, ?>) {
 					Map<String, Object> descriptionMAp = (Map<String, Object>) descriptionMapObject;
 					Map<String, String> localizedAdditionalInfo = (Map<String, String>) descriptionMAp.get("localizations");
 					Collection<String> availableLocales = AmenityUIHelper.collectAvailableLocalesFromTags(localizedAdditionalInfo.keySet());
-					Locale prefferedLocale = LocaleHelper.getPreferredNameLocale(app, availableLocales);
+					prefferedLocale = LocaleHelper.getPreferredNameLocale(app, availableLocales);
 					String descriptionLocalizedKey = prefferedLocale != null ? Amenity.SHORT_DESCRIPTION + ":" + prefferedLocale.getLanguage() : Amenity.SHORT_DESCRIPTION;
 					description = localizedAdditionalInfo.get(descriptionLocalizedKey);
 					if (description == null) {
@@ -91,9 +99,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					}
 				}
 			}
-			if(Algorithms.isEmpty(description)) {
-				hasData = false;
-				description = amenity.getFlattenedNames();
+			if (Algorithms.isEmpty(description)) {
+				hasDescriptionData = false;
+				description = createWikipediaArticleList(filteredInfo);
 			}
 			if (!Algorithms.isEmpty(description)) {
 				View rowView = buildRow(view, 0, null, description, 0, true,
@@ -105,20 +113,62 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					updateDescriptionState(textView, descriptionToSet);
 				});
 				updateDescriptionState(textView, descriptionToSet);
-				String btnText = app.getString(hasData ? R.string.context_menu_read_full_article : R.string.read_on_wiki);
+				String btnText = app.getString(hasDescriptionData ? R.string.context_menu_read_full_article : R.string.read_on_wiki);
+				Locale finalPrefferedLocale = prefferedLocale;
 				buildReadFullButton((LinearLayout) view, btnText, (v) -> {
-					WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
+					if (hasDescriptionData) {
+						WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
+					} else {
+						String wikipediaUrl = amenity.getAdditionalInfo(Amenity.WIKIPEDIA);
+						if (wikipediaUrl == null && finalPrefferedLocale != null) {
+							String title = amenity.getName(finalPrefferedLocale.getLanguage());
+							wikipediaUrl = "https://" + finalPrefferedLocale.getLanguage() + WIKIPEDIA_ORG_WIKI_URL_PART + title.replace(' ', '_');
+						}
+						MapActivity activity = app.getOsmandMap().getMapView().getMapActivity();
+						if (activity != null) {
+							AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), app.getDaynightHelper().isNightMode());
+						}
+					}
 				});
 			}
+			if (isCustomOnlinePhotosPosition()) {
+				buildNearestPhotos((ViewGroup) view, amenity);
+			}
 		}
-		buildNearestPhotos((ViewGroup) view, amenity);
+	}
+
+	@Nullable
+	private String createWikipediaArticleList(Map<String, Object> filteredInfo) {
+		Object value = filteredInfo.get(Amenity.WIKIPEDIA);
+		if (value != null) {
+			if (value instanceof String url) {
+				if (url.contains(WIKIPEDIA_ORG_WIKI_URL_PART)) {
+					return url.substring(url.lastIndexOf(WIKIPEDIA_ORG_WIKI_URL_PART) + WIKIPEDIA_ORG_WIKI_URL_PART.length());
+				}
+			} else {
+				Map<String, Object> map = (Map<String, Object>) value;
+				Map<String, String> localizedAdditionalInfo = (Map<String, String>) map.get("localizations");
+				if (Algorithms.isEmpty(localizedAdditionalInfo)) {
+					return null;
+				}
+				Collection<String> availableLocales = AmenityUIHelper.collectAvailableLocalesFromTags(localizedAdditionalInfo.keySet());
+				StringJoiner joiner = new StringJoiner(", ");
+				for (String key : availableLocales) {
+					String localizedKey = Amenity.WIKIPEDIA + ":" + key;
+					String name = String.format(app.getString(R.string.wikipedia_names_pattern), localizedAdditionalInfo.get(localizedKey), key);
+					joiner.add(name);
+				}
+				return joiner.toString();
+			}
+		}
+		return null;
 	}
 
 	private void updateDescriptionState(TextViewEx textView, String description) {
 		String text = description;
-		if(descriptionCollapsed) {
+		if (descriptionCollapsed) {
 			text = description.substring(0, Math.min(description.length(), 200));
-			if(description.length() > text.length()) {
+			if (description.length() > text.length()) {
 				text += app.getString(R.string.shared_string_ellipsis);
 			}
 		}
