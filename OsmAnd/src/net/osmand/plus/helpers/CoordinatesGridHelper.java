@@ -46,7 +46,6 @@ public class CoordinatesGridHelper {
 	private Float cachedTextScale;
 	private Boolean cachedGridShow;
 	private boolean cachedNightMode;
-	@Nullable private Boolean forcedNightMode;
 	private StateChangedListener settingsListener;
 
 	public CoordinatesGridHelper(@NonNull OsmandApplication app,
@@ -293,13 +292,7 @@ public class CoordinatesGridHelper {
 	}
 
 	private boolean isNightMode(@NonNull ApplicationMode appMode) {
-		return forcedNightMode != null
-				? forcedNightMode
-				: app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode);
-	}
-
-	public void setForcedNightMode(@Nullable Boolean forcedNightMode) {
-		this.forcedNightMode = forcedNightMode;
+		return app.getDaynightHelper().isNightMode();
 	}
 
 	@NonNull

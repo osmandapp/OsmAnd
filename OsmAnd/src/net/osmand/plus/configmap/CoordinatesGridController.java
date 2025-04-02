@@ -183,7 +183,7 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public boolean isNightMode() {
-		return screen != null && screen.isNightMode();
+		return app.getDaynightHelper().isNightMode();
 	}
 
 	@DrawableRes
