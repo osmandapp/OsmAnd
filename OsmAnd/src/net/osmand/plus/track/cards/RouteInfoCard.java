@@ -59,9 +59,7 @@ import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
 import org.apache.commons.logging.Log;
 
 public class RouteInfoCard extends MapBaseCard {
-	public static final Set<String> HIDDEN_GPX_TAGS = Set.of(ACTIVITY_TYPE, NAME, DESCRIPTION,
-			ROUTE_BBOX_RADIUS, ROUTE_SHORTLINK_TILES, ROUTE_SEGMENT_INDEX, "translucent_line_colors");
-	private static final String HIDDEN_SHIELD_TAGS_PREFIX = "shield_";
+	public static final Set<String> HIDDEN_GPX_TAGS = Set.of(ACTIVITY_TYPE, NAME, DESCRIPTION);
 	private static final String HIDDEN_OSMC_TAGS_PREFIX = "osmc_";
 	public static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";
 	public static final String OSM_WAY_URL = "https://www.openstreetmap.org/way/";
@@ -140,8 +138,8 @@ public class RouteInfoCard extends MapBaseCard {
 			if (routeKey.type != OsmRouteType.UNKNOWN &&
 					(key.equals("name") || key.equals("type") || key.contains("osmc"))) {
 				continue;
-			} else if (key.startsWith(HIDDEN_SHIELD_TAGS_PREFIX) || key.startsWith(HIDDEN_OSMC_TAGS_PREFIX) ||
-					HIDDEN_GPX_TAGS.contains(key) || GpxAppearanceInfo.isGpxAppearanceTag(key)) {
+			} else if (HIDDEN_GPX_TAGS.contains(key) || key.startsWith(HIDDEN_OSMC_TAGS_PREFIX)
+					|| GpxAppearanceInfo.isGpxAppearanceTag(key)) {
 				continue;
 			} else if (key.contains(":") && !key.startsWith("name:") && !key.startsWith("ref:")) {
 				String mainTag = key.split(":")[1];
@@ -153,6 +151,10 @@ public class RouteInfoCard extends MapBaseCard {
 			}
 
 			RouteTag routeTag = new RouteTag(key, value);
+
+			if (routeTag.poiType != null && routeTag.poiType.isHidden()) {
+				continue;
+			}
 
 			String keyBase = key.split(":")[0];
 			if (TRANSLATABLE_KEYS.containsKey(keyBase)) {
