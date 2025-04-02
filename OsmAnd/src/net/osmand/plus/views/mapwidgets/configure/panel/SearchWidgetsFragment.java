@@ -301,8 +301,8 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 
 			for (WidgetType widgetType : allWidgetTypes) {
-				if (widgetType.getGroup() != null) {
-					groupedWidgets.computeIfAbsent(widgetType.getGroup(), k -> new ArrayList<>()).add(widgetType);
+				if (widgetType.getGroup(selectedPanel) != null) {
+					groupedWidgets.computeIfAbsent(widgetType.getGroup(selectedPanel), k -> new ArrayList<>()).add(widgetType);
 				}
 			}
 			widgetItems.clear();
@@ -319,7 +319,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 			sortWidgetsItems(app, allWidgetItems);
 
 			for (WidgetType widgetType : allWidgetTypes) {
-				if (widgetType.getGroup() == null) {
+				if (widgetType.getGroup(selectedPanel) == null) {
 					widgetItems.add(widgetType);
 				}
 			}
