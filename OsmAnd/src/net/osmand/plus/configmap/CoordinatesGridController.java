@@ -182,6 +182,10 @@ public class CoordinatesGridController extends BaseDialogController {
 		return app.getSettings().getApplicationMode();
 	}
 
+	public boolean isNightMode() {
+		return screen != null && screen.isNightMode();
+	}
+
 	@DrawableRes
 	public static int getStateIcon(boolean selected) {
 		return selected ?

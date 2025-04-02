@@ -1,7 +1,5 @@
 package net.osmand.plus.helpers;
 
-import android.graphics.Color;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,6 +46,7 @@ public class CoordinatesGridHelper {
 	private Float cachedTextScale;
 	private Boolean cachedGridShow;
 	private boolean cachedNightMode;
+	@Nullable private Boolean forcedNightMode;
 	private StateChangedListener settingsListener;
 
 	public CoordinatesGridHelper(@NonNull OsmandApplication app,
@@ -294,12 +293,13 @@ public class CoordinatesGridHelper {
 	}
 
 	private boolean isNightMode(@NonNull ApplicationMode appMode) {
-		return app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode);
+		return forcedNightMode != null
+				? forcedNightMode
+				: app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode);
 	}
 
-	@NonNull
-	public Limits<Integer> getZoomLevelsWithRestrictions() {
-		return getZoomLevelsWithRestrictions(settings.getApplicationMode());
+	public void setForcedNightMode(@Nullable Boolean forcedNightMode) {
+		this.forcedNightMode = forcedNightMode;
 	}
 
 	@NonNull

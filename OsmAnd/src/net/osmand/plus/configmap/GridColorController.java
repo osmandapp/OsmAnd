@@ -40,6 +40,7 @@ public class GridColorController extends MapColorPaletteController {
 
 	@Override
 	public void onCloseScreen(@NonNull MapActivity activity) {
+		gridHelper.setForcedNightMode(null);
 		setSavedColors(applyChanges);
 		activity.getSupportFragmentManager().popBackStack();
 		activity.getDashboard().setDashboardVisibility(true, COORDINATE_GRID, false);
@@ -71,6 +72,7 @@ public class GridColorController extends MapColorPaletteController {
 
 	@Override
 	protected void onColorsPaletteModeChanged() {
+		gridHelper.setForcedNightMode(isNightMap());
 		externalListener.onColorsPaletteModeChanged();
 		askUpdateGridColor();
 	}

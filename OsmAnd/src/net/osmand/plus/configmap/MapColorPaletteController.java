@@ -50,6 +50,7 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 		super(app);
 		this.colorDay = this.initialColorDay = initialColorDay;
 		this.colorNight = this.initialColorNight = initialColorNight;
+		initialNightMode = app.getDaynightHelper().isNightModeForMapControls();
 	}
 
 	@NonNull
@@ -76,7 +77,6 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 	}
 
 	public void onResume() {
-		initialNightMode = app.getDaynightHelper().isNightModeForMapControls();
 		setMapThemeProvider(this);
 	}
 
