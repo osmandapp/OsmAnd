@@ -5767,4 +5767,8 @@
     <string name="display_priority">Anzeigepriorität</string>
     <string name="poi_source">POI-Quelle</string>
     <string name="row_height">Zeilenhöhe</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="read_on_wiki">Auf Wikipedia lesen</string>
+    <string name="prediction_time">Vorhersagezeit</string>
+    <string name="shared_string_no_animation">Keine Animation</string>
 </resources>
