@@ -7,7 +7,9 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.ResultMatcher;
-import net.osmand.map.TileSourceManager;
+
+import static net.osmand.map.TileSourceManager.TileSourceTemplate;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -24,40 +26,40 @@ class InstallMapLayersDialogFragmentFactory {
 
 	private final FragmentActivity activity;
 	private final OsmandSettings settings;
-	private final ResultMatcher<TileSourceManager.TileSourceTemplate> result;
+	private final ResultMatcher<TileSourceTemplate> result;
 
 	public InstallMapLayersDialogFragmentFactory(final FragmentActivity activity,
-												 final ResultMatcher<TileSourceManager.TileSourceTemplate> result) {
+												 final ResultMatcher<TileSourceTemplate> result) {
 		this.activity = activity;
 		this.result = result;
 		this.settings = ((OsmandApplication) activity.getApplication()).getSettings();
 	}
 
-	public Optional<InstallMapLayersDialogFragment> createInstallMapLayersDialogFragment(final List<TileSourceManager.TileSourceTemplate> downloaded) {
+	public Optional<InstallMapLayersDialogFragment> createInstallMapLayersDialogFragment(final List<TileSourceTemplate> tileSourceTemplates) {
 		if (activity.isFinishing()) {
 			return Optional.empty();
 		}
-		if (downloaded == null || downloaded.isEmpty()) {
+		if (tileSourceTemplates == null || tileSourceTemplates.isEmpty()) {
 			Toast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 			return Optional.empty();
 		}
-		final boolean[] selected = new boolean[downloaded.size()];
+		final boolean[] selected = new boolean[tileSourceTemplates.size()];
 		return Optional.of(
 				SelectionDialogFragmentFactory.createInstallMapLayersDialogFragment(
-						getAlertDialogData(downloaded, selected, activity),
-						createSelectionDialogFragmentData(downloaded, selected),
+						getAlertDialogData(tileSourceTemplates, selected, activity),
+						createSelectionDialogFragmentData(tileSourceTemplates, selected),
 						v -> {
 							if (!activity.isFinishing()) {
 								final int which = (int) v.getTag();
 								selected[which] = !selected[which];
-								if (settings.getTileSourceEntries().containsKey(downloaded.get(which).getName()) && selected[which]) {
+								if (settings.getTileSourceEntries().containsKey(tileSourceTemplates.get(which).getName()) && selected[which]) {
 									Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
 								}
 							}
 						}));
 	}
 
-	private AlertDialogData getAlertDialogData(final List<TileSourceManager.TileSourceTemplate> downloaded,
+	private AlertDialogData getAlertDialogData(final List<TileSourceTemplate> tileSourceTemplates,
 											   final boolean[] selected,
 											   final FragmentActivity activity) {
 		final boolean nightMode = OsmandRasterMapsPlugin.isNightMode(activity);
@@ -67,13 +69,13 @@ class InstallMapLayersDialogFragmentFactory {
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
 					if (!activity.isFinishing()) {
-						List<TileSourceManager.TileSourceTemplate> toInstall = new ArrayList<>();
+						final List<TileSourceTemplate> toInstall = new ArrayList<>();
 						for (int i = 0; i < selected.length; i++) {
 							if (selected[i]) {
-								toInstall.add(downloaded.get(i));
+								toInstall.add(tileSourceTemplates.get(i));
 							}
 						}
-						for (TileSourceManager.TileSourceTemplate ts : toInstall) {
+						for (TileSourceTemplate ts : toInstall) {
 							if (settings.installTileSource(ts)) {
 								if (result != null) {
 									result.publish(ts);
@@ -89,9 +91,9 @@ class InstallMapLayersDialogFragmentFactory {
 	}
 
 	private static SelectionDialogFragmentData createSelectionDialogFragmentData(
-			final List<TileSourceManager.TileSourceTemplate> downloaded,
+			final List<TileSourceTemplate> tileSourceTemplates,
 			final boolean[] selected) {
-		final List<String> names = getNames(downloaded);
+		final List<String> names = getNames(tileSourceTemplates);
 		return new SelectionDialogFragmentData(
 				names,
 				asCharSequences(names),
@@ -99,10 +101,10 @@ class InstallMapLayersDialogFragmentFactory {
 				INVALID_ID);
 	}
 
-	private static List<String> getNames(final List<TileSourceManager.TileSourceTemplate> downloaded) {
-		return downloaded
+	private static List<String> getNames(final List<TileSourceTemplate> tileSourceTemplates) {
+		return tileSourceTemplates
 				.stream()
-				.map(TileSourceManager.TileSourceTemplate::getName)
+				.map(TileSourceTemplate::getName)
 				.collect(Collectors.toUnmodifiableList());
 	}
 

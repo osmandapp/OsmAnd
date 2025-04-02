@@ -23,6 +23,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
+
+import static net.osmand.plus.plugins.PluginsHelper.isOnlineMapsPluginActive;
+
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -471,7 +474,7 @@ public class MapLayers {
 			final boolean includeOfflineMaps,
 			final @NonNull CommonPreference<String> targetLayer,
 			final @Nullable CallbackWithObject<String> callback) {
-		if (!PluginsHelper.isOnlineMapsPluginActive()) {
+		if (!isOnlineMapsPluginActive()) {
 			return Optional.empty();
 		}
 		final boolean nightMode = isNightMode();
@@ -553,7 +556,8 @@ public class MapLayers {
 	}
 
 	private void onMapLayerSelected(
-			@NonNull MapActivity mapActivity, boolean includeOfflineMaps,
+			@NonNull MapActivity mapActivity,
+			boolean includeOfflineMaps,
 			@NonNull CommonPreference<String> targetLayer,
 			@Nullable CallbackWithObject<String> callback,
 			@NonNull String layerKey

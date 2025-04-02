@@ -527,9 +527,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		final var downloadTask = createDownloadTileSourceTemplatesTask(app);
 		downloadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		final List<TileSourceTemplate> downloaded = waitFor(downloadTask);
+		final List<TileSourceTemplate> tileSourceTemplates = waitFor(downloadTask);
 		final Optional<InstallMapLayersDialogFragment> dialog =
-				new InstallMapLayersDialogFragmentFactory(activity, result).createInstallMapLayersDialogFragment(downloaded);
+				new InstallMapLayersDialogFragmentFactory(activity, result).createInstallMapLayersDialogFragment(tileSourceTemplates);
 		dialog.ifPresent(_dialog -> _dialog.show(activity.getSupportFragmentManager()));
 		return dialog;
 	}
