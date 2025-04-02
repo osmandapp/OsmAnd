@@ -46,7 +46,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
+import net.osmand.plus.widgets.alert.InstallMapLayersDialogFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -518,20 +518,20 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return overlayLayerMapSource != null && overlayLayerMapSource.couldBeDownloadedFromInternet();
 	}
 
-	public static Optional<MultiSelectionDialogFragment> installMapLayers(final FragmentActivity activity,
-																		  final ResultMatcher<TileSourceTemplate> result) {
+	public static Optional<InstallMapLayersDialogFragment> installMapLayers(final FragmentActivity activity,
+																			final ResultMatcher<TileSourceTemplate> result) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final OsmandSettings settings = app.getSettings();
-		if (!settings.isInternetConnectionAvailable(true)) {
+		if (!app.getSettings().isInternetConnectionAvailable(true)) {
 			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 			return Optional.empty();
 		}
-		final var downloadTileSourceTemplatesTask = createDownloadTileSourceTemplatesTask(app);
-		downloadTileSourceTemplatesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		final List<TileSourceTemplate> downloaded = waitFor(downloadTileSourceTemplatesTask);
-		final Optional<MultiSelectionDialogFragment> multiSelectionDialogFragment = new MultiSelectionDialogFragmentFactory(activity, result).createMultiSelectionDialogFragment(downloaded);
-		multiSelectionDialogFragment.ifPresent(_multiSelectionDialogFragment -> _multiSelectionDialogFragment.show(activity.getSupportFragmentManager()));
-		return multiSelectionDialogFragment;
+		final var downloadTask = createDownloadTileSourceTemplatesTask(app);
+		downloadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		final List<TileSourceTemplate> downloaded = waitFor(downloadTask);
+		final Optional<InstallMapLayersDialogFragment> dialog =
+				new InstallMapLayersDialogFragmentFactory(activity, result).createInstallMapLayersDialogFragment(downloaded);
+		dialog.ifPresent(_dialog -> _dialog.show(activity.getSupportFragmentManager()));
+		return dialog;
 	}
 
 	private static AsyncTask<Void, Void, List<TileSourceTemplate>> createDownloadTileSourceTemplatesTask(final OsmandApplication app) {

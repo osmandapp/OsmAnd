@@ -44,6 +44,18 @@ public class SelectionDialogFragmentFactory {
 				MultiSelectionDialogFragment::new);
 	}
 
+	public static InstallMapLayersDialogFragment createInstallMapLayersDialogFragment(
+			final AlertDialogData data,
+			final SelectionDialogFragmentData selectionDialogFragmentData,
+			final View.OnClickListener itemClickListener) {
+		return createSelectionDialogFragment(
+				data,
+				selectionDialogFragmentData,
+				itemClickListener,
+				true,
+				InstallMapLayersDialogFragment::new);
+	}
+
 	@FunctionalInterface
 	private interface _SelectionDialogFragmentFactory<F extends SelectionDialogFragment> {
 

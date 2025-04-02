@@ -20,22 +20,20 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 // FK-TODO: refractor
-// FK-TODO: rename to installMapLayersFactpry
-class MultiSelectionDialogFragmentFactory {
+class InstallMapLayersDialogFragmentFactory {
 
 	private final FragmentActivity activity;
 	private final OsmandSettings settings;
 	private final ResultMatcher<TileSourceManager.TileSourceTemplate> result;
 
-	public MultiSelectionDialogFragmentFactory(final FragmentActivity activity,
-											   final ResultMatcher<TileSourceManager.TileSourceTemplate> result) {
+	public InstallMapLayersDialogFragmentFactory(final FragmentActivity activity,
+												 final ResultMatcher<TileSourceManager.TileSourceTemplate> result) {
 		this.activity = activity;
 		this.result = result;
 		this.settings = ((OsmandApplication) activity.getApplication()).getSettings();
 	}
 
-	// FK-TODO: create class InstallMapLayersDialogFragment as a replacement for MultiSelectionDialogFragment in this situation
-	public Optional<MultiSelectionDialogFragment> createMultiSelectionDialogFragment(final List<TileSourceManager.TileSourceTemplate> downloaded) {
+	public Optional<InstallMapLayersDialogFragment> createInstallMapLayersDialogFragment(final List<TileSourceManager.TileSourceTemplate> downloaded) {
 		if (activity.isFinishing()) {
 			return Optional.empty();
 		}
@@ -45,7 +43,7 @@ class MultiSelectionDialogFragmentFactory {
 		}
 		final boolean[] selected = new boolean[downloaded.size()];
 		return Optional.of(
-				SelectionDialogFragmentFactory.createMultiSelectionDialogFragment(
+				SelectionDialogFragmentFactory.createInstallMapLayersDialogFragment(
 						getAlertDialogData(downloaded, selected, activity),
 						createSelectionDialogFragmentData(downloaded, selected),
 						v -> {
