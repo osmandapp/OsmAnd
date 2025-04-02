@@ -125,8 +125,6 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	public void updateWidgetView() {
 		if (verticalWidget) {
 			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
-			int streetNameColor = ColorUtilities.getColor(app, nightMode ? R.color.text_color_tertiary_light : R.color.icon_color_secondary_dark);
-			streetView.setTextColor(streetNameColor);
 		}
 	}
 
@@ -380,6 +378,11 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 				? R.color.text_color_primary_dark
 				: R.color.widgettext_day;
 		exitView.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
+
+		int streetNameColor = ColorUtilities.getColor(app, nightMode
+				? R.color.text_color_tertiary_light
+				: R.color.icon_color_secondary_dark);
+		streetView.setTextColor(streetNameColor);
 
 		distanceView.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
 		distanceSubView.setTextColor(ColorUtilities.getSecondaryTextColor(mapActivity, nightMode));
