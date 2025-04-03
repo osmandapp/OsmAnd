@@ -3816,7 +3816,7 @@
     <string name="poi_liaison_liaison_office">Kancelarija</string>
     <string name="poi_consulate_honorary_consul">Počasni konzulat</string>
     <string name="poi_consulate_consulate_general">Generalni konzulat</string>
-    <string name="poi_consulate_consular_office">Konzulat</string>
+    <string name="poi_consulate_consular_office">Konzularna kancelarija</string>
     <string name="poi_consulate_consular_agency">Konzularna agencija</string>
     <string name="poi_consulate_yes">Na čelu sa konzulom</string>
     <string name="poi_embassy_residence">Rezidencija</string>
@@ -5009,4 +5009,6 @@
     <string name="poi_presbyterian_church">Prezbiterijanska crkva</string>
     <string name="poi_protestant_church">Protestantska crkva</string>
     <string name="poi_evangelical_church">Evangelistička crkva</string>
+    <string name="poi_aerodrome_type_airfield">Pista</string>
+    <string name="poi_consulate">Konzulat</string>
 </resources>
