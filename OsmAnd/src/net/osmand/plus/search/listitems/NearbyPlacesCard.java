@@ -53,7 +53,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 
 	private final OsmandApplication app;
 	private final WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
-	private final PoiUIFilter wikiFilter = plugin.getTopWikiPoiFilter();
+	private PoiUIFilter wikiFilter;
 
 	private SearchAmenitiesTask searchAmenitiesTask;
 
@@ -121,8 +121,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
-				if (dialogFragment != null) {
-					dialogFragment.showResult(wikiFilter);
+				if (dialogFragment != null && getWikiFilter() != null) {
+					dialogFragment.showResult(getWikiFilter());
 				}
 			}
 		});
@@ -199,13 +199,21 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	}
 
 	private void startLoadingNearbyPlaces() {
-		if (!isLoadingItems) {
+		if (!isLoadingItems && getWikiFilter() != null) {
 			isLoadingItems = true;
 			LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-			searchAmenitiesTask = new SearchAmenitiesTask(wikiFilter, latLon);
+			searchAmenitiesTask = new SearchAmenitiesTask(getWikiFilter(), latLon);
 			searchAmenitiesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			AndroidUiHelper.updateVisibility(progressBar, true);
 		}
+	}
+
+	@Nullable
+	private PoiUIFilter getWikiFilter() {
+		if(wikiFilter == null) {
+			wikiFilter = plugin.getTopWikiPoiFilter();
+		}
+		return wikiFilter;
 	}
 
 	private void setupExpandNearbyPlacesIndicator() {
