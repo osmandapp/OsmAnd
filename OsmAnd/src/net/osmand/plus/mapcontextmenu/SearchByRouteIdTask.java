@@ -9,7 +9,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +21,8 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
 
     private final SearchType searchType;
     private final OsmandApplication app;
+
+    private final Amenity amenity;
 
     public enum SearchType {
         RELATED,
@@ -44,14 +45,16 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
         }
         searchType = type;
         this.app = app;
+        this.amenity = amenity;
     }
 
-    protected SearchByRouteIdTask(String routeId, String routeMembersIds, SearchType type, OsmandApplication app, SearchByRouteIdListener listener) {
+    public SearchByRouteIdTask(String routeId, String routeMembersIds, SearchType type, OsmandApplication app, SearchByRouteIdListener listener) {
         this.routeId = routeId;
         this.routeMembersIds = routeMembersIds;
         this.listener = listener;
         this.searchType = type;
         this.app = app;
+        this.amenity = null;
     }
 
     @Override
@@ -80,7 +83,9 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
                     for (Amenity am : list) {
                         LatLon l = am.getLocation();
                         if (!latLonHashSet.contains(l)) {
-                            amenities.add(am);
+                            if (amenity == null || !amenity.getId().equals(am.getId())) {
+                                amenities.add(am);
+                            }
                         }
                         latLonHashSet.add(l);
                     }

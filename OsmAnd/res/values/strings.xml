@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="route_members">Members</string>
+    <string name="multipoligon_related">Related</string>
+    <string name="route_part_of">Part of</string>
 	<string name="wikidata">Wikidata</string>
 	<string name="read_on_wiki">Read on Wikipedia</string>
     <string name="prediction_time_description">Position icon in OsmAnd animates with each received GPS data point (once per second). A slight delay in its movement may be noticeable, especially when the user is moving quickly or the GPS signal fluctuates.</string>
