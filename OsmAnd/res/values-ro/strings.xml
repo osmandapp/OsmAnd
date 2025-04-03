@@ -6121,4 +6121,11 @@
     <string name="show_mercator_grids_description">Afișați grila în km Mercator în loc de WGS84 sau UTM</string>
     <string name="show_dm_grids_description">Afișați grila în grade și minute în loc de grade sau DMS</string>
     <string name="wiki_around">Locuri populare din apropiere</string>
+    <string name="shared_string_road_exit">Ieșire</string>
+    <string name="ais_address_settings">Setări adresă IP</string>
+    <string name="ais_load_data">Încărcați datele AIS din fișier</string>
+    <string name="ais_address_settings_description">Alegeți protocolul NMEA (UDP/TCP) și definiți adresele</string>
+    <string name="ais_nmea_protocol_description">Alegeți protocolul pentru recepția datelor NMEA</string>
+    <string name="ais_address_nmea_server">Adresa IP a sursei de date NMEA</string>
+    <string name="ais_nmea_protocol">Protocol pentru recepția datelor NMEA</string>
 </resources>
