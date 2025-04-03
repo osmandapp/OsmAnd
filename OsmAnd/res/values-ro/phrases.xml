@@ -4996,4 +4996,18 @@
     <string name="poi_jehovahs_witness_kingdom_hall">Sala Regatului Martorilor lui Iehova</string>
     <string name="poi_catholic_church">Biserica catolică</string>
     <string name="poi_roman_catholic_church">Biserica romano-catolică</string>
+    <string name="poi_aerodrome_type_airfield">Aerodrom</string>
+    <string name="poi_consulate">Consulat</string>
+    <string name="poi_baptist_church">Biserica baptistă</string>
+    <string name="poi_lutheran_church">Biserica luterană</string>
+    <string name="poi_orthodox_church">Biserica Ortodoxă</string>
+    <string name="poi_protestant_church">Biserica protestantă</string>
+    <string name="poi_anglican_church">Biserica anglicană</string>
+    <string name="poi_methodist_church">Biserica metodistă</string>
+    <string name="poi_greek_orthodox_church">Biserica Ortodoxă Greacă</string>
+    <string name="poi_russian_orthodox_church">Biserica Ortodoxă Rusă</string>
+    <string name="poi_pentecostal_church">Biserica penticostală</string>
+    <string name="poi_evangelical_church">Biserica evanghelică</string>
+    <string name="poi_presbyterian_church">Biserica prezbiteriană</string>
+    <string name="poi_access_main_tag">Acces</string>
 </resources>
