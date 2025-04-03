@@ -4961,4 +4961,7 @@
     <string name="poi_climbing_area">Zonă de escaladă</string>
     <string name="poi_climbing_route">Traseu de escaladă</string>
     <string name="poi_climbing_route_bottom">Începutul traseului de escalată</string>
+    <string name="poi_network_foot">Rețea de trasee (drumeții)</string>
+    <string name="poi_network_cycling">Rețeaua de rute (ciclism)</string>
+    <string name="poi_osmwiki">Locuri populare (Wikipedia)</string>
 </resources>
