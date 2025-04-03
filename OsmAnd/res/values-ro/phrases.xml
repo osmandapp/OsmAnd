@@ -4979,4 +4979,21 @@
     <string name="poi_atv_yes">ATV: da</string>
     <string name="poi_atv_no">ATV: nu</string>
     <string name="poi_access_notes">Note de acces</string>
+    <string name="poi_network_nwn">Trasee naționale de drumeții (NWN)</string>
+    <string name="poi_network_rwn">Rute regionale de drumeții (RWN)</string>
+    <string name="poi_network_lwn">Trasee locale de drumeții (LWN)</string>
+    <string name="poi_network_rcn">Rute ciclabile regionale (RCN)</string>
+    <string name="poi_network_lcn">Rute locale pentru biciclete (LCN)</string>
+    <string name="poi_piste_oneway">Pistă cu sens unic</string>
+    <string name="poi_network_iwn">Rute internaționale de drumeții (IWN)</string>
+    <string name="poi_network_icn">Rute internaționale de ciclism (ICN)</string>
+    <string name="poi_network_ncn">Rute naționale de ciclism (NCN)</string>
+    <string name="poi_mosque">Moschee</string>
+    <string name="poi_buddhist_temple">Templu budist</string>
+    <string name="poi_hindu_temple">Templu hindus</string>
+    <string name="poi_shinto_shrine">Sanctuar Shinto</string>
+    <string name="poi_synagogue">Sinagogă</string>
+    <string name="poi_jehovahs_witness_kingdom_hall">Sala Regatului Martorilor lui Iehova</string>
+    <string name="poi_catholic_church">Biserica catolică</string>
+    <string name="poi_roman_catholic_church">Biserica romano-catolică</string>
 </resources>
