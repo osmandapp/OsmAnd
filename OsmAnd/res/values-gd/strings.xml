@@ -612,4 +612,23 @@
     <string name="favourites_edit_dialog_title">Fiosrachadh annsachd</string>
     <string name="your_edits">Na deasachaidhean agad</string>
     <string name="osm_edit_created_poi">OSM POI cruthaichte</string>
+    <string name="favourites_edit_dialog_category">Roinn-seòrsa</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_successfully">Tilesource %1$s sàbhailte</string>
+    <string name="local_openstreetmap_upload">Luchdaich suas deasachadh gu OSM</string>
+    <string name="edit_tilesource_maxzoom">Claon-ruathar as motha</string>
+    <string name="maps_define_edit">Sònraich/Deasaich…</string>
+    <string name="local_openstreetmap_delete">Dubh às deasachadh</string>
+    <string name="fav_points_edited">Bha a\' phuing annsachd air deasachadh</string>
+    <string name="edit_filter_delete_dialog_title">Dubh às an siolachan seo?</string>
+    <string name="edit_filter_save_as_menu_item">Sàbhail mar</string>
+    <string name="quick_action_edit_action">Deasaich gnìomh</string>
+    <string name="edit_tilesource_minzoom">Claon-ruathar as lugha</string>
+    <string name="favourites_context_menu_edit">Deasaich annsachd</string>
+    <string name="poi_edit_title">Deasaich POI</string>
+    <string name="edit_group">Deasaich buidheann</string>
+    <string name="edit_filter_create_message">Siolachan \'%1$s\' cruthaichte</string>
+    <string name="number_of_edits">Àireamh de dheasachaidhean</string>
+    <string name="distance_measurement_finish_editing">Crìochnaich deasachadh</string>
+    <string name="distance_measurement_start_editing">Tòisich deasachadh</string>
 </resources>
