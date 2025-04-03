@@ -5,6 +5,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE
 import static net.osmand.data.Amenity.ALT_NAME_WITH_LANG_PREFIX;
 import static net.osmand.data.Amenity.COLLAPSABLE_PREFIX;
 import static net.osmand.data.Amenity.CONTENT;
+import static net.osmand.data.Amenity.NAME;
 import static net.osmand.data.Amenity.OPENING_HOURS;
 import static net.osmand.data.Amenity.SHORT_DESCRIPTION;
 import static net.osmand.data.Amenity.SUBTYPE;
@@ -131,6 +132,9 @@ public class AmenityUIHelper extends MenuBuilder {
 				Object value = entry.getValue();
 				if(key.contains(WIKIPEDIA) || key.contains(CONTENT) || key.contains(SHORT_DESCRIPTION)) {
 					continue;
+				}
+				if(key.equals(NAME)) {
+					continue; // will be added in buildNamesRow
 				}
 				AmenityInfoRow infoRow = null;
 				if (value instanceof String strValue) {
@@ -552,10 +556,10 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	public void buildNamesRow(ViewGroup viewGroup, Map<String, String> namesMap, boolean altName) {
-		if (namesMap.values().size() > 0) {
+		if (!namesMap.isEmpty()) {
 			Locale nameLocale = getPreferredLocale(namesMap.keySet());
 			if (nameLocale == null) {
-				String localeId = (String) namesMap.values().toArray()[0];
+				String localeId = (String) namesMap.keySet().toArray()[0];
 				nameLocale = new Locale(localeId);
 			}
 			String name = namesMap.get(nameLocale.getLanguage());
