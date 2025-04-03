@@ -3083,7 +3083,11 @@ public class OsmandSettings {
 		}
 		CommonPreference<String> preference = getCustomRenderProperty(attrName);
 		String value = preference.get();
-		return property.containsValue(value) ? value : preference.getDefaultValue();
+
+		if (property.hasPossibleValues()) {
+			return property.containsValue(value) ? value : preference.getDefaultValue();
+		}
+		return value;
 	}
 
 	@NonNull
