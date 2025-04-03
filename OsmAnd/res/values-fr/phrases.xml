@@ -4990,4 +4990,24 @@
     <string name="poi_osmwiki">Lieux populaires (Wikipédia)</string>
     <string name="poi_mosque">Mosquée</string>
     <string name="poi_buddhist_temple">Temple bouddhiste</string>
+    <string name="poi_consulate">Consulat</string>
+    <string name="poi_russian_orthodox_church">Église orthodoxe russe</string>
+    <string name="poi_protestant_church">Église protestante</string>
+    <string name="poi_aerodrome_type_airfield">Aérodrome</string>
+    <string name="poi_evangelical_church">Église évangélique</string>
+    <string name="poi_anglican_church">Église anglicane</string>
+    <string name="poi_methodist_church">Église méthodiste</string>
+    <string name="poi_hindu_temple">Temple hindou</string>
+    <string name="poi_shinto_shrine">Sanctuaire shintoïste</string>
+    <string name="poi_synagogue">Synagogue</string>
+    <string name="poi_jehovahs_witness_kingdom_hall">Salle du Royaume des Témoins de Jéhovah</string>
+    <string name="poi_catholic_church">Église catholique</string>
+    <string name="poi_roman_catholic_church">Église catholique romaine</string>
+    <string name="poi_baptist_church">Église baptiste</string>
+    <string name="poi_lutheran_church">Église luthérienne</string>
+    <string name="poi_orthodox_church">Église orthodoxe</string>
+    <string name="poi_greek_orthodox_church">Église orthodoxe grecque</string>
+    <string name="poi_pentecostal_church">Église pentecôtiste</string>
+    <string name="poi_presbyterian_church">Église presbytérienne</string>
+    <string name="poi_access_main_tag">Accès</string>
 </resources>
