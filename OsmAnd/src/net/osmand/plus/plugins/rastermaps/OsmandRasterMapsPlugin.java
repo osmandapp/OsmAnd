@@ -550,6 +550,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 			@Override
 			protected List<TileSourceTemplate> doInBackground(Void... params) {
+				// FK-TODO: cache downloaded TileSourceTemplate while building search database for performance
 				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app), true);
 			}
 		};
