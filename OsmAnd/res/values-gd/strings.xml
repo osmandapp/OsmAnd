@@ -593,4 +593,23 @@
     <string name="osm_edit_closed_note">OSM nòta dùinte</string>
     <string name="add_edit_favorite">Cuir no deasaich annsachd</string>
     <string name="osm_editing">Deasachadh OSM</string>
+    <string name="start_editing">Tòisich a\' deasachadh</string>
+    <string name="osm_edits">Deasachaidhean OSM</string>
+    <string name="edit_map_marker">Deasaich comharraiche mapa</string>
+    <string name="osm_recipient_stat">Deasachaidhean %1$s, sùim %2$s mBTC</string>
+    <string name="osm_user_stat">Deasachaidhean %1$s, inbhe %2$s, deasachaidhean gu lèir %3$s</string>
+    <string name="osm_edits_export_desc">Mach-ghluais mar nòtaichean OSM, POIan, no an dà chuid.</string>
+    <string name="edit_line">Deasaich loidhne</string>
+    <string name="mapillary_menu_edit_text_hint">Clò-sgrìobh ainm-cleachdaiche</string>
+    <string name="coord_input_edit_point">Deasaich puing</string>
+    <string name="osm_edit_context_menu_delete">Dubh às deasachadh OSM</string>
+    <string name="shared_string_edit">Deasaich</string>
+    <string name="osm_editing_plugin_name">Deasachadh OpenStreetMap</string>
+    <string name="edit_name">Deasaich ainm</string>
+    <string name="shared_string_edited">Deasaichte</string>
+    <string name="quick_action_edit_actions">Deasaich gnìomhan</string>
+    <string name="context_menu_item_edit_waypoint">Deasaich puing-thurais GPX</string>
+    <string name="favourites_edit_dialog_title">Fiosrachadh annsachd</string>
+    <string name="your_edits">Na deasachaidhean agad</string>
+    <string name="osm_edit_created_poi">OSM POI cruthaichte</string>
 </resources>
