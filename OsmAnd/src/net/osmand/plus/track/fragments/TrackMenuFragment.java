@@ -190,7 +190,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private AuthorCard authorCard;
 	private CopyrightCard copyrightCard;
 	private InfoCard infoCard;
-	private RouteInfoCard trackExtensionsCard;
 	private RouteInfoCard routeInfoCard;
 	private OverviewCard overviewCard;
 	private TrackPointsCard pointsCard;
@@ -807,10 +806,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			cardsContainer.addView(copyrightCard.build(mapActivity));
 		}
 
-		if (shouldReattachCards && trackExtensionsCard != null && trackExtensionsCard.getView() != null) {
-			reattachCard(cardsContainer, trackExtensionsCard);
-		}
-
 		View cardBottomSpace = inflate(R.layout.list_item_divider, cardsContainer, true);
 		cardBottomSpace.findViewById(R.id.topShadowView).setVisibility(View.INVISIBLE);
 	}
@@ -868,9 +863,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (infoCard != null) {
 			infoCard.updateContent();
-		}
-		if (trackExtensionsCard != null) {
-			trackExtensionsCard.updateContent();
 		}
 	}
 
@@ -1473,9 +1465,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (copyrightCard != null) {
 			copyrightCard.updateContent();
-		}
-		if (trackExtensionsCard != null) {
-			trackExtensionsCard.updateContent();
 		}
 		updatePointGroupsCard();
 		setupCards(true);

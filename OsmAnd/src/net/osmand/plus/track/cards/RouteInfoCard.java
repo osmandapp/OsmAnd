@@ -51,9 +51,6 @@ import androidx.annotation.StringRes;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.data.Amenity.DESCRIPTION;
 import static net.osmand.data.Amenity.NAME;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SEGMENT_INDEX;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SHORTLINK_TILES;
 import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
 
 import org.apache.commons.logging.Log;
