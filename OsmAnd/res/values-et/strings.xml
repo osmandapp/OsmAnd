@@ -5236,4 +5236,6 @@
     <string name="ant_write_to_gpx">Salvesta andmeid raja juurde</string>
     <string name="download_complete">Allalaadimine on lõppenud</string>
     <string name="calculating_altitude">Arvutame kõrgust</string>
+    <string name="wikidata">Vikiandmed</string>
+    <string name="read_on_wiki">Loe Vikipeedias</string>
 </resources>
