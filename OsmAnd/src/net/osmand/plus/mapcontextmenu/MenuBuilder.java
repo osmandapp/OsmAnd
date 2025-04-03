@@ -10,6 +10,8 @@ import static net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.NEARBY_MAX_POI_
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.DIVIDER_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_MEMBERS_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_PART_OF_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.WITHIN_POLYGONS_ROW_KEY;
 
 import android.content.Context;
@@ -59,6 +61,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
+import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
+import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchType;
 import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
@@ -314,6 +318,9 @@ public class MenuBuilder {
 		buildWithinRow(view);
 		buildNearestWikiRow(view);
 		buildNearestPoiRow(view);
+		buildRouteMembersRow(view);
+		buildRoutePartOfRow(view);
+		buildRelatedRouteRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
@@ -524,6 +531,55 @@ public class MenuBuilder {
 				}
 			});
 		}
+	}
+
+	protected void buildRouteMembersRow(ViewGroup viewGroup) {
+		if (amenity != null && amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS) != null) {
+			int position = viewGroup.getChildCount();
+			WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
+			buildRouteMembersRow(amenities -> {
+				buildRouteRow(amenities, viewGroupRef, position, ROUTE_MEMBERS_ROW_KEY, "Members");
+            });
+		}
+	}
+
+	protected void buildRoutePartOfRow(ViewGroup viewGroup) {
+		if (amenity != null && amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null) {
+			int position = viewGroup.getChildCount();
+			WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
+			buildPartOfRow(amenities -> {
+				buildRouteRow(amenities, viewGroupRef, position, ROUTE_PART_OF_ROW_KEY, "Part of");
+            });
+		}
+	}
+
+	protected void buildRelatedRouteRow(ViewGroup viewGroup) {
+		if (amenity != null && amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null) {
+			int position = viewGroup.getChildCount();
+			WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
+			buildRelatedRoutesRow(amenities -> {
+				buildRouteRow(amenities, viewGroupRef, position, ROUTE_PART_OF_ROW_KEY, "Related");
+			});
+		}
+	}
+
+	private void buildRouteRow(List<Amenity> amenities, WeakReference<ViewGroup> viewGroupRef, int position, String key, String title) {
+		ViewGroup viewGroup1 = viewGroupRef.get();
+		if (viewGroup1 == null || Algorithms.isEmpty(amenities)) {
+			return;
+		}
+		String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+		String count = "(" + amenities.size() + ")";
+		String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
+		View wikiRow = viewGroup1.findViewWithTag(NEAREST_WIKI_KEY);
+		View amenitiesRow = createRowContainer(viewGroup1.getContext(), key);
+		firstRow = position == 0 || isDividerAtPosition(viewGroup1, position - 1);
+		int iconId = AmenityMenuController.getRightIconId(app, amenity);
+		CollapsableView collapsableView = getCollapsableView(amenitiesRow.getContext(), true, amenities, key);
+		buildRow(amenitiesRow, iconId, null, text, 0, true, collapsableView,
+				false, 0, false, null, false);
+		viewGroup1.addView(amenitiesRow, position);
+		buildNearestRowDividerIfMissing(viewGroup1, position);
 	}
 
 	protected View createRowContainer(Context context, String tag) {
@@ -1488,6 +1544,24 @@ public class MenuBuilder {
 			if (filter != null) {
 				searchSortedAmenities(filter, latLon, listener);
 			}
+		}
+	}
+
+	protected void buildRouteMembersRow(SearchByRouteIdListener listener) {
+		if (amenity != null) {
+			execute(new SearchByRouteIdTask(amenity, SearchType.MEMBERS, app, listener));
+		}
+	}
+
+	protected void buildRelatedRoutesRow(SearchByRouteIdListener listener) {
+		if (amenity != null) {
+			execute(new SearchByRouteIdTask(amenity, SearchType.RELATED, app, listener));
+		}
+	}
+
+	protected void buildPartOfRow(SearchByRouteIdListener listener) {
+		if (amenity != null) {
+			execute(new SearchByRouteIdTask(amenity, SearchType.PART_OF, app, listener));
 		}
 	}
 

@@ -938,22 +938,13 @@ public class ResourceManager {
 	}
 
 
-	private List<Amenity> searchRouteByName(String multipleSearch, double lat, double lon, CollatorStringMatcher.StringMatcherMode mode, ResultMatcher<Amenity> matcher) {
-		List<AmenityIndexRepositoryBinary> list = new ArrayList<>();
+	private List<Amenity> searchRouteByName(String multipleSearch, CollatorStringMatcher.StringMatcherMode mode, ResultMatcher<Amenity> matcher) {
 		List<Amenity> result = new ArrayList<>();
-		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
-			if (index instanceof AmenityIndexRepositoryBinary) {
-				if (index.checkContains(lat, lon)) {
-					list.add(0, (AmenityIndexRepositoryBinary) index);
-				}
-			}
-		}
 		BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
-				MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat), multipleSearch,
-				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher
+				0, 0, multipleSearch,0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher
 		);
 		req.setMatcherMode(mode);
-		for (AmenityIndexRepositoryBinary index : list) {
+		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
 			List<Amenity> amenities = index.searchPoiByName(req);
 			if (!Algorithms.isEmpty(amenities)) {
 				result.addAll(amenities);
@@ -962,7 +953,7 @@ public class ResourceManager {
 		return result;
 	}
 
-	public List<Amenity> searchRoutePartOf(String routeId, double lat, double lon) {
+	public List<Amenity> searchRoutePartOf(String routeId) {
 		ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 			@Override
 			public boolean publish(Amenity amenity) {
@@ -980,10 +971,10 @@ public class ResourceManager {
 				return false;
 			}
 		};
-		return searchRouteByName(routeId, lat, lon, CHECK_EQUALS_FROM_SPACE, matcher);
+		return searchRouteByName(routeId, CHECK_EQUALS_FROM_SPACE, matcher);
 	}
 
-	public Map<String, List<Amenity>> searchRouteMembers(String multipleSearch, double lat, double lon) {
+	public Map<String, List<Amenity>> searchRouteMembers(String multipleSearch) {
 		HashSet<String> ids = new HashSet<>();
 		Collections.addAll(ids, multipleSearch.split(" "));
 		ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
@@ -1000,7 +991,7 @@ public class ResourceManager {
 		};
 
 		Map<String, List<Amenity>> map = new HashMap<>();
-		List<Amenity> result = searchRouteByName(multipleSearch, lat, lon, MULTISEARCH, matcher);
+		List<Amenity> result = searchRouteByName(multipleSearch, MULTISEARCH, matcher);
 		for (Amenity am : result) {
 			String routeId = am.getAdditionalInfo(Amenity.ROUTE_ID);
 			List<Amenity> amenities = map.computeIfAbsent(routeId, l -> new ArrayList<>());
