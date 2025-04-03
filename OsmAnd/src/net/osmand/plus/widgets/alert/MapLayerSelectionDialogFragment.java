@@ -15,7 +15,6 @@ import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvid
 import java.util.Map;
 import java.util.Optional;
 
-// FK-FIXME: suche nach CyclOSM, klicke auf eines der Suchergebnisse, dann wird der Dialog fehlerhafterweise nicht geöffnet und folglich wird auch CyclOSM nicht gehighlightet, vielleicht weil CyclOSM ein Fahrradsymbol hat?
 public class MapLayerSelectionDialogFragment extends SelectionDialogFragment {
 
 	public final Optional<InstallMapLayersDialogFragment> installMapLayersDialogFragment;
