@@ -76,6 +76,9 @@
 				android:paddingHorizontal="8dp"
 				android:textColor="@color/card_and_list_background_light"
 				android:textSize="16sp"
+				android:includeFontPadding="false"
+				android:scrollbars="none"
+				android:lines="1"
 				android:visibility="gone"
 				tools:text="Exit 8"
 				tools:visibility="visible" />
