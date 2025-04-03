@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-// FK-TODO: refractor
 class InstallMapLayersDialogFragmentFactory {
 
 	private final FragmentActivity activity;

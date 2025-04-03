@@ -824,9 +824,9 @@ public class ConfigureMapMenu {
 																	 final MapActivity activity,
 																	 // FK-TODO: inline icon, rename method to createRoadStyleRenderingProperty()?
 																	 final @DrawableRes int icon,
-																	 // FK-TODO: inline attrName
+																	 // FK-TODO: inline attrName?
 																	 final String attrName,
-																	 // FK-TODO: inline id
+																	 // FK-TODO: inline id?
 																	 final String id,
 																	 final boolean nightMode) {
 		for (final RenderingRuleProperty property : customRules) {
