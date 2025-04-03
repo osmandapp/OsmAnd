@@ -5335,4 +5335,13 @@ POIの更新は利用できません</string>
     <string name="average_temperature">平均気温</string>
     <string name="fuel_tank_capacity_description">タンク容量を入力し、燃料レベルと消費量を正確に追跡します</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">計算による車両の燃料消費率(L/100 km)を表示します</string>
+    <string name="prediction_time_advanced_description">遅延が最小になるように予想時間を調整します。</string>
+    <string name="shared_string_no_animation">アニメーション無し</string>
+    <string name="position_animation_empty_banner_description">位置アイコンはアニメーションせずに新しい受信位置に移動します。</string>
+    <string name="intermediate_first">最初の中間目的地</string>
+    <string name="poi_source">POI情報源</string>
+    <string name="prediction_time">予想時間</string>
+    <string name="position_animation">位置アニメーション</string>
+    <string name="destination_first">最初の目的地</string>
+    <string name="display_priority">表示優先度</string>
 </resources>
