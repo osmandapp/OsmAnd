@@ -475,7 +475,7 @@ public class MapSelectionHelper {
 		}
 		String routeId = tags.get(ROUTE_ID);
 		if (routeId != null) {
-			Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(routeId, latLon.getLatitude(), latLon.getLongitude());
+			Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(routeId);
 			List<Amenity> list = map.get(routeId);
 			amenity = Algorithms.isEmpty(list) ? null : list.get(0);
 		}

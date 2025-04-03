@@ -75,6 +75,7 @@ public class Amenity extends MapObject {
 	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
 	public static final String ROUTE_MEMBERS_IDS = "route_members_ids";
+	public static final String ROUTE_BBOX_RADIUS = "route_bbox_radius";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
 	public static final int DEFAULT_ELO = 900;
 
@@ -691,12 +692,17 @@ public class Amenity extends MapObject {
 			return false;
 		} else {
 			boolean hasRouteTrackSubtype = subType.startsWith(ROUTES_PREFIX) || subType.equals(ROUTE_TRACK);
-			return hasRouteTrackSubtype && !Algorithms.isEmpty(getRouteId());
+			boolean hasGeometry = additionalInfo != null && additionalInfo.containsKey(ROUTE_BBOX_RADIUS);
+			return hasRouteTrackSubtype && hasGeometry && !Algorithms.isEmpty(getRouteId());
 		}
 	}
 
 	public boolean isRoutePoint() {
 		return subType != null && (subType.equals(ROUTE_TRACK_POINT) || subType.equals(ROUTE_ARTICLE_POINT));
+	}
+
+	public boolean isSuperRoute() {
+		return additionalInfo != null && additionalInfo.containsKey(ROUTE_MEMBERS_IDS);
 	}
 
 	public JSONObject toJSON() {
