@@ -4995,4 +4995,16 @@
     <string name="poi_buddhist_temple">Buddhista szentély</string>
     <string name="poi_route_activity_type_walking">Sétaútonalak</string>
     <string name="poi_osmwiki">Népszerű helyek (Wikipédia)</string>
+    <string name="poi_aerodrome_type_airfield">Kis repülőtér</string>
+    <string name="poi_consulate">Konzulátus</string>
+    <string name="poi_network_ncn">Országos kerépáros útvonalak</string>
+    <string name="poi_route_activity_type_mountain_biking">MTB (hegyi kerékpáros) útvonalak</string>
+    <string name="poi_network_iwn">Nemzetközi turistautak</string>
+    <string name="poi_network_nwn">Országos turistautak</string>
+    <string name="poi_network_rwn">Regionális turistautak</string>
+    <string name="poi_network_lwn">Helyi turistautak</string>
+    <string name="poi_network_icn">Nemzetközi kerépáros útvonalak</string>
+    <string name="poi_network_rcn">Regionális kerépáros útvonalak</string>
+    <string name="poi_route_activity_type_road_cycling">Országúti kerékpáros útvonalak</string>
+    <string name="poi_network_lcn">Helyi kerépáros útvonalak</string>
 </resources>
