@@ -5358,4 +5358,13 @@ POIの更新は利用できません</string>
     <string name="obd_connected_to_device">%sと接続しました</string>
     <string name="obd_connecting_to_device">%sに接続しています</string>
     <string name="bt_start_pair_failed">端末とのペアリングを開始できません</string>
+    <string name="reset_average_speed">平均速度をリセット</string>
+    <string name="unknown_bt_device">不明な端末</string>
+    <string name="obd_vin">VIN(シャシー識別番号)</string>
+    <string name="new_segment_started_m">新しい経路区分の記録を開始しました。</string>
+    <string name="track_does_not_contain_data_to_save">経路には保存するデータが含まれていません。</string>
+    <string name="start_trip_recording_first_m">まずは旅程の記録を開始してください。</string>
+    <string name="movies_list">動画リスト</string>
+    <string name="third_links">外部リンク</string>
+    <string name="new_trip_segment">新しい旅程区分</string>
 </resources>

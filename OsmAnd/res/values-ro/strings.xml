@@ -6095,4 +6095,14 @@
     <string name="layer_coordinates_grid">Rețea de coordonate</string>
     <string name="shared_string_manual">Manual</string>
     <string name="shared_string_map_center">Centrul hărții</string>
+    <string name="hmd_promo">HMD Promo pentru %1$s luni</string>
+    <string name="apply_to_all_points">Se aplică la toate punctele</string>
+    <string name="original_shape_description">Fiecare punct își va păstra forma proprie.</string>
+    <string name="popular_places">Locuri cunoscute</string>
+    <string name="show_list">Afișați lista</string>
+    <string name="original_color_description">Fiecare punct își va păstra propria culoare.</string>
+    <string name="hmd_promo_description">Acces gratuit la funcții, inclusiv descărcări nelimitate de hărți, relief 3D etc. pentru %1$s lună</string>
+    <string name="save_favorite_default_appearance">Aplicați modificările la punctele existente în dosar sau numai la cele noi?</string>
+    <string name="choose_location_on_map">Alegeți o locație pe hartă.</string>
+    <string name="original_icon_description">Fiecare punct își va păstra propria pictogramă.</string>
 </resources>
