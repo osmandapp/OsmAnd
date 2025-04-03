@@ -12,6 +12,7 @@ import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_MEMBERS_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_PART_OF_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_RELATED_ROUTES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.WITHIN_POLYGONS_ROW_KEY;
 
 import android.content.Context;
@@ -100,6 +101,8 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -318,9 +321,7 @@ public class MenuBuilder {
 		buildWithinRow(view);
 		buildNearestWikiRow(view);
 		buildNearestPoiRow(view);
-		buildRouteMembersRow(view);
-		buildRoutePartOfRow(view);
-		buildRelatedRouteRow(view);
+		buildRouteRows(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
@@ -533,33 +534,31 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildRouteMembersRow(ViewGroup viewGroup) {
-		if (amenity != null && amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS) != null) {
-			int position = viewGroup.getChildCount();
-			WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
-			buildRouteMembersRow(amenities -> {
-				buildRouteRow(amenities, viewGroupRef, position, ROUTE_MEMBERS_ROW_KEY, "Members");
-            });
+	protected void buildRouteRows(ViewGroup viewGroup) {
+		if (amenity == null) {
+			return;
 		}
-	}
+		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
+		int position = viewGroup.getChildCount();
+		if (amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS) != null) {
 
-	protected void buildRoutePartOfRow(ViewGroup viewGroup) {
-		if (amenity != null && amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null) {
-			int position = viewGroup.getChildCount();
-			WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
-			buildPartOfRow(amenities -> {
-				buildRouteRow(amenities, viewGroupRef, position, ROUTE_PART_OF_ROW_KEY, "Part of");
-            });
+			buildRouteRow(amenities -> {
+				String title = app.getString(R.string.route_members);
+				buildRouteRow(amenities, viewGroupRef, position, ROUTE_MEMBERS_ROW_KEY, title);
+			}, SearchType.MEMBERS);
 		}
-	}
 
-	protected void buildRelatedRouteRow(ViewGroup viewGroup) {
-		if (amenity != null && amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null) {
-			int position = viewGroup.getChildCount();
-			WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
-			buildRelatedRoutesRow(amenities -> {
-				buildRouteRow(amenities, viewGroupRef, position, ROUTE_PART_OF_ROW_KEY, "Related");
-			});
+		if (amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null) {
+
+			buildRouteRow(amenities -> {
+				String title = app.getString(R.string.route_part_of);
+				buildRouteRow(amenities, viewGroupRef, position, ROUTE_PART_OF_ROW_KEY, title);
+			}, SearchType.PART_OF);
+
+			buildRouteRow(amenities -> {
+				String title = app.getString(R.string.multipoligon_related);
+				buildRouteRow(amenities, viewGroupRef, position, ROUTE_RELATED_ROUTES_ROW_KEY, title);
+			}, SearchType.RELATED);
 		}
 	}
 
@@ -1389,9 +1388,15 @@ public class MenuBuilder {
 			button.setText(name);
 
 			button.setOnClickListener(v -> {
-				LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
-				mapActivity.getContextMenu().show(latLon, pointDescription, poi);
-				app.getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
+				if (poi.isRouteTrack()) {
+					TravelHelper travelHelper = app.getTravelHelper();
+					TravelGpx travelGpx = new TravelGpx(poi);
+					travelHelper.openTrackMenu(travelGpx, getMapActivity(), poi.getGpxFileName(null), poi.getLocation(), true);
+				} else {
+					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
+					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
+					app.getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
+				}
 			});
 			view.addView(button);
 		}
@@ -1547,21 +1552,9 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildRouteMembersRow(SearchByRouteIdListener listener) {
+	protected void buildRouteRow(SearchByRouteIdListener listener, SearchType type) {
 		if (amenity != null) {
-			execute(new SearchByRouteIdTask(amenity, SearchType.MEMBERS, app, listener));
-		}
-	}
-
-	protected void buildRelatedRoutesRow(SearchByRouteIdListener listener) {
-		if (amenity != null) {
-			execute(new SearchByRouteIdTask(amenity, SearchType.RELATED, app, listener));
-		}
-	}
-
-	protected void buildPartOfRow(SearchByRouteIdListener listener) {
-		if (amenity != null) {
-			execute(new SearchByRouteIdTask(amenity, SearchType.PART_OF, app, listener));
+			execute(new SearchByRouteIdTask(amenity, type, app, listener));
 		}
 	}
 
