@@ -6128,4 +6128,9 @@
     <string name="ais_nmea_protocol_description">Alegeți protocolul pentru recepția datelor NMEA</string>
     <string name="ais_address_nmea_server">Adresa IP a sursei de date NMEA</string>
     <string name="ais_nmea_protocol">Protocol pentru recepția datelor NMEA</string>
+    <string name="ais_port_nmea_local_description">Definiți portul UPD unde OsmAnd primește date NMEA</string>
+    <string name="ais_address_nmea_server_description">Definiți adresa IP a sursei de date NMEA (dacă se utilizează TCP)</string>
+    <string name="ais_port_nmea_server">Portul TCP al sursei de date NMEA</string>
+    <string name="ais_port_nmea_server_description">Definiți numărul portului TCP al sursei de date NMEA</string>
+    <string name="ais_port_nmea_local">Portul UDP al receptorului local de date NMEA</string>
 </resources>
