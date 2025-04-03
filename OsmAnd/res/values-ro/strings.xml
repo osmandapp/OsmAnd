@@ -1443,7 +1443,7 @@
     <string name="si_m_s">Metri pe secundă</string>
     <string name="si_min_km">Minute pe kilometru</string>
     <string name="si_min_m">Minute pe milă</string>
-    <string name="si_nm_h">Mile marine pe oră (noduri)</string>
+    <string name="si_nm_h">Mile nautice pe oră (noduri)</string>
     <string name="nm_h">kn</string>
     <string name="nm">nmi ( nautic miles)</string>
     <string name="min_mile">min/m</string>
@@ -3250,7 +3250,7 @@
     <string name="track_recording_will_be_continued">Înregistrarea va fi continuată.</string>
     <string name="copy_poi_name">Copiați numele punctului de interes</string>
     <string name="quick_action_show_hide_title">Arată/ascunde</string>
-    <string name="shared_string_interval">Interval</string>
+    <string name="shared_string_interval">Intervalul</string>
     <string name="track_has_no_altitude">Traseul nu conține date de altitudine.</string>
     <string name="track_has_no_speed">Traseul nu conține date privind viteza.</string>
     <string name="select_another_colorization">Selectați un alt tip de colorare.</string>
@@ -5323,27 +5323,7 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">Rata medie de planare</string>
     <string name="help_article_map_legend_nautical_map_name">Stilul hărții nautice</string>
-    <string name="release_4_6">• Android Auto: S-a adăugat modul 3D
-\n
-\n • Tracks:S-au introdus filtre și foldere inteligente, s-a optimizat memoria pentru fișiere mai mari
-\n
-\n • Gestionarea mai bună a resurselor locale
-\n
-\n • Mapare personalizabilă a butoanelor pentru controllere externe
-\n
-\n •Widget-uri noi: \"Glide Ratio\" și \"Sun Position\"
-\n
-\n • OsmAnd Cloud: Acum accesați fișierele șterse
-\n
-\n • Colorare mai bună a pistei în modul Slope cu noul gradient simetric
-\n
-\n • Probleme rezolvate cu bara de stare transparentă
-\n
-\n • S-a adăugat suport la widget-ul ANT+ de temperatură
-\n
-\n• S-a introdus widgetul \"RAM disponibil\"
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: S-a adăugat modul 3D \n \n • Tracks:S-au introdus filtre și foldere inteligente, s-a optimizat memoria pentru fișiere mai mari \n \n • Gestionarea mai bună a resurselor locale \n \n • Mapare personalizabilă a butoanelor pentru controllere externe \n \n •Widget-uri noi: \"Glide Ratio\" și \"Sun Position\" \n \n • OsmAnd Cloud: Acum accesați fișierele șterse \n \n • Colorare mai bună a pistei în modul Slope cu noul gradient simetric \n \n • Probleme rezolvate cu bara de stare transparentă \n \n • S-a adăugat suport la widget-ul ANT+ de temperatură \n \n• S-a introdus widgetul \"RAM disponibil\"</string>
     <string name="app_mode_baby_transport">Transportul bebelușilor</string>
     <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatură</string>
@@ -5373,7 +5353,7 @@
     <string name="help_article_navigation_routing_horse_routing_name">Rutare pentru călărie</string>
     <string name="help_article_navigation_routing_ski_routing_name">Rutare pentru schiat</string>
     <string name="help_article_personal_name">Informațiile mele</string>
-    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_brouter_name">BRuter</string>
     <string name="help_article_navigation_routing_name">Parametrii rutei</string>
     <string name="help_article_navigation_routing_moped_routing_name">Navigație moped</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Rutare pentru bărci</string>
@@ -5639,25 +5619,7 @@
     <string name="use_3d_track_visualization">Vizualizare 3D</string>
     <string name="shared_string_changes">Modificări</string>
     <string name="map_widget_map_scale">Scara hărții</string>
-    <string name="release_4_7">Noul widget \"Speedometru\" compatibil cu Android Auto
-\n
-\n • Configurați ecranul hărții prin adăugarea mai multor butoane \"Acțiuni rapide\"
-\n
-\n • Îmbunătățirea lizibilității datelor din grafice
-\n
-\n • Adăugarea de filtre în funcție de datele senzorilor pentru trasee
-\n
-\n • Personalizare îmbunătățită a aspectului pentru grupuri de piste
-\n
-\n • Adăugat suport pentru etichete GPX suplimentare
-\n
-\n • Personalizarea \"Distanței în timpul navigației\": alegeți între numere precise sau rotunjite în sus
-\n
-\n • Interfață unificată pentru selectarea track-urilor
-\n
-\n • Autentificarea OpenStreetMap a trecut la OAuth 2.0
-\n
-\n</string>
+    <string name="release_4_7">Noul widget \"Speedometru\" compatibil cu Android Auto \n \n • Configurați ecranul hărții prin adăugarea mai multor butoane \"Acțiuni rapide\" \n \n • Îmbunătățirea lizibilității datelor din grafice \n \n • Adăugarea de filtre în funcție de datele senzorilor pentru trasee \n \n • Personalizare îmbunătățită a aspectului pentru grupuri de piste \n \n • Adăugat suport pentru etichete GPX suplimentare \n \n • Personalizarea \"Distanței în timpul navigației\": alegeți între numere precise sau rotunjite în sus \n \n • Interfață unificată pentru selectarea track-urilor \n \n • Autentificarea OpenStreetMap a trecut la OAuth 2.0</string>
     <string name="use_terrain_maps_summary">Folosește hărți ale terenului pentru datele de altitudine. Geometria pistei rămâne neschimbată.</string>
     <string name="maps_that_also_be_used">Hărți ce vor fi de asemenea utilizate: %1$s</string>
     <string name="shared_string_scale">Scară</string>
