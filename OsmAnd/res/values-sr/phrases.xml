@@ -5012,4 +5012,6 @@
     <string name="poi_access_main_tag">Приступ</string>
     <string name="poi_evangelical_church">Евангелистичка црква</string>
     <string name="poi_presbyterian_church">Презбитеријанска црква</string>
+    <string name="poi_aerodrome_type_airfield">Писта</string>
+    <string name="poi_consulate">Конзулат</string>
 </resources>
