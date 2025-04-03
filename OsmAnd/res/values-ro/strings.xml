@@ -2034,7 +2034,7 @@
     <string name="notes">Note A/V</string>
     <string name="online_map">Hartă online</string>
     <string name="roads_only">Doar drumurile</string>
-    <string name="rendering_attr_pisteRoutes_name">Pârtii de ski</string>
+    <string name="rendering_attr_pisteRoutes_name">Trasee de schi</string>
     <string name="free">Disponibil %1$s</string>
     <string name="device_memory">Memorie dispozitiv</string>
     <string name="edit_group">Editează grupul</string>
@@ -6133,4 +6133,19 @@
     <string name="ais_port_nmea_server">Portul TCP al sursei de date NMEA</string>
     <string name="ais_port_nmea_server_description">Definiți numărul portului TCP al sursei de date NMEA</string>
     <string name="ais_port_nmea_local">Portul UDP al receptorului local de date NMEA</string>
+    <string name="ais_object_lost_timeout_description">Setați Timeout pentru vizibilitatea obiectelor AIS: După acest timp fără recepționarea semnalului, obiectul AIS va fi eliminat de pe ecran.</string>
+    <string name="plugin_ais_tracker_name">Dispozitiv de urmărire a navelor AIS</string>
+    <string name="ais_cpa_warning_time_description">Dacă TCPA (timpul necesar pentru a ajunge la CPA cu o altă navă) este mai mic decât această valoare, nava este marcată cu roșu.</string>
+    <string name="plugin_ais_tracker_description">Afișați pozițiile AIS și informații despre navele din jur. Datele AIS sunt primite prin rețea de la un receptor AIS extern.</string>
+    <string name="ais_ship_lost_timeout_description">Setați timpul de așteptare pentru vizibilitatea navei: După acest timp fără recepționarea semnalului, simbolul navei își va schimba starea pe ecran: Acesta va fi barat.</string>
+    <string name="ais_object_lost_timeouts">Setări de temporizare pentru recepția semnalului AIS</string>
+    <string name="ais_object_lost_timeouts_description">Setați valorile timeout pentru a identifica obiectele AIS pierdute în cazul în care nu a fost primit niciun semnal pentru o anumită perioadă de timp.</string>
+    <string name="ais_ship_lost_timeout">Timeout pentru vizibilitatea navei atunci când nu se primește niciun semnal</string>
+    <string name="ais_cpa_warning_distance">Distanța de avertizare pentru punctul de închidere a apropierii (CPA)</string>
+    <string name="ais_cpa_warning_distance_description">Navele sunt marcate cu roșu dacă CPA este mai mică decât această valoare și CPA este atinsă în viitorul apropiat (a se vedea setarea Timp de avertizare pentru atingerea CPA).</string>
+    <string name="ais_cpa_warning_time">Timpul de avertizare pentru atingerea celui mai apropiat punct de apropiere (CPA)</string>
+    <string name="ais_object_lost_timeout">Timeout pentru vizibilitate atunci când obiectul este pierdut</string>
+    <string name="ais_cpa_settings">Setări referitoare la CPA</string>
+    <string name="ais_cpa_settings_description">Aceste valori definesc prezentarea obiectelor AIS care se pot apropia prea mult de propria poziție.</string>
+    <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nAcest plugin este un proiect de hobby și nu este proiectat pentru fiabilitate și corectitudine. NU vă bazați pe acest software în niciun fel, inclusiv pentru navigație și/sau siguranța vieții.</string>
 </resources>
