@@ -5734,4 +5734,13 @@
     <string name="destination_first">Destination en premier</string>
     <string name="display_priority">Priorité d\'affichage</string>
     <string name="poi_source">Source des PI</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="wiki_around">Emplacements populaires à proximité</string>
+    <string name="read_on_wiki">Lire sur Wikipédia</string>
+    <string name="prediction_time_description">L\'icône de la position actuelle dans OsmAnd s\'anime avec chaque point GPS reçu (un par seconde). Un léger délai sur son mouvement peut se remarquer, notamment lorsque l\'utilisateur se déplace rapidement ou si le signal GPS fluctue.</string>
+    <string name="prediction_time_advanced_description">Ajuster le temps de prédiction pour minimiser le délai.</string>
+    <string name="prediction_time">Temps de prédiction</string>
+    <string name="shared_string_no_animation">Aucune animation</string>
+    <string name="position_animation_empty_banner_description">L\'icône de la position actuelle se déplace à chaque nouveau point GPS reçu sans animation.</string>
+    <string name="position_animation">Animation de la position</string>
 </resources>
