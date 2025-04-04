@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.OnResultCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -19,7 +20,9 @@ import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.CoordinatesGridHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.EnumWithTitleId;
 import net.osmand.plus.settings.enums.GridFormat;
+import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -55,31 +58,11 @@ public class CoordinatesGridController extends BaseDialogController {
 	@NonNull
 	public String getSelectedFormatName() {
 		GridFormat gridFormat = getGridFormat();
-		return gridFormat.getTitle(app);
+		return getString(gridFormat.getTitleId());
 	}
 
-	public void onFormatSelectorClicked(@NonNull View anchorView,
-	                                    @ColorInt int activeColor, boolean nightMode) {
-		GridFormat gridFormat = getGridFormat();
-		List<PopUpMenuItem> items = new ArrayList<>();
-		for (GridFormat format : GridFormat.values()) {
-			items.add(new PopUpMenuItem.Builder(app)
-					.setTitle(format.getTitle(app))
-					.showTopDivider(format == GridFormat.UTM)
-					.setTitleColor(getPrimaryTextColor(app, nightMode))
-					.setSelected(gridFormat == format)
-					.showCompoundBtn(activeColor)
-					.setTag(format)
-					.create()
-			);
-		}
-		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
-		data.widthMode = PopUpMenuWidthMode.STANDARD;
-		data.anchorView = anchorView;
-		data.menuItems = items;
-		data.nightMode = nightMode;
-		data.onItemClickListener = item -> onSelectFormat((GridFormat) item.getTag());
-		PopUpMenu.show(data);
+	public void onFormatSelectorClicked(@NonNull View anchorView, @ColorInt int color, boolean nightMode) {
+		showPopUpMenu(anchorView, GridFormat.values(), getGridFormat(), this::onSelectFormat, color, nightMode);
 	}
 
 	private void onSelectFormat(@NonNull GridFormat format) {
@@ -101,6 +84,61 @@ public class CoordinatesGridController extends BaseDialogController {
 
 	public void onZoomLevelsClicked(@NonNull MapActivity activity) {
 		GridZoomLevelsController.showDialog(activity);
+	}
+
+	@DrawableRes
+	public int getSelectedLabelsPositionIcon() {
+		GridLabelsPosition position = getLabelsPosition();
+		return position.getIconId();
+	}
+
+	@NonNull
+	public String getSelectedLabelsPositionName() {
+		GridLabelsPosition position = getLabelsPosition();
+		return app.getString(position.getTitleId());
+	}
+
+	public void onLabelsPositionSelectorClicked(@NonNull View anchorView, @ColorInt int color, boolean nightMode) {
+		showPopUpMenu(anchorView, GridLabelsPosition.values(), getLabelsPosition(), this::onSelectLabelsPosition, color, nightMode);
+	}
+
+	private void onSelectLabelsPosition(@NonNull GridLabelsPosition position) {
+		setLabelsPosition(position);
+		if (screen != null) {
+			screen.updateLabelsPositionButton();
+		}
+	}
+
+	public void onSelectGridColorClicked(@NonNull MapActivity mapActivity) {
+		GridColorController.showDialog(mapActivity);
+	}
+
+	private <T extends Enum<T> & EnumWithTitleId> void showPopUpMenu(
+			@NonNull View anchorView, @NonNull T[] values, @NonNull T selectedValue,
+			@NonNull OnResultCallback<T> callback, @ColorInt int controlsColor, boolean nightMode
+	) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+		for (T value : values) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(app.getString(value.getTitleId()))
+					.setTitleColor(getPrimaryTextColor(app, nightMode))
+					.setSelected(value == selectedValue)
+					.showCompoundBtn(controlsColor)
+					.setTag(value)
+					.create()
+			);
+		}
+		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
+		data.widthMode = PopUpMenuWidthMode.STANDARD;
+		data.anchorView = anchorView;
+		data.menuItems = items;
+		data.nightMode = nightMode;
+		data.onItemClickListener = item -> {
+			@SuppressWarnings("unchecked")
+			T selected = (T) item.getTag();
+			callback.onResult(selected);
+		};
+		PopUpMenu.show(data);
 	}
 
 	public boolean isEnabled() {
@@ -126,8 +164,26 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	@NonNull
+	public GridLabelsPosition getLabelsPosition() {
+		return gridHelper.getGridLabelsPosition(getSelectedAppMode());
+	}
+
+	public void setLabelsPosition(@NonNull GridLabelsPosition position) {
+		gridHelper.setGridLabelsPosition(getSelectedAppMode(), position);
+	}
+
+	@ColorInt
+	public int getGridColor() {
+		return gridHelper.getGridColor(getSelectedAppMode(), isNightMode());
+	}
+
+	@NonNull
 	private ApplicationMode getSelectedAppMode() {
 		return app.getSettings().getApplicationMode();
+	}
+
+	public boolean isNightMode() {
+		return app.getDaynightHelper().isNightMode();
 	}
 
 	@DrawableRes
