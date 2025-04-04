@@ -467,7 +467,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 
 	public void updateRouteCalculationProgress(int progress) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
+		if (mapActivity == null || view == null) {
 			return;
 		}
 		ProgressBar progressBarButton = view.findViewById(R.id.progress_bar_button);
