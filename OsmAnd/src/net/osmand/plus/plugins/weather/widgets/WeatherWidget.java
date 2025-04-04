@@ -23,6 +23,7 @@ import net.osmand.plus.plugins.weather.enums.WeatherSource;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -69,8 +70,8 @@ public class WeatherWidget extends SimpleWidget {
 	private long lastDisplayedForecastTime;
 	private WeatherPlugin plugin;
 
-	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, short band) {
-		super(mapActivity, widgetType, customId, null);
+	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel, short band) {
+		super(mapActivity, widgetType, customId, panel);
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		this.band = band;
 		this.hideOldDataMessageId = OsmAndConstants.UI_HANDLER_WEATHER_WIDGET + band;

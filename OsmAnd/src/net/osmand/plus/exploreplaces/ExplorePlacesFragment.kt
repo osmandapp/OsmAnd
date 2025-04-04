@@ -82,10 +82,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-
-		savedInstanceState?.let {
+		if(savedInstanceState != null) {
 			val filterId = savedInstanceState.getString(POI_UI_FILTER_ID)
 			poiUIFilter = app.poiFilters.getFilterById(filterId)
+		} else {
+			closeFragment()
 		}
 	}
 
@@ -177,6 +178,9 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		if (savedInstanceState == null) {
+			hideList()
+		}
 		updateMapControls()
 	}
 

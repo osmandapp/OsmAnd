@@ -145,11 +145,16 @@ public class RenderingRuleProperty {
 		return ruleValue == renderingProperty;
 	}
 
+	public boolean hasPossibleValues() {
+		return !Algorithms.isEmpty(possibleValues)
+				&& (possibleValues.length > 1 || !Algorithms.isEmpty(possibleValues[0]));
+	}
+
 	public boolean containsValue(String value) {
 		String[] values = getPossibleValues();
 		if (!Algorithms.isEmpty(values)) {
 			for (String v : values) {
-				if (Algorithms.objectEquals(v, value)) {
+				if (Algorithms.stringsEqual(v, value)) {
 					return true;
 				}
 			}

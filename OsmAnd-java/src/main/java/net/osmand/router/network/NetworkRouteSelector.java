@@ -10,7 +10,10 @@ import net.osmand.data.QuadRect;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -49,9 +52,9 @@ public class NetworkRouteSelector {
 	private static final int CONNECT_POINTS_DISTANCE_STEP = 50;
 	private static final int CONNECT_POINTS_DISTANCE_MAX = 1000;
 
-
 	private final NetworkRouteContext rCtx;
 	private final INetworkRouteSelection callback;
+	private final RouteActivityHelper routeActivityHelper;
 
 	public interface INetworkRouteSelection {
 		boolean isCancelled();
@@ -75,6 +78,7 @@ public class NetworkRouteSelector {
 			filter = new NetworkRouteSelectorFilter();
 		}
 		this.rCtx = new NetworkRouteContext(files, filter, routing);
+		this.routeActivityHelper = RouteActivityHelper.INSTANCE;
 		this.callback = callback;
 	}
 
@@ -782,9 +786,16 @@ public class NetworkRouteSelector {
 		System.out.println(String.format("Segments size %d: %s", track.getSegments().size(), sizes.toString()));
 		gpxFile.getTracks().add(track);
 		gpxFile.addRouteKeyTags(routeKey.tagsToGpx());
+		updateGpxFileActivity(gpxFile, routeKey);
 		return gpxFile;
 	}
 
+	private void updateGpxFileActivity(GpxFile gpxFile, RouteKey routeKey) {
+		RouteActivity activity = routeActivityHelper.findActivityByTag(routeKey.type.getName());
+		if (activity != null) {
+			gpxFile.getMetadata().setRouteActivity(activity);
+		}
+	}
 
 	public static class NetworkRouteSelectorFilter {
 		public Set<RouteKey> keyFilter = null; // null - all
