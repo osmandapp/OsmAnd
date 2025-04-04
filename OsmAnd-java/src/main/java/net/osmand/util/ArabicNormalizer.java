@@ -2,10 +2,18 @@ package net.osmand.util;
 
 public class ArabicNormalizer {
 
-    private static final String DIACRITIC_REGEX = "[\\u064B-\\u0652]";
+    private static final String[] DIACRITIC_REGEX = {"[\\u064B-\\u065F]", "[\\u0610-\\u061A]", "[\\u06D6-\\u06ED]", "\\u0640", "\\u0670"};
+    private static final String[] DIACRITIC_REPLACE = {
+            "\\u0624", "\\u0648", // Replace Waw Hamza Above by Waw
+            "\\u0629", "\\u0647", // Replace Ta Marbuta by Ha
+            "\\u064A", "\\u0649", // Replace Ya by Alif Maksura
+            "\\u0626", "\\u0649", // Replace Ya Hamza Above by Alif Maksura
+            "\\u0622", "\\u0627", // Replace Alifs with Hamza Above
+            "\\u0623", "\\u0627", // Replace Alifs with Hamza Below
+            "\\u0625", "\\u0627"  // Replace with Madda Above by Alif
+    };
     private static final String ARABIC_DIGITS = "٠١٢٣٤٥٦٧٨٩";
     private static final String DIGITS_REPLACEMENT = "0123456789";
-    private static final String KASHIDA = "\u0640";
 
     public static boolean isSpecialArabic(String text) {
         if (text == null || text.isEmpty()) {
@@ -26,8 +34,13 @@ public class ArabicNormalizer {
         if (text == null || text.isEmpty()) {
             return text;
         }
-        String result = text.replaceAll(DIACRITIC_REGEX, "");
-        result = result.replace(KASHIDA, "");
+        String result = text;
+        for (int i = 0; i < DIACRITIC_REGEX.length; i++) {
+            result = result.replaceAll(DIACRITIC_REGEX[i], "");
+        }
+        for (int i = 0; i < DIACRITIC_REPLACE.length; i = i + 2) {
+            result = result.replaceAll(DIACRITIC_REPLACE[i], DIACRITIC_REPLACE[i + 1]);
+        }
         return replaceDigits(result);
     }
 
