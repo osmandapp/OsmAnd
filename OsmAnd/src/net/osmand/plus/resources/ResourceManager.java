@@ -1,6 +1,8 @@
 package net.osmand.plus.resources;
 
 
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE;
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.MULTISEARCH;
 import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.AppInitEvents.ASSETS_COPIED;
 import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
@@ -16,6 +18,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.Location;
@@ -35,7 +38,6 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -81,8 +83,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -935,6 +935,74 @@ public class ResourceManager {
 			}
 		}
 		return false;
+	}
+
+
+	private List<Amenity> searchRouteByName(String multipleSearch, CollatorStringMatcher.StringMatcherMode mode, ResultMatcher<Amenity> matcher) {
+		List<Amenity> result = new ArrayList<>();
+		BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+				0, 0, multipleSearch,0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher
+		);
+		req.setMatcherMode(mode);
+		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
+			List<Amenity> amenities = index.searchPoiByName(req);
+			if (!Algorithms.isEmpty(amenities)) {
+				result.addAll(amenities);
+			}
+		}
+		return result;
+	}
+
+	public List<Amenity> searchRoutePartOf(String routeId) {
+		ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+			@Override
+			public boolean publish(Amenity amenity) {
+				String members = amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS);
+				if (members != null) {
+					HashSet<String> ids = new HashSet<>();
+					Collections.addAll(ids, members.split(" "));
+					return ids.contains(routeId);
+				}
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		return searchRouteByName(routeId, CHECK_EQUALS_FROM_SPACE, matcher);
+	}
+
+	public Map<String, List<Amenity>> searchRouteMembers(String multipleSearch) {
+		HashSet<String> ids = new HashSet<>();
+		Collections.addAll(ids, multipleSearch.split(" "));
+		ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+			@Override
+			public boolean publish(Amenity amenity) {
+				String routeId = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+				return routeId != null && ids.contains(routeId);
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+
+		Map<String, List<Amenity>> map = new HashMap<>();
+		List<Amenity> result = searchRouteByName(multipleSearch, MULTISEARCH, matcher);
+		for (Amenity am : result) {
+			String routeId = am.getAdditionalInfo(Amenity.ROUTE_ID);
+			List<Amenity> amenities = map.computeIfAbsent(routeId, l -> new ArrayList<>());
+			amenities.add(am);
+		}
+		for (String id : ids) {
+			if (!map.containsKey(id)) {
+				map.put(id, null);
+			}
+		}
+		return map;
 	}
 
 	public List<Amenity> searchAmenitiesByName(String searchQuery,

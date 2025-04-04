@@ -60,6 +60,8 @@ public class TravelGpx extends TravelArticle {
 	public double minElevation = Double.NaN;
 	public double avgElevation;
 
+	public boolean isSuperRoute = false;
+
 	private String amenitySubType;
 	private String amenityRegionName;
 
@@ -101,6 +103,9 @@ public class TravelGpx extends TravelArticle {
 					activityType = amenity.getTagContent(key);
 				}
 			}
+		}
+		if (!Algorithms.isEmpty(amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS))) {
+			isSuperRoute = true;
 		}
 	}
 

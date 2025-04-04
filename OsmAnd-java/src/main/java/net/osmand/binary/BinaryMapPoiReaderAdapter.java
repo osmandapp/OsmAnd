@@ -5,6 +5,7 @@ import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
+import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -313,8 +314,7 @@ public class BinaryMapPoiReaderAdapter {
 	protected void searchPoiByName(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		String query = normalizeSearchPoiByNameQuery(req.nameQuery);
-		CollatorStringMatcher matcher = new CollatorStringMatcher(query,
-				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		CollatorStringMatcher matcher = new CollatorStringMatcher(query, req.matcherMode);
 		long indexOffset = codedIS.getTotalBytesRead();
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		List<Integer> nameIndexCoordinates = new ArrayList<>();
@@ -452,13 +452,19 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				if (listOfSepOffsets.size() > 0) {
-					offsets.putAll(listOfSepOffsets.get(0));
-					for (int j = 1; j < listOfSepOffsets.size(); j++) {
-						TIntLongHashMap mp = listOfSepOffsets.get(j);
-						// offsets.retainAll(mp); -- calculate intresection of mp & offsets
-						for (int chKey : offsets.keys()) {
-							if (!mp.containsKey(chKey)) {
-								offsets.remove(chKey);
+					if (req.matcherMode == StringMatcherMode.MULTISEARCH) {
+						for (TIntLongHashMap m : listOfSepOffsets) {
+							offsets.putAll(m);
+						}
+					} else {
+						offsets.putAll(listOfSepOffsets.get(0));
+						for (int j = 1; j < listOfSepOffsets.size(); j++) {
+							TIntLongHashMap mp = listOfSepOffsets.get(j);
+							// offsets.retainAll(mp); -- calculate intresection of mp & offsets
+							for (int chKey : offsets.keys()) {
+								if (!mp.containsKey(chKey)) {
+									offsets.remove(chKey);
+								}
 							}
 						}
 					}
@@ -648,7 +654,8 @@ public class BinaryMapPoiReaderAdapter {
 						if (!matches) {
 							for (String key : am.getAdditionalInfoKeys()) {
 								if (!key.contains("_name") && !key.equals("brand") &&
-										!key.contains("wikidata") && !key.equals("route_id")) {
+										!key.contains("wikidata") && !key.equals("route_id") &&
+										!key.equals("route_members_ids")) {
 									continue;
 								}
 								matches = matcher.matches(am.getAdditionalInfo(key));

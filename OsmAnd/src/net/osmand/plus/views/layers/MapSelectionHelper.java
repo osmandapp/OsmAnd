@@ -90,6 +90,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 public class MapSelectionHelper {
 
 	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -463,7 +464,7 @@ public class MapSelectionHelper {
 	}
 
 	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject, Map<String, String> tags) {
-		Amenity amenity;
+		Amenity amenity = null;
 		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
 		String caption = obfMapObject.getCaptionInNativeLanguage();
 		if (!caption.isEmpty()) {
@@ -472,8 +473,16 @@ public class MapSelectionHelper {
 		if (!Algorithms.isEmpty(tags) && tags.containsKey(TRAVEL_MAP_TO_POI_TAG) && "point".equals(tags.get(ROUTE))) {
 			names.add(tags.get(TRAVEL_MAP_TO_POI_TAG)); // additional attribute for TravelGpx points (route_id)
 		}
-		long id = obfMapObject.getId().getId().longValue();
-		amenity = findAmenity(app, latLon, names, id);
+		String routeId = tags.get(ROUTE_ID);
+		if (routeId != null) {
+			Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(routeId);
+			List<Amenity> list = map.get(routeId);
+			amenity = Algorithms.isEmpty(list) ? null : list.get(0);
+		}
+		if (amenity == null) {
+			long id = obfMapObject.getId().getId().longValue();
+			amenity = findAmenity(app, latLon, names, id);
+		}
 		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
 			for (int k = 0; k < points31.size(); k++) {
