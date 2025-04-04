@@ -65,7 +65,6 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 	public static final String KEY_APP_MODE = "app_mode";
 	public static final String KEY_WIDGET_ID = "widget_id";
 	public static final String KEY_ADD_MODE = "add_mode_key";
-	public static final String IS_VERTICAL_PANEL_KEY = "is_vertical_panel_key";
 	public static final String KEY_SELECTED_PANEL = "selected_panel_key";
 
 	protected ConfigureWidgetsController controller;
@@ -238,8 +237,8 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 		widgetId = bundle.getString(KEY_WIDGET_ID);
 		appMode = ApplicationMode.valueOfStringKey(bundle.getString(KEY_APP_MODE), settings.getApplicationMode());
 		addNewWidgetMode = bundle.getBoolean(KEY_ADD_MODE, false);
-		isVerticalPanel = bundle.getBoolean(IS_VERTICAL_PANEL_KEY);
 		widgetPanel = WidgetsPanel.valueOf(bundle.getString(KEY_SELECTED_PANEL));
+		isVerticalPanel = widgetPanel.isPanelVertical();
 
 		if (addNewWidgetMode && controller != null) {
 			MapWidgetInfo controllerAddedWidgetInfo = controller.getAddedWidget();
@@ -370,7 +369,6 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 		outState.putString(KEY_APP_MODE, appMode.getStringKey());
 		outState.putString(KEY_WIDGET_ID, widgetId);
 		outState.putBoolean(KEY_ADD_MODE, addNewWidgetMode);
-		outState.putBoolean(IS_VERTICAL_PANEL_KEY, isVerticalPanel);
 		outState.putString(KEY_SELECTED_PANEL, widgetPanel.name());
 	}
 
