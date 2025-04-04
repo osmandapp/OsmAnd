@@ -53,7 +53,7 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 			themedInflater.inflate(R.layout.resizable_widget_setting, container);
 
 			TextView height = container.findViewById(R.id.height);
-			height.setText(R.string.row_height);
+			height.setText(R.string.shared_string_height);
 			setupToggleButtons(view);
 		}
 	}

@@ -149,6 +149,10 @@ public class InAppPurchaseUtils {
 				checkDeveloperBuildIfNeeded(app, true);
 	}
 
+	public static boolean isGridColorAvailable(@NonNull OsmandApplication app) {
+		return isSubscribedToAny(app);
+	}
+
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
 		long time = System.currentTimeMillis();
 		long installTime = Math.max(Version.getUpdateTime(app), Version.getInstallTime(app));
