@@ -225,9 +225,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 				toggleEditMode(true);
 				selectedFragment.updateEditMode();
 			} else if (selectedFragment != null) {
-				v.postDelayed(() -> {
-					selectedFragment.resetToOriginal();
-				}, 200);
+				selectedFragment.resetToOriginal();
 			}
 		});
 
