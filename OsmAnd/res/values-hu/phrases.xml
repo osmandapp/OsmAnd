@@ -4950,7 +4950,7 @@
     <string name="poi_route_activity_type_truck_hgv">Nehéz tehergépkocsi</string>
     <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Terepmotorozás (krosszmotorozás)</string>
     <string name="poi_route_activity_type_hiking">Turistautak</string>
-    <string name="poi_route_article"/>
+    <string name="poi_route_article">Útibeszámolók</string>
     <string name="poi_piste_oneway">Egyirányú pálya</string>
     <string name="poi_climbing_area">Mászóterület</string>
     <string name="poi_climbing_route">Mászóút</string>
@@ -5007,4 +5007,7 @@
     <string name="poi_network_rcn">Regionális kerépáros útvonalak</string>
     <string name="poi_route_activity_type_road_cycling">Országúti kerékpáros útvonalak</string>
     <string name="poi_network_lcn">Helyi kerépáros útvonalak</string>
+    <string name="poi_route_activity_type_road_running">Országúti futás</string>
+    <string name="poi_route_activity_type_track_racing">Pályaverseny</string>
+    <string name="poi_route_activity_type_snowshoeing">Hótalpazás</string>
 </resources>
