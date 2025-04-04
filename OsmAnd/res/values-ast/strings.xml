@@ -2643,7 +2643,6 @@
     <string name="route_calculation">Route calculation</string>
     <string name="upload_poi">Upload POI</string>
     <string name="route_roundabout_short">Sal pela salida %1$d y sigui</string>
-    <string name="wiki_around">Artículos de Wikipedia cercanos</string>
     <string name="routing_attr_allow_motorway_description">Allows motorways.</string>
     <string name="routing_attr_allow_motorway_name">Use motorways</string>
     <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>

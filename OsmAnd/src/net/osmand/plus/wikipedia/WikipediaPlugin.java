@@ -12,6 +12,7 @@ import static net.osmand.plus.poi.PoiUIFilter.TOP_WIKI_FILTER_ID;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -229,7 +230,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 				.setDescription(selected ? getLanguagesSummary() : null)
 				.setSelected(selected)
 				.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_plugin_wikipedia)
+				.setIcon(R.drawable.ic_action_popular_places)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener));
 	}
@@ -434,7 +435,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			for (String locale : getLanguagesToShow()) {
 				translations.add(getWikiLanguageTranslation(locale));
 			}
-			return android.text.TextUtils.join(", ", translations);
+			return TextUtils.join(", ", translations);
 		}
 		return app.getString(R.string.shared_string_all_languages);
 	}

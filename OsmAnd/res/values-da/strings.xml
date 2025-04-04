@@ -2030,7 +2030,6 @@
     <string name="upload_poi">Upload IP</string>
     <string name="route_roundabout_short">Tag %1$d afkørsel og forsæt</string>
     <string name="search_map_hint">By eller område</string>
-    <string name="wiki_around">Wikipedia-artikler i nærheden</string>
     <string name="routing_attr_allow_motorway_name">Brug motorveje</string>
     <string name="routing_attr_allow_motorway_description">Tillader motorveje.</string>
     <string name="lang_sr_latn">Serbisk (latin)</string>
@@ -5769,4 +5768,13 @@
     <string name="destination_first">Destination først</string>
     <string name="display_priority">Prioritet for visning</string>
     <string name="poi_source">IP-kilde</string>
+    <string name="wiki_around">Populære steder i nærheden</string>
+    <string name="read_on_wiki">Læs på Wikipedia</string>
+    <string name="prediction_time_description">Positionsikonet i OsmAnd animeres med hvert modtaget GPS-datapunkt (en gang i sekundet). En lille forsinkelse i bevægelsen kan være mærkbar, især når brugeren bevæger sig hurtigt, eller GPS-signalet svinger.</string>
+    <string name="prediction_time">Forudsigelsestid</string>
+    <string name="shared_string_no_animation">Ingen animation</string>
+    <string name="position_animation_empty_banner_description">Positionsikonet flytter sig til hver ny modtaget placering uden animation.</string>
+    <string name="position_animation">Positionsanimation</string>
+    <string name="prediction_time_advanced_description">Juster forudsigelsestiden for at minimere forsinkelsen.</string>
+    <string name="wikidata">Wikidata</string>
 </resources>

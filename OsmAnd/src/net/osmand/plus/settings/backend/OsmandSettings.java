@@ -3083,7 +3083,11 @@ public class OsmandSettings {
 		}
 		CommonPreference<String> preference = getCustomRenderProperty(attrName);
 		String value = preference.get();
-		return property.containsValue(value) ? value : preference.getDefaultValue();
+
+		if (property.hasPossibleValues()) {
+			return property.containsValue(value) ? value : preference.getDefaultValue();
+		}
+		return value;
 	}
 
 	@NonNull
@@ -3197,7 +3201,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference(this, "pt_safe_mode", false).makeProfile();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
-	public final CommonPreference<Integer> LOCATION_INTERPOLATION_PERCENT = new IntPreference(this, "location_interpolation_percent", 0).makeGlobal().makeShared();
+	public final CommonPreference<Integer> LOCATION_INTERPOLATION_PERCENT = new IntPreference(this, "location_interpolation_percent", 0).makeProfile().makeShared();
 
 	public final CommonPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render",
 			Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();

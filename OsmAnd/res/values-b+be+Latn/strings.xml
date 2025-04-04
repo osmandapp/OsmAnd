@@ -2167,7 +2167,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rendering_value_low_name">Nizkaja</string>
     <string name="rendering_attr_contourWidth_name">Taŭščynia haryzantaliaŭ</string>
     <string name="rendering_value_high_name">Vysokaja</string>
-    <string name="wiki_around">Blizkija artykuly ŭ Vikipedyi</string>
     <string name="route_roundabout_short">Zbočcie na %1$d źjeździe</string>
     <string name="gpx_no_tracks_title">U vas jašče niama GPX-fajlaŭ</string>
     <string name="gpx_no_tracks_title_folder">Vy taksama možacie dadać GPX-fajly ŭ tečku</string>

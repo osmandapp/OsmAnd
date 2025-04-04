@@ -2020,7 +2020,6 @@
     <string name="rendering_value_fine_name">Sottile</string>
     <string name="upload_poi">Carica i PDI</string>
     <string name="route_roundabout_short">Prendere la %1$d uscita e proseguire</string>
-    <string name="wiki_around">Articoli Wikipedia vicini</string>
     <string name="search_map_hint">Città o regione</string>
     <string name="routing_attr_allow_motorway_name">Usa autostrade</string>
     <string name="routing_attr_allow_motorway_description">Permette autostrade.</string>
@@ -4615,7 +4614,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_inhg">mmHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -5696,7 +5695,7 @@
     <string name="ais_object_lost_timeout">Timeout per la visibilità quando l\'oggetto viene perso</string>
     <string name="ais_object_lost_timeout_description">Imposta il timeout per la visibilità degli oggetti AIS: trascorso questo periodo di tempo senza ricezione del segnale, l\'oggetto AIS verrà rimosso dallo schermo.</string>
     <string name="ais_port_nmea_local_description">Definisci la porta UDP in cui OsmAnd riceve i dati NMEA</string>
-    <string name="ais_ship_lost_timeout_description">Imposta il timeout per la visibilità della nave: trascorso questo periodo di tempo senza ricezione del segnale, il simbolo della nave cambierà stato sullo schermo: sarà barrato.</string>
+    <string name="ais_ship_lost_timeout_description">Imposta il timeout per la visibilità della nave. Trascorso questo periodo di tempo senza ricezione del segnale, il simbolo della nave cambierà stato sullo schermo: sarà barrato.</string>
     <string name="ais_cpa_settings">Impostazioni relative al PAV</string>
     <string name="ais_cpa_settings_description">Questi valori definiscono la presentazione degli oggetti AIS che potrebbero avvicinarsi troppo alla propria posizione.</string>
     <string name="ais_address_settings">Impostazioni dell\'indirizzo IP</string>
@@ -5755,6 +5754,14 @@
     <string name="row_height">Altezza riga</string>
     <string name="poi_source">Sorgente PDI</string>
     <string name="display_priority">Priorità del display</string>
-    <string name="intermediate_first">Intermedi prima</string>
+    <string name="intermediate_first">Intermedio prima</string>
     <string name="destination_first">Destinazione prima</string>
+    <string name="prediction_time">Tempo di previsione</string>
+    <string name="shared_string_no_animation">Senza animazione</string>
+    <string name="read_on_wiki">Leggi su Wikipedia</string>
+    <string name="prediction_time_advanced_description">Regola il tempo di previsione per ridurre al minimo il ritardo.</string>
+    <string name="position_animation_empty_banner_description">L\'icona della posizione si sposta in ogni nuova posizione ricevuta senza animazione.</string>
+    <string name="position_animation">Animazione della posizione</string>
+    <string name="wiki_around">Luoghi popolari nelle vicinanze</string>
+    <string name="wikidata">Wikidata</string>
 </resources>

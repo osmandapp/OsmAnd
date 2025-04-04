@@ -31,6 +31,7 @@ public class PoiType extends AbstractPoiType {
 	private boolean relation;
 	private int order = DEFAULT_ORDER;
 	private boolean topIndex = false;
+	private boolean hidden = false;
 	private int maxPerMap;
 	private int minCount;
 
@@ -264,6 +265,14 @@ public class PoiType extends AbstractPoiType {
 		this.order = order;
 	}
 
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
 	@Override
 	public String toString() {
 		return "PoiType{" +
@@ -278,6 +287,7 @@ public class PoiType extends AbstractPoiType {
 				", nameOnly=" + nameOnly +
 				", relation=" + relation +
 				", order=" + order +
+				", hidden=" + hidden +
 				'}';
 	}
 

@@ -129,6 +129,7 @@ public class MenuBuilder {
 	private boolean showNearestWiki;
 	private boolean showNearestPoi;
 	private boolean showOnlinePhotos = true;
+	private boolean customOnlinePhotosPosition;
 
 	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();
 
@@ -281,6 +282,14 @@ public class MenuBuilder {
 		this.showOnlinePhotos = showOnlinePhotos;
 	}
 
+	public boolean isCustomOnlinePhotosPosition() {
+		return customOnlinePhotosPosition;
+	}
+
+	public void setCustomOnlinePhotosPosition(boolean customOnlinePhotosPosition) {
+		this.customOnlinePhotosPosition = customOnlinePhotosPosition;
+	}
+
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
 	}
@@ -314,12 +323,17 @@ public class MenuBuilder {
 		if (needBuildCoordinatesRow()) {
 			buildCoordinatesRow(view);
 		}
+		if (!isCustomOnlinePhotosPosition()) {
+			buildNearestPhotos(view, object);
+		}
+	}
+
+	public void buildNearestPhotos(@NonNull ViewGroup view, @Nullable Object object) {
 		galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos && galleryController != null) {
 			buildNearestPhotosRow(view);
 			buildPluginGalleryRows(view, object);
 		}
-
 		startLoadingImages();
 	}
 
@@ -753,6 +767,7 @@ public class MenuBuilder {
 
 		// Primary text
 		TextViewEx textView = new TextViewEx(view.getContext());
+		textView.setId(R.id.text);
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(llTextParams,
 				icon != null ? 0 : dpToPx(16f), dpToPx(textPrefixView != null ? 2f : (secondaryText != null ? 10f : 8f)), 0, dpToPx(secondaryText != null ? 6f : 8f));
@@ -886,10 +901,14 @@ public class MenuBuilder {
 	}
 
 	public View buildDescriptionRow(View view, String description) {
+		return buildDescriptionRow(view, description, null, null);
+	}
+
+	public View buildDescriptionRow(View view, String description, @Nullable View.OnClickListener onClickListener, @Nullable String buttonText) {
 		String descriptionLabel = app.getString(R.string.shared_string_description);
-		View.OnClickListener onClickListener = v -> {
-			showDescriptionDialog(view.getContext(), description, descriptionLabel);
-		};
+		if (onClickListener == null) {
+			onClickListener = v -> showDescriptionDialog(view.getContext(), description, descriptionLabel);
+		}
 		boolean light = isLightContent();
 
 		if (!isFirstRow()) {
@@ -960,7 +979,10 @@ public class MenuBuilder {
 		llText.addView(textView);
 
 		// Read Full button
-		buildReadFullButton(llText, app.getString(R.string.context_menu_read_full), onClickListener);
+		if (buttonText == null) {
+			buttonText = app.getString(R.string.context_menu_read_full);
+		}
+		buildReadFullButton(llText, buttonText, onClickListener);
 
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);

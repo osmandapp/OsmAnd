@@ -670,7 +670,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
     <string name="play_commands_of_currently_selected_voice">Hang kijelölése és tesztelése bemondások lejátszásával:</string>
     <string name="debugging_and_development">OsmAnd fejlesztés</string>
-    <string name="native_rendering">Natív térképrajzolás</string>
+    <string name="native_rendering">Natív térképkirajzolás</string>
     <string name="test_voice_prompts">Hangutasítások tesztelése</string>
     <string name="local_index_routing_data">Útvonaltervezési adatok</string>
     <string name="navigate_point_format">Formátum</string>
@@ -699,8 +699,8 @@
     <string name="osmand_parking_warning">Figyelmeztetés</string>
     <string name="osmand_parking_warning_text">Az autó felvételére be lett állítva a naptárban egy emlékeztető, amely ott szerkeszthető vagy eltávolítható.</string>
     <string name="osmand_parking_time_limit_title">Parkolási időkorlát beállítása</string>
-    <string name="osmand_parking_delete_confirm">Törli a parkolóhely jelölőjét\?</string>
-    <string name="osmand_parking_delete">Parkolóhely jelölőjének törlése</string>
+    <string name="osmand_parking_delete_confirm">Törli az itt parkolok jelölőt?</string>
+    <string name="osmand_parking_delete">Itt parkolok jelölő törlése</string>
     <string name="osmand_parking_choose_type">Parkolótípus kiválasztása</string>
     <string name="osmand_parking_lim_text">Időkorlátos</string>
     <string name="osmand_parking_no_lim_text">Korlátlan idejű</string>
@@ -714,7 +714,7 @@
     <string name="osmand_parking_position_name">Parkolóhely</string>
     <string name="osmand_parking_plugin_description">Jelölje meg, hol parkol az autója, és kapjon értesítést naptárából a parkolási idő lejártáról. A jelölés elhelyezéséhez válasszon egy helyet a térképen, menjen a Műveletek menüpontra, és koppintson a Parkolóhely hozzáadása lehetőségre.</string>
     <string name="osmand_parking_plugin_name">Parkolási pozíció</string>
-    <string name="context_menu_item_add_parking_point">Megjelölés parkolóhelyként</string>
+    <string name="context_menu_item_add_parking_point">Itt parkolok</string>
     <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
     <string name="starting_point_too_far">A kezdőpont túl messze van a legközelebbi úttól.</string>
     <string name="shared_location">Megosztott hely</string>
@@ -1996,7 +1996,6 @@
     <string name="search_hint">Város, cím, érdekes pont (POI) nevének megadása</string>
     <string name="translit_names">Nevek átírása</string>
     <string name="rendering_value_fine_name">Finom</string>
-    <string name="wiki_around">Közeli Wikipédia-cikkek</string>
     <string name="search_map_hint">Város vagy régió</string>
     <string name="routing_attr_allow_motorway_name">Autópálya használata</string>
     <string name="routing_attr_allow_motorway_description">Engedélyezi az autópályákat.</string>
@@ -2124,7 +2123,7 @@
     <string name="routing_attr_relief_smoothness_factor_name">Magasság ingadozásának kijelölése</string>
     <string name="right_side_navigation">Jobb oldali közlekedés</string>
     <string name="shared_string_automatic">Automatikus</string>
-    <string name="type_city_town">Település beírása</string>
+    <string name="type_city_town">Adja meg a településnevet</string>
     <string name="type_postcode">Adja meg az irányítószámot</string>
     <string name="nearest_cities">Közeli települések</string>
     <string name="quick_action_auto_zoom">Térkép automatikus nagyítás</string>
@@ -2182,7 +2181,7 @@
     <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatja\?</string>
     <string name="private_access_routing_req">Az úticél korlátozott hozzáférésű területen található. Engedélyezi a magánutak használatát ennél az útvonaltervnél?</string>
     <string name="restart_search">Keresés újraindítása</string>
-    <string name="increase_search_radius">Keresett terület szélesítése</string>
+    <string name="increase_search_radius">Keresési terület növelése</string>
     <string name="nothing_found">Nincs találat</string>
     <string name="nothing_found_descr">Módosítsa a keresést vagy növelje a sugarát.</string>
     <string name="mapillary">Mapillary</string>
@@ -2610,7 +2609,7 @@
     <string name="transport_nearby_routes">Ezen belül:</string>
     <string name="shared_string_launch">Indítás</string>
     <string name="lang_gn_py">guarani</string>
-    <string name="osmand_extended_description_part2">GPS navigáció \n • Válasszon az offline (nincs roamingdíj külföldön) vagy online (gyorsabb) mód között \n • Kanyaronkénti hangutasítások vezetik végig az úton (felvett ill. előállított hangok) \n • Az útvonalterv újratervezésre kerül, ha eltér attól \n • Sávvezérlés, utcanevek, és becsült érkezési idő segít az úton \n • Az út biztonságosabbá tételéhez a nappali/éjszakai mód automatikusan vált \n • Sebességhatárok megjelenítése, és értesítés, ha túllépi azt \n • A térkép nagyítási szintje követi a sebességet \n • Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint \n • Köztes pontok támogatása az útitervben \n • Saját GPX sávok rögzítése, vagy azok feltöltése és követése</string>
+    <string name="osmand_extended_description_part2">GPS navigáció \n • Válasszon az offline (nincs roamingdíj külföldön) vagy online (gyorsabb) mód között \n • Kanyaronkénti hangutasítások vezetik végig az úton (felvett ill. előállított hangok) \n • Az útvonalterv újratervezésre kerül, ha eltér tőle \n • Sávvezérlés, utcanevek, és becsült érkezési idő segít az úton \n • Az út biztonságosabbá tételéhez a nappali/éjszakai mód automatikusan vált \n • Sebességhatárok megjelenítése, és értesítés, ha túllépi azt \n • A térkép nagyítási szintje követi a sebességet \n • Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint \n • Köztes pontok támogatása az útitervben \n • Saját GPX sávok rögzítése, vagy azok feltöltése és követése</string>
     <string name="osmand_extended_description_part3">Térkép \n • POI-k (érdekes helyek) megjelenítése a közelében \n • A térkép módosítása a mozgási iránya (vagy az iránytű) alapján \n • A pozíció és az irány megjelenítése, amerre tekint \n • A pozíció megosztása, hogy a barátai megtalálhassák \n • A legfontosabb helyei „Kedvencként” tárolása \n • Kiválaszthatja, hogyan jelenjenek meg a nevek a térképen: angolul, helyi nyelven, vagy fonetikus átírással \n • Speciális online csempék megjelenítése, műholdnézet (a Bingről), különböző fedőrétegek, mint túra/navigációs GPX sávok, és további állítható átlátszóságú rétegek</string>
     <string name="osmand_extended_description_part6">Séta, túra, városnézés \n • A térkép megjeleníti a séta- és túraútvonalakat \n • A Wikipédia sok minden elmondhat az előnyben részesített nyelvén egy városnézés során \n • Tömegközlekedési megállók (busz, villamos, vonal), vonalnevekkel, melyek segítenek tájékozódni egy új városban \n • A gyalogos módban a GPS navigáció gyalogutakból állítja össze az útvonalat \n • GPX útvonalak feltöltése és követése, vagy saját rögzítése és megosztása</string>
     <string name="osmand_extended_description_part7">Közreműködés az OSM-ben \n • Adathibák jelentése \n • GPX nyomvonalak feltöltése az OSM-be, közvetlenül az alkalmazásból \n • POI-k hozzáadása, és közvetlen feltöltés az OSM-be (vagy később, ha offline vagy)</string>
@@ -3500,7 +3499,7 @@
     <string name="shared_string_gpx_route">Útvonal követése</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Ajánlás: Nehéz megjósolni, hogy mi lesz a felvételen és mi nem, így talán a legjobb ezt a szűrőt kikapcsolni.</string>
     <string name="map_widget_monitoring">Utazás felvétele</string>
-    <string name="search_offline_geo_error">Nem sikerült elemezni a következő térképrajzolási szándékot: „%s”.</string>
+    <string name="search_offline_geo_error">Nem sikerült elemezni a következő térképkirajzolási szándékot: „%s”.</string>
     <string name="plan_route_open_existing_track">Meglévő nyomvonal megnyitása</string>
     <string name="track_coloring_solid">Tömör</string>
     <string name="access_hint_enter_address">Adjon meg címet</string>
@@ -4288,7 +4287,7 @@
     <string name="widget_secondary_desc_part_of">A(z) %1$s bővítmény része.</string>
     <string name="gps_info_widget_desc">Megjeleníti a jelenleg látható, illetve használt műholdak számát.</string>
     <string name="elevation_profile_widget_desc">Megjeleníti a jelenlegi útvonal magassági és lejtésprofilját.</string>
-    <string name="parking_widget_desc">Megjeleníti a képernyő középpontjától a parkolóhelyig tartó távolságot.</string>
+    <string name="parking_widget_desc">Megjeleníti a képernyő középpontja és parkolóhelye közti távolságot.</string>
     <string name="altitude_widget_desc">Megjeleníti a jelenlegi földrajzi hely tengerszint feletti magasságát.</string>
     <string name="max_speed_widget_desc">Megjeleníti a jelenleg használt úton érvényes sebességkorlátozást.</string>
     <string name="navigation_points">Navigációs pontok</string>
@@ -4401,7 +4400,7 @@
     <string name="compass_desc">Az északi irányt mutatja.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourWidth_description">Mélységvonalak vastagsága</string>
-    <string name="time_to_destination_widget_desc">A modul megjeleníti az érkezési időt vagy az utolsó célpontig hátralévő időt. A navigáció során az idő folyamatosan frissül, és megegyezik a jelenlegi helytől számított útvonal idejével.</string>
+    <string name="time_to_destination_widget_desc">A modul megjeleníti az érkezési időt vagy az utolsó célpontig hátralévő időt. A navigáció során az idő folyamatosan frissül az aktuális pozíciónak megfelelően.</string>
     <string name="time_to_intermediate_widget_desc">A modul megjeleníti az érkezési időt vagy az első köztes célpontig hátralévő időt. Az idő folyamatosan frissül a navigáció során, és a köztes pontot elhagyva frissül a következő köztes pontra vonatkozó időre.</string>
     <string name="auto_backup_preference_desc">Alapértelmezés szerint az Android biztonsági mentést készít a kedvencekről, a térkép-tokenekről és az OsmAnd beállításairól, hogy új eszközön vagy újratelepítés után vissza lehessen állítani ezeket. A mentés mérete legfeljebb 25 MB.
 \nHa az OsmAnd Cloudot használja, ez félreértésekhez vezethet az újratelepítés után.</string>
@@ -4492,7 +4491,7 @@
     <string name="map_widget_altitude_map_center">Magasság: térképközéppont</string>
     <string name="map_widget_altitude_current_location">Magasság: jelenlegi hely</string>
     <string name="map_widget_altitude_desc">Megjeleníti a jelenlegi hely vagy a térképközéppont tengerszint feletti magasságát</string>
-    <string name="map_widget_rendering_fps">Térképrajzolás (képkocka/mp)</string>
+    <string name="map_widget_rendering_fps">Térképkirajzolás (képkocka/mp)</string>
     <string name="map_widget_rendering_fps_desc">Megjeleníti, milyen gyorsan jelenik meg és frissül a térkép és a térképelemek (képkocka/másodperc, frames per second [FPS]).</string>
     <string name="simulate_location_by_gpx">Hely szimulálása GPX-szel</string>
     <string name="location_simulation_cutoff">A szimuláció kihagyja az első métereket</string>
@@ -4998,7 +4997,7 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új modulok: „Siklószám” és „Nap állása” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtviszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet modulhoz \n \n • Bemutatjuk az \"Elérhető RAM\" modult</string>
+    <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új modulok: „Siklószám” és „Napszak” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtviszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet modulhoz \n \n • Bemutatjuk az \"Elérhető RAM\" modult</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
     <string name="app_mode_baby_transport">Babakocsi</string>
     <string name="app_mode_paragliding">Siklóernyőzés</string>
@@ -5130,7 +5129,7 @@
     <string name="add_new_button">Új gomb hozzáadása</string>
     <string name="use_v1_auto_zoom">Diszkrét automatikus nagyítás (régi verzió)</string>
     <string name="shared_string_next_event">Következő esemény</string>
-    <string name="map_widget_sun_position">Nap állása</string>
+    <string name="map_widget_sun_position">Napszak</string>
     <string name="map_widget_sun_position_desc">Mutatja a napfelkeltéig vagy napnyugtáig hátralévő időt.</string>
     <string name="previous_row_has_complex_widget">Az előző sorban összetett modul van</string>
     <string name="complex_widget_alert">%1$s modul csak a saját sorában helyezhető el.</string>

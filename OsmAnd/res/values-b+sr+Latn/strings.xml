@@ -2633,7 +2633,6 @@
     <string name="upload_poi">Učitaj TOI</string>
     <string name="route_roundabout_short">Odredi izlaz %1$d i idi</string>
     <string name="search_map_hint">Grad ili oblast</string>
-    <string name="wiki_around">Članci Vikipedije o okolini</string>
     <string name="upload_osm_note_description">Učitaj svoju OSM belešku anonimno ili korišćenjem svog profila na OpenStreetMap.org.</string>
     <string name="routing_attr_allow_motorway_description">Omogući magistrale.</string>
     <string name="auto_split_recording_descr">Počni novi segment posle razmaka od 6 minuta, novu putanju posle razmaka od 2 sata, ili novu fajl posle dužeg razmaka ako je dan izmenjen.</string>
@@ -5723,4 +5722,12 @@
     <string name="destination_first">Prvo odredište</string>
     <string name="poi_source">Izvor TOI</string>
     <string name="display_priority">Prioritet prikaza</string>
+    <string name="read_on_wiki">Pročitajte na Wikipediji</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="prediction_time">Vreme predviđanja</string>
+    <string name="shared_string_no_animation">Nema animacije</string>
+    <string name="position_animation_empty_banner_description">Ikona pozicije se kreće na svaku novu primljenu lokaciju bez animacije.</string>
+    <string name="prediction_time_description">Ikona pozicije u OsmAnd animira se svakim promenom GPS tačke (jednom u sekundi). Blago kašnjenje u njegovom kretanju može biti primetno, posebno kada se korisnik brzo kreće ili GPS signal varira.</string>
+    <string name="prediction_time_advanced_description">Podesite vreme predviđanja kako biste smanjili kašnjenje.</string>
+    <string name="position_animation">Animacija pozicije</string>
 </resources>
