@@ -1,7 +1,5 @@
 package net.osmand.plus.helpers;
 
-import android.graphics.Color;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +23,8 @@ import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.GridFormat;
+import net.osmand.plus.settings.enums.GridLabelsPosition;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -40,12 +40,12 @@ public class CoordinatesGridHelper {
 	private GridMarksProvider marksProvider;
 
 	private GridFormat cachedGridFormat;
-	@ColorInt
-	private int cachedGridColor;
-	@ColorInt
-	private int cachedHaloColor;
+	private GridLabelsPosition cachedLabelsPosition;
+	@ColorInt private int cachedGridColorDay;
+	@ColorInt private int cachedGridColorNight;
 	private Float cachedTextScale;
 	private Boolean cachedGridShow;
+	private boolean cachedNightMode;
 	private StateChangedListener settingsListener;
 
 	public CoordinatesGridHelper(@NonNull OsmandApplication app,
@@ -60,6 +60,9 @@ public class CoordinatesGridHelper {
 		settings.COORDINATE_GRID_MIN_ZOOM.addListener(settingsListener);
 		settings.COORDINATE_GRID_MAX_ZOOM.addListener(settingsListener);
 		settings.COORDINATES_FORMAT.addListener(settingsListener);
+		settings.COORDINATES_GRID_LABELS_POSITION.addListener(settingsListener);
+		settings.COORDINATES_GRID_COLOR_DAY.addListener(settingsListener);
+		settings.COORDINATES_GRID_COLOR_NIGHT.addListener(settingsListener);
 		settings.TEXT_SCALE.addListener(settingsListener);
 	}
 
@@ -77,7 +80,7 @@ public class CoordinatesGridHelper {
 	public void updateGridSettings(@NonNull MapRendererView mapRenderer) {
 		boolean updateAppearance;
 		ApplicationMode appMode = settings.getApplicationMode();
-		if (gridConfig == null) {
+		if (gridConfig == null || !mapRenderer.hasSymbolsProvider(marksProvider)) {
 			gridConfig = new GridConfiguration();
 			initVariables(appMode);
 			setupMapZoomListener();
@@ -98,9 +101,11 @@ public class CoordinatesGridHelper {
 
 	private void initVariables(@NonNull ApplicationMode appMode) {
 		cachedGridFormat = getGridFormat(appMode);
-		cachedGridColor = getGridColor(appMode);
-		cachedHaloColor = getHaloColor(appMode);
+		cachedLabelsPosition = getGridLabelsPosition(appMode);
+		cachedGridColorDay = getGridColor(appMode, false);
+		cachedGridColorNight = getGridColor(appMode, true);
 		cachedTextScale = getTextScale(appMode);
+		cachedNightMode = isNightMode(appMode);
 		cachedGridShow = shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
 	}
 
@@ -115,14 +120,14 @@ public class CoordinatesGridHelper {
 			cachedGridFormat = newGridFormat;
 			updated = true;
 		}
-		int newGridColor = getGridColor(appMode);
-		if (cachedGridColor != newGridColor) {
-			cachedGridColor = newGridColor;
+		int newGridColorDay = getGridColor(appMode, false);
+		if (cachedGridColorDay != newGridColorDay) {
+			cachedGridColorDay = newGridColorDay;
 			updated = true;
 		}
-		int newHaloColor = getHaloColor(appMode);
-		if (cachedHaloColor != newHaloColor) {
-			cachedHaloColor = newHaloColor;
+		int newGridColorNight = getGridColor(appMode, true);
+		if (cachedGridColorNight != newGridColorNight) {
+			cachedGridColorNight = newGridColorNight;
 			updated = true;
 		}
 		float newTextScale = getTextScale(appMode);
@@ -130,14 +135,27 @@ public class CoordinatesGridHelper {
 			cachedTextScale = newTextScale;
 			updated = true;
 		}
+		GridLabelsPosition newLabelsPosition = getGridLabelsPosition(appMode);
+		if (cachedLabelsPosition != newLabelsPosition) {
+			cachedLabelsPosition = newLabelsPosition;
+			updated = true;
+		}
+		boolean newNightMode = isNightMode(appMode);
+		if (cachedNightMode != newNightMode) {
+			cachedNightMode = newNightMode;
+			updated = true;
+		}
 		return updated;
 	}
 
 	private void updateGridAppearance() {
-		Projection projection = cachedGridFormat.getProjection();
 		Format format = cachedGridFormat.getFormat();
-		FColorARGB color = NativeUtilities.createFColorARGB(cachedGridColor);
-		FColorARGB haloColor = NativeUtilities.createFColorARGB(cachedHaloColor);
+		Projection projection = cachedGridFormat.getProjection();
+
+		int colorInt = cachedNightMode ? cachedGridColorNight : cachedGridColorDay;
+		FColorARGB color = NativeUtilities.createFColorARGB(colorInt);
+		int haloColorInt = ColorUtilities.getContrastColor(app, colorInt, true);
+		FColorARGB haloColor = NativeUtilities.createFColorARGB(haloColorInt);
 
 		gridConfig.setPrimaryProjection(projection);
 		gridConfig.setPrimaryFormat(format);
@@ -157,7 +175,8 @@ public class CoordinatesGridHelper {
 		String meridian180 = app.getString(R.string.meridian_180);
 		marksProvider.setPrimary(false, equator, "", primeMeridian, meridian180);
 
-		marksProvider.setSecondaryStyle(secondaryStyle, 2.0f * cachedTextScale);
+		boolean drawLabelsInCenter = cachedLabelsPosition == GridLabelsPosition.CENTER;
+		marksProvider.setSecondaryStyle(secondaryStyle, 2.0f * cachedTextScale, drawLabelsInCenter);
 		if (cachedGridFormat.needSuffixes()) {
 			marksProvider.setSecondary(true, "N", "S", "E", "W");
 		} else {
@@ -244,20 +263,36 @@ public class CoordinatesGridHelper {
 	}
 
 	@ColorInt
-	public int getGridColor(@NonNull ApplicationMode appMode) {
-		// temporally use predefined color, it will be set from the preferences in the future
-		return Color.parseColor("#FF1A00CC");
+	public int getGridColor(@NonNull ApplicationMode appMode, boolean nightMode) {
+		return nightMode
+				? settings.COORDINATES_GRID_COLOR_NIGHT.getModeValue(appMode)
+				: settings.COORDINATES_GRID_COLOR_DAY.getModeValue(appMode);
 	}
 
-	@ColorInt
-	public int getHaloColor(@NonNull ApplicationMode appMode) {
-		// temporally use predefined color, it will be set from the preferences in the future
-		return Color.parseColor("#80FFFFFF");
+	public void setGridColor(@NonNull ApplicationMode appMode, @ColorInt int color, boolean nightMode) {
+		if (nightMode) {
+			settings.COORDINATES_GRID_COLOR_NIGHT.setModeValue(appMode, color);
+		} else {
+			settings.COORDINATES_GRID_COLOR_DAY.setModeValue(appMode, color);
+		}
+	}
+
+	public void resetGridColors(@NonNull ApplicationMode appMode) {
+		settings.COORDINATES_GRID_COLOR_DAY.resetModeToDefault(appMode);
+		settings.COORDINATES_GRID_COLOR_NIGHT.resetModeToDefault(appMode);
 	}
 
 	@NonNull
-	public Limits<Integer> getZoomLevelsWithRestrictions() {
-		return getZoomLevelsWithRestrictions(settings.getApplicationMode());
+	public GridLabelsPosition getGridLabelsPosition(@NonNull ApplicationMode appMode) {
+		return settings.COORDINATES_GRID_LABELS_POSITION.getModeValue(appMode);
+	}
+
+	public void setGridLabelsPosition(@NonNull ApplicationMode appMode, @NonNull GridLabelsPosition position) {
+		settings.COORDINATES_GRID_LABELS_POSITION.setModeValue(appMode, position);
+	}
+
+	private boolean isNightMode(@NonNull ApplicationMode appMode) {
+		return app.getDaynightHelper().isNightMode();
 	}
 
 	@NonNull
