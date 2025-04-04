@@ -679,8 +679,8 @@ public class AmenityUIHelper extends MenuBuilder {
 				}
 			case "depth":
 			case "seamark_height":
-				try {
-					double valueAsDouble = Double.parseDouble(value);
+				double valueAsDouble = Algorithms.parseDoubleSilently(value, 0);
+				if (valueAsDouble > 0) {
 					if (metricSystem == MILES_AND_FEET || metricSystem == NAUTICAL_MILES_AND_FEET) {
 						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * FEET_IN_ONE_METER) + " " + app.getString(R.string.foot);
 					} else if (metricSystem == MILES_AND_YARDS) {
@@ -688,8 +688,6 @@ public class AmenityUIHelper extends MenuBuilder {
 					} else {
 						formattedValue = value + " " + app.getString(R.string.m);
 					}
-				} catch (RuntimeException e) {
-					LOG.error(e.getMessage(), e);
 				}
 				break;
 			case "distance":
