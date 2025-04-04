@@ -41,6 +41,7 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -191,11 +192,24 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 
 		buildNearestRows((ViewGroup) view);
-		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getAltNamesMap(), true);
-		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getNamesMap(true), false);
+		buildAltNamesRow((ViewGroup) view);
+		buildNamesRow((ViewGroup) view);
 		if (!rowsBuilder.isFirstRow()) {
 			firstRow = rowsBuilder.isFirstRow();
 		}
+	}
+
+	private void buildNamesRow(ViewGroup view) {
+		HashMap<String, String> names = new HashMap<>();
+		if(amenity.getName() != null) {
+			names.put("", amenity.getName());
+		}
+		names.putAll(amenity.getNamesMap(true));
+		rowsBuilder.buildNamesRow(view, names, false);
+	}
+
+	private void buildAltNamesRow(ViewGroup view) {
+		rowsBuilder.buildNamesRow(view, amenity.getAltNamesMap(), true);
 	}
 
 	private void processRoutePointAmenityTags(View view) {

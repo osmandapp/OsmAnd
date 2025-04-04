@@ -1,5 +1,6 @@
 package net.osmand.plus.track.cards;
 
+import android.graphics.drawable.Drawable;
 import android.text.util.Linkify;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,11 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.LatLon;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -26,7 +29,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -51,14 +53,9 @@ import androidx.annotation.StringRes;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.data.Amenity.DESCRIPTION;
 import static net.osmand.data.Amenity.NAME;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SEGMENT_INDEX;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SHORTLINK_TILES;
 import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
 
-import org.apache.commons.logging.Log;
-
-public class RouteInfoCard extends MapBaseCard {
+public class TrackTagsInfoCard extends BaseMetadataCard {
 	public static final Set<String> HIDDEN_GPX_TAGS = Set.of(ACTIVITY_TYPE, NAME, DESCRIPTION);
 	private static final String HIDDEN_OSMC_TAGS_PREFIX = "osmc_";
 	public static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";
@@ -75,55 +72,78 @@ public class RouteInfoCard extends MapBaseCard {
 
 	private final RouteKey routeKey;
 	private final GpxFile gpxFile;
-	private static final Log log = PlatformUtil.getLog(RouteInfoCard.class);
+	private final RouteActivitySelectionHelper activityHelper;
 
-	public RouteInfoCard(
+	public TrackTagsInfoCard(
 			@NonNull MapActivity activity,
-			@NonNull RouteKey routeKey,
-			@NonNull GpxFile gpxFile
-	) {
-		super(activity);
+			@Nullable RouteKey routeKey,
+			@NonNull GpxFile gpxFile,
+			@NonNull RouteActivitySelectionHelper activityHelper) {
+		super(activity, gpxFile.getMetadata());
 		this.routeKey = routeKey;
 		this.gpxFile = gpxFile;
+		this.activityHelper = activityHelper;
 	}
 
 	@Override
-	public int getCardLayoutId() {
-		return R.layout.gpx_route_info_card;
+	@StringRes
+	protected int getTitleId() {
+		return R.string.poi_information;
 	}
 
 	@Override
 	public void updateContent() {
+		super.updateContent();
+
 		LinearLayout container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
 
-		if (routeKey.type != OsmRouteType.UNKNOWN) {
-			String routeTypeToDisplay = AndroidUtils.getActivityTypeTitle(app, routeKey.type);
-			addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false, false);
+		RouteActivity routeActivity = activityHelper.getSelectedActivity();
+		String label = routeActivity != null
+				? routeActivity.getLabel()
+				: app.getString(R.string.shared_string_none);
+		Drawable icon = getContentIcon(AndroidUtils.getActivityIconId(app, routeActivity));
+		createItemRow(getString(R.string.shared_string_activity), label, icon).setOnClickListener(
+				v -> SelectRouteActivityController.showDialog(activity, activityHelper)
+		);
+
+		String keywords = metadata != null ? metadata.getKeywords() : null;
+		if (!Algorithms.isEmpty(keywords)) {
+			createItemRow(getString(R.string.shared_string_keywords), keywords, getContentIcon(R.drawable.ic_action_label));
 		}
 
-		int addedRows = 0;
-		for (TagsRow row : getRows()) {
-			LinearLayout expandableView = null;
-			int tagsCount = row.tags.size();
+		String link = (metadata != null && metadata.getLink() != null) ? metadata.getLink().getHref() : null;
+		if (!Algorithms.isEmpty(link)) {
+			createLinkItemRow(getString(R.string.shared_string_link), link, R.drawable.ic_action_link);
+		}
 
-			for (int tagIndex = 0; tagIndex < tagsCount; tagIndex++) {
-				RouteTag tag = row.tags.get(tagIndex);
-				if (!shouldAddRow(tag.key)) break;
+		if (routeKey != null) {
+			if (routeKey.type != OsmRouteType.UNKNOWN) {
+				String routeTypeToDisplay = AndroidUtils.getActivityTypeTitle(app, routeKey.type);
+				addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false, false);
+			}
 
-				ViewGroup tagContainer = tagIndex == 0 ? container : expandableView;
-				View view = addInfoRow(tagContainer, tag);
-				addedRows++;
+			for (TagsRow row : getRows()) {
+				LinearLayout expandableView = null;
+				int tagsCount = row.tags.size();
 
-				if (tagIndex == 0 && tagsCount > 1) {
-					expandableView = createExpandableView();
-					container.addView(expandableView);
-					setupViewExpand(view, expandableView);
+				for (int tagIndex = 0; tagIndex < tagsCount; tagIndex++) {
+					RouteTag tag = row.tags.get(tagIndex);
+					if (!shouldAddRow(tag.key)) break;
+
+					ViewGroup tagContainer = tagIndex == 0 ? container : expandableView;
+					View view = addInfoRow(tagContainer, tag);
+
+					if (tagIndex == 0 && tagsCount > 1) {
+						expandableView = createExpandableView();
+						container.addView(expandableView);
+						setupViewExpand(view, expandableView);
+					}
 				}
 			}
 		}
 
-		updateVisibility(view, addedRows > 0);
+		updateVisibility(view, true);
 	}
 
 	@NonNull
@@ -327,7 +347,9 @@ public class RouteInfoCard extends MapBaseCard {
 					return app.getString(translatableKey.getValue());
 				}
 			}
-			if (poiType != null) {
+			if (key.startsWith("network_")) {
+				return app.getString(R.string.poi_network);
+			} else if (poiType != null) {
 				return poiType.getTranslation();
 			} else {
 				String stringKey = key.toLowerCase().replace(":", "_");
@@ -343,7 +365,15 @@ public class RouteInfoCard extends MapBaseCard {
 		public String getFormattedValue(@NonNull OsmandApplication app, @NonNull OsmRouteType routeType) {
 			switch (key) {
 				case "network":
-					String network = AndroidUtils.getStringByProperty(app, "poi_route_" + routeType.getName() + "_" + value + "_poi");
+				case "network_lwn":
+				case "network_rwn":
+				case "network_nwn":
+				case "network_iwn":
+				case "network_lcn":
+				case "network_rcn":
+				case "network_ncn":
+				case "network_icn":
+					String network = AndroidUtils.getStringByProperty(app, "poi_network_" + value);
 					return Algorithms.isEmpty(network) ? value : network;
 				case "wikipedia":
 					return WikiAlgorithms.getWikiUrl(value);

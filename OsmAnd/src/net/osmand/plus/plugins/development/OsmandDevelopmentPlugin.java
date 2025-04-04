@@ -10,9 +10,11 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.squareup.picasso.Picasso;
 
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
@@ -257,6 +259,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		}
 		avgStatsEnabled = false;
 		super.disable(app);
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		PicassoUtils.getPicasso(app);
+		Picasso.get().setLoggingEnabled(enabled);
 	}
 
 	@Override
