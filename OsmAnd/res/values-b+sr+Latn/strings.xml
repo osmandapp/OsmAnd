@@ -5736,4 +5736,5 @@
     <string name="grid_color">Boja grida</string>
     <string name="shared_string_edges">Ivice</string>
     <string name="labels_position">Položaj nalepnica</string>
+    <string name="customize_grid_color">Prilagodite boju mreže</string>
 </resources>
