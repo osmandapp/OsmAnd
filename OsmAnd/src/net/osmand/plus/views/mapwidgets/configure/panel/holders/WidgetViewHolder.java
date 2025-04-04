@@ -102,7 +102,7 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder {
 
 			moveIcon.setOnTouchListener(null);
 			int iconId = nightMode ? R.drawable.ic_action_info_dark : R.drawable.ic_action_info;
-			moveIcon.setImageDrawable(app.getUIUtilities().getIcon(iconId));
+			moveIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconId, ColorUtilities.getDefaultIconColor(app, nightMode)));
 			itemView.setOnClickListener(view -> {
 				listener.onWidgetClick(widgetItem.mapWidgetInfo);
 			});

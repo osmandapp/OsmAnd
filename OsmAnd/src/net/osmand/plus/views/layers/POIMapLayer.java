@@ -751,12 +751,12 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					}
 					updated = true;
 				}
-				boolean isOnline = app.getSettings().WIKI_DATA_SOURCE_TYPE.get() == DataSourceType.ONLINE;
-				boolean showTopPlacesPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get() && isOnline;
+				boolean showTopPlacesPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
 				boolean showTopPlacesPreviewsChanged = this.showTopPlacesPreviews != showTopPlacesPreviews;
 				this.showTopPlacesPreviews = showTopPlacesPreviews;
 				if (updated || showTopPlacesPreviewsChanged || topPlacesBox == null || !topPlacesBox.containsTileBox(tileBox)) {
 					List<Amenity> places = data.getResults();
+					updateVisiblePlaces(data.getDisplayedResults(), tileBox.getLatLonBounds());
                     if (showTopPlacesPreviews && places != null) {
                         RotatedTileBox extendedBox = tileBox.copy();
                         int bigIconSize = getBigIconSize();
@@ -764,7 +764,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
                         topPlacesBox = extendedBox;
 						updateTopPlaces(places, tileBox.getLatLonBounds(), zoom);
 						updateTopPlacesCollection();
-						updateVisiblePlaces(data.getDisplayedResults(), tileBox.getLatLonBounds());
                     } else {
                         clearMapMarkersCollections();
 						cancelLoadingImages();

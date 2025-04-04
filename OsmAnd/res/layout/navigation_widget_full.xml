@@ -82,6 +82,9 @@
 					android:textColor="@color/card_and_list_background_light"
 					android:textSize="18sp"
 					android:visibility="gone"
+					android:scrollbars="none"
+					android:includeFontPadding="false"
+					android:lines="1"
 					tools:text="Exit 8"
 					tools:visibility="visible" />
 

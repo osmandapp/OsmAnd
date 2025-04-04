@@ -639,7 +639,6 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 			return false;
 		}
 
-
 		@Nullable
 		@Override
 		public Object getChangePayload(int oldItemPosition, int newItemPosition) {

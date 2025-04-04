@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="release_5_0">
+    • Odkrywaj najwyżej oceniane POI w nowym trybie Eksploruj\n\n
+    • Wszystkie trasy OSM teraz przeszukiwalne! Wędrówki, jazda na rowerze, MTB i więcej\n\n
+    • Nowy widżet nawigacji łączy strzałkę skrętu i instrukcje nawigacyjne\n\n
+    • Widżet informacji o bieżącej trasie: wyświetla ETA, czas przybycia i dystans\n\n
+    • Wybieraj trasy narciarskie i szlaki MTB na mapie, aby uzyskać szczegółowe informacje\n\n
+    • Możliwość wyboru rozmiaru widżetu dla lewego i prawego panelu\n\n
+    • Dodano "Siatkę współrzędnych" z koordynatami geograficznymi\n\n
+    • Dodano możliwość dostosowania domyślnego wyglądu grup ulubionych\n\n
+    • Android Auto: wyświetlaj ETA i dystans do następnego punktu trasy; nazwy miast pojawiają się teraz w wynikach wyszukiwania\n\n
+    • Wybitne szczyty są teraz wykrywalne za pomocą mapy i wyszukiwania\n\n
+    • Wysokości szczytów górskich w stopach\n\n
+    • Dodano: Skały i obszary wspinaczkowe na mapie\n\n
+    • Wyszukiwanie adresów w USA zostało ulepszone\n\n
+    • Dodano hebrajski TTS do nawigacji\n\n
+</string>
     <string name="use_transparent_map_theme">Przezroczysty motyw</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
     <string name="init_native_library">Inicjowanie biblioteki renderowania natywnego…</string>

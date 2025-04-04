@@ -406,8 +406,14 @@ public class RenderingRulesStorage {
 				prop.setDefaultValueDescription(attrsMap.get("defaultValueDescription"));
 				prop.setCategory(attrsMap.get("category"));
 				prop.setName(attrsMap.get("name"));
-				if (attrsMap.get("possibleValues") != null) {
-					prop.setPossibleValues(attrsMap.get("possibleValues").split(","));
+
+				String possibleValues = attrsMap.get("possibleValues");
+				if (possibleValues != null) {
+					String[] values = possibleValues.split(",");
+					for (int i = 0; i < values.length; i++) {
+						values[i] = values[i].trim();
+					}
+					prop.setPossibleValues(values);
 				}
 				PROPS.registerRule(prop, !addon);
 			} else if ("renderingConstant".equals(name)) {
