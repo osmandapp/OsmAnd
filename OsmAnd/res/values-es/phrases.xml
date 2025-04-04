@@ -4909,4 +4909,8 @@
     <string name="poi_route_activity_type_car">Coche</string>
     <string name="poi_route_activity_type_truck_hgv">Camión (vehículo pesado)</string>
     <string name="poi_contact_website">Sitio web</string>
+    <string name="poi_osmwiki">Lugares populares (Wikipedia)</string>
+    <string name="poi_network_foot">Red de rutas (senderismo)</string>
+    <string name="poi_network_cycling">Red de rutas (ciclismo)</string>
+    <string name="poi_cafe_filter">Cafetería</string>
 </resources>
