@@ -28,7 +28,6 @@
 				android:layout_height="match_parent"
 				android:layout_gravity="end"
 				android:paddingHorizontal="@dimen/content_padding"
-				android:tint="?attr/secondary_icon_color"
 				app:srcCompat="@drawable/ic_action_item_move" />
 
 			<LinearLayout

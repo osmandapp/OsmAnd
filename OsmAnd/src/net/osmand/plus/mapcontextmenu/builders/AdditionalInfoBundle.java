@@ -15,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.util.CollectionUtils;
@@ -66,6 +69,11 @@ public class AdditionalInfoBundle {
 					continue;
 				} else {
 					key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
+				}
+				if (MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key) instanceof PoiType that) {
+					if (that.isHidden()) {
+						continue;
+					}
 				}
 				if (!HIDDEN_EXTENSIONS.contains(key)) {
 					result.put(key, get(key));

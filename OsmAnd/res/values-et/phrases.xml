@@ -2248,15 +2248,15 @@
     <string name="poi_material_limestone">Materjal: lubjakivi</string>
     <string name="poi_material_marble">Materjal: marmor</string>
     <string name="poi_material_aluminium">Materjal: alumiinium</string>
-    <string name="poi_site_type_megalith">Hiidrahn</string>
-    <string name="poi_site_type_tumulus">Hauaküngas</string>
-    <string name="poi_site_type_fortification">Linnus</string>
-    <string name="poi_site_type_settlement">Asustus</string>
-    <string name="poi_site_type_city">Linn</string>
-    <string name="poi_site_type_hut_circle">Onnide ring</string>
-    <string name="poi_site_type_necropolis">Nekropol</string>
-    <string name="poi_site_type_petroglyph">Petroglüüf</string>
-    <string name="poi_site_type_earthwork">Mullatööd</string>
+    <string name="poi_archaeological_site_megalith">Hiidrahn</string>
+    <string name="poi_archaeological_site_tumulus">Hauaküngas</string>
+    <string name="poi_archaeological_site_fortification">Linnus</string>
+    <string name="poi_archaeological_site_settlement">Asustus</string>
+    <string name="poi_archaeological_site_city">Linn</string>
+    <string name="poi_archaeological_site_hut_circle">Onnide ring</string>
+    <string name="poi_archaeological_site_necropolis">Nekropol</string>
+    <string name="poi_archaeological_site_petroglyph">Petroglüüf</string>
+    <string name="poi_archaeological_site_earthwork">Mullatööd</string>
     <string name="poi_megalith_type_menhir">Hiidrahnu liik: menhir</string>
     <string name="poi_megalith_type_dolmen">Hiidrahnu liik: dolmen</string>
     <string name="poi_megalith_type_nuraghe">Hiidrahnu liik: nuraghe</string>
@@ -5024,4 +5024,6 @@
     <string name="poi_shinto_shrine">Šinto tempel</string>
     <string name="poi_access_main_tag">Ligipääs</string>
     <string name="poi_osmwiki">Populaarsed paigad (Vikipeedia)</string>
+    <string name="poi_consulate">Konsulaat</string>
+    <string name="poi_aerodrome_type_airfield">Lennuväli</string>
 </resources>

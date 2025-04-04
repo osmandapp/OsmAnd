@@ -5724,7 +5724,7 @@
     <string name="show_image_previews">Zobrazit náhledy obrázků</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Akce pro ovládání viditelnosti souřadnicové sítě na mapě.</string>
     <string name="layer_coordinates_grid">Souřadnicová síť</string>
-    <string name="release_5_0">• Objevte nejlépe hodnocené body zájmu pomocí nového režimu Prozkoumat\n\n • Všechny trasy OSM, nyní s možností vyhledávání! Pěší turistika, cyklistika, MTB a další\n\n • Nový navigační widget kombinuje směrovou šipku a navigační pokyny\n\n • Widget s informacemi o aktuální trase: zobrazuje odhadovaný čas, čas příjezdu a vzdálenost\n\n • Výběr lyžařských sjezdovek a MTB tras na mapě pro podrobné informace\n\n • Možnost výběru velikosti widgetu pro levý a pravý panel\n\n • Přidána mřížka souřadnic se zeměpisnými souřadnicemi\n\n • Přidána možnost přizpůsobit výchozí vzhled oblíbených skupin\n\n • Android Auto: zobrazení odhadovaného času a vzdálenosti k dalšímu bodu trasy; ve výsledcích vyhledávání se nyní zobrazují názvy měst\n\n • Významné vrcholy jsou nyní objevitelné prostřednictvím mapy a vyhledávání\n\n • Výšky horských vrcholů ve stopách (ft)\n\n • Přidáno: skalní útvary a horolezecké oblasti na mapě\n\n • Vylepšeno vyhledávání adres v USA\n\n • Přidáno hebrejské TTS pro navigaci</string>
+    <string name="release_5_0">• Objevte nejlépe hodnocené body zájmu pomocí nového režimu Prozkoumat\n\n • Všechny trasy OSM, nyní s možností vyhledávání! Pěší turistika, cyklistika, MTB a další\n\n • Nový navigační widget kombinuje směrovou šipku a navigační pokyny\n\n • Widget s informacemi o aktuální trase: zobrazuje odhadovaný čas, čas příjezdu a vzdálenost\n\n • Výběr lyžařských sjezdovek a MTB tras na mapě pro podrobné informace\n\n • Možnost výběru velikosti widgetu pro levý a pravý panel\n\n • Přidána mřížka souřadnic se zeměpisnými souřadnicemi\n\n • Přidána možnost přizpůsobit výchozí vzhled oblíbených skupin\n\n • Android Auto: zobrazení odhadovaného času a vzdálenosti k dalšímu bodu trasy; ve výsledcích vyhledávání se nyní zobrazují názvy měst\n • Významné vrcholy jsou nyní objevitelné prostřednictvím mapy a vyhledávání\n\n • Výšky horských vrcholů ve stopách (ft)\n\n • Přidáno: skalní útvary a horolezecké oblasti na mapě\n\n • Vylepšeno vyhledávání adres v USA\n\n • Přidáno hebrejské TTS pro navigaci</string>
     <string name="prime_meridian">Nultý poledník</string>
     <string name="equator">Rovník</string>
     <string name="meridian_180">180. poledník</string>
@@ -5736,4 +5736,15 @@
     <string name="intermediate_first">Nejprve mezicíl</string>
     <string name="destination_first">Nejprve cíl</string>
     <string name="display_priority">Zobrazit prioritu</string>
+    <string name="wiki_around">Populární místa v okolí</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="prediction_time_advanced_description">Upravit čas předpovědi pro minimalizaci zpoždění.</string>
+    <string name="shared_string_no_animation">Žádná animace</string>
+    <string name="position_animation">Animace polohy</string>
+    <string name="read_on_wiki">Přečíst na Wikipedii</string>
+    <string name="prediction_time_description">Ikona polohy v aplikaci OsmAnd se animuje s každým přijatým bodem dat GPS (jednou za sekundu). Může být patrné mírné zpoždění jejího pohybu, zejména pokud se uživatel pohybuje rychle nebo pokud signál GPS kolísá.</string>
+    <string name="prediction_time">Čas předpovědi</string>
+    <string name="position_animation_empty_banner_description">Ikona polohy se přesune na každé nové přijaté místo bez animace.</string>
+    <string name="routing_attr_allow_ferries_name">Povolit trajekty</string>
+    <string name="routing_attr_allow_ferries_description">Povolit plánování trasy s trajekty</string>
 </resources>

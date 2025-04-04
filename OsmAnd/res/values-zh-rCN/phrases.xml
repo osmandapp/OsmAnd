@@ -274,7 +274,7 @@
     <string name="poi_social_facility_for_child">儿童</string>
     <string name="poi_animal_training_dog">狗</string>
     <string name="poi_animal_training_horse">马</string>
-    <string name="poi_site_type_city">城市</string>
+    <string name="poi_archaeological_site_city">城市</string>
     <string name="poi_cargo_bicycle">自行车</string>
     <string name="poi_aerodrome_type_international">国际</string>
     <string name="poi_aerodrome_type_public">公共</string>
@@ -769,7 +769,7 @@
     <string name="poi_takeaway_only">仅限外卖</string>
     <string name="poi_pharmacy_dispensing">配药</string>
     <string name="poi_automated">自动化</string>
-    <string name="poi_site_type_fortification">防御工事</string>
+    <string name="poi_archaeological_site_fortification">防御工事</string>
     <string name="poi_surface_wood">表面：木材</string>
     <string name="poi_dead_wood">枯木</string>
     <string name="poi_fuel_wood">燃料：薪柴</string>
@@ -1909,7 +1909,7 @@
     <string name="poi_pet_grooming">宠物美容</string>
     <string name="poi_service_vehicle_transmission_repair_yes">变速箱维修</string>
     <string name="poi_agrarian">农业用品店</string>
-    <string name="poi_site_type_petroglyph">岩画</string>
+    <string name="poi_archaeological_site_petroglyph">岩画</string>
     <string name="poi_bandstand">演奏台</string>
     <string name="poi_stripclub">脱衣舞俱乐部</string>
     <string name="poi_casino">赌场</string>

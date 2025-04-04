@@ -2125,15 +2125,15 @@
     <string name="poi_material_limestone">Materiale: kalksten</string>
     <string name="poi_material_marble">Materiale: marmor</string>
     <string name="poi_material_aluminium">Materiale: aluminium</string>
-    <string name="poi_site_type_megalith">Megalith</string>
-    <string name="poi_site_type_tumulus">Gravhøj</string>
-    <string name="poi_site_type_fortification">Befæstning</string>
-    <string name="poi_site_type_settlement">Bebyggelse</string>
-    <string name="poi_site_type_city">By</string>
-    <string name="poi_site_type_hut_circle">Hyttekreds</string>
-    <string name="poi_site_type_necropolis">Nekropol</string>
-    <string name="poi_site_type_petroglyph">Helleristning</string>
-    <string name="poi_site_type_earthwork">Jordarbejde</string>
+    <string name="poi_archaeological_site_megalith">Megalith</string>
+    <string name="poi_archaeological_site_tumulus">Gravhøj</string>
+    <string name="poi_archaeological_site_fortification">Befæstning</string>
+    <string name="poi_archaeological_site_settlement">Bebyggelse</string>
+    <string name="poi_archaeological_site_city">By</string>
+    <string name="poi_archaeological_site_hut_circle">Hyttekreds</string>
+    <string name="poi_archaeological_site_necropolis">Nekropol</string>
+    <string name="poi_archaeological_site_petroglyph">Helleristning</string>
+    <string name="poi_archaeological_site_earthwork">Jordarbejde</string>
     <string name="poi_megalith_type_menhir">Megalit type: bautasten</string>
     <string name="poi_megalith_type_dolmen">Megalit type: dysse</string>
     <string name="poi_megalith_type_nuraghe">Megalit type: nuragh</string>
@@ -4222,4 +4222,5 @@
     <string name="poi_lit">Belysning</string>
     <string name="poi_access_main_tag">Adgang</string>
     <string name="poi_hindu_temple">Hindutempel</string>
+    <string name="poi_consulate">Konsulat</string>
 </resources>

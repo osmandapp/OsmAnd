@@ -62,6 +62,8 @@ public class PositionAnimationPreference extends Preference {
 	public void setupPreference(boolean nightMode, SliderPreferenceListener listener) {
 		this.nightMode = nightMode;
 		this.listener = listener;
+
+		isSliderVisible = listener.getValue() > 0;
 	}
 
 	protected int getLayoutId() {
@@ -81,8 +83,6 @@ public class PositionAnimationPreference extends Preference {
 		advancedItem = view.findViewById(R.id.selectable_list_item);
 		sliderContainer = view.findViewById(R.id.slider_container);
 		advancedItemIcon = view.findViewById(R.id.advanced_item_icon);
-
-		isSliderVisible = listener.getValue() > 0;
 
 		setupSliderView();
 		setupAdvancedButton();

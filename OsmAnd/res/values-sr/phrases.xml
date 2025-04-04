@@ -307,7 +307,7 @@
     <string name="poi_shower_cold">Туш: хладан</string>
     <string name="poi_shower_indoor">Туш: унутра</string>
     <string name="poi_power_supply_yes">Да; Напајање</string>
-    <string name="poi_site_type_necropolis">Некропола</string>
+    <string name="poi_archaeological_site_necropolis">Некропола</string>
     <string name="poi_generator_output_electricity">Излазна снага</string>
     <string name="poi_generator_output_hot_water">Излазна снага топле воде</string>
     <string name="poi_generator_output_compressed_air">Излазна снага ваздуха под притиском</string>
@@ -2334,14 +2334,14 @@
     <string name="poi_material_limestone">Материјал: кречњак</string>
     <string name="poi_material_marble">Материјал: мермер</string>
     <string name="poi_material_aluminium">Материјал: алуминијум</string>
-    <string name="poi_site_type_megalith">Мегалит</string>
-    <string name="poi_site_type_tumulus">Хумка</string>
-    <string name="poi_site_type_fortification">Утврђење</string>
-    <string name="poi_site_type_settlement">Насеље</string>
-    <string name="poi_site_type_city">Велеград</string>
-    <string name="poi_site_type_hut_circle">Круг кућишта</string>
-    <string name="poi_site_type_petroglyph">Петроглиф</string>
-    <string name="poi_site_type_earthwork">Земљана баријера</string>
+    <string name="poi_archaeological_site_megalith">Мегалит</string>
+    <string name="poi_archaeological_site_tumulus">Хумка</string>
+    <string name="poi_archaeological_site_fortification">Утврђење</string>
+    <string name="poi_archaeological_site_settlement">Насеље</string>
+    <string name="poi_archaeological_site_city">Велеград</string>
+    <string name="poi_archaeological_site_hut_circle">Круг кућишта</string>
+    <string name="poi_archaeological_site_petroglyph">Петроглиф</string>
+    <string name="poi_archaeological_site_earthwork">Земљана баријера</string>
     <string name="poi_aerodrome_type_military">Војни аеродром</string>
     <string name="poi_aerodrome_type_military_public">Војни/цивилни</string>
     <string name="poi_fitness_station">Теретана на отвореном</string>
@@ -5012,4 +5012,6 @@
     <string name="poi_access_main_tag">Приступ</string>
     <string name="poi_evangelical_church">Евангелистичка црква</string>
     <string name="poi_presbyterian_church">Презбитеријанска црква</string>
+    <string name="poi_aerodrome_type_airfield">Писта</string>
+    <string name="poi_consulate">Конзулат</string>
 </resources>

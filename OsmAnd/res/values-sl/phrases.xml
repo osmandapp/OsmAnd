@@ -813,7 +813,7 @@
     <string name="poi_aeroway_terminal">Letališki terminal</string>
     <string name="poi_runway">Tekaška proga</string>
     <string name="poi_bicycle_parking">Parkirišče za kolesa</string>
-    <string name="poi_site_type_fortification">Fortifikacija</string>
+    <string name="poi_archaeological_site_fortification">Fortifikacija</string>
     <string name="poi_historic_ship">Zgodovinska ladja</string>
     <string name="poi_tourism_yes">Turistični objekt</string>
     <string name="poi_gasometer">Plinski rezervoar</string>
@@ -2379,9 +2379,9 @@
     <string name="poi_historic_period_urban">Zgodovinsko obdobje: urbano (doba III, 133 n. št. - 374 n. št.)</string>
     <string name="poi_stone_type_conciliation_cross">Vrsta: spravni križ</string>
     <string name="poi_historic_era_neolithic">Zgodovinsko obdobje: neolitik</string>
-    <string name="poi_site_type_tumulus">Tumulus</string>
+    <string name="poi_archaeological_site_tumulus">Tumulus</string>
     <string name="poi_historic_era_chalcolithic">Zgodovinska doba: kalkolitik (4.–3. tisočletje pr. n. št.)</string>
-    <string name="poi_site_type_settlement">Naselje</string>
+    <string name="poi_archaeological_site_settlement">Naselje</string>
     <string name="poi_refugee_no">Begunci: ne</string>
     <string name="poi_historic_stone">Zgodovinski kamen</string>
     <string name="poi_deaf_description">Opis za gluhe</string>
@@ -2452,8 +2452,8 @@
     <string name="poi_historic_period_imperial">Zgodovinsko obdobje: cesarsko (doba V, 900 n. št. - 1200 n. št.)</string>
     <string name="poi_historic_era_paleolithic">Zgodovinsko obdobje: paleolitik (2,6 milijona let - 10000 p. s.)</string>
     <string name="poi_stone_type_coat_of_arms">Vrsta: grb</string>
-    <string name="poi_site_type_megalith">Megalit</string>
-    <string name="poi_site_type_city">Mesto</string>
+    <string name="poi_archaeological_site_megalith">Megalit</string>
+    <string name="poi_archaeological_site_city">Mesto</string>
     <string name="poi_cargo_hgv">Težka tovorna vozila</string>
     <string name="poi_cargo_passengers">Potniki</string>
     <string name="poi_bridge_ref">Oznaka mostu</string>
@@ -2487,10 +2487,10 @@
     <string name="poi_step_condition_even">Stanje stopnic: enakomerne</string>
     <string name="poi_step_condition_uneven">Stanje stopnic: neenakomerne</string>
     <string name="poi_step_condition_rough">Stanje stopnic: slabe</string>
-    <string name="poi_site_type_hut_circle">Krog kolibe</string>
-    <string name="poi_site_type_necropolis">Nekropola</string>
-    <string name="poi_site_type_petroglyph">Petroglif</string>
-    <string name="poi_site_type_earthwork">Zemeljsko delo</string>
+    <string name="poi_archaeological_site_hut_circle">Krog kolibe</string>
+    <string name="poi_archaeological_site_necropolis">Nekropola</string>
+    <string name="poi_archaeological_site_petroglyph">Petroglif</string>
+    <string name="poi_archaeological_site_earthwork">Zemeljsko delo</string>
     <string name="poi_megalith_type_menhir">Vrsta megalita: menhir</string>
     <string name="poi_megalith_type_dolmen">Vrsta megalita: dolmen</string>
     <string name="poi_megalith_type_nuraghe">Vrsta megalita: nuraghe</string>
