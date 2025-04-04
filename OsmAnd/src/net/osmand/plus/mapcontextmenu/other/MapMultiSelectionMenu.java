@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.NativeLibrary;
 import net.osmand.OnCompleteCallback;
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -60,6 +60,14 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			IContextMenuProvider contextObject = e.getValue();
 
 			MenuObject menuObject = MenuObjectUtils.createMenuObject(selectedObj, contextObject, latLon, getMapActivity());
+			if (menuObject.hasEmptyNameStr() && selectedObj instanceof NativeLibrary.RenderedObject) {
+				// Do not display nameless RenderedObject(s). Explanation:
+				// Actual menuObject.nameStr is calculated from name-tags and iconRes.
+				// Default Map Style renders some objects using different icon names, for example:
+				// "barrier=bollard" at z17 has icon "barrier_small_red_2" which is not translated (nameStr="")
+				// "barrier=bollard" at z18 has icon "barrier_bollard" and translated using "poi_bollard" ("Bollard")
+				continue;
+			}
 			if (menuObject.needStreetName()) {
 				menuObject.setOnSearchAddressDoneCallback(onSearchAddressDone);
 			}
@@ -97,7 +105,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		createCollection(selectedObjects);
 		updateNightMode();
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && !objects.isEmpty()) {
 			MapMultiSelectionMenuFragment.showInstance(mapActivity);
 			mapActivity.refreshMap();
 		}

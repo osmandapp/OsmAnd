@@ -215,7 +215,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@NonNull
 	private String searchObjectNameById() {
-		String content = getActualContent();
+		String content = getActualContentFromIconRes();
 		MapActivity mapActivity = getMapActivity();
 		if (content != null && mapActivity != null) {
 			String[] contentParts = content.split("_");
@@ -247,11 +247,11 @@ public class RenderedObjectMenuController extends MenuController {
 				}
 			}
 		}
-		return getActualContent();
+		return getActualContentFromIconRes();
 	}
 
 	@Nullable
-	private String getActualContent() {
+	private String getActualContentFromIconRes() {
 		String content = renderedObject.getIconRes();
 		if ("osmand_steps".equals(content)) {
 			return "highway_steps";
