@@ -302,9 +302,9 @@ public class Amenity extends MapObject {
 					if (pt2 != null) {
 						String cat = pt2.getCategory().getKeyName();
 						if (poi_type.containsKey(cat)) {
-							val = poi_type.get(cat) + ";" + val;
+							key = poi_type.get(cat) + ";" + key;
 						}
-						poi_type.put(pt2.getCategory().getKeyName(), val);
+						poi_type.put(pt2.getCategory().getKeyName(), key);
 					} else {
 						text.put(key, val);
 					}
