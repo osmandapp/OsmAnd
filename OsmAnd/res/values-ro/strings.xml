@@ -6002,7 +6002,7 @@
     <string name="obd_fuel_type_desc">Afișează tipul de combustibil al vehiculului prin senzorul OBD</string>
     <string name="obd_air_intake_temp">Temperatura de admisie</string>
     <string name="calculating_indication_message">Calculând…</string>
-    <string name="obd_fuel_level_desc">Afișează Afișează nivelul de combustibil al vehiculului prin senzorul OBD nivelul de combustibil al vehiculului prin senzorul OBD</string>
+    <string name="obd_fuel_level_desc">Afișează nivelul de combustibil al vehiculului prin senzorul OBD</string>
     <string name="calculate_size">Calculați dimensiunea</string>
     <string name="obd_rpm_desc">Afișează turația tahometrului vehiculului pe senzorul OBD</string>
     <string name="rendering_attr_showClimbingRoutes_name">Rute de alpinism</string>
@@ -6110,4 +6110,8 @@
     <string name="ais_cpa_settings">Setări referitoare la CPA</string>
     <string name="ais_cpa_settings_description">Aceste valori definesc prezentarea obiectelor AIS care se pot apropia prea mult de propria poziție.</string>
     <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nAcest plugin este un proiect de hobby și nu este proiectat pentru fiabilitate și corectitudine. NU vă bazați pe acest software în niciun fel, inclusiv pentru navigație și/sau siguranța vieții.</string>
+    <string name="grid_color">Culoarea rețelei</string>
+    <string name="shared_string_edges">Margini</string>
+    <string name="labels_position">Poziția etichetelor</string>
+    <string name="customize_grid_color">Personalizați culoarea rețelei</string>
 </resources>
