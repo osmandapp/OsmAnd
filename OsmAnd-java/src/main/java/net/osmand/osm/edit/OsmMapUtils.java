@@ -43,6 +43,10 @@ public class OsmMapUtils {
 	}
 
 	public static LatLon getCenter(Entity e) {
+		return getCenter(e, false);
+	}
+
+	public static LatLon getCenter(Entity e, boolean needCenterNode) {
 		if (e instanceof Node) {
 			return ((Node) e).getLatLon();
 		} else if (e instanceof Way) {
@@ -91,7 +95,11 @@ public class OsmMapUtils {
 					list.add(c);
 				}
 			}
-			return getWeightCenter(list);
+			LatLon center = getWeightCenter(list);
+			if (needCenterNode) {
+				return getCenterNode(list, center);
+			}
+			return center;
 		}
 		return null;
 	}
@@ -134,6 +142,22 @@ public class OsmMapUtils {
 			latitude += n.getLatitude();
 		}
 		return new LatLon(latitude / nodes.size(), longitude / nodes.size());
+	}
+
+	public static LatLon getCenterNode(Collection<LatLon> nodes, LatLon weightCenter) {
+		if (nodes.isEmpty()) {
+			return null;
+		}
+		double minDist = 99999;
+		LatLon center = null;
+		for (LatLon n : nodes) {
+			double dist = Math.pow(n.getLatitude() - weightCenter.getLatitude(), 2) + Math.pow(n.getLongitude() - weightCenter.getLongitude(), 2);
+			if (minDist > dist) {
+				center = n;
+				minDist = dist;
+			}
+		}
+		return center;
 	}
 
 	public static LatLon getWeightCenterForNodes(Collection<Node> nodes ) {
