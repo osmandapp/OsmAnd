@@ -5771,4 +5771,6 @@
     <string name="read_on_wiki">Auf Wikipedia lesen</string>
     <string name="prediction_time">Vorhersagezeit</string>
     <string name="shared_string_no_animation">Keine Animation</string>
+    <string name="routing_attr_allow_ferries_description">Routenführung über Fährverbindungen zulassen</string>
+    <string name="routing_attr_allow_ferries_name">Fähren zulassen</string>
 </resources>
