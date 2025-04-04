@@ -76,7 +76,7 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 
 	public TrackTagsInfoCard(
 			@NonNull MapActivity activity,
-			@Nullable RouteKey routeKey, // TODO
+			@Nullable RouteKey routeKey,
 			@NonNull GpxFile gpxFile,
 			@NonNull RouteActivitySelectionHelper activityHelper) {
 		super(activity, gpxFile.getMetadata());
