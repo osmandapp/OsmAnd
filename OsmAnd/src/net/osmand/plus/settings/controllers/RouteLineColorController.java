@@ -94,7 +94,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 				}
 
 				@Override
-				protected PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode) {
+				public PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode) {
 					boolean useNightMap = Objects.equals(paletteMode.getTag(), PALETTE_MODE_ID_NIGHT);
 					return collection.findPaletteColor(routeLinePreview.getCustomColor(useNightMap));
 				}

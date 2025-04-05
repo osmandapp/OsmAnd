@@ -74,7 +74,7 @@
 
 					<TextView
 						android:id="@+id/get"
-						android:layout_width="wrap_content"
+						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:layout_weight="1"
 						android:gravity="center_vertical"
@@ -83,10 +83,10 @@
 						android:textColor="@color/active_color_primary_light"
 						android:textSize="16sp" />
 
-					<ImageView
+					<androidx.appcompat.widget.AppCompatImageView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginLeft="6dp"
+						android:layout_marginStart="6dp"
 						android:src="@drawable/ic_arrow_forward"
 						app:tint="@color/active_color_primary_light" />
 				</LinearLayout>

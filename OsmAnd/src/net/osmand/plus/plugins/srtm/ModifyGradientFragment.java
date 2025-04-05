@@ -172,8 +172,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		if (paletteColor instanceof PaletteGradientColor) {
-			PaletteGradientColor paletteGradientColor = (PaletteGradientColor) paletteColor;
+		if (paletteColor instanceof PaletteGradientColor paletteGradientColor) {
 			TerrainType terrainType = TerrainType.valueOf(paletteGradientColor.getTypeName());
 			String key = paletteGradientColor.getPaletteName();
 			TerrainMode mode = TerrainMode.getMode(terrainType, key);

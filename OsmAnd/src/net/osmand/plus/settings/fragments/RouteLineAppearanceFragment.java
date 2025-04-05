@@ -541,13 +541,12 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		if (paletteColor instanceof PaletteGradientColor){
-			PaletteGradientColor paletteGradientColor = (PaletteGradientColor) paletteColor;
+		if (paletteColor instanceof PaletteGradientColor paletteGradientColor) {
 			previewRouteLineInfo.setGradientPalette(paletteGradientColor.getPaletteName());
 			if (getMapActivity() != null) {
 				getMapActivity().refreshMap();
 			}
-		} else{
+		} else {
 			RouteLineColorController colorController = getColorCardController();
 			previewRouteLineInfo.setCustomColor(paletteColor.getColor(), colorController.isNightMap());
 			updateColorItems();

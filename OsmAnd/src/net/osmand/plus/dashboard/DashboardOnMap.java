@@ -45,6 +45,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.configmap.CoordinatesGridController;
+import net.osmand.plus.configmap.CoordinatesGridFragment;
 import net.osmand.plus.configmap.routes.MapRoutesFragment;
 import net.osmand.plus.configmap.routes.RenderingClassFragment;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
@@ -522,6 +523,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		removeFragment(TerrainFragment.TAG);
 		removeFragment(TransportLinesFragment.TAG);
 		removeFragment(WeatherMainFragment.TAG);
+		removeFragment(CoordinatesGridFragment.TAG);
 
 		if (visible) {
 			mapActivity.getFragmentsHelper().dismissCardDialog();

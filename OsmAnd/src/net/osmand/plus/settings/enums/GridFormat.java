@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.enums;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -11,7 +9,7 @@ import net.osmand.core.jni.GridConfiguration.Projection;
 import net.osmand.plus.R;
 import net.osmand.util.CollectionUtils;
 
-public enum GridFormat {
+public enum GridFormat implements EnumWithTitleId {
 
 	DMS(LocationConvert.FORMAT_SECONDS, R.string.dd_mm_ss_format),
 	DM(LocationConvert.FORMAT_MINUTES, R.string.dd_mm_mmm_format),
@@ -27,9 +25,9 @@ public enum GridFormat {
 		this.titleId = titleId;
 	}
 
-	@NonNull
-	public String getTitle(@NonNull Context context) {
-		return context.getString(titleId);
+	@Override
+	public int getTitleId() {
+		return titleId;
 	}
 
 	@NonNull

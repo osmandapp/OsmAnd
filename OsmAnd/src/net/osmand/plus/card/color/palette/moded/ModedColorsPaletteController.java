@@ -90,7 +90,7 @@ public abstract class ModedColorsPaletteController extends ColorsPaletteControll
 	protected abstract PaletteMode getInitialPaletteMode();
 
 	@Nullable
-	protected abstract PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode);
+	public abstract PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode);
 
 	public interface OnPaletteModeSelectedListener {
 		void onColorsPaletteModeChanged();

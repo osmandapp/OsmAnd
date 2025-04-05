@@ -365,7 +365,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				textLayer.putData(this, pointsCache);
 			}
 		}
-		invalidated = false;
+		setInvalidated(false);
 		mapActivityInvalidated = false;
 	}
 

@@ -106,7 +106,7 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 		LinearLayoutManager lm = (LinearLayoutManager) rvColors.getLayoutManager();
 		int firstVisiblePosition = lm != null ? lm.findFirstCompletelyVisibleItemPosition() : 0;
 		int lastVisiblePosition = lm != null ? lm.findLastCompletelyVisibleItemPosition() : paletteAdapter.getItemCount();
-		if (targetPosition < firstVisiblePosition || targetPosition > lastVisiblePosition) {
+		if (targetPosition >= 0 && (targetPosition < firstVisiblePosition || targetPosition > lastVisiblePosition)) {
 			if (useSmoothScroll) {
 				rvColors.smoothScrollToPosition(targetPosition);
 			} else {
