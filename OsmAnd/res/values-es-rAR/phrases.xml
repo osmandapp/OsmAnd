@@ -5009,4 +5009,6 @@
     <string name="poi_russian_orthodox_church">Iglesia ortodoxa rusa</string>
     <string name="poi_baptist_church">Iglesia Bautista</string>
     <string name="poi_buddhist_temple">Templo budista</string>
+    <string name="poi_aerodrome_type_airfield">Aeródromo</string>
+    <string name="poi_consulate">Consulado</string>
 </resources>
