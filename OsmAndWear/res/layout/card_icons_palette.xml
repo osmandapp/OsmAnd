@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<include layout="@layout/icons_list"/>
+
+	<include
+		android:id="@+id/divider"
+		layout="@layout/simple_divider_item"
+		android:layout_width="match_parent"
+		android:layout_height="1dp" />
+
+	<FrameLayout
+		android:id="@+id/button_all_icons"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_list_item_height">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle.Medium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:text="@string/shared_string_all_icons"
+			android:textColor="?attr/active_color_basic" />
+
+	</FrameLayout>
+
+</LinearLayout>
