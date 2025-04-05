@@ -1296,7 +1296,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 
 									private static List<TileSourceTemplate> getTileSourceTemplates(final OsmandApplication app) {
-										final var downloadTask = createDownloadTileSourceTemplatesTask(app);
+										final var downloadTask = createDownloadTileSourceTemplatesTask(app.getTileSourceTemplatesProvider());
 										downloadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 										return waitFor(downloadTask);
 									}

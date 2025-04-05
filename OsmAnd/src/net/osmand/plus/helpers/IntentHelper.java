@@ -158,7 +158,8 @@ public class IntentHelper {
 								mapActivity,
 								MapActivity.FRAGMENT_CONTAINER_VIEW_ID,
 								MainSettingsFragment.class,
-								app.getSettings().AVAILABLE_APP_MODES));
+								app.getSettings().AVAILABLE_APP_MODES,
+								app.getTileSourceTemplatesProvider()));
 	}
 
 	private boolean parseNavigationIntent() {

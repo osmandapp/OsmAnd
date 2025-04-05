@@ -27,11 +27,9 @@ import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -533,7 +531,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 			return Optional.empty();
 		}
-		final var downloadTask = createDownloadTileSourceTemplatesTask(app);
+		final var downloadTask = createDownloadTileSourceTemplatesTask(app.getTileSourceTemplatesProvider());
 		downloadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		final List<TileSourceTemplate> tileSourceTemplates = waitFor(downloadTask);
 		final Optional<InstallMapLayersDialogFragment> dialog =
@@ -545,13 +543,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	@VisibleForTesting
-	public static AsyncTask<Void, Void, List<TileSourceTemplate>> createDownloadTileSourceTemplatesTask(final OsmandApplication app) {
+	public static AsyncTask<Void, Void, List<TileSourceTemplate>> createDownloadTileSourceTemplatesTask(final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
 		return new AsyncTask<>() {
 
 			@Override
 			protected List<TileSourceTemplate> doInBackground(Void... params) {
-				// FK-TODO: cache downloaded TileSourceTemplate while building search database for performance
-				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app), true);
+				return tileSourceTemplatesProvider.getTileSourceTemplates();
 			}
 		};
 	}

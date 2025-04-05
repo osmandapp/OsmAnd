@@ -17,6 +17,7 @@ import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.configmap.MapModeFragment;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
+import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.transport.TransportLinesFragment;
@@ -36,28 +37,46 @@ import de.KnollFrank.lib.settingssearch.client.SearchConfig;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
+import de.KnollFrank.lib.settingssearch.graph.ComputePreferencesListener;
 import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
 
 public class SettingsSearchButtonHelper {
 
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
-	private final SearchDatabaseStatusHandler searchDatabaseStatusHandler;
 	private final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier;
+	private final SearchDatabaseStatusHandler searchDatabaseStatusHandler;
 	private final OsmandPreference<String> availableAppModes;
+	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
-	public SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
-									  final @IdRes int fragmentContainerViewId,
-									  final OsmandApplication app,
-									  final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier) {
-		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
-		this.fragmentContainerViewId = fragmentContainerViewId;
-		this.searchDatabaseStatusHandler =
+	public static SettingsSearchButtonHelper of(final BaseSettingsFragment rootSearchPreferenceFragment,
+												final @IdRes int fragmentContainerViewId,
+												final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier,
+												final OsmandApplication app) {
+
+		return new SettingsSearchButtonHelper(
+				rootSearchPreferenceFragment,
+				fragmentContainerViewId,
+				createSearchDatabaseTaskSupplier,
 				new SearchDatabaseStatusHandler(
 						new SetStringPreference(
-								app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH));
+								app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH)),
+				app.getSettings().AVAILABLE_APP_MODES,
+				app.getTileSourceTemplatesProvider());
+	}
+
+	private SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
+									   final int fragmentContainerViewId,
+									   final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier,
+									   final SearchDatabaseStatusHandler searchDatabaseStatusHandler,
+									   final OsmandPreference<String> availableAppModes,
+									   final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
+		this.fragmentContainerViewId = fragmentContainerViewId;
 		this.createSearchDatabaseTaskSupplier = createSearchDatabaseTaskSupplier;
-		this.availableAppModes = app.getSettings().AVAILABLE_APP_MODES;
+		this.searchDatabaseStatusHandler = searchDatabaseStatusHandler;
+		this.availableAppModes = availableAppModes;
+		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
 	}
 
 	public void configureSettingsSearchButton(final ImageView settingsSearchButton) {
@@ -72,7 +91,8 @@ public class SettingsSearchButtonHelper {
 			final FragmentActivity fragmentActivity,
 			final @IdRes int fragmentContainerViewId,
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
-			final OsmandPreference<String> availableAppModes) {
+			final OsmandPreference<String> availableAppModes,
+			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
 		final SearchResultsFilter searchResultsFilter =
 				SearchResultsFilterFactory.createSearchResultsFilter(
 						PreferencePathDisplayerFactory.getApplicationModeKeys(),
@@ -89,6 +109,20 @@ public class SettingsSearchButtonHelper {
 								.withSearchableInfoProvider(SettingsSearchButtonHelper::getSearchableInfo)
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 								.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
+								.withComputePreferencesListener(
+										// FK-TODO: extract class
+										new ComputePreferencesListener() {
+
+											@Override
+											public void onStartComputePreferences() {
+												tileSourceTemplatesProvider.enableCache();
+											}
+
+											@Override
+											public void onFinishComputePreferences() {
+												tileSourceTemplatesProvider.disableCache();
+											}
+										})
 								.build(),
 						SearchConfig
 								.builder(fragmentContainerViewId, fragmentActivity)
@@ -142,7 +176,8 @@ public class SettingsSearchButtonHelper {
 						rootSearchPreferenceFragment.requireActivity(),
 						fragmentContainerViewId,
 						rootSearchPreferenceFragment.getClass(),
-						availableAppModes);
+						availableAppModes,
+						tileSourceTemplatesProvider);
 		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment(searchPreferenceFragments));
 	}
 

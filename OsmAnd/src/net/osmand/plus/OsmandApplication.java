@@ -33,6 +33,8 @@ import androidx.multidex.MultiDexApplication;
 
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
+import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesDownloader;
 import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
@@ -81,7 +83,6 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -233,6 +234,8 @@ public class OsmandApplication extends MultiDexApplication {
 	private float density = 0f;
 	// Typeface
 
+	private TileSourceTemplatesProvider tileSourceTemplatesProvider;
+
 	@Override
 	public void onCreate() {
 		if (RestartActivity.isRestartProcess(this)) {
@@ -296,6 +299,15 @@ public class OsmandApplication extends MultiDexApplication {
 
 		SearchUICore.setDebugMode(PluginsHelper.isDevelopment());
 		BackupHelper.DEBUG = true;//PluginsHelper.isDevelopment();
+		tileSourceTemplatesProvider =
+				new TileSourceTemplatesProvider(
+						new TileSourceTemplatesDownloader(
+								Version.getVersionAsURLParam(this)),
+						false);
+	}
+
+	public TileSourceTemplatesProvider getTileSourceTemplatesProvider() {
+		return tileSourceTemplatesProvider;
 	}
 
 	public boolean isPlusVersionInApp() {

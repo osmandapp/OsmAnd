@@ -46,11 +46,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback, PreferenceFragmentHandlerProvider, ShowableSearchablePreferenceDialogProvider {
 
@@ -327,11 +323,11 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	protected void createToolbar(@NonNull final LayoutInflater inflater, @NonNull final View view) {
 		super.createToolbar(inflater, view);
 		final SettingsSearchButtonHelper settingsSearchButtonHelper =
-				new SettingsSearchButtonHelper(
+				SettingsSearchButtonHelper.of(
 						this,
 						R.id.fragmentContainer,
-						app,
-						getMapActivity()::getCreateSearchDatabaseTask);
+						Objects.requireNonNull(getMapActivity())::getCreateSearchDatabaseTask,
+						app);
 		settingsSearchButtonHelper.configureSettingsSearchButton(view.findViewById(R.id.action_button));
 	}
 }
