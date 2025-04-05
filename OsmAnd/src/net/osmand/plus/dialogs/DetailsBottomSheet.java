@@ -53,6 +53,7 @@ import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 
+// FK-FIXME: search for "nautical depth", select it and press the close button, then the Details menu item should display 1/12 but it erroneously displays 0/12
 public class DetailsBottomSheet extends BasePreferenceBottomSheet implements SettingHighlighterProvider {
 
 	public static final String TAG = DetailsBottomSheet.class.getName();
