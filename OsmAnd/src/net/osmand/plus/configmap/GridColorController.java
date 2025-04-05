@@ -14,9 +14,8 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
-import net.osmand.plus.helpers.CoordinatesGridHelper;
+import net.osmand.plus.views.layers.CoordinatesGridHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class GridColorController extends MapColorPaletteController {
 
@@ -24,11 +23,10 @@ public class GridColorController extends MapColorPaletteController {
 	private final ApplicationMode appMode;
 	private boolean applyChanges = false;
 
-	public GridColorController(@NonNull OsmandApplication app, @NonNull CoordinatesGridHelper gridHelper,
-	                           @NonNull ApplicationMode appMode, @ColorInt int initialColorDay,
-	                           @ColorInt int initialColorNight) {
-		super(app, initialColorDay, initialColorNight);
-		this.appMode = appMode;
+	public GridColorController(@NonNull OsmandApplication app,
+	                           @NonNull CoordinatesGridHelper gridHelper) {
+		super(app, gridHelper.getGridColorDay(), gridHelper.getGridColorNight());
+		this.appMode = app.getSettings().getApplicationMode();
 		this.gridHelper = gridHelper;
 	}
 
@@ -43,7 +41,6 @@ public class GridColorController extends MapColorPaletteController {
 		setSavedColors(applyChanges);
 		activity.getSupportFragmentManager().popBackStack();
 		activity.getDashboard().setDashboardVisibility(true, COORDINATE_GRID, false);
-		askUpdateGridColor();
 	}
 
 	@Override
@@ -72,7 +69,6 @@ public class GridColorController extends MapColorPaletteController {
 	@Override
 	protected void onColorsPaletteModeChanged() {
 		externalListener.onColorsPaletteModeChanged();
-		askUpdateGridColor();
 	}
 
 	@Override
@@ -100,22 +96,12 @@ public class GridColorController extends MapColorPaletteController {
 	@Override
 	public void onResume() {
 		super.onResume();
-		askUpdateGridColor();
 	}
 
-	private void askUpdateGridColor() {
-		app.runInUIThread(gridHelper::updateGridSettings, 50);
-	}
-
-	public static void showDialog(@NonNull FragmentActivity activity) {
+	public static void showDialog(@NonNull FragmentActivity activity,
+	                              @NonNull CoordinatesGridHelper gridHelper) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		OsmandSettings settings = app.getSettings();
-		ApplicationMode appMode = settings.getApplicationMode();
-
-		CoordinatesGridHelper gridHelper = app.getOsmandMap().getMapView().getGridHelper();
-		int colorDay = gridHelper.getGridColor(appMode, false);
-		int colorNight = gridHelper.getGridColor(appMode, true);
-		GridColorController controller = new GridColorController(app, gridHelper, appMode, colorDay, colorNight);
+		GridColorController controller = new GridColorController(app, gridHelper);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(controller.getProcessId(), controller);

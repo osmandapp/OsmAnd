@@ -18,7 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.helpers.CoordinatesGridHelper;
+import net.osmand.plus.views.layers.CoordinatesGridHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.EnumWithTitleId;
 import net.osmand.plus.settings.enums.GridFormat;
@@ -42,7 +42,7 @@ public class CoordinatesGridController extends BaseDialogController {
 
 	public CoordinatesGridController(@NonNull OsmandApplication app) {
 		super(app);
-		gridHelper = app.getOsmandMap().getMapView().getGridHelper();
+		gridHelper = new CoordinatesGridHelper(app);
 	}
 
 	public void bindScreen(@NonNull ICoordinatesGridScreen screen) {
@@ -83,7 +83,7 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public void onZoomLevelsClicked(@NonNull MapActivity activity) {
-		GridZoomLevelsController.showDialog(activity);
+		GridZoomLevelsController.showDialog(activity, gridHelper);
 	}
 
 	@DrawableRes
@@ -110,7 +110,7 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public void onSelectGridColorClicked(@NonNull MapActivity mapActivity) {
-		GridColorController.showDialog(mapActivity);
+		GridColorController.showDialog(mapActivity, gridHelper);
 	}
 
 	private <T extends Enum<T> & EnumWithTitleId> void showPopUpMenu(
