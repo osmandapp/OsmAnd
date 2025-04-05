@@ -109,20 +109,7 @@ public class SettingsSearchButtonHelper {
 								.withSearchableInfoProvider(SettingsSearchButtonHelper::getSearchableInfo)
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 								.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
-								.withComputePreferencesListener(
-										// FK-TODO: extract class
-										new ComputePreferencesListener() {
-
-											@Override
-											public void onStartComputePreferences() {
-												tileSourceTemplatesProvider.enableCache();
-											}
-
-											@Override
-											public void onFinishComputePreferences() {
-												tileSourceTemplatesProvider.disableCache();
-											}
-										})
+								.withComputePreferencesListener(enableCacheForDownloadedTileSourceTemplatesWhileBuildingSearchDatabase(tileSourceTemplatesProvider))
 								.build(),
 						SearchConfig
 								.builder(fragmentContainerViewId, fragmentActivity)
@@ -187,5 +174,21 @@ public class SettingsSearchButtonHelper {
 			searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
 		}
 		searchPreferenceFragments.showSearchPreferenceFragment();
+	}
+
+	private static ComputePreferencesListener enableCacheForDownloadedTileSourceTemplatesWhileBuildingSearchDatabase(
+			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+		return new ComputePreferencesListener() {
+
+			@Override
+			public void onStartComputePreferences() {
+				tileSourceTemplatesProvider.enableCache();
+			}
+
+			@Override
+			public void onFinishComputePreferences() {
+				tileSourceTemplatesProvider.disableCache();
+			}
+		};
 	}
 }
