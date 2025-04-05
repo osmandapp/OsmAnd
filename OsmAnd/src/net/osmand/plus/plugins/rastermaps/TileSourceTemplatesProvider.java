@@ -25,10 +25,10 @@ public class TileSourceTemplatesProvider {
 	}
 
 	public void disableCache() {
-		this.cacheEnabled = false;
+		cacheEnabled = false;
 	}
 
 	public void enableCache() {
-		this.cacheEnabled = true;
+		cacheEnabled = true;
 	}
 }
