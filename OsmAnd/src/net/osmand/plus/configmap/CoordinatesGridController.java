@@ -18,7 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.views.layers.CoordinatesGridHelper;
+import net.osmand.plus.views.layers.CoordinatesGridLayerSettings;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.EnumWithTitleId;
 import net.osmand.plus.settings.enums.GridFormat;
@@ -37,12 +37,12 @@ public class CoordinatesGridController extends BaseDialogController {
 
 	private static final String PROCESS_ID = "configure_coordinates_grid";
 
-	private final CoordinatesGridHelper gridHelper;
+	private final CoordinatesGridLayerSettings gridLayerSettings;
 	private ICoordinatesGridScreen screen;
 
 	public CoordinatesGridController(@NonNull OsmandApplication app) {
 		super(app);
-		gridHelper = new CoordinatesGridHelper(app);
+		gridLayerSettings = new CoordinatesGridLayerSettings(app);
 	}
 
 	public void bindScreen(@NonNull ICoordinatesGridScreen screen) {
@@ -83,7 +83,7 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public void onZoomLevelsClicked(@NonNull MapActivity activity) {
-		GridZoomLevelsController.showDialog(activity, gridHelper);
+		GridZoomLevelsController.showDialog(activity, gridLayerSettings);
 	}
 
 	@DrawableRes
@@ -110,7 +110,7 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public void onSelectGridColorClicked(@NonNull MapActivity mapActivity) {
-		GridColorController.showDialog(mapActivity, gridHelper);
+		GridColorController.showDialog(mapActivity, gridLayerSettings);
 	}
 
 	private <T extends Enum<T> & EnumWithTitleId> void showPopUpMenu(
@@ -142,39 +142,39 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public boolean isEnabled() {
-		return gridHelper.isEnabled(getSelectedAppMode());
+		return gridLayerSettings.isEnabled(getSelectedAppMode());
 	}
 
 	public void setEnabled(boolean enabled) {
-		gridHelper.setEnabled(getSelectedAppMode(), enabled);
+		gridLayerSettings.setEnabled(getSelectedAppMode(), enabled);
 	}
 
 	@NonNull
 	public GridFormat getGridFormat() {
-		return gridHelper.getGridFormat(getSelectedAppMode());
+		return gridLayerSettings.getGridFormat(getSelectedAppMode());
 	}
 
 	public void setGridFormat(@NonNull GridFormat format) {
-		gridHelper.setGridFormat(getSelectedAppMode(), format);
+		gridLayerSettings.setGridFormat(getSelectedAppMode(), format);
 	}
 
 	@NonNull
 	public Limits<Integer> getZoomLevels() {
-		return gridHelper.getZoomLevelsWithRestrictions(getSelectedAppMode());
+		return gridLayerSettings.getZoomLevelsWithRestrictions(getSelectedAppMode());
 	}
 
 	@NonNull
 	public GridLabelsPosition getLabelsPosition() {
-		return gridHelper.getGridLabelsPosition(getSelectedAppMode());
+		return gridLayerSettings.getGridLabelsPosition(getSelectedAppMode());
 	}
 
 	public void setLabelsPosition(@NonNull GridLabelsPosition position) {
-		gridHelper.setGridLabelsPosition(getSelectedAppMode(), position);
+		gridLayerSettings.setGridLabelsPosition(getSelectedAppMode(), position);
 	}
 
 	@ColorInt
 	public int getGridColor() {
-		return gridHelper.getGridColor(getSelectedAppMode(), isNightMode());
+		return gridLayerSettings.getGridColor(getSelectedAppMode(), isNightMode());
 	}
 
 	@NonNull

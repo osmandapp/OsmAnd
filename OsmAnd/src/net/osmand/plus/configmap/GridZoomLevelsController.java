@@ -10,20 +10,20 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.views.layers.CoordinatesGridHelper;
+import net.osmand.plus.views.layers.CoordinatesGridLayerSettings;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class GridZoomLevelsController extends ZoomLevelsController {
 
-	private final CoordinatesGridHelper gridHelper;
+	private final CoordinatesGridLayerSettings gridLayerSettings;
 	private final ApplicationMode appMode;
 	private boolean applyChanges = false;
 
 	public GridZoomLevelsController(@NonNull OsmandApplication app,
-	                                @NonNull CoordinatesGridHelper gridHelper) {
-		super(app, gridHelper.getZoomLevels(), gridHelper.getSupportedZoomLevels());
+	                                @NonNull CoordinatesGridLayerSettings gridLayerSettings) {
+		super(app, gridLayerSettings.getZoomLevels(), gridLayerSettings.getSupportedZoomLevels());
 		this.appMode = app.getSettings().getApplicationMode();
-		this.gridHelper = gridHelper;
+		this.gridLayerSettings = gridLayerSettings;
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 
 	@Override
 	public void onResetToDefault() {
-		gridHelper.resetZoomLevels(appMode);
+		gridLayerSettings.resetZoomLevels(appMode);
 		selectedLimits = getSavedZoomLimits();
 	}
 
@@ -47,19 +47,19 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 	}
 
 	protected void setSavedZoomLimits(@NonNull Limits<Integer> limits) {
-		gridHelper.setZoomLevels(appMode, limits);
+		gridLayerSettings.setZoomLevels(appMode, limits);
 	}
 
 	@Override
 	@NonNull
 	protected Limits<Integer> getSavedZoomLimits() {
-		return gridHelper.getZoomLevelsWithRestrictions(appMode);
+		return gridLayerSettings.getZoomLevelsWithRestrictions(appMode);
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
-	                              @NonNull CoordinatesGridHelper gridHelper) {
+	                              @NonNull CoordinatesGridLayerSettings gridLayerSettings) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		GridZoomLevelsController controller = new GridZoomLevelsController(app, gridHelper);
+		GridZoomLevelsController controller = new GridZoomLevelsController(app, gridLayerSettings);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(controller.getProcessId(), controller);

@@ -32,7 +32,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final CoordinatesGridHelper gridHelper;
+	private final CoordinatesGridLayerSettings gridLayerSettings;
 	private final OsmandMapTileView mapTileView;
 
 	private GridConfiguration gridConfig;
@@ -51,7 +51,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		super(app);
 		this.app = app;
 		settings = app.getSettings();
-		gridHelper = new CoordinatesGridHelper(app);
+		gridLayerSettings = new CoordinatesGridLayerSettings(app);
 		mapTileView = app.getOsmandMap().getMapView();
 
 		settingsListener = this::onPreferenceChange;
@@ -103,7 +103,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 			cleanupMarksProvider(mapRenderer);
 			updateGridAppearance();
 		}
-		boolean show = gridHelper.shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
+		boolean show = gridLayerSettings.shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
 		if (cachedGridShow != show || updateAppearance) {
 			cachedGridShow = show;
 			updateGridVisibility(mapRenderer, cachedGridShow);
@@ -112,38 +112,38 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 	}
 
 	private void initVariables(@NonNull ApplicationMode appMode) {
-		cachedGridFormat = gridHelper.getGridFormat(appMode);
-		cachedLabelsPosition = gridHelper.getGridLabelsPosition(appMode);
-		cachedGridColorDay = gridHelper.getGridColor(appMode, false);
-		cachedGridColorNight = gridHelper.getGridColor(appMode, true);
-		cachedTextScale = gridHelper.getTextScale(appMode);
+		cachedGridFormat = gridLayerSettings.getGridFormat(appMode);
+		cachedLabelsPosition = gridLayerSettings.getGridLabelsPosition(appMode);
+		cachedGridColorDay = gridLayerSettings.getGridColor(appMode, false);
+		cachedGridColorNight = gridLayerSettings.getGridColor(appMode, true);
+		cachedTextScale = gridLayerSettings.getTextScale(appMode);
 		cachedNightMode = isNightMode();
-		cachedGridShow = gridHelper.shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
+		cachedGridShow = gridLayerSettings.shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
 	}
 
 	private boolean updateVariables(@NonNull ApplicationMode appMode) {
 		boolean updated = false;
-		GridFormat newGridFormat = gridHelper.getGridFormat(appMode);
+		GridFormat newGridFormat = gridLayerSettings.getGridFormat(appMode);
 		if (cachedGridFormat != newGridFormat) {
 			cachedGridFormat = newGridFormat;
 			updated = true;
 		}
-		int newGridColorDay = gridHelper.getGridColor(appMode, false);
+		int newGridColorDay = gridLayerSettings.getGridColor(appMode, false);
 		if (cachedGridColorDay != newGridColorDay) {
 			cachedGridColorDay = newGridColorDay;
 			updated = true;
 		}
-		int newGridColorNight = gridHelper.getGridColor(appMode, true);
+		int newGridColorNight = gridLayerSettings.getGridColor(appMode, true);
 		if (cachedGridColorNight != newGridColorNight) {
 			cachedGridColorNight = newGridColorNight;
 			updated = true;
 		}
-		float newTextScale = gridHelper.getTextScale(appMode);
+		float newTextScale = gridLayerSettings.getTextScale(appMode);
 		if (Math.abs(cachedTextScale - newTextScale) >= 0.0001f) {
 			cachedTextScale = newTextScale;
 			updated = true;
 		}
-		GridLabelsPosition newLabelsPosition = gridHelper.getGridLabelsPosition(appMode);
+		GridLabelsPosition newLabelsPosition = gridLayerSettings.getGridLabelsPosition(appMode);
 		if (cachedLabelsPosition != newLabelsPosition) {
 			cachedLabelsPosition = newLabelsPosition;
 			updated = true;

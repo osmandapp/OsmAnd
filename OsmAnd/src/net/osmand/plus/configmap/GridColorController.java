@@ -14,20 +14,20 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
-import net.osmand.plus.views.layers.CoordinatesGridHelper;
+import net.osmand.plus.views.layers.CoordinatesGridLayerSettings;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class GridColorController extends MapColorPaletteController {
 
-	private final CoordinatesGridHelper gridHelper;
+	private final CoordinatesGridLayerSettings gridLayerSettings;
 	private final ApplicationMode appMode;
 	private boolean applyChanges = false;
 
 	public GridColorController(@NonNull OsmandApplication app,
-	                           @NonNull CoordinatesGridHelper gridHelper) {
-		super(app, gridHelper.getGridColorDay(), gridHelper.getGridColorNight());
+	                           @NonNull CoordinatesGridLayerSettings gridLayerSettings) {
+		super(app, gridLayerSettings.getGridColorDay(), gridLayerSettings.getGridColorNight());
 		this.appMode = app.getSettings().getApplicationMode();
-		this.gridHelper = gridHelper;
+		this.gridLayerSettings = gridLayerSettings;
 	}
 
 	@NonNull
@@ -45,7 +45,7 @@ public class GridColorController extends MapColorPaletteController {
 
 	@Override
 	public void onResetToDefault() {
-		gridHelper.resetGridColors(appMode);
+		gridLayerSettings.resetGridColors(appMode);
 		loadSavedColors();
 		refreshSelectedPaletteColor();
 	}
@@ -84,13 +84,13 @@ public class GridColorController extends MapColorPaletteController {
 
 	@Override
 	protected void setSavedColor(@ColorInt int color, boolean nightMode) {
-		gridHelper.setGridColor(appMode, color, nightMode);
+		gridLayerSettings.setGridColor(appMode, color, nightMode);
 	}
 
 	@Override
 	@ColorInt
 	protected int getSavedColor(boolean nightMode) {
-		return gridHelper.getGridColor(appMode, nightMode);
+		return gridLayerSettings.getGridColor(appMode, nightMode);
 	}
 
 	@Override
@@ -99,9 +99,9 @@ public class GridColorController extends MapColorPaletteController {
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
-	                              @NonNull CoordinatesGridHelper gridHelper) {
+	                              @NonNull CoordinatesGridLayerSettings gridLayerSettings) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		GridColorController controller = new GridColorController(app, gridHelper);
+		GridColorController controller = new GridColorController(app, gridLayerSettings);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(controller.getProcessId(), controller);
