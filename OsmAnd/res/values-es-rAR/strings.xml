@@ -5598,7 +5598,7 @@
     <string name="prime_meridian">Meridiano cero</string>
     <string name="equator">Ecuador</string>
     <string name="meridian_180">Meridiano 180</string>
-    <string name="release_5_0">• Descubrí los PDI mejor clasificados con el nuevo modo «Explorar»\n\n• Todas las rutas de OSM, ¡ahora con opción de búsqueda! Senderismo, ciclismo, BTT y mucho más\n\n• El nuevo widget de navegación combina la flecha de giro y las idicaciones de navegación\n\n• Widget de información de la ruta actual: muestra el tiempo estimado, la hora y la distancia de llegada\n\n• Marcá pistas de esquí y BTT en el mapa para obtener información detallada\n\n• Posibilidad de cambiar el tamaño del widget para los paneles izquierdo y derecho\n\n• Se añadió la cuadrícula de coordenadas con coordenadas geográficas\n\n• Se añadió la posibilidad de personalizar el aspecto predefinido de los grupos favoritos\n\n• Android Auto: visualización del tiempo estimado de llegada y de la distancia hasta el siguiente punto de ruta; los nombres de las ciudades aparecen ahora en los resultados de búsqueda\n\n• Los picos prominentes ahora se pueden descubrir a través del mapa y la búsqueda\n\n• Alturas de picos de montaña en pies\n\n• Se añadieron peñascos y zonas de escalada en el mapa\n\n• Se mejoró la búsqueda de direcciones en EE.UU\n\n• Se añadió la voz sintetizada al hebreo para la navegación</string>
+    <string name="release_5_0">• Descubrí los PDI mejor clasificados con el nuevo modo «Explorar»\n\n • Todas las rutas de OSM, ¡ahora con opción de búsqueda! Senderismo, ciclismo, BTT y mucho más\n\n • El nuevo widget de navegación combina la flecha de giro y las indicaciones de navegación\n\n • Widget de información de la ruta actual: muestra el tiempo estimado de llegada, la hora de llegada y la distancia\n\n • Marcá pistas de esquí y BTT en el mapa para obtener información detallada\n\n • Posibilidad de cambiar el tamaño del widget para los paneles izquierdo y derecho\n\n • Se agregó una cuadrícula de coordenadas con coordenadas geográficas\n\n • Se agregó la posibilidad de personalizar el aspecto predefinido de los grupos favoritos\n\n • Android Auto: vista del tiempo estimado de llegada y de la distancia hasta el siguiente punto de ruta; los nombres de las ciudades aparecen ahora en los resultados de búsqueda\n\n • Los picos prominentes ahora se pueden descubrir a través del mapa y la búsqueda\n\n • Alturas de picos de montaña en pies\n\n • Se agregaron peñascos y zonas de escalada en el mapa\n\n • Se mejoró la búsqueda de direcciones en EE.UU.\n\n • Se agregó la voz de habla sintetizada (TTS) al hebreo para la navegación</string>
     <string name="add_widget">Añadir widget</string>
     <string name="shared_string_online_only">Sólo en línea</string>
     <string name="shared_string_offline_only">Sólo desconectado</string>
@@ -5616,4 +5616,10 @@
     <string name="position_animation">Animación de ubicación</string>
     <string name="wikidata">Wikidata</string>
     <string name="prediction_time_description">El ícono de ubicación en OsmAnd se anima con cada punto de datos GPS recibido (una vez por segundo). Un ligero retraso en su movimiento puede ser notable, especialmente cuando el usuario se mueve rápidamente o la señal GPS fluctúa.</string>
+    <string name="routing_attr_allow_ferries_name">Permitir transbordadores</string>
+    <string name="grid_color">Color de la cuadrícula</string>
+    <string name="shared_string_edges">Bordes</string>
+    <string name="labels_position">Ubicación de las etiquetas</string>
+    <string name="routing_attr_allow_ferries_description">Permite navegar por rutas de transbordadores (ferris)</string>
+    <string name="customize_grid_color">Personalizar el color de la cuadrícula</string>
 </resources>
