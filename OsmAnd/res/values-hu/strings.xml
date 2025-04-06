@@ -369,7 +369,7 @@
     <string name="poi_context_menu_delete">POI törlés</string>
     <string name="rotate_map_compass_opt">Iránytű alapján</string>
     <string name="rotate_map_bearing_opt">A mozgás irányába</string>
-    <string name="rotate_map_north_opt">Észak felül</string>
+    <string name="rotate_map_north_opt">Észak mindig felül</string>
     <string name="rotate_map_to_descr">Térkép igazítása:</string>
     <string name="rotate_map_to">Térkép forgatása</string>
     <string name="show_route">Útvonal részletei</string>
@@ -3321,7 +3321,7 @@
     <string name="screen_control">Kijelző beállításai</string>
     <string name="system_screen_timeout">Képernyő-időkorlát: rendszerbeállítás használata</string>
     <string name="turn_screen_on_descr">Válassza ki a kijelző felébresztési lehetőségeit (fontos, hogy az OsmAnd az előtérben fusson, amikor az eszköz lezárásra kerül):</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Valamennyi navigációs utasítás előtt a kijelző bekapcsolásra kerül.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Valamennyi navigációs utasítás előtt a kijelző bekapcsolódik</string>
     <string name="turn_screen_on_navigation_instructions">Navigációs utasítások</string>
     <string name="turn_screen_on_power_button_descr">A készülék bekapcsológombjának megnyomásával a képernyő bekapcsol, a zárolási képernyő fölött pedig az OsmAnd jelenik meg.</string>
     <string name="turn_screen_on_power_button">Bekapcsológomb</string>
@@ -3560,7 +3560,7 @@
     <string name="osm_edit_logout_success">Kijelentkezett</string>
     <string name="use_two_phase_routing">Kétszakaszos A* útvonaltervezési algoritmus használata</string>
     <string name="file_already_imported">A fájl már importálva van az OsmAndba</string>
-    <string name="snowmobile_render_descr">Motorosszán vezetéshez külön utakkal és pályákkal.</string>
+    <string name="snowmobile_render_descr">Motoros szán vezetéshez külön utakkal és pályákkal.</string>
     <string name="shared_string_graph">Grafikon</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s adatok csak utakról állnak rendelkezésre. Az ábrák megtekintéséhez az „Útvonal tervezése pontok között” funkcióval számítsa ki az útvonalat.</string>
     <string name="message_graph_will_be_available_after_recalculation">Várjon.\nAz ábra az útvonal újratervezése után lesz látható.</string>
