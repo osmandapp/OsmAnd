@@ -3120,7 +3120,7 @@
     <string name="osm_authorization_success">Autorización exitosa</string>
     <string name="rearrange_categories">Reordenar categorías</string>
     <string name="create_custom_categories_list_promo">Cambiá el orden de la lista y ocultá las categorías. Importá o exportá todos los cambios como perfiles.</string>
-    <string name="add_new_custom_category_button_promo">Añadí una nueva categoría personalizada marcando una o varias categorías.</string>
+    <string name="add_new_custom_category_button_promo">Agregá una nueva categoría personalizada marcando una o varias categorías.</string>
     <string name="shared_string_available">Disponible</string>
     <string name="add_custom_category">Agregar categoría personalizada</string>
     <string name="rendering_attr_streetLightingNight_name">Mostrar sólo de noche</string>
@@ -3466,7 +3466,7 @@
     <string name="shared_string_is_saved">se ha guardado</string>
     <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
     <string name="number_of_gpx_files_selected_pattern">Se muestran %s trazas</string>
-    <string name="one_point_error">Añadí al menos dos puntos.</string>
+    <string name="one_point_error">Agregá al menos dos puntos.</string>
     <string name="shared_string_redo">Rehacer</string>
     <string name="release_3_8">• Se actualizó la función «Planificar ruta»: te permite usar diferentes tipos de navegación por segmento y la inclusión de trazas\n\n• Nuevo menú con el aspecto de las trazas: elegí el color, el grosor, mostrar las flechas de dirección y los íconos de inicio y fin\n\n• Mejoras en la visibilidad de los nodos de bicicleta\n\n• Las trazas ahora se pueden pulsar, contiene un menú contextual con información básica\n\n• Algoritmos de búsqueda mejorados\n\n• Mejoras en las opciones de seguimiento de la navegación\n\n• Se solucionaron los problemas de la importación y exportación en los ajustes de los perfiles</string>
     <string name="sort_last_modified">Último modificado</string>
@@ -4991,7 +4991,7 @@
     <string name="key_event_action_previous_app_profile">Perfil de aplicación anterior</string>
     <string name="show_toast_about_key_pressed">Mostrar notificación sobre la tecla pulsada</string>
     <string name="key_event_action_move_left">Mover a la izquierda</string>
-    <string name="press_button_to_link_with_action">Presioná el botón en el dispositivo para asignarle la acción: %1$s</string>
+    <string name="press_button_to_link_with_action">Pulsá el botón en el dispositivo para asignarle la acción: %1$s</string>
     <string name="deletion_error">Error de borrado</string>
     <string name="key_event_action_move_right">Mover a la derecha</string>
     <string name="shared_string_button">Botón</string>
@@ -5600,13 +5600,13 @@
     <string name="meridian_180">Meridiano 180</string>
     <string name="release_5_0">• Descubrí los PDI mejor clasificados con el nuevo modo «Explorar»\n\n • Todas las rutas de OSM, ¡ahora con opción de búsqueda! Senderismo, ciclismo, BTT y mucho más\n\n • El nuevo widget de navegación combina la flecha de giro y las indicaciones de navegación\n\n • Widget de información de la ruta actual: muestra el tiempo estimado de llegada, la hora de llegada y la distancia\n\n • Marcá pistas de esquí y BTT en el mapa para obtener información detallada\n\n • Posibilidad de cambiar el tamaño del widget para los paneles izquierdo y derecho\n\n • Se agregó una cuadrícula de coordenadas con coordenadas geográficas\n\n • Se agregó la posibilidad de personalizar el aspecto predefinido de los grupos favoritos\n\n • Android Auto: vista del tiempo estimado de llegada y de la distancia hasta el siguiente punto de ruta; los nombres de las ciudades aparecen ahora en los resultados de búsqueda\n\n • Los picos prominentes ahora se pueden descubrir a través del mapa y la búsqueda\n\n • Alturas de picos de montaña en pies\n\n • Se agregaron peñascos y zonas de escalada en el mapa\n\n • Se mejoró la búsqueda de direcciones en EE.UU.\n\n • Se agregó la voz de habla sintetizada (TTS) al hebreo para la navegación</string>
     <string name="add_widget">Añadir widget</string>
-    <string name="shared_string_online_only">Sólo en línea</string>
+    <string name="shared_string_online_only">Sólo al conectarse</string>
     <string name="shared_string_offline_only">Sólo desconectado</string>
     <string name="row_height">Altura de la fila</string>
     <string name="intermediate_first">Primer intermedio</string>
     <string name="destination_first">Primer destino</string>
     <string name="display_priority">Prioridad de vista</string>
-    <string name="poi_source">Orígen del PDI</string>
+    <string name="poi_source">Origen del PDI</string>
     <string name="position_animation_empty_banner_description">El ícono de ubicación se mueve a cada nueva ubicación recibida sin animación.</string>
     <string name="wiki_around">Sitios populares cerca</string>
     <string name="read_on_wiki">Leer en Wikipedia</string>
