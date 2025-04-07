@@ -3321,7 +3321,7 @@
     <string name="screen_control">Kijelző beállításai</string>
     <string name="system_screen_timeout">Képernyő-időkorlát: rendszerbeállítás használata</string>
     <string name="turn_screen_on_descr">Válassza ki a kijelző felébresztési lehetőségeit (fontos, hogy az OsmAnd az előtérben fusson, amikor az eszköz lezárásra kerül):</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Valamennyi navigációs utasítás előtt a kijelző bekapcsolódik</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Valamennyi navigációs utasítás előtt a kijelző bekapcsolódik.</string>
     <string name="turn_screen_on_navigation_instructions">Navigációs utasítások</string>
     <string name="turn_screen_on_power_button_descr">A készülék bekapcsológombjának megnyomásával a képernyő bekapcsol, a zárolási képernyő fölött pedig az OsmAnd jelenik meg.</string>
     <string name="turn_screen_on_power_button">Bekapcsológomb</string>
