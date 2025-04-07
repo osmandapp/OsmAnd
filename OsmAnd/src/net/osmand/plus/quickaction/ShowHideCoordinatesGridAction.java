@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.layers.CoordinatesGridLayerSettings;
+import net.osmand.plus.views.layers.CoordinatesGridSettings;
 
 public class ShowHideCoordinatesGridAction extends QuickAction {
 
@@ -24,7 +24,7 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 			.nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 
-	private CoordinatesGridLayerSettings gridLayerSettings;
+	private CoordinatesGridSettings gridSettings;
 
 	public ShowHideCoordinatesGridAction() {
 		super(TYPE);
@@ -65,10 +65,10 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 	}
 
 	@NonNull
-	private CoordinatesGridLayerSettings requireGridHelper(@NonNull OsmandApplication app) {
-		if (gridLayerSettings == null) {
-			gridLayerSettings = new CoordinatesGridLayerSettings(app);
+	private CoordinatesGridSettings requireGridHelper(@NonNull OsmandApplication app) {
+		if (gridSettings == null) {
+			gridSettings = new CoordinatesGridSettings(app);
 		}
-		return gridLayerSettings;
+		return gridSettings;
 	}
 }

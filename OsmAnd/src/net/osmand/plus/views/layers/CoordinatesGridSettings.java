@@ -17,14 +17,14 @@ import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.views.OsmandMapTileView;
 
-public class CoordinatesGridLayerSettings {
+public class CoordinatesGridSettings {
 
 	public static final int SUPPORTED_MAX_ZOOM = 22;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
-	public CoordinatesGridLayerSettings(@NonNull OsmandApplication app) {
+	public CoordinatesGridSettings(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 	}

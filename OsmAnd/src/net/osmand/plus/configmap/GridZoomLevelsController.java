@@ -10,20 +10,20 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.views.layers.CoordinatesGridLayerSettings;
+import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class GridZoomLevelsController extends ZoomLevelsController {
 
-	private final CoordinatesGridLayerSettings gridLayerSettings;
+	private final CoordinatesGridSettings gridSettings;
 	private final ApplicationMode appMode;
 	private boolean applyChanges = false;
 
 	public GridZoomLevelsController(@NonNull OsmandApplication app,
-	                                @NonNull CoordinatesGridLayerSettings gridLayerSettings) {
-		super(app, gridLayerSettings.getZoomLevels(), gridLayerSettings.getSupportedZoomLevels());
+	                                @NonNull CoordinatesGridSettings gridSettings) {
+		super(app, gridSettings.getZoomLevels(), gridSettings.getSupportedZoomLevels());
 		this.appMode = app.getSettings().getApplicationMode();
-		this.gridLayerSettings = gridLayerSettings;
+		this.gridSettings = gridSettings;
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 
 	@Override
 	public void onResetToDefault() {
-		gridLayerSettings.resetZoomLevels(appMode);
+		gridSettings.resetZoomLevels(appMode);
 		selectedLimits = getSavedZoomLimits();
 	}
 
@@ -47,19 +47,19 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 	}
 
 	protected void setSavedZoomLimits(@NonNull Limits<Integer> limits) {
-		gridLayerSettings.setZoomLevels(appMode, limits);
+		gridSettings.setZoomLevels(appMode, limits);
 	}
 
 	@Override
 	@NonNull
 	protected Limits<Integer> getSavedZoomLimits() {
-		return gridLayerSettings.getZoomLevelsWithRestrictions(appMode);
+		return gridSettings.getZoomLevelsWithRestrictions(appMode);
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
-	                              @NonNull CoordinatesGridLayerSettings gridLayerSettings) {
+	                              @NonNull CoordinatesGridSettings gridSettings) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		GridZoomLevelsController controller = new GridZoomLevelsController(app, gridLayerSettings);
+		GridZoomLevelsController controller = new GridZoomLevelsController(app, gridSettings);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(controller.getProcessId(), controller);

@@ -16,9 +16,11 @@ import net.osmand.core.jni.GridConfiguration.Projection;
 import net.osmand.core.jni.GridMarksProvider;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.TextRasterizer.Style.TextAlignment;
+import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.GridFormat;
@@ -28,22 +30,25 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
+import java.util.Objects;
+
 public class CoordinatesGridLayer extends OsmandMapLayer {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final CoordinatesGridLayerSettings gridLayerSettings;
+	private final CoordinatesGridSettings gridSettings;
 	private final OsmandMapTileView mapTileView;
 
 	private GridConfiguration gridConfig;
 	private GridMarksProvider marksProvider;
 
 	private GridFormat cachedGridFormat;
+	private Limits<Integer> cachedZoomLimits;
 	private GridLabelsPosition cachedLabelsPosition;
 	@ColorInt private int cachedGridColorDay;
 	@ColorInt private int cachedGridColorNight;
 	private Float cachedTextScale;
-	private Boolean cachedGridShow;
+	private Boolean cachedGridEnabled;
 	private boolean cachedNightMode;
 	private StateChangedListener settingsListener;
 
@@ -51,7 +56,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		super(app);
 		this.app = app;
 		settings = app.getSettings();
-		gridLayerSettings = new CoordinatesGridLayerSettings(app);
+		gridSettings = new CoordinatesGridSettings(app);
 		mapTileView = app.getOsmandMap().getMapView();
 
 		settingsListener = this::onPreferenceChange;
@@ -64,7 +69,6 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		settings.COORDINATES_GRID_COLOR_DAY.addListener(settingsListener);
 		settings.COORDINATES_GRID_COLOR_NIGHT.addListener(settingsListener);
 		settings.TEXT_SCALE.addListener(settingsListener);
-		setInvalidated(true);
 	}
 
 	@Override
@@ -89,61 +93,65 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 	}
 
 	public void updateGridSettings(@NonNull MapRendererView mapRenderer) {
-		boolean updateAppearance;
 		ApplicationMode appMode = settings.getApplicationMode();
-		if (gridConfig == null || !mapRenderer.hasSymbolsProvider(marksProvider)) {
-			gridConfig = new GridConfiguration();
-			initVariables(appMode);
-			setupMapZoomListener();
-			updateAppearance = true;
-		} else {
-			updateAppearance = updateVariables(appMode);
+		boolean updateAppearance = false;
+		boolean zoomLevelsUpdated = false;
+
+		boolean show = gridSettings.isEnabled(appMode);
+		if (show) {
+			if (gridConfig == null || !mapRenderer.hasSymbolsProvider(marksProvider)) {
+				gridConfig = new GridConfiguration();
+				initVariables(appMode);
+				updateAppearance = true;
+			} else {
+				updateAppearance = updateVariables(appMode);
+				zoomLevelsUpdated = updateZoomLevels(appMode);
+			}
+			if (updateAppearance) {
+				cleanupMarksProvider(mapRenderer);
+				updateGridAppearance();
+			}
 		}
-		if (updateAppearance) {
-			cleanupMarksProvider(mapRenderer);
-			updateGridAppearance();
+		if (cachedGridEnabled != show || updateAppearance || zoomLevelsUpdated) {
+			cachedGridEnabled = show;
+			updateGridVisibility(mapRenderer, cachedGridEnabled);
 		}
-		boolean show = gridLayerSettings.shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
-		if (cachedGridShow != show || updateAppearance) {
-			cachedGridShow = show;
-			updateGridVisibility(mapRenderer, cachedGridShow);
-		}
-		setInvalidated(false);
 	}
 
 	private void initVariables(@NonNull ApplicationMode appMode) {
-		cachedGridFormat = gridLayerSettings.getGridFormat(appMode);
-		cachedLabelsPosition = gridLayerSettings.getGridLabelsPosition(appMode);
-		cachedGridColorDay = gridLayerSettings.getGridColor(appMode, false);
-		cachedGridColorNight = gridLayerSettings.getGridColor(appMode, true);
-		cachedTextScale = gridLayerSettings.getTextScale(appMode);
+		cachedGridFormat = gridSettings.getGridFormat(appMode);
+		cachedLabelsPosition = gridSettings.getGridLabelsPosition(appMode);
+		cachedGridColorDay = gridSettings.getGridColor(appMode, false);
+		cachedGridColorNight = gridSettings.getGridColor(appMode, true);
+		cachedTextScale = gridSettings.getTextScale(appMode);
+		cachedGridEnabled = gridSettings.isEnabled(appMode);
+		cachedZoomLimits = gridSettings.getZoomLevelsWithRestrictions(appMode, cachedGridFormat);
 		cachedNightMode = isNightMode();
-		cachedGridShow = gridLayerSettings.shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
 	}
 
 	private boolean updateVariables(@NonNull ApplicationMode appMode) {
 		boolean updated = false;
-		GridFormat newGridFormat = gridLayerSettings.getGridFormat(appMode);
+		GridFormat newGridFormat = gridSettings.getGridFormat(appMode);
 		if (cachedGridFormat != newGridFormat) {
 			cachedGridFormat = newGridFormat;
 			updated = true;
 		}
-		int newGridColorDay = gridLayerSettings.getGridColor(appMode, false);
+		int newGridColorDay = gridSettings.getGridColor(appMode, false);
 		if (cachedGridColorDay != newGridColorDay) {
 			cachedGridColorDay = newGridColorDay;
 			updated = true;
 		}
-		int newGridColorNight = gridLayerSettings.getGridColor(appMode, true);
+		int newGridColorNight = gridSettings.getGridColor(appMode, true);
 		if (cachedGridColorNight != newGridColorNight) {
 			cachedGridColorNight = newGridColorNight;
 			updated = true;
 		}
-		float newTextScale = gridLayerSettings.getTextScale(appMode);
+		float newTextScale = gridSettings.getTextScale(appMode);
 		if (Math.abs(cachedTextScale - newTextScale) >= 0.0001f) {
 			cachedTextScale = newTextScale;
 			updated = true;
 		}
-		GridLabelsPosition newLabelsPosition = gridLayerSettings.getGridLabelsPosition(appMode);
+		GridLabelsPosition newLabelsPosition = gridSettings.getGridLabelsPosition(appMode);
 		if (cachedLabelsPosition != newLabelsPosition) {
 			cachedLabelsPosition = newLabelsPosition;
 			updated = true;
@@ -153,12 +161,14 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 			cachedNightMode = newNightMode;
 			updated = true;
 		}
-		return updated || invalidated;
+		return updated;
 	}
 
 	private void updateGridAppearance() {
 		Format format = cachedGridFormat.getFormat();
 		Projection projection = cachedGridFormat.getProjection();
+		ZoomLevel minZoom = ZoomLevel.swigToEnum(cachedZoomLimits.min());
+		ZoomLevel maxZoom = ZoomLevel.swigToEnum(cachedZoomLimits.max());
 
 		int colorInt = cachedNightMode ? cachedGridColorNight : cachedGridColorDay;
 		FColorARGB color = NativeUtilities.createFColorARGB(colorInt);
@@ -168,10 +178,14 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		gridConfig.setPrimaryProjection(projection);
 		gridConfig.setPrimaryFormat(format);
 		gridConfig.setPrimaryColor(color);
+		gridConfig.setPrimaryMinZoomLevel(minZoom);
+		gridConfig.setPrimaryMaxZoomLevel(maxZoom);
 
 		gridConfig.setSecondaryProjection(projection);
 		gridConfig.setSecondaryFormat(format);
 		gridConfig.setSecondaryColor(color);
+		gridConfig.setSecondaryMinZoomLevel(minZoom);
+		gridConfig.setSecondaryMaxZoomLevel(maxZoom);
 
 		marksProvider = new GridMarksProvider();
 		TextRasterizer.Style primaryStyle = createMarksStyle(color, haloColor, TextAlignment.Under);
@@ -190,6 +204,23 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		} else {
 			marksProvider.setSecondary(true, "", "", "", "");
 		}
+	}
+
+	private boolean updateZoomLevels(@NonNull ApplicationMode appMode) {
+		Limits<Integer> newZoomLimits = gridSettings.getZoomLevelsWithRestrictions(appMode, cachedGridFormat);
+		if (!Objects.equals(cachedZoomLimits, newZoomLimits)) {
+			cachedZoomLimits = newZoomLimits;
+			if (gridConfig != null) {
+				ZoomLevel minZoom = ZoomLevel.swigToEnum(cachedZoomLimits.min());
+				ZoomLevel maxZoom = ZoomLevel.swigToEnum(cachedZoomLimits.max());
+				gridConfig.setPrimaryMinZoomLevel(minZoom);
+				gridConfig.setPrimaryMaxZoomLevel(maxZoom);
+				gridConfig.setSecondaryMinZoomLevel(minZoom);
+				gridConfig.setSecondaryMaxZoomLevel(maxZoom);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@NonNull
@@ -224,15 +255,6 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 			mapRenderer.removeSymbolsProvider(marksProvider);
 			marksProvider = null;
 		}
-	}
-
-	private void setupMapZoomListener() {
-		OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
-		mapTileView.addMapZoomChangeListener(manual -> setInvalidated(true));
-	}
-
-	private int getCurrentZoom() {
-		return mapTileView.getZoom();
 	}
 
 	private boolean isNightMode() {
