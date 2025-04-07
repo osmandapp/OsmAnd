@@ -92,6 +92,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -715,10 +716,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public void restoreToolbar() {
 		if (toolbarVisible) {
-			if (toolbarTitle != null) {
-				showToolbar(toolbarTitle);
-			} else {
-				showToolbar();
+			MapActivity mapActivity = getMapActivity();
+			TopToolbarController controller = mapActivity.getTopToolbarController(toolbarController.getType());
+			if (controller == null) {
+				if (toolbarTitle != null) {
+					showToolbar(toolbarTitle);
+				} else {
+					showToolbar();
+				}
 			}
 		}
 	}

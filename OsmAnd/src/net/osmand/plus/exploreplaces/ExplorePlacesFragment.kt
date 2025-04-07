@@ -55,8 +55,9 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private val singleThreadExecutor = Executors.newSingleThreadExecutor()
 	private var convertAmenitiesTask: ConvertAmenitiesTask? = null
 
-	private lateinit var poiUIFilter: PoiUIFilter
-	private lateinit var adapter: ExplorePlacesAdapter
+	private var poiUIFilter: PoiUIFilter? = null
+	private var poiUIFilterID: String? = null
+	private var adapter: ExplorePlacesAdapter? = null
 
 	private var visiblePlaces: List<Amenity>? = null
 	private var location: Location? = null
@@ -82,12 +83,18 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		if(savedInstanceState != null) {
+		if (savedInstanceState != null) {
 			val filterId = savedInstanceState.getString(POI_UI_FILTER_ID)
 			poiUIFilter = app.poiFilters.getFilterById(filterId)
-		} else {
-			closeFragment()
+			poiUIFilterID = filterId
 		}
+	}
+
+	private fun getPoiUIFilter(): PoiUIFilter? {
+		if (poiUIFilter == null && poiUIFilterID != null) {
+			poiUIFilter = app.poiFilters.getFilterById(poiUIFilterID)
+		}
+		return poiUIFilter
 	}
 
 	override fun onCreateView(
@@ -126,11 +133,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun setupRecyclerView(view: View) {
-		adapter = ExplorePlacesAdapter(view.context, poiUIFilter, this, nightMode)
-
-		recyclerView = view.findViewById(R.id.vertical_nearby_list)
-		recyclerView?.layoutManager = LinearLayoutManager(view.context)
-		recyclerView?.adapter = adapter
+		val filter = getPoiUIFilter()
+		filter?.let {
+			adapter = ExplorePlacesAdapter(view.context, filter, this, nightMode)
+			recyclerView = view.findViewById(R.id.vertical_nearby_list)
+			recyclerView?.layoutManager = LinearLayoutManager(view.context)
+			recyclerView?.adapter = adapter
+		}
 	}
 
 	private fun buildZoomButtons(view: View) {
@@ -197,25 +206,24 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun updatePoints() {
-		if (app.osmandMap.mapView.isMapInteractionActive) {
-			return;
+		val filter = getPoiUIFilter()
+		if (app.osmandMap.mapView.isMapInteractionActive || filter == null) {
+			return
 		}
 		val visiblePlaces = app.osmandMap.mapLayers.poiMapLayer.visiblePlaces
 		if (visiblePlaces != null && visiblePlaces != this.visiblePlaces) {
 			this.visiblePlaces = visiblePlaces
 
-			val callback = object : CallbackWithObject<List<QuickSearchListItem>> {
-				override fun processResult(result: List<QuickSearchListItem>): Boolean {
+			val callback = CallbackWithObject<List<QuickSearchListItem>> { result ->
 					if (isAdded) {
-						adapter.setItems(result)
+						adapter?.setItems(result)
 						updateMapControls()
 					}
-					return true
+					true
 				}
-			}
 			stopConvertAmenitiesTask()
 			convertAmenitiesTask =
-				ConvertAmenitiesTask(app, visiblePlaces, poiUIFilter.isTopImagesFilter, callback)
+				ConvertAmenitiesTask(app, visiblePlaces, filter.isTopImagesFilter, callback)
 			convertAmenitiesTask?.executeOnExecutor(singleThreadExecutor)
 		}
 	}
@@ -254,7 +262,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
-		outState.putString(POI_UI_FILTER_ID, poiUIFilter.filterId)
+		outState.putString(POI_UI_FILTER_ID, getPoiUIFilter()?.filterId)
 	}
 
 	override fun updateLocation(location: Location?) {
@@ -278,7 +286,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	private fun updateAdapter() {
 		app.runInUIThreadAndCancelPrevious(REFRESH_UI_ID, {
-			adapter.notifyDataSetChanged()
+			adapter?.notifyDataSetChanged()
 		}, 0)
 	}
 
@@ -330,7 +338,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun closeFragment() {
-		app.getPoiFilters().restoreSelectedPoiFilters()
+		app.poiFilters.restoreSelectedPoiFilters()
 		mapActivity?.let { activity ->
 			val fragment = activity.fragmentsHelper.explorePlacesFragment
 			if (fragment != null) {
@@ -357,6 +365,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = ExplorePlacesFragment()
 				fragment.poiUIFilter = poiUIFilter
+				fragment.poiUIFilterID = poiUIFilter.filterId
 				manager.beginTransaction()
 					.addToBackStack(TAG)
 					.replace(R.id.fragmentContainer, fragment, TAG)
