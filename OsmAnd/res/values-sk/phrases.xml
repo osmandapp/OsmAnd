@@ -4573,4 +4573,13 @@
     <string name="poi_presbyterian_church">Presbyteriánsky kostol</string>
     <string name="poi_access_main_tag">Prístup</string>
     <string name="poi_cafe_filter">Kaviareň</string>
+    <string name="poi_climbing_area">Lezecká oblasť</string>
+    <string name="poi_climbing_route">Lezecká trasa</string>
+    <string name="poi_climbing_route_bottom">Spodná časť lezeckej trasy</string>
+    <string name="poi_sled_yes">Sánky: áno</string>
+    <string name="poi_sled_no">Sánky: nie</string>
+    <string name="poi_dog_sled_yes">Psí záprah: áno</string>
+    <string name="poi_dog_sled_no">Psí záprah: nie</string>
+    <string name="poi_atv_yes">Terénna štvorkolka: áno</string>
+    <string name="poi_atv_no">Terénna štvorkolka: nie</string>
 </resources>
