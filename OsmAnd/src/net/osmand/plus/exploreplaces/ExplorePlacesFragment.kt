@@ -21,6 +21,8 @@ import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.Amenity
 import net.osmand.map.IMapLocationListener
+import net.osmand.plus.AppInitializeListener
+import net.osmand.plus.AppInitializer
 import net.osmand.plus.OsmAndConstants.EXPLORE_PLACES_UPDATE
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
@@ -134,11 +136,20 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	private fun setupRecyclerView(view: View) {
 		val filter = getPoiUIFilter()
-		filter?.let {
-			adapter = ExplorePlacesAdapter(view.context, filter, this, nightMode)
-			recyclerView = view.findViewById(R.id.vertical_nearby_list)
-			recyclerView?.layoutManager = LinearLayoutManager(view.context)
-			recyclerView?.adapter = adapter
+		adapter = ExplorePlacesAdapter(view.context, filter, this, nightMode)
+		recyclerView = view.findViewById(R.id.vertical_nearby_list)
+		recyclerView?.layoutManager = LinearLayoutManager(view.context)
+		recyclerView?.adapter = adapter
+		if (filter == null && app.appInitializer.isAppInitializing) {
+			app.appInitializer.addListener(object : AppInitializeListener{
+				override fun onFinish(init: AppInitializer) {
+					poiUIFilter = getPoiUIFilter()
+					adapter?.setPoiUIFilter(poiUIFilter)
+					poiUIFilter?.let {
+						app.poiFilters.replaceSelectedPoiFilters(it)
+					}
+				}
+			})
 		}
 	}
 

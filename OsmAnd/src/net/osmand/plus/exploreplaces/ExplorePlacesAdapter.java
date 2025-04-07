@@ -38,7 +38,7 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private List<QuickSearchListItem> items = new ArrayList<>();
 
 	@Nullable
-	private final PoiUIFilter poiUIFilter;
+	private PoiUIFilter poiUIFilter;
 
 	public ExplorePlacesAdapter(@NonNull Context context, @Nullable PoiUIFilter poiUIFilter,
 			@Nullable NearbyItemClickListener itemClickListener, boolean nightMode) {
@@ -92,6 +92,11 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 				}
 			});
 		}
+	}
+
+	public void setPoiUIFilter(@Nullable PoiUIFilter filter) {
+		poiUIFilter = filter;
+		notifyDataSetChanged();
 	}
 
 	@Override
