@@ -5262,4 +5262,10 @@
     <string name="average_speed_time_interval_desc">Vali välp keskmise kiiruse arvutamiseks.</string>
     <string name="trip_recording_duration_widget_desc">Näitab hetkel salvestatud teekonna aega.</string>
     <string name="trip_recording_distance_widget_desc">Näitab hetkel salvestatud teekonna vahemaad.</string>
+    <string name="routing_attr_avoid_4wd_only_name">Väldi teid, kus peab kasutama neljarattavedu</string>
+    <string name="routing_attr_avoid_highway_description">Väldi kiirteid</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Eelistus puudub</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Näita mägirattasõiduks mõeldud radu.</string>
+    <string name="co2_mission">Süsihappegaasi heitkogused</string>
+    <string name="checking_progress">Kontrollin…</string>
 </resources>
