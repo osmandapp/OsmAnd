@@ -83,7 +83,7 @@ public class CoordinatesGridHelper {
 		if (gridConfig == null || !mapRenderer.hasSymbolsProvider(marksProvider)) {
 			gridConfig = new GridConfiguration();
 			initVariables(appMode);
-			setupMapZoomListener();
+//			setupMapZoomListener();
 			updateAppearance = true;
 		} else {
 			updateAppearance = updateVariables(appMode);
@@ -109,9 +109,9 @@ public class CoordinatesGridHelper {
 		cachedGridShow = shouldShowGrid(appMode, cachedGridFormat, getCurrentZoom());
 	}
 
-	private void setupMapZoomListener() {
-		mapTileView.addMapZoomChangeListener(manual -> updateGridSettings());
-	}
+//	private void setupMapZoomListener() {
+//		mapTileView.addMapZoomChangeListener(manual -> updateGridSettings());
+//	}
 
 	private boolean updateVariables(@NonNull ApplicationMode appMode) {
 		boolean updated = false;
