@@ -1146,6 +1146,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				if (getResultCollection() != null) {
 					updateSearchResult(getResultCollection(), false);
 					onSearchFinished(searchUICore.getPhrase());
+				} else if (!Algorithms.isEmpty(searchQuery)) {
+					runSearch();
 				}
 				break;
 		}

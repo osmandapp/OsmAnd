@@ -143,6 +143,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		if (filter == null && app.appInitializer.isAppInitializing) {
 			app.appInitializer.addListener(object : AppInitializeListener{
 				override fun onFinish(init: AppInitializer) {
+					init.removeListener(this)
 					poiUIFilter = getPoiUIFilter()
 					adapter?.setPoiUIFilter(poiUIFilter)
 					poiUIFilter?.let {
