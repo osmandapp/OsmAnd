@@ -31,6 +31,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		CHECK_CONTAINS,
 		// simple collator equals
 		CHECK_EQUALS,
+		MULTISEARCH,
 	}
 
 	public CollatorStringMatcher(String part, StringMatcherMode mode) {
@@ -69,7 +70,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		}
 		switch (mode) {
 		case CHECK_CONTAINS:
-			return ccontains(collator, fullName, part); 
+			return ccontains(collator, fullName, part);
 		case CHECK_EQUALS_FROM_SPACE:
 			return cstartsWith(collator, fullName, part, true, true, true);
 		case CHECK_STARTS_FROM_SPACE:
@@ -80,6 +81,8 @@ public class CollatorStringMatcher implements StringMatcher {
 			return cstartsWith(collator, fullName, part, true, false, false);
 		case CHECK_EQUALS:
 			return cstartsWith(collator, fullName, part, false, false, true);
+		case MULTISEARCH:
+			return cstartsWith(collator, part, fullName, true, true, true);
 		}
 		return false;
 	}

@@ -36,6 +36,10 @@ public class MenuRowBuilder {
 	public static final String NAMES_ROW_KEY = "names_row_key";
 	public static final String ALT_NAMES_ROW_KEY = "alt_names_row_key";
 
+	public static final String ROUTE_MEMBERS_ROW_KEY = "route_members_row_key";
+	public static final String ROUTE_PART_OF_ROW_KEY = "route_part_of_row_key";
+	public static final String ROUTE_RELATED_ROUTES_ROW_KEY = "route_related_routes_row_key";
+
 	private final OsmandApplication app;
 	private final MapActivity mapActivity;
 	private final UiUtilities iconsCache;
