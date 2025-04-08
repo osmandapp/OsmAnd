@@ -5737,4 +5737,7 @@
     <string name="shared_string_edges">Ivice</string>
     <string name="labels_position">Položaj nalepnica</string>
     <string name="customize_grid_color">Prilagodite boju mreže</string>
+    <string name="multipoligon_related">Srodno</string>
+    <string name="route_part_of">Deo</string>
+    <string name="route_members">Članovi</string>
 </resources>
