@@ -933,7 +933,7 @@
     <string name="routing_attr_prefer_unpaved_name">Eelista katteta teid</string>
     <string name="routing_attr_prefer_unpaved_description">Eelista katteta teid.</string>
     <string name="update_all_maps">Uuenda kõiki kaarte</string>
-    <string name="update_all_maps_q">Uuendada kõik (%1$d) kaarti\?</string>
+    <string name="update_all_maps_q">Kas uuendan kõik (%1$d) kaarti?</string>
     <string name="release_3_5">• Uuendatud rakenduse ja profiili seadeid, mis on nüüd järjestatud tüübi järgi. Igat profiili saab kohandada eraldi. \n \n • Uus kaartide allalaadimise dialoog, mis soovitab sirvimise ajal kaarte allalaadimiseks \n \n • Öise teema parandused \n \n • Parandanud mitmeid marsruutimisprobleeme kogu maailmas \n \n • Uuendatud põhikaart koos üksikasjalikuma teedevõrguga \n \n • Fikseeritud üleujutuse piirkonnad kogu maailmas \n \n • Suusarajad: teekonna üksikasjadele on lisatud kõrguse profiil ja teekonna keerukus \n \n • Muud veaparandused</string>
     <string name="apply_preference_to_all_profiles">Rakenda see muudatus kõigile või valitud profiilile.</string>
     <string name="shared_preference">Jagatud</string>
@@ -2306,7 +2306,7 @@
     <string name="get_started">Alusta</string>
     <string name="replace_favorite_confirmation">Asendada lemmik \"%1$s\"\?</string>
     <string name="clear_tile_data">Eemalda kõik paanid</string>
-    <string name="update_all_maps_now">Uuendada kohe kõik kaardid\?</string>
+    <string name="update_all_maps_now">Kas uuendan kohe kõik kaardid?</string>
     <string name="search_my_location">Leia minu asukoht</string>
     <string name="skip_map_downloading">Jäta kaartide allalaadimine vahele</string>
     <string name="skip_map_downloading_desc">Sul ei ole võrguühenduseta kaarte paigaldatud. Võid valida kaardi nimekirjast või kaardid hiljem alla laadida \'Menüü - %1$s\' kaudu.</string>
@@ -3934,7 +3934,7 @@
     <string name="on_hold">Ootel</string>
     <string name="expired">Aegunud</string>
     <string name="release_4_0_beta">• Lisatud võimalus kõrgusjoonte allalaadimiseks jalgades \n \n • Plaani marsruudi maastik: lisatud vahekaardid punktide või graafikute vahel vahetamiseks \n \n • OsmAnd Live värskendused viidi üle jaotisse \"Allalaadimised &gt; Uuendused\". \n \n • Radu saab nüüd värvida kõrguse, kiiruse või kallakuga. \n \n • Lisatud võimalus muuta marsruudiliini välimust. \n \n • Uuendatud dialoog \"Reisi salvestamine\"</string>
-    <string name="update_all_maps_added">Uuendada kõik %1$s lisatud kaardid\?</string>
+    <string name="update_all_maps_added">Kas uuendan kõik %1$s lisatud kaarti?</string>
     <string name="shared_string_feet">jalga</string>
     <string name="srtm_unit_format">Kõrgusjoonte ühiku variant</string>
     <string name="srtm_download_list_help_message">OsmAnd pakub kõrgusjoonte andmeid meetrites ja jalgades. Formaadi muutmiseks laadi fail uuesti alla.</string>
