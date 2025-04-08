@@ -5014,4 +5014,10 @@
     <string name="poi_presbyterian_church">Презбитеријанска црква</string>
     <string name="poi_aerodrome_type_airfield">Писта</string>
     <string name="poi_consulate">Конзулат</string>
+    <string name="poi_hazard_additional_landslide">Опасност: одрон</string>
+    <string name="poi_hazard_additional_yes">Опасност</string>
+    <string name="poi_hazard_falling_rocks">Камење које пада</string>
+    <string name="poi_hazard_contamination">Контаминација</string>
+    <string name="poi_hazard_yes">Опасност</string>
+    <string name="poi_hazard_additional_slippery_road">Клизав пут</string>
 </resources>
