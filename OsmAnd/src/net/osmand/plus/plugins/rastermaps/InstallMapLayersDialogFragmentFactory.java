@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.rastermaps;
 
 import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
+import android.content.DialogInterface;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.search.SearchDatabaseDirectoryIO;
 
 class InstallMapLayersDialogFragmentFactory {
 
@@ -66,27 +69,47 @@ class InstallMapLayersDialogFragmentFactory {
 				.setTitle(R.string.select_tile_source_to_install)
 				.setControlsColor(ColorUtilities.getAppModeColor((OsmandApplication) activity.getApplication(), nightMode))
 				.setNegativeButton(R.string.shared_string_cancel, null)
-				.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
-					if (!activity.isFinishing()) {
-						final List<TileSourceTemplate> toInstall = new ArrayList<>();
-						for (int i = 0; i < selected.length; i++) {
-							if (selected[i]) {
-								toInstall.add(tileSourceTemplates.get(i));
-							}
-						}
-						for (TileSourceTemplate ts : toInstall) {
-							if (settings.installTileSource(ts)) {
-								if (result != null) {
-									result.publish(ts);
+				.setPositiveButton(
+						R.string.shared_string_apply,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(final DialogInterface dialog, final int which) {
+								if (!activity.isFinishing()) {
+									final List<TileSourceTemplate> toInstall = getSelectedTileSourceTemplates();
+									boolean someTileSourceWasInstalled = false;
+									for (final TileSourceTemplate ts : toInstall) {
+										if (settings.installTileSource(ts)) {
+											someTileSourceWasInstalled = true;
+											if (result != null) {
+												result.publish(ts);
+											}
+										}
+									}
+									if (someTileSourceWasInstalled) {
+										rebuildSearchDatabase();
+									}
+									// at the end publish null to show end of process
+									if (!toInstall.isEmpty() && result != null) {
+										result.publish(null);
+									}
 								}
 							}
-						}
-						// at the end publish null to show end of process
-						if (!toInstall.isEmpty() && result != null) {
-							result.publish(null);
-						}
-					}
-				});
+
+							private List<TileSourceTemplate> getSelectedTileSourceTemplates() {
+								final List<TileSourceTemplate> selectedTileSourceTemplates = new ArrayList<>();
+								for (int i = 0; i < selected.length; i++) {
+									if (selected[i]) {
+										selectedTileSourceTemplates.add(tileSourceTemplates.get(i));
+									}
+								}
+								return selectedTileSourceTemplates;
+							}
+
+							private void rebuildSearchDatabase() {
+								new SearchDatabaseDirectoryIO(activity).removeSearchDatabaseDirectories4AllLocales();
+							}
+						});
 	}
 
 	private static SelectionDialogFragmentData createSelectionDialogFragmentData(

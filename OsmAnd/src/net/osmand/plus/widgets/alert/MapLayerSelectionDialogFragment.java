@@ -15,11 +15,6 @@ import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvid
 import java.util.Map;
 import java.util.Optional;
 
-// FK-FIXME: 1. navigate to InstallMapLayersDialogFragment (Settings -> Driving -> Configure map -> Map source... -> Add more...)
-//           2. select "Top Yandex RU"
-//           3. click Apply
-//           Then "Top Yandex RU" appears in MapLayerSelectionDialogFragment (Settings -> Driving -> Configure map -> Map source...) but this new entry of MapLayerSelectionDialogFragment is not yet stored in the search database and hence can't be found via a search query.
-//           Fix: invoke SearchPreferenceFragments.rebuildSearchDatabase() after user clicked the Apply button in step 3.
 public class MapLayerSelectionDialogFragment extends SelectionDialogFragment {
 
 	public final Optional<InstallMapLayersDialogFragment> installMapLayersDialogFragment;
