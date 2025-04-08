@@ -5678,7 +5678,7 @@
     <string name="show_list">Mostrar listado</string>
     <string name="customize_grid_color">Personalizar el color de la cuadrícula</string>
     <string name="read_on_wiki">Leer en Wikipedia</string>
-    <string name="prediction_time_description">El ícono de ubicación en OsmAnd se anima con cada punto de datos GPS recibido (una vez por segundo). Un ligero retraso en su movimiento puede ser notable, especialmente cuando el usuario se mueve rápidamente o la señal GPS fluctúa.</string>
+    <string name="prediction_time_description">El ícono de ubicación en OsmAnd se anima con cada punto de datos GPS recibido (una vez por segundo). Podrías notar un ligero retraso en el movimiento, especialmente cuando te mueves rápidamente o la señal GPS fluctúa.</string>
     <string name="prediction_time_advanced_description">Ajustar el tiempo de predicción para minimizar el retraso.</string>
     <string name="destination_first">Primer destino</string>
     <string name="display_priority">Prioridad de vista</string>
