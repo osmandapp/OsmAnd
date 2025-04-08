@@ -213,7 +213,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		}
 
 		if (pair.second instanceof Amenity amenity) {
-			if (amenity.isRouteTrack()) {
+			if (amenity.isRouteTrack() && !amenity.isSuperRoute()) {
 				TravelHelper travelHelper = app.getTravelHelper();
 				TravelGpx travelGpx = new TravelGpx(amenity);
 
