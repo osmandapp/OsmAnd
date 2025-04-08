@@ -5129,7 +5129,7 @@
     <string name="add_new_button">Új gomb hozzáadása</string>
     <string name="use_v1_auto_zoom">Diszkrét automatikus nagyítás (régi verzió)</string>
     <string name="shared_string_next_event">Következő esemény</string>
-    <string name="map_widget_sun_position">Napszak</string>
+    <string name="map_widget_sun_position">Napszak váltás</string>
     <string name="map_widget_sun_position_desc">Mutatja a napfelkeltéig vagy napnyugtáig hátralévő időt.</string>
     <string name="previous_row_has_complex_widget">Az előző sorban összetett modul van</string>
     <string name="complex_widget_alert">%1$s modul csak a saját sorában helyezhető el.</string>
