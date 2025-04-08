@@ -142,7 +142,8 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         }
 
         GpxFile gpxFile;
-        if (article instanceof TravelGpx) {
+        boolean isSuperRoute = false;
+        if (article instanceof TravelGpx travelGpx) {
             gpxFile = new GpxFile(Version.getFullVersion(app));
             gpxFile.getMetadata().setName(Objects.requireNonNullElse(article.title, article.routeId)); // path is name
             if (!Algorithms.isEmpty(article.title) && article.hasOsmRouteId()) {
@@ -151,6 +152,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             if (!Algorithms.isEmpty(article.description)) {
                 gpxFile.getMetadata().setDesc(article.description);
             }
+            isSuperRoute = travelGpx.isSuperRoute;
         } else {
             String description = article.getDescription();
             String title = FileUtils.isValidFileName(description) ? description : article.getTitle();
@@ -170,7 +172,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             gpxFile.getMetadata().setLink(new Link(TravelArticle.getImageUrl(article.getImageTitle(), false)));
         }
 
-        if (!segmentList.isEmpty()) {
+        if (!segmentList.isEmpty() || isSuperRoute) {
             boolean hasAltitude = false;
             Track track = new Track();
             for (BinaryMapDataObject segment : segmentList) {
