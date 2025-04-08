@@ -112,7 +112,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 				updateGridAppearance();
 			}
 		}
-		if (cachedGridEnabled != show || updateAppearance || zoomLevelsUpdated) {
+		if (gridConfig != null && (cachedGridEnabled != show || updateAppearance || zoomLevelsUpdated)) {
 			cachedGridEnabled = show;
 			updateGridVisibility(mapRenderer, cachedGridEnabled);
 		}
