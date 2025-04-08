@@ -136,13 +136,13 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 		setupButtonListeners();
 		setupToolbar();
-		//todo do we really need lifecycleCallbacks? onPause/onResume is not enough?
+
 		lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
 			@Override
 			public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
 				super.onFragmentDestroyed(fm, f);
 				if (isAdded()) {
-					Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.fragmentContainer);
+					Fragment currentFragment = fm.findFragmentById(R.id.fragmentContainer);
 					if (currentFragment instanceof SearchWidgetsFragment) {
 						onBackPressedCallback.setEnabled(true);
 					}
@@ -193,18 +193,6 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), onBackPressedCallback);
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		onBackPressedCallback.setEnabled(true);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		onBackPressedCallback.setEnabled(false);
 	}
 
 	private void closeFragment() {

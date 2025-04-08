@@ -165,18 +165,11 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		bottomButtons.setVisibility(View.GONE);
 		bottomButtonsShadow.setVisibility(View.GONE);
 
-		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				closeFragment();
-			}
-		});
-
 		lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
 			@Override
 			public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
 				super.onFragmentDestroyed(fm, f);
-				Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.fragmentContainer);
+				Fragment currentFragment = fm.findFragmentById(R.id.fragmentContainer);
 				if (currentFragment instanceof ConfigureWidgetsFragment) {
 					onBackPressedCallback.setEnabled(true);
 				}
@@ -545,13 +538,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		super.onResume();
 		setupController();
 		updateStatusBar();
-		onBackPressedCallback.setEnabled(true);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		onBackPressedCallback.setEnabled(false);
 	}
 
 	@Override
