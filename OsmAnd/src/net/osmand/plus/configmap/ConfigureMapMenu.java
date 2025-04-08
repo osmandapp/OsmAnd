@@ -762,7 +762,7 @@ public class ConfigureMapMenu {
 			final List<RenderingRuleProperty> properties,
 			final List<CommonPreference<Boolean>> preferences) {
 		return ConfigureMapDialogs
-				.createPreferencesDialogIfActivityNotDestroyed(
+				.createMultiSelectionDialogFragmentIfActivityNotDestroyed(
 						item,
 						activity,
 						activity.getString(strId),

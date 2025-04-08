@@ -446,7 +446,7 @@ public class ConfigureMapDialogs {
 		}
 	}
 
-	public static Optional<MultiSelectionDialogFragment> createPreferencesDialogIfActivityNotDestroyed(
+	public static Optional<MultiSelectionDialogFragment> createMultiSelectionDialogFragmentIfActivityNotDestroyed(
 			final ContextMenuItem item,
 			final MapActivity activity,
 			final String category,
@@ -454,11 +454,11 @@ public class ConfigureMapDialogs {
 			final List<CommonPreference<Boolean>> prefs,
 			final boolean nightMode) {
 		return AndroidUtils.isActivityNotDestroyed(activity) ?
-				Optional.of(createPreferencesDialog(item, activity, category, properties, prefs, nightMode)) :
+				Optional.of(createMultiSelectionDialogFragment(item, activity, category, properties, prefs, nightMode)) :
 				Optional.empty();
 	}
 
-	private static MultiSelectionDialogFragment createPreferencesDialog(
+	private static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
 			final ContextMenuItem item,
 			final MapActivity activity,
 			final String category,

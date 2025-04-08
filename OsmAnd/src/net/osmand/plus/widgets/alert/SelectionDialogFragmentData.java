@@ -30,6 +30,5 @@ public record SelectionDialogFragmentData(List<String> keys,
 						Collectors.toOrderedMap(
 								keyItemPair -> keyItemPair.first,
 								keyItemPair -> keyItemPair.second));
-
 	}
 }
