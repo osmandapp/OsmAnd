@@ -5748,4 +5748,7 @@
     <string name="position_animation">Animi pozicion</string>
     <string name="wiki_around">Proksimaj popularaj lokoj</string>
     <string name="release_5_0">• esplori la plej popularajn interesejojn en la nova serĉa reĝimo “Esplori”\n\n• eblo serĉi ĉiujn kursojn en OSM, piedirado, biciklado kaj pli\n\n• novaj navigaj fenestraĵoj kunigas sagetojn de turniĝoj kun navigaj instrukcioj\n\n• fenestraĵo “Informoj pri kurso” nun montras proksimuman tempon de alveno, pluan tempon kaj distancon\n\n• eblo elekti skivojojn kaj montbiciklajn kursojn sur la mapo por vidigi detalajn informojn\n\n• eblo agordi grandon de dekstra/maldekstra fenestraĵo\n\n• aldonis kradon de geografiajn koordinatoj\n\n• eblo alĝustigi implicitan aspekton de grupoj de ŝatataj punktoj\n\n• Android Auto: vidigi proksimuman tempon de alveno kaj distancon por sekva intercelo, nomoj de urboj montrataj en serĉ-rezultoj\n\n• elstaraj montpintoj esploreblaj sur la serĉilo\n\n• eblo vidigi alton de montpintoj en futoj\n\n• aldonis areojn de grimpado sur la mapo\n\n• plibonigita serĉado de adresoj en Usono\n\n• hebrea voĉo por navigi</string>
+    <string name="route_members">Anoj</string>
+    <string name="route_part_of">Parto de</string>
+    <string name="multipoligon_related">Rilataj</string>
 </resources>
