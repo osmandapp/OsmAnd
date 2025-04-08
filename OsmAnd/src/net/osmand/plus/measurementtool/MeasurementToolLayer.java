@@ -420,14 +420,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				}
 			}
 			if (editingCtx.getSelectedPointPosition() == -1) {
-				if (hasMapRenderer) {
-					if (centerPointMarker != null) {
-						centerPointMarker.setPosition(new PointI(tb.getCenter31X(), tb.getCenter31Y()));
-						centerPointMarker.setIsHidden(false);
-					}
-				} else {
-					drawCenterIcon(canvas, tb, settings.isNightMode());
-				}
+				drawCenterIcon(canvas, tb, settings.isNightMode());
+
 				if (measureDistanceToCenterListener != null) {
 					float distance = 0;
 					float bearing = 0;
@@ -441,8 +435,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 					}
 					measureDistanceToCenterListener.onMeasure(distance, bearing);
 				}
-			} else if (hasMapRenderer && centerPointMarker != null) {
-				centerPointMarker.setIsHidden(true);
 			}
 			List<WptPt> beforePoints = editingCtx.getBeforePoints();
 			List<WptPt> afterPoints = editingCtx.getAfterPoints();
@@ -850,16 +842,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		if (mapRenderer != null) {
 			clearActivePointsCollection();
 			activePointsCollection = new MapMarkersCollection();
-			// Center marker
-			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getPointsOrder() - 600);
-			builder.setIsAccuracyCircleSupported(false);
-			builder.setIsHidden(true);
-			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(nightMode ? centerIconNight : centerIconDay));
-			centerPointMarker = builder.buildAndAddToCollection(activePointsCollection);
-			mapRenderer.addSymbolsProvider(activePointsCollection);
 			// Before marker
-			builder = new MapMarkerBuilder();
+			MapMarkerBuilder builder = new MapMarkerBuilder();
 			builder.setBaseOrder(getPointsOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
@@ -914,11 +898,25 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	public WptPt addCenterPoint(boolean addPointBefore) {
-		RotatedTileBox tb = view.getCurrentRotatedTileBox();
-		LatLon l = tb.getCenterLatLon();
 		WptPt pt = new WptPt();
-		pt.setLat(l.getLatitude());
-		pt.setLon(l.getLongitude());
+		RotatedTileBox tb = view.getCurrentRotatedTileBox();
+
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null)
+		{
+			PointF pixel = new PointF(tb.getCenterPixelX(), tb.getCenterPixelY());
+			LatLon l = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, pixel);
+
+			pt.setLat(l.getLatitude());
+			pt.setLon(l.getLongitude());
+		}
+		else
+		{
+			LatLon l = tb.getCenterLatLon();
+			pt.setLat(l.getLatitude());
+			pt.setLon(l.getLongitude());
+		}
+
 		boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 		if (allowed) {
 			editingCtx.addPoint(pt, addPointBefore ? AdditionMode.ADD_BEFORE : AdditionMode.ADD_AFTER);
