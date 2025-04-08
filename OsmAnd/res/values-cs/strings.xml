@@ -5751,4 +5751,7 @@
     <string name="shared_string_edges">Okraje</string>
     <string name="labels_position">Umístění štítků</string>
     <string name="customize_grid_color">Nastavení barvy mřížky</string>
+    <string name="route_members">Členové</string>
+    <string name="multipoligon_related">Související</string>
+    <string name="route_part_of">Součást</string>
 </resources>
