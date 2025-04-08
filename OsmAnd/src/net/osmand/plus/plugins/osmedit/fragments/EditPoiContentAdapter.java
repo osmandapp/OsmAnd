@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment.OpenHoursItem;
@@ -66,7 +67,7 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 	private final EditPoiAdapterListener editPoiAdapterListener;
 
 
-	public EditPoiContentAdapter(@NonNull MapActivity mapActivity, @NonNull List<Object> items,
+	public EditPoiContentAdapter(@NonNull OsmandInAppPurchaseActivity mapActivity, @NonNull List<Object> items,
 	                             ArrayAdapter<String> valueAdapter, OsmTagsArrayAdapter tagAdapter,
 	                             OpeningHoursAdapter openingHoursAdapter, boolean nightMode, @NonNull EditPoiDialogFragment editPoiDialogFragment,
 	                             @NonNull EditPoiListener editPoiListener) {
