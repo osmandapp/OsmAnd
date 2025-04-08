@@ -297,7 +297,6 @@ public class MapLayers {
 		List<PoiUIFilter> list = new ArrayList<>();
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			if (!f.isTopWikiFilter()
-					&& !f.isRoutesFilter()
 					&& !f.isRouteArticleFilter()
 					&& !f.isRouteArticlePointFilter()
 					&& !f.isCustomPoiFilter()) {
@@ -367,7 +366,6 @@ public class MapLayers {
 		list.add(null);
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			if (!f.isTopWikiFilter()
-					&& !f.isRoutesFilter()
 					&& !f.isRouteArticleFilter()
 					&& !f.isRouteArticlePointFilter()
 					&& !f.isCustomPoiFilter()) {
