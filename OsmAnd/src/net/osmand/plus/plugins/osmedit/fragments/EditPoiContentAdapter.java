@@ -31,6 +31,7 @@ import net.osmand.plus.plugins.osmedit.fragments.holders.BasicInfoHolder;
 import net.osmand.plus.plugins.osmedit.fragments.holders.DescriptionItemHolder;
 import net.osmand.plus.plugins.osmedit.fragments.holders.OpenTimeListHolder;
 import net.osmand.plus.plugins.osmedit.fragments.holders.TagItemHolder;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -67,21 +68,21 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 	private final EditPoiAdapterListener editPoiAdapterListener;
 
 
-	public EditPoiContentAdapter(@NonNull OsmandInAppPurchaseActivity mapActivity, @NonNull List<Object> items,
+	public EditPoiContentAdapter(@NonNull Activity activity, @NonNull List<Object> items,
 	                             ArrayAdapter<String> valueAdapter, OsmTagsArrayAdapter tagAdapter,
 	                             OpeningHoursAdapter openingHoursAdapter, boolean nightMode, @NonNull EditPoiDialogFragment editPoiDialogFragment,
 	                             @NonNull EditPoiListener editPoiListener) {
 		setHasStableIds(true);
 		this.items.addAll(items);
 		this.nightMode = nightMode;
-		this.app = mapActivity.getMyApplication();
-		this.activity = mapActivity;
+		this.app = AndroidUtils.getApp(activity);
+		this.activity = activity;
 		this.valueAdapter = valueAdapter;
 		this.tagAdapter = tagAdapter;
 		this.openingHoursAdapter = openingHoursAdapter;
 		this.editPoiDialogFragment = editPoiDialogFragment;
 		this.editPoiListener = editPoiListener;
-		themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
+		themedInflater = UiUtilities.getInflater(activity, nightMode);
 		editPoiAdapterListener = getTagItemHolderListener();
 	}
 

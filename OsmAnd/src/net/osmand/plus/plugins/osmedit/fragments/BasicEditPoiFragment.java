@@ -111,7 +111,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 			}
 		};
 
-		contentAdapter = new EditPoiContentAdapter((OsmandInAppPurchaseActivity) requireActivity(), getContentList(),
+		contentAdapter = new EditPoiContentAdapter(requireActivity(), getContentList(),
 				null, null, openingHoursAdapter, nightMode, getEditPoiFragment(), editPoiListener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(contentAdapter);
