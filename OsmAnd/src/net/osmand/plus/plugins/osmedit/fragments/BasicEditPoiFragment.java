@@ -21,8 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
