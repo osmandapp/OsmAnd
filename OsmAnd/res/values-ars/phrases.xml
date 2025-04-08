@@ -591,7 +591,7 @@
     <string name="poi_hazard_additional_avalanche">الخطر: انهيار جليدي</string>
     <string name="poi_hazard_additional_flood">الخطر: فيضان</string>
     <string name="poi_hazard_additional_nuclear">الخطر: نووي</string>
-    <string name="poi_hazard_additional_rockfall">الخطر: سقوط الصخور</string>
+    <string name="poi_hazard_additional_falling_rocks">الخطر: سقوط الصخور</string>
     <string name="poi_hazard_additional_erosion">خطر: تآكل/تعرية</string>
     <string name="poi_rescue_box">صندوق الطوارئ</string>
     <string name="poi_change_delete">كائن محذوف</string>

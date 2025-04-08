@@ -3725,7 +3725,7 @@
     <string name="poi_hazard_additional_avalanche">Опасност: лавина</string>
     <string name="poi_hazard_additional_flood">Опасност: поплава</string>
     <string name="poi_hazard_additional_nuclear">Опасност: нуклеарна</string>
-    <string name="poi_hazard_additional_rockfall">Опасност: одрон стена</string>
+    <string name="poi_hazard_additional_falling_rocks">Опасност: одрон стена</string>
     <string name="poi_hazard_additional_erosion">Опасност: ерозија</string>
     <string name="poi_rescue_box">Спасилачка кутија</string>
     <string name="poi_change_delete">Избрисани објект</string>

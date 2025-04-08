@@ -3457,7 +3457,7 @@
     <string name="poi_hazard_additional_avalanche">Pericol: avalanșă</string>
     <string name="poi_hazard_additional_flood">Pericol: inundații</string>
     <string name="poi_hazard_additional_nuclear">Pericol: nuclear</string>
-    <string name="poi_hazard_additional_rockfall">Pericol: cădere de pietre</string>
+    <string name="poi_hazard_additional_falling_rocks">Pericol: cădere de pietre</string>
     <string name="poi_hazard_additional_erosion">Pericol: eroziune</string>
     <string name="poi_rescue_box">Cutie de salvare</string>
     <string name="poi_change_delete">Obiect șters</string>

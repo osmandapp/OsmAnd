@@ -3669,7 +3669,7 @@
     <string name="poi_hazard_additional_avalanche">Κίνδυνος: χιονοστιβάδα</string>
     <string name="poi_hazard_additional_flood">Κίνδυνος; πλημμύρα</string>
     <string name="poi_hazard_additional_nuclear">Κίνδυνος: πυρηνικά</string>
-    <string name="poi_hazard_additional_rockfall">Κίνδυνος: πτώση βράχων</string>
+    <string name="poi_hazard_additional_falling_rocks">Κίνδυνος: πτώση βράχων</string>
     <string name="poi_hazard_additional_erosion">Κίνδυνος: διάβρωση</string>
     <string name="poi_rescue_box">Κουτί διάσωσης</string>
     <string name="poi_change_delete">Διαγραμμένο αντικείμενο</string>

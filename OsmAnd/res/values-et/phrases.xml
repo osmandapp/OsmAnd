@@ -3568,7 +3568,7 @@
     <string name="poi_rescue_box">Päästekast</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">Oht: erosioon</string>
-    <string name="poi_hazard_additional_rockfall">Oht: langevad kivid</string>
+    <string name="poi_hazard_additional_falling_rocks">Oht: langevad kivid</string>
     <string name="poi_hazard_additional_nuclear">Oht: tuuma</string>
     <string name="poi_hazard_additional_flood">Oht: üleujutus</string>
     <string name="poi_hazard_additional_avalanche">Oht: laviin</string>

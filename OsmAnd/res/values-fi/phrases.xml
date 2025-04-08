@@ -1073,7 +1073,7 @@
     <string name="poi_hazard_flood">Tulvavaara</string>
     <string name="poi_hazard">Vaara</string>
     <string name="poi_hazard_additional_erosion">Vaara: eroosio</string>
-    <string name="poi_hazard_additional_rockfall">Vaara: kivivyöry</string>
+    <string name="poi_hazard_additional_falling_rocks">Vaara: kivivyöry</string>
     <string name="poi_hazard_additional_flood">Vaara: tulva</string>
     <string name="poi_hazard_additional_avalanche">Vaara: lumivyöry</string>
     <string name="poi_hazard_additional_minefield">Vaara: miinakenttä</string>

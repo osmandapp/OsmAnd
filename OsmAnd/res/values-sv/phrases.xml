@@ -3684,7 +3684,7 @@
     <string name="poi_hazard_additional_avalanche">Fara: lavin</string>
     <string name="poi_hazard_additional_flood">Fara: översvämmning</string>
     <string name="poi_hazard_additional_nuclear">Fara: nukleär</string>
-    <string name="poi_hazard_additional_rockfall">Fara: stenfall</string>
+    <string name="poi_hazard_additional_falling_rocks">Fara: stenfall</string>
     <string name="poi_hazard_additional_erosion">Fara: erosion</string>
     <string name="poi_rescue_box">Räddningslåda</string>
     <string name="poi_change_delete">Borttaget objekt</string>

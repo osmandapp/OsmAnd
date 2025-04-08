@@ -3554,7 +3554,7 @@
     <string name="poi_rescue_box">Skrzynka ratunkowa</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">Zagrożenie: erozja</string>
-    <string name="poi_hazard_additional_rockfall">Zagrożenie: spadające skały</string>
+    <string name="poi_hazard_additional_falling_rocks">Zagrożenie: spadające skały</string>
     <string name="poi_hazard_additional_nuclear">Zagrożenie: jądrowe</string>
     <string name="poi_hazard_additional_flood">Zagrożenie: powódź</string>
     <string name="poi_hazard_additional_avalanche">Zagrożenie: lawina</string>

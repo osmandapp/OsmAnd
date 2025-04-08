@@ -3553,7 +3553,7 @@
     <string name="poi_hazard">Danger</string>
     <string name="poi_flare">Torchère</string>
     <string name="poi_hazard_additional_erosion">Danger : érosion</string>
-    <string name="poi_hazard_additional_rockfall">Danger : chutes de rochers</string>
+    <string name="poi_hazard_additional_falling_rocks">Danger : chutes de rochers</string>
     <string name="poi_hazard_additional_nuclear">Danger : nucléaire</string>
     <string name="poi_hazard_additional_flood">Danger : inondations</string>
     <string name="poi_hazard_additional_avalanche">Danger : avalanches</string>

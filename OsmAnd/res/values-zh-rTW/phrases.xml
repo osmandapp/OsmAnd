@@ -3554,7 +3554,7 @@
     <string name="poi_climbing_crag">攀岩</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">危害：侵蝕</string>
-    <string name="poi_hazard_additional_rockfall">危害：落石</string>
+    <string name="poi_hazard_additional_falling_rocks">危害：落石</string>
     <string name="poi_hazard_additional_nuclear">危害：核能</string>
     <string name="poi_hazard_additional_flood">危害：洪水</string>
     <string name="poi_hazard_additional_avalanche">危害：雪崩</string>

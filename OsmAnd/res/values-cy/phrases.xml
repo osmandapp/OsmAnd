@@ -3747,7 +3747,7 @@
     <string name="poi_payment_contactless_no">Ddim yn derbyn digyswllt</string>
     <string name="poi_substation_converter">Trawsnewidydd</string>
     <string name="poi_substation_compensation">Iawndal</string>
-    <string name="poi_hazard_additional_rockfall">Perygl: cwymp cerrig</string>
+    <string name="poi_hazard_additional_falling_rocks">Perygl: cwymp cerrig</string>
     <string name="poi_bus_designated">Dynodedig;Dynodedig ar gyfer bysiau</string>
     <string name="poi_caravan_yes">Oes;Carafán</string>
     <string name="poi_cash_withdrawal_postfinance_card">Cerdyn post-gyllid</string>

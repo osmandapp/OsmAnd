@@ -448,7 +448,7 @@
     <string name="poi_hazard_additional_avalanche">Hazard: avalanche</string>
     <string name="poi_hazard_additional_flood">Peligru: inundación</string>
     <string name="poi_hazard_additional_nuclear">Peligru: nuclear</string>
-    <string name="poi_hazard_additional_rockfall">Peligru: argayu</string>
+    <string name="poi_hazard_additional_falling_rocks">Peligru: argayu</string>
     <string name="poi_hazard_additional_erosion">Peligru: erosión</string>
     <string name="poi_rescue_box">Rescue box</string>
     <string name="poi_change_delete">Deleted object</string>

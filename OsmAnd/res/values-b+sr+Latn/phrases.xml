@@ -3725,7 +3725,7 @@
     <string name="poi_hazard_additional_avalanche">Opasnost: lavina</string>
     <string name="poi_hazard_additional_flood">Opasnost: poplava</string>
     <string name="poi_hazard_additional_nuclear">Opasnost: nuklearna</string>
-    <string name="poi_hazard_additional_rockfall">Opasnost: odron stena</string>
+    <string name="poi_hazard_additional_falling_rocks">Opasnost: odron stena</string>
     <string name="poi_hazard_additional_erosion">Opasnost: erozija</string>
     <string name="poi_rescue_box">Ormarić za prvu pomoć</string>
     <string name="poi_change_delete">Izbrisani objekt</string>

@@ -3869,7 +3869,7 @@
     <string name="poi_hazard_additional_nuclear">Pericolo: nucleare</string>
     <string name="poi_hazard_additional_avalanche">Pericolo: valanga</string>
     <string name="poi_hazard_additional_erosion">Pericolo: erosione</string>
-    <string name="poi_hazard_additional_rockfall">Pericolo: caduta massi</string>
+    <string name="poi_hazard_additional_falling_rocks">Pericolo: caduta massi</string>
     <string name="poi_hazard_additional_flood">Pericolo: inondazione</string>
     <string name="poi_motor_vehicle_customers">Accesso veicoli a motore: clienti</string>
     <string name="poi_shop_security">Negozio di sicurezza</string>

@@ -3695,7 +3695,7 @@
     <string name="poi_motor_vehicle_military">Dostop z motornim vozilom: vojska</string>
     <string name="poi_motorcar_forestry">Dostop z avtomobilom: gozdarstvo</string>
     <string name="poi_memorial_stele">Stela</string>
-    <string name="poi_hazard_additional_rockfall">Nevarnost: padec kamenja</string>
+    <string name="poi_hazard_additional_falling_rocks">Nevarnost: padec kamenja</string>
     <string name="poi_hazard_additional_nuclear">Nevarnost: jedrska</string>
     <string name="poi_hgv_unsuitable">Dostop za težka tovorna vozila: neprimeren</string>
     <string name="poi_goods_no">Dostop za lahka tovorna vozila: ne</string>

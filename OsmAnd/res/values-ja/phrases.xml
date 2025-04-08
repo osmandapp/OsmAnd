@@ -3562,7 +3562,7 @@
     <string name="poi_bath_type">タイプ</string>
     <string name="poi_bath_open_air">露天</string>
     <string name="poi_hazard_additional_erosion">注意災害:浸食</string>
-    <string name="poi_hazard_additional_rockfall">注意災害:落石</string>
+    <string name="poi_hazard_additional_falling_rocks">注意災害:落石</string>
     <string name="poi_hazard_additional_nuclear">注意災害:核(放射線)</string>
     <string name="poi_hazard_additional_flood">注意災害:洪水</string>
     <string name="poi_hazard_additional_avalanche">注意災害:雪崩</string>

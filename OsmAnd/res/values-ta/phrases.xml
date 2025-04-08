@@ -3965,7 +3965,7 @@
     <string name="poi_change_delete">நீக்கப்பட்ட பொருள்</string>
     <string name="poi_rescue_box">மீட்பு பெட்டி</string>
     <string name="poi_hazard_additional_erosion">ஆபத்து: அரிப்பு</string>
-    <string name="poi_hazard_additional_rockfall">ஆபத்து: ராக்ஃபால்</string>
+    <string name="poi_hazard_additional_falling_rocks">ஆபத்து: ராக்ஃபால்</string>
     <string name="poi_hazard_additional_nuclear">ஆபத்து: அணு</string>
     <string name="poi_hazard_additional_avalanche">ஆபத்து: பனிச்சரிவு</string>
     <string name="poi_hazard_additional_minefield">ஆபத்து: கண்ணிவெடி</string>

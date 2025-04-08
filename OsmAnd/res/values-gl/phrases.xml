@@ -3554,7 +3554,7 @@
     <string name="reddit">Reddit</string>
     <string name="poi_rescue_box">Caixa de rescate</string>
     <string name="poi_hazard_additional_erosion">Perigo: erosión</string>
-    <string name="poi_hazard_additional_rockfall">Perigo: desprendemento de rochas</string>
+    <string name="poi_hazard_additional_falling_rocks">Perigo: desprendemento de rochas</string>
     <string name="poi_hazard_additional_nuclear">Perigo: nuclear</string>
     <string name="poi_hazard_additional_flood">Perigo: inundación</string>
     <string name="poi_hazard_additional_avalanche">Perigo: alude</string>

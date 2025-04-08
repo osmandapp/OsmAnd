@@ -3533,7 +3533,7 @@
     <string name="poi_rescue_box">Záchranný balíček</string>
     <string name="poi_climbing_crag">Lezecká stěna</string>
     <string name="poi_hazard_additional_erosion">Nebezpečí: eroze</string>
-    <string name="poi_hazard_additional_rockfall">Nebezpečí: padající kameny</string>
+    <string name="poi_hazard_additional_falling_rocks">Nebezpečí: padající kameny</string>
     <string name="poi_hazard_additional_nuclear">Nebezpečí: jaderné</string>
     <string name="poi_hazard_additional_flood">Nebezpečí: povodeň</string>
     <string name="poi_hazard_additional_avalanche">Nebezpečí: lavina</string>

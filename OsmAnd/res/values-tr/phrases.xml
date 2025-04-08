@@ -3293,7 +3293,7 @@
     <string name="poi_hazard_additional_flood">Tehlike: sel</string>
     <string name="poi_hazard_flood">Sel tehlikesi</string>
     <string name="poi_hazard_additional_nuclear">Tehlike: nükleer</string>
-    <string name="poi_hazard_additional_rockfall">Tehlike: kaya düşmesi</string>
+    <string name="poi_hazard_additional_falling_rocks">Tehlike: kaya düşmesi</string>
     <string name="poi_hazard_additional_erosion">Tehlike: erozyon</string>
     <string name="poi_hazard_minefield">Mayın tarlası</string>
     <string name="poi_hazard_slippery_road">Kaygan yol</string>

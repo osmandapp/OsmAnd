@@ -3554,7 +3554,7 @@
     <string name="poi_climbing_crag">Escalada en roca;Peñón de escalada</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">Peligro: erosión</string>
-    <string name="poi_hazard_additional_rockfall">Peligro: desprendimiento de rocas</string>
+    <string name="poi_hazard_additional_falling_rocks">Peligro: desprendimiento de rocas</string>
     <string name="poi_hazard_additional_nuclear">Peligro: nuclear</string>
     <string name="poi_hazard_additional_flood">Peligro: inundación</string>
     <string name="poi_hazard_additional_avalanche">Peligro: avalancha</string>
