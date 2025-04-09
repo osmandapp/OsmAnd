@@ -22,7 +22,7 @@ public class ArabicNormalizer {
         char first = text.charAt(0);
         if (Character.UnicodeBlock.of(first) == Character.UnicodeBlock.ARABIC) {
             for (char c : text.toCharArray()) {
-                if (isDiacritic(c) || isArabicDigit(c) || isKashida(c)) {
+                if (isDiacritic(c) || isArabicDigit(c) || isNeedReplace(c)) {
                     return true;
                 }
             }
@@ -67,14 +67,23 @@ public class ArabicNormalizer {
     }
 
     private static boolean isDiacritic(char c) {
-        return c >= '\u064B' && c <= '\u0652';  // Diacritic range
+        return (c >= '\u064B' && c <= '\u065F') || 
+                (c >= '\u0610' && c <= '\u061A') ||
+                (c >= '\u06D6' && c <= '\u06ED') ||
+                c == '\u0640' || c == '\u0670';
+    }
+
+    private static boolean isNeedReplace(char c) {
+        String charAsString = String.valueOf(c);
+        for (int i = 0; i < DIACRITIC_REPLACE.length; i += 2) {
+            if (DIACRITIC_REPLACE[i].equals(charAsString)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean isArabicDigit(char c) {
         return c >= '\u0660' && c <= '\u0669';  // Arabic-Indic digits ٠-٩
-    }
-
-    private static boolean isKashida(char c) {
-        return c == '\u0640';  // Kashida character
     }
 }
