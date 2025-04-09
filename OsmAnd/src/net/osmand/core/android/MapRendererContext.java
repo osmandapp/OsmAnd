@@ -205,18 +205,23 @@ public class MapRendererContext {
 		if (rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
 			rendName = "default";
 		}
-		if (!mapStyles.containsKey(rendName)) {
-			Log.d(TAG, "Style '" + rendName + "' not in cache");
-			if (mapStylesCollection.getStyleByName(rendName) == null || IGNORE_CORE_PRELOADED_STYLES) {
-				Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
-				loadRenderer(rendName);
-			}
-			ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
-			if (mapStyle != null) {
-				mapStyles.put(rendName, mapStyle);
+		while (true) {
+			if (mapStyles.containsKey(rendName)) {
+				break;
 			} else {
-				Log.d(TAG, "Failed to resolve '" + rendName + "', will use 'default'");
-				rendName = "default";
+				Log.d(TAG, "Style '" + rendName + "' not in cache");
+				if (mapStylesCollection.getStyleByName(rendName) == null || IGNORE_CORE_PRELOADED_STYLES) {
+					Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
+					loadRenderer(rendName);
+				}
+				ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
+				if (mapStyle != null) {
+					mapStyles.put(rendName, mapStyle);
+					break;
+				} else {
+					Log.d(TAG, "Failed to resolve '" + rendName + "', will use 'default'");
+					rendName = "default";
+				}
 			}
 		}
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
