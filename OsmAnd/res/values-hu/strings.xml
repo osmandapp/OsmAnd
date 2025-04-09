@@ -5708,4 +5708,7 @@
     <string name="shared_string_edges">Élek</string>
     <string name="labels_position">Címkék pozíciója</string>
     <string name="customize_grid_color">Rács szín testreszabása</string>
+    <string name="route_members">Tagok</string>
+    <string name="route_part_of">Része ennek:</string>
+    <string name="multipoligon_related">Összefüggő</string>
 </resources>
