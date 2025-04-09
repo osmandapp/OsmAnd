@@ -2596,15 +2596,15 @@
 	<string name="poi_material_marble">Material: marble</string>
 	<string name="poi_material_aluminium">Material: aluminium</string>
 
-	<string name="poi_site_type_megalith">Megalith</string>
-	<string name="poi_site_type_tumulus">Tumulus</string>
-	<string name="poi_site_type_fortification">Fortification</string>
-	<string name="poi_site_type_settlement">Settlement</string>
-	<string name="poi_site_type_city">City</string>
-	<string name="poi_site_type_hut_circle">Hut circle</string>
-	<string name="poi_site_type_necropolis">Necropolis</string>
-	<string name="poi_site_type_petroglyph">Petroglyph</string>
-	<string name="poi_site_type_earthwork">Earthwork</string>
+	<string name="poi_archaeological_site_megalith">Megalith</string>
+	<string name="poi_archaeological_site_tumulus">Tumulus</string>
+	<string name="poi_archaeological_site_fortification">Fortification</string>
+	<string name="poi_archaeological_site_settlement">Settlement</string>
+	<string name="poi_archaeological_site_city">City</string>
+	<string name="poi_archaeological_site_hut_circle">Hut circle</string>
+	<string name="poi_archaeological_site_necropolis">Necropolis</string>
+	<string name="poi_archaeological_site_petroglyph">Petroglyph</string>
+	<string name="poi_archaeological_site_earthwork">Earthwork</string>
 	<string name="poi_megalith_type_menhir">Megalith type: menhir</string>
 	<string name="poi_megalith_type_dolmen">Megalith type: dolmen</string>
 	<string name="poi_megalith_type_nuraghe">Megalith type: nuraghe</string>
@@ -4113,7 +4113,7 @@
 	<string name="poi_rescue_box">Rescue box</string>
 
 	<string name="poi_hazard_additional_erosion">Hazard: erosion</string>
-	<string name="poi_hazard_additional_rockfall">Hazard: rockfall</string>
+	<string name="poi_hazard_additional_falling_rocks">Hazard: rockfall</string>
 	<string name="poi_hazard_additional_nuclear">Hazard: nuclear</string>
 	<string name="poi_hazard_additional_flood">Hazard: flood</string>
 	<string name="poi_hazard_additional_avalanche">Hazard: avalanche</string>
@@ -5582,6 +5582,17 @@
 	<string name="poi_evangelical_church">Evangelical church</string>
 	<string name="poi_presbyterian_church">Presbyterian church</string>
 	<string name="poi_access_main_tag">Access</string>
+
+	<string name="poi_aerodrome_type_airfield">Airfield</string>
+
+	<string name="poi_consulate">Consulate</string>
+
+	<string name="poi_hazard_additional_landslide">Hazard: landslide</string>
+	<string name="poi_hazard_additional_yes">Hazard</string>
+	<string name="poi_hazard_falling_rocks">Falling rocks</string>
+	<string name="poi_hazard_contamination">Contamination</string>
+	<string name="poi_hazard_yes">Hazard</string>
+	<string name="poi_hazard_additional_slippery_road">Slippery road</string>
 
 
 </resources>

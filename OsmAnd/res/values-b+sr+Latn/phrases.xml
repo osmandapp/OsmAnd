@@ -307,7 +307,7 @@
     <string name="poi_shower_cold">Tuš: hladan</string>
     <string name="poi_shower_indoor">Tuš: unutra</string>
     <string name="poi_power_supply_yes">Da;Napajanje</string>
-    <string name="poi_site_type_necropolis">Nekropola</string>
+    <string name="poi_archaeological_site_necropolis">Nekropola</string>
     <string name="poi_generator_output_electricity">Izlazna snaga</string>
     <string name="poi_generator_output_hot_water">Izlazna snaga tople vode</string>
     <string name="poi_generator_output_compressed_air">Izlazna snaga komprinovanog vazduha</string>
@@ -2334,14 +2334,14 @@
     <string name="poi_material_limestone">Materijal: krečnjak</string>
     <string name="poi_material_marble">Materijal: mermer</string>
     <string name="poi_material_aluminium">Materijal: aluminijum</string>
-    <string name="poi_site_type_megalith">Megalit</string>
-    <string name="poi_site_type_tumulus">Humka</string>
-    <string name="poi_site_type_fortification">Utvrđenje</string>
-    <string name="poi_site_type_settlement">Naselje</string>
-    <string name="poi_site_type_city">Grad</string>
-    <string name="poi_site_type_hut_circle">Krug kućišta</string>
-    <string name="poi_site_type_petroglyph">Petroglif</string>
-    <string name="poi_site_type_earthwork">Zemljana barijera</string>
+    <string name="poi_archaeological_site_megalith">Megalit</string>
+    <string name="poi_archaeological_site_tumulus">Humka</string>
+    <string name="poi_archaeological_site_fortification">Utvrđenje</string>
+    <string name="poi_archaeological_site_settlement">Naselje</string>
+    <string name="poi_archaeological_site_city">Grad</string>
+    <string name="poi_archaeological_site_hut_circle">Krug kolibe</string>
+    <string name="poi_archaeological_site_petroglyph">Petroglif</string>
+    <string name="poi_archaeological_site_earthwork">Zemljana barijera</string>
     <string name="poi_aerodrome_type_military">Vojni aerodrom</string>
     <string name="poi_aerodrome_type_military_public">Vojni/civilni</string>
     <string name="poi_fitness_station">Fitnes stanica na otvorenom</string>
@@ -3725,7 +3725,7 @@
     <string name="poi_hazard_additional_avalanche">Opasnost: lavina</string>
     <string name="poi_hazard_additional_flood">Opasnost: poplava</string>
     <string name="poi_hazard_additional_nuclear">Opasnost: nuklearna</string>
-    <string name="poi_hazard_additional_rockfall">Opasnost: odron stena</string>
+    <string name="poi_hazard_additional_falling_rocks">Opasnost: odron stena</string>
     <string name="poi_hazard_additional_erosion">Opasnost: erozija</string>
     <string name="poi_rescue_box">Ormarić za prvu pomoć</string>
     <string name="poi_change_delete">Izbrisani objekt</string>
@@ -3816,7 +3816,7 @@
     <string name="poi_liaison_liaison_office">Kancelarija</string>
     <string name="poi_consulate_honorary_consul">Počasni konzulat</string>
     <string name="poi_consulate_consulate_general">Generalni konzulat</string>
-    <string name="poi_consulate_consular_office">Konzulat</string>
+    <string name="poi_consulate_consular_office">Konzularna kancelarija</string>
     <string name="poi_consulate_consular_agency">Konzularna agencija</string>
     <string name="poi_consulate_yes">Na čelu sa konzulom</string>
     <string name="poi_embassy_residence">Rezidencija</string>
@@ -5009,4 +5009,6 @@
     <string name="poi_presbyterian_church">Prezbiterijanska crkva</string>
     <string name="poi_protestant_church">Protestantska crkva</string>
     <string name="poi_evangelical_church">Evangelistička crkva</string>
+    <string name="poi_aerodrome_type_airfield">Pista</string>
+    <string name="poi_consulate">Konzulat</string>
 </resources>

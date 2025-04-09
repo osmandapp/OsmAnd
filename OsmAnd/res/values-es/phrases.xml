@@ -2125,15 +2125,15 @@
     <string name="poi_material_limestone">Material: piedra caliza</string>
     <string name="poi_material_marble">Material: mármol</string>
     <string name="poi_material_aluminium">Material: aluminio</string>
-    <string name="poi_site_type_megalith">Megalito</string>
-    <string name="poi_site_type_tumulus">Túmulo</string>
-    <string name="poi_site_type_fortification">Fortificación</string>
-    <string name="poi_site_type_settlement">Asentamiento</string>
-    <string name="poi_site_type_city">Ciudad</string>
-    <string name="poi_site_type_hut_circle">Círculo de choza</string>
-    <string name="poi_site_type_necropolis">Necrópolis</string>
-    <string name="poi_site_type_petroglyph">Petroglifo</string>
-    <string name="poi_site_type_earthwork">Obras de tierra</string>
+    <string name="poi_archaeological_site_megalith">Megalito</string>
+    <string name="poi_archaeological_site_tumulus">Túmulo</string>
+    <string name="poi_archaeological_site_fortification">Fortificación</string>
+    <string name="poi_archaeological_site_settlement">Asentamiento</string>
+    <string name="poi_archaeological_site_city">Ciudad</string>
+    <string name="poi_archaeological_site_hut_circle">Círculo de choza</string>
+    <string name="poi_archaeological_site_necropolis">Necrópolis</string>
+    <string name="poi_archaeological_site_petroglyph">Petroglifo</string>
+    <string name="poi_archaeological_site_earthwork">Obras de tierra</string>
     <string name="poi_megalith_type_menhir">Tipo de megalito: menhir</string>
     <string name="poi_megalith_type_dolmen">Tipo de megalito: dolmen</string>
     <string name="poi_megalith_type_nuraghe">Tipo de megalito: nuraga</string>
@@ -3554,7 +3554,7 @@
     <string name="poi_climbing_crag">Escalada en roca;Peñón de escalada</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">Peligro: erosión</string>
-    <string name="poi_hazard_additional_rockfall">Peligro: desprendimiento de rocas</string>
+    <string name="poi_hazard_additional_falling_rocks">Peligro: desprendimiento de rocas</string>
     <string name="poi_hazard_additional_nuclear">Peligro: nuclear</string>
     <string name="poi_hazard_additional_flood">Peligro: inundación</string>
     <string name="poi_hazard_additional_avalanche">Peligro: avalancha</string>
@@ -4909,4 +4909,8 @@
     <string name="poi_route_activity_type_car">Coche</string>
     <string name="poi_route_activity_type_truck_hgv">Camión (vehículo pesado)</string>
     <string name="poi_contact_website">Sitio web</string>
+    <string name="poi_osmwiki">Lugares populares (Wikipedia)</string>
+    <string name="poi_network_foot">Red de rutas (senderismo)</string>
+    <string name="poi_network_cycling">Red de rutas (ciclismo)</string>
+    <string name="poi_cafe_filter">Cafetería</string>
 </resources>

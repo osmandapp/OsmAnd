@@ -2089,11 +2089,11 @@
     <string name="poi_material_limestone">原材料：石灰石</string>
     <string name="poi_material_marble">原材料：大理石</string>
     <string name="poi_material_aluminium">原材料：鋁</string>
-    <string name="poi_site_type_megalith">類型：巨石</string>
-    <string name="poi_site_type_tumulus">類型：古墳</string>
-    <string name="poi_site_type_fortification">類型：防禦</string>
-    <string name="poi_site_type_settlement">類型：居地</string>
-    <string name="poi_site_type_city">類型：城市</string>
+    <string name="poi_archaeological_site_megalith">類型：巨石</string>
+    <string name="poi_archaeological_site_tumulus">類型：古墳</string>
+    <string name="poi_archaeological_site_fortification">類型：防禦</string>
+    <string name="poi_archaeological_site_settlement">類型：居地</string>
+    <string name="poi_archaeological_site_city">類型：城市</string>
     <string name="poi_wiki_lang_af">南非文維基</string>
     <string name="poi_wiki_lang_als">阿爾薩斯文維基</string>
     <string name="poi_wiki_lang_az">亞塞拜然文維基</string>
@@ -2324,10 +2324,10 @@
     <string name="poi_historic_period_classical">歷史時期：古典（新時代 IV，西元 374 年 - 西元 900 年）</string>
     <string name="poi_historic_period_imperial">歷史時期︰帝國 (新時代 V，西元 900 年 — 西元 1200 年)</string>
     <string name="poi_historic_era_paleolithic">歷史時期：舊石器時代（260 萬年前 - 100 萬年前）</string>
-    <string name="poi_site_type_hut_circle">環狀石塊</string>
-    <string name="poi_site_type_necropolis">大型墓地</string>
-    <string name="poi_site_type_petroglyph">岩石畫</string>
-    <string name="poi_site_type_earthwork">土木工程</string>
+    <string name="poi_archaeological_site_hut_circle">環狀石塊</string>
+    <string name="poi_archaeological_site_necropolis">大型墓地</string>
+    <string name="poi_archaeological_site_petroglyph">岩石畫</string>
+    <string name="poi_archaeological_site_earthwork">土木工程</string>
     <string name="poi_fortification_type_hill_fort">防禦類型︰土堡</string>
     <string name="poi_fortification_type_limes">防禦類型︰邊防線</string>
     <string name="poi_fortification_type_sconce">防禦類型︰掩蔽物</string>
@@ -3554,7 +3554,7 @@
     <string name="poi_climbing_crag">攀岩</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">危害：侵蝕</string>
-    <string name="poi_hazard_additional_rockfall">危害：落石</string>
+    <string name="poi_hazard_additional_falling_rocks">危害：落石</string>
     <string name="poi_hazard_additional_nuclear">危害：核能</string>
     <string name="poi_hazard_additional_flood">危害：洪水</string>
     <string name="poi_hazard_additional_avalanche">危害：雪崩</string>
@@ -5009,4 +5009,6 @@
     <string name="poi_presbyterian_church">長老教會</string>
     <string name="poi_access_main_tag">使用權</string>
     <string name="poi_pentecostal_church">五旬節教堂</string>
+    <string name="poi_aerodrome_type_airfield">飛行場</string>
+    <string name="poi_consulate">領事館</string>
 </resources>

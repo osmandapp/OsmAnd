@@ -1317,7 +1317,7 @@
     <string name="poi_material_plastic">المادة: البلاستيك</string>
     <string name="poi_material_glass">المادة: زجاج</string>
     <string name="poi_material_aluminium">المواد : الألومنيوم</string>
-    <string name="poi_site_type_city">المدينة</string>
+    <string name="poi_archaeological_site_city">المدينة</string>
     <string name="poi_historic_farm">مزرعة تاريخية</string>
     <string name="poi_historic_railway_station">محطة سكة حديد تاريخية</string>
     <string name="poi_artist_name">فنان</string>
@@ -2494,13 +2494,13 @@
     <string name="poi_fortification_type_sconce">حصن وقائي صغير</string>
     <string name="poi_fortification_type_limes">نوع التحصين: الجير</string>
     <string name="poi_fortification_type_hill_fort">حصن التلال</string>
-    <string name="poi_site_type_petroglyph">بتروجليف</string>
-    <string name="poi_site_type_necropolis">مقبرة كبيرة قديمة</string>
-    <string name="poi_site_type_hut_circle">دائرة الكوخ</string>
-    <string name="poi_site_type_settlement">مستوطنة/هجرة</string>
-    <string name="poi_site_type_fortification">حصن</string>
-    <string name="poi_site_type_tumulus">تومولوس</string>
-    <string name="poi_site_type_megalith">المغليث حجر ضخم</string>
+    <string name="poi_archaeological_site_petroglyph">بتروجليف</string>
+    <string name="poi_archaeological_site_necropolis">مقبرة كبيرة قديمة</string>
+    <string name="poi_archaeological_site_hut_circle">دائرة الكوخ</string>
+    <string name="poi_archaeological_site_settlement">مستوطنة/هجرة</string>
+    <string name="poi_archaeological_site_fortification">حصن</string>
+    <string name="poi_archaeological_site_tumulus">تومولوس</string>
+    <string name="poi_archaeological_site_megalith">المغليث حجر ضخم</string>
     <string name="poi_material_marble">المواد: الرخام</string>
     <string name="poi_material_limestone">المواد: الحجر الجيري</string>
     <string name="poi_material_composite">المواد: مركب</string>
@@ -3096,7 +3096,7 @@
     <string name="poi_hazard_additional_avalanche">الخطر: انهيار جليدي</string>
     <string name="poi_hazard_additional_flood">الخطر: فيضان</string>
     <string name="poi_hazard_additional_nuclear">الخطر: نووي</string>
-    <string name="poi_hazard_additional_rockfall">الخطر: سقوط الصخور</string>
+    <string name="poi_hazard_additional_falling_rocks">الخطر: سقوط الصخور</string>
     <string name="poi_hazard_additional_erosion">خطر: تآكل/تعرية</string>
     <string name="poi_rescue_box">صندوق الطوارئ</string>
     <string name="poi_change_delete">كائن محذوف</string>
@@ -3970,7 +3970,7 @@
     <string name="poi_speedway">مضمار</string>
     <string name="poi_hoops">الأطواق</string>
     <string name="poi_liaison_subnational">دون وطني</string>
-    <string name="poi_site_type_earthwork">أعمال الحفر</string>
+    <string name="poi_archaeological_site_earthwork">أعمال الحفر</string>
     <string name="poi_memorial_cross">شكل-صليب</string>
     <string name="poi_operator_type_cooperative">نوع المشغل: تعاوني</string>
     <string name="poi_operator_type_community">نوع المشغل: المجتمع</string>

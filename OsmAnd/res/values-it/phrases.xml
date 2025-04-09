@@ -1709,9 +1709,9 @@
     <string name="poi_material_earth">Materiale: terra</string>
     <string name="poi_material_marble">Materiale: marmo</string>
     <string name="poi_material_aluminium">Materiale: alluminio</string>
-    <string name="poi_site_type_fortification">Fortificazione</string>
-    <string name="poi_site_type_settlement">Insediamento</string>
-    <string name="poi_site_type_city">Città</string>
+    <string name="poi_archaeological_site_fortification">Fortificazione</string>
+    <string name="poi_archaeological_site_settlement">Insediamento</string>
+    <string name="poi_archaeological_site_city">Città</string>
     <string name="poi_historic_railway_station">Stazione ferroviaria storica</string>
     <string name="poi_historic_gallows">Patibolo storico</string>
     <string name="poi_historic_railway">Ferrovia storica</string>
@@ -2515,8 +2515,8 @@
     <string name="poi_material_concrete">Materiale: calcestruzzo</string>
     <string name="poi_material_composite">Materiale: composito</string>
     <string name="poi_material_limestone">Materiale: calcare</string>
-    <string name="poi_site_type_megalith">Magalito</string>
-    <string name="poi_site_type_necropolis">Necropoli</string>
+    <string name="poi_archaeological_site_megalith">Magalito</string>
+    <string name="poi_archaeological_site_necropolis">Necropoli</string>
     <string name="poi_cargo_passengers">Passeggeri</string>
     <string name="poi_cargo_hgv">Mezzi pesanti</string>
     <string name="poi_healthcare_speciality_gynaecology">Ginecologia</string>
@@ -3409,13 +3409,13 @@
     <string name="poi_socket_type2_cable_voltage_filter">Tensione connettore cavo tipo 2</string>
     <string name="poi_socket_type3a_voltage_filter">Tensione connettore tipo 3a</string>
     <string name="poi_socket_type3c_output_filter">Uscita connettore tipo 3c</string>
-    <string name="poi_site_type_hut_circle">Cerchio di capanne</string>
+    <string name="poi_archaeological_site_hut_circle">Cerchio di capanne</string>
     <string name="poi_healthcare_speciality_physiatry">Medicina fisica e riabilitazione</string>
     <string name="poi_healthcare_speciality_general">Medico di base</string>
     <string name="poi_bathing_no">Bagno: no</string>
     <string name="poi_cairn">Tumulo</string>
     <string name="poi_megalith_type_nuraghe">Tipo di megalite: nuraghe</string>
-    <string name="poi_site_type_earthwork">Terrapieno</string>
+    <string name="poi_archaeological_site_earthwork">Terrapieno</string>
     <string name="poi_historic_era_neolithic">Epoca storica: neolitico</string>
     <string name="poi_historic_period_classical">Periodo storico: classico (epoca IV, 374 d.C. - 900 d.C.)</string>
     <string name="poi_historic_period_old_kingdom">Periodo storico: antico regno (2686 - 2181 a.C.)</string>
@@ -3462,7 +3462,7 @@
     <string name="poi_stone_type_coat_of_arms">Tipo: stemma</string>
     <string name="poi_material_masonry">Materiale: muratura</string>
     <string name="poi_material_sandstone">Materiale: arenaria</string>
-    <string name="poi_site_type_tumulus">Tumulo</string>
+    <string name="poi_archaeological_site_tumulus">Tumulo</string>
     <string name="poi_megalith_type_menhir">Tipo di megalito: menhir</string>
     <string name="poi_megalith_type_dolmen">Tipo di megalite: dolmen</string>
     <string name="poi_megalith_type_stone_circle">Tipo di megalite: cerchio di pietre</string>
@@ -3502,7 +3502,7 @@
     <string name="poi_historic_period_roman_kingdom">Periodo storico: Regno romano (753 a.C. - 509 a.C.)</string>
     <string name="poi_historic_period_dominate">Periodo storico: dominato (285 d.C. – 476 d.C.)</string>
     <string name="poi_historic_period_urban">Periodo storico: urbano (epoca III, 133 d.C. - 374 d.C.)</string>
-    <string name="poi_site_type_petroglyph">Petroglifo</string>
+    <string name="poi_archaeological_site_petroglyph">Petroglifo</string>
     <string name="poi_historic_farm">Fattoria storica</string>
     <string name="poi_megalith_type_passage_grave">Tipo megalite: tomba di passaggio</string>
     <string name="poi_labor_camp">Tipo: campo di lavoro</string>
@@ -3869,7 +3869,7 @@
     <string name="poi_hazard_additional_nuclear">Pericolo: nucleare</string>
     <string name="poi_hazard_additional_avalanche">Pericolo: valanga</string>
     <string name="poi_hazard_additional_erosion">Pericolo: erosione</string>
-    <string name="poi_hazard_additional_rockfall">Pericolo: caduta massi</string>
+    <string name="poi_hazard_additional_falling_rocks">Pericolo: caduta massi</string>
     <string name="poi_hazard_additional_flood">Pericolo: inondazione</string>
     <string name="poi_motor_vehicle_customers">Accesso veicoli a motore: clienti</string>
     <string name="poi_shop_security">Negozio di sicurezza</string>
