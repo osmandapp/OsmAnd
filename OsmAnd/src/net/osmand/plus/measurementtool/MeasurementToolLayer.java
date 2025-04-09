@@ -406,7 +406,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
-		if (inMeasurementMode && editingCtx.getSelectedPointPosition() == -1) {
+		if (isInMeasurementMode() && editingCtx.getSelectedPointPosition() == -1) {
 			drawCenterIcon(canvas, tb, settings.isNightMode());
 		}
 
@@ -658,7 +658,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
 			points.addAll(editingCtx.getAfterPoints());
 			showPointsZoomCache = zoom;
-			boolean showPointsMinZoom = points.size() > 0 && calcZoomToShowPoints(tileBox, points, showPointsZoomCache);
+			boolean showPointsMinZoom = points.size() > 1 && calcZoomToShowPoints(tileBox, points, showPointsZoomCache);
 			if (mapRenderer != null) {
 				if ((showPointsMinZoom && !this.showPointsMinZoom) || oldMovedPointRedraw) {
 					clearPointsProvider();
