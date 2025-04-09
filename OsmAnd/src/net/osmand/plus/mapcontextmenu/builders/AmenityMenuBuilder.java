@@ -201,7 +201,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	private void buildNamesRow(ViewGroup view) {
 		HashMap<String, String> names = new HashMap<>();
-		if(amenity.getName() != null) {
+		if(!Algorithms.isEmpty(amenity.getName())) {
 			names.put("", amenity.getName());
 		}
 		names.putAll(amenity.getNamesMap(true));
