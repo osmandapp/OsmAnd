@@ -5,6 +5,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -219,7 +220,9 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 
 		updateNightMode();
 		view = themedInflater.inflate(R.layout.widget_settings_info_fragment, container, false);
-		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		if (Build.VERSION.SDK_INT < 30) {
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		}
 		promoBannerContainer = view.findViewById(R.id.promo_banner_container);
 		promoBanner = view.findViewById(R.id.promo_banner);
 
