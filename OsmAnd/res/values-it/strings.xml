@@ -5771,4 +5771,7 @@
     <string name="labels_position">Posizione delle etichette</string>
     <string name="routing_attr_allow_ferries_description">Routing tramite le rotte di traghetto consentito</string>
     <string name="customize_grid_color">Personalizza il colore della griglia</string>
+    <string name="route_part_of">Parte di</string>
+    <string name="route_members">Membri</string>
+    <string name="multipoligon_related">Collegato</string>
 </resources>
