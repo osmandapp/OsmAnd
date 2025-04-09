@@ -4,13 +4,13 @@ public class ArabicNormalizer {
 
     private static final String[] DIACRITIC_REGEX = {"[\\u064B-\\u065F]", "[\\u0610-\\u061A]", "[\\u06D6-\\u06ED]", "\\u0640", "\\u0670"};
     private static final String[] DIACRITIC_REPLACE = {
-            "\\u0624", "\\u0648", // Replace Waw Hamza Above by Waw
-            "\\u0629", "\\u0647", // Replace Ta Marbuta by Ha
-            "\\u064A", "\\u0649", // Replace Ya by Alif Maksura
-            "\\u0626", "\\u0649", // Replace Ya Hamza Above by Alif Maksura
-            "\\u0622", "\\u0627", // Replace Alifs with Hamza Above
-            "\\u0623", "\\u0627", // Replace Alifs with Hamza Below
-            "\\u0625", "\\u0627"  // Replace with Madda Above by Alif
+            "\u0624", "\u0648", // Replace Waw Hamza Above by Waw
+            "\u0629", "\u0647", // Replace Ta Marbuta by Ha
+            "\u064A", "\u0649", // Replace Ya by Alif Maksura
+            "\u0626", "\u0649", // Replace Ya Hamza Above by Alif Maksura
+            "\u0622", "\u0627", // Replace Alifs with Hamza Above
+            "\u0623", "\u0627", // Replace Alifs with Hamza Below
+            "\u0625", "\u0627"  // Replace with Madda Above by Alif
     };
     private static final String ARABIC_DIGITS = "٠١٢٣٤٥٦٧٨٩";
     private static final String DIGITS_REPLACEMENT = "0123456789";
@@ -39,7 +39,7 @@ public class ArabicNormalizer {
             result = result.replaceAll(DIACRITIC_REGEX[i], "");
         }
         for (int i = 0; i < DIACRITIC_REPLACE.length; i = i + 2) {
-            result = result.replaceAll(DIACRITIC_REPLACE[i], DIACRITIC_REPLACE[i + 1]);
+            result = result.replace(DIACRITIC_REPLACE[i], DIACRITIC_REPLACE[i + 1]);
         }
         return replaceDigits(result);
     }
