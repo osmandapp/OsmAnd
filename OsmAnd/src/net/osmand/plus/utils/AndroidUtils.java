@@ -1290,7 +1290,7 @@ public class AndroidUtils {
 			Field field = R.string.class.getField(property);
 			return getStringForField(ctx, field);
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			LOG.warn("String not found: " + e.getMessage());
 		}
 		return null;
 	}

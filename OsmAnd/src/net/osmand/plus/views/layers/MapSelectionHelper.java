@@ -279,12 +279,15 @@ public class MapSelectionHelper {
 					addClickableWay(result, clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
 				}
 
-				if (!isClickableWay && !isOsmRoute && !isTravelGpx) {
+				boolean allowAmenityObjects = !isTravelGpx;
+
+				if (allowAmenityObjects) {
 					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
 					if (!amenityAdded) {
 						result.selectedObjects.put(renderedObject, null);
 					}
 				}
+
 				if (objectId != null) {
 					uniqueRenderedObjectIds.add(objectId);
 				}
@@ -372,7 +375,11 @@ public class MapSelectionHelper {
 							} else if (isClickableWay) {
 								addClickableWay(result,
 										clickableWayHelper.loadClickableWay(result.pointLatLon, obfMapObject, tags));
-							} else {
+							}
+
+							boolean allowAmenityObjects = !isTravelGpx;
+
+							if (allowAmenityObjects) {
 								IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 								if (onPathMapSymbol == null) {
 									LatLon latLon = result.objectLatLon;
@@ -381,10 +388,13 @@ public class MapSelectionHelper {
 										latLon = l == null ? latLon : l;
 										tags.remove(TAG_POI_LAT_LON);
 									}
+
+									boolean allowRenderedObjects = !isOsmRoute && !isClickableWay;
 									amenity = getAmenity(latLon, obfMapObject, tags);
+
 									if (amenity != null) {
 										amenity.setMapIconName(getMapIconName(symbolInfo));
-									} else if (!isOsmRoute && !isTravelGpx && !isClickableWay) {
+									} else if (allowRenderedObjects) {
 										addRenderedObject(result, symbolInfo, obfMapObject, tags);
 									}
 								}
