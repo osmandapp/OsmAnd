@@ -5783,4 +5783,7 @@
     <string name="shared_string_edges">Kanter</string>
     <string name="labels_position">Etiketters position</string>
     <string name="customize_grid_color">Tilpas farve på net</string>
+    <string name="route_members">Medlemmer</string>
+    <string name="multipoligon_related">Beslægtet</string>
+    <string name="route_part_of">Del af</string>
 </resources>

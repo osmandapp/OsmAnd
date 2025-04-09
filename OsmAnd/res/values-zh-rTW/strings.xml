@@ -5738,4 +5738,7 @@
     <string name="labels_position">標籤位置</string>
     <string name="customize_grid_color">自訂網格色彩</string>
     <string name="shared_string_edges">邊緣</string>
+    <string name="route_members">成員</string>
+    <string name="multipoligon_related">相關</string>
+    <string name="route_part_of">所屬實體</string>
 </resources>

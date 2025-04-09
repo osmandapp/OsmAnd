@@ -3567,13 +3567,13 @@
     <string name="poi_healthcare_speciality_radiotherapy">Kiiritusravi</string>
     <string name="poi_rescue_box">Päästekast</string>
     <string name="reddit">Reddit</string>
-    <string name="poi_hazard_additional_erosion">Oht: erosioon</string>
-    <string name="poi_hazard_additional_falling_rocks">Oht: langevad kivid</string>
-    <string name="poi_hazard_additional_nuclear">Oht: tuuma</string>
-    <string name="poi_hazard_additional_flood">Oht: üleujutus</string>
-    <string name="poi_hazard_additional_avalanche">Oht: laviin</string>
-    <string name="poi_hazard_additional_minefield">Oht: miiniväli</string>
-    <string name="poi_hazard_additional_contamination">Oht: saastumine</string>
+    <string name="poi_hazard_additional_erosion">Ohutegur: erosioon</string>
+    <string name="poi_hazard_additional_falling_rocks">Ohutegur: langevad kivid</string>
+    <string name="poi_hazard_additional_nuclear">Ohutegur: tuuma</string>
+    <string name="poi_hazard_additional_flood">Ohutegur: üleujutus</string>
+    <string name="poi_hazard_additional_avalanche">Ohutegur: laviin</string>
+    <string name="poi_hazard_additional_minefield">Ohutegur: miiniväli</string>
+    <string name="poi_hazard_additional_contamination">Ohutegur: saastumine</string>
     <string name="poi_defibrillator_location">Asukoht</string>
     <string name="poi_changing_table_yes">Jah;Mähkimislaud: jah</string>
     <string name="poi_changing_table_no">Ei;Mähkimislaud: ei</string>
@@ -5026,4 +5026,10 @@
     <string name="poi_osmwiki">Populaarsed paigad (Vikipeedia)</string>
     <string name="poi_consulate">Konsulaat</string>
     <string name="poi_aerodrome_type_airfield">Lennuväli</string>
+    <string name="poi_hazard_additional_landslide">Ohutegur: maalihe</string>
+    <string name="poi_hazard_additional_yes">Oht</string>
+    <string name="poi_hazard_falling_rocks">Langevad kivid</string>
+    <string name="poi_hazard_contamination">Saastumine</string>
+    <string name="poi_hazard_yes">Oht</string>
+    <string name="poi_hazard_additional_slippery_road">Libe tee</string>
 </resources>
