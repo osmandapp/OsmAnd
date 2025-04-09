@@ -1992,6 +1992,10 @@ public class BinaryMapIndexReader {
         public void setSearchBoxes(Collection<QuadRect> searchBboxes) {
             this.searchBoxes = searchBboxes;
         }
+
+		public void setMatcherMode(StringMatcherMode mode) {
+			matcherMode = mode;
+		}
     }
 
 

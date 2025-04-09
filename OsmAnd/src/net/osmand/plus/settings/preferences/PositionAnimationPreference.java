@@ -92,8 +92,8 @@ public class PositionAnimationPreference extends Preference {
 	private void updateContent() {
 		AndroidUiHelper.updateVisibility(sliderContainer, isSliderVisible);
 		advancedItemIcon.setImageDrawable(app.getUIUtilities().getIcon(isSliderVisible
-				? R.drawable.ic_action_arrow_down
-				: R.drawable.ic_action_arrow_up, ColorUtilities.getDefaultIconColorId(nightMode)));
+				? R.drawable.ic_action_arrow_up
+				: R.drawable.ic_action_arrow_down, ColorUtilities.getDefaultIconColorId(nightMode)));
 	}
 
 	private void setupAdvancedButton() {
