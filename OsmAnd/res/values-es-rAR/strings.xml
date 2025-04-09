@@ -5622,4 +5622,7 @@
     <string name="labels_position">Ubicación de las etiquetas</string>
     <string name="routing_attr_allow_ferries_description">Permite navegar por rutas de transbordadores (ferris)</string>
     <string name="customize_grid_color">Personalizar el color de la cuadrícula</string>
+    <string name="multipoligon_related">Relacionado</string>
+    <string name="route_part_of">Parte de</string>
+    <string name="route_members">Miembros</string>
 </resources>
