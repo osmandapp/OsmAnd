@@ -406,6 +406,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		if (inMeasurementMode && editingCtx.getSelectedPointPosition() == -1) {
+			drawCenterIcon(canvas, tb, settings.isNightMode());
+		}
+
 		boolean hasMapRenderer = hasMapRenderer();
 		if (isDrawingEnabled()) {
 			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || forceUpdateOnDraw;
@@ -420,8 +424,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				}
 			}
 			if (editingCtx.getSelectedPointPosition() == -1) {
-				drawCenterIcon(canvas, tb, settings.isNightMode());
-
 				if (measureDistanceToCenterListener != null) {
 					float distance = 0;
 					float bearing = 0;
