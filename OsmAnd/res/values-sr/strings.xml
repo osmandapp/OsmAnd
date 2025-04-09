@@ -5741,4 +5741,7 @@
     <string name="shared_string_edges">Ивице</string>
     <string name="customize_grid_color">Прилагодите боју мреже</string>
     <string name="labels_position">Положај ознака</string>
+    <string name="multipoligon_related">Повезано</string>
+    <string name="route_part_of">Део од</string>
+    <string name="route_members">Чланови</string>
 </resources>

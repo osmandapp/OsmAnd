@@ -5749,4 +5749,6 @@
     <string name="labels_position">Position des libellés</string>
     <string name="shared_string_edges">Bords</string>
     <string name="grid_color">Couleur de grille</string>
+    <string name="route_part_of">Fait partie de</string>
+    <string name="route_members">Membres</string>
 </resources>
