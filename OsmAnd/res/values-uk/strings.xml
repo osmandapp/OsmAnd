@@ -5762,4 +5762,7 @@
     <string name="labels_position">Положення міток</string>
     <string name="customize_grid_color">Налаштувати колір сітки</string>
     <string name="grid_color">Колір сітки</string>
+    <string name="route_part_of">Частина</string>
+    <string name="multipoligon_related">Пов\'язані</string>
+    <string name="route_members">Члени</string>
 </resources>
