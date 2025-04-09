@@ -5773,4 +5773,7 @@
     <string name="shared_string_no_animation">Žiadna animácia</string>
     <string name="position_animation_empty_banner_description">Ikona polohy sa presunie na novú prijatú pozíciu bez animácie.</string>
     <string name="position_animation">Animácia polohy</string>
+    <string name="route_part_of">Súčasť</string>
+    <string name="route_members">Členy</string>
+    <string name="multipoligon_related">Súvisiace</string>
 </resources>
