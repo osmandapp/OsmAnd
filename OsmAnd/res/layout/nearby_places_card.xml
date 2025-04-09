@@ -103,7 +103,18 @@
 
 	<include layout="@layout/nearby_places_no_internet" />
 
-	<include layout="@layout/empty_nearby_places" />
+	<LinearLayout
+		android:id="@+id/empty_nearby_places"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color"
+		android:orientation="vertical">
+
+		<include layout="@layout/no_explore_places_available" />
+
+		<include layout="@layout/nearby_places_download_maps_card" />
+
+	</LinearLayout>
 
 	<include layout="@layout/list_item_divider" />
 

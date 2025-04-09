@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/download_maps_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:padding="@dimen/content_padding">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingBottom="@dimen/content_padding_half"
+		android:text="@string/shared_string_download_map"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		android:textStyle="bold" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingBottom="@dimen/content_padding"
+		android:text="@string/wiki_menu_download_descr"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/download_recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="0dp" />
+
+</LinearLayout>

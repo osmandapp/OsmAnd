@@ -13,7 +13,6 @@ import androidx.annotation.ColorRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import net.osmand.CallbackWithObject
@@ -40,6 +39,7 @@ import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
+import net.osmand.plus.widgets.EmptyStateRecyclerView
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.search.core.SearchCoreFactory
 import net.osmand.util.MapUtils
@@ -63,7 +63,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private var visiblePlaces: List<Amenity>? = null
 	private var location: Location? = null
 	private var mainContent: LinearLayout? = null
-	private var recyclerView: RecyclerView? = null
+	private var recyclerView: EmptyStateRecyclerView? = null
 	private var showListContainer: View? = null
 	private var frameLayout: CoordinatorLayout? = null
 	private var lastCompassUpdate = 0L
@@ -144,6 +144,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		recyclerView = view.findViewById(R.id.vertical_nearby_list)
 		recyclerView?.layoutManager = LinearLayoutManager(view.context)
 		recyclerView?.adapter = adapter
+		recyclerView?.setEmptyView(view.findViewById(R.id.empty_view))
 	}
 
 	private fun buildZoomButtons(view: View) {
