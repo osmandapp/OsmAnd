@@ -1286,6 +1286,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">This action is not supported by the selected map style.</string>
+    <string name="cant_load_map_styles">Can\'t load map styles.</string>
     <string name="rendering_engine_failed_descr">OsmAnd has reverted to \'Version 1\' map rendering. You can try to switch back to the new \'Version 2 (OpenGL)\' rendering engine in the Settings.\n\nPlease support improvements by providing your error log.</string>
     <string name="rendering_engine_failed">OsmAnd\'s map rendering has recently crashed.</string>
     <string name="share_crash_log">Share crash log</string>
