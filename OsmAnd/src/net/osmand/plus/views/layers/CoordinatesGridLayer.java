@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import android.graphics.Canvas;
+import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -20,19 +21,25 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeListener;
+import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.util.Objects;
 
 public class CoordinatesGridLayer extends OsmandMapLayer {
+
+	private static final float DEFAULT_MARGIN_FACTOR = 8.0f;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -52,12 +59,22 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 	private boolean cachedNightMode;
 	private StateChangedListener settingsListener;
 
+	private ViewHeightChangeListener widgetsPanelHeightListener;
+	private VerticalWidgetPanel topWidgetsPanel;
+	private VerticalWidgetPanel bottomWidgetsPanel;
+	private boolean marginFactorUpdateNeeded = false;
+
 	public CoordinatesGridLayer(@NonNull OsmandApplication app) {
 		super(app);
 		this.app = app;
 		settings = app.getSettings();
 		gridSettings = new CoordinatesGridSettings(app);
 		mapTileView = app.getOsmandMap().getMapView();
+
+		widgetsPanelHeightListener = () -> {
+			marginFactorUpdateNeeded = true;
+			updateGridSettings();
+		};
 
 		settingsListener = this::onPreferenceChange;
 		settings.SHOW_COORDINATES_GRID.addListener(settingsListener);
@@ -69,6 +86,28 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		settings.COORDINATES_GRID_COLOR_DAY.addListener(settingsListener);
 		settings.COORDINATES_GRID_COLOR_NIGHT.addListener(settingsListener);
 		settings.TEXT_SCALE.addListener(settingsListener);
+	}
+
+	@Override
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		if (mapActivity != null) {
+			topWidgetsPanel = mapActivity.findViewById(R.id.top_widgets_panel);
+			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
+			if (topWidgetsPanel != null) {
+				topWidgetsPanel.addViewChangeListener(widgetsPanelHeightListener);
+			}
+			if (bottomWidgetsPanel != null) {
+				bottomWidgetsPanel.addViewChangeListener(widgetsPanelHeightListener);
+			}
+		} else {
+			if (topWidgetsPanel != null) {
+				topWidgetsPanel.removeViewChangeListener(widgetsPanelHeightListener);
+			}
+			if (bottomWidgetsPanel != null) {
+				bottomWidgetsPanel.removeViewChangeListener(widgetsPanelHeightListener);
+			}
+		}
 	}
 
 	@Override
@@ -96,6 +135,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		ApplicationMode appMode = settings.getApplicationMode();
 		boolean updateAppearance = false;
 		boolean zoomLevelsUpdated = false;
+		boolean marginFactorUpdated = false;
 
 		boolean show = gridSettings.isEnabled(appMode);
 		if (show) {
@@ -106,13 +146,15 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 			} else {
 				updateAppearance = updateVariables(appMode);
 				zoomLevelsUpdated = updateZoomLevels(appMode);
+				marginFactorUpdated = updateLabelsMarginFactor();
 			}
 			if (updateAppearance) {
 				cleanupMarksProvider(mapRenderer);
 				updateGridAppearance();
 			}
 		}
-		if (gridConfig != null && (cachedGridEnabled != show || updateAppearance || zoomLevelsUpdated)) {
+		boolean updated = updateAppearance || zoomLevelsUpdated || marginFactorUpdated;
+		if (gridConfig != null && (cachedGridEnabled != show || updated)) {
 			cachedGridEnabled = show;
 			updateGridVisibility(mapRenderer, cachedGridEnabled);
 		}
@@ -223,6 +265,39 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		return false;
 	}
 
+	private boolean updateLabelsMarginFactor() {
+		if (marginFactorUpdateNeeded) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null && topWidgetsPanel != null && bottomWidgetsPanel != null) {
+				float top = DEFAULT_MARGIN_FACTOR;
+				float bottom = DEFAULT_MARGIN_FACTOR;
+				float screenHeight = AndroidUtils.getScreenHeight(mapActivity);
+
+				if (topWidgetsPanel.getVisibility() == View.VISIBLE) {
+					int topWidgetsHeight = topWidgetsPanel.getMeasuredHeight();
+					if (topWidgetsHeight > 0) {
+						float calculated = (screenHeight * 0.9f) / topWidgetsHeight;
+						top = Math.min(calculated, DEFAULT_MARGIN_FACTOR);
+					}
+				}
+				if (bottomWidgetsPanel.getVisibility() == View.VISIBLE) {
+					int bottomWidgetsHeight = bottomWidgetsPanel.getMeasuredHeight();
+					if (bottomWidgetsHeight > 0) {
+						float calculated = screenHeight / bottomWidgetsHeight;
+						bottom = Math.min(calculated, DEFAULT_MARGIN_FACTOR);
+					}
+				}
+				gridConfig.setPrimaryTopMarginFactor(top);
+				gridConfig.setSecondaryTopMarginFactor(top);
+				gridConfig.setPrimaryBottomMarginFactor(bottom);
+				gridConfig.setSecondaryBottomMarginFactor(bottom);
+				marginFactorUpdateNeeded = false;
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@NonNull
 	private TextRasterizer.Style createMarksStyle(@NonNull FColorARGB color,
 	                                              @NonNull FColorARGB haloColor,
@@ -264,5 +339,21 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	private interface ViewHeightChangeListener extends ViewChangeListener {
+
+		@Override
+		default void onSizeChanged(@NonNull View view, int w, int h, int oldWidth, int oldHeight) {
+			if (h != oldHeight) {
+				onViewHeightChanged();
+			}
+		}
+
+		default void onVisibilityChanged(@NonNull View view, int visibility) {
+			onViewHeightChanged();
+		}
+
+		void onViewHeightChanged();
 	}
 }
