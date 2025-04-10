@@ -54,8 +54,8 @@
 				<TextView
 					android:id="@+id/item_type"
 					android:layout_width="0dp"
-					android:layout_weight="1"
 					android:layout_height="wrap_content"
+					android:layout_weight="1"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="14sp"
 					tools:text="Monument" />
@@ -71,32 +71,53 @@
 						android:id="@+id/direction"
 						android:layout_width="@dimen/directionIconSize"
 						android:layout_height="@dimen/directionIconSize"
-						android:layout_marginTop="1sp"
-						android:layout_gravity="center_vertical"/>
+						android:layout_gravity="center_vertical"
+						android:layout_marginTop="1sp" />
 
 					<TextView
 						android:id="@+id/distance"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
+						android:layout_marginStart="2dp"
 						android:layout_marginLeft="2dp"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_sub_text_size"
-						tools:text="100500 km"
-						android:layout_marginStart="2dp" />
+						tools:text="100500 km" />
 
 				</LinearLayout>
 			</LinearLayout>
 
 		</LinearLayout>
 
-		<ImageView
-			android:id="@+id/item_image"
+		<FrameLayout
+			android:id="@+id/item_image_container"
 			android:layout_width="@dimen/nearby_place_image_vertical_size"
 			android:layout_height="@dimen/nearby_place_image_vertical_size"
 			android:layout_gravity="center_horizontal"
-			android:layout_marginStart="@dimen/content_padding_small"
-			android:scaleType="centerCrop" />
+			android:layout_marginStart="@dimen/content_padding_small">
+
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="?attr/activity_background_color">
+
+				<ImageView
+					android:id="@+id/item_image_error"
+					android:layout_width="@dimen/nearby_place_error_image_size"
+					android:layout_height="@dimen/nearby_place_error_image_size"
+					android:layout_gravity="center"
+					android:scaleType="fitCenter" />
+			</FrameLayout>
+
+			<ImageView
+				android:id="@+id/item_image"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_horizontal"
+				android:contentDescription="@string/popular_places_nearby"
+				android:visibility="gone" />
+		</FrameLayout>
 
 	</LinearLayout>
 

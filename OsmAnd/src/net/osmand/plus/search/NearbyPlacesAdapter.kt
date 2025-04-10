@@ -75,6 +75,8 @@ class NearbyPlacesAdapter(
 	) : RecyclerView.ViewHolder(itemView) {
 		private var item: Amenity? = null
 		private val imageView: ImageView = itemView.findViewById(R.id.item_image)
+		private val imageViewContainer: ViewGroup = itemView.findViewById(R.id.item_image_container)
+		private val errorImageView: ImageView = itemView.findViewById(R.id.item_image_error)
 		private val iconImageView: ImageView = itemView.findViewById(R.id.item_icon)
 		private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
 		private val descriptionTextView: TextView? = itemView.findViewById(R.id.item_description)
@@ -107,41 +109,37 @@ class NearbyPlacesAdapter(
 				uiUtilities.getIcon(R.drawable.ic_action_info_dark, nightMode)
 			}
 			iconImageView.setImageDrawable(coloredIcon)
+			errorImageView.setImageDrawable(coloredIcon)
 			if (shouldShowImage()) {
-				AndroidUiHelper.updateVisibility(imageView, true)
-				imageView.scaleType = ImageView.ScaleType.CENTER
+				AndroidUiHelper.updateVisibility(imageViewContainer, true)
 				val picasso = PicassoUtils.getPicasso(app)
-				if (imageView.tag != item.wikiImageStubUrl) {
+				if (!Algorithms.objectEquals(imageView.tag, item.wikiImageStubUrl)) {
 					imageView.tag = item.wikiImageStubUrl
 					item.wikiImageStubUrl?.let {
 						val creator = Picasso.get()
 							.load(it)
 						if (coloredIcon != null) {
-							val errorImageSize =
-								app.resources.getDimension(R.dimen.nearby_place_error_mange_size)
-							val errorDrawable = AndroidUtils.createScaledBitmap(
-								coloredIcon,
-								errorImageSize.toInt(),
-								errorImageSize.toInt())
-							if (errorDrawable != null) {
-								creator.error(errorDrawable.toDrawable(app.resources))
-								creator.placeholder(errorDrawable.toDrawable(app.resources))
+							if (coloredIcon != null) {
+								creator.error(coloredIcon)
 							}
 						}
 						creator.into(imageView, object : Callback {
 							override fun onSuccess() {
-								iconImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+								AndroidUiHelper.updateVisibility(imageView, true)
+								AndroidUiHelper.updateVisibility(errorImageView, false)
 								picasso.setResultLoaded(it, true)
 							}
 
 							override fun onError(e: Exception?) {
-								picasso.setResultLoaded(it, true)
+								AndroidUiHelper.updateVisibility(imageView, false)
+								AndroidUiHelper.updateVisibility(errorImageView, true)
+								picasso.setResultLoaded(it, false)
 							}
 						})
 					}
 				}
 			} else {
-				AndroidUiHelper.updateVisibility(imageView, false)
+				AndroidUiHelper.updateVisibility(imageViewContainer, false)
 			}
 
 			// Add row number to the title
