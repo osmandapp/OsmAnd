@@ -26,6 +26,7 @@ import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.AudioNotesTileProvider;
 import net.osmand.util.Algorithms;
@@ -224,19 +225,14 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= START_ZOOM) {
-			getRecordingsFromPoint(point, tileBox, objects);
-		}
-	}
-
-	public void getRecordingsFromPoint(PointF point, RotatedTileBox tileBox, List<? super Recording> am) {
-		Collection<Recording> allRecordings = plugin.getAllRecordings();
-		if (Algorithms.isEmpty(allRecordings)) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
+		Collection<Recording> recordings = plugin.getAllRecordings();
+		if (Algorithms.isEmpty(recordings) || tileBox.getZoom() < START_ZOOM) {
 			return;
 		}
-
 		MapRendererView mapRenderer = getMapRenderer();
 		float radius = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
@@ -246,8 +242,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 				return;
 			}
 		}
-
-		for (Recording recording : allRecordings) {
+		for (Recording recording : recordings) {
 			double lat = recording.getLatitude();
 			double lon = recording.getLongitude();
 
@@ -255,7 +250,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 					? NativeUtilities.isPointInsidePolygon(lat, lon, touchPolygon31)
 					: tileBox.isLatLonNearPixel(lat, lon, point.x, point.y, radius);
 			if (add) {
-				am.add(recording);
+				result.collect(recording, this);
 			}
 		}
 	}

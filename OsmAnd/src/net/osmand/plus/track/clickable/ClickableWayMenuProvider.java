@@ -1,6 +1,5 @@
 package net.osmand.plus.track.clickable;
 
-import android.graphics.PointF;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -10,13 +9,11 @@ import net.osmand.CallbackWithObject;
 import net.osmand.binary.HeightDataLoader.CancellableCallback;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.shared.gpx.primitives.WptPt;
-
-import java.util.List;
 
 public class ClickableWayMenuProvider implements ContextMenuLayer.IContextMenuProvider {
     private final OsmandMapTileView view;
@@ -59,6 +56,6 @@ public class ClickableWayMenuProvider implements ContextMenuLayer.IContextMenuPr
     }
 
     @Override
-    public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation, boolean excludeUntouchableObjects) {
+    public void collectObjectsFromPoint(@NonNull MapSelectionResult result, boolean unknownLocation, boolean excludeUntouchableObjects) {
     }
 }

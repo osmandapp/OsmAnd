@@ -55,6 +55,7 @@ import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParamete
 import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -297,15 +298,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@Nullable
 	private Pair<LatLon, PointDescription> getObjectLocation(OsmandMapTileView mapView, PointF point, RotatedTileBox tileBox) {
+		MapSelectionResult result = new MapSelectionResult(mapView.getApplication(), tileBox, point);
 		for (OsmandMapLayer layer : mapView.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider) {
-				List<Object> objects = new ArrayList<>();
-				provider.collectObjectsFromPoint(point, tileBox, objects, true, true);
-				for (Object o : objects) {
-					LatLon latLon = provider.getObjectLocation(o);
+				provider.collectObjectsFromPoint(result, true, true);
+				for (Object object : result.getObjects()) {
+					LatLon latLon = provider.getObjectLocation(object);
 					PointDescription name = null;
-					if (o instanceof FavouritePoint) {
-						name = ((FavouritePoint) o).getPointDescription(mapView.getApplication());
+					if (object instanceof FavouritePoint) {
+						name = ((FavouritePoint) object).getPointDescription(mapView.getApplication());
 					}
 					return new Pair<>(latLon, name);
 				}

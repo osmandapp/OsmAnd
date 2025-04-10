@@ -56,7 +56,6 @@ import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapSelectionHelper.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -67,7 +66,6 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -719,9 +717,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (menu == null || mAddGpxPointBottomSheetHelper == null) {
 			return false;
 		}
-		MapSelectionResult selectionResult = selectionHelper.selectObjectsFromMap(point, tileBox, showUnknownLocation);
-		LatLon pointLatLon = selectionResult.pointLatLon;
-		Map<Object, IContextMenuProvider> selectedObjects = selectionResult.selectedObjects;
+		MapSelectionResult result = selectionHelper.collectObjectsFromMap(point, tileBox, showUnknownLocation);
+		LatLon pointLatLon = result.getPointLatLon();
+		Map<Object, IContextMenuProvider> selectedObjects = result.getObjectsWithProviders();
 
 		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
 			IContextMenuProvider provider = entry.getValue();
@@ -731,7 +729,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		if (selectedObjects.size() == 1) {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
-			LatLon latLon = selectionResult.getObjectLatLon();
+			LatLon latLon = result.getObjectLatLon();
 			PointDescription pointDescription = null;
 			IContextMenuProvider provider = selectedObjects.get(selectedObj);
 			if (provider != null) {
@@ -953,7 +951,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		 * @param excludeUntouchableObjects Touchable objects are objects that
 		 *                                  change appearance when touched on map
 		 */
-		void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+		void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 		                             boolean unknownLocation, boolean excludeUntouchableObjects);
 
 		LatLon getObjectLocation(Object o);
