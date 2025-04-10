@@ -3476,7 +3476,7 @@
     <string name="poi_payment_contactless_yes">senkontakta (alproksima)</string>
     <string name="poi_payment_contactless_no">Senkontakta pagmaniero malakceptata</string>
     <string name="poi_hazard_nuclear">Danĝero: radiado</string>
-    <string name="poi_hazard_erosion">Danĝero: terglitejo</string>
+    <string name="poi_hazard_erosion">Danĝero: terglito</string>
     <string name="poi_hazard_avalanche">Danĝero: lavango</string>
     <string name="poi_hazard_slippery_road">Danĝero: glita vojo</string>
     <string name="poi_hazard_flood">Danĝero: superakvego</string>
@@ -5011,4 +5011,10 @@
     <string name="poi_network_ncn">Biciklaj kursoj ŝtataj</string>
     <string name="poi_aerodrome_type_airfield">Malgranda</string>
     <string name="poi_consulate">Konsulejo</string>
+    <string name="poi_hazard_additional_landslide">Danĝero: terglito</string>
+    <string name="poi_hazard_additional_yes">Danĝero</string>
+    <string name="poi_hazard_falling_rocks">Danĝero: falantaj ŝtonoj</string>
+    <string name="poi_hazard_contamination">Danĝero: ĥemia poluo</string>
+    <string name="poi_hazard_yes">Danĝero</string>
+    <string name="poi_hazard_additional_slippery_road">Danĝero: glitiga vojo</string>
 </resources>
