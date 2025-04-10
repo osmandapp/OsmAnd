@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/bg_color"
+	android:clickable="true"
+	android:clipChildren="false"
+	android:clipToPadding="false"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbar_height"
+		android:background="?attr/actionModeBackground">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height"
+			android:minHeight="@dimen/toolbar_height"
+			app:layout_collapseMode="pin"
+			app:title="@string/ant_plus_searching"
+			app:titleMarginEnd="0dp"
+			app:titleMarginStart="0dp"
+			app:titleTextAppearance="@style/AppBarTitle"
+			app:titleTextColor="?attr/app_bar_primary_item_color">
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<FrameLayout
+		android:id="@+id/content"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:clipChildren="false"
+		android:clipToPadding="false">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/state_searching"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipChildren="false"
+			android:clipToPadding="false"
+			android:orientation="vertical"
+			android:visibility="visible">
+
+			<View
+				android:id="@+id/guideline"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginBottom="48dp"
+				app:layout_constraintBottom_toTopOf="@+id/searching_text" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:clipToOutline="false"
+				android:padding="0dp"
+				android:scaleType="centerCrop"
+				android:src="@drawable/ic_sensors_search"
+				android:tint="?attr/list_divider"
+				app:layout_constraintBottom_toBottomOf="@+id/guideline"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+			<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+				android:id="@+id/progressBar"
+				style="@style/Widget.MaterialProgressBar.ProgressBar.NoPadding"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
+				android:layout_gravity="center_vertical"
+				android:indeterminate="true"
+				android:visibility="visible"
+				app:layout_constraintBottom_toBottomOf="@+id/guideline"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/guideline"
+				app:mpb_progressStyle="circular"
+				app:mpb_setBothDrawables="true"
+				app:mpb_useIntrinsicPadding="false" />
+
+			<TextView
+				android:id="@+id/searching_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/external_devices_empty_content_centre_margin"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:lineSpacingExtra="5sp"
+				android:text="@string/obd_searching_text"
+				android:textColor="?android:textColor"
+				android:textSize="@dimen/default_list_text_size"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:typefaceWeight="medium" />
+
+			<TextView
+				android:id="@+id/no_bluetooth_description_searching"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/content_padding_small"
+				android:layout_marginTop="@dimen/content_padding_small_half"
+				android:layout_marginRight="@dimen/content_padding_small"
+				android:gravity="center"
+				android:lineSpacingExtra="5sp"
+				android:paddingStart="@dimen/content_padding_small"
+				android:paddingEnd="@dimen/content_padding_small"
+				android:text="@string/obd_searching_text_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/searching_text"
+				app:typefaceWeight="medium" />
+
+
+		</androidx.constraintlayout.widget.ConstraintLayout> <!--SEARCHING-->
+
+		<include
+			android:id="@+id/state_no_bluetooth"
+			layout="@layout/no_bluetooth_view" />
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/state_nothing_found"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:paddingLeft="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			android:visibility="gone">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:layout_marginBottom="@dimen/horizontal_divider_height"
+				android:src="@drawable/ic_action_sensor_find"
+				android:tint="?attr/default_icon_color"
+				app:layout_constraintBottom_toTopOf="@+id/nothing_found_text"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent" />
+
+			<TextView
+				android:id="@+id/nothing_found_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/external_devices_empty_content_centre_margin"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:lineSpacingExtra="5sp"
+				android:text="@string/obd_nothing_found_text"
+				android:textColor="?android:textColor"
+				android:textSize="@dimen/default_list_text_size"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:typefaceWeight="medium" />
+
+			<TextView
+				android:id="@+id/nothing_found_description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_small_half"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:gravity="center"
+				android:lineSpacingExtra="5sp"
+				android:text="@string/obd_nothing_found_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/nothing_found_text"
+				app:typefaceWeight="medium" />
+
+			<include
+				android:id="@+id/button_container"
+				layout="@layout/bottom_buttons"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/nothing_found_description" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout> <!--NOTHING_FOUND-->
+
+		<LinearLayout
+			android:id="@+id/state_found_devices_list"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:visibility="gone">
+
+			<TextView
+				android:id="@+id/found_devices_count"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding_extra_large"
+				android:layout_marginTop="@dimen/content_padding_medium"
+				android:lineSpacingExtra="3sp"
+				android:textColor="@color/preference_category_title"
+				android:textSize="@dimen/default_desc_text_size"
+				app:typefaceWeight="medium" />
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/paired_devices_list"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+
+		</LinearLayout> <!--FOUND DEVICES-->
+
+	</FrameLayout>
+
+</LinearLayout>
