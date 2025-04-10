@@ -24,6 +24,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -205,6 +206,7 @@ public class MapRendererContext {
 		if (rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
 			rendName = "default";
 		}
+		int tryCount = 0;
 		while (true) {
 			if (mapStyles.containsKey(rendName)) {
 				break;
@@ -221,6 +223,14 @@ public class MapRendererContext {
 				} else {
 					Log.d(TAG, "Failed to resolve '" + rendName + "', will use 'default'");
 					rendName = "default";
+				}
+			}
+			if (tryCount < 3) {
+				tryCount++;
+				if (tryCount > 1)
+				{
+					Log.e(TAG, "Failed to load '" + rendName + "' style, will keep trying");
+					app.showToastMessage(R.string.cant_load_map_styles);
 				}
 			}
 		}
