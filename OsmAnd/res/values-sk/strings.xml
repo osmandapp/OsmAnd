@@ -5776,4 +5776,5 @@
     <string name="route_part_of">Súčasť</string>
     <string name="route_members">Členy</string>
     <string name="multipoligon_related">Súvisiace</string>
+    <string name="cant_load_map_styles">Nepodarilo sa načítať mapové štýly.</string>
 </resources>
