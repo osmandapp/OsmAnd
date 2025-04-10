@@ -77,7 +77,10 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
                     Map<String, List<Amenity>> related = app.getResourceManager().searchRouteMembers(routeId);
                     List<Amenity> list = new ArrayList<>();
                     for (Map.Entry<String, List<Amenity>> entry : related.entrySet()) {
-                        list.addAll(entry.getValue());
+                        List<Amenity> val = entry.getValue();
+                        if (!Algorithms.isEmpty(val)) {
+                            list.addAll(val);
+                        }
                     }
                     HashSet<LatLon> latLonHashSet = new HashSet<>();
                     for (Amenity am : list) {
