@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.UiContext
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -18,6 +19,7 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.render.RenderingIcons
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.PicassoUtils
 import net.osmand.plus.utils.UiUtilities
@@ -73,6 +75,8 @@ class NearbyPlacesAdapter(
 	) : RecyclerView.ViewHolder(itemView) {
 		private var item: Amenity? = null
 		private val imageView: ImageView = itemView.findViewById(R.id.item_image)
+		private val imageViewContainer: ViewGroup = itemView.findViewById(R.id.item_image_container)
+		private val errorImageView: ImageView = itemView.findViewById(R.id.item_image_error)
 		private val iconImageView: ImageView = itemView.findViewById(R.id.item_icon)
 		private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
 		private val descriptionTextView: TextView? = itemView.findViewById(R.id.item_description)
@@ -105,27 +109,37 @@ class NearbyPlacesAdapter(
 				uiUtilities.getIcon(R.drawable.ic_action_info_dark, nightMode)
 			}
 			iconImageView.setImageDrawable(coloredIcon)
+			errorImageView.setImageDrawable(coloredIcon)
 			if (shouldShowImage()) {
-				AndroidUiHelper.updateVisibility(imageView, true)
+				AndroidUiHelper.updateVisibility(imageViewContainer, true)
 				val picasso = PicassoUtils.getPicasso(app)
-				item.wikiImageStubUrl?.let {
-					val creator = Picasso.get()
-						.load(it)
-					if (coloredIcon != null) {
-						creator.error(coloredIcon)
-					}
-					creator.into(imageView, object : Callback {
-						override fun onSuccess() {
-							picasso.setResultLoaded(it, true)
+				if (!Algorithms.objectEquals(imageView.tag, item.wikiImageStubUrl)) {
+					imageView.tag = item.wikiImageStubUrl
+					item.wikiImageStubUrl?.let {
+						val creator = Picasso.get()
+							.load(it)
+						if (coloredIcon != null) {
+							if (coloredIcon != null) {
+								creator.error(coloredIcon)
+							}
 						}
+						creator.into(imageView, object : Callback {
+							override fun onSuccess() {
+								AndroidUiHelper.updateVisibility(imageView, true)
+								AndroidUiHelper.updateVisibility(errorImageView, false)
+								picasso.setResultLoaded(it, true)
+							}
 
-						override fun onError(e: Exception?) {
-							picasso.setResultLoaded(it, true)
-						}
-					})
+							override fun onError(e: Exception?) {
+								AndroidUiHelper.updateVisibility(imageView, false)
+								AndroidUiHelper.updateVisibility(errorImageView, true)
+								picasso.setResultLoaded(it, false)
+							}
+						})
+					}
 				}
 			} else {
-				AndroidUiHelper.updateVisibility(imageView, false)
+				AndroidUiHelper.updateVisibility(imageViewContainer, false)
 			}
 
 			// Add row number to the title
