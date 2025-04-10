@@ -151,9 +151,9 @@ public class MapSelectionHelper {
 			boolean unknownLocation) {
 		Map<LatLon, BackgroundType> touchedMapObjectsFull = new HashMap<>();
 		Map<LatLon, BackgroundType> touchedMapObjectsSmall = new HashMap<>();
-		MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider) {
+				MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 				provider.collectObjectsFromPoint(result, unknownLocation, true);
 				for (Object object : result.getObjects()) {
 					LatLon latLon = provider.getObjectLocation(object);
