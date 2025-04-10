@@ -41,6 +41,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.OsmBugsTileProvider;
 import net.osmand.util.Algorithms;
@@ -242,11 +243,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		return false;
 	}
 
-	public void getBugFromPoint(RotatedTileBox tb, PointF point, List<? super OpenStreetNote> res) {
+	public void collectBugsFromPoint(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		List<OpenStreetNote> objects = data.getResults();
-		if (view != null && !Algorithms.isEmpty(objects) && tb.getZoom() >= startZoom) {
+
+		if (view != null && !Algorithms.isEmpty(objects) && tileBox.getZoom() >= startZoom) {
 			MapRendererView mapRenderer = getMapRenderer();
-			float radius = getScaledTouchRadius(getApplication(), getRadiusBug(tb)) * TOUCH_RADIUS_MULTIPLIER;
+			float radius = getScaledTouchRadius(getApplication(), getRadiusBug(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
 			QuadRect screenArea = new QuadRect(
 					point.x - radius,
 					point.y - radius / 3f,
@@ -274,9 +278,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 					boolean add = mapRenderer != null
 							? NativeUtilities.isPointInsidePolygon(lat, lon, touchPolygon31)
-							: tb.isLatLonInsidePixelArea(lat, lon, screenArea);
+							: tileBox.isLatLonInsidePixelArea(lat, lon, screenArea);
 					if (add) {
-						res.add(note);
+						result.collect(note, this);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
@@ -509,10 +513,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= startZoom) {
-			getBugFromPoint(tileBox, point, res);
+		if (result.getTileBox().getZoom() >= startZoom) {
+			collectBugsFromPoint(result);
 		}
 	}
 

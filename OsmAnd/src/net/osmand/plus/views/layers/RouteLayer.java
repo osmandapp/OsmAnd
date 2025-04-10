@@ -796,10 +796,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		return helper.isPublicTransportMode() ? publicTransportRouteGeometry.getDrawer().getRouteTransportStops() : null;
 	}
 
-	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res,
-			@NonNull List<TransportStop> routeTransportStops) {
+	private void collectTransportStopsFromPoint(@NonNull MapSelectionResult result,
+			@NonNull List<TransportStop> transportStops) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		MapRendererView mapRenderer = getMapRenderer();
-		float radius = getRadiusPoi(tb) * TOUCH_RADIUS_MULTIPLIER;
+
+		float radius = getRadiusPoi(tileBox) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
 		if (mapRenderer != null) {
 			touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
@@ -809,8 +812,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 
 		try {
-			for (int i = 0; i < routeTransportStops.size(); i++) {
-				TransportStop transportStop = routeTransportStops.get(i);
+			for (int i = 0; i < transportStops.size(); i++) {
+				TransportStop transportStop = transportStops.get(i);
 				LatLon latLon = transportStop.getLocation();
 				if (latLon == null) {
 					continue;
@@ -818,9 +821,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 				boolean add = mapRenderer != null
 						? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
-						: tb.isLatLonNearPixel(latLon, point.x, point.y, radius);
+						: tileBox.isLatLonNearPixel(latLon, point.x, point.y, radius);
 				if (add) {
-					res.add(transportStop);
+					result.collect(transportStop, this);
 				}
 			}
 		} catch (IndexOutOfBoundsException e) {
@@ -835,7 +838,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (excludeUntouchableObjects) {
 			return;
@@ -843,7 +846,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 		List<TransportStop> routeTransportStops = getRouteTransportStops();
 		if (!Algorithms.isEmpty(routeTransportStops)) {
-			getFromPoint(tileBox, point, res, routeTransportStops);
+			collectTransportStopsFromPoint(result, routeTransportStops);
 		}
 	}
 

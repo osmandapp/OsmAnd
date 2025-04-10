@@ -27,7 +27,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.util.Algorithms;
 
 import java.util.Iterator;
 import java.util.List;
@@ -219,19 +221,13 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 			boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= START_ZOOM) {
-			getAisObjectsFromPoint(point, tileBox, objects);
-		}
-	}
-
-	public void getAisObjectsFromPoint(PointF point, RotatedTileBox tileBox,
-			List<? super AisObject> aisList) {
-		if (aisObjectList.isEmpty()) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
+		if (Algorithms.isEmpty(aisObjectList) || tileBox.getZoom() < START_ZOOM) {
 			return;
 		}
-
 		MapRendererView mapRenderer = getMapRenderer();
 		float radius = getScaledTouchRadius(getApplication(), tileBox.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
@@ -241,18 +237,17 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 				return;
 			}
 		}
-
-		for (AisObject ais : aisObjectList.values()) {
-			LatLon pos = ais.getPosition();
-			if (pos != null) {
-				double lat = pos.getLatitude();
-				double lon = pos.getLongitude();
+		for (AisObject object : aisObjectList.values()) {
+			LatLon latLon = object.getPosition();
+			if (latLon != null) {
+				double lat = latLon.getLatitude();
+				double lon = latLon.getLongitude();
 
 				boolean add = mapRenderer != null
 						? NativeUtilities.isPointInsidePolygon(lat, lon, touchPolygon31)
 						: tileBox.isLatLonNearPixel(lat, lon, point.x, point.y, radius);
 				if (add) {
-					aisList.add(ais);
+					result.collect(object, this);
 				}
 			}
 		}

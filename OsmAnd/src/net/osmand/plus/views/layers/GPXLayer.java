@@ -1487,7 +1487,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return selectedGpxFile.isGroupHidden(point.getCategory());
 	}
 
-	public void getWptFromPoint(RotatedTileBox tb, PointF point, List<? super WptPt> res) {
+	public void collectWptFromPoint(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tb = result.getTileBox();
 		MapRendererView mapRenderer = getMapRenderer();
 		float radius = getScaledTouchRadius(app, tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
@@ -1510,18 +1512,19 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						? NativeUtilities.isPointInsidePolygon(waypoint.getLat(), waypoint.getLon(), touchPolygon31)
 						: tb.isLatLonNearPixel(waypoint.getLat(), waypoint.getLon(), point.x, point.y, radius);
 				if (add) {
-					res.add(waypoint);
+					result.collect(waypoint, this);
 				}
 			}
 		}
 	}
 
-	public void getTracksFromPoint(RotatedTileBox tb, PointF point, List<Object> res, boolean showTrackPointMenu) {
+	public void collectTracksFromPoint(@NonNull MapSelectionResult result, boolean showTrackPointMenu) {
 		List<SelectedGpxFile> selectedGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		if (selectedGpxFiles.isEmpty()) {
 			return;
 		}
-
+		PointF point = result.getPoint();
+		RotatedTileBox tb = result.getTileBox();
 		MapRendererView mapRenderer = getMapRenderer();
 		int radius = getScaledTouchRadius(app, tb.getDefaultRadiusPoi());
 		List<PointI> touchPolygon31 = null;
@@ -1552,8 +1555,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (latLonFromPixel == null) {
 					latLonFromPixel = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, point.x, point.y);
 				}
-				res.add(GpxUtils.createSelectedGpxPoint(selectedGpxFile, line.first, line.second, latLonFromPixel,
-						showTrackPointMenu));
+				result.collect(GpxUtils.createSelectedGpxPoint(selectedGpxFile, line.first, line.second, latLonFromPixel,
+						showTrackPointMenu), this);
 			}
 		}
 	}
@@ -1645,20 +1648,21 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return true;
 		}
 		if (tileBox.getZoom() >= START_ZOOM) {
-			List<Object> res = new ArrayList<>();
-			getTracksFromPoint(tileBox, point, res, false);
-			return !Algorithms.isEmpty(res);
+			MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
+			collectTracksFromPoint(result, false);
+			return !Algorithms.isEmpty(result.getObjectsWithProviders());
 		}
 		return false;
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= START_ZOOM) {
-			getWptFromPoint(tileBox, point, res);
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
+			boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (result.getTileBox().getZoom() >= START_ZOOM) {
+			collectWptFromPoint(result);
+
 			if (!excludeUntouchableObjects) {
-				getTracksFromPoint(tileBox, point, res, false);
+				collectTracksFromPoint(result, false);
 			}
 		}
 	}
@@ -1682,9 +1686,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		if (tileBox.getZoom() >= START_ZOOM) {
-			List<Object> trackPoints = new ArrayList<>();
-			getTracksFromPoint(tileBox, point, trackPoints, true);
+			MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
+			collectTracksFromPoint(result, true);
 
+			List<Object> trackPoints = result.getObjects();
 			if (!Algorithms.isEmpty(trackPoints)) {
 				LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox, point);
 				if (trackPoints.size() == 1) {

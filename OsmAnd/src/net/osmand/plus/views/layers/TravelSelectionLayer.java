@@ -2,7 +2,6 @@ package net.osmand.plus.views.layers;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.PointF;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,6 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
@@ -20,9 +18,8 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
-
-import java.util.List;
 
 public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenuProvider {
 
@@ -95,7 +92,8 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
+			boolean unknownLocation, boolean excludeUntouchableObjects) {
 
 	}
 
