@@ -952,7 +952,7 @@ public class MapPoiTypes {
 
 
 	private void initPoiType(PoiType p) {
-		if (!p.isReference()) {
+		if (!p.isReference() && !Algorithms.isEmpty(p.getRawOsmTag())) { // TODO research dupes in "sustenance"
 			String key = null;
 			if (p.isAdditional()) {
 				key = p.isText() ? p.getRawOsmTag() :
