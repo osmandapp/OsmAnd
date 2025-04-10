@@ -31,7 +31,6 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.data.LatLon;
@@ -52,7 +51,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.CoordinatesGridHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
@@ -124,7 +122,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	protected OsmandSettings settings;
-	private CoordinatesGridHelper coordinatesGridHelper;
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
 
 	private CanvasColors canvasColors;
@@ -262,7 +259,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void init(@NonNull Context ctx, int width, int height) {
 		app = (OsmandApplication) ctx.getApplicationContext();
 		settings = app.getSettings();
-		coordinatesGridHelper = new CoordinatesGridHelper(app, this);
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 
 		paintGrayFill = new Paint();
@@ -2563,15 +2559,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else {
 			mapRenderer.disableBatterySavingMode();
 		}
-	}
-
-	public void applyGridSettings(AtlasMapRendererView mapRenderer) {
-		coordinatesGridHelper.updateGridSettings(mapRenderer);
-	}
-
-	@NonNull
-	public CoordinatesGridHelper getGridHelper() {
-		return coordinatesGridHelper;
 	}
 
 	public void applyDebugSettings(MapRendererView mapRenderer) {

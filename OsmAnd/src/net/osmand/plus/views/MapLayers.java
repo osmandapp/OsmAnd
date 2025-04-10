@@ -84,6 +84,7 @@ public class MapLayers {
 	private SelectLocationLayer selectLocationLayer;
 	private MapMarkersLayer mapMarkersLayer;
 	private ImpassableRoadsLayer impassableRoadsLayer;
+	private CoordinatesGridLayer coordinatesGridLayer;
 	private MapInfoLayer mapInfoLayer;
 	private MapTextLayer mapTextLayer;
 	private ContextMenuLayer contextMenuLayer;
@@ -177,6 +178,9 @@ public class MapLayers {
 		// 7.5 Impassable roads
 		impassableRoadsLayer = new ImpassableRoadsLayer(app);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);
+		// 7.6 Coordinates Grid layer
+		coordinatesGridLayer = new CoordinatesGridLayer(app);
+		mapView.addLayer(coordinatesGridLayer, 7.6f);
 		// 7.8 radius ruler control layer
 		radiusRulerControlLayer = new RadiusRulerControlLayer(app);
 		mapView.addLayer(radiusRulerControlLayer, 7.8f);
@@ -604,6 +608,10 @@ public class MapLayers {
 
 	public ImpassableRoadsLayer getImpassableRoadsLayer() {
 		return impassableRoadsLayer;
+	}
+
+	public CoordinatesGridLayer getCoordinatesGridLayer() {
+		return coordinatesGridLayer;
 	}
 
 	public GPXLayer getGpxLayer() {

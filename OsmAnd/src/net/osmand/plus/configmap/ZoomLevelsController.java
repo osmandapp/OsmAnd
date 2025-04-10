@@ -10,7 +10,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.util.Algorithms;
 
 public abstract class ZoomLevelsController extends BaseDialogController {
 
