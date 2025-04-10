@@ -827,10 +827,10 @@ public class PointLocationLayer extends OsmandMapLayer
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= 3 && !excludeUntouchableObjects) {
-			getMyLocationFromPoint(tileBox, point, o);
+		if (result.getTileBox().getZoom() >= 3 && !excludeUntouchableObjects) {
+			getMyLocationFromPoint(result);
 		}
 	}
 
@@ -854,15 +854,17 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 	}
 
-	private void getMyLocationFromPoint(RotatedTileBox tb, PointF point, List<? super LatLon> myLocation) {
+	private void getMyLocationFromPoint(@NonNull MapSelectionResult result) {
 		LatLon location = getMyLocation();
 		if (location != null && view != null) {
+			PointF point = result.getPoint();
+			RotatedTileBox tileBox = result.getTileBox();
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, location);
-			int rad = (int) (18 * tb.getDensity());
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox, location);
+			int rad = (int) (18 * tileBox.getDensity());
 			if (Math.abs(pixel.x - ex) <= rad && (ey - pixel.y) <= rad && (pixel.y - ey) <= 2.5 * rad) {
-				myLocation.add(location);
+				result.collect(location, this);
 			}
 		}
 	}

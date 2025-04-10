@@ -154,8 +154,10 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		List<AvoidRoadInfo> impassableRoads = avoidRoadsHelper.getImpassableRoads();
 		if (tileBox.getZoom() >= START_ZOOM && !excludeUntouchableObjects && !Algorithms.isEmpty(impassableRoads)) {
 			MapRendererView mapRenderer = getMapRenderer();
@@ -180,7 +182,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 						? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
 						: tileBox.isLatLonInsidePixelArea(latLon, screenArea);
 				if (add) {
-					o.add(road);
+					result.collect(road, this);
 				}
 			}
 		}

@@ -54,6 +54,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.layers.MapTextLayer;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -260,7 +261,9 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		return true;
 	}
 
-	public void getOsmEditsFromPoint(PointF pixel, RotatedTileBox tileBox, List<? super OsmPoint> result) {
+	public void collectOsmEditsFromPoint(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		if (tileBox.getZoom() < START_ZOOM) {
 			return;
 		}
@@ -269,30 +272,30 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		List<OsmPoint> osmBugs = new ArrayList<>(plugin.getDBBug().getOsmBugsPoints());
 		if (!Algorithms.isEmpty(osmBugs)) {
 			QuadRect screenArea = new QuadRect(
-					pixel.x - radius,
-					pixel.y - radius / 3f,
-					pixel.x + radius,
-					pixel.y + radius * 1.5f
+					point.x - radius,
+					point.y - radius / 3f,
+					point.x + radius,
+					point.y + radius * 1.5f
 			);
-			getOsmEditsFromScreenArea(tileBox, osmBugs, screenArea, result);
+			collectOsmEditsFromScreenArea(tileBox, osmBugs, screenArea, result);
 		}
 
 		List<OsmPoint> osmEdits = new ArrayList<>(plugin.getDBPOI().getOpenstreetmapPoints());
 		if (!Algorithms.isEmpty(osmEdits)) {
 			QuadRect screenArea = new QuadRect(
-					pixel.x - radius,
-					pixel.y - radius,
-					pixel.x + radius,
-					pixel.y + radius
+					point.x - radius,
+					point.y - radius,
+					point.x + radius,
+					point.y + radius
 			);
-			getOsmEditsFromScreenArea(tileBox, osmEdits, screenArea, result);
+			collectOsmEditsFromScreenArea(tileBox, osmEdits, screenArea, result);
 		}
 	}
 
-	public void getOsmEditsFromScreenArea(@NonNull RotatedTileBox tileBox,
+	public void collectOsmEditsFromScreenArea(@NonNull RotatedTileBox tileBox,
 	                                      @NonNull List<OsmPoint> osmEdits,
 	                                      @NonNull QuadRect screenArea,
-	                                      @NonNull List<? super OsmPoint> result) {
+	                                      @NonNull MapSelectionResult result) {
 		MapRendererView mapRenderer = getMapRenderer();
 		List<PointI> touchPolygon31 = null;
 		if (mapRenderer != null) {
@@ -308,7 +311,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 					? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
 					: tileBox.isLatLonInsidePixelArea(latLon, screenArea);
 			if (add) {
-				result.add(osmEdit);
+				result.collect(osmEdit, this);
 			}
 		}
 	}
@@ -324,10 +327,10 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= START_ZOOM) {
-			getOsmEditsFromPoint(point, tileBox, o);
+		if (result.getTileBox().getZoom() >= START_ZOOM) {
+			collectOsmEditsFromPoint(result);
 		}
 	}
 

@@ -278,8 +278,10 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		if (tileBox.getZoom() >= 3 && !excludeUntouchableObjects) {
 			TargetPointsHelper tg = getApplication().getTargetPointsHelper();
 			List<TargetPoint> intermediatePoints = tg.getAllPoints();
@@ -292,7 +294,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 					int ey = (int) point.y;
 					PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox, latLon);
 					if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, r)) {
-						o.add(tp);
+						result.collect(tp, this);
 					}
 				}
 			}

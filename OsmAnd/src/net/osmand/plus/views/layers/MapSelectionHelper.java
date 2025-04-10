@@ -28,29 +28,14 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
-import net.osmand.core.jni.AreaI;
-import net.osmand.core.jni.IBillboardMapSymbol;
-import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
-import net.osmand.core.jni.IOnPathMapSymbol;
+import net.osmand.core.jni.*;
 import net.osmand.core.jni.MapObject;
+import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
 import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
-import net.osmand.core.jni.MapSymbol;
-import net.osmand.core.jni.MapSymbolInformationList;
 import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
-import net.osmand.core.jni.ObfMapObject;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QStringList;
-import net.osmand.core.jni.QStringStringHash;
-import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.RasterMapSymbol;
-import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
-import net.osmand.data.BackgroundType;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.data.TransportStop;
+import net.osmand.data.*;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -65,6 +50,7 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.clickable.ClickableWay;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -78,17 +64,10 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.MapUtils;
-import net.osmand.plus.track.clickable.ClickableWayHelper;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public class MapSelectionHelper {
@@ -140,59 +119,53 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	MapSelectionResult selectObjectsFromMap(@NonNull PointF point, @NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
-		LatLon pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(view.getMapRenderer(), tileBox, point);
+	MapSelectionResult collectObjectsFromMap(@NonNull PointF point,
+			@NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
 		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
-		Map<Object, IContextMenuProvider> selectedObjects =
-				selectObjectsFromMap(tileBox, point, showUnknownLocation, false);
-		MapSelectionResult result = new MapSelectionResult(selectedObjects, pointLatLon);
+		MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
+
+		collectObjectsFromMap(result, showUnknownLocation, false);
+
 		if (app.useOpenGlRenderer()) {
 			selectObjectsFromOpenGl(result, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
 		}
-		processTransportStops(selectedObjects);
-		if (selectedObjects.isEmpty()) {
-			selectedObjects.putAll(selectObjectsFromMap(tileBox, point, showUnknownLocation, true));
+		processTransportStops(result.getObjectsWithProviders());
+		if (result.getObjectsWithProviders().isEmpty()) {
+			collectObjectsFromMap(result, showUnknownLocation, true);
 		}
 		return result;
 	}
 
-	@NonNull
-	protected Map<Object, IContextMenuProvider> selectObjectsFromMap(@NonNull RotatedTileBox tileBox,
-	                                                                 @NonNull PointF point,
-	                                                                 boolean unknownLocation, boolean secondaryObjects) {
-		Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+	protected void collectObjectsFromMap(@NonNull MapSelectionResult result,
+			boolean unknownLocation, boolean secondaryObjects) {
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider && (!provider.isSecondaryProvider() || secondaryObjects)) {
-				List<Object> objects = new ArrayList<>();
-				provider.collectObjectsFromPoint(point, tileBox, objects, unknownLocation, false);
-				for (Object o : objects) {
-					selectedObjects.put(o, provider);
-				}
+				provider.collectObjectsFromPoint(result, unknownLocation, false);
 			}
 		}
-		return selectedObjects;
 	}
 
-	public void acquireTouchedMapObjects(@NonNull RotatedTileBox tileBox, @NonNull PointF point, boolean unknownLocation) {
+	public void acquireTouchedMapObjects(@NonNull RotatedTileBox tileBox, @NonNull PointF point,
+			boolean unknownLocation) {
 		Map<LatLon, BackgroundType> touchedMapObjectsFull = new HashMap<>();
 		Map<LatLon, BackgroundType> touchedMapObjectsSmall = new HashMap<>();
+		MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider) {
-				List<Object> collectedObjects = new ArrayList<>();
-				provider.collectObjectsFromPoint(point, tileBox, collectedObjects, unknownLocation, true);
-				for (Object o : collectedObjects) {
-					LatLon latLon = provider.getObjectLocation(o);
+				provider.collectObjectsFromPoint(result, unknownLocation, true);
+				for (Object object : result.getObjects()) {
+					LatLon latLon = provider.getObjectLocation(object);
 					BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
-					if (o instanceof OpenStreetNote) {
+					if (object instanceof OpenStreetNote) {
 						backgroundType = BackgroundType.COMMENT;
 					}
-					if (o instanceof FavouritePoint) {
-						backgroundType = ((FavouritePoint) o).getBackgroundType();
+					if (object instanceof FavouritePoint) {
+						backgroundType = ((FavouritePoint) object).getBackgroundType();
 					}
-					if (o instanceof WptPt) {
-						backgroundType = BackgroundType.getByTypeName(((WptPt) o).getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
+					if (object instanceof WptPt) {
+						backgroundType = BackgroundType.getByTypeName(((WptPt) object).getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
 					}
 					if (layer.isPresentInFullObjects(latLon) && !touchedMapObjectsFull.containsKey(latLon)) {
 						touchedMapObjectsFull.put(latLon, backgroundType);
@@ -206,8 +179,9 @@ public class MapSelectionHelper {
 		this.touchedSmallMapObjects = touchedMapObjectsSmall;
 	}
 
-	private void selectObjectsFromNative(@NonNull MapSelectionResult result, @NonNull NativeOsmandLibrary nativeLib,
-	                                     @NonNull RotatedTileBox tileBox, @NonNull PointF point) {
+	private void selectObjectsFromNative(@NonNull MapSelectionResult result,
+			@NonNull NativeOsmandLibrary nativeLib, @NonNull RotatedTileBox tileBox,
+			@NonNull PointF point) {
 		MapRenderRepositories maps = app.getResourceManager().getRenderer();
 		RenderingContext rc = maps.getVisibleRenderingContext();
 		RenderedObject[] renderedObjects = null;
@@ -264,19 +238,19 @@ public class MapSelectionHelper {
 
 				if (renderedObject.getX() != null && renderedObject.getX().size() == 1
 						&& renderedObject.getY() != null && renderedObject.getY().size() == 1) {
-					result.objectLatLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
-							MapUtils.get31LongitudeX(renderedObject.getX().get(0)));
+					result.setObjectLatLon(new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
+							MapUtils.get31LongitudeX(renderedObject.getX().get(0))));
 				} else if (renderedObject.getLabelLatLon() != null) {
-					result.objectLatLon = renderedObject.getLabelLatLon();
+					result.setObjectLatLon(renderedObject.getLabelLatLon());
 				}
-				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.pointLatLon;
+				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.getPointLatLon();
 
 				if (isOsmRoute && !osmRoutesAlreadyAdded) {
 					osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
 				} else if (isTravelGpx) {
 					addTravelGpx(result, travelGpxFilter);
 				} else if (isClickableWay) {
-					addClickableWay(result, clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
+					addClickableWay(result, clickableWayHelper.loadClickableWay(result.getPointLatLon(), renderedObject));
 				}
 
 				boolean allowAmenityObjects = !isTravelGpx;
@@ -284,7 +258,7 @@ public class MapSelectionHelper {
 				if (allowAmenityObjects) {
 					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
 					if (!amenityAdded) {
-						result.selectedObjects.put(renderedObject, null);
+						result.collect(renderedObject, null);
 					}
 				}
 
@@ -295,8 +269,8 @@ public class MapSelectionHelper {
 		}
 	}
 
-	private void selectObjectsFromOpenGl(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox,
-	                                     @NonNull PointF point) {
+	private void selectObjectsFromOpenGl(@NonNull MapSelectionResult result,
+			@NonNull RotatedTileBox tileBox, @NonNull PointF point) {
 		MapRendererView rendererView = view.getMapRenderer();
 		if (rendererView != null) {
 			int delta = 20;
@@ -316,7 +290,7 @@ public class MapSelectionHelper {
 				if (billboardMapSymbol != null) {
 					double lat = Utilities.get31LatitudeY(billboardMapSymbol.getPosition31().getY());
 					double lon = Utilities.get31LongitudeX(billboardMapSymbol.getPosition31().getX());
-					result.objectLatLon = new LatLon(lat, lon);
+					result.setObjectLatLon(new LatLon(lat, lon));
 
 					AdditionalBillboardSymbolInstanceParameters billboardAdditionalParams;
 					try {
@@ -328,7 +302,7 @@ public class MapSelectionHelper {
 					if (billboardAdditionalParams != null && billboardAdditionalParams.getOverridesPosition31()) {
 						lat = Utilities.get31LatitudeY(billboardAdditionalParams.getPosition31().getY());
 						lon = Utilities.get31LongitudeX(billboardAdditionalParams.getPosition31().getX());
-						result.objectLatLon = new LatLon(lat, lon);
+						result.setObjectLatLon(new LatLon(lat, lon));
 					}
 
 					try {
@@ -336,7 +310,7 @@ public class MapSelectionHelper {
 					} catch (Exception ignore) {
 					}
 				} else {
-					result.objectLatLon = NativeUtilities.getLatLonFromElevatedPixel(rendererView, tileBox, point);
+					result.setObjectLatLon(NativeUtilities.getLatLonFromElevatedPixel(rendererView, tileBox, point));
 				}
 				if (jniAmenity != null) {
 					List<String> names = getValues(jniAmenity.getLocalizedNames());
@@ -374,7 +348,7 @@ public class MapSelectionHelper {
 								addTravelGpx(result, tags.get(ROUTE_ID));
 							} else if (isClickableWay) {
 								addClickableWay(result,
-										clickableWayHelper.loadClickableWay(result.pointLatLon, obfMapObject, tags));
+										clickableWayHelper.loadClickableWay(result.getPointLatLon(), obfMapObject, tags));
 							}
 
 							boolean allowAmenityObjects = !isTravelGpx;
@@ -402,8 +376,8 @@ public class MapSelectionHelper {
 						}
 					}
 				}
-				if (amenity != null && isUniqueAmenity(result.selectedObjects.keySet(), amenity)) {
-					result.selectedObjects.put(amenity, mapLayers.getPoiMapLayer());
+				if (amenity != null && isUniqueAmenity(result.getObjectsWithProviders().keySet(), amenity)) {
+					result.collect(amenity, mapLayers.getPoiMapLayer());
 				}
 			}
 		}
@@ -427,8 +401,9 @@ public class MapSelectionHelper {
 		return null;
 	}
 
-	private void addRenderedObject(@NonNull MapSelectionResult result, @NonNull MapSymbolInformation symbolInfo,
-	                               @NonNull ObfMapObject obfMapObject, Map<String, String> tags) {
+	private void addRenderedObject(@NonNull MapSelectionResult result,
+			@NonNull MapSymbolInformation symbolInfo,
+			@NonNull ObfMapObject obfMapObject, Map<String, String> tags) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null) {
 			RenderedObject renderedObject = new RenderedObject();
@@ -451,7 +426,7 @@ public class MapSelectionHelper {
 			for (Map.Entry<String, String> entry : tags.entrySet()) {
 				renderedObject.putTag(entry.getKey(), entry.getValue());
 			}
-			result.selectedObjects.put(renderedObject, null);
+			result.collect(renderedObject, null);
 		}
 	}
 
@@ -503,29 +478,31 @@ public class MapSelectionHelper {
 		return amenity;
 	}
 
-	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId) {
-		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(result.pointLatLon, routeId);
-		if (travelGpx != null && isUniqueTravelGpx(result.selectedObjects, travelGpx)) {
+	private void addTravelGpx(@NonNull MapSelectionResult result,
+			@Nullable String routeId) {
+		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(result.getPointLatLon(), routeId);
+		if (travelGpx != null && isUniqueTravelGpx(result.getObjectsWithProviders(), travelGpx)) {
 			WptPt selectedPoint = new WptPt();
-			selectedPoint.setLat(result.pointLatLon.getLatitude());
-			selectedPoint.setLon(result.pointLatLon.getLongitude());
+			selectedPoint.setLat(result.getPointLatLon().getLatitude());
+			selectedPoint.setLon(result.getPointLatLon().getLongitude());
 			SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
-			result.selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getTravelSelectionLayer());
+			result.collect(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getTravelSelectionLayer());
 		} else if (travelGpx == null) {
 			log.error("addTravelGpx() searchTravelGpx() travelGpx is null");
 		}
 	}
 
-	private boolean addClickableWay(@NonNull MapSelectionResult result, @Nullable ClickableWay clickableWay) {
-		if (clickableWay != null && isUniqueClickableWay(result.selectedObjects, clickableWay)) {
-			result.selectedObjects.put(clickableWay, clickableWayHelper.getContextMenuProvider());
+	private boolean addClickableWay(@NonNull MapSelectionResult result,
+			@Nullable ClickableWay clickableWay) {
+		if (clickableWay != null && isUniqueClickableWay(result.getObjectsWithProviders(), clickableWay)) {
+			result.collect(clickableWay, clickableWayHelper.getContextMenuProvider());
 			return true;
 		}
 		return false;
 	}
 
 	private boolean isUniqueGpxFileName(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-										@NonNull String gpxFileName) {
+			@NonNull String gpxFileName) {
 		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
 			if (entry.getKey() instanceof SelectedGpxPoint && entry.getValue() instanceof GPXLayer) {
 				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) entry.getKey();
@@ -538,7 +515,7 @@ public class MapSelectionHelper {
 	}
 
 	private boolean isUniqueClickableWay(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-										 @NonNull ClickableWay clickableWay) {
+			@NonNull ClickableWay clickableWay) {
 		for (Object object : selectedObjects.keySet()) {
 			if (object instanceof ClickableWay that) {
 				if (clickableWay.getOsmId() == that.getOsmId()) {
@@ -550,7 +527,7 @@ public class MapSelectionHelper {
 	}
 
 	private boolean isUniqueTravelGpx(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-									  @NonNull TravelGpx travelGpx) {
+			@NonNull TravelGpx travelGpx) {
 		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
 			if (entry.getKey() instanceof Pair && entry.getValue() instanceof GPXLayer
 					&& ((Pair<?, ?>) entry.getKey()).first instanceof TravelGpx) {
@@ -560,11 +537,12 @@ public class MapSelectionHelper {
 				}
 			}
 		}
-		return isUniqueGpxFileName(selectedObjects,  travelGpx.getGpxFileName() + GPX_FILE_EXT);
+		return isUniqueGpxFileName(selectedObjects, travelGpx.getGpxFileName() + GPX_FILE_EXT);
 	}
 
-	private boolean addOsmRoutesAround(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox,
-									   @NonNull PointF point, @NonNull NetworkRouteSelectorFilter selectorFilter) {
+	private boolean addOsmRoutesAround(@NonNull MapSelectionResult result,
+			@NonNull RotatedTileBox tileBox, @NonNull PointF point,
+			@NonNull NetworkRouteSelectorFilter selectorFilter) {
 		if (Algorithms.isEmpty(selectorFilter.typeFilter)) {
 			return false;
 		}
@@ -575,7 +553,7 @@ public class MapSelectionHelper {
 				point.x + searchRadius, point.y + searchRadius);
 		QuadRect rect = new QuadRect(minLatLon.getLongitude(), minLatLon.getLatitude(),
 				maxLatLon.getLongitude(), maxLatLon.getLatitude());
-		return putRouteGpxToSelected(result.selectedObjects, mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
+		return putRouteGpxToSelected(result.getObjectsWithProviders(), mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
 	}
 
 	private NetworkRouteSelectorFilter createRouteFilter() {
@@ -605,9 +583,10 @@ public class MapSelectionHelper {
 		return routeSelectorFilter;
 	}
 
-	private boolean putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-										  @NonNull IContextMenuProvider provider, @NonNull QuadRect rect,
-										  @NonNull NetworkRouteSelectorFilter selectorFilter) {
+	private boolean putRouteGpxToSelected(
+			@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+			@NonNull IContextMenuProvider provider, @NonNull QuadRect rect,
+			@NonNull NetworkRouteSelectorFilter selectorFilter) {
 		int added = 0;
 		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
@@ -638,7 +617,8 @@ public class MapSelectionHelper {
 		return true;
 	}
 
-	private boolean addAmenity(@NonNull MapSelectionResult result, @NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
+	private boolean addAmenity(@NonNull MapSelectionResult result,
+			@NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
 		Amenity amenity = findAmenity(app, searchLatLon, object.getOriginalNames(), object.getId());
 		if (amenity != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
@@ -646,8 +626,8 @@ public class MapSelectionHelper {
 				amenity.getY().addAll(object.getY());
 			}
 			amenity.setMapIconName(object.getIconRes());
-			if (isUniqueAmenity(result.selectedObjects.keySet(), amenity)) {
-				result.selectedObjects.put(amenity, mapLayers.getPoiMapLayer());
+			if (isUniqueAmenity(result.getObjectsWithProviders().keySet(), amenity)) {
+				result.collect(amenity, mapLayers.getPoiMapLayer());
 			}
 			return true;
 		}
@@ -738,7 +718,7 @@ public class MapSelectionHelper {
 	}
 
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
-	                                  @Nullable List<String> names, long id) {
+			@Nullable List<String> names, long id) {
 		int searchRadius = ObfConstants.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
 				? AMENITY_SEARCH_RADIUS_FOR_RELATION
 				: AMENITY_SEARCH_RADIUS;
@@ -747,7 +727,7 @@ public class MapSelectionHelper {
 
 	@Nullable
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
-	                                  @Nullable List<String> names, long id, int radius) {
+			@Nullable List<String> names, long id, int radius) {
 		id = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
@@ -760,7 +740,8 @@ public class MapSelectionHelper {
 	}
 
 	@Nullable
-	public static Amenity findAmenityByOsmId(@NonNull OsmandApplication app, @NonNull LatLon latLon, long osmId) {
+	public static Amenity findAmenityByOsmId(@NonNull OsmandApplication app, @NonNull LatLon latLon,
+			long osmId) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_RADIUS);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
@@ -787,43 +768,26 @@ public class MapSelectionHelper {
 	}
 
 	@Nullable
-	public static Amenity findAmenityByName(@NonNull List<Amenity> amenities, @Nullable List<String> names) {
+	public static Amenity findAmenityByName(@NonNull List<Amenity> amenities,
+			@Nullable List<String> names) {
 		if (!Algorithms.isEmpty(names)) {
 			return amenities.stream()
-				.filter(amenity -> !amenity.isClosed())
-				.filter(amenity -> names.contains(amenity.getName()))
-				.findAny()
-				.orElseGet(() ->
-					amenities.stream()
-						.filter(amenity -> !amenity.isClosed())
-						.filter(amenity -> amenity.isRoutePoint())
-						.filter(amenity -> amenity.getName().isEmpty())
-						.filter(amenity -> {
-							String travelRouteId = amenity.getAdditionalInfo(TRAVEL_MAP_TO_POI_TAG);
-							return travelRouteId != null && names.contains(travelRouteId);
-						})
-						.findAny()
-						.orElse(null)
-				);
+					.filter(amenity -> !amenity.isClosed())
+					.filter(amenity -> names.contains(amenity.getName()))
+					.findAny()
+					.orElseGet(() ->
+							amenities.stream()
+									.filter(amenity -> !amenity.isClosed())
+									.filter(amenity -> amenity.isRoutePoint())
+									.filter(amenity -> amenity.getName().isEmpty())
+									.filter(amenity -> {
+										String travelRouteId = amenity.getAdditionalInfo(TRAVEL_MAP_TO_POI_TAG);
+										return travelRouteId != null && names.contains(travelRouteId);
+									})
+									.findAny()
+									.orElse(null)
+					);
 		}
 		return null;
-	}
-
-	static class MapSelectionResult {
-
-		final LatLon pointLatLon;
-		final Map<Object, IContextMenuProvider> selectedObjects;
-
-		private LatLon objectLatLon;
-
-		public MapSelectionResult(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-		                          @NonNull LatLon pointLatLon) {
-			this.pointLatLon = pointLatLon;
-			this.selectedObjects = selectedObjects;
-		}
-
-		public LatLon getObjectLatLon() {
-			return objectLatLon;
-		}
 	}
 }

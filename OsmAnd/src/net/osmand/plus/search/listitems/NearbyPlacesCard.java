@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -30,6 +31,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.NearbyPlacesAdapter;
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.MapUtils;
@@ -78,7 +80,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private boolean nightMode;
 
 	public NearbyPlacesCard(@NonNull MapActivity activity,
-			@NonNull NearbyItemClickListener listener, boolean nightMode) {
+	                        @NonNull NearbyItemClickListener listener, boolean nightMode) {
 		super(activity);
 		app = (OsmandApplication) activity.getApplicationContext();
 		this.clickListener = listener;
@@ -148,11 +150,10 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private void updateExpandState() {
 		int iconRes = collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
 		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, !app.getSettings().isLightContent()));
-		boolean internetAvailable = app.getSettings().isInternetConnectionAvailable();
 		boolean nearbyPointFound = getNearbyAdapter().getItemCount() > 0;
-		AndroidUiHelper.updateVisibility(cardContent, !collapsed && nearbyPointFound && internetAvailable);
-		AndroidUiHelper.updateVisibility(noInternetCard, !collapsed && !internetAvailable);
-		AndroidUiHelper.updateVisibility(emptyView, !collapsed && internetAvailable && !nearbyPointFound && !isLoadingItems);
+		AndroidUiHelper.updateVisibility(cardContent, !collapsed && nearbyPointFound && isDataSourceAvailable());
+		AndroidUiHelper.updateVisibility(noInternetCard, !collapsed && !isDataSourceAvailable());
+		AndroidUiHelper.updateVisibility(emptyView, !collapsed && isDataSourceAvailable() && !nearbyPointFound && !isLoadingItems);
 		if (!collapsed && !nearbyPointFound && !isLoadingItems) {
 			populateDownloadItems();
 		}
@@ -190,8 +191,14 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		}
 	}
 
+	private boolean isDataSourceAvailable() {
+		OsmandSettings settings = app.getSettings();
+		boolean dataSourceOnline = settings.WIKI_DATA_SOURCE_TYPE.get() == DataSourceType.ONLINE;
+		return settings.isInternetConnectionAvailable() || !dataSourceOnline;
+	}
+
 	private void onNearbyPlacesCollapseChanged() {
-		if (!collapsed && app.getSettings().isInternetConnectionAvailable()) {
+		if (!collapsed && isDataSourceAvailable()) {
 			startLoadingNearbyPlaces();
 		}
 		updateExpandState();
@@ -210,7 +217,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 
 	@Nullable
 	private PoiUIFilter getWikiFilter() {
-		if(wikiFilter == null) {
+		if (wikiFilter == null) {
 			wikiFilter = plugin.getTopWikiPoiFilter();
 		}
 		return wikiFilter;

@@ -2,6 +2,7 @@ package net.osmand.plus.search;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,8 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 	public final TextView type;
 	public final ImageView icon;
 	public final ImageView image;
+	public final ViewGroup imageViewContainer;
+	public final ImageView errorImageView;
 
 	public final boolean nightMode;
 
@@ -49,6 +52,8 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 		type = view.findViewById(R.id.item_type);
 		icon = view.findViewById(R.id.item_icon);
 		image = view.findViewById(R.id.item_image);
+		imageViewContainer = view.findViewById(R.id.item_image_container);
+		errorImageView = itemView.findViewById(R.id.item_image_error);
 	}
 
 	public void bindItem(@NonNull QuickSearchWikiItem item, @Nullable PoiUIFilter poiUIFilter,
@@ -59,25 +64,32 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 
 		Drawable drawable = item.getIcon();
 		icon.setImageDrawable(drawable);
+		errorImageView.setImageDrawable(drawable);
 
 		boolean shouldLayoutWithImages = poiUIFilter != null && poiUIFilter.showLayoutWithImages();
-		AndroidUiHelper.updateVisibility(image, shouldLayoutWithImages);
+		AndroidUiHelper.updateVisibility(imageViewContainer, shouldLayoutWithImages);
 		if (shouldLayoutWithImages) {
 			String wikiImageUrl = item.getImage();
-			if (wikiImageUrl != null) {
-				RequestCreator creator = Picasso.get().load(wikiImageUrl);
-				creator.error(drawable);
-				creator.into(image, new Callback() {
-					@Override
-					public void onSuccess() {
-						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
-					}
+			if (image.getTag() != wikiImageUrl) {
+				image.setTag(wikiImageUrl);
+				if (wikiImageUrl != null) {
+					RequestCreator creator = Picasso.get().load(wikiImageUrl);
+					creator.into(image, new Callback() {
+						@Override
+						public void onSuccess() {
+							AndroidUiHelper.updateVisibility(image, true);
+							AndroidUiHelper.updateVisibility(errorImageView, false);
+							PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
+						}
 
-					@Override
-					public void onError(Exception e) {
-						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
-					}
-				});
+						@Override
+						public void onError(Exception e) {
+							AndroidUiHelper.updateVisibility(image, false);
+							AndroidUiHelper.updateVisibility(errorImageView, true);
+							PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, false);
+						}
+					});
+				}
 			}
 		}
 		QuickSearchListAdapter.updateCompass(itemView, item, locationViewCache, useMapCenter);

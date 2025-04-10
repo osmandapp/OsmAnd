@@ -30,6 +30,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable.RenderableSegment;
 import net.osmand.plus.views.Renderable.StandardTrack;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
 import net.osmand.plus.views.layers.core.TilePointsProvider;
@@ -1083,7 +1084,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 
 	}
