@@ -33,7 +33,7 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 
 	private ModedColorsPaletteController colorsPaletteController;
 	protected IMapColorPaletteControllerListener externalListener;
-	private boolean initialNightMode;
+	private final boolean initialNightMode;
 
 	@ColorInt protected final int initialColorDay;
 	@ColorInt protected final int initialColorNight;
