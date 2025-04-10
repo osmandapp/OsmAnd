@@ -31,6 +31,7 @@ import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,19 +91,26 @@ public class MapHudLayout extends FrameLayout {
 
 	private void addPosition(@Nullable View view) {
 		if (view != null) {
-			addChangeListeners(view);
+			addViewChangeListener(view);
 			widgetPositions.put(view, createWidgetPosition(view));
 		}
 	}
 
-	private void addChangeListeners(@NonNull View view) {
+	private void addViewChangeListener(@NonNull View view) {
 		if (view instanceof ViewChangeProvider provider) {
-			provider.setSizeListener((v, width, height, oldWidth, oldHeight) -> {
-				if (width != oldWidth || height != oldHeight) {
+			provider.addViewChangeListener(new ViewChangeListener() {
+				@Override
+				public void onSizeChanged(@NonNull View view, int width, int height, int oldWidth, int oldHeight) {
+					if (width != oldWidth || height != oldHeight) {
+						refresh();
+					}
+				}
+
+				@Override
+				public void onVisibilityChanged(@NonNull View view, int visibility) {
 					refresh();
 				}
 			});
-			provider.setVisibilityListener((v, visibility) -> refresh());
 		}
 	}
 
@@ -116,7 +124,7 @@ public class MapHudLayout extends FrameLayout {
 		if (position != null) {
 			updateButtonParams(params, position);
 		}
-		addChangeListeners(button);
+		addViewChangeListener(button);
 
 		addView(button, params);
 		mapButtons.add(button);
@@ -127,7 +135,7 @@ public class MapHudLayout extends FrameLayout {
 		LayoutParams params = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
 
 		updateButtonParams(params, position);
-		addChangeListeners(view);
+		addViewChangeListener(view);
 
 		addView(view, params);
 		additionalWidgetPositions.put(view, position);
@@ -348,19 +356,38 @@ public class MapHudLayout extends FrameLayout {
 		return getHeight() - statusBarHeight;
 	}
 
-	public interface VisibilityChangeListener {
-		void onVisibilityChanged(@NonNull View view, int visibility);
-	}
-
-	public interface SizeChangeListener {
+	public interface ViewChangeListener {
 		void onSizeChanged(@NonNull View view, int w, int h, int oldWidth, int oldHeight);
+
+		void onVisibilityChanged(@NonNull View view, int visibility);
 	}
 
 	public interface ViewChangeProvider {
 
-		void setSizeListener(@Nullable SizeChangeListener listener);
+		default void addViewChangeListener(@NonNull ViewChangeListener listener) {
+			Collection<ViewChangeListener> listeners = getViewChangeListeners();
+			if (!listeners.contains(listener)) {
+				listeners.add(listener);
+			}
+		}
 
-		void setVisibilityListener(@Nullable VisibilityChangeListener listener);
+		default void removeViewChangeListener(@NonNull ViewChangeListener listener) {
+			getViewChangeListeners().remove(listener);
+		}
 
+		default void notifySizeChanged(@NonNull View view, int w, int h, int oldWidth, int oldHeight) {
+			for (ViewChangeListener listener : getViewChangeListeners()) {
+				listener.onSizeChanged(view, w, h, oldWidth, oldHeight);
+			}
+		}
+
+		default void notifyVisibilityChanged(@NonNull View view, int visibility) {
+			for (ViewChangeListener listener : getViewChangeListeners()) {
+				listener.onVisibilityChanged(view, visibility);
+			}
+		}
+
+		@NonNull
+		Collection<ViewChangeListener> getViewChangeListeners();
 	}
 }

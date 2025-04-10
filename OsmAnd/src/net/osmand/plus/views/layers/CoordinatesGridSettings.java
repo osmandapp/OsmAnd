@@ -170,10 +170,4 @@ public class CoordinatesGridSettings {
 		OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
 		return settings.TEXT_SCALE.getModeValue(appMode) * mapTileView.getDensity();
 	}
-
-	public boolean shouldShowGrid(@NonNull ApplicationMode appMode,
-	                              @NonNull GridFormat gridFormat, int zoom) {
-		Limits<Integer> limits = getZoomLevelsWithRestrictions(appMode, gridFormat);
-		return isEnabled(appMode) && zoom >= limits.min() && zoom <= limits.max();
-	}
 }
