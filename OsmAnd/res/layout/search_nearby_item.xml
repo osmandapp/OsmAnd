@@ -13,7 +13,7 @@
 		android:layout_width="@dimen/nearby_place_image_width"
 		android:layout_height="@dimen/nearby_place_image_height"
 		android:layout_gravity="center_horizontal"
-		android:scaleType="centerCrop" />
+		/>
 
 	<TextView
 		android:id="@+id/item_title"

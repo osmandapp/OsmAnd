@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.UiContext
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -18,6 +19,7 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.render.RenderingIcons
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.PicassoUtils
 import net.osmand.plus.utils.UiUtilities
@@ -107,22 +109,36 @@ class NearbyPlacesAdapter(
 			iconImageView.setImageDrawable(coloredIcon)
 			if (shouldShowImage()) {
 				AndroidUiHelper.updateVisibility(imageView, true)
+				imageView.scaleType = ImageView.ScaleType.CENTER
 				val picasso = PicassoUtils.getPicasso(app)
-				item.wikiImageStubUrl?.let {
-					val creator = Picasso.get()
-						.load(it)
-					if (coloredIcon != null) {
-						creator.error(coloredIcon)
-					}
-					creator.into(imageView, object : Callback {
-						override fun onSuccess() {
-							picasso.setResultLoaded(it, true)
+				if (imageView.tag != item.wikiImageStubUrl) {
+					imageView.tag = item.wikiImageStubUrl
+					item.wikiImageStubUrl?.let {
+						val creator = Picasso.get()
+							.load(it)
+						if (coloredIcon != null) {
+							val errorImageSize =
+								app.resources.getDimension(R.dimen.nearby_place_error_mange_size)
+							val errorDrawable = AndroidUtils.createScaledBitmap(
+								coloredIcon,
+								errorImageSize.toInt(),
+								errorImageSize.toInt())
+							if (errorDrawable != null) {
+								creator.error(errorDrawable.toDrawable(app.resources))
+								creator.placeholder(errorDrawable.toDrawable(app.resources))
+							}
 						}
+						creator.into(imageView, object : Callback {
+							override fun onSuccess() {
+								iconImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+								picasso.setResultLoaded(it, true)
+							}
 
-						override fun onError(e: Exception?) {
-							picasso.setResultLoaded(it, true)
-						}
-					})
+							override fun onError(e: Exception?) {
+								picasso.setResultLoaded(it, true)
+							}
+						})
+					}
 				}
 			} else {
 				AndroidUiHelper.updateVisibility(imageView, false)

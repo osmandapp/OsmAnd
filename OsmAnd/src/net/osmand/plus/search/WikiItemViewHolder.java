@@ -64,20 +64,23 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 		AndroidUiHelper.updateVisibility(image, shouldLayoutWithImages);
 		if (shouldLayoutWithImages) {
 			String wikiImageUrl = item.getImage();
-			if (wikiImageUrl != null) {
-				RequestCreator creator = Picasso.get().load(wikiImageUrl);
-				creator.error(drawable);
-				creator.into(image, new Callback() {
-					@Override
-					public void onSuccess() {
-						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
-					}
+			if (image.getTag() != wikiImageUrl) {
+				image.setTag(wikiImageUrl);
+				if (wikiImageUrl != null) {
+					RequestCreator creator = Picasso.get().load(wikiImageUrl);
+					creator.error(drawable);
+					creator.into(image, new Callback() {
+						@Override
+						public void onSuccess() {
+							PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
+						}
 
-					@Override
-					public void onError(Exception e) {
-						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
-					}
-				});
+						@Override
+						public void onError(Exception e) {
+							PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, false);
+						}
+					});
+				}
 			}
 		}
 		QuickSearchListAdapter.updateCompass(itemView, item, locationViewCache, useMapCenter);
