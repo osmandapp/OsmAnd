@@ -281,6 +281,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 		if (needUpdateOnly && mapillaryCards != null) {
 			mapillaryCardsRow.setCards(mapillaryCards);
+		} else if (!collapsableView.isCollapsed() && mapillaryCards == null) {
+			menuBuilder.startLoadingImages();
 		}
 	}
 

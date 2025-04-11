@@ -58,7 +58,7 @@
 			android:id="@+id/item_icon"
 			android:layout_width="16dp"
 			android:layout_height="16dp"
-			android:layout_gravity="center_vertical|top"
+			android:layout_gravity="center_vertical"
 			android:layout_marginEnd="6dp" />
 
 		<TextView
@@ -70,7 +70,6 @@
 			android:textColor="?android:textColorSecondary"
 			android:textSize="14sp"
 			tools:text="Monument" />
-
 
 	</LinearLayout>
 

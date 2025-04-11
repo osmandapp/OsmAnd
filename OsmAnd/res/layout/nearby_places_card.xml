@@ -7,6 +7,8 @@
 	android:background="?attr/activity_background_color"
 	android:orientation="vertical">
 
+	<include layout="@layout/list_item_divider" />
+
 	<LinearLayout
 		android:id="@+id/nearby_title_container"
 		android:layout_width="match_parent"
