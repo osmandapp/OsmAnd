@@ -494,9 +494,9 @@ public class GeocodingUtilities {
 		}
 		List<Integer> types = new ArrayList<>();
 		int[] t = obj.getTypes();
-        for (int j : t) {
-            types.add(j);
-        }
+		for (int j : t) {
+			types.add(j);
+		}
 		for (Map.Entry<String, List<String>> entry : GEOCODING_ACCESS.entrySet()) {
 			for (String val : entry.getValue()) {
 				int type = obj.region.findOrCreateRouteType(entry.getKey(), val);
