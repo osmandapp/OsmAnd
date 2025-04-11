@@ -5744,4 +5744,5 @@
     <string name="multipoligon_related">Повезано</string>
     <string name="route_part_of">Део од</string>
     <string name="route_members">Чланови</string>
+    <string name="cant_load_map_styles">Не могу се учитати стилови мапе.</string>
 </resources>
