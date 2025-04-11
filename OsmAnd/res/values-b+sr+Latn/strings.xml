@@ -5554,7 +5554,7 @@
     <string name="connect_obd_instructions_step">1. Spoj skener na OBD-II priključak vozila.\n\n2. Uključi motor vozila\n\n3. Omogući Bluetooth na svom uređaju\n\n4. Dodirni \'%1$s\' i odaberi svoj skener s liste.</string>
     <string name="route_guidance_desc">Omogućuje navođenje rutom u stvarnom vremenu, uključujući udaljenost do sledećeg skretanja, naziv ulice, trenutni naziv ulice i informacije o traci. Widžeti su aktivni tokom navigacije.</string>
     <string name="obd_nothing_found_description">Proveriti sledeće:\n – Proveri je li Bluetooth uključen\n – Motor vozila radi\n – Proveri je li uređaj u dometu skenera.</string>
-    <string name="obd_bluetooth_off_description">Uključi Bluetooth traženje i povezivanje skenera.</string>
+    <string name="obd_bluetooth_off_description">Uključite Bluetooth da biste pronašli i povezali skenere.</string>
     <string name="obd_searching_text_description">Drži uređaj blizu skenera. Proveri da li radi motor vozila.</string>
     <string name="obd_fuel_consumption_rate_sensor">Potrošnja goriva (senzor)</string>
     <string name="obd_fuel_level_liter">Nivo goriva (l)</string>
