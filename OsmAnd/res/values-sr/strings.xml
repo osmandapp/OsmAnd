@@ -5552,7 +5552,7 @@
     <string name="obd_widget_vehicle_speed">Брзина возила</string>
     <string name="obd_widget_engine_speed">Брзина мотора</string>
     <string name="obd_nothing_found_text">Није пронађен ни један пријемник</string>
-    <string name="obd_bluetooth_off_description">Укључите Блутут проналажење и повезивање пријемника.</string>
+    <string name="obd_bluetooth_off_description">Укључите Блутут да бисте пронашли и повезали пријемнике.</string>
     <string name="obd_searching_text">Тражење пријемника</string>
     <string name="obd_device_forget_sensor">Заборави пријемник</string>
     <string name="obd_searching_text_description">Држите уређај близу пријемника. Проверите да мотор возила ради.</string>
