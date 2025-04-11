@@ -333,6 +333,9 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
+		if (way != null && profileName.equals("geocoding")) {
+			return true;
+		}
 		Float res = getCache(RouteDataObjectAttribute.ACCESS, way);
 		if (res == null) {
 			res = (float) getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
