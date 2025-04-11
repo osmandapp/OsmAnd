@@ -5751,4 +5751,6 @@
     <string name="grid_color">Couleur de grille</string>
     <string name="route_part_of">Fait partie de</string>
     <string name="route_members">Membres</string>
+    <string name="multipoligon_related">Lié</string>
+    <string name="cant_load_map_styles">Impossible de charger les styles de carte.</string>
 </resources>
