@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -55,6 +56,38 @@ public class GeocodingUtilities {
 			return Double.compare(o1.getDistance(), o2.getDistance());
 		}
 	};
+
+	public static final Map<String, List<String>> GEOCODING_ACCESS = initGeocodingAccess();
+	private static Map<String, List<String>> initGeocodingAccess() {
+		Map<String, List<String>> map = new HashMap<>();
+
+		map.put("highway", Arrays.asList(
+				"motorway",
+				"motorway_link",
+				"trunk",
+				"trunk_link",
+				"primary",
+				"primary_link",
+				"secondary",
+				"secondary_link",
+				"tertiary",
+				"tertiary_link",
+				"unclassified",
+				"road",
+				"residential",
+				"track",
+				"service",
+				"living_street",
+				"pedestrian"
+		));
+
+		map.put("route", Arrays.asList(
+				"ferry",
+				"shuttle_train"
+		));
+
+		return map;
+	}
 
 	public static class GeocodingResult {
 		public GeocodingResult() {
@@ -453,5 +486,25 @@ public class GeocodingUtilities {
 		Collections.sort(complete, DISTANCE_COMPARATOR);
 		return complete;
 
+	}
+
+	public boolean hasGeocodingAccess(RouteDataObject obj) {
+		if (obj == null) {
+			return false;
+		}
+		List<Integer> types = new ArrayList<>();
+		int[] t = obj.getTypes();
+        for (int j : t) {
+            types.add(j);
+        }
+		for (Map.Entry<String, List<String>> entry : GEOCODING_ACCESS.entrySet()) {
+			for (String val : entry.getValue()) {
+				int type = obj.region.findOrCreateRouteType(entry.getKey(), val);
+				if (types.contains(type)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

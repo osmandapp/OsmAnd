@@ -238,9 +238,9 @@ public class CurrentPositionHelper {
 	private void justifyResult(List<GeocodingResult> res, ResultMatcher<GeocodingResult> result) {
 		List<GeocodingResult> complete = new ArrayList<>();
 		double minBuildingDistance = 0;
+		GeocodingUtilities utilities = new GeocodingUtilities();
 		if (res != null) {
 			List<BinaryMapIndexReader> readers = new ArrayList<>();
-			GeocodingUtilities utilities = new GeocodingUtilities();
 			for (GeocodingResult r : res) {
 				BinaryMapIndexReader foundRepo = null;
 				List<BinaryMapReaderResource> rts  = usedReaders;
@@ -294,6 +294,7 @@ public class CurrentPositionHelper {
 			app.runInUIThread(() -> result.publish(null));
 			return;
 		}
+		complete.removeIf(entry -> entry.building == null && entry.street == null && !utilities.hasGeocodingAccess(entry.point.getRoad()));
 		GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
 		app.runInUIThread(() -> result.publish(rts));
 	}
