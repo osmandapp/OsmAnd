@@ -5572,7 +5572,7 @@
     <string name="obd_fuel_pressure_desc">Показує тиск всередині паливної системи</string>
     <string name="kpa_unit">кПа</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Показує швидкість споживання палива автомобіля на основі датчика (л/год)</string>
-    <string name="obd_bluetooth_off_description">Увімкніть функцію пошуку та підключення сканерів за допомогою Bluetooth.</string>
+    <string name="obd_bluetooth_off_description">Увімкніть Bluetooth, щоб знайти та підключити сканери.</string>
     <string name="shared_string_dynamic">Динамічний</string>
     <string name="obd_connected_to_device">Під\'єднано до %s</string>
     <string name="dynamic_icon_type_summary">Піктограма змінюється залежно від стану дії.</string>
