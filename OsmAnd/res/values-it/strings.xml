@@ -5774,4 +5774,5 @@
     <string name="route_part_of">Parte di</string>
     <string name="route_members">Membri</string>
     <string name="multipoligon_related">Collegato</string>
+    <string name="cant_load_map_styles">Impossible caricare gli stili di mappa.</string>
 </resources>
