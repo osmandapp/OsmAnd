@@ -208,7 +208,7 @@
 – Vehicle engine is running\n
 – Make sure your device is within range of the scanner.</string>
     <string name="obd_nothing_found_text">No scanners found</string>
-    <string name="obd_bluetooth_off_description">Turn on Bluetooth find and connect scanners.</string>
+    <string name="obd_bluetooth_off_description">Turn on Bluetooth to find and connect scanners.</string>
     <string name="obd_searching_text_description">Please keep your device close to the scanner. Ensure the vehicle\'s engine is running.</string>
     <string name="obd_searching_text">Searching for scanners</string>
     <string name="obd_device_forget_sensor">Forget scanner</string>
