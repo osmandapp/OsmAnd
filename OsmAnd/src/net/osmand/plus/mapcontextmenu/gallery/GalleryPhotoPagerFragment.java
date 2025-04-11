@@ -120,7 +120,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		descriptionContainer = view.findViewById(R.id.description_container);
 
 		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
-		if (selectedPosition <= imageCards.size()) {
+		if (selectedPosition < imageCards.size()) {
 			setupViewPager(view);
 			preloadThumbNails();
 			updateImageDescriptionRow(getSelectedImageCard(), true, null);
