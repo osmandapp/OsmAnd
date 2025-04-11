@@ -57,9 +57,9 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 	private Float cachedTextScale;
 	private Boolean cachedGridEnabled;
 	private boolean cachedNightMode;
-	private StateChangedListener settingsListener;
+	private final StateChangedListener settingsListener;
 
-	private ViewHeightChangeListener widgetsPanelHeightListener;
+	private final ViewHeightChangeListener panelsHeightListener;
 	private VerticalWidgetPanel topWidgetsPanel;
 	private VerticalWidgetPanel bottomWidgetsPanel;
 	private boolean marginFactorUpdateNeeded = false;
@@ -71,7 +71,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		gridSettings = new CoordinatesGridSettings(app);
 		mapTileView = app.getOsmandMap().getMapView();
 
-		widgetsPanelHeightListener = () -> {
+		panelsHeightListener = () -> {
 			marginFactorUpdateNeeded = true;
 			updateGridSettings();
 		};
@@ -95,18 +95,20 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 			topWidgetsPanel = mapActivity.findViewById(R.id.top_widgets_panel);
 			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
 			if (topWidgetsPanel != null) {
-				topWidgetsPanel.addViewChangeListener(widgetsPanelHeightListener);
+				topWidgetsPanel.addViewChangeListener(panelsHeightListener);
 			}
 			if (bottomWidgetsPanel != null) {
-				bottomWidgetsPanel.addViewChangeListener(widgetsPanelHeightListener);
+				bottomWidgetsPanel.addViewChangeListener(panelsHeightListener);
 			}
 		} else {
 			if (topWidgetsPanel != null) {
-				topWidgetsPanel.removeViewChangeListener(widgetsPanelHeightListener);
+				topWidgetsPanel.removeViewChangeListener(panelsHeightListener);
 			}
 			if (bottomWidgetsPanel != null) {
-				bottomWidgetsPanel.removeViewChangeListener(widgetsPanelHeightListener);
+				bottomWidgetsPanel.removeViewChangeListener(panelsHeightListener);
 			}
+			topWidgetsPanel = null;
+			bottomWidgetsPanel = null;
 		}
 	}
 
