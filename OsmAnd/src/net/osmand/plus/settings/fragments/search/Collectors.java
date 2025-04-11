@@ -6,10 +6,9 @@ import java.util.stream.Collector;
 
 public class Collectors {
 
-	public static <T, K, U>
-	Collector<T, ?, LinkedHashMap<K, U>> toOrderedMap(Function<? super T, ? extends K> keyMapper,
-													  Function<? super T, ? extends U> valueMapper) {
-
+	public static <T, K, U> Collector<T, ?, LinkedHashMap<K, U>> toOrderedMap(
+			Function<? super T, ? extends K> keyMapper,
+			Function<? super T, ? extends U> valueMapper) {
 		return java.util.stream.Collectors.toMap(
 				keyMapper,
 				valueMapper,
