@@ -6011,7 +6011,7 @@
     <string name="show_dm_grids_description">Mostrar la cuadrícula en grados y minutos en lugar de grados o DMS</string>
     <string name="show_dms_grids_description">Mostrar la cuadrícula en grados, minutos y segundos en lugar de grados</string>
     <string name="original_icon_description">Cada punto mantendría su propio icono.</string>
-    <string name="ais_cpa_warning_distance"></string>
+    <string name="ais_cpa_warning_distance"/>
     <string name="grid_color">Color de la cuadrícula</string>
     <string name="shared_string_edges">Bordes</string>
     <string name="labels_position">Posición de las etiquetas</string>
