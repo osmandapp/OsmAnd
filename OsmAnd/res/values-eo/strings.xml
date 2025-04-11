@@ -5751,4 +5751,5 @@
     <string name="route_members">Anoj</string>
     <string name="route_part_of">Parto de</string>
     <string name="multipoligon_related">Rilataj</string>
+    <string name="cant_load_map_styles">Ne povas enlegi map-stilojn.</string>
 </resources>
