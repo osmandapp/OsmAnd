@@ -5740,4 +5740,5 @@
     <string name="multipoligon_related">Srodno</string>
     <string name="route_part_of">Deo</string>
     <string name="route_members">Članovi</string>
+    <string name="cant_load_map_styles">Ne mogu da učitam stilove mape.</string>
 </resources>
