@@ -269,7 +269,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	public void updateRow(MapWidget widget) {
-		if (getMapActivity() != null || !getMapActivity().isActivityDestroyed()) {
+		if (getMapActivity() != null && !getMapActivity().isActivityDestroyed()) {
 			topWidgetsPanel.updateRow(widget);
 			bottomWidgetsPanel.updateRow(widget);
 		}
