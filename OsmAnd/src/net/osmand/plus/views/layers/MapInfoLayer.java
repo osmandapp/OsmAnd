@@ -261,15 +261,15 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
-	private void clearCustomContainers(MapActivity mapActivity) {
-		ViewGroup lanesCustomContainer = mapActivity.findViewById(R.id.lanes_widget_special_position);
-		if (lanesCustomContainer != null) {
-			lanesCustomContainer.removeAllViews();
+	private void clearCustomContainers(@NonNull MapActivity activity) {
+		ViewGroup container = activity.findViewById(R.id.lanes_widget_special_position);
+		if (container != null) {
+			container.removeAllViews();
 		}
 	}
 
-	public void updateRow(MapWidget widget) {
-		if (getMapActivity() != null && !getMapActivity().isActivityDestroyed()) {
+	public void updateRow(@NonNull MapWidget widget) {
+		if (AndroidUtils.isActivityNotDestroyed(getMapActivity())) {
 			topWidgetsPanel.updateRow(widget);
 			bottomWidgetsPanel.updateRow(widget);
 		}
