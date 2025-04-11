@@ -138,11 +138,6 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		return am;
 	}
 
-	@NonNull
-	public Amenity getAmenity() {
-		return amenity;
-	}
-
 	private static class SearchAmenitiesTask extends AsyncTask<Void, Void, Amenity> {
 
 		private final CallbackWithObject<Amenity> listener;

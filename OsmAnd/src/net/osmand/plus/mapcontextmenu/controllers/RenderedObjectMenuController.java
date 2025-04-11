@@ -28,8 +28,11 @@ public class RenderedObjectMenuController extends MenuController {
 	private RenderedObject renderedObject;
 
 	private String nameStr = null;
-	private MapPoiTypes mapPoiTypes = null;
-	private MapPoiTypes.PoiTranslator poiTranslator = null;
+
+	@Nullable
+	private final MapPoiTypes mapPoiTypes;
+	@Nullable
+	private final MapPoiTypes.PoiTranslator poiTranslator;
 
 	public RenderedObjectMenuController(@NonNull MapActivity mapActivity,
 	                                    @NonNull PointDescription pointDescription,
@@ -37,10 +40,8 @@ public class RenderedObjectMenuController extends MenuController {
 		super(new RenderedObjectMenuBuilder(mapActivity, renderedObject), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		setRenderedObject(renderedObject);
-		if (this.getMapActivity() != null) {
-			mapPoiTypes = mapActivity.getMyApplication().getPoiTypes();
-			poiTranslator = mapActivity.getMyApplication().getPoiTypes().getPoiTranslator();
-		}
+		mapPoiTypes = mapActivity.getMyApplication().getPoiTypes();
+		poiTranslator = mapPoiTypes != null ? mapPoiTypes.getPoiTranslator() : null;
 	}
 
 	@Override
@@ -225,12 +226,10 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			MapPoiTypes poiTypes = mapActivity.getMyApplication().getPoiTypes();
+		if (mapPoiTypes != null) {
 			for (Map.Entry<String, String> entry : renderedObject.getTags().entrySet()) {
 				if (entry.getKey().equalsIgnoreCase("maxheight")) {
-					AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(entry.getKey());
+					AbstractPoiType pt = mapPoiTypes.getAnyPoiAdditionalTypeByKey(entry.getKey());
 					if (pt != null) {
 						addPlainMenuItem(R.drawable.ic_action_note_dark, null, pt.getTranslation() + ": " + entry.getValue(), false, false, null);
 					}
@@ -279,9 +278,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Nullable
 	private String getIconRes() {
-		if (getMapActivity() != null && renderedObject.isPolygon()) {
-			OsmandApplication app = getMapActivity().getMyApplication();
-			MapPoiTypes mapPoiTypes = app.getPoiTypes();
+		if (mapPoiTypes != null && renderedObject.isPolygon()) {
 			Map<String, String> t  = renderedObject.getTags();
 			for (Map.Entry<String, String> e : t.entrySet()) {
 				PoiType pt = mapPoiTypes.getPoiTypeByKey(e.getValue());
