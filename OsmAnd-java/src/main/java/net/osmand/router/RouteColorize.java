@@ -163,7 +163,11 @@ public class RouteColorize {
 				slopes[i] = Double.NaN;
 			} else {
 				double[] arg = findDerivativeArguments(distances, elevations, i, slopeRange);
-				slopes[i] = (arg[1] - arg[0]) / (arg[3] - arg[2]);
+				if (arg.length >= 4) {
+					slopes[i] = (arg[1] - arg[0]) / (arg[3] - arg[2]);
+				} else {
+					slopes[i] = Double.NaN;
+				}
 			}
 		}
 		return slopes;

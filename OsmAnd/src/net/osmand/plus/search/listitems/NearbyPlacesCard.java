@@ -1,6 +1,6 @@
 package net.osmand.plus.search.listitems;
 
-import static android.os.AsyncTask.Status.RUNNING;
+import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -20,7 +20,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -80,7 +80,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private boolean nightMode;
 
 	public NearbyPlacesCard(@NonNull MapActivity activity,
-	                        @NonNull NearbyItemClickListener listener, boolean nightMode) {
+			@NonNull NearbyItemClickListener listener, boolean nightMode) {
 		super(activity);
 		app = (OsmandApplication) activity.getApplicationContext();
 		this.clickListener = listener;
@@ -243,8 +243,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 			downloadItemsAdapter.setItems(items);
 		} else {
 			try {
-				items.addAll(DownloadResources.findIndexItemsAt(
-						app, getMapActivity().getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
+				MapViewTrackingUtilities utilities = app.getMapViewTrackingUtilities();
+				items.addAll(DownloadResources.findIndexItemsAt(app, utilities.getMapLocation(), WIKIPEDIA_FILE,
 						false, -1, true));
 				haveWikiMapsToDownload = !items.isEmpty();
 				if (haveWikiMapsToDownload) {

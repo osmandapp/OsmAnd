@@ -293,7 +293,15 @@ public class QuickActionsWidget extends LinearLayout {
 		return (int) Math.ceil((actions.size()) / (double) 6);
 	}
 
-	public void animateWidget(boolean show) {
+	public void updateVisibility(boolean visible) {
+		if (settings.DO_NOT_USE_ANIMATIONS.get() || !isAttachedToWindow() || selectedButton == null) {
+			AndroidUiHelper.updateVisibility(this, visible);
+		} else {
+			animateWidget(visible);
+		}
+	}
+
+	private void animateWidget(boolean show) {
 		AnimatorSet set = new AnimatorSet();
 		List<Animator> animators = new ArrayList<>();
 

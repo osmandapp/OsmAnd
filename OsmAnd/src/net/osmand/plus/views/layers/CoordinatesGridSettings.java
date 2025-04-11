@@ -10,6 +10,7 @@ import net.osmand.core.jni.GridConfiguration.Projection;
 import net.osmand.core.jni.GridParameters;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -151,19 +152,23 @@ public class CoordinatesGridSettings {
 
 	@NonNull
 	public Limits<Integer> getSupportedZoomLevels(@NonNull GridFormat gridFormat) {
-		GridConfiguration config = new GridConfiguration();
-		Projection projection = gridFormat.getProjection();
-		config.setPrimaryProjection(projection);
-		config.setSecondaryProjection(projection);
+		int minZoom = 1;
+		if (isGridSupported(app)) {
+			GridConfiguration config = new GridConfiguration();
+			Projection projection = gridFormat.getProjection();
+			config.setPrimaryProjection(projection);
+			config.setSecondaryProjection(projection);
 
-		Format format = gridFormat.getFormat();
-		config.setPrimaryFormat(format);
-		config.setSecondaryFormat(format);
-		config.setProjectionParameters();
+			Format format = gridFormat.getFormat();
+			config.setPrimaryFormat(format);
+			config.setSecondaryFormat(format);
+			config.setProjectionParameters();
 
-		GridParameters params = config.getGridParameters();
-		ZoomLevel min = params.getMinZoom();
-		return new Limits<>(min.swigValue(), SUPPORTED_MAX_ZOOM);
+			GridParameters params = config.getGridParameters();
+			ZoomLevel min = params.getMinZoom();
+			minZoom = min.swigValue();
+		}
+		return new Limits<>(minZoom, SUPPORTED_MAX_ZOOM);
 	}
 
 	public float getTextScale(@NonNull ApplicationMode appMode) {
@@ -171,9 +176,7 @@ public class CoordinatesGridSettings {
 		return settings.TEXT_SCALE.getModeValue(appMode) * mapTileView.getDensity();
 	}
 
-	public boolean shouldShowGrid(@NonNull ApplicationMode appMode,
-	                              @NonNull GridFormat gridFormat, int zoom) {
-		Limits<Integer> limits = getZoomLevelsWithRestrictions(appMode, gridFormat);
-		return isEnabled(appMode) && zoom >= limits.min() && zoom <= limits.max();
+	public static boolean isGridSupported(@NonNull OsmandApplication app) {
+		return app.getSettings().USE_OPENGL_RENDER.get() && Version.isOpenGlAvailable(app);
 	}
 }
