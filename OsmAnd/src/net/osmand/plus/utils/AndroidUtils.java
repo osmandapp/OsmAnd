@@ -1052,7 +1052,8 @@ public class AndroidUtils {
 	}
 
 	public static boolean isLayoutRtl(Context ctx) {
-		return getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL;
+		Configuration config = ctx.getResources().getConfiguration();
+		return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
 	}
 
 	public static List<View> getChildrenViews(ViewGroup vg) {
