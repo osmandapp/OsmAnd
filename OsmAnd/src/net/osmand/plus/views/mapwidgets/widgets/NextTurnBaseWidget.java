@@ -21,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -239,42 +241,32 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	private void checkShieldOverflow() {
 		if (verticalWidget && WidgetSize.SMALL == getWidgetSizePref().get()) {
-			shieldImagesContainer.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-				@Override
-				public void onGlobalLayout() {
-					shieldImagesContainer.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+			ScrollUtils.addOnGlobalLayoutListener(shieldImagesContainer, () -> {
+				int containerWidth = shieldImagesContainer.getWidth();
+				int usedWidth = 0;
+				int addedCount = 0;
 
-					int containerWidth = shieldImagesContainer.getWidth();
-					int usedWidth = 0;
-					int addedCount = 0;
+				for (int i = 0; i < shieldImagesContainer.getChildCount(); i++) {
+					View view = shieldImagesContainer.getChildAt(i);
 
-					for (int i = 0; i < shieldImagesContainer.getChildCount(); i++) {
-						View view = shieldImagesContainer.getChildAt(i);
+					if (!(view instanceof ImageView image)) continue;
 
-						if (!(view instanceof ImageView image)) continue;
+					Drawable drawable = image.getDrawable();
+					int shieldWidth = drawable.getIntrinsicWidth();
+					ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) image.getLayoutParams();
+					int margins = params.getMarginStart() + params.getMarginEnd();
+					int totalWidth = shieldWidth + margins;
 
-						Drawable drawable = image.getDrawable();
-
-						int shieldWidth = drawable.getIntrinsicWidth();
-						ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) image.getLayoutParams();
-						int margins = params.getMarginStart() + params.getMarginEnd();
-						int totalWidth = shieldWidth + margins;
-
-						if (usedWidth + totalWidth <= containerWidth) {
-							image.setVisibility(View.VISIBLE);
-							usedWidth += totalWidth;
-							addedCount++;
-						} else {
-							image.setVisibility(View.GONE);
-						}
-					}
-
-					if (addedCount == 0) {
-						shieldImagesContainer.setVisibility(View.GONE);
+					if (usedWidth + totalWidth <= containerWidth) {
+						image.setVisibility(View.VISIBLE);
+						usedWidth += totalWidth;
+						addedCount++;
 					} else {
-						shieldImagesContainer.setVisibility(View.VISIBLE);
+						image.setVisibility(View.GONE);
 					}
 				}
+
+				AndroidUiHelper.updateVisibility(shieldImagesContainer, addedCount != 0);
 			});
 		}
 	}
