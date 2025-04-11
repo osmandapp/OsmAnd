@@ -69,6 +69,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 	}
 
+	@NonNull
+	public Amenity getAmenity() {
+		return amenity;
+	}
+
 	@Override
 	protected void buildNearestWikiRow(ViewGroup view) {
 	}
