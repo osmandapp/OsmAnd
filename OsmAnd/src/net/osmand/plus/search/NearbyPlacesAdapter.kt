@@ -1,6 +1,8 @@
 package net.osmand.plus.search
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
@@ -19,13 +21,14 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.render.RenderingIcons
-import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.PicassoUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.util.Algorithms
+import androidx.core.graphics.createBitmap
+import net.osmand.plus.utils.ColorUtilities
 
 class NearbyPlacesAdapter(
 	@UiContext val context: Context,
@@ -110,6 +113,8 @@ class NearbyPlacesAdapter(
 			}
 			iconImageView.setImageDrawable(coloredIcon)
 			errorImageView.setImageDrawable(coloredIcon)
+			AndroidUiHelper.updateVisibility(errorImageView, true)
+
 			if (shouldShowImage()) {
 				AndroidUiHelper.updateVisibility(imageViewContainer, true)
 				val picasso = PicassoUtils.getPicasso(app)
@@ -119,9 +124,7 @@ class NearbyPlacesAdapter(
 						val creator = Picasso.get()
 							.load(it)
 						if (coloredIcon != null) {
-							if (coloredIcon != null) {
-								creator.error(coloredIcon)
-							}
+							creator.error(coloredIcon)
 						}
 						creator.into(imageView, object : Callback {
 							override fun onSuccess() {

@@ -342,7 +342,6 @@ public class MenuBuilder {
 			buildNearestPhotosRow(view);
 			buildPluginGalleryRows(view, object);
 		}
-		startLoadingImages();
 	}
 
 	private boolean showTransportRoutes() {
@@ -626,6 +625,8 @@ public class MenuBuilder {
 
 		if (needUpdateOnly && onlinePhotoCards != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
+		} else if (!collapsableView.isCollapsed() && onlinePhotoCards == null) {
+			startLoadingImages();
 		}
 	}
 

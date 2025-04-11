@@ -10,8 +10,6 @@
 		android:background="?attr/activity_background_color"
 		android:orientation="vertical">
 
-		<include layout="@layout/list_item_divider" />
-
 		<ListView
 			android:id="@android:id/list"
 			android:layout_width="match_parent"
