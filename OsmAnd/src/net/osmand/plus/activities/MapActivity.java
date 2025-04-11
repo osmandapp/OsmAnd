@@ -756,6 +756,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		extendedMapActivity.onResume(this);
 
 		getMapView().getAnimatedDraggingThread().toggleAnimations();
+
+		MapLayers mapLayers = getMapLayers();
+		mapLayers.getMapInfoLayer().onResumeUpdate();
 	}
 
 	@Override

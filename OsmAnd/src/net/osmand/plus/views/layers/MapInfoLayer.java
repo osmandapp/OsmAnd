@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,6 +73,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	private DrawSettings drawSettings;
 	private int themeId = -1;
+	private boolean oldRtlOrientation;
 
 	private TopToolbarView topToolbarView;
 
@@ -89,6 +91,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		mapDisplayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 		topPanelBoundsChangeListener = new BoundsChangeListener(mapDisplayPositionManager, true);
 		bottomPanelBoundsChangeListener = new BoundsChangeListener(mapDisplayPositionManager, true);
+
+		oldRtlOrientation = AndroidUtils.isLayoutRtl(app);
 	}
 
 	@Override
@@ -185,6 +189,37 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	public boolean isTopToolbarViewVisible() {
 		return topToolbarView != null && topToolbarView.isTopToolbarViewVisible();
+	}
+
+	public void onResumeUpdate() {
+		boolean currentRtl = AndroidUtils.isLayoutRtl(app);
+		if (oldRtlOrientation == currentRtl) {
+			return;
+		}
+
+		oldRtlOrientation = currentRtl;
+		if (rightWidgetsPanel != null && rightWidgetsPanel.getVisibility() == View.VISIBLE) {
+			rightWidgetsPanel.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					rightWidgetsPanel.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					updateMapControlsButton();
+				}
+			});
+		} else if (leftWidgetsPanel != null && leftWidgetsPanel.getVisibility() == View.VISIBLE) {
+			leftWidgetsPanel.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					leftWidgetsPanel.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					updateMapControlsButton();
+				}
+			});
+		}
+	}
+
+	private void updateMapControlsButton(){
+		MapLayers mapLayers = requireMapActivity().getMapLayers();
+		mapLayers.getMapControlsLayer().refreshButtons();
 	}
 
 	public void updateSideWidgets() {
