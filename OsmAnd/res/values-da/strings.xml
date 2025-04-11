@@ -5596,7 +5596,7 @@
     <string name="obd_widget_engine_speed">Motorens omdrejningshastighed</string>
     <string name="obd_nothing_found_description">Tjek venligst følgende:\n – Sørg for, at Bluetooth er slået til\n – Køretøjets motor er i gang\n – Sørg for, at din enhed er inden for scannerens rækkevidde.</string>
     <string name="obd_nothing_found_text">Ingen scannere fundet</string>
-    <string name="obd_bluetooth_off_description">Slå Bluetooth til og find og tilslut scannere.</string>
+    <string name="obd_bluetooth_off_description">Slå Bluetooth til for at finde og tilslutte scannere.</string>
     <string name="obd_searching_text_description">Hold din enhed tæt på scanneren. Sørg for, at køretøjets motor er i gang.</string>
     <string name="obd_device_forget_sensor">Glem scanner</string>
     <string name="obd_device_forget_sensor_description">Scanneren fjernes fra listen. Du vil til enhver tid kunne parre denne scanner igen.</string>
