@@ -203,34 +203,6 @@ class NearbyPlacesAdapter(
 		}
 	}
 
-	fun createPlaceholderWithBackground(
-		context: Context,
-		icon: Drawable,
-		iconSizeDp: Int
-	): Drawable {
-		val widthPx =
-			context.resources.getDimensionPixelSize(if (isVertical) R.dimen.nearby_place_image_vertical_size else R.dimen.nearby_place_image_width)
-		val heightPx =
-			context.resources.getDimensionPixelSize(if (isVertical) R.dimen.nearby_place_image_vertical_size else R.dimen.nearby_place_image_height)
-
-		val metrics = context.resources.displayMetrics
-		val iconSizePx = (iconSizeDp * metrics.density).toInt()
-
-		val bitmap = createBitmap(widthPx, heightPx)
-		val canvas = Canvas(bitmap)
-
-		val backgroundColor = ColorUtilities.getActivityBgColor(context, isNightMode())
-		canvas.drawColor(backgroundColor)
-
-		val left = (widthPx - iconSizePx) / 2
-		val top = (heightPx - iconSizePx) / 2
-
-		icon.setBounds(left, top, left + iconSizePx, top + iconSizePx)
-		icon.draw(canvas)
-
-		return bitmap.toDrawable(context.resources)
-	}
-
 	private fun shouldShowImage(): Boolean {
 		val plugin = PluginsHelper.getPlugin(WikipediaPlugin::class.java)
 		return plugin?.topWikiPoiFilter?.showLayoutWithImages() == true
