@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
@@ -26,12 +27,21 @@ public class RenderedObjectMenuController extends MenuController {
 
 	private RenderedObject renderedObject;
 
+	private String nameStr = null;
+
+	@Nullable
+	private final MapPoiTypes mapPoiTypes;
+	@Nullable
+	private final MapPoiTypes.PoiTranslator poiTranslator;
+
 	public RenderedObjectMenuController(@NonNull MapActivity mapActivity,
 	                                    @NonNull PointDescription pointDescription,
 	                                    @NonNull RenderedObject renderedObject) {
 		super(new RenderedObjectMenuBuilder(mapActivity, renderedObject), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		setRenderedObject(renderedObject);
+		mapPoiTypes = mapActivity.getMyApplication().getPoiTypes();
+		poiTranslator = mapPoiTypes != null ? mapPoiTypes.getPoiTranslator() : null;
 	}
 
 	@Override
@@ -65,6 +75,8 @@ public class RenderedObjectMenuController extends MenuController {
 		String iconRes = getIconRes();
 		if (iconRes != null && RenderingIcons.containsBigIcon(iconRes)) {
 			return RenderingIcons.getBigIconResourceId(iconRes);
+		} else if (iconRes != null && RenderingIcons.containsSmallIcon(iconRes)) {
+			return RenderingIcons.getResId(iconRes);
 		} else {
 			return R.drawable.ic_action_street_name;
 		}
@@ -73,25 +85,61 @@ public class RenderedObjectMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
+		if (!Algorithms.isEmpty(nameStr)) {
+			return nameStr; // cached
+		}
+
 		String lang = getPreferredMapLangLC();
 		boolean transliterate = isTransliterateNames();
-		String name = renderedObject.getName(lang, transliterate);
+		nameStr = renderedObject.getName(lang, transliterate);
 
-		if (!Algorithms.isEmpty(name) && !isStartingWithRTLChar(name)) {
-			return name;
-		} else if (renderedObject.getTags().size() > 0) {
-			name = "";
+		if (!Algorithms.isEmpty(nameStr) && !isStartingWithRTLChar(nameStr)) {
+			return nameStr;
+		} else if (!renderedObject.getTags().isEmpty()) {
 			if (!Algorithms.isEmpty(lang)) {
-				name = renderedObject.getTagValue("name:" + lang);
+				nameStr = renderedObject.getTagValue("name:" + lang);
 			}
-			if (Algorithms.isEmpty(name)) {
-				name = renderedObject.getTagValue("name");
+			if (Algorithms.isEmpty(nameStr)) {
+				nameStr = renderedObject.getTagValue("name");
 			}
 		}
-		if (!Algorithms.isEmpty(name)) {
-			return name;
+
+		if (Algorithms.isEmpty(nameStr) && builder instanceof RenderedObjectMenuBuilder that) {
+			nameStr = searchObjectNameByAmenityTags(that.getAmenity());
 		}
-		return searchObjectNameById();
+
+		if (Algorithms.isEmpty(nameStr)) {
+			nameStr = searchObjectNameByIconRes();
+		}
+
+		return nameStr != null ? nameStr : "";
+	}
+
+	@Nullable
+	private String searchObjectNameByAmenityTags(@NonNull Amenity amenity) {
+		if (poiTranslator == null) {
+			return null;
+		}
+
+		String translation = poiTranslator.getTranslation(amenity.getSubType());
+
+		for (String key : amenity.getAdditionalInfoKeys()) {
+			String value = amenity.getAdditionalInfo(key);
+			if (!Algorithms.isEmpty(translation)) {
+				break;
+			}
+			if (Algorithms.isEmpty(translation)) {
+				translation = poiTranslator.getTranslation(key + "_" + value);
+			}
+			if (Algorithms.isEmpty(translation)) {
+				translation = poiTranslator.getTranslation(value);
+			}
+			if (Algorithms.isEmpty(translation)) {
+				translation = poiTranslator.getTranslation(key);
+			}
+		}
+
+		return translation;
 	}
 
 	@NonNull
@@ -104,13 +152,9 @@ public class RenderedObjectMenuController extends MenuController {
 	}
 
 	private String getTranslatedType(RenderedObject renderedObject) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
+		if (poiTranslator == null) {
 			return "";
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
-		MapPoiTypes mapPoiTypes = app.getPoiTypes();
-		MapPoiTypes.PoiTranslator poiTranslator = mapPoiTypes.getPoiTranslator();
 		PoiType pt = null;
 		PoiType otherPt = null;
 		String translated = null;
@@ -177,17 +221,15 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public boolean needStreetName() {
-		return !renderedObject.isPolygon() && (!getPointDescription().isAddress() || isObjectTypeRecognizedById());
+		return !renderedObject.isPolygon() && (!getPointDescription().isAddress() || isObjectTypeRecognized());
 	}
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			MapPoiTypes poiTypes = mapActivity.getMyApplication().getPoiTypes();
+		if (mapPoiTypes != null) {
 			for (Map.Entry<String, String> entry : renderedObject.getTags().entrySet()) {
 				if (entry.getKey().equalsIgnoreCase("maxheight")) {
-					AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(entry.getKey());
+					AbstractPoiType pt = mapPoiTypes.getAnyPoiAdditionalTypeByKey(entry.getKey());
 					if (pt != null) {
 						addPlainMenuItem(R.drawable.ic_action_note_dark, null, pt.getTranslation() + ": " + entry.getValue(), false, false, null);
 					}
@@ -198,7 +240,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return renderedObject.isPolygon() || !isObjectTypeRecognizedById();
+		return renderedObject.isPolygon() || !isObjectTypeRecognized();
 	}
 
 	private boolean isStartingWithRTLChar(String s) {
@@ -209,12 +251,12 @@ public class RenderedObjectMenuController extends MenuController {
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE;
 	}
 
-	private boolean isObjectTypeRecognizedById() {
-		return !Algorithms.isEmpty(searchObjectNameById());
+	private boolean isObjectTypeRecognized() {
+		return !Algorithms.isEmpty(getNameStr());
 	}
 
-	@NonNull
-	private String searchObjectNameById() {
+	@Nullable
+	private String searchObjectNameByIconRes() {
 		String content = getActualContentFromIconRes();
 		MapActivity mapActivity = getMapActivity();
 		if (content != null && mapActivity != null) {
@@ -231,14 +273,12 @@ public class RenderedObjectMenuController extends MenuController {
 				}
 			}
 		}
-		return "";
+		return null;
 	}
 
 	@Nullable
 	private String getIconRes() {
-		if (getMapActivity() != null && renderedObject.isPolygon()) {
-			OsmandApplication app = getMapActivity().getMyApplication();
-			MapPoiTypes mapPoiTypes = app.getPoiTypes();
+		if (mapPoiTypes != null && renderedObject.isPolygon()) {
 			Map<String, String> t  = renderedObject.getTags();
 			for (Map.Entry<String, String> e : t.entrySet()) {
 				PoiType pt = mapPoiTypes.getPoiTypeByKey(e.getValue());
