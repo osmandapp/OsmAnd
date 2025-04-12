@@ -1,7 +1,6 @@
 package net.osmand.plus.keyevent.fragments.selectkeycode;
 
 import static android.graphics.Typeface.BOLD;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 import static net.osmand.plus.utils.UiUtilities.createSpannableString;
 
@@ -71,8 +70,6 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		initialKeyCode = arguments.getInt(ATTR_KEY_CODE);
 		assignmentId = arguments.getString(ATTR_ASSIGNMENT_ID);
 
-		String appModeKey = arguments.getString(APP_MODE_KEY);
-		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 		String deviceId = Objects.requireNonNull(arguments.getString(ATTR_DEVICE_ID));
 		inputDevice = deviceHelper.getDeviceById(appMode, deviceId);
 

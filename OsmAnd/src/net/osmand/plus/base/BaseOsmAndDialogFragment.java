@@ -17,15 +17,19 @@ import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.RequestMapThemeParams;
+import net.osmand.plus.helpers.RequestThemeParams;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 
+	private static final String APP_MODE_KEY = "app_mode_key";
+
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
+	protected ApplicationMode appMode;
 	protected UiUtilities iconsCache;
 	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
@@ -36,19 +40,52 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 		app = (OsmandApplication) requireActivity().getApplication();
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
+		restoreAppMode(savedInstanceState);
 
 		updateNightMode();
 		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 	}
 
+	private void restoreAppMode(@Nullable Bundle savedInstanceState) {
+		if (savedInstanceState != null) {
+			String modeKey = savedInstanceState.getString(APP_MODE_KEY);
+			appMode = ApplicationMode.valueOfStringKey(modeKey, null);
+		}
+		Bundle args = getArguments();
+		if (appMode == null && args != null) {
+			String modeKey = args.getString(APP_MODE_KEY);
+			appMode = ApplicationMode.valueOfStringKey(modeKey, null);
+		}
+		if (appMode == null) {
+			appMode = settings.getApplicationMode();
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (appMode != null) {
+			outState.putString(APP_MODE_KEY, appMode.getStringKey());
+		}
+	}
+
 	protected void updateNightMode() {
 		nightMode = isNightMode(isUsedOnMap());
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 	}
 
 	protected boolean isUsedOnMap() {
 		return false;
+	}
+
+	public void setAppMode(@NonNull ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
+	@NonNull
+	public ApplicationMode getAppMode() {
+		return appMode;
 	}
 
 	@NonNull
@@ -92,7 +129,7 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		RequestMapThemeParams params = new RequestMapThemeParams().markIgnoreExternalProvider();
+		RequestThemeParams params = new RequestThemeParams(appMode, true);
 		return app.getDaynightHelper().isNightMode(usedOnMap, params);
 	}
 }

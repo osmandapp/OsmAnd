@@ -102,18 +102,24 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		app = requireMyApplication();
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
-		Bundle args = getArguments();
+		restoreAppMode(savedInstanceState);
+		super.onCreate(savedInstanceState);
+		currentScreenType = getCurrentScreenType();
+	}
+
+	private void restoreAppMode(@Nullable Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
+			String modeKey = savedInstanceState.getString(APP_MODE_KEY);
+			appMode = ApplicationMode.valueOfStringKey(modeKey, null);
 		}
+		Bundle args = getArguments();
 		if (appMode == null && args != null) {
-			appMode = ApplicationMode.valueOfStringKey(args.getString(APP_MODE_KEY), null);
+			String modeKey = args.getString(APP_MODE_KEY);
+			appMode = ApplicationMode.valueOfStringKey(modeKey, null);
 		}
 		if (appMode == null) {
 			appMode = settings.getApplicationMode();
 		}
-		super.onCreate(savedInstanceState);
-		currentScreenType = getCurrentScreenType();
 	}
 
 	@Override
@@ -800,8 +806,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (activity != null) {
 			DialogManager dialogManager = app.getDialogManager();
 			dialogManager.register(processId, controller);
+			ApplicationMode appMode = getSelectedAppMode();
 			FragmentManager fm = activity.getSupportFragmentManager();
-			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, false);
+			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, appMode, false);
 		}
 	}
 

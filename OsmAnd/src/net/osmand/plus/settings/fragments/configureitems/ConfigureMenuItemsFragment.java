@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments.configureitems;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.settings.fragments.configureitems.RearrangeItemsHelper.SCREEN_TYPE_KEY;
 import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
 import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
@@ -88,6 +87,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment implements Co
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 

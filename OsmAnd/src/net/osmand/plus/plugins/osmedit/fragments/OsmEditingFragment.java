@@ -234,7 +234,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				if (!isValidToken() && !isLoginExists()) {
-					MappersPromoFragment.showInstance(activity, this);
+					MappersPromoFragment.showInstance(activity, getSelectedAppMode(), this);
 				} else {
 					MappersFragment.showInstance(activity);
 				}

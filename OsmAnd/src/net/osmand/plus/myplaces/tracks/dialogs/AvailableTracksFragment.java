@@ -94,7 +94,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		setRootFolder(folder);
 		setSelectedFolder(folder);
 
-		trackFoldersHelper = new TrackFoldersHelper(requireMyActivity(), folder);
+		trackFoldersHelper = new TrackFoldersHelper(requireMyActivity(), appMode, folder);
 		trackFoldersHelper.setLoadTracksListener(getLoadTracksListener());
 
 		visibleTracksGroup = new VisibleTracksGroup(app);

@@ -24,6 +24,7 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -39,10 +40,12 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 	private LinearLayout listContainer;
 	private final List<OsmAndFeature> allFeatures = new ArrayList<>();
 
-	public static void showInstance(@NonNull FragmentActivity activity, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull ApplicationMode appMode, @Nullable Fragment target) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (!manager.isStateSaved() && manager.findFragmentByTag(TAG) == null) {
 			MappersPromoFragment fragment = new MappersPromoFragment();
+			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(activity.getSupportFragmentManager(), TAG);
 		}
