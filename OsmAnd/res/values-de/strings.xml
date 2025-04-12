@@ -1618,7 +1618,7 @@
     <string name="shared_string_undo">Rückgängig machen</string>
     <string name="shared_string_skip">Überspringen</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="traffic_warning_hazard">Gefährdung</string>
+    <string name="traffic_warning_hazard">Gefahr</string>
     <string name="rendering_value_boldOutline_name">Hervorgehobene Umrisse</string>
     <string name="delete_change">Änderung löschen</string>
     <string name="shared_string_card_was_hidden">Karte wurde versteckt</string>
@@ -5782,4 +5782,8 @@
     <string name="shared_string_edges">Ränder</string>
     <string name="labels_position">Position der Beschriftungen</string>
     <string name="customize_grid_color">Rasterfarbe anpassen</string>
+    <string name="route_members">Mitglieder</string>
+    <string name="multipoligon_related">Zugehörig</string>
+    <string name="route_part_of">Teil von</string>
+    <string name="cant_load_map_styles">Kartenstile können nicht geladen werden.</string>
 </resources>
