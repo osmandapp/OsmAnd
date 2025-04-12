@@ -5505,7 +5505,7 @@
     <string name="screen_is_unlocked">Az érintőképernyő feloldva.</string>
     <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Koppintson a gombra a feloldáshoz.</string>
     <string name="screen_is_locked_by_external_button">Az érintőképernyő le van zárva. A feloldáshoz nyomja meg a(z) %1$s gombot vagy koppintson a képernyőn megjelenő gombra.</string>
-    <string name="connect_obd_instructions_title">Az OsmAnd támogatja a Bluetooth-kapcsolatot használó OBD-II eszközöket.</string>
+    <string name="connect_obd_instructions_title">Az OsmAnd támogatja a Bluetooth-kapcsolatot használó OBD-II olvasókat.</string>
     <string name="connect_obd_instructions_step2">Indítsa el a jármű motorját</string>
     <string name="connect_obd_instructions_step3">Engedélyezze a Bluetooth-t a telefonján</string>
     <string name="connect_obd_instructions_step4">Koppintson a „%1$s”-ra és válassza ki az OBD-olvasót a listáról.</string>
@@ -5519,14 +5519,14 @@
     <string name="obd_widget_vehicle_speed">Jármű sebessége</string>
     <string name="obd_widget_engine_speed">Motor fordulatszáma</string>
     <string name="obd_nothing_found_text">Nem található OBD-olvasó</string>
-    <string name="obd_bluetooth_off_description">Kapcsolja be a Bluetooth keresést és kapcsolja be az OBD-olvasót.</string>
+    <string name="obd_bluetooth_off_description">Kapcsolja be a Bluetooth-t az OBD-olvasó megkereséséhez és csatlakoztatásához.</string>
     <string name="obd_searching_text_description">Tartsa készülékét az OBD-olvasó közelében. Győződjön meg arról, hogy a jármű motorja jár.</string>
     <string name="obd_nothing_found_description">Ellenőrizze a következőket:\n – a Bluetooth be van-e kapcsolva\n – a motor jár-e\n – készüléke az OBD-olvasó hatókörén belül van.</string>
     <string name="obd_searching_text">OBD-olvasók keresése</string>
     <string name="obd_device_forget_sensor">OBD-olvasó elfelejtése</string>
     <string name="obd_device_forget_sensor_description">Az OBD-olvasó törlődik a listáról, de bármikor újra párosíthatja azt.</string>
     <string name="route_guidance_desc">Valós idejű útbaigazítást biztosít, beleértve a következő kanyar távolságát, az út nevét, a jelenlegi utca nevét és a sávinformációkat. A modulok navigáció közben aktívak.</string>
-    <string name="connect_obd_instructions_step">1. Helyezze az olvasót a jármű OBD-II aljzatába.\n\n 2. Indítsa el a jármű motorját\n\n 3. Engedélyezze a Bluetooth-t a készülékén\n\n 4. Koppintson a „%1$s” gombra, és válassza ki az olvasót a listából.</string>
+    <string name="connect_obd_instructions_step">1. Helyezze az olvasót a jármű OBD-II aljzatába.\n\n 2. Indítsa el a jármű motorját\n\n 3. Engedélyezze a Bluetooth-t a készülékén\n\n 4. Koppintson a „%1$s” gombra, és válassza ki az OBD-olvasót a listából.</string>
     <string name="obd_fuel_consumption_rate_sensor">Fogyasztás (érzékelő)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Megjeleníti a jármű számított időalapú üzemanyag-fogyasztását liter/órában</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Megjeleníti a jármű üzemanyag-fogyasztását liter/órában az érzékelő adatai alapján</string>
@@ -5599,7 +5599,7 @@
     <string name="preview_next_turn">Következő kanyarodás előnézete</string>
     <string name="av_audio_sample_rate">Hang mintavételi arány</string>
     <string name="av_audio_sample_rate_descr">Válassza ki a hang mintavételi arányát.</string>
-    <string name="connect_new_scanner">Csatlakoztasson új olvasót</string>
+    <string name="connect_new_scanner">Csatlakoztasson új OBD-olvasót</string>
     <string name="auto_zoom_3d_angle">Automatikus zoom 3D szög</string>
     <string name="vehicle_metrics_recording_description">Válassza ki a GPX-fájlba elmentendő paramétereket.</string>
     <string name="shared_string_engine">Motor</string>
@@ -5711,4 +5711,5 @@
     <string name="route_members">Tagok</string>
     <string name="route_part_of">Része ennek:</string>
     <string name="multipoligon_related">Összefüggő</string>
+    <string name="cant_load_map_styles">Nem lehet betölteni a térképstílusokat.</string>
 </resources>
