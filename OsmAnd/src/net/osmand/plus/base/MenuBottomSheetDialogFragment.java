@@ -41,10 +41,9 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment implements AppModeDependentComponent {
 
 	private static final String USED_ON_MAP_KEY = "used_on_map";
-	protected static final String APP_MODE_KEY = "app_mode_key";
 	protected static final int DEFAULT_VALUE = -1;
 
 	protected List<BaseBottomSheetItem> items = new ArrayList<>();
@@ -71,20 +70,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (savedInstanceState != null) {
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 		}
-		restoreAppMode(savedInstanceState);
-	}
-
-	private void restoreAppMode(@Nullable Bundle savedInstanceState) {
-		Bundle args = getArguments();
-		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
-		}
-		if (appMode == null && args != null) {
-			appMode = ApplicationMode.valueOfStringKey(args.getString(APP_MODE_KEY), null);
-		}
-		if (appMode == null) {
-			appMode = requiredMyApplication().getSettings().getApplicationMode();
-		}
+		appMode = restoreAppMode(requiredMyApplication(), appMode, savedInstanceState, getArguments());
 	}
 
 	@Nullable
@@ -132,9 +118,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
-		if (appMode != null) {
-			outState.putString(APP_MODE_KEY, appMode.getStringKey());
-		}
+		saveAppModeToBundle(appMode, outState);
 	}
 
 	@Override

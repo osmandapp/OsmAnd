@@ -28,9 +28,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
-
-	protected static final String APP_MODE_KEY = "app_mode_key";
+public class BaseOsmAndFragment extends Fragment implements TransitionAnimator, AppModeDependentComponent {
 
 	protected OsmandApplication app;
 	protected ApplicationMode appMode;
@@ -48,31 +46,14 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		app = (OsmandApplication) requireActivity().getApplication();
 		settings = app.getSettings();
 		uiUtilities = app.getUIUtilities();
-		restoreAppMode(savedInstanceState);
+		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
 		updateNightMode();
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (appMode != null) {
-			outState.putString(APP_MODE_KEY, appMode.getStringKey());
-		}
-	}
-
-	private void restoreAppMode(@Nullable Bundle savedInstanceState) {
-		if (savedInstanceState != null) {
-			String modeKey = savedInstanceState.getString(APP_MODE_KEY);
-			appMode = ApplicationMode.valueOfStringKey(modeKey, null);
-		}
-		Bundle args = getArguments();
-		if (appMode == null && args != null) {
-			String modeKey = args.getString(APP_MODE_KEY);
-			appMode = ApplicationMode.valueOfStringKey(modeKey, null);
-		}
-		if (appMode == null) {
-			appMode = settings.getApplicationMode();
-		}
+		saveAppModeToBundle(appMode, outState);
 	}
 
 	public void setAppMode(@NonNull ApplicationMode appMode) {
@@ -80,7 +61,7 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	}
 
 	@NonNull
-	protected ApplicationMode getAppMode() {
+	public ApplicationMode getAppMode() {
 		return appMode;
 	}
 

@@ -23,9 +23,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public abstract class BaseOsmAndDialogFragment extends DialogFragment {
-
-	private static final String APP_MODE_KEY = "app_mode_key";
+public abstract class BaseOsmAndDialogFragment extends DialogFragment implements AppModeDependentComponent {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -40,43 +38,22 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 		app = (OsmandApplication) requireActivity().getApplication();
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
-		restoreAppMode(savedInstanceState);
+		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
 
 		updateNightMode();
 		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 	}
 
-	private void restoreAppMode(@Nullable Bundle savedInstanceState) {
-		if (savedInstanceState != null) {
-			String modeKey = savedInstanceState.getString(APP_MODE_KEY);
-			appMode = ApplicationMode.valueOfStringKey(modeKey, null);
-		}
-		Bundle args = getArguments();
-		if (appMode == null && args != null) {
-			String modeKey = args.getString(APP_MODE_KEY);
-			appMode = ApplicationMode.valueOfStringKey(modeKey, null);
-		}
-		if (appMode == null) {
-			appMode = settings.getApplicationMode();
-		}
-	}
-
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (appMode != null) {
-			outState.putString(APP_MODE_KEY, appMode.getStringKey());
-		}
+		saveAppModeToBundle(appMode, outState);
 	}
 
 	protected void updateNightMode() {
 		nightMode = isNightMode(isUsedOnMap());
 		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-	}
-
-	protected boolean isUsedOnMap() {
-		return false;
 	}
 
 	public void setAppMode(@NonNull ApplicationMode appMode) {
@@ -86,6 +63,10 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 	@NonNull
 	public ApplicationMode getAppMode() {
 		return appMode;
+	}
+
+	protected boolean isUsedOnMap() {
+		return false;
 	}
 
 	@NonNull
