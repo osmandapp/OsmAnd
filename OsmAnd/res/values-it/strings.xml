@@ -5573,7 +5573,7 @@
     <string name="obd_fuel_level_percent">Livello carburante (%)</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="speedometer_maximum">Massimo</string>
-    <string name="obd_bluetooth_off_description">Accendere Bluetooth per trovare e collegare gli scanner.</string>
+    <string name="obd_bluetooth_off_description">Attivare il Bluetooth per trovare e collegare gli scanner.</string>
     <string name="obd_searching_text_description">Per favore tieni il tuo dispositivo vicino allo scanner. Assicurati che il motore del veicolo sia acceso.</string>
     <string name="obd_searching_text">Ricerca di scanner</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Tasso di consumo di carburante %/h</string>
