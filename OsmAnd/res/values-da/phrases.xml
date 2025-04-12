@@ -1215,7 +1215,7 @@
     <string name="poi_mini_roundabout">Mini-rundkørsel</string>
     <string name="poi_railway_crossing">Jernbaneoverskæring</string>
     <string name="poi_railway_level_crossing">Jernbaneoverskæring</string>
-    <string name="poi_bird_hide">Fugletårn</string>
+    <string name="poi_bird_hide">Fugleskjul</string>
     <string name="poi_horse_riding">Ridning</string>
     <string name="poi_garden">Have</string>
     <string name="poi_heath">Hede</string>
@@ -2348,7 +2348,7 @@
     <string name="poi_shuffleboard">Shuffleboard</string>
     <string name="poi_lacrosse">Lacrosse</string>
     <string name="poi_boxing">Boksning</string>
-    <string name="poi_official_name">Officielle navn</string>
+    <string name="poi_official_name">Officielt navn</string>
     <string name="poi_seamark_dyke">Sømærke dige</string>
     <string name="poi_dolphin">Delfin</string>
     <string name="poi_forestry_compartment">Vejviser: skovbrug</string>
@@ -2701,16 +2701,16 @@
     <string name="poi_hygrometer_no">Hygrometer: nej</string>
     <string name="poi_date_yes">Datovisning</string>
     <string name="poi_date_no">Datovisning: nej</string>
-    <string name="poi_support_pole">Support: pæl</string>
-    <string name="poi_support_wall_mounted">Support: væg</string>
-    <string name="poi_support_tree">Support: træ</string>
-    <string name="poi_support_pedestal">Support: piedestal</string>
-    <string name="poi_support_ground">Support: jorden</string>
-    <string name="poi_support_billboard">Support: skilt</string>
-    <string name="poi_support_ceiling">Support: loft</string>
-    <string name="poi_support_suspended">Support: ophængt</string>
-    <string name="poi_support_roof">Support: tag</string>
-    <string name="poi_support_tower">Support: tårn</string>
+    <string name="poi_support_pole">Understøtning: pæl</string>
+    <string name="poi_support_wall_mounted">Understøtning: væg</string>
+    <string name="poi_support_tree">Understøtning: træ</string>
+    <string name="poi_support_pedestal">Understøtning: piedestal</string>
+    <string name="poi_support_ground">Understøtning: jorden</string>
+    <string name="poi_support_billboard">Understøtning: skilt</string>
+    <string name="poi_support_ceiling">Understøtning: loft</string>
+    <string name="poi_support_suspended">Understøtning: ophængt</string>
+    <string name="poi_support_roof">Understøtning: tag</string>
+    <string name="poi_support_tower">Understøtning: tårn</string>
     <string name="poi_passenger_information_display_yes">Informationsskærm for passagerer: ja</string>
     <string name="poi_passenger_information_display_no">Informationsskærm for passagerer: nej</string>
     <string name="poi_aquaculture">Akvakultur</string>
@@ -4229,4 +4229,8 @@
     <string name="poi_hazard_contamination">Forurening</string>
     <string name="poi_hazard_yes">Fare</string>
     <string name="poi_hazard_additional_slippery_road">Glat vejbane</string>
+    <string name="poi_short_name">Kort navn</string>
+    <string name="poi_lifeguard_tower">Livreddertårn</string>
+    <string name="poi_birds_nest">Fuglerede</string>
+    <string name="poi_us_maps_recreation_area_forest_name">Skovnavn</string>
 </resources>
