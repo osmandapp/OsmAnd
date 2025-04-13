@@ -103,17 +103,14 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	private void updateCoordinatesView(@NonNull View view) {
 		TextView tvCoordinates = view.findViewById(R.id.coordinates);
-		if (tvCoordinates != null && getActivity() != null) {
-			tvCoordinates.setText(controller.getFormattedCoordinates(getActivity()));
+		if (tvCoordinates != null) {
+			tvCoordinates.setText(controller.getFormattedCoordinates());
 		}
 	}
 
 	@Override
 	protected void applyChanges() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			controller.onApplySelection(activity);
-		}
+		app.runInUIThread(controller::onApplySelection, 100);
 	}
 
 	@Override
