@@ -11,6 +11,7 @@ import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.Subscriptio
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.UNDEFINED;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
 import net.osmand.Period.PeriodUnit;
@@ -36,8 +37,15 @@ public class PurchaseUiDataUtils {
 	public static final int INVALID = -1;
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
-	@NonNull
+	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app, @NonNull InAppPurchase purchase) {
+		return createUiData(app, purchase, app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()));
+	}
+
+	@Nullable
+	public static PurchaseUiData createUiData(@NonNull OsmandApplication app,
+											  @NonNull InAppPurchase purchase,
+											  @NonNull PurchaseOrigin origin) {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 		InAppPurchases purchases = purchaseHelper.getInAppPurchases();
 
@@ -51,7 +59,6 @@ public class PurchaseUiDataUtils {
 		boolean autoRenewing = false;
 		boolean renewVisible = false;
 		SubscriptionState subscriptionState = UNDEFINED;
-		PurchaseOrigin origin = purchaseHelper.getPurchaseOriginBySku(sku);
 		boolean isSubscription = purchase instanceof InAppSubscription;
 
 		if (purchases.isOsmAndProSubscription(purchase)) {
@@ -63,6 +70,8 @@ public class PurchaseUiDataUtils {
 		} else if (purchases.isMapsSubscription(purchase) || purchases.isFullVersion(purchase)) {
 			title = app.getString(R.string.maps_plus);
 			iconId = R.drawable.ic_action_osmand_maps_plus;
+		} else {
+			return null;
 		}
 
 		if (isSubscription) {
