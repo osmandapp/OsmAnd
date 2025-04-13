@@ -12,7 +12,6 @@ import net.osmand.data.BackgroundType;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.dialogs.SelectLocationController;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -64,7 +63,7 @@ public class SelectLocationLayer extends OsmandMapLayer {
 
 	private void drawTargetDrawable(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
 	                                @NonNull PointImageDrawable drawable) {
-		float targetX = getTargetPixelX(tileBox);
+		float targetX = tileBox.getCenterPixelX();
 		float targetY = tileBox.getCenterPixelY();
 		BackgroundType backgroundType = drawable.getBackgroundType();
 		int offsetY = backgroundType.getOffsetY(view.getContext(), getTextScale());
@@ -77,16 +76,8 @@ public class SelectLocationLayer extends OsmandMapLayer {
 
 	private void drawTargetBitmap(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
 	                              @NonNull Bitmap bitmap, float marginX, float marginY) {
-		float targetX = getTargetPixelX(tileBox);
+		float targetX = tileBox.getCenterPixelX();
 		float targetY = tileBox.getCenterPixelY();
 		canvas.drawBitmap(bitmap, targetX - marginX, targetY - marginY, bitmapPaint);
-	}
-
-	private float getTargetPixelX(@NonNull RotatedTileBox tileBox) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			return SelectLocationController.getTargetPixelX(mapActivity);
-		}
-		return tileBox.getCenterPixelX();
 	}
 }

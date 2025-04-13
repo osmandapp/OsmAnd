@@ -11,10 +11,12 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
@@ -26,6 +28,7 @@ public class SelectLocationController extends BaseDialogController implements IM
 	private static final String PROCESS_ID = "select_location_on_map";
 
 	private ILocationSelectionHandler handler;
+	private boolean landscape;
 
 	public SelectLocationController(@NonNull OsmandApplication app,
 	                                @NonNull ILocationSelectionHandler handler) {
@@ -37,6 +40,11 @@ public class SelectLocationController extends BaseDialogController implements IM
 	@Override
 	public String getProcessId() {
 		return PROCESS_ID;
+	}
+
+	public void bindDialog(@NonNull MapActivity mapActivity, @NonNull IDialog dialog) {
+		registerDialog(dialog);
+		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
 	public void setLocationSelectionHandler(@NonNull ILocationSelectionHandler handler) {
@@ -73,10 +81,12 @@ public class SelectLocationController extends BaseDialogController implements IM
 
 	public void onResume() {
 		updateMapLocationListener(true);
+		updateMapPositionShiftedX(landscape);
 	}
 
 	public void onPause() {
 		updateMapLocationListener(false);
+		updateMapPositionShiftedX(false);
 	}
 
 	private void updateMapLocationListener(boolean register) {
@@ -87,6 +97,12 @@ public class SelectLocationController extends BaseDialogController implements IM
 		} else {
 			mapView.removeMapLocationListener(this);
 		}
+	}
+
+	private void updateMapPositionShiftedX(boolean shifted) {
+		MapViewTrackingUtilities mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
+		MapDisplayPositionManager positionManager = mapViewTrackingUtilities.getMapDisplayPositionManager();
+		positionManager.setMapPositionShiftedX(shifted);
 	}
 
 	@Override
@@ -114,27 +130,11 @@ public class SelectLocationController extends BaseDialogController implements IM
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		MapRendererView mapRenderer = mapView.getMapRenderer();
-		RotatedTileBox tileBox = mapView.getRotatedTileBox();
 
-		boolean landscape = !AndroidUiHelper.isOrientationPortrait(activity);
-		boolean rtl = AndroidUtils.isLayoutRtl(activity);
-		int centerX = getTargetPixelX(tileBox, landscape, rtl);
+		RotatedTileBox tileBox = mapView.getRotatedTileBox();
+		int centerX = tileBox.getCenterPixelX();
 		int centerY = tileBox.getCenterPixelY();
 		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, centerX, centerY);
-	}
-
-	public static int getTargetPixelX(@NonNull MapActivity activity) {
-		RotatedTileBox tileBox = activity.getMapView().getRotatedTileBox();
-		boolean landscape = !AndroidUiHelper.isOrientationPortrait(activity);
-		boolean rtl = AndroidUtils.isLayoutRtl(activity);
-		return getTargetPixelX(tileBox, landscape, rtl);
-	}
-
-	public static int getTargetPixelX(@NonNull RotatedTileBox tb, boolean landscape, boolean rtl) {
-		if (landscape) {
-			return Math.round((rtl ? 0.3f : 0.7f) * tb.getPixWidth());
-		}
-		return tb.getCenterPixelX();
 	}
 
 	@Nullable
