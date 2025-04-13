@@ -5711,5 +5711,5 @@
     <string name="route_members">Tagok</string>
     <string name="route_part_of">Része ennek:</string>
     <string name="multipoligon_related">Összefüggő</string>
-    <string name="cant_load_map_styles">Nem lehet betölteni a térképstílusokat.</string>
+    <string name="cant_load_map_styles">Térképstílusok betöltése sikertelen.</string>
 </resources>
