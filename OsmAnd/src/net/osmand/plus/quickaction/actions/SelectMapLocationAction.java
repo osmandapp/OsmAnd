@@ -45,8 +45,7 @@ public abstract class SelectMapLocationAction extends QuickAction {
 		if (isManualLocationSelection()) {
 			SelectLocationController.showDialog(mapActivity, createHandler(mapActivity));
 		} else {
-			OsmandApplication app = mapActivity.getMyApplication();
-			callback.onResult(SelectLocationController.getMapCenterCoordinates(app));
+			callback.onResult(SelectLocationController.getMapTargetCoordinates(mapActivity));
 		}
 	}
 

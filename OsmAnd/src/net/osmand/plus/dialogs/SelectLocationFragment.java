@@ -11,6 +11,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
@@ -102,14 +103,17 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	private void updateCoordinatesView(@NonNull View view) {
 		TextView tvCoordinates = view.findViewById(R.id.coordinates);
-		if (tvCoordinates != null) {
-			tvCoordinates.setText(controller.getFormattedCoordinates());
+		if (tvCoordinates != null && getActivity() != null) {
+			tvCoordinates.setText(controller.getFormattedCoordinates(getActivity()));
 		}
 	}
 
 	@Override
 	protected void applyChanges() {
-		controller.onApplySelection();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			controller.onApplySelection(activity);
+		}
 	}
 
 	@Override
