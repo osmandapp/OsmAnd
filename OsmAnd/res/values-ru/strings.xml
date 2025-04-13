@@ -5980,4 +5980,7 @@
     <string name="route_members">Участники</string>
     <string name="route_part_of">Часть</string>
     <string name="customize_grid_color">Настроить цвет сетки</string>
+    <string name="multipoligon_related">Связанный</string>
+    <string name="cant_load_map_styles">Невозможно загрузить стили карты.</string>
+    <string name="prediction_time_description">Значок положения в OsmAnd анимируется с каждой полученной точкой данных GPS (раз в секунду). Небольшая задержка в его движении может быть заметна, особенно когда пользователь быстро движется или сигнал GPS колеблется.</string>
 </resources>
