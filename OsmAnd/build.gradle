@@ -264,8 +264,8 @@ dependencies {
 	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:master-snapshot@aar"
 	opengldebugImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
 
-	openglImplementation ('net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar') {changing=true}
-	openglImplementation ('net.osmand:OsmAndCore_android:master-snapshot@aar') {changing=true}
+	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar"
+	openglImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
 
 	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
 	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
