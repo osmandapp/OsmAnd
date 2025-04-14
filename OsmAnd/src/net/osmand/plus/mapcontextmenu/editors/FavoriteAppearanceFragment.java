@@ -37,7 +37,7 @@ import net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceCo
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption;
+import net.osmand.plus.myplaces.favorites.SaveOption;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
@@ -46,6 +46,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+
+import java.util.Collections;
 
 public class FavoriteAppearanceFragment extends BaseOsmAndDialogFragment {
 
@@ -280,7 +282,7 @@ public class FavoriteAppearanceFragment extends BaseOsmAndDialogFragment {
 			}
 
 			if (shouldSave) {
-				favouritesHelper.saveCurrentPointsIntoFile(true);
+				favouritesHelper.saveSelectedGroupsIntoFile(Collections.singletonList(favoriteGroup), true);
 			}
 		}
 
