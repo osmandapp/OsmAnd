@@ -25,6 +25,7 @@ import net.osmand.plus.chooseplan.NoPurchasesCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppStateHolder;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -86,9 +87,9 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		}
 
 		// External inapp purchases
-		Map<InAppPurchase, PurchaseOrigin> externalInApps = purchaseHelper.getExternalInApps();
-		externalInApps.forEach((purchase, origin) -> {
-			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app, purchase, origin);
+		Map<InAppPurchase, InAppStateHolder> externalInApps = purchaseHelper.getExternalInApps();
+		externalInApps.forEach((purchase, holder) -> {
+			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app, purchase, holder.purchaseTime, holder.origin);
 			if (purchaseData != null) {
 				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 				PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchaseData);
@@ -206,7 +207,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 				String sku = purchase.isPromo() ? null : purchase.getSku();
 				String promoType = sku == null ? purchase.getTitle() : null;
 				FragmentManager fragmentManager = activity.getSupportFragmentManager();
-				PurchaseItemFragment.showInstance(fragmentManager, sku, promoType);
+				PurchaseItemFragment.showInstance(fragmentManager, sku, promoType, purchase.getOrigin());
 			}
 		}
 	}

@@ -69,6 +69,7 @@ public abstract class InAppPurchaseHelper {
 	public static final String PLATFORM_APPLE = "apple";
 	public static final String PLATFORM_AMAZON = "amazon";
 	public static final String PLATFORM_HUAWEI = "huawei";
+	public static final String PLATFORM_FASTSPRING = "fastspring";
 
 	private final boolean mDebugLog = true;
 
@@ -122,18 +123,21 @@ public abstract class InAppPurchaseHelper {
 		void onFail();
 	}
 
-	protected static class SubscriptionStateHolder {
-		SubscriptionState state = SubscriptionState.UNDEFINED;
-		long startTime;
-		long expireTime;
-		PeriodUnit periodUnit;
-		PurchaseOrigin origin;
+	public static class SubscriptionStateHolder {
+		public String sku;
+		public SubscriptionState state = SubscriptionState.UNDEFINED;
+		public long startTime;
+		public long expireTime;
+		public PeriodUnit periodUnit;
+		public PurchaseOrigin origin;
 	}
 
-	protected static class InAppStateHolder {
-		PurchaseOrigin origin;
-		String platform;
-		InAppPurchase linkedPurchase;
+	public static class InAppStateHolder {
+		public String sku;
+		public PurchaseOrigin origin;
+		public String platform;
+		public long purchaseTime;
+		public InAppPurchase linkedPurchase;
 	}
 
 	public enum InAppPurchaseTaskType {
@@ -252,12 +256,15 @@ public abstract class InAppPurchaseHelper {
 		return purchases;
 	}
 
+	public abstract String getPlatform();
+
 	@NonNull
-	public Map<InAppPurchase, PurchaseOrigin> getExternalInApps() {
-		Map<InAppPurchase, PurchaseOrigin> res = new HashMap<>();
+	public Map<InAppPurchase, InAppStateHolder> getExternalInApps() {
+		Map<InAppPurchase, InAppStateHolder> res = new HashMap<>();
+		String platform = getPlatform();
 		for (InAppStateHolder holder : inAppStateMap.values()) {
-			if (holder.linkedPurchase != null && !PLATFORM_GOOGLE.equals(holder.platform)) {
-				res.put(holder.linkedPurchase, holder.origin);
+			if (holder.linkedPurchase != null && !platform.equals(holder.platform)) {
+				res.put(holder.linkedPurchase, holder);
 			}
 		}
 		return res;
@@ -578,6 +585,7 @@ public abstract class InAppPurchaseHelper {
 
 				if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
 					SubscriptionStateHolder stateHolder = new SubscriptionStateHolder();
+					stateHolder.sku = sku;
 					stateHolder.state = SubscriptionState.getByStateStr(state);
 					stateHolder.startTime = subObj.optLong("start_time");
 					stateHolder.expireTime = subObj.optLong("expire_time");
@@ -608,11 +616,14 @@ public abstract class InAppPurchaseHelper {
 			for (int i = 0; i < subArrJson.length(); i++) {
 				JSONObject subObj = subArrJson.getJSONObject(i);
 				String sku = subObj.getString("sku");
-				String platform = subObj.getString("platform");
+				String platform = subObj.optString("platform", null);
+				long purchaseTime = subObj.optLong("purchaseTime", 0);
 				if (!Algorithms.isEmpty(sku)) {
 					InAppStateHolder stateHolder = new InAppStateHolder();
+					stateHolder.sku = sku;
 					stateHolder.origin = getPurchaseOriginBySku(sku);
 					stateHolder.platform = platform;
+					stateHolder.purchaseTime = purchaseTime;
 					stateHolder.linkedPurchase = getLinkedPurchaseBySku(sku);
 					inappStateMap.put(sku, stateHolder);
 				}
@@ -668,6 +679,7 @@ public abstract class InAppPurchaseHelper {
 				settings.BACKUP_PURCHASE_EXPIRE_TIME.set(stateHolder.expireTime);
 				settings.BACKUP_PURCHASE_PERIOD.set(stateHolder.periodUnit);
 				settings.BACKUP_SUBSCRIPTION_ORIGIN.set(stateHolder.origin);
+				settings.BACKUP_SUBSCRIPTION_SKU.set(stateHolder.sku);
 				return stateHolder.state.isActive();
 			}
 			return false;
@@ -931,16 +943,6 @@ public abstract class InAppPurchaseHelper {
 		}
 	}
 
-	public static String getPlatformString() {
-		if (Version.isAmazon()) {
-			return PLATFORM_AMAZON;
-		} else if (Version.isHuawei()) {
-			return PLATFORM_HUAWEI;
-		} else {
-			return PLATFORM_GOOGLE;
-		}
-	}
-
 	protected void sendTokens(@NonNull List<PurchaseInfo> purchaseInfoList, @Nullable OnRequestResultListener listener) {
 		String userId = ctx.getSettings().BILLING_USER_ID.get();
 		String token = ctx.getSettings().BILLING_USER_TOKEN.get();
@@ -957,7 +959,7 @@ public abstract class InAppPurchaseHelper {
 						? PURCHASE_TYPE_INAPP : PURCHASE_TYPE_SUBSCRIPTION);
 				parameters.put("userid", userId);
 				parameters.put("sku", sku);
-				parameters.put("platform", getPlatformString());
+				parameters.put("platform", getPlatform());
 				parameters.put("orderId", info.getOrderId());
 				parameters.put("purchaseToken", info.getPurchaseToken());
 				parameters.put("email", email);
@@ -1128,7 +1130,21 @@ public abstract class InAppPurchaseHelper {
 		if (sku.contains(".amazon.")) {
 			return PurchaseOrigin.AMAZON;
 		}
+		if (sku.contains(".fastspring.")) {
+			return PurchaseOrigin.FASTSPRING;
+		}
 		return PurchaseOrigin.GOOGLE;
+	}
+
+	@NonNull
+	public PurchaseOrigin getPurchaseOriginByPlatform(@NonNull String platform) {
+		return switch (platform) {
+			case PLATFORM_APPLE -> PurchaseOrigin.IOS;
+			case PLATFORM_AMAZON -> PurchaseOrigin.AMAZON;
+			case PLATFORM_HUAWEI -> PurchaseOrigin.HUAWEI;
+			case PLATFORM_FASTSPRING -> PurchaseOrigin.FASTSPRING;
+			default -> PurchaseOrigin.GOOGLE;
+		};
 	}
 
 	@Nullable
