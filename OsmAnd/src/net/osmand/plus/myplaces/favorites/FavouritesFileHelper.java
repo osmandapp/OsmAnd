@@ -133,15 +133,17 @@ public class FavouritesFileHelper {
 		}
 	}
 
-	public void saveFavoritesIntoFile(@NonNull List<FavoriteGroup> groups, @Nullable SaveFavoritesListener listener) {
-		SaveFavoritesTask savePointsTask = new SaveFavoritesTask(this, groups, listener);
-		savePointsTask.executeOnExecutor(singleThreadExecutor);
+	public void saveFavoritesIntoFile(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
+			@Nullable SaveFavoritesListener listener) {
+		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
+		task.executeOnExecutor(singleThreadExecutor);
 	}
 
-	public void saveFavoritesIntoFileSync(@NonNull List<FavoriteGroup> groups, @Nullable SaveFavoritesListener listener) {
-		SaveFavoritesTask savePointsTask = new SaveFavoritesTask(this, groups, listener);
+	public void saveFavoritesIntoFileSync(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
+			@Nullable SaveFavoritesListener listener) {
+		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
 		try {
-			savePointsTask.executeOnExecutor(singleThreadExecutor).get();
+			task.executeOnExecutor(singleThreadExecutor).get();
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}

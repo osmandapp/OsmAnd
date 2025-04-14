@@ -211,7 +211,8 @@ public class FavouritesHelper {
 		listeners.remove(listener);
 	}
 
-	private boolean merge(Map<String, FavoriteGroup> source, Map<String, FavoriteGroup> destination) {
+	private boolean merge(@NonNull Map<String, FavoriteGroup> source,
+			@NonNull Map<String, FavoriteGroup> destination) {
 		boolean changed = false;
 		for (Map.Entry<String, FavoriteGroup> entry : source.entrySet()) {
 			String key = entry.getKey();
@@ -220,19 +221,31 @@ public class FavouritesHelper {
 
 			if (destinationGroup == null) {
 				changed = true;
-				destinationGroup = new FavoriteGroup(sourceGroup);
-				destination.put(key, destinationGroup);
+				destination.put(key, new FavoriteGroup(sourceGroup));
 			} else {
-				List<FavouritePoint> points = destinationGroup.getPoints();
-				Map<String, FavouritePoint> pointsMap = new HashMap<>();
-				for (FavouritePoint point : points) {
-					pointsMap.put(point.getKey(), point);
+				boolean groupChanged = false;
+				if (!destinationGroup.appearanceEquals(sourceGroup)) {
+					groupChanged = true;
+					destinationGroup.copyAppearance(sourceGroup);
 				}
-				for (FavouritePoint point : sourceGroup.getPoints()) {
-					if (!pointsMap.containsKey(point.getKey())) {
-						changed = true;
-						points.add(point);
+				Map<String, FavouritePoint> destPointsMap = new LinkedHashMap<>();
+				for (FavouritePoint point : destinationGroup.getPoints()) {
+					destPointsMap.put(point.getKey(), point);
+				}
+				for (FavouritePoint sourcePoint : sourceGroup.getPoints()) {
+					String pointKey = sourcePoint.getKey();
+					FavouritePoint destPoint = destPointsMap.get(pointKey);
+					if (destPoint == null) {
+						groupChanged = true;
+						destPointsMap.put(pointKey, sourcePoint);
+					} else if (!destPoint.appearanceEquals(sourcePoint)) {
+						groupChanged = true;
+						destPoint.copyAppearance(sourcePoint);
 					}
+				}
+				if (groupChanged) {
+					changed = true;
+					destinationGroup.setPoints(new ArrayList<>(destPointsMap.values()));
 				}
 			}
 		}
@@ -490,14 +503,21 @@ public class FavouritesHelper {
 	}
 
 	public void saveCurrentPointsIntoFile(boolean async) {
-		updateLastModifiedTime();
-		SaveFavoritesListener listener = this::onFavouritePropertiesUpdated;
+		saveGroupsInternal(new ArrayList<>(favoriteGroups), true, async);
+	}
 
-		List<FavoriteGroup> groups = new ArrayList<>(favoriteGroups);
+	public void saveSelectedGroupsIntoFile(@NonNull List<FavoriteGroup> groups, boolean async) {
+		saveGroupsInternal(groups, false, async);
+	}
+
+	private void saveGroupsInternal(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups, boolean async) {
+		updateLastModifiedTime();
+		SaveFavoritesListener listener = this::onSavingFavoritesFinished;
+
 		if (async) {
-			fileHelper.saveFavoritesIntoFile(groups, listener);
+			fileHelper.saveFavoritesIntoFile(groups, saveAllGroups, listener);
 		} else {
-			fileHelper.saveFavoritesIntoFileSync(groups, listener);
+			fileHelper.saveFavoritesIntoFileSync(groups, saveAllGroups, listener);
 		}
 	}
 
@@ -831,9 +851,9 @@ public class FavouritesHelper {
 		}
 	}
 
-	private void onFavouritePropertiesUpdated() {
+	private void onSavingFavoritesFinished() {
 		for (FavoritesListener listener : listeners) {
-			listener.onFavoritePropertiesUpdated();
+			listener.onSavingFavoritesFinished();
 		}
 	}
 

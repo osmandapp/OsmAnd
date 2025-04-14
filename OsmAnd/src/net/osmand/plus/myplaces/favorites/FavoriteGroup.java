@@ -6,11 +6,11 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -131,14 +131,26 @@ public class FavoriteGroup {
 			return false;
 		}
 		FavoriteGroup that = (FavoriteGroup) o;
-		return color == that.color && Algorithms.stringsEqual(name, that.name)
-				&& Algorithms.stringsEqual(iconName, that.iconName) && backgroundType == that.backgroundType
+		return Algorithms.stringsEqual(name, that.name)
+				&& appearanceEquals(that)
 				&& points.equals(that.points);
+	}
+
+	public boolean appearanceEquals(@NonNull FavoriteGroup group) {
+		return (color == group.color)
+				&& Algorithms.stringsEqual(iconName, group.iconName)
+				&& (backgroundType == group.backgroundType);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(name, iconName, backgroundType, points.size(), color, visible);
+	}
+
+	public void copyAppearance(@NonNull FavoriteGroup group) {
+		setColor(group.getColor());
+		setIconName(group.getIconName());
+		setBackgroundType(group.getBackgroundType());
 	}
 
 	private static boolean isPersonal(@NonNull String name) {

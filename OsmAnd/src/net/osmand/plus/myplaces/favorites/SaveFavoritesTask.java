@@ -9,17 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.FavouritePoint;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -36,10 +38,12 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 	private final FavouritesFileHelper fileHelper;
 	private final List<FavoriteGroup> favoriteGroups;
 	private final SaveFavoritesListener listener;
+	private final boolean saveAllGroups;
 
 	public SaveFavoritesTask(@NonNull FavouritesFileHelper fileHelper,
-	                         @NonNull List<FavoriteGroup> favoriteGroups,
-	                         @Nullable SaveFavoritesListener listener) {
+			@NonNull List<FavoriteGroup> favoriteGroups,
+			boolean saveAllGroups, @Nullable SaveFavoritesListener listener) {
+		this.saveAllGroups = saveAllGroups;
 		this.fileHelper = fileHelper;
 		this.favoriteGroups = favoriteGroups;
 		this.listener = listener;
@@ -47,11 +51,15 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 
 	@Override
 	protected Void doInBackground(Void... params) {
-		saveCurrentPointsIntoFile(favoriteGroups);
+		if (saveAllGroups) {
+			saveAllGroups(favoriteGroups);
+		} else {
+			saveSelectedGroupsOnly(favoriteGroups);
+		}
 		return null;
 	}
 
-	private void saveCurrentPointsIntoFile(@NonNull List<FavoriteGroup> groups) {
+	private void saveAllGroups(@NonNull List<FavoriteGroup> groups) {
 		try {
 			Map<String, FavoriteGroup> deletedGroups = new LinkedHashMap<>();
 			Map<String, FavouritePoint> deletedPoints = new LinkedHashMap<>();
@@ -87,6 +95,16 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 		}
 	}
 
+	private void saveSelectedGroupsOnly(@NonNull List<FavoriteGroup> groupsToSave) {
+		try {
+			for (FavoriteGroup group : groupsToSave) {
+				saveFavoriteGroup(group);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+
 	private void loadGPXFiles(@NonNull Map<String, FavoriteGroup> favoriteGroups) {
 		File[] files = fileHelper.getFavoritesFiles();
 		if (!Algorithms.isEmpty(files)) {
@@ -99,14 +117,16 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 		}
 	}
 
-	private void saveExternalFiles(@NonNull List<FavoriteGroup> localGroups, @NonNull Set<String> deleted) {
+	private void saveExternalFiles(@NonNull List<FavoriteGroup> localGroups,
+			@NonNull Set<String> deleted) {
 		Map<String, FavoriteGroup> fileGroups = new LinkedHashMap<>();
 		loadGPXFiles(fileGroups);
 		saveFileGroups(localGroups, fileGroups);
 		saveLocalGroups(localGroups, fileGroups, deleted);
 	}
 
-	private void saveFileGroups(@NonNull List<FavoriteGroup> localGroups, @NonNull Map<String, FavoriteGroup> fileGroups) {
+	private void saveFileGroups(@NonNull List<FavoriteGroup> localGroups,
+			@NonNull Map<String, FavoriteGroup> fileGroups) {
 		for (FavoriteGroup fileGroup : fileGroups.values()) {
 			// Search corresponding group in memory
 			boolean hasLocalGroup = false;
@@ -123,7 +143,8 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 		}
 	}
 
-	private void saveLocalGroups(@NonNull List<FavoriteGroup> localGroups, @NonNull Map<String, FavoriteGroup> fileGroups, @NonNull Set<String> deleted) {
+	private void saveLocalGroups(@NonNull List<FavoriteGroup> localGroups,
+			@NonNull Map<String, FavoriteGroup> fileGroups, @NonNull Set<String> deleted) {
 		for (FavoriteGroup localGroup : localGroups) {
 			FavoriteGroup fileGroup = fileGroups.get(localGroup.getName());
 			// Collect non deleted points from external group
@@ -145,24 +166,28 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			localGroup.getPoints().addAll(all.values());
 			// Save file if group changed
 			if (!localGroup.equals(fileGroup)) {
-				File externalFile = fileHelper.getExternalFile(localGroup);
-				Exception exception = fileHelper.saveFile(Collections.singletonList(localGroup), externalFile);
-				if (exception != null) {
-					log.error(exception);
-				}
+				saveFavoriteGroup(localGroup);
 			}
+		}
+	}
+
+	private void saveFavoriteGroup(@NonNull FavoriteGroup group) {
+		File externalFile = fileHelper.getExternalFile(group);
+		Exception exception = fileHelper.saveFile(Collections.singletonList(group), externalFile);
+		if (exception != null) {
+			log.error(exception);
 		}
 	}
 
 	private void backup(@NonNull File backupFile, @NonNull File externalFile) {
 		String name = backupFile.getName();
 		String nameNoExt = name.substring(0, name.lastIndexOf(ZIP_EXT));
-		FileInputStream fis = null;
+		InputStream fis = null;
 		ZipOutputStream zos = null;
 		try {
 			File file = new File(backupFile.getParentFile(), backupFile.getName());
 			zos = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-			fis = new FileInputStream(externalFile);
+			fis = new BufferedInputStream(new FileInputStream(externalFile));
 			zos.putNextEntry(new ZipEntry(nameNoExt));
 			Algorithms.streamCopy(fis, zos);
 			zos.closeEntry();

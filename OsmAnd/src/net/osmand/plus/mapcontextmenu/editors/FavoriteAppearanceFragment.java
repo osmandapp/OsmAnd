@@ -47,6 +47,8 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
+import java.util.Collections;
+
 public class FavoriteAppearanceFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = FavoriteAppearanceFragment.class.getName();
@@ -280,7 +282,7 @@ public class FavoriteAppearanceFragment extends BaseOsmAndDialogFragment {
 			}
 
 			if (shouldSave) {
-				favouritesHelper.saveCurrentPointsIntoFile(true);
+				favouritesHelper.saveSelectedGroupsIntoFile(Collections.singletonList(favoriteGroup), true);
 			}
 		}
 
