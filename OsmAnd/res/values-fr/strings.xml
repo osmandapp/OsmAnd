@@ -5564,7 +5564,7 @@
     <string name="obd_device_forget_sensor">Oublier le scanner</string>
     <string name="route_guidance_desc">Fournit un guidage routier en temps réel, y compris la distance jusqu\'au prochain virage, le nom de la route, le nom de la rue actuelle et des informations sur les voies de circulation. Les widgets sont actifs pendant la navigation.</string>
     <string name="obd_nothing_found_description">Veuillez vérifiez les points suivants :\n – Assurez-vous que la fonction Bluetooth est activée\n – Le moteur du véhicule est en marche\n – Assurez-vous que votre appareil est à portée du scanner.</string>
-    <string name="obd_bluetooth_off_description">Activez le Bluetooth pour chercher et connecter des scanners.</string>
+    <string name="obd_bluetooth_off_description">Activez le Bluetooth pour rechercher et connecter des scanners.</string>
     <string name="obd_device_forget_sensor_description">Le scanner sera retiré de la liste. Vous pourrez ré-appairer ce scanner à tout moment.</string>
     <string name="obd_searching_text_description">Veuillez garder votre appareil à proximité du scanner. Assurez-vous que le moteur du véhicule est en marche.</string>
     <string name="connect_obd_instructions_step">1. Connectez le scanner au port OBD-II de votre véhicule.\n\n2. Allumez le moteur de votre véhicule\n\n3. Activez le Bluetooth sur votre appareil\n\n4. Appuyez sur « %1$s » et sélectionnez votre scanner dans la liste.</string>
