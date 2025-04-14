@@ -781,6 +781,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (shouldDraw(zoom)) {
 			data.queryNewData(tileBox);
 			List<Amenity> objects = data.getResults();
+			updateVisiblePlaces(data.getDisplayedResults(), tileBox.getLatLonBounds());
 			if (objects != null) {
 				float textScale = getTextScale();
 				float iconSize = getIconSize(app);
