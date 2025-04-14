@@ -109,7 +109,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	@Override
 	protected void applyChanges() {
-		app.runInUIThread(controller::onApplySelection, 100);
+		controller.onApplySelection();
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.finishProcessIfNeeded(getActivity());
+		controller.onDestroy(getActivity());
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
