@@ -35,26 +35,26 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 
 	private static final Log log = PlatformUtil.getLog(SaveFavoritesTask.class);
 
-	private final FavouritesFileHelper fileHelper;
-	private final List<FavoriteGroup> favoriteGroups;
+	private final FavouritesFileHelper helper;
+	private final List<FavoriteGroup> groups;
 	private final SaveFavoritesListener listener;
 	private final boolean saveAllGroups;
 
-	public SaveFavoritesTask(@NonNull FavouritesFileHelper fileHelper,
-			@NonNull List<FavoriteGroup> favoriteGroups,
-			boolean saveAllGroups, @Nullable SaveFavoritesListener listener) {
+	public SaveFavoritesTask(@NonNull FavouritesFileHelper helper,
+			@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
+			@Nullable SaveFavoritesListener listener) {
 		this.saveAllGroups = saveAllGroups;
-		this.fileHelper = fileHelper;
-		this.favoriteGroups = favoriteGroups;
+		this.helper = helper;
+		this.groups = groups;
 		this.listener = listener;
 	}
 
 	@Override
 	protected Void doInBackground(Void... params) {
 		if (saveAllGroups) {
-			saveAllGroups(favoriteGroups);
+			saveAllGroups(groups);
 		} else {
-			saveSelectedGroupsOnly(favoriteGroups);
+			saveSelectedGroupsOnly(groups);
 		}
 		return null;
 	}
@@ -64,10 +64,10 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			Map<String, FavoriteGroup> deletedGroups = new LinkedHashMap<>();
 			Map<String, FavouritePoint> deletedPoints = new LinkedHashMap<>();
 
-			File internalFile = fileHelper.getInternalFile();
+			File internalFile = helper.getInternalFile();
 			GpxFile gpxFile = SharedUtil.loadGpxFile(internalFile);
 			if (gpxFile.getError() == null) {
-				fileHelper.collectFavoriteGroups(gpxFile, deletedGroups);
+				helper.collectFavoriteGroups(gpxFile, deletedGroups);
 			}
 			// Get all points from internal file to filter later
 			for (FavoriteGroup group : deletedGroups.values()) {
@@ -84,12 +84,12 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 				deletedGroups.remove(group.getName());
 			}
 			// Save groups to internal file
-			fileHelper.saveFile(groups, internalFile);
+			helper.saveFile(groups, internalFile);
 			// Save groups to external files
 			saveExternalFiles(groups, deletedPoints.keySet());
 			// Save groups to backup file
 			// backup(groups, getBackupFile()); // creates new, but does not zip
-			backup(fileHelper.getBackupFile(), internalFile); // simply backs up internal file, hence internal name is reflected in gpx <name> metadata
+			backup(helper.getBackupFile(), internalFile); // simply backs up internal file, hence internal name is reflected in gpx <name> metadata
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
@@ -97,6 +97,8 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 
 	private void saveSelectedGroupsOnly(@NonNull List<FavoriteGroup> groupsToSave) {
 		try {
+			// No need to touch internal file or backup
+			// Changes will be picked up during next loadFavorites()
 			for (FavoriteGroup group : groupsToSave) {
 				saveFavoriteGroup(group);
 			}
@@ -106,12 +108,12 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 	}
 
 	private void loadGPXFiles(@NonNull Map<String, FavoriteGroup> favoriteGroups) {
-		File[] files = fileHelper.getFavoritesFiles();
+		File[] files = helper.getFavoritesFiles();
 		if (!Algorithms.isEmpty(files)) {
 			for (File file : files) {
 				GpxFile gpxFile = SharedUtil.loadGpxFile(file);
 				if (gpxFile.getError() == null) {
-					fileHelper.collectFavoriteGroups(gpxFile, favoriteGroups);
+					helper.collectFavoriteGroups(gpxFile, favoriteGroups);
 				}
 			}
 		}
@@ -121,11 +123,11 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			@NonNull Set<String> deleted) {
 		Map<String, FavoriteGroup> fileGroups = new LinkedHashMap<>();
 		loadGPXFiles(fileGroups);
-		saveFileGroups(localGroups, fileGroups);
+		cleanupOrphanedGroupFiles(localGroups, fileGroups);
 		saveLocalGroups(localGroups, fileGroups, deleted);
 	}
 
-	private void saveFileGroups(@NonNull List<FavoriteGroup> localGroups,
+	private void cleanupOrphanedGroupFiles(@NonNull List<FavoriteGroup> localGroups,
 			@NonNull Map<String, FavoriteGroup> fileGroups) {
 		for (FavoriteGroup fileGroup : fileGroups.values()) {
 			// Search corresponding group in memory
@@ -138,7 +140,7 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			}
 			// Delete external group file if it does not exist in local groups
 			if (!hasLocalGroup) {
-				fileHelper.getExternalFile(fileGroup).delete();
+				helper.getExternalFile(fileGroup).delete();
 			}
 		}
 	}
@@ -172,8 +174,8 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 	}
 
 	private void saveFavoriteGroup(@NonNull FavoriteGroup group) {
-		File externalFile = fileHelper.getExternalFile(group);
-		Exception exception = fileHelper.saveFile(Collections.singletonList(group), externalFile);
+		File externalFile = helper.getExternalFile(group);
+		Exception exception = helper.saveFile(Collections.singletonList(group), externalFile);
 		if (exception != null) {
 			log.error(exception);
 		}
@@ -199,7 +201,7 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			Algorithms.closeStream(zos);
 			Algorithms.closeStream(fis);
 		}
-		fileHelper.clearOldBackups();
+		helper.clearOldBackups();
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package net.osmand.plus.myplaces.favorites;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_ALL;
-import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_NEW;
+import static net.osmand.plus.myplaces.favorites.SaveOption.APPLY_TO_ALL;
+import static net.osmand.plus.myplaces.favorites.SaveOption.APPLY_TO_NEW;
 import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.graphics.drawable.Drawable;
@@ -38,7 +38,6 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -211,8 +210,7 @@ public class FavouritesHelper {
 		listeners.remove(listener);
 	}
 
-	private boolean merge(@NonNull Map<String, FavoriteGroup> source,
-			@NonNull Map<String, FavoriteGroup> destination) {
+	private boolean merge(@NonNull Map<String, FavoriteGroup> source, @NonNull Map<String, FavoriteGroup> destination) {
 		boolean changed = false;
 		for (Map.Entry<String, FavoriteGroup> entry : source.entrySet()) {
 			String key = entry.getKey();
@@ -221,7 +219,8 @@ public class FavouritesHelper {
 
 			if (destinationGroup == null) {
 				changed = true;
-				destination.put(key, new FavoriteGroup(sourceGroup));
+				destinationGroup = new FavoriteGroup(sourceGroup);
+				destination.put(key, destinationGroup);
 			} else {
 				boolean groupChanged = false;
 				if (!destinationGroup.appearanceEquals(sourceGroup)) {
@@ -666,17 +665,19 @@ public class FavouritesHelper {
 
 	public void sortAll() {
 		Collator collator = getCollator();
-		ArrayList<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
-		Collections.sort(tmpFavoriteGroups, (lhs, rhs) -> lhs.isPersonal() ? -1 : rhs.isPersonal() ? 1 : collator.compare(lhs.getName(), rhs.getName()));
-		Comparator<FavouritePoint> favoritesComparator = getComparator();
+		List<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
+		Collections.sort(tmpFavoriteGroups, (lhs, rhs) -> lhs.isPersonal() ? -1
+				: rhs.isPersonal() ? 1 : collator.compare(lhs.getName(), rhs.getName()));
+
+		Comparator<FavouritePoint> comparator = new FavouritePointComparator(collator);
 		for (FavoriteGroup group : tmpFavoriteGroups) {
-			ArrayList<FavouritePoint> points = new ArrayList<>(group.getPoints());
-			Collections.sort(points, favoritesComparator);
+			List<FavouritePoint> points = new ArrayList<>(group.getPoints());
+			Collections.sort(points, comparator);
 			group.setPoints(points);
 		}
 		favoriteGroups = tmpFavoriteGroups;
-		ArrayList<FavouritePoint> tmpCechPoints = new ArrayList<>(cachedFavoritePoints);
-		Collections.sort(tmpCechPoints, favoritesComparator);
+		List<FavouritePoint> tmpCechPoints = new ArrayList<>(cachedFavoritePoints);
+		Collections.sort(tmpCechPoints, comparator);
 		cachedFavoritePoints = tmpCechPoints;
 	}
 
@@ -685,34 +686,6 @@ public class FavouritesHelper {
 		Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		return collator;
-	}
-
-	@NonNull
-	private static Comparator<FavouritePoint> getComparator() {
-		Collator collator = getCollator();
-		return (o1, o2) -> {
-			String s1 = o1.getName();
-			String s2 = o2.getName();
-			int i1 = Algorithms.extractIntegerNumber(s1);
-			int i2 = Algorithms.extractIntegerNumber(s2);
-			String ot1 = Algorithms.extractIntegerPrefix(s1);
-			String ot2 = Algorithms.extractIntegerPrefix(s2);
-			// Next 6 lines needed for correct comparison of names with and without digits
-			if (ot1.length() == 0) {
-				ot1 = s1;
-			}
-			if (ot2.length() == 0) {
-				ot2 = s2;
-			}
-			int res = collator.compare(ot1, ot2);
-			if (res == 0) {
-				res = Integer.compare(i1, i2);
-			}
-			if (res == 0) {
-				res = collator.compare(s1, s2);
-			}
-			return res;
-		};
 	}
 
 	public void updateGroupColor(@NonNull FavoriteGroup group, int color, @NonNull SaveOption saveOption, boolean saveImmediately) {
@@ -864,19 +837,5 @@ public class FavouritesHelper {
 			favouritePoints.addAll(group.getPoints());
 		}
 		return favouritePoints;
-	}
-
-	public enum SaveOption {
-		APPLY_TO_EXISTING,
-		APPLY_TO_NEW,
-		APPLY_TO_ALL;
-
-		public boolean shouldUpdatePoints() {
-			return this == APPLY_TO_EXISTING || this == APPLY_TO_ALL;
-		}
-
-		public boolean shouldUpdateGroup(){
-			return this == APPLY_TO_NEW || this == APPLY_TO_ALL;
-		}
 	}
 }

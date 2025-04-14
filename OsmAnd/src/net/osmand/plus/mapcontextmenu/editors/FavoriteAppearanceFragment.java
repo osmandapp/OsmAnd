@@ -37,7 +37,7 @@ import net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceCo
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption;
+import net.osmand.plus.myplaces.favorites.SaveOption;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;

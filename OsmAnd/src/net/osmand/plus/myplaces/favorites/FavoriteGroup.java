@@ -138,8 +138,8 @@ public class FavoriteGroup {
 
 	public boolean appearanceEquals(@NonNull FavoriteGroup group) {
 		return (color == group.color)
-				&& Algorithms.stringsEqual(iconName, group.iconName)
-				&& (backgroundType == group.backgroundType);
+				&& (backgroundType == group.backgroundType)
+				&& Algorithms.stringsEqual(iconName, group.iconName);
 	}
 
 	@Override
