@@ -12,6 +12,10 @@ class CompassDrawable(private val original: Drawable) : Drawable() {
 		this.mapRotation = mapRotation
 	}
 
+	fun getMapRotation(): Float {
+		return mapRotation
+	}
+
 	override fun draw(canvas: Canvas) {
 		canvas.save()
 		canvas.rotate(mapRotation, intrinsicWidth / 2f, intrinsicHeight / 2f)
