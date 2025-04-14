@@ -5073,4 +5073,15 @@
     <string name="poi_orthodox_church">Rétttrúnaðarkirkja</string>
     <string name="poi_jehovahs_witness_kingdom_hall">Konungshöll Votta Jehóva</string>
     <string name="poi_synagogue">Sýnagóga</string>
+    <string name="poi_pentecostal_church">Hvítasunnukirkja</string>
+    <string name="poi_evangelical_church">Evangelísk kirkja</string>
+    <string name="poi_hazard_additional_landslide">Slysahætta: skriður/framhlaup</string>
+    <string name="poi_presbyterian_church">Presbýterakirkja</string>
+    <string name="poi_aerodrome_type_airfield">Flugvöllur</string>
+    <string name="poi_consulate">Ræðismaður</string>
+    <string name="poi_hazard_additional_yes">Slysahætta</string>
+    <string name="poi_hazard_falling_rocks">Grjóthrun</string>
+    <string name="poi_hazard_contamination">Smithætta</string>
+    <string name="poi_hazard_yes">Slysahætta</string>
+    <string name="poi_hazard_additional_slippery_road">Hálka á vegi</string>
 </resources>
