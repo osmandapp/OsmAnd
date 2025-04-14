@@ -54,15 +54,23 @@ public class RouteExporter {
 		Track track = new Track();
 		track.setName(name);
 		gpx.getTracks().add(track);
-		track.getSegments().addAll(trkSegments);
+		if (trkSegments != null) {
+			for (TrkSegment segment : trkSegments) {
+				track.getSegments().add(new TrkSegment(segment));
+			}
+		}
 		if (points != null) {
 			for (WptPt pt : points) {
-				gpx.addPoint(pt);
+				gpx.addPoint(new WptPt(pt));
 			}
 		}
 		if (routePoints != null) {
 			for (List<WptPt> wptPts : routePoints) {
-				gpx.addRoutePoints(wptPts, true);
+				List<WptPt> routePointsList = new ArrayList<>();
+				for (WptPt pt : wptPts) {
+					routePointsList.add(new WptPt(pt));
+				}
+				gpx.addRoutePoints(routePointsList, true);
 			}
 		}
 		return gpx;
