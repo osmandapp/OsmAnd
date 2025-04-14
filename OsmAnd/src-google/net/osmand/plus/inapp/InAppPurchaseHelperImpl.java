@@ -74,6 +74,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
+	@Override
+	public String getPlatform() {
+		return PLATFORM_GOOGLE;
+	}
+
 	private BillingManager getBillingManager() {
 		return billingManager;
 	}

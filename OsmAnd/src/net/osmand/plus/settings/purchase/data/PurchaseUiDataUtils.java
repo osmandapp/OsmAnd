@@ -39,21 +39,22 @@ public class PurchaseUiDataUtils {
 
 	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app, @NonNull InAppPurchase purchase) {
-		return createUiData(app, purchase, app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()));
+		return createUiData(app, purchase, purchase.getPurchaseTime(),
+				app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()));
 	}
 
 	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app,
 											  @NonNull InAppPurchase purchase,
+											  long purchaseTime,
 											  @NonNull PurchaseOrigin origin) {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 		InAppPurchases purchases = purchaseHelper.getInAppPurchases();
 
 		String sku = purchase.getSku();
 		String title = app.getString(R.string.shared_string_undefined);
-		int iconId = INVALID;
+		int iconId;
 		String purchaseType;
-		long purchaseTime = purchase.getPurchaseTime();
 		long expireTime = INVALID;
 		boolean liveUpdateSubscription = purchases.isLiveUpdatesSubscription(purchase);
 		boolean autoRenewing = false;
@@ -99,7 +100,6 @@ public class PurchaseUiDataUtils {
 			}
 		} else {
 			purchaseType = app.getString(R.string.in_app_purchase_desc);
-			purchaseTime = purchase.getPurchaseTime();
 		}
 
 		return new PurchaseUiData(sku, title, iconId, purchaseType,
@@ -112,7 +112,7 @@ public class PurchaseUiDataUtils {
 	public static PurchaseUiData createBackupSubscriptionUiData(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 
-		String sku = null;
+		String sku = settings.BACKUP_SUBSCRIPTION_SKU.get();
 		String title;
 		String purchaseType;
 		int iconId = R.drawable.ic_action_osmand_pro_logo_colored;

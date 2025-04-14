@@ -100,6 +100,10 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
+	@Override
+	public String getPlatform() {
+		return PLATFORM_HUAWEI;
+	}
 	protected void execImpl(@NonNull final InAppPurchaseTaskType taskType, @NonNull final InAppCommand command) {
 		if (envReady) {
 			command.run(this);

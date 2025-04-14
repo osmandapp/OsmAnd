@@ -73,6 +73,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
+	public String getPlatform() {
+		return PLATFORM_AMAZON;
+	}
+
+	@Override
 	protected void execImpl(@NonNull InAppPurchaseTaskType taskType, @NonNull InAppCommand command) {
 		command.run(this);
 	}
