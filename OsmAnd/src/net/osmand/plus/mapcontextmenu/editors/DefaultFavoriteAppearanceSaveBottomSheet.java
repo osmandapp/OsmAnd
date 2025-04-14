@@ -1,8 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_ALL;
-import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_EXISTING;
-import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_NEW;
+import static net.osmand.plus.myplaces.favorites.SaveOption.APPLY_TO_ALL;
+import static net.osmand.plus.myplaces.favorites.SaveOption.APPLY_TO_EXISTING;
+import static net.osmand.plus.myplaces.favorites.SaveOption.APPLY_TO_NEW;
 
 import android.os.Bundle;
 
