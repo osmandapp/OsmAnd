@@ -1,6 +1,5 @@
 package net.osmand.plus.keyevent.fragments.inputdevices;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,15 +35,11 @@ public class InputDevicesFragment extends BaseOsmAndFragment implements InputDev
 	private InputDevicesAdapter adapter;
 	private InputDevicesController controller;
 
-	private ApplicationMode appMode;
 	private InputDevicesHelper deviceHelper;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Bundle arguments = getArguments();
-		String appModeKey = arguments != null ? arguments.getString(APP_MODE_KEY) : "";
-		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 		controller = new InputDevicesController(app, appMode, isUsedOnMap());
 		deviceHelper = app.getInputDeviceHelper();
 	}

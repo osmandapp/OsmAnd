@@ -339,7 +339,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putSerializable(TAGS_LIST, (Serializable) new LinkedHashMap<>(editPoiData.getTagValues()));
 		super.onSaveInstanceState(outState);
 	}

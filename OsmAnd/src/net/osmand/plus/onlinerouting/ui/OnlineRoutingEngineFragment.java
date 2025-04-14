@@ -4,7 +4,6 @@ import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VE
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.DERIVED_PROFILE_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -68,7 +67,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private static final String EXAMPLE_LOCATION_KEY = "example_location";
 	private static final String EDITED_ENGINE_KEY = "edited_engine_key";
 
-	private ApplicationMode appMode;
 	private String approxRouteProfile;
 	private String approxDerivedProfile;
 	private MapActivity mapActivity;
@@ -597,11 +595,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		}
 	}
 
-	@NonNull
-	private ApplicationMode getAppMode() {
-		return appMode != null ? appMode : app.getSettings().getApplicationMode();
-	}
-
 	@Nullable
 	private MapActivity getMapActivity() {
 		FragmentActivity activity = getActivity();
@@ -635,7 +628,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		}
 		outState.putString(ENGINE_CUSTOM_VEHICLE_KEY, customVehicleKey);
 		outState.putString(EXAMPLE_LOCATION_KEY, selectedLocation.name());
-		outState.putString(APP_MODE_KEY, getAppMode().getStringKey());
 		outState.putString(EDITED_ENGINE_KEY, editedEngineKey);
 	}
 
@@ -654,7 +646,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		engine = type.newInstance(params);
 		customVehicleKey = savedState.getString(ENGINE_CUSTOM_VEHICLE_KEY);
 		selectedLocation = ExampleLocation.valueOf(savedState.getString(EXAMPLE_LOCATION_KEY));
-		appMode = ApplicationMode.valueOfStringKey(savedState.getString(APP_MODE_KEY), null);
 	}
 
 	private void initState() {
@@ -690,7 +681,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
-			fragment.appMode = appMode;
+			fragment.setAppMode(appMode);
 			fragment.editedEngineKey = editedEngineKey;
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)

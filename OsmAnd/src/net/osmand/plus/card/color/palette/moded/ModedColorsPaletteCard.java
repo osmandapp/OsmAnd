@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
@@ -22,13 +23,13 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 
 	public ModedColorsPaletteCard(@NonNull FragmentActivity activity,
 	                              @NonNull ModedColorsPaletteController controller) {
-		this(activity, controller, true);
+		this(activity, controller, null, true);
 	}
 
 	public ModedColorsPaletteCard(@NonNull FragmentActivity activity,
 	                              @NonNull ModedColorsPaletteController controller,
-	                              boolean usedOnMap) {
-		super(activity, controller, usedOnMap);
+	                              @Nullable ApplicationMode appMode, boolean usedOnMap) {
+		super(activity, controller, appMode, usedOnMap);
 		this.controller = controller;
 	}
 

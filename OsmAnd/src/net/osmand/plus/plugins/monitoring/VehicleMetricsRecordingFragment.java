@@ -4,7 +4,6 @@ import static net.osmand.plus.plugins.monitoring.VehicleMetricsRecordingFragment
 import static net.osmand.plus.plugins.monitoring.VehicleMetricsRecordingFragment.VehicleMetricsRecordingCategory.FUEL;
 import static net.osmand.plus.plugins.monitoring.VehicleMetricsRecordingFragment.VehicleMetricsRecordingCategory.OTHER;
 import static net.osmand.plus.plugins.monitoring.VehicleMetricsRecordingFragment.VehicleMetricsRecordingCategory.TEMPERATURE;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -52,6 +51,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
@@ -59,7 +59,6 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
 	public static final String SELECTED_COMMANDS_KEY = "selected_commands_key";
 
-	public ApplicationMode selectedMode;
 	private Toolbar toolbar;
 	private ImageView navigationIcon;
 
@@ -105,10 +104,9 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 		preference = PluginsHelper.requirePlugin(VehicleMetricsPlugin.class).getTRIP_RECORDING_VEHICLE_METRICS();
 
 		if (savedInstanceState != null) {
-			selectedMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), settings.getApplicationMode());
-			selectedCommands.addAll(savedInstanceState.getStringArrayList(SELECTED_COMMANDS_KEY));
+			selectedCommands.addAll(Objects.requireNonNull(savedInstanceState.getStringArrayList(SELECTED_COMMANDS_KEY)));
 		} else {
-			List<String> commands = preference.getStringsListForProfile(selectedMode);
+			List<String> commands = preference.getStringsListForProfile(appMode);
 			if (commands != null) {
 				selectedCommands.addAll(commands);
 			}
@@ -147,7 +145,6 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putStringArrayList(SELECTED_COMMANDS_KEY, new ArrayList<>(selectedCommands));
-		outState.putString(APP_MODE_KEY, selectedMode.getStringKey());
 	}
 
 	private void dismiss() {
@@ -201,7 +198,7 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 
 	private void updateSelectAllButton() {
 		selectAllButton.setTitleId(areAllCommandsSelected() ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
-		applyButton.setEnabled(!areListsEqual(selectedCommands, preference.getStringsListForProfile(selectedMode)));
+		applyButton.setEnabled(!areListsEqual(selectedCommands, preference.getStringsListForProfile(appMode)));
 	}
 
 	private boolean areListsEqual(@NonNull Set<String> set, @Nullable List<String> list) {
@@ -280,7 +277,7 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			VehicleMetricsRecordingFragment fragment = new VehicleMetricsRecordingFragment();
-			fragment.selectedMode = selectedAppMode;
+			fragment.setAppMode(selectedAppMode);
 			fragment.setTargetFragment(monitoringSettingsFragment, 0);
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)

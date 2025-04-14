@@ -345,7 +345,7 @@ public class EditKeyAssignmentController extends BaseDialogController implements
 	}
 
 	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(false);
+		return app.getDaynightHelper().isNightMode(false, appMode);
 	}
 
 	@Nullable

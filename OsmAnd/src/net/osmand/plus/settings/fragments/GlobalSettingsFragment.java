@@ -179,7 +179,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
-				SpeedCamerasBottomSheet.showInstance(manager, this);
+				SpeedCamerasBottomSheet.showInstance(manager, this, getSelectedAppMode(), false);
 			}
 		} else if (prefId.equals(settings.LOCATION_SOURCE.getId())) {
 			FragmentManager manager = getFragmentManager();

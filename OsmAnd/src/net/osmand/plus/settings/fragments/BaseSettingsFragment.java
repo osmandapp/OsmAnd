@@ -42,6 +42,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.base.AppModeDependentComponent;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -72,11 +73,10 @@ import java.io.Serializable;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
-		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
+		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged, AppModeDependentComponent {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
 
-	public static final String APP_MODE_KEY = "app_mode_key";
 	public static final String OPEN_CONFIG_PROFILE = "openConfigProfile";
 	public static final String OPEN_SETTINGS = "openSettings";
 	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
@@ -102,16 +102,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		app = requireMyApplication();
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
-		Bundle args = getArguments();
-		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
-		}
-		if (appMode == null && args != null) {
-			appMode = ApplicationMode.valueOfStringKey(args.getString(APP_MODE_KEY), null);
-		}
-		if (appMode == null) {
-			appMode = settings.getApplicationMode();
-		}
+		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
 		super.onCreate(savedInstanceState);
 		currentScreenType = getCurrentScreenType();
 	}
@@ -186,8 +177,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		outState.putString(APP_MODE_KEY, appMode.getStringKey());
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		saveAppModeToBundle(appMode, outState);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -343,7 +334,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public void onAppModeChanged(ApplicationMode appMode) {
-		this.appMode = appMode;
+		setAppMode(appMode);
 		if (updateTheme()) {
 			recreate();
 		} else {
@@ -351,6 +342,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			updateToolbar();
 			updateAllSettings();
 		}
+	}
+
+	@Override
+	public void setAppMode(@NonNull ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
+	@NonNull
+	@Override
+	public ApplicationMode getAppMode() {
+		return appMode;
 	}
 
 	public Bundle buildArguments() {
@@ -800,8 +802,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (activity != null) {
 			DialogManager dialogManager = app.getDialogManager();
 			dialogManager.register(processId, controller);
+			ApplicationMode appMode = getSelectedAppMode();
 			FragmentManager fm = activity.getSupportFragmentManager();
-			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, false);
+			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, appMode, false);
 		}
 	}
 
