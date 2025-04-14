@@ -17,6 +17,7 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.track.fragments.SelectRouteActivityFragment;
 import net.osmand.plus.track.helpers.RouteActivitySearchFilter;
@@ -203,14 +204,14 @@ public class SelectRouteActivityController extends BaseDialogController
 		return PROCESS_ID;
 	}
 
-	public static void showDialog(@NonNull FragmentActivity activity,
+	public static void showDialog(@NonNull FragmentActivity activity, @Nullable ApplicationMode appMode,
 	                              @NonNull RouteActivitySelectionHelper routeActivitySelectionHelper) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, new SelectRouteActivityController(app, routeActivitySelectionHelper));
 
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		SelectRouteActivityFragment.showInstance(fragmentManager, PROCESS_ID);
+		SelectRouteActivityFragment.showInstance(fragmentManager, appMode, PROCESS_ID);
 	}
 
 	@Nullable

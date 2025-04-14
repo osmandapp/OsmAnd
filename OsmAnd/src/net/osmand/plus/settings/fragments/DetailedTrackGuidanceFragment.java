@@ -43,9 +43,6 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	private static final String TAG = DetailedTrackGuidanceFragment.class.getSimpleName();
 	private static final String DETAILED_TRACK_GUIDANCE_KEY = "detailed_track_guidance_key";
 	private static final String THRESHOLD_DISTANCE_KEY = "threshold_distance_key";
-	private static final String SELECTED_APP_MODE_KEY = "selected_app_mode_key";
-
-	private ApplicationMode selectedAppMode;
 
 	private View sliderView;
 	private TextView sliderTv;
@@ -58,25 +55,14 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setupAppMode(savedInstanceState);
-
-		int distance = settings.GPX_APPROXIMATION_DISTANCE.getModeValue(selectedAppMode);
-		TrackApproximationType type = settings.DETAILED_TRACK_GUIDANCE.getModeValue(selectedAppMode);
+		int distance = settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode);
+		TrackApproximationType type = settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode);
 		if (savedInstanceState != null) {
 			changedTrackGuidance = TrackApproximationType.values()[savedInstanceState.getInt(DETAILED_TRACK_GUIDANCE_KEY, type.ordinal())];
 			changedThresholdDistance = savedInstanceState.getInt(THRESHOLD_DISTANCE_KEY, distance);
 		} else {
 			changedTrackGuidance = type;
 			changedThresholdDistance = distance;
-		}
-	}
-
-	private void setupAppMode(@Nullable Bundle savedInstanceState) {
-		if (selectedAppMode == null && savedInstanceState != null) {
-			selectedAppMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(SELECTED_APP_MODE_KEY), null);
-		}
-		if (selectedAppMode == null) {
-			selectedAppMode = settings.getApplicationMode();
 		}
 	}
 
@@ -101,7 +87,6 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 		super.onSaveInstanceState(outState);
 		outState.putInt(DETAILED_TRACK_GUIDANCE_KEY, changedTrackGuidance.ordinal());
 		outState.putInt(THRESHOLD_DISTANCE_KEY, changedThresholdDistance);
-		outState.putString(SELECTED_APP_MODE_KEY, selectedAppMode.getStringKey());
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -125,8 +110,8 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 
 		applyButton.setOnClickListener(v -> {
 			if (isParametersChanged()) {
-				settings.DETAILED_TRACK_GUIDANCE.setModeValue(selectedAppMode, changedTrackGuidance);
-				settings.GPX_APPROXIMATION_DISTANCE.setModeValue(selectedAppMode, changedThresholdDistance);
+				settings.DETAILED_TRACK_GUIDANCE.setModeValue(appMode, changedTrackGuidance);
+				settings.GPX_APPROXIMATION_DISTANCE.setModeValue(appMode, changedThresholdDistance);
 				Fragment fragment = getTargetFragment();
 				if (fragment instanceof NavigationFragment) {
 					((NavigationFragment) fragment).showTrackGuidancePref();
@@ -212,8 +197,8 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	}
 
 	private boolean isParametersChanged() {
-		return settings.GPX_APPROXIMATION_DISTANCE.getModeValue(selectedAppMode) != changedThresholdDistance
-				|| settings.DETAILED_TRACK_GUIDANCE.getModeValue(selectedAppMode) != changedTrackGuidance;
+		return settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode) != changedThresholdDistance
+				|| settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) != changedTrackGuidance;
 	}
 
 	private void setupRadioButton(@NonNull View button, @StringRes int titleId, boolean selected, boolean showDivider, @NonNull View.OnClickListener listener) {
@@ -261,11 +246,12 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 		return (MapActivity) getActivity();
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, @NonNull ApplicationMode mode, NavigationFragment navigationFragment) {
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull ApplicationMode mode,
+	                                @NonNull NavigationFragment navigationFragment) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			DetailedTrackGuidanceFragment fragment = new DetailedTrackGuidanceFragment();
-			fragment.selectedAppMode = mode;
+			fragment.setAppMode(mode);
 			fragment.setTargetFragment(navigationFragment, 0);
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)

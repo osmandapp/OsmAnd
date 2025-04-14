@@ -48,7 +48,7 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(PENDING_ENABLE_PROXY_ATTR, pendingEnableProxy);
 	}

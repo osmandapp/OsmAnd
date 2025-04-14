@@ -104,7 +104,7 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 				: app.getString(R.string.shared_string_none);
 		Drawable icon = getContentIcon(AndroidUtils.getActivityIconId(app, routeActivity));
 		createItemRow(getString(R.string.shared_string_activity), label, icon).setOnClickListener(
-				v -> SelectRouteActivityController.showDialog(activity, activityHelper)
+				v -> SelectRouteActivityController.showDialog(activity, appMode, activityHelper)
 		);
 
 		String keywords = metadata != null ? metadata.getKeywords() : null;

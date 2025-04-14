@@ -31,6 +31,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -40,13 +41,14 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment implements AppModeDependentComponent {
 
 	private static final String USED_ON_MAP_KEY = "used_on_map";
 	protected static final int DEFAULT_VALUE = -1;
 
 	protected List<BaseBottomSheetItem> items = new ArrayList<>();
 
+	protected ApplicationMode appMode;
 	protected boolean usedOnMap = true;
 	protected boolean nightMode;
 
@@ -68,6 +70,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (savedInstanceState != null) {
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 		}
+		appMode = restoreAppMode(requiredMyApplication(), appMode, savedInstanceState, getArguments());
 	}
 
 	@Nullable
@@ -115,6 +118,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
+		saveAppModeToBundle(appMode, outState);
 	}
 
 	@Override
@@ -146,6 +150,15 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			}
 			setupHeightAndBackground(mainView);
 		}
+	}
+
+	public void setAppMode(@Nullable ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
+	@NonNull
+	public ApplicationMode getAppMode() {
+		return appMode;
 	}
 
 	@Override
@@ -463,7 +476,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	public boolean isNightMode(@NonNull OsmandApplication app) {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		return app.getDaynightHelper().isNightMode(usedOnMap, appMode);
 	}
 
 	private void showShadowButton() {

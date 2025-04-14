@@ -173,7 +173,7 @@ class InputDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 	}
 
 	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		return app.getDaynightHelper().isNightMode(usedOnMap, appMode);
 	}
 
 	private int getDimen(@DimenRes int resId) {
