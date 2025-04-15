@@ -161,21 +161,21 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapHudLayout.addMapButton(mapButton);
 	}
 
-	public void addCustomMapButton(@NonNull MapButton mapButton) {
+	public void addCustomMapButton(@NonNull MapButton mapButton, boolean alwaysVisible, boolean longClickable, boolean useCustomPosition, boolean useDefaultAppearance) {
 		customMapButtons.add(mapButton);
-		mapButton.setAlwaysVisible(true);
-		mapButton.setLongClickable(false);
-		mapButton.setUseCustomPosition(false);
-		mapButton.setUseDefaultAppearance(true);
+		mapButton.setAlwaysVisible(alwaysVisible);
+		mapButton.setLongClickable(longClickable);
+		mapButton.setUseCustomPosition(useCustomPosition);
+		mapButton.setUseDefaultAppearance(useDefaultAppearance);
 		mapButton.setMapActivity(requireMapActivity());
 	}
 
+	public void addCustomMapButton(@NonNull MapButton mapButton) {
+		addCustomMapButton(mapButton, true, false, false, true);
+	}
+
 	public void addCustomizedDefaultMapButton(@NonNull MapButton mapButton) {
-		customMapButtons.add(mapButton);
-		mapButton.setAlwaysVisible(true);
-		mapButton.setLongClickable(false);
-		mapButton.setUseCustomPosition(false);
-		mapButton.setMapActivity(requireMapActivity());
+		addCustomMapButton(mapButton, true, false, false, false);
 	}
 
 	@NonNull
