@@ -3804,17 +3804,11 @@
     <string name="gpx_upload_trackable_visibility_descr">„Z opcją śledzenia” oznacza, że ślad nie pojawia się w żadnych publicznych wykazach, ale przetworzone punkty śledzenia z sygnaturami czasowymi (których nie można bezpośrednio powiązać z Tobą) są pobierane z publicznego interfejsu GPS API.</string>
     <string name="osm_login_descr">Zaloguj się z użyciem metody OAuth lub swojej nazwy użytkownika i hasła OSM.</string>
     <string name="shared_string_add_photo">Dodaj zdjęcie</string>
-    <string name="register_on_openplacereviews">Zarejestruj się w
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Utwórz nowe konto</string>
     <string name="register_opr_have_account">Mam już konto</string>
     <string name="select_groups_for_import">Wybierz grupy, które zostaną zaimportowane.</string>
     <string name="select_items_for_import">Wybierz elementy, które zostaną zaimportowane.</string>
     <string name="use_dev_url_descr">Przełącz na dev.openstreetmap.org zamiast openstreetmap.org do testowania przesyłania uwag OSM / użytecznych miejsc / GPX.</string>
-    <string name="add_photos_descr">OsmAnd pokazuje zdjęcia z kilku źródeł:
-\nOpenPlaceReviews - zdjęcia punktów użyteczności;
-\nMapillary - zdjęcia z poziomu ulicy;
-\nWeb / Wikimedia - zdjęcia punktów POI zgodnie z danymi OpenStreetMap.</string>
     <string name="shared_string_resources">Zasoby</string>
     <string name="approximate_file_size">Przybliżony rozmiar pliku</string>
     <string name="select_data_to_export">Wybierz dane do wyeksportowania do pliku.</string>
@@ -3921,9 +3915,6 @@
     <string name="uploaded_count">Przesłano %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Wybierz zmiany do przesłania</string>
     <string name="hillshade_slope_contour_lines">Mapa cieniowana / Nachylenie / Poziomice</string>
-    <string name="open_place_reviews_plugin_description">Dodaj do projektu OpenPlaceReviews zdjęcia, recenzje i linki do miejsc publicznych takich jak restauracje, hotele czy muzea.
-\n
-\nZnajdź instrukcje jak to zrobić na naszej stronie %1$s.</string>
     <string name="activity_type_water_name">Zbiornik wodny</string>
     <string name="activity_type_winter_name">Zimowe</string>
     <string name="activity_type_snowmobile_name">Skuter śnieżny</string>

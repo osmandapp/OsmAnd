@@ -3647,8 +3647,6 @@
     <string name="osm_edit_comment_note">Comentário na nota do OpenStreetMap</string>
     <string name="osm_login_descr">Inicie a sessão pelo método seguro OAuth ou use o seu nome de utilizador e a palavra-passe do OpenStreetMap.</string>
     <string name="shared_string_add_photo">Adicionar fotografia</string>
-    <string name="register_on_openplacereviews">Crie uma conta em
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Criar uma conta</string>
     <string name="register_opr_have_account">Já tenho uma conta</string>
     <string name="shared_string_search_history">Histórico de pesquisa</string>
@@ -3661,10 +3659,6 @@
     <string name="export_not_enough_space_descr">O seu dispositivo só tem disponível %1$s. Liberte algum espaço ou desmarque alguns itens para exportar.</string>
     <string name="export_not_enough_space">Não há espaço suficiente</string>
     <string name="add_to_mapillary">Adicionar ao Mapillary</string>
-    <string name="add_photos_descr">OsmAnd mostra fotografias de várias origens:
-\nOpenPlaceReviews - fotografias de POI;
-\nMapillary - fotografias ao nível do solo;
-\nWeb / Wikimedia - fotografias de POI definidas no OpenStreetMap.</string>
     <string name="select_groups_for_import">Selecionar os grupos que serão importados.</string>
     <string name="select_items_for_import">Selecionar os objetos que serão importados.</string>
     <string name="use_dev_url">Utilizar dev.openstreetmap.org</string>
@@ -3704,9 +3698,6 @@
     <string name="rename_track">Alterar nome do trilho</string>
     <string name="change_folder">Mudar pasta</string>
     <string name="hillshade_slope_contour_lines">Curvas de nível / sombras de relevo / declives</string>
-    <string name="open_place_reviews_plugin_description">Faça contribuições para o projeto OpenPlaceReviews, como fotos, comentários ou hiperligações para locais públicos, como restaurantes, hotéis ou museus.
-\n
-\nVeja as instruções sobre como contribuir em %1$s.</string>
     <string name="activity_type_water_name">Água</string>
     <string name="activity_type_winter_name">Inverno</string>
     <string name="activity_type_snowmobile_name">Moto de neve</string>
@@ -5383,10 +5374,6 @@
     <string name="energy_avg_info_description">Nível da bateria por minuto: %1$s
 \nConsumo de energia (mAh): %2$s</string>
     <string name="rendering_avg_info">Estatísticas de renderização (média de 1 / 5 / 15 minutos)</string>
-    <string name="rendering_avg_info_description">FPS dos últimos 1k fotogramas: %1$s
-\nCPU básico: %2$s
-\nGPU 1k: %3$s
-\nINATIVO 1k: %4$s</string>
     <string name="quick_action_directions_from">Ponto inicial</string>
     <string name="quick_action_new_route">Nova rota</string>
     <string name="quick_action_next_app_profile">Perfil seguinte da aplicação</string>

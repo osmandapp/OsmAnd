@@ -2751,8 +2751,6 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tollán toirmiscthe do rothaithe</string>
     <string name="poi_route_article">Earraí Taistil</string>
     <string name="poi_route_article_point">Pointí Taistil</string>
-    <string name="poi_route_track">Bealaí eile</string>
-    <string name="poi_activities_bicycle">Rothar</string>
     <string name="poi_activities_running">Ag rith</string>
     <string name="poi_activities_pedestrian">Ag siúl</string>
     <string name="poi_activities_kayak">Spóirt uisce</string>
@@ -4865,8 +4863,6 @@
     <string name="poi_cash_in_no">Ní hea</string>
     <string name="poi_diet_pescetarian_no">Aiste bia pescetarian: níl</string>
     <string name="poi_route_track_point">Pointí bealaigh</string>
-    <string name="poi_activities_horse">Marcaíocht capall</string>
-    <string name="poi_activities_mountain_bike">Rothaíocht sléibhe</string>
     <string name="poi_name_right">Ainm an taoibh dheis</string>
     <string name="poi_camp_site_deluxe">DeluxeName</string>
     <string name="poi_name_etymology">Ainm sanasaíocht</string>
@@ -4882,8 +4878,6 @@
     <string name="poi_us_maps_recreation_area_open_status_open_2">Stádas rochtana limistéar áineasa (2): oscailte</string>
     <string name="poi_us_maps_recreation_area_activity_day_use_site">Limistéar úsáide lae; Suíomh úsáide lae; Limistéar úsáide lae; Suíomh úsáide lae; Limistéar áineasa úsáide lae; Suíomh áineasa úsáide lae</string>
     <string name="poi_us_maps_recreation_area_facility_fire_lookout">Faire dóiteáin</string>
-    <string name="poi_activities_trekking">Siúlach</string>
-    <string name="poi_property_management">Oifig bainistíochta maoine</string>
     <string name="poi_climbing_boulder">Bollán dreapadóireachta</string>
     <string name="poi_payment_parco_yes">Páirc</string>
     <string name="poi_payment_parco_no">Níor glacadh le Parco</string>

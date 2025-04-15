@@ -3601,8 +3601,6 @@
     <string name="osm_edit_comment_note">Komentovat OSM poznámku</string>
     <string name="osm_login_descr">Přihlaste se metodou OAuth nebo použijte své přihlašovací jméno a heslo v OSM.</string>
     <string name="shared_string_add_photo">Přidat fotku</string>
-    <string name="register_on_openplacereviews">Zaregistrovat na
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Vytvořit nový účet</string>
     <string name="register_opr_have_account">Už mám účet</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -3637,10 +3635,6 @@
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorový člun</string>
     <string name="add_to_mapillary">Přidat do Mapillary</string>
-    <string name="add_photos_descr">OsmAnd zobrazuje fotografie z několika zdrojů:
-\nOpenPlaceReviews - fotografie bodů zájmu
-\nMapillary - pouliční fotografie
-\nWeb / Wikimedia - fotografie bodů zájmu podle OpenStreetMap dat.</string>
     <string name="shared_string_resources">Zdroje</string>
     <string name="approximate_file_size">Přibližná velikost souboru</string>
     <string name="select_data_to_export">Vyberte data k exportu do souboru.</string>
@@ -3738,9 +3732,6 @@
     <string name="uploaded_count">Nahráno %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Vyberte úpravy pro nahrání</string>
     <string name="hillshade_slope_contour_lines">Vrstevnice / Stínované svahy / Sklon svahů</string>
-    <string name="open_place_reviews_plugin_description">Přispívejte do projektu OpenPlaceReviews, například fotografiemi, recenzemi nebo odkazy na veřejná místa, jako jsou restaurace, hotely nebo muzea.
-\n
-\nNávod, jak přispět, najdete na našich webových stránkách %1$s.</string>
     <string name="select_segments">Vybrat úseky</string>
     <string name="select_segments_description">%1$s obsahuje více než jeden úsek, musíte určit potřebnou část pro navigaci.</string>
     <string name="segments_count">Úsek %1$d</string>

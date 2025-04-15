@@ -3602,8 +3602,6 @@
     <string name="osm_edit_comment_note">Hozzászólás az OSM-jegyzethez</string>
     <string name="osm_login_descr">Jelentkezzen be az OAuth módszerrel vagy OSM felhasználónevével és jelszavával.</string>
     <string name="shared_string_add_photo">Fénykép hozzáadása</string>
-    <string name="register_on_openplacereviews">Regisztráció az
-\nOpenPlaceReviews.org oldalon</string>
     <string name="register_opr_create_new_account">Új fiók létrehozása</string>
     <string name="register_opr_have_account">Már van fiókom</string>
     <string name="app_mode_motorboat">Motorcsónak</string>
@@ -3611,10 +3609,6 @@
     <string name="shared_string_search_history">Keresési előzmények</string>
     <string name="shared_string_resources">Erőforrások</string>
     <string name="add_to_mapillary">Hozzáadás a Mapillaryhez</string>
-    <string name="add_photos_descr">Az OsmAnd több forrásból jelenít meg fényképeket:
-\nOpenPlaceReviews – POI-fotók;
-\nMapillary – utcaszintű képek;
-\nWeb / Wikimedia – POI-fotók az OpenStreetMap-adatoknak megfelelően.</string>
     <string name="approximate_file_size">Hozzávetőleges fájlméret</string>
     <string name="select_data_to_export">Jelölje ki a fájlba exportálandó adatokat.</string>
     <string name="file_size_needed_for_import">Szükséges az importáláshoz</string>
@@ -3712,9 +3706,6 @@
     <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
     <string name="activity_type_snowmobile_name">Motoros szán</string>
     <string name="hillshade_slope_contour_lines">Szintvonalak / Domborzatárnyékolás / Lejtés</string>
-    <string name="open_place_reviews_plugin_description">Hozzájárulhat az OpenPlaceReviews projekthez, például éttermekről, szállodákról vagy múzeumokról készült fényképekkel, véleményekkel vagy linkekkel.
-\n
-\nA közreműködés módjáról olvashat a %1$s weboldalunkon.</string>
     <string name="activity_type_water_name">Víz</string>
     <string name="activity_type_winter_name">Tél</string>
     <string name="activity_type_riding_name">Lovaglás</string>
@@ -5338,10 +5329,6 @@
     <string name="quick_action_remove_next_destination">Következő úticél-pont</string>
     <string name="energy_avg_info_description">Töltöttségi szint / perc: %1$s\nEnergiafogyasztás (mAh): %2$s</string>
     <string name="rendering_avg_info">Megjelenítési statisztika (1/5/15 perces átlagok)</string>
-    <string name="rendering_avg_info_description">Képkocka/másodperc a legutóbbi 1000 képre: %1$s
-\nCPU alap: %2$s
-\nGPU 1000: %3$s
-\nTÉTLEN 1000: %4$s</string>
     <string name="energy_avg_info">Energiastatisztika (1/5/15 perces átlagok)</string>
     <string name="choose_map_orientation">Térkép irányának kiválasztása</string>
     <string name="profile_icon">Profil ikon</string>

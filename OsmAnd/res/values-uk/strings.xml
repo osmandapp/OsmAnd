@@ -3643,8 +3643,6 @@
     <string name="osm_edit_comment_note">Коментувати Нотатку OSM</string>
     <string name="osm_login_descr">Увійдіть за допомогою методу OAuth або за допомогою облікових даних OSM.</string>
     <string name="shared_string_add_photo">Додати світлини</string>
-    <string name="register_on_openplacereviews">Зареєструватися на
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Створити обліковий запис</string>
     <string name="register_opr_have_account">У мене вже є обліковий запис</string>
     <string name="shared_string_search_history">Історія пошуку</string>
@@ -3657,10 +3655,6 @@
     <string name="export_not_enough_space_descr">На вашому пристрої вільно лише %1$s. Звільніть місце або приберіть позначки з деяких елементів для експортування.</string>
     <string name="export_not_enough_space">Бракує вільного місця</string>
     <string name="add_to_mapillary">Додати до Mapillary</string>
-    <string name="add_photos_descr">OsmAnd показує світлини з кількох джерел:
-\nOpenPlaceReviews — світлини точок інтересу;
-\nMapillary - зображення вулиць;
-\nМережа / Вікімедіа — світлини точок інтересу, за даними з OpenStreetMap.</string>
     <string name="select_groups_for_import">Виберіть групи, які буде імпортовано.</string>
     <string name="select_items_for_import">Виберіть елементи, які буде імпортовано.</string>
     <string name="use_dev_url_descr">Перейдіть на dev.openstreetmap.org замість openstreetmap.org для перевірки надсилання Нотаток OSM / POI / GPX.</string>
@@ -3752,9 +3746,6 @@
     <string name="uploaded_count">Надіслано %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Виберіть зміни для надсилання</string>
     <string name="hillshade_slope_contour_lines">Ізолінії / Рельєф / Схили</string>
-    <string name="open_place_reviews_plugin_description">Зробіть свій внесок у проєкт OpenPlaceReviews, наприклад, світлини, відгуки або посилання на громадські місця, такі як ресторани, готелі або музеї.
-\n
-\nІнструкції про те, як зробити свій внесок, можна знайти на нашому вебсайті %1$s.</string>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_snowmobile_name">Снігохід</string>
@@ -5393,10 +5384,6 @@
     <string name="energy_avg_info_description">Розряджання акумулятора на хвилину: %1$s
 \nСпоживання енергії (мАг): %2$s</string>
     <string name="rendering_avg_info">Статистика рендерингу (в середньому 1/5/15 хвилин)</string>
-    <string name="rendering_avg_info_description">FPS за останніми 1k кадрами: %1$s
-\nЦП базовий: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Статистика споживання енергії (в середньому 1/5/15 хвилин)</string>
     <string name="choose_map_orientation">Виберіть орієнтацію мапи</string>
     <string name="shared_string_all_icons">Усі піктограми</string>
