@@ -65,7 +65,7 @@ public class PointLocationCardController extends BaseMultiStateCardController {
 	@Override
 	protected List<CardState> collectSupportedCardStates() {
 		List<CardState> states = new ArrayList<>();
-		states.add(new CardState(R.string.shared_string_manual).setTag(true).setShowTopDivider(true));
+		states.add(new CardState(R.string.shared_string_manual).setTag(true));
 		states.add(new CardState(R.string.shared_string_map_center).setTag(false));
 		return states;
 	}

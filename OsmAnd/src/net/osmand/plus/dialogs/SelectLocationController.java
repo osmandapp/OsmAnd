@@ -10,8 +10,13 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
@@ -22,6 +27,8 @@ public class SelectLocationController extends BaseDialogController implements IM
 	private static final String PROCESS_ID = "select_location_on_map";
 
 	private ILocationSelectionHandler handler;
+	private boolean applyChanges = false;
+	private boolean landscape;
 
 	public SelectLocationController(@NonNull OsmandApplication app,
 	                                @NonNull ILocationSelectionHandler handler) {
@@ -35,32 +42,58 @@ public class SelectLocationController extends BaseDialogController implements IM
 		return PROCESS_ID;
 	}
 
+	public void bindDialog(@NonNull MapActivity mapActivity, @NonNull IDialog dialog) {
+		registerDialog(dialog);
+		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
+	}
+
 	public void setLocationSelectionHandler(@NonNull ILocationSelectionHandler handler) {
 		this.handler = handler;
 	}
 
 	@NonNull
 	public String getDialogTitle() {
-		return handler.getDialogTitle();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return handler.getDialogTitle(mapActivity);
+		}
+		return "";
 	}
 
 	@NonNull
 	public String getFormattedCoordinates() {
-		LatLon latLon = getMapCenterCoordinates(app);
+		LatLon latLon = getMapTargetCoordinates(app);
 		int format = app.getSettings().COORDINATES_FORMAT.get();
 		return OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format);
 	}
 
 	public void onApplySelection() {
-		handler.onLocationSelected(getMapCenterCoordinates(app));
+		applyChanges = true;
 	}
 
 	public void onResume() {
 		updateMapLocationListener(true);
+		updateMapPositionShiftedX(landscape);
 	}
 
 	public void onPause() {
 		updateMapLocationListener(false);
+		updateMapPositionShiftedX(false);
+	}
+
+	public void onDestroy(@Nullable FragmentActivity activity) {
+		if (finishProcessIfNeeded(activity) && applyChanges) {
+			applyChanges = false;
+			onLocationSelected();
+		}
+	}
+
+	private void onLocationSelected() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			LatLon targetLatLon = getMapTargetCoordinates(app);
+			handler.onLocationSelected(mapActivity, targetLatLon);
+		}
 	}
 
 	private void updateMapLocationListener(boolean register) {
@@ -73,6 +106,12 @@ public class SelectLocationController extends BaseDialogController implements IM
 		}
 	}
 
+	private void updateMapPositionShiftedX(boolean shifted) {
+		MapViewTrackingUtilities mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
+		MapDisplayPositionManager positionManager = mapViewTrackingUtilities.getMapDisplayPositionManager();
+		positionManager.setMapPositionShiftedX(shifted);
+	}
+
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		dialogManager.askRefreshDialogCompletely(getProcessId());
@@ -80,17 +119,27 @@ public class SelectLocationController extends BaseDialogController implements IM
 
 	@Nullable
 	public Object getCenterPointIcon() {
-		return handler != null ? handler.getCenterPointIcon() : null;
+		MapActivity mapActivity = getMapActivity();
+		if (handler != null && mapActivity != null) {
+			return handler.getCenterPointIcon(mapActivity);
+		}
+		return null;
+	}
+
+	@Nullable
+	private MapActivity getMapActivity() {
+		return app.getOsmandMap().getMapView().getMapActivity();
 	}
 
 	@NonNull
-	public static LatLon getMapCenterCoordinates(@NonNull OsmandApplication app) {
+	public static LatLon getMapTargetCoordinates(@NonNull OsmandApplication app) {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		MapRendererView mapRenderer = mapView.getMapRenderer();
-		RotatedTileBox tb = mapView.getRotatedTileBox();
-		int centerPixX = tb.getCenterPixelX();
-		int centerPixY = tb.getCenterPixelY();
-		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, centerPixX, centerPixY);
+		RotatedTileBox tileBox = mapView.getRotatedTileBox();
+
+		int centerX = tileBox.getCenterPixelX();
+		int centerY = tileBox.getCenterPixelY();
+		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, centerX, centerY);
 	}
 
 	@Nullable
