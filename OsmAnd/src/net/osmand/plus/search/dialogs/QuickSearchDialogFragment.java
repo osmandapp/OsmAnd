@@ -354,16 +354,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else {
 							filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
 						}
-						app.getPoiFilters().replaceSelectedPoiFilters(filter);
-
-						MapContextMenu contextMenu = mapActivity.getContextMenu();
-						contextMenu.close();
-						contextMenu.closeActiveToolbar();
-
-						showToolbar();
-						mapActivity.updateStatusBarColor();
-						mapActivity.refreshMap();
-						hide();
 						LatLon cityLocation = searchPhrase.getCityLocation();
 						if (cityLocation != null && getActivity() != null) {
 							app.getSettings().setMapLocationToShow(cityLocation.getLatitude(), cityLocation.getLongitude(), SearchCoreFactory.PREFERRED_CITY_ZOOM);
