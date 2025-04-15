@@ -2276,7 +2276,7 @@
     <string name="mapillary_action_descr">Zdieľajte vlastný pohľad z úrovne ulice cez Mapillary.</string>
     <string name="mapillary_widget_descr">Umožňuje rýchle prispievanie do Mapillary.</string>
     <string name="mapillary_descr">Online fotografie z ulíc pre každého. Objavte miesta, spolupracuje, zachyťte svet.</string>
-    <string name="plugin_mapillary_descr">Fotografie z úrovne ulice. Môžete prispieť aj vy. Pre zobrazenie existujúcich údajov ako vrstvu na mape zapnite \"Snímky z úrovne ulice\" v menu \"Nastaviť mapu\".</string>
+    <string name="plugin_mapillary_descr">Fotografie z úrovne ulice. Môžete prispieť aj vy. Pre zobrazenie existujúcich údajov ako vrstvy na mape zapnite \"Snímky z úrovne ulice\" v menu \"Nastaviť mapu\".</string>
     <string name="mapillary_widget">Nástroj Mapillary</string>
     <string name="mapillary_image">Obrázok Mapillary</string>
     <string name="distance_moving">Vzdialenosť opravená</string>
@@ -3833,7 +3833,7 @@
     <string name="shared_string_feet">stopy</string>
     <string name="srtm_unit_format">Variant jednotiek vrstevníc</string>
     <string name="srtm_download_list_help_message">OsmAnd poskytuje údaje vrstevníc v metroch a stopách. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
-    <string name="srtm_download_single_help_message">Prosím zvoľte variant. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
+    <string name="srtm_download_single_help_message">Prosím zvoľte variant. Pre následnú zmenu formátu budete musieť znovu stiahnuť tento súbor.</string>
     <string name="route_line_use_gradient_coloring">Čiara trasy je vyfarbená podľa svahu prevýšenia.</string>
     <string name="shared_string_min_height">Min. výška</string>
     <string name="shared_string_max_height">Max. výška</string>
