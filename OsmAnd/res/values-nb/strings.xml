@@ -3743,8 +3743,6 @@
     <string name="subscription_paused_title">OsmAnd-Live-abonnement har blitt satt på vent</string>
     <string name="subscription_on_hold_title">OsmAnd-Live-abonnement på vent</string>
     <string name="osm_login_descr">Logg inn med OAuth-metoden, eller bruk ditt OSM-brukernavn og passord.</string>
-    <string name="register_on_openplacereviews">Registrer deg på
-\nOpenPlaceReviews.org</string>
     <string name="manage_subscription">Håndter abonnement</string>
     <string name="shared_string_add_photo">Legg til bilde</string>
     <string name="register_opr_create_new_account">Opprett ny konto</string>
@@ -3760,10 +3758,6 @@
     <string name="select_picture">Velg bilde</string>
     <string name="add_to_mapillary">Legg til i Mapillary</string>
     <string name="use_dev_url">Bruk dev.openstreetmap.org</string>
-    <string name="add_photos_descr">OsmAnd viser bilder fra flere kilder:
-\nOpenPlaceReviews - interessepunktbilder;
-\nMapillary - bilder på gatenivå;
-\nWeb / Wikimedia - interessepunktbilder i henhold til OpenStreetMap-data.</string>
     <string name="app_mode_light_aircraft">Småfly</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Tysk (uformell)</string>
@@ -4130,9 +4124,6 @@
     <string name="gpx_upload_public_visibility_descr">«Offentlig» betyr at sporet vises offentlig i dine GPS-spor og i offentlige GPS-sporingsoppføringer, og i den offentlige spor-listen med tidsstempler i rå form. Data servert via API-et viser ikke til sporsiden din. Tidsstempler fra sporingspunkter er ikke tilgjengelig gjennom det offentlige GPS-API-et, og sporingspunkter sorteres ikke kronologisk.</string>
     <string name="backup_error_subscription_was_expired_descr">Ditt OsmAnd Pro-abonnement har utløpt. Forny det nå for å bruke sikkerhetskopi. Du kan fremdeles gjenopprette data fra OsmAnd-sky.</string>
     <string name="use_dev_url_descr">Bytt til dev.openstreetmap.org istedenfor openstreetmap.org for testopplasting av OSM-notat/POI/GPX.</string>
-    <string name="open_place_reviews_plugin_description">Gi bidrag til prosjektet OpenPlaceReviews som bilder, omtaler eller lenker om offentlige steder som restauranter, hoteller eller museer.
-\n
-\nFinn instruksjoner om hvordan du kan bidra på nettsiden vår %1$s.</string>
     <string name="temporary_conditional_routing_descr">Bruk veibegrensninger som er aktive nå på kartet</string>
     <string name="routing_attr_driving_style_description">Velg kjøreformål for å få kortere, raskere, eller tryggere rute</string>
     <string name="app_restart_required">Programomstart kreves for å bruke noen innstillinger.</string>

@@ -3629,17 +3629,11 @@
     <string name="gpx_upload_private_visibility_descr">\"Einka\" þýðir að ferillinn birtist ekki á neinum opinberum listum, en ferilpunktar í ótímasettri röð eru tiltækir í gegnum opinbert GPS API-forritsviðmót án tímamerkja.</string>
     <string name="osm_edit_close_note">Loka OSM-minnispunkti</string>
     <string name="register_opr_have_account">Ég er nú þegar með notandaaðgang</string>
-    <string name="register_on_openplacereviews">Skráðu þig á
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Búa til nýjan notandaaðgang</string>
     <string name="osm_login_descr">Skráðu þig inn með öruggu OAuth-aðferðinni eða með OSM-notandanafni og lykilorði.</string>
     <string name="app_mode_motorboat">Vélbátar</string>
     <string name="osm_edit_comment_note">Gera athugasemd við OSM-minnispunkt</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Rekjanlegt\" þýðir að ferillinn birtist ekki á neinum opinberum listum, en meðhöndlaðir ferilpunktar með tímamerkjum úr ferlinum (sem ekki er hægt að tengja beint við þig) munu birtast í gögnum sem eru sótt í gegnum opinbert GPS API-forritsviðmót.</string>
-    <string name="add_photos_descr">OsmAnd birtir ljósmyndir frá ýmsum þjónustum:
-\nOpenPlaceReviews - ljósmyndir POI-merkisstaða;
-\nMapillary - myndefni í götuhæð;
-\nWeb / Wikimedia - ljósmyndir POI-merkisstaða sem eru í gögnum OpenStreetMap.</string>
     <string name="use_dev_url_descr">Skiptu yfir í að nota dev.openstreetmap.org í staðinn fyrir openstreetmap.org til að prófa innsendingu OSM-minnispunkta / POI-merkisstaða / GPX-ferla.</string>
     <string name="lang_de_casual">Þýska (dagleg)</string>
     <string name="use_dev_url">Nota dev.openstreetmap.org</string>
@@ -3753,9 +3747,6 @@
     <string name="activity_type_car_name">Akandi</string>
     <string name="routing_attr_height_obstacles_description">Tímaáætlanir munu taka mið af hækkunum. Leiðagerð gæti forðast miklar brekkur upp í mót:</string>
     <string name="select_category_descr">Veldu flokk eða bættu við nýjum</string>
-    <string name="open_place_reviews_plugin_description">Leggðu þitt af mörkum til OpenPlaceReviews vekefnisins. Sendu ljósmyndir, umsagnir og tengla í aðrar veitur um opinbera staði á borð við veitingastaði, hótel, söfn og leiðarpunkta.
-\n
-\nÞú getur lesið meira um verkefnið á vefsvæðinu: %1$s.</string>
     <string name="map_widget_distance_by_tap">Vegalengd með því að ýta</string>
     <string name="select_segments_description">%1$s inniheldur fleiri en einn bút, þú þarft að velja þann sem er nauðsynlegur fyrir leiðsögnina.</string>
     <string name="routing_attr_driving_style_description">Veldu tilgang aksturs til að fá styttri, hraðari eða öruggari leið</string>

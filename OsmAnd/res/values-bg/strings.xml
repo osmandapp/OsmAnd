@@ -3322,8 +3322,6 @@
     <string name="map_widget_ant_bicycle_power_desc">Показва мощността на велосипедиста, която се използва за придвижването му</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Показва честотата на въртене на педалите на велосипеда</string>
     <string name="markers_history">История на маркери</string>
-    <string name="register_on_openplacereviews">Регистрирайте се на
-\nOpenPlaceReviews.org</string>
     <string name="shared_string_sunset">Залез</string>
     <string name="quick_action_showhide_osmbugs_descr">Бутон, превключващ бележките от OSM на картата.</string>
     <string name="quick_action_hillshade_descr">Превключване на засенчването на релефа на картата.</string>
@@ -3337,9 +3335,6 @@
     <string name="coordinates_widget_secondary_desc">Формата на координатите можете да промените от %1$s – %2$s – %3$s.</string>
     <string name="clear_all_history">Премахване на историята</string>
     <string name="map_markers_history">История на маркерите на картата</string>
-    <string name="open_place_reviews_plugin_description">Направете принос към проекта OpenPlaceReviews, например снимки, отзиви или препратки за обществени места, като ресторанти, хотели или музеи.
-\n
-\nНамерете инструкции за това как да допринесете на адрес %1$s.</string>
     <string name="angular_measeurement">Ъглови единици</string>
     <string name="display_zoom_level">Увеличение: %1$s</string>
     <string name="simulate_location_by_gpx">Симулиране на местоположението чрез GPX</string>
@@ -3426,10 +3421,6 @@
     <string name="lanes_widgets_desc">Показва схема на лентите на текущия път и подчертава тези, които трябва да използвате при маршрутизиране.</string>
     <string name="map_markers_bar_widget_desc">Приспособлението на горния панел показва разстоянието и посоката до следващия маркер на картата от текущото местоположение. Приспособлението може да показва 1 или 2 маркера.</string>
     <string name="coordinates_widget_desc">Показва географските координати на текущото местоположение.</string>
-    <string name="add_photos_descr">OsmAnd показва снимки от няколко източника:
-\nOpenPlaceReviews - снимки на POI;
-\nMapillary - снимки от улицата;
-\nИнтернет / Wikimedia - снимки на POI по данни на OpenStreetMap.</string>
     <string name="routing_attr_length_name">Дължина</string>
     <string name="copy_from_other_profile">Копиране от друг профил</string>
     <string name="marker_moved_to_history">Маркерът е преместен в историята</string>

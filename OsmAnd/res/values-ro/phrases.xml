@@ -4642,8 +4642,6 @@
     <string name="poi_impromptu">Improvizat</string>
     <string name="poi_reservation">Rezervare</string>
     <string name="poi_us_maps_recreation_area_facility">Facilitatea zonei de recreere</string>
-    <string name="poi_osmand_foot_private">Acces pietonal: privat</string>
-    <string name="poi_osmand_bicycle_no">Acces biciclete: nu</string>
     <string name="poi_healthcare_speciality_venereology">Venerologie</string>
     <string name="poi_healthcare_speciality_pedorthist">Ortezist</string>
     <string name="poi_distance">Distanță</string>
@@ -4664,7 +4662,6 @@
     <string name="poi_from">De la</string>
     <string name="poi_to">Către</string>
     <string name="poi_live_music">Muzică live</string>
-    <string name="poi_osmand_access_private">Acces: privat</string>
     <string name="poi_healthcare_speciality_palliative">Paliativă</string>
     <string name="poi_healthcare_speciality_denturist">Protezist</string>
     <string name="poi_healthcare_speciality_pediatric">Pediatrică</string>
@@ -4686,15 +4683,6 @@
     <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Camping în sălbăticie</string>
     <string name="poi_us_maps_recreation_area_activity_dog_sledding">Sănii trase de câini</string>
     <string name="poi_us_maps_recreation_area_activity_hiking">Hiking</string>
-    <string name="poi_osmand_access_no">Acces: nu</string>
-    <string name="poi_osmand_motorcar_private">Acces autoturism: privat</string>
-    <string name="poi_osmand_motorcycle_no">Acces motociclete: nu</string>
-    <string name="poi_osmand_motorcycle_private">Acces motociclete: privat</string>
-    <string name="poi_osmand_vehicle_no">Acces vehicule: nu</string>
-    <string name="poi_osmand_vehicle_private">Acces vehicule: privat</string>
-    <string name="poi_osmand_motor_vehicle_private">Acces autovehicule: privat</string>
-    <string name="poi_osmand_motorcar_no">Acces autoturism: nu</string>
-    <string name="poi_osmand_foot_no">Acces pietonal: nu</string>
     <string name="poi_healthcare_speciality_ayurveda">Ayurveda</string>
     <string name="poi_healthcare_speciality_travel_clinic">Clinică ambulantă</string>
     <string name="poi_healthcare_speciality_sleep">Somnologie</string>
@@ -4733,8 +4721,6 @@
     <string name="poi_healthcare_speciality_diabetology">Diabetologie</string>
     <string name="poi_healthcare_speciality_pharmacology">Farmacologie</string>
     <string name="poi_border_zone">Frontieră</string>
-    <string name="poi_osmand_motor_vehicle_no">Acces autovehicule: nu</string>
-    <string name="poi_osmand_bicycle_private">Acces biciclete: privat</string>
     <string name="poi_healthcare_speciality_pain_control">Controlul durerii</string>
     <string name="poi_healthcare_speciality_chronic">Cronic</string>
     <string name="poi_state_inuse">Stare: în folosință</string>

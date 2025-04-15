@@ -3811,17 +3811,11 @@
     <string name="send_files_to_openstreetmap">Отправить GPX-файл в OpenStreetMap</string>
     <string name="osm_edit_close_note">Закрыть заметку OSM</string>
     <string name="shared_string_add_photo">Добавить фото</string>
-    <string name="register_on_openplacereviews">Зарегистрироваться на
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Создать новый аккаунт</string>
     <string name="register_opr_have_account">У меня уже есть аккаунт</string>
     <string name="shared_string_search_history">История поиска</string>
     <string name="app_mode_motorboat">Моторная лодка</string>
     <string name="add_to_mapillary">Добавить в Mapillary</string>
-    <string name="add_photos_descr">OsmAnd показывает фотографии из нескольких источников:
-\nOpenPlaceReviews — фотографии POI;
-\nMapillary — изображения улиц;
-\nWeb / Wikimedia — фотографии POI по данным OpenStreetMap.</string>
     <string name="shared_string_resources">Ресурсы</string>
     <string name="approximate_file_size">Примерный размер файла</string>
     <string name="file_size_needed_for_import">Требуется для импорта</string>
@@ -3943,9 +3937,6 @@
     <string name="reverse_all_points">Реверсировать все точки</string>
     <string name="routing_attr_allow_streams_description">Разрешить ручьи и канавы</string>
     <string name="routing_attr_allow_streams_name">Разрешить ручьи и канавы</string>
-    <string name="open_place_reviews_plugin_description">Внесите свой вклад в проект OpenPlaceReviews в виде фото, ссылок или обзоров публичных мест, таких как рестораны, отели или музеи.
-\n
-\nИнструкции по добавлению информации есть на нашем сайте %1$s.</string>
     <string name="activity_type_racing_name">Гонки</string>
     <string name="app_restart_required">Для применения настроек требуется перезапуск приложения.</string>
     <string name="map_widget_distance_by_tap">Расстояние по нажатию</string>
@@ -5633,10 +5624,6 @@
 \nПотребление энергии (мАч): %2$s</string>
     <string name="rendering_avg_info">Статистика рендеринга (в среднем за 1/5/15 минут)</string>
     <string name="energy_avg_info">Статистика потребления энергии (в среднем за 1/5/15 минут)</string>
-    <string name="rendering_avg_info_description">FPS по последним 1k кадрам: %1$s
-\nCPU базовый: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Выберите ориентацию карты</string>
     <string name="shared_string_all_icons">Все значки</string>
     <string name="profile_icon">Значок профиля</string>

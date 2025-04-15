@@ -3795,8 +3795,6 @@
     <string name="osm_edit_comment_note">להגיב על הערת OSM</string>
     <string name="osm_login_descr">ניתן להיכנס באמצעות שיטת OAuth או להיכנס עם שם המשתמש והססמה שלך ב־OSM.</string>
     <string name="shared_string_add_photo">הוספת תמונה</string>
-    <string name="register_on_openplacereviews">יש להירשם בכתובת
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">יצירת חשבון חדש</string>
     <string name="register_opr_have_account">כבר יש לי חשבון</string>
     <string name="shared_string_search_history">היסטוריית חיפוש</string>
@@ -3810,10 +3808,6 @@
     <string name="export_not_enough_space_descr">במכשיר שלך יש רק %1$s פנויים. נא לפנות מקום או לבטל כמה מהפריטים לייצוא.</string>
     <string name="export_not_enough_space">אין מספיק מקום</string>
     <string name="add_to_mapillary">הוספה ל־Mapillary</string>
-    <string name="add_photos_descr">OsmAnd מציג תמונות ממגוון מקורות:
-\nOpenPlaceReviews - תמונות של נקודות עניין;
-\nMapillary - תמונות ברמת הרחוב;
-\nאינטרנט / ויקימדיה - תמונות נקודות עניין בהתאם לנתונים של OpenStreetMap.</string>
     <string name="select_groups_for_import">נא לבחור קבוצות שייובאו.</string>
     <string name="select_items_for_import">נא לבחור פריטים שייובאו.</string>
     <string name="use_dev_url_descr">לעבור להשתמש ב־dev.openstreetmap.org במקום ב־openstreetmap.org כדי לבדוק העלאות של הערות OSM / נקודות עניין / GPX.</string>
@@ -3915,9 +3909,6 @@
     <string name="toast_select_edits_for_upload">נא לבחור עריכות לשליחה</string>
     <string name="announcement_time_descr">זמן ההכרזה של ההנחיות הקוליות השונות תלוי בסוג ההכרזה, במהירות הניווט הנוכחית ובמהירות הניווט כבררת מחדל.</string>
     <string name="hillshade_slope_contour_lines">הצללה / מדרון / קווי מתאר</string>
-    <string name="open_place_reviews_plugin_description">ניתן לשלוח תמונות, סקירות וקישורים לגבי מקומות ציבוריים כגון מסעדות, מלונות, מוזיאונים ונקודות דרך כנתונים פתוחים אל https://openplacereviews.org/data/‎.
-\n
-\nניתן לקרוא עוד באתר: https://openplacereviews.org</string>
     <string name="activity_type_water_name">מים</string>
     <string name="activity_type_winter_name">חורף</string>
     <string name="activity_type_snowmobile_name">אופנוע שלג</string>

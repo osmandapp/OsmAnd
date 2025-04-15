@@ -3590,8 +3590,6 @@
     <string name="app_mode_kayak">Καγιάκ</string>
     <string name="copy_address">Αντιγραφή διεύθυνσης</string>
     <string name="routing_attr_prefer_hiking_routes_description">Προτιμήστε διαδρομή για πεζοπορία</string>
-    <string name="register_on_openplacereviews">Εγγραφή στο
-\nOpenPlaceReviews.org</string>
     <string name="osm_login_descr">Συνδεθείτε με την μέθοδο OAuth, ή με το όνομα χρήστη και κωδικό στο OSM.</string>
     <string name="complex_routing_descr">Δρομολόγηση δύο-φάσεων για πλοήγηση αυτοκινήτου.</string>
     <string name="number_of_gpx_files_selected_pattern">%s αρχεία ιχνών επιλέχθηκαν</string>
