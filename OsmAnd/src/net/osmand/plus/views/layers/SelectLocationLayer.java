@@ -46,12 +46,12 @@ public class SelectLocationLayer extends OsmandMapLayer {
 		if (controller != null) {
 			Object iconObject = controller.getCenterPointIcon();
 			if (iconObject instanceof PointImageDrawable drawable) {
-				drawCenterDrawable(canvas, tileBox, drawable);
+				drawTargetDrawable(canvas, tileBox, drawable);
 			} else if (iconObject instanceof ShiftedBitmap icon) {
-				drawCenterBitmap(canvas, tileBox, icon.getBitmap(), icon.getMarginX(), icon.getMarginY());
+				drawTargetBitmap(canvas, tileBox, icon.getBitmap(), icon.getMarginX(), icon.getMarginY());
 			} else {
 				Bitmap centerIcon = settings.isNightMode() ? defaultIconNight : defaultIconDay;
-				drawCenterBitmap(canvas, tileBox, centerIcon);
+				drawTargetBitmap(canvas, tileBox, centerIcon);
 			}
 		}
 	}
@@ -61,23 +61,23 @@ public class SelectLocationLayer extends OsmandMapLayer {
 		return true;
 	}
 
-	private void drawCenterDrawable(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+	private void drawTargetDrawable(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
 	                                @NonNull PointImageDrawable drawable) {
-		float centerX = tileBox.getCenterPixelX();
-		float centerY = tileBox.getCenterPixelY();
+		float targetX = tileBox.getCenterPixelX();
+		float targetY = tileBox.getCenterPixelY();
 		BackgroundType backgroundType = drawable.getBackgroundType();
 		int offsetY = backgroundType.getOffsetY(view.getContext(), getTextScale());
-		drawable.drawPoint(canvas, centerX, centerY - offsetY, getTextScale(), false);
+		drawable.drawPoint(canvas, targetX, targetY - offsetY, getTextScale(), false);
 	}
 
-	private void drawCenterBitmap(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @NonNull Bitmap icon) {
-		drawCenterBitmap(canvas, tileBox, icon, icon.getWidth() / 2f, icon.getHeight() / 2f);
+	private void drawTargetBitmap(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @NonNull Bitmap icon) {
+		drawTargetBitmap(canvas, tileBox, icon, icon.getWidth() / 2f, icon.getHeight() / 2f);
 	}
 
-	private void drawCenterBitmap(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+	private void drawTargetBitmap(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
 	                              @NonNull Bitmap bitmap, float marginX, float marginY) {
-		float centerX = tileBox.getCenterPixelX();
-		float centerY = tileBox.getCenterPixelY();
-		canvas.drawBitmap(bitmap, centerX - marginX, centerY - marginY, bitmapPaint);
+		float targetX = tileBox.getCenterPixelX();
+		float targetY = tileBox.getCenterPixelY();
+		canvas.drawBitmap(bitmap, targetX - marginX, targetY - marginY, bitmapPaint);
 	}
 }

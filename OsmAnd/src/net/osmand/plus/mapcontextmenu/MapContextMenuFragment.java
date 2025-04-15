@@ -508,8 +508,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			MapButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
 			MapButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
-			layer.addCustomMapButton(zoomInButton);
-			layer.addCustomMapButton(zoomOutButton);
+			layer.addCustomizedDefaultMapButton(zoomInButton);
+			layer.addCustomizedDefaultMapButton(zoomOutButton);
 			zoomInButton.setUseDefaultAppearance(false);
 			zoomOutButton.setUseDefaultAppearance(false);
 		}

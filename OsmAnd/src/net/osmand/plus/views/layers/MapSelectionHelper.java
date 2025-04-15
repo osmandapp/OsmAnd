@@ -280,6 +280,9 @@ public class MapSelectionHelper {
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
+				if (symbolInfo.getMapSymbol().getIgnoreClick()) {
+					continue;
+				}
 				IBillboardMapSymbol billboardMapSymbol = null;
 				Amenity amenity = null;
 				net.osmand.core.jni.Amenity jniAmenity = null;

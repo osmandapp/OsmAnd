@@ -28,10 +28,12 @@ public abstract class BaseDialogController implements IDialogController {
 		dialogManager.register(getProcessId(), dialog);
 	}
 
-	public void finishProcessIfNeeded(@Nullable FragmentActivity activity) {
+	public boolean finishProcessIfNeeded(@Nullable FragmentActivity activity) {
 		if (activity != null && !activity.isChangingConfigurations()) {
 			dialogManager.unregister(getProcessId());
+			return true;
 		}
+		return false;
 	}
 
 	@NonNull

@@ -155,15 +155,15 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			val layer = mapLayers.mapControlsLayer
 			val zoomInBtn = view.findViewById<ZoomInButton>(R.id.map_zoom_in_button)
 			if (zoomInBtn != null) {
-				layer.addCustomMapButton(zoomInBtn)
+				layer.addCustomizedDefaultMapButton(zoomInBtn)
 			}
 			val zoomOutBtn = view.findViewById<ZoomOutButton>(R.id.map_zoom_out_button)
 			if (zoomOutBtn != null) {
-				layer.addCustomMapButton(zoomOutBtn)
+				layer.addCustomizedDefaultMapButton(zoomOutBtn)
 			}
 			val myLocationBtn = view.findViewById<MyLocationButton>(R.id.map_my_location_button)
 			if (myLocationBtn != null) {
-				layer.addCustomMapButton(myLocationBtn)
+				layer.addCustomizedDefaultMapButton(myLocationBtn)
 			}
 			AndroidUiHelper.updateVisibility(zoomButtonsView, true)
 			activity.mapLayers.mapControlsLayer.addCustomMapButton(view.findViewById(R.id.map_compass_button))
