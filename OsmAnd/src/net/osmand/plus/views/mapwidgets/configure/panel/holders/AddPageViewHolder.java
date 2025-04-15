@@ -34,7 +34,7 @@ public class AddPageViewHolder extends RecyclerView.ViewHolder implements Unmova
 		itemView.setOnClickListener(v -> {
 			listener.onAddPageClicked();
 		});
-		title.setText(isVerticalPanel ? R.string.add_page : R.string.add_row);
+		title.setText(isVerticalPanel ? R.string.add_row : R.string.add_page);
 
 		int color = selectedAppMode.getProfileColor(nightMode);
 		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
