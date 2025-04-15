@@ -95,7 +95,9 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldHideBottomWidgets() {
-		return shouldHideVerticalWidgets() || isContextMenuFragmentVisible();
+		return shouldHideVerticalWidgets()
+				|| isContextMenuFragmentVisible()
+				|| isInTrackMenuMode();
 	}
 
 	public boolean shouldShowBottomMenuButtons() {
