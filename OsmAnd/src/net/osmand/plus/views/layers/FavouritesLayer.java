@@ -335,12 +335,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return false;
 	}
 
-	private void getFavoriteFromPoint(RotatedTileBox tb, PointF point, List<? super FavouritePoint> res) {
+	private void collectFavoritesFromPoint(@NonNull MapSelectionResult result) {
 		List<FavouritePoint> favouritePoints = favouritesHelper.getFavouritePoints();
 		if (Algorithms.isEmpty(favouritePoints)) {
 			return;
 		}
-
+		PointF point = result.getPoint();
+		RotatedTileBox tb = result.getTileBox();
 		MapRendererView mapRenderer = getMapRenderer();
 		float radius = getScaledTouchRadius(getApplication(), tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
@@ -363,7 +364,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					? NativeUtilities.isPointInsidePolygon(lat, lon, touchPolygon31)
 					: tb.isLatLonNearPixel(lat, lon, point.x, point.y, radius);
 			if (add) {
-				res.add(favouritePoint);
+				result.collect(favouritePoint, this);
 			}
 		}
 	}
@@ -377,10 +378,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (this.settings.SHOW_FAVORITES.get() && tileBox.getZoom() >= START_ZOOM) {
-			getFavoriteFromPoint(tileBox, point, res);
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
+			boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (settings.SHOW_FAVORITES.get() && result.getTileBox().getZoom() >= START_ZOOM) {
+			collectFavoritesFromPoint(result);
 		}
 	}
 

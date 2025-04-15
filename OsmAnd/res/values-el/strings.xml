@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="release_5_0">
+    • Ανακαλύψτε τα κορυφαία POI με τη νέα λειτουργία Εξερεύνησης\n\n
+    • Όλες οι διαδρομές OSM, τώρα με δυνατότητα αναζήτησης! Πεζοπορία, ποδηλασία, MTB και άλλα\n\n
+    • Νέο widget πλοήγησης που συνδυάζει βέλος στροφής και οδηγίες πλοήγησης\n\n
+    • Widget πληροφοριών τρέχουσας διαδρομής: εμφανίζει ETA, ώρα άφιξης και απόσταση\n\n
+    • Επιλέξτε πίστες σκι και μονοπάτια MTB στο χάρτη για λεπτομερείς πληροφορίες\n\n
+    • Δυνατότητα επιλογής μεγέθους widget για το αριστερό και δεξί πλαίσιο\n\n
+    • Προστέθηκε "Πλέγμα συντεταγμένων" με γεωγραφικές συντεταγμένες\n\n
+    • Προστέθηκε η δυνατότητα προσαρμογής της προεπιλεγμένης εμφάνισης των αγαπημένων ομάδων\n\n
+    • Android Auto: προβολή ETA και απόστασης μέχρι το επόμενο σημείο διαδρομής· τα ονόματα πόλεων εμφανίζονται τώρα στα αποτελέσματα αναζήτησης\n\n
+    • Οι εξέχουσες κορυφές είναι τώρα ανιχνεύσιμες μέσω χάρτη και αναζήτησης\n\n
+    • Ύψη κορυφών βουνών σε πόδια\n\n
+    • Προστέθηκε: Βράχοι και περιοχές αναρρίχησης στο χάρτη\n\n
+    • Η αναζήτηση διευθύνσεων στις ΗΠΑ έχει βελτιωθεί\n\n
+    • Προστέθηκε Εβραϊκό TTS για πλοήγηση\n\n
+</string>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1852,7 +1868,6 @@
     <string name="routing_attr_allow_motorway_name">Να χρησιμοποιήσεις τους αυτοκινητόδρομους</string>
     <string name="routing_attr_allow_motorway_description">Να επιτρέψεις τους αυτοκινητόδρομους.</string>
     <string name="upload_osm_note_description">Ανεβάσετε την OSM σημείωσή σας ανώνυμα ή χρησιμοποιήσετε την κατατομή (προφίλ) σας στο OpenStreetMap.org.</string>
-    <string name="wiki_around">Πλησιέστερα άρθρα της βικιπαίδειας</string>
     <string name="search_map_hint">Πόλη ή περιοχή</string>
     <string name="route_roundabout_short">Πάρτε την %1$d έξοδο και πηγαίνετε</string>
     <string name="upload_poi">Ανεβάστε ΣΕ</string>
@@ -4561,4 +4576,12 @@
     <string name="routing_attr_difficulty_preference_advanced_name">Προηγμένα</string>
     <string name="select_backup_data_descr">Επιλέξτε δεδομένα και φακέλους για δημιουργία αντιγράφων ασφαλείας.</string>
     <string name="backup_now">Αντίγραφο ασφαλείας τώρα</string>
+    <string name="help_article_map_raster_maps_name">Χάρτες Raster (Online / Offline)</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Φωνητικές υποδείξεις / Ειδοποιήσεις</string>
+    <string name="simulation_constant_mode_desc">Η προσομοίωση θα πραγματοποιηθεί με σταθερή επιλεγμένη ταχύτητα.</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Πλοήγηση μέσω δεικτών</string>
+    <string name="simulation_real_mode_desc">Στα ευθύγραμμα τμήματα του δρόμου, η ταχύτητα θα είναι κατά προσέγγιση η μέγιστη επιτρεπόμενη ταχύτητα.\nΣτις διασταυρώσεις, η προσομοίωση θα επιβραδύνει.\nΕπιπλέον κυρώσεις θα εφαρμόζονται σε σήματα κυκλοφορίας, πινακίδες στοπ κ.λπ.</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Οθόνη χάρτη κατά τη διάρκεια της πλοήγησης</string>
+    <string name="simulation_preview_mode_desc">Η ταχύτητα της προσομοίωσης θα είναι μέγιστη σε ευθείες και θα επιβραδύνεται μόνο σε διασταυρώσεις.</string>
+    <string name="help_article_navigation_guidance_name">Καθοδήγηση πλοήγησης</string>
 </resources>

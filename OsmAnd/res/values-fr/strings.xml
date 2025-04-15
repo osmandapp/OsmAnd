@@ -2033,7 +2033,6 @@
     <string name="search_map_hint">Ville ou région</string>
     <string name="routing_attr_allow_motorway_description">Autoriser les trajets sur autoroute.</string>
     <string name="routing_attr_allow_motorway_name">Autoriser les autoroutes</string>
-    <string name="wiki_around">Articles Wikipédia à proximité</string>
     <string name="lang_sr_latn">Serbe (latin)</string>
     <string name="lang_zh_hk">Chinois (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Eau</string>
@@ -5726,9 +5725,13 @@
     <string name="prime_meridian">Méridien d\'origine</string>
     <string name="equator">Équateur</string>
     <string name="meridian_180">180e méridien</string>
-    <string name="release_5_0">• Découvrez les PI les mieux classés avec le nouveau mode Explorer\n\n• Tous les itinéraires OSM, désormais consultables ! Randonnée, vélo, VTT, et plus encore\n\n• Le nouveau widget de navigation combine la flèche de virage et les instructions de navigation\n\n• Widget d\'information sur l\'itinéraire actuel : affiche le temps restant, l\'heure d\'arrivée et la distance\n\n• Sélectionnez les pistes de ski et de VTT sur la carte pour obtenir des informations détaillées\n\n• Possibilité de sélectionner la taille du widget pour les panneaux gauche et droit\n\n• Ajout d\'une grille de coordonnées avec les coordonnées géographiques\n\n• Ajout de la possibilité de personnaliser l\'apparence par défaut des groupes favoris\n\n• Android Auto : affichage de l\'heure d\'arrivée et de la distance jusqu\'au prochain point de passage ; les noms de ville apparaissent désormais dans les résultats de la recherche\n\n• Les sommets les plus importants peuvent désormais être découverts via la carte et la recherche\n\n• Hauteur des sommets en pieds\n\n• Ajout de falaises et de zones d\'escalade sur la carte\n\n• La recherche d\'adresses aux États-Unis a été améliorée\n\n• Ajout de l\'hébreu TTS pour la navigation</string>
+        <string name="release_5_0">• Découvrez les PI les mieux classés avec le nouveau mode Explorer\n\n• Tous les itinéraires OSM, désormais consultables ! Randonnée, vélo, VTT, et plus encore\n\n• Le nouveau widget de navigation combine la flèche de virage et les instructions de navigation\n\n• Widget d\'information sur l\'itinéraire actuel : affiche le temps restant, l\'heure d\'arrivée et la distance\n\n• Sélectionnez les pistes de ski et de VTT sur la carte pour obtenir des informations détaillées\n\n• Possibilité de sélectionner la taille du widget pour les panneaux gauche et droit\n\n• Ajout d\'une grille de coordonnées avec les coordonnées géographiques\n\n• Ajout de la possibilité de personnaliser l\'apparence par défaut des groupes favoris\n\n• Android Auto : affichage de l\'heure d\'arrivée et de la distance jusqu\'au prochain point de passage ; les noms de ville apparaissent désormais dans les résultats de la recherche\n\n• Les sommets les plus importants peuvent désormais être découverts via la carte et la recherche\n\n• Hauteur des sommets en pieds\n\n• Ajout de falaises et de zones d\'escalade sur la carte\n\n• La recherche d\'adresses aux États-Unis a été améliorée\n\n• Ajout de l\'hébreu TTS pour la navigation</string>
     <string name="shared_string_online_only">Uniquement en ligne</string>
     <string name="row_height">Hauteur de la ligne</string>
     <string name="shared_string_offline_only">Uniquement hors ligne</string>
     <string name="add_widget">Ajouter un gadget</string>
+    <string name="intermediate_first">Étape en premier</string>
+    <string name="destination_first">Destination en premier</string>
+    <string name="display_priority">Priorité d\'affichage</string>
+    <string name="poi_source">Source des PI</string>
 </resources>

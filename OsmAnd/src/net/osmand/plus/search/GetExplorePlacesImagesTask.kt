@@ -12,9 +12,9 @@ class GetExplorePlacesImagesTask(
 	val app: OsmandApplication,
 	val mapRect: KQuadRect,
 	val zoom: Int,
-	val locale: String,
-	val listener: GetImageCardsListener)
-	: KAsyncTask<Unit, Unit, List<OsmandApiFeatureData>?>(true) {
+	val languages: List<String>,
+	val listener: GetImageCardsListener
+) : KAsyncTask<Unit, Unit, List<OsmandApiFeatureData>?>(true) {
 
 	private val LOG = LoggerFactory.getLogger("GetNearbyImagesTask")
 
@@ -25,7 +25,8 @@ class GetExplorePlacesImagesTask(
 		var wikimediaImageList: List<OsmandApiFeatureData>? = null
 		LOG.debug("Start loading nearby places")
 		try {
-			wikimediaImageList = WikiCoreHelper.getExploreImageList(mapRect, zoom, locale)
+			val langs = languages.joinToString(",")
+			wikimediaImageList = WikiCoreHelper.getExploreImageList(mapRect, zoom, langs)
 		} catch (error: Exception) {
 			LOG.debug("Load nearby images error $error")
 		}

@@ -726,7 +726,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					if (!points.isEmpty()) {
 						ApplicationMode snapToRoadAppMode = ApplicationMode.valueOfStringKey(points.get(points.size() - 1).getProfileType(), null);
 						if (snapToRoadAppMode != null) {
-							setAppMode(snapToRoadAppMode);
+							setupAppMode(snapToRoadAppMode);
 						}
 					}
 				}
@@ -1487,7 +1487,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		};
 	}
 
-	private void setAppMode(@NonNull ApplicationMode appMode) {
+	private void setupAppMode(@NonNull ApplicationMode appMode) {
 		editingCtx.setAppMode(appMode);
 		editingCtx.scheduleRouteCalculateIfNotEmpty();
 		updateSnapToRoadControls();

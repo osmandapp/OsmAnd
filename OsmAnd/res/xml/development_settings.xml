@@ -47,13 +47,6 @@
 		android:title="@string/simulate_your_location"
 		tools:summary="@string/simulate_your_location_stop_descr" />
 
-	<Preference
-		android:key="location_interpolation_percent"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:title="@string/location_interpolation_percent"
-		tools:summary="50 %" />
-
 	<PreferenceCategory
 		android:key="debugging_and_development"
 		android:layout="@layout/preference_category_with_descr"

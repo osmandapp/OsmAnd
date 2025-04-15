@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments.configureitems;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,8 +32,6 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ConfigureMenuRootFragment.class.getName();
 
-	private ApplicationMode appMode;
-
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
@@ -46,22 +42,10 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		return nightMode;
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
-		}
-		if (appMode == null) {
-			appMode = settings.getApplicationMode();
-		}
-		nightMode = !settings.isLightContentForMode(appMode);
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_ui_customization, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireActivity(), view);
 
@@ -131,16 +115,10 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString(APP_MODE_KEY, appMode.getStringKey());
-	}
-
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull ApplicationMode appMode, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ConfigureMenuRootFragment fragment = new ConfigureMenuRootFragment();
-			fragment.appMode = appMode;
+			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
 
 			manager.beginTransaction()

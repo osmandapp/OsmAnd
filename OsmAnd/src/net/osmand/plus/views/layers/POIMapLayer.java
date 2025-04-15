@@ -9,16 +9,7 @@ import static net.osmand.plus.views.layers.core.POITileProvider.TILE_POINTS_LIMI
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
-import android.graphics.RectF;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.text.util.Linkify;
 import android.util.Base64;
@@ -97,7 +88,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -567,11 +557,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return calculatedFilters;
 	}
 
-	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> result) {
+	public void collectAmenitiesFromPoint(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		List<Amenity> objects = data.getDisplayedResults();
-		if (tb.getZoom() >= START_ZOOM && !Algorithms.isEmpty(objects)) {
+
+		if (tileBox.getZoom() >= START_ZOOM && !Algorithms.isEmpty(objects)) {
 			MapRendererView mapRenderer = getMapRenderer();
-			float radius = getScaledTouchRadius(view.getApplication(), getRadiusPoi(tb)) * TOUCH_RADIUS_MULTIPLIER;
+			float radius = getScaledTouchRadius(view.getApplication(), getRadiusPoi(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
 			List<PointI> touchPolygon31 = null;
 			if (mapRenderer != null) {
 				touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
@@ -581,22 +574,20 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			}
 
 			try {
-				List<Amenity> res = new ArrayList<>();
 				for (int i = 0; i < objects.size(); i++) {
 					Amenity amenity = objects.get(i);
 					LatLon latLon = amenity.getLocation();
 					boolean add = mapRenderer != null
 							? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
-							: tb.isLatLonNearPixel(latLon, point.x, point.y, radius);
+							: tileBox.isLatLonNearPixel(latLon, point.x, point.y, radius);
 					if (add) {
 						if (topPlaces != null && topPlaces.containsValue(amenity)) {
-							res = Collections.singletonList(amenity);
+							result.collect(amenity, this);
 							break;
 						}
-						res.add(amenity);
+						result.collect(amenity, this);
 					}
 				}
-				result.addAll(res);
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
@@ -756,6 +747,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				this.showTopPlacesPreviews = showTopPlacesPreviews;
 				if (updated || showTopPlacesPreviewsChanged || topPlacesBox == null || !topPlacesBox.containsTileBox(tileBox)) {
 					List<Amenity> places = data.getResults();
+					updateVisiblePlaces(data.getDisplayedResults(), tileBox.getLatLonBounds());
                     if (showTopPlacesPreviews && places != null) {
                         RotatedTileBox extendedBox = tileBox.copy();
                         int bigIconSize = getBigIconSize();
@@ -763,7 +755,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
                         topPlacesBox = extendedBox;
 						updateTopPlaces(places, tileBox.getLatLonBounds(), zoom);
 						updateTopPlacesCollection();
-						updateVisiblePlaces(data.getDisplayedResults(), tileBox.getLatLonBounds());
                     } else {
                         clearMapMarkersCollections();
 						cancelLoadingImages();
@@ -790,6 +781,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (shouldDraw(zoom)) {
 			data.queryNewData(tileBox);
 			List<Amenity> objects = data.getResults();
+			updateVisiblePlaces(data.getDisplayedResults(), tileBox.getLatLonBounds());
 			if (objects != null) {
 				float textScale = getTextScale();
 				float iconSize = getIconSize(app);
@@ -976,10 +968,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= START_ZOOM) {
-			getAmenityFromPoint(tileBox, point, objects);
+		if (result.getTileBox().getZoom() >= START_ZOOM) {
+			collectAmenitiesFromPoint(result);
 		}
 	}
 

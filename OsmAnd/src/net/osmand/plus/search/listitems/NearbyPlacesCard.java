@@ -1,6 +1,6 @@
 package net.osmand.plus.search.listitems;
 
-import static android.os.AsyncTask.Status.RUNNING;
+import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -30,6 +31,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.NearbyPlacesAdapter;
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.MapUtils;
@@ -53,7 +55,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 
 	private final OsmandApplication app;
 	private final WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
-	private final PoiUIFilter wikiFilter = plugin.getTopWikiPoiFilter();
+	private PoiUIFilter wikiFilter;
 
 	private SearchAmenitiesTask searchAmenitiesTask;
 
@@ -121,8 +123,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
-				if (dialogFragment != null) {
-					dialogFragment.showResult(wikiFilter);
+				if (dialogFragment != null && getWikiFilter() != null) {
+					dialogFragment.showResult(getWikiFilter());
 				}
 			}
 		});
@@ -148,11 +150,10 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private void updateExpandState() {
 		int iconRes = collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
 		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, !app.getSettings().isLightContent()));
-		boolean internetAvailable = app.getSettings().isInternetConnectionAvailable();
 		boolean nearbyPointFound = getNearbyAdapter().getItemCount() > 0;
-		AndroidUiHelper.updateVisibility(cardContent, !collapsed && nearbyPointFound && internetAvailable);
-		AndroidUiHelper.updateVisibility(noInternetCard, !collapsed && !internetAvailable);
-		AndroidUiHelper.updateVisibility(emptyView, !collapsed && internetAvailable && !nearbyPointFound && !isLoadingItems);
+		AndroidUiHelper.updateVisibility(cardContent, !collapsed && nearbyPointFound && isDataSourceAvailable());
+		AndroidUiHelper.updateVisibility(noInternetCard, !collapsed && !isDataSourceAvailable());
+		AndroidUiHelper.updateVisibility(emptyView, !collapsed && isDataSourceAvailable() && !nearbyPointFound && !isLoadingItems);
 		if (!collapsed && !nearbyPointFound && !isLoadingItems) {
 			populateDownloadItems();
 		}
@@ -190,8 +191,14 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		}
 	}
 
+	private boolean isDataSourceAvailable() {
+		OsmandSettings settings = app.getSettings();
+		boolean dataSourceOnline = settings.WIKI_DATA_SOURCE_TYPE.get() == DataSourceType.ONLINE;
+		return settings.isInternetConnectionAvailable() || !dataSourceOnline;
+	}
+
 	private void onNearbyPlacesCollapseChanged() {
-		if (!collapsed && app.getSettings().isInternetConnectionAvailable()) {
+		if (!collapsed && isDataSourceAvailable()) {
 			startLoadingNearbyPlaces();
 		}
 		updateExpandState();
@@ -199,13 +206,21 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	}
 
 	private void startLoadingNearbyPlaces() {
-		if (!isLoadingItems) {
+		if (!isLoadingItems && getWikiFilter() != null) {
 			isLoadingItems = true;
 			LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-			searchAmenitiesTask = new SearchAmenitiesTask(wikiFilter, latLon);
+			searchAmenitiesTask = new SearchAmenitiesTask(getWikiFilter(), latLon);
 			searchAmenitiesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			AndroidUiHelper.updateVisibility(progressBar, true);
 		}
+	}
+
+	@Nullable
+	private PoiUIFilter getWikiFilter() {
+		if (wikiFilter == null) {
+			wikiFilter = plugin.getTopWikiPoiFilter();
+		}
+		return wikiFilter;
 	}
 
 	private void setupExpandNearbyPlacesIndicator() {
@@ -228,8 +243,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 			downloadItemsAdapter.setItems(items);
 		} else {
 			try {
-				items.addAll(DownloadResources.findIndexItemsAt(
-						app, getMapActivity().getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
+				MapViewTrackingUtilities utilities = app.getMapViewTrackingUtilities();
+				items.addAll(DownloadResources.findIndexItemsAt(app, utilities.getMapLocation(), WIKIPEDIA_FILE,
 						false, -1, true));
 				haveWikiMapsToDownload = !items.isEmpty();
 				if (haveWikiMapsToDownload) {

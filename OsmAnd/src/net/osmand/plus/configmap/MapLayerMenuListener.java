@@ -20,6 +20,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -30,10 +31,13 @@ final class MapLayerMenuListener extends OnRowItemClick {
 
 	private final MapActivity mapActivity;
 	private final TransportLinesMenu transportLinesMenu;
+	private final CoordinatesGridSettings gridSettings;
 
 	MapLayerMenuListener(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		this.transportLinesMenu = new TransportLinesMenu(mapActivity.getMyApplication());
+		OsmandApplication app = mapActivity.getMyApplication();
+		this.transportLinesMenu = new TransportLinesMenu(app);
+		this.gridSettings = new CoordinatesGridSettings(app);
 	}
 
 	@Override
@@ -110,7 +114,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.show_borders_of_downloaded_maps) {
 			settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.set(isChecked);
 		} else if (itemId == R.string.layer_coordinates_grid) {
-			mapActivity.getMapView().getGridHelper().setEnabled(isChecked);
+			gridSettings.setEnabled(isChecked);
 			item.setIcon(CoordinatesGridController.getStateIcon(isChecked));
 			item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 		}

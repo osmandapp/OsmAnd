@@ -40,6 +40,6 @@ public class CompassModeWidgetDialogController extends BaseCompassModeDialogCont
 		dialogManager.register(PROCESS_ID, controller);
 
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
+		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, null, true);
 	}
 }

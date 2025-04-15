@@ -1,12 +1,15 @@
 package net.osmand.plus.search
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.UiContext
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -24,6 +27,8 @@ import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.util.Algorithms
+import androidx.core.graphics.createBitmap
+import net.osmand.plus.utils.ColorUtilities
 
 class NearbyPlacesAdapter(
 	@UiContext val context: Context,
@@ -73,6 +78,8 @@ class NearbyPlacesAdapter(
 	) : RecyclerView.ViewHolder(itemView) {
 		private var item: Amenity? = null
 		private val imageView: ImageView = itemView.findViewById(R.id.item_image)
+		private val imageViewContainer: ViewGroup = itemView.findViewById(R.id.item_image_container)
+		private val errorImageView: ImageView = itemView.findViewById(R.id.item_image_error)
 		private val iconImageView: ImageView = itemView.findViewById(R.id.item_icon)
 		private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
 		private val descriptionTextView: TextView? = itemView.findViewById(R.id.item_description)
@@ -105,27 +112,37 @@ class NearbyPlacesAdapter(
 				uiUtilities.getIcon(R.drawable.ic_action_info_dark, nightMode)
 			}
 			iconImageView.setImageDrawable(coloredIcon)
-			if (shouldShowImage()) {
-				AndroidUiHelper.updateVisibility(imageView, true)
-				val picasso = PicassoUtils.getPicasso(app)
-				item.wikiImageStubUrl?.let {
-					val creator = Picasso.get()
-						.load(it)
-					if (coloredIcon != null) {
-						creator.error(coloredIcon)
-					}
-					creator.into(imageView, object : Callback {
-						override fun onSuccess() {
-							picasso.setResultLoaded(it, true)
-						}
+			errorImageView.setImageDrawable(coloredIcon)
+			AndroidUiHelper.updateVisibility(errorImageView, true)
 
-						override fun onError(e: Exception?) {
-							picasso.setResultLoaded(it, true)
+			if (shouldShowImage()) {
+				AndroidUiHelper.updateVisibility(imageViewContainer, true)
+				val picasso = PicassoUtils.getPicasso(app)
+				if (!Algorithms.objectEquals(imageView.tag, item.wikiImageStubUrl)) {
+					imageView.tag = item.wikiImageStubUrl
+					item.wikiImageStubUrl?.let {
+						val creator = Picasso.get()
+							.load(it)
+						if (coloredIcon != null) {
+							creator.error(coloredIcon)
 						}
-					})
+						creator.into(imageView, object : Callback {
+							override fun onSuccess() {
+								AndroidUiHelper.updateVisibility(imageView, true)
+								AndroidUiHelper.updateVisibility(errorImageView, false)
+								picasso.setResultLoaded(it, true)
+							}
+
+							override fun onError(e: Exception?) {
+								AndroidUiHelper.updateVisibility(imageView, false)
+								AndroidUiHelper.updateVisibility(errorImageView, true)
+								picasso.setResultLoaded(it, false)
+							}
+						})
+					}
 				}
 			} else {
-				AndroidUiHelper.updateVisibility(imageView, false)
+				AndroidUiHelper.updateVisibility(imageViewContainer, false)
 			}
 
 			// Add row number to the title

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="release_5_0">
+    • Descubra POIs de topo com o novo modo Explorar\n\n
+    • Todas as rotas OSM, agora pesquisáveis! Caminhada, ciclismo, BTT e mais\n\n
+    • Novo widget de navegação combina seta de curva e instruções de navegação\n\n
+    • Widget de informações da rota atual: exibe ETA, hora de chegada e distância\n\n
+    • Selecione pistas de esqui e trilhos de BTT no mapa para informações detalhadas\n\n
+    • Capacidade de selecionar o tamanho do widget para os painéis esquerdo e direito\n\n
+    • Adicionada "Grelha de coordenadas" com coordenadas geográficas\n\n
+    • Adicionada capacidade de personalizar a aparência padrão dos grupos favoritos\n\n
+    • Android Auto: veja ETA e distância até ao próximo ponto de passagem; nomes de cidades agora aparecem nos resultados da pesquisa\n\n
+    • Picos proeminentes agora podem ser descobertos através do mapa e pesquisa\n\n
+    • Alturas de picos de montanha em pés\n\n
+    • Adicionado: Falésias e áreas de escalada no mapa\n\n
+    • A pesquisa de endereços nos EUA foi melhorada\n\n
+    • Adicionado TTS hebraico para navegação\n\n
+</string>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barreira</string>
     <string name="amenity_type_education">Educação</string>
@@ -1988,7 +2004,6 @@
     <string name="rendering_attr_hideWaterPolygons_name">Corpos de água largos</string>
     <string name="routing_attr_allow_motorway_name">Utilizar autoestradas</string>
     <string name="routing_attr_allow_motorway_description">Permitir autoestradas.</string>
-    <string name="wiki_around">Artigos da Wikipédia próximos</string>
     <string name="search_map_hint">Cidade ou região</string>
     <string name="route_roundabout_short">Saia na %1$d saída para</string>
     <string name="upload_poi">Enviar pontos de interesse (POI)</string>

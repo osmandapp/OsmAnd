@@ -371,10 +371,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 				&& (this.timestamp == point.timestamp)
 				&& (this.visitedDate == point.visitedDate)
 				&& (this.pickupDate == point.pickupDate)
-				&& (this.color == point.color)
+				&& (this.specialPointType == point.specialPointType)
+				&& appearanceEquals(point);
+	}
+
+	public boolean appearanceEquals(@NonNull FavouritePoint point) {
+		return (this.color == point.color)
 				&& (this.iconId == point.iconId)
-				&& (this.backgroundType == point.backgroundType)
-				&& (this.specialPointType == point.specialPointType);
+				&& (this.backgroundType == point.backgroundType);
 	}
 
 	@Override
@@ -392,6 +396,12 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((amenityOriginName == null) ? 0 : amenityOriginName.hashCode());
 		return result;
+	}
+
+	public void copyAppearance(@NonNull FavouritePoint point) {
+		setColor(point.getColor());
+		setIconId(point.getIconId());
+		setBackgroundType(point.getBackgroundType());
 	}
 
 	public static FavouritePoint fromWpt(@NonNull WptPt pt) {

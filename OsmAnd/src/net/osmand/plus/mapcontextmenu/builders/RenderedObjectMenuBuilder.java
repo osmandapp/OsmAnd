@@ -94,6 +94,9 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 				pt = mapPoiTypes.getPoiTypeByKey(value);
 			} else {
 				PoiType poiType = mapPoiTypes.getPoiTypeByKey(e.getKey() + "_" + e.getValue());
+				if (poiType == null) {
+					poiType = mapPoiTypes.getPoiTypeByKey(e.getKey());
+				}
 				if (poiType != null) {
 					otherPt = pt != null ? poiType : otherPt;
 					subtype = pt == null ? value : subtype;
@@ -121,7 +124,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		}
 		if (pt != null) {
 			am.setType(pt.getCategory());
-		} else if(otherPt != null) {
+		} else if (otherPt != null) {
 			am.setType(otherPt.getCategory());
 			am.setSubType(otherPt.getKeyName());
 		}

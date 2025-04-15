@@ -2377,7 +2377,6 @@
     <string name="rendering_value_fine_name">Peen</string>
     <string name="upload_poi">Laadi üles huvipunkt</string>
     <string name="search_map_hint">Linn või piirkond</string>
-    <string name="wiki_around">Lähedalasuvad Vikipeedia artiklid</string>
     <string name="upload_osm_note_description">Laadi üles oma OSM märge anonüümselt või kasutades oma OpenStreetMap.org profiili.</string>
     <string name="routing_attr_allow_motorway_name">Kasuta kiirteid</string>
     <string name="routing_attr_allow_motorway_description">Lubab kiirteed.</string>

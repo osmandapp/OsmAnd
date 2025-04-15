@@ -942,7 +942,6 @@
     <string name="rendering_attr_contourWidth_name">Дебљина линије изохипси</string>
     <string name="rendering_attr_hideWaterPolygons_description">Воде</string>
     <string name="rendering_attr_hideWaterPolygons_name">Сакриј воду</string>
-    <string name="wiki_around">Чланци Википедије о околини</string>
     <string name="search_map_hint">Град или област</string>
     <string name="route_roundabout_short">Одреди излаз %1$d и иди</string>
     <string name="upload_poi">Отпреми тачку занимања</string>

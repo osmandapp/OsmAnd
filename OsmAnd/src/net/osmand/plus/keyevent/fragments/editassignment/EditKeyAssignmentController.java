@@ -121,11 +121,13 @@ public class EditKeyAssignmentController extends BaseDialogController implements
 	}
 
 	@Override
-	public void finishProcessIfNeeded(@Nullable FragmentActivity activity) {
+	public boolean finishProcessIfNeeded(@Nullable FragmentActivity activity) {
 		if (activity != null && !activity.isChangingConfigurations()) {
 			dialogManager.unregister(PROCESS_ID);
 			dialogManager.unregister(AddQuickActionController.PROCESS_ID);
+			return true;
 		}
+		return false;
 	}
 
 	public void showOverflowMenu(@NonNull FragmentActivity activity, @Nullable View actionView) {
@@ -345,7 +347,7 @@ public class EditKeyAssignmentController extends BaseDialogController implements
 	}
 
 	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(false);
+		return app.getDaynightHelper().isNightMode(false, appMode);
 	}
 
 	@Nullable

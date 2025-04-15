@@ -136,13 +136,16 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 		setupButtonListeners();
 		setupToolbar();
-			lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
+
+		lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
 			@Override
 			public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
 				super.onFragmentDestroyed(fm, f);
-				Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.fragmentContainer);
-				if (currentFragment instanceof SearchWidgetsFragment) {
-					onBackPressedCallback.setEnabled(true);
+				if (isAdded()) {
+					Fragment currentFragment = fm.findFragmentById(R.id.fragmentContainer);
+					if (currentFragment instanceof SearchWidgetsFragment) {
+						onBackPressedCallback.setEnabled(true);
+					}
 				}
 			}
 
@@ -190,18 +193,6 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), onBackPressedCallback);
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		onBackPressedCallback.setEnabled(true);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		onBackPressedCallback.setEnabled(false);
 	}
 
 	private void closeFragment() {
@@ -301,8 +292,8 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 
 
 			for (WidgetType widgetType : allWidgetTypes) {
-				if (widgetType.getGroup() != null) {
-					groupedWidgets.computeIfAbsent(widgetType.getGroup(), k -> new ArrayList<>()).add(widgetType);
+				if (widgetType.getGroup(selectedPanel) != null) {
+					groupedWidgets.computeIfAbsent(widgetType.getGroup(selectedPanel), k -> new ArrayList<>()).add(widgetType);
 				}
 			}
 			widgetItems.clear();
@@ -319,7 +310,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 			sortWidgetsItems(app, allWidgetItems);
 
 			for (WidgetType widgetType : allWidgetTypes) {
-				if (widgetType.getGroup() == null) {
+				if (widgetType.getGroup(selectedPanel) == null) {
 					widgetItems.add(widgetType);
 				}
 			}

@@ -4,7 +4,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/bg_color"
-	android:minHeight="@dimen/context_menu_action_buttons_height">
+	android:minHeight="@dimen/setting_list_item_large_height">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
@@ -17,7 +17,7 @@
 
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_marginStart="@dimen/content_padding">
 
 		<LinearLayout
@@ -25,6 +25,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginEnd="@dimen/list_item_button_padding"
+			android:layout_gravity="center_vertical"
 			android:gravity="center_vertical"
 			android:minHeight="@dimen/context_menu_action_buttons_height"
 			android:orientation="horizontal">
@@ -48,7 +49,7 @@
 				android:maxWidth="@dimen/list_item_description_width"
 				android:maxLines="1"
 				android:textColor="?attr/android:textColorSecondary"
-				android:textSize="@dimen/default_desc_text_size"
+				android:textSize="@dimen/default_list_text_size"
 				tools:text="Offline vector maps" />
 
 			<ImageView

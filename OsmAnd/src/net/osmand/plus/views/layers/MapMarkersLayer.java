@@ -643,12 +643,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		if (tileBox.getZoom() < START_ZOOM
 				|| !settings.SHOW_MAP_MARKERS.get()
 				|| excludeUntouchableObjects
@@ -684,7 +686,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 							: tileBox.isLatLonInsidePixelArea(latLon, screenArea);
 					if (add) {
 						if (!unknownLocation && selectMarkerOnSingleTap) {
-							o.add(marker);
+							result.collect(marker, this);
 						} else {
 							if (isMarkerOnFavorite(marker) && settings.SHOW_FAVORITES.get()
 									|| isMarkerOnWaypoint(marker) && settings.SHOW_WPT.get()) {
@@ -693,9 +695,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 							Amenity mapObj = getMapObjectByMarker(marker);
 							if (mapObj != null) {
 								amenities.add(mapObj);
-								o.add(mapObj);
+								result.collect(mapObj, this);
 							} else {
-								o.add(marker);
+								result.collect(marker, this);
 							}
 						}
 					}

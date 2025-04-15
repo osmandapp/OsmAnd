@@ -20,7 +20,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
@@ -177,10 +176,6 @@ public class KeyAssignmentsController extends BaseDialogController {
 
 	private void askRefreshDialog() {
 		dialogManager.askRefreshDialogCompletely(PROCESS_ID);
-	}
-
-	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap, new RequestMapThemeParams().setAppMode(appMode));
 	}
 
 	private static class EditingBundle {

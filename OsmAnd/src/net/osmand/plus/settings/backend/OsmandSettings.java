@@ -34,6 +34,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -3083,7 +3084,11 @@ public class OsmandSettings {
 		}
 		CommonPreference<String> preference = getCustomRenderProperty(attrName);
 		String value = preference.get();
-		return property.containsValue(value) ? value : preference.getDefaultValue();
+
+		if (property.hasPossibleValues()) {
+			return property.containsValue(value) ? value : preference.getDefaultValue();
+		}
+		return value;
 	}
 
 	@NonNull
@@ -3197,7 +3202,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference(this, "pt_safe_mode", false).makeProfile();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
-	public final CommonPreference<Integer> LOCATION_INTERPOLATION_PERCENT = new IntPreference(this, "location_interpolation_percent", 0).makeGlobal().makeShared();
+	public final CommonPreference<Integer> LOCATION_INTERPOLATION_PERCENT = new IntPreference(this, "location_interpolation_percent", 0).makeProfile().makeShared();
 
 	public final CommonPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render",
 			Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();
@@ -3349,6 +3354,15 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> COORDINATE_GRID_MAX_ZOOM =
 			new IntPreference(this, "coordinate_grid_max_zoom", 31).makeProfile();
+
+	public final OsmandPreference<GridLabelsPosition> COORDINATES_GRID_LABELS_POSITION =
+			new EnumStringPreference<>(this, "coordinates_grid_labels_position", GridLabelsPosition.EDGES, GridLabelsPosition.values()).makeProfile();
+
+	public final OsmandPreference<Integer> COORDINATES_GRID_COLOR_DAY =
+			new IntPreference(this, "coordinates_grid_color_day", Color.parseColor("#FF1A00CC")).makeProfile();
+
+	public final OsmandPreference<Integer> COORDINATES_GRID_COLOR_NIGHT =
+			new IntPreference(this, "coordinates_grid_color_night", Color.parseColor("#FF1A00CC")).makeProfile();
 
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();

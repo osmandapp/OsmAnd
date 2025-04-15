@@ -78,7 +78,7 @@ public class WikipediaPoiMenu {
 				} else if (itemId == R.string.poi_source) {
 					showDataSourceDialog(uiAdapter, view, item);
 				} else if (itemId == R.string.show_image_previews) {
-					app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.set(isChecked);
+					settings.WIKI_SHOW_IMAGE_PREVIEWS.set(isChecked);
 					item.setSelected(isChecked);
 					item.setColor(app, isChecked ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID);
 					item.setIcon(isChecked ? R.drawable.ic_action_photo : R.drawable.ic_action_image_disabled);
@@ -261,7 +261,6 @@ public class WikipediaPoiMenu {
 				.setOnClickListener(v -> {
 					boolean online = sourceType == ONLINE;
 					app.getSettings().WIKI_DATA_SOURCE_TYPE.set(sourceType);
-
 					item.setIcon(sourceType.iconId);
 					item.setDescription(app.getString(sourceType.nameId));
 					item.setColor(app, online ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID);

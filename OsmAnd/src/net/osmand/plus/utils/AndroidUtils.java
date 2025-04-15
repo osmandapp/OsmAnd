@@ -30,6 +30,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.*;
 import android.hardware.display.DisplayManager;
 import android.net.Uri;
@@ -629,9 +630,42 @@ public class AndroidUtils {
 		textView.setText(text);
 	}
 
-	public static int getTextWidth(float textSize, String text) {
+	public static int getMaxPossibleTextSize(@NonNull String text, @Nullable Typeface typeface,
+	                                         int viewWidthPx, int minSizePx, int maxSizePx) {
+		int textWidthAtMax = getTextWidth(typeface, maxSizePx, text);
+		if (textWidthAtMax <= viewWidthPx) {
+			return maxSizePx;
+		}
+
+		float scale = (float) viewWidthPx / textWidthAtMax;
+		int scaledSize = (int) Math.floor(maxSizePx * scale);
+
+		int candidateSize = Math.min(maxSizePx, Math.max(minSizePx, scaledSize));
+		int candidateWidth = getTextWidth(typeface, candidateSize, text);
+		if (candidateWidth <= viewWidthPx) {
+			return candidateSize;
+		}
+
+		while (candidateSize > minSizePx) {
+			candidateSize--;
+			candidateWidth = getTextWidth(typeface, candidateSize, text);
+			if (candidateWidth <= viewWidthPx) {
+				return candidateSize;
+			}
+		}
+		return minSizePx;
+	}
+
+	public static int getTextWidth(float textSize, @NonNull String text) {
+		return getTextWidth(null, textSize, text);
+	}
+
+	public static int getTextWidth(@Nullable Typeface typeface, float textSize, @NonNull String text) {
 		Paint paint = new Paint();
 		paint.setTextSize(textSize);
+		if (typeface != null) {
+			paint.setTypeface(typeface);
+		}
 		return (int) paint.measureText(text);
 	}
 
@@ -945,6 +979,10 @@ public class AndroidUtils {
 		view.setPaddingRelative(start, top, end, bottom);
 	}
 
+	public static void setMargins(ViewGroup.MarginLayoutParams layoutParams, int vertical, int horizontal) {
+		setMargins(layoutParams, horizontal, vertical, horizontal, vertical);
+	}
+
 	public static void setMargins(ViewGroup.MarginLayoutParams layoutParams, int start, int top, int end, int bottom) {
 		layoutParams.setMargins(start, top, end, bottom);
 			layoutParams.setMarginStart(start);
@@ -1014,7 +1052,8 @@ public class AndroidUtils {
 	}
 
 	public static boolean isLayoutRtl(Context ctx) {
-		return getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL;
+		Configuration config = ctx.getResources().getConfiguration();
+		return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
 	}
 
 	public static List<View> getChildrenViews(ViewGroup vg) {
@@ -1252,7 +1291,7 @@ public class AndroidUtils {
 			Field field = R.string.class.getField(property);
 			return getStringForField(ctx, field);
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			LOG.warn("String not found: " + e.getMessage());
 		}
 		return null;
 	}

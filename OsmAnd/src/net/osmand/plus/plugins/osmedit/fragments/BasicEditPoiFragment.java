@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
@@ -110,7 +109,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 			}
 		};
 
-		contentAdapter = new EditPoiContentAdapter((MapActivity) requireActivity(), getContentList(),
+		contentAdapter = new EditPoiContentAdapter(requireActivity(), getContentList(),
 				null, null, openingHoursAdapter, nightMode, getEditPoiFragment(), editPoiListener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(contentAdapter);

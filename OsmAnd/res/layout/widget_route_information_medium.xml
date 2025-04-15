@@ -14,6 +14,7 @@
         android:layout_height="match_parent">
 
         <FrameLayout
+            android:id="@+id/button_container"
             android:layout_width="36dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -42,10 +43,7 @@
             android:includeFontPadding="false"
             android:maxLines="1"
             android:textColor="?android:textColorPrimary"
-            app:autoSizeMaxTextSize="30sp"
-            app:autoSizeMinTextSize="16sp"
-            app:autoSizeStepGranularity="1sp"
-            app:autoSizeTextType="uniform"
+            android:textSize="30sp"
             app:separator=" • "
             app:separatorColor="?android:textColorSecondary"
             tools:primaryText="20:33"
@@ -59,10 +57,7 @@
             android:includeFontPadding="false"
             android:maxLines="1"
             android:textColor="?android:textColorPrimary"
-            app:autoSizeMaxTextSize="18sp"
-            app:autoSizeMinTextSize="14sp"
-            app:autoSizeStepGranularity="1sp"
-            app:autoSizeTextType="uniform"
+            android:textSize="18sp"
             app:separator=" • "
             app:separatorColor="?android:textColorSecondary"
             tools:primaryText="331 km"

@@ -313,7 +313,7 @@ public class MapActivityActions extends MapActions {
 				activity.getMapRouteInfoMenu().setShowMenu(menuState);
 			}
 			if (!settings.SPEED_CAMERAS_ALERT_SHOWED.get()) {
-				SpeedCamerasBottomSheet.showInstance(activity.getSupportFragmentManager(), null);
+				SpeedCamerasBottomSheet.showInstance(activity.getSupportFragmentManager(), null, null, true);
 			}
 		}
 	}

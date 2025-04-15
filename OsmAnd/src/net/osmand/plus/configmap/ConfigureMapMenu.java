@@ -54,6 +54,7 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -210,15 +211,18 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS)
 				.setListener(listener));
 
-		selected = activity.getMapView().getGridHelper().isEnabled();
-		adapter.addItem(new ContextMenuItem(COORDINATES_GRID_ID)
-				.setTitleId(R.string.layer_coordinates_grid, activity)
-				.setSelected(selected)
-				.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
-				.setIcon(CoordinatesGridController.getStateIcon(selected))
-				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setItemDeleteAction(settings.SHOW_COORDINATES_GRID)
-				.setListener(listener));
+		if (CoordinatesGridSettings.isGridSupported(app)) {
+			CoordinatesGridSettings gridSettings = new CoordinatesGridSettings(app);
+			selected = gridSettings.isEnabled();
+			adapter.addItem(new ContextMenuItem(COORDINATES_GRID_ID)
+					.setTitleId(R.string.layer_coordinates_grid, activity)
+					.setSelected(selected)
+					.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
+					.setIcon(CoordinatesGridController.getStateIcon(selected))
+					.setSecondaryIcon(R.drawable.ic_action_additional_option)
+					.setItemDeleteAction(settings.SHOW_COORDINATES_GRID)
+					.setListener(listener));
+		}
 	}
 
 	private void createRouteAttributeItems(@NonNull List<RenderingRuleProperty> customRules,

@@ -14,7 +14,6 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFragment {
 	private static final String SHOW_ICON_KEY = "show_icon_key";
-	private boolean isWidgetVertical = false;
 
 	public CommonPreference<Boolean> shouldShowIconPref;
 
@@ -24,7 +23,6 @@ public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFrag
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
 		if (widgetInfo != null && widgetInfo.widget instanceof SimpleWidget simpleWidget) {
-			isWidgetVertical = simpleWidget.isVerticalWidget();
 			shouldShowIconPref = simpleWidget.shouldShowIconPref();
 			showIcon = bundle.containsKey(SHOW_ICON_KEY) ? bundle.getBoolean(SHOW_ICON_KEY) : shouldShowIconPref.get();
 		}
@@ -39,7 +37,7 @@ public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFrag
 	@Override
 	protected void setupTopContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		super.setupTopContent(themedInflater, container);
-		if (isWidgetVertical) {
+		if (isVerticalPanel) {
 			themedInflater.inflate(R.layout.simple_widget_settings, container);
 
 			SwitchCompat switchCompat = container.findViewById(R.id.show_icon_toggle);
@@ -57,7 +55,7 @@ public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFrag
 
 	@Override
 	protected void applySettings() {
-		if (isWidgetVertical) {
+		if (isVerticalPanel) {
 			shouldShowIconPref.set(showIcon);
 			if (widgetInfo != null) {
 				if (widgetInfo.widget instanceof SimpleWidget simpleWidget) {

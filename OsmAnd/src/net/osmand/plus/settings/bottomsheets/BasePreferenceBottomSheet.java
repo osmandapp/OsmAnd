@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.bottomsheets;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,8 +8,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.DialogPreference.TargetFragment;
 import androidx.preference.Preference;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 
@@ -25,22 +21,12 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 
 	private String prefId;
 	private Preference preference;
-	private ApplicationMode appMode;
 	private boolean profileDependent;
 	private ApplyQueryType applyQueryType;
-
-	public void setAppMode(ApplicationMode appMode) {
-		this.appMode = appMode;
-	}
-
-	public ApplicationMode getAppMode() {
-		return appMode != null ? appMode : requiredMyApplication().getSettings().getApplicationMode();
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			applyQueryType = ApplyQueryType.valueOf(savedInstanceState.getString(APPLY_QUERY_TYPE));
 			profileDependent = savedInstanceState.getBoolean(PROFILE_DEPENDENT, false);
 		}
@@ -51,20 +37,8 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(PROFILE_DEPENDENT, profileDependent);
-		if (appMode != null) {
-			outState.putString(APP_MODE_KEY, appMode.getStringKey());
-		}
 		outState.putString(APPLY_QUERY_TYPE, applyQueryType != null ?
 				applyQueryType.name() : ApplyQueryType.NONE.name());
-	}
-
-	@Override
-	public boolean isNightMode(@NonNull OsmandApplication app) {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControlsForProfile(getAppMode());
-		} else {
-			return !app.getSettings().isLightContentForMode(getAppMode());
-		}
 	}
 
 	public String getPrefId() {
@@ -97,8 +71,7 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 	public static BasePreferenceBottomSheet findPreferenceBottomSheet(@NonNull FragmentManager manager, @NonNull String prefId) {
 		List<Fragment> fragments = manager.getFragments();
 		for (Fragment fragment : fragments) {
-			if (fragment instanceof BasePreferenceBottomSheet) {
-				BasePreferenceBottomSheet bottomSheet = (BasePreferenceBottomSheet) fragment;
+			if (fragment instanceof BasePreferenceBottomSheet bottomSheet) {
 				if (prefId.equals(bottomSheet.getPrefId())) {
 					return bottomSheet;
 				}

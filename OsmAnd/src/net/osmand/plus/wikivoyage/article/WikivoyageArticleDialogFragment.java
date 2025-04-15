@@ -177,7 +177,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(SELECTED_LANG_KEY, selectedLang);
 	}

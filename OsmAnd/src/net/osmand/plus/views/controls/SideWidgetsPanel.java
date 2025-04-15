@@ -33,16 +33,18 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeListener;
 import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
-import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.util.Algorithms;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, ViewChangeProvider {
 
@@ -61,8 +63,7 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, V
 	protected WidgetsPagerAdapter adapter;
 	protected LinearLayout dots;
 
-	private SizeChangeListener sizeListener;
-	private VisibilityChangeListener visibilityListener;
+	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 	private int screenWidth = -1;
 
 	public SideWidgetsPanel(@NonNull Context context) {
@@ -321,30 +322,22 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, V
 		return ((OsmandApplication) getContext().getApplicationContext());
 	}
 
+	@NonNull
 	@Override
-	public void setSizeListener(@Nullable SizeChangeListener listener) {
-		this.sizeListener = listener;
-	}
-
-	@Override
-	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
-		this.visibilityListener = listener;
+	public Collection<ViewChangeListener> getViewChangeListeners() {
+		return viewChangeListeners;
 	}
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		if (sizeListener != null) {
-			sizeListener.onSizeChanged(this, w, h, oldw, oldh);
-		}
+		notifySizeChanged(this, w, h, oldw, oldh);
 	}
 
 	@Override
 	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
 		super.onVisibilityChanged(changedView, visibility);
-		if (visibilityListener != null) {
-			visibilityListener.onVisibilityChanged(changedView, visibility);
-		}
+		notifyVisibilityChanged(changedView, visibility);
 	}
 
 	public void setScreenWidth(@NonNull Activity activity) {

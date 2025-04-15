@@ -2596,7 +2596,6 @@
     <string name="select_folder_descr">აირჩიეთ დასტა ან შექმენით ახალი</string>
     <string name="rendering_attr_contourWidth_description">კონტურული ხაზის სისქე</string>
     <string name="lang_zh_hk">ჩინური (ჰონგ კონგი)</string>
-    <string name="wiki_around">უახლოესი სტატიები Wikipedia-ზე</string>
     <string name="search_map_hint">ქალაქი ან რაიონი</string>
     <string name="rendering_attr_surfaceIntegrity_name">გზის საფრის ერთიანობა</string>
     <string name="no_inet_connection">საჭიროა ინტერნეტთან კავშირი</string>

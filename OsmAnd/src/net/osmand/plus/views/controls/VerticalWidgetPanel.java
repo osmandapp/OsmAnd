@@ -23,9 +23,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeListener;
 import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
-import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -47,8 +46,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 	private final MapWidgetRegistry widgetRegistry;
 	private final List<Row> visibleRows = new ArrayList<>();
 	private boolean topPanel;
-	private SizeChangeListener sizeListener;
-	private VisibilityChangeListener visibilityListener;
+	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 	private boolean nightMode;
 
 	public VerticalWidgetPanel(@NonNull Context context) {
@@ -313,29 +311,21 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 	}
 
 	@Override
-	public void setSizeListener(@Nullable SizeChangeListener listener) {
-		this.sizeListener = listener;
-	}
-
-	@Override
-	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
-		this.visibilityListener = listener;
-	}
-
-	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		if (sizeListener != null) {
-			sizeListener.onSizeChanged(this, w, h, oldw, oldh);
-		}
+		notifySizeChanged(this, w, h, oldw, oldh);
+	}
+
+	@NonNull
+	@Override
+	public Collection<ViewChangeListener> getViewChangeListeners() {
+		return viewChangeListeners;
 	}
 
 	@Override
 	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
 		super.onVisibilityChanged(changedView, visibility);
-		if (visibilityListener != null) {
-			visibilityListener.onVisibilityChanged(changedView, visibility);
-		}
+		notifyVisibilityChanged(changedView, visibility);
 	}
 
 	private class Row {

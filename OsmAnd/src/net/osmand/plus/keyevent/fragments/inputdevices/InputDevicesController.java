@@ -133,6 +133,6 @@ class InputDevicesController {
 	}
 
 	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		return app.getDaynightHelper().isNightMode(usedOnMap, appMode);
 	}
 }

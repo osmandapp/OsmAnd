@@ -65,9 +65,13 @@
 				android:background="@drawable/bg_navigation_widget_exit"
 				android:minWidth="@dimen/map_widget_height"
 				android:paddingHorizontal="6dp"
+				android:includeFontPadding="false"
+
 				android:textColor="@color/card_and_list_background_light"
 				android:textSize="18sp"
 				android:visibility="gone"
+				android:scrollbars="none"
+				android:lines="1"
 				tools:text="Exit 8"
 				tools:visibility="visible" />
 
@@ -77,7 +81,6 @@
 				android:layout_height="match_parent"
 				android:layout_gravity="center"
 				android:layout_marginEnd="6dp"
-				android:gravity="center"
 				android:orientation="horizontal"
 				android:visibility="gone"
 				tools:visibility="visible" />

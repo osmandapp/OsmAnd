@@ -43,30 +43,30 @@ public abstract class SelectMapLocationAction extends QuickAction {
 	private void requestLocation(@NonNull MapActivity mapActivity,
 	                             @NonNull OnResultCallback<LatLon> callback) {
 		if (isManualLocationSelection()) {
-			SelectLocationController.showDialog(mapActivity, createHandler(mapActivity));
+			SelectLocationController.showDialog(mapActivity, createHandler());
 		} else {
 			OsmandApplication app = mapActivity.getMyApplication();
-			callback.onResult(SelectLocationController.getMapCenterCoordinates(app));
+			callback.onResult(SelectLocationController.getMapTargetCoordinates(app));
 		}
 	}
 
 	@NonNull
-	private ILocationSelectionHandler createHandler(@NonNull MapActivity mapActivity) {
+	private ILocationSelectionHandler createHandler() {
 		return new ILocationSelectionHandler() {
 			@Nullable
 			@Override
-			public Object getCenterPointIcon() {
+			public Object getCenterPointIcon(@NonNull MapActivity mapActivity) {
 				return getLocationIcon(mapActivity);
 			}
 
 			@Override
-			public void onLocationSelected(@NonNull LatLon latLon) {
+			public void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
 				SelectMapLocationAction.this.onLocationSelected(mapActivity, latLon);
 			}
 
 			@NonNull
 			@Override
-			public String getDialogTitle() {
+			public String getDialogTitle(@NonNull MapActivity mapActivity) {
 				return SelectMapLocationAction.this.getDialogTitle(mapActivity);
 			}
 		};

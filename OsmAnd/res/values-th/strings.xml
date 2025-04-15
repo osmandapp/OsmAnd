@@ -795,4 +795,12 @@
     <string name="map_widget_route_information">ข้อมูลเส้นทาง</string>
     <string name="route_kr">ชิดขวาและไปต่อ</string>
     <string name="turn_on_public_transport_description">เปิดเพื่อดูเส้นทางขนส่งสาธารณะบนแผนที่</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">เส้นทางรถไฟ</string>
+    <string name="shared_string_show">แสดงผลบนแผนที่</string>
+    <string name="rendering_attr_transportStops_name">ป้ายหยุด หรือสถานี</string>
+    <string name="rendering_attr_trolleybusRoutes_name">เส้นทางรถโดยสารประจำทางไฟฟ้า</string>
+    <string name="rendering_attr_subwayMode_name">เส้นทางรถไฟฟ้าใต้ดิน</string>
+    <string name="rendering_attr_tramRoutes_name">เส้นทางรถราง</string>
+    <string name="rendering_attr_busRoutes_name">เส้นทางรถประจำทาง</string>
+    <string name="favourites">สถานที่ที่ชื่นชอบ</string>
 </resources>

@@ -12,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -20,6 +21,7 @@ import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.util.CollectionUtils;
@@ -35,6 +37,7 @@ public class WidgetsVisibilityHelper {
 
 	private final OsmandApplication app;
 	private final RoutingHelper routingHelper;
+	private final MapFragmentsHelper fragmentsHelper;
 
 	private final MapActivity mapActivity;
 	private final MapLayers mapLayers;
@@ -44,6 +47,7 @@ public class WidgetsVisibilityHelper {
 		app = mapActivity.getMyApplication();
 		routingHelper = app.getRoutingHelper();
 		mapLayers = app.getOsmandMap().getMapLayers();
+		fragmentsHelper = mapActivity.getFragmentsHelper();
 	}
 
 	public boolean shouldShowQuickActionButton() {
@@ -72,7 +76,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowTopCoordinatesWidget() {
-		return !isExplorePLacesMode()&&
+		return !isExplorePLacesMode() &&
 				!mapActivity.shouldHideTopControls()
 				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
 				&& !mapActivity.isTopToolbarActive()
@@ -95,7 +99,9 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldHideBottomWidgets() {
-		return shouldHideVerticalWidgets() || isContextMenuFragmentVisible();
+		return shouldHideVerticalWidgets()
+				|| isContextMenuFragmentVisible()
+				|| isInTrackMenuMode();
 	}
 
 	public boolean shouldShowBottomMenuButtons() {
@@ -266,8 +272,8 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean isInTrackMenuMode() {
-		return mapActivity.getFragmentsHelper().getTrackMenuFragment() != null
-				&& mapActivity.getFragmentsHelper().getTrackMenuFragment().isVisible();
+		TrackMenuFragment fragment = fragmentsHelper.getTrackMenuFragment();
+		return fragment != null && fragment.isVisible();
 	}
 
 	private boolean isInChoosingRoutesMode() {
@@ -311,23 +317,23 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isInGpsFilteringMode() {
-		return mapActivity.getFragmentsHelper().getGpsFilterFragment() != null;
+		return fragmentsHelper.getGpsFilterFragment() != null;
 	}
 
 	private boolean isExplorePLacesMode() {
-		return mapActivity.getFragmentsHelper().getExplorePlacesFragment() != null;
+		return fragmentsHelper.getExplorePlacesFragment() != null;
 	}
 
 	public boolean isInConfigureMapOptionMode() {
-		return mapActivity.getFragmentsHelper().getConfigureMapOptionFragment() != null;
+		return fragmentsHelper.getConfigureMapOptionFragment() != null;
 	}
 
 	private boolean isInWeatherForecastMode() {
-		return mapActivity.getFragmentsHelper().getWeatherForecastFragment() != null;
+		return fragmentsHelper.getWeatherForecastFragment() != null;
 	}
 
 	private boolean isSelectingTilesZone() {
-		return mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null;
+		return fragmentsHelper.getDownloadTilesFragment() != null;
 	}
 
 	private boolean isMapLinkedToLocation() {
@@ -417,23 +423,15 @@ public class WidgetsVisibilityHelper {
 		}
 
 		boolean isVisibleInMode(@NonNull WidgetsVisibilityHelper helper) {
-			switch (this) {
-				case WEATHER_FORECAST:
-					return helper.isInWeatherForecastMode();
-				case MEASUREMENT_MODE:
-					return helper.isInMeasurementToolMode();
-				case PLAN_ROUTE_MODE:
-					return helper.isInPlanRouteMode();
-				case TRACK_APPEARANCE_MODE:
-					return helper.isInTrackAppearanceMode();
-				case SELECTING_TILES_ZONE_MODE:
-					return helper.isSelectingTilesZone();
-				case GPS_FILTERING_MODE:
-					return helper.isInGpsFilteringMode();
-				case EXPLORE_PLACES:
-					return helper.isExplorePLacesMode();
-			}
-			return true;
+			return switch (this) {
+				case WEATHER_FORECAST -> helper.isInWeatherForecastMode();
+				case MEASUREMENT_MODE -> helper.isInMeasurementToolMode();
+				case PLAN_ROUTE_MODE -> helper.isInPlanRouteMode();
+				case TRACK_APPEARANCE_MODE -> helper.isInTrackAppearanceMode();
+				case SELECTING_TILES_ZONE_MODE -> helper.isSelectingTilesZone();
+				case GPS_FILTERING_MODE -> helper.isInGpsFilteringMode();
+				case EXPLORE_PLACES -> helper.isExplorePLacesMode();
+			};
 		}
 	}
 }

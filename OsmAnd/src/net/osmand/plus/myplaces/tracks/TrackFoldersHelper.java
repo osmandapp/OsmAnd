@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -83,6 +84,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	public final static String SORT_SUB_FOLDERS_KEY = "sort_sub_folders_key";
 
 	private final OsmandApplication app;
+	private final ApplicationMode appMode;
 	private final UiUtilities uiUtilities;
 	private final ImportHelper importHelper;
 	private final GpxSelectionHelper gpxSelectionHelper;
@@ -97,10 +99,12 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 
 	private boolean importing;
 
-	public TrackFoldersHelper(@NonNull MyPlacesActivity activity, @NonNull TrackFolder rootFolder) {
+	public TrackFoldersHelper(@NonNull MyPlacesActivity activity,
+	                          @NonNull ApplicationMode appMode, @NonNull TrackFolder rootFolder) {
 		this.activity = activity;
 		this.rootFolder = rootFolder;
 		this.app = activity.getMyApplication();
+		this.appMode = appMode;
 		this.importHelper = app.getImportHelper();
 		this.uiUtilities = app.getUIUtilities();
 		this.gpxSelectionHelper = app.getSelectedGpxHelper();
@@ -318,7 +322,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 						helper.saveRouteActivity(items, routeActivity);
 						dismissFragment(fragment, false);
 					});
-					SelectRouteActivityController.showDialog(activity, routeActivitySelectionHelper);
+					SelectRouteActivityController.showDialog(activity, appMode, routeActivitySelectionHelper);
 				})
 				.create()
 		);
