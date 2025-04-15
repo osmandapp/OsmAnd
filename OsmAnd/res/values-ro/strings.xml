@@ -5899,7 +5899,7 @@
     <string name="route_guidance_desc">Oferă ghidare pe traseu în timp real, inclusiv distanța până la următorul viraj, numele drumului, numele actual al străzii și informații despre benzi. Widget-urile sunt active în timpul navigării.</string>
     <string name="obd_vehicle_info">Informații despre vehicul</string>
     <string name="connect_obd_instructions_title">OsmAnd acceptă conexiuni Bluetooth la scanerele OBD-II.</string>
-    <string name="obd_bluetooth_off_description">Activați Bluetooth pentru a găsi și conecta scanerele.</string>
+    <string name="obd_bluetooth_off_description">Activați Bluetooth pentru găsirea și conectarea scanerelor.</string>
     <string name="obd_device_forget_sensor">Uitați de scaner</string>
     <string name="shared_string_dynamic">Dinamică</string>
     <string name="bt_start_pair_failed">Nu se poate iniția împerecherea cu dispozitivul</string>
@@ -6102,4 +6102,6 @@
     <string name="labels_position">Poziția etichetelor</string>
     <string name="customize_grid_color">Personalizați culoarea rețelei</string>
     <string name="route_members">Membri</string>
+    <string name="multipoligon_related">Legate de</string>
+    <string name="route_part_of">Parte din</string>
 </resources>
