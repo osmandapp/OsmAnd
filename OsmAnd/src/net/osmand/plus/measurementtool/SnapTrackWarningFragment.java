@@ -123,9 +123,9 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer controlsLayer = mapLayers.getMapControlsLayer();
 
-		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_zoom_in_button));
-		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_zoom_out_button));
-		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_my_location_button));
+		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_in_button));
+		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_out_button));
+		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_my_location_button));
 
 		RulerWidget mapRuler = view.findViewById(R.id.map_ruler_layout);
 		mapLayers.getMapInfoLayer().setupRulerWidget(mapRuler);

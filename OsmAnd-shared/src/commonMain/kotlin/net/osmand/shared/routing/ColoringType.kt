@@ -20,7 +20,7 @@ enum class ColoringType(val id: String, val titleId: String, val iconId: String)
 		val TRACK_TYPES = arrayOf(TRACK_SOLID, SPEED, ALTITUDE, SLOPE, ATTRIBUTE)
 
 		fun getRouteInfoAttribute(name: String?): String? {
-			return if (!name.isNullOrEmpty() && name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX)) {
+			return if (!name.isNullOrEmpty() && (name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX) || name.startsWith(RouteStatisticsHelper.OLD_ROUTE_INFO_PREFIX))) {
 				name
 			} else {
 				null
@@ -121,4 +121,5 @@ enum class ColoringType(val id: String, val titleId: String, val iconId: String)
 
 object RouteStatisticsHelper {
 	const val ROUTE_INFO_PREFIX = "route_info_"
+	const val OLD_ROUTE_INFO_PREFIX = "routeInfo_"
 }

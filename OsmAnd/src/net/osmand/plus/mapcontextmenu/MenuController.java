@@ -37,7 +37,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.*;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
@@ -45,6 +45,8 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.aistracker.AisObject;
+import net.osmand.plus.plugins.aistracker.AisObjectMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
@@ -56,6 +58,7 @@ import net.osmand.plus.plugins.osmedit.menu.OsmBugMenuController;
 import net.osmand.plus.plugins.parking.ParkingPositionMenuController;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.resources.SearchOsmandRegionTask;
+import net.osmand.plus.track.clickable.ClickableWay;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.NativeUtilities;
@@ -110,7 +113,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected List<OpeningHours.Info> openingHoursInfo;
 
-	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
+	public MenuController(MenuBuilder builder, PointDescription pointDescription, @NonNull MapActivity mapActivity) {
 		super(mapActivity);
 		this.pointDescription = pointDescription;
 		this.builder = builder;
@@ -145,7 +148,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return builder.isTransliterateNames();
 	}
 
-	public void setMapContextMenu(MapContextMenu mapContextMenu) {
+	public void setMapContextMenu(@Nullable MapContextMenu mapContextMenu) {
 		this.mapContextMenu = mapContextMenu;
 		builder.setMapContextMenu(mapContextMenu);
 	}
@@ -217,8 +220,13 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new RenderedObjectMenuController(mapActivity, pointDescription, (RenderedObject) object);
 			} else if (object instanceof MapillaryImage) {
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
+			} else if (object instanceof AisObject) {
+				menuController = new AisObjectMenuController(mapActivity, pointDescription, (AisObject) object);
 			} else if (object instanceof SelectedGpxPoint) {
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) object);
+			} else if (object instanceof ClickableWay) {
+				SelectedGpxPoint point = ((ClickableWay) object).getSelectedGpxPoint();
+				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, point);
 			} else if (object instanceof Pair) {
 				Pair<?, ?> pair = (Pair<?, ?>) object;
 				if (pair.second instanceof SelectedGpxPoint) {

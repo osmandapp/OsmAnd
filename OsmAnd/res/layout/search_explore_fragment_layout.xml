@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/activity_background_color">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/activity_background_color"
+		android:orientation="vertical">
+
+		<ListView
+			android:id="@android:id/list"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/activity_background_color"
+			android:divider="@null"
+			android:dividerHeight="0dp"
+			android:drawSelectorOnTop="true" />
+	</LinearLayout>
+</FrameLayout>

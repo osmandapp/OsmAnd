@@ -40,6 +40,7 @@ import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
+import net.osmand.plus.configmap.TerrainZoomLevelsController;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.LocalItemType;
@@ -49,6 +50,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -63,6 +65,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +111,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		srtmPlugin = PluginsHelper.requirePlugin(SRTMPlugin.class);
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 	}
 
@@ -218,9 +221,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		String transparency = transparencyValue + "%";
 		visibilityTv.setText(transparency);
 
-		int minZoom = srtmPlugin.getTerrainMinZoom();
-		int maxZoom = srtmPlugin.getTerrainMaxZoom();
-		String zoomLevels = minZoom + " - " + maxZoom;
+		NumberFormat numberFormat = OsmAndFormatter.getNumberFormat(app);
+		String minZoom = numberFormat.format(srtmPlugin.getTerrainMinZoom());
+		String maxZoom = numberFormat.format(srtmPlugin.getTerrainMaxZoom());
+		String zoomLevels = getString(R.string.ltr_or_rtl_combine_via_dash, minZoom, maxZoom);
 		zoomLevelsTv.setText(zoomLevels);
 		coloSchemeTv.setText(mode.getType().getName(app));
 	}
@@ -260,7 +264,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getDashboard().hideDashboard();
-				TerrainZoomLevelsFragment.showInstance(mapActivity.getSupportFragmentManager());
+				TerrainZoomLevelsController.showDialog(mapActivity, srtmPlugin);
 			}
 		});
 	}

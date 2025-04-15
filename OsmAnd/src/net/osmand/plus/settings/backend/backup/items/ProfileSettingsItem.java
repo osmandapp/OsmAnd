@@ -1,10 +1,5 @@
 package net.osmand.plus.settings.backend.backup.items;
 
-import static net.osmand.plus.settings.enums.SunPositionMode.SUN_POSITION_MODE;
-import static net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState.SIMPLE_WIDGET_SIZE_ID;
-import static net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState.SUN_POSITION_WIDGET_MODE_ID;
-import static net.osmand.router.GeneralRouter.USE_SHORTEST_WAY;
-
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -19,23 +14,17 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.OsmandSettingsItemReader;
-import net.osmand.plus.settings.backend.backup.OsmandSettingsItemWriter;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsItemReader;
-import net.osmand.plus.settings.backend.backup.SettingsItemType;
-import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.*;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.enums.SunPositionMode;
-import net.osmand.plus.settings.enums.WidgetSize;
-import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.MarkerClickBehaviour;
-import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.SideMarkerMode;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 public class ProfileSettingsItem extends OsmandSettingsItem {
 
@@ -52,21 +41,23 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 		modeBean = appMode.toModeBean();
 	}
 
-	public ProfileSettingsItem(@NonNull OsmandApplication app, @Nullable ProfileSettingsItem baseItem, @NonNull ApplicationModeBean modeBean) {
+	public ProfileSettingsItem(@NonNull OsmandApplication app,
+			@Nullable ProfileSettingsItem baseItem, @NonNull ApplicationModeBean modeBean) {
 		super(app.getSettings(), baseItem);
 		this.modeBean = modeBean;
 		builder = ApplicationMode.fromModeBean(app, modeBean);
 		appMode = builder.getApplicationMode();
 	}
 
-	public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public ProfileSettingsItem(@NonNull OsmandApplication app,
+			@NonNull JSONObject json) throws JSONException {
 		super(SettingsItemType.PROFILE, app.getSettings(), json);
 	}
 
 	@Override
 	protected void init() {
 		super.init();
-		appModeBeanPrefsIds = new HashSet<>(Arrays.asList(getAppModeBeanPrefsIds()));
+		appModeBeanPrefsIds = ApplicationModeBean.getAppModeBeanPrefsIds(app);
 	}
 
 	@NonNull
@@ -180,7 +171,8 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 		if (!appMode.isCustomProfile() && !shouldReplace) {
 			ApplicationMode parent = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
 			renameProfile();
-			ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
+
+			ApplicationModeBuilder builder = ApplicationMode
 					.createCustomMode(parent, modeBean.stringKey, app)
 					.setIconResName(modeBean.iconName)
 					.setUserProfileName(modeBean.userProfileName)
@@ -189,7 +181,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 					.setIconColor(modeBean.iconColor)
 					.setLocationIcon(modeBean.locIcon)
 					.setNavigationIcon(modeBean.navIcon);
-			getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode());
+			getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode(), true);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		} else if (!shouldReplace && exists()) {
 			renameProfile();
@@ -268,99 +260,20 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return new OsmandSettingsItemReader<>(this) {
-			@Override
-			protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
-				if (!appModeBeanPrefsIds.contains(preference.getId())) {
-					preference.readFromJson(json, appMode);
-				}
-			}
-
-			@Override
-			public void readPreferencesFromJson(JSONObject json) {
-				app.runInUIThread(() -> {
-					OsmandSettings settings = getSettings();
-					Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
-					Iterator<String> iterator = json.keys();
-					while (iterator.hasNext()) {
-						String key = iterator.next();
-						OsmandPreference<?> preference = prefs.get(key);
-						if (preference == null) {
-							String value = json.optString(key);
-							preference = createPreference(settings, key, value);
-						}
-						if (preference != null) {
-							try {
-								readPreferenceFromJson(preference, json);
-								if (OsmandSettings.isRoutingPreference(preference.getId())
-										&& preference.getId().endsWith(USE_SHORTEST_WAY)) {
-									settings.FAST_ROUTE_MODE.setModeValue(appMode,
-											!settings.getCustomRoutingBooleanProperty(USE_SHORTEST_WAY, false).getModeValue(appMode));
-								}
-							} catch (Exception e) {
-								SettingsHelper.LOG.error("Failed to read preference: " + key, e);
-							}
-						} else {
-							SettingsHelper.LOG.warn("No preference while importing settings: " + key);
-						}
-					}
-					settings.setLastModePreferencesEditTime(appMode, lastModifiedTime);
-				});
-			}
-
-			@Nullable
-			private OsmandPreference<?> createPreference(@NonNull OsmandSettings settings,
-					@NonNull String key, @Nullable String value) {
-				if (!Algorithms.isEmpty(value)) {
-					boolean boolPref = "true".equalsIgnoreCase(value) || "false".equalsIgnoreCase(value);
-					if (OsmandSettings.isRoutingPreference(key)) {
-						return boolPref ? settings.getCustomRoutingBooleanProperty(key,
-								Boolean.parseBoolean(value)) : settings.getCustomRoutingProperty(key, value);
-					} else if (OsmandSettings.isRendererPreference(key)) {
-						return boolPref ? settings.getCustomRenderBooleanProperty(key) : settings.getCustomRenderProperty(key);
-					} else if (boolPref) {
-						return settings.registerBooleanPreference(key, Boolean.parseBoolean(value));
-					} else if (key.startsWith(SIMPLE_WIDGET_SIZE_ID)) {
-						return settings.registerEnumStringPreference(key, WidgetSize.MEDIUM, WidgetSize.values(), WidgetSize.class);
-					} else if (key.startsWith(SUN_POSITION_WIDGET_MODE_ID)) {
-						return settings.registerEnumStringPreference(key, SUN_POSITION_MODE, SunPositionMode.values(), SunPositionMode.class);
-					} else if (key.contains("map_marker_mode")) {
-						return settings.registerEnumStringPreference(key, SideMarkerMode.DISTANCE, SideMarkerMode.values(), SideMarkerMode.class);
-					} else if (key.contains("map_marker_click_behaviour")) {
-						return settings.registerEnumStringPreference(key, MarkerClickBehaviour.SWITCH_MODE, MarkerClickBehaviour.values(), MarkerClickBehaviour.class);
-					}
-				}
-				return null;
-			}
-		};
+		return new ProfileSettingsItemReader(this);
 	}
 
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		return new OsmandSettingsItemWriter<ProfileSettingsItem>(this, getSettings()) {
+		return new OsmandSettingsItemWriter<>(this, getSettings()) {
 			@Override
-			protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+			protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference,
+					@NonNull JSONObject json) throws JSONException {
 				if (!appModeBeanPrefsIds.contains(preference.getId())) {
 					preference.writeToJson(json, appMode);
 				}
 			}
-		};
-	}
-
-	private String[] getAppModeBeanPrefsIds() {
-		OsmandSettings settings = app.getSettings();
-		return new String[] {
-				settings.ICON_COLOR.getId(),
-				settings.CUSTOM_ICON_COLOR.getId(),
-				settings.ICON_RES_NAME.getId(),
-				settings.PARENT_APP_MODE.getId(),
-				settings.ROUTING_PROFILE.getId(),
-				settings.ROUTE_SERVICE.getId(),
-				settings.USER_PROFILE_NAME.getId(),
-				settings.LOCATION_ICON.getId(),
-				settings.NAVIGATION_ICON.getId(),
-				settings.APP_MODE_ORDER.getId()
 		};
 	}
 }

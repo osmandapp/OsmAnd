@@ -76,12 +76,15 @@ public class OSMSettings {
 		WEBSITE("website"), //$NON-NLS-1$
 		URL("url"), //$NON-NLS-1$
 		WIKIPEDIA("wikipedia"), //$NON-NLS-1$
+		WIKIDATA("wikidata"), //$NON-NLS-1$
 		
 		ADMIN_LEVEL("admin_level"), //$NON-NLS-1$
 		PUBLIC_TRANSPORT("public_transport"), //$NON-NLS-1$
 		ENTRANCE("entrance"), //$NON-NLS-1$
 		COLOUR("colour"),
-		RELATION_ID("relation_id");
+		RELATION_ID("relation_id"),
+		CLIMBING("climbing"),
+		OSMAND_CLIMBING("osmand_climbing");
 		
 		
 		private final String value;

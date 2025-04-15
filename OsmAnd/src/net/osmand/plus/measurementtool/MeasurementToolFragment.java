@@ -726,7 +726,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					if (!points.isEmpty()) {
 						ApplicationMode snapToRoadAppMode = ApplicationMode.valueOfStringKey(points.get(points.size() - 1).getProfileType(), null);
 						if (snapToRoadAppMode != null) {
-							setAppMode(snapToRoadAppMode);
+							setupAppMode(snapToRoadAppMode);
 						}
 					}
 				}
@@ -922,7 +922,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					addToGpx(finalSaveAction);
 				}
 			} else {
-				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.none_point_error);
 			}
 		}
 	}
@@ -1019,7 +1019,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 							dismiss(mapActivity);
 							runNavigation(gpx, appMode);
 						} else {
-							Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
+							app.showShortToastMessage(R.string.error_occurred_saving_gpx);
 						}
 					} else {
 						if (editingCtx.shouldCheckApproximation() && editingCtx.isApproximationNeeded() && editingCtx.hasTimestamps()) {
@@ -1035,7 +1035,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					}
 				}
 			} else {
-				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.none_point_error);
 			}
 		}
 	}
@@ -1084,7 +1084,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (editingCtx.getPointsCount() > 0) {
 				showAddToTrackDialog(mapActivity);
 			} else {
-				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.none_point_error);
 			}
 		}
 	}
@@ -1113,7 +1113,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				updateUndoRedoButton(true, undoBtn);
 				updateDistancePointsText();
 			} else {
-				Toast.makeText(mapActivity, getString(R.string.one_point_error), Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.one_point_error);
 			}
 		}
 	}
@@ -1487,7 +1487,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		};
 	}
 
-	private void setAppMode(@NonNull ApplicationMode appMode) {
+	private void setupAppMode(@NonNull ApplicationMode appMode) {
 		editingCtx.setAppMode(appMode);
 		editingCtx.scheduleRouteCalculateIfNotEmpty();
 		updateSnapToRoadControls();
@@ -1565,7 +1565,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
 				SaveAsNewTrackBottomSheetDialogFragment.showInstance(manager, getSuggestedFileName(), this, true, true);
 			} else {
-				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.none_point_error);
 			}
 		}
 	}
@@ -1874,14 +1874,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					case SHOW_TOAST:
 						editingCtx.setChangesSaved();
 						if (savedGpxFile != null && !savedGpxFile.isShowCurrentTrack()) {
-							Toast.makeText(mapActivity,
-									MessageFormat.format(getString(R.string.gpx_saved_sucessfully), outFile.getAbsolutePath()),
-									Toast.LENGTH_LONG).show();
+							app.showToastMessage(MessageFormat.format(getString(R.string.gpx_saved_sucessfully), outFile.getAbsolutePath()));
 						}
 				}
 			}
 		} else {
-			Toast.makeText(mapActivity, warning.getMessage(), Toast.LENGTH_LONG).show();
+			app.showToastMessage(warning.getMessage());
 		}
 	}
 
@@ -2249,7 +2247,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				dismiss(mapActivity);
 				runNavigation(gpx, appMode);
 			} else {
-				Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.error_occurred_saving_gpx);
 			}
 		}
 	}

@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.customizable.CustomizableSingleSelectionDialogFragment;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
 import net.osmand.plus.utils.AndroidUtils;
@@ -170,10 +171,11 @@ public class SelectRouteActivityFragment extends CustomizableSingleSelectionDial
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull String processId) {
+	                                   @NonNull ApplicationMode appMode, @NonNull String processId) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectRouteActivityFragment fragment = new SelectRouteActivityFragment();
 			fragment.setProcessId(processId);
+			fragment.setAppMode(appMode);
 			fragment.show(fragmentManager, TAG);
 			return true;
 		}

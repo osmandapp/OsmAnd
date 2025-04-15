@@ -231,7 +231,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull CloudChangeItem item,
 	                                @NonNull ChangesTabFragment target) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			ChangeItemActionsBottomSheet fragment = new ChangeItemActionsBottomSheet();
 			fragment.item = item;
 			fragment.recentChangesType = target.getChangesTabType();

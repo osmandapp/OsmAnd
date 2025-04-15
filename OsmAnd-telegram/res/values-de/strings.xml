@@ -94,9 +94,9 @@
     <string name="shared_string_authorization">Autorisation</string>
     <string name="shared_string_authorization_descr">Bitte geben Sie Ihre Telegram-Telefonnummer im internationalen Format ein</string>
     <string name="shared_string_welcome">Willkommen</string>
-    <string name="yard">yd</string>
-    <string name="foot">ft</string>
-    <string name="mile">mi</string>
+    <string name="yard">Yard</string>
+    <string name="foot">Foot</string>
+    <string name="mile">Meile</string>
     <string name="km">km</string>
     <string name="m">m</string>
     <string name="min_mile">min/mile</string>

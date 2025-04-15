@@ -77,6 +77,11 @@ public class PoiFilter extends AbstractPoiType {
 		return acceptedTypes;
 	}
 
+	@Override
+	public String getParentTypeName() {
+		return pc != null ? pc.getTranslation() : "";
+	}
+
 	protected void addReferenceTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
 		for (PoiType pt : getPoiTypes()) {
 			if (pt.isReference()) {

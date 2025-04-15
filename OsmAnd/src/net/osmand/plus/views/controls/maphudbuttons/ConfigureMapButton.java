@@ -1,6 +1,6 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONFIGURE_MAP;
+import static net.osmand.plus.dashboard.DashboardType.CONFIGURE_MAP;
 
 import android.content.Context;
 import android.util.AttributeSet;

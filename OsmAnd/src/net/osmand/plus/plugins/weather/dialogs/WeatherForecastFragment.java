@@ -345,15 +345,15 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 
 		ZoomInButton zoomInBtn = view.findViewById(R.id.map_zoom_in_button);
 		if (zoomInBtn != null) {
-			layer.addCustomMapButton(zoomInBtn);
+			layer.addCustomizedDefaultMapButton(zoomInBtn);
 		}
 		ZoomOutButton zoomOutBtn = view.findViewById(R.id.map_zoom_out_button);
 		if (zoomOutBtn != null) {
-			layer.addCustomMapButton(zoomOutBtn);
+			layer.addCustomizedDefaultMapButton(zoomOutBtn);
 		}
 		MyLocationButton myLocationBtn = view.findViewById(R.id.map_my_location_button);
 		if (myLocationBtn != null) {
-			layer.addCustomMapButton(myLocationBtn);
+			layer.addCustomizedDefaultMapButton(myLocationBtn);
 		}
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 

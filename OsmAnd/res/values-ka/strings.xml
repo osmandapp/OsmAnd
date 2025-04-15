@@ -1232,7 +1232,6 @@
     <string name="file_size_needed_for_import">საჭიროა იმპორტისთვის</string>
     <string name="select_items_for_import">აირჩიეთ საიმპორტო პუნქტები.</string>
     <string name="add_to_mapillary">Mapillary-ში დამატება</string>
-    <string name="add_to_opr">OpenPlaceReviews-ში დამატება</string>
     <string name="shared_string_save_as_gpx"/>
     <string name="layer_gpx_layer">თვალთვალი</string>
     <string name="map_widget_monitoring">გზის ჩაწერა</string>
@@ -1277,7 +1276,6 @@
     <string name="pause_navigation">ნავიგაციის შეჩერება</string>
     <string name="continue_navigation">ნავიგაციის გაგრძელება</string>
     <string name="lang_sr">სერბული (კირილიცა)</string>
-    <string name="rendering_attr_hideAccess_name">წვდომის შეზღუდვები</string>
     <string name="rendering_attr_lessDetailed_name">ნაკლები დეტალი</string>
     <string name="rendering_attr_moreDetailed_name">მეტი დეტალი</string>
     <string name="select_destination_and_intermediate_points">დანიშნულების წერტილების მითითება</string>
@@ -2171,8 +2169,6 @@
     <string name="login_open_street_map_org">გთხოვთ, შეხვიდეთ OpenStreetMap.org-ზე</string>
     <string name="use_login_password">მომხმარებელის და პაროლის გამოყენება</string>
     <string name="manage_subscription">გამოწერის მართვა</string>
-    <string name="register_on_openplacereviews">OpenPlaceReviews.org-ზე
-\nრეგისტრაცია</string>
     <string name="maps_you_need">რუკები, როლებიც შეიძლება დაგჭირდეთ</string>
     <string name="wiki_article_not_found">სტატია ნაპოვნი არაა</string>
     <string name="download_wikipedia_label">ვიკიპედიის მონაცემების გადმოწერა</string>
@@ -2598,7 +2594,6 @@
     <string name="select_folder_descr">აირჩიეთ დასტა ან შექმენით ახალი</string>
     <string name="rendering_attr_contourWidth_description">კონტურული ხაზის სისქე</string>
     <string name="lang_zh_hk">ჩინური (ჰონგ კონგი)</string>
-    <string name="wiki_around">უახლოესი სტატიები Wikipedia-ზე</string>
     <string name="search_map_hint">ქალაქი ან რაიონი</string>
     <string name="rendering_attr_surfaceIntegrity_name">გზის საფრის ერთიანობა</string>
     <string name="no_inet_connection">საჭიროა ინტერნეტთან კავშირი</string>
@@ -3049,7 +3044,7 @@
     <string name="weather_precip_milimeters">მილიმეტრი</string>
     <string name="map_widget_trip_recording_duration">ხანგრძლივობა</string>
     <string name="map_widget_trip_recording_uphill">აღმართი</string>
-    <string name="map_widget_trip_recording_distance">მანძილი</string>
+    <string name="map_widget_distance">მანძილი</string>
     <string name="map_widget_rssi">Rssi</string>
     <string name="shared_string_nearest">უახლოესი</string>
     <string name="contact_support">მხარდაჭერა</string>
@@ -3287,4 +3282,7 @@
     <string name="keep_both_desc">შემოტანილი ელემენტები პრეფიქსით დაემატება</string>
     <string name="units_and_formats">ერთეულები და ფორმატები</string>
     <string name="switch_start_finish">საწყისი წერტილის და დანიშნულების პუნქტის შებრუნება</string>
+    <string name="weather_wind_kilimeters_per_hour">კილომეტრი საათში</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="wiki_around">უახლოესი პოპულარული ადგილები</string>
 </resources>

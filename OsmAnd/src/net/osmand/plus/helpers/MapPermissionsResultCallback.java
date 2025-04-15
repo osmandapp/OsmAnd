@@ -2,7 +2,6 @@ package net.osmand.plus.helpers;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
@@ -37,7 +36,7 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 			PluginsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			activity.getMapActions().onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-			OnRequestPermissionsResultCallback aaCallback = app.getAndroidAutoPermissionRequestResultListener();
+			OnRequestPermissionsResultCallback aaCallback = app.getCarAppPermissionListener();
 			if (aaCallback != null) {
 				aaCallback.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
@@ -48,9 +47,7 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 				permissionAsked = true;
 				permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 				if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-					Toast.makeText(activity,
-							R.string.missing_write_external_storage_permission,
-							Toast.LENGTH_LONG).show();
+					app.showToastMessage(R.string.missing_write_external_storage_permission);
 				}
 			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
 				app.runInUIThread(() -> {

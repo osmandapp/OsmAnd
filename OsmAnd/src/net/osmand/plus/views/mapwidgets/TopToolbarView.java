@@ -21,13 +21,15 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeListener;
 import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
-import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 
@@ -45,15 +47,14 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 	private ImageButton backButton;
 	private TextView titleView;
 	private TextView descrView;
-	private ImageButton refreshButton;
+	private ImageButton actionButton;
 	private ImageButton closeButton;
 	private TextView saveView;
 	private TextView textBtn;
 	private SwitchCompat topBarSwitch;
 	private View shadowView;
 
-	private SizeChangeListener sizeListener;
-	private VisibilityChangeListener visibilityListener;
+	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 
 	private boolean nightMode;
 
@@ -84,7 +85,7 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 		topBarBottomView = findViewById(R.id.widget_top_bar_bottom_view);
 		topBarTitleLayout = findViewById(R.id.widget_top_bar_title_layout);
 		backButton = findViewById(R.id.widget_top_bar_back_button);
-		refreshButton = findViewById(R.id.widget_top_bar_refresh_button);
+		actionButton = findViewById(R.id.widget_top_bar_action_button);
 		closeButton = findViewById(R.id.widget_top_bar_close_button);
 		titleView = findViewById(R.id.widget_top_bar_title);
 		saveView = findViewById(R.id.widget_top_bar_save);
@@ -139,8 +140,8 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 		return topBarSwitch;
 	}
 
-	public ImageButton getRefreshButton() {
-		return refreshButton;
+	public ImageButton getActionButton() {
+		return actionButton;
 	}
 
 	public View getShadowView() {
@@ -193,7 +194,7 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 		backButton.setOnClickListener(controller.onBackButtonClickListener);
 		topBarTitleLayout.setOnClickListener(controller.onTitleClickListener);
 		closeButton.setOnClickListener(controller.onCloseButtonClickListener);
-		refreshButton.setOnClickListener(controller.onRefreshButtonClickListener);
+		actionButton.setOnClickListener(controller.onActionButtonClickListener);
 		saveView.setOnClickListener(controller.onSaveViewClickListener);
 		textBtn.setOnClickListener(controller.onTextBtnClickListener);
 		topBarSwitch.setOnCheckedChangeListener(controller.onSwitchCheckedChangeListener);
@@ -266,9 +267,9 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 			closeButton.setImageDrawable(uiUtilities.getIcon(closeBtnIconId, closeBtnIconClrId));
 		}
 		if (refreshBtnIconId == 0) {
-			refreshButton.setImageDrawable(null);
+			actionButton.setImageDrawable(null);
 		} else {
-			refreshButton.setImageDrawable(uiUtilities.getIcon(refreshBtnIconId, refreshBtnIconClrId));
+			actionButton.setImageDrawable(uiUtilities.getIcon(refreshBtnIconId, refreshBtnIconClrId));
 		}
 		int titleColor = titleTextClr != -1 ? titleTextClr : getContext().getColor(titleTextClrId);
 		int descrColor = descrTextClr != -1 ? descrTextClr : getContext().getColor(descrTextClrId);
@@ -281,20 +282,9 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 
 		titleView.setSingleLine(controller.singleLineTitle);
 
-		if (controller.closeBtnVisible) {
-			if (closeButton.getVisibility() == View.GONE) {
-				closeButton.setVisibility(View.VISIBLE);
-			}
-		} else if (closeButton.getVisibility() == View.VISIBLE) {
-			closeButton.setVisibility(View.GONE);
-		}
-		if (controller.refreshBtnVisible) {
-			if (refreshButton.getVisibility() == View.GONE) {
-				refreshButton.setVisibility(View.VISIBLE);
-			}
-		} else if (refreshButton.getVisibility() == View.VISIBLE) {
-			refreshButton.setVisibility(View.GONE);
-		}
+		AndroidUiHelper.updateVisibility(closeButton, controller.closeButtonVisible);
+		AndroidUiHelper.updateVisibility(actionButton, controller.actionButtonVisible);
+
 		if (controller.saveViewVisible) {
 			if (controller.saveViewTextId != -1) {
 				saveView.setText(getContext().getString(controller.saveViewTextId));
@@ -338,29 +328,21 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 		return nightMode;
 	}
 
+	@NonNull
 	@Override
-	public void setSizeListener(@Nullable SizeChangeListener listener) {
-		this.sizeListener = listener;
-	}
-
-	@Override
-	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
-		this.visibilityListener = listener;
+	public Collection<ViewChangeListener> getViewChangeListeners() {
+		return viewChangeListeners;
 	}
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		if (sizeListener != null) {
-			sizeListener.onSizeChanged(this, w, h, oldw, oldh);
-		}
+		notifySizeChanged(this, w, h, oldw, oldh);
 	}
 
 	@Override
 	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
 		super.onVisibilityChanged(changedView, visibility);
-		if (visibilityListener != null) {
-			visibilityListener.onVisibilityChanged(changedView, visibility);
-		}
+		notifyVisibilityChanged(changedView, visibility);
 	}
 }

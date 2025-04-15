@@ -4,6 +4,7 @@ package net.osmand.render;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -142,6 +143,23 @@ public class RenderingRuleProperty {
 			return false;
 		}
 		return ruleValue == renderingProperty;
+	}
+
+	public boolean hasPossibleValues() {
+		return !Algorithms.isEmpty(possibleValues)
+				&& (possibleValues.length > 1 || !Algorithms.isEmpty(possibleValues[0]));
+	}
+
+	public boolean containsValue(String value) {
+		String[] values = getPossibleValues();
+		if (!Algorithms.isEmpty(values)) {
+			for (String v : values) {
+				if (Algorithms.stringsEqual(v, value)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	@Override

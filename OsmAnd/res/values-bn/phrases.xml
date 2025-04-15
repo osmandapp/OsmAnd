@@ -35,7 +35,6 @@
     <string name="poi_finance">অর্থ</string>
     <string name="poi_natural">প্রাকৃতিক</string>
     <string name="poi_military">সামরিক</string>
-    <string name="poi_osmwiki">উইকিপিডিয়া</string>
     <string name="poi_user_defined_other">ব্যবহারকারী কর্তৃক নির্ধারিত</string>
     <string name="poi_bakery">বেকারি</string>
     <string name="poi_alcohol">চায়ের দোকান</string>
@@ -123,5 +122,5 @@
     <string name="poi_archaeological_site_type">ধরণ</string>
     <string name="poi_free_flying_characteristics">বিশিষ্ট</string>
     <string name="poi_healthcare_alternative_types">বিশিষ্টতা</string>
-    <string name="poi_site_type_fortification">দুর্গপ্রাকার</string>
+    <string name="poi_archaeological_site_fortification">দুর্গপ্রাকার</string>
 </resources>

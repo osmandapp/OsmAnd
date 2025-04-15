@@ -338,7 +338,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
-	public void onGpxUploaded(String result) {
+	public void onGpxUploadFinished(String result) {
 		dismiss();
 	}
 

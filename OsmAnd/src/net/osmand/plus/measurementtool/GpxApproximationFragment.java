@@ -101,7 +101,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment implemen
 			mainView.findViewById(R.id.control_buttons).setLayoutParams(params);
 		}
 		runLayoutListener();
-		helper.calculateGpxApproximationAsync(true);
+		helper.calculateGpxApproximationAsync();
 
 		ScrollView profileView = (ScrollView) getBottomScrollView();
 		profileView.postDelayed(() -> {

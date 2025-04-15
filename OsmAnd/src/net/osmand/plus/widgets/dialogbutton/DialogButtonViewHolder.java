@@ -114,16 +114,14 @@ public class DialogButtonViewHolder {
 
 	public void updateTitle() {
 		TextViewEx tvTitle = view.findViewById(R.id.button_text);
-		String title = attrs.getTitle();
+		CharSequence title = attrs.getTitle();
 		if (title == null && attrs.getTitleId() != INVALID_ID) {
 			title = view.getContext().getString(attrs.getTitleId());
 		}
 		if (title == null) {
 			title = "";
 		}
-		if (attrs.shouldUseUppercase()) {
-			title = title.toUpperCase();
-		}
+		tvTitle.setAllCaps(attrs.shouldUseUppercase());
 		tvTitle.setText(title);
 	}
 

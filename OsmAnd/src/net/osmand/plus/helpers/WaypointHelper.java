@@ -24,7 +24,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfoType;
@@ -80,7 +79,6 @@ public class WaypointHelper {
 	private final ConcurrentHashMap<AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
 	private TIntArrayList pointsProgress = new TIntArrayList();
-	private boolean rejectPointsCalculation = false;
 	private RouteCalculationResult route;
 
 	private ApplicationMode appMode;
@@ -286,33 +284,20 @@ public class WaypointHelper {
 	}
 
 	public void switchWaypointType(int type, boolean enable) {
-		rejectPointsCalculation = true;
-		//An item will be displayed in the Waypoint list if either "Show..." or "Announce..." is selected for it in the Navigation settings
-		//Keep both "Show..." and "Announce..." Nav settings in sync when user changes what to display in the Waypoint list, as follows:
 		if (type == ALARMS) {
 			settings.SHOW_TRAFFIC_WARNINGS.setModeValue(appMode, enable);
-			settings.SPEAK_TRAFFIC_WARNINGS.setModeValue(appMode, enable);
 			settings.SHOW_PEDESTRIAN.setModeValue(appMode, enable);
-			settings.SPEAK_PEDESTRIAN.setModeValue(appMode, enable);
 			settings.SHOW_TUNNELS.setModeValue(appMode, enable);
-			settings.SPEAK_TUNNELS.setModeValue(appMode, enable);
-			//But do not implicitly change speed_cam settings here because of legal restrictions in some countries, so Nav settings must prevail
+			// Do not implicitly change speed_cam settings here because of
+			// legal restrictions in some countries, so Nav settings must prevail
 		} else if (type == POI) {
 			settings.SHOW_NEARBY_POI.setModeValue(appMode, enable);
-			settings.ANNOUNCE_NEARBY_POI.setModeValue(appMode, enable);
 		} else if (type == FAVORITES) {
 			settings.SHOW_NEARBY_FAVORITES.setModeValue(appMode, enable);
-			settings.ANNOUNCE_NEARBY_FAVORITES.setModeValue(appMode, enable);
 		} else if (type == WAYPOINTS) {
 			settings.SHOW_WPT.set(enable);
-			settings.ANNOUNCE_WPT.set(enable);
 		}
-		rejectPointsCalculation = false;
 		recalculatePoints(route, type, locationPoints);
-	}
-
-	public void recalculatePointsAsync(int type, @Nullable OnCompleteCallback callback) {
-		runAsync(() -> recalculatePoints(route, type, locationPoints), callback);
 	}
 
 
@@ -321,11 +306,7 @@ public class WaypointHelper {
 	}
 
 	public boolean isTypeVisible(int waypointType) {
-		boolean vis = app.getAppCustomization().isWaypointGroupVisible(waypointType, route);
-		if (!vis) {
-			return false;
-		}
-		return vis;
+		return app.getAppCustomization().isWaypointGroupVisible(waypointType, route);
 	}
 
 	public boolean isTypeEnabled(int type) {
@@ -598,8 +579,12 @@ public class WaypointHelper {
 		setLocationPoints(locationPoints, route);
 	}
 
+	public void recalculatePointsAsync(int type, @Nullable OnCompleteCallback callback) {
+		runAsync(() -> recalculatePoints(route, type, locationPoints), callback);
+	}
+
 	protected void recalculatePoints(RouteCalculationResult route, int type, List<List<LocationPointWrapper>> locationPoints) {
-		if (route == null || route.isEmpty() || rejectPointsCalculation) {
+		if (route == null || route.isEmpty()) {
 			return;
 		}
 		boolean all = type == -1;
@@ -611,9 +596,9 @@ public class WaypointHelper {
 			appMode = route.getAppMode();
 		}
 		boolean showPOI = settings.SHOW_NEARBY_POI.getModeValue(appMode);
+		boolean announcePOI = settings.ANNOUNCE_NEARBY_POI.getModeValue(appMode);
 		boolean showFavorites = settings.SHOW_NEARBY_FAVORITES.getModeValue(appMode);
 		boolean announceFavorites = settings.ANNOUNCE_NEARBY_FAVORITES.getModeValue(appMode);
-		boolean announcePOI = settings.ANNOUNCE_NEARBY_POI.getModeValue(appMode);
 
 		if ((type == FAVORITES || all)) {
 			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);

@@ -482,7 +482,7 @@
     <string name="light_theme">ธีมสว่าง</string>
     <string name="lang_tl">ภาษาตากาล็อค</string>
     <string name="lang_la">ภาษาละติน</string>
-    <string name="route_roundabout_short">ออกวงเวียนทางออกที่ %1$d แล้วไปยัง</string>
+    <string name="route_roundabout_short">ออกวงเวียนทางออกที่ %1$d แล้วไปต่อ</string>
     <string name="shared_string_recorded">บันทึกแล้ว</string>
     <string name="shared_string_memory_used_mb_desc">ใช้ไป %1$s เมกะไบต์</string>
     <string name="shared_string_visible">มองเห็นได้</string>
@@ -693,7 +693,7 @@
     <string name="obd_fuel_consumption_rate_l_km_desc">แสดงอัตราการใช้พลังงานของยานพาหนะจากการคำนวณ (หน่วย ล./100 กม.)</string>
     <string name="screen_is_unlocked">หน้าจอสัมผัสปลดล็อกแล้ว</string>
     <string name="quick_action_verb_navigate">นำทาง</string>
-    <string name="shared_string_volume">ความดังเสียง</string>
+    <string name="shared_string_volume">ระดับเสียง</string>
     <string name="obd_air_intake_temp_desc">แสดงอุณหภูมิของอากาศที่เข้ามายังท่อรวมไอดีของเครื่องยนต์</string>
     <string name="obd_fuel_type_bifuel_cng">เชื้อเพลิง 2 ชนิดที่กำลังใช้แก๊ส CNG</string>
     <string name="route_to">จุดหมาย :</string>
@@ -781,4 +781,26 @@
     <string name="auto_25_chars_route_tl_kr">เลี้ยวซ้าย แล้วให้ชิดขวา</string>
     <string name="route_guidance_desc">ให้คำแนะนำเส้นทางแบบเรียลไทม์ รวมถึงระยะทางจนถึงทางเลี้ยวถัดไป ชื่อถนน ชื่อถนนปัจจุบัน และข้อมูลเลน โดยที่วิดเจ็ตจะเปิดใช้งานระหว่างการนำทาง</string>
     <string name="release_4_1">• เพิ่มการสนับสนุนเบื้องต้นสำหรับ Android Auto\n\n• อัปเดตอินเทอร์เฟซผู้ใช้สำหรับการค้นหาพิกัด UTM\n\n• ตัวกรอง GPS สำหรับเส้นทาง GPX\n\n• วิดเจ็ตระดับความสูง (Pro)\n\n• รายการโปรด: เพิ่มความสามารถในการดูไอคอนที่ใช้ล่าสุด\n\n• การวางแผนเส้นทาง: จะใช้โปรไฟล์ที่เลือกหลังจากเปิดใช้งาน\n\n• แก้ไขเลเยอร์ Mapillary โดยปลั๊กอินถูกปิดใช้งานตามค่าเริ่มต้น\n\n• เพิ่มหน้าจอสำหรับจัดการประวัติทั้งหมดในแอป\n\n• ทิศทางแผนที่จะไม่รีเซ็ตหลังจากรีสตาร์ทแอป\n\n• ปรับปรุงการเรนเดอร์เครื่องหมายความสูง SRTM\n\n• แก้ไขคำบรรยายแผนที่ภาษาอาหรับ\n\n• แก้ไขปัญหาเส้นทางที่แตกต่างกัน</string>
+    <string name="export_to_file">ส่งออกเป็นไฟล์</string>
+    <string name="import_from_file">นำเข้าจากไฟล์</string>
+    <string name="help_article_personal_import_export_name">นำเข้า / ส่งออก</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="travel_route_types">ประเภทเส้นทาง</string>
+    <string name="poi_routes">เส้นทาง</string>
+    <string name="route_kl">ชิดซ้ายและไปต่อ</string>
+    <string name="weather_wind_kilimeters_per_hour">กิโลเมตรต่อชั่วโมง</string>
+    <string name="route_tshl">เลี้ยวซ้ายหักศอกและไปต่อ</string>
+    <string name="route_tl">เลี้ยวซ้ายและไปต่อ</string>
+    <string name="route_tsll">เบี่ยงซ้ายและไปต่อ</string>
+    <string name="map_widget_route_information">ข้อมูลเส้นทาง</string>
+    <string name="route_kr">ชิดขวาและไปต่อ</string>
+    <string name="turn_on_public_transport_description">เปิดเพื่อดูเส้นทางขนส่งสาธารณะบนแผนที่</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">เส้นทางรถไฟ</string>
+    <string name="shared_string_show">แสดงผลบนแผนที่</string>
+    <string name="rendering_attr_transportStops_name">ป้ายหยุด หรือสถานี</string>
+    <string name="rendering_attr_trolleybusRoutes_name">เส้นทางรถโดยสารประจำทางไฟฟ้า</string>
+    <string name="rendering_attr_subwayMode_name">เส้นทางรถไฟฟ้าใต้ดิน</string>
+    <string name="rendering_attr_tramRoutes_name">เส้นทางรถราง</string>
+    <string name="rendering_attr_busRoutes_name">เส้นทางรถประจำทาง</string>
+    <string name="favourites">สถานที่ที่ชื่นชอบ</string>
 </resources>

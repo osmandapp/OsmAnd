@@ -54,6 +54,12 @@ public class RegisterUserCommand extends BackupCommand {
 		}
 		String deviceId = getApp().getUserAndroidId();
 		params.put("deviceid", deviceId);
+		String userId = getApp().getSettings().BILLING_USER_ID.get();
+		String userToken = getApp().getSettings().BILLING_USER_TOKEN.get();
+		if (!Algorithms.isEmpty(userId) && !Algorithms.isEmpty(userToken)) {
+			params.put("userId", userId);
+			params.put("userToken", userToken);
+		}
 		OperationLog operationLog = createOperationLog("registerUser");
 		AndroidNetworkUtils.sendRequest(getApp(), USER_REGISTER_URL, params, "Register user", false, true, (resultJson, error, resultCode) -> {
 			int status;

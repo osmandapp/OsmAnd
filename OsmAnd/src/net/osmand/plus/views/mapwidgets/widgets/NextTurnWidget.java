@@ -16,12 +16,14 @@ import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 
 public class NextTurnWidget extends NextTurnBaseWidget {
 
 	private final NextDirectionInfo nextDirectionInfo = new NextDirectionInfo();
 
-	public NextTurnWidget(@NonNull MapActivity mapActivity, @Nullable String customId, boolean horizontalMini, @Nullable WidgetsPanel panel) {
+	public NextTurnWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
+			@Nullable WidgetsPanel panel, boolean horizontalMini) {
 		super(mapActivity, customId, horizontalMini ? SMALL_NEXT_TURN : NEXT_TURN, panel, horizontalMini);
 		setOnClickListener(getOnClickListener());
 	}
@@ -76,8 +78,11 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 				setDeviatePath((int) routingHelper.getRouteDeviation());
 			} else {
 				NextDirectionInfo info = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
-				if (info != null && info.distanceTo > 0 && info.directionInfo != null) {
+				if (info != null && info.distanceTo >= 0 && info.directionInfo != null) {
 					streetName = TripUtils.getStreetName(app, info, info.directionInfo);
+					if (verticalWidget && Algorithms.isEmpty(streetName.text)) {
+						streetName.text = info.directionInfo.getDescriptionRoutePart();
+					}
 					turnType = info.directionInfo.getTurnType();
 					nextTurnDistance = info.distanceTo;
 					turnImminent = info.imminent;

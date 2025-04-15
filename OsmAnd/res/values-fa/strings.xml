@@ -1277,7 +1277,6 @@
     <string name="rendering_attr_buildings15zoom_name">ساختمان‌ها در زوم ۱۵</string>
     <string name="rendering_attr_moreDetailed_name">جزئیات بیشتر</string>
     <string name="rendering_attr_lessDetailed_name">جزئیات کمتر</string>
-    <string name="rendering_attr_hideAccess_name">محدودیت‌های دسترسی</string>
     <string name="rendering_attr_showAccess_name">محدودیت‌های دسترسی و عوارضی‌ها</string>
     <string name="rendering_attr_showSurfaceGrade_name">کیفیت راه</string>
     <string name="rendering_attr_showSurfaces_name">سطح راه</string>
@@ -1783,7 +1782,6 @@
     <string name="rendering_attr_contourWidth_name">ضخامت منحنی میزان</string>
     <string name="routing_attr_allow_motorway_name">استفاده از آزادراه</string>
     <string name="routing_attr_allow_motorway_description">مسیردهی از آزادراه مجاز می‌شود.</string>
-    <string name="wiki_around">مقالات ویکی‌پدیا دربارهٔ این حوالی</string>
     <string name="search_map_hint">شهر یا منطقه</string>
     <string name="upload_poi">بارگذاری POI</string>
     <string name="route_calculation">محاسبهٔ مسیر</string>
@@ -2835,7 +2833,7 @@
     <string name="rendering_attr_highway_class_motorway_name">آزادراه</string>
     <string name="rendering_attr_highway_class_street_name">خیابان</string>
     <string name="public_transport_warning_descr_blog">در وبلاگ ما دربارهٔ مسیریابی OsmAnd بیشتر بخوانید.</string>
-    <string name="public_transport_warning_title">ناوبری حمل‌ونقل عمومی هم‌اکنون آزمایش بتا را سپری می‌کند و بعید نیست که خطاها و نقایصی داشته باشد.</string>
+    <string name="public_transport_warning_title">ناوبری حمل‌ونقل عمومی هم‌اکنون آزمایش بتا را سپری می‌کند و شاید خطا یا ایرادهایی داشته باشد.</string>
     <string name="add_intermediate">افزودن نقطهٔ میانی</string>
     <string name="rendering_attr_surface_sand_name">ماسه</string>
     <string name="rendering_attr_surface_ground_name">زمین</string>
@@ -3775,9 +3773,6 @@
     <string name="gpx_upload_identifiable_visibility_descr">«قابل‌شناسایی» یا Identifiable به این معنی است که رد به‌صورت عمومی در فهرست ردهای جی‌پی‌اس شما و لیست عمومی ردهای جی‌پی‌اس نمایش داده می‌شود، یعنی سایر کاربران می‌توانند رد خام را بارگیری کنند و بدانند که مربوط به نام کاربری شماست. دادهٔ نقاط رد همراه با مهر زمان از طریق API به‌طور عمومی در دسترس است و به صفحهٔ ردهای شما ارجاع می‌دهد.</string>
     <string name="gpx_upload_trackable_visibility_descr">«قابل‌ردیابی» یا Trackable به این معنی است که رد در هیچ فهرست عمومی‌ای نشان داده نمی‌شود اما نقاط پردازش‌شدهٔ رد + مهر زمان نقاط (که مستقیماً به نام کاربری شما ارجاع نمی‌دهد) از طریق API جی‌پی‌اس‌های عمومی قابل‌بارگیری است.</string>
     <string name="shared_string_add_photo">افزودن عکس</string>
-    <string name="register_on_openplacereviews_desc">عکس‌ها به‌واسطهٔ پروژهٔ داده‌باز OpenPlaceReviews.org ارائه می‌شود. برای بارگذاری عکس‌های خود لازم است در این وبگاه ثبت نام کنید.</string>
-    <string name="register_on_openplacereviews">ثبت نام در
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">ساخت حساب جدید</string>
     <string name="register_opr_have_account">حساب کاربری دارم</string>
     <string name="shared_string_search_history">تاریخچهٔ جست‌وجو</string>
@@ -3786,13 +3781,8 @@
     <string name="select_groups_for_import">گروه‌هایی را که درون‌ریزی خواهند شد را انتخاب کنید.</string>
     <string name="select_items_for_import">مواردی که درون‌برد خواهند شد را انتخاب کنید.</string>
     <string name="add_to_mapillary">افزودن به مپیلاری</string>
-    <string name="add_to_opr">افزودن به OpenPlaceReviews</string>
     <string name="use_dev_url_descr">برای بارگذاری آزمایشی یادداشت / نقطهٔ توجه / GPX، به‌جای openstreetmep.org از dev.openstreetmap.org استفاده کنید.</string>
     <string name="use_dev_url">استفاده از dev.openstreetmap.org</string>
-    <string name="add_photos_descr">برنامه OsmAnd عکس‌ها را از چند منبع نشان می‌دهد:
-\nاز OpenPlaceReview برای عکس‌های نقاط توجه؛
-\nاز مپیلاری برای تصویر سطح خیابان؛
-\nاز وب و ویکی‌پدیا برای عکس‌های نقاط توجه متناسب با داده‌های اوپن‌استریت‌مپ.</string>
     <string name="app_mode_light_aircraft">هواپیمای سبک</string>
     <string name="plan_route_split_before">تقطیع از اینجا به قبل</string>
     <string name="plan_route_split_after">تقطیع از این جا به بعد</string>
@@ -3875,12 +3865,6 @@
     <string name="uploaded_count">%1$d از %2$d بارگذاری شد</string>
     <string name="toast_select_edits_for_upload">ویرایش‌ها را برای بارگذاری انتخاب کنید</string>
     <string name="hillshade_slope_contour_lines">سایه‌روشن / شیب / منحنی‌های میزان</string>
-    <string name="open_place_reviews_plugin_description">برای مکان‌های عمومی مانند رستوران‌ها، هتل‌ها، موزه‌ها و نقاط بین‌راهی نگاره بفرستید، دیدگاه بنویسید و پیوند ثبت کنید؛ همگی این‌ها به‌عنوان دادهٔ باز ثبت خواهد شد. http://openplacereviews.org/data
-\n
-\nاینجا بیشتر بخوانید: http://openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">استفاده از test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">ورود به OpenPlaceReviews</string>
     <string name="activity_type_water_name">آب</string>
     <string name="activity_type_winter_name">زمستان</string>
     <string name="activity_type_snowmobile_name">برف‌رو</string>
@@ -3906,15 +3890,7 @@
     <string name="shared_string_subtype">زیرنوع</string>
     <string name="use_native_pt">پیاده‌سازی Native حمل‌ونقل عمومی</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="release_3_9">• گزینه‌ای برای برون‌برد و درون‌برد همهٔ داده‌ها شامل تنظیمات، منابع و مکان‌های من اضافه شد.
-\n
-\n • طراحی مسیر: برای پاره‌هایی از رد که مسیر دارند نمودار رسم می‌شود. امکان ساخت و ویرایش چندین پارهٔ رد اضافه شد.
-\n
-\n • شیوهٔ احراز هویت OAuth برای OpenStreetMap اضافه شد، رابط کاربری کادرهای OSM بهبود یافت.
-\n
-\n • پشتیبانی از رنگ‌های دلخواه برای علاقه‌مندی‌ها (favorites) و راه‌نشان‌های رد (track waypoints)
-\n
-\n</string>
+    <string name="release_3_9">• گزینه‌ای برای برون‌برد و درون‌برد همهٔ داده‌ها شامل تنظیمات، منابع و مکان‌های من اضافه شد. \n \n • طراحی مسیر: برای پاره‌هایی از رد که مسیر دارند نمودار رسم می‌شود. امکان ساخت و ویرایش چندین پارهٔ رد اضافه شد. \n \n • شیوهٔ احراز هویت OAuth برای OpenStreetMap اضافه شد، رابط کاربری کادرهای OSM بهبود یافت. \n \n • پشتیبانی از رنگ‌های دلخواه برای علاقه‌مندی‌ها (favorites) و راه‌نشان‌های رد (track waypoints)</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="routing_attr_prefer_hiking_routes_description">ترجیح مسیرهای پیاده‌گردی</string>
     <string name="routing_attr_prefer_hiking_routes_name">ترجیح مسیرهای پیاده‌گردی</string>
@@ -4310,7 +4286,7 @@
     <string name="weather_wind_mph">مایل در ساعت</string>
     <string name="shared_string_mode">حالت</string>
     <string name="fold_unfold">تا کردن/باز کردن</string>
-    <string name="map_widget_trip_recording_distance">فاصله</string>
+    <string name="map_widget_distance">فاصله</string>
     <string name="shared_string_large">بزرگ</string>
     <string name="shared_string_normal">عادی</string>
     <string name="shared_string_widget">ویجت</string>
@@ -4417,4 +4393,12 @@
     <string name="shared_string_automatically">خودکار</string>
     <string name="ask_every_time">همیشه بپرس</string>
     <string name="quick_action_routes_summary">کلیدی برای نمایش یا پنهان‌سازی %1$s روی نقشه.</string>
+    <string name="maps_and_resources">نقشه‌ها و منابع</string>
+    <string name="map_settings_weather_air_pressure">فشار هوا</string>
+    <string name="map_settings_weather_precip">بارش</string>
+    <string name="empty_screen_weather_precipitation_layer">برای نمایش لایه بارش در نقشه روشن کنید.</string>
+    <string name="quick_action_precipitation_layer">یک کلید برای نمایش یا پنهان کردن لایه بارش در نقشه.</string>
+    <string name="precipitation_widget_desc">نمایش بارش کنونی در مرکز نقشه.</string>
+    <string name="send_uuid_preference_desc">از یک UUID تصادفی برای بارگیری نقشه های آفلاین از سرورهای OSMAND برای نظارت بر به‌کارگیری عادلانه منابع سرور ، پیش‌بینی الگوهای ترافیک و تولید گزارش نقشه ماهانه ناشناس استفاده می شود.</string>
+    <string name="precipitation_layer">لایه بارش</string>
 </resources>

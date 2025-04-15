@@ -64,7 +64,7 @@ public class TilesPreviewDrawer {
 
 
 	private void drawTilePreview(@NonNull Canvas canvas, @NonNull LatLon center, int zoom, @NonNull DrawSettings drawSettings) {
-		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
+		RotatedTileBox tileBox = mapView.getRotatedTileBox();
 		tileBox.setLatLonCenter(center.getLatitude(), center.getLongitude());
 		tileBox.setZoom(zoom);
 		tileBox.setPixelDimensions(previewSize, previewSize);

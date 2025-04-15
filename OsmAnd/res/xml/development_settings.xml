@@ -47,13 +47,6 @@
 		android:title="@string/simulate_your_location"
 		tools:summary="@string/simulate_your_location_stop_descr" />
 
-	<Preference
-		android:key="location_interpolation_percent"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:title="@string/location_interpolation_percent"
-		tools:summary="50 %" />
-
 	<PreferenceCategory
 		android:key="debugging_and_development"
 		android:layout="@layout/preference_category_with_descr"
@@ -166,6 +159,17 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/allow_display_on_top" />
+
+	<PreferenceCategory
+		android:key="aistracker"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/plugin_ais_tracker_name" />
+
+	<Preference
+		android:key="aistracker_simulation"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/ais_load_data" />
 
 	<PreferenceCategory
 		android:key="info"

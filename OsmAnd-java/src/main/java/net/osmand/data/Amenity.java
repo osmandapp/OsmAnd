@@ -13,8 +13,11 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.shared.wiki.WikiHelper;
+import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.wiki.WikiCoreHelper;
 
 import org.json.JSONObject;
 
@@ -30,6 +33,7 @@ public class Amenity extends MapObject {
 	public static final String PHONE = "phone";
 	public static final String MOBILE = "mobile";
 	public static final String DESCRIPTION = "description";
+	public static final String SHORT_DESCRIPTION = "short_description";
 	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
 	public static final String SERVICE_TIMES = "service_times";
@@ -52,9 +56,15 @@ public class Amenity extends MapObject {
 	public static final String IS_AGGR_PART = "is_aggr_part";
 	public static final String CONTENT_JSON = "content_json";
 	public static final String ROUTE_ID = "route_id";
-	public static final String ROUTE_ID_OSM_PREFIX = "OSM";
+	public static final String ROUTE_ID_OSM_PREFIX_LEGACY = "OSM"; // non-indexed
+	public static final String ROUTE_ID_OSM_PREFIX = "O"; // indexed in POI-section
 	public static final String ROUTE_SOURCE = "route_source";
 	public static final String ROUTE_NAME = "route_name";
+	public static final String WIKI_PHOTO = "wiki_photo";
+	public static final String WIKI_CATEGORY = "wiki_category";
+	public static final String TRAVEL_TOPIC = "travel_topic";
+	public static final String TRAVEL_ELO = "travel_elo";
+	public static final String OSMAND_POI_KEY = "osmand_poi_key";
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";
@@ -64,7 +74,10 @@ public class Amenity extends MapObject {
 	public static final String SEPARATOR = ";";
 	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
+	public static final String ROUTE_MEMBERS_IDS = "route_members_ids";
+	public static final String ROUTE_BBOX_RADIUS = "route_bbox_radius";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
+	public static final int DEFAULT_ELO = 900;
 
 	private String subType;
 	private PoiCategory type;
@@ -79,6 +92,12 @@ public class Amenity extends MapObject {
 	private int order;
 	private Map<Integer, List<TagValuePair>> tagGroups;
 	private String regionName;
+
+	private String wikiIconUrl;
+	private String wikiImageStubUrl;
+	private int travelElo = 0;
+
+	private Set<String> contentLocales;
 
 	public int getOrder() {
 		return order;
@@ -115,7 +134,7 @@ public class Amenity extends MapObject {
 		return regionName;
 	}
 
-	public static class AmenityRoutePoint {
+    public static class AmenityRoutePoint {
 		public double deviateDistance;
 		public boolean deviationDirectionRight;
 		public Location pointA;
@@ -257,12 +276,13 @@ public class Amenity extends MapObject {
 		} else if (isNameLangTag(tag)) {
 			setName(tag.substring("name:".length()), value);
 		} else {
-			if (this.additionalInfo == null) {
-				this.additionalInfo = new LinkedHashMap<String, String>();
+			if (additionalInfo == null) {
+				additionalInfo = new LinkedHashMap<String, String>();
 			}
-			this.additionalInfo.put(tag, value);
+			additionalInfo.put(tag, value);
+
 			if (OPENING_HOURS.equals(tag)) {
-				this.openingHours = unzipContent(value);
+				openingHours = unzipContent(value);
 			}
 		}
 	}
@@ -287,9 +307,9 @@ public class Amenity extends MapObject {
 					if (pt2 != null) {
 						String cat = pt2.getCategory().getKeyName();
 						if (poi_type.containsKey(cat)) {
-							val = poi_type.get(cat) + ";" + val;
+							key = poi_type.get(cat) + ";" + key;
 						}
-						poi_type.put(pt2.getCategory().getKeyName(), val);
+						poi_type.put(pt2.getCategory().getKeyName(), key);
 					} else {
 						text.put(key, val);
 					}
@@ -392,10 +412,21 @@ public class Amenity extends MapObject {
 	}
 
 	public Set<String> getSupportedContentLocales() {
-		Set<String> supported = new TreeSet<>();
-		supported.addAll(getNames("content", "en"));
-		supported.addAll(getNames("description", "en"));
-		return supported;
+		if (contentLocales != null) {
+			return contentLocales;
+		} else {
+			Set<String> supported = new TreeSet<>();
+			supported.addAll(getNames(CONTENT, "en"));
+			supported.addAll(getNames(DESCRIPTION, "en"));
+			return supported;
+		}
+	}
+
+	public void updateContentLocales(Set<String> locales) {
+		if (contentLocales == null) {
+			contentLocales = new TreeSet<>();
+		}
+		contentLocales.addAll(locales);
 	}
 
 	public List<String> getNames(String tag, String defTag) {
@@ -457,15 +488,97 @@ public class Amenity extends MapObject {
 		return getAdditionalInfo(ROUTE_ID);
 	}
 
+	public String getWikiPhoto() {
+		return getAdditionalInfo(WIKI_PHOTO);
+	}
+
+	public void setWikiPhoto(String wikiPhoto) {
+		setAdditionalInfo(WIKI_PHOTO, wikiPhoto);
+	}
+
+	public String getWikiCategory() {
+		return getAdditionalInfo(WIKI_CATEGORY);
+	}
+
+	public void setWikiCategory(String wikiCategory) {
+		setAdditionalInfo(WIKI_CATEGORY, wikiCategory);
+	}
+
+	public String getTravelTopic() {
+		return getAdditionalInfo(TRAVEL_TOPIC);
+	}
+
+	public void setTravelTopic(String travelTopic) {
+		setAdditionalInfo(TRAVEL_TOPIC, travelTopic);
+	}
+
+	public String getTravelElo() {
+		return getAdditionalInfo(TRAVEL_ELO);
+	}
+
+	public int getTravelEloNumber() {
+		if (travelElo > 0) {
+			return travelElo;
+		}
+		String travelEloStr = getTravelElo();
+		try {
+			travelElo = Integer.parseInt(travelEloStr);
+		} catch (NumberFormatException e) {
+			travelElo = DEFAULT_ELO;
+		}
+		return travelElo;
+	}
+
+	public void setTravelEloNumber(int elo) {
+		travelElo = elo;
+	}
+
+	public String getWikiIconUrl() {
+		if (wikiIconUrl == null) {
+			obtainWikiUrls();
+		}
+		return wikiIconUrl;
+	}
+
+	public void setWikiIconUrl(String wikiIconUrl) {
+		this.wikiIconUrl = wikiIconUrl;
+	}
+
+	public String getWikiImageStubUrl() {
+		if (wikiImageStubUrl == null) {
+			obtainWikiUrls();
+		}
+		return wikiImageStubUrl;
+	}
+
+	public void setWikiImageStubUrl(String wikiImageStubUrl) {
+		this.wikiImageStubUrl = wikiImageStubUrl;
+	}
+
+	public String getOsmandPoiKey() {
+		return getAdditionalInfo(OSMAND_POI_KEY);
+	}
+
+	private void obtainWikiUrls() {
+		String wikiPhoto = getWikiPhoto();
+		if (!Algorithms.isEmpty(wikiPhoto)) {
+			WikiImage wikiIMage = WikiHelper.INSTANCE.getImageData(wikiPhoto);
+			setWikiIconUrl(wikiIMage.getImageIconUrl());
+			setWikiImageStubUrl(wikiIMage.getImageStubUrl());
+		}
+	}
+
 	public boolean hasOsmRouteId() {
 		String routeId = getRouteId();
-		return routeId != null && routeId.startsWith(ROUTE_ID_OSM_PREFIX);
+		return routeId != null &&
+				(routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX_LEGACY)
+						|| routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX));
 	}
 
 	public String getGpxFileName(String lang) {
 		final String gpxFileName = lang != null ? getName(lang) : getEnName(true);
 		if (!Algorithms.isEmpty(gpxFileName)) {
-			return gpxFileName;
+			return Algorithms.sanitizeFileName(gpxFileName);
 		}
 		if (!Algorithms.isEmpty(getRouteId())) {
 			return getRouteId();
@@ -579,11 +692,21 @@ public class Amenity extends MapObject {
 	}
 
 	public boolean isRouteTrack() {
-		return subType != null && (subType.equals(ROUTE_TRACK) || subType.startsWith(ROUTES_PREFIX));
+		if (subType == null) {
+			return false;
+		} else {
+			boolean hasRouteTrackSubtype = subType.startsWith(ROUTES_PREFIX) || subType.equals(ROUTE_TRACK);
+			boolean hasGeometry = additionalInfo != null && additionalInfo.containsKey(ROUTE_BBOX_RADIUS);
+			return hasRouteTrackSubtype && hasGeometry && !Algorithms.isEmpty(getRouteId());
+		}
 	}
 
 	public boolean isRoutePoint() {
 		return subType != null && (subType.equals(ROUTE_TRACK_POINT) || subType.equals(ROUTE_ARTICLE_POINT));
+	}
+
+	public boolean isSuperRoute() {
+		return additionalInfo != null && additionalInfo.containsKey(ROUTE_MEMBERS_IDS);
 	}
 
 	public JSONObject toJSON() {
@@ -603,32 +726,31 @@ public class Amenity extends MapObject {
 	}
 
 	public static Amenity parseJSON(JSONObject json) {
-		Amenity a = new Amenity();
-		MapObject.parseJSON(json, a);
+		Amenity amenity = new Amenity();
+		MapObject.parseJSON(json, amenity);
 
 		if (json.has("subType")) {
-			a.subType = json.getString("subType");
+			amenity.subType = json.getString("subType");
 		}
 		if (json.has("type")) {
 			String categoryName = json.getString("type");
-			a.setType(MapPoiTypes.getDefault().getPoiCategoryByName(categoryName));
+			amenity.setType(MapPoiTypes.getDefault().getPoiCategoryByName(categoryName));
 		} else {
-			a.setType(MapPoiTypes.getDefault().getOtherPoiCategory());
+			amenity.setType(MapPoiTypes.getDefault().getOtherPoiCategory());
 		}
 		if (json.has("openingHours")) {
-			a.openingHours = json.getString("openingHours");
+			amenity.openingHours = json.getString("openingHours");
 		}
 		if (json.has("additionalInfo")) {
 			JSONObject namesObj = json.getJSONObject("additionalInfo");
-			a.additionalInfo = new HashMap<>();
 			Iterator<String> iterator = namesObj.keys();
 			while (iterator.hasNext()) {
 				String key = iterator.next();
 				String value = namesObj.getString(key);
-				a.additionalInfo.put(key, value);
+				amenity.setAdditionalInfo(key, value);
 			}
 		}
-		return a;
+		return amenity;
 	}
 
 	public Map<String, String> getAmenityExtensions() {

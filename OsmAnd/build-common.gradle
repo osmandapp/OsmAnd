@@ -3,8 +3,8 @@ tasks.register('printc') {
 }
 
 android {
-    compileSdk 34
-    buildToolsVersion = "34.0.0"
+    compileSdk 35
+    buildToolsVersion = "35.0.0"
     // compileNdkVersion "android-ndk-r17b"
     namespace = "net.osmand.plus"
     defaultConfig {
@@ -198,13 +198,6 @@ tasks.register('collectFonts', Copy) {
 	include "*.ttf"
 }
 
-tasks.register('collectHelpContentsStyle', Copy) {
-	from("../../help/website/help/") {
-		include "style.css"
-	}
-	into "assets"
-}
-
 tasks.register('copyBundledAssets', Copy) {
 	from("../../resources/bundled_assets.json") {
 		include "bundled_assets.json"
@@ -292,7 +285,6 @@ tasks.register('copy3DModels', Copy) {
 tasks.register('collectExternalResources') {
 	dependsOn collectVoiceAssets,
 			collectFonts,
-			collectHelpContentsStyle,
 			copyMapShaderIcons,
 			copyMapPOIIcons,
 			copyLargePOIIcons,
@@ -404,6 +396,9 @@ dependencies {
 	// turn off for now
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'com.squareup.picasso:picasso:2.71828'
+	//implementation("io.coil-kt.coil3:coil-core:3.1.0")
+	//implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+
 	implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
 	implementation "net.osmand:antpluginlib:3.8.0@aar"
 	// JS core
@@ -444,4 +439,5 @@ dependencies {
 	androidTestImplementation ('androidx.test.espresso:espresso-contrib:3.5.1') {
 		exclude module: "protobuf-lite"
 	}
+	implementation 'net.sf.marineapi:marineapi:0.12.0'
 }

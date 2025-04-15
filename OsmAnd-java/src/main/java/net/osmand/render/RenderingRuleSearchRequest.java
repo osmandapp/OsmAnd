@@ -161,16 +161,6 @@ public class RenderingRuleSearchRequest {
 		return searchResult;
 	}
 
-	public boolean searchRenderingAssociation(String association) {
-		searchResult = false;
-		RenderingRule rule = storage.getRenderingAssociationRule(association);
-		if (rule == null) {
-			return false;
-		}
-		searchResult = visitRule(rule, true);
-		return searchResult;
-	}
-
 	public boolean search(int state) {
 		return search(state, true);
 	}

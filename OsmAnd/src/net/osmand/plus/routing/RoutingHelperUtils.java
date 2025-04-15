@@ -7,7 +7,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
@@ -96,8 +96,8 @@ public class RoutingHelperUtils {
 		for (Location l : list) {
 			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
 		}
-		List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-		for (TargetPointsHelper.TargetPoint l : targetPoints) {
+		List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+		for (TargetPoint l : targetPoints) {
 			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
 		}
 
@@ -278,11 +278,11 @@ public class RoutingHelperUtils {
 
 	@NonNull
 	public static List<Location> predictLocations(@NonNull Location previousLocation, @NonNull Location currentLocation,
-	                                        double timeInSeconds, @NonNull RouteCalculationResult route) {
+	                                        double timeInSeconds, @NonNull RouteCalculationResult route, int interpolationPercent) {
 		float speedPrev = previousLocation.getSpeed();
 		float speedNew = currentLocation.getSpeed();
 		double avgSpeed = (speedPrev + speedNew) / 2.0;
-		double remainingDistance = avgSpeed * timeInSeconds * 0.8;
+		double remainingDistance = avgSpeed * timeInSeconds * (interpolationPercent / 100.0);
 
 		List<Location> predictedLocations = new ArrayList<>();
 		int currentRoute = route.getCurrentRouteForLocation(currentLocation) + 1;

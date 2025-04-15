@@ -33,7 +33,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -526,7 +526,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		OsmandSettings settings = app.getSettings();
 		if (!settings.isInternetConnectionAvailable(true)) {
-			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.internet_not_available);
 			return;
 		}
 		AsyncTask<Void, Void, List<TileSourceTemplate>> t = new AsyncTask<Void, Void, List<TileSourceTemplate>>() {
@@ -542,7 +542,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				}
 				OsmandApplication app = (OsmandApplication) activity.getApplication();
 				if (downloaded == null || downloaded.isEmpty()) {
-					Toast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
+					app.showShortToastMessage(R.string.shared_string_io_error);
 					return;
 				}
 				String[] names = new String[downloaded.size()];
@@ -586,7 +586,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						int which = (int) v.getTag();
 						selected[which] = !selected[which];
 						if (entriesMap.containsKey(downloaded.get(which).getName()) && selected[which]) {
-							Toast.makeText(_activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+							app.showShortToastMessage(R.string.tile_source_already_installed);
 						}
 					}
 				});

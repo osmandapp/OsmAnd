@@ -1202,7 +1202,6 @@
     <string name="rendering_attr_buildings15zoom_name">Будынкі на маштабе 15</string>
     <string name="rendering_attr_moreDetailed_name">Больш падрабязна</string>
     <string name="rendering_attr_lessDetailed_name">Менш падрабязна</string>
-    <string name="rendering_attr_hideAccess_name">Абмежаванні доступу</string>
     <string name="rendering_attr_showAccess_name">Паказаць абмежаванні доступу і аплату</string>
     <string name="rendering_attr_showSurfaceGrade_name">Адлюстроўваць якасць дарог</string>
     <string name="rendering_attr_showSurfaces_name">Адлюстроўваць тып пакрыцця</string>
@@ -2051,7 +2050,6 @@
     <string name="route_roundabout_short">Збочце на %1$d з’ездзе</string>
     <string name="upload_poi">Запампаваць POI</string>
     <string name="search_map_hint">Горад ці краіна</string>
-    <string name="wiki_around">Блізкія артыкулы ў Вікіпедыі</string>
     <string name="rendering_value_fine_name">Вельмі тонкі</string>
     <string name="rendering_attr_contourColorScheme_description">Каляровая схема гарызанталяў</string>
     <string name="save_track_min_speed">Мінімальная хуткасць для запісу</string>
@@ -3812,9 +3810,6 @@
     <string name="osm_edit_comment_note">Каментаваць нататку OSM</string>
     <string name="osm_login_descr">Увайдзіце з дапамогай OAuth або імя карыстальніка і пароля для OSM.</string>
     <string name="shared_string_add_photo">Дадаць фотаздымак</string>
-    <string name="register_on_openplacereviews">Зарэгістравацца на
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Фотаздымкі падаюцца праектам з адкрытымі данымі OpenPlaceReviews.org. Каб запампаваць фотаздымкі, зарэгіструйцеся на іх сайце.</string>
     <string name="register_opr_create_new_account">Стварыць акаўнт</string>
     <string name="register_opr_have_account">У мяне ўжо ёсць акаўнт</string>
     <string name="shared_string_search_history">Гісторыя пошуку</string>
@@ -3831,13 +3826,8 @@
     <string name="select_groups_for_import">Абярыце групы, якія трэба імпартаваць.</string>
     <string name="select_items_for_import">Абярыце элементы, якія трэба імпартаваць.</string>
     <string name="add_to_mapillary">Дадаць да Mapillary</string>
-    <string name="add_to_opr">Дадаць да OpenPlaceReviews</string>
     <string name="use_dev_url_descr">Пераключыцца на выкарыстанне dev.openstreetmap.org замест openstreetmap.org для тэставання адпраўлення нататак OSM / POI / GPX.</string>
     <string name="use_dev_url">Выкарыстоўваць dev.openstreetmap.org</string>
-    <string name="add_photos_descr">OsmAnd паказвае фотаздымкі з некалькіх крыніц;
-\nOpenPlaceReviews - фотаздымкі POI;
-\nMapillary - выявы вуліц;
-\nWeb / Wikimedia - фотаздымкі POI паводле даных з OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Лёгкі самалёт</string>
     <string name="plan_route_split_before">Падзяліць да</string>
@@ -3929,12 +3919,6 @@
     <string name="uploaded_count">Адпраўлена %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Абярыце змены для адпраўлення</string>
     <string name="hillshade_slope_contour_lines">Рэльеф мясцовасці / Схілы / Контурныя лініі</string>
-    <string name="open_place_reviews_plugin_description">Рабіце ўнёскі у праект OpenPlaceReviews, напрыклад фатаграфіі, агляды або спасылкі на грамадскія месцы (рэстараны, гасцініцы або музеі).
-\n
-\nЗнайсці інструкцыі можна на нашым сайце %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Выкарыстаць test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Увайсці ў OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вада</string>
     <string name="activity_type_winter_name">Зіма</string>
     <string name="activity_type_snowmobile_name">Снегаход</string>
@@ -4055,7 +4039,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Ізабары</string>
     <string name="routing_attr_avoid_highway_name">Пазбягаць аўтамагісрталяў</string>
     <string name="routing_attr_avoid_highway_description">Пазбягаць аўтамагісрталяў</string>
-    <string name="map_widget_trip_recording_distance">Адлегласць</string>
+    <string name="map_widget_distance">Адлегласць</string>
     <string name="routing_attr_hazmat_category_name">Катэгорыя небяспечнасці</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без абмежаванняў)</string>
     <string name="routing_attr_avoid_fords_description">Пазбягаць бродаў</string>

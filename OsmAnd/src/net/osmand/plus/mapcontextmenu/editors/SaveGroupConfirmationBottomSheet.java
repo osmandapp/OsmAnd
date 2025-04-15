@@ -22,7 +22,7 @@ public class SaveGroupConfirmationBottomSheet extends MenuBottomSheetDialogFragm
 	public static final String POINTS_SIZE_KEY = "points_size_key";
 
 	private String editorTag;
-	private int pointsSize;
+	protected int pointsSize;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class SaveGroupConfirmationBottomSheet extends MenuBottomSheetDialogFragm
 		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
 	}
 
-	private boolean isWptEditor() {
+	protected boolean isWptEditor() {
 		return WptPtEditor.TAG.equals(editorTag);
 	}
 

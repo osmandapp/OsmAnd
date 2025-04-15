@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.backend.backup.exporttype.ExportType.MAP_SOURCES;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -65,7 +64,6 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
 	private ProgressDialog progress;
-	private ApplicationMode appMode;
 	private SettingsExportListener exportListener;
 
 	private int progressMax;
@@ -78,7 +76,6 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			globalExport = savedInstanceState.getBoolean(GLOBAL_EXPORT_KEY);
 			exportingStarted = savedInstanceState.getBoolean(EXPORTING_STARTED_KEY);
 			exportStartTime = savedInstanceState.getLong(EXPORT_START_TIME_KEY);
@@ -163,7 +160,6 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		outState.putBoolean(GLOBAL_EXPORT_KEY, globalExport);
 		outState.putBoolean(EXPORTING_STARTED_KEY, exportingStarted);
 		outState.putLong(EXPORT_START_TIME_KEY, exportStartTime);
-		outState.putString(APP_MODE_KEY, appMode.getStringKey());
 		if (progress != null) {
 			outState.putInt(PROGRESS_MAX_KEY, progress.getMax());
 			outState.putInt(PROGRESS_VALUE_KEY, progress.getProgress());
@@ -337,7 +333,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	                                @Nullable HashMap<ExportType, List<?>> selectedTypes, boolean globalExport) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ExportSettingsFragment fragment = new ExportSettingsFragment();
-			fragment.appMode = appMode;
+			fragment.setAppMode(appMode);
 			fragment.globalExport = globalExport;
 
 			if (!Algorithms.isEmpty(selectedTypes)) {

@@ -10,7 +10,6 @@
     <string name="poi_public_transport_platform_bus">बस थांबा</string>
     <string name="poi_public_transport_platform_tram">ट्राम थांबा</string>
     <string name="poi_office">कार्यालय</string>
-    <string name="poi_osmwiki">विकिपीडिया</string>
     <string name="poi_books">पुस्तकालय</string>
     <string name="poi_transportation">परिवहन</string>
     <string name="poi_road_obstacle">रस्त्यातील अडथळा</string>
@@ -230,5 +229,5 @@
     <string name="poi_water_purification">जल शुद्धीकरण</string>
     <string name="poi_zoo_type">प्राणी संग्रहालय</string>
     <string name="poi_library">वाचनालय</string>
-    <string name="poi_site_type_fortification">दुर्ग</string>
+    <string name="poi_archaeological_site_fortification">दुर्ग</string>
 </resources>

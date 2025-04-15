@@ -19,9 +19,12 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeListener;
 import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
-import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RulerWidget extends FrameLayout implements ViewChangeProvider {
 
@@ -39,8 +42,7 @@ public class RulerWidget extends FrameLayout implements ViewChangeProvider {
 	private double cacheRulerTileX;
 	private double cacheRulerTileY;
 
-	private SizeChangeListener sizeListener;
-	private VisibilityChangeListener visibilityListener;
+	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 
 	public RulerWidget(@NonNull Context context) {
 		this(context, null);
@@ -124,29 +126,21 @@ public class RulerWidget extends FrameLayout implements ViewChangeProvider {
 		return OsmAndFormatter.calculateRoundedDist(maxWidth / pixDensity, app);
 	}
 
+	@NonNull
 	@Override
-	public void setSizeListener(@Nullable SizeChangeListener listener) {
-		this.sizeListener = listener;
-	}
-
-	@Override
-	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
-		this.visibilityListener = listener;
+	public Collection<ViewChangeListener> getViewChangeListeners() {
+		return viewChangeListeners;
 	}
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldWidth, int oldHeight) {
 		super.onSizeChanged(w, h, oldWidth, oldHeight);
-		if (sizeListener != null) {
-			sizeListener.onSizeChanged(this, w, h, oldWidth, oldHeight);
-		}
+		notifySizeChanged(this, w, h, oldWidth, oldHeight);
 	}
 
 	@Override
 	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
 		super.onVisibilityChanged(changedView, visibility);
-		if (visibilityListener != null) {
-			visibilityListener.onVisibilityChanged(changedView, visibility);
-		}
+		notifyVisibilityChanged(changedView, visibility);
 	}
 }

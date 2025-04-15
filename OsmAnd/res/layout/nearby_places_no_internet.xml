@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/no_internet"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:orientation="horizontal"
+	android:visibility="gone">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/content_padding"
+		android:contentDescription="@string/shared_string_no_internet_connection"
+		android:tint="?attr/default_icon_color"
+		app:srcCompat="@drawable/ic_action_wifi_off" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding"
+			android:gravity="start"
+			android:text="@string/shared_string_no_internet_connection"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			android:textStyle="normal" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:gravity="start"
+			android:text="@string/no_internet_descr"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size"
+			android:textStyle="normal" />
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/try_again_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="start"
+			app:dialogButtonBottomMargin="@dimen/content_padding"
+			app:dialogButtonTitle="@string/try_again"
+			app:dialogButtonTopMargin="@dimen/content_padding"
+			app:dialogButtonType="secondary" />
+
+	</LinearLayout>
+</LinearLayout>

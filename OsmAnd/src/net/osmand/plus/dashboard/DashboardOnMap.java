@@ -1,6 +1,6 @@
 package net.osmand.plus.dashboard;
 
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.*;
+import static net.osmand.plus.dashboard.DashboardType.*;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -43,14 +43,14 @@ import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.AlpineHikingScaleFragment;
 import net.osmand.plus.configmap.ConfigureMapFragment;
-import net.osmand.plus.configmap.CycleRoutesFragment;
-import net.osmand.plus.configmap.HikingRoutesFragment;
-import net.osmand.plus.configmap.MtbRoutesFragment;
-import net.osmand.plus.configmap.TravelRoutesFragment;
+import net.osmand.plus.configmap.CoordinatesGridController;
+import net.osmand.plus.configmap.CoordinatesGridFragment;
+import net.osmand.plus.configmap.routes.MapRoutesFragment;
+import net.osmand.plus.configmap.routes.RenderingClassFragment;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
+import net.osmand.plus.configmap.routes.TravelRoutesFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.dashboard.tools.DashFragmentData.ShouldShowFunction;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
 import net.osmand.plus.dialogs.RasterMapMenu;
@@ -91,7 +91,9 @@ import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
+import net.osmand.render.RenderingClass;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -168,29 +170,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return fragmentsData;
 	}
 
-	public enum DashboardType {
-		CONFIGURE_MAP,
-		DASHBOARD,
-		OVERLAY_MAP,
-		UNDERLAY_MAP,
-		MAPILLARY,
-		CONTOUR_LINES,
-		OSM_NOTES,
-		WIKIPEDIA,
-		TERRAIN,
-		RELIEF_3D,
-		CYCLE_ROUTES,
-		HIKING_ROUTES,
-		TRAVEL_ROUTES,
-		TRANSPORT_LINES,
-		WEATHER,
-		WEATHER_LAYER,
-		WEATHER_CONTOURS,
-		NAUTICAL_DEPTH,
-		MTB_ROUTES,
-		ALPINE_HIKING
-	}
-
 	private final Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
 
 	public enum DashboardActionButtonType {
@@ -230,7 +209,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public void createDashboardView() {
 		baseColor = ContextCompat.getColor(mapActivity, R.color.osmand_orange) & 0x00ffffff;
-		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
+		waypointDialogHelper = new WaypointDialogHelper();
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = mapActivity.findViewById(R.id.dashboard);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
@@ -327,11 +306,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (isCurrentType(RELIEF_3D)) {
 			tv.setText(R.string.relief_3d);
 		} else if (isCurrentType(WIKIPEDIA)) {
-			tv.setText(R.string.shared_string_wikipedia);
-		} else if (isCurrentType(CYCLE_ROUTES)) {
-			tv.setText(R.string.rendering_attr_showCycleRoutes_name);
-		} else if (isCurrentType(HIKING_ROUTES)) {
-			tv.setText(R.string.rendering_attr_hikingRoutesOSMC_name);
+			WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
+			tv.setText(plugin.getPopularPlacesTitle());
 		} else if (isCurrentType(TRAVEL_ROUTES)) {
 			tv.setText(R.string.travel_routes);
 		} else if (isCurrentType(TRANSPORT_LINES)) {
@@ -350,10 +326,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.shared_string_contours);
 		} else if (isCurrentType(NAUTICAL_DEPTH)) {
 			tv.setText(R.string.nautical_depth);
-		} else if (isCurrentType(MTB_ROUTES)) {
-			tv.setText(R.string.app_mode_mountain_bicycle);
-		} else if (isCurrentType(ALPINE_HIKING)) {
-			tv.setText(R.string.rendering_attr_alpineHiking_name);
+		} else if (isCurrentType(MAP_ROUTES)) {
+			RouteLayersHelper helper = getMyApplication().getRouteLayersHelper();
+			tv.setText(helper.getRoutesTypeName(helper.getSelectedAttrName()));
+		} else if (isCurrentType(RENDERING_CLASS)) {
+			RouteLayersHelper helper = getMyApplication().getRouteLayersHelper();
+			RenderingClass renderingClass = helper.getSelectedRenderingClass();
+			if (renderingClass != null) {
+				tv.setText(renderingClass.getTitle());
+			}
+		} else if (isCurrentType(COORDINATE_GRID)) {
+			tv.setText(R.string.layer_coordinates_grid);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -540,6 +523,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		removeFragment(TerrainFragment.TAG);
 		removeFragment(TransportLinesFragment.TAG);
 		removeFragment(WeatherMainFragment.TAG);
+		removeFragment(CoordinatesGridFragment.TAG);
 
 		if (visible) {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
@@ -575,10 +559,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					ConfigureMapFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(MAPILLARY)) {
 					MapillaryFiltersFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(CYCLE_ROUTES)) {
-					CycleRoutesFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(HIKING_ROUTES)) {
-					HikingRoutesFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRAVEL_ROUTES)) {
 					TravelRoutesFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRANSPORT_LINES)) {
@@ -595,10 +575,20 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					WeatherLayerFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEATHER_CONTOURS)) {
 					WeatherContoursFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(MTB_ROUTES)) {
-					MtbRoutesFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(ALPINE_HIKING)) {
-					AlpineHikingScaleFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(MAP_ROUTES)) {
+					RouteLayersHelper helper = getMyApplication().getRouteLayersHelper();
+					String attrName = helper.getSelectedAttrName();
+					if (attrName != null) {
+						MapRoutesFragment.showInstance(mapActivity, attrName);
+					}
+				} else if (isCurrentType(RENDERING_CLASS)) {
+					RouteLayersHelper helper = getMyApplication().getRouteLayersHelper();
+					RenderingClass renderingClass = helper.getSelectedRenderingClass();
+					if (renderingClass != null) {
+						RenderingClassFragment.showInstance(mapActivity, renderingClass);
+					}
+				} else if (isCurrentType(COORDINATE_GRID)) {
+					CoordinatesGridController.showDialog(mapActivity);
 				}
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);
@@ -663,9 +653,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else {
 			listView.setBackgroundColor(backgroundColor);
 		}
-		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
-				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
-				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES, ALPINE_HIKING)) {
+		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, MAP_ROUTES, RENDERING_CLASS, TRAVEL_ROUTES,
+				OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH,
+				COORDINATE_GRID)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -769,42 +759,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			if (cm != null) {
 				cm.onDataSetInvalidated();
 			}
-		} else if (isCurrentType(MAPILLARY)) {
-			refreshFragment(MapillaryFiltersFragment.TAG);
-		} else if (isCurrentType(TERRAIN)) {
-			refreshFragment(TerrainFragment.TAG);
-		} else if (isCurrentType(RELIEF_3D)) {
-			refreshFragment(Relief3DFragment.TAG);
-		} else if (isCurrentType(CYCLE_ROUTES)) {
-			refreshFragment(CycleRoutesFragment.TAG);
-		} else if (isCurrentType(HIKING_ROUTES)) {
-			refreshFragment(HikingRoutesFragment.TAG);
-		} else if (isCurrentType(TRAVEL_ROUTES)) {
-			refreshFragment(TravelRoutesFragment.TAG);
-		} else if (isCurrentType(TRANSPORT_LINES)) {
-			refreshFragment(TransportLinesFragment.TAG);
-		} else if (isCurrentType(WEATHER)) {
-			refreshFragment(WeatherMainFragment.TAG);
-		} else if (isCurrentType(WEATHER_LAYER)) {
-			refreshFragment(WeatherLayerFragment.TAG);
-		} else if (isCurrentType(WEATHER_CONTOURS)) {
-			refreshFragment(WeatherContoursFragment.TAG);
-		} else if (isCurrentType(NAUTICAL_DEPTH)) {
-			refreshFragment(NauticalDepthContourFragment.TAG);
-		} else if (isCurrentType(MTB_ROUTES)) {
-			refreshFragment(MtbRoutesFragment.TAG);
-		} else if (isCurrentType(ALPINE_HIKING)) {
-			refreshFragment(AlpineHikingScaleFragment.TAG);
+		} else if (isCurrentTypeHasIndividualFragment()) {
+			refreshFragment();
 		} else if (listAdapter != null) {
 			listAdapter.notifyDataSetChanged();
 		}
 	}
 
-	private void refreshFragment(@NonNull String tag) {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		Fragment fragment = fragmentManager.findFragmentByTag(tag);
-		if (fragment != null && AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			fragmentManager.beginTransaction()
+	private void refreshFragment() {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		Fragment fragment = manager.findFragmentById(R.id.content);
+		if (fragment != null && AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			manager.beginTransaction()
 					.detach(fragment)
 					.attach(fragment)
 					.commitAllowingStateLoss();
@@ -1026,9 +992,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isCurrentTypeHasIndividualFragment() {
 		return isCurrentType(
-				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, CYCLE_ROUTES, HIKING_ROUTES,
-				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
-				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES, ALPINE_HIKING
+				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
+				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS,
+				NAUTICAL_DEPTH, COORDINATE_GRID
 		);
 	}
 
@@ -1304,12 +1270,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			while (list.size() != numberOfRows) {
 				list.remove(numberOfRows);
 			}
-		}
-	}
-
-	public static class DefaultShouldShow extends ShouldShowFunction {
-		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			return settings.registerBooleanPreference(SHOULD_SHOW + tag, true).makeGlobal().get();
 		}
 	}
 

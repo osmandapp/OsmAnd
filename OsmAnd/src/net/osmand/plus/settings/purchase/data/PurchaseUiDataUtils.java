@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.purchase.data;
 
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.HMD_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.HUGEROCK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
@@ -10,6 +11,7 @@ import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.Subscriptio
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.UNDEFINED;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
 import net.osmand.Period.PeriodUnit;
@@ -35,22 +37,29 @@ public class PurchaseUiDataUtils {
 	public static final int INVALID = -1;
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
-	@NonNull
+	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app, @NonNull InAppPurchase purchase) {
+		return createUiData(app, purchase, purchase.getPurchaseTime(),
+				app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()));
+	}
+
+	@Nullable
+	public static PurchaseUiData createUiData(@NonNull OsmandApplication app,
+											  @NonNull InAppPurchase purchase,
+											  long purchaseTime,
+											  @NonNull PurchaseOrigin origin) {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 		InAppPurchases purchases = purchaseHelper.getInAppPurchases();
 
 		String sku = purchase.getSku();
 		String title = app.getString(R.string.shared_string_undefined);
-		int iconId = INVALID;
+		int iconId;
 		String purchaseType;
-		long purchaseTime = purchase.getPurchaseTime();
 		long expireTime = INVALID;
 		boolean liveUpdateSubscription = purchases.isLiveUpdatesSubscription(purchase);
 		boolean autoRenewing = false;
 		boolean renewVisible = false;
 		SubscriptionState subscriptionState = UNDEFINED;
-		PurchaseOrigin origin = purchaseHelper.getPurchaseOriginBySku(sku);
 		boolean isSubscription = purchase instanceof InAppSubscription;
 
 		if (purchases.isOsmAndProSubscription(purchase)) {
@@ -62,6 +71,8 @@ public class PurchaseUiDataUtils {
 		} else if (purchases.isMapsSubscription(purchase) || purchases.isFullVersion(purchase)) {
 			title = app.getString(R.string.maps_plus);
 			iconId = R.drawable.ic_action_osmand_maps_plus;
+		} else {
+			return null;
 		}
 
 		if (isSubscription) {
@@ -89,7 +100,6 @@ public class PurchaseUiDataUtils {
 			}
 		} else {
 			purchaseType = app.getString(R.string.in_app_purchase_desc);
-			purchaseTime = purchase.getPurchaseTime();
 		}
 
 		return new PurchaseUiData(sku, title, iconId, purchaseType,
@@ -102,7 +112,7 @@ public class PurchaseUiDataUtils {
 	public static PurchaseUiData createBackupSubscriptionUiData(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 
-		String sku = null;
+		String sku = settings.BACKUP_SUBSCRIPTION_SKU.get();
 		String title;
 		String purchaseType;
 		int iconId = R.drawable.ic_action_osmand_pro_logo_colored;
@@ -195,6 +205,14 @@ public class PurchaseUiDataUtils {
 		SubscriptionState state = InAppPurchaseUtils.isHugerockPromoAvailable(app) ? ACTIVE : EXPIRED;
 
 		return createPromoUiData(app, HUGEROCK_PROMO, state, expireTime);
+	}
+
+	@NonNull
+	public static PurchaseUiData createHMDPurchaseUiData(@NonNull OsmandApplication app) {
+		long expireTime = InAppPurchaseUtils.getHMDPromoExpirationTime(app);
+		SubscriptionState state = InAppPurchaseUtils.isHMDPromoAvailable(app) ? ACTIVE : EXPIRED;
+
+		return createPromoUiData(app, HMD_PROMO, state, expireTime);
 	}
 
 	@NonNull

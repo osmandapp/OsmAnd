@@ -10,6 +10,7 @@ import static net.osmand.plus.settings.enums.CompassVisibility.VISIBLE_IF_MAP_RO
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -44,7 +45,6 @@ public class CompassButton extends MapButton {
 	private ViewPropertyAnimatorCompat hideAnimator;
 
 	private boolean forceHideCompass;
-	private float mapRotation;
 
 	public CompassButton(@NonNull Context context) {
 		this(context, null);
@@ -75,15 +75,12 @@ public class CompassButton extends MapButton {
 	@Override
 	public void update() {
 		super.update();
-
 		float mapRotation = mapActivity.getMapRotate();
-		if (this.mapRotation != mapRotation) {
-			this.mapRotation = mapRotation;
-
-			if (imageView.getDrawable() instanceof CompassDrawable drawable) {
+		if (imageView.getDrawable() instanceof CompassDrawable drawable) {
+			if (drawable.getMapRotation() != mapRotation) {
 				drawable.setMapRotation(mapRotation);
+				imageView.invalidate();
 			}
-			imageView.invalidate();
 		}
 		CompassMode compassMode = settings.getCompassMode();
 		setContentDescription(app.getString(compassMode.getTitleId()));

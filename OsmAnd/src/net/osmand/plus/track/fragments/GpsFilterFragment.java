@@ -363,7 +363,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 			GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 			KQuadRect r = gpxFile.getRect();
 
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 			int marginStartPx = 0;
@@ -475,7 +475,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	@Override
 	public void onFinishFiltering(@NonNull GpxFile filteredGpxFile) {
-		app.runMessageInUIThreadAndCancelPrevious(REFRESH_UI_MESSAGE_ID, () -> {
+		app.runInUIThreadAndCancelPrevious(REFRESH_UI_MESSAGE_ID, () -> {
 			gpsFilterScreensAdapter.onFinishFiltering();
 			Fragment target = getTargetFragment();
 			if (target instanceof GpsFilterFragmentLister) {

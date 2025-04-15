@@ -28,7 +28,7 @@
     <string name="poi_filter_sightseeing">观光</string>
     <string name="poi_filter_car_aid">汽车援助</string>
     <string name="poi_filter_food_shop">食品店</string>
-    <string name="poi_filter_for_tourists">对于游客</string>
+    <string name="poi_filter_for_tourists">针对游客</string>
     <string name="poi_filter_fuel">燃料</string>
     <string name="use_compass_navigation">使用指南针</string>
     <string name="avoid_motorway">避开高速公路</string>
@@ -494,7 +494,7 @@
     <string name="address_search_desc">地址搜索</string>
     <string name="transport_search_desc">查找公共交通</string>
     <string name="offline_navigation_not_available">OsmAnd 离线导航暂时不可用。</string>
-    <string name="left_side_navigation">左侧行驶</string>
+    <string name="left_side_navigation">靠左行驶</string>
     <string name="modify_transparency">设置透明度(0 - 透明，255 - 不透明)</string>
     <string name="confirm_interrupt_download">取消下载？</string>
     <string name="local_indexes_cat_tile">在线与缓存的瓦片地图</string>
@@ -921,7 +921,7 @@
     <string name="shared_string_update">更新</string>
     <string name="shared_string_upload">上传</string>
     <string name="osm_edit_created_poi">创建的 OSM 兴趣点</string>
-    <string name="shared_string_qr_code">QR码</string>
+    <string name="shared_string_qr_code">二维码</string>
     <string name="map_downloaded">地图已下载</string>
     <string name="go_to_map">显示地图</string>
     <string name="simulate_initial_startup">模拟首次启动应用</string>
@@ -1072,7 +1072,6 @@
     <string name="shared_string_export">导出</string>
     <string name="shared_string_more">更多…</string>
     <string name="upload_osm_note_description">匿名上传您的 OSM 注记，或者使用您的 OpenStreetMap.org 账号。</string>
-    <string name="wiki_around">附近的维基百科条目</string>
     <string name="search_map_hint">城市或地区</string>
     <string name="upload_poi">上传兴趣点</string>
     <string name="route_calculation">路线计算</string>
@@ -1145,7 +1144,7 @@
     <string name="voice_pref_title">语音</string>
     <string name="quick_action_navigation_voice_on">语音静音</string>
     <string name="interrupt_music">暂停音乐</string>
-    <string name="interrupt_music_descr">语音提示暂停音乐播放。</string>
+    <string name="interrupt_music_descr">语音提示时暂停音乐播放。</string>
     <string name="select_voice_provider_descr">为您的语言选择或下载语音指引。</string>
     <string name="voice_provider_descr">为导航选择语音指引。</string>
     <string name="voice_provider">语音指引</string>
@@ -1618,7 +1617,7 @@
 \n 经度 %2$s</string>
     <string name="watch">查看</string>
     <string name="notes">音视频注记</string>
-    <string name="rendering_attr_pisteRoutes_name">滑雪斜坡</string>
+    <string name="rendering_attr_pisteRoutes_name">滑雪路线</string>
     <string name="free">%1$s 可用</string>
     <string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
     <string name="world_ski_missing">下载专用的离线地图以显示滑雪设施。</string>
@@ -1658,7 +1657,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">无轨电车路线</string>
     <string name="rendering_category_transport">公共交通</string>
     <string name="map_widget_appearance_rem">剩余的元素</string>
-    <string name="search_radius_proximity">之间</string>
+    <string name="search_radius_proximity">在此之内</string>
     <string name="speed_limit_exceed_message">选择限速容许幅度，超过限速容许幅度将收到语音警告。</string>
     <string name="fav_point_emoticons_message">收藏已重命名为\"%1$s\"，以将包含表情符号的字符串保存到文件中。</string>
     <string name="fav_point_dublicate">指定的收藏名称重复</string>
@@ -1725,7 +1724,6 @@
     <string name="rendering_attr_buildings15zoom_name">15 级缩放建筑物</string>
     <string name="rendering_attr_moreDetailed_name">更多细节</string>
     <string name="rendering_attr_lessDetailed_name">较少细节</string>
-    <string name="rendering_attr_hideAccess_name">访问限制</string>
     <string name="rendering_attr_showAccess_name">显示访问限制</string>
     <string name="no_index_file_to_download">下载未找到，请检查您的互联网连接。</string>
     <string name="select_index_file_to_download">什么也没找到。但您可以自行制作（参考 https://osmand.net）。</string>
@@ -2717,7 +2715,7 @@
     <string name="rendering_attr_smoothness_horrible_name">极端</string>
     <string name="rendering_attr_smoothness_very_horrible_name">超极端</string>
     <string name="rendering_attr_smoothness_impassable_name">无法通行</string>
-    <string name="rendering_attr_highway_class_motorway_name">机动车道</string>
+    <string name="rendering_attr_highway_class_motorway_name">高速公路</string>
     <string name="rendering_attr_highway_class_road_name">道路</string>
     <string name="rendering_attr_highway_class_street_name">街道</string>
     <string name="rendering_attr_highway_class_service_name">服务道路</string>
@@ -2729,7 +2727,7 @@
     <string name="angular_measeurement_descr">更改方位角测量方式。</string>
     <string name="files_failed">无法复制 %1$d 个文件 (%2$s)。</string>
     <string name="poi_cannot_be_found">找不到节点或道路。</string>
-    <string name="shared_string_total">一共</string>
+    <string name="shared_string_total">共计</string>
     <string name="wikivoyage_download_pics">下载图像</string>
     <string name="shared_string_travel_book">旅游书</string>
     <string name="download_images">下载图片</string>
@@ -2756,7 +2754,7 @@
     <string name="shared_string_max_speed">最高速度</string>
     <string name="default_speed_setting_title">默认速度</string>
     <string name="shared_string_default">默认</string>
-    <string name="transport_nearby_routes">之间</string>
+    <string name="transport_nearby_routes">在此之内</string>
     <string name="shared_string_privacy_policy">隐私政策</string>
     <string name="help_us_make_osmand_better">帮助我们让 OsmAnd 变得更好</string>
     <string name="shared_string_no_thank_you">不，谢谢</string>
@@ -2896,7 +2894,7 @@
     <string name="photo_notes">图片注记</string>
     <string name="video_notes">视频注记</string>
     <string name="multimedia_notes_view_descr">你的OSM注记在 %1$s。</string>
-    <string name="show_closed_notes">显示关闭的注记</string>
+    <string name="show_closed_notes">显示已关闭的注记</string>
     <string name="osm_edit_closed_note">已关闭的 OSM 注记</string>
     <string name="add_online_source">添加在线资源</string>
     <string name="rendering_attr_highway_class_bridleway_name">驮道</string>
@@ -3005,7 +3003,7 @@
     <string name="shared_string_view">查看</string>
     <string name="shared_string_do">做</string>
     <string name="shared_string_contents">内容</string>
-    <string name="shared_string_read">读取</string>
+    <string name="shared_string_read">阅读</string>
     <string name="shared_string_explore">探索</string>
     <string name="shared_string_result">结果</string>
     <string name="shared_string_always">总是</string>
@@ -3235,12 +3233,6 @@
     <string name="toast_select_edits_for_upload">选择要上传的编辑</string>
     <string name="uploaded_count">已上传 %1$d，共 %2$d</string>
     <string name="hillshade_slope_contour_lines">等高线/山体阴影/斜坡</string>
-    <string name="open_place_reviews_plugin_description">为 OpenPlaceReviews 项目做出贡献，例如照片、评论或公共场所（如餐馆、酒店或博物馆）的链接。
-\n
-\n在我们的网站上查找有关如何做出贡献的说明 %1$s。</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">登录 OpenPlaceReviews</string>
     <string name="activity_type_winter_name">冬季</string>
     <string name="activity_type_snowmobile_name">雪地摩托</string>
     <string name="activity_type_riding_name">骑行</string>
@@ -3300,9 +3292,6 @@
     <string name="osm_edit_comment_note">评论 OSM 注记</string>
     <string name="osm_login_descr">使用 OAuth 方式或者你的 OSM 登录名和密码进行登录。</string>
     <string name="shared_string_add_photo">添加照片</string>
-    <string name="register_on_openplacereviews">注册
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">照片由 OpenPlaceReviews.org 开放数据项目提供。为了上传你的照片，你需要在他们的网站上注册。</string>
     <string name="register_opr_create_new_account">创建新帐户</string>
     <string name="register_opr_have_account">我已经有一个账户</string>
     <string name="shared_string_search_history">搜索历史记录</string>
@@ -3319,13 +3308,8 @@
     <string name="select_groups_for_import">选择要导入的组。</string>
     <string name="select_items_for_import">选择要导入的项目。</string>
     <string name="add_to_mapillary">添加到 Mapillary</string>
-    <string name="add_to_opr">添加到 OpenPlaceReviews</string>
     <string name="use_dev_url_descr">改用 dev.openstreetmap.org 而不是 openstreetmap.org 来测试上传 OSM 注记 / 兴趣点 / GPX。</string>
     <string name="use_dev_url">使用 dev.openstreetmap.org</string>
-    <string name="add_photos_descr">OsmAnd显示来自多个来源的照片：
-\nOpenPlaceReviews - POI照片；
-\nMapillary - 街道级图像；
-\n网络/维基媒体 - 根据OpenStreetMap数据的POI照片。</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">轻型飞机</string>
     <string name="plan_route_split_before">拆分之前</string>
@@ -4155,7 +4139,7 @@
     <string name="selected_profile">当前所选配置文件</string>
     <string name="monitoring_min_distance_descr_recommendation">建议：如果您不想记录路线的微小细节，并且不需要关于休息时间的额外数据，请设置 5 米位移。</string>
     <string name="live_monitoring_tracking_interval">追踪间隔</string>
-    <string name="monitoring_min_distance_descr_side_effect">副作用。休息时将完全不被记录，或只被记录一个点。小的（现实世界的）移动（例如侧道，以标记你的旅行中可能出现的岔道）可能被过滤掉。你的文件包含较少的后处理信息，并且在记录时过滤掉明显多余的点，而有可能保留由不良接收或GPS芯片组影响造成的失真，使统计结果更差。</string>
+    <string name="monitoring_min_distance_descr_side_effect">副作用：休息时将完全不被记录，或只被记录一个点。小的（现实世界的）移动（例如侧道，以标记你的旅行中可能出现的岔道）可能被过滤掉。你的文件包含较少的后处理信息，并且在记录时过滤掉明显多余的点，而有可能保留由不良接收或GPS芯片组影响造成的失真，使统计结果更差。</string>
     <string name="select_nav_icon_descr">在导航或移动时显示的图标。</string>
     <string name="tracks_view_descr">你录制的轨迹位于%1$s，或OsmAnd文件夹中。</string>
     <string name="select_map_icon_descr">静止时显示的图标。</string>
@@ -4228,7 +4212,7 @@
     <string name="rendering_attr_weatherPressureContours_name">等压线</string>
     <string name="map_widget_trip_recording_uphill">上坡</string>
     <string name="map_widget_trip_recording_duration">持续时间</string>
-    <string name="map_widget_trip_recording_distance">距离</string>
+    <string name="map_widget_distance">距离</string>
     <string name="routing_attr_hazmat_category_description">危险品类别/考虑危险品准入许可</string>
     <string name="routing_attr_avoid_fords_name">避免涉水</string>
     <string name="routing_attr_avoid_fords_description">避免涉水</string>
@@ -4334,7 +4318,7 @@
     <string name="auto_25_chars_route_tu_kr">掉头并靠右</string>
     <string name="auto_25_chars_route_roundabout_kl">从第%1$d 出口离开并靠左</string>
     <string name="auto_25_chars_route_roundabout_kr">从第 %1$d 出口离开并靠右</string>
-    <string name="attach_roads_descr">粗略计算您的轨迹，以便在各点之间确定路线，并关联精确的转弯指示和路线属性。</string>
+    <string name="attach_roads_descr">将轨迹附加到道路上，即可获得详细的路线信息，包括转弯指示和道路属性。</string>
     <string name="duplacate_widget_added_snackbar">正在将重复的小工具添加到列表中。</string>
     <string name="shared_string_duplicate">重复</string>
     <string name="av_notes_photo_widget_desc">点击小部件可以让你拍下照片。</string>
@@ -4709,7 +4693,7 @@
     <string name="data_storage_space_description">剩余 %1$sGB 可用（总共 %2$s GB）</string>
     <string name="change_osmand_data_folder_question">更改 OsmAnd 数据文件夹？</string>
     <string name="rendering_attr_piste_type_sled_name">雪橇</string>
-    <string name="utm_format_descr">OsmAnd使用UTM标准，该标准与UTM NATO格式相似但不完全相同。</string>
+    <string name="utm_format_descr">OsmAnd使用 通用横轴墨卡托投影（UTM）标准，该标准与UTM NATO格式相似但不完全相同。</string>
     <string name="screen_alerts_descr">导航期间显示左下角的警报。</string>
     <string name="routing_attr_max_num_changes_name">换乘次数</string>
     <string name="press_again_to_change_the_map_orientation">再次点击可更改地图方向</string>
@@ -4957,7 +4941,7 @@
     <string name="download_cloud_version">下载云端版本</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">风速等值线</string>
     <string name="open_weather_action_description">允许您打开包含详细天气信息的屏幕。</string>
-    <string name="navigate_point_format_utm">UTM标准</string>
+    <string name="navigate_point_format_utm">通用横轴墨卡托投影（UTM）标准</string>
     <string name="cloud_all_changes_uploaded_descr">在此设备上所做的所有更改都会与OsmAnd Cloud同步。</string>
     <string name="upload_all">全部上传</string>
     <string name="cloud_all_changes_downloaded">已下载所有变更</string>
@@ -4986,31 +4970,7 @@
     <string name="backup_error_failed_to_fetch_remote_items">无法从服务器获取文件列表。</string>
     <string name="switch_mode_by_tapping_on_widget">通过点击小部件来切换模式。</string>
     <string name="navigate_point_format_olc">开放位置代码（OLC）</string>
-    <string name="release_4_1">• 增加了对Android Auto的初步支持
-\n
-\n • UTM坐标搜索的用户界面更新
-\n
-\n • GPX轨迹的GPS过滤器
-\n
-\n • 高程小工具（专业版）
-\n
-\n • 收藏：增加了查看最近使用的图标的功能
-\n
-\n • 路线规划：启动后将使用选定的配置文件
-\n
-\n • 修复了Mapillary图层，该插件现在默认是禁用的。
-\n
-\n • 增加了管理应用程序中所有历史记录的屏幕
-\n
-\n • 重新启动应用程序后，地图方向不会被重置
-\n
-\n • 改进了SRTM高度标记的渲染
-\n
-\n • 修正了阿拉伯语的地图说明
-\n
-\n • 修正了不同的路由问题
-\n
-\n</string>
+    <string name="release_4_1">• 增加了对Android Auto的初步支持 \n \n • 通用横轴墨卡托投影（UTM）坐标搜索的用户界面更新 \n \n • GPX轨迹的GPS过滤器 \n \n • 高程小工具（专业版） \n \n • 收藏：增加了查看最近使用的图标的功能 \n \n • 路线规划：启动后将使用选定的配置文件 \n \n • 修复了Mapillary图层，该插件现在默认是禁用的。 \n \n • 增加了管理应用程序中所有历史记录的屏幕 \n \n • 重新启动应用程序后，地图方向不会被重置 \n \n • 改进了SRTM高度标记的渲染 \n \n • 修正了阿拉伯语的地图说明 \n \n • 修正了各种路由问题</string>
     <string name="enable_3d_maps">启用 3D 地图</string>
     <string name="metric_lbs">磅</string>
     <string name="weather_download_error">无法下载 %1$s 瓦片。</string>
@@ -5266,7 +5226,7 @@
     <string name="help_article_navigation_routing_public_transport_navigation_name">公共交通路线规划</string>
     <string name="help_article_navigation_routing_ski_routing_name">滑雪路线规划</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">按照轨迹导航</string>
-    <string name="help_article_navigation_guidance_name">指引</string>
+    <string name="help_article_navigation_guidance_name">导航指引</string>
     <string name="help_article_personal_name">我的数据</string>
     <string name="help_article_personal_import_export_name">导入/导出</string>
     <string name="help_article_personal_profiles_name">配置文件（设置）</string>
@@ -5362,7 +5322,7 @@
 \n设备上的所有数据仍保持不变。</string>
     <string name="shared_string_close_the_dialog">关闭对话框</string>
     <string name="no_visible_tracks_description">选择轨迹以在地图上显示。</string>
-    <string name="display_position_automatic_descr">取决于地图方向：底部表示移动方向，中间表示所有其他方向。</string>
+    <string name="display_position_automatic_descr">取决于地图方向：底部为移动方向，中心为所有其他方向。</string>
     <string name="sound_beep_complex">蜂鸣：复杂</string>
     <string name="sound_beep_complex_loud">蜂鸣：复杂响亮</string>
     <string name="sound_beep_simple">蜂鸣：简单</string>
@@ -5473,7 +5433,7 @@
     <string name="lang_ta_in">泰米尔语（印度）</string>
     <string name="shared_string_colors">颜色</string>
     <string name="relief_3d_download_description">需要额外的地图数据才能在地图上查看地形。</string>
-    <string name="vertical_exaggeration_description">通过改变比例值，可以突出三维地形的效果。</string>
+    <string name="vertical_exaggeration_description">通过改变比例值，您可以加强三维地形的显示效果。</string>
     <string name="vertical_exaggeration">垂直夸大</string>
     <string name="fix_north_up">启用固定北方朝上</string>
     <string name="use_3d_track_visualization">3D 可视化</string>
@@ -5555,7 +5515,7 @@
     <string name="target_elevation">目标海拔</string>
     <string name="max_sensor_heartrate">最大心率</string>
     <string name="clear_key_assignment">清除按键分配</string>
-    <string name="tripltek_promo_description">免费使用无限下载地图、3D 浮雕等功能 %1$s 个月</string>
+    <string name="tripltek_promo_description">免费使用无限地图下载、三维地形等功能 %1$s 个月</string>
     <string name="remove_widget_first">请先移除小工具</string>
     <string name="trash_is_empty_banner_desc">从 OsmAnd Cloud 中删除的文件将在 %1$s 天后在此处可用。</string>
     <string name="shared_string_delete_immediately">立即删除</string>
@@ -5624,7 +5584,7 @@
     <string name="shared_string_automatically">自动</string>
     <string name="ask_every_time">每次都询问</string>
     <string name="quick_action_location_by_gpx">GPX 定位</string>
-    <string name="rendering_value_pale_name">灰暗</string>
+    <string name="rendering_value_pale_name">苍白</string>
     <string name="energy_avg_info">能耗统计（1 / 5 / 15 分钟平均）</string>
     <string name="energy_avg_info_description">每分钟电池电量： %1$s \n电量消耗（毫安时mAh）： %2$s</string>
     <string name="choose_map_orientation">选择地图朝向</string>
@@ -5657,7 +5617,7 @@
     <string name="quick_action_remove_next_destination">下一个目的地点</string>
     <string name="daynight_mode_sunrise_sunset_summary">根据当地日出和日落时间，自动切换日间和夜间主题。</string>
     <string name="auto_25_chars_route_tl">左转</string>
-    <string name="hugerock_promo_description">在 %1$s 个月内免费使用包括无限制地图下载、3D 地形等功能</string>
+    <string name="hugerock_promo_description">免费使用无限地图下载、三维地形等功能 %1$s 个月</string>
     <string name="auto_25_chars_route_kl">保持在左侧</string>
     <string name="auto_25_chars_route_kr">保持在右侧</string>
     <string name="auto_25_chars_route_tshr">向右急转</string>
@@ -5918,4 +5878,149 @@
     <string name="obd_fuel_type_desc">通过 OBD 传感器显示车辆燃料类型</string>
     <string name="display_distance_to_first_intermediate_summary">首先显示下一站的时间和距离。关闭此功能以始终显示目的地的详细信息。</string>
     <string name="display_distance_to_first_intermediate">显示下一站的路线详情</string>
+    <string name="external_device_characteristic_systolic">收缩压</string>
+    <string name="shared_string_modify">修改</string>
+    <string name="shared_string_source">源</string>
+    <string name="external_device_characteristic_diastolic">舒张压</string>
+    <string name="track_line">轨迹线</string>
+    <string name="map_text">地图文字</string>
+    <string name="key_assignment_add_key">添加键</string>
+    <string name="key_assignment_add_action">添加动作</string>
+    <string name="shared_string_length">长度</string>
+    <string name="routing_type_a_star_2_phase">A* 2-相</string>
+    <string name="obd_fuel_left_km">剩餘燃料（公里）</string>
+    <string name="connect_obd_instructions_step4">按 “%1$s”，然后从列表中选择您的扫描器。</string>
+    <string name="connect_obd_instructions_step3">在您的设备上启用蓝牙</string>
+    <string name="ais_address_settings">IP 地址设置</string>
+    <string name="ais_nmea_protocol">NMEA 数据接收协议</string>
+    <string name="ais_nmea_protocol_description">为 NMEA 数据接收选择协议</string>
+    <string name="shared_string_avg_speed">最低速度</string>
+    <string name="recently_visited">最近访问</string>
+    <string name="shared_string_default_view">默认视图</string>
+    <string name="map_widget_route_information">路线信息</string>
+    <string name="liter">升</string>
+    <string name="obd_vin">车辆识别号码</string>
+    <string name="shared_string_key">键</string>
+    <string name="routing_attr_avoid_cobblestone_description">避免鹅卵石</string>
+    <string name="routing_type">路线类型</string>
+    <string name="ais_port_nmea_local_description">指定 OsmAnd 接收数据的 UDP 端口</string>
+    <string name="shared_string_increase">增加</string>
+    <string name="default_buttons_opacity_original_description">每个按钮都会保留其背景不透明度。</string>
+    <string name="save_favorite_default_appearance">将更改应用于文件夹中已存在的点，还是仅应用于新的点？</string>
+    <string name="ais_address_settings_description">选择 NMEA 协议（UDP/TCP）并定义地址</string>
+    <string name="popular_places_nearby">附近的热门地点</string>
+    <string name="ais_load_data">从文件载入 AIS 数据</string>
+    <string name="ais_address_nmea_server">NMEA 数据源的 IP 地址</string>
+    <string name="ais_address_nmea_server_description">为 NMEA 数据源指定 IP 地址（若使用 TCP）</string>
+    <string name="calculating_indication_message">正在计算…</string>
+    <string name="tomorrow">明天</string>
+    <string name="ais_object_lost_timeouts_description">设定超时值，这样若在一定时间内没有接收到信号就能辨别出丢失的 AIS 物件。</string>
+    <string name="calculate_size">计算大小</string>
+    <string name="obd_fuel_level_percent">油量 (%)</string>
+    <string name="bottom">底部</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="top">顶部</string>
+    <string name="gpx_approximation_java">基于路线的（Java）</string>
+    <string name="routing_attr_avoid_cobblestone_name">避免鹅卵石</string>
+    <string name="gpx_approximation">GPX 估计</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="title_3d_track">3D 轨迹</string>
+    <string name="key_name_pattern">按键 “%1$s”</string>
+    <string name="required_maps">需要的地图</string>
+    <string name="external_device_characteristic_arterial_pressure">动脉血压</string>
+    <string name="ais_port_nmea_local">本地 NMEA 数据接收器的 UDP 端口</string>
+    <string name="liter_per_hour">L/h</string>
+    <string name="shared_string_decrease">减少</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="original_icon_description">每个点都会保留其图标。</string>
+    <string name="travel_topics">旅行话题</string>
+    <string name="action_icon">动作图标</string>
+    <string name="routing_type_a_star_classic">A* 经典</string>
+    <string name="gpx_approximation_cpp">基于路线的（C++）</string>
+    <string name="original_color_description">每个点都会保留其颜色。</string>
+    <string name="original_shape_description">每个点都会保留其形状。</string>
+    <string name="apply_to_all_points">应用至所有点</string>
+    <string name="shared_string_road_exit">退出</string>
+    <string name="ais_port_nmea_server">NMEA 数据源的 TCP 端口</string>
+    <string name="ais_port_nmea_server_description">为 NMEA 数据源指定端口号</string>
+    <string name="ais_object_lost_timeouts">AIS 信号接收的超时设置</string>
+    <string name="shared_string_avg_altitude">平均海拔</string>
+    <string name="no_places_available">没有可用的地点</string>
+    <string name="ais_cpa_settings">与 CPA 相关的设置</string>
+    <string name="no_photo_for_location_desc">此地点尚未添加用户照片</string>
+    <string name="map_widget_route_information_desc">显示预计到达时间、剩余旅行时间以及当前导航路线的距离。</string>
+    <string name="default_buttons_corners_original_description">每个按钮都会保留其转角半径。</string>
+    <string name="default_buttons_size_original_description">每个按钮都会保留其大小。</string>
+    <string name="obd_fuel_level_liter">油量（升）</string>
+    <string name="obd_device_forget_sensor">忘记扫描器</string>
+    <string name="java_safe">Java（安全）</string>
+    <string name="percent_hour">%/小时</string>
+    <string name="connect_obd_instructions_step2">启动您车辆的引擎</string>
+    <string name="kpa_unit">千帕</string>
+    <string name="obd_fuel_pressure">燃料压力</string>
+    <string name="unit_volt">伏特</string>
+    <string name="show_list">显示列表</string>
+    <string name="popular_places">热门地点</string>
+    <string name="poi_source">兴趣点来源</string>
+    <string name="point_location">点位置</string>
+    <string name="allow_display_on_top">允许在顶部显示</string>
+    <string name="daynight_mode_app_theme">应用昼夜模式主题</string>
+    <string name="key_event_action_continuous_zoom_in">连续放大</string>
+    <string name="map_grid">地图网格</string>
+    <string name="show_dm_grids_description">用度和分显示网格，而非用度或 DMS （度、分、秒）显示网格</string>
+    <string name="daynight_mode_day_summary">始终以浅色主题显示地图，是白天需要高辨识度时的理想选择。</string>
+    <string name="disable_map_layers">停用地图图层</string>
+    <string name="daynight_mode_sensor_summary">使用设备的光线传感器，根据环境光线水平在明暗主题之间切换。</string>
+    <string name="missing_maps_ignore_details">下载的地图是否涵盖您的路线？如果您熟悉该地区，可以使用它们导航。</string>
+    <string name="new_key_assignment">分配新按键</string>
+    <string name="remove_key_assignment_summary">所选操作的按键分配将被移除。</string>
+    <string name="map_settings_weather_wind_animation">风动画</string>
+    <string name="show_debug_info">显示调试信息</string>
+    <string name="remove_key_assignment">移除按键分配</string>
+    <string name="intermediate_first">中继点优先</string>
+    <string name="add_widget">添加小工具</string>
+    <string name="clear_all_key_shortcuts">清除所有快捷键</string>
+    <string name="show_debug_info_description">显示有关每个地图文本位置的图形信息</string>
+    <string name="layer_coordinates_grid">坐标网格</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">快捷动作可控制地图上坐标网格可见度。</string>
+    <string name="daynight_mode_night_summary">始终以暗色主题显示地图，适合夜间或弱光环境。</string>
+    <string name="show_dms_grids">使用 DMS（度、分、秒）代替度数</string>
+    <string name="destination_first">目的地优先</string>
+    <string name="display_priority">显示优先程度</string>
+    <string name="shared_string_offline_only">仅离线</string>
+    <string name="no_assigned_keys_desc">点击 “添加 ”按钮，选择一项操作并分配一个按键。</string>
+    <string name="change_terrain_color_scheme">更改地形配色方案</string>
+    <string name="daynight_mode_app_theme_summary">地图显示与应用程序的整体主题一致——浅色主题为 “日间模式”，深色主题为 “夜间模式”</string>
+    <string name="no_assigned_keys">没有已分配的按键</string>
+    <string name="allow_display_on_top_description">允许重叠显示地图文本</string>
+    <string name="show_grids">显示地图网格</string>
+    <string name="show_grids_description">允许在地图上显示网格</string>
+    <string name="show_utm_grids">使用 通用横轴墨卡托投影（UTM ）取代 WGS84</string>
+    <string name="show_utm_grids_description">以 通用横轴墨卡托投影（UTM）的米制单位显示网格，而非WGS84（经纬度）</string>
+    <string name="show_mercator_grids">使用墨卡托投影而非 WGS84 或 通用横轴墨卡托投影（UTM）</string>
+    <string name="show_dms_grids_description">以度、分、秒为单位显示网格，而非度数</string>
+    <string name="show_dm_grids">用 DM（度、分） 代替度或 DMS（度、分、秒）</string>
+    <string name="disable_map_layers_descr">停用矢量地图上方的所有地图图层（需要重新启动）。</string>
+    <string name="show_mercator_grids_description">以墨卡托投影的公里单位显示网格，而非WGS84（经纬度）或UTM坐标</string>
+    <string name="shared_string_online_only">仅在线</string>
+    <string name="equator">赤道</string>
+    <string name="choose_location">选择地点</string>
+    <string name="show_image_previews">显示图像预览</string>
+    <string name="meridian_180">180 度经线</string>
+    <string name="prime_meridian">本初子午线（0°经线）</string>
+    <string name="key_event_action_continuous_zoom_out">连续缩小</string>
+    <string name="clear_key_assignment_summary">所选操作的按键分配将被清除。</string>
+    <string name="clear_all_key_shortcuts_summary">将删除所选类型的所有按键分配。</string>
+    <string name="shared_string_manual">手册</string>
+    <string name="rendering_attr_showClimbingRoutes_name">攀岩路线</string>
+    <string name="ais_object_lost_timeout_description">设置 AIS 对象的可见性超时： 在这段时间内未接收到信号，屏幕上的 AIS 对象将被删除。</string>
+    <string name="shared_string_map_center">地图中心</string>
+    <string name="show_toast_about_key_pressed">显示关于已按下按键的浮动式消息</string>
+    <string name="hmd_promo_description">免费使用无限地图下载、三维地形等功能 %1$s 个月</string>
+    <string name="plugin_ais_tracker_name">AIS 船只追踪器</string>
+    <string name="help_article_personal_color_palette_schemes_name">颜色方案</string>
+    <string name="ais_ship_lost_timeout">未收到信号时，船舶的可见性超时时间</string>
+    <string name="choose_location_on_map">在地图上选择一个位置。</string>
+    <string name="ais_ship_lost_timeout_description">设置船只可见性超时： 在此时间内没有接收到信号后，屏幕上的船只符号将改变状态： 它会被标记为划掉。</string>
+    <string name="ais_object_lost_timeout">对象丢失时的可见性超时</string>
 </resources>

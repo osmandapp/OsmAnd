@@ -7,16 +7,13 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
+
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.AnimatedValue;
-import net.osmand.core.jni.IAnimation;
-import net.osmand.core.jni.MapAnimator;
-import net.osmand.core.jni.PointD;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.SWIGTYPE_p_void;
-import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.TimingFunction;
+import net.osmand.core.jni.*;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -28,10 +25,6 @@ import net.osmand.plus.views.Zoom.ComplexZoom;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 
 import java.util.EnumSet;
 
@@ -301,7 +294,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 		stopAnimatingSync();
 
-		RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
+		RotatedTileBox rb = tileView.getRotatedTileBox();
 		double startLat = rb.getLatitude();
 		double startLon = rb.getLongitude();
 		int startZoom = rb.getZoom();
@@ -502,7 +495,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 			startAnimationCallback.run();
 		}
 
-		RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
+		RotatedTileBox rb = tileView.getRotatedTileBox();
 		double startLat = rb.getLatitude();
 		double startLon = rb.getLongitude();
 		int startZoom = rb.getZoom();
@@ -619,7 +612,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 	public int calculateMoveZoom(RotatedTileBox rb, double finalLat, double finalLon, float[] mSt) {
 		if (rb == null) {
-			rb = tileView.getCurrentRotatedTileBox().copy();
+			rb = tileView.getRotatedTileBox();
 		}
 		double startLat = rb.getLatitude();
 		double startLon = rb.getLongitude();
@@ -778,7 +771,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	private void animatingZoomInThread(int zoomStart, double zoomFloatStart,
 									   int zoomEnd, double zoomFloatEnd, float animationTime, boolean notifyListener) {
 		try {
-			RotatedTileBox tb = tileView.getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = tileView.getRotatedTileBox();
 			int centerPixelX = tb.getCenterPixelX();
 			int centerPixelY = tb.getCenterPixelY();
 			animatingMapZoom = true;
@@ -905,7 +898,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 					tileView.setLatLonAnimate(zoomingLatLon.getLatitude(), zoomingLatLon.getLongitude(), notifyListener);
 				}
 			} else {
-				RotatedTileBox tb = tileView.getCurrentRotatedTileBox().copy();
+				RotatedTileBox tb = tileView.getRotatedTileBox();
 				animatingZoomInThread(tb.getZoom(), tb.getZoomFloatPart(), zoomEnd, zoomPart, animationTime, notifyListener);
 
 				pendingRotateAnimation();

@@ -53,7 +53,7 @@ class ColorPalette {
 			return (a and 0xFF shl 24) or (r and 0xFF shl 16) or (g and 0xFF shl 8) or (b and 0xFF shl 0)
 		}
 
-		private fun parsePalette(vl: Array<DoubleArray>): ColorPalette {
+		fun parsePalette(vl: Array<DoubleArray>): ColorPalette {
 			val palette = ColorPalette()
 			for (v in vl) {
 				val c = when {

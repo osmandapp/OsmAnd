@@ -25,6 +25,9 @@ tasks.register('collectMiscResources', Copy) {
 	from("../../resources/poi") {
 		include "poi_types.xml"
 	}
+	from("../../resources/poi") {
+		include "activities.json"
+	}
 }
 
 tasks.register('collectRenderingStylesResources', Sync) {

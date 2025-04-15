@@ -12,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -207,8 +208,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 
 			@Override
-			protected List<BinaryMapDataObject> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
-				return queryData(latLonBounds, zoom);
+			protected Pair<List<BinaryMapDataObject>, List<BinaryMapDataObject>> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				List<BinaryMapDataObject> dataObjects = queryData(latLonBounds, zoom);
+				return new Pair<>(dataObjects, dataObjects);
 			}
 		};
 		addMapsInitializedListener();
@@ -578,7 +580,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	// IContextMenuProvider
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (excludeUntouchableObjects) {
 			return;
@@ -592,8 +594,13 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			isMenuVisible = menu.isVisible() || (multiMenu != null && multiMenu.isVisible());
 		}
 		if (!isMenuVisible) {
-			getWorldRegionFromPoint(tileBox, point, objects);
+			collectRegionsFromPoint(result);
 		}
+	}
+
+	@Override
+	public boolean isSecondaryProvider() {
+		return true;
 	}
 
 	@Override
@@ -616,7 +623,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				getContext().getString(R.string.shared_string_map), "");
 	}
 
-	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super DownloadMapObject> dataObjects) {
+	private void collectRegionsFromPoint(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tb = result.getTileBox();
 		int zoom = tb.getZoom();
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION
 				&& data.getResults() != null && osmandRegions.isInitialized()) {
@@ -624,8 +633,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			int point31x = MapUtils.get31TileNumberX(pointLatLon.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(pointLatLon.getLatitude());
 
-			List<BinaryMapDataObject> result = new LinkedList<>(data.getResults());
-			Iterator<BinaryMapDataObject> it = result.iterator();
+			List<BinaryMapDataObject> objects = new LinkedList<>(data.getResults());
+			Iterator<BinaryMapDataObject> it = objects.iterator();
 			while (it.hasNext()) {
 				BinaryMapDataObject o = it.next();
 				if (!osmandRegions.contain(o, point31x, point31y)) {
@@ -633,7 +642,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				}
 			}
 			OsmandRegions osmandRegions = app.getRegions();
-			for (BinaryMapDataObject o : result) {
+			for (BinaryMapDataObject o : objects) {
 				String fullName = osmandRegions.getFullName(o);
 				WorldRegion region = osmandRegions.getRegionData(fullName);
 				if (region != null && region.isRegionMapDownload()) {
@@ -654,16 +663,16 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 					if (!dataItems.isEmpty()) {
 						for (IndexItem item : dataItems) {
-							dataObjects.add(new DownloadMapObject(o, region, item, null));
+							result.collect(new DownloadMapObject(o, region, item, null), this);
 						}
 					} else {
 						String downloadName = osmandRegions.getDownloadName(o);
 						List<LocalItem> infos = helper.getLocalItems(downloadName);
-						if (infos.size() == 0) {
-							dataObjects.add(new DownloadMapObject(o, region, null, null));
+						if (Algorithms.isEmpty(infos)) {
+							result.collect(new DownloadMapObject(o, region, null, null), this);
 						} else {
 							for (LocalItem info : infos) {
-								dataObjects.add(new DownloadMapObject(o, region, null, info));
+								result.collect(new DownloadMapObject(o, region, null, info), this);
 							}
 						}
 					}

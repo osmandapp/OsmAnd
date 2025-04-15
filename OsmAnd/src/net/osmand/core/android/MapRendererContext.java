@@ -24,12 +24,14 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -43,6 +45,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -203,18 +206,32 @@ public class MapRendererContext {
 		if (rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
 			rendName = "default";
 		}
-		if (!mapStyles.containsKey(rendName)) {
-			Log.d(TAG, "Style '" + rendName + "' not in cache");
-			if (mapStylesCollection.getStyleByName(rendName) == null || IGNORE_CORE_PRELOADED_STYLES) {
-				Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
-				loadRenderer(rendName);
-			}
-			ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
-			if (mapStyle != null) {
-				mapStyles.put(rendName, mapStyle);
+		int tryCount = 0;
+		while (true) {
+			if (mapStyles.containsKey(rendName)) {
+				break;
 			} else {
-				Log.d(TAG, "Failed to resolve '" + rendName + "', will use 'default'");
-				rendName = "default";
+				Log.d(TAG, "Style '" + rendName + "' not in cache");
+				if (mapStylesCollection.getStyleByName(rendName) == null || IGNORE_CORE_PRELOADED_STYLES) {
+					Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
+					loadRenderer(rendName);
+				}
+				ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
+				if (mapStyle != null) {
+					mapStyles.put(rendName, mapStyle);
+					break;
+				} else {
+					Log.d(TAG, "Failed to resolve '" + rendName + "', will use 'default'");
+					rendName = "default";
+				}
+			}
+			if (tryCount < 3) {
+				tryCount++;
+				if (tryCount > 1)
+				{
+					Log.e(TAG, "Failed to load '" + rendName + "' style, will keep trying");
+					app.showToastMessage(R.string.cant_load_map_styles);
+				}
 			}
 		}
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
@@ -308,26 +325,42 @@ public class MapRendererContext {
 		}
 	}
 
+	@NonNull
 	protected QStringStringHash getMapStyleSettings() {
 		// Apply map style settings
 		OsmandSettings settings = app.getSettings();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 
-		Map<String, String> properties = new HashMap<>();
-		for (RenderingRuleProperty property : storage.PROPS.getCustomRules()) {
+		List<RenderingRuleProperty> customRules = storage.PROPS.getCustomRules();
+		Map<String, RenderingClass> renderingClasses = storage.getRenderingClasses();
+		Map<String, String> properties = new LinkedHashMap<>(customRules.size() + renderingClasses.size());
+
+		for (RenderingRuleProperty property : customRules) {
 			String attrName = property.getAttrName();
 			if (property.isBoolean()) {
-				properties.put(attrName, settings.getRenderBooleanPropertyValue(attrName) + "");
+				properties.put(attrName, String.valueOf(settings.getRenderBooleanPropertyValue(attrName)));
 			} else {
-				String value = settings.getRenderPropertyValue(attrName);
+				String value = settings.getRenderPropertyValue(property);
 				if (!Algorithms.isEmpty(value)) {
 					properties.put(attrName, value);
 				}
 			}
 		}
+		Map<String, Boolean> parentsStates = new HashMap<>();
+		for (Map.Entry<String, RenderingClass> entry : renderingClasses.entrySet()) {
+			String name = entry.getKey();
+			RenderingClass renderingClass = entry.getValue();
+			boolean enabled = settings.getBooleanRenderClassProperty(renderingClass).get();
 
+			String parentName = renderingClass.getParentName();
+			if (parentName != null && parentsStates.containsKey(parentName) && !parentsStates.get(parentName)) {
+				enabled = false;
+			}
+			properties.put(name, String.valueOf(enabled));
+			parentsStates.put(name, enabled);
+		}
 		QStringStringHash styleSettings = new QStringStringHash();
-		for (Entry<String, String> setting : properties.entrySet()) {
+		for (Map.Entry<String, String> setting : properties.entrySet()) {
 			styleSettings.set(setting.getKey(), setting.getValue());
 		}
 		if (nightMode) {

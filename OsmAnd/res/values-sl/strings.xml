@@ -1249,7 +1249,6 @@
     <string name="rendering_attr_buildings15zoom_name">Zgradbe pri povečavi 15</string>
     <string name="rendering_attr_moreDetailed_name">Več podrobnosti</string>
     <string name="rendering_attr_lessDetailed_name">Manj podrobnosti</string>
-    <string name="rendering_attr_hideAccess_name">Mesta z omejenim dostopom</string>
     <string name="rendering_attr_showAccess_name">Prikaži omejitve dostopa in cestnine</string>
     <string name="rendering_attr_showSurfaceGrade_name">Pokaži kakovost cest</string>
     <string name="rendering_attr_showSurfaces_name">Pokaži površino cest</string>
@@ -2042,7 +2041,6 @@
     <string name="rendering_value_fine_name">Drobno</string>
     <string name="route_roundabout_short">Pojdite na %1$d izhod in nadaljujte</string>
     <string name="search_map_hint">Mesto ali območje</string>
-    <string name="wiki_around">Bližnja mesta s članki Wikipedije</string>
     <string name="lang_sr_latn">Srbščina (latinica)</string>
     <string name="lang_zh_hk">Kitajščina (Hong Kong)</string>
     <string name="routing_attr_allow_motorway_name">Uporabljaj avtoceste</string>
@@ -3255,13 +3253,8 @@
     <string name="select_groups_for_import">Izbor skupin za uvoz.</string>
     <string name="select_items_for_import">Izbor predmetov za uvoz.</string>
     <string name="add_to_mapillary">Dodaj na Mapillary</string>
-    <string name="add_to_opr">Dodaj na OpenPlaceReviews</string>
     <string name="use_dev_url_descr">Za preizkušanje pošiljanja sporočil, točk in sledi GPX preklopi iz openstreetmap.org na preizkusni dev.openstreetmap.org.</string>
     <string name="use_dev_url">Uporabi dev.openstreetmap.org</string>
-    <string name="add_photos_descr">Program podpira prikaz fotografij različnih virov:
-\nOpenPlaceReviews – fotografije točk POI;
-\nMapillary – ulična fotografija;
-\nSplet / Wikimedia – fotografije točk POI in OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="plan_route_add_new_segment">Dodaj nov del poti</string>
     <string name="app_mode_light_aircraft">Lahko letalo</string>
@@ -3879,7 +3872,6 @@
 \nVsi neshranjeni podatki bodo izgubljeni.</string>
     <string name="track_recording_title">Snemanje sledi je ustavljeno</string>
     <string name="activity_type_racing_name">Dirkanje</string>
-    <string name="opr_use_dev_url">Uporabi test.openplacereviews.org</string>
     <string name="rendering_attr_natureReserves_description">Pokaže naravne rezervate, zavarovana območja in narodne parke.</string>
     <string name="activity_type_winter_name">Zimsko</string>
     <string name="segments_count">Segment %1$d</string>
@@ -3891,7 +3883,6 @@
     <string name="shared_strings_all_regions">Vse regije</string>
     <string name="routing_attr_driving_style_description">Izberi namen vožnje za krajšo, hitrejšo ali varnejšo pot</string>
     <string name="activity_type_offroad_name">Off-road</string>
-    <string name="login_open_place_reviews">Prijava v OpenPlaceReviews</string>
     <string name="delete_online_routing_engine">Želiš odstraniti ta spletni mehanizem za usmerjanje\?</string>
     <string name="quick_action_show_hide_title">Pokaži/skrij</string>
     <string name="delete_updates">Izbriši posodobitve</string>
@@ -3899,7 +3890,6 @@
     <string name="activity_type_riding_name">Jahanje</string>
     <string name="activity_type_snowmobile_name">Motorne sani</string>
     <string name="activity_type_water_name">Vodno</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="hillshade_slope_contour_lines">Izohipse / senčenje terena / naklon</string>
     <string name="trip_recording_show_start_dialog_setting">Če onemogočeno, se bo snemanje začelo takoj, ko tapneš pripomoček ali element menija, pri čemer se preskoči potrditveno okno.</string>
     <string name="show_start_dialog">Pokaži začetno pogovorno okno</string>
@@ -3943,9 +3933,6 @@
     <string name="osm_edit_comment_note">Komentiraj OSM opombo</string>
     <string name="gpx_upload_trackable_visibility_descr">»Sledljivo« pomeni, da se sled ne prikaže v nobenem javnem seznamu, ampak se prikažejo samo obdelane točke sledi s časovnimi žigi (ki jih ni mogoče neposredno povezati s tabo) iz javnega API-ja GPS.</string>
     <string name="shared_string_search_history">Zgodovina iskanja</string>
-    <string name="open_place_reviews_plugin_description">Prispevaj k projektu OpenPlaceReviews, kot npr. fotografije, ocene, povezave o javnih mestih, kot so restavracije, hoteli, ali muzeji.
-\n
-\nNavodila za prispevanje najdeš na naši spletni strani %1$s.</string>
     <string name="routing_attr_allow_intermittent_name">Omogoči občasne vodotoke</string>
     <string name="app_mode_motorboat">Motorni čoln</string>
     <string name="edit_online_routing_engine">Urejanje spletnega usmerjevalnika</string>
@@ -3956,9 +3943,6 @@
     <string name="cannot_upload_image">Slike ni mogoče naložiti: prosim, poskusite znova pozneje</string>
     <string name="register_opr_have_account">Že imam račun</string>
     <string name="register_opr_create_new_account">Ustvari nov račun</string>
-    <string name="register_on_openplacereviews_desc">Fotografije so na voljo v OpenPlaceReviews.org odprt podatkovni projekt. Za nalaganje fotografij se moraš prijaviti na njihovo spletno stran.</string>
-    <string name="register_on_openplacereviews">Registriraj se na
-\nOpenPlaceReviews.org</string>
     <string name="osm_login_descr">Prijavi se z metodo OAuth ali z uporabniškim imenom in geslom OSM.</string>
     <string name="keep_it_empty_if_not">Naj bo prazno, če že ni</string>
     <string name="app_mode_kayak">Kajak</string>
@@ -4558,7 +4542,7 @@
     <string name="map_widget_trip_recording_downhill">Navzdol</string>
     <string name="map_widget_trip_recording_uphill">Navkreber</string>
     <string name="map_widget_trip_recording_duration">Trajanje</string>
-    <string name="map_widget_trip_recording_distance">Razdalja</string>
+    <string name="map_widget_distance">Razdalja</string>
     <string name="routing_attr_hazmat_category_name">Kategorija nevarnih snovi</string>
     <string name="routing_attr_allow_private_for_truck_description">Dovoli dostop do zasebnih površin za tovornjake.</string>
     <string name="routing_attr_hazmat_category_description">Kategorija nevarnih snovi / Upoštevaj dovoljenja za dostop do nevarnih snovi</string>

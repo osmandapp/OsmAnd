@@ -37,6 +37,7 @@ import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.helpers.*;
@@ -156,10 +157,9 @@ public class AppInitializer implements IProgress {
 		if (initSettings) {
 			return;
 		}
+		String name = getLocalClassName(app.getAppCustomization().getMapActivity().getName());
+		startPrefs = app.getSharedPreferences(name, Context.MODE_PRIVATE);
 		ApplicationMode.onApplicationStart(app);
-		startPrefs = app.getSharedPreferences(
-				getLocalClassName(app.getAppCustomization().getMapActivity().getName()),
-				Context.MODE_PRIVATE);
 		appVersionUpgrade.upgradeVersion(startPrefs, LAST_APP_VERSION);
 		initSettings = true;
 	}
@@ -336,7 +336,7 @@ public class AppInitializer implements IProgress {
 		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
 		app.trackSortModesHelper = startupInit(new TrackSortModesHelper(app), TrackSortModesHelper.class);
-
+		app.explorePlacesProvider = startupInit(new ExplorePlacesOnlineProvider(app), ExplorePlacesOnlineProvider.class);
 		initOpeningHoursParser();
 	}
 
@@ -765,6 +765,11 @@ public class AppInitializer implements IProgress {
 			public void onStart(@NonNull AppInitializer init) {
 				callback.onResult(init);
 			}
+
+			@Override
+			public void onFinish(@NonNull AppInitializer init) {
+				init.removeListener(this);
+			}
 		});
 	}
 
@@ -777,6 +782,11 @@ public class AppInitializer implements IProgress {
 					callback.onResult(init);
 				}
 			}
+
+			@Override
+			public void onFinish(@NonNull AppInitializer init) {
+				init.removeListener(this);
+			}
 		});
 	}
 
@@ -784,6 +794,7 @@ public class AppInitializer implements IProgress {
 		addListener(new AppInitializeListener() {
 			@Override
 			public void onFinish(@NonNull AppInitializer init) {
+				init.removeListener(this);
 				callback.onResult(init);
 			}
 		});

@@ -41,7 +41,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -567,7 +567,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location != null && routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
 				&& simulatePosition == null) {
 			long fixTime = location.getTime();
-			app.runMessageInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, () -> {
+			app.runInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, () -> {
 				net.osmand.Location lastKnown = getLastKnownLocation();
 				if (lastKnown != null && lastKnown.getTime() > fixTime) {
 					// false positive case, still strange how we got here with removeMessages
@@ -580,7 +580,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					setLocation(null);
 				}
 			}, LOST_LOCATION_CHECK_DELAY);
-			app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, () -> {
+			app.runInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, () -> {
 				net.osmand.Location lastKnown = getLastKnownLocation();
 				if (lastKnown != null && lastKnown.getTime() > fixTime) {
 					// false positive case, still strange how we got here with removeMessages
@@ -598,7 +598,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void simulatePosition() {
-		app.runMessageInUIThreadAndCancelPrevious(RUN_SIMULATE_LOCATION_MSG_ID, this::simulatePositionImpl, 600);
+		app.runInUIThreadAndCancelPrevious(RUN_SIMULATE_LOCATION_MSG_ID, this::simulatePositionImpl, 600);
 	}
 
 	private void simulatePositionImpl() {
@@ -732,7 +732,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public String getNavigationHint(TargetPoint point) {
-		String hint = navigationInfo.getDirectionString(point == null ? null : point.point, getHeading());
+		String hint = navigationInfo.getDirectionString(point == null ? null : point.getLatLon(), getHeading());
 		if (hint == null)
 			hint = app.getString(R.string.no_info);
 		return hint;

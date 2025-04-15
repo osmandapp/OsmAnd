@@ -9,23 +9,25 @@ import android.widget.ImageView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 
-public class ShapesCard extends MapBaseCard {
+public class ShapesCard extends BaseCard {
 
 	@NonNull
 	private BackgroundType selectedShape;
 	@ColorInt
-	private int selectedColor;
+	protected int selectedColor;
 
-	public ShapesCard(@NonNull MapActivity mapActivity, @NonNull BackgroundType shape, @ColorInt int color) {
-		super(mapActivity);
+	public ShapesCard(@NonNull FragmentActivity fragmentActivity, @NonNull BackgroundType shape, @ColorInt int color) {
+		super(fragmentActivity);
 		this.selectedShape = shape;
 		this.selectedColor = color;
 	}
@@ -74,7 +76,7 @@ public class ShapesCard extends MapBaseCard {
 		return shapeItemView;
 	}
 
-	private Drawable getOutlineDrawable(@DrawableRes int shapeIconId) {
+	protected Drawable getOutlineDrawable(@DrawableRes int shapeIconId) {
 		Resources resources = app.getResources();
 		String shapeIconName = resources.getResourceName(shapeIconId);
 		String shapeBackgroundIconName = shapeIconName + "_contour";
@@ -109,7 +111,7 @@ public class ShapesCard extends MapBaseCard {
 		}
 	}
 
-	private void setUnselectedBackground(@NonNull BackgroundType backgroundType, @NonNull ImageView background) {
+	protected void setUnselectedBackground(@NonNull BackgroundType backgroundType, @NonNull ImageView background) {
 		int inactiveColorId = ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
 		Drawable inactiveIcon = getColoredIcon(backgroundType.getIconId(), inactiveColorId);
 		background.setImageDrawable(inactiveIcon);

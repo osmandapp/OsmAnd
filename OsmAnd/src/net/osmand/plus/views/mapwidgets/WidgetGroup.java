@@ -21,7 +21,7 @@ import java.util.List;
 
 public enum WidgetGroup {
 
-	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
+	ROUTE_MANEUVERS(R.string.route_guidance, R.string.route_guidance_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
 	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night, R.string.docs_widget_navigation_points),
 	COORDINATES_WIDGET(R.string.coordinates_widget, R.string.coordinates_widget_desc, R.drawable.widget_coordinates_longitude_west_day, R.drawable.widget_coordinates_longitude_west_night, R.string.docs_widget_coordinates),
 	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_night, R.string.docs_widget_markers),
@@ -62,13 +62,25 @@ public enum WidgetGroup {
 
 	@NonNull
 	public List<WidgetType> getWidgets() {
+		return getWidgets(null);
+	}
+
+	@NonNull
+	public List<WidgetType> getWidgets(@Nullable WidgetsPanel panel) {
 		List<WidgetType> widgets = new ArrayList<>();
 		for (WidgetType widget : WidgetType.values()) {
-			if (this == widget.getGroup() || this == widget.getVerticalGroup()) {
+			if (isRelatedWidget(widget, panel)) {
 				widgets.add(widget);
 			}
 		}
 		return widgets;
+	}
+
+	public boolean isRelatedWidget(@NonNull WidgetType widget, @Nullable WidgetsPanel panel) {
+		if (panel != null) {
+			return this == widget.getGroup(panel);
+		}
+		return this == widget.getGroup() || this == widget.getVerticalGroup();
 	}
 
 	@NonNull
@@ -82,16 +94,12 @@ public enum WidgetGroup {
 
 	@Nullable
 	public WidgetType getMainWidget() {
-		switch (this) {
-			case BEARING:
-				return WidgetType.RELATIVE_BEARING;
-			case TRIP_RECORDING:
-				return WidgetType.TRIP_RECORDING_DISTANCE;
-			case AUDIO_VIDEO_NOTES:
-				return WidgetType.AV_NOTES_ON_REQUEST;
-			default:
-				return null;
-		}
+		return switch (this) {
+			case BEARING -> WidgetType.RELATIVE_BEARING;
+			case TRIP_RECORDING -> WidgetType.TRIP_RECORDING_DISTANCE;
+			case AUDIO_VIDEO_NOTES -> WidgetType.AV_NOTES_ON_REQUEST;
+			default -> null;
+		};
 	}
 
 	@DrawableRes
@@ -137,8 +145,8 @@ public enum WidgetGroup {
 		return 0;
 	}
 
-	public int getOrder() {
-		return getWidgets().get(0).ordinal();
+	public int getOrder(@Nullable WidgetsPanel panel) {
+		return getWidgets(panel).get(0).ordinal();
 	}
 
 	@Nullable

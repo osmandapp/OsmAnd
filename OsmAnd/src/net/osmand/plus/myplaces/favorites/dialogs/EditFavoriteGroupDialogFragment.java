@@ -25,6 +25,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.mapcontextmenu.editors.FavoriteAppearanceFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -32,6 +33,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 
 public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragment {
@@ -108,13 +110,15 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						Bundle bundle = new Bundle();
-						Bundle prevParams = new Bundle();
-
-						bundle.putString(GROUP_NAME_KEY, group.getName());
-						prevParams.putInt(TAB_ID, FAV_TAB);
-
-						MapActivity.launchMapActivityMoveToTop(activity, prevParams, null, bundle);
+						PointsGroup pointsGroup = group != null ? group.toPointsGroup(app) : null;
+						FragmentManager manager = activity.getSupportFragmentManager();
+						if (pointsGroup != null) {
+							Fragment fragment = getParentFragment();
+							if (fragment instanceof FavoritesTreeFragment) {
+								FavoriteAppearanceFragment.showInstance(manager, pointsGroup, fragment);
+								dismiss();
+							}
+						}
 					}
 				})
 				.create();

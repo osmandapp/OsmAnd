@@ -149,7 +149,7 @@
     <string name="live_now">En vivo ahora</string>
     <string name="enter_another_device_name">Elige un nombre que no se haya usado</string>
     <string name="device_added_successfully">%1$s añadido(s).</string>
-    <string name="shared_string_add">Añadir</string>
+    <string name="shared_string_add">Agregar</string>
     <string name="error_adding_new_device">No se pudo añadir el dispositivo</string>
     <string name="enter_device_name_description">El nombre del dispositivo nuevo (máx. 200 símbolos).</string>
     <string name="device_name_is_too_long">Nombre del dispositivo demasiado largo</string>

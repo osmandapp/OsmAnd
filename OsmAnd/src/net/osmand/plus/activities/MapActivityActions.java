@@ -30,7 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.help.HelpActivity;
@@ -313,7 +313,7 @@ public class MapActivityActions extends MapActions {
 				activity.getMapRouteInfoMenu().setShowMenu(menuState);
 			}
 			if (!settings.SPEED_CAMERAS_ALERT_SHOWED.get()) {
-				SpeedCamerasBottomSheet.showInstance(activity.getSupportFragmentManager(), null);
+				SpeedCamerasBottomSheet.showInstance(activity.getSupportFragmentManager(), null, null, true);
 			}
 		}
 	}
@@ -704,7 +704,7 @@ public class MapActivityActions extends MapActions {
 					String text = releaseText == null
 							? osmAndVersion
 							: app.getString(R.string.ltr_or_rtl_combine_via_comma, osmAndVersion, releaseText);
-					ShareMenu.copyToClipboardWithToast(app, text, Toast.LENGTH_SHORT);
+					ShareMenu.copyToClipboardWithToast(app, text, false);
 					return true;
 				});
 	}
@@ -713,7 +713,7 @@ public class MapActivityActions extends MapActions {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.hideContextAndRouteInfoMenues();
-			WaypointsFragment.showInstance(activity.getSupportFragmentManager());
+			WaypointsFragment.showInstance(activity);
 		}
 	}
 

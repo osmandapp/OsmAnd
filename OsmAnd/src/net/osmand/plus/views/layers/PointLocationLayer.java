@@ -686,9 +686,11 @@ public class PointLocationLayer extends OsmandMapLayer
 			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
 			if (dataChanged) {
 				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
-				if (prevLocation != null && getApplication().getRoutingHelper().isFollowingMode() && settings.LOCATION_INTERPOLATION_PERCENT.get() > 0) {
+				boolean animatePosition = settings.ANIMATE_MY_LOCATION.get();
+				Integer interpolationPercent = settings.LOCATION_INTERPOLATION_PERCENT.get();
+				if (prevLocation != null && getApplication().getRoutingHelper().isFollowingMode() && interpolationPercent > 0 && animatePosition) {
 					List<Location> predictedLocations = RoutingHelperUtils.predictLocations(prevLocation, location,
-							movingTime / 1000.0, getApplication().getRoutingHelper().getRoute());
+							movingTime / 1000.0, getApplication().getRoutingHelper().getRoute(), interpolationPercent);
 					if (!predictedLocations.isEmpty()) {
 						// At the moment we get the first predicted location, but there may be several of them
 						Location predictedLocation = predictedLocations.get(0);
@@ -825,10 +827,10 @@ public class PointLocationLayer extends OsmandMapLayer
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= 3 && !excludeUntouchableObjects) {
-			getMyLocationFromPoint(tileBox, point, o);
+		if (result.getTileBox().getZoom() >= 3 && !excludeUntouchableObjects) {
+			getMyLocationFromPoint(result);
 		}
 	}
 
@@ -852,15 +854,17 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 	}
 
-	private void getMyLocationFromPoint(RotatedTileBox tb, PointF point, List<? super LatLon> myLocation) {
+	private void getMyLocationFromPoint(@NonNull MapSelectionResult result) {
 		LatLon location = getMyLocation();
 		if (location != null && view != null) {
+			PointF point = result.getPoint();
+			RotatedTileBox tileBox = result.getTileBox();
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, location);
-			int rad = (int) (18 * tb.getDensity());
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox, location);
+			int rad = (int) (18 * tileBox.getDensity());
 			if (Math.abs(pixel.x - ex) <= rad && (ey - pixel.y) <= rad && (pixel.y - ey) <= 2.5 * rad) {
-				myLocation.add(location);
+				result.collect(location, this);
 			}
 		}
 	}

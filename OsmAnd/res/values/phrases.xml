@@ -194,7 +194,8 @@
 	<string name="poi_cash_in">Cash deposit</string>
 	<string name="poi_camp_site_type">Camp site type</string>
 	<string name="poi_cafe_filter">Cafe</string>
-
+	<string name="poi_network_foot">Routes network (hiking)</string>
+	<string name="poi_network_cycling">Routes network (cycling)</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -240,7 +241,7 @@
 	<string name="poi_natural">Natural</string>
 	<string name="poi_seamark">Nautical</string>
 	<string name="poi_military">Military</string>
-	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_osmwiki">Popular places (Wikipedia)</string>
 	<string name="poi_water_filter">Water;Drinking water</string>
 	<string name="poi_user_defined_other">User defined</string>
 
@@ -1361,12 +1362,6 @@
 	<string name="poi_nwn_ref">National hiking network node</string>
 	<string name="poi_rwn_ref">Regional hiking network node</string>
 	<string name="poi_lwn_ref">Local hiking network node</string>
-
-	<string name="poi_route_hiking_iwn_poi">International hiking route</string>
-	<string name="poi_route_hiking_nwn_poi">National hiking route</string>
-	<string name="poi_route_hiking_rwn_poi">Regional hiking route</string>
-	<string name="poi_route_hiking_lwn_poi">Local hiking route</string>
-	<string name="poi_route_hiking_ref_poi">Hiking route reference</string>
 
 	<string name="poi_opening_hours">Opening hours</string>
 	<string name="poi_collection_times">Collection times</string>
@@ -2601,15 +2596,15 @@
 	<string name="poi_material_marble">Material: marble</string>
 	<string name="poi_material_aluminium">Material: aluminium</string>
 
-	<string name="poi_site_type_megalith">Megalith</string>
-	<string name="poi_site_type_tumulus">Tumulus</string>
-	<string name="poi_site_type_fortification">Fortification</string>
-	<string name="poi_site_type_settlement">Settlement</string>
-	<string name="poi_site_type_city">City</string>
-	<string name="poi_site_type_hut_circle">Hut circle</string>
-	<string name="poi_site_type_necropolis">Necropolis</string>
-	<string name="poi_site_type_petroglyph">Petroglyph</string>
-	<string name="poi_site_type_earthwork">Earthwork</string>
+	<string name="poi_archaeological_site_megalith">Megalith</string>
+	<string name="poi_archaeological_site_tumulus">Tumulus</string>
+	<string name="poi_archaeological_site_fortification">Fortification</string>
+	<string name="poi_archaeological_site_settlement">Settlement</string>
+	<string name="poi_archaeological_site_city">City</string>
+	<string name="poi_archaeological_site_hut_circle">Hut circle</string>
+	<string name="poi_archaeological_site_necropolis">Necropolis</string>
+	<string name="poi_archaeological_site_petroglyph">Petroglyph</string>
+	<string name="poi_archaeological_site_earthwork">Earthwork</string>
 	<string name="poi_megalith_type_menhir">Megalith type: menhir</string>
 	<string name="poi_megalith_type_dolmen">Megalith type: dolmen</string>
 	<string name="poi_megalith_type_nuraghe">Megalith type: nuraghe</string>
@@ -4118,7 +4113,7 @@
 	<string name="poi_rescue_box">Rescue box</string>
 
 	<string name="poi_hazard_additional_erosion">Hazard: erosion</string>
-	<string name="poi_hazard_additional_rockfall">Hazard: rockfall</string>
+	<string name="poi_hazard_additional_falling_rocks">Hazard: rockfall</string>
 	<string name="poi_hazard_additional_nuclear">Hazard: nuclear</string>
 	<string name="poi_hazard_additional_flood">Hazard: flood</string>
 	<string name="poi_hazard_additional_avalanche">Hazard: avalanche</string>
@@ -4848,7 +4843,7 @@
 	<string name="poi_computer_parts_yes">Yes;Computer parts</string>
 	<string name="poi_computer_parts_no">Computer parts: no</string>
 
-	<string name="poi_climbing_crag">Yes;Climbing crag</string>
+	<string name="poi_climbing_crag">Climbing crag</string>
 
 	<string name="poi_museum_art">Art</string>
 	<string name="poi_museum_gallery">Gallery</string>
@@ -4931,7 +4926,7 @@
 	<string name="poi_board_type_sport">Sport</string>
 	<string name="poi_board_type_welcome_sign">Welcome sign</string>
 
-	<string name="poi_landuse_education">Education</string>
+	<string name="poi_landuse_education">Educational area</string>
 
 	<string name="poi_greenery">Greenery</string>
 
@@ -5480,24 +5475,24 @@
 	<string name="poi_route_activity_type_track_racing">Track Racing</string>
 	<string name="poi_route_activity_type_motor_scooter">Motor scooter</string>
 	<string name="poi_route_activity_type_backpacking">Backpacking</string>
-	<string name="poi_route_activity_type_hiking">Hiking</string>
+	<string name="poi_route_activity_type_hiking">Hiking routes</string>
 	<string name="poi_route_activity_type_hill_climbing">Hill climbing</string>
 	<string name="poi_route_activity_type_road_running">Road Running</string>
 	<string name="poi_route_activity_type_trail_running">Trail Running</string>
 	<string name="poi_route_activity_type_trekking">Trekking</string>
-	<string name="poi_route_activity_type_walking">Walking</string>
+	<string name="poi_route_activity_type_walking">Walking routes</string>
 	<string name="poi_route_activity_type_cross_country_skiing">Cross-Country Skiing</string>
 	<string name="poi_route_activity_type_ice_skating">Ice Skating</string>
 	<string name="poi_route_activity_type_ski_touring">Ski Touring</string>
-	<string name="poi_route_activity_type_skiing">Skiing</string>
+	<string name="poi_route_activity_type_skiing">Skiing routes</string>
 	<string name="poi_route_activity_type_snowboarding">Snowboarding</string>
 	<string name="poi_route_activity_type_snowmobiling">Snowmobiling</string>
 	<string name="poi_route_activity_type_snowshoeing">Snowshoeing</string>
 	<string name="poi_route_activity_type_e_biking">E-Biking</string>
 	<string name="poi_route_activity_type_e_mountain_bike">E-mountain bike</string>
 	<string name="poi_route_activity_type_gravel_biking">Gravel Biking</string>
-	<string name="poi_route_activity_type_mountain_biking">Mountain biking</string>
-	<string name="poi_route_activity_type_road_cycling">Road cycling</string>
+	<string name="poi_route_activity_type_mountain_biking">MTB routes (mountain bike)</string>
+	<string name="poi_route_activity_type_road_cycling">Road cycling routes</string>
 	<string name="poi_route_activity_type_touring">Touring</string>
 	<string name="poi_route_activity_type_aviation">Aviation</string>
 	<string name="poi_route_activity_type_drone_flying">Drone Flying</string>
@@ -5543,5 +5538,61 @@
 	<string name="poi_climbing_route_bottom">Climbing route bottom</string>
 
 	<string name="poi_cafe_yes">Yes</string>
+
+	<string name="poi_sled_yes">Sled: yes</string>
+	<string name="poi_sled_no">Sled: no</string>
+	<string name="poi_dog_sled_yes">Dog sled: yes</string>
+	<string name="poi_dog_sled_no">Dog sled: no</string>
+	<string name="poi_atv_yes">ATV: yes</string>
+	<string name="poi_atv_no">ATV: no</string>
+	<string name="poi_access_notes">Access notes</string>
+
+	<string name="poi_contact_website">Website</string>
+
+	<string name="poi_lit">Lighting</string>
+	<string name="poi_piste_type">Piste type</string>
+	<string name="poi_piste_oneway">Piste oneway</string>
+
+	<string name="poi_network_iwn">International hiking routes (IWN)</string>
+	<string name="poi_network_nwn">National hiking routes (NWN) </string>
+	<string name="poi_network_rwn">Regional hiking routes (RWN)</string>
+	<string name="poi_network_lwn">Local hiking routes (LWN)</string>
+	<string name="poi_network_icn">International cycling routes (ICN)</string>
+	<string name="poi_network_ncn">National cycling routes (NCN)</string>
+	<string name="poi_network_rcn">Regional cycling routes (RCN)</string>
+	<string name="poi_network_lcn">Local cycling routes (LCN)</string>
+
+	<string name="poi_mosque">Mosque</string>
+	<string name="poi_buddhist_temple">Buddhist temple</string>
+	<string name="poi_hindu_temple">Hindu temple</string>
+	<string name="poi_shinto_shrine">Shinto shrine</string>
+	<string name="poi_synagogue">Synagogue</string>
+	<string name="poi_jehovahs_witness_kingdom_hall">Jehovahs Witness Kingdom Hall</string>
+	<string name="poi_catholic_church">Catholic church</string>
+	<string name="poi_roman_catholic_church">Roman catholic church</string>
+	<string name="poi_baptist_church">Baptist church</string>
+	<string name="poi_lutheran_church">Lutheran church</string>
+	<string name="poi_orthodox_church">Orthodox church</string>
+	<string name="poi_protestant_church">Protestant church</string>
+	<string name="poi_anglican_church">Anglican church</string>
+	<string name="poi_methodist_church">Methodist church</string>
+	<string name="poi_greek_orthodox_church">Greek orthodox church</string>
+	<string name="poi_russian_orthodox_church">Russian orthodox church</string>
+	<string name="poi_pentecostal_church">Pentecostal church</string>
+	<string name="poi_evangelical_church">Evangelical church</string>
+	<string name="poi_presbyterian_church">Presbyterian church</string>
+	<string name="poi_access_main_tag">Access</string>
+
+	<string name="poi_aerodrome_type_airfield">Airfield</string>
+
+	<string name="poi_consulate">Consulate</string>
+
+	<string name="poi_hazard_additional_landslide">Hazard: landslide</string>
+	<string name="poi_hazard_additional_yes">Hazard</string>
+	<string name="poi_hazard_falling_rocks">Falling rocks</string>
+	<string name="poi_hazard_contamination">Contamination</string>
+	<string name="poi_hazard_yes">Hazard</string>
+	<string name="poi_hazard_additional_slippery_road">Slippery road</string>
+
 
 </resources>

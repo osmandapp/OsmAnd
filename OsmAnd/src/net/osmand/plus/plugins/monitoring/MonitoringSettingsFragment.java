@@ -487,7 +487,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		} else if (PRESELECTED_ROUTE_ACTIVITY.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				SelectRouteActivityController.showDialog(mapActivity, getRouteActivitySelectionHelper());
+				SelectRouteActivityController.showDialog(mapActivity, getSelectedAppMode(), getRouteActivitySelectionHelper());
 			}
 		} else if (RECORD_OBD_DATA_PROMO.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();

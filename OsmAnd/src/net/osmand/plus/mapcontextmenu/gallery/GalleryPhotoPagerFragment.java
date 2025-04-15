@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -36,6 +39,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.UrlImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController.DownloadMetadataListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -46,8 +50,8 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiImageCard;
+import net.osmand.shared.wiki.WikiMetadata;
 import net.osmand.util.Algorithms;
-import net.osmand.wiki.Metadata;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -78,34 +82,6 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
-	}
-
-	@Override
-	public void onMetadataUpdated(@NonNull Set<String> updatedMediaTagImages) {
-		ImageCard card = getSelectedImageCard();
-		if (card instanceof WikiImageCard wikiImageCard && updatedMediaTagImages.contains(wikiImageCard.getWikiImage().getWikiMediaTag())) {
-			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
-			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
-		}
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		ViewGroup view = (ViewGroup) themedInflater.inflate(R.layout.gallery_photo_fragment, container, false);
-
-		toolbar = view.findViewById(R.id.toolbar);
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		params.topMargin = AndroidUtils.getStatusBarHeight(getMapActivity());
-		toolbar.setLayoutParams(params);
-
-		sourceView = view.findViewById(R.id.source_icon);
-		setupMetadataRow(view);
-
-		descriptionShadow = view.findViewById(R.id.description_shadow);
-		descriptionContainer = view.findViewById(R.id.description_container);
 
 		Bundle args = getArguments();
 		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POSITION_KEY)) {
@@ -113,35 +89,43 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		} else if (args != null && args.containsKey(SELECTED_POSITION_KEY)) {
 			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
 		}
+		if (selectedPosition > controller.getOnlinePhotoCards().size()) {
+			dismiss();
+		}
+	}
 
-		ViewPager photoPager = view.findViewById(R.id.photo_pager);
-		ViewPagerAdapter adapter = new ViewPagerAdapter(getMapActivity().getSupportFragmentManager(), controller.getOnlinePhotoCards(), this);
-		photoPager.setAdapter(adapter);
-		photoPager.setCurrentItem(selectedPosition);
-		photoPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-			@Override
-			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-			}
+	@Override
+	public void onMetadataUpdated(@NonNull Set<String> updatedMediaTagImages) {
+		ImageCard card = getSelectedImageCard();
+		if (card instanceof WikiImageCard wikiImageCard && updatedMediaTagImages.contains(wikiImageCard.getWikiImage().getWikiMediaTag())) {
+			WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
+		}
+	}
 
-			@Override
-			public void onPageSelected(int position) {
-				boolean shouldPreloadNext = selectedPosition < position;
-				selectedPosition = position;
-				preloadThumbNails(shouldPreloadNext);
-				updateImageDescriptionRow(getSelectedImageCard(), false, shouldPreloadNext);
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int state) {
-
-			}
-		});
-		photoPager.setPageTransformer(true, new GalleryDepthTransformer());
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
+		updateNightMode();
+		ViewGroup view = (ViewGroup) inflate(R.layout.gallery_photo_fragment, container);
 
 		setupToolbar(view);
 		setupOnBackPressedCallback();
-		preloadThumbNails();
-		updateImageDescriptionRow(getSelectedImageCard(), true, null);
+
+		sourceView = view.findViewById(R.id.source_icon);
+		setupMetadataRow(view);
+
+		descriptionShadow = view.findViewById(R.id.description_shadow);
+		descriptionContainer = view.findViewById(R.id.description_container);
+
+		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
+		if (selectedPosition < imageCards.size()) {
+			setupViewPager(view);
+			preloadThumbNails();
+			updateImageDescriptionRow(getSelectedImageCard(), true, null);
+		}
+
 		return view;
 	}
 
@@ -199,7 +183,9 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		super.onSaveInstanceState(outState);
 	}
 
-	private Set<WikiImageCard> getImagesToDownloadMetadata(@NonNull WikiImageCard wikiImageCard, boolean initialLoad, @Nullable Boolean preloadNext){
+	@NonNull
+	private Set<WikiImageCard> getImagesToDownloadMetadata(@NonNull WikiImageCard wikiImageCard,
+			boolean initialLoad, @Nullable Boolean preloadNext) {
 		Set<WikiImageCard> result = new HashSet<>();
 		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
 		if (imageCards.size() <= 1 && !initialLoad) {
@@ -217,7 +203,8 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		return result;
 	}
 
-	private void addImages(@NonNull List<ImageCard> imageList, @NonNull Set<WikiImageCard> result, boolean next, int downloadCount) {
+	private void addImages(@NonNull List<ImageCard> imageList, @NonNull Set<WikiImageCard> result,
+			boolean next, int downloadCount) {
 		int direction = next ? 1 : -1;
 		for (int i = 1; i <= downloadCount; i++) {
 			int currentIndex = selectedPosition + (i * direction);
@@ -230,8 +217,8 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		}
 	}
 
-	private boolean shouldDownloadMetadata(@NonNull WikiImageCard wikiImageCard){
-		Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+	private boolean shouldDownloadMetadata(@NonNull WikiImageCard wikiImageCard) {
+		WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 		String date = metadata.getDate();
 		String author = metadata.getAuthor();
 		String license = metadata.getLicense();
@@ -241,7 +228,8 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 				|| Algorithms.isEmpty(license) || license.equals("Unknown"));
 	}
 
-	private void updateImageDescriptionRow(@NonNull ImageCard imageCard, boolean initialLoad, @Nullable Boolean preloadNext) {
+	private void updateImageDescriptionRow(@NonNull ImageCard imageCard, boolean initialLoad,
+			@Nullable Boolean preloadNext) {
 		if (imageCard instanceof WikiImageCard wikiImageCard) {
 			dateView.setVisibility(View.VISIBLE);
 			authorView.setVisibility(View.VISIBLE);
@@ -249,7 +237,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 			controller.addMetaDataListener(this);
 			controller.downloadWikiMetaData(getImagesToDownloadMetadata(wikiImageCard, initialLoad, preloadNext));
 
-			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+			WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 		} else {
 			dateView.setVisibility(View.INVISIBLE);
@@ -263,7 +251,8 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		AndroidUiHelper.updateVisibility(sourceView, icon != null);
 	}
 
-	private void setMetaData(@Nullable String author, @Nullable String date, @Nullable String license) {
+	private void setMetaData(@Nullable String author, @Nullable String date,
+			@Nullable String license) {
 		String formattedDate = WikiAlgorithms.formatWikiDate(date);
 
 		String fullDate = getString(R.string.ltr_or_rtl_combine_via_colon,
@@ -279,7 +268,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		licenseView.setText(licenseString);
 	}
 
-	private void setupMetadataRow(ViewGroup view) {
+	private void setupMetadataRow(@NonNull ViewGroup view) {
 		dateView = view.findViewById(R.id.date);
 		dateView.setTextColor(ColorUtilities.getColor(app, R.color.text_color_tertiary_light));
 
@@ -356,12 +345,16 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	}
 
 	private void setupToolbar(@NonNull View view) {
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbar = view.findViewById(R.id.toolbar);
+
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
+		params.topMargin = AndroidUtils.getStatusBarHeight(getMapActivity());
+		toolbar.setLayoutParams(params);
 
 		ImageView backButton = toolbar.findViewById(R.id.back_button);
 		backButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_close, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
 		backButton.setContentDescription(getString(R.string.shared_string_close));
-		backButton.setOnClickListener(v -> onBackPressed());
+		backButton.setOnClickListener(v -> dismiss());
 		setupSelectableBackground(backButton);
 
 		ImageView shareButton = toolbar.findViewById(R.id.share_button);
@@ -389,6 +382,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	}
 
 	public void showContextWidgetMenu(@NonNull View view) {
+		ImageCard card = getSelectedImageCard();
 		List<PopUpMenuItem> items = new ArrayList<>();
 		UiUtilities uiUtilities = app.getUIUtilities();
 		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
@@ -398,23 +392,28 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 				.setOnClickListener(item -> GalleryDetailsFragment.showInstance(getMapActivity(), selectedPosition))
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
-				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_external_link, iconColor))
-				.setTitleId(R.string.open_in_browser)
-				.setOnClickListener(item -> {
-					FragmentActivity activity = getActivity();
-					ImageCard card = getSelectedImageCard();
-					if (activity != null && card instanceof WikiImageCard wikiImageCard) {
-						AndroidUtils.openUrl(activity, wikiImageCard.getWikiImage().getUrlWithCommonAttributions(), nightMode);
-					}
-				})
-				.create());
+		if (card instanceof WikiImageCard || card instanceof UrlImageCard urlCard && urlCard.getSuitableUrl() != null) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_external_link, iconColor))
+					.setTitleId(R.string.open_in_browser)
+					.setOnClickListener(item -> {
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							if (card instanceof WikiImageCard wikiImageCard) {
+								AndroidUtils.openUrl(activity, wikiImageCard.getWikiImage().getUrlWithCommonAttributions(), nightMode);
+							} else {
+								UrlImageCard urlImageCard = (UrlImageCard) card;
+								AndroidUtils.openUrl(activity, urlImageCard.getSuitableUrl(), nightMode);
+							}
+						}
+					})
+					.create());
+		}
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_gsave_dark, iconColor))
 				.setTitleId(R.string.shared_string_download)
 				.setOnClickListener(item -> {
-					ImageCard card = getSelectedImageCard();
 					String downloadUrl = card.getImageHiresUrl();
 					if (Algorithms.isEmpty(downloadUrl)) {
 						downloadUrl = card.getImageUrl();
@@ -458,6 +457,36 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		downloadManager.enqueue(request);
 	}
 
+	private void setupViewPager(@NonNull View view) {
+		ViewPager pager = view.findViewById(R.id.photo_pager);
+		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
+		FragmentManager manager = getChildFragmentManager();
+
+		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, imageCards);
+		pager.setAdapter(adapter);
+		pager.setCurrentItem(selectedPosition);
+		pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset,
+					int positionOffsetPixels) {
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				boolean shouldPreloadNext = selectedPosition < position;
+				selectedPosition = position;
+				preloadThumbNails(shouldPreloadNext);
+				updateImageDescriptionRow(getSelectedImageCard(), false, shouldPreloadNext);
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+
+			}
+		});
+		pager.setPageTransformer(true, new GalleryDepthTransformer());
+	}
+
 	private ImageCard getSelectedImageCard() {
 		return controller.getOnlinePhotoCards().get(selectedPosition);
 	}
@@ -472,16 +501,17 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		OnBackPressedCallback backPressedCallback = new OnBackPressedCallback(true) {
 			@Override
 			public void handleOnBackPressed() {
-				onBackPressed();
+				dismiss();
 			}
 		};
 		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
 	}
 
-
-	private void onBackPressed() {
-		FragmentManager manager = getMapActivity().getSupportFragmentManager();
-		manager.popBackStack();
+	private void dismiss() {
+		FragmentActivity activity = getMyActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().popBackStack();
+		}
 	}
 
 	@Override
@@ -529,18 +559,16 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	private static class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
 		private final List<ImageCard> pictures;
-		private final Fragment targetFragment;
 
-		public ViewPagerAdapter(FragmentManager fm, List<ImageCard> pictures, Fragment target) {
-			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+		public ViewPagerAdapter(@NonNull FragmentManager manager, @NonNull List<ImageCard> pictures) {
+			super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			this.pictures = pictures;
-			this.targetFragment = target;
 		}
 
 		@NonNull
 		@Override
 		public Fragment getItem(int position) {
-			return GalleryPhotoViewerFragment.newInstance(position, targetFragment);
+			return GalleryPhotoViewerFragment.newInstance(position);
 		}
 
 		@Override

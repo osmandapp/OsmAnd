@@ -12,6 +12,6 @@ public interface FavoritesListener {
 	default void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
 	}
 
-	default void onFavoritePropertiesUpdated() {
+	default void onSavingFavoritesFinished() {
 	}
 }

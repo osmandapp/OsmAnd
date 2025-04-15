@@ -340,7 +340,6 @@
     <string name="routing_attr_allow_motorway_name">Gunakan jalan bebas hambatan</string>
     <string name="routing_attr_allow_motorway_description">Mengizinkan jalan bebas hambatan.</string>
     <string name="upload_osm_note_description">Unggah Catatan OSM Anda secara anonim atau dengan menggunakan profil OpenStreetMap.org Anda.</string>
-    <string name="wiki_around">Artikel Wikipedia terdekat</string>
     <string name="search_map_hint">Kota atau daerah</string>
     <string name="route_roundabout_short">Ambil %1$d keluar dan pergi</string>
     <string name="upload_poi">Unggah POI</string>
@@ -942,9 +941,6 @@
     <string name="osm_edit_close_note">Tutup Catatan OSM</string>
     <string name="osm_login_descr">Masuk dengan metode OAuth, atau nama pengguna dan kata sandi OSM Anda.</string>
     <string name="shared_string_add_photo">Tambahkan foto</string>
-    <string name="register_on_openplacereviews">Daftar di
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Foto disediakan oleh proyek data terbuka OpenPlaceReviews.org. Untuk mengunggah foto, Anda perlu mendaftar di situs webnya.</string>
     <string name="register_opr_create_new_account">Buat akun baru</string>
     <string name="register_opr_have_account">Saya sudah memiliki sebuah akun</string>
     <string name="shared_string_search_history">Riwayat pencarian</string>
@@ -958,7 +954,6 @@
     <string name="select_groups_for_import">Pilih grup yang akan diimpor.</string>
     <string name="select_items_for_import">Pilih item yang akan diimpor.</string>
     <string name="add_to_mapillary">Tambahkan ke Mapillary</string>
-    <string name="add_to_opr">Tambahkan ke OpenPlaceReviews</string>
     <string name="use_dev_url">Gunakan dev.openstreetmap.org</string>
     <string name="app_mode_light_aircraft">Pesawat terbang ringan</string>
     <string name="plan_route_add_new_segment">Tambahkan segmen baru</string>
@@ -998,9 +993,6 @@
     <string name="uploading_count">Mengunggah %1$d dari %2$d</string>
     <string name="uploaded_count">%1$d dari %2$d terunggah</string>
     <string name="toast_select_edits_for_upload">Pilih suntingan untuk diunggah</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Gunakan test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Masuk ke OpenPlaceReviews</string>
     <string name="activity_type_water_name">Air</string>
     <string name="activity_type_snowmobile_name">Mobil Salju</string>
     <string name="activity_type_racing_name">Balapan</string>
@@ -2425,10 +2417,6 @@
     <string name="purchases_restored">Pembelian dipulihkan</string>
     <string name="connect_track_points_as">Hubungkan titik rute</string>
     <string name="enough_contributions_descr">Selamat, Anda telah menyediakan kontribusi OpenStreetMap yang cukup dan dapat menikmati pembaruan peta OsmAnd tak terbatas!</string>
-    <string name="add_photos_descr">OsmAnd menampilkan foto dari beberapa sumber:
-\nOpenPlaceReviews - foto POI;
-\nMapillary - citra tingkat jalan;
-\nWeb / Wikimedia - foto POI sesuai data OpenStreetMap.</string>
     <string name="use_dev_url_descr">Ubah untuk menggunakan dev.openstreetmap.org daripada openstreetmap.org untuk menguji coba mengunggah Catatan / POI / GPX OSM.</string>
     <string name="clear_osm_token">Hapus token OAuth OpenStreetMap</string>
     <string name="osm_editing_plugin_description">Buat kontribusi ke OpenStreetMap, sebuah komunitas global yang membuat peta dunia dan menyediakan data sumber terbuka terbaru kepada pengguna siapa pun.
@@ -2806,9 +2794,6 @@
     <string name="renew_subscription">Perbarui langganan</string>
     <string name="three_months_subscription">Langganan tiga bulan</string>
     <string name="map_widget_distance_by_tap">Jarak dengan ketukan</string>
-    <string name="open_place_reviews_plugin_description">Buat kontribusi ke proyek OpenPlaceReviews, seperti foto, ulasan, atau tautan untuk tempat publik seperti restoran, hotel, atau museum.
-\n
-\nCari petunjuk cara berkontribusi di situs web kami %1$s.</string>
     <string name="activity_type_riding_name">Berkendara</string>
     <string name="activity_type_winter_name">Musim dingin</string>
     <string name="routing_engine_vehicle_type_hgv">HGV</string>
@@ -3523,7 +3508,6 @@
     <string name="map_widget_appearance_rem">Elemen yang tersisa</string>
     <string name="traffic_warning_border_control">Gerbang perbatasan</string>
     <string name="traffic_warning_speed_camera">Kamera kecepatan</string>
-    <string name="rendering_attr_hideAccess_name">Pembatasan akses</string>
     <string name="rendering_attr_showCycleRoutes_name">Rute bersepeda</string>
     <string name="gpx_selection_number_of_points">%1$s titik</string>
     <string name="gpx_selection_point">Titik %1$s</string>
@@ -3551,7 +3535,7 @@
     <string name="tts_missing_language_data_title">Data hilang</string>
     <string name="track_points">Titik trek</string>
     <string name="days_behind">hari di belakang</string>
-    <string name="rendering_attr_pisteRoutes_name">Lereng ski</string>
+    <string name="rendering_attr_pisteRoutes_name">Rute ski</string>
     <string name="rendering_attr_pisteGrooming_name">Perawatan piste</string>
     <string name="gpx_selection_points">%1$s
 \nTitik</string>
@@ -3708,7 +3692,7 @@
     <string name="monitoring_min_distance_descr_recommendation">Rekomendasi: Tetapkan perpindahan 5 meter jika Anda tidak ingin mencatat detail kecil dari rute Anda, dan tidak memerlukan data tambahan tentang periode istirahat Anda.</string>
     <string name="apply_preference_to_all_profiles">Terapkan perubahan ini ke semua atau profil yang dipilih.</string>
     <string name="routing_attr_allow_private_for_truck_description">Izinkan akses ke area pribadi untuk truk.</string>
-    <string name="map_widget_trip_recording_distance">Jarak</string>
+    <string name="map_widget_distance">Jarak</string>
     <string name="rendering_attr_horseRoutes_name">Rute kuda</string>
     <string name="osm_save_offline">Simpan secara luring</string>
     <string name="osn_reopen_dialog_title">Buka kembali catatan</string>
@@ -4046,7 +4030,7 @@
     <string name="trip_recording_duration_widget_desc">Menampilkan waktu perekaman trek, durasi dalam menit/jam dari perjalanan yang sedang direkam.</string>
     <string name="download_tiles">Unduh ubin</string>
     <string name="connect_with_straight_line">Hubungkan dengan garis lurus</string>
-    <string name="attach_roads_descr">Perkirakan trek Anda ke jalan yang diperbolehkan untuk merute antara titik dan kaitkan instruksi belokan tepat dan properti rute.</string>
+    <string name="attach_roads_descr">Pasang trek Anda pada jalan untuk mendapatkan informasi rute detail, termasuk petunjuk putaran dan atribut jalan.</string>
     <string name="auto_backup_title">Pencadangan otomatis</string>
     <string name="without_profiles_changing">Tanpa perubahan profil</string>
     <string name="shared_string_only_missing">Hanya hilang</string>
@@ -6007,7 +5991,6 @@
     <string name="fuel_tank_capacity">Kapasitas tangki bahan bakar</string>
     <string name="shared_strings_dimensions">Dimensi</string>
     <string name="litres">Liter</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galon imperial</string>
     <string name="us_gallons">Galon AS</string>
@@ -6052,7 +6035,7 @@
     <string name="location_interpolation_percent">Persentase interpolasi lokasi</string>
     <string name="shared_string_interpolation">Interpolasi</string>
     <string name="location_interpolation_percent_desc">Tetapkan presentasi interpolasi lokasi saat navigasi rute. Parameter ini mengurangi kelambatan posisi lokasi di peta saat ada animasi.</string>
-    <string name="selected_delayed_profile">Profil \"%s\" terpilih</string>
+    <string name="selected_delayed_profile">Profil \"%s\\ terpilih</string>
     <string name="default_buttons_corners_original_description">Setiap tombol tetap memiliki radius bulatnya sendiri.</string>
     <string name="default_buttons_size_original_description">Setiap tombol tetap memiliki ukurannya sendiri.</string>
     <string name="default_buttons_opacity_original_description">Setiap tombol tetap memiliki opasitas latar belakangnya sendiri.</string>
@@ -6062,4 +6045,81 @@
     <string name="calculate_size">Hitung ukuran</string>
     <string name="display_distance_to_first_intermediate_summary">Menampilkan waktu dan jarak untuk perhentian pertama terlebih dahulu. Matikan untuk selalu menampilkan detail tujuan.</string>
     <string name="display_distance_to_first_intermediate">Tampilkan detail rute until perhentian berikutnya</string>
+    <string name="recently_visited">Dikunjungi baru-baru ini</string>
+    <string name="popular_places_nearby">Tempat-tempat sekitar yang populer</string>
+    <string name="shared_string_avg_altitude">Ketinggian rata-rata</string>
+    <string name="shared_string_length">Panjang</string>
+    <string name="shared_string_avg_speed">Kecepatan minimum</string>
+    <string name="map_widget_route_information">Informasi rute</string>
+    <string name="map_widget_route_information_desc">Menampilkan waktu tiba, sisa waktu perjalanan, dan jarak untuk rute navigasi saat ini.</string>
+    <string name="ais_nmea_protocol">Protokol untuk penerimaan data NMEA</string>
+    <string name="ais_address_nmea_server">Alamat IP sumber data NMEA</string>
+    <string name="ais_address_settings">Pengaturan alamat IP</string>
+    <string name="ais_load_data">Muat data AIS dari berkas</string>
+    <string name="ais_nmea_protocol_description">Pilih protokol untuk penerimaan data NMEA</string>
+    <string name="ais_ship_lost_timeout_description">Tetapkan habisnya waktu keterlihatan kapal: Setelah waktu ini tanpa penerimaan sinyal, simbol kapal akan berubah keadaannya pada layar: Akan di silang.</string>
+    <string name="plugin_ais_tracker_disclaimer">PENAFIAN\n\nPlugin ini merupakan proyek hobi dan tidak dirancang untuk keandalan dan kebenaran. JANGAN bergantung pada perangkat lunak ini dengan cara apa pun termasuk navigasi dan/atau keamanan kehidupan.</string>
+    <string name="ais_cpa_warning_distance_description">Kapal ditandai dengan warna merah jika CPA lebih sedikit daripada nilai ini dan jika CPA tercapai dalam waktu dekat (lihat penetapan Waktu peringatan untuk mencapai CPA).</string>
+    <string name="ais_address_settings_description">Pilih protokol NMEA (UDP/TCP) dan tentukan alamat</string>
+    <string name="ais_address_nmea_server_description">Tentukan alamat IP sumber data NMEA (jika TCP digunakan)</string>
+    <string name="ais_port_nmea_server">Porta TCP sumber data NMEA</string>
+    <string name="ais_port_nmea_server_description">Tentukan nomor porta TCP sumber data NMEA</string>
+    <string name="ais_port_nmea_local">Porta UDP penerima data NMEA lokal</string>
+    <string name="ais_port_nmea_local_description">Tentukan porta UDP di mana OsmAnd menerima data NMEA</string>
+    <string name="ais_object_lost_timeouts">Pengaturan habisnya waktu untuk penerimaan sinyal AIS</string>
+    <string name="ais_object_lost_timeouts_description">Tetapkan nilai habisnya waktu mengenal objek AIS yang hilang jika tidak ada sinyal yang diterima pada waktu tertentu.</string>
+    <string name="ais_object_lost_timeout">Habisnya waktu keterlihatan ketika objek hilang</string>
+    <string name="ais_object_lost_timeout_description">Tetapkan habisnya waktu keterlihatan objek AIS: Setelah waktu ini tanpa penerimaan sinyal, objek AIS akan dihilangkan dari layar.</string>
+    <string name="ais_ship_lost_timeout">Habisnya waktu keterlihatan kapal ketika tidak ada sinyal yang diterima</string>
+    <string name="ais_cpa_settings">Pengaturan berkaitan dengan CPA</string>
+    <string name="ais_cpa_settings_description">Nilai-nilai ini menentukan penampilan objek AIS yang mungkin terlalu dekat dengan posisinya.</string>
+    <string name="ais_cpa_warning_time">Waktu peringatan mencapai Titik Pendekatan Terdekat (CPA)</string>
+    <string name="ais_cpa_warning_time_description">Jika TCPA (waktu mencapai CPA dengan kapal lain) lebih sedikit daripada nilai ini, kapal akan ditandai dengan warna merah.</string>
+    <string name="ais_cpa_warning_distance">Peringatan jarak untuk Titik Pendekatan Terdekat (CPA)</string>
+    <string name="plugin_ais_tracker_name">Pelacak kapal AIS</string>
+    <string name="plugin_ais_tracker_description">Menampilkan posisi dan informasi AIS tentang kapal di sekitar. Data AIS diterima melalui jaringan dari penerima AIS eksternal.</string>
+    <string name="shared_string_default_view">Tampilan bawaan</string>
+    <string name="show_utm_grids">Gunakan UTM daripada WGS84</string>
+    <string name="map_grid">Kisi peta</string>
+    <string name="show_utm_grids_description">Tampilkan kisi dalam meter UTM daripada WGS84</string>
+    <string name="show_grids_description">Perbolehkan menampilkan kisi pada peta</string>
+    <string name="show_grids">Tampilkan kisi peta</string>
+    <string name="no_places_available">Tidak ada tempat yang tersedia</string>
+    <string name="no_photo_for_location_desc">Belum ada foto pengguna yang ditambahkan ke tempat ini</string>
+    <string name="show_mercator_grids">Gunakan Mercator daripada WGS84 atau UTM</string>
+    <string name="show_mercator_grids_description">Tampilkan kisi dalam km Mercator daripada WGS84 atau UTM</string>
+    <string name="show_dms_grids_description">Tampilkan kisi dalam derajat, menit, detik daripada derajat</string>
+    <string name="show_dm_grids">Gunakan DM daripada derajat atau DMS</string>
+    <string name="show_dm_grids_description">Tampilkan kisi dalam derajat dan menit daripada derajat atau DMS</string>
+    <string name="original_color_description">Setiap titik menyimpan warnanya sendiri.</string>
+    <string name="original_icon_description">Setiap titik menyimpan ikonnya sendiri.</string>
+    <string name="apply_to_all_points">Tetapkan ke semua titik</string>
+    <string name="original_shape_description">Setiap titik menyimpan bentuknya sendiri.</string>
+    <string name="save_favorite_default_appearance">Tetapkan perubahan pada titik-titik yang sudah ada dalam folder atau hanya yang baru?</string>
+    <string name="show_dms_grids">Gunakan DMS daripada derajat</string>
+    <string name="hmd_promo">Promo HMD selama %1$s bulan</string>
+    <string name="hmd_promo_description">Akses fitur secara gratis termasuk pengunduhan peta tidak terbatas, relief 3D, dll. selama %1$s bulan</string>
+    <string name="shared_string_road_exit">Keluar</string>
+    <string name="show_list">Tampilkan daftar</string>
+    <string name="point_location">Lokasi titik</string>
+    <string name="shared_string_manual">Manual</string>
+    <string name="shared_string_map_center">Tengah peta</string>
+    <string name="choose_location_on_map">Pilih lokasi di peta.</string>
+    <string name="popular_places">Tempat populer</string>
+    <string name="choose_location">Pilih lokasi</string>
+    <string name="show_image_previews">Tampilkan pratinjau gambar</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Tindakan mengendalikan keterlihatan kisi Koordinat pada peta.</string>
+    <string name="layer_coordinates_grid">Kisi koordinat</string>
+    <string name="prime_meridian">Meridian primer</string>
+    <string name="meridian_180">Meridian ke-180</string>
+    <string name="equator">Ekuator</string>
+    <string name="release_5_0">• Temukan POI peringkat teratas dengan mode Explore baru\n\n • Semua rute OSM, sekarang dapat dicari! Hiking, bersepeda, mtb, dan banyak lagi\n\n • Widget navigasi baru menggabungkan petunjuk panah dan navigasi\n\n • Widget Info Rute Saat Ini: Menampilkan ETA, Waktu Kedatangan, dan Jarak\n\n\n\n • Pilih lereng ski dan jalur MTB di peta untuk informasi terperinci\n\n\n\n • Kemampuan untuk memilih ukuran widget untuk panel kiri dan kanan\n\n\n\n • Menambahkan koordinat kisi dengan koordinat geografis\n\n\n\n • Menambahkan kemampuan untuk menyesuaikan tampilan default grup favorit\n\n\n\n • Android Auto: Lihat ETA dan Jarak ke Waypoint berikutnya; Nama kota sekarang muncul di hasil pencarian\n\n\n\n • Puncak yang menonjol sekarang dapat ditemukan melalui peta dan pencarian\n\n\n\n • ketinggian puncak gunung di kaki\n\n\n\n • Ditambahkan: tebing dan area pendakian di peta\n\n\n\n • Pencarian alamat di AS telah ditingkatkan\n\n\n\n • Menambahkan TT Ibrani untuk navigasi</string>
+    <string name="shared_string_online_only">Hanya Daring</string>
+    <string name="shared_string_offline_only">Hanya Luring</string>
+    <string name="intermediate_first">Perhentian terlebih dahulu</string>
+    <string name="destination_first">Tujuan terlebih dahulu</string>
+    <string name="display_priority">Tampilkan prioritas</string>
+    <string name="row_height">Ketinggian baris</string>
+    <string name="add_widget">Tambahkan widget</string>
+    <string name="poi_source">Sumber POI</string>
 </resources>

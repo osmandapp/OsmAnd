@@ -9,7 +9,6 @@ import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.CITY;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
-import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -35,6 +34,7 @@ import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
@@ -72,6 +72,7 @@ public class SearchCoreFactory {
 	public static final int PREFERRED_COUNTRY_ZOOM = 7;
 	public static final int PREFERRED_CITY_ZOOM = 13;
 	public static final int PREFERRED_POI_ZOOM = 16;
+	public static final int PREFERRED_NEARBY_POINT_ZOOM = 16;
 	public static final int PREFERRED_WPT_ZOOM = 16;
 	public static final int PREFERRED_GPX_FILE_ZOOM = 17;
 	public static final int PREFERRED_DEFAULT_RECENT_ZOOM = 17;
@@ -111,7 +112,6 @@ public class SearchCoreFactory {
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 700;
 	protected static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
 	protected static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
-
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
 
@@ -563,7 +563,8 @@ public class SearchCoreFactory {
 						SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
 				if (ArabicNormalizer.isSpecialArabic(wordToSearch)) {
-					wordToSearch = ArabicNormalizer.normalize(wordToSearch);
+					String normalized = ArabicNormalizer.normalize(wordToSearch);
+					wordToSearch = normalized == null ? wordToSearch : normalized;
 				}
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
@@ -619,7 +620,8 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			String searchWord = phrase.getUnknownWordToSearch();
 			if (ArabicNormalizer.isSpecialArabic(searchWord)) {
-				searchWord = ArabicNormalizer.normalize(searchWord);
+				String normalized = ArabicNormalizer.normalize(searchWord);
+				searchWord = normalized == null ? searchWord : normalized;
 			}
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 			QuadRect bbox = phrase.getFileRequest() != null ? phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY) : phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
@@ -812,6 +814,12 @@ public class SearchCoreFactory {
 				if (nmAdditional != null) {
 					addAditonals(nmAdditional, results, c);
 				}
+				for (PoiFilter pf : c.getPoiFilters()) {
+					PoiTypeResult filtRes = checkPoiType(nm, pf);
+					if (filtRes != null) {
+						results.put(filtRes.pt.getKeyName(), filtRes);
+					}
+				}
 			}
 			Map<String, PoiTypeResult> additionals = new LinkedHashMap<>();
 			Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
@@ -850,10 +858,9 @@ public class SearchCoreFactory {
 						existingResult.pt = f;
 					} else {
 						String enTranslation = a.getEnTranslation().toLowerCase();
-						if (!"no".equals(enTranslation) // && !"yes".equals(enTranslation)
-						) {
+						if (!"no".equals(enTranslation) ) {
 							PoiTypeResult ptr = checkPoiType(nm, a);
-							if (ptr != null) {
+							if (ptr != null && ptr.pt != null && ptr.pt.isTopVisible()) {
 								results.put(a.getKeyName(), ptr);
 							}
 						}
@@ -1717,11 +1724,13 @@ public class SearchCoreFactory {
 
 	public static class PoiAdditionalCustomFilter extends AbstractPoiType {
 
+		private final PoiType poiType;
 		public List<PoiType> additionalPoiTypes = new ArrayList<>();
 
 		public PoiAdditionalCustomFilter(MapPoiTypes registry, PoiType pt) {
 			super(pt.getKeyName(), registry);
 			additionalPoiTypes.add(pt);
+			poiType = pt;
 		}
 
 		@Override
@@ -1741,6 +1750,22 @@ public class SearchCoreFactory {
 
 			}
 			return acceptedTypes;
+		}
+
+		@Override
+		public String getParentTypeName() {
+			return poiType.getParentTypeName();
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			if (super.equals(other)) {
+				if (!(other instanceof PoiAdditionalCustomFilter that)) {
+					return false;
+				}
+				return this.additionalPoiTypes.equals(that.additionalPoiTypes);
+			}
+			return false;
 		}
 
 	}
@@ -1997,6 +2022,30 @@ public class SearchCoreFactory {
 	public static boolean isLastWordCityGroup(SearchPhrase p ) {
 		return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) ||
 				p.isLastWord(ObjectType.VILLAGE);
+	}
+
+	public static SearchResult createSearchResult(Amenity amenity, SearchPhrase phrase,
+			MapPoiTypes poiTypes) {
+		SearchResult result = new SearchResult(phrase);
+		result.object = amenity;
+		result.objectType = POI;
+		result.location = amenity.getLocation();
+		result.preferredZoom = PREFERRED_POI_ZOOM;
+
+		SearchSettings settings = phrase.getSettings();
+		result.otherNames = amenity.getOtherNames(true);
+		result.alternateName = amenity.getCityFromTagGroups(settings.getLang());
+		result.localeName = amenity.getName(settings.getLang(), settings.isTransliterate());
+		if (Algorithms.isEmpty(result.localeName)) {
+			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());
+			if (poiType != null) {
+				result.localeName = poiType.getTranslation();
+			} else {
+				result.localeName = amenity.getSubType();
+			}
+		}
+
+		return result;
 	}
 
 	private static class TopIndexMatch {

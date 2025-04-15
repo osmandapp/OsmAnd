@@ -295,7 +295,7 @@ public class SearchUICore {
 							}
 							if (Algorithms.stringsEqual(a1.getAdditionalInfo(ROUTE_ID), a2.getAdditionalInfo(ROUTE_ID))
 								&& (subType1.startsWith(ROUTES_PREFIX) || subType1.equals(ROUTE_TRACK))) {
-								similarityRadius = 50000;
+								similarityRadius = 1_000_000; // conceal redundant "5km" TravelGpx points
 							}
 						}
 					} else if (ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
@@ -304,7 +304,7 @@ public class SearchUICore {
 					return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
 				}
 			} else if (r1.object != null && r2.object != null) {
-				return r1.object == r2.object;
+				return r1.object.equals(r2.object);
 			}
 			return false;
 		}
@@ -996,7 +996,6 @@ public class SearchUICore {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
-		COMPARE_AMENITY_TYPE_ADDITIONAL,
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
 		COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT, // makes sense only for inner subqueries
@@ -1054,15 +1053,6 @@ public class SearchUICore {
 				int st2 = Algorithms.extractFirstIntegerNumber(localeName2);
 				if (st1 != st2) {
 					return Algorithms.compare(st1, st2);
-				}
-				break;
-			}
-			case COMPARE_AMENITY_TYPE_ADDITIONAL: {
-				boolean additional1 = o1.object instanceof AbstractPoiType && ((AbstractPoiType) o1.object).isAdditional();
-				boolean additional2 = o2.object instanceof AbstractPoiType && ((AbstractPoiType) o2.object).isAdditional();
-				if (additional1 != additional2) {
-					// -1 - means 1st is less than 2nd
-					return additional1 ? 1 : -1;
 				}
 				break;
 			}

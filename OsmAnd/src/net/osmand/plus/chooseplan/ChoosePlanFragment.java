@@ -289,8 +289,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		tvTitle.setTextColor(colorNoAlpha);
 
 		TextView tvDescription = view.findViewById(R.id.description);
-		String pricePattern = getString(R.string.from_with_param);
-		String description = price != null ? String.format(pricePattern, price) : "";
+		String description = price != null ? price.toString() : "";
 		tvDescription.setText(description);
 		tvDescription.setTextColor(ColorUtilities.getColorWithAlpha(colorNoAlpha, 0.75f));
 

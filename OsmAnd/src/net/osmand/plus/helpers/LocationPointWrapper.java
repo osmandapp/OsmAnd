@@ -13,7 +13,6 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.settings.enums.DrivingRegion;
@@ -61,7 +60,7 @@ public class LocationPointWrapper {
 	public Drawable getDrawable(@NonNull Context context, @NonNull OsmandApplication app, boolean nightMode) {
 		if (type == WaypointHelper.POI) {
 			Amenity amenity = ((AmenityLocationPoint) point).getAmenity();
-			String iconName = RenderingIcons.getBigIconNameForAmenity(amenity);
+			String iconName = RenderingIcons.getBigIconNameForAmenity(app, amenity);
 			return iconName == null ? null : AppCompatResources.getDrawable(context,
 					RenderingIcons.getBigIconResourceId(iconName));
 		} else if (type == WaypointHelper.TARGETS) {

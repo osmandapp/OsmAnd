@@ -3,6 +3,7 @@ package net.osmand.osm;
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.data.Amenity;
+import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -658,6 +659,7 @@ public class MapPoiTypes {
 		ref.setTopVisible(poiAdditional.isTopVisible());
 		ref.setText(poiAdditional.isText());
 		ref.setOrder(poiAdditional.getOrder());
+		ref.setHidden(poiAdditional.isHidden());
 		ref.setOsmTag(poiAdditional.getOsmTag());
 		ref.setNotEditableOsm(poiAdditional.isNotEditableOsm());
 		ref.setOsmValue(poiAdditional.getOsmValue());
@@ -696,6 +698,7 @@ public class MapPoiTypes {
 			 (lastFilter != null ? lastFilter : lastCategory));
 		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
+		tp.setHidden(Boolean.parseBoolean(parser.getAttributeValue("", "hidden")));
 		String orderStr = parser.getAttributeValue("", "order");
 		if (!Algorithms.isEmpty(orderStr)) {
 			tp.setOrder(Integer.parseInt(orderStr));
@@ -753,6 +756,7 @@ public class MapPoiTypes {
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
+		tp.setHidden(Boolean.parseBoolean(parser.getAttributeValue("", "hidden")));
 		String orderStr = parser.getAttributeValue("", "order");
 		if (!Algorithms.isEmpty(orderStr)) {
 			tp.setOrder(Integer.parseInt(orderStr));
@@ -948,7 +952,7 @@ public class MapPoiTypes {
 
 
 	private void initPoiType(PoiType p) {
-		if (!p.isReference()) {
+		if (!p.isReference() && !Algorithms.isEmpty(p.getRawOsmTag())) {
 			String key = null;
 			if (p.isAdditional()) {
 				key = p.isText() ? p.getRawOsmTag() :
@@ -992,8 +996,9 @@ public class MapPoiTypes {
 			return null;
 		}
 		boolean multy = "multipolygon".equals(otherTags.get("type")) || "site".equals(otherTags.get("type"));
+		boolean superroute = OsmMapUtils.isSuperRoute(otherTags);
 		// example of site is scottish parliament POI
-		if (!multy && relation && !pt.isRelation()) {
+		if (!multy && relation && !pt.isRelation() && !superroute) {
 			return null;
 		}
 

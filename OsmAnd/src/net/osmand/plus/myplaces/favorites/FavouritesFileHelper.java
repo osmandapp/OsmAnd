@@ -4,16 +4,17 @@ import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.FAVORITES_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
+import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.gpx.GpxFile;
@@ -24,14 +25,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -69,12 +63,12 @@ public class FavouritesFileHelper {
 		return new File(app.getAppPath(null), LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT);
 	}
 
-	public File getExternalFile(FavoriteGroup group) {
+	@NonNull
+	public File getExternalFile(@NonNull FavoriteGroup group) {
 		File favDir = getExternalDir();
-		String fileName = (group.getName().isEmpty()
-				? FAV_FILE_PREFIX
-				: FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + getGroupFileName(group.getName())) + GPX_FILE_EXT;
-		return new File(favDir, fileName);
+		String fileName = group.getName().isEmpty() ? FAV_FILE_PREFIX
+				: FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + getGroupFileName(group.getName());
+		return new File(favDir, fileName + GPX_FILE_EXT);
 	}
 
 	@NonNull
@@ -139,15 +133,17 @@ public class FavouritesFileHelper {
 		}
 	}
 
-	public void saveFavoritesIntoFile(@NonNull List<FavoriteGroup> groups, @Nullable SaveFavoritesListener listener) {
-		SaveFavoritesTask savePointsTask = new SaveFavoritesTask(this, groups, listener);
-		savePointsTask.executeOnExecutor(singleThreadExecutor);
+	public void saveFavoritesIntoFile(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
+			@Nullable SaveFavoritesListener listener) {
+		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
+		task.executeOnExecutor(singleThreadExecutor);
 	}
 
-	public void saveFavoritesIntoFileSync(@NonNull List<FavoriteGroup> groups, @Nullable SaveFavoritesListener listener) {
-		SaveFavoritesTask savePointsTask = new SaveFavoritesTask(this, groups, listener);
+	public void saveFavoritesIntoFileSync(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
+			@Nullable SaveFavoritesListener listener) {
+		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
 		try {
-			savePointsTask.executeOnExecutor(singleThreadExecutor).get();
+			task.executeOnExecutor(singleThreadExecutor).get();
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}
@@ -190,6 +186,7 @@ public class FavouritesFileHelper {
 		return SharedUtil.writeGpxFile(file, gpx);
 	}
 
+	@NonNull
 	private File getBackupsFolder() {
 		File folder = new File(app.getAppPath(null), BACKUP_INDEX_DIR);
 		if (!folder.exists()) {
@@ -218,6 +215,7 @@ public class FavouritesFileHelper {
 		return result;
 	}
 
+	@NonNull
 	public List<File> getBackupFiles() {
 		List<File> backupFiles = new ArrayList<>();
 		File[] files = getBackupsFolder().listFiles();
@@ -235,7 +233,7 @@ public class FavouritesFileHelper {
 		clearOldBackups(getBackupFiles(), BACKUP_MAX_COUNT);
 	}
 
-	private void clearOldBackups(List<File> files, int maxCount) {
+	private void clearOldBackups(@NonNull List<File> files, int maxCount) {
 		if (files.size() >= maxCount) {
 			// sort in order from oldest to newest
 			Collections.sort(files, (f1, f2) -> {
@@ -248,27 +246,37 @@ public class FavouritesFileHelper {
 		}
 	}
 
+	@NonNull
 	private static String formatTime(long time) {
 		SimpleDateFormat format = getTimeFormatter();
 		return format.format(new Date(time));
 	}
 
+	@NonNull
 	private static SimpleDateFormat getTimeFormatter() {
 		SimpleDateFormat format = new SimpleDateFormat(TIME_PATTERN, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return format;
 	}
 
+	@NonNull
 	public static String getGroupFileName(@NonNull String groupName) {
 		if (groupName.contains("/")) {
 			return groupName.replaceAll("/", SUBFOLDER_PLACEHOLDER);
 		}
+		if (groupName.contains(":")) {
+			return groupName.replaceAll(":", XML_COLON);
+		}
 		return groupName;
 	}
 
+	@NonNull
 	public static String getGroupName(@NonNull String fileName) {
 		if (fileName.contains(SUBFOLDER_PLACEHOLDER)) {
 			return fileName.replaceAll(SUBFOLDER_PLACEHOLDER, "/");
+		}
+		if (fileName.contains(XML_COLON)) {
+			return fileName.replaceAll(XML_COLON, ":");
 		}
 		return fileName;
 	}

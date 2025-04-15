@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/content_padding"
+    android:orientation="vertical">
+
+    <net.osmand.plus.widgets.TextViewEx
+        style="@style/TitleStyle.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:textColor="?android:textColorPrimary"
+        android:text="@string/choose_location_on_map" />
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:id="@+id/coordinates"
+        style="@style/DescStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/content_padding_minimal"
+        android:textColor="?android:textColorSecondary"
+        tools:text="50.385780, 6.656350" />
+
+</LinearLayout>

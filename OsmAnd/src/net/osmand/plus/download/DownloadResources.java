@@ -139,6 +139,24 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	@NonNull
+	public List<IndexItem> getIndexItems(@Nullable List<DownloadActivityType> types) {
+		if (rawResources == null) {
+			return Collections.emptyList();
+		}
+		List<IndexItem> items = new ArrayList<>();
+		if (Algorithms.isEmpty(types)) {
+			items.addAll(rawResources);
+		} else {
+			for (IndexItem item : rawResources) {
+				if (types.contains(item.getType())) {
+					items.add(item);
+				}
+			}
+		}
+		return items;
+	}
+
+	@NonNull
 	public List<DownloadItem> getDownloadItems(WorldRegion region) {
 		DownloadResourceGroup group = getRegionMapsGroup(region);
 		if (group != null) {

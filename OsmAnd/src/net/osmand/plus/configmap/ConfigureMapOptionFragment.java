@@ -63,19 +63,13 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		View view = themedInflater.inflate(R.layout.configure_map_option_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
 
-		applyButton = view.findViewById(R.id.apply_button);
-		applyButton.setOnClickListener(viewOnCLick -> {
-			applyChanges();
-			dismiss();
-		});
-
+		setupApplyButton(applyButton = view.findViewById(R.id.apply_button));
 		setupToolBar(view);
 		buildZoomButtons(view);
 		moveMap3DButton(view);
 		setupBackgroundShadow(view);
 		setupBottomContainer(view.findViewById(R.id.bottom_container));
 		setupMainContent(view.findViewById(R.id.main_content));
-		updateApplyButton(false);
 
 		refreshMap();
 		refreshControlsButtons();
@@ -116,9 +110,9 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer controlsLayer = mapLayers.getMapControlsLayer();
 
-		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_zoom_in_button));
-		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_zoom_out_button));
-		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_my_location_button));
+		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_in_button));
+		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_out_button));
+		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_my_location_button));
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 
@@ -135,6 +129,14 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 			activity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			view.findViewById(R.id.main_view).setBackgroundResource(typedValueAttr.resourceId);
 		}
+	}
+
+	protected void setupApplyButton(@NonNull DialogButton applyButton) {
+		applyButton.setOnClickListener(viewOnCLick -> {
+			applyChanges();
+			dismiss();
+		});
+		updateApplyButton(false);
 	}
 
 	protected void setupToolBar(@NonNull View view) {

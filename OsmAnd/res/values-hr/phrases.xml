@@ -362,7 +362,6 @@
     <string name="poi_finance">Financije</string>
     <string name="poi_natural">Priroda</string>
     <string name="poi_military">Vojska</string>
-    <string name="poi_osmwiki">Wikipedija</string>
     <string name="poi_user_defined_other">Korisnički određeno</string>
     <string name="poi_bakery">Pekara</string>
     <string name="poi_cheese">Prodavaonica sireva</string>
@@ -888,8 +887,8 @@
     <string name="poi_defibrillator">Defibrilator</string>
     <string name="poi_defibrillator_yes">Defibrilator: da</string>
     <string name="poi_animal_training_dog">Pas</string>
-    <string name="poi_site_type_settlement">Naselje</string>
-    <string name="poi_site_type_city">Grad</string>
+    <string name="poi_archaeological_site_settlement">Naselje</string>
+    <string name="poi_archaeological_site_city">Grad</string>
     <string name="poi_square">Kvadrat</string>
     <string name="poi_artist_name">Umjetnik</string>
     <string name="poi_sculptor">Kipar</string>
@@ -1376,7 +1375,7 @@
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_change_delete">Izbrisani objekt</string>
     <string name="poi_hazard_additional_erosion">Opasnost: erozija</string>
-    <string name="poi_hazard_additional_rockfall">Opasnost: odron stijena</string>
+    <string name="poi_hazard_additional_falling_rocks">Opasnost: odron stijena</string>
     <string name="poi_hazard_additional_nuclear">Opasnost: nuklearni otpad</string>
     <string name="poi_hazard_additional_flood">Opasnost: poplava</string>
     <string name="poi_hazard_additional_avalanche">Opasnost: lavine</string>
@@ -2029,7 +2028,7 @@
     <string name="poi_palm">Palma</string>
     <string name="poi_us_maps_recreation_area_activity_surfing">Surfing</string>
     <string name="poi_cypress">Čempres</string>
-    <string name="poi_site_type_hut_circle">Krug kolibe</string>
+    <string name="poi_archaeological_site_hut_circle">Krug kolibe</string>
     <string name="poi_volcano_type_mud">Blato</string>
     <string name="poi_animal_shelter_mammal">Sisavci</string>
     <string name="poi_water_characteristic_mineral">Mineralna</string>
@@ -2070,8 +2069,6 @@
     <string name="poi_smoking_isolated">U izoliranoj prostoriji</string>
     <string name="poi_full_service_yes">Sveobuhvatna usluga</string>
     <string name="poi_route_activity_type_trekking">Treking</string>
-    <string name="poi_route_activity_type_walking">Pješačenje</string>
-    <string name="poi_route_activity_type_skiing">Skijanje</string>
     <string name="poi_route_activity_type_harvesting">Žetva</string>
     <string name="poi_route_activity_type_tree_climbing">Penjanje po drvetu</string>
     <string name="poi_route_activity_type_fitness">Fitnes</string>
@@ -2131,7 +2128,6 @@
     <string name="poi_diaper_table_count">Broj stolova za mijenjanje pelena</string>
     <string name="poi_animal_shelter_purpose_release_no">Puštanje u divljinu: ne</string>
     <string name="poi_us_maps_recreation_area_activity_hunting">Lov</string>
-    <string name="poi_route_activity_type_hiking">Planinarenje</string>
     <string name="poi_route_activity_type_ice_skating">Klizanje</string>
     <string name="poi_route_activity_type_mushrooms_picking">Branje gljiva</string>
     <string name="poi_name_etymology">Etimologija imena</string>

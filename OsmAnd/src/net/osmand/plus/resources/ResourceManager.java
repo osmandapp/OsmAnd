@@ -1,6 +1,8 @@
 package net.osmand.plus.resources;
 
 
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE;
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.MULTISEARCH;
 import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.AppInitEvents.ASSETS_COPIED;
 import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
@@ -16,6 +18,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.Location;
@@ -141,7 +144,7 @@ public class ResourceManager {
 	protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<>();
 	//	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<>();
 	protected final Map<String, BinaryMapReaderResource> transportRepositories = new ConcurrentHashMap<>();
-	protected final Map<String, BinaryMapReaderResource> travelRepositories = new ConcurrentHashMap<>();
+	protected final Map<String, AmenityIndexRepository> travelRepositories = new ConcurrentHashMap<>();
 	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<>();
 	protected final Map<String, File> indexFiles = new ConcurrentHashMap<>();
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<>();
@@ -653,12 +656,17 @@ public class ResourceManager {
 					}
 					renderer.initializeNewResource(f, mapReader);
 					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
+					boolean isTravelObf = resource.getFileName().endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
 					if (mapReader.containsPoiData()) {
-						amenityRepositories.put(fileName, new AmenityIndexRepositoryBinary(resource, app));
+						AmenityIndexRepositoryBinary amenityResource = new AmenityIndexRepositoryBinary(f, resource, app);
+						amenityRepositories.put(fileName, amenityResource);
+						if (isTravelObf) {
+							// reuse until new BinaryMapReaderResourceType.TRAVEL_GPX
+							travelRepositories.put(resource.getFileName(), amenityResource);
+						}
 					}
 					fileReaders.put(fileName, resource);
-					if (resource.getFileName().endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-						travelRepositories.put(resource.getFileName(), resource);
+					if (isTravelObf) {
 						// travel files should be indexed separately (so it's possible to turn on / off)
 						continue;
 					}
@@ -737,33 +745,16 @@ public class ResourceManager {
 		return fileNames;
 	}
 
-	public List<BinaryMapIndexReader> getTravelMapRepositories() {
-		List<BinaryMapIndexReader> res = new ArrayList<>();
-		for (String fileName : getTravelRepositoryNames()) {
-			BinaryMapReaderResource resource = travelRepositories.get(fileName);
-			if (resource != null) {
-				BinaryMapIndexReader shallowReader = resource.getShallowReader();
-				if (shallowReader != null && shallowReader.containsMapData()) {
-					res.add(shallowReader);
-				}
-			}
-		}
-		return res;
+	public List<AmenityIndexRepository> getTravelGpxRepositories() {
+		return getAmenityRepositories(true);
 	}
 
-	public List<BinaryMapIndexReader> getTravelRepositories() {
-		List<BinaryMapIndexReader> res = new ArrayList<>();
-		for (String fileName : getTravelRepositoryNames()) {
-			BinaryMapReaderResource r = travelRepositories.get(fileName);
-			if (r != null) {
-				res.add(r.getReader(BinaryMapReaderResourceType.POI));
-			}
-		}
-		return res;
+	public List<AmenityIndexRepository> getWikivoyageRepositories() {
+		return new ArrayList<>(travelRepositories.values());
 	}
 
-	public boolean isTravelGuidesRepositoryEmpty() {
-		return getTravelRepositories().isEmpty();
+	public boolean isWikivoyageRepositoryEmpty() {
+		return travelRepositories.isEmpty();
 	}
 
 	public void initMapBoundariesCacheNative() {
@@ -783,8 +774,11 @@ public class ResourceManager {
 
 	public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
 		List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
-		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
-		List<AmenityIndexRepository> res = new ArrayList<>();
+		List<AmenityIndexRepository> baseMaps = new ArrayList<>();
+		List<AmenityIndexRepository> result = new ArrayList<>();
+
+		fileNames.sort(Algorithms.getStringVersionComparator());
+
 		for (String fileName : fileNames) {
 			if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
 				if (!includeTravel || !app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()) {
@@ -792,21 +786,15 @@ public class ResourceManager {
 				}
 			}
 			AmenityIndexRepository r = amenityRepositories.get(fileName);
-			if (r != null) {
-				res.add(r);
+			if (r != null && r.isWorldMap()) {
+				baseMaps.add(r);
+			} else if (r != null) {
+				result.add(r);
 			}
 		}
-		return res;
-	}
 
-	@NonNull
-	public List<BinaryMapIndexReader> getAmenityReaders(boolean includeTravel) {
-		List<BinaryMapIndexReader> readers = new ArrayList<>();
-		List<AmenityIndexRepository> repos = app.getResourceManager().getAmenityRepositories(includeTravel);
-		for (AmenityIndexRepository repo : repos) {
-			readers.add(((AmenityIndexRepositoryBinary) repo).getOpenFile());
-		}
-		return readers;
+		result.addAll(baseMaps);
+		return result;
 	}
 
 	@NonNull
@@ -829,7 +817,11 @@ public class ResourceManager {
 			double leftLongitude, double bottomLatitude,
 			double rightLongitude, int zoom, boolean includeTravel,
 			ResultMatcher<Amenity> matcher) {
-		List<Amenity> amenities = new ArrayList<>();
+
+		Set<Long> openAmenities = new HashSet<>();
+		Set<Long> closedAmenities = new HashSet<>();
+		List<Amenity> actualAmenities = new ArrayList<>();
+
 		searchAmenitiesInProgress = true;
 		try {
 			boolean isEmpty = filter.isEmpty();
@@ -841,16 +833,28 @@ public class ResourceManager {
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
 				int right31 = MapUtils.get31TileNumberX(rightLongitude);
-				for (AmenityIndexRepository index : getAmenityRepositories(includeTravel)) {
+
+				List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel);
+
+				for (AmenityIndexRepository repo : repos) {
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;
 					}
-					if (index != null && index.checkContainsInt(top31, left31, bottom31, right31)) {
-						List<Amenity> r = index.searchAmenities(top31,
-								left31, bottom31, right31, zoom, filter, additionalFilter, matcher);
-						if (r != null) {
-							amenities.addAll(r);
+					if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
+						List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
+								zoom, filter, additionalFilter, matcher);
+						if (foundAmenities != null) {
+							for (Amenity amenity : foundAmenities) {
+								Long id = amenity.getId();
+								if (amenity.isClosed()) {
+									closedAmenities.add(id);
+								} else if (!closedAmenities.contains(id)) {
+									if (openAmenities.add(id)) {
+										actualAmenities.add(amenity);
+									}
+								}
+							}
 						}
 					}
 				}
@@ -858,7 +862,7 @@ public class ResourceManager {
 		} finally {
 			searchAmenitiesInProgress = false;
 		}
-		return amenities;
+		return actualAmenities;
 	}
 
 	@NonNull
@@ -931,6 +935,74 @@ public class ResourceManager {
 			}
 		}
 		return false;
+	}
+
+
+	private List<Amenity> searchRouteByName(String multipleSearch, CollatorStringMatcher.StringMatcherMode mode, ResultMatcher<Amenity> matcher) {
+		List<Amenity> result = new ArrayList<>();
+		BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+				0, 0, multipleSearch,0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher
+		);
+		req.setMatcherMode(mode);
+		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
+			List<Amenity> amenities = index.searchPoiByName(req);
+			if (!Algorithms.isEmpty(amenities)) {
+				result.addAll(amenities);
+			}
+		}
+		return result;
+	}
+
+	public List<Amenity> searchRoutePartOf(String routeId) {
+		ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+			@Override
+			public boolean publish(Amenity amenity) {
+				String members = amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS);
+				if (members != null) {
+					HashSet<String> ids = new HashSet<>();
+					Collections.addAll(ids, members.split(" "));
+					return ids.contains(routeId);
+				}
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		return searchRouteByName(routeId, CHECK_EQUALS_FROM_SPACE, matcher);
+	}
+
+	public Map<String, List<Amenity>> searchRouteMembers(String multipleSearch) {
+		HashSet<String> ids = new HashSet<>();
+		Collections.addAll(ids, multipleSearch.split(" "));
+		ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+			@Override
+			public boolean publish(Amenity amenity) {
+				String routeId = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+				return routeId != null && ids.contains(routeId);
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+
+		Map<String, List<Amenity>> map = new HashMap<>();
+		List<Amenity> result = searchRouteByName(multipleSearch, MULTISEARCH, matcher);
+		for (Amenity am : result) {
+			String routeId = am.getAdditionalInfo(Amenity.ROUTE_ID);
+			List<Amenity> amenities = map.computeIfAbsent(routeId, l -> new ArrayList<>());
+			amenities.add(am);
+		}
+		for (String id : ids) {
+			if (!map.containsKey(id)) {
+				map.put(id, null);
+			}
+		}
+		return map;
 	}
 
 	public List<Amenity> searchAmenitiesByName(String searchQuery,

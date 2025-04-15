@@ -5,7 +5,6 @@ import static net.osmand.data.PointDescription.POINT_TYPE_ROUTE;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.util.Pair;
 
@@ -39,7 +38,6 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -188,7 +186,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, boolean unknownLocation, boolean excludeUntouchableObjects) {
 
 	}
 

@@ -237,10 +237,10 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
+		ApplicationMode mode = getSelectedAppMode();
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
-			SpeedCamerasBottomSheet.showInstance(requireFragmentManager(), this);
+			SpeedCamerasBottomSheet.showInstance(requireFragmentManager(), this, mode, false);
 		} else if (settings.SPEED_LIMIT_EXCEED_KMH.getId().equals(prefId)) {
-			ApplicationMode mode = getSelectedAppMode();
 			SpeedLimitBottomSheet.showInstance(requireFragmentManager(), this, prefId, mode);
 		}
 		return super.onPreferenceClick(preference);

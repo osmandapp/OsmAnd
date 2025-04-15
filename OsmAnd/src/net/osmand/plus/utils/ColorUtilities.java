@@ -144,6 +144,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getSecondaryActiveColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getSecondaryActiveColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getSecondaryActiveColorId(boolean nightMode) {
+		return nightMode ? R.color.active_color_secondary_dark : R.color.active_color_secondary_light;
+	}
+
+	@ColorInt
 	public static int getActiveTabTextColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getActiveTabTextColorId(nightMode));
 	}
@@ -437,16 +447,21 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getMapButtonIconColor(@NonNull Context ctx, boolean nightMode) {
-		return ColorUtilities.getColor(ctx, nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light);
+		return getColor(ctx, nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light);
 	}
 
 	@ColorInt
 	public static int getMapButtonBackgroundColor(@NonNull Context ctx, boolean nightMode) {
-		return ColorUtilities.getColor(ctx, nightMode ? R.color.map_button_background_color_dark : R.color.map_button_background_color_light);
+		return getColor(ctx, nightMode ? R.color.map_button_background_color_dark : R.color.map_button_background_color_light);
 	}
 
 	@ColorInt
 	public static int getMapButtonBackgroundPressedColor(@NonNull Context ctx, boolean nightMode) {
-		return ColorUtilities.getColor(ctx, nightMode ? R.color.map_widget_dark_pressed : R.color.map_widget_light_pressed);
+		return getColor(ctx, nightMode ? R.color.map_widget_dark_pressed : R.color.map_widget_light_pressed);
+	}
+
+	@ColorInt
+	public static int getTransparentColor(@NonNull Context ctx) {
+		return getColor(ctx, R.color.color_transparent);
 	}
 }

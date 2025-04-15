@@ -35,7 +35,7 @@ import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -317,9 +317,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 			} else if (resId == R.string.poi_context_menu_modify) {
 				if (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null) {
-					EditPoiDialogFragment.showEditInstance(((TransportStop) selectedObj).getAmenity(), mapActivity);
+					EditPoiDialogFragment.showEditInstance(mapActivity, ((TransportStop) selectedObj).getAmenity());
 				} else if (selectedObj instanceof MapObject) {
-					EditPoiDialogFragment.showEditInstance((MapObject) selectedObj, mapActivity);
+					EditPoiDialogFragment.showEditInstance(mapActivity, (MapObject) selectedObj);
 				}
 			} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 				Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();
@@ -394,6 +394,16 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			registerLayers(mapActivity, mapActivity);
 		}
 		osmBugsLayer.modifyBug(mapActivity, point);
+	}
+
+	@NonNull
+	public OsmBugsLayer getOsmBugsLayer() {
+		return osmBugsLayer;
+	}
+
+	@NonNull
+	public OsmEditsLayer getOsmEditsLayer() {
+		return osmEditsLayer;
 	}
 
 	@Override
@@ -472,7 +482,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			if (RENDERING_CATEGORY_OSM_ASSISTANT.equals(property.getCategory())) {
 				iterator.remove();
 				String id = OPEN_STREET_MAP_ITEMS_ID_SCHEME + property.getAttrName();
-				adapter.addItem(ConfigureMapMenu.createRenderingProperty(adapter, mapActivity, INVALID_ID, property, id, nightMode));
+				adapter.addItem(ConfigureMapMenu.createRenderingProperty(mapActivity, INVALID_ID, property, id, nightMode));
 			}
 		}
 	}

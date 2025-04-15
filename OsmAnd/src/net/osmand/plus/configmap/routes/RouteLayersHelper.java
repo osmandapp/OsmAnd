@@ -5,6 +5,7 @@ import static net.osmand.osm.OsmRouteType.BICYCLE;
 import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.osm.OsmRouteType.MTB;
 import static net.osmand.plus.configmap.ConfigureMapMenu.ALPINE_HIKING_SCALE_SCHEME_ATTR;
+import static net.osmand.plus.configmap.routes.AlpineHikingCard.getDifficultyClassificationDescription;
 import static net.osmand.plus.configmap.routes.RouteUtils.CYCLE_NODE_NETWORK_ROUTES_ATTR;
 
 import android.content.Context;
@@ -13,14 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class RouteLayersHelper {
@@ -41,6 +43,11 @@ public class RouteLayersHelper {
 	private final CommonPreference<Boolean> alpineHikingPreference;
 	private final CommonPreference<String> alpineHikingScaleScheme;
 
+	@Nullable
+	private String selectedAttrName;
+	@Nullable
+	private RenderingClass selectedRenderingClass;
+
 	public RouteLayersHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
@@ -57,6 +64,24 @@ public class RouteLayersHelper {
 
 		alpineHikingPreference = settings.getCustomRenderBooleanProperty(ALPINE.getRenderingPropertyAttr());
 		alpineHikingScaleScheme = settings.getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
+	}
+
+	@Nullable
+	public String getSelectedAttrName() {
+		return selectedAttrName;
+	}
+
+	public void setSelectedAttrName(@Nullable String selectedAttrName) {
+		this.selectedAttrName = selectedAttrName;
+	}
+
+	@Nullable
+	public RenderingClass getSelectedRenderingClass() {
+		return selectedRenderingClass;
+	}
+
+	public void setSelectedRenderingClass(@Nullable RenderingClass renderingClass) {
+		this.selectedRenderingClass = renderingClass;
 	}
 
 	public void toggleRoutesType(@NonNull String attrName) {
@@ -85,6 +110,32 @@ public class RouteLayersHelper {
 			return isAlpineHikingRoutesEnabled();
 		} else {
 			return settings.getCustomRenderBooleanProperty(attrName).get();
+		}
+	}
+
+	@NonNull
+	public String getRoutesTypeName(@NonNull String attrName) {
+		if (BICYCLE.getRenderingPropertyAttr().equals(attrName)) {
+			return app.getString(R.string.rendering_attr_showCycleRoutes_name);
+		} else if (MTB.getRenderingPropertyAttr().equals(attrName)) {
+			return app.getString(R.string.app_mode_mountain_bicycle);
+		} else if (HIKING.getRenderingPropertyAttr().equals(attrName)) {
+			return app.getString(R.string.rendering_attr_hikingRoutesOSMC_name);
+		} else if (ALPINE.getRenderingPropertyAttr().equals(attrName)) {
+			return app.getString(R.string.rendering_attr_alpineHiking_name);
+		}
+		return AndroidUtils.getRenderingStringPropertyName(app, attrName, attrName);
+	}
+
+	@NonNull
+	public String getRoutesTypeDescription(@NonNull String attrName) {
+		boolean enabled = isRoutesTypeEnabled(attrName);
+		if (MTB.getRenderingPropertyAttr().equals(attrName)) {
+			return enabled ? getSelectedMtbClassificationName(app) : app.getString(R.string.shared_string_disabled);
+		} else if (ALPINE.getRenderingPropertyAttr().equals(attrName)) {
+			return getDifficultyClassificationDescription(app);
+		} else {
+			return app.getString(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 		}
 	}
 
@@ -145,13 +196,19 @@ public class RouteLayersHelper {
 
 	@NonNull
 	public String getSelectedMtbClassificationName(@NonNull Context context) {
+		MtbClassification classification = getSelectedMtbClassification();
+		return classification != null ? context.getString(classification.nameId) : "";
+	}
+
+	@NonNull
+	public MtbClassification getSelectedMtbClassification() {
 		String selectedId = getSelectedMtbClassificationId();
 		for (MtbClassification classification : MtbClassification.values()) {
 			if (Objects.equals(classification.attrName, selectedId)) {
-				return context.getString(classification.nameId);
+				return classification;
 			}
 		}
-		return "";
+		return null;
 	}
 
 	@Nullable
@@ -178,8 +235,7 @@ public class RouteLayersHelper {
 
 	public boolean isHikingRoutesEnabled() {
 		RenderingRuleProperty property = getHikingRenderingRuleProperty();
-		List<String> possibleValues = property != null ? Arrays.asList(property.getPossibleValues()) : null;
-		return possibleValues != null && possibleValues.contains(hikingRoutesPreference.get());
+		return property != null && property.containsValue(hikingRoutesPreference.get());
 	}
 
 	@NonNull

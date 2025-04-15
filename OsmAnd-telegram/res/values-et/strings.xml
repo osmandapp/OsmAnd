@@ -4,7 +4,7 @@
     <string name="buffer_time">Puhvri aegumisaeg</string>
     <string name="time_zone_descr">Vali oma asukohateadetes kuvatav ajavöönd.</string>
     <string name="time_zone">Ajavöönd</string>
-    <string name="units_and_formats">Ühikud ja formaadid</string>
+    <string name="units_and_formats">Ühikud ja vormingud</string>
     <string name="unit_of_length_descr">Muuda vahemaa mõõtmiseks kasutatud ühikut.</string>
     <string name="unit_of_length">Pikkusühikud</string>
     <string name="unit_of_speed_system_descr">Määra kiiruse ühik.</string>
@@ -32,7 +32,7 @@
     <string name="proxy_port">Port</string>
     <string name="proxy_server">Server</string>
     <string name="shared_string_connection">Ühendus</string>
-    <string name="shared_string_enable">Luba</string>
+    <string name="shared_string_enable">Võta kasutusele</string>
     <string name="proxy_type">Puhverserveri liik</string>
     <string name="proxy_connected">Ühendatud</string>
     <string name="proxy_disconnected">Ühendus puudub</string>
@@ -64,7 +64,7 @@
     <string name="shared_string_cancel">Tühista</string>
     <string name="shared_string_settings">Seaded</string>
     <string name="osmand_service">Taustarežiim</string>
-    <string name="yard">yd</string>
+    <string name="yard">jrd</string>
     <string name="foot">jalga</string>
     <string name="mile">mi</string>
     <string name="km">km</string>
@@ -73,8 +73,8 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="km_h">km/h</string>
-    <string name="mile_per_hour">mph</string>
+    <string name="km_h">km/t</string>
+    <string name="mile_per_hour">mi/t</string>
     <string name="si_kmh">Kilomeetrit tunnis</string>
     <string name="si_mph">Miili tunnis</string>
     <string name="si_m_s">Meetrit sekundis</string>

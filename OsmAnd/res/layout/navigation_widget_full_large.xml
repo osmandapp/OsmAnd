@@ -26,8 +26,10 @@
 			android:gravity="center"
 			app:srcCompat="@drawable/ic_action_remove_dark" />
 
-		<FrameLayout
+		<LinearLayout
 			android:layout_width="match_parent"
+			android:orientation="vertical"
+			android:gravity="center_vertical"
 			android:layout_height="match_parent">
 
 			<LinearLayout
@@ -81,6 +83,9 @@
 					android:textColor="@color/card_and_list_background_light"
 					android:textSize="24sp"
 					android:visibility="gone"
+					android:scrollbars="none"
+					android:includeFontPadding="false"
+					android:lines="1"
 					tools:text="Exit 8"
 					tools:visibility="visible" />
 
@@ -91,6 +96,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom"
+				android:minHeight="36dp"
 				android:orientation="horizontal">
 
 				<LinearLayout
@@ -105,19 +111,19 @@
 				<TextView
 					android:id="@+id/street_text"
 					android:layout_width="wrap_content"
-					android:layout_height="32dp"
+					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
 					android:gravity="start|center"
 					android:includeFontPadding="false"
 					android:ellipsize="end"
 					android:maxLines="1"
 					android:textColor="@color/text_color_primary_light"
-					android:textSize="24sp"
-					tools:text="Street" />
+					android:textSize="30sp"
+					tools:text="Ring" />
 
 			</LinearLayout>
 
-		</FrameLayout>
+		</LinearLayout>
 
 	</LinearLayout>
 

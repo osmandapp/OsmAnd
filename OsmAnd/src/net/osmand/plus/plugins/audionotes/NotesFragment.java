@@ -530,7 +530,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (!recording.setName(editText.getText().toString())) {
-					Toast.makeText(getActivity(), R.string.rename_failed, Toast.LENGTH_SHORT).show();
+				AndroidUtils.getApp(requireContext()).showShortToastMessage(R.string.rename_failed);
 				}
 				listAdapter.notifyDataSetInvalidated();
 			}

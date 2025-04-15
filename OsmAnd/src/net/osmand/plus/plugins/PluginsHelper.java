@@ -56,6 +56,7 @@ import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
@@ -111,12 +112,13 @@ public class PluginsHelper {
 		checkMarketPlugin(app, new SRTMPlugin(app));
 		allPlugins.add(new WeatherPlugin(app));
 		checkMarketPlugin(app, new NauticalMapsPlugin(app));
+		if (Version.isDeveloperVersion(app)) {
+			allPlugins.add(new AisTrackerPlugin(app));
+		}
 		checkMarketPlugin(app, new SkiMapsPlugin(app));
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new ParkingPositionPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
-		// OpenPlaceReviews has been discontinued in 15 June 2023 (schedule to delete the code).
-		// allPlugins.add(new OpenPlaceReviewsPlugin(app));
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new ExternalSensorsPlugin(app));
 		allPlugins.add(new VehicleMetricsPlugin(app));
@@ -559,14 +561,14 @@ public class PluginsHelper {
 	}
 
 	public static List<String> onIndexingFiles(@Nullable IProgress progress) {
-		List<String> l = new ArrayList<>();
+		List<String> list = new ArrayList<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			List<String> ls = plugin.indexingFiles(progress);
-			if (ls != null && ls.size() > 0) {
-				l.addAll(ls);
+			List<String> files = plugin.indexingFiles(progress);
+			if (!Algorithms.isEmpty(files)) {
+				list.addAll(files);
 			}
 		}
-		return l;
+		return list;
 	}
 
 	public static void onMapActivityCreate(@NonNull MapActivity activity) {

@@ -364,6 +364,12 @@
         <item name="hintTextColor">?android:textColorSecondary</item>
     </style>
 
+    <style name="MaterialOsmandFab">
+        <item name="cornerSize">16dp</item>
+        <item name="rippleColor">?attr/active_color_primary</item>
+        <item name="tint">?attr/active_color_primary</item>
+        <item name="backgroundTint">?attr/active_color_secondary</item>
+    </style>
 
     <!--******************************** Basic text styles ********************************-->
 

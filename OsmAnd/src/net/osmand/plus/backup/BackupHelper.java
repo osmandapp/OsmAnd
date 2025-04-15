@@ -33,6 +33,7 @@ import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -43,6 +44,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +99,7 @@ public class BackupHelper {
 	private final OsmandSettings settings;
 	private final BackupDbHelper dbHelper;
 	private final BackupExecutor executor;
-	private final List<OnPrepareBackupListener> prepareBackupListeners = new ArrayList<>();
+	private List<OnPrepareBackupListener> prepareBackupListeners = new ArrayList<>();
 
 	private PrepareBackupTask prepareBackupTask;
 	private PrepareBackupResult backup = new PrepareBackupResult();
@@ -365,14 +367,14 @@ public class BackupHelper {
 	}
 
 	public void addPrepareBackupListener(@NonNull OnPrepareBackupListener listener) {
-		prepareBackupListeners.add(listener);
+		prepareBackupListeners = CollectionUtils.addAllToList(prepareBackupListeners, Collections.singletonList(listener));
 		if (isBackupPreparing()) {
 			listener.onBackupPreparing();
 		}
 	}
 
 	public void removePrepareBackupListener(@NonNull OnPrepareBackupListener listener) {
-		prepareBackupListeners.remove(listener);
+		prepareBackupListeners = CollectionUtils.removeFromList(prepareBackupListeners, listener);
 	}
 
 	private void setPrepareBackupTask(@Nullable PrepareBackupTask task) {
@@ -574,6 +576,7 @@ public class BackupHelper {
 		String error;
 		String type = remoteFile.getType();
 		String fileName = remoteFile.getName();
+		StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
 		try {
 			Map<String, String> params = new HashMap<>();
 			params.put("deviceid", getDeviceId());
@@ -582,7 +585,6 @@ public class BackupHelper {
 			params.put("type", type);
 			params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
 
-			StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
 			boolean firstParam = true;
 			for (Entry<String, String> entry : params.entrySet()) {
 				builder.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));

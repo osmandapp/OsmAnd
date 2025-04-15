@@ -1179,7 +1179,6 @@
     <string name="rendering_attr_buildings15zoom_name">Budovy pri priblížení 15</string>
     <string name="rendering_attr_moreDetailed_name">Viac detailov</string>
     <string name="rendering_attr_lessDetailed_name">Menej detailov</string>
-    <string name="rendering_attr_hideAccess_name">Obmedzenia prístupu</string>
     <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
@@ -1333,7 +1332,7 @@
     <string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
     <string name="free">%1$s voľných</string>
     <string name="device_memory">Pamäť zariadenia</string>
-    <string name="rendering_attr_pisteRoutes_name">Lyžiarske svahy</string>
+    <string name="rendering_attr_pisteRoutes_name">Lyžiarske trasy</string>
     <string name="share_note">Zdieľať poznámku</string>
     <string name="notes">A/V poznámky</string>
     <string name="online_map">Online mapa</string>
@@ -2026,7 +2025,6 @@
     <string name="route_roundabout_short">Použite výjazd %1$d a pokračujte</string>
     <string name="upload_poi">Odoslať POI</string>
     <string name="search_map_hint">Mesto alebo región</string>
-    <string name="wiki_around">Články Wikipédie v okolí</string>
     <string name="routing_attr_allow_motorway_name">Použiť diaľnice</string>
     <string name="routing_attr_allow_motorway_description">Povoliť použiť diaľnice.</string>
     <string name="lang_sr_latn">Srbsky (Latinka)</string>
@@ -3646,20 +3644,12 @@
     <string name="osm_edit_comment_note">Komentovať OSM poznámku</string>
     <string name="osm_login_descr">Prihláste sa metódou OAuth alebo pomocou mena a hesla v OSM.</string>
     <string name="shared_string_add_photo">Pridať foto</string>
-    <string name="register_on_openplacereviews">Zaregistrovať na
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotografie sú poskytované projektom OpenPlaceReviews.org s otvorenými dátami. Na odoslanie vašich fotiek sa musíte zaregistrovať na webovej stránke.</string>
     <string name="register_opr_create_new_account">Vytvoriť nový účet</string>
     <string name="register_opr_have_account">Už mám účet</string>
     <string name="shared_string_search_history">História hľadania</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorový čln</string>
     <string name="add_to_mapillary">Pridať do Mapillary</string>
-    <string name="add_to_opr">Pridať do OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd zobrazuje fotografie z rôznych zdrojov:
-\nOpenPlaceReviews - fotografie bodov záujmu;
-\nMapillary - fotografie z ulice;
-\nWeb / Wikimedia - fotografie bodov záujmu špeficikované v údajoch OpenStreetMap.</string>
     <string name="shared_string_resources">Zdroje</string>
     <string name="approximate_file_size">Približná veľkosť súboru</string>
     <string name="select_data_to_export">Zvoľte údaje na export do súboru.</string>
@@ -3761,12 +3751,6 @@
     <string name="uploaded_count">Odoslané %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
     <string name="hillshade_slope_contour_lines">Vrstevnice / Tieňované svahy / Sklony svahov</string>
-    <string name="open_place_reviews_plugin_description">Prispievajte do projektu OpenPlaceReviews, napríklad fotografiami, recenziami, odkazmi o verejných miestach ako sú reštaurácie, hotely alebo múzeá.
-\n
-\nInštrukcie ako prispievať nájdete na našej webstránke %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Použiť test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Prihlásiť sa do OpenPlaceReviews</string>
     <string name="activity_type_water_name">Voda</string>
     <string name="activity_type_winter_name">Zima</string>
     <string name="activity_type_snowmobile_name">Snežný skúter</string>
@@ -4341,7 +4325,7 @@
     <string name="rendering_attr_horseScale_name">Náročnosť ciest pre kone</string>
     <string name="routing_attr_avoid_highway_name">Vyhnúť sa cestám</string>
     <string name="map_widget_trip_recording_duration">Trvanie</string>
-    <string name="map_widget_trip_recording_distance">Vzdialenosť</string>
+    <string name="map_widget_distance">Vzdialenosť</string>
     <string name="routing_attr_hazmat_category_name">Kategória nebezpečného nákladu</string>
     <string name="current_time_widget_desc">Zobrazuje aktuálny čas podľa vášho zariadenia.</string>
     <string name="get_altitude_information">Získať informácie o nadmorskej výške</string>
@@ -4488,7 +4472,7 @@
     <string name="without_profiles_changing">Bez zmeny profilov</string>
     <string name="shared_string_only_missing">Len chýbajúce</string>
     <string name="download_tiles">Stiahnuť dlaždice</string>
-    <string name="attach_roads_descr">Aproximujte vašu stopu pomocou povolených ciest na medzi bodmi a pre priradenie presných navigačných pokynov a informácií o ceste.</string>
+    <string name="attach_roads_descr">Pripojte vašu stopu k cestám, aby ste získali podrobné informácie o trase, navigačné pokyny a informácie o ceste.</string>
     <string name="connect_with_straight_line">Spojiť priamou čiarou</string>
     <string name="external_sensors_plugin_name">Externé senzory</string>
     <string name="map_widget_altitude_map_center">Nadmorská výška: stred mapy</string>
@@ -4687,7 +4671,7 @@
     <string name="backup_error_failed_to_fetch_remote_items">Nepodarilo sa stiahnuť zoznam súborov zo serveru.</string>
     <string name="local_file_will_be_restored">Lokálny súbor bude obnovený</string>
     <string name="choose_what_to_sync">Zvoľte čo synchronizovať</string>
-    <string name="cloud_sync_progress">Synchronizuje sa…%1$s</string>
+    <string name="cloud_sync_progress">Synchronizuje sa… %1$s</string>
     <string name="checking_progress">Kontroluje sa…</string>
     <string name="shared_string_modified">Zmenené</string>
     <string name="res_unknown">Neznáme</string>
@@ -5409,10 +5393,6 @@
     <string name="energy_avg_info_description">Úroveň batérie za minútu: %1$s
 \nSpotreba energie (mAh): %2$s</string>
     <string name="rendering_avg_info">Štatistika vykresľovania (priemer za 1 / 5 / 15 minút)</string>
-    <string name="rendering_avg_info_description">FPS za posledných 1k snímok: %1$s
-\nProcesor: %2$s
-\nGrafika 1k: %3$s
-\nNečinné 1k: %4$s</string>
     <string name="choose_map_orientation">Zvoľte orientáciu mapy</string>
     <string name="rendering_attr_alpineHiking_name">Stupeň náročnosti turistických trás</string>
     <string name="driving_region_uk">Veľká Británia a podobné krajiny</string>
@@ -5574,7 +5554,6 @@
     <string name="fuel_tank_capacity">Objem nádrže</string>
     <string name="shared_strings_dimensions">Rozmery</string>
     <string name="litres">Litre</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Imperiálne galóny</string>
     <string name="us_gallons">USA galóny</string>
@@ -5599,7 +5578,6 @@
     <string name="current_temperature">Aktuálna teplota</string>
     <string name="average_temperature">Priemerná teplota</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
-    <string name="obd_rpm">Ot./min</string>
     <string name="obd_battery_voltage_desc">Zobrazuje úroveň napätia batérie vozidla</string>
     <string name="obd_fuel_type_hydrogen">Vodík</string>
     <string name="shared_string_volume">Objem</string>
@@ -5632,7 +5610,7 @@
     <string name="obd_nothing_found_description">Prosím skontrujte nasledujúce:\n – Zabezpečte, že je zapnutý Bluetooth\n – Motor vozidla beží\n – Zabezpečte, že je vaše zariadenie v dosahu skeneru.</string>
     <string name="obd_device_forget_sensor">Zabudnúť skener</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="obd_bluetooth_off_description">Zapnite Bluetooth hľadanie a pripojenie skenerov.</string>
+    <string name="obd_bluetooth_off_description">Zapnite Bluetooth pre hľadanie a pripojenie skenerov.</string>
     <string name="obd_searching_text_description">Udržujte svoje zariadenie blízko skeneru. Uistite sa, že motor vozidla beží.</string>
     <string name="obd_searching_text">Hľadanie skenerov</string>
     <string name="connect_obd_instructions_step4">Stlačte \'%1$s\' a zvoľte váš skener zo zoznamu.</string>
@@ -5688,4 +5666,102 @@
     <string name="calculating_indication_message">Vypočítavam…</string>
     <string name="calculate_size">Vypočítať veľkosť</string>
     <string name="rendering_attr_showClimbingRoutes_description">Zobraziť lezecké trasy</string>
+    <string name="shared_string_length">Dĺžka</string>
+    <string name="shared_string_avg_altitude">Priem.nadm.výška</string>
+    <string name="shared_string_avg_speed">Min. rýchlosť</string>
+    <string name="popular_places_nearby">Populárne miesta v okolí</string>
+    <string name="recently_visited">Nedávno navštívené</string>
+    <string name="display_distance_to_first_intermediate_summary">Zobrazí čas a vzdialenosť pre ďalšiu zastávku. Vypnite ak chcete vždy zobrazenie podrobnosti trasy k cieľu.</string>
+    <string name="display_distance_to_first_intermediate">Zobraziť podrobnosti trasy pre ďalšiu zastávku</string>
+    <string name="ais_port_nmea_server_description">Zadajte port TCP zdroja údajov NMEA</string>
+    <string name="ais_object_lost_timeout">Časový limit pre viditeľnosť ak je objekt stratený</string>
+    <string name="ais_object_lost_timeout_description">Nastavte časový limit pre viditeľnosť objektov AIS: Po tomto čase bez príjmu signálu bude objekt AIS odstránený z obrazovky.</string>
+    <string name="ais_cpa_warning_time">Výstražná doba na dosiahnutie najbližšieho bodu priblíženia (CPA)</string>
+    <string name="plugin_ais_tracker_name">Sledovanie plavidiel AIS</string>
+    <string name="show_list">Zobraziť zoznam</string>
+    <string name="show_mercator_grids">Použiť Mercatorovu projekciu namiesto WGS84 alebo UTM</string>
+    <string name="original_color_description">Každý bod by si zachoval vlastnú farbu.</string>
+    <string name="ais_nmea_protocol">Protokol pre prijímanie údajov NMEA</string>
+    <string name="ais_cpa_settings">Nastavenia týkajúce sa CPA</string>
+    <string name="map_widget_route_information">Informácie o trase</string>
+    <string name="ais_cpa_settings_description">Tieto hodnoty určujú zobrazenie objektov AIS, ktoré sa môžu príliš priblížiť k vlastnej polohe.</string>
+    <string name="show_dm_grids">Použiť SM namiesto stupňov alebo SMS</string>
+    <string name="show_dm_grids_description">Zobraziť mriežku v stupňoch a minútach namiesto stupňov alebo SMS</string>
+    <string name="show_grids">Zobraziť mriežku mapy</string>
+    <string name="show_grids_description">Povoliť zobrazenie mriežky cez mapu</string>
+    <string name="show_utm_grids">Použiť UTM namiesto WGS84</string>
+    <string name="show_utm_grids_description">Zobraziť mriežku v metroch UTM namiesto WGS84</string>
+    <string name="ais_object_lost_timeouts">Časový limit pre príjem signálu AIS</string>
+    <string name="ais_object_lost_timeouts_description">Nastavte hodnoty pre rozoznanie stratených objektov AIS, ak nebol obdržaný žiadny signál v zadanom čase.</string>
+    <string name="no_places_available">Nie sú dostupné žiadne miesta</string>
+    <string name="shared_string_default_view">Predvolené zobrazenie</string>
+    <string name="map_widget_route_information_desc">Zobrazuje odhadovaný čas príjazdu, zostávajúci čas jazdy a vzdialenosť pre aktuálnu navigačnú trasu.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Akcia pre ovládanie viditeľnosti súradnicovej siete na mape.</string>
+    <string name="layer_coordinates_grid">Súradnicová sieť</string>
+    <string name="choose_location">Zvoľte polohu</string>
+    <string name="point_location">Bod z mapy</string>
+    <string name="shared_string_map_center">Stred mapy</string>
+    <string name="popular_places">Populárne miesta</string>
+    <string name="plugin_ais_tracker_disclaimer">Upozornenie\n\nTento modul je voľnočasovým projektom a nie je navrhnutý na spoľahlivosť a presnosť. V žiadnom prípade sa NESPOLIEHAJTE na tento softvér, vrátane navigácie alebo bezpečnosti života.</string>
+    <string name="show_mercator_grids_description">Zobraziť mriežku v Mercatorových km namiesto WGS84 alebo UTM</string>
+    <string name="show_dms_grids_description">Zobraziť mriežku v stupňoch, minútach, sekundách namiesto stupňov</string>
+    <string name="save_favorite_default_appearance">Použiť zmeny na existujúce body v priečinku alebo iba na nové body?</string>
+    <string name="original_icon_description">Každý bod by si zachoval vlastnú ikonu.</string>
+    <string name="original_shape_description">Každý bod by si zachoval vlastný tvar.</string>
+    <string name="apply_to_all_points">Použiť na všetky body</string>
+    <string name="ais_nmea_protocol_description">Zvoľte protokol pre prijímanie údajov NMEA</string>
+    <string name="ais_address_nmea_server">IP adresa zdroja údajov NMEA</string>
+    <string name="plugin_ais_tracker_description">Zobraziť polohy AIS a informácie o okolitých plavidlách. Údaje AIS sú prijímané pomocou siete z externého prijímača AIS.</string>
+    <string name="hmd_promo">HMD Promo na %1$s mesiacov</string>
+    <string name="hmd_promo_description">Bezplatný prístup k funkciám vrátane neobmedzeného sťahovania máp, 3D reliéfu, atď. na %1$s mesiacov</string>
+    <string name="shared_string_road_exit">Výjazd</string>
+    <string name="ais_address_settings">Nastavenia IP adresy</string>
+    <string name="ais_port_nmea_local">Port UDP lokálneho prijímača údajov NMEA</string>
+    <string name="ais_cpa_warning_distance">Výstražná vzdialenosť pre najbližší bod priblíženia (CPA)</string>
+    <string name="ais_cpa_warning_distance_description">Plavidlá sú vyznačené červenou farbou ak je CPA nižšie ako táto hodnota a CPA bude dosiahnutý v blízkej budúcnosti (pozri nastavenia Výstražnej doby pre dosiahnutie CPA).</string>
+    <string name="ais_address_nmea_server_description">Zadajte IP adresu zdroja údajov NMEA (ak sa používa TCP)</string>
+    <string name="ais_ship_lost_timeout">Časový limit pre viditeľnosť lode, keď nie je obdržaný signál</string>
+    <string name="ais_ship_lost_timeout_description">Nastavte časový limit pre viditeľnosť lode: Po tomto čase bez príjmu signálu bude symbol lode na obrazovke zmenený: bude preškrtnutý.</string>
+    <string name="choose_location_on_map">Zvoľte polohu na mape.</string>
+    <string name="show_image_previews">Zobraziť náhľady obrázkov</string>
+    <string name="shared_string_manual">Ručne</string>
+    <string name="ais_load_data">Načítať údaje AIS zo súboru</string>
+    <string name="ais_address_settings_description">Zvoľte protokol NMEA (UDP/TCP) a nastavte adresy</string>
+    <string name="ais_cpa_warning_time_description">Ak je TCPA (čas na dosiahnutie CPA s iným plavidlom) menej ako táto hodnota, bude plavidlo označené červenou farbou.</string>
+    <string name="ais_port_nmea_server">Port TCP zdroja údajov NMEA</string>
+    <string name="ais_port_nmea_local_description">Zadajte port UDP, kde bude OsmAnd prijímať údaje NMEA</string>
+    <string name="no_photo_for_location_desc">K tejto polohe zatiaľ neboli pridané žiadne fotografie používateľov</string>
+    <string name="show_dms_grids">Použiť SMS namiesto stupňov</string>
+    <string name="map_grid">Mapové mriežky</string>
+    <string name="meridian_180">180. poludník</string>
+    <string name="prime_meridian">Nultý poludník</string>
+    <string name="equator">Rovník</string>
+    <string name="shared_string_online_only">Len online</string>
+    <string name="shared_string_offline_only">Len offline</string>
+    <string name="release_5_0">• Objavte najlepšie hodnotené body záujmu v novom režime Prieskumu\n\n • Všetky trasy v OSM sú teraz vyhľadateľné! Turistické, cyklistické, horské bicykle a ďalšie\n\n • Nový navigačný nástroj kombinuje navigačné inštrukcie a šípky zabočenia\n\n • Nový nástroj pre aktuálnu trasu: zobrazuje odhadovaný čas trvania, príjazdu a vzdialenosti\n\n • Zvoľte lyžiarske svahy a cesty pre horské bicykle na mape pre podrobné informácie\n\n • Možnosť zvoliť veľkosť nástrojov pre ľavý a pravý panel\n\n • Pridaná súradnicová sieť pre geografické súradnice\n\n • Pridaná možnosť nastavenia predvoleného vzhľadu pre skupiny obľúbených bodov\n\n • Android Auto: zobrazte odhadovaný čas príjazdu a vzdialenosť k ďalšiemu bodu trasy; vo výsledkoch vyhľadávania sa zobrazujú aj názvy miest\n\n • Výrazné vrchy je teraz možné nájsť pomocou mapy a vyhľadávania\n\n • Výšky vrcholov hôr v stopách\n\n • Pridané: Skalné steny a oblasti na horolezectvo na mape\n\n • Vyhľadávanie adries v USA bolo vylepšené\n\n • Pridané navigačné hlasové pokyny vo formáte TTS v hebrejčine</string>
+    <string name="add_widget">Pridať nástroj</string>
+    <string name="row_height">Výška riadka</string>
+    <string name="intermediate_first">Najprv prechodný bod</string>
+    <string name="poi_source">Zdroj bodu záujmu</string>
+    <string name="destination_first">Najprv cieľ</string>
+    <string name="display_priority">Priorita zobrazenia</string>
+    <string name="grid_color">Farba mriežky</string>
+    <string name="shared_string_edges">Okraje</string>
+    <string name="labels_position">Umiestnenie nápisov</string>
+    <string name="routing_attr_allow_ferries_name">Povoliť trajekty</string>
+    <string name="routing_attr_allow_ferries_description">Povoliť navigáciu po trasách trajektov</string>
+    <string name="wiki_around">Populárne miesta v okolí</string>
+    <string name="customize_grid_color">Prispôsobiť farbu mriežky</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="read_on_wiki">Prečítať na Wikipédii</string>
+    <string name="prediction_time_description">Ikona polohy v OsmAnde je animovaná podľa bodov získaných z GPS (raz za sekundu). Môže byť viditeľné drobné oneskorenie jej pohybu, najmä ak sa používateľ rýchlo pohybuje alebo je signál GPS nestabilný.</string>
+    <string name="prediction_time_advanced_description">Upraviť čas predpovede pre minimalizáciu oneskorenia.</string>
+    <string name="prediction_time">Čas predpovede</string>
+    <string name="shared_string_no_animation">Žiadna animácia</string>
+    <string name="position_animation_empty_banner_description">Ikona polohy sa presunie na novú prijatú pozíciu bez animácie.</string>
+    <string name="position_animation">Animácia polohy</string>
+    <string name="route_part_of">Súčasť</string>
+    <string name="route_members">Členy</string>
+    <string name="multipoligon_related">Súvisiace</string>
+    <string name="cant_load_map_styles">Nepodarilo sa načítať mapové štýly.</string>
 </resources>

@@ -976,7 +976,6 @@
     <string name="routing_attr_allow_motorway_name">awtodróhi wužiwać</string>
     <string name="routing_attr_allow_motorway_description">Awtodróhi su dowolene.</string>
     <string name="upload_osm_note_description">Móžeš swoju OSM-noticu anonymnje nahrać abo přez swój profil na OpenStreetMap.org.</string>
-    <string name="wiki_around">zapiski Wikipedije w bliskosći</string>
     <string name="search_map_hint">Město abo region</string>
     <string name="route_calculation">Wobličenje čary</string>
     <string name="gpx_no_tracks_title">Hišće žane GPX-dataje nimaš</string>

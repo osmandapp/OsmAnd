@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.HorizontalSpaceItemDecoration;
 
@@ -22,7 +23,13 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 
 	public IconsPaletteCard(@NonNull FragmentActivity activity,
 	                        @NonNull IIconsPaletteController<IconData> controller, boolean usedOnMap) {
-		super(activity, usedOnMap);
+		this(activity, controller, null, usedOnMap);
+	}
+
+	public IconsPaletteCard(@NonNull FragmentActivity activity,
+	                        @NonNull IIconsPaletteController<IconData> controller,
+	                        @Nullable ApplicationMode appMode, boolean usedOnMap) {
+		super(activity, appMode, usedOnMap);
 		this.controller = controller;
 		controller.bindPalette(this);
 		paletteAdapter = new IconsPaletteAdapter<>(activity, controller, nightMode);

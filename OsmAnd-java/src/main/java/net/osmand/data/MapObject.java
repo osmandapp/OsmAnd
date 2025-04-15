@@ -80,7 +80,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 			names.putAll(name);
 		}
 	}
-	
+
 	public Map<String, String> getNamesMap(boolean includeEn) {
 		if ((!includeEn || Algorithms.isEmpty(enName)) && names == null) {
 			return Collections.emptyMap();

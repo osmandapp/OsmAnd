@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -306,11 +306,12 @@ public class RoutingHelper {
 		return route.getImmutableAllLocations();
 	}
 
-	public void setAppMode(ApplicationMode mode) {
+	public void setAppMode(@NonNull ApplicationMode mode) {
 		this.mode = mode;
 		voiceRouter.updateAppMode();
 	}
 
+	@NonNull
 	public ApplicationMode getAppMode() {
 		return mode;
 	}
@@ -525,7 +526,7 @@ public class RoutingHelper {
 		// 2. check if intermediate found
 		if (route.getIntermediatePointsToPass() > 0
 				&& route.getDistanceToNextIntermediate(lastFixedLocation) < voiceRouter.getArrivalDistance() && !isRoutePlanningMode) {
-			showMessage(app.getString(R.string.arrived_at_intermediate_point));
+			app.showToastMessage(R.string.arrived_at_intermediate_point);
 			route.passIntermediatePoint();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			String name = "";
@@ -534,7 +535,7 @@ public class RoutingHelper {
 				List<TargetPoint> ll = targets.getIntermediatePointsNavigation();
 				int ind = -1;
 				for (int i = 0; i < ll.size(); i++) {
-					if (ll.get(i).point != null && MapUtils.getDistance(ll.get(i).point, rm) < 5) {
+					if (ll.get(i).getLatLon() != null && MapUtils.getDistance(ll.get(i).getLatLon(), rm) < 5) {
 						name = ll.get(i).getOnlyName();
 						ind = i;
 						break;
@@ -748,7 +749,11 @@ public class RoutingHelper {
 	}
 
 	public int getLeftDistanceNextIntermediate() {
-		return route.getDistanceToNextIntermediate(lastFixedLocation);
+		return getLeftDistanceToIntermediate(0);
+	}
+
+	public int getLeftDistanceToIntermediate(int intermediateIndexOffset) {
+		return route.getDistanceToNextIntermediate(lastFixedLocation, intermediateIndexOffset);
 	}
 
 	public int getLeftTime() {
@@ -760,7 +765,11 @@ public class RoutingHelper {
 	}
 
 	public int getLeftTimeNextIntermediate() {
-		return route.getLeftTimeToNextIntermediate(lastFixedLocation);
+		return getLeftTimeNextIntermediate(0);
+	}
+
+	public int getLeftTimeNextIntermediate(int intermediateIndexOffset) {
+		return route.getLeftTimeToNextIntermediate(lastFixedLocation, intermediateIndexOffset);
 	}
 
 	public OsmandSettings getSettings() {
@@ -891,10 +900,6 @@ public class RoutingHelper {
 
 	public boolean isRouteBeingCalculated() {
 		return routeRecalculationHelper.isRouteBeingCalculated();
-	}
-
-	private void showMessage(String msg) {
-		app.runInUIThread(() -> app.showToastMessage(msg));
 	}
 
 	@NonNull

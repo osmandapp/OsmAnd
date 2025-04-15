@@ -67,7 +67,7 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			if (!app.getSettings().isInternetConnectionAvailable()) {
-				Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+				app.showToastMessage(R.string.internet_not_available);
 				dismiss();
 			} else {
 				AndroidNetworkUtils.sendRequestAsync(app, "https://osmand.net/api/missing_search", params,
@@ -78,9 +78,9 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 									try {
 										JSONObject obj = new JSONObject(result);
 										if (!obj.has("error")) {
-											Toast.makeText(app, getString(R.string.thank_you_for_feedback), Toast.LENGTH_SHORT).show();
+											app.showShortToastMessage(R.string.thank_you_for_feedback);
 										} else {
-											Toast.makeText(app, MessageFormat.format(getString(R.string.error_message_pattern), obj.getString("error")), Toast.LENGTH_SHORT).show();
+											app.showShortToastMessage(R.string.error_message_pattern, obj.getString("error"));
 										}
 									} catch (JSONException e) {
 

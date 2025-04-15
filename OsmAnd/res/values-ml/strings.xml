@@ -1361,7 +1361,6 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">വാഹനങ്ങുളുടേതല്ലാത്ത പാതകള്‍</string>
     <string name="rendering_attr_hideWoodScrubs_name">മരങ്ങളും കുറ്റിച്ചെടികളും</string>
     <string name="rendering_attr_buildings15zoom_name">കെട്ടിടങ്ങള്‍ സൂം 15-ല്‍</string>
-    <string name="rendering_attr_hideAccess_name">പ്രവേഷന തടസം</string>
     <string name="osmo_edit_color">പ്രദര്‍ശനനിറം</string>
     <string name="int_days">ദിവസങ്ങള്‍</string>
     <string name="index_item_world_altitude_correction">"ലോക ഉയരവ്യത്യാസതിരുത്തലുകള്‍ "</string>
@@ -2271,7 +2270,6 @@
     <string name="upload_poi">POI അപ്ലോഡ് ചെയ്യുക</string>
     <string name="route_roundabout_short">%1$d എക്സിറ്റ് എടുത്തു പോവുക</string>
     <string name="search_map_hint">നഗരമോ പ്രദേശമോ തിരയുക</string>
-    <string name="wiki_around">അടുത്തുള്ള വിക്കിപീഡിയ ലേഖനങ്ങൾ</string>
     <string name="upload_osm_note_description">OSM കുറിപ്പ് അജ്ഞാതമായി അല്ലെങ്കിൽ നിങ്ങളുടെ OpenStreetMap.org പ്രൊഫൈൽ ഉപയോഗിച്ച് അപ്ലോഡുചെയ്യുക.</string>
     <string name="routing_attr_allow_motorway_name">അതിവേഗപാതകള്‍ അനുവദിക്കുക</string>
     <string name="routing_attr_allow_motorway_description">അതിവേഗപാതകള്‍ അനുവദിക്കുക.</string>

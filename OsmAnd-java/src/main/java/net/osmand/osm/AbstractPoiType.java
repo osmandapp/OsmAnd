@@ -170,8 +170,20 @@ public abstract class AbstractPoiType {
 
 	public abstract Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes);
 
+	public String getParentTypeName() {
+		return "";
+	}
+
 	@Override
 	public String toString() {
 		return keyName;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof AbstractPoiType that)) {
+			return false;
+		}
+		return keyName != null && keyName.equals(that.keyName);
 	}
 }

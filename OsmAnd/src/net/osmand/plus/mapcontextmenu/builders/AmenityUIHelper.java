@@ -4,9 +4,13 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.ALT_NAME_WITH_LANG_PREFIX;
 import static net.osmand.data.Amenity.COLLAPSABLE_PREFIX;
+import static net.osmand.data.Amenity.CONTENT;
+import static net.osmand.data.Amenity.NAME;
 import static net.osmand.data.Amenity.OPENING_HOURS;
+import static net.osmand.data.Amenity.SHORT_DESCRIPTION;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
+import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
@@ -86,6 +90,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + "cuisine";
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + "dish";
 	private static final String US_MAPS_RECREATION_AREA = "us_maps_recreation_area";
+	private static final String WIKI_DATA_BASE_URL = "https://www.wikidata.org/wiki/";
 
 	private final MetricsConstants metricSystem;
 	private final AdditionalInfoBundle additionalInfo;
@@ -121,23 +126,30 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
 		Map<String, Object> filteredInfo = additionalInfo.getFilteredLocalizedInfo();
-
-		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-			AmenityInfoRow infoRow = null;
-			if (value instanceof String strValue) {
-				infoRow = createAmenityInfoRow(context, key, strValue, null);
-			} else if (value != null) {
-				infoRow = createLocalizedAmenityInfoRow(context, key, value);
-			}
-			if (infoRow != null) {
-				if (lastBuiltRowIsDescription) {
-					descriptions.add(infoRow);
-				} else if (Amenity.CUISINE.equals(key)) {
-					cuisineRow = infoRow;
-				} else if (poiType == null) {
-					infoRows.add(infoRow);
+		if (!poiCategory.isWiki()) {
+			for (Entry<String, Object> entry : filteredInfo.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+				if(key.contains(WIKIPEDIA) || key.contains(CONTENT) || key.contains(SHORT_DESCRIPTION)) {
+					continue;
+				}
+				if(key.equals(NAME)) {
+					continue; // will be added in buildNamesRow
+				}
+				AmenityInfoRow infoRow = null;
+				if (value instanceof String strValue) {
+					infoRow = createAmenityInfoRow(context, key, strValue, null);
+				} else if (value != null) {
+					infoRow = createLocalizedAmenityInfoRow(context, key, value);
+				}
+				if (infoRow != null) {
+					if (lastBuiltRowIsDescription) {
+						descriptions.add(infoRow);
+					} else if (Amenity.CUISINE.equals(key)) {
+						cuisineRow = infoRow;
+					} else if (poiType == null) {
+						infoRows.add(infoRow);
+					}
 				}
 			}
 		}
@@ -220,6 +232,24 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 	}
 
+	public void buildWikiDataRow(@NonNull View view) {
+		String wikidataValue = additionalInfo.get(WIKIDATA);
+		if (wikidataValue != null) {
+			int iconId = R.drawable.ic_action_logo_wikidata;
+			PoiType pType;
+			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(WIKIDATA);
+			if (pt != null) {
+				pType = (PoiType) pt;
+				String textPrefix = pType.getTranslation();
+				String hiddenUrl = getSocialMediaUrl(WIKIDATA, wikidataValue);
+				AmenityInfoRow infoRow = new AmenityInfoRow(WIKIDATA, iconId, textPrefix, wikidataValue, hiddenUrl, false,
+						null, 0, false, true, true, pType.getOrder(),
+						pType.getKeyName(), false, true, matchWidthDivider, 0);
+				buildAmenityRow(view, infoRow);
+			}
+		}
+	}
+
 	private void initVariables() {
 		poiCategory = null;
 		String typeTag = additionalInfo.get(TYPE);
@@ -291,7 +321,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			collapsableView = new CollapsableView(llv, this, true);
 		}
-		hasWiki = false; // allow another hasWiki try for infoRow at return
 		return createAmenityInfoRow(context, headerKey, headerValue, collapsableView);
 	}
 
@@ -370,38 +399,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 		}
 
-		if (poiCategory.isWiki()) {
-			if (!hasWiki) {
-				Map<String, String> additionalInfoFiltered = additionalInfo.getFilteredInfo();
-				wikiAmenity = new Amenity();
-				wikiAmenity.setType(poiCategory);
-				wikiAmenity.setSubType(subtype);
-				wikiAmenity.setAdditionalInfo(additionalInfoFiltered);
-				wikiAmenity.setLocation(getLatLon());
-				String name = additionalInfoFiltered.get("name");
-				if (!Algorithms.isEmpty(name)) {
-					wikiAmenity.setName(name);
-				}
-
-				String articleLang = PluginsHelper.onGetMapObjectsLocale(wikiAmenity, this.preferredLang);
-				String lng = wikiAmenity.getContentLanguage("content", articleLang, "en");
-				if (Algorithms.isEmpty(lng)) {
-					lng = "en";
-				}
-
-				String langSelected = lng;
-				String content = wikiAmenity.getDescription(langSelected);
-				vl = (content != null) ? WikiArticleHelper.getPartialContent(content) : "";
-				vl = vl == null ? "" : vl;
-				hasWiki = true;
-				isWiki = true;
-				needLinks = false;
-				hiddenUrl = null;
-				isUrl = false;
-			} else {
-				return null;
-			}
-		} else if (MapObject.isNameLangTag(key)) {
+		if (MapObject.isNameLangTag(key)) {
 			return null;
 		} else if (Amenity.COLLECTION_TIMES.equals(baseKey) || Amenity.SERVICE_TIMES.equals(baseKey)) {
 			iconId = R.drawable.ic_action_time;
@@ -449,6 +447,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			textPrefix = app.getString(R.string.poi_cuisine);
 			vl = sb.toString();
 		} else if (key.contains(Amenity.ROUTE)
+				|| key.equals(Amenity.WIKI_PHOTO)
 				|| key.equals(Amenity.WIKIDATA)
 				|| key.equals(Amenity.WIKIMEDIA_COMMONS)) {
 			return null;
@@ -557,10 +556,10 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	public void buildNamesRow(ViewGroup viewGroup, Map<String, String> namesMap, boolean altName) {
-		if (namesMap.values().size() > 0) {
+		if (!namesMap.isEmpty()) {
 			Locale nameLocale = getPreferredLocale(namesMap.keySet());
 			if (nameLocale == null) {
-				String localeId = (String) namesMap.values().toArray()[0];
+				String localeId = (String) namesMap.keySet().toArray()[0];
 				nameLocale = new Locale(localeId);
 			}
 			String name = namesMap.get(nameLocale.getLanguage());
@@ -589,7 +588,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				Locale locale = new Locale(key);
 				String name = mapNames.get(key);
 
-				View amenitiesRow = createRowContainer(app, null);
+				View amenitiesRow = createRowContainer(mapActivity, null);
 				buildDetailsRow(amenitiesRow, null, name,
 						app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, locale.getDisplayLanguage()),
 						null, null, false, null);
@@ -643,6 +642,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		urls.put("ok", "https://ok.ru/%s");
 		urls.put("telegram", "https://t.me/%s");
 		urls.put("flickr", "https://flickr.com/%s");
+		urls.put("wikidata", WIKI_DATA_BASE_URL + "%s");
 
 		String url = urls.get(key);
 		if (url != null) {
@@ -679,8 +679,8 @@ public class AmenityUIHelper extends MenuBuilder {
 				}
 			case "depth":
 			case "seamark_height":
-				try {
-					double valueAsDouble = Double.parseDouble(value);
+				double valueAsDouble = Algorithms.parseDoubleSilently(value, 0);
+				if (valueAsDouble > 0) {
 					if (metricSystem == MILES_AND_FEET || metricSystem == NAUTICAL_MILES_AND_FEET) {
 						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * FEET_IN_ONE_METER) + " " + app.getString(R.string.foot);
 					} else if (metricSystem == MILES_AND_YARDS) {
@@ -688,8 +688,6 @@ public class AmenityUIHelper extends MenuBuilder {
 					} else {
 						formattedValue = value + " " + app.getString(R.string.m);
 					}
-				} catch (RuntimeException e) {
-					LOG.error(e.getMessage(), e);
 				}
 				break;
 			case "distance":
@@ -776,6 +774,8 @@ public class AmenityUIHelper extends MenuBuilder {
 			String textToCopy;
 			if (hiddenUrl != null && hiddenUrl.contains(WIKI_LINK)) {
 				textToCopy = hiddenUrl;
+			} else if (hiddenUrl != null && hiddenUrl.contains(WIKI_DATA_BASE_URL)) {
+				textToCopy = text;
 			} else {
 				textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + text : text;
 			}
@@ -904,7 +904,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 		if (isWiki) {
 			buildReadFullButton(llText, app.getString(R.string.context_menu_read_full_article), v -> {
-				WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity);
+				WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity, null);
 			});
 		}
 
@@ -931,7 +931,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				}
 			});
 		} else if (isWiki) {
-			ll.setOnClickListener(v -> WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity));
+			ll.setOnClickListener(v -> WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity, null));
 		} else if (isText && text.length() > 200) {
 			ll.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, text, textPrefix));
 		}
@@ -1019,7 +1019,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	@NonNull
-	private Set<String> collectAvailableLocalesFromTags(@NonNull Collection<String> tags) {
+	public static Set<String> collectAvailableLocalesFromTags(@NonNull Collection<String> tags) {
 		Set<String> result = new HashSet<>();
 		for (String tag : tags) {
 			String[] parts = tag.split(":");

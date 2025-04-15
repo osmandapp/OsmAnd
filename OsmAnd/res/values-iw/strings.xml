@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="release_5_0">
+    • גלה נקודות עניין (POI) מובילות עם מצב \'חקור\' החדש\n\n
+    • כל מסלולי OSM, עכשיו ניתנים לחיפוש! טיולים רגליים, רכיבה על אופניים, MTB ועוד\n\n
+    • ווידג\'ט ניווט חדש המשלב חץ פנייה והוראות ניווט\n\n
+    • ווידג\'ט מידע מסלול נוכחי: מציג ETA, זמן הגעה ומרחק\n\n
+    • בחר מסלולי סקי ושבילי MTB על המפה למידע מפורט\n\n
+    • יכולת לבחור גודל ווידג\'ט עבור הפאנלים השמאלי והימני\n\n
+    • נוספה "רשת קואורדינטות" עם קואורדינטות גיאוגרפיות\n\n
+    • נוספה יכולת להתאים אישית את המראה של קבוצות מועדפים\n\n
+    • Android Auto: הצג ETA ומרחק לנקודת הציון הבאה; שמות ערים מופיעים כעת בתוצאות החיפוש\n\n
+    • פסגות בולטות ניתנות כעת לגילוי באמצעות מפה וחיפוש\n\n
+    • גבהי פסגות הרים ברגל (feet)\n\n
+    • נוסף: צוקים ואזורי טיפוס על המפה\n\n
+    • חיפוש כתובות בארה"ב שופר\n\n
+    • נוסף TTS בעברית לניווט\n\n
+</string>
     <string name="shared_string_no">לא</string>
     <string name="shared_string_yes">כן</string>
     <string name="close_changeset">סגירת ערכת השינויים</string>
@@ -895,7 +911,7 @@
     <string name="recording_description">מתבצעת הקלטה %1$s %3$s %2$s</string>
     <string name="recording_default_name">בהקלטה</string>
     <string name="shared_string_control_stop">עצירה</string>
-    <string name="shared_string_control_start">הקלטה</string>
+    <string name="shared_string_control_start">התחלה</string>
     <string name="map_widget_av_notes">הערות קוליות</string>
     <string name="av_def_action_video">הקלטת וידאו</string>
     <string name="av_def_action_audio">הקלטת שמע</string>
@@ -1423,7 +1439,7 @@
     <string name="notes">הערות ק/ו</string>
     <string name="online_map">מפה מקוונת</string>
     <string name="roads_only">דרכים בלבד</string>
-    <string name="rendering_attr_pisteRoutes_name">מדרוני סקי</string>
+    <string name="rendering_attr_pisteRoutes_name">מסלולי סקי</string>
     <string name="free">%1$s פנויים</string>
     <string name="device_memory">זיכרון המכשיר</string>
     <string name="rendering_attr_pisteGrooming_name">פילוס שלג</string>
@@ -1538,7 +1554,6 @@
     <string name="rendering_attr_buildings15zoom_name">בניינים בתקריב 15</string>
     <string name="rendering_attr_moreDetailed_name">פרטים נוספים</string>
     <string name="rendering_attr_lessDetailed_name">פחות פרטים</string>
-    <string name="rendering_attr_hideAccess_name">הגבלות גישה</string>
     <string name="rendering_attr_showAccess_name">הצגת הגבלות גישה</string>
     <string name="rendering_attr_showSurfaceGrade_name">הצגת איכות הדרך</string>
     <string name="rendering_attr_showSurfaces_name">הצגת משטח הדרך</string>
@@ -2173,7 +2188,6 @@
     <string name="rendering_attr_hideWaterPolygons_name">הסתרת מים</string>
     <string name="routing_attr_allow_motorway_name">להשתמש בדרכים סלולות</string>
     <string name="routing_attr_allow_motorway_description">מאפשר דרכים סלולות.</string>
-    <string name="wiki_around">ערכי ויקיפדיה בקרבת מקום</string>
     <string name="search_map_hint">עיר או מחוז</string>
     <string name="route_roundabout_short">יש לצאת ביציאה מס׳ %1$d ולהמשיך</string>
     <string name="upload_poi">העלאת נקודות עניין</string>
@@ -3781,9 +3795,6 @@
     <string name="osm_edit_comment_note">להגיב על הערת OSM</string>
     <string name="osm_login_descr">ניתן להיכנס באמצעות שיטת OAuth או להיכנס עם שם המשתמש והססמה שלך ב־OSM.</string>
     <string name="shared_string_add_photo">הוספת תמונה</string>
-    <string name="register_on_openplacereviews">יש להירשם בכתובת
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">התמונות מסופקות על ידי מיזם הנתונים הפתוחים OpenPlaceReviews.org. כדי להעלות את התמונות שלך עליך להירשם באתר .</string>
     <string name="register_opr_create_new_account">יצירת חשבון חדש</string>
     <string name="register_opr_have_account">כבר יש לי חשבון</string>
     <string name="shared_string_search_history">היסטוריית חיפוש</string>
@@ -3797,11 +3808,6 @@
     <string name="export_not_enough_space_descr">במכשיר שלך יש רק %1$s פנויים. נא לפנות מקום או לבטל כמה מהפריטים לייצוא.</string>
     <string name="export_not_enough_space">אין מספיק מקום</string>
     <string name="add_to_mapillary">הוספה ל־Mapillary</string>
-    <string name="add_to_opr">הוספה ל־OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd מציג תמונות ממגוון מקורות:
-\nOpenPlaceReviews - תמונות של נקודות עניין;
-\nMapillary - תמונות ברמת הרחוב;
-\nאינטרנט / ויקימדיה - תמונות נקודות עניין בהתאם לנתונים של OpenStreetMap.</string>
     <string name="select_groups_for_import">נא לבחור קבוצות שייובאו.</string>
     <string name="select_items_for_import">נא לבחור פריטים שייובאו.</string>
     <string name="use_dev_url_descr">לעבור להשתמש ב־dev.openstreetmap.org במקום ב־openstreetmap.org כדי לבדוק העלאות של הערות OSM / נקודות עניין / GPX.</string>
@@ -3901,14 +3907,8 @@
     <string name="uploading_count">נשלחות %1$d מתוך %2$d</string>
     <string name="uploaded_count">נשלחו %1$d מתוך %2$d</string>
     <string name="toast_select_edits_for_upload">נא לבחור עריכות לשליחה</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">להשתמש ב־test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">כניסה ל־OpenPlaceReviews</string>
     <string name="announcement_time_descr">זמן ההכרזה של ההנחיות הקוליות השונות תלוי בסוג ההכרזה, במהירות הניווט הנוכחית ובמהירות הניווט כבררת מחדל.</string>
     <string name="hillshade_slope_contour_lines">הצללה / מדרון / קווי מתאר</string>
-    <string name="open_place_reviews_plugin_description">ניתן לשלוח תמונות, סקירות וקישורים לגבי מקומות ציבוריים כגון מסעדות, מלונות, מוזיאונים ונקודות דרך כנתונים פתוחים אל https://openplacereviews.org/data/‎.
-\n
-\nניתן לקרוא עוד באתר: https://openplacereviews.org</string>
     <string name="activity_type_water_name">מים</string>
     <string name="activity_type_winter_name">חורף</string>
     <string name="activity_type_snowmobile_name">אופנוע שלג</string>
@@ -4563,7 +4563,7 @@
     <string name="explore_plans">עיון בתוכניות</string>
     <string name="rendering_attr_hideMilitaryAreas_description">הסתרת שטחים צבאיים</string>
     <string name="map_widget_trip_recording_duration">משך</string>
-    <string name="map_widget_trip_recording_distance">מרחק</string>
+    <string name="map_widget_distance">מרחק</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (אין הגבלות)</string>
     <string name="routing_attr_hazmat_category_name">קטגוריית חומ״ס</string>
     <string name="routing_attr_hazmat_category_description">קטגוריית חומרים מסוכנים / התחשבות ההגבלות גישה עקב חומרים מסוכנים</string>
@@ -4991,4 +4991,14 @@
     <string name="obd_not_connected_to_device">מנותק מ־%s</string>
     <string name="obd_connecting_to_device">התחברות אל %s</string>
     <string name="wheel_circumference">היקף גלגל</string>
+    <string name="popular_places_nearby">מקומות נפוצים באזור</string>
+    <string name="shared_string_avg_altitude">גובה ממוצע</string>
+    <string name="shared_string_length">אורך</string>
+    <string name="shared_string_avg_speed">מהירות מזערית</string>
+    <string name="rendering_attr_showClimbingRoutes_description">הצגת מסלולי טיפוס</string>
+    <string name="calculate_size">חישוב הגודל</string>
+    <string name="default_buttons_corners_original_description">כל כפתור ישמור על רדיוס הפינות שלו.</string>
+    <string name="default_buttons_size_original_description">על כל כפתור לשמור את הגודל שלו.</string>
+    <string name="calculating_indication_message">מתבצע חישוב…</string>
+    <string name="cant_load_map_styles">לא ניתן לטעון סגנונות מפה.</string>
 </resources>

@@ -4,14 +4,7 @@ import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
+import android.graphics.*;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -334,10 +327,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (isLayerEnabled()) {
-			getFromPoint(tileBox, point, o);
+			collectFromPoint(result);
 		}
 	}
 
@@ -460,13 +453,15 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return false;
 	}
 
-	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super AidlMapPointWrapper> points) {
+	private void collectFromPoint(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		List<AidlMapPointWrapper> aidlPoints = aidlLayer.getPoints();
-		if (view == null || Algorithms.isEmpty(aidlPoints) || tb.getZoom() < START_ZOOM) {
+		if (view == null || Algorithms.isEmpty(aidlPoints) || tileBox.getZoom() < START_ZOOM) {
 			return;
 		}
 
-		int radius = getPointRadius(tb);
+		int radius = getPointRadius(tileBox);
 
 		MapRendererView mapRenderer = getMapRenderer();
 		List<PointI> touchPolygon31 = null;
@@ -482,9 +477,9 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			if (position != null) {
 				boolean add = mapRenderer != null
 						? NativeUtilities.isPointInsidePolygon(position, touchPolygon31)
-						: tb.isLatLonNearPixel(position, point.x, point.y, radius);
+						: tileBox.isLatLonNearPixel(position, point.x, point.y, radius);
 				if (add) {
-					points.add(p);
+					result.collect(p, this);
 				}
 			}
 		}

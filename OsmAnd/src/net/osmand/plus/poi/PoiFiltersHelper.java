@@ -23,7 +23,19 @@ import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class PoiFiltersHelper {
 
@@ -40,10 +52,8 @@ public class PoiFiltersHelper {
 	private PoiUIFilter showAllPOIFilter;
 	private PoiUIFilter topWikiPoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters = null;
-	private Set<PoiUIFilter> overwrittenSelectedPoiFilters = new TreeSet<>();
 	private Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
-	private boolean useOverwrittenFilters;
-
+	private Set<PoiUIFilter> overwrittenPoiFilters = null;
 
 	public PoiFiltersHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -456,32 +466,15 @@ public class PoiFiltersHelper {
 
 	@NonNull
 	public Set<PoiUIFilter> getSelectedPoiFilters() {
-		return useOverwrittenFilters ? overwrittenSelectedPoiFilters : selectedPoiFilters;
+		return overwrittenPoiFilters != null ? overwrittenPoiFilters : selectedPoiFilters;
 	}
 
-	public void replaceSelectedPoiFilters(PoiUIFilter filter) {
-		Set<PoiUIFilter> overwrittenSelectedPoiFilters = new TreeSet<>();
-		overwrittenSelectedPoiFilters.add(filter);
-		PoiUIFilter wiki = getTopWikiPoiFilter();
-		if (isPoiFilterSelected(wiki)) {
-			overwrittenSelectedPoiFilters.add(wiki);
-		}
-		this.overwrittenSelectedPoiFilters = overwrittenSelectedPoiFilters;
-		useOverwrittenFilters = true;
+	public void replaceSelectedPoiFilters(@NonNull PoiUIFilter filter) {
+		overwrittenPoiFilters = new TreeSet<>(Set.of(filter));
 	}
 
 	public void restoreSelectedPoiFilters() {
-		PoiUIFilter wiki = getTopWikiPoiFilter();
-		if (wiki != null) {
-			Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
-			if (isPoiFilterSelected(wiki)) {
-				selectedPoiFilters.add(wiki);
-			} else {
-				selectedPoiFilters.remove(wiki);
-			}
-			this.selectedPoiFilters = selectedPoiFilters;
-		}
-		useOverwrittenFilters = false;
+		overwrittenPoiFilters = null;
 	}
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
@@ -535,8 +528,8 @@ public class PoiFiltersHelper {
 	}
 
 	private void setSelectedPoiFilters(@NonNull Set<PoiUIFilter> filters) {
-		if (useOverwrittenFilters) {
-			overwrittenSelectedPoiFilters = filters;
+		if (overwrittenPoiFilters != null) {
+			overwrittenPoiFilters = filters;
 		} else {
 			selectedPoiFilters = filters;
 			saveSelectedPoiFilters(selectedPoiFilters);
@@ -553,7 +546,7 @@ public class PoiFiltersHelper {
 
 	public String getFiltersName(Set<PoiUIFilter> filters) {
 		if (filters.isEmpty()) {
-			return app.getResources().getString(R.string.shared_string_none);
+			return app.getString(R.string.shared_string_none);
 		} else {
 			List<String> names = new ArrayList<>();
 			for (PoiUIFilter filter : filters) {

@@ -117,6 +117,8 @@ public class RouteUtils {
 			return R.drawable.mm_routes;
 		} else if (DIRTBIKE.getRenderingPropertyAttr().equals(attrName)) {
 			return R.drawable.ic_action_dirt_motorcycle;
+		} else if (CLIMBING.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_hill_climbing;
 		}
 		return INVALID_ID;
 	}

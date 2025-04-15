@@ -257,9 +257,11 @@ public abstract class InAppPurchases {
 			AMAZON(R.string.amazon_market),
 			HUAWEI(R.string.huawei_market),
 			IOS(R.string.apple_app_store),
+			FASTSPRING(R.string.fastspring_market),
 			PROMO(R.string.promo),
 			TRIPLTEK_PROMO(R.string.tripltek),
-			HUGEROCK_PROMO(R.string.hugerock);
+			HUGEROCK_PROMO(R.string.hugerock),
+			HMD_PROMO(R.string.hmd);
 
 			private final int storeNameId;
 

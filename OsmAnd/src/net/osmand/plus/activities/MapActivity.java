@@ -5,6 +5,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 import android.Manifest;
@@ -57,6 +58,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.HMDPromoFragment;
 import net.osmand.plus.chooseplan.HugerockPromoFragment;
 import net.osmand.plus.chooseplan.TripltekPromoFragment;
 import net.osmand.plus.configmap.ConfigureMapFragment;
@@ -65,6 +67,7 @@ import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.feedback.CrashBottomSheetDialogFragment;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RenderInitErrorBottomSheet;
@@ -72,7 +75,6 @@ import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.keyevent.KeyEventHelper;
@@ -91,7 +93,6 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
-import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
@@ -137,8 +138,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
@@ -194,7 +193,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean activityRestartNeeded;
 	private boolean stopped = true;
 
-	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private final StateChangedListener<Integer> mapScreenOrientationSettingListener = new StateChangedListener<Integer>() {
 		@Override
@@ -516,8 +514,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
 			return;
 		}
-		QuickSearchDialogFragment fragment = fragmentsHelper.getQuickSearchDialogFragment();
-		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && fragment != null && fragment.isSearchHidden()) {
+		ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
+		if (explorePlacesFragment != null) {
+			fragmentsHelper.closeExplore();
+			fragmentsHelper.showQuickSearch(CURRENT, false);
+			return;
+		}
+		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
+		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && quickSearchFragment != null
+				&& quickSearchFragment.isSearchHidden()) {
 			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
@@ -588,6 +593,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else if (HugerockPromoFragment.shouldShow(app)) {
 				SecondSplashScreenFragment.SHOW = false;
 				HugerockPromoFragment.showInstance(fragmentManager);
+			} else if (HMDPromoFragment.shouldShow(app)) {
+				SecondSplashScreenFragment.SHOW = false;
+				HMDPromoFragment.showInstance(fragmentManager);
 			}
 		}
 
@@ -627,7 +635,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()
-				&& (!Algorithms.objectEquals(targets.getPointToNavigate().point, routingHelper.getFinalLocation()) || !Algorithms
+				&& (!Algorithms.objectEquals(targets.getPointToNavigate().getLatLon(), routingHelper.getFinalLocation()) || !Algorithms
 				.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints()))) {
 			targets.updateRouteAndRefresh(true);
 		}
@@ -842,7 +850,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapContextMenu.setMapCenter(latLonToShow);
 				mapContextMenu.setCenterMarker(true);
 
-				RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+				RotatedTileBox tb = mapView.getRotatedTileBox();
 				LatLon prevCenter = tb.getCenterLatLon();
 
 				double border = 0.8;
@@ -1113,18 +1121,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void updateMapSettings(boolean updateMapRenderer) {
-		if (!app.isApplicationInitializing()) {
-			UpdateVectorRendererAsyncTask task = new UpdateVectorRendererAsyncTask(app, updateMapRenderer, changed -> {
-				if (changed) {
-					ConfigureMapFragment fragment = ConfigureMapFragment.getVisibleInstance(this);
-					if (fragment != null) {
-						fragment.onRefreshItem(MAP_STYLE_ID);
-					}
+		getMapView().updateMapSettings(updateMapRenderer, changed -> {
+			if (changed) {
+				ConfigureMapFragment fragment = ConfigureMapFragment.getVisibleInstance(this);
+				if (fragment != null) {
+					fragment.onRefreshItem(MAP_STYLE_ID);
 				}
-				return true;
-			});
-			task.executeOnExecutor(singleThreadExecutor);
-		}
+			}
+			return true;
+		});
 	}
 
 	public MapScrollHelper getMapScrollHelper() {
@@ -1284,9 +1289,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void refreshMapComplete() {
-		getMyApplication().getResourceManager().getRenderer().clearCache();
-		updateMapSettings(true);
-		getMapView().refreshMap(true);
+		getMapView().refreshMapComplete();
 	}
 
 	public View getLayout() {
@@ -1314,7 +1317,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@NonNull
-	public MapRouteInfoMenu getMapRouteInfoMenu() { return mapRouteInfoMenu; }
+	public MapRouteInfoMenu getMapRouteInfoMenu() {
+		return mapRouteInfoMenu;
+	}
 
 	@NonNull
 	public TrackDetailsMenu getTrackDetailsMenu() {
@@ -1544,7 +1549,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				sim.startStopRouteAnimation(this);
 			}
 		}
-		for (OsmandPlugin plugin: PluginsHelper.getEnabledPlugins()) {
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 			plugin.newRouteIsCalculated(newRoute);
 		}
 	}

@@ -8,6 +8,8 @@ import android.view.ViewParent;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DimenRes;
+import androidx.annotation.Dimension;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,7 @@ import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.List;
@@ -38,22 +41,34 @@ public abstract class MapWidget {
 	protected final UiUtilities iconsCache;
 	protected final OsmAndLocationProvider locationProvider;
 	protected final RoutingHelper routingHelper;
+	protected final WidgetsVisibilityHelper visibilityHelper;
 
 	protected final WidgetType widgetType;
 	protected boolean nightMode;
 
+	protected WidgetsPanel panel;
+	@Nullable
+	protected String customId;
+
 	protected final View view;
 
-	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
+	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
+			@Nullable String customId, @Nullable WidgetsPanel panel) {
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
+		this.customId = customId;
 		this.widgetType = widgetType;
 		this.iconsCache = app.getUIUtilities();
 		this.locationProvider = app.getLocationProvider();
 		this.routingHelper = app.getRoutingHelper();
 		this.nightMode = app.getDaynightHelper().isNightMode();
+		this.visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
 		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
+
+		String id = customId != null ? customId : widgetType.id;
+		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings);
+		setPanel(selectedPanel);
 	}
 
 	@LayoutRes
@@ -79,10 +94,12 @@ public abstract class MapWidget {
 		}
 	}
 
-	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode,
+			@NonNull ApplicationMode appMode, @Nullable String customId) {
 	}
 
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
+			@NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
 	}
 
@@ -102,7 +119,7 @@ public abstract class MapWidget {
 		return null;
 	}
 
-	@Nullable
+	@NonNull
 	public WidgetType getWidgetType() {
 		return widgetType;
 	}
@@ -127,9 +144,17 @@ public abstract class MapWidget {
 		return view.getVisibility() == View.VISIBLE;
 	}
 
+	protected void setPanel(@NonNull WidgetsPanel panel) {
+		this.panel = panel;
+	}
+
+	public boolean isVerticalWidget() {
+		return panel.isPanelVertical();
+	}
+
 	public static void updateTextColor(@NonNull TextView text, @Nullable TextView textShadow,
-									   @ColorInt int textColor, @ColorInt int textShadowColor,
-									   boolean boldText, int shadowRadius) {
+			@ColorInt int textColor, @ColorInt int textShadowColor,
+			boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
 		if (textShadow != null) {
@@ -155,6 +180,11 @@ public abstract class MapWidget {
 		} else {
 			return app.getString(stringId);
 		}
+	}
+
+	@Dimension
+	protected int getDimensionPixelSize(@DimenRes int resId) {
+		return getMyApplication().getResources().getDimensionPixelSize(resId);
 	}
 
 	@NonNull

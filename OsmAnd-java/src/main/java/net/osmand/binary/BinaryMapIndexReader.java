@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -73,6 +74,7 @@ import net.osmand.data.City;
 import net.osmand.data.IncompleteTransportRoute;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -975,8 +977,10 @@ public class BinaryMapIndexReader {
 					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
 					}
-
-
+					if (req.hasSearchBoxes() &&
+							!req.containsSearchBox(index.left, index.top, index.right, index.bottom)) {
+						continue;
+					}
 
 					// lazy initializing trees
 					if (index.trees == null) {
@@ -989,6 +993,10 @@ public class BinaryMapIndexReader {
 
 					for (MapTree tree : index.trees) {
 						if (tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top) {
+							continue;
+						}
+						if (req.hasSearchBoxes() &&
+								!req.containsSearchBox(tree.left, tree.top, tree.right, tree.bottom)) {
 							continue;
 						}
 						codedIS.seek(tree.filePointer);
@@ -1115,9 +1123,12 @@ public class BinaryMapIndexReader {
 				// coordinates are init
 				if (current.right < req.left || current.left > req.right || current.top > req.bottom || current.bottom < req.top) {
 					return;
-				} else {
-					req.numberOfAcceptedSubtrees++;
 				}
+				if (req.hasSearchBoxes() &&
+						!req.containsSearchBox(current.left, current.top, current.right, current.bottom)) {
+					return;
+				}
+				req.numberOfAcceptedSubtrees++;
 			}
 			switch (tag) {
 			case 0:
@@ -1802,6 +1813,8 @@ public class BinaryMapIndexReader {
 		int top = 0;
 		int bottom = 0;
 
+		private Collection<QuadRect> searchBoxes;
+
 		int zoom = 15;
 		int limit = -1;
 
@@ -1981,7 +1994,36 @@ public class BinaryMapIndexReader {
 		public boolean isBboxSpecified() {
 			return left != 0 || right != 0;
 		}
-	}
+
+		private boolean hasSearchBoxes() {
+			return searchBoxes != null;
+		}
+
+		private boolean containsSearchBox(int left, int top, int right, int bottom) {
+			if (Algorithms.isEmpty(searchBoxes)) {
+				return false;
+			}
+			QuadRect searchRect = new QuadRect(left, top, right, bottom);
+			for (QuadRect box : searchBoxes) {
+				if (searchRect.contains(box)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+        public Collection<QuadRect> clearSearchBoxes() {
+            return searchBoxes = null;
+        }
+
+        public void setSearchBoxes(Collection<QuadRect> searchBboxes) {
+            this.searchBoxes = searchBboxes;
+        }
+
+		public void setMatcherMode(StringMatcherMode mode) {
+			matcherMode = mode;
+		}
+    }
 
 
 	public static class MapIndex extends BinaryIndexPart {

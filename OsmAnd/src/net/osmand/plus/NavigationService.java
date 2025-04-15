@@ -244,9 +244,9 @@ public class NavigationService extends Service {
 				});
 			}
 		} catch (SecurityException e) {
-			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show();
+			getApp().showToastMessage(R.string.no_location_permission);
 		} catch (IllegalArgumentException e) {
-			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show();
+			getApp().showToastMessage(R.string.gps_not_available);
 		}
 	}
 

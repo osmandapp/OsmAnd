@@ -40,7 +40,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
@@ -782,7 +782,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 				}
 			}
 
-			RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapView.getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 

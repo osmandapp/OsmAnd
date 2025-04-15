@@ -33,21 +33,9 @@ import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.ElevationDiffsCalculator;
-import net.osmand.plus.charts.ElevationChartAppearance;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.primitives.TrkSegment;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.GPXDataSetAxisType;
-import net.osmand.plus.charts.GPXDataSetType;
-import net.osmand.plus.charts.GPXHighlight;
-import net.osmand.plus.charts.OrderedLineDataSet;
-import net.osmand.plus.charts.TrackChartPoints;
+import net.osmand.plus.charts.*;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -55,9 +43,16 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -106,8 +101,8 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 	};
 
-	public ElevationProfileWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, ELEVATION_PROFILE);
+	public ElevationProfileWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(mapActivity, ELEVATION_PROFILE, customId, panel);
 		this.showSlopePreference = registerShowSlopePref(customId);
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);
@@ -186,7 +181,7 @@ public class ElevationProfileWidget extends MapWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowElevationProfileWidget();
+		boolean visible = visibilityHelper.shouldShowElevationProfileWidget();
 		updateVisibility(visible);
 		if (visible) {
 			updateInfoImpl();

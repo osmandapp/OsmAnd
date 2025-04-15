@@ -129,6 +129,10 @@ public class Ring implements Comparable<Ring> {
 	public List<Node> getBorder() {
 		return border.getNodes();
 	}
+	
+	public Way getBorderWay() {
+		return border;
+	}
 
 
 	/**

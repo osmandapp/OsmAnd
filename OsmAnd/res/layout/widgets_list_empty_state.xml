@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/no_widgets_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center_horizontal"
+		android:orientation="vertical"
+		android:paddingHorizontal="@dimen/dialog_content_margin"
+		android:background="?attr/list_background_color">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/no_widgets_image"
+			android:layout_width="@dimen/icon_size_double"
+			android:layout_height="@dimen/icon_size_double"
+			android:layout_marginTop="@dimen/content_padding_large"
+			android:layout_marginBottom="@dimen/dialog_content_margin"
+			tools:src="@drawable/ic_action_screen_side_left" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle.Medium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:text="@string/no_widgets_here_yet"
+			android:textColor="?android:textColorPrimary" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/DescStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_small_half"
+			android:layout_marginBottom="@dimen/empty_state_button_margin_top"
+			android:gravity="center_horizontal"
+			android:text="@string/no_widgets_descr"
+			android:textColor="?android:textColorSecondary" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/add_button"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				app:dialogButtonBottomMargin="@dimen/empty_state_button_margin_top"
+				app:dialogButtonTitle="@string/shared_string_add"
+				app:dialogButtonType="secondary" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:scaleType="fitXY"
+		app:srcCompat="@drawable/bg_shadow_list_bottom" />
+
+</LinearLayout>

@@ -182,7 +182,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private boolean processFileName() {
 		if (Algorithms.isBlank(newGpxName)) {
-			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.empty_filename);
 			return false;
 		}
 		if (!initialGpxName.equalsIgnoreCase(newGpxName)) {

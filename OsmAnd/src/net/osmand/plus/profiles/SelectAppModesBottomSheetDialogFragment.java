@@ -1,7 +1,5 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +9,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 
@@ -29,19 +26,13 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 	private static final Log LOG = PlatformUtil.getLog(SelectAppModesBottomSheetDialogFragment.class);
 
 	private List<ApplicationMode> activeModes = new ArrayList<>();
-	private ApplicationMode appMode;
 	private boolean appModeChangeable;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			appModeChangeable = savedInstanceState.getBoolean(APP_MODE_CHANGEABLE_KEY);
-		}
-		OsmandApplication app = requiredMyApplication();
-		if (appMode == null) {
-			appMode = app.getSettings().getApplicationMode();
 		}
 	}
 
@@ -51,14 +42,6 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 		activeModes = new ArrayList<>(ApplicationMode.values(getMyApplication()));
 		adapter.updateItemsList(activeModes);
 		setupHeightAndBackground(getView());
-	}
-
-	public ApplicationMode getAppMode() {
-		return appMode;
-	}
-
-	public void setAppMode(ApplicationMode appMode) {
-		this.appMode = appMode;
 	}
 
 	public boolean isAppModeChangeable() {
@@ -103,19 +86,7 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (appMode != null) {
-			outState.putString(APP_MODE_KEY, appMode.getStringKey());
-		}
 		outState.putBoolean(APP_MODE_CHANGEABLE_KEY, appModeChangeable);
-	}
-
-	@Override
-	public boolean isNightMode(@NonNull OsmandApplication app) {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControlsForProfile(getAppMode());
-		} else {
-			return !app.getSettings().isLightContentForMode(getAppMode());
-		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, boolean usedOnMap,

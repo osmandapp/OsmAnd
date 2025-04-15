@@ -138,7 +138,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		updatePreference(findPreference(SCREEN_ALERTS_IMAGE));
 
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
-			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
+			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
 		}
 		return super.onPreferenceClick(preference);
 	}

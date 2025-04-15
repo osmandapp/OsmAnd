@@ -50,13 +50,13 @@ public class SaveDirectionsAsyncTask extends AsyncTask<File, Void, GpxFile> {
 			}
 			app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 			String result = app.getString(R.string.route_successfully_saved_at, gpxFile.getTracks().get(0).getName());
-			Toast.makeText(app, result, Toast.LENGTH_LONG).show();
+			app.showToastMessage(result);
 		} else {
 			String errorMessage = SharedUtil.jException(gpxFile.getError()).getMessage();
 			if (errorMessage == null) {
 				errorMessage = app.getString(R.string.error_occurred_saving_gpx);
 			}
-			Toast.makeText(app, errorMessage, Toast.LENGTH_LONG).show();
+			app.showToastMessage(errorMessage);
 		}
 	}
 }

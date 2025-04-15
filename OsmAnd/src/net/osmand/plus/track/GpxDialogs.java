@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -25,7 +24,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -68,7 +67,7 @@ public class GpxDialogs {
 		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, null, false);
 		if (list.isEmpty()) {
-			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.gpx_files_not_found);
 		}
 		if (!list.isEmpty() || showCurrentGpx) {
 			if (showCurrentGpx) {
@@ -355,7 +354,7 @@ public class GpxDialogs {
 				mapActivity.startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 				mapActivity.registerActivityResultListener(new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, listener));
 			} catch (ActivityNotFoundException e) {
-				Toast.makeText(mapActivity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+				AndroidUtils.getApp(activity).showToastMessage(R.string.no_activity_for_intent);
 			}
 		}
 	}
@@ -406,7 +405,7 @@ public class GpxDialogs {
 			if (System.currentTimeMillis() - lastUpdateTime > MIN_UPDATE_INTERVAL) {
 				updateItemsProc.run();
 			}
-			app.runMessageInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
+			app.runInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
 		}
 	}
 }

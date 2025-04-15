@@ -10,6 +10,9 @@ import static net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.NEARBY_MAX_POI_
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.DIVIDER_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_MEMBERS_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_PART_OF_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_RELATED_ROUTES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.WITHIN_POLYGONS_ROW_KEY;
 
 import android.content.Context;
@@ -59,6 +62,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
+import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
+import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchType;
 import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
@@ -96,6 +101,8 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -129,6 +136,7 @@ public class MenuBuilder {
 	private boolean showNearestWiki;
 	private boolean showNearestPoi;
 	private boolean showOnlinePhotos = true;
+	private boolean customOnlinePhotosPosition;
 
 	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();
 
@@ -138,6 +146,7 @@ public class MenuBuilder {
 	private List<AbstractCard> onlinePhotoCards;
 
 	private CollapseExpandListener collapseExpandListener;
+	private GetImageCardsTask getImageCardsTask;
 
 	private final String preferredMapLang;
 	private String preferredMapAppLang;
@@ -235,6 +244,7 @@ public class MenuBuilder {
 		return app;
 	}
 
+	@Nullable
 	public MapContextMenu getMapContextMenu() {
 		return mapContextMenu;
 	}
@@ -247,7 +257,7 @@ public class MenuBuilder {
 		this.latLon = objectLocation;
 	}
 
-	public void setMapContextMenu(MapContextMenu mapContextMenu) {
+	public void setMapContextMenu(@Nullable MapContextMenu mapContextMenu) {
 		this.mapContextMenu = mapContextMenu;
 	}
 
@@ -279,6 +289,14 @@ public class MenuBuilder {
 		this.showOnlinePhotos = showOnlinePhotos;
 	}
 
+	public boolean isCustomOnlinePhotosPosition() {
+		return customOnlinePhotosPosition;
+	}
+
+	public void setCustomOnlinePhotosPosition(boolean customOnlinePhotosPosition) {
+		this.customOnlinePhotosPosition = customOnlinePhotosPosition;
+	}
+
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
 	}
@@ -303,6 +321,7 @@ public class MenuBuilder {
 		buildWithinRow(view);
 		buildNearestWikiRow(view);
 		buildNearestPoiRow(view);
+		buildRouteRows(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
@@ -312,13 +331,17 @@ public class MenuBuilder {
 		if (needBuildCoordinatesRow()) {
 			buildCoordinatesRow(view);
 		}
+		if (!isCustomOnlinePhotosPosition()) {
+			buildNearestPhotos(view, object);
+		}
+	}
+
+	public void buildNearestPhotos(@NonNull ViewGroup view, @Nullable Object object) {
 		galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos && galleryController != null) {
 			buildNearestPhotosRow(view);
 			buildPluginGalleryRows(view, object);
 		}
-
-		startLoadingImages();
 	}
 
 	private boolean showTransportRoutes() {
@@ -326,13 +349,13 @@ public class MenuBuilder {
 	}
 
 	private boolean showLocalTransportRoutes() {
-		List<TransportStopRoute> localTransportRoutes = mapContextMenu.getLocalTransportStopRoutes();
-		return localTransportRoutes != null && localTransportRoutes.size() > 0;
+		List<TransportStopRoute> localTransportRoutes = mapContextMenu != null ? mapContextMenu.getLocalTransportStopRoutes() : null;
+		return localTransportRoutes != null && !localTransportRoutes.isEmpty();
 	}
 
 	private boolean showNearbyTransportRoutes() {
-		List<TransportStopRoute> nearbyTransportRoutes = mapContextMenu.getNearbyTransportStopRoutes();
-		return nearbyTransportRoutes != null && nearbyTransportRoutes.size() > 0;
+		List<TransportStopRoute> nearbyTransportRoutes = mapContextMenu != null ? mapContextMenu.getNearbyTransportStopRoutes() : null;
+		return nearbyTransportRoutes != null && !nearbyTransportRoutes.isEmpty();
 	}
 
 	void onHide() {
@@ -346,6 +369,7 @@ public class MenuBuilder {
 			galleryController.clearHolder();
 		}
 		clearPluginRows();
+		stopLoadingImagesTask();
 	}
 
 	public boolean isHidden() {
@@ -397,7 +421,7 @@ public class MenuBuilder {
 	protected void buildWithinRow(ViewGroup viewGroup) {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		MapRendererView rendererView = app.getOsmandMap().getMapView().getMapRenderer();
-		if (mapContext != null && rendererView != null) {
+		if (mapContext != null && rendererView != null && mapContextMenu != null) {
 			ZoomLevel zoom = rendererView.getZoomLevel();
 			PointI pointI = NativeUtilities.getPoint31FromLatLon(getLatLon());
 			List<RenderedObject> polygons = mapContext.retrievePolygonsAroundMapObject(pointI, mapContextMenu.getObject(), zoom);
@@ -419,7 +443,7 @@ public class MenuBuilder {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (int i = 0; i < menuObjects.size(); i++) {
 			MenuObject menuObject = menuObjects.get(i);
-			View container = createRowContainer(app, null);
+			View container = createRowContainer(mapActivity, null);
 			String rowTextPrefix, rowText;
 			String title = menuObject.getTitleStr();
 			if (title.contains(":")) {
@@ -500,13 +524,60 @@ public class MenuBuilder {
 
 					View amenitiesRow = createRowContainer(viewGroup.getContext(), NEAREST_POI_KEY);
 					firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
-					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(amenity), text, NEAREST_POI_KEY);
+					buildNearestRow(amenitiesRow, amenities, AmenityMenuController.getRightIconId(app, amenity), text, NEAREST_POI_KEY);
 					viewGroup.addView(amenitiesRow, insertIndex);
 
 					buildNearestRowDividerIfMissing(viewGroup, insertIndex);
 				}
 			});
 		}
+	}
+
+	protected void buildRouteRows(ViewGroup viewGroup) {
+		if (amenity == null) {
+			return;
+		}
+		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
+		int position = viewGroup.getChildCount();
+		if (amenity.getAdditionalInfo(Amenity.ROUTE_MEMBERS_IDS) != null) {
+
+			buildRouteRow(amenities -> {
+				String title = app.getString(R.string.route_members);
+				buildRouteRow(amenities, viewGroupRef, position, ROUTE_MEMBERS_ROW_KEY, title);
+			}, SearchType.MEMBERS);
+		}
+
+		if (amenity.getAdditionalInfo(Amenity.ROUTE_ID) != null) {
+
+			buildRouteRow(amenities -> {
+				String title = app.getString(R.string.route_part_of);
+				buildRouteRow(amenities, viewGroupRef, position, ROUTE_PART_OF_ROW_KEY, title);
+			}, SearchType.PART_OF);
+
+			buildRouteRow(amenities -> {
+				String title = app.getString(R.string.multipoligon_related);
+				buildRouteRow(amenities, viewGroupRef, position, ROUTE_RELATED_ROUTES_ROW_KEY, title);
+			}, SearchType.RELATED);
+		}
+	}
+
+	private void buildRouteRow(List<Amenity> amenities, WeakReference<ViewGroup> viewGroupRef, int position, String key, String title) {
+		ViewGroup viewGroup1 = viewGroupRef.get();
+		if (viewGroup1 == null || Algorithms.isEmpty(amenities)) {
+			return;
+		}
+		String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+		String count = "(" + amenities.size() + ")";
+		String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
+		View wikiRow = viewGroup1.findViewWithTag(NEAREST_WIKI_KEY);
+		View amenitiesRow = createRowContainer(viewGroup1.getContext(), key);
+		firstRow = position == 0 || isDividerAtPosition(viewGroup1, position - 1);
+		int iconId = AmenityMenuController.getRightIconId(app, amenity);
+		CollapsableView collapsableView = getCollapsableView(amenitiesRow.getContext(), true, amenities, key);
+		buildRow(amenitiesRow, iconId, null, text, 0, true, collapsableView,
+				false, 0, false, null, false);
+		viewGroup1.addView(amenitiesRow, position);
+		buildNearestRowDividerIfMissing(viewGroup1, position);
 	}
 
 	protected View createRowContainer(Context context, String tag) {
@@ -554,6 +625,8 @@ public class MenuBuilder {
 
 		if (needUpdateOnly && onlinePhotoCards != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
+		} else if (!collapsableView.isCollapsed() && onlinePhotoCards == null) {
+			startLoadingImages();
 		}
 	}
 
@@ -579,12 +652,22 @@ public class MenuBuilder {
 		Map<String, String> params = getAdditionalCardParams();
 		if (galleryController.isCurrentHolderEquals(latLon, params)) {
 			imageCardListener.onFinish(galleryController.getCurrentCardsHolder());
+		} else {
+			stopLoadingImagesTask();
+			galleryController.clearHolder();
+			getImageCardsTask = new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener);
+			execute(getImageCardsTask);
 		}
-		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
+	}
+
+	private void stopLoadingImagesTask() {
+		if (getImageCardsTask != null && getImageCardsTask.getStatus() == AsyncTask.Status.RUNNING) {
+			getImageCardsTask.cancel(false);
+		}
 	}
 
 	protected Map<String, String> getAdditionalCardParams() {
-		return null;
+		return Collections.emptyMap();
 	}
 
 	protected void buildInternal(View view) {
@@ -594,13 +677,14 @@ public class MenuBuilder {
 		buildMainImage(view);
 		buildDescription(view);
 		if (showLocalTransportRoutes()) {
-			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
+			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, false);
+			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, collapsableView != null, collapsableView,
 					false, 0, false, null, true);
 		}
 		if (showNearbyTransportRoutes()) {
 			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
 			String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS_UI, app);
-			buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
+			buildRow(view, 0, null, routesWithingDistance, 0, collapsableView != null, collapsableView,
 					false, 0, false, null, true);
 		}
 	}
@@ -644,28 +728,28 @@ public class MenuBuilder {
 	}
 
 	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
-	                     boolean collapsable, CollapsableView collapsableView,
+	                     boolean collapsable, @Nullable CollapsableView collapsableView,
 	                     boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, text, textColor, null, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(View view, Drawable icon, String buttonText, String text, int textColor, String secondaryText,
-	                     boolean collapsable, CollapsableView collapsableView, boolean needLinks,
+	                     boolean collapsable, @Nullable CollapsableView collapsableView, boolean needLinks,
 	                     int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, icon, buttonText, null, text, textColor, secondaryText, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, false, false, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
-	                     boolean collapsable, CollapsableView collapsableView,
+	                     boolean collapsable, @Nullable CollapsableView collapsableView,
 	                     boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
 		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, null, text, textColor, null, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, isNumber, isEmail, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(View view, Drawable icon, String buttonText, String textPrefix, String text,
-	                     int textColor, String secondaryText, boolean collapsable, CollapsableView collapsableView, boolean needLinks,
+	                     int textColor, String secondaryText, boolean collapsable, @Nullable CollapsableView collapsableView, boolean needLinks,
 	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
 		boolean light = isLightContent();
 
@@ -739,6 +823,7 @@ public class MenuBuilder {
 
 		// Primary text
 		TextViewEx textView = new TextViewEx(view.getContext());
+		textView.setId(R.id.text);
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(llTextParams,
 				icon != null ? 0 : dpToPx(16f), dpToPx(textPrefixView != null ? 2f : (secondaryText != null ? 10f : 8f)), 0, dpToPx(secondaryText != null ? 6f : 8f));
@@ -872,10 +957,14 @@ public class MenuBuilder {
 	}
 
 	public View buildDescriptionRow(View view, String description) {
+		return buildDescriptionRow(view, description, null, null);
+	}
+
+	public View buildDescriptionRow(View view, String description, @Nullable View.OnClickListener onClickListener, @Nullable String buttonText) {
 		String descriptionLabel = app.getString(R.string.shared_string_description);
-		View.OnClickListener onClickListener = v -> {
-			showDescriptionDialog(view.getContext(), description, descriptionLabel);
-		};
+		if (onClickListener == null) {
+			onClickListener = v -> showDescriptionDialog(view.getContext(), description, descriptionLabel);
+		}
 		boolean light = isLightContent();
 
 		if (!isFirstRow()) {
@@ -946,7 +1035,10 @@ public class MenuBuilder {
 		llText.addView(textView);
 
 		// Read Full button
-		buildReadFullButton(llText, app.getString(R.string.context_menu_read_full), onClickListener);
+		if (buttonText == null) {
+			buttonText = app.getString(R.string.context_menu_read_full);
+		}
+		buildReadFullButton(llText, buttonText, onClickListener);
 
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
@@ -1231,7 +1323,11 @@ public class MenuBuilder {
 		}
 	}
 
+	@Nullable
 	private CollapsableView getCollapsableTransportStopRoutesView(Context context, boolean collapsed, boolean isNearbyRoutes) {
+		if (mapContextMenu == null) {
+			return null;
+		}
 		LinearLayout view = buildCollapsableContentView(context, collapsed, false);
 		List<TransportStopRoute> localTransportStopRoutes = mapContextMenu.getLocalTransportStopRoutes();
 		List<TransportStopRoute> nearbyTransportStopRoutes = mapContextMenu.getNearbyTransportStopRoutes();
@@ -1293,9 +1389,15 @@ public class MenuBuilder {
 			button.setText(name);
 
 			button.setOnClickListener(v -> {
-				LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
-				mapActivity.getContextMenu().show(latLon, pointDescription, poi);
-				app.getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
+				if (poi.isRouteTrack()) {
+					TravelHelper travelHelper = app.getTravelHelper();
+					TravelGpx travelGpx = new TravelGpx(poi);
+					travelHelper.openTrackMenu(travelGpx, getMapActivity(), poi.getGpxFileName(null), poi.getLocation(), true);
+				} else {
+					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
+					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
+					app.getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
+				}
 			});
 			view.addView(button);
 		}
@@ -1327,7 +1429,7 @@ public class MenuBuilder {
 			PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
 			poiFiltersHelper.clearGeneralSelectedPoiFilters();
 			poiFiltersHelper.addSelectedPoiFilter(filter);
-			QuickSearchToolbarController controller = new QuickSearchToolbarController();
+			QuickSearchToolbarController controller = new QuickSearchToolbarController(mapActivity);
 			controller.setTitle(filter.getName());
 
 			controller.setOnBackButtonClickListener(v1 -> {
@@ -1343,7 +1445,9 @@ public class MenuBuilder {
 				mapActivity.hideTopToolbar(controller);
 				mapActivity.refreshMap();
 			});
-			mapContextMenu.hideMenus();
+			if (mapContextMenu != null) {
+				mapContextMenu.hideMenus();
+			}
 			mapActivity.showTopToolbar(controller);
 			mapActivity.refreshMap();
 		});
@@ -1415,7 +1519,7 @@ public class MenuBuilder {
 	private void buildGetWikipediaBanner(ViewGroup viewGroup) {
 		boolean light = isLightContent();
 		OsmAndFeature feature = OsmAndFeature.WIKIPEDIA;
-		LinearLayout view = buildCollapsableContentView(app, false, true);
+		LinearLayout view = buildCollapsableContentView(viewGroup.getContext(), false, true);
 
 		View banner = UiUtilities.getInflater(mapActivity, !light)
 				.inflate(R.layout.get_wikipedia_context_menu_banner, view, false);
@@ -1431,7 +1535,7 @@ public class MenuBuilder {
 			}
 		});
 
-		View row = createRowContainer(app, NEAREST_WIKI_KEY);
+		View row = createRowContainer(viewGroup.getContext(), NEAREST_WIKI_KEY);
 		view.addView(banner);
 		String text = app.getString(R.string.wiki_around);
 		CollapsableView collapsableView = new CollapsableView(view, this, false);
@@ -1446,6 +1550,12 @@ public class MenuBuilder {
 			if (filter != null) {
 				searchSortedAmenities(filter, latLon, listener);
 			}
+		}
+	}
+
+	protected void buildRouteRow(SearchByRouteIdListener listener, SearchType type) {
+		if (amenity != null) {
+			execute(new SearchByRouteIdTask(amenity, type, app, listener));
 		}
 	}
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="release_5_0">- Відкривайте для себе найпопулярніші POI з новим режимом Дослідження\n\n - Всі маршрути OSM тепер доступні для пошуку! Піші, велосипедні, MTB та багато іншого\n\n - Новий навігаційний віджет поєднує стрілку повороту та інструкції з навігації\n\n - Віджет інформації про поточний маршрут: відображає час прибуття, час проходження та відстань\n\n - Виберіть гірськолижні схили та MTB-траси на карті для отримання детальної інформації\n\n - Можливість вибору розміру віджету для лівої та правої панелей\n\n - Додана координатна сітка з географічними координатами\n\n - Додана можливість налаштування зовнішнього вигляду обраних груп за замовчуванням\n\n - Android Auto: перегляд ETA та відстані до наступної точки маршруту; назви міст тепер з\'являються в результатах пошуку\n - Видатні вершини тепер можна знайти через карту та пошук\n\n - Висота гірських вершин у футах\n\n - Додано: Скелі та місця для скелелазіння на карті\n\n - Покращено пошук адрес у США\n\n - Додано івритську TTS для навігації</string>
     <string name="asap">Швидко</string>
     <string name="route_roundabout">Круговий рух : Прямуйте до %1$d з’їзду та продовжуйте рух</string>
     <string name="route_kl">Тримайтесь ліворуч</string>
@@ -1067,7 +1068,6 @@
     <string name="rendering_attr_buildings15zoom_name">Будинки на масштабі 15</string>
     <string name="rendering_attr_moreDetailed_name">Докладніше</string>
     <string name="rendering_attr_lessDetailed_name">Спрощено</string>
-    <string name="rendering_attr_hideAccess_name">Обмеження доступу</string>
     <string name="rendering_attr_showAccess_name">Показати обмеження доступу</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
     <string name="rendering_attr_showSurfaces_name">Показувати тип покриття</string>
@@ -1944,7 +1944,6 @@
     <string name="rendering_attr_hideWaterPolygons_name">Сховати воду</string>
     <string name="routing_attr_allow_motorway_name">Використовувати автомагістралі</string>
     <string name="routing_attr_allow_motorway_description">Дозволяє рух автомагістралями.</string>
-    <string name="wiki_around">Статті Вікіпедії поруч</string>
     <string name="search_map_hint">Місто або регіон</string>
     <string name="route_roundabout_short">Поверніть у %1$d з’їзд</string>
     <string name="upload_poi">Надіслати точки інтересу</string>
@@ -3644,9 +3643,6 @@
     <string name="osm_edit_comment_note">Коментувати Нотатку OSM</string>
     <string name="osm_login_descr">Увійдіть за допомогою методу OAuth або за допомогою облікових даних OSM.</string>
     <string name="shared_string_add_photo">Додати світлини</string>
-    <string name="register_on_openplacereviews">Зареєструватися на
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Світлини надано проєктом відкритих даних OpenPlaceReviews.org. Щоб завантажити світлини зареєструйтеся на їхньому вебсайті.</string>
     <string name="register_opr_create_new_account">Створити обліковий запис</string>
     <string name="register_opr_have_account">У мене вже є обліковий запис</string>
     <string name="shared_string_search_history">Історія пошуку</string>
@@ -3659,11 +3655,6 @@
     <string name="export_not_enough_space_descr">На вашому пристрої вільно лише %1$s. Звільніть місце або приберіть позначки з деяких елементів для експортування.</string>
     <string name="export_not_enough_space">Бракує вільного місця</string>
     <string name="add_to_mapillary">Додати до Mapillary</string>
-    <string name="add_to_opr">Додати до OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd показує світлини з кількох джерел:
-\nOpenPlaceReviews — світлини точок інтересу;
-\nMapillary - зображення вулиць;
-\nМережа / Вікімедіа — світлини точок інтересу, за даними з OpenStreetMap.</string>
     <string name="select_groups_for_import">Виберіть групи, які буде імпортовано.</string>
     <string name="select_items_for_import">Виберіть елементи, які буде імпортовано.</string>
     <string name="use_dev_url_descr">Перейдіть на dev.openstreetmap.org замість openstreetmap.org для перевірки надсилання Нотаток OSM / POI / GPX.</string>
@@ -3755,12 +3746,6 @@
     <string name="uploaded_count">Надіслано %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Виберіть зміни для надсилання</string>
     <string name="hillshade_slope_contour_lines">Ізолінії / Рельєф / Схили</string>
-    <string name="open_place_reviews_plugin_description">Зробіть свій внесок у проєкт OpenPlaceReviews, наприклад, світлини, відгуки або посилання на громадські місця, такі як ресторани, готелі або музеї.
-\n
-\nІнструкції про те, як зробити свій внесок, можна знайти на нашому вебсайті %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Використовувати test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Увійти до OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_snowmobile_name">Снігохід</string>
@@ -4378,7 +4363,7 @@
     <string name="map_widget_trip_recording_duration">Тривалість</string>
     <string name="routing_attr_allow_private_for_truck_description">Дозволити доступ вантажних автомобілів на приватну територію.</string>
     <string name="map_widget_trip_recording_downhill">Спуск</string>
-    <string name="map_widget_trip_recording_distance">Відстань</string>
+    <string name="map_widget_distance">Відстань</string>
     <string name="routing_attr_hazmat_category_name">Категорія небезпеки</string>
     <string name="map_widget_true_bearing">Справжній азимут</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Не показувати військові обʼєкти</string>
@@ -4480,7 +4465,7 @@
     <string name="attach_roads_warning">До доріг можна прикріпити лише записаний трек.</string>
     <string name="without_profiles_changing">Без зміни профілів</string>
     <string name="download_tiles">Завантажити тайли</string>
-    <string name="attach_roads_descr">Додайте контрольні точки треку вздовж доріг, по яких рух дозволений, щоб прокласти маршрут між ними з урахуванням наявних обмежень та особливостей маршруту.</string>
+    <string name="attach_roads_descr">Прив’яжіть свій трек до доріг, щоб отримати детальну інформацію про маршрут, включаючи покрокові інструкції та атрибути дороги.</string>
     <string name="shared_string_only_missing">Лише відсутні</string>
     <string name="included_in_your_current_plan">Включено до поточного плану \"%1$s\"</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках передплати %1$s.</string>
@@ -4899,7 +4884,7 @@
     <string name="power_watts_unit">Ватт</string>
     <string name="revolutions_per_minute_unit">об/хв</string>
     <string name="shared_string_close_the_dialog">Закрити діалогове вікно</string>
-    <string name="terrain_map">Мапа рельєфу (3D)</string>
+    <string name="terrain_map">Карта рельєфу (3D)</string>
     <string name="relief_3d">3D-рельєф</string>
     <string name="relief_3d_description">Придбайте та спостерігайте за масштабною моделлю вашого району або цілого континенту.</string>
     <string name="terrain_category_description">Ізолінії рельєфу, відтінки схилів у сірій і кольоровій гамах для позначення вершин і низин.</string>
@@ -4967,7 +4952,7 @@
     <string name="write_bearing_description">Під час запису зберігати напрямок на кожну точку треку</string>
     <string name="feature_available_as_part_of_plan">%1$s доступно в рамках тарифного плану %2$s</string>
     <string name="shared_string_included">Включено</string>
-    <string name="local_indexes_category_terrain">Карти місцевості (3D</string>
+    <string name="local_indexes_category_terrain">Карти місцевості (3D)</string>
     <string name="hillshade_slope">Рельєф місцевості, схил</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="wheel_circumference">Окружність колеса</string>
@@ -5081,12 +5066,12 @@
     <string name="delete_map_description">Видалити мапу %1$s?</string>
     <string name="maps_and_resources">Мапи й ресурси</string>
     <string name="shared_string_show_icon">Показати піктограму</string>
-    <string name="smart_folder_name_present">Така розумна тека вже існує</string>
+    <string name="smart_folder_name_present">Така розумна папка вже є</string>
     <string name="smart_folder_saved">Розумну теку збережено</string>
-    <string name="add_smart_folder">Додати розумну теку</string>
+    <string name="add_smart_folder">Додати розумну папку</string>
     <string name="empty_name">Назви немає</string>
     <string name="edit_filter">Змінити фільтр</string>
-    <string name="save_as_smart_folder">Зберегти як розумну теку</string>
+    <string name="save_as_smart_folder">Зберегти як розумну папку</string>
     <string name="delete_smart_folder_dialog_message">Це видалить розумну папку \"%1$s\". (Жодна композиція не буде видалена.)</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
     <string name="release_4_6">• Android Auto: додано режим 3D \n\n • Треки: представлено фільтри та розумні папки, оптимізовано пам’ять для великих файлів \n\n • Покращено верхню та нижню панелі віджетів для розміщення всіх віджетів \n\n • Покращене управління місцевими ресурсами \n\n • Настроюване відображення кнопок для зовнішніх контролерів \n\n • Нові віджети: «Коефіцієнт ковзання» та «Позиція сонця» \n\n • OsmAnd Cloud: тепер доступ до видалених файлів \n\n • Покращене забарвлення доріжки в режимі нахилу з новим симетричним градієнтом \n\n • Вирішено проблеми з прозорим рядком стану \n\n • Додано підтримку віджета температури ANT+ \n\n • Представлено віджет «Доступна оперативна пам’ять»</string>
@@ -5236,7 +5221,7 @@
     <string name="apply_only_to_new">Застосовувати лише до нових</string>
     <string name="shared_string_changes">Зміни</string>
     <string name="change_default_tracks_appearance_confirmation">Застосувати зміни до наявних треків у теці чи лише до нових?</string>
-    <string name="unchanged_parameter_summary">Кожен трек збереже свої параметри.</string>
+    <string name="unchanged_parameter_summary">Кожен трек збереже власні параметри.</string>
     <string name="shared_string_unchanged">Без змін</string>
     <string name="map_widget_map_scale">Масштаб карти</string>
     <string name="max_sensor_speed">Швидкість датчика, макс</string>
@@ -5399,10 +5384,6 @@
     <string name="energy_avg_info_description">Розряджання акумулятора на хвилину: %1$s
 \nСпоживання енергії (мАг): %2$s</string>
     <string name="rendering_avg_info">Статистика рендерингу (в середньому 1/5/15 хвилин)</string>
-    <string name="rendering_avg_info_description">FPS за останніми 1k кадрами: %1$s
-\nЦП базовий: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Статистика споживання енергії (в середньому 1/5/15 хвилин)</string>
     <string name="choose_map_orientation">Виберіть орієнтацію мапи</string>
     <string name="shared_string_all_icons">Усі піктограми</string>
@@ -5423,23 +5404,23 @@
 \nПроцесор (час простою): %3$s
 \nПроцесор (очікування GPU): %4$s</string>
     <string name="resting_position">Положення у стані спокою</string>
-    <string name="auto_25_chars_route_kl">Тримайтеся ліворуч</string>
-    <string name="auto_25_chars_route_kr">Тримайтеся праворуч</string>
+    <string name="auto_25_chars_route_kl">Тримайся ліворуч</string>
+    <string name="auto_25_chars_route_kr">Тримайся праворуч</string>
     <string name="auto_25_chars_route_tr">Поверніть праворуч</string>
     <string name="auto_25_chars_route_tshr">Різко поверніть праворуч</string>
-    <string name="auto_25_chars_route_tslr">Плавно поверніть праворуч</string>
+    <string name="auto_25_chars_route_tslr">Злегка поверніть праворуч</string>
     <string name="auto_25_chars_route_tl">Поверніть ліворуч</string>
     <string name="auto_25_chars_route_tshl">Різко поверніть ліворуч</string>
-    <string name="auto_25_chars_route_tsll">Плавно поверніть ліворуч</string>
-    <string name="auto_25_chars_route_tu">Виконайте розворот</string>
+    <string name="auto_25_chars_route_tsll">Поверніть трохи вліво</string>
+    <string name="auto_25_chars_route_tu">Зробіть розворот</string>
     <string name="driving_region_uk">Велика Британія та подібні</string>
     <string name="hugerock_promo_description">Безплатний доступ до функцій, включно з необмеженою кількістю завантажень мап, 3D-рельєф тощо на %1$s місяця</string>
     <string name="driving_region_india">Індія</string>
     <string name="hugerock_promo">Промо Hugerock на %1$s місяців</string>
-    <string name="detailed_track_guidance_description">OsmAnd зіставить ваш трек із сусідніми дорогами для поліпшення покрокового супроводу.</string>
+    <string name="detailed_track_guidance_description">OsmAnd зіставить ваш трек із сусідніми дорогами для покращеного покрокового супроводу.</string>
     <string name="quick_action_routes_summary">Перемикач, щоб показати або прибрати %1$s на мапі.</string>
-    <string name="detailed_track_guidance">Покрокова маршрутизація треком</string>
-    <string name="ask_every_time">Запитувати щоразу</string>
+    <string name="detailed_track_guidance">Детальне керівництво трасою</string>
+    <string name="ask_every_time">Запитуйте кожен раз</string>
     <string name="shared_string_automatically">Автоматично</string>
     <string name="compass_click_north_is_up">Затисніть, щоб змінити режим орієнтації</string>
     <string name="help_article_map_routes_name">маршрути</string>
@@ -5485,12 +5466,12 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
     <string name="shared_string_decrease">Зменшити</string>
     <string name="shared_string_increase">Збільшити</string>
-    <string name="no_photos_available_descr">До цієї локації ще не додано жодної фотографії користувача</string>
-    <string name="no_photos_available">Фото відсутні</string>
+    <string name="no_photos_available_descr">До цього місця ще не додано жодної фотографії користувача</string>
+    <string name="no_photos_available">Фотографії відсутні</string>
     <string name="open_in_browser">Відкрити в браузері</string>
     <string name="shared_string_source">Джерело</string>
     <string name="shared_string_no_internet_connection">Зʼєднання з інтернетом відсутнє</string>
-    <string name="no_internet_descr">Будь ласка, перевірте з\'єднання та спробуйте ще раз.</string>
+    <string name="no_internet_descr">Перевірте підключення та повторіть спробу.</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
     <string name="obd_fuel_type_ethanol">Етанол</string>
@@ -5544,8 +5525,8 @@
     <string name="obd_fuel_type_unknown">Невідомий тип пального</string>
     <string name="obd_fuel_level_desc">Віджет показує рівень пального в машині за датчиком OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Віджет показує споживання пального машиною на основі даних OBD про розташування</string>
-    <string name="lock_screen">Екран блокування</string>
-    <string name="quick_action_verb_start_pause">Старт / Пауза</string>
+    <string name="lock_screen">Блокування екрану</string>
+    <string name="quick_action_verb_start_pause">Пуск / Пауза</string>
     <string name="help_article_personal_color_palette_schemes_name">Кольорові схеми</string>
     <string name="quick_action_finish_trip_recording_summary">Кнопка для збереження GPX-треку і завершення запису подорожі.</string>
     <string name="start_trip_recording_first_m">Будь ласка, спочатку почніть запис треку.</string>
@@ -5578,7 +5559,7 @@
     <string name="obd_fuel_pressure_desc">Показує тиск всередині паливної системи</string>
     <string name="kpa_unit">кПа</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Показує швидкість споживання палива автомобіля на основі датчика (л/год)</string>
-    <string name="obd_bluetooth_off_description">Увімкніть функцію пошуку та підключення сканерів за допомогою Bluetooth.</string>
+    <string name="obd_bluetooth_off_description">Увімкніть Bluetooth, щоб знайти та підключити сканери.</string>
     <string name="shared_string_dynamic">Динамічний</string>
     <string name="obd_connected_to_device">Під\'єднано до %s</string>
     <string name="dynamic_icon_type_summary">Піктограма змінюється залежно від стану дії.</string>
@@ -5605,8 +5586,6 @@
     <string name="obd_fuel_consumption_rate_sensor">Витрата палива (датчик)</string>
     <string name="obd_fuel_left_km">Залишок пального (км)</string>
     <string name="obd_fuel_level_percent">Рівень палива (%)</string>
-    <string name="obd_fuel_left_percent">Залишок пального (%)</string>
-    <string name="obd_fuel_left_liter">Залишок пального (л)</string>
     <string name="obd_fuel_consumption_rate_scanner">Витрата пального (у.п.)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Норма витрати палива</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Витрата палива %/год</string>
@@ -5629,7 +5608,6 @@
     <string name="us_gallons_unit">галон</string>
     <string name="imperial_gallons">Імперські галони</string>
     <string name="us_gallons">Галони США</string>
-    <string name="imperial_gallons_unit">імп гал</string>
     <string name="unit_of_volume_description">Вибрані одиниці будуть застосовані до всіх даних, пов\'язаних з об\'ємом, у поточному профілі.</string>
     <string name="unit_of_volume">Одиниця виміру об\'єму</string>
     <string name="obd_fuel_level_liter">Рівень палива (л)</string>
@@ -5680,4 +5658,99 @@
     <string name="rendering_attr_showClimbingRoutes_name">Скелелазні маршрути</string>
     <string name="display_distance_to_first_intermediate">Показати деталі маршруту до наступної зупинки</string>
     <string name="display_distance_to_first_intermediate_summary">Спочатку показує час і відстань до наступної зупинки. Вимкніть, щоб завжди показувати деталі до кінцевої точки.</string>
+    <string name="recently_visited">Нещодавно відвідав</string>
+    <string name="popular_places_nearby">Популярні місця поблизу</string>
+    <string name="shared_string_avg_speed">Хв. швидкість</string>
+    <string name="shared_string_length">Довжина</string>
+    <string name="shared_string_avg_altitude">Середнє висота</string>
+    <string name="map_widget_route_information">Інформація про маршрут</string>
+    <string name="shared_string_default_view">Перегляд за замовчуванням</string>
+    <string name="map_widget_route_information_desc">Відображає приблизний час прибуття, час, що залишився в дорозі, і відстань для поточного маршруту навігації.</string>
+    <string name="ais_address_settings">Налаштування IP-адреси</string>
+    <string name="ais_address_settings_description">Виберіть протокол NMEA (UDP/TCP) і визначте адреси</string>
+    <string name="ais_nmea_protocol">Протокол прийому даних NMEA</string>
+    <string name="ais_nmea_protocol_description">Виберіть протокол для прийому даних NMEA</string>
+    <string name="ais_address_nmea_server">IP-адреса джерела даних NMEA</string>
+    <string name="ais_address_nmea_server_description">Визначте IP-адресу джерела даних NMEA (якщо використовується TCP)</string>
+    <string name="ais_port_nmea_server">Порт TCP джерела даних NMEA</string>
+    <string name="ais_port_nmea_local">Порт UDP локального приймача даних NMEA</string>
+    <string name="ais_port_nmea_local_description">Визначте порт UPD, через який OsmAnd отримує дані NMEA</string>
+    <string name="ais_object_lost_timeouts">Параметри тайм-ауту для прийому сигналу AIS</string>
+    <string name="ais_object_lost_timeouts_description">Встановіть значення часу очікування для визначення втрачених об’єктів AIS, якщо протягом певного часу не було отримано сигнал.</string>
+    <string name="ais_object_lost_timeout">Час очікування для видимості, коли об’єкт втрачено</string>
+    <string name="ais_cpa_settings">Налаштування, пов\'язані з CPA</string>
+    <string name="ais_cpa_settings_description">Ці значення визначають представлення об’єктів AIS, які можуть підійти занадто близько до власної позиції.</string>
+    <string name="ais_cpa_warning_time">Час попередження для досягнення найближчої точки наближення (CPA)</string>
+    <string name="ais_cpa_warning_time_description">Якщо TCPA (час досягнення CPA іншим судном) менше цього значення, судно позначається червоним кольором.</string>
+    <string name="plugin_ais_tracker_name">AIS трекер суден</string>
+    <string name="plugin_ais_tracker_description">Відображення позицій AIS та інформації про навколишні судна. Дані AIS надходять через мережу із зовнішнього приймача AIS.</string>
+    <string name="ais_load_data">Завантажити дані AIS з файлу</string>
+    <string name="plugin_ais_tracker_disclaimer">ВІДМОВА ВІД ВІДПОВІДАЛЬНОСТІ\n\nЦей плагін є проектом для хобі і не призначений для надійності та коректності. НЕ покладайтеся на це програмне забезпечення жодним чином, зокрема для навігації та/або безпеки життя.</string>
+    <string name="ais_ship_lost_timeout">Тайм-аут для видимості корабля, коли сигнал не отримано</string>
+    <string name="ais_cpa_warning_distance_description">Судини позначаються червоним кольором, якщо CPA менше цього значення і CPA буде досягнуто найближчим часом (див. налаштування часу попередження для досягнення CPA).</string>
+    <string name="ais_ship_lost_timeout_description">Встановити тайм-аут для видимості корабля: після закінчення цього часу без прийому сигналу символ корабля змінить свій стан на екрані: він буде перекреслений.</string>
+    <string name="ais_port_nmea_server_description">Визначте номер порту TCP джерела даних NMEA</string>
+    <string name="ais_object_lost_timeout_description">Встановіть час очікування для видимості об’єктів AIS: після закінчення цього часу без прийому сигналу об’єкт AIS буде видалено з екрана.</string>
+    <string name="ais_cpa_warning_distance">Відстань попередження для точки наближення (CPA)</string>
+    <string name="show_grids">Показати сітку карти</string>
+    <string name="show_grids_description">Дозволити відображення сітки поверх карти</string>
+    <string name="show_utm_grids">Використовувати UTM замість WGS84</string>
+    <string name="show_utm_grids_description">Показати сітку в метрах UTM замість WGS84</string>
+    <string name="map_grid">Картографічні сітки</string>
+    <string name="no_places_available">Немає доступних місць</string>
+    <string name="no_photo_for_location_desc">До цього місця ще не додано жодної фотографії користувача</string>
+    <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо протягом %1$s місяця</string>
+    <string name="shared_string_road_exit">Вихід</string>
+    <string name="hmd_promo">Промо HMD на %1$s місяців</string>
+    <string name="original_color_description">Кожна точка зберігає свій колір.</string>
+    <string name="original_icon_description">Кожна точка матиме власний значок.</string>
+    <string name="original_shape_description">Кожна точка зберігає власну форму.</string>
+    <string name="save_favorite_default_appearance">Застосувати зміни до наявних точок у папці чи лише до нових?</string>
+    <string name="apply_to_all_points">Застосувати до всіх точок</string>
+    <string name="show_mercator_grids_description">Показувати сітку в кілометрах Меркатора замість WGS84 або UTM</string>
+    <string name="show_dm_grids_description">Показувати сітку в градусах і хвилинах замість градусів або DMS</string>
+    <string name="show_dms_grids_description">Показати сітку в градусах, хвилинах, секундах замість градусів</string>
+    <string name="show_dm_grids">Використовувати DM замість градусів або DMS</string>
+    <string name="show_dms_grids">Використовувати DMS замість градусів</string>
+    <string name="show_mercator_grids">Використовувати Mercator замість WGS84 або UTM</string>
+    <string name="show_list">Показати список</string>
+    <string name="popular_places">Популярні місця</string>
+    <string name="choose_location">Виберіть локацію</string>
+    <string name="point_location">Розташування точки</string>
+    <string name="shared_string_map_center">Центр карти</string>
+    <string name="shared_string_manual">Інструкція</string>
+    <string name="choose_location_on_map">Виберіть місце на карті.</string>
+    <string name="show_image_previews">Показати попередній перегляд зображення</string>
+    <string name="layer_coordinates_grid">Координатна сітка</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Дія для керування видимістю сітки координат на карті.</string>
+    <string name="prime_meridian">Початковий меридіан</string>
+    <string name="meridian_180">180-й меридіан</string>
+    <string name="equator">Екватор</string>
+    <string name="shared_string_offline_only">Тільки офлайн</string>
+    <string name="shared_string_online_only">Тільки онлайн</string>
+    <string name="row_height">Висота рядка</string>
+    <string name="add_widget">Додати віджет</string>
+    <string name="intermediate_first">Перший проміжний</string>
+    <string name="destination_first">Перше місце призначення</string>
+    <string name="display_priority">Пріоритет відображення</string>
+    <string name="poi_source">Джерело POI</string>
+    <string name="read_on_wiki">Прочитайте у Вікіпедії</string>
+    <string name="wikidata">Вікідані</string>
+    <string name="prediction_time_description">Значок положення в OsmAnd анімується з кожною отриманою точкою GPS-даних (раз на секунду). Невелика затримка в її русі може бути помітна, особливо коли користувач швидко рухається або коли сигнал GPS коливається.</string>
+    <string name="prediction_time_advanced_description">Налаштуйте час передбачення, щоб мінімізувати затримку.</string>
+    <string name="prediction_time">Час передбачення</string>
+    <string name="shared_string_no_animation">Без анімація</string>
+    <string name="position_animation_empty_banner_description">Піктограма позиції переміщується до кожного нового отриманого місця без анімації.</string>
+    <string name="position_animation">Анімація позиції</string>
+    <string name="wiki_around">Популярні місця поруч</string>
+    <string name="routing_attr_allow_ferries_name">Дозволити пороми</string>
+    <string name="routing_attr_allow_ferries_description">Дозволити маршрутизацію поромними маршрутами</string>
+    <string name="shared_string_edges">Краї</string>
+    <string name="labels_position">Положення міток</string>
+    <string name="customize_grid_color">Налаштувати колір сітки</string>
+    <string name="grid_color">Колір сітки</string>
+    <string name="route_part_of">Частина</string>
+    <string name="multipoligon_related">Пов\'язані</string>
+    <string name="route_members">Члени</string>
+    <string name="cant_load_map_styles">Не вдається завантажити стилі карти.</string>
 </resources>

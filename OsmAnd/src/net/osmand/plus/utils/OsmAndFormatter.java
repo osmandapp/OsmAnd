@@ -7,6 +7,7 @@ import static java.util.Calendar.YEAR;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -26,6 +27,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -41,6 +43,7 @@ import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -111,18 +114,27 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDuration(long seconds, @NonNull OsmandApplication app) {
+		NumberFormat numberFormat = getNumberFormat(app);
 		long hours = seconds / (60 * 60);
 		long minutes = (seconds / 60) % 60;
 		if (hours > 0) {
-			return hours + " "
+			return numberFormat.format(hours) + " "
 					+ app.getString(R.string.osmand_parking_hour)
-					+ (minutes > 0 ? " " + minutes + " "
+					+ (minutes > 0 ? " " + numberFormat.format(minutes) + " "
 					+ app.getString(R.string.shared_string_minute_lowercase) : "");
 		} else if (minutes > 0) {
-			return minutes + " " + app.getString(R.string.shared_string_minute_lowercase);
+			return numberFormat.format(minutes) + " " + app.getString(R.string.shared_string_minute_lowercase);
 		} else {
-			return "<1 " + app.getString(R.string.shared_string_minute_lowercase);
+			return "<" + numberFormat.format(1) + " " + app.getString(R.string.shared_string_minute_lowercase);
 		}
+	}
+
+	@NonNull
+	public static NumberFormat getNumberFormat(@NonNull OsmandApplication app) {
+		LocaleHelper localeHelper = app.getLocaleHelper();
+		Locale locale = localeHelper.getPreferredLocale() != null
+				? localeHelper.getPreferredLocale() : localeHelper.getDefaultLocale();
+		return NumberFormat.getInstance(locale);
 	}
 
 	public static String getFormattedDurationShort(int seconds) {
@@ -165,6 +177,24 @@ public class OsmAndFormatter {
 		int minutes = totalMinutes % 60;
 		return String.format(Locale.US, "%d:%02d", hours, minutes);
 	}
+
+	@NonNull
+	public static Pair<String, String> getFormattedTime(@NonNull Context context, long time) {
+		String timeFormatted;
+		String period = null;
+
+		boolean is24HourFormat = android.text.format.DateFormat.is24HourFormat(context);
+
+		if (is24HourFormat) {
+			timeFormatted = android.text.format.DateFormat.format("k:mm", time).toString();
+		} else {
+			timeFormatted = android.text.format.DateFormat.format("h:mm", time).toString();
+			period = android.text.format.DateFormat.format("aa", time).toString();
+		}
+
+		return new Pair<>(timeFormatted, period);
+	}
+
 
 	public static DateFormat getDateFormat(@NonNull Context context) {
 		return android.text.format.DateFormat.getDateFormat(context);
@@ -223,6 +253,12 @@ public class OsmAndFormatter {
 	public static String getFormattedDistanceInterval(OsmandApplication app, double interval, OsmAndFormatterParams pms) {
 		double roundedDist = calculateRoundedDist(interval, app);
 		return getFormattedDistance((float) roundedDist, app, pms);
+	}
+
+	public static String getFormattedPredictionTime(@NonNull OsmandApplication app, double interpolationValue) {
+		double seconds = interpolationValue / 100.0;
+		String formattedValue = String.format(seconds % 1 == 0 ? "%.0f" : "%.1f", seconds);
+		return app.getString(R.string.ltr_or_rtl_combine_via_space, formattedValue, app.getString(R.string.shared_string_sec));
 	}
 
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {

@@ -111,28 +111,31 @@ public class DayNightHelper implements SensorEventListener {
 	}
 
 	public boolean isNightMode(boolean usedOnMap) {
-		return isNightMode(usedOnMap, new RequestMapThemeParams());
+		return isNightMode(usedOnMap, new RequestThemeParams());
 	}
 
-	public boolean isNightMode(boolean usedOnMap, @NonNull RequestMapThemeParams params) {
+	public boolean isNightMode(boolean usedOnMap, @NonNull ApplicationMode appMode) {
+		return isNightMode(usedOnMap, new RequestThemeParams(appMode));
+	}
+
+	public boolean isNightMode(boolean usedOnMap, @NonNull RequestThemeParams params) {
 		if (usedOnMap) {
 			return isNightModeForMapControls(params);
 		} else {
-			return !settings.isLightContent();
+			return !settings.isLightContentForMode(params.requireAppMode(app));
 		}
 	}
 
 	public boolean isNightModeForMapControls() {
-		return isNightModeForMapControls(new RequestMapThemeParams());
+		return isNightModeForMapControls(new RequestThemeParams());
 	}
 
 	public boolean isNightModeForMapControlsForProfile(ApplicationMode mode) {
-		return isNightModeForMapControls(new RequestMapThemeParams().setAppMode(mode));
+		return isNightModeForMapControls(new RequestThemeParams(mode));
 	}
 
-	public boolean isNightModeForMapControls(@NonNull RequestMapThemeParams params) {
-		ApplicationMode mode = params.requireAppMode(settings.APPLICATION_MODE.get());
-		if (settings.isLightContentForMode(mode)) {
+	public boolean isNightModeForMapControls(@NonNull RequestThemeParams params) {
+		if (settings.isLightContentForMode(params.requireAppMode(app))) {
 			return isNightModeForProfile(params);
 		} else {
 			return true;
@@ -140,12 +143,12 @@ public class DayNightHelper implements SensorEventListener {
 	}
 
 	public boolean isNightMode() {
-		return isNightModeForProfile(new RequestMapThemeParams());
+		return isNightModeForProfile(new RequestThemeParams());
 	}
 
-	private boolean isNightModeForProfile(@NonNull RequestMapThemeParams params) {
-		ApplicationMode mode = params.requireAppMode(settings.APPLICATION_MODE.get());
-		DayNightMode dayNightMode = settings.DAYNIGHT_MODE.getModeValue(mode);
+	private boolean isNightModeForProfile(@NonNull RequestThemeParams params) {
+		ApplicationMode appMode = params.requireAppMode(app);
+		DayNightMode dayNightMode = settings.DAYNIGHT_MODE.getModeValue(appMode);
 		if (externalMapThemeProvider != null && !params.shouldIgnoreExternalProvider()) {
 			DayNightMode providedTheme = externalMapThemeProvider.getMapTheme();
 			dayNightMode = providedTheme != null ? providedTheme : dayNightMode;
@@ -181,7 +184,7 @@ public class DayNightHelper implements SensorEventListener {
 		} else if (dayNightMode.isSensor()) {
 			return lastNightMode;
 		} else if (dayNightMode.isAppTheme()) {
-			return !settings.isLightContentForMode(mode);
+			return !settings.isLightContentForMode(appMode);
 		}
 		return false;
 	}

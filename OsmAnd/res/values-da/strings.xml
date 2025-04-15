@@ -1170,7 +1170,6 @@
     <string name="rendering_attr_buildings15zoom_name">Bygninger på zoomniveau 15</string>
     <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
-    <string name="rendering_attr_hideAccess_name">Adgangsbegrænsninger</string>
     <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægning</string>
@@ -1340,7 +1339,7 @@
     <string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
     <string name="free">Ledig %1$s</string>
     <string name="device_memory">Lagerplads</string>
-    <string name="rendering_attr_pisteRoutes_name">Skiløjper</string>
+    <string name="rendering_attr_pisteRoutes_name">Skiruter</string>
     <string name="roads_only">Kun veje</string>
     <string name="notes">A/V-noter</string>
     <string name="online_map">Online kort</string>
@@ -2031,7 +2030,6 @@
     <string name="upload_poi">Upload IP</string>
     <string name="route_roundabout_short">Tag %1$d afkørsel og forsæt</string>
     <string name="search_map_hint">By eller område</string>
-    <string name="wiki_around">Wikipedia-artikler i nærheden</string>
     <string name="routing_attr_allow_motorway_name">Brug motorveje</string>
     <string name="routing_attr_allow_motorway_description">Tillader motorveje.</string>
     <string name="lang_sr_latn">Serbisk (latin)</string>
@@ -3432,7 +3430,7 @@
     <string name="vessel_height_warning_link">Indstil fartøjets højde</string>
     <string name="vessel_width_limit_description">Indstil fartøjets bredde for at undgå smalle broer</string>
     <string name="plugin_wikipedia_description">Få oplysninger om interessepunkter fra Wikipedia, en offline lommeguide med artikler om steder og destinationer.</string>
-    <string name="add_hidden_group_info">Det tilføjede punkt kan findes i \"%s\". Fjern skjul for den valgte gruppe for at vise den på kortet.</string>
+    <string name="add_hidden_group_info">Det tilføjede punkt kan findes i \"%s\". Fjern skjulning for den valgte gruppe for at vise den på kortet.</string>
     <string name="app_mode_wheelchair_forward">Kørestol fremad</string>
     <string name="set_working_days_to_continue">Angiv arbejdsdage for at fortsætte</string>
     <string name="route_between_points">Rute mellem punkter</string>
@@ -3556,20 +3554,12 @@
     <string name="osm_edit_comment_note">Kommentér OSM-bemærkning</string>
     <string name="osm_login_descr">Log ind ved hjælp af OAuth-metoden eller med dit OSM-brugernavn og adgangskode.</string>
     <string name="shared_string_add_photo">Tilføj fotos</string>
-    <string name="register_on_openplacereviews">Tilmeld på
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Billederne leveres af OpenPlaceReviews.org open data-projektet. For at kunne uploade dine fotos skal du tilmelde dig på deres websted.</string>
     <string name="register_opr_create_new_account">Opret ny konto</string>
     <string name="register_opr_have_account">Har allerede en konto</string>
     <string name="shared_string_search_history">Søgehistorik</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorbåd</string>
     <string name="add_to_mapillary">Føj til Mapillary</string>
-    <string name="add_to_opr">Føj til OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd viser fotos fra flere kilder:
-\nOpenPlaceReviews - IP-fotos;
-\nMapillary - billeder på gadeniveau;
-\nWeb / Wikimedia - IP-fotos angivet i OpenStreetMap data.</string>
     <string name="shared_string_resources">Ressourcer</string>
     <string name="approximate_file_size">Omtrentlig filstørrelse</string>
     <string name="select_data_to_export">Vælg de data, der skal eksporteres til filen.</string>
@@ -3592,7 +3582,7 @@
     <string name="plan_route_add_new_segment">Tilføj et nyt segment</string>
     <string name="start_recording">Start optagelse</string>
     <string name="routing_engine_vehicle_type_wheelchair">Kørestol</string>
-    <string name="routing_engine_vehicle_type_walking">Gå</string>
+    <string name="routing_engine_vehicle_type_walking">Gang</string>
     <string name="routing_engine_vehicle_type_small_truck">Varevogn</string>
     <string name="routing_engine_vehicle_type_hgv">Tung gods transport</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Elektrisk cykling</string>
@@ -3606,7 +3596,6 @@
     <string name="uploading_count">Sender %1$d af %2$d</string>
     <string name="uploaded_count">Sendt %1$d af %2$d</string>
     <string name="upload_photo">Sender</string>
-    <string name="opr_use_dev_url">Brug test.openplacereviews.org</string>
     <string name="activity_type_winter_name">Vinter</string>
     <string name="activity_type_riding_name">Ridning</string>
     <string name="activity_type_cycling_name">Cykling</string>
@@ -3629,8 +3618,6 @@
     <string name="select_segments_description">%1$s indeholder mere end et segment, du skal udvælge en del til navigationen.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="toast_select_edits_for_upload">Vælg redigeringer til overførsel</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="login_open_place_reviews">Log på OpenPlaceReviews</string>
     <string name="activity_type_water_name">Vand</string>
     <string name="activity_type_snowmobile_name">Snescooter</string>
     <string name="activity_type_mountainbike_name">Mountainbike</string>
@@ -3868,9 +3855,6 @@
     <string name="shared_string_server_url">Server-URL</string>
     <string name="keep_it_empty_if_not">Lad den være tom, hvis ikke</string>
     <string name="online_routing_example_hint">URL med alle parametre vil se således ud:</string>
-    <string name="open_place_reviews_plugin_description">Lav bidrag til OpenPlaceReviews-projektet som f.eks. fotos, anmeldelser, links for offentlige steder som restauranter, hoteller eller museer.
-\n
-\nFind vejledninger om, hvordan du bidrager, på vores websted %1$s.</string>
     <string name="routing_attr_height_obstacles_description">Den forventede rejsetid vil afspejle højdepåvirkningen. Ruteberegningsvalg kan hjælpe med at undgå stejle opkørsler:</string>
     <string name="release_4_0_beta">- Tilføjet mulighed for at downloade højdekurver i fod \n \n - Planlæg rute-landskab: tilføjet faner til at skifte mellem punkter eller grafer \n \n - OsmAnd Live-opdateringer flyttet til \"Downloads &gt; Opdateringer\" \n \n - Spor kan nu farves efter højde, hastighed eller hældning. \n \n - Der er tilføjet mulighed for at ændre rutelinjens udseende. \n \n - Opdateret dialogboks \"Turoptagelse\"</string>
     <string name="search_more">Søg mere…</string>
@@ -4387,7 +4371,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Tryk-isolinjer</string>
     <string name="routing_attr_avoid_highway_name">Undgå motorveje</string>
     <string name="rendering_attr_horseScale_name">Sværhedsgraden af ridestier</string>
-    <string name="map_widget_trip_recording_distance">Afstand</string>
+    <string name="map_widget_distance">Afstand</string>
     <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
     <string name="routing_attr_avoid_highway_description">Undgå motorveje</string>
     <string name="map_widget_trip_recording_downhill">Nedstigning</string>
@@ -4492,7 +4476,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Vis stier beregnet til mountainbiking.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Vis MTB IMBA-spor</string>
     <string name="connect_with_straight_line">Forbind med en lige linje</string>
-    <string name="attach_roads_descr">Tilnærm dit spor til tilladte veje for at følge punkter og tilknytte præcise svinginstruktioner og ruteegenskaber.</string>
+    <string name="attach_roads_descr">Fastgør dit spor til veje for at få detaljerede ruteoplysninger, inklusive præcise svinginstruktioner og vejegenskaber.</string>
     <string name="attach_roads_warning">Kun et optaget spor kan vedhæftes vejene.</string>
     <string name="download_tiles">Download kortfliser</string>
     <string name="shared_string_only_missing">Kun manglende</string>
@@ -4986,7 +4970,7 @@
     <string name="feature_available_as_part_of_plan">%1$s tilgængelig som en del af %2$s-abonnementet</string>
     <string name="shared_string_included">Inkluderet</string>
     <string name="hillshade_slope">Terrænskygge, hældning</string>
-    <string name="local_indexes_category_terrain">Terrænkort (3D</string>
+    <string name="local_indexes_category_terrain">Terrænkort (3D)</string>
     <string name="map_widget_glide_average_desc">Viser det gennemsnitlige glidetal for det indstillede interval.</string>
     <string name="average_glide_time_interval_desc">Angiv tidsintervallet for glide-gennemsnit.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
@@ -5418,10 +5402,6 @@
     <string name="energy_avg_info_description">Batteriniveau pr. minut: %1$s
 \nEnergiforbrug (mAh): %2$s</string>
     <string name="rendering_avg_info">Gengivelsesstatistik (gennemsnitlig 1 / 5 / 15 minutter)</string>
-    <string name="rendering_avg_info_description">FPS efter sidste 1k billeder: %1$s
-\nCPU basic: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Vælg kortets orientering</string>
     <string name="shared_string_all_icons">Alle ikoner</string>
     <string name="navigation_position_icon_summary">Ikon, der vises, mens du navigerer eller bevæger dig.</string>
@@ -5506,7 +5486,7 @@
     <string name="shared_string_source">Kilde</string>
     <string name="shared_string_no_internet_connection">Ingen internetforbindelse</string>
     <string name="no_internet_descr">Tjek din forbindelse og prøv igen.</string>
-    <string name="no_photos_available_descr">Der er endnu ikke tilføjet nogen brugerbilleder til dette sted</string>
+    <string name="no_photos_available_descr">Der er endnu ikke tilføjet nogen brugerfotos til dette sted</string>
     <string name="no_photos_available">Ingen fotos tilgængelige</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="unit_volt">V</string>
@@ -5603,7 +5583,7 @@
     <string name="obd_widget_engine_speed">Motorens omdrejningshastighed</string>
     <string name="obd_nothing_found_description">Tjek venligst følgende:\n – Sørg for, at Bluetooth er slået til\n – Køretøjets motor er i gang\n – Sørg for, at din enhed er inden for scannerens rækkevidde.</string>
     <string name="obd_nothing_found_text">Ingen scannere fundet</string>
-    <string name="obd_bluetooth_off_description">Slå Bluetooth til og find og tilslut scannere.</string>
+    <string name="obd_bluetooth_off_description">Slå Bluetooth til for at finde og tilslutte scannere.</string>
     <string name="obd_searching_text_description">Hold din enhed tæt på scanneren. Sørg for, at køretøjets motor er i gang.</string>
     <string name="obd_device_forget_sensor">Glem scanner</string>
     <string name="obd_device_forget_sensor_description">Scanneren fjernes fra listen. Du vil til enhver tid kunne parre denne scanner igen.</string>
@@ -5640,7 +5620,6 @@
     <string name="fuel_tank_capacity">Brændstoftankens kapacitet</string>
     <string name="shared_strings_dimensions">Dimensioner</string>
     <string name="litres">Liter</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Imperial gallons</string>
     <string name="us_gallons">US gallons</string>
@@ -5699,4 +5678,100 @@
     <string name="rendering_attr_showClimbingRoutes_description">Vis klatreruter</string>
     <string name="display_distance_to_first_intermediate_summary">Viser tid og afstand til næste stop først. Slå fra for altid at vise detaljer for destinationen.</string>
     <string name="display_distance_to_first_intermediate">Vis rutedetaljer for det næste stop</string>
+    <string name="popular_places_nearby">Populære steder i nærheden</string>
+    <string name="recently_visited">Besøgt for nylig</string>
+    <string name="shared_string_length">Længde</string>
+    <string name="shared_string_avg_altitude">Gns. højde</string>
+    <string name="shared_string_avg_speed">Min. hastighed</string>
+    <string name="map_widget_route_information">Ruteinformation</string>
+    <string name="map_widget_route_information_desc">Viser den forventede ankomsttid, resterende rejsetid og afstand for den aktuelle navigationsrute.</string>
+    <string name="shared_string_default_view">Standardvisning</string>
+    <string name="plugin_ais_tracker_disclaimer">ANSVARSFRASKRIVELSE\n\nDenne udvidelse er et hobbyprojekt og er ikke designet til at være pålidelig og korrekt. Stol IKKE på denne software på nogen måde, heller ikke når det gælder navigation og/eller livssikkerhed.</string>
+    <string name="ais_ship_lost_timeout_description">Indstil timeout for skibets synlighed: Efter denne tid uden signalmodtagelse vil skibssymbolet ændre tilstand på skærmen: Det bliver streget ud.</string>
+    <string name="ais_object_lost_timeout">Timeout for synlighed, når objektet går tabt</string>
+    <string name="ais_object_lost_timeout_description">Indstil timeout for synlighed af AIS-objekter: Efter denne tid uden signalmodtagelse fjernes AIS-objektet fra skærmen.</string>
+    <string name="ais_load_data">Indlæs AIS-data fra fil</string>
+    <string name="ais_cpa_warning_distance_description">Fartøjer markeres med rød farve, hvis CPA\'en er mindre end denne værdi, og CPA\'en nås i den nærmeste fremtid (se indstillingen Advarsel om tid til at nå CPA\'en).</string>
+    <string name="ais_address_settings">Indstillinger for IP-adresse</string>
+    <string name="ais_address_settings_description">Vælg NMEA-protokol (UDP/TCP), og definer adresser</string>
+    <string name="ais_nmea_protocol">Protokol til modtagelse af NMEA-data</string>
+    <string name="ais_nmea_protocol_description">Vælg protokol til modtagelse af NMEA-data</string>
+    <string name="ais_address_nmea_server">IP-adresse for NMEA-datakilde</string>
+    <string name="ais_address_nmea_server_description">Definer NMEA-datakildens IP-adresse (hvis TCP anvendes)</string>
+    <string name="ais_port_nmea_server">TCP-port for NMEA-datakilde</string>
+    <string name="ais_port_nmea_server_description">Definer TCP-portnummer for NMEA-datakilden</string>
+    <string name="ais_port_nmea_local">UDP-port på lokal NMEA-datamodtager</string>
+    <string name="ais_port_nmea_local_description">Definer UPD-port, hvor OsmAnd modtager NMEA-data</string>
+    <string name="ais_object_lost_timeouts">Timeout-indstillinger for modtagelse af AIS-signaler</string>
+    <string name="ais_object_lost_timeouts_description">Indstil timeout-værdier for at identificere mistede AIS-objekter, hvis der ikke er modtaget noget signal i et bestemt tidsrum.</string>
+    <string name="ais_ship_lost_timeout">Timeout for skibets synlighed, når der ikke modtages noget signal</string>
+    <string name="ais_cpa_settings">Indstillinger relateret til CPA</string>
+    <string name="ais_cpa_settings_description">Disse værdier definerer præsentationen af AIS-objekter, der kan komme for tæt på ens egen position.</string>
+    <string name="ais_cpa_warning_time">Advarselstid for at nå det nærmeste indsejlingspunkt (CPA)</string>
+    <string name="ais_cpa_warning_time_description">Hvis TCPA (tid til at nå CPA med et andet fartøj) er mindre end denne værdi, markeres fartøjet med rød farve.</string>
+    <string name="ais_cpa_warning_distance">Advarselsafstand for det nærmeste indsejlingsspunkt (CPA)</string>
+    <string name="plugin_ais_tracker_name">AIS-fartøjssporing</string>
+    <string name="plugin_ais_tracker_description">Vis AIS-positioner og oplysninger om omkringliggende fartøjer. AIS-dataene modtages via netværk fra en ekstern AIS-modtager.</string>
+    <string name="show_utm_grids">Brug UTM i stedet for WGS84</string>
+    <string name="show_utm_grids_description">Vis gradnet i UTM-meter i stedet for WGS84</string>
+    <string name="map_grid">Kortgradnet</string>
+    <string name="show_grids">Vis gradnet på kort</string>
+    <string name="show_grids_description">Tillad visning af gradnet over kortet</string>
+    <string name="no_places_available">Ingen steder til rådighed</string>
+    <string name="no_photo_for_location_desc">Der er endnu ikke tilføjet nogen brugerfotos til dette sted</string>
+    <string name="hmd_promo_description">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief etc. i %1$s måneder</string>
+    <string name="shared_string_road_exit">Afkørsel</string>
+    <string name="hmd_promo">HMD Promo i %1$s måneder</string>
+    <string name="original_color_description">Hvert punkt beholder sin egen farve.</string>
+    <string name="original_icon_description">Hvert punkt beholder sit eget ikon.</string>
+    <string name="original_shape_description">Hvert punkt beholder sin egen form.</string>
+    <string name="apply_to_all_points">Anvend på alle punkter</string>
+    <string name="save_favorite_default_appearance">Anvend ændringer på de eksisterende punkter i mappen eller kun på de nye?</string>
+    <string name="show_mercator_grids_description">Vis gradnet i Mercator km i stedet for WGS84 eller UTM</string>
+    <string name="show_dms_grids_description">Vis gradnet i grader, minutter, sekunder i stedet for grader</string>
+    <string name="show_dm_grids">Brug DM i stedet for grader eller DMS</string>
+    <string name="show_dm_grids_description">Vis gradnet i grader og minutter i stedet for grader eller DMS</string>
+    <string name="show_dms_grids">Vis DMS i stedet for grader</string>
+    <string name="show_mercator_grids">Brug Mercator i stedet for WGS84 eller UTM</string>
+    <string name="show_list">Vis liste</string>
+    <string name="point_location">Punktplacering</string>
+    <string name="shared_string_manual">Manuel</string>
+    <string name="shared_string_map_center">Kortcentrum</string>
+    <string name="choose_location_on_map">Vælg en placering på kortet.</string>
+    <string name="popular_places">Populære steder</string>
+    <string name="choose_location">Vælg en placering</string>
+    <string name="show_image_previews">Vis forhåndsvisninger af billeder</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Handling til at styre synligheden af koordinatnettet på kortet.</string>
+    <string name="layer_coordinates_grid">Koordinatnet</string>
+    <string name="release_5_0">• Opdag de bedst bedømte interessepunkter med den nye Udforsk-tilstand\n\n • Alle OSM-ruter, nu søgbare! Vandring, cykling, MTB og meget mere\n\n •Nyt navigations modul kombinerer svingpil og navigationsinstruktioner\n\n • Modul med aktuel ruteinfo: viser ETA, ankomsttid og afstand\n\n • Vælg skiløjper og MTB-spor på kortet for at få detaljerede oplysninger\n\n • Mulighed for at vælge modulstørrelse for venstre og højre panel\n\n • Tilføjet koordinatnet med geografiske koordinater\n\n • Tilføjet mulighed for at tilpasse standardudseendet for favoritgrupper\n\n • Android Auto: se ETA og afstand til næste rutepunkt; bynavne vises nu i søgeresultater\n\n • Fremtrædende bjergtoppe kan nu findes via kort og søgning\n\n • Bjergtoppes højde i meter\n\n • Tilføjet: Klipper og klatreområder på kortet\n\n • Adressesøgning i USA er blevet forbedret\n\n • Tilføjet hebraisk TTS til navigation</string>
+    <string name="prime_meridian">Nulmeridianen</string>
+    <string name="meridian_180">180. længdekreds</string>
+    <string name="equator">Ækvator</string>
+    <string name="shared_string_offline_only">Kun offline</string>
+    <string name="shared_string_online_only">Kun online</string>
+    <string name="add_widget">Tilføj modul</string>
+    <string name="row_height">Rækkehøjde</string>
+    <string name="intermediate_first">Mellemliggende først</string>
+    <string name="destination_first">Destination først</string>
+    <string name="display_priority">Prioritet for visning</string>
+    <string name="poi_source">IP-kilde</string>
+    <string name="wiki_around">Populære steder i nærheden</string>
+    <string name="read_on_wiki">Læs på Wikipedia</string>
+    <string name="prediction_time_description">Positionsikonet i OsmAnd animeres med hvert modtaget GPS-datapunkt (en gang i sekundet). En lille forsinkelse i bevægelsen kan være mærkbar, især når brugeren bevæger sig hurtigt, eller GPS-signalet svinger.</string>
+    <string name="prediction_time">Forudsigelsestid</string>
+    <string name="shared_string_no_animation">Ingen animation</string>
+    <string name="position_animation_empty_banner_description">Positionsikonet flytter sig til hver ny modtaget placering uden animation.</string>
+    <string name="position_animation">Positionsanimation</string>
+    <string name="prediction_time_advanced_description">Juster forudsigelsestiden for at minimere forsinkelsen.</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="routing_attr_allow_ferries_description">Tillad ruteberegning via færgeruter</string>
+    <string name="routing_attr_allow_ferries_name">Tillad færger</string>
+    <string name="grid_color">Netfarve</string>
+    <string name="shared_string_edges">Kanter</string>
+    <string name="labels_position">Etiketters position</string>
+    <string name="customize_grid_color">Tilpas farve på net</string>
+    <string name="route_members">Medlemmer</string>
+    <string name="multipoligon_related">Beslægtet</string>
+    <string name="route_part_of">Del af</string>
+    <string name="cant_load_map_styles">Kan ikke indlæse kortstile.</string>
 </resources>
