@@ -54,7 +54,10 @@ public class OutlineTextView extends TextViewEx {
 
 	@Override
 	public void invalidate() {
-		if (isDrawing) return;
+		if (isDrawing){
+			postInvalidate();
+			return;
+		}
 		super.invalidate();
 	}
 
