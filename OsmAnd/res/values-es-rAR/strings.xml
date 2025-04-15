@@ -3531,7 +3531,6 @@
     <string name="osm_edit_comment_note">Comentar nota de OSM</string>
     <string name="osm_login_descr">Iniciá sesión con las credenciales de OAuth u OpenStreetMap.</string>
     <string name="shared_string_add_photo">Agregar foto</string>
-    <string name="register_on_openplacereviews">Registrarse en
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Crear nueva cuenta</string>
     <string name="register_opr_have_account">Ya tengo cuenta</string>
@@ -3545,7 +3544,6 @@
     <string name="export_not_enough_space_descr">El dispositivo sólo tiene %1$s libre. Por favor, liberá algo de espacio o desmarcá algunos elementos a exportar.</string>
     <string name="export_not_enough_space">Sin espacio suficiente</string>
     <string name="add_to_mapillary">Agregar a Mapillary</string>
-    <string name="add_photos_descr">OsmAnd muestra fotos de varios repositorios:
 \nOpenPlaceReviews (fotos de PDI);
 \nMapillary (imágenes a nivel de calle);
 \nWeb / Wikimedia (fotos de PDI según datos de OpenStreetMap).</string>
@@ -3640,7 +3638,6 @@
     <string name="uploaded_count">Se subieron %1$d de %2$d</string>
     <string name="toast_select_edits_for_upload">Marcar ediciones a subir</string>
     <string name="hillshade_slope_contour_lines">Curvas de nivel / Sombreado / Pendiente</string>
-    <string name="open_place_reviews_plugin_description">Haz contribuciones al proyecto OpenPlaceReviews, como fotos, reseñas o enlaces sobre lugares públicos como restaurantes, hoteles o museos.
 \n
 \nEn nuestro sitio web, hay una guía de cómo contribuir - %1$s.</string>
     <string name="activity_type_water_name">Agua</string>
@@ -5252,7 +5249,6 @@
 \nConsumo de energía (mAh): %2$s</string>
     <string name="rendering_avg_info">Estadísticas de visualización (rangos en 1, 5 y 15 min.)</string>
     <string name="energy_avg_info">Estadísticas de energía (rangos en 1, 5 y 15 min.)</string>
-    <string name="rendering_avg_info_description">FPS (últimos mil fotogramas): %1$s
 \nCPU básica: %2$s
 \nGPU (1k): %3$s
 \nInactivo (1k): %4$s</string>

@@ -3625,7 +3625,6 @@
     <string name="osm_edit_comment_note">Commenta la nota OSM</string>
     <string name="osm_login_descr">Puoi autenticarti con il metodo OAuth, o utilizzare le tue credenziali su OSM.</string>
     <string name="shared_string_add_photo">Aggiungi foto</string>
-    <string name="register_on_openplacereviews">Registrati su
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Crea un nuovo account</string>
     <string name="register_opr_have_account">Ho già un account</string>
@@ -3654,7 +3653,6 @@
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificabile\" significa che la traccia è visualizzabile nelle mie tracce GPS e nelle liste pubbliche, ad es. gli altri utenti potranno scaricare la traccia grezza e associarla con il tuo nome utente. I punti della traccia, con le loro informazioni temporali, saranno riconducibili, attraverso le API GPS, alla tua traccia originale.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Tracciabile\" significa che la traccia non è visualizzabile in alcuna lista pubblica, ma solo i suoi punti, processati, con le informazioni temporali (che non possono essere direttamente associati a te) attraverso le API GPS pubbliche.</string>
     <string name="add_to_mapillary">Aggiungi a Mapillary</string>
-    <string name="add_photos_descr">OsmAnd mostra foto da diverse fonti:
 \nOpenPlaceReviews - foto PDI;
 \nMapillary - immagini stradali;
 \nWeb / Wikimedia - foto PDI di dati OpenStreetMap.</string>
@@ -3702,7 +3700,6 @@
     <string name="uploaded_count">Caricati %1$d di %2$d</string>
     <string name="toast_select_edits_for_upload">Seleziona le modifiche per il caricamento</string>
     <string name="hillshade_slope_contour_lines">Linee di contorno / Ombra / Pendenza</string>
-    <string name="open_place_reviews_plugin_description">Contribuisci al progetto OpenPlaceReviews con foto, recensioni o link di luoghi pubblici come ristoranti, hotel, o musei.
 \n
 \nTrova informazioni su come contribuire nel nostro sito: %1$s.</string>
     <string name="reverse_all_points">Inverti tutti i punti</string>
@@ -5399,7 +5396,6 @@
     <string name="weather_screen">Schermata meteo</string>
     <string name="energy_avg_info_description">Livello della batteria per minuto: %1$s
 \nConsumo energetico (mAh): %2$s</string>
-    <string name="rendering_avg_info_description">FPS degli ultimi 1.000 frames: %1$s
 \nCPU di base: %2$s
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>

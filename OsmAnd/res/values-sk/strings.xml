@@ -3644,7 +3644,6 @@
     <string name="osm_edit_comment_note">Komentovať OSM poznámku</string>
     <string name="osm_login_descr">Prihláste sa metódou OAuth alebo pomocou mena a hesla v OSM.</string>
     <string name="shared_string_add_photo">Pridať foto</string>
-    <string name="register_on_openplacereviews">Zaregistrovať na
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Vytvoriť nový účet</string>
     <string name="register_opr_have_account">Už mám účet</string>
@@ -3652,7 +3651,6 @@
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorový čln</string>
     <string name="add_to_mapillary">Pridať do Mapillary</string>
-    <string name="add_photos_descr">OsmAnd zobrazuje fotografie z rôznych zdrojov:
 \nOpenPlaceReviews - fotografie bodov záujmu;
 \nMapillary - fotografie z ulice;
 \nWeb / Wikimedia - fotografie bodov záujmu špeficikované v údajoch OpenStreetMap.</string>
@@ -3757,7 +3755,6 @@
     <string name="uploaded_count">Odoslané %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
     <string name="hillshade_slope_contour_lines">Vrstevnice / Tieňované svahy / Sklony svahov</string>
-    <string name="open_place_reviews_plugin_description">Prispievajte do projektu OpenPlaceReviews, napríklad fotografiami, recenziami, odkazmi o verejných miestach ako sú reštaurácie, hotely alebo múzeá.
 \n
 \nInštrukcie ako prispievať nájdete na našej webstránke %1$s.</string>
     <string name="activity_type_water_name">Voda</string>
@@ -5402,7 +5399,6 @@
     <string name="energy_avg_info_description">Úroveň batérie za minútu: %1$s
 \nSpotreba energie (mAh): %2$s</string>
     <string name="rendering_avg_info">Štatistika vykresľovania (priemer za 1 / 5 / 15 minút)</string>
-    <string name="rendering_avg_info_description">FPS za posledných 1k snímok: %1$s
 \nProcesor: %2$s
 \nGrafika 1k: %3$s
 \nNečinné 1k: %4$s</string>

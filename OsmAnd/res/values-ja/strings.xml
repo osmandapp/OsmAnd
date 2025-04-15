@@ -3714,7 +3714,6 @@ POIの更新は利用できません</string>
     <string name="uploaded_count">%2$d個中%1$d個をアップロードしました</string>
     <string name="toast_select_edits_for_upload">アップロードする編集を選択</string>
     <string name="hillshade_slope_contour_lines">陰影起伏図 / 勾配 / 等高線</string>
-    <string name="open_place_reviews_plugin_description">"OpenPlaceReviewsプロジェクトに貢献しましょう。例えば、レストラン、ホテル、美術館のような公共の場所の写真、レビュー、リンクなどを投稿してください。
 \n貢献の方法については、私たちのウェブサイト%1$s  を参照してください。"</string>
     <string name="activity_type_water_name">水</string>
     <string name="activity_type_winter_name">冬</string>
@@ -3784,7 +3783,6 @@ POIの更新は利用できません</string>
     <string name="select_groups_for_import">インポートするグループを選択します。</string>
     <string name="select_items_for_import">インポートするアイテムを選択します。</string>
     <string name="add_to_mapillary">Mapillaryに追加</string>
-    <string name="add_photos_descr">OsmAndは、いくつかのソースからの写真を表示します:
 \nOpenPlaceReviewsはPOIの写真;
 \nMapillaryは投稿されたストリート画像;
 \nWeb / WikimediaはOpenStreetMapデータのPOIの写真を利用しています。</string>

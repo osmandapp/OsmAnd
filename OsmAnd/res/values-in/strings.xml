@@ -941,7 +941,6 @@
     <string name="osm_edit_close_note">Tutup Catatan OSM</string>
     <string name="osm_login_descr">Masuk dengan metode OAuth, atau nama pengguna dan kata sandi OSM Anda.</string>
     <string name="shared_string_add_photo">Tambahkan foto</string>
-    <string name="register_on_openplacereviews">Daftar di
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Buat akun baru</string>
     <string name="register_opr_have_account">Saya sudah memiliki sebuah akun</string>
@@ -2419,7 +2418,6 @@
     <string name="purchases_restored">Pembelian dipulihkan</string>
     <string name="connect_track_points_as">Hubungkan titik rute</string>
     <string name="enough_contributions_descr">Selamat, Anda telah menyediakan kontribusi OpenStreetMap yang cukup dan dapat menikmati pembaruan peta OsmAnd tak terbatas!</string>
-    <string name="add_photos_descr">OsmAnd menampilkan foto dari beberapa sumber:
 \nOpenPlaceReviews - foto POI;
 \nMapillary - citra tingkat jalan;
 \nWeb / Wikimedia - foto POI sesuai data OpenStreetMap.</string>
@@ -2800,7 +2798,6 @@
     <string name="renew_subscription">Perbarui langganan</string>
     <string name="three_months_subscription">Langganan tiga bulan</string>
     <string name="map_widget_distance_by_tap">Jarak dengan ketukan</string>
-    <string name="open_place_reviews_plugin_description">Buat kontribusi ke proyek OpenPlaceReviews, seperti foto, ulasan, atau tautan untuk tempat publik seperti restoran, hotel, atau museum.
 \n
 \nCari petunjuk cara berkontribusi di situs web kami %1$s.</string>
     <string name="activity_type_riding_name">Berkendara</string>

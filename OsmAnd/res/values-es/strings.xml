@@ -3750,7 +3750,6 @@
     <string name="osm_edit_close_note">Cerrar nota de OSM</string>
     <string name="osm_edit_comment_note">Comentar nota de OSM</string>
     <string name="shared_string_add_photo">Añadir foto</string>
-    <string name="register_on_openplacereviews">Registrarse en
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Crear nueva cuenta</string>
     <string name="register_opr_have_account">Ya tengo cuenta</string>
@@ -3758,7 +3757,6 @@
     <string name="app_mode_kayak">Kayak</string>
     <string name="app_mode_motorboat">Lancha a motor</string>
     <string name="add_to_mapillary">Añadir a Mapillary</string>
-    <string name="add_photos_descr">OsmAnd muestra fotos de varios repositorios:
 \nOpenPlaceReviews (fotos de PDI);
 \nMapillary (imágenes a nivel de calle);
 \nWeb / Wikimedia (fotos de PDI según datos de OpenStreetMap).</string>
@@ -3842,7 +3840,6 @@
     <string name="routing_attr_allow_streams_name">Permitir arroyos y desagües</string>
     <string name="routing_attr_allow_intermittent_description">Permite cursos de agua intermitentes</string>
     <string name="voice_prompts_timetable">Tiempo de los avisos por voz</string>
-    <string name="open_place_reviews_plugin_description">Haz contribuciones al proyecto OpenPlaceReviews, como fotos, reseñas o enlaces de lugares públicos como restaurantes, hoteles o museos.
 \n
 \nEncuentra las instrucciones sobre cómo haber las contribuciones nuestro sitio web %1$s.</string>
     <string name="online_routing_example_hint">La URL con todos los parámetros se verá así:</string>
@@ -5699,7 +5696,6 @@
 \nConsumo de energía (mAh): %2$s</string>
     <string name="rendering_avg_info">Estadísticas de renderizado (promedio 1 / 5 / 15 minutos)</string>
     <string name="energy_avg_info">Estadísticas de energía (promedio 1 / 5 / 15 minutos)</string>
-    <string name="rendering_avg_info_description">FPS por los últimos 1k fotogramas: %1$s
 \nCPU básica: %2$s
 \nGPU 1k: %3$s
 \nINACTIVO 1k: %4$s</string>

@@ -3773,7 +3773,6 @@
     <string name="gpx_upload_identifiable_visibility_descr">«قابل‌شناسایی» یا Identifiable به این معنی است که رد به‌صورت عمومی در فهرست ردهای جی‌پی‌اس شما و لیست عمومی ردهای جی‌پی‌اس نمایش داده می‌شود، یعنی سایر کاربران می‌توانند رد خام را بارگیری کنند و بدانند که مربوط به نام کاربری شماست. دادهٔ نقاط رد همراه با مهر زمان از طریق API به‌طور عمومی در دسترس است و به صفحهٔ ردهای شما ارجاع می‌دهد.</string>
     <string name="gpx_upload_trackable_visibility_descr">«قابل‌ردیابی» یا Trackable به این معنی است که رد در هیچ فهرست عمومی‌ای نشان داده نمی‌شود اما نقاط پردازش‌شدهٔ رد + مهر زمان نقاط (که مستقیماً به نام کاربری شما ارجاع نمی‌دهد) از طریق API جی‌پی‌اس‌های عمومی قابل‌بارگیری است.</string>
     <string name="shared_string_add_photo">افزودن عکس</string>
-    <string name="register_on_openplacereviews">ثبت نام در
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">ساخت حساب جدید</string>
     <string name="register_opr_have_account">حساب کاربری دارم</string>
@@ -3785,7 +3784,6 @@
     <string name="add_to_mapillary">افزودن به مپیلاری</string>
     <string name="use_dev_url_descr">برای بارگذاری آزمایشی یادداشت / نقطهٔ توجه / GPX، به‌جای openstreetmep.org از dev.openstreetmap.org استفاده کنید.</string>
     <string name="use_dev_url">استفاده از dev.openstreetmap.org</string>
-    <string name="add_photos_descr">برنامه OsmAnd عکس‌ها را از چند منبع نشان می‌دهد:
 \nاز OpenPlaceReview برای عکس‌های نقاط توجه؛
 \nاز مپیلاری برای تصویر سطح خیابان؛
 \nاز وب و ویکی‌پدیا برای عکس‌های نقاط توجه متناسب با داده‌های اوپن‌استریت‌مپ.</string>
@@ -3871,7 +3869,6 @@
     <string name="uploaded_count">%1$d از %2$d بارگذاری شد</string>
     <string name="toast_select_edits_for_upload">ویرایش‌ها را برای بارگذاری انتخاب کنید</string>
     <string name="hillshade_slope_contour_lines">سایه‌روشن / شیب / منحنی‌های میزان</string>
-    <string name="open_place_reviews_plugin_description">برای مکان‌های عمومی مانند رستوران‌ها، هتل‌ها، موزه‌ها و نقاط بین‌راهی نگاره بفرستید، دیدگاه بنویسید و پیوند ثبت کنید؛ همگی این‌ها به‌عنوان دادهٔ باز ثبت خواهد شد. http://openplacereviews.org/data
 \n
 \nاینجا بیشتر بخوانید: http://openplacereviews.org</string>
     <string name="activity_type_water_name">آب</string>

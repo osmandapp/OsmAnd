@@ -3554,7 +3554,6 @@
     <string name="osm_edit_comment_note">Kommentér OSM-bemærkning</string>
     <string name="osm_login_descr">Log ind ved hjælp af OAuth-metoden eller med dit OSM-brugernavn og adgangskode.</string>
     <string name="shared_string_add_photo">Tilføj fotos</string>
-    <string name="register_on_openplacereviews">Tilmeld på
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Opret ny konto</string>
     <string name="register_opr_have_account">Har allerede en konto</string>
@@ -3562,7 +3561,6 @@
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorbåd</string>
     <string name="add_to_mapillary">Føj til Mapillary</string>
-    <string name="add_photos_descr">OsmAnd viser fotos fra flere kilder:
 \nOpenPlaceReviews - IP-fotos;
 \nMapillary - billeder på gadeniveau;
 \nWeb / Wikimedia - IP-fotos angivet i OpenStreetMap data.</string>
@@ -3861,7 +3859,6 @@
     <string name="shared_string_server_url">Server-URL</string>
     <string name="keep_it_empty_if_not">Lad den være tom, hvis ikke</string>
     <string name="online_routing_example_hint">URL med alle parametre vil se således ud:</string>
-    <string name="open_place_reviews_plugin_description">Lav bidrag til OpenPlaceReviews-projektet som f.eks. fotos, anmeldelser, links for offentlige steder som restauranter, hoteller eller museer.
 \n
 \nFind vejledninger om, hvordan du bidrager, på vores websted %1$s.</string>
     <string name="routing_attr_height_obstacles_description">Den forventede rejsetid vil afspejle højdepåvirkningen. Ruteberegningsvalg kan hjælpe med at undgå stejle opkørsler:</string>
@@ -5411,7 +5408,6 @@
     <string name="energy_avg_info_description">Batteriniveau pr. minut: %1$s
 \nEnergiforbrug (mAh): %2$s</string>
     <string name="rendering_avg_info">Gengivelsesstatistik (gennemsnitlig 1 / 5 / 15 minutter)</string>
-    <string name="rendering_avg_info_description">FPS efter sidste 1k billeder: %1$s
 \nCPU basic: %2$s
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>

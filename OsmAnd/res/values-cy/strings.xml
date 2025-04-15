@@ -586,7 +586,6 @@
     <string name="shared_string_last_used">Defnyddiwyd diwethaf</string>
     <string name="profile_by_default_description">Dewiswch y proffil i\'w ddefnyddio ar ddechrau\'r ap.</string>
     <string name="profile_type_user_string">Proffil defnyddiwr</string>
-    <string name="add_photos_descr">Mae OsmAnd yn dangos lluniau o sawl ffynhonell:
 \nOpenPlaceReviews - lluniau MODd;
 \nMapillary - delweddau lefel strydoedd;
 \nGwe / Wicimedia - lluniau MODd yn ôl data OpenStreetMap.</string>
@@ -1124,7 +1123,6 @@
 \n - Canllaw lonydd cywir, dangos cyfyngiadau cyflymder, lleisiau wedi\'i recordio a thestun-i-lais.
 \n</string>
     <string name="show_tunnels">Twneli</string>
-    <string name="open_place_reviews_plugin_description">Anfon lluniau, adolygiadau, a dolenni am lefydd cyhoeddus megis bwytai, gwestai, amgueddfeydd, a mannau o ddiddordeb fel data agored https://openplacereviews.org/data/.
 \n
 \nDarllenwch mwy ar https://openplacereviews.org</string>
     <string name="routing_engine_vehicle_type_foot">Cerdded</string>
@@ -2396,7 +2394,6 @@
     <string name="shared_strings_all_regions">Pob rhanbarth</string>
     <string name="snap_to_road_descr">Bydd yr eicon lleoliad presennol yn snapio i\'r llwybr llywio cyfredol</string>
     <string name="reverse_all_points">Gwrthdroi pob pwynt</string>
-    <string name="register_on_openplacereviews">Cofrestru ar
 \nOpenPlaceReviews.org</string>
     <string name="delete_updates">Dileu diweddariadau</string>
     <string name="app_mode_light_aircraft">Awyrennau bychain</string>

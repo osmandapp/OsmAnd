@@ -3709,7 +3709,6 @@
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
-    <string name="open_place_reviews_plugin_description">Unvia semeyes, reseñes y enllaces de llugares públicos como restoranes, hoteles, museos y otros puntos a OpenPlaceReviews.
 \n
 \nToos estos datos son abiertos y pues lleer más tocante al proyeutu en https://openplacereviews.org</string>
     <string name="activity_type_water_name">Water</string>
@@ -3943,7 +3942,6 @@
     <string name="osm_edit_comment_note">Comment OSM Note</string>
     <string name="osm_login_descr">Log in using the OAuth method, or your OSM username and password.</string>
     <string name="shared_string_add_photo">Add photo</string>
-    <string name="register_on_openplacereviews">Rexistru en
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Crear una cuenta</string>
     <string name="register_opr_have_account">Yá tengo una cuenta</string>
@@ -3963,7 +3961,6 @@
     <string name="add_to_mapillary">Add to Mapillary</string>
     <string name="use_dev_url_descr">Switch to use \"dev.openstreetmap.org\" instead of \"openstreetmap.org\" to testing uploading OSM Note / POI / GPX.</string>
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
-    <string name="add_photos_descr">OsmAnd shows photos from several sources:
 \nOpenPlaceReviews - POI photos;
 \nMapillary - street-level imagery;
 \nWeb / Wikimedia - POI photos as per OpenStreetMap data.</string>

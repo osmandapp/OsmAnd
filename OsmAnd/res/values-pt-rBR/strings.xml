@@ -3775,7 +3775,6 @@
     <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
     <string name="osm_login_descr">Entre usando o método OAuth ou seu nome de usuário e senha do OSM.</string>
     <string name="shared_string_add_photo">Adicionar foto</string>
-    <string name="register_on_openplacereviews">Cadastre-se em
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Criar nova conta</string>
     <string name="register_opr_have_account">Eu já tenho uma conta</string>
@@ -3783,7 +3782,6 @@
     <string name="app_mode_kayak">Caiaque</string>
     <string name="app_mode_motorboat">Lancha</string>
     <string name="add_to_mapillary">Adicionar ao Mapillary</string>
-    <string name="add_photos_descr">OsmAnd mostra fotos de várias fontes:
 \nOpenPlaceReviews - fotos de POI;
 \nMapillary - imagens de nível da rua;
 \nWeb / Wikimedia - fotos de POI especificadas de acordo com os dados do OpenStreetMap.</string>
@@ -3884,7 +3882,6 @@
     <string name="uploaded_count">Carregado %1$d de %2$d</string>
     <string name="toast_select_edits_for_upload">Selecione as edições para carregamento</string>
     <string name="hillshade_slope_contour_lines">Curvas de nível / Sombras de relevo / Encosta</string>
-    <string name="open_place_reviews_plugin_description">Faça contribuições para o projeto OpenPlaceReviews, como fotos, comentários ou hiperligações para locais públicos, como restaurantes, hotéis ou museus.
 \n
 \nVeja as instruções sobre como contribuir em %1$s.</string>
     <string name="activity_type_motorbike_name">Motocicleta</string>

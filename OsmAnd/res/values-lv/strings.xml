@@ -3149,7 +3149,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="osm_edit_comment_note">Komentēt OSM Note</string>
     <string name="osm_login_descr">Ielogojieties ar drošo OAuth metodi vai savu lietotāja vārdu un paroli.</string>
     <string name="shared_string_add_photo">Pievienot foto</string>
-    <string name="register_on_openplacereviews">Reģistrēties
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Izveidot jaunu kontu</string>
     <string name="icon_group_symbols">Simboli</string>
@@ -3162,7 +3161,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="app_mode_kayak">Kajaks</string>
     <string name="app_mode_motorboat">Motorlaiva</string>
     <string name="add_to_mapillary">Pievienot Mapillary</string>
-    <string name="add_photos_descr">OsmAnd rāda attēlus no dažādiem avotiem:
 \nOpenPlaceReviews - POI bildes;
 \nMapillary - ielas līmeņa attēli;
 \nWeb / Wikimedia - POI bildes no OpenStreetMap datiem.</string>

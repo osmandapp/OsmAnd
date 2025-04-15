@@ -3627,7 +3627,6 @@
     <string name="osm_edit_comment_note">Commenter la note OSM</string>
     <string name="osm_edit_close_note">Fermer la note OSM</string>
     <string name="shared_string_add_photo">Ajouter une photo</string>
-    <string name="register_on_openplacereviews">Inscrivez-vous sur
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Créer un nouveau compte</string>
     <string name="register_opr_have_account">J\'ai déjà un compte</string>
@@ -3645,7 +3644,6 @@
     <string name="file_size_needed_for_import">Nécessaire pour l\'import</string>
     <string name="export_not_enough_space">L\'espace disponible est insuffisant</string>
     <string name="add_to_mapillary">Ajouter à Mapillary</string>
-    <string name="add_photos_descr">OsmAnd affiche des photos de plusieurs sources :
 \nOpenPlaceReviews : photos de PI ;
 \nMapillary : photos de rue ;
 \nWeb / Wikimedia : photos de PI réféfencés dans OpenStreetMap.</string>
@@ -3756,7 +3754,6 @@
     <string name="activity_type_riding_name">Équitation</string>
     <string name="activity_type_offroad_name">Tout-terrain</string>
     <string name="activity_type_motorbike_name">Moto</string>
-    <string name="open_place_reviews_plugin_description">Envoyez vos photos, avis et liens sur des lieux publics tels que les restaurants, les hôtels ou les musées afin de contribuer au projet OpenPlaceReviews.
 \n
 \nPour en savoir plus, consultez %1$s.</string>
     <string name="activity_type_racing_name">Course</string>
@@ -5379,7 +5376,6 @@
 \nConsommation d\'énergie (mAh) : %2$s</string>
     <string name="rendering_avg_info">Statistiques d\'affichage (moyenne sur 1 / 5 / 15 minutes)</string>
     <string name="energy_avg_info">Statistiques de consommation (moyenne sur 1 / 5 / 15 minutes)</string>
-    <string name="rendering_avg_info_description">Images par seconde sur les 1 000 dernières images : %1$s
 \nProcesseur : %2$s
 \nCarte graphique : %3$s
 \nVeille : %4$s</string>
