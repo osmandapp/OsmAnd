@@ -52,7 +52,8 @@ public class SearchUtils {
 				} else {
 					filter = app.getPoiFilters().getSearchByNamePOIFilter();
 					if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
-						filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
+						String searchWord = searchPhrase.hasCityName() ? searchPhrase.getCitySearchWord() : searchPhrase.getFirstUnknownSearchWord();
+						filter.setFilterByName(searchWord);
 						filter.clearCurrentResults();
 					}
 				}

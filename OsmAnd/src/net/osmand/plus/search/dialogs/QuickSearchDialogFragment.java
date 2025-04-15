@@ -354,6 +354,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else {
 							filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
 						}
+						LatLon cityLocation = searchPhrase.getCityLocation();
+						if (cityLocation != null && getActivity() != null) {
+							app.getSettings().setMapLocationToShow(cityLocation.getLatitude(), cityLocation.getLongitude(), SearchCoreFactory.PREFERRED_CITY_ZOOM);
+							MapActivity.launchMapActivityMoveToTop(getActivity());
+						}
 						showFilterOnMap(filter, getText());
 					} else {
 						SearchWord word = searchPhrase.getLastSelectedWord();
