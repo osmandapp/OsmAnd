@@ -3635,11 +3635,17 @@
     <string name="osm_edit_comment_note">Komenti OSM-rimarkon</string>
     <string name="osm_login_descr">Ensalutu per la metodo OAuth aŭ per uzi uzantnomon kaj pasvorton al OSM.</string>
     <string name="shared_string_add_photo">Aldoni foton</string>
+    <string name="register_on_openplacereviews">Registri ĉe
+\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Krei novan konton</string>
     <string name="register_opr_have_account">Mi jam havas konton</string>
     <string name="shared_string_search_history">Historio de serĉoj</string>
     <string name="app_mode_kayak">Kajako</string>
     <string name="app_mode_motorboat">Motorboato</string>
+    <string name="add_photos_descr">OsmAnd montras fotojn el diversaj fontoj:
+\nOpenPlaceReviews – fotoj de interesejoj;
+\nMapillary – strat‑nivela fotaro;
+\ninterreto, Vikimedio – fotoj de interesejoj difinitaj en OSM-datumoj.</string>
     <string name="shared_string_resources">Rimedoj</string>
     <string name="approximate_file_size">Proksimuma dosiergrando</string>
     <string name="select_data_to_export">Elektu datumojn por elporti al dosiero.</string>
@@ -3738,6 +3744,9 @@
     <string name="uploaded_count">Sendis %1$d el %2$d</string>
     <string name="toast_select_edits_for_upload">Elektu redaktojn por sendi</string>
     <string name="hillshade_slope_contour_lines">Nivelkurboj / nivelombrumo / dekliveco</string>
+    <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – per aldoni fotojn, opiniojn kaj ligilojn pri publikaj ejoj: restoracioj, hoteloj, muzeoj kaj pli.
+\n
+\nInstrukcioj (en la angla) pri kiel kontribui troviĝas sur nia retejo: %1$s</string>
     <string name="activity_type_water_name">Akvo</string>
     <string name="activity_type_winter_name">Vintro</string>
     <string name="activity_type_snowmobile_name">Motorsledo</string>
@@ -5366,6 +5375,10 @@
     <string name="quick_action_map_underlay">Subtavolo</string>
     <string name="app_profile">Aplikaĵa profilo</string>
     <string name="release_4_8">• nova eblo por kolorigi terenon: “Altitudo” \n \n• alĝustigeblaj koloroj por tereno, spuroj kaj kursoj \n \n• 3-dimensiaj bildsimboloj de pozicio \n \n• rapida ago povas esti asignita al ekstera klavaro \n \n• vetero: modernigita fasado, movbilda vento \n \n• spuroj: plibonigoj al 3-dimensia vidigo \n \n• etendita elekto de turismaj kursoj sur la mapo \n \n• eblo agordi aplikaĵan etoson laŭ map-reĝimo \n \n• riparitaj statistikoj pri spuroj, ordigado kaj serĉado \n \n• OSM-redaktilo: forigis simplan (uzantnomo+pasvorto) aŭtentigan metodon \n \n• transiro al la operaciuma koniga folio «System Share Sheet» komence de Android 14</string>
+    <string name="rendering_avg_info_description">Kadroj / sekundo dum lastaj 1k kadroj: %1$s
+\nCPU: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Statistiko pri energio (mezume 1 /5 /15 minutoj)</string>
     <string name="energy_avg_info_description">Bateri-nivelo je minuto: %1$s
 \nKonsumo de energio (mAh): %2$s</string>

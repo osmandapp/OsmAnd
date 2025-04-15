@@ -4634,6 +4634,12 @@
     <string name="poi_indoor_seating_yes">Vnitřní posezení: Ano</string>
     <string name="poi_indoor_seating_no">Bez vnitřního posezení</string>
     <string name="poi_indoor_seating_bar_table">Sezení uvnitř: barový stůl</string>
+    <string name="poi_osmand_access_no">Přístup: ne</string>
+    <string name="poi_osmand_access_private">Přístup: soukromý</string>
+    <string name="poi_osmand_motorcycle_no">Přístup pro motocykly: ne</string>
+    <string name="poi_osmand_vehicle_no">Přístup vozidla: ne</string>
+    <string name="poi_osmand_motorcycle_private">Přístup pro motocykly: soukromý</string>
+    <string name="poi_healthcare_speciality_ayurveda">Ájurvéda</string>
     <string name="poi_healthcare_speciality_reflexology">Reflexní terapie</string>
     <string name="poi_healthcare_speciality_anthroposophical">Antroposofický</string>
     <string name="poi_healthcare_speciality_neonatology">Neonatologie</string>
@@ -4675,6 +4681,12 @@
     <string name="poi_live_music_yes">Ano</string>
     <string name="poi_music_venue">Hudební místo</string>
     <string name="poi_cash_in">Vklad v hotovosti</string>
+    <string name="poi_osmand_motorcar_no">Přístup motorovým vozidlem: ne</string>
+    <string name="poi_osmand_motorcar_private">Přístup autem: soukromý</string>
+    <string name="poi_osmand_foot_private">Přístup pro pěší: soukromý</string>
+    <string name="poi_osmand_bicycle_no">Přístup pro kola: ne</string>
+    <string name="poi_osmand_bicycle_private">Přístup pro kola: soukromý</string>
+    <string name="poi_healthcare_speciality_tuina">Tuina</string>
     <string name="poi_healthcare_speciality_unani">Unani</string>
     <string name="poi_healthcare_speciality_primary_care">Primární péče</string>
     <string name="poi_healthcare_speciality_humanistic">Humanistická psychologie</string>
@@ -4688,6 +4700,8 @@
     <string name="poi_state_detour">Stav: objížďka</string>
     <string name="poi_ascent">Stoupání</string>
     <string name="poi_descent">Klesání</string>
+    <string name="poi_osmand_foot_no">Přístup pro pěší: ne</string>
+    <string name="poi_healthcare_speciality_applied_kinesiology">Aplikovaná kineziologie</string>
     <string name="poi_healthcare_speciality_psychology">Psychologie</string>
     <string name="poi_healthcare_speciality_denturist">Denturista</string>
     <string name="poi_us_maps_recreation_area_activity">Aktivita v rekreační oblasti</string>
@@ -4705,6 +4719,10 @@
     <string name="poi_roundtrip_yes">Zpáteční cesta: ano</string>
     <string name="poi_shop_general">Obchod se smíšeným zbožím</string>
     <string name="poi_photo_booth">Fotobudka</string>
+    <string name="poi_osmand_vehicle_private">Přístup autem: soukromý</string>
+    <string name="poi_osmand_motor_vehicle_no">Přístup motorovým vozidlem: ne</string>
+    <string name="poi_osmand_motor_vehicle_private">Přístup motorovým vozidlem: soukromý</string>
+    <string name="poi_healthcare_speciality_kinesitherapy">Kineziterapie</string>
     <string name="poi_healthcare_speciality_pediatric">Pediatrická</string>
     <string name="poi_healthcare_speciality_pedorthist">Pedorthista</string>
     <string name="poi_healthcare_speciality_proctology">Proktologie</string>
@@ -4863,6 +4881,8 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunel se zákazem pro cyklisty</string>
     <string name="poi_route_article">Články o cestování</string>
     <string name="poi_route_article_point">Body na cestách</string>
+    <string name="poi_route_track">Další trasy</string>
+    <string name="poi_route_track_point">Body trasy</string>
     <string name="poi_name_etymology">Původ názvu</string>
     <string name="poi_name_right">Název pravé strany</string>
     <string name="poi_name_left">Název levé strany</string>

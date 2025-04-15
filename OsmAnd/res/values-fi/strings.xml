@@ -2653,6 +2653,8 @@
     <string name="osm_edit_comment_note">Kommentoi OSM Notea</string>
     <string name="osm_login_descr">Voit kirjautua turvallisesti käyttämällä turvallista OAuth-tapaa tai kirjaudu tunnuksellasi ja salasanallasi.</string>
     <string name="shared_string_add_photo">Lisää kuva</string>
+    <string name="register_on_openplacereviews">Rekistöröidy
+\nOpenPlaceReviews.org-sivulla</string>
     <string name="register_opr_create_new_account">Luo uudet tunnukset</string>
     <string name="register_opr_have_account">Minulla on jo tunnukset</string>
     <string name="shared_string_search_history">Hakuhistoria</string>
@@ -2777,6 +2779,9 @@
     <string name="select_segments_description">%1$s sisältää useamman kuin yhden segmentin, sinun on määriteltävä navigointiin käytettävä osa.</string>
     <string name="segments_count">Segmentti %1$d</string>
     <string name="hillshade_slope_contour_lines">Kukkulavarjostus / rinne / korkeuskäyrät</string>
+    <string name="open_place_reviews_plugin_description">Lähetä valokuvia, arvosteluja ja linkkejä julkisista paikoista, kuten ravintoloista, hotelleista, museoista ja väyläpisteistä avoimena datana https://openplacereviews.org/data/.
+\n
+\nLue lisää osoitteessa: https://openplacereviews.org</string>
     <string name="temporary_conditional_routing_descr">Käytä tierajoituksia, jotka ovat nyt aktiivisia kartalla</string>
     <string name="routing_attr_short_way_description">Optimoitu lyhyempi reitti (energiansäästö)</string>
     <string name="routing_attr_driving_style_description">Valitse ajotarkoitus saadaksesi lyhyemmän, nopeamman tai turvallisemman reitin</string>
@@ -2784,6 +2789,10 @@
     <string name="delete_number_files_question">Poista %1$d tiedostoa\?</string>
     <string name="track_recording_stop_without_saving">Lopeta tallentamatta</string>
     <string name="quick_action_coordinates_widget_descr">Painike Koordinaatit-widgetin näyttämiseen tai piilottamiseen kartalla.</string>
+    <string name="add_photos_descr">OsmAnd näyttää kuvia useista lähteistä:
+\nOpenPlaceReviews - KP-kuvat;
+\nMapillary - katutason kuvia;
+\nInternet / Wikimedia - KP-kuvat OpenStreetMap-tietojen mukaisesti.</string>
     <string name="select_groups_for_import">Valitse tuotavat ryhmät.</string>
     <string name="select_items_for_import">Valitse tuotavat kohteet.</string>
     <string name="add_to_mapillary">Lisää Mapillaryyn</string>

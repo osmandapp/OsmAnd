@@ -3255,6 +3255,10 @@
     <string name="add_to_mapillary">Dodaj na Mapillary</string>
     <string name="use_dev_url_descr">Za preizkušanje pošiljanja sporočil, točk in sledi GPX preklopi iz openstreetmap.org na preizkusni dev.openstreetmap.org.</string>
     <string name="use_dev_url">Uporabi dev.openstreetmap.org</string>
+    <string name="add_photos_descr">Program podpira prikaz fotografij različnih virov:
+\nOpenPlaceReviews – fotografije točk POI;
+\nMapillary – ulična fotografija;
+\nSplet / Wikimedia – fotografije točk POI in OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="plan_route_add_new_segment">Dodaj nov del poti</string>
     <string name="app_mode_light_aircraft">Lahko letalo</string>
@@ -3933,6 +3937,9 @@
     <string name="osm_edit_comment_note">Komentiraj OSM opombo</string>
     <string name="gpx_upload_trackable_visibility_descr">»Sledljivo« pomeni, da se sled ne prikaže v nobenem javnem seznamu, ampak se prikažejo samo obdelane točke sledi s časovnimi žigi (ki jih ni mogoče neposredno povezati s tabo) iz javnega API-ja GPS.</string>
     <string name="shared_string_search_history">Zgodovina iskanja</string>
+    <string name="open_place_reviews_plugin_description">Prispevaj k projektu OpenPlaceReviews, kot npr. fotografije, ocene, povezave o javnih mestih, kot so restavracije, hoteli, ali muzeji.
+\n
+\nNavodila za prispevanje najdeš na naši spletni strani %1$s.</string>
     <string name="routing_attr_allow_intermittent_name">Omogoči občasne vodotoke</string>
     <string name="app_mode_motorboat">Motorni čoln</string>
     <string name="edit_online_routing_engine">Urejanje spletnega usmerjevalnika</string>
@@ -3943,6 +3950,8 @@
     <string name="cannot_upload_image">Slike ni mogoče naložiti: prosim, poskusite znova pozneje</string>
     <string name="register_opr_have_account">Že imam račun</string>
     <string name="register_opr_create_new_account">Ustvari nov račun</string>
+    <string name="register_on_openplacereviews">Registriraj se na
+\nOpenPlaceReviews.org</string>
     <string name="osm_login_descr">Prijavi se z metodo OAuth ali z uporabniškim imenom in geslom OSM.</string>
     <string name="keep_it_empty_if_not">Naj bo prazno, če že ni</string>
     <string name="app_mode_kayak">Kajak</string>

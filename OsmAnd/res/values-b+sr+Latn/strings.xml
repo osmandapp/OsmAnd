@@ -3625,6 +3625,8 @@
     <string name="osm_edit_comment_note">Komentar OSM napomena</string>
     <string name="osm_login_descr">Prijavi se koristeći bezbedan način OAuth ili koristiti svoje korisničko ime i lozinku.</string>
     <string name="shared_string_add_photo">Dodaj fotografiju</string>
+    <string name="register_on_openplacereviews">Registrujte se na
+\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Napravi novi profil</string>
     <string name="register_opr_have_account">Već imam</string>
     <string name="shared_string_search_history">Pretraga istorije</string>
@@ -3643,6 +3645,10 @@
     <string name="add_to_mapillary">Dodaj u Mapilari</string>
     <string name="use_dev_url_descr">Pređi na upotrebu dev.openstreetmap.org umesto na openstreetmap.org radi probe otpremanja beleške OSM-a / TOI / GPX.</string>
     <string name="use_dev_url">Koristi dev.openstreetmap.org</string>
+    <string name="add_photos_descr">OsmAnd prikazuje fotografije iz nekoliko izvora:
+\nOpenPlaceReviews - fotografije tačaka od interesa;
+\nMapillary - slike na nivou ulice;
+\nVeb / Vikimedija - fotografije tačaka od interesa navedene u OpenStreetMap podacima.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Laka letelica</string>
     <string name="plan_route_split_before">Razdvoj pre</string>
@@ -3729,6 +3735,9 @@
     <string name="uploaded_count">Otpremljeno %1$d od %2$d</string>
     <string name="toast_select_edits_for_upload">Odaberi izmene za preuzimanje</string>
     <string name="hillshade_slope_contour_lines">Konturne linije / senčanje reljefa/ nagib</string>
+    <string name="open_place_reviews_plugin_description">Šaljite fotografije, recenzije i veze o javnim mestima kao što su restorani, hoteli, muzeji i putne tačke kao otvorene podatke na https://openplacereviews.org/data/.
+\n
+\nPročitajte više na https://openplacereviews.org</string>
     <string name="activity_type_water_name">Voda</string>
     <string name="activity_type_winter_name">Zima</string>
     <string name="activity_type_snowmobile_name">Motorne sanke</string>
@@ -5357,6 +5366,10 @@
     <string name="quick_action_remove_next_destination">Sledeća odredišna tačka</string>
     <string name="energy_avg_info_description">Nivo baterije u minuti: %1$s
 \nPotrošnja energije (mAh): %2$s</string>
+    <string name="rendering_avg_info_description">FPS prema poslednjih 1k kadrova: %1$s
+\nCPU bazično: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Energetska statistika (prosek 1 / 5 / 15 minuta)</string>
     <string name="rendering_avg_info">Statistika prikazivanja (prosečno 1 / 5 / 15 minuta)</string>
     <string name="choose_map_orientation">Odaberite orjentaciju mape</string>

@@ -3233,6 +3233,9 @@
     <string name="toast_select_edits_for_upload">选择要上传的编辑</string>
     <string name="uploaded_count">已上传 %1$d，共 %2$d</string>
     <string name="hillshade_slope_contour_lines">等高线/山体阴影/斜坡</string>
+    <string name="open_place_reviews_plugin_description">为 OpenPlaceReviews 项目做出贡献，例如照片、评论或公共场所（如餐馆、酒店或博物馆）的链接。
+\n
+\n在我们的网站上查找有关如何做出贡献的说明 %1$s。</string>
     <string name="activity_type_winter_name">冬季</string>
     <string name="activity_type_snowmobile_name">雪地摩托</string>
     <string name="activity_type_riding_name">骑行</string>
@@ -3292,6 +3295,8 @@
     <string name="osm_edit_comment_note">评论 OSM 注记</string>
     <string name="osm_login_descr">使用 OAuth 方式或者你的 OSM 登录名和密码进行登录。</string>
     <string name="shared_string_add_photo">添加照片</string>
+    <string name="register_on_openplacereviews">注册
+\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">创建新帐户</string>
     <string name="register_opr_have_account">我已经有一个账户</string>
     <string name="shared_string_search_history">搜索历史记录</string>
@@ -3310,6 +3315,10 @@
     <string name="add_to_mapillary">添加到 Mapillary</string>
     <string name="use_dev_url_descr">改用 dev.openstreetmap.org 而不是 openstreetmap.org 来测试上传 OSM 注记 / 兴趣点 / GPX。</string>
     <string name="use_dev_url">使用 dev.openstreetmap.org</string>
+    <string name="add_photos_descr">OsmAnd显示来自多个来源的照片：
+\nOpenPlaceReviews - POI照片；
+\nMapillary - 街道级图像；
+\n网络/维基媒体 - 根据OpenStreetMap数据的POI照片。</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">轻型飞机</string>
     <string name="plan_route_split_before">拆分之前</string>

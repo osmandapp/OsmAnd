@@ -3812,12 +3812,18 @@
     <string name="osm_edit_comment_note">Cummenta sa nota de OSM</string>
     <string name="osm_login_descr">Intra impreende su mètodu OAuth o cun su nùmene tuo e sa crae de intrada tua de OSM.</string>
     <string name="shared_string_add_photo">Annanghe una fotografia</string>
+    <string name="register_on_openplacereviews">Registra·ti in
+\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Crea unu contu nou</string>
     <string name="register_opr_have_account">Tèngio giai unu contu</string>
     <string name="shared_string_search_history">Cronologia de chirca</string>
     <string name="app_mode_kayak">Kàyak</string>
     <string name="app_mode_motorboat">Motoscafu</string>
     <string name="add_to_mapillary">Annanghe a Mapillary</string>
+    <string name="add_photos_descr">OsmAnd ammustrat fotografias dae fontes medas:
+\nOpenPlaceReviews - fotografias de sos PDI;
+\nMapillary - immàgines a livellu de su caminu;
+\nWeb / Wikimedia - fotografias de sos PDI ligadas a sos datos de OpenStreetMap.</string>
     <string name="shared_string_resources">Risursas</string>
     <string name="approximate_file_size">Mannària aprossimativa de su documentu</string>
     <string name="select_data_to_export">Ischerta sos datos de esportare in su documentu.</string>
@@ -3915,6 +3921,9 @@
     <string name="toast_select_edits_for_upload">Ischerta modìficas de carrigare</string>
     <string name="announcement_time_descr">Su tempus de annùntziu de sos annùntzios vocales diferentes dipendet dae sa casta de annùntziu, dae sa lestresa de navigatzione de cussu momentu e dae sa lestresa de navigatzione predefinida.</string>
     <string name="announcement_time_title">Tempus de s\'annùntziu</string>
+    <string name="open_place_reviews_plugin_description">Faghe contributziones a su progetu de OpenPlaceReviews comente fotografias, retzensiones o ligàmenes pro logos pùblicos che a ristorantes, albergos o museos.
+\n
+\nAtzapa istrutziones subra de comente contribuire in su situ nostru %1$s.</string>
     <string name="announcement_time_passing">Colende</string>
     <string name="announcement_time_approach">Acùrtzia·ti</string>
     <string name="announcement_time_prepare_long">Ammanniamentu longu</string>

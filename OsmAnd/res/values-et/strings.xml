@@ -3594,6 +3594,8 @@
     <string name="osm_edit_comment_note">Kommenteeri OSM märkust</string>
     <string name="osm_login_descr">Logi sisse, kasutades OAuth-meetodit või oma OSM kasutajanime ja salasõna.</string>
     <string name="shared_string_add_photo">Lisa foto</string>
+    <string name="register_on_openplacereviews">Registreeru
+\nOpenPlaceReviews.org saidis</string>
     <string name="register_opr_create_new_account">Loo uus kasutajakonto</string>
     <string name="register_opr_have_account">Mul juba on kasutajakonto olemas</string>
     <string name="shared_string_search_history">Otsinguajalugu</string>
@@ -3612,6 +3614,10 @@
     <string name="add_to_mapillary">Lisa Mapillary saiti</string>
     <string name="use_dev_url_descr">Tavasaidi openstreetmap.org asemel kasuta OSM märkuste, huvipunktide või GPX-failide üleslaadimise katsetamiseks arendussaiti dev.openstreetmap.org.</string>
     <string name="use_dev_url">Kasuta dev.openstreetmap.org saiti</string>
+    <string name="add_photos_descr">OsmAnd kuvab fotosid mitmetest allikatest:
+\nOpenPlaceReviews - huvipunkti fotod;
+\nMapillary - tänavavaated;
+\nWikimedia või veeb - OpenStreetMap\'i andmetes kirjeldatud fotod.</string>
     <string name="markers_history">Markerite ajalugu</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Kerglennukid</string>
@@ -3758,6 +3764,9 @@
     <string name="select_segments_description">Failis %1$s on mitu segmendi. Navigeerimiseks pead sa valima sobiva osa.</string>
     <string name="segments_count">Lõik %1$d</string>
     <string name="hillshade_slope_contour_lines">Kõrgusjooned / Reljeefi varjutus / Nõlvad</string>
+    <string name="open_place_reviews_plugin_description">Saada fotosid, ülevaateid ja viitu avalikest kohtadest nagu restranid, hotellid, muuseumid ja teeviidad kui avalikud andmed http://openplacereviews.org/data/.
+\n
+\nTäiendavalt saad lugeda aadressil http://openplacereviews.org</string>
     <string name="activity_type_water_name">Vesi</string>
     <string name="activity_type_winter_name">Talv</string>
     <string name="activity_type_snowmobile_name">Mootorsaan</string>

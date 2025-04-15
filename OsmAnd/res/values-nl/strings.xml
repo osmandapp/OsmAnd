@@ -3787,6 +3787,8 @@
     <string name="osm_edit_comment_note">Opmerking maken bij OSM-nota</string>
     <string name="osm_login_descr">Log in met de OAuth-methode, of je OSM-gebruikersnaam en -wachtwoord.</string>
     <string name="shared_string_add_photo">Een foto toevoegen</string>
+    <string name="register_on_openplacereviews">Registreer je op
+\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Maak een nieuw account aan</string>
     <string name="register_opr_have_account">Ik heb al een account</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
@@ -3844,6 +3846,10 @@
     <string name="export_not_enough_space_descr">Je apparaat heeft slechts %1$s beschikbaar. Maak plaats of deselecteer enkele items.</string>
     <string name="export_not_enough_space">Er is niet genoeg ruimte</string>
     <string name="use_dev_url_descr">Gebruik dev.openstreetmap.org in plaats van openstreetmap.org om het uploaden van OSM-nota\'s, interessepunten of GPX-tracks uit te testen.</string>
+    <string name="add_photos_descr">OsmAnd toon foto\'s van verschillende bronnen:
+\nOpenPlaceReviews - foto\'s van interessepunten;
+\nMapillary - foto\'s vanop straatniveau;
+\nWikimedia / het Web - foto\'s van interessepunten zoals gelinkt in OpenStreetMap.</string>
     <string name="release_3_9">• Een optie is toegevoegd om alle data te exporten, waaronder instellingen, andere bronnen en mijn plaatsen
 \n
 \n • Plan een route: diagram met individuele segmenten is toegevoegd, verschillende segmenten kunnen nu gemaakt en aangepast worden
@@ -3906,6 +3912,9 @@
     <string name="select_segments_description">%1$s bevat meer dan één segment, u moet het gedeelte voor navigatie specificeren.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="hillshade_slope_contour_lines">Contourlijnen / Reliëfschaduw / Helling</string>
+    <string name="open_place_reviews_plugin_description">Lever een bijdragen aan het OpenPlaceReviews-project met foto\'s, beoordelingen, of links van openbare plaatsen zoals restaurants, hotels of musea.
+\n
+\nU kunt instructies vinden op onze website over hoe u kunt bijdragen: %1$s.</string>
     <string name="activity_type_water_name">Water</string>
     <string name="activity_type_winter_name">Winter</string>
     <string name="activity_type_snowmobile_name">Sneeuwscooter</string>

@@ -3037,6 +3037,8 @@
     <string name="markers_remove_dialog_msg">“%s” xəritə işarəsi silinsin\?</string>
     <string name="shared_storage_last_step">Daha sonra yeni məlumat qovluğu təyin edə bilərsiniz.</string>
     <string name="shortcut_navigate_to_work">“iş”ə get</string>
+    <string name="register_on_openplacereviews">OpenPlaceReviews.org-da
+\nqeydiyyatdan keç</string>
     <string name="shared_string_quick_actions">Sürətli fəaliyyətlər</string>
     <string name="vector_data_missing">Xəritələri oflayn istifadə etmək üçün (“oflayn”) məlumatları endirin.</string>
     <string name="sd_unmounted">Yaddaş kartına giriş yoxdur.
@@ -3173,6 +3175,10 @@
     <string name="osmand_parking_position_name">Parkinq yeri</string>
     <string name="context_menu_item_delete_parking_point">Parkinq işarəsini sil</string>
     <string name="context_menu_item_add_parking_point">Parkinq məkanı olaraq işarələ</string>
+    <string name="add_photos_descr">OsmAnd bir neçə mənbədən şəkilləri göstərir:
+\nOpenPlaceReviews - POI şəkilləri;
+\nMapillary - küçə səviyyəsində şəkillər;
+\nİnternet / Vikimedia - OpenStreetMap məlumatlarına görə POI şəkilləri.</string>
     <string name="street_level_imagery">Küçə səviyyəsində şəkillər</string>
     <string name="parking_positions">Parkinq mövqeləri</string>
     <string name="osmand_parking_time_limit_title">Parkinq vaxtı limitini təyin edin</string>

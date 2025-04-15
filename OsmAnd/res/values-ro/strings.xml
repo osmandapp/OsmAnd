@@ -3202,6 +3202,9 @@
     <string name="icon_group_service">Servicii</string>
     <string name="icon_group_symbols">Simboluri</string>
     <string name="hillshade_slope_contour_lines">Linii de contur / Relief umbrit / Pantă</string>
+    <string name="open_place_reviews_plugin_description">Contribuiți la proiectul OpenPlaceReviews, cum ar fi fotografii, recenzii sau linkuri pentru locuri publice, cum ar fi restaurante, hoteluri sau muzee.
+\n
+\nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru %1$s.</string>
     <string name="use_volume_buttons_as_zoom_descr">Controlați nivelul de zoom al hărții cu ajutorul butoanelor de volum de pe dispozitiv.</string>
     <string name="quick_action_remove_next_destination_descr">Șterge următoarea destinație de pe traseu. Dacă aceasta este destinația finală, navigația se va opri.</string>
     <string name="plugin_wikipedia_description">Obțineți informații despre punctele de interes de pe Wikipedia, un ghid offline de buzunar care conține articole despre locuri și destinații.</string>
@@ -3299,6 +3302,8 @@
     <string name="osm_edit_comment_note">Comentează la nota OSM</string>
     <string name="osm_login_descr">Conectați-vă folosind metoda OAuth sau numele de utilizator și parola OSM.</string>
     <string name="shared_string_add_photo">Adaugă fotografie</string>
+    <string name="register_on_openplacereviews">Înregistrați-vă pe
+\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Crează cont nou</string>
     <string name="register_opr_have_account">Am deja un cont</string>
     <string name="shared_string_search_history">Istoric de căutări</string>
@@ -3317,6 +3322,10 @@
     <string name="add_to_mapillary">Adaugă la Mapillary</string>
     <string name="use_dev_url_descr">Comută la utilizarea dev.openstreetmap.org în loc de openstreetmap.org pentru a testa încărcarea de OSM Note / POI / GPX.</string>
     <string name="use_dev_url">Folosește dev.openstreetmap.org</string>
+    <string name="add_photos_descr">OsmAnd prezintă fotografii din mai multe surse:
+\nOpenPlaceReviews - fotografii POI;
+\nMapillary - imagini la nivel de stradă;
+\nWeb / Wikimedia - fotografii POI conform datelor OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Aeronave ușoare</string>
     <string name="plan_route_split_before">Împarte înainte de</string>
@@ -5726,6 +5735,10 @@
 \nConsumul de energie (mAh): %2$s</string>
     <string name="quick_action_audio_note">Notă audio</string>
     <string name="quick_action_first_intermediate">Primul intermediar</string>
+    <string name="rendering_avg_info_description">FPS prin ultimele 1k cadre: %1$s
+\nCPU de bază: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
     <string name="quick_action_video_note">Notă video</string>
     <string name="quick_action_map_overlay">Suprapunere</string>
     <string name="quick_action_map_style">Stil hartă</string>
