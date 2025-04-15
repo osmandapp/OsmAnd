@@ -4518,14 +4518,6 @@
     <string name="poi_healthcare_speciality_covid19">COVID19</string>
     <string name="poi_healthcare_speciality_blood_check">Testiranje krvi</string>
     <string name="poi_healthcare_speciality_intensive">Intezivna nega</string>
-    <string name="poi_osmand_access_no">Pristup: ne</string>
-    <string name="poi_osmand_access_private">Pristup: privatni</string>
-    <string name="poi_osmand_motor_vehicle_private">Pristup automobilom: privatni</string>
-    <string name="poi_osmand_bicycle_private">Pristup biciklom: privatan</string>
-    <string name="poi_osmand_motorcar_no">Pristup automobilom: ne</string>
-    <string name="poi_osmand_motorcycle_private">Prilaz motociklom: privatan</string>
-    <string name="poi_healthcare_speciality_ayurveda">Ajurveda</string>
-    <string name="poi_healthcare_speciality_reflexology">Refleksologija</string>
     <string name="poi_healthcare_speciality_applied_kinesiology">Primenjena kineziologija</string>
     <string name="poi_healthcare_speciality_aromatherapy">Aromaterapija</string>
     <string name="poi_healthcare_speciality_hydrotherapy">Hidroterapija</string>
@@ -4626,8 +4618,6 @@
     <string name="poi_healthcare_speciality_infectious_diseases">Zarazne bolesti</string>
     <string name="poi_dressing_room">Svlačionica</string>
     <string name="poi_healthcare_speciality_community">Zajednica</string>
-    <string name="poi_osmand_bicycle_no">Prilaz biciklom: ne</string>
-    <string name="poi_healthcare_speciality_anthroposophical">Antropozofija</string>
     <string name="poi_healthcare_speciality_body">Telesna psihoterapija</string>
     <string name="poi_healthcare_speciality_systemic">Sistemska porodična terapija</string>
     <string name="poi_healthcare_speciality_sophrologist">Sofrologija</string>
@@ -4663,12 +4653,6 @@
     <string name="poi_dry_cleaning_yes">Da</string>
     <string name="poi_sinkhole_doline">Vrtača: dolina</string>
     <string name="poi_sinkhole_ponor">Vrtača: ponor</string>
-    <string name="poi_osmand_motor_vehicle_no">Pristup za vozila: ne</string>
-    <string name="poi_osmand_vehicle_private">Pristup vozilu: privatni</string>
-    <string name="poi_osmand_vehicle_no">Pristup vozilu: ne</string>
-    <string name="poi_osmand_motorcar_private">Pristup automobilom: privatan</string>
-    <string name="poi_osmand_motorcycle_no">Pristup motociklima: ne</string>
-    <string name="poi_board_type_sport">Sport</string>
     <string name="poi_board_type_welcome_sign">Znak dobrodošlice</string>
     <string name="poi_payment_american_express_contactless_yes">Beskontaktni American Express (AMEX)</string>
     <string name="poi_payment_mastercard_contactless_no">Beskontaktna MasterCard nije prihvaćena</string>
@@ -4722,8 +4706,6 @@
     <string name="poi_healthcare_speciality_massage_therapy">Terapija masažom</string>
     <string name="poi_healthcare_speciality_vascular_surgery">Vaskularna hirurgija</string>
     <string name="poi_healthcare_speciality_fertility">Oplodnja</string>
-    <string name="poi_osmand_foot_no">Pešački pristup: nema</string>
-    <string name="poi_osmand_foot_private">Pešački pristup: privatan</string>
     <string name="poi_healthcare_speciality_hypnosis">Hipnoza</string>
     <string name="poi_healthcare_speciality_shiatsu">Šijacu</string>
     <string name="poi_healthcare_speciality_neonatology">Neonatologija</string>
@@ -4881,8 +4863,6 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunel zabranjen za bicikliste</string>
     <string name="poi_route_article">Članci o putovanjima</string>
     <string name="poi_route_article_point">Tačke na putovanjima</string>
-    <string name="poi_route_track">Druge rute</string>
-    <string name="poi_route_track_point">Tačke rute</string>
     <string name="poi_name_etymology">Etimologija imena</string>
     <string name="poi_name_left">Naziv leve strane</string>
     <string name="poi_name_right">Naziv desne strane</string>

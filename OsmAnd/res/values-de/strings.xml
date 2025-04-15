@@ -3664,18 +3664,12 @@
     <string name="osm_edit_comment_note">OSM-Hinweis kommentieren</string>
     <string name="osm_login_descr">Melden Sie sich mit der OAuth-Methode oder mit Ihrem OSM-Benutzernamen und -Passwort an.</string>
     <string name="shared_string_add_photo">Foto hinzufügen</string>
-    <string name="register_on_openplacereviews">Registrieren bei
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Neues Konto erstellen</string>
     <string name="register_opr_have_account">Ich habe bereits ein Konto</string>
     <string name="shared_string_search_history">Suchverlauf</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorboot</string>
     <string name="add_to_mapillary">Zu Mapillary hinzufügen</string>
-    <string name="add_photos_descr">OsmAnd zeigt Fotos aus verschiedenen Quellen:
-\nOpenPlaceReviews - POI Fotos;
-\nMapillary - Bilder auf Straßenebene;
-\nWeb / Wikimedia - POI-Fotos gemäß OpenStreetMap-Daten.</string>
     <string name="shared_string_resources">Quellen</string>
     <string name="approximate_file_size">Ungefähre Dateigröße</string>
     <string name="select_data_to_export">Wählen Sie die Daten aus, die in die Datei exportiert werden sollen.</string>
@@ -3769,9 +3763,6 @@
     <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
     <string name="toast_select_edits_for_upload">Bearbeitungen zum Hochladen auswählen</string>
     <string name="hillshade_slope_contour_lines">Höhenlinien / Relief / Hangneigung</string>
-    <string name="open_place_reviews_plugin_description">Tragen Sie zum OpenPlaceReviews-Projekt bei, z. B. mit Fotos, Bewertungen oder Links für öffentliche Orte wie Restaurants, Hotels oder Museen.
-\n
-\nAuf unserer Website %1$s finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
     <string name="activity_type_water_name">Wasser</string>
     <string name="activity_type_winter_name">Winter</string>
     <string name="activity_type_snowmobile_name">Schneemobil</string>
@@ -5411,10 +5402,6 @@
 \nEnergieverbrauch (mAh): %2$s</string>
     <string name="rendering_avg_info">Rendering-Statistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
     <string name="energy_avg_info">Energiestatistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
-    <string name="rendering_avg_info_description">FPS der letzten 1000 Frames: %1$s
-\nCPU-Basis: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Kartenorientierung wählen</string>
     <string name="rendering_value_pale_name">Blass</string>
     <string name="shared_string_all_icons">Alle Icons</string>

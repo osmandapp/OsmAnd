@@ -3545,18 +3545,12 @@
     <string name="osm_edit_comment_note">Напомена белешке ОСМ-а</string>
     <string name="osm_login_descr">Пријавите се користећи безбедан начин OАутх или користити своје корисничко име и лозинку.</string>
     <string name="shared_string_add_photo">Додај фотографију</string>
-    <string name="register_on_openplacereviews">Упишите се на
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Направите нови налог</string>
     <string name="register_opr_have_account">Већ имам</string>
     <string name="shared_string_search_history">Претрага историје</string>
     <string name="app_mode_kayak">Кајак</string>
     <string name="app_mode_motorboat">Моторни чамац</string>
     <string name="add_to_mapillary">Додај у Мапилари</string>
-    <string name="add_photos_descr">ОсмАнд приказује фотографије из неколико извора:
-\nOpenPlaceReviews - фотографије тачака занимања;
-\nMapillary - слике улица;
-\nВеб / Викимедија - фотографије тачака занимања наведене у подацима Опенстритмапа.</string>
     <string name="shared_string_resources">Сировине</string>
     <string name="approximate_file_size">Приближна величина датотеке</string>
     <string name="select_data_to_export">Изаберите податке за извоз у датотеку.</string>
@@ -3801,9 +3795,6 @@
     <string name="announce_when_exceeded">Објави када се премаши</string>
     <string name="user_points">Кориснички бодови</string>
     <string name="output">Излаз</string>
-    <string name="open_place_reviews_plugin_description">Помозите пројекту ОпенПлацеРевиевс, преко слика, чланака, или веза ка јавним местима као што су гостионе, одмаралишта, музеји.
-\n
-\nПронађите упутства како да учествујете на страницама %1$s.</string>
     <string name="release_4_0_beta">• Додата је могућност преузимања изохипси у стопама\n\n• Планирајте положене путање: додати су листови за прелазак између тачака или слика\n\n• Освежавања ОсмАнда уживо су премештена у \"Преузимања &gt; Освежења\"\n\n • Путање се сада могу обојити по висини, брзини или нагибу.\n\n • Додата је могућност измене изгледа линија трагова\n\n • Освежен је прозорчић \"Снимање путовања\"</string>
     <string name="copy_address">Копирај адресу</string>
     <string name="voice_prompts_timetable">Времена гласовних навођења</string>
@@ -5371,10 +5362,6 @@
     <string name="energy_avg_info_description">Ниво батерије у минути: %1$s
 \nПотрошња енергије (mAh): %2$s</string>
     <string name="rendering_avg_info">Статистика приказивања (просечно 1 / 5/ 15 минута)</string>
-    <string name="rendering_avg_info_description">FPS према последњих 1k кадрова: %1$s
-\nCPU базично: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Енергетска статистика (просек 1 / 5 / 15 минута)</string>
     <string name="choose_map_orientation">Одаберите усмерење карте</string>
     <string name="navigation_position_icon">Сличица положаја навођења</string>

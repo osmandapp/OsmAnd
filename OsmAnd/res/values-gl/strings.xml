@@ -3805,8 +3805,6 @@
     <string name="osm_edit_comment_note">Comentar nota do OSM</string>
     <string name="osm_login_descr">Podes iniciar a sesión co método seguro do OAuth ou emprega o nome de usuario e contrasinal.</string>
     <string name="shared_string_add_photo">Engadir imaxe</string>
-    <string name="register_on_openplacereviews">Rexistrarse no
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Crear nova conta</string>
     <string name="register_opr_have_account">Xa teño unha conta</string>
     <string name="shared_string_search_history">Historial de procura</string>
@@ -3825,10 +3823,6 @@
     <string name="add_to_mapillary">Engadir ó Mapillary</string>
     <string name="use_dev_url_descr">Mudar á versión para desenvolvedores dev.openstreetmap.org no canto do openstreetmap.org para probar a carga de PDI, notas do OSM e ficheiros GPX.</string>
     <string name="use_dev_url">Empregar dev.openstreetmap.org</string>
-    <string name="add_photos_descr">O OsmAnd amosa imaxes de diferentes fontes:
-\nOpenPlaceReviews - imaxes POI;
-\nMapillary - maxes a nivel de rúa;
-\nWeb / Wikimedia - imaxes POI segundo datos do OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemán casual</string>
     <string name="app_mode_light_aircraft">Avión lixeiro</string>
@@ -3922,11 +3916,6 @@
     <string name="uploaded_count">Subíronse %1$d de %2$d</string>
     <string name="toast_select_edits_for_upload">Seleccionar edicións para subir</string>
     <string name="hillshade_slope_contour_lines">Sombras do relevo / Pendentes / Curvas de nivel</string>
-    <string name="open_place_reviews_plugin_description">O OpenPlaceReviews é un proxecto impulsado pola comunidade sobre lugares públicos como restaurantes, hoteis, museos, puntos de referencia. Recolle toda a información pública sobre eles como imaxes, recesións, ligazóns a outros servizos como OpenStreetMap e Wikipedia.
-\n
-\nTodos os datos do OpenPlaceReviews son abertos e están dispoñíbeis para todos: http://openplacereviews.org/data.
-\n
-\nPodes ler máis en: https://openplacereviews.org</string>
     <string name="snap_to_road_descr">A icona da posición actual será axustada á ruta de navegación actual</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas as rexións</string>

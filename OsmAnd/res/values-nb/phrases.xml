@@ -1954,15 +1954,9 @@
     <string name="poi_route_track_point">Andre rutepunkter</string>
     <string name="poi_activities_bicycle">Sykling</string>
     <string name="poi_activities_pedestrian">Gåing</string>
-    <string name="poi_route_track">Andre ruter</string>
-    <string name="poi_activities_skiing">Vintersport</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Tunnel forbudt for fotgjengere</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunnel forbudt for syklister</string>
-    <string name="poi_activities_mountain_bike">Terrengsykling</string>
-    <string name="poi_activities_kayak">Vannsport</string>
     <string name="poi_activities_running">Løping</string>
-    <string name="poi_activities_trekking">Fotturer</string>
-    <string name="poi_route_activity_type_e_mountain_bike">El-terrengsykkel</string>
     <string name="poi_route_activity_type_gravel_biking">Grusveisykling</string>
     <string name="poi_cafe_yes">Ja</string>
     <string name="poi_route_activity_type_e_biking">El-sykling</string>
