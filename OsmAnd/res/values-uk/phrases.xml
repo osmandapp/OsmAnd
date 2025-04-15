@@ -1711,7 +1711,7 @@
     <string name="poi_aerialway_length">Протяжність</string>
     <string name="poi_health_facility_type_laboratory">Вид медустанови: медична лабораторія</string>
     <string name="poi_payment_maestro_no">Картки Maestro не приймаються</string>
-    <string name="poi_healthcare_speciality_general">Сімейна медицина</string>
+    <string name="poi_healthcare_speciality_general">Лікар загальної практики</string>
     <string name="poi_health_facility_type_therapy">Вид медустанови: терапія</string>
     <string name="poi_payment_american_express_yes">American Express (AMEX)</string>
     <string name="poi_healthcare_speciality_ophthalmology">Офтальмологія</string>
@@ -2081,7 +2081,7 @@
     <string name="poi_valley_balka">Балка</string>
     <string name="poi_hygrometer_yes">Гігрометр</string>
     <string name="poi_bridge_structure_simple_suspension">Конструкція моста: простий підвісний</string>
-    <string name="poi_healthcare_speciality_physiatry">Реабілітація</string>
+    <string name="poi_healthcare_speciality_physiatry">Фізична медицина та реабілітація</string>
     <string name="poi_ventilation_shaft">Вентиляційна шахта</string>
     <string name="poi_hygrometer_no">Гігрометр: відсутній</string>
     <string name="poi_payment_coinkite_no">Оплата через Coinkite не приймається</string>
@@ -4993,4 +4993,13 @@
     <string name="poi_hazard_additional_yes">Небезпека</string>
     <string name="poi_hazard_additional_slippery_road">Слизька дорога</string>
     <string name="poi_hazard_yes">Небезпека</string>
+    <string name="poi_healthcare_speciality_neonatology">Неонатологія</string>
+    <string name="poi_healthcare_speciality_family_medicine">Сімейна медицина</string>
+    <string name="poi_healthcare_speciality_primary_care">Первинна допомога</string>
+    <string name="poi_healthcare_speciality_rehabilitation">Реабілітація</string>
+    <string name="poi_route_track_point">Точки маршруту</string>
+    <string name="poi_healthcare_speciality_reflexology">Рефлексотерапія</string>
+    <string name="poi_healthcare_speciality_applied_kinesiology">Прикладна кінезіологія</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Охорона здоров\'я за спеціальністю: психотерапевт</string>
+    <string name="poi_healthcare_speciality_tuina">Туїна</string>
 </resources>
