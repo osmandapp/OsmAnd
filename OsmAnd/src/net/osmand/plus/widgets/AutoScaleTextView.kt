@@ -6,10 +6,11 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.Dimension
 import net.osmand.plus.R
+import net.osmand.plus.views.OutlineTextView
 import kotlin.math.min
 
 
-class AutoScaleTextView : androidx.appcompat.widget.AppCompatTextView {
+class AutoScaleTextView : OutlineTextView {
 	constructor(context: Context) : super(context)
 	constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 	constructor(

@@ -368,6 +368,10 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			turnDrawable.updateColors(isNightMode());
 		}
 		turnDrawable.invalidateSelf();
+
+		updateTextOutline(distanceView, textState);
+		updateTextOutline(distanceSubView, textState);
+		updateTextOutline(streetView, textState);
 	}
 
 	protected void updateVerticalWidgetColors(@NonNull TextState textState) {

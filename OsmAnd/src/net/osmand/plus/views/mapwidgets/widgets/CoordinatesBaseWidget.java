@@ -309,6 +309,9 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 		view.setBackgroundResource(textState.widgetBackgroundId);
 		updateInfo(null);
+
+		updateTextOutline(firstCoordinate, textState);
+		updateTextOutline(secondCoordinate, textState);
 	}
 
 	private boolean isLayoutRtl() {
