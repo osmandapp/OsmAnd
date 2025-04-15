@@ -1197,11 +1197,6 @@
     <string name="poi_nwn_ref">Εθνικός κόμβος πεζοπορικού δικτύου</string>
     <string name="poi_rwn_ref">Περιφερειακός κόμβος πεζοπορικού δικτύου</string>
     <string name="poi_lwn_ref">Τοπικός κόμβος πεζοπορικού δικτύου</string>
-    <string name="poi_route_hiking_iwn_poi">Διεθνής πεζοπορική διαδρομή</string>
-    <string name="poi_route_hiking_nwn_poi">Εθνική πεζοπορική διαδρομή</string>
-    <string name="poi_route_hiking_rwn_poi">Περιφερειακή πεζοπορική διαδρομή</string>
-    <string name="poi_route_hiking_lwn_poi">Τοπική πεζοπορική διαδρομή</string>
-    <string name="poi_route_hiking_ref_poi">Παραπομπή πεζοπορικής διαδρομής</string>
     <string name="poi_opening_hours">Ώρες λειτουργίας</string>
     <string name="poi_collection_times">Ώρα συλλογής</string>
     <string name="poi_description">Περιγραφή</string>

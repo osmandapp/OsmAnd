@@ -1736,11 +1736,6 @@
     <string name="poi_nwn_ref">Nacionalni planinarski mrežni čvor</string>
     <string name="poi_rwn_ref">Regionalni planinarski mrežni čvor</string>
     <string name="poi_lwn_ref">Lokalni planinarski mrežni čvor</string>
-    <string name="poi_route_hiking_iwn_poi">Međunarodna planinarska ruta</string>
-    <string name="poi_route_hiking_nwn_poi">Nacionalna planinarska ruta</string>
-    <string name="poi_route_hiking_rwn_poi">Regionalna planinarska ruta</string>
-    <string name="poi_route_hiking_lwn_poi">Lokalna planinarska ruta</string>
-    <string name="poi_route_hiking_ref_poi">Referenca planinarske rute</string>
     <string name="poi_collection_times">Kolekcioni periodi</string>
     <string name="poi_access_permissive">Dozvoljen pristup</string>
     <string name="poi_content_silage">Sadržaj: silaža</string>

@@ -842,11 +842,6 @@
     <string name="poi_nwn_ref">Węzeł krajowego szlaku turystycznego</string>
     <string name="poi_rwn_ref">Węzeł regionalnego szlaku turystycznego</string>
     <string name="poi_lwn_ref">Węzeł lokalnego szlaku turystycznego</string>
-    <string name="poi_route_hiking_iwn_poi">Międzynarodowy szlak turystyczny</string>
-    <string name="poi_route_hiking_nwn_poi">Krajowy szlak turystyczny</string>
-    <string name="poi_route_hiking_rwn_poi">Regionalny szlak turystyczny</string>
-    <string name="poi_route_hiking_lwn_poi">Lokalny szlak turystyczny</string>
-    <string name="poi_route_hiking_ref_poi">Zestawienie szlaków turystycznych</string>
     <string name="poi_opening_hours">Godziny otwarcia</string>
     <string name="poi_collection_times">Godziny odbioru przesyłek</string>
     <string name="poi_description">Opis</string>

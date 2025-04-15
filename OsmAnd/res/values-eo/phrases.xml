@@ -1035,11 +1035,6 @@
     <string name="poi_nwn_ref">Punkto de piedirada vojo ŝtata</string>
     <string name="poi_rwn_ref">Punkto de piedirada vojo regiona</string>
     <string name="poi_lwn_ref">Punkto de piedirada vojo loka</string>
-    <string name="poi_route_hiking_iwn_poi">Piedirada vojo interŝtata</string>
-    <string name="poi_route_hiking_nwn_poi">Piedirada vojo ŝtata</string>
-    <string name="poi_route_hiking_rwn_poi">Piedirada vojo regiona</string>
-    <string name="poi_route_hiking_lwn_poi">Piedirada vojo loka</string>
-    <string name="poi_route_hiking_ref_poi">Identigilo de piedirada vojo</string>
     <string name="poi_collection_times">Repreno je</string>
     <string name="poi_phone">Telefono</string>
     <string name="poi_website">Retejo</string>

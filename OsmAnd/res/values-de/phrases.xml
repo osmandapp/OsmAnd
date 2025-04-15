@@ -846,11 +846,6 @@
     <string name="poi_nwn_ref">Nationaler Wanderwegenetz-Knoten</string>
     <string name="poi_rwn_ref">Regionaler Wanderwegenetz-Knoten</string>
     <string name="poi_lwn_ref">Lokaler Wanderwegenetz-Knoten</string>
-    <string name="poi_route_hiking_iwn_poi">Internationaler Wanderweg</string>
-    <string name="poi_route_hiking_nwn_poi">Nationaler Wanderweg</string>
-    <string name="poi_route_hiking_rwn_poi">Regionaler Wanderweg</string>
-    <string name="poi_route_hiking_lwn_poi">Örtlicher Wanderweg</string>
-    <string name="poi_route_hiking_ref_poi">Wanderweghinweis</string>
     <string name="poi_collection_times">Leerungszeiten</string>
     <string name="poi_service_times">Betriebszeiten</string>
     <string name="poi_abandoned_poi">Verlassenes Objekt</string>

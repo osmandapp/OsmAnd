@@ -1154,11 +1154,6 @@
     <string name="poi_phone">Telefon</string>
     <string name="poi_description">Descriere</string>
     <string name="poi_collection_times">Timpii de colectare</string>
-    <string name="poi_route_hiking_ref_poi">Referință traseu de drumeție</string>
-    <string name="poi_route_hiking_lwn_poi">Traseu local de drumeție</string>
-    <string name="poi_route_hiking_rwn_poi">Traseu regional de drumeție</string>
-    <string name="poi_route_hiking_nwn_poi">Traseu național de drumeție</string>
-    <string name="poi_route_hiking_iwn_poi">Traseu internațional de drumeție</string>
     <string name="poi_lwn_ref">Nod de rețea de drumeție locală</string>
     <string name="poi_rwn_ref">Nod al rețelei regionale de drumeții</string>
     <string name="poi_nwn_ref">Nod al rețelei naționale de drumeții</string>

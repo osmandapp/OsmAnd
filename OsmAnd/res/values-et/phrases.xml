@@ -1094,11 +1094,6 @@
     <string name="poi_enforcement_access">Jõustamine: ligipääs</string>
     <string name="poi_enforcement_toll">Jõustamine: teemaks</string>
     <string name="poi_abandoned_poi">Mahajäetud objekt</string>
-    <string name="poi_route_hiking_iwn_poi">Rahvusvaheline matkatee</string>
-    <string name="poi_route_hiking_nwn_poi">Riiklik matkatee</string>
-    <string name="poi_route_hiking_rwn_poi">Piirkondlik matkatee</string>
-    <string name="poi_route_hiking_lwn_poi">Kohalik matkatee</string>
-    <string name="poi_route_hiking_ref_poi">Matkatee viide</string>
     <string name="poi_iwn_ref">Rahvusvahelise matkavõrgu sõlm</string>
     <string name="poi_nwn_ref">Riikliku matkavõrgu sõlm</string>
     <string name="poi_rwn_ref">Piirkondliku matkavõrgu sõlm</string>

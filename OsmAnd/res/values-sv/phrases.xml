@@ -1119,10 +1119,6 @@
     <string name="poi_nwn_ref">Nationell vandringsnätverksnod</string>
     <string name="poi_rwn_ref">Regionell vandringsnätverksnod</string>
     <string name="poi_lwn_ref">Lokal vandringsnätverksnod</string>
-    <string name="poi_route_hiking_iwn_poi">Internationell vandringsrutt</string>
-    <string name="poi_route_hiking_nwn_poi">Nationell vandringsrutt</string>
-    <string name="poi_route_hiking_rwn_poi">Regional vandringsrutt</string>
-    <string name="poi_route_hiking_lwn_poi">Lokal vandringsrutt</string>
     <string name="poi_opening_hours">Öppettider</string>
     <string name="poi_collection_times">Hämtningstid</string>
     <string name="poi_description">Beskrivning</string>
@@ -1859,7 +1855,6 @@
     <string name="poi_sally_port">Sally port</string>
     <string name="poi_swing_gate">Svängport</string>
     <string name="poi_kent_carriage_gap">Kent carriage gap</string>
-    <string name="poi_route_hiking_ref_poi">Vandringsruttreferens</string>
     <string name="poi_intermittent">Återkommande</string>
     <string name="poi_payment_e_zpass_yes">E‑ZPass</string>
     <string name="poi_shelter_type_lean_to">Vindskydd</string>

@@ -934,10 +934,6 @@
     <string name="poi_recycling_animal_waste">Déchets animaliers</string>
     <string name="poi_recycling_furniture">Meubles</string>
     <string name="poi_recycling_diapers">Couches</string>
-    <string name="poi_route_hiking_iwn_poi">Chemin de randonnée international</string>
-    <string name="poi_route_hiking_nwn_poi">Chemin de randonnée national</string>
-    <string name="poi_route_hiking_rwn_poi">Chemin de randonnée régional</string>
-    <string name="poi_route_hiking_lwn_poi">Chemin de randonnée local</string>
     <string name="poi_fee_no">Non</string>
     <string name="poi_supervised_yes">Surveillé</string>
     <string name="poi_supervised_no">Non surveillé</string>
@@ -1015,7 +1011,6 @@
     <string name="poi_denomination_romanian_orthodox">Orthodoxe roumain</string>
     <string name="poi_denomination_maronite">Maronite</string>
     <string name="poi_military_office">Bureau militaire</string>
-    <string name="poi_route_hiking_ref_poi">Légende des chemins de randonnée</string>
     <string name="poi_height">Hauteur</string>
     <string name="poi_ele">Hauteur au dessus du niveau de la mer</string>
     <string name="poi_start_date">Date de début</string>

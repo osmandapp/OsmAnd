@@ -1047,10 +1047,6 @@
     <string name="poi_wiki_lang_nn">Norská nynorská wiki</string>
     <string name="poi_wiki_lang_te">Telugská wiki</string>
     <string name="poi_wiki_lang_vo">Volapükská wiki</string>
-    <string name="poi_route_hiking_iwn_poi">Mezinárodní pěší trasa</string>
-    <string name="poi_route_hiking_nwn_poi">Národní pěší trasa</string>
-    <string name="poi_route_hiking_rwn_poi">Regionální pěší trasa</string>
-    <string name="poi_route_hiking_lwn_poi">Lokální pěší trasa</string>
     <string name="poi_collection_times">Čas vybírání pošty</string>
     <string name="poi_supervised_yes">Střežené</string>
     <string name="poi_supervised_no">Nestřežené</string>
@@ -1207,7 +1203,6 @@
     <string name="poi_denomination_coptic_orthodox">Koptský pravoslavný</string>
     <string name="poi_internet_access_no">Přístup k internetu: ne</string>
     <string name="poi_kent_carriage_gap">Kent carriage gap (překážka bránící vjezdu automobilů)</string>
-    <string name="poi_route_hiking_ref_poi">Rozcestník turistických tras</string>
     <string name="poi_wheelchair_no">Ne</string>
     <string name="poi_wheelchair_limited">Omezeně</string>
     <string name="poi_content_slurry">Obsah: močůvka</string>

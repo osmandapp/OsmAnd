@@ -1193,11 +1193,6 @@
     <string name="poi_nwn_ref">Вузол національної мережі пішого туризму</string>
     <string name="poi_rwn_ref">Вузол регіональної мережі пішого туризму</string>
     <string name="poi_lwn_ref">Вузол місцевої мережі пішого туризму</string>
-    <string name="poi_route_hiking_iwn_poi">Міжнародний маршрут пішого туризму</string>
-    <string name="poi_route_hiking_nwn_poi">Національний маршрут пішого туризму</string>
-    <string name="poi_route_hiking_rwn_poi">Регіональний маршрут пішого туризму</string>
-    <string name="poi_route_hiking_lwn_poi">Місцевий маршрут пішого туризму</string>
-    <string name="poi_route_hiking_ref_poi">Позначення маршруту пішого туризму</string>
     <string name="poi_opening_hours">Робочі години</string>
     <string name="poi_collection_times">Години виймання (посилок)</string>
     <string name="poi_phone">Телефон</string>

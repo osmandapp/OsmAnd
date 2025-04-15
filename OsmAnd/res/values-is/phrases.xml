@@ -2677,11 +2677,6 @@
     <string name="poi_nwn_ref">Hnútur í landsbundnu gönguleiðaneti</string>
     <string name="poi_rwn_ref">Hnútur í svæðisbundnu gönguleiðaneti</string>
     <string name="poi_lwn_ref">Hnútur í staðbundnu gönguleiðaneti</string>
-    <string name="poi_route_hiking_iwn_poi">Alþjóðleg gönguleið</string>
-    <string name="poi_route_hiking_nwn_poi">Gönguleið á landsvísu</string>
-    <string name="poi_route_hiking_rwn_poi">Svæðisbundin gönguleið</string>
-    <string name="poi_route_hiking_lwn_poi">Staðbundin gönguleið</string>
-    <string name="poi_route_hiking_ref_poi">Tilvísun gönguleiðar</string>
     <string name="poi_aerialway_summer_access_entry">Aðgangur að sumarlagi: einungis inngangur</string>
     <string name="poi_aerialway_summer_access_exit">Aðgangur að sumarlagi: einungis útgangur</string>
     <string name="poi_aerialway_summer_access_both">Aðgangur að sumarlagi: út- og inngangur</string>
