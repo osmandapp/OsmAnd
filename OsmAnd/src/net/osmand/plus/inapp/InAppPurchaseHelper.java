@@ -507,17 +507,22 @@ public abstract class InAppPurchaseHelper {
 						GET_ACTIVE_SUBSCRIPTIONS_SKU_URL,
 						parameters, "Requesting active subscriptions...", false, false);
 
+				boolean hasToken = false;
 				String userId = ctx.getSettings().BILLING_USER_ID.get();
 				String userToken = ctx.getSettings().BILLING_USER_TOKEN.get();
 				if (!Algorithms.isEmpty(userId) && !Algorithms.isEmpty(userToken)) {
 					parameters.put("userId", userId);
 					parameters.put("userToken", userToken);
-					String deviceId = ctx.getSettings().BACKUP_DEVICE_ID.get();
-					String accessToken = ctx.getSettings().BACKUP_ACCESS_TOKEN.get();
-					if (!Algorithms.isEmpty(deviceId) && !Algorithms.isEmpty(accessToken)) {
-						parameters.put("deviceId", deviceId);
-						parameters.put("accessToken", accessToken);
-					}
+					hasToken = true;
+				}
+				String deviceId = ctx.getSettings().BACKUP_DEVICE_ID.get();
+				String accessToken = ctx.getSettings().BACKUP_ACCESS_TOKEN.get();
+				if (!Algorithms.isEmpty(deviceId) && !Algorithms.isEmpty(accessToken)) {
+					parameters.put("deviceId", deviceId);
+					parameters.put("accessToken", accessToken);
+					hasToken = true;
+				}
+				if (hasToken) {
 					subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, GET_SUBSCRIPTIONS_URL,
 							parameters, "Requesting subscriptions state...", false, false);
 					inappsState = AndroidNetworkUtils.sendRequest(ctx, GET_INAPPS_URL,
