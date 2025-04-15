@@ -1094,11 +1094,6 @@
     <string name="poi_enforcement_access">Jõustamine: ligipääs</string>
     <string name="poi_enforcement_toll">Jõustamine: teemaks</string>
     <string name="poi_abandoned_poi">Mahajäetud objekt</string>
-    <string name="poi_route_hiking_iwn_poi">Rahvusvaheline matkatee</string>
-    <string name="poi_route_hiking_nwn_poi">Riiklik matkatee</string>
-    <string name="poi_route_hiking_rwn_poi">Piirkondlik matkatee</string>
-    <string name="poi_route_hiking_lwn_poi">Kohalik matkatee</string>
-    <string name="poi_route_hiking_ref_poi">Matkatee viide</string>
     <string name="poi_iwn_ref">Rahvusvahelise matkavõrgu sõlm</string>
     <string name="poi_nwn_ref">Riikliku matkavõrgu sõlm</string>
     <string name="poi_rwn_ref">Piirkondliku matkavõrgu sõlm</string>
@@ -4532,6 +4527,9 @@
     <string name="poi_to">Algpunkt</string>
     <string name="poi_from">Sihtpunkt</string>
     <string name="poi_ascent">Tõus</string>
+    <string name="poi_not_pt_shelter_yes">Varjualune (muu, kui ühistranspordi jaoks)</string>
+    <string name="poi_climbing_bolts_no">Ei</string>
+    <string name="poi_roundtrip_no">Edasi-tagasi reis: ei</string>
     <string name="poi_roundtrip_yes">Edasi-tagasi reis: jah</string>
     <string name="poi_direction">Suund</string>
     <string name="poi_descent">Laskumine</string>
@@ -4840,6 +4838,7 @@
     <string name="poi_padus_category_designation">Kategooria: määramine</string>
     <string name="poi_padus_category_easement">Kategooria: servituut</string>
     <string name="poi_route_track_point">Teekonnapunktid</string>
+    <string name="poi_payment_parkster_no">Parksteri teenus pole kasutatav</string>
     <string name="poi_payment_parkster_yes">Parkster</string>
     <string name="poi_payment_parco_no">Parco teenus pole kasutatav</string>
     <string name="poi_payment_parco_yes">Parco</string>

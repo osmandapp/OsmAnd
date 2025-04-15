@@ -1012,11 +1012,6 @@
     <string name="poi_nwn_ref">Nationaal wandelknooppunt</string>
     <string name="poi_rwn_ref">Regionaal wandelknooppunt</string>
     <string name="poi_lwn_ref">Lokaal wandelknooppunt</string>
-    <string name="poi_route_hiking_iwn_poi">Internationale wandelroute</string>
-    <string name="poi_route_hiking_nwn_poi">Nationale wandelroute</string>
-    <string name="poi_route_hiking_rwn_poi">Regionale wandelroute</string>
-    <string name="poi_route_hiking_lwn_poi">Lokale wandelroute</string>
-    <string name="poi_route_hiking_ref_poi">Wandelroutenummer</string>
     <string name="poi_opening_hours">Openingstijden</string>
     <string name="poi_collection_times">Lichtingstijden</string>
     <string name="poi_description">Omschrijving</string>

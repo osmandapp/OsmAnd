@@ -1948,11 +1948,6 @@
     <string name="poi_swing_gate">Barreira xiratoria</string>
     <string name="poi_turnstile">Torno</string>
     <string name="poi_kent_carriage_gap">Paso para carruaxes</string>
-    <string name="poi_route_hiking_iwn_poi">Roteiro internacional de sendeirismo</string>
-    <string name="poi_route_hiking_nwn_poi">Roteiro nacional de sendeirismo</string>
-    <string name="poi_route_hiking_rwn_poi">Roteiro rexional de sendeirismo</string>
-    <string name="poi_route_hiking_lwn_poi">Roteiro local de sendeirismo</string>
-    <string name="poi_route_hiking_ref_poi">Referencia do roteiro de sendeirismo</string>
     <string name="poi_wholesale">Venda maiorista</string>
     <string name="poi_content_slurry">Contido: xurro</string>
     <string name="poi_content_sewage">Contido: augas residuais</string>

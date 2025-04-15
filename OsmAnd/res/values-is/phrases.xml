@@ -2677,11 +2677,6 @@
     <string name="poi_nwn_ref">Hnútur í landsbundnu gönguleiðaneti</string>
     <string name="poi_rwn_ref">Hnútur í svæðisbundnu gönguleiðaneti</string>
     <string name="poi_lwn_ref">Hnútur í staðbundnu gönguleiðaneti</string>
-    <string name="poi_route_hiking_iwn_poi">Alþjóðleg gönguleið</string>
-    <string name="poi_route_hiking_nwn_poi">Gönguleið á landsvísu</string>
-    <string name="poi_route_hiking_rwn_poi">Svæðisbundin gönguleið</string>
-    <string name="poi_route_hiking_lwn_poi">Staðbundin gönguleið</string>
-    <string name="poi_route_hiking_ref_poi">Tilvísun gönguleiðar</string>
     <string name="poi_aerialway_summer_access_entry">Aðgangur að sumarlagi: einungis inngangur</string>
     <string name="poi_aerialway_summer_access_exit">Aðgangur að sumarlagi: einungis útgangur</string>
     <string name="poi_aerialway_summer_access_both">Aðgangur að sumarlagi: út- og inngangur</string>
@@ -4631,6 +4626,8 @@
     <string name="poi_socket_typee_output">Rafmagnsinnstunga: Type E: úttak</string>
     <string name="poi_vending_machine_fuel_filter">Sjálfvirkar eldsneytisdælur;Eldsneytissjálfsali</string>
     <string name="poi_socket_typee_yes">Tegund E</string>
+    <string name="poi_healthcare_speciality_abortion">Þungunarrof</string>
+    <string name="poi_healthcare_speciality_autism">Einhverfa</string>
     <string name="poi_from">Frá</string>
     <string name="poi_to">Til</string>
     <string name="poi_state_proposed">Staða: áætlað</string>
@@ -4645,6 +4642,11 @@
     <string name="poi_padus_manager_fullname">Stjórnandi</string>
     <string name="poi_padus_designation_type_fullname">Tegund tilgangs</string>
     <string name="poi_padus_public_access_closed">Aðgangur: lokað</string>
+    <string name="poi_healthcare_speciality_clinic">Heilsutengt sérsvið: klínik</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Heilsutengt sérsvið: sálmeðferðarfræðingur</string>
+    <string name="poi_healthcare_speciality_laboratory">Heilsutengt sérsvið: rannsóknastofa</string>
+    <string name="poi_healthcare_speciality_ayurveda">Ayurveda</string>
+    <string name="poi_healthcare_speciality_hypnosis">Dáleiðsla</string>
     <string name="poi_healthcare_speciality_psychology">Sálfræði</string>
     <string name="poi_healthcare_speciality_palliative">Líknarmeðferð</string>
     <string name="poi_healthcare_speciality_diabetology">Sykursýkilækningar</string>
@@ -4652,6 +4654,9 @@
     <string name="poi_healthcare_speciality_first_aid_training">Þjálfun í fyrstu hjálp</string>
     <string name="poi_healthcare_speciality_sleep">Svefn</string>
     <string name="poi_healthcare_speciality_venereology">Kynsjúkdómalækningar</string>
+    <string name="poi_dressing_room">Búningsherbergi</string>
+    <string name="poi_healthcare_speciality_shiatsu">Shiatsu</string>
+    <string name="poi_healthcare_speciality_tuina">Tuina</string>
     <string name="poi_healthcare_speciality_unani">Unani</string>
     <string name="poi_healthcare_speciality_rehabilitation">Endurhæfing</string>
     <string name="poi_healthcare_speciality_nutrition">Næring</string>
@@ -4676,6 +4681,10 @@
     <string name="poi_padus_public_access_open">Aðgangur: opið</string>
     <string name="poi_padus_public_access_restricted">Aðgangur: takmarkaður</string>
     <string name="poi_padus_public_access_unknown">Aðgangur: óþekkt</string>
+    <string name="poi_checkpoint_cycling">Eftirlitsstöð á hjólaleið</string>
+    <string name="poi_healthcare_speciality_reflexology">Svæðanudd</string>
+    <string name="poi_healthcare_speciality_anthroposophical">Mannspeki</string>
+    <string name="poi_healthcare_speciality_aromatherapy">Ilmkjarnameðferð</string>
     <string name="poi_healthcare_speciality_hydrotherapy">Vatnsþjálfun</string>
     <string name="poi_healthcare_speciality_neonatology">Fyrirburalækningar</string>
     <string name="poi_emergency_bay">Neyðarútskot</string>
@@ -4747,6 +4756,7 @@
     <string name="poi_us_maps_recreation_area_activity_description">Lýsing á afþreyingu</string>
     <string name="poi_us_maps_recreation_area_accessibility_info">Upplýsingar um aðgengi</string>
     <string name="poi_padus_local_manager">Staðarstjóri</string>
+    <string name="poi_us_maps_recreation_area_activity_campground_camping">Tjöldun á tjaldsvæði</string>
     <string name="poi_us_maps_recreation_area_activity_camping_and_cabins">Tjaldstæði og smáhýsi</string>
     <string name="poi_us_maps_recreation_area_activity_caving">Hellaskoðun</string>
     <string name="poi_us_maps_recreation_area_activity_day_hiking">Dagsgönguferðir</string>
@@ -4839,6 +4849,7 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Göng bönnuð fyrir hjólandi</string>
     <string name="poi_route_article">Ferðagreinar</string>
     <string name="poi_route_article_point">Punktar ferðar</string>
+    <string name="poi_route_track_point">Punktar í leið</string>
     <string name="poi_name_right">Nafn hægra megin</string>
     <string name="poi_name_etymology">Orðsifjar nafns</string>
     <string name="poi_name_left">Nafn vinstra megin</string>

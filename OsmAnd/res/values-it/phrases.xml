@@ -2131,10 +2131,6 @@
     <string name="poi_nwn_ref">Nodo di rete escursionistica nazionale</string>
     <string name="poi_rwn_ref">Nodo di rete escursionistica regionale</string>
     <string name="poi_lwn_ref">Nodo di rete escursionistica locale</string>
-    <string name="poi_route_hiking_iwn_poi">Percorso escursionistico internazionale</string>
-    <string name="poi_route_hiking_nwn_poi">Percorso escursionistico nazionale</string>
-    <string name="poi_route_hiking_rwn_poi">Percorso escursionistico regionale</string>
-    <string name="poi_route_hiking_lwn_poi">Percorso escursionistico locale</string>
     <string name="poi_crossing_unmarked">Senza semaforo</string>
     <string name="poi_genus">Genere</string>
     <string name="poi_taxon">Tassonomia</string>
@@ -2719,7 +2715,6 @@
     <string name="poi_sally_port">Porta militare per sortita</string>
     <string name="poi_swing_gate">Porta a vento</string>
     <string name="poi_kent_carriage_gap">Apertura per carrozze Kent</string>
-    <string name="poi_route_hiking_ref_poi">Riferimento di un itinerario di escursionismo</string>
     <string name="poi_denomination_mennonite">Mennonita</string>
     <string name="poi_denomination_old_believers">Vecchi credenti</string>
     <string name="poi_denomination_scientist">Scientifica</string>

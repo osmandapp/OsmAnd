@@ -1119,10 +1119,6 @@
     <string name="poi_nwn_ref">Nationell vandringsnätverksnod</string>
     <string name="poi_rwn_ref">Regionell vandringsnätverksnod</string>
     <string name="poi_lwn_ref">Lokal vandringsnätverksnod</string>
-    <string name="poi_route_hiking_iwn_poi">Internationell vandringsrutt</string>
-    <string name="poi_route_hiking_nwn_poi">Nationell vandringsrutt</string>
-    <string name="poi_route_hiking_rwn_poi">Regional vandringsrutt</string>
-    <string name="poi_route_hiking_lwn_poi">Lokal vandringsrutt</string>
     <string name="poi_opening_hours">Öppettider</string>
     <string name="poi_collection_times">Hämtningstid</string>
     <string name="poi_description">Beskrivning</string>
@@ -1859,7 +1855,6 @@
     <string name="poi_sally_port">Sally port</string>
     <string name="poi_swing_gate">Svängport</string>
     <string name="poi_kent_carriage_gap">Kent carriage gap</string>
-    <string name="poi_route_hiking_ref_poi">Vandringsruttreferens</string>
     <string name="poi_intermittent">Återkommande</string>
     <string name="poi_payment_e_zpass_yes">E‑ZPass</string>
     <string name="poi_shelter_type_lean_to">Vindskydd</string>
@@ -4586,6 +4581,7 @@
     <string name="poi_us_maps_recreation_area_open_season_end">Säsongsöppet slutar</string>
     <string name="poi_us_maps_recreation_area_activity_description">Aktivitetsbeskrivning</string>
     <string name="poi_us_maps_recreation_area_accessibility_info">Tillgänglighetsupplysningar</string>
+    <string name="poi_healthcare_speciality_palliative">Palliativ</string>
     <string name="poi_healthcare_speciality_diabetology">Diabetes</string>
     <string name="poi_healthcare_speciality_pharmacology">Farmakologi</string>
     <string name="poi_healthcare_speciality_pain_control">Smärthantering</string>
@@ -4611,6 +4607,7 @@
     <string name="poi_state_detour">Tillstånd: omväg</string>
     <string name="poi_state_suspended">Tillstånd: tillfälligt avstängd</string>
     <string name="poi_roundtrip_no">Rundtur: nej</string>
+    <string name="poi_photo_booth">Fotoautomat</string>
     <string name="poi_healthcare_speciality_obstetrics">Obstetrik</string>
     <string name="poi_healthcare_speciality_otorhinolaryngology">Öron, näsa, hals</string>
     <string name="poi_healthcare_speciality_nutrition">Näringslära</string>
@@ -4621,6 +4618,13 @@
     <string name="poi_healthcare_speciality_audiology">Audiologi</string>
     <string name="poi_state_main">Tillstånd: huvudsaklig</string>
     <string name="poi_playground_hopscotch">Hopphage</string>
+    <string name="poi_healthcare_speciality_ayurveda">Ayurveda</string>
+    <string name="poi_healthcare_speciality_psychology">Psykologi</string>
+    <string name="poi_healthcare_speciality_primary_care">Primärvård</string>
+    <string name="poi_healthcare_speciality_family_medicine">Familjemedicin</string>
+    <string name="poi_waste_rubble">Fyllnadsmassor, byggavfall</string>
+    <string name="poi_hang_gliding">Hängflygning</string>
+    <string name="poi_padus_owner_fullname">Ägare</string>
     <string name="poi_padus_public_access_open">Åtkomst: öppen</string>
     <string name="poi_padus_public_access_restricted">Åtkomst: begränsad</string>
     <string name="poi_padus_public_access_unknown">Åtkomst: okänd</string>

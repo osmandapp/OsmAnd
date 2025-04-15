@@ -924,11 +924,6 @@
     <string name="poi_nwn_ref">Ulusal giden ağ düğümü</string>
     <string name="poi_rwn_ref">Bölgesel giden ağ düğümü</string>
     <string name="poi_lwn_ref">Yerel yürüyüş ağ düğümü</string>
-    <string name="poi_route_hiking_iwn_poi">Uluslararası yürüyüş güzergahı</string>
-    <string name="poi_route_hiking_nwn_poi">Ulusal yürüyüş güzergahı</string>
-    <string name="poi_route_hiking_rwn_poi">Bölgesel yürüyüş güzergahı</string>
-    <string name="poi_route_hiking_lwn_poi">Yerel yürüyüş güzergahı</string>
-    <string name="poi_route_hiking_ref_poi">Yürüyüş yolu başvurusu</string>
     <string name="poi_opening_hours">Çalışma saatleri</string>
     <string name="poi_collection_times">Toplama zamanları</string>
     <string name="poi_description">Açıklama</string>

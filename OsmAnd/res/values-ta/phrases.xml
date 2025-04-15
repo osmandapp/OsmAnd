@@ -1901,11 +1901,6 @@
     <string name="poi_iwn_ref">பன்னாட்டு ஐகிங் பிணையம் முனை</string>
     <string name="poi_rwn_ref">பிராந்திய ஐக்கிங் பிணையம் முனை</string>
     <string name="poi_lwn_ref">உள்ளக ஐக்கிங் பிணையம் முனை</string>
-    <string name="poi_route_hiking_iwn_poi">பன்னாட்டு நடைபயணம் பாதை</string>
-    <string name="poi_route_hiking_nwn_poi">தேசிய நடைபயணம் பாதை</string>
-    <string name="poi_route_hiking_rwn_poi">பிராந்திய ஐக்கிங் பாதை</string>
-    <string name="poi_route_hiking_lwn_poi">உள்ளக ஐக்கிங் பாதை</string>
-    <string name="poi_route_hiking_ref_poi">ஐக்கிங் பாதை குறிப்பு</string>
     <string name="poi_opening_hours">திறந்த நேரம்</string>
     <string name="poi_collection_times">சேகரிப்பு நேரம்</string>
     <string name="poi_description">விவரம்</string>

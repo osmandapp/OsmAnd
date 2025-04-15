@@ -860,11 +860,6 @@
     <string name="poi_country">País</string>
     <string name="poi_fee_yes">Sim;Grátis</string>
     <string name="poi_abandoned_poi">Objeto abandonado</string>
-    <string name="poi_route_hiking_iwn_poi">Rota internacional de caminhada</string>
-    <string name="poi_route_hiking_nwn_poi">Rota nacional de caminhada</string>
-    <string name="poi_route_hiking_rwn_poi">Rota regional de caminhada</string>
-    <string name="poi_route_hiking_lwn_poi">Rota local de caminhada</string>
-    <string name="poi_route_hiking_ref_poi">Referência de rota de caminhada</string>
     <string name="poi_traffic_enforcement">Fiscalização de trânsito</string>
     <string name="poi_node_networks">Nós da rede de caminhada/ciclismo</string>
     <string name="poi_hiking_routes">Rotas de caminhada</string>
@@ -4631,6 +4626,11 @@
     <string name="poi_socket_typee_output">Tomada: Tipo E: saída</string>
     <string name="poi_dressing_room">Provador</string>
     <string name="poi_healthcare_speciality_intensive">Intensivo</string>
+    <string name="poi_emergency_bay">Área de emergência</string>
+    <string name="poi_health_specialty_paediatric_surgery_yes">Cirurgia pediátrica</string>
+    <string name="poi_healthcare_speciality_laboratory">Especialidade de saúde: laboratório</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Especialidade em saúde: psicoterapeuta</string>
+    <string name="poi_healthcare_speciality_hypnosis">Hipnose</string>
     <string name="poi_healthcare_speciality_paediatric_surgery">Cirurgia pediátrica</string>
     <string name="poi_healthcare_speciality_clinic">Especialidade de saúde: clínica</string>
     <string name="poi_healthcare_speciality_reflexology">Reflexologia</string>
@@ -4852,6 +4852,7 @@
     <string name="poi_us_maps_recreation_area_activity_day_use_site">Área de uso diurno;Local de uso diurno;Área de uso diurno;Área de recreação de uso diurno;Local de recreação de uso diurno</string>
     <string name="poi_cash_in">Depósito em dinheiro</string>
     <string name="poi_osmand_access_main_tag">Acesso</string>
+    <string name="poi_osmand_foot_prohibited_tunnel">Túnel proibido para pedestres</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Túnel proibido para ciclistas</string>
     <string name="poi_route_article">Artigos de viagem</string>
     <string name="poi_route_article_point">Pontos de viagem</string>

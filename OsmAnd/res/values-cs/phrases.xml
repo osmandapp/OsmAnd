@@ -1047,10 +1047,6 @@
     <string name="poi_wiki_lang_nn">Norská nynorská wiki</string>
     <string name="poi_wiki_lang_te">Telugská wiki</string>
     <string name="poi_wiki_lang_vo">Volapükská wiki</string>
-    <string name="poi_route_hiking_iwn_poi">Mezinárodní pěší trasa</string>
-    <string name="poi_route_hiking_nwn_poi">Národní pěší trasa</string>
-    <string name="poi_route_hiking_rwn_poi">Regionální pěší trasa</string>
-    <string name="poi_route_hiking_lwn_poi">Lokální pěší trasa</string>
     <string name="poi_collection_times">Čas vybírání pošty</string>
     <string name="poi_supervised_yes">Střežené</string>
     <string name="poi_supervised_no">Nestřežené</string>
@@ -1207,7 +1203,6 @@
     <string name="poi_denomination_coptic_orthodox">Koptský pravoslavný</string>
     <string name="poi_internet_access_no">Přístup k internetu: ne</string>
     <string name="poi_kent_carriage_gap">Kent carriage gap (překážka bránící vjezdu automobilů)</string>
-    <string name="poi_route_hiking_ref_poi">Rozcestník turistických tras</string>
     <string name="poi_wheelchair_no">Ne</string>
     <string name="poi_wheelchair_limited">Omezeně</string>
     <string name="poi_content_slurry">Obsah: močůvka</string>
@@ -4634,6 +4629,7 @@
     <string name="poi_indoor_seating_yes">Vnitřní posezení: Ano</string>
     <string name="poi_indoor_seating_no">Bez vnitřního posezení</string>
     <string name="poi_indoor_seating_bar_table">Sezení uvnitř: barový stůl</string>
+    <string name="poi_healthcare_speciality_ayurveda">Ájurvéda</string>
     <string name="poi_healthcare_speciality_reflexology">Reflexní terapie</string>
     <string name="poi_healthcare_speciality_anthroposophical">Antroposofický</string>
     <string name="poi_healthcare_speciality_neonatology">Neonatologie</string>
@@ -4675,6 +4671,7 @@
     <string name="poi_live_music_yes">Ano</string>
     <string name="poi_music_venue">Hudební místo</string>
     <string name="poi_cash_in">Vklad v hotovosti</string>
+    <string name="poi_healthcare_speciality_tuina">Tuina</string>
     <string name="poi_healthcare_speciality_unani">Unani</string>
     <string name="poi_healthcare_speciality_primary_care">Primární péče</string>
     <string name="poi_healthcare_speciality_humanistic">Humanistická psychologie</string>
@@ -4688,6 +4685,7 @@
     <string name="poi_state_detour">Stav: objížďka</string>
     <string name="poi_ascent">Stoupání</string>
     <string name="poi_descent">Klesání</string>
+    <string name="poi_healthcare_speciality_applied_kinesiology">Aplikovaná kineziologie</string>
     <string name="poi_healthcare_speciality_psychology">Psychologie</string>
     <string name="poi_healthcare_speciality_denturist">Denturista</string>
     <string name="poi_us_maps_recreation_area_activity">Aktivita v rekreační oblasti</string>
@@ -4705,6 +4703,7 @@
     <string name="poi_roundtrip_yes">Zpáteční cesta: ano</string>
     <string name="poi_shop_general">Obchod se smíšeným zbožím</string>
     <string name="poi_photo_booth">Fotobudka</string>
+    <string name="poi_healthcare_speciality_kinesitherapy">Kineziterapie</string>
     <string name="poi_healthcare_speciality_pediatric">Pediatrická</string>
     <string name="poi_healthcare_speciality_pedorthist">Pedorthista</string>
     <string name="poi_healthcare_speciality_proctology">Proktologie</string>
@@ -4863,6 +4862,7 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunel se zákazem pro cyklisty</string>
     <string name="poi_route_article">Články o cestování</string>
     <string name="poi_route_article_point">Body na cestách</string>
+    <string name="poi_route_track_point">Body trasy</string>
     <string name="poi_name_etymology">Původ názvu</string>
     <string name="poi_name_right">Název pravé strany</string>
     <string name="poi_name_left">Název levé strany</string>
@@ -4997,9 +4997,4 @@
     <string name="poi_hazard_contamination">Kontaminace</string>
     <string name="poi_hazard_additional_slippery_road">Kluzká vozovka</string>
     <string name="poi_hazard_yes">Nebezpečí</string>
-    <string name="poi_healthcare_speciality_tuina">Tuina</string>
-    <string name="poi_healthcare_speciality_ayurveda">Ájurvéda</string>
-    <string name="poi_healthcare_speciality_applied_kinesiology">Aplikovaná kineziologie</string>
-    <string name="poi_route_track_point">Body trasy</string>
-    <string name="poi_healthcare_speciality_kinesitherapy">Kineziterapie</string>
 </resources>

@@ -860,11 +860,6 @@
     <string name="poi_country">國家</string>
     <string name="poi_fee_yes">是;費用</string>
     <string name="poi_abandoned_poi">已遺棄的物件</string>
-    <string name="poi_route_hiking_iwn_poi">國際登山健行登山路線</string>
-    <string name="poi_route_hiking_nwn_poi">全國登山健行路線</string>
-    <string name="poi_route_hiking_rwn_poi">地區性登山健行路線</string>
-    <string name="poi_route_hiking_lwn_poi">當地登山健行路線</string>
-    <string name="poi_route_hiking_ref_poi">登山健行路線參考</string>
     <string name="poi_node_networks">登山健行/自行車網路節點</string>
     <string name="poi_hiking_routes">登山健行路線</string>
     <string name="poi_traffic_enforcement">交通執法</string>
@@ -4634,6 +4629,8 @@
     <string name="poi_socket_typee_yes">種類 E</string>
     <string name="poi_dressing_room">更衣室</string>
     <string name="poi_emergency_bay">避車彎</string>
+    <string name="poi_healthcare_speciality_denturist">假牙師</string>
+    <string name="poi_healthcare_speciality_pediatric">兒科</string>
     <string name="poi_healthcare_speciality_pedorthist">足療師</string>
     <string name="poi_healthcare_speciality_laboratory">醫療保健專科：檢驗</string>
     <string name="poi_healthcare_speciality_body">身體導向心理治療</string>
@@ -4863,6 +4860,7 @@
     <string name="poi_payment_parkster_no">不接受 Parkster</string>
     <string name="poi_osmand_foot_prohibited_tunnel">隧道禁止行人通行</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">隧道禁止腳踏車騎士通行</string>
+    <string name="poi_route_track_point">路線點</string>
     <string name="poi_route_article_point">旅遊點</string>
     <string name="poi_route_article">旅遊文章</string>
     <string name="poi_name_etymology">名稱詞源學</string>

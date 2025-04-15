@@ -1874,7 +1874,6 @@
     <string name="poi_rcn_ref">区域性骑行网络节点</string>
     <string name="poi_motorcycle_barrier">摩托车屏障</string>
     <string name="poi_rwn_ref">区域性徒步网络节点</string>
-    <string name="poi_route_hiking_rwn_poi">区域性徒步旅行路线</string>
     <string name="poi_reg_name">地区性名称</string>
     <string name="poi_motorcycle_repair">摩托车维修</string>
     <string name="poi_second_hand_yes">是</string>
@@ -2360,8 +2359,6 @@
     <string name="poi_zero_waste_yes">零浪费： 是</string>
     <string name="poi_zero_waste_no">零浪费：否</string>
     <string name="poi_zero_waste_only">零浪费：仅限</string>
-    <string name="poi_route_hiking_lwn_poi">本地徒步路线</string>
-    <string name="poi_route_hiking_ref_poi">徒步路线编号</string>
     <string name="poi_aerialway_bubble_yes">安全罩</string>
     <string name="poi_patrolled_no">巡逻：否</string>
     <string name="poi_piste_ski_jump">跳台滑雪</string>
@@ -2390,8 +2387,6 @@
     <string name="poi_ncn_ref">全国骑行网络节点</string>
     <string name="poi_nwn_ref">全国徒步网络节点</string>
     <string name="poi_lwn_ref">本地徒步网络节点</string>
-    <string name="poi_route_hiking_iwn_poi">国际徒步路线</string>
-    <string name="poi_route_hiking_nwn_poi">全国徒步路线</string>
     <string name="poi_collection_times">收集时间</string>
     <string name="poi_email">电子邮件</string>
     <string name="poi_fax">传真</string>
