@@ -1223,20 +1223,24 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			String width = actualGpxWidth != null ? actualGpxWidth : ts.getWidth(defaultGpxWidth);
 			cachedTrackWidth.putIfAbsent(width, null);
 			int color = getTrackColor(gpxFile, ts.getColor(cachedColor));
+
 			boolean newTsRenderer = false;
 			if (ts.getRenderer() == null && !ts.getPoints().isEmpty()) {
-				RenderableSegment renderer = currentTrack ? new CurrentTrack(ts.getPoints()) : new StandardTrack(ts.getPoints(), 17.2);
+				List<WptPt> points = ts.getPoints();
+				RenderableSegment renderer = currentTrack ? new CurrentTrack(points) : new StandardTrack(points, 17.2);
 				renderer.setBorderPaint(borderPaint);
 				ts.setRenderer(renderer);
 				GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 				geometryWay.updateTrack3DStyle(track3DStyle);
 				geometryWay.updateColoringType(coloringType);
 				geometryWay.updateCustomWidth(paint.getStrokeWidth());
-				if (!oldSegments.isEmpty() && oldSegments.get(0).getRenderer() instanceof RenderableSegment renderableSegment) {
-					geometryWay.vectorLinesCollection = renderableSegment.getGeometryWay().vectorLinesCollection;
-					geometryWay.vectorLineArrowsProvider = renderableSegment.getGeometryWay().vectorLineArrowsProvider;
-					geometryWay.updateCustomWidth(renderableSegment.getGeometryWay().getCustomWidth());
-					geometryWay.updateDrawDirectionArrows(renderableSegment.getGeometryWay().getDrawDirectionArrows());
+
+				if (!oldSegments.isEmpty() && oldSegments.get(0).getRenderer() instanceof CurrentTrack track) {
+					GpxGeometryWay gpxGeometryWay = track.getGeometryWay();
+					geometryWay.vectorLinesCollection = gpxGeometryWay.vectorLinesCollection;
+					geometryWay.vectorLineArrowsProvider = gpxGeometryWay.vectorLineArrowsProvider;
+					geometryWay.updateCustomWidth(gpxGeometryWay.getCustomWidth());
+					geometryWay.updateDrawDirectionArrows(gpxGeometryWay.getDrawDirectionArrows());
 					oldSegments.remove(0);
 				}
 				geometryWay.baseOrder = baseOrder--;
