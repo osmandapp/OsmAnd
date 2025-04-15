@@ -3,6 +3,7 @@ package net.osmand.plus.settings.purchase;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.GOOGLE;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.HUGEROCK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.UNDEFINED;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -185,7 +186,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 
 		String purchasedOn = getString(R.string.shared_string_purchased_on);
 		PurchaseOrigin origin = purchase.getOrigin();
-		String platform = promoType != null ? NO_VALUE : getString(origin.getStoreNameId());
+		String platform = origin == UNDEFINED ? NO_VALUE : getString(origin.getStoreNameId());
 		updateInformationBlock(R.id.platform_block, purchasedOn, platform);
 
 		// Bottom buttons
