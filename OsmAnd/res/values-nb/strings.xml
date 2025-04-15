@@ -5737,4 +5737,10 @@
     <string name="relief_3d_download_description">Ytterligere kart er nødvendig for å vise terreng på kartet.</string>
     <string name="obd_fuel_type_diesel">Diesel</string>
     <string name="show_mercator_grids">Bruk Mercator istedenfor WGS84 eller UTM</string>
+    <string name="shared_string_edges">Kanter</string>
+    <string name="layer_coordinates_grid">Koordinatnett</string>
+    <string name="equator">Ekvator</string>
+    <string name="wiki_around">Populære steder i nærheten</string>
+    <string name="prime_meridian">Nullmeridian</string>
+    <string name="meridian_180">180. meridian</string>
 </resources>
