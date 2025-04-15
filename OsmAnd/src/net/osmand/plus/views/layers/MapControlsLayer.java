@@ -170,6 +170,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapButton.setMapActivity(requireMapActivity());
 	}
 
+	public void addCustomizedDefaultMapButton(@NonNull MapButton mapButton) {
+		customMapButtons.add(mapButton);
+		mapButton.setAlwaysVisible(true);
+		mapButton.setLongClickable(false);
+		mapButton.setUseCustomPosition(false);
+		mapButton.setMapActivity(requireMapActivity());
+	}
+
 	@NonNull
 	private List<MapButton> getAllMapButtons() {
 		List<MapButton> buttons = new ArrayList<>(mapButtons);
