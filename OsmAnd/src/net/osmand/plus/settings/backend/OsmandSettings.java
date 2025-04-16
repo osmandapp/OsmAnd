@@ -10,6 +10,7 @@ import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWi
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.ELEVATION_UNITS_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.ELEVATION_UNITS_FEET_VALUE;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.ELEVATION_UNITS_METERS_VALUE;
@@ -3086,6 +3087,9 @@ public class OsmandSettings {
 		String value = preference.get();
 
 		if (property.hasPossibleValues()) {
+			if (CONTOUR_LINES_ATTR.equals(attrName) && Algorithms.isEmpty(value)) {
+				return value;
+			}
 			return property.containsValue(value) ? value : preference.getDefaultValue();
 		}
 		return value;
