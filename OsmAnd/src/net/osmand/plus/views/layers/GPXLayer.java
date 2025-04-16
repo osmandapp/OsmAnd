@@ -109,6 +109,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 	private static final int START_ZOOM = 7;
+	private static final int MAX_SUPPORTED_TRACK_WIDTH_DP = 48;
 
 	private Paint paint;
 	private Paint borderPaint;
@@ -485,10 +486,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return hashChanged;
 	}
 
-	private void acquireTrackWidth(String widthKey, RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RenderingContext rc) {
+	private void acquireTrackWidth(@NonNull String widthKey, @NonNull RenderingRulesStorage rrs,
+			@NonNull RenderingRuleSearchRequest req, @NonNull RenderingContext rc) {
 		if (!Algorithms.isEmpty(widthKey) && Algorithms.isInt(widthKey)) {
 			try {
-				int widthDp = Integer.parseInt(widthKey);
+				int widthDp = Math.min(Integer.parseInt(widthKey), MAX_SUPPORTED_TRACK_WIDTH_DP);
 				float widthF = AndroidUtils.dpToPx(app, widthDp);
 				cachedTrackWidth.put(widthKey, widthF);
 			} catch (NumberFormatException e) {
