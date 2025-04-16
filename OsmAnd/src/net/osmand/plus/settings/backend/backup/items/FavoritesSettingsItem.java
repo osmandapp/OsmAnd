@@ -12,6 +12,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
@@ -179,7 +180,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			for (FavoriteGroup group : appliedItems) {
 				PointsGroup pointsGroup = group.toPointsGroup(app);
 				for (FavouritePoint point : group.getPoints()) {
-					favoritesHelper.addFavourite(point, false, false, false, pointsGroup);
+					favoritesHelper.addFavourite(point, pointsGroup, new AddFavoriteOptions());
 				}
 			}
 			favoritesHelper.sortAll();

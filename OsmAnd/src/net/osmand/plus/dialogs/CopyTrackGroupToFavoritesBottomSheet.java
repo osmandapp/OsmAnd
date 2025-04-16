@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
@@ -22,6 +23,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSheet {
 
@@ -48,6 +52,11 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 	private void copyToFavorites() {
 		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
+
+		List<FavouritePoint> addedPoints = new ArrayList<>();
+		List<FavouritePoint> duplicatePoints = new ArrayList<>();
+		AddFavoriteOptions options = new AddFavoriteOptions().setLookupAddress(true);
+
 		for (GpxDisplayItem item : group.getDisplayItems()) {
 			if (item.locationStart != null) {
 				FavouritePoint point = FavouritePoint.fromWpt(item.locationStart, groupName);
@@ -57,15 +66,23 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 				if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
 					plugin.updateParkingPoint(point);
 				}
-				favouritesHelper.addFavourite(point, true, false, false, null);
+				switch (favouritesHelper.addFavourite(point, options)) {
+					case ADDED -> addedPoints.add(point);
+					case DUPLICATE -> duplicatePoints.add(point);
+				}
 			}
 		}
 		favouritesHelper.saveCurrentPointsIntoFile(true);
 
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnGroupNameChangeListener) {
-			OnGroupNameChangeListener listener = (OnGroupNameChangeListener) fragment;
+		if (fragment instanceof OnGroupNameChangeListener listener) {
 			listener.onTrackGroupChanged();
+		}
+		if (!addedPoints.isEmpty()) {
+			app.showShortToastMessage(getString(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size()));
+		}
+		if (!duplicatePoints.isEmpty()) {
+			app.showShortToastMessage(getString(R.string.msg_favorites_skipped_as_existing, duplicatePoints.size()));
 		}
 		dismiss();
 	}

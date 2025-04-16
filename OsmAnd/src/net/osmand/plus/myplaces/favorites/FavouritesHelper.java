@@ -26,6 +26,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
+import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
+import net.osmand.plus.myplaces.favorites.add.AddFavoriteResult;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
@@ -367,24 +369,38 @@ public class FavouritesHelper {
 	}
 
 	public boolean addFavourite(@NonNull FavouritePoint point) {
-		return addFavourite(point, true, true, true, null);
+		return addFavourite(point, new AddFavoriteOptions().enableAll()) == AddFavoriteResult.ADDED;
 	}
 
-	public boolean addFavourite(@NonNull FavouritePoint point, boolean lookupAddress, boolean sortAndSave,
-	                            boolean saveAsync, @Nullable PointsGroup pointsGroup) {
+	@NonNull
+	public AddFavoriteResult addFavourite(@NonNull FavouritePoint point, @NonNull AddFavoriteOptions options) {
+		return addFavourite(point, null, options);
+	}
+
+	@NonNull
+	public AddFavoriteResult addFavourite(@NonNull FavouritePoint point,
+	                                      @Nullable PointsGroup pointsGroup,
+	                                      @NonNull AddFavoriteOptions options) {
 		if (Double.isNaN(point.getAltitude()) || point.getAltitude() == 0) {
 			initAltitude(point);
 		}
-		if (point.getName().isEmpty() && flatGroups.containsKey(point.getCategory())) {
-			return true;
+
+		String pointName = point.getName();
+		FavoriteGroup favoriteGroup = flatGroups.get(point.getCategory());
+		if (favoriteGroup != null && pointName.isEmpty()) {
+			return AddFavoriteResult.IGNORED;
 		}
-		if (lookupAddress && !point.isAddressSpecified()) {
+		if (favoriteGroup != null && favoriteGroup.containsPointByName(pointName)) {
+			return AddFavoriteResult.DUPLICATE;
+		}
+
+		if (options.lookupAddress && !point.isAddressSpecified()) {
 			lookupAddress(point);
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
 
 		FavoriteGroup group = getOrCreateGroup(point, pointsGroup);
-		if (!point.getName().isEmpty()) {
+		if (!pointName.isEmpty()) {
 			point.setVisible(group.isVisible());
 			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
 				point.setColor(getParkingIconColor());
@@ -394,9 +410,9 @@ public class FavouritesHelper {
 			group.getPoints().add(point);
 			addFavouritePoint(point);
 		}
-		if (sortAndSave) {
+		if (options.sortAndSave) {
 			sortAll();
-			saveCurrentPointsIntoFile(saveAsync);
+			saveCurrentPointsIntoFile(options.saveAsync);
 		}
 
 		runSyncWithMarkers(group);
@@ -404,7 +420,7 @@ public class FavouritesHelper {
 			app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 		}
 
-		return true;
+		return AddFavoriteResult.ADDED;
 	}
 
 	public void lookupAddress(@NonNull FavouritePoint point) {

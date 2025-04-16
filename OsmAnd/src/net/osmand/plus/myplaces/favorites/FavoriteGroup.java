@@ -195,4 +195,15 @@ public class FavoriteGroup {
 		}
 		return favoriteGroup;
 	}
+
+	public boolean containsPointByName(@NonNull String name) {
+		if (!name.isEmpty()) {
+			for (FavouritePoint p : points) {
+				if (Objects.equals(name, p.getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
