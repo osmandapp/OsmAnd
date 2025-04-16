@@ -341,10 +341,6 @@ public class MapSelectionHelper {
 							boolean isOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
 							boolean isClickableWay = clickableWayHelper.isClickableWay(obfMapObject, tags);
 
-							if (!isOsmRoute && NetworkRouteSelector.containsUnsupportedRouteTags(tags)) {
-								continue;
-							}
-
 							if (isOsmRoute && !osmRoutesAlreadyAdded) {
 								osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
 							} else if (isTravelGpx) {
@@ -366,7 +362,9 @@ public class MapSelectionHelper {
 										tags.remove(TAG_POI_LAT_LON);
 									}
 
-									boolean allowRenderedObjects = !isOsmRoute && !isClickableWay;
+									boolean allowRenderedObjects = !isOsmRoute && !isClickableWay
+											&& !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
+
 									amenity = getAmenity(latLon, obfMapObject, tags);
 
 									if (amenity != null) {
