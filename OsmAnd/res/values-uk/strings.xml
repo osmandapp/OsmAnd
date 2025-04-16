@@ -1387,7 +1387,7 @@
     <string name="download_tab_downloads">Усі завантаження</string>
     <string name="download_tab_updates">Оновлення</string>
     <string name="download_tab_local">Локальні</string>
-    <string name="no_internet_connection">Не вдалося завантажити, перевірте ваше Інтернет-зʼєднання.</string>
+    <string name="no_internet_connection">Немає підключення до Інтернету</string>
     <string name="everything_up_to_date">Всі файли оновлені</string>
     <string name="use_opengl_render">Використовувати рендеринг OpenGL</string>
     <string name="use_opengl_render_descr">Використовувати апаратне прискорення OpenGL для рендерингу (може бути причиною швидкого розряду батареї або не працювати на деяких пристроях).</string>
