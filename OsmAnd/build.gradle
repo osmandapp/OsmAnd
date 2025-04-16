@@ -274,7 +274,7 @@ afterEvaluate {
   def useLocalDebug = false
   android.applicationVariants.all { variant ->
     if (variant.name.contains('Opengldebug') && localAarFile.exists()) {
-      useLocalDebug = true;
+//      useLocalDebug = true;
     } else {
       useLocalDebug = false;
     }
