@@ -49,8 +49,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null || mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx().getPoints().isEmpty()) {
+		if (requireMapActivity().getMapLayers().getMeasurementToolLayer().getEditingCtx().getPoints().isEmpty()) {
 			dismiss();
 			return null;
 		} else {
@@ -349,6 +348,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (targetFragment instanceof SelectedPointFragmentListener) {
 			((SelectedPointFragmentListener) targetFragment).onClearSelection();
 		}
+	}
+
+	@NonNull
+	private MapActivity requireMapActivity() {
+		return (MapActivity) requireActivity();
 	}
 
 	@Nullable
