@@ -1329,7 +1329,7 @@
     <string name="use_opengl_render">Použít OpenGL</string>
     <string name="use_opengl_render_descr">Použít hardwarově akcelerované renderování pomocí OpenGL (může spotřebovávat více energie z baterie a nemusí fungovat na velmi starých zařízeních).</string>
     <string name="error_avoid_specific_road">Žádná objížďka nenalezena</string>
-    <string name="no_internet_connection">Nelze stáhnout, prosím zkontrolujte internetové připojení.</string>
+    <string name="no_internet_connection">Žádné připojení k internetu</string>
     <string name="map_locale">Jazyk map</string>
     <string name="rendering_attr_transportStops_name">Zastávky veřejné dopravy</string>
     <string name="navigate_point_zone">Zóna</string>
