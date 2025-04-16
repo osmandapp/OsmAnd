@@ -10,7 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="msg_gpx_waypoints_copied">GPX waypoints (%1$d) copied to favorites.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favorites.</string>
     <string name="msg_favorites_skipped_as_existing">Favorite points (%1$d) were skipped as already existing.</string>
     <string name="customize_grid_color">Customize grid color</string>
     <string name="grid_color">Grid color</string>

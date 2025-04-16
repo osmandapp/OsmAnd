@@ -79,7 +79,7 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 			listener.onTrackGroupChanged();
 		}
 		if (!addedPoints.isEmpty()) {
-			app.showShortToastMessage(getString(R.string.msg_gpx_waypoints_copied, addedPoints.size()));
+			app.showShortToastMessage(getString(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size()));
 		}
 		if (!duplicatePoints.isEmpty()) {
 			app.showShortToastMessage(getString(R.string.msg_favorites_skipped_as_existing, duplicatePoints.size()));
