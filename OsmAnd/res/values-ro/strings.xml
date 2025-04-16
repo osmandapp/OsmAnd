@@ -6104,4 +6104,5 @@
     <string name="route_members">Membri</string>
     <string name="multipoligon_related">Legate de</string>
     <string name="route_part_of">Parte din</string>
+    <string name="cant_load_map_styles">Nu se pot încărca stilurile hărții.</string>
 </resources>
