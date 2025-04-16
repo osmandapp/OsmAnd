@@ -50,74 +50,76 @@ public class OpenTimeListHolder extends RecyclerView.ViewHolder {
 		int position = openHoursItem.position();
 		clockIconImageView.setImageDrawable(openingHoursAdapter.getClockDrawable());
 
-		if (openingHours.getRules().get(position) instanceof OpeningHoursParser.BasicOpeningHourRule rule) {
-			StringBuilder stringBuilder = new StringBuilder();
-			rule.appendDaysString(stringBuilder);
+		if(openingHours.getRules().size() > position) {
+			if (openingHours.getRules().get(position) instanceof OpeningHoursParser.BasicOpeningHourRule rule) {
+				StringBuilder stringBuilder = new StringBuilder();
+				rule.appendDaysString(stringBuilder);
 
-			daysTextView.setText(stringBuilder.toString());
-			daysTextView.setOnClickListener(v -> {
-				OpeningHoursDaysDialogFragment fragment =
-						OpeningHoursDaysDialogFragment.createInstance(rule, position);
-				fragment.show(editPoiListener.getChildFragmentManager(), "OpenTimeDialogFragment");
-			});
-
-			TIntArrayList startTimes = rule.getStartTimes();
-			TIntArrayList endTimes = rule.getEndTimes();
-			for (int i = 0; i < startTimes.size(); i++) {
-				View timeFromToLayout = LayoutInflater.from(activity)
-						.inflate(R.layout.time_from_to_layout, timeListContainer, false);
-				TextView openingTextView = timeFromToLayout.findViewById(R.id.openingTextView);
-				openingTextView.setText(Algorithms.formatMinutesDuration(startTimes.get(i)));
-
-				TextView closingTextView = timeFromToLayout.findViewById(R.id.closingTextView);
-				closingTextView.setText(Algorithms.formatMinutesDuration(endTimes.get(i)));
-
-				openingTextView.setTag(i);
-				openingTextView.setOnClickListener(v -> {
-					int index = (int) v.getTag();
-					OpeningHoursHoursDialogFragment.createInstance(rule, position, true, index)
-							.show(editPoiListener.getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
-				});
-				closingTextView.setTag(i);
-				closingTextView.setOnClickListener(v -> {
-					int index = (int) v.getTag();
-					OpeningHoursHoursDialogFragment.createInstance(rule, position, false, index)
-							.show(editPoiListener.getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
+				daysTextView.setText(stringBuilder.toString());
+				daysTextView.setOnClickListener(v -> {
+					OpeningHoursDaysDialogFragment fragment =
+							OpeningHoursDaysDialogFragment.createInstance(rule, position);
+					fragment.show(editPoiListener.getChildFragmentManager(), "OpenTimeDialogFragment");
 				});
 
-				ImageButton deleteTimeSpanImageButton = timeFromToLayout
-						.findViewById(R.id.deleteTimespanImageButton);
-				deleteTimeSpanImageButton.setImageDrawable(openingHoursAdapter.getDeleteDrawable());
-				int timeSpanPosition = i;
-				deleteTimeSpanImageButton.setOnClickListener(v -> {
-					if (startTimes.size() == 1) {
-						openingHours.getRules().remove(position);
-					} else {
-						rule.deleteTimeRange(timeSpanPosition);
-					}
+				TIntArrayList startTimes = rule.getStartTimes();
+				TIntArrayList endTimes = rule.getEndTimes();
+				for (int i = 0; i < startTimes.size(); i++) {
+					View timeFromToLayout = LayoutInflater.from(activity)
+							.inflate(R.layout.time_from_to_layout, timeListContainer, false);
+					TextView openingTextView = timeFromToLayout.findViewById(R.id.openingTextView);
+					openingTextView.setText(Algorithms.formatMinutesDuration(startTimes.get(i)));
+
+					TextView closingTextView = timeFromToLayout.findViewById(R.id.closingTextView);
+					closingTextView.setText(Algorithms.formatMinutesDuration(endTimes.get(i)));
+
+					openingTextView.setTag(i);
+					openingTextView.setOnClickListener(v -> {
+						int index = (int) v.getTag();
+						OpeningHoursHoursDialogFragment.createInstance(rule, position, true, index)
+								.show(editPoiListener.getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
+					});
+					closingTextView.setTag(i);
+					closingTextView.setOnClickListener(v -> {
+						int index = (int) v.getTag();
+						OpeningHoursHoursDialogFragment.createInstance(rule, position, false, index)
+								.show(editPoiListener.getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
+					});
+
+					ImageButton deleteTimeSpanImageButton = timeFromToLayout
+							.findViewById(R.id.deleteTimespanImageButton);
+					deleteTimeSpanImageButton.setImageDrawable(openingHoursAdapter.getDeleteDrawable());
+					int timeSpanPosition = i;
+					deleteTimeSpanImageButton.setOnClickListener(v -> {
+						if (startTimes.size() == 1) {
+							openingHours.getRules().remove(position);
+						} else {
+							rule.deleteTimeRange(timeSpanPosition);
+						}
+						openingHoursAdapter.updateHoursData();
+						editPoiAdapterListener.dataChanged();
+					});
+					timeListContainer.addView(timeFromToLayout);
+				}
+
+				deleteItemImageButton.setVisibility(View.GONE);
+				addTimeSpanButton.setVisibility(View.VISIBLE);
+				addTimeSpanButton.setOnClickListener(v -> OpeningHoursHoursDialogFragment.createInstance(rule, position, true,
+						startTimes.size()).show(editPoiListener.getChildFragmentManager(),
+						"TimePickerDialogFragment"));
+			} else if (openingHours.getRules().get(position) instanceof OpeningHoursParser.UnparseableRule) {
+				daysTextView.setText(openingHours.getRules().get(position).toRuleString());
+				timeListContainer.removeAllViews();
+
+				deleteItemImageButton.setVisibility(View.VISIBLE);
+				deleteItemImageButton.setImageDrawable(openingHoursAdapter.getDeleteDrawable());
+				deleteItemImageButton.setOnClickListener(v -> {
+					openingHours.getRules().remove(position);
 					openingHoursAdapter.updateHoursData();
 					editPoiAdapterListener.dataChanged();
 				});
-				timeListContainer.addView(timeFromToLayout);
+				addTimeSpanButton.setVisibility(View.GONE);
 			}
-
-			deleteItemImageButton.setVisibility(View.GONE);
-			addTimeSpanButton.setVisibility(View.VISIBLE);
-			addTimeSpanButton.setOnClickListener(v -> OpeningHoursHoursDialogFragment.createInstance(rule, position, true,
-					startTimes.size()).show(editPoiListener.getChildFragmentManager(),
-					"TimePickerDialogFragment"));
-		} else if (openingHours.getRules().get(position) instanceof OpeningHoursParser.UnparseableRule) {
-			daysTextView.setText(openingHours.getRules().get(position).toRuleString());
-			timeListContainer.removeAllViews();
-
-			deleteItemImageButton.setVisibility(View.VISIBLE);
-			deleteItemImageButton.setImageDrawable(openingHoursAdapter.getDeleteDrawable());
-			deleteItemImageButton.setOnClickListener(v -> {
-				openingHours.getRules().remove(position);
-				openingHoursAdapter.updateHoursData();
-				editPoiAdapterListener.dataChanged();
-			});
-			addTimeSpanButton.setVisibility(View.GONE);
 		}
 	}
 }
