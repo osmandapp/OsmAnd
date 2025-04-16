@@ -1,5 +1,6 @@
 package net.osmand.plus.track.fragments;
 
+import static net.osmand.data.PointDescription.POINT_TYPE_WPT;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS;
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,12 +30,15 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.dialogs.CopyTrackGroupToFavoritesBottomSheet;
 import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnGroupNameChangeListener;
 import net.osmand.plus.dialogs.RenameTrackGroupBottomSheet;
+import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapcontextmenu.editors.GpxGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
@@ -47,8 +53,10 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -104,10 +112,14 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 		items.add(new OptionsDividerItem(app));
 
-		if (!gpxFile.isShowCurrentTrack() && trackPoints) {
+		boolean currentTrack = gpxFile.isShowCurrentTrack();
+		if (!currentTrack && trackPoints) {
 			items.add(createCopyToMarkersItem());
 		}
 		items.add(createCopyToFavoritesItem());
+		if (!currentTrack) {
+			items.add(createAddToNavigationItem());
+		}
 		items.add(new OptionsDividerItem(app));
 
 		items.add(createDeleteGroupItem());
@@ -279,6 +291,54 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				}).create();
 	}
 
+	@NonNull
+	private BaseBottomSheetItem createAddToNavigationItem() {
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark))
+				.setTitle(getString(R.string.add_to_navigation))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(v -> addToNavigation()).create();
+	}
+
+	private void addToNavigation() {
+		List<GpxDisplayItem> displayItems = displayGroup.getDisplayItems();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		if (!Algorithms.isEmpty(displayItems)) {
+			int i = 0;
+			GpxDisplayItem item = displayItems.get(i++);
+			if (item.locationStart != null) {
+				LatLon latLon = new LatLon(item.locationStart.getLat(), item.locationStart.getLon());
+				targetPointsHelper.setStartPoint(latLon, false, new PointDescription(POINT_TYPE_WPT, item.name));
+			}
+
+			List<TargetPoint> targetPoints = new ArrayList<>();
+			for (int k = i; k < displayItems.size(); k++) {
+				GpxDisplayItem displayItem = displayItems.get(k);
+				if (item.locationStart != null) {
+					LatLon latLon = new LatLon(displayItem.locationStart.getLatitude(), displayItem.locationStart.getLongitude());
+					TargetPoint point = new TargetPoint(latLon, new PointDescription(POINT_TYPE_WPT, displayItem.name));
+					targetPoints.add(point);
+				}
+			}
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			boolean updateRoute = routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode();
+			targetPointsHelper.reorderAllTargetPoints(targetPoints, updateRoute);
+		} else {
+			targetPointsHelper.clearStartPoint(false);
+			targetPointsHelper.clearPointToNavigate(false);
+		}
+		dismissAll();
+		app.getOsmandMap().getMapActions().doRoute();
+	}
+
+	private void dismissAll() {
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof TrackMenuFragment) {
+			((TrackMenuFragment) fragment).dismiss();
+		}
+		dismiss();
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -315,7 +375,8 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		return Algorithms.isEmpty(category) ? ctx.getString(R.string.shared_string_waypoints) : category;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull GpxDisplayGroup group, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager,
+			@NonNull GpxDisplayGroup group, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			EditTrackGroupDialogFragment fragment = new EditTrackGroupDialogFragment();
 			fragment.displayGroup = group;
