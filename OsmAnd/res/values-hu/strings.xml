@@ -1314,7 +1314,7 @@
     <string name="download_tab_updates">Frissítések</string>
     <string name="download_tab_downloads">Letöltés</string>
     <string name="download_tab_local">Telepítve</string>
-    <string name="no_internet_connection">A letöltés nem lehetséges, ellenőrizze az internetkapcsolatot.</string>
+    <string name="no_internet_connection">Nincs internetkapcsolat</string>
     <string name="shared_string_dismiss">Bezárás</string>
     <string name="everything_up_to_date">Minden fájl naprakész</string>
     <string name="use_opengl_render">OpenGL megjelenítő használata</string>
