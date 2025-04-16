@@ -270,22 +270,21 @@ dependencies {
 }
 
 afterEvaluate {
+  def remoteAarSnapshot = "master-snapshot"
   def localAarFile = file("../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar")
-  def useLocalDebug = false
-  android.applicationVariants.all { variant ->
-    if (variant.name.contains('Opengldebug') && localAarFile.exists()) {
-//      useLocalDebug = true;
-    } else {
-      useLocalDebug = false;
-    }
-  }
-  if (useLocalDebug) {
+
+  def requestedTasks = gradle.startParameter.taskNames.join(",").toLowerCase()
+  def useLocalOsmAndCore = requestedTasks.contains("opengldebug") && localAarFile.exists()
+
+  if (useLocalOsmAndCore) {
+    println "Using local OsmAndCore AAR (${localAarFile})"
     dependencies.add("openglImplementation", files(localAarFile))
     dependencies.add("opengldebugImplementation", files(localAarFile))
   } else {
-    dependencies.add("openglImplementation", "net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar")
-    dependencies.add("openglImplementation", "net.osmand:OsmAndCore_android:master-snapshot@aar")
-    dependencies.add("opengldebugImplementation", "net.osmand:OsmAndCore_androidNativeDebug:master-snapshot@aar")
-    dependencies.add("opengldebugImplementation", "net.osmand:OsmAndCore_android:master-snapshot@aar")
+    println "Using remote OsmAndCore snapshot (${remoteAarSnapshot})"
+    dependencies.add("openglImplementation", "net.osmand:OsmAndCore_androidNativeRelease:${remoteAarSnapshot}@aar")
+    dependencies.add("openglImplementation", "net.osmand:OsmAndCore_android:${remoteAarSnapshot}@aar")
+    dependencies.add("opengldebugImplementation", "net.osmand:OsmAndCore_androidNativeDebug:${remoteAarSnapshot}@aar")
+    dependencies.add("opengldebugImplementation", "net.osmand:OsmAndCore_android:${remoteAarSnapshot}@aar")
   }
 }
