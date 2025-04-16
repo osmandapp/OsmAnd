@@ -827,7 +827,10 @@ public class OsmAndFormatter {
 			// no need to repeat this
 			return localName;
 		}
-		if (localName.length() == 0) {
+		if (Algorithms.isEmpty(localName) && amenity.isRouteTrack()) {
+			localName = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+		}
+		if (Algorithms.isEmpty(localName)) {
 			return typeName;
 		}
 		return typeName + " " + localName; //$NON-NLS-1$

@@ -1352,6 +1352,9 @@ public class SearchCoreFactory {
 					}
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getOtherNames(true);
+					if (Algorithms.isEmpty(res.localeName) && object.isRouteTrack()) {
+						res.localeName = object.getAdditionalInfo(Amenity.ROUTE_ID);
+					}
 					if (Algorithms.isEmpty(res.localeName)) {
 						AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
 						if (st != null) {
