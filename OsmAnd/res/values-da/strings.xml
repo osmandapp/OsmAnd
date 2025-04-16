@@ -1283,8 +1283,8 @@
     <string name="error_avoid_specific_road">Ingen omfartsvej fundet</string>
     <string name="use_opengl_render">Brug OpenGL gengivelse</string>
     <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL-gengivelse (kan bruge mere batteri, eller virker ikke på meget gamle enheder).</string>
-    <string name="everything_up_to_date">Alt er opdateret</string>
-    <string name="no_internet_connection">Ude af stand til at hente, kontroller internetforbindelsen.</string>
+    <string name="everything_up_to_date">Alle filer er opdateret</string>
+    <string name="no_internet_connection">Ingen internetforbindelse</string>
     <string name="download_tab_downloads">Alle filhentninger</string>
     <string name="download_tab_updates">Opdateringer</string>
     <string name="download_tab_local">Lokal</string>
