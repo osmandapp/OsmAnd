@@ -8,7 +8,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,6 +45,18 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	public static final String TAG = SelectedPointBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SelectedPointBottomSheetDialogFragment.class);
 	private MeasurementEditingContext editingCtx;
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null || mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx().getPoints().isEmpty()) {
+			dismiss();
+			return null;
+		} else {
+			return super.onCreateView(inflater, parent, savedInstanceState);
+		}
+	}
 
 	@SuppressLint("InflateParams")
 	@Override
