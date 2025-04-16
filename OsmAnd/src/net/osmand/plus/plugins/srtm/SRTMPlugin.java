@@ -1,13 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.RELIEF_3D_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DEPTH_CONTOURS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
 import static net.osmand.plus.plugins.srtm.CollectColorPalletTask.CollectColorPalletListener;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
@@ -575,25 +568,31 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void selectPropertyValue(MapActivity activity, RenderingRuleProperty p,
-	                                CommonPreference<String> pref, Runnable callback) {
-		boolean nightMode = isNightMode(activity, app);
-		String title = AndroidUtils.getRenderingStringPropertyDescription(activity, p.getAttrName(), p.getName());
-		List<String> possibleValuesList = new ArrayList<>(Arrays.asList(p.getPossibleValues()));
-		possibleValuesList.remove(CONTOUR_LINES_DISABLED_VALUE);
-		String[] possibleValues = possibleValuesList.toArray(new String[0]);
+	public void selectPropertyValue(@NonNull MapActivity activity,
+			@NonNull RenderingRuleProperty property,
+			@NonNull CommonPreference<String> preference, @Nullable Runnable callback) {
+		List<String> possibleValues = new ArrayList<>(Arrays.asList(property.getPossibleValues()));
 
-		int selectedIndex = AndroidUtils.getRenderPropertySelectedValueIndex(app, p);
-
-		String[] possibleValuesString = new String[possibleValues.length + 1];
-		possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(activity,
-				p.getDefaultValueDescription());
-
-		for (int j = 0; j < possibleValues.length; j++) {
-			possibleValuesString[j + 1] = AndroidUtils.getRenderingStringPropertyValue(activity,
-					possibleValues[j]);
+		int index = AndroidUtils.getRenderPropertySelectedValueIndex(app, property);
+		if (possibleValues.remove(CONTOUR_LINES_DISABLED_VALUE)) {
+			index = possibleValues.indexOf(preference.get());
+			if (index >= 0) {
+				index++;
+			} else if (Algorithms.isEmpty(preference.get())) {
+				index = 0;
+			}
 		}
 
+		String[] values = possibleValues.toArray(new String[0]);
+		String[] names = new String[values.length + 1];
+		names[0] = AndroidUtils.getRenderingStringPropertyValue(activity, property.getDefaultValueDescription());
+
+		for (int i = 0; i < values.length; i++) {
+			names[i + 1] = AndroidUtils.getRenderingStringPropertyValue(activity, values[i]);
+		}
+
+		boolean nightMode = isNightMode(activity, app);
+		String title = AndroidUtils.getRenderingStringPropertyDescription(app, property.getAttrName(), property.getName());
 		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
 				.setTitle(title)
 				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
@@ -604,12 +603,12 @@ public class SRTMPlugin extends OsmandPlugin {
 					}
 				});
 
-		CustomAlert.showSingleSelection(dialogData, possibleValuesString, selectedIndex, v -> {
+		CustomAlert.showSingleSelection(dialogData, names, index, v -> {
 			int which = (int) v.getTag();
 			if (which == 0) {
-				pref.set("");
+				preference.set("");
 			} else {
-				pref.set(possibleValues[which - 1]);
+				preference.set(values[which - 1]);
 			}
 			activity.refreshMapComplete();
 		});
