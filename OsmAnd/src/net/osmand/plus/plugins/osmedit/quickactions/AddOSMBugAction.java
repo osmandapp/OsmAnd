@@ -46,7 +46,7 @@ public class AddOSMBugAction extends SelectMapLocationAction {
 	public void execute(@NonNull MapActivity mapActivity) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
-		super.execute(mapActivity);
+			super.execute(mapActivity);
 		}
 	}
 

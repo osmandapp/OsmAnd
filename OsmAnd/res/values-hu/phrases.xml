@@ -894,11 +894,6 @@
     <string name="poi_nwn_ref">Országos turistaút-hálózati csomópont</string>
     <string name="poi_rwn_ref">Regionális turistaút-hálózati csomópont</string>
     <string name="poi_lwn_ref">Helyi turistaút-hálózati csomópont</string>
-    <string name="poi_route_hiking_iwn_poi">Nemzetközi turistaút</string>
-    <string name="poi_route_hiking_nwn_poi">Országos turistaút</string>
-    <string name="poi_route_hiking_rwn_poi">Regionális turistaút</string>
-    <string name="poi_route_hiking_lwn_poi">Helyi turistaút</string>
-    <string name="poi_route_hiking_ref_poi">Turistaútjelzés</string>
     <string name="poi_opening_hours">Nyitva tartás</string>
     <string name="poi_collection_times">Ürítési idő</string>
     <string name="poi_description">Leírás</string>
@@ -4600,6 +4595,7 @@
     <string name="poi_direction">Irány</string>
     <string name="poi_roundtrip_yes">Körútvonal</string>
     <string name="poi_roundtrip_no">Nem körútvonal</string>
+    <string name="poi_healthcare_speciality_weight_loss">Testtömegcsökkentés</string>
     <string name="poi_healthcare_speciality_blood_check">Vérvizsgálat</string>
     <string name="poi_healthcare_speciality_intensive">Intenzív ellátás</string>
     <string name="poi_healthcare_speciality_fertility">Termékenység</string>
@@ -4618,10 +4614,12 @@
     <string name="poi_ship_yes">Nagyobb hajóval használható</string>
     <string name="poi_ship_no">Nagyobb hajóval nem használható</string>
     <string name="poi_ship_private">Nagyobb hajóval a tulajdonos engedélyével használható</string>
+    <string name="poi_boat_destination">Használat kishajóval: csak célforgalom</string>
     <string name="poi_boat_permissive">Kishajóval használata megtűrt</string>
     <string name="poi_boat_no">Kishajóval nem használható</string>
     <string name="poi_ship_destination">Használat nagyobb hajóval: csak célforgalom</string>
     <string name="poi_ship_delivery">Nagyobb hajóval csak áruszállításra használható</string>
+    <string name="poi_boat_designated">Kishajók számára kijelölve</string>
     <string name="poi_ship_permissive">Használata nagyobb hajóval megtűrt</string>
     <string name="poi_us_maps_recreation_area_open_status">Szabadidős terület használhatósága</string>
     <string name="poi_lock_name">Zsilip neve</string>
@@ -4787,6 +4785,7 @@
     <string name="poi_padus_public_access_unknown">Belépés: ismeretlen</string>
     <string name="poi_live_music_yes">van</string>
     <string name="poi_cuisine_fish">Hal</string>
+    <string name="poi_padus_owner_fullname">Tulajdonos</string>
     <string name="poi_border_zone">Határsáv</string>
     <string name="poi_padus_public_access_open">Belépés: nyilvános</string>
     <string name="poi_indoor_seating_bar_table">Beltéri ülőhely: bárpult</string>
@@ -4861,6 +4860,7 @@
     <string name="poi_payment_parco_no">Parcót nem fogad el</string>
     <string name="poi_payment_parkster_yes">Parkster</string>
     <string name="poi_payment_parkster_no">Parkstert nem fogad el</string>
+    <string name="poi_routes_motorcycling">Motorozás</string>
     <string name="poi_routes_foot">Gyaloglás</string>
     <string name="poi_routes_cycling">Kerékpározás</string>
     <string name="poi_routes_water_sport">Vízi sportok</string>

@@ -1736,11 +1736,6 @@
     <string name="poi_nwn_ref">Nacionalni planinarski mrežni čvor</string>
     <string name="poi_rwn_ref">Regionalni planinarski mrežni čvor</string>
     <string name="poi_lwn_ref">Lokalni planinarski mrežni čvor</string>
-    <string name="poi_route_hiking_iwn_poi">Međunarodna planinarska ruta</string>
-    <string name="poi_route_hiking_nwn_poi">Nacionalna planinarska ruta</string>
-    <string name="poi_route_hiking_rwn_poi">Regionalna planinarska ruta</string>
-    <string name="poi_route_hiking_lwn_poi">Lokalna planinarska ruta</string>
-    <string name="poi_route_hiking_ref_poi">Referenca planinarske rute</string>
     <string name="poi_collection_times">Kolekcioni periodi</string>
     <string name="poi_access_permissive">Dozvoljen pristup</string>
     <string name="poi_content_silage">Sadržaj: silaža</string>
@@ -4518,6 +4513,8 @@
     <string name="poi_healthcare_speciality_covid19">COVID19</string>
     <string name="poi_healthcare_speciality_blood_check">Testiranje krvi</string>
     <string name="poi_healthcare_speciality_intensive">Intezivna nega</string>
+    <string name="poi_healthcare_speciality_ayurveda">Ajurveda</string>
+    <string name="poi_healthcare_speciality_reflexology">Refleksologija</string>
     <string name="poi_healthcare_speciality_applied_kinesiology">Primenjena kineziologija</string>
     <string name="poi_healthcare_speciality_aromatherapy">Aromaterapija</string>
     <string name="poi_healthcare_speciality_hydrotherapy">Hidroterapija</string>
@@ -4618,6 +4615,7 @@
     <string name="poi_healthcare_speciality_infectious_diseases">Zarazne bolesti</string>
     <string name="poi_dressing_room">Svlačionica</string>
     <string name="poi_healthcare_speciality_community">Zajednica</string>
+    <string name="poi_healthcare_speciality_anthroposophical">Antropozofija</string>
     <string name="poi_healthcare_speciality_body">Telesna psihoterapija</string>
     <string name="poi_healthcare_speciality_systemic">Sistemska porodična terapija</string>
     <string name="poi_healthcare_speciality_sophrologist">Sofrologija</string>
@@ -4653,6 +4651,7 @@
     <string name="poi_dry_cleaning_yes">Da</string>
     <string name="poi_sinkhole_doline">Vrtača: dolina</string>
     <string name="poi_sinkhole_ponor">Vrtača: ponor</string>
+    <string name="poi_board_type_sport">Sport</string>
     <string name="poi_board_type_welcome_sign">Znak dobrodošlice</string>
     <string name="poi_payment_american_express_contactless_yes">Beskontaktni American Express (AMEX)</string>
     <string name="poi_payment_mastercard_contactless_no">Beskontaktna MasterCard nije prihvaćena</string>
@@ -4863,6 +4862,7 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunel zabranjen za bicikliste</string>
     <string name="poi_route_article">Članci o putovanjima</string>
     <string name="poi_route_article_point">Tačke na putovanjima</string>
+    <string name="poi_route_track_point">Tačke rute</string>
     <string name="poi_name_etymology">Etimologija imena</string>
     <string name="poi_name_left">Naziv leve strane</string>
     <string name="poi_name_right">Naziv desne strane</string>

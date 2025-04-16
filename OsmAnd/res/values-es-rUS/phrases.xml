@@ -860,11 +860,6 @@
     <string name="poi_fee_yes">Sí;Tarifado</string>
     <string name="poi_kent_carriage_gap">Bolardos para carros a caballo</string>
     <string name="poi_abandoned_poi">Objeto abandonado</string>
-    <string name="poi_route_hiking_iwn_poi">Ruta internacional de senderismo</string>
-    <string name="poi_route_hiking_nwn_poi">Ruta nacional de senderismo</string>
-    <string name="poi_route_hiking_rwn_poi">Ruta regional de senderismo</string>
-    <string name="poi_route_hiking_lwn_poi">Ruta local de senderismo</string>
-    <string name="poi_route_hiking_ref_poi">Referencia de ruta de senderismo</string>
     <string name="poi_node_networks">Red de nodos de senderismo/ciclismo</string>
     <string name="poi_hiking_routes">Rutas de senderismo</string>
     <string name="poi_traffic_enforcement">Control del tráfico</string>
@@ -4634,6 +4629,8 @@
     <string name="poi_socket_typee_output">Enchufe: Tipo E: salida</string>
     <string name="poi_dressing_room">Vestidor</string>
     <string name="poi_emergency_bay">Bahía de emergencia</string>
+    <string name="poi_healthcare_speciality_denturist">Denturista</string>
+    <string name="poi_healthcare_speciality_pediatric">Pediatría</string>
     <string name="poi_healthcare_speciality_pedorthist">Pedortista</string>
     <string name="poi_healthcare_speciality_laboratory">Especialidad médica: laboratorio</string>
     <string name="poi_healthcare_speciality_body">Psicoterapia corporal</string>
@@ -4719,6 +4716,7 @@
     <string name="poi_padus_category_easement">Categoría: facilidad</string>
     <string name="poi_padus_local_designation">Designación local</string>
     <string name="poi_padus_designation_type_fullname">Tipo de designación</string>
+    <string name="poi_indoor_seating_yes">Asientos en interior: sí</string>
     <string name="poi_indoor_seating_no">Asientos en interior: No</string>
     <string name="poi_us_maps_recreation_area_activity_boating_motorized">Barco motorizado</string>
     <string name="poi_us_maps_recreation_area_activity_fishing">Pesca</string>
@@ -4864,6 +4862,7 @@
     <string name="poi_osmand_foot_prohibited_tunnel">Túnel prohibido para peatones</string>
     <string name="poi_route_article">Artículos turísticos</string>
     <string name="poi_route_article_point">Puntos turísticos</string>
+    <string name="poi_route_track_point">Puntos de ruta</string>
     <string name="poi_routes_driving">Automóvil</string>
     <string name="poi_routes_motorcycling">Motocicleta</string>
     <string name="poi_routes_foot">A pie</string>

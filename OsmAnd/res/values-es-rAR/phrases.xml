@@ -860,11 +860,6 @@
     <string name="poi_fee_yes">Sí;Tarifado</string>
     <string name="poi_kent_carriage_gap">Bolardos para carros a caballo</string>
     <string name="poi_abandoned_poi">Objeto abandonado</string>
-    <string name="poi_route_hiking_iwn_poi">Ruta internacional de senderismo</string>
-    <string name="poi_route_hiking_nwn_poi">Ruta nacional de senderismo</string>
-    <string name="poi_route_hiking_rwn_poi">Ruta regional de senderismo</string>
-    <string name="poi_route_hiking_lwn_poi">Ruta local de senderismo</string>
-    <string name="poi_route_hiking_ref_poi">Referencia de ruta de senderismo</string>
     <string name="poi_node_networks">Red de nodos de senderismo/ciclismo</string>
     <string name="poi_hiking_routes">Rutas de senderismo</string>
     <string name="poi_traffic_enforcement">Control del tráfico</string>
@@ -4634,6 +4629,8 @@
     <string name="poi_socket_typee_yes">Tipo E</string>
     <string name="poi_dressing_room">Vestidor</string>
     <string name="poi_emergency_bay">Bahía de emergencia</string>
+    <string name="poi_healthcare_speciality_denturist">Denturista</string>
+    <string name="poi_healthcare_speciality_pediatric">Pediatría</string>
     <string name="poi_healthcare_speciality_pedorthist">Pedortista</string>
     <string name="poi_healthcare_speciality_laboratory">Especialidad médica: laboratorio</string>
     <string name="poi_healthcare_speciality_body">Psicoterapia corporal</string>
@@ -4865,6 +4862,7 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Túnel prohibido para ciclistas</string>
     <string name="poi_route_article">Artículos turísticos</string>
     <string name="poi_route_article_point">Puntos turísticos</string>
+    <string name="poi_route_track_point">Puntos de la ruta</string>
     <string name="poi_name_etymology">Nombre etimológico</string>
     <string name="poi_name_left">Nombre del lado izquierdo</string>
     <string name="poi_name_right">Nombre del lado derecho</string>

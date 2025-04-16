@@ -846,11 +846,6 @@
     <string name="poi_nwn_ref">Nationaler Wanderwegenetz-Knoten</string>
     <string name="poi_rwn_ref">Regionaler Wanderwegenetz-Knoten</string>
     <string name="poi_lwn_ref">Lokaler Wanderwegenetz-Knoten</string>
-    <string name="poi_route_hiking_iwn_poi">Internationaler Wanderweg</string>
-    <string name="poi_route_hiking_nwn_poi">Nationaler Wanderweg</string>
-    <string name="poi_route_hiking_rwn_poi">Regionaler Wanderweg</string>
-    <string name="poi_route_hiking_lwn_poi">Örtlicher Wanderweg</string>
-    <string name="poi_route_hiking_ref_poi">Wanderweghinweis</string>
     <string name="poi_collection_times">Leerungszeiten</string>
     <string name="poi_service_times">Betriebszeiten</string>
     <string name="poi_abandoned_poi">Verlassenes Objekt</string>
@@ -4634,6 +4629,8 @@
     <string name="poi_socket_typee_output">Sockel: Typ E: Leistung</string>
     <string name="poi_dressing_room">Umkleideraum</string>
     <string name="poi_emergency_bay">Rettungsbucht</string>
+    <string name="poi_healthcare_speciality_denturist">Zahntechniker</string>
+    <string name="poi_healthcare_speciality_pediatric">Pädiatrie</string>
     <string name="poi_healthcare_speciality_pedorthist">Fußpfleger</string>
     <string name="poi_healthcare_speciality_laboratory">Gesundheitsspezialisierung: Labor</string>
     <string name="poi_healthcare_speciality_body">Körperorientierte Psychotherapie</string>
@@ -4865,6 +4862,7 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunnel für Radfahrer verboten</string>
     <string name="poi_route_article_point">Reisepunkte</string>
     <string name="poi_route_article">Reiseartikel</string>
+    <string name="poi_route_track_point">Routenpunkte</string>
     <string name="poi_name_etymology">Namensetymologie</string>
     <string name="poi_name_left">Name der linken Seite</string>
     <string name="poi_name_right">Name der rechten Seite</string>

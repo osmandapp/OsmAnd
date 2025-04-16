@@ -2530,11 +2530,6 @@
     <string name="poi_nwn_ref">Bidezidor kirol sare nazionaleko nodoa</string>
     <string name="poi_rwn_ref">Bidezidor kirol sare erregionaleko nodoa</string>
     <string name="poi_lwn_ref">Bidezidor kirol sare lokaleko nodoa</string>
-    <string name="poi_route_hiking_iwn_poi">Bidezidor kirol ibilbide internazionala</string>
-    <string name="poi_route_hiking_nwn_poi">Bidezidor kirol ibilbide nazionala</string>
-    <string name="poi_route_hiking_rwn_poi">Bidezidor kirol ibilbide erregionala</string>
-    <string name="poi_route_hiking_lwn_poi">Bidezidor kirol ibilbide lokala</string>
-    <string name="poi_route_hiking_ref_poi">Bidezidor kirolerako ibilbidearen erreferentzia</string>
     <string name="poi_opening_hours">Irekiera-ordutegia</string>
     <string name="poi_collection_times">Bilketa-ordutegia</string>
     <string name="poi_description">Deskripzioa</string>

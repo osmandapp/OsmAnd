@@ -1120,11 +1120,6 @@
     <string name="poi_nwn_ref">നാഷണല്‍ ഹൈക്കിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
     <string name="poi_rwn_ref">"റീജിയണല്‍ ഹൈക്കിങ്ങ്  നെറ്റ്വര്‍ക്ക് നോഡ്"</string>
     <string name="poi_lwn_ref">ലോക്കല്‍ ഹൈക്കിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
-    <string name="poi_route_hiking_iwn_poi">"ഇന്റെര്‍നാഷണല്‍ ഹൈക്കിങ്ങ്  റൂട്ട് "</string>
-    <string name="poi_route_hiking_nwn_poi">"നാഷണല്‍ ഹൈക്കിങ്ങ്  റൂട്ട് "</string>
-    <string name="poi_route_hiking_rwn_poi">റീജിയണല്‍ ഹൈക്കിങ്ങ് റൂട്ട്</string>
-    <string name="poi_route_hiking_lwn_poi">"ലോക്കല്‍ ഹൈക്കിങ്ങ് റൂട്ട് "</string>
-    <string name="poi_route_hiking_ref_poi">ഹൈക്കിങ്ങ് റൂട്ട് റെഫറന്‍സ്</string>
     <string name="poi_opening_hours">തുറക്കുന്ന സമയം</string>
     <string name="poi_collection_times">കളക്ഷന്‍ ടൈംസ്</string>
     <string name="poi_description">വിവരണം</string>

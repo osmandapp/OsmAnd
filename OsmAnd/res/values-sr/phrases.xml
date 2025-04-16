@@ -1736,11 +1736,6 @@
     <string name="poi_nwn_ref">Национални планинарски мрежни чвор</string>
     <string name="poi_rwn_ref">Регионални планинарски мрежни чвор</string>
     <string name="poi_lwn_ref">Локални планинарски мрежни чвор</string>
-    <string name="poi_route_hiking_iwn_poi">Међународна планинарска рута</string>
-    <string name="poi_route_hiking_nwn_poi">Национална планинарска рута</string>
-    <string name="poi_route_hiking_rwn_poi">Регионална планинарска рута</string>
-    <string name="poi_route_hiking_lwn_poi">Локална планинарска рута</string>
-    <string name="poi_route_hiking_ref_poi">Референца планинарске руте</string>
     <string name="poi_collection_times">Колекциони периоди</string>
     <string name="poi_access_permissive">Дозвољен приступ</string>
     <string name="poi_content_silage">Садржај: силосни</string>
@@ -4350,6 +4345,7 @@
     <string name="poi_hiking_filter">Погодно за планинарење</string>
     <string name="poi_waste_accepted">Прихватљив отпад</string>
     <string name="poi_vending_machine_fuel_filter">Аутоматски диспенсери за гориво;Аутомати за гориво</string>
+    <string name="poi_socket_type2_cable">Утичница: Тип 2 кабал</string>
     <string name="poi_socket_type2_cable_current">Утичница: Тип 2 кабал: тренутно</string>
     <string name="poi_socket_typee_voltage">Утичница: Тип Е: напон</string>
     <string name="poi_climbing_rock_gritstone">Стена за пењање: пешчаник</string>
@@ -4357,6 +4353,7 @@
     <string name="poi_payment_mir_no">Мир картице се не прихватају</string>
     <string name="poi_club_youth_movement">Покрет младих</string>
     <string name="poi_club_amateur_radio">Аматерски радио клуб</string>
+    <string name="poi_socket_type2_cable_output">Утичница: Тип 2 кабал: излаз</string>
     <string name="poi_socket_typee">Утичница: Тип Е</string>
     <string name="poi_climbing_rock_conglomerate">Стена за пењање: конгломерат</string>
     <string name="poi_water_filter">Вода;Пијаћа вода</string>
@@ -4588,6 +4585,7 @@
     <string name="poi_healthcare_speciality_allergology">Алергологија</string>
     <string name="poi_healthcare_speciality_cardiac_surgery">Кардио хирургија</string>
     <string name="poi_healthcare_speciality_endodontics">Ендодонтика</string>
+    <string name="poi_healthcare_speciality_ayurveda">Ајурведа</string>
     <string name="poi_not_pt_shelter_yes">Заклон (не за јавни превоз)</string>
     <string name="poi_ship_yes">Приступ бродом: да</string>
     <string name="poi_cemt_ii">II</string>
@@ -4621,6 +4619,7 @@
     <string name="poi_healthcare_speciality_blood_check">Провера крви</string>
     <string name="poi_healthcare_speciality_massage_therapy">Терапија масажом</string>
     <string name="poi_healthcare_speciality_vascular_surgery">Васкуларна хирургија</string>
+    <string name="poi_tunnel_name">Назив тунела</string>
     <string name="poi_bridge_name">Назив моста</string>
     <string name="poi_vending_machine_fuel">Да</string>
     <string name="poi_surface_acrylic">Површина: акрилна</string>
@@ -4723,6 +4722,7 @@
     <string name="poi_us_maps_recreation_area_activity_big_game_hunting">Лов на крупно</string>
     <string name="poi_us_maps_recreation_area_activity_boating_motorized">Моторизована вожња чамцем</string>
     <string name="poi_us_maps_recreation_area_activity_boating_non_motorized">Немоторизована вожња чамцем</string>
+    <string name="poi_us_maps_recreation_area_activity_campground_camping">Камповање на камп терену</string>
     <string name="poi_us_maps_recreation_area_activity_camping_and_cabins">Камповање и колибе</string>
     <string name="poi_us_maps_recreation_area_activity_caving">Пећинарење</string>
     <string name="poi_us_maps_recreation_area_activity_climbing">Пењање</string>
@@ -4862,6 +4862,7 @@
     <string name="poi_osmand_foot_prohibited_tunnel">Тунел забрањен за пешаке</string>
     <string name="poi_route_article_point">Тачке на путовањима</string>
     <string name="poi_route_article">Чланци о путовањима</string>
+    <string name="poi_route_track_point">Тачке руте</string>
     <string name="poi_name_etymology">Етимологија имена</string>
     <string name="poi_name_left">Назив леве стране</string>
     <string name="poi_name_right">Назив десне стране</string>
