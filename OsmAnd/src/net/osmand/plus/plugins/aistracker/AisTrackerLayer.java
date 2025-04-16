@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import androidx.annotation.DrawableRes;
@@ -25,6 +26,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult;
@@ -180,7 +182,15 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Nullable
 	public Bitmap getBitmap(@DrawableRes int drawable) {
-		return getScaledBitmap(drawable);
+		Drawable icon = getApplication().getUIUtilities().getIcon(drawable);
+		Bitmap bitmap = AndroidUtils.drawableToBitmap(icon);
+
+		float scale = getTextScale();
+		if (bitmap != null && scale != 1f && scale > 0) {
+			bitmap = AndroidUtils.scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+		return bitmap;
 	}
 
 	@NonNull
