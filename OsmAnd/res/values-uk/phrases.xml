@@ -4987,6 +4987,8 @@
     <string name="poi_network_ncn">Національні велосипедні маршрути (NCN)</string>
     <string name="poi_network_rcn">Регіональні велосипедні маршрути (RCN)</string>
     <string name="poi_network_lcn">Місцеві велосипедні маршрути (LCN)</string>
+    <string name="poi_network_nhn">Національні кінні маршрути (NHN)</string>
+    <string name="poi_network_rhn">Регіональні кінні маршрути (RHN)</string>
     <string name="poi_network_lhn">Місцеві кінні маршрути (LHN)</string>
     <string name="poi_network_cycling">Мережа маршрутів (велосипедний)</string>
     <string name="poi_route_activity_type_mountain_biking">MTB маршрути (маунтінбайк)</string>
