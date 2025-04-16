@@ -1362,7 +1362,7 @@
     <string name="map_locale">Език на картата</string>
     <string name="download_tab_downloads">Всички</string>
     <string name="download_tab_local">Изтеглени</string>
-    <string name="no_internet_connection">Грешка при изтегляне. Проверете връзката с интернет.</string>
+    <string name="no_internet_connection">Няма връзка с интернет</string>
     <string name="everything_up_to_date">Всички файлове са обновени</string>
     <string name="use_opengl_render">OpenGL изчертаване</string>
     <string name="use_opengl_render_descr">Използване на хардуерно ускорено OpenGL изчертаване (възможно е да има повишена консумация и да не работи на някои по-стари устройства).</string>
