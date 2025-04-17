@@ -5753,4 +5753,5 @@
     <string name="multipoligon_related">Пов\'язані</string>
     <string name="route_members">Члени</string>
     <string name="cant_load_map_styles">Не вдається завантажити стилі карти.</string>
+    <string name="add_to_navigation">Додати до навігації</string>
 </resources>
