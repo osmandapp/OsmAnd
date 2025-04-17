@@ -268,7 +268,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		WikiDataProperties properties = featureData.properties;
 
 		amenity.setAdditionalInfo(WIKIDATA, app.getString(R.string.wikidata_id_pattern, properties.id));
-		amenity.setId(properties.osmid);
 		amenity.setName(properties.wikiTitle);
 		amenity.setEnName(TransliterationHelper.transliterate(amenity.getName()));
 		amenity.setDescription(properties.wikiDesc);
@@ -284,15 +283,24 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		amenity.setLocation(featureData.geometry.coordinates[1], featureData.geometry.coordinates[0]);
 
 		String poitype = properties.poitype;
-		if (!Algorithms.isEmpty(poitype)) {
-			PoiCategory category = app.getPoiTypes().getPoiCategoryByName(poitype);
-			amenity.setType(category != null ? category : app.getPoiTypes().getOtherPoiCategory());
+		String subtype = properties.poisubtype;
+		PoiCategory wikiCategory = app.getPoiTypes().getPoiCategoryByName("osmwiki");
+		PoiCategory category = Algorithms.isEmpty(poitype) ? null : app.getPoiTypes().getPoiCategoryByName(poitype);
+		if (Algorithms.isEmpty(subtype) || category == null) {
+			category = wikiCategory;
+			subtype = "wikiplace";
 		}
-		amenity.setSubType(properties.poisubtype);
+		if (category == null) {
+			return null;
+		}
+		amenity.setType(category);
+		amenity.setSubType(subtype);
+		// TODO calculate osmid for different types way, node, relation
+		amenity.setId(properties.osmid * 2); // + 1 way, relation special algorithm backend
 		//amenity.setTravelTopic(properties.wikiTitle);
 		//amenity.setWikiCategory(properties.wikiDesc);
 		amenity.setTravelEloNumber(properties.elo != null ? properties.elo.intValue() : DEFAULT_ELO);
-		return amenity.getType() != null ? amenity : null;
+		return amenity;
 	}
 
 	@SuppressLint("DefaultLocale")
