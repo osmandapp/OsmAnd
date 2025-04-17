@@ -63,7 +63,7 @@
 						android:singleLine="true"
 						android:textColor="?attr/searchbar_text"
 						android:textColorHint="?attr/searchbar_text_hint"
-						android:textSize="@dimen/default_list_text_size" />
+						android:textSize="@dimen/dialog_header_text_size" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/toolbar_title"
@@ -72,7 +72,7 @@
 						android:layout_gravity="center_vertical"
 						android:layout_marginVertical="@dimen/content_padding_half"
 						android:text="@string/shared_string_widgets"
-						android:textSize="@dimen/default_list_text_size"
+						android:textSize="@dimen/dialog_header_text_size"
 						app:typefaceWeight="medium" />
 
 				</FrameLayout>
