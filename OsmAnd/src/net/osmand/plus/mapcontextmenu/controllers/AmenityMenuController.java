@@ -226,7 +226,7 @@ public class AmenityMenuController extends MenuController {
 		String distance = AmenityExtensionsHelper.getAmenityDistanceFormatted(amenity, app);
 		String activityType = amenity.getRouteActivityType();
 		if (!Algorithms.isEmpty(activityType)) {
-			type = app.getString(R.string.ltr_or_rtl_combine_via_comma, type, activityType);
+			type = activityType;
 		}
 		if (distance != null) {
 			return app.getString(R.string.ltr_or_rtl_combine_via_comma, type, distance);
