@@ -20,7 +20,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.SwigUtilities;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -32,7 +36,9 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +56,9 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private final Paint bitmapPaint;
 	private Timer timer;
 	private AisMessageListener listener;
+	
+	private MapMarkersCollection markersCollection;
+	private Map<Integer, MapMarker> markerMap;
 
 	public AisTrackerLayer(@NonNull Context context) {
 		super(context);
@@ -68,6 +77,20 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		initTimer();
 		startNetworkListener();
+
+		markerMap = new HashMap<>();
+	}
+
+	@Override
+	public void onMapRendererChange(@Nullable MapRendererView currentMapRenderer,
+									@Nullable MapRendererView newMapRenderer) {
+		super.onMapRendererChange(currentMapRenderer, newMapRenderer);
+
+		if (newMapRenderer != null) {
+			markerMap.clear();
+			markersCollection = new MapMarkersCollection();
+			newMapRenderer.addSymbolsProvider(markersCollection);
+		}
 	}
 
 	public void setListener(AisMessageListener listener) {
@@ -217,6 +240,12 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (tileBox.getZoom() >= START_ZOOM) {
 			AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
+
+			if (view.getMapRenderer() != null) {
+				updateMarkersCollection();
+				return;
+			}
+
 			for (AisObject ais : aisObjectList.values()) {
 				if (isLocationVisible(tileBox, ais.getPosition())) {
 					ais.draw(this, bitmapPaint, canvas, tileBox);
@@ -297,5 +326,44 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 							(ais.getSignalLostState() ? " (signal lost)" : ""));
 		}
 		return null;
+	}
+
+	private void updateMarkersCollection() {
+		if (markersCollection == null) {
+			return;
+		}
+
+		for (AisObject aisObject : aisObjectList.values()) {
+			LatLon location = aisObject.getPosition();
+			Bitmap bitmap = aisObject.getBitmap(this, bitmapPaint);
+
+			if (location != null && bitmap != null) {
+				PointI point = new PointI(
+						MapUtils.get31TileNumberX(location.getLongitude()),
+						MapUtils.get31TileNumberY(location.getLatitude())
+				);
+
+				int mmsi = aisObject.getMmsi();
+				MapMarker marker = markerMap.get(mmsi);
+
+				if (marker == null) {
+					MapMarkerBuilder markerBuilder = new MapMarkerBuilder();
+					markerBuilder.setIsHidden(false)
+							.setBaseOrder(getBaseOrder())
+							.setIsAccuracyCircleSupported(false)
+							.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), NativeUtilities.createSkImageFromBitmap(bitmap));
+
+					marker = markerBuilder.buildAndAddToCollection(markersCollection);
+					markerMap.put(mmsi, marker);
+				}
+
+				marker.setPosition(point);
+
+				if (!aisObject.isVesselAtRest() && aisObject.needRotation()) {
+					float rotation = (aisObject.getVesselRotation() + 180f) % 360f;
+					marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
+				}
+			}
+		}
 	}
 }

@@ -502,9 +502,7 @@ public class AisObject {
             float fx =  locationX - this.bitmap.getWidth() / 2.0f;
             float fy =  locationY - this.bitmap.getHeight() / 2.0f;
             if (!vesselAtRest && this.needRotation()) {
-                float rotation = 0;
-                if (this.ais_cog != INVALID_COG) { rotation = (float)this.ais_cog; }
-                else if (this.ais_heading != INVALID_HEADING ) { rotation = this.ais_heading; }
+                float rotation = getVesselRotation();
                 canvas.rotate(rotation, locationX, locationY);
             }
             if (vesselAtRest) {
@@ -548,7 +546,7 @@ public class AisObject {
         }
         return 0.0f;
     }
-    private boolean needRotation() {
+    boolean needRotation() {
         if (((this.ais_cog != INVALID_COG) && (this.ais_cog != 0)) ||
                 ((this.ais_heading != INVALID_HEADING) && (this.ais_heading != 0)))
         {
@@ -557,7 +555,7 @@ public class AisObject {
         return false;
     }
     /* return true if a vessel is moored etc. and needs to be drawn as a circle */
-    private boolean isVesselAtRest() {
+    boolean isVesselAtRest() {
         switch (this.objectClass) {
             case AIS_VESSEL:
             case AIS_VESSEL_SPORT:
@@ -987,5 +985,19 @@ public class AisObject {
     }
     public boolean getSignalLostState() {
         return (isLost(vesselLostTimeoutInMinutes) && isMovable() && !vesselAtRest);
+    }
+
+    Bitmap getBitmap(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint)
+    {
+        updateBitmap(mapLayer, paint);
+        return bitmap;
+    }
+
+    float getVesselRotation()
+    {
+        float rotation = 0;
+        if (this.ais_cog != INVALID_COG) { rotation = (float)this.ais_cog; }
+        else if (this.ais_heading != INVALID_HEADING ) { rotation = this.ais_heading; }
+        return rotation;
     }
 }
