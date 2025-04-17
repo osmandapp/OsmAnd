@@ -32,8 +32,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.squareup.picasso.Picasso;
-
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -62,7 +60,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 
 	public static final String TAG = GalleryPhotoPagerFragment.class.getSimpleName();
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
-	public static final int PRELOAD_THUMBNAILS_COUNT = 5;
+	public static final int PRELOAD_THUMBNAILS_COUNT = 3;
 	public static final String SELECTED_POSITION_KEY = "selected_position_key";
 
 	private GalleryController controller;
@@ -159,7 +157,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 			}
 			for (int i = selectedPosition; i < lastPreloadThumbnailIndex; i++) {
 				ImageCard card = imageCards.get(i);
-				Picasso.get().load(card.getThumbnailUrl()).fetch();
+				downloadThumbnail(card.getThumbnailUrl());
 			}
 		} else {
 			int startPreloadThumbnailIndex = selectedPosition - 1;
@@ -172,8 +170,14 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 			}
 			for (int i = selectedPosition; i > lastPreloadThumbnailIndex; i--) {
 				ImageCard card = imageCards.get(i);
-				Picasso.get().load(card.getThumbnailUrl()).fetch();
+				downloadThumbnail(card.getThumbnailUrl());
 			}
+		}
+	}
+
+	private void downloadThumbnail(@Nullable String url) {
+		if (!Algorithms.isEmpty(url)) {
+			controller.getImageLoader().loadImage(url);
 		}
 	}
 

@@ -56,6 +56,16 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
 
         return LoadingImage(url, imageLoader.enqueue(request))
     }
+
+    fun loadImage(
+        url: String,
+    ): LoadingImage {
+        val request = ImageRequest.Builder(context)
+            .data(url)
+            .build()
+
+        return LoadingImage(url, imageLoader.enqueue(request))
+    }
 }
 
 interface ImageLoaderCallback {

@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
+import static net.osmand.plus.helpers.AndroidUiHelper.ANIMATION_DURATION;
 import static net.osmand.plus.settings.bottomsheets.WidgetsResetConfirmationBottomSheet.*;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.utils.WidgetUtils.createNewWidget;
@@ -75,7 +76,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private static final String CONTEXT_SELECTED_PANEL = "context_selected_panel";
 	private static final String ADD_TO_NEXT = "widget_order";
 	private static final String EDIT_MODE_KEY = "edit_mode_key";
-	private static final int ANIMATION_DURATION = 300;
 
 	private DialogManager dialogManager;
 	private ConfigureWidgetsController controller;

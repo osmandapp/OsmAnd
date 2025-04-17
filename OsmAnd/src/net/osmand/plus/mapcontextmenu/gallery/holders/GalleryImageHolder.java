@@ -3,6 +3,10 @@ package net.osmand.plus.mapcontextmenu.gallery.holders;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator.GRID_SCREEN_ITEM_SPACE_DP;
 import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.ImageHolderType.*;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
@@ -16,9 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,6 +31,9 @@ import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.ImageCardListen
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.util.ImageLoaderCallback;
+import net.osmand.shared.util.LoadingImage;
+import net.osmand.shared.util.NetworkImageLoader;
 
 public class GalleryImageHolder extends RecyclerView.ViewHolder {
 	private final int MAIN_PHOTO_SIZE_DP;
@@ -43,6 +47,7 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 	private final View border;
 	private final View itemView;
 	private ImageHolderType type;
+	private LoadingImage loadingImage;
 
 	public GalleryImageHolder(OsmandApplication app, @NonNull View itemView) {
 		super(itemView);
@@ -57,7 +62,7 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull MapActivity mapActivity, @NonNull ImageCardListener listener, @NonNull ImageCard imageCard,
-	                     @NonNull ImageHolderType type, Integer viewWidth, boolean nightMode) {
+	                     @NonNull ImageHolderType type, Integer viewWidth, @NonNull NetworkImageLoader imageLoader, boolean nightMode) {
 		this.type = type;
 		OsmandApplication app = mapActivity.getMyApplication();
 		UiUtilities uiUtilities = app.getUIUtilities();
@@ -75,27 +80,45 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 
 		progressBar.setVisibility(imageCard instanceof UrlImageCard ? View.VISIBLE : View.GONE);
 
+		ivImage.setImageDrawable(null);
+
 		if (imageCard.isImageDownloadFailed()) {
 			bindUrl(mapActivity, imageCard, nightMode);
 		} else {
-			tryLoadImage(mapActivity, listener, imageCard, nightMode);
+			tryLoadImage(mapActivity, listener, imageCard, imageLoader, nightMode);
 		}
 	}
 
 	private void tryLoadImage(@NonNull MapActivity mapActivity, @NonNull ImageCardListener listener,
-	                          @NonNull ImageCard imageCard, boolean nightMode) {
-		Picasso.get().load(imageCard.getImageUrl()).into(ivImage, new Callback() {
-			@Override
-			public void onSuccess() {
-				bindImage(listener, imageCard);
-			}
+	                          @NonNull ImageCard imageCard, @NonNull NetworkImageLoader imageLoader, boolean nightMode) {
+		if (loadingImage != null) {
+			loadingImage.cancel();
+		}
 
-			@Override
-			public void onError(Exception e) {
-				imageCard.markImageDownloadFailed(true);
-				bindUrl(mapActivity, imageCard, nightMode);
-			}
-		});
+		String imageUrl = imageCard.getImageUrl();
+
+		if (imageUrl != null) {
+			loadingImage = imageLoader.loadImage(imageUrl, new ImageLoaderCallback() {
+				@Override
+				public void onStart(@Nullable Bitmap bitmap) {
+
+				}
+
+				@Override
+				public void onSuccess(@NonNull Bitmap bitmap) {
+					bindImage(listener, imageCard);
+					Drawable next = new BitmapDrawable(ivImage.getResources(), bitmap);
+
+					ivImage.setImageDrawable(next);
+				}
+
+				@Override
+				public void onError() {
+					imageCard.markImageDownloadFailed(true);
+					bindUrl(mapActivity, imageCard, nightMode);
+				}
+			}, false);
+		}
 	}
 
 	private void bindImage(@NonNull ImageCardListener listener, @NonNull ImageCard imageCard) {
