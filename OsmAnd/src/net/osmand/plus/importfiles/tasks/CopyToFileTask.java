@@ -34,12 +34,8 @@ public class CopyToFileTask extends BaseImportAsyncTask<Void, Void, String> {
 		try {
 			out = app.getContentResolver().openOutputStream(destinationUri);
 			in = new FileInputStream(originalFile);
-			byte[] buffer = new byte[4096];
-			int length;
 			if (out != null) {
-				while ((length = in.read(buffer)) > 0) {
-					out.write(buffer, 0, length);
-				}
+				Algorithms.streamCopy(in, out);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
