@@ -464,7 +464,7 @@ public class QuickSearchListItem {
 				pointDescription = entry.getName();
 				if (pointDescription.isPoi() || pointDescription.isAddressTypeCity()) {
 					Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(),
-							entry.getLat(), entry.getLon(), lang, transliterate);
+							entry.getLat(), entry.getLon(), lang, transliterate, true);
 					if (amenity != null) {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
@@ -544,7 +544,7 @@ public class QuickSearchListItem {
 	                                          @NonNull String lang, boolean transliterate) {
 		if ("basemap".equals(amenity.getRegionName())) {
 			Amenity freshAmenity = app.getSearchUICore().findAmenity(amenity.getName(lang),
-					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), lang, transliterate);
+					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), lang, transliterate, false);
 			if (freshAmenity != null) {
 				return freshAmenity;
 			}

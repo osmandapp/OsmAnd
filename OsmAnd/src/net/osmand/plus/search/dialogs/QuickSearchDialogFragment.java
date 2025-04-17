@@ -374,7 +374,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 											settings.isTransliterate() : app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 									Amenity amenity = app.getSearchUICore().findAmenity(searchResult.localeName,
 											searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-											lang, transliterate);
+											lang, transliterate, true);
 									if (amenity != null) {
 										object = amenity;
 									}

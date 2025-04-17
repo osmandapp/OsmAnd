@@ -167,9 +167,9 @@ public class QuickSearchHelper implements ResourceListener {
 		core.getSearchSettings().setRegions(app.getRegions());
 	}
 
-	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
+	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate, boolean includeTravel) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, includeTravel);
 
 		MapPoiTypes types = app.getPoiTypes();
 		for (Amenity amenity : amenities) {
@@ -406,7 +406,7 @@ public class QuickSearchHelper implements ResourceListener {
 				String lang = sr.requiredSearchPhrase.getSettings().getLang();
 				boolean transliterate = sr.requiredSearchPhrase.getSettings().isTransliterate();
 				Amenity a = app.getSearchUICore().findAmenity(amenity.getName(), latLon.getLatitude(),
-						latLon.getLongitude(), lang, transliterate);
+						latLon.getLongitude(), lang, transliterate, false);
 				if (a != null) {
 					sr = getSearchResult(phrase, a);
 				}
