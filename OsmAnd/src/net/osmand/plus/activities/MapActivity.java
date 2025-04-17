@@ -974,6 +974,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		extendedMapActivity.onDestroy(this);
 
 		mIsDestroyed = true;
+
+		removeActivityResultListener(importHelper.getSaveFileResultListener());
 	}
 
 	public LatLon getMapLocation() {
@@ -1633,7 +1635,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void registerActivityResultListener(ActivityResultListener listener) {
-		activityResultListeners.add(listener);
+		if (!activityResultListeners.contains(listener)) {
+			activityResultListeners.add(listener);
+		}
 	}
 
 	public void removeActivityResultListener(ActivityResultListener listener) {

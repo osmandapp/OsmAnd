@@ -1193,7 +1193,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
 				}
 			} else if (buttonIndex == SHARE_BUTTON_INDEX) {
-				GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
+				GpxUiHelper.saveAndShareGpxWithAppearance(app, mapActivity, gpxFile);
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {
 				OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
