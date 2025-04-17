@@ -5746,4 +5746,5 @@
     <string name="multipoligon_related">Související</string>
     <string name="route_part_of">Součást</string>
     <string name="cant_load_map_styles">Nelze načíst styly map.</string>
+    <string name="add_to_navigation">Přidat do navigace</string>
 </resources>
