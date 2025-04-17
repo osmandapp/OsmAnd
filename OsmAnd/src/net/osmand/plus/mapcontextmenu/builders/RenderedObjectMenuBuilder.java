@@ -23,6 +23,7 @@ import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,7 +76,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		PoiType pt = null;
 		PoiType otherPt = null;
 		String subtype = null;
-		Map<String, String> additionalInfo = new HashMap<>();
+		Map<String, String> additionalInfo = new LinkedHashMap<>();
 		for (Map.Entry<String, String> e : renderedObject.getTags().entrySet()) {
 			String tag = e.getKey();
 			String value = e.getValue();
