@@ -1199,7 +1199,7 @@
     <string name="download_tab_downloads">Toate descărcările</string>
     <string name="download_tab_updates">Actualizări</string>
     <string name="download_tab_local">Locală</string>
-    <string name="no_internet_connection">Descărcarea nu este posibilă, verificaţi conexiunea la Internet.</string>
+    <string name="no_internet_connection">Fără conexiune la internet</string>
     <string name="shared_string_dismiss">Închide</string>
     <string name="everything_up_to_date">Toate fișierele au fost actualizate</string>
     <string name="use_opengl_render">Utilizaţi redare OpenGL</string>
@@ -6105,4 +6105,5 @@
     <string name="multipoligon_related">Legate de</string>
     <string name="route_part_of">Parte din</string>
     <string name="cant_load_map_styles">Nu se pot încărca stilurile hărții.</string>
+    <string name="add_to_navigation">Adăugați la navigare</string>
 </resources>
