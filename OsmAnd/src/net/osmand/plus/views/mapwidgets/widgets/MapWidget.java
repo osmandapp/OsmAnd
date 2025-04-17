@@ -24,6 +24,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.OutlineTextView;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -171,6 +172,21 @@ public abstract class MapWidget {
 		}
 		text.setTextColor(textColor);
 		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+	}
+
+	public static void updateTextOutline(@Nullable TextView textView, @NonNull TextState textState) {
+		if (textView instanceof OutlineTextView outlineTextView) {
+			if (textState.textShadowRadius > 0) {
+				outlineTextView.setStrokeWidth(textState.textShadowRadius);
+				int color = textState.textShadowColor;
+				if (color != 0) {
+					outlineTextView.setStrokeColor(textState.textShadowColor);
+				}
+				outlineTextView.showOutline(true);
+			} else {
+				outlineTextView.showOutline(false);
+			}
+		}
 	}
 
 	@NonNull

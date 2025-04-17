@@ -334,6 +334,8 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		if (bottomDivider != null) {
 			bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
 		}
+		updateTextOutline(textView, textState);
+		updateTextOutline(smallTextView, textState);
 	}
 
 	@Override

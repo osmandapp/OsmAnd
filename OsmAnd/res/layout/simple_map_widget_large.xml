@@ -27,7 +27,7 @@
 				android:layoutDirection="rtl"
 				android:orientation="horizontal">
 
-				<androidx.appcompat.widget.AppCompatTextView
+				<net.osmand.plus.views.OutlineTextView
 					android:id="@+id/widget_text_small"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
@@ -70,7 +70,7 @@
 					android:gravity="center"
 					app:srcCompat="@drawable/ic_action_remove_dark" />
 
-				<TextView
+				<net.osmand.plus.views.OutlineTextView
 					android:id="@+id/widget_text"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
