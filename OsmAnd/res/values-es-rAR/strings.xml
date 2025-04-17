@@ -175,7 +175,7 @@
     <string name="download_tab_downloads">Todas las descargas</string>
     <string name="download_tab_updates">Actualizaciones</string>
     <string name="download_tab_local">Local</string>
-    <string name="no_internet_connection">Imposible descargar, comprueba la conexión a Internet.</string>
+    <string name="no_internet_connection">Sin conexión a Internet</string>
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
     <string name="use_opengl_render">Usar renderizado OpenGL</string>
     <string name="home_button">Casa</string>
@@ -4955,7 +4955,7 @@
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d traza)</item>
         <item quantity="many">%1$d (%2$d trazas)</item>
-        <item quantity="other"/>
+        <item quantity="other">%1$d (%2$d trazas)</item>
     </plurals>
     <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera?</string>
     <string name="restore_from_trash">Restaurar desde la papelera</string>
