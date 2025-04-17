@@ -197,6 +197,9 @@ public class AmenityMenuController extends MenuController {
 				name = operator;
 			}
 		}
+		if (Algorithms.isEmpty(name) && amenity.isRouteTrack()) {
+			name = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+		}
 		return name;
 	}
 
@@ -221,6 +224,10 @@ public class AmenityMenuController extends MenuController {
 	private String getTypeWithDistanceStr(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
 		String type = getTypeStr(amenity);
 		String distance = AmenityExtensionsHelper.getAmenityDistanceFormatted(amenity, app);
+		String activityType = amenity.getRouteActivityType();
+		if (!Algorithms.isEmpty(activityType)) {
+			type = activityType;
+		}
 		if (distance != null) {
 			return app.getString(R.string.ltr_or_rtl_combine_via_comma, type, distance);
 		} else {

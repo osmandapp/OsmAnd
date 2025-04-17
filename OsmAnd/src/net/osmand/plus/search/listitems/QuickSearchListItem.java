@@ -219,6 +219,9 @@ public class QuickSearchListItem {
 				return res;
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
+				if (amenity.isRouteTrack()) {
+					return amenity.getRouteActivityType();
+				}
 				return amenity.getSubTypeStr();
 			case LOCATION:
 				LatLon latLon = searchResult.location;
