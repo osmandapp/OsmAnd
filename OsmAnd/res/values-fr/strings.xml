@@ -1340,7 +1340,7 @@
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (peut consommer plus de batterie et ne pas fonctionner sur les anciens appareils).</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
     <string name="shared_string_dismiss">Arrêter</string>
-    <string name="no_internet_connection">Téléchargement impossible, veuillez vérifier votre connexion Internet.</string>
+    <string name="no_internet_connection">Aucune connexion Internet</string>
     <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
     <string name="navigate_point_zone">Zone</string>
@@ -5740,4 +5740,5 @@
     <string name="route_members">Membres</string>
     <string name="multipoligon_related">Lié</string>
     <string name="cant_load_map_styles">Impossible de charger les styles de carte.</string>
+    <string name="add_to_navigation">Ajouter au guidage</string>
 </resources>
