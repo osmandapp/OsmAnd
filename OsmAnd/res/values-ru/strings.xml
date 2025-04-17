@@ -5923,7 +5923,7 @@
     <string name="show_mercator_grids">Использовать Меркатор вместо WGS84 или UTM</string>
     <string name="show_mercator_grids_description">Показывать сетку в километрах Меркатор вместо WGS84 или UTM</string>
     <string name="original_shape_description">Форма каждой точки сохранится.</string>
-    <string name="original_icon_description">Иконки каждой точки сохранятся.</string>
+    <string name="original_icon_description">Каждая точка сохранит свой значок.</string>
     <string name="original_color_description">Цвет каждой точки сохранится.</string>
     <string name="apply_to_all_points">Применить для всех точек</string>
     <string name="hmd_promo">HMD Промо на %1$s месяцев</string>
@@ -5964,10 +5964,11 @@
     <string name="wikidata">Викиданные</string>
     <string name="prediction_time_advanced_description">Отрегулируйте время прогнозирования, чтобы минимизировать задержку.</string>
     <string name="wiki_around">Популярные места поблизости</string>
-    <string name="route_members">Участники</string>
-    <string name="route_part_of">Часть</string>
+    <string name="route_members">Члены</string>
+    <string name="route_part_of">Часть от</string>
     <string name="customize_grid_color">Настроить цвет сетки</string>
     <string name="multipoligon_related">Связанный</string>
     <string name="cant_load_map_styles">Невозможно загрузить стили карты.</string>
     <string name="prediction_time_description">Значок положения в OsmAnd анимируется с каждой полученной точкой данных GPS (раз в секунду). Небольшая задержка в его движении может быть заметна, особенно когда пользователь быстро движется или сигнал GPS колеблется.</string>
+    <string name="add_to_navigation">Добавить к навигации</string>
 </resources>
