@@ -1276,7 +1276,7 @@
     <string name="use_opengl_render">Utilizzare il rendering OpenGL</string>
     <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe utilizzare più batteria o non funzionare in dispositivi molto vecchi).</string>
     <string name="everything_up_to_date">Tutti i file sono aggiornati</string>
-    <string name="no_internet_connection">Non sono in grado di scaricare. Prego, verifica la connessione a internet.</string>
+    <string name="no_internet_connection">Nessuna connessione a internet</string>
     <string name="download_tab_downloads">Tutti i download</string>
     <string name="download_tab_updates">Aggiornamenti</string>
     <string name="download_tab_local">Nel dispositivo</string>
@@ -5762,4 +5762,5 @@
     <string name="route_members">Membri</string>
     <string name="multipoligon_related">Collegato</string>
     <string name="cant_load_map_styles">Impossible caricare gli stili di mappa.</string>
+    <string name="add_to_navigation">Aggiungi alla navigazione</string>
 </resources>
