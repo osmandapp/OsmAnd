@@ -335,7 +335,7 @@ public class MapSelectionHelper {
 							obfMapObject = null;
 						}
 						if (obfMapObject != null) {
-							LinkedHashMap<String, String> tags = getTags(obfMapObject.getResolvedAttributesListPairs());
+							Map<String, String> tags = getOrderedTags(obfMapObject.getResolvedAttributesListPairs());
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
@@ -404,7 +404,7 @@ public class MapSelectionHelper {
 
 	private void addRenderedObject(@NonNull MapSelectionResult result,
 			@NonNull MapSymbolInformation symbolInfo,
-			@NonNull ObfMapObject obfMapObject, LinkedHashMap<String, String> tags) {
+			@NonNull ObfMapObject obfMapObject, Map<String, String> tags) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null) {
 			RenderedObject renderedObject = new RenderedObject();
@@ -706,16 +706,15 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	private static LinkedHashMap<String, String> getTags(@Nullable QStringStringList tags) {
-		LinkedHashMap<String, String> map = new LinkedHashMap<>();
-		List<Pair<String, String>> list = new ArrayList<>();
-		if (tags != null) {
-			for (int i = 0; i < tags.size(); i++) {
-				QStringStringPair pair = tags.get(i);
-				map.put(pair.getFirst(), pair.getSecond());
+	private static Map<String, String> getOrderedTags(@Nullable QStringStringList tagsList) {
+		Map<String, String> tagsMap = new LinkedHashMap<>();
+		if (tagsList != null) {
+			for (int i = 0; i < tagsList.size(); i++) {
+				QStringStringPair pair = tagsList.get(i);
+				tagsMap.put(pair.getFirst(), pair.getSecond());
 			}
 		}
-		return map;
+		return tagsMap;
 	}
 
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
