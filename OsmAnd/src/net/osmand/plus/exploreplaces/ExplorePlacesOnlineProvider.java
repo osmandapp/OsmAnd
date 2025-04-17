@@ -266,7 +266,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		WikiDataProperties properties = featureData.properties;
 
 		amenity.setAdditionalInfo(WIKIDATA, app.getString(R.string.wikidata_id_pattern, properties.id));
-		amenity.setId(properties.osmid);
 		amenity.setName(properties.wikiTitle);
 		amenity.setEnName(TransliterationHelper.transliterate(amenity.getName()));
 		amenity.setDescription(properties.wikiDesc);
@@ -294,6 +293,8 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		}
 		amenity.setType(category);
 		amenity.setSubType(subtype);
+		// TODO calculate osmid for different types way, node, relation
+		amenity.setId(properties.osmid * 2); // + 1 way, relation special algorithm backend
 		//amenity.setTravelTopic(properties.wikiTitle);
 		//amenity.setWikiCategory(properties.wikiDesc);
 		amenity.setTravelEloNumber(properties.elo != null ? properties.elo.intValue() : DEFAULT_ELO);
