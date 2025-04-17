@@ -28,6 +28,7 @@ import net.osmand.plus.mapcontextmenu.gallery.holders.NoInternetHolder;
 import net.osmand.plus.plugins.mapillary.MapillaryContributeCard;
 import net.osmand.plus.plugins.mapillary.MapillaryImageCard;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	private boolean loadingImages = false;
 	private final Integer viewWidth;
 
+	private final NetworkImageLoader imageLoader;
 	public GalleryGridAdapter(@NonNull MapActivity mapActivity, @NonNull ImageCardListener listener,
 	                          @Nullable Integer viewWidth, boolean isOnlinePhotos, boolean nightMode) {
 		this.listener = listener;
@@ -67,6 +69,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.viewWidth = viewWidth;
+		this.imageLoader = new NetworkImageLoader(app, false);
 		themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 	}
 
@@ -132,7 +135,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			Object item = items.get(position);
 			if (item instanceof ImageCard imageCard) {
 				ImageHolderType type = resizeBySpanCount ? SPAN_RESIZABLE : position == 0 ? MAIN : STANDARD;
-				viewHolder.bindView(mapActivity, listener, imageCard, type, viewWidth, nightMode);
+				viewHolder.bindView(mapActivity, listener, imageCard, type, viewWidth, imageLoader, nightMode);
 			}
 		} else if (holder instanceof MapillaryContributeHolder viewHolder) {
 			viewHolder.bindView(nightMode, mapActivity);

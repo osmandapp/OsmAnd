@@ -15,6 +15,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
@@ -24,6 +26,7 @@ import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -42,6 +45,8 @@ import net.osmand.PlatformUtil;
  * Created by dummy on 28.01.15.
  */
 public class AndroidUiHelper {
+
+	public static final int ANIMATION_DURATION = 300;
 
 	private static final int ORIENTATION_0 = 0;
 	private static final int ORIENTATION_90 = 3;
@@ -213,6 +218,19 @@ public class AndroidUiHelper {
 				}
 			}
 		});
+	}
+
+	public static void crossFadeDrawables(@NonNull ImageView imageView, @NonNull Drawable... drawables) {
+		if (drawables.length < 2) {
+			if (drawables.length == 1) {
+				imageView.setImageDrawable(drawables[0]);
+			}
+			return;
+		}
+
+		TransitionDrawable transitionDrawable = new TransitionDrawable(drawables);
+		imageView.setImageDrawable(transitionDrawable);
+		transitionDrawable.startTransition(ANIMATION_DURATION);
 	}
 
 	public static void updateActionBarVisibility(@Nullable AppCompatActivity activity, boolean visible) {
