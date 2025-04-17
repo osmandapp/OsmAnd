@@ -29,12 +29,11 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
 
     private static final long DATA_EXPIRATION_TIME = TimeUnit.DAYS.toMillis(30); // 1 month
 
-    private static final int DATABASE_VERSION = 2; // Incremented version for schema changes
+    private static final int DATABASE_VERSION = 3; // Incremented version for schema changes
     private static final String TABLE_PLACES = "places";
     private static final String COLUMN_ZOOM = "zoom";
     private static final String COLUMN_TILE_X = "tileX";
     private static final String COLUMN_TILE_Y = "tileY";
-    private static final String COLUMN_LANG = "lang";
     private static final String COLUMN_DATA = "data";
     private static final String COLUMN_TIMESTAMP = "timestamp";
 
@@ -42,10 +41,9 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_ZOOM + " INTEGER,"
             + COLUMN_TILE_X + " INTEGER,"
             + COLUMN_TILE_Y + " INTEGER,"
-            + COLUMN_LANG + " TEXT,"
             + COLUMN_DATA + " TEXT,"
             + COLUMN_TIMESTAMP + " INTEGER,"
-            + "PRIMARY KEY (" + COLUMN_ZOOM + ", " + COLUMN_TILE_X + ", " + COLUMN_TILE_Y + ", " + COLUMN_LANG + ")"
+            + "PRIMARY KEY (" + COLUMN_ZOOM + ", " + COLUMN_TILE_X + ", " + COLUMN_TILE_Y  + ")"
             + ")";
 
     private final Gson gson = new Gson();
@@ -72,30 +70,23 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 2) {
+        if (oldVersion < 3) {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACES);
             onCreate(db);
         }
     }
 
-    public void insertPlaces(int zoom, int tileX, int tileY,
-            Map<String, List<OsmandApiFeatureData>> placesByLang) {
+    public void insertPlaces(int zoom, int tileX, int tileY, List<? extends OsmandApiFeatureData> result) {
         SQLiteDatabase db = getWritableDatabase();
         try {
             db.beginTransaction();
-            for (Map.Entry<String, List<OsmandApiFeatureData>> entry : placesByLang.entrySet()) {
-                String lang = entry.getKey();
-                List<OsmandApiFeatureData> places = entry.getValue();
-
-                ContentValues values = new ContentValues();
-                values.put(COLUMN_ZOOM, zoom);
-                values.put(COLUMN_TILE_X, tileX);
-                values.put(COLUMN_TILE_Y, tileY);
-                values.put(COLUMN_LANG, lang);
-                values.put(COLUMN_DATA, gson.toJson(places));
-                values.put(COLUMN_TIMESTAMP, System.currentTimeMillis());
-                db.insertWithOnConflict(TABLE_PLACES, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-            }
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_ZOOM, zoom);
+            values.put(COLUMN_TILE_X, tileX);
+            values.put(COLUMN_TILE_Y, tileY);
+            values.put(COLUMN_DATA, gson.toJson(result));
+            values.put(COLUMN_TIMESTAMP, System.currentTimeMillis());
+            db.insertWithOnConflict(TABLE_PLACES, null, values, SQLiteDatabase.CONFLICT_REPLACE);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -105,7 +96,7 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
     @NonNull
     public List<OsmandApiFeatureData> getPlaces(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
         SQLiteDatabase db = getReadableDatabase();
-        Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY, languages);
+        Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY);
         Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_DATA, COLUMN_TIMESTAMP},
                 pair.first, pair.second, null, null, null);
 
@@ -117,8 +108,19 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
                 String json = cursor.getString(c);
                 long timestamp = cursor.getLong(t);
                 List<OsmandApiFeatureData> parsed = gson.fromJson(json,
-                        new TypeToken<List<OsmandApiFeatureData>>() {}.getType());
-                if (parsed != null) {
+                        new TypeToken<List<OsmandApiFeatureData>>() {
+                        }.getType());
+                if (parsed != null && languages != null && !languages.isEmpty()) {
+                    for (OsmandApiFeatureData d : parsed) {
+                        for (String lang : languages) {
+                            // TODO parse arra
+                            if (d.properties.wikiLangs.contains(lang)) {
+                                places.add(d);
+                                break;
+                            }
+                        }
+                    }
+                } else if (parsed != null) {
                     places.addAll(parsed);
                 }
             } while (cursor.moveToNext());
@@ -127,12 +129,10 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
         return places;
     }
 
-    public boolean isDataExpired(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
+    public boolean isDataExpired(int zoom, int tileX, int tileY) {
         SQLiteDatabase db = getReadableDatabase();
-        boolean filterByLang = !Algorithms.isEmpty(languages);
-        Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY, languages);
-
-        try (Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_LANG, COLUMN_TIMESTAMP},
+        Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY);
+        try (Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_TIMESTAMP},
                 pair.first, pair.second, null, null, null)) {
             if (cursor.moveToFirst()) {
                 Set<String> foundLangs = new HashSet<>();
@@ -143,40 +143,23 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
                     if ((currentTime - timestamp) > DATA_EXPIRATION_TIME) {
                         return true; // 1 month expiration
                     }
-                    int langIndex = cursor.getColumnIndex(COLUMN_LANG);
-                    String lang = cursor.getString(langIndex);
-                    foundLangs.add(lang);
+                    return false;
                 } while (cursor.moveToNext());
-
-                return filterByLang && foundLangs.size() < languages.size();
             }
             return true; // Data is expired if it doesn't exist
         }
     }
 
     @NonNull
-    private Pair<String, String[]> getSelectionWithArgs(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
+    private Pair<String, String[]> getSelectionWithArgs(int zoom, int tileX, int tileY) {
         List<String> list = new ArrayList<>();
         list.add(String.valueOf(zoom));
         list.add(String.valueOf(tileX));
         list.add(String.valueOf(tileY));
-
         StringBuilder builder = new StringBuilder();
         builder.append(COLUMN_ZOOM).append("=? AND ")
                 .append(COLUMN_TILE_X).append("=? AND ")
                 .append(COLUMN_TILE_Y).append("=?");
-
-        if (!Algorithms.isEmpty(languages)) {
-            StringBuilder placeholders = new StringBuilder();
-            for (int i = 0; i < languages.size(); i++) {
-                placeholders.append("?");
-                if (i < languages.size() - 1) {
-                    placeholders.append(",");
-                }
-            }
-            builder.append(" AND ").append(COLUMN_LANG).append(" IN (").append(placeholders).append(")");
-            list.addAll(languages);
-        }
         return Pair.create(builder.toString(), list.toArray(new String[0]));
     }
 }
