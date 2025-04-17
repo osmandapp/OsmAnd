@@ -335,9 +335,7 @@ public class MapSelectionHelper {
 							obfMapObject = null;
 						}
 						if (obfMapObject != null) {
-							Pair<Map<String, String>, List<Pair<String, String>>> pair = getTags(obfMapObject.getResolvedAttributesListPairs());
-							Map<String, String> tags = pair.first;
-							List<Pair<String, String>> tagList = pair.second;
+							LinkedHashMap<String, String> tags = getTags(obfMapObject.getResolvedAttributesListPairs());
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
@@ -372,7 +370,7 @@ public class MapSelectionHelper {
 									if (amenity != null) {
 										amenity.setMapIconName(getMapIconName(symbolInfo));
 									} else if (allowRenderedObjects) {
-										addRenderedObject(result, symbolInfo, obfMapObject, tagList);
+										addRenderedObject(result, symbolInfo, obfMapObject, tags);
 									}
 								}
 							}
@@ -406,7 +404,7 @@ public class MapSelectionHelper {
 
 	private void addRenderedObject(@NonNull MapSelectionResult result,
 			@NonNull MapSymbolInformation symbolInfo,
-			@NonNull ObfMapObject obfMapObject, List<Pair<String, String>> tags) {
+			@NonNull ObfMapObject obfMapObject, LinkedHashMap<String, String> tags) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null) {
 			RenderedObject renderedObject = new RenderedObject();
@@ -426,8 +424,8 @@ public class MapSelectionHelper {
 			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
 				renderedObject.setIconRes(rasterMapSymbol.getContent());
 			}
-			for (Pair<String, String> entry : tags) {
-				renderedObject.putTag(entry.first, entry.second);
+			for (Map.Entry<String, String> entry : tags.entrySet()) {
+				renderedObject.putTag(entry.getKey(), entry.getValue());
 			}
 			result.collect(renderedObject, null);
 		}
@@ -708,19 +706,16 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	private static Pair<Map<String, String>, List<Pair<String, String>>> getTags(@Nullable QStringStringList tags) {
-		Map<String, String> map = new HashMap<>();
+	private static LinkedHashMap<String, String> getTags(@Nullable QStringStringList tags) {
+		LinkedHashMap<String, String> map = new LinkedHashMap<>();
 		List<Pair<String, String>> list = new ArrayList<>();
 		if (tags != null) {
 			for (int i = 0; i < tags.size(); i++) {
 				QStringStringPair pair = tags.get(i);
-				String key = pair.getFirst();
-				String value = pair.getSecond();
-				map.put(key, value);
-				list.add(new Pair<>(key, value));
+				map.put(pair.getFirst(), pair.getSecond());
 			}
 		}
-		return new Pair<>(map, list);
+		return map;
 	}
 
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
