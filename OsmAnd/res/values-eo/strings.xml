@@ -525,7 +525,7 @@
     <string name="navigate_point_easting">Absciso</string>
     <string name="download_tab_downloads">Ĉiuj</string>
     <string name="download_tab_local">Lokaj</string>
-    <string name="no_internet_connection">Ne povas elŝuti, bonvolu kontroli vian retkonekton.</string>
+    <string name="no_internet_connection">Neniu retkonekto</string>
     <string name="record_plugin_name">Spur-registrilo</string>
     <string name="record_plugin_description">Ebligas registri viajn vojaĝojn aŭ trejnadojn kaj analizi ilin konsiderante rapidon, tutajn suprenirojn kaj malsuprenirojn, profilon de altitudo kaj pli. Registritajn spurojn oni povas arĥivigi, kunhavigi, redakti kaj pritrakti.
 \n
@@ -5739,4 +5739,5 @@
     <string name="route_part_of">Parto de</string>
     <string name="multipoligon_related">Rilataj</string>
     <string name="cant_load_map_styles">Ne povas enlegi map-stilojn.</string>
+    <string name="add_to_navigation">Aldoni por navigi</string>
 </resources>
