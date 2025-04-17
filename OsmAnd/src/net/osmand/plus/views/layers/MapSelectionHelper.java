@@ -335,7 +335,7 @@ public class MapSelectionHelper {
 							obfMapObject = null;
 						}
 						if (obfMapObject != null) {
-							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
+							Map<String, String> tags = getOrderedTags(obfMapObject.getResolvedAttributesListPairs());
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
@@ -706,16 +706,15 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	private static Map<String, String> getTags(@Nullable QStringStringHash set) {
-		Map<String, String> res = new HashMap<>();
-		if (set != null) {
-			QStringList keys = set.keys();
-			for (int i = 0; i < keys.size(); i++) {
-				String key = keys.get(i);
-				res.put(key, set.get(key));
+	private static Map<String, String> getOrderedTags(@Nullable QStringStringList tagsList) {
+		Map<String, String> tagsMap = new LinkedHashMap<>();
+		if (tagsList != null) {
+			for (int i = 0; i < tagsList.size(); i++) {
+				QStringStringPair pair = tagsList.get(i);
+				tagsMap.put(pair.getFirst(), pair.getSecond());
 			}
 		}
-		return res;
+		return tagsMap;
 	}
 
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
