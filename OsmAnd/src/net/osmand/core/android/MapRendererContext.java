@@ -9,6 +9,7 @@ import static net.osmand.plus.views.OsmandMapTileView.SKY_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.SKY_NIGHTMODE_COLOR;
 
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -742,11 +743,11 @@ public class MapRendererContext {
 
 	private RenderedObject createRenderedObjectForPolygon(MapObject mapObject, int order) {
 		RenderedObject object = new RenderedObject();
-		QStringStringHash tags = mapObject.getResolvedAttributes();
-		QStringList tagsKeys = tags.keys();
-		for (int i = 0; i < tagsKeys.size(); i++) {
-			String key = tagsKeys.get(i);
-			String value = tags.get(key);
+		QStringStringList tags = mapObject.getResolvedAttributesListPairs();
+		for (int i = 0; i < tags.size(); i++) {
+			QStringStringPair pair = tags.get(i);
+			String key = pair.getFirst();
+			String value = pair.getSecond();
 			if ("osmand_change".equals(key) && "delete".equals(value)) {
 				return null;
 			}
