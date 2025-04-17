@@ -60,6 +60,7 @@ public class Amenity extends MapObject {
 	public static final String ROUTE_ID_OSM_PREFIX = "O"; // indexed in POI-section
 	public static final String ROUTE_SOURCE = "route_source";
 	public static final String ROUTE_NAME = "route_name";
+	public static final String ROUTE_ACTIVITY_TYPE = "route_activity_type";
 	public static final String WIKI_PHOTO = "wiki_photo";
 	public static final String WIKI_CATEGORY = "wiki_category";
 	public static final String TRAVEL_TOPIC = "travel_topic";
@@ -906,5 +907,17 @@ public class Amenity extends MapObject {
 
 	public void setY(TIntArrayList y) {
 		this.y = y;
+	}
+
+	public String getRouteActivityType() {
+		if (!isRouteTrack() && !isSuperRoute()) {
+			return "";
+		}
+		for (Map.Entry<String, String> entry : additionalInfo.entrySet()) {
+			if (entry.getKey().startsWith(ROUTE_ACTIVITY_TYPE + "_")) {
+				return MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(entry.getKey()).getTranslation();
+			}
+		}
+		return "";
 	}
 }
