@@ -1474,7 +1474,7 @@
     <string name="download_tab_downloads">כל ההורדות</string>
     <string name="download_tab_updates">עדכונים</string>
     <string name="download_tab_local">מקומי</string>
-    <string name="no_internet_connection">לא ניתן להוריד, נא לבדוק את החיבור שלך לאינטרנט.</string>
+    <string name="no_internet_connection">אין חיבור לאינטרנט</string>
     <string name="everything_up_to_date">כל הקבצים עדכניים</string>
     <string name="use_opengl_render">שימוש בעיבוד OpenGL</string>
     <string name="search_for">חיפוש אחר</string>
