@@ -194,7 +194,7 @@
     <string name="download_tab_downloads">Сва преузимања</string>
     <string name="download_tab_updates">Надградње</string>
     <string name="download_tab_local">Местно</string>
-    <string name="no_internet_connection">Преузимање је немогуће, проверите везу са Интернетом.</string>
+    <string name="no_internet_connection">Нема интернет везе</string>
     <string name="shared_string_dismiss">Откажи</string>
     <string name="everything_up_to_date">Све датотеке су свеже</string>
     <string name="use_opengl_render">Користи ОпенГЛ за приказ</string>
@@ -5732,4 +5732,5 @@
     <string name="route_part_of">Део од</string>
     <string name="route_members">Чланови</string>
     <string name="cant_load_map_styles">Не могу се учитати стилови мапе.</string>
+    <string name="add_to_navigation">Додај у Навигацију</string>
 </resources>
