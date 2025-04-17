@@ -4734,31 +4734,7 @@
     <string name="simulate_location_by_gpx">Simulează poziția folosind GPX</string>
     <string name="purchases_feature_desc_external_sensors">Afișați și înregistrați date de la senzorii externi: viteza bicicletei, puterea exercitată, cadența pedalării și pulsul.</string>
     <string name="external_sensors_support">Suport senzori externi</string>
-    <string name="release_4_3">• Motor de redare a hărților nou, mai rapid, versiunea 2 (OpenGL), cu vedere 2.5D
-\n
-\n • Animație lină a schimbărilor de locație în timpul mișcării
-\n
-\n • Noi widget-uri pentru coordonatele centrului hărții și altitudinea geolocațiilor
-\n
-\n • \"Distance to tap\": s-au adăugat opțiuni de mărime a textului
-\n
-\n • Widgetul \"Map marker\": a fost adăugată opțiunea de modificare a comportamentului la clic
-\n
-\n • Fixată opțiunea \"Position placement\" (Amplasare poziție)
-\n
-\n • GPX: adăugat suport pentru etichetele \"link\", \"cmt\", \"desc\" și pentru orice extensii personalizate
-\n
-\n • Reorganizarea listei \"Hărți nautice\"
-\n
-\n • A fost adăugat suport pentru senzorii ANT+
-\n
-\n • A fost adăugată opțiunea de dezactivare a UUID-ului de descărcare
-\n
-\n • Prognoză reglabilă a vitezei implicite pentru timpii de deplasare în funcție de altitudine pentru mersul pe jos/călătorie/ alergare
-\n
-\n • A fost reparată ieșirea audio și comportamentul cursorului de volum
-\n
-\n</string>
+    <string name="release_4_3">• Motor de redare a hărților nou, mai rapid, versiunea 2 (OpenGL), cu vedere 2.5D \n \n • Animație lină a schimbărilor de locație în timpul mișcării \n \n • Noi widget-uri pentru coordonatele centrului hărții și altitudinea geolocațiilor \n \n • \"Distance to tap\": noi opțiuni de mărime a textului \n \n • Widgetul \"Map marker\": opțiunea de modificare a comportamentului la clic \n \n • Fixată opțiunea \"Position placement\" \n \n • GPX: adăugat suport pentru etichetele \"link\", \"cmt\", \"desc\" și pentru orice extensii personalizate \n \n • Reorganizarea listei \"Hărți nautice\" \n \n • Nou suport la senzorii ANT+ \n \n • Nouă opțiune de dezactivare a UUID-ului de descărcare \n \n • Prognoză reglabilă a vitezei implicite la timpii de deplasare în funcție de altitudine pentru mersul pe jos/călătorie/ alergare \n \n • A fost reparată ieșirea audio și comportamentul cursorului de volum</string>
     <string name="speak_gps_signal_status">Pierdere și recuperare semnal GPS</string>
     <string name="speak_route_recalculation">Recalculare rută</string>
     <string name="map_center_widget">Coordonate: Centru hartă</string>
@@ -5018,37 +4994,7 @@
     <string name="simulation_position_description">Selectați un fișier de traseu care va fi utilizat ca sursă pentru mutarea locației.</string>
     <string name="inch">în</string>
     <string name="shared_string_inches">inci</string>
-    <string name="release_4_4">• Îmbunătățirea meniului \"Trasee\" din \"Configurare hartă\"
-\n
-\n • Meniul contextual afișează acum denumirile localizate pentru POI-uri
-\n
-\n • A fost adăugată opțiunea de partajare a traseului prin link
-\n
-\n • A fost adăugată unitatea de lungime \"Mile marine/picioare\"
-\n
-\n • Adăugat nou mod de orientare a hărții: modul fix
-\n
-\n • Ecran de pornire simplificat
-\n
-\n • Corectat poziția locației în modul ecran divizat în Android Auto
-\n
-\n • A fost adăugat graficul \"Speed/Slope\" pentru analiza traseului
-\n
-\n • Android 13: mutat selecția limbii aplicației în setările sistemului
-\n
-\n • Au fost rezolvate problemele legate de afișarea locurilor Vegan
-\n
-\n • Adăugat posibilitarea de a descărca hărți online folosing hărți „strat suprapus” sau „strat fundal”
-\n
-\n • Adăugat suport pentru unități de măsură imperiale la „Parametrii vehicul”
-\n
-\n • Profil nou: Moped
-\n
-\n • „Afișarea poziției” opțiune nouă: „Automat”
-\n
-\n • Corectat probleme cu gesturile pentru înclinare, mărire și rotație
-\n
-\n</string>
+    <string name="release_4_4">- Meniu „Urme” îmbunătățit în „Configurare hartă”\n\n • Meniul contextual afișează acum denumirile localizate pentru POI\n\n • A fost adăugată opțiunea de partajare a traseului prin link\n\n • S-a adăugat unitatea de lungime „Mile marine/picioare”.\n\n • Orientarea hărții a adăugat un nou mod fix\n\n • Ecran de pornire simplificat\n\n • Poziție fixă a locației în modul ecran divizat în Android Auto\n\n • A fost adăugat graficul „Viteză/înclinație” pentru analiza traseului\n\n • Android 13 a mutat selectarea limbii aplicației la setările sistemului\n\n • Au fost rezolvate probleme cu afișarea locurilor din Vegan\n\n • A fost adăugată posibilitatea de a descărca dale online utilizate ca hărți „Overlay” sau „Underlay”\n\n • A fost adăugat suportul unităților imperiale pentru „Parametrii vehiculului”\n\n • Profil nou pentru mopede\n\n • „Poziția afișării” a adăugat noua opțiune „Automat”\n\n • Gesturi fixe ale hărții pentru înclinare, zoom și rotație</string>
     <string name="approximate_bearing">Direcție aproximativă</string>
     <string name="approximate_bearing_descr">Calculează direcția din ruta de navigație urmată.</string>
     <string name="clear_online_cache">Ștergeți memoria cache online</string>
