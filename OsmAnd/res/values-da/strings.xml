@@ -5774,4 +5774,5 @@
     <string name="multipoligon_related">Beslægtet</string>
     <string name="route_part_of">Del af</string>
     <string name="cant_load_map_styles">Kan ikke indlæse kortstile.</string>
+    <string name="add_to_navigation">Tilføj til navigation</string>
 </resources>
