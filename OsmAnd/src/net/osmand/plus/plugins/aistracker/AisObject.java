@@ -386,6 +386,7 @@ public class AisObject {
         }
         this.initObjectClass();
         this.invalidateBitmap();
+        this.bitmapColor = 0;
     }
 
     public static int selectBitmap(AisObjType objType) {
@@ -452,7 +453,7 @@ public class AisObject {
     private void setColor() {
         if (isLost(vesselLostTimeoutInMinutes) && !vesselAtRest) {
             if (isMovable()) {
-                this.bitmapColor = selectColor(this.objectClass);
+                this.bitmapColor = 0; // transparent
             }
         } else {
             this.bitmapColor = selectColor(this.objectClass);
