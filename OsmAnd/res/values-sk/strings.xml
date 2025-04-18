@@ -5764,4 +5764,5 @@
     <string name="route_members">Členy</string>
     <string name="multipoligon_related">Súvisiace</string>
     <string name="cant_load_map_styles">Nepodarilo sa načítať mapové štýly.</string>
+    <string name="add_to_navigation">Pridať do navigácie</string>
 </resources>
