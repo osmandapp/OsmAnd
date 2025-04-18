@@ -24,7 +24,7 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 			.nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 
-	private CoordinatesGridSettings gridSettings;
+	private transient CoordinatesGridSettings gridSettings;
 
 	public ShowHideCoordinatesGridAction() {
 		super(TYPE);
