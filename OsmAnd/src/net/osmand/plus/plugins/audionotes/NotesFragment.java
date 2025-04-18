@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.mapcontextmenu.other.ShareMenu.showNativeShareDialog;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,7 +25,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -321,7 +323,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 	}
 
 	private List<Recording> sortRecsByDateDescending(List<Recording> recs) {
-		Collections.sort(recs, new Comparator<Recording>() {
+		Collections.sort(recs, new Comparator<>() {
 			@Override
 			public int compare(Recording first, Recording second) {
 				long firstTime = first.getLastModified();
@@ -488,20 +490,33 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 
 		Activity activity = getActivity();
 		if (activity != null) {
-			Intent shareIntent = new Intent(Intent.ACTION_SEND);
+			String type = null;
 			if (recording.isPhoto()) {
-				shareIntent.setType("image/*");
+				type = "image/*";
 			} else if (recording.isAudio()) {
-				shareIntent.setType("audio/*");
+				type = "audio/*";
 			} else if (recording.isVideo()) {
-				shareIntent.setType("video/*");
+				type = "video/*";
 			}
-			Uri uri = AndroidUtils.getUriForFile(activity, recording.getFile().getAbsoluteFile());
-			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-			shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-			shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
-			AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
+			if (Build.VERSION.SDK_INT >= 34) {
+				OsmandApplication app = getMyApplication();
+				File file = recording.getFile().getAbsoluteFile();
+				app.getImportHelper().registerResultListener(app, activity, file);
+				showNativeShareDialog(app, requireActivity(), file, true, false, type);
+			} else {
+				Intent shareIntent = new Intent(Intent.ACTION_SEND);
+				if (type != null) {
+					shareIntent.setType(type);
+
+				}
+
+				Uri uri = AndroidUtils.getUriForFile(activity, recording.getFile().getAbsoluteFile());
+				shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+				shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+				shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
+				AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
+			}
 		}
 	}
 

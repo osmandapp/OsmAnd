@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="saved_to_device">Saved to device</string>
+	<string name="save_to_device_error">Save to device error</string>
+	<string name="save_to_device">Save to Device</string>
     <string name="add_to_navigation">Add to Navigation</string>
     <string name="customize_grid_color">Customize grid color</string>
     <string name="grid_color">Grid color</string>

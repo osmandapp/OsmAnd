@@ -399,7 +399,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, gpxFile -> {
-					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
+					GpxUiHelper.saveAndShareGpxWithAppearance(app, activity, gpxFile);
 					return true;
 				}))
 				.create());

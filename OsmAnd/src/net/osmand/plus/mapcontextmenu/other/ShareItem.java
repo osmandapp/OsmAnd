@@ -16,7 +16,8 @@ public enum ShareItem {
 	ADDRESS(R.drawable.ic_action_street_name, R.string.copy_address),
 	NAME(R.drawable.ic_action_copy, R.string.copy_poi_name),
 	COORDINATES(R.drawable.ic_action_coordinates_location, R.string.copy_coordinates),
-	GEO(R.drawable.ic_world_globe_dark, R.string.share_geo);
+	GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
+	SAVE_AS_FILE(R.drawable.ic_action_save_to_file_outlined, R.string.save_to_device);
 
 	@DrawableRes
 	private final int iconId;

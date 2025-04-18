@@ -1,8 +1,11 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.mapcontextmenu.other.ShareMenu.showNativeShareDialog;
+
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +19,8 @@ import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
+
+import java.io.File;
 
 public class AudioVideoNoteMenuController extends MenuController {
 	private Recording mRecording;
@@ -187,20 +192,32 @@ public class AudioVideoNoteMenuController extends MenuController {
 	public void share(LatLon latLon, String title, String address) {
 		MapActivity mapActivity = getMapActivity();
 		if (mIsFileAvailable && mapActivity != null) {
-			Intent shareIntent = new Intent(Intent.ACTION_SEND);
+			String type = null;
 			if (mRecording.isPhoto()) {
-				shareIntent.setType("image/*");
+				type = "image/*";
 			} else if (mRecording.isAudio()) {
-				shareIntent.setType("audio/*");
+				type = "audio/*";
 			} else if (mRecording.isVideo()) {
-				shareIntent.setType("video/*");
+				type = "video/*";
 			}
-			Uri uri = AndroidUtils.getUriForFile(mapActivity, mRecording.getFile().getAbsoluteFile());
-			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-			shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-			shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
-			AndroidUtils.startActivityIfSafe(mapActivity, shareIntent, chooserIntent);
+			if (Build.VERSION.SDK_INT >= 34) {
+				File file = mRecording.getFile().getAbsoluteFile();
+
+				getApplication().getImportHelper().registerResultListener(getApplication(), mapActivity, file);
+				showNativeShareDialog(getApplication(), mapActivity, file, false, false, type);
+			} else {
+				Intent shareIntent = new Intent(Intent.ACTION_SEND);
+				if (type != null) {
+					shareIntent.setType(type);
+				}
+
+				Uri uri = AndroidUtils.getUriForFile(mapActivity, mRecording.getFile().getAbsoluteFile());
+				shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+				shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+				shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
+				AndroidUtils.startActivityIfSafe(mapActivity, shareIntent, chooserIntent);
+			}
 		} else {
 			super.share(latLon, title, "");
 		}
