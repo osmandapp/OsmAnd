@@ -241,9 +241,17 @@ public class BackupHelper {
 	}
 
 	public void logout() {
-		settings.BACKUP_PROMOCODE.resetToDefault();
+		resetBackupPurchase();
 		settings.BACKUP_DEVICE_ID.resetToDefault();
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
+	}
+
+	public void resetBackupPurchase() {
+		settings.BACKUP_PROMOCODE.resetToDefault();
+		settings.BACKUP_PURCHASE_ACTIVE.resetToDefault();
+		settings.BACKUP_SUBSCRIPTION_SKU.resetToDefault();
+		settings.BACKUP_SUBSCRIPTION_ORIGIN.resetToDefault();
+		app.getInAppPurchaseHelper().resetPurchases();
 	}
 
 	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportType exportType) {

@@ -145,7 +145,7 @@ public class PurchaseUiDataUtils {
 	public static boolean shouldShowBackupSubscription(@NonNull OsmandApplication app,
 	                                                   @NonNull List<InAppPurchase> mainPurchases) {
 		OsmandSettings settings = app.getSettings();
-		if (!Algorithms.isEmpty(settings.BACKUP_SUBSCRIPTION_SKU.get())) {
+		if (settings.BACKUP_SUBSCRIPTION_ORIGIN.get() != PurchaseOrigin.UNDEFINED) {
 			InAppPurchaseHelper helper = app.getInAppPurchaseHelper();
 			InAppPurchases purchases = helper.getInAppPurchases();
 			for (InAppPurchase purchase : mainPurchases) {
