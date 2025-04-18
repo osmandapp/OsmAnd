@@ -713,6 +713,14 @@ class GpxFile : GpxExtensions {
 		getExtensionsToWrite()["show_start_finish"] = showStartFinish.toString()
 	}
 
+	fun isJoinSegments(): Boolean {
+		return extensions?.get("is_join_segments")?.toBoolean() ?: false
+	}
+
+	fun setJoinSegment(isJoinSegment: Boolean) {
+		getExtensionsToWrite()["is_join_segments"] = isJoinSegment.toString()
+	}
+
 	fun addRouteKeyTags(routeKey: Map<String, String>) {
 		networkRouteKeyTags.putAll(routeKey)
 	}
