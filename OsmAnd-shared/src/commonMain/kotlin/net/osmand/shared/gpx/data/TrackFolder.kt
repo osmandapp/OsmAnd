@@ -6,14 +6,15 @@ import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.KCollectionUtils
 import kotlin.math.max
 
 class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	TracksGroup, ComparableTracksGroup {
 	private var dirFile: KFile
 	private val parentFolder: TrackFolder?
-	private var trackItems = mutableListOf<TrackItem>()
-	private var subFolders = mutableListOf<TrackFolder>()
+	private var trackItems = listOf<TrackItem>()
+	private var subFolders = listOf<TrackFolder>()
 	private var flattenedTrackItems: List<TrackItem>? = null
 	private var flattenedSubFolders: List<TrackFolder>? = null
 	private var folderAnalysis: TrackFolderAnalysis? = null
@@ -85,7 +86,7 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	fun addSubFolder(subFolder: TrackFolder) {
-		this.subFolders.add(subFolder)
+		this.subFolders = KCollectionUtils.addToList(subFolders, subFolder)
 	}
 
 	fun setTrackItems(trackItems: MutableList<TrackItem>) {
@@ -93,11 +94,11 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	fun addTrackItem(trackItem: TrackItem) {
-		this.trackItems.add(trackItem)
+		this.trackItems = KCollectionUtils.addToList(trackItems, trackItem)
 	}
 
 	fun addTrackItems(trackItems: List<TrackItem>) {
-		this.trackItems.addAll(trackItems)
+		this.trackItems = KCollectionUtils.addAllToList(this.trackItems, trackItems)
 	}
 
 	val isEmpty: Boolean

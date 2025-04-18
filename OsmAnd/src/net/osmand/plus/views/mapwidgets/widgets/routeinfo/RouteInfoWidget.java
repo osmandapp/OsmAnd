@@ -310,9 +310,17 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 			preferredTextSizePx = spToPx(textSize.getSecondaryMaxTextSizeSp());
 			minTextSizePx = spToPx(textSize.getMinTextSizeSp());
-			fullText = "" + tvSecondaryLine1.getText() + (hasSecondaryBlock ? tvSecondaryLine2.getText() : "");
-			textSizePx = AndroidUtils.getMaxPossibleTextSize(fullText, tvSecondaryLine1.getTypeface(), availableTextWidthPx, minTextSizePx, preferredTextSizePx);
-			tvSecondaryLine1.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePx);
+			fullText = "";
+			if (tvSecondaryLine1 != null) {
+				fullText += tvSecondaryLine1.getText();
+			}
+			if (hasSecondaryBlock) {
+				fullText += tvSecondaryLine2.getText();
+			}
+			textSizePx = AndroidUtils.getMaxPossibleTextSize(fullText, tvSecondaryLine2.getTypeface(), availableTextWidthPx, minTextSizePx, preferredTextSizePx);
+			if (tvSecondaryLine1 != null) {
+				tvSecondaryLine1.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePx);
+			}
 			tvSecondaryLine2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePx);
 		}
 	}

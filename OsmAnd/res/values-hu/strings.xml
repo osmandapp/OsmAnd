@@ -5699,4 +5699,5 @@
     <string name="route_part_of">Része ennek:</string>
     <string name="multipoligon_related">Összefüggő</string>
     <string name="cant_load_map_styles">Térképstílusok betöltése sikertelen.</string>
+    <string name="add_to_navigation">Hozzáadás a navigációhoz</string>
 </resources>

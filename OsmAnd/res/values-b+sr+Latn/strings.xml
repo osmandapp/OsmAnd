@@ -194,7 +194,7 @@
     <string name="download_tab_downloads">Sva preuzimanja</string>
     <string name="download_tab_updates">Ažuriranja</string>
     <string name="download_tab_local">Preuzeto</string>
-    <string name="no_internet_connection">Nema interneta</string>
+    <string name="no_internet_connection">Nema internet veze</string>
     <string name="shared_string_dismiss">Otkaži</string>
     <string name="everything_up_to_date">Svi fajlovi su ažurirani</string>
     <string name="use_opengl_render">Koristi OpenGL za prikaz</string>
@@ -5441,7 +5441,7 @@
     <string name="shared_string_decrease">Smanjenje</string>
     <string name="open_in_browser">Otvori u internet pretraživaču</string>
     <string name="shared_string_source">Izvor</string>
-    <string name="shared_string_no_internet_connection">Nema interneta</string>
+    <string name="shared_string_no_internet_connection">Nema internet veze</string>
     <string name="no_internet_descr">Proverite internet i pokušajte ponovo.</string>
     <string name="no_photos_available_descr">Za ovu lokaciju još nisu dodate fotografije korisnika</string>
     <string name="no_photos_available">Nema dostupnih fotografija</string>

@@ -1283,7 +1283,7 @@
     <string name="everything_up_to_date">全部都是最新的檔案</string>
     <string name="use_opengl_render">使用 OpenGL 繪製</string>
     <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能會使用更多的電量，或不適用於非常舊的裝置)。</string>
-    <string name="no_internet_connection">無法下載，請檢查您的網路連線。</string>
+    <string name="no_internet_connection">無法下載，請檢查您的網路連線</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">可更新</string>
     <string name="download_tab_local">本機</string>
@@ -5726,4 +5726,5 @@
     <string name="multipoligon_related">相關</string>
     <string name="route_part_of">所屬實體</string>
     <string name="cant_load_map_styles">無法載入地圖樣式。</string>
+    <string name="add_to_navigation">新增至導航</string>
 </resources>

@@ -5613,4 +5613,5 @@
     <string name="route_part_of">Parte de</string>
     <string name="route_members">Miembros</string>
     <string name="cant_load_map_styles">No se pudieron cargar los estilos de mapa.</string>
+    <string name="add_to_navigation">Agregar a la navegación</string>
 </resources>
