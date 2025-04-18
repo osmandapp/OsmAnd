@@ -20,11 +20,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.jni.VectorLine;
+import net.osmand.core.jni.VectorLineBuilder;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -38,7 +44,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -56,9 +61,11 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private final Paint bitmapPaint;
 	private Timer timer;
 	private AisMessageListener listener;
-	
+	private final FColorARGB lineColor;
 	private MapMarkersCollection markersCollection;
-	private Map<Integer, MapMarker> markerMap;
+	private VectorLinesCollection vectorLinesCollection;
+	private final ConcurrentMap<Integer, MapMarker> markerMap;
+	private final ConcurrentMap<Integer, VectorLine> linesMap;
 
 	public AisTrackerLayer(@NonNull Context context) {
 		super(context);
@@ -78,7 +85,10 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		initTimer();
 		startNetworkListener();
 
-		markerMap = new HashMap<>();
+		markerMap = new ConcurrentHashMap<>();
+		linesMap = new ConcurrentHashMap<>();
+
+		lineColor = NativeUtilities.createFColorARGB(0xFF000000);
 	}
 
 	@Override
@@ -88,8 +98,17 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (newMapRenderer != null) {
 			markerMap.clear();
+			linesMap.clear();
+			if (markersCollection != null) {
+				view.getMapRenderer().removeSymbolsProvider(markersCollection);
+			}
+			if (vectorLinesCollection != null) {
+				view.getMapRenderer().removeSymbolsProvider(vectorLinesCollection);
+			}
 			markersCollection = new MapMarkersCollection();
+			vectorLinesCollection = new VectorLinesCollection();
 			newMapRenderer.addSymbolsProvider(markersCollection);
+			newMapRenderer.addSymbolsProvider(vectorLinesCollection);
 		}
 	}
 
@@ -157,6 +176,16 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			this.aisObjectList.clear();
 			this.aisObjectList = null;
 		}
+
+		if (view.getMapRenderer() != null && markersCollection != null && vectorLinesCollection != null) {
+			markerMap.clear();
+			linesMap.clear();
+			markersCollection.removeAllMarkers();
+			vectorLinesCollection.removeAllLines();
+			view.getMapRenderer().removeSymbolsProvider(markersCollection);
+			view.getMapRenderer().removeSymbolsProvider(vectorLinesCollection);
+		}
+
 		stopNetworkListener();
 	}
 
@@ -165,6 +194,9 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			Map.Entry<Integer, AisObject> entry = iterator.next();
 			if (entry.getValue().checkObjectAge()) {
 				Log.d("AisTrackerLayer", "remove AIS object with MMSI " + entry.getValue().getMmsi());
+				if (view.getMapRenderer() != null && markersCollection != null && vectorLinesCollection != null) {
+					RemoveAisRenderData(entry.getValue());
+				}
 				iterator.remove();
 			}
 		}
@@ -184,6 +216,9 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		if (oldest != null) {
 			Log.d("AisTrackerLayer", "remove AIS object with MMSI " + oldest.getMmsi());
+			if (view.getMapRenderer() != null && markersCollection != null && vectorLinesCollection != null) {
+				RemoveAisRenderData(oldest);
+			}
 			aisObjectList.remove(oldest.getMmsi(), oldest);
 		}
 	}
@@ -195,11 +230,21 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (obj == null) {
 			Log.d("AisTrackerLayer", "add AIS object with MMSI " + ais.getMmsi());
 			aisObjectList.put(mmsi, new AisObject(ais));
+
+			if (view.getMapRenderer() != null && markersCollection != null && vectorLinesCollection != null) {
+				CreateAisRenderData(ais);
+				UpdateAisRenderData(ais);
+			}
+
 			if (aisObjectList.size() >= aisObjectListCounterMax) {
 				this.removeOldestAisObjectListEntry();
 			}
 		} else {
 			obj.set(ais);
+
+			if (view.getMapRenderer() != null && markersCollection != null && vectorLinesCollection != null) {
+				UpdateAisRenderData(ais);
+			}
 		}
 	}
 
@@ -241,14 +286,11 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (tileBox.getZoom() >= START_ZOOM) {
 			AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
 
-			if (view.getMapRenderer() != null) {
-				updateMarkersCollection();
-				return;
-			}
-
-			for (AisObject ais : aisObjectList.values()) {
-				if (isLocationVisible(tileBox, ais.getPosition())) {
-					ais.draw(this, bitmapPaint, canvas, tileBox);
+			if (view.getMapRenderer() == null) {
+				for (AisObject ais : aisObjectList.values()) {
+					if (isLocationVisible(tileBox, ais.getPosition())) {
+						ais.draw(this, bitmapPaint, canvas, tileBox);
+					}
 				}
 			}
 		}
@@ -328,42 +370,96 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		return null;
 	}
 
-	private void updateMarkersCollection() {
-		if (markersCollection == null) {
-			return;
+	private void CreateAisRenderData(AisObject ais) {
+		int mmsi = ais.getMmsi();
+
+		Bitmap bitmap = ais.getBitmap(this, bitmapPaint);
+		SingleSkImage image = NativeUtilities.createSkImageFromBitmap(bitmap);
+
+		MapMarkerBuilder markerBuilder = new MapMarkerBuilder();
+		markerBuilder.setBaseOrder(getBaseOrder());
+		markerBuilder.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), image);
+		markerBuilder.setIsHidden(true);
+		markerMap.put(mmsi, markerBuilder.buildAndAddToCollection(markersCollection));
+
+		VectorLineBuilder lineBuilder = new VectorLineBuilder();
+		lineBuilder.setLineId(mmsi);
+		lineBuilder.setIsHidden(true);
+		linesMap.put(mmsi, lineBuilder.buildAndAddToCollection(vectorLinesCollection));
+	}
+
+	private void UpdateAisRenderData(AisObject ais) {
+		int mmsi = ais.getMmsi();
+		LatLon location = ais.getPosition();
+		Bitmap bitmap = ais.getBitmap(this, bitmapPaint);
+
+		MapMarker marker = markerMap.get(mmsi);
+		VectorLine line = linesMap.get(mmsi);
+
+		marker.setIsHidden(true);
+		line.setIsHidden(true);
+
+		if (location != null && bitmap != null) {
+			PointI markerLocation = new PointI(
+					MapUtils.get31TileNumberX(location.getLongitude()),
+					MapUtils.get31TileNumberY(location.getLatitude())
+			);
+
+			float speedFactor = ais.getMovement();
+			boolean lostTimeout = ais.isLostTimeout();
+			boolean atRest = ais.isVesselAtRest();
+			boolean drawDirectionLine = (speedFactor > 0) && (!lostTimeout) && !atRest;
+
+			marker.setPosition(markerLocation);
+			marker.setIsHidden(false);
+
+			float rotation = (ais.getVesselRotation() + 180f) % 360f;
+			if (!atRest && ais.needRotation()) {
+				marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
+			}
+
+			float lineLength = (float) bitmap.getHeight() * speedFactor;
+
+			PointI directionLineStart = new PointI(markerLocation);
+
+			double theta = Math.toRadians(rotation);
+			float dx = (float) (-Math.sin(theta) * lineLength);
+			float dy = (float) (Math.cos(theta) * lineLength);
+
+			float VECTOR_LINE_SCALE_COEF = 2.0f;
+			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+			float coef = VECTOR_LINE_SCALE_COEF + (1 - app.getOsmandMap().getCarDensityScaleCoef()) * VECTOR_LINE_SCALE_COEF;
+
+			PointI directionLineEnd = new PointI(
+					(int) (directionLineStart.getX() + dx * 10 * coef),
+					(int) (directionLineStart.getY() + dy * 10 * coef)
+			);
+
+			QVectorPointI points = new QVectorPointI();
+			points.add(directionLineStart);
+			points.add(directionLineEnd);
+
+			line.setPoints(points);
+			line.setFillColor(lineColor);
+			line.setLineWidth(3 * coef);
+			line.setIsHidden(!drawDirectionLine);
+		}
+	}
+
+	private void RemoveAisRenderData(AisObject ais)
+	{
+		int mmsi = ais.getMmsi();
+
+		MapMarker marker = markerMap.get(mmsi);
+		if (marker != null) {
+			markersCollection.removeMarker(marker);
+			markerMap.remove(marker);
 		}
 
-		for (AisObject aisObject : aisObjectList.values()) {
-			LatLon location = aisObject.getPosition();
-			Bitmap bitmap = aisObject.getBitmap(this, bitmapPaint);
-
-			if (location != null && bitmap != null) {
-				PointI point = new PointI(
-						MapUtils.get31TileNumberX(location.getLongitude()),
-						MapUtils.get31TileNumberY(location.getLatitude())
-				);
-
-				int mmsi = aisObject.getMmsi();
-				MapMarker marker = markerMap.get(mmsi);
-
-				if (marker == null) {
-					MapMarkerBuilder markerBuilder = new MapMarkerBuilder();
-					markerBuilder.setIsHidden(false)
-							.setBaseOrder(getBaseOrder())
-							.setIsAccuracyCircleSupported(false)
-							.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), NativeUtilities.createSkImageFromBitmap(bitmap));
-
-					marker = markerBuilder.buildAndAddToCollection(markersCollection);
-					markerMap.put(mmsi, marker);
-				}
-
-				marker.setPosition(point);
-
-				if (!aisObject.isVesselAtRest() && aisObject.needRotation()) {
-					float rotation = (aisObject.getVesselRotation() + 180f) % 360f;
-					marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
-				}
-			}
+		VectorLine line = linesMap.get(mmsi);
+		if (marker != null) {
+			vectorLinesCollection.removeLine(line);
+			linesMap.remove(line);
 		}
 	}
 }

@@ -386,7 +386,6 @@ public class AisObject {
         }
         this.initObjectClass();
         this.invalidateBitmap();
-        this.bitmapColor = 0;
     }
 
     public static int selectBitmap(AisObjType objType) {
@@ -453,7 +452,7 @@ public class AisObject {
     private void setColor() {
         if (isLost(vesselLostTimeoutInMinutes) && !vesselAtRest) {
             if (isMovable()) {
-                this.bitmapColor = 0; // transparent
+                this.bitmapColor = selectColor(this.objectClass);
             }
         } else {
             this.bitmapColor = selectColor(this.objectClass);
@@ -534,7 +533,7 @@ public class AisObject {
     height to draw a line to indicate the speed,
     otherwise return 0 (no movement)
     */
-    private float getMovement() {
+    float getMovement() {
         if (this.ais_sog > 0.0d) {
             if (isMovable()) {
                 if (this.ais_sog <  2.0d) { return 0.0f; }
@@ -987,17 +986,25 @@ public class AisObject {
         return (isLost(vesselLostTimeoutInMinutes) && isMovable() && !vesselAtRest);
     }
 
-    Bitmap getBitmap(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint)
+    public Bitmap getBitmap(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint)
     {
         updateBitmap(mapLayer, paint);
         return bitmap;
     }
 
-    float getVesselRotation()
+    public float getVesselRotation()
     {
         float rotation = 0;
         if (this.ais_cog != INVALID_COG) { rotation = (float)this.ais_cog; }
         else if (this.ais_heading != INVALID_HEADING ) { rotation = this.ais_heading; }
         return rotation;
+    }
+
+    public int getBitmapColor(){
+        return bitmapColor;
+    }
+
+    public boolean isLostTimeout() {
+        return isLost(vesselLostTimeoutInMinutes);
     }
 }
