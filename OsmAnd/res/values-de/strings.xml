@@ -1372,7 +1372,7 @@
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Rendering verwenden</string>
     <string name="use_opengl_render_descr">Hardware-beschleunigtes OpenGL-Rendering verwenden (Könnte mehr Akkuleistung verbrauchen und nicht auf allen Geräten funktionieren).</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich. Bitte die Internet-Verbindung prüfen.</string>
+    <string name="no_internet_connection">Keine Internet Verbindung</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
@@ -5773,4 +5773,5 @@
     <string name="multipoligon_related">Zugehörig</string>
     <string name="route_part_of">Teil von</string>
     <string name="cant_load_map_styles">Kartenstile können nicht geladen werden.</string>
+    <string name="add_to_navigation">Zur Navigation hinzufügen</string>
 </resources>
