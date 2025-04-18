@@ -3105,7 +3105,7 @@
     <string name="touring_view_renderer">Reisi vaade</string>
     <string name="nautical_renderer">Merenduslik</string>
     <string name="copy_location_name">Kopeeri asukoht / huvipunkti nimi</string>
-    <string name="toast_empty_name_error">Nimetu asukoht</string>
+    <string name="toast_empty_name_error">Ilma nimeta asukoht</string>
     <string name="tunnel_warning">Tunnel ees</string>
     <string name="show_tunnels">Tunnelid</string>
     <string name="download_wikipedia_description">Laadi alla Vikipeedia artiklid %1$s kohta ilma võrguühenduseta lugemiseks.</string>
@@ -3884,8 +3884,8 @@
     <string name="continue_with">Jätka %1$s</string>
     <string name="not_available_with">Ei ole saadaval koos %1$s</string>
     <string name="redeem_promo_code">Lunasta sooduskood</string>
-    <string name="osmand_maps_plus_tagline">Hangi täiendavaid funktsioone</string>
-    <string name="osmand_pro_tagline">Hangi maksimaalsed funktsioonid</string>
+    <string name="osmand_maps_plus_tagline">Kasuta täiendavat funktsionaalsust</string>
+    <string name="osmand_pro_tagline">Kasuta maksimalset funktsionaalsust</string>
     <string name="shared_string_learn_more">Lisateave</string>
     <string name="cancel_anytime_in_huawei_appgallery">Tühista see igal ajal Huawei AppGallery\'s</string>
     <string name="cancel_anytime_in_gplay">Tühista see igal ajal Google Play\'s.</string>
@@ -3989,7 +3989,7 @@
     <string name="shared_string_contributions">Kaastööd</string>
     <string name="map_updates_are_unavailable_yet">Kaardi värskendused pole veel saadaval. :-(</string>
     <string name="connect_track_points_as">Marsruudi punktide ühendamine</string>
-    <string name="pro_features">Pro funktsioonid</string>
+    <string name="pro_features">Pro funktsionaalsus</string>
     <string name="purchases_restored">Ostud taastatud</string>
     <string name="backup_error_subscription_was_expired_descr">Sinu OsmAnd Pro tellimus on aegunud, uuenda seda varukoopiate kasutamiseks. Andmeid saad endiselt pilvest taastada.</string>
     <string name="logout_from_osmand_cloud">Logi OsmAnd Cloud pilvest välja</string>
@@ -5259,4 +5259,21 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Näita mägirattasõiduks mõeldud radu.</string>
     <string name="co2_mission">Süsihappegaasi heitkogused</string>
     <string name="checking_progress">Kontrollin…</string>
+    <string name="bicycle_scd_device_name">Seade jalgrattal</string>
+    <string name="shared_string_cross_buy">Seotud teenuste ostud</string>
+    <string name="free_favorites_backup">Lemmikute tasuta varundus</string>
+    <string name="shared_string_wrist">Randmel</string>
+    <string name="shared_string_ear_lobe">Kõrvanibul</string>
+    <string name="shared_string_chest">Rinnal</string>
+    <string name="free_favorites_backup_description">Registreeru OsmAnd Cloudi kasutajaks ning pruugi lemmikute ja seadistuste tasuta varunduse võimalust.</string>
+    <string name="shared_string_finger">Sõrmel</string>
+    <string name="external_sensors_source_of_data">Andmeallikas</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Seda tüüpi ühendatud andureid ei leidu</string>
+    <string name="get_osmand_cloud">Liitu OsmAnd Cloudi teenusega</string>
+    <string name="beats_per_minute_short">l/min</string>
+    <string name="external_sensors_not_found">Andureid ei leidu</string>
+    <string name="shared_string_hand">Käel</string>
+    <string name="shared_string_foot">Jalal</string>
+    <string name="external_device_blood_pressure">Vererõhuandur</string>
+    <string name="no_bt_permission">Puuduvad õigused Bluetoothi kasutamiseks</string>
 </resources>
