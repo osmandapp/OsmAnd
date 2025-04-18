@@ -5000,4 +5000,7 @@
     <string name="poi_network_rhn">區域馬匹網路 (RHN)</string>
     <string name="poi_network_lhn">在地馬匹網路 (LHN)</string>
     <string name="poi_network_nhn">國家馬匹網路 (NHN)</string>
+    <string name="poi_footway">散步道</string>
+    <string name="poi_area_highway">機動性區域</string>
+    <string name="poi_area_highway_footway">適合步行的區域</string>
 </resources>
