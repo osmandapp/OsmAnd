@@ -707,7 +707,7 @@ public class ResourceManager {
 					Map<String, PoiType> poiTypes = toAddPoiTypes.get(poiCategory);
 					if (poiTypes != null) {
 						for (String s : entry.getValue()) {
-							PoiType pt = new PoiType(MapPoiTypes.getDefault(), poiCategory, null, s);
+							PoiType pt = new PoiType(MapPoiTypes.getDefault(), poiCategory, null, s, null);
 							pt.setOsmTag("");
 							pt.setOsmValue("");
 							pt.setNotEditableOsm(true);

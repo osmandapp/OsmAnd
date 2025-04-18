@@ -476,7 +476,9 @@ public class MapPoiTypes {
                             }
                         }
                         case "poi_reference" -> {
-                            PoiType tp = new PoiType(this, lastCategory, lastFilter, parser.getAttributeValue("", "name"));
+                            String keyName = parser.getAttributeValue("", "name");
+                            String iconName = parser.getAttributeValue("", "icon");
+                            PoiType tp = new PoiType(this, lastCategory, lastFilter, keyName, iconName);
                             referenceTypes.add(tp);
                             tp.setReferenceType(tp);
                             if (lastFilter != null) {
@@ -634,15 +636,17 @@ public class MapPoiTypes {
 		PoiFilter lastFilter = null;
 		PoiType lastType = null;
 		PoiType ref = null;
+		String keyName = poiAdditional.getKeyName();
+		String iconName = poiAdditional.getIconName();
 		if (parent instanceof PoiCategory) {
 			lastCategory = (PoiCategory) parent;
-			ref = new PoiType(this, lastCategory, null, poiAdditional.getKeyName());
+			ref = new PoiType(this, lastCategory, null, keyName, iconName);
 		} else if (parent instanceof PoiFilter) {
 			lastFilter = (PoiFilter) parent;
-			ref = new PoiType(this, lastFilter.getPoiCategory(), lastFilter, poiAdditional.getKeyName());
+			ref = new PoiType(this, lastFilter.getPoiCategory(), lastFilter, keyName, iconName);
 		} else if (parent instanceof PoiType) {
 			lastType = (PoiType) parent;
-			ref = new PoiType(this, lastType.getCategory(), lastType.getFilter(), poiAdditional.getKeyName());
+			ref = new PoiType(this, lastType.getCategory(), lastType.getFilter(), keyName, iconName);
 		}
 		if (ref == null) {
 			return null;
@@ -691,7 +695,8 @@ public class MapPoiTypes {
 		if (lang != null) {
 			otag += ":" + lang;
 		}
-		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname);
+		String iconName = parser.getAttributeValue("", "icon");
+		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname, iconName);
 		tp.setBaseLangType(langBaseType);
 		tp.setLang(lang);
 		tp.setAdditional(lastType != null ? lastType :
@@ -739,7 +744,8 @@ public class MapPoiTypes {
 		if (lang != null) {
 			oname += ":" + lang;
 		}
-		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname);
+		String iconName = parser.getAttributeValue("", "icon");
+		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname, iconName);
 		String otag = parser.getAttributeValue("", "tag");
 		if (lang != null) {
 			otag += ":" + lang;
