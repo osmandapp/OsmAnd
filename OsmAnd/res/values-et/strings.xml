@@ -5276,4 +5276,7 @@
     <string name="shared_string_foot">Jalal</string>
     <string name="external_device_blood_pressure">Vererõhuandur</string>
     <string name="no_bt_permission">Puuduvad õigused Bluetoothi kasutamiseks</string>
+    <string name="external_device_details_information">Lisateave</string>
+    <string name="external_device_details_battery">Aku</string>
+    <string name="external_device_details_received_data">Vastuvõetud andmed</string>
 </resources>
