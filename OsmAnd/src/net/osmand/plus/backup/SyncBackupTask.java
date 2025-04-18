@@ -103,7 +103,9 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 			syncListener.onBackupSyncStarted();
 		}
 		if (settingsItems.size() > 0 && operation != SYNC_OPERATION_UPLOAD) {
-			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, UNIQUE, true, this);
+			if (networkSettingsHelper.isSyncing(RESTORE_ITEMS_KEY)) {
+				networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, UNIQUE, true, this);
+			}
 		} else if (operation != SYNC_OPERATION_DOWNLOAD) {
 			uploadNewItems();
 		} else {
