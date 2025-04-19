@@ -5000,4 +5000,7 @@
     <string name="poi_network_rhn">Ĉevalaj kursoj regionaj</string>
     <string name="poi_network_nhn">Ĉevalaj kursoj ŝtataj</string>
     <string name="poi_network_lhn">Ĉevalaj kursoj lokaj</string>
+    <string name="poi_footway">Irejo</string>
+    <string name="poi_area_highway">Piedirada strato (areo)</string>
+    <string name="poi_area_highway_footway">Irejo (areo)</string>
 </resources>
