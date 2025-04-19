@@ -1277,7 +1277,7 @@
     <string name="everything_up_to_date">Všetky súbory sú aktuálne</string>
     <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (môže používať viac batérie a nemusí na niektorých starých zariadeniach fungovať).</string>
-    <string name="no_internet_connection">Nepodarilo sa stiahnuť, prosím skontrolujte pripojenie na Internet.</string>
+    <string name="no_internet_connection">Žiadne pripojenie na Internet.</string>
     <string name="navigate_point_zone">Zóna</string>
     <string name="download_tab_downloads">Všetky sťahovania</string>
     <string name="download_tab_updates">Aktualizácie</string>
