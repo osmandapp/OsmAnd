@@ -3883,7 +3883,7 @@
     <string name="backup_delete_types_descr">Törli az összes elavult adattípus adatát az OsmAnd Cloudból\?</string>
     <string name="from_with_param">%1$s-tól</string>
     <string name="regular_price">Rendes ár</string>
-    <string name="complete_purchase">Vásárlás befejezése</string>
+    <string name="complete_purchase">Vásárlás véglegesítése</string>
     <string name="shared_string_includes">Tartalmazza</string>
     <string name="shared_string_not_included">Nem tartalmazza</string>
     <string name="cancel_anytime_in_huawei_appgallery">Bármikor lemondhatja a Huawei AppGallery-ben</string>
@@ -5366,7 +5366,7 @@
     <string name="quick_action_routes_summary">Egy kapcsoló %1$s mutatásához vagy rejtéséhez a térképen.</string>
     <string name="shared_string_automatically">Automatikusan</string>
     <string name="ask_every_time">Kérdezzen rá mindig</string>
-    <string name="detailed_track_guidance">Részletes útmutatás</string>
+    <string name="detailed_track_guidance">Nyomvonal korrekció</string>
     <string name="compass_click_north_is_up">Tájolási mód megváltoztatásához kattintson és tartsa nyomva</string>
     <string name="route_roundabout_exit">Hajtson ki a %1$d kijáraton</string>
     <string name="help_article_map_tracks_name">Nyomvonalak</string>
