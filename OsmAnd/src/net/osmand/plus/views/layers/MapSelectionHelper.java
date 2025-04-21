@@ -335,7 +335,7 @@ public class MapSelectionHelper {
 							obfMapObject = null;
 						}
 						if (obfMapObject != null) {
-							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
+							Map<String, String> tags = getOrderedTags(obfMapObject.getResolvedAttributesListPairs());
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
@@ -450,7 +450,6 @@ public class MapSelectionHelper {
 	}
 
 	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject, Map<String, String> tags) {
-		Amenity amenity = null;
 		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
 		String caption = obfMapObject.getCaptionInNativeLanguage();
 		if (!caption.isEmpty()) {
@@ -459,16 +458,8 @@ public class MapSelectionHelper {
 		if (!Algorithms.isEmpty(tags) && tags.containsKey(TRAVEL_MAP_TO_POI_TAG) && "point".equals(tags.get(ROUTE))) {
 			names.add(tags.get(TRAVEL_MAP_TO_POI_TAG)); // additional attribute for TravelGpx points (route_id)
 		}
-		String routeId = tags.get(ROUTE_ID);
-		if (routeId != null) {
-			Map<String, List<Amenity>> map = app.getResourceManager().searchRouteMembers(routeId);
-			List<Amenity> list = map.get(routeId);
-			amenity = Algorithms.isEmpty(list) ? null : list.get(0);
-		}
-		if (amenity == null) {
-			long id = obfMapObject.getId().getId().longValue();
-			amenity = findAmenity(app, latLon, names, id);
-		}
+		long id = obfMapObject.getId().getId().longValue();
+		Amenity amenity = findAmenity(app, latLon, names, id);
 		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
 			for (int k = 0; k < points31.size(); k++) {
@@ -706,16 +697,15 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	private static Map<String, String> getTags(@Nullable QStringStringHash set) {
-		Map<String, String> res = new HashMap<>();
-		if (set != null) {
-			QStringList keys = set.keys();
-			for (int i = 0; i < keys.size(); i++) {
-				String key = keys.get(i);
-				res.put(key, set.get(key));
+	private static Map<String, String> getOrderedTags(@Nullable QStringStringList tagsList) {
+		Map<String, String> tagsMap = new LinkedHashMap<>();
+		if (tagsList != null) {
+			for (int i = 0; i < tagsList.size(); i++) {
+				QStringStringPair pair = tagsList.get(i);
+				tagsMap.put(pair.getFirst(), pair.getSecond());
 			}
 		}
-		return res;
+		return tagsMap;
 	}
 
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
@@ -733,7 +723,7 @@ public class MapSelectionHelper {
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
-		Amenity amenity = findAmenityByOsmId(amenities, id);
+		Amenity amenity = findAmenityByOsmId(amenities, id, latLon);
 		if (amenity == null) {
 			amenity = findAmenityByName(amenities, names);
 		}
@@ -746,11 +736,13 @@ public class MapSelectionHelper {
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_RADIUS);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
-		return findAmenityByOsmId(amenities, osmId);
+		return findAmenityByOsmId(amenities, osmId, latLon);
 	}
 
 	@Nullable
-	public static Amenity findAmenityByOsmId(@NonNull List<Amenity> amenities, long id) {
+	public static Amenity findAmenityByOsmId(@NonNull List<Amenity> amenities, long id, LatLon point) {
+		Amenity am = null;
+		double minDist = AMENITY_SEARCH_RADIUS_FOR_RELATION * 2;
 		for (Amenity amenity : amenities) {
 			Long initAmenityId = amenity.getId();
 			if (initAmenityId != null) {
@@ -761,11 +753,15 @@ public class MapSelectionHelper {
 					amenityId = initAmenityId >> AMENITY_ID_RIGHT_SHIFT;
 				}
 				if (amenityId == id && !amenity.isClosed()) {
-					return amenity;
+					double dist = MapUtils.getDistance(amenity.getLocation(), point);
+					if (am == null || dist < minDist) {
+						am = amenity;
+						minDist = dist;
+					}
 				}
 			}
 		}
-		return null;
+		return am;
 	}
 
 	@Nullable

@@ -2,9 +2,6 @@ package net.osmand.plus.backup.ui.status;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
 import static net.osmand.plus.backup.ui.BackupUiUtils.getLastBackupTimeDescription;
-import static net.osmand.plus.backup.ui.status.BackupStatus.BACKUP_COMPLETE;
-import static net.osmand.plus.backup.ui.status.BackupStatus.CONFLICTS;
-import static net.osmand.plus.backup.ui.status.BackupStatus.MAKE_BACKUP;
 import static net.osmand.plus.base.OsmandBaseExpandableListAdapter.adjustIndicator;
 
 import android.content.Context;
@@ -145,7 +142,7 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 			Drawable icon = getTwoStateIcon(R.drawable.ic_action_update);
 
 			setupButton(syncButton, title, icon, v -> notifyButtonPressed(SYNC_BUTTON_INDEX));
-			syncButton.setEnabled(status == MAKE_BACKUP || status == CONFLICTS || status == BACKUP_COMPLETE);
+			syncButton.setEnabled(status.canSync());
 		}
 
 		ImageView imageView = syncButton.findViewById(android.R.id.icon);

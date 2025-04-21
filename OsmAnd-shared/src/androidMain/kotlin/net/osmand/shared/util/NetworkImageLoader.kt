@@ -6,6 +6,7 @@ import coil3.ImageLoader
 import coil3.disk.DiskCache
 import coil3.disk.directory
 import coil3.memory.MemoryCache
+import coil3.request.CachePolicy
 import coil3.request.Disposable
 import coil3.request.ImageRequest
 import coil3.request.allowHardware
@@ -33,6 +34,8 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
                         .maxSizeBytes(DISK_CACHE_SIZE)
                         .build()
                 }
+            } else {
+                diskCachePolicy(CachePolicy.DISABLED)
             }
         }
         .build()
@@ -52,6 +55,16 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
                 onError = { _ ->
                     callback.onError()
                 })
+            .build()
+
+        return LoadingImage(url, imageLoader.enqueue(request))
+    }
+
+    fun loadImage(
+        url: String,
+    ): LoadingImage {
+        val request = ImageRequest.Builder(context)
+            .data(url)
             .build()
 
         return LoadingImage(url, imageLoader.enqueue(request))

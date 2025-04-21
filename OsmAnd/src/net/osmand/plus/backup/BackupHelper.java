@@ -20,7 +20,11 @@ import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.commands.*;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.inapp.InAppPurchases;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -165,6 +169,28 @@ public class BackupHelper {
 		return purchasedSubscription != null ? purchasedSubscription.getOrderId() : null;
 	}
 
+	public boolean isBackupSubscriptionsExpired() {
+		if (InAppPurchaseUtils.isBackupAvailable(app)) {
+			return false;
+		}
+		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+		InAppPurchases purchases = purchaseHelper.getInAppPurchases();
+
+		boolean subscriptionsExpired = false;
+		for (InAppPurchase purchase : purchaseHelper.getEverMadeMainPurchases()) {
+			if (purchases.isOsmAndProSubscription(purchase) && purchase instanceof InAppSubscription subscription) {
+				SubscriptionState state = subscription.getState();
+				if (state.isActive() || subscription.isPurchased()) {
+					return false;
+				}
+				if (state.isGone()) {
+					subscriptionsExpired = true;
+				}
+			}
+		}
+		return subscriptionsExpired;
+	}
+
 	@Nullable
 	private Map<String, LocalFile> getPreparedLocalFiles() {
 		if (isBackupPreparing()) {
@@ -215,9 +241,17 @@ public class BackupHelper {
 	}
 
 	public void logout() {
-		settings.BACKUP_PROMOCODE.resetToDefault();
+		resetBackupPurchase();
 		settings.BACKUP_DEVICE_ID.resetToDefault();
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
+	}
+
+	public void resetBackupPurchase() {
+		settings.BACKUP_PROMOCODE.resetToDefault();
+		settings.BACKUP_PURCHASE_ACTIVE.resetToDefault();
+		settings.BACKUP_SUBSCRIPTION_SKU.resetToDefault();
+		settings.BACKUP_SUBSCRIPTION_ORIGIN.resetToDefault();
+		app.getInAppPurchaseHelper().resetPurchases();
 	}
 
 	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportType exportType) {

@@ -13,6 +13,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.LoadImagesMetadataTask;
 import net.osmand.plus.wikipedia.WikiImageCard;
+import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -30,11 +31,18 @@ public class GalleryController implements IDialogController {
 	private final OsmandApplication app;
 
 	private ImageCardsHolder currentCardsHolder;
+
+	private final NetworkImageLoader imageLoader;
 	private final List<WeakReference<DownloadMetadataListener>> listeners = new LinkedList<>();
 	private final Set<WikiImageCard> downloadingMetadata = new HashSet<>();
 
 	public GalleryController(@NonNull OsmandApplication app) {
 		this.app = app;
+		imageLoader = new NetworkImageLoader(app, false);
+	}
+
+	public NetworkImageLoader getImageLoader() {
+		return imageLoader;
 	}
 
 	@NonNull
