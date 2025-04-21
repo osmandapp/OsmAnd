@@ -21,7 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
-import net.osmand.core.jni.FColorARGB;
+import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
@@ -35,9 +35,9 @@ import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
 import java.util.Arrays;
@@ -447,7 +447,7 @@ public class AisObject {
 				    Color.argb(0xff, 0x55, 0x6b, 0x2f); // 0x556b2f: darkolivegreen
 		    case AIS_VESSEL_SAR -> Color.argb(0xff, 0xfa, 0x80, 0x72); // 0xfa8072: salmon
 		    case AIS_VESSEL_OTHER -> Color.argb(0xff, 0x00, 0xbf, 0xff); // 0x00bfff: deepskyblue
-		    default -> 0; // transparent
+		    default -> 0; // default icon
 	    };
     }
 
@@ -472,7 +472,7 @@ public class AisObject {
     private void setColor() {
         if (isLost(vesselLostTimeoutInMinutes) && !vesselAtRest) {
             if (isMovable()) {
-                this.bitmapColor = 0; // transparent
+                this.bitmapColor = 0; // default icon
             }
         } else {
             this.bitmapColor = selectColor(this.objectClass);
@@ -553,7 +553,7 @@ public class AisObject {
     height to draw a line to indicate the speed,
     otherwise return 0 (no movement)
     */
-    float getMovement() {
+    private float getMovement() {
         if (this.ais_sog > 0.0d) {
             if (isMovable()) {
                 if (this.ais_sog <  2.0d) { return 0.0f; }
@@ -565,7 +565,7 @@ public class AisObject {
         }
         return 0.0f;
     }
-    boolean needRotation() {
+    private boolean needRotation() {
         if (((this.ais_cog != INVALID_COG) && (this.ais_cog != 0)) ||
                 ((this.ais_heading != INVALID_HEADING) && (this.ais_heading != 0)))
         {
@@ -574,7 +574,7 @@ public class AisObject {
         return false;
     }
     /* return true if a vessel is moored etc. and needs to be drawn as a circle */
-    boolean isVesselAtRest() {
+    private boolean isVesselAtRest() {
         switch (this.objectClass) {
             case AIS_VESSEL:
             case AIS_VESSEL_SPORT:
@@ -1040,12 +1040,17 @@ public class AisObject {
 
         VectorLineBuilder lineBuilder = new VectorLineBuilder();
         lineBuilder.setLineId(getMmsi());
-        lineBuilder.setBaseOrder(baseOrder);
+        // To simplify algorithm draw line from the center of icon and increase order to draw it behind the icon
+        lineBuilder.setBaseOrder(baseOrder + 10);
         lineBuilder.setIsHidden(true);
+        lineBuilder.setFillColor(NativeUtilities.createFColorARGB(0xFF000000));
+        // Create line with non empty vector, otherwise render symbol is not created, TODO: FIX IN ENGINE
+        lineBuilder.setPoints(new QVectorPointI(2));
+        lineBuilder.setLineWidth(6);
         directionLine = lineBuilder.buildAndAddToCollection(vectorLinesCollection);
     }
 
-    public void updateAisRenderData(Context context,
+    public void updateAisRenderData(OsmandMapTileView TileView,
                                     @NonNull AisTrackerLayer mapLayer, @NonNull Paint paint) {
         // Call updateBitmap to update marker color
         updateBitmap(mapLayer, paint);
@@ -1063,8 +1068,11 @@ public class AisObject {
             activeMarker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
         }
 
-        activeMarker.setOnSurfaceIconModulationColor(NativeUtilities.createColorARGB(bitmapColor));
-        restMarker.setOnSurfaceIconModulationColor(NativeUtilities.createColorARGB(bitmapColor));
+        ColorARGB iconColor = bitmapColor == 0 ? NativeUtilities.createColorARGB(0xFFFFFFFF)
+                : NativeUtilities.createColorARGB(bitmapColor);
+
+        activeMarker.setOnSurfaceIconModulationColor(iconColor);
+        restMarker.setOnSurfaceIconModulationColor(iconColor);
 
         LatLon location = getPosition();
         if (location != null) {
@@ -1076,29 +1084,23 @@ public class AisObject {
             activeMarker.setPosition(markerLocation);
             restMarker.setPosition(markerLocation);
 
-            float lineLength = (float) bitmap.getHeight() * speedFactor;
-            PointI directionLineStart = new PointI(markerLocation);
+            int inverseZoom = TileView != null ? TileView.getMaxZoom() - TileView.getZoom() : 0;
+            float lineLength = speedFactor * (float)MapUtils.getPowZoom(inverseZoom) * bitmap.getHeight() * 0.75f;
 
             double theta = Math.toRadians(rotation);
             float dx = (float) (-Math.sin(theta) * lineLength);
             float dy = (float) (Math.cos(theta) * lineLength);
 
-            float VECTOR_LINE_SCALE_COEF = 2.0f;
-            OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-            float coef = VECTOR_LINE_SCALE_COEF + (1 - app.getOsmandMap().getCarDensityScaleCoef()) * VECTOR_LINE_SCALE_COEF;
-
             PointI directionLineEnd = new PointI(
-                    (int) (directionLineStart.getX() + dx * 10 * coef),
-                    (int) (directionLineStart.getY() + dy * 10 * coef)
+                    (int) (markerLocation.getX() + Math.ceil(dx)),
+                    (int) (markerLocation.getY() + Math.ceil(dy))
             );
 
             QVectorPointI points = new QVectorPointI();
-            points.add(directionLineStart);
+            points.add(markerLocation);
             points.add(directionLineEnd);
 
             directionLine.setPoints(points);
-            directionLine.setFillColor(NativeUtilities.createFColorARGB(0xFF000000));
-            directionLine.setLineWidth(3 * coef);
             directionLine.setIsHidden(!drawDirectionLine);
         }
     }

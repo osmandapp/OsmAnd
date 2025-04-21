@@ -20,21 +20,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.FColorARGB;
-import net.osmand.core.jni.MapMarker;
-import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.SingleSkImage;
-import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.VectorLine;
-import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -43,7 +34,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.util.Iterator;
 import java.util.List;
@@ -98,7 +88,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			for (AisObject ais : aisObjectList.values()) {
 				ais.createAisRenderData(getContext(), getBaseOrder(), this, bitmapPaint,
 						markersCollection, vectorLinesCollection);
-				ais.updateAisRenderData(getContext(), this, bitmapPaint);
+				ais.updateAisRenderData(getTileView(), this, bitmapPaint);
 			}
 		}
 	}
@@ -221,12 +211,12 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			AisObject newObj = new AisObject(ais);
 
 			if (view.getMapRenderer() != null && markersCollection != null && vectorLinesCollection != null) {
-				newObj.createAisRenderData(getContext(), getBaseOrder(), this, bitmapPaint,
+				newObj.createAisRenderData(getContext(),  getBaseOrder(), this, bitmapPaint,
 						markersCollection, vectorLinesCollection);
-				newObj.updateAisRenderData(getContext(), this, bitmapPaint);
-
-				aisObjectList.put(mmsi, newObj);
+				newObj.updateAisRenderData(getTileView(), this, bitmapPaint);
 			}
+
+			aisObjectList.put(mmsi, newObj);
 
 			if (aisObjectList.size() >= aisObjectListCounterMax) {
 				this.removeOldestAisObjectListEntry();
@@ -235,7 +225,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			obj.set(ais);
 
 			if (view.getMapRenderer() != null && markersCollection != null && vectorLinesCollection != null) {
-				obj.updateAisRenderData(getContext(), this, bitmapPaint);
+				ais.updateAisRenderData(getTileView(), this, bitmapPaint);
 			}
 		}
 	}
@@ -278,11 +268,18 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (tileBox.getZoom() >= START_ZOOM) {
 			AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
 
-			if (view.getMapRenderer() == null) {
-				for (AisObject ais : aisObjectList.values()) {
-					if (isLocationVisible(tileBox, ais.getPosition())) {
-						ais.draw(this, bitmapPaint, canvas, tileBox);
-					}
+			for (AisObject ais : aisObjectList.values()) {
+				if (view.getMapRenderer() != null) {
+					// Calling updateAisRenderData in onPrepareBufferImage is overhead
+					// but it is needed to update directional line points
+					// also there is no zoom animation for directional line
+					// TODO: SUPPORT THIS IN ENGINE
+					ais.updateAisRenderData(getTileView(), this, bitmapPaint);
+					continue;
+				}
+
+				if (isLocationVisible(tileBox, ais.getPosition())) {
+					ais.draw(this, bitmapPaint, canvas, tileBox);
 				}
 			}
 		}
