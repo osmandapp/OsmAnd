@@ -5775,4 +5775,6 @@
     <string name="route_part_of">Del af</string>
     <string name="cant_load_map_styles">Kan ikke indlæse kortstile.</string>
     <string name="add_to_navigation">Tilføj til navigation</string>
+    <string name="msg_favorites_skipped_as_existing">Favoritpunkter (%1$d) blev sprunget over som allerede eksisterende.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX-rutepunkter (%1$d) kopieret til favoritter.</string>
 </resources>
