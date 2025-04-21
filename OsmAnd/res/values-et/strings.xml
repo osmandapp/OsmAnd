@@ -5279,4 +5279,13 @@
     <string name="external_device_details_information">Lisateave</string>
     <string name="external_device_details_battery">Aku</string>
     <string name="external_device_details_received_data">Vastuvõetud andmed</string>
+    <string name="cloud_conflict">Versioonikonflikt</string>
+    <string name="upload_change">Laadi muudatus üles</string>
+    <string name="sync_now">Sünkroniseeri nüüd</string>
+    <string name="last_sync">Viimane sünkroonimine</string>
+    <string name="local_changes">Kohalikud muudatused</string>
+    <string name="cloud_changes_will_be_dismissed">Pilves olevad muudatused lähevad kaotsi</string>
+    <string name="cloud_version_will_be_removed">Pilves olev versioon kuulub eemaldamisele</string>
+    <string name="local_changes_will_be_dismissed">Kohalikus nutiseadmes olevad muudatused lähevad kaotsi</string>
+    <string name="local_file_will_be_restored">Kohalik fail kuulub taastamisele</string>
 </resources>
