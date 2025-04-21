@@ -1649,7 +1649,7 @@
     <string name="poi_shelter_type_wildlife_hide">Vildtskjul</string>
     <string name="poi_shelter_type_rock_shelter">Klippehule</string>
     <string name="poi_shelter_type_sun_shelter">Solafskærming</string>
-    <string name="poi_shelter_type_field_shelter">Friluftsshelter</string>
+    <string name="poi_shelter_type_field_shelter">Læskur til husdyr</string>
     <string name="poi_shelter_type_tent">Sheltertype: telt</string>
     <string name="poi_shelter_type_abandoned">Sheltertype: forladt</string>
     <string name="poi_internet_access_type_wlan">Wi-Fi</string>
@@ -4228,4 +4228,5 @@
     <string name="poi_lifeguard_tower">Livreddertårn</string>
     <string name="poi_birds_nest">Fuglerede</string>
     <string name="poi_us_maps_recreation_area_forest_name">Skovnavn</string>
+    <string name="poi_travel_agency">Rejsebureau</string>
 </resources>
