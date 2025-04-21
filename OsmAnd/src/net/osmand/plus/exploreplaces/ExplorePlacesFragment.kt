@@ -228,7 +228,12 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 				}
 			stopConvertAmenitiesTask()
 			convertAmenitiesTask =
-				ConvertAmenitiesTask(app, visiblePlaces, poiUIFilter?.isTopImagesFilter == true, callback)
+				ConvertAmenitiesTask(
+					app,
+					visiblePlaces,
+					poiUIFilter?.isTopImagesFilter == true,
+					app.locationProvider,
+					callback)
 			convertAmenitiesTask?.executeOnExecutor(singleThreadExecutor)
 		}
 	}

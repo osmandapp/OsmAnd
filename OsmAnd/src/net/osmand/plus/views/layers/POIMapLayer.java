@@ -28,7 +28,6 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.core.android.MapRendererView;
@@ -46,7 +45,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -82,7 +80,7 @@ import net.osmand.shared.util.LoadingImage;
 import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.poi.PoiFilterUtils.sortViaElo;
+import static net.osmand.plus.poi.PoiFilterUtils.sortByElo;
 
 import net.osmand.util.MapUtils;
 
@@ -146,7 +144,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private RotatedTileBox topPlacesBox;
 	private Amenity selectedTopPlace;
 	protected MapMarkersCollection selectedTopPlaceCollection;
-	private OsmAndLocationProvider locationProvider;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
@@ -164,7 +161,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		super(context);
 		app = (OsmandApplication) context.getApplicationContext();
 		routingHelper = app.getRoutingHelper();
-		locationProvider = app.getLocationProvider();
 
 		travelRendererHelper = app.getTravelRendererHelper();
 		showTravel = app.getSettings().SHOW_TRAVEL.get();
@@ -246,7 +242,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			                    }
 		                    });
 					if (filter.isTopWikiFilter()) {
-						sortViaElo(amenities);
+						sortByElo(amenities);
 						res.addAll(0, amenities);
 					} else {
 						for (Amenity amenity : amenities) {
@@ -261,18 +257,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					}
 				}
 				Set<Amenity> displayedPoints = collectDisplayedPoints(latLonBounds, zoom, res);
-				ArrayList<Amenity> sortedDisplayedItems = new ArrayList<>(displayedPoints);
-				if (calculatedFilters.size() == 1) {
-					if (new ArrayList<>(calculatedFilters).get(0).isRatingSorted()) {
-						sortViaElo(sortedDisplayedItems);
-					} else {
-						Location location = locationProvider.getLastStaleKnownLocation();
-						if (location != null) {
-							MapUtils.sortListOfMapObject(sortedDisplayedItems, location.getLatitude(), location.getLongitude());
-						}
-					}
-				}
-				return new Pair<>(res, sortedDisplayedItems);
+				return new Pair<>(res, new ArrayList<>(displayedPoints));
 			}
 
 			@NonNull
