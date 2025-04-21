@@ -105,6 +105,20 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		}
 	}
 
+	fun onBackPress(): Boolean {
+		if (bottomSheetBehavior.state == STATE_HIDDEN) {
+			return if (mapActivity?.contextMenu?.isVisible == true) {
+				mapActivity?.contextMenu?.hideMenus()
+				true
+			} else {
+				false
+			}
+		} else {
+			hideList()
+			return true
+		}
+	}
+
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
 	): View? {

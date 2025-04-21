@@ -516,8 +516,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
 		if (explorePlacesFragment != null) {
-			fragmentsHelper.closeExplore();
-			fragmentsHelper.showQuickSearch(CURRENT, false);
+			if (!explorePlacesFragment.onBackPress()) {
+				fragmentsHelper.closeExplore();
+				fragmentsHelper.showQuickSearch(CURRENT, false);
+			}
 			return;
 		}
 		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
