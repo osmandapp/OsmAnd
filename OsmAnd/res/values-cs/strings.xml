@@ -5747,4 +5747,6 @@
     <string name="route_part_of">Součást</string>
     <string name="cant_load_map_styles">Nelze načíst styly map.</string>
     <string name="add_to_navigation">Přidat do navigace</string>
+    <string name="msg_favorites_skipped_as_existing">Oblíbené body (%1$d) byly přeskočeny, protože již existují.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Body GPX (%1$d) zkopírovány do oblíbených.</string>
 </resources>
