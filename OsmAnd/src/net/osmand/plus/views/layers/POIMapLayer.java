@@ -28,6 +28,7 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.core.android.MapRendererView;
@@ -45,6 +46,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -79,6 +81,9 @@ import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
+
+import static net.osmand.plus.poi.PoiFilterUtils.sortViaElo;
+
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -141,6 +146,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private RotatedTileBox topPlacesBox;
 	private Amenity selectedTopPlace;
 	protected MapMarkersCollection selectedTopPlaceCollection;
+	private OsmAndLocationProvider locationProvider;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
@@ -158,6 +164,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		super(context);
 		app = (OsmandApplication) context.getApplicationContext();
 		routingHelper = app.getRoutingHelper();
+		locationProvider = app.getLocationProvider();
 
 		travelRendererHelper = app.getTravelRendererHelper();
 		showTravel = app.getSettings().SHOW_TRAVEL.get();
@@ -233,28 +240,43 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
                                     return true;
                                 }
 
-                                @Override
-                                public boolean isCancelled() {
-                                    return isInterrupted();
-                                }
-                            });
-                    for (Amenity amenity : amenities) {
-                        if (amenity.isRouteTrack()) {
-                            String routeId = amenity.getRouteId();
-                            if (routeId != null && !uniqueRouteIds.add(routeId)) {
-                                continue; // duplicate
-                            }
-                        }
-                        res.add(amenity);
-                    }
-                }
+			                    @Override
+			                    public boolean isCancelled() {
+				                    return isInterrupted();
+			                    }
+		                    });
+					if (filter.isTopWikiFilter()) {
+						sortViaElo(amenities);
+						res.addAll(0, amenities);
+					} else {
+						for (Amenity amenity : amenities) {
+							if (amenity.isRouteTrack()) {
+								String routeId = amenity.getRouteId();
+								if (routeId != null && !uniqueRouteIds.add(routeId)) {
+									continue; // duplicate
+								}
+							}
+							res.add(amenity);
+						}
+					}
+				}
+				Set<Amenity> displayedPoints = collectDisplayedPoints(latLonBounds, zoom, res);
+				ArrayList<Amenity> sortedDisplayedItems = new ArrayList<>(displayedPoints);
+				if (calculatedFilters.size() == 1) {
+					if (new ArrayList<>(calculatedFilters).get(0).isRatingSorted()) {
+						sortViaElo(sortedDisplayedItems);
+					} else {
+						Location location = locationProvider.getLastStaleKnownLocation();
+						if (location != null) {
+							MapUtils.sortListOfMapObject(sortedDisplayedItems, location.getLatitude(), location.getLongitude());
+						}
+					}
+				}
+				return new Pair<>(res, sortedDisplayedItems);
+			}
 
-				res.sort((a1, a2) -> {
-                    int cmp = Integer.compare(a2.getTravelEloNumber(), a1.getTravelEloNumber());
-                    if (cmp != 0) return cmp;
-                    return a1.getId() < a2.getId() ? -1 : (a1.getId().longValue() == a2.getId().longValue() ? 0 : 1);
-                });
-
+			@NonNull
+			private Set<Amenity> collectDisplayedPoints(@NonNull QuadRect latLonBounds, int zoom, List<Amenity> res) {
 				Set<Amenity> displayedPoints = new HashSet<>();
 				int i = 0;
 				for (Amenity amenity : res) {
@@ -296,8 +318,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 						}
 					}
 				}
-				return new Pair<>(res, new ArrayList<>(displayedPoints));
-            }
+				return displayedPoints;
+			}
 
 			private double alignTile(double zoom, double tile) {
 				if (tile < 0) {
