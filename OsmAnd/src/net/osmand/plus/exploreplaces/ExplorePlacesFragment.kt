@@ -186,23 +186,25 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 	private val bottomSheetCallback = object : BottomSheetCallback() {
 		override fun onStateChanged(bottomSheet: View, newState: Int) {
-			recyclerView?.let { recyclerView ->
-				val minPeekHeight =
-					resources.getDimensionPixelSize(R.dimen.bottom_sheet_min_peek_height)
-				val defaultPeekHeight =
-					resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
-				bottomSheetBehavior.peekHeight =
-					if (recyclerView.measuredHeight < defaultPeekHeight) {
-						minPeekHeight
-					} else {
-						defaultPeekHeight
-					}
-			}
+			updateBottomSheetHeight()
 			updateMapControls()
 		}
 
 		override fun onSlide(bottomSheet: View, slideOffset: Float) {
 		}
+	}
+
+	private fun updateBottomSheetHeight() {
+		val minPeekHeight =
+			resources.getDimensionPixelSize(R.dimen.bottom_sheet_min_peek_height)
+		val defaultPeekHeight =
+			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
+		bottomSheetBehavior.peekHeight =
+			if (adapter?.itemCount == 0) {
+				minPeekHeight
+			} else {
+				defaultPeekHeight
+			}
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -234,12 +236,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			this.visiblePlaces = visiblePlaces
 
 			val callback = CallbackWithObject<List<QuickSearchListItem>> { result ->
-					if (isAdded) {
-						adapter?.setItems(result)
-						updateMapControls()
-					}
-					true
+				if (isAdded) {
+					adapter?.setItems(result)
+					updateBottomSheetHeight()
+					updateMapControls()
 				}
+				true
+			}
 			stopConvertAmenitiesTask()
 			convertAmenitiesTask =
 				ConvertAmenitiesTask(
