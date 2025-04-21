@@ -5003,4 +5003,5 @@
     <string name="poi_footway">Доріжка</string>
     <string name="poi_area_highway">Зона мобільності</string>
     <string name="poi_area_highway_footway">Прогулянкова зона</string>
+    <string name="poi_travel_agency">Турагентство</string>
 </resources>
