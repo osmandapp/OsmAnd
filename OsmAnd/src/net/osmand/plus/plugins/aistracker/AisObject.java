@@ -9,6 +9,7 @@ import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_CPA_WARNIN
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_OBJ_LOST_DEFAULT_TIMEOUT;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_SHIP_LOST_DEFAULT_TIMEOUT;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,9 +21,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.core.jni.FColorARGB;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.SingleSkImage;
+import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.jni.VectorLine;
+import net.osmand.core.jni.VectorLineBuilder;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ChartPointsHelper;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.util.MapUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -80,6 +96,9 @@ public class AisObject {
     private AisTrackerHelper.Cpa cpa;
     private long lastCpaUpdate = 0;
     private boolean vesselAtRest = false; // if true, draw a circle instead of a bitmap
+    private MapMarker activeMarker;
+    private MapMarker restMarker;
+    private VectorLine directionLine;
 
     public AisObject(int mmsi, int msgType, double lat, double lon) {
         initObj(mmsi, msgType);
@@ -987,13 +1006,7 @@ public class AisObject {
         return (isLost(vesselLostTimeoutInMinutes) && isMovable() && !vesselAtRest);
     }
 
-    public Bitmap getBitmap(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint)
-    {
-        updateBitmap(mapLayer, paint);
-        return bitmap;
-    }
-
-    public float getVesselRotation()
+    private float getVesselRotation()
     {
         float rotation = 0;
         if (this.ais_cog != INVALID_COG) { rotation = (float)this.ais_cog; }
@@ -1001,11 +1014,99 @@ public class AisObject {
         return rotation;
     }
 
-    public int getBitmapColor(){
-        return bitmapColor;
+    public void createAisRenderData(@NonNull Context context, int baseOrder,
+                                    @NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
+                                    @NonNull MapMarkersCollection markersCollection,
+                                    @NonNull VectorLinesCollection vectorLinesCollection) {
+        updateBitmap(mapLayer, paint);
+
+        assert bitmap != null;
+
+        float CircleCIDensity = 5;
+        ChartPointsHelper chartPointsHelper = new ChartPointsHelper(context);
+
+        SingleSkImage activeImage = NativeUtilities.createSkImageFromBitmap(bitmap);
+        SingleSkImage restImage = NativeUtilities.createSkImageFromBitmap(
+                chartPointsHelper.createXAxisPointBitmap(bitmapColor, CircleCIDensity));
+
+        MapMarkerBuilder markerBuilder = new MapMarkerBuilder();
+        markerBuilder.setBaseOrder(baseOrder);
+        markerBuilder.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), activeImage);
+        markerBuilder.setIsHidden(true);
+        activeMarker = markerBuilder.buildAndAddToCollection(markersCollection);
+
+        markerBuilder.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), restImage);
+        restMarker = markerBuilder.buildAndAddToCollection(markersCollection);
+
+        VectorLineBuilder lineBuilder = new VectorLineBuilder();
+        lineBuilder.setLineId(getMmsi());
+        lineBuilder.setBaseOrder(baseOrder);
+        lineBuilder.setIsHidden(true);
+        directionLine = lineBuilder.buildAndAddToCollection(vectorLinesCollection);
     }
 
-    public boolean isLostTimeout() {
-        return isLost(vesselLostTimeoutInMinutes);
+    public void updateAisRenderData(Context context,
+                                    @NonNull AisTrackerLayer mapLayer, @NonNull Paint paint) {
+        // Call updateBitmap to update marker color
+        updateBitmap(mapLayer, paint);
+
+        float speedFactor = getMovement();
+        boolean lostTimeout = isLost(vesselLostTimeoutInMinutes) && vesselAtRest;
+        boolean drawDirectionLine = (speedFactor > 0) && (!lostTimeout) && !vesselAtRest;
+
+        activeMarker.setIsHidden(vesselAtRest);
+        restMarker.setIsHidden(!vesselAtRest);
+        directionLine.setIsHidden(drawDirectionLine);
+
+        float rotation = (getVesselRotation() + 180f) % 360f;
+        if (!vesselAtRest && needRotation()) {
+            activeMarker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
+        }
+
+        activeMarker.setOnSurfaceIconModulationColor(NativeUtilities.createColorARGB(bitmapColor));
+        restMarker.setOnSurfaceIconModulationColor(NativeUtilities.createColorARGB(bitmapColor));
+
+        LatLon location = getPosition();
+        if (location != null) {
+            PointI markerLocation = new PointI(
+                    MapUtils.get31TileNumberX(location.getLongitude()),
+                    MapUtils.get31TileNumberY(location.getLatitude())
+            );
+
+            activeMarker.setPosition(markerLocation);
+            restMarker.setPosition(markerLocation);
+
+            float lineLength = (float) bitmap.getHeight() * speedFactor;
+            PointI directionLineStart = new PointI(markerLocation);
+
+            double theta = Math.toRadians(rotation);
+            float dx = (float) (-Math.sin(theta) * lineLength);
+            float dy = (float) (Math.cos(theta) * lineLength);
+
+            float VECTOR_LINE_SCALE_COEF = 2.0f;
+            OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+            float coef = VECTOR_LINE_SCALE_COEF + (1 - app.getOsmandMap().getCarDensityScaleCoef()) * VECTOR_LINE_SCALE_COEF;
+
+            PointI directionLineEnd = new PointI(
+                    (int) (directionLineStart.getX() + dx * 10 * coef),
+                    (int) (directionLineStart.getY() + dy * 10 * coef)
+            );
+
+            QVectorPointI points = new QVectorPointI();
+            points.add(directionLineStart);
+            points.add(directionLineEnd);
+
+            directionLine.setPoints(points);
+            directionLine.setFillColor(NativeUtilities.createFColorARGB(0xFF000000));
+            directionLine.setLineWidth(3 * coef);
+            directionLine.setIsHidden(!drawDirectionLine);
+        }
+    }
+
+    public void clearAisRenderData(@NonNull MapMarkersCollection markersCollection,
+                                   @NonNull VectorLinesCollection vectorLinesCollection) {
+        markersCollection.removeMarker(activeMarker);
+        markersCollection.removeMarker(restMarker);
+        vectorLinesCollection.removeLine(directionLine);
     }
 }
