@@ -5000,4 +5000,7 @@
     <string name="poi_network_lhn">Rețea locală de cai (LHN)</string>
     <string name="poi_network_nhn">Rețeaua națională pentru cai (NHN)</string>
     <string name="poi_network_rhn">Rețeaua regională pentru cai (RHN)</string>
+    <string name="poi_area_highway">Zona de mobilitate</string>
+    <string name="poi_area_highway_footway">Zonă pietonală</string>
+    <string name="poi_footway">Pasarelă</string>
 </resources>

@@ -4541,15 +4541,7 @@
     <string name="calculating_altitude">Se calculează elevația</string>
     <string name="routing_attr_avoid_4wd_only_name">Evită drumuri 4WD</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="release_4_2">- Reproiectarea widgeturilor: aspect nou, grupați după pagini, modificați ordinea și combinați-le după cum doriți.
-\n
-\n - Drumeții / Ciclism / Rute de călătorie: apăsați pe simbolul traseului și obțineți informații complete despre traseu.
-\n
-\n - Grupuri favorite: setați aspectul implicit pentru noile puncte din grup.
-\n
-\n - Corecții: actualizarea automată a segmentelor de hartă online
-\n
-\n</string>
+    <string name="release_4_2">• Reproiectarea widgeturilor: aspect nou, grupați după pagini, modificați ordinea și combinați-le după cum doriți. \n \n • Drumeții / Ciclism / Rute de călătorie: apăsați pe simbolul traseului și obțineți informații complete despre traseu. \n \n • Grupuri favorite: setați aspectul implicit pentru noile puncte din grup. \n \n • Corecții: actualizarea automată a segmentelor de hartă online</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Doar dacă este necesar</string>
     <string name="map_widget_true_bearing">Direcție reală</string>
     <string name="shared_string_symbol">Simbol</string>
