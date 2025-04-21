@@ -5600,5 +5600,6 @@
 	<string name="poi_footway">Walkway</string>
 	<string name="poi_area_highway">Mobility area</string>
 	<string name="poi_area_highway_footway">Walkable area</string>
+	<string name="poi_travel_agency">Travel agency</string>
 
 </resources>
