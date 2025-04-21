@@ -5754,4 +5754,6 @@
     <string name="route_members">Члени</string>
     <string name="cant_load_map_styles">Не вдається завантажити стилі карти.</string>
     <string name="add_to_navigation">Додати до навігації</string>
+    <string name="msg_favorites_skipped_as_existing">Вибрані точки (%1$d) пропущено як уже наявні.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Шляхові точки GPX (%1$d) скопійовано до вибраного.</string>
 </resources>
