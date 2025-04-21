@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favorites.</string>
+    <string name="msg_favorites_skipped_as_existing">Favorite points (%1$d) were skipped as already existing.</string>
 	<string name="saved_to_device">Saved to device</string>
 	<string name="save_to_device_error">Save to device error</string>
 	<string name="save_to_device">Save to Device</string>
@@ -23,8 +26,8 @@
     <string name="route_members">Members</string>
     <string name="multipoligon_related">Related</string>
     <string name="route_part_of">Part of</string>
-	<string name="wikidata">Wikidata</string>
-	<string name="read_on_wiki">Read on Wikipedia</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="read_on_wiki">Read on Wikipedia</string>
     <string name="prediction_time_description">Position icon in OsmAnd animates with each received GPS data point (once per second). A slight delay in its movement may be noticeable, especially when the user is moving quickly or the GPS signal fluctuates.</string>
     <string name="prediction_time_advanced_description">Adjust the prediction time to minimize delay.</string>
     <string name="prediction_time">Prediction time</string>
@@ -35,8 +38,8 @@
     <string name="intermediate_first">Intermediate first</string>
     <string name="destination_first">Destination first</string>
     <string name="display_priority">Display priority</string>
-	<string name="row_height">Row height</string>
-	<string name="add_widget">Add widget</string>
+    <string name="row_height">Row height</string>
+    <string name="add_widget">Add widget</string>
     <string name="shared_string_online_only">Online Only</string>
     <string name="shared_string_offline_only">Offline Only</string>
     <string name="meridian_180">180th meridian</string>

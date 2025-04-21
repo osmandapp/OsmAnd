@@ -948,6 +948,11 @@ public abstract class InAppPurchaseHelper {
 		}
 	}
 
+	public void resetPurchases() {
+		subscriptionStateMap = new HashMap<>();
+		inAppStateMap = new HashMap<>();
+	}
+
 	protected void sendTokens(@NonNull List<PurchaseInfo> purchaseInfoList, @Nullable OnRequestResultListener listener) {
 		String userId = ctx.getSettings().BILLING_USER_ID.get();
 		String token = ctx.getSettings().BILLING_USER_TOKEN.get();
