@@ -5729,4 +5729,6 @@
     <string name="route_members">Članovi</string>
     <string name="cant_load_map_styles">Ne mogu da učitam stilove mape.</string>
     <string name="add_to_navigation">Dodaj u navigaciju</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX putne tačke (%1$d) kopirane su u favorite.</string>
+    <string name="msg_favorites_skipped_as_existing">Omiljene tačke (%1$d) su preskočene kao već postojeće.</string>
 </resources>
