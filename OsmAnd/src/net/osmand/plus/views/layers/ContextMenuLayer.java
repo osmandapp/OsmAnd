@@ -126,6 +126,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			menu = null;
 			multiSelectionMenu = null;
 			movementListener = null;
+			mInChangeMarkerPositionMode = false;
+			mInAddGpxPointMode = false;
 			mMoveMarkerBottomSheetHelper = null;
 			mAddGpxPointBottomSheetHelper = null;
 		}
@@ -450,8 +452,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public boolean isObjectMoveable(Object o) {
 		if (o != null && selectedObjectContextMenuProvider != null
-				&& selectedObjectContextMenuProvider instanceof IMoveObjectProvider) {
-			IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
+				&& selectedObjectContextMenuProvider instanceof IMoveObjectProvider l) {
 			return l.isObjectMovable(o);
 		}
 		return false;
@@ -459,8 +460,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public void applyMovedObject(Object o, LatLon position, ApplyMovedObjectCallback callback) {
 		if (selectedObjectContextMenuProvider != null && !isInAddGpxPointMode()) {
-			if (selectedObjectContextMenuProvider instanceof IMoveObjectProvider) {
-				IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
+			if (selectedObjectContextMenuProvider instanceof IMoveObjectProvider l) {
 				if (l.isObjectMovable(o)) {
 					l.applyNewObjectPosition(o, position, callback);
 				}
