@@ -306,7 +306,7 @@ public class WikiCoreHelper {
 		public Long osmid;
 
 		public Double elo;
-		private String osmtype;
+		public int osmtype;
 	}
 
 	public static class OsmandAPIResponse {

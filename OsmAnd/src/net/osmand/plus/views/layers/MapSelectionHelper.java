@@ -247,10 +247,14 @@ public class MapSelectionHelper {
 
 				if (isOsmRoute && !osmRoutesAlreadyAdded) {
 					osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
-				} else if (isTravelGpx) {
-					addTravelGpx(result, travelGpxFilter);
-				} else if (isClickableWay) {
-					addClickableWay(result, clickableWayHelper.loadClickableWay(result.getPointLatLon(), renderedObject));
+				}
+
+				if (!isOsmRoute || !osmRoutesAlreadyAdded) {
+					if (isTravelGpx) {
+						addTravelGpx(result, travelGpxFilter);
+					} else if (isClickableWay) {
+						addClickableWay(result, clickableWayHelper.loadClickableWay(result.getPointLatLon(), renderedObject));
+					}
 				}
 
 				boolean allowAmenityObjects = !isTravelGpx;
@@ -343,11 +347,15 @@ public class MapSelectionHelper {
 
 							if (isOsmRoute && !osmRoutesAlreadyAdded) {
 								osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
-							} else if (isTravelGpx) {
-								addTravelGpx(result, tags.get(ROUTE_ID));
-							} else if (isClickableWay) {
-								addClickableWay(result,
-										clickableWayHelper.loadClickableWay(result.getPointLatLon(), obfMapObject, tags));
+							}
+
+							if (!isOsmRoute || !osmRoutesAlreadyAdded) {
+								if (isTravelGpx) {
+									addTravelGpx(result, tags.get(ROUTE_ID));
+								} else if (isClickableWay) {
+									addClickableWay(result,
+											clickableWayHelper.loadClickableWay(result.getPointLatLon(), obfMapObject, tags));
+								}
 							}
 
 							boolean allowAmenityObjects = !isTravelGpx;

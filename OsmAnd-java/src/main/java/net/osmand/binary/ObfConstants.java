@@ -48,6 +48,18 @@ public class ObfConstants {
 		return osmId;
 	}
 
+	public static long createMapObjectIdFromOsmId(Long osmId, int osmType) {
+		return switch (osmType) {
+			case 1 -> //node
+					osmId * 2;
+			case 2 -> //way
+					osmId * 2 + 1;
+			case 3 -> // relation
+					(osmId << (5 + SHIFT_ID)) | (ObfConstants.RELATION_BIT | ObfConstants.SPLIT_BIT);
+			default -> osmId;
+		};
+	}
+
 	public static long getOsmObjectId(MapObject object) {
 		long originalId = -1;
 		Long id = object.getId();
