@@ -36,8 +36,8 @@ public class PoiType extends AbstractPoiType {
 	private int minCount;
 
 
-	public PoiType(MapPoiTypes poiTypes, PoiCategory category, PoiFilter filter, String keyName) {
-		super(keyName, poiTypes);
+	public PoiType(MapPoiTypes poiTypes, PoiCategory category, PoiFilter filter, String keyName, String iconName) {
+		super(keyName, poiTypes, iconName);
 		this.category = category;
 		this.filter = filter;
 	}
