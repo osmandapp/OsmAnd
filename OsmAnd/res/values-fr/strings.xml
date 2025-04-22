@@ -5566,7 +5566,7 @@
     <string name="obd_fuel_consumption_rate_l_h">Consommation de carburant (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Consommation de carburant (capteur)</string>
     <string name="speedometer_maximum">Maximum</string>
-    <string name="liter">l</string>
+    <string name="liter">L</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (%/h)</string>
     <string name="l_100km">l/100km</string>
@@ -5586,13 +5586,13 @@
     <string name="dynamic_icon_type_summary">L’icône change en fonction de l\'état de l\'action.</string>
     <string name="record_obd_data">Enregistrer les données du véhicule</string>
     <string name="fuel_tank_capacity_description">Saisissez la capacité du réservoir pour suivre avec précision le niveau de carburant et la consommation</string>
-    <string name="fuel_tank_capacity">Capacité du réservoir de carburant</string>
+    <string name="fuel_tank_capacity">Capacité du réservoir d\'essence</string>
     <string name="shared_strings_dimensions">Dimensions</string>
     <string name="litres">Litres</string>
     <string name="us_gallons_unit">gal</string>
-    <string name="imperial_gallons">Galons impériaux</string>
-    <string name="us_gallons">Gallons américains</string>
-    <string name="unit_of_volume_description">Les unités sélectionnées seront utilisées pour toutes les données de volume dans le profil actuel.</string>
+    <string name="imperial_gallons">Gallons impériaux</string>
+    <string name="us_gallons">Gallons US</string>
+    <string name="unit_of_volume_description">Les unités sélectionnées seront appliquées à toutes les données relatives au volume dans le profil actuel.</string>
     <string name="unit_of_volume">Unité de volume</string>
     <string name="wunderlinq_datagrid">Grille de données WunderLINQ</string>
     <string name="vehicle_metrics_obd_ii">Mesures du véhicule (OBD-II)</string>
@@ -5741,4 +5741,6 @@
     <string name="multipoligon_related">Lié</string>
     <string name="cant_load_map_styles">Impossible de charger les styles de carte.</string>
     <string name="add_to_navigation">Ajouter au guidage</string>
+    <string name="msg_favorites_skipped_as_existing">%1$d points favoris ont été ignorés car ils existaient déjà.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Points de passage GPX (%1$d) copiés dans les favoris.</string>
 </resources>
