@@ -1304,7 +1304,7 @@
     <string name="poi_vending_stamps">Маркице</string>
     <string name="poi_vending_food">Храна</string>
     <string name="poi_vending_drinks_food">Пиће и храна</string>
-    <string name="poi_vending_fuel">Гориво</string>
+    <string name="poi_vending_fuel">Продаја горива</string>
     <string name="poi_vending_milk">Млеко</string>
     <string name="poi_vending_elongated_coin">Издужени новчићи</string>
     <string name="poi_vending_bread">Хлеб</string>
@@ -5003,4 +5003,5 @@
     <string name="poi_area_highway_footway">Пешачка област</string>
     <string name="poi_area_highway">Подручје мобилности</string>
     <string name="poi_footway">Пролаз</string>
+    <string name="poi_travel_agency">Туристичка агенција</string>
 </resources>

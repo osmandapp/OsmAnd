@@ -231,7 +231,7 @@
     <string name="poi_filter_custom_filter">Vlastní filtr</string>
     <string name="poi_filter_food_shop">Potraviny</string>
     <string name="poi_filter_for_tourists">Pro turisty</string>
-    <string name="poi_filter_fuel">Čerpací stanice</string>
+    <string name="poi_filter_fuel">Palivo</string>
     <string name="poi_filter_namefinder">On-line POI filtr „NameFinder“</string>
     <string name="reading_cached_tiles">Načítání uložených dlaždic…</string>
     <string name="version_index_is_big_for_memory">Index \'\'{0}\'\' se nevejde do paměti</string>
@@ -5589,8 +5589,8 @@
     <string name="obd_connecting_to_device">Připojení k %s</string>
     <string name="shared_strings_dimensions">Rozměry</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
-    <string name="fuel_tank_capacity_description">Zadejte objem nádrže, abyste mohli přesně sledovat stav paliva a jeho spotřebu</string>
-    <string name="fuel_tank_capacity">Objem palivové nádrže</string>
+    <string name="fuel_tank_capacity_description">Zadejte kapacitu vaší palivové nádrže pro přesnější sledování úrovně a spotřeby paliva</string>
+    <string name="fuel_tank_capacity">Kapacita palivové nádrže</string>
     <string name="obd_engine_oil_temperature_desc">Ukazuje teplotu motorového oleje.</string>
     <string name="obd_throttle_position_desc">Ukazuje úhel škrticí klapky v tělese škrticí klapky.</string>
     <string name="vehicle_metrics_obd_ii">Metriky vozidla (OBD-II)</string>
@@ -5607,7 +5607,7 @@
     <string name="show_minor_turns">Zobrazení na menších křižovatkách při přímé navigaci</string>
     <string name="litres">Litry</string>
     <string name="imperial_gallons">Imperiální galony</string>
-    <string name="us_gallons">US galony</string>
+    <string name="us_gallons">Americké galony</string>
     <string name="record_obd_data">Záznam metrik vozidla</string>
     <string name="shared_string_hour">Hodiny</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Sledování důležitých údajů o vozidle pomocí protokolu OBD-II. Sledujte klíčové ukazatele, jako je rychlost, otáčky motoru, spotřeba paliva a další.</string>
@@ -5618,7 +5618,7 @@
     <string name="average_temperature">Průměrná teplota</string>
     <string name="show_minor_turns_descr">Na všech průjezdních křižovatkách se zobrazí jízdní pruhy bez ohledu na hlasové pokyny</string>
     <string name="us_gallons_unit">gal</string>
-    <string name="unit_of_volume_description">Vybrané jednotky se použijí na všechna data související s objemem v aktuálním profilu.</string>
+    <string name="unit_of_volume_description">Zvolené jednotky budou použity na všechna data týkající se objemu v aktuálním profilu.</string>
     <string name="obd_fuel_pressure_desc">Ukazuje tlak v palivovém systému</string>
     <string name="obd_battery_voltage_desc">Zobrazuje úroveň napětí baterie vozidla</string>
     <string name="obd_engine_runtime_desc">Ukazuje, jak dlouho motor běží od jeho nastartování.</string>
@@ -5749,4 +5749,7 @@
     <string name="add_to_navigation">Přidat do navigace</string>
     <string name="msg_favorites_skipped_as_existing">Oblíbené body (%1$d) byly přeskočeny, protože již existují.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Body GPX (%1$d) zkopírovány do oblíbených.</string>
+    <string name="saved_to_device">Uloženo do zařízení</string>
+    <string name="save_to_device">Uložit do zařízení</string>
+    <string name="save_to_device_error">Chyba při ukládání do zařízení</string>
 </resources>

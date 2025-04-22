@@ -5756,4 +5756,7 @@
     <string name="add_to_navigation">Додати до навігації</string>
     <string name="msg_favorites_skipped_as_existing">Вибрані точки (%1$d) пропущено як уже наявні.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Шляхові точки GPX (%1$d) скопійовано до вибраного.</string>
+    <string name="saved_to_device">Збережено на пристрої</string>
+    <string name="save_to_device_error">Помилка збереження на пристрої</string>
+    <string name="save_to_device">Зберегти на пристрій</string>
 </resources>

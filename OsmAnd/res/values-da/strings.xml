@@ -5777,4 +5777,7 @@
     <string name="add_to_navigation">Tilføj til navigation</string>
     <string name="msg_favorites_skipped_as_existing">Favoritpunkter (%1$d) blev sprunget over som allerede eksisterende.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX-rutepunkter (%1$d) kopieret til favoritter.</string>
+    <string name="save_to_device">Gem på enhed</string>
+    <string name="saved_to_device">Gemt på enhed</string>
+    <string name="save_to_device_error">Gemt på enhed fejl</string>
 </resources>
