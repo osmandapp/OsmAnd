@@ -207,6 +207,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		return filterId.startsWith(STD_PREFIX + WIKI_PLACE) || isTopWikiFilter();
 	}
 
+	public boolean isRatingSorted() {
+		return isWikiFilter();
+	}
+
 	public boolean isTopWikiFilter() {
 		return filterId.equals(TOP_WIKI_FILTER_ID);
 	}
