@@ -69,7 +69,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.viewWidth = viewWidth;
-		this.imageLoader = new NetworkImageLoader(app, false);
+		this.imageLoader = new NetworkImageLoader(app, true);
 		themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 	}
 
