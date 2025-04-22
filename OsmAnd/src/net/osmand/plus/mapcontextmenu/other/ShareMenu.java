@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.plus.mapcontextmenu.other.ShareItem.SAVE_AS_FILE;
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_ACTION_ID;
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_ADDRESS;
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_COORDINATES;
@@ -21,6 +22,7 @@ import android.service.chooser.ChooserAction;
 import android.text.Html;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
@@ -41,6 +43,7 @@ import net.osmand.util.TextDirectionUtil;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +54,7 @@ public class ShareMenu extends BaseMenuController {
 
 	private static final String KEY_SHARE_MENU_LATLON = "key_share_menu_latlon";
 	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
+	public static final String KEY_SAVE_FILE_NAME = "key_save_file_name";
 
 	private LatLon latLon;
 	private String title;
@@ -267,5 +271,52 @@ public class ShareMenu extends BaseMenuController {
 			return true;
 		}
 		return false;
+	}
+
+	@RequiresApi(api = 34)
+	public static void showNativeShareDialog(@NonNull OsmandApplication app, @NonNull Activity activity,
+	                                         @NonNull File file, boolean singleTop, boolean newTask, @Nullable String type) {
+		ChooserAction[] actions = new ChooserAction[1];
+
+		Intent intent = new Intent(app, activity.getClass());
+		intent.putExtra(KEY_SAVE_FILE_NAME, file.toURI());
+		intent.putExtra("file_path", file.getAbsolutePath());
+
+		if (singleTop) {
+			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		}
+
+		ShareItem item = SAVE_AS_FILE;
+		intent.putExtra(KEY_SHARE_ACTION_ID, item.ordinal());
+		PendingIntent pendingIntent = PendingIntent.getActivity(
+				app,
+				0,
+				intent,
+				PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+		);
+
+		actions[0] = new ChooserAction.Builder(Icon.createWithResource(app, item.getIconId()),
+				activity.getString(item.getTitleId()), pendingIntent).build();
+
+		Intent sendIntent = new Intent(Intent.ACTION_SEND);
+
+		sendIntent.setType(Algorithms.isEmpty(type) ? "*/*" : type);
+		sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
+		sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		if (newTask) {
+			sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		}
+
+		Intent shareIntent = Intent.createChooser(sendIntent, null);
+		shareIntent.putExtra(Intent.EXTRA_CHOOSER_CUSTOM_ACTIONS, actions);
+		AndroidUtils.startActivityIfSafe(app, sendIntent, shareIntent);
+	}
+
+	@RequiresApi(api = 34)
+	public static void showNativeShareDialog(@NonNull OsmandApplication app, @NonNull Activity activity,
+	                                         @NonNull File file, boolean singleTop, boolean newTask) {
+		showNativeShareDialog(app, activity, file, singleTop, newTask, null);
 	}
 }

@@ -11,6 +11,7 @@ import static net.osmand.IndexConstants.SQLITE_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
+import static net.osmand.plus.helpers.IntentHelper.REQUEST_CODE_CREATE_FILE;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
@@ -21,6 +22,7 @@ import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_LA
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_VERSION_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -33,7 +35,6 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.util.Pair;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +47,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.importfiles.tasks.CopyToFileTask;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.AppInitializer;
@@ -110,6 +113,8 @@ public class ImportHelper {
 
 	private FragmentActivity activity;
 	private GpxImportListener gpxImportListener;
+
+	private ActivityResultListener saveFileResultListener;
 
 	public ImportHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -315,6 +320,11 @@ public class ImportHelper {
 
 	protected void handleGeoTiffImport(Uri uri, String name) {
 		executeImportTask(new GeoTiffImportTask(activity, uri, name));
+	}
+
+
+	public void handleCopyFileToFile(File originalFile, Uri destinationUri) {
+		executeImportTask(new CopyToFileTask(activity, originalFile, destinationUri));
 	}
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras) {
@@ -717,6 +727,34 @@ public class ImportHelper {
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra(TAB_ID, GPX_TAB);
 		activity.startActivity(intent);
+	}
+
+	private void removeResultListener(@NonNull Activity activity){
+		if (activity instanceof MyPlacesActivity myPlacesActivity) {
+			myPlacesActivity.removeActivityResultListener(saveFileResultListener);
+		} else if (activity instanceof MapActivity mapActivity) {
+			mapActivity.removeActivityResultListener(saveFileResultListener);
+		}
+	}
+
+	public void registerResultListener(@NonNull OsmandApplication app, @NonNull Activity activity, @NonNull File file) {
+		removeResultListener(activity);
+
+		saveFileResultListener = new ActivityResultListener(REQUEST_CODE_CREATE_FILE, (resultCode, resultData) -> {
+			if (resultCode == Activity.RESULT_OK && resultData != null && resultData.getData() != null) {
+				app.getImportHelper().handleCopyFileToFile(file, resultData.getData());
+			}
+		});
+		if (activity instanceof MyPlacesActivity myPlacesActivity) {
+			myPlacesActivity.registerActivityResultListener(saveFileResultListener);
+		} else if (activity instanceof MapActivity mapActivity) {
+			mapActivity.registerActivityResultListener(saveFileResultListener);
+		}
+	}
+
+	@Nullable
+	public ActivityResultListener getSaveFileResultListener() {
+		return saveFileResultListener;
 	}
 
 	private <P> void executeImportTask(AsyncTask<P, ?, ?> importTask, P... requests) {

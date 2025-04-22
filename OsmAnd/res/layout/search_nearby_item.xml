@@ -67,6 +67,7 @@
 			android:layout_height="wrap_content"
 			android:ellipsize="end"
 			android:maxLines="1"
+			android:layout_gravity="center_vertical"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="14sp"
 			tools:text="Monument" />

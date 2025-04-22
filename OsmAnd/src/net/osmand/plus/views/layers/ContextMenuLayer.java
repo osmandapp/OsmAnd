@@ -43,6 +43,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -901,6 +902,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (multiSelectionMenu != null && multiSelectionMenu.isVisible()) {
 			multiSelectionMenu.hide();
 			return true;
+		}
+		if (mapActivity != null) {
+			ExplorePlacesFragment explorePlacesFragment = mapActivity.getFragmentsHelper().getExplorePlacesFragment();
+			if (explorePlacesFragment != null) {
+				explorePlacesFragment.hideList();
+				return true;
+			}
 		}
 		return false;
 	}
