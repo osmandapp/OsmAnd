@@ -5,6 +5,7 @@ import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAG
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
+import static net.osmand.plus.mapcontextmenu.other.ShareMenu.KEY_SAVE_FILE_NAME;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
@@ -97,6 +98,7 @@ public class IntentHelper {
 	private static final String URL_PARAMETER_TOKEN = "token";
 	private static final String URL_PARAMETER_MODE = "profile";
 	private static final String URL_PARAMETER_INTERMEDIATE_POINTS = "via";
+	public static final int REQUEST_CODE_CREATE_FILE = 1101;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -526,6 +528,19 @@ public class IntentHelper {
 					PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
 				clearIntent(intent);
+			}
+			if (intent.hasExtra(KEY_SAVE_FILE_NAME)) {
+				String filePath = intent.getStringExtra("file_path");
+				if (Algorithms.isEmpty(filePath)) {
+					return;
+				}
+				File fileToSave = new File(filePath);
+
+				Intent createFileIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+				createFileIntent.setType("*/*");
+				createFileIntent.putExtra(Intent.EXTRA_TITLE, fileToSave.getName());
+
+				AndroidUtils.startActivityForResultIfSafe(mapActivity, createFileIntent, REQUEST_CODE_CREATE_FILE);
 			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {

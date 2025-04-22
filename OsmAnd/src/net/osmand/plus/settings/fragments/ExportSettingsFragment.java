@@ -1,11 +1,13 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.mapcontextmenu.other.ShareMenu.showNativeShareDialog;
 import static net.osmand.plus.settings.backend.backup.exporttype.ExportType.MAP_SOURCES;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -167,12 +169,6 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		checkExportingFile();
-	}
-
-	@Override
 	public void onPause() {
 		super.onPause();
 		if (exportingStarted) {
@@ -318,15 +314,21 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void shareProfile(@NonNull File file) {
-		Intent sendIntent = new Intent();
-		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
-		sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
-		sendIntent.setType("*/*");
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		if (Build.VERSION.SDK_INT >= 34) {
+			app.getImportHelper().registerResultListener(app, requireActivity(), file);
+			showNativeShareDialog(app, requireActivity(), file, false, false);
+		} else {
+			Intent sendIntent = new Intent();
+			sendIntent.setAction(Intent.ACTION_SEND);
+			sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
 
-		Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
-		AndroidUtils.startActivityIfSafe(app, chooserIntent);
+			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
+			sendIntent.setType("*/*");
+			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+			Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
+			AndroidUtils.startActivityIfSafe(app, chooserIntent);
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull ApplicationMode appMode,

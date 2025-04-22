@@ -75,7 +75,7 @@ public class MarkersHistorySettingsFragment extends HistoryItemsFragment {
 		List<MapMarker> mapMarkers = getSelectedMarkers();
 		ItineraryDataHelper dataHelper = app.getMapMarkersHelper().getDataHelper();
 		GpxFile gpxFile = dataHelper.generateGpx(mapMarkers, true);
-		GpxUiHelper.saveAndShareGpx(app, gpxFile);
+		GpxUiHelper.saveAndShareGpx(app, requireActivity(), gpxFile);
 	}
 
 	@Override
