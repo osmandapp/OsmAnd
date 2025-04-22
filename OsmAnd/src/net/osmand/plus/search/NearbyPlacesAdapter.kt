@@ -1,15 +1,14 @@
 package net.osmand.plus.search
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.drawable.Drawable
+import android.content.res.Resources
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.UiContext
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -21,14 +20,14 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.render.RenderingIcons
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.PicassoUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.util.Algorithms
-import androidx.core.graphics.createBitmap
-import net.osmand.plus.utils.ColorUtilities
+import kotlin.math.ceil
 
 class NearbyPlacesAdapter(
 	@UiContext val context: Context,
@@ -86,13 +85,20 @@ class NearbyPlacesAdapter(
 		private val itemTypeTextView: TextView = itemView.findViewById(R.id.item_type)
 		private val distanceTextView: TextView? = itemView.findViewById(R.id.distance)
 		private val arrowImageView: ImageView? = itemView.findViewById(R.id.direction)
+		private val maxHeight = calculateMaxItemHeight(context)
 
 		fun bind(item: Amenity, position: Int) {
 			this.item = item
 			val layoutParams = itemView.layoutParams
-			val heightResId =
-				if (shouldShowImage()) R.dimen.nearby_place_item_height else R.dimen.nearby_place_item_height_non_image
-			layoutParams.height = context.resources.getDimensionPixelSize(heightResId)
+			if (shouldShowImage()) {
+				layoutParams.height =
+					if (isVertical)
+						context.resources.getDimensionPixelSize(R.dimen.nearby_place_item_height)
+					else maxHeight
+			} else {
+				layoutParams.height =
+					context.resources.getDimensionPixelSize(R.dimen.nearby_place_item_height_non_image)
+			}
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
 			val osmanPoiType = item.osmandPoiKey
@@ -179,6 +185,26 @@ class NearbyPlacesAdapter(
 			if (!itemView.hasOnClickListeners()) {
 				itemView.setOnClickListener(clickListener)
 			}
+		}
+
+		private fun calculateMaxItemHeight(context: Context): Int {
+			val res: Resources = context.resources
+			val metrics: DisplayMetrics = res.displayMetrics
+
+			val padding: Float = res.getDimension(R.dimen.content_padding) * 2
+			val imageHeight: Float = res.getDimension(R.dimen.nearby_place_image_height)
+
+			val lineHeight: Int = AndroidUtils.getTextHeight(titleTextView.paint)
+			val twoLinesTitleHeight = lineHeight * 2
+			val marginTopTitle: Float = 9 * metrics.density
+
+			val typeLineHeight: Int = AndroidUtils.getTextHeight(itemTypeTextView.paint)
+			val marginTopType: Float = 3 * metrics.density
+
+			val totalHeight =
+				imageHeight + padding + marginTopTitle + twoLinesTitleHeight + marginTopType + typeLineHeight
+
+			return ceil(totalHeight.toDouble()).toInt()
 		}
 
 		private val clickListener =

@@ -48,7 +48,7 @@ public class ClickableWayHelper {
     public static final Map<String, String> FORBIDDEN_TAGS =
             Map.of("area", "yes", "access", "no", "aerialway", "*");
     public static final Set<String> REQUIRED_TAGS_ANY =
-            Set.of("name", "ref", "piste:name");
+            Set.of("name", "ref", "piste:name", "mtb:name");
     public static final Map<String, String> GPX_COLORS = Map.ofEntries(
             Map.entry("0", "brown"),
             Map.entry("1", "green"),

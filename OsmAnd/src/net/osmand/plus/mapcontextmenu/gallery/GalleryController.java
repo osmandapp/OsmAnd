@@ -38,7 +38,7 @@ public class GalleryController implements IDialogController {
 
 	public GalleryController(@NonNull OsmandApplication app) {
 		this.app = app;
-		imageLoader = new NetworkImageLoader(app, false);
+		imageLoader = new NetworkImageLoader(app, true);
 	}
 
 	public NetworkImageLoader getImageLoader() {

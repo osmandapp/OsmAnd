@@ -26,6 +26,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -144,7 +145,7 @@ public class PurchaseUiDataUtils {
 	public static boolean shouldShowBackupSubscription(@NonNull OsmandApplication app,
 	                                                   @NonNull List<InAppPurchase> mainPurchases) {
 		OsmandSettings settings = app.getSettings();
-		if (settings.BACKUP_PURCHASE_ACTIVE.get()) {
+		if (settings.BACKUP_SUBSCRIPTION_ORIGIN.get() != PurchaseOrigin.UNDEFINED) {
 			InAppPurchaseHelper helper = app.getInAppPurchaseHelper();
 			InAppPurchases purchases = helper.getInAppPurchases();
 			for (InAppPurchase purchase : mainPurchases) {

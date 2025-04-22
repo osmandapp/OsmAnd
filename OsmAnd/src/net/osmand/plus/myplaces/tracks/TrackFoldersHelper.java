@@ -240,7 +240,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file == null ? null : SharedUtil.jFile(file), true, gpxFile -> {
-					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
+					GpxUiHelper.saveAndShareGpxWithAppearance(app, activity, gpxFile);
 					return true;
 				}))
 				.create());

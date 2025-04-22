@@ -49,6 +49,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -79,6 +80,9 @@ import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
+
+import static net.osmand.plus.poi.PoiFilterUtils.sortByElo;
+
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -233,28 +237,32 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
                                     return true;
                                 }
 
-                                @Override
-                                public boolean isCancelled() {
-                                    return isInterrupted();
-                                }
-                            });
-                    for (Amenity amenity : amenities) {
-                        if (amenity.isRouteTrack()) {
-                            String routeId = amenity.getRouteId();
-                            if (routeId != null && !uniqueRouteIds.add(routeId)) {
-                                continue; // duplicate
-                            }
-                        }
-                        res.add(amenity);
-                    }
-                }
+			                    @Override
+			                    public boolean isCancelled() {
+				                    return isInterrupted();
+			                    }
+		                    });
+					if (filter.isTopWikiFilter()) {
+						sortByElo(amenities);
+						res.addAll(0, amenities);
+					} else {
+						for (Amenity amenity : amenities) {
+							if (amenity.isRouteTrack()) {
+								String routeId = amenity.getRouteId();
+								if (routeId != null && !uniqueRouteIds.add(routeId)) {
+									continue; // duplicate
+								}
+							}
+							res.add(amenity);
+						}
+					}
+				}
+				Set<Amenity> displayedPoints = collectDisplayedPoints(latLonBounds, zoom, res);
+				return new Pair<>(res, new ArrayList<>(displayedPoints));
+			}
 
-				res.sort((a1, a2) -> {
-                    int cmp = Integer.compare(a2.getTravelEloNumber(), a1.getTravelEloNumber());
-                    if (cmp != 0) return cmp;
-                    return a1.getId() < a2.getId() ? -1 : (a1.getId().longValue() == a2.getId().longValue() ? 0 : 1);
-                });
-
+			@NonNull
+			private Set<Amenity> collectDisplayedPoints(@NonNull QuadRect latLonBounds, int zoom, List<Amenity> res) {
 				Set<Amenity> displayedPoints = new HashSet<>();
 				int i = 0;
 				for (Amenity amenity : res) {
@@ -296,8 +304,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 						}
 					}
 				}
-				return new Pair<>(res, new ArrayList<>(displayedPoints));
-            }
+				return displayedPoints;
+			}
 
 			private double alignTile(double zoom, double tile) {
 				if (tile < 0) {
@@ -857,6 +865,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	@Override
 	protected void cleanupResources() {
 		super.cleanupResources();
+		imageCircleBitmap = null;
 		clearSelectedTopPlaceCollection();
 		clearPoiTileProvider();
 	}
@@ -960,10 +969,18 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && topPlaces != null && o instanceof Amenity && topPlaces.containsValue(o)) {
+			hideExplorePlacesFragment(mapActivity);
 			showTopPlaceContextMenu((Amenity) o);
 			return true;
 		} else {
 			return IContextMenuProvider.super.runExclusiveAction(o, unknownLocation);
+		}
+	}
+
+	private void hideExplorePlacesFragment(@NonNull MapActivity mapActivity){
+		ExplorePlacesFragment explorePlacesFragment = mapActivity.getFragmentsHelper().getExplorePlacesFragment();
+		if (explorePlacesFragment != null) {
+			explorePlacesFragment.hideList();
 		}
 	}
 
@@ -1139,7 +1156,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		int cy = circle.getHeight() / 2;
 		int radius = (Math.min(cx, cy) - borderWidth * 2);
 		canvas.save();
-		canvas.clipRect(0, 0, circle.getWidth(), circle.getHeight());
+//		canvas.clipRect(0, 0, circle.getWidth(), circle.getHeight());
 		Path circularPath = new Path();
 		circularPath.addCircle((float) cx, (float) cy, (float) radius, Path.Direction.CW);
 		canvas.clipPath(circularPath);

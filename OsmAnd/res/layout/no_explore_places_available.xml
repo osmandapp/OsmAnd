@@ -15,32 +15,15 @@
 		android:tint="?attr/default_icon_color"
 		app:srcCompat="@drawable/ic_action_desert" />
 
-	<LinearLayout
+	<net.osmand.plus.widgets.TextViewEx
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:gravity="start"
+		android:layout_gravity="center_vertical"
 		android:layout_marginEnd="@dimen/content_padding"
-		android:orientation="vertical">
-
-		<net.osmand.plus.widgets.TextViewEx
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/content_padding"
-			android:gravity="start"
-			android:text="@string/no_places_available"
-			android:textColor="?android:textColorPrimary"
-			android:textSize="@dimen/default_list_text_size"
-			android:textStyle="normal" />
-
-		<net.osmand.plus.widgets.TextViewEx
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/content_padding_half"
-			android:layout_marginBottom="@dimen/content_padding"
-			android:gravity="start"
-			android:text="@string/no_photo_for_location_desc"
-			android:textColor="?android:textColorSecondary"
-			android:textSize="@dimen/default_desc_text_size"
-			android:textStyle="normal" />
-	</LinearLayout>
+		android:text="@string/no_places_available"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		android:textStyle="normal" />
 
 </LinearLayout>

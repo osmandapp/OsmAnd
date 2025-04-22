@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import static net.osmand.binary.ObfConstants.createMapObjectIdFromOsmId;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
@@ -34,19 +35,11 @@ import org.apache.commons.logging.Log;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
 
-// TODO use gzip in loading +
-// TODO errors shouldn'go with empty response "" into cache! +
-// TODO remove checks poi type subtype null +
-// TODO display all data downloaded even if maps are not loaded
-// TODO: why recreate provider when new points are loaded? that causes blinking
-// TODO: scheduleImageRefreshes in layer is incorrect it starts downloading all images and stops interacting
-// TODO images shouldn't be queried if they are not visible in all lists! size doesn't matter !
-// TODO show on map close button is not visible +
-// TODO layer sometimes becomes non-interactive - MAP FPS drops
-// TODO Context menu doesn't work correctly and duplicates actual POI +
-// TODO compass is not rotating +
 // Extra: display new categories from web
+
 public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	private static final Log LOG = PlatformUtil.getLog(ExplorePlacesOnlineProvider.class);
@@ -296,7 +289,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		amenity.setType(category);
 		amenity.setSubType(subtype);
 		// TODO calculate osmid for different types way, node, relation
-		amenity.setId(properties.osmid * 2); // + 1 way, relation special algorithm backend
+		amenity.setId(createMapObjectIdFromOsmId(properties.osmid, properties.osmtype));
 		//amenity.setTravelTopic(properties.wikiTitle);
 		//amenity.setWikiCategory(properties.wikiDesc);
 		amenity.setTravelEloNumber(properties.elo != null ? properties.elo.intValue() : DEFAULT_ELO);
