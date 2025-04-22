@@ -864,6 +864,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	@Override
 	protected void cleanupResources() {
 		super.cleanupResources();
+		imageCircleBitmap = null;
 		clearSelectedTopPlaceCollection();
 		clearPoiTileProvider();
 	}
@@ -1146,7 +1147,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		int cy = circle.getHeight() / 2;
 		int radius = (Math.min(cx, cy) - borderWidth * 2);
 		canvas.save();
-		canvas.clipRect(0, 0, circle.getWidth(), circle.getHeight());
+//		canvas.clipRect(0, 0, circle.getWidth(), circle.getHeight());
 		Path circularPath = new Path();
 		circularPath.addCircle((float) cx, (float) cy, (float) radius, Path.Direction.CW);
 		canvas.clipPath(circularPath);
@@ -1176,6 +1177,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private int getBigIconSize() {
+		android.util.Log.d("Corwin", "getBigIconSize: " + getTextScale());
 		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale());
 	}
 }
