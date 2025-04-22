@@ -1177,7 +1177,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private int getBigIconSize() {
-		android.util.Log.d("Corwin", "getBigIconSize: " + getTextScale());
 		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale());
 	}
 }
