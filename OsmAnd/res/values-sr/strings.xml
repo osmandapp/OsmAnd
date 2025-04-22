@@ -5573,14 +5573,14 @@
     <string name="obd_connecting_to_device">Повезивање са %s</string>
     <string name="dynamic_icon_type_summary">Промена сличице на основу стања радње.</string>
     <string name="obd_not_connected_to_device">Прекинута веза са %s</string>
-    <string name="fuel_tank_capacity">Запремина спремишта горива</string>
+    <string name="fuel_tank_capacity">Капацитет резервоара за гориво</string>
     <string name="shared_strings_dimensions">Димензије</string>
     <string name="litres">Литара</string>
-    <string name="us_gallons_unit">gal</string>
+    <string name="us_gallons_unit">гал</string>
     <string name="imperial_gallons">Империјални галони</string>
     <string name="us_gallons">Амерички галони</string>
     <string name="unit_of_volume">Јединица запремине</string>
-    <string name="fuel_tank_capacity_description">Унесите запремину спремишта горива за тачно мерење горива и потрошње</string>
+    <string name="fuel_tank_capacity_description">Унесите капацитет резервоара да бисте прецизно пратили нивое горива и потрошњу</string>
     <string name="unit_of_volume_description">Изабране јединице ће бити примењене на све податке који се односе на запремину у тренутном профилу.</string>
     <string name="record_obd_data">Сними метрику возила</string>
     <string name="wunderlinq_datagrid">WunderLINQ Мрежа података</string>
@@ -5733,4 +5733,9 @@
     <string name="route_members">Чланови</string>
     <string name="cant_load_map_styles">Не могу се учитати стилови мапе.</string>
     <string name="add_to_navigation">Додај у Навигацију</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">ГПКс пролазне тачке (%1$d) су копиране у фаворите.</string>
+    <string name="msg_favorites_skipped_as_existing">Омиљене тачке (%1$d) су прескочене као већ постојеће.</string>
+    <string name="save_to_device">Сачувај на уређају</string>
+    <string name="saved_to_device">Сачувано на уређају</string>
+    <string name="save_to_device_error">Грешка при упису на уређају</string>
 </resources>
