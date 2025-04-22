@@ -5727,4 +5727,6 @@
     <string name="route_part_of">所屬實體</string>
     <string name="cant_load_map_styles">無法載入地圖樣式。</string>
     <string name="add_to_navigation">新增至導航</string>
+    <string name="msg_favorites_skipped_as_existing">收藏點 (%1$d) 因已存在而被略過。</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX 航點 (%1$d) 已複製到收藏。</string>
 </resources>
