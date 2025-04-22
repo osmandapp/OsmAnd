@@ -2943,8 +2943,8 @@
     <string name="shared_string_track_is_saved">Stopa %s je uložená</string>
     <string name="app_mode_camper">Obytný príves</string>
     <string name="app_mode_campervan">Obytné vozidlo</string>
-    <string name="rendering_attr_showLez_description">Zobraziť Zóny s nízkymi emisiami na mape. Neovplyvňuje navigáciu.</string>
-    <string name="rendering_attr_showLez_name">Zobraziť Zóny s nízkymi emisiami</string>
+    <string name="rendering_attr_showLez_description">Zobraziť zóny s nízkymi emisiami na mape. Neovplyvňuje navigáciu.</string>
+    <string name="rendering_attr_showLez_name">Zobraziť zóny s nízkymi emisiami</string>
     <string name="temporary_conditional_routing">Zohľadniť dočasné obmedzenia</string>
     <string name="shared_string_default">Predvolené</string>
     <string name="new_route_calculated_dist_dbg">Trasa: vzdialenosť %1$s, potrebný čas %2$s \nVýpočet: %3$.1f sekúnd, %4$d ciest, %5$d dlaždíc)</string>
@@ -5765,4 +5765,9 @@
     <string name="multipoligon_related">Súvisiace</string>
     <string name="cant_load_map_styles">Nepodarilo sa načítať mapové štýly.</string>
     <string name="add_to_navigation">Pridať do navigácie</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Body trasy GPX (%1$d) skopírované do obľúbených položiek.</string>
+    <string name="msg_favorites_skipped_as_existing">Obľúbené body (%1$d) boli preskočené pretože už existovali.</string>
+    <string name="save_to_device_error">Chyba pri ukladaní do zariadenia</string>
+    <string name="save_to_device">Uložiť do zariadenia</string>
+    <string name="saved_to_device">Uložené do zariadenia</string>
 </resources>
