@@ -5700,4 +5700,9 @@
     <string name="multipoligon_related">Összefüggő</string>
     <string name="cant_load_map_styles">Térképstílusok betöltése sikertelen.</string>
     <string name="add_to_navigation">Hozzáadás a navigációhoz</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX útpontok (%1$d) a kedvencek közé másolva.</string>
+    <string name="msg_favorites_skipped_as_existing">A kedvenc pontok (%1$d) kihagyva, már léteznek.</string>
+    <string name="saved_to_device">Mentve az eszközre</string>
+    <string name="save_to_device_error">Hiba az eszközre mentéskor</string>
+    <string name="save_to_device">Mentés az eszközre</string>
 </resources>
