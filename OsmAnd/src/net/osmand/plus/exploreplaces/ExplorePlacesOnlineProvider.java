@@ -38,6 +38,8 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 
+// Extra: display new categories from web
+
 public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	private static final Log LOG = PlatformUtil.getLog(ExplorePlacesOnlineProvider.class);
