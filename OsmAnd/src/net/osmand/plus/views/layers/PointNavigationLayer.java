@@ -242,24 +242,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		return getScaledBitmap(drawableId, textScale);
 	}
 
-	private float getPointX(RotatedTileBox tileBox, TargetPoint point) {
-		if (contextMenuLayer.getMoveableObject() != null
-				&& point == contextMenuLayer.getMoveableObject()) {
-			return contextMenuLayer.getMovableCenterPoint(tileBox).x;
-		} else {
-			return tileBox.getPixXFromLonNoRot(point.getLongitude());
-		}
-	}
-
-	private float getPointY(RotatedTileBox tileBox, TargetPoint point) {
-		if (contextMenuLayer.getMoveableObject() != null
-				&& point == contextMenuLayer.getMoveableObject()) {
-			return contextMenuLayer.getMovableCenterPoint(tileBox).y;
-		} else {
-			return tileBox.getPixYFromLatNoRot(point.getLatitude());
-		}
-	}
-
 	public boolean isLocationVisible(RotatedTileBox tb, TargetPoint p) {
 		if (contextMenuLayer.getMoveableObject() != null
 				&& p == contextMenuLayer.getMoveableObject()) {
@@ -440,24 +422,29 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	private void drawPointImpl(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
 	                           @NonNull TargetPoint point, @NonNull ShiftedBitmap shiftedBitmap,
 	                           @Nullable String label) {
-		float locationX = getPointX(tileBox, point);
-		float locationY = getPointY(tileBox, point);
-
+		float x, y, rotationX, rotationY;
+		
+		if (contextMenuLayer.getMoveableObject() != null && point == contextMenuLayer.getMoveableObject()) {
+			PointF centerPoint = contextMenuLayer.getMovableCenterPoint(tileBox);
+			x = centerPoint.x;
+			y = centerPoint.y;
+			rotationX = tileBox.getCenterPixelX();
+			rotationY = tileBox.getCenterPixelY();
+		} else {
+			rotationX = x = tileBox.getPixXFromLonNoRot(point.getLongitude());
+			rotationY = y = tileBox.getPixYFromLatNoRot(point.getLatitude());
+		}
+		Bitmap bitmap = shiftedBitmap.getBitmap();
 		float marginX = shiftedBitmap.getMarginX();
 		float marginY = shiftedBitmap.getMarginY();
-
-		float x = locationX - marginX;
-		float y = locationY - marginY;
-
-		Bitmap bitmap = shiftedBitmap.getBitmap();
-		canvas.rotate(-tileBox.getRotate(), locationX, locationY);
-		canvas.drawBitmap(bitmap, x, y, mBitmapPaint);
-
+		
+		canvas.save();
+		canvas.rotate(-tileBox.getRotate(), rotationX, rotationY);
+		canvas.drawBitmap(bitmap, x - marginX, y - marginY, mBitmapPaint);
 		if (label != null) {
 			marginX = bitmap.getWidth() / 3f;
-			canvas.drawText(label, locationX + marginX, locationY - 3 * marginY / 5f, mTextPaint);
+			canvas.drawText(label, x + marginX, y - 3 * marginY / 5f, mTextPaint);
 		}
-
-		canvas.rotate(tileBox.getRotate(), locationX, locationY);
+		canvas.restore();
 	}
 }
