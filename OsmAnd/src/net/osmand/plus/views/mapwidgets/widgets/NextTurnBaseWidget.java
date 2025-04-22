@@ -33,6 +33,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.OutlineTextView;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
@@ -368,10 +369,6 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			turnDrawable.updateColors(isNightMode());
 		}
 		turnDrawable.invalidateSelf();
-
-		updateTextOutline(distanceView, textState);
-		updateTextOutline(distanceSubView, textState);
-		updateTextOutline(streetView, textState);
 	}
 
 	protected void updateVerticalWidgetColors(@NonNull TextState textState) {
@@ -396,6 +393,10 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 		turnDrawable.updateColors(isNightMode());
 		bg.setBackgroundResource(textState.widgetBackgroundId);
+
+		updateTextOutline(distanceView, textState, typefaceStyle);
+		updateTextOutline(distanceSubView, textState, typefaceStyle);
+		updateTextOutline(streetView, textState, typefaceStyle);
 	}
 
 	@Override
@@ -556,6 +557,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		if (newTextView != null && oldTextView != null) {
 			newTextView.setText(oldTextView.getText());
 			copyView(newTextView, oldTextView);
+			updateTextOutlineTextView(newTextView, oldTextView);
 		}
 	}
 

@@ -175,6 +175,10 @@ public abstract class MapWidget {
 	}
 
 	public static void updateTextOutline(@Nullable TextView textView, @NonNull TextState textState) {
+		updateTextOutline(textView, textState, null);
+	}
+
+	public static void updateTextOutline(@Nullable TextView textView, @NonNull TextState textState, @Nullable Integer typeFace) {
 		if (textView instanceof OutlineTextView outlineTextView) {
 			if (textState.textShadowRadius > 0) {
 				outlineTextView.setStrokeWidth(textState.textShadowRadius);
@@ -183,9 +187,22 @@ public abstract class MapWidget {
 					outlineTextView.setStrokeColor(textState.textShadowColor);
 				}
 				outlineTextView.showOutline(true);
+
+				if (typeFace != null) {
+					outlineTextView.setTypeface(Typeface.DEFAULT, typeFace);
+				}
 			} else {
 				outlineTextView.showOutline(false);
 			}
+			outlineTextView.invalidate();
+		}
+	}
+
+	public static void updateTextOutlineTextView(@Nullable TextView newTextView, @Nullable TextView oldTextView) {
+		if (newTextView instanceof OutlineTextView newOutlineTextView && oldTextView instanceof OutlineTextView oldOutlineTextView) {
+			newOutlineTextView.setStrokeColor(oldOutlineTextView.getStrokeColor());
+			newOutlineTextView.setStrokeWidth(oldOutlineTextView.getStrokeWidth());
+			newOutlineTextView.showOutline(oldOutlineTextView.shouldShowOutline());
 		}
 	}
 

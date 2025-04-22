@@ -67,7 +67,7 @@
 				android:textSize="@dimen/simple_widget_description_text_size"
 				tools:text="Widget name" />
 
-			<net.osmand.plus.views.OutlineTextView
+			<TextView
 				android:id="@+id/widget_text_small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

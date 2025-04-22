@@ -267,6 +267,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 			newTextView.getPaint().setStyle(oldTextView.getPaint().getStyle());
 			newTextView.setText(oldTextView.getText());
 			copyView(newTextView, oldTextView);
+			updateTextOutlineTextView(newTextView, oldTextView);
 		}
 	}
 
