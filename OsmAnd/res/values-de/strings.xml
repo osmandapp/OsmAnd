@@ -5774,4 +5774,6 @@
     <string name="route_part_of">Teil von</string>
     <string name="cant_load_map_styles">Kartenstile können nicht geladen werden.</string>
     <string name="add_to_navigation">Zur Navigation hinzufügen</string>
+    <string name="msg_favorites_skipped_as_existing">Favorisierte Punkte (%1$d) wurden übersprungen, da bereits vorhanden.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX-Wegpunkte (%1$d) in die Favoriten kopiert.</string>
 </resources>
