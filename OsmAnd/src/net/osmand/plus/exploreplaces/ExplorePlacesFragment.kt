@@ -321,7 +321,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		}
 	}
 
-	private fun hideList() {
+	fun hideList() {
 		bottomSheetBehavior.state = STATE_HIDDEN
 	}
 
