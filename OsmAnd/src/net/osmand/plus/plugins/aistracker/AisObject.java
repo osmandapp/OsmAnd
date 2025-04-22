@@ -98,6 +98,7 @@ public class AisObject {
     private boolean vesselAtRest = false; // if true, draw a circle instead of a bitmap
     private MapMarker activeMarker;
     private MapMarker restMarker;
+    private MapMarker lostMarker;
     private VectorLine directionLine;
 
     public AisObject(int mmsi, int msgType, double lat, double lon) {
@@ -1026,8 +1027,12 @@ public class AisObject {
         ChartPointsHelper chartPointsHelper = new ChartPointsHelper(context);
 
         SingleSkImage activeImage = NativeUtilities.createSkImageFromBitmap(bitmap);
+
         SingleSkImage restImage = NativeUtilities.createSkImageFromBitmap(
                 chartPointsHelper.createXAxisPointBitmap(bitmapColor, CircleCIDensity));
+
+        SingleSkImage lostImage = NativeUtilities.createSkImageFromBitmap(
+                mapLayer.getBitmap(R.drawable.mm_ais_vessel_cross));
 
         MapMarkerBuilder markerBuilder = new MapMarkerBuilder();
         markerBuilder.setBaseOrder(baseOrder);
@@ -1037,6 +1042,9 @@ public class AisObject {
 
         markerBuilder.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), restImage);
         restMarker = markerBuilder.buildAndAddToCollection(markersCollection);
+
+        markerBuilder.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), lostImage);
+        lostMarker = markerBuilder.buildAndAddToCollection(markersCollection);
 
         VectorLineBuilder lineBuilder = new VectorLineBuilder();
         lineBuilder.setLineId(getMmsi());
@@ -1056,16 +1064,18 @@ public class AisObject {
         updateBitmap(mapLayer, paint);
 
         float speedFactor = getMovement();
-        boolean lostTimeout = isLost(vesselLostTimeoutInMinutes) && vesselAtRest;
+        boolean lostTimeout = isLost(vesselLostTimeoutInMinutes) && !vesselAtRest;
         boolean drawDirectionLine = (speedFactor > 0) && (!lostTimeout) && !vesselAtRest;
 
-        activeMarker.setIsHidden(vesselAtRest);
+        activeMarker.setIsHidden(vesselAtRest || lostTimeout);
         restMarker.setIsHidden(!vesselAtRest);
+        lostMarker.setIsHidden(!lostTimeout);
         directionLine.setIsHidden(drawDirectionLine);
 
         float rotation = (getVesselRotation() + 180f) % 360f;
         if (!vesselAtRest && needRotation()) {
             activeMarker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
+            lostMarker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
         }
 
         ColorARGB iconColor = bitmapColor == 0 ? NativeUtilities.createColorARGB(0xFFFFFFFF)
@@ -1083,6 +1093,7 @@ public class AisObject {
 
             activeMarker.setPosition(markerLocation);
             restMarker.setPosition(markerLocation);
+            lostMarker.setPosition(markerLocation);
 
             int inverseZoom = TileView != null ? TileView.getMaxZoom() - TileView.getZoom() : 0;
             float lineLength = speedFactor * (float)MapUtils.getPowZoom(inverseZoom) * bitmap.getHeight() * 0.75f;
@@ -1109,6 +1120,7 @@ public class AisObject {
                                    @NonNull VectorLinesCollection vectorLinesCollection) {
         markersCollection.removeMarker(activeMarker);
         markersCollection.removeMarker(restMarker);
+        markersCollection.removeMarker(lostMarker);
         vectorLinesCollection.removeLine(directionLine);
     }
 }
