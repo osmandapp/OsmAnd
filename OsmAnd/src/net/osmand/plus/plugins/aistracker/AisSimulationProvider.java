@@ -25,7 +25,7 @@ public class AisSimulationProvider {
 	public void startSimulation(@NonNull File file) {
 		AisTrackerLayer layer = plugin.getLayer();
 		if (layer != null) {
-			AisMessageListener listener = new AisMessageListener(layer, file);
+			AisMessageListener listener = new AisMessageListener(layer, file, 100);
 			layer.setListener(listener);
 		}
 	}
