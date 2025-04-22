@@ -5586,8 +5586,10 @@
 	<string name="poi_presbyterian_church">Presbyterian church</string>
 	<string name="poi_access_main_tag">Access</string>
 
+	<string name="poi_steps">Steps</string>
 	<string name="poi_footway">Walkway</string>
 	<string name="poi_area_highway">Mobility area</string>
+	<string name="poi_area_highway_steps">Stairway area</string>
 	<string name="poi_area_highway_footway">Walkable area</string>
 
 </resources>
