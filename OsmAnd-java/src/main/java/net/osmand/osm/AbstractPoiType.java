@@ -53,7 +53,7 @@ public abstract class AbstractPoiType {
 		return keyName;
 	}
 
-	public String getIconName() {
+	protected String getIconNameInternal() {
 		return iconName;
 	}
 

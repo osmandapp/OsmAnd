@@ -637,16 +637,16 @@ public class MapPoiTypes {
 		PoiType lastType = null;
 		PoiType ref = null;
 		String keyName = poiAdditional.getKeyName();
-		String iconName = poiAdditional.getIconName();
+		String iconNameAttribute = poiAdditional.getIconNameInternal();
 		if (parent instanceof PoiCategory) {
 			lastCategory = (PoiCategory) parent;
-			ref = new PoiType(this, lastCategory, null, keyName, iconName);
+			ref = new PoiType(this, lastCategory, null, keyName, iconNameAttribute);
 		} else if (parent instanceof PoiFilter) {
 			lastFilter = (PoiFilter) parent;
-			ref = new PoiType(this, lastFilter.getPoiCategory(), lastFilter, keyName, iconName);
+			ref = new PoiType(this, lastFilter.getPoiCategory(), lastFilter, keyName, iconNameAttribute);
 		} else if (parent instanceof PoiType) {
 			lastType = (PoiType) parent;
-			ref = new PoiType(this, lastType.getCategory(), lastType.getFilter(), keyName, iconName);
+			ref = new PoiType(this, lastType.getCategory(), lastType.getFilter(), keyName, iconNameAttribute);
 		}
 		if (ref == null) {
 			return null;
