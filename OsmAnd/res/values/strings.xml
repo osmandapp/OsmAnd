@@ -1494,8 +1494,19 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="map_widget_distance_to_intermediate">Distance to intermediate</string>
     <string name="radius_ruler_mode_desc">Tapping the widget switches to \“Radius ruler\” mode.</string>
     <string name="explore_plans">Explore Plans</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Hide military areas</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Military areas</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Hide military areas</string>
+    <string name="rendering_attr_hidePOILabels_name">POI labels</string>
+    <string name="rendering_attr_hideIcons_name">POI icons</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Water</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Hide water</string>
+    <string name="rendering_attr_hideOverground_name">Overground objects</string>	
+    <string name="rendering_attr_hideUnderground_name">Underground objects</string>
+    <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
+    <string name="rendering_attr_hideBuildings_name">Buildings</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>
+    <string name="rendering_attr_hideText_name">Text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Wood and scrubs</string>
     <string name="map_widget_true_bearing">True bearing</string>
     <string name="routing_attr_allow_private_for_truck_description">Allow access to private areas for trucks.</string>
     <string name="routing_attr_allow_private_for_truck_name">Allow private access (truck)</string>
@@ -3369,7 +3380,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="all_data">All data</string>
     <string name="osm_notes">OSM notes</string>
     <string name="will_open_tomorrow_at">Opens tomorrow at</string>
-    <string name="rendering_attr_hidePOILabels_name">POI labels</string>
     <string name="shared_string_without_name">Without name</string>
     <string name="what_is_here">What\'s here:</string>
     <string name="parked_at">parked at</string>
@@ -3709,8 +3719,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_value_low_name">Low</string>
     <string name="rendering_attr_contourWidth_description">Contour line width</string>
     <string name="rendering_attr_contourWidth_name">Contour line width</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Water</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
     <string name="routing_attr_allow_motorway_name">Use motorways</string>
     <string name="routing_attr_allow_motorway_description">Allows motorways.</string>
     <string name="upload_osm_note_description">Upload your OSM note anonymously or by using your OpenStreetMap.org profile.</string>
@@ -3797,7 +3805,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>
     <string name="replace_favorite_confirmation">Replace the \"%1$s\" Favorite?</string>
-    <string name="rendering_attr_hideOverground_name">Overground objects</string>
     <string name="shared_string_change">Change</string>
     <string name="get_started">Get started</string>
     <string name="route_stops_before">%1$s stops before</string>
@@ -3952,7 +3959,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Save changes</string>
     <string name="shared_string_email_address">E-mail address</string>
-    <string name="rendering_attr_hideUnderground_name">Underground objects</string>
     <string name="data_is_not_available">Data not available</string>
     <string name="shared_string_remove">Remove</string>
     <string name="shared_string_read_more">Read more</string>
@@ -3961,7 +3967,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="road_blocked">Road blocked</string>
     <string name="shared_string_select">Select</string>
     <string name="switch_start_finish">Reverse starting point &amp; destination</string>
-    <string name="rendering_attr_hideIcons_name">POI icons</string>
     <string name="item_removed">Item removed</string>
     <string name="n_items_removed">items removed</string>
     <string name="shared_string_undo_all">Undo all</string>
@@ -4185,7 +4190,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Network affiliation</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Log Off</string>
-    <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
     <string name="application_dir_change_warning3">Move OsmAnd data files to the new destination?</string>
     <string name="specified_directiory_not_writeable">Maps could not be created in specified directory</string>
     <string name="copying_osmand_file_failed">Moving files failed</string>
@@ -4522,10 +4526,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="live_monitoring_start">Start online tracking</string>
     <string name="live_monitoring_stop">Stop online tracking</string>
     <string name="gpx_start_new_segment">Start new segment</string>
-    <string name="rendering_attr_hideBuildings_name">Buildings</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>
-    <string name="rendering_attr_hideText_name">Text</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Wood and scrubs</string>
     <string name="rendering_attr_buildings15zoom_name">Buildings on zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
