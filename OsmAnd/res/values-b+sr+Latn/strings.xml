@@ -5574,7 +5574,7 @@
     <string name="litres">Litara</string>
     <string name="imperial_gallons">Imperijalni galoni</string>
     <string name="us_gallons_unit">gal</string>
-    <string name="unit_of_volume">Mera zapremine</string>
+    <string name="unit_of_volume">Jedinice zapremine</string>
     <string name="unit_of_volume_description">Odabrane jedinice primeniće se na sve podatke koji se odnose na zapreminu u trenutnom profilu.</string>
     <string name="fuel_tank_capacity_description">Unesi kapacitet goriva u rezervaru za tačno praćenje nivoa i potrošnje goriva</string>
     <string name="us_gallons">US galoni</string>
@@ -5731,4 +5731,7 @@
     <string name="add_to_navigation">Dodaj u navigaciju</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX putne tačke (%1$d) kopirane su u favorite.</string>
     <string name="msg_favorites_skipped_as_existing">Omiljene tačke (%1$d) su preskočene kao već postojeće.</string>
+    <string name="save_to_device_error">Greška pri upisu na uređaju</string>
+    <string name="save_to_device">Sačuvaj na Uređaju</string>
+    <string name="saved_to_device">Sačuvano na uređaju</string>
 </resources>
