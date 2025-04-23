@@ -2817,7 +2817,7 @@
     <string name="poi_xmas_opening_hours">Jul: åbningstider</string>
     <string name="poi_xmas_location">Jul: placering</string>
     <string name="poi_xmas_url">Jul: hjemmeside</string>
-    <string name="poi_public_bookcase">Offentlig bogreol</string>
+    <string name="poi_public_bookcase">Bogbytteskab</string>
     <string name="poi_public_bookcase_type_phone_box">Type: telefonboks</string>
     <string name="poi_public_bookcase_type_reading_box">Type: læsekasse</string>
     <string name="poi_public_bookcase_type_wooden_cabinet">Type: trækabinet</string>
