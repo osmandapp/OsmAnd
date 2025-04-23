@@ -47,6 +47,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.importfiles.tasks.CopyToFileTask;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.shared.SharedUtil;
@@ -323,7 +324,7 @@ public class ImportHelper {
 	}
 
 
-	public void handleCopyFileToFile(File originalFile, Uri destinationUri) {
+	public void handleCopyFileToFile(@NonNull File originalFile, @NonNull Uri destinationUri) {
 		executeImportTask(new CopyToFileTask(activity, originalFile, destinationUri));
 	}
 
@@ -730,10 +731,8 @@ public class ImportHelper {
 	}
 
 	private void removeResultListener(@NonNull Activity activity){
-		if (activity instanceof MyPlacesActivity myPlacesActivity) {
-			myPlacesActivity.removeActivityResultListener(saveFileResultListener);
-		} else if (activity instanceof MapActivity mapActivity) {
-			mapActivity.removeActivityResultListener(saveFileResultListener);
+		if (activity instanceof OsmandActionBarActivity actionBarActivity) {
+			actionBarActivity.removeActivityResultListener(saveFileResultListener);
 		}
 	}
 
@@ -745,10 +744,8 @@ public class ImportHelper {
 				app.getImportHelper().handleCopyFileToFile(file, resultData.getData());
 			}
 		});
-		if (activity instanceof MyPlacesActivity myPlacesActivity) {
-			myPlacesActivity.registerActivityResultListener(saveFileResultListener);
-		} else if (activity instanceof MapActivity mapActivity) {
-			mapActivity.registerActivityResultListener(saveFileResultListener);
+		if (activity instanceof OsmandActionBarActivity actionBarActivity) {
+			actionBarActivity.registerActivityResultListener(saveFileResultListener);
 		}
 	}
 

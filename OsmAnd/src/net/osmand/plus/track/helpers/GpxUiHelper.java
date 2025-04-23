@@ -5,7 +5,6 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
-import static net.osmand.plus.mapcontextmenu.other.ShareMenu.showNativeShareDialog;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import static net.osmand.shared.gpx.GpxParameter.*;
 import static net.osmand.util.Algorithms.formatDuration;
@@ -13,11 +12,9 @@ import static net.osmand.util.Algorithms.formatDuration;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,6 +36,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -704,22 +702,16 @@ public class GpxUiHelper {
 	}
 
 	public static void shareGpx(@NonNull Context context, @NonNull Activity activity, @NonNull File file) {
-		if (Build.VERSION.SDK_INT >= 34) {
-			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			app.getImportHelper().registerResultListener(app, activity, file);
-			showNativeShareDialog(app, activity, file, true, context instanceof OsmandApplication);
-		} else {
-			Uri fileUri = AndroidUtils.getUriForFile(context, file);
-			Intent intent = new Intent(Intent.ACTION_SEND);
-			intent.putExtra(Intent.EXTRA_STREAM, fileUri);
-			intent.setType("application/gpx+xml");
-			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			if (context instanceof OsmandApplication) {
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			}
-			Intent chooserIntent = Intent.createChooser(intent, context.getString(R.string.shared_string_share));
-			AndroidUtils.startActivityIfSafe(context, chooserIntent);
-		}
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		Uri fileUri = AndroidUtils.getUriForFile(context, file);
+
+		new NativeShareDialogBuilder()
+				.addFileWithSaveAction(file, app, activity, false)
+				.setChooserTitle(app.getString(R.string.shared_string_share))
+				.setExtraStream(fileUri)
+				.setNewTask(context instanceof OsmandApplication)
+				.setType("application/gpx+xml")
+				.build(app);
 	}
 
 	@NonNull

@@ -58,8 +58,6 @@ public class MyPlacesActivity extends TabActivity {
 	private final List<WeakReference<FragmentStateHolder>> fragmentsStateList = new ArrayList<>();
 	private int tabSize;
 
-	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
-
 	private Bundle intentParams;
 
 	@Override
@@ -175,27 +173,6 @@ public class MyPlacesActivity extends TabActivity {
 
 			AndroidUtils.startActivityForResultIfSafe(this, createFileIntent, REQUEST_CODE_CREATE_FILE);
 		}
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		for (ActivityResultListener listener : activityResultListeners) {
-			if (listener.processResult(requestCode, resultCode, data)) {
-				removeActivityResultListener(listener);
-				return;
-			}
-		}
-		super.onActivityResult(requestCode, resultCode, data);
-	}
-
-	public void registerActivityResultListener(ActivityResultListener listener) {
-		if (!activityResultListeners.contains(listener)) {
-			activityResultListeners.add(listener);
-		}
-	}
-
-	public void removeActivityResultListener(ActivityResultListener listener) {
-		activityResultListeners.remove(listener);
 	}
 
 	@Override
