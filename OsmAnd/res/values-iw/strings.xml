@@ -2184,7 +2184,7 @@
     <string name="rendering_value_low_name">נמוכה</string>
     <string name="rendering_attr_contourWidth_description">עובי קו מתאר</string>
     <string name="rendering_attr_contourWidth_name">עובי קו מתאר</string>
-    <string name="rendering_attr_hideWaterPolygons_description">מים</string>
+    <string name="rendering_attr_hideWaterPolygons_description">הסתרת מים</string>
     <string name="rendering_attr_hideWaterPolygons_name">הסתרת מים</string>
     <string name="routing_attr_allow_motorway_name">להשתמש בדרכים סלולות</string>
     <string name="routing_attr_allow_motorway_description">מאפשר דרכים סלולות.</string>
