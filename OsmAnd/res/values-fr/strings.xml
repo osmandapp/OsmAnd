@@ -5744,4 +5744,6 @@
     <string name="msg_favorites_skipped_as_existing">%1$d points favoris ont été ignorés car ils existaient déjà.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Points de passage GPX (%1$d) copiés dans les favoris.</string>
     <string name="saved_to_device">Enregistré sur l\'appareil</string>
+    <string name="save_to_device_error">Erreur lors de l\'enregistrement sur l\'appareil</string>
+    <string name="save_to_device">Enregistrer sur l\'appareil</string>
 </resources>
