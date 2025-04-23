@@ -34,7 +34,6 @@ import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -1018,21 +1017,19 @@ public class AisObject {
     public void createAisRenderData(@NonNull Context context, int baseOrder,
                                     @NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
                                     @NonNull MapMarkersCollection markersCollection,
-                                    @NonNull VectorLinesCollection vectorLinesCollection) {
+                                    @NonNull VectorLinesCollection vectorLinesCollection,
+                                    @NonNull SingleSkImage restImage) {
         updateBitmap(mapLayer, paint);
 
-        assert bitmap != null;
+        Bitmap lostBitmap = mapLayer.getBitmap(R.drawable.mm_ais_vessel_cross);
 
-        float CircleCIDensity = 5;
-        ChartPointsHelper chartPointsHelper = new ChartPointsHelper(context);
+        if (bitmap == null || lostBitmap == null)
+        {
+            return;
+        }
 
         SingleSkImage activeImage = NativeUtilities.createSkImageFromBitmap(bitmap);
-
-        SingleSkImage restImage = NativeUtilities.createSkImageFromBitmap(
-                chartPointsHelper.createXAxisPointBitmap(bitmapColor, CircleCIDensity));
-
-        SingleSkImage lostImage = NativeUtilities.createSkImageFromBitmap(
-                mapLayer.getBitmap(R.drawable.mm_ais_vessel_cross));
+        SingleSkImage lostImage = NativeUtilities.createSkImageFromBitmap(lostBitmap);
 
         MapMarkerBuilder markerBuilder = new MapMarkerBuilder();
         markerBuilder.setBaseOrder(baseOrder);
@@ -1062,6 +1059,11 @@ public class AisObject {
                                     @NonNull AisTrackerLayer mapLayer, @NonNull Paint paint) {
         // Call updateBitmap to update marker color
         updateBitmap(mapLayer, paint);
+
+        if (activeMarker == null || restMarker == null || lostMarker == null || directionLine == null)
+        {
+            return;
+        }
 
         float speedFactor = getMovement();
         boolean lostTimeout = isLost(vesselLostTimeoutInMinutes) && !vesselAtRest;

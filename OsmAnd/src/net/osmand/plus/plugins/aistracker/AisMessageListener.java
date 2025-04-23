@@ -33,7 +33,6 @@ public class AisMessageListener {
     private InputStream fileStream;
     private SentenceReader sentenceReader = null;
     private Stack<SentenceListener> listenerList = null;
-    private int simulatedMessageLatencyTime = 0;
 
     public AisMessageListener(int port, @NonNull AisTrackerLayer layer) {
         initMembers(layer);
@@ -58,12 +57,6 @@ public class AisMessageListener {
             Log.e("AisMessageListener", "exception: " + e.getMessage());
             fileStream = null;
         }
-    }
-
-    public AisMessageListener(@NonNull AisTrackerLayer layer, @NonNull File file,
-                              int simulatedLatencyTime) {
-        this(layer, file);
-        simulatedMessageLatencyTime = simulatedLatencyTime;
     }
 
     public AisMessageListener(@NonNull String serverIp, int serverPort, @NonNull AisTrackerLayer layer) {
@@ -176,15 +169,7 @@ public class AisMessageListener {
         return (tcpSocket != null) && (tcpStream != null);
     }
 
-    private void handleAisMessage(int aisType, Object obj) {
-        if (simulatedMessageLatencyTime > 0) {
-            try {
-                Thread.sleep(simulatedMessageLatencyTime);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-
+    protected void handleAisMessage(int aisType, Object obj) {
         AisObject ais = null;
         int msgType = 0;
         int mmsi = 0;
