@@ -5614,4 +5614,9 @@
     <string name="route_members">Miembros</string>
     <string name="cant_load_map_styles">No se pudieron cargar los estilos de mapa.</string>
     <string name="add_to_navigation">Agregar a la navegación</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Puntos GPX (%1$d) copiados a favoritos.</string>
+    <string name="msg_favorites_skipped_as_existing">Puntos favoritos (%1$d) omitidos como ya existentes.</string>
+    <string name="saved_to_device">Guardado en el dispositivo</string>
+    <string name="save_to_device_error">Guardar el error del dispositivo</string>
+    <string name="save_to_device">Guardar en el dispositivo</string>
 </resources>
