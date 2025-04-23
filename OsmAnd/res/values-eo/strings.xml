@@ -5742,4 +5742,7 @@
     <string name="add_to_navigation">Aldoni por navigi</string>
     <string name="msg_favorites_skipped_as_existing">Ignoris %1$d ŝatata(j)n punkto(j)n pro jam ekzisti.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Kopiis %1$d GPX-navigadpnkto(j)n al ŝatataj.</string>
+    <string name="save_to_device_error">Eraro dum konservi al aparato</string>
+    <string name="save_to_device">Konservi al aparato</string>
+    <string name="saved_to_device">Konservis al aparato</string>
 </resources>

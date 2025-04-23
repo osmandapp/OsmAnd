@@ -5971,4 +5971,9 @@
     <string name="cant_load_map_styles">Невозможно загрузить стили карты.</string>
     <string name="prediction_time_description">Значок положения в OsmAnd анимируется с каждой полученной точкой данных GPS (раз в секунду). Небольшая задержка в его движении может быть заметна, особенно когда пользователь быстро движется или сигнал GPS колеблется.</string>
     <string name="add_to_navigation">Добавить к навигации</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Путевые точки GPX (%1$d) скопированы в избранные.</string>
+    <string name="msg_favorites_skipped_as_existing">Избранные точки (%1$d) были пропущены как уже существующие.</string>
+    <string name="saved_to_device">Сохранено на устройстве</string>
+    <string name="save_to_device">Сохранить на устройстве</string>
+    <string name="save_to_device_error">Ошибка сохранения на устройстве</string>
 </resources>
