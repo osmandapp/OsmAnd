@@ -5763,4 +5763,6 @@
     <string name="multipoligon_related">Collegato</string>
     <string name="cant_load_map_styles">Impossible caricare gli stili di mappa.</string>
     <string name="add_to_navigation">Aggiungi alla navigazione</string>
+    <string name="msg_favorites_skipped_as_existing">Punti preferiti (%1$d) sono stati saltati perché già esistenti.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Waypoint GPX (%1$d) copiati nei preferiti.</string>
 </resources>
