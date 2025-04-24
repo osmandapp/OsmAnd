@@ -4766,4 +4766,22 @@
     <string name="poi_state_under_construction">Stan: w budowie</string>
     <string name="poi_cafe_yes">Tak</string>
     <string name="poi_contact_website">Strona internetowa</string>
+    <string name="poi_hang_gliding">Lotniarstwo</string>
+    <string name="poi_us_maps_recreation_area_activity_campground_camping">Kemping na polu namiotowym</string>
+    <string name="poi_us_maps_recreation_area_activity_camping_and_cabins">Kemping i domki</string>
+    <string name="poi_us_maps_recreation_area_activity_boating_non_motorized">Żeglarstwo niezmotoryzowane</string>
+    <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Kemping rozproszony</string>
+    <string name="poi_us_maps_recreation_area_activity_fishing">Wędkowanie</string>
+    <string name="poi_us_maps_recreation_area_activity_fossil_collecting">Kolekcjonowanie skamieniałości</string>
+    <string name="poi_us_maps_recreation_area_facility_cabin_rentals">Wynajem domków</string>
+    <string name="poi_us_maps_recreation_area_activity_climbing">Wspinaczka</string>
+    <string name="poi_us_maps_recreation_area_activity_hang_gliding">Lotniarstwo</string>
+    <string name="poi_lit">Oświetlenie</string>
+    <string name="poi_us_maps_recreation_area_activity_estuary_fishing">Wędkarstwo w estuarium</string>
+    <string name="poi_us_maps_recreation_area_activity_dog_sledding">Psie zaprzęgi</string>
+    <string name="poi_travel_agency">Biuro podróży</string>
+    <string name="poi_area_highway_steps">Obszar schodów</string>
+    <string name="poi_steps">Schody</string>
+    <string name="poi_us_maps_recreation_area_activity_boating_motorized">Żeglarstwo motorowe</string>
+    <string name="poi_route_activity_type_hang_gliding">Lotniarstwo</string>
 </resources>
