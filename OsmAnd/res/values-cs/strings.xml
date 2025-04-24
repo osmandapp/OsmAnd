@@ -2033,8 +2033,8 @@
     <string name="rendering_value_low_name">Malá</string>
     <string name="rendering_attr_contourWidth_description">Šířka linie vrstevnic</string>
     <string name="rendering_attr_contourWidth_name">Šířka linie vrstevnic</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Skrýt vodu</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Skrýt vodu</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Voda</string>
     <string name="configure_screen_quick_action">Rychlá akce</string>
     <string name="quick_action_item_action">Akce %d</string>
     <string name="quick_action_item_screen">Obrazovka %d</string>
@@ -4435,7 +4435,7 @@
     <string name="first_marker_widget_desc">Widget můžete nakonfigurovat tak, aby zobrazoval vzdálenost nebo odhadovaný čas příjezdu k první mapové značce.</string>
     <string name="goods_delivery_desc">Na některých silnicích může být omezen provoz dodávkových vozidel.</string>
     <string name="routing_attr_avoid_highway_description">Vyhnout se dálnicím</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Skrýt vojenské prostory</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Vojenské prostory</string>
     <string name="rendering_attr_horseScale_name">Obtížnost stezek pro koně</string>
     <string name="routing_attr_avoid_fords_description">Vyhnout se brodům</string>
     <string name="routing_attr_avoid_fords_name">Vyhnout se brodům</string>
