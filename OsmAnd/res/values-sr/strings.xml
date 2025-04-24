@@ -940,8 +940,8 @@
     <string name="rendering_value_low_name">Ретка</string>
     <string name="rendering_attr_contourWidth_description">Дебљина линије изохипсе</string>
     <string name="rendering_attr_contourWidth_name">Дебљина линије изохипси</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Воде</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Сакриј воду</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Сакриј воду</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Вода</string>
     <string name="search_map_hint">Град или област</string>
     <string name="route_roundabout_short">Одреди излаз %1$d и иди</string>
     <string name="upload_poi">Отпреми тачку занимања</string>
@@ -4273,7 +4273,7 @@
     <string name="shared_string_mode">Начин</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (нема ограничења)</string>
     <string name="av_def_action_choose">На захтев</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Сакриј војна подручја</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Војна подручја</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Неприказивање војних подручја</string>
     <string name="map_widget_true_bearing">Прави правац</string>
     <string name="routing_attr_allow_private_for_truck_description">Омогућен приступ приватним просторима теретним возилима.</string>
