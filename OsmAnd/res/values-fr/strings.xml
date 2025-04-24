@@ -2035,7 +2035,7 @@
     <string name="routing_attr_allow_motorway_name">Autoriser les autoroutes</string>
     <string name="lang_sr_latn">Serbe (latin)</string>
     <string name="lang_zh_hk">Chinois (Hong Kong)</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Eau</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Masquer l\'eau</string>
     <string name="rendering_attr_contourWidth_description">Épaisseur des traits pour les courbes de niveau</string>
     <string name="rendering_attr_contourWidth_name">Épaisseur des courbes de niveau</string>
     <string name="rendering_attr_contourDensity_name">Densité des courbes de niveau</string>
@@ -4360,7 +4360,7 @@
     <string name="routing_attr_hazmat_category_name">Catégorie des matières dangereuses</string>
     <string name="map_widget_true_bearing">Relèvement vrai</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Zones militaires</string>
-    <string name="rendering_attr_hideMilitaryAreas_description">Zones militaires</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Masquer les zones militaires</string>
     <string name="explore_plans">Explorer les plans</string>
     <string name="map_widget_time_to_destination">Temps restant jusqu\'à destination</string>
     <string name="map_widget_time_to_intermediate">Temps restant jusqu\'au point intermédiaire</string>
