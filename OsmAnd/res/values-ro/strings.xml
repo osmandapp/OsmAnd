@@ -6044,4 +6044,7 @@
     <string name="route_part_of">Parte din</string>
     <string name="cant_load_map_styles">Nu se pot încărca stilurile hărții.</string>
     <string name="add_to_navigation">Adăugați la navigare</string>
+    <string name="msg_favorites_skipped_as_existing">Punctele preferate (%1$d) au fost ignorate deoarece existau deja.</string>
+    <string name="saved_to_device">Salvat pe dispozitiv</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Puncte de referință GPX (%1$d) copiate în favorite.</string>
 </resources>
