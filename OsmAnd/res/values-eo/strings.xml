@@ -2035,7 +2035,7 @@
     <string name="rendering_value_low_name">Malalta</string>
     <string name="rendering_attr_contourWidth_description">Larĝo de nivelkurboj</string>
     <string name="rendering_attr_contourWidth_name">Nivelkurba larĝo</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Akvo</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Kaŝi akvon</string>
     <string name="rendering_attr_hideWaterPolygons_name">Akvo</string>
     <string name="configure_screen_quick_action">Rapida ago</string>
     <string name="quick_action_item_action">Ago %d</string>
@@ -4348,8 +4348,8 @@
     <string name="route_maneuvers_desc">Fenestraĵoj aktiviĝantaj dum navigado, kiuj vidigas la jenajn informojn: distanco, tempo de alveno, restanta tempo, sekva turniĝo, direkto, nomo de strato, vetur-koridoroj, maksimuma rapido, avertoj, interesejoj, navigadpunktoj.</string>
     <string name="map_widget_true_bearing">Vera direkto</string>
     <string name="route_maneuvers">Manovroj</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Ne superstreki armeajn areojn</string>
-    <string name="rendering_attr_hideMilitaryAreas_description">Ne montri transversajn ruĝajn liniojn sur armeaj areoj</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Armeaj terenoj</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Kaŝi armeajn terenojn</string>
     <string name="get_altitude_information">Akiri informojn pri altitudo</string>
     <string name="calculating_altitude">Kalkulado de altitudo</string>
     <string name="calculate_online">Kalkuli enrete</string>
