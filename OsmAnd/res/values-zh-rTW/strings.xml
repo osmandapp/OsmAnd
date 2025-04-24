@@ -2019,7 +2019,7 @@
     <string name="routing_attr_allow_motorway_description">允許進高速公路。</string>
     <string name="lang_sr_latn">塞爾維亞語（拉丁文）</string>
     <string name="lang_zh_hk">中文（香港）</string>
-    <string name="rendering_attr_hideWaterPolygons_description">水</string>
+    <string name="rendering_attr_hideWaterPolygons_description">隱藏水</string>
     <string name="rendering_attr_contourWidth_description">等高線的線寬</string>
     <string name="rendering_attr_contourWidth_name">等高線的線寬</string>
     <string name="rendering_attr_contourDensity_description">等高線的密度</string>
@@ -2027,7 +2027,7 @@
     <string name="rendering_value_high_name">高</string>
     <string name="rendering_value_medium_w_name">中</string>
     <string name="rendering_value_low_name">低</string>
-    <string name="rendering_attr_hideWaterPolygons_name">隱藏水</string>
+    <string name="rendering_attr_hideWaterPolygons_name">水</string>
     <string name="quick_action_item_screen">螢幕 %d</string>
     <string name="quick_action_map_style_switch">地圖樣式變更為「%s」。</string>
     <string name="quick_action_navigation_voice">聲音開/關</string>
@@ -4341,7 +4341,7 @@
     <string name="map_widget_true_bearing">真實方位</string>
     <string name="map_widget_trip_recording_duration">持續時間</string>
     <string name="routing_attr_hazmat_category_name">危險品分類</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">隱藏軍事區域</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">軍事區域</string>
     <string name="rendering_attr_hideMilitaryAreas_description">隱藏軍事區域</string>
     <string name="explore_plans">探索方案</string>
     <string name="shared_string_mode">模式</string>
