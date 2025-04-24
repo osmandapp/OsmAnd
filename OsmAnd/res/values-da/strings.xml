@@ -2034,7 +2034,7 @@
     <string name="routing_attr_allow_motorway_description">Tillader motorveje.</string>
     <string name="lang_sr_latn">Serbisk (latin)</string>
     <string name="lang_zh_hk">Kinesisk (Hongkong)</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Vand</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Skjul vand</string>
     <string name="rendering_attr_contourWidth_description">Bredde på højdekurver</string>
     <string name="rendering_attr_contourWidth_name">Bredde på højdekurver</string>
     <string name="rendering_attr_contourDensity_description">Tæthed på højdekurver</string>
@@ -2042,7 +2042,7 @@
     <string name="rendering_value_high_name">Høj</string>
     <string name="rendering_value_medium_w_name">Mellem</string>
     <string name="rendering_value_low_name">Lav</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Skjul vand</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Vand</string>
     <string name="configure_screen_quick_action">Genvej</string>
     <string name="quick_action_item_action">Genvej %d</string>
     <string name="quick_action_item_screen">Skærm %d</string>
@@ -4382,7 +4382,7 @@
     <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
     <string name="map_widget_true_bearing">Sande pejling</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Skjul militære områder</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Skjul militære områder</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Militære områder</string>
     <string name="explore_plans">Udforsk planer</string>
     <string name="radius_ruler_mode_desc">Ved tryk på modulet skiftes til radiusmålertilstand.</string>
     <string name="map_widget_time_to_destination">Tid til destination</string>
