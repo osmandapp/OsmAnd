@@ -334,8 +334,8 @@
     <string name="rendering_value_low_name">Retko</string>
     <string name="rendering_attr_contourWidth_description">Debljina linije izohipse</string>
     <string name="rendering_attr_contourWidth_name">Debljina linije izohipsi</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Sakriti vodu</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Sakriti vodene površine</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Vodene površine</string>
     <string name="routing_attr_allow_motorway_name">Koristi magistrale</string>
     <string name="quick_action_add_configure_map">Podesite mapu</string>
     <string name="quick_action_poi_show">Prikazati %1$s</string>
@@ -3993,7 +3993,7 @@
     <string name="poi_routes">Rute</string>
     <string name="shared_string_includes">Uključuje</string>
     <string name="shared_string_grade">Stepen</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Sakriti vojna područja</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Vojna oblast</string>
     <string name="routing_attr_avoid_4wd_only_description">Puteve za 4WD vozila</string>
     <string name="lanes_widgets_desc">Prikazuje trenutni raspored kolovozne trake i ističe trake za prestrojavanje prilikom navođenja.</string>
     <string name="route_maneuvers">Manevri rute</string>
