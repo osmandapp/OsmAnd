@@ -2031,13 +2031,13 @@
     <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
     <string name="rendering_attr_contourWidth_description">Hrúbka vrstevníc</string>
     <string name="rendering_attr_contourWidth_name">Hrúbka vrstevníc</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Skryť vodu</string>
     <string name="rendering_attr_contourDensity_description">Hustota vrstevníc</string>
     <string name="rendering_attr_contourDensity_name">Hustota vrstevníc</string>
     <string name="rendering_value_high_name">Vysoká</string>
     <string name="rendering_value_medium_w_name">Stredná</string>
     <string name="rendering_value_low_name">Nízka</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Skryť vodu</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Vodu</string>
     <string name="quick_action_navigation_voice">Hlas zapnúť/vypnúť</string>
     <string name="quick_action_navigation_voice_off">Zapnúť hlas</string>
     <string name="quick_action_navigation_voice_on">Stlmiť hlas</string>
@@ -4349,7 +4349,7 @@
     <string name="track_attach_to_the_roads_descr">Stopa bude prichytená k ceste pomocou offline máp, geometria stopy bude zmenená.</string>
     <string name="turn_on_public_transport_description">Zapnite pre zobrazenie liniek hromadnej dopravy na mape.</string>
     <string name="explore_plans">Preskúmať možnosti predplatného</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Skryť vojenské oblasti</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Vojenské oblasti</string>
     <string name="routing_attr_hazmat_category_description">Kategória nebezpečného nákladu / Zohľadniť obmedzenia pre nebezpečný náklad</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Bez obmedzení)</string>
     <string name="routing_attr_avoid_fords_name">Vyhnúť sa brodom</string>
