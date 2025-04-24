@@ -2031,8 +2031,8 @@
     <string name="rendering_value_low_name">Basso</string>
     <string name="rendering_attr_contourWidth_description">Spessore linee isoipse</string>
     <string name="rendering_attr_contourWidth_name">Spessore linee isoipse</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Acqua</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Nascondi l\'acqua</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Nascondi acqua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Acqua</string>
     <string name="rendering_attr_contourDensity_description">Densità linee isoipse</string>
     <string name="configure_screen_quick_action">Azione rapida</string>
     <string name="quick_action_item_action">Azione %d</string>
@@ -4369,7 +4369,7 @@
     <string name="routing_attr_hazmat_category_name">Categoria di materiale pericoloso</string>
     <string name="map_markers_bar_widget_desc">Nel widget della barra superiore puoi vedere la distanza e la direzione dalla posizione attuale al marcatore. È possibile configurare la visualizzazione di 1 o 2 marcatori.</string>
     <string name="route_maneuvers_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, ora di arrivo o tempo rimanente, prossime svolte, angolazione, nome della strada attuale, indicazioni di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Nascondi le aree militari</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Aree militari</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Nascondi le aree militari</string>
     <string name="navigation_points_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, tempo di arrivo o rimanente, prossime svolte, direzione, il nome della strada attuale o successiva, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
     <string name="app_mode_mountain_bicycle">Mountain bike</string>
@@ -5760,9 +5760,11 @@
     <string name="customize_grid_color">Personalizza il colore della griglia</string>
     <string name="route_part_of">Parte di</string>
     <string name="route_members">Membri</string>
-    <string name="multipoligon_related">Collegato</string>
+    <string name="multipoligon_related">Correlati</string>
     <string name="cant_load_map_styles">Impossible caricare gli stili di mappa.</string>
     <string name="add_to_navigation">Aggiungi alla navigazione</string>
     <string name="msg_favorites_skipped_as_existing">Punti preferiti (%1$d) sono stati saltati perché già esistenti.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Waypoint GPX (%1$d) copiati nei preferiti.</string>
+    <string name="saved_to_device">Salvato nel dispositivo</string>
+    <string name="save_to_device">Salva nel dispositivo</string>
 </resources>
