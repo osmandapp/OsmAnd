@@ -853,7 +853,7 @@
     <string name="poi_abandoned">Opuszczony</string>
     <string name="poi_abandoned_poi">Obiekt opuszczony</string>
     <string name="poi_disused">Wyłączony z użycia</string>
-    <string name="poi_operator">Zarządca</string>
+    <string name="poi_operator">Operator</string>
     <string name="poi_brand">Marka</string>
     <string name="poi_fee_yes">Tak;Opłata</string>
     <string name="poi_enforcement_traffic_signals">Egzekwowanie: sygnalizacja świetlna</string>
@@ -2814,7 +2814,7 @@
     <string name="poi_xmas_note">Uwaga</string>
     <string name="poi_xmas_opening_hours">Godziny otwarcia</string>
     <string name="poi_xmas_location">Miejsce</string>
-    <string name="poi_xmas_url">Strona internetowa</string>
+    <string name="poi_xmas_url">Święta bożonarodzeniowe: Strona internetowa</string>
     <string name="poi_public_bookcase">Półka wymiany książek</string>
     <string name="poi_public_bookcase_type_phone_box">Typ: budka telefoniczna</string>
     <string name="poi_public_bookcase_type_reading_box">Typ: skrzynka z książkami</string>
@@ -4016,7 +4016,7 @@
     <string name="poi_permanent_camping_no">Nie</string>
     <string name="poi_permanent_camping_only">Tylko;Tylko stały kemping</string>
     <string name="poi_direction_north">Kierunek północny</string>
-    <string name="poi_destination">Kierunek</string>
+    <string name="poi_destination">Cel</string>
     <string name="poi_manufacturer">Producent</string>
     <string name="poi_fridge_filter">Lodówka</string>
     <string name="poi_membership_filter">Wymagane członkostwo</string>
@@ -4731,7 +4731,7 @@
     <string name="poi_healthcare_speciality_chronic">Choroby chroniczne</string>
     <string name="poi_healthcare_speciality_otorhinolaryngology">Otorynolaryngologia</string>
     <string name="poi_healthcare_speciality_pedorthist">Pedortysta</string>
-    <string name="poi_healthcare_speciality_pediatric">Pediatria</string>
+    <string name="poi_healthcare_speciality_pediatric">Pediatryczny</string>
     <string name="poi_impromptu">Zaimprowizowany</string>
     <string name="poi_reservation">Rezerwacja</string>
     <string name="poi_us_maps_recreation_area_facility">Obiekt obszaru rekreacyjnego</string>
