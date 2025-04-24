@@ -5833,4 +5833,6 @@
     <string name="meridian_180">180 południk</string>
     <string name="prime_meridian">Południk zerowy</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Punkty trasy GPX (%1$d) skopiowano do ulubionych.</string>
+    <string name="us_gallons">Galony amerykańskie</string>
+    <string name="us_gallons_unit">galon</string>
 </resources>
