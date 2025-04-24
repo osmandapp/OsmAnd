@@ -1940,8 +1940,8 @@
     <string name="rendering_value_low_name">Низька</string>
     <string name="rendering_attr_contourWidth_description">Товщина ізоліній</string>
     <string name="rendering_attr_contourWidth_name">Товщина ізоліній</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Воду</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Сховати воду</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Сховати воду</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Вода</string>
     <string name="routing_attr_allow_motorway_name">Використовувати автомагістралі</string>
     <string name="routing_attr_allow_motorway_description">Дозволяє рух автомагістралями.</string>
     <string name="search_map_hint">Місто або регіон</string>
@@ -4366,7 +4366,7 @@
     <string name="map_widget_distance">Відстань</string>
     <string name="routing_attr_hazmat_category_name">Категорія небезпеки</string>
     <string name="map_widget_true_bearing">Справжній азимут</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Не показувати військові обʼєкти</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Військові райони</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Не показувати військові обʼєкти</string>
     <string name="explore_plans">Ознайомитися з тарифними планами</string>
     <string name="shared_string_mode">Режим</string>
