@@ -1,13 +1,10 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.mapcontextmenu.other.ShareMenu.showNativeShareDialog;
 import static net.osmand.plus.settings.backend.backup.exporttype.ExportType.MAP_SOURCES;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +24,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
@@ -314,21 +312,12 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void shareProfile(@NonNull File file) {
-		if (Build.VERSION.SDK_INT >= 34) {
-			app.getImportHelper().registerResultListener(app, requireActivity(), file);
-			showNativeShareDialog(app, requireActivity(), file, false, false);
-		} else {
-			Intent sendIntent = new Intent();
-			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
-
-			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
-			sendIntent.setType("*/*");
-			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-			Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
-			AndroidUtils.startActivityIfSafe(app, chooserIntent);
-		}
+		new NativeShareDialogBuilder()
+				.addFileWithSaveAction(file, app, requireActivity(), false)
+				.setChooserTitle(getString(R.string.shared_string_share))
+				.setExtraStream(AndroidUtils.getUriForFile(app, file))
+				.setExtraSubject(file.getName())
+				.build(app);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull ApplicationMode appMode,

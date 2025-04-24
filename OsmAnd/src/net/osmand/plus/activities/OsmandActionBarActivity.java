@@ -1,19 +1,25 @@
 package net.osmand.plus.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressLint("Registered")
 public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
 	protected boolean haveHomeButton = true;
+	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
 	//should be called after set content view
 	protected void setupHomeButton() {
@@ -28,6 +34,27 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 			supportActionBar.setDisplayHomeAsUpEnabled(true);
 			supportActionBar.setHomeAsUpIndicator(app.getUIUtilities().getIcon(iconId, colorId));
 		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		for (ActivityResultListener listener : activityResultListeners) {
+			if (listener.processResult(requestCode, resultCode, data)) {
+				removeActivityResultListener(listener);
+				return;
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	public void registerActivityResultListener(ActivityResultListener listener) {
+		if (!activityResultListeners.contains(listener)) {
+			activityResultListeners.add(listener);
+		}
+	}
+
+	public void removeActivityResultListener(ActivityResultListener listener) {
+		activityResultListeners.remove(listener);
 	}
 
     @Override
