@@ -1056,6 +1056,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(),
 					animatedThread.getTargetIntZoom());
 		}
+		mapView.syncRotate();
 
 		MapRendererView mapRenderer = mapView.getMapRenderer();
 		if (mapRenderer != null)
