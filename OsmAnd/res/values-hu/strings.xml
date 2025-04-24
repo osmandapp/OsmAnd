@@ -2008,8 +2008,8 @@
     <string name="rendering_value_low_name">Alacsony</string>
     <string name="rendering_attr_contourWidth_description">Szintvonalak vastagsága</string>
     <string name="rendering_attr_contourWidth_name">Szintvonalak vastagsága</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Vízfelületek</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Vízfelületek elrejtése</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Vízfelületek elrejtése</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Vízfelületek</string>
     <string name="configure_screen_quick_action">Gyorsművelet</string>
     <string name="quick_action_item_action">%d. művelet</string>
     <string name="quick_action_item_screen">%d képernyő</string>
@@ -4322,7 +4322,7 @@
     <string name="routing_attr_hazmat_category_name">Veszélyes anyag kategória</string>
     <string name="map_widget_true_bearing">Valódi irány</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Nem jeleníti meg a katonai területeket</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Katonai területek elrejtése</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Katonai területek</string>
     <string name="explore_plans">Díjcsomagok</string>
     <string name="time_to_navigation_point_widget_settings_desc">Koppintson a modulra a módok közötti váltáshoz.</string>
     <string name="map_widget_time_to_destination">Hátralévő idő az úti célig</string>
