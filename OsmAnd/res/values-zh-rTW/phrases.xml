@@ -5004,4 +5004,6 @@
     <string name="poi_area_highway">機動性區域</string>
     <string name="poi_area_highway_footway">適合步行的區域</string>
     <string name="poi_travel_agency">旅行社</string>
+    <string name="poi_steps">步驟</string>
+    <string name="poi_area_highway_steps">樓梯區域</string>
 </resources>
