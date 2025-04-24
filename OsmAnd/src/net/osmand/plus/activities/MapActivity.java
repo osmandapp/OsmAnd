@@ -159,8 +159,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Nullable
 	private static Intent prevActivityIntent = null;
 
-	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
-
 	private BroadcastReceiver screenOffReceiver;
 	private WidgetsVisibilityHelper mapWidgetsVisibilityHelper;
 	private ExtendedMapActivity extendedMapActivity;
@@ -1273,12 +1271,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		for (ActivityResultListener listener : activityResultListeners) {
-			if (listener.processResult(requestCode, resultCode, data)) {
-				removeActivityResultListener(listener);
-				return;
-			}
-		}
 		PluginsHelper.onMapActivityResult(requestCode, resultCode, data);
 		extendedMapActivity.onActivityResult(this, requestCode, resultCode, data);
 		super.onActivityResult(requestCode, resultCode, data);
@@ -1634,16 +1626,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public List<Fragment> getActiveTalkbackFragments() {
 		return fragmentsHelper.getActiveTalkbackFragments();
-	}
-
-	public void registerActivityResultListener(ActivityResultListener listener) {
-		if (!activityResultListeners.contains(listener)) {
-			activityResultListeners.add(listener);
-		}
-	}
-
-	public void removeActivityResultListener(ActivityResultListener listener) {
-		activityResultListeners.remove(listener);
 	}
 
 	@Override

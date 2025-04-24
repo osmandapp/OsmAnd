@@ -16,6 +16,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +37,7 @@ import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -44,6 +46,7 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.DeleteFavoritesTask;
@@ -63,6 +66,7 @@ import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -656,8 +660,24 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	@Override
-	public void shareFavoritesFinished() {
+	public void shareFavoritesFinished(@NonNull File destFile, @NonNull Spanned pointsDescription) {
 		updateProgressVisibility(false);
+		if (destFile.exists()) {
+			OsmandActionBarActivity activity = requireMyActivity();
+			String type = "text/plain";
+			String extraText = String.valueOf(pointsDescription);
+			String extraSubject = app.getString(R.string.share_fav_subject);
+
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			new NativeShareDialogBuilder()
+					.addFileWithSaveAction(destFile, app, activity, true)
+					.setChooserTitle(extraSubject)
+					.setExtraSubject(extraSubject)
+					.setExtraText(extraText)
+					.setExtraStream(AndroidUtils.getUriForFile(app, destFile))
+					.setType(type)
+					.build(app);
+		}
 	}
 
 	private void setupGetOsmAndCloudButton(@NonNull View view) {

@@ -5,8 +5,11 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +18,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class CopyToFileTask extends BaseImportAsyncTask<Void, Void, String> {
+	private static final Log LOG = PlatformUtil.getLog(CopyToFileTask.class.getName());
 
 	private final File originalFile;
 	private final Uri destinationUri;
@@ -38,7 +42,7 @@ public class CopyToFileTask extends BaseImportAsyncTask<Void, Void, String> {
 				Algorithms.streamCopy(in, out);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e);
 			error = e.getMessage();
 		} finally {
 			Algorithms.closeStream(out);

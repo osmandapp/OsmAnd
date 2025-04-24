@@ -18,6 +18,7 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.service.chooser.ChooserAction;
 import android.text.Html;
 
@@ -44,6 +45,7 @@ import net.osmand.util.TextDirectionUtil;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -273,50 +275,121 @@ public class ShareMenu extends BaseMenuController {
 		return false;
 	}
 
-	@RequiresApi(api = 34)
-	public static void showNativeShareDialog(@NonNull OsmandApplication app, @NonNull Activity activity,
-	                                         @NonNull File file, boolean singleTop, boolean newTask, @Nullable String type) {
-		ChooserAction[] actions = new ChooserAction[1];
+	public static class NativeShareDialogBuilder{
 
-		Intent intent = new Intent(app, activity.getClass());
-		intent.putExtra(KEY_SAVE_FILE_NAME, file.toURI());
-		intent.putExtra("file_path", file.getAbsolutePath());
+		private List<ChooserAction> chooserActions = new ArrayList<>();
+		private File file = null;
+		private String type = "*/*";
+		private String extraText = null;
+		private String extraSubject;
+		private Parcelable extraStream = null;
+		private String chooserTitle = null;
+		private boolean newTask = false;
+		private boolean newDocument = false;
 
-		if (singleTop) {
-			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		public NativeShareDialogBuilder() {}
+
+		public NativeShareDialogBuilder addFileWithSaveAction(@NonNull File file, @NonNull OsmandApplication app,
+		                                                      @NonNull Activity activity, boolean singleTop) {
+			this.file = file;
+
+			if (Build.VERSION.SDK_INT >= 34) {
+				app.getImportHelper().registerResultListener(app, activity, file);
+
+				Intent intent = new Intent(app, activity.getClass());
+				intent.putExtra(KEY_SAVE_FILE_NAME, file.toURI());
+				intent.putExtra("file_path", file.getAbsolutePath());
+
+				if (singleTop) {
+					intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				}
+
+				ShareItem item = SAVE_AS_FILE;
+				intent.putExtra(KEY_SHARE_ACTION_ID, item.ordinal());
+				PendingIntent pendingIntent = PendingIntent.getActivity(
+						app,
+						0,
+						intent,
+						PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+				);
+
+				ChooserAction saveToDeviceAction = new ChooserAction.Builder(Icon.createWithResource(app, item.getIconId()),
+						app.getString(item.getTitleId()), pendingIntent).build();
+
+				chooserActions.add(saveToDeviceAction);
+			}
+
+			return this;
 		}
 
-		ShareItem item = SAVE_AS_FILE;
-		intent.putExtra(KEY_SHARE_ACTION_ID, item.ordinal());
-		PendingIntent pendingIntent = PendingIntent.getActivity(
-				app,
-				0,
-				intent,
-				PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-		);
-
-		actions[0] = new ChooserAction.Builder(Icon.createWithResource(app, item.getIconId()),
-				activity.getString(item.getTitleId()), pendingIntent).build();
-
-		Intent sendIntent = new Intent(Intent.ACTION_SEND);
-
-		sendIntent.setType(Algorithms.isEmpty(type) ? "*/*" : type);
-		sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
-		sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
-		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		if (newTask) {
-			sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		public NativeShareDialogBuilder setNewTask(boolean newTask) {
+			this.newTask = newTask;
+			return this;
 		}
 
-		Intent shareIntent = Intent.createChooser(sendIntent, null);
-		shareIntent.putExtra(Intent.EXTRA_CHOOSER_CUSTOM_ACTIONS, actions);
-		AndroidUtils.startActivityIfSafe(app, sendIntent, shareIntent);
-	}
+		public NativeShareDialogBuilder setNewDocument(boolean newDocument) {
+			this.newDocument = newDocument;
+			return this;
+		}
 
-	@RequiresApi(api = 34)
-	public static void showNativeShareDialog(@NonNull OsmandApplication app, @NonNull Activity activity,
-	                                         @NonNull File file, boolean singleTop, boolean newTask) {
-		showNativeShareDialog(app, activity, file, singleTop, newTask, null);
+		public NativeShareDialogBuilder setType(@Nullable String type) {
+			this.type = type != null ? type : "*/*";
+			return this;
+		}
+
+		public NativeShareDialogBuilder setChooserTitle(@NonNull String chooserTitle) {
+			this.chooserTitle = chooserTitle;
+			return this;
+		}
+
+		public NativeShareDialogBuilder setExtraSubject(@NonNull String extraSubject) {
+			this.extraSubject = extraSubject;
+			return this;
+		}
+
+		public NativeShareDialogBuilder setExtraText(@NonNull String extraText) {
+			this.extraText = extraText;
+			return this;
+		}
+
+		public NativeShareDialogBuilder setExtraStream(@NonNull Parcelable extraStream) {
+			this.extraStream = extraStream;
+			return this;
+		}
+
+		public NativeShareDialogBuilder build(@NonNull OsmandApplication app){
+			Intent sendIntent = new Intent(Intent.ACTION_SEND);
+			sendIntent.setType(type);
+
+			if (!Algorithms.isEmpty(extraText)) {
+				sendIntent.putExtra(Intent.EXTRA_TEXT, extraText);
+			}
+
+			if (!Algorithms.isEmpty(extraSubject)) {
+				sendIntent.putExtra(Intent.EXTRA_SUBJECT, extraSubject);
+			}
+
+			if (extraStream != null) {
+				sendIntent.putExtra(Intent.EXTRA_STREAM, extraStream);
+			} else if (file != null) {
+				sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
+			}
+
+			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			if (newTask) {
+				sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			}
+			if (newDocument) {
+				sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+			}
+
+			Intent shareIntent = Intent.createChooser(sendIntent, chooserTitle);
+			if (Build.VERSION.SDK_INT >= 34 && !Algorithms.isEmpty(chooserActions)) {
+				ChooserAction[] actions = chooserActions.toArray(new ChooserAction[0]);
+				shareIntent.putExtra(Intent.EXTRA_CHOOSER_CUSTOM_ACTIONS, actions);
+			}
+			AndroidUtils.startActivityIfSafe(app, sendIntent, shareIntent);
+			return this;
+		}
 	}
 }
