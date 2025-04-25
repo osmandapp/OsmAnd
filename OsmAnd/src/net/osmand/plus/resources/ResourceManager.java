@@ -818,46 +818,46 @@ public class ResourceManager {
 			double rightLongitude, int zoom, boolean includeTravel,
 			ResultMatcher<Amenity> matcher) {
 
-		Set<Long> openAmenities = new HashSet<>();
-		Set<Long> closedAmenities = new HashSet<>();
-		List<Amenity> actualAmenities = new ArrayList<>();
+		final Set<Long> openAmenities = ConcurrentHashMap.newKeySet();
+		final Set<Long> closedAmenities = ConcurrentHashMap.newKeySet();
+		final List<Amenity> actualAmenities = Collections.synchronizedList(new ArrayList<>());
 
 		searchAmenitiesInProgress = true;
 		try {
-			boolean isEmpty = filter.isEmpty();
-			if (isEmpty && additionalFilter != null) {
-				filter = null;
-			}
+			final boolean isEmpty = filter.isEmpty();
+			final SearchPoiTypeFilter finalFilter = isEmpty && additionalFilter != null ? null : filter;
+			final ResultMatcher<Amenity> finalMatcher = matcher;
+
 			if (!isEmpty || additionalFilter != null) {
-				int top31 = MapUtils.get31TileNumberY(topLatitude);
-				int left31 = MapUtils.get31TileNumberX(leftLongitude);
-				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
-				int right31 = MapUtils.get31TileNumberX(rightLongitude);
+				final int top31 = MapUtils.get31TileNumberY(topLatitude);
+				final int left31 = MapUtils.get31TileNumberX(leftLongitude);
+				final int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
+				final int right31 = MapUtils.get31TileNumberX(rightLongitude);
 
 				List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel);
 
-				for (AmenityIndexRepository repo : repos) {
-					if (matcher != null && matcher.isCancelled()) {
+				repos.parallelStream()
+						.filter(repo -> repo.checkContainsInt(top31, left31, bottom31, right31))
+						.forEach(repo -> {
+					if (finalMatcher != null && finalMatcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
-						break;
+						return;
 					}
-					if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
-						List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
-								zoom, filter, additionalFilter, matcher);
-						if (foundAmenities != null) {
-							for (Amenity amenity : foundAmenities) {
-								Long id = amenity.getId();
-								if (amenity.isClosed()) {
-									closedAmenities.add(id);
-								} else if (!closedAmenities.contains(id)) {
-									if (openAmenities.add(id)) {
-										actualAmenities.add(amenity);
-									}
+					List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
+							zoom, finalFilter, additionalFilter, finalMatcher);
+					if (foundAmenities != null) {
+						foundAmenities.forEach(amenity -> {
+							Long id = amenity.getId();
+							if (amenity.isClosed()) {
+								closedAmenities.add(id);
+							} else if (!closedAmenities.contains(id)) {
+								if (openAmenities.add(id)) {
+									actualAmenities.add(amenity);
 								}
 							}
-						}
+						});
 					}
-				}
+				});
 			}
 		} finally {
 			searchAmenitiesInProgress = false;
