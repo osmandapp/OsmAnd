@@ -38,6 +38,7 @@ import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -704,9 +705,10 @@ public class GpxUiHelper {
 	public static void shareGpx(@NonNull Context context, @NonNull Activity activity, @NonNull File file) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		Uri fileUri = AndroidUtils.getUriForFile(context, file);
+		boolean singleTop = !(activity instanceof MapActivity);
 
 		new NativeShareDialogBuilder()
-				.addFileWithSaveAction(file, app, activity, false)
+				.addFileWithSaveAction(file, app, activity, singleTop)
 				.setChooserTitle(app.getString(R.string.shared_string_share))
 				.setExtraStream(fileUri)
 				.setNewTask(context instanceof OsmandApplication)
