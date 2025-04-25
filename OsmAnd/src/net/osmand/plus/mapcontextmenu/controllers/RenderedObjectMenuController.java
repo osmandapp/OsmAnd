@@ -123,7 +123,7 @@ public class RenderedObjectMenuController extends MenuController {
 		String translation = poiTranslator.getTranslation(amenity.getSubType());
 
 		for (String key : amenity.getAdditionalInfoKeys()) {
-			String translationKey = key.replace(":", "_");
+			String translationKey = key.replace("osmand_", "").replace(":", "_");
 			String value = amenity.getAdditionalInfo(key);
 			if (!Algorithms.isEmpty(translation)) {
 				break;
@@ -165,7 +165,7 @@ public class RenderedObjectMenuController extends MenuController {
 		for (Map.Entry<String, String> e : renderedObject.getTags().entrySet()) {
 			String key = e.getKey();
 			String value = e.getValue();
-			String translationKey = key.replace(":", "_");
+			String translationKey = key.replace("osmand_", "").replace(":", "_");
 			if (key.startsWith("name")) {
 				continue;
 			}
