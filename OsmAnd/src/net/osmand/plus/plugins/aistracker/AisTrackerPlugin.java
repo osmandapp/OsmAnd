@@ -155,7 +155,6 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		} else {
 			if (layer != null) {
 				mapView.removeLayer(layer);
-				layer.cleanup();
 				layer = null;
 				mapView.refreshMap();
 			}

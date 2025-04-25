@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import androidx.annotation.DrawableRes;
@@ -28,7 +29,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -62,7 +63,6 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	public AisTrackerLayer(@NonNull Context context) {
 		super(context);
-		this.listener = null;
 
 		this.bitmapPaint.setAntiAlias(true);
 		this.bitmapPaint.setFilterBitmap(true);
@@ -80,12 +80,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
-		ChartPointsHelper chartPointsHelper = new ChartPointsHelper(getContext());
 
-		float CircleCIDensity = 5;
-		int iconColorRGBA = 0xFFFFFFFF;
-		aisRestImage = NativeUtilities.createSkImageFromBitmap(
-				chartPointsHelper.createXAxisPointBitmap(iconColorRGBA, CircleCIDensity));
 	}
 
 	@Override
@@ -99,6 +94,12 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			newMapRenderer.addSymbolsProvider(markersCollection);
 			newMapRenderer.addSymbolsProvider(vectorLinesCollection);
 
+			ChartPointsHelper pointsHelper = new ChartPointsHelper(getContext());
+			float density = 5;
+			int pointColor = 0xFFFFFFFF;
+			aisRestImage = NativeUtilities.createSkImageFromBitmap(
+					pointsHelper.createXAxisPointBitmap(pointColor, density));
+
 			for (AisObject ais : objects.values()) {
 				ais.createAisRenderData(getBaseOrder(), this, bitmapPaint,
 						markersCollection, vectorLinesCollection, aisRestImage);
@@ -107,21 +108,19 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
-	public void setListener(AisMessageListener listener) {
+	public void setListener(@Nullable AisMessageListener listener) {
 		this.listener = listener;
 	}
 
 	private void initTimer() {
-		TimerTask taskCheckAisObjectList;
-		taskCheckAisObjectList = new TimerTask() {
+		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				Log.d("AisTrackerLayer", "timer task taskCheckAisObjectList running");
 				removeLostAisObjects();
 			}
 		};
 		this.timer = new Timer();
-		timer.schedule(taskCheckAisObjectList, 20000, 30000);
+		timer.schedule(timerTask, 20000, 30000);
 	}
 
 	private void startNetworkListener() {
@@ -161,7 +160,8 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		startNetworkListener();
 	}
 
-	public void cleanup() {
+	@Override
+	public void cleanupResources() {
 		if (this.timer != null) {
 			this.timer.cancel();
 			this.timer.purge();
@@ -169,11 +169,12 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		this.objects.clear();
 
-		if (view.getMapRenderer() != null && markersCollection != null && vectorLinesCollection != null) {
+		MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null && markersCollection != null && vectorLinesCollection != null) {
 			markersCollection.removeAllMarkers();
 			vectorLinesCollection.removeAllLines();
-			view.getMapRenderer().removeSymbolsProvider(markersCollection);
-			view.getMapRenderer().removeSymbolsProvider(vectorLinesCollection);
+			mapRenderer.removeSymbolsProvider(markersCollection);
+			mapRenderer.removeSymbolsProvider(vectorLinesCollection);
 		}
 
 		stopNetworkListener();
@@ -245,7 +246,8 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	public Bitmap getBitmap(@DrawableRes int drawableId) {
 		Bitmap bitmap = pointImages.get(drawableId);
 		if (bitmap == null) {
-			bitmap = RenderingIcons.getBitmapFromVectorDrawable(getContext(), drawableId, textScale);
+			Drawable icon = getApplication().getUIUtilities().getIcon(drawableId);
+			bitmap = AndroidUtils.drawableToBitmap(icon, textScale, true);
 			pointImages.put(drawableId, bitmap);
 		}
 		return bitmap;

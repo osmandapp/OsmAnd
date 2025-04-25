@@ -407,35 +407,21 @@ public class AisObject {
         this.bitmapColor = 0;
     }
 
-    public static int selectBitmap(AisObjType objType) {
-        switch (objType) {
-            case AIS_VESSEL:
-            case AIS_VESSEL_SPORT:
-            case AIS_VESSEL_FAST:
-            case AIS_VESSEL_PASSENGER:
-            case AIS_VESSEL_FREIGHT:
-            case AIS_VESSEL_COMMERCIAL:
-            case AIS_VESSEL_AUTHORITIES:
-            case AIS_VESSEL_SAR:
-            case AIS_VESSEL_OTHER:
-            case AIS_INVALID:
-                return R.drawable.mm_ais_vessel;
-            case AIS_LANDSTATION:
-                return R.drawable.mm_ais_land;
-            case AIS_AIRPLANE:
-                return R.drawable.mm_ais_plane;
-            case AIS_SART:
-                return R.drawable.mm_ais_sar;
-            case AIS_ATON:
-                return R.drawable.mm_ais_aton;
-            case AIS_ATON_VIRTUAL:
-                return R.drawable.mm_ais_aton_virt;
-        }
-        return -1;
+    public static int selectBitmap(@NonNull AisObjType type) {
+        return switch (type) {
+            case AIS_VESSEL, AIS_VESSEL_SPORT, AIS_VESSEL_FAST, AIS_VESSEL_PASSENGER,
+                 AIS_VESSEL_FREIGHT, AIS_VESSEL_COMMERCIAL, AIS_VESSEL_AUTHORITIES, AIS_VESSEL_SAR,
+                 AIS_VESSEL_OTHER, AIS_INVALID -> R.drawable.mm_ais_vessel;
+            case AIS_LANDSTATION -> R.drawable.mm_ais_land;
+            case AIS_AIRPLANE -> R.drawable.mm_ais_plane;
+            case AIS_SART -> R.drawable.mm_ais_sar;
+            case AIS_ATON -> R.drawable.mm_ais_aton;
+            case AIS_ATON_VIRTUAL -> R.drawable.mm_ais_aton_virt;
+        };
     }
 
-    public static int selectColor(AisObjType objType) {
-	    return switch (objType) {
+    public static int selectColor(@NonNull AisObjType type) {
+	    return switch (type) {
 		    case AIS_VESSEL -> Color.GREEN;
 		    case AIS_VESSEL_SPORT -> Color.YELLOW;
 		    case AIS_VESSEL_FAST -> Color.BLUE;
