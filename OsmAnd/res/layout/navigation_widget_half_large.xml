@@ -31,7 +31,7 @@
 				android:gravity="center"
 				app:srcCompat="@drawable/ic_action_remove_dark" />
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/distance_text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
 				android:textSize="36sp"
 				tools:text="Value" />
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/distance_sub_text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
 				android:orientation="horizontal"
 				tools:visibility="visible" />
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/street_text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -97,7 +98,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		emptyBanner = view.findViewById(R.id.empty_banner);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
-		textViewShadow = view.findViewById(R.id.widget_text_shadow);
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
 		widgetName = view.findViewById(R.id.widget_name);
@@ -168,8 +168,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	public void recreateView() {
 		ImageView oldImageView = imageView;
-		TextView oldTextView = textView;
-		TextView oldTextViewShadow = textViewShadow;
+		OutlinedTextContainer oldTextView = textView;
 		TextView oldSmallTextView = smallTextView;
 		TextView oldSmallTextViewShadow = smallTextViewShadow;
 		View oldContainer = container;
@@ -185,7 +184,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		view.setVisibility(oldContainer.getVisibility());
 
 		copyTextView(textView, oldTextView);
-		copyTextView(textViewShadow, oldTextViewShadow);
 		copyTextView(smallTextView, oldSmallTextView);
 		copyTextView(smallTextViewShadow, oldSmallTextViewShadow);
 		copyView(emptyBanner, oldEmptyBanner);
@@ -270,6 +268,13 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		}
 	}
 
+	private void copyTextView(@Nullable OutlinedTextContainer newTextView, @Nullable OutlinedTextContainer oldTextView) {
+		if (newTextView != null && oldTextView != null) {
+			newTextView.copyFromTextContainer(oldTextView);
+			copyView(newTextView, oldTextView);
+		}
+	}
+
 	private void copyView(@Nullable View newView, @Nullable View oldTView) {
 		if (newView != null && oldTView != null) {
 			newView.setFocusable(oldTView.isFocusable());
@@ -334,6 +339,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		if (bottomDivider != null) {
 			bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
 		}
+		updateTextOutline(textView, textState);
 	}
 
 	@Override

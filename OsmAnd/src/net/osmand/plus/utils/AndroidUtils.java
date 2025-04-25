@@ -56,7 +56,6 @@ import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.*;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -76,6 +75,7 @@ import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMap;
@@ -618,7 +618,7 @@ public class AndroidUtils {
 		return width;
 	}
 
-	public static void setTruncatedText(TextView textView, String text) {
+	public static void setTruncatedText(OutlinedTextContainer textView, String text) {
 		Paint paint = new Paint();
 		paint.setTextSize(textView.getTextSize());
 		float textWidth = paint.measureText(text);
