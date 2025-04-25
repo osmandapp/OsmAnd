@@ -1010,40 +1010,41 @@ public class ResourceManager {
 			double lat, double lon, ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<>();
 		List<AmenityIndexRepositoryBinary> list = new ArrayList<>();
-		int left = MapUtils.get31TileNumberX(leftLongitude);
-		int top = MapUtils.get31TileNumberY(topLatitude);
-		int right = MapUtils.get31TileNumberX(rightLongitude);
-		int bottom = MapUtils.get31TileNumberY(bottomLatitude);
-		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
-			if (matcher != null && matcher.isCancelled()) {
-				break;
-			}
-			if (index instanceof AmenityIndexRepositoryBinary) {
-				if (index.checkContainsInt(top, left, bottom, right)) {
-					if (index.checkContains(lat, lon)) {
-						list.add(0, (AmenityIndexRepositoryBinary) index);
-					} else {
-						list.add((AmenityIndexRepositoryBinary) index);
-					}
+		final int left = MapUtils.get31TileNumberX(leftLongitude);
+		final int top = MapUtils.get31TileNumberY(topLatitude);
+		final int right = MapUtils.get31TileNumberX(rightLongitude);
+		final int bottom = MapUtils.get31TileNumberY(bottomLatitude);
 
-				}
-			}
+		if (matcher != null && matcher.isCancelled()) {
+			return amenities;
 		}
+
+		getAmenityRepositories(false).parallelStream()
+				.filter(index -> index instanceof AmenityIndexRepositoryBinary)
+				.filter(index -> index.checkContainsInt(top, left, bottom, right))
+				.forEach(index -> {
+			if (index.checkContains(lat, lon)) {
+				list.add(0, (AmenityIndexRepositoryBinary) index);
+			} else {
+				list.add((AmenityIndexRepositoryBinary) index);
+			}
+		});
 
 		// Not using boundaries results in very slow initial search if user has many maps installed
 //		int left = 0;
 //		int top = 0;
 //		int right = Integer.MAX_VALUE;
 //		int bottom = Integer.MAX_VALUE;
-		for (AmenityIndexRepositoryBinary index : list) {
-			if (matcher != null && matcher.isCancelled()) {
-				break;
-			}
+
+		list.parallelStream()
+				.filter(index -> matcher == null || !matcher.isCancelled())
+				.forEach(index -> {
 			List<Amenity> result = index.searchAmenitiesByName(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat),
-					left, top, right, bottom,
-					searchQuery, matcher);
-			amenities.addAll(result);
-		}
+					left, top, right, bottom, searchQuery, matcher);
+			synchronized (amenities) {
+				amenities.addAll(result);
+			}
+		});
 
 		return amenities;
 	}
