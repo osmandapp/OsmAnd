@@ -2700,4 +2700,9 @@
     <string name="months_2_4">മാസങ്ങള്‍</string>
     <string name="months_5">മാസങ്ങള്‍</string>
     <string name="year">വര്‍ഷം</string>
+    <string name="add_to_navigation">നാവിഗേഷനിലേക്ക് ആഡ് ചെയ്യാൻ</string>
+    <string name="grid_color">ഗ്രിഡിന്റെ കളർ</string>
+    <string name="customize_grid_color">ഗ്രിഡിന്റെ കളർ കസ്റ്റമൈസ്</string>
+    <string name="save_to_device">ഫോണിലേക്ക് സേവ് ചെയ്യാൻ</string>
+    <string name="saved_to_device">ഫോണിൽ സേവ് ആയി</string>
 </resources>

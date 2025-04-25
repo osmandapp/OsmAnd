@@ -3993,7 +3993,7 @@
     <string name="poi_routes">Rute</string>
     <string name="shared_string_includes">Uključuje</string>
     <string name="shared_string_grade">Stepen</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Vojna oblast</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Vojne oblasti</string>
     <string name="routing_attr_avoid_4wd_only_description">Puteve za 4WD vozila</string>
     <string name="lanes_widgets_desc">Prikazuje trenutni raspored kolovozne trake i ističe trake za prestrojavanje prilikom navođenja.</string>
     <string name="route_maneuvers">Manevri rute</string>

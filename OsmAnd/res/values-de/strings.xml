@@ -491,7 +491,7 @@
     <string name="poi_filter_custom_filter">Benutzerdefinierter Filter</string>
     <string name="poi_filter_food_shop">Lebensmittelgeschäft</string>
     <string name="poi_filter_for_tourists">Für Touristen</string>
-    <string name="poi_filter_fuel">Tankstelle</string>
+    <string name="poi_filter_fuel">Kraftstoff</string>
     <string name="poi_filter_namefinder">Online-Namensfinder</string>
     <string name="reading_cached_tiles">Zwischengespeicherte Kacheln werden gelesen …</string>
     <string name="version_index_is_big_for_memory">Nicht genügend Speicher für Index \'\'{0}\'\'</string>
@@ -2773,7 +2773,7 @@
     <string name="rendering_attr_highway_class_road_name">Landstraße</string>
     <string name="rendering_attr_highway_class_street_name">Straße</string>
     <string name="rendering_attr_highway_class_service_name">Erschließungsweg</string>
-    <string name="rendering_attr_highway_class_footway_name">Gehweg</string>
+    <string name="rendering_attr_highway_class_footway_name">Fußweg</string>
     <string name="rendering_attr_highway_class_track_name">Wirtschaftsweg</string>
     <string name="rendering_attr_highway_class_bridleway_name">Reitweg</string>
     <string name="rendering_attr_highway_class_steps_name">Stufen</string>
@@ -4336,7 +4336,7 @@
     <string name="circle_settings">Kreiseinstellungen</string>
     <string name="map_widget_distance">Entfernung</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Militärische Bereiche ausblenden</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Militärische Bereiche</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Militärgelände</string>
     <string name="routing_attr_hazmat_category_name">Gefahrgutkategorie</string>
     <string name="average_speed_skip_stops">Zwischenstopps berücksichtigen</string>
     <string name="map_widget_true_bearing">Tatsächliche Peilung</string>
@@ -5615,13 +5615,13 @@
     <string name="obd_connected_to_device">Verbunden mit %s</string>
     <string name="obd_not_connected_to_device">Getrennt von %s</string>
     <string name="dynamic_icon_type_summary">Symbol ändert sich je nach Aktionsstatus.</string>
-    <string name="fuel_tank_capacity_description">Tankinhalt eingeben, um Kraftstoffstand und -verbrauch genau zu verfolgen</string>
+    <string name="fuel_tank_capacity_description">Geben Sie das Fassungsvermögen Ihres Tanks ein, um Kraftstoffstand und -verbrauch genau zu verfolgen</string>
     <string name="shared_strings_dimensions">Abmessungen</string>
-    <string name="fuel_tank_capacity">Volumen des Kraftstofftanks</string>
+    <string name="fuel_tank_capacity">Fassungsvermögen des Kraftstofftanks</string>
     <string name="litres">Liter</string>
     <string name="us_gallons_unit">gal</string>
-    <string name="imperial_gallons">Imperiale Gallone</string>
-    <string name="us_gallons">US-Gallone</string>
+    <string name="imperial_gallons">Imperiale Gallonen</string>
+    <string name="us_gallons">US-Gallonen</string>
     <string name="unit_of_volume_description">Ausgewählte Einheiten werden auf alle volumenbezogenen Daten im aktuellen Profil angewendet.</string>
     <string name="unit_of_volume">Volumeneinheit</string>
     <string name="record_obd_data">Fahrzeugdaten aufzeichnen</string>
@@ -5776,4 +5776,7 @@
     <string name="add_to_navigation">Zur Navigation hinzufügen</string>
     <string name="msg_favorites_skipped_as_existing">Favorisierte Punkte (%1$d) wurden übersprungen, da bereits vorhanden.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX-Wegpunkte (%1$d) in die Favoriten kopiert.</string>
+    <string name="save_to_device_error">Fehler beim Speichern auf dem Gerät</string>
+    <string name="saved_to_device">Auf dem Gerät gespeichert</string>
+    <string name="save_to_device">Auf dem Gerät speichern</string>
 </resources>
