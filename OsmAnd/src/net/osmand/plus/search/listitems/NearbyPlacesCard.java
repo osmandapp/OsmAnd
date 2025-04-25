@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.data.Amenity;
 import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -34,7 +33,6 @@ import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -209,7 +207,12 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		if (!isLoadingItems && getWikiFilter() != null) {
 			isLoadingItems = true;
 			LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-			searchAmenitiesTask = new SearchAmenitiesTask(getWikiFilter(), latLon);
+			searchAmenitiesTask = new SearchAmenitiesTask(getWikiFilter(), latLon, SEARCH_POI_RADIUS, amenities -> {
+				amenities = amenities.subList(0, Math.min(DISPLAY_ITEMS, amenities.size()));
+				updateItems(amenities);
+				onLoadingFinished();
+				return false;
+			});
 			searchAmenitiesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			AndroidUiHelper.updateVisibility(progressBar, true);
 		}
@@ -283,34 +286,5 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	public void downloadHasFinished() {
 		onNearbyPlacesCollapseChanged();
 		downloadItemsAdapter.notifyDataSetChanged();
-	}
-
-	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
-
-		private final LatLon latLon;
-		private final PoiUIFilter filter;
-
-		protected SearchAmenitiesTask(@NonNull PoiUIFilter filter, @NonNull LatLon latLon) {
-			this.filter = filter;
-			this.latLon = latLon;
-		}
-
-		@Override
-		protected List<Amenity> doInBackground(Void... params) {
-			QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), SEARCH_POI_RADIUS);
-			List<Amenity> amenities = getAmenities(rect);
-			return amenities.subList(0, Math.min(DISPLAY_ITEMS, amenities.size()));
-		}
-
-		@NonNull
-		private List<Amenity> getAmenities(@NonNull QuadRect rect) {
-			return filter.searchAmenities(rect.top, rect.left, rect.bottom, rect.right, -1, null);
-		}
-
-		@Override
-		protected void onPostExecute(List<Amenity> amenities) {
-			updateItems(amenities);
-			onLoadingFinished();
-		}
 	}
 }

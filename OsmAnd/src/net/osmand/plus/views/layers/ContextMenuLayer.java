@@ -109,6 +109,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		selectionHelper = new MapSelectionHelper(context);
 	}
 
+	@NonNull
+	public MapSelectionHelper getSelectionHelper() {
+		return selectionHelper;
+	}
+
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);

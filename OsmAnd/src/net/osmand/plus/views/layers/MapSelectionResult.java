@@ -73,7 +73,7 @@ public class MapSelectionResult {
 		allObjects.add(new SelectedMapObject(object, provider));
 	}
 
-	public void groupByOsmIdAndWikidataId(@NonNull OsmandApplication app) {
+	public void groupByOsmIdAndWikidataId() {
 		List<PlaceDetailsObject> detailsObjects = new ArrayList<>();
 		for (SelectedMapObject selectedObject : allObjects) {
 			Object object = selectedObject.object();
@@ -101,7 +101,7 @@ public class MapSelectionResult {
 			detailsObjects.add(detailsObject);
 		}
 		for (PlaceDetailsObject object : detailsObjects) {
-			object.combineData(app);
+			object.combineData();
 			processedObjects.add(new SelectedMapObject(object, poiProvider));
 		}
 	}

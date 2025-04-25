@@ -1049,16 +1049,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return getAmenityName(o);
 	}
 
-	private String getAmenityName(Amenity amenity) {
+	private String getAmenityName(@NonNull Amenity amenity) {
 		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-
 		if (amenity.getType().isWiki()) {
 			if (Algorithms.isEmpty(locale)) {
 				locale = app.getLanguage();
 			}
 			locale = PluginsHelper.onGetMapObjectsLocale(amenity, locale);
 		}
-
 		return amenity.getName(locale, app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 	}
 
