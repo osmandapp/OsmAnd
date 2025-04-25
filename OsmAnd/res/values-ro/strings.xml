@@ -6047,4 +6047,6 @@
     <string name="msg_favorites_skipped_as_existing">Punctele preferate (%1$d) au fost ignorate deoarece existau deja.</string>
     <string name="saved_to_device">Salvat pe dispozitiv</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Puncte de referință GPX (%1$d) copiate în favorite.</string>
+    <string name="save_to_device_error">Eroare la salvarea pe dispozitiv</string>
+    <string name="save_to_device">Salvare pe dispozitiv</string>
 </resources>
