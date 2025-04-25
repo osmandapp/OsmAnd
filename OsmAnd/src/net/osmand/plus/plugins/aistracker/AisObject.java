@@ -9,7 +9,6 @@ import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_CPA_WARNIN
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_OBJ_LOST_DEFAULT_TIMEOUT;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_SHIP_LOST_DEFAULT_TIMEOUT;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -1014,14 +1013,14 @@ public class AisObject {
         return rotation;
     }
 
-    public void createAisRenderData(@NonNull Context context, int baseOrder,
-                                    @NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
-                                    @NonNull MapMarkersCollection markersCollection,
-                                    @NonNull VectorLinesCollection vectorLinesCollection,
-                                    @NonNull SingleSkImage restImage) {
-        updateBitmap(mapLayer, paint);
+    public void createAisRenderData(int baseOrder, @NonNull AisTrackerLayer layer,
+		    @NonNull Paint paint,
+		    @NonNull MapMarkersCollection markersCollection,
+		    @NonNull VectorLinesCollection vectorLinesCollection,
+		    @NonNull SingleSkImage restImage) {
+	    updateBitmap(layer, paint);
 
-        Bitmap lostBitmap = mapLayer.getBitmap(R.drawable.mm_ais_vessel_cross);
+        Bitmap lostBitmap = layer.getBitmap(R.drawable.mm_ais_vessel_cross);
 
         if (bitmap == null || lostBitmap == null)
         {
