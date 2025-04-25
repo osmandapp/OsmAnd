@@ -498,6 +498,9 @@ public class AmenityUIHelper extends MenuBuilder {
 					iconId = R.drawable.ic_action_note_dark;
 				}
 			} else if (poiType != null) {
+				if (MapPoiTypes.OTHER_MAP_CATEGORY.equals(poiType.getCategory().getKeyName())) {
+					return null; // the "Others" value is already displayed as a title
+				}
 				String catKey = poiType.getCategory().getKeyName();
 				List<PoiType> list = collectedPoiTypes.computeIfAbsent(catKey, s -> new ArrayList<>());
 				list.add(poiType);
