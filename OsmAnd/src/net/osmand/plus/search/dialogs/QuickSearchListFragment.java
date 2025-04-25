@@ -43,6 +43,7 @@ import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.search.core.ObjectType;
@@ -211,8 +212,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (getMapActivity() == null) {
 			return;
 		}
-
-		if (pair.second instanceof Amenity amenity) {
+		Object object = pair.second;
+		if (object instanceof Amenity amenity) {
 			if (amenity.isRouteTrack() && !amenity.isSuperRoute()) {
 				TravelHelper travelHelper = app.getTravelHelper();
 				TravelGpx travelGpx = new TravelGpx(amenity);
@@ -224,11 +225,12 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
 				return; // TravelGpx
 			}
+			object = MapSelectionHelper.fetchOtherData(app, amenity);
 		}
 
 		showOnMap(getMapActivity(), dialogFragment,
 				searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-				searchResult.preferredZoom, pair.first, pair.second);
+				searchResult.preferredZoom, pair.first, object);
 	}
 
 	private void showGpxTrackResult(SearchResult searchResult) {

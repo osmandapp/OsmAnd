@@ -122,25 +122,30 @@ public class MapSelectionHelper {
 	@NonNull
 	MapSelectionResult collectObjectsFromMap(@NonNull PointF point,
 			@NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
-		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 		MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 
-		collectObjectsFromMap(result, showUnknownLocation, false);
+		collectObjectsFromLayers(result, showUnknownLocation, false);
+		collectObjectsFromMap(result, point, tileBox);
 
+		processTransportStops(result.getAllObjects());
+		if (result.isEmpty()) {
+			collectObjectsFromLayers(result, showUnknownLocation, true);
+		}
+		result.groupByOsmIdAndWikidataId();
+		return result;
+	}
+
+	private void collectObjectsFromMap(@NonNull MapSelectionResult result,
+			@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
+		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 		if (app.useOpenGlRenderer()) {
 			selectObjectsFromOpenGl(result, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
 		}
-		processTransportStops(result.getAllObjects());
-		if (result.isEmpty()) {
-			collectObjectsFromMap(result, showUnknownLocation, true);
-		}
-		result.groupByOsmIdAndWikidataId(app);
-		return result;
 	}
 
-	protected void collectObjectsFromMap(@NonNull MapSelectionResult result,
+	protected void collectObjectsFromLayers(@NonNull MapSelectionResult result,
 			boolean unknownLocation, boolean secondaryObjects) {
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider && (!provider.isSecondaryProvider() || secondaryObjects)) {
@@ -735,12 +740,16 @@ public class MapSelectionHelper {
 		return amenity;
 	}
 
+	@NonNull
+	public static List<Amenity> findAmenities(@NonNull OsmandApplication app, @NonNull LatLon latLon) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_RADIUS);
+		return app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
+	}
+
 	@Nullable
 	public static Amenity findAmenityByOsmId(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 			long osmId) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_RADIUS);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
-
+		List<Amenity> amenities = findAmenities(app, latLon);
 		return findAmenityByOsmId(amenities, osmId, latLon);
 	}
 
@@ -791,5 +800,26 @@ public class MapSelectionHelper {
 					);
 		}
 		return null;
+	}
+
+	@NonNull
+	public static PlaceDetailsObject fetchOtherData(@NonNull OsmandApplication app,	@NonNull Amenity amenity) {
+		IContextMenuProvider provider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
+		return fetchOtherData(app, new PlaceDetailsObject(amenity, provider));
+	}
+
+	@NonNull
+	public static PlaceDetailsObject fetchOtherData(@NonNull OsmandApplication app,	@NonNull PlaceDetailsObject object) {
+		LatLon latLon = object.getLocation();
+		List<Amenity> amenities = MapSelectionHelper.findAmenities(app, latLon);
+		IContextMenuProvider provider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
+
+		for (Amenity amenity : amenities) {
+			if (object.overlapsWith(amenity)) {
+				object.addObject(amenity, provider);
+			}
+		}
+		object.combineData();
+		return object;
 	}
 }

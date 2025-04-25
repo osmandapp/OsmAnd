@@ -11,7 +11,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.util.Algorithms;
@@ -28,9 +27,21 @@ public class PlaceDetailsObject {
 
 	private final Amenity syntheticAmenity = new Amenity();
 
+	public PlaceDetailsObject() {
+	}
+
+	public PlaceDetailsObject(@NonNull Object object, @Nullable IContextMenuProvider provider) {
+		addObject(object, provider);
+		combineData();
+	}
+
 	@NonNull
 	public Amenity getSyntheticAmenity() {
 		return syntheticAmenity;
+	}
+
+	public LatLon getLocation() {
+		return syntheticAmenity.getLocation();
 	}
 
 	@NonNull
@@ -69,7 +80,7 @@ public class PlaceDetailsObject {
 		selectedObjects.addAll(other.getSelectedObjects());
 	}
 
-	public void combineData(@NonNull OsmandApplication app) {
+	public void combineData() {
 		Set<String> contentLocales = new TreeSet<>();
 		for (SelectedMapObject selectedObject : selectedObjects) {
 			Object object = selectedObject.object();
