@@ -705,7 +705,7 @@ public class GpxUiHelper {
 	public static void shareGpx(@NonNull Context context, @NonNull Activity activity, @NonNull File file) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		Uri fileUri = AndroidUtils.getUriForFile(context, file);
-		boolean singleTop = activity instanceof MyPlacesActivity;
+		boolean singleTop = !(activity instanceof MapActivity);
 
 		new NativeShareDialogBuilder()
 				.addFileWithSaveAction(file, app, activity, singleTop)
