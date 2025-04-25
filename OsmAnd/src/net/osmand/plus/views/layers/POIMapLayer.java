@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.data.PointDescription.POINT_TYPE_POI;
 import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
@@ -37,14 +38,7 @@ import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapMarker;
 import net.osmand.core.jni.TextRasterizer;
-import net.osmand.data.Amenity;
-import net.osmand.data.DataSourceType;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.data.ValueHolder;
+import net.osmand.data.*;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -68,6 +62,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.POITileProvider;
@@ -75,27 +70,15 @@ import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
-
-import static net.osmand.plus.poi.PoiFilterUtils.sortByElo;
-
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
@@ -143,7 +126,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private boolean showTopPlacesPreviews;
 	private PoiUIFilter topPlacesFilter;
 	private RotatedTileBox topPlacesBox;
-	private Amenity selectedTopPlace;
+	private Pair<PlaceDetailsObject, Amenity> selectedTopPlace;
 	protected MapMarkersCollection selectedTopPlaceCollection;
 
 	/// cache for displayed POI
@@ -243,7 +226,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			                    }
 		                    });
 					if (filter.isTopWikiFilter()) {
-						sortByElo(amenities);
+						PoiFilterUtils.sortByElo(amenities);
 						res.addAll(0, amenities);
 					} else {
 						for (Amenity amenity : amenities) {
@@ -771,7 +754,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				if (selectedTopPlace != null) {
 					MapActivity mapActivity = getMapActivity();
 					MapContextMenu contextMenu = mapActivity != null ? mapActivity.getContextMenu() : null;
-					if (contextMenu != null && (!contextMenu.isVisible() || contextMenu.getObject() != selectedTopPlace)) {
+					if (contextMenu != null && (!contextMenu.isVisible()
+							|| contextMenu.getObject() != selectedTopPlace.first)) {
 						updateSelectedTopPlace(null);
 					}
 				}
@@ -959,8 +943,16 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof Amenity) {
-			return new PointDescription(PointDescription.POINT_TYPE_POI, getAmenityName((Amenity) o));
+		Amenity amenity = getAmenity(o);
+		return amenity != null ? new PointDescription(POINT_TYPE_POI, getAmenityName(amenity)) : null;
+	}
+
+	@Nullable
+	public Amenity getAmenity(@Nullable Object object) {
+		if (object instanceof Amenity amenity) {
+			return amenity;
+		} else if (object instanceof PlaceDetailsObject detailsObject) {
+			return detailsObject.getSyntheticAmenity();
 		}
 		return null;
 	}
@@ -968,16 +960,33 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	@Override
 	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && topPlaces != null && o instanceof Amenity && topPlaces.containsValue(o)) {
-			hideExplorePlacesFragment(mapActivity);
-			showTopPlaceContextMenu((Amenity) o);
-			return true;
-		} else {
-			return IContextMenuProvider.super.runExclusiveAction(o, unknownLocation);
+		if (mapActivity != null && o instanceof PlaceDetailsObject object) {
+			Amenity amenity = getSelectedTopPlace(object);
+			if (amenity != null) {
+				hideExplorePlacesFragment(mapActivity);
+				showTopPlaceContextMenu(mapActivity, object, amenity);
+				return true;
+			}
 		}
+		return IContextMenuProvider.super.runExclusiveAction(o, unknownLocation);
 	}
 
-	private void hideExplorePlacesFragment(@NonNull MapActivity mapActivity){
+	@Nullable
+	private Amenity getSelectedTopPlace(@NonNull PlaceDetailsObject detailsObject) {
+		if (!Algorithms.isEmpty(topPlaces)) {
+			for (SelectedMapObject selectedObject : detailsObject.getSelectedObjects()) {
+				if (selectedObject.object() instanceof MapObject mapObject) {
+					Amenity amenity = topPlaces.get(mapObject.getId());
+					if (amenity != null) {
+						return amenity;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	private void hideExplorePlacesFragment(@NonNull MapActivity mapActivity) {
 		ExplorePlacesFragment explorePlacesFragment = mapActivity.getFragmentsHelper().getExplorePlacesFragment();
 		if (explorePlacesFragment != null) {
 			explorePlacesFragment.hideList();
@@ -994,35 +1003,32 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof Amenity) {
-			return ((Amenity) o).getLocation();
-		}
-		return null;
+		Amenity amenity = getAmenity(o);
+		return amenity != null ? amenity.getLocation() : null;
 	}
 
 	@Override
 	public boolean showMenuAction(@Nullable Object object) {
 		OsmandApplication app = view.getApplication();
-		MapActivity mapActivity = view.getMapActivity();
-		if (mapActivity != null && object instanceof Amenity amenity) {
-			TravelHelper travelHelper = app.getTravelHelper();
+		MapActivity activity = view.getMapActivity();
+		if (activity != null && object instanceof Amenity amenity
+				&& amenity.getType().getKeyName().equals(ROUTES)) {
 			String subType = amenity.getSubType();
-			if (amenity.getType().getKeyName().equals(ROUTES)) {
-				if (subType.equals(ROUTE_ARTICLE)) {
-					String lang = app.getLanguage();
-					lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
-					String name = amenity.getGpxFileName(lang);
-					TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
-					if (article == null) {
-						return true;
-					}
-					travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
-					return true;
-				} else if (amenity.isRouteTrack()) {
-					TravelGpx travelGpx = new TravelGpx(amenity);
-					travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getGpxFileName(null), amenity.getLocation(), false);
+			TravelHelper travelHelper = app.getTravelHelper();
+			if (subType.equals(ROUTE_ARTICLE)) {
+				String lang = app.getLanguage();
+				lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
+				String name = amenity.getGpxFileName(lang);
+				TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
+				if (article == null) {
 					return true;
 				}
+				travelHelper.openTrackMenu(article, activity, name, amenity.getLocation(), false);
+				return true;
+			} else if (amenity.isRouteTrack()) {
+				TravelGpx travelGpx = new TravelGpx(amenity);
+				travelHelper.openTrackMenu(travelGpx, activity, amenity.getGpxFileName(null), amenity.getLocation(), false);
+				return true;
 			}
 		}
 		return false;
@@ -1086,7 +1092,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		}
 	}
 
-	public void updateSelectedTopPlace(@Nullable Amenity selectedTopPlace) {
+	public void updateSelectedTopPlace(@Nullable Pair<PlaceDetailsObject, Amenity> selectedPlace) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
@@ -1103,16 +1109,17 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				break;
 			}
 		}
-		this.selectedTopPlace = selectedTopPlace;
-		if (selectedTopPlace == null || topPlaces != null && !topPlaces.containsValue(selectedTopPlace)) {
+		this.selectedTopPlace = selectedPlace;
+		if (selectedPlace == null || topPlaces != null && !topPlaces.containsValue(selectedPlace.second)) {
 			if (previousSelectedMarker != null) {
 				selectedTopPlaceCollection.removeMarker(previousSelectedMarker);
 			}
 			return;
 		}
 
-		Bitmap imageBitmap = getTopPlaceBitmap(selectedTopPlace);
+		Bitmap imageBitmap = getTopPlaceBitmap(selectedPlace.second);
 		if (imageBitmap != null) {
+			LatLon latLon = selectedPlace.second.getLocation();
 			Bitmap imageMapBitmap = createImageBitmap(imageBitmap, true);
 
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
@@ -1120,8 +1127,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					.setMarkerId(SELECTED_MARKER_ID)
 					.setBaseOrder(getPointsOrder() - 110)
 					.setPinIcon(NativeUtilities.createSkImageFromBitmap(imageMapBitmap))
-					.setPosition(NativeUtilities.getPoint31FromLatLon(selectedTopPlace.getLocation().getLatitude(),
-							selectedTopPlace.getLocation().getLongitude()))
+					.setPosition(NativeUtilities.getPoint31FromLatLon(latLon.getLatitude(), latLon.getLongitude()))
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
 					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 					.buildAndAddToCollection(selectedTopPlaceCollection);
@@ -1132,13 +1138,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		}
 	}
 
-	private void showTopPlaceContextMenu(@NonNull Amenity topPlace) {
-		updateSelectedTopPlace(topPlace);
-		app.getSettings().setMapLocationToShow(
-				topPlace.getLocation().getLatitude(), topPlace.getLocation().getLongitude(),
-				SearchCoreFactory.PREFERRED_NEARBY_POINT_ZOOM,
-				QuickSearchWikiItem.getPointDescription(app, topPlace), true, topPlace);
-		MapActivity.launchMapActivityMoveToTop(requireMapActivity());
+	private void showTopPlaceContextMenu(@NonNull MapActivity mapActivity,
+			@NonNull PlaceDetailsObject object, @NonNull Amenity topPlace) {
+		Amenity amenity = object.getSyntheticAmenity();
+		updateSelectedTopPlace(Pair.create(object, topPlace));
+
+		MapContextMenu contextMenu = mapActivity.getContextMenu();
+		contextMenu.setCenterMarker(true);
+		contextMenu.show(topPlace.getLocation(), QuickSearchWikiItem.getPointDescription(app, amenity), object);
 	}
 
 	private Bitmap createImageBitmap(Bitmap bitmap, boolean isSelected) {

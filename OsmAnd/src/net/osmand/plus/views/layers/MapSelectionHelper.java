@@ -55,6 +55,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.render.RenderingRuleProperty;
@@ -131,10 +132,11 @@ public class MapSelectionHelper {
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
 		}
-		processTransportStops(result.getObjectsWithProviders());
-		if (result.getObjectsWithProviders().isEmpty()) {
+		processTransportStops(result.getAllObjects());
+		if (result.isEmpty()) {
 			collectObjectsFromMap(result, showUnknownLocation, true);
 		}
+		result.groupByOsmIdAndWikidataId(app);
 		return result;
 	}
 
@@ -155,7 +157,8 @@ public class MapSelectionHelper {
 			if (layer instanceof IContextMenuProvider provider) {
 				MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 				provider.collectObjectsFromPoint(result, unknownLocation, true);
-				for (Object object : result.getObjects()) {
+				for (SelectedMapObject selectedObject : result.getAllObjects()) {
+					Object object = selectedObject.object();
 					LatLon latLon = provider.getObjectLocation(object);
 					BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 					if (object instanceof OpenStreetNote) {
@@ -385,7 +388,7 @@ public class MapSelectionHelper {
 						}
 					}
 				}
-				if (amenity != null && isUniqueAmenity(result.getObjectsWithProviders().keySet(), amenity)) {
+				if (amenity != null && isUniqueAmenity(result.getAllObjects(), amenity)) {
 					result.collect(amenity, mapLayers.getPoiMapLayer());
 				}
 			}
@@ -478,10 +481,9 @@ public class MapSelectionHelper {
 		return amenity;
 	}
 
-	private void addTravelGpx(@NonNull MapSelectionResult result,
-			@Nullable String routeId) {
+	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId) {
 		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(result.getPointLatLon(), routeId);
-		if (travelGpx != null && isUniqueTravelGpx(result.getObjectsWithProviders(), travelGpx)) {
+		if (travelGpx != null && isUniqueTravelGpx(result.getAllObjects(), travelGpx)) {
 			WptPt selectedPoint = new WptPt();
 			selectedPoint.setLat(result.getPointLatLon().getLatitude());
 			selectedPoint.setLon(result.getPointLatLon().getLongitude());
@@ -494,19 +496,19 @@ public class MapSelectionHelper {
 
 	private boolean addClickableWay(@NonNull MapSelectionResult result,
 			@Nullable ClickableWay clickableWay) {
-		if (clickableWay != null && isUniqueClickableWay(result.getObjectsWithProviders(), clickableWay)) {
+		if (clickableWay != null && isUniqueClickableWay(result.getAllObjects(), clickableWay)) {
 			result.collect(clickableWay, clickableWayHelper.getContextMenuProvider());
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isUniqueGpxFileName(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+	private boolean isUniqueGpxFileName(@NonNull List<SelectedMapObject> selectedObjects,
 			@NonNull String gpxFileName) {
-		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
-			if (entry.getKey() instanceof SelectedGpxPoint && entry.getValue() instanceof GPXLayer) {
-				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) entry.getKey();
-				if (selectedGpxPoint.getSelectedGpxFile().getGpxFile().getPath().endsWith(gpxFileName)) {
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			Object object = selectedObject.object();
+			if (object instanceof SelectedGpxPoint gpxPoint && selectedObject.provider() instanceof GPXLayer) {
+				if (gpxPoint.getSelectedGpxFile().getGpxFile().getPath().endsWith(gpxFileName)) {
 					return false;
 				}
 			}
@@ -514,27 +516,23 @@ public class MapSelectionHelper {
 		return true;
 	}
 
-	private boolean isUniqueClickableWay(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+	private boolean isUniqueClickableWay(@NonNull List<SelectedMapObject> selectedObjects,
 			@NonNull ClickableWay clickableWay) {
-		for (Object object : selectedObjects.keySet()) {
-			if (object instanceof ClickableWay that) {
-				if (clickableWay.getOsmId() == that.getOsmId()) {
-					return false;
-				}
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (selectedObject.object() instanceof ClickableWay that && clickableWay.getOsmId() == that.getOsmId()) {
+				return false;
 			}
 		}
 		return isUniqueGpxFileName(selectedObjects, clickableWay.getGpxFileName() + GPX_FILE_EXT);
 	}
 
-	private boolean isUniqueTravelGpx(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+	private boolean isUniqueTravelGpx(@NonNull List<SelectedMapObject> selectedObjects,
 			@NonNull TravelGpx travelGpx) {
-		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
-			if (entry.getKey() instanceof Pair && entry.getValue() instanceof GPXLayer
-					&& ((Pair<?, ?>) entry.getKey()).first instanceof TravelGpx) {
-				TravelGpx object = (TravelGpx) ((Pair<?, ?>) entry.getKey()).first;
-				if (travelGpx.equals(object)) {
-					return false;
-				}
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			Object object = selectedObject.object();
+			if (object instanceof Pair && selectedObject.provider() instanceof GPXLayer
+					&& ((Pair<?, ?>) object).first instanceof TravelGpx gpx && travelGpx.equals(gpx)) {
+				return false;
 			}
 		}
 		return isUniqueGpxFileName(selectedObjects, travelGpx.getGpxFileName() + GPX_FILE_EXT);
@@ -553,7 +551,7 @@ public class MapSelectionHelper {
 				point.x + searchRadius, point.y + searchRadius);
 		QuadRect rect = new QuadRect(minLatLon.getLongitude(), minLatLon.getLatitude(),
 				maxLatLon.getLongitude(), maxLatLon.getLatitude());
-		return putRouteGpxToSelected(result.getObjectsWithProviders(), mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
+		return putRouteGpxToSelected(result.getAllObjects(), mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
 	}
 
 	private NetworkRouteSelectorFilter createRouteFilter() {
@@ -584,7 +582,7 @@ public class MapSelectionHelper {
 	}
 
 	private boolean putRouteGpxToSelected(
-			@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+			@NonNull List<SelectedMapObject> selectedObjects,
 			@NonNull IContextMenuProvider provider, @NonNull QuadRect rect,
 			@NonNull NetworkRouteSelectorFilter selectorFilter) {
 		int added = 0;
@@ -597,21 +595,19 @@ public class MapSelectionHelper {
 			log.error(e);
 		}
 		for (RouteKey routeKey : routes.keySet()) {
-			if (isUniqueOsmRoute(selectedObjects.keySet(), routeKey)) {
-				selectedObjects.put(new Pair<>(routeKey, rect), provider);
+			if (isUniqueOsmRoute(selectedObjects, routeKey)) {
+				selectedObjects.add(new SelectedMapObject(new Pair<>(routeKey, rect), provider));
 				added++;
 			}
 		}
 		return added > 0;
 	}
 
-	private boolean isUniqueOsmRoute(@NonNull Set<Object> set, @NonNull RouteKey tmpRouteKey) {
-		for (Object selectedObject : set) {
-			if (selectedObject instanceof Pair && ((Pair<?, ?>) selectedObject).first instanceof RouteKey) {
-				RouteKey routeKey = (RouteKey) ((Pair<?, ?>) selectedObject).first;
-				if (routeKey.equals(tmpRouteKey)) {
-					return false;
-				}
+	private boolean isUniqueOsmRoute(@NonNull List<SelectedMapObject> selectedObjects, @NonNull RouteKey tmpKey) {
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			Object object = selectedObject.object();
+			if (object instanceof Pair && ((Pair<?, ?>) object).first instanceof RouteKey key && key.equals(tmpKey)) {
+				return false;
 			}
 		}
 		return true;
@@ -626,7 +622,7 @@ public class MapSelectionHelper {
 				amenity.getY().addAll(object.getY());
 			}
 			amenity.setMapIconName(object.getIconRes());
-			if (isUniqueAmenity(result.getObjectsWithProviders().keySet(), amenity)) {
+			if (isUniqueAmenity(result.getAllObjects(), amenity)) {
 				result.collect(amenity, mapLayers.getPoiMapLayer());
 			}
 			return true;
@@ -634,11 +630,12 @@ public class MapSelectionHelper {
 		return false;
 	}
 
-	private boolean isUniqueAmenity(@NonNull Set<Object> set, @NonNull Amenity amenity) {
-		for (Object o : set) {
-			if (o instanceof Amenity && ((Amenity) o).compareTo(amenity) == 0) {
+	private boolean isUniqueAmenity(@NonNull List<SelectedMapObject> selectedObjects, @NonNull Amenity amenity) {
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			Object object = selectedObject.object();
+			if (object instanceof Amenity && ((Amenity) object).strictEquals(amenity)) {
 				return false;
-			} else if (o instanceof TransportStop && ((TransportStop) o).getName().startsWith(amenity.getName())) {
+			} else if (object instanceof TransportStop stop && stop.getName().startsWith(amenity.getName())) {
 				return false;
 			}
 		}
@@ -667,25 +664,25 @@ public class MapSelectionHelper {
 		return publicTransportTypes;
 	}
 
-	private void processTransportStops(@NonNull Map<Object, IContextMenuProvider> selectedObjects) {
+	private void processTransportStops(@NonNull List<SelectedMapObject> selectedObjects) {
 		List<String> publicTransportTypes = getPublicTransportTypes();
 		if (publicTransportTypes != null) {
 			List<Amenity> transportStopAmenities = new ArrayList<>();
-			for (Object object : selectedObjects.keySet()) {
-				if (object instanceof Amenity) {
-					Amenity amenity = (Amenity) object;
+			for (SelectedMapObject selectedObject : selectedObjects) {
+				Object object = selectedObject.object();
+				if (object instanceof Amenity amenity) {
 					if (!TextUtils.isEmpty(amenity.getSubType()) && publicTransportTypes.contains(amenity.getSubType())) {
 						transportStopAmenities.add(amenity);
 					}
 				}
 			}
-			if (transportStopAmenities.size() > 0) {
+			if (!Algorithms.isEmpty(transportStopAmenities)) {
 				TransportStopsLayer transportStopsLayer = mapLayers.getTransportStopsLayer();
 				for (Amenity amenity : transportStopAmenities) {
 					TransportStop transportStop = TransportStopController.findBestTransportStopForAmenity(app, amenity);
 					if (transportStop != null && transportStopsLayer != null) {
-						selectedObjects.remove(amenity);
-						selectedObjects.put(transportStop, transportStopsLayer);
+						selectedObjects.add(new SelectedMapObject(transportStop, transportStopsLayer));
+						selectedObjects.removeIf(selectedObject -> Algorithms.objectEquals(selectedObject.object(), amenity));
 					}
 				}
 			}

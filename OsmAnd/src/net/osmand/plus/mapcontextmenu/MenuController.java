@@ -65,6 +65,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -227,6 +228,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof ClickableWay) {
 				SelectedGpxPoint point = ((ClickableWay) object).getSelectedGpxPoint();
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, point);
+			}  else if (object instanceof PlaceDetailsObject detailsObject) {
+				menuController = new PlaceDetailsMenuController(mapActivity, pointDescription, detailsObject);
 			} else if (object instanceof Pair) {
 				Pair<?, ?> pair = (Pair<?, ?>) object;
 				if (pair.second instanceof SelectedGpxPoint) {
