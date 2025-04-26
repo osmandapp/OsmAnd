@@ -1995,7 +1995,7 @@
     <string name="routing_attr_allow_motorway_description">Permite usar autopistas.</string>
     <string name="lang_sr_latn">Serbio (latino)</string>
     <string name="lang_zh_hk">Chino (Hong Kong)</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Agua</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Oculta los cuerpos de agua</string>
     <string name="rendering_attr_contourDensity_description">Densidad de la curva de nivel</string>
     <string name="rendering_attr_contourDensity_name">Densidad de la curva de nivel</string>
     <string name="rendering_value_high_name">Alto</string>
