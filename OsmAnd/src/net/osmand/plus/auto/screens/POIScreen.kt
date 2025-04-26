@@ -2,6 +2,7 @@ package net.osmand.plus.auto.screens
 
 import android.text.SpannableString
 import android.text.Spanned
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.car.app.CarContext
 import androidx.car.app.model.Action
 import androidx.car.app.model.ActionStrip
@@ -57,9 +58,9 @@ class POIScreen(
             templateBuilder.setLoading(false)
             templateBuilder.setItemList(itemList)
         }
-        var title = QuickSearchListItem.getName(app, categoryResult);
+        var title = QuickSearchListItem.getName(app, categoryResult)
         if (Algorithms.isEmpty(title)) {
-            title = QuickSearchListItem.getTypeName(app, categoryResult);
+            title = QuickSearchListItem.getTypeName(app, categoryResult)
         }
         return templateBuilder
             .setTitle(title)
@@ -91,7 +92,7 @@ class POIScreen(
             if (resultsCount == 0) {
                 this.itemList = withNoResults(ItemList.Builder()).build()
             } else {
-                var builder = ItemList.Builder();
+                val builder = ItemList.Builder()
                 setupPOI(builder, searchResults)
                 this.itemList = builder.build()
             }
@@ -119,9 +120,9 @@ class POIScreen(
                     Algorithms.extendRectToContainPoint(mapRect, latLon.longitude, latLon.latitude)
                 }
                 val title = point.localeName
-                var groupIcon = QuickSearchListItem.getIcon(app, categoryResult)
+                var groupIcon = QuickSearchListItem.getIcon(app, point)
                 if (groupIcon == null) {
-                    groupIcon = app.getDrawable(R.drawable.mx_special_custom_category)
+                    groupIcon = AppCompatResources.getDrawable(app, R.drawable.mx_special_custom_category)
                 }
                 val icon = CarIcon.Builder(
                     IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(groupIcon))).build()
