@@ -214,8 +214,8 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	protected boolean shouldHide() {
-		return isVerticalWidget() && visibilityHelper.shouldHideVerticalWidgets() ||
-				panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets();
+		return (!(panel == BOTTOM && visibilityHelper.shouldShowBottomWidgets())) && (isVerticalWidget() && visibilityHelper.shouldHideVerticalWidgets() ||
+				panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets());
 	}
 
 	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {

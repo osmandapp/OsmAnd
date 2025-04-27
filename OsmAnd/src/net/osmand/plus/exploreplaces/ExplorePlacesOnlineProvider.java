@@ -121,9 +121,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	@NonNull
 	private List<String> getPreferredLangs() {
 		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		if (Algorithms.isEmpty(preferredLang)) {
-			preferredLang = app.getLanguage();
-		}
 		Set<String> languages = new LinkedHashSet<>();
 		WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
 		if (plugin.hasCustomSettings()) {
@@ -132,8 +129,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 				languages.add(preferredLang);
 			}
 			languages.addAll(langs);
-		} else {
-			languages.add(preferredLang);
 		}
 		return new ArrayList<>(languages);
 	}
