@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -43,17 +42,16 @@ import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
+import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class MapDataMenuController extends MenuController {
 
@@ -142,19 +140,19 @@ public class MapDataMenuController extends MenuController {
 				if (activity != null) {
 					activity.getContextMenu().close();
 
-					Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+					List<SelectedMapObject> selectedObjects = new ArrayList<>();
 					IContextMenuProvider provider = activity.getMapLayers().getDownloadedRegionsLayer();
-					if (otherIndexItems != null && otherIndexItems.size() > 0) {
+					if (!Algorithms.isEmpty(otherIndexItems)) {
 						for (IndexItem item : otherIndexItems) {
-							selectedObjects.put(
-									new DownloadMapObject(mapObject.getDataObject(), mapObject.getWorldRegion(), item, null),
-									provider);
+							selectedObjects.add(new SelectedMapObject(new DownloadMapObject(
+									mapObject.getDataObject(), mapObject.getWorldRegion(),
+									item, null), provider));
 						}
-					} else if (otherLocalItems != null && otherLocalItems.size() > 0) {
+					} else if (!Algorithms.isEmpty(otherLocalItems)) {
 						for (LocalItem info : otherLocalItems) {
-							selectedObjects.put(
-									new DownloadMapObject(mapObject.getDataObject(), mapObject.getWorldRegion(), null, info),
-									provider);
+							selectedObjects.add(new SelectedMapObject(new DownloadMapObject(
+									mapObject.getDataObject(), mapObject.getWorldRegion(),
+									null, info), provider));
 						}
 					}
 					activity.getContextMenu().getMultiSelectionMenu().show(
