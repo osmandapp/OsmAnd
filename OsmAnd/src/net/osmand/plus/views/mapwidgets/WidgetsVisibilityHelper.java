@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -76,8 +77,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowTopCoordinatesWidget() {
-		return !isExplorePLacesMode() &&
-				!mapActivity.shouldHideTopControls()
+		return !mapActivity.shouldHideTopControls()
 				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
 				&& !mapActivity.isTopToolbarActive()
 				&& !isInRouteLineAppearanceMode()
@@ -88,9 +88,13 @@ public class WidgetsVisibilityHelper {
 				&& shouldShowElementOnActiveScreen(TOP_COORDINATES_WIDGET);
 	}
 
+	public boolean shouldShowBottomWidgets() {
+		return isExplorePlacesPresentHidden() && !isContextMenuFragmentVisible();
+	}
+
 	public boolean shouldHideVerticalWidgets() {
 		return isMapRouteInfoMenuVisible()
-				|| isExplorePLacesMode()
+				|| isExplorePlacesMode()
 				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()
 				|| isInRouteLineAppearanceMode()
@@ -320,8 +324,14 @@ public class WidgetsVisibilityHelper {
 		return fragmentsHelper.getGpsFilterFragment() != null;
 	}
 
-	private boolean isExplorePLacesMode() {
-		return fragmentsHelper.getExplorePlacesFragment() != null;
+	private boolean isExplorePlacesMode() {
+		ExplorePlacesFragment fragment = fragmentsHelper.getExplorePlacesFragment();
+		return fragment != null && !fragment.isListHidden();
+	}
+
+	private boolean isExplorePlacesPresentHidden() {
+		ExplorePlacesFragment fragment = fragmentsHelper.getExplorePlacesFragment();
+		return fragment != null && (fragment.isListHidden() || fragment.isHidden());
 	}
 
 	public boolean isInConfigureMapOptionMode() {
@@ -430,7 +440,7 @@ public class WidgetsVisibilityHelper {
 				case TRACK_APPEARANCE_MODE -> helper.isInTrackAppearanceMode();
 				case SELECTING_TILES_ZONE_MODE -> helper.isSelectingTilesZone();
 				case GPS_FILTERING_MODE -> helper.isInGpsFilteringMode();
-				case EXPLORE_PLACES -> helper.isExplorePLacesMode();
+				case EXPLORE_PLACES -> helper.isExplorePlacesMode();
 			};
 		}
 	}
