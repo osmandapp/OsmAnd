@@ -38,7 +38,7 @@
     <string name="poi_filter_car_aid">Servicii auto</string>
     <string name="poi_filter_food_shop">Magazin alimentar</string>
     <string name="poi_filter_for_tourists">Pentru turiști</string>
-    <string name="poi_filter_fuel">Stații carburant</string>
+    <string name="poi_filter_fuel">Combustibil</string>
     <string name="show_warnings_title">Arată alerte…</string>
     <string name="show_warnings_descr">Configurează avertismente de trafic (limite de viteză, opriri forțate, limitatoare de viteză, tuneluri), avertismente privind camerele de viteză și informații despre benzi.</string>
     <string name="use_compass_navigation_descr">Folosește busola când nu se poate determina orientarea în alt mod.</string>
@@ -1938,8 +1938,8 @@
     <string name="altitude_ascent">Urcare</string>
     <string name="average_altitude">Altitudine medie</string>
     <string name="rendering_value_medium_w_name">Medie</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Apă</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Ape</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Ascundeți apa</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Apă</string>
     <string name="search_map_hint">Oraș sau regiune</string>
     <string name="upload_poi">Încărcă punct de interes</string>
     <string name="route_calculation">Se calculează ruta</string>
@@ -5801,7 +5801,7 @@
     <string name="fuel_tank_capacity">Capacitatea rezervorului de combustibil</string>
     <string name="shared_strings_dimensions">Dimensiuni</string>
     <string name="litres">Litri</string>
-    <string name="us_gallons_unit">galon</string>
+    <string name="us_gallons_unit">gal</string>
     <string name="shared_string_interpolation">Interpolare</string>
     <string name="wunderlinq_datagrid">Rețea de date WunderLINQ</string>
     <string name="show_minor_turns">Afișare la intersecțiile minore atunci când se navighează în linie dreaptă</string>
@@ -5810,7 +5810,7 @@
     <string name="selected_delayed_profile">Profil selectat \"%s\\</string>
     <string name="fuel_tank_capacity_description">Introduceți capacitatea rezervorului pentru a urmări cu exactitate nivelurile de combustibil și consumul</string>
     <string name="location_interpolation_percent">Procent de interpolare a locației</string>
-    <string name="us_gallons">Galoane US</string>
+    <string name="us_gallons">Galoane SUA</string>
     <string name="unit_of_volume_description">Unitățile selectate vor fi aplicate tuturor datelor legate de volum din profilul curent.</string>
     <string name="unit_of_volume">Unitate de volum</string>
     <string name="record_obd_data">Înregistrarea măsurătorilor vehiculului</string>
