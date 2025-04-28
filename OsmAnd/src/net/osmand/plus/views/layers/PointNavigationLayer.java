@@ -107,9 +107,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			Object movableObject = contextMenuLayer.getMoveableObject();
 			if (movableObject instanceof TargetPoint targetPoint) {
 				//draw movable object on canvas
-				if (targetPoints.getPointToStart() == targetPoint) {
+				if (Algorithms.objectEquals(targetPoints.getPointToStart(), targetPoint)) {
 					drawStartPoint(canvas, tb, targetPoint);
-				} else if (targetPoints.getPointToNavigate() == targetPoint) {
+				} else if (Algorithms.objectEquals(targetPoints.getPointToNavigate(), targetPoint)) {
 					drawPointToNavigate(canvas, tb, targetPoint);
 				} else if (targetPoints.getIntermediatePoints().contains(targetPoint)) {
 					drawIntermediatePoint(canvas, tb, targetPoint, targetPoints.getIntermediatePoints().indexOf(targetPoint) + 1);

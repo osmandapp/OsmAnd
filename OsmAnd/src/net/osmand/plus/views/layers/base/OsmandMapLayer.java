@@ -503,6 +503,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		if (mapRenderer != null && mapMarkersCollection != null) {
 			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
 			mapMarkersCollection = null;
+			movableObject = null;
 		}
 	}
 
