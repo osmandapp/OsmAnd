@@ -71,6 +71,7 @@ import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -329,13 +330,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			return true;
 		};
 		boolean isEditable = false;
-		if (selectedObj instanceof Amenity || (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null)) {
-			Amenity amenity;
-			if (selectedObj instanceof Amenity) {
-				amenity = (Amenity) selectedObj;
-			} else {
-				amenity = ((TransportStop) selectedObj).getAmenity();
-			}
+		Amenity amenity = null;
+		if (selectedObj instanceof Amenity) {
+			amenity = (Amenity) selectedObj;
+		} else if (selectedObj instanceof TransportStop stop) {
+			amenity = stop.getAmenity();
+		} else if (selectedObj instanceof PlaceDetailsObject detailsObject) {
+			amenity = detailsObject.getSyntheticAmenity();
+		}
+		if (amenity != null) {
 			if (!amenity.getType().isWiki()) {
 				if (settings.isInternetConnectionAvailable() && ObfConstants.isOsmUrlAvailable(amenity)) {
 					isEditable = true;
@@ -578,8 +581,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, Object object) {
-		if (object instanceof Amenity amenity) {
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
+		Amenity amenity = null;
+		if (object instanceof Amenity) {
+			amenity = (Amenity) object;
+		} else if (object instanceof PlaceDetailsObject detailsObject) {
+			amenity = detailsObject.getSyntheticAmenity();
+		}
+		if (amenity != null) {
 			String link = ObfConstants.getOsmUrlForId(amenity);
 			if (!Algorithms.isEmpty(link)) {
 				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
