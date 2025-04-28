@@ -577,7 +577,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
-		return menuControllerClass == AmenityMenuController.class || menuControllerClass == RenderedObjectMenuController.class;
+		return AmenityMenuController.class.isAssignableFrom(menuControllerClass)
+				|| menuControllerClass == RenderedObjectMenuController.class;
 	}
 
 	@Override
