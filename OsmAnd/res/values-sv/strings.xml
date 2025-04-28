@@ -5049,7 +5049,7 @@
     <string name="time_to_navigation_point_widget_settings_desc">Tryck på widgeten för att växla läge.</string>
     <string name="map_3d_mode_description">Tryck i kartan med två fingrar, håll in och dra upp eller ned för att justera kartans lutning.</string>
     <string name="action_cannot_be_undone">Denna åtgärd kan inte ångras.</string>
-    <string name="free_ride">Gratis tur</string>
+    <string name="free_ride">Friåkning</string>
     <string name="shared_storage_second_step">Tryck \"Använd den här mappen\".</string>
     <string name="auto_25_chars_route_roundabout_kl">Ta %1$d avfarten och håll till vänster</string>
     <string name="av_notes_photo_widget_desc">Med knapptryck på widgeten kan du ta ett foto.</string>

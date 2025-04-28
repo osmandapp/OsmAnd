@@ -56,6 +56,7 @@ import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingPara
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
 import net.osmand.plus.views.layers.MapSelectionResult;
+import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -302,7 +303,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		for (OsmandMapLayer layer : mapView.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider) {
 				provider.collectObjectsFromPoint(result, true, true);
-				for (Object object : result.getObjects()) {
+				for (SelectedMapObject selectedMapObject : result.getAllObjects()) {
+					Object object = selectedMapObject.object();
 					LatLon latLon = provider.getObjectLocation(object);
 					PointDescription name = null;
 					if (object instanceof FavouritePoint) {

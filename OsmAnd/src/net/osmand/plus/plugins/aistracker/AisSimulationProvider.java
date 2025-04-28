@@ -18,6 +18,8 @@ public class AisSimulationProvider {
 
 	private final AisTrackerPlugin plugin;
 
+	static private final int DELAY_TIME_MS = 100;
+
 	public AisSimulationProvider(@NonNull AisTrackerPlugin plugin) {
 		this.plugin = plugin;
 	}
@@ -25,7 +27,7 @@ public class AisSimulationProvider {
 	public void startSimulation(@NonNull File file) {
 		AisTrackerLayer layer = plugin.getLayer();
 		if (layer != null) {
-			AisMessageListener listener = new AisMessageListener(layer, file);
+			AisMessageSimulationListener listener = new AisMessageSimulationListener(layer, file, DELAY_TIME_MS);
 			layer.setListener(listener);
 		}
 	}

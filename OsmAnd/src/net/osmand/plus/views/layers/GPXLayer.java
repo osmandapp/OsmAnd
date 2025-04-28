@@ -74,6 +74,7 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
+import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
@@ -1656,7 +1657,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (tileBox.getZoom() >= START_ZOOM) {
 			MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 			collectTracksFromPoint(result, false);
-			return !Algorithms.isEmpty(result.getObjectsWithProviders());
+			return !result.isEmpty();
 		}
 		return false;
 	}
@@ -1695,18 +1696,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 			collectTracksFromPoint(result, true);
 
-			List<Object> trackPoints = result.getObjects();
-			if (!Algorithms.isEmpty(trackPoints)) {
+			List<SelectedMapObject> objects = result.getAllObjects();
+			if (!Algorithms.isEmpty(objects)) {
 				LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox, point);
-				if (trackPoints.size() == 1) {
-					SelectedGpxPoint gpxPoint = (SelectedGpxPoint) trackPoints.get(0);
+				if (objects.size() == 1) {
+					SelectedGpxPoint gpxPoint = (SelectedGpxPoint) objects.get(0).object();
 					contextMenuLayer.showContextMenu(latLon, getObjectName(gpxPoint), gpxPoint, null);
-				} else if (trackPoints.size() > 1) {
-					Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
-					for (Object object : trackPoints) {
-						selectedObjects.put(object, this);
-					}
-					contextMenuLayer.showContextMenuForSelectedObjects(latLon, selectedObjects);
+				} else if (objects.size() > 1) {
+					contextMenuLayer.showContextMenuForSelectedObjects(latLon, objects);
 				}
 				return true;
 			}

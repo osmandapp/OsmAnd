@@ -9,7 +9,6 @@ import static net.osmand.plus.views.OsmandMapTileView.SKY_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.SKY_NIGHTMODE_COLOR;
 
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +31,7 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -702,14 +702,17 @@ public class MapRendererContext {
 		}
 	}
 
-	public List<RenderedObject> retrievePolygonsAroundMapObject(PointI point, Object mapObject, ZoomLevel zoomLevel) {
+	public List<RenderedObject> retrievePolygonsAroundMapObject(PointI point, Object object, ZoomLevel zoomLevel) {
 		List<RenderedObject> rendPolygons = retrievePolygonsAroundPoint(point, zoomLevel, false);
 		List<LatLon> objectPolygon = null;
-		if (mapObject instanceof Amenity am) {
-			objectPolygon = am.getPolygon();
+		if (object instanceof Amenity amenity) {
+			objectPolygon = amenity.getPolygon();
 		}
-		if (mapObject instanceof RenderedObject ro) {
-			objectPolygon = ro.getPolygon();
+		if (object instanceof RenderedObject renderedObject) {
+			objectPolygon = renderedObject.getPolygon();
+		}
+		if (object instanceof PlaceDetailsObject detailsObject) {
+			objectPolygon = detailsObject.getSyntheticAmenity().getPolygon();
 		}
 		List<RenderedObject> res = new ArrayList<>();
 		if (objectPolygon != null) {

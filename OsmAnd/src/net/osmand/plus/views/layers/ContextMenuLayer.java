@@ -28,13 +28,7 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.MapMarker;
-import net.osmand.core.jni.MapMarkerBuilder;
-import net.osmand.core.jni.MapMarkersCollection;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.VectorLineBuilder;
-import net.osmand.core.jni.VectorLinesCollection;
+import net.osmand.core.jni.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
@@ -57,6 +51,7 @@ import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -67,7 +62,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.Map;
+import java.util.List;
 import java.util.Map.Entry;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -112,6 +107,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public ContextMenuLayer(@NonNull Context context) {
 		super(context);
 		selectionHelper = new MapSelectionHelper(context);
+	}
+
+	@NonNull
+	public MapSelectionHelper getSelectionHelper() {
+		return selectionHelper;
 	}
 
 	@Override
@@ -210,14 +210,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (selectedObject != null) {
 			TIntArrayList x = null;
 			TIntArrayList y = null;
-			if (selectedObject instanceof Amenity) {
-				Amenity a = (Amenity) selectedObject;
-				x = a.getX();
-				y = a.getY();
-			} else if (selectedObject instanceof RenderedObject) {
-				RenderedObject r = (RenderedObject) selectedObject;
-				x = r.getX();
-				y = r.getY();
+			if (selectedObject instanceof Amenity amenity) {
+				x = amenity.getX();
+				y = amenity.getY();
+			} else if (selectedObject instanceof RenderedObject object) {
+				x = object.getX();
+				y = object.getY();
+			}  else if (selectedObject instanceof PlaceDetailsObject object) {
+				Amenity amenity = object.getSyntheticAmenity();
+				x = amenity.getX();
+				y = amenity.getY();
 			} else if (selectedObject instanceof AidlMapPointWrapper) {
 				markerCustomized = true;
 			}
@@ -720,19 +722,20 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		MapSelectionResult result = selectionHelper.collectObjectsFromMap(point, tileBox, showUnknownLocation);
 		LatLon pointLatLon = result.getPointLatLon();
-		Map<Object, IContextMenuProvider> selectedObjects = result.getObjectsWithProviders();
+		List<SelectedMapObject> selectedObjects = result.getProcessedObjects();
 
-		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
-			IContextMenuProvider provider = entry.getValue();
-			if (provider != null && provider.runExclusiveAction(entry.getKey(), showUnknownLocation)) {
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			IContextMenuProvider provider = selectedObject.provider();
+			if (provider != null && provider.runExclusiveAction(selectedObject.object(), showUnknownLocation)) {
 				return true;
 			}
 		}
 		if (selectedObjects.size() == 1) {
-			Object selectedObj = selectedObjects.keySet().iterator().next();
+			SelectedMapObject selectedObject = selectedObjects.get(0);
+			Object selectedObj = selectedObject.object();
 			LatLon latLon = result.getObjectLatLon();
 			PointDescription pointDescription = null;
-			IContextMenuProvider provider = selectedObjects.get(selectedObj);
+			IContextMenuProvider provider = selectedObject.provider();
 			if (provider != null) {
 				if (latLon == null) {
 					latLon = provider.getObjectLocation(selectedObj);
@@ -913,7 +916,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	protected void showContextMenuForSelectedObjects(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects) {
+	protected void showContextMenuForSelectedObjects(LatLon latLon, List<SelectedMapObject> selectedObjects) {
 		hideVisibleMenues();
 		selectedObjectContextMenuProvider = null;
 		if (multiSelectionMenu != null) {

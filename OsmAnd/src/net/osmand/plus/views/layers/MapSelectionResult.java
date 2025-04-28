@@ -10,27 +10,29 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MapSelectionResult {
 
 	private final PointF point;
 	private final LatLon pointLatLon;
 	private final RotatedTileBox tileBox;
-	private final Map<Object, IContextMenuProvider> selectedObjects = new LinkedHashMap<>();
+	private final IContextMenuProvider poiProvider;
+
+	private final List<SelectedMapObject> allObjects = new ArrayList<>();
+	private final List<SelectedMapObject> processedObjects = new ArrayList<>();
 
 	protected LatLon objectLatLon;
 
-	public MapSelectionResult(@NonNull OsmandApplication app,
-			@NonNull RotatedTileBox tileBox, @NonNull PointF point) {
+	public MapSelectionResult(@NonNull OsmandApplication app, @NonNull RotatedTileBox tileBox,
+			@NonNull PointF point) {
 		this.point = point;
 		this.tileBox = tileBox;
-		this.pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(
-				app.getOsmandMap().getMapView().getMapRenderer(), tileBox, point);
+		this.poiProvider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
+		this.pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(app.getOsmandMap().getMapView().getMapRenderer(), tileBox, point);
 	}
 
 	@NonNull
@@ -49,13 +51,13 @@ public class MapSelectionResult {
 	}
 
 	@NonNull
-	public List<Object> getObjects() {
-		return new ArrayList<>(selectedObjects.keySet());
+	public List<SelectedMapObject> getAllObjects() {
+		return allObjects;
 	}
 
 	@NonNull
-	public Map<Object, IContextMenuProvider> getObjectsWithProviders() {
-		return selectedObjects;
+	public List<SelectedMapObject> getProcessedObjects() {
+		return processedObjects;
 	}
 
 	@Nullable
@@ -68,6 +70,48 @@ public class MapSelectionResult {
 	}
 
 	public void collect(@NonNull Object object, @Nullable IContextMenuProvider provider) {
-		selectedObjects.put(object, provider);
+		allObjects.add(new SelectedMapObject(object, provider));
+	}
+
+	public void groupByOsmIdAndWikidataId() {
+		List<PlaceDetailsObject> detailsObjects = new ArrayList<>();
+		for (SelectedMapObject selectedObject : allObjects) {
+			Object object = selectedObject.object();
+			if (PlaceDetailsObject.shouldSkip(object)) {
+				processedObjects.add(selectedObject);
+				continue;
+			}
+			List<PlaceDetailsObject> overlapped = new ArrayList<>();
+			for (PlaceDetailsObject detailsObject : detailsObjects) {
+				if (detailsObject.overlapsWith(object)) {
+					overlapped.add(detailsObject);
+				}
+			}
+			PlaceDetailsObject detailsObject;
+			if (Algorithms.isEmpty(overlapped)) {
+				detailsObject = new PlaceDetailsObject();
+			} else {
+				detailsObject = overlapped.get(0);
+				for (int i = 1; i < overlapped.size(); i++) {
+					detailsObject.merge(overlapped.get(i));
+				}
+				detailsObjects.removeAll(overlapped);
+			}
+			detailsObject.addObject(object, selectedObject.provider());
+			detailsObjects.add(detailsObject);
+		}
+		for (PlaceDetailsObject object : detailsObjects) {
+			object.combineData();
+			processedObjects.add(new SelectedMapObject(object, poiProvider));
+		}
+	}
+
+	public boolean isEmpty() {
+		return allObjects.isEmpty();
+	}
+
+	public record SelectedMapObject(@NonNull Object object,
+	                                @Nullable IContextMenuProvider provider) {
+
 	}
 }

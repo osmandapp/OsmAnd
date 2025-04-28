@@ -998,31 +998,43 @@ public class AndroidUtils {
 		return isLayoutRtl(ctx) ? R.drawable.ic_arrow_forward : R.drawable.ic_arrow_back;
 	}
 
+	@NonNull
 	public static Drawable getDrawableForDirection(@NonNull Context ctx, @NonNull Drawable drawable) {
 		return isLayoutRtl(ctx) ? getMirroredDrawable(drawable) : drawable;
 	}
 
+	@NonNull
 	public static Drawable getMirroredDrawable(@NonNull Drawable drawable) {
 		drawable.setAutoMirrored(true);
 		return drawable;
 	}
 
+	@NonNull
 	public static Bitmap drawableToBitmap(Drawable drawable) {
 		return drawableToBitmap(drawable, false);
 	}
 
-	public static Bitmap drawableToBitmap(Drawable drawable, boolean noOptimization) {
-		if (drawable instanceof BitmapDrawable && !noOptimization) {
-			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-			if (bitmapDrawable.getBitmap() != null) {
-				return bitmapDrawable.getBitmap();
-			}
+	@NonNull
+	public static Bitmap drawableToBitmap(@NonNull Drawable drawable, boolean noOptimization) {
+		int width = drawable.getIntrinsicWidth() <= 0 ? 1 : drawable.getIntrinsicWidth();
+		int height = drawable.getIntrinsicHeight() <= 0 ? 1 : drawable.getIntrinsicHeight();
+		return drawableToBitmap(drawable, width, height, noOptimization);
+	}
+
+	@NonNull
+	public static Bitmap drawableToBitmap(@NonNull Drawable drawable, float scale, boolean noOptimization) {
+		int width = (int) (drawable.getIntrinsicWidth() * scale);
+		int height = (int) (drawable.getIntrinsicHeight() * scale);
+		return drawableToBitmap(drawable, width, height, noOptimization);
+	}
+
+	@NonNull
+	public static Bitmap drawableToBitmap(@NonNull Drawable drawable, int width, int height,
+			boolean noOptimization) {
+		if (!noOptimization && drawable instanceof BitmapDrawable bitmap && bitmap.getBitmap() != null) {
+			return bitmap.getBitmap();
 		}
-
-		Bitmap bitmap = drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0
-				? Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
-				: Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-
+		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
 		drawable.draw(canvas);
