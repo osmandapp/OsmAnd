@@ -453,10 +453,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 		Object movableObject = contextMenuLayer.getMoveableObject();
-		if (movableObject instanceof MapMarker) {
-			MapMarker movableMarker = (MapMarker) movableObject;
+		if (movableObject instanceof MapMarker movableMarker) {
 			setMovableObject(movableMarker.getLatitude(), movableMarker.getLongitude());
-			drawMovableMarker(canvas, tileBox, (MapMarker) movableObject);
+			drawMovableMarker(canvas, tileBox, movableMarker);
 		}
 		if (this.movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
 			cancelMovableObject();
