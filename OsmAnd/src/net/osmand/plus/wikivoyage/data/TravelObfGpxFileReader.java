@@ -343,7 +343,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             currentAmenities.clear();
 
-            if (!isPoiSectionIntersects(repo, pointRequest)) {
+            if (!repo.isPoiSectionIntersects(pointRequest)) {
                 continue;
             }
 
@@ -405,17 +405,6 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             if (!repo.getReaderPoiIndexes().isEmpty() && !Algorithms.objectEquals(
                     repo.getReaderPoiIndexes().get(0).getName(), that.getAmenityRegionName())) {
                 return true; // skip inappropriate RegionName
-            }
-        }
-        return false;
-    }
-
-    private boolean isPoiSectionIntersects(AmenityIndexRepository repo,
-                                           BinaryMapIndexReader.SearchRequest<Amenity> pointRequest) {
-        for (BinaryMapPoiReaderAdapter.PoiRegion poiIndex : repo.getReaderPoiIndexes()) {
-            if (pointRequest.intersects(
-                    poiIndex.getLeft31(), poiIndex.getTop31(), poiIndex.getRight31(), poiIndex.getBottom31())) {
-                return true;
             }
         }
         return false;

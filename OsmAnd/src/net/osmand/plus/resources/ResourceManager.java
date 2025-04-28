@@ -24,12 +24,16 @@ import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
@@ -868,10 +872,9 @@ public class ResourceManager {
 	@NonNull
 	public List<String> searchPoiSubTypesByPrefix(@NonNull String prefix) {
 		Set<String> poiSubTypes = new HashSet<>();
-		for (AmenityIndexRepository index : getAmenityRepositories()) {
-			if (index instanceof AmenityIndexRepositoryBinary) {
-				AmenityIndexRepositoryBinary repository = (AmenityIndexRepositoryBinary) index;
-				List<PoiSubType> subTypes = repository.searchPoiSubTypesByPrefix(prefix);
+		for (AmenityIndexRepository repository : getAmenityRepositories()) {
+			if (repository instanceof AmenityIndexRepositoryBinary binaryRepository) {
+				List<PoiSubType> subTypes = binaryRepository.searchPoiSubTypesByPrefix(prefix);
 				for (PoiSubType subType : subTypes) {
 					poiSubTypes.add(subType.name);
 				}
@@ -940,8 +943,8 @@ public class ResourceManager {
 
 	private List<Amenity> searchRouteByName(String multipleSearch, CollatorStringMatcher.StringMatcherMode mode, ResultMatcher<Amenity> matcher) {
 		List<Amenity> result = new ArrayList<>();
-		BinaryMapIndexReader.SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
-				0, 0, multipleSearch,0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+				0, 0, multipleSearch, 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher
 		);
 		req.setMatcherMode(mode);
 		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
@@ -1051,6 +1054,59 @@ public class ResourceManager {
 
 	public AmenityIndexRepositoryBinary getAmenityRepositoryByFileName(String filename) {
 		return (AmenityIndexRepositoryBinary) amenityRepositories.get(filename);
+	}
+
+	@NonNull
+	public List<BinaryMapDataObject> searchBinaryMapDataForAmenity(@NonNull Amenity amenity) {
+		long osmId = ObfConstants.getOsmObjectId(amenity);
+		ResultMatcher<BinaryMapDataObject> matcher = new ResultMatcher<>() {
+			@Override
+			public boolean publish(BinaryMapDataObject object) {
+				return osmId == ObfConstants.getOsmObjectId(object);
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		return searchBinaryMapDataObjects(amenity.getLocation(), matcher);
+	}
+
+	@NonNull
+	public List<BinaryMapDataObject> searchBinaryMapDataObjects(@NonNull LatLon latLon,
+			@Nullable ResultMatcher<BinaryMapDataObject> matcher) {
+		List<BinaryMapDataObject> list = new ArrayList<>();
+
+		int y = MapUtils.get31TileNumberY(latLon.getLatitude());
+		int x = MapUtils.get31TileNumberX(latLon.getLongitude());
+
+		SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader.buildSearchRequest(x,
+				x + 1, y, y + 1, 15, null, new ResultMatcher<>() {
+					@Override
+					public boolean publish(BinaryMapDataObject object) {
+						if (matcher == null || matcher.publish(object)) {
+							list.add(object);
+							return true;
+						}
+						return false;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return matcher != null && matcher.isCancelled();
+					}
+				});
+
+		for (AmenityIndexRepository repository : getAmenityRepositories(false)) {
+			if (matcher != null && matcher.isCancelled()) {
+				break;
+			}
+			if (repository.isPoiSectionIntersects(request)) {
+				repository.searchMapIndex(request);
+			}
+		}
+		return list;
 	}
 
 	////////////////////////////////////////////// Working with address ///////////////////////////////////////////
