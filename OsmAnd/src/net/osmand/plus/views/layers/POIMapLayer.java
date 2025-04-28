@@ -975,10 +975,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private Amenity getSelectedTopPlace(@NonNull PlaceDetailsObject detailsObject) {
 		if (!Algorithms.isEmpty(topPlaces)) {
 			for (SelectedMapObject selectedObject : detailsObject.getSelectedObjects()) {
-				if (selectedObject.object() instanceof MapObject mapObject) {
-					Amenity amenity = topPlaces.get(mapObject.getId());
-					if (amenity != null) {
-						return amenity;
+				if (selectedObject.object() instanceof Amenity amenity) {
+					Amenity topPlace = topPlaces.get(amenity.getId());
+					if (topPlace != null) {
+						return topPlace;
 					}
 				}
 			}
@@ -1009,10 +1009,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public boolean showMenuAction(@Nullable Object object) {
-		OsmandApplication app = view.getApplication();
+		Amenity amenity = getAmenity(object);
 		MapActivity activity = view.getMapActivity();
-		if (activity != null && object instanceof Amenity amenity
-				&& amenity.getType().getKeyName().equals(ROUTES)) {
+		if (activity != null && amenity != null && amenity.getType().getKeyName().equals(ROUTES)) {
 			String subType = amenity.getSubType();
 			TravelHelper travelHelper = app.getTravelHelper();
 			if (subType.equals(ROUTE_ARTICLE)) {

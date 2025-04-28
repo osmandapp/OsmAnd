@@ -317,10 +317,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			} else if (resId == R.string.context_menu_item_modify_note) {
 				modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 			} else if (resId == R.string.poi_context_menu_modify) {
-				if (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null) {
-					EditPoiDialogFragment.showEditInstance(mapActivity, ((TransportStop) selectedObj).getAmenity());
-				} else if (selectedObj instanceof MapObject) {
-					EditPoiDialogFragment.showEditInstance(mapActivity, (MapObject) selectedObj);
+				Amenity amenity = getAmenity(selectedObj);
+				if (amenity != null) {
+					EditPoiDialogFragment.showEditInstance(mapActivity, amenity);
 				}
 			} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 				Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();
@@ -330,14 +329,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			return true;
 		};
 		boolean isEditable = false;
-		Amenity amenity = null;
-		if (selectedObj instanceof Amenity) {
-			amenity = (Amenity) selectedObj;
-		} else if (selectedObj instanceof TransportStop stop) {
-			amenity = stop.getAmenity();
-		} else if (selectedObj instanceof PlaceDetailsObject detailsObject) {
-			amenity = detailsObject.getSyntheticAmenity();
-		}
+		Amenity amenity = getAmenity(selectedObj);
 		if (amenity != null) {
 			if (!amenity.getType().isWiki()) {
 				if (settings.isInternetConnectionAvailable() && ObfConstants.isOsmUrlAvailable(amenity)) {
@@ -382,6 +374,18 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setOrder(OPEN_OSM_NOTE_ITEM_ORDER)
 					.setListener(listener));
 		}
+	}
+
+	@Nullable
+	private Amenity getAmenity(@NonNull Object selectedObj) {
+		if (selectedObj instanceof Amenity amenity) {
+			return amenity;
+		} else if (selectedObj instanceof TransportStop stop) {
+			return stop.getAmenity();
+		} else if (selectedObj instanceof PlaceDetailsObject detailsObject) {
+			return detailsObject.getSyntheticAmenity();
+		}
+		return null;
 	}
 
 	public void openOsmNote(@NonNull MapActivity mapActivity, double latitude, double longitude,
