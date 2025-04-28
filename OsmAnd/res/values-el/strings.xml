@@ -1060,7 +1060,7 @@
     <string name="gpx_selection_point">Σημείο %1$s</string>
     <string name="gpx_selection_route_points">%1$s
 \nΣημεία διαδρομής %2$s</string>
-    <string name="gpx_selection_points">%1$s\nΣημεία</string>
+    <string name="gpx_selection_points">%1$s \nΣημεία</string>
     <string name="osmo_edit_color">Χρώμα εμφάνισης</string>
     <string name="int_days">ημέρες</string>
     <string name="osmo_connect_menu">Σύνδεση</string>
@@ -1861,8 +1861,8 @@
     <string name="rendering_value_high_name">Υψηλή</string>
     <string name="rendering_value_medium_w_name">Μέση</string>
     <string name="rendering_value_low_name">Χαμηλή</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Νερό</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Απόκρυψη νερού</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Απόκρυψη νερού</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Νερό</string>
     <string name="routing_attr_allow_motorway_name">Να χρησιμοποιήσεις τους αυτοκινητόδρομους</string>
     <string name="routing_attr_allow_motorway_description">Να επιτρέψεις τους αυτοκινητόδρομους.</string>
     <string name="upload_osm_note_description">Ανεβάσετε την OSM σημείωσή σας ανώνυμα ή χρησιμοποιήσετε την κατατομή (προφίλ) σας στο OpenStreetMap.org.</string>
@@ -4211,7 +4211,7 @@
     <string name="quick_action_map_overlay">Επικάλυψη</string>
     <string name="show_borders_of_downloaded_maps">Εμφάνιση συνόρων από τους κατεβασμένους χάρτες</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Χρωματίζονται οι διαδρομές ανάλογα με τον τύπο του δικτύου κόμβων (διεθνές, περιφερειακό, τοπικό).</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Απόκρυψη στρατοπέδων</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Στρατιωτικές περιοχές</string>
     <string name="rendering_attr_showRunningRoutes_description">Εμφάνιση διαδρομών τρεξίματος</string>
     <string name="show_map_symbols">Εμφάνιση συμβόλων χάρτη</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Απόκρυψη στρατιωτικών περιοχών</string>
