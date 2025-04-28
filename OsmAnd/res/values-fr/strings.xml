@@ -5586,7 +5586,7 @@
     <string name="dynamic_icon_type_summary">L’icône change en fonction de l\'état de l\'action.</string>
     <string name="record_obd_data">Enregistrer les données du véhicule</string>
     <string name="fuel_tank_capacity_description">Saisissez la capacité du réservoir pour suivre avec précision le niveau de carburant et la consommation</string>
-    <string name="fuel_tank_capacity">Capacité du réservoir d\'essence</string>
+    <string name="fuel_tank_capacity">Capacité du réservoir de carburant</string>
     <string name="shared_strings_dimensions">Dimensions</string>
     <string name="litres">Litres</string>
     <string name="us_gallons_unit">gal</string>
