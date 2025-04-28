@@ -150,8 +150,12 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
 		bottomSheetBehavior.isHideable = true
 		bottomSheetBehavior.isDraggable = AndroidUiHelper.isOrientationPortrait(view.context)
-
+		updateMapControls()
 		return view
+	}
+
+	fun isListHidden(): Boolean {
+		return view == null || bottomSheetBehavior.state == STATE_HIDDEN
 	}
 
 	private fun setupRecyclerView(view: View) {
@@ -179,8 +183,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			if (myLocationBtn != null) {
 				layer.addCustomizedDefaultMapButton(myLocationBtn)
 			}
-			AndroidUiHelper.updateVisibility(zoomButtonsView, true)
-			activity.mapLayers.mapControlsLayer.addCustomMapButton(view.findViewById(R.id.map_compass_button))
 		}
 	}
 
@@ -218,11 +220,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	fun updateMapControls() {
 		val state = bottomSheetBehavior.state
 		AndroidUiHelper.updateVisibility(
-			showListContainer, state == STATE_HIDDEN || state == STATE_COLLAPSED
+			showListContainer, state == STATE_COLLAPSED
 		)
 		val params = zoomButtonsView?.layoutParams as ViewGroup.MarginLayoutParams
 		params.bottomMargin =
-			if (state == STATE_COLLAPSED) resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height) else 0
+			if (state == STATE_COLLAPSED) bottomSheetBehavior.peekHeight else 0
 		zoomButtonsView?.layoutParams = params
 		zoomButtonsView?.requestLayout()
 	}
