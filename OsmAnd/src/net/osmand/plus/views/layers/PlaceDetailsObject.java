@@ -114,6 +114,10 @@ public class PlaceDetailsObject {
 		if (syntheticAmenity.getMapIconName() == null && mapIconName != null) {
 			syntheticAmenity.setMapIconName(mapIconName);
 		}
+		String regionName = amenity.getRegionName();
+		if (syntheticAmenity.getRegionName() == null && regionName != null) {
+			syntheticAmenity.setRegionName(regionName);
+		}
 		Map<Integer, List<TagValuePair>> groups = amenity.getTagGroups();
 		if (syntheticAmenity.getTagGroups() == null && groups != null) {
 			syntheticAmenity.setTagGroups(new HashMap<>(groups));
