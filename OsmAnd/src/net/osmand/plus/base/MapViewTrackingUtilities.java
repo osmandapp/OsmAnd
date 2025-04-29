@@ -235,19 +235,19 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public double correctAzimuthForElevationAndOffset(float azimuthDeg, float elevationDeg,
-		double scaleX, float scaleY) {
+													  float scaleX, float scaleY) {
 		if (elevationDeg >= 90.0) {
 			return azimuthDeg;
 		}
 
-		double bAzimuthRad = Math.toRadians(azimuthDeg);
-		double elevRad = Math.toRadians(elevationDeg);
+		float bAzimuthRad = (float)Math.toRadians(azimuthDeg);
+		float elevRad = (float)Math.toRadians(elevationDeg);
 
-		double dirX = scaleX - 0.5;
-		double dirY = scaleY - 0.5;
+		float dirX = scaleX - 0.5f;
+		float dirY = scaleY - 0.5f;
 
-		double angleOffset = Math.atan( Math.sin(elevRad) * (dirX / dirY) );
-		double cameraAzimuthRad = bAzimuthRad - angleOffset + (Math.abs(angleOffset) * dirX);
+		float angleOffset = (float)Math.atan( Math.sin(elevRad) * (dirX / dirY) );
+		float cameraAzimuthRad = bAzimuthRad - angleOffset + (Math.abs(angleOffset) * dirX);
 		return Math.toDegrees(cameraAzimuthRad);
 	}
 
