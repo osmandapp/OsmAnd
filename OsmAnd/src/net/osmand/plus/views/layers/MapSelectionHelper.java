@@ -825,7 +825,7 @@ public class MapSelectionHelper {
 
 		Amenity amenity = detailsObject.getSyntheticAmenity();
 		if (amenity.getX().isEmpty() || amenity.getY().isEmpty()) {
-			List<BinaryMapDataObject> dataObjects = app.getResourceManager().searchBinaryMapDataForAmenity(amenity);
+			List<BinaryMapDataObject> dataObjects = app.getResourceManager().searchBinaryMapDataForAmenity(amenity, 1);
 			for (BinaryMapDataObject dataObject : dataObjects) {
 				if (copyCoordinates(amenity, dataObject)) {
 					break;
