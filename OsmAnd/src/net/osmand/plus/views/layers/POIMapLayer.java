@@ -739,23 +739,30 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				if (updated || showTopPlacesPreviewsChanged || topPlacesBox == null || !topPlacesBox.containsTileBox(tileBox)) {
 					List<Amenity> places = data.getResults();
 					updateVisiblePlaces(data.getDisplayedResults(), tileBox.getLatLonBounds());
-                    if (showTopPlacesPreviews && places != null) {
-                        RotatedTileBox extendedBox = tileBox.copy();
-                        int bigIconSize = getBigIconSize();
-                        extendedBox.increasePixelDimensions(bigIconSize * 2, bigIconSize * 2);
-                        topPlacesBox = extendedBox;
+					if (showTopPlacesPreviews && places != null) {
+						RotatedTileBox extendedBox = tileBox.copy();
+						int bigIconSize = getBigIconSize();
+						extendedBox.increasePixelDimensions(bigIconSize * 2, bigIconSize * 2);
+						topPlacesBox = extendedBox;
 						updateTopPlaces(places, tileBox.getLatLonBounds(), zoom);
 						updateTopPlacesCollection();
-                    } else {
-                        clearMapMarkersCollections();
+					} else {
+						clearMapMarkersCollections();
 						cancelLoadingImages();
-                    }
-                }
-				if (selectedTopPlace != null) {
-					MapActivity mapActivity = getMapActivity();
-					MapContextMenu contextMenu = mapActivity != null ? mapActivity.getContextMenu() : null;
-					if (contextMenu != null && (!contextMenu.isVisible()
-							|| contextMenu.getObject() != selectedTopPlace.first)) {
+					}
+				}
+				MapActivity mapActivity = getMapActivity();
+				MapContextMenu contextMenu = mapActivity != null ? mapActivity.getContextMenu() : null;
+				if (contextMenu != null) {
+					if (selectedTopPlace == null && contextMenu.isVisible()) {
+						Object object = contextMenu.getObject();
+						if (object instanceof PlaceDetailsObject detailsObject) {
+							Amenity amenity = getSelectedTopPlace(detailsObject);
+							if (amenity != null) {
+								updateSelectedTopPlace(Pair.create(detailsObject, amenity));
+							}
+						}
+					} else if (!contextMenu.isVisible() || contextMenu.getObject() != selectedTopPlace.first) {
 						updateSelectedTopPlace(null);
 					}
 				}
@@ -958,17 +965,20 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Override
-	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
+	public boolean runExclusiveAction(@Nullable Object object, boolean unknownLocation) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && o instanceof PlaceDetailsObject object) {
-			Amenity amenity = getSelectedTopPlace(object);
+		if (object instanceof Amenity amenity) {
+			object = MapSelectionHelper.fetchOtherData(app, amenity);
+		}
+		if (mapActivity != null && object instanceof PlaceDetailsObject detailsObject) {
+			Amenity amenity = getSelectedTopPlace(detailsObject);
 			if (amenity != null) {
 				hideExplorePlacesFragment(mapActivity);
-				showTopPlaceContextMenu(mapActivity, object, amenity);
+				showTopPlaceContextMenu(mapActivity, detailsObject, amenity);
 				return true;
 			}
 		}
-		return IContextMenuProvider.super.runExclusiveAction(o, unknownLocation);
+		return IContextMenuProvider.super.runExclusiveAction(object, unknownLocation);
 	}
 
 	@Nullable

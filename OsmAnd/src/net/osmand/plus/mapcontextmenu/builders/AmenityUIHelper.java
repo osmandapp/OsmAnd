@@ -2,15 +2,8 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
-import static net.osmand.data.Amenity.ALT_NAME_WITH_LANG_PREFIX;
-import static net.osmand.data.Amenity.COLLAPSABLE_PREFIX;
-import static net.osmand.data.Amenity.CONTENT;
-import static net.osmand.data.Amenity.NAME;
-import static net.osmand.data.Amenity.OPENING_HOURS;
-import static net.osmand.data.Amenity.SHORT_DESCRIPTION;
-import static net.osmand.data.Amenity.SUBTYPE;
-import static net.osmand.data.Amenity.TYPE;
-import static net.osmand.data.Amenity.WIKIDATA;
+import static net.osmand.data.Amenity.*;
+import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
@@ -130,10 +123,11 @@ public class AmenityUIHelper extends MenuBuilder {
 			for (Entry<String, Object> entry : filteredInfo.entrySet()) {
 				String key = entry.getKey();
 				Object value = entry.getValue();
-				if(key.contains(WIKIPEDIA) || key.contains(CONTENT) || key.contains(SHORT_DESCRIPTION)) {
+				if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
+						|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
 					continue;
 				}
-				if(key.equals(NAME)) {
+				if (key.equals(NAME)) {
 					continue; // will be added in buildNamesRow
 				}
 				AmenityInfoRow infoRow = null;

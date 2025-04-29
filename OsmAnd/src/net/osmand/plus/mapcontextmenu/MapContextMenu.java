@@ -47,6 +47,7 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
+import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
@@ -333,18 +334,20 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	                    @Nullable PointDescription pointDescription,
 	                    @Nullable Object object,
 	                    boolean update, boolean restorePrevious) {
-
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return false;
 		}
 
 		OsmandApplication app = mapActivity.getMyApplication();
+		object = fetchOtherData(app, object);
 
 		Object thisObject = getObject();
 		if (!update && isVisible()) {
 			if (thisObject == null || !thisObject.equals(object)
-					|| (thisObject instanceof Amenity && !((Amenity) thisObject).strictEquals(object))) {
+					|| (thisObject instanceof Amenity amenity && !amenity.strictEquals(object))
+					|| (thisObject instanceof PlaceDetailsObject detailsObject
+					&& !detailsObject.getSyntheticAmenity().strictEquals(object))) {
 				hide();
 			} else {
 				return false;
@@ -402,6 +405,16 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 
 		return true;
+	}
+
+	@Nullable
+	private Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
+		if (object instanceof Amenity amenity) {
+			return MapSelectionHelper.fetchOtherData(app, amenity);
+		} else if (object instanceof PlaceDetailsObject detailsObject) {
+			return MapSelectionHelper.fetchOtherData(app, detailsObject);
+		}
+		return object;
 	}
 
 	public void show() {

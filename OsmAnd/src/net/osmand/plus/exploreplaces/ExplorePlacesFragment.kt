@@ -13,7 +13,6 @@ import androidx.annotation.ColorRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import net.osmand.CallbackWithObject
@@ -34,7 +33,6 @@ import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
 import net.osmand.plus.search.listitems.QuickSearchListItem
-import net.osmand.plus.search.listitems.QuickSearchWikiItem
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
@@ -42,7 +40,6 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
 import net.osmand.plus.widgets.EmptyStateRecyclerView
 import net.osmand.plus.wikipedia.WikipediaPlugin
-import net.osmand.search.core.SearchCoreFactory
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 import java.util.concurrent.Executors
@@ -230,7 +227,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun updatePoints() {
-		if (app.osmandMap.mapView.isMapInteractionActive || poiUIFilter == null) {
+		if (app.osmandMap.mapView.isMapInteractionActive || poiUIFilter == null || isListHidden()) {
 			return
 		}
 		val visiblePlaces = app.osmandMap.mapLayers.poiMapLayer.visiblePlaces
@@ -329,18 +326,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		}, LIST_UPDATE_PERIOD.toLong())
 	}
 
-	private fun showPointInContextMenu(mapActivity: MapActivity, point: Amenity) {
-		app.settings.setMapLocationToShow(
-			point.location.latitude, point.location.longitude,
-			SearchCoreFactory.PREFERRED_NEARBY_POINT_ZOOM,
-			QuickSearchWikiItem.getPointDescription(app, point), true, point
-		)
-		MapActivity.launchMapActivityMoveToTop(mapActivity)
+	private fun showPointInContextMenu(amenity: Amenity) {
+		app.osmandMap.mapLayers.poiMapLayer.runExclusiveAction(amenity, false)
 	}
 
 	override fun onNearbyItemClicked(amenity: Amenity) {
 		mapActivity?.let {
-			showPointInContextMenu(it, amenity)
+			showPointInContextMenu(amenity)
 			hideList()
 		}
 	}
