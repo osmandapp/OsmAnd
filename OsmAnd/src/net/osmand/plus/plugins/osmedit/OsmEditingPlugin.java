@@ -320,6 +320,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				Amenity amenity = getAmenity(selectedObj);
 				if (amenity != null) {
 					EditPoiDialogFragment.showEditInstance(mapActivity, amenity);
+				} else if (selectedObj instanceof MapObject mapObject) {
+					EditPoiDialogFragment.showEditInstance(mapActivity, mapObject);
 				}
 			} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 				Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();

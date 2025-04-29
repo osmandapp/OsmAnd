@@ -975,10 +975,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private Amenity getSelectedTopPlace(@NonNull PlaceDetailsObject detailsObject) {
 		if (!Algorithms.isEmpty(topPlaces)) {
 			for (SelectedMapObject selectedObject : detailsObject.getSelectedObjects()) {
-				if (selectedObject.object() instanceof Amenity amenity) {
-					Amenity topPlace = topPlaces.get(amenity.getId());
-					if (topPlace != null) {
-						return topPlace;
+				if (selectedObject.object() instanceof MapObject mapObject) {
+					Amenity amenity = topPlaces.get(mapObject.getId());
+					if (amenity != null) {
+						return amenity;
 					}
 				}
 			}
