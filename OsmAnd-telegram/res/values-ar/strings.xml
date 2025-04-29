@@ -12,7 +12,7 @@
     <string name="shared_string_later">لاحقا</string>
     <string name="osmand_service">حالة وضع السكون</string>
     <string name="nm_h">ميل بحري/في الساعة</string>
-    <string name="si_nm_h">أميال بحرية في الساعة (عقدة)</string>
+    <string name="si_nm_h">الأميال البحرية في الساعة (العقدة)</string>
     <string name="si_km_m">كم ، م</string>
     <string name="shared_string_end">نهاية</string>
     <string name="saved_messages">الرسائل المحفوظة</string>
