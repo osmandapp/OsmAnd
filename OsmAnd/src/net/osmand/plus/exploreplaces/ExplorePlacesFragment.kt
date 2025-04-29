@@ -162,6 +162,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
             bottomSheetBehavior.state = STATE_EXPANDED
             bottomSheetBehavior.isHideable = false
             bottomSheetBehavior.isDraggable = false
+			bottomSheetBehavior.peekHeight = 0
             AndroidUiHelper.updateVisibility(showListContainer, false)
             view.translationX = -resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat()
             landscapeFragmentVisible = false;
