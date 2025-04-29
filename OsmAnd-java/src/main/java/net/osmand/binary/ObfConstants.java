@@ -82,6 +82,10 @@ public class ObfConstants {
 		return originalId;
 	}
 
+	public static long getOsmObjectId(BinaryMapDataObject object) {
+		return object.getId() >> BinaryMapDataObject.SHIFT_ID;
+	}
+
 	public static EntityType getOsmEntityType(MapObject object) {
 		if (isOsmUrlAvailable(object)) {
 			Long id = object.getId();
