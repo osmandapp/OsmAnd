@@ -6,6 +6,7 @@ import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
+import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.view.Display;
 
@@ -233,6 +234,23 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
 	}
 
+	public double correctAzimuthForElevationAndOffset(float azimuthDeg, float elevationDeg,
+		double scaleX, float scaleY) {
+		if (elevationDeg >= 90.0) {
+			return azimuthDeg;
+		}
+
+		double bAzimuthRad = Math.toRadians(azimuthDeg);
+		double elevRad = Math.toRadians(elevationDeg);
+
+		double dirX = scaleX - 0.5;
+		double dirY = scaleY - 0.5;
+
+		double angleOffset = Math.atan( Math.sin(elevRad) * (dirX / dirY) );
+		double cameraAzimuthRad = bAzimuthRad - angleOffset + (Math.abs(angleOffset) * dirX);
+		return Math.toDegrees(cameraAzimuthRad);
+	}
+
 	@Override
 	public void updateLocation(Location location) {
 		Location prevLocation = myLocation;
@@ -278,7 +296,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					// special case when bearing equals to zero (we don't change anything)
 					if (location.hasBearing() && location.getBearing() != 0f) {
-						rotation = -location.getBearing();
+						PointF ratio = app.getMapViewTrackingUtilities().getMapDisplayPositionManager().getMapRatio();
+						if (ratio.x != 0.5f) {
+							OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+							rotation = (float) -correctAzimuthForElevationAndOffset(
+									location.getBearing(), mapView.getElevationAngle(), ratio.x, ratio.y);
+						}
+						else {
+							rotation = -location.getBearing();
+						}
 					}
 					if (rotation == null && prevLocation != null && tb != null) {
 						double distDp = (tb.getPixDensity() * MapUtils.getDistance(prevLocation, location)) / tb.getDensity();
