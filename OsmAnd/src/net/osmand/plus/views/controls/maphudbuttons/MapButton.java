@@ -379,6 +379,10 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	protected void drawShadow(@NotNull Canvas canvas) {
+		if (shadowDrawable == null) {
+			return;
+		}
+
 		canvas.save();
 
 		int width = getWidth();
@@ -392,6 +396,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		canvas.clipPath(clipPath, DIFFERENCE);
 		shadowDrawable.setBounds(0, 0, width, height);
 		shadowDrawable.draw(canvas);
+
 		canvas.restore();
 	}
 
