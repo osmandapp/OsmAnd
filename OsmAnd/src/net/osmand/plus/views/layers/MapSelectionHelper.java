@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.android.MapRendererView;
@@ -809,17 +810,40 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	public static PlaceDetailsObject fetchOtherData(@NonNull OsmandApplication app,	@NonNull PlaceDetailsObject object) {
-		LatLon latLon = object.getLocation();
-		List<Amenity> amenities = MapSelectionHelper.findAmenities(app, latLon);
+	public static PlaceDetailsObject fetchOtherData(@NonNull OsmandApplication app,	@NonNull PlaceDetailsObject detailsObject) {
+		LatLon latLon = detailsObject.getLocation();
+		List<Amenity> amenities = findAmenities(app, latLon);
 		IContextMenuProvider provider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 
 		for (Amenity amenity : amenities) {
-			if (object.overlapsWith(amenity)) {
-				object.addObject(amenity, provider);
+			if (!amenity.isClosed() && detailsObject.overlapsWith(amenity)) {
+				detailsObject.addObject(amenity, provider);
 			}
 		}
-		object.combineData();
-		return object;
+		detailsObject.combineData();
+
+		Amenity amenity = detailsObject.getSyntheticAmenity();
+		if (amenity.getX().isEmpty() || amenity.getY().isEmpty()) {
+			List<BinaryMapDataObject> dataObjects = app.getResourceManager().searchBinaryMapDataForAmenity(amenity);
+			for (BinaryMapDataObject dataObject : dataObjects) {
+				if (copyCoordinates(amenity, dataObject)) {
+					break;
+				}
+			}
+		}
+		return detailsObject;
+	}
+
+	private static boolean copyCoordinates(@NonNull Amenity amenity,
+			@NonNull BinaryMapDataObject mapObject) {
+		int pointsLength = mapObject.getPointsLength();
+		for (int i = 0; i < pointsLength; i++) {
+			int x = mapObject.getPoint31XTile(i);
+			int y = mapObject.getPoint31YTile(i);
+
+			amenity.getX().add(x);
+			amenity.getY().add(y);
+		}
+		return pointsLength > 0;
 	}
 }

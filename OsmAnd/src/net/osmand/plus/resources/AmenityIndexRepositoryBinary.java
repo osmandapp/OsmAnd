@@ -10,10 +10,11 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.data.Amenity;
 import net.osmand.map.WorldRegion;
@@ -25,6 +26,7 @@ import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -227,11 +229,11 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 
 	@Override
-	public synchronized void searchMapIndex(SearchRequest<BinaryMapDataObject> sr) {
+	public synchronized void searchMapIndex(@NotNull SearchRequest<BinaryMapDataObject> searchRequest) {
 		BinaryMapIndexReader reader = getOpenReader();
 		if (reader != null) {
 			try {
-				reader.searchMapIndex(sr);
+				reader.searchMapIndex(searchRequest);
 			} catch (IOException e) {
 				log.error(e.getMessage(), e);
 			}
@@ -241,11 +243,11 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 
 	@Override
-	public synchronized void searchPoi(SearchRequest<Amenity> amenitySearchRequest) {
+	public synchronized void searchPoi(@NotNull SearchRequest<Amenity> searchRequest) {
 		BinaryMapIndexReader reader = getOpenReader();
 		if (reader != null) {
 			try {
-				reader.searchPoi(amenitySearchRequest);
+				reader.searchPoi(searchRequest);
 			} catch (IOException e) {
 				log.error(e.getMessage(), e);
             }
@@ -256,7 +258,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@NonNull
 	@Override
-	public synchronized List<Amenity> searchPoiByName(SearchRequest<Amenity> searchRequest) {
+	public synchronized List<Amenity> searchPoiByName(@NotNull SearchRequest<Amenity> searchRequest) {
 		BinaryMapIndexReader reader = getOpenReader();
 		if (reader != null) {
 			try {
@@ -274,6 +276,16 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	public boolean isWorldMap() {
 		String fileName = getFile().getName().toLowerCase();
 		return fileName.startsWith(WorldRegion.WORLD + "_") || fileName.contains("basemap");
+	}
+
+	@Override
+	public boolean isPoiSectionIntersects(@NonNull SearchRequest<?> searchRequest) {
+		for (PoiRegion index : getReaderPoiIndexes()) {
+			if (searchRequest.intersects(index.getLeft31(), index.getTop31(), index.getRight31(), index.getBottom31())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@NonNull
