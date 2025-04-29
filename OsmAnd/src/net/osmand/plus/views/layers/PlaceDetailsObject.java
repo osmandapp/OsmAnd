@@ -94,9 +94,8 @@ public class PlaceDetailsObject {
 	}
 
 	private void processAmenity(@NonNull Amenity amenity, @NonNull Set<String> contentLocales) {
-		Long id = amenity.getId();
-		if (syntheticAmenity.getId() == null && id != null) {
-			syntheticAmenity.setId(id);
+		if (syntheticAmenity.getId() == null && ObfConstants.isOsmUrlAvailable(amenity)) {
+			syntheticAmenity.setId(amenity.getId());
 		}
 		LatLon location = amenity.getLocation();
 		if (syntheticAmenity.getLocation() == null && location != null) {
