@@ -44,6 +44,7 @@ import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
+import net.osmand.plus.views.mapwidgets.TopToolbarView
 import net.osmand.plus.widgets.EmptyStateRecyclerView
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.search.core.SearchCoreFactory
@@ -376,7 +377,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun hideList() {
-		bottomSheetBehavior.state = STATE_HIDDEN
+		if (isPortrait()) {
+			bottomSheetBehavior.state = STATE_HIDDEN
+		} else {
+			hideLandscapeFragment()
+		}
 	}
 
 	override fun locationChanged(p0: Double, p1: Double, p2: Any?) {
@@ -396,29 +401,32 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 				STATE_COLLAPSED, STATE_EXPANDED -> bottomSheetBehavior.state = STATE_HIDDEN
 			}
 		} else {
-			toggleFragmentSlide(
-				requireView(),
-				resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat(), app, 500
-			)
+			toggleFragmentSlide()
 		}
 	}
 
-	private fun toggleFragmentSlide(
-		viewContainer: View,
-		fragmentWidthDp: Float,
-		context: Context,
-		duration: Long
-	) {
-		if (mapActivity == null) {
-			return
+	private fun hideLandscapeFragment() {
+		mapActivity?.let {
+			if (landscapeFragmentVisible) {
+				landscapeFragmentVisible = false
+				slideLandscapeFragment(requireView())
+			}
 		}
-		landscapeFragmentVisible = !landscapeFragmentVisible
+	}
 
-		val density = context.resources.displayMetrics.density
-		val fragmentWidthPx = fragmentWidthDp * density
+	private fun toggleFragmentSlide() {
+		mapActivity?.let {
+			landscapeFragmentVisible = !landscapeFragmentVisible
+			slideLandscapeFragment(requireView())
+		}
+	}
+
+	private fun slideLandscapeFragment(viewContainer: View){
+		val density = app.resources.displayMetrics.density
+		val fragmentWidthPx = resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat() * density
 
 		val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
-		valueAnimator.duration = duration
+		valueAnimator.duration = LANDSCAPE_SLIDE_ANIMATION_TIME
 		valueAnimator.addUpdateListener { animator ->
 			val fraction = animator.animatedValue as Float
 
@@ -430,11 +438,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			viewContainer.translationX = currentTranslationX
 			getToolbar()?.adjustForOverlay(viewContainer)
 		}
-
-		valueAnimator.addListener(object : AnimatorListenerAdapter() {
-			override fun onAnimationEnd(animation: Animator) {
-			}
-		})
 
 		valueAnimator.start()
 	}
@@ -473,6 +476,8 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		private const val LIST_UPDATE_PERIOD = 1000
 		private const val REFRESH_UI_ID = EXPLORE_PLACES_UPDATE + 1
 		private const val POI_UI_FILTER_ID = "poi_ui_filter_id"
+
+		private const val LANDSCAPE_SLIDE_ANIMATION_TIME = 500L
 
 		fun showInstance(manager: FragmentManager, poiUIFilter: PoiUIFilter) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
