@@ -16,9 +16,7 @@
 			android:layout_height="match_parent"
 			android:layout_gravity="bottom"
 			android:background="?attr/activity_background_color"
-			android:orientation="vertical"
-			app:behavior_hideable="false"
-			app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+			android:orientation="vertical">
 
 			<include layout="@layout/card_bottom_divider" />
 

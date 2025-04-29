@@ -62,8 +62,6 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 
 	private boolean nightMode;
 
-	private int savedParamsWidth = 0;
-	private int savedParamsHeight = 0;
 	private int savedInitialWidth = 0;
 	private float savedInitialViewX = 0f;
 	private float savedInitialScreenX = 0f;
@@ -347,10 +345,6 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 				savedInitialWidth = getMeasuredWidth();
 				savedInitialViewX = getX();
 				savedInitialScreenX = toolbarLocationOnScreen[0];
-
-				ViewGroup.LayoutParams params = getLayoutParams();
-				savedParamsWidth = params.width;
-				savedParamsHeight = params.height;
 			}
 		});
 	}
@@ -360,8 +354,8 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 			setX(savedInitialViewX);
 		}
 		ViewGroup.LayoutParams params = getLayoutParams();
-		params.width = savedParamsWidth;
-		params.height = savedParamsHeight;
+		params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+		params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
 		setLayoutParams(params);
 	}
 
