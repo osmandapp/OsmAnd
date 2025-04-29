@@ -5515,13 +5515,13 @@
     <string name="obd_plugin_name">Misure del veicolo</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm_desc">Mostra il tachimetro giri/minuto sopra il sensore OBD</string>
-    <string name="fuel_tank_capacity_description">Inserisci la capacità del serbatoio per monitorare con precisione i livelli di carburante e il consumo</string>
-    <string name="fuel_tank_capacity">Capacità serbatoio</string>
+    <string name="fuel_tank_capacity_description">Inserisci la capacità del tuo serbatoio per monitorare con precisione i livelli e i consumi di carburante</string>
+    <string name="fuel_tank_capacity">Capacità del serbatoio di carburante</string>
     <string name="shared_strings_dimensions">Dimensioni</string>
     <string name="litres">Litri</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galloni imperiali</string>
-    <string name="us_gallons">Galloni americani</string>
+    <string name="us_gallons">Galloni USA</string>
     <string name="obd_how_to_connect">Come connettere:</string>
     <string name="connect_obd_instructions_step">1. Connettere lo scanner alla porta OBD-II del veicolo.\n\n2. Avviare il motore del veicolo\n\n3. Abilitare il Bluetooth sul dispositivo\n\n4. Premere \'%1$s\' e selezionare lo scanner dalla lista.</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>

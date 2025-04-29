@@ -3324,15 +3324,7 @@
     <string name="plan_route_add_new_segment">Adaugă un nou segment</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profilul utilizatorului</string>
-    <string name="release_3_9">• A fost adăugată opțiunea de a exporta și importa toate datele, inclusiv setările, resursele, locurile mele
-\n
-\n • Planificare traseu: grafice pentru segmente de traseu cu traseu și s-a adăugat posibilitatea de a crea și edita mai multe segmente de traseu
-\n
-\n • A fost adăugată metoda de autentificare OAuth pentru OpenStreetMap, a fost îmbunătățită interfața de utilizare a dialogurilor OSM
-\n
-\n • Suportă culori personalizate pentru favorite și puncte de traseu
-\n
-\n</string>
+    <string name="release_3_9">• A fost adăugată opțiunea de a exporta și importa toate datele, inclusiv setările, resursele, locurile mele \n \n • Planificare traseu: grafice pentru segmente de traseu cu traseu și s-a adăugat posibilitatea de a crea și edita mai multe segmente de traseu \n \n • A fost adăugată metoda de autentificare OAuth pentru OpenStreetMap, a fost îmbunătățită interfața de utilizare a dialogurilor OSM \n \n • Suportă culori personalizate pentru favorite și puncte de traseu</string>
     <string name="reverse_all_points">Inversați toate punctele</string>
     <string name="profile_by_default_description">Selectați profilul care va fi utilizat la pornirea aplicației.</string>
     <string name="shared_string_last_used">Ultima utilizare</string>
