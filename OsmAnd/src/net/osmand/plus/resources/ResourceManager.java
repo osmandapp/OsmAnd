@@ -1057,7 +1057,7 @@ public class ResourceManager {
 	}
 
 	@NonNull
-	public List<BinaryMapDataObject> searchBinaryMapDataForAmenity(@NonNull Amenity amenity) {
+	public List<BinaryMapDataObject> searchBinaryMapDataForAmenity(@NonNull Amenity amenity, int limit) {
 		long osmId = ObfConstants.getOsmObjectId(amenity);
 		ResultMatcher<BinaryMapDataObject> matcher = new ResultMatcher<>() {
 			@Override
@@ -1070,12 +1070,12 @@ public class ResourceManager {
 				return false;
 			}
 		};
-		return searchBinaryMapDataObjects(amenity.getLocation(), matcher);
+		return searchBinaryMapDataObjects(amenity.getLocation(), matcher, limit);
 	}
 
 	@NonNull
 	public List<BinaryMapDataObject> searchBinaryMapDataObjects(@NonNull LatLon latLon,
-			@Nullable ResultMatcher<BinaryMapDataObject> matcher) {
+			@Nullable ResultMatcher<BinaryMapDataObject> matcher, int limit) {
 		List<BinaryMapDataObject> list = new ArrayList<>();
 
 		int y = MapUtils.get31TileNumberY(latLon.getLatitude());
@@ -1094,7 +1094,8 @@ public class ResourceManager {
 
 					@Override
 					public boolean isCancelled() {
-						return matcher != null && matcher.isCancelled();
+						return matcher != null && matcher.isCancelled()
+								|| limit != -1 && list.size() == limit;
 					}
 				});
 
