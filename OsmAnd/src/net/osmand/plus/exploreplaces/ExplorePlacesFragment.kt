@@ -1,5 +1,9 @@
 package net.osmand.plus.exploreplaces
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
+import android.content.Context
 import android.os.AsyncTask.Status.RUNNING
 import android.os.Bundle
 import android.os.Handler
@@ -13,7 +17,6 @@ import androidx.annotation.ColorRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import net.osmand.CallbackWithObject
@@ -40,6 +43,7 @@ import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
+import net.osmand.plus.views.mapwidgets.TopToolbarView
 import net.osmand.plus.widgets.EmptyStateRecyclerView
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.search.core.SearchCoreFactory
@@ -72,6 +76,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private var lastHeading = 0f
 	private var showOnMapContainer: View? = null
 	private var zoomButtonsView: View? = null
+	private var landscapeFragmentVisible: Boolean = false
 
 	override fun getContentStatusBarNightMode(): Boolean {
 		return nightMode
@@ -144,15 +149,29 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		buildZoomButtons(view)
 		updatePoints()
 
-		bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
-		bottomSheetBehavior.state = STATE_HIDDEN
-		bottomSheetBehavior.peekHeight =
-			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
-		bottomSheetBehavior.isHideable = true
-		bottomSheetBehavior.isDraggable = AndroidUiHelper.isOrientationPortrait(view.context)
+		if (isPortrait()) {
+			bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
+			bottomSheetBehavior.state = STATE_HIDDEN
+			bottomSheetBehavior.peekHeight =
+				resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
+			bottomSheetBehavior.isHideable = true
+			bottomSheetBehavior.isDraggable = AndroidUiHelper.isOrientationPortrait(view.context)
+		} else {
+			bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
+			bottomSheetBehavior.state = STATE_EXPANDED
+			bottomSheetBehavior.isHideable = false
+			bottomSheetBehavior.isDraggable = false
+			AndroidUiHelper.updateVisibility(showListContainer, false)
+			view.translationX = -resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat()
+			landscapeFragmentVisible = false;
+
+			getToolbar()?.saveInitialViewParams()
+		}
 
 		return view
 	}
+
+
 
 	private fun setupRecyclerView(view: View) {
 		adapter = ExplorePlacesAdapter(view.context, poiUIFilter, this, nightMode)
@@ -194,7 +213,15 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		}
 	}
 
+	private fun isPortrait():Boolean{
+		return AndroidUiHelper.isOrientationPortrait(requireActivity())
+	}
+
 	private fun updateBottomSheetHeight() {
+		if (!isPortrait()) {
+			return
+		}
+
 		val minPeekHeight =
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_min_peek_height)
 		val defaultPeekHeight =
@@ -216,6 +243,10 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun updateMapControls() {
+		if (!isPortrait()) {
+			return
+		}
+
 		val state = bottomSheetBehavior.state
 		AndroidUiHelper.updateVisibility(
 			showListContainer, state == STATE_HIDDEN || state == STATE_COLLAPSED
@@ -358,9 +389,63 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun toggleState() {
-		when (bottomSheetBehavior.state) {
-			STATE_HIDDEN -> bottomSheetBehavior.state = STATE_COLLAPSED
-			STATE_COLLAPSED, STATE_EXPANDED -> bottomSheetBehavior.state = STATE_HIDDEN
+		if (isPortrait()) {
+			when (bottomSheetBehavior.state) {
+				STATE_HIDDEN -> bottomSheetBehavior.state = STATE_COLLAPSED
+				STATE_COLLAPSED, STATE_EXPANDED -> bottomSheetBehavior.state = STATE_HIDDEN
+			}
+		} else {
+			toggleFragmentSlide(
+				requireView(),
+				resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat(), app, 500
+			)
+		}
+	}
+
+	private fun toggleFragmentSlide(
+		viewContainer: View,
+		fragmentWidthDp: Float,
+		context: Context,
+		duration: Long
+	) {
+		if (mapActivity == null) {
+			return
+		}
+		landscapeFragmentVisible = !landscapeFragmentVisible
+
+		val density = context.resources.displayMetrics.density
+		val fragmentWidthPx = fragmentWidthDp * density
+
+		val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
+		valueAnimator.duration = duration
+		valueAnimator.addUpdateListener { animator ->
+			val fraction = animator.animatedValue as Float
+
+			val currentTranslationX = if (landscapeFragmentVisible) {
+				-fragmentWidthPx + fragmentWidthPx * fraction
+			} else {
+				-fragmentWidthPx * fraction
+			}
+			viewContainer.translationX = currentTranslationX
+			getToolbar()?.adjustForOverlay(viewContainer)
+		}
+
+		valueAnimator.addListener(object : AnimatorListenerAdapter() {
+			override fun onAnimationEnd(animation: Animator) {
+			}
+		})
+
+		valueAnimator.start()
+	}
+
+	private fun getToolbar(): TopToolbarView? {
+        return mapActivity?.mapLayers?.mapInfoLayer?.topToolbarView
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
+		if (!isPortrait()) {
+			getToolbar()?.restoreSavedParams()
 		}
 	}
 

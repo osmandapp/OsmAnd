@@ -6,6 +6,9 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -20,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.MapHudLayout.ViewChangeListener;
 import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
@@ -57,6 +61,10 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 
 	private boolean nightMode;
+
+	private int savedInitialWidth = 0;
+	private float savedInitialViewX = 0f;
+	private float savedInitialScreenX = 0f;
 
 	public TopToolbarView(@NonNull Context context) {
 		this(context, null);
@@ -322,6 +330,57 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 			controller.nightMode = nightMode;
 		}
 		updateColors();
+	}
+
+	public void saveInitialViewParams(){
+		getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				ViewTreeObserver vto = getViewTreeObserver();
+				if (vto.isAlive()) {
+					vto.removeOnGlobalLayoutListener(this);
+				}
+				int[] toolbarLocationOnScreen = new int[2];
+				getLocationOnScreen(toolbarLocationOnScreen);
+				savedInitialWidth = getMeasuredWidth();
+				savedInitialViewX = getX();
+				savedInitialScreenX = toolbarLocationOnScreen[0];
+			}
+		});
+	}
+
+	public void restoreSavedParams() {
+		if (savedInitialWidth != 0) {
+			ViewGroup.LayoutParams params = getLayoutParams();
+			params.width = savedInitialWidth;
+			setLayoutParams(params);
+			setX(savedInitialViewX);
+		}
+	}
+
+	public void adjustForOverlay(View overlayView) {
+		int[] fragmentLocationOnScreen = new int[2];
+		overlayView.getLocationOnScreen(fragmentLocationOnScreen);
+		int fragmentRightEdge = fragmentLocationOnScreen[0] + overlayView.getWidth();
+
+		int padding = AndroidUtils.dpToPx(app, 12f);
+
+		if (fragmentRightEdge > savedInitialScreenX + padding) {
+			int overlapWidth = (int) (fragmentRightEdge - savedInitialScreenX);
+
+			int newToolbarWidth = savedInitialWidth - overlapWidth + padding;
+			float newToolbarX = savedInitialViewX + overlapWidth - padding;
+
+			ViewGroup.LayoutParams layoutParams = getLayoutParams();
+			layoutParams.width = Math.max(newToolbarWidth, 0);
+			setLayoutParams(layoutParams);
+			setX(newToolbarX);
+		} else {
+			ViewGroup.LayoutParams layoutParams = getLayoutParams();
+			layoutParams.width = savedInitialWidth;
+			setLayoutParams(layoutParams);
+			setX(savedInitialViewX);
+		}
 	}
 
 	public boolean isNightMode() {
