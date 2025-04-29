@@ -6,7 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.Drawable;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -15,25 +19,21 @@ import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.List;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-
 public class ChartPointsHelper {
 
-	private final LayerDrawable highlightedPointIcon;
+	private final Drawable highlightedPointIcon;
 
 	private final Paint innerCirclePaint;
 	private final Paint outerCirclePaint;
 
 	public ChartPointsHelper(@NonNull Context context) {
-		this.highlightedPointIcon = (LayerDrawable) AppCompatResources.getDrawable(context,
-				R.drawable.map_location_default);
+		this.highlightedPointIcon = AppCompatResources.getDrawable(context, R.drawable.map_location_default);
 		this.innerCirclePaint = createPaint(0);
 		this.outerCirclePaint = createPaint(Color.WHITE);
 		outerCirclePaint.setAlpha(204);
 	}
 
+	@NonNull
 	private Paint createPaint(@ColorInt int color) {
 		Paint paint = new Paint();
 		paint.setStyle(Style.FILL_AND_STROKE);
@@ -42,16 +42,15 @@ public class ChartPointsHelper {
 		return paint;
 	}
 
-	public void drawHighlightedPoint(@NonNull LatLon highlightedPoint,
-	                                 @NonNull Canvas canvas,
-	                                 @NonNull RotatedTileBox tileBox) {
+	public void drawHighlightedPoint(@NonNull LatLon latLon,
+			@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
-		if (highlightedPoint.getLongitude() >= latLonBounds.left
-				&& highlightedPoint.getLatitude() <= latLonBounds.top
-				&& highlightedPoint.getLongitude() <= latLonBounds.right
-				&& highlightedPoint.getLatitude() >= latLonBounds.bottom) {
-			int x = (int) tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-			int y = (int) tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
+		if (latLon.getLongitude() >= latLonBounds.left
+				&& latLon.getLatitude() <= latLonBounds.top
+				&& latLon.getLongitude() <= latLonBounds.right
+				&& latLon.getLatitude() >= latLonBounds.bottom) {
+			int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int intrinsicW2 = highlightedPointIcon.getIntrinsicWidth() / 2;
 			int intrinsicH2 = highlightedPointIcon.getIntrinsicHeight() / 2;
 			highlightedPointIcon.setBounds(x - intrinsicW2, y - intrinsicH2, x + intrinsicW2,
@@ -61,7 +60,7 @@ public class ChartPointsHelper {
 	}
 
 	public void drawXAxisPoints(@NonNull List<LatLon> xAxisPoints, @ColorInt int xAxisPointColor,
-	                            @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
+			@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
 		float r = 3 * tileBox.getDensity();
 		float density = (float) Math.ceil(tileBox.getDensity());
@@ -91,10 +90,12 @@ public class ChartPointsHelper {
 		}
 	}
 
+	@NonNull
 	public Bitmap createHighlightedPointBitmap() {
 		return AndroidUtils.drawableToBitmap(highlightedPointIcon);
 	}
 
+	@NonNull
 	public Bitmap createXAxisPointBitmap(@ColorInt int pointColor, float density) {
 		float r = 3 * density;
 		density = (float) Math.ceil(density);

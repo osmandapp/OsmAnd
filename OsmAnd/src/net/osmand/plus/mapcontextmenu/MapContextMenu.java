@@ -47,6 +47,7 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
@@ -966,8 +967,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			} else {
 				String mapObjectName = null;
 				Object object = getObject();
+
+				Amenity amenity = null;
 				if (object instanceof Amenity) {
-					Amenity amenity = (Amenity) object;
+					amenity = (Amenity) object;
+				} else if (object instanceof PlaceDetailsObject detailsObject) {
+					amenity = detailsObject.getSyntheticAmenity();
+				}
+				if (amenity != null) {
 					mapObjectName = amenity.getName() + "_" + amenity.getType().getKeyName();
 				}
 				LatLon latLon = getLatLon();
@@ -1148,9 +1155,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 
 			Amenity amenity = null;
-			Object object = getObject();
-			if (object instanceof Amenity && pointDescription.isPoi()) {
-				amenity = (Amenity) object;
+			if (pointDescription.isPoi()) {
+				Object object = getObject();
+				if (object instanceof Amenity) {
+					amenity = (Amenity) object;
+				} else if (object instanceof PlaceDetailsObject detailsObject) {
+					amenity = detailsObject.getSyntheticAmenity();
+				}
 			}
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();

@@ -12,7 +12,6 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.DatagramSocket;
@@ -170,7 +169,7 @@ public class AisMessageListener {
         return (tcpSocket != null) && (tcpStream != null);
     }
 
-    private void handleAisMessage(int aisType, Object obj) {
+    protected void handleAisMessage(int aisType, Object obj) {
         AisObject ais = null;
         int msgType = 0;
         int mmsi = 0;

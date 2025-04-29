@@ -1726,6 +1726,7 @@ public class BinaryMapIndexReader {
 			mapIndexes.clear();
 			addressIndexes.clear();
 			transportIndexes.clear();
+			poiIndexes.clear();
 		}
 	}
 

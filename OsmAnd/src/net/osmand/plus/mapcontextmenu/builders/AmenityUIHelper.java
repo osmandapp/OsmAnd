@@ -499,6 +499,9 @@ public class AmenityUIHelper extends MenuBuilder {
 				}
 			} else if (poiType != null) {
 				String catKey = poiType.getCategory().getKeyName();
+				if (MapPoiTypes.OTHER_MAP_CATEGORY.equals(catKey)) {
+					return null; // the "Others" value is already displayed as a title
+				}
 				List<PoiType> list = collectedPoiTypes.computeIfAbsent(catKey, s -> new ArrayList<>());
 				list.add(poiType);
 			} else if (baseKey.startsWith(US_MAPS_RECREATION_AREA)) {

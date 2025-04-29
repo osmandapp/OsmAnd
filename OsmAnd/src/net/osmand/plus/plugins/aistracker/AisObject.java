@@ -20,9 +20,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.core.jni.ColorARGB;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.SingleSkImage;
+import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.jni.VectorLine;
+import net.osmand.core.jni.VectorLineBuilder;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.MapUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -80,6 +94,10 @@ public class AisObject {
     private AisTrackerHelper.Cpa cpa;
     private long lastCpaUpdate = 0;
     private boolean vesselAtRest = false; // if true, draw a circle instead of a bitmap
+    private MapMarker activeMarker;
+    private MapMarker restMarker;
+    private MapMarker lostMarker;
+    private VectorLine directionLine;
 
     public AisObject(int mmsi, int msgType, double lat, double lon) {
         initObj(mmsi, msgType);
@@ -389,35 +407,21 @@ public class AisObject {
         this.bitmapColor = 0;
     }
 
-    public static int selectBitmap(AisObjType objType) {
-        switch (objType) {
-            case AIS_VESSEL:
-            case AIS_VESSEL_SPORT:
-            case AIS_VESSEL_FAST:
-            case AIS_VESSEL_PASSENGER:
-            case AIS_VESSEL_FREIGHT:
-            case AIS_VESSEL_COMMERCIAL:
-            case AIS_VESSEL_AUTHORITIES:
-            case AIS_VESSEL_SAR:
-            case AIS_VESSEL_OTHER:
-            case AIS_INVALID:
-                return R.drawable.mm_ais_vessel;
-            case AIS_LANDSTATION:
-                return R.drawable.mm_ais_land;
-            case AIS_AIRPLANE:
-                return R.drawable.mm_ais_plane;
-            case AIS_SART:
-                return R.drawable.mm_ais_sar;
-            case AIS_ATON:
-                return R.drawable.mm_ais_aton;
-            case AIS_ATON_VIRTUAL:
-                return R.drawable.mm_ais_aton_virt;
-        }
-        return -1;
+    public static int selectBitmap(@NonNull AisObjType type) {
+        return switch (type) {
+            case AIS_VESSEL, AIS_VESSEL_SPORT, AIS_VESSEL_FAST, AIS_VESSEL_PASSENGER,
+                 AIS_VESSEL_FREIGHT, AIS_VESSEL_COMMERCIAL, AIS_VESSEL_AUTHORITIES, AIS_VESSEL_SAR,
+                 AIS_VESSEL_OTHER, AIS_INVALID -> R.drawable.mm_ais_vessel;
+            case AIS_LANDSTATION -> R.drawable.mm_ais_land;
+            case AIS_AIRPLANE -> R.drawable.mm_ais_plane;
+            case AIS_SART -> R.drawable.mm_ais_sar;
+            case AIS_ATON -> R.drawable.mm_ais_aton;
+            case AIS_ATON_VIRTUAL -> R.drawable.mm_ais_aton_virt;
+        };
     }
 
-    public static int selectColor(AisObjType objType) {
-	    return switch (objType) {
+    public static int selectColor(@NonNull AisObjType type) {
+	    return switch (type) {
 		    case AIS_VESSEL -> Color.GREEN;
 		    case AIS_VESSEL_SPORT -> Color.YELLOW;
 		    case AIS_VESSEL_FAST -> Color.BLUE;
@@ -428,7 +432,7 @@ public class AisObject {
 				    Color.argb(0xff, 0x55, 0x6b, 0x2f); // 0x556b2f: darkolivegreen
 		    case AIS_VESSEL_SAR -> Color.argb(0xff, 0xfa, 0x80, 0x72); // 0xfa8072: salmon
 		    case AIS_VESSEL_OTHER -> Color.argb(0xff, 0x00, 0xbf, 0xff); // 0x00bfff: deepskyblue
-		    default -> 0; // transparent
+		    default -> 0; // default icon
 	    };
     }
 
@@ -453,7 +457,7 @@ public class AisObject {
     private void setColor() {
         if (isLost(vesselLostTimeoutInMinutes) && !vesselAtRest) {
             if (isMovable()) {
-                this.bitmapColor = 0; // transparent
+                this.bitmapColor = 0; // default icon
             }
         } else {
             this.bitmapColor = selectColor(this.objectClass);
@@ -502,9 +506,7 @@ public class AisObject {
             float fx =  locationX - this.bitmap.getWidth() / 2.0f;
             float fy =  locationY - this.bitmap.getHeight() / 2.0f;
             if (!vesselAtRest && this.needRotation()) {
-                float rotation = 0;
-                if (this.ais_cog != INVALID_COG) { rotation = (float)this.ais_cog; }
-                else if (this.ais_heading != INVALID_HEADING ) { rotation = this.ais_heading; }
+                float rotation = getVesselRotation();
                 canvas.rotate(rotation, locationX, locationY);
             }
             if (vesselAtRest) {
@@ -987,5 +989,125 @@ public class AisObject {
     }
     public boolean getSignalLostState() {
         return (isLost(vesselLostTimeoutInMinutes) && isMovable() && !vesselAtRest);
+    }
+
+    private float getVesselRotation()
+    {
+        float rotation = 0;
+        if (this.ais_cog != INVALID_COG) { rotation = (float)this.ais_cog; }
+        else if (this.ais_heading != INVALID_HEADING ) { rotation = this.ais_heading; }
+        return rotation;
+    }
+
+    public void createAisRenderData(int baseOrder, @NonNull AisTrackerLayer layer,
+		    @NonNull Paint paint,
+		    @NonNull MapMarkersCollection markersCollection,
+		    @NonNull VectorLinesCollection vectorLinesCollection,
+		    @NonNull SingleSkImage restImage) {
+	    updateBitmap(layer, paint);
+
+        Bitmap lostBitmap = layer.getBitmap(R.drawable.mm_ais_vessel_cross);
+
+        if (bitmap == null || lostBitmap == null)
+        {
+            return;
+        }
+
+        SingleSkImage activeImage = NativeUtilities.createSkImageFromBitmap(bitmap);
+        SingleSkImage lostImage = NativeUtilities.createSkImageFromBitmap(lostBitmap);
+
+        MapMarkerBuilder markerBuilder = new MapMarkerBuilder();
+        markerBuilder.setBaseOrder(baseOrder);
+        markerBuilder.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), activeImage);
+        markerBuilder.setIsHidden(true);
+        activeMarker = markerBuilder.buildAndAddToCollection(markersCollection);
+
+        markerBuilder.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), restImage);
+        restMarker = markerBuilder.buildAndAddToCollection(markersCollection);
+
+        markerBuilder.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), lostImage);
+        lostMarker = markerBuilder.buildAndAddToCollection(markersCollection);
+
+        VectorLineBuilder lineBuilder = new VectorLineBuilder();
+        lineBuilder.setLineId(getMmsi());
+        // To simplify algorithm draw line from the center of icon and increase order to draw it behind the icon
+        lineBuilder.setBaseOrder(baseOrder + 10);
+        lineBuilder.setIsHidden(true);
+        lineBuilder.setFillColor(NativeUtilities.createFColorARGB(0xFF000000));
+        // Create line with non empty vector, otherwise render symbol is not created, TODO: FIX IN ENGINE
+        lineBuilder.setPoints(new QVectorPointI(2));
+        lineBuilder.setLineWidth(6);
+        directionLine = lineBuilder.buildAndAddToCollection(vectorLinesCollection);
+    }
+
+    public void updateAisRenderData(OsmandMapTileView TileView,
+                                    @NonNull AisTrackerLayer mapLayer, @NonNull Paint paint) {
+        // Call updateBitmap to update marker color
+        updateBitmap(mapLayer, paint);
+
+        if (activeMarker == null || restMarker == null || lostMarker == null || directionLine == null)
+        {
+            return;
+        }
+
+        float speedFactor = getMovement();
+        boolean lostTimeout = isLost(vesselLostTimeoutInMinutes) && !vesselAtRest;
+        boolean drawDirectionLine = (speedFactor > 0) && (!lostTimeout) && !vesselAtRest;
+
+        activeMarker.setIsHidden(vesselAtRest || lostTimeout);
+        restMarker.setIsHidden(!vesselAtRest);
+        lostMarker.setIsHidden(!lostTimeout);
+        directionLine.setIsHidden(drawDirectionLine);
+
+        float rotation = (getVesselRotation() + 180f) % 360f;
+        if (!vesselAtRest && needRotation()) {
+            activeMarker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
+            lostMarker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(1), rotation);
+        }
+
+        ColorARGB iconColor = bitmapColor == 0 ? NativeUtilities.createColorARGB(0xFFFFFFFF)
+                : NativeUtilities.createColorARGB(bitmapColor);
+
+        activeMarker.setOnSurfaceIconModulationColor(iconColor);
+        restMarker.setOnSurfaceIconModulationColor(iconColor);
+
+        LatLon location = getPosition();
+        if (location != null) {
+            PointI markerLocation = new PointI(
+                    MapUtils.get31TileNumberX(location.getLongitude()),
+                    MapUtils.get31TileNumberY(location.getLatitude())
+            );
+
+            activeMarker.setPosition(markerLocation);
+            restMarker.setPosition(markerLocation);
+            lostMarker.setPosition(markerLocation);
+
+            int inverseZoom = TileView != null ? TileView.getMaxZoom() - TileView.getZoom() : 0;
+            float lineLength = speedFactor * (float)MapUtils.getPowZoom(inverseZoom) * bitmap.getHeight() * 0.75f;
+
+            double theta = Math.toRadians(rotation);
+            float dx = (float) (-Math.sin(theta) * lineLength);
+            float dy = (float) (Math.cos(theta) * lineLength);
+
+            PointI directionLineEnd = new PointI(
+                    (int) (markerLocation.getX() + Math.ceil(dx)),
+                    (int) (markerLocation.getY() + Math.ceil(dy))
+            );
+
+            QVectorPointI points = new QVectorPointI();
+            points.add(markerLocation);
+            points.add(directionLineEnd);
+
+            directionLine.setPoints(points);
+            directionLine.setIsHidden(!drawDirectionLine);
+        }
+    }
+
+    public void clearAisRenderData(@NonNull MapMarkersCollection markersCollection,
+                                   @NonNull VectorLinesCollection vectorLinesCollection) {
+        markersCollection.removeMarker(activeMarker);
+        markersCollection.removeMarker(restMarker);
+        markersCollection.removeMarker(lostMarker);
+        vectorLinesCollection.removeLine(directionLine);
     }
 }

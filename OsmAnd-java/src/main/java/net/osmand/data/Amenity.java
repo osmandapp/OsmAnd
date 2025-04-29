@@ -284,6 +284,20 @@ public class Amenity extends MapObject {
 		}
 	}
 
+	public void copyAdditionalInfo(Amenity amenity, boolean overwrite) {
+		Map<String, String> map = amenity.getInternalAdditionalInfoMap();
+		if (overwrite || additionalInfo == null) {
+			setAdditionalInfo(map);
+		} else {
+			for (Map.Entry<String, String> entry : map.entrySet()) {
+				String key = entry.getKey();
+				if (!additionalInfo.containsKey(key)) {
+					setAdditionalInfo(key, entry.getValue());
+				}
+			}
+		}
+	}
+
 	public StringBuilder printNamesAndAdditional() {
 		StringBuilder s = new StringBuilder();
 		Map<String, String> additionals = new HashMap<>();
@@ -512,17 +526,16 @@ public class Amenity extends MapObject {
 	public String getTravelElo() {
 		return getAdditionalInfo(TRAVEL_ELO);
 	}
+	public String getWikidata() {
+		return getAdditionalInfo(WIKIDATA);
+	}
 
 	public int getTravelEloNumber() {
 		if (travelElo > 0) {
 			return travelElo;
 		}
 		String travelEloStr = getTravelElo();
-		try {
-			travelElo = Integer.parseInt(travelEloStr);
-		} catch (NumberFormatException e) {
-			travelElo = DEFAULT_ELO;
-		}
+		travelElo = Algorithms.parseIntSilently(travelEloStr, DEFAULT_ELO);
 		return travelElo;
 	}
 

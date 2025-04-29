@@ -108,8 +108,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint) {
-			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
+		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint objectInMotion) {
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
 			float textScale = getTextScale();

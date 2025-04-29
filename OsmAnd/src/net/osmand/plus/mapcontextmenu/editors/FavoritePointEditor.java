@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.activities.MapActivity;
@@ -64,14 +65,17 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
 
+		Amenity amenity = null;
 		if (object instanceof Amenity) {
-			setAmenity(((Amenity) object));
-		} else if (object instanceof OpenstreetmapPoint) {
-			Entity entity = ((OpenstreetmapPoint) object).getEntity();
-			Amenity amenity = MapSelectionHelper.findAmenityByOsmId(app, latLon, entity.getId());
-			if (amenity != null) {
-				setAmenity(amenity);
-			}
+			amenity = (Amenity) object;
+		} else if (object instanceof PlaceDetailsObject detailsObject) {
+			amenity = detailsObject.getSyntheticAmenity();
+		} else if (object instanceof OpenstreetmapPoint point) {
+			Entity entity = point.getEntity();
+			amenity = MapSelectionHelper.findAmenityByOsmId(app, latLon, entity.getId());
+		}
+		if (amenity != null) {
+			setAmenity(amenity);
 		}
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}

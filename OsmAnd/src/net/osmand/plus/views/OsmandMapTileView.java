@@ -1465,6 +1465,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(y31), MapUtils.get31LongitudeX(x31));
 	}
 
+	public void syncRotate() {
+		this.rotate = currentViewport.getRotate();
+	}
+
 	private void setRotateImpl(float rotate) {
 		RotatedTileBox tb = currentViewport.copy();
 		setRotateImpl(rotate, tb.getCenterPixelX(), tb.getCenterPixelY());

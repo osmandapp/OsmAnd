@@ -17,6 +17,7 @@ import androidx.annotation.ColorRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import net.osmand.CallbackWithObject
@@ -43,7 +44,6 @@ import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
-import net.osmand.plus.views.mapwidgets.TopToolbarView
 import net.osmand.plus.widgets.EmptyStateRecyclerView
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.search.core.SearchCoreFactory
@@ -149,29 +149,32 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		buildZoomButtons(view)
 		updatePoints()
 
-		if (isPortrait()) {
-			bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
-			bottomSheetBehavior.state = STATE_HIDDEN
-			bottomSheetBehavior.peekHeight =
-				resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
-			bottomSheetBehavior.isHideable = true
-			bottomSheetBehavior.isDraggable = AndroidUiHelper.isOrientationPortrait(view.context)
-		} else {
-			bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
-			bottomSheetBehavior.state = STATE_EXPANDED
-			bottomSheetBehavior.isHideable = false
-			bottomSheetBehavior.isDraggable = false
-			AndroidUiHelper.updateVisibility(showListContainer, false)
-			view.translationX = -resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat()
-			landscapeFragmentVisible = false;
+        if (isPortrait()) {
+            bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
+            bottomSheetBehavior.state = STATE_HIDDEN
+            bottomSheetBehavior.peekHeight =
+                resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
+            bottomSheetBehavior.isHideable = true
+            bottomSheetBehavior.isDraggable = AndroidUiHelper.isOrientationPortrait(view.context)
+        } else {
+            bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
+            bottomSheetBehavior.state = STATE_EXPANDED
+            bottomSheetBehavior.isHideable = false
+            bottomSheetBehavior.isDraggable = false
+            AndroidUiHelper.updateVisibility(showListContainer, false)
+            view.translationX = -resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat()
+            landscapeFragmentVisible = false;
 
-			getToolbar()?.saveInitialViewParams()
-		}
+            getToolbar()?.saveInitialViewParams()
+        }
 
+		updateMapControls()
 		return view
 	}
 
-
+	fun isListHidden(): Boolean {
+		return view == null || bottomSheetBehavior.state == STATE_HIDDEN
+	}
 
 	private fun setupRecyclerView(view: View) {
 		adapter = ExplorePlacesAdapter(view.context, poiUIFilter, this, nightMode)
@@ -198,8 +201,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			if (myLocationBtn != null) {
 				layer.addCustomizedDefaultMapButton(myLocationBtn)
 			}
-			AndroidUiHelper.updateVisibility(zoomButtonsView, true)
-			activity.mapLayers.mapControlsLayer.addCustomMapButton(view.findViewById(R.id.map_compass_button))
 		}
 	}
 
@@ -249,11 +250,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 		val state = bottomSheetBehavior.state
 		AndroidUiHelper.updateVisibility(
-			showListContainer, state == STATE_HIDDEN || state == STATE_COLLAPSED
+			showListContainer, state == STATE_COLLAPSED
 		)
 		val params = zoomButtonsView?.layoutParams as ViewGroup.MarginLayoutParams
 		params.bottomMargin =
-			if (state == STATE_COLLAPSED) resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height) else 0
+			if (state == STATE_COLLAPSED) bottomSheetBehavior.peekHeight else 0
 		zoomButtonsView?.layoutParams = params
 		zoomButtonsView?.requestLayout()
 	}
