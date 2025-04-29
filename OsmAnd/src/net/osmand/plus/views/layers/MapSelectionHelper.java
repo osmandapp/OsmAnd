@@ -74,7 +74,7 @@ import java.util.*;
 
 public class MapSelectionHelper {
 
-	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
+	private static final Log log = PlatformUtil.getLog(MapSelectionHelper.class);
 	private static final int AMENITY_SEARCH_RADIUS = 50;
 	private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
 	private static final int TILE_SIZE = 256;
@@ -811,6 +811,7 @@ public class MapSelectionHelper {
 
 	@NonNull
 	public static PlaceDetailsObject fetchOtherData(@NonNull OsmandApplication app,	@NonNull PlaceDetailsObject detailsObject) {
+		long time = System.currentTimeMillis();
 		LatLon latLon = detailsObject.getLocation();
 		List<Amenity> amenities = findAmenities(app, latLon);
 		IContextMenuProvider provider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
@@ -831,6 +832,7 @@ public class MapSelectionHelper {
 				}
 			}
 		}
+		log.debug("fetchOtherData time " + (System.currentTimeMillis() - time));
 		return detailsObject;
 	}
 

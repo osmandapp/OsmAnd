@@ -1041,18 +1041,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		fillCanvas(canvas, drawSettings);
 		List<OsmandMapLayer> layers = getLayers();
 		for (int i = 0; i < layers.size(); i++) {
+			final int saveCount = canvas.getSaveCount();
+			canvas.save();
 			try {
 				OsmandMapLayer layer = layers.get(i);
-				canvas.save();
 				// rotate if needed
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(tileBox.getRotate(), c.x, c.y);
 				}
 				layer.onPrepareBufferImage(canvas, tileBox, drawSettings);
-				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
-				canvas.restore();
+			} finally {
+				canvas.restoreToCount(saveCount);
 			}
 		}
 		Bitmap t = bufferBitmap;
@@ -1243,9 +1244,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		List<OsmandMapLayer> layers = getLayers();
 		for (int i = 0; i < layers.size(); i++) {
+			final int saveCount = canvas.getSaveCount();
+			canvas.save();
 			try {
 				OsmandMapLayer layer = layers.get(i);
-				canvas.save();
 				// rotate if needed
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(tileBox.getRotate(), c.x, c.y);
@@ -1254,9 +1256,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					layer.onPrepareBufferImage(canvas, tileBox, drawSettings);
 				}
 				layer.onDraw(canvas, tileBox, drawSettings);
-				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
+			} finally {
+				canvas.restoreToCount(saveCount);
 			}
 		}
 		if (showMapPosition || PluginsHelper.isMapPositionIconNeeded()) {
