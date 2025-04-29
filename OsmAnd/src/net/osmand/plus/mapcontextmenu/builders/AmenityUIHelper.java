@@ -506,7 +506,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 				}
 			} else {
-				textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
+				return null; // do not display internal and/or non-translatable tags
 			}
 		}
 
