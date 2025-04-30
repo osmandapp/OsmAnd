@@ -135,7 +135,7 @@ public class SearchUICore {
 			if (resortAll) {
 				this.searchResults.addAll(sr);
 				if (removeDuplicates) {
-					//glueSameResults(this.searchResults);
+					glueSameResults(this.searchResults);
 				}
 				sortSearchResults();
 				if (removeDuplicates) {
@@ -1074,7 +1074,7 @@ public class SearchUICore {
 				}
 				break;
 			case OBF_RESOURCE:
-				// sort order:
+				// sort order: DETAILED, WIKIPEDIA, TRAVEL, BASEMAP
 				int ord1 = o1.getObfType().ordinal();
 				int ord2 = o2.getObfType().ordinal();
 				if (ord1 != ord2) {
