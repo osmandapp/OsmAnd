@@ -1,5 +1,6 @@
 package net.osmand.plus.exploreplaces
 
+import android.animation.ValueAnimator
 import android.os.AsyncTask.Status.RUNNING
 import android.os.Bundle
 import android.os.Handler
@@ -38,6 +39,7 @@ import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
+import net.osmand.plus.views.mapwidgets.TopToolbarView
 import net.osmand.plus.widgets.EmptyStateRecyclerView
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.util.MapUtils
@@ -65,10 +67,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	private var showListContainer: View? = null
 	private var frameLayout: CoordinatorLayout? = null
 	private var lastCompassUpdate = 0L
-	private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
+	private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
 	private var lastHeading = 0f
 	private var showOnMapContainer: View? = null
 	private var zoomButtonsView: View? = null
+	private var isPortrait: Boolean = false
 
 	override fun getContentStatusBarNightMode(): Boolean {
 		return nightMode
@@ -100,10 +103,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 				})
 			}
 		}
+		isPortrait = AndroidUiHelper.isOrientationPortrait(requireActivity())
 	}
 
 	fun onBackPress(): Boolean {
-		if (bottomSheetBehavior.state == STATE_HIDDEN) {
+		if (bottomSheetBehavior?.state == STATE_HIDDEN || (!isPortrait && !isLandScapeVisible())) {
 			return if (mapActivity?.contextMenu?.isVisible == true) {
 				mapActivity?.contextMenu?.hideMenus()
 				true
@@ -141,18 +145,35 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		buildZoomButtons(view)
 		updatePoints()
 
-		bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
-		bottomSheetBehavior.state = STATE_HIDDEN
-		bottomSheetBehavior.peekHeight =
-			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
-		bottomSheetBehavior.isHideable = true
-		bottomSheetBehavior.isDraggable = AndroidUiHelper.isOrientationPortrait(view.context)
+        if (isPortrait) {
+            bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
+            bottomSheetBehavior?.state = STATE_HIDDEN
+            bottomSheetBehavior?.peekHeight =
+                resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
+            bottomSheetBehavior?.isHideable = true
+            bottomSheetBehavior?.isDraggable = AndroidUiHelper.isOrientationPortrait(view.context)
+        } else {
+			AndroidUiHelper.updateVisibility(showListContainer, false)
+
+			val isRtl = AndroidUtils.isLayoutRtl(requireActivity())
+			val fragmentWidth = resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat()
+
+			view.translationX = if (isRtl) {
+				fragmentWidth
+			} else {
+				-fragmentWidth
+			}
+
+            getToolbar()?.saveInitialViewParams()
+            getToolbar()?.setupAnimationParams()
+        }
+
 		updateMapControls()
 		return view
 	}
 
 	fun isListHidden(): Boolean {
-		return view == null || bottomSheetBehavior.state == STATE_HIDDEN
+		return view == null || bottomSheetBehavior?.state == STATE_HIDDEN
 	}
 
 	private fun setupRecyclerView(view: View) {
@@ -194,11 +215,15 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun updateBottomSheetHeight() {
+		if (!isPortrait) {
+			return
+		}
+
 		val minPeekHeight =
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_min_peek_height)
 		val defaultPeekHeight =
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
-		bottomSheetBehavior.peekHeight =
+		bottomSheetBehavior?.peekHeight =
 			if (adapter?.itemCount == 0) {
 				minPeekHeight
 			} else {
@@ -215,13 +240,17 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun updateMapControls() {
-		val state = bottomSheetBehavior.state
+		if (!isPortrait) {
+			return
+		}
+
+		val state = bottomSheetBehavior?.state
 		AndroidUiHelper.updateVisibility(
 			showListContainer, state == STATE_COLLAPSED
 		)
 		val params = zoomButtonsView?.layoutParams as ViewGroup.MarginLayoutParams
 		params.bottomMargin =
-			if (state == STATE_COLLAPSED) bottomSheetBehavior.peekHeight else 0
+			if (state == STATE_COLLAPSED) bottomSheetBehavior?.peekHeight ?: 0 else 0
 		zoomButtonsView?.layoutParams = params
 		zoomButtonsView?.requestLayout()
 	}
@@ -265,7 +294,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 		startHandler()
 		mapActivity?.disableDrawer()
-		bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback)
+		bottomSheetBehavior?.addBottomSheetCallback(bottomSheetCallback)
 
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
@@ -278,7 +307,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 		stopConvertAmenitiesTask()
 		mapActivity?.enableDrawer()
-		bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallback)
+		bottomSheetBehavior?.removeBottomSheetCallback(bottomSheetCallback)
 
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
@@ -338,7 +367,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun hideList() {
-		bottomSheetBehavior.state = STATE_HIDDEN
+		if (isPortrait) {
+			bottomSheetBehavior?.state = STATE_HIDDEN
+		} else {
+			hideLandscapeFragment()
+		}
 	}
 
 	override fun locationChanged(p0: Double, p1: Double, p2: Any?) {
@@ -352,9 +385,88 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun toggleState() {
-		when (bottomSheetBehavior.state) {
-			STATE_HIDDEN -> bottomSheetBehavior.state = STATE_COLLAPSED
-			STATE_COLLAPSED, STATE_EXPANDED -> bottomSheetBehavior.state = STATE_HIDDEN
+		if (isPortrait) {
+			when (bottomSheetBehavior?.state) {
+				STATE_HIDDEN -> bottomSheetBehavior?.state = STATE_COLLAPSED
+				STATE_COLLAPSED, STATE_EXPANDED -> bottomSheetBehavior?.state = STATE_HIDDEN
+			}
+		} else {
+			toggleFragmentSlide()
+		}
+	}
+
+	private fun hideLandscapeFragment() {
+		mapActivity?.let {
+			if (isLandScapeVisible()) {
+				slideLandscapeFragment(it, requireView())
+			}
+		}
+	}
+
+	private fun toggleFragmentSlide() {
+		mapActivity?.let {
+			slideLandscapeFragment(it, requireView())
+		}
+	}
+
+	private fun isLandScapeVisible(): Boolean {
+		val isRtl = AndroidUtils.isLayoutRtl(requireActivity())
+		val translation = requireView().translationX
+		return if (isRtl) {
+			!(translation > 0f)
+		} else {
+			!(translation < 0f)
+		}
+	}
+
+	private fun slideLandscapeFragment(mapActivity: MapActivity, viewContainer: View) {
+		val density = app.resources.displayMetrics.density
+		val fragmentWidthPx =
+			resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat() * density
+		val isLandScapeVisible = isLandScapeVisible()
+		if (!mapActivity.myApplication.settings.DO_NOT_USE_ANIMATIONS.get()) {
+			val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
+			valueAnimator.duration =
+				app.resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+			valueAnimator.addUpdateListener { animator ->
+				val fraction = animator.animatedValue as Float
+
+				val currentTranslationX = if (AndroidUtils.isLayoutRtl(requireActivity())) {
+					if (!isLandScapeVisible) {
+						fragmentWidthPx - fragmentWidthPx * fraction
+					} else {
+						fragmentWidthPx * fraction
+					}
+				} else {
+					if (!isLandScapeVisible) {
+						-fragmentWidthPx + fragmentWidthPx * fraction
+					} else {
+						-fragmentWidthPx * fraction
+					}
+				}
+				viewContainer.translationX = currentTranslationX
+				getToolbar()?.adjustForOverlay(viewContainer)
+			}
+
+			valueAnimator.start()
+		} else {
+			viewContainer.translationX = if (AndroidUtils.isLayoutRtl(requireActivity())) {
+				if (!isLandScapeVisible()) 0f else fragmentWidthPx
+			} else {
+				if (!isLandScapeVisible()) 0f else -fragmentWidthPx
+			}
+			getToolbar()?.adjustForOverlay(viewContainer)
+		}
+	}
+
+	private fun getToolbar(): TopToolbarView? {
+		return mapActivity?.mapLayers?.mapInfoLayer?.topToolbarView
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
+		if (!isPortrait) {
+			getToolbar()?.restoreSavedParams()
 		}
 	}
 
