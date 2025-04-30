@@ -4997,4 +4997,13 @@
     <string name="poi_aerodrome_type_airfield">Aerpháirc</string>
     <string name="poi_hazard_falling_rocks">Carraigeacha ag titim</string>
     <string name="poi_consulate">Consalacht</string>
+    <string name="poi_network_nhn">Líonra náisiúnta capall (NHN)</string>
+    <string name="poi_network_rhn">Líonra capall réigiúnach (RHN)</string>
+    <string name="poi_network_lhn">Líonra capall áitiúil (LHN)</string>
+    <string name="poi_travel_agency">Gníomhaireacht taistil</string>
+    <string name="poi_steps">Céimeanna</string>
+    <string name="poi_footway">Siúlbhealach</string>
+    <string name="poi_area_highway">Limistéar soghluaisteachta</string>
+    <string name="poi_area_highway_steps">Limistéar staighre</string>
+    <string name="poi_area_highway_footway">Ceantar siúlóide</string>
 </resources>
