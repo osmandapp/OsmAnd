@@ -37,6 +37,7 @@ import de.KnollFrank.lib.settingssearch.client.SearchConfig;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
+import de.KnollFrank.lib.settingssearch.db.preference.dao.SearchablePreferenceDAO;
 import de.KnollFrank.lib.settingssearch.graph.ComputePreferencesListener;
 import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
 
@@ -44,14 +45,14 @@ public class SettingsSearchButtonHelper {
 
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
-	private final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier;
+	private final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, SearchablePreferenceDAO>>> createSearchDatabaseTaskSupplier;
 	private final SearchDatabaseStatusHandler searchDatabaseStatusHandler;
 	private final OsmandPreference<String> availableAppModes;
 	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
 	public static SettingsSearchButtonHelper of(final BaseSettingsFragment rootSearchPreferenceFragment,
 												final @IdRes int fragmentContainerViewId,
-												final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier,
+												final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, SearchablePreferenceDAO>>> createSearchDatabaseTaskSupplier,
 												final OsmandApplication app) {
 
 		return new SettingsSearchButtonHelper(
@@ -67,7 +68,7 @@ public class SettingsSearchButtonHelper {
 
 	private SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
 									   final int fragmentContainerViewId,
-									   final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier,
+									   final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, SearchablePreferenceDAO>>> createSearchDatabaseTaskSupplier,
 									   final SearchDatabaseStatusHandler searchDatabaseStatusHandler,
 									   final OsmandPreference<String> availableAppModes,
 									   final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
@@ -86,7 +87,7 @@ public class SettingsSearchButtonHelper {
 	}
 
 	public static SearchPreferenceFragments createSearchPreferenceFragments(
-			final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier,
+			final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, SearchablePreferenceDAO>>> createSearchDatabaseTaskSupplier,
 			final Consumer<MergedPreferenceScreen> onMergedPreferenceScreenAvailable,
 			final FragmentActivity fragmentActivity,
 			final @IdRes int fragmentContainerViewId,

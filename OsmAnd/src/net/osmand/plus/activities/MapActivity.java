@@ -143,6 +143,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
+import de.KnollFrank.lib.settingssearch.db.preference.dao.SearchablePreferenceDAO;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
@@ -165,7 +166,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static Intent prevActivityIntent = null;
 
 	public static final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
-	private Optional<AsyncTaskWithProgressUpdateListeners<?>> createSearchDatabaseTask = Optional.empty();
+	private Optional<AsyncTaskWithProgressUpdateListeners<Void, SearchablePreferenceDAO>> createSearchDatabaseTask = Optional.empty();
 
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
@@ -344,7 +345,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public Optional<AsyncTaskWithProgressUpdateListeners<?>> getCreateSearchDatabaseTask() {
+	public Optional<AsyncTaskWithProgressUpdateListeners<Void, SearchablePreferenceDAO>> getCreateSearchDatabaseTask() {
 		return createSearchDatabaseTask;
 	}
 

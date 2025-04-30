@@ -6,7 +6,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 
 import java.util.List;
 
-import de.KnollFrank.lib.settingssearch.search.SearchDatabaseDirectoryIO;
+import de.KnollFrank.lib.settingssearch.db.preference.dao.SearchDatabaseDirectoryIO;
 
 public class SettingsSearchInitializer {
 

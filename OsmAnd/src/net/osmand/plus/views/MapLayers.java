@@ -552,6 +552,7 @@ public class MapLayers {
 		if (includeOfflineMaps) {
 			entriesMap.put(LAYER_OSM_VECTOR, app.getString(R.string.vector_data));
 		}
+		// Der folgende Aufruf hängt dynamisch von den installierten TileSources ab. Falls in InstallMapLayersDialogFragment eine neue Map installiert wurde, dann wird diese Map hier auftauchen.
 		entriesMap.putAll(app.getSettings().getTileSourceEntries());
 		entriesMap.put(LAYER_INSTALL_MORE, app.getString(R.string.install_more));
 		entriesMap.put(LAYER_ADD, app.getString(R.string.shared_string_add_manually));
