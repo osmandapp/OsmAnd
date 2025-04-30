@@ -5,6 +5,7 @@ import static net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarCo
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -62,8 +63,8 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 
 	private boolean nightMode;
 
+	private int savedInitialGravity = 0;
 	private int savedInitialWidth = 0;
-	private float savedInitialViewX = 0f;
 	private float savedInitialScreenX = 0f;
 
 	public TopToolbarView(@NonNull Context context) {
@@ -332,7 +333,7 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 		updateColors();
 	}
 
-	public void saveInitialViewParams(){
+	public void saveInitialViewParams() {
 		getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
@@ -343,44 +344,72 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 				int[] toolbarLocationOnScreen = new int[2];
 				getLocationOnScreen(toolbarLocationOnScreen);
 				savedInitialWidth = getMeasuredWidth();
-				savedInitialViewX = getX();
 				savedInitialScreenX = toolbarLocationOnScreen[0];
 			}
 		});
+
+		if (getLayoutParams() instanceof LinearLayout.LayoutParams layoutParams) {
+			savedInitialGravity = layoutParams.gravity;
+		}
 	}
 
 	public void restoreSavedParams() {
-		if (savedInitialWidth != 0) {
-			setX(savedInitialViewX);
-		}
 		ViewGroup.LayoutParams params = getLayoutParams();
+
+		if (params instanceof LinearLayout.LayoutParams layoutParams) {
+			layoutParams.gravity = savedInitialGravity;
+		}
+
 		params.width = ViewGroup.LayoutParams.MATCH_PARENT;
 		params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+
 		setLayoutParams(params);
 	}
 
 	public void adjustForOverlay(View overlayView) {
 		int[] fragmentLocationOnScreen = new int[2];
 		overlayView.getLocationOnScreen(fragmentLocationOnScreen);
-		int fragmentRightEdge = fragmentLocationOnScreen[0] + overlayView.getWidth();
 
+		int fragmentLeftEdge = fragmentLocationOnScreen[0];
+		int fragmentRightEdge = fragmentLocationOnScreen[0] + overlayView.getWidth();
+		boolean isRtl = AndroidUtils.isLayoutRtl(getContext());
 		int padding = AndroidUtils.dpToPx(app, 12f);
 
-		if (fragmentRightEdge > savedInitialScreenX + padding) {
-			int overlapWidth = (int) (fragmentRightEdge - savedInitialScreenX);
+		if (isRtl) {
+			int toolbarRightEdge = (int) (savedInitialScreenX + savedInitialWidth);
+			if (fragmentLeftEdge < toolbarRightEdge - padding) {
+				int overlapWidth = toolbarRightEdge - fragmentLeftEdge;
+				int newToolbarWidth = savedInitialWidth - overlapWidth + padding;
 
-			int newToolbarWidth = savedInitialWidth - overlapWidth + padding;
-			float newToolbarX = savedInitialViewX + overlapWidth - padding;
-
-			ViewGroup.LayoutParams layoutParams = getLayoutParams();
-			layoutParams.width = Math.max(newToolbarWidth, 0);
-			setLayoutParams(layoutParams);
-			setX(newToolbarX);
+				ViewGroup.LayoutParams layoutParams = getLayoutParams();
+				layoutParams.width = Math.max(newToolbarWidth, 0);
+				setLayoutParams(layoutParams);
+			} else {
+				ViewGroup.LayoutParams layoutParams = getLayoutParams();
+				layoutParams.width = savedInitialWidth;
+				setLayoutParams(layoutParams);
+			}
 		} else {
-			ViewGroup.LayoutParams layoutParams = getLayoutParams();
-			layoutParams.width = savedInitialWidth;
+			if (fragmentRightEdge > savedInitialScreenX + padding) {
+				int overlapWidth = (int) (fragmentRightEdge - savedInitialScreenX);
+
+				int newToolbarWidth = savedInitialWidth - overlapWidth + padding;
+
+				ViewGroup.LayoutParams layoutParams = getLayoutParams();
+				layoutParams.width = Math.max(newToolbarWidth, 0);
+				setLayoutParams(layoutParams);
+			} else {
+				ViewGroup.LayoutParams layoutParams = getLayoutParams();
+				layoutParams.width = savedInitialWidth;
+				setLayoutParams(layoutParams);
+			}
+		}
+	}
+
+	public void setupAnimationParams() {
+		if (getLayoutParams() instanceof LinearLayout.LayoutParams layoutParams) {
+			layoutParams.gravity = Gravity.END;
 			setLayoutParams(layoutParams);
-			setX(savedInitialViewX);
 		}
 	}
 

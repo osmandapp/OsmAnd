@@ -155,10 +155,19 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
             bottomSheetBehavior?.isHideable = true
             bottomSheetBehavior?.isDraggable = AndroidUiHelper.isOrientationPortrait(view.context)
         } else {
-            AndroidUiHelper.updateVisibility(showListContainer, false)
-            view.translationX = -resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat()
+			AndroidUiHelper.updateVisibility(showListContainer, false)
+
+			val isRtl = AndroidUtils.isLayoutRtl(requireActivity())
+			val fragmentWidth = resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat()
+
+			view.translationX = if (isRtl) {
+				fragmentWidth
+			} else {
+				-fragmentWidth
+			}
 
             getToolbar()?.saveInitialViewParams()
+            getToolbar()?.setupAnimationParams()
         }
 
 		updateMapControls()
@@ -408,7 +417,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun isLandScapeVisible(): Boolean {
-		return !(requireView().translationX < 0f)
+		val isRtl = AndroidUtils.isLayoutRtl(requireActivity())
+		val translation = requireView().translationX
+		return if (isRtl) {
+			!(translation > 0f)
+		} else {
+			!(translation < 0f)
+		}
 	}
 
 	private fun slideLandscapeFragment(mapActivity: MapActivity, viewContainer: View) {
@@ -416,7 +431,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 		val fragmentWidthPx =
 			resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat() * density
 		val isLandScapeVisible = isLandScapeVisible()
-
 		if (!mapActivity.myApplication.settings.DO_NOT_USE_ANIMATIONS.get()) {
 			val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
 			valueAnimator.duration =
@@ -424,10 +438,18 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			valueAnimator.addUpdateListener { animator ->
 				val fraction = animator.animatedValue as Float
 
-				val currentTranslationX = if (!isLandScapeVisible) {
-					-fragmentWidthPx + fragmentWidthPx * fraction
+				val currentTranslationX = if (AndroidUtils.isLayoutRtl(requireActivity())) {
+					if (!isLandScapeVisible) {
+						fragmentWidthPx - fragmentWidthPx * fraction
+					} else {
+						fragmentWidthPx * fraction
+					}
 				} else {
-					-fragmentWidthPx * fraction
+					if (!isLandScapeVisible) {
+						-fragmentWidthPx + fragmentWidthPx * fraction
+					} else {
+						-fragmentWidthPx * fraction
+					}
 				}
 				viewContainer.translationX = currentTranslationX
 				getToolbar()?.adjustForOverlay(viewContainer)
@@ -435,7 +457,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 
 			valueAnimator.start()
 		} else {
-			viewContainer.translationX = if (!isLandScapeVisible()) 0f else -fragmentWidthPx
+			viewContainer.translationX = if (AndroidUtils.isLayoutRtl(requireActivity())) {
+				if (!isLandScapeVisible()) 0f else fragmentWidthPx
+			} else {
+				if (!isLandScapeVisible()) 0f else -fragmentWidthPx
+			}
 			getToolbar()?.adjustForOverlay(viewContainer)
 		}
 	}
