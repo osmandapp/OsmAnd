@@ -1424,7 +1424,7 @@
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="location_source">Foinse suímh</string>
     <string name="app_mode_horse">Capall</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Uisce</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Folaigh uisce</string>
     <string name="profile_alert_need_save_title">Sábháil na hathruithe</string>
     <string name="routing_profile_geocoding">Geochódú</string>
     <string name="shared_string_alt_name">Ainm eile</string>
@@ -1798,7 +1798,7 @@
     <string name="clear_online_cache">Glan an taisce ar líne</string>
     <string name="sort_date_ascending">Dáta is nuaí ar dtús</string>
     <string name="arrival_distance_factor_at_last">An-déanach</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Folaigh uisce</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Uisce</string>
     <string name="poi_filter_food_shop">Siopa bia</string>
     <string name="use_compass_navigation">Úsáid an compás</string>
     <string name="open_from">Oscailte ó</string>
@@ -1820,7 +1820,7 @@
     <string name="no_altitude_data">Gan sonraí faoin airde</string>
     <string name="nautical_depth_points">Pointí doimhneachta farraige</string>
     <string name="parked_at">páirceáilte ar</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Folaigh na háiteanna míleata</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Limistéir mhíleata</string>
     <string name="download_wiki_region_placeholder">an réigiún seo</string>
     <string name="left_side_navigation">Tiomáin ar chlé</string>
     <string name="sort_distance_ascending">Achar is lú ar dtús</string>
@@ -3947,7 +3947,7 @@
     <string name="avoid_roads_msg">Bealach eile a spreagadh trí bhóithre a roghnú chun</string>
     <string name="show_railway_warnings">Crosairí iarnróid</string>
     <string name="map_locale">Teanga léarscáile</string>
-    <string name="no_internet_connection">Ní féidir é a íoslódáil, seiceáil do nasc Idirlín le do thoil.</string>
+    <string name="no_internet_connection">Gan nasc Idirlín</string>
     <string name="use_opengl_render_descr">Bain úsáid as rindreáil OpenGL luathaithe crua-earraí (d\'fhéadfadh sé níos mó ceallraí a úsáid, nó gan a bheith ag obair ar ghléasanna an-sean).</string>
     <string name="wake_on_voice_descr">Cas air scáileán an ghléis (má tá sé as) agus tú ag druidim le cas.</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Bealaí traenach</string>
@@ -4639,7 +4639,7 @@
     <string name="obd_fuel_pressure">Brú breosla</string>
     <string name="obd_fuel_consumption_rate_sensor">Ráta ídithe breosla (braiteoir)</string>
     <string name="obd_widget_engine_speed">Luas an innill</string>
-    <string name="obd_bluetooth_off_description">Cas air Bluetooth scanóirí a aimsiú agus a nascadh.</string>
+    <string name="obd_bluetooth_off_description">Cas air Bluetooth chun scanóirí a aimsiú agus a nascadh.</string>
     <string name="quick_action_start_pause_recording">Cnaipe chun taifeadadh an riain GPX a thosú, a chur ar sos nó a atosú.</string>
     <string name="third_links">An Tríú Nasc</string>
     <string name="raster_layers_action_descr">Athraigh sraitheanna raster</string>
@@ -5555,4 +5555,14 @@
     <string name="shared_string_edges">Imill</string>
     <string name="labels_position">Seasamh lipéid</string>
     <string name="customize_grid_color">Saincheap dath greille</string>
+    <string name="msg_favorites_skipped_as_existing">Scipeáladh pointí is fearr leat (%1$d) mar bhí siad ann cheana féin.</string>
+    <string name="add_to_navigation">Cuir leis an Loingseoireacht</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Bealphointí GPX (%1$d) cóipeáilte chuig na cinn is ansa leat.</string>
+    <string name="route_members">Baill</string>
+    <string name="multipoligon_related">Gaolmhar</string>
+    <string name="saved_to_device">Sábháilte chuig an ngléas</string>
+    <string name="save_to_device_error">Earráid shábháil chuig gléas</string>
+    <string name="save_to_device">Sábháil chuig Gléas</string>
+    <string name="route_part_of">Cuid de</string>
+    <string name="cant_load_map_styles">Ní féidir stíleanna léarscáile a luchtú.</string>
 </resources>
