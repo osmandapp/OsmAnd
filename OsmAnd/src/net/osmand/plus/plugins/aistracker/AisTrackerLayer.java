@@ -280,6 +280,10 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		if (view.getMapRenderer() != null) {
+			if (tileBox.getZoom() >= START_ZOOM) {
+				AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
+			}
+
 			for (AisObject ais : objects.values()) {
 				// Calling updateAisRenderData in onPrepareBufferImage is overhead
 				// but it is needed to update directional line points
