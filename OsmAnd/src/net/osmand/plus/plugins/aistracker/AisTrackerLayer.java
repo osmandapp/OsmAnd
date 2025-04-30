@@ -74,6 +74,8 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		initTimer();
 		startNetworkListener();
+
+		AisObject.setMinDrawZoom(START_ZOOM);
 	}
 
 	@Override
@@ -270,27 +272,27 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
 
+		float textScale = getTextScale();
+		boolean textScaleChanged = this.textScale != textScale;
+		this.textScale = textScale;
+		if (textScaleChanged) {
+			pointImages.clear();
+		}
+
+		if (view.getMapRenderer() != null) {
+			for (AisObject ais : objects.values()) {
+				// Calling updateAisRenderData in onPrepareBufferImage is overhead
+				// but it is needed to update directional line points
+				// also there is no zoom animation for directional line depending on zoom
+				// TODO: SUPPORT THIS IN ENGINE
+				ais.updateAisRenderData(getTileView(), this, bitmapPaint);
+			}
+
+			return;
+		}
+
 		if (tileBox.getZoom() >= START_ZOOM) {
 			AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
-
-			float textScale = getTextScale();
-			boolean textScaleChanged = this.textScale != textScale;
-			this.textScale = textScale;
-			if (textScaleChanged) {
-				pointImages.clear();
-			}
-			if (view.getMapRenderer() != null) {
-				for (AisObject ais : objects.values()) {
-					// Calling updateAisRenderData in onPrepareBufferImage is overhead
-					// but it is needed to update directional line points
-					// also there is no zoom animation for directional line depending on zoom
-					// TODO: SUPPORT THIS IN ENGINE
-					ais.updateAisRenderData(getTileView(), this, bitmapPaint);
-				}
-
-				return;
-			}
-
 			for (AisObject ais : objects.values()) {
 				if (isLocationVisible(tileBox, ais.getPosition())) {
 					ais.draw(this, bitmapPaint, canvas, tileBox);
