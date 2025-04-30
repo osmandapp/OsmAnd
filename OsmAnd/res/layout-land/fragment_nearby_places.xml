@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="@dimen/dashboard_land_width"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
+		android:id="@+id/frame_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:id="@+id/main_content"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_gravity="bottom"
+			android:background="?attr/activity_background_color"
+			android:orientation="vertical">
+
+			<include layout="@layout/card_bottom_divider" />
+
+			<net.osmand.plus.widgets.EmptyStateRecyclerView
+				android:id="@+id/vertical_nearby_list"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:clipToPadding="false"
+				android:paddingTop="@dimen/content_padding" />
+			<include
+				android:id="@+id/empty_view"
+				layout="@layout/no_explore_places_available" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/show_list_container"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_gravity="bottom|start"
+			android:orientation="vertical"
+			android:visibility="gone">
+
+			<include
+				layout="@layout/map_compass_button"
+				android:layout_width="@dimen/map_small_button_size"
+				android:layout_height="@dimen/map_small_button_size"
+				android:layout_marginStart="@dimen/map_button_margin"
+				android:layout_marginTop="@dimen/map_small_button_margin" />
+
+			<androidx.legacy.widget.Space
+				android:layout_width="1dp"
+				android:layout_height="0dp"
+				android:layout_weight="1" />
+
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<include
+					layout="@layout/map_hud_controls"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|bottom" />
+
+			</FrameLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="10dp"
+				android:background="@drawable/bg_contextmenu_shadow_top_light" />
+
+		</LinearLayout>
+
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</LinearLayout>
