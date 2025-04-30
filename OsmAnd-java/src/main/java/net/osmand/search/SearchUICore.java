@@ -1,6 +1,7 @@
 package net.osmand.search;
 
 import static net.osmand.data.Amenity.ROUTE_ID;
+import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 
@@ -9,7 +10,9 @@ import net.osmand.Collator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -43,10 +46,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -129,6 +134,9 @@ public class SearchUICore {
 			}
 			if (resortAll) {
 				this.searchResults.addAll(sr);
+				if (removeDuplicates) {
+					//glueSameResults(this.searchResults);
+				}
 				sortSearchResults();
 				if (removeDuplicates) {
 					filterSearchDuplicateResults();
@@ -240,6 +248,56 @@ public class SearchUICore {
 					}
 				}
 			}
+		}
+
+		private void glueSameResults(List<SearchResult> lst) {
+			ListIterator<SearchResult> it = lst.listIterator();
+			LinkedList<SearchResult> lstUnique = new LinkedList<SearchResult>();
+			while (it.hasNext()) {
+				SearchResult iterated = it.next();
+				boolean same = false;
+				for (SearchResult unique : lstUnique) {
+					if (sameOsmIdOrWikidata(unique, iterated)) {
+						BaseDetailsObject base = new BaseDetailsObject(unique.object);
+						base.addObject(iterated.object);
+						base.combineData();
+						unique.object = base.getSyntheticAmenity();
+						if (iterated.otherNames != null) {
+							if (!iterated.localeName.equals(unique.localeName)) {
+								iterated.otherNames.add(iterated.localeName);
+							}
+							if (unique.otherNames == null)
+								unique.otherNames = new ArrayList<>();
+							for (String name : iterated.otherNames) {
+								if (!unique.otherNames.contains(name)) {
+									unique.otherNames.add(name);
+								}
+							}
+						}
+						it.remove();
+						same = true;
+						break;
+					}
+				}
+				if (!same) {
+					lstUnique.add(iterated);
+				}
+			}
+			lst.clear();
+			lst.addAll(0, lstUnique);
+		}
+
+		private boolean sameOsmIdOrWikidata(SearchResult sr1, SearchResult sr2) {
+			if (sr1.object instanceof Amenity am1 && sr2.object instanceof Amenity am2) {
+				long osmId1 = ObfConstants.isShiftedID(am1.getId()) ? ObfConstants.getOsmId(am1.getId()) : am1.getId() >> AMENITY_ID_RIGHT_SHIFT;
+				long osmId2 = ObfConstants.isShiftedID(am2.getId()) ? ObfConstants.getOsmId(am2.getId()) : am2.getId() >> AMENITY_ID_RIGHT_SHIFT;
+				if (osmId1 == osmId2) {
+					return true;
+				}
+				String wikidata1 = am1.getWikidata();
+				return wikidata1 != null && wikidata1.equals(am2.getWikidata());
+			}
+			return false;
 		}
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
@@ -994,6 +1052,7 @@ public class SearchUICore {
 	
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
+		OBF_RESOURCE,
 		FOUND_WORD_COUNT, // more is better (top)
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
@@ -1012,6 +1071,14 @@ public class SearchUICore {
 				if (topVisible1 != topVisible2) {
 					// -1 - means 1st is less than 2nd
 					return topVisible1 ? -1 : 1;
+				}
+				break;
+			case OBF_RESOURCE:
+				// sort order:
+				int ord1 = o1.getObfType().ordinal();
+				int ord2 = o2.getObfType().ordinal();
+				if (ord1 != ord2) {
+					return ord2 > ord1 ? -1 : 1;
 				}
 				break;
 			case FOUND_WORD_COUNT: 
@@ -1085,32 +1152,6 @@ public class SearchUICore {
 				if (am1 != am2) {
 					// amenity second
 					return am1 ? 1 : -1;
-				} else if (am1 && am2) {
-					// here 2 points are amenity
-					Amenity a1 = (Amenity) o1.object;
-					Amenity a2 = (Amenity) o2.object;
-
-					String type1 = a1.getType().getKeyName();
-					String type2 = a2.getType().getKeyName();
-					String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
-					String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
-
-					int cmp = 0;
-					boolean subtypeFilter1 = FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1);
-					boolean subtypeFilter2 = FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2);
-					if (subtypeFilter1 != subtypeFilter2) {
-						// to filter second
-						return subtypeFilter1 ? 1 : -1;
-					}
-					cmp = c.collator.compare(type1, type2);
-					if (cmp != 0) {
-						return cmp;
-					}
-
-					cmp = c.collator.compare(subType1, subType2);
-					if (cmp != 0) {
-						return cmp;
-					}
 				}
 				break;
 			}

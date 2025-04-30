@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
@@ -56,6 +57,15 @@ public class SearchResult {
 	public double distRelatedObjectName;
 
 	private double unknownPhraseMatchWeight = 0;
+
+	public enum ObfType {
+		DETAILED,
+		WIKIPEDIA,
+		TRAVEL,
+		BASEMAP
+	}
+
+	private ObfType obfType;
 
 	public SearchResult() {
 		this.requiredSearchPhrase = SearchPhrase.emptyPhrase();
@@ -275,5 +285,19 @@ public class SearchResult {
 			}
 		}
 		return b.toString();
+	}
+
+	public ObfType getObfType() {
+		if (obfType == null) {
+			obfType = ObfType.DETAILED;
+			if (object != null && object instanceof Amenity amenity) {
+				obfType = amenity.getType().isWiki() ? ObfType.WIKIPEDIA : obfType;
+			}
+			if (file != null) {
+				obfType = file.getFile().getName().contains(".travel") ? ObfType.TRAVEL : obfType;
+				obfType = file.isBasemap() ? ObfType.BASEMAP : obfType;
+			}
+		}
+		return obfType;
 	}
 }
