@@ -150,6 +150,11 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
+	@Nullable
+	public TopToolbarView getTopToolbarView() {
+		return topToolbarView;
+	}
+
 	private void resetCashedTheme() {
 		themeId = -1;
 	}
