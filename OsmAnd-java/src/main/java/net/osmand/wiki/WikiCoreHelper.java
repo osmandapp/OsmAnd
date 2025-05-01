@@ -36,7 +36,6 @@ public class WikiCoreHelper {
 	private static final String WIKIMEDIA_ACTION = "?action=query&list=categorymembers&cmtitle=";
 	private static final String CM_LIMIT = "&cmlimit=100";
 	private static final String FORMAT_JSON = "&format=json";
-	private static final String IMAGE_BASE_URL = "https://commons.wikimedia.org/wiki/Special:FilePath/";
 	public static final String WIKIMEDIA_FILE = "File:";
 	public static final String WIKIMEDIA_CATEGORY = "Category:";
 	private static final int THUMB_SIZE = 480;
