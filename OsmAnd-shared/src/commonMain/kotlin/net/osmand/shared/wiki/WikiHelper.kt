@@ -1,6 +1,6 @@
 package net.osmand.shared.wiki
 
-import net.osmand.shared.util.MD5
+import okio.ByteString.Companion.encodeUtf8
 
 object WikiHelper {
     data class WikiTagData(
@@ -75,7 +75,7 @@ object WikiHelper {
     }
 
     private fun getWikiHash(imageFileName: String): Pair<String, String> {
-        val md5 = MD5.digestHex(imageFileName)
+        val md5 = imageFileName.encodeUtf8().md5().hex();
         return Pair(md5.substring(0, 1), md5.substring(0, 2))
     }
 }
