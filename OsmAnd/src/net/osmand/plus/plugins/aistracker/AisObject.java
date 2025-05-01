@@ -87,7 +87,6 @@ public class AisObject {
     private static float cpaWarningDistance = AIS_CPA_WARNING_DEFAULT_DISTANCE; // in miles
     private static Location ownPosition = null; // used to calculate distances, CPA etc.
     private static boolean ownPositionFaked = false; // used for test purposes to fake own position
-    private static int MIN_DRAW_ZOOM = 6;
     private AisObjType objectClass;
     private Bitmap bitmap = null;
     private boolean bitmapValid = false;
@@ -641,7 +640,6 @@ public class AisObject {
     public static void setCpaWarningTime(int warningTime) { cpaWarningTime = warningTime; }
     public static void setCpaWarningDistance(float warningDistance) { cpaWarningDistance = warningDistance; }
     public static void setOwnPosition(Location position) { if (!ownPositionFaked) { ownPosition = position; }}
-    public static void setMinDrawZoom(int zoom) { MIN_DRAW_ZOOM = zoom ;}
     public static void fakeOwnPosition(Location fakePosition) { // used for test purposes
         ownPosition = fakePosition;
         ownPositionFaked = fakePosition != null;
@@ -1053,7 +1051,7 @@ public class AisObject {
         }
 
         int currentZoom = TileView != null ? TileView.getZoom() : 0;
-        if (currentZoom < MIN_DRAW_ZOOM) {
+        if (currentZoom < AisTrackerLayer.START_ZOOM) {
             activeMarker.setIsHidden(true);
             restMarker.setIsHidden(true);
             lostMarker.setIsHidden(true);

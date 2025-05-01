@@ -46,7 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvider {
 
-	private static final int START_ZOOM = 6;
+	public static final int START_ZOOM = 6;
 	private static final int AIS_OBJECT_LIST_COUNTER_MAX = 200;
 
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
@@ -74,8 +74,6 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		initTimer();
 		startNetworkListener();
-
-		AisObject.setMinDrawZoom(START_ZOOM);
 	}
 
 	@Override
@@ -279,11 +277,11 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			pointImages.clear();
 		}
 
-		if (view.getMapRenderer() != null) {
-			if (tileBox.getZoom() >= START_ZOOM) {
-				AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
-			}
+		if (tileBox.getZoom() >= START_ZOOM && !Algorithms.isEmpty(objects)) {
+			AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
+		}
 
+		if (view.getMapRenderer() != null) {
 			for (AisObject ais : objects.values()) {
 				// Calling updateAisRenderData in onPrepareBufferImage is overhead
 				// but it is needed to update directional line points
@@ -291,12 +289,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 				// TODO: SUPPORT THIS IN ENGINE
 				ais.updateAisRenderData(getTileView(), this, bitmapPaint);
 			}
-
-			return;
-		}
-
-		if (tileBox.getZoom() >= START_ZOOM) {
-			AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
+		} else if (tileBox.getZoom() >= START_ZOOM) {
 			for (AisObject ais : objects.values()) {
 				if (isLocationVisible(tileBox, ais.getPosition())) {
 					ais.draw(this, bitmapPaint, canvas, tileBox);
