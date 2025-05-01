@@ -476,6 +476,9 @@ public class AmenityUIHelper extends MenuBuilder {
 					vl = pType.getTranslation();
 				} else {
 					isText = true;
+					if (!pType.hasValidTranslation()) {
+						return null; // do not display internal and/or non-translatable tags
+					}
 					isDescription = iconId == R.drawable.ic_action_note_dark;
 					textPrefix = pType.getTranslation();
 					if (needIntFormatting) {
