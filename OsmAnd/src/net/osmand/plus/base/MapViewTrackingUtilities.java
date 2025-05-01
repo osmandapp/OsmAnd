@@ -296,9 +296,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					// special case when bearing equals to zero (we don't change anything)
 					if (location.hasBearing() && location.getBearing() != 0f) {
-						PointF ratio = app.getMapViewTrackingUtilities().getMapDisplayPositionManager().getMapRatio();
+						PointF ratio = getMapDisplayPositionManager().getMapRatio();
 						if (ratio.x != 0.5f) {
-							OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 							rotation = (float) -correctAzimuthForElevationAndOffset(
 									location.getBearing(), mapView.getElevationAngle(), ratio.x, ratio.y);
 						}
