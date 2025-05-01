@@ -113,6 +113,10 @@ public abstract class AbstractPoiType {
 		}
 	}
 
+	public boolean hasValidTranslation() {
+		return registry.hasValidTranslation(this);
+	}
+
 	public void addPoiAdditional(PoiType tp) {
 		if (poiAdditionals == null) {
 			poiAdditionals = new ArrayList<>();
