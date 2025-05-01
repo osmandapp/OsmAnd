@@ -14,6 +14,7 @@ import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_MEMBE
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_PART_OF_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_RELATED_ROUTES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.WITHIN_POLYGONS_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.WIKIMEDIA;
 
 import android.content.Context;
 import android.content.Intent;
@@ -73,6 +74,9 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
 import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.PhotoCacheManager;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheReadTask;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheWriteTask;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.other.MenuObject;
@@ -100,11 +104,15 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.shared.wiki.WikiHelper;
+import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.wiki.WikiCoreHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -644,19 +652,61 @@ public class MenuBuilder {
 	}
 
 	private void startLoadingImagesTask() {
-		if (!app.getSettings().isInternetConnectionAvailable() || galleryController == null) {
+		if (galleryController == null) {
 			return;
 		}
+
 		onlinePhotoCards = new ArrayList<>();
 		LatLon latLon = getLatLon();
 		Map<String, String> params = getAdditionalCardParams();
+
+		PhotoCacheManager cacheManager = new PhotoCacheManager(app);
+		WikiHelper.WikiTagData wikiTagData = WikiHelper.INSTANCE.extractWikiTagData(params);
+		String wikidataId = wikiTagData.getWikidataId();
+		String wikiCategory = wikiTagData.getWikiCategory();
+		String wikiTitle = wikiTagData.getWikiTitle();
+		String rawKey = PhotoCacheManager.buildRawKey(wikidataId, wikiCategory, wikiTitle);
+
 		if (galleryController.isCurrentHolderEquals(latLon, params)) {
 			imageCardListener.onFinish(galleryController.getCurrentCardsHolder());
+		} else if(!app.getSettings().isInternetConnectionAvailable()){
+			loadFromCache(cacheManager, rawKey, params, wikiTagData, latLon);
 		} else {
 			stopLoadingImagesTask();
 			galleryController.clearHolder();
-			getImageCardsTask = new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener);
+			getImageCardsTask = new GetImageCardsTask(mapActivity, getLatLon(),
+					getAdditionalCardParams(), imageCardListener,
+					response -> savePhotoListToCache(cacheManager, rawKey, response));
 			execute(getImageCardsTask);
+		}
+	}
+
+	private void savePhotoListToCache(@NonNull PhotoCacheManager cacheManager, @NonNull String rawKey, @NonNull String response){
+		if (!Algorithms.isEmpty(response)) {
+			CacheWriteTask cacheWriteTask = new CacheWriteTask(cacheManager, rawKey, response);
+			execute(cacheWriteTask);
+		}
+	}
+
+	private void loadFromCache(@NonNull PhotoCacheManager cacheManager, @NonNull String rawKey,
+	                           @NonNull Map<String, String> params, @NonNull WikiHelper.WikiTagData wikiTagData,
+	                           @NonNull LatLon latLon){
+		if (cacheManager.exists(rawKey)) {
+			imageCardListener.onTaskStarted();
+			CacheReadTask cacheReadTask = new CacheReadTask(cacheManager, rawKey, json -> {
+				if (!Algorithms.isEmpty(json)) {
+					ImageCardsHolder holder = new ImageCardsHolder(latLon, params);
+					List<WikiImage> wikimediaImageList = WikiCoreHelper.getImagesFromJson(json, wikiTagData.getWikiImages());
+					for (WikiImage wikiImage : wikimediaImageList) {
+						holder.addCard(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
+					}
+					imageCardListener.onFinish(holder);
+				} else {
+					imageCardListener.onFinish(null);
+				}
+				return true;
+			});
+			execute(cacheReadTask);
 		}
 	}
 

@@ -71,7 +71,14 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 		if (controller != null) {
 			ImageCard imageCard = controller.getOnlinePhotoCards().get(selectedPosition);
 			if (imageCard != null) {
-				downloadThumbnail(imageCard);
+				if (loadingImage != null) {
+					loadingImage.cancel();
+				}
+				if (!app.getSettings().isInternetConnectionAvailable()) {
+					downloadHiResImage(imageCard, true);
+				} else{
+					downloadThumbnail(imageCard);
+				}
 			}
 		}
 
@@ -89,9 +96,6 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 	}
 
 	private void downloadThumbnail(@NonNull ImageCard imageCard) {
-		if (loadingImage != null) {
-			loadingImage.cancel();
-		}
 		String thumbnailUrl = imageCard.getThumbnailUrl();
 		if (thumbnailUrl != null) {
 			loadingImage = controller.getImageLoader().loadImage(thumbnailUrl, new ImageLoaderCallback() {
@@ -109,20 +113,20 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 							previous,
 							next);
 
-					downloadHiResImage(imageCard);
+					downloadHiResImage(imageCard, false);
 				}
 
 				@Override
 				public void onError() {
-					downloadHiResImage(imageCard);
+					downloadHiResImage(imageCard, true);
 				}
 			}, false);
 		} else {
-			downloadHiResImage(imageCard);
+			downloadHiResImage(imageCard, false);
 		}
 	}
 
-	private void downloadHiResImage(@NonNull ImageCard imageCard) {
+	private void downloadHiResImage(@NonNull ImageCard imageCard, boolean loadPreviewOnError) {
 		String hiResUrl = imageCard.getGalleryFullSizeUrl();
 		if (hiResUrl != null) {
 			loadingImage = controller.getImageLoader().loadImage(imageCard.getGalleryFullSizeUrl(), new ImageLoaderCallback() {
@@ -143,7 +147,37 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 
 				@Override
 				public void onError() {
-					LOG.error("Unable to download hi res image: " + hiResUrl);
+					if (loadPreviewOnError) {
+						tryLoadCachePreviewImage(imageCard);
+					} else {
+						LOG.error("Unable to download hi res image: " + hiResUrl);
+					}
+				}
+			}, false);
+		}
+	}
+
+	private void tryLoadCachePreviewImage(@NonNull ImageCard imageCard) {
+		String imageUrl = imageCard.getImageUrl();
+		if (imageUrl != null) {
+			loadingImage = controller.getImageLoader().loadImage(imageUrl, new ImageLoaderCallback() {
+				@Override
+				public void onStart(@Nullable Bitmap bitmap) {
+
+				}
+
+				@Override
+				public void onSuccess(@NonNull Bitmap bitmap) {
+					Drawable previous = new ColorDrawable(Color.TRANSPARENT);
+					Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
+
+					AndroidUiHelper.crossFadeDrawables(imageView,
+							previous,
+							next);
+				}
+
+				@Override
+				public void onError() {
 				}
 			}, false);
 		}
