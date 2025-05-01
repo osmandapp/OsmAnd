@@ -409,12 +409,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	@Nullable
 	private Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
-		if (object instanceof Amenity amenity) {
-			return MapSelectionHelper.fetchOtherData(app, amenity);
-		} else if (object instanceof PlaceDetailsObject detailsObject) {
-			return MapSelectionHelper.fetchOtherData(app, detailsObject);
-		}
-		return object;
+		return MapSelectionHelper.fetchOtherData(app, object);
 	}
 
 	public void show() {

@@ -8,6 +8,8 @@ import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 
 import java.util.*;
 
+import gnu.trove.list.array.TIntArrayList;
+
 public class PlaceDetailsObject extends BaseDetailsObject {
 
 	private final List<SelectedMapObject> selectedObjects = new ArrayList<>();
@@ -36,4 +38,27 @@ public class PlaceDetailsObject extends BaseDetailsObject {
 	}
 
 
+    public void setMapIconName(String mapIconName) {
+		this.syntheticAmenity.setMapIconName(mapIconName);
+    }
+
+	public void setX(TIntArrayList x) {
+		this.syntheticAmenity.getX().addAll(x);
+	}
+
+	public void setY(TIntArrayList y) {
+		this.syntheticAmenity.getY().addAll(y);
+	}
+
+	public void addX(int x) {
+		this.syntheticAmenity.getX().add(x);
+	}
+
+	public void addY(int y) {
+		this.syntheticAmenity.getY().add(y);
+	}
+
+	public boolean hasGeometry() {
+		return !this.syntheticAmenity.getX().isEmpty() && !this.syntheticAmenity.getY().isEmpty();
+	}
 }

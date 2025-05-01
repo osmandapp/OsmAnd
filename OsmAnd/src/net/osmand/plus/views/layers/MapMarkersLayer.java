@@ -717,7 +717,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public Amenity getMapObjectByMarker(@NonNull MapMarker marker) {
 		if (marker.mapObjectName != null && marker.point != null) {
 			String mapObjName = marker.mapObjectName.split("_")[0];
-			return MapSelectionHelper.findAmenity(getApplication(), marker.point, Collections.singletonList(mapObjName), -1, 15);
+			return MapSelectionHelper.findAmenity(getApplication(), marker.point, -1, Collections.singletonList(mapObjName), null);
 		}
 		return null;
 	}

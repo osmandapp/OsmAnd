@@ -289,9 +289,10 @@ public class SearchUICore {
 
 		private boolean sameOsmIdOrWikidata(SearchResult sr1, SearchResult sr2) {
 			if (sr1.object instanceof Amenity am1 && sr2.object instanceof Amenity am2) {
-				long osmId1 = ObfConstants.isShiftedID(am1.getId()) ? ObfConstants.getOsmId(am1.getId()) : am1.getId() >> AMENITY_ID_RIGHT_SHIFT;
-				long osmId2 = ObfConstants.isShiftedID(am2.getId()) ? ObfConstants.getOsmId(am2.getId()) : am2.getId() >> AMENITY_ID_RIGHT_SHIFT;
-				if (osmId1 == osmId2) {
+				if (am1.getId() == null || am2.getId() == null) {
+					return false;
+				}
+				if (am1.getOsmId().equals(am2.getOsmId())) {
 					return true;
 				}
 				String wikidata1 = am1.getWikidata();
@@ -327,7 +328,7 @@ public class SearchUICore {
 				}
 				if (r1.localeName.equals(r2.localeName)) {
 					double similarityRadius = 30;
-					if (a1 != null && a2 != null) {
+					if (a1 != null && a2 != null && a1.getId() != null && a2.getId() != null) {
 						// here 2 points are amenity
 						String type1 = a1.getType().getKeyName();
 						String type2 = a2.getType().getKeyName();
