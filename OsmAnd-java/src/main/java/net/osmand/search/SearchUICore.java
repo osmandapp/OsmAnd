@@ -1053,8 +1053,8 @@ public class SearchUICore {
 	
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
-		OBF_RESOURCE,
 		FOUND_WORD_COUNT, // more is better (top)
+		OBF_RESOURCE,
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
