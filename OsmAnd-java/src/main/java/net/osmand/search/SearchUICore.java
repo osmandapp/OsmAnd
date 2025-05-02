@@ -49,10 +49,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -82,6 +85,8 @@ public class SearchUICore {
 	private MapPoiTypes poiTypes;
 
 	private static boolean debugMode = false;
+
+	private int MAX_DUPLIATE_COUNT = 50;
 	
 	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
 			Arrays.asList("building", "internet_access_yes"));
@@ -251,64 +256,90 @@ public class SearchUICore {
 			}
 		}
 
-		private void glueSameResults(List<SearchResult> lst) {
-			ListIterator<SearchResult> it = lst.listIterator();
-			LinkedList<SearchResult> lstUnique = new LinkedList<SearchResult>();
-			while (it.hasNext()) {
-				SearchResult iterated = it.next();
-				boolean same = false;
-				for (SearchResult unique : lstUnique) {
-					if (sameOsmIdOrWikidata(unique, iterated)) {
-						BaseDetailsObject base = new BaseDetailsObject(unique.object);
-						base.addObject(iterated.object);
-						base.combineData();
-						unique.object = base.getSyntheticAmenity();
-						if (iterated.otherNames != null) {
-							if (!iterated.localeName.equals(unique.localeName)) {
-								iterated.otherNames.add(iterated.localeName);
-							}
-							if (unique.otherNames == null)
-								unique.otherNames = new ArrayList<>();
-							for (String name : iterated.otherNames) {
-								if (!unique.otherNames.contains(name)) {
-									unique.otherNames.add(name);
-								}
-							}
-						}
-						if (iterated.getOtherWordsMatch() != null) {
-							if (unique.getOtherWordsMatch() == null) {
-								unique.setOtherWordsMatch(new TreeSet<>());
-							}
-							unique.getOtherWordsMatch().addAll(iterated.getOtherWordsMatch());
-						}
-						if (iterated.getUnknownPhraseMatchWeight() > unique.getUnknownPhraseMatchWeight()) {
-							unique.setUnknownPhraseMatchWeight(iterated.getUnknownPhraseMatchWeight());
-						}
-						it.remove();
-						same = true;
-						break;
+		private void copyData(SearchResult unique, SearchResult iterated) {
+			BaseDetailsObject base = new BaseDetailsObject(unique.object);
+			base.addObject(iterated.object);
+			base.combineData();
+			unique.object = base.getSyntheticAmenity();
+			if (iterated.otherNames != null) {
+				if (!iterated.localeName.equals(unique.localeName)) {
+					iterated.otherNames.add(iterated.localeName);
+				}
+				if (unique.otherNames == null)
+					unique.otherNames = new ArrayList<>();
+				for (String name : iterated.otherNames) {
+					if (!unique.otherNames.contains(name)) {
+						unique.otherNames.add(name);
 					}
 				}
-				if (!same) {
-					lstUnique.add(iterated);
-				}
 			}
-			lst.clear();
-			lst.addAll(0, lstUnique);
+			if (iterated.getOtherWordsMatch() != null) {
+				if (unique.getOtherWordsMatch() == null) {
+					unique.setOtherWordsMatch(new TreeSet<>());
+				}
+				unique.getOtherWordsMatch().addAll(iterated.getOtherWordsMatch());
+			}
+			if (iterated.getUnknownPhraseMatchWeight() > unique.getUnknownPhraseMatchWeight()) {
+				unique.setUnknownPhraseMatchWeight(iterated.getUnknownPhraseMatchWeight());
+			}
 		}
 
-		private boolean sameOsmIdOrWikidata(SearchResult sr1, SearchResult sr2) {
-			if (sr1.object instanceof Amenity am1 && sr2.object instanceof Amenity am2) {
-				if (am1.getId() == null || am2.getId() == null) {
-					return false;
-				}
-				if (am1.getOsmId().equals(am2.getOsmId())) {
-					return true;
-				}
-				String wikidata1 = am1.getWikidata();
-				return wikidata1 != null && wikidata1.equals(am2.getWikidata());
+		private static class OsmIdWikidataKey {
+			private final Long osmId;
+			private final String wikidata;
+			public OsmIdWikidataKey(SearchResult result) {
+				Amenity amenity = (Amenity) result.object;
+				this.osmId = amenity.getOsmId();
+				this.wikidata = amenity.getWikidata();
 			}
-			return false;
+
+			@Override
+			public boolean equals(Object o) {
+				if (this == o)
+					return true;
+				if (o == null || getClass() != o.getClass())
+					return false;
+				OsmIdWikidataKey key = (OsmIdWikidataKey) o;
+				boolean osmIdEq = osmId != null && key.osmId != null && key.osmId.equals(osmId);
+				boolean wikidataEq = wikidata != null && key.wikidata != null && key.wikidata.equals(wikidata);
+				return osmIdEq || wikidataEq;
+			}
+
+			@Override
+			public int hashCode() {
+				return Objects.hash(osmId, wikidata);
+			}
+		}
+
+		private void glueSameResults(List<SearchResult> lst) {
+			Map<OsmIdWikidataKey, SearchResult> uniqueMap = new LinkedHashMap<>();
+			ListIterator<SearchResult> it = lst.listIterator();
+			while (it.hasNext()) {
+				SearchResult iterated = it.next();
+				if (iterated.object instanceof Amenity amenity) {
+					boolean added = false;
+					String wikidata = amenity.getWikidata();
+					if (amenity.getOsmId() != null || wikidata != null) {
+						OsmIdWikidataKey key = new OsmIdWikidataKey(iterated);
+						for (OsmIdWikidataKey k : uniqueMap.keySet()) {
+							if (key.equals(k)) {
+								key = k;
+								break;
+							}
+						}
+						if (uniqueMap.containsKey(key)) {
+							copyData(uniqueMap.get(key), iterated);
+						} else {
+							uniqueMap.put(key, iterated);
+						}
+						added = true;
+					}
+					if (added) {
+						it.remove();
+					}
+				}
+			}
+			lst.addAll(0, uniqueMap.values());
 		}
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
