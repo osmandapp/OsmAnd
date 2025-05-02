@@ -812,11 +812,12 @@ public class MapSelectionHelper {
 		return null;
 	}
 
-	@NonNull
+	@Nullable
 	public static Object fetchOtherData(@NonNull OsmandApplication app,	@Nullable Object object) {
 		PlaceDetailsObject detailsObject = null;
 		long time = System.currentTimeMillis();
 		if (object instanceof Amenity amenity) {
+			// TODO check if working for favorite, wpt
 			IContextMenuProvider provider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 			LatLon latLon = amenity.getLocation();
 			detailsObject = findPlaceDetails(app, latLon, amenity.getOsmId(), null, amenity.getWikidata(), provider);

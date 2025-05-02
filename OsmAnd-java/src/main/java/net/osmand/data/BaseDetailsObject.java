@@ -172,7 +172,7 @@ public class BaseDetailsObject {
         if (obfResourceName != null && obfResourceName.contains("basemap")) {
             return SearchResult.ObfType.BASEMAP;
         }
-        if (obfResourceName != null && obfResourceName.contains("travel")) {
+        if (obfResourceName != null && (obfResourceName.contains("travel") || obfResourceName.contains("wikivoyage"))) {
             return SearchResult.ObfType.TRAVEL;
         }
         if (syntheticAmenity.getType().isWiki()) {
