@@ -18,7 +18,7 @@
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="36dp"
 			android:orientation="horizontal">
 
 			<androidx.appcompat.widget.AppCompatImageView
@@ -30,23 +30,23 @@
 				android:gravity="center"
 				app:srcCompat="@drawable/ic_action_remove_dark" />
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/distance_text"
 				android:layout_width="wrap_content"
-				android:layout_height="36dp"
+				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical|start"
 				android:layout_marginEnd="3dp"
-				android:gravity="center"
+				android:gravity="start|center"
 				android:includeFontPadding="false"
 				android:maxLines="1"
 				android:textColor="@color/text_color_primary_light"
 				android:textSize="24sp"
 				tools:text="Value" />
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/distance_sub_text"
 				android:layout_width="wrap_content"
-				android:layout_height="36dp"
+				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical|start"
 				android:layout_marginEnd="6dp"
 				android:gravity="center"
@@ -85,10 +85,10 @@
 				android:visibility="gone"
 				tools:visibility="visible" />
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/street_text"
 				android:layout_width="wrap_content"
-				android:layout_height="36dp"
+				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical|start"
 				android:ellipsize="end"
 				android:gravity="center"

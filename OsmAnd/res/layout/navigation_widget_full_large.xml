@@ -45,7 +45,7 @@
 					android:layout_weight="1"
 					android:orientation="horizontal">
 
-					<TextView
+					<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 						android:id="@+id/distance_text"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
 						android:textSize="36sp"
 						tools:text="200" />
 
-					<TextView
+					<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 						android:id="@+id/distance_sub_text"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
 					android:gravity="center"
 					android:orientation="horizontal"/>
 
-				<TextView
+				<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 					android:id="@+id/street_text"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"

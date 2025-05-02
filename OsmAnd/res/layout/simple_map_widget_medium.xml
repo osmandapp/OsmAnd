@@ -74,7 +74,7 @@
 					android:gravity="center"
 					app:srcCompat="@drawable/ic_action_remove_dark" />
 
-				<TextView
+				<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 					android:id="@+id/widget_text"
 					android:layout_width="wrap_content"
 					android:layout_height="match_parent"
