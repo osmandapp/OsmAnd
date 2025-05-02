@@ -389,6 +389,7 @@ public class MapSelectionHelper {
 									if (detailsObject != null) {
 										detailsObject.setMapIconName(getMapIconName(symbolInfo));
 										addGeometry(detailsObject, obfMapObject);
+										detailsObject.setObfResourceName(obfMapObject.getObfSection().getName());
 									} else if (allowRenderedObjects) {
 										addRenderedObject(result, symbolInfo, obfMapObject, tags);
 									}
@@ -397,7 +398,7 @@ public class MapSelectionHelper {
 						}
 					}
 				}
-				if (detailsObject != null && isTransportStop(result.getAllObjects(), detailsObject)) {
+				if (detailsObject != null && !isTransportStop(result.getAllObjects(), detailsObject)) {
 					result.collect(detailsObject, mapLayers.getPoiMapLayer());
 				}
 			}

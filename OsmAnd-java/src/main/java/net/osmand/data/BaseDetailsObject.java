@@ -5,6 +5,7 @@ import static net.osmand.data.Amenity.DEFAULT_ELO;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.osm.PoiCategory;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -22,8 +23,9 @@ public class BaseDetailsObject {
     protected final Set<Long> osmIds = new HashSet<>();
     protected final Set<String> wikidataIds = new HashSet<>();
     protected final List<Object> objects = new ArrayList<>();
+    protected String obfResourceName;
 
-    protected final Amenity syntheticAmenity = new Amenity();
+    protected Amenity syntheticAmenity = new Amenity();
 
     public BaseDetailsObject() {
     }
@@ -50,24 +52,36 @@ public class BaseDetailsObject {
             return;
         }
         objects.add(object);
-        if (object instanceof MapObject mapObject) {
-            long osmId = ObfConstants.getOsmObjectId(mapObject);
-            osmIds.add(osmId);
+        Amenity amenity = null;
+        if (object instanceof BaseDetailsObject detailsObject) {
+            amenity = detailsObject.syntheticAmenity;
         }
-        if (object instanceof Amenity amenity) {
+        if (object instanceof Amenity) {
+            amenity = (Amenity) object;
+        }
+        if (amenity != null) {
             String wikidata = amenity.getWikidata();
             if (!Algorithms.isEmpty(wikidata)) {
                 wikidataIds.add(wikidata);
             }
+            osmIds.add(amenity.getOsmId());
         }
     }
 
     public boolean overlapsWith(Object object) {
-        Long osmId = (object instanceof MapObject) ? ObfConstants.getOsmObjectId((MapObject) object) : null;
-        String wikidata = (object instanceof Amenity) ? ((Amenity) object).getWikidata() : null;
-
-        return (osmId != null && osmIds.contains(osmId))
-                || (!Algorithms.isEmpty(wikidata) && wikidataIds.contains(wikidata));
+        Amenity amenity = null;
+        if (object instanceof BaseDetailsObject detailsObject) {
+            amenity = detailsObject.syntheticAmenity;
+        }
+        if (object instanceof Amenity) {
+            amenity = (Amenity) object;
+        }
+        if (amenity == null) {
+            return false;
+        }
+        String wikidata = amenity.getWikidata();
+        boolean wikidataEqual = !Algorithms.isEmpty(wikidata) && wikidataIds.contains(wikidata);
+        return osmIds.contains(amenity.getOsmId()) || wikidataEqual;
     }
 
     public void merge(BaseDetailsObject other) {
@@ -78,9 +92,21 @@ public class BaseDetailsObject {
 
     public void combineData() {
         Set<String> contentLocales = new TreeSet<>();
+        syntheticAmenity = new Amenity();
+        objects.sort((o1, o2) -> {
+            int ord1 = getObfType(o1).ordinal();
+            int ord2 = getObfType(o2).ordinal();
+            if (ord1 != ord2) {
+                return ord2 > ord1 ? -1 : 1;
+            }
+            return 0;
+        });
         for (Object object : objects) {
             if (object instanceof Amenity amenity) {
                 processAmenity(amenity, contentLocales);
+            }
+            if (object instanceof BaseDetailsObject detailsObject) {
+                processAmenity(detailsObject.syntheticAmenity, contentLocales);
             }
         }
         if (!Algorithms.isEmpty(contentLocales)) {
@@ -135,7 +161,37 @@ public class BaseDetailsObject {
     }
 
     public static boolean shouldSkip(Object object) {
-        return !(object instanceof Amenity);
+        return !(object instanceof Amenity) && !(object instanceof BaseDetailsObject);
+    }
+
+    public void setObfResourceName(String obfName) {
+        obfResourceName = obfName;
+    }
+
+    public SearchResult.ObfType getObfType() {
+        if (obfResourceName != null && obfResourceName.contains("basemap")) {
+            return SearchResult.ObfType.BASEMAP;
+        }
+        if (obfResourceName != null && obfResourceName.contains("travel")) {
+            return SearchResult.ObfType.TRAVEL;
+        }
+        if (syntheticAmenity.getType().isWiki()) {
+            return SearchResult.ObfType.WIKIPEDIA;
+        }
+        return SearchResult.ObfType.DETAILED;
+    }
+
+
+    private static SearchResult.ObfType getObfType(Object object) {
+        if (object instanceof BaseDetailsObject detailsObject) {
+            return detailsObject.getObfType();
+        }
+        if (object instanceof Amenity amenity) {
+            BaseDetailsObject baseDetailsObject = new BaseDetailsObject(amenity);
+            baseDetailsObject.setObfResourceName(amenity.getRegionName());
+            return baseDetailsObject.getObfType();
+        }
+        return SearchResult.ObfType.DETAILED;
     }
 
 }
