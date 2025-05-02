@@ -19,6 +19,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -171,6 +172,34 @@ public abstract class MapWidget {
 		}
 		text.setTextColor(textColor);
 		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+	}
+
+	public static void updateTextOutline(@Nullable OutlinedTextContainer textContainer, @NonNull TextState textState) {
+		if (textContainer == null) {
+			return;
+		}
+
+		if (textState.textShadowRadius > 0) {
+			textContainer.setStrokeWidth(textState.textShadowRadius);
+			int color = textState.textShadowColor;
+			if (color != 0) {
+				textContainer.setStrokeColor(textState.textShadowColor);
+			}
+			textContainer.showOutline(true);
+		} else {
+			textContainer.showOutline(false);
+		}
+		textContainer.invalidate();
+	}
+
+	public static void updateTextContainer(@Nullable OutlinedTextContainer textContainer, @NonNull TextState textState) {
+		if (textContainer == null) {
+			return;
+		}
+
+		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
+		textContainer.setTextColor(textState.textColor);
+		textContainer.setTypeface(Typeface.DEFAULT, typefaceStyle);
 	}
 
 	@NonNull

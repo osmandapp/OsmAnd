@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -49,8 +49,8 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	protected View firstContainer;
 	protected View secondContainer;
 
-	protected TextView firstCoordinate;
-	protected TextView secondCoordinate;
+	protected OutlinedTextContainer firstCoordinate;
+	protected OutlinedTextContainer secondCoordinate;
 
 	private String firstCoordinateText = "";
 	private String secondCoordinateText = "";
@@ -241,7 +241,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		setCoordinateText(secondCoordinate, text);
 	}
 
-	private void setCoordinateText(@NonNull TextView textView, @NonNull String text) {
+	private void setCoordinateText(@NonNull OutlinedTextContainer textView, @NonNull String text) {
 		AndroidUtils.setTruncatedText(textView, TextDirectionUtil.markAsLTR(text));
 	}
 
@@ -306,6 +306,9 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
 		firstCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
 		secondCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
+
+		updateTextOutline(firstCoordinate, textState);
+		updateTextOutline(secondCoordinate, textState);
 
 		view.setBackgroundResource(textState.widgetBackgroundId);
 		updateInfo(null);

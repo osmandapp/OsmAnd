@@ -1,0 +1,318 @@
+package net.osmand.plus.views.mapwidgets;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
+import android.text.TextPaint;
+import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.AutoScaleTextView;
+
+import org.apache.commons.logging.Log;
+
+import java.lang.reflect.Constructor;
+
+public class OutlinedTextContainer extends FrameLayout {
+	private static final Log LOG = PlatformUtil.getLog(OutlinedTextContainer.class);
+
+	private TextView outlineTextView;
+	private TextView mainTextView;
+	private String textViewClassName = null;
+
+	public OutlinedTextContainer(Context context) {
+		super(context);
+		init(null);
+	}
+
+	public OutlinedTextContainer(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init(attrs);
+	}
+
+	public OutlinedTextContainer(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+		init(attrs);
+	}
+
+	private void init(@Nullable AttributeSet attrs) {
+		if (attrs != null) {
+			AttrsHolder holder = new AttrsHolder(attrs);
+
+			outlineTextView = createTextView(textViewClassName);
+			mainTextView = createTextView(textViewClassName);
+
+			setupTextView(outlineTextView, holder, true);
+			setupTextView(mainTextView, holder, false);
+		} else {
+			outlineTextView = new TextView(getContext());
+			mainTextView = new TextView(getContext());
+		}
+
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+
+		addView(outlineTextView, params);
+		addView(mainTextView, params);
+
+		setVerticalScrollBarEnabled(false);
+		setHorizontalScrollBarEnabled(false);
+	}
+
+	private void setupTextView(@NonNull TextView textView, @NonNull AttrsHolder holder, boolean isOutline) {
+		textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.textSize);
+		textView.setTypeface(holder.typeface);
+		textView.setGravity(holder.gravity);
+		textView.setText(holder.initialText);
+
+		if (holder.maxLines > 0) {
+			textView.setMaxLines(holder.maxLines);
+		}
+		if (holder.ellipsize != null) {
+			textView.setEllipsize(holder.ellipsize);
+		}
+		textView.setIncludeFontPadding(holder.includeFontPadding);
+		textView.setLetterSpacing(holder.letterSpacing);
+		textView.setLineSpacing(holder.lineSpacingExtra, holder.lineSpacingMultiplier);
+
+		if (holder.autoSizeTextType != TextView.AUTO_SIZE_TEXT_TYPE_NONE && VERSION.SDK_INT >= VERSION_CODES.O) {
+			textView.setAutoSizeTextTypeWithDefaults(holder.autoSizeTextType);
+			if (holder.autoSizeMinTextSize > 0 && holder.autoSizeMaxTextSize > 0 && holder.autoSizeStepGranularity > 0) {
+				textView.setAutoSizeTextTypeUniformWithConfiguration(
+						holder.autoSizeMinTextSize,
+						holder.autoSizeMaxTextSize,
+						holder.autoSizeStepGranularity,
+						TypedValue.COMPLEX_UNIT_PX
+				);
+			}
+		}
+
+		if (isOutline) {
+			textView.setTextColor(holder.outlineColor);
+			//textView.setLayerType(LAYER_TYPE_SOFTWARE, null);
+			TextPaint paint = textView.getPaint();
+			paint.setStyle(Paint.Style.STROKE);
+			paint.setStrokeWidth(holder.outlineWidth);
+			//paint.setStrokeJoin(Paint.Join.ROUND);
+		} else {
+			textView.setTextColor(holder.textColor);
+		}
+
+		if (textView instanceof AutoScaleTextView autoScaleTextView) {
+
+			if (holder.minTextSize > 0) {
+				autoScaleTextView.setMinTextSize(holder.minTextSize);
+			}
+
+			if (holder.maxTextSize > 0) {
+				autoScaleTextView.setMaxTextSize(holder.maxTextSize);
+			}
+		}
+
+		textView.setVerticalScrollBarEnabled(false);
+		textView.setHorizontalScrollBarEnabled(false);
+	}
+
+	private TextView createTextView(@Nullable String className) {
+		if (className == null) {
+			return new TextView(getContext());
+		}
+
+		TextView textView;
+		try {
+			Class<?> clazz = Class.forName(className);
+			Constructor<?> constructor = clazz.getConstructor(Context.class);
+			textView = (TextView) constructor.newInstance(getContext());
+		} catch (Exception e) {
+			LOG.error("OutlinedTextContainer: Failed to create TextView of class " + className, e);
+			textView = new TextView(getContext());
+		}
+
+		return textView;
+	}
+
+	public void setText(@Nullable CharSequence text) {
+		outlineTextView.setText(text);
+		mainTextView.setText(text);
+	}
+
+	public CharSequence getText() {
+		return mainTextView.getText();
+	}
+
+	public void setTextColor(int color) {
+		mainTextView.setTextColor(color);
+	}
+
+	public int getTextColor() {
+		return mainTextView.getCurrentTextColor();
+	}
+
+	public void setTextSize(float size) {
+		outlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+		mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+	}
+
+	public void setTypeface(@Nullable Typeface tf, int style) {
+		outlineTextView.setTypeface(tf, style);
+		mainTextView.setTypeface(tf, style);
+	}
+
+	public void setTypeface(@Nullable Typeface tf) {
+		outlineTextView.setTypeface(tf);
+		mainTextView.setTypeface(tf);
+	}
+
+	public void setTextDirection(int textDirection) {
+		outlineTextView.setTextDirection(textDirection);
+		mainTextView.setTextDirection(textDirection);
+	}
+
+	public void setTextAlignment(int textAlignment) {
+		outlineTextView.setTextAlignment(textAlignment);
+		mainTextView.setTextAlignment(textAlignment);
+	}
+
+	public void setGravity(int gravity) {
+		mainTextView.setGravity(gravity);
+		outlineTextView.setGravity(gravity);
+	}
+
+	public void setStrokeWidth(int textShadowRadius) {
+		outlineTextView.getPaint().setStrokeWidth(textShadowRadius);
+	}
+
+	public float getStrokeWidth() {
+		return outlineTextView.getPaint().getStrokeWidth();
+	}
+
+	public void setStrokeColor(int textShadowColor) {
+		outlineTextView.setTextColor(textShadowColor);
+	}
+
+	public int getStrokeColor() {
+		return outlineTextView.getCurrentTextColor();
+	}
+
+	public void showOutline(boolean showOutline) {
+		AndroidUiHelper.updateVisibility(outlineTextView, showOutline);
+	}
+
+	public boolean isShowingOutline() {
+		return outlineTextView.getVisibility() == View.VISIBLE;
+	}
+
+	public Typeface getTypeface() {
+		return mainTextView.getTypeface();
+	}
+
+	public float getTextSize() {
+		return mainTextView.getTextSize();
+	}
+
+	public void copyFromTextContainer(OutlinedTextContainer sourceTextContainer) {
+		setTextColor(sourceTextContainer.getTextColor());
+		setTypeface(sourceTextContainer.getTypeface());
+
+		setStrokeWidth((int) sourceTextContainer.getStrokeWidth());
+		setStrokeColor(sourceTextContainer.getStrokeColor());
+		showOutline(sourceTextContainer.isShowingOutline());
+
+		setText(sourceTextContainer.getText());
+	}
+
+	class AttrsHolder {
+		int textColor = Color.BLACK;
+		int outlineColor = Color.WHITE;
+		float outlineWidth = 0f;
+		float textSize = 14f;
+		Typeface typeface = Typeface.DEFAULT;
+		int gravity = 0;
+		CharSequence initialText = "";
+		int maxLines = -1;
+		TextUtils.TruncateAt ellipsize = null;
+		boolean includeFontPadding = true;
+		float letterSpacing = 0f;
+		float lineSpacingExtra = 0f;
+		float lineSpacingMultiplier = 1.0f;
+		int autoSizeTextType = 0;
+		int autoSizeMinTextSize = -1;
+		int autoSizeMaxTextSize = -1;
+		int autoSizeStepGranularity = -1;
+
+		float minTextSize = -1;
+		float maxTextSize = -1;
+
+		public AttrsHolder(@NonNull AttributeSet attrs) {
+			init(attrs);
+		}
+
+		private void init(@NonNull AttributeSet attrs) {
+			try (TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.OutlinedTextContainer)) {
+				textColor = a.getColor(R.styleable.OutlinedTextContainer_android_textColor, textColor);
+				textSize = a.getDimension(R.styleable.OutlinedTextContainer_android_textSize, textSize);
+				gravity = a.getInt(R.styleable.OutlinedTextContainer_android_gravity, gravity);
+
+				outlineColor = a.getColor(R.styleable.OutlinedTextContainer_outlineColor, outlineColor);
+				outlineWidth = a.getDimension(R.styleable.OutlinedTextContainer_outlineWidth, outlineWidth);
+
+				String fontFamily = a.getString(R.styleable.OutlinedTextContainer_android_fontFamily);
+				if (fontFamily != null) {
+					typeface = Typeface.create(fontFamily, Typeface.NORMAL);
+				}
+
+				CharSequence text = a.getText(R.styleable.OutlinedTextContainer_android_text);
+				if (text != null) {
+					initialText = text;
+				}
+
+				maxLines = a.getInt(R.styleable.OutlinedTextContainer_android_maxLines, maxLines);
+
+				int ellipsizeValue = a.getInt(R.styleable.OutlinedTextContainer_android_ellipsize, -1);
+				if (ellipsizeValue != -1) {
+					ellipsize = switch (ellipsizeValue) {
+						case 1 -> TextUtils.TruncateAt.START;
+						case 2 -> TextUtils.TruncateAt.MIDDLE;
+						case 3 -> TextUtils.TruncateAt.END;
+						case 4 -> TextUtils.TruncateAt.MARQUEE;
+						default -> ellipsize;
+					};
+				}
+
+				includeFontPadding = a.getBoolean(R.styleable.OutlinedTextContainer_android_includeFontPadding, includeFontPadding);
+
+				letterSpacing = a.getFloat(R.styleable.OutlinedTextContainer_android_letterSpacing, letterSpacing);
+
+				lineSpacingExtra = a.getDimension(R.styleable.OutlinedTextContainer_android_lineSpacingExtra, lineSpacingExtra);
+				lineSpacingMultiplier = a.getFloat(R.styleable.OutlinedTextContainer_android_lineSpacingMultiplier, lineSpacingMultiplier);
+
+				autoSizeTextType = a.getInt(R.styleable.OutlinedTextContainer_android_autoSizeTextType, autoSizeTextType);
+				autoSizeMinTextSize = a.getDimensionPixelSize(R.styleable.OutlinedTextContainer_android_autoSizeMinTextSize, autoSizeMinTextSize);
+				autoSizeMaxTextSize = a.getDimensionPixelSize(R.styleable.OutlinedTextContainer_android_autoSizeMaxTextSize, autoSizeMaxTextSize);
+				autoSizeStepGranularity = a.getDimensionPixelSize(R.styleable.OutlinedTextContainer_android_autoSizeStepGranularity, autoSizeStepGranularity);
+
+				String className = a.getString(R.styleable.OutlinedTextContainer_textViewClass);
+				if (className != null && !className.isEmpty()) {
+					textViewClassName = className;
+				}
+
+				minTextSize = a.getDimension(R.styleable.OutlinedTextContainer_autoScale_minTextSize, minTextSize);
+				maxTextSize = a.getDimension(R.styleable.OutlinedTextContainer_autoScale_maxTextSize, maxTextSize);
+			}
+		}
+	}
+}
