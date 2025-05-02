@@ -1,5 +1,7 @@
 package net.osmand.shared.wiki
 
+import okio.ByteString.Companion.encodeUtf8
+
 object WikiHelper {
     data class WikiTagData(
         val wikiImages: List<WikiImage>,
@@ -12,9 +14,10 @@ object WikiHelper {
     private const val WIKIPEDIA_TAG_PREFIX = "wikipedia:"
     private const val WIKIMEDIA_FILE_PREFIX = "File:"
     private const val WIKIMEDIA_CATEGORY_PREFIX = "Category:"
-    private const val WIKIMEDIA_FILE_URL = "https://commons.wikimedia.org/wiki/Special:FilePath/"
+    private const val OSMAND_IMAGES_BASE_URL = "https://data.osmand.net/wikimedia/images-1280"
+    private const val IMAGE_FULL_SIZE = 1280
     private const val IMAGE_THUMB_SIZE = 480
-    private const val IMAGE_ICON_SIZE = 64
+    private const val IMAGE_ICON_SIZE = 160
 
     fun extractWikiTagData(tags: Map<String, String>?): WikiTagData {
         val wikiImages = mutableListOf<WikiImage>()
@@ -59,28 +62,20 @@ object WikiHelper {
     }
 
     fun getImageData(imageFileName: String): WikiImage {
+        val hash = getWikiHash(imageFileName);
+        val h1 = hash.first;
+        val h2 = hash.second;
         return WikiImage(
             wikiMediaTag = imageFileName,
             imageName = imageFileName,
-            imageStubUrl = "$WIKIMEDIA_FILE_URL$imageFileName?width=$IMAGE_THUMB_SIZE",
-            imageHiResUrl = "$WIKIMEDIA_FILE_URL$imageFileName",
-            imageIconUrl = "$WIKIMEDIA_FILE_URL$imageFileName?width=$IMAGE_ICON_SIZE"
+            imageHiResUrl = "$OSMAND_IMAGES_BASE_URL/$h1/$h2/$imageFileName?width=$IMAGE_FULL_SIZE",
+            imageStubUrl = "$OSMAND_IMAGES_BASE_URL/$h1/$h2/$imageFileName?width=$IMAGE_THUMB_SIZE",
+            imageIconUrl = "$OSMAND_IMAGES_BASE_URL/$h1/$h2/$imageFileName?width=$IMAGE_ICON_SIZE"
         )
     }
 
-    fun getImageData(
-        imageFileName: String,
-        baseUrl: String,
-        thumbSize: Int,
-        iconSize: Int
-    ): WikiImage {
-        return WikiImage(
-            wikiMediaTag = imageFileName,
-            imageName = imageFileName,
-            imageStubUrl = "$baseUrl$imageFileName?width=$thumbSize",
-            imageHiResUrl = "$baseUrl$imageFileName",
-            imageIconUrl = "$baseUrl$imageFileName?width=$iconSize"
-        )
+    private fun getWikiHash(imageFileName: String): Pair<String, String> {
+        val md5 = imageFileName.encodeUtf8().md5().hex();
+        return Pair(md5.substring(0, 1), md5.substring(0, 2))
     }
-
 }

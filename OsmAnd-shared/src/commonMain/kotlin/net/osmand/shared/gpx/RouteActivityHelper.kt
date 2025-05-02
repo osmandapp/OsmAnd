@@ -29,7 +29,11 @@ object RouteActivityHelper {
 	private var cachedGroups = mutableListOf<RouteActivityGroup>()
 	private var cachedActivities = mutableListOf<RouteActivity>()
 
-	fun findRouteActivity(id: String?) = id?.let { getActivities().firstOrNull { it.id == id } }
+	fun findRouteActivity(id: String?) = id?.let {
+		getActivities().firstOrNull {
+			it != null && it.id == id
+		}
+	}
 
 	fun getActivityGroups(): List<RouteActivityGroup> {
 		if (cachedGroups.isEmpty()) {

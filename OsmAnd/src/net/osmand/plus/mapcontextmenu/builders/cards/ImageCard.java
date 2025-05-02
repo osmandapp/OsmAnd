@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public abstract class ImageCard extends AbstractCard {
 	private static final Log LOG = PlatformUtil.getLog(ImageCard.class);
-	private static final int THUMBNAIL_WIDTH = 20;
+	private static final int THUMBNAIL_WIDTH = 160;
 	private static final int GALLERY_FULL_SIZE_WIDTH = 1280;
 
 	protected String type;

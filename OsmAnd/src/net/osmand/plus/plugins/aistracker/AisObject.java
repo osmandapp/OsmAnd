@@ -1050,6 +1050,15 @@ public class AisObject {
             return;
         }
 
+        int currentZoom = TileView != null ? TileView.getZoom() : 0;
+        if (currentZoom < AisTrackerLayer.START_ZOOM) {
+            activeMarker.setIsHidden(true);
+            restMarker.setIsHidden(true);
+            lostMarker.setIsHidden(true);
+            directionLine.setIsHidden(true);
+            return;
+        }
+
         float speedFactor = getMovement();
         boolean lostTimeout = isLost(vesselLostTimeoutInMinutes) && !vesselAtRest;
         boolean drawDirectionLine = (speedFactor > 0) && (!lostTimeout) && !vesselAtRest;

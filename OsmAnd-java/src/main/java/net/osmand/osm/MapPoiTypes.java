@@ -903,6 +903,14 @@ public class MapPoiTypes {
 		return getBasePoiName(abstractPoiType);
 	}
 
+	public boolean hasValidTranslation(AbstractPoiType poiType) {
+		if (poiTranslator != null) {
+			String translation = poiTranslator.getTranslation(poiType);
+			return !Algorithms.isEmpty(translation);
+		}
+		return false;
+	}
+
 	public String getAllLanguagesTranslationSuffix() {
 		if (poiTranslator != null) {
 			return poiTranslator.getAllLanguagesTranslationSuffix();

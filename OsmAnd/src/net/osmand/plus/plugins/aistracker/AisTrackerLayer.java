@@ -46,7 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvider {
 
-	private static final int START_ZOOM = 6;
+	public static final int START_ZOOM = 6;
 	private static final int AIS_OBJECT_LIST_COUNTER_MAX = 200;
 
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
@@ -270,27 +270,26 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
 
-		if (tileBox.getZoom() >= START_ZOOM) {
+		float textScale = getTextScale();
+		boolean textScaleChanged = this.textScale != textScale;
+		this.textScale = textScale;
+		if (textScaleChanged) {
+			pointImages.clear();
+		}
+
+		if (tileBox.getZoom() >= START_ZOOM && !Algorithms.isEmpty(objects)) {
 			AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
+		}
 
-			float textScale = getTextScale();
-			boolean textScaleChanged = this.textScale != textScale;
-			this.textScale = textScale;
-			if (textScaleChanged) {
-				pointImages.clear();
+		if (view.getMapRenderer() != null) {
+			for (AisObject ais : objects.values()) {
+				// Calling updateAisRenderData in onPrepareBufferImage is overhead
+				// but it is needed to update directional line points
+				// also there is no zoom animation for directional line depending on zoom
+				// TODO: SUPPORT THIS IN ENGINE
+				ais.updateAisRenderData(getTileView(), this, bitmapPaint);
 			}
-			if (view.getMapRenderer() != null) {
-				for (AisObject ais : objects.values()) {
-					// Calling updateAisRenderData in onPrepareBufferImage is overhead
-					// but it is needed to update directional line points
-					// also there is no zoom animation for directional line depending on zoom
-					// TODO: SUPPORT THIS IN ENGINE
-					ais.updateAisRenderData(getTileView(), this, bitmapPaint);
-				}
-
-				return;
-			}
-
+		} else if (tileBox.getZoom() >= START_ZOOM) {
 			for (AisObject ais : objects.values()) {
 				if (isLocationVisible(tileBox, ais.getPosition())) {
 					ais.draw(this, bitmapPaint, canvas, tileBox);

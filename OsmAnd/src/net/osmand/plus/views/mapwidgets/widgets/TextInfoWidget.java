@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -29,8 +30,7 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	protected String contentTitle;
 
 	protected ImageView imageView;
-	protected TextView textView;
-	protected TextView textViewShadow;
+	protected OutlinedTextContainer textView;
 	protected TextView smallTextView;
 	protected TextView smallTextViewShadow;
 	protected View container;
@@ -53,7 +53,6 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 		emptyBanner = view.findViewById(R.id.empty_banner);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
-		textViewShadow = view.findViewById(R.id.widget_text_shadow);
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
 		bottomDivider = view.findViewById(R.id.bottom_divider);
@@ -144,9 +143,6 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 
 	private void setText(String text) {
 		textView.setText(text);
-		if (textViewShadow != null) {
-			textViewShadow.setText(text);
-		}
 	}
 
 	private void setSmallText(String text) {
@@ -188,8 +184,10 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 		super.updateColors(textState);
 		updateTextColor(smallTextView, smallTextViewShadow, textState.textColor, textState.textShadowColor,
 				textState.textBold, textState.textShadowRadius);
-		updateTextColor(textView, textViewShadow, textState.textColor, textState.textShadowColor,
-				textState.textBold, textState.textShadowRadius);
+
+		updateTextOutline(textView, textState);
+		updateTextContainer(textView, textState);
+
 		int iconId = getIconId();
 		if (iconId != 0) {
 			setImageDrawable(iconId);
