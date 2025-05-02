@@ -44,6 +44,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -273,6 +274,15 @@ public class SearchUICore {
 									unique.otherNames.add(name);
 								}
 							}
+						}
+						if (iterated.getOtherWordsMatch() != null) {
+							if (unique.getOtherWordsMatch() == null) {
+								unique.setOtherWordsMatch(new TreeSet<>());
+							}
+							unique.getOtherWordsMatch().addAll(iterated.getOtherWordsMatch());
+						}
+						if (iterated.getUnknownPhraseMatchWeight() > unique.getUnknownPhraseMatchWeight()) {
+							unique.setUnknownPhraseMatchWeight(iterated.getUnknownPhraseMatchWeight());
 						}
 						it.remove();
 						same = true;
@@ -1074,17 +1084,17 @@ public class SearchUICore {
 					return topVisible1 ? -1 : 1;
 				}
 				break;
+			case FOUND_WORD_COUNT: 
+				if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
+					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
+				}
+				break;
 			case OBF_RESOURCE:
 				// sort order: DETAILED, WIKIPEDIA, TRAVEL, BASEMAP
 				int ord1 = o1.getObfType().ordinal();
 				int ord2 = o2.getObfType().ordinal();
 				if (ord1 != ord2) {
 					return ord2 > ord1 ? -1 : 1;
-				}
-				break;
-			case FOUND_WORD_COUNT: 
-				if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
-					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 				}
 				break;
 			case UNKNOWN_PHRASE_MATCH_WEIGHT:

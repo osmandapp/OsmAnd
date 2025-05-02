@@ -300,4 +300,16 @@ public class SearchResult {
 		}
 		return obfType;
 	}
+
+	public Collection<String> getOtherWordsMatch() {
+		return otherWordsMatch;
+	}
+
+	public void setOtherWordsMatch(Collection<String> set) {
+		otherWordsMatch = set;
+	}
+
+	public void setUnknownPhraseMatchWeight(double weight) {
+		unknownPhraseMatchWeight = weight;
+	}
 }
