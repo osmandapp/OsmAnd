@@ -141,7 +141,13 @@ public class SearchUICore {
 			if (resortAll) {
 				this.searchResults.addAll(sr);
 				if (removeDuplicates) {
-					glueSameResults(this.searchResults);
+					long start = System.currentTimeMillis(), size = this.searchResults.size();
+
+//					glueSameResults(this.searchResults);
+					uniteSearchResultsByOsmIdOrWikidata(this.searchResults);
+
+					System.err.printf("XXX time %d ms (removed %s results)\n",
+							System.currentTimeMillis() - start, size - this.searchResults.size());
 				}
 				sortSearchResults();
 				if (removeDuplicates) {
@@ -308,6 +314,60 @@ public class SearchUICore {
 			@Override
 			public int hashCode() {
 				return Objects.hash(osmId, wikidata);
+			}
+		}
+
+		private void uniteSearchResultsByOsmIdOrWikidata(List<SearchResult> input) {
+			List<SearchResult> output = new ArrayList<>();
+			Map<Long, Integer> osmIdMap = new HashMap<>();
+			Map<String, Integer> wikidataMap = new HashMap<>();
+			for (SearchResult sr : input) {
+				if (sr.object instanceof Amenity that) {
+					Long osmId = that.getOsmId();
+					String wikidata = that.getWikidata();
+					Integer foundOsmIdIndex = osmId == null ? null : osmIdMap.get(osmId);
+					Integer foundWikidataIndex = wikidata == null ? null : wikidataMap.get(wikidata);
+
+					int indexToUpdate = -1; // unique
+
+					if (foundOsmIdIndex != null || foundWikidataIndex != null) {
+						assert foundOsmIdIndex == null || foundWikidataIndex == null
+								|| Objects.equals(foundOsmIdIndex, foundWikidataIndex);
+						indexToUpdate = foundOsmIdIndex != null ? foundOsmIdIndex : foundWikidataIndex;
+					}
+
+//					if (foundOsmIdIndex == null && foundWikidataIndex == null) {
+//						indexToUpdate = -1; // new unique result
+//					} else if (Objects.equals(foundOsmIdIndex, foundWikidataIndex)) {
+//						indexToUpdate = foundOsmIdIndex; // found both
+//					} else if (foundOsmIdIndex != null && foundWikidataIndex == null) {
+//						indexToUpdate = foundOsmIdIndex; // found osmId only
+//					} else if (foundWikidataIndex != null && foundOsmIdIndex == null) {
+//						indexToUpdate = foundWikidataIndex; // found wikidata only
+//					} else {
+//						LOG.info("foundOsmIdIndex != foundWikidataIndex (should never happens)");
+//					}
+
+					if (indexToUpdate == -1) {
+						output.add(sr);
+						indexToUpdate = output.size() - 1;
+					} else {
+						copyData(output.get(indexToUpdate), sr);
+					}
+
+					if (osmId != null) {
+						osmIdMap.put(osmId, indexToUpdate);
+					}
+					if (wikidata != null) {
+						wikidataMap.put(wikidata, indexToUpdate);
+					}
+				} else {
+					output.add(sr);
+				}
+			}
+			if (input.size() != output.size()) {
+				input.clear();
+				input.addAll(output);
 			}
 		}
 
