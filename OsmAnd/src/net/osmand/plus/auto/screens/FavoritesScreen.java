@@ -135,7 +135,6 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
 					.build());
 		}
-		adjustMapToRect(location, mapRect);
 	}
 
 	private void onClickFavorite(@NonNull FavouritePoint point) {
