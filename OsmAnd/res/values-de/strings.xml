@@ -5622,7 +5622,7 @@
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Imperiale Gallonen</string>
     <string name="us_gallons">US-Gallonen</string>
-    <string name="unit_of_volume_description">Ausgewählte Einheiten werden auf alle volumenbezogenen Daten im aktuellen Profil angewendet.</string>
+    <string name="unit_of_volume_description">Ausgewählte Einheiten werden für alle volumenabhängigen Daten im aktuellen Profil genutzt.</string>
     <string name="unit_of_volume">Volumeneinheit</string>
     <string name="record_obd_data">Fahrzeugdaten aufzeichnen</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
