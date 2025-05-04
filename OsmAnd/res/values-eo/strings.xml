@@ -1188,7 +1188,7 @@
     <string name="favorite_home_category">Hejmo</string>
     <string name="preferred_locale">Lingvo de aplikaĵo</string>
     <string name="incomplete_locale">nekompleta</string>
-    <string name="map_online_plugin_is_not_installed">Aktivigu la kromprogramon “enretaj mapoj” por elekti aliajn fontojn de mapoj</string>
+    <string name="map_online_plugin_is_not_installed">Aktivigu la kromprogramon “Enretaj mapoj” por elekti aliajn fontojn de mapoj</string>
     <string name="map_online_data">Enretaj kaj kahelaj mapoj</string>
     <string name="map_online_data_descr">Uzi enretajn mapojn (elŝuti kaj kaŝmemorigi kahelojn en memorkarton).</string>
     <string name="online_map_settings_descr">Agordi fontojn de enretaj kaj kahelaj mapoj.</string>
@@ -2547,7 +2547,7 @@
     <string name="show_images">Montri bildojn</string>
     <string name="online_webpage_warning">Paĝo disponebla nur enrete. Ĉu malfermi ĝin per foliumilo?</string>
     <string name="shared_string_dont">Ne</string>
-    <string name="shared_string_do">" "</string>
+    <string name="shared_string_do">Jes</string>
     <string name="shared_string_only_with_wifi">Nur tra vifio</string>
     <string name="wikivoyage_download_pics">Elŝuti bildojn</string>
     <string name="wikivoyage_download_pics_descr">Bildoj por artikoloj estas elŝuteblaj por eksterreta uzo. 
@@ -5665,7 +5665,7 @@
     <string name="layer_coordinates_grid">Krado de koordinatoj</string>
     <string name="show_image_previews">Antaŭvidi bildojn</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Butono por montri/kaŝi kradon de koordinatoj sur la mapo.</string>
-    <string name="poi_source">Fonto de interesejo</string>
+    <string name="poi_source">Fonto de interesejoj</string>
     <string name="ais_load_data">Enlegi AIS-datumojn el dosiero</string>
     <string name="hmd_promo">Promocio HMD por %1$s monatoj</string>
     <string name="hmd_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
