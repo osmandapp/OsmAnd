@@ -42,18 +42,19 @@ public class PlaceDetailsObject extends BaseDetailsObject {
 	@NonNull
 	public List<Amenity> getAmenities() {
 		List<Amenity> amenities = new ArrayList<>();
-		for (SelectedMapObject mapObject : selectedObjects) {
-			if (mapObject.object() instanceof Amenity amenity) {
+		for (Object object : objects) {
+			if (object instanceof Amenity amenity) {
 				amenities.add(amenity);
+			} else if (object instanceof PlaceDetailsObject detailsObject) {
+				amenities.addAll(detailsObject.getAmenities());
 			}
 		}
 		return amenities;
 	}
 
-
-    public void setMapIconName(String mapIconName) {
+	public void setMapIconName(String mapIconName) {
 		this.syntheticAmenity.setMapIconName(mapIconName);
-    }
+	}
 
 	public void setX(TIntArrayList x) {
 		this.syntheticAmenity.getX().addAll(x);

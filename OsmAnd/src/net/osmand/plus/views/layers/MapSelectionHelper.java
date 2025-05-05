@@ -492,7 +492,9 @@ public class MapSelectionHelper {
 		return false;
 	}
 
-	public static Amenity findAmenity(OsmandApplication app, LatLon latLon, long id, List<String> names, String wikidata) {
+	@Nullable
+	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
+			long id, @Nullable List<String> names, @Nullable String wikidata) {
 		PlaceDetailsObject detail = findPlaceDetails(app, latLon, id, names, wikidata, null);
 		if (detail != null) {
 			return detail.getSyntheticAmenity();
@@ -500,11 +502,16 @@ public class MapSelectionHelper {
 		return null;
 	}
 
-	private PlaceDetailsObject findPlaceDetails(LatLon latLon, long id, List<String> names, String wikidata) {
+	@Nullable
+	private PlaceDetailsObject findPlaceDetails(@NonNull LatLon latLon, long id,
+			@Nullable List<String> names, @Nullable String wikidata) {
 		return findPlaceDetails(app, latLon, id, names, wikidata, mapLayers.getPoiMapLayer());
 	}
 
-	private static PlaceDetailsObject findPlaceDetails(OsmandApplication app, LatLon latLon, long id, List<String> names, String wikidata, @Nullable IContextMenuProvider provider) {
+	@Nullable
+	private static PlaceDetailsObject findPlaceDetails(@NonNull OsmandApplication app,
+			@NonNull LatLon latLon, long id, @Nullable List<String> names,
+			@Nullable String wikidata, @Nullable IContextMenuProvider provider) {
 		int searchRadius = ObfConstants.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
 				? AMENITY_SEARCH_RADIUS_FOR_RELATION
 				: AMENITY_SEARCH_RADIUS;
@@ -534,7 +541,7 @@ public class MapSelectionHelper {
 		return null;
 	}
 
-	private List<String> getNames(ObfMapObject obfMapObject, Map<String, String> tags) {
+	private List<String> getNames(@NonNull ObfMapObject obfMapObject, @NonNull Map<String, String> tags) {
 		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
 		String caption = obfMapObject.getCaptionInNativeLanguage();
 		if (!caption.isEmpty()) {
@@ -546,7 +553,7 @@ public class MapSelectionHelper {
 		return names;
 	}
 
-	private void addGeometry(PlaceDetailsObject detailObj, ObfMapObject obfMapObject) {
+	private void addGeometry(@Nullable PlaceDetailsObject detailObj, @NonNull ObfMapObject obfMapObject) {
 		if (detailObj != null && !detailObj.hasGeometry() && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
 			for (int k = 0; k < points31.size(); k++) {
@@ -556,9 +563,9 @@ public class MapSelectionHelper {
 		}
 	}
 
-	@Nullable
+	@NonNull
 	public static List<Amenity> findAmenitiesByOsmIdOrWikidata(@NonNull List<Amenity> amenities,
-			long id, LatLon point, String wikidata) {
+			long id, @NonNull LatLon point, @Nullable String wikidata) {
 		List<Amenity> result = new ArrayList<>();
 		double minDist = AMENITY_SEARCH_RADIUS_FOR_RELATION * 4;
 		for (Amenity amenity : amenities) {
