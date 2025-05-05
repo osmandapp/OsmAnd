@@ -557,7 +557,8 @@ public class MapSelectionHelper {
 	}
 
 	@Nullable
-	public static List<Amenity> findAmenitiesByOsmIdOrWikidata(@NonNull List<Amenity> amenities, long id, LatLon point, String wikidata) {
+	public static List<Amenity> findAmenitiesByOsmIdOrWikidata(@NonNull List<Amenity> amenities,
+			long id, LatLon point, String wikidata) {
 		List<Amenity> result = new ArrayList<>();
 		double minDist = AMENITY_SEARCH_RADIUS_FOR_RELATION * 4;
 		for (Amenity amenity : amenities) {
@@ -791,7 +792,7 @@ public class MapSelectionHelper {
 	@Nullable
 	public static Amenity findAmenityByName(@NonNull List<Amenity> amenities,
 			@Nullable List<String> names) {
-		if (!Algorithms.isEmpty(names)) {
+		if (!Algorithms.isEmpty(names) && !Algorithms.isEmpty(amenities)) {
 			return amenities.stream()
 					.filter(amenity -> !amenity.isClosed())
 					.filter(amenity -> names.contains(amenity.getName()))
@@ -806,18 +807,19 @@ public class MapSelectionHelper {
 										return travelRouteId != null && names.contains(travelRouteId);
 									})
 									.findAny()
-									.orElse(null)
-					);
+									.orElseGet(() ->
+											amenities.stream()
+													.filter(amenity -> names.contains(amenity.toStringEn()))
+													.findAny().orElse(null)));
 		}
 		return null;
 	}
 
 	@Nullable
-	public static Object fetchOtherData(@NonNull OsmandApplication app,	@Nullable Object object) {
+	public static Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
 		PlaceDetailsObject detailsObject = null;
 		long time = System.currentTimeMillis();
 		if (object instanceof Amenity amenity) {
-			// TODO check if working for favorite, wpt
 			IContextMenuProvider provider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 			LatLon latLon = amenity.getLocation();
 			detailsObject = findPlaceDetails(app, latLon, amenity.getOsmId(), null, amenity.getWikidata(), provider);

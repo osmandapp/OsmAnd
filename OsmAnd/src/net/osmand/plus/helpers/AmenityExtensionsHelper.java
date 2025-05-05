@@ -1,31 +1,31 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.Amenity.MAPILLARY;
 import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.data.Amenity.WIKIMEDIA_COMMONS;
 import static net.osmand.data.Amenity.WIKIPEDIA;
-import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
-import net.osmand.data.QuadRect;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
+import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,15 +42,9 @@ public class AmenityExtensionsHelper {
 
 	@Nullable
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
-
-		for (Amenity amenity : amenities) {
-			if (Algorithms.stringsEqual(amenity.toStringEn(), nameEn)) {
-				return amenity;
-			}
-		}
-		return null;
+		LatLon latLon = new LatLon(lat, lon);
+		List<String> names = Collections.singletonList(nameEn);
+		return MapSelectionHelper.findAmenity(app, latLon, -1, names, null);
 	}
 
 	@NonNull
