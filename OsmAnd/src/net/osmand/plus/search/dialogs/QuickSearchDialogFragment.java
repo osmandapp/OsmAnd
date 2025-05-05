@@ -62,6 +62,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -2238,7 +2239,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public static SearchResultCollection createSearchResultCollection(
 			@NonNull OsmandApplication app, @NonNull List<Amenity> amenities) {
 		SearchUICore core = app.getSearchUICore().getCore();
-		SearchPhrase phrase = SearchPhrase.emptyPhrase(core.getSearchSettings());
+		String locale = LocaleHelper.getPreferredPlacesLanguage(app);
+		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		SearchSettings settings = core.getSearchSettings().setLang(locale, transliterate);
+
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(settings);
 		SearchResultCollection collection = new SearchResultCollection(phrase);
 
 		List<SearchResult> results = new ArrayList<>();
