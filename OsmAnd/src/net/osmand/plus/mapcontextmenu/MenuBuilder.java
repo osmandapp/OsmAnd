@@ -331,6 +331,10 @@ public class MenuBuilder {
 		if (needBuildCoordinatesRow()) {
 			buildCoordinatesRow(view);
 		}
+		buildPlaceRows(view, object);
+	}
+
+	public void buildPlaceRows(@NonNull ViewGroup view, @Nullable Object object) {
 		if (!isCustomOnlinePhotosPosition()) {
 			buildNearestPhotos(view, object);
 		}

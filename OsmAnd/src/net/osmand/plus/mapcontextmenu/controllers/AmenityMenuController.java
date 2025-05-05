@@ -29,7 +29,6 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -48,9 +47,16 @@ public class AmenityMenuController extends MenuController {
 	private TransportStopController transportStopController;
 
 	public AmenityMenuController(@NonNull MapActivity mapActivity,
-	                             @NonNull PointDescription pointDescription,
-	                             @NonNull Amenity amenity) {
-		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
+			@NonNull PointDescription pointDescription,
+			@NonNull Amenity amenity) {
+		this(mapActivity, new AmenityMenuBuilder(mapActivity, amenity), pointDescription, amenity);
+	}
+
+	public AmenityMenuController(@NonNull MapActivity mapActivity,
+			@NonNull MenuBuilder builder,
+			@NonNull PointDescription pointDescription,
+			@NonNull Amenity amenity) {
+		super(builder, pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {
 			boolean showTransportStops = false;
