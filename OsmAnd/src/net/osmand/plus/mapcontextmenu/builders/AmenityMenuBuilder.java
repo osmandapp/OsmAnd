@@ -128,7 +128,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					}
 				});
 			}
-			buildPlaceRows((ViewGroup) view, amenity);
+			if (isCustomOnlinePhotosPosition()) {
+				buildNearestRows((ViewGroup) view, amenity);
+			}
 		}
 	}
 

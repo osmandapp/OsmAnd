@@ -18,6 +18,7 @@ import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.helpers.LocaleHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.render.RenderingIcons
 import net.osmand.plus.utils.AndroidUtils
@@ -40,6 +41,9 @@ class NearbyPlacesAdapter(
 		fun onNearbyItemClicked(amenity: Amenity)
 	}
 
+	val locale = LocaleHelper.getPreferredPlacesLanguage(getApp())
+	val transliterate = getApp().getSettings().MAP_TRANSLITERATE_NAMES.get()
+
 	// Initialize the UpdateLocationViewCache
 	private val updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context)
 	private var location: Location? = null
@@ -54,9 +58,12 @@ class NearbyPlacesAdapter(
 		return NearbyViewHolder(view, updateLocationViewCache)
 	}
 
+	private fun getApp(): OsmandApplication {
+		return context.applicationContext as OsmandApplication
+	}
+
 	private fun isNightMode(): Boolean {
-		val app = context.applicationContext as OsmandApplication
-		return !app.getSettings().isLightContent
+		return !getApp().getSettings().isLightContent
 	}
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
@@ -151,10 +158,9 @@ class NearbyPlacesAdapter(
 				AndroidUiHelper.updateVisibility(imageViewContainer, false)
 			}
 
-			// Add row number to the title
-			titleTextView.text = "${position + 1}. ${item.name}"
+			titleTextView.text = "${position + 1}. ${item.getName(locale, transliterate)}"
 
-			descriptionTextView?.text = item.getDescription(null)
+			descriptionTextView?.text = item.getDescription(locale)
 			descriptionTextView?.let {
 				AndroidUiHelper.updateVisibility(it, !Algorithms.isEmpty(item.getDescription(null)))
 			}
@@ -163,11 +169,10 @@ class NearbyPlacesAdapter(
 
 			// Calculate distance and show arrow
 			if (distanceTextView != null && arrowImageView != null) {
-				val distance = calculateDistance(app, item, location)
-				if (distance != null) {
+				val distance = calculateDistance(item, location)
+				val hasDistance = distance != null
+				if (hasDistance) {
 					distanceTextView.text = OsmAndFormatter.getFormattedDistance(distance, app)
-					distanceTextView.visibility = View.VISIBLE
-					arrowImageView.visibility = View.VISIBLE
 
 					// Update compass icon rotation
 					val latLon = LatLon(item.location.latitude, item.location.longitude)
@@ -176,11 +181,11 @@ class NearbyPlacesAdapter(
 						updateLocationViewCache,
 						arrowImageView,
 						distanceTextView,
-						latLon)
-				} else {
-					distanceTextView.visibility = View.GONE
-					arrowImageView.visibility = View.GONE
+						latLon
+					)
 				}
+				AndroidUiHelper.updateVisibility(arrowImageView, hasDistance)
+				AndroidUiHelper.updateVisibility(distanceTextView, hasDistance)
 			}
 			if (!itemView.hasOnClickListeners()) {
 				itemView.setOnClickListener(clickListener)
@@ -210,10 +215,7 @@ class NearbyPlacesAdapter(
 		private val clickListener =
 			OnClickListener { item?.let { onItemClickListener.onNearbyItemClicked(it) } }
 
-		private fun calculateDistance(
-			app: OsmandApplication,
-			item: Amenity,
-			location: Location?): Float? {
+		private fun calculateDistance(item: Amenity, location: Location?): Float? {
 			if (location != null) {
 				val results = FloatArray(1)
 				Location.distanceBetween(
