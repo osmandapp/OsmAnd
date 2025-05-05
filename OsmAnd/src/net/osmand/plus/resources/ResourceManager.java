@@ -88,6 +88,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * Resource manager is responsible to work with all resources
  * that could consume memory (especially with file resources).
@@ -1058,11 +1060,19 @@ public class ResourceManager {
 
 	@NonNull
 	public List<BinaryMapDataObject> searchBinaryMapDataForAmenity(@NonNull Amenity amenity, int limit) {
+		String name = amenity.getName();
 		long osmId = ObfConstants.getOsmObjectId(amenity);
 		ResultMatcher<BinaryMapDataObject> matcher = new ResultMatcher<>() {
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
-				return osmId == ObfConstants.getOsmObjectId(object);
+				long id = ObfConstants.getOsmObjectId(object);
+				if (osmId != -1) {
+					return osmId == id;
+				} else if (!Algorithms.isEmpty(name)) {
+					TIntObjectHashMap<String> names = object.getObjectNames();
+					return names != null && names.containsValue(name);
+				}
+				return false;
 			}
 
 			@Override
