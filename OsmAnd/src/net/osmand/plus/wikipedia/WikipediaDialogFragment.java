@@ -1,5 +1,6 @@
 package net.osmand.plus.wikipedia;
 
+import static net.osmand.data.Amenity.CONTENT;
 import static net.osmand.plus.wikipedia.WikipediaOptionsBottomSheetDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE;
 
 import android.annotation.SuppressLint;
@@ -210,7 +211,11 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 				langSelected = "en";
 			}
 
-			article = amenity.getDescription(langSelected);
+			String content = amenity.getTagContent(CONTENT, langSelected);
+			if (Algorithms.isEmpty(content)) {
+				content = amenity.getDescription(langSelected);
+			}
+			article = content;
 			title = amenity.getName(langSelected);
 			articleToolbarText.setText(title);
 			readFullArticleButton.setOnClickListener(view -> {
@@ -283,9 +288,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull Amenity amenity,
 			@Nullable String lang) {
 		FragmentManager manager = activity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)
-				&& amenity.getType().isWiki()) {
-
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			WikipediaPlugin plugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
 			if (lang == null && plugin != null) {
 				OsmandApplication app = (OsmandApplication) activity.getApplication();
