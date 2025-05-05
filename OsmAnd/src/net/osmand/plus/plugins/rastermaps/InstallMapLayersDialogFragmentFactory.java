@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import de.KnollFrank.lib.settingssearch.db.preference.dao.SearchDatabaseDirectoryIO;
+import de.KnollFrank.lib.settingssearch.db.preference.db.DatabaseResetter;
 
 class InstallMapLayersDialogFragmentFactory {
 
@@ -87,7 +87,7 @@ class InstallMapLayersDialogFragmentFactory {
 										}
 									}
 									if (someTileSourceWasInstalled) {
-										rebuildSearchDatabase();
+										resetSearchDatabase();
 									}
 									// at the end publish null to show end of process
 									if (!toInstall.isEmpty() && result != null) {
@@ -106,8 +106,8 @@ class InstallMapLayersDialogFragmentFactory {
 								return selectedTileSourceTemplates;
 							}
 
-							private void rebuildSearchDatabase() {
-								new SearchDatabaseDirectoryIO(activity).removeSearchDatabaseDirectories4AllLocales();
+							private void resetSearchDatabase() {
+								DatabaseResetter.resetDatabases(activity);
 							}
 						});
 	}

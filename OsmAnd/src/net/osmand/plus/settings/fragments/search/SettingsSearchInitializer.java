@@ -6,7 +6,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 
 import java.util.List;
 
-import de.KnollFrank.lib.settingssearch.db.preference.dao.SearchDatabaseDirectoryIO;
+import de.KnollFrank.lib.settingssearch.db.preference.db.DatabaseResetter;
 
 public class SettingsSearchInitializer {
 
@@ -30,6 +30,6 @@ public class SettingsSearchInitializer {
 	}
 
 	private void rebuildSearchDatabase() {
-		new SearchDatabaseDirectoryIO(app).removeSearchDatabaseDirectories4AllLocales();
+		DatabaseResetter.resetDatabases(app);
 	}
 }
