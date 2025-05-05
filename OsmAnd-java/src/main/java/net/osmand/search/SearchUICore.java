@@ -86,7 +86,7 @@ public class SearchUICore {
 
 	private static boolean debugMode = false;
 
-	private int MAX_DUPLIATE_COUNT = 50;
+	private static int lastCurrentResultSize = 0;
 	
 	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
 			Arrays.asList("building", "internet_access_yes"));
@@ -143,14 +143,12 @@ public class SearchUICore {
 			}
 			if (resortAll) {
 				this.searchResults.addAll(sr);
-				if (removeDuplicates) {
+				if (removeDuplicates && lastCurrentResultSize != this.searchResults.size()) {
 					long start = System.currentTimeMillis(), size = this.searchResults.size();
-
-//					glueSameResults(this.searchResults);
 					uniteSearchResultsByOsmIdOrWikidata(this.searchResults);
-
-					System.err.printf("XXX time %d ms (removed %s results)\n",
-							System.currentTimeMillis() - start, size - this.searchResults.size());
+					System.err.printf("XXX time %d ms (removed %s results=%d-%d)\n",
+							System.currentTimeMillis() - start, size - this.searchResults.size(), size, this.searchResults.size());
+					lastCurrentResultSize = this.searchResults.size();
 				}
 				sortSearchResults();
 				if (removeDuplicates) {
@@ -293,33 +291,6 @@ public class SearchUICore {
 			}
 		}
 
-		private static class OsmIdWikidataKey {
-			private final Long osmId;
-			private final String wikidata;
-			public OsmIdWikidataKey(SearchResult result) {
-				Amenity amenity = (Amenity) result.object;
-				this.osmId = amenity.getOsmId();
-				this.wikidata = amenity.getWikidata();
-			}
-
-			@Override
-			public boolean equals(Object o) {
-				if (this == o)
-					return true;
-				if (o == null || getClass() != o.getClass())
-					return false;
-				OsmIdWikidataKey key = (OsmIdWikidataKey) o;
-				boolean osmIdEq = osmId != null && key.osmId != null && key.osmId.equals(osmId);
-				boolean wikidataEq = wikidata != null && key.wikidata != null && key.wikidata.equals(wikidata);
-				return osmIdEq || wikidataEq;
-			}
-
-			@Override
-			public int hashCode() {
-				return Objects.hash(osmId, wikidata);
-			}
-		}
-
 		private void uniteSearchResultsByOsmIdOrWikidata(List<SearchResult> input) {
 			List<SearchResult> output = new ArrayList<>();
 			Map<Long, Integer> osmIdMap = new HashMap<>();
@@ -338,18 +309,6 @@ public class SearchUICore {
 								|| Objects.equals(foundOsmIdIndex, foundWikidataIndex);
 						indexToUpdate = foundOsmIdIndex != null ? foundOsmIdIndex : foundWikidataIndex;
 					}
-
-//					if (foundOsmIdIndex == null && foundWikidataIndex == null) {
-//						indexToUpdate = -1; // new unique result
-//					} else if (Objects.equals(foundOsmIdIndex, foundWikidataIndex)) {
-//						indexToUpdate = foundOsmIdIndex; // found both
-//					} else if (foundOsmIdIndex != null && foundWikidataIndex == null) {
-//						indexToUpdate = foundOsmIdIndex; // found osmId only
-//					} else if (foundWikidataIndex != null && foundOsmIdIndex == null) {
-//						indexToUpdate = foundWikidataIndex; // found wikidata only
-//					} else {
-//						LOG.info("foundOsmIdIndex != foundWikidataIndex (should never happens)");
-//					}
 
 					if (indexToUpdate == -1) {
 						output.add(sr);
@@ -372,37 +331,6 @@ public class SearchUICore {
 				input.clear();
 				input.addAll(output);
 			}
-		}
-
-		private void glueSameResults(List<SearchResult> lst) {
-			Map<OsmIdWikidataKey, SearchResult> uniqueMap = new LinkedHashMap<>();
-			ListIterator<SearchResult> it = lst.listIterator();
-			while (it.hasNext()) {
-				SearchResult iterated = it.next();
-				if (iterated.object instanceof Amenity amenity) {
-					boolean added = false;
-					String wikidata = amenity.getWikidata();
-					if (amenity.getOsmId() != null || wikidata != null) {
-						OsmIdWikidataKey key = new OsmIdWikidataKey(iterated);
-						for (OsmIdWikidataKey k : uniqueMap.keySet()) {
-							if (key.equals(k)) {
-								key = k;
-								break;
-							}
-						}
-						if (uniqueMap.containsKey(key)) {
-							copyData(uniqueMap.get(key), iterated);
-						} else {
-							uniqueMap.put(key, iterated);
-						}
-						added = true;
-					}
-					if (added) {
-						it.remove();
-					}
-				}
-			}
-			lst.addAll(0, uniqueMap.values());
 		}
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
@@ -868,6 +796,7 @@ public class SearchUICore {
 						o2.getSearchPriority(phrase));
 			}
 		});
+		lastCurrentResultSize = 0;
 		for (SearchCoreAPI api : lst) {
 			if (matcher.isCancelled()) {
 				break;
