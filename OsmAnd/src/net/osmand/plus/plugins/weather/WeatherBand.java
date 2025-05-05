@@ -151,21 +151,15 @@ public class WeatherBand {
 	}
 
 	public boolean isBandVisible() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloud.get();
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTemp.get();
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressure.get();
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWind.get();
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecip.get();
-			case WEATHER_BAND_WIND_ANIMATION:
-				return getWeatherSettings().weatherWindAnimation.get();
-		}
-		return false;
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> getWeatherSettings().weatherCloud.get();
+			case WEATHER_BAND_TEMPERATURE -> getWeatherSettings().weatherTemp.get();
+			case WEATHER_BAND_PRESSURE -> getWeatherSettings().weatherPressure.get();
+			case WEATHER_BAND_WIND_SPEED -> getWeatherSettings().weatherWind.get();
+			case WEATHER_BAND_PRECIPITATION -> getWeatherSettings().weatherPrecip.get();
+			case WEATHER_BAND_WIND_ANIMATION -> getWeatherSettings().weatherWindAnimation.get();
+			default -> false;
+		};
 	}
 
 	public boolean setBandVisible(boolean visible) {
@@ -363,21 +357,14 @@ public class WeatherBand {
 
 	@NonNull
 	public List<? extends WeatherUnit> getAvailableBandUnits() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return CLOUD_UNITS;
-			case WEATHER_BAND_TEMPERATURE:
-				return TEMP_UNITS;
-			case WEATHER_BAND_PRESSURE:
-				return PRESSURE_UNITS;
-			case WEATHER_BAND_WIND_ANIMATION:
-			case WEATHER_BAND_WIND_SPEED:
-				return WIND_UNITS;
-			case WEATHER_BAND_PRECIPITATION:
-				return PRECIPITATION_UNITS;
-			default:
-				return Collections.emptyList();
-		}
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> CLOUD_UNITS;
+			case WEATHER_BAND_TEMPERATURE -> TEMP_UNITS;
+			case WEATHER_BAND_PRESSURE -> PRESSURE_UNITS;
+			case WEATHER_BAND_WIND_ANIMATION, WEATHER_BAND_WIND_SPEED -> WIND_UNITS;
+			case WEATHER_BAND_PRECIPITATION -> PRECIPITATION_UNITS;
+			default -> Collections.emptyList();
+		};
 	}
 
 	public float getBandOpacity() {
