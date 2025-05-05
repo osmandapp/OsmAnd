@@ -1178,6 +1178,9 @@ public class OsmandSettings {
 
 	}.makeProfile();
 
+	public final OsmandPreference<TemperatureUnitMode> UNIT_OF_TEMPERATURE = new EnumStringPreference<>(this,
+			"unit_of_temperature", TemperatureUnitMode.SYSTEM_DEFAULT, TemperatureUnitMode.values()).makeProfile();
+
 	// fuel tank capacity stored in litres
 	public final OsmandPreference<Float> FUEL_TANK_CAPACITY = new FloatPreference(this,
 			"fuel_tank_capacity", OBDDataComputer.DEFAULT_FUEL_TANK_CAPACITY).makeProfile();

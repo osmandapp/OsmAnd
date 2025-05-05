@@ -48,7 +48,7 @@
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="default_metric_system"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/unit_of_length" />
+		android:title="@string/shared_string_length" />
 
 	<Preference
 		android:key="coordinates_format"
@@ -64,12 +64,17 @@
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="default_speed_system"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/default_speed_system" />
+		android:title="@string/shared_string_speed" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="unit_of_volume"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/unit_of_volume" />
+		android:title="@string/shared_string_volume" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="unit_of_temperature"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/shared_string_temperature" />
 
 	<Preference
 		android:key="precise_distance_numbers"
