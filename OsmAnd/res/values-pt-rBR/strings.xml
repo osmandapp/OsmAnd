@@ -6103,4 +6103,5 @@
     <string name="no_photo_for_location_desc">Nenhuma foto de usuário foi adicionada a este local ainda</string>
     <string name="cant_load_map_styles">Não é possível carregar estilos de mapa.</string>
     <string name="remaining_fuel">Combustível restante</string>
+    <string name="shared_string_instant">Instantâneo</string>
 </resources>
