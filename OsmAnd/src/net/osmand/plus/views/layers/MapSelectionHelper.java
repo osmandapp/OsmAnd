@@ -547,7 +547,7 @@ public class MapSelectionHelper {
 	}
 
 	private void addGeometry(PlaceDetailsObject detailObj, ObfMapObject obfMapObject) {
-		if (detailObj != null && obfMapObject.getPoints31().size() > 1) {
+		if (detailObj != null && !detailObj.hasGeometry() && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
 			for (int k = 0; k < points31.size(); k++) {
 				detailObj.addX(points31.get(k).getX());

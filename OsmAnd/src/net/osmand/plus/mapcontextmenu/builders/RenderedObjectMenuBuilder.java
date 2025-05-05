@@ -9,22 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
@@ -142,41 +140,25 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 	private static class SearchAmenitiesTask extends AsyncTask<Void, Void, Amenity> {
 
 		private final CallbackWithObject<Amenity> listener;
-		private final QuadRect rect;
 		private final long osmId;
 		private final OsmandApplication app;
+		private final RenderedObject renderedObject;
+		private final LatLon latLon;
 
 		private SearchAmenitiesTask(OsmandApplication application, RenderedObject renderedObject, CallbackWithObject<Amenity> listener) {
 			this.listener = listener;
-			double lat = MapUtils.get31LatitudeY(renderedObject.getLabelY());
-			double lon = MapUtils.get31LongitudeX(renderedObject.getLabelX());
-			rect = MapUtils.calculateLatLonBbox(lat, lon, SEARCH_POI_RADIUS);
 			osmId = ObfConstants.getOsmObjectId(renderedObject);
 			app = application;
+			double lat = MapUtils.get31LatitudeY(renderedObject.getLabelY());
+			double lon = MapUtils.get31LongitudeX(renderedObject.getLabelX());
+			latLon = new LatLon(lat, lon);
+			this.renderedObject = renderedObject;
 		}
 
 		@Override
 		protected Amenity doInBackground(Void... params) {
-			List<Amenity> amenities = app.getResourceManager().searchAmenities(
-					BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
-					rect.top, rect.left, rect.bottom, rect.right,
-					-1, true,
-					new ResultMatcher<>() {
-						@Override
-						public boolean publish(Amenity amenity) {
-							long id = ObfConstants.getOsmObjectId(amenity);
-							return id == osmId;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-			});
-			if (amenities.size() > 0) {
-				return amenities.get(0);
-			}
-			return null;
+			String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
+			return MapSelectionHelper.findAmenity(app, latLon, osmId, null, wikidata);
 		}
 
 		@Override
