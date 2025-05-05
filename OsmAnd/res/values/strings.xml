@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="travel_guides">Guides</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favorites.</string>
     <string name="msg_favorites_skipped_as_existing">Favorite points (%1$d) were skipped as already existing.</string>
     <string name="saved_to_device">Saved to device</string>

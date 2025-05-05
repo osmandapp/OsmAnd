@@ -49,6 +49,17 @@ public class PlaceDetailsObject {
 		return selectedObjects;
 	}
 
+	@NonNull
+	public List<Amenity> getAmenities() {
+		List<Amenity> amenities = new ArrayList<>();
+		for (SelectedMapObject mapObject : selectedObjects) {
+			if (mapObject.object() instanceof Amenity amenity) {
+				amenities.add(amenity);
+			}
+		}
+		return amenities;
+	}
+
 	public void addObject(@NonNull Object object, @Nullable IContextMenuProvider provider) {
 		if (shouldSkip(object)) {
 			return;

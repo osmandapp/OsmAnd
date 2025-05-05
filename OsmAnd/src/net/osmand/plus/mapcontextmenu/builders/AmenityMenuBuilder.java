@@ -137,9 +137,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					}
 				});
 			}
-			if (isCustomOnlinePhotosPosition()) {
-				buildNearestPhotos((ViewGroup) view, amenity);
-			}
+			buildPlaceRows((ViewGroup) view, amenity);
 		}
 	}
 
@@ -183,15 +181,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		if (amenity.isRoutePoint()) {
-			processRoutePointAmenityTags(view);
-		}
+		processRoutePointAmenityTags(view);
+		buildInternalRows(view);
 
-		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
-		rowsBuilder.setLight(isLightContent());
-		rowsBuilder.setLatLon(getLatLon());
-		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
-		rowsBuilder.buildInternal(view);
 		if (PluginsHelper.getActivePlugin(OsmEditingPlugin.class) != null) {
 			rowsBuilder.buildWikiDataRow(view);
 		}
@@ -202,6 +194,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (!rowsBuilder.isFirstRow()) {
 			firstRow = rowsBuilder.isFirstRow();
 		}
+	}
+
+	public void buildInternalRows(View view) {
+		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
+		rowsBuilder.setLight(isLightContent());
+		rowsBuilder.setLatLon(getLatLon());
+		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
+		rowsBuilder.buildInternal(view);
 	}
 
 	private void buildNamesRow(ViewGroup view) {
@@ -218,6 +218,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private void processRoutePointAmenityTags(View view) {
+		if (!amenity.isRoutePoint()) {
+			return;
+		}
 		final String wptExtraTags = additionalInfo.get(WPT_EXTRA_TAGS);
 		if (!Algorithms.isEmpty(wptExtraTags)) {
 			Gson gson = new Gson();

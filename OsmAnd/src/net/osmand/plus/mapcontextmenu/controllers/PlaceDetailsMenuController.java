@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.builders.PlaceDetailsMenuBuilder;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
 
 public class PlaceDetailsMenuController extends AmenityMenuController {
@@ -13,7 +14,7 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 	public PlaceDetailsMenuController(@NonNull MapActivity activity,
 			@NonNull PointDescription description,
 			@NonNull PlaceDetailsObject detailsObject) {
-		super(activity, description, detailsObject.getSyntheticAmenity());
+		super(activity, new PlaceDetailsMenuBuilder(activity, detailsObject), description, detailsObject.getSyntheticAmenity());
 		this.detailsObject = detailsObject;
 	}
 
