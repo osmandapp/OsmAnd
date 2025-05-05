@@ -124,8 +124,9 @@ class POIScreen(
                 if (groupIcon == null) {
                     groupIcon = AppCompatResources.getDrawable(app, R.drawable.mx_special_custom_category)
                 }
-                val icon = CarIcon.Builder(
-                    IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(groupIcon))).build()
+                val icon = if (groupIcon != null) CarIcon.Builder(
+                    IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(groupIcon)))
+                    .build() else null
                 val description =
                     if (point.alternateName != null) point.alternateName else ""
                 val dist = MapUtils.getDistance(
@@ -135,9 +136,8 @@ class POIScreen(
                     SpannableString(if (Algorithms.isEmpty(description)) " " else "  • $description")
                 val distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist))
                 address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
-                listBuilder.addItem(Row.Builder()
+                val rowBuilder = Row.Builder()
                     .setTitle(title)
-                    .setImage(icon)
                     .addText(address)
                     .setOnClickListener { onClickSearchResult(point) }
                     .setMetadata(
@@ -146,7 +146,8 @@ class POIScreen(
                                 CarLocation.create(
                                     point.location.latitude,
                                     point.location.longitude)).build()).build())
-                    .build())
+                icon?.let { rowBuilder.setImage(it) }
+                listBuilder.addItem(rowBuilder.build())
             }
         }
         adjustMapToRect(location, mapRect)

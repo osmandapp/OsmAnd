@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
-import android.os.LocaleList;
 import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
@@ -259,6 +258,12 @@ public class LocaleHelper {
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	public static String getPreferredPlacesLanguage(@NonNull OsmandApplication app) {
+		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		return Algorithms.isEmpty(locale) ? app.getLanguage() : locale;
 	}
 
 	@NonNull

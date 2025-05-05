@@ -1010,7 +1010,7 @@ public class AndroidUtils {
 	}
 
 	@NonNull
-	public static Bitmap drawableToBitmap(Drawable drawable) {
+	public static Bitmap drawableToBitmap(@NonNull Drawable drawable) {
 		return drawableToBitmap(drawable, false);
 	}
 

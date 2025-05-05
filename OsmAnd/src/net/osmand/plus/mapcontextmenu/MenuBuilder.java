@@ -332,8 +332,12 @@ public class MenuBuilder {
 			buildCoordinatesRow(view);
 		}
 		if (!isCustomOnlinePhotosPosition()) {
-			buildNearestPhotos(view, object);
+			buildNearestRows(view, object);
 		}
+	}
+
+	public void buildNearestRows(@NonNull ViewGroup view, @Nullable Object object) {
+		buildNearestPhotos(view, object);
 	}
 
 	public void buildNearestPhotos(@NonNull ViewGroup view, @Nullable Object object) {

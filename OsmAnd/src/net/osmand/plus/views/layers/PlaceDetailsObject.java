@@ -2,6 +2,8 @@ package net.osmand.plus.views.layers;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
@@ -35,6 +37,17 @@ public class PlaceDetailsObject extends BaseDetailsObject {
 	@NonNull
 	public List<SelectedMapObject> getSelectedObjects() {
 		return selectedObjects;
+	}
+
+	@NonNull
+	public List<Amenity> getAmenities() {
+		List<Amenity> amenities = new ArrayList<>();
+		for (SelectedMapObject mapObject : selectedObjects) {
+			if (mapObject.object() instanceof Amenity amenity) {
+				amenities.add(amenity);
+			}
+		}
+		return amenities;
 	}
 
 
