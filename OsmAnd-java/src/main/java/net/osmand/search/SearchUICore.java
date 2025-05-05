@@ -138,6 +138,9 @@ public class SearchUICore {
 			if (SearchUICore.isDebugMode()) {
 				LOG.info("Add search results resortAll=" + (resortAll ? "true" : "false") + " removeDuplicates=" + (removeDuplicates ? "true" : "false") + " Results=" + sr.size() + " Current results=" + this.searchResults.size());
 			}
+			if (Algorithms.isEmpty(sr)) {
+				return this;
+			}
 			if (resortAll) {
 				this.searchResults.addAll(sr);
 				if (removeDuplicates) {
