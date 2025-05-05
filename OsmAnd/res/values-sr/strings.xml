@@ -5715,7 +5715,7 @@
     <string name="destination_first">Прво одредиште</string>
     <string name="position_animation_empty_banner_description">Сличица положаја се помера на сваки нови примљени положај без оживљавања.</string>
     <string name="wikidata">Викидата</string>
-    <string name="shared_string_no_animation">Без оживљавања</string>
+    <string name="shared_string_no_animation">Без исцртавања</string>
     <string name="read_on_wiki">Прочитајте на Википедији</string>
     <string name="prediction_time_description">Сличица положаја у ОсмАнду оживљава са сваком примљеном тачком података ГПС-а (једном у секунди). Мало кашњење у његовом кретању може бити приметно, посебно када се корисник брзо креће или снага ГПС-а скаче.</string>
     <string name="prediction_time_advanced_description">Подесите време предвиђања да бисте смањили кашњење.</string>

@@ -1240,7 +1240,7 @@
     <string name="background_service_int_descr">Intervalo de activación del modo reposo:</string>
     <string name="background_service_provider_descr">Método de ubicación usado del modo reposo:</string>
     <string name="background_service_provider">Proveedor de ubicación</string>
-    <string name="background_router_service_descr">Realiza un seguimiento de tu ubicación con la pantalla apagada.</string>
+    <string name="background_router_service_descr">Registra tu ubicación con la pantalla apagada.</string>
     <string name="background_router_service">Ejecutar OsmAnd en modo reposo</string>
     <string name="off_router_service_no_gps_available">El servicio de navegación en modo reposo, necesita un proveedor de ubicación para activarse.</string>
     <string name="hide_poi_filter">Ocultar filtro</string>
@@ -2893,8 +2893,8 @@
     <string name="months_3">Tres meses</string>
     <string name="price_free">Gratis</string>
     <string name="get_discount_title">Obtené %1$d %2$s a %3$s de descuento.</string>
-    <string name="get_discount_first_part">%1$s durante el primer %2$s</string>
-    <string name="get_discount_first_few_part">%1$s durante el primer %2$s</string>
+    <string name="get_discount_first_part">%1$s el primer %2$s</string>
+    <string name="get_discount_first_few_part">%1$s el primer %2$s</string>
     <string name="get_discount_second_part">Luego %1$s</string>
     <string name="cancel_subscription">Cancelar suscripción</string>
     <string name="price_and_discount">%1$s • Ahorrá %2$s</string>
@@ -5465,7 +5465,7 @@
     <string name="unit_of_volume">Unidad de volumen</string>
     <string name="record_obd_data">Grabar estadísticas del vehículo</string>
     <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Realiza un seguimiento de los datos vitales del vehículo usando el protocolo OBD-II. Supervisa valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registra los datos vitales del vehículo usando el protocolo OBD-II. Supervisá valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
     <string name="vehicle_metrics_obd_ii">Estadísticas del vehículo (OBD-II)</string>
     <string name="shared_string_volume">Volumen</string>
     <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
