@@ -343,12 +343,17 @@ public class TravelArticle {
 		}
 
 		private TravelArticleIdentifier(@NonNull TravelArticle article) {
-			file = article.file;
-			lat = article.lat;
-			lon = article.lon;
-			title = article.title;
-			routeId = article.routeId;
-			routeSource = article.routeSource;
+			this(article.file, article.lat, article.lon, article.title, article.routeId, article.routeSource);
+		}
+
+		public TravelArticleIdentifier(@Nullable File file, double lat, double lon,
+				@Nullable String title, @Nullable String routeId, @Nullable String routeSource) {
+			this.file = file;
+			this.lat = lat;
+			this.lon = lon;
+			this.title = title;
+			this.routeId = routeId;
+			this.routeSource = routeSource;
 		}
 
 		@Override
