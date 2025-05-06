@@ -30,7 +30,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
 
 import net.osmand.IndexConstants;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -51,12 +50,14 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -395,41 +396,41 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	}
 
 	public static boolean showInstanceByTitle(@NonNull OsmandApplication app,
-											  @NonNull FragmentManager fm,
+											  @NonNull FragmentManager manager,
 											  @NonNull String title,
 											  @NonNull String lang) {
 		TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, lang);
-		return articleId != null && showInstance(app, fm, articleId, lang);
+		return articleId != null && showInstance(app, manager, articleId, lang);
 	}
 
 	public static boolean showInstance(@NonNull OsmandApplication app,
-									   @NonNull FragmentManager fm,
+									   @NonNull FragmentManager manager,
 									   @NonNull TravelArticleIdentifier articleId,
 									   @Nullable String selectedLang) {
-		ArrayList<String> langs = app.getTravelHelper().getArticleLangs(articleId);
-		return showInstance(fm, articleId, langs, selectedLang);
+		List<String> langs = app.getTravelHelper().getArticleLangs(articleId);
+		return showInstance(manager, articleId, langs, selectedLang);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fm,
+	public static boolean showInstance(@NonNull FragmentManager manager,
 									   @NonNull TravelArticleIdentifier articleId,
-									   @NonNull ArrayList<String> langs) {
-		return showInstance(fm, articleId, langs, null);
+									   @NonNull List<String> langs) {
+		return showInstance(manager, articleId, langs, null);
 	}
 
-	private static boolean showInstance(@NonNull FragmentManager fm,
+	public static boolean showInstance(@NonNull FragmentManager manager,
 										@NonNull TravelArticleIdentifier articleId,
-										@NonNull ArrayList<String> langs,
+										@NonNull List<String> langs,
 										@Nullable String selectedLang) {
 		try {
 			Bundle args = new Bundle();
 			args.putParcelable(ARTICLE_ID_KEY, articleId);
-			args.putStringArrayList(LANGS_KEY, langs);
+			args.putStringArrayList(LANGS_KEY, new ArrayList<>(langs));
 			if (langs.contains(selectedLang)) {
 				args.putString(SELECTED_LANG_KEY, selectedLang);
 			}
 			WikivoyageArticleDialogFragment fragment = new WikivoyageArticleDialogFragment();
 			fragment.setArguments(args);
-			fragment.show(fm, TAG);
+			fragment.show(manager, TAG);
 			return true;
 		} catch (RuntimeException e) {
 			return false;
