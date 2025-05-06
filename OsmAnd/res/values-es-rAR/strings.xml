@@ -920,7 +920,7 @@
     <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas.</string>
     <string name="offline_edition">Edición sin conexión</string>
-    <string name="offline_edition_descr">Si activás la edición sin conexión, los cambios se guardarán localmente primero y se cargarán a pedido; de lo contrario, los cambios se cargarán de inmediato.</string>
+    <string name="offline_edition_descr">Si activás la edición sin conexión, los cambios se guardarán localmente primero y se cargarán a pedido, de lo contrario los cambios se cargarán de inmediato.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación no afectan a los archivos de mapa descargados; en su lugar, los cambios se guardan como un archivo en el dispositivo.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
     <string name="local_openstreetmap_were_uploaded">Se enviaron {0} PDI/notas de OSM</string>
@@ -5619,4 +5619,5 @@
     <string name="saved_to_device">Guardado en el dispositivo</string>
     <string name="save_to_device_error">Guardar el error del dispositivo</string>
     <string name="save_to_device">Guardar en el dispositivo</string>
+    <string name="travel_guides">Guías</string>
 </resources>
