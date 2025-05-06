@@ -530,11 +530,9 @@ public class MapSelectionHelper {
 		}
 		if (!Algorithms.isEmpty(filtered)) {
 			PlaceDetailsObject detailObj = new PlaceDetailsObject(filtered.get(0), provider);
-			if (filtered.size() > 1) {
-				for (int i = 1; i < filtered.size(); i++) {
-					detailObj.addObject(filtered.get(i));
-					detailObj.combineData();
-				}
+			for (int i = 1; i < filtered.size(); i++) {
+				detailObj.addObject(filtered.get(i));
+				detailObj.combineData();
 			}
 			return detailObj;
 		}
@@ -564,7 +562,7 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	public static List<Amenity> findAmenitiesByOsmIdOrWikidata(@NonNull List<Amenity> amenities,
+	private static List<Amenity> findAmenitiesByOsmIdOrWikidata(@NonNull List<Amenity> amenities,
 			long id, @NonNull LatLon point, @Nullable String wikidata) {
 		List<Amenity> result = new ArrayList<>();
 		double minDist = AMENITY_SEARCH_RADIUS_FOR_RELATION * 4;

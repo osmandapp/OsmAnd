@@ -1,7 +1,6 @@
 package net.osmand.search;
 
 import static net.osmand.data.Amenity.ROUTE_ID;
-import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 
@@ -10,7 +9,6 @@ import net.osmand.Collator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.City;
@@ -44,16 +42,14 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -86,8 +82,6 @@ public class SearchUICore {
 
 	private static boolean debugMode = false;
 
-	private static int lastCurrentResultSize = 0;
-	
 	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
 			Arrays.asList("building", "internet_access_yes"));
 
@@ -143,12 +137,13 @@ public class SearchUICore {
 			}
 			if (resortAll) {
 				this.searchResults.addAll(sr);
-				if (removeDuplicates && lastCurrentResultSize != this.searchResults.size()) {
+				if (removeDuplicates) {
 					long start = System.currentTimeMillis(), size = this.searchResults.size();
 					uniteSearchResultsByOsmIdOrWikidata(this.searchResults);
-					System.err.printf("XXX time %d ms (removed %s results=%d-%d)\n",
-							System.currentTimeMillis() - start, size - this.searchResults.size(), size, this.searchResults.size());
-					lastCurrentResultSize = this.searchResults.size();
+					if (SearchUICore.isDebugMode()) {
+						LOG.info(String.format(Locale.US, "Deduplicate time %d ms (removed %s results=%d-%d)\n",
+								System.currentTimeMillis() - start, size - this.searchResults.size(), size, this.searchResults.size()));
+					}
 				}
 				sortSearchResults();
 				if (removeDuplicates) {
@@ -796,7 +791,6 @@ public class SearchUICore {
 						o2.getSearchPriority(phrase));
 			}
 		});
-		lastCurrentResultSize = 0;
 		for (SearchCoreAPI api : lst) {
 			if (matcher.isCancelled()) {
 				break;
