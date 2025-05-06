@@ -761,7 +761,7 @@
     <string name="routing_preferences_descr">Поставке путовања</string>
     <string name="amenity_type_seamark">Водена ознака</string>
     <string name="app_modes_choose">Апликативни профили</string>
-    <string name="map_widget_map_rendering">Приказ карте</string>
+    <string name="map_widget_map_rendering">Приказивање карте</string>
     <string name="app_mode_motorcycle">Мотоцикл</string>
     <string name="app_mode_boat">Брод</string>
     <string name="app_mode_aircraft">Авион</string>
@@ -5738,4 +5738,5 @@
     <string name="save_to_device">Сачувај на уређају</string>
     <string name="saved_to_device">Сачувано на уређају</string>
     <string name="save_to_device_error">Грешка при упису на уређају</string>
+    <string name="travel_guides">Упутства</string>
 </resources>
