@@ -5734,4 +5734,5 @@
     <string name="save_to_device_error">Greška pri upisu na uređaju</string>
     <string name="save_to_device">Sačuvaj na Uređaju</string>
     <string name="saved_to_device">Sačuvano na uređaju</string>
+    <string name="travel_guides">Vodič</string>
 </resources>
