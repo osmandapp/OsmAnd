@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentManager.BackStackEntry;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -235,15 +236,16 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		if (article == null || activity == null || fm == null) {
 			return;
 		}
-		if (activity instanceof WikivoyageExploreActivity) {
-			WikivoyageExploreActivity exploreActivity = (WikivoyageExploreActivity) activity;
+		if (activity instanceof WikivoyageExploreActivity exploreActivity) {
 			exploreActivity.setArticle(article);
+		} else if (activity instanceof MapActivity) {
+			closeFragment();
 		}
 		TravelHelper travelHelper = app.getTravelHelper();
 		File file = travelHelper.createGpxFile(article);
 		boolean temporarySelected = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) == null;
 		TrackMenuFragment.openTrack(activity, new File(file.getAbsolutePath()), null,
-				getString(R.string.icon_group_travel), TrackMenuTab.POINTS, temporarySelected);
+				app.getString(R.string.icon_group_travel), TrackMenuTab.POINTS, temporarySelected);
 	}
 
 	private void updateSaveButton() {
