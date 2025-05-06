@@ -287,6 +287,10 @@ public class GpxDisplayHelper {
 		};
 	}
 
+	public void removeSplitTrackTask(@NonNull SelectedGpxFile selectedGpxFile) {
+		splitTrackTasks.remove(selectedGpxFile.getGpxFile().getPath());
+	}
+
 	@NonNull
 	public static String buildTrackSegmentName(GpxFile gpxFile, Track track, TrkSegment segment, OsmandApplication app) {
 		String trackTitle = getTrackTitle(gpxFile, track, app);
