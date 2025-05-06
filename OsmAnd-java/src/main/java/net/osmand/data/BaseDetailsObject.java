@@ -7,6 +7,7 @@ import net.osmand.binary.ObfConstants;
 import net.osmand.osm.PoiCategory;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
+import net.osmand.search.core.SearchResult.ObfType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,15 +25,23 @@ public class BaseDetailsObject {
     protected final Set<String> wikidataIds = new HashSet<>();
     protected final List<Object> objects = new ArrayList<>();
     protected String obfResourceName;
+    protected SearchResult.ObfType obfType;
 
     protected Amenity syntheticAmenity = new Amenity();
+    protected final String lang;
 
     public BaseDetailsObject() {
+        lang = "en";
     }
 
-    public BaseDetailsObject(Object object) {
+    public BaseDetailsObject(Object object, String lang) {
         addObject(object);
         combineData();
+        if (lang != null) {
+            this.lang = lang;
+        } else {
+            this.lang = "en";
+        }
     }
 
     public Amenity getSyntheticAmenity() {
@@ -93,6 +102,20 @@ public class BaseDetailsObject {
     public void combineData() {
         Set<String> contentLocales = new TreeSet<>();
         syntheticAmenity = new Amenity();
+        objects.sort((o1, o2) -> {
+            String l1 = getLangForTravel(o1);
+            String l2 = getLangForTravel(o2);
+            if (l2.equals(l1)) {
+                return 0;
+            }
+            if (l2.equals(lang)) {
+                return 1;
+            }
+            if (l1.equals(lang)) {
+                return -1;
+            }
+            return 0;
+        });
         objects.sort((o1, o2) -> {
             int ord1 = getObfType(o1).ordinal();
             int ord2 = getObfType(o2).ordinal();
@@ -169,13 +192,20 @@ public class BaseDetailsObject {
     }
 
     public SearchResult.ObfType getObfType() {
+        if (obfType == null) {
+            obfType = findObfType(obfResourceName, syntheticAmenity);
+        }
+        return obfType;
+    }
+
+    private static SearchResult.ObfType findObfType(String obfResourceName, Amenity amenity) {
         if (obfResourceName != null && obfResourceName.contains("basemap")) {
             return SearchResult.ObfType.BASEMAP;
         }
         if (obfResourceName != null && (obfResourceName.contains("travel") || obfResourceName.contains("wikivoyage"))) {
             return SearchResult.ObfType.TRAVEL;
         }
-        if (syntheticAmenity.getType().isWiki()) {
+        if (amenity.getType().isWiki()) {
             return SearchResult.ObfType.WIKIPEDIA;
         }
         return SearchResult.ObfType.DETAILED;
@@ -187,11 +217,26 @@ public class BaseDetailsObject {
             return detailsObject.getObfType();
         }
         if (object instanceof Amenity amenity) {
-            BaseDetailsObject baseDetailsObject = new BaseDetailsObject(amenity);
-            baseDetailsObject.setObfResourceName(amenity.getRegionName());
-            return baseDetailsObject.getObfType();
-        }
+            return findObfType(amenity.getRegionName(), amenity);
+         }
         return SearchResult.ObfType.DETAILED;
+    }
+
+    private static String getLangForTravel(Object object) {
+        Amenity amenity = null;
+        if (object instanceof Amenity) {
+            amenity = (Amenity) object;
+        }
+        if (object instanceof BaseDetailsObject) {
+            amenity = ((BaseDetailsObject) object).syntheticAmenity;
+        }
+        if (amenity != null && getObfType(object) == ObfType.TRAVEL) {
+            String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+            if (lang != null) {
+                return lang;
+            }
+        }
+        return "en";
     }
 
 }

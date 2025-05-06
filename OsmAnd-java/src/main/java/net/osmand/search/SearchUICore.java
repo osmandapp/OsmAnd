@@ -259,7 +259,7 @@ public class SearchUICore {
 		}
 
 		private void copyData(SearchResult unique, SearchResult iterated) {
-			BaseDetailsObject base = new BaseDetailsObject(unique.object);
+			BaseDetailsObject base = new BaseDetailsObject(unique.object, phrase.getSettings().getLang());
 			base.addObject(iterated.object);
 			base.combineData();
 			unique.object = base.getSyntheticAmenity();

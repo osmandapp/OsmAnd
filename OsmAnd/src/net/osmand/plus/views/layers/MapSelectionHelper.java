@@ -529,7 +529,7 @@ public class MapSelectionHelper {
 			}
 		}
 		if (!Algorithms.isEmpty(filtered)) {
-			PlaceDetailsObject detailObj = new PlaceDetailsObject(filtered.get(0), provider);
+			PlaceDetailsObject detailObj = new PlaceDetailsObject(filtered.get(0), provider, app.getLanguage());
 			for (int i = 1; i < filtered.size(); i++) {
 				detailObj.addObject(filtered.get(i));
 				detailObj.combineData();
@@ -829,7 +829,7 @@ public class MapSelectionHelper {
 			LatLon latLon = amenity.getLocation();
 			detailsObject = findPlaceDetails(app, latLon, amenity.getOsmId(), null, amenity.getWikidata(), provider);
 			if (detailsObject == null) {
-				detailsObject = new PlaceDetailsObject(amenity, provider);
+				detailsObject = new PlaceDetailsObject(amenity, provider, app.getLanguage());
 			}
 		}
 

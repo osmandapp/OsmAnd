@@ -20,8 +20,8 @@ public class PlaceDetailsObject extends BaseDetailsObject {
 		super();
 	}
 
-	public PlaceDetailsObject(@NonNull Object object, @Nullable IContextMenuProvider provider) {
-		super(object);
+	public PlaceDetailsObject(@NonNull Object object, @Nullable IContextMenuProvider provider, @Nullable String lang) {
+		super(object, lang);
 		addObject(object, provider);
 		combineData();
 	}
