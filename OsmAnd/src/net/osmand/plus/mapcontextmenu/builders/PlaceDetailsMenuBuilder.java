@@ -84,10 +84,11 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 	@NonNull
 	protected CollapsableView getGuidesCollapsableView(
 			@NonNull Map<String, Map<String, TravelArticle>> articles) {
-		String lang = app.getLanguage();
+		String appLang = app.getLanguage();
+		String mapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		LinearLayout view = buildCollapsableContentView(mapActivity, true, true);
 		for (Map<String, TravelArticle> articleMap : articles.values()) {
-			TravelArticle article = getArticle(articleMap, lang);
+			TravelArticle article = getArticle(articleMap, appLang, mapLang);
 
 			TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
 			button.setText(article.getTitle());
@@ -103,9 +104,13 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 	}
 
 	@NonNull
-	private TravelArticle getArticle(@NonNull Map<String, TravelArticle> map, @NonNull String lang) {
-		TravelArticle article = map.get(lang);
-		return article != null ? article : map.entrySet().iterator().next().getValue();
+	private TravelArticle getArticle(@NonNull Map<String, TravelArticle> articleMap,
+			@NonNull String appLang, @Nullable String mapLang) {
+		TravelArticle article = articleMap.get(appLang);
+		if (article == null) {
+			article = articleMap.get(mapLang);
+		}
+		return article != null ? article : articleMap.entrySet().iterator().next().getValue();
 	}
 
 	@NonNull
