@@ -22,7 +22,9 @@ public class PlaceDetailsObject extends BaseDetailsObject {
 
 	public PlaceDetailsObject(BaseDetailsObject baseDetailsObject, @Nullable IContextMenuProvider provider) {
 		super(baseDetailsObject.getLang());
-		addObject(baseDetailsObject.getObjects(), provider);
+		for (Object obj : baseDetailsObject.getObjects()) {
+			addObject(obj, provider);
+		}
 		combineData();
 	}
 
