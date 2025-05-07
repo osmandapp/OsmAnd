@@ -644,7 +644,7 @@
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
-    <string name="audionotes_location_not_defined">Pulsá «Usar ubicación…» para agregar una nota a la ubicación.</string>
+    <string name="audionotes_location_not_defined">Pulsa en «Usar ubicación…» para agregar una nota a la ubicación.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_roads_only_item">Sólo caminos</string>
@@ -3293,7 +3293,7 @@
     <string name="subscription_osmandlive_item">Suscripción - OsmAnd Live</string>
     <string name="some_articles_may_not_available_in_lang">Es posible que algunos artículos de Wikipedia no estén disponibles en tu idioma.</string>
     <string name="select_wikipedia_article_langs">Marca los idiomas de los artículos de Wikipedia en el mapa. Cambia a cualquier idioma disponible mientras lees el artículo.</string>
-    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa «Alternar» para marcar todo y el lado izquierdo para elegir una categoría.</string>
+    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa en «Alternar» para marcar todo y el lado izquierdo para elegir una categoría.</string>
     <string name="search_poi_types">Buscar por tipos de PDI</string>
     <string name="radius_ruler_item">Regla radial</string>
     <string name="quick_action_item">Acción rápida</string>
@@ -4009,7 +4009,7 @@
     <string name="release_4_1">• Se agregó compatibilidad inicial con Android Auto\n\n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM\n\n• Filtro del GPS para la traza GPX\n\n• Widget de elevación (Pro)\n\n• Favoritos: se agregó la posibilidad de ver los íconos usados recientemente\n\n• Planificación de rutas: se usa el perfil elegido tras la ejecución\n\n• Se corrigió la capa de Mapillary, el complemento se desactiva de forma predefinida\n\n• Se agregó una pantalla para gestionar todo el historial de la aplicación\n\n• La orientación del mapa no se restablece luego de reiniciar la aplicación\n\n• Se mejoró la visualización del marcador SRTM de altura\n\n• Se corrigieron los subtítulos de los mapas en árabe\n\n• Se corrigieron diferentes problemas de navegación</string>
     <string name="shared_string_articles">Artículos</string>
     <string name="shared_string_details">Detalles</string>
-    <string name="exit_pan_mode_descr">Pulsa «Elegir» para salir del modo panorámico</string>
+    <string name="exit_pan_mode_descr">Pulsa en «Elegir» para salir del modo panorámico</string>
     <string name="upload_gpx_description_hint">Al dejarlo vacío, se usarán los nombres de las trazas como descripción. La descripción ingresada se aplica a cada traza.</string>
     <string name="search_title">Buscar: %1$s</string>
     <string name="icon_group_nautical">Náutico</string>
@@ -4068,7 +4068,7 @@
     <string name="copying_file">Copiando archivo %1$s…</string>
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="progress_complete">%1$s completo</string>
-    <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
+    <string name="storage_found_files_descr">Pulsa en «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
     <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
     <string name="storage_copied_files_size">Procesados %1$s archivo(s), %2$s</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
@@ -4077,7 +4077,7 @@
 \nLa aplicación cargará los datos usando la nueva carpeta.</string>
     <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
     <string name="shared_storage_third_step">Concede acceso a la carpeta. Sin esto, OsmAnd no puede copiar los archivos.</string>
-    <string name="shared_storage_first_step">Pulsa «%1$s». \nEl gestor de archivos se abrirá donde deberías encontrar y abrir la carpeta «osmand».</string>
+    <string name="shared_storage_first_step">Pulsa en «%1$s».\nEl gestor de archivos se abrirá donde deberías encontrar y abrir la carpeta «osmand».</string>
     <string name="shared_storage_second_step">Pulsa en «Usar esta carpeta».</string>
     <string name="folder_access_denied">Se necesitan permisos para acceder a la carpeta elegida.</string>
     <string name="copying_completed">Copiado</string>
@@ -5490,11 +5490,11 @@
     <string name="obd_device_forget_sensor_description">El escáner se quitará de la lista. Puedes vincular este escáner de nuevo en cualquier momento.</string>
     <string name="obd_vehicle_info">Datos del vehículo</string>
     <string name="obd_how_to_connect">Cómo conectarse:</string>
-    <string name="connect_obd_instructions_step">1. Conecta el escáner al puerto OBD-II del vehículo.\n\n2. Enciende el motor del vehículo\n\n3. Activa el Bluetooth del dispositivo\n\n4. Pulsa «%1$s» y elige el escáner del listado.</string>
+    <string name="connect_obd_instructions_step">1. Conecta el escáner al puerto OBD-II del vehículo.\n\n2. Enciende el motor del vehículo\n\n3. Activa el Bluetooth del dispositivo\n\n4. Pulsa en «%1$s» y elige el escáner del listado.</string>
     <string name="connect_obd_instructions_step1">Conecta el escáner al puerto OBD-II del vehículo.</string>
     <string name="connect_obd_instructions_step2">Enciende el motor del vehiculo</string>
     <string name="connect_obd_instructions_step3">Activa el Bluetooth del dispositivo</string>
-    <string name="connect_obd_instructions_step4">Pulsa «%1$s» y elige el escáner del listado.</string>
+    <string name="connect_obd_instructions_step4">Pulsa en «%1$s» y elige el escáner del listado.</string>
     <string name="obd_fuel_consumption_rate_l_h">Tasa de consumo del combustible (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Tasa de consumo del combustible (sensor)</string>
     <string name="learn_more_about_obd_sensors">Aprende más sobre los sensores.</string>
