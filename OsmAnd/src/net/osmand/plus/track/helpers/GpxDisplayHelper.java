@@ -259,7 +259,7 @@ public class GpxDisplayHelper {
 					splitTrackTasks.remove(path);
 				}
 			});
-			splitTrackTasks.put(selectedGpxFile.getGpxFile().getPath(), splitTask);
+			splitTrackTasks.put(path, splitTask);
 			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor);
 		}
 	}
