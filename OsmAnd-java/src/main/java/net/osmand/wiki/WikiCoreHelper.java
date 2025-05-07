@@ -156,9 +156,9 @@ public class WikiCoreHelper {
 		return wikiImages;
 	}
 
-	public static <T> T getImagesOsmAndAPIRequestV2(String jsonString, Class<T> responseClass) {
+	private static OsmandAPIResponseV2 getImagesOsmAndAPIRequestV2(String jsonString) {
 		try {
-			return new Gson().fromJson(jsonString, responseClass);
+			return new Gson().fromJson(jsonString, OsmandAPIResponseV2.class);
 		} catch (JsonSyntaxException e) {
 			LOG.error(e.getLocalizedMessage());
 		}
@@ -178,7 +178,7 @@ public class WikiCoreHelper {
 	}
 
 	public static List<WikiImage> getImagesFromJson(String json, List<WikiImage> wikiImages) {
-		OsmandAPIResponseV2 response = getImagesOsmAndAPIRequestV2(json, OsmandAPIResponseV2.class);
+		OsmandAPIResponseV2 response = getImagesOsmAndAPIRequestV2(json);
 		return createWikiImages(response, wikiImages);
 	}
 
