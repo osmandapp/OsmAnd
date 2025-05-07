@@ -14,7 +14,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.util.Algorithms;
 
 public class FavoritePointEditor extends PointEditor {

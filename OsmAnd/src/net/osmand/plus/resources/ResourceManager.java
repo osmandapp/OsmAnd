@@ -1,8 +1,6 @@
 package net.osmand.plus.resources;
 
 
-import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE;
-import static net.osmand.CollatorStringMatcher.StringMatcherMode.MULTISEARCH;
 import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.AppInitEvents.ASSETS_COPIED;
 import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
@@ -18,17 +16,14 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
-import net.osmand.CollatorStringMatcher;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
-import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
@@ -88,8 +83,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -363,14 +356,6 @@ public class ResourceManager {
 				: 0;
 	}
 
-	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom,
-			long requestTimestamp) {
-		TilesCache<?> cache = getTilesCache(map);
-		if (cache != null) {
-			cache.getTileForMap(file, map, x, y, zoom, true, false, true, requestTimestamp);
-		}
-	}
-
 	private GeoidAltitudeCorrection geoidAltitudeCorrection;
 	private boolean searchAmenitiesInProgress;
 
@@ -514,20 +499,6 @@ public class ResourceManager {
 			log.error(e);
 		}
 		return warnings;
-	}
-
-	private void copyPoiTypes(boolean overwrite) {
-		try {
-			File file = app.getAppPath(SETTINGS_DIR + "poi_types.xml");
-			boolean exists = file.exists();
-			if (!exists || overwrite) {
-				FileOutputStream fout = new FileOutputStream(file);
-				Algorithms.streamCopy(MapPoiTypes.class.getResourceAsStream("poi_types.xml"), fout);
-				fout.close();
-			}
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
 	}
 
 	private void renameRoadsFiles(ArrayList<File> files, File roadsPath) {
