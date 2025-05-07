@@ -298,7 +298,6 @@ public class GpxDisplayHelper {
 				if (callback != null) {
 					callback.processResult(success);
 				}
-				splitTrackTasks.remove(selectedGpxFile.getGpxFile().getPath());
 			}
 		};
 	}
