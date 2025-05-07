@@ -105,9 +105,10 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 	}
 
 	private void applyShadow() {
+		boolean isTransparentWidgets = app.getSettings().TRANSPARENT_MAP_THEME.get();
 		setClipToPadding(false);
 		setOutlineProvider(ViewOutlineProvider.BOUNDS);
-		ViewCompat.setElevation(this, isAnyRowVisible() ? 5f : 0);
+		ViewCompat.setElevation(this, isAnyRowVisible() && !isTransparentWidgets? 5f : 0);
 	}
 
 	private void updateVisibility() {
