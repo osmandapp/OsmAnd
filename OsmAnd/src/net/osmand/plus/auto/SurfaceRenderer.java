@@ -27,6 +27,8 @@ import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererView.MapRendererViewListener;
+import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.AppInitializeListener;
@@ -50,6 +52,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	public static final float MIN_ALLOWED_ELEVATION_ANGLE_AA = 20;
 
 	private static final double VISIBLE_AREA_MIN_DETECTION_SIZE = 1.025;
+	private static final double FREE_RIDE_AREA_MIN_DETECTION_SIZE = 1.15;
+	private static final float SPLIT_SCREEN_MIN_DETECTION_SIZE = 0.4f;
 	private static final int MAP_RENDER_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 7;
 
 	private final CarContext carContext;
@@ -123,9 +127,27 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					int containerHeight = surfaceContainer.getHeight();
 
 					float ratioX = cachedRatioX;
-					if ((float) containerWidth / visibleAreaWidth > VISIBLE_AREA_MIN_DETECTION_SIZE) {
+					float containerToVisibleAreaRatio = (float) containerWidth / visibleAreaWidth;
+					if (containerToVisibleAreaRatio > VISIBLE_AREA_MIN_DETECTION_SIZE) {
 						int centerX = visibleArea.centerX();
 						ratioX = (float) centerX / containerWidth;
+
+						if (containerToVisibleAreaRatio < FREE_RIDE_AREA_MIN_DETECTION_SIZE)
+						{
+							ratioX = 0.5f;
+						}
+
+						if (offscreenMapRendererView != null) {
+							int mapViewWidth = containerWidth;
+							if (ratioX < SPLIT_SCREEN_MIN_DETECTION_SIZE) {
+								ratioX = 0.5f;
+								mapViewWidth = visibleArea.right;
+							}
+
+							surfaceView.setSurfaceParams(mapViewWidth, surfaceView.getHeight(), surfaceView.getDpi());
+							AreaI viewport = new AreaI(new PointI(0, 0), new PointI(getWidth(), getHeight()));
+							offscreenMapRendererView.setViewport(viewport, false);
+						}
 						cachedRatioX = ratioX;
 					}
 					float ratioY = cachedRatioY;
