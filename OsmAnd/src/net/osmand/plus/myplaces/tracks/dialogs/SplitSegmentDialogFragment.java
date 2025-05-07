@@ -288,7 +288,6 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 					selectedGpxFile.setSplitGroups(groups, app);
 				}
 				updateContent();
-				app.getGpxDisplayHelper().removeSplitTrackTask(selectedGpxFile);
 			}
 		};
 	}

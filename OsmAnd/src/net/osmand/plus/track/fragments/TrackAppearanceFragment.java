@@ -759,7 +759,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 					selectedGpxFile.setSplitGroups(groups, app);
 					refreshMap();
 				}
-				app.getGpxDisplayHelper().removeSplitTrackTask(selectedGpxFile);
 			}
 		};
 	}
