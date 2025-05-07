@@ -158,7 +158,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		@Override
 		protected Amenity doInBackground(Void... params) {
 			String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
-			return MapSelectionHelper.findAmenity(app, latLon, osmId, null, wikidata);
+			return app.getResourceManager().getAmenitySearcher().findAmenity(latLon, osmId, null, wikidata);
 		}
 
 		@Override

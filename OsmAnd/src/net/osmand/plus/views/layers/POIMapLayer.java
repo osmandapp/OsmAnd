@@ -969,7 +969,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public boolean runExclusiveAction(@Nullable Object object, boolean unknownLocation) {
 		MapActivity mapActivity = getMapActivity();
 		if (object instanceof Amenity amenity) {
-			object = MapSelectionHelper.fetchOtherData(app, amenity);
+			object = app.getResourceManager().fetchOtherData(app, amenity);
 		}
 		if (mapActivity != null && object instanceof PlaceDetailsObject detailsObject) {
 			Amenity amenity = getSelectedTopPlace(detailsObject);

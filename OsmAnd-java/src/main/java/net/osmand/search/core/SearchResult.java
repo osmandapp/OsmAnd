@@ -58,14 +58,14 @@ public class SearchResult {
 
 	private double unknownPhraseMatchWeight = 0;
 
-	public enum ObfType {
+	public enum SearchResultResource {
 		DETAILED,
 		WIKIPEDIA,
 		TRAVEL,
 		BASEMAP
 	}
 
-	private ObfType obfType;
+	private SearchResultResource searchResultResource;
 
 	public SearchResult() {
 		this.requiredSearchPhrase = SearchPhrase.emptyPhrase();
@@ -287,18 +287,18 @@ public class SearchResult {
 		return b.toString();
 	}
 
-	public ObfType getObfType() {
-		if (obfType == null) {
-			obfType = ObfType.DETAILED;
+	public SearchResultResource getResourceType() {
+		if (searchResultResource == null) {
+			searchResultResource = SearchResultResource.DETAILED;
 			if (object != null && object instanceof Amenity amenity) {
-				obfType = amenity.getType().isWiki() ? ObfType.WIKIPEDIA : obfType;
+				searchResultResource = amenity.getType().isWiki() ? SearchResultResource.WIKIPEDIA : searchResultResource;
 			}
 			if (file != null) {
-				obfType = file.getFile().getName().contains(".travel") ? ObfType.TRAVEL : obfType;
-				obfType = file.isBasemap() ? ObfType.BASEMAP : obfType;
+				searchResultResource = file.getFile().getName().contains(".travel") ? SearchResultResource.TRAVEL : searchResultResource;
+				searchResultResource = file.isBasemap() ? SearchResultResource.BASEMAP : searchResultResource;
 			}
 		}
-		return obfType;
+		return searchResultResource;
 	}
 
 	public Collection<String> getOtherWordsMatch() {

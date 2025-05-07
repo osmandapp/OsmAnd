@@ -23,6 +23,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
+import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -31,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -148,6 +150,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		return poiSubTypes;
 	}
 
+	@Override
 	public synchronized List<Amenity> searchAmenitiesByName(int x, int y, int l, int t, int r, int b, String query, ResultMatcher<Amenity> resulMatcher) {
 		long now = System.currentTimeMillis();
 		List<Amenity> amenities = Collections.emptyList();

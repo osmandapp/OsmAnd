@@ -17,7 +17,13 @@ public class PlaceDetailsObject extends BaseDetailsObject {
 	private final List<SelectedMapObject> selectedObjects = new ArrayList<>();
 
 	public PlaceDetailsObject() {
-		super();
+		super("en");
+	}
+
+	public PlaceDetailsObject(BaseDetailsObject baseDetailsObject, @Nullable IContextMenuProvider provider) {
+		super(baseDetailsObject.getLang());
+		addObject(baseDetailsObject.getObjects(), provider);
+		combineData();
 	}
 
 	public PlaceDetailsObject(@NonNull Object object, @Nullable IContextMenuProvider provider, @Nullable String lang) {
