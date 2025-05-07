@@ -36,6 +36,7 @@ import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
@@ -70,10 +71,10 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private int widgetWidth;
 
 	// views
-	private MultiTextViewEx tvPrimaryLine1;
-	private MultiTextViewEx tvSecondaryLine1;
-	private TextView tvPrimaryLine2;
-	private TextView tvSecondaryLine2;
+	private OutlinedTextContainer tvPrimaryLine1;
+	private OutlinedTextContainer tvSecondaryLine1;
+	private OutlinedTextContainer tvPrimaryLine2;
+	private OutlinedTextContainer tvSecondaryLine2;
 
 	public RouteInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
 	                       @Nullable WidgetsPanel panel) {
@@ -373,6 +374,12 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		this.textState = textState;
 		this.nightMode = textState.night;
 		recreateView();
+		updateTextOutline(tvPrimaryLine1, textState);
+		updateTextOutline(tvSecondaryLine1, textState);
+		updateTextOutline(tvPrimaryLine2, textState);
+		updateTextOutline(tvSecondaryLine2, textState);
+		forceUpdate = true;
+		updateInfoInternal();
 	}
 
 	@Override

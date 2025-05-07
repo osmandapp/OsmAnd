@@ -261,6 +261,18 @@
 		<!-- AutoScaleTextView attributes -->
 		<attr name="autoScale_minTextSize" format="dimension" />
 		<attr name="autoScale_maxTextSize" format="dimension" />
+
+		<!-- MultiTextViewEx attributes -->
+		<attr name="multiTextViewEx_separator" format="string" />
+		<attr name="multiTextViewEx_separatorColor" format="reference" />
+
+		<attr name="multiTextViewEx_primaryText" format="string" />
+		<attr name="multiTextViewEx_secondaryText" format="string" />
+		<attr name="multiTextViewEx_tertiaryText" format="string" />
+
+		<attr name="multiTextViewEx_primaryTextColor" format="reference" />
+		<attr name="multiTextViewEx_secondaryTextColor" format="reference" />
+		<attr name="multiTextViewEx_tertiaryTextColor" format="reference" />
 	</declare-styleable>
 
 	<declare-styleable name="HorizontalChipsView">
