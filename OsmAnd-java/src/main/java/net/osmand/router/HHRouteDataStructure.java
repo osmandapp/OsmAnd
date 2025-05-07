@@ -292,22 +292,20 @@ public class HHRouteDataStructure {
 		public void clearVisited(TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints) {
 			queue(false).clear();
 			queue(true).clear();
-			Iterator<T> it = queueAdded.iterator();
-			while (it.hasNext()) {
-				NetworkDBPoint p = it.next();
+			for (NetworkDBPoint p : queueAdded) {
 				FinalRouteSegment pos = p.rt(false).rtDetailedRoute;
 				FinalRouteSegment rev = p.rt(true).rtDetailedRoute;
 				p.clearRouting();
-				if (stPoints.containsKey(p.index) && pos != null) {
+				if (pos != null && stPoints.containsKey(p.index)) {
 					p.setDistanceToEnd(false, distanceToEnd(false, p));
 					p.setDetailedParentRt(false, pos);
-				} 
-				if (endPoints.containsKey(p.index) && rev != null) {
+				}
+				if (rev != null && endPoints.containsKey(p.index)) {
 					p.setDistanceToEnd(true, distanceToEnd(true, p));
 					p.setDetailedParentRt(true, rev);
 				}
-				it.remove();
 			}
+			queueAdded.clear();
 			visited.clear();
 			visitedRev.clear();
 		}
