@@ -5768,4 +5768,5 @@
     <string name="saved_to_device">Salvato nel dispositivo</string>
     <string name="save_to_device">Salva nel dispositivo</string>
     <string name="travel_guides">Guide</string>
+    <string name="save_to_device_error">Errore di salvataggio sul dispositivo</string>
 </resources>
