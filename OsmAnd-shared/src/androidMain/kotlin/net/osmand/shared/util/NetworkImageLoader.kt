@@ -3,6 +3,7 @@ package net.osmand.shared.util
 import android.content.Context
 import coil3.Bitmap
 import coil3.ImageLoader
+import coil3.decode.DataSource
 import coil3.disk.DiskCache
 import coil3.disk.directory
 import coil3.memory.MemoryCache
@@ -41,33 +42,57 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
         .build()
 
     fun loadImage(
-        url: String, callback: ImageLoaderCallback, handlePlaceholder: Boolean = false
+        url: String,
+        callback: ImageLoaderCallback? = null,
+        imageRequestListener: ImageRequestListener? = null,
+        handlePlaceholder: Boolean = false
     ): LoadingImage {
-        val request = ImageRequest.Builder(context)
+        val requestBuilder = ImageRequest.Builder(context)
             .data(url)
-            .target(
+
+        callback?.let {
+            requestBuilder.target(
                 onStart = { placeholder ->
-                    callback.onStart(placeholder?.takeIf { handlePlaceholder }?.toBitmap())
+                    it.onStart(placeholder?.takeIf { handlePlaceholder }?.toBitmap())
                 },
                 onSuccess = { result ->
-                    callback.onSuccess(result.toBitmap())
+                    it.onSuccess(result.toBitmap())
                 },
                 onError = { _ ->
-                    callback.onError()
-                })
-            .build()
+                    it.onError()
+                }
+            )
+        }
 
+        imageRequestListener?.let {
+            requestBuilder.listener(
+                onSuccess = { _, result ->
+                    val source = when (result.dataSource) {
+                        DataSource.MEMORY_CACHE -> ImageLoadSource.MEMORY_CACHE
+                        DataSource.MEMORY -> ImageLoadSource.MEMORY
+                        DataSource.DISK -> ImageLoadSource.DISK
+                        DataSource.NETWORK -> ImageLoadSource.NETWORK
+                        else -> ImageLoadSource.MEMORY
+                    }
+                    it.onSuccess(source)
+                }
+            )
+        }
+
+        val request = requestBuilder.build()
         return LoadingImage(url, imageLoader.enqueue(request))
     }
 
     fun loadImage(
         url: String,
+        callback: ImageLoaderCallback,
+        handlePlaceholder: Boolean = false
     ): LoadingImage {
-        val request = ImageRequest.Builder(context)
-            .data(url)
-            .build()
+        return loadImage(url, callback, null, handlePlaceholder)
+    }
 
-        return LoadingImage(url, imageLoader.enqueue(request))
+    fun loadImage(url: String): LoadingImage {
+        return loadImage(url, null, null, false)
     }
 }
 
@@ -78,6 +103,17 @@ interface ImageLoaderCallback {
     fun onSuccess(bitmap: Bitmap)
 
     fun onError()
+}
+
+interface ImageRequestListener {
+    fun onSuccess(source: ImageLoadSource)
+}
+
+enum class ImageLoadSource {
+    MEMORY_CACHE,
+    MEMORY,
+    DISK,
+    NETWORK
 }
 
 class LoadingImage(val url: String, private val disposable: Disposable) {

@@ -4,9 +4,7 @@ import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator.GR
 import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.ImageHolderType.*;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
@@ -31,6 +29,7 @@ import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.ImageCardListen
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.util.ImageLoadSource;
 import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 import net.osmand.shared.util.NetworkImageLoader;
@@ -40,8 +39,10 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 
 	private final int STANDARD_PHOTO_SIZE_DP;
 
+	private final OsmandApplication app;
 	private final ImageView ivImage;
 	private final ImageView ivSourceType;
+	private final ImageView loadSourceType;
 	private final TextView tvUrl;
 	private final ProgressBar progressBar;
 	private final View border;
@@ -49,11 +50,13 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 	private ImageHolderType type;
 	private LoadingImage loadingImage;
 
-	public GalleryImageHolder(OsmandApplication app, @NonNull View itemView) {
+	public GalleryImageHolder(@NonNull OsmandApplication app, @NonNull View itemView) {
 		super(itemView);
 		this.itemView = itemView;
+		this.app = app;
 		ivImage = itemView.findViewById(R.id.image);
 		ivSourceType = itemView.findViewById(R.id.source_type);
+		loadSourceType = itemView.findViewById(R.id.load_source_type);
 		tvUrl = itemView.findViewById(R.id.url);
 		border = itemView.findViewById(R.id.card_outline);
 		progressBar = itemView.findViewById(R.id.progress);
@@ -114,16 +117,56 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 
 				@Override
 				public void onError() {
+					if (!app.getSettings().isInternetConnectionAvailable()) {
+						tryLoadCacheHiResImage(mapActivity, listener, imageCard, imageLoader, nightMode);
+					} else {
+						imageCard.markImageDownloadFailed(true);
+						bindUrl(mapActivity, imageCard, nightMode);
+					}
+				}
+			}, this::updateLoadSource, false);
+		}
+	}
+
+	private void tryLoadCacheHiResImage(@NonNull MapActivity mapActivity, @NonNull ImageCardListener listener,
+	                                    @NonNull ImageCard imageCard, @NonNull NetworkImageLoader imageLoader, boolean nightMode) {
+		String hiResUrl = imageCard.getGalleryFullSizeUrl();
+		if (hiResUrl != null) {
+			loadingImage = imageLoader.loadImage(hiResUrl, new ImageLoaderCallback() {
+				@Override
+				public void onStart(@Nullable Bitmap bitmap) {
+
+				}
+
+				@Override
+				public void onSuccess(@NonNull Bitmap bitmap) {
+					bindImage(listener, imageCard);
+					Drawable next = new BitmapDrawable(ivImage.getResources(), bitmap);
+
+					ivImage.setImageDrawable(next);
+				}
+
+				@Override
+				public void onError() {
 					imageCard.markImageDownloadFailed(true);
 					bindUrl(mapActivity, imageCard, nightMode);
 				}
-			}, false);
+			}, this::updateLoadSource, false);
+		}
+	}
+
+	private void updateLoadSource(@Nullable ImageLoadSource source) {
+		if (!app.getSettings().isInternetConnectionAvailable() && ImageLoadSource.NETWORK != source) {
+			loadSourceType.setVisibility(View.VISIBLE);
+		} else {
+			loadSourceType.setVisibility(View.GONE);
 		}
 	}
 
 	private void bindImage(@NonNull ImageCardListener listener, @NonNull ImageCard imageCard) {
 		LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		layoutParams.gravity = Gravity.CENTER;
+		ivImage.setVisibility(View.VISIBLE);
 		ivImage.setLayoutParams(layoutParams);
 		ivImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
 		ivImage.setOnClickListener(v -> listener.onImageClicked(imageCard));
@@ -139,6 +182,7 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 		tvUrl.setOnClickListener(v -> AndroidUtils.openUrl(mapActivity, imageCard.getUrl(), nightMode));
 		border.setVisibility(View.VISIBLE);
 		progressBar.setVisibility(View.GONE);
+		updateLoadSource(null);
 		setSourceTypeIcon(null);
 	}
 

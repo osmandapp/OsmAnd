@@ -21,6 +21,16 @@
 		android:layout_marginTop="9dp"
 		android:visibility="gone" />
 
+	<ImageView
+		android:id="@+id/load_source_type"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_marginStart="6dp"
+		android:layout_marginBottom="6dp"
+		android:layout_gravity="start|bottom"
+		android:src="@drawable/ic_action_download_offline_with_bg"
+		android:visibility="gone"/>
+
 	<TextView
 		android:id="@+id/url"
 		android:layout_width="match_parent"
