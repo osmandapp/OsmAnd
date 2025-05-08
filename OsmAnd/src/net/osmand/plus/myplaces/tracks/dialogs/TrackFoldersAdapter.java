@@ -92,7 +92,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		locationViewCache.arrowResId = R.drawable.ic_direction_arrow;
 		locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode);
 		this.selectedFolder = selectedFolder;
-		sortMode = TracksSortMode.getDefaultSortMode(selectedFolder == null ? null : selectedFolder.getName());
+		sortMode = TracksSortMode.getDefaultSortMode(selectedFolder == null ? null : selectedFolder.getId());
 	}
 
 	public void setItems(@NonNull List<Object> items) {

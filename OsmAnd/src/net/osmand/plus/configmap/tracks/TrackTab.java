@@ -39,7 +39,7 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 
 	public TrackTab(@NonNull Context context, @NonNull File directory) {
 		this(context, directory, null, FOLDER);
-		sortMode = TracksSortMode.getDefaultSortMode(directory.getName());
+		sortMode = TracksSortMode.getDefaultSortMode(getId());
 	}
 
 	public TrackTab(@NonNull Context context, @NonNull SmartFolder smartFolder) {
