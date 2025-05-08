@@ -47,7 +47,6 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
-import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
@@ -409,7 +408,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	@Nullable
 	private Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
-		return MapSelectionHelper.fetchOtherData(app, object);
+		return app.getResourceManager().fetchOtherData(app, object);
 	}
 
 	public void show() {

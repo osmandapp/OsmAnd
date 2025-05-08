@@ -17,7 +17,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -158,7 +157,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		@Override
 		protected Amenity doInBackground(Void... params) {
 			String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
-			return MapSelectionHelper.findAmenity(app, latLon, osmId, null, wikidata);
+			return app.getResourceManager().getAmenitySearcher().findAmenity(latLon, osmId, null, wikidata);
 		}
 
 		@Override

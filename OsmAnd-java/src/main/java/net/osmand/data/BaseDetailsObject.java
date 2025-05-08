@@ -5,9 +5,8 @@ import static net.osmand.data.Amenity.DEFAULT_ELO;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.osm.PoiCategory;
-import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
-import net.osmand.search.core.SearchResult.ObfType;
+import net.osmand.search.core.SearchResult.SearchResultResource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,13 +24,13 @@ public class BaseDetailsObject {
     protected final Set<String> wikidataIds = new HashSet<>();
     protected final List<Object> objects = new ArrayList<>();
     protected String obfResourceName;
-    protected SearchResult.ObfType obfType;
+    protected SearchResultResource searchResultResource;
 
     protected Amenity syntheticAmenity = new Amenity();
     protected final String lang;
 
-    public BaseDetailsObject() {
-        lang = "en";
+    public BaseDetailsObject(String lang) {
+        this.lang = lang;
     }
 
     public BaseDetailsObject(Object object, String lang) {
@@ -117,8 +116,8 @@ public class BaseDetailsObject {
             return 0;
         });
         objects.sort((o1, o2) -> {
-            int ord1 = getObfType(o1).ordinal();
-            int ord2 = getObfType(o2).ordinal();
+            int ord1 = getResourceType(o1).ordinal();
+            int ord2 = getResourceType(o2).ordinal();
             if (ord1 != ord2) {
                 return ord2 > ord1 ? -1 : 1;
             }
@@ -191,35 +190,35 @@ public class BaseDetailsObject {
         obfResourceName = obfName;
     }
 
-    public SearchResult.ObfType getObfType() {
-        if (obfType == null) {
-            obfType = findObfType(obfResourceName, syntheticAmenity);
+    public SearchResultResource getResourceType() {
+        if (searchResultResource == null) {
+            searchResultResource = findObfType(obfResourceName, syntheticAmenity);
         }
-        return obfType;
+        return searchResultResource;
     }
 
-    private static SearchResult.ObfType findObfType(String obfResourceName, Amenity amenity) {
+    private static SearchResultResource findObfType(String obfResourceName, Amenity amenity) {
         if (obfResourceName != null && obfResourceName.contains("basemap")) {
-            return SearchResult.ObfType.BASEMAP;
+            return SearchResultResource.BASEMAP;
         }
         if (obfResourceName != null && (obfResourceName.contains("travel") || obfResourceName.contains("wikivoyage"))) {
-            return SearchResult.ObfType.TRAVEL;
+            return SearchResultResource.TRAVEL;
         }
         if (amenity.getType().isWiki()) {
-            return SearchResult.ObfType.WIKIPEDIA;
+            return SearchResultResource.WIKIPEDIA;
         }
-        return SearchResult.ObfType.DETAILED;
+        return SearchResultResource.DETAILED;
     }
 
 
-    private static SearchResult.ObfType getObfType(Object object) {
+    private static SearchResultResource getResourceType(Object object) {
         if (object instanceof BaseDetailsObject detailsObject) {
-            return detailsObject.getObfType();
+            return detailsObject.getResourceType();
         }
         if (object instanceof Amenity amenity) {
             return findObfType(amenity.getRegionName(), amenity);
          }
-        return SearchResult.ObfType.DETAILED;
+        return SearchResultResource.DETAILED;
     }
 
     private static String getLangForTravel(Object object) {
@@ -230,13 +229,17 @@ public class BaseDetailsObject {
         if (object instanceof BaseDetailsObject) {
             amenity = ((BaseDetailsObject) object).syntheticAmenity;
         }
-        if (amenity != null && getObfType(object) == ObfType.TRAVEL) {
+        if (amenity != null && getResourceType(object) == SearchResultResource.TRAVEL) {
             String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
             if (lang != null) {
                 return lang;
             }
         }
         return "en";
+    }
+
+    public String getLang() {
+        return lang;
     }
 
 }
