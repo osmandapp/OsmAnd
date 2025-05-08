@@ -2735,8 +2735,8 @@
     <string name="rendering_attr_smoothness_very_horrible_name">Molto orribile</string>
     <string name="rendering_attr_smoothness_impassable_name">Impassibile</string>
     <string name="rendering_attr_highway_class_state_road_name">Strada statale</string>
-    <string name="rendering_attr_highway_class_road_name">Strada</string>
-    <string name="rendering_attr_highway_class_street_name">Strada</string>
+    <string name="rendering_attr_highway_class_road_name">Strada extraurbana</string>
+    <string name="rendering_attr_highway_class_street_name">Strada urbana</string>
     <string name="rendering_attr_highway_class_service_name">Strada di servizio</string>
     <string name="rendering_attr_highway_class_footway_name">Percorso pedonale</string>
     <string name="rendering_attr_highway_class_track_name">Carrareccia</string>
