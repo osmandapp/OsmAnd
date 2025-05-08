@@ -4,7 +4,6 @@ import static net.osmand.data.PointDescription.POINT_TYPE_POI;
 import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
-import static net.osmand.plus.poi.PoiUIFilter.TOP_PLACES_LIMIT;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.views.layers.core.POITileProvider.TILE_POINTS_LIMIT;
 
@@ -86,6 +85,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private static final int START_ZOOM = 5;
 	private static final int START_ZOOM_ROUTE_TRACK = 11;
 	private static final int END_ZOOM_ROUTE_TRACK = 13;
+	private static final int TOP_PLACES_LIMIT = 15;
+	private static final int NEARBY_PLACES_LIMIT = 150;
 
 	private static final Log LOG = PlatformUtil.getLog(POIMapLayer.class);
 
@@ -157,7 +158,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 		routingHelper.addListener(this);
 		travelRendererHelper.addFileVisibilityListener(this);
-		data = new MapLayerData<List<Amenity>>() {
+		data = new MapLayerData<>() {
 
             Set<PoiUIFilter> calculatedFilters;
 
@@ -248,12 +249,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			private Set<Amenity> collectDisplayedPoints(@NonNull QuadRect latLonBounds, int zoom, List<Amenity> res) {
 				Set<Amenity> displayedPoints = new HashSet<>();
 				int i = 0;
-				for (Amenity amenity : res) {
-					displayedPoints.add(amenity);
-					if (i++ > TOP_PLACES_LIMIT) {
-						break;
-					}
-				}
 				float minTileX = (float) MapUtils.getTileNumberX(zoom, latLonBounds.left);
 				float maxTileX = (float) MapUtils.getTileNumberX(zoom, latLonBounds.right);
 				float minTileY = (float) MapUtils.getTileNumberY(zoom, latLonBounds.top);
@@ -450,7 +445,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (!intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
 				res.put(place.getId(), place);
 			}
-			if (i++ > TOP_PLACES_LIMIT) {
+			if (i++ > NEARBY_PLACES_LIMIT) {
 				break;
 			}
 		}
@@ -498,13 +493,16 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (place.alreadyExists || imageBitmap == null) {
 				continue;
 			}
+			if(mapPlaces.indexOf(place) > TOP_PLACES_LIMIT) {
+				break;
+			}
 
 			Bitmap imageMapBitmap = createImageBitmap(imageBitmap, false);
 
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
 					.setMarkerId(place.placeId)
-					.setBaseOrder(getPointsOrder() - 100)
+					.setBaseOrder(-800000)//context menu layer baseOrder to be over object polygon
 					.setPinIcon(NativeUtilities.createSkImageFromBitmap(imageMapBitmap))
 					.setPosition(place.position)
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
@@ -966,17 +964,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public boolean runExclusiveAction(@Nullable Object object, boolean unknownLocation) {
-		MapActivity mapActivity = getMapActivity();
 		if (object instanceof Amenity amenity) {
 			object = MapSelectionHelper.fetchOtherData(app, amenity);
-		}
-		if (mapActivity != null && object instanceof PlaceDetailsObject detailsObject) {
-			Amenity amenity = getSelectedTopPlace(detailsObject);
-			if (amenity != null) {
-				hideExplorePlacesFragment(mapActivity);
-				showTopPlaceContextMenu(mapActivity, detailsObject, amenity);
-				return true;
-			}
 		}
 		return IContextMenuProvider.super.runExclusiveAction(object, unknownLocation);
 	}

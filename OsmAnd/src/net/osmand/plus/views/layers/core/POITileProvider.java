@@ -50,7 +50,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	private static final Log LOG = PlatformUtil.getLog(POITileProvider.class);
 
-	public static final int TILE_POINTS_LIMIT = 20;
+	public static final int TILE_POINTS_LIMIT = 100;
 
 	private final Context ctx;
 	private final int baseOrder;

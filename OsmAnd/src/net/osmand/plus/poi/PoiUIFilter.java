@@ -62,7 +62,6 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
 	public static final String TOP_WIKI_FILTER_ID = STD_PREFIX + OSM_WIKI_CATEGORY;
 	public static final int INVALID_ORDER = -1;
-	public static final int TOP_PLACES_LIMIT = 15;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();
