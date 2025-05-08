@@ -29,6 +29,7 @@ import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -173,7 +174,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			((RecentlyVisibleViewHolder) holder).bindView(selectionMode);
 		} else if (holder instanceof SortTracksViewHolder) {
 			boolean enabled = !Algorithms.isEmpty(trackTab.getTrackItems()) || (selectTrackMode && !Algorithms.isEmpty(trackTab.getTrackFolders()));
-			((SortTracksViewHolder) holder).bindView(enabled, null);
+			((SortTracksViewHolder) holder).bindView(enabled, null, trackTab.getId());
 		}
 	}
 
