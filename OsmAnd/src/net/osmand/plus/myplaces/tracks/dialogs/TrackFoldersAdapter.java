@@ -228,7 +228,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 		if (holder instanceof SortTracksViewHolder) {
 			SortTracksViewHolder viewHolder = (SortTracksViewHolder) holder;
-			viewHolder.bindView(hasTrackItems(), null, selectedFolder == null ? null : selectedFolder.getName());
+			viewHolder.bindView(hasTrackItems(), null, selectedFolder == null ? null : selectedFolder.getId());
 		} else if (holder instanceof TrackViewHolder) {
 			TrackItem trackItem = (TrackItem) items.get(position);
 
