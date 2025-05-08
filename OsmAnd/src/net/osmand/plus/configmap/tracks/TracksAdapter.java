@@ -174,8 +174,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			((RecentlyVisibleViewHolder) holder).bindView(selectionMode);
 		} else if (holder instanceof SortTracksViewHolder) {
 			boolean enabled = !Algorithms.isEmpty(trackTab.getTrackItems()) || (selectTrackMode && !Algorithms.isEmpty(trackTab.getTrackFolders()));
-			File directory = trackTab.directory;
-			((SortTracksViewHolder) holder).bindView(enabled, null, directory == null ? null : directory.getName());
+			((SortTracksViewHolder) holder).bindView(enabled, null, trackTab.getId());
 		}
 	}
 
