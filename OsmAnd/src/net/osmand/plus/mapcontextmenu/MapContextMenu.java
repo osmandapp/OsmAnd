@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.OnResultCallback;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
@@ -47,12 +48,12 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
-import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.search.core.SearchAmenitiesAsync;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -404,17 +405,22 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			app.getTargetPointsHelper().addPointListener(this);
 		}
 
+		/*if (object instanceof RenderedObject renderedObject) {
+			SearchAmenitiesAsync asyncSearch = new SearchAmenitiesAsync(app.getResourceManager().getAmenitySearcher(), app.getResourceManager().mainThreadExecutor);
+			asyncSearch.searchAmenity(renderedObject, am -> {
+				if (am != null) {
+					update(latLon, pointDescription, am);
+				}
+				return true;
+			});
+		}*/
+
 		return true;
 	}
 
 	@Nullable
 	private Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
-		if (object instanceof Amenity amenity) {
-			return MapSelectionHelper.fetchOtherData(app, amenity);
-		} else if (object instanceof PlaceDetailsObject detailsObject) {
-			return MapSelectionHelper.fetchOtherData(app, detailsObject);
-		}
-		return object;
+		return app.getResourceManager().fetchOtherData(app, object);
 	}
 
 	public void show() {

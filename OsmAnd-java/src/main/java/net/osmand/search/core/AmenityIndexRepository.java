@@ -1,6 +1,4 @@
-package net.osmand.plus.resources;
-
-import androidx.annotation.NonNull;
+package net.osmand.search.core;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -38,11 +36,13 @@ public interface AmenityIndexRepository {
 
 	List<PoiRegion> getReaderPoiIndexes();
 
-	void searchMapIndex(@NonNull SearchRequest<BinaryMapDataObject> searchRequest);
+	void searchMapIndex(SearchRequest<BinaryMapDataObject> searchRequest);
 
-	void searchPoi(@NonNull SearchRequest<Amenity> searchRequest);
+	void searchPoi(SearchRequest<Amenity> searchRequest);
 
-	List<Amenity> searchPoiByName(@NonNull SearchRequest<Amenity> searchRequest);
+	List<Amenity> searchPoiByName(SearchRequest<Amenity> searchRequest);
 
-	boolean isPoiSectionIntersects(@NonNull SearchRequest<?> searchRequest);
+	boolean isPoiSectionIntersects(SearchRequest<?> searchRequest);
+
+	List<Amenity> searchAmenitiesByName(int x, int y, int l, int t, int r, int b, String query, ResultMatcher<Amenity> resulMatcher);
 }

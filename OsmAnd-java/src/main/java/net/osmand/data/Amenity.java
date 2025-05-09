@@ -9,6 +9,7 @@ import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.ObfConstants;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -932,5 +933,17 @@ public class Amenity extends MapObject {
 			}
 		}
 		return "";
+	}
+
+	public Long getOsmId() {
+		Long id = getId();
+		if (id == null) {
+			return null;
+		}
+		if (ObfConstants.isShiftedID(id)) {
+			return ObfConstants.getOsmId(id);
+		} else {
+			return id >> AMENITY_ID_RIGHT_SHIFT;
+		}
 	}
 }

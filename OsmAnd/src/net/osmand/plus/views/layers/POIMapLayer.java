@@ -29,6 +29,7 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.core.android.MapRendererView;
@@ -968,7 +969,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public boolean runExclusiveAction(@Nullable Object object, boolean unknownLocation) {
 		MapActivity mapActivity = getMapActivity();
 		if (object instanceof Amenity amenity) {
-			object = MapSelectionHelper.fetchOtherData(app, amenity);
+			object = app.getResourceManager().fetchOtherData(app, amenity);
 		}
 		if (mapActivity != null && object instanceof PlaceDetailsObject detailsObject) {
 			Amenity amenity = getSelectedTopPlace(detailsObject);
@@ -1012,9 +1013,16 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Override
-	public LatLon getObjectLocation(Object o) {
-		Amenity amenity = getAmenity(o);
-		return amenity != null ? amenity.getLocation() : null;
+	public LatLon getObjectLocation(Object object) {
+		Amenity amenity = getAmenity(object);
+		if (amenity != null) {
+			return amenity.getLocation();
+		} else if (object instanceof RenderedObject renderedObject) {
+			double lat = MapUtils.get31LatitudeY(renderedObject.getLabelY());
+			double lon = MapUtils.get31LongitudeX(renderedObject.getLabelX());
+			return new LatLon(lat, lon);
+		}
+		return null;
 	}
 
 	@Override

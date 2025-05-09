@@ -119,31 +119,29 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
 		Map<String, Object> filteredInfo = additionalInfo.getFilteredLocalizedInfo();
-		if (!poiCategory.isWiki()) {
-			for (Entry<String, Object> entry : filteredInfo.entrySet()) {
-				String key = entry.getKey();
-				Object value = entry.getValue();
-				if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
-						|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
-					continue;
-				}
-				if (key.equals(NAME)) {
-					continue; // will be added in buildNamesRow
-				}
-				AmenityInfoRow infoRow = null;
-				if (value instanceof String strValue) {
-					infoRow = createAmenityInfoRow(context, key, strValue, null);
-				} else if (value != null) {
-					infoRow = createLocalizedAmenityInfoRow(context, key, value);
-				}
-				if (infoRow != null) {
-					if (lastBuiltRowIsDescription) {
-						descriptions.add(infoRow);
-					} else if (Amenity.CUISINE.equals(key)) {
-						cuisineRow = infoRow;
-					} else if (poiType == null) {
-						infoRows.add(infoRow);
-					}
+		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
+					|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
+				continue;
+			}
+			if (key.equals(NAME)) {
+				continue; // will be added in buildNamesRow
+			}
+			AmenityInfoRow infoRow = null;
+			if (value instanceof String strValue) {
+				infoRow = createAmenityInfoRow(context, key, strValue, null);
+			} else if (value != null) {
+				infoRow = createLocalizedAmenityInfoRow(context, key, value);
+			}
+			if (infoRow != null) {
+				if (lastBuiltRowIsDescription) {
+					descriptions.add(infoRow);
+				} else if (Amenity.CUISINE.equals(key)) {
+					cuisineRow = infoRow;
+				} else if (poiType == null) {
+					infoRows.add(infoRow);
 				}
 			}
 		}

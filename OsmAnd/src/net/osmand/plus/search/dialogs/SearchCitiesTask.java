@@ -70,7 +70,7 @@ class SearchCitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 			lat = latLon.getLatitude();
 			lon = latLon.getLongitude();
 		}
-		app.getResourceManager().searchAmenitiesByName(region, MAX_LATITUDE, MIN_LONGITUDE,
+		app.getResourceManager().getAmenitySearcher().searchAmenitiesByName(region, MAX_LATITUDE, MIN_LONGITUDE,
 				MIN_LATITUDE, MAX_LONGITUDE, lat, lon, new ResultMatcher<>() {
 					int count;
 

@@ -23,7 +23,7 @@ public class ObfConstants {
 	
 	
 	public static final long RELATION_BIT = 1L << (ObfConstants.SHIFT_MULTIPOLYGON_IDS - 1); // 1L << 42
-	public static final long PROPAGATE_NODE_BIT = 1L << (ObfConstants.SHIFT_PROPAGATED_NODE_IDS  - 1); // 1L << 41
+	public static final long PROPAGATE_NODE_BIT = 1L << (ObfConstants.SHIFT_PROPAGATED_NODE_IDS  - 1); // 1L << 49
 	public static final long SPLIT_BIT = 1L << (ObfConstants.SHIFT_NON_SPLIT_EXISTING_IDS - 1); // 1L << 40
 
 	public static final int DUPLICATE_SPLIT = 5; //According IndexPoiCreator DUPLICATE_SPLIT
@@ -83,7 +83,7 @@ public class ObfConstants {
 	}
 
 	public static long getOsmObjectId(BinaryMapDataObject object) {
-		return object.getId() >> BinaryMapDataObject.SHIFT_ID;
+		return getOsmId(object.getId() >> 1);
 	}
 
 	public static EntityType getOsmEntityType(MapObject object) {

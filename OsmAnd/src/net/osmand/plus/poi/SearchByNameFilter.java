@@ -34,7 +34,7 @@ public class SearchByNameFilter extends PoiUIFilter {
 		int limit = distanceInd == 0 ? 500 : -1;
 		List<Amenity> result = Collections.emptyList();
 		if (!Algorithms.isBlank(getFilterByName())) {
-			result = app.getResourceManager().searchAmenitiesByName(getFilterByName(), topLatitude,
+			result = app.getResourceManager().getAmenitySearcher().searchAmenitiesByName(getFilterByName(), topLatitude,
 					leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
 						boolean elimit;
 

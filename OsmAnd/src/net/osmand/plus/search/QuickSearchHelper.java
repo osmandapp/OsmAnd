@@ -16,6 +16,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.search.FullAmenitySearch;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
@@ -159,9 +160,10 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public void setRepositoriesForSearchUICore(OsmandApplication app) {
 		List<String> ignoreExtensions = new ArrayList<>();
-		if (!app.getSettings().SHOW_TRAVEL.get()) {
-			ignoreExtensions.add(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
-		}
+		// TODO ???
+//		if (!app.getSettings().SHOW_TRAVEL.get()) {
+//			ignoreExtensions.add(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
+//		}
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles(ignoreExtensions);
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 		core.getSearchSettings().setRegions(app.getRegions());
@@ -169,7 +171,8 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
+		FullAmenitySearch fullAmenitySearch = app.getResourceManager().getAmenitySearcher();
+		List<Amenity> amenities = fullAmenitySearch.searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
 		MapPoiTypes types = app.getPoiTypes();
 		for (Amenity amenity : amenities) {
