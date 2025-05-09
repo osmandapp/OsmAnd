@@ -27,6 +27,8 @@ import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererView.MapRendererViewListener;
+import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.AppInitializeListener;
@@ -49,7 +51,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	public static final float MIN_ALLOWED_ELEVATION_ANGLE_AA = 20;
 
-	private static final double VISIBLE_AREA_MIN_DETECTION_SIZE = 1.025;
+	private static final double VISIBLE_AREA_Y_MIN_DETECTION_SIZE = 1.025;
+	private static final double VISIBLE_AREA_X_MIN_DETECTION_SIZE = 0.204;
+	private static final double RIGHT_BUTTONS_AREA_X_MIN_DETECTION_SIZE = 0.89;
+	private static final double TOP_BUTTONS_AREA_Y_MIN_DETECTION_SIZE = 0.75;
 	private static final int MAP_RENDER_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 7;
 
 	private final CarContext carContext;
@@ -69,7 +74,6 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	@Nullable
 	private Rect stableArea;
 
-	private float cachedRatioX = 0f;
 	private float cachedRatioY = 0f;
 	private float cachedDefaultRatioY = 0f;
 
@@ -117,20 +121,53 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				if (!visibleArea.isEmpty() && mapView != null) {
 					MapDisplayPositionManager displayPositionManager = getDisplayPositionManager();
 
-					int visibleAreaWidth = visibleArea.width();
 					int visibleAreaHeight = visibleArea.height();
 					int containerWidth = surfaceContainer.getWidth();
 					int containerHeight = surfaceContainer.getHeight();
 
-					float ratioX = cachedRatioX;
-					if ((float) containerWidth / visibleAreaWidth > VISIBLE_AREA_MIN_DETECTION_SIZE) {
-						int centerX = visibleArea.centerX();
-						ratioX = (float) centerX / containerWidth;
-						cachedRatioX = ratioX;
+					// Detect if right buttons are on screen
+					if ((float) visibleArea.right / containerWidth > RIGHT_BUTTONS_AREA_X_MIN_DETECTION_SIZE)
+					{
+						visibleArea.right = containerWidth;
 					}
+
+					// Detect if top buttons are on screen
+					if ((float) visibleArea.top / containerHeight > TOP_BUTTONS_AREA_Y_MIN_DETECTION_SIZE)
+					{
+						visibleArea.top = containerHeight;
+					}
+
+					int centerX = visibleArea.centerX();
+					float centerXProportion = (float) centerX / containerWidth;
+
+					// 0.5 used in free ride and in split screen when seat is on the left
+					float ratioX = 0.5f;
+					if (offscreenMapRendererView != null) {
+						PointI viewportOrigin = new PointI(0, 0);
+						int mapViewWidth = containerWidth;
+
+						// Full screen, navigation
+						if (centerXProportion > (0.5 + VISIBLE_AREA_X_MIN_DETECTION_SIZE)) {
+							ratioX = centerXProportion;
+						}
+						// Seat is on the left
+						else if (centerXProportion < 0.5) {
+							mapViewWidth = visibleArea.right;
+						}
+						// Seat is on the right
+						else if (centerXProportion > 0.5) {
+							viewportOrigin.setX(visibleArea.left);
+							ratioX = centerXProportion;
+						}
+
+						surfaceView.setSurfaceParams(mapViewWidth, surfaceView.getHeight(), surfaceView.getDpi());
+						AreaI viewport = new AreaI(viewportOrigin, new PointI(getWidth(), getHeight()));
+						offscreenMapRendererView.setViewport(viewport, false);
+					}
+
 					float ratioY = cachedRatioY;
 					float defaultRatioY = displayPositionManager.getNavigationMapPosition().getRatioY();
-					if (defaultRatioY != cachedDefaultRatioY || (float) containerHeight / visibleAreaHeight > VISIBLE_AREA_MIN_DETECTION_SIZE) {
+					if (defaultRatioY != cachedDefaultRatioY || (float) containerHeight / visibleAreaHeight > VISIBLE_AREA_Y_MIN_DETECTION_SIZE) {
 						float centerY = (visibleAreaHeight * defaultRatioY) + visibleArea.top;
 						ratioY = centerY / containerHeight;
 						cachedRatioY = ratioY;
