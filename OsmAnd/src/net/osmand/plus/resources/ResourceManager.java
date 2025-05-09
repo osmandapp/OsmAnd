@@ -824,46 +824,46 @@ public class ResourceManager {
 			double rightLongitude, int zoom, boolean includeTravel,
 			ResultMatcher<Amenity> matcher) {
 
-		Set<Long> openAmenities = new HashSet<>();
-		Set<Long> closedAmenities = new HashSet<>();
-		List<Amenity> actualAmenities = new ArrayList<>();
+		final Set<Long> openAmenities = ConcurrentHashMap.newKeySet();
+		final Set<Long> closedAmenities = ConcurrentHashMap.newKeySet();
+		final List<Amenity> actualAmenities = Collections.synchronizedList(new ArrayList<>());
 
 		searchAmenitiesInProgress = true;
 		try {
-			boolean isEmpty = filter.isEmpty();
-			if (isEmpty && additionalFilter != null) {
-				filter = null;
-			}
+			final boolean isEmpty = filter.isEmpty();
+			final SearchPoiTypeFilter finalFilter = isEmpty && additionalFilter != null ? null : filter;
+			final ResultMatcher<Amenity> finalMatcher = matcher;
+
 			if (!isEmpty || additionalFilter != null) {
-				int top31 = MapUtils.get31TileNumberY(topLatitude);
-				int left31 = MapUtils.get31TileNumberX(leftLongitude);
-				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
-				int right31 = MapUtils.get31TileNumberX(rightLongitude);
+				final int top31 = MapUtils.get31TileNumberY(topLatitude);
+				final int left31 = MapUtils.get31TileNumberX(leftLongitude);
+				final int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
+				final int right31 = MapUtils.get31TileNumberX(rightLongitude);
 
 				List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel);
 
-				for (AmenityIndexRepository repo : repos) {
-					if (matcher != null && matcher.isCancelled()) {
+				repos.parallelStream()
+						.filter(repo -> repo.checkContainsInt(top31, left31, bottom31, right31))
+						.forEach(repo -> {
+					if (finalMatcher != null && finalMatcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
-						break;
+						return;
 					}
-					if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
-						List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
-								zoom, filter, additionalFilter, matcher);
-						if (foundAmenities != null) {
-							for (Amenity amenity : foundAmenities) {
-								Long id = amenity.getId();
-								if (amenity.isClosed()) {
-									closedAmenities.add(id);
-								} else if (!closedAmenities.contains(id)) {
-									if (openAmenities.add(id)) {
-										actualAmenities.add(amenity);
-									}
+					List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
+							zoom, finalFilter, additionalFilter, finalMatcher);
+					if (foundAmenities != null) {
+						foundAmenities.forEach(amenity -> {
+							Long id = amenity.getId();
+							if (amenity.isClosed()) {
+								closedAmenities.add(id);
+							} else if (!closedAmenities.contains(id)) {
+								if (openAmenities.add(id)) {
+									actualAmenities.add(amenity);
 								}
 							}
-						}
+						});
 					}
-				}
+				});
 			}
 		} finally {
 			searchAmenitiesInProgress = false;
@@ -1015,40 +1015,41 @@ public class ResourceManager {
 			double lat, double lon, ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<>();
 		List<AmenityIndexRepositoryBinary> list = new ArrayList<>();
-		int left = MapUtils.get31TileNumberX(leftLongitude);
-		int top = MapUtils.get31TileNumberY(topLatitude);
-		int right = MapUtils.get31TileNumberX(rightLongitude);
-		int bottom = MapUtils.get31TileNumberY(bottomLatitude);
-		for (AmenityIndexRepository index : getAmenityRepositories(false)) {
-			if (matcher != null && matcher.isCancelled()) {
-				break;
-			}
-			if (index instanceof AmenityIndexRepositoryBinary) {
-				if (index.checkContainsInt(top, left, bottom, right)) {
-					if (index.checkContains(lat, lon)) {
-						list.add(0, (AmenityIndexRepositoryBinary) index);
-					} else {
-						list.add((AmenityIndexRepositoryBinary) index);
-					}
+		final int left = MapUtils.get31TileNumberX(leftLongitude);
+		final int top = MapUtils.get31TileNumberY(topLatitude);
+		final int right = MapUtils.get31TileNumberX(rightLongitude);
+		final int bottom = MapUtils.get31TileNumberY(bottomLatitude);
 
-				}
-			}
+		if (matcher != null && matcher.isCancelled()) {
+			return amenities;
 		}
+
+		getAmenityRepositories(false).parallelStream()
+				.filter(index -> index instanceof AmenityIndexRepositoryBinary)
+				.filter(index -> index.checkContainsInt(top, left, bottom, right))
+				.forEach(index -> {
+			if (index.checkContains(lat, lon)) {
+				list.add(0, (AmenityIndexRepositoryBinary) index);
+			} else {
+				list.add((AmenityIndexRepositoryBinary) index);
+			}
+		});
 
 		// Not using boundaries results in very slow initial search if user has many maps installed
 //		int left = 0;
 //		int top = 0;
 //		int right = Integer.MAX_VALUE;
 //		int bottom = Integer.MAX_VALUE;
-		for (AmenityIndexRepositoryBinary index : list) {
-			if (matcher != null && matcher.isCancelled()) {
-				break;
-			}
+
+		list.parallelStream()
+				.filter(index -> matcher == null || !matcher.isCancelled())
+				.forEach(index -> {
 			List<Amenity> result = index.searchAmenitiesByName(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat),
-					left, top, right, bottom,
-					searchQuery, matcher);
-			amenities.addAll(result);
-		}
+					left, top, right, bottom, searchQuery, matcher);
+			synchronized (amenities) {
+				amenities.addAll(result);
+			}
+		});
 
 		return amenities;
 	}
