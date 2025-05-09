@@ -1037,18 +1037,24 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public ArrayList<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId) {
-		ArrayList<String> res = new ArrayList<>();
+	public List<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId) {
+		return new ArrayList<>(getArticleByLangs(articleId).keySet());
+	}
+
+	@NonNull
+	@Override
+	public Map<String, TravelArticle> getArticleByLangs(@NonNull TravelArticleIdentifier articleId) {
+		Map<String, TravelArticle> res = new LinkedHashMap<>();
 		TravelArticle article = getArticleById(articleId, "", false, null);
 		if (article != null) {
 			Map<String, TravelArticle> articles = cachedArticles.get(article.generateIdentifier());
 			if (articles != null) {
-				res.addAll(articles.keySet());
+				res.putAll(articles);
 			}
 		} else {
 			List<TravelArticle> articles = localDataHelper.getSavedArticles(articleId.file, articleId.routeId);
 			for (TravelArticle a : articles) {
-				res.add(a.getLang());
+				res.put(a.getLang(), a);
 			}
 		}
 		return res;
