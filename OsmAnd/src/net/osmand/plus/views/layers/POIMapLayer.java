@@ -57,6 +57,7 @@ import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
@@ -129,6 +130,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private RotatedTileBox topPlacesBox;
 	private Pair<PlaceDetailsObject, Amenity> selectedTopPlace;
 	protected MapMarkersCollection selectedTopPlaceCollection;
+	private final MapLayers mapLayers;
+	private int contextLayerBaseOrder = 0;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
@@ -295,6 +298,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				return tile;
 			}
 		};
+		mapLayers = app.getOsmandMap().getMapLayers();
 	}
 
 	@Nullable
@@ -502,7 +506,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
 					.setMarkerId(place.placeId)
-					.setBaseOrder(-800000)//context menu layer baseOrder to be over object polygon
+					.setBaseOrder(getPointsOrder() - 100)//context menu layer baseOrder to be over object polygon
 					.setPinIcon(NativeUtilities.createSkImageFromBitmap(imageMapBitmap))
 					.setPosition(place.position)
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
@@ -962,14 +966,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return null;
 	}
 
-	@Override
-	public boolean runExclusiveAction(@Nullable Object object, boolean unknownLocation) {
-		if (object instanceof Amenity amenity) {
-			object = MapSelectionHelper.fetchOtherData(app, amenity);
-		}
-		return IContextMenuProvider.super.runExclusiveAction(object, unknownLocation);
-	}
-
 	@Nullable
 	private Amenity getSelectedTopPlace(@NonNull PlaceDetailsObject detailsObject) {
 		if (!Algorithms.isEmpty(topPlaces)) {
@@ -1121,7 +1117,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
 					.setMarkerId(SELECTED_MARKER_ID)
-					.setBaseOrder(getPointsOrder() - 110)
+					.setBaseOrder(getContextMenuBaseOrder())
 					.setPinIcon(NativeUtilities.createSkImageFromBitmap(imageMapBitmap))
 					.setPosition(NativeUtilities.getPoint31FromLatLon(latLon.getLatitude(), latLon.getLongitude()))
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
@@ -1190,5 +1186,12 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private int getBigIconSize() {
 		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale());
+	}
+
+	private int getContextMenuBaseOrder() {
+		if(contextLayerBaseOrder == 0) {
+			contextLayerBaseOrder = mapLayers.getContextMenuLayer().getBaseOrder() - 110;
+		}
+		return contextLayerBaseOrder;
 	}
 }
