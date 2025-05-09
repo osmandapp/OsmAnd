@@ -59,11 +59,11 @@ public class FullAmenitySearch {
         fileNames.sort(Algorithms.getStringVersionComparator());
 
         for (String fileName : fileNames) {
-            if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-                if (!includeTravel || !travelFileVisibility.getTravelFileVisibility(fileName)) {
-                    continue;
-                }
-            }
+//            if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+//                if (!includeTravel || !travelFileVisibility.getTravelFileVisibility(fileName)) {
+//                    continue;
+//                }
+//            }
             AmenityIndexRepository r = amenityRepositories.get(fileName);
             if (r != null && r.isWorldMap()) {
                 baseMaps.add(r);
@@ -141,7 +141,7 @@ public class FullAmenitySearch {
         return actualAmenities;
     }
 
-    public Amenity findAmenity(LatLon latLon, long id, Collection<String> names, String wikidata) {
+    public Amenity findAmenity(LatLon latLon, Long id, Collection<String> names, String wikidata) {
         BaseDetailsObject detail = findPlaceDetails(latLon, id, names, wikidata);
         if (detail != null) {
             return detail.getSyntheticAmenity();
@@ -149,7 +149,8 @@ public class FullAmenitySearch {
         return null;
     }
 
-    public BaseDetailsObject findPlaceDetails(LatLon latLon, long id, Collection<String> names, String wikidata) {
+    public BaseDetailsObject findPlaceDetails(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
+        long id = obId == null ? -1 : obId;
         int searchRadius = ObfConstants.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
                 ? AMENITY_SEARCH_RADIUS_FOR_RELATION
                 : AMENITY_SEARCH_RADIUS;

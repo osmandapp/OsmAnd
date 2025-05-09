@@ -81,6 +81,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -164,6 +165,7 @@ public class ResourceManager {
 	private boolean indexesLoadedOnStart;
 
 	private final FullAmenitySearch fullAmenitySearch;
+	public final Executor mainThreadExecutor;
 
 	public ResourceManager(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -197,6 +199,7 @@ public class ResourceManager {
 		fullAmenitySearch = new FullAmenitySearch(searchAmenitiesInProgress,
 				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get(),
 				app.getLanguage());
+		mainThreadExecutor = app::runInUIThread;
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {
@@ -1106,7 +1109,7 @@ public class ResourceManager {
 		if (object instanceof Amenity amenity) {
 			ContextMenuLayer.IContextMenuProvider provider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 			LatLon latLon = amenity.getLocation();
-			BaseDetailsObject baseObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getOsmId(), null, amenity.getWikidata());
+			BaseDetailsObject baseObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
 			if (baseObject == null) {
 				detailsObject = new PlaceDetailsObject(amenity, provider, app.getLanguage());
 			} else {

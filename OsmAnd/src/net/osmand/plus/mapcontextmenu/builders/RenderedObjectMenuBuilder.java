@@ -1,24 +1,20 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import static net.osmand.NativeLibrary.RenderedObject;
-import android.os.AsyncTask;
 
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.CallbackWithObject;
-import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.search.core.SearchAmenitiesAsync;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.LinkedHashMap;
@@ -38,20 +34,21 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 
 	private void searchAmenity(ViewGroup view, Object object) {
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(view);
-		execute(new SearchAmenitiesTask(app, renderedObject, am -> {
-			ViewGroup viewGroup = viewGroupRef.get();
-			if (viewGroup == null) {
-				return false;
-			}
-			if (am != null) {
-				amenity = am;
-				amenity.setX(renderedObject.getX());
-				amenity.setY(renderedObject.getY());
-				additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
-			}
-			RenderedObjectMenuBuilder.this.rebuild(viewGroup, object);
-			return true;
-		}));
+		SearchAmenitiesAsync asyncSearch = new SearchAmenitiesAsync(app.getResourceManager().getAmenitySearcher(), app.getResourceManager().mainThreadExecutor);
+		asyncSearch.searchAmenity(renderedObject, am -> {
+            ViewGroup viewGroup = viewGroupRef.get();
+            if (viewGroup == null) {
+                return false;
+            }
+            if (am != null) {
+                amenity = am;
+                amenity.setX(renderedObject.getX());
+                amenity.setY(renderedObject.getY());
+                additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
+            }
+            RenderedObjectMenuBuilder.this.rebuild(viewGroup, object);
+            return true;
+        });
 	}
 
 	@Override
@@ -134,35 +131,5 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		am.setX(renderedObject.getX());
 		am.setY(renderedObject.getY());
 		return am;
-	}
-
-	private static class SearchAmenitiesTask extends AsyncTask<Void, Void, Amenity> {
-
-		private final CallbackWithObject<Amenity> listener;
-		private final long osmId;
-		private final OsmandApplication app;
-		private final RenderedObject renderedObject;
-		private final LatLon latLon;
-
-		private SearchAmenitiesTask(OsmandApplication application, RenderedObject renderedObject, CallbackWithObject<Amenity> listener) {
-			this.listener = listener;
-			osmId = ObfConstants.getOsmObjectId(renderedObject);
-			app = application;
-			double lat = MapUtils.get31LatitudeY(renderedObject.getLabelY());
-			double lon = MapUtils.get31LongitudeX(renderedObject.getLabelX());
-			latLon = new LatLon(lat, lon);
-			this.renderedObject = renderedObject;
-		}
-
-		@Override
-		protected Amenity doInBackground(Void... params) {
-			String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
-			return app.getResourceManager().getAmenitySearcher().findAmenity(latLon, osmId, null, wikidata);
-		}
-
-		@Override
-		protected void onPostExecute(Amenity amenity) {
-			listener.processResult(amenity);
-		}
 	}
 }

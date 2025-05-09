@@ -378,15 +378,16 @@ public class MapSelectionHelper {
 									boolean allowRenderedObjects = !isOsmRoute && !isClickableWay
 											&& !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
 
-									long id = obfMapObject.getId().getId().longValue();
-									detailsObject = findPlaceDetails(latLon, id, getNames(obfMapObject, tags), tags.get(WIKIDATA));
-
-									if (detailsObject != null) {
-										detailsObject.setMapIconName(getMapIconName(symbolInfo));
-										addGeometry(detailsObject, obfMapObject);
-										detailsObject.setObfResourceName(obfMapObject.getObfSection().getName());
-									} else if (allowRenderedObjects) {
+									if (allowRenderedObjects) {
 										addRenderedObject(result, symbolInfo, obfMapObject, tags);
+									} else {
+										long id = obfMapObject.getId().getId().longValue();
+										detailsObject = findPlaceDetails(latLon, id, getNames(obfMapObject, tags), tags.get(WIKIDATA));
+										if (detailsObject != null) {
+											detailsObject.setMapIconName(getMapIconName(symbolInfo));
+											addGeometry(detailsObject, obfMapObject);
+											detailsObject.setObfResourceName(obfMapObject.getObfSection().getName());
+										}
 									}
 								}
 							}
