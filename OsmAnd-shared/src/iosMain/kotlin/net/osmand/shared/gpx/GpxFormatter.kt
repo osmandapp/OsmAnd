@@ -11,6 +11,7 @@ actual object GpxFormatter {
         numberStyle = NSNumberFormatterDecimalStyle
         locale = NSLocale(localeIdentifier = "en_US")
         // Set a minimum of 2 fraction digits and a maximum of 7 fraction digits.
+        usesGroupingSeparator = false
         minimumFractionDigits = 2u
         maximumFractionDigits = 7u
     }
@@ -18,6 +19,7 @@ actual object GpxFormatter {
     private val DECIMAL_FORMAT: NSNumberFormatter = NSNumberFormatter().apply {
         numberStyle = NSNumberFormatterDecimalStyle
         locale = NSLocale(localeIdentifier = "en_US")
+        usesGroupingSeparator = false
         minimumFractionDigits = 0u
         maximumFractionDigits = 1u
     }
