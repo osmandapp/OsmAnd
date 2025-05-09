@@ -140,8 +140,6 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					int centerX = visibleArea.centerX();
 					float centerXProportion = (float) centerX / containerWidth;
 
-					Log.d("MyApp", "centerXProportion: " + centerXProportion);
-
 					// 0.5 used in free ride and in split screen when seat is on the left
 					float ratioX = 0.5f;
 					if (offscreenMapRendererView != null) {
