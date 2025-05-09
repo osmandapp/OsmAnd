@@ -396,15 +396,18 @@ public class FullAmenitySearch {
     public List<BinaryMapDataObject> searchBinaryMapDataForAmenity(Amenity amenity, int limit) {
         String name = amenity.getName();
         long osmId = ObfConstants.getOsmObjectId(amenity);
+        boolean checkId = osmId != -1;
+        boolean checkName = !Algorithms.isEmpty(name);
+
         ResultMatcher<BinaryMapDataObject> matcher = new ResultMatcher<>() {
             @Override
             public boolean publish(BinaryMapDataObject object) {
-                long id = ObfConstants.getOsmObjectId(object);
-                if (osmId != -1) {
-                    return osmId == id;
-                } else if (!Algorithms.isEmpty(name)) {
+                if (checkId && osmId == ObfConstants.getOsmObjectId(object)) {
+                    return true;
+                }
+                if (checkName) {
                     TIntObjectHashMap<String> names = object.getObjectNames();
-                    return names != null && names.containsValue(name);
+                    return names != null && !names.isEmpty() && names.containsValue(name);
                 }
                 return false;
             }
