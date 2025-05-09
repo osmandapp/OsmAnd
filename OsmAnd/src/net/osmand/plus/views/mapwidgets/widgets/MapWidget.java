@@ -189,7 +189,7 @@ public abstract class MapWidget {
 		} else {
 			textContainer.showOutline(false);
 		}
-		textContainer.invalidate();
+		textContainer.invalidateTextViews();
 	}
 
 	public static void updateTextContainer(@Nullable OutlinedTextContainer textContainer, @NonNull TextState textState) {

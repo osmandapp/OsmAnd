@@ -85,6 +85,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * Resource manager is responsible to work with all resources
  * that could consume memory (especially with file resources).

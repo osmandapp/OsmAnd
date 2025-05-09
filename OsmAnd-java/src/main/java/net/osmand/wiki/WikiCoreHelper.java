@@ -6,7 +6,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.wiki.WikiHelper;
@@ -74,7 +73,7 @@ public class WikiCoreHelper {
 	}
 
 	// wiki_place api call
-	public static List<WikiImage> getWikiImageList(Map<String, String> tags) {
+	public static List<WikiImage> getWikiImageList(Map<String, String> tags, NetworkResponseListener listener) {
 		WikiHelper.WikiTagData wikiTagData = WikiHelper.INSTANCE.extractWikiTagData(tags);
 		String wikidataId = wikiTagData.getWikidataId();
 		String wikiCategory = wikiTagData.getWikiCategory();
@@ -96,7 +95,7 @@ public class WikiCoreHelper {
 				}
 				if (!url.isEmpty()) {
 					url += "&" + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
-					getImagesOsmAndAPIRequestV2(url, wikiImages);
+					getImagesOsmAndAPIRequestV2(url, wikiImages, listener);
 				}
 			} catch (UnsupportedEncodingException e) {
 				LOG.error(e);
@@ -156,8 +155,16 @@ public class WikiCoreHelper {
 		return wikiImages;
 	}
 
-	private static List<WikiImage> getImagesOsmAndAPIRequestV2(String url, List<WikiImage> wikiImages) {
-		OsmandAPIResponseV2 response = sendWikipediaApiRequest(url, OsmandAPIResponseV2.class, false);
+	private static OsmandAPIResponseV2 getImagesOsmAndAPIRequestV2(String jsonString) {
+		try {
+			return new Gson().fromJson(jsonString, OsmandAPIResponseV2.class);
+		} catch (JsonSyntaxException e) {
+			LOG.error(e.getLocalizedMessage());
+		}
+		return null;
+	}
+
+	private static List<WikiImage> createWikiImages(OsmandAPIResponseV2 response, List<WikiImage> wikiImages) {
 		if (response != null && !Algorithms.isEmpty(response.images)) {
 			for (Map<String, String> image : response.images) {
 				WikiImage wikiImage = parseImageDataWithMetaData(image);
@@ -167,6 +174,16 @@ public class WikiCoreHelper {
 			}
 		}
 		return wikiImages;
+	}
+
+	public static List<WikiImage> getImagesFromJson(String json, List<WikiImage> wikiImages) {
+		OsmandAPIResponseV2 response = getImagesOsmAndAPIRequestV2(json);
+		return createWikiImages(response, wikiImages);
+	}
+
+	private static List<WikiImage> getImagesOsmAndAPIRequestV2(String url, List<WikiImage> wikiImages, NetworkResponseListener listener) {
+		OsmandAPIResponseV2 response = sendWikipediaApiRequest(url, OsmandAPIResponseV2.class, listener, false);
+		return createWikiImages(response, wikiImages);
 	}
 
 	private static boolean isUrlFileImage(WikiImage wikiImage) {
@@ -243,6 +260,10 @@ public class WikiCoreHelper {
 	}
 
 	private static <T> T sendWikipediaApiRequest(String url, Class<T> responseClass, boolean useGzip) {
+		return sendWikipediaApiRequest(url, responseClass, null, useGzip);
+	}
+
+	private static <T> T sendWikipediaApiRequest(String url, Class<T> responseClass, NetworkResponseListener listener, boolean useGzip) {
 		StringBuilder rawResponse = new StringBuilder();
 		try {
 			// Send the GET request with GZIP support
@@ -250,7 +271,11 @@ public class WikiCoreHelper {
 			if (errorMessage == null) {
 				try {
 					// Parse the JSON response
-					return new Gson().fromJson(rawResponse.toString(), responseClass);
+					String stringResponse = rawResponse.toString();
+					if (listener != null) {
+						listener.onGetRawResponse(stringResponse);
+					}
+					return new Gson().fromJson(stringResponse, responseClass);
 				} catch (JsonSyntaxException e) {
 					LOG.error(e.getLocalizedMessage());
 				}
@@ -368,5 +393,9 @@ public class WikiCoreHelper {
 		@SerializedName("title")
 		@Expose
 		private String title;
+	}
+
+	public interface NetworkResponseListener {
+		void onGetRawResponse(String response);
 	}
 }

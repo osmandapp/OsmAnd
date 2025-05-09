@@ -242,8 +242,24 @@ public class GpxDisplayHelper {
 			cancelTrackSplitting(selectedGpxFile);
 		}
 		if (paramsChanged || !splittingTrack) {
-			SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, splitParams, groups, listener);
-			splitTrackTasks.put(selectedGpxFile.getGpxFile().getPath(), splitTask);
+			String path = selectedGpxFile.getGpxFile().getPath();
+			SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, splitParams, groups, new SplitTrackListener() {
+				@Override
+				public void trackSplittingStarted() {
+					if (listener != null) {
+						listener.trackSplittingStarted();
+					}
+				}
+
+				@Override
+				public void trackSplittingFinished(boolean success) {
+					if (listener != null) {
+						listener.trackSplittingFinished(success);
+					}
+					splitTrackTasks.remove(path);
+				}
+			});
+			splitTrackTasks.put(path, splitTask);
 			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor);
 		}
 	}
@@ -282,7 +298,6 @@ public class GpxDisplayHelper {
 				if (callback != null) {
 					callback.processResult(success);
 				}
-				splitTrackTasks.remove(selectedGpxFile.getGpxFile().getPath());
 			}
 		};
 	}

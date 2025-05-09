@@ -392,8 +392,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public List<Amenity> searchAmenities(double top, double left, double bottom, double right, int zoom, ResultMatcher<Amenity> matcher) {
 		Set<Amenity> results = new HashSet<>();
-		List<Amenity> tempResults = currentSearchResult;
-		if (tempResults != null) {
+		if (currentSearchResult != null) {
+			List<Amenity> tempResults = new ArrayList<>(currentSearchResult);
 			for (Amenity a : tempResults) {
 				LatLon l = a.getLocation();
 				if (l != null && l.getLatitude() <= top && l.getLatitude() >= bottom
