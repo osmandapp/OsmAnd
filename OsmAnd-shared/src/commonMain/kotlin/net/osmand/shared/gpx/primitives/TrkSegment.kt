@@ -5,13 +5,24 @@ import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.gpx.SplitMetric
 import net.osmand.shared.gpx.SplitSegment
 
-class TrkSegment : GpxExtensions() {
+class TrkSegment : GpxExtensions {
 	var name: String? = null
 	var generalSegment = false
 	var points = mutableListOf<WptPt>()
 	var renderer: Any? = null
 	var routeSegments = mutableListOf<GpxUtilities.RouteSegment>()
 	var routeTypes = mutableListOf<GpxUtilities.RouteType>()
+
+	constructor()
+
+	constructor(segment: TrkSegment) {
+		this.name = segment.name
+		this.generalSegment = segment.generalSegment
+		this.renderer = segment.renderer
+		this.routeSegments.addAll(segment.routeSegments.map { GpxUtilities.RouteSegment(it) })
+		this.routeTypes.addAll(segment.routeTypes.map { GpxUtilities.RouteType(it) })
+		this.points.addAll(segment.points.map { WptPt(it) })
+	}
 
 	fun isGeneralSegment() = generalSegment
 

@@ -53,6 +53,26 @@ class GpxFile : GpxExtensions {
 		}
 	}
 
+	constructor(other: GpxFile) {
+		this.author = other.author
+		this.metadata = Metadata(other.metadata)
+		this.tracks = other.tracks.map { Track(it) }.toMutableList()
+		this.routes = other.routes.map { Route(it) }.toMutableList()
+		this.points = other.points.map { WptPt(it) }.toMutableList()
+		this.pointsGroups = other.pointsGroups.mapValues { PointsGroup(it.value) }.toMutableMap()
+		this.networkRouteKeyTags.putAll(other.networkRouteKeyTags)
+
+		this.error = other.error
+		this.path = other.path
+		this.showCurrentTrack = other.showCurrentTrack
+		this.hasAltitude = other.hasAltitude
+		this.modifiedTime = other.modifiedTime
+		this.pointsModifiedTime = other.pointsModifiedTime
+
+		this.generalTrack = other.generalTrack?.let { Track(it) }
+		this.generalSegment = other.generalSegment?.let { TrkSegment(it) }
+	}
+
 	fun isShowCurrentTrack() = showCurrentTrack
 
 	fun hasAltitude() = hasAltitude
