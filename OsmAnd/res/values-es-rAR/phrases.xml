@@ -451,7 +451,7 @@
     <string name="poi_attraction">Atracción turística</string>
     <string name="poi_attraction_amusement_ride">Atracción de feria</string>
     <string name="poi_attraction_animal">Animal (atracción)</string>
-    <string name="poi_attraction_big_wheel">Rueda de la fortuna;Noria;Vuelta al mundo</string>
+    <string name="poi_attraction_big_wheel">Rueda de la fortuna;Noria;Vuelta al mundo;Viaje a la luna;Rueda moscovita;Rueda de Chicago;Rueda chicagua;Rueda gigante;Rueda ferris</string>
     <string name="poi_attraction_carousel">Calesita;Carrusel</string>
     <string name="poi_attraction_maze">Laberinto</string>
     <string name="poi_attraction_roller_coaster">Montaña rusa</string>
@@ -3064,7 +3064,7 @@
     <string name="poi_zoo_aviary">Pajarera</string>
     <string name="poi_zoo_falconry">Cetrería</string>
     <string name="poi_zoo_reptile">Reptiles</string>
-    <string name="poi_stands">Tribunas;Gradas</string>
+    <string name="poi_stands">Tribunas;Gradas;Palcos</string>
     <string name="poi_motorcycle_services">Servicios</string>
     <string name="poi_motorcycle_type">Tipo de motocicleta</string>
     <string name="poi_motorcycle_sales_yes">Ventas</string>
@@ -3518,7 +3518,7 @@
     <string name="poi_denotation_natural_monument">Monumento natural</string>
     <string name="poi_denotation_landmark">Referencia terrestre</string>
     <string name="poi_park_ride">Estacionamiento disuasorio</string>
-    <string name="poi_park_ride_yes">Sí;Estacionamiento disuasorio</string>
+    <string name="poi_park_ride_yes">Sí;Estacionamiento disuasorio;Aparcamiento disuasorio</string>
     <string name="poi_park_ride_train">Tren</string>
     <string name="poi_park_ride_bus">Colectivo</string>
     <string name="poi_park_ride_metro">Subte</string>
@@ -5001,7 +5001,7 @@
     <string name="poi_network_rhn">Red ecuestre regional (RHN)</string>
     <string name="poi_network_lhn">Red ecuestre local (LHN)</string>
     <string name="poi_area_highway">Área de movilidad</string>
-    <string name="poi_footway">Vereda</string>
+    <string name="poi_footway">Vereda/Acera</string>
     <string name="poi_area_highway_footway">Área de vereda</string>
     <string name="poi_travel_agency">Agencia de viajes; Agencia de turismo</string>
     <string name="poi_steps">Escalones</string>

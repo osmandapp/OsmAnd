@@ -870,7 +870,7 @@
     <string name="coordinates">Koordinater</string>
     <string name="download_tab_downloads">Alle nedlastinger</string>
     <string name="download_tab_updates">Oppdateringer</string>
-    <string name="no_internet_connection">Ikke i stand til å laste ned, kontroller internettforbindelsen.</string>
+    <string name="no_internet_connection">Ingen internettforbindelse</string>
     <string name="shared_string_dismiss">Avvis</string>
     <string name="everything_up_to_date">Alle filer er oppdaterte</string>
     <string name="use_opengl_render">Bruk OpenGL-opptegning</string>
@@ -1588,8 +1588,8 @@
     <string name="rendering_value_high_name">Høy</string>
     <string name="rendering_value_medium_w_name">Middels</string>
     <string name="rendering_value_low_name">Lav</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Vann</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Skjul vann</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Skjul vann</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Vann</string>
     <string name="route_roundabout_short">Ta avkjøring %1$d og fortsett</string>
     <string name="route_calculation">Ruteberegning</string>
     <string name="shared_string_appearance">Utseende</string>
@@ -4568,7 +4568,7 @@
     <string name="routing_attr_avoid_fords_name">Unngå vadesteder</string>
     <string name="routing_attr_avoid_fords_description">Unngå vadesteder</string>
     <string name="map_widget_trip_recording_uphill">Oppoverbakke</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Skjul militære områder</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Militære områder</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Skjul militære områder</string>
     <string name="map_widget_trip_recording_downhill">Nedoverbakke</string>
     <string name="map_widget_trip_recording_duration">Varighet</string>

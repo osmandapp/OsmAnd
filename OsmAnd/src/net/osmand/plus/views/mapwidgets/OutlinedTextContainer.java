@@ -15,17 +15,22 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.base.containers.PaintedText;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.AutoScaleTextView;
+import net.osmand.plus.widgets.MultiTextViewEx;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.lang.reflect.Constructor;
+import java.util.List;
 
 public class OutlinedTextContainer extends FrameLayout {
 	private static final Log LOG = PlatformUtil.getLog(OutlinedTextContainer.class);
@@ -113,18 +118,46 @@ public class OutlinedTextContainer extends FrameLayout {
 		}
 
 		if (textView instanceof AutoScaleTextView autoScaleTextView) {
+			setupAutoScaleTextView(autoScaleTextView, holder);
+		}
 
-			if (holder.minTextSize > 0) {
-				autoScaleTextView.setMinTextSize(holder.minTextSize);
-			}
-
-			if (holder.maxTextSize > 0) {
-				autoScaleTextView.setMaxTextSize(holder.maxTextSize);
-			}
+		if (textView instanceof MultiTextViewEx multiTextViewEx) {
+			setupMultiTextView(multiTextViewEx, holder);
 		}
 
 		textView.setVerticalScrollBarEnabled(false);
 		textView.setHorizontalScrollBarEnabled(false);
+	}
+
+	private void setupAutoScaleTextView(@NonNull AutoScaleTextView autoScaleTextView, @NonNull AttrsHolder holder) {
+		if (holder.minTextSize > 0) {
+			autoScaleTextView.setMinTextSize(holder.minTextSize);
+		}
+
+		if (holder.maxTextSize > 0) {
+			autoScaleTextView.setMaxTextSize(holder.maxTextSize);
+		}
+	}
+
+	private void setupMultiTextView(@NonNull MultiTextViewEx multiTextViewEx, @NonNull AttrsHolder holder) {
+		int textColor = holder.textColor;
+
+		String primaryText = !Algorithms.isEmpty(holder.multiTextViewPrimaryText) ? holder.multiTextViewPrimaryText : "";
+		String secondaryText = !Algorithms.isEmpty(holder.multiTextViewSecondaryText) ? holder.multiTextViewSecondaryText : "";
+		String tertiaryText = !Algorithms.isEmpty(holder.multiTextViewTertiaryText) ? holder.multiTextViewTertiaryText : "";
+
+		int primaryColor = holder.multiTextViewPrimaryColor != -1 ? holder.multiTextViewPrimaryColor : textColor;
+		int secondaryColor = holder.multiTextViewSecondaryColor != -1 ? holder.multiTextViewSecondaryColor : textColor;
+		int tertiaryColor = holder.multiTextViewTertiaryColor != -1 ? holder.multiTextViewTertiaryColor : textColor;
+
+		String separator = holder.multiTextViewSeparator;
+		separator = Algorithms.isEmpty(separator) ? " " : separator;
+		int separatorColor = holder.multiTextViewSeparatorColor != -1 ? holder.multiTextViewSeparatorColor : textColor;
+
+
+		multiTextViewEx.init(separator, separatorColor,
+				primaryText, secondaryText, tertiaryText,
+				primaryColor, secondaryColor, tertiaryColor);
 	}
 
 	private TextView createTextView(@Nullable String className) {
@@ -163,8 +196,13 @@ public class OutlinedTextContainer extends FrameLayout {
 	}
 
 	public void setTextSize(float size) {
-		outlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
-		mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+		outlineTextView.setTextSize(size);
+		mainTextView.setTextSize(size);
+	}
+
+	public void setTextSize(int unit, float size) {
+		outlineTextView.setTextSize(unit, size);
+		mainTextView.setTextSize(unit, size);
 	}
 
 	public void setTypeface(@Nullable Typeface tf, int style) {
@@ -235,6 +273,20 @@ public class OutlinedTextContainer extends FrameLayout {
 		setText(sourceTextContainer.getText());
 	}
 
+	public void setMultiText(List<PaintedText> primaryLineText) {
+		if (outlineTextView instanceof MultiTextViewEx multiTextViewEx) {
+			multiTextViewEx.setOutlineMultiText(primaryLineText, getStrokeColor());
+		}
+		if (mainTextView instanceof MultiTextViewEx multiTextViewEx) {
+			multiTextViewEx.setMultiText(primaryLineText);
+		}
+	}
+
+	public void invalidateTextViews() {
+		outlineTextView.invalidate();
+		mainTextView.invalidate();
+	}
+
 	class AttrsHolder {
 		int textColor = Color.BLACK;
 		int outlineColor = Color.WHITE;
@@ -254,8 +306,20 @@ public class OutlinedTextContainer extends FrameLayout {
 		int autoSizeMaxTextSize = -1;
 		int autoSizeStepGranularity = -1;
 
+		//AutoScaleTextView attributes
 		float minTextSize = -1;
 		float maxTextSize = -1;
+
+		//MultiTextViewEx attributes
+		String multiTextViewSeparator = "";
+		@ColorInt
+		int multiTextViewSeparatorColor = -1;
+		int multiTextViewPrimaryColor = -1;
+		int multiTextViewSecondaryColor = -1;
+		int multiTextViewTertiaryColor = -1;
+		String multiTextViewPrimaryText = "";
+		String multiTextViewSecondaryText = "";
+		String multiTextViewTertiaryText = "";
 
 		public AttrsHolder(@NonNull AttributeSet attrs) {
 			init(attrs);
@@ -312,6 +376,18 @@ public class OutlinedTextContainer extends FrameLayout {
 
 				minTextSize = a.getDimension(R.styleable.OutlinedTextContainer_autoScale_minTextSize, minTextSize);
 				maxTextSize = a.getDimension(R.styleable.OutlinedTextContainer_autoScale_maxTextSize, maxTextSize);
+
+				multiTextViewPrimaryText = a.getString(R.styleable.OutlinedTextContainer_multiTextViewEx_primaryText);
+				multiTextViewSecondaryText = a.getString(R.styleable.OutlinedTextContainer_multiTextViewEx_secondaryText);
+				multiTextViewTertiaryText = a.getString(R.styleable.OutlinedTextContainer_multiTextViewEx_tertiaryText);
+
+				multiTextViewPrimaryColor = a.getColor(R.styleable.OutlinedTextContainer_multiTextViewEx_primaryTextColor, -1);
+				multiTextViewSecondaryColor = a.getColor(R.styleable.OutlinedTextContainer_multiTextViewEx_secondaryTextColor, -1);
+				multiTextViewTertiaryColor = a.getColor(R.styleable.OutlinedTextContainer_multiTextViewEx_tertiaryTextColor, -1);
+
+				multiTextViewSeparator = a.getString(R.styleable.OutlinedTextContainer_multiTextViewEx_separator);
+				multiTextViewSeparator = Algorithms.isEmpty(multiTextViewSeparator) ? " " : multiTextViewSeparator;
+				multiTextViewSeparatorColor = a.getColor(R.styleable.OutlinedTextContainer_multiTextViewEx_separatorColor, -1);
 			}
 		}
 	}

@@ -1959,7 +1959,7 @@
     <string name="poi_refugee_yes">Flygtningefaciliteter</string>
     <string name="poi_refugee_no">Flygtninge: nej</string>
     <string name="poi_social_facility_group_home">Bosted</string>
-    <string name="poi_social_facility_assisted_living">Plejehjem</string>
+    <string name="poi_social_facility_assisted_living">Beskyttet bolig</string>
     <string name="poi_social_facility_outreach">Privat humanitær organisation</string>
     <string name="poi_social_facility_food_bank">Madcentral</string>
     <string name="poi_social_facility_shelter">Herberg</string>
@@ -4112,7 +4112,7 @@
     <string name="poi_second_hand_filter">Brugte varer</string>
     <string name="poi_shop_general">Landhandel</string>
     <string name="poi_live_music">Live musik</string>
-    <string name="poi_healthcare_speciality_clinic">Helbreds specialist: klinik</string>
+    <string name="poi_healthcare_speciality_clinic">Sundhedsfagligt speciale: klinik</string>
     <string name="poi_us_maps_recreation_area_open_status">Adgangsstatus til rekreativt område</string>
     <string name="poi_us_maps_recreation_area_activity">Aktivitet i rekreativt område</string>
     <string name="poi_impromptu">Improviseret</string>
@@ -4234,4 +4234,5 @@
     <string name="poi_area_highway_footway">Gangbart område</string>
     <string name="poi_footway">Gangbro</string>
     <string name="poi_area_highway_steps">Trappeområde</string>
+    <string name="poi_sports_hall">Idrætshal</string>
 </resources>

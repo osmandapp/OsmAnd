@@ -4784,4 +4784,5 @@
     <string name="poi_steps">Schody</string>
     <string name="poi_us_maps_recreation_area_activity_boating_motorized">Żeglarstwo motorowe</string>
     <string name="poi_route_activity_type_hang_gliding">Lotniarstwo</string>
+    <string name="poi_us_maps_recreation_area_activity_bicycling">Jazda na rowerze</string>
 </resources>

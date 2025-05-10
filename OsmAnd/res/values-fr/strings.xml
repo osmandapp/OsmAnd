@@ -5746,4 +5746,5 @@
     <string name="saved_to_device">Enregistré sur l\'appareil</string>
     <string name="save_to_device_error">Erreur lors de l\'enregistrement sur l\'appareil</string>
     <string name="save_to_device">Enregistrer sur l\'appareil</string>
+    <string name="travel_guides">Guides</string>
 </resources>

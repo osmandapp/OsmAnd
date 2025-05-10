@@ -43,7 +43,7 @@
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
     <string name="download_srtm_maps">Højdekurver</string>
-    <string name="download_regular_maps">Standard kort</string>
+    <string name="download_regular_maps">Standardkort</string>
     <string name="download_roads_only_maps">Kort kun med veje</string>
     <string name="rendering_attr_noAdminboundaries_name">Grænser</string>
     <string name="intermediate_points_change_order">Ændr rækkefølge</string>
@@ -2596,7 +2596,7 @@
     <string name="maps_you_need">Kort der er brug for</string>
     <string name="shared_string_restart">Genstart app</string>
     <string name="show_images">Vis billeder</string>
-    <string name="purchase_cancelled_dialog_title">OsmAnd Live-abonnement er annulleret</string>
+    <string name="purchase_cancelled_dialog_title">Du har annulleret dit OsmAnd Live-abonnement</string>
     <string name="purchase_cancelled_dialog_descr">Forny abonnement for at fortsætte med at bruge alle funktioner:</string>
     <string name="download_all">Download alle</string>
     <string name="open_wikipedia_link_online">Åbn Wikipedia-link online</string>
@@ -5780,4 +5780,5 @@
     <string name="save_to_device">Gem på enhed</string>
     <string name="saved_to_device">Gemt på enhed</string>
     <string name="save_to_device_error">Gemt på enhed fejl</string>
+    <string name="travel_guides">Guider</string>
 </resources>

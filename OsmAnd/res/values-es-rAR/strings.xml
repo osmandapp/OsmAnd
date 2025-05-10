@@ -635,7 +635,7 @@
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
-    <string name="audionotes_location_not_defined">Pulsá «Usar ubicación…» para agregar una nota a la ubicación.</string>
+    <string name="audionotes_location_not_defined">Pulsá en «Usar ubicación…» para agregar una nota a la ubicación.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_roads_only_item">Sólo caminos</string>
@@ -920,7 +920,7 @@
     <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas.</string>
     <string name="offline_edition">Edición sin conexión</string>
-    <string name="offline_edition_descr">Si activás la edición sin conexión, los cambios se guardarán localmente primero y se cargarán a pedido; de lo contrario, los cambios se cargarán de inmediato.</string>
+    <string name="offline_edition_descr">Si activás la edición sin conexión, los cambios se guardarán localmente primero y se cargarán a pedido, de lo contrario los cambios se cargarán de inmediato.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación no afectan a los archivos de mapa descargados; en su lugar, los cambios se guardan como un archivo en el dispositivo.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
     <string name="local_openstreetmap_were_uploaded">Se enviaron {0} PDI/notas de OSM</string>
@@ -1240,7 +1240,7 @@
     <string name="background_service_int_descr">Intervalo de activación del modo reposo:</string>
     <string name="background_service_provider_descr">Método de ubicación usado del modo reposo:</string>
     <string name="background_service_provider">Proveedor de ubicación</string>
-    <string name="background_router_service_descr">Realiza un seguimiento de tu ubicación con la pantalla apagada.</string>
+    <string name="background_router_service_descr">Registra tu ubicación con la pantalla apagada.</string>
     <string name="background_router_service">Ejecutar OsmAnd en modo reposo</string>
     <string name="off_router_service_no_gps_available">El servicio de navegación en modo reposo, necesita un proveedor de ubicación para activarse.</string>
     <string name="hide_poi_filter">Ocultar filtro</string>
@@ -2893,8 +2893,8 @@
     <string name="months_3">Tres meses</string>
     <string name="price_free">Gratis</string>
     <string name="get_discount_title">Obtené %1$d %2$s a %3$s de descuento.</string>
-    <string name="get_discount_first_part">%1$s durante el primer %2$s</string>
-    <string name="get_discount_first_few_part">%1$s durante el primer %2$s</string>
+    <string name="get_discount_first_part">%1$s el primer %2$s</string>
+    <string name="get_discount_first_few_part">%1$s el primer %2$s</string>
     <string name="get_discount_second_part">Luego %1$s</string>
     <string name="cancel_subscription">Cancelar suscripción</string>
     <string name="price_and_discount">%1$s • Ahorrá %2$s</string>
@@ -3280,7 +3280,7 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">El pago se carga en la cuenta de Google Play al confirmar la compra. \n \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. \n \nGestioná o cancelá las suscripciones cuando quieras, en los ajustes de Google Play.</string>
     <string name="search_poi_types">Buscar por tipos de PDI</string>
-    <string name="search_poi_types_descr">Combiná tipos de PDI de diferentes categorías. Pulsá «Alternar» para marcar todo y el lado izquierdo para elegir una categoría.</string>
+    <string name="search_poi_types_descr">Combiná tipos de PDI de diferentes categorías. Pulsá en «Alternar» para marcar todo y el lado izquierdo para elegir una categoría.</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Acción rápida</string>
     <string name="radius_ruler_item">Regla radial</string>
@@ -3938,7 +3938,7 @@
     <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimento táctil</string>
     <string name="search_title">Buscar: %1$s</string>
     <string name="upload_gpx_description_hint">Al dejarlo vacío, se usarán los nombres de las trazas como descripción. La descripción ingresada se aplica a cada traza.</string>
-    <string name="exit_pan_mode_descr">Pulsá «Elegir» para salir del modo panorámico</string>
+    <string name="exit_pan_mode_descr">Pulsá en «Elegir» para salir del modo panorámico</string>
     <string name="shared_storage_warning_title">Cambios en las normas de acceso al almacenamiento</string>
     <string name="purchases_feature_desc_android_auto">Transmite los mapas y navegación sin conexión de OsmAnd en la pantalla del vehículo y se integra con los controles del mismo.</string>
     <string name="icon_group_nautical">Náutico</string>
@@ -3988,13 +3988,13 @@
     <string name="copying_file">Copiando archivo %1$s…</string>
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="progress_complete">%1$s completo</string>
-    <string name="storage_found_files_descr">Pulsá «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
+    <string name="storage_found_files_descr">Pulsá en «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
     <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
     <string name="storage_copied_files_size">Procesados %1$s archivo(s), %2$s</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
     <string name="shared_storage_last_step">Podés definir una nueva carpeta de datos después.</string>
     <string name="shared_storage_third_step">Concedé acceso a la carpeta. Sin esto, OsmAnd no puede copiar los archivos.</string>
-    <string name="shared_storage_first_step">Pulsá «%1$s». \nEl gestor de archivos se abrirá donde deberías encontrar y abrir la carpeta «osmand».</string>
+    <string name="shared_storage_first_step">Pulsá en «%1$s».\nEl gestor de archivos se abrirá donde deberías encontrar y abrir la carpeta «osmand».</string>
     <string name="shared_storage_migration_descr">Debido a los cambios en el acceso al almacenamiento en Android, OsmAnd ya no puede usar «%1$s». \n \nCopiá todos los datos a la nueva carpeta.</string>
     <string name="shared_storage_second_step">Pulsá en «Usar esta carpeta».</string>
     <string name="folder_access_denied">Se necesitan permisos para acceder a la carpeta elegida.</string>
@@ -5408,7 +5408,7 @@
     <string name="screen_is_unlocked">Pantalla táctil desbloqueada.</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="connect_obd_instructions_title">OsmAnd admite conexiones Bluetooth a escáneres OBD-II.</string>
-    <string name="connect_obd_instructions_step4">Pulsá «%1$s» y elegí el escáner del listado.</string>
+    <string name="connect_obd_instructions_step4">Pulsá en «%1$s» y elegí el escáner del listado.</string>
     <string name="obd_vehicle_info">Datos del vehículo</string>
     <string name="obd_how_to_connect">Cómo conectarse:</string>
     <string name="connect_obd_instructions_step1">Conecta el escáner al puerto OBD-II del vehículo.</string>
@@ -5427,7 +5427,7 @@
     <string name="obd_searching_text">Buscando escáneres</string>
     <string name="obd_device_forget_sensor">Desvincular escáner</string>
     <string name="obd_device_forget_sensor_description">El escáner se quitará de la lista. Podés vincular este escáner de nuevo en cualquier momento.</string>
-    <string name="connect_obd_instructions_step">1. Conectá el escáner al puerto OBD-II del vehículo.\n\n2. Encendé el motor del vehículo\n\n3. Activá el Bluetooth del dispositivo\n\n4. Pulsá «%1$s» y elegí el escáner de la lista.</string>
+    <string name="connect_obd_instructions_step">1. Conectá el escáner al puerto OBD-II del vehículo.\n\n2. Encendé el motor del vehículo\n\n3. Activá el Bluetooth del dispositivo\n\n4. Pulsá en «%1$s» y elegí el escáner de la lista.</string>
     <string name="obd_fuel_consumption_rate_sensor">Tasa de consumo del combustible (sensor)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Muestra la tasa de consumo del combustible del vehículo según el sensor (l/h)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Tasa de consumo del combustible</string>
@@ -5465,7 +5465,7 @@
     <string name="unit_of_volume">Unidad de volumen</string>
     <string name="record_obd_data">Grabar estadísticas del vehículo</string>
     <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Realiza un seguimiento de los datos vitales del vehículo usando el protocolo OBD-II. Supervisa valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registra los datos vitales del vehículo usando el protocolo OBD-II. Supervisá valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
     <string name="vehicle_metrics_obd_ii">Estadísticas del vehículo (OBD-II)</string>
     <string name="shared_string_volume">Volumen</string>
     <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
@@ -5619,4 +5619,5 @@
     <string name="saved_to_device">Guardado en el dispositivo</string>
     <string name="save_to_device_error">Guardar el error del dispositivo</string>
     <string name="save_to_device">Guardar en el dispositivo</string>
+    <string name="travel_guides">Guías</string>
 </resources>

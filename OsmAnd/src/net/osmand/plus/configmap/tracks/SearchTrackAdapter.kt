@@ -41,7 +41,7 @@ class SearchTracksAdapter(
     private val locationViewCache: UpdateLocationViewCache
     private var items: MutableList<Any> = mutableListOf()
     private var filteredItems: List<TrackItem> = mutableListOf()
-    private var sortMode: TracksSortMode = TracksSortMode.getDefaultSortMode()
+    private var sortMode: TracksSortMode = TracksSortMode.getDefaultSortMode(null)
 
     private var sortTracksListener: SortTracksListener? = null
     private var selectionListener: TrackSelectionListener? = null
@@ -168,7 +168,7 @@ class SearchTracksAdapter(
             holder.bindView()
         } else if (holder is SortTracksViewHolder) {
             val enabled = !Algorithms.isEmpty(trackItems)
-            holder.bindView(enabled, filter)
+            holder.bindView(enabled, filter, null)
         }
     }
 
