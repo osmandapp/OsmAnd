@@ -26,7 +26,6 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,20 +34,27 @@ import java.util.Locale;
 
 public class PurchaseUiDataUtils {
 
-	public static final int INVALID = -1;
+	public static final int UNDEFINED_TIME = -1;
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
 	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app, @NonNull InAppPurchase purchase) {
-		return createUiData(app, purchase, purchase.getPurchaseTime(),
-				app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()));
+		long expireTime = UNDEFINED_TIME;
+		SubscriptionState subscriptionState = null;
+		if (purchase instanceof InAppSubscription) {
+			expireTime = ((InAppSubscription) purchase).getExpireTime();
+			subscriptionState = ((InAppSubscription) purchase).getState();
+		}
+		return createUiData(app, purchase, purchase.getPurchaseTime(), expireTime,
+				app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()), subscriptionState);
 	}
 
 	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app,
 											  @NonNull InAppPurchase purchase,
-											  long purchaseTime,
-											  @NonNull PurchaseOrigin origin) {
+											  long purchaseTime, long expireTime,
+											  @NonNull PurchaseOrigin origin,
+											  @Nullable SubscriptionState subscriptionState) {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 		InAppPurchases purchases = purchaseHelper.getInAppPurchases();
 
@@ -56,11 +62,12 @@ public class PurchaseUiDataUtils {
 		String title = app.getString(R.string.shared_string_undefined);
 		int iconId;
 		String purchaseType;
-		long expireTime = INVALID;
 		boolean liveUpdateSubscription = purchases.isLiveUpdatesSubscription(purchase);
 		boolean autoRenewing = false;
 		boolean renewVisible = false;
-		SubscriptionState subscriptionState = UNDEFINED;
+		if (subscriptionState == null) {
+			subscriptionState = UNDEFINED;
+		}
 		boolean isSubscription = purchase instanceof InAppSubscription;
 
 		if (purchases.isOsmAndProSubscription(purchase)) {
@@ -80,23 +87,27 @@ public class PurchaseUiDataUtils {
 			InAppSubscription subscription = (InAppSubscription) purchase;
 			purchaseType = app.getString(subscription.getPeriodTypeString());
 
-			subscriptionState = subscription.getState();
-			if (subscription.isPurchased() && subscription.getPurchaseInfo() != null) {
-				autoRenewing = subscription.getPurchaseInfo().isAutoRenewing();
-				subscriptionState = ACTIVE;
-			} else if (subscriptionState != UNDEFINED) {
-				autoRenewing = subscriptionState == ACTIVE || subscriptionState == IN_GRACE_PERIOD;
-			}
-			expireTime = subscription.getExpireTime();
-			if (expireTime == 0) {
-				expireTime = subscription.getCalculatedExpiredTime();
-			}
-			if (!autoRenewing && subscriptionState != ACTIVE && subscriptionState != CANCELLED) {
-				if (purchases.isMapsSubscription(subscription)) {
-					boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseUtils.isFullVersionAvailable(app, false);
-					renewVisible = !isFullVersion && !InAppPurchaseUtils.isSubscribedToAny(app, false);
-				} else if (purchases.isOsmAndProSubscription(subscription)) {
-					renewVisible = !InAppPurchaseUtils.isOsmAndProAvailable(app, false);
+			if (origin == purchaseHelper.getPlatformOrigin()) {
+				subscriptionState = subscription.getState();
+				if (subscription.isPurchased() && subscription.getPurchaseInfo() != null) {
+					autoRenewing = subscription.getPurchaseInfo().isAutoRenewing();
+					subscriptionState = ACTIVE;
+				} else if (subscriptionState != UNDEFINED) {
+					autoRenewing = subscriptionState == ACTIVE || subscriptionState == IN_GRACE_PERIOD;
+				}
+				if (expireTime == UNDEFINED_TIME) {
+					expireTime = subscription.getExpireTime();
+					if (expireTime == 0) {
+						expireTime = subscription.getCalculatedExpiredTime();
+					}
+				}
+				if (!autoRenewing && subscriptionState != ACTIVE && subscriptionState != CANCELLED) {
+					if (purchases.isMapsSubscription(subscription)) {
+						boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseUtils.isFullVersionAvailable(app, false);
+						renewVisible = !isFullVersion && !InAppPurchaseUtils.isSubscribedToAny(app, false);
+					} else if (purchases.isOsmAndProSubscription(subscription)) {
+						renewVisible = !InAppPurchaseUtils.isOsmAndProAvailable(app, false);
+					}
 				}
 			}
 		} else {
