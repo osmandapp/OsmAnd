@@ -9,7 +9,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.weather.units.TemperatureUnit;
 
-public enum TemperatureUnitMode {
+public enum TemperatureUnitsMode {
 
 	SYSTEM_DEFAULT(R.string.system_default_theme, null),
 	CELSIUS(R.string.weather_temperature_celsius, TemperatureUnit.CELSIUS),
@@ -17,11 +17,11 @@ public enum TemperatureUnitMode {
 
 	@StringRes
 	private final int titleId;
-	private final TemperatureUnit unit;
+	private final TemperatureUnit temperatureUnit;
 
-	TemperatureUnitMode(@StringRes int titleId, @Nullable TemperatureUnit unit) {
+	TemperatureUnitsMode(@StringRes int titleId, @Nullable TemperatureUnit temperatureUnit) {
 		this.titleId = titleId;
-		this.unit = unit;
+		this.temperatureUnit = temperatureUnit;
 	}
 
 	@StringRes
@@ -29,8 +29,13 @@ public enum TemperatureUnitMode {
 		return titleId;
 	}
 
+	@Nullable
+	public TemperatureUnit getTemperatureUnit() {
+		return temperatureUnit;
+	}
+
 	@NonNull
 	public String toHumanString(@NonNull Context ctx) {
-		return unit != null ? unit.toHumanString(ctx) : ctx.getString(titleId);
+		return temperatureUnit != null ? temperatureUnit.toHumanString(ctx) : ctx.getString(titleId);
 	}
 }

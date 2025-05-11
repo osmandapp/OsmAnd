@@ -203,9 +203,13 @@ public class WeatherBand {
 
 	@Nullable
 	public WeatherUnit getBandUnit() {
-		CommonPreference<? extends WeatherUnit> preference = getBandUnitPref();
-		if (preference != null) {
-			return preference.get();
+		if (bandIndex == WEATHER_BAND_TEMPERATURE) {
+			return app.getSettings().getTemperatureUnit();
+		} else {
+			CommonPreference<? extends WeatherUnit> preference = getBandUnitPref();
+			if (preference != null) {
+				return preference.get();
+			}
 		}
 		return null;
 	}
@@ -215,7 +219,6 @@ public class WeatherBand {
 		WeatherSettings settings = getWeatherSettings();
 		return switch (bandIndex) {
 			case WEATHER_BAND_CLOUD -> settings.weatherCloudUnit;
-			case WEATHER_BAND_TEMPERATURE -> settings.weatherTempUnit;
 			case WEATHER_BAND_PRESSURE -> settings.weatherPressureUnit;
 			case WEATHER_BAND_WIND_SPEED -> settings.weatherWindUnit;
 			case WEATHER_BAND_PRECIPITATION -> settings.weatherPrecipUnit;
@@ -231,7 +234,6 @@ public class WeatherBand {
 		WeatherSettings settings = getWeatherSettings();
 		return switch (bandIndex) {
 			case WEATHER_BAND_CLOUD -> settings.weatherCloudUnit.set((CloudUnit) unit);
-			case WEATHER_BAND_TEMPERATURE -> settings.weatherTempUnit.set((TemperatureUnit) unit);
 			case WEATHER_BAND_PRESSURE -> settings.weatherPressureUnit.set((PressureUnit) unit);
 			case WEATHER_BAND_WIND_SPEED -> settings.weatherWindUnit.set((WindUnit) unit);
 			case WEATHER_BAND_PRECIPITATION -> settings.weatherPrecipUnit.set((PrecipitationUnit) unit);
@@ -323,6 +325,8 @@ public class WeatherBand {
 				return DEFAULT_WIND_SPEED_UNIT;
 			case WEATHER_BAND_PRECIPITATION:
 				return DEFAULT_PRECIP_UNIT;
+			case WEATHER_BAND_NOTHING:
+				break;
 		}
 		return null;
 	}
@@ -341,6 +345,8 @@ public class WeatherBand {
 				return INTERNAL_WIND_SPEED_UNIT;
 			case WEATHER_BAND_PRECIPITATION:
 				return INTERNAL_PRECIP_UNIT;
+			case WEATHER_BAND_NOTHING:
+				break;
 		}
 		return null;
 	}

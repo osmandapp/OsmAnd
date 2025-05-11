@@ -36,7 +36,7 @@ import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.settings.enums.TemperatureUnitMode;
+import net.osmand.plus.settings.enums.TemperatureUnitsMode;
 import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
@@ -256,7 +256,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupUnitOfTemperaturePref() {
 		ListPreferenceEx preference = requirePreference(settings.UNIT_OF_TEMPERATURE.getId());
-		TemperatureUnitMode[] unitValues = TemperatureUnitMode.values();
+		TemperatureUnitsMode[] unitValues = TemperatureUnitsMode.values();
 		String[] entries = new String[unitValues.length];
 		Integer[] entryValues = new Integer[unitValues.length];
 

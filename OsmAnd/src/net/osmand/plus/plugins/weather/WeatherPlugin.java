@@ -58,6 +58,7 @@ import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.plugins.weather.enums.WeatherSource;
+import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidget;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -117,7 +118,10 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherSettings = weatherHelper.getWeatherSettings();
 
 		for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
-			pluginPreferences.add(weatherBand.getBandUnitPref());
+			CommonPreference<? extends WeatherUnit> preference = weatherBand.getBandUnitPref();
+			if (preference != null) {
+				pluginPreferences.add(preference);
+			}
 		}
 
 		ApplicationMode[] noAppMode = {};
