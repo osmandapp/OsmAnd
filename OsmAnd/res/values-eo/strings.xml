@@ -145,7 +145,7 @@
     <string name="share_osm_edits_subject">OSM-redaktoj kunhavataj per OsmAnd</string>
     <string name="lang_nds">Platgermana</string>
     <string name="lang_mk">Makedona</string>
-    <string name="lang_fy">Okcidentfrisa</string>
+    <string name="lang_fy">Okcident-frisa</string>
     <string name="lang_als">Albana (Toska)</string>
     <string name="read_more">Legi pli</string>
     <string name="whats_new">Kio estas nova en</string>
@@ -284,7 +284,7 @@
     <string name="lang_ga">Irlanda</string>
     <string name="lang_ku">Kurda</string>
     <string name="lang_ta">Tamila</string>
-    <string name="lang_ml">Malajala</string>
+    <string name="lang_ml">Malajalama</string>
     <string name="lang_lb">Luksemburga</string>
     <string name="lang_os">Oseta</string>
     <string name="lang_nb">Norvega Bokmål</string>
@@ -679,7 +679,7 @@
     <string name="lang_ca">Kataluna</string>
     <string name="lang_da">Dana</string>
     <string name="lang_nl">Nederlanda</string>
-    <string name="lang_fi">Suoma</string>
+    <string name="lang_fi">Finna</string>
     <string name="lang_ka">Kartvela</string>
     <string name="lang_el">Greka</string>
     <string name="lang_iw">Hebrea</string>
