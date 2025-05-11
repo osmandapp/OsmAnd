@@ -19,9 +19,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
-import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseAnnualSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseMonthlySubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
@@ -57,6 +59,7 @@ public abstract class InAppPurchaseHelper {
 	public static final String SUBSCRIPTION_REGISTER_URL = SERVER_URL + "/subscription/register";
 	public static final String GET_ACTIVE_SUBSCRIPTIONS_SKU_URL = SERVER_URL + "/api/subscriptions/active";
 	public static final String GET_SUBSCRIPTIONS_URL = SERVER_URL + "/api/subscriptions/get";
+	public static final String GET_ALL_SUBSCRIPTIONS_URL = SERVER_URL + "/api/subscriptions/getAll";
 	public static final String GET_INAPPS_URL = SERVER_URL + "/api/inapps/get";
 	public static final String USER_VALIDATE_SUBSCRIPTION_URL = SERVER_URL + "/userdata/user-validate-sub";
 	public static final String PURCHASE_COMPLETE_URL = SERVER_URL + "/api/purchase-complete";
@@ -130,6 +133,7 @@ public abstract class InAppPurchaseHelper {
 		public long expireTime;
 		public PeriodUnit periodUnit;
 		public PurchaseOrigin origin;
+		public InAppSubscription linkedSubscription;
 	}
 
 	public static class InAppStateHolder {
@@ -256,15 +260,28 @@ public abstract class InAppPurchaseHelper {
 		return purchases;
 	}
 
+	@NonNull
 	public abstract String getPlatform();
 
 	@NonNull
-	public Map<InAppPurchase, InAppStateHolder> getExternalInApps() {
-		Map<InAppPurchase, InAppStateHolder> res = new HashMap<>();
+	public List<SubscriptionStateHolder> getExternalSubscriptions() {
+		List<SubscriptionStateHolder> res = new ArrayList<>();
+		PurchaseOrigin origin = getPlatformOrigin();
+		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+			if (holder.linkedSubscription != null && holder.origin != origin) {
+				res.add(holder);
+			}
+		}
+		return res;
+	}
+
+	@NonNull
+	public List<InAppStateHolder> getExternalInApps() {
+		List<InAppStateHolder> res = new ArrayList<>();
 		String platform = getPlatform();
 		for (InAppStateHolder holder : inAppStateMap.values()) {
 			if (holder.linkedPurchase != null && !platform.equals(holder.platform)) {
-				res.put(holder.linkedPurchase, holder);
+				res.add(holder);
 			}
 		}
 		return res;
@@ -523,7 +540,7 @@ public abstract class InAppPurchaseHelper {
 					hasToken = true;
 				}
 				if (hasToken) {
-					subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, GET_SUBSCRIPTIONS_URL,
+					subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, GET_ALL_SUBSCRIPTIONS_URL,
 							parameters, "Requesting subscriptions state...", false, false);
 					inappsState = AndroidNetworkUtils.sendRequest(ctx, GET_INAPPS_URL,
 							parameters, "Requesting inapps state...", false, false);
@@ -595,6 +612,7 @@ public abstract class InAppPurchaseHelper {
 					stateHolder.startTime = subObj.optLong("start_time");
 					stateHolder.expireTime = subObj.optLong("expire_time");
 					stateHolder.origin = getPurchaseOriginBySku(sku);
+					stateHolder.linkedSubscription = getLinkedSubscriptionBySku(sku);
 
 					PeriodUnit periodUnit = null;
 					if (stateHolder.origin == PurchaseOrigin.PROMO || sku.contains("annual")) {
@@ -1147,6 +1165,11 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	@NonNull
+	public PurchaseOrigin getPlatformOrigin() {
+		return getPurchaseOriginByPlatform(getPlatform());
+	}
+
+	@NonNull
 	public PurchaseOrigin getPurchaseOriginByPlatform(@NonNull String platform) {
 		return switch (platform) {
 			case PLATFORM_APPLE -> PurchaseOrigin.IOS;
@@ -1186,5 +1209,94 @@ public abstract class InAppPurchaseHelper {
 
 			default -> null;
 		};
+	}
+
+	@Nullable
+	public InAppSubscription getLinkedSubscriptionBySku(@NonNull String sku) {
+		InAppSubscription monthlyLiveUpdates = null;
+		InAppSubscription proMonthly = null;
+		InAppSubscription proAnnually = null;
+		InAppSubscription mapsAnnually = null;
+		List<InAppSubscription> subscriptions = getSubscriptions().getSubscriptions();
+		for (int i = subscriptions.size() - 1; i >= 0; i--) {
+			InAppSubscription subscription = subscriptions.get(i);
+			if (subscription.isLegacy() && subscription instanceof InAppPurchaseMonthlySubscription) {
+				if (monthlyLiveUpdates == null) {
+					monthlyLiveUpdates = subscription;
+				}
+			} else if (purchases.isOsmAndProSubscription(subscription) && subscription instanceof InAppPurchaseMonthlySubscription) {
+				proMonthly = subscription;
+			} else if (purchases.isOsmAndProSubscription(subscription) && subscription instanceof InAppPurchaseAnnualSubscription) {
+				proAnnually = subscription;
+			} else if (purchases.isMapsSubscription(subscription) && subscription instanceof InAppPurchaseAnnualSubscription) {
+				mapsAnnually = subscription;
+			}
+		}
+
+		// Google
+		if (sku.startsWith("osm_live_subscription_monthly_")) {
+			return monthlyLiveUpdates;
+		}
+		if (sku.startsWith("osmand_pro_monthly_")) {
+			return proMonthly;
+		}
+		if (sku.startsWith("osmand_pro_annual_")) {
+			return proAnnually;
+		}
+		if (sku.startsWith("osmand_maps_annual_")) {
+			return mapsAnnually;
+		}
+
+		// iOS
+		if (sku.equals("net.osmand.maps.subscription.monthly")) {
+			return monthlyLiveUpdates;
+		}
+		if (sku.startsWith("net.osmand.maps.subscription.pro.monthly")) {
+			return proMonthly;
+		}
+		if (sku.startsWith("net.osmand.maps.subscription.pro.annual")) {
+			return proAnnually;
+		}
+		if (sku.startsWith("net.osmand.maps.subscription.plus.annual")) {
+			return mapsAnnually;
+		}
+
+		// Amazon
+		if (sku.contains(".amazon.pro.monthly")) {
+			return proMonthly;
+		}
+		if (sku.contains(".amazon.pro.annual")) {
+			return proAnnually;
+		}
+		if (sku.contains(".amazon.maps.annual")) {
+			return mapsAnnually;
+		}
+
+		// Huawei
+		if (sku.startsWith("net.osmand.huawei.monthly")) {
+			return monthlyLiveUpdates;
+		}
+		if (sku.startsWith("net.osmand.huawei.monthly.pro")) {
+			return proMonthly;
+		}
+		if (sku.startsWith("net.osmand.huawei.annual.pro")) {
+			return proAnnually;
+		}
+		if (sku.startsWith("net.osmand.huawei.annual.maps")) {
+			return mapsAnnually;
+		}
+
+		// FastSpring
+		if (sku.startsWith("net.osmand.fastspring.subscription.pro.monthly")) {
+			return proMonthly;
+		}
+		if (sku.startsWith("net.osmand.fastspring.subscription.pro.annual")) {
+			return proAnnually;
+		}
+		if (sku.startsWith("net.osmand.fastspring.subscription.maps.annual")) {
+			return mapsAnnually;
+		}
+
+		return null;
 	}
 }

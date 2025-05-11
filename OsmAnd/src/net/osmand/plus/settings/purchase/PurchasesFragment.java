@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.purchase;
 
+import static net.osmand.plus.settings.purchase.data.PurchaseUiDataUtils.UNDEFINED_TIME;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,8 +28,8 @@ import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppStateHolder;
+import net.osmand.plus.inapp.InAppPurchaseHelper.SubscriptionStateHolder;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
-import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.purchase.data.PurchaseUiData;
@@ -37,7 +39,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-import java.util.Map;
 
 public class PurchasesFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener, CardListener {
 
@@ -76,6 +77,8 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 
 		// Android purchases
 		List<InAppPurchase> mainPurchases = purchaseHelper.getEverMadeMainPurchases();
+		boolean showBackupSubscription = PurchaseUiDataUtils.shouldShowBackupSubscription(app, mainPurchases);
+		String backupSubscriptionSku = settings.BACKUP_SUBSCRIPTION_SKU.get();
 		for (int i = 0; i < mainPurchases.size(); i++) {
 			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app, mainPurchases.get(i));
 			if (purchaseData != null) {
@@ -86,20 +89,36 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 			}
 		}
 
-		// External inapp purchases
-		Map<InAppPurchase, InAppStateHolder> externalInApps = purchaseHelper.getExternalInApps();
-		externalInApps.forEach((purchase, holder) -> {
-			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app, purchase, holder.purchaseTime, holder.origin);
+		// External subscriptions
+		List<SubscriptionStateHolder> externalSubscriptions = purchaseHelper.getExternalSubscriptions();
+		for (SubscriptionStateHolder holder : externalSubscriptions) {
+			if (showBackupSubscription && holder.sku.equals(backupSubscriptionSku)) {
+				continue;
+			}
+			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app,
+					holder.linkedSubscription, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
 			if (purchaseData != null) {
 				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 				PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchaseData);
 				purchaseCard.setListener(PurchasesFragment.this);
 				cardsContainer.addView(purchaseCard.build(activity));
 			}
-		});
+		}
+
+		// External inapp purchases
+		List<InAppStateHolder> externalInApps = purchaseHelper.getExternalInApps();
+		for (InAppStateHolder holder : externalInApps) {
+			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app,
+					holder.linkedPurchase, holder.purchaseTime, UNDEFINED_TIME, holder.origin, null);
+			if (purchaseData != null) {
+				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+				PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchaseData);
+				purchaseCard.setListener(PurchasesFragment.this);
+				cardsContainer.addView(purchaseCard.build(activity));
+			}
+		}
 
 		// Backup subscription
-		boolean showBackupSubscription = PurchaseUiDataUtils.shouldShowBackupSubscription(app, mainPurchases);
 		if (showBackupSubscription) {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createBackupSubscriptionUiData(app);

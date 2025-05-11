@@ -1,5 +1,7 @@
 package net.osmand.plus.inapp;
 
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.*;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -74,6 +76,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getPlatform() {
 		return PLATFORM_GOOGLE;
@@ -151,7 +154,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						for (Purchase p : purchases) {
 							skuSubscriptions.addAll(p.getProducts());
 						}
-						skuSubscriptions.addAll(subscriptionStateMap.keySet());
+						for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+							if (holder.origin == PurchaseOrigin.GOOGLE) {
+								skuSubscriptions.add(holder.sku);
+							}
+						}
 
 						BillingManager manager = getBillingManager();
 						// Have we been disposed of in the meantime? If so, quit.
@@ -441,6 +448,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				boolean subscribedToLiveUpdates = false;
 				boolean subscribedToOsmAndPro = false;
 				boolean subscribedToMaps = false;
+				InAppSubscription mapsSubscription = null;
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					Purchase purchase = getPurchase(s.getSku());
 					if (purchase != null || s.getState().isActive()) {
@@ -455,6 +463,17 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						}
 						if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
 							subscribedToMaps = true;
+						}
+					}
+					if (purchases.isMapsSubscription(s)) {
+						mapsSubscription = s;
+					}
+				}
+				if (!subscribedToMaps) {
+					for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+						if (holder.linkedSubscription == mapsSubscription && holder.state == SubscriptionState.ACTIVE) {
+							subscribedToMaps = true;
+							break;
 						}
 					}
 				}
