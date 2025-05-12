@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
+import android.util.Pair;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -8,13 +9,10 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
@@ -26,7 +24,10 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -38,7 +39,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
 	private final Map<String, String> amenityExtensions = new HashMap<>();
-	private Amenity amenity;
+	private PlaceDetailsObject detailsObject;
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
 		super(mapActivity);
@@ -50,18 +51,18 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	private void acquireAmenityExtensions() {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
 
-		String amenityOriginName = wpt.getAmenityOriginName();
-		if (amenityOriginName != null) {
-			amenity = helper.findAmenity(amenityOriginName, wpt.getLatitude(), wpt.getLongitude());
-		}
+		String originName = wpt.getAmenityOriginName();
+		Pair<PlaceDetailsObject, Map<String, String>> pair = helper.getDetailsObjectWithExtensions(
+				wpt.getExtensionsToRead(), originName, wpt.getLatitude(), wpt.getLongitude());
 
-		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(wpt.getExtensionsToRead(),
-				wpt.getAmenityOriginName(), wpt.getLatitude(), wpt.getLongitude()));
+		detailsObject = pair.first;
+		amenityExtensions.putAll(pair.second);
 	}
 
 	@Override
-	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
-		if (amenity == null) {
+	protected void buildNearestRow(@NonNull View view, @NonNull List<Amenity> nearestAmenities,
+			int iconId, String text, String amenityKey) {
+		if (detailsObject == null) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}
@@ -172,7 +173,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		return visit;
 	}
 
-	private CollapsableView getCollapsableWaypointsView(Context context, boolean collapsed, @NonNull GpxFile gpxFile, WptPt selectedPoint) {
+	private CollapsableView getCollapsableWaypointsView(Context context, boolean collapsed,
+			@NonNull GpxFile gpxFile, WptPt selectedPoint) {
 		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<WptPt> points = gpxFile.getPointsList();
