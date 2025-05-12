@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -30,7 +31,6 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -46,7 +46,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	private final FavouritePoint point;
 	private final Map<String, String> amenityExtensions = new HashMap<>();
-	private PlaceDetailsObject detailsObject;
+	private BaseDetailsObject detailsObject;
 
 	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity,
 			@NonNull FavouritePoint point) {
@@ -60,7 +60,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
 
 		String originName = point.getAmenityOriginName();
-		Pair<PlaceDetailsObject, Map<String, String>> pair = helper.getDetailsObjectWithExtensions(
+		Pair<BaseDetailsObject, Map<String, String>> pair = helper.getDetailsObjectWithExtensions(
 				point.getAmenityExtensions(), originName, point.getLatitude(), point.getLongitude());
 
 		detailsObject = pair.first;
