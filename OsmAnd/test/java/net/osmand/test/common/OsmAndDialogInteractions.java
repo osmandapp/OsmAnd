@@ -1,5 +1,6 @@
 package net.osmand.test.common;
 
+import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -76,5 +77,17 @@ public class OsmAndDialogInteractions {
 			Espresso.pressBack();
 		} catch (Throwable ignore) {
 		}
+	}
+
+	public static void clickButtonWithText(int textId) {
+		onView(withText(textId)).perform(click());
+	}
+
+	public static void clickButtonWithId(int id) {
+		onView(withId(id)).perform(click());
+	}
+
+	public static void clickButtonWithText(String textId) {
+		onView(withText(textId)).perform(click());
 	}
 }
