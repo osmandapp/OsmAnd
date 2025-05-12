@@ -6,8 +6,10 @@ import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
+import net.osmand.NativeLibrary;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -29,6 +31,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -37,6 +42,8 @@ public class FullAmenitySearch {
     protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<>();
     private boolean progress;
     private final TravelFileVisibility travelFileVisibility;
+    private ThreadPoolExecutor singleThreadedExecutor;
+    private LinkedBlockingQueue<Runnable> taskQueue;
 
     private static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
@@ -46,6 +53,8 @@ public class FullAmenitySearch {
         this.progress = progress;
         this.travelFileVisibility = travelFileVisibility;
         this.lang = lang;
+        taskQueue = new LinkedBlockingQueue<Runnable>();
+        singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
     }
 
     public interface TravelFileVisibility {
@@ -59,11 +68,11 @@ public class FullAmenitySearch {
         fileNames.sort(Algorithms.getStringVersionComparator());
 
         for (String fileName : fileNames) {
-//            if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-//                if (!includeTravel || !travelFileVisibility.getTravelFileVisibility(fileName)) {
-//                    continue;
-//                }
-//            }
+            if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+                if (!includeTravel || !travelFileVisibility.getTravelFileVisibility(fileName)) {
+                    continue;
+                }
+            }
             AmenityIndexRepository r = amenityRepositories.get(fileName);
             if (r != null && r.isWorldMap()) {
                 baseMaps.add(r);
@@ -454,6 +463,31 @@ public class FullAmenitySearch {
             }
         }
         return list;
+    }
+
+    public void searchAmenityAsync(LatLon latLon, long id, Collection<String> names, String wikidata, CallbackWithObject<Amenity> callbackWithAmenity) {
+        singleThreadedExecutor.submit(() -> {
+            Amenity amenity = findAmenity(latLon, id, names, wikidata);
+            callbackWithAmenity.processResult(amenity);
+        });
+    }
+
+    public void searchAmenityAsync(NativeLibrary.RenderedObject renderedObject, CallbackWithObject<Amenity> callbackWithAmenity) {
+        LatLon latLon = renderedObject.getLabelLatLon();
+        if (latLon == null && renderedObject.getLabelX() != 0) {
+            latLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getLabelY()), MapUtils.get31LongitudeX(renderedObject.getLabelX()));
+        } else if (!renderedObject.getX().isEmpty()) {
+            latLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)), MapUtils.get31LongitudeX(renderedObject.getX().get(0)));
+        } else {
+            callbackWithAmenity.processResult(null);
+            return;
+        }
+        final LatLon finalLatLon = latLon;
+        singleThreadedExecutor.submit(() -> {
+            String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
+            Amenity amenity = findAmenity(finalLatLon, renderedObject.getId(), null, wikidata);
+            callbackWithAmenity.processResult(amenity);
+        });
     }
 
 }

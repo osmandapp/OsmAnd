@@ -167,7 +167,6 @@ public class ResourceManager {
 	private boolean indexesLoadedOnStart;
 
 	private final FullAmenitySearch fullAmenitySearch;
-	public final Executor mainThreadExecutor;
 
 	public ResourceManager(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -201,7 +200,6 @@ public class ResourceManager {
 		fullAmenitySearch = new FullAmenitySearch(searchAmenitiesInProgress,
 				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get(),
 				app.getLanguage());
-		mainThreadExecutor = app::runInUIThread;
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {

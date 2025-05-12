@@ -53,7 +53,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.search.core.SearchAmenitiesAsync;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -405,15 +404,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			app.getTargetPointsHelper().addPointListener(this);
 		}
 
-		/*if (object instanceof RenderedObject renderedObject) {
-			SearchAmenitiesAsync asyncSearch = new SearchAmenitiesAsync(app.getResourceManager().getAmenitySearcher(), app.getResourceManager().mainThreadExecutor);
-			asyncSearch.searchAmenity(renderedObject, am -> {
+		// TODO ???
+		if (object instanceof RenderedObject renderedObject) {
+			app.getResourceManager().getAmenitySearcher().searchAmenityAsync(renderedObject, am -> {
 				if (am != null) {
-					update(latLon, pointDescription, am);
+					app.runInUIThread(() -> update(latLon, pointDescription, am));
 				}
 				return true;
 			});
-		}*/
+		}
 
 		return true;
 	}
@@ -477,12 +476,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null) {
 			WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 			init(latLon, pointDescription, object, true, false);
-			if (fragmentRef != null) {
-				fragmentRef.get().rebuildMenu(centerMarker);
-			}
-			ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
-			contextMenuLayer.updateContextMenu();
-			centerMarker = false;
+//			if (fragmentRef != null) {
+//				fragmentRef.get().rebuildMenu(centerMarker);
+//			}
+//			ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+//			contextMenuLayer.updateContextMenu();
+//			centerMarker = false;
 		}
 	}
 

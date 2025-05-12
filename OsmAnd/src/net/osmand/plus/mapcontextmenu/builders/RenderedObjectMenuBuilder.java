@@ -13,7 +13,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.search.core.SearchAmenitiesAsync;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -24,7 +23,6 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 
 	QuadRect bbox;
 	RenderedObject renderedObject;
-	private static final int SEARCH_POI_RADIUS = 50;
 
 	public RenderedObjectMenuBuilder(@NonNull MapActivity mapActivity, @NonNull RenderedObject renderedObject) {
 		super(mapActivity, getSyntheticAmenity(mapActivity, renderedObject));
@@ -34,19 +32,20 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 
 	private void searchAmenity(ViewGroup view, Object object) {
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(view);
-		SearchAmenitiesAsync asyncSearch = new SearchAmenitiesAsync(app.getResourceManager().getAmenitySearcher(), app.getResourceManager().mainThreadExecutor);
-		asyncSearch.searchAmenity(renderedObject, am -> {
-            ViewGroup viewGroup = viewGroupRef.get();
-            if (viewGroup == null) {
-                return false;
-            }
-            if (am != null) {
-                amenity = am;
-                amenity.setX(renderedObject.getX());
-                amenity.setY(renderedObject.getY());
-                additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
-            }
-            RenderedObjectMenuBuilder.this.rebuild(viewGroup, object);
+		app.getResourceManager().getAmenitySearcher().searchAmenityAsync(renderedObject, am -> {
+			app.runInUIThread(() -> {
+                ViewGroup viewGroup = viewGroupRef.get();
+                if (viewGroup == null) {
+                    return;
+                }
+                if (am != null) {
+                    amenity = am;
+                    amenity.setX(renderedObject.getX());
+                    amenity.setY(renderedObject.getY());
+                    additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
+                }
+                RenderedObjectMenuBuilder.this.rebuild(viewGroup, object);
+            });
             return true;
         });
 	}
