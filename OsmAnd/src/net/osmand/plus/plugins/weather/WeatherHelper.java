@@ -135,7 +135,7 @@ public class WeatherHelper {
 		);
 		webClient.setDownloadStateListener(this::onDownloadStateChanged);
 		webClient.swigReleaseOwnership();
-		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager)); // todo
+		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 		offlineForecastHelper.setWeatherResourcesManager(weatherTileResourcesManager);
 	}
