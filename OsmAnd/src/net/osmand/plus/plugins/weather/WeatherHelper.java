@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.GeoBandSettings;
@@ -28,6 +29,7 @@ import net.osmand.plus.plugins.weather.WeatherWebClient.DownloadState;
 import net.osmand.plus.plugins.weather.WeatherWebClient.WeatherWebClientListener;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
+import net.osmand.plus.settings.enums.TemperatureUnitsMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
@@ -52,6 +54,7 @@ public class WeatherHelper {
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 	private final WeatherTotalCacheSize totalCacheSize;
 	private List<WeakReference<WeatherWebClientListener>> downloadStateListeners = new ArrayList<>();
+	private final StateChangedListener<TemperatureUnitsMode> temperaturePreferenceListener = weatherUnit -> updateBandsSettings();
 	private WeatherWebClient webClient;
 
 	private WeatherTileResourcesManager weatherTileResourcesManager;
@@ -68,6 +71,8 @@ public class WeatherHelper {
 		weatherBands.put(WEATHER_BAND_CLOUD, WeatherBand.withWeatherBand(app, WEATHER_BAND_CLOUD));
 		weatherBands.put(WEATHER_BAND_PRECIPITATION, WeatherBand.withWeatherBand(app, WEATHER_BAND_PRECIPITATION));
 		weatherBands.put(WEATHER_BAND_WIND_ANIMATION, WeatherBand.withWeatherBand(app, WEATHER_BAND_WIND_ANIMATION));
+
+		app.getSettings().UNIT_OF_TEMPERATURE.addListener(temperaturePreferenceListener);
 	}
 
 	@NonNull
@@ -130,7 +135,7 @@ public class WeatherHelper {
 		);
 		webClient.setDownloadStateListener(this::onDownloadStateChanged);
 		webClient.swigReleaseOwnership();
-		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
+		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager)); // todo
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 		offlineForecastHelper.setWeatherResourcesManager(weatherTileResourcesManager);
 	}

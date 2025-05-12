@@ -273,19 +273,19 @@ public class WeatherPlugin extends OsmandPlugin {
 	@Nullable
 	@Override
 	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		switch (widgetType) {
-			case WEATHER_TEMPERATURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_TEMPERATURE);
-			case WEATHER_PRECIPITATION_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRECIPITATION);
-			case WEATHER_WIND_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_WIND_SPEED);
-			case WEATHER_CLOUDS_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_CLOUD);
-			case WEATHER_AIR_PRESSURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRESSURE);
-		}
-		return null;
+		return switch (widgetType) {
+			case WEATHER_TEMPERATURE_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_TEMPERATURE);
+			case WEATHER_PRECIPITATION_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRECIPITATION);
+			case WEATHER_WIND_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_WIND_SPEED);
+			case WEATHER_CLOUDS_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_CLOUD);
+			case WEATHER_AIR_PRESSURE_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRESSURE);
+			default -> null;
+		};
 	}
 
 	@Nullable
