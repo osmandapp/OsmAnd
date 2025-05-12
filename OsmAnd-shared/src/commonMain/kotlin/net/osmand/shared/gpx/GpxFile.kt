@@ -929,7 +929,7 @@ class GpxFile : GpxExtensions {
 		const val XML_COLON = "_-_"
 	}
 
-	fun renameTrack(newName: String) {
+	fun updateTrackName(newName: String) {
 		metadata.name = newName
 		if (tracks.size == 1) {
 			tracks[0].name = newName
