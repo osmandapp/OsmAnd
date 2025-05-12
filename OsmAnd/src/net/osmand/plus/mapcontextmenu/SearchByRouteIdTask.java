@@ -88,7 +88,7 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
                     for (Amenity am : list) {
                         LatLon l = am.getLocation();
                         if (!latLonHashSet.contains(l)) {
-                            if (amenity == null || Algorithms.objectEquals(am.getId(), amenity.getId())) {
+                            if (amenity == null || !Algorithms.objectEquals(am.getId(), amenity.getId())) {
                                 amenities.add(am);
                             }
                         }
