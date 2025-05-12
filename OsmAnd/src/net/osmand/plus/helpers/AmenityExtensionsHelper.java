@@ -43,23 +43,22 @@ public class AmenityExtensionsHelper {
 	}
 
 	@NonNull
-	public Pair<BaseDetailsObject, Map<String, String>> getDetailsObjectWithExtensions(
+	public Pair<Amenity, Map<String, String>> getAmenityWithExtensions(
 			@NonNull Map<String, String> extensions, @Nullable String originName,
 			double lat, double lon) {
-		BaseDetailsObject detailsObject = null;
+		Amenity amenity = null;
 		if (!Algorithms.isEmpty(originName)) {
-			detailsObject = findDetailsObject(originName, lat, lon);
+			amenity = findAmenity(originName, lat, lon);
 		}
-		Amenity amenity = detailsObject != null ? detailsObject.getSyntheticAmenity() : null;
 		extensions = getUpdatedAmenityExtensions(extensions, amenity);
-		return Pair.create(detailsObject, extensions);
+		return Pair.create(amenity, extensions);
 	}
 
 	@Nullable
-	public BaseDetailsObject findDetailsObject(@NonNull String nameEn, double lat, double lon) {
+	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
 		LatLon latLon = new LatLon(lat, lon);
 		List<String> names = Collections.singletonList(nameEn);
-		return app.getResourceManager().getAmenitySearcher().findPlaceDetails(latLon, null, names, null);
+		return app.getResourceManager().getAmenitySearcher().findAmenity(latLon, null, names, null);
 	}
 
 	@NonNull

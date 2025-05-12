@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -46,7 +45,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	private final FavouritePoint point;
 	private final Map<String, String> amenityExtensions = new HashMap<>();
-	private BaseDetailsObject detailsObject;
+	private Amenity amenity;
 
 	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity,
 			@NonNull FavouritePoint point) {
@@ -60,22 +59,22 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
 
 		String originName = point.getAmenityOriginName();
-		Pair<BaseDetailsObject, Map<String, String>> pair = helper.getDetailsObjectWithExtensions(
+		Pair<Amenity, Map<String, String>> pair = helper.getAmenityWithExtensions(
 				point.getAmenityExtensions(), originName, point.getLatitude(), point.getLongitude());
 
-		detailsObject = pair.first;
+		amenity = pair.first;
 		amenityExtensions.putAll(pair.second);
 	}
 
 	@Nullable
 	public Amenity getAmenity() {
-		return detailsObject != null ? detailsObject.getSyntheticAmenity() : null;
+		return amenity;
 	}
 
 	@Override
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId,
 			String text, String amenityKey) {
-		if (detailsObject == null) {
+		if (amenity == null) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}

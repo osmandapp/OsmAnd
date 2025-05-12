@@ -340,7 +340,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 
 		OsmandApplication app = mapActivity.getMyApplication();
-		object = fetchOtherData(app, object);
+		object = app.getResourceManager().fetchOtherData(app, object);
 
 		Object thisObject = getObject();
 		if (!update && isVisible()) {
@@ -403,23 +403,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		} else if (object instanceof TargetPoint) {
 			app.getTargetPointsHelper().addPointListener(this);
 		}
-
-		// TODO ???
-		if (object instanceof RenderedObject renderedObject) {
-			app.getResourceManager().getAmenitySearcher().searchAmenityAsync(renderedObject, am -> {
-				if (am != null) {
-					app.runInUIThread(() -> update(latLon, pointDescription, am));
-				}
-				return true;
-			});
-		}
-
 		return true;
-	}
-
-	@Nullable
-	private Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
-		return app.getResourceManager().fetchOtherData(app, object);
 	}
 
 	public void show() {

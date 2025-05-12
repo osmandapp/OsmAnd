@@ -39,7 +39,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
 	private final Map<String, String> amenityExtensions = new HashMap<>();
-	private BaseDetailsObject detailsObject;
+	private Amenity amenity;
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
 		super(mapActivity);
@@ -52,17 +52,17 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
 
 		String originName = wpt.getAmenityOriginName();
-		Pair<BaseDetailsObject, Map<String, String>> pair = helper.getDetailsObjectWithExtensions(
+		Pair<Amenity, Map<String, String>> pair = helper.getAmenityWithExtensions(
 				wpt.getExtensionsToRead(), originName, wpt.getLatitude(), wpt.getLongitude());
 
-		detailsObject = pair.first;
+		amenity = pair.first;
 		amenityExtensions.putAll(pair.second);
 	}
 
 	@Override
 	protected void buildNearestRow(@NonNull View view, @NonNull List<Amenity> nearestAmenities,
 			int iconId, String text, String amenityKey) {
-		if (detailsObject == null) {
+		if (amenity == null) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}
@@ -93,8 +93,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description,
-			@NonNull String title) {
+	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
