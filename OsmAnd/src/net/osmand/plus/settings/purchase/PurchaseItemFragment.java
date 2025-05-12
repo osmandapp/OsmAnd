@@ -4,6 +4,7 @@ import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.HUGEROCK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.UNDEFINED;
+import static net.osmand.plus.settings.purchase.data.PurchaseUiDataUtils.UNDEFINED_TIME;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -32,8 +33,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppStateHolder;
+import net.osmand.plus.inapp.InAppPurchaseHelper.SubscriptionStateHolder;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.settings.purchase.data.PurchaseUiData;
@@ -43,8 +46,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
-
-import java.util.Map.Entry;
 
 public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
 
@@ -109,12 +110,20 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		if (purchaseSku != null) {
 			if (inAppPurchaseHelper != null) {
 				if (purchaseOrigin != null) {
-					for (Entry<InAppPurchase, InAppStateHolder> entry : inAppPurchaseHelper.getExternalInApps().entrySet()) {
-						InAppPurchase inapp = entry.getKey();
-						InAppStateHolder holder = entry.getValue();
-						if (holder.origin == purchaseOrigin && purchaseSku.equals(inapp.getSku())) {
-							purchase = PurchaseUiDataUtils.createUiData(app, inapp, holder.purchaseTime, holder.origin);
+					for (InAppStateHolder holder : inAppPurchaseHelper.getExternalInApps()) {
+						InAppPurchase inapp = holder.linkedPurchase;
+						if (inapp != null && holder.origin == purchaseOrigin && purchaseSku.equals(inapp.getSku())) {
+							purchase = PurchaseUiDataUtils.createUiData(app, inapp, holder.purchaseTime, UNDEFINED_TIME, holder.origin, null);
 							break;
+						}
+					}
+					if (purchase == null) {
+						for (SubscriptionStateHolder holder : inAppPurchaseHelper.getExternalSubscriptions()) {
+							InAppSubscription subscription = holder.linkedSubscription;
+							if (subscription != null && holder.origin == purchaseOrigin && purchaseSku.equals(subscription.getSku())) {
+								purchase = PurchaseUiDataUtils.createUiData(app, subscription, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
+								break;
+							}
 						}
 					}
 				}

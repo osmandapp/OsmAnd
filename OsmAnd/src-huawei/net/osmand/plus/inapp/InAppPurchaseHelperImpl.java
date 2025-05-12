@@ -25,6 +25,7 @@ import com.huawei.hms.iap.entity.StartIapActivityResult;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
@@ -533,6 +534,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				if (fullVersionPurchaseData != null) {
 					completePurchases.add(fullVersionPurchaseData);
 					ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+				} else if (fullVersion != null) {
+					for (InAppStateHolder holder : inAppStateMap.values()) {
+						if (holder.linkedPurchase == fullVersion) {
+							ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+							break;
+						}
+					}
 				}
 				InAppPurchaseData depthContoursPurchaseData = depthContours != null ? getPurchaseData(depthContours.getSku()) : null;
 				if (depthContoursPurchaseData != null) {
@@ -547,6 +555,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				boolean subscribedToLiveUpdates = false;
 				boolean subscribedToOsmAndPro = false;
 				boolean subscribedToMaps = false;
+				InAppSubscription mapsSubscription = null;
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					InAppPurchaseData purchaseData = getPurchaseData(s.getSku());
 					if (purchaseData != null || s.getState().isActive()) {
@@ -561,6 +570,17 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						}
 						if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
 							subscribedToMaps = true;
+						}
+					}
+					if (purchases.isMapsSubscription(s)) {
+						mapsSubscription = s;
+					}
+				}
+				if (!subscribedToMaps) {
+					for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+						if (holder.linkedSubscription == mapsSubscription && holder.state == SubscriptionState.ACTIVE) {
+							subscribedToMaps = true;
+							break;
 						}
 					}
 				}

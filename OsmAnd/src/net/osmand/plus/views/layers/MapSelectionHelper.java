@@ -14,7 +14,6 @@ import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 
 import android.content.Context;
 import android.graphics.PointF;
-import android.text.TextUtils;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -35,13 +34,9 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.*;
 import net.osmand.osm.OsmRouteType;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -82,7 +77,7 @@ public class MapSelectionHelper {
 	private final OsmandMapTileView view;
 	private final MapLayers mapLayers;
 
-	private List<String> publicTransportTypes;
+	private final TransportStopHelper transportStopHelper;
 
 	private Map<LatLon, BackgroundType> touchedFullMapObjects = new HashMap<>();
 	private Map<LatLon, BackgroundType> touchedSmallMapObjects = new HashMap<>();
@@ -94,6 +89,7 @@ public class MapSelectionHelper {
 		settings = app.getSettings();
 		view = app.getOsmandMap().getMapView();
 		mapLayers = app.getOsmandMap().getMapLayers();
+		transportStopHelper = new TransportStopHelper(app);
 		clickableWayHelper = new ClickableWayHelper(app, view);
 	}
 
@@ -124,7 +120,7 @@ public class MapSelectionHelper {
 		collectObjectsFromLayers(result, showUnknownLocation, false);
 		collectObjectsFromMap(result, point, tileBox);
 
-		processTransportStops(result.getAllObjects());
+		transportStopHelper.processTransportStops(result.getAllObjects());
 		if (result.isEmpty()) {
 			collectObjectsFromLayers(result, showUnknownLocation, true);
 		}
@@ -597,8 +593,7 @@ public class MapSelectionHelper {
 		return routeSelectorFilter;
 	}
 
-	private boolean putRouteGpxToSelected(
-			@NonNull List<SelectedMapObject> selectedObjects,
+	private boolean putRouteGpxToSelected(@NonNull List<SelectedMapObject> selectedObjects,
 			@NonNull IContextMenuProvider provider, @NonNull QuadRect rect,
 			@NonNull NetworkRouteSelectorFilter selectorFilter) {
 		int added = 0;
@@ -654,53 +649,6 @@ public class MapSelectionHelper {
 			}
 		}
 		return false;
-	}
-
-	@Nullable
-	private List<String> getPublicTransportTypes() {
-		if (publicTransportTypes == null && !app.isApplicationInitializing()) {
-			PoiCategory category = app.getPoiTypes().getPoiCategoryByName("transportation");
-			if (category != null) {
-				publicTransportTypes = new ArrayList<>();
-				List<PoiFilter> filters = category.getPoiFilters();
-				for (PoiFilter poiFilter : filters) {
-					if (poiFilter.getKeyName().equals("public_transport") || poiFilter.getKeyName().equals("water_transport")) {
-						for (PoiType poiType : poiFilter.getPoiTypes()) {
-							publicTransportTypes.add(poiType.getKeyName());
-							for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
-								publicTransportTypes.add(poiAdditionalType.getKeyName());
-							}
-						}
-					}
-				}
-			}
-		}
-		return publicTransportTypes;
-	}
-
-	private void processTransportStops(@NonNull List<SelectedMapObject> selectedObjects) {
-		List<String> publicTransportTypes = getPublicTransportTypes();
-		if (publicTransportTypes != null) {
-			List<Amenity> transportStopAmenities = new ArrayList<>();
-			for (SelectedMapObject selectedObject : selectedObjects) {
-				Object object = selectedObject.object();
-				if (object instanceof Amenity amenity) {
-					if (!TextUtils.isEmpty(amenity.getSubType()) && publicTransportTypes.contains(amenity.getSubType())) {
-						transportStopAmenities.add(amenity);
-					}
-				}
-			}
-			if (!Algorithms.isEmpty(transportStopAmenities)) {
-				TransportStopsLayer transportStopsLayer = mapLayers.getTransportStopsLayer();
-				for (Amenity amenity : transportStopAmenities) {
-					TransportStop transportStop = TransportStopController.findBestTransportStopForAmenity(app, amenity);
-					if (transportStop != null && transportStopsLayer != null) {
-						selectedObjects.add(new SelectedMapObject(transportStop, transportStopsLayer));
-						selectedObjects.removeIf(selectedObject -> Algorithms.objectEquals(selectedObject.object(), amenity));
-					}
-				}
-			}
-		}
 	}
 
 	@NonNull

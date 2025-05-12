@@ -7,11 +7,14 @@ import static net.osmand.data.Amenity.WIKIPEDIA;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -39,19 +42,31 @@ public class AmenityExtensionsHelper {
 		this.app = app;
 	}
 
+	@NonNull
+	public Pair<BaseDetailsObject, Map<String, String>> getDetailsObjectWithExtensions(
+			@NonNull Map<String, String> extensions, @Nullable String originName,
+			double lat, double lon) {
+		BaseDetailsObject detailsObject = null;
+		if (!Algorithms.isEmpty(originName)) {
+			detailsObject = findDetailsObject(originName, lat, lon);
+		}
+		Amenity amenity = detailsObject != null ? detailsObject.getSyntheticAmenity() : null;
+		extensions = getUpdatedAmenityExtensions(extensions, amenity);
+		return Pair.create(detailsObject, extensions);
+	}
+
 	@Nullable
-	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
+	public BaseDetailsObject findDetailsObject(@NonNull String nameEn, double lat, double lon) {
 		LatLon latLon = new LatLon(lat, lon);
 		List<String> names = Collections.singletonList(nameEn);
-		return app.getResourceManager().getAmenitySearcher().findAmenity(latLon, null, names, null);
+		return app.getResourceManager().getAmenitySearcher().findPlaceDetails(latLon, null, names, null);
 	}
 
 	@NonNull
-	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> savedExtensions,
-	                                                       @Nullable String amenityOriginName,
-	                                                       double lat, double lon) {
+	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> extensions,
+			@Nullable Amenity amenity) {
 		Map<String, String> updatedExtensions = new HashMap<>();
-		for (Map.Entry<String, String> entry : savedExtensions.entrySet()) {
+		for (Map.Entry<String, String> entry : extensions.entrySet()) {
 			String key = entry.getKey();
 			String value = entry.getValue();
 			if (key.startsWith(AMENITY_PREFIX)) {
@@ -62,11 +77,8 @@ public class AmenityExtensionsHelper {
 				updatedExtensions.put(key, value);
 			}
 		}
-		if (amenityOriginName != null) {
-			Amenity amenity = findAmenity(amenityOriginName, lat, lon);
-			if (amenity != null) {
-				updatedExtensions.putAll(amenity.getAmenityExtensions(app.getPoiTypes(), false));
-			}
+		if (amenity != null) {
+			updatedExtensions.putAll(amenity.getAmenityExtensions(app.getPoiTypes(), false));
 		}
 		return updatedExtensions;
 	}
@@ -98,7 +110,8 @@ public class AmenityExtensionsHelper {
 	}
 
 	@Nullable
-	public static String getAmenityDistanceFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+	public static String getAmenityDistanceFormatted(@NonNull Amenity amenity,
+			@NonNull OsmandApplication app) {
 		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
 		float km = Algorithms.parseFloatSilently(distanceTag, 0);
 
