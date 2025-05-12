@@ -41,7 +41,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		app.getResourceManager().getAmenitySearcher().searchAmenityAsync(renderedObject, amenity -> {
 			app.runInUIThread(() -> {
 				ViewGroup viewGroup = viewGroupRef.get();
-				if (viewGroup == null) {
+				if (viewGroup == null || mapContextMenu == null) {
 					return;
 				}
 				if (amenity != null) {
