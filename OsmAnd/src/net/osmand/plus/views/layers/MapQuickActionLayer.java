@@ -184,6 +184,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 	public boolean setSelectedButton(@Nullable QuickActionButton button) {
 		boolean visible = button != null;
+		return setSelectedButton(button, visible);
+	}
+
+	public boolean setSelectedButton(@Nullable QuickActionButton button, boolean visible) {
 		MapActivity mapActivity = getMapActivity();
 		// check if state change is needed
 		boolean buttonChanged = selectedButton != button;
