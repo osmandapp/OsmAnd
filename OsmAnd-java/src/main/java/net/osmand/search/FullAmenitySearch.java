@@ -166,7 +166,7 @@ public class FullAmenitySearch {
                 ? AMENITY_SEARCH_RADIUS_FOR_RELATION
                 : AMENITY_SEARCH_RADIUS;
         QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
-        List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
+        List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false);
         long osmId = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
         List<Amenity> filtered = new ArrayList<>();
         if (osmId > 0 || wikidata != null) {
@@ -475,13 +475,7 @@ public class FullAmenitySearch {
     }
 
     public void searchAmenityAsync(NativeLibrary.RenderedObject renderedObject, CallbackWithObject<Amenity> callbackWithAmenity) {
-        LatLon latLon = renderedObject.getLabelLatLon();
-        if (latLon == null && renderedObject.getLabelX() != 0) {
-            latLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getLabelY()), MapUtils.get31LongitudeX(renderedObject.getLabelX()));
-        }
-        if (latLon == null && !renderedObject.getX().isEmpty()) {
-            latLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)), MapUtils.get31LongitudeX(renderedObject.getX().get(0)));
-        }
+        LatLon latLon = renderedObject.getLatLon();
         if (latLon == null) {
             callbackWithAmenity.processResult(null);
             return;
@@ -490,6 +484,10 @@ public class FullAmenitySearch {
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
             Amenity amenity = findAmenity(finalLatLon, renderedObject.getId(), null, wikidata);
+            if (amenity != null) {
+                amenity.setX(renderedObject.getX());
+                amenity.setY(renderedObject.getY());
+            }
             callbackWithAmenity.processResult(amenity);
         });
     }
