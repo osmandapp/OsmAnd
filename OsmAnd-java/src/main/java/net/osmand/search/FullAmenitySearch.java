@@ -478,9 +478,11 @@ public class FullAmenitySearch {
         LatLon latLon = renderedObject.getLabelLatLon();
         if (latLon == null && renderedObject.getLabelX() != 0) {
             latLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getLabelY()), MapUtils.get31LongitudeX(renderedObject.getLabelX()));
-        } else if (!renderedObject.getX().isEmpty()) {
+        }
+        if (latLon == null && !renderedObject.getX().isEmpty()) {
             latLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)), MapUtils.get31LongitudeX(renderedObject.getX().get(0)));
-        } else {
+        }
+        if (latLon == null) {
             callbackWithAmenity.processResult(null);
             return;
         }
