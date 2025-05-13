@@ -158,7 +158,10 @@ public class AmenityUIHelper extends MenuBuilder {
 					StringBuilder sb = new StringBuilder();
 					List<String> records = new ArrayList<>(Arrays.asList(e.getValue().split(Amenity.SEPARATOR)));
 					for (String record : records) {
-						AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(record);
+						AbstractPoiType pt = poiTypes.getPoiAdditionalType(poiCategory, record);
+						if (pt == null) {
+							pt = poiTypes.getAnyPoiAdditionalTypeByKey(record);
+						}
 						categoryTypes.add((PoiType) pt);
 						if (sb.length() > 0) {
 							sb.append(" • ");
@@ -965,20 +968,21 @@ public class AmenityUIHelper extends MenuBuilder {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
 			String name = pt.getTranslation();
 			button.setText(name);
+			PoiCategory category = pt.getCategory() != null ? pt.getCategory() : type;
 
 			button.setOnClickListener(v -> {
-				if (type != null) {
-					PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + type.getKeyName());
+				if (category != null) {
+					PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + category.getKeyName());
 					if (filter != null) {
 						filter.clearFilter();
 						if (poiAdditional) {
-							filter.setTypeToAccept(type, true);
+							filter.setTypeToAccept(category, true);
 							filter.updateTypesToAccept(pt);
 							filter.setFilterByName(pt.getKeyName().replace('_', ':').toLowerCase());
 						} else {
 							LinkedHashSet<String> accept = new LinkedHashSet<>();
 							accept.add(pt.getKeyName());
-							filter.selectSubTypesToAccept(type, accept);
+							filter.selectSubTypesToAccept(category, accept);
 						}
 						getMapActivity().getFragmentsHelper().showQuickSearch(filter);
 					}
