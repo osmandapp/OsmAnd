@@ -809,6 +809,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	public static <T extends NetworkDBPoint> TIntObjectHashMap<List<T>> groupByClusters(TLongObjectHashMap<T> pointsById, boolean out) {
 		TIntObjectHashMap<List<T>> res = new TIntObjectHashMap<>();
 		for (T p : pointsById.valueCollection()) {
+			if (!out && p.dualPoint == null) {
+				assert(false);
+				continue;
+			}
 			int cid = out ? p.clusterId : p.dualPoint.clusterId;
 			if (!res.containsKey(cid)) {
 				res.put(cid, new ArrayList<T>());

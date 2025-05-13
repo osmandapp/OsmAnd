@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -286,6 +285,16 @@ public class HHRouteDataStructure {
 		}
 		
 		public List<T> getOutgoingPoints(T point) {
+			if (point.dualPoint == null) {
+				List<String> files = new ArrayList<>();
+				for (HHRouteRegionPointsCtx<T> r : regions) {
+					if (r.file != null) {
+						files.add(r.file.getFile().getName());
+					}
+				}
+				String error = String.format("dualPoint is null for %s (%s)", point, String.join(" ", files));
+				throw new IllegalStateException(error); // should fall back to BinaryRoutePlanner
+			}
 			return clusterOutPoints.get(point.dualPoint.clusterId);
 		}
 
