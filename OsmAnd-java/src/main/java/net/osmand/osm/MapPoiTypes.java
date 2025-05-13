@@ -847,24 +847,11 @@ public class MapPoiTypes {
 	}
 
 	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
-		PoiType add = null;
 		for (int i = 0; i < categories.size(); i++) {
 			PoiCategory pc = categories.get(i);
-			add = getPoiAdditionalByKey(pc, name);
+			AbstractPoiType add = getPoiAdditionalType(pc, name);
 			if (add != null) {
 				return add;
-			}
-			for (PoiFilter pf : pc.getPoiFilters()) {
-				add = getPoiAdditionalByKey(pf, name);
-				if (add != null) {
-					return add;
-				}
-			}
-			for (PoiType p : pc.getPoiTypes()) {
-				add = getPoiAdditionalByKey(p, name);
-				if (add != null) {
-					return add;
-				}
 			}
 		}
 		return null;
