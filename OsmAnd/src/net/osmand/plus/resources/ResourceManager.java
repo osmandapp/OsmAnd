@@ -1108,12 +1108,14 @@ public class ResourceManager {
 		long time = System.currentTimeMillis();
 		if (object instanceof Amenity amenity) {
 			ContextMenuLayer.IContextMenuProvider provider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
-			LatLon latLon = amenity.getLocation();
-			BaseDetailsObject baseObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
-			if (baseObject == null) {
+			if (amenity.isContainsFullInfo()) {
 				detailsObject = new PlaceDetailsObject(amenity, provider, app.getLanguage());
 			} else {
-				detailsObject = new PlaceDetailsObject(baseObject, provider);
+				LatLon latLon = amenity.getLocation();
+				BaseDetailsObject baseObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
+				if (baseObject != null) {
+					detailsObject = new PlaceDetailsObject(baseObject, provider);
+				}
 			}
 		}
 

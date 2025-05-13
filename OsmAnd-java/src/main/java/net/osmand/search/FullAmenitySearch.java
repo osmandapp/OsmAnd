@@ -153,7 +153,9 @@ public class FullAmenitySearch {
     public Amenity findAmenity(LatLon latLon, Long id, Collection<String> names, String wikidata) {
         BaseDetailsObject detail = findPlaceDetails(latLon, id, names, wikidata);
         if (detail != null) {
-            return detail.getSyntheticAmenity();
+            Amenity amenity = detail.getSyntheticAmenity();
+            amenity.setContainsFullInfo(true);
+            return amenity;
         }
         return null;
     }
