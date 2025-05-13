@@ -121,7 +121,10 @@ public class WeatherWidgetsPanel extends LinearLayout implements WidgetsContaine
 			textState.night = nightMode;
 			widget.updateColors(textState);
 			widgetView.findViewById(R.id.widget_bg).setBackgroundResource(nightMode ? R.color.list_background_color_dark : R.color.widget_background_color_light);
-			((OutlinedTextContainer) widgetView.findViewById(R.id.widget_text)).setTextColor(ColorUtilities.getPrimaryTextColor(getContext(), nightMode));
+			OutlinedTextContainer widgetText = widgetView.findViewById(R.id.widget_text);
+
+			widgetText.setTextColor(ColorUtilities.getPrimaryTextColor(getContext(), nightMode));
+			widgetText.showOutline(false);
 			((TextView) widgetView.findViewById(R.id.widget_text_small)).setTextColor(ColorUtilities.getSecondaryTextColor(getContext(), nightMode));
 		}
 	}
