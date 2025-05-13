@@ -921,19 +921,19 @@ class GpxFile : GpxExtensions {
 		return null
 	}
 
-	fun isOsmAndOrigin() = author?.startsWith(OSMAND_AUTHOR_PREFIX, ignoreCase = true) ?: false
-
-	companion object {
-		const val OSMAND_AUTHOR_PREFIX = "OsmAnd"
-		const val DEFAULT_WPT_GROUP_NAME = ""
-		const val XML_COLON = "_-_"
-	}
-
 	fun updateTrackName(newName: String) {
 		metadata.name = newName
 		if (tracks.size == 1) {
 			tracks[0].name = newName
 		}
 		modifiedTime = currentTimeMillis()
+	}
+
+	fun isOsmAndOrigin() = author?.startsWith(OSMAND_AUTHOR_PREFIX, ignoreCase = true) ?: false
+
+	companion object {
+		const val OSMAND_AUTHOR_PREFIX = "OsmAnd"
+		const val DEFAULT_WPT_GROUP_NAME = ""
+		const val XML_COLON = "_-_"
 	}
 }
