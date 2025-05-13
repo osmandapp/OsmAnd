@@ -921,6 +921,14 @@ class GpxFile : GpxExtensions {
 		return null
 	}
 
+	fun updateTrackName(newName: String) {
+		metadata.name = newName
+		if (tracks.size == 1) {
+			tracks[0].name = newName
+		}
+		modifiedTime = currentTimeMillis()
+	}
+
 	fun isOsmAndOrigin() = author?.startsWith(OSMAND_AUTHOR_PREFIX, ignoreCase = true) ?: false
 
 	companion object {
