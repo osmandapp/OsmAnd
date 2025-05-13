@@ -143,18 +143,18 @@ public class MapSelectionHelper {
 
 	private void recollectForMultiselectMenu(MapSelectionResult result) {
 		List<SelectedMapObject> selectedObjects = result.getAllObjects();
-        for (int i = 0; i < selectedObjects.size(); i++) {
+		for (int i = 0; i < selectedObjects.size(); i++) {
 			SelectedMapObject sel = selectedObjects.get(i);
-            if (sel.object() instanceof RenderedObject renderedObject) {
-                LatLon l = renderedObject.getLatLon();
-                if (l != null) {
-                    PlaceDetailsObject pdo = findPlaceDetails(l, renderedObject.getId(), renderedObject.getOriginalNames(), renderedObject.getTagValue(WIKIDATA));
-                    if (pdo != null) {
+			if (sel.object() instanceof RenderedObject renderedObject) {
+				LatLon l = renderedObject.getLatLon();
+				if (l != null) {
+					PlaceDetailsObject pdo = findPlaceDetails(l, renderedObject.getId(), renderedObject.getOriginalNames(), renderedObject.getTagValue(WIKIDATA));
+					if (pdo != null) {
 						selectedObjects.set(i, new SelectedMapObject(pdo, sel.provider()));
-                    }
-                }
-            }
-        }
+					}
+				}
+			}
+		}
 	}
 
 	protected void collectObjectsFromLayers(@NonNull MapSelectionResult result,
