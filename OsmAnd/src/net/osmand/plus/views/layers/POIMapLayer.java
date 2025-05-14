@@ -5,7 +5,6 @@ import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.views.layers.core.POITileProvider.TILE_POINTS_LIMIT;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -86,8 +85,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private static final int START_ZOOM = 5;
 	private static final int START_ZOOM_ROUTE_TRACK = 11;
 	private static final int END_ZOOM_ROUTE_TRACK = 13;
-	private static final int TOP_PLACES_LIMIT = 15;
-	private static final int NEARBY_PLACES_LIMIT = 150;
+	private static final int TOP_PLACES_LIMIT = 20;
+	public static final int TILE_POINTS_LIMIT = 25;
 
 	private static final Log LOG = PlatformUtil.getLog(POIMapLayer.class);
 
@@ -277,9 +276,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 								if (tileLatLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
 										latLon.getLongitude(), latLon.getLatitude())) {
 									displayedPoints.add(amenity);
-								}
-								if (i++ > TILE_POINTS_LIMIT) {
-									break;
+									if (++i == TILE_POINTS_LIMIT) {
+										break;
+									}
 								}
 							}
 						}
@@ -449,9 +448,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (!intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
 				res.put(place.getId(), place);
 			}
-			if (i++ > NEARBY_PLACES_LIMIT) {
-				break;
-			}
 		}
 		return res;
 	}
@@ -490,17 +486,24 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					break;
 				}
 			}
-			mapPlaces.add(new MapTopPlace(placeId, position, getTopPlaceBitmap(place), alreadyExists));
+			Bitmap topPlaceBitmap = getTopPlaceBitmap(place);
+			if(topPlaceBitmap != null) {
+				mapPlaces.add(new MapTopPlace(placeId, position, topPlaceBitmap, alreadyExists));
+			}
+			if(mapPlaces.size() == TOP_PLACES_LIMIT) {
+				break;
+			}
+		}
+		for (int i = 0; i < existingIds.length; i++) {
+			if (existingIds[i] != 0) {
+				mapMarkersCollection.removeMarker(existingMapPoints.get(i));
+			}
 		}
 		for (MapTopPlace place : mapPlaces) {
 			Bitmap imageBitmap = place.imageBitmap;
-			if (place.alreadyExists || imageBitmap == null) {
+			if (place.alreadyExists) {
 				continue;
 			}
-			if(mapPlaces.indexOf(place) > TOP_PLACES_LIMIT) {
-				break;
-			}
-
 			Bitmap imageMapBitmap = createImageBitmap(imageBitmap, false);
 
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
@@ -512,11 +515,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
 					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 					.buildAndAddToCollection(mapMarkersCollection);
-		}
-		for (int i = 0; i < existingIds.length; i++) {
-			if (existingIds[i] != 0) {
-				mapMarkersCollection.removeMarker(existingMapPoints.get(i));
-			}
 		}
 		mapRenderer.addSymbolsProvider(mapMarkersCollection);
 	}

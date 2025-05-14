@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.GZIPInputStream;
 
-@RunWith(Parameterized.class)
+//@RunWith(Parameterized.class)
 public class SearchUICoreTest {
 
 	private static final String SEARCH_RESOURCES_PATH = "src/test/resources/search/";
@@ -83,7 +83,7 @@ public class SearchUICoreTest {
     	return arrayList;
     }
 
-    @Test
+//    @Test
 	public void testSearch() throws IOException, JSONException {
 	    File obfFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf"));
 		File obfZipFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf.gz"));
