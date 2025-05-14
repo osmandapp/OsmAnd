@@ -1,21 +1,21 @@
 package net.osmand.test.activities;
 
+import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithContentDescription;
+import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithText;
+import static net.osmand.test.common.OsmAndDialogInteractions.clickMapButtonWithId;
+import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
+import static net.osmand.test.common.OsmAndDialogInteractions.writeText;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
-import net.osmand.plus.activities.MapActivity; // Assuming MapActivity is your main map screen
-import net.osmand.plus.R; // Assuming your resources are in net.osmand.plus
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.test.common.AndroidTest;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static androidx.test.espresso.action.ViewActions.click;
-import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithId;
-import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithText;
-import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
-import static org.hamcrest.Matchers.allOf; // Required for combining matchers
 
 /**
  * Test for enabling the POI overlay layer via the main menu and Configure Map screen.
@@ -31,11 +31,18 @@ public class SimpleClickTest extends AndroidTest {
 	public void testEnablePoiOverlay() throws Throwable {
 		skipAppStartDialogs(app);
 
-		clickButtonWithId(R.id.map_menu_button);
-		clickButtonWithText(R.string.configure_map);
-//		clickButtonWithText(R.string.layer_map_appearance);
+		clickMapButtonWithId(R.id.map_menu_button);
+		clickButtonWithText(R.string.maps_and_resources);
 
-		// wait 5 second
-        Thread.sleep(5000);
+		Thread.sleep(5000);
+
+		clickButtonWithContentDescription(R.string.shared_string_search);
+		writeText(R.id.searchEditText, "Kyiv");
+
+		Thread.sleep(5000);
+
+		clickButtonWithText("Kyiv");
+
+		Thread.sleep(5000);
 	}
 }
