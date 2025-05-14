@@ -501,7 +501,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
     <string name="show_debug_info">Show debug information</string>
     <string name="show_debug_info_description">Display graphical info about placement of each map text</string>
-    <string name="map_text">Map texts</string>
+    <string name="map_text">Map Rendering</string>
     <string name="show_grids">Show map grid</string>
     <string name="show_grids_description">Allow displaying grid over the map</string>
     <string name="show_utm_grids">Use UTM instead of WGS84</string>
