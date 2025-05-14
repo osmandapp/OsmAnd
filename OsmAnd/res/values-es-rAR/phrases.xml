@@ -5006,4 +5006,23 @@
     <string name="poi_travel_agency">Agencia de viajes; Agencia de turismo</string>
     <string name="poi_steps">Escalones</string>
     <string name="poi_area_highway_steps">Área de escalera</string>
+    <string name="poi_mormon_church">Iglesia mormona</string>
+    <string name="poi_reformed_church">Iglesia reformada</string>
+    <string name="poi_ethiopian_orthodox_church">Iglesia ortodoxa etíope</string>
+    <string name="poi_greek_catholic_church">Iglesia católica griega</string>
+    <string name="poi_iglesia_ni_cristo_church">Iglesia ni cristo</string>
+    <string name="poi_georgian_orthodox_church">Iglesia ortodoxa georgiana</string>
+    <string name="poi_united_church">Iglesia unida</string>
+    <string name="poi_assemblies_of_god_church">Asambleas de la iglesia de Dios</string>
+    <string name="poi_salvation_army_church">Iglesia del ejército de salvación</string>
+    <string name="poi_united_methodist_church">Iglesia metodista unida</string>
+    <string name="poi_ukrainian_greek_catholic_church">Iglesia greco-católica ucraniana</string>
+    <string name="poi_nondenominational_church">Iglesia aconfesional;Iglesia no denominacional</string>
+    <string name="poi_ukrainian_orthodox_church">Iglesia ortodoxa ucraniana</string>
+    <string name="poi_new_apostolic_church">Nueva iglesia apostólica</string>
+    <string name="poi_romanian_orthodox_church">Iglesia ortodoxa rumana</string>
+    <string name="poi_church_of_scotland">Iglesia escocesa</string>
+    <string name="poi_seventh_day_adventist_church">Iglesia adventista del séptimo día</string>
+    <string name="poi_episcopal_church">Iglesia episcopal</string>
+    <string name="poi_serbian_orthodox_church">Iglesia ortodoxa serbia</string>
 </resources>
