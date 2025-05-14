@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.data.LatLon;
@@ -2582,6 +2583,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(show);
 			debugSettings.setSkipSymbolsIntersectionCheck(allow);
 			mapRenderer.setDebugSettings(debugSettings);
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			if (mapContext != null) {
+				mapContext.showDebugTiles = plugin.SHOW_PRIMITIVES_DEBUG_INFO.get();
+				mapContext.recreateRasterAndSymbolsProvider(MapRendererContext.ProviderType.MAIN);
+			}
+
 		}
 	}
 
