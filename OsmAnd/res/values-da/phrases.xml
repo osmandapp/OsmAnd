@@ -96,7 +96,7 @@
     <string name="poi_fire_water_pond">Branddam</string>
     <string name="poi_grit_bin">Grusbeholder</string>
     <string name="poi_ambulance_station">Ambulancestation</string>
-    <string name="poi_disaster_response">Katastrofe beredskabsstation</string>
+    <string name="poi_disaster_response">Station for katastrofeberedskab</string>
     <string name="poi_emergency_access_point">Nødstilfælde punkt</string>
     <string name="poi_ford">Vadested</string>
     <string name="poi_mountain_pass">Bjergpas</string>
@@ -4235,4 +4235,7 @@
     <string name="poi_footway">Gangbro</string>
     <string name="poi_area_highway_steps">Trappeområde</string>
     <string name="poi_sports_hall">Idrætshal</string>
+    <string name="poi_network_foot">Rutenetværk (vandring)</string>
+    <string name="poi_network_cycling">Rutenetværk (cykling)</string>
+    <string name="poi_osmwiki">Populære steder (Wikipedia)</string>
 </resources>
