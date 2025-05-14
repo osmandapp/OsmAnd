@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
@@ -24,7 +25,6 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer;
-import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -39,7 +39,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
 	private final Map<String, String> amenityExtensions = new HashMap<>();
-	private PlaceDetailsObject detailsObject;
+	private Amenity amenity;
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
 		super(mapActivity);
@@ -52,17 +52,17 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
 
 		String originName = wpt.getAmenityOriginName();
-		Pair<PlaceDetailsObject, Map<String, String>> pair = helper.getDetailsObjectWithExtensions(
+		Pair<Amenity, Map<String, String>> pair = helper.getAmenityWithExtensions(
 				wpt.getExtensionsToRead(), originName, wpt.getLatitude(), wpt.getLongitude());
 
-		detailsObject = pair.first;
+		amenity = pair.first;
 		amenityExtensions.putAll(pair.second);
 	}
 
 	@Override
 	protected void buildNearestRow(@NonNull View view, @NonNull List<Amenity> nearestAmenities,
 			int iconId, String text, String amenityKey) {
-		if (detailsObject == null) {
+		if (amenity == null) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}

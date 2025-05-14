@@ -5669,5 +5669,6 @@
 	<string name="poi_adoption_agency">Adoption agency</string>
 	<string name="poi_international_organization">International organization</string>
 	<string name="poi_airline">Airline office</string>
+	<string name="poi_route_point_category">Travel point category</string>
 
 </resources>

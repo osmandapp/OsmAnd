@@ -1,21 +1,13 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import static net.osmand.data.Amenity.NAME;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
-import static net.osmand.shared.gpx.GpxUtilities.ADDRESS_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.AMENITY_ORIGIN_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
-import static net.osmand.shared.gpx.GpxUtilities.BACKGROUND_TYPE_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.COLOR_NAME_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.ICON_NAME_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.PROFILE_TYPE_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
-import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -65,7 +57,7 @@ public class AdditionalInfoBundle {
 				String key;
 				if (origKey.equals(AMENITY_PREFIX + Amenity.OPENING_HOURS)) {
 					key = origKey.replace(AMENITY_PREFIX, "");
-				} else if (origKey.startsWith(AMENITY_PREFIX)) {
+				} else if (origKey.startsWith(AMENITY_PREFIX) || origKey.contains("route_point_category")) {
 					continue;
 				} else {
 					key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
@@ -84,7 +76,7 @@ public class AdditionalInfoBundle {
 		return filteredAdditionalInfo;
 	}
 
-	public boolean containsAny(@NonNull String ... keys) {
+	public boolean containsAny(@NonNull String... keys) {
 		return CollectionUtils.containsAny(getAdditionalInfoKeys(), keys);
 	}
 
