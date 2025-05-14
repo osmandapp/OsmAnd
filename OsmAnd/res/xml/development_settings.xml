@@ -66,6 +66,7 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/battery_saving_mode" />
 
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="transparent_status_bar"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
