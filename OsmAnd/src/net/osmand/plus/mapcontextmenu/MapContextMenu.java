@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.OnResultCallback;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
@@ -47,7 +48,6 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
-import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
@@ -340,7 +340,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 
 		OsmandApplication app = mapActivity.getMyApplication();
-		object = fetchOtherData(app, object);
+		object = app.getResourceManager().fetchOtherData(app, object);
 
 		Object thisObject = getObject();
 		if (!update && isVisible()) {
@@ -403,18 +403,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		} else if (object instanceof TargetPoint) {
 			app.getTargetPointsHelper().addPointListener(this);
 		}
-
 		return true;
-	}
-
-	@Nullable
-	private Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
-		if (object instanceof Amenity amenity) {
-			return MapSelectionHelper.fetchOtherData(app, amenity);
-		} else if (object instanceof PlaceDetailsObject detailsObject) {
-			return MapSelectionHelper.fetchOtherData(app, detailsObject);
-		}
-		return object;
 	}
 
 	public void show() {
