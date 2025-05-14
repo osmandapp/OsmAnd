@@ -5646,4 +5646,28 @@
 
 	<string name="poi_christian_church">Christian church</string>
 
+	<string name="poi_financial_advisor">Financial advisor</string>
+	<string name="poi_security">Security office</string>
+	<string name="poi_construction_company">Construction company</string>
+	<string name="poi_union">Union office</string>
+	<string name="poi_office_charity">Charity office</string>
+	<string name="poi_courier">Courier office</string>
+	<string name="poi_moving_company">Moving company</string>
+	<string name="poi_surveyor">Surveyor office</string>
+	<string name="poi_graphic_design">Graphic design office</string>
+	<string name="poi_office_university">University office</string>
+	<string name="poi_transport">Transport office</string>
+	<string name="poi_harbour_master">Harbour master</string>
+	<string name="poi_bail_bond_agent">Bail bond agent</string>
+	<string name="poi_translator">Translator</string>
+	<string name="poi_private_investigator">Private investigator</string>
+	<string name="poi_visa">Visa</string>
+	<string name="poi_interior_design">Interior design</string>
+	<string name="poi_chamber">Chamber</string>
+	<string name="poi_tutoring">Tutoring</string>
+	<string name="poi_politician">Politician office</string>
+	<string name="poi_adoption_agency">Adoption agency</string>
+	<string name="poi_international_organization">International organization</string>
+	<string name="poi_airline">Airline office</string>
+
 </resources>
