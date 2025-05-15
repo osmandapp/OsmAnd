@@ -5010,4 +5010,6 @@
     <string name="poi_mennonite_church">Menonitska crkva</string>
     <string name="poi_landmark_church">Znamenita crkva</string>
     <string name="poi_adventist_church">Adventistička crkva</string>
+    <string name="poi_mormon_church">Mormonska crkva</string>
+    <string name="poi_seventh_day_adventist_church">Adventistička crkva sedmog dana</string>
 </resources>
