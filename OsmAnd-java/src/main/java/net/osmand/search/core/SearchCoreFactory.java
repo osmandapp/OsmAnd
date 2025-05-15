@@ -655,10 +655,19 @@ public class SearchCoreFactory {
 						sr.localeName = object.getName(phrase.getSettings().getLang(),
 								phrase.getSettings().isTransliterate());
 					}
-					if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)
-							&& !nm.matches(object.getAdditionalInfoValues(false))) {
-						return false;
+					if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)) {
+						Collection<String> altNames = object.getAdditionalInfoValues(true);
+						for (String name : altNames) {
+							if (nm.matches(name)) {
+								sr.alternateName = name;
+								break;
+							}
+						}
+						if (Algorithms.isEmpty(sr.alternateName)) {
+							return false;
+						}
 					}
+					
 					sr.object = object;
 					sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
 					sr.file = currentFile[0];
@@ -672,8 +681,10 @@ public class SearchCoreFactory {
 						sr.priorityDistance = 1;
 					}
 					sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
-					sr.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					phrase.countUnknownWordsMatchMainResult(sr);
+					if (Algorithms.isEmpty(sr.alternateName)) {
+						sr.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
+					}
 					sr.objectType = ObjectType.POI;
 					resultMatcher.publish(sr);
 					ids.add(poiID);
@@ -1364,6 +1375,7 @@ public class SearchCoreFactory {
 						}
 					}
 					if (ns != null) {
+						// TODO why only ref
 						if (ns.matches(res.localeName) || ns.matches(res.otherNames)) {
 							phrase.countUnknownWordsMatchMainResult(res, countExtraWords);
 						} else {
@@ -1371,16 +1383,19 @@ public class SearchCoreFactory {
 							if (ref == null || !ns.matches(ref)) {
 								return false;
 							} else {
-								phrase.countUnknownWordsMatch(res, ref, null, countExtraWords);
+								phrase.countUnknownWordsMatchMainResult(res, ref, countExtraWords);
 								res.localeName += " " + ref;
 							}
 						}
 					} else {
-						phrase.countUnknownWordsMatch(res, "", null, countExtraWords);
+						phrase.countUnknownWordsMatchMainResult(res, countExtraWords);
 					}
 
 					res.object = object;
-					res.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
+					// assign alternateName only after count words
+					if (Algorithms.isEmpty(res.alternateName)) {
+						res.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
+					}
 					res.preferredZoom = PREFERRED_POI_ZOOM;
 					res.file = selected;
 					res.location = object.getLocation();

@@ -93,11 +93,16 @@ public class SearchResult {
 			// don't overload with poi types
 		} else {
 			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
-			if (allWordsMatched(localeName, completeMatchRes)) {
-				// ignore other names
-			} else if (otherNames != null) {
+			boolean matched = false;
+			matched = allWordsMatched(localeName, completeMatchRes);
+			if (!matched && alternateName != null) {
+				// TODO incorrect when alternate name is city
+				matched = allWordsMatched(alternateName, completeMatchRes);
+			}
+			if (!matched && otherNames != null) {
 				for (String otherName : otherNames) {
 					if (allWordsMatched(otherName, completeMatchRes)) {
+						matched = true;
 						break;
 					}
 				}
