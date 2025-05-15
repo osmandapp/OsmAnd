@@ -139,8 +139,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearContextMarkerCollection();
 		clearOutlineCollection();
 	}
