@@ -15,6 +15,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -38,17 +39,18 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 
 	private void searchAmenity(@NonNull ViewGroup view, @Nullable Object object) {
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(view);
-		app.getResourceManager().getAmenitySearcher().searchAmenityAsync(renderedObject, amenity -> {
+		app.getResourceManager().getAmenitySearcher().searchBaseDetailsAsync(renderedObject, baseDetails -> {
 			app.runInUIThread(() -> {
 				ViewGroup viewGroup = viewGroupRef.get();
 				if (viewGroup == null || mapContextMenu == null) {
 					return;
 				}
-				if (amenity != null) {
+				if (baseDetails != null) {
+					PlaceDetailsObject placeDetailsObject = new PlaceDetailsObject(baseDetails, app.getOsmandMap().getMapLayers().getPoiMapLayer());
 					LatLon latLon = getLatLon();
 					MapLayers mapLayers = mapActivity.getMapLayers();
-					PointDescription description = mapLayers.getPoiMapLayer().getObjectName(amenity);
-					mapContextMenu.update(latLon, description, amenity);
+					PointDescription description = mapLayers.getPoiMapLayer().getObjectName(placeDetailsObject);
+					mapContextMenu.update(latLon, description, placeDetailsObject);
 				} else {
 					super.build(viewGroup, object);
 				}

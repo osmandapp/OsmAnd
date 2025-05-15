@@ -46,7 +46,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 	@Override
 	public void buildNearestRows(@NonNull ViewGroup viewGroup, @Nullable Object object) {
 		super.buildNearestRows(viewGroup, object);
-		//buildGuidesRow(viewGroup);
+		buildGuidesRow(viewGroup);
 	}
 
 	private void buildGuidesRow(@NonNull ViewGroup viewGroup) {

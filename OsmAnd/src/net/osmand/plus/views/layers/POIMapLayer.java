@@ -959,7 +959,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public Amenity getAmenity(@Nullable Object object) {
 		if (object instanceof Amenity amenity) {
 			return amenity;
-		} else if (object instanceof PlaceDetailsObject detailsObject) {
+		} else if (object instanceof BaseDetailsObject detailsObject) {
 			return detailsObject.getSyntheticAmenity();
 		}
 		return null;
