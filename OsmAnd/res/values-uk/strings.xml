@@ -5760,4 +5760,6 @@
     <string name="save_to_device_error">Помилка збереження на пристрої</string>
     <string name="save_to_device">Зберегти на пристрій</string>
     <string name="travel_guides">Путівника</string>
+    <string name="show_debug_tile">Показати інформацію про плитку</string>
+    <string name="show_debug_tile_description">Відображати інформацію про символи карти кожної плитки</string>
 </resources>
