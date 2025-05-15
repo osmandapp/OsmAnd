@@ -5006,4 +5006,8 @@
     <string name="poi_travel_agency">Turistička agencija</string>
     <string name="poi_steps">Koraci</string>
     <string name="poi_area_highway_steps">Površina stepeništa</string>
+    <string name="poi_evangelical_lutheran_church">Evangelistička luteranska crkva</string>
+    <string name="poi_mennonite_church">Menonitska crkva</string>
+    <string name="poi_landmark_church">Znamenita crkva</string>
+    <string name="poi_adventist_church">Adventistička crkva</string>
 </resources>
