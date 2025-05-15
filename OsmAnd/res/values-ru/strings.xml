@@ -5976,4 +5976,7 @@
     <string name="saved_to_device">Сохранено на устройстве</string>
     <string name="save_to_device">Сохранить на устройстве</string>
     <string name="save_to_device_error">Ошибка сохранения на устройстве</string>
+    <string name="travel_guides">Путеводители</string>
+    <string name="show_debug_tile_description">Показывать отладочную информацию о каждом тайле</string>
+    <string name="show_debug_tile">Показывать информацию о тайле</string>
 </resources>
