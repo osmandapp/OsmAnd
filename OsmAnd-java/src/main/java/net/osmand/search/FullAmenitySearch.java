@@ -154,7 +154,6 @@ public class FullAmenitySearch {
         BaseDetailsObject detail = findPlaceDetails(latLon, id, names, wikidata);
         if (detail != null) {
             Amenity amenity = detail.getSyntheticAmenity();
-            amenity.setContainsFullInfo(true);
             return amenity;
         }
         return null;
@@ -166,7 +165,7 @@ public class FullAmenitySearch {
                 ? AMENITY_SEARCH_RADIUS_FOR_RELATION
                 : AMENITY_SEARCH_RADIUS;
         QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
-        List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false);
+        List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
         long osmId = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
         List<Amenity> filtered = new ArrayList<>();
         if (osmId > 0 || wikidata != null) {
@@ -184,6 +183,7 @@ public class FullAmenitySearch {
                 detailObj.addObject(filtered.get(i));
                 detailObj.combineData();
             }
+            detailObj.getSyntheticAmenity().setContainsFullInfo(true);
             return detailObj;
         }
         return null;
@@ -474,7 +474,7 @@ public class FullAmenitySearch {
         });
     }
 
-    public void searchAmenityAsync(NativeLibrary.RenderedObject renderedObject, CallbackWithObject<Amenity> callbackWithAmenity) {
+    public void searchBaseDetailsAsync(NativeLibrary.RenderedObject renderedObject, CallbackWithObject<BaseDetailsObject> callbackWithAmenity) {
         LatLon latLon = renderedObject.getLatLon();
         if (latLon == null) {
             callbackWithAmenity.processResult(null);
@@ -483,12 +483,12 @@ public class FullAmenitySearch {
         final LatLon finalLatLon = latLon;
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
-            Amenity amenity = findAmenity(finalLatLon, renderedObject.getId(), null, wikidata);
-            if (amenity != null) {
-                amenity.setX(renderedObject.getX());
-                amenity.setY(renderedObject.getY());
+            BaseDetailsObject baseDetailsObject = findPlaceDetails(finalLatLon, renderedObject.getId(), null, wikidata);
+            if (baseDetailsObject != null) {
+                baseDetailsObject.getSyntheticAmenity().setX(renderedObject.getX());
+                baseDetailsObject.getSyntheticAmenity().setY(renderedObject.getY());
             }
-            callbackWithAmenity.processResult(amenity);
+            callbackWithAmenity.processResult(baseDetailsObject);
         });
     }
 
