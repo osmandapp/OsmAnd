@@ -48,14 +48,14 @@ public class ObfConstants {
 		return osmId;
 	}
 
-	public static long createMapObjectIdFromOsmId(Long osmId, int osmType) {
-		return switch (osmType) {
-			case 1 -> //node
-					osmId * 2;
-			case 2 -> //way
-					osmId * 2 + 1;
-			case 3 -> // relation
-					(osmId << (5 + SHIFT_ID)) | (ObfConstants.RELATION_BIT | ObfConstants.SPLIT_BIT);
+	public static long createMapObjectIdFromOsmId(long osmId, EntityType type) {
+		return switch (type) {
+			case NODE -> //node
+					osmId << AMENITY_ID_RIGHT_SHIFT;
+			case WAY -> //way
+					(osmId << AMENITY_ID_RIGHT_SHIFT) + 1;
+			case RELATION -> // relation
+					RELATION_BIT + ((osmId << SHIFT_ID) << DUPLICATE_SPLIT);
 			default -> osmId;
 		};
 	}
