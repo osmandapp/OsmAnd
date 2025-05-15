@@ -5272,7 +5272,7 @@
     <string name="allow_display_on_top_description">Omogući prikaz teksta s mape jedan iznad drugog</string>
     <string name="show_debug_info">Pokaži debug informacije</string>
     <string name="show_debug_info_description">Prikaži grafičke informacije o položaju svakog teksta mape</string>
-    <string name="map_text">Tekst mape</string>
+    <string name="map_text">Rendering mape</string>
     <string name="routing_attr_avoid_cobblestone_name">Izbegavati kaldrmu</string>
     <string name="routing_attr_avoid_cobblestone_description">Izbegavati kaldrmu</string>
     <string name="steps_per_minute_unit">KPM</string>
@@ -5735,4 +5735,7 @@
     <string name="save_to_device">Sačuvaj na Uređaju</string>
     <string name="saved_to_device">Sačuvano na uređaju</string>
     <string name="travel_guides">Vodič</string>
+    <string name="show_debug_tile_description">Prikaz informacija o simbolima na mapi svakog tila</string>
+    <string name="show_debug_tile">Prikaži informacije o tilovima</string>
+    <string name="show_symbols_debug_info">Prikaži simbol informacije o otklanjanju grešaka</string>
 </resources>
