@@ -32,13 +32,13 @@ public abstract class Entity implements Serializable {
 		}
 
 		public static EntityType valueOf(int i) {
-            return switch (i) {
-                case 1 -> NODE;
-                case 2 -> WAY;
-                case 3 -> RELATION;
-                default -> null;
-            };
-        }
+			return switch (i) {
+				case 1 -> NODE;
+				case 2 -> WAY;
+				case 3 -> RELATION;
+				default -> null;
+			};
+		}
 	}
 
 	public static class EntityId {
