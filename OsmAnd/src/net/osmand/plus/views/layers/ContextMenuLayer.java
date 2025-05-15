@@ -31,6 +31,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -63,6 +64,7 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -724,10 +726,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon pointLatLon = result.getPointLatLon();
 		List<SelectedMapObject> selectedObjects = result.getProcessedObjects();
 
-		for (SelectedMapObject selectedObject : selectedObjects) {
-			IContextMenuProvider provider = selectedObject.provider();
-			if (provider != null && provider.runExclusiveAction(selectedObject.object(), showUnknownLocation)) {
-				return true;
+		if(!isForceMultiSelection(selectedObjects)) {
+			for (SelectedMapObject selectedObject : selectedObjects) {
+				IContextMenuProvider provider = selectedObject.provider();
+				if (provider != null && provider.runExclusiveAction(selectedObject.object(), showUnknownLocation)) {
+					return true;
+				}
 			}
 		}
 		if (selectedObjects.size() == 1) {
@@ -769,6 +773,24 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		return false;
+	}
+
+	private boolean isForceMultiSelection(List<SelectedMapObject> selectedObjects) {
+		boolean hasFavorites = false;
+		boolean hasTopPlace = false;
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			if(selectedObject.object() instanceof FavouritePoint) {
+				hasFavorites = true;
+			}
+			if(selectedObject.provider() instanceof POIMapLayer poiMapLayer && selectedObject.object() instanceof PlaceDetailsObject placeDetailsObject) {
+				placeDetailsObject.getSyntheticAmenity().getId();
+				if(poiMapLayer.getSelectedTopPlace(placeDetailsObject) != null) {
+					hasTopPlace = true;
+				}
+			}
+		}
+
+		return hasTopPlace && hasFavorites;
 	}
 
 	public boolean disableSingleTap() {
