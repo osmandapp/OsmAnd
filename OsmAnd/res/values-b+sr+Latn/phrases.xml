@@ -5012,4 +5012,12 @@
     <string name="poi_adventist_church">Adventistička crkva</string>
     <string name="poi_mormon_church">Mormonska crkva</string>
     <string name="poi_seventh_day_adventist_church">Adventistička crkva sedmog dana</string>
+    <string name="poi_romanian_orthodox_church">Rumunska pravoslavna crkva</string>
+    <string name="poi_serbian_orthodox_church">Srpska pravoslavna crkva</string>
+    <string name="poi_greek_catholic_church">Grčko - katolička crkva</string>
+    <string name="poi_united_methodist_church">Ujedinjena metodistička crkva</string>
+    <string name="poi_ukrainian_greek_catholic_church">Ukrajinska grčko - katolička crkva</string>
+    <string name="poi_route_point_category">Kategorija putnih tačaka</string>
+    <string name="poi_reformed_church">Reformistička crkva</string>
+    <string name="poi_ethiopian_orthodox_church">Etiopska pravoslavna crkva</string>
 </resources>
