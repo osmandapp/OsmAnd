@@ -5298,7 +5298,7 @@
     <string name="allow_display_on_top_description">Дозволити показ текстів мап один над одним</string>
     <string name="show_debug_info">Показати інформацію про налагодження</string>
     <string name="show_debug_info_description">Показувати графічну інформацію про розміщення кожного тексту на мапі</string>
-    <string name="map_text">Тексти мап</string>
+    <string name="map_text">Рендеринг карти</string>
     <string name="routing_attr_avoid_cobblestone_name">Уникати бруківки</string>
     <string name="routing_attr_avoid_cobblestone_description">Уникати бруківки</string>
     <string name="disable_map_layers">Вимкнути шари мапи</string>
