@@ -323,7 +323,11 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Nullable
 	private GpxFile getGpx() {
-		return displayHelper.getGpx();
+		if (displayHelper != null) {
+			return displayHelper.getGpx();
+		} else {
+			return null;
+		}
 	}
 
 	private void prepareSplitIntervalAdapterData() {

@@ -22,7 +22,6 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.plus.resources.AmenityIndexRepository;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -38,6 +37,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.search.SearchUICore;
+import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
@@ -1037,18 +1037,24 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public ArrayList<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId) {
-		ArrayList<String> res = new ArrayList<>();
+	public List<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId) {
+		return new ArrayList<>(getArticleByLangs(articleId).keySet());
+	}
+
+	@NonNull
+	@Override
+	public Map<String, TravelArticle> getArticleByLangs(@NonNull TravelArticleIdentifier articleId) {
+		Map<String, TravelArticle> res = new LinkedHashMap<>();
 		TravelArticle article = getArticleById(articleId, "", false, null);
 		if (article != null) {
 			Map<String, TravelArticle> articles = cachedArticles.get(article.generateIdentifier());
 			if (articles != null) {
-				res.addAll(articles.keySet());
+				res.putAll(articles);
 			}
 		} else {
 			List<TravelArticle> articles = localDataHelper.getSavedArticles(articleId.file, articleId.routeId);
 			for (TravelArticle a : articles) {
-				res.add(a.getLang());
+				res.put(a.getLang(), a);
 			}
 		}
 		return res;

@@ -803,21 +803,28 @@ public class SearchPhrase {
 
 		@Override
 		public boolean matches(String name) {
+			if (name == null || name.length() == 0) {
+				return false;
+			}
 			return sm.matches(name);
 		}
 		
 	}
 	
 	public int countUnknownWordsMatchMainResult(SearchResult sr) {
-		return countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, 0);
+		return countUnknownWordsMatchInternal(sr, null, 0);
 	}
 	
 	public int countUnknownWordsMatchMainResult(SearchResult sr, int amountMatchingWords) {
-		return countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, amountMatchingWords);
+		return countUnknownWordsMatchInternal(sr, null, amountMatchingWords);
+	}
+	
+	public int countUnknownWordsMatchMainResult(SearchResult sr, String name, int amountMatchingWords) {
+		return countUnknownWordsMatchInternal(sr, name, amountMatchingWords);
 	}
 	
 	
-	public int countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames, int amountMatchingWords) {
+	private int countUnknownWordsMatchInternal(SearchResult sr, String extraName, int amountMatchingWords) {
 		int r = 0;
 		if (otherUnknownWords.size() > 0) {
 			for (int i = 0; i < otherUnknownWords.size(); i++) {
@@ -826,7 +833,8 @@ public class SearchPhrase {
 					match = true;
 				} else {
 					NameStringMatcher ms = getUnknownNameStringMatcher(i);
-					if (ms.matches(localeName) || ms.matches(otherNames)) {
+					if (ms.matches(sr.localeName) || ms.matches(sr.otherNames)
+							|| ms.matches(sr.alternateName) || ms.matches(extraName) ) {
 						match = true;
 					}
 				}
@@ -843,9 +851,11 @@ public class SearchPhrase {
 			sr.firstUnknownWordMatches = true;
 			r++;
 		} else {
-			boolean match = localeName.equals(getFirstUnknownSearchWord())
-					|| getFirstUnknownNameStringMatcher().matches(localeName)
-					|| getFirstUnknownNameStringMatcher().matches(otherNames);
+			boolean match =
+					getFirstUnknownNameStringMatcher().matches(sr.localeName) 
+					|| getFirstUnknownNameStringMatcher().matches(sr.otherNames)
+					|| getFirstUnknownNameStringMatcher().matches(sr.alternateName)
+					|| getFirstUnknownNameStringMatcher().matches(extraName);
 			if(match) {
 				r++;
 			}

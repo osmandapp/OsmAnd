@@ -144,7 +144,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			Locale locale = LocaleHelper.getPreferredNameLocale(app, locales);
 			String key = locale != null ? SHORT_DESCRIPTION + ":" + locale.getLanguage() : SHORT_DESCRIPTION;
+
 			String description = localizations.get(key);
+			if (description == null && locale != null && Algorithms.stringsEqual(locale.getLanguage(), "en")) {
+				description = localizations.get(SHORT_DESCRIPTION);
+			}
 			if (description == null) {
 				Map.Entry<String, String> entry = new ArrayList<>(localizations.entrySet()).get(0);
 				description = entry.getValue();

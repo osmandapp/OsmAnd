@@ -23,7 +23,7 @@ public class ObfConstants {
 	
 	
 	public static final long RELATION_BIT = 1L << (ObfConstants.SHIFT_MULTIPOLYGON_IDS - 1); // 1L << 42
-	public static final long PROPAGATE_NODE_BIT = 1L << (ObfConstants.SHIFT_PROPAGATED_NODE_IDS  - 1); // 1L << 41
+	public static final long PROPAGATE_NODE_BIT = 1L << (ObfConstants.SHIFT_PROPAGATED_NODE_IDS  - 1); // 1L << 49
 	public static final long SPLIT_BIT = 1L << (ObfConstants.SHIFT_NON_SPLIT_EXISTING_IDS - 1); // 1L << 40
 
 	public static final int DUPLICATE_SPLIT = 5; //According IndexPoiCreator DUPLICATE_SPLIT
@@ -48,14 +48,11 @@ public class ObfConstants {
 		return osmId;
 	}
 
-	public static long createMapObjectIdFromOsmId(Long osmId, int osmType) {
-		return switch (osmType) {
-			case 1 -> //node
-					osmId * 2;
-			case 2 -> //way
-					osmId * 2 + 1;
-			case 3 -> // relation
-					(osmId << (5 + SHIFT_ID)) | (ObfConstants.RELATION_BIT | ObfConstants.SPLIT_BIT);
+	public static long createMapObjectIdFromOsmId(long osmId, EntityType type) {
+		return switch (type) {
+			case NODE -> osmId << AMENITY_ID_RIGHT_SHIFT;
+			case WAY -> (osmId << AMENITY_ID_RIGHT_SHIFT) + 1;
+			case RELATION -> RELATION_BIT + ((osmId << SHIFT_ID) << DUPLICATE_SPLIT);
 			default -> osmId;
 		};
 	}
@@ -83,7 +80,7 @@ public class ObfConstants {
 	}
 
 	public static long getOsmObjectId(BinaryMapDataObject object) {
-		return object.getId() >> BinaryMapDataObject.SHIFT_ID;
+		return getOsmId(object.getId() >> 1);
 	}
 
 	public static EntityType getOsmEntityType(MapObject object) {
@@ -157,5 +154,19 @@ public class ObfConstants {
 
 	public static boolean isIdFromSplit(long id) {
 		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
+	}
+	
+	public static boolean isTagIndexedForSearchAsName(String tag) {
+		if (tag != null) {
+			return tag.contains("name") || tag.contains("brand");
+		}
+		return false;
+	}
+	
+	public static boolean isTagIndexedForSearchAsId(String tag) {
+		if (tag != null) {
+			return tag.equals(Amenity.WIKIDATA) || tag.equals(Amenity.ROUTE_ID);
+		}
+		return false;
 	}
 }

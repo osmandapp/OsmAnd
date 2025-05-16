@@ -679,6 +679,26 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@NonNull
+	@Override
+	public Map<String, TravelArticle> getArticleByLangs(@NonNull TravelArticleIdentifier articleId) {
+		Map<String, TravelArticle> res = new LinkedHashMap<>();
+		SQLiteConnection conn = openConnection();
+		if (conn != null) {
+			Map<String, TravelArticle> articles = readTravelArticles(conn, "", Collections.singletonList(articleId.routeId));
+			if (!Algorithms.isEmpty(articles)) {
+				res.putAll(articles);
+			}
+		}
+		if (Algorithms.isEmpty(res)) {
+			List<TravelArticle> articles = localDataHelper.getSavedArticles(articleId.file, articleId.routeId);
+			for (TravelArticle article : articles) {
+				res.put(article.getLang(), article);
+			}
+		}
+		return res;
+	}
+
+	@NonNull
 	private TravelArticle readArticle(SQLiteCursor cursor) {
 		TravelArticle res = new TravelArticle();
 		res.file = selectedTravelBook;

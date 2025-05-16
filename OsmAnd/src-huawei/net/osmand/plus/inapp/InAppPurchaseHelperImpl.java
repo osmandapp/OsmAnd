@@ -25,6 +25,7 @@ import com.huawei.hms.iap.entity.StartIapActivityResult;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
@@ -161,19 +162,28 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	@Override
 	public void purchaseFullVersion(@NonNull final Activity activity) throws UnsupportedOperationException {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
-		exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, getPurchaseInAppCommand(activity, purchases.getFullVersion().getSku()));
+		InAppPurchase fullVersion = purchases.getFullVersion();
+		if (fullVersion != null) {
+			exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, getPurchaseInAppCommand(activity, fullVersion.getSku()));
+		}
 	}
 
 	@Override
 	public void purchaseDepthContours(@NonNull final Activity activity) throws UnsupportedOperationException {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
-		exec(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS, getPurchaseInAppCommand(activity, purchases.getDepthContours().getSku()));
+		InAppPurchase depthContours = purchases.getDepthContours();
+		if (depthContours != null) {
+			exec(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS, getPurchaseInAppCommand(activity, depthContours.getSku()));
+		}
 	}
 
 	@Override
 	public void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_CONTOUR_LINES);
-		exec(InAppPurchaseTaskType.PURCHASE_CONTOUR_LINES, getPurchaseInAppCommand(activity, purchases.getContourLines().getSku()));
+		InAppPurchase contourLines = purchases.getContourLines();
+		if (contourLines != null) {
+			exec(InAppPurchaseTaskType.PURCHASE_CONTOUR_LINES, getPurchaseInAppCommand(activity, contourLines.getSku()));
+		}
 	}
 
 	@Override
@@ -494,8 +504,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 				}
 
+				List<InAppPurchaseData> completePurchases = new ArrayList<>();
 				InAppPurchase fullVersion = getFullVersion();
-				if (hasDetails(fullVersion.getSku())) {
+				if (fullVersion != null && hasDetails(fullVersion.getSku())) {
 					InAppPurchaseData purchaseData = getPurchaseData(fullVersion.getSku());
 					ProductInfo fullPriceDetails = getProductInfo(fullVersion.getSku());
 					if (fullPriceDetails != null) {
@@ -503,7 +514,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 				}
 				InAppPurchase depthContours = getDepthContours();
-				if (hasDetails(depthContours.getSku())) {
+				if (depthContours != null && hasDetails(depthContours.getSku())) {
 					InAppPurchaseData purchaseData = getPurchaseData(depthContours.getSku());
 					ProductInfo depthContoursDetails = getProductInfo(depthContours.getSku());
 					if (depthContoursDetails != null) {
@@ -511,7 +522,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 				}
 				InAppPurchase contourLines = getContourLines();
-				if (hasDetails(contourLines.getSku())) {
+				if (contourLines != null && hasDetails(contourLines.getSku())) {
 					InAppPurchaseData purchaseData = getPurchaseData(contourLines.getSku());
 					ProductInfo contourLinesDetails = getProductInfo(contourLines.getSku());
 					if (contourLinesDetails != null) {
@@ -519,13 +530,24 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 				}
 
-				if (getPurchaseData(fullVersion.getSku()) != null) {
+				InAppPurchaseData fullVersionPurchaseData = fullVersion != null ? getPurchaseData(fullVersion.getSku()) : null;
+				if (fullVersionPurchaseData != null) {
+					completePurchases.add(fullVersionPurchaseData);
 					ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+				} else if (fullVersion != null) {
+					for (InAppStateHolder holder : inAppStateMap.values()) {
+						if (holder.linkedPurchase == fullVersion) {
+							ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+							break;
+						}
+					}
 				}
-				if (getPurchaseData(depthContours.getSku()) != null) {
+				InAppPurchaseData depthContoursPurchaseData = depthContours != null ? getPurchaseData(depthContours.getSku()) : null;
+				if (depthContoursPurchaseData != null) {
 					ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
 				}
-				if (getPurchaseData(contourLines.getSku()) != null) {
+				InAppPurchaseData countourLinesPurchaseData = contourLines != null ? getPurchaseData(contourLines.getSku()) : null;
+				if (countourLinesPurchaseData != null) {
 					ctx.getSettings().CONTOUR_LINES_PURCHASED.set(true);
 				}
 
@@ -533,12 +555,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				boolean subscribedToLiveUpdates = false;
 				boolean subscribedToOsmAndPro = false;
 				boolean subscribedToMaps = false;
-				List<InAppPurchaseData> subscriptionPurchases = new ArrayList<>();
+				InAppSubscription mapsSubscription = null;
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					InAppPurchaseData purchaseData = getPurchaseData(s.getSku());
 					if (purchaseData != null || s.getState().isActive()) {
 						if (purchaseData != null) {
-							subscriptionPurchases.add(purchaseData);
+							completePurchases.add(purchaseData);
 						}
 						if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
 							subscribedToLiveUpdates = true;
@@ -548,6 +570,17 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						}
 						if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
 							subscribedToMaps = true;
+						}
+					}
+					if (purchases.isMapsSubscription(s)) {
+						mapsSubscription = s;
+					}
+				}
+				if (!subscribedToMaps) {
+					for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+						if (holder.linkedSubscription == mapsSubscription && holder.state == SubscriptionState.ACTIVE) {
+							subscribedToMaps = true;
+							break;
 						}
 					}
 				}
@@ -579,24 +612,14 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				settings.INAPPS_READ.set(true);
 
 				List<InAppPurchaseData> tokensToSend = new ArrayList<>();
-				if (subscriptionPurchases.size() > 0) {
+				if (!completePurchases.isEmpty()) {
 					List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
-					for (InAppPurchaseData purchase : subscriptionPurchases) {
-						if ((Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get()))
-								&& !Algorithms.isEmpty(purchase.getDeveloperPayload())) {
-							String payload = purchase.getDeveloperPayload();
-							if (!Algorithms.isEmpty(payload)) {
-								String[] arr = payload.split(" ");
-								if (arr.length > 0) {
-									settings.BILLING_USER_ID.set(arr[0]);
-								}
-								if (arr.length > 1) {
-									token = arr[1];
-									settings.BILLING_USER_TOKEN.set(token);
-								}
-							}
+					for (InAppPurchaseData purchase : completePurchases) {
+						if (needRestoreUserInfo()) {
+							restoreUserInfo(purchase);
 						}
-						if (!tokensSent.contains(purchase.getProductId())) {
+						String sku = purchase.getProductId();
+						if (!Algorithms.isEmpty(sku) && !tokensSent.contains(sku)) {
 							tokensToSend.add(purchase);
 						}
 					}
@@ -614,6 +637,31 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 			}
 		};
+	}
+
+	private void restoreUserInfo(InAppPurchaseData purchase) {
+		restoreUserInfoFromString(purchase.getDeveloperPayload());
+	}
+
+	private boolean restoreUserInfoFromString(String userInfo) {
+		if (Algorithms.isEmpty(userInfo)) {
+			return false;
+		}
+		OsmandSettings settings = ctx.getSettings();
+		String[] arr = userInfo.split(" ");
+		if (arr.length > 0) {
+			settings.BILLING_USER_ID.set(arr[0]);
+		}
+		if (arr.length > 1) {
+			token = arr[1];
+			settings.BILLING_USER_TOKEN.set(token);
+		}
+		return needRestoreUserInfo();
+	}
+
+	private boolean needRestoreUserInfo() {
+		OsmandSettings settings = ctx.getSettings();
+		return Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get());
 	}
 
 	private IapClient getIapClient() {

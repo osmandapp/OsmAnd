@@ -1372,6 +1372,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				this.initLayout = true;
 				this.centered = true;
 			}
+			forceUpdateLayout = true;
+			transportBadgesCreated = false;
+
 			updateButtonsAndProgress();
 			runLayoutListener();
 		}
@@ -1379,6 +1382,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void createTransportBadges() {
 		if (!transportBadgesCreated) {
+			mainRouteBadgeContainer.removeAllViews();
 			List<TransportStopRoute> localTransportStopRoutes = menu.getLocalTransportStopRoutes();
 			List<TransportStopRoute> nearbyTransportStopRoutes = menu.getNearbyTransportStopRoutes();
 			int maxLocalRows = 0;

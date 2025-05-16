@@ -743,5 +743,17 @@ public class NativeLibrary {
 			}
 			return new QuadRect(MapUtils.get31LongitudeX(left), MapUtils.get31LatitudeY(top), MapUtils.get31LongitudeX(right), MapUtils.get31LatitudeY(bottom));
 		}
+
+		public LatLon getLatLon() {
+			LatLon latLon = getLabelLatLon();
+			if (latLon == null && getLabelX() != 0) {
+				latLon = new LatLon(MapUtils.get31LatitudeY(getLabelY()), MapUtils.get31LongitudeX(getLabelX()));
+			}
+			QuadRect rect = getRectLatLon();
+			if (latLon == null && rect != null) {
+				latLon = new LatLon(rect.centerY(), rect.centerX());
+			}
+			return latLon;
+		}
 	}
 }

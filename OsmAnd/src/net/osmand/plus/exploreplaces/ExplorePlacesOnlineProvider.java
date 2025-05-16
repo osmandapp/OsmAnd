@@ -13,6 +13,7 @@ import static net.osmand.binary.ObfConstants.createMapObjectIdFromOsmId;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -283,9 +284,9 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		}
 		amenity.setType(category);
 		amenity.setSubType(subtype);
-		if(properties.osmtype != 0 && properties.osmid != 0) {
-			amenity.setId(createMapObjectIdFromOsmId(properties.osmid, properties.osmtype));
-		} else{
+		if (properties.osmid > 0) {
+			amenity.setId(createMapObjectIdFromOsmId(properties.osmid, Entity.EntityType.valueOf(properties.osmtype)));
+		} else {
 			amenity.setId(-Long.parseLong(featureData.properties.id));
 		}
 		//amenity.setTravelTopic(properties.wikiTitle);

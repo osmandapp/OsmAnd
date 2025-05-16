@@ -403,7 +403,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private boolean animateMyLocation(@NonNull Location location) {
-		return settings.ANIMATE_MY_LOCATION.get() && !isSmallSpeedForAnimation(location) && !movingToMyLocation;
+		return settings.ANIMATE_MY_LOCATION.get() && !movingToMyLocation;
 	}
 
 	public boolean isShowViewAngle() {
