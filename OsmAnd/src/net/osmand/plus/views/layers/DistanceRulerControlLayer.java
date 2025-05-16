@@ -58,6 +58,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private static final long DRAW_TIME = 4000;
 	private static final long DELAY_BEFORE_DRAW = 200;
 	private static final int DISTANCE_TEXT_SIZE = 16;
+	private static final int LABEL_OFFSET = 20;
 
 	private OsmandApplication app;
 
@@ -298,6 +299,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		markerBuilder.setBaseOrder(getBaseOrder() - 1);
 		markerBuilder.setCaptionStyle(style);
 		MapMarker marker = markerBuilder.buildAndAddToCollection(mapMarkersCollection);
+		marker.setOffsetFromLine(LABEL_OFFSET);
 		rulerLine.attachMarker(marker);
 	}
 
