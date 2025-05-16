@@ -41,6 +41,7 @@ class NearbyPlacesAdapter(
 		fun onNearbyItemClicked(amenity: Amenity)
 	}
 
+	var isLoading = false
 	val locale = LocaleHelper.getPreferredPlacesLanguage(getApp())
 	val transliterate = getApp().getSettings().MAP_TRANSLITERATE_NAMES.get()
 
@@ -67,11 +68,15 @@ class NearbyPlacesAdapter(
 	}
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
-		val item = items[position]
-		holder.bind(item, position)
+		if (!isLoading) {
+			val item = items[position]
+			holder.bind(item, position)
+		}
 	}
 
-	override fun getItemCount(): Int = items.size
+	override fun getItemCount(): Int = if (isLoading) 5 else items.size
+
+	fun hasData(): Boolean = items.isNotEmpty()
 
 	fun updateLocation(location: Location?) {
 		this.location = location
@@ -88,6 +93,7 @@ class NearbyPlacesAdapter(
 		private val errorImageView: ImageView = itemView.findViewById(R.id.item_image_error)
 		private val iconImageView: ImageView = itemView.findViewById(R.id.item_icon)
 		private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
+		private val itemTypeContainer: View? = itemView.findViewById(R.id.item_type_container)
 		private val descriptionTextView: TextView? = itemView.findViewById(R.id.item_description)
 		private val itemTypeTextView: TextView = itemView.findViewById(R.id.item_type)
 		private val distanceTextView: TextView? = itemView.findViewById(R.id.distance)
@@ -158,6 +164,12 @@ class NearbyPlacesAdapter(
 				AndroidUiHelper.updateVisibility(imageViewContainer, false)
 			}
 
+			itemTypeContainer?.let {
+				it.setBackgroundResource(0)
+				it.alpha = 1f
+			}
+			titleTextView.setBackgroundResource(0)
+			titleTextView.alpha = 1f
 			titleTextView.text = "${position + 1}. ${item.getName(locale, transliterate)}"
 
 			descriptionTextView?.text = item.getDescription(locale)

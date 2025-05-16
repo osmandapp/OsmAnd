@@ -31,6 +31,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -62,7 +63,9 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -218,7 +221,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			} else if (selectedObject instanceof RenderedObject object) {
 				x = object.getX();
 				y = object.getY();
-			}  else if (selectedObject instanceof PlaceDetailsObject object) {
+			} else if (selectedObject instanceof PlaceDetailsObject object) {
 				Amenity amenity = object.getSyntheticAmenity();
 				x = amenity.getX();
 				y = amenity.getY();
@@ -724,6 +727,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon pointLatLon = result.getPointLatLon();
 		List<SelectedMapObject> selectedObjects = result.getProcessedObjects();
 
+		filterForAvailableActions(selectedObjects);
 		for (SelectedMapObject selectedObject : selectedObjects) {
 			IContextMenuProvider provider = selectedObject.provider();
 			if (provider != null && provider.runExclusiveAction(selectedObject.object(), showUnknownLocation)) {
@@ -769,6 +773,30 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		return false;
+	}
+
+	private void filterForAvailableActions(List<SelectedMapObject> selectedObjects) {
+		boolean hasTopPlace = false;
+		ArrayList<SelectedMapObject> newSelectedObjects = new ArrayList<>();
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (selectedObject.provider() instanceof OsmandMapLayer selectedObjectLayer) {
+				if (selectedObjectLayer.getBaseOrder() < getApplication().getOsmandMap().getMapLayers().getPoiMapLayer().getBaseOrder()) {
+					newSelectedObjects.add(selectedObject);
+				}
+			}
+			if (selectedObject.provider() instanceof POIMapLayer poiMapLayer && selectedObject.object() instanceof PlaceDetailsObject placeDetailsObject) {
+				placeDetailsObject.getSyntheticAmenity().getId();
+				if (poiMapLayer.getSelectedTopPlace(placeDetailsObject) != null) {
+					newSelectedObjects.add(selectedObject);
+					hasTopPlace = true;
+				}
+			}
+		}
+
+		if (hasTopPlace) {
+			selectedObjects.clear();
+			selectedObjects.addAll(newSelectedObjects);
+		}
 	}
 
 	public boolean disableSingleTap() {

@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import net.osmand.data.Amenity;
 import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
@@ -68,6 +70,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private View emptyView;
 	private View noCardsFound;
 	private View cardContent;
+	private ShimmerFrameLayout shimmerFrameLayout;
 	private boolean isLoadingItems;
 
 	private RecyclerView downloadRecyclerView;
@@ -98,6 +101,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		emptyView = findViewById(R.id.empty_nearby_places);
 		noCardsFound = findViewById(R.id.no_cards_found);
 		cardContent = findViewById(R.id.card_content);
+		shimmerFrameLayout = findViewById(R.id.shimmer_layout);
 		downloadMapsCard = findViewById(R.id.download_maps_card);
 		downloadRecyclerView = emptyView.findViewById(R.id.download_recycler_view);
 		downloadRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -148,8 +152,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private void updateExpandState() {
 		int iconRes = collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
 		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, !app.getSettings().isLightContent()));
-		boolean nearbyPointFound = getNearbyAdapter().getItemCount() > 0;
-		AndroidUiHelper.updateVisibility(cardContent, !collapsed && nearbyPointFound && isDataSourceAvailable());
+		boolean nearbyPointFound = getNearbyAdapter().hasData();
+		AndroidUiHelper.updateVisibility(cardContent, !collapsed && isDataSourceAvailable());
 		AndroidUiHelper.updateVisibility(noInternetCard, !collapsed && !isDataSourceAvailable());
 		AndroidUiHelper.updateVisibility(emptyView, !collapsed && isDataSourceAvailable() && !nearbyPointFound && !isLoadingItems);
 		if (!collapsed && !nearbyPointFound && !isLoadingItems) {
@@ -166,7 +170,10 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 
 	public void onLoadingFinished() {
 		searchAmenitiesTask = null;
+		adapter.setLoading(false);
 		isLoadingItems = false;
+		shimmerFrameLayout.stopShimmer();
+		shimmerFrameLayout.hideShimmer();
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		updateExpandState();
 	}
@@ -206,6 +213,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private void startLoadingNearbyPlaces() {
 		if (!isLoadingItems && getWikiFilter() != null) {
 			isLoadingItems = true;
+			adapter.setLoading(true);
 			LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 			searchAmenitiesTask = new SearchAmenitiesTask(getWikiFilter(), latLon, SEARCH_POI_RADIUS, amenities -> {
 				amenities = amenities.subList(0, Math.min(DISPLAY_ITEMS, amenities.size()));
@@ -215,6 +223,9 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 			});
 			searchAmenitiesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			AndroidUiHelper.updateVisibility(progressBar, true);
+			if(!getNearbyAdapter().hasData()) {
+				shimmerFrameLayout.startShimmer();
+			}
 		}
 	}
 
