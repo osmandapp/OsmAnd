@@ -51,7 +51,6 @@
 			<androidx.appcompat.widget.AppCompatImageView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/card_content_padding_large"
 				app:srcCompat="@drawable/img_download"
 				android:layout_marginStart="@dimen/card_content_padding_large" />
 
@@ -79,7 +78,7 @@
 				android:layout_height="match_parent" />
 
 			<net.osmand.plus.widgets.dialogbutton.DialogButton
-				android:id="@+id/btnDownload"
+				android:id="@+id/btnApply"
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
