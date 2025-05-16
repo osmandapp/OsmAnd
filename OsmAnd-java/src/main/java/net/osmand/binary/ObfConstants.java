@@ -158,4 +158,12 @@ public class ObfConstants {
 	public static boolean isIdFromSplit(long id) {
 		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
 	}
+	
+	public static boolean isTagIndexedForSearch(String tag) {
+		if (tag != null) {
+			return tag.contains("name") || tag.contains("brand") || tag.contains("wikidata");
+		}
+		return false;
+
+	}
 }

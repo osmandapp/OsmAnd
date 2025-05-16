@@ -21,6 +21,7 @@ import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.CommonWords;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -656,10 +657,9 @@ public class SearchCoreFactory {
 								phrase.getSettings().isTransliterate());
 					}
 					if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)) {
-						Collection<String> altNames = object.getAdditionalInfoValues(true);
-						for (String name : altNames) {
-							if (nm.matches(name)) {
-								sr.alternateName = name;
+						for(String k : object.getAdditionalInfoKeys()) {
+							if (ObfConstants.isTagIndexedForSearch(k) && nm.matches(object.getAdditionalInfo(k))) {
+								sr.alternateName = object.getAdditionalInfo(k);
 								break;
 							}
 						}

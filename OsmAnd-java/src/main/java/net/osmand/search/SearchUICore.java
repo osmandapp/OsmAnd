@@ -931,6 +931,7 @@ public class SearchUICore {
 					}
 				}
 				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
+					// TODO only indexed
 					for (String value : ((Amenity) object.object).getAdditionalInfoValues(true)) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(value)) {
 							object.alternateName = value;
