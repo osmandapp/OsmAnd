@@ -1381,10 +1381,10 @@ public class SearchCoreFactory {
 						}
 					}
 					if (ns != null) {
-						// TODO why only ref
 						if (ns.matches(res.localeName) || ns.matches(res.otherNames)) {
 							phrase.countUnknownWordsMatchMainResult(res, countExtraWords);
 						} else {
+							// Use ref https://github.com/osmandapp/OsmAnd/issues/8319
 							String ref = object.getTagContent(Amenity.REF, null);
 							if (ref == null || !ns.matches(ref)) {
 								return false;
