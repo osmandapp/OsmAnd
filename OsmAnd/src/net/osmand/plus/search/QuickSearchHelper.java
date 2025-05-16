@@ -388,8 +388,11 @@ public class QuickSearchHelper implements ResourceListener {
 			double lon = phrase.getSettings().getOriginalLocation().getLongitude();
 			String text = phrase.getFullSearchPhrase();
 			filter.setFilterByName(text);
-			publishAmenities(phrase, matcher, filter.initializeNewSearch(lat, lon,
-					-1, null, phrase.getRadiusLevel() + 3));
+			List<Amenity> amenities = filter.initializeNewSearch(lat, lon,-1, null, phrase.getRadiusLevel() + 3);
+			for (Amenity amenity : amenities) {
+				SearchResult sr = getSearchResult(phrase, amenity);
+				matcher.publish(sr);
+			}
 			return true;
 		}
 
@@ -399,21 +402,6 @@ public class QuickSearchHelper implements ResourceListener {
 				return SEARCH_ONLINE_API_PRIORITY;
 			}
 			return -1;
-		}
-
-		private void publishAmenities(SearchPhrase phrase, SearchResultMatcher matcher, List<Amenity> amenities) {
-			for (Amenity amenity : amenities) {
-				SearchResult sr = getSearchResult(phrase, amenity);
-				LatLon latLon = amenity.getLocation();
-				String lang = sr.requiredSearchPhrase.getSettings().getLang();
-				boolean transliterate = sr.requiredSearchPhrase.getSettings().isTransliterate();
-				Amenity a = app.getSearchUICore().findAmenity(amenity.getName(), latLon.getLatitude(),
-						latLon.getLongitude(), lang, transliterate);
-				if (a != null) {
-					sr = getSearchResult(phrase, a);
-				}
-				matcher.publish(sr);
-			}
 		}
 
 		@NonNull
