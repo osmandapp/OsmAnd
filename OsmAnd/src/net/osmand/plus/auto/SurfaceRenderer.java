@@ -80,8 +80,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	private SurfaceRendererCallback callback;
 
-	private static final float surfaceWidthMultiply = 0.6f;
+	private static final float surfaceWidthMultiply = 0.5f;
 	private int surfaceAdditionalWidth = 0;
+	// Ratios are calculated dynamically using surfaceWidthMultiply
 	private float minRatio = 0;
 	private float maxRatio = 1;
 
@@ -108,9 +109,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				surfaceView.setSurfaceParams(surfaceContainer.getWidth() + surfaceAdditionalWidth,
 						surfaceContainer.getHeight(), surfaceContainer.getDpi());
 
-				float visibleRatio = (float) surfaceContainer.getWidth() / getWidth();
-				minRatio = 0.5f - visibleRatio / 2.0f;
-				maxRatio = 0.5f + visibleRatio / 2.0f;
+				minRatio = (1f - surfaceWidthMultiply) / 2.0f;
+				maxRatio = 1f - (1f - surfaceWidthMultiply) / 2.0f;
 
 				darkMode = carContext.isDarkMode();
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
@@ -138,6 +138,18 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					int centerX = visibleArea.centerX();
 					cachedRatioX = (float) centerX / containerWidth;
 
+					float dRatio = 0.5f + (1.0f - surfaceWidthMultiply) * (((1.0f - maxRatio) + minRatio) * 0.5f);
+					float cameraCenterShiftX = 0.5f;
+
+					if (cachedRatioX < minRatio) {
+						cameraCenterShiftX = 0.5f - (minRatio - cachedRatioX) * dRatio;
+						cachedRatioX = minRatio;
+					}
+					else if (cachedRatioX > maxRatio) {
+						cameraCenterShiftX = 0.5f + (cachedRatioX - maxRatio) * dRatio;
+						cachedRatioX = maxRatio;
+					}
+
 					float ratioY = cachedRatioY;
 					float defaultRatioY = displayPositionManager.getNavigationMapPosition().getRatioY();
 					if (defaultRatioY != cachedDefaultRatioY || (float) containerHeight / visibleAreaHeight > VISIBLE_AREA_Y_MIN_DETECTION_SIZE) {
@@ -146,7 +158,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 						cachedRatioY = ratioY;
 						cachedDefaultRatioY = defaultRatioY;
 					}
-					displayPositionManager.setCustomMapRatio(0.5f, ratioY);
+					displayPositionManager.setCustomMapRatio(cameraCenterShiftX, ratioY);
 				}
 				renderFrame();
 			}
