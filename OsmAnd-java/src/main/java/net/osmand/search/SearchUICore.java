@@ -294,14 +294,20 @@ public class SearchUICore {
 				if (sr.object instanceof Amenity that) {
 					Long osmId = that.getOsmId();
 					String wikidata = that.getWikidata();
+
+					if (osmId != null && osmId < 0) {
+						osmId = null; // do not merge synthetic osmId such as wiki
+					}
+
 					Integer foundOsmIdIndex = osmId == null ? null : osmIdMap.get(osmId);
 					Integer foundWikidataIndex = wikidata == null ? null : wikidataMap.get(wikidata);
 
 					int indexToUpdate = -1; // unique
 
-					if (foundOsmIdIndex != null || foundWikidataIndex != null) {
-						assert foundOsmIdIndex == null || foundWikidataIndex == null
-								|| Objects.equals(foundOsmIdIndex, foundWikidataIndex);
+					if (foundOsmIdIndex != null && foundWikidataIndex != null
+							&& !Objects.equals(foundOsmIdIndex, foundWikidataIndex)) {
+						LOG.info("foundOsmIdIndex != foundWikidataIndex (should never happens)");
+					} else if (foundOsmIdIndex != null || foundWikidataIndex != null) {
 						indexToUpdate = foundOsmIdIndex != null ? foundOsmIdIndex : foundWikidataIndex;
 					}
 
