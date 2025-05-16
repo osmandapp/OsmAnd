@@ -1022,7 +1022,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		Set<String> result = new HashSet<>();
 		for (String tag : tags) {
 			String[] parts = tag.split(":");
-			String locale = parts.length > 1 ? parts[1] : null;
+			String locale = parts.length > 1 ? parts[1] : "en";
 			if (locale != null) {
 				result.add(locale);
 			}
