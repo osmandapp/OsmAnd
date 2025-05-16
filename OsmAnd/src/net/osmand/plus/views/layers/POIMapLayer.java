@@ -968,26 +968,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return null;
 	}
 
-<<<<<<< HEAD
-=======
-	@Override
-	public boolean runExclusiveAction(@Nullable Object object, boolean unknownLocation) {
-		MapActivity mapActivity = getMapActivity();
-		if (object instanceof Amenity amenity) {
-			object = app.getResourceManager().fetchOtherData(app, amenity);
-		}
-		if (mapActivity != null && object instanceof PlaceDetailsObject detailsObject) {
-			Amenity amenity = getSelectedTopPlace(detailsObject);
-			if (amenity != null) {
-				hideExplorePlacesFragment(mapActivity);
-				showTopPlaceContextMenu(mapActivity, detailsObject, amenity);
-				return true;
-			}
-		}
-		return IContextMenuProvider.super.runExclusiveAction(object, unknownLocation);
-	}
-
->>>>>>> b778ef013050b677aadfe7d90c68eeb6afcb7b97
 	@Nullable
 	public Amenity getSelectedTopPlace(@NonNull PlaceDetailsObject detailsObject) {
 		if (!Algorithms.isEmpty(topPlaces)) {
