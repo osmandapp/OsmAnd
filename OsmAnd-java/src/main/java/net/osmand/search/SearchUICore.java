@@ -925,11 +925,13 @@ public class SearchUICore {
 			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)
 					&& Algorithms.isEmpty(object.alternateName)) {
 				boolean updateName = false;
-				for (String s : object.otherNames) {
-					if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
-						object.localeName = s;
-						updateName = true;
-						break;
+				if (object.otherNames != null) {
+					for (String s : object.otherNames) {
+						if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
+							object.localeName = s;
+							updateName = true;
+							break;
+						}
 					}
 				}
 				if (!updateName && object.object instanceof Amenity) {
