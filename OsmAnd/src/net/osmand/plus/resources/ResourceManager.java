@@ -1115,6 +1115,8 @@ public class ResourceManager {
 				BaseDetailsObject baseObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
 				if (baseObject != null) {
 					detailsObject = new PlaceDetailsObject(baseObject, provider);
+					detailsObject.addObject(amenity);
+					detailsObject.combineData();
 				}
 			}
 		}

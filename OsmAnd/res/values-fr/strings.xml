@@ -1694,7 +1694,7 @@
     <string name="navigation_item_description">Paramétrer le guidage</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Foire Aux Questions</string>
-    <string name="map_viewing_item">Affichage de la carte</string>
+    <string name="map_viewing_item">Visualisation de la carte</string>
     <string name="search_on_the_map_item">Rechercher sur la carte</string>
     <string name="planning_trip_item">Préparer un itinéraire</string>
     <string name="instalation_troubleshooting_item">Installation et débogage</string>
@@ -5280,7 +5280,7 @@
     <string name="show_debug_info">Afficher les informations de debug</string>
     <string name="routing_attr_avoid_cobblestone_name">Éviter les pavés</string>
     <string name="routing_attr_avoid_cobblestone_description">Éviter les routes pavées</string>
-    <string name="map_text">Textes de la carte</string>
+    <string name="map_text">Affichage de la carte</string>
     <string name="allow_display_on_top">Autoriser l\'affichage par dessus</string>
     <string name="allow_display_on_top_description">Permet d\'afficher les textes de carte les uns par dessus les autres</string>
     <string name="show_debug_info_description">Affiche les données graphiques de position pour chaque texte sur la carte</string>
@@ -5747,4 +5747,7 @@
     <string name="save_to_device_error">Erreur lors de l\'enregistrement sur l\'appareil</string>
     <string name="save_to_device">Enregistrer sur l\'appareil</string>
     <string name="travel_guides">Guides</string>
+    <string name="show_debug_tile_description">Afficher les informations à propos des symboles de la carte sur chaque tuile</string>
+    <string name="show_debug_tile">Afficher les informations de la tuile</string>
+    <string name="show_symbols_debug_info">Afficher les symboles pour débuger</string>
 </resources>

@@ -477,9 +477,6 @@ public class AmenityUIHelper extends MenuBuilder {
 					vl = pType.getTranslation();
 				} else {
 					isText = true;
-					if (!pType.hasValidTranslation()) {
-						return null; // do not display internal and/or non-translatable tags
-					}
 					isDescription = iconId == R.drawable.ic_action_note_dark;
 					textPrefix = pType.getTranslation();
 					if (needIntFormatting) {
@@ -510,7 +507,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 				}
 			} else {
-				return null; // do not display internal and/or non-translatable tags
+				textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 			}
 		}
 
@@ -1025,7 +1022,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		Set<String> result = new HashSet<>();
 		for (String tag : tags) {
 			String[] parts = tag.split(":");
-			String locale = parts.length > 1 ? parts[1] : null;
+			String locale = parts.length > 1 ? parts[1] : "en";
 			if (locale != null) {
 				result.add(locale);
 			}

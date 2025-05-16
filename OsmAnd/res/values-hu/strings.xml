@@ -5243,7 +5243,7 @@
     <string name="allow_display_on_top">Megjelenítés felül engedélyezése</string>
     <string name="show_debug_info">Hibakeresési információk mutatása</string>
     <string name="show_debug_info_description">Grafikus információk megjelenítése az egyes térképszövegek elhelyezéséről</string>
-    <string name="map_text">Térképszövegek</string>
+    <string name="map_text">Térkép renderelés</string>
     <string name="routing_attr_avoid_cobblestone_name">Macskakő elkerülése</string>
     <string name="routing_attr_avoid_cobblestone_description">Macskakő elkerülése</string>
     <string name="track_vertical_exaggeration_description">A skála értékének változtatásával módosíthatja a 3D nyomvonal magasságát.</string>
@@ -5706,4 +5706,7 @@
     <string name="save_to_device_error">Hiba az eszközre mentéskor</string>
     <string name="save_to_device">Mentés az eszközre</string>
     <string name="travel_guides">Útikalauzok</string>
+    <string name="show_debug_tile">Csempe információk mutatása</string>
+    <string name="show_debug_tile_description">Információk megjelenítése az egyes csempék térképjeleiről</string>
+    <string name="show_symbols_debug_info">Szimbólumok hibakeresési információinak mutatása</string>
 </resources>

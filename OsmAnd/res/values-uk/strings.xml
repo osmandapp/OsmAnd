@@ -5762,4 +5762,5 @@
     <string name="travel_guides">Путівника</string>
     <string name="show_debug_tile">Показати інформацію про плитку</string>
     <string name="show_debug_tile_description">Відображати інформацію про символи карти кожної плитки</string>
+    <string name="show_symbols_debug_info">Показати інформацію про налагодження символів</string>
 </resources>

@@ -50,6 +50,7 @@ public class SearchResult {
 
 	public String localeName;
 	public String alternateName;
+	public String cityName;
 	public Collection<String> otherNames;
 
 	public String localeRelatedObjectName;
@@ -93,11 +94,15 @@ public class SearchResult {
 			// don't overload with poi types
 		} else {
 			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
-			if (allWordsMatched(localeName, completeMatchRes)) {
-				// ignore other names
-			} else if (otherNames != null) {
+			boolean matched = false;
+			matched = allWordsMatched(localeName, completeMatchRes);
+			if (!matched && alternateName != null && !Algorithms.objectEquals(cityName, alternateName)) {
+				matched = allWordsMatched(alternateName, completeMatchRes);
+			}
+			if (!matched && otherNames != null) {
 				for (String otherName : otherNames) {
 					if (allWordsMatched(otherName, completeMatchRes)) {
+						matched = true;
 						break;
 					}
 				}

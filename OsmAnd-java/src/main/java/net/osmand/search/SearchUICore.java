@@ -296,14 +296,20 @@ public class SearchUICore {
 				if (sr.object instanceof Amenity that) {
 					Long osmId = that.getOsmId();
 					String wikidata = that.getWikidata();
+
+					if (osmId != null && osmId < 0) {
+						osmId = null; // do not merge synthetic osmId such as wiki
+					}
+
 					Integer foundOsmIdIndex = osmId == null ? null : osmIdMap.get(osmId);
 					Integer foundWikidataIndex = wikidata == null ? null : wikidataMap.get(wikidata);
 
 					int indexToUpdate = -1; // unique
 
-					if (foundOsmIdIndex != null || foundWikidataIndex != null) {
-						assert foundOsmIdIndex == null || foundWikidataIndex == null
-								|| Objects.equals(foundOsmIdIndex, foundWikidataIndex);
+					if (foundOsmIdIndex != null && foundWikidataIndex != null
+							&& !Objects.equals(foundOsmIdIndex, foundWikidataIndex)) {
+						LOG.info("foundOsmIdIndex != foundWikidataIndex (should never happens)");
+					} else if (foundOsmIdIndex != null || foundWikidataIndex != null) {
 						indexToUpdate = foundOsmIdIndex != null ? foundOsmIdIndex : foundWikidataIndex;
 					}
 
@@ -930,19 +936,27 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
-				if (Algorithms.isEmpty(object.alternateName)) {
+			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)
+					&& Algorithms.isEmpty(object.alternateName)) {
+				boolean updateName = false;
+				if (object.otherNames != null) {
 					for (String s : object.otherNames) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
-							object.alternateName = s;
+							object.localeName = s;
+							updateName = true;
 							break;
 						}
 					}
 				}
-				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
-					for (String value : ((Amenity) object.object).getAdditionalInfoValues(true)) {
-						if (phrase.getFirstUnknownNameStringMatcher().matches(value)) {
-							object.alternateName = value;
+				if (!updateName && object.object instanceof Amenity) {
+					for (String key : ((Amenity) object.object).getAdditionalInfoKeys()) {
+						if (!ObfConstants.isTagIndexedForSearchAsId(key)
+								&& !ObfConstants.isTagIndexedForSearchAsName(key)) {
+							continue;
+						}
+						String vl = ((Amenity) object.object).getAdditionalInfo(key);
+						if (phrase.getFirstUnknownNameStringMatcher().matches(vl)) {
+							object.alternateName = vl;
 							break;
 						}
 					}
@@ -951,6 +965,9 @@ public class SearchUICore {
 			if (Algorithms.isEmpty(object.localeName) && object.alternateName != null) {
 				object.localeName = object.alternateName;
 				object.alternateName = null;
+			}
+			if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
+				object.alternateName = object.cityName;
 			}
 			object.parentSearchResult = parentSearchResult;
 			if (matcher == null || matcher.publish(object)) {
