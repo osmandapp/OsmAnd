@@ -63,6 +63,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -220,7 +221,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			} else if (selectedObject instanceof RenderedObject object) {
 				x = object.getX();
 				y = object.getY();
-			}  else if (selectedObject instanceof PlaceDetailsObject object) {
+			} else if (selectedObject instanceof PlaceDetailsObject object) {
 				Amenity amenity = object.getSyntheticAmenity();
 				x = amenity.getX();
 				y = amenity.getY();
@@ -726,12 +727,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon pointLatLon = result.getPointLatLon();
 		List<SelectedMapObject> selectedObjects = result.getProcessedObjects();
 
-		if(!isForceMultiSelection(selectedObjects)) {
-			for (SelectedMapObject selectedObject : selectedObjects) {
-				IContextMenuProvider provider = selectedObject.provider();
-				if (provider != null && provider.runExclusiveAction(selectedObject.object(), showUnknownLocation)) {
-					return true;
-				}
+		filterForAvailableActions(selectedObjects);
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			IContextMenuProvider provider = selectedObject.provider();
+			if (provider != null && provider.runExclusiveAction(selectedObject.object(), showUnknownLocation)) {
+				return true;
 			}
 		}
 		if (selectedObjects.size() == 1) {
@@ -775,22 +775,28 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private boolean isForceMultiSelection(List<SelectedMapObject> selectedObjects) {
-		boolean hasFavorites = false;
+	private void filterForAvailableActions(List<SelectedMapObject> selectedObjects) {
 		boolean hasTopPlace = false;
+		ArrayList<SelectedMapObject> newSelectedObjects = new ArrayList<>();
 		for (SelectedMapObject selectedObject : selectedObjects) {
-			if(selectedObject.object() instanceof FavouritePoint) {
-				hasFavorites = true;
+			if (selectedObject.provider() instanceof OsmandMapLayer selectedObjectLayer) {
+				if (selectedObjectLayer.getBaseOrder() < getApplication().getOsmandMap().getMapLayers().getPoiMapLayer().getBaseOrder()) {
+					newSelectedObjects.add(selectedObject);
+				}
 			}
-			if(selectedObject.provider() instanceof POIMapLayer poiMapLayer && selectedObject.object() instanceof PlaceDetailsObject placeDetailsObject) {
+			if (selectedObject.provider() instanceof POIMapLayer poiMapLayer && selectedObject.object() instanceof PlaceDetailsObject placeDetailsObject) {
 				placeDetailsObject.getSyntheticAmenity().getId();
-				if(poiMapLayer.getSelectedTopPlace(placeDetailsObject) != null) {
+				if (poiMapLayer.getSelectedTopPlace(placeDetailsObject) != null) {
+					newSelectedObjects.add(selectedObject);
 					hasTopPlace = true;
 				}
 			}
 		}
 
-		return hasTopPlace && hasFavorites;
+		if (hasTopPlace) {
+			selectedObjects.clear();
+			selectedObjects.addAll(newSelectedObjects);
+		}
 	}
 
 	public boolean disableSingleTap() {
