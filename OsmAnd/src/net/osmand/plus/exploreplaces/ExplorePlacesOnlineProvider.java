@@ -285,7 +285,9 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		amenity.setType(category);
 		amenity.setSubType(subtype);
 		// TODO calculate osmid for different types way, node, relation
-		amenity.setId(createMapObjectIdFromOsmId(properties.osmid, Entity.EntityType.valueOf(properties.osmtype)));
+		if (properties.osmid > 0) {
+			amenity.setId(createMapObjectIdFromOsmId(properties.osmid, Entity.EntityType.valueOf(properties.osmtype)));
+		}
 		//amenity.setTravelTopic(properties.wikiTitle);
 		//amenity.setWikiCategory(properties.wikiDesc);
 		amenity.setTravelEloNumber(properties.elo != null ? properties.elo.intValue() : DEFAULT_ELO);
