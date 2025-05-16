@@ -5752,7 +5752,7 @@
     <string name="saved_to_device">Uloženo do zařízení</string>
     <string name="save_to_device">Uložit do zařízení</string>
     <string name="save_to_device_error">Chyba při ukládání do zařízení</string>
-    <string name="travel_guides">Návody</string>
+    <string name="travel_guides">Průvodci</string>
     <string name="show_debug_tile">Zobrazit informace o dlaždicích</string>
     <string name="show_debug_tile_description">Zobrazení informací o mapových symbolech jednotlivých dlaždic</string>
     <string name="show_symbols_debug_info">Zobrazovat informace o ladění symbolů</string>
