@@ -1178,7 +1178,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private Bitmap getCircle(int size) {
-		if (imageCircleBitmap == null) {
+		if (imageCircleBitmap == null || imageCircleBitmap.getWidth() != size || imageCircleBitmap.getHeight() != size) {
 			imageCircleBitmap = RenderingIcons.getBitmapFromVectorDrawable(getContext(),
 					R.drawable.bg_point_circle, size, size);
 		}
