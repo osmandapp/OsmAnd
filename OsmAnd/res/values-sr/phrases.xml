@@ -5011,4 +5011,27 @@
     <string name="poi_church_of_scotland">Crkva Škotske</string>
     <string name="poi_church_of_christ">Crkva Hristova</string>
     <string name="poi_armenian_apostolic_church">Jermenska apostolska crkva</string>
+    <string name="poi_reformed_church">Реформистичка црква</string>
+    <string name="poi_romanian_orthodox_church">Румунска православна црква</string>
+    <string name="poi_serbian_orthodox_church">Србска православна црква</string>
+    <string name="poi_greek_catholic_church">Грчкокатоличка црква</string>
+    <string name="poi_episcopal_church">Епископална црква</string>
+    <string name="poi_new_apostolic_church">Нова апостолска црква</string>
+    <string name="poi_ukrainian_orthodox_church">Украјинска православна црква</string>
+    <string name="poi_united_church">Уједињена црква</string>
+    <string name="poi_assemblies_of_god_church">Црква Скупштине Божије</string>
+    <string name="poi_quaker_church">Квекерска црква</string>
+    <string name="poi_mennonite_church">Менонитска црква</string>
+    <string name="poi_neo_pentecostal_church">Неопентекостална црква</string>
+    <string name="poi_latter_day_saints_church">Црква светаца последњих дана</string>
+    <string name="poi_evangelical_lutheran_church">Евангелистичко лутеранска црква</string>
+    <string name="poi_landmark_church">Знаменита црква</string>
+    <string name="poi_adventist_church">Адвентистичка црква</string>
+    <string name="poi_nondenominational_church">Неденоминационална црква</string>
+    <string name="poi_iglesia_ni_cristo_church">Црква Христова</string>
+    <string name="poi_ukrainian_greek_catholic_church">Украјинска грчкокатоличка црква</string>
+    <string name="poi_ethiopian_orthodox_church">Етиопска православна црква</string>
+    <string name="poi_united_methodist_church">Уједињена методистичка црква</string>
+    <string name="poi_georgian_orthodox_church">Грузијска православна црква</string>
+    <string name="poi_salvation_army_church">Црква Војске спаса</string>
 </resources>
