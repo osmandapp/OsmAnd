@@ -690,9 +690,7 @@ public class SearchCoreFactory {
 					}
 					sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
 					phrase.countUnknownWordsMatchMainResult(sr);
-					if (Algorithms.isEmpty(sr.alternateName)) {
-						sr.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
-					}
+					sr.cityName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					sr.objectType = ObjectType.POI;
 					resultMatcher.publish(sr);
 					ids.add(poiID);
@@ -1400,10 +1398,7 @@ public class SearchCoreFactory {
 					}
 
 					res.object = object;
-					// assign alternateName only after count words
-					if (Algorithms.isEmpty(res.alternateName)) {
-						res.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
-					}
+					res.cityName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					res.preferredZoom = PREFERRED_POI_ZOOM;
 					res.file = selected;
 					res.location = object.getLocation();
@@ -1990,8 +1985,7 @@ public class SearchCoreFactory {
 				p.isLastWord(ObjectType.VILLAGE);
 	}
 
-	public static SearchResult createSearchResult(Amenity amenity, SearchPhrase phrase,
-			MapPoiTypes poiTypes) {
+	public static SearchResult createSearchResult(Amenity amenity, SearchPhrase phrase, MapPoiTypes poiTypes) {
 		SearchResult result = new SearchResult(phrase);
 		result.object = amenity;
 		result.objectType = POI;
@@ -2000,7 +1994,9 @@ public class SearchCoreFactory {
 
 		SearchSettings settings = phrase.getSettings();
 		result.otherNames = amenity.getOtherNames(true);
-		result.alternateName = amenity.getCityFromTagGroups(settings.getLang());
+		result.cityName = amenity.getCityFromTagGroups(settings.getLang());
+		// we can calculate alternate name possibly
+		result.alternateName = result.cityName;
 		result.localeName = amenity.getName(settings.getLang(), settings.isTransliterate());
 		if (Algorithms.isEmpty(result.localeName)) {
 			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());

@@ -50,6 +50,7 @@ public class SearchResult {
 
 	public String localeName;
 	public String alternateName;
+	public String cityName;
 	public Collection<String> otherNames;
 
 	public String localeRelatedObjectName;
@@ -95,8 +96,7 @@ public class SearchResult {
 			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
 			boolean matched = false;
 			matched = allWordsMatched(localeName, completeMatchRes);
-			if (!matched && alternateName != null) {
-				// TODO incorrect when alternate name is city
+			if (!matched && alternateName != null && !Algorithms.objectEquals(cityName, alternateName)) {
 				matched = allWordsMatched(alternateName, completeMatchRes);
 			}
 			if (!matched && otherNames != null) {

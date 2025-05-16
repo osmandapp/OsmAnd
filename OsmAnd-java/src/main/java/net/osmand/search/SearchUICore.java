@@ -9,6 +9,7 @@ import net.osmand.Collator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.City;
@@ -921,7 +922,7 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
+			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
 				if (Algorithms.isEmpty(object.alternateName)) {
 					for (String s : object.otherNames) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
@@ -931,10 +932,14 @@ public class SearchUICore {
 					}
 				}
 				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
-					// TODO only indexed
-					for (String value : ((Amenity) object.object).getAdditionalInfoValues(true)) {
-						if (phrase.getFirstUnknownNameStringMatcher().matches(value)) {
-							object.alternateName = value;
+					for (String key : ((Amenity) object.object).getAdditionalInfoKeys()) {
+						if (!ObfConstants.isTagIndexedForSearchAsId(key)
+								&& !ObfConstants.isTagIndexedForSearchAsName(key)) {
+							continue;
+						}
+						String vl = ((Amenity) object.object).getAdditionalInfo(key);
+						if (phrase.getFirstUnknownNameStringMatcher().matches(vl)) {
+							object.alternateName = vl;
 							break;
 						}
 					}
@@ -943,6 +948,9 @@ public class SearchUICore {
 			if (Algorithms.isEmpty(object.localeName) && object.alternateName != null) {
 				object.localeName = object.alternateName;
 				object.alternateName = null;
+			}
+			if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
+				object.alternateName = object.cityName;
 			}
 			object.parentSearchResult = parentSearchResult;
 			if (matcher == null || matcher.publish(object)) {
