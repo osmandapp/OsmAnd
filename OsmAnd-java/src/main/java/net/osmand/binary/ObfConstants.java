@@ -155,4 +155,18 @@ public class ObfConstants {
 	public static boolean isIdFromSplit(long id) {
 		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
 	}
+	
+	public static boolean isTagIndexedForSearchAsName(String tag) {
+		if (tag != null) {
+			return tag.contains("name") || tag.contains("brand");
+		}
+		return false;
+	}
+	
+	public static boolean isTagIndexedForSearchAsId(String tag) {
+		if (tag != null) {
+			return tag.equals(Amenity.WIKIDATA) || tag.equals(Amenity.ROUTE_ID);
+		}
+		return false;
+	}
 }
