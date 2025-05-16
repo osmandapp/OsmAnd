@@ -167,7 +167,7 @@ public class FullAmenitySearch {
                 : AMENITY_SEARCH_RADIUS;
         QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
         List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false);
-        long osmId = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
+        long osmId = ObfConstants.isShiftedID(id) ? ObfConstants.getOsmId(id) : id >> AMENITY_ID_RIGHT_SHIFT;
         List<Amenity> filtered = new ArrayList<>();
         if (osmId > 0 || wikidata != null) {
             filtered = findAmenitiesByOsmIdOrWikidata(amenities, osmId, latLon, wikidata);
