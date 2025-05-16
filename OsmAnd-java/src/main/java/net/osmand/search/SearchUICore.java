@@ -922,16 +922,17 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
-				if (Algorithms.isEmpty(object.alternateName)) {
-					for (String s : object.otherNames) {
-						if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
-							object.alternateName = s;
-							break;
-						}
+			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)
+					&& Algorithms.isEmpty(object.alternateName)) {
+				boolean updateName = false;
+				for (String s : object.otherNames) {
+					if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
+						object.localeName = s;
+						updateName = true;
+						break;
 					}
 				}
-				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
+				if (!updateName && object.object instanceof Amenity) {
 					for (String key : ((Amenity) object.object).getAdditionalInfoKeys()) {
 						if (!ObfConstants.isTagIndexedForSearchAsId(key)
 								&& !ObfConstants.isTagIndexedForSearchAsName(key)) {
