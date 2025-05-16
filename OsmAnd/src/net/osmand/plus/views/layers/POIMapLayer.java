@@ -448,6 +448,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (!intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
 				res.put(place.getId(), place);
 			}
+			if (i++ > TOP_PLACES_LIMIT) {
+				break;
+			}
 		}
 		return res;
 	}

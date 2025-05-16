@@ -283,7 +283,11 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		}
 		amenity.setType(category);
 		amenity.setSubType(subtype);
-		amenity.setId(createMapObjectIdFromOsmId(properties.osmid, properties.osmtype));
+		if(properties.osmtype != 0 && properties.osmid != 0) {
+			amenity.setId(createMapObjectIdFromOsmId(properties.osmid, properties.osmtype));
+		} else{
+			amenity.setId(-Long.parseLong(featureData.properties.id));
+		}
 		//amenity.setTravelTopic(properties.wikiTitle);
 		//amenity.setWikiCategory(properties.wikiDesc);
 		amenity.setTravelEloNumber(properties.elo != null ? properties.elo.intValue() : DEFAULT_ELO);
