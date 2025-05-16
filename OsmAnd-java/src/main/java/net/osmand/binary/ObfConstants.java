@@ -159,11 +159,17 @@ public class ObfConstants {
 		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
 	}
 	
-	public static boolean isTagIndexedForSearch(String tag) {
+	public static boolean isTagIndexedForSearchAsName(String tag) {
 		if (tag != null) {
-			return tag.contains("name") || tag.contains("brand") || tag.contains("wikidata");
+			return tag.contains("name") || tag.contains("brand");
 		}
 		return false;
-
+	}
+	
+	public static boolean isTagIndexedForSearchAsId(String tag) {
+		if (tag != null) {
+			return tag.equals(Amenity.WIKIDATA) || tag.equals(Amenity.ROUTE_ID);
+		}
+		return false;
 	}
 }
