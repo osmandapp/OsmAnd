@@ -265,12 +265,13 @@ public class MapLayers {
 	public void updateMapSource(@NonNull OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
 		OsmandSettings settings = app.getSettings();
 		boolean useOpenGLRender = app.useOpenGlRenderer();
+		boolean rasterMapsEnabled = PluginsHelper.isEnabled(OsmandRasterMapsPlugin.class);
 
 		// update transparency
 		int mapTransparency = 255;
-		if (settings.MAP_UNDERLAY.get() != null) {
+		if (rasterMapsEnabled && settings.MAP_UNDERLAY.get() != null) {
 			mapTransparency = settings.MAP_TRANSPARENCY.get();
-		} else if (useOpenGLRender && settings.MAP_OVERLAY.get() != null) {
+		} else if (rasterMapsEnabled && useOpenGLRender && settings.MAP_OVERLAY.get() != null) {
 			mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
 		}
 		mapTileLayer.setAlpha(mapTransparency);
