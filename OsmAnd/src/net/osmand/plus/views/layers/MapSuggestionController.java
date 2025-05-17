@@ -102,7 +102,7 @@ public class MapSuggestionController {
 
 	private boolean shouldShowBanner() {
 		MapActivity mapActivity = view.getMapActivity();
-		return app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
+		return app.getSettings().SHOW_SUGGEST_MAP_DIALOG.get()
 				&& mapActivity != null && mapActivity.getWidgetsVisibilityHelper().shouldShowSuggestMapBanner()
 				&& lastMapZoom >= MIN_ZOOM_TO_SHOW_BANNER
 				&& lastMapZoom <= MAX_ZOOM_TO_SHOW_BANNER
@@ -133,7 +133,7 @@ public class MapSuggestionController {
 					} else {
 						deactivated.clear();
 						downloadable.clear();
-						break;
+						return;
 					}
 				}
 			}
@@ -148,16 +148,18 @@ public class MapSuggestionController {
 
 	@Nullable
 	private LocalItem findBackupedLocalItem(@NonNull WorldRegion regionData) {
-		String downloadRegionName = regionData.getRegionDownloadName();
-		LocalItem localItem = findBackupedLocalItem(downloadRegionName, IndexConstants.BINARY_MAP_INDEX_EXT);
-		return localItem != null ? localItem : findBackupedLocalItem(downloadRegionName, IndexConstants.BINARY_ROAD_MAP_INDEX_EXT);
+		String regionName = regionData.getRegionDownloadName();
+		String mapFileName = ResourceManager.getMapFileName(regionName);
+		String roadMapFileName = ResourceManager.getRoadMapFileName(regionName);
+
+		LocalItem localItem = findBackupedLocalItem(mapFileName);
+		return localItem != null ? localItem : findBackupedLocalItem(roadMapFileName);
 	}
 
 	@Nullable
-	private LocalItem findBackupedLocalItem(@NonNull String downloadRegionName, @NonNull String ext) {
+	private LocalItem findBackupedLocalItem(@NonNull String fileName) {
 		File backupDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
-		String fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadRegionName);
-		File file = new File(backupDir, fileName + ext);
+		File file = new File(backupDir, fileName);
 		if (file.exists()) {
 			LocalItemType type = LocalItemUtils.getItemType(app, file);
 			if (type != null) {

@@ -81,11 +81,8 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -233,18 +230,14 @@ public class ResourceManager {
 	}
 
 	public boolean checkIfObjectDownloaded(String downloadName) {
-		String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
-				+ BINARY_MAP_INDEX_EXT;
-		String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
-				+ BINARY_MAP_INDEX_EXT;
+		String regionName = getMapFileName(downloadName);
+		String roadsRegionName = getRoadMapFileName(downloadName);
 		return indexFileNames.containsKey(regionName) || indexFileNames.containsKey(roadsRegionName);
 	}
 
 	public boolean checkIfObjectBackuped(String downloadName) {
-		String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
-				+ BINARY_MAP_INDEX_EXT;
-		String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
-				+ BINARY_MAP_INDEX_EXT;
+		String regionName = getMapFileName(downloadName);
+		String roadsRegionName = getRoadMapFileName(downloadName);
 		return backupedFileNames.containsKey(regionName) || backupedFileNames.containsKey(roadsRegionName);
 	}
 
@@ -1137,6 +1130,14 @@ public class ResourceManager {
 		}
 		log.debug("fetchOtherData time " + (System.currentTimeMillis() - time));
 		return detailsObject;
+	}
+
+	public static String getMapFileName(String regionName) {
+		return Algorithms.capitalizeFirstLetterAndLowercase(regionName) + BINARY_MAP_INDEX_EXT;
+	}
+
+	public static String getRoadMapFileName(String regionName) {
+		return Algorithms.capitalizeFirstLetterAndLowercase(regionName) + BINARY_ROAD_MAP_INDEX_EXT;
 	}
 
 	private static boolean copyCoordinates(@NonNull PlaceDetailsObject detailsObject,

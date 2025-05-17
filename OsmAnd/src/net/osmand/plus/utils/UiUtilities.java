@@ -624,7 +624,13 @@ public class UiUtilities {
 
 	@NonNull
 	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId) {
-		return getInflater(ctx, nightMode).inflate(layoutId, null);
+		return inflate(ctx, nightMode, layoutId, null, false);
+	}
+
+	@NonNull
+	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId,
+	                           @Nullable ViewGroup root, boolean attachToRoot) {
+		return getInflater(ctx, nightMode).inflate(layoutId, root, attachToRoot);
 	}
 
 	@NonNull
