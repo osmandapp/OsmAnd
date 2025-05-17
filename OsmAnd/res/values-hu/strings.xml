@@ -5356,7 +5356,7 @@
     <string name="hugerock_promo_description">Ingyenes hozzáférés %1$s hónapig különböző funkciókhoz, beleértve a korlátlan térképletöltést, 3D domborzatot stb.</string>
     <string name="hugerock_promo">Hugerock promóció %1$s hónapig</string>
     <string name="detailed_track_guidance_description">Az OsmAnd a nyomvonalát a közeli utakhoz igazítja a jobb, részletes navigáció érdekében.</string>
-    <string name="quick_action_routes_summary">Kapcsoló, amellyel %1$megjeleníthető vagy elrejthető a térképen.</string>
+    <string name="quick_action_routes_summary">Kapcsoló, amellyel %1$s megjeleníthető vagy elrejthető a térképen.</string>
     <string name="shared_string_automatically">Automatikusan</string>
     <string name="ask_every_time">Kérdezzen rá mindig</string>
     <string name="detailed_track_guidance">Nyomvonal korrekció</string>
