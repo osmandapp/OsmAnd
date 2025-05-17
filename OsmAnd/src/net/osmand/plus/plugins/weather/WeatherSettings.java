@@ -7,7 +7,6 @@ import net.osmand.plus.plugins.weather.enums.WeatherSource;
 import net.osmand.plus.plugins.weather.units.CloudUnit;
 import net.osmand.plus.plugins.weather.units.PrecipitationUnit;
 import net.osmand.plus.plugins.weather.units.PressureUnit;
-import net.osmand.plus.plugins.weather.units.TemperatureUnit;
 import net.osmand.plus.plugins.weather.units.WindUnit;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -36,7 +35,6 @@ public class WeatherSettings {
 	public final EnumStringPreference<WindUnit> weatherWindUnit;
 	public final EnumStringPreference<WindUnit> weatherWindAnimationUnit;
 	public final EnumStringPreference<CloudUnit> weatherCloudUnit;
-	public final EnumStringPreference<TemperatureUnit> weatherTempUnit;
 	public final EnumStringPreference<PressureUnit> weatherPressureUnit;
 	public final EnumStringPreference<PrecipitationUnit> weatherPrecipUnit;
 
@@ -95,8 +93,6 @@ public class WeatherSettings {
 		weatherForecastCloud = settings.registerBooleanPreference("weatherForecastCloud", false).makeProfile();
 		weatherForecastPrecip = settings.registerBooleanPreference("weatherForecastPrecip", false).makeProfile();
 
-		weatherTempUnit = (EnumStringPreference<TemperatureUnit>) settings.registerEnumStringPreference(
-				"weatherTempUnit", TemperatureUnit.CELSIUS, TemperatureUnit.values(), TemperatureUnit.class).makeProfile();
 		weatherPressureUnit = (EnumStringPreference<PressureUnit>) settings.registerEnumStringPreference(
 				"weatherPressureUnit", PressureUnit.MILLIMETERS_OF_MERCURY, PressureUnit.values(), PressureUnit.class).makeProfile();
 		weatherWindUnit = (EnumStringPreference<WindUnit>) settings.registerEnumStringPreference(

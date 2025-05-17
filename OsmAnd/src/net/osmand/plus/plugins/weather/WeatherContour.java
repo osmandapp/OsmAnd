@@ -24,6 +24,7 @@ import net.osmand.plus.plugins.weather.units.CloudUnit;
 import net.osmand.plus.plugins.weather.units.PrecipitationUnit;
 import net.osmand.plus.plugins.weather.units.PressureUnit;
 import net.osmand.plus.plugins.weather.units.TemperatureUnit;
+import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.plugins.weather.units.WindUnit;
 
 public enum WeatherContour {
@@ -77,34 +78,20 @@ public enum WeatherContour {
 
 	@Nullable
 	public Enum<?>[] getUnits() {
-		switch (this) {
-			case TEMPERATURE:
-				return TemperatureUnit.values();
-			case PRESSURE:
-				return PressureUnit.values();
-			case WIND:
-				return WindUnit.values();
-			case CLOUDS:
-				return CloudUnit.values();
-			case PRECIPITATION:
-				return PrecipitationUnit.values();
-			default:
-				return null;
-		}
+		return switch (this) {
+			case TEMPERATURE -> TemperatureUnit.values();
+			case PRESSURE -> PressureUnit.values();
+			case WIND -> WindUnit.values();
+			case CLOUDS -> CloudUnit.values();
+			case PRECIPITATION -> PrecipitationUnit.values();
+			default -> null;
+		};
 	}
 
 	@Nullable
 	public String getUnitName(@NonNull Context ctx, @NonNull Enum<?> value) {
-		if (value instanceof TemperatureUnit) {
-			return ((TemperatureUnit) value).toHumanString(ctx);
-		} else if (value instanceof PressureUnit) {
-			return ((PressureUnit) value).toHumanString(ctx);
-		} else if (value instanceof WindUnit) {
-			return ((WindUnit) value).toHumanString(ctx);
-		} else if (value instanceof CloudUnit) {
-			return ((CloudUnit) value).getSymbol();
-		} else if (value instanceof PrecipitationUnit) {
-			return ((PrecipitationUnit) value).toHumanString(ctx);
+		if (value instanceof WeatherUnit weatherUnit) {
+			return weatherUnit.toHumanString(ctx);
 		}
 		return null;
 	}

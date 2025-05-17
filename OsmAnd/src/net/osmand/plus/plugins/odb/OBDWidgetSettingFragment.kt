@@ -11,7 +11,6 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.material.slider.Slider
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.plugins.weather.units.TemperatureUnit
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.preferences.OsmandPreference
 import net.osmand.plus.utils.AndroidUtils
@@ -26,7 +25,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 	private var selectedAverageMode: Boolean = false
 	private var selectedIntervalMillis: Long = 0
 	private var seekBarIntervalMillis: Long = 0
-	private var selectedTemperatureUnit: TemperatureUnit = TemperatureUnit.CELSIUS
 
 	private lateinit var inflater: LayoutInflater
 	private var buttonsCard: LinearLayout? = null
@@ -36,7 +34,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 	private lateinit var widget: OBDTextWidget
 	private var averageValueModePref: OsmandPreference<Boolean>? = null
 	private var averageValueIntervalPref: OsmandPreference<Long>? = null
-	private var temperatureUnitPref: OsmandPreference<TemperatureUnit>? = null
 
 	companion object {
 		private const val AVERAGE_MODE_KEY = "average_mode"
@@ -49,7 +46,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 			widget = widgetInfo?.widget as OBDTextWidget
 			averageValueModePref = widget.averageModePref
 			averageValueIntervalPref = widget.measuredIntervalPref
-			temperatureUnitPref = widget.temperatureUnitPref
 		} else {
 			dismiss()
 		}
@@ -62,7 +58,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 		selectedAppMode = settings.applicationMode
 		availableIntervals = getAvailableIntervals()
 
-		selectedTemperatureUnit = temperatureUnitPref?.getModeValue(appMode) ?: selectedTemperatureUnit
 		selectedIntervalMillis = averageValueIntervalPref?.getModeValue(appMode) ?: selectedIntervalMillis
 		selectedAverageMode = averageValueModePref?.getModeValue(appMode) ?: selectedAverageMode
 
@@ -81,14 +76,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 		val buttonsList: MutableList<ButtonItem> = ArrayList()
 
 		val showAverageButtons = averageValueModePref != null && averageValueIntervalPref != null
-		if (temperatureUnitPref != null) {
-			buttonsList.add(
-				ButtonItem(
-					getString(R.string.shared_string_temperature),
-					app.getString(selectedTemperatureUnit.titleId)
-				) { showTemperatureDialog() })
-		}
-
 		if (showAverageButtons) {
 			buttonsList.add(
 				ButtonItem(
@@ -251,22 +238,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 		}
 	}
 
-	private fun showTemperatureDialog() {
-		val items = arrayOfNulls<CharSequence>(TemperatureUnit.entries.size)
-		for (i in TemperatureUnit.entries.toTypedArray().indices) {
-			items[i] = app.getString(TemperatureUnit.entries[i].titleId)
-		}
-
-		val dialogData = AlertDialogData(requireMyActivity(), nightMode)
-			.setTitle(R.string.shared_string_temperature)
-			.setControlsColor(ColorUtilities.getActiveColor(app, nightMode))
-
-		CustomAlert.showSingleSelection(dialogData, items, selectedTemperatureUnit.ordinal) { v: View ->
-			selectedTemperatureUnit = TemperatureUnit.entries[v.tag as Int]
-			setupConfigButtons()
-		}
-	}
-
 	private fun setupListItemBackground(view: View) {
 		val button = view.findViewById<View>(R.id.button_container)
 		val color = selectedAppMode.getProfileColor(nightMode)
@@ -283,12 +254,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 	override fun applySettings() {
 		super.applySettings()
 		var averageChanged = false
-		var temperatureChanged = false
-
-		if (temperatureUnitPref != null){
-			temperatureChanged = temperatureUnitPref?.getModeValue(appMode) != selectedTemperatureUnit
-			temperatureUnitPref?.setModeValue(appMode, selectedTemperatureUnit)
-		}
 
 		if (averageValueModePref != null && averageValueIntervalPref != null){
 			averageChanged = averageValueModePref?.getModeValue(appMode) != selectedAverageMode
@@ -299,7 +264,7 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 			}
 		}
 
-		val prefsChanged = averageChanged || temperatureChanged
+		val prefsChanged = averageChanged
 		widget.updatePrefs(prefsChanged)
 	}
 

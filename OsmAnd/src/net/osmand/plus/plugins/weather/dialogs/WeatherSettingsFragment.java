@@ -26,6 +26,7 @@ import net.osmand.plus.plugins.weather.viewholder.WeatherTotalCacheSizeViewHolde
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -75,14 +76,17 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 			entryValues[i] = ((Enum<?>) unit).ordinal();
 		}
 
-		ListPreferenceEx preference = createListPreferenceEx(weatherBand.getBandUnitPref().getId(), entries,
-				entryValues, weatherBand.getMeasurementName(), R.layout.preference_with_descr);
-		preference.setEntries(entries);
-		preference.setEntryValues(entryValues);
-		preference.setIcon(getActiveIcon(weatherBand.getIconId()));
+		CommonPreference<? extends WeatherUnit> preference = weatherBand.getBandUnitPref();
+		if (preference != null) {
+			ListPreferenceEx uiPreference = createListPreferenceEx(preference.getId(), entries,
+					entryValues, weatherBand.getMeasurementName(), R.layout.preference_with_descr);
+			uiPreference.setEntries(entries);
+			uiPreference.setEntryValues(entryValues);
+			uiPreference.setIcon(getActiveIcon(weatherBand.getIconId()));
 
-		unitPrefs.put(preference, weatherBand);
-		addOnPreferencesScreen(preference);
+			unitPrefs.put(uiPreference, weatherBand);
+			addOnPreferencesScreen(uiPreference);
+		}
 	}
 
 	private void setupCacheSizeCategory() {

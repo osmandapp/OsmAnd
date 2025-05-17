@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="unit_of_temperature_description">Selected units will be applied to all temperature related data in the current profile.</string>
     <string name="travel_guides">Guides</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favorites.</string>
     <string name="msg_favorites_skipped_as_existing">Favorite points (%1$d) were skipped as already existing.</string>
