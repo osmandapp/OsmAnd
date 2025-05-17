@@ -46,9 +46,7 @@ public class DownloadMapToolbarController extends SuggestMapToolbarController {
 
 	@Override
 	protected void onApply() {
-		if (indexItem != null) {
-			downloadValidationManager.startDownload(mapActivity, indexItem);
-		}
+		downloadValidationManager.startDownload(mapActivity, indexItem);
 		dismiss();
 	}
 }

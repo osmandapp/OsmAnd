@@ -1,6 +1,7 @@
 package net.osmand.plus.download.ui;
 
 import static net.osmand.IProgress.EMPTY_PROGRESS;
+import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 
 import android.os.AsyncTask;
 
@@ -31,15 +32,13 @@ public class ActivateMapToolbarController extends SuggestMapToolbarController {
 
 	@Override
 	protected void onApply() {
-		if (localItem != null) {
-			LocalOperationTask task = new LocalOperationTask(app, OperationType.RESTORE_OPERATION, new OperationListener() {
-				@Override
-				public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
-					app.getResourceManager().reloadIndexesAsync(EMPTY_PROGRESS, warnings -> app.getOsmandMap().refreshMap());
-				}
-			});
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
-		}
+		LocalOperationTask task = new LocalOperationTask(app, RESTORE_OPERATION, new OperationListener() {
+			@Override
+			public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
+				app.getResourceManager().reloadIndexesAsync(EMPTY_PROGRESS, warnings -> app.getOsmandMap().refreshMap());
+			}
+		});
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
 		dismiss();
 	}
 }
