@@ -1,7 +1,7 @@
 package net.osmand.plus.download.ui;
 
 
-import android.widget.TextView;
+import android.view.ViewGroup.LayoutParams;
 
 import androidx.annotation.NonNull;
 
@@ -15,33 +15,43 @@ public class DownloadMapToolbarController extends SuggestMapToolbarController {
 	private final DownloadValidationManager downloadValidationManager;
 	private final IndexItem indexItem;
 
-	private final TextView tvSize;
-
 	public DownloadMapToolbarController(@NonNull MapActivity mapActivity, @NonNull IndexItem indexItem, @NonNull String regionName) {
-		super(mapActivity, regionName, R.layout.download_detailed_map_widget);
+		super(mapActivity, regionName);
 		this.indexItem = indexItem;
 		downloadValidationManager = new DownloadValidationManager(app);
-		tvSize = mainView.findViewById(R.id.fileSize);
 		initializeUI();
 	}
 
-	@NonNull
-	public IndexItem getIndexItem() {
-		return indexItem;
-	}
-
 	@Override
-	protected void refreshView() {
-		super.refreshView();
-		if (indexItem != null) {
-			String size = indexItem.getSizeDescription(mapActivity);
-			tvSize.setText(size);
-		}
-	}
-
-	@Override
-	protected int getSummaryPattern() {
+	protected int getPrimaryTextPattern() {
 		return R.string.download_detailed_map;
+	}
+
+	@NonNull
+	@Override
+	protected String getSecondaryText() {
+		return indexItem.getSizeDescription(mapActivity);
+	}
+
+	@Override
+	protected int getIconId() {
+		return R.drawable.img_download;
+	}
+
+	@Override
+	protected int getPreferredIconHeight() {
+		return LayoutParams.WRAP_CONTENT;
+	}
+
+	@Override
+	protected int getPreferredIconWidth() {
+		return LayoutParams.WRAP_CONTENT;
+	}
+
+	@NonNull
+	@Override
+	protected String getApplyButtonTitle() {
+		return app.getString(R.string.shared_string_download);
 	}
 
 	@Override

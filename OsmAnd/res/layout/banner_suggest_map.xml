@@ -26,16 +26,17 @@
                 android:orientation="vertical">
 
                 <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/description"
+                    android:id="@+id/primary_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="?android:textColorSecondary"
                     android:layout_marginTop="@dimen/list_content_padding"
                     android:textSize="@dimen/default_list_text_size"
                     android:textStyle="normal"
-                    tools:text="@string/suggest_activate_map_msg" />
+                    tools:text="@string/download_detailed_map" />
 
                 <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/secondary_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="?attr/active_color_basic"
@@ -43,14 +44,15 @@
                     android:paddingTop="@dimen/text_margin_small"
                     android:paddingBottom="@dimen/text_margin_small"
                     app:typefaceWeight="medium"
-                    android:text="@string/deactivated_map" />
+                    tools:text="139 MB" />
 
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="72dp"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_action_box_open_arrow_colored"
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/img_download"
                 android:layout_marginStart="@dimen/card_content_padding_large" />
 
         </LinearLayout>
@@ -82,7 +84,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 app:dialogButtonType="primary"
-                app:dialogButtonTitle="@string/local_index_mi_restore" />
+                app:dialogButtonTitle="@string/shared_string_download" />
 
         </LinearLayout>
 

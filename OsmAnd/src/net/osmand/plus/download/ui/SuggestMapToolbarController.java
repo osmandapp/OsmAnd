@@ -3,10 +3,11 @@ package net.osmand.plus.download.ui;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
@@ -30,28 +31,31 @@ public abstract class SuggestMapToolbarController extends TopToolbarController {
 	protected final boolean nightMode;
 
 	protected final View mainView;
-	protected final TextView tvSummary;
+	protected final TextView tvPrimaryText;
+	protected final TextView tvSecondaryText;
+	protected final ImageView ivIcon;
 	protected final DialogButton btnClose;
 	protected final DialogButton btnApply;
 
 	private static String regionName;
 	private static String lastProcessedRegionName;
 
-	public SuggestMapToolbarController(@NonNull MapActivity mapActivity,
-	                                   @NonNull String regionName, @LayoutRes int layoutId) {
+	public SuggestMapToolbarController(@NonNull MapActivity mapActivity, @NonNull String regionName) {
 		super(TopToolbarControllerType.SUGGEST_MAP);
 		SuggestMapToolbarController.regionName = regionName;
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
-		this.mainView = UiUtilities.inflate(mapActivity, nightMode, layoutId);
+		this.mainView = UiUtilities.inflate(mapActivity, nightMode, R.layout.banner_suggest_map);
 		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			mainView.setBackgroundResource(getLandscapeBottomSidesBgResId());
 		} else {
 			mainView.setBackgroundResource(getPortraitBgResId());
 		}
-		tvSummary = mainView.findViewById(R.id.description);
+		tvPrimaryText = mainView.findViewById(R.id.primary_text);
+		tvSecondaryText = mainView.findViewById(R.id.secondary_text);
+		ivIcon = mainView.findViewById(R.id.icon);
 		btnClose = mainView.findViewById(R.id.btnClose);
 		btnApply = mainView.findViewById(R.id.btnApply);
 	}
@@ -68,19 +72,39 @@ public abstract class SuggestMapToolbarController extends TopToolbarController {
 
 	protected void refreshView() {
 		if (!Algorithms.isEmpty(regionName)) {
-			String summary = String.format(app.getString(getSummaryPattern()), regionName);
+			String summary = String.format(app.getString(getPrimaryTextPattern()), regionName);
 			int startIndex = summary.indexOf(regionName);
 			int endIndex = startIndex + regionName.length();
 			SpannableStringBuilder description = new SpannableStringBuilder(summary);
 			if (startIndex != -1 && endIndex != -1) {
 				description.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
-			tvSummary.setText(description);
+			tvPrimaryText.setText(description);
 		}
+		tvSecondaryText.setText(getSecondaryText());
+		ivIcon.setImageResource(getIconId());
+		ViewGroup.LayoutParams layoutParams = ivIcon.getLayoutParams();
+		layoutParams.height = getPreferredIconHeight();
+		layoutParams.width = getPreferredIconWidth();
+		ivIcon.setLayoutParams(layoutParams);
+		btnApply.setTitle(getApplyButtonTitle());
 	}
 
 	@StringRes
-	protected abstract int getSummaryPattern();
+	protected abstract int getPrimaryTextPattern();
+
+	@NonNull
+	protected abstract String getSecondaryText();
+
+	@DrawableRes
+	protected abstract int getIconId();
+
+	protected abstract int getPreferredIconHeight();
+
+	protected abstract int getPreferredIconWidth();
+
+	@NonNull
+	protected abstract String getApplyButtonTitle();
 
 	protected abstract void onApply();
 
