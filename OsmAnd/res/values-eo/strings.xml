@@ -5280,7 +5280,7 @@
     <string name="allow_display_on_top_description">Permesi al etikedoj sur la mapo kovri unu al la alia</string>
     <string name="show_debug_info">Montri senerarigajn informojn</string>
     <string name="show_debug_info_description">Montri grafikajn informojn pri lokiĝo de ĉiu teksto sur la mapo</string>
-    <string name="map_text">Etikedoj sur la mapo</string>
+    <string name="map_text">Map-bildigado</string>
     <string name="routing_attr_avoid_cobblestone_name">Eviti rulŝtonajn kahelojn</string>
     <string name="routing_attr_avoid_cobblestone_description">Eviti ĝibajn pavimŝtonojn</string>
     <string name="gpx_approximation_geo_cpp">Surbaze de geometrio (C++) (rapide)</string>
@@ -5746,4 +5746,7 @@
     <string name="save_to_device">Konservi al aparato</string>
     <string name="saved_to_device">Konservis al aparato</string>
     <string name="travel_guides">Gvidiloj</string>
+    <string name="show_debug_tile">Montri informojn pri kahelo</string>
+    <string name="show_debug_tile_description">Montri informojn pri simboloj por ĉiu map-kahelo</string>
+    <string name="show_symbols_debug_info">Montri senerarigajn informojn pri simboloj</string>
 </resources>
