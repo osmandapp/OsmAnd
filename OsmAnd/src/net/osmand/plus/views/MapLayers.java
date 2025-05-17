@@ -269,10 +269,12 @@ public class MapLayers {
 
 		// update transparency
 		int mapTransparency = 255;
-		if (rasterMapsEnabled && settings.MAP_UNDERLAY.get() != null) {
-			mapTransparency = settings.MAP_TRANSPARENCY.get();
-		} else if (rasterMapsEnabled && useOpenGLRender && settings.MAP_OVERLAY.get() != null) {
-			mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
+		if (rasterMapsEnabled) {
+			if (settings.MAP_UNDERLAY.get() != null) {
+				mapTransparency = settings.MAP_TRANSPARENCY.get();
+			} else if (useOpenGLRender && settings.MAP_OVERLAY.get() != null) {
+				mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
+			}
 		}
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
