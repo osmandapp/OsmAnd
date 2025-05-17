@@ -101,9 +101,7 @@ public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, 
 	private boolean processItem(@NonNull BaseLocalItem item) {
 		if (item instanceof LocalItem) {
 			return processItem((LocalItem) item);
-		} else if (item instanceof LiveGroupItem) {
-			LiveGroupItem groupItem = (LiveGroupItem) item;
-
+		} else if (item instanceof LiveGroupItem groupItem) {
 			boolean success = false;
 			for (LocalItem localItem : groupItem.getItems()) {
 				if (!isCancelled()) {

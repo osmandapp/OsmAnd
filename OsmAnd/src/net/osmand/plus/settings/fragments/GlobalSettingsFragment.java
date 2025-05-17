@@ -89,7 +89,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		if (DIALOGS_AND_NOTIFICATIONS_PREF_ID.equals(prefId)) {
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null) {
-				boolean enabled = preference.isEnabled() && (!settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || settings.SHOW_DOWNLOAD_MAP_DIALOG.get());
+				boolean enabled = preference.isEnabled() && (!settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || settings.SHOW_SUGGEST_MAP_DIALOG.get());
 				imageView.setEnabled(enabled);
 			}
 		} else if (SEND_UNIQUE_USER_IDENTIFIER_PREF_ID.equals(prefId)) {
@@ -275,7 +275,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private void setupDialogsAndNotificationsPref() {
 		boolean showStartupMessages = !settings.DO_NOT_SHOW_STARTUP_MESSAGES.get();
-		boolean showDownloadMapDialog = settings.SHOW_DOWNLOAD_MAP_DIALOG.get();
+		boolean showDownloadMapDialog = settings.SHOW_SUGGEST_MAP_DIALOG.get();
 		String summary;
 		if (showStartupMessages && showDownloadMapDialog) {
 			summary = getString(R.string.shared_string_all);
