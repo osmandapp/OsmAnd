@@ -5732,7 +5732,7 @@
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX putne tačke (%1$d) kopirane su u favorite.</string>
     <string name="msg_favorites_skipped_as_existing">Omiljene tačke (%1$d) su preskočene kao već postojeće.</string>
     <string name="save_to_device_error">Greška pri upisu na uređaju</string>
-    <string name="save_to_device">Sačuvaj na Uređaju</string>
+    <string name="save_to_device">Sačuvaj na uređaju</string>
     <string name="saved_to_device">Sačuvano na uređaju</string>
     <string name="travel_guides">Vodič</string>
     <string name="show_debug_tile_description">Prikaz informacija o simbolima na mapi svakog tila</string>

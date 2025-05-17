@@ -700,11 +700,11 @@
     <string name="poi_denomination_church_of_england">Eklezio de Anglujo</string>
     <string name="poi_denomination_episcopal">Episkopanismo</string>
     <string name="poi_denomination_shia">Ŝijaismo</string>
-    <string name="poi_denomination_united">Unuigita Eklezio de Kanado</string>
+    <string name="poi_denomination_united">Unuiĝinta Eklezio de Kanado</string>
     <string name="poi_denomination_greek_catholic">Orienta Katolika Eklezio</string>
     <string name="poi_denomination_tibetan">Tibeta Budaismo</string>
-    <string name="poi_denomination_united_reformed">Unuigita Reformita Eklezio</string>
-    <string name="poi_denomination_church_of_scotland">Unuigita Eklezio de Skotujo</string>
+    <string name="poi_denomination_united_reformed">Unuiĝinta Reformita Eklezio</string>
+    <string name="poi_denomination_church_of_scotland">Eklezio de Skotlando</string>
     <string name="poi_denomination_salvation_army">Armeo de Savo</string>
     <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
     <string name="poi_denomination_uniting">Unuigata Eklezio de Aŭstralio</string>
@@ -2972,7 +2972,7 @@
     <string name="poi_cuisine_nepalese">nepala</string>
     <string name="poi_cuisine_mongolian">mongola</string>
     <string name="poi_cuisine_middle_eastern">proksim-orienta</string>
-    <string name="poi_cuisine_ukrainian">ukrajna</string>
+    <string name="poi_cuisine_ukrainian">ukraina</string>
     <string name="poi_cuisine_afghan">afgana</string>
     <string name="poi_cuisine_belgian">belga</string>
     <string name="poi_cuisine_basque">eŭska</string>
@@ -5011,6 +5011,22 @@
     <string name="poi_serbian_orthodox_church">Serb-ortodoksa kirko</string>
     <string name="poi_greek_catholic_church">Grekkatolika kirko</string>
     <string name="poi_mormon_church">Mormona preĝejo</string>
-    <string name="poi_seventh_day_adventist_church">Preĝdomo de Sepataga Adventisma Eklezio</string>
+    <string name="poi_seventh_day_adventist_church">Sepatag-adventisma preĝejo</string>
     <string name="poi_romanian_orthodox_church">Rom-ortodoksa kirko</string>
+    <string name="poi_ukrainian_greek_catholic_church">Ukrain-grek-katolika kirko</string>
+    <string name="poi_united_methodist_church">Unuiĝint-metodisma preĝejo</string>
+    <string name="poi_episcopal_church">Episkopa kirko</string>
+    <string name="poi_iglesia_ni_cristo_church">Kirko de Iglesia ni Cristo</string>
+    <string name="poi_nondenominational_church">Senkonfesia kirko</string>
+    <string name="poi_georgian_orthodox_church">Kartvel-ortodoksa kirko</string>
+    <string name="poi_new_apostolic_church">Novapostola kirko</string>
+    <string name="poi_ukrainian_orthodox_church">Ukrain-ortodoksa kirko</string>
+    <string name="poi_united_church">Preĝejo de Unuiĝinta Eklezio de Kanado</string>
+    <string name="poi_church_of_scotland">Preĝejo de Eklezio de Skotlando</string>
+    <string name="poi_armenian_apostolic_church">Amren-apostola kirko</string>
+    <string name="poi_neo_pentecostal_church">Novpentekosta kirko</string>
+    <string name="poi_assemblies_of_god_church">Preĝejo de Asembleoj de Dio</string>
+    <string name="poi_salvation_army_church">Preĝejo de Armeo de Savo</string>
+    <string name="poi_quaker_church">Kvakera preĝejo</string>
+    <string name="poi_church_of_christ">Preĝejo de Eklezio de Kristo</string>
 </resources>
