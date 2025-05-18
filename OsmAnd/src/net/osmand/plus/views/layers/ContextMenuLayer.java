@@ -727,12 +727,32 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon pointLatLon = result.getPointLatLon();
 		List<SelectedMapObject> selectedObjects = result.getProcessedObjects();
 
-		filterForAvailableActions(selectedObjects);
+		long objectSelectionThreshold = 0;
 		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (selectedObject.provider() != null) {
+				long selectionThreshold = selectedObject.provider().getObjectSelectionThresholdBaseOrder(selectedObject.object());
+				if (selectionThreshold <= objectSelectionThreshold) {
+					objectSelectionThreshold = selectionThreshold;
+				}
+			}
+		}
+		ArrayList<SelectedMapObject> objectsAvailableForSelection = new ArrayList<>();
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (objectSelectionThreshold < 0) {
+				IContextMenuProvider provider = selectedObject.provider();
+				if (provider instanceof OsmandMapLayer layer && layer.getPointOrder(selectedObject.object()) <= objectSelectionThreshold) {
+					objectsAvailableForSelection.add(selectedObject);
+				} else {
+					continue;
+				}
+			}
 			IContextMenuProvider provider = selectedObject.provider();
 			if (provider != null && provider.runExclusiveAction(selectedObject.object(), showUnknownLocation)) {
 				return true;
 			}
+		}
+		if (objectSelectionThreshold < 0) {
+			selectedObjects = objectsAvailableForSelection;
 		}
 		if (selectedObjects.size() == 1) {
 			SelectedMapObject selectedObject = selectedObjects.get(0);
@@ -741,7 +761,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			PointDescription pointDescription = null;
 			IContextMenuProvider provider = selectedObject.provider();
 			if (provider != null) {
-				if (latLon == null) {
+				if (latLon == null || objectSelectionThreshold < 0) {
 					latLon = provider.getObjectLocation(selectedObj);
 				}
 				pointDescription = provider.getObjectName(selectedObj);
@@ -773,30 +793,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		return false;
-	}
-
-	private void filterForAvailableActions(List<SelectedMapObject> selectedObjects) {
-		boolean hasTopPlace = false;
-		ArrayList<SelectedMapObject> newSelectedObjects = new ArrayList<>();
-		for (SelectedMapObject selectedObject : selectedObjects) {
-			if (selectedObject.provider() instanceof OsmandMapLayer selectedObjectLayer) {
-				if (selectedObjectLayer.getBaseOrder() < getApplication().getOsmandMap().getMapLayers().getPoiMapLayer().getBaseOrder()) {
-					newSelectedObjects.add(selectedObject);
-				}
-			}
-			if (selectedObject.provider() instanceof POIMapLayer poiMapLayer && selectedObject.object() instanceof PlaceDetailsObject placeDetailsObject) {
-				placeDetailsObject.getSyntheticAmenity().getId();
-				if (poiMapLayer.getSelectedTopPlace(placeDetailsObject) != null) {
-					newSelectedObjects.add(selectedObject);
-					hasTopPlace = true;
-				}
-			}
-		}
-
-		if (hasTopPlace) {
-			selectedObjects.clear();
-			selectedObjects.addAll(newSelectedObjects);
-		}
 	}
 
 	public boolean disableSingleTap() {
@@ -1015,6 +1011,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		default boolean showMenuAction(@Nullable Object o) {
 			return false;
+		}
+
+		default long getObjectSelectionThresholdBaseOrder(Object selectedObject) {
+			return 0L;
 		}
 	}
 
