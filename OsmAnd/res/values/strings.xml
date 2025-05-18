@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="deactivated_map">Deactivated map</string>
+    <string name="suggest_activate_map_msg">%1$s map is deactivated,\nactivate to view this area.</string>
     <string name="travel_guides">Guides</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favorites.</string>
     <string name="msg_favorites_skipped_as_existing">Favorite points (%1$d) were skipped as already existing.</string>
