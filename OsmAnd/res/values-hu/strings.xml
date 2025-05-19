@@ -5702,4 +5702,7 @@
     <string name="show_debug_tile">Csempeadatok megjelenítése</string>
     <string name="show_debug_tile_description">Információk megjelenítése az egyes csempék térképjeleiről</string>
     <string name="show_symbols_debug_info">Szimbólumok hibakeresési adatainak megjelenítése</string>
+    <string name="unit_of_temperature_description">A kiválasztott mértékegységek az aktuális profil összes hőmérséklettel kapcsolatos adatára alkalmazva lesznek.</string>
+    <string name="deactivated_map">Deaktivált térkép</string>
+    <string name="suggest_activate_map_msg">%1$s térkép inaktív,\naktiválja a terület megtekintéséhez.</string>
 </resources>
