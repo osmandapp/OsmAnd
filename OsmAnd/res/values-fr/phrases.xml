@@ -4873,7 +4873,7 @@
     <string name="poi_routes_motorcycling">Motocyclisme</string>
     <string name="poi_routes_other">Autres itinéraires</string>
     <string name="poi_route_activity_type_hill_climbing">Escalade</string>
-    <string name="poi_network_foot">Réseau de routes (randonnée)</string>
+    <string name="poi_network_foot">Réseau d\'itinéraires (randonnée)</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunnel interdit aux cyclistes</string>
     <string name="poi_route_article_point">Points de Voyage</string>
     <string name="poi_routes_cycling">Cyclisme</string>
