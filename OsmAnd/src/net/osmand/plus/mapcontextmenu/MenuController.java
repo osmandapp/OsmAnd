@@ -441,7 +441,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public boolean supportZoomIn() {
-		return true;
+		return false;
 	}
 
 	public boolean navigateButtonVisible() {
