@@ -483,7 +483,8 @@ public class FullAmenitySearch {
         final LatLon finalLatLon = latLon;
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
-            Amenity amenity = findAmenity(finalLatLon, renderedObject.getId(), null, wikidata);
+            long osmId = ObfConstants.getOsmObjectId(renderedObject);
+            Amenity amenity = findAmenity(finalLatLon, osmId << AMENITY_ID_RIGHT_SHIFT, null, wikidata);
             if (amenity != null) {
                 amenity.setX(renderedObject.getX());
                 amenity.setY(renderedObject.getY());

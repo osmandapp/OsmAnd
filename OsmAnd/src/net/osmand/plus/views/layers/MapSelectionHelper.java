@@ -30,7 +30,6 @@ import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
 import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
 import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.*;
 import net.osmand.osm.OsmRouteType;
@@ -120,14 +119,15 @@ public class MapSelectionHelper {
 		collectObjectsFromLayers(result, showUnknownLocation, false);
 		collectObjectsFromMap(result, point, tileBox);
 
-		transportStopHelper.processTransportStops(result.getAllObjects());
+		//transportStopHelper.processTransportStops(result.getAllObjects());
 		if (result.isEmpty()) {
 			collectObjectsFromLayers(result, showUnknownLocation, true);
 		}
 		if (result.getAllObjects().size() > 1) {
 			recollectForMultiselectMenu(result);
 		}
-		result.groupByOsmIdAndWikidataId();
+		result.groupPoiByOsmIdAndWikidata();
+		result.groupOtherObjects();
 		return result;
 	}
 

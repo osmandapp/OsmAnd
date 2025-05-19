@@ -1,7 +1,9 @@
 package net.osmand.data;
 
 import static net.osmand.data.Amenity.DEFAULT_ELO;
+import static net.osmand.data.Amenity.WIKIDATA;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.osm.PoiCategory;
@@ -92,10 +94,37 @@ public class BaseDetailsObject {
         return osmIds.contains(amenity.getOsmId()) || wikidataEqual;
     }
 
-    public void merge(BaseDetailsObject other) {
+    public void merge(Object object) {
+        if (object instanceof BaseDetailsObject baseDetailsObject)
+            merge(baseDetailsObject);
+        if (object instanceof TransportStop transportStop)
+            merge(transportStop);
+        if (object instanceof RenderedObject renderedObject)
+            merge(renderedObject);
+    }
+
+    private void merge(BaseDetailsObject other) {
         osmIds.addAll(other.osmIds);
         wikidataIds.addAll(other.wikidataIds);
         objects.addAll(other.getObjects());
+    }
+
+    private void merge(TransportStop other) {
+        osmIds.add(ObfConstants.getOsmObjectId(other));
+        Amenity amenity = other.getAmenity();
+        if (amenity != null) {
+            wikidataIds.add(amenity.getWikidata());
+        }
+        objects.add(other);
+    }
+
+    private void merge(RenderedObject renderedObject) {
+        osmIds.add(ObfConstants.getOsmObjectId(renderedObject));
+        String wikidata = renderedObject.getTagValue(WIKIDATA);
+        if (!Algorithms.isEmpty(wikidata)) {
+            wikidataIds.add(wikidata);
+        }
+        objects.add(renderedObject);
     }
 
     public void combineData() {
