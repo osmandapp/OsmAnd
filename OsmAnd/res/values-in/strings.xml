@@ -6147,4 +6147,5 @@
     <string name="add_to_navigation">Tambahkan ke Navigasi</string>
     <string name="saved_to_device">Disimpan ke perangkat</string>
     <string name="cant_load_map_styles">Tidak dapat mengubah gaya peta.</string>
+    <string name="travel_guides">Panduan</string>
 </resources>

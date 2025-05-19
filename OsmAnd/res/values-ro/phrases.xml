@@ -812,7 +812,7 @@
     <string name="poi_traffic_calming_bump">Limitator de viteză</string>
     <string name="poi_border_control">Control de frontieră</string>
     <string name="poi_toll_booth">Cabină de taxare</string>
-    <string name="poi_lift_gate">Platformă hidraulică</string>
+    <string name="poi_lift_gate">Barieră auto cu braț</string>
     <string name="poi_city_wall">Zid oraș</string>
     <string name="poi_gate">Poartă</string>
     <string name="poi_mountain_pass">Trecătoare</string>

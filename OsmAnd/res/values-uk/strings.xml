@@ -4731,7 +4731,7 @@
     <string name="delete_cloud_version">Вилучити хмарну версію</string>
     <string name="local_version_do_not_exist">Немає локальної версії.</string>
     <string name="shared_string_in_progress">Виконується</string>
-    <string name="shared_string_original">Оригінальна</string>
+    <string name="shared_string_original">Оригінал</string>
     <string name="movement_speed">Швидкість руху</string>
     <string name="simulation_position_description">Виберіть файл треку, який буде джерелом для симуляції руху.</string>
     <string name="release_4_4">• Покращено меню «Трек» у «Налаштувати карту» \n\n • Контекстне меню тепер відображає локалізовані назви POI \n\n • Додано можливість поділитися маршрутом за посиланням \n\n • Додано одиницю вимірювання довжини «морські милі/фути». \n\n • Орієнтація карти додано новий фіксований режим \n\n • Спрощений стартовий екран \n\n • Виправлено положення розташування в режимі розділеного екрана в Android Auto \n\n • Додано графік «Швидкість/Нахил» для аналізу траси \n\n • В Android 13 вибір мови додатка перенесено в налаштування системи \n\n • Виправлено проблеми з відображенням веганських місць \n\n • Додано можливість завантажувати онлайн-плитки, які використовуються як карти «Накладання» або «Підслоння». \n\n • Додано підтримку імперських одиниць для «Параметрів автомобіля» \n\n • Новий профіль Мопед \n\n • «Позиція відображення» додала нову опцію «Автоматично» \n\n • Виправлені жести для нахилу, масштабування та обертання карти</string>
@@ -5298,7 +5298,7 @@
     <string name="allow_display_on_top_description">Дозволити показ текстів мап один над одним</string>
     <string name="show_debug_info">Показати інформацію про налагодження</string>
     <string name="show_debug_info_description">Показувати графічну інформацію про розміщення кожного тексту на мапі</string>
-    <string name="map_text">Тексти мап</string>
+    <string name="map_text">Рендеринг карти</string>
     <string name="routing_attr_avoid_cobblestone_name">Уникати бруківки</string>
     <string name="routing_attr_avoid_cobblestone_description">Уникати бруківки</string>
     <string name="disable_map_layers">Вимкнути шари мапи</string>
@@ -5702,10 +5702,10 @@
     <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо протягом %1$s місяця</string>
     <string name="shared_string_road_exit">Вихід</string>
     <string name="hmd_promo">Промо HMD на %1$s місяців</string>
-    <string name="original_color_description">Кожна точка зберігає свій колір.</string>
-    <string name="original_icon_description">Кожна точка матиме власний значок.</string>
-    <string name="original_shape_description">Кожна точка зберігає власну форму.</string>
-    <string name="save_favorite_default_appearance">Застосувати зміни до наявних точок у папці чи лише до нових?</string>
+    <string name="original_color_description">Кожна точка збереже свій власний колір.</string>
+    <string name="original_icon_description">Кожна точка мала б свою власну іконку.</string>
+    <string name="original_shape_description">Кожна точка зберігала б свою форму.</string>
+    <string name="save_favorite_default_appearance">Застосувати зміни до існуючих точок у папці чи лише до нових?</string>
     <string name="apply_to_all_points">Застосувати до всіх точок</string>
     <string name="show_mercator_grids_description">Показувати сітку в кілометрах Меркатора замість WGS84 або UTM</string>
     <string name="show_dm_grids_description">Показувати сітку в градусах і хвилинах замість градусів або DMS</string>
@@ -5723,7 +5723,7 @@
     <string name="show_image_previews">Показати попередній перегляд зображення</string>
     <string name="layer_coordinates_grid">Координатна сітка</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Дія для керування видимістю сітки координат на карті.</string>
-    <string name="prime_meridian">Початковий меридіан</string>
+    <string name="prime_meridian">Нульовий меридіан</string>
     <string name="meridian_180">180-й меридіан</string>
     <string name="equator">Екватор</string>
     <string name="shared_string_offline_only">Тільки офлайн</string>
@@ -5760,4 +5760,7 @@
     <string name="save_to_device_error">Помилка збереження на пристрої</string>
     <string name="save_to_device">Зберегти на пристрій</string>
     <string name="travel_guides">Путівника</string>
+    <string name="show_debug_tile">Показати інформацію про плитку</string>
+    <string name="show_debug_tile_description">Відображати інформацію про символи карти кожної плитки</string>
+    <string name="show_symbols_debug_info">Показати інформацію про налагодження символів</string>
 </resources>

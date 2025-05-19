@@ -4243,7 +4243,7 @@
     <string name="location_source">Kilde til placering</string>
     <string name="shared_string_shape">Form</string>
     <string name="default_appearance_desc">Standard farve, ikon og form vil gælde for de tilføjede favoritpunkter i gruppen.</string>
-    <string name="default_appearance">Standardudseende</string>
+    <string name="default_appearance">Standard-udseende</string>
     <string name="edit_category">Rediger kategori</string>
     <string name="stop_and_exit">Stop og afslut</string>
     <string name="shared_string_complete">fuldført</string>
@@ -4747,7 +4747,7 @@
     <string name="shared_string_delete_file">Slet fil</string>
     <string name="delete_cloud_version">Slet cloud-version</string>
     <string name="shared_string_in_progress">I gang</string>
-    <string name="shared_string_original">Oprindelig</string>
+    <string name="shared_string_original">Original</string>
     <string name="local_version_do_not_exist">Der findes ingen lokal version.</string>
     <string name="movement_speed">Bevægelseshastighed</string>
     <string name="simulation_position_description">Vælg en sporfil, der skal bruges som kilde til bevægelse af en placering.</string>
@@ -5315,7 +5315,7 @@
     <string name="routing_attr_avoid_cobblestone_description">Undgå brosten</string>
     <string name="show_debug_info">Vis fejlfindingsinformation</string>
     <string name="show_debug_info_description">Vis grafisk info om placering af hver korttekst</string>
-    <string name="map_text">Korttekster</string>
+    <string name="map_text">Kortgengivelse</string>
     <string name="routing_attr_avoid_cobblestone_name">Undgå brosten</string>
     <string name="track_vertical_exaggeration_description">Ved at ændre skalaværdien kan du ændre 3D-sporets højde.</string>
     <string name="steps_per_minute_unit">SPM</string>
@@ -5722,9 +5722,9 @@
     <string name="hmd_promo_description">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief etc. i %1$s måneder</string>
     <string name="shared_string_road_exit">Afkørsel</string>
     <string name="hmd_promo">HMD Promo i %1$s måneder</string>
-    <string name="original_color_description">Hvert punkt beholder sin egen farve.</string>
-    <string name="original_icon_description">Hvert punkt beholder sit eget ikon.</string>
-    <string name="original_shape_description">Hvert punkt beholder sin egen form.</string>
+    <string name="original_color_description">Hvert punkt ville beholde sin egen farve.</string>
+    <string name="original_icon_description">Hvert punkt ville beholde sit eget ikon.</string>
+    <string name="original_shape_description">Hvert punkt ville beholde sin egen form.</string>
     <string name="apply_to_all_points">Anvend på alle punkter</string>
     <string name="save_favorite_default_appearance">Anvend ændringer på de eksisterende punkter i mappen eller kun på de nye?</string>
     <string name="show_mercator_grids_description">Vis gradnet i Mercator km i stedet for WGS84 eller UTM</string>
@@ -5744,7 +5744,7 @@
     <string name="quick_action_showhide_coordinates_grid_descr">Handling til at styre synligheden af koordinatnettet på kortet.</string>
     <string name="layer_coordinates_grid">Koordinatnet</string>
     <string name="release_5_0">• Opdag de bedst bedømte interessepunkter med den nye Udforsk-tilstand\n\n • Alle OSM-ruter, nu søgbare! Vandring, cykling, MTB og meget mere\n\n •Nyt navigations modul kombinerer svingpil og navigationsinstruktioner\n\n • Modul med aktuel ruteinfo: viser ETA, ankomsttid og afstand\n\n • Vælg skiløjper og MTB-spor på kortet for at få detaljerede oplysninger\n\n • Mulighed for at vælge modulstørrelse for venstre og højre panel\n\n • Tilføjet koordinatnet med geografiske koordinater\n\n • Tilføjet mulighed for at tilpasse standardudseendet for favoritgrupper\n\n • Android Auto: se ETA og afstand til næste rutepunkt; bynavne vises nu i søgeresultater\n\n • Fremtrædende bjergtoppe kan nu findes via kort og søgning\n\n • Bjergtoppes højde i meter\n\n • Tilføjet: Klipper og klatreområder på kortet\n\n • Adressesøgning i USA er blevet forbedret\n\n • Tilføjet hebraisk TTS til navigation</string>
-    <string name="prime_meridian">Nulmeridianen</string>
+    <string name="prime_meridian">Førstemeridian</string>
     <string name="meridian_180">180. længdekreds</string>
     <string name="equator">Ækvator</string>
     <string name="shared_string_offline_only">Kun offline</string>
@@ -5766,10 +5766,10 @@
     <string name="wikidata">Wikidata</string>
     <string name="routing_attr_allow_ferries_description">Tillad ruteberegning via færgeruter</string>
     <string name="routing_attr_allow_ferries_name">Tillad færger</string>
-    <string name="grid_color">Netfarve</string>
+    <string name="grid_color">Gitterfarve</string>
     <string name="shared_string_edges">Kanter</string>
     <string name="labels_position">Etiketters position</string>
-    <string name="customize_grid_color">Tilpas farve på net</string>
+    <string name="customize_grid_color">Tilpas gitterfarve</string>
     <string name="route_members">Medlemmer</string>
     <string name="multipoligon_related">Beslægtet</string>
     <string name="route_part_of">Del af</string>
@@ -5781,4 +5781,7 @@
     <string name="saved_to_device">Gemt på enhed</string>
     <string name="save_to_device_error">Gemt på enhed fejl</string>
     <string name="travel_guides">Guider</string>
+    <string name="show_debug_tile">Vis information om kortflise</string>
+    <string name="show_debug_tile_description">Vis information om kortsymboler for hver kortflise</string>
+    <string name="show_symbols_debug_info">Vis symboler fejlfindinginfo</string>
 </resources>

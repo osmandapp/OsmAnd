@@ -1,45 +1,16 @@
 package net.osmand.search.core;
 
 
+
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS;
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
+import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
+import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
-
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.OsmAndCollator;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapAddressReaderAdapter;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
-import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.CommonWords;
-import net.osmand.data.Amenity;
-import net.osmand.data.Building;
-import net.osmand.data.City;
-import net.osmand.data.City.CityType;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.data.Street;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
-import net.osmand.osm.PoiType;
-import net.osmand.search.SearchUICore.SearchResultMatcher;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
-import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
-import net.osmand.util.*;
-import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -62,6 +33,42 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapAddressReaderAdapter;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
+import net.osmand.binary.CommonWords;
+import net.osmand.data.Amenity;
+import net.osmand.data.Building;
+import net.osmand.data.City;
+import net.osmand.data.City.CityType;
+import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
+import net.osmand.data.Street;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
+import net.osmand.search.SearchUICore.SearchResultMatcher;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
+import net.osmand.util.Algorithms;
+import net.osmand.util.ArabicNormalizer;
+import net.osmand.util.GeoParsedPoint;
+import net.osmand.util.GeoPointParserUtil;
+import net.osmand.util.LocationParser;
+import net.osmand.util.LocationParser.ParsedOpenLocationCode;
+import net.osmand.util.MapUtils;
 
 public class SearchCoreFactory {
 
@@ -655,10 +662,20 @@ public class SearchCoreFactory {
 						sr.localeName = object.getName(phrase.getSettings().getLang(),
 								phrase.getSettings().isTransliterate());
 					}
-					if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)
-							&& !nm.matches(object.getAdditionalInfoValues(false))) {
-						return false;
+					if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)) {
+						for(String k : object.getAdditionalInfoKeys()) {
+							if ((isTagIndexedForSearchAsName(k)
+									|| isTagIndexedForSearchAsId(k))
+									&& nm.matches(object.getAdditionalInfo(k))) {
+								sr.alternateName = object.getAdditionalInfo(k);
+								break;
+							}
+						}
+						if (Algorithms.isEmpty(sr.alternateName)) {
+							return false;
+						}
 					}
+					
 					sr.object = object;
 					sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
 					sr.file = currentFile[0];
@@ -672,8 +689,8 @@ public class SearchCoreFactory {
 						sr.priorityDistance = 1;
 					}
 					sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
-					sr.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					phrase.countUnknownWordsMatchMainResult(sr);
+					sr.cityName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					sr.objectType = ObjectType.POI;
 					resultMatcher.publish(sr);
 					ids.add(poiID);
@@ -1123,6 +1140,7 @@ public class SearchCoreFactory {
 						SearchResult res = new SearchResult(phrase);
 						res.localeName = match.translatedValue;
 						res.object = new TopIndexFilter(match.subType, types, match.value);
+						res.file = r;
 						addPoiTypeResult(phrase, resultMatcher, false, null, res);
 						HashSet<String> values = matchedValues.computeIfAbsent(match.subType.name, s -> new HashSet<>());
 						values.add(match.value);
@@ -1367,20 +1385,21 @@ public class SearchCoreFactory {
 						if (ns.matches(res.localeName) || ns.matches(res.otherNames)) {
 							phrase.countUnknownWordsMatchMainResult(res, countExtraWords);
 						} else {
+							// Use ref https://github.com/osmandapp/OsmAnd/issues/8319
 							String ref = object.getTagContent(Amenity.REF, null);
 							if (ref == null || !ns.matches(ref)) {
 								return false;
 							} else {
-								phrase.countUnknownWordsMatch(res, ref, null, countExtraWords);
+								phrase.countUnknownWordsMatchMainResult(res, ref, countExtraWords);
 								res.localeName += " " + ref;
 							}
 						}
 					} else {
-						phrase.countUnknownWordsMatch(res, "", null, countExtraWords);
+						phrase.countUnknownWordsMatchMainResult(res, countExtraWords);
 					}
 
 					res.object = object;
-					res.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
+					res.cityName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					res.preferredZoom = PREFERRED_POI_ZOOM;
 					res.file = selected;
 					res.location = object.getLocation();
@@ -1967,8 +1986,7 @@ public class SearchCoreFactory {
 				p.isLastWord(ObjectType.VILLAGE);
 	}
 
-	public static SearchResult createSearchResult(Amenity amenity, SearchPhrase phrase,
-			MapPoiTypes poiTypes) {
+	public static SearchResult createSearchResult(Amenity amenity, SearchPhrase phrase, MapPoiTypes poiTypes) {
 		SearchResult result = new SearchResult(phrase);
 		result.object = amenity;
 		result.objectType = POI;
@@ -1977,7 +1995,9 @@ public class SearchCoreFactory {
 
 		SearchSettings settings = phrase.getSettings();
 		result.otherNames = amenity.getOtherNames(true);
-		result.alternateName = amenity.getCityFromTagGroups(settings.getLang());
+		result.cityName = amenity.getCityFromTagGroups(settings.getLang());
+		// we can calculate alternate name possibly
+		result.alternateName = result.cityName;
 		result.localeName = amenity.getName(settings.getLang(), settings.isTransliterate());
 		if (Algorithms.isEmpty(result.localeName)) {
 			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());

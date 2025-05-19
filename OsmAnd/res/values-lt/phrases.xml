@@ -2592,4 +2592,11 @@
     <string name="poi_state_abandoned">Būsena: apleista</string>
     <string name="poi_state_active">Būsena: aktyvi</string>
     <string name="poi_state_detour">Būsena: apylanka</string>
+    <string name="poi_archaeological_site">Archeologinė vietovė</string>
+    <string name="poi_place_of_worship">Maldos vieta</string>
+    <string name="poi_historic_manor">Istorinis dvaras</string>
+    <string name="poi_townhall">Rotušė</string>
+    <string name="poi_highway_crossing">Kelio perėja</string>
+    <string name="poi_cross">Kryžius</string>
+    <string name="poi_property_management">Nekilnojamojo turto valdymo biuras</string>
 </resources>

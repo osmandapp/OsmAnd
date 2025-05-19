@@ -5356,7 +5356,7 @@
     <string name="no_assigned_keys">Žádné přiřazené klávesy</string>
     <string name="action_icon">Ikona akce</string>
     <string name="assigned_keys">Přiřazené klávesy</string>
-    <string name="map_text">Texty na mapě</string>
+    <string name="map_text">Vykreslení mapy</string>
     <string name="top">Nahoře</string>
     <string name="bottom">Dole</string>
     <string name="title_3d_track">3D stopa</string>
@@ -5714,9 +5714,9 @@
     <string name="choose_location">Vybrat polohu</string>
     <string name="show_image_previews">Zobrazit náhledy obrázků</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Akce pro ovládání viditelnosti souřadnicové sítě na mapě.</string>
-    <string name="layer_coordinates_grid">Souřadnicová síť</string>
+    <string name="layer_coordinates_grid">Mřížka souřadnic</string>
     <string name="release_5_0">• Objevte nejlépe hodnocené body zájmu pomocí nového režimu Prozkoumat\n\n • Všechny trasy OSM, nyní s možností vyhledávání! Pěší turistika, cyklistika, MTB a další\n\n • Nový navigační widget kombinuje směrovou šipku a navigační pokyny\n\n • Widget s informacemi o aktuální trase: zobrazuje odhadovaný čas, čas příjezdu a vzdálenost\n\n • Výběr lyžařských sjezdovek a MTB tras na mapě pro podrobné informace\n\n • Možnost výběru velikosti widgetu pro levý a pravý panel\n\n • Přidána mřížka souřadnic se zeměpisnými souřadnicemi\n\n • Přidána možnost přizpůsobit výchozí vzhled oblíbených skupin\n\n • Android Auto: zobrazení odhadovaného času a vzdálenosti k dalšímu bodu trasy; ve výsledcích vyhledávání se nyní zobrazují názvy měst\n • Významné vrcholy jsou nyní objevitelné prostřednictvím mapy a vyhledávání\n\n • Výšky horských vrcholů ve stopách (ft)\n\n • Přidáno: skalní útvary a horolezecké oblasti na mapě\n\n • Vylepšeno vyhledávání adres v USA\n\n • Přidáno hebrejské TTS pro navigaci</string>
-    <string name="prime_meridian">Nultý poledník</string>
+    <string name="prime_meridian">Hlavní poledník</string>
     <string name="equator">Rovník</string>
     <string name="meridian_180">180. poledník</string>
     <string name="shared_string_offline_only">Pouze offline</string>
@@ -5740,8 +5740,8 @@
     <string name="routing_attr_allow_ferries_description">Povolit plánování trasy s trajekty</string>
     <string name="grid_color">Barva mřížky</string>
     <string name="shared_string_edges">Okraje</string>
-    <string name="labels_position">Umístění štítků</string>
-    <string name="customize_grid_color">Nastavení barvy mřížky</string>
+    <string name="labels_position">Pozice štítků</string>
+    <string name="customize_grid_color">Přizpůsobení barvy mřížky</string>
     <string name="route_members">Členové</string>
     <string name="multipoligon_related">Související</string>
     <string name="route_part_of">Součást</string>
@@ -5752,5 +5752,8 @@
     <string name="saved_to_device">Uloženo do zařízení</string>
     <string name="save_to_device">Uložit do zařízení</string>
     <string name="save_to_device_error">Chyba při ukládání do zařízení</string>
-    <string name="travel_guides">Návody</string>
+    <string name="travel_guides">Průvodci</string>
+    <string name="show_debug_tile">Zobrazit informace o dlaždicích</string>
+    <string name="show_debug_tile_description">Zobrazení informací o mapových symbolech jednotlivých dlaždic</string>
+    <string name="show_symbols_debug_info">Zobrazovat informace o ladění symbolů</string>
 </resources>

@@ -5617,7 +5617,10 @@
     <string name="msg_gpx_waypoints_copied_to_favorites">Puntos GPX (%1$d) copiados a favoritos.</string>
     <string name="msg_favorites_skipped_as_existing">Puntos favoritos (%1$d) omitidos como ya existentes.</string>
     <string name="saved_to_device">Guardado en el dispositivo</string>
-    <string name="save_to_device_error">Guardar el error del dispositivo</string>
+    <string name="save_to_device_error">Guardar el error en el dispositivo</string>
     <string name="save_to_device">Guardar en el dispositivo</string>
     <string name="travel_guides">Guías</string>
+    <string name="show_debug_tile_description">Muestra información sobre los símbolos de mapa de cada tesela</string>
+    <string name="show_symbols_debug_info">Mostrar información de los símbolos de depuración</string>
+    <string name="show_debug_tile">Mostrar información de la tesela</string>
 </resources>

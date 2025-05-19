@@ -143,9 +143,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_8_03 = 4803;
 	public static final int VERSION_5_0_00 = 5000;
 	public static final int VERSION_5_0_01 = 5001;
-	public static final int VERSION_5_0_02 = 5002;
+	// 5005 - (Resend user purchases)
+	public static final int VERSION_5_0_05 = 5005;
 
-	public static final int LAST_APP_VERSION = VERSION_5_0_01;
+	public static final int LAST_APP_VERSION = VERSION_5_0_05;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -284,7 +285,7 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_5_0_01) {
 					migrateSideWidgetsSizePrefToSmall(settings);
 				}
-				if (prevAppVersion < VERSION_5_0_02) {
+				if (prevAppVersion < VERSION_5_0_05) {
 					settings.BILLING_PURCHASE_TOKENS_SENT.set("");
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();

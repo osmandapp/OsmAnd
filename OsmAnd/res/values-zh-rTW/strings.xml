@@ -5269,7 +5269,7 @@
     <string name="allow_display_on_top_description">允許在彼此之上顯示地圖文字</string>
     <string name="show_debug_info">顯示除錯資訊</string>
     <string name="show_debug_info_description">顯示關於每個地圖文字位置的圖形資訊</string>
-    <string name="map_text">地圖文字</string>
+    <string name="map_text">地圖呈現</string>
     <string name="routing_attr_avoid_cobblestone_name">避免鵝卵石</string>
     <string name="routing_attr_avoid_cobblestone_description">避免鵝卵石</string>
     <string name="steps_per_minute_unit">步數每分鐘</string>
@@ -5733,4 +5733,7 @@
     <string name="save_to_device_error">儲存到裝置時發生錯誤</string>
     <string name="save_to_device">儲存到裝置</string>
     <string name="travel_guides">指南</string>
+    <string name="show_debug_tile_description">顯示每個圖磚的地圖符號資訊</string>
+    <string name="show_symbols_debug_info">顯示符號除錯資訊</string>
+    <string name="show_debug_tile">顯示圖磚資訊</string>
 </resources>

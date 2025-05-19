@@ -3392,7 +3392,7 @@
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Γρήγορη ενέργεια</string>
     <string name="measure_distance_item">Μέτρηση απόστασης</string>
-    <string name="travel_item">Ταξίδια (Βικιταξίδια και βικιπαίδεια)</string>
+    <string name="travel_item">Ταξίδια (Βικιταξίδια και Βικιπαίδεια)</string>
     <string name="map_markers_item">Δείκτες χάρτη</string>
     <string name="favorites_item">Αγαπημένα</string>
     <string name="subscription_osmandlive_item">Συνδρομή - OsmAnd Live</string>
@@ -4584,4 +4584,9 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="rendering_attr_alpineHiking_description">Τύποι ταξινόμησης δυσκολίας για τις διαδρομές.</string>
     <string name="wiki_around">Κοντινά δημοφιλή μέρη</string>
+    <string name="travel_route_types">Τύποι διαδρομών</string>
+    <string name="travel_routes">Διαδρομές ταξιδιών</string>
+    <string name="travel_guides">Οδηγοί</string>
+    <string name="travel_topics">Θέματα ταξιδιών</string>
+    <string name="clear_all_history">Καθαρισμός όλου του ιστορικού</string>
 </resources>

@@ -4680,7 +4680,7 @@
     <string name="shared_string_delete_file">Избриши датотеку</string>
     <string name="local_version_do_not_exist">Није присутно местно издање.</string>
     <string name="shared_string_in_progress">У току</string>
-    <string name="shared_string_original">Изворно</string>
+    <string name="shared_string_original">Оригинал</string>
     <string name="movement_speed">Брзина кретања</string>
     <string name="shared_string_inches">инчи</string>
     <string name="x_axis">X-осовина</string>
@@ -5276,7 +5276,7 @@
     <string name="allow_display_on_top_description">Дозволи преклапање натписа на карти</string>
     <string name="show_debug_info">Прикажи податке за отклањање грешака</string>
     <string name="show_debug_info_description">Приказ сликовне податке о положају сваког натписа на карти</string>
-    <string name="map_text">Натписи карте</string>
+    <string name="map_text">Приказивање мапе</string>
     <string name="routing_attr_avoid_cobblestone_name">Избегавај калдрму</string>
     <string name="routing_attr_avoid_cobblestone_description">Избегавање калдрме</string>
     <string name="steps_per_minute_unit">КПМ</string>
@@ -5684,7 +5684,7 @@
     <string name="original_shape_description">Свака тачка би задржала свој облик.</string>
     <string name="apply_to_all_points">Примени на све тачке</string>
     <string name="original_color_description">Свака тачка би задржала своју боју.</string>
-    <string name="save_favorite_default_appearance">Да ли применити измене на постојеће тачке у фасцикли или само на нове?</string>
+    <string name="save_favorite_default_appearance">Да ли применити измене на постојеће тачке у фолдеру или само на нове?</string>
     <string name="show_mercator_grids">Користи Меркатор уместо WGS84 или UTM</string>
     <string name="show_mercator_grids_description">Прикажи мрежу у Меркатор km уместо WGS84 или UTM</string>
     <string name="show_dms_grids">Користи DMS уместо степени</string>
@@ -5739,4 +5739,7 @@
     <string name="saved_to_device">Сачувано на уређају</string>
     <string name="save_to_device_error">Грешка при упису на уређају</string>
     <string name="travel_guides">Упутства</string>
+    <string name="show_debug_tile">Прикажи информације о плочицама</string>
+    <string name="show_debug_tile_description">Прикажите информације о симболима мапе сваке плочице</string>
+    <string name="show_symbols_debug_info">Прикажи информације о отклањању грешака у симболима</string>
 </resources>

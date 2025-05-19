@@ -826,25 +826,32 @@ public class MapPoiTypes {
 		return null;
 	}
 
-	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
-		PoiType add = null;
-		for (int i = 0; i < categories.size(); i++) {
-			PoiCategory pc = categories.get(i);
-			add = getPoiAdditionalByKey(pc, name);
+	public AbstractPoiType getPoiAdditionalType(PoiCategory category, String name) {
+		PoiType add = getPoiAdditionalByKey(category, name);
+		if (add != null) {
+			return add;
+		}
+		for (PoiFilter pf : category.getPoiFilters()) {
+			add = getPoiAdditionalByKey(pf, name);
 			if (add != null) {
 				return add;
 			}
-			for (PoiFilter pf : pc.getPoiFilters()) {
-				add = getPoiAdditionalByKey(pf, name);
-				if (add != null) {
-					return add;
-				}
+		}
+		for (PoiType p : category.getPoiTypes()) {
+			add = getPoiAdditionalByKey(p, name);
+			if (add != null) {
+				return add;
 			}
-			for (PoiType p : pc.getPoiTypes()) {
-				add = getPoiAdditionalByKey(p, name);
-				if (add != null) {
-					return add;
-				}
+		}
+		return null;
+	}
+
+	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
+		for (int i = 0; i < categories.size(); i++) {
+			PoiCategory pc = categories.get(i);
+			AbstractPoiType add = getPoiAdditionalType(pc, name);
+			if (add != null) {
+				return add;
 			}
 		}
 		return null;

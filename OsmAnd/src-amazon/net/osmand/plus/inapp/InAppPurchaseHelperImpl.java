@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.util.IapManager;
 import net.osmand.plus.inapp.util.IapPurchasingListener;
@@ -329,12 +330,20 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 					if (fullVersion != null && getReceipt(fullVersion.getSku()) != null) {
 						ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+					} else if (fullVersion != null) {
+						for (InAppStateHolder holder : inAppStateMap.values()) {
+							if (holder.linkedPurchase == fullVersion) {
+								ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+								break;
+							}
+						}
 					}
 
 					// Do we have the live updates?
 					boolean subscribedToLiveUpdates = false;
 					boolean subscribedToOsmAndPro = false;
 					boolean subscribedToMaps = false;
+					InAppSubscription mapsSubscription = null;
 					Map<String, Receipt> subscriptionPurchases = new HashMap<>();
 					for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 						Receipt receipt = getReceipt(s.getSku());
@@ -350,6 +359,17 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							}
 							if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
 								subscribedToMaps = true;
+							}
+						}
+						if (purchases.isMapsSubscription(s)) {
+							mapsSubscription = s;
+						}
+					}
+					if (!subscribedToMaps) {
+						for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+							if (holder.linkedSubscription == mapsSubscription && holder.state == SubscriptionState.ACTIVE) {
+								subscribedToMaps = true;
+								break;
 							}
 						}
 					}

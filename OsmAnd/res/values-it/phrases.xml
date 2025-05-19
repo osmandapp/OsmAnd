@@ -4672,4 +4672,16 @@
     <string name="poi_steps">Scale</string>
     <string name="poi_area_highway_steps">Scalinata</string>
     <string name="poi_route_activity_type_motorboat">Motoscafo</string>
+    <string name="poi_office_university">Ufficio universitario</string>
+    <string name="poi_moving_company">Azienda di traslochi</string>
+    <string name="poi_bail_bond_agent">Agente per la cauzione</string>
+    <string name="poi_private_investigator">Investigatore privato</string>
+    <string name="poi_translator">Traduttore</string>
+    <string name="poi_chamber">Camera</string>
+    <string name="poi_politician">Ufficio di un politico</string>
+    <string name="poi_adoption_agency">Agenzia per adozioni</string>
+    <string name="poi_airline">Ufficio compagnia aerea</string>
+    <string name="poi_graphic_design">Ufficio di grafica</string>
+    <string name="poi_international_organization">Organizzazione internazionale</string>
+    <string name="poi_transport">Ufficio trasporti</string>
 </resources>

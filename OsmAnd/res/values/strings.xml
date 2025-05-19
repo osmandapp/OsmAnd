@@ -12,6 +12,8 @@
 -->
 
     <string name="unit_of_temperature_description">Selected units will be applied to all temperature related data in the current profile.</string>
+    <string name="deactivated_map">Deactivated map</string>
+    <string name="suggest_activate_map_msg">%1$s map is deactivated,\nactivate to view this area.</string>
     <string name="travel_guides">Guides</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favorites.</string>
     <string name="msg_favorites_skipped_as_existing">Favorite points (%1$d) were skipped as already existing.</string>
@@ -500,9 +502,11 @@ You will be able to pair this scanner again at any time.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
+    <string name="show_debug_tile">Show tile information</string>
+    <string name="show_debug_tile_description">Display information about map symbols of each tile</string>
     <string name="show_debug_info">Show debug information</string>
     <string name="show_debug_info_description">Display graphical info about placement of each map text</string>
-    <string name="map_text">Map texts</string>
+    <string name="map_text">Map Rendering</string>
     <string name="show_grids">Show map grid</string>
     <string name="show_grids_description">Allow displaying grid over the map</string>
     <string name="show_utm_grids">Use UTM instead of WGS84</string>
@@ -6109,4 +6113,5 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
+    <string name="show_symbols_debug_info">Show symbols debug info</string>
 </resources>

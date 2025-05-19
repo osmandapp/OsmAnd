@@ -145,7 +145,7 @@
     <string name="share_osm_edits_subject">OSM-redaktoj kunhavataj per OsmAnd</string>
     <string name="lang_nds">Platgermana</string>
     <string name="lang_mk">Makedona</string>
-    <string name="lang_fy">Okcidentfrisa</string>
+    <string name="lang_fy">Okcident-frisa</string>
     <string name="lang_als">Albana (Toska)</string>
     <string name="read_more">Legi pli</string>
     <string name="whats_new">Kio estas nova en</string>
@@ -284,7 +284,7 @@
     <string name="lang_ga">Irlanda</string>
     <string name="lang_ku">Kurda</string>
     <string name="lang_ta">Tamila</string>
-    <string name="lang_ml">Malajala</string>
+    <string name="lang_ml">Malajalama</string>
     <string name="lang_lb">Luksemburga</string>
     <string name="lang_os">Oseta</string>
     <string name="lang_nb">Norvega Bokmål</string>
@@ -679,7 +679,7 @@
     <string name="lang_ca">Kataluna</string>
     <string name="lang_da">Dana</string>
     <string name="lang_nl">Nederlanda</string>
-    <string name="lang_fi">Suoma</string>
+    <string name="lang_fi">Finna</string>
     <string name="lang_ka">Kartvela</string>
     <string name="lang_el">Greka</string>
     <string name="lang_iw">Hebrea</string>
@@ -5280,7 +5280,7 @@
     <string name="allow_display_on_top_description">Permesi al etikedoj sur la mapo kovri unu al la alia</string>
     <string name="show_debug_info">Montri senerarigajn informojn</string>
     <string name="show_debug_info_description">Montri grafikajn informojn pri lokiĝo de ĉiu teksto sur la mapo</string>
-    <string name="map_text">Etikedoj sur la mapo</string>
+    <string name="map_text">Map-bildigado</string>
     <string name="routing_attr_avoid_cobblestone_name">Eviti rulŝtonajn kahelojn</string>
     <string name="routing_attr_avoid_cobblestone_description">Eviti ĝibajn pavimŝtonojn</string>
     <string name="gpx_approximation_geo_cpp">Surbaze de geometrio (C++) (rapide)</string>
@@ -5746,4 +5746,7 @@
     <string name="save_to_device">Konservi al aparato</string>
     <string name="saved_to_device">Konservis al aparato</string>
     <string name="travel_guides">Gvidiloj</string>
+    <string name="show_debug_tile">Montri informojn pri kahelo</string>
+    <string name="show_debug_tile_description">Montri informojn pri simboloj por ĉiu map-kahelo</string>
+    <string name="show_symbols_debug_info">Montri senerarigajn informojn pri simboloj</string>
 </resources>

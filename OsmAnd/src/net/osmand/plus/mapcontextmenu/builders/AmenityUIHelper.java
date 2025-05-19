@@ -119,31 +119,29 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
 		Map<String, Object> filteredInfo = additionalInfo.getFilteredLocalizedInfo();
-		if (!poiCategory.isWiki()) {
-			for (Entry<String, Object> entry : filteredInfo.entrySet()) {
-				String key = entry.getKey();
-				Object value = entry.getValue();
-				if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
-						|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
-					continue;
-				}
-				if (key.equals(NAME)) {
-					continue; // will be added in buildNamesRow
-				}
-				AmenityInfoRow infoRow = null;
-				if (value instanceof String strValue) {
-					infoRow = createAmenityInfoRow(context, key, strValue, null);
-				} else if (value != null) {
-					infoRow = createLocalizedAmenityInfoRow(context, key, value);
-				}
-				if (infoRow != null) {
-					if (lastBuiltRowIsDescription) {
-						descriptions.add(infoRow);
-					} else if (Amenity.CUISINE.equals(key)) {
-						cuisineRow = infoRow;
-					} else if (poiType == null) {
-						infoRows.add(infoRow);
-					}
+		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
+					|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
+				continue;
+			}
+			if (key.equals(NAME)) {
+				continue; // will be added in buildNamesRow
+			}
+			AmenityInfoRow infoRow = null;
+			if (value instanceof String strValue) {
+				infoRow = createAmenityInfoRow(context, key, strValue, null);
+			} else if (value != null) {
+				infoRow = createLocalizedAmenityInfoRow(context, key, value);
+			}
+			if (infoRow != null) {
+				if (lastBuiltRowIsDescription) {
+					descriptions.add(infoRow);
+				} else if (Amenity.CUISINE.equals(key)) {
+					cuisineRow = infoRow;
+				} else if (poiType == null) {
+					infoRows.add(infoRow);
 				}
 			}
 		}
@@ -160,7 +158,10 @@ public class AmenityUIHelper extends MenuBuilder {
 					StringBuilder sb = new StringBuilder();
 					List<String> records = new ArrayList<>(Arrays.asList(e.getValue().split(Amenity.SEPARATOR)));
 					for (String record : records) {
-						AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(record);
+						AbstractPoiType pt = poiTypes.getPoiAdditionalType(poiCategory, record);
+						if (pt == null) {
+							pt = poiTypes.getAnyPoiAdditionalTypeByKey(record);
+						}
 						categoryTypes.add((PoiType) pt);
 						if (sb.length() > 0) {
 							sb.append(" • ");
@@ -476,9 +477,6 @@ public class AmenityUIHelper extends MenuBuilder {
 					vl = pType.getTranslation();
 				} else {
 					isText = true;
-					if (!pType.hasValidTranslation()) {
-						return null; // do not display internal and/or non-translatable tags
-					}
 					isDescription = iconId == R.drawable.ic_action_note_dark;
 					textPrefix = pType.getTranslation();
 					if (needIntFormatting) {
@@ -509,7 +507,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 				}
 			} else {
-				return null; // do not display internal and/or non-translatable tags
+				textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 			}
 		}
 
@@ -967,20 +965,21 @@ public class AmenityUIHelper extends MenuBuilder {
 			TextViewEx button = buildButtonInCollapsableView(context, false, false);
 			String name = pt.getTranslation();
 			button.setText(name);
+			PoiCategory category = pt.getCategory() != null ? pt.getCategory() : type;
 
 			button.setOnClickListener(v -> {
-				if (type != null) {
-					PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + type.getKeyName());
+				if (category != null) {
+					PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + category.getKeyName());
 					if (filter != null) {
 						filter.clearFilter();
 						if (poiAdditional) {
-							filter.setTypeToAccept(type, true);
+							filter.setTypeToAccept(category, true);
 							filter.updateTypesToAccept(pt);
 							filter.setFilterByName(pt.getKeyName().replace('_', ':').toLowerCase());
 						} else {
 							LinkedHashSet<String> accept = new LinkedHashSet<>();
 							accept.add(pt.getKeyName());
-							filter.selectSubTypesToAccept(type, accept);
+							filter.selectSubTypesToAccept(category, accept);
 						}
 						getMapActivity().getFragmentsHelper().showQuickSearch(filter);
 					}
@@ -1023,7 +1022,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		Set<String> result = new HashSet<>();
 		for (String tag : tags) {
 			String[] parts = tag.split(":");
-			String locale = parts.length > 1 ? parts[1] : null;
+			String locale = parts.length > 1 ? parts[1] : "en";
 			if (locale != null) {
 				result.add(locale);
 			}
