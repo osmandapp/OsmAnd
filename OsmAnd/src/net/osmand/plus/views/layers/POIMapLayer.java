@@ -250,9 +250,11 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				Set<Amenity> displayedPoints = new HashSet<>();
 				int i = 0;
 				for (Amenity amenity : res) {
-					displayedPoints.add(amenity);
-					if (i++ > TOP_PLACES_LIMIT) {
-						break;
+					if (shouldDraw(amenity, zoom)) {
+						displayedPoints.add(amenity);
+						if (i++ > TOP_PLACES_LIMIT) {
+							break;
+						}
 					}
 				}
 				float minTileX = (float) MapUtils.getTileNumberX(zoom, latLonBounds.left);
@@ -274,6 +276,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 						i = 0;
 						for (Amenity amenity : res) {
+							if (!shouldDraw(amenity, zoom)) {
+								continue;
+							}
 							LatLon latLon = amenity.getLocation();
 							if (extTileLatLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
 									latLon.getLongitude(), latLon.getLatitude())) {
@@ -638,7 +643,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return false;
 	}
 
-	private boolean shouldDraw(@NonNull RotatedTileBox tileBox, @NonNull Amenity amenity) {
+	private boolean shouldDraw(@NonNull Amenity amenity, int zoom) {
 		if (customObjectsDelegate != null) {
 			return true;
 		} else {
@@ -646,15 +651,15 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					|| ROUTE_ARTICLE.equals(amenity.getSubType());
 			boolean routeTrack = amenity.isRouteTrack();
 			if (routeArticle) {
-				return tileBox.getZoom() >= START_ZOOM;
+				return zoom >= START_ZOOM;
 			} else if (routeTrack) {
 				if (travelRendererHelper.getRouteTracksProperty().get()) {
-					return tileBox.getZoom() >= START_ZOOM && tileBox.getZoom() <= END_ZOOM_ROUTE_TRACK;
+					return zoom >= START_ZOOM && zoom <= END_ZOOM_ROUTE_TRACK;
 				} else {
-					return tileBox.getZoom() >= START_ZOOM_ROUTE_TRACK;
+					return zoom >= START_ZOOM_ROUTE_TRACK;
 				}
 			} else {
-				return tileBox.getZoom() >= START_ZOOM;
+				return zoom >= START_ZOOM;
 			}
 		}
 	}
@@ -780,7 +785,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		List<LatLon> smallObjectsLatLon = new ArrayList<>();
 		if (shouldDraw(zoom)) {
 			data.queryNewData(tileBox);
-			List<Amenity> objects = data.getResults();
+			List<Amenity> objects = data.getDisplayedResults();
 			updateVisiblePlaces(data.getDisplayedResults(), tileBox.getLatLonBounds());
 			if (objects != null) {
 				float textScale = getTextScale();
@@ -788,25 +793,23 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 				WaypointHelper wph = app.getWaypointHelper();
 				for (Amenity o : objects) {
-					if (shouldDraw(tileBox, o)) {
-						PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
-								getContext(), getColor(o), true);
-						pointImageDrawable.setAlpha(0.8f);
-						LatLon latLon = o.getLocation();
-						float x = tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-						float y = tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
+							getContext(), getColor(o), true);
+					pointImageDrawable.setAlpha(0.8f);
+					LatLon latLon = o.getLocation();
+					float x = tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					float y = tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 
-						if (tileBox.containsPoint(x, y, iconSize)) {
-							boolean intersects = intersects(boundIntersections, x, y, iconSize, iconSize);
-							boolean shouldShowNearbyPoi = app.getSettings().SHOW_NEARBY_POI.get()
-									&& routingHelper.isFollowingMode();
-							if (intersects || shouldShowNearbyPoi && !wph.isAmenityNoPassed(o)) {
-								pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
-								smallObjectsLatLon.add(latLon);
-							} else {
-								fullObjects.add(o);
-								fullObjectsLatLon.add(latLon);
-							}
+					if (tileBox.containsPoint(x, y, iconSize)) {
+						boolean intersects = intersects(boundIntersections, x, y, iconSize, iconSize);
+						boolean shouldShowNearbyPoi = app.getSettings().SHOW_NEARBY_POI.get()
+								&& routingHelper.isFollowingMode();
+						if (intersects || shouldShowNearbyPoi && !wph.isAmenityNoPassed(o)) {
+							pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
+							smallObjectsLatLon.add(latLon);
+						} else {
+							fullObjects.add(o);
+							fullObjectsLatLon.add(latLon);
 						}
 					}
 				}
