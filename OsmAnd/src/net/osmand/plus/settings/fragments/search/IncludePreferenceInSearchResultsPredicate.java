@@ -1,12 +1,12 @@
 package net.osmand.plus.settings.fragments.search;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 
 import java.util.stream.Stream;
-
-import javax.annotation.Nullable;
 
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 
