@@ -5742,4 +5742,7 @@
     <string name="show_debug_tile">Прикажи информације о плочицама</string>
     <string name="show_debug_tile_description">Прикажите информације о симболима мапе сваке плочице</string>
     <string name="show_symbols_debug_info">Прикажи информације о отклањању грешака у симболима</string>
+    <string name="deactivated_map">Деактивирана мапа</string>
+    <string name="unit_of_temperature_description">Изабране јединице ће бити примењене на све податке везане за температуру у тренутном профилу.</string>
+    <string name="suggest_activate_map_msg">%1$s мапа је деактивирана,\nактивирајте је да бисте видели ову област.</string>
 </resources>
