@@ -36,6 +36,7 @@ import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.TemperatureUnitsMode;
 import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
@@ -66,6 +67,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
 		setupUnitOfVolumePref();
+		setupUnitOfTemperaturePref();
 		setupPreciseDistanceNumbersPref();
 
 		setupVolumeButtonsAsZoom();
@@ -232,7 +234,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 						|| routerProfile == GeneralRouter.GeneralRouterProfile.SKI;
 			}
 		}
-		ListPreferenceEx unitOfVolumePref = findPreference(settings.UNIT_OF_VOLUME.getId());
+		ListPreferenceEx unitOfVolumePref = requirePreference(settings.UNIT_OF_VOLUME.getId());
 		if (hidePref) {
 			unitOfVolumePref.setVisible(false);
 		} else {
@@ -250,6 +252,22 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			unitOfVolumePref.setDescription(R.string.unit_of_volume_description);
 			unitOfVolumePref.setIcon(getActiveIcon(R.drawable.ic_action_fuel_tank));
 		}
+	}
+
+	private void setupUnitOfTemperaturePref() {
+		ListPreferenceEx preference = requirePreference(settings.UNIT_OF_TEMPERATURE.getId());
+		TemperatureUnitsMode[] unitValues = TemperatureUnitsMode.values();
+		String[] entries = new String[unitValues.length];
+		Integer[] entryValues = new Integer[unitValues.length];
+
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = unitValues[i].toHumanString(app);
+			entryValues[i] = unitValues[i].ordinal();
+		}
+		preference.setEntries(entries);
+		preference.setEntryValues(entryValues);
+		preference.setDescription(R.string.unit_of_temperature_description);
+		preference.setIcon(getActiveIcon(R.drawable.ic_action_thermometer));
 	}
 
 	private void setupPreciseDistanceNumbersPref() {

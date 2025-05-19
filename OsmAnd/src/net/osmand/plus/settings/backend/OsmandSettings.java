@@ -44,6 +44,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.text.util.LocalePreferences;
 
 import net.osmand.IndexConstants;
 import net.osmand.Period;
@@ -81,6 +82,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
+import net.osmand.plus.plugins.weather.units.TemperatureUnit;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.render.RendererRegistry;
@@ -1177,6 +1179,25 @@ public class OsmandSettings {
 		}
 
 	}.makeProfile();
+
+	public final OsmandPreference<TemperatureUnitsMode> UNIT_OF_TEMPERATURE = new EnumStringPreference<>(this,
+			"unit_of_temperature", TemperatureUnitsMode.SYSTEM_DEFAULT, TemperatureUnitsMode.values()).makeProfile();
+
+	@NonNull
+	public TemperatureUnit getTemperatureUnit() {
+		return getTemperatureUnit(getApplicationMode());
+	}
+
+	@NonNull
+	public TemperatureUnit getTemperatureUnit(@NonNull ApplicationMode appMode) {
+		TemperatureUnitsMode unitsMode = UNIT_OF_TEMPERATURE.getModeValue(appMode);
+		if (unitsMode == TemperatureUnitsMode.SYSTEM_DEFAULT) {
+			String unit = LocalePreferences.getTemperatureUnit();
+			boolean fahrenheit = Objects.equals(unit, LocalePreferences.TemperatureUnit.FAHRENHEIT);
+			return fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
+		}
+		return Objects.requireNonNull(unitsMode.getTemperatureUnit());
+	}
 
 	// fuel tank capacity stored in litres
 	public final OsmandPreference<Float> FUEL_TANK_CAPACITY = new FloatPreference(this,
