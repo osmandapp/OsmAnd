@@ -376,28 +376,31 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 			if (vectorLinesCollection == null) {
 				drawLineBetweenLocationsOpenGl(mapRenderer, touchPointLatLon, myLocation);
 				drawFingerTouchIconsOpenGl(mapRenderer, touchPointLatLon, nightMode);
-			}
 
-			if (calculateTextPathOpenGl(mapRenderer, tileBox, touchPointLatLon, myLocation)) {
-				distance = MapUtils.getDistance(touchPointLatLon, myLocation);
+				if (calculateTextPathOpenGl(mapRenderer, tileBox, touchPointLatLon, myLocation)) {
+					distance = MapUtils.getDistance(touchPointLatLon, myLocation);
+				}
+
+				if (!Double.isNaN(distance)) {
+					String formattedDistance = OsmAndFormatter.getFormattedDistance((float) distance, app);
+					drawTextOnCenterOfPathOpenGl(formattedDistance, nightMode);
+				}
 			}
 		} else if (showTwoFingersDistance) {
 			if (vectorLinesCollection == null) {
 				drawLineBetweenLocationsOpenGl(mapRenderer, cachedFirstTouchLatLon, cachedSecondTouchLatLon);
 				drawFingerTouchIconsOpenGl(mapRenderer, cachedFirstTouchLatLon, nightMode);
 				drawFingerTouchIconsOpenGl(mapRenderer, cachedSecondTouchLatLon, nightMode);
-			}
 
-			if (calculateTextPathOpenGl(mapRenderer, tileBox, cachedFirstTouchLatLon, cachedSecondTouchLatLon)) {
-				distance = MapUtils.getDistance(cachedFirstTouchLatLon, cachedSecondTouchLatLon);
-			}
-		}
+				if (calculateTextPathOpenGl(mapRenderer, tileBox, cachedFirstTouchLatLon, cachedSecondTouchLatLon)) {
+					distance = MapUtils.getDistance(cachedFirstTouchLatLon, cachedSecondTouchLatLon);
+				}
 
-		if (!Double.isNaN(distance)) {
-			String formattedDistance = OsmAndFormatter.getFormattedDistance((float) distance, app);
-			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-			drawTextOnCenterOfPathOpenGl(formattedDistance, nightMode);
-			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+				if (!Double.isNaN(distance)) {
+					String formattedDistance = OsmAndFormatter.getFormattedDistance((float) distance, app);
+					drawTextOnCenterOfPathOpenGl(formattedDistance, nightMode);
+				}
+			}
 		}
 	}
 
