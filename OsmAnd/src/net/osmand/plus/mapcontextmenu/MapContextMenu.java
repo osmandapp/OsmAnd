@@ -18,6 +18,7 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.OnResultCallback;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -48,7 +49,6 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
-import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
@@ -346,7 +346,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (!update && isVisible()) {
 			if (thisObject == null || !thisObject.equals(object)
 					|| (thisObject instanceof Amenity amenity && !amenity.strictEquals(object))
-					|| (thisObject instanceof PlaceDetailsObject detailsObject
+					|| (thisObject instanceof BaseDetailsObject detailsObject
 					&& !detailsObject.getSyntheticAmenity().strictEquals(object))) {
 				hide();
 			} else {
@@ -973,7 +973,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				Amenity amenity = null;
 				if (object instanceof Amenity) {
 					amenity = (Amenity) object;
-				} else if (object instanceof PlaceDetailsObject detailsObject) {
+				} else if (object instanceof BaseDetailsObject detailsObject) {
 					amenity = detailsObject.getSyntheticAmenity();
 				}
 				if (amenity != null) {
@@ -1161,7 +1161,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				Object object = getObject();
 				if (object instanceof Amenity) {
 					amenity = (Amenity) object;
-				} else if (object instanceof PlaceDetailsObject detailsObject) {
+				} else if (object instanceof BaseDetailsObject detailsObject) {
 					amenity = detailsObject.getSyntheticAmenity();
 				}
 			}

@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.OsmAndFormatter;

@@ -55,9 +55,7 @@ import net.osmand.plus.resources.CheckAssetsTask.CheckAssetsListener;
 import net.osmand.plus.resources.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.router.TransportStopsRouteReader;
@@ -81,11 +79,8 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -1104,25 +1099,24 @@ public class ResourceManager {
 
 	@Nullable
 	public Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
-		PlaceDetailsObject detailsObject = null;
+		BaseDetailsObject detailsObject = null;
 		long time = System.currentTimeMillis();
 		if (object instanceof Amenity amenity) {
-			ContextMenuLayer.IContextMenuProvider provider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 			if (amenity.isContainsFullInfo()) {
-				detailsObject = new PlaceDetailsObject(amenity, provider, app.getLanguage());
+				detailsObject = new BaseDetailsObject(amenity, app.getLanguage());
 			} else {
 				LatLon latLon = amenity.getLocation();
 				BaseDetailsObject baseObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
 				if (baseObject != null) {
-					detailsObject = new PlaceDetailsObject(baseObject, provider);
+					detailsObject = new BaseDetailsObject(baseObject, app.getLanguage());
 					detailsObject.addObject(amenity);
 					detailsObject.combineData();
 				}
 			}
 		}
 
-		if (object instanceof PlaceDetailsObject) {
-			detailsObject = (PlaceDetailsObject) object;
+		if (object instanceof BaseDetailsObject) {
+			detailsObject = (BaseDetailsObject) object;
 		}
 
 		if (detailsObject == null) {
@@ -1141,7 +1135,7 @@ public class ResourceManager {
 		return detailsObject;
 	}
 
-	private static boolean copyCoordinates(@NonNull PlaceDetailsObject detailsObject,
+	private static boolean copyCoordinates(@NonNull BaseDetailsObject detailsObject,
 										   @NonNull BinaryMapDataObject mapObject) {
 		int pointsLength = mapObject.getPointsLength();
 		for (int i = 0; i < pointsLength; i++) {

@@ -127,7 +127,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private boolean showTopPlacesPreviews;
 	private PoiUIFilter topPlacesFilter;
 	private RotatedTileBox topPlacesBox;
-	private Pair<PlaceDetailsObject, Amenity> selectedTopPlace;
+	private Pair<BaseDetailsObject, Amenity> selectedTopPlace;
 	protected MapMarkersCollection selectedTopPlaceCollection;
 
 	/// cache for displayed POI
@@ -762,7 +762,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				if (contextMenu != null) {
 					if (selectedTopPlace == null && contextMenu.isVisible()) {
 						Object object = contextMenu.getObject();
-						if (object instanceof PlaceDetailsObject detailsObject) {
+						if (object instanceof BaseDetailsObject detailsObject) {
 							Amenity amenity = getSelectedTopPlace(detailsObject);
 							if (amenity != null) {
 								updateSelectedTopPlace(Pair.create(detailsObject, amenity));
@@ -962,7 +962,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public Amenity getAmenity(@Nullable Object object) {
 		if (object instanceof Amenity amenity) {
 			return amenity;
-		} else if (object instanceof PlaceDetailsObject detailsObject) {
+		} else if (object instanceof BaseDetailsObject detailsObject) {
 			return detailsObject.getSyntheticAmenity();
 		}
 		return null;
@@ -974,7 +974,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (object instanceof Amenity amenity) {
 			object = app.getResourceManager().fetchOtherData(app, amenity);
 		}
-		if (mapActivity != null && object instanceof PlaceDetailsObject detailsObject) {
+		if (mapActivity != null && object instanceof BaseDetailsObject detailsObject) {
 			Amenity amenity = getSelectedTopPlace(detailsObject);
 			if (amenity != null) {
 				hideExplorePlacesFragment(mapActivity);
@@ -986,14 +986,12 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Nullable
-	private Amenity getSelectedTopPlace(@NonNull PlaceDetailsObject detailsObject) {
+	private Amenity getSelectedTopPlace(@NonNull BaseDetailsObject detailsObject) {
 		if (!Algorithms.isEmpty(topPlaces)) {
-			for (SelectedMapObject selectedObject : detailsObject.getSelectedObjects()) {
-				if (selectedObject.object() instanceof MapObject mapObject) {
-					Amenity amenity = topPlaces.get(mapObject.getId());
-					if (amenity != null) {
-						return amenity;
-					}
+			for (Amenity amenity : detailsObject.getAmenities()) {
+				Amenity topPlace = topPlaces.get(amenity.getId());
+				if (topPlace != null) {
+					return topPlace;
 				}
 			}
 		}
@@ -1110,7 +1108,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		}
 	}
 
-	public void updateSelectedTopPlace(@Nullable Pair<PlaceDetailsObject, Amenity> selectedPlace) {
+	public void updateSelectedTopPlace(@Nullable Pair<BaseDetailsObject, Amenity> selectedPlace) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
@@ -1157,7 +1155,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private void showTopPlaceContextMenu(@NonNull MapActivity mapActivity,
-			@NonNull PlaceDetailsObject object, @NonNull Amenity topPlace) {
+			@NonNull BaseDetailsObject object, @NonNull Amenity topPlace) {
 		Amenity amenity = object.getSyntheticAmenity();
 		updateSelectedTopPlace(Pair.create(object, topPlace));
 
