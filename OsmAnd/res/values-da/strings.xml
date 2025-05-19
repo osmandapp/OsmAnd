@@ -5784,4 +5784,7 @@
     <string name="show_debug_tile">Vis information om kortflise</string>
     <string name="show_debug_tile_description">Vis information om kortsymboler for hver kortflise</string>
     <string name="show_symbols_debug_info">Vis symboler fejlfindinginfo</string>
+    <string name="deactivated_map">Deaktiveret kort</string>
+    <string name="suggest_activate_map_msg">%1$s kort er deaktiveret,\naktiver for at se dette område.</string>
+    <string name="unit_of_temperature_description">De valgte enheder vil blive anvendt på alle temperaturrelaterede data i den aktuelle profil.</string>
 </resources>
