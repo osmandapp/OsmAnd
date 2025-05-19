@@ -15,6 +15,6 @@ public class PreferenceMarker {
 	}
 
 	public static boolean isPreferenceConnectedToPlugin(final SearchablePreference preference, final Class<? extends OsmandPlugin> plugin) {
-		return plugin.getName().equals(preference.getExtras().getString(KEY));
+		return false; // FK-FIXME: plugin.getName().equals(preference.getExtras().getString(KEY));
 	}
 }
