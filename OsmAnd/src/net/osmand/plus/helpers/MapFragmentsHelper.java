@@ -118,16 +118,20 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	public void updateFragments() {
 		FragmentManager manager = getSupportFragmentManager();
 		for (Fragment fragment : manager.getFragments()) {
-			try {
-				manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
-				manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
-			} catch (IllegalStateException e) {
-				LOG.error("Error updating fragment " + fragment.getClass().getSimpleName(), e);
-			}
+			updateFragment(manager, fragment);
 		}
 		DashboardOnMap dashboard = activity.getDashboard();
 		if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
 			dashboard.refreshContent(true);
+		}
+	}
+
+	public void updateFragment(@NonNull FragmentManager manager, @NonNull Fragment fragment) {
+		try {
+			manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
+			manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
+		} catch (IllegalStateException e) {
+			LOG.error("Error updating fragment " + fragment.getClass().getSimpleName(), e);
 		}
 	}
 
