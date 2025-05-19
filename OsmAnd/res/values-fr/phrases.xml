@@ -4699,7 +4699,7 @@
     <string name="poi_indoor_seating_bar_table">Places assises à l\'intérieur : table de bar</string>
     <string name="poi_photo_booth">Photomaton</string>
     <string name="poi_indoor_seating_no">Pas de places assises à l\'intérieur</string>
-    <string name="poi_sump_buster">Démolisseur de carter</string>
+    <string name="poi_sump_buster">Arrêtoir de voiture (sump buster)</string>
     <string name="poi_live_music">Musique live</string>
     <string name="poi_music_venue">Salle de musique</string>
     <string name="poi_us_maps_recreation_area_activity">Activité de la zone de loisirs</string>
@@ -4897,7 +4897,7 @@
     <string name="poi_route_activity_type_ski_touring">Ski de randonnée</string>
     <string name="poi_route_track_point">Points d\'itinéraire</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Tunnel interdit aux piétons</string>
-    <string name="poi_route_article">Articles de Voyage</string>
+    <string name="poi_route_article">Articles de voyage</string>
     <string name="poi_route_activity_type_truck_hgv">Camion (poids lourd)</string>
     <string name="poi_route_activity_type_snowshoeing">Raquettes à neige</string>
     <string name="poi_route_activity_type_snowmobiling">Motoneige</string>
@@ -4953,7 +4953,7 @@
     <string name="poi_atv_yes">VTT : oui</string>
     <string name="poi_atv_no">VTT : non</string>
     <string name="poi_access_notes">Notes d\'accès</string>
-    <string name="poi_contact_website">Site web</string>
+    <string name="poi_contact_website">Site Internet</string>
     <string name="poi_network_lwn">Itinéraires de randonnée locaux (LWN)</string>
     <string name="poi_network_icn">Itinéraires cyclables internationaux (ICN)</string>
     <string name="poi_network_rcn">Itinéraires cyclables régionaux (RCN)</string>
@@ -5038,7 +5038,7 @@
     <string name="poi_bail_bond_agent">Agent de cautionnement</string>
     <string name="poi_translator">Traducteur</string>
     <string name="poi_visa">Visa</string>
-    <string name="poi_interior_design">Design d\'intérieur</string>
+    <string name="poi_interior_design">Architecte d\'intérieur</string>
     <string name="poi_chamber">Chambre</string>
     <string name="poi_politician">Bureau politique</string>
     <string name="poi_route_point_category">Catégorie de point de voyage</string>
@@ -5056,7 +5056,7 @@
     <string name="poi_private_investigator">Détective privé</string>
     <string name="poi_landmark_church">Église emblématique</string>
     <string name="poi_episcopal_church">Église épiscopale</string>
-    <string name="poi_airline">Bureau de la compagnie aérienne</string>
+    <string name="poi_airline">Bureau de compagnie aérienne</string>
     <string name="poi_financial_advisor">Conseiller financier</string>
     <string name="poi_georgian_orthodox_church">Église orthodoxe géorgienne</string>
     <string name="poi_international_organization">Organisation internationale</string>
@@ -5066,7 +5066,7 @@
     <string name="poi_armenian_apostolic_church">Église apostolique arménienne</string>
     <string name="poi_evangelical_lutheran_church">Église évangélique luthérienne</string>
     <string name="poi_spiritist_church">Église spirite</string>
-    <string name="poi_graphic_design">Bureau de design graphique</string>
+    <string name="poi_graphic_design">Bureau de conception graphique</string>
     <string name="poi_christian_church">Église chrétienne</string>
     <string name="poi_tutoring">Tutorat</string>
     <string name="poi_adoption_agency">Agence d\'adoption</string>
