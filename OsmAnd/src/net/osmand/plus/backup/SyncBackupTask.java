@@ -40,7 +40,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 	private final SyncOperationType operation;
 	private final OnBackupSyncListener syncListener;
-	private final boolean singleOperation;
+	private final boolean syncOperation;
 
 	private int maxProgress;
 	private int importProgress;
@@ -53,7 +53,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		this.app = app;
 		this.key = key;
 		this.operation = operation;
-		this.singleOperation = operation != SYNC_OPERATION_SYNC;
+		this.syncOperation = operation == SYNC_OPERATION_SYNC;
 		this.syncListener = syncListener;
 		this.backupHelper = app.getBackupHelper();
 		this.networkSettingsHelper = app.getNetworkSettingsHelper();
@@ -179,7 +179,9 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 	@Override
 	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
-		startSync();
+		if (syncOperation) {
+			startSync();
+		}
 	}
 
 	@Override
@@ -191,7 +193,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		if (succeed) {
 			BackupUtils.updateCacheForItems(app, items);
 		}
-		if (singleOperation) {
+		if (!syncOperation) {
 			onSyncFinished(null);
 		} else {
 			uploadNewItems();
