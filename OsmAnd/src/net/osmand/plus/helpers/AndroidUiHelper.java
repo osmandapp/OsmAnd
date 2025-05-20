@@ -21,7 +21,6 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
@@ -41,7 +40,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.transition.MaterialContainerTransform;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.AndroidUtils;
 
 /**
  * Created by dummy on 28.01.15.
