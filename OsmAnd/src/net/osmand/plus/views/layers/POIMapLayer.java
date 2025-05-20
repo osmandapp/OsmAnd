@@ -1136,7 +1136,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (imageBitmap != null) {
 			LatLon latLon = selectedPlace.second.getLocation();
 			Bitmap imageMapBitmap = createImageBitmap(imageBitmap, true);
-			int baseOrder = app.getOsmandMap().getMapLayers().getContextMenuLayer().getBaseOrder() + 50;
+			int baseOrder = app.getOsmandMap().getMapLayers().getContextMenuLayer().getBaseOrder() - 50;
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
 					.setMarkerId(SELECTED_MARKER_ID)
