@@ -1101,8 +1101,10 @@ public class ResourceManager {
 			// TODO check double finding amenity !!!
 			LatLon latLon = amenity.getLocation();
 			detailsObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
-			detailsObject.addObject(amenity);
-			detailsObject.combineData();
+			if (detailsObject != null) {
+				detailsObject.addObject(amenity);
+				detailsObject.combineData();
+			}
 		}
 
 		if (object instanceof BaseDetailsObject) {
