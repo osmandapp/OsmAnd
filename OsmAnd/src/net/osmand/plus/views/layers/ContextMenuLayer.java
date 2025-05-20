@@ -64,6 +64,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -73,6 +74,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
+	public static final int MARKER_ORDER_DIFF = 100;
 
 	private MapContextMenu menu;
 	private MapMultiSelectionMenu multiSelectionMenu;
@@ -364,7 +366,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 			contextMarkerCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getPointsOrder() - 100);
+			builder.setBaseOrder(getMarkerBaseOrder());
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(contextMarkerImage));
@@ -730,11 +732,32 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon pointLatLon = result.getPointLatLon();
 		List<SelectedMapObject> selectedObjects = result.getProcessedObjects();
 
+		long objectSelectionThreshold = 0;
 		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (selectedObject.provider() != null) {
+				long selectionThreshold = selectedObject.provider().getSelectionPointOrder(selectedObject.object());
+				if (selectionThreshold <= objectSelectionThreshold) {
+					objectSelectionThreshold = selectionThreshold;
+				}
+			}
+		}
+		ArrayList<SelectedMapObject> objectsAvailableForSelection = new ArrayList<>();
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (objectSelectionThreshold < 0) {
+				IContextMenuProvider provider = selectedObject.provider();
+				if (provider instanceof OsmandMapLayer layer && layer.getPointOrder(selectedObject.object()) <= objectSelectionThreshold) {
+					objectsAvailableForSelection.add(selectedObject);
+				} else {
+					continue;
+				}
+			}
 			IContextMenuProvider provider = selectedObject.provider();
 			if (provider != null && provider.runExclusiveAction(selectedObject.object(), showUnknownLocation)) {
 				return true;
 			}
+		}
+		if (objectSelectionThreshold < 0) {
+			selectedObjects = objectsAvailableForSelection;
 		}
 		if (selectedObjects.size() == 1) {
 			SelectedMapObject selectedObject = selectedObjects.get(0);
@@ -743,7 +766,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			PointDescription pointDescription = null;
 			IContextMenuProvider provider = selectedObject.provider();
 			if (provider != null) {
-				if (latLon == null) {
+				if (latLon == null || objectSelectionThreshold < 0) {
 					latLon = provider.getObjectLocation(selectedObj);
 				}
 				pointDescription = provider.getObjectName(selectedObj);
@@ -962,6 +985,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
+	public int getMarkerBaseOrder() {
+		return getPointsOrder() - MARKER_ORDER_DIFF;
+	}
+
 	public interface IContextMenuProvider {
 
 		/**
@@ -993,6 +1020,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		default boolean showMenuAction(@Nullable Object o) {
 			return false;
+		}
+
+		default long getSelectionPointOrder(Object selectedObject) {
+			return 0L;
 		}
 	}
 
