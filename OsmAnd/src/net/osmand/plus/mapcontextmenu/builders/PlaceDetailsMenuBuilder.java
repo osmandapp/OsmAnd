@@ -13,11 +13,11 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.SearchTravelArticlesTask;
-import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -35,10 +35,10 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 
 	private static final String TRAVEL_GUIDES_KEY = "travel_guides_key";
 
-	private final PlaceDetailsObject detailsObject;
+	private final BaseDetailsObject detailsObject;
 
 	public PlaceDetailsMenuBuilder(@NonNull MapActivity activity,
-			@NonNull PlaceDetailsObject detailsObject) {
+			@NonNull BaseDetailsObject detailsObject) {
 		super(activity, detailsObject.getSyntheticAmenity());
 		this.detailsObject = detailsObject;
 	}
