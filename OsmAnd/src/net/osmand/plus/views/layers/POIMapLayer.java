@@ -1136,11 +1136,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (imageBitmap != null) {
 			LatLon latLon = selectedPlace.second.getLocation();
 			Bitmap imageMapBitmap = createImageBitmap(imageBitmap, true);
-			int baseOrder = app.getOsmandMap().getMapLayers().getContextMenuLayer().getBaseOrder() - 50;
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
 					.setMarkerId(SELECTED_MARKER_ID)
-					.setBaseOrder(baseOrder) //context menu layer baseOrder to be over object polygon
+					.setBaseOrder(getSelectedTopPlaceBaseOrder()) //context menu layer baseOrder to be over object polygon
 					.setPinIcon(NativeUtilities.createSkImageFromBitmap(imageMapBitmap))
 					.setPosition(NativeUtilities.getPoint31FromLatLon(latLon.getLatitude(), latLon.getLongitude()))
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
@@ -1237,6 +1236,13 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private int getTopPlaceBaseOrder() {
 		return getPointsOrder() - 100;
+	}
+
+	private int getSelectedTopPlaceBaseOrder() {
+		ContextMenuLayer contextLayer = app.getOsmandMap().getMapLayers().getContextMenuLayer();
+		int baseOrder = contextLayer.getBaseOrder();
+		int markerOrder = contextLayer.getMarkerBaseOrder();
+		return baseOrder + (markerOrder - baseOrder) / 2;
 	}
 
 	@Override

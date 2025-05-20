@@ -74,6 +74,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
+	public static final int MARKER_ORDER_DIFF = 100;
 
 	private MapContextMenu menu;
 	private MapMultiSelectionMenu multiSelectionMenu;
@@ -365,7 +366,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 			contextMarkerCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getPointsOrder() - 100);
+			builder.setBaseOrder(getMarkerBaseOrder());
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(contextMarkerImage));
@@ -982,6 +983,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		return false;
+	}
+
+	public int getMarkerBaseOrder() {
+		return getPointsOrder() - MARKER_ORDER_DIFF;
 	}
 
 	public interface IContextMenuProvider {
