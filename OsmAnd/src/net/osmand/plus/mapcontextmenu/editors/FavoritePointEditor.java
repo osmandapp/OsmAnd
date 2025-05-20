@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.search.FullAmenitySearch;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.edit.Entity;
@@ -68,7 +68,7 @@ public class FavoritePointEditor extends PointEditor {
 		Amenity amenity = null;
 		if (object instanceof Amenity) {
 			amenity = (Amenity) object;
-		} else if (object instanceof PlaceDetailsObject detailsObject) {
+		} else if (object instanceof BaseDetailsObject detailsObject) {
 			amenity = detailsObject.getSyntheticAmenity();
 		} else if (object instanceof OpenstreetmapPoint point) {
 			Entity entity = point.getEntity();

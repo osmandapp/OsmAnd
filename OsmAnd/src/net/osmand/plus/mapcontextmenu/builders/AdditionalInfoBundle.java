@@ -62,11 +62,6 @@ public class AdditionalInfoBundle {
 				} else {
 					key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
 				}
-				if (MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key) instanceof PoiType that) {
-					if (that.isHidden()) {
-						continue;
-					}
-				}
 				if (!HIDDEN_EXTENSIONS.contains(key)) {
 					result.put(key, get(key));
 				}

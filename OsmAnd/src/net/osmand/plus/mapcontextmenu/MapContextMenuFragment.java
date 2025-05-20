@@ -1549,7 +1549,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 				@Override
 				public void onGlobalLayout() {
-
 					if (view != null) {
 						ViewTreeObserver obs = view.getViewTreeObserver();
 						obs.removeOnGlobalLayoutListener(this);
@@ -1560,7 +1559,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 						int newMenuTopViewHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
 						int newMenuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
-						menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
+						menuFullHeight = mainView.getHeight();
 						zoomButtonsHeight = zoomButtonsView.getHeight();
 
 						int dy = 0;

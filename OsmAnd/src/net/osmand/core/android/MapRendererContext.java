@@ -21,6 +21,7 @@ import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.MapPrimitivesProvider.Mode;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -31,7 +32,6 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -711,7 +711,7 @@ public class MapRendererContext {
 		if (object instanceof RenderedObject renderedObject) {
 			objectPolygon = renderedObject.getPolygon();
 		}
-		if (object instanceof PlaceDetailsObject detailsObject) {
+		if (object instanceof BaseDetailsObject detailsObject) {
 			objectPolygon = detailsObject.getSyntheticAmenity().getPolygon();
 		}
 		List<RenderedObject> res = new ArrayList<>();

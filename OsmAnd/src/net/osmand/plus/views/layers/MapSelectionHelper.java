@@ -30,12 +30,12 @@ import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
 import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
 import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.*;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.ConfigureMapUtils;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -120,13 +120,12 @@ public class MapSelectionHelper {
 		collectObjectsFromLayers(result, showUnknownLocation, false);
 		collectObjectsFromMap(result, point, tileBox);
 
-		transportStopHelper.processTransportStops(result.getAllObjects());
 		if (result.isEmpty()) {
 			collectObjectsFromLayers(result, showUnknownLocation, true);
 		}
-		if (result.getAllObjects().size() > 1) {
-			recollectForMultiselectMenu(result);
-		}
+//		if (result.getAllObjects().size() > 1) {
+//			recollectForMultiselectMenu(result);
+//		}
 		result.groupByOsmIdAndWikidataId();
 		return result;
 	}
@@ -148,7 +147,7 @@ public class MapSelectionHelper {
 			if (sel.object() instanceof RenderedObject renderedObject) {
 				LatLon l = renderedObject.getLatLon();
 				if (l != null) {
-					PlaceDetailsObject pdo = findPlaceDetails(l, renderedObject.getId(), renderedObject.getOriginalNames(), renderedObject.getTagValue(WIKIDATA));
+					BaseDetailsObject pdo = findPlaceDetails(l, renderedObject.getId(), renderedObject.getOriginalNames(), renderedObject.getTagValue(WIKIDATA));
 					if (pdo != null) {
 						selectedObjects.set(i, new SelectedMapObject(pdo, sel.provider()));
 					}
@@ -308,7 +307,7 @@ public class MapSelectionHelper {
 					continue;
 				}
 				IBillboardMapSymbol billboardMapSymbol = null;
-				PlaceDetailsObject detailsObject = null;
+				BaseDetailsObject detailsObject = null;
 				net.osmand.core.jni.Amenity jniAmenity = null;
 				try {
 					billboardMapSymbol = IBillboardMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
@@ -515,7 +514,7 @@ public class MapSelectionHelper {
 		return names;
 	}
 
-	private void addGeometry(@Nullable PlaceDetailsObject detailObj, @NonNull ObfMapObject obfMapObject) {
+	private void addGeometry(@Nullable BaseDetailsObject detailObj, @NonNull ObfMapObject obfMapObject) {
 		if (detailObj != null && !detailObj.hasGeometry() && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
 			for (int k = 0; k < points31.size(); k++) {
@@ -525,11 +524,12 @@ public class MapSelectionHelper {
 		}
 	}
 
-	private PlaceDetailsObject findPlaceDetails(LatLon latLon, long id, @Nullable Collection<String> names, String wikidata) {
+	@Nullable
+	private BaseDetailsObject findPlaceDetails(LatLon latLon, long id, @Nullable Collection<String> names, String wikidata) {
 		FullAmenitySearch fullAmenitySearch = app.getResourceManager().getAmenitySearcher();
 		BaseDetailsObject base = fullAmenitySearch.findPlaceDetails(latLon, id, names, wikidata);
 		if (base != null) {
-			return new PlaceDetailsObject(base, mapLayers.getPoiMapLayer());
+			return new BaseDetailsObject(base, LocaleHelper.getPreferredPlacesLanguage(app));
 		}
 		return null;
 	}
@@ -645,7 +645,7 @@ public class MapSelectionHelper {
 
 	private boolean addAmenity(@NonNull MapSelectionResult result,
 			@NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
-		PlaceDetailsObject detail = findPlaceDetails(searchLatLon, object.getId(), object.getOriginalNames(), null);
+		BaseDetailsObject detail = findPlaceDetails(searchLatLon, object.getId(), object.getOriginalNames(), null);
 		if (detail != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
 				detail.setX(object.getX());
@@ -660,7 +660,7 @@ public class MapSelectionHelper {
 		return false;
 	}
 
-	private boolean isTransportStop(@NonNull List<SelectedMapObject> selectedObjects, @NonNull PlaceDetailsObject detail) {
+	private boolean isTransportStop(@NonNull List<SelectedMapObject> selectedObjects, @NonNull BaseDetailsObject detail) {
 		for (SelectedMapObject selectedObject : selectedObjects) {
 			Object sel = selectedObject.object();
 			if (sel instanceof TransportStop stop && stop.getName().startsWith(detail.getSyntheticAmenity().getName())) {
