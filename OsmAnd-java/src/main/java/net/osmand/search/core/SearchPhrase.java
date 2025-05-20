@@ -1,6 +1,15 @@
 package net.osmand.search.core;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import net.osmand.Collator;
@@ -16,7 +25,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.util.Algorithms;
-import net.osmand.util.ArabicNormalizer;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
@@ -25,6 +33,7 @@ public class SearchPhrase {
 	public static final String DELIMITER = " ";
 	public static final String ALLDELIMITERS = "\\s|,";
 	public static final String ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-";
+	public static final String HYPHEN = "-";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
 	private static Set<String> conjunctions = new TreeSet<>();
@@ -55,6 +64,9 @@ public class SearchPhrase {
 	private NameStringMatcher firstUnknownNameStringMatcher;
 	private NameStringMatcher mainUnknownNameStringMatcher;
 	private List<NameStringMatcher> unknownWordsMatcher = new ArrayList<>();
+	
+	// Final result matchers for sorting
+	private List<NameStringMatcher> resultWordsMatcher;
 
 	private AbstractPoiType unselectedPoiType;
 	private boolean acceptPrivate;
@@ -600,6 +612,37 @@ public class SearchPhrase {
 			unknownWordsMatcher.add(getNameStringMatcher(otherUnknownWords.get(ind), completeMatch));
 		}
 		return unknownWordsMatcher.get(i);
+	}
+
+	public List<NameStringMatcher> getResultWordsMatchers() {
+		if (resultWordsMatcher != null) {
+			return resultWordsMatcher;
+		}
+		resultWordsMatcher = new ArrayList<SearchPhrase.NameStringMatcher>();
+		String fw = getFirstUnknownSearchWord();
+		if (fw != null && fw.length() > 0) {
+			addAndSplitHyphen(resultWordsMatcher, fw);
+		}
+		List<String> ow = getUnknownSearchWords();
+		if (ow != null) {
+			for (String o : ow) {
+				addAndSplitHyphen(resultWordsMatcher, o);
+			}
+		}
+		return resultWordsMatcher;
+	}
+	
+	private void addAndSplitHyphen(List<NameStringMatcher> res, String f) {
+		if(f.trim().isEmpty()) {
+			return;
+		}
+		if(f.indexOf(HYPHEN) != -1) {
+			for(String part : f.split(HYPHEN)) {
+				addAndSplitHyphen(res, part);
+			}
+		} else {
+			res.add(getNameStringMatcher(f, true));
+		}
 	}
 
 	private NameStringMatcher getNameStringMatcher(String word, boolean complete) {

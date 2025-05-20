@@ -13,6 +13,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import static net.osmand.search.core.SearchCoreFactory.PREFERRED_DEFAULT_ZOOM;
@@ -150,25 +151,23 @@ public class SearchResult {
 	}
 
 	private boolean allWordsMatched(String name, CheckWordsMatchCount cnt) {
-		List<String> searchPhraseNames = getSearchPhraseNames();
 		List<String> localResultNames;
+		boolean wordMatched;
 		if (!requiredSearchPhrase.getFullSearchPhrase().contains(HYPHEN)) {
 			// we split '-' words in result, so user can input same without '-'
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN);
 		} else {
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
 		}
-		
-		boolean wordMatched;
-		if (searchPhraseNames.isEmpty()) {
+		List<NameStringMatcher> resultWordsMatchers = requiredSearchPhrase.getResultWordsMatchers();
+		if (resultWordsMatchers.isEmpty()) {
 			return false;
 		}
 		int idxMatchedWord = -1;
-		for (String searchPhraseName : searchPhraseNames) {
+		for (NameStringMatcher resultWordsMatcher : resultWordsMatchers) {
 			wordMatched = false;
 			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
-				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
-				if (r == 0) {
+				if (resultWordsMatcher.matches(localResultNames.get(i))) {
 					wordMatched = true;
 					idxMatchedWord = i;
 					break;
@@ -178,7 +177,7 @@ public class SearchResult {
 				return false;
 			}
 		}
-		if (searchPhraseNames.size() == localResultNames.size()) {
+		if (resultWordsMatchers.size() == localResultNames.size()) {
 			cnt.allWordsEqual = true;
 		}
 		cnt.allWordsInPhraseAreInResult = true;
@@ -188,21 +187,6 @@ public class SearchResult {
 	static class CheckWordsMatchCount {
 		boolean allWordsEqual;
 		boolean allWordsInPhraseAreInResult;
-	}
-
-	private List<String> getSearchPhraseNames() {
-		List<String> searchPhraseNames = new ArrayList<>();
-
-		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
-		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
-		if (fw != null && fw.length() > 0) {
-			searchPhraseNames.add(fw);
-		}
-		if (ow != null) {
-			searchPhraseNames.addAll(ow);
-		}
-
-		return searchPhraseNames;
 	}
 
 	private int getSelfWordCount() {
