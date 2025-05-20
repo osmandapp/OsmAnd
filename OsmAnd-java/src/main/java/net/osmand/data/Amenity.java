@@ -288,7 +288,10 @@ public class Amenity extends MapObject {
 	}
 
 	public void copyAdditionalInfo(Amenity amenity, boolean overwrite) {
-		Map<String, String> map = amenity.getInternalAdditionalInfoMap();
+		copyAdditionalInfo(amenity.getInternalAdditionalInfoMap(), overwrite);
+	}
+
+	public void copyAdditionalInfo(Map<String, String> map, boolean overwrite) {
 		if (overwrite || additionalInfo == null) {
 			setAdditionalInfo(map);
 		} else {
