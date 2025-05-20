@@ -665,7 +665,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (needMoreItem) {
 			items.add(TRANSPORT_BADGE_MORE_ITEM);
 		}
-		TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(requireContext(), items, nightMode);
+		TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(requireActivity(), items, nightMode);
 		adapter.setListener(position -> {
 			Object object = adapter.getItem(position);
 			MapActivity mapActivity = getMapActivity();
