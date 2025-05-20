@@ -83,24 +83,53 @@ public class MapSelectionResult {
 		allObjects.add(new SelectedMapObject(object, provider));
 	}
 
-	public void groupPoiByOsmIdAndWikidata() {
-		List<SelectedMapObject> plainObjects = new ArrayList<>();
-		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
+	public void groupByOsmIdAndWikidataId() {
+		List<SelectedMapObject> amenities = new ArrayList<>();
+		List<SelectedMapObject> supported = new ArrayList<>();
+		List<SelectedMapObject> other = new ArrayList<>();
 		for (SelectedMapObject selectedObject : allObjects) {
 			Object object = selectedObject.object();
-			if (!BaseDetailsObject.shouldAdd(object)) {
-				plainObjects.add(selectedObject);
-				continue;
+			if (object instanceof Amenity) {
+				amenities.add(selectedObject);
+			} else if (BaseDetailsObject.isSupportedObjectType(object)) {
+				supported.add(selectedObject);
+			} else {
+				other.add(selectedObject);
 			}
-			List<BaseDetailsObject> overlapped = new ArrayList<>();
-			for (BaseDetailsObject detailsObject : detailsObjects) {
-				if (detailsObject.overlapsWith(object)) {
-					overlapped.add(detailsObject);
-				}
-			}
+		}
+
+		List<BaseDetailsObject> detailsObjects = processObjects(amenities, supported, other);
+		for (BaseDetailsObject object : detailsObjects) {
+			object.combineData();
+			processedObjects.add(new SelectedMapObject(object, poiProvider));
+		}
+		processedObjects.addAll(other);
+	}
+
+	@NonNull
+	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> amenities,
+			@NonNull List<SelectedMapObject> supported, @NonNull List<SelectedMapObject> other) {
+		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
+		processGroup(amenities, detailsObjects, null);
+		processGroup(supported, detailsObjects, other);
+		return detailsObjects;
+	}
+
+	private void processGroup(@NonNull List<SelectedMapObject> selectedMapObjects,
+			@NonNull List<BaseDetailsObject> detailsObjects,
+			@Nullable List<SelectedMapObject> nonOverlapped) {
+
+		for (SelectedMapObject selectedObject : selectedMapObjects) {
+			Object object = selectedObject.object();
+			List<BaseDetailsObject> overlapped = collectOverlappedObjects(object, detailsObjects);
+
 			BaseDetailsObject detailsObject;
 			if (Algorithms.isEmpty(overlapped)) {
-				detailsObject = new BaseDetailsObject(lang);
+				if (nonOverlapped != null) {
+					nonOverlapped.add(selectedObject);
+					continue;
+				}
+				detailsObject = new BaseDetailsObject(this.lang);
 			} else {
 				detailsObject = overlapped.get(0);
 				for (int i = 1; i < overlapped.size(); i++) {
@@ -111,11 +140,18 @@ public class MapSelectionResult {
 			detailsObject.addObject(object);
 			detailsObjects.add(detailsObject);
 		}
-		for (BaseDetailsObject object : detailsObjects) {
-			object.combineData();
-			processedObjects.add(new SelectedMapObject(object, poiProvider));
+	}
+
+	@NonNull
+	private List<BaseDetailsObject> collectOverlappedObjects(@NonNull Object object,
+			@NonNull List<BaseDetailsObject> detailsObjects) {
+		List<BaseDetailsObject> overlapped = new ArrayList<>();
+		for (BaseDetailsObject detailsObject : detailsObjects) {
+			if (detailsObject.overlapsWith(object)) {
+				overlapped.add(detailsObject);
+			}
 		}
-		processedObjects.addAll(plainObjects);
+		return overlapped;
 	}
 
 	public void groupOtherObjects() {

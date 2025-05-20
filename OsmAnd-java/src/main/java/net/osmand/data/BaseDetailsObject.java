@@ -50,7 +50,7 @@ public class BaseDetailsObject {
 	}
 
 	public void addObject(Object object) {
-		if (!shouldAdd(object)) {
+		if (!isSupportedObjectType(object)) {
 			return;
 		}
 		if (object instanceof BaseDetailsObject detailsObject) {
@@ -61,8 +61,7 @@ public class BaseDetailsObject {
 			objects.add(object);
 
 			Long osmId = getOsmId(object);
-			Amenity amenity = getAmenity(object);
-			String wikidata = amenity != null ? amenity.getWikidata() : null;
+			String wikidata = getWikidata(object);
 
 			if (osmId != null && osmId != -1) {
 				osmIds.add(osmId);
@@ -73,12 +72,14 @@ public class BaseDetailsObject {
 		}
 	}
 
-	private Amenity getAmenity(Object object) {
+	private String getWikidata(Object object) {
 		if (object instanceof Amenity amenity) {
-			return amenity;
-		}
-		if (object instanceof BaseDetailsObject detailsObject) {
-			return detailsObject.getSyntheticAmenity();
+			return amenity.getWikidata();
+		} else if (object instanceof TransportStop transportStop) {
+			Amenity amenity = transportStop.getAmenity();
+			return amenity != null ? amenity.getWikidata() : null;
+		} else if (object instanceof RenderedObject renderedObject) {
+			return renderedObject.getTagValue(WIKIDATA);
 		}
 		return null;
 	}
@@ -90,16 +91,12 @@ public class BaseDetailsObject {
 		if (object instanceof MapObject mapObject) {
 			return ObfConstants.getOsmObjectId(mapObject);
 		}
-		if (object instanceof BaseDetailsObject detailsObject) {
-			return detailsObject.getSyntheticAmenity().getOsmId();
-		}
 		return null;
 	}
 
 	public boolean overlapsWith(Object object) {
 		Long osmId = getOsmId(object);
-		Amenity amenity = getAmenity(object);
-		String wikidata = amenity != null ? amenity.getWikidata() : null;
+		String wikidata = getWikidata(object);
 
 		boolean osmIdEqual = osmId != null && osmId != -1 && osmIds.contains(osmId);
 		boolean wikidataEqual = !Algorithms.isEmpty(wikidata) && wikidataIds.contains(wikidata);
@@ -147,39 +144,22 @@ public class BaseDetailsObject {
 		for (Object object : objects) {
 			if (object instanceof Amenity amenity) {
 				processAmenity(amenity, contentLocales);
-			}
-			if (object instanceof BaseDetailsObject detailsObject) {
-				processAmenity(detailsObject.syntheticAmenity, contentLocales);
+			} else if (object instanceof TransportStop transportStop) {
+				Amenity amenity = transportStop.getAmenity();
+				if (amenity != null) {
+					processAmenity(amenity, contentLocales);
+				} else {
+					syntheticAmenity.copyNames(transportStop);
+				}
+			} else if (object instanceof RenderedObject renderedObject) {
+				syntheticAmenity.copyNames(renderedObject);
+				syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
+				processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
 			}
 		}
 		if (!Algorithms.isEmpty(contentLocales)) {
 			syntheticAmenity.updateContentLocales(contentLocales);
 		}
-	}
-
-	private void sortObjects() {
-		objects.sort((o1, o2) -> {
-			String l1 = getLangForTravel(o1);
-			String l2 = getLangForTravel(o2);
-			if (l2.equals(l1)) {
-				return 0;
-			}
-			if (l2.equals(lang)) {
-				return 1;
-			}
-			if (l1.equals(lang)) {
-				return -1;
-			}
-			return 0;
-		});
-		objects.sort((o1, o2) -> {
-			int ord1 = getResourceType(o1).ordinal();
-			int ord2 = getResourceType(o2).ordinal();
-			if (ord1 != ord2) {
-				return ord2 > ord1 ? -1 : 1;
-			}
-			return 0;
-		});
 	}
 
 	protected void processAmenity(Amenity amenity, Set<String> contentLocales) {
@@ -214,18 +194,65 @@ public class BaseDetailsObject {
 		if (syntheticAmenity.getTravelEloNumber() == DEFAULT_ELO && travelElo != DEFAULT_ELO) {
 			syntheticAmenity.setTravelEloNumber(travelElo);
 		}
-		TIntArrayList x = amenity.getX();
+		syntheticAmenity.copyNames(amenity);
+		syntheticAmenity.copyAdditionalInfo(amenity, false);
+		processPolygonCoordinates(amenity.getX(), amenity.getY());
+
+		contentLocales.addAll(amenity.getSupportedContentLocales());
+	}
+
+	private void processPolygonCoordinates(TIntArrayList x, TIntArrayList y) {
 		if (syntheticAmenity.getX().isEmpty() && !x.isEmpty()) {
 			syntheticAmenity.getX().addAll(x);
 		}
-		TIntArrayList y = amenity.getY();
 		if (syntheticAmenity.getY().isEmpty() && !y.isEmpty()) {
 			syntheticAmenity.getY().addAll(y);
 		}
-		syntheticAmenity.copyNames(amenity);
-		syntheticAmenity.copyAdditionalInfo(amenity, false);
+	}
 
-		contentLocales.addAll(amenity.getSupportedContentLocales());
+	private void sortObjects() {
+		sortObjectsByLang();
+		sortObjectsByResourceType();
+		sortObjectsByClass();
+	}
+
+	private void sortObjectsByLang() {
+		objects.sort((o1, o2) -> {
+			String l1 = getLangForTravel(o1);
+			String l2 = getLangForTravel(o2);
+			if (l2.equals(l1)) {
+				return 0;
+			}
+			if (l2.equals(lang)) {
+				return 1;
+			}
+			if (l1.equals(lang)) {
+				return -1;
+			}
+			return 0;
+		});
+	}
+
+	private void sortObjectsByResourceType() {
+		objects.sort((o1, o2) -> {
+			int ord1 = getResourceType(o1).ordinal();
+			int ord2 = getResourceType(o2).ordinal();
+			if (ord1 != ord2) {
+				return ord2 > ord1 ? -1 : 1;
+			}
+			return 0;
+		});
+	}
+
+	private void sortObjectsByClass() {
+		objects.sort((o1, o2) -> {
+			int ord1 = getClassOrder(o1);
+			int ord2 = getClassOrder(o2);
+			if (ord1 != ord2) {
+				return ord2 > ord1 ? -1 : 1;
+			}
+			return 0;
+		});
 	}
 
 	public void setObfResourceName(String obfName) {
@@ -267,8 +294,9 @@ public class BaseDetailsObject {
 		return !this.syntheticAmenity.getX().isEmpty() && !this.syntheticAmenity.getY().isEmpty();
 	}
 
-	public static boolean shouldAdd(Object object) {
-		return object instanceof Amenity || object instanceof BaseDetailsObject;
+	public static boolean isSupportedObjectType(Object object) {
+		return object instanceof Amenity || object instanceof TransportStop
+				|| object instanceof RenderedObject || object instanceof BaseDetailsObject;
 	}
 
 	public List<Amenity> getAmenities() {
@@ -319,5 +347,23 @@ public class BaseDetailsObject {
 			}
 		}
 		return "en";
+	}
+
+	private static int getClassOrder(Object object) {
+		if (object instanceof BaseDetailsObject) {
+			return 1;
+		}
+		if (object instanceof Amenity) {
+			return 2;
+		}
+		if (object instanceof TransportStop) {
+			return 3;
+		}
+		return 4;
+	}
+
+	@Override
+	public String toString() {
+		return getSyntheticAmenity().toString();
 	}
 }
