@@ -173,7 +173,9 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun isListHidden(): Boolean {
-		return view == null || bottomSheetBehavior?.state == STATE_HIDDEN
+		return view == null ||
+				isPortrait && bottomSheetBehavior?.state == STATE_HIDDEN ||
+				!isPortrait && !isLandScapeVisible()
 	}
 
 	private fun setupRecyclerView(view: View) {

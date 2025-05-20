@@ -1079,4 +1079,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 	}
 
+	public long getPointOrder(Object object) {
+		return getPointsOrder();
+	}
 }

@@ -190,9 +190,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, languages);
 						cachedPlaces = new ArrayList<>();
 						for (OsmandApiFeatureData item : places) {
-							if (Algorithms.isEmpty(item.properties.photoTitle)) {
-								continue;
-							}
 							Amenity amenity = createAmenity(item);
 							if (amenity != null) {
 								filterAmenity(amenity, filteredAmenities, rect, uniqueIds, loadAll);
@@ -265,10 +262,12 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 			amenity.updateContentLocales(Set.of(properties.wikiLangs.split(",")));
 		}
 
-		WikiImage imageData = WikiHelper.INSTANCE.getImageData(properties.photoTitle);
-		amenity.setWikiPhoto(imageData.getImageHiResUrl());
-		amenity.setWikiIconUrl(imageData.getImageIconUrl());
-		amenity.setWikiImageStubUrl(imageData.getImageStubUrl());
+		if (!Algorithms.isEmpty(properties.photoTitle)) {
+			WikiImage imageData = WikiHelper.INSTANCE.getImageData(properties.photoTitle);
+			amenity.setWikiPhoto(imageData.getImageHiResUrl());
+			amenity.setWikiIconUrl(imageData.getImageIconUrl());
+			amenity.setWikiImageStubUrl(imageData.getImageStubUrl());
+		}
 		amenity.setLocation(featureData.geometry.coordinates[1], featureData.geometry.coordinates[0]);
 
 		String poitype = properties.poitype;
