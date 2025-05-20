@@ -192,9 +192,10 @@ public class ResourceManager {
 			path.mkdir();
 		}
 
-		fullAmenitySearch = new FullAmenitySearch(searchAmenitiesInProgress,
-				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get(),
-				app.getLanguage());
+		String lang = app.getLanguage(); // app.getSettings().MAP_PREFERRED_LOCALE.get() ?
+		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		fullAmenitySearch = new FullAmenitySearch(searchAmenitiesInProgress, lang, transliterate, app.getPoiTypes(),
+				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get());
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {

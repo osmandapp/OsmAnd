@@ -62,8 +62,8 @@ public class SearchResult {
 	public enum SearchResultResource {
 		DETAILED,
 		WIKIPEDIA,
-		TRAVEL,
-		BASEMAP
+		BASEMAP, // TODO exactly found cities from basemap should be placed at the top of results...
+		TRAVEL
 	}
 
 	private SearchResultResource searchResultResource;

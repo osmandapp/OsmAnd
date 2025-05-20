@@ -949,4 +949,23 @@ public class Amenity extends MapObject {
 			return id >> AMENITY_ID_RIGHT_SHIFT;
 		}
 	}
+
+	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
+		String typeName = amenity.getSubTypeStr();
+		String localName = amenity.getName(locale, transliterate);
+		if (typeName != null && localName.contains(typeName)) {
+			// type is contained in name e.g.
+			// localName = "Bakery the Corner"
+			// type = "Bakery"
+			// no need to repeat this
+			return localName;
+		}
+		if (Algorithms.isEmpty(localName) && amenity.isRouteTrack()) {
+			localName = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+		}
+		if (Algorithms.isEmpty(localName)) {
+			return typeName;
+		}
+		return typeName + " " + localName; // $NON-NLS-1$
+	}
 }

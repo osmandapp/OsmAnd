@@ -18,6 +18,8 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -40,14 +42,24 @@ public class FullAmenitySearch {
 
     private static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
-    private final String lang;
+    private String lang;
+    private boolean transliterate;
+    private final MapPoiTypes mapPoiTypes; // nullable
 
-    public FullAmenitySearch(boolean progress, TravelFileVisibility travelFileVisibility, String lang) {
+    public FullAmenitySearch(boolean progress, String lang, boolean transliterate, MapPoiTypes mapPoiTypes,
+                             TravelFileVisibility travelFileVisibility) {
         this.progress = progress;
         this.travelFileVisibility = travelFileVisibility;
         this.lang = lang;
+        this.transliterate = transliterate;
+        this.mapPoiTypes = mapPoiTypes;
         taskQueue = new LinkedBlockingQueue<Runnable>();
         singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
+    }
+
+    public void updateLangAndTransliterate(String lang, boolean transliterate) {
+        this.lang = lang;
+        this.transliterate = transliterate;
     }
 
     public interface TravelFileVisibility {
@@ -203,12 +215,11 @@ public class FullAmenitySearch {
         return result;
     }
 
-    public static Amenity findAmenityByName(Collection<Amenity> amenities,
-                                            Collection<String> names) {
+    public Amenity findAmenityByName(Collection<Amenity> amenities, Collection<String> names) {
         if (!Algorithms.isEmpty(names) && !Algorithms.isEmpty(amenities)) {
             return amenities.stream()
                     .filter(amenity -> !amenity.isClosed())
-                    .filter(amenity -> names.contains(amenity.getName()))
+                    .filter(amenity -> namesMatcher(amenity, names, false))
                     .findAny()
                     .orElseGet(() ->
                             amenities.stream()
@@ -222,10 +233,53 @@ public class FullAmenitySearch {
                                     .findAny()
                                     .orElseGet(() ->
                                             amenities.stream()
-                                                    .filter(amenity -> names.contains(amenity.toStringEn()))
+                                                    .filter(amenity -> namesMatcher(amenity, names, true))
                                                     .findAny().orElse(null)));
         }
         return null;
+    }
+
+    private boolean namesMatcher(Amenity amenity, Collection<String> matchList, boolean deepNameSearch) {
+        String poiSimpleFormat = Amenity.getPoiStringWithoutType(amenity, lang, transliterate);
+        if (matchList.contains(poiSimpleFormat)) {
+            return true;
+        }
+
+        String amenityName = amenity.getName(lang, transliterate);
+        if (matchList.contains(amenityName)) {
+            return true;
+        }
+
+        if (mapPoiTypes != null) {
+            AbstractPoiType st = mapPoiTypes.getAnyPoiTypeByKey(amenity.getSubType());
+            String poiTypeName = st != null ? st.getTranslation() : amenity.getSubType();
+            if (matchList.contains(poiTypeName)) {
+                return true;
+            }
+        }
+
+        if (deepNameSearch) {
+            Set<String> allAmenityNames = new HashSet<>();
+            allAmenityNames.addAll(amenity.getAltNamesMap().values());
+            allAmenityNames.addAll(amenity.getNamesMap(true).values());
+
+            String typeName = amenity.getSubTypeStr();
+            if (!Algorithms.isEmpty(typeName)) {
+                Set<String> withPoiTypes = new HashSet<>();
+                for (String name : allAmenityNames) {
+                    withPoiTypes.add(typeName + " " + name);
+                }
+                allAmenityNames.addAll(withPoiTypes);
+            }
+
+            for (String match : matchList) {
+                if (allAmenityNames.contains(match)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void addAmenityRepository(String fileName, AmenityIndexRepository repository) {
@@ -484,5 +538,4 @@ public class FullAmenitySearch {
             callback.processResult(detailsObject);
         });
     }
-
 }
