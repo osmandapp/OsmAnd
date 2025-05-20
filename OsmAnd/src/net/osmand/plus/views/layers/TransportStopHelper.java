@@ -227,7 +227,7 @@ public class TransportStopHelper {
 	}
 
 	@Nullable
-	private List<String> getPublicTransportTypes() {
+	public List<String> getPublicTransportTypes() {
 		if (publicTransportTypes == null && !app.isApplicationInitializing()) {
 			PoiCategory category = app.getPoiTypes().getPoiCategoryByName("transportation");
 			if (category != null) {

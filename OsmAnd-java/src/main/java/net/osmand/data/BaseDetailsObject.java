@@ -6,9 +6,11 @@ import static net.osmand.data.Amenity.WIKIDATA;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.search.core.SearchResult.SearchResultResource;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.*;
 
@@ -26,6 +28,8 @@ public class BaseDetailsObject {
 	protected SearchResultResource searchResultResource;
 
 	protected Amenity syntheticAmenity = new Amenity();
+
+	public static final int MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS = 30;
 
 
 	public enum DataEnvelope {
@@ -112,6 +116,47 @@ public class BaseDetailsObject {
 		return osmIdEqual || wikidataEqual;
 	}
 
+	public boolean overlapPublicTransport(Object object, Collection<String> publicTransportTypes) {
+		if (object instanceof RenderedObject renderedObject) {
+			Collection<TransportStop> stops = getTransportStops();
+			if (stops.isEmpty()) {
+				return false;
+			}
+			Map<String, String> tags = renderedObject.getTags();
+			String name = renderedObject.getName();
+			if (!Algorithms.isEmpty(name)) {
+				boolean namesEqual = false;
+				for (TransportStop stop : stops) {
+					if (stop.getName().contains(name) || name.contains(stop.getName())) {
+						namesEqual = true;
+						break;
+					}
+				}
+				if (!namesEqual) {
+					return false;
+				}
+			}
+			boolean isStop = false;
+			for (Map.Entry<String, String> entry : tags.entrySet()) {
+				String tag = entry.getKey();
+				String value = entry.getValue();
+				if (publicTransportTypes.contains(value) || publicTransportTypes.contains(tag + "_" + value)) {
+					isStop = true;
+					break;
+				}
+			}
+			if (isStop) {
+				assert stops.size() == 1; // TODO remove later !!!
+				for (TransportStop stop : stops) {
+					if (MapUtils.getDistance(stop.getLocation(), renderedObject.getLatLon()) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	public void merge(Object object) {
 		if (object instanceof BaseDetailsObject baseDetailsObject)
 			merge(baseDetailsObject);
@@ -159,11 +204,17 @@ public class BaseDetailsObject {
 					processAmenity(amenity, contentLocales);
 				} else {
 					syntheticAmenity.copyNames(transportStop);
+					if (syntheticAmenity.getLocation() == null) {
+						syntheticAmenity.setLocation(transportStop.getLocation());
+					}
 				}
 			} else if (object instanceof RenderedObject renderedObject) {
 				syntheticAmenity.copyNames(renderedObject);
 				syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
 				processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
+				if (syntheticAmenity.getLocation() == null) {
+					syntheticAmenity.setLocation(renderedObject.getLocation());
+				}
 			}
 		}
 		if (!Algorithms.isEmpty(contentLocales)) {
@@ -171,6 +222,10 @@ public class BaseDetailsObject {
 		}
 		if (this.dataEnvelope.ordinal() < DataEnvelope.FULL.ordinal()) {
 			this.dataEnvelope = syntheticAmenity.getType() == null ? DataEnvelope.EMPTY : DataEnvelope.COMBINED;
+		}
+		if (syntheticAmenity.getType() == null) {
+			syntheticAmenity.setType(MapPoiTypes.getDefault().getUserDefinedCategory());
+			syntheticAmenity.setSubType("");
 		}
 	}
 
@@ -319,6 +374,16 @@ public class BaseDetailsObject {
 			}
 		}
 		return amenities;
+	}
+
+	public List<TransportStop> getTransportStops() {
+		List<TransportStop> stops = new ArrayList<>();
+		for (Object object : objects) {
+			if (object instanceof TransportStop transportStop) {
+				stops.add(transportStop);
+			}
+		}
+		return stops;
 	}
 
 	private static SearchResultResource findObfType(String obfResourceName, Amenity amenity) {

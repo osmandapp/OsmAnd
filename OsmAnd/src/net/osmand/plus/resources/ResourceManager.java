@@ -1097,12 +1097,34 @@ public class ResourceManager {
 	public Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
 		BaseDetailsObject detailsObject = null;
 		long time = System.currentTimeMillis();
+		// TODO perhaps roll-back
+		LatLon latLon = null;
+		Long id = null;
+		String wikidata = null;
+		List<String> names = null;
+		if (object instanceof BaseDetailsObject bdo && bdo.dataEnvelope == BaseDetailsObject.DataEnvelope.EMPTY) {
+			Object mainObj = bdo.getObjects().get(0);
+			if (mainObj instanceof Amenity amenity) {
+				latLon = amenity.getLocation();
+				id = amenity.getId();
+				wikidata = amenity.getWikidata();
+			}
+			if (mainObj instanceof TransportStop stop) {
+				latLon = stop.getLocation();
+				id = stop.getId();
+				names = stop.getOtherNames();
+				names.add(stop.getName());
+			}
+		}
 		if (object instanceof Amenity amenity) {
-			// TODO check double finding amenity !!!
-			LatLon latLon = amenity.getLocation();
-			detailsObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
+			latLon = amenity.getLocation();
+			id = amenity.getId();
+			wikidata = amenity.getWikidata();
+		}
+		if (latLon != null && id != null) {
+			detailsObject = fullAmenitySearch.findPlaceDetails(latLon, id, names, wikidata);
 			if (detailsObject != null) {
-				detailsObject.addObject(amenity);
+				detailsObject.addObject(object);
 				detailsObject.combineData();
 			}
 		}

@@ -20,6 +20,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -35,15 +36,18 @@ public class MapSelectionResult {
 	private final List<SelectedMapObject> allObjects = new ArrayList<>();
 	private final List<SelectedMapObject> processedObjects = new ArrayList<>();
 
+	private final Collection<String> publicTransportTypes;
+
 	protected LatLon objectLatLon;
 
 	public MapSelectionResult(@NonNull OsmandApplication app, @NonNull RotatedTileBox tileBox,
-			@NonNull PointF point) {
+			@NonNull PointF point, @Nullable Collection<String> publicTransportTypes) {
 		this.point = point;
 		this.tileBox = tileBox;
 		this.lang = LocaleHelper.getPreferredPlacesLanguage(app);
 		this.poiProvider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 		this.pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(app.getOsmandMap().getMapView().getMapRenderer(), tileBox, point);
+		this.publicTransportTypes = publicTransportTypes;
 	}
 
 	@NonNull
@@ -111,10 +115,13 @@ public class MapSelectionResult {
 	}
 
 	@NonNull
-	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> amenities, @NonNull List<SelectedMapObject> stops,
-			@NonNull List<SelectedMapObject> supported, @NonNull List<SelectedMapObject> other) {
+	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> amenities,
+												   @NonNull List<SelectedMapObject> stops,
+												   @NonNull List<SelectedMapObject> supported,
+												   @NonNull List<SelectedMapObject> other) {
 		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
 		processGroup(amenities, detailsObjects, null);
+		processGroup(stops, detailsObjects, null);
 		processGroup(supported, detailsObjects, other);
 		return detailsObjects;
 	}
@@ -151,7 +158,7 @@ public class MapSelectionResult {
 			@NonNull List<BaseDetailsObject> detailsObjects) {
 		List<BaseDetailsObject> overlapped = new ArrayList<>();
 		for (BaseDetailsObject detailsObject : detailsObjects) {
-			if (detailsObject.overlapsWith(object)) {
+			if (detailsObject.overlapsWith(object) || detailsObject.overlapPublicTransport(object, publicTransportTypes)) {
 				overlapped.add(detailsObject);
 			}
 		}
