@@ -31,7 +31,6 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -65,7 +64,6 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -730,7 +728,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		long objectSelectionThreshold = 0;
 		for (SelectedMapObject selectedObject : selectedObjects) {
 			if (selectedObject.provider() != null) {
-				long selectionThreshold = selectedObject.provider().getObjectSelectionThresholdBaseOrder(selectedObject.object());
+				long selectionThreshold = selectedObject.provider().getSelectionPointOrder(selectedObject.object());
 				if (selectionThreshold <= objectSelectionThreshold) {
 					objectSelectionThreshold = selectionThreshold;
 				}
@@ -1013,7 +1011,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return false;
 		}
 
-		default long getObjectSelectionThresholdBaseOrder(Object selectedObject) {
+		default long getSelectionPointOrder(Object selectedObject) {
 			return 0L;
 		}
 	}

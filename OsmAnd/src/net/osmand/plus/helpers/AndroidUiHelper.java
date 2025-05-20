@@ -253,12 +253,4 @@ public class AndroidUiHelper {
 		fragment.setSharedElementEnterTransition(transform);
 		view.setTransitionName(transitionName);
 	}
-
-	public static Pair<Float, Float> getScreenResolutionDp(@NonNull Context context) {
-		DisplayMetrics metrics = new DisplayMetrics();
-		AndroidUtils.getDisplay(context).getMetrics(metrics);
-		float dpWidth = metrics.widthPixels / metrics.density;
-		float dpHeight = metrics.widthPixels / metrics.density;
-		return new Pair<>(dpWidth, dpHeight);
-	}
 }

@@ -58,7 +58,6 @@ import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
@@ -132,8 +131,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private RotatedTileBox topPlacesBox;
 	private Pair<PlaceDetailsObject, Amenity> selectedTopPlace;
 	protected MapMarkersCollection selectedTopPlaceCollection;
-	private final MapLayers mapLayers;
-	private int contextLayerBaseOrder = 0;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
@@ -300,7 +297,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				return tile;
 			}
 		};
-		mapLayers = app.getOsmandMap().getMapLayers();
 	}
 
 	@Nullable
@@ -534,8 +530,11 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private void updateTopPlacesLimit() {
-		Pair<Float, Float> resolution = AndroidUiHelper.getScreenResolutionDp(app);
-		topPlacesLimit = (int) (Math.min(resolution.first, resolution.second) / IMAGE_ICON_SIZE_DP * 1.5);
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			int screenSize = Math.min(AndroidUtils.getScreenHeight(activity), AndroidUtils.getScreenWidth(activity));
+			topPlacesLimit = (int) ((float) screenSize / getBigIconSize() * 1.5);
+		}
 	}
 
 	private Set<PoiUIFilter> collectFilters() {
@@ -1130,11 +1129,11 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (imageBitmap != null) {
 			LatLon latLon = selectedPlace.second.getLocation();
 			Bitmap imageMapBitmap = createImageBitmap(imageBitmap, true);
-
+			int baseOrder = app.getOsmandMap().getMapLayers().getContextMenuLayer().getBaseOrder() + 50;
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
 					.setMarkerId(SELECTED_MARKER_ID)
-					.setBaseOrder(getContextMenuBaseOrder() + 50 ) //context menu layer baseOrder to be over object polygon
+					.setBaseOrder(baseOrder) //context menu layer baseOrder to be over object polygon
 					.setPinIcon(NativeUtilities.createSkImageFromBitmap(imageMapBitmap))
 					.setPosition(NativeUtilities.getPoint31FromLatLon(latLon.getLatitude(), latLon.getLongitude()))
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
@@ -1205,19 +1204,12 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale());
 	}
 
-	private int getContextMenuBaseOrder() {
-		if(contextLayerBaseOrder == 0) {
-			contextLayerBaseOrder = mapLayers.getContextMenuLayer().getBaseOrder() - 110;
-		}
-		return contextLayerBaseOrder;
-	}
-
 	@Override
-	public long getObjectSelectionThresholdBaseOrder(Object selectedObject) {
+	public long getSelectionPointOrder(Object selectedObject) {
 		if (isTopPlace(selectedObject)) {
 			return getTopPlaceBaseOrder();
 		} else {
-			return IContextMenuProvider.super.getObjectSelectionThresholdBaseOrder(selectedObject);
+			return IContextMenuProvider.super.getSelectionPointOrder(selectedObject);
 		}
 	}
 
