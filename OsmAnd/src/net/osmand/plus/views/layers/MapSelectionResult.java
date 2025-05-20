@@ -30,7 +30,6 @@ public class MapSelectionResult {
 	private final LatLon pointLatLon;
 	private final RotatedTileBox tileBox;
 	private final IContextMenuProvider poiProvider;
-	private final String lang;
 
 	private final List<SelectedMapObject> allObjects = new ArrayList<>();
 	private final List<SelectedMapObject> processedObjects = new ArrayList<>();
@@ -43,7 +42,6 @@ public class MapSelectionResult {
 		this.tileBox = tileBox;
 		this.lang = LocaleHelper.getPreferredPlacesLanguage(app);
 		this.poiProvider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
-		this.lang = app.getLanguage();
 		this.pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(app.getOsmandMap().getMapView().getMapRenderer(), tileBox, point);
 	}
 
@@ -122,15 +120,15 @@ public class MapSelectionResult {
 
 	public void groupOtherObjects() {
 		processedObjects.sort((o1, o2) -> {
-            int ord1 = getClassOrder(o1.object);
-            int ord2 = getClassOrder(o2.object);
-            if (ord1 != ord2) {
-                return ord2 > ord1 ? -1 : 1;
-            }
-            return 0;
-        });
+			int ord1 = getClassOrder(o1.object);
+			int ord2 = getClassOrder(o2.object);
+			if (ord1 != ord2) {
+				return ord2 > ord1 ? -1 : 1;
+			}
+			return 0;
+		});
 		HashMap<Long, Integer> osmIds = new HashMap<>();
-		Iterator<SelectedMapObject> it =  processedObjects.iterator();
+		Iterator<SelectedMapObject> it = processedObjects.iterator();
 		//List<Integer> amenitiesIndexes = new ArrayList<>();
 		while (it.hasNext()) {
 			SelectedMapObject selectedMapObject = it.next();
@@ -143,12 +141,12 @@ public class MapSelectionResult {
 //			}
 			if (index != null) {
 				SelectedMapObject other = processedObjects.get(index);
-				if (other.object instanceof PlaceDetailsObject bdo) {
+				if (other.object instanceof BaseDetailsObject bdo) {
 					bdo.merge(selectedMapObject.object);
 				} else {
-					PlaceDetailsObject bdo = new PlaceDetailsObject(other.object, other.provider, lang);
+					BaseDetailsObject bdo = new BaseDetailsObject(other.object, lang);
 					bdo.merge(selectedMapObject.object);
-					if (PlaceDetailsObject.shouldSkip(other.object)) {
+					if (!BaseDetailsObject.shouldAdd(other.object)) {
 						bdo.merge(other.object);
 					}
 				}
