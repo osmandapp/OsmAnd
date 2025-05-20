@@ -27,6 +27,15 @@ public class BaseDetailsObject {
 
 	protected Amenity syntheticAmenity = new Amenity();
 
+
+	public enum DataEnvelope {
+		EMPTY,
+		COMBINED,
+		FULL
+	}
+
+	public DataEnvelope dataEnvelope = DataEnvelope.EMPTY;
+
 	public BaseDetailsObject(String lang) {
 		this.lang = lang;
 	}
@@ -159,6 +168,9 @@ public class BaseDetailsObject {
 		}
 		if (!Algorithms.isEmpty(contentLocales)) {
 			syntheticAmenity.updateContentLocales(contentLocales);
+		}
+		if (this.dataEnvelope.ordinal() < DataEnvelope.FULL.ordinal()) {
+			this.dataEnvelope = syntheticAmenity.getType() == null ? DataEnvelope.EMPTY : DataEnvelope.COMBINED;
 		}
 	}
 

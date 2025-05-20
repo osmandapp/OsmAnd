@@ -99,8 +99,6 @@ public class Amenity extends MapObject {
 	private String wikiImageStubUrl;
 	private int travelElo = 0;
 
-	private boolean containsFullInfo;
-
 	private Set<String> contentLocales;
 
 	public int getOrder() {
@@ -951,13 +949,4 @@ public class Amenity extends MapObject {
 			return id >> AMENITY_ID_RIGHT_SHIFT;
 		}
 	}
-
-	public boolean isContainsFullInfo() {
-		return containsFullInfo;
-	}
-
-	public void setContainsFullInfo(boolean containsFullInfo) {
-		this.containsFullInfo = containsFullInfo;
-	}
-
 }

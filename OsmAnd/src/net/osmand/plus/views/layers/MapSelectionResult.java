@@ -5,6 +5,7 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
@@ -86,11 +87,14 @@ public class MapSelectionResult {
 	public void groupByOsmIdAndWikidataId() {
 		List<SelectedMapObject> amenities = new ArrayList<>();
 		List<SelectedMapObject> supported = new ArrayList<>();
+		List<SelectedMapObject> stops= new ArrayList<>();
 		List<SelectedMapObject> other = new ArrayList<>();
 		for (SelectedMapObject selectedObject : allObjects) {
 			Object object = selectedObject.object();
 			if (object instanceof Amenity) {
 				amenities.add(selectedObject);
+			} else if (object instanceof TransportStop transportStop) {
+				stops.add(selectedObject);
 			} else if (BaseDetailsObject.isSupportedObjectType(object)) {
 				supported.add(selectedObject);
 			} else {
@@ -98,7 +102,7 @@ public class MapSelectionResult {
 			}
 		}
 
-		List<BaseDetailsObject> detailsObjects = processObjects(amenities, supported, other);
+		List<BaseDetailsObject> detailsObjects = processObjects(amenities, stops, supported, other);
 		for (BaseDetailsObject object : detailsObjects) {
 			object.combineData();
 			processedObjects.add(new SelectedMapObject(object, poiProvider));
@@ -107,7 +111,7 @@ public class MapSelectionResult {
 	}
 
 	@NonNull
-	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> amenities,
+	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> amenities, @NonNull List<SelectedMapObject> stops,
 			@NonNull List<SelectedMapObject> supported, @NonNull List<SelectedMapObject> other) {
 		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
 		processGroup(amenities, detailsObjects, null);
@@ -182,7 +186,7 @@ public class MapSelectionResult {
 				} else {
 					BaseDetailsObject bdo = new BaseDetailsObject(other.object, lang);
 					bdo.merge(selectedMapObject.object);
-					if (!BaseDetailsObject.shouldAdd(other.object)) {
+					if (!BaseDetailsObject.isSupportedObjectType(other.object)) {
 						bdo.merge(other.object);
 					}
 				}

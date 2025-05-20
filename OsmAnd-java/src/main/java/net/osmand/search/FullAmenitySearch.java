@@ -172,7 +172,7 @@ public class FullAmenitySearch {
                 detailObj.addObject(filtered.get(i));
                 detailObj.combineData();
             }
-            detailObj.getSyntheticAmenity().setContainsFullInfo(true);
+            detailObj.dataEnvelope = BaseDetailsObject.DataEnvelope.FULL;
             return detailObj;
         }
         return null;

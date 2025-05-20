@@ -1098,17 +1098,11 @@ public class ResourceManager {
 		BaseDetailsObject detailsObject = null;
 		long time = System.currentTimeMillis();
 		if (object instanceof Amenity amenity) {
-			if (amenity.isContainsFullInfo()) {
-				detailsObject = new BaseDetailsObject(amenity, app.getLanguage());
-			} else {
-				LatLon latLon = amenity.getLocation();
-				BaseDetailsObject baseObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
-				if (baseObject != null) {
-					detailsObject = new BaseDetailsObject(baseObject, app.getLanguage());
-					detailsObject.addObject(amenity);
-					detailsObject.combineData();
-				}
-			}
+			// TODO check double finding amenity !!!
+			LatLon latLon = amenity.getLocation();
+			detailsObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
+			detailsObject.addObject(amenity);
+			detailsObject.combineData();
 		}
 
 		if (object instanceof BaseDetailsObject) {

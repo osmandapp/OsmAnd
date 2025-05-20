@@ -124,11 +124,11 @@ public class MapSelectionHelper {
 		if (result.isEmpty()) {
 			collectObjectsFromLayers(result, showUnknownLocation, true);
 		}
-		if (result.getAllObjects().size() > 1) {
+		/*if (result.getAllObjects().size() > 1) {
 			recollectForMultiselectMenu(result);
-		}
-		result.groupPoiByOsmIdAndWikidata();
-		result.groupOtherObjects();
+		}*/
+		result.groupByOsmIdAndWikidataId();
+		//result.groupOtherObjects();
 		return result;
 	}
 
@@ -139,22 +139,6 @@ public class MapSelectionHelper {
 			selectObjectsFromOpenGl(result, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
-		}
-	}
-
-	private void recollectForMultiselectMenu(MapSelectionResult result) {
-		List<SelectedMapObject> selectedObjects = result.getAllObjects();
-		for (int i = 0; i < selectedObjects.size(); i++) {
-			SelectedMapObject sel = selectedObjects.get(i);
-			if (sel.object() instanceof RenderedObject renderedObject) {
-				LatLon l = renderedObject.getLatLon();
-				if (l != null) {
-					BaseDetailsObject pdo = findPlaceDetails(l, renderedObject.getId(), renderedObject.getOriginalNames(), renderedObject.getTagValue(WIKIDATA));
-					if (pdo != null) {
-						selectedObjects.set(i, new SelectedMapObject(pdo, sel.provider()));
-					}
-				}
-			}
 		}
 	}
 
