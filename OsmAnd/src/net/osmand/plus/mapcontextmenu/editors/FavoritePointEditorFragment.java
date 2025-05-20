@@ -230,7 +230,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
 			if (editor.isNew()) {
-				doAddFavorite(name, category, description, address, color, backgroundType, iconId);
+				FavouritePoint favouritePoint = getFavorite();
+				if(favouritePoint != null) {
+					favouritesHelper.doAddFavorite(name, category, description, address, color, backgroundType, iconId, favouritePoint);
+				}
 			} else {
 				doEditFavorite(favorite, name, category, description, address, color, backgroundType, iconId, favouritesHelper);
 			}
@@ -262,21 +265,21 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		helper.editFavouriteName(favorite, name, category, description, address);
 	}
 
-	private void doAddFavorite(String name, String category, String description, String address, @ColorInt int color,
-	                           BackgroundType backgroundType, @DrawableRes int iconId) {
-		FavouritePoint favorite = getFavorite();
-		if (favorite != null) {
-			favorite.setName(name);
-			favorite.setCategory(category);
-			favorite.setDescription(description);
-			favorite.setAddress(address);
-			favorite.setColor(color);
-			favorite.setBackgroundType(backgroundType);
-			favorite.setIconId(iconId);
-			app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
-			favouritesHelper.addFavourite(favorite);
-		}
-	}
+//	private void doAddFavorite(String name, String category, String description, String address, @ColorInt int color,
+//	                           BackgroundType backgroundType, @DrawableRes int iconId) {
+//		FavouritePoint favorite = getFavorite();
+//		if (favorite != null) {
+//			favorite.setName(name);
+//			favorite.setCategory(category);
+//			favorite.setDescription(description);
+//			favorite.setAddress(address);
+//			favorite.setColor(color);
+//			favorite.setBackgroundType(backgroundType);
+//			favorite.setIconId(iconId);
+//			app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
+//			favouritesHelper.addFavourite(favorite);
+//		}
+//	}
 
 	@Override
 	protected void delete(boolean needDismiss) {
