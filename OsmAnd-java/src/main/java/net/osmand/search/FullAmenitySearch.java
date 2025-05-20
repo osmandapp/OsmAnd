@@ -55,19 +55,19 @@ public class FullAmenitySearch {
     }
     public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
         List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
+        List<AmenityIndexRepository> travelMaps = new ArrayList<>();
         List<AmenityIndexRepository> baseMaps = new ArrayList<>();
         List<AmenityIndexRepository> result = new ArrayList<>();
 
         fileNames.sort(Algorithms.getStringVersionComparator());
 
         for (String fileName : fileNames) {
-            if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-                if (!includeTravel || !travelFileVisibility.getTravelFileVisibility(fileName)) {
-                    continue;
-                }
-            }
             AmenityIndexRepository r = amenityRepositories.get(fileName);
-            if (r != null && r.isWorldMap()) {
+            if (r != null && fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+                if (includeTravel && !travelFileVisibility.getTravelFileVisibility(fileName)) {
+                    travelMaps.add(r);
+                }
+            } else if (r != null && r.isWorldMap()) {
                 baseMaps.add(r);
             } else if (r != null) {
                 result.add(r);
@@ -75,6 +75,8 @@ public class FullAmenitySearch {
         }
 
         result.addAll(baseMaps);
+        result.addAll(travelMaps);
+
         return result;
     }
 
