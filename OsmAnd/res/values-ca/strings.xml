@@ -3709,8 +3709,6 @@
     <string name="osm_edit_comment_note">Comentari de la nota d\'OSM</string>
     <string name="osm_login_descr">Podeu iniciar la sessió mitjançant el mètode segur OAuth o fer servir el vostre usuari i contrasenya.</string>
     <string name="shared_string_add_photo">Afegeix foto</string>
-    <string name="register_on_openplacereviews">Registreu-vos a
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Crea un compte nou</string>
     <string name="register_opr_have_account">ja tinc un compte</string>
     <string name="shared_string_search_history">Historial de cerques</string>
@@ -3728,10 +3726,6 @@
     <string name="select_items_for_import">Seleccioneu els elements que s\'importaran.</string>
     <string name="add_to_mapillary">Afegeix a Mapillary</string>
     <string name="use_dev_url">Utilitza dev.openstreetmap.org</string>
-    <string name="add_photos_descr">OsmAnd mostra fotos de diverses fonts:
-\nOpenPlaceReviews - fotos de PDIs;
-\nMapillary: imatges a nivell de carrer;
-\nWeb / Wikimedia: fotos dels PDIs d\'OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="icon_group_amenity">Equipament</string>
     <string name="app_mode_light_aircraft">Avioneta</string>

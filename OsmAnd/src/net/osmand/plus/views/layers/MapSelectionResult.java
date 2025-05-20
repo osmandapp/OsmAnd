@@ -5,10 +5,13 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.utils.NativeUtilities;
@@ -16,6 +19,8 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class MapSelectionResult {
@@ -82,7 +87,6 @@ public class MapSelectionResult {
 		List<SelectedMapObject> amenities = new ArrayList<>();
 		List<SelectedMapObject> supported = new ArrayList<>();
 		List<SelectedMapObject> other = new ArrayList<>();
-
 		for (SelectedMapObject selectedObject : allObjects) {
 			Object object = selectedObject.object();
 			if (object instanceof Amenity) {
@@ -148,6 +152,87 @@ public class MapSelectionResult {
 			}
 		}
 		return overlapped;
+	}
+
+	public void groupOtherObjects() {
+		processedObjects.sort((o1, o2) -> {
+			int ord1 = getClassOrder(o1.object);
+			int ord2 = getClassOrder(o2.object);
+			if (ord1 != ord2) {
+				return ord2 > ord1 ? -1 : 1;
+			}
+			return 0;
+		});
+		HashMap<Long, Integer> osmIds = new HashMap<>();
+		Iterator<SelectedMapObject> it = processedObjects.iterator();
+		//List<Integer> amenitiesIndexes = new ArrayList<>();
+		while (it.hasNext()) {
+			SelectedMapObject selectedMapObject = it.next();
+			Long osmId = getOsmId(selectedMapObject.object);
+			if (osmId == null)
+				continue;
+			Integer index = osmIds.get(osmId);
+//			if (index == null) {
+//				index = matchTransportStop(amenitiesIndexes, selectedMapObject.object);
+//			}
+			if (index != null) {
+				SelectedMapObject other = processedObjects.get(index);
+				if (other.object instanceof BaseDetailsObject bdo) {
+					bdo.merge(selectedMapObject.object);
+				} else {
+					BaseDetailsObject bdo = new BaseDetailsObject(other.object, lang);
+					bdo.merge(selectedMapObject.object);
+					if (!BaseDetailsObject.shouldAdd(other.object)) {
+						bdo.merge(other.object);
+					}
+				}
+				it.remove();
+			} else {
+				int ind = processedObjects.indexOf(selectedMapObject);
+//				if (selectedMapObject.object instanceof Amenity || selectedMapObject.object instanceof BaseDetailsObject) {
+//					amenitiesIndexes.add(ind);
+//				}
+				osmIds.put(osmId, ind);
+			}
+		}
+		allObjects.clear();
+		allObjects.addAll(processedObjects);
+	}
+
+	/*private Integer matchTransportStop(List<Integer> amenitiesIndexes, Object object) {
+		if (object instanceof TransportStop transportStop) {
+			for (int i : amenitiesIndexes) {
+				Object obj = processedObjects.get(i).object;
+				Amenity amenity = obj instanceof Amenity ? (Amenity) obj : ((BaseDetailsObject) obj).getSyntheticAmenity();
+				if (TransportStopHelper.matchAmenityAndTransportStop(transportStop, amenity)) {
+					return i;
+				}
+			}
+		}
+		return null;
+	}*/
+
+	private int getClassOrder(Object object) {
+		if (object instanceof BaseDetailsObject) {
+			return 1;
+		}
+		if (object instanceof Amenity) {
+			return 2;
+		}
+		if (object instanceof TransportStop) {
+			return 3;
+		}
+		return 4;
+	}
+
+	private Long getOsmId(Object object) {
+		if (object instanceof BaseDetailsObject baseDetailsObject) {
+			return baseDetailsObject.getSyntheticAmenity().getOsmId();
+		}
+		if (object instanceof MapObject mapObject) {
+			return ObfConstants.getOsmObjectId(mapObject);
+		}
+		return null;
 	}
 
 	public boolean isEmpty() {

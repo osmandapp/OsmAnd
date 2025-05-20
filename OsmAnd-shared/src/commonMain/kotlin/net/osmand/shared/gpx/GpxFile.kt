@@ -713,6 +713,14 @@ class GpxFile : GpxExtensions {
 		getExtensionsToWrite()["show_start_finish"] = showStartFinish.toString()
 	}
 
+	fun isJoinSegments(): Boolean {
+		return extensions?.get("is_join_segments")?.toBoolean() ?: false
+	}
+
+	fun setJoinSegment(isJoinSegment: Boolean) {
+		getExtensionsToWrite()["is_join_segments"] = isJoinSegment.toString()
+	}
+
 	fun addRouteKeyTags(routeKey: Map<String, String>) {
 		networkRouteKeyTags.putAll(routeKey)
 	}
@@ -911,6 +919,14 @@ class GpxFile : GpxExtensions {
 			}
 		}
 		return null
+	}
+
+	fun updateTrackName(newName: String) {
+		metadata.name = newName
+		if (tracks.size == 1) {
+			tracks[0].name = newName
+		}
+		modifiedTime = currentTimeMillis()
 	}
 
 	fun isOsmAndOrigin() = author?.startsWith(OSMAND_AUTHOR_PREFIX, ignoreCase = true) ?: false

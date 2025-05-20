@@ -2596,15 +2596,15 @@
 	<string name="poi_material_marble">Material: marble</string>
 	<string name="poi_material_aluminium">Material: aluminium</string>
 
-	<string name="poi_site_type_megalith">Megalith</string>
-	<string name="poi_site_type_tumulus">Tumulus</string>
-	<string name="poi_site_type_fortification">Fortification</string>
-	<string name="poi_site_type_settlement">Settlement</string>
-	<string name="poi_site_type_city">City</string>
-	<string name="poi_site_type_hut_circle">Hut circle</string>
-	<string name="poi_site_type_necropolis">Necropolis</string>
-	<string name="poi_site_type_petroglyph">Petroglyph</string>
-	<string name="poi_site_type_earthwork">Earthwork</string>
+	<string name="poi_archaeological_site_megalith">Megalith</string>
+	<string name="poi_archaeological_site_tumulus">Tumulus</string>
+	<string name="poi_archaeological_site_fortification">Fortification</string>
+	<string name="poi_archaeological_site_settlement">Settlement</string>
+	<string name="poi_archaeological_site_city">City</string>
+	<string name="poi_archaeological_site_hut_circle">Hut circle</string>
+	<string name="poi_archaeological_site_necropolis">Necropolis</string>
+	<string name="poi_archaeological_site_petroglyph">Petroglyph</string>
+	<string name="poi_archaeological_site_earthwork">Earthwork</string>
 	<string name="poi_megalith_type_menhir">Megalith type: menhir</string>
 	<string name="poi_megalith_type_dolmen">Megalith type: dolmen</string>
 	<string name="poi_megalith_type_nuraghe">Megalith type: nuraghe</string>
@@ -4113,7 +4113,7 @@
 	<string name="poi_rescue_box">Rescue box</string>
 
 	<string name="poi_hazard_additional_erosion">Hazard: erosion</string>
-	<string name="poi_hazard_additional_rockfall">Hazard: rockfall</string>
+	<string name="poi_hazard_additional_falling_rocks">Hazard: rockfall</string>
 	<string name="poi_hazard_additional_nuclear">Hazard: nuclear</string>
 	<string name="poi_hazard_additional_flood">Hazard: flood</string>
 	<string name="poi_hazard_additional_avalanche">Hazard: avalanche</string>
@@ -5586,11 +5586,89 @@
 	<string name="poi_presbyterian_church">Presbyterian church</string>
 	<string name="poi_access_main_tag">Access</string>
 
+	<string name="poi_aerodrome_type_airfield">Airfield</string>
+
+	<string name="poi_consulate">Consulate</string>
+
+	<string name="poi_hazard_additional_landslide">Hazard: landslide</string>
+	<string name="poi_hazard_additional_yes">Hazard</string>
+	<string name="poi_hazard_falling_rocks">Falling rocks</string>
+	<string name="poi_hazard_contamination">Contamination</string>
+	<string name="poi_hazard_yes">Hazard</string>
+	<string name="poi_hazard_additional_slippery_road">Slippery road</string>
+
 	<string name="poi_steps">Steps</string>
 	<string name="poi_footway">Walkway</string>
 	<string name="poi_area_highway">Mobility area</string>
 	<string name="poi_area_highway_steps">Stairway area</string>
 	<string name="poi_area_highway_footway">Walkable area</string>
+	<string name="poi_travel_agency">Travel agency</string>
+
+	<string name="poi_mormon_church">Mormon church</string>
+	<string name="poi_seventh_day_adventist_church">Seventh day adventist church</string>
+	<string name="poi_reformed_church">Reformed church</string>
+	<string name="poi_ethiopian_orthodox_church">Ethiopian orthodox church</string>
+	<string name="poi_romanian_orthodox_church">Romanian orthodox church</string>
+	<string name="poi_serbian_orthodox_church">Serbian orthodox church</string>
+	<string name="poi_greek_catholic_church">Greek catholic church</string>
+	<string name="poi_united_methodist_church">United methodist church</string>
+	<string name="poi_ukrainian_greek_catholic_church">Ukrainian greek catholic church</string>
+	<string name="poi_episcopal_church">Episcopal church</string>
+	<string name="poi_iglesia_ni_cristo_church">Iglesia ni cristo church</string>
+	<string name="poi_nondenominational_church">Nondenominational church</string>
+	<string name="poi_georgian_orthodox_church">Georgian orthodox church</string>
+	<string name="poi_new_apostolic_church">New apostolic church</string>
+	<string name="poi_ukrainian_orthodox_church">Ukrainian orthodox church</string>
+	<string name="poi_united_church">United church</string>
+	<string name="poi_assemblies_of_god_church">Assemblies of god church</string>
+	<string name="poi_church_of_scotland">Church of scotland</string>
+	<string name="poi_salvation_army_church">Salvation army church</string>
+	<string name="poi_armenian_apostolic_church">Armenian apostolic church</string>
+	<string name="poi_quaker_church">Quaker church</string>
+	<string name="poi_church_of_christ">Church of christ</string>
+	<string name="poi_neo_pentecostal_church">Neo-pentecostal church</string>
+	<string name="poi_latter_day_saints_church">Latter day saints church</string>
+	<string name="poi_evangelical_lutheran_church">Evangelical lutheran church</string>
+	<string name="poi_mennonite_church">Mennonite church</string>
+	<string name="poi_landmark_church">Landmark church</string>
+	<string name="poi_adventist_church">Adventist church</string>
+	<string name="poi_uniting_church">Uniting church</string>
+	<string name="poi_apostolic_church">Apostolic church</string>
+	<string name="poi_united_church_of_christ">United church of christ</string>
+	<string name="poi_united_reformed_church">United reformed church</string>
+	<string name="poi_anabaptist_church">Anabaptist church</string>
+	<string name="poi_bulgarian_orthodox_church">Bulgarian orthodox church</string>
+	<string name="poi_african_methodist_episcopal_church">African methodist episcopal church</string>
+	<string name="poi_macedonian_orthodox_church">Macedonian orthodox church</string>
+	<string name="poi_southern_baptist_church">Southern baptist church</string>
+	<string name="poi_congregational_church">Congregational church</string>
+	<string name="poi_spiritist_church">Spiritist church</string>
+
+	<string name="poi_christian_church">Christian church</string>
+
+	<string name="poi_financial_advisor">Financial advisor</string>
+	<string name="poi_security">Security office</string>
+	<string name="poi_construction_company">Construction company</string>
+	<string name="poi_union">Union office</string>
+	<string name="poi_office_charity">Charity office</string>
+	<string name="poi_courier">Courier office</string>
+	<string name="poi_moving_company">Moving company</string>
+	<string name="poi_surveyor">Surveyor office</string>
+	<string name="poi_graphic_design">Graphic design office</string>
+	<string name="poi_office_university">University office</string>
+	<string name="poi_transport">Transport office</string>
+	<string name="poi_harbour_master">Harbour master</string>
+	<string name="poi_bail_bond_agent">Bail bond agent</string>
+	<string name="poi_translator">Translator</string>
+	<string name="poi_private_investigator">Private investigator</string>
+	<string name="poi_visa">Visa</string>
+	<string name="poi_interior_design">Interior design</string>
+	<string name="poi_chamber">Chamber</string>
+	<string name="poi_tutoring">Tutoring</string>
+	<string name="poi_politician">Politician office</string>
+	<string name="poi_adoption_agency">Adoption agency</string>
+	<string name="poi_international_organization">International organization</string>
+	<string name="poi_airline">Airline office</string>
 	<string name="poi_route_point_category">Travel point category</string>
 
 </resources>

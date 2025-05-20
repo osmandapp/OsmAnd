@@ -1,6 +1,7 @@
 package net.osmand.search;
 
 import static net.osmand.data.Amenity.ROUTE_ID;
+import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 
@@ -369,7 +370,7 @@ public class SearchUICore {
 						String subType1 = a1.getSubType();
 						String subType2 = a2.getSubType();
 
-						boolean isEqualId = a1.getId().longValue() == a2.getId().longValue();
+						boolean isEqualId = getOsmId(a1) == getOsmId(a2);
 
 						if (isEqualId && (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)
 								|| FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2))) {
@@ -386,9 +387,8 @@ public class SearchUICore {
 									|| (subType1.startsWith("route_hiking_") && subType1.endsWith("n_poi"))) {
 								similarityRadius = 50000;
 							}
-							if (Algorithms.stringsEqual(a1.getAdditionalInfo(ROUTE_ID), a2.getAdditionalInfo(ROUTE_ID))
-								&& (subType1.startsWith(ROUTES_PREFIX) || subType1.equals(ROUTE_TRACK))) {
-								similarityRadius = 1_000_000; // conceal redundant "5km" TravelGpx points
+							if (a1.getAdditionalInfo(ROUTE_ID) != null && Algorithms.stringsEqual(a1.getAdditionalInfo(ROUTE_ID), a2.getAdditionalInfo(ROUTE_ID))) {
+								similarityRadius = 1_000_000;
 							}
 						}
 					} else if (ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
@@ -400,6 +400,14 @@ public class SearchUICore {
 				return r1.object.equals(r2.object);
 			}
 			return false;
+		}
+	}
+
+	private static long getOsmId(Amenity amenity) {
+		if (ObfConstants.isShiftedID(amenity.getId())) {
+			return ObfConstants.getOsmId(amenity.getId());
+		} else {
+			return amenity.getId() >> AMENITY_ID_RIGHT_SHIFT;
 		}
 	}
 	

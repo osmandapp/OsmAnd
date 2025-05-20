@@ -274,7 +274,7 @@
     <string name="poi_social_facility_for_child">儿童</string>
     <string name="poi_animal_training_dog">狗</string>
     <string name="poi_animal_training_horse">马</string>
-    <string name="poi_site_type_city">城市</string>
+    <string name="poi_archaeological_site_city">城市</string>
     <string name="poi_cargo_bicycle">自行车</string>
     <string name="poi_aerodrome_type_international">国际</string>
     <string name="poi_aerodrome_type_public">公共</string>
@@ -769,7 +769,7 @@
     <string name="poi_takeaway_only">仅限外卖</string>
     <string name="poi_pharmacy_dispensing">配药</string>
     <string name="poi_automated">自动化</string>
-    <string name="poi_site_type_fortification">防御工事</string>
+    <string name="poi_archaeological_site_fortification">防御工事</string>
     <string name="poi_surface_wood">表面：木材</string>
     <string name="poi_dead_wood">枯木</string>
     <string name="poi_fuel_wood">燃料：薪柴</string>
@@ -1714,7 +1714,7 @@
     <string name="poi_barbecue_grill">烧烤架: 有</string>
     <string name="poi_water_utility">自来水公司办公室</string>
     <string name="poi_amusement_arcade">街机娱乐</string>
-    <string name="poi_hazard_additional_rockfall">危害：落石</string>
+    <string name="poi_hazard_additional_falling_rocks">危害：落石</string>
     <string name="poi_rescue_box">救援箱</string>
     <string name="poi_defibrillator_location">位置</string>
     <string name="poi_taxi_office">出租车办公室</string>
@@ -1874,7 +1874,6 @@
     <string name="poi_rcn_ref">区域性骑行网络节点</string>
     <string name="poi_motorcycle_barrier">摩托车屏障</string>
     <string name="poi_rwn_ref">区域性徒步网络节点</string>
-    <string name="poi_route_hiking_rwn_poi">区域性徒步旅行路线</string>
     <string name="poi_reg_name">地区性名称</string>
     <string name="poi_motorcycle_repair">摩托车维修</string>
     <string name="poi_second_hand_yes">是</string>
@@ -1909,7 +1908,7 @@
     <string name="poi_pet_grooming">宠物美容</string>
     <string name="poi_service_vehicle_transmission_repair_yes">变速箱维修</string>
     <string name="poi_agrarian">农业用品店</string>
-    <string name="poi_site_type_petroglyph">岩画</string>
+    <string name="poi_archaeological_site_petroglyph">岩画</string>
     <string name="poi_bandstand">演奏台</string>
     <string name="poi_stripclub">脱衣舞俱乐部</string>
     <string name="poi_casino">赌场</string>
@@ -2360,8 +2359,6 @@
     <string name="poi_zero_waste_yes">零浪费： 是</string>
     <string name="poi_zero_waste_no">零浪费：否</string>
     <string name="poi_zero_waste_only">零浪费：仅限</string>
-    <string name="poi_route_hiking_lwn_poi">本地徒步路线</string>
-    <string name="poi_route_hiking_ref_poi">徒步路线编号</string>
     <string name="poi_aerialway_bubble_yes">安全罩</string>
     <string name="poi_patrolled_no">巡逻：否</string>
     <string name="poi_piste_ski_jump">跳台滑雪</string>
@@ -2390,8 +2387,6 @@
     <string name="poi_ncn_ref">全国骑行网络节点</string>
     <string name="poi_nwn_ref">全国徒步网络节点</string>
     <string name="poi_lwn_ref">本地徒步网络节点</string>
-    <string name="poi_route_hiking_iwn_poi">国际徒步路线</string>
-    <string name="poi_route_hiking_nwn_poi">全国徒步路线</string>
     <string name="poi_collection_times">收集时间</string>
     <string name="poi_email">电子邮件</string>
     <string name="poi_fax">传真</string>

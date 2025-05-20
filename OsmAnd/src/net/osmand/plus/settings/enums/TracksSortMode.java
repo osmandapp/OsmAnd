@@ -2,6 +2,7 @@ package net.osmand.plus.settings.enums;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -41,8 +42,13 @@ public enum TracksSortMode {
 	}
 
 	@NonNull
-	public static TracksSortMode getDefaultSortMode() {
-		return LAST_MODIFIED;
+	public static TracksSortMode getDefaultSortMode(@Nullable String sortEntryId) {
+		if (Algorithms.isEmpty(sortEntryId) ||
+				Algorithms.stringsEqual("rec", sortEntryId) ||
+				Algorithms.stringsEqual("import", sortEntryId)) {
+			return LAST_MODIFIED;
+		}
+		return NAME_ASCENDING;
 	}
 
 	@NonNull
@@ -52,6 +58,6 @@ public enum TracksSortMode {
 				return sortMode;
 			}
 		}
-		return getDefaultSortMode();
+		return getDefaultSortMode("");
 	}
 }

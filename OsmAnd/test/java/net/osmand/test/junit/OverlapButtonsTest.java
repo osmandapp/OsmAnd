@@ -1,4 +1,4 @@
-package net.osmand.test.activities;
+package net.osmand.test.junit;
 
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_FULL_WIDTH;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_TOP;

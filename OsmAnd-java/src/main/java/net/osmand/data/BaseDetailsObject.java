@@ -103,10 +103,37 @@ public class BaseDetailsObject {
 		return osmIdEqual || wikidataEqual;
 	}
 
-	public void merge(BaseDetailsObject other) {
+	public void merge(Object object) {
+		if (object instanceof BaseDetailsObject baseDetailsObject)
+			merge(baseDetailsObject);
+		if (object instanceof TransportStop transportStop)
+			merge(transportStop);
+		if (object instanceof RenderedObject renderedObject)
+			merge(renderedObject);
+	}
+
+	private void merge(BaseDetailsObject other) {
 		osmIds.addAll(other.osmIds);
 		wikidataIds.addAll(other.wikidataIds);
 		objects.addAll(other.getObjects());
+	}
+
+	private void merge(TransportStop other) {
+		osmIds.add(ObfConstants.getOsmObjectId(other));
+		Amenity amenity = other.getAmenity();
+		if (amenity != null) {
+			wikidataIds.add(amenity.getWikidata());
+		}
+		objects.add(other);
+	}
+
+	private void merge(RenderedObject renderedObject) {
+		osmIds.add(ObfConstants.getOsmObjectId(renderedObject));
+		String wikidata = renderedObject.getTagValue(WIKIDATA);
+		if (!Algorithms.isEmpty(wikidata)) {
+			wikidataIds.add(wikidata);
+		}
+		objects.add(renderedObject);
 	}
 
 	public void combineData() {

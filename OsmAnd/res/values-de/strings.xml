@@ -491,7 +491,7 @@
     <string name="poi_filter_custom_filter">Benutzerdefinierter Filter</string>
     <string name="poi_filter_food_shop">Lebensmittelgeschäft</string>
     <string name="poi_filter_for_tourists">Für Touristen</string>
-    <string name="poi_filter_fuel">Tankstelle</string>
+    <string name="poi_filter_fuel">Kraftstoff</string>
     <string name="poi_filter_namefinder">Online-Namensfinder</string>
     <string name="reading_cached_tiles">Zwischengespeicherte Kacheln werden gelesen …</string>
     <string name="version_index_is_big_for_memory">Nicht genügend Speicher für Index \'\'{0}\'\'</string>
@@ -1372,7 +1372,7 @@
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Rendering verwenden</string>
     <string name="use_opengl_render_descr">Hardware-beschleunigtes OpenGL-Rendering verwenden (Könnte mehr Akkuleistung verbrauchen und nicht auf allen Geräten funktionieren).</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich. Bitte die Internet-Verbindung prüfen.</string>
+    <string name="no_internet_connection">Keine Internet Verbindung</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
@@ -1618,7 +1618,7 @@
     <string name="shared_string_undo">Rückgängig machen</string>
     <string name="shared_string_skip">Überspringen</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="traffic_warning_hazard">Gefährdung</string>
+    <string name="traffic_warning_hazard">Gefahr</string>
     <string name="rendering_value_boldOutline_name">Hervorgehobene Umrisse</string>
     <string name="delete_change">Änderung löschen</string>
     <string name="shared_string_card_was_hidden">Karte wurde versteckt</string>
@@ -2773,7 +2773,7 @@
     <string name="rendering_attr_highway_class_road_name">Landstraße</string>
     <string name="rendering_attr_highway_class_street_name">Straße</string>
     <string name="rendering_attr_highway_class_service_name">Erschließungsweg</string>
-    <string name="rendering_attr_highway_class_footway_name">Gehweg</string>
+    <string name="rendering_attr_highway_class_footway_name">Fußweg</string>
     <string name="rendering_attr_highway_class_track_name">Wirtschaftsweg</string>
     <string name="rendering_attr_highway_class_bridleway_name">Reitweg</string>
     <string name="rendering_attr_highway_class_steps_name">Stufen</string>
@@ -3664,18 +3664,12 @@
     <string name="osm_edit_comment_note">OSM-Hinweis kommentieren</string>
     <string name="osm_login_descr">Melden Sie sich mit der OAuth-Methode oder mit Ihrem OSM-Benutzernamen und -Passwort an.</string>
     <string name="shared_string_add_photo">Foto hinzufügen</string>
-    <string name="register_on_openplacereviews">Registrieren bei
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Neues Konto erstellen</string>
     <string name="register_opr_have_account">Ich habe bereits ein Konto</string>
     <string name="shared_string_search_history">Suchverlauf</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorboot</string>
     <string name="add_to_mapillary">Zu Mapillary hinzufügen</string>
-    <string name="add_photos_descr">OsmAnd zeigt Fotos aus verschiedenen Quellen:
-\nOpenPlaceReviews - POI Fotos;
-\nMapillary - Bilder auf Straßenebene;
-\nWeb / Wikimedia - POI-Fotos gemäß OpenStreetMap-Daten.</string>
     <string name="shared_string_resources">Quellen</string>
     <string name="approximate_file_size">Ungefähre Dateigröße</string>
     <string name="select_data_to_export">Wählen Sie die Daten aus, die in die Datei exportiert werden sollen.</string>
@@ -3769,9 +3763,6 @@
     <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
     <string name="toast_select_edits_for_upload">Bearbeitungen zum Hochladen auswählen</string>
     <string name="hillshade_slope_contour_lines">Höhenlinien / Relief / Hangneigung</string>
-    <string name="open_place_reviews_plugin_description">Tragen Sie zum OpenPlaceReviews-Projekt bei, z. B. mit Fotos, Bewertungen oder Links für öffentliche Orte wie Restaurants, Hotels oder Museen.
-\n
-\nAuf unserer Website %1$s finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
     <string name="activity_type_water_name">Wasser</string>
     <string name="activity_type_winter_name">Winter</string>
     <string name="activity_type_snowmobile_name">Schneemobil</string>
@@ -4345,7 +4336,7 @@
     <string name="circle_settings">Kreiseinstellungen</string>
     <string name="map_widget_distance">Entfernung</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Militärische Bereiche ausblenden</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Militärische Bereiche</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Militärgelände</string>
     <string name="routing_attr_hazmat_category_name">Gefahrgutkategorie</string>
     <string name="average_speed_skip_stops">Zwischenstopps berücksichtigen</string>
     <string name="map_widget_true_bearing">Tatsächliche Peilung</string>
@@ -5411,10 +5402,6 @@
 \nEnergieverbrauch (mAh): %2$s</string>
     <string name="rendering_avg_info">Rendering-Statistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
     <string name="energy_avg_info">Energiestatistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
-    <string name="rendering_avg_info_description">FPS der letzten 1000 Frames: %1$s
-\nCPU-Basis: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Kartenorientierung wählen</string>
     <string name="rendering_value_pale_name">Blass</string>
     <string name="shared_string_all_icons">Alle Icons</string>
@@ -5628,14 +5615,14 @@
     <string name="obd_connected_to_device">Verbunden mit %s</string>
     <string name="obd_not_connected_to_device">Getrennt von %s</string>
     <string name="dynamic_icon_type_summary">Symbol ändert sich je nach Aktionsstatus.</string>
-    <string name="fuel_tank_capacity_description">Tankinhalt eingeben, um Kraftstoffstand und -verbrauch genau zu verfolgen</string>
+    <string name="fuel_tank_capacity_description">Geben Sie das Fassungsvermögen Ihres Tanks ein, um Kraftstoffstand und -verbrauch genau zu verfolgen</string>
     <string name="shared_strings_dimensions">Abmessungen</string>
-    <string name="fuel_tank_capacity">Volumen des Kraftstofftanks</string>
+    <string name="fuel_tank_capacity">Fassungsvermögen des Kraftstofftanks</string>
     <string name="litres">Liter</string>
     <string name="us_gallons_unit">gal</string>
-    <string name="imperial_gallons">Imperiale Gallone</string>
-    <string name="us_gallons">US-Gallone</string>
-    <string name="unit_of_volume_description">Ausgewählte Einheiten werden auf alle volumenbezogenen Daten im aktuellen Profil angewendet.</string>
+    <string name="imperial_gallons">Imperiale Gallonen</string>
+    <string name="us_gallons">US-Gallonen</string>
+    <string name="unit_of_volume_description">Ausgewählte Einheiten werden für alle volumenabhängigen Daten im aktuellen Profil genutzt.</string>
     <string name="unit_of_volume">Volumeneinheit</string>
     <string name="record_obd_data">Fahrzeugdaten aufzeichnen</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
@@ -5767,4 +5754,29 @@
     <string name="display_priority">Anzeigepriorität</string>
     <string name="poi_source">POI-Quelle</string>
     <string name="row_height">Zeilenhöhe</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="read_on_wiki">Auf Wikipedia lesen</string>
+    <string name="prediction_time">Vorhersagezeit</string>
+    <string name="shared_string_no_animation">Keine Animation</string>
+    <string name="routing_attr_allow_ferries_description">Routenführung über Fährverbindungen zulassen</string>
+    <string name="routing_attr_allow_ferries_name">Fähren zulassen</string>
+    <string name="prediction_time_advanced_description">Vorhersagezeit anpassen, um Verzögerung zu minimieren.</string>
+    <string name="position_animation_empty_banner_description">Positionssymbol bewegt sich ohne Animation zu jedem neu empfangenen Standort.</string>
+    <string name="position_animation">Animation der Position</string>
+    <string name="prediction_time_description">Animation des Positionssymbols in OsmAnd bei jedem empfangenen GPS-Datenpunkt (einmal pro Sekunde). Kann zu einer merkbaren Verzögerung seiner Bewegung führen, insbesondere wenn der Nutzer sich schnell bewegt oder die GPS-Signalstärke schwankt.</string>
+    <string name="wiki_around">Nahegelegene beliebte Orte</string>
+    <string name="grid_color">Rasterfarbe</string>
+    <string name="shared_string_edges">Ränder</string>
+    <string name="labels_position">Position der Beschriftungen</string>
+    <string name="customize_grid_color">Rasterfarbe anpassen</string>
+    <string name="route_members">Mitglieder</string>
+    <string name="multipoligon_related">Zugehörig</string>
+    <string name="route_part_of">Teil von</string>
+    <string name="cant_load_map_styles">Kartenstile können nicht geladen werden.</string>
+    <string name="add_to_navigation">Zur Navigation hinzufügen</string>
+    <string name="msg_favorites_skipped_as_existing">Favorisierte Punkte (%1$d) wurden übersprungen, da bereits vorhanden.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX-Wegpunkte (%1$d) in die Favoriten kopiert.</string>
+    <string name="save_to_device_error">Fehler beim Speichern auf dem Gerät</string>
+    <string name="saved_to_device">Auf dem Gerät gespeichert</string>
+    <string name="save_to_device">Auf dem Gerät speichern</string>
 </resources>

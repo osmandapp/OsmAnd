@@ -1276,7 +1276,7 @@
     <string name="use_opengl_render">Utilizzare il rendering OpenGL</string>
     <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe utilizzare più batteria o non funzionare in dispositivi molto vecchi).</string>
     <string name="everything_up_to_date">Tutti i file sono aggiornati</string>
-    <string name="no_internet_connection">Non sono in grado di scaricare. Prego, verifica la connessione a internet.</string>
+    <string name="no_internet_connection">Nessuna connessione a internet</string>
     <string name="download_tab_downloads">Tutti i download</string>
     <string name="download_tab_updates">Aggiornamenti</string>
     <string name="download_tab_local">Nel dispositivo</string>
@@ -2031,8 +2031,8 @@
     <string name="rendering_value_low_name">Basso</string>
     <string name="rendering_attr_contourWidth_description">Spessore linee isoipse</string>
     <string name="rendering_attr_contourWidth_name">Spessore linee isoipse</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Acqua</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Nascondi l\'acqua</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Nascondi acqua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Acqua</string>
     <string name="rendering_attr_contourDensity_description">Densità linee isoipse</string>
     <string name="configure_screen_quick_action">Azione rapida</string>
     <string name="quick_action_item_action">Azione %d</string>
@@ -2735,8 +2735,8 @@
     <string name="rendering_attr_smoothness_very_horrible_name">Molto orribile</string>
     <string name="rendering_attr_smoothness_impassable_name">Impassibile</string>
     <string name="rendering_attr_highway_class_state_road_name">Strada statale</string>
-    <string name="rendering_attr_highway_class_road_name">Strada</string>
-    <string name="rendering_attr_highway_class_street_name">Strada</string>
+    <string name="rendering_attr_highway_class_road_name">Strada extraurbana</string>
+    <string name="rendering_attr_highway_class_street_name">Strada urbana</string>
     <string name="rendering_attr_highway_class_service_name">Strada di servizio</string>
     <string name="rendering_attr_highway_class_footway_name">Percorso pedonale</string>
     <string name="rendering_attr_highway_class_track_name">Carrareccia</string>
@@ -3625,8 +3625,6 @@
     <string name="osm_edit_comment_note">Commenta la nota OSM</string>
     <string name="osm_login_descr">Puoi autenticarti con il metodo OAuth, o utilizzare le tue credenziali su OSM.</string>
     <string name="shared_string_add_photo">Aggiungi foto</string>
-    <string name="register_on_openplacereviews">Registrati su
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Crea un nuovo account</string>
     <string name="register_opr_have_account">Ho già un account</string>
     <string name="shared_string_search_history">Cronologia di ricerca</string>
@@ -3654,10 +3652,6 @@
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificabile\" significa che la traccia è visualizzabile nelle mie tracce GPS e nelle liste pubbliche, ad es. gli altri utenti potranno scaricare la traccia grezza e associarla con il tuo nome utente. I punti della traccia, con le loro informazioni temporali, saranno riconducibili, attraverso le API GPS, alla tua traccia originale.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Tracciabile\" significa che la traccia non è visualizzabile in alcuna lista pubblica, ma solo i suoi punti, processati, con le informazioni temporali (che non possono essere direttamente associati a te) attraverso le API GPS pubbliche.</string>
     <string name="add_to_mapillary">Aggiungi a Mapillary</string>
-    <string name="add_photos_descr">OsmAnd mostra foto da diverse fonti:
-\nOpenPlaceReviews - foto PDI;
-\nMapillary - immagini stradali;
-\nWeb / Wikimedia - foto PDI di dati OpenStreetMap.</string>
     <string name="shared_string_resources">Risorse</string>
     <string name="approximate_file_size">Dimesione approssimativa del file</string>
     <string name="select_data_to_export">Seleziona i dati da esportare nel file.</string>
@@ -3702,9 +3696,6 @@
     <string name="uploaded_count">Caricati %1$d di %2$d</string>
     <string name="toast_select_edits_for_upload">Seleziona le modifiche per il caricamento</string>
     <string name="hillshade_slope_contour_lines">Linee di contorno / Ombra / Pendenza</string>
-    <string name="open_place_reviews_plugin_description">Contribuisci al progetto OpenPlaceReviews con foto, recensioni o link di luoghi pubblici come ristoranti, hotel, o musei.
-\n
-\nTrova informazioni su come contribuire nel nostro sito: %1$s.</string>
     <string name="reverse_all_points">Inverti tutti i punti</string>
     <string name="voice_prompts_timetable">Tempo degli avvisi vocali</string>
     <string name="profile_type_osmand_string">Profilo OsmAnd</string>
@@ -3784,7 +3775,7 @@
 \nTutti i dati non salvati saranno persi.</string>
     <string name="on_pause">In pausa</string>
     <string name="app_restart_required">Riavvio richiesto per applicare alcune impostazioni.</string>
-    <string name="routing_attr_height_obstacles_description">Il tempo di percorrenza previsto terrà conto dell\'impatto dell\'elevazione. La preferenza di percorso può aiutare a evitare salite ripide:</string>
+    <string name="routing_attr_height_obstacles_description">Il tempo di percorrenza previsto terrà conto dell\'impatto dell\'elevazione. La scelta può aiutare a evitare salite ripide:</string>
     <string name="quick_action_coordinates_widget_descr">Un interruttore per mostrare o nascondere il widget delle Coordinate sulla mappa.</string>
     <string name="map_widget_distance_by_tap">Distanza dal tocco</string>
     <string name="latest_openstreetmap_update">Ultimo aggiornamento OpenStreetMap disponibile:</string>
@@ -4284,7 +4275,7 @@
     <string name="simulation_real_mode_title">Simulazione realistica</string>
     <string name="speed_mode">Modalità veloce</string>
     <string name="move_map_to_select_area">Muovi la mappa per selezionare l\'area desiderata.</string>
-    <string name="default_appearance">Grafica predefinita</string>
+    <string name="default_appearance">Aspetto predefinito</string>
     <string name="apply_only_to_new_points">Applica solo ai nuovi punti</string>
     <string name="configure_screen_widgets_descr">Seleziona il lato dello schermo per aggiungere o riorganizzare i widget.</string>
     <string name="routeInfo_horse_scale_description">Disegna i percorsi in base alla difficoltà dell\'itinerario a cavallo</string>
@@ -4378,7 +4369,7 @@
     <string name="routing_attr_hazmat_category_name">Categoria di materiale pericoloso</string>
     <string name="map_markers_bar_widget_desc">Nel widget della barra superiore puoi vedere la distanza e la direzione dalla posizione attuale al marcatore. È possibile configurare la visualizzazione di 1 o 2 marcatori.</string>
     <string name="route_maneuvers_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, ora di arrivo o tempo rimanente, prossime svolte, angolazione, nome della strada attuale, indicazioni di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Nascondi le aree militari</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Aree militari</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Nascondi le aree militari</string>
     <string name="navigation_points_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, tempo di arrivo o rimanente, prossime svolte, direzione, il nome della strada attuale o successiva, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
     <string name="app_mode_mountain_bicycle">Mountain bike</string>
@@ -5314,7 +5305,7 @@
     <string name="allow_display_on_top_description">Consenti la visualizzazione dei testi della mappa uno sopra l\'altro</string>
     <string name="show_debug_info">Mostra informazioni di debug</string>
     <string name="show_debug_info_description">Visualizza informazioni grafiche sul posizionamento di ciascun testo della mappa</string>
-    <string name="map_text">Testi della mappa</string>
+    <string name="map_text">Rendering della mappa</string>
     <string name="routing_attr_avoid_cobblestone_name">Evita acciottolato</string>
     <string name="disable_map_layers">Disabilita i livelli della mappa</string>
     <string name="height_legend_description">Le mappe a colori dell\'altitudine sono utilizzate per visualizzare i rilievi.</string>
@@ -5399,10 +5390,6 @@
     <string name="weather_screen">Schermata meteo</string>
     <string name="energy_avg_info_description">Livello della batteria per minuto: %1$s
 \nConsumo energetico (mAh): %2$s</string>
-    <string name="rendering_avg_info_description">FPS degli ultimi 1.000 frames: %1$s
-\nCPU di base: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Statistiche energetiche (media 1 / 5 / 15 minuti)</string>
     <string name="rendering_avg_info">Statistiche di rendering (media 1 / 5 / 15 minuti)</string>
     <string name="choose_map_orientation">Scegli l\'orientamento della mappa</string>
@@ -5528,13 +5515,13 @@
     <string name="obd_plugin_name">Misure del veicolo</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm_desc">Mostra il tachimetro giri/minuto sopra il sensore OBD</string>
-    <string name="fuel_tank_capacity_description">Inserisci la capacità del serbatoio per monitorare con precisione i livelli di carburante e il consumo</string>
-    <string name="fuel_tank_capacity">Capacità serbatoio</string>
+    <string name="fuel_tank_capacity_description">Inserisci la capacità del tuo serbatoio per monitorare con precisione i livelli e i consumi di carburante</string>
+    <string name="fuel_tank_capacity">Capacità del serbatoio di carburante</string>
     <string name="shared_strings_dimensions">Dimensioni</string>
     <string name="litres">Litri</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galloni imperiali</string>
-    <string name="us_gallons">Galloni americani</string>
+    <string name="us_gallons">Galloni USA</string>
     <string name="obd_how_to_connect">Come connettere:</string>
     <string name="connect_obd_instructions_step">1. Connettere lo scanner alla porta OBD-II del veicolo.\n\n2. Avviare il motore del veicolo\n\n3. Abilitare il Bluetooth sul dispositivo\n\n4. Premere \'%1$s\' e selezionare lo scanner dalla lista.</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
@@ -5573,7 +5560,7 @@
     <string name="obd_fuel_level_percent">Livello carburante (%)</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="speedometer_maximum">Massimo</string>
-    <string name="obd_bluetooth_off_description">Accendere Bluetooth per trovare e collegare gli scanner.</string>
+    <string name="obd_bluetooth_off_description">Attivare il Bluetooth per trovare e collegare gli scanner.</string>
     <string name="obd_searching_text_description">Per favore tieni il tuo dispositivo vicino allo scanner. Assicurati che il motore del veicolo sia acceso.</string>
     <string name="obd_searching_text">Ricerca di scanner</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Tasso di consumo di carburante %/h</string>
@@ -5729,11 +5716,11 @@
     <string name="show_dms_grids">Usa DMS invece di gradi</string>
     <string name="show_dms_grids_description">Mostra la griglia in gradi, minuti, secondi invece che gradi</string>
     <string name="show_dm_grids">Usa DM invece di gradi o DMS</string>
-    <string name="original_color_description">Ogni punto manterrebbe il proprio colore.</string>
-    <string name="original_shape_description">Ogni punto manterrebbe la propria forma.</string>
-    <string name="original_icon_description">Ogni punto manterrebbe la propria icona.</string>
+    <string name="original_color_description">Ogni punto manterrà il suo colore.</string>
+    <string name="original_shape_description">Ogni punto manterrà la sua forma.</string>
+    <string name="original_icon_description">Ogni punto manterrà la sua icona.</string>
     <string name="show_dm_grids_description">Mostra la griglia in gradi e minuti invece che in gradi o DMS</string>
-    <string name="save_favorite_default_appearance">Applicare le modifiche ai punti esistenti nella cartella o solo a quelli nuovi?</string>
+    <string name="save_favorite_default_appearance">Applica modifiche ai punti esistenti nella cartella o solo a quelli nuovi?</string>
     <string name="popular_places">Luoghi popolari</string>
     <string name="show_list">Mostra lista</string>
     <string name="point_location">Posizione del punto</string>
@@ -5742,12 +5729,12 @@
     <string name="shared_string_map_center">Centro della mappa</string>
     <string name="shared_string_manual">Manuale</string>
     <string name="show_image_previews">Mostra l\' immagine precedente</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Azione per il controllo della visibilità della griglia delle coordinate sulla mappa.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Azioni per controllare la visibilità della griglia delle coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
     <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
     <string name="equator">Equatore</string>
-    <string name="prime_meridian">Meridiano fondamentale</string>
-    <string name="meridian_180">180° meridiano</string>
+    <string name="prime_meridian">Primo meridiano</string>
+    <string name="meridian_180">180º meridiano</string>
     <string name="shared_string_online_only">Solo online</string>
     <string name="shared_string_offline_only">Solo offline</string>
     <string name="add_widget">Aggiungi widget</string>
@@ -5764,4 +5751,25 @@
     <string name="position_animation">Animazione della posizione</string>
     <string name="wiki_around">Luoghi popolari nelle vicinanze</string>
     <string name="wikidata">Wikidata</string>
+    <string name="routing_attr_allow_ferries_name">Traghetti consentiti</string>
+    <string name="prediction_time_description">L\'icona della posizione in OsmAnd si anima con ogni punto dati GPS ricevuto (una volta al secondo). Un leggero ritardo nel suo movimento potrebbe essere evidente, specialmente quando ti muovi rapidamente o il segnale GPS fluttua.</string>
+    <string name="grid_color">Colore griglia</string>
+    <string name="shared_string_edges">Bordi</string>
+    <string name="labels_position">Posizione etichette</string>
+    <string name="routing_attr_allow_ferries_description">Routing tramite le rotte di traghetto consentito</string>
+    <string name="customize_grid_color">Personalizza colore griglia</string>
+    <string name="route_part_of">Parte di</string>
+    <string name="route_members">Membri</string>
+    <string name="multipoligon_related">Correlati</string>
+    <string name="cant_load_map_styles">Impossible caricare gli stili di mappa.</string>
+    <string name="add_to_navigation">Aggiungi alla navigazione</string>
+    <string name="msg_favorites_skipped_as_existing">Punti preferiti (%1$d) sono stati saltati perché già esistenti.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Waypoint GPX (%1$d) copiati nei preferiti.</string>
+    <string name="saved_to_device">Salvato nel dispositivo</string>
+    <string name="save_to_device">Salva nel dispositivo</string>
+    <string name="travel_guides">Guide</string>
+    <string name="save_to_device_error">Errore di salvataggio sul dispositivo</string>
+    <string name="show_symbols_debug_info">Mostra info dei simboli di debug</string>
+    <string name="show_debug_tile_description">Mostra le informazioni sui simboli della mappa di ogni riquadro</string>
+    <string name="show_debug_tile">Mostra informazioni riquadro</string>
 </resources>

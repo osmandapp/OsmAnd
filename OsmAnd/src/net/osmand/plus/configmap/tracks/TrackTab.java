@@ -34,11 +34,12 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	public final SmartFolder smartFolder;
 	public final String initialName;
 
-	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
+	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode(null);
 	private TrackFolderAnalysis analysis = null;
 
 	public TrackTab(@NonNull Context context, @NonNull File directory) {
 		this(context, directory, null, FOLDER);
+		sortMode = TracksSortMode.getDefaultSortMode(getId());
 	}
 
 	public TrackTab(@NonNull Context context, @NonNull SmartFolder smartFolder) {

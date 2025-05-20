@@ -1436,11 +1436,6 @@
     <string name="uploaded_count">Preneseno %1$d od %2$d</string>
     <string name="toast_select_edits_for_upload">Odaberite uređivanja za prijenos</string>
     <string name="hillshade_slope_contour_lines">Izohipse / Sjenčani reljef / Kosina</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews je projekt, razvijan od strane zajednice, koji daje informacije o mjestima kao što su restorani, hoteli, muzeji, putne točke. Ovaj projekt sakuplja sve javne informacije o tim mjestima, kao što su slike, recenzije, linkovi na druge sustave OpenStreetMap, Wikipedia.
-\n
-\nSvi OpenPlaceReview podaci su javni i dostupni svima: http://openplacereviews.org/data.
-\n
-\nPročitajte više na: http://openplacereviews.org</string>
     <string name="activity_type_water_name">Voda</string>
     <string name="activity_type_winter_name">Zima</string>
     <string name="activity_type_snowmobile_name">Motorne sanjke</string>

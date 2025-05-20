@@ -161,5 +161,5 @@
     <string name="poi_emergency_phone">Фавқулотда телефон</string>
     <string name="poi_fire_hydrant">Ўт ўчириш гидранти</string>
     <string name="poi_fire_extinguisher">Ўтўчиргич</string>
-    <string name="poi_site_type_fortification">Mudofaa inshootlari</string>
+    <string name="poi_archaeological_site_fortification">Mudofaa inshootlari</string>
 </resources>

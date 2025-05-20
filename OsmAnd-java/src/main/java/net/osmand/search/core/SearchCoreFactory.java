@@ -1140,6 +1140,7 @@ public class SearchCoreFactory {
 						SearchResult res = new SearchResult(phrase);
 						res.localeName = match.translatedValue;
 						res.object = new TopIndexFilter(match.subType, types, match.value);
+						res.file = r;
 						addPoiTypeResult(phrase, resultMatcher, false, null, res);
 						HashSet<String> values = matchedValues.computeIfAbsent(match.subType.name, s -> new HashSet<>());
 						values.add(match.value);

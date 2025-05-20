@@ -870,7 +870,7 @@
     <string name="coordinates">Koordinater</string>
     <string name="download_tab_downloads">Alle nedlastinger</string>
     <string name="download_tab_updates">Oppdateringer</string>
-    <string name="no_internet_connection">Ikke i stand til å laste ned, kontroller internettforbindelsen.</string>
+    <string name="no_internet_connection">Ingen internettforbindelse</string>
     <string name="shared_string_dismiss">Avvis</string>
     <string name="everything_up_to_date">Alle filer er oppdaterte</string>
     <string name="use_opengl_render">Bruk OpenGL-opptegning</string>
@@ -1588,8 +1588,8 @@
     <string name="rendering_value_high_name">Høy</string>
     <string name="rendering_value_medium_w_name">Middels</string>
     <string name="rendering_value_low_name">Lav</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Vann</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Skjul vann</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Skjul vann</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Vann</string>
     <string name="route_roundabout_short">Ta avkjøring %1$d og fortsett</string>
     <string name="route_calculation">Ruteberegning</string>
     <string name="shared_string_appearance">Utseende</string>
@@ -3743,8 +3743,6 @@
     <string name="subscription_paused_title">OsmAnd-Live-abonnement har blitt satt på vent</string>
     <string name="subscription_on_hold_title">OsmAnd-Live-abonnement på vent</string>
     <string name="osm_login_descr">Logg inn med OAuth-metoden, eller bruk ditt OSM-brukernavn og passord.</string>
-    <string name="register_on_openplacereviews">Registrer deg på
-\nOpenPlaceReviews.org</string>
     <string name="manage_subscription">Håndter abonnement</string>
     <string name="shared_string_add_photo">Legg til bilde</string>
     <string name="register_opr_create_new_account">Opprett ny konto</string>
@@ -3760,10 +3758,6 @@
     <string name="select_picture">Velg bilde</string>
     <string name="add_to_mapillary">Legg til i Mapillary</string>
     <string name="use_dev_url">Bruk dev.openstreetmap.org</string>
-    <string name="add_photos_descr">OsmAnd viser bilder fra flere kilder:
-\nOpenPlaceReviews - interessepunktbilder;
-\nMapillary - bilder på gatenivå;
-\nWeb / Wikimedia - interessepunktbilder i henhold til OpenStreetMap-data.</string>
     <string name="app_mode_light_aircraft">Småfly</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Tysk (uformell)</string>
@@ -4130,9 +4124,6 @@
     <string name="gpx_upload_public_visibility_descr">«Offentlig» betyr at sporet vises offentlig i dine GPS-spor og i offentlige GPS-sporingsoppføringer, og i den offentlige spor-listen med tidsstempler i rå form. Data servert via API-et viser ikke til sporsiden din. Tidsstempler fra sporingspunkter er ikke tilgjengelig gjennom det offentlige GPS-API-et, og sporingspunkter sorteres ikke kronologisk.</string>
     <string name="backup_error_subscription_was_expired_descr">Ditt OsmAnd Pro-abonnement har utløpt. Forny det nå for å bruke sikkerhetskopi. Du kan fremdeles gjenopprette data fra OsmAnd-sky.</string>
     <string name="use_dev_url_descr">Bytt til dev.openstreetmap.org istedenfor openstreetmap.org for testopplasting av OSM-notat/POI/GPX.</string>
-    <string name="open_place_reviews_plugin_description">Gi bidrag til prosjektet OpenPlaceReviews som bilder, omtaler eller lenker om offentlige steder som restauranter, hoteller eller museer.
-\n
-\nFinn instruksjoner om hvordan du kan bidra på nettsiden vår %1$s.</string>
     <string name="temporary_conditional_routing_descr">Bruk veibegrensninger som er aktive nå på kartet</string>
     <string name="routing_attr_driving_style_description">Velg kjøreformål for å få kortere, raskere, eller tryggere rute</string>
     <string name="app_restart_required">Programomstart kreves for å bruke noen innstillinger.</string>
@@ -4577,7 +4568,7 @@
     <string name="routing_attr_avoid_fords_name">Unngå vadesteder</string>
     <string name="routing_attr_avoid_fords_description">Unngå vadesteder</string>
     <string name="map_widget_trip_recording_uphill">Oppoverbakke</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Skjul militære områder</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Militære områder</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Skjul militære områder</string>
     <string name="map_widget_trip_recording_downhill">Nedoverbakke</string>
     <string name="map_widget_trip_recording_duration">Varighet</string>
@@ -5737,4 +5728,10 @@
     <string name="relief_3d_download_description">Ytterligere kart er nødvendig for å vise terreng på kartet.</string>
     <string name="obd_fuel_type_diesel">Diesel</string>
     <string name="show_mercator_grids">Bruk Mercator istedenfor WGS84 eller UTM</string>
+    <string name="shared_string_edges">Kanter</string>
+    <string name="layer_coordinates_grid">Koordinatnett</string>
+    <string name="equator">Ekvator</string>
+    <string name="wiki_around">Populære steder i nærheten</string>
+    <string name="prime_meridian">Nullmeridian</string>
+    <string name="meridian_180">180. meridian</string>
 </resources>

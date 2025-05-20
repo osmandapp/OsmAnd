@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="release_5_0">
-    • Відкрийте POI з найвищим рейтингом у новому режимі «Огляд»\n\n
-    • Усі маршрути OSM тепер доступні для пошуку! Піші прогулянки, велоспорт, MTB тощо\n\n
-    • Новий віджет навігації поєднує стрілку повороту та навігаційні інструкції\n\n
-    • Віджет інформації про поточний маршрут: відображає ETA, час прибуття та відстань\n\n
-    • Вибирайте гірськолижні схили та MTB-траси на карті для отримання детальної інформації\n\n
-    • Можливість вибору розміру віджета для лівої та правої панелей\n\n
-    • Додано «Сітку координат» з географічними координатами\n\n
-    • Додано можливість налаштовувати стандартний вигляд груп улюбленого\n\n
-    • Android Auto: перегляд ETA та відстані до наступної точки маршруту; назви міст тепер з\'являються в результатах пошуку\n\n
-    • Визначні вершини тепер можна знайти на карті та в пошуку\n\n
-    • Висоти гірських вершин у футах\n\n
-    • Додано: Скелі та зони для скелелазіння на карті\n\n
-    • Покращено пошук адрес у США\n\n
-    • Додано підтримку івриту TTS для навігації\n\n
-</string>
+    <string name="release_5_0">- Відкривайте для себе найпопулярніші POI з новим режимом Дослідження\n\n - Всі маршрути OSM тепер доступні для пошуку! Піші, велосипедні, MTB та багато іншого\n\n - Новий навігаційний віджет поєднує стрілку повороту та інструкції з навігації\n\n - Віджет інформації про поточний маршрут: відображає час прибуття, час проходження та відстань\n\n - Виберіть гірськолижні схили та MTB-траси на карті для отримання детальної інформації\n\n - Можливість вибору розміру віджету для лівої та правої панелей\n\n - Додана координатна сітка з географічними координатами\n\n - Додана можливість налаштування зовнішнього вигляду обраних груп за замовчуванням\n\n - Android Auto: перегляд ETA та відстані до наступної точки маршруту; назви міст тепер з\'являються в результатах пошуку\n - Видатні вершини тепер можна знайти через карту та пошук\n\n - Висота гірських вершин у футах\n\n - Додано: Скелі та місця для скелелазіння на карті\n\n - Покращено пошук адрес у США\n\n - Додано івритську TTS для навігації</string>
     <string name="asap">Швидко</string>
     <string name="route_roundabout">Круговий рух : Прямуйте до %1$d з’їзду та продовжуйте рух</string>
     <string name="route_kl">Тримайтесь ліворуч</string>
@@ -1402,7 +1387,7 @@
     <string name="download_tab_downloads">Усі завантаження</string>
     <string name="download_tab_updates">Оновлення</string>
     <string name="download_tab_local">Локальні</string>
-    <string name="no_internet_connection">Не вдалося завантажити, перевірте ваше Інтернет-зʼєднання.</string>
+    <string name="no_internet_connection">Немає підключення до Інтернету</string>
     <string name="everything_up_to_date">Всі файли оновлені</string>
     <string name="use_opengl_render">Використовувати рендеринг OpenGL</string>
     <string name="use_opengl_render_descr">Використовувати апаратне прискорення OpenGL для рендерингу (може бути причиною швидкого розряду батареї або не працювати на деяких пристроях).</string>
@@ -1955,8 +1940,8 @@
     <string name="rendering_value_low_name">Низька</string>
     <string name="rendering_attr_contourWidth_description">Товщина ізоліній</string>
     <string name="rendering_attr_contourWidth_name">Товщина ізоліній</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Воду</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Сховати воду</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Сховати воду</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Вода</string>
     <string name="routing_attr_allow_motorway_name">Використовувати автомагістралі</string>
     <string name="routing_attr_allow_motorway_description">Дозволяє рух автомагістралями.</string>
     <string name="search_map_hint">Місто або регіон</string>
@@ -3658,8 +3643,6 @@
     <string name="osm_edit_comment_note">Коментувати Нотатку OSM</string>
     <string name="osm_login_descr">Увійдіть за допомогою методу OAuth або за допомогою облікових даних OSM.</string>
     <string name="shared_string_add_photo">Додати світлини</string>
-    <string name="register_on_openplacereviews">Зареєструватися на
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Створити обліковий запис</string>
     <string name="register_opr_have_account">У мене вже є обліковий запис</string>
     <string name="shared_string_search_history">Історія пошуку</string>
@@ -3672,10 +3655,6 @@
     <string name="export_not_enough_space_descr">На вашому пристрої вільно лише %1$s. Звільніть місце або приберіть позначки з деяких елементів для експортування.</string>
     <string name="export_not_enough_space">Бракує вільного місця</string>
     <string name="add_to_mapillary">Додати до Mapillary</string>
-    <string name="add_photos_descr">OsmAnd показує світлини з кількох джерел:
-\nOpenPlaceReviews — світлини точок інтересу;
-\nMapillary - зображення вулиць;
-\nМережа / Вікімедіа — світлини точок інтересу, за даними з OpenStreetMap.</string>
     <string name="select_groups_for_import">Виберіть групи, які буде імпортовано.</string>
     <string name="select_items_for_import">Виберіть елементи, які буде імпортовано.</string>
     <string name="use_dev_url_descr">Перейдіть на dev.openstreetmap.org замість openstreetmap.org для перевірки надсилання Нотаток OSM / POI / GPX.</string>
@@ -3767,9 +3746,6 @@
     <string name="uploaded_count">Надіслано %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Виберіть зміни для надсилання</string>
     <string name="hillshade_slope_contour_lines">Ізолінії / Рельєф / Схили</string>
-    <string name="open_place_reviews_plugin_description">Зробіть свій внесок у проєкт OpenPlaceReviews, наприклад, світлини, відгуки або посилання на громадські місця, такі як ресторани, готелі або музеї.
-\n
-\nІнструкції про те, як зробити свій внесок, можна знайти на нашому вебсайті %1$s.</string>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_snowmobile_name">Снігохід</string>
@@ -4390,7 +4366,7 @@
     <string name="map_widget_distance">Відстань</string>
     <string name="routing_attr_hazmat_category_name">Категорія небезпеки</string>
     <string name="map_widget_true_bearing">Справжній азимут</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Не показувати військові обʼєкти</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Військові райони</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Не показувати військові обʼєкти</string>
     <string name="explore_plans">Ознайомитися з тарифними планами</string>
     <string name="shared_string_mode">Режим</string>
@@ -4755,7 +4731,7 @@
     <string name="delete_cloud_version">Вилучити хмарну версію</string>
     <string name="local_version_do_not_exist">Немає локальної версії.</string>
     <string name="shared_string_in_progress">Виконується</string>
-    <string name="shared_string_original">Оригінальна</string>
+    <string name="shared_string_original">Оригінал</string>
     <string name="movement_speed">Швидкість руху</string>
     <string name="simulation_position_description">Виберіть файл треку, який буде джерелом для симуляції руху.</string>
     <string name="release_4_4">• Покращено меню «Трек» у «Налаштувати карту» \n\n • Контекстне меню тепер відображає локалізовані назви POI \n\n • Додано можливість поділитися маршрутом за посиланням \n\n • Додано одиницю вимірювання довжини «морські милі/фути». \n\n • Орієнтація карти додано новий фіксований режим \n\n • Спрощений стартовий екран \n\n • Виправлено положення розташування в режимі розділеного екрана в Android Auto \n\n • Додано графік «Швидкість/Нахил» для аналізу траси \n\n • В Android 13 вибір мови додатка перенесено в налаштування системи \n\n • Виправлено проблеми з відображенням веганських місць \n\n • Додано можливість завантажувати онлайн-плитки, які використовуються як карти «Накладання» або «Підслоння». \n\n • Додано підтримку імперських одиниць для «Параметрів автомобіля» \n\n • Новий профіль Мопед \n\n • «Позиція відображення» додала нову опцію «Автоматично» \n\n • Виправлені жести для нахилу, масштабування та обертання карти</string>
@@ -5322,7 +5298,7 @@
     <string name="allow_display_on_top_description">Дозволити показ текстів мап один над одним</string>
     <string name="show_debug_info">Показати інформацію про налагодження</string>
     <string name="show_debug_info_description">Показувати графічну інформацію про розміщення кожного тексту на мапі</string>
-    <string name="map_text">Тексти мап</string>
+    <string name="map_text">Рендеринг карти</string>
     <string name="routing_attr_avoid_cobblestone_name">Уникати бруківки</string>
     <string name="routing_attr_avoid_cobblestone_description">Уникати бруківки</string>
     <string name="disable_map_layers">Вимкнути шари мапи</string>
@@ -5408,10 +5384,6 @@
     <string name="energy_avg_info_description">Розряджання акумулятора на хвилину: %1$s
 \nСпоживання енергії (мАг): %2$s</string>
     <string name="rendering_avg_info">Статистика рендерингу (в середньому 1/5/15 хвилин)</string>
-    <string name="rendering_avg_info_description">FPS за останніми 1k кадрами: %1$s
-\nЦП базовий: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Статистика споживання енергії (в середньому 1/5/15 хвилин)</string>
     <string name="choose_map_orientation">Виберіть орієнтацію мапи</string>
     <string name="shared_string_all_icons">Усі піктограми</string>
@@ -5587,7 +5559,7 @@
     <string name="obd_fuel_pressure_desc">Показує тиск всередині паливної системи</string>
     <string name="kpa_unit">кПа</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Показує швидкість споживання палива автомобіля на основі датчика (л/год)</string>
-    <string name="obd_bluetooth_off_description">Увімкніть функцію пошуку та підключення сканерів за допомогою Bluetooth.</string>
+    <string name="obd_bluetooth_off_description">Увімкніть Bluetooth, щоб знайти та підключити сканери.</string>
     <string name="shared_string_dynamic">Динамічний</string>
     <string name="obd_connected_to_device">Під\'єднано до %s</string>
     <string name="dynamic_icon_type_summary">Піктограма змінюється залежно від стану дії.</string>
@@ -5609,7 +5581,7 @@
     <string name="obd_throttle_position">Положення дросельної заслінки</string>
     <string name="speedometer_maximum">Максимум</string>
     <string name="obd_fuel_consumption_rate_l_h">Витрата палива (л/год)</string>
-    <string name="liter">л</string>
+    <string name="liter">l</string>
     <string name="percent_hour">%/год</string>
     <string name="obd_fuel_consumption_rate_sensor">Витрата палива (датчик)</string>
     <string name="obd_fuel_left_km">Залишок пального (км)</string>
@@ -5629,15 +5601,15 @@
     <string name="learn_more_about_obd_sensors">Дізнайтеся більше про датчики.</string>
     <string name="obd_fuel_left_liters">Залишок пального (літри)</string>
     <string name="connect_obd_instructions_step4">Торкніться «%1$s» і виберіть свій сканер зі списку.</string>
-    <string name="fuel_tank_capacity_description">Введіть об\'єм резервуара, щоб точно відстежувати рівень та витрату пального</string>
-    <string name="fuel_tank_capacity">Ємність паливного бака</string>
+    <string name="fuel_tank_capacity_description">Введіть об’єм бака, щоб точно відстежувати рівень палива та споживання</string>
+    <string name="fuel_tank_capacity">Ємність паливного баку</string>
     <string name="shared_strings_dimensions">Розміри</string>
-    <string name="litres">Літри</string>
-    <string name="us_gallons_unit">галон</string>
+    <string name="litres">Літрів</string>
+    <string name="us_gallons_unit">гал</string>
     <string name="imperial_gallons">Імперські галони</string>
     <string name="us_gallons">Галони США</string>
-    <string name="unit_of_volume_description">Вибрані одиниці будуть застосовані до всіх даних, пов\'язаних з об\'ємом, у поточному профілі.</string>
-    <string name="unit_of_volume">Одиниця виміру об\'єму</string>
+    <string name="unit_of_volume_description">Вибрані одиниці вимірювання буде застосовано до всіх даних, пов’язаних із обсягом, у поточному профілі.</string>
+    <string name="unit_of_volume">Одиниця об\'єму</string>
     <string name="obd_fuel_level_liter">Рівень палива (л)</string>
     <string name="obd_device_forget_sensor">Забудьте про сканер</string>
     <string name="connect_obd_instructions_step">1. Підключіть сканер до порту OBD-II вашого автомобіля.\n\n 2. Увімкніть двигун автомобіля\n\n 3. Увімкніть Bluetooth на вашому пристрої\n\n 4. Торкніться \'%1$s\' і виберіть ваш сканер зі списку.</string>
@@ -5730,10 +5702,10 @@
     <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо протягом %1$s місяця</string>
     <string name="shared_string_road_exit">Вихід</string>
     <string name="hmd_promo">Промо HMD на %1$s місяців</string>
-    <string name="original_color_description">Кожна точка зберігає свій колір.</string>
-    <string name="original_icon_description">Кожна точка матиме власний значок.</string>
-    <string name="original_shape_description">Кожна точка зберігає власну форму.</string>
-    <string name="save_favorite_default_appearance">Застосувати зміни до наявних точок у папці чи лише до нових?</string>
+    <string name="original_color_description">Кожна точка збереже свій власний колір.</string>
+    <string name="original_icon_description">Кожна точка мала б свою власну іконку.</string>
+    <string name="original_shape_description">Кожна точка зберігала б свою форму.</string>
+    <string name="save_favorite_default_appearance">Застосувати зміни до існуючих точок у папці чи лише до нових?</string>
     <string name="apply_to_all_points">Застосувати до всіх точок</string>
     <string name="show_mercator_grids_description">Показувати сітку в кілометрах Меркатора замість WGS84 або UTM</string>
     <string name="show_dm_grids_description">Показувати сітку в градусах і хвилинах замість градусів або DMS</string>
@@ -5751,7 +5723,7 @@
     <string name="show_image_previews">Показати попередній перегляд зображення</string>
     <string name="layer_coordinates_grid">Координатна сітка</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Дія для керування видимістю сітки координат на карті.</string>
-    <string name="prime_meridian">Початковий меридіан</string>
+    <string name="prime_meridian">Нульовий меридіан</string>
     <string name="meridian_180">180-й меридіан</string>
     <string name="equator">Екватор</string>
     <string name="shared_string_offline_only">Тільки офлайн</string>
@@ -5771,4 +5743,27 @@
     <string name="position_animation_empty_banner_description">Піктограма позиції переміщується до кожного нового отриманого місця без анімації.</string>
     <string name="position_animation">Анімація позиції</string>
     <string name="wiki_around">Популярні місця поруч</string>
+    <string name="routing_attr_allow_ferries_name">Дозволити пороми</string>
+    <string name="routing_attr_allow_ferries_description">Дозволити маршрутизацію поромними маршрутами</string>
+    <string name="shared_string_edges">Краї</string>
+    <string name="labels_position">Положення міток</string>
+    <string name="customize_grid_color">Налаштувати колір сітки</string>
+    <string name="grid_color">Колір сітки</string>
+    <string name="route_part_of">Частина</string>
+    <string name="multipoligon_related">Пов\'язані</string>
+    <string name="route_members">Члени</string>
+    <string name="cant_load_map_styles">Не вдається завантажити стилі карти.</string>
+    <string name="add_to_navigation">Додати до навігації</string>
+    <string name="msg_favorites_skipped_as_existing">Вибрані точки (%1$d) пропущено як уже наявні.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Шляхові точки GPX (%1$d) скопійовано до вибраного.</string>
+    <string name="saved_to_device">Збережено на пристрої</string>
+    <string name="save_to_device_error">Помилка збереження на пристрої</string>
+    <string name="save_to_device">Зберегти на пристрій</string>
+    <string name="travel_guides">Путівника</string>
+    <string name="show_debug_tile">Показати інформацію про плитку</string>
+    <string name="show_debug_tile_description">Відображати інформацію про символи карти кожної плитки</string>
+    <string name="show_symbols_debug_info">Показати інформацію про налагодження символів</string>
+    <string name="deactivated_map">Деактивована карта</string>
+    <string name="suggest_activate_map_msg">Карта %1$s деактивована,\nактивуйте її, щоб переглянути цю область.</string>
+    <string name="unit_of_temperature_description">Вибрані одиниці вимірювання будуть застосовані до всіх даних, пов\'язаних з температурою, у поточному профілі.</string>
 </resources>

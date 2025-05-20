@@ -209,7 +209,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	protected void setupAdapter(@NonNull View view) {
-		adapter = new TrackFoldersAdapter(view.getContext(), nightMode);
+		adapter = new TrackFoldersAdapter(view.getContext(), nightMode, selectedFolder);
 		adapter.setSortTracksListener(this);
 		adapter.setTrackGroupsListener(this);
 		adapter.setTrackSelectionListener(this);

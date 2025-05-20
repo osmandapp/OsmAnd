@@ -1,4 +1,4 @@
-package net.osmand.test.activities;
+package net.osmand.test.ui.navigation;
 
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 

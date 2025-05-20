@@ -142,7 +142,7 @@
     <string name="si_mi_yard">Mil/yard</string>
     <string name="km">km</string>
     <string name="m">m</string>
-    <string name="unit_of_length_descr">Ubah jarak apa yang diukuri.</string>
+    <string name="unit_of_length_descr">Ubah jarak yang diukur.</string>
     <string name="si_mi_feet">Mil/kaki</string>
     <string name="nm">nmi</string>
     <string name="buffer_time_descr">Waktu maksimum untuk menyimpan titik pada buffer</string>
@@ -190,7 +190,7 @@
     <string name="shared_string_status">Status</string>
     <string name="connecting_to_the_internet">Menghubungkan ke internet</string>
     <string name="battery_optimization_description">Matikan pengoptimalan baterai untuk Pelacak OsmAnd supaya tidak mati dengan tiba-tiba ketika berada dalam latar belakang.</string>
-    <string name="disconnect_from_telegram_desc">"Untuk menghilangkan akses pembagian lokasi. Buka Telegram, pergi ke Pengaturan → Privasi dan Keamanan  → Sesi, dan akhiri sesi Pelacak OsmAnd."</string>
+    <string name="disconnect_from_telegram_desc">Untuk menghilangkan akses pembagian lokasi. Buka Telegram, pergi ke Pengaturan → Privasi dan Keamanan → Sesi, dan akhiri sesi Pelacak OsmAnd.</string>
     <string name="disconnect_from_telegram">Cara mematikan Pelacak OsmAnd dari Telegram</string>
     <string name="logout_from_osmand_telegram_descr">Apakah Anda ingin keluar dari Pelacak OsmAnd supaya Anda tidak dapat membagikan lokasi atau melihat lokasi orang lain\?</string>
     <string name="disable_all_sharing_desc">Menonaktifkan semua pembagian lokasi ke semua obrolan (%1$d).</string>
@@ -271,7 +271,7 @@
     <string name="show_users_on_map">Tampilkan pengguna pada peta</string>
     <string name="active_chats">Obrolan aktif</string>
     <string name="si_min_m">Menit per mil</string>
-    <string name="si_nm_h">Mil bahari per jam (knot)</string>
+    <string name="si_nm_h">Mil laut per jam (knot)</string>
     <string name="live_now">Langsung sekarang</string>
     <string name="timeline">Linimasa</string>
     <string name="location_source">Sumber lokasi</string>

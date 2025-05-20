@@ -2169,8 +2169,6 @@
     <string name="login_open_street_map_org">გთხოვთ, შეხვიდეთ OpenStreetMap.org-ზე</string>
     <string name="use_login_password">მომხმარებელის და პაროლის გამოყენება</string>
     <string name="manage_subscription">გამოწერის მართვა</string>
-    <string name="register_on_openplacereviews">OpenPlaceReviews.org-ზე
-\nრეგისტრაცია</string>
     <string name="maps_you_need">რუკები, როლებიც შეიძლება დაგჭირდეთ</string>
     <string name="wiki_article_not_found">სტატია ნაპოვნი არაა</string>
     <string name="download_wikipedia_label">ვიკიპედიის მონაცემების გადმოწერა</string>
@@ -3286,4 +3284,5 @@
     <string name="switch_start_finish">საწყისი წერტილის და დანიშნულების პუნქტის შებრუნება</string>
     <string name="weather_wind_kilimeters_per_hour">კილომეტრი საათში</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="wiki_around">უახლოესი პოპულარული ადგილები</string>
 </resources>
