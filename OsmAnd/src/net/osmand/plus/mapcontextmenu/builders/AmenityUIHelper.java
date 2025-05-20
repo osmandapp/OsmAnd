@@ -122,6 +122,11 @@ public class AmenityUIHelper extends MenuBuilder {
 		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
+			if (MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key) instanceof PoiType that) {
+				if (that.isHidden()) {
+					continue;
+				}
+			}
 			if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
 					|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
 				continue;
@@ -507,7 +512,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 				}
 			} else {
-				textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
+				return null; // skip non-translatable NON-poiType tags
 			}
 		}
 

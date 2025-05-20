@@ -11,6 +11,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
+import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -32,6 +33,7 @@ import net.osmand.core.jni.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
@@ -210,21 +212,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		boolean markerCustomized = false;
 		boolean clearSelectedObject = true;
 		if (selectedObject != null) {
-			TIntArrayList x = null;
-			TIntArrayList y = null;
-			if (selectedObject instanceof Amenity amenity) {
-				x = amenity.getX();
-				y = amenity.getY();
-			} else if (selectedObject instanceof RenderedObject object) {
-				x = object.getX();
-				y = object.getY();
-			}  else if (selectedObject instanceof PlaceDetailsObject object) {
-				Amenity amenity = object.getSyntheticAmenity();
-				x = amenity.getX();
-				y = amenity.getY();
-			} else if (selectedObject instanceof AidlMapPointWrapper) {
-				markerCustomized = true;
-			}
+			markerCustomized = selectedObject instanceof AidlMapPointWrapper;
+
+			Pair<TIntArrayList, TIntArrayList> pair = getCoordinates(selectedObject);
+			TIntArrayList x = pair != null ? pair.first : null;
+			TIntArrayList y = pair != null ? pair.second : null;
+
 			if (x != null && y != null && x.size() > 2) {
 				if (hasMapRenderer) {
 					clearSelectedObject = false;
@@ -333,6 +326,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			contextCoreMarker.setIsHidden(!showMarker);
 		}
 		mapActivityInvalidated = false;
+	}
+
+	@Nullable
+	private Pair<TIntArrayList, TIntArrayList> getCoordinates(@NonNull Object object) {
+		if (object instanceof Amenity amenity) {
+			return Pair.create(amenity.getX(), amenity.getY());
+		} else if (object instanceof RenderedObject renderedObject) {
+			return Pair.create(renderedObject.getX(), renderedObject.getY());
+		} else if (object instanceof BaseDetailsObject objectDetails) {
+			Amenity amenity = objectDetails.getSyntheticAmenity();
+			return Pair.create(amenity.getX(), amenity.getY());
+		}
+		return null;
 	}
 
 	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {

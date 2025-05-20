@@ -38,17 +38,17 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 
 	private void searchAmenity(@NonNull ViewGroup view, @Nullable Object object) {
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(view);
-		app.getResourceManager().getAmenitySearcher().searchAmenityAsync(renderedObject, amenity -> {
+		app.getResourceManager().getAmenitySearcher().searchBaseDetailsObjectAsync(renderedObject, detailsObject -> {
 			app.runInUIThread(() -> {
 				ViewGroup viewGroup = viewGroupRef.get();
 				if (viewGroup == null || mapContextMenu == null) {
 					return;
 				}
-				if (amenity != null) {
+				if (detailsObject != null) {
 					LatLon latLon = getLatLon();
 					MapLayers mapLayers = mapActivity.getMapLayers();
-					PointDescription description = mapLayers.getPoiMapLayer().getObjectName(amenity);
-					mapContextMenu.update(latLon, description, amenity);
+					PointDescription description = mapLayers.getPoiMapLayer().getObjectName(detailsObject);
+					mapContextMenu.update(latLon, description, detailsObject);
 				} else {
 					super.build(viewGroup, object);
 				}

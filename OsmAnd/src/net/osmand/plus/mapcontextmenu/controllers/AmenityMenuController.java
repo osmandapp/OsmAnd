@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -41,11 +42,12 @@ import org.apache.commons.logging.Log;
 import java.util.List;
 
 public class AmenityMenuController extends MenuController {
+
 	private static final Log LOG = PlatformUtil.getLog(AmenityMenuController.class);
 
 	private Amenity amenity;
 	private final MapMarker marker;
-	private TransportStopController transportStopController;
+	protected TransportStopController transportStopController;
 
 	public AmenityMenuController(@NonNull MapActivity mapActivity,
 			@NonNull PointDescription pointDescription,
@@ -59,25 +61,7 @@ public class AmenityMenuController extends MenuController {
 			@NonNull Amenity amenity) {
 		super(builder, pointDescription, mapActivity);
 		this.amenity = amenity;
-		if (amenity.getType().getKeyName().equals("transportation")) {
-			boolean showTransportStops = false;
-			PoiFilter f = amenity.getType().getPoiFilterByName("public_transport");
-			if (f != null) {
-				for (PoiType t : f.getPoiTypes()) {
-					if (t.getKeyName().equals(amenity.getSubType())) {
-						showTransportStops = true;
-						break;
-					}
-				}
-			}
-			if (showTransportStops) {
-				TransportStop transportStop = TransportStopHelper.findBestTransportStopForAmenity(mapActivity.getMyApplication(), amenity);
-				if (transportStop != null) {
-					transportStopController = new TransportStopController(mapActivity, pointDescription, transportStop);
-					transportStopController.processRoutes();
-				}
-			}
-		}
+		acquireTransportStopController(mapActivity, pointDescription);
 
 		String mapNameForMarker = amenity.getName() + "_" + amenity.getType().getKeyName();
 		marker = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarker(mapNameForMarker, amenity.getLocation());
@@ -100,8 +84,39 @@ public class AmenityMenuController extends MenuController {
 			openTrackButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
 			leftTitleButtonController = openTrackButtonController;
 		}
-
 		openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
+	}
+
+	protected void acquireTransportStopController(@NonNull MapActivity activity,
+			@NonNull PointDescription description) {
+		transportStopController = acquireTransportStopController(amenity, activity, description);
+		if (transportStopController != null) {
+			transportStopController.processRoutes();
+		}
+	}
+
+	@Nullable
+	protected TransportStopController acquireTransportStopController(@NonNull Amenity amenity,
+			@NonNull MapActivity activity, @NonNull PointDescription description) {
+		if (amenity.getType().getKeyName().equals("transportation")) {
+			boolean showTransportStops = false;
+			PoiFilter filter = amenity.getType().getPoiFilterByName("public_transport");
+			if (filter != null) {
+				for (PoiType type : filter.getPoiTypes()) {
+					if (type.getKeyName().equals(amenity.getSubType())) {
+						showTransportStops = true;
+						break;
+					}
+				}
+			}
+			if (showTransportStops) {
+				TransportStop transportStop = TransportStopHelper.findBestTransportStopForAmenity(getApplication(), amenity);
+				if (transportStop != null) {
+					return new TransportStopController(activity, description, transportStop);
+				}
+			}
+		}
+		return null;
 	}
 
 	void openTrack(MapActivity mapActivity) {

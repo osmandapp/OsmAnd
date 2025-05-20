@@ -5756,4 +5756,7 @@
     <string name="show_debug_tile">Zobrazit informace o dlaždicích</string>
     <string name="show_debug_tile_description">Zobrazení informací o mapových symbolech jednotlivých dlaždic</string>
     <string name="show_symbols_debug_info">Zobrazovat informace o ladění symbolů</string>
+    <string name="deactivated_map">Deaktivovaná mapa</string>
+    <string name="suggest_activate_map_msg">Mapa %1$s je deaktivovaná,\naktivujte ji, abyste mohli zobrazit tuto oblast.</string>
+    <string name="unit_of_temperature_description">Zvolené jednotky budou použity na všechna data týkající se teploty v aktuálním profilu.</string>
 </resources>

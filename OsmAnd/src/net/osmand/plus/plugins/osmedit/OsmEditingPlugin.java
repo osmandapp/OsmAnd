@@ -23,6 +23,7 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
@@ -71,7 +72,6 @@ import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -384,7 +384,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			return amenity;
 		} else if (selectedObj instanceof TransportStop stop) {
 			return stop.getAmenity();
-		} else if (selectedObj instanceof PlaceDetailsObject detailsObject) {
+		} else if (selectedObj instanceof BaseDetailsObject detailsObject) {
 			return detailsObject.getSyntheticAmenity();
 		}
 		return null;
@@ -592,7 +592,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		Amenity amenity = null;
 		if (object instanceof Amenity) {
 			amenity = (Amenity) object;
-		} else if (object instanceof PlaceDetailsObject detailsObject) {
+		} else if (object instanceof BaseDetailsObject detailsObject) {
 			amenity = detailsObject.getSyntheticAmenity();
 		}
 		if (amenity != null) {
