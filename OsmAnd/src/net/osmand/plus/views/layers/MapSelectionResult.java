@@ -5,9 +5,11 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.util.Algorithms;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class MapSelectionResult {
 
+	private final String lang;
 	private final PointF point;
 	private final LatLon pointLatLon;
 	private final RotatedTileBox tileBox;
@@ -31,6 +34,7 @@ public class MapSelectionResult {
 			@NonNull PointF point) {
 		this.point = point;
 		this.tileBox = tileBox;
+		this.lang = LocaleHelper.getPreferredPlacesLanguage(app);
 		this.poiProvider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 		this.pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(app.getOsmandMap().getMapView().getMapRenderer(), tileBox, point);
 	}
@@ -74,22 +78,23 @@ public class MapSelectionResult {
 	}
 
 	public void groupByOsmIdAndWikidataId() {
-		List<PlaceDetailsObject> detailsObjects = new ArrayList<>();
+		List<SelectedMapObject> plainObjects = new ArrayList<>();
+		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
 		for (SelectedMapObject selectedObject : allObjects) {
 			Object object = selectedObject.object();
-			if (PlaceDetailsObject.shouldSkip(object)) {
-				processedObjects.add(selectedObject);
+			if (!BaseDetailsObject.shouldAdd(object)) {
+				plainObjects.add(selectedObject);
 				continue;
 			}
-			List<PlaceDetailsObject> overlapped = new ArrayList<>();
-			for (PlaceDetailsObject detailsObject : detailsObjects) {
+			List<BaseDetailsObject> overlapped = new ArrayList<>();
+			for (BaseDetailsObject detailsObject : detailsObjects) {
 				if (detailsObject.overlapsWith(object)) {
 					overlapped.add(detailsObject);
 				}
 			}
-			PlaceDetailsObject detailsObject;
+			BaseDetailsObject detailsObject;
 			if (Algorithms.isEmpty(overlapped)) {
-				detailsObject = new PlaceDetailsObject();
+				detailsObject = new BaseDetailsObject(lang);
 			} else {
 				detailsObject = overlapped.get(0);
 				for (int i = 1; i < overlapped.size(); i++) {
@@ -97,13 +102,14 @@ public class MapSelectionResult {
 				}
 				detailsObjects.removeAll(overlapped);
 			}
-			detailsObject.addObject(object, selectedObject.provider());
+			detailsObject.addObject(object);
 			detailsObjects.add(detailsObject);
 		}
-		for (PlaceDetailsObject object : detailsObjects) {
+		for (BaseDetailsObject object : detailsObjects) {
 			object.combineData();
 			processedObjects.add(new SelectedMapObject(object, poiProvider));
 		}
+		processedObjects.addAll(plainObjects);
 	}
 
 	public boolean isEmpty() {
