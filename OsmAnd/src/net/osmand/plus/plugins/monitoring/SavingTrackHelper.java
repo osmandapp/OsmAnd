@@ -96,12 +96,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 	private int currentTrackIndex = 1;
 	private boolean shouldAutomaticallyRecord = true;
+	//todo : remove
 	private LatLon lastPoint;
 	private float distance;
 	private long duration;
 	private int points;
 	private int trkPoints;
 
+	//todo : remove
 	private long lastTimeUpdated;
 	private long lastTimeFileSaved;
 
@@ -200,7 +202,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 					if (has) {
 						return true;
 					}
-					q = db.query(false, POINT_NAME, new String[] {POINT_COL_LAT, POINT_COL_LON}, null, null, null, null, null, null);
+					q = db.query(false, POINT_NAME, new String[]{POINT_COL_LAT, POINT_COL_LON}, null, null, null, null, null, null);
 					has = q.moveToFirst();
 					while (has) {
 						if (q.getDouble(0) != 0 || q.getDouble(1) != 0) {
@@ -237,10 +239,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			for (Map.Entry<String, GpxFile> entry : data.entrySet()) {
 				String f = entry.getKey();
 				GpxFile gpx = entry.getValue();
+
+				GpxFile filteredGpx = SavedTrackFilter.filterGpxFile(gpx, settings);
+
 				log.debug("Filename: " + f);
 				File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
-				if (!gpx.isEmpty()) {
-					WptPt pt = gpx.findPointToShow();
+				//todo : optionally save unfiltered gpx
+				if (!filteredGpx.isEmpty()) {
+					WptPt pt = filteredGpx.findPointToShow();
 					long time = pt != null ? pt.getTime() : System.currentTimeMillis();
 					String fileName = f + "_" + GPX_FILE_DATE_FORMAT.format(new Date(time));
 					Integer trackStorageDirectory = app.getSettings().TRACK_STORAGE_DIRECTORY.get();
@@ -256,24 +262,24 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 							fileName = dateDirName + File.separator + fileName;
 						}
 					}
-					gpxFilesByName.put(fileName, gpx);
+					gpxFilesByName.put(fileName, filteredGpx);
 					fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
 					int ind = 1;
 					while (fout.exists()) {
 						fout = new File(dir, fileName + "_" + (++ind) + IndexConstants.GPX_FILE_EXT); //$NON-NLS-1$
 					}
 				}
-				savePreselectedRouteActivity(gpx);
+				savePreselectedRouteActivity(filteredGpx);
 
 				KFile fKout = SharedUtil.kFile(fout);
-				Exception warn = SharedUtil.writeGpxFile(fKout, gpx);
+				Exception warn = SharedUtil.writeGpxFile(fKout, filteredGpx);
 				if (warn != null) {
 					warnings.add(warn.getMessage());
 					return new SaveGpxResult(warnings, new HashMap<>());
 				}
 
 				GpxDataItem item = new GpxDataItem(fKout);
-				item.setAnalysis(gpx.getAnalysis(fout.lastModified()));
+				item.setAnalysis(filteredGpx.getAnalysis(fout.lastModified()));
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
 				saveTrackAppearance(item);
@@ -317,8 +323,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			if (db != null) {
 				try {
 					if (db.isOpen()) {
-						db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[] {time});
-						db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[] {time});
+						db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[]{time});
+						db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[]{time});
 					}
 				} finally {
 					db.close();
@@ -350,6 +356,16 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			}
 		}
 		return data;
+	}
+
+	public Map<String, GpxFile> filterRecordedData(@NonNull Map<String, GpxFile> data) {
+		Map<String, GpxFile> res = new LinkedHashMap<String, GpxFile>();
+
+		for (Map.Entry<String, GpxFile> entry : data.entrySet()) {
+			GpxFile filteredGpx = SavedTrackFilter.filterGpxFile(entry.getValue(), settings);
+			res.put(entry.getKey(), filteredGpx);
+		};
+		return res;
 	}
 
 	private void collectDBPoints(@NonNull SQLiteDatabase db, @NonNull Map<String, GpxFile> dataTracks) {
@@ -521,49 +537,21 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		} else if (settings.getApplicationMode() == settings.DEFAULT_APPLICATION_MODE.get()) {
 			lastRoutingApplicationMode = null;
 		}
-		boolean record = shouldRecordLocation(location, time);
-		if (record) {
-			heading = getAdjustedHeading(heading);
 
-			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), time,
-					location.getAltitude(), location.getSpeed(), location.getAccuracy(), heading);
+		//log.debug("updateLocation at " + time);
+		heading = getAdjustedHeading(heading);
 
-			String pluginsInfo = getPluginsInfo(location);
-			Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
-			if (!Algorithms.isEmpty(extensions)) {
-				GpxUtilities.INSTANCE.assignExtensionWriter(wptPt, extensions, "plugins");
-			}
+		WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), time,
+				location.getAltitude(), location.getSpeed(), location.getAccuracy(), heading);
 
-			insertData(wptPt, pluginsInfo);
-			app.getNotificationHelper().refreshNotification(NotificationType.GPX);
+		String pluginsInfo = getPluginsInfo(location);
+		Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
+		if (!Algorithms.isEmpty(extensions)) {
+			GpxUtilities.INSTANCE.assignExtensionWriter(wptPt, extensions, "plugins");
 		}
-	}
 
-	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
-		boolean record = false;
-		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
-				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
-				record = true;
-			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
-					&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
-				record = true;
-			}
-			float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
-			if (minDistance > 0 && lastPoint != null
-					&& MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) < minDistance) {
-				record = false;
-			}
-			float precision = settings.SAVE_TRACK_PRECISION.get();
-			if (precision > 0 && (!location.hasAccuracy() || location.getAccuracy() > precision)) {
-				record = false;
-			}
-			float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
-			if (minSpeed > 0 && (!location.hasSpeed() || location.getSpeed() < minSpeed)) {
-				record = false;
-			}
-		}
-		return record;
+		insertData(wptPt, pluginsInfo);
+		app.getNotificationHelper().refreshNotification(NotificationType.GPX);
 	}
 
 	private float getAdjustedHeading(@Nullable Float heading) {
@@ -815,6 +803,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	}
 
 	public void loadGpxFromDatabase() {
+		//todo : filter here ?
 		Map<String, GpxFile> files = collectRecordedData();
 		List<Track> tracks = new ArrayList<>();
 		for (Map.Entry<String, GpxFile> entry : files.entrySet()) {
@@ -913,4 +902,67 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	public void routeWasFinished() {
 		shouldAutomaticallyRecord = true;
 	}
+
+	private static class SavedTrackFilter {
+		LatLon lastPoint = null;
+		long lastTimeUpdated = -1;
+		OsmandSettings settings;
+
+		public static GpxFile filterGpxFile(@NonNull GpxFile gpx, @NonNull OsmandSettings settings) {
+			GpxFile res = gpx.clone();
+
+			//todo : tracks/segments
+			 var filteredPoints = new ArrayList<WptPt>();
+
+			SavedTrackFilter inst = new SavedTrackFilter(settings);
+			for(WptPt point : res.getPointsList()) {
+				var latlon = new LatLon(point.getLat(), point.getLon());
+				//todo : accuracy
+				if (inst.isFiltered(latlon, point.getTime(), point.getSpeed(), 100.0)) {
+					filteredPoints.add(point);
+				}
+			}
+
+			res.setPointsList(filteredPoints);
+
+			return res;
+		};
+
+		private SavedTrackFilter(@NonNull OsmandSettings _settings)
+		{
+			this.settings = _settings;
+		}
+
+		private boolean isFiltered(@Nullable LatLon location, long locationTime, double speed, double accuracy) {
+			boolean record = false;
+			if ((location != null)
+				// && SimulationProvider.isNotSimulatedLocation(location)
+					&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
+//				if (isRecordingAutomatically() &&
+				if(		locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
+					lastTimeUpdated = locationTime;
+					record = true;
+				} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
+						&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
+					lastTimeUpdated = locationTime;
+					record = true;
+				}
+				float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
+				if (minDistance > 0 && lastPoint != null
+						&& MapUtils.getDistance(lastPoint, location) < minDistance) {
+					record = false;
+					lastPoint = location;
+				}
+				float precision = settings.SAVE_TRACK_PRECISION.get();
+				if (precision > 0 && (Double.isNaN(accuracy) || accuracy > precision)) {
+					record = false;
+				}
+				float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
+				if (minSpeed > 0 && (Double.isNaN(speed) || speed < minSpeed)) {
+					record = false;
+				}
+			}
+			return record;
+		};
+	};
 }
