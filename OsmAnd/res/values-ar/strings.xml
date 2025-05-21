@@ -5359,7 +5359,7 @@
     <string name="allow_display_on_top_description">السماح بعرض نصوص الخريطة فوق بعضها البعض</string>
     <string name="show_debug_info">إظهار معلومات التصحيح</string>
     <string name="show_debug_info_description">عرض معلومات رسومية حول موضع كل نص للخريطة</string>
-    <string name="map_text">نصوص الخريطة</string>
+    <string name="map_text">عرض الخريطة</string>
     <string name="routing_attr_avoid_cobblestone_name">تجنب الحصى</string>
     <string name="routing_attr_avoid_cobblestone_description">تجنب الحصى</string>
     <string name="release_4_8">• خيار تلوين التضاريس الجديد \"الارتفاع\" \n \n • لوحات الألوان المخصصة للتضاريس، والمسارات، والطرق \n \n • متغير ثلاثي الأبعاد لأيقونات موضع الموقع \n \n • يمكن الآن تخصيص الإجراءات السريعة للوحات المفاتيح الخارجية \n \n • الطقس: تحديث واجهة المستخدم، وأضاف الرسوم المتحركة الرياح \n \n • تحسينات المسار ثلاثي الأبعاد: خيارات التصور والتلوين الجديدة \n \n • توسيع نطاق اختيار الطرق السياحية على الخريطة \n \n • تمت إضافة خيار موضوع التطبيق لمتابعة وضع الخريطة \n \n • احصائيات المسار الثابت، والفرز والبحث \n \n • تحرير OSM: حذف طريقة ترخيص تسجيل الدخول / كلمة المرور \n \n • التبديل إلى صفحة مشاركة النظام بدءا من Android 14</string>
@@ -5817,4 +5817,11 @@
     <string name="save_to_device">الحفظ على الجهاز</string>
     <string name="route_part_of">جزء من</string>
     <string name="row_height">ارتفاع الصف</string>
+    <string name="travel_guides">أدلة إرشادية</string>
+    <string name="show_debug_tile">عرض معلومات المربع</string>
+    <string name="show_debug_tile_description">عرض معلومات حول رموز الخريطة لكل مربع</string>
+    <string name="deactivated_map">خريطة معطلة</string>
+    <string name="suggest_activate_map_msg">تم إلغاء تنشيط خريطة %1$s، \nقم بتنشيطها لعرض هذه المنطقة.</string>
+    <string name="show_symbols_debug_info">إظهار معلومات تصحيح أخطاء الرموز</string>
+    <string name="unit_of_temperature_description">سيتم تطبيق الوحدات المحددة على جميع البيانات المتعلقة بدرجة الحرارة في الملف الشخصي الحالي.</string>
 </resources>
