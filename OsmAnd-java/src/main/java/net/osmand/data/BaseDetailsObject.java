@@ -7,7 +7,9 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.MapPoiTypes.PoiTranslator;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.SearchResult.SearchResultResource;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -209,12 +211,17 @@ public class BaseDetailsObject {
 					}
 				}
 			} else if (object instanceof RenderedObject renderedObject) {
+				if (syntheticAmenity.getType() == null) {
+					Amenity amenity = BaseDetailsObject.convertToSyntheticAmenity(renderedObject);
+					syntheticAmenity.setType(amenity.getType());
+					syntheticAmenity.setSubType(amenity.getSubType());
+					syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
+				}
 				syntheticAmenity.copyNames(renderedObject);
-				syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
-				processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
 				if (syntheticAmenity.getLocation() == null) {
 					syntheticAmenity.setLocation(renderedObject.getLocation());
 				}
+				processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
 			}
 		}
 		if (!Algorithms.isEmpty(contentLocales)) {
@@ -442,5 +449,80 @@ public class BaseDetailsObject {
 	@Override
 	public String toString() {
 		return getSyntheticAmenity().toString();
+	}
+
+	public static Amenity convertToSyntheticAmenity(RenderedObject renderedObject) {
+		MapPoiTypes poiTypes = MapPoiTypes.getDefault();
+
+		Amenity amenity = new Amenity();
+		amenity.setType(poiTypes.getOtherPoiCategory());
+		amenity.setSubType("");
+
+		PoiTranslator translator = poiTypes.getPoiTranslator();
+		PoiType pt = null;
+		PoiType otherPt = null;
+		String subtype = null;
+		Map<String, String> additionalInfo = new LinkedHashMap<>();
+		for (Map.Entry<String, String> e : renderedObject.getTags().entrySet()) {
+			String tag = e.getKey();
+			String value = e.getValue();
+			if (tag.equals("name")) {
+				amenity.setName(value);
+				continue;
+			}
+			if (e.getKey().startsWith("name:")) {
+				amenity.setName(tag.substring("name:".length()), value);
+				continue;
+			}
+			if (tag.equals("amenity")) {
+				if (pt != null) {
+					otherPt = pt;
+				}
+				pt = poiTypes.getPoiTypeByKey(value);
+			} else {
+				PoiType poiType = poiTypes.getPoiTypeByKey(e.getKey() + "_" + e.getValue());
+				if (poiType == null) {
+					poiType = poiTypes.getPoiTypeByKey(e.getKey());
+				}
+				if (poiType != null) {
+					otherPt = pt != null ? poiType : otherPt;
+					subtype = pt == null ? value : subtype;
+					pt = pt == null ? poiType : pt;
+				}
+			}
+			if (Algorithms.isEmpty(value) && otherPt == null) {
+				otherPt = poiTypes.getPoiTypeByKey(tag);
+			}
+			if (otherPt == null) {
+				PoiType poiType = poiTypes.getPoiTypeByKey(value);
+				if (poiType != null && poiType.getOsmTag().equals(tag)) {
+					otherPt = poiType;
+				}
+			}
+			if (!Algorithms.isEmpty(value)) {
+				String translate = translator.getTranslation(tag + "_" + value);
+				String translate2 = translator.getTranslation(value);
+				if (translate != null && translate2 != null) {
+					additionalInfo.put(translate, translate2);
+				} else {
+					additionalInfo.put(tag, value);
+				}
+			}
+		}
+		if (pt != null) {
+			amenity.setType(pt.getCategory());
+		} else if (otherPt != null) {
+			amenity.setType(otherPt.getCategory());
+			amenity.setSubType(otherPt.getKeyName());
+		}
+		if (subtype != null) {
+			amenity.setSubType(subtype);
+		}
+		amenity.setId(renderedObject.getId());
+		amenity.setAdditionalInfo(additionalInfo);
+		amenity.setX(renderedObject.getX());
+		amenity.setY(renderedObject.getY());
+
+		return amenity;
 	}
 }
