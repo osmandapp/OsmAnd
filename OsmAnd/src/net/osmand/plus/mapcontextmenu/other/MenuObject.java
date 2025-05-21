@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.plus.mapcontextmenu.MenuController.MenuType.MULTI_LINE;
+
 import androidx.annotation.Nullable;
 
 import net.osmand.NativeLibrary;
@@ -8,7 +10,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuTitleController;
 
 public class MenuObject extends MenuTitleController {
@@ -25,7 +26,8 @@ public class MenuObject extends MenuTitleController {
 	@Nullable
 	private OnCompleteCallback onSearchAddressDone;
 
-	MenuObject(LatLon latLon, PointDescription pointDescription, Object object, @Nullable MapActivity mapActivity) {
+	MenuObject(LatLon latLon, PointDescription pointDescription, Object object,
+			@Nullable MapActivity mapActivity) {
 		this.latLon = latLon;
 		this.pointDescription = pointDescription;
 		this.object = object;
@@ -39,7 +41,7 @@ public class MenuObject extends MenuTitleController {
 	protected void init() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object, MenuType.MULTI_LINE);
+			controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object, MULTI_LINE);
 			controller.setActive(true);
 			initTitle();
 		}

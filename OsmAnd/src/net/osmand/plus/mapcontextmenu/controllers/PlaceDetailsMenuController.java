@@ -1,12 +1,17 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.PlaceDetailsMenuBuilder;
+import net.osmand.util.Algorithms;
+
+import java.util.List;
 
 public class PlaceDetailsMenuController extends AmenityMenuController {
 
@@ -31,16 +36,29 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 	}
 
 	@Override
-	protected void acquireTransportStopController(@NonNull MapActivity mapActivity,
-			@NonNull PointDescription pointDescription) {
+	protected void acquireTransportStopController(@NonNull MapActivity activity,
+			@NonNull PointDescription description) {
 		if (detailsObject != null) {
-			for (Amenity amenity : detailsObject.getAmenities()) {
-				transportStopController = acquireTransportStopController(amenity, mapActivity, pointDescription);
-				if (transportStopController != null) {
-					transportStopController.processRoutes();
-					break;
-				}
+			transportStopController = getTransportStopController(activity, description);
+		}
+		if (transportStopController != null) {
+			transportStopController.processRoutes();
+		}
+	}
+
+	@Nullable
+	private TransportStopController getTransportStopController(@NonNull MapActivity activity,
+			@NonNull PointDescription description) {
+		for (Amenity amenity : detailsObject.getAmenities()) {
+			TransportStopController controller = acquireTransportStopController(amenity, activity, description);
+			if (controller != null) {
+				return controller;
 			}
 		}
+		List<TransportStop> stops = detailsObject.getTransportStops();
+		if (!Algorithms.isEmpty(stops)) {
+			return new TransportStopController(activity, description, stops.get(0));
+		}
+		return null;
 	}
 }
