@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx
 
+import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KMapUtils
@@ -13,7 +14,7 @@ abstract class ElevationDiffsCalculator {
 	private var diffElevationDown = 0.0
 	private var extremums = mutableListOf<Extremum>()
 
-	data class Extremum(val dist: Double, val ele: Double)
+	data class Extremum(val dist: Double, val ele: Double, val wptPt: WptPt? = null)
 
 	abstract fun getPointDistance(index: Int): Double
 
@@ -31,6 +32,10 @@ abstract class ElevationDiffsCalculator {
 
 	fun getExtremums(): List<Extremum> {
 		return extremums.toList()
+	}
+
+	fun setExtremums(extremums: MutableList<Extremum>) {
+		this.extremums = extremums
 	}
 
 	private fun getProjectionDist(x: Double, y: Double, fromx: Double, fromy: Double, tox: Double, toy: Double): Double {
@@ -76,12 +81,7 @@ abstract class ElevationDiffsCalculator {
 		points[pointsCount - 1] = true
 		findMaximumExtremumBetween(0, pointsCount - 1, points)
 
-		extremums = mutableListOf()
-		for (i in points.indices) {
-			if (points[i]) {
-				extremums.add(Extremum(getPointDistance(i), getPointElevation(i)))
-			}
-		}
+		collectExtremums(points)
 
 		for (i in 1 until extremums.size) {
 			val prevElevation = extremums[i - 1].ele
@@ -91,6 +91,15 @@ abstract class ElevationDiffsCalculator {
 				diffElevationUp += eleDiffSumm
 			} else {
 				diffElevationDown -= eleDiffSumm
+			}
+		}
+	}
+
+	open fun collectExtremums(points: BooleanArray){
+		extremums = mutableListOf()
+		for (i in points.indices) {
+			if (points[i]) {
+				extremums.add(Extremum(getPointDistance(i), getPointElevation(i)))
 			}
 		}
 	}

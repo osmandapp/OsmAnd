@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
+import static net.osmand.shared.gpx.primitives.TrkSegment.*;
 
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
@@ -97,7 +98,7 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 		} else {
 			if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
 				overviewTextView.setTextColor(app.getColor(activeColorId));
-				if (trackGroup != null && trackGroup.isSplitDistance()) {
+				if (trackGroup != null && (trackGroup.isSplitDistance() || currentGpxDisplayItem.analysis.getSegmentSlopeType() != null)) {
 					overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, activeColorId));
 					overviewTextView.setText("");
 					double metricStart = currentGpxDisplayItem.analysis.getMetricEnd() - currentGpxDisplayItem.analysis.getTotalDistance();
@@ -105,6 +106,20 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 					overviewTextView.append(" - ");
 					overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.getMetricEnd(), app));
 					overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
+					SegmentSlopeType slopeType = currentGpxDisplayItem.analysis.getSegmentSlopeType();
+
+					if (slopeType != null) {
+						String slopeName;
+						if (slopeType == SegmentSlopeType.FLAT) {
+							slopeName = getString(R.string.shared_string_flat);
+						} else if (slopeType == SegmentSlopeType.UPHILL) {
+							slopeName = getString(R.string.shared_string_uphill);
+						} else {
+							slopeName = getString(R.string.shared_string_downhill);
+						}
+
+						overviewTextView.append(" - " + slopeName);
+					}
 				} else if (trackGroup != null && trackGroup.isSplitTime()) {
 					overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_time_span_16, activeColorId));
 					overviewTextView.setText("");

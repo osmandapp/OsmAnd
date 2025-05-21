@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_flat">Flat</string>
+    <string name="uphill_downhill_split">Uphill / Downhill</string>
     <string name="travel_guides">Guides</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favorites.</string>
     <string name="msg_favorites_skipped_as_existing">Favorite points (%1$d) were skipped as already existing.</string>
