@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.PointDescription;
@@ -16,24 +17,40 @@ import java.util.List;
 public class PlaceDetailsMenuController extends AmenityMenuController {
 
 	private BaseDetailsObject detailsObject;
+	private RenderedObjectMenuController renderedObjectController;
 
 	public PlaceDetailsMenuController(@NonNull MapActivity activity,
 			@NonNull PointDescription description,
 			@NonNull BaseDetailsObject detailsObject) {
 		super(activity, new PlaceDetailsMenuBuilder(activity, detailsObject), description, detailsObject.getSyntheticAmenity());
 		this.detailsObject = detailsObject;
+		acquireMenuControllers(activity, description);
+	}
+
+	protected void acquireMenuControllers(@NonNull MapActivity activity,
+			@NonNull PointDescription description) {
 		acquireTransportStopController(activity, description);
+
+		List<RenderedObject> renderedObjects = detailsObject.getRenderedObjects();
+		if (!Algorithms.isEmpty(renderedObjects)) {
+			renderedObjectController = new RenderedObjectMenuController(activity, description, renderedObjects.get(0));
+		}
 	}
 
 	public int getRightIconId() {
-		int iconId = getRightIconId(getApplication(), amenity);
-		if (iconId != 0) {
-			return iconId;
+		int iconId = transportStopController != null ? transportStopController.getRightIconId() : 0;
+		if (iconId == 0) {
+			for (Amenity amenity : detailsObject.getAmenities()) {
+				iconId = getRightIconId(getApplication(), amenity);
+				if (iconId != 0) {
+					break;
+				}
+			}
 		}
-		if (transportStopController != null) {
-			return transportStopController.getRightIconId();
+		if (iconId == 0) {
+			iconId = renderedObjectController != null ? renderedObjectController.getRightIconId() : 0;
 		}
-		return 0;
+		return iconId;
 	}
 
 	@Override

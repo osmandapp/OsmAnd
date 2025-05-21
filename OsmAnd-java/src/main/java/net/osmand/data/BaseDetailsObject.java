@@ -403,6 +403,16 @@ public class BaseDetailsObject {
 		return stops;
 	}
 
+	public List<RenderedObject> getRenderedObjects() {
+		List<RenderedObject> renderedObjects = new ArrayList<>();
+		for (Object object : objects) {
+			if (object instanceof RenderedObject renderedObject) {
+				renderedObjects.add(renderedObject);
+			}
+		}
+		return renderedObjects;
+	}
+
 	private static SearchResultResource findObfType(String obfResourceName, Amenity amenity) {
 		if (obfResourceName != null && obfResourceName.contains("basemap")) {
 			return SearchResultResource.BASEMAP;
