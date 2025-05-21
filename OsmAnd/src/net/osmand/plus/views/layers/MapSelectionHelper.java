@@ -119,16 +119,10 @@ public class MapSelectionHelper {
 
 		collectObjectsFromLayers(result, showUnknownLocation, false);
 		collectObjectsFromMap(result, point, tileBox);
-
-		//transportStopHelper.processTransportStops(result.getAllObjects());
 		if (result.isEmpty()) {
 			collectObjectsFromLayers(result, showUnknownLocation, true);
 		}
-		/*if (result.getAllObjects().size() > 1) {
-			recollectForMultiselectMenu(result);
-		}*/
 		result.groupByOsmIdAndWikidataId();
-		//result.groupOtherObjects();
 		return result;
 	}
 

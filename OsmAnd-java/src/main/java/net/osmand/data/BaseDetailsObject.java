@@ -148,7 +148,6 @@ public class BaseDetailsObject {
 				}
 			}
 			if (isStop) {
-				assert stops.size() == 1; // TODO remove later !!!
 				for (TransportStop stop : stops) {
 					if (MapUtils.getDistance(stop.getLocation(), renderedObject.getLatLon()) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS) {
 						return true;

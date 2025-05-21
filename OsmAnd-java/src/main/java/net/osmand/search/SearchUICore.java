@@ -1133,7 +1133,9 @@ public class SearchUICore {
 				}
 				break;
 			case OBF_RESOURCE:
-				// sort order: DETAILED, WIKIPEDIA, TRAVEL, BASEMAP
+				if (o1.isFullPhraseEqualLocaleName() || o2.isFullPhraseEqualLocaleName()) {
+					break;
+				}
 				int ord1 = o1.getResourceType().ordinal();
 				int ord2 = o2.getResourceType().ordinal();
 				if (ord1 != ord2) {

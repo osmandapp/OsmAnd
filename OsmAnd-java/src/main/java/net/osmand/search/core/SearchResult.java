@@ -317,4 +317,8 @@ public class SearchResult {
 	public void setUnknownPhraseMatchWeight(double weight) {
 		unknownPhraseMatchWeight = weight;
 	}
+
+	public boolean isFullPhraseEqualLocaleName() {
+		return requiredSearchPhrase.getFullSearchPhrase().equalsIgnoreCase(localeName);
+	}
 }
