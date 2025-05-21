@@ -4,6 +4,7 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FR
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.MULTISEARCH;
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
+import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 
 import net.osmand.CallbackWithObject;
@@ -18,6 +19,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.data.TransportStop;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.AmenityIndexRepository;
@@ -538,5 +540,83 @@ public class FullAmenitySearch {
             }
             callback.processResult(detailsObject);
         });
+    }
+
+    public void fetchOtherDataAsync(Object object, CallbackWithObject<Object> callback) {
+        singleThreadedExecutor.submit(() -> {
+            Object fethched = fetchOtherData(object);
+            callback.processResult(fethched);
+        });
+    }
+
+    public Object fetchOtherData(Object object) {
+        if (object instanceof BaseDetailsObject baseDetailsObject && baseDetailsObject.dataEnvelope == BaseDetailsObject.DataEnvelope.FULL) {
+            return object;
+        }
+        BaseDetailsObject detailsObject = null;
+        long time = System.currentTimeMillis();
+        LatLon latLon = null;
+        Long id = null;
+        String wikidata = null;
+        List<String> names = null;
+        if (object instanceof BaseDetailsObject bdo && bdo.dataEnvelope == BaseDetailsObject.DataEnvelope.EMPTY) {
+            Object mainObj = bdo.getObjects().get(0);
+            if (mainObj instanceof Amenity amenity) {
+                latLon = amenity.getLocation();
+                id = amenity.getId();
+                wikidata = amenity.getWikidata();
+            }
+            if (mainObj instanceof TransportStop stop) {
+                latLon = stop.getLocation();
+                id = stop.getId();
+                names = stop.getOtherNames();
+                names.add(stop.getName());
+            }
+        }
+        if (object instanceof Amenity amenity) {
+            latLon = amenity.getLocation();
+            id = amenity.getId();
+            wikidata = amenity.getWikidata();
+        }
+        if (object instanceof RenderedObject renderedObject) {
+            latLon = renderedObject.getLatLon();
+            names = renderedObject.getOriginalNames();
+            id = ObfConstants.getOsmObjectId(renderedObject) << AMENITY_ID_RIGHT_SHIFT;
+            wikidata = renderedObject.getTagValue(WIKIDATA);
+        }
+        if (latLon != null && id != null) {
+            detailsObject = findPlaceDetails(latLon, id, names, wikidata);
+            if (detailsObject != null) {
+                detailsObject.addObject(object);
+                detailsObject.combineData();
+            }
+        }
+
+        if (detailsObject == null) {
+            return object;
+        }
+
+        if (!detailsObject.hasGeometry()) {
+            detailsObject.processPolygonCoordinates(object);
+            if (!detailsObject.hasGeometry()) {
+                List<BinaryMapDataObject> dataObjects = searchBinaryMapDataForAmenity(detailsObject.getSyntheticAmenity(), 1);
+                for (BinaryMapDataObject dataObject : dataObjects) {
+                    if (copyCoordinates(detailsObject, dataObject)) {
+                        break;
+                    }
+                }
+            }
+        }
+        //log.debug("fetchOtherData time " + (System.currentTimeMillis() - time));
+        return detailsObject;
+    }
+
+    private boolean copyCoordinates(BaseDetailsObject detailsObject, BinaryMapDataObject mapObject) {
+        int pointsLength = mapObject.getPointsLength();
+        for (int i = 0; i < pointsLength; i++) {
+            detailsObject.addX(mapObject.getPoint31XTile(i));
+            detailsObject.addY(mapObject.getPoint31YTile(i));
+        }
+        return pointsLength > 0;
     }
 }

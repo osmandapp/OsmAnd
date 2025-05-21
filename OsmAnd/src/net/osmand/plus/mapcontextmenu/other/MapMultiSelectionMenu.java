@@ -64,7 +64,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		this.selectedObjects.addAll(selectedObjects);
 		objects.clear();
 		for (SelectedMapObject selectedMapObject : selectedObjects) {
-			Object object = fetchObject(selectedMapObject.object());
+			Object object = getApplication().getResourceManager().getAmenitySearcher().fetchOtherData(selectedMapObject.object());
 			IContextMenuProvider provider = selectedMapObject.provider();
 
 			MenuObject menuObject = MenuObjectUtils.createMenuObject(object, provider, latLon, getMapActivity());
@@ -86,24 +86,6 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			}
 		}
 		objects.sort(new MultiSelectionMenuComparator(getAppMode()));
-	}
-
-	@NonNull
-	private Object fetchObject(@NonNull Object object) {
-		if (object instanceof RenderedObject renderedObject) {
-			LatLon latLon = renderedObject.getLatLon();
-			if (latLon != null) {
-				long osmId = ObfConstants.getOsmObjectId(renderedObject);
-				long id = osmId << AMENITY_ID_RIGHT_SHIFT;
-				FullAmenitySearch amenitySearcher = getApplication().getResourceManager().getAmenitySearcher();
-				BaseDetailsObject detailsObject = amenitySearcher.findPlaceDetails(latLon, id,
-						renderedObject.getOriginalNames(), renderedObject.getTagValue(WIKIDATA));
-				if (detailsObject != null) {
-					return detailsObject;
-				}
-			}
-		}
-		return object;
 	}
 
 	private ApplicationMode getAppMode() {

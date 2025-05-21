@@ -1094,77 +1094,11 @@ public class ResourceManager {
 		return fullAmenitySearch;
 	}
 
-	@Nullable
-	public Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
-		BaseDetailsObject detailsObject = null;
-		long time = System.currentTimeMillis();
-		// TODO perhaps roll-back
-		LatLon latLon = null;
-		Long id = null;
-		String wikidata = null;
-		List<String> names = null;
-		if (object instanceof BaseDetailsObject bdo && bdo.dataEnvelope == BaseDetailsObject.DataEnvelope.EMPTY) {
-			Object mainObj = bdo.getObjects().get(0);
-			if (mainObj instanceof Amenity amenity) {
-				latLon = amenity.getLocation();
-				id = amenity.getId();
-				wikidata = amenity.getWikidata();
-			}
-			if (mainObj instanceof TransportStop stop) {
-				latLon = stop.getLocation();
-				id = stop.getId();
-				names = stop.getOtherNames();
-				names.add(stop.getName());
-			}
-		}
-		if (object instanceof Amenity amenity) {
-			latLon = amenity.getLocation();
-			id = amenity.getId();
-			wikidata = amenity.getWikidata();
-		}
-		if (latLon != null && id != null) {
-			detailsObject = fullAmenitySearch.findPlaceDetails(latLon, id, names, wikidata);
-			if (detailsObject != null) {
-				detailsObject.addObject(object);
-				detailsObject.combineData();
-			}
-		}
-
-		if (object instanceof BaseDetailsObject) {
-			detailsObject = (BaseDetailsObject) object;
-		}
-
-		if (detailsObject == null) {
-			return object;
-		}
-
-		if (!detailsObject.hasGeometry()) {
-			List<BinaryMapDataObject> dataObjects = fullAmenitySearch.searchBinaryMapDataForAmenity(detailsObject.getSyntheticAmenity(), 1);
-			for (BinaryMapDataObject dataObject : dataObjects) {
-				if (copyCoordinates(detailsObject, dataObject)) {
-					break;
-				}
-			}
-		}
-		log.debug("fetchOtherData time " + (System.currentTimeMillis() - time));
-		return detailsObject;
-	}
-
 	public static String getMapFileName(String regionName) {
 		return Algorithms.capitalizeFirstLetterAndLowercase(regionName) + BINARY_MAP_INDEX_EXT;
 	}
 
 	public static String getRoadMapFileName(String regionName) {
 		return Algorithms.capitalizeFirstLetterAndLowercase(regionName) + BINARY_ROAD_MAP_INDEX_EXT;
-	}
-
-	private static boolean copyCoordinates(@NonNull BaseDetailsObject detailsObject,
-										   @NonNull BinaryMapDataObject mapObject) {
-		int pointsLength = mapObject.getPointsLength();
-		for (int i = 0; i < pointsLength; i++) {
-			detailsObject.addX(mapObject.getPoint31XTile(i));
-			detailsObject.addY(mapObject.getPoint31YTile(i));
-		}
-		return pointsLength > 0;
 	}
 }

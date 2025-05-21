@@ -233,6 +233,7 @@ public class BaseDetailsObject {
 		if (syntheticAmenity.getType() == null) {
 			syntheticAmenity.setType(MapPoiTypes.getDefault().getUserDefinedCategory());
 			syntheticAmenity.setSubType("");
+			this.dataEnvelope = DataEnvelope.EMPTY;
 		}
 	}
 
@@ -281,6 +282,15 @@ public class BaseDetailsObject {
 		}
 		if (syntheticAmenity.getY().isEmpty() && !y.isEmpty()) {
 			syntheticAmenity.getY().addAll(y);
+		}
+	}
+
+	public void processPolygonCoordinates(Object object) {
+		if (object instanceof Amenity amenity) {
+			processPolygonCoordinates(amenity.getX(), amenity.getY());
+		}
+		if (object instanceof RenderedObject renderedObject) {
+			processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
 		}
 	}
 
