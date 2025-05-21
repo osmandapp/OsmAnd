@@ -4,9 +4,7 @@ import static net.osmand.data.PointDescription.POINT_TYPE_POI;
 import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
-import static net.osmand.plus.poi.PoiUIFilter.TOP_PLACES_LIMIT;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.views.layers.core.POITileProvider.TILE_POINTS_LIMIT;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -45,6 +43,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -86,6 +85,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private static final int START_ZOOM = 5;
 	private static final int START_ZOOM_ROUTE_TRACK = 11;
 	private static final int END_ZOOM_ROUTE_TRACK = 13;
+	private static final int TOP_PLACES_LIMIT = 20;
+	public static final int TILE_POINTS_LIMIT = 25;
 
 	private static final Log LOG = PlatformUtil.getLog(POIMapLayer.class);
 
@@ -111,6 +112,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private String routeArticlePointsFilterByName;
 	private boolean fileVisibilityChanged;
 	public CustomMapObjects<Amenity> customObjectsDelegate;
+	private int topPlacesLimit = TOP_PLACES_LIMIT;
 
 	private static final int SELECTED_MARKER_ID = -1;
 	private static final int IMAGE_ICON_BORDER_DP = 2;
@@ -145,7 +147,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		super(context);
 		app = (OsmandApplication) context.getApplicationContext();
 		routingHelper = app.getRoutingHelper();
-
+		updateTopPlacesLimit();
 		travelRendererHelper = app.getTravelRendererHelper();
 		showTravel = app.getSettings().SHOW_TRAVEL.get();
 		routeArticleFilterEnabled = travelRendererHelper.getRouteArticlesProperty().get();
@@ -157,7 +159,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 		routingHelper.addListener(this);
 		travelRendererHelper.addFileVisibilityListener(this);
-		data = new MapLayerData<List<Amenity>>() {
+		data = new MapLayerData<>() {
 
             Set<PoiUIFilter> calculatedFilters;
 
@@ -284,9 +286,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 								if (tileLatLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
 										latLon.getLongitude(), latLon.getLatitude())) {
 									displayedPoints.add(amenity);
-								}
-								if (i++ > TILE_POINTS_LIMIT) {
-									break;
+									if (++i == TILE_POINTS_LIMIT) {
+										break;
+									}
 								}
 							}
 						}
@@ -455,7 +457,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (!intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
 				res.put(place.getId(), place);
 			}
-			if (i++ > TOP_PLACES_LIMIT) {
+			if (i++ > topPlacesLimit) {
 				break;
 			}
 		}
@@ -496,30 +498,35 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					break;
 				}
 			}
-			mapPlaces.add(new MapTopPlace(placeId, position, getTopPlaceBitmap(place), alreadyExists));
-		}
-		for (MapTopPlace place : mapPlaces) {
-			Bitmap imageBitmap = place.imageBitmap;
-			if (place.alreadyExists || imageBitmap == null) {
-				continue;
+			Bitmap topPlaceBitmap = getTopPlaceBitmap(place);
+			if(topPlaceBitmap != null) {
+				mapPlaces.add(new MapTopPlace(placeId, position, topPlaceBitmap, alreadyExists));
 			}
-
-			Bitmap imageMapBitmap = createImageBitmap(imageBitmap, false);
-
-			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
-			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
-					.setMarkerId(place.placeId)
-					.setBaseOrder(getPointsOrder() - 100)
-					.setPinIcon(NativeUtilities.createSkImageFromBitmap(imageMapBitmap))
-					.setPosition(place.position)
-					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
-					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
-					.buildAndAddToCollection(mapMarkersCollection);
+			if(mapPlaces.size() == topPlacesLimit) {
+				break;
+			}
 		}
 		for (int i = 0; i < existingIds.length; i++) {
 			if (existingIds[i] != 0) {
 				mapMarkersCollection.removeMarker(existingMapPoints.get(i));
 			}
+		}
+		for (MapTopPlace place : mapPlaces) {
+			Bitmap imageBitmap = place.imageBitmap;
+			if (place.alreadyExists) {
+				continue;
+			}
+			Bitmap imageMapBitmap = createImageBitmap(imageBitmap, false);
+
+			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
+					.setMarkerId(place.placeId)
+					.setBaseOrder(getTopPlaceBaseOrder())
+					.setPinIcon(NativeUtilities.createSkImageFromBitmap(imageMapBitmap))
+					.setPosition(place.position)
+					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
+					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+					.buildAndAddToCollection(mapMarkersCollection);
 		}
 		mapRenderer.addSymbolsProvider(mapMarkersCollection);
 	}
@@ -527,8 +534,17 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	@Override
 	protected void updateResources() {
 		super.updateResources();
+		updateTopPlacesLimit();
 		cleanupResources();
 		data.clearCache();
+	}
+
+	private void updateTopPlacesLimit() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			int screenSize = Math.min(AndroidUtils.getScreenHeight(activity), AndroidUtils.getScreenWidth(activity));
+			topPlacesLimit = (int) ((float) screenSize / getBigIconSize() * 1.5);
+		}
 	}
 
 	private Set<PoiUIFilter> collectFilters() {
@@ -967,25 +983,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return null;
 	}
 
-	@Override
-	public boolean runExclusiveAction(@Nullable Object object, boolean unknownLocation) {
-		MapActivity mapActivity = getMapActivity();
-		if (object instanceof Amenity amenity) {
-			object = app.getResourceManager().getAmenitySearcher().fetchOtherData(amenity);
-		}
-		if (mapActivity != null && object instanceof BaseDetailsObject detailsObject) {
-			Amenity amenity = getSelectedTopPlace(detailsObject);
-			if (amenity != null) {
-				hideExplorePlacesFragment(mapActivity);
-				showTopPlaceContextMenu(mapActivity, detailsObject, amenity);
-				return true;
-			}
-		}
-		return IContextMenuProvider.super.runExclusiveAction(object, unknownLocation);
-	}
-
 	@Nullable
-	private Amenity getSelectedTopPlace(@NonNull BaseDetailsObject detailsObject) {
+	public Amenity getSelectedTopPlace(@NonNull BaseDetailsObject detailsObject) {
 		if (!Algorithms.isEmpty(topPlaces)) {
 			for (Amenity amenity : detailsObject.getAmenities()) {
 				Amenity topPlace = topPlaces.get(amenity.getId());
@@ -1136,11 +1135,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (imageBitmap != null) {
 			LatLon latLon = selectedPlace.second.getLocation();
 			Bitmap imageMapBitmap = createImageBitmap(imageBitmap, true);
-
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
 					.setMarkerId(SELECTED_MARKER_ID)
-					.setBaseOrder(getPointsOrder() - 110)
+					.setBaseOrder(getSelectedTopPlaceBaseOrder()) //context menu layer baseOrder to be over object polygon
 					.setPinIcon(NativeUtilities.createSkImageFromBitmap(imageMapBitmap))
 					.setPosition(NativeUtilities.getPoint31FromLatLon(latLon.getLatitude(), latLon.getLongitude()))
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
@@ -1192,7 +1190,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private Bitmap getCircle(int size) {
-		if (imageCircleBitmap == null) {
+		if (imageCircleBitmap == null || imageCircleBitmap.getWidth() != size || imageCircleBitmap.getHeight() != size) {
 			imageCircleBitmap = RenderingIcons.getBitmapFromVectorDrawable(getContext(),
 					R.drawable.bg_point_circle, size, size);
 		}
@@ -1209,5 +1207,45 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private int getBigIconSize() {
 		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale());
+	}
+
+	@Override
+	public long getSelectionPointOrder(Object selectedObject) {
+		if (isTopPlace(selectedObject)) {
+			return getTopPlaceBaseOrder();
+		} else {
+			return IContextMenuProvider.super.getSelectionPointOrder(selectedObject);
+		}
+	}
+
+	private boolean isTopPlace(Object object) {
+		if (topPlaces != null) {
+			Long id;
+			if (object instanceof Amenity) {
+				id = ((Amenity) object).getId();
+			} else if (object instanceof BaseDetailsObject) {
+				id = ((BaseDetailsObject) object).getSyntheticAmenity().getId();
+			} else {
+				id = null;
+			}
+			return id != null && topPlaces.containsKey(id);
+		}
+		return false;
+	}
+
+	private int getTopPlaceBaseOrder() {
+		return getPointsOrder() - 100;
+	}
+
+	private int getSelectedTopPlaceBaseOrder() {
+		ContextMenuLayer contextLayer = app.getOsmandMap().getMapLayers().getContextMenuLayer();
+		int baseOrder = contextLayer.getBaseOrder();
+		int markerOrder = contextLayer.getMarkerBaseOrder();
+		return baseOrder + (markerOrder - baseOrder) / 2;
+	}
+
+	@Override
+	public long getPointOrder(Object object) {
+		return isTopPlace(object) ? getTopPlaceBaseOrder() : getPointsOrder();
 	}
 }
