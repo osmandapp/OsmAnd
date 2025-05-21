@@ -230,7 +230,9 @@ public class NetworkRouteSelector {
 	public static boolean containsUnsupportedRouteTags(Map<String, String> tags) {
 		for (OsmRouteType routeType : OsmRouteType.getAllValues()) {
 			if (routeType.getRenderingPropertyAttr() == null) {
-				if (tags.containsKey("route_" + routeType.getName())) {
+				String routeName = "route_" + routeType.getName();
+				String routeNameWithSuffixFirst = routeName + "_1";
+				if (tags.containsKey(routeName) || tags.containsKey(routeNameWithSuffixFirst)) {
 					return true;
 				}
 			}
