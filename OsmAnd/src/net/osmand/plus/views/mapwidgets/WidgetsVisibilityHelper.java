@@ -196,10 +196,10 @@ public class WidgetsVisibilityHelper {
 		 */
 	}
 
-	public boolean shouldShowDownloadMapWidget() {
+	public boolean shouldShowSuggestMapBanner() {
 		return !isInRouteLineAppearanceMode()
 				&& !isInConfigureMapOptionMode()
-				&& shouldShowElementOnActiveScreen(DOWNLOAD_MAP_WIDGET);
+				&& shouldShowElementOnActiveScreen(SUGGEST_MAP_BANNER);
 	}
 
 	public boolean shouldShowSpeedometer() {
@@ -410,7 +410,7 @@ public class WidgetsVisibilityHelper {
 		TOP_BUTTONS,
 		BACK_TO_LOCATION_BUTTON,
 		ELEVATION_PROFILE_WIDGET,
-		DOWNLOAD_MAP_WIDGET,
+		SUGGEST_MAP_BANNER,
 		FAB_BUTTON,
 		SPEEDOMETER
 	}
@@ -419,9 +419,9 @@ public class WidgetsVisibilityHelper {
 
 		EXPLORE_PLACES(),
 		WEATHER_FORECAST(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON),
-		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, DOWNLOAD_MAP_WIDGET, TOP_BUTTONS, COMPASS),
-		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, DOWNLOAD_MAP_WIDGET),
-		TRACK_APPEARANCE_MODE(DOWNLOAD_MAP_WIDGET),
+		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, SUGGEST_MAP_BANNER, TOP_BUTTONS, COMPASS),
+		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, SUGGEST_MAP_BANNER),
+		TRACK_APPEARANCE_MODE(SUGGEST_MAP_BANNER),
 		SELECTING_TILES_ZONE_MODE(),
 		GPS_FILTERING_MODE();
 

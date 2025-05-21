@@ -30,6 +30,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -619,6 +620,17 @@ public class UiUtilities {
 			tvTitle.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 			tvTitle.setCompoundDrawablePadding(AndroidUtils.dpToPx(ctx, ctx.getResources().getDimension(R.dimen.content_padding_half)));
 		}
+	}
+
+	@NonNull
+	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId) {
+		return inflate(ctx, nightMode, layoutId, null, false);
+	}
+
+	@NonNull
+	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId,
+	                           @Nullable ViewGroup root, boolean attachToRoot) {
+		return getInflater(ctx, nightMode).inflate(layoutId, root, attachToRoot);
 	}
 
 	@NonNull

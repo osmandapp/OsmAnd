@@ -48,14 +48,14 @@ public class ObfConstants {
 		return osmId;
 	}
 
-	public static long createMapObjectIdFromOsmId(Long osmId, int osmType) {
-		return switch (osmType) {
-			case 1 -> //node
-					osmId * 2;
-			case 2 -> //way
-					osmId * 2 + 1;
-			case 3 -> // relation
-					(osmId << (5 + SHIFT_ID)) | (ObfConstants.RELATION_BIT | ObfConstants.SPLIT_BIT);
+	public static long createMapObjectIdFromOsmId(long osmId, EntityType type) {
+		if (type == null) {
+			return osmId;
+		}
+		return switch (type) {
+			case NODE -> osmId << AMENITY_ID_RIGHT_SHIFT;
+			case WAY -> (osmId << AMENITY_ID_RIGHT_SHIFT) + 1;
+			case RELATION -> RELATION_BIT + ((osmId << SHIFT_ID) << DUPLICATE_SPLIT);
 			default -> osmId;
 		};
 	}
@@ -157,5 +157,19 @@ public class ObfConstants {
 
 	public static boolean isIdFromSplit(long id) {
 		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
+	}
+	
+	public static boolean isTagIndexedForSearchAsName(String tag) {
+		if (tag != null) {
+			return tag.contains("name") || tag.contains("brand");
+		}
+		return false;
+	}
+	
+	public static boolean isTagIndexedForSearchAsId(String tag) {
+		if (tag != null) {
+			return tag.equals(Amenity.WIKIDATA) || tag.equals(Amenity.ROUTE_ID);
+		}
+		return false;
 	}
 }

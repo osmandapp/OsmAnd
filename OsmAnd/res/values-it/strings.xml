@@ -4275,7 +4275,7 @@
     <string name="simulation_real_mode_title">Simulazione realistica</string>
     <string name="speed_mode">Modalità veloce</string>
     <string name="move_map_to_select_area">Muovi la mappa per selezionare l\'area desiderata.</string>
-    <string name="default_appearance">Grafica predefinita</string>
+    <string name="default_appearance">Aspetto predefinito</string>
     <string name="apply_only_to_new_points">Applica solo ai nuovi punti</string>
     <string name="configure_screen_widgets_descr">Seleziona il lato dello schermo per aggiungere o riorganizzare i widget.</string>
     <string name="routeInfo_horse_scale_description">Disegna i percorsi in base alla difficoltà dell\'itinerario a cavallo</string>
@@ -5305,7 +5305,7 @@
     <string name="allow_display_on_top_description">Consenti la visualizzazione dei testi della mappa uno sopra l\'altro</string>
     <string name="show_debug_info">Mostra informazioni di debug</string>
     <string name="show_debug_info_description">Visualizza informazioni grafiche sul posizionamento di ciascun testo della mappa</string>
-    <string name="map_text">Testi della mappa</string>
+    <string name="map_text">Rendering della mappa</string>
     <string name="routing_attr_avoid_cobblestone_name">Evita acciottolato</string>
     <string name="disable_map_layers">Disabilita i livelli della mappa</string>
     <string name="height_legend_description">Le mappe a colori dell\'altitudine sono utilizzate per visualizzare i rilievi.</string>
@@ -5716,11 +5716,11 @@
     <string name="show_dms_grids">Usa DMS invece di gradi</string>
     <string name="show_dms_grids_description">Mostra la griglia in gradi, minuti, secondi invece che gradi</string>
     <string name="show_dm_grids">Usa DM invece di gradi o DMS</string>
-    <string name="original_color_description">Ogni punto manterrebbe il proprio colore.</string>
-    <string name="original_shape_description">Ogni punto manterrebbe la propria forma.</string>
-    <string name="original_icon_description">Ogni punto manterrebbe la propria icona.</string>
+    <string name="original_color_description">Ogni punto manterrà il suo colore.</string>
+    <string name="original_shape_description">Ogni punto manterrà la sua forma.</string>
+    <string name="original_icon_description">Ogni punto manterrà la sua icona.</string>
     <string name="show_dm_grids_description">Mostra la griglia in gradi e minuti invece che in gradi o DMS</string>
-    <string name="save_favorite_default_appearance">Applicare le modifiche ai punti esistenti nella cartella o solo a quelli nuovi?</string>
+    <string name="save_favorite_default_appearance">Applica modifiche ai punti esistenti nella cartella o solo a quelli nuovi?</string>
     <string name="popular_places">Luoghi popolari</string>
     <string name="show_list">Mostra lista</string>
     <string name="point_location">Posizione del punto</string>
@@ -5729,12 +5729,12 @@
     <string name="shared_string_map_center">Centro della mappa</string>
     <string name="shared_string_manual">Manuale</string>
     <string name="show_image_previews">Mostra l\' immagine precedente</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Azione per il controllo della visibilità della griglia delle coordinate sulla mappa.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Azioni per controllare la visibilità della griglia delle coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
     <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
     <string name="equator">Equatore</string>
-    <string name="prime_meridian">Meridiano fondamentale</string>
-    <string name="meridian_180">180° meridiano</string>
+    <string name="prime_meridian">Primo meridiano</string>
+    <string name="meridian_180">180º meridiano</string>
     <string name="shared_string_online_only">Solo online</string>
     <string name="shared_string_offline_only">Solo offline</string>
     <string name="add_widget">Aggiungi widget</string>
@@ -5753,11 +5753,11 @@
     <string name="wikidata">Wikidata</string>
     <string name="routing_attr_allow_ferries_name">Traghetti consentiti</string>
     <string name="prediction_time_description">L\'icona della posizione in OsmAnd si anima con ogni punto dati GPS ricevuto (una volta al secondo). Un leggero ritardo nel suo movimento potrebbe essere evidente, specialmente quando ti muovi rapidamente o il segnale GPS fluttua.</string>
-    <string name="grid_color">Colore della griglia</string>
+    <string name="grid_color">Colore griglia</string>
     <string name="shared_string_edges">Bordi</string>
-    <string name="labels_position">Posizione delle etichette</string>
+    <string name="labels_position">Posizione etichette</string>
     <string name="routing_attr_allow_ferries_description">Routing tramite le rotte di traghetto consentito</string>
-    <string name="customize_grid_color">Personalizza il colore della griglia</string>
+    <string name="customize_grid_color">Personalizza colore griglia</string>
     <string name="route_part_of">Parte di</string>
     <string name="route_members">Membri</string>
     <string name="multipoligon_related">Correlati</string>
@@ -5769,4 +5769,7 @@
     <string name="save_to_device">Salva nel dispositivo</string>
     <string name="travel_guides">Guide</string>
     <string name="save_to_device_error">Errore di salvataggio sul dispositivo</string>
+    <string name="show_symbols_debug_info">Mostra info dei simboli di debug</string>
+    <string name="show_debug_tile_description">Mostra le informazioni sui simboli della mappa di ogni riquadro</string>
+    <string name="show_debug_tile">Mostra informazioni riquadro</string>
 </resources>

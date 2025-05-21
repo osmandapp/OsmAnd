@@ -1,4 +1,4 @@
-package net.osmand.test.activities;
+package net.osmand.test.ui.basic;
 
 import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithContentDescription;
 import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithText;
@@ -7,6 +7,7 @@ import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialog
 import static net.osmand.test.common.OsmAndDialogInteractions.writeText;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
 import net.osmand.plus.R;
@@ -20,6 +21,7 @@ import org.junit.runner.RunWith;
 /**
  * Test for enabling the POI overlay layer via the main menu and Configure Map screen.
  */
+@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class SimpleClickTest extends AndroidTest {
 
@@ -34,15 +36,10 @@ public class SimpleClickTest extends AndroidTest {
 		clickMapButtonWithId(R.id.map_menu_button);
 		clickButtonWithText(R.string.maps_and_resources);
 
-		Thread.sleep(5000);
-
 		clickButtonWithContentDescription(R.string.shared_string_search);
 		writeText(R.id.searchEditText, "Kyiv");
 
-		Thread.sleep(5000);
-
 		clickButtonWithText("Kyiv");
 
-		Thread.sleep(5000);
 	}
 }

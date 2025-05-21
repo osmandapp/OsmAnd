@@ -122,6 +122,11 @@ public class AmenityUIHelper extends MenuBuilder {
 		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
+			if (MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key) instanceof PoiType that) {
+				if (that.isHidden()) {
+					continue;
+				}
+			}
 			if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
 					|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
 				continue;
@@ -477,9 +482,6 @@ public class AmenityUIHelper extends MenuBuilder {
 					vl = pType.getTranslation();
 				} else {
 					isText = true;
-					if (!pType.hasValidTranslation()) {
-						return null; // do not display internal and/or non-translatable tags
-					}
 					isDescription = iconId == R.drawable.ic_action_note_dark;
 					textPrefix = pType.getTranslation();
 					if (needIntFormatting) {
@@ -510,7 +512,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 				}
 			} else {
-				return null; // do not display internal and/or non-translatable tags
+				return null; // skip non-translatable NON-poiType tags
 			}
 		}
 
@@ -1025,7 +1027,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		Set<String> result = new HashSet<>();
 		for (String tag : tags) {
 			String[] parts = tag.split(":");
-			String locale = parts.length > 1 ? parts[1] : null;
+			String locale = parts.length > 1 ? parts[1] : "en";
 			if (locale != null) {
 				result.add(locale);
 			}

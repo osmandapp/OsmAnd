@@ -11,6 +11,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
+import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -32,6 +33,7 @@ import net.osmand.core.jni.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
@@ -62,6 +64,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -71,6 +74,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
+	public static final int MARKER_ORDER_DIFF = 100;
 
 	private MapContextMenu menu;
 	private MapMultiSelectionMenu multiSelectionMenu;
@@ -210,21 +214,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		boolean markerCustomized = false;
 		boolean clearSelectedObject = true;
 		if (selectedObject != null) {
-			TIntArrayList x = null;
-			TIntArrayList y = null;
-			if (selectedObject instanceof Amenity amenity) {
-				x = amenity.getX();
-				y = amenity.getY();
-			} else if (selectedObject instanceof RenderedObject object) {
-				x = object.getX();
-				y = object.getY();
-			}  else if (selectedObject instanceof PlaceDetailsObject object) {
-				Amenity amenity = object.getSyntheticAmenity();
-				x = amenity.getX();
-				y = amenity.getY();
-			} else if (selectedObject instanceof AidlMapPointWrapper) {
-				markerCustomized = true;
-			}
+			markerCustomized = selectedObject instanceof AidlMapPointWrapper;
+
+			Pair<TIntArrayList, TIntArrayList> pair = getCoordinates(selectedObject);
+			TIntArrayList x = pair != null ? pair.first : null;
+			TIntArrayList y = pair != null ? pair.second : null;
+
 			if (x != null && y != null && x.size() > 2) {
 				if (hasMapRenderer) {
 					clearSelectedObject = false;
@@ -335,6 +330,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mapActivityInvalidated = false;
 	}
 
+	@Nullable
+	private Pair<TIntArrayList, TIntArrayList> getCoordinates(@NonNull Object object) {
+		if (object instanceof Amenity amenity) {
+			return Pair.create(amenity.getX(), amenity.getY());
+		} else if (object instanceof RenderedObject renderedObject) {
+			return Pair.create(renderedObject.getX(), renderedObject.getY());
+		} else if (object instanceof BaseDetailsObject objectDetails) {
+			Amenity amenity = objectDetails.getSyntheticAmenity();
+			return Pair.create(amenity.getX(), amenity.getY());
+		}
+		return null;
+	}
+
 	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {
 		this.selectOnMap = selectOnMap;
 	}
@@ -358,7 +366,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 			contextMarkerCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getPointsOrder() - 100);
+			builder.setBaseOrder(getMarkerBaseOrder());
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(contextMarkerImage));
@@ -724,11 +732,32 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon pointLatLon = result.getPointLatLon();
 		List<SelectedMapObject> selectedObjects = result.getProcessedObjects();
 
+		long objectSelectionThreshold = 0;
 		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (selectedObject.provider() != null) {
+				long selectionThreshold = selectedObject.provider().getSelectionPointOrder(selectedObject.object());
+				if (selectionThreshold <= objectSelectionThreshold) {
+					objectSelectionThreshold = selectionThreshold;
+				}
+			}
+		}
+		ArrayList<SelectedMapObject> objectsAvailableForSelection = new ArrayList<>();
+		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (objectSelectionThreshold < 0) {
+				IContextMenuProvider provider = selectedObject.provider();
+				if (provider instanceof OsmandMapLayer layer && layer.getPointOrder(selectedObject.object()) <= objectSelectionThreshold) {
+					objectsAvailableForSelection.add(selectedObject);
+				} else {
+					continue;
+				}
+			}
 			IContextMenuProvider provider = selectedObject.provider();
 			if (provider != null && provider.runExclusiveAction(selectedObject.object(), showUnknownLocation)) {
 				return true;
 			}
+		}
+		if (objectSelectionThreshold < 0) {
+			selectedObjects = objectsAvailableForSelection;
 		}
 		if (selectedObjects.size() == 1) {
 			SelectedMapObject selectedObject = selectedObjects.get(0);
@@ -737,7 +766,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			PointDescription pointDescription = null;
 			IContextMenuProvider provider = selectedObject.provider();
 			if (provider != null) {
-				if (latLon == null) {
+				if (latLon == null || objectSelectionThreshold < 0) {
 					latLon = provider.getObjectLocation(selectedObj);
 				}
 				pointDescription = provider.getObjectName(selectedObj);
@@ -956,6 +985,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
+	public int getMarkerBaseOrder() {
+		return getPointsOrder() - MARKER_ORDER_DIFF;
+	}
+
 	public interface IContextMenuProvider {
 
 		/**
@@ -987,6 +1020,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		default boolean showMenuAction(@Nullable Object o) {
 			return false;
+		}
+
+		default long getSelectionPointOrder(Object selectedObject) {
+			return 0L;
 		}
 	}
 

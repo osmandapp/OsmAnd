@@ -9,7 +9,7 @@ import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import net.osmand.CallbackWithObject;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
-import net.osmand.NativeLibrary;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -22,14 +22,7 @@ import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -152,12 +145,7 @@ public class FullAmenitySearch {
 
     public Amenity findAmenity(LatLon latLon, Long id, Collection<String> names, String wikidata) {
         BaseDetailsObject detail = findPlaceDetails(latLon, id, names, wikidata);
-        if (detail != null) {
-            Amenity amenity = detail.getSyntheticAmenity();
-            amenity.setContainsFullInfo(true);
-            return amenity;
-        }
-        return null;
+        return detail != null ? detail.getSyntheticAmenity() : null;
     }
 
     public BaseDetailsObject findPlaceDetails(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
@@ -167,7 +155,7 @@ public class FullAmenitySearch {
                 : AMENITY_SEARCH_RADIUS;
         QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
         List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false);
-        long osmId = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
+        long osmId = ObfConstants.isShiftedID(id) ? ObfConstants.getOsmId(id) : id >> AMENITY_ID_RIGHT_SHIFT;
         List<Amenity> filtered = new ArrayList<>();
         if (osmId > 0 || wikidata != null) {
             filtered = findAmenitiesByOsmIdOrWikidata(amenities, osmId, latLon, wikidata);
@@ -184,6 +172,7 @@ public class FullAmenitySearch {
                 detailObj.addObject(filtered.get(i));
                 detailObj.combineData();
             }
+            detailObj.getSyntheticAmenity().setContainsFullInfo(true);
             return detailObj;
         }
         return null;
@@ -474,21 +463,23 @@ public class FullAmenitySearch {
         });
     }
 
-    public void searchAmenityAsync(NativeLibrary.RenderedObject renderedObject, CallbackWithObject<Amenity> callbackWithAmenity) {
+    public void searchBaseDetailsObjectAsync(RenderedObject renderedObject, CallbackWithObject<BaseDetailsObject> callback) {
         LatLon latLon = renderedObject.getLatLon();
         if (latLon == null) {
-            callbackWithAmenity.processResult(null);
+            callback.processResult(null);
             return;
         }
         final LatLon finalLatLon = latLon;
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
-            Amenity amenity = findAmenity(finalLatLon, renderedObject.getId(), null, wikidata);
-            if (amenity != null) {
+            long osmId = ObfConstants.getOsmObjectId(renderedObject);
+            BaseDetailsObject detailsObject = findPlaceDetails(finalLatLon, osmId << AMENITY_ID_RIGHT_SHIFT, null, wikidata);
+            if (detailsObject != null) {
+                Amenity amenity = detailsObject.getSyntheticAmenity();
                 amenity.setX(renderedObject.getX());
                 amenity.setY(renderedObject.getY());
             }
-            callbackWithAmenity.processResult(amenity);
+            callback.processResult(detailsObject);
         });
     }
 
