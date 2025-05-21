@@ -25,6 +25,17 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 		acquireTransportStopController(activity, description);
 	}
 
+	public int getRightIconId() {
+		int iconId = getRightIconId(getApplication(), amenity);
+		if (iconId != 0) {
+			return iconId;
+		}
+		if (transportStopController != null) {
+			return transportStopController.getRightIconId();
+		}
+		return 0;
+	}
+
 	@Override
 	protected void setObject(Object object) {
 		if (object instanceof BaseDetailsObject) {
