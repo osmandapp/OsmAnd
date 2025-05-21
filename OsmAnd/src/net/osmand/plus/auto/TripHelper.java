@@ -300,7 +300,7 @@ public class TripHelper {
 		int leftTimeSec = 0;
 		int leftDistance = 0;
 		if (settings.USE_LEFT_DISTANCE_TO_INTERMEDIATE.get()) {
-			leftDistance = routingHelper.getLeftTimeNextIntermediate();
+			leftDistance = routingHelper.getLeftDistanceNextIntermediate();
 			leftTimeSec = routingHelper.getLeftTimeNextIntermediate();
 		}
 		if (leftDistance == 0) {
