@@ -1499,7 +1499,7 @@
     <string name="dash_download_msg_none">Sækja kort til að nota án nettengingar?</string>
     <string name="dash_download_msg">Þú ert búinn að ná í %1$s kort</string>
     <string name="dash_download_new_one">Sækja nýtt kort</string>
-    <string name="no_internet_connection">Ekki er hægt að sækja, athugaðu nettenginguna þína.</string>
+    <string name="no_internet_connection">Engin internettenging</string>
     <string name="everything_up_to_date">Allar skrár af nýjustu útgáfu</string>
     <string name="use_opengl_render">Nota OpenGL myndgerð</string>
     <string name="use_opengl_render_descr">Nota vélbúnaðarhröðun OpenGL myndgerðar (gæti notað meira af rafhlöðu, eða virkað ekki á eldri tækjum).</string>
@@ -1670,7 +1670,7 @@
     <string name="show_current_gpx_title">Eyða núverandi ferli</string>
     <string name="rendering_attr_contourWidth_description">Breidd hæðarlína</string>
     <string name="rendering_attr_contourWidth_name">Breidd hæðarlína</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Vatn</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Fela vatn</string>
     <string name="local_recordings_delete_all_confirm">Á að eyða %1$d minnispunktum\?</string>
     <string name="audionotes_plugin_name">Hljóð/myndskeiðs-minnispunktar</string>
     <string name="speech_rate_descr">Tilgreindu talhraða fyrir talgervil.</string>
@@ -1732,7 +1732,7 @@
     <string name="rendering_value_high_name">Hár</string>
     <string name="rendering_value_medium_w_name">Miðlungs</string>
     <string name="rendering_value_low_name">Lágur</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Fela vatn</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Vatn</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Gönguleiðir</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-kortagerðaraðstoð</string>
     <string name="first_usage_greeting">Fáðu leiðbeiningar og uppgötvaðu nýja staði, án nettengingar</string>
@@ -4415,7 +4415,7 @@
     <string name="distance_to_destination_widget_desc">Viðmótshlutinn sýnir vegalengdina sem eftir er að síðasta áfangastaðnum.</string>
     <string name="time_to_intermediate_widget_desc">Viðmótshlutinn sýnir \"Komutími\" eða \"Tími til stefnu\" að fyrsta milliáfanganum. Tíminn er uppfærður í sífellu á meðan leiðsögn stendur, um leið og farið er fram hjá milliáfanga, er vegalengdin uppreiknuð að næsta milliáfanga.</string>
     <string name="distance_to_intermediate_widget_desc">Viðmótshlutinn sýnir vegalengdina sem eftir er að fyrsta milliáfanganum. Um leið og farið er fram hjá milliáfanga, er vegalengdin uppreiknuð að næsta milliáfanga.</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Fela hersvæði</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Hersvæði</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Fela hersvæði</string>
     <string name="mapillary_widget_desc">Gefur fljótlegan aðgang að Mapillary-forritinu svo hægt sé að bæta við myndefni í götuhæð.</string>
     <string name="route_maneuvers">Aðgerðir leiðar</string>
@@ -5252,7 +5252,7 @@
     <string name="map_widget_map_scale">Kvarði korts</string>
     <string name="routing_attr_avoid_cobblestone_description">Forðast götusteina</string>
     <string name="routing_attr_avoid_cobblestone_name">Forðast götusteina</string>
-    <string name="map_text">Textar á korti</string>
+    <string name="map_text">Myndgerð korts</string>
     <string name="show_debug_info_description">Birta myndrænar upplýsingar um staðsetningu hvers kortatexta</string>
     <string name="auto_25_chars_route_tu">Taktu U-beygju</string>
     <string name="resting_position">Staðsetning hvíldar</string>
@@ -5731,4 +5731,17 @@
     <string name="wikidata">Wikidata</string>
     <string name="prediction_time">Áætlaður tími</string>
     <string name="cant_load_map_styles">Tekst ekki að hlaða inn stílum kortsins.</string>
+    <string name="travel_guides">Leiðbeiningar</string>
+    <string name="save_to_device_error">Villa við vistun á tæki</string>
+    <string name="save_to_device">Vista á tæki</string>
+    <string name="add_to_navigation">Bæta í leiðsögn</string>
+    <string name="show_symbols_debug_info">Birta villuleitarupplýsingar tákna</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX-ferilpunktar (%1$d) afritaðir inn í eftirlæti.</string>
+    <string name="saved_to_device">Vistað á tæki</string>
+    <string name="show_debug_tile">Birta upplýsingar um kortatígul</string>
+    <string name="show_debug_tile_description">Birta upplýsingar um kortatákn hvers kortatíguls</string>
+    <string name="deactivated_map">Óvirkt kort</string>
+    <string name="unit_of_temperature_description">Valdar einingar verða notaðar á öll hitastigstengd gögn í fyrirliggjandi notkunarsniði.</string>
+    <string name="suggest_activate_map_msg">%1$s kort er óvirkt,\nvirkjaðu það til að skoða þetta svæði.</string>
+    <string name="msg_favorites_skipped_as_existing">Eftirlætis-ferilpunktum (%1$d) var sleppt þar sem þeir voru þegar til staðar.</string>
 </resources>
