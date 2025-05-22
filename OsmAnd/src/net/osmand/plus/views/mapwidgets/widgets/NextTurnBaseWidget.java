@@ -536,7 +536,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		} else {
 			ImageView oldImageView = imageView;
 			OutlinedTextContainer oldTextView = textView;
-			TextView oldSmallTextView = smallTextView;
+			OutlinedTextContainer oldSmallTextView = smallTextView;
 			TextView oldSmallTextViewShadow = smallTextViewShadow;
 			View oldEmptyBanner = emptyBanner;
 

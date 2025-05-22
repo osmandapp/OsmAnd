@@ -45,7 +45,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	private final SimpleWidgetState widgetState;
 
-	protected TextView widgetName;
+	protected OutlinedTextContainer widgetName;
 	protected TextState textState;
 	private boolean isFullRow;
 
@@ -169,7 +169,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	public void recreateView() {
 		ImageView oldImageView = imageView;
 		OutlinedTextContainer oldTextView = textView;
-		TextView oldSmallTextView = smallTextView;
+		OutlinedTextContainer oldSmallTextView = smallTextView;
 		TextView oldSmallTextViewShadow = smallTextViewShadow;
 		View oldContainer = container;
 		View oldEmptyBanner = emptyBanner;
@@ -340,6 +340,8 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 			bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
 		}
 		updateTextOutline(textView, textState);
+		updateTextOutline(widgetName, textState);
+		updateTextOutline(smallTextView, textState);
 	}
 
 	@Override
