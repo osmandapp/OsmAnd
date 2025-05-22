@@ -554,7 +554,6 @@ public class FullAmenitySearch {
             return object;
         }
         BaseDetailsObject detailsObject = null;
-        long time = System.currentTimeMillis();
         LatLon latLon = null;
         Long id = null;
         String wikidata = null;
@@ -607,7 +606,6 @@ public class FullAmenitySearch {
                 }
             }
         }
-        //log.debug("fetchOtherData time " + (System.currentTimeMillis() - time));
         return detailsObject;
     }
 

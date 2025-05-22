@@ -89,6 +89,10 @@ public class MapSelectionResult {
 	}
 
 	public void groupByOsmIdAndWikidataId() {
+		if (allObjects.size() == 1) {
+			processedObjects.addAll(allObjects);
+			return;
+		}
 		List<SelectedMapObject> amenities = new ArrayList<>();
 		List<SelectedMapObject> supported = new ArrayList<>();
 		List<SelectedMapObject> stops= new ArrayList<>();
@@ -108,8 +112,12 @@ public class MapSelectionResult {
 
 		List<BaseDetailsObject> detailsObjects = processObjects(amenities, stops, supported, other);
 		for (BaseDetailsObject object : detailsObjects) {
-			object.combineData();
-			processedObjects.add(new SelectedMapObject(object, poiProvider));
+			if (object.getObjects().size() > 1) {
+				object.combineData();
+				processedObjects.add(new SelectedMapObject(object, poiProvider));
+			} else {
+				processedObjects.add(new SelectedMapObject(object.getObjects().get(0), poiProvider));
+			}
 		}
 		processedObjects.addAll(other);
 	}
@@ -120,15 +128,14 @@ public class MapSelectionResult {
 												   @NonNull List<SelectedMapObject> supported,
 												   @NonNull List<SelectedMapObject> other) {
 		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
-		processGroup(amenities, detailsObjects, null);
-		processGroup(stops, detailsObjects, null);
-		processGroup(supported, detailsObjects, other);
+		processGroup(amenities, detailsObjects);
+		processGroup(stops, detailsObjects);
+		processGroup(supported, detailsObjects);
 		return detailsObjects;
 	}
 
 	private void processGroup(@NonNull List<SelectedMapObject> selectedMapObjects,
-			@NonNull List<BaseDetailsObject> detailsObjects,
-			@Nullable List<SelectedMapObject> nonOverlapped) {
+			@NonNull List<BaseDetailsObject> detailsObjects) {
 
 		for (SelectedMapObject selectedObject : selectedMapObjects) {
 			Object object = selectedObject.object();
@@ -136,10 +143,6 @@ public class MapSelectionResult {
 
 			BaseDetailsObject detailsObject;
 			if (Algorithms.isEmpty(overlapped)) {
-				if (nonOverlapped != null) {
-					nonOverlapped.add(selectedObject);
-					continue;
-				}
 				detailsObject = new BaseDetailsObject(this.lang);
 			} else {
 				detailsObject = overlapped.get(0);
