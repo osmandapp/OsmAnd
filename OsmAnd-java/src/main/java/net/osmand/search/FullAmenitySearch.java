@@ -164,6 +164,36 @@ public class FullAmenitySearch {
         return detail != null ? detail.getSyntheticAmenity() : null;
     }
 
+    public BaseDetailsObject findPlaceDetails(Object object) {
+        LatLon latLon = null;
+        Long id = null;
+        Collection<String> names = null;
+        String wikidata = null;
+        if (object instanceof Amenity amenity) {
+            latLon = amenity.getLocation();
+            id = amenity.getId();
+            wikidata = amenity.getWikidata();
+            names = amenity.getOtherNames();
+            names.add(amenity.getName());
+        }
+        if (object instanceof RenderedObject renderedObject) {
+            latLon = renderedObject.getLatLon();
+            names = renderedObject.getOriginalNames();
+            id = ObfConstants.getOsmObjectId(renderedObject) << AMENITY_ID_RIGHT_SHIFT;
+            wikidata = renderedObject.getTagValue(WIKIDATA);
+        }
+        if (object instanceof TransportStop stop) {
+            latLon = stop.getLocation();
+            id = stop.getId();
+            names = stop.getOtherNames();
+            names.add(stop.getName());
+        }
+        if (latLon != null) {
+            return findPlaceDetails(latLon, id, names, wikidata);
+        }
+        return null;
+    }
+
     public BaseDetailsObject findPlaceDetails(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
         long id = obId == null ? -1 : obId;
         int searchRadius = ObfConstants.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
@@ -554,41 +584,16 @@ public class FullAmenitySearch {
             return object;
         }
         BaseDetailsObject detailsObject = null;
-        LatLon latLon = null;
-        Long id = null;
-        String wikidata = null;
-        List<String> names = null;
+        Object clarifyObj = null;
         if (object instanceof BaseDetailsObject bdo && bdo.dataEnvelope == BaseDetailsObject.DataEnvelope.EMPTY) {
-            Object mainObj = bdo.getObjects().get(0);
-            if (mainObj instanceof Amenity amenity) {
-                latLon = amenity.getLocation();
-                id = amenity.getId();
-                wikidata = amenity.getWikidata();
-            }
-            if (mainObj instanceof TransportStop stop) {
-                latLon = stop.getLocation();
-                id = stop.getId();
-                names = stop.getOtherNames();
-                names.add(stop.getName());
-            }
+            clarifyObj = bdo.getObjects().get(0);
+        } else {
+            clarifyObj = object;
         }
-        if (object instanceof Amenity amenity) {
-            latLon = amenity.getLocation();
-            id = amenity.getId();
-            wikidata = amenity.getWikidata();
-        }
-        if (object instanceof RenderedObject renderedObject) {
-            latLon = renderedObject.getLatLon();
-            names = renderedObject.getOriginalNames();
-            id = ObfConstants.getOsmObjectId(renderedObject) << AMENITY_ID_RIGHT_SHIFT;
-            wikidata = renderedObject.getTagValue(WIKIDATA);
-        }
-        if (latLon != null && id != null) {
-            detailsObject = findPlaceDetails(latLon, id, names, wikidata);
-            if (detailsObject != null) {
-                detailsObject.addObject(object);
-                detailsObject.combineData();
-            }
+        detailsObject = findPlaceDetails(clarifyObj);
+        if (detailsObject != null) {
+            detailsObject.addObject(object);
+            detailsObject.combineData();
         }
 
         if (detailsObject == null) {

@@ -211,9 +211,9 @@ public class BaseDetailsObject {
 				}
 			} else if (object instanceof RenderedObject renderedObject) {
 				if (syntheticAmenity.getType() == null) {
-					Amenity amenity = BaseDetailsObject.convertToSyntheticAmenity(renderedObject);
-					syntheticAmenity.setType(amenity.getType());
-					syntheticAmenity.setSubType(amenity.getSubType());
+//					Amenity amenity = BaseDetailsObject.convertToSyntheticAmenity(renderedObject);
+//					syntheticAmenity.setType(amenity.getType());
+//					syntheticAmenity.setSubType(amenity.getSubType());
 					syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
 				}
 				syntheticAmenity.copyNames(renderedObject);
