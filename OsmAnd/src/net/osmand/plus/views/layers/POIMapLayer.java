@@ -84,7 +84,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener, OnFileVisibilityChangeListener {
 	private static final int START_ZOOM = 5;
 	private static final int START_ZOOM_ROUTE_TRACK = 11;
-	private static final int END_ZOOM_ROUTE_TRACK = 13;
+	private static final int END_ZOOM_ROUTE_TRACK = 22;
 	private static final int TOP_PLACES_LIMIT = 20;
 	public static final int TILE_POINTS_LIMIT = 25;
 
