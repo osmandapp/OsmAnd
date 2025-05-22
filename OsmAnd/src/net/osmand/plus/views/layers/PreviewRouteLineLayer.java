@@ -112,6 +112,12 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		}
 	}
 
+	public void clearPaintShader() {
+		if (attrs != null) {
+			attrs.customColorPaint.setShader(null);
+		}
+	}
+
 	private void drawRouteLinePreview(Canvas canvas,
 	                                  RotatedTileBox tileBox,
 	                                  PreviewRouteLineInfo previewInfo) {
