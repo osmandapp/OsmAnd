@@ -158,6 +158,25 @@ public abstract class MapWidget {
 			boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
+		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
+
+		text.setTextColor(textColor);
+		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+	}
+
+	public static void updateTextColor(@NonNull OutlinedTextContainer text, @Nullable TextView textShadow,
+			@ColorInt int textColor, @ColorInt int textShadowColor,
+			boolean boldText, int shadowRadius) {
+		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
+
+		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
+
+		text.setTextColor(textColor);
+		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+		text.showOutline(false);
+	}
+
+	private static void updateTextShadow(@Nullable TextView textShadow, @ColorInt int textShadowColor, int shadowRadius, int typefaceStyle){
 		if (textShadow != null) {
 			if (shadowRadius > 0) {
 				AndroidUiHelper.updateVisibility(textShadow, true);
@@ -170,8 +189,6 @@ public abstract class MapWidget {
 				AndroidUiHelper.updateVisibility(textShadow, false);
 			}
 		}
-		text.setTextColor(textColor);
-		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
 	}
 
 	public static void updateTextOutline(@Nullable OutlinedTextContainer textContainer, @NonNull TextState textState) {
