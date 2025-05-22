@@ -685,7 +685,7 @@
     <string name="searching_gps">GPSi otsimine</string>
     <string name="coordinates_widget">Koordinaatide vidin</string>
     <string name="rate_dialog_descr">Palun jaga oma tagasisidet ja hinda meie tööd Google Play keskkonnas.</string>
-    <string name="shared_string_privacy_policy">Privaatsuspoliitika</string>
+    <string name="shared_string_privacy_policy">Andmekaitsepõhimõtted</string>
     <string name="help_us_make_osmand_better">Aita meil teha OsmAnd paremaks</string>
     <string name="make_osmand_better_descr">Luba OsmAndil koguda ja töödelda anonüümseid rakenduse kasutamise andmeid. Sinu asukoha või kaardil vaadeldavate asukohtade kohta andmeid ei koguta.
 \n
