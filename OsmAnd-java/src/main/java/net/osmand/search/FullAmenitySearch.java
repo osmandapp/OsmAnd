@@ -482,10 +482,10 @@ public class FullAmenitySearch {
     }
 
     public List<BinaryMapDataObject> searchBinaryMapDataForAmenity(Amenity amenity, int limit) {
-        String name = amenity.getName();
         long osmId = ObfConstants.getOsmObjectId(amenity);
-        boolean checkId = osmId != -1;
-        boolean checkName = !Algorithms.isEmpty(name);
+        boolean checkId = osmId > 0;
+        String wikidata = amenity.getWikidata();
+        boolean checkWikidata = !Algorithms.isEmpty(wikidata);
 
         ResultMatcher<BinaryMapDataObject> matcher = new ResultMatcher<>() {
             @Override
@@ -493,9 +493,9 @@ public class FullAmenitySearch {
                 if (checkId && osmId == ObfConstants.getOsmObjectId(object)) {
                     return true;
                 }
-                if (checkName) {
+                if (checkWikidata) {
                     TIntObjectHashMap<String> names = object.getObjectNames();
-                    return names != null && !names.isEmpty() && names.containsValue(name);
+                    return names != null && !names.isEmpty() && names.containsValue(wikidata);
                 }
                 return false;
             }
