@@ -5779,4 +5779,6 @@
     <string name="save_to_device_error">Fehler beim Speichern auf dem Gerät</string>
     <string name="saved_to_device">Auf dem Gerät gespeichert</string>
     <string name="save_to_device">Auf dem Gerät speichern</string>
+    <string name="deactivated_map">Deaktivierte Karte</string>
+    <string name="suggest_activate_map_msg">Die %1$s-Karte ist deaktiviert,\naktivieren um das Gebiet anzusehen.</string>
 </resources>
