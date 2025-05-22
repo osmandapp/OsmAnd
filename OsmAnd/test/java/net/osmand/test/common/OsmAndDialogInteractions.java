@@ -12,19 +12,27 @@ import static net.osmand.test.common.Matchers.hasOnClickListener;
 import static org.hamcrest.Matchers.allOf;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.action.GeneralClickAction;
+import androidx.test.espresso.action.Press;
+import androidx.test.espresso.action.Tap;
 
 import net.osmand.plus.R;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.core.StringRegularExpression;
 import org.hamcrest.core.StringStartsWith;
 
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 public class OsmAndDialogInteractions {
 
 	public static void skipAppStartDialogs(@NonNull Context ctx) {
@@ -108,5 +116,48 @@ public class OsmAndDialogInteractions {
 
 	public static void writeText(@IdRes int id, @NonNull String text) {
 		onView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(typeText(text));
+	}
+
+	public static ViewAction clickInView(final float x, final float y) {
+		return new GeneralClickAction(
+				Tap.SINGLE,
+				view -> {
+					final int[] location = new int[2];
+					view.getLocationOnScreen(location);
+					return new float[] {location[0] + x, location[1] + y};
+				},
+				Press.FINGER
+		);
+	}
+
+	public static void waitForAnyView(long timeoutMs, long pollIntervalMs, Matcher<View>... matchers) {
+		long startTime = System.currentTimeMillis();
+
+		while (System.currentTimeMillis() - startTime < timeoutMs) {
+			for (Matcher<View> matcher : matchers) {
+				try {
+					onView(matcher).check(matches(isDisplayed()));
+					return; // One of the views is displayed
+				} catch (NoMatchingViewException | AssertionError e) {
+					// Ignore and try next
+				}
+			}
+
+			try {
+				Thread.sleep(pollIntervalMs);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				throw new RuntimeException("Interrupted while waiting for view", e);
+			}
+		}
+	}
+
+	public static boolean isViewVisible(Matcher<View> matcher) {
+		try {
+			onView(matcher).check(matches(isDisplayed()));
+			return true;
+		} catch (NoMatchingViewException | AssertionError e) {
+			return false;
+		}
 	}
 }

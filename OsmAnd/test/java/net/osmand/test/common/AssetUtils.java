@@ -12,6 +12,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -40,6 +41,18 @@ public class AssetUtils {
 		out.close();
 
 		return AndroidUtils.getUriForFile(app, fileToShare);
+	}
+
+
+	public static void copyAssetToFile(@NonNull Context testContext, String assetName, File destFile) throws IOException {
+		try (InputStream in = testContext.getAssets().open(assetName);
+		     FileOutputStream out = new FileOutputStream(destFile)) {
+			byte[] buffer = new byte[4096];
+			int length;
+			while ((length = in.read(buffer)) > 0) {
+				out.write(buffer, 0, length);
+			}
+		}
 	}
 
 }

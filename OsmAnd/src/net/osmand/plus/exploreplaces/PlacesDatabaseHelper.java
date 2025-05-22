@@ -27,7 +27,7 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "places.db";
 
-    private static final long DATA_EXPIRATION_TIME = TimeUnit.DAYS.toMillis(30); // 1 month
+    private static final long DATA_EXPIRATION_TIME = TimeUnit.MINUTES.toMillis(2); // 1 month
 
     private static final int DATABASE_VERSION = 2; // Incremented version for schema changes
     private static final String TABLE_PLACES = "places";
