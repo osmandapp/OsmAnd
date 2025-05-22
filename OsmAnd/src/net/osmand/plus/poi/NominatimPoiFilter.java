@@ -131,7 +131,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 								a.setId(id);
 								String name = parser.getAttributeValue("", "display_name"); //$NON-NLS-1$//$NON-NLS-2$
 								a.setName(name);
-								a.setEnName(TransliterationHelper.transliterate(getName()));
+								a.setEnName(TransliterationHelper.transliterate(name));
 								a.setSubType(parser.getAttributeValue("", "type")); //$NON-NLS-1$//$NON-NLS-2$
 								PoiType pt = poiTypes.getPoiTypeByKey(a.getSubType());
 								a.setType(pt != null ? pt.getCategory() : poiTypes.getOtherPoiCategory());
@@ -142,14 +142,6 @@ public class NominatimPoiFilter extends PoiUIFilter {
 								log.info("Invalid attributes", e); //$NON-NLS-1$
 							}
 						}
-					} else if (a != null && parser.getName().equals(a.getSubType())) {
-						if (parser.next() == XmlPullParser.TEXT) {
-							String name = parser.getText();
-							if (name != null) {
-								a.setName(name);
-								a.setEnName(TransliterationHelper.transliterate(getName()));
-							}
-						}
 					}
 					if (extratags && a != null) {
 						String tag = parser.getAttributeValue("", "key");
@@ -158,6 +150,15 @@ public class NominatimPoiFilter extends PoiUIFilter {
 					}
 					if (parser.getName().equals("extratags")) {
 						extratags = true;
+					}
+					if (a != null && parser.getName().equals(a.getSubType())) {
+						if (parser.next() == XmlPullParser.TEXT) {
+							String name = parser.getText();
+							if (name != null) {
+								a.setName(name);
+								a.setEnName(TransliterationHelper.transliterate(getName()));
+							}
+						}
 					}
 				} else if (eventType == XmlPullParser.END_TAG) {
 					if (parser.getName().equals("place")) { //$NON-NLS-1$
