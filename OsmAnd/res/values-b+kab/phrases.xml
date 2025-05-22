@@ -207,9 +207,7 @@
     <string name="poi_cuisine_ukrainian">Tukranit</string>
     <string name="poi_cuisine_mongolian">Tamungulit</string>
     <string name="poi_cuisine_latin_american">Taspanit n temrikt talatinit</string>
-    <string name="poi_cuisine_cuban">![]({{ site.baseurl }}/assets/posts/2017-07-03-cuba/child_apps.jpg)&lt;br/&gt;
-\n*Agrud n Kuba yettnadin isnasen yella i usiggez*
-\n</string>
+    <string name="poi_cuisine_cuban"></string>
     <string name="poi_cuisine_czech">Taččikit</string>
     <string name="poi_cuisine_uzbek">Tuzbikt</string>
     <string name="poi_cuisine_european">Asulay VAT n Turuft</string>
