@@ -22,6 +22,7 @@ import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -340,7 +341,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 
 		OsmandApplication app = mapActivity.getMyApplication();
-		object = app.getResourceManager().getAmenitySearcher().fetchOtherData(object);
+
+		if (!(object instanceof RenderedObject)) {
+			object = app.getResourceManager().getAmenitySearcher().fetchOtherData(object);
+		}
 
 		Object thisObject = getObject();
 		if (!update && isVisible()) {
