@@ -259,8 +259,10 @@ public class MapSelectionHelper {
 				boolean allowAmenityObjects = !isTravelGpx;
 
 				if (allowAmenityObjects) {
+					boolean allowRenderedObjects = !isOsmRoute && !isClickableWay
+							&& !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
 					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
-					if (!amenityAdded) {
+					if (!amenityAdded && allowRenderedObjects) {
 						result.collect(renderedObject, null);
 					}
 				}
