@@ -5609,7 +5609,7 @@
     <string name="poi_source">Orígen del PDI</string>
     <string name="position_animation_empty_banner_description">El ícono de ubicación se mueve a cada nueva ubicación recibida sin animación.</string>
     <string name="wiki_around">Sitios populares cerca</string>
-    <string name="read_on_wiki">Leer en Wikipedia</string>
+    <string name="read_on">Leer en %1$s</string>
     <string name="prediction_time_advanced_description">Ajustar el tiempo de predicción para minimizar el retraso.</string>
     <string name="prediction_time">Tiempo de predicción</string>
     <string name="shared_string_no_animation">Sin animación</string>

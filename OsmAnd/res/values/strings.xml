@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="read_on">Read on %1$s</string>
     <string name="travel_guides">Guides</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favorites.</string>
     <string name="msg_favorites_skipped_as_existing">Favorite points (%1$d) were skipped as already existing.</string>
@@ -28,7 +29,6 @@
     <string name="multipoligon_related">Related</string>
     <string name="route_part_of">Part of</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Read on Wikipedia</string>
     <string name="prediction_time_description">Position icon in OsmAnd animates with each received GPS data point (once per second). A slight delay in its movement may be noticeable, especially when the user is moving quickly or the GPS signal fluctuates.</string>
     <string name="prediction_time_advanced_description">Adjust the prediction time to minimize delay.</string>
     <string name="prediction_time">Prediction time</string>
