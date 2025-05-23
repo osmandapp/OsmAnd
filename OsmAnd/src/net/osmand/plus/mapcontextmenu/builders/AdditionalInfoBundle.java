@@ -8,8 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.util.CollectionUtils;

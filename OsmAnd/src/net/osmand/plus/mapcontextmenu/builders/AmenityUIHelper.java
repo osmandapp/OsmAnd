@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.builders;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.*;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
@@ -129,6 +130,9 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
 					|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
+				continue;
+			}
+			if (ROUTE_ARTICLE.equals(subtype) && key.contains(DESCRIPTION)) {
 				continue;
 			}
 			if (key.equals(NAME)) {

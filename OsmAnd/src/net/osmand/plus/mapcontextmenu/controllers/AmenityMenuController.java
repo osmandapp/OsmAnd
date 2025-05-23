@@ -45,8 +45,8 @@ public class AmenityMenuController extends MenuController {
 
 	private static final Log LOG = PlatformUtil.getLog(AmenityMenuController.class);
 
-	private Amenity amenity;
-	private final MapMarker marker;
+	protected Amenity amenity;
+	protected final MapMarker marker;
 	protected TransportStopController transportStopController;
 
 	public AmenityMenuController(@NonNull MapActivity mapActivity,

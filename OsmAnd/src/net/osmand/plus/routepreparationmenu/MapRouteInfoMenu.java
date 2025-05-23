@@ -299,7 +299,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@Nullable
 	private Pair<LatLon, PointDescription> getObjectLocation(OsmandMapTileView mapView, PointF point, RotatedTileBox tileBox) {
-		MapSelectionResult result = new MapSelectionResult(mapView.getApplication(), tileBox, point);
+		MapSelectionResult result = new MapSelectionResult(mapView.getApplication(), tileBox, point, null);
 		for (OsmandMapLayer layer : mapView.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider) {
 				provider.collectObjectsFromPoint(result, true, true);

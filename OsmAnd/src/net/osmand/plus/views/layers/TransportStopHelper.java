@@ -4,7 +4,6 @@ import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController
 import static net.osmand.util.MapUtils.ROUNDING_ERROR;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +15,6 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -227,7 +225,7 @@ public class TransportStopHelper {
 	}
 
 	@Nullable
-	private List<String> getPublicTransportTypes() {
+	public List<String> getPublicTransportTypes() {
 		if (publicTransportTypes == null && !app.isApplicationInitializing()) {
 			PoiCategory category = app.getPoiTypes().getPoiCategoryByName("transportation");
 			if (category != null) {
@@ -246,30 +244,5 @@ public class TransportStopHelper {
 			}
 		}
 		return publicTransportTypes;
-	}
-
-	public void processTransportStops(@NonNull List<SelectedMapObject> selectedObjects) {
-		List<String> publicTransportTypes = getPublicTransportTypes();
-		if (publicTransportTypes != null) {
-			List<Amenity> transportStopAmenities = new ArrayList<>();
-			for (SelectedMapObject selectedObject : selectedObjects) {
-				Object object = selectedObject.object();
-				if (object instanceof Amenity amenity) {
-					if (!TextUtils.isEmpty(amenity.getSubType()) && publicTransportTypes.contains(amenity.getSubType())) {
-						transportStopAmenities.add(amenity);
-					}
-				}
-			}
-			if (!Algorithms.isEmpty(transportStopAmenities)) {
-				TransportStopsLayer transportStopsLayer = mapLayers.getTransportStopsLayer();
-				for (Amenity amenity : transportStopAmenities) {
-					TransportStop transportStop = findBestTransportStopForAmenity(app, amenity);
-					if (transportStop != null && transportStopsLayer != null) {
-						selectedObjects.add(new SelectedMapObject(transportStop, transportStopsLayer));
-						selectedObjects.removeIf(selectedObject -> Algorithms.objectEquals(selectedObject.object(), amenity));
-					}
-				}
-			}
-		}
 	}
 }

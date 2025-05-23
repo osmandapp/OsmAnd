@@ -1655,7 +1655,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return true;
 		}
 		if (tileBox.getZoom() >= START_ZOOM) {
-			MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
+			MapSelectionResult result = new MapSelectionResult(app, tileBox, point, null);
 			collectTracksFromPoint(result, false);
 			return !result.isEmpty();
 		}
@@ -1693,7 +1693,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		if (tileBox.getZoom() >= START_ZOOM) {
-			MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
+			MapSelectionResult result = new MapSelectionResult(app, tileBox, point, null);
 			collectTracksFromPoint(result, true);
 
 			List<SelectedMapObject> objects = result.getAllObjects();

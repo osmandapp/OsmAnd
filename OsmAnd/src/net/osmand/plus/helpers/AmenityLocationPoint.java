@@ -43,7 +43,7 @@ public class AmenityLocationPoint implements LocationPoint {
 
 		String locale = settings.MAP_PREFERRED_LOCALE.get();
 		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
-		return new PointDescription(POINT_TYPE_POI, OsmAndFormatter.getPoiStringWithoutType(amenity, locale, transliterate));
+		return new PointDescription(POINT_TYPE_POI, Amenity.getPoiStringWithoutType(amenity, locale, transliterate));
 	}
 
 	@Override

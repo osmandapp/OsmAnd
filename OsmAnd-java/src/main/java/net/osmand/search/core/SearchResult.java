@@ -62,8 +62,8 @@ public class SearchResult {
 	public enum SearchResultResource {
 		DETAILED,
 		WIKIPEDIA,
-		TRAVEL,
-		BASEMAP
+		BASEMAP,
+		TRAVEL
 	}
 
 	private SearchResultResource searchResultResource;
@@ -316,5 +316,9 @@ public class SearchResult {
 
 	public void setUnknownPhraseMatchWeight(double weight) {
 		unknownPhraseMatchWeight = weight;
+	}
+
+	public boolean isFullPhraseEqualLocaleName() {
+		return requiredSearchPhrase.getFullSearchPhrase().equalsIgnoreCase(localeName);
 	}
 }

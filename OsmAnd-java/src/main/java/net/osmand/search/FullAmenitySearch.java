@@ -4,6 +4,7 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FR
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.MULTISEARCH;
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
+import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 
 import net.osmand.CallbackWithObject;
@@ -18,6 +19,9 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.data.TransportStop;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -40,34 +44,45 @@ public class FullAmenitySearch {
 
     private static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
-    private final String lang;
+    private String lang;
+    private boolean transliterate;
+    private final MapPoiTypes mapPoiTypes; // nullable
 
-    public FullAmenitySearch(boolean progress, TravelFileVisibility travelFileVisibility, String lang) {
+    public FullAmenitySearch(boolean progress, String lang, boolean transliterate, MapPoiTypes mapPoiTypes,
+                             TravelFileVisibility travelFileVisibility) {
         this.progress = progress;
         this.travelFileVisibility = travelFileVisibility;
         this.lang = lang;
+        this.transliterate = transliterate;
+        this.mapPoiTypes = mapPoiTypes;
         taskQueue = new LinkedBlockingQueue<Runnable>();
         singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
+    }
+
+    public void updateLangAndTransliterate(String lang, boolean transliterate) {
+        this.lang = lang;
+        this.transliterate = transliterate;
     }
 
     public interface TravelFileVisibility {
         public boolean getTravelFileVisibility(String fileName);
     }
+
     public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
         List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
+        List<AmenityIndexRepository> travelMaps = new ArrayList<>();
         List<AmenityIndexRepository> baseMaps = new ArrayList<>();
         List<AmenityIndexRepository> result = new ArrayList<>();
 
         fileNames.sort(Algorithms.getStringVersionComparator());
 
         for (String fileName : fileNames) {
-            if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-                if (!includeTravel || !travelFileVisibility.getTravelFileVisibility(fileName)) {
-                    continue;
-                }
-            }
             AmenityIndexRepository r = amenityRepositories.get(fileName);
-            if (r != null && r.isWorldMap()) {
+            if (r != null && fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+                if (includeTravel && !travelFileVisibility.getTravelFileVisibility(fileName)) {
+                    travelMaps.add(r);
+                }
+            } else if (r != null && r.isWorldMap()) {
                 baseMaps.add(r);
             } else if (r != null) {
                 result.add(r);
@@ -75,6 +90,8 @@ public class FullAmenitySearch {
         }
 
         result.addAll(baseMaps);
+        result.addAll(travelMaps);
+
         return result;
     }
 
@@ -148,6 +165,36 @@ public class FullAmenitySearch {
         return detail != null ? detail.getSyntheticAmenity() : null;
     }
 
+    public BaseDetailsObject findPlaceDetails(Object object) {
+        LatLon latLon = null;
+        Long id = null;
+        Collection<String> names = null;
+        String wikidata = null;
+        if (object instanceof Amenity amenity) {
+            latLon = amenity.getLocation();
+            id = amenity.getId();
+            wikidata = amenity.getWikidata();
+            names = amenity.getOtherNames();
+            names.add(amenity.getName());
+        }
+        if (object instanceof RenderedObject renderedObject) {
+            latLon = renderedObject.getLatLon();
+            names = renderedObject.getOriginalNames();
+            id = ObfConstants.getOsmObjectId(renderedObject) << AMENITY_ID_RIGHT_SHIFT;
+            wikidata = renderedObject.getTagValue(WIKIDATA);
+        }
+        if (object instanceof TransportStop stop) {
+            latLon = stop.getLocation();
+            id = stop.getId();
+            names = stop.getOtherNames();
+            names.add(stop.getName());
+        }
+        if (latLon != null) {
+            return findPlaceDetails(latLon, id, names, wikidata);
+        }
+        return null;
+    }
+
     public BaseDetailsObject findPlaceDetails(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
         long id = obId == null ? -1 : obId;
         int searchRadius = ObfConstants.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
@@ -172,7 +219,7 @@ public class FullAmenitySearch {
                 detailObj.addObject(filtered.get(i));
                 detailObj.combineData();
             }
-            detailObj.getSyntheticAmenity().setContainsFullInfo(true);
+            detailObj.dataEnvelope = BaseDetailsObject.DataEnvelope.FULL;
             return detailObj;
         }
         return null;
@@ -201,12 +248,11 @@ public class FullAmenitySearch {
         return result;
     }
 
-    public static Amenity findAmenityByName(Collection<Amenity> amenities,
-                                            Collection<String> names) {
+    public Amenity findAmenityByName(Collection<Amenity> amenities, Collection<String> names) {
         if (!Algorithms.isEmpty(names) && !Algorithms.isEmpty(amenities)) {
             return amenities.stream()
                     .filter(amenity -> !amenity.isClosed())
-                    .filter(amenity -> names.contains(amenity.getName()))
+                    .filter(amenity -> namesMatcher(amenity, names, false))
                     .findAny()
                     .orElseGet(() ->
                             amenities.stream()
@@ -220,10 +266,53 @@ public class FullAmenitySearch {
                                     .findAny()
                                     .orElseGet(() ->
                                             amenities.stream()
-                                                    .filter(amenity -> names.contains(amenity.toStringEn()))
+                                                    .filter(amenity -> namesMatcher(amenity, names, true))
                                                     .findAny().orElse(null)));
         }
         return null;
+    }
+
+    private boolean namesMatcher(Amenity amenity, Collection<String> matchList, boolean deepNameSearch) {
+        String poiSimpleFormat = Amenity.getPoiStringWithoutType(amenity, lang, transliterate);
+        if (matchList.contains(poiSimpleFormat)) {
+            return true;
+        }
+
+        String amenityName = amenity.getName(lang, transliterate);
+        if (matchList.contains(amenityName)) {
+            return true;
+        }
+
+        if (mapPoiTypes != null) {
+            AbstractPoiType st = mapPoiTypes.getAnyPoiTypeByKey(amenity.getSubType());
+            String poiTypeName = st != null ? st.getTranslation() : amenity.getSubType();
+            if (matchList.contains(poiTypeName)) {
+                return true;
+            }
+        }
+
+        if (deepNameSearch) {
+            Set<String> allAmenityNames = new HashSet<>();
+            allAmenityNames.addAll(amenity.getAltNamesMap().values());
+            allAmenityNames.addAll(amenity.getNamesMap(true).values());
+
+            String typeName = amenity.getSubTypeStr();
+            if (!Algorithms.isEmpty(typeName)) {
+                Set<String> withPoiTypes = new HashSet<>();
+                for (String name : allAmenityNames) {
+                    withPoiTypes.add(typeName + " " + name);
+                }
+                allAmenityNames.addAll(withPoiTypes);
+            }
+
+            for (String match : matchList) {
+                if (allAmenityNames.contains(match)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void addAmenityRepository(String fileName, AmenityIndexRepository repository) {
@@ -394,10 +483,10 @@ public class FullAmenitySearch {
     }
 
     public List<BinaryMapDataObject> searchBinaryMapDataForAmenity(Amenity amenity, int limit) {
-        String name = amenity.getName();
         long osmId = ObfConstants.getOsmObjectId(amenity);
-        boolean checkId = osmId != -1;
-        boolean checkName = !Algorithms.isEmpty(name);
+        boolean checkId = osmId > 0;
+        String wikidata = amenity.getWikidata();
+        boolean checkWikidata = !Algorithms.isEmpty(wikidata);
 
         ResultMatcher<BinaryMapDataObject> matcher = new ResultMatcher<>() {
             @Override
@@ -405,9 +494,9 @@ public class FullAmenitySearch {
                 if (checkId && osmId == ObfConstants.getOsmObjectId(object)) {
                     return true;
                 }
-                if (checkName) {
+                if (checkWikidata) {
                     TIntObjectHashMap<String> names = object.getObjectNames();
-                    return names != null && !names.isEmpty() && names.containsValue(name);
+                    return names != null && !names.isEmpty() && names.containsValue(wikidata);
                 }
                 return false;
             }
@@ -421,7 +510,7 @@ public class FullAmenitySearch {
     }
 
     private List<BinaryMapDataObject> searchBinaryMapDataObjects(LatLon latLon,
-                                                                ResultMatcher<BinaryMapDataObject> matcher, int limit) {
+                                                                 ResultMatcher<BinaryMapDataObject> matcher, int limit) {
         List<BinaryMapDataObject> list = new ArrayList<>();
 
         int y = MapUtils.get31TileNumberY(latLon.getLatitude());
@@ -473,7 +562,8 @@ public class FullAmenitySearch {
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
             long osmId = ObfConstants.getOsmObjectId(renderedObject);
-            BaseDetailsObject detailsObject = findPlaceDetails(finalLatLon, osmId << AMENITY_ID_RIGHT_SHIFT, null, wikidata);
+            BaseDetailsObject detailsObject = findPlaceDetails(finalLatLon,
+                    osmId << AMENITY_ID_RIGHT_SHIFT, renderedObject.getOriginalNames(), wikidata);
             if (detailsObject != null) {
                 Amenity amenity = detailsObject.getSyntheticAmenity();
                 amenity.setX(renderedObject.getX());
@@ -483,4 +573,54 @@ public class FullAmenitySearch {
         });
     }
 
+    public void fetchOtherDataAsync(Object object, CallbackWithObject<Object> callback) {
+        singleThreadedExecutor.submit(() -> {
+            Object fethched = fetchOtherData(object);
+            callback.processResult(fethched);
+        });
+    }
+
+    public Object fetchOtherData(Object object) {
+        if (object instanceof BaseDetailsObject baseDetailsObject && baseDetailsObject.dataEnvelope == BaseDetailsObject.DataEnvelope.FULL) {
+            return object;
+        }
+        BaseDetailsObject detailsObject = null;
+        Object clarifyObj = null;
+        if (object instanceof BaseDetailsObject bdo && bdo.dataEnvelope == BaseDetailsObject.DataEnvelope.EMPTY) {
+            clarifyObj = bdo.getObjects().get(0);
+        } else {
+            clarifyObj = object;
+        }
+        detailsObject = findPlaceDetails(clarifyObj);
+        if (detailsObject != null) {
+            detailsObject.addObject(object);
+            detailsObject.combineData();
+        }
+
+        if (detailsObject == null) {
+            return object;
+        }
+
+        if (!detailsObject.hasGeometry()) {
+            detailsObject.processPolygonCoordinates(object);
+            if (!detailsObject.hasGeometry()) {
+                List<BinaryMapDataObject> dataObjects = searchBinaryMapDataForAmenity(detailsObject.getSyntheticAmenity(), 1);
+                for (BinaryMapDataObject dataObject : dataObjects) {
+                    if (copyCoordinates(detailsObject, dataObject)) {
+                        break;
+                    }
+                }
+            }
+        }
+        return detailsObject;
+    }
+
+    private boolean copyCoordinates(BaseDetailsObject detailsObject, BinaryMapDataObject mapObject) {
+        int pointsLength = mapObject.getPointsLength();
+        for (int i = 0; i < pointsLength; i++) {
+            detailsObject.addX(mapObject.getPoint31XTile(i));
+            detailsObject.addY(mapObject.getPoint31YTile(i));
+        }
+        return pointsLength > 0;
+    }
 }

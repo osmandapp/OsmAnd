@@ -98,9 +98,6 @@ public class Amenity extends MapObject {
 	private String wikiIconUrl;
 	private String wikiImageStubUrl;
 	private int travelElo = 0;
-
-	private boolean containsFullInfo;
-
 	private Set<String> contentLocales;
 
 	public int getOrder() {
@@ -288,7 +285,10 @@ public class Amenity extends MapObject {
 	}
 
 	public void copyAdditionalInfo(Amenity amenity, boolean overwrite) {
-		Map<String, String> map = amenity.getInternalAdditionalInfoMap();
+		copyAdditionalInfo(amenity.getInternalAdditionalInfoMap(), overwrite);
+	}
+
+	public void copyAdditionalInfo(Map<String, String> map, boolean overwrite) {
 		if (overwrite || additionalInfo == null) {
 			setAdditionalInfo(map);
 		} else {
@@ -949,12 +949,23 @@ public class Amenity extends MapObject {
 		}
 	}
 
-	public boolean isContainsFullInfo() {
-		return containsFullInfo;
-	}
-
-	public void setContainsFullInfo(boolean containsFullInfo) {
-		this.containsFullInfo = containsFullInfo;
+	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
+		String typeName = amenity.getSubTypeStr();
+		String localName = amenity.getName(locale, transliterate);
+		if (typeName != null && localName.contains(typeName)) {
+			// type is contained in name e.g.
+			// localName = "Bakery the Corner"
+			// type = "Bakery"
+			// no need to repeat this
+			return localName;
+		}
+		if (Algorithms.isEmpty(localName) && amenity.isRouteTrack()) {
+			localName = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+		}
+		if (Algorithms.isEmpty(localName)) {
+			return typeName;
+		}
+		return typeName + " " + localName; // $NON-NLS-1$
 	}
 
 }

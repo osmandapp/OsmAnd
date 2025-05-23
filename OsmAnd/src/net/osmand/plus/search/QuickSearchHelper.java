@@ -61,6 +61,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class QuickSearchHelper implements ResourceListener {
@@ -169,32 +170,9 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
 		FullAmenitySearch fullAmenitySearch = app.getResourceManager().getAmenitySearcher();
-		List<Amenity> amenities = fullAmenitySearch.searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
-
-		MapPoiTypes types = app.getPoiTypes();
-		for (Amenity amenity : amenities) {
-			String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate);
-			if (poiSimpleFormat.equals(name)) {
-				return amenity;
-			}
-		}
-		for (Amenity amenity : amenities) {
-			String amenityName = amenity.getName(lang, transliterate);
-			if (Algorithms.isEmpty(amenityName)) {
-				AbstractPoiType st = types.getAnyPoiTypeByKey(amenity.getSubType());
-				if (st != null) {
-					amenityName = st.getTranslation();
-				} else {
-					amenityName = amenity.getSubType();
-				}
-			}
-			if (name.contains(amenityName)) {
-				return amenity;
-			}
-		}
-		return null;
+		fullAmenitySearch.updateLangAndTransliterate(lang, transliterate);
+		return fullAmenitySearch.findAmenity(new LatLon(lat, lon), null, Collections.singletonList(name), null);
 	}
 
 	public static class SearchWptAPI extends SearchBaseAPI {

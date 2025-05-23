@@ -192,9 +192,10 @@ public class ResourceManager {
 			path.mkdir();
 		}
 
-		fullAmenitySearch = new FullAmenitySearch(searchAmenitiesInProgress,
-				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get(),
-				app.getLanguage());
+		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		fullAmenitySearch = new FullAmenitySearch(searchAmenitiesInProgress, lang, transliterate, app.getPoiTypes(),
+				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get());
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {
@@ -1095,53 +1096,5 @@ public class ResourceManager {
 
 	public FullAmenitySearch getAmenitySearcher() {
 		return fullAmenitySearch;
-	}
-
-	@Nullable
-	public Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
-		BaseDetailsObject detailsObject = null;
-		long time = System.currentTimeMillis();
-		if (object instanceof Amenity amenity) {
-			if (amenity.isContainsFullInfo()) {
-				detailsObject = new BaseDetailsObject(amenity, app.getLanguage());
-			} else {
-				LatLon latLon = amenity.getLocation();
-				BaseDetailsObject baseObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
-				if (baseObject != null) {
-					detailsObject = new BaseDetailsObject(baseObject, app.getLanguage());
-					detailsObject.addObject(amenity);
-					detailsObject.combineData();
-				}
-			}
-		}
-
-		if (object instanceof BaseDetailsObject) {
-			detailsObject = (BaseDetailsObject) object;
-		}
-
-		if (detailsObject == null) {
-			return object;
-		}
-
-		if (!detailsObject.hasGeometry()) {
-			List<BinaryMapDataObject> dataObjects = fullAmenitySearch.searchBinaryMapDataForAmenity(detailsObject.getSyntheticAmenity(), 1);
-			for (BinaryMapDataObject dataObject : dataObjects) {
-				if (copyCoordinates(detailsObject, dataObject)) {
-					break;
-				}
-			}
-		}
-		log.debug("fetchOtherData time " + (System.currentTimeMillis() - time));
-		return detailsObject;
-	}
-
-	private static boolean copyCoordinates(@NonNull BaseDetailsObject detailsObject,
-										   @NonNull BinaryMapDataObject mapObject) {
-		int pointsLength = mapObject.getPointsLength();
-		for (int i = 0; i < pointsLength; i++) {
-			detailsObject.addX(mapObject.getPoint31XTile(i));
-			detailsObject.addY(mapObject.getPoint31YTile(i));
-		}
-		return pointsLength > 0;
 	}
 }
