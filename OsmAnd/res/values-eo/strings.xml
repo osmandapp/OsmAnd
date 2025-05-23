@@ -3929,7 +3929,7 @@
     <string name="purchases_feature_desc_nautical">Akiru aliron al informoj pri mara profundo.</string>
     <string name="purchases_feature_desc_terrain">Nivelkurboj (egal-nivel-linioj), nivelombrumo (reliefo) kaj perkolora prezento de dekliveco por montri teren-formon.</string>
     <string name="purchases_feature_desc_wikivoyage">Esploru Vikivojaĝon malkonekte. Artikoloj estas dividitaj laŭ landoj/regionoj kaj estas disponeblaj en ĉiuj lingvoj.</string>
-    <string name="purchases_feature_desc_wikipedia">Malkonekta aliro al ĉiuj artikoloj de Vikipedio pri lokoj por ke vi povu sciiĝi pri la vizitataj ejoj per simple frapi la mapon. Ne forgesu elŝuti Vikipediajn mapojn de la dezirataj lokoj antaŭ komenci vojaĝon.</string>
+    <string name="purchases_feature_desc_wikipedia">Malkonekta aliro al ĉiuj artikoloj de Vikipedio pri lokoj por ke vi povu sciiĝi pri la vizitataj ejoj per simple frapi la mapon. Ne forgesu elŝuti Vikipediajn mapojn de la dezirataj lokoj antaŭ ol komenci vojaĝon.</string>
     <string name="purchases_feature_desc_combined_wiki">Esploru artikolojn de Vikipedio dum vojaĝi sen interreta konekto. Datumoj estas dividitaj laŭ landoj kaj liveras artikolojn en ĉiuj lingvoj.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Akiru aliron al senlimaj elŝutoj de malkonektaj mapoj de ĉiuj kontinentoj kaj regionoj.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Akiru aliron al ĉiumonataj ĝisdatigoj de malkonektaj mapoj.</string>
@@ -5533,7 +5533,7 @@
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Britaj galjonoj</string>
     <string name="us_gallons">Usonaj galjonoj</string>
-    <string name="unit_of_volume_description">Elektata mezurunuo estos aplikita al ĉiuj volumen-rilataj datumoj en la elektita profilo.</string>
+    <string name="unit_of_volume_description">Elektata mezurunuo estos aplikita al ĉiuj volumen-rilataj datumoj en la nuna profilo.</string>
     <string name="unit_of_volume">Unuo de volumeno</string>
     <string name="dynamic_icon_type_summary">Bildsimbolo ŝanĝiĝas laŭ stato de ago.</string>
     <string name="shared_string_dynamic">Dinamika</string>
@@ -5749,4 +5749,7 @@
     <string name="show_debug_tile">Montri informojn pri kahelo</string>
     <string name="show_debug_tile_description">Montri informojn pri simboloj por ĉiu map-kahelo</string>
     <string name="show_symbols_debug_info">Montri senerarigajn informojn pri simboloj</string>
+    <string name="deactivated_map">Malaktiva mapo</string>
+    <string name="suggest_activate_map_msg">La mapo “%1$s” estas malaktiva,\naktivigu ĝin por bildigi tiun ĉi areon.</string>
+    <string name="unit_of_temperature_description">Elektata mezurunuo estos aplikita al ĉiuj temperatur-rilataj datumoj en la nuna profilo.</string>
 </resources>
