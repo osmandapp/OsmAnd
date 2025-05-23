@@ -300,6 +300,10 @@ public class SearchUICore {
 					if (osmId != null && osmId < 0) {
 						osmId = null; // do not merge synthetic osmId such as wiki
 					}
+					if (that.isRouteTrack()) {
+						osmId = null;
+						wikidata = null; // do not merge routes
+					}
 
 					Integer foundOsmIdIndex = osmId == null ? null : osmIdMap.get(osmId);
 					Integer foundWikidataIndex = wikidata == null ? null : wikidataMap.get(wikidata);
