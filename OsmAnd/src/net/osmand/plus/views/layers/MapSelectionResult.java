@@ -5,9 +5,11 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.utils.NativeUtilities;
@@ -15,6 +17,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MapSelectionResult {
@@ -28,15 +31,18 @@ public class MapSelectionResult {
 	private final List<SelectedMapObject> allObjects = new ArrayList<>();
 	private final List<SelectedMapObject> processedObjects = new ArrayList<>();
 
+	private final Collection<String> publicTransportTypes;
+
 	protected LatLon objectLatLon;
 
 	public MapSelectionResult(@NonNull OsmandApplication app, @NonNull RotatedTileBox tileBox,
-			@NonNull PointF point) {
+							  @NonNull PointF point, @Nullable Collection<String> publicTransportTypes) {
 		this.point = point;
 		this.tileBox = tileBox;
 		this.lang = LocaleHelper.getPreferredPlacesLanguage(app);
 		this.poiProvider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 		this.pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(app.getOsmandMap().getMapView().getMapRenderer(), tileBox, point);
+		this.publicTransportTypes = publicTransportTypes;
 	}
 
 	@NonNull
@@ -78,23 +84,61 @@ public class MapSelectionResult {
 	}
 
 	public void groupByOsmIdAndWikidataId() {
-		List<SelectedMapObject> plainObjects = new ArrayList<>();
-		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
+		if (allObjects.size() == 1) {
+			processedObjects.addAll(allObjects);
+			return;
+		}
+		List<SelectedMapObject> amenities = new ArrayList<>();
+		List<SelectedMapObject> supported = new ArrayList<>();
+		List<SelectedMapObject> stops= new ArrayList<>();
+		List<SelectedMapObject> other = new ArrayList<>();
 		for (SelectedMapObject selectedObject : allObjects) {
 			Object object = selectedObject.object();
-			if (!BaseDetailsObject.shouldAdd(object)) {
-				plainObjects.add(selectedObject);
-				continue;
+			if (object instanceof Amenity) {
+				amenities.add(selectedObject);
+			} else if (object instanceof TransportStop transportStop) {
+				stops.add(selectedObject);
+			} else if (BaseDetailsObject.isSupportedObjectType(object)) {
+				supported.add(selectedObject);
+			} else {
+				other.add(selectedObject);
 			}
-			List<BaseDetailsObject> overlapped = new ArrayList<>();
-			for (BaseDetailsObject detailsObject : detailsObjects) {
-				if (detailsObject.overlapsWith(object)) {
-					overlapped.add(detailsObject);
-				}
+		}
+
+		List<BaseDetailsObject> detailsObjects = processObjects(amenities, stops, supported, other);
+		for (BaseDetailsObject object : detailsObjects) {
+			if (object.getObjects().size() > 1) {
+				object.combineData();
+				processedObjects.add(new SelectedMapObject(object, poiProvider));
+			} else {
+				processedObjects.add(new SelectedMapObject(object.getObjects().get(0), poiProvider));
 			}
+		}
+		processedObjects.addAll(other);
+	}
+
+	@NonNull
+	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> amenities,
+												   @NonNull List<SelectedMapObject> stops,
+												   @NonNull List<SelectedMapObject> supported,
+												   @NonNull List<SelectedMapObject> other) {
+		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
+		processGroup(amenities, detailsObjects);
+		processGroup(stops, detailsObjects);
+		processGroup(supported, detailsObjects);
+		return detailsObjects;
+	}
+
+	private void processGroup(@NonNull List<SelectedMapObject> selectedMapObjects,
+							  @NonNull List<BaseDetailsObject> detailsObjects) {
+
+		for (SelectedMapObject selectedObject : selectedMapObjects) {
+			Object object = selectedObject.object();
+			List<BaseDetailsObject> overlapped = collectOverlappedObjects(object, detailsObjects);
+
 			BaseDetailsObject detailsObject;
 			if (Algorithms.isEmpty(overlapped)) {
-				detailsObject = new BaseDetailsObject(lang);
+				detailsObject = new BaseDetailsObject(this.lang);
 			} else {
 				detailsObject = overlapped.get(0);
 				for (int i = 1; i < overlapped.size(); i++) {
@@ -105,11 +149,18 @@ public class MapSelectionResult {
 			detailsObject.addObject(object);
 			detailsObjects.add(detailsObject);
 		}
-		for (BaseDetailsObject object : detailsObjects) {
-			object.combineData();
-			processedObjects.add(new SelectedMapObject(object, poiProvider));
+	}
+
+	@NonNull
+	private List<BaseDetailsObject> collectOverlappedObjects(@NonNull Object object,
+															 @NonNull List<BaseDetailsObject> detailsObjects) {
+		List<BaseDetailsObject> overlapped = new ArrayList<>();
+		for (BaseDetailsObject detailsObject : detailsObjects) {
+			if (detailsObject.overlapsWith(object) || detailsObject.overlapPublicTransport(object, publicTransportTypes)) {
+				overlapped.add(detailsObject);
+			}
 		}
-		processedObjects.addAll(plainObjects);
+		return overlapped;
 	}
 
 	public boolean isEmpty() {

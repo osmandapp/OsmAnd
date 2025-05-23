@@ -1,12 +1,18 @@
 package net.osmand.data;
 
 import static net.osmand.data.Amenity.DEFAULT_ELO;
+import static net.osmand.data.Amenity.WIKIDATA;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.MapPoiTypes.PoiTranslator;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.SearchResult.SearchResultResource;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.*;
 
@@ -24,6 +30,17 @@ public class BaseDetailsObject {
 	protected SearchResultResource searchResultResource;
 
 	protected Amenity syntheticAmenity = new Amenity();
+
+	public static final int MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS = 30;
+
+
+	public enum DataEnvelope {
+		EMPTY,
+		COMBINED,
+		FULL
+	}
+
+	public DataEnvelope dataEnvelope = DataEnvelope.EMPTY;
 
 	public BaseDetailsObject(String lang) {
 		this.lang = lang;
@@ -48,7 +65,7 @@ public class BaseDetailsObject {
 	}
 
 	public void addObject(Object object) {
-		if (!shouldAdd(object)) {
+		if (!isSupportedObjectType(object)) {
 			return;
 		}
 		if (object instanceof BaseDetailsObject detailsObject) {
@@ -59,8 +76,7 @@ public class BaseDetailsObject {
 			objects.add(object);
 
 			Long osmId = getOsmId(object);
-			Amenity amenity = getAmenity(object);
-			String wikidata = amenity != null ? amenity.getWikidata() : null;
+			String wikidata = getWikidata(object);
 
 			if (osmId != null && osmId != -1) {
 				osmIds.add(osmId);
@@ -71,12 +87,14 @@ public class BaseDetailsObject {
 		}
 	}
 
-	private Amenity getAmenity(Object object) {
+	private String getWikidata(Object object) {
 		if (object instanceof Amenity amenity) {
-			return amenity;
-		}
-		if (object instanceof BaseDetailsObject detailsObject) {
-			return detailsObject.getSyntheticAmenity();
+			return amenity.getWikidata();
+		} else if (object instanceof TransportStop transportStop) {
+			Amenity amenity = transportStop.getAmenity();
+			return amenity != null ? amenity.getWikidata() : null;
+		} else if (object instanceof RenderedObject renderedObject) {
+			return renderedObject.getTagValue(WIKIDATA);
 		}
 		return null;
 	}
@@ -88,26 +106,89 @@ public class BaseDetailsObject {
 		if (object instanceof MapObject mapObject) {
 			return ObfConstants.getOsmObjectId(mapObject);
 		}
-		if (object instanceof BaseDetailsObject detailsObject) {
-			return detailsObject.getSyntheticAmenity().getOsmId();
-		}
 		return null;
 	}
 
 	public boolean overlapsWith(Object object) {
 		Long osmId = getOsmId(object);
-		Amenity amenity = getAmenity(object);
-		String wikidata = amenity != null ? amenity.getWikidata() : null;
+		String wikidata = getWikidata(object);
 
 		boolean osmIdEqual = osmId != null && osmId != -1 && osmIds.contains(osmId);
 		boolean wikidataEqual = !Algorithms.isEmpty(wikidata) && wikidataIds.contains(wikidata);
 		return osmIdEqual || wikidataEqual;
 	}
 
-	public void merge(BaseDetailsObject other) {
+	public boolean overlapPublicTransport(Object object, Collection<String> publicTransportTypes) {
+		if (object instanceof RenderedObject renderedObject) {
+			Collection<TransportStop> stops = getTransportStops();
+			if (stops.isEmpty()) {
+				return false;
+			}
+			Map<String, String> tags = renderedObject.getTags();
+			String name = renderedObject.getName();
+			if (!Algorithms.isEmpty(name)) {
+				boolean namesEqual = false;
+				for (TransportStop stop : stops) {
+					if (stop.getName().contains(name) || name.contains(stop.getName())) {
+						namesEqual = true;
+						break;
+					}
+				}
+				if (!namesEqual) {
+					return false;
+				}
+			}
+			boolean isStop = false;
+			for (Map.Entry<String, String> entry : tags.entrySet()) {
+				String tag = entry.getKey();
+				String value = entry.getValue();
+				if (publicTransportTypes.contains(value) || publicTransportTypes.contains(tag + "_" + value)) {
+					isStop = true;
+					break;
+				}
+			}
+			if (isStop) {
+				for (TransportStop stop : stops) {
+					if (MapUtils.getDistance(stop.getLocation(), renderedObject.getLatLon()) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	public void merge(Object object) {
+		if (object instanceof BaseDetailsObject baseDetailsObject)
+			merge(baseDetailsObject);
+		if (object instanceof TransportStop transportStop)
+			merge(transportStop);
+		if (object instanceof RenderedObject renderedObject)
+			merge(renderedObject);
+	}
+
+	private void merge(BaseDetailsObject other) {
 		osmIds.addAll(other.osmIds);
 		wikidataIds.addAll(other.wikidataIds);
 		objects.addAll(other.getObjects());
+	}
+
+	private void merge(TransportStop other) {
+		osmIds.add(ObfConstants.getOsmObjectId(other));
+		Amenity amenity = other.getAmenity();
+		if (amenity != null) {
+			wikidataIds.add(amenity.getWikidata());
+		}
+		objects.add(other);
+	}
+
+	private void merge(RenderedObject renderedObject) {
+		osmIds.add(ObfConstants.getOsmObjectId(renderedObject));
+		String wikidata = renderedObject.getTagValue(WIKIDATA);
+		if (!Algorithms.isEmpty(wikidata)) {
+			wikidataIds.add(wikidata);
+		}
+		objects.add(renderedObject);
 	}
 
 	public void combineData() {
@@ -118,39 +199,38 @@ public class BaseDetailsObject {
 		for (Object object : objects) {
 			if (object instanceof Amenity amenity) {
 				processAmenity(amenity, contentLocales);
-			}
-			if (object instanceof BaseDetailsObject detailsObject) {
-				processAmenity(detailsObject.syntheticAmenity, contentLocales);
+			} else if (object instanceof TransportStop transportStop) {
+				Amenity amenity = transportStop.getAmenity();
+				if (amenity != null) {
+					processAmenity(amenity, contentLocales);
+				} else {
+					syntheticAmenity.copyNames(transportStop);
+					if (syntheticAmenity.getLocation() == null) {
+						syntheticAmenity.setLocation(transportStop.getLocation());
+					}
+				}
+			} else if (object instanceof RenderedObject renderedObject) {
+				if (syntheticAmenity.getType() == null) {
+					syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
+				}
+				syntheticAmenity.copyNames(renderedObject);
+				if (syntheticAmenity.getLocation() == null) {
+					syntheticAmenity.setLocation(renderedObject.getLocation());
+				}
+				processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
 			}
 		}
 		if (!Algorithms.isEmpty(contentLocales)) {
 			syntheticAmenity.updateContentLocales(contentLocales);
 		}
-	}
-
-	private void sortObjects() {
-		objects.sort((o1, o2) -> {
-			String l1 = getLangForTravel(o1);
-			String l2 = getLangForTravel(o2);
-			if (l2.equals(l1)) {
-				return 0;
-			}
-			if (l2.equals(lang)) {
-				return 1;
-			}
-			if (l1.equals(lang)) {
-				return -1;
-			}
-			return 0;
-		});
-		objects.sort((o1, o2) -> {
-			int ord1 = getResourceType(o1).ordinal();
-			int ord2 = getResourceType(o2).ordinal();
-			if (ord1 != ord2) {
-				return ord2 > ord1 ? -1 : 1;
-			}
-			return 0;
-		});
+		if (this.dataEnvelope.ordinal() < DataEnvelope.FULL.ordinal()) {
+			this.dataEnvelope = syntheticAmenity.getType() == null ? DataEnvelope.EMPTY : DataEnvelope.COMBINED;
+		}
+		if (syntheticAmenity.getType() == null) {
+			syntheticAmenity.setType(MapPoiTypes.getDefault().getUserDefinedCategory());
+			syntheticAmenity.setSubType("");
+			this.dataEnvelope = DataEnvelope.EMPTY;
+		}
 	}
 
 	protected void processAmenity(Amenity amenity, Set<String> contentLocales) {
@@ -185,18 +265,74 @@ public class BaseDetailsObject {
 		if (syntheticAmenity.getTravelEloNumber() == DEFAULT_ELO && travelElo != DEFAULT_ELO) {
 			syntheticAmenity.setTravelEloNumber(travelElo);
 		}
-		TIntArrayList x = amenity.getX();
+		syntheticAmenity.copyNames(amenity);
+		syntheticAmenity.copyAdditionalInfo(amenity, false);
+		processPolygonCoordinates(amenity.getX(), amenity.getY());
+
+		contentLocales.addAll(amenity.getSupportedContentLocales());
+	}
+
+	private void processPolygonCoordinates(TIntArrayList x, TIntArrayList y) {
 		if (syntheticAmenity.getX().isEmpty() && !x.isEmpty()) {
 			syntheticAmenity.getX().addAll(x);
 		}
-		TIntArrayList y = amenity.getY();
 		if (syntheticAmenity.getY().isEmpty() && !y.isEmpty()) {
 			syntheticAmenity.getY().addAll(y);
 		}
-		syntheticAmenity.copyNames(amenity);
-		syntheticAmenity.copyAdditionalInfo(amenity, false);
+	}
 
-		contentLocales.addAll(amenity.getSupportedContentLocales());
+	public void processPolygonCoordinates(Object object) {
+		if (object instanceof Amenity amenity) {
+			processPolygonCoordinates(amenity.getX(), amenity.getY());
+		}
+		if (object instanceof RenderedObject renderedObject) {
+			processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
+		}
+	}
+
+	private void sortObjects() {
+		sortObjectsByLang();
+		sortObjectsByResourceType();
+		sortObjectsByClass();
+	}
+
+	private void sortObjectsByLang() {
+		objects.sort((o1, o2) -> {
+			String l1 = getLangForTravel(o1);
+			String l2 = getLangForTravel(o2);
+			if (l2.equals(l1)) {
+				return 0;
+			}
+			if (l2.equals(lang)) {
+				return 1;
+			}
+			if (l1.equals(lang)) {
+				return -1;
+			}
+			return 0;
+		});
+	}
+
+	private void sortObjectsByResourceType() {
+		objects.sort((o1, o2) -> {
+			int ord1 = getResourceType(o1).ordinal();
+			int ord2 = getResourceType(o2).ordinal();
+			if (ord1 != ord2) {
+				return ord2 > ord1 ? -1 : 1;
+			}
+			return 0;
+		});
+	}
+
+	private void sortObjectsByClass() {
+		objects.sort((o1, o2) -> {
+			int ord1 = getClassOrder(o1);
+			int ord2 = getClassOrder(o2);
+			if (ord1 != ord2) {
+				return ord2 > ord1 ? -1 : 1;
+			}
+			return 0;
+		});
 	}
 
 	public void setObfResourceName(String obfName) {
@@ -238,8 +374,9 @@ public class BaseDetailsObject {
 		return !this.syntheticAmenity.getX().isEmpty() && !this.syntheticAmenity.getY().isEmpty();
 	}
 
-	public static boolean shouldAdd(Object object) {
-		return object instanceof Amenity || object instanceof BaseDetailsObject;
+	public static boolean isSupportedObjectType(Object object) {
+		return object instanceof Amenity || object instanceof TransportStop
+				|| object instanceof RenderedObject || object instanceof BaseDetailsObject;
 	}
 
 	public List<Amenity> getAmenities() {
@@ -250,6 +387,26 @@ public class BaseDetailsObject {
 			}
 		}
 		return amenities;
+	}
+
+	public List<TransportStop> getTransportStops() {
+		List<TransportStop> stops = new ArrayList<>();
+		for (Object object : objects) {
+			if (object instanceof TransportStop transportStop) {
+				stops.add(transportStop);
+			}
+		}
+		return stops;
+	}
+
+	public List<RenderedObject> getRenderedObjects() {
+		List<RenderedObject> renderedObjects = new ArrayList<>();
+		for (Object object : objects) {
+			if (object instanceof RenderedObject renderedObject) {
+				renderedObjects.add(renderedObject);
+			}
+		}
+		return renderedObjects;
 	}
 
 	private static SearchResultResource findObfType(String obfResourceName, Amenity amenity) {
@@ -290,5 +447,23 @@ public class BaseDetailsObject {
 			}
 		}
 		return "en";
+	}
+
+	private static int getClassOrder(Object object) {
+		if (object instanceof BaseDetailsObject) {
+			return 1;
+		}
+		if (object instanceof Amenity) {
+			return 2;
+		}
+		if (object instanceof TransportStop) {
+			return 3;
+		}
+		return 4;
+	}
+
+	@Override
+	public String toString() {
+		return getSyntheticAmenity().toString();
 	}
 }

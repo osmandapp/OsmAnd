@@ -797,45 +797,6 @@ public class OsmAndFormatter {
 		return "";
 	}
 
-	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
-		PoiCategory pc = amenity.getType();
-
-		//multivalued amenity
-		String[] subtypes = amenity.getSubType().split(";");
-		String typeName = "";
-		for (String subType : subtypes) {
-			PoiType pt = pc.getPoiTypeByKeyName(subType);
-			String tmp;
-			if (pt != null) {
-				tmp = pt.getTranslation();
-			} else {
-				tmp = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
-			}
-			if (!typeName.isEmpty()) {
-				typeName += ", " + tmp.toLowerCase();
-				break;
-			} else {
-				typeName = tmp;
-			}
-		}
-
-		String localName = amenity.getName(locale, transliterate);
-		if (typeName != null && localName.contains(typeName)) {
-			// type is contained in name e.g.
-			// localName = "Bakery the Corner"
-			// type = "Bakery"
-			// no need to repeat this
-			return localName;
-		}
-		if (Algorithms.isEmpty(localName) && amenity.isRouteTrack()) {
-			localName = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
-		}
-		if (Algorithms.isEmpty(localName)) {
-			return typeName;
-		}
-		return typeName + " " + localName; //$NON-NLS-1$
-	}
-
 	public static List<String> getPoiStringsWithoutType(Amenity amenity, String locale, boolean transliterate) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
