@@ -530,7 +530,7 @@
     <string name="reset_average_speed">Ath-shuidhich luths cuibheasach</string>
     <string name="obd_connecting_to_device">A\' ceangal ri %s</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Leugh air Uicipeid</string>
+    <string name="read_on">Leugh air %1$s</string>
     <string name="destination_first">Ceann-uidhe an tòiseach</string>
     <string name="intermediate_first">Eadar-mheadhanach an tòiseach</string>
     <string name="display_priority">Taisbean prìomhachas</string>

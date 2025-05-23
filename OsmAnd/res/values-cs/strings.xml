@@ -5732,7 +5732,7 @@
     <string name="prediction_time_advanced_description">Upravit čas předpovědi pro minimalizaci zpoždění.</string>
     <string name="shared_string_no_animation">Žádná animace</string>
     <string name="position_animation">Animace polohy</string>
-    <string name="read_on_wiki">Přečíst na Wikipedii</string>
+    <string name="read_on">Přečíst na %1$s</string>
     <string name="prediction_time_description">Ikona polohy v aplikaci OsmAnd se animuje s každým přijatým bodem dat GPS (jednou za sekundu). Může být patrné mírné zpoždění jejího pohybu, zejména pokud se uživatel pohybuje rychle nebo pokud signál GPS kolísá.</string>
     <string name="prediction_time">Čas předpovědi</string>
     <string name="position_animation_empty_banner_description">Ikona polohy se přesune na každé nové přijaté místo bez animace.</string>

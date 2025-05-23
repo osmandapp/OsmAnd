@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="read_on">Read on %1$s</string>
     <string name="unit_of_temperature_description">Selected units will be applied to all temperature related data in the current profile.</string>
     <string name="deactivated_map">Deactivated map</string>
     <string name="suggest_activate_map_msg">%1$s map is deactivated,\nactivate to view this area.</string>
@@ -31,7 +32,6 @@
     <string name="multipoligon_related">Related</string>
     <string name="route_part_of">Part of</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Read on Wikipedia</string>
     <string name="prediction_time_description">Position icon in OsmAnd animates with each received GPS data point (once per second). A slight delay in its movement may be noticeable, especially when the user is moving quickly or the GPS signal fluctuates.</string>
     <string name="prediction_time_advanced_description">Adjust the prediction time to minimize delay.</string>
     <string name="prediction_time">Prediction time</string>
@@ -1506,7 +1506,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_hideIcons_name">POI icons</string>
     <string name="rendering_attr_hideWaterPolygons_name">Water</string>
     <string name="rendering_attr_hideWaterPolygons_description">Hide water</string>
-    <string name="rendering_attr_hideOverground_name">Overground objects</string>	
+    <string name="rendering_attr_hideOverground_name">Overground objects</string>
     <string name="rendering_attr_hideUnderground_name">Underground objects</string>
     <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
     <string name="rendering_attr_hideBuildings_name">Buildings</string>
