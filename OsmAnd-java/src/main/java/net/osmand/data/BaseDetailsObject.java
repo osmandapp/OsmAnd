@@ -177,7 +177,9 @@ public class BaseDetailsObject {
 		osmIds.add(ObfConstants.getOsmObjectId(other));
 		Amenity amenity = other.getAmenity();
 		if (amenity != null) {
-			wikidataIds.add(amenity.getWikidata());
+			String wikidata = amenity.getWikidata();
+			if (wikidata != null)
+				wikidataIds.add(amenity.getWikidata());
 		}
 		objects.add(other);
 	}

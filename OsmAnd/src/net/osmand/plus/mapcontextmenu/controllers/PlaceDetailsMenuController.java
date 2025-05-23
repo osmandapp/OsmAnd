@@ -20,8 +20,8 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 	private RenderedObjectMenuController renderedObjectController;
 
 	public PlaceDetailsMenuController(@NonNull MapActivity activity,
-									  @NonNull PointDescription description,
-									  @NonNull BaseDetailsObject detailsObject) {
+									@NonNull PointDescription description,
+									@NonNull BaseDetailsObject detailsObject) {
 		super(activity, new PlaceDetailsMenuBuilder(activity, detailsObject), description, detailsObject.getSyntheticAmenity());
 		this.detailsObject = detailsObject;
 		acquireMenuControllers(activity, description);
@@ -65,7 +65,7 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 
 	@Override
 	protected void acquireTransportStopController(@NonNull MapActivity activity,
-												  @NonNull PointDescription description) {
+												@NonNull PointDescription description) {
 		if (detailsObject != null) {
 			transportStopController = getTransportStopController(activity, description);
 		}

@@ -36,7 +36,7 @@ public class MapSelectionResult {
 	protected LatLon objectLatLon;
 
 	public MapSelectionResult(@NonNull OsmandApplication app, @NonNull RotatedTileBox tileBox,
-							  @NonNull PointF point, @Nullable Collection<String> publicTransportTypes) {
+							@NonNull PointF point, @Nullable Collection<String> publicTransportTypes) {
 		this.point = point;
 		this.tileBox = tileBox;
 		this.lang = LocaleHelper.getPreferredPlacesLanguage(app);
@@ -119,9 +119,9 @@ public class MapSelectionResult {
 
 	@NonNull
 	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> amenities,
-												   @NonNull List<SelectedMapObject> stops,
-												   @NonNull List<SelectedMapObject> supported,
-												   @NonNull List<SelectedMapObject> other) {
+												@NonNull List<SelectedMapObject> stops,
+												@NonNull List<SelectedMapObject> supported,
+												@NonNull List<SelectedMapObject> other) {
 		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
 		processGroup(amenities, detailsObjects);
 		processGroup(stops, detailsObjects);
@@ -153,7 +153,7 @@ public class MapSelectionResult {
 
 	@NonNull
 	private List<BaseDetailsObject> collectOverlappedObjects(@NonNull Object object,
-															 @NonNull List<BaseDetailsObject> detailsObjects) {
+															@NonNull List<BaseDetailsObject> detailsObjects) {
 		List<BaseDetailsObject> overlapped = new ArrayList<>();
 		for (BaseDetailsObject detailsObject : detailsObjects) {
 			if (detailsObject.overlapsWith(object) || detailsObject.overlapPublicTransport(object, publicTransportTypes)) {
