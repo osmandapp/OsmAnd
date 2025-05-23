@@ -253,6 +253,7 @@
 		<attr name="android:autoSizeMinTextSize" />
 		<attr name="android:autoSizeStepGranularity" />
 		<attr name="android:autoSizeTextType" />
+		<attr name="android:textAllCaps" />
 
 		<attr name="outlineColor" format="color" />
 		<attr name="outlineWidth" format="dimension" />
