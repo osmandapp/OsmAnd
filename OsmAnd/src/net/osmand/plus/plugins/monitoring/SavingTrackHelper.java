@@ -242,13 +242,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 				GpxFile filteredGpx = SavedTrackFilter.filterGpxFile(gpx, settings);
 
-				log.debug("Filename: " + f);
 				File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
-				//todo : optionally save unfiltered gpx
+				WptPt pt = filteredGpx.findPointToShow();
+				long time = pt != null ? pt.getTime() : System.currentTimeMillis();
+				String fileName = f + "_" + GPX_FILE_DATE_FORMAT.format(new Date(time));
+
 				if (!filteredGpx.isEmpty()) {
-					WptPt pt = filteredGpx.findPointToShow();
-					long time = pt != null ? pt.getTime() : System.currentTimeMillis();
-					String fileName = f + "_" + GPX_FILE_DATE_FORMAT.format(new Date(time));
 					Integer trackStorageDirectory = app.getSettings().TRACK_STORAGE_DIRECTORY.get();
 					if (!OsmandSettings.REC_DIRECTORY.equals(trackStorageDirectory)) {
 						SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM", Locale.US);
@@ -273,6 +272,20 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 				KFile fKout = SharedUtil.kFile(fout);
 				Exception warn = SharedUtil.writeGpxFile(fKout, filteredGpx);
+				if (warn != null) {
+					warnings.add(warn.getMessage());
+					return new SaveGpxResult(warnings, new HashMap<>());
+				}
+
+                File dir_un = new File(dir, "unfiltered");
+				File fout_un = new File(dir_un, fileName + IndexConstants.GPX_FILE_EXT);
+                int ind = 1;
+                while (fout_un.exists()) {
+                    fout_un = new File(dir_un, fileName + "_" + (++ind) + "_unfiltered" + IndexConstants.GPX_FILE_EXT); //$NON-NLS-1$
+                }
+
+				KFile fKout_un = SharedUtil.kFile(fout_un);
+				warn = SharedUtil.writeGpxFile(fKout_un, gpx);
 				if (warn != null) {
 					warnings.add(warn.getMessage());
 					return new SaveGpxResult(warnings, new HashMap<>());
@@ -909,22 +922,34 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		OsmandSettings settings;
 
 		public static GpxFile filterGpxFile(@NonNull GpxFile gpx, @NonNull OsmandSettings settings) {
-			GpxFile res = gpx.clone();
-
-			//todo : tracks/segments
-			 var filteredPoints = new ArrayList<WptPt>();
-
 			SavedTrackFilter inst = new SavedTrackFilter(settings);
-			for(WptPt point : res.getPointsList()) {
-				var latlon = new LatLon(point.getLat(), point.getLon());
-				//todo : accuracy
-				if (inst.isFiltered(latlon, point.getTime(), point.getSpeed(), 100.0)) {
-					filteredPoints.add(point);
+
+			assert (gpx.getTracks().isEmpty() == false) : "GpxFile contains no tracks";
+			Track track = gpx.getTracks().get(0);
+			var filteredSegments = new ArrayList<TrkSegment>();
+
+			for (TrkSegment segment : track.getSegments()) {
+				var filteredPoints = new ArrayList<WptPt>();
+				for(WptPt point : segment.getPoints()) {
+					var latlon = new LatLon(point.getLat(), point.getLon());
+					if (inst.isFiltered(latlon, point.getTime(), point.getSpeed(), point.getHdop())) {
+						filteredPoints.add(point);
+					}
 				}
+
+				var filteredSegment = new TrkSegment();
+				filteredSegment.setPoints(filteredPoints);
+				filteredSegments.add(filteredSegment);
 			}
 
-			res.setPointsList(filteredPoints);
+			var filteredTrack = new Track();
+			filteredTrack.setSegments(filteredSegments);
 
+			var filteredTrackArray = new ArrayList<Track>();
+			filteredTrackArray.add(filteredTrack);
+
+			GpxFile res = gpx.clone();
+			res.setTracks(filteredTrackArray);
 			return res;
 		};
 
