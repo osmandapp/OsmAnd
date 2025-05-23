@@ -5758,7 +5758,7 @@
     <string name="destination_first">Destinazione prima</string>
     <string name="prediction_time">Tempo di previsione</string>
     <string name="shared_string_no_animation">Senza animazione</string>
-    <string name="read_on_wiki">Leggi su Wikipedia</string>
+    <string name="read_on">Leggi su %1$s</string>
     <string name="prediction_time_advanced_description">Regola il tempo di previsione per ridurre al minimo il ritardo.</string>
     <string name="position_animation_empty_banner_description">L\'icona della posizione si sposta in ogni nuova posizione ricevuta senza animazione.</string>
     <string name="position_animation">Animazione della posizione</string>

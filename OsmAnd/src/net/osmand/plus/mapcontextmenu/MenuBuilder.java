@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.util.Linkify;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -132,6 +133,7 @@ public class MenuBuilder {
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
 	protected OsmAndAppCustomization customization;
+	protected LayoutInflater themedInflater;
 	protected MenuRowBuilder menuRowBuilder;
 
 	protected LinkedList<PlainMenuItem> plainMenuItems;
@@ -216,6 +218,7 @@ public class MenuBuilder {
 			preferredMapAppLang = app.getLanguage();
 		}
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		themedInflater = UiUtilities.getInflater(mapActivity, !isLightContent());
 	}
 
 	public void notifyCollapseExpand(boolean collapsed) {
@@ -317,6 +320,7 @@ public class MenuBuilder {
 
 	public void setLight(boolean light) {
 		menuRowBuilder.setLightContent(light);
+		themedInflater = UiUtilities.getInflater(mapActivity, !light);
 	}
 
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
