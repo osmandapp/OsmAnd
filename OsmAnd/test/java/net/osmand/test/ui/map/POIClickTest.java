@@ -1,37 +1,38 @@
 package net.osmand.test.ui.map;
 
-import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithContentDescription;
-import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithText;
-import static net.osmand.test.common.OsmAndDialogInteractions.clickInView;
-import static net.osmand.test.common.OsmAndDialogInteractions.clickMapButtonWithId;
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static net.osmand.test.common.AppSettings.showFavorites;
+import static net.osmand.test.common.AppSettings.showWikiOnMap;
+import static net.osmand.test.common.AssetUtils.copyAssetToFile;
+import static net.osmand.test.common.SystemDialogInteractions.clickInView;
 import static net.osmand.test.common.OsmAndDialogInteractions.isViewVisible;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static net.osmand.test.common.OsmAndDialogInteractions.waitForAnyView;
-import static net.osmand.test.common.OsmAndDialogInteractions.writeText;
+import static net.osmand.test.common.SystemDialogInteractions.getViewById;
 
-import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.action.CoordinatesProvider;
-import androidx.test.espresso.action.GeneralClickAction;
-import androidx.test.espresso.action.Press;
-import androidx.test.espresso.action.Tap;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
 import net.osmand.data.BackgroundType;
+import net.osmand.data.DataSourceType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.plus.mapcontextmenu.other.MenuObject;
 import net.osmand.test.common.AndroidTest;
+import net.osmand.test.common.actions.GetViewAction;
 
-import static net.osmand.test.common.AppSettings.showWikiOnMap;
-import static net.osmand.test.common.AppSettings.showFavorites;
-
-import static net.osmand.test.common.AssetUtils.copyAssetToFile;
+import static org.hamcrest.CoreMatchers.anything;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,24 +44,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.test.espresso.Espresso;
-
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-
-import android.util.Log;
-import android.view.View;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -74,6 +62,10 @@ public class POIClickTest extends AndroidTest {
 	public void setup() {
 		super.setup();
 		try {
+			File wikiFolder = new File(app.getAppPath(null), "wiki");
+			wikiFolder.mkdir();
+
+			copyAssetToFile(testContext, "wiki/Ukraine_kyiv_europe.wiki.obf", new File(app.getAppPath(null), "wiki/Ukraine_kyiv_europe.wiki.obf"));
 			copyAssetToFile(testContext, "World_basemap_mini.obf", new File(app.getAppPath(null), "World_basemap_mini.obf"));
 			copyAssetToFile(testContext, "Ukraine_kyiv-city_europe.obf", new File(app.getAppPath(null), "Ukraine_kyiv-city_europe.obf"));
 		} catch (IOException e) {
@@ -86,6 +78,7 @@ public class POIClickTest extends AndroidTest {
 	public void testClickOnMApPoint() throws Throwable {
 		showWikiOnMap(app);
 		showFavorites(app);
+		app.getSettings().WIKI_DATA_SOURCE_TYPE.set(DataSourceType.ONLINE);
 		activityRule.launchActivity(null);
 		double lattitude = 50.452880;
 		double longitude = 30.514269;
@@ -99,10 +92,14 @@ public class POIClickTest extends AndroidTest {
 		List<ClickData> clicks = parseClicksJson("clicks.json");
 
 		for (ClickData click : clicks) {
+//			if (clicks.indexOf(click) != 8) {
+//				continue;
+//			}
 			lattitude = click.latitude;
 			longitude = click.longitude;
 			zoom = click.zoom;
 			moveAndZoomMap(lattitude, longitude, zoom);
+//			Thread.sleep(5000);
 			float x = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixXFromLatLon(lattitude, longitude);
 			float y = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixYFromLatLon(lattitude, longitude);
 			onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
@@ -112,13 +109,44 @@ public class POIClickTest extends AndroidTest {
 					withId(R.id.context_menu_layout),    // first possible view
 					withId(R.id.multi_selection_main_view)       // second possible view
 			);
-			if(isViewVisible(withId(R.id.context_menu_layout))) {
-				Log.d("Corwin", "testClickOnMApPoint: opened menu");
+			boolean menuOpened = false;
+			if (isViewVisible(withId(R.id.context_menu_layout))) {
+				menuOpened = true;
+				ViewGroup menuLayout = (ViewGroup) getViewById(R.id.context_menu_layout);
+				Log.d("Corwin", "testClickOnMApPoint: opened menu " + menuLayout.getChildCount());
 			}
-			if(isViewVisible(withId(R.id.multi_selection_main_view))) {
-				Log.d("Corwin", "testClickOnMApPoint: opened multi-selection");
+			if (isViewVisible(withId(R.id.multi_selection_main_view))) {
+				menuOpened = true;
+				ViewGroup menuLayout = (ViewGroup) getViewById(R.id.multi_selection_main_view);
+				ListView menuList = menuLayout.findViewById(R.id.list);
+				int itemsCount = menuList.getAdapter().getCount();
+				Log.d("Corwin", "testClickOnMApPoint: opened multi-selection " + itemsCount);
+				for (int i = 1; i < itemsCount; i++) { // skip header
+					View[] viewHolder = new View[1];
+					onData(anything())
+							.inAdapterView(withId(R.id.list))
+							.atPosition(i)
+							.perform(new GetViewAction(viewHolder));
+					View itemView = viewHolder[0];
+					MenuObject item = (MenuObject) menuList.getAdapter().getItem(i);
+					if (item != null) {
+						Log.d("Corwin", "item " + i + " title " + ((TextView) itemView.findViewById(R.id.context_menu_line1)).getText());
+						Log.d("Corwin", "item " + i + " description " + ((TextView) itemView.findViewById(R.id.context_menu_line2)).getText());
+						if(item.getRightIconId() != 0) {
+							Log.d("Corwin", "item " + i + " icon " + app.getResources().getResourceEntryName(item.getRightIconId()));
+						} else {
+							Log.d("Corwin", "item " + i + " no icon");
+						}
+					}
+				}
+
+
 			}
-			pressBack();
+			if (menuOpened) {
+				pressBack();
+			} else {
+				Log.d("Corwin", "testClickOnMApPoint: nothing opened");
+			}
 		}
 
 
@@ -129,8 +157,8 @@ public class POIClickTest extends AndroidTest {
 
 	}
 
-	private void moveAndZoomMap(double lattitude, double longitude, int zoom) {
-		app.getOsmandMap().getMapView().setLatLon(lattitude, longitude);
+	private void moveAndZoomMap(double latitude, double longitude, int zoom) {
+		app.getOsmandMap().getMapView().setLatLon(latitude, longitude);
 		app.getOsmandMap().getMapView().refreshMap();
 		app.getOsmandMap().getMapView().setIntZoom(zoom);
 	}

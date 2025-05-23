@@ -118,17 +118,6 @@ public class OsmAndDialogInteractions {
 		onView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(typeText(text));
 	}
 
-	public static ViewAction clickInView(final float x, final float y) {
-		return new GeneralClickAction(
-				Tap.SINGLE,
-				view -> {
-					final int[] location = new int[2];
-					view.getLocationOnScreen(location);
-					return new float[] {location[0] + x, location[1] + y};
-				},
-				Press.FINGER
-		);
-	}
 
 	public static void waitForAnyView(long timeoutMs, long pollIntervalMs, Matcher<View>... matchers) {
 		long startTime = System.currentTimeMillis();
