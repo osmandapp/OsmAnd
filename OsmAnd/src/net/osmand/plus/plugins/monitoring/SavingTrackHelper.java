@@ -96,14 +96,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 	private int currentTrackIndex = 1;
 	private boolean shouldAutomaticallyRecord = true;
-	//todo : remove
 	private LatLon lastPoint;
 	private float distance;
 	private long duration;
 	private int points;
 	private int trkPoints;
 
-	//todo : remove
 	private long lastTimeUpdated;
 	private long lastTimeFileSaved;
 
@@ -202,7 +200,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 					if (has) {
 						return true;
 					}
-					q = db.query(false, POINT_NAME, new String[]{POINT_COL_LAT, POINT_COL_LON}, null, null, null, null, null, null);
+					q = db.query(false, POINT_NAME, new String[] {POINT_COL_LAT, POINT_COL_LON}, null, null, null, null, null, null);
 					has = q.moveToFirst();
 					while (has) {
 						if (q.getDouble(0) != 0 || q.getDouble(1) != 0) {
@@ -277,18 +275,20 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 					return new SaveGpxResult(warnings, new HashMap<>());
 				}
 
-                File dir_un = new File(dir, "unfiltered");
-				File fout_un = new File(dir_un, fileName + IndexConstants.GPX_FILE_EXT);
-                int ind = 1;
-                while (fout_un.exists()) {
-                    fout_un = new File(dir_un, fileName + "_" + (++ind) + "_unfiltered" + IndexConstants.GPX_FILE_EXT); //$NON-NLS-1$
-                }
+				if (settings.SAVE_TRACK_UNFILTERED.get()) {
+					File dir_un = new File(dir, "unfiltered");
+					File fout_un = new File(dir_un, fileName + IndexConstants.GPX_FILE_EXT);
+					int ind = 1;
+					while (fout_un.exists()) {
+						fout_un = new File(dir_un, fileName + "_" + (++ind) + "_unfiltered" + IndexConstants.GPX_FILE_EXT); //$NON-NLS-1$
+					}
 
-				KFile fKout_un = SharedUtil.kFile(fout_un);
-				warn = SharedUtil.writeGpxFile(fKout_un, gpx);
-				if (warn != null) {
-					warnings.add(warn.getMessage());
-					return new SaveGpxResult(warnings, new HashMap<>());
+					KFile fKout_un = SharedUtil.kFile(fout_un);
+					warn = SharedUtil.writeGpxFile(fKout_un, gpx);
+					if (warn != null) {
+						warnings.add(warn.getMessage());
+						return new SaveGpxResult(warnings, new HashMap<>());
+					}
 				}
 
 				GpxDataItem item = new GpxDataItem(fKout);
@@ -336,8 +336,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			if (db != null) {
 				try {
 					if (db.isOpen()) {
-						db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[]{time});
-						db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[]{time});
+						db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[] {time});
+						db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[] {time});
 					}
 				} finally {
 					db.close();
@@ -369,16 +369,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			}
 		}
 		return data;
-	}
-
-	public Map<String, GpxFile> filterRecordedData(@NonNull Map<String, GpxFile> data) {
-		Map<String, GpxFile> res = new LinkedHashMap<String, GpxFile>();
-
-		for (Map.Entry<String, GpxFile> entry : data.entrySet()) {
-			GpxFile filteredGpx = SavedTrackFilter.filterGpxFile(entry.getValue(), settings);
-			res.put(entry.getKey(), filteredGpx);
-		};
-		return res;
 	}
 
 	private void collectDBPoints(@NonNull SQLiteDatabase db, @NonNull Map<String, GpxFile> dataTracks) {
@@ -551,7 +541,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			lastRoutingApplicationMode = null;
 		}
 
-		//log.debug("updateLocation at " + time);
 		heading = getAdjustedHeading(heading);
 
 		WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), time,
@@ -816,7 +805,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	}
 
 	public void loadGpxFromDatabase() {
-		//todo : filter here ?
 		Map<String, GpxFile> files = collectRecordedData();
 		List<Track> tracks = new ArrayList<>();
 		for (Map.Entry<String, GpxFile> entry : files.entrySet()) {
@@ -917,8 +905,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	}
 
 	private static class SavedTrackFilter {
-		LatLon lastPoint = null;
-		long lastTimeUpdated = -1;
+		LatLon lastFilteredPoint = null;
+		long lastFilteredTime = -1;
 		OsmandSettings settings;
 
 		public static GpxFile filterGpxFile(@NonNull GpxFile gpx, @NonNull OsmandSettings settings) {
@@ -964,19 +952,19 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 				// && SimulationProvider.isNotSimulatedLocation(location)
 					&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 //				if (isRecordingAutomatically() &&
-				if(		locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
-					lastTimeUpdated = locationTime;
+				if(		locationTime - lastFilteredTime > settings.SAVE_TRACK_INTERVAL.get()) {
+					lastFilteredTime = locationTime;
 					record = true;
 				} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
-						&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
-					lastTimeUpdated = locationTime;
+						&& locationTime - lastFilteredTime > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
+					lastFilteredTime = locationTime;
 					record = true;
 				}
 				float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
-				if (minDistance > 0 && lastPoint != null
-						&& MapUtils.getDistance(lastPoint, location) < minDistance) {
+				if (minDistance > 0 && lastFilteredPoint != null
+						&& MapUtils.getDistance(lastFilteredPoint, location) < minDistance) {
 					record = false;
-					lastPoint = location;
+					lastFilteredPoint = location;
 				}
 				float precision = settings.SAVE_TRACK_PRECISION.get();
 				if (precision > 0 && (Double.isNaN(accuracy) || accuracy > precision)) {

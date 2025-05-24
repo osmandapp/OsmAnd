@@ -57,6 +57,13 @@
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/save_track_logging_accuracy" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="save_track_unfiltered"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/save_track_unfiltered_title" />
+
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="save_global_track_interval"
 		android:layout="@layout/preference_with_descr"
