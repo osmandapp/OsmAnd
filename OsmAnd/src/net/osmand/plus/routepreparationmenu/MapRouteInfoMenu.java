@@ -584,7 +584,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		} else if (isTransportRouteCalculated()) {
 			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 			List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
-			if (routes != null && routes.size() > 0) {
+			if (routes != null && !routes.isEmpty()) {
 				TransportRouteResult route = routes.get(0);
 				int walkTimeReal = transportRoutingHelper.getWalkingTime(route.getSegments());
 				int walkTimePT = (int) route.getWalkTime();
@@ -623,7 +623,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					pedestrianRouteCard.setListener(this);
 					menuCards.add(pedestrianRouteCard);
 				}
-				bottomShadowVisible = routes.size() == 0;
+				bottomShadowVisible = routes.isEmpty();
 			} else {
 				RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(routingHelper.getAppMode());
 				if (mode != null) {
@@ -686,7 +686,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						}
 					}
 				}
-				if (gpxFiles.size() > 0) {
+				if (!gpxFiles.isEmpty()) {
 					TracksCard tracksCard = new TracksCard(mapActivity, gpxFiles);
 					tracksCard.setListener(this);
 					menuCards.add(tracksCard);
@@ -694,7 +694,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 				// Map markers card
 				List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
-				if (mapMarkers.size() > 0) {
+				if (!mapMarkers.isEmpty()) {
 					MapMarkersCard mapMarkersCard = new MapMarkersCard(mapActivity, mapMarkers);
 					mapMarkersCard.setListener(this);
 					menuCards.add(mapMarkersCard);
