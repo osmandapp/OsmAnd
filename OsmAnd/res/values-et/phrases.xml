@@ -869,7 +869,7 @@
     <string name="poi_religion_hindu">Hinduism</string>
     <string name="poi_religion_shinto">Šinto</string>
     <string name="poi_religion_taoist">Taoism</string>
-    <string name="poi_information">Teave</string>
+    <string name="poi_information">Turismiinfo</string>
     <string name="poi_leisure_fishing">Kalastuskoht</string>
     <string name="poi_craft_agricultural_engines">Põllumajandustehnika mootorid</string>
     <string name="poi_craft_basket_maker">Korvivalmistaja</string>
@@ -1306,17 +1306,17 @@
     <string name="poi_genus">Perekond</string>
     <string name="poi_taxon">Takson</string>
     <string name="poi_cuisine">Roogade valik</string>
-    <string name="poi_information_guidepost">Juhtpost</string>
-    <string name="poi_information_board">Tahvel</string>
-    <string name="poi_information_map">Kaart</string>
-    <string name="poi_information_office">Kontor</string>
+    <string name="poi_information_guidepost">Teeviit</string>
+    <string name="poi_information_board">Infotahvel</string>
+    <string name="poi_information_map">Infotahvel kaardiga</string>
+    <string name="poi_information_office">Turismiinfo kontor</string>
     <string name="poi_information_trail_blaze">Raja värvimärgid</string>
-    <string name="poi_information_terminal">Terminal</string>
+    <string name="poi_information_terminal">Infoterminal</string>
     <string name="poi_information_route_marker">Teetähis</string>
     <string name="poi_information_hikingmap">Matkakaart</string>
     <string name="poi_information_nature">Loodus</string>
     <string name="poi_information_history">Ajalugu</string>
-    <string name="poi_information_sign">Märk</string>
+    <string name="poi_information_sign">Silt</string>
     <string name="poi_information_audioguide">Audiogiid</string>
     <string name="poi_information_bicyclemap">Jalgrattakaart</string>
     <string name="poi_information_tactile_model">Kombatav mudel</string>
@@ -3787,7 +3787,7 @@
     <string name="poi_city_block">Tänavatevaheline kvartal</string>
     <string name="poi_borough">Vald</string>
     <string name="poi_give_box">Annetuskast</string>
-    <string name="poi_traffic_signals_arrow">Teeviit</string>
+    <string name="poi_traffic_signals_arrow">Nool</string>
     <string name="poi_traffic_signals_arrow_yes">Jah;Liiklusmärk noolega</string>
     <string name="poi_traffic_signals_vibration_yes">Jah;Liiklusmärk värinaalarmiga</string>
     <string name="poi_traffic_signals_vibration_no">Vibreerimine: ei</string>
@@ -5060,4 +5060,6 @@
     <string name="poi_adoption_agency">Lapsendamisbüroo</string>
     <string name="poi_airline">Lennufirma kontor</string>
     <string name="poi_route_point_category">Teekonnapunkti kategooria</string>
+    <string name="poi_iglesia_ni_cristo_church">Iglesia ni cristo kirik</string>
+    <string name="poi_neo_pentecostal_church">Uusnelipühilaste kirik</string>
 </resources>
