@@ -40,12 +40,9 @@ public class HomeWorkCard extends MapBaseCard {
 	private void setSpecialButtonOnClickListeners(FavouritePoint point, int buttonId, PointType pointType) {
 		View homeButton = view.findViewById(buttonId);
 		homeButton.setOnClickListener(new SpecialButtonOnClickListener(point, pointType));
-		homeButton.setOnLongClickListener(new View.OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				AddPointBottomSheetDialog.showInstance(mapActivity, pointType);
-				return true;
-			}
+		homeButton.setOnLongClickListener(v -> {
+			AddPointBottomSheetDialog.showInstance(mapActivity, pointType);
+			return true;
 		});
 	}
 

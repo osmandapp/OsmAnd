@@ -47,6 +47,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.*;
+import net.osmand.plus.dialogs.ILocationSelectionHandler;
+import net.osmand.plus.dialogs.SelectLocationController;
 import net.osmand.plus.routepreparationmenu.data.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.data.parameters.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.AvoidRoadsRoutingParameter;
@@ -269,32 +271,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		selectFromMapTouch = false;
 	}
 
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			if (selectFromMapTouch) {
-				selectFromMapTouch = false;
+	public boolean onSingleTap() {
+		return selectFromMapTouch;
+	}
 
-				Pair<LatLon, PointDescription> pair = getObjectLocation(mapActivity.getMapView(), point, tileBox);
-				LatLon selectedPoint;
-				PointDescription name = null;
-				if (pair != null) {
-					selectedPoint = pair.first;
-					name = pair.second;
-				} else {
-					MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
-					selectedPoint = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, point);
-				}
-				choosePointTypeAction(selectedPoint, selectFromMapPointType, name, null);
-				if (selectFromMapWaypoints) {
-					WaypointsFragment.showInstance(mapActivity, true);
-				} else {
-					show(selectFromMapMenuState);
-				}
-				return true;
-			}
-		}
-		return false;
+	public boolean onLongPress() {
+		return selectFromMapTouch;
 	}
 
 	@Nullable
@@ -1948,7 +1930,63 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		selectFromMapMenuState = menuState;
 		selectFromMapWaypoints = waypointsMenu;
 		hide();
+		startSelectLocationFlow();
 	}
+
+	private void startSelectLocationFlow() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			SelectLocationController.showDialog(mapActivity, createLocationSelectionHandler());
+		}
+	}
+
+	@NonNull
+	private ILocationSelectionHandler createLocationSelectionHandler() {
+		return new ILocationSelectionHandler() {
+
+			@Nullable
+			@Override
+			public Object getCenterPointIcon(@NonNull MapActivity mapActivity) {
+				return null;
+			}
+
+			@Override
+			public void onApplySelection(@NonNull MapActivity mapActivity) {
+				RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+				OsmandApplication app = mapActivity.getMyApplication();
+				PointF point = SelectLocationController.getCenterPixelPoint(app);
+
+				Pair<LatLon, PointDescription> pair = getObjectLocation(mapActivity.getMapView(), point, tileBox);
+				LatLon selectedPoint;
+				PointDescription name = null;
+				if (pair != null) {
+					selectedPoint = pair.first;
+					name = pair.second;
+				} else {
+					MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
+					selectedPoint = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, point);
+				}
+				choosePointTypeAction(selectedPoint, selectFromMapPointType, name, null);
+			}
+
+			@Override
+			public void onScreenClosed(@NonNull MapActivity mapActivity) {
+				if (selectFromMapWaypoints) {
+					WaypointsFragment.showInstance(mapActivity, true);
+				} else {
+					show(selectFromMapMenuState);
+				}
+			}
+
+			@NonNull
+			@Override
+			public String getDialogTitle(@NonNull MapActivity mapActivity) {
+				return "Select location on map";
+			}
+		};
+	}
+
+
 
 	public void selectAddress(@Nullable String name, @NonNull LatLon latLon, PointType pointType) {
 		MapActivity mapActivity = getMapActivity();

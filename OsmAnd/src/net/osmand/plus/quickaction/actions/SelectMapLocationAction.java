@@ -60,8 +60,14 @@ public abstract class SelectMapLocationAction extends QuickAction {
 			}
 
 			@Override
-			public void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+			public void onApplySelection(@NonNull MapActivity mapActivity) {
+				OsmandApplication app = mapActivity.getMyApplication();
+				LatLon latLon = SelectLocationController.getMapTargetCoordinates(app);
 				SelectMapLocationAction.this.onLocationSelected(mapActivity, latLon);
+			}
+
+			@Override
+			public void onScreenClosed(@NonNull MapActivity mapActivity) {
 			}
 
 			@NonNull
