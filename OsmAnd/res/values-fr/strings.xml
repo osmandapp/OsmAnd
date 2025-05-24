@@ -5753,5 +5753,5 @@
     <string name="deactivated_map">Carte désactivée</string>
     <string name="suggest_activate_map_msg">La carte %1$s est désactivée,\nactivez-la pour consulter cette zone.</string>
     <string name="unit_of_temperature_description">Les unités sélectionnées seront appliquées à toutes les données de température pour le profil actuel.</string>
-    <string name="read_on">Lire la suite %1$s</string>
+    <string name="read_on">Lire la suite sur %1$s</string>
 </resources>
