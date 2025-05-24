@@ -5745,4 +5745,5 @@
     <string name="deactivated_map">Искључена карта</string>
     <string name="unit_of_temperature_description">Изабране јединице ће бити примењене на све податке везане за температуру у тренутном профилу.</string>
     <string name="suggest_activate_map_msg">Карта %1$s је искључена,\nради прегледа ове области је укључите.</string>
+    <string name="read_on">Читајте на %1$s</string>
 </resources>
