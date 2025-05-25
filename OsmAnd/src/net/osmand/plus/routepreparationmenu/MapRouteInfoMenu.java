@@ -49,6 +49,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.data.*;
 import net.osmand.plus.dialogs.ILocationSelectionHandler;
 import net.osmand.plus.dialogs.SelectLocationController;
+import net.osmand.plus.routepreparationmenu.data.PointType;
 import net.osmand.plus.routepreparationmenu.data.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.data.parameters.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.AvoidRoadsRoutingParameter;
@@ -57,6 +58,7 @@ import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParamete
 import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.shared.gpx.GpxFile;
@@ -195,15 +197,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public interface OnMarkerSelectListener {
 		void onSelect(int index, PointType pointType);
-	}
-
-	public enum PointType {
-		START,
-		TARGET,
-		INTERMEDIATE,
-		HOME,
-		WORK,
-		PARKING
 	}
 
 	public MapRouteInfoMenu() {
@@ -1947,6 +1940,29 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			@Nullable
 			@Override
 			public Object getCenterPointIcon(@NonNull MapActivity mapActivity) {
+				if (selectFromMapPointType != null) {
+					MapLayers layers = mapActivity.getMapLayers();
+					switch (selectFromMapPointType) {
+						case START -> {
+							return layers.getNavigationLayer().getStartPointIcon();
+						}
+						case INTERMEDIATE -> {
+							return layers.getNavigationLayer().getIntermediatePointIcon();
+						}
+						case TARGET -> {
+							return layers.getNavigationLayer().getPointToNavigateIcon();
+						}
+						case HOME -> {
+							return layers.getFavouritesLayer().createHomeIcon();
+						}
+						case WORK -> {
+							return layers.getFavouritesLayer().createWorkIcon();
+						}
+						case PARKING -> {
+							return layers.getFavouritesLayer().createParkingIcon();
+						}
+					}
+				}
 				return null;
 			}
 
@@ -1981,7 +1997,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			@NonNull
 			@Override
 			public String getDialogTitle(@NonNull MapActivity mapActivity) {
-				return "Select location on map";
+				return selectFromMapPointType != null ? selectFromMapPointType.getTitle(mapActivity) : "";
 			}
 		};
 	}

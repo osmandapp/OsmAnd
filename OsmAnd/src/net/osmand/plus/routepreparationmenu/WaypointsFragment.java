@@ -41,6 +41,7 @@ import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.LocationPointWrapper;
+import net.osmand.plus.routepreparationmenu.data.PointType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -199,7 +200,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
 				Bundle arguments = new Bundle();
-				arguments.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, MapRouteInfoMenu.PointType.INTERMEDIATE.name());
+				arguments.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, PointType.INTERMEDIATE.name());
 				AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 				fragment.setArguments(arguments);
 				fragment.setUsedOnMap(true);

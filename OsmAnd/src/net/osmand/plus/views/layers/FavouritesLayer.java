@@ -250,9 +250,24 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@NonNull
+	public PointImageDrawable createHomeIcon() {
+		return createSpecialIcon(SpecialPointType.HOME);
+	}
+
+	@NonNull
+	public PointImageDrawable createWorkIcon() {
+		return createSpecialIcon(SpecialPointType.WORK);
+	}
+
+	@NonNull
 	public PointImageDrawable createParkingIcon() {
+		return createSpecialIcon(SpecialPointType.PARKING);
+	}
+
+	@NonNull
+	public PointImageDrawable createSpecialIcon(@NonNull SpecialPointType pointType) {
+		int iconId = pointType.getIconId(getContext());
 		int pointColor = favouritesHelper.getParkingIconColor();
-		int iconId = SpecialPointType.PARKING.getIconId(getContext());
 		return createFavoriteIcon(pointColor, iconId, DEFAULT_BACKGROUND_TYPE, false);
 	}
 

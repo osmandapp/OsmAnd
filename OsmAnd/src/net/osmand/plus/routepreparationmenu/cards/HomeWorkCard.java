@@ -11,7 +11,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
+import net.osmand.plus.routepreparationmenu.data.PointType;
 
 public class HomeWorkCard extends MapBaseCard {
 
