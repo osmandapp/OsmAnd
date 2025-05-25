@@ -75,7 +75,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private DialogListener listener;
 
 	public interface DialogListener {
-		void onSelectOnMap(AddPointBottomSheetDialog dialog);
+		void onRequestToSelectOnMap(@NonNull PointType pointType);
 	}
 
 	public DialogListener getListener() {
@@ -258,7 +258,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					if (activity != null) {
 						DialogListener listener = getListener();
 						if (listener != null) {
-							listener.onSelectOnMap(AddPointBottomSheetDialog.this);
+							listener.onRequestToSelectOnMap(pointType);
 						} else {
 							MapRouteInfoMenu menu = activity.getMapRouteInfoMenu();
 							menu.selectOnScreen(pointType);

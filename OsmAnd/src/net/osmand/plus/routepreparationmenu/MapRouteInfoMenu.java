@@ -9,11 +9,9 @@ import static net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.MapRouteMenu
 
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
-import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -45,10 +43,7 @@ import androidx.transition.TransitionManager;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.core.android.MapRendererView;
 import net.osmand.data.*;
-import net.osmand.plus.dialogs.ILocationSelectionHandler;
-import net.osmand.plus.dialogs.SelectLocationController;
 import net.osmand.plus.routepreparationmenu.data.PointType;
 import net.osmand.plus.routepreparationmenu.data.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.data.parameters.AvoidPTTypesRoutingParameter;
@@ -58,9 +53,6 @@ import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParamete
 import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
-import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.layers.MapSelectionResult;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -85,7 +77,6 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
-import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.cards.*;
@@ -112,11 +103,8 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -148,10 +136,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private boolean routeCalculationInProgress;
 
-	private boolean selectFromMapTouch;
-	private PointType selectFromMapPointType;
-	private int selectFromMapMenuState = MenuState.HEADER_ONLY;
-	private boolean selectFromMapWaypoints;
+	private SelectNavigationPointController selectNavPointController;
+	private int cachedMenuState = MenuState.HEADER_ONLY;
 	private boolean selectFromTracks;
 	private boolean customizingRouteLine;
 
@@ -221,6 +207,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			app = mapActivity.getMyApplication();
 			portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			animationsHandler = new Handler();
+			selectNavPointController = new SelectNavigationPointController(app);
 		}
 	}
 
@@ -254,65 +241,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public void setOnDismissListener(OnDismissListener onDismissListener) {
 		this.onDismissListener = onDismissListener;
-	}
-
-	public boolean isSelectFromMapTouch() {
-		return selectFromMapTouch;
-	}
-
-	public void cancelSelectionFromMap() {
-		selectFromMapTouch = false;
-	}
-
-	public boolean onSingleTap() {
-		return selectFromMapTouch;
-	}
-
-	public boolean onLongPress() {
-		return selectFromMapTouch;
-	}
-
-	@Nullable
-	private Pair<LatLon, PointDescription> getObjectLocation(OsmandMapTileView mapView, PointF point, RotatedTileBox tileBox) {
-		MapSelectionResult result = new MapSelectionResult(mapView.getApplication(), tileBox, point);
-		for (OsmandMapLayer layer : mapView.getLayers()) {
-			if (layer instanceof IContextMenuProvider provider) {
-				provider.collectObjectsFromPoint(result, true, true);
-				for (SelectedMapObject selectedMapObject : result.getAllObjects()) {
-					Object object = selectedMapObject.object();
-					LatLon latLon = provider.getObjectLocation(object);
-					PointDescription name = null;
-					if (object instanceof FavouritePoint) {
-						name = ((FavouritePoint) object).getPointDescription(mapView.getApplication());
-					}
-					return new Pair<>(latLon, name);
-				}
-			}
-		}
-		return null;
-	}
-
-	private void choosePointTypeAction(LatLon latLon, PointType pointType, PointDescription pd, String address) {
-		OsmandApplication app = getApp();
-		FavouritesHelper favorites = app.getFavoritesHelper();
-		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		switch (pointType) {
-			case START:
-				targetPointsHelper.setStartPoint(latLon, true, pd);
-				break;
-			case TARGET:
-				targetPointsHelper.navigateToPoint(latLon, true, -1, pd);
-				break;
-			case INTERMEDIATE:
-				targetPointsHelper.navigateToPoint(latLon, true, targetPointsHelper.getIntermediatePoints().size(), pd);
-				break;
-			case HOME:
-				favorites.setSpecialPoint(latLon, SpecialPointType.HOME, address);
-				break;
-			case WORK:
-				favorites.setSpecialPoint(latLon, SpecialPointType.WORK, address);
-				break;
-		}
 	}
 
 	public OnMarkerSelectListener getOnMarkerSelectListener() {
@@ -1909,106 +1837,28 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
 	}
 
-	public void selectOnScreen(PointType pointType) {
-		selectOnScreen(pointType, getCurrentMenuState(), false);
+	public void selectOnScreen(@NonNull PointType pointType) {
+		selectOnScreen(pointType, null);
 	}
 
-	public void selectOnScreen(PointType pointType, boolean waypointsMenu) {
-		selectOnScreen(pointType, getCurrentMenuState(), waypointsMenu);
-	}
-
-	public void selectOnScreen(PointType pointType, int menuState, boolean waypointsMenu) {
-		selectFromMapTouch = true;
-		selectFromMapPointType = pointType;
-		selectFromMapMenuState = menuState;
-		selectFromMapWaypoints = waypointsMenu;
+	public void selectOnScreen(@NonNull PointType pointType, @Nullable String dialogId) {
+		cachedMenuState = getCurrentMenuState();
 		hide();
-		startSelectLocationFlow();
-	}
 
-	private void startSelectLocationFlow() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			SelectLocationController.showDialog(mapActivity, createLocationSelectionHandler());
+		if (mapActivity != null && selectNavPointController != null) {
+			selectNavPointController.selectOnMap(mapActivity, pointType, dialogId);
 		}
 	}
 
-	@NonNull
-	private ILocationSelectionHandler createLocationSelectionHandler() {
-		return new ILocationSelectionHandler() {
-
-			@Nullable
-			@Override
-			public Object getCenterPointIcon(@NonNull MapActivity mapActivity) {
-				if (selectFromMapPointType != null) {
-					MapLayers layers = mapActivity.getMapLayers();
-					switch (selectFromMapPointType) {
-						case START -> {
-							return layers.getNavigationLayer().getStartPointIcon();
-						}
-						case INTERMEDIATE -> {
-							return layers.getNavigationLayer().getIntermediatePointIcon();
-						}
-						case TARGET -> {
-							return layers.getNavigationLayer().getPointToNavigateIcon();
-						}
-						case HOME -> {
-							return layers.getFavouritesLayer().createHomeIcon();
-						}
-						case WORK -> {
-							return layers.getFavouritesLayer().createWorkIcon();
-						}
-						case PARKING -> {
-							return layers.getFavouritesLayer().createParkingIcon();
-						}
-					}
-				}
-				return null;
-			}
-
-			@Override
-			public void onApplySelection(@NonNull MapActivity mapActivity) {
-				RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
-				OsmandApplication app = mapActivity.getMyApplication();
-				PointF point = SelectLocationController.getCenterPixelPoint(app);
-
-				Pair<LatLon, PointDescription> pair = getObjectLocation(mapActivity.getMapView(), point, tileBox);
-				LatLon selectedPoint;
-				PointDescription name = null;
-				if (pair != null) {
-					selectedPoint = pair.first;
-					name = pair.second;
-				} else {
-					MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
-					selectedPoint = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, point);
-				}
-				choosePointTypeAction(selectedPoint, selectFromMapPointType, name, null);
-			}
-
-			@Override
-			public void onScreenClosed(@NonNull MapActivity mapActivity) {
-				if (selectFromMapWaypoints) {
-					WaypointsFragment.showInstance(mapActivity, true);
-				} else {
-					show(selectFromMapMenuState);
-				}
-			}
-
-			@NonNull
-			@Override
-			public String getDialogTitle(@NonNull MapActivity mapActivity) {
-				return selectFromMapPointType != null ? selectFromMapPointType.getTitle(mapActivity) : "";
-			}
-		};
+	public boolean isSelectFromMap() {
+		return selectNavPointController != null && selectNavPointController.isSelectFromMap();
 	}
-
-
 
 	public void selectAddress(@Nullable String name, @NonNull LatLon latLon, PointType pointType) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, name);
-			choosePointTypeAction(latLon, pointType, pd, name);
+			selectNavPointController.selectAddress(name, latLon, pointType);
 			updateMenu();
 		}
 	}
@@ -2130,9 +1980,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (marker != null) {
-				LatLon latLon = new LatLon(marker.getLatitude(), marker.getLongitude());
-				PointDescription pd = marker.getPointDescription(mapActivity);
-				choosePointTypeAction(latLon, pointType, pd, null);
+				selectNavPointController.selectMapMarker(mapActivity, marker, pointType);
 				updateMenu();
 			} else {
 				MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);
@@ -2399,8 +2247,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (switched) {
 					mapActivity.getMapActions().switchToRouteFollowingLayout();
 				}
-				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && !selectFromTracks
-						&& !customizingRouteLine) {
+				if (mapActivity.getPointToNavigate() == null && !isSelectFromMap()
+						&& !selectFromTracks && !customizingRouteLine) {
 					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				}
 				mapActivity.updateStatusBarColor();
@@ -2434,6 +2282,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public void show() {
 		show(getInitialMenuState());
+	}
+
+	public void restore() {
+		show(cachedMenuState);
 	}
 
 	protected void show(int menuState) {

@@ -305,10 +305,7 @@ public class MapActions {
 	private void onNavigationClick() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			MapRouteInfoMenu mapRouteInfoMenu = activity.getMapRouteInfoMenu();
-			mapRouteInfoMenu.cancelSelectionFromMap();
 			MapActivity.clearPrevActivityIntent();
-
 			if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 				TargetPoint start = targetHelper.getPointToStart();
 				if (start != null) {

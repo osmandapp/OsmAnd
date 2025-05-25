@@ -741,10 +741,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 	}
 
 	@Override
-	public void onSelectOnMap(AddPointBottomSheetDialog dialog) {
+	public void onRequestToSelectOnMap(@NonNull PointType pointType) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapRouteInfoMenu().selectOnScreen(dialog.getPointType(), true);
+			mapActivity.getMapRouteInfoMenu().selectOnScreen(pointType, TAG);
 			controller.setUseRouteInfoMenu(false);
 			dismiss();
 		}
