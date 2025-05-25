@@ -5752,4 +5752,5 @@
     <string name="deactivated_map">Malaktiva mapo</string>
     <string name="suggest_activate_map_msg">La mapo “%1$s” estas malaktiva,\naktivigu ĝin por bildigi tiun ĉi areon.</string>
     <string name="unit_of_temperature_description">Elektata mezurunuo estos aplikita al ĉiuj temperatur-rilataj datumoj en la nuna profilo.</string>
+    <string name="read_on">Legi en %1$s</string>
 </resources>
