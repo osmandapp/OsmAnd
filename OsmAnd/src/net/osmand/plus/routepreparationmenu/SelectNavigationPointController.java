@@ -1,5 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
+import android.content.Context;
 import android.graphics.PointF;
 import android.util.Pair;
 
@@ -13,6 +14,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ILocationSelectionHandler;
 import net.osmand.plus.dialogs.SelectLocationController;
@@ -44,7 +46,7 @@ public class SelectNavigationPointController {
 			@NonNull
 			@Override
 			public String getDialogTitle(@NonNull MapActivity activity) {
-				return pointType.getTitle(activity);
+				return getTitle(mapActivity, pointType);
 			}
 
 			@Nullable
@@ -121,6 +123,31 @@ public class SelectNavigationPointController {
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	private String getTitle(@NonNull Context context, @NonNull PointType pointType) {
+		switch (pointType) {
+			case START -> {
+				return context.getString(R.string.set_start_point);
+			}
+			case INTERMEDIATE -> {
+				return context.getString(R.string.set_intermediate_point);
+			}
+			case TARGET -> {
+				return context.getString(R.string.add_destination_point);
+			}
+			case HOME -> {
+				return context.getString(R.string.set_home);
+			}
+			case WORK -> {
+				return context.getString(R.string.set_work);
+			}
+			case PARKING -> {
+				return context.getString(R.string.set_parking_position);
+			}
+		}
+		return "";
 	}
 
 	@Nullable
