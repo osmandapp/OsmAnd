@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Pair;
 
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
@@ -24,6 +27,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class PlacesDatabaseHelper extends SQLiteOpenHelper {
+
+    private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(PlacesDatabaseHelper.class);
 
     private static final String DATABASE_NAME = "places.db";
 
@@ -55,8 +60,25 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    public SQLiteDatabase getReadableDatabase() {
+        SQLiteDatabase db = super.getReadableDatabase();
+        File dbFile = new File(db.getPath());
+        if (!dbFile.exists()) {
+            db.close();
+            db = super.getReadableDatabase();
+        }
+        return db;
+    }
+
+    @Override
     public SQLiteDatabase getWritableDatabase() {
-        return super.getWritableDatabase();
+        SQLiteDatabase db = super.getWritableDatabase();
+        File dbFile = new File(db.getPath());
+        if (!dbFile.exists()) {
+            db.close();
+            db = super.getWritableDatabase();
+        }
+        return db;
     }
 
     @Override
@@ -80,8 +102,9 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
 
     public void insertPlaces(int zoom, int tileX, int tileY,
             Map<String, List<OsmandApiFeatureData>> placesByLang) {
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = null;
         try {
+            db = getWritableDatabase();
             db.beginTransaction();
             for (Map.Entry<String, List<OsmandApiFeatureData>> entry : placesByLang.entrySet()) {
                 String lang = entry.getKey();
@@ -97,60 +120,80 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
                 db.insertWithOnConflict(TABLE_PLACES, null, values, SQLiteDatabase.CONFLICT_REPLACE);
             }
             db.setTransactionSuccessful();
+        } catch (SQLiteException e) {
+            LOG.error("Failed insert places", e);
         } finally {
-            db.endTransaction();
+            if (db != null) {
+                db.endTransaction();
+            }
         }
     }
 
     @NonNull
     public List<OsmandApiFeatureData> getPlaces(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
-        SQLiteDatabase db = getReadableDatabase();
-        Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY, languages);
-        Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_DATA, COLUMN_TIMESTAMP},
-                pair.first, pair.second, null, null, null);
-
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
         List<OsmandApiFeatureData> places = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            int c = cursor.getColumnIndex(COLUMN_DATA);
-            int t = cursor.getColumnIndex(COLUMN_TIMESTAMP);
-            do {
-                String json = cursor.getString(c);
-                long timestamp = cursor.getLong(t);
-                List<OsmandApiFeatureData> parsed = gson.fromJson(json,
-                        new TypeToken<List<OsmandApiFeatureData>>() {}.getType());
-                if (parsed != null) {
-                    places.addAll(parsed);
-                }
-            } while (cursor.moveToNext());
+        try {
+            db = getReadableDatabase();
+            Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY, languages);
+            cursor = db.query(TABLE_PLACES, new String[] {COLUMN_DATA, COLUMN_TIMESTAMP},
+                    pair.first, pair.second, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                int c = cursor.getColumnIndex(COLUMN_DATA);
+                int t = cursor.getColumnIndex(COLUMN_TIMESTAMP);
+                do {
+                    String json = cursor.getString(c);
+                    long timestamp = cursor.getLong(t);
+                    List<OsmandApiFeatureData> parsed = gson.fromJson(json,
+                            new TypeToken<List<OsmandApiFeatureData>>() {
+                            }.getType());
+                    if (parsed != null) {
+                        places.addAll(parsed);
+                    }
+                } while (cursor.moveToNext());
+            }
+        } catch (SQLiteException e) {
+            LOG.error("Failed get places", e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
-        cursor.close();
         return places;
     }
 
     public boolean isDataExpired(int zoom, int tileX, int tileY, @NonNull List<String> languages) {
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = null;
         boolean filterByLang = !Algorithms.isEmpty(languages);
-        Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY, languages);
+        try {
+            db = getReadableDatabase(); // Move inside try block
+            Pair<String, String[]> pair = getSelectionWithArgs(zoom, tileX, tileY, languages);
 
-        try (Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_LANG, COLUMN_TIMESTAMP},
-                pair.first, pair.second, null, null, null)) {
-            if (cursor.moveToFirst()) {
-                Set<String> foundLangs = new HashSet<>();
-                long currentTime = System.currentTimeMillis();
-                do {
-                    int timestampIndex = cursor.getColumnIndex(COLUMN_TIMESTAMP);
-                    long timestamp = cursor.getLong(timestampIndex);
-                    if ((currentTime - timestamp) > DATA_EXPIRATION_TIME) {
-                        return true; // 1 month expiration
-                    }
-                    int langIndex = cursor.getColumnIndex(COLUMN_LANG);
-                    String lang = cursor.getString(langIndex);
-                    foundLangs.add(lang);
-                } while (cursor.moveToNext());
+            try (Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_LANG, COLUMN_TIMESTAMP},
+                    pair.first, pair.second, null, null, null)) {
+                if (cursor.moveToFirst()) {
+                    Set<String> foundLangs = new HashSet<>();
+                    long currentTime = System.currentTimeMillis();
+                    do {
+                        int timestampIndex = cursor.getColumnIndex(COLUMN_TIMESTAMP);
+                        long timestamp = cursor.getLong(timestampIndex);
+                        if ((currentTime - timestamp) > DATA_EXPIRATION_TIME) {
+                            return true; // 1 month expiration
+                        }
+                        int langIndex = cursor.getColumnIndex(COLUMN_LANG);
+                        String lang = cursor.getString(langIndex);
+                        foundLangs.add(lang);
+                    } while (cursor.moveToNext());
 
-                return filterByLang && foundLangs.size() < languages.size();
+                    return filterByLang && foundLangs.size() < languages.size();
+                }
+                return true; // Data is expired if it doesn't exist
             }
-            return true; // Data is expired if it doesn't exist
+        } catch (SQLiteException e) {
+            LOG.error("Failed check places expired", e);
+            return true;
         }
     }
 
