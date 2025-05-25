@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
@@ -25,6 +27,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class PlacesDatabaseHelper extends SQLiteOpenHelper {
+
+    private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(PlacesDatabaseHelper.class);
 
     private static final String DATABASE_NAME = "places.db";
 
@@ -117,7 +121,7 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
             }
             db.setTransactionSuccessful();
         } catch (SQLiteException e) {
-            e.printStackTrace();
+            LOG.error("Failed insert places", e);
         } finally {
             if (db != null) {
                 db.endTransaction();
@@ -151,7 +155,7 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
                 } while (cursor.moveToNext());
             }
         } catch (SQLiteException e) {
-            e.printStackTrace();
+            LOG.error("Failed get places", e);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -188,7 +192,7 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
                 return true; // Data is expired if it doesn't exist
             }
         } catch (SQLiteException e) {
-            e.printStackTrace();
+            LOG.error("Failed check places expired", e);
             return true;
         }
     }
