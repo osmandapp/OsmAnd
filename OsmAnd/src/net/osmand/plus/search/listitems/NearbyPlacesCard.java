@@ -81,15 +81,15 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private boolean nightMode;
 
 	public NearbyPlacesCard(@NonNull MapActivity activity,
-			@NonNull NearbyItemClickListener listener, boolean nightMode) {
+	                        @NonNull NearbyItemClickListener listener, boolean nightMode, boolean loadItemsOnInit) {
 		super(activity);
 		app = (OsmandApplication) activity.getApplicationContext();
 		this.clickListener = listener;
 		this.nightMode = nightMode;
-		init();
+		init(loadItemsOnInit);
 	}
 
-	private void init() {
+	private void init(boolean loadItemsOnInit) {
 		downloadThread = app.getDownloadThread();
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		inflater.inflate(R.layout.nearby_places_card, this, true);
@@ -116,7 +116,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 
 		setupRecyclerView();
 		setupShowAllNearbyPlacesBtn();
-		setupExpandNearbyPlacesIndicator();
+		setupExpandNearbyPlacesIndicator(loadItemsOnInit);
 		updateExpandState();
 	}
 
@@ -223,7 +223,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 			});
 			searchAmenitiesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			AndroidUiHelper.updateVisibility(progressBar, true);
-			if(!getNearbyAdapter().hasData()) {
+			if (!getNearbyAdapter().hasData()) {
 				shimmerFrameLayout.startShimmer();
 			}
 		}
@@ -237,7 +237,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		return wikiFilter;
 	}
 
-	private void setupExpandNearbyPlacesIndicator() {
+	private void setupExpandNearbyPlacesIndicator(boolean loadItemsOnInit) {
 		collapsed = app.getSettings().EXPLORE_NEARBY_ITEMS_ROW_COLLAPSED.get();
 		explicitIndicator = findViewById(R.id.explicit_indicator);
 		titleContainer = findViewById(R.id.nearby_title_container);
@@ -245,7 +245,9 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 			collapsed = !collapsed;
 			onNearbyPlacesCollapseChanged();
 		});
-		onNearbyPlacesCollapseChanged();
+		if (loadItemsOnInit) {
+			onNearbyPlacesCollapseChanged();
+		}
 	}
 
 	private void populateDownloadItems() {

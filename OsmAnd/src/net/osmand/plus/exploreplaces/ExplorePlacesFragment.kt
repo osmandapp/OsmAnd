@@ -481,7 +481,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun closeFragment() {
-		app.poiFilters.restoreSelectedPoiFilters()
 		mapActivity?.let { activity ->
 			val fragment = activity.fragmentsHelper.explorePlacesFragment
 			if (fragment != null) {

@@ -613,13 +613,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void showFilterOnMap(@Nullable PoiUIFilter filter, @Nullable String title) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			app.getPoiFilters().replaceSelectedPoiFilters(filter);
-
 			MapContextMenu contextMenu = activity.getContextMenu();
 			contextMenu.close();
 			contextMenu.closeActiveToolbar();
 
-			showToolbar(title);
+			showToolbar(filter, title);
 			activity.updateStatusBarColor();
 			activity.refreshMap();
 
@@ -720,22 +718,27 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			MapActivity mapActivity = getMapActivity();
 			TopToolbarController controller = mapActivity.getTopToolbarController(toolbarController.getType());
 			if (controller == null) {
+				PoiUIFilter filter = toolbarController.getSelectedFilter();
 				if (toolbarTitle != null) {
-					showToolbar(toolbarTitle);
+					showToolbar(filter, toolbarTitle);
 				} else {
-					showToolbar();
+					showToolbar(filter);
 				}
 			}
 		}
 	}
 
-	public void showToolbar() {
-		showToolbar(getText());
+	public void showToolbar(@Nullable PoiUIFilter filter) {
+		showToolbar(filter, getText());
 	}
 
-	public void showToolbar(String title) {
+	public void showToolbar(@Nullable PoiUIFilter filter, String title) {
 		toolbarVisible = true;
 		toolbarTitle = title;
+		if (filter != null) {
+			app.getPoiFilters().replaceSelectedPoiFilters(filter);
+		}
+		toolbarController.setSelectedFilter(filter);
 		toolbarController.setTitle(toolbarTitle);
 		getMapActivity().showTopToolbar(toolbarController);
 	}
