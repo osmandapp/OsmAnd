@@ -20,13 +20,9 @@ import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
-import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailsObject;
-import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -194,7 +190,7 @@ public class ResourceManager {
 
 		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-		fullAmenitySearch = new FullAmenitySearch(searchAmenitiesInProgress, lang, transliterate, app.getPoiTypes(),
+		fullAmenitySearch = new FullAmenitySearch(lang, transliterate, app.getPoiTypes(),
 				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get());
 	}
 
@@ -356,7 +352,6 @@ public class ResourceManager {
 	}
 
 	private GeoidAltitudeCorrection geoidAltitudeCorrection;
-	private boolean searchAmenitiesInProgress;
 
 	@Nullable
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
@@ -851,10 +846,6 @@ public class ResourceManager {
 
 	public void interruptRendering() {
 		renderer.interruptLoadingMap();
-	}
-
-	public boolean isSearchAmenitiesInProgress() {
-		return searchAmenitiesInProgress;
 	}
 
 	public MapRenderRepositories getRenderer() {

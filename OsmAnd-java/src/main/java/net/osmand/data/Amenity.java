@@ -18,7 +18,6 @@ import net.osmand.shared.wiki.WikiHelper;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.wiki.WikiCoreHelper;
 
 import org.json.JSONObject;
 

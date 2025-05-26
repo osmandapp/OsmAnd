@@ -40,7 +40,6 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public class FullAmenitySearch {
 
     protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<>();
-    private boolean progress;
     private final TravelFileVisibility travelFileVisibility;
     private ThreadPoolExecutor singleThreadedExecutor;
     private LinkedBlockingQueue<Runnable> taskQueue;
@@ -51,9 +50,8 @@ public class FullAmenitySearch {
     private boolean transliterate;
     private final MapPoiTypes mapPoiTypes; // nullable
 
-    public FullAmenitySearch(boolean progress, String lang, boolean transliterate, MapPoiTypes mapPoiTypes,
+    public FullAmenitySearch(String lang, boolean transliterate, MapPoiTypes mapPoiTypes,
                              TravelFileVisibility travelFileVisibility) {
-        this.progress = progress;
         this.travelFileVisibility = travelFileVisibility;
         this.lang = lang;
         this.transliterate = transliterate;
@@ -120,46 +118,41 @@ public class FullAmenitySearch {
         Set<Long> closedAmenities = new HashSet<>();
         List<Amenity> actualAmenities = new ArrayList<>();
 
-        progress = true;
-        try {
-            boolean isEmpty = filter.isEmpty();
-            if (isEmpty && additionalFilter != null) {
-                filter = null;
-            }
-            if (!isEmpty || additionalFilter != null) {
-                int top31 = MapUtils.get31TileNumberY(topLatitude);
-                int left31 = MapUtils.get31TileNumberX(leftLongitude);
-                int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
-                int right31 = MapUtils.get31TileNumberX(rightLongitude);
+        boolean isEmpty = filter.isEmpty();
+        if (isEmpty && additionalFilter != null) {
+            filter = null;
+        }
+        if (!isEmpty || additionalFilter != null) {
+            int top31 = MapUtils.get31TileNumberY(topLatitude);
+            int left31 = MapUtils.get31TileNumberX(leftLongitude);
+            int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
+            int right31 = MapUtils.get31TileNumberX(rightLongitude);
 
-                List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel);
+            List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel);
 
-                for (AmenityIndexRepository repo : repos) {
-                    if (matcher != null && matcher.isCancelled()) {
-                        progress = false;
-                        break;
-                    }
-                    if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
-                        List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
-                                zoom, filter, additionalFilter, matcher);
-                        if (foundAmenities != null) {
-                            for (Amenity amenity : foundAmenities) {
-                                Long id = amenity.getId();
-                                if (amenity.isClosed()) {
-                                    closedAmenities.add(id);
-                                } else if (!closedAmenities.contains(id)) {
-                                    if (openAmenities.add(id)) {
-                                        actualAmenities.add(amenity);
-                                    }
+            for (AmenityIndexRepository repo : repos) {
+                if (matcher != null && matcher.isCancelled()) {
+                    break;
+                }
+                if (repo.checkContainsInt(top31, left31, bottom31, right31)) {
+                    List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
+                            zoom, filter, additionalFilter, matcher);
+                    if (foundAmenities != null) {
+                        for (Amenity amenity : foundAmenities) {
+                            Long id = amenity.getId();
+                            if (amenity.isClosed()) {
+                                closedAmenities.add(id);
+                            } else if (!closedAmenities.contains(id)) {
+                                if (openAmenities.add(id)) {
+                                    actualAmenities.add(amenity);
                                 }
                             }
                         }
                     }
                 }
             }
-        } finally {
-            progress = false;
         }
+
         return actualAmenities;
     }
 
@@ -272,7 +265,7 @@ public class FullAmenitySearch {
         return null;
     }
 
-    private boolean namesMatcher(Amenity amenity, Collection<String> matchList, boolean deepNameSearch) {
+    private boolean namesMatcher(Amenity amenity, Collection<String> matchList, boolean matchAllLanguagesAndAltNames) {
         String poiSimpleFormat = Amenity.getPoiStringWithoutType(amenity, lang, transliterate);
         if (matchList.contains(poiSimpleFormat)) {
             return true;
@@ -291,7 +284,7 @@ public class FullAmenitySearch {
             }
         }
 
-        if (deepNameSearch) {
+        if (matchAllLanguagesAndAltNames) {
             Set<String> allAmenityNames = new HashSet<>();
             allAmenityNames.addAll(amenity.getAltNamesMap().values());
             allAmenityNames.addAll(amenity.getNamesMap(true).values());
@@ -338,44 +331,41 @@ public class FullAmenitySearch {
     public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius,
                                                   BinaryMapIndexReader.SearchPoiTypeFilter filter,
                                                   ResultMatcher<Amenity> matcher) {
-        progress = true;
         List<Amenity> amenities = new ArrayList<>();
-        try {
-            if (locations != null && locations.size() > 0) {
-                List<AmenityIndexRepository> repos = new ArrayList<>();
-                double topLatitude = locations.get(0).getLatitude();
-                double bottomLatitude = locations.get(0).getLatitude();
-                double leftLongitude = locations.get(0).getLongitude();
-                double rightLongitude = locations.get(0).getLongitude();
-                for (Location l : locations) {
-                    topLatitude = Math.max(topLatitude, l.getLatitude());
-                    bottomLatitude = Math.min(bottomLatitude, l.getLatitude());
-                    leftLongitude = Math.min(leftLongitude, l.getLongitude());
-                    rightLongitude = Math.max(rightLongitude, l.getLongitude());
-                }
-                if (!filter.isEmpty()) {
-                    for (AmenityIndexRepository index : getAmenityRepositories()) {
-                        if (index.checkContainsInt(
-                                MapUtils.get31TileNumberY(topLatitude),
-                                MapUtils.get31TileNumberX(leftLongitude),
-                                MapUtils.get31TileNumberY(bottomLatitude),
-                                MapUtils.get31TileNumberX(rightLongitude))) {
-                            repos.add(index);
-                        }
+
+        if (locations != null && !locations.isEmpty()) {
+            List<AmenityIndexRepository> repos = new ArrayList<>();
+            double topLatitude = locations.get(0).getLatitude();
+            double bottomLatitude = locations.get(0).getLatitude();
+            double leftLongitude = locations.get(0).getLongitude();
+            double rightLongitude = locations.get(0).getLongitude();
+            for (Location l : locations) {
+                topLatitude = Math.max(topLatitude, l.getLatitude());
+                bottomLatitude = Math.min(bottomLatitude, l.getLatitude());
+                leftLongitude = Math.min(leftLongitude, l.getLongitude());
+                rightLongitude = Math.max(rightLongitude, l.getLongitude());
+            }
+            if (!filter.isEmpty()) {
+                for (AmenityIndexRepository index : getAmenityRepositories()) {
+                    if (index.checkContainsInt(
+                            MapUtils.get31TileNumberY(topLatitude),
+                            MapUtils.get31TileNumberX(leftLongitude),
+                            MapUtils.get31TileNumberY(bottomLatitude),
+                            MapUtils.get31TileNumberX(rightLongitude))) {
+                        repos.add(index);
                     }
-                    if (!repos.isEmpty()) {
-                        for (AmenityIndexRepository r : repos) {
-                            List<Amenity> res = r.searchAmenitiesOnThePath(locations, radius, filter, matcher);
-                            if (res != null) {
-                                amenities.addAll(res);
-                            }
+                }
+                if (!repos.isEmpty()) {
+                    for (AmenityIndexRepository r : repos) {
+                        List<Amenity> res = r.searchAmenitiesOnThePath(locations, radius, filter, matcher);
+                        if (res != null) {
+                            amenities.addAll(res);
                         }
                     }
                 }
             }
-        } finally {
-            progress = false;
         }
+
         return amenities;
     }
 
