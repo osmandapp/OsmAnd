@@ -19,7 +19,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
-import net.osmand.data.BaseDetailsObject.ObjectCompleteness;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
@@ -201,13 +200,14 @@ public class FullAmenitySearch {
         QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
 
         List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false);
+
         long osmId = ObfConstants.isShiftedID(id) ? ObfConstants.getOsmId(id) : id >> AMENITY_ID_RIGHT_SHIFT;
         List<Amenity> filtered = new ArrayList<>();
         if (osmId > 0 || wikidata != null) {
             filtered = findAmenitiesByOsmIdOrWikidata(amenities, osmId, latLon, wikidata);
         }
         if (Algorithms.isEmpty(filtered) && !Algorithms.isEmpty(names)) {
-            Amenity amenity = findAmenityByName(amenities, names);
+            Amenity amenity = findByName(amenities, names, latLon);
             if (amenity != null) {
                 filtered = findAmenitiesByOsmIdOrWikidata(amenities, amenity.getOsmId(), amenity.getLocation(), amenity.getWikidata());
             }
@@ -241,9 +241,10 @@ public class FullAmenitySearch {
         return result;
     }
 
-    private Amenity findAmenityByName(Collection<Amenity> amenities, Collection<String> names) {
+    private Amenity findByName(Collection<Amenity> amenities, Collection<String> names, LatLon searchLatLon) {
         if (!Algorithms.isEmpty(names) && !Algorithms.isEmpty(amenities)) {
             return amenities.stream()
+                    .sorted(Comparator.comparingDouble(a -> MapUtils.getDistance(a.getLocation(), searchLatLon)))
                     .filter(amenity -> !amenity.isClosed())
                     .filter(amenity -> namesMatcher(amenity, names, false))
                     .findAny()
@@ -272,8 +273,12 @@ public class FullAmenitySearch {
         }
 
         String amenityName = amenity.getName(lang, transliterate);
-        if (matchList.contains(amenityName)) {
-            return true;
+        if (!Algorithms.isEmpty(amenityName)) {
+            for (String match : matchList) {
+                if (match.endsWith(amenityName)) {
+                    return true;
+                }
+            }
         }
 
         if (mapPoiTypes != null) {
