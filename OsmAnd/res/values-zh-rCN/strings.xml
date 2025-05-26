@@ -5940,7 +5940,7 @@
     <string name="original_color_description">每个点都会保留其颜色。</string>
     <string name="original_shape_description">每个点都会保留其形状。</string>
     <string name="apply_to_all_points">应用至所有点</string>
-    <string name="shared_string_road_exit">退出</string>
+    <string name="shared_string_road_exit">出口</string>
     <string name="ais_port_nmea_server">NMEA 数据源的 TCP 端口</string>
     <string name="ais_port_nmea_server_description">为 NMEA 数据源指定端口号</string>
     <string name="ais_object_lost_timeouts">AIS 信号接收的超时设置</string>
