@@ -1,6 +1,7 @@
 package net.osmand.test.common;
 
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.IdRes;
 import androidx.test.espresso.UiController;
@@ -13,8 +14,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.Espresso.onView;
 
-
-import net.osmand.plus.R;
 
 import org.hamcrest.Matcher;
 
@@ -51,6 +50,33 @@ public class SystemDialogInteractions {
 				},
 				Press.FINGER
 		);
+	}
+
+
+	//finds n-th child of given type at one hierarchy level
+	public static <T extends View> T findDescendantOfType(View parent, Class<T> targetClass, int targetIndex) {
+		if (targetIndex < 0) {
+			throw new IllegalArgumentException("targetIndex should be 0 or more");
+		}
+		if (targetClass.isInstance(parent) && targetIndex == 0) {
+			return targetClass.cast(parent);
+		}
+
+		if (parent instanceof ViewGroup group) {
+			int levelTargetIndex = targetIndex;
+			for (int i = 0; i < group.getChildCount(); i++) {
+				View child = group.getChildAt(i);
+				T result = findDescendantOfType(child, targetClass, targetIndex);
+				if (result != null) {
+					if (levelTargetIndex == 0) {
+						return result;
+					} else {
+						levelTargetIndex--;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 }
