@@ -68,7 +68,7 @@ public class MapHudCard extends MapBaseCard {
 		MapButton button = (MapButton) themedInflater.inflate(layoutId, mapHudLayout, false);
 		button.setAlwaysVisible(true);
 		button.setNightMode(nightMode);
-		button.setMapActivity(mapActivity);
+		button.setMapActivityAndUpdate(mapActivity);
 		button.setOnTouchListener(null);
 		button.setOnClickListener(null);
 		button.setOnLongClickListener(null);

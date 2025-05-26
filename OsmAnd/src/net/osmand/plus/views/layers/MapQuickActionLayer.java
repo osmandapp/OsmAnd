@@ -134,7 +134,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			for (QuickActionButtonState state : buttonStates) {
 				QuickActionButton button = (QuickActionButton) inflater.inflate(R.layout.map_quick_actions_button, mapHudLayout, false);
 				button.setButtonState(state);
-				button.setMapActivity(activity);
+				button.setMapActivityAndUpdate(activity);
 				button.setUseCustomPosition(true);
 
 				buttons.add(button);

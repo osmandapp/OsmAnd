@@ -10,7 +10,6 @@ import static net.osmand.plus.settings.enums.CompassVisibility.VISIBLE_IF_MAP_RO
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -66,8 +65,8 @@ public class CompassButton extends MapButton {
 	}
 
 	@Override
-	public void setMapActivity(@NonNull @NotNull MapActivity mapActivity) {
-		super.setMapActivity(mapActivity);
+	public void setMapActivityAndUpdate(@NonNull @NotNull MapActivity mapActivity) {
+		super.setMapActivityAndUpdate(mapActivity);
 		setupTouchListener();
 		setupAccessibilityActions();
 	}

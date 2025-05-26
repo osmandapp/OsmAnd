@@ -53,7 +53,7 @@ public class MapButtonCard extends MapBaseCard {
 		mapButton = (MapButton) themedInflater.inflate(buttonState.getDefaultLayoutId(), container, false);
 		mapButton.setAlwaysVisible(true);
 		mapButton.setNightMode(nightMode);
-		mapButton.setMapActivity(mapActivity);
+		mapButton.setMapActivityAndUpdate(mapActivity);
 		mapButton.setOnTouchListener(null);
 		mapButton.setOnClickListener(null);
 		mapButton.setOnLongClickListener(null);
