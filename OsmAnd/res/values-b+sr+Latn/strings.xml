@@ -5722,7 +5722,7 @@
     <string name="destination_first">Prvo odredište</string>
     <string name="poi_source">Izvor TOI</string>
     <string name="display_priority">Prioritet prikaza</string>
-    <string name="read_on_wiki">Pročitajte na Wikipediji</string>
+    <string name="read_on">Pročitajte na %1$s</string>
     <string name="wikidata">Wikidata</string>
     <string name="prediction_time">Vreme predviđanja</string>
     <string name="shared_string_no_animation">Nema animacije</string>

@@ -156,6 +156,7 @@
 		<attr name="dlg_btn_secondary_harmful_text" format="reference" />
 		<attr name="dlg_btn_transparent" format="reference" />
 		<attr name="dlg_btn_stroked" format="reference" />
+		<attr name="dlg_btn_stroked_secondary_content" format="reference" />
 		<attr name="dlg_btn_tertiary_text" format="reference" />
 		<attr name="dlg_btn_tertiary_harmful" format="reference" />
 		<attr name="stroked_btn_contour" format="reference" />
@@ -253,6 +254,7 @@
 		<attr name="android:autoSizeMinTextSize" />
 		<attr name="android:autoSizeStepGranularity" />
 		<attr name="android:autoSizeTextType" />
+		<attr name="android:textAllCaps" />
 
 		<attr name="outlineColor" format="color" />
 		<attr name="outlineWidth" format="dimension" />
@@ -315,8 +317,9 @@
 			<enum name="secondaryHarmful" value="3" />
 			<enum name="secondaryActive" value="4" />
 			<enum name="stroked" value="5" />
-			<enum name="tertiary" value="6" />
-			<enum name="tertiary_harmful" value="7" />
+			<enum name="stroked_secondary" value="6" />
+			<enum name="tertiary" value="7" />
+			<enum name="tertiary_harmful" value="8" />
 		</attr>
 		<attr name="dialogButtonTopMargin" format="dimension" />
 		<attr name="dialogButtonBottomMargin" format="dimension" />
