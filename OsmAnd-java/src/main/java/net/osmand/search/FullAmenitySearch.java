@@ -5,6 +5,8 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.MULTISEARCH;
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.Amenity.WIKIDATA;
+import static net.osmand.data.BaseDetailsObject.ObjectCompleteness.EMPTY;
+import static net.osmand.data.BaseDetailsObject.ObjectCompleteness.FULL;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 
 import net.osmand.CallbackWithObject;
@@ -17,6 +19,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.BaseDetailsObject.ObjectCompleteness;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
@@ -195,12 +198,15 @@ public class FullAmenitySearch {
         return null;
     }
 
-    public BaseDetailsObject findPlaceDetails(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
+	public BaseDetailsObject findPlaceDetails(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
+		if (latLon == null) {
+            return null;
+        }
         long id = obId == null ? -1 : obId;
-        int searchRadius = ObfConstants.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
-                ? AMENITY_SEARCH_RADIUS_FOR_RELATION
-                : AMENITY_SEARCH_RADIUS;
+        boolean relation = ObfConstants.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT);
+        int searchRadius = relation ? AMENITY_SEARCH_RADIUS_FOR_RELATION : AMENITY_SEARCH_RADIUS;
         QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
+
         List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false);
         long osmId = ObfConstants.isShiftedID(id) ? ObfConstants.getOsmId(id) : id >> AMENITY_ID_RIGHT_SHIFT;
         List<Amenity> filtered = new ArrayList<>();
@@ -214,13 +220,7 @@ public class FullAmenitySearch {
             }
         }
         if (!Algorithms.isEmpty(filtered)) {
-            BaseDetailsObject detailObj = new BaseDetailsObject(filtered.get(0), lang);
-            for (int i = 1; i < filtered.size(); i++) {
-                detailObj.addObject(filtered.get(i));
-                detailObj.combineData();
-            }
-            detailObj.dataEnvelope = BaseDetailsObject.DataEnvelope.FULL;
-            return detailObj;
+	        return new BaseDetailsObject(filtered, lang);
         }
         return null;
     }
@@ -248,7 +248,7 @@ public class FullAmenitySearch {
         return result;
     }
 
-    public Amenity findAmenityByName(Collection<Amenity> amenities, Collection<String> names) {
+    private Amenity findAmenityByName(Collection<Amenity> amenities, Collection<String> names) {
         if (!Algorithms.isEmpty(names) && !Algorithms.isEmpty(amenities)) {
             return amenities.stream()
                     .filter(amenity -> !amenity.isClosed())
@@ -482,7 +482,7 @@ public class FullAmenitySearch {
         return amenities;
     }
 
-    public List<BinaryMapDataObject> searchBinaryMapDataForAmenity(Amenity amenity, int limit) {
+    private List<BinaryMapDataObject> searchBinaryMapDataForAmenity(Amenity amenity, int limit) {
         long osmId = ObfConstants.getOsmObjectId(amenity);
         boolean checkId = osmId > 0;
         String wikidata = amenity.getWikidata();
@@ -581,12 +581,12 @@ public class FullAmenitySearch {
     }
 
     public Object fetchOtherData(Object object) {
-        if (object instanceof BaseDetailsObject baseDetailsObject && baseDetailsObject.dataEnvelope == BaseDetailsObject.DataEnvelope.FULL) {
+        if (object instanceof BaseDetailsObject baseDetailsObject && baseDetailsObject.getObjectCompletness() == FULL) {
             return object;
         }
         BaseDetailsObject detailsObject = null;
         Object clarifyObj = null;
-        if (object instanceof BaseDetailsObject bdo && bdo.dataEnvelope == BaseDetailsObject.DataEnvelope.EMPTY) {
+        if (object instanceof BaseDetailsObject bdo && bdo.getObjectCompletness() == EMPTY) {
             clarifyObj = bdo.getObjects().get(0);
         } else {
             clarifyObj = object;
@@ -594,7 +594,6 @@ public class FullAmenitySearch {
         detailsObject = findPlaceDetails(clarifyObj);
         if (detailsObject != null) {
             detailsObject.addObject(object);
-            detailsObject.combineData();
         }
 
         if (detailsObject == null) {

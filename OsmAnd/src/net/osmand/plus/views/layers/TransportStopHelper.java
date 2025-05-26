@@ -9,9 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.*;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.MapLayers;
@@ -30,8 +27,6 @@ public class TransportStopHelper {
 
 	private final OsmandApplication app;
 	private final MapLayers mapLayers;
-
-	private List<String> publicTransportTypes;
 
 	public TransportStopHelper(@NonNull Context context) {
 		app = (OsmandApplication) context.getApplicationContext();
@@ -222,27 +217,5 @@ public class TransportStopHelper {
 			}
 		}
 		return false;
-	}
-
-	@Nullable
-	public List<String> getPublicTransportTypes() {
-		if (publicTransportTypes == null && !app.isApplicationInitializing()) {
-			PoiCategory category = app.getPoiTypes().getPoiCategoryByName("transportation");
-			if (category != null) {
-				publicTransportTypes = new ArrayList<>();
-				List<PoiFilter> filters = category.getPoiFilters();
-				for (PoiFilter poiFilter : filters) {
-					if (poiFilter.getKeyName().equals("public_transport") || poiFilter.getKeyName().equals("water_transport")) {
-						for (PoiType poiType : poiFilter.getPoiTypes()) {
-							publicTransportTypes.add(poiType.getKeyName());
-							for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
-								publicTransportTypes.add(poiAdditionalType.getKeyName());
-							}
-						}
-					}
-				}
-			}
-		}
-		return publicTransportTypes;
 	}
 }

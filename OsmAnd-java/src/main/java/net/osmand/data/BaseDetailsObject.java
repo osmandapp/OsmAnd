@@ -2,14 +2,14 @@ package net.osmand.data;
 
 import static net.osmand.data.Amenity.DEFAULT_ELO;
 import static net.osmand.data.Amenity.WIKIDATA;
+import static net.osmand.data.BaseDetailsObject.ObjectCompleteness.EMPTY;
+import static net.osmand.data.BaseDetailsObject.ObjectCompleteness.FULL;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.MapPoiTypes.PoiTranslator;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.search.core.SearchResult.SearchResultResource;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -20,27 +20,26 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class BaseDetailsObject {
 
-	protected final Set<Long> osmIds = new HashSet<>();
-	protected final Set<String> wikidataIds = new HashSet<>();
-	protected final List<Object> objects = new ArrayList<>();
+	private static final int MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS = 30;
 
-	protected final String lang;
+	private final Set<Long> osmIds = new HashSet<>();
+	private final Set<String> wikidataIds = new HashSet<>();
+	private final List<Object> objects = new ArrayList<>();
 
-	protected String obfResourceName;
-	protected SearchResultResource searchResultResource;
+	private final String lang;
 
-	protected Amenity syntheticAmenity = new Amenity();
+	private String obfResourceName;
+	private SearchResultResource searchResultResource;
 
-	public static final int MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS = 30;
+	private Amenity syntheticAmenity = new Amenity();
 
+	private ObjectCompleteness objectCompleteness = EMPTY;
 
-	public enum DataEnvelope {
+	public enum ObjectCompleteness {
 		EMPTY,
 		COMBINED,
 		FULL
 	}
-
-	public DataEnvelope dataEnvelope = DataEnvelope.EMPTY;
 
 	public BaseDetailsObject(String lang) {
 		this.lang = lang;
@@ -49,7 +48,15 @@ public class BaseDetailsObject {
 	public BaseDetailsObject(Object object, String lang) {
 		this(lang != null ? lang : "en");
 		addObject(object);
-		combineData();
+	}
+
+	public BaseDetailsObject(List<Amenity> amenities, String lang) {
+		this(lang != null ? lang : "en");
+
+		for (Amenity amenity : amenities) {
+			addObject(amenity);
+		}
+		objectCompleteness = FULL;
 	}
 
 	public Amenity getSyntheticAmenity() {
@@ -64,9 +71,13 @@ public class BaseDetailsObject {
 		return objects;
 	}
 
-	public void addObject(Object object) {
+	public ObjectCompleteness getObjectCompletness() {
+		return objectCompleteness;
+	}
+
+	public boolean addObject(Object object) {
 		if (!isSupportedObjectType(object)) {
-			return;
+			return false;
 		}
 		if (object instanceof BaseDetailsObject detailsObject) {
 			for (Object obj : detailsObject.getObjects()) {
@@ -85,6 +96,8 @@ public class BaseDetailsObject {
 				wikidataIds.add(wikidata);
 			}
 		}
+		combineData();
+		return true;
 	}
 
 	private String getWikidata(Object object) {
@@ -115,43 +128,50 @@ public class BaseDetailsObject {
 
 		boolean osmIdEqual = osmId != null && osmId != -1 && osmIds.contains(osmId);
 		boolean wikidataEqual = !Algorithms.isEmpty(wikidata) && wikidataIds.contains(wikidata);
-		return osmIdEqual || wikidataEqual;
+
+		if (osmIdEqual || wikidataEqual) {
+			return true;
+		}
+		if (object instanceof RenderedObject renderedObject) {
+			return overlapPublicTransport(renderedObject);
+		}
+		return false;
 	}
 
-	public boolean overlapPublicTransport(Object object, Collection<String> publicTransportTypes) {
-		if (object instanceof RenderedObject renderedObject) {
-			Collection<TransportStop> stops = getTransportStops();
-			if (stops.isEmpty()) {
-				return false;
-			}
-			Map<String, String> tags = renderedObject.getTags();
-			String name = renderedObject.getName();
-			if (!Algorithms.isEmpty(name)) {
-				boolean namesEqual = false;
-				for (TransportStop stop : stops) {
-					if (stop.getName().contains(name) || name.contains(stop.getName())) {
-						namesEqual = true;
-						break;
-					}
-				}
-				if (!namesEqual) {
-					return false;
-				}
-			}
-			boolean isStop = false;
-			for (Map.Entry<String, String> entry : tags.entrySet()) {
-				String tag = entry.getKey();
-				String value = entry.getValue();
-				if (publicTransportTypes.contains(value) || publicTransportTypes.contains(tag + "_" + value)) {
-					isStop = true;
+	private boolean overlapPublicTransport(RenderedObject renderedObject) {
+		List<String> transportTypes = MapPoiTypes.getDefault().getPublicTransportTypes();
+
+		Collection<TransportStop> stops = getTransportStops();
+		if (Algorithms.isEmpty(stops) || Algorithms.isEmpty(transportTypes)) {
+			return false;
+		}
+		Map<String, String> tags = renderedObject.getTags();
+		String name = renderedObject.getName();
+		if (!Algorithms.isEmpty(name)) {
+			boolean namesEqual = false;
+			for (TransportStop stop : stops) {
+				if (stop.getName().contains(name) || name.contains(stop.getName())) {
+					namesEqual = true;
 					break;
 				}
 			}
-			if (isStop) {
-				for (TransportStop stop : stops) {
-					if (MapUtils.getDistance(stop.getLocation(), renderedObject.getLatLon()) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS) {
-						return true;
-					}
+			if (!namesEqual) {
+				return false;
+			}
+		}
+		boolean isStop = false;
+		for (Map.Entry<String, String> entry : tags.entrySet()) {
+			String tag = entry.getKey();
+			String value = entry.getValue();
+			if (transportTypes.contains(value) || transportTypes.contains(tag + "_" + value)) {
+				isStop = true;
+				break;
+			}
+		}
+		if (isStop) {
+			for (TransportStop stop : stops) {
+				if (MapUtils.getDistance(stop.getLocation(), renderedObject.getLatLon()) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS) {
+					return true;
 				}
 			}
 		}
@@ -193,7 +213,7 @@ public class BaseDetailsObject {
 		objects.add(renderedObject);
 	}
 
-	public void combineData() {
+	private void combineData() {
 		syntheticAmenity = new Amenity();
 
 		sortObjects();
@@ -225,13 +245,13 @@ public class BaseDetailsObject {
 		if (!Algorithms.isEmpty(contentLocales)) {
 			syntheticAmenity.updateContentLocales(contentLocales);
 		}
-		if (this.dataEnvelope.ordinal() < DataEnvelope.FULL.ordinal()) {
-			this.dataEnvelope = syntheticAmenity.getType() == null ? DataEnvelope.EMPTY : DataEnvelope.COMBINED;
+		if (this.objectCompleteness.ordinal() < FULL.ordinal()) {
+			this.objectCompleteness = syntheticAmenity.getType() == null ? EMPTY : ObjectCompleteness.COMBINED;
 		}
 		if (syntheticAmenity.getType() == null) {
 			syntheticAmenity.setType(MapPoiTypes.getDefault().getUserDefinedCategory());
 			syntheticAmenity.setSubType("");
-			this.dataEnvelope = DataEnvelope.EMPTY;
+			this.objectCompleteness = EMPTY;
 		}
 	}
 
@@ -302,16 +322,13 @@ public class BaseDetailsObject {
 		objects.sort((o1, o2) -> {
 			String l1 = getLangForTravel(o1);
 			String l2 = getLangForTravel(o2);
-			if (l2.equals(l1)) {
+
+			boolean preferred1 = Algorithms.stringsEqual(l1, lang);
+			boolean preferred2 = Algorithms.stringsEqual(l2, lang);
+			if (preferred1 == preferred2) {
 				return 0;
 			}
-			if (l2.equals(lang)) {
-				return 1;
-			}
-			if (l1.equals(lang)) {
-				return -1;
-			}
-			return 0;
+			return preferred1 ? -1 : 1;
 		});
 	}
 

@@ -17,7 +17,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class MapSelectionResult {
@@ -31,18 +30,15 @@ public class MapSelectionResult {
 	private final List<SelectedMapObject> allObjects = new ArrayList<>();
 	private final List<SelectedMapObject> processedObjects = new ArrayList<>();
 
-	private final Collection<String> publicTransportTypes;
-
 	protected LatLon objectLatLon;
 
 	public MapSelectionResult(@NonNull OsmandApplication app, @NonNull RotatedTileBox tileBox,
-							@NonNull PointF point, @Nullable Collection<String> publicTransportTypes) {
+			@NonNull PointF point) {
 		this.point = point;
 		this.tileBox = tileBox;
 		this.lang = LocaleHelper.getPreferredPlacesLanguage(app);
 		this.poiProvider = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 		this.pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(app.getOsmandMap().getMapView().getMapRenderer(), tileBox, point);
-		this.publicTransportTypes = publicTransportTypes;
 	}
 
 	@NonNull
@@ -90,7 +86,7 @@ public class MapSelectionResult {
 		}
 		List<SelectedMapObject> amenities = new ArrayList<>();
 		List<SelectedMapObject> supported = new ArrayList<>();
-		List<SelectedMapObject> stops= new ArrayList<>();
+		List<SelectedMapObject> stops = new ArrayList<>();
 		List<SelectedMapObject> other = new ArrayList<>();
 		for (SelectedMapObject selectedObject : allObjects) {
 			Object object = selectedObject.object();
@@ -108,7 +104,6 @@ public class MapSelectionResult {
 		List<BaseDetailsObject> detailsObjects = processObjects(amenities, stops, supported, other);
 		for (BaseDetailsObject object : detailsObjects) {
 			if (object.getObjects().size() > 1) {
-				object.combineData();
 				processedObjects.add(new SelectedMapObject(object, poiProvider));
 			} else {
 				processedObjects.add(new SelectedMapObject(object.getObjects().get(0), poiProvider));
@@ -153,10 +148,10 @@ public class MapSelectionResult {
 
 	@NonNull
 	private List<BaseDetailsObject> collectOverlappedObjects(@NonNull Object object,
-															@NonNull List<BaseDetailsObject> detailsObjects) {
+			@NonNull List<BaseDetailsObject> detailsObjects) {
 		List<BaseDetailsObject> overlapped = new ArrayList<>();
 		for (BaseDetailsObject detailsObject : detailsObjects) {
-			if (detailsObject.overlapsWith(object) || detailsObject.overlapPublicTransport(object, publicTransportTypes)) {
+			if (detailsObject.overlapsWith(object)) {
 				overlapped.add(detailsObject);
 			}
 		}

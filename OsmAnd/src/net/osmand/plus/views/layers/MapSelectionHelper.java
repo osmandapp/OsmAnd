@@ -115,7 +115,7 @@ public class MapSelectionHelper {
 	@NonNull
 	MapSelectionResult collectObjectsFromMap(@NonNull PointF point,
 			@NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
-		MapSelectionResult result = new MapSelectionResult(app, tileBox, point, transportStopHelper.getPublicTransportTypes());
+		MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 
 		collectObjectsFromLayers(result, showUnknownLocation, false);
 		collectObjectsFromMap(result, point, tileBox);
@@ -152,7 +152,7 @@ public class MapSelectionHelper {
 		Map<LatLon, BackgroundType> touchedMapObjectsSmall = new HashMap<>();
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider) {
-				MapSelectionResult result = new MapSelectionResult(app, tileBox, point, null);
+				MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 				provider.collectObjectsFromPoint(result, unknownLocation, true);
 				for (SelectedMapObject selectedObject : result.getAllObjects()) {
 					Object object = selectedObject.object();
