@@ -15,8 +15,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
@@ -170,9 +169,9 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
-		FullAmenitySearch fullAmenitySearch = app.getResourceManager().getAmenitySearcher();
-		fullAmenitySearch.updateLangAndTransliterate(lang, transliterate);
-		return fullAmenitySearch.findAmenity(new LatLon(lat, lon), null, Collections.singletonList(name), null);
+		AmenitySearcher amenitySearch = app.getResourceManager().getAmenitySearcher();
+		amenitySearch.updateLangAndTransliterate(lang, transliterate);
+		return amenitySearch.searchDetailsAmenity(new LatLon(lat, lon), null, Collections.singletonList(name), null);
 	}
 
 	public static class SearchWptAPI extends SearchBaseAPI {

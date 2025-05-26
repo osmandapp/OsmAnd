@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.OnCompleteCallback;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
@@ -58,7 +59,11 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		this.selectedObjects.addAll(selectedObjects);
 		objects.clear();
 		for (SelectedMapObject selectedMapObject : selectedObjects) {
-			Object object = getApplication().getResourceManager().getAmenitySearcher().fetchOtherData(selectedMapObject.object());
+			Object object = selectedMapObject.object();
+			BaseDetailsObject detailsObject = getApplication().getResourceManager().getAmenitySearcher().searchDetailsObject(object);
+			if (detailsObject != null) {
+				object = detailsObject;
+			}
 			IContextMenuProvider provider = selectedMapObject.provider();
 
 			MenuObject menuObject = MenuObjectUtils.createMenuObject(object, provider, latLon, getMapActivity());

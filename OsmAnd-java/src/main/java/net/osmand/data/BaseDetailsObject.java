@@ -2,8 +2,6 @@ package net.osmand.data;
 
 import static net.osmand.data.Amenity.DEFAULT_ELO;
 import static net.osmand.data.Amenity.WIKIDATA;
-import static net.osmand.data.BaseDetailsObject.ObjectCompleteness.EMPTY;
-import static net.osmand.data.BaseDetailsObject.ObjectCompleteness.FULL;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -33,9 +31,9 @@ public class BaseDetailsObject {
 
 	private Amenity syntheticAmenity = new Amenity();
 
-	private ObjectCompleteness objectCompleteness = EMPTY;
+	private ObjectCompleteness objectCompleteness = ObjectCompleteness.EMPTY;
 
-	public enum ObjectCompleteness {
+	private enum ObjectCompleteness {
 		EMPTY,
 		COMBINED,
 		FULL
@@ -56,7 +54,7 @@ public class BaseDetailsObject {
 		for (Amenity amenity : amenities) {
 			addObject(amenity);
 		}
-		objectCompleteness = FULL;
+		objectCompleteness = ObjectCompleteness.FULL;
 	}
 
 	public Amenity getSyntheticAmenity() {
@@ -71,8 +69,12 @@ public class BaseDetailsObject {
 		return objects;
 	}
 
-	public ObjectCompleteness getObjectCompletness() {
-		return objectCompleteness;
+	public boolean isObjectFull() {
+		return objectCompleteness == ObjectCompleteness.FULL || objectCompleteness == ObjectCompleteness.COMBINED;
+	}
+
+	public boolean isObjectEmpty() {
+		return objectCompleteness == ObjectCompleteness.EMPTY;
 	}
 
 	public boolean addObject(Object object) {
@@ -245,13 +247,13 @@ public class BaseDetailsObject {
 		if (!Algorithms.isEmpty(contentLocales)) {
 			syntheticAmenity.updateContentLocales(contentLocales);
 		}
-		if (this.objectCompleteness.ordinal() < FULL.ordinal()) {
-			this.objectCompleteness = syntheticAmenity.getType() == null ? EMPTY : ObjectCompleteness.COMBINED;
+		if (this.objectCompleteness.ordinal() < ObjectCompleteness.FULL.ordinal()) {
+			this.objectCompleteness = syntheticAmenity.getType() == null ? ObjectCompleteness.EMPTY : ObjectCompleteness.COMBINED;
 		}
 		if (syntheticAmenity.getType() == null) {
 			syntheticAmenity.setType(MapPoiTypes.getDefault().getUserDefinedCategory());
 			syntheticAmenity.setSubType("");
-			this.objectCompleteness = EMPTY;
+			this.objectCompleteness = ObjectCompleteness.EMPTY;
 		}
 	}
 

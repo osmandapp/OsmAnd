@@ -35,7 +35,6 @@ import net.osmand.data.*;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.ConfigureMapUtils;
-import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -53,7 +52,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.router.network.NetworkRouteSelector;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -284,6 +283,7 @@ public class MapSelectionHelper {
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
 			boolean osmRoutesAlreadyAdded = false;
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
+			AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
 				if (symbolInfo.getMapSymbol().getIgnoreClick()) {
@@ -325,7 +325,7 @@ public class MapSelectionHelper {
 					List<String> names = getValues(jniAmenity.getLocalizedNames());
 					names.add(jniAmenity.getNativeName());
 					long id = jniAmenity.getId().getId().longValue();
-					detailsObject = findPlaceDetails(result.objectLatLon, id, names, null);
+					detailsObject = amenitySearcher.searchDetailsObject(result.objectLatLon, id, names, null);
 				} else {
 					MapObject mapObject;
 					try {
@@ -379,7 +379,7 @@ public class MapSelectionHelper {
 										addRenderedObject(result, symbolInfo, obfMapObject, tags);
 									} else {
 										long id = obfMapObject.getId().getId().longValue();
-										detailsObject = findPlaceDetails(latLon, id, getNames(obfMapObject, tags), tags.get(WIKIDATA));
+										detailsObject = amenitySearcher.searchDetailsObject(latLon, id, getNames(obfMapObject, tags), tags.get(WIKIDATA));
 										if (detailsObject != null) {
 											detailsObject.setMapIconName(getMapIconName(symbolInfo));
 											addGeometry(detailsObject, obfMapObject);
@@ -507,16 +507,6 @@ public class MapSelectionHelper {
 		}
 	}
 
-	@Nullable
-	private BaseDetailsObject findPlaceDetails(LatLon latLon, long id, @Nullable Collection<String> names, String wikidata) {
-		FullAmenitySearch fullAmenitySearch = app.getResourceManager().getAmenitySearcher();
-		BaseDetailsObject base = fullAmenitySearch.findPlaceDetails(latLon, id, names, wikidata);
-		if (base != null) {
-			return new BaseDetailsObject(base, LocaleHelper.getPreferredPlacesLanguage(app));
-		}
-		return null;
-	}
-
 	private boolean isUniqueGpxFileName(@NonNull List<SelectedMapObject> selectedObjects,
 			@NonNull String gpxFileName) {
 		for (SelectedMapObject selectedObject : selectedObjects) {
@@ -628,7 +618,8 @@ public class MapSelectionHelper {
 
 	private boolean addAmenity(@NonNull MapSelectionResult result,
 			@NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
-		BaseDetailsObject detail = findPlaceDetails(searchLatLon, object.getId(), object.getOriginalNames(), null);
+		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+		BaseDetailsObject detail = amenitySearcher.searchDetailsObject(searchLatLon, object.getId(), object.getOriginalNames(), null);
 		if (detail != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
 				detail.setX(object.getX());

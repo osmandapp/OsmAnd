@@ -5,8 +5,6 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.MULTISEARCH;
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.Amenity.WIKIDATA;
-import static net.osmand.data.BaseDetailsObject.ObjectCompleteness.EMPTY;
-import static net.osmand.data.BaseDetailsObject.ObjectCompleteness.FULL;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 
 import net.osmand.CallbackWithObject;
@@ -34,9 +32,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-public class FullAmenitySearch {
+public class AmenitySearcher {
 
     protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<>();
     private final TravelFileVisibility travelFileVisibility;
@@ -49,7 +48,7 @@ public class FullAmenitySearch {
     private boolean transliterate;
     private final MapPoiTypes mapPoiTypes; // nullable
 
-    public FullAmenitySearch(String lang, boolean transliterate, MapPoiTypes mapPoiTypes,
+    public AmenitySearcher(String lang, boolean transliterate, MapPoiTypes mapPoiTypes,
                              TravelFileVisibility travelFileVisibility) {
         this.travelFileVisibility = travelFileVisibility;
         this.lang = lang;
@@ -100,13 +99,6 @@ public class FullAmenitySearch {
         return searchAmenities(filter, null, rect.top, rect.left, rect.bottom, rect.right, -1, includeTravel, null);
     }
 
-    public List<Amenity> searchAmenities(BinaryMapIndexReader.SearchPoiTypeFilter filter, double top,
-                                         double left, double bottom,
-                                         double right, int zoom, boolean includeTravel,
-                                         ResultMatcher<Amenity> matcher) {
-        return searchAmenities(filter, null, top, left, bottom, right, zoom, includeTravel, matcher);
-    }
-
     public List<Amenity> searchAmenities(BinaryMapIndexReader.SearchPoiTypeFilter filter,
                                          BinaryMapIndexReader.SearchPoiAdditionalFilter additionalFilter, double topLatitude,
                                          double leftLongitude, double bottomLatitude,
@@ -155,12 +147,12 @@ public class FullAmenitySearch {
         return actualAmenities;
     }
 
-    public Amenity findAmenity(LatLon latLon, Long id, Collection<String> names, String wikidata) {
-        BaseDetailsObject detail = findPlaceDetails(latLon, id, names, wikidata);
+    public Amenity searchDetailsAmenity(LatLon latLon, Long id, Collection<String> names, String wikidata) {
+        BaseDetailsObject detail = searchDetailsObject(latLon, id, names, wikidata);
         return detail != null ? detail.getSyntheticAmenity() : null;
     }
 
-    public BaseDetailsObject findPlaceDetails(Object object) {
+    public BaseDetailsObject searchDetailsObject(Object object) {
         LatLon latLon = null;
         Long id = null;
         Collection<String> names = null;
@@ -184,13 +176,25 @@ public class FullAmenitySearch {
             names = stop.getOtherNames();
             names.add(stop.getName());
         }
-        if (latLon != null) {
-            return findPlaceDetails(latLon, id, names, wikidata);
+        if (object instanceof BaseDetailsObject detailsObject) {
+            if (detailsObject.isObjectFull()) {
+                completeGeometry(detailsObject, detailsObject.getObjects().get(0));
+                return detailsObject;
+            }
+            if (!detailsObject.getObjects().isEmpty()) {
+                Object obj = detailsObject.getObjects().get(0);
+                return searchDetailsObject(obj);
+            }
         }
-        return null;
+        BaseDetailsObject detailsObject = null;
+        if (latLon != null) {
+            detailsObject = searchDetailsObject(latLon, id, names, wikidata);
+        }
+        completeGeometry(detailsObject, object);
+        return detailsObject;
     }
 
-	public BaseDetailsObject findPlaceDetails(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
+	public BaseDetailsObject searchDetailsObject(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
 		if (latLon == null) {
             return null;
         }
@@ -204,12 +208,12 @@ public class FullAmenitySearch {
         long osmId = ObfConstants.isShiftedID(id) ? ObfConstants.getOsmId(id) : id >> AMENITY_ID_RIGHT_SHIFT;
         List<Amenity> filtered = new ArrayList<>();
         if (osmId > 0 || wikidata != null) {
-            filtered = findAmenitiesByOsmIdOrWikidata(amenities, osmId, latLon, wikidata);
+            filtered = filterByOsmIdOrWikidata(amenities, osmId, latLon, wikidata);
         }
         if (Algorithms.isEmpty(filtered) && !Algorithms.isEmpty(names)) {
             Amenity amenity = findByName(amenities, names, latLon);
             if (amenity != null) {
-                filtered = findAmenitiesByOsmIdOrWikidata(amenities, amenity.getOsmId(), amenity.getLocation(), amenity.getWikidata());
+                filtered = filterByOsmIdOrWikidata(amenities, amenity.getOsmId(), amenity.getLocation(), amenity.getWikidata());
             }
         }
         if (!Algorithms.isEmpty(filtered)) {
@@ -218,7 +222,7 @@ public class FullAmenitySearch {
         return null;
     }
 
-    private List<Amenity> findAmenitiesByOsmIdOrWikidata(Collection<Amenity> amenities, long id, LatLon point, String wikidata) {
+    private List<Amenity> filterByOsmIdOrWikidata(Collection<Amenity> amenities, long id, LatLon point, String wikidata) {
         List<Amenity> result = new ArrayList<>();
         double minDist = AMENITY_SEARCH_RADIUS_FOR_RELATION * 4;
         for (Amenity amenity : amenities) {
@@ -540,9 +544,9 @@ public class FullAmenitySearch {
         return list;
     }
 
-    public void searchAmenityAsync(LatLon latLon, long id, Collection<String> names, String wikidata, CallbackWithObject<Amenity> callbackWithAmenity) {
+    public void searchDetailsAmenityAsync(LatLon latLon, long id, Collection<String> names, String wikidata, CallbackWithObject<Amenity> callbackWithAmenity) {
         singleThreadedExecutor.submit(() -> {
-            Amenity amenity = findAmenity(latLon, id, names, wikidata);
+            Amenity amenity = searchDetailsAmenity(latLon, id, names, wikidata);
             callbackWithAmenity.processResult(amenity);
         });
     }
@@ -557,7 +561,7 @@ public class FullAmenitySearch {
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
             long osmId = ObfConstants.getOsmObjectId(renderedObject);
-            BaseDetailsObject detailsObject = findPlaceDetails(finalLatLon,
+            BaseDetailsObject detailsObject = searchDetailsObject(finalLatLon,
                     osmId << AMENITY_ID_RIGHT_SHIFT, renderedObject.getOriginalNames(), wikidata);
             if (detailsObject != null) {
                 Amenity amenity = detailsObject.getSyntheticAmenity();
@@ -568,45 +572,42 @@ public class FullAmenitySearch {
         });
     }
 
-    public void fetchOtherDataAsync(Object object, CallbackWithObject<Object> callback) {
+    public void searchDetailsObjectAsync(Object object, CallbackWithObject<Object> callback) {
         singleThreadedExecutor.submit(() -> {
-            Object fethched = fetchOtherData(object);
-            callback.processResult(fethched);
+            Object fetched = searchDetailsObject(object);
+            callback.processResult(fetched == null ? object : fetched);
         });
     }
 
-    public Object fetchOtherData(Object object) {
-        if (object instanceof BaseDetailsObject baseDetailsObject && baseDetailsObject.getObjectCompletness() == FULL) {
-            return object;
-        }
-        BaseDetailsObject detailsObject = null;
-        Object clarifyObj = null;
-        if (object instanceof BaseDetailsObject bdo && bdo.getObjectCompletness() == EMPTY) {
-            clarifyObj = bdo.getObjects().get(0);
-        } else {
-            clarifyObj = object;
-        }
-        detailsObject = findPlaceDetails(clarifyObj);
-        if (detailsObject != null) {
-            detailsObject.addObject(object);
-        }
-
+    private void completeGeometry(BaseDetailsObject detailsObject, Object object) {
         if (detailsObject == null) {
-            return object;
+            return;
         }
-
-        if (!detailsObject.hasGeometry()) {
-            detailsObject.processPolygonCoordinates(object);
-            if (!detailsObject.hasGeometry()) {
-                List<BinaryMapDataObject> dataObjects = searchBinaryMapDataForAmenity(detailsObject.getSyntheticAmenity(), 1);
-                for (BinaryMapDataObject dataObject : dataObjects) {
-                    if (copyCoordinates(detailsObject, dataObject)) {
-                        break;
-                    }
+        TIntArrayList xx = null;
+        TIntArrayList yy = null;
+        if (object instanceof Amenity amenity) {
+            xx = amenity.getX();
+            yy = amenity.getY();
+        }
+        if (object instanceof RenderedObject renderedObject) {
+            xx = renderedObject.getX();
+            yy = renderedObject.getY();
+        }
+        if (object instanceof BaseDetailsObject base) {
+            xx = base.getSyntheticAmenity().getX();
+            yy = base.getSyntheticAmenity().getY();
+        }
+        if (xx != null && yy != null && !xx.isEmpty()) {
+            detailsObject.setX(xx);
+            detailsObject.setY(yy);
+        } else {
+            List<BinaryMapDataObject> dataObjects = searchBinaryMapDataForAmenity(detailsObject.getSyntheticAmenity(), 1);
+            for (BinaryMapDataObject dataObject : dataObjects) {
+                if (copyCoordinates(detailsObject, dataObject)) {
+                    break;
                 }
             }
         }
-        return detailsObject;
     }
 
     private boolean copyCoordinates(BaseDetailsObject detailsObject, BinaryMapDataObject mapObject) {

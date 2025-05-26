@@ -341,7 +341,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 		OsmandApplication app = mapActivity.getMyApplication();
 		if (!(object instanceof RenderedObject)) {
-			object = app.getResourceManager().getAmenitySearcher().fetchOtherData(object);
+			BaseDetailsObject detailsObject = app.getResourceManager().getAmenitySearcher().searchDetailsObject(object);
+			if (detailsObject != null) {
+				object = detailsObject;
+			}
 		}
 
 		Object thisObject = getObject();

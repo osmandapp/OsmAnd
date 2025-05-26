@@ -24,7 +24,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -191,7 +191,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		for (City.CityType t : City.CityType.values()) {
 			cityTypes.put(t.name().toLowerCase(Locale.ROOT), t);
 		}
-		FullAmenitySearch searcher = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
 		List<Amenity> cities = searcher.searchAmenities(new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {

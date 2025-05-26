@@ -55,7 +55,7 @@ import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.router.TransportStopsRouteReader;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -157,7 +157,7 @@ public class ResourceManager {
 	private boolean depthContours;
 	private boolean indexesLoadedOnStart;
 
-	private final FullAmenitySearch fullAmenitySearch;
+	private final AmenitySearcher amenitySearcher;
 
 	public ResourceManager(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -190,7 +190,7 @@ public class ResourceManager {
 
 		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-		fullAmenitySearch = new FullAmenitySearch(lang, transliterate, app.getPoiTypes(),
+		amenitySearcher = new AmenitySearcher(lang, transliterate, app.getPoiTypes(),
 				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get());
 	}
 
@@ -635,7 +635,7 @@ public class ResourceManager {
 					boolean isTravelObf = resource.getFileName().endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
 					if (mapReader.containsPoiData()) {
 						AmenityIndexRepositoryBinary amenityResource = new AmenityIndexRepositoryBinary(f, resource, app);
-						fullAmenitySearch.addAmenityRepository(fileName, amenityResource);
+						amenitySearcher.addAmenityRepository(fileName, amenityResource);
 						if (isTravelObf) {
 							// reuse until new BinaryMapReaderResourceType.TRAVEL_GPX
 							travelRepositories.put(resource.getFileName(), amenityResource);
@@ -672,7 +672,7 @@ public class ResourceManager {
 			}
 		}
 		Map<PoiCategory, Map<String, PoiType>> toAddPoiTypes = new HashMap<>();
-		for (AmenityIndexRepository repo : fullAmenitySearch.getAmenityRepositories()) {
+		for (AmenityIndexRepository repo : amenitySearcher.getAmenityRepositories()) {
 			Map<String, List<String>> categories = ((AmenityIndexRepositoryBinary) repo).getDeltaPoiCategories();
 			if (!categories.isEmpty()) {
 				for (Map.Entry<String, List<String>> entry : categories.entrySet()) {
@@ -722,7 +722,7 @@ public class ResourceManager {
 	}
 
 	public List<AmenityIndexRepository> getTravelGpxRepositories() {
-		return fullAmenitySearch.getAmenityRepositories(true);
+		return amenitySearcher.getAmenityRepositories(true);
 	}
 
 	public List<AmenityIndexRepository> getWikivoyageRepositories() {
@@ -745,7 +745,7 @@ public class ResourceManager {
 
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<AmenityIndexRepository> getAmenityRepositories() {
-		return fullAmenitySearch.getAmenityRepositories(true);
+		return amenitySearcher.getAmenityRepositories(true);
 	}
 
 	@NonNull
@@ -763,7 +763,7 @@ public class ResourceManager {
 	}
 
 	public AmenityIndexRepositoryBinary getAmenityRepositoryByFileName(String filename) {
-		return (AmenityIndexRepositoryBinary) fullAmenitySearch.getAmenityRepository(filename);
+		return (AmenityIndexRepositoryBinary) amenitySearcher.getAmenityRepository(filename);
 	}
 
 	public RegionAddressRepository getRegionRepository(String name) {
@@ -855,7 +855,7 @@ public class ResourceManager {
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
 
 	public void closeFile(String fileName) {
-		fullAmenitySearch.removeAmenityRepository(fileName);
+		amenitySearcher.removeAmenityRepository(fileName);
 		addressMap.remove(fileName);
 		transportRepositories.remove(fileName);
 		indexFileNames.remove(fileName);
@@ -889,7 +889,7 @@ public class ResourceManager {
 		transportRepositories.clear();
 		travelRepositories.clear();
 		addressMap.clear();
-		fullAmenitySearch.clearAmenityRepositories();
+		amenitySearcher.clearAmenityRepositories();
 		for (BinaryMapReaderResource res : fileReaders.values()) {
 			res.close();
 		}
@@ -1085,7 +1085,7 @@ public class ResourceManager {
 		return modifiedTime != null && file.setLastModified(modifiedTime);
 	}
 
-	public FullAmenitySearch getAmenitySearcher() {
-		return fullAmenitySearch;
+	public AmenitySearcher getAmenitySearcher() {
+		return amenitySearcher;
 	}
 }
