@@ -5569,4 +5569,8 @@
     <string name="show_debug_tile">Taispeáin faisnéis tíleanna</string>
     <string name="show_debug_tile_description">Taispeáin faisnéis faoi shiombailí léarscáile gach tíle</string>
     <string name="show_symbols_debug_info">Taispeáin eolas dífhabhtaithe siombailí</string>
+    <string name="read_on">Léigh ar %1$s</string>
+    <string name="unit_of_temperature_description">Cuirfear na haonaid roghnaithe i bhfeidhm ar na sonraí go léir a bhaineann le teocht sa phróifíl reatha.</string>
+    <string name="deactivated_map">Léarscáil díghníomhachtaithe</string>
+    <string name="suggest_activate_map_msg">Tá léarscáil %1$s díghníomhachtaithe,\ngníomhachtaigh chun an ceantar seo a fheiceáil.</string>
 </resources>
