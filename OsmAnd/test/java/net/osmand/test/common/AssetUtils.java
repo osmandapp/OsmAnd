@@ -52,8 +52,9 @@ public class AssetUtils {
 		InstrumentationRegistry.getInstrumentation().sendStatus(0, results);
 
 		String[] files = testContext.getAssets().list("");
-		Log.d("TAG", "*copyAssetToFile: List " + files.length);
+		Log.i("TAG", "*copyAssetToFile: List " + files.length);
 		System.out.println("copyAssetToFile: List " + files.length);
+		System.console().printf("log from test");
 
 		for (int i = 0; i < files.length; i++) {
 			Log.d("TAG", "*copyAssetToFile: List " + files[0]);
