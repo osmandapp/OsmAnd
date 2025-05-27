@@ -16,7 +16,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.BaseDetailedObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
@@ -36,7 +36,6 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class AmenitySearcher {
-
     protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<>();
     private final TravelFileVisibility travelFileVisibility;
     private ThreadPoolExecutor singleThreadedExecutor;
@@ -148,11 +147,11 @@ public class AmenitySearcher {
     }
 
     public Amenity searchDetailsAmenity(LatLon latLon, Long id, Collection<String> names, String wikidata) {
-        BaseDetailsObject detail = searchDetailsObject(latLon, id, names, wikidata);
+        BaseDetailedObject detail = searchDetailsObject(latLon, id, names, wikidata);
         return detail != null ? detail.getSyntheticAmenity() : null;
     }
 
-    public BaseDetailsObject searchDetailsObject(Object object) {
+    public BaseDetailedObject searchDetailsObject(Object object) {
         LatLon latLon = null;
         Long id = null;
         Collection<String> names = null;
@@ -176,7 +175,7 @@ public class AmenitySearcher {
             names = stop.getOtherNames();
             names.add(stop.getName());
         }
-        if (object instanceof BaseDetailsObject detailsObject) {
+        if (object instanceof BaseDetailedObject detailsObject) {
             if (detailsObject.isObjectFull()) {
                 completeGeometry(detailsObject, detailsObject.getObjects().get(0));
                 return detailsObject;
@@ -186,7 +185,7 @@ public class AmenitySearcher {
                 return searchDetailsObject(obj);
             }
         }
-        BaseDetailsObject detailsObject = null;
+        BaseDetailedObject detailsObject = null;
         if (latLon != null) {
             detailsObject = searchDetailsObject(latLon, id, names, wikidata);
         }
@@ -194,7 +193,7 @@ public class AmenitySearcher {
         return detailsObject;
     }
 
-	public BaseDetailsObject searchDetailsObject(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
+	public BaseDetailedObject searchDetailsObject(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
 		if (latLon == null) {
             return null;
         }
@@ -217,7 +216,7 @@ public class AmenitySearcher {
             }
         }
         if (!Algorithms.isEmpty(filtered)) {
-	        return new BaseDetailsObject(filtered, lang);
+	        return new BaseDetailedObject(filtered, lang);
         }
         return null;
     }
@@ -551,7 +550,7 @@ public class AmenitySearcher {
         });
     }
 
-    public void searchBaseDetailsObjectAsync(RenderedObject renderedObject, CallbackWithObject<BaseDetailsObject> callback) {
+    public void searchBaseDetailsObjectAsync(RenderedObject renderedObject, CallbackWithObject<BaseDetailedObject> callback) {
         LatLon latLon = renderedObject.getLatLon();
         if (latLon == null) {
             callback.processResult(null);
@@ -561,7 +560,7 @@ public class AmenitySearcher {
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
             long osmId = ObfConstants.getOsmObjectId(renderedObject);
-            BaseDetailsObject detailsObject = searchDetailsObject(finalLatLon,
+            BaseDetailedObject detailsObject = searchDetailsObject(finalLatLon,
                     osmId << AMENITY_ID_RIGHT_SHIFT, renderedObject.getOriginalNames(), wikidata);
             if (detailsObject != null) {
                 Amenity amenity = detailsObject.getSyntheticAmenity();
@@ -579,7 +578,7 @@ public class AmenitySearcher {
         });
     }
 
-    private void completeGeometry(BaseDetailsObject detailsObject, Object object) {
+    private void completeGeometry(BaseDetailedObject detailsObject, Object object) {
         if (detailsObject == null) {
             return;
         }
@@ -593,7 +592,7 @@ public class AmenitySearcher {
             xx = renderedObject.getX();
             yy = renderedObject.getY();
         }
-        if (object instanceof BaseDetailsObject base) {
+        if (object instanceof BaseDetailedObject base) {
             xx = base.getSyntheticAmenity().getX();
             yy = base.getSyntheticAmenity().getY();
         }
@@ -610,7 +609,7 @@ public class AmenitySearcher {
         }
     }
 
-    private boolean copyCoordinates(BaseDetailsObject detailsObject, BinaryMapDataObject mapObject) {
+    private boolean copyCoordinates(BaseDetailedObject detailsObject, BinaryMapDataObject mapObject) {
         int pointsLength = mapObject.getPointsLength();
         for (int i = 0; i < pointsLength; i++) {
             detailsObject.addX(mapObject.getPoint31XTile(i));
