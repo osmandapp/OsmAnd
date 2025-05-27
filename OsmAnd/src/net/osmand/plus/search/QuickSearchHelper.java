@@ -168,10 +168,12 @@ public class QuickSearchHelper implements ResourceListener {
 		core.getSearchSettings().setRegions(app.getRegions());
 	}
 
-	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
+	public Amenity findAmenity(String name, double lat, double lon) {
 		AmenitySearcher amenitySearch = app.getResourceManager().getAmenitySearcher();
-		amenitySearch.updateLangAndTransliterate(lang, transliterate);
-		return amenitySearch.searchDetailedAmenity(new LatLon(lat, lon), null, Collections.singletonList(name), null);
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		AmenitySearcher.Request request =
+				new AmenitySearcher.Request(new LatLon(lat, lon), null, null, Collections.singletonList(name));
+		return amenitySearch.searchDetailedAmenity(request, settings);
 	}
 
 	public static class SearchWptAPI extends SearchBaseAPI {

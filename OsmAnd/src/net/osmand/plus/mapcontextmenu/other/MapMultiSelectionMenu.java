@@ -10,11 +10,13 @@ import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -60,8 +62,10 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		objects.clear();
 		for (SelectedMapObject selectedMapObject : selectedObjects) {
 			Object object = selectedMapObject.object();
-			BaseDetailsObject detailsObject =
-					getApplication().getResourceManager().getAmenitySearcher().searchDetailedObject(object);
+			ResourceManager resourceManager = getApplication().getResourceManager();
+			AmenitySearcher searcher = resourceManager.getAmenitySearcher();
+			AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
+			BaseDetailsObject detailsObject = searcher.searchDetailedObject(object, settings);
 			if (detailsObject != null) {
 				object = detailsObject;
 			}

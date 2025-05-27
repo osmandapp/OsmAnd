@@ -325,7 +325,9 @@ public class MapSelectionHelper {
 					List<String> names = getValues(jniAmenity.getLocalizedNames());
 					names.add(jniAmenity.getNativeName());
 					long id = jniAmenity.getId().getId().longValue();
-					detailsObject = amenitySearcher.searchDetailedObject(result.objectLatLon, id, names, null);
+					AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+					AmenitySearcher.Request request = new AmenitySearcher.Request(result.objectLatLon, id, null, names);
+					detailsObject = amenitySearcher.searchDetailedObject(request, settings);
 				} else {
 					MapObject mapObject;
 					try {
@@ -379,8 +381,11 @@ public class MapSelectionHelper {
 										addRenderedObject(result, symbolInfo, obfMapObject, tags);
 									} else {
 										long id = obfMapObject.getId().getId().longValue();
-										detailsObject = amenitySearcher.searchDetailedObject(latLon, id,
-												getNames(obfMapObject, tags), tags.get(WIKIDATA));
+										AmenitySearcher.Settings settings =
+												app.getResourceManager().getDefaultAmenitySearchSettings();
+										AmenitySearcher.Request request = new AmenitySearcher.Request(latLon, id,
+												tags.get(WIKIDATA), getNames(obfMapObject, tags));
+										detailsObject = amenitySearcher.searchDetailedObject(request, settings);
 										if (detailsObject != null) {
 											detailsObject.setMapIconName(getMapIconName(symbolInfo));
 											addGeometry(detailsObject, obfMapObject);
@@ -620,8 +625,10 @@ public class MapSelectionHelper {
 	private boolean addAmenity(@NonNull MapSelectionResult result,
 			@NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
 		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
-		BaseDetailsObject detail = amenitySearcher.searchDetailedObject(searchLatLon, object.getId(),
-				object.getOriginalNames(), null);
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		AmenitySearcher.Request request = new AmenitySearcher.Request(
+				searchLatLon, object.getId(), null, object.getOriginalNames());
+		BaseDetailsObject detail = amenitySearcher.searchDetailedObject(request, settings);
 		if (detail != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
 				detail.setX(object.getX());

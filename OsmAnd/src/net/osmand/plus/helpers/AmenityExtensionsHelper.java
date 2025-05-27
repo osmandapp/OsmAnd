@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -57,7 +58,10 @@ public class AmenityExtensionsHelper {
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
 		LatLon latLon = new LatLon(lat, lon);
 		List<String> names = Collections.singletonList(nameEn);
-		return app.getResourceManager().getAmenitySearcher().searchDetailedAmenity(latLon, null, names, null);
+		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		AmenitySearcher.Request request = new AmenitySearcher.Request(latLon, null, null, names);
+		return searcher.searchDetailedAmenity(request, settings);
 	}
 
 	@NonNull

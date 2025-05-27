@@ -31,43 +31,33 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class AmenitySearcher {
 
+    public record Request(LatLon latLon, Long osmId, String wikidata, Collection<String> names) {}
+    public record Settings(Supplier<String> language, Supplier<Boolean> transliterate, Predicate<String> fileVisibility) {}
+
     protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<>();
-    private final TravelFileVisibility travelFileVisibility;
     private ThreadPoolExecutor singleThreadedExecutor;
     private LinkedBlockingQueue<Runnable> taskQueue;
 
     private static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
-    private String lang;
-    private boolean transliterate;
     private final MapPoiTypes mapPoiTypes; // nullable
 
-    public AmenitySearcher(String lang, boolean transliterate, MapPoiTypes mapPoiTypes,
-                             TravelFileVisibility travelFileVisibility) {
-        this.travelFileVisibility = travelFileVisibility;
-        this.lang = lang;
-        this.transliterate = transliterate;
+    public AmenitySearcher(MapPoiTypes mapPoiTypes) {
         this.mapPoiTypes = mapPoiTypes;
         taskQueue = new LinkedBlockingQueue<Runnable>();
         singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
     }
 
-    public void updateLangAndTransliterate(String lang, boolean transliterate) {
-        this.lang = lang;
-        this.transliterate = transliterate;
-    }
-
-    public interface TravelFileVisibility {
-        public boolean getTravelFileVisibility(String fileName);
-    }
-
-    public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
+    public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel,
+                                                               Predicate<String> travelFileVisibility) {
         List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
         List<AmenityIndexRepository> travelMaps = new ArrayList<>();
         List<AmenityIndexRepository> baseMaps = new ArrayList<>();
@@ -78,7 +68,7 @@ public class AmenitySearcher {
         for (String fileName : fileNames) {
             AmenityIndexRepository r = amenityRepositories.get(fileName);
             if (r != null && fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-                if (includeTravel && !travelFileVisibility.getTravelFileVisibility(fileName)) {
+                if (includeTravel && travelFileVisibility != null && !travelFileVisibility.test(fileName)) {
                     travelMaps.add(r);
                 }
             } else if (r != null && r.isWorldMap()) {
@@ -95,14 +85,16 @@ public class AmenitySearcher {
     }
 
     public List<Amenity> searchAmenities(BinaryMapIndexReader.SearchPoiTypeFilter filter, QuadRect rect,
-                                         boolean includeTravel) {
-        return searchAmenities(filter, null, rect.top, rect.left, rect.bottom, rect.right, -1, includeTravel, null);
+                                         boolean includeTravel, Predicate<String> travelFileVisibility) {
+        return searchAmenities(filter, null, rect.top, rect.left, rect.bottom, rect.right, -1,
+                includeTravel, travelFileVisibility, null);
     }
 
     public List<Amenity> searchAmenities(BinaryMapIndexReader.SearchPoiTypeFilter filter,
-                                         BinaryMapIndexReader.SearchPoiAdditionalFilter additionalFilter, double topLatitude,
-                                         double leftLongitude, double bottomLatitude,
+                                         BinaryMapIndexReader.SearchPoiAdditionalFilter additionalFilter,
+                                         double topLatitude, double leftLongitude, double bottomLatitude,
                                          double rightLongitude, int zoom, boolean includeTravel,
+                                         Predicate<String> travelFileVisibility,
                                          ResultMatcher<Amenity> matcher) {
 
         Set<Long> openAmenities = new HashSet<>();
@@ -119,7 +111,7 @@ public class AmenitySearcher {
             int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
             int right31 = MapUtils.get31TileNumberX(rightLongitude);
 
-            List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel);
+            List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel, travelFileVisibility);
 
             for (AmenityIndexRepository repo : repos) {
                 if (matcher != null && matcher.isCancelled()) {
@@ -147,12 +139,12 @@ public class AmenitySearcher {
         return actualAmenities;
     }
 
-    public Amenity searchDetailedAmenity(LatLon latLon, Long id, Collection<String> names, String wikidata) {
-        BaseDetailsObject detail = searchDetailedObject(latLon, id, names, wikidata);
-        return detail != null ? detail.getSyntheticAmenity() : null;
+    public Amenity searchDetailedAmenity(Request request, Settings settings) {
+        BaseDetailsObject detailed = searchDetailedObject(request, settings);
+        return detailed != null ? detailed.getSyntheticAmenity() : null;
     }
 
-    public BaseDetailsObject searchDetailedObject(Object object) {
+    public BaseDetailsObject searchDetailedObject(Object object, Settings settings) {
         LatLon latLon = null;
         Long id = null;
         Collection<String> names = null;
@@ -183,18 +175,24 @@ public class AmenitySearcher {
             }
             if (!detailsObject.getObjects().isEmpty()) {
                 Object obj = detailsObject.getObjects().get(0);
-                return searchDetailedObject(obj);
+                return searchDetailedObject(obj, settings);
             }
         }
         BaseDetailsObject detailsObject = null;
         if (latLon != null) {
-            detailsObject = searchDetailedObject(latLon, id, names, wikidata);
+            Request request = new Request(latLon, id, wikidata, names);
+            detailsObject = searchDetailedObject(request, settings);
         }
         completeGeometry(detailsObject, object);
         return detailsObject;
     }
 
-	public BaseDetailsObject searchDetailedObject(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
+    public BaseDetailsObject searchDetailedObject(Request request, Settings settings) {
+        LatLon latLon = request.latLon;
+        Long obId = request.osmId;
+        String wikidata = request.wikidata;
+        Collection<String> names = request.names;
+
 		if (latLon == null) {
             return null;
         }
@@ -203,7 +201,7 @@ public class AmenitySearcher {
         int searchRadius = relation ? AMENITY_SEARCH_RADIUS_FOR_RELATION : AMENITY_SEARCH_RADIUS;
         QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
 
-        List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false);
+        List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false, settings.fileVisibility);
 
         long osmId = ObfConstants.isShiftedID(id) ? ObfConstants.getOsmId(id) : id >> AMENITY_ID_RIGHT_SHIFT;
         List<Amenity> filtered = new ArrayList<>();
@@ -211,14 +209,16 @@ public class AmenitySearcher {
             filtered = filterByOsmIdOrWikidata(amenities, osmId, latLon, wikidata);
         }
         if (Algorithms.isEmpty(filtered) && !Algorithms.isEmpty(names)) {
-            Amenity amenity = findByName(amenities, names, latLon);
+            Amenity amenity = findByName(amenities, names, latLon, settings);
             if (amenity != null) {
-                filtered = filterByOsmIdOrWikidata(amenities, amenity.getOsmId(), amenity.getLocation(), amenity.getWikidata());
+                filtered = filterByOsmIdOrWikidata(
+                        amenities, amenity.getOsmId(), amenity.getLocation(), amenity.getWikidata());
             }
         }
         if (!Algorithms.isEmpty(filtered)) {
-	        return new BaseDetailsObject(filtered, lang);
+	        return new BaseDetailsObject(filtered, settings.language().get());
         }
+
         return null;
     }
 
@@ -245,12 +245,13 @@ public class AmenitySearcher {
         return result;
     }
 
-    private Amenity findByName(Collection<Amenity> amenities, Collection<String> names, LatLon searchLatLon) {
+    private Amenity findByName(Collection<Amenity> amenities, Collection<String> names, LatLon searchLatLon,
+                               Settings settings) {
         if (!Algorithms.isEmpty(names) && !Algorithms.isEmpty(amenities)) {
             return amenities.stream()
                     .sorted(Comparator.comparingDouble(a -> MapUtils.getDistance(a.getLocation(), searchLatLon)))
                     .filter(amenity -> !amenity.isClosed())
-                    .filter(amenity -> namesMatcher(amenity, names, false))
+                    .filter(amenity -> namesMatcher(amenity, names, settings, false))
                     .findAny()
                     .orElseGet(() ->
                             amenities.stream()
@@ -264,13 +265,17 @@ public class AmenitySearcher {
                                     .findAny()
                                     .orElseGet(() ->
                                             amenities.stream()
-                                                    .filter(amenity -> namesMatcher(amenity, names, true))
+                                                    .filter(amenity -> namesMatcher(amenity, names, settings, true))
                                                     .findAny().orElse(null)));
         }
         return null;
     }
 
-    private boolean namesMatcher(Amenity amenity, Collection<String> matchList, boolean matchAllLanguagesAndAltNames) {
+    private boolean namesMatcher(Amenity amenity, Collection<String> matchList, Settings settings,
+                                 boolean matchAllLanguagesAndAltNames) {
+        String lang = settings.language.get();
+        boolean transliterate = settings.transliterate.get();
+
         String poiSimpleFormat = Amenity.getPoiStringWithoutType(amenity, lang, transliterate);
         if (matchList.contains(poiSimpleFormat)) {
             return true;
@@ -384,7 +389,7 @@ public class AmenitySearcher {
                 0, 0, multipleSearch, 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher
         );
         req.setMatcherMode(mode);
-        for (AmenityIndexRepository index : getAmenityRepositories(false)) {
+        for (AmenityIndexRepository index : getAmenityRepositories(false, null)) {
             List<Amenity> amenities = index.searchPoiByName(req);
             if (!Algorithms.isEmpty(amenities)) {
                 result.addAll(amenities);
@@ -454,7 +459,7 @@ public class AmenitySearcher {
         int top = MapUtils.get31TileNumberY(topLatitude);
         int right = MapUtils.get31TileNumberX(rightLongitude);
         int bottom = MapUtils.get31TileNumberY(bottomLatitude);
-        for (AmenityIndexRepository index : getAmenityRepositories(false)) {
+        for (AmenityIndexRepository index : getAmenityRepositories(false, null)) {
             if (matcher != null && matcher.isCancelled()) {
                 break;
             }
@@ -533,7 +538,7 @@ public class AmenitySearcher {
                     }
                 });
 
-        for (AmenityIndexRepository repository : getAmenityRepositories(false)) {
+        for (AmenityIndexRepository repository : getAmenityRepositories(false, null)) {
             if (matcher != null && matcher.isCancelled()) {
                 break;
             }
@@ -544,14 +549,16 @@ public class AmenitySearcher {
         return list;
     }
 
-    public void searchDetailedAmenityAsync(LatLon latLon, long id, Collection<String> names, String wikidata, CallbackWithObject<Amenity> callbackWithAmenity) {
+    public void searchDetailedAmenityAsync(Request request, Settings settings,
+                                           CallbackWithObject<Amenity> callbackWithAmenity) {
         singleThreadedExecutor.submit(() -> {
-            Amenity amenity = searchDetailedAmenity(latLon, id, names, wikidata);
+            Amenity amenity = searchDetailedAmenity(request, settings);
             callbackWithAmenity.processResult(amenity);
         });
     }
 
-    public void searchBaseDetailedObjectAsync(RenderedObject renderedObject, CallbackWithObject<BaseDetailsObject> callback) {
+    public void searchBaseDetailedObjectAsync(RenderedObject renderedObject, Settings settings,
+                                              CallbackWithObject<BaseDetailsObject> callback) {
         LatLon latLon = renderedObject.getLatLon();
         if (latLon == null) {
             callback.processResult(null);
@@ -561,8 +568,9 @@ public class AmenitySearcher {
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
             long osmId = ObfConstants.getOsmObjectId(renderedObject);
-            BaseDetailsObject detailsObject = searchDetailedObject(finalLatLon,
-                    osmId << AMENITY_ID_RIGHT_SHIFT, renderedObject.getOriginalNames(), wikidata);
+            Request request = new Request(finalLatLon, osmId << AMENITY_ID_RIGHT_SHIFT, wikidata,
+                    renderedObject.getOriginalNames());
+            BaseDetailsObject detailsObject = searchDetailedObject(request, settings);
             if (detailsObject != null) {
                 Amenity amenity = detailsObject.getSyntheticAmenity();
                 amenity.setX(renderedObject.getX());
@@ -572,9 +580,10 @@ public class AmenitySearcher {
         });
     }
 
-    public void searchDetailedObjectAsync(Object object, CallbackWithObject<Object> callback) {
+    public void searchDetailedObjectAsync(Object object, Settings settings,
+                                          CallbackWithObject<Object> callback) {
         singleThreadedExecutor.submit(() -> {
-            Object fetched = searchDetailedObject(object);
+            Object fetched = searchDetailedObject(object, settings);
             callback.processResult(fetched == null ? object : fetched);
         });
     }
