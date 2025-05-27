@@ -202,7 +202,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 			public boolean isEmpty() {
 				return false;
 			}
-		}, rect, false);
+		}, rect, false, null);
 
 		if (!Algorithms.isEmpty(cities)) {
 			sortAmenities(cities, cityTypes, latLon);

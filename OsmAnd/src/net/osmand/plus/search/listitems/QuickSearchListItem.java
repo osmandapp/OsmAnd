@@ -466,7 +466,7 @@ public class QuickSearchListItem {
 				pointDescription = entry.getName();
 				if (pointDescription.isPoi() || pointDescription.isAddressTypeCity()) {
 					Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(),
-							entry.getLat(), entry.getLon(), lang, transliterate);
+							entry.getLat(), entry.getLon());
 					if (amenity != null) {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,

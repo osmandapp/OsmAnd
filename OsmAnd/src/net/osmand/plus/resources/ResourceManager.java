@@ -188,10 +188,7 @@ public class ResourceManager {
 			path.mkdir();
 		}
 
-		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-		amenitySearcher = new AmenitySearcher(lang, transliterate, app.getPoiTypes(),
-				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get());
+		amenitySearcher = new AmenitySearcher(app.getPoiTypes());
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {
@@ -722,7 +719,8 @@ public class ResourceManager {
 	}
 
 	public List<AmenityIndexRepository> getTravelGpxRepositories() {
-		return amenitySearcher.getAmenityRepositories(true);
+		AmenitySearcher.AmenitySearchSettings settings = getDefaultAmenitySearchSettings();
+		return amenitySearcher.getAmenityRepositories(true, settings.fileVisibility());
 	}
 
 	public List<AmenityIndexRepository> getWikivoyageRepositories() {
@@ -745,7 +743,8 @@ public class ResourceManager {
 
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<AmenityIndexRepository> getAmenityRepositories() {
-		return amenitySearcher.getAmenityRepositories(true);
+		AmenitySearcher.AmenitySearchSettings settings = getDefaultAmenitySearchSettings();
+		return amenitySearcher.getAmenityRepositories(true, settings.fileVisibility());
 	}
 
 	@NonNull
@@ -1087,5 +1086,13 @@ public class ResourceManager {
 
 	public AmenitySearcher getAmenitySearcher() {
 		return amenitySearcher;
+	}
+
+	public AmenitySearcher.AmenitySearchSettings getDefaultAmenitySearchSettings() {
+		return new AmenitySearcher.AmenitySearchSettings(
+				() -> app.getSettings().MAP_PREFERRED_LOCALE.get(),
+				() -> app.getSettings().MAP_TRANSLITERATE_NAMES.get(),
+				(fileName) -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()
+		);
 	}
 }
