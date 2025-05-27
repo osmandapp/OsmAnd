@@ -59,9 +59,9 @@ public class AmenityExtensionsHelper {
 		LatLon latLon = new LatLon(lat, lon);
 		List<String> names = Collections.singletonList(nameEn);
 		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
-		AmenitySearcher.AmenitySearchSettings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
-		AmenitySearcher.AmenitySearchQuery query = new AmenitySearcher.AmenitySearchQuery(latLon, null, null, names);
-		return searcher.searchDetailedAmenity(query, settings);
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		AmenitySearcher.Request request = new AmenitySearcher.Request(latLon, null, null, names);
+		return searcher.searchDetailedAmenity(request, settings);
 	}
 
 	@NonNull

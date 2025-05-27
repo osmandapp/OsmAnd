@@ -40,7 +40,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 	private void searchAmenity(@NonNull ViewGroup view, @Nullable Object object) {
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(view);
 		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
-		AmenitySearcher.AmenitySearchSettings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 		searcher.searchBaseDetailedObjectAsync(renderedObject, settings, detailsObject -> {
 			app.runInUIThread(() -> {
 				ViewGroup viewGroup = viewGroupRef.get();

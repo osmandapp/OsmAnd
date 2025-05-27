@@ -39,8 +39,8 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class AmenitySearcher {
 
-    public record AmenitySearchQuery(LatLon latLon, Long osmId, String wikidata, Collection<String> names) {}
-    public record AmenitySearchSettings(Supplier<String> language, Supplier<Boolean> transliterate, Predicate<String> fileVisibility) {}
+    public record Request(LatLon latLon, Long osmId, String wikidata, Collection<String> names) {}
+    public record Settings(Supplier<String> language, Supplier<Boolean> transliterate, Predicate<String> fileVisibility) {}
 
     protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<>();
     private ThreadPoolExecutor singleThreadedExecutor;
@@ -139,12 +139,12 @@ public class AmenitySearcher {
         return actualAmenities;
     }
 
-    public Amenity searchDetailedAmenity(AmenitySearchQuery query, AmenitySearchSettings settings) {
-        BaseDetailsObject detailed = searchDetailedObject(query, settings);
+    public Amenity searchDetailedAmenity(Request request, Settings settings) {
+        BaseDetailsObject detailed = searchDetailedObject(request, settings);
         return detailed != null ? detailed.getSyntheticAmenity() : null;
     }
 
-    public BaseDetailsObject searchDetailedObject(Object object, AmenitySearchSettings settings) {
+    public BaseDetailsObject searchDetailedObject(Object object, Settings settings) {
         LatLon latLon = null;
         Long id = null;
         Collection<String> names = null;
@@ -180,18 +180,18 @@ public class AmenitySearcher {
         }
         BaseDetailsObject detailsObject = null;
         if (latLon != null) {
-            AmenitySearchQuery query = new AmenitySearchQuery(latLon, id, wikidata, names);
-            detailsObject = searchDetailedObject(query, settings);
+            Request request = new Request(latLon, id, wikidata, names);
+            detailsObject = searchDetailedObject(request, settings);
         }
         completeGeometry(detailsObject, object);
         return detailsObject;
     }
 
-    public BaseDetailsObject searchDetailedObject(AmenitySearchQuery query, AmenitySearchSettings settings) {
-        LatLon latLon = query.latLon;
-        Long obId = query.osmId;
-        String wikidata = query.wikidata;
-        Collection<String> names = query.names;
+    public BaseDetailsObject searchDetailedObject(Request request, Settings settings) {
+        LatLon latLon = request.latLon;
+        Long obId = request.osmId;
+        String wikidata = request.wikidata;
+        Collection<String> names = request.names;
 
 		if (latLon == null) {
             return null;
@@ -246,7 +246,7 @@ public class AmenitySearcher {
     }
 
     private Amenity findByName(Collection<Amenity> amenities, Collection<String> names, LatLon searchLatLon,
-                               AmenitySearchSettings settings) {
+                               Settings settings) {
         if (!Algorithms.isEmpty(names) && !Algorithms.isEmpty(amenities)) {
             return amenities.stream()
                     .sorted(Comparator.comparingDouble(a -> MapUtils.getDistance(a.getLocation(), searchLatLon)))
@@ -271,7 +271,7 @@ public class AmenitySearcher {
         return null;
     }
 
-    private boolean namesMatcher(Amenity amenity, Collection<String> matchList, AmenitySearchSettings settings,
+    private boolean namesMatcher(Amenity amenity, Collection<String> matchList, Settings settings,
                                  boolean matchAllLanguagesAndAltNames) {
         String lang = settings.language.get();
         boolean transliterate = settings.transliterate.get();
@@ -549,15 +549,15 @@ public class AmenitySearcher {
         return list;
     }
 
-    public void searchDetailedAmenityAsync(AmenitySearchQuery query, AmenitySearchSettings settings,
+    public void searchDetailedAmenityAsync(Request request, Settings settings,
                                            CallbackWithObject<Amenity> callbackWithAmenity) {
         singleThreadedExecutor.submit(() -> {
-            Amenity amenity = searchDetailedAmenity(query, settings);
+            Amenity amenity = searchDetailedAmenity(request, settings);
             callbackWithAmenity.processResult(amenity);
         });
     }
 
-    public void searchBaseDetailedObjectAsync(RenderedObject renderedObject, AmenitySearchSettings settings,
+    public void searchBaseDetailedObjectAsync(RenderedObject renderedObject, Settings settings,
                                               CallbackWithObject<BaseDetailsObject> callback) {
         LatLon latLon = renderedObject.getLatLon();
         if (latLon == null) {
@@ -568,9 +568,9 @@ public class AmenitySearcher {
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
             long osmId = ObfConstants.getOsmObjectId(renderedObject);
-            AmenitySearchQuery query = new AmenitySearchQuery(finalLatLon, osmId << AMENITY_ID_RIGHT_SHIFT,
-                    wikidata, renderedObject.getOriginalNames());
-            BaseDetailsObject detailsObject = searchDetailedObject(query, settings);
+            Request request = new Request(finalLatLon, osmId << AMENITY_ID_RIGHT_SHIFT, wikidata,
+                    renderedObject.getOriginalNames());
+            BaseDetailsObject detailsObject = searchDetailedObject(request, settings);
             if (detailsObject != null) {
                 Amenity amenity = detailsObject.getSyntheticAmenity();
                 amenity.setX(renderedObject.getX());
@@ -580,7 +580,7 @@ public class AmenitySearcher {
         });
     }
 
-    public void searchDetailedObjectAsync(Object object, AmenitySearchSettings settings,
+    public void searchDetailedObjectAsync(Object object, Settings settings,
                                           CallbackWithObject<Object> callback) {
         singleThreadedExecutor.submit(() -> {
             Object fetched = searchDetailedObject(object, settings);

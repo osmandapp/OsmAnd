@@ -721,10 +721,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			String mapObjName = marker.mapObjectName.split("_")[0];
 			ResourceManager resourceManager = getApplication().getResourceManager();
 			AmenitySearcher searcher = resourceManager.getAmenitySearcher();
-			AmenitySearcher.AmenitySearchSettings settings = resourceManager.getDefaultAmenitySearchSettings();
-			AmenitySearcher.AmenitySearchQuery query = new AmenitySearcher.AmenitySearchQuery(
+			AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
+			AmenitySearcher.Request request = new AmenitySearcher.Request(
 					marker.point, null, null, Collections.singletonList(mapObjName));
-			return searcher.searchDetailedAmenity(query, settings);
+			return searcher.searchDetailedAmenity(request, settings);
 		}
 		return null;
 	}

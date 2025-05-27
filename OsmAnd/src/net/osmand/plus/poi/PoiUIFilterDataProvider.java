@@ -47,7 +47,7 @@ public class PoiUIFilterDataProvider {
                     filter.wrapResultMatcher(matcher));
         } else {
             AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
-            AmenitySearcher.AmenitySearchSettings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+            AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
             return amenitySearcher.searchAmenities(filter, filter.additionalFilter, topLatitude, leftLongitude,
                     bottomLatitude, rightLongitude, zoom, true, settings.fileVisibility(),
                     filter.wrapResultMatcher(matcher));

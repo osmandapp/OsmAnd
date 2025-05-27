@@ -343,7 +343,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		OsmandApplication app = mapActivity.getMyApplication();
 		if (!(object instanceof RenderedObject)) {
 			AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
-			AmenitySearcher.AmenitySearchSettings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+			AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 			BaseDetailsObject detailsObject = searcher.searchDetailedObject(object, settings);
 			if (detailsObject != null) {
 				object = detailsObject;

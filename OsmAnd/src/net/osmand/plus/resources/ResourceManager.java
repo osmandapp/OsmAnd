@@ -719,7 +719,7 @@ public class ResourceManager {
 	}
 
 	public List<AmenityIndexRepository> getTravelGpxRepositories() {
-		AmenitySearcher.AmenitySearchSettings settings = getDefaultAmenitySearchSettings();
+		AmenitySearcher.Settings settings = getDefaultAmenitySearchSettings();
 		return amenitySearcher.getAmenityRepositories(true, settings.fileVisibility());
 	}
 
@@ -743,7 +743,7 @@ public class ResourceManager {
 
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<AmenityIndexRepository> getAmenityRepositories() {
-		AmenitySearcher.AmenitySearchSettings settings = getDefaultAmenitySearchSettings();
+		AmenitySearcher.Settings settings = getDefaultAmenitySearchSettings();
 		return amenitySearcher.getAmenityRepositories(true, settings.fileVisibility());
 	}
 
@@ -1088,8 +1088,8 @@ public class ResourceManager {
 		return amenitySearcher;
 	}
 
-	public AmenitySearcher.AmenitySearchSettings getDefaultAmenitySearchSettings() {
-		return new AmenitySearcher.AmenitySearchSettings(
+	public AmenitySearcher.Settings getDefaultAmenitySearchSettings() {
+		return new AmenitySearcher.Settings(
 				() -> app.getSettings().MAP_PREFERRED_LOCALE.get(),
 				() -> app.getSettings().MAP_TRANSLITERATE_NAMES.get(),
 				(fileName) -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()

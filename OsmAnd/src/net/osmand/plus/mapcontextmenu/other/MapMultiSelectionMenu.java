@@ -64,7 +64,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			Object object = selectedMapObject.object();
 			ResourceManager resourceManager = getApplication().getResourceManager();
 			AmenitySearcher searcher = resourceManager.getAmenitySearcher();
-			AmenitySearcher.AmenitySearchSettings settings = resourceManager.getDefaultAmenitySearchSettings();
+			AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
 			BaseDetailsObject detailsObject = searcher.searchDetailedObject(object, settings);
 			if (detailsObject != null) {
 				object = detailsObject;

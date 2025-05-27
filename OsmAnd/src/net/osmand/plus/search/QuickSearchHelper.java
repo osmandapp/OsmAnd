@@ -170,10 +170,10 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public Amenity findAmenity(String name, double lat, double lon) {
 		AmenitySearcher amenitySearch = app.getResourceManager().getAmenitySearcher();
-		AmenitySearcher.AmenitySearchSettings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
-		AmenitySearcher.AmenitySearchQuery query = new AmenitySearcher
-				.AmenitySearchQuery(new LatLon(lat, lon), null, null, Collections.singletonList(name));
-		return amenitySearch.searchDetailedAmenity(query, settings);
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		AmenitySearcher.Request request =
+				new AmenitySearcher.Request(new LatLon(lat, lon), null, null, Collections.singletonList(name));
+		return amenitySearch.searchDetailedAmenity(request, settings);
 	}
 
 	public static class SearchWptAPI extends SearchBaseAPI {
