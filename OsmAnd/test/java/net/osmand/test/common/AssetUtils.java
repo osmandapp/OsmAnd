@@ -47,9 +47,20 @@ public class AssetUtils {
 
 	public static void copyAssetToFile(@NonNull Context testContext, String assetName, File destFile) throws IOException {
 		String[] files = testContext.getAssets().list("");
+		Log.d("TAG", "*copyAssetToFile: List " + files.length);
+		System.out.println("copyAssetToFile: List " + files.length);
+
 		for (int i = 0; i < files.length; i++) {
 			Log.d("TAG", "*copyAssetToFile: List " + files[0]);
 			System.out.println("copyAssetToFile: List " + files[0]);
+		}
+		String[] files2 = testContext.getAssets().list("");
+
+		Log.d("TAG", "*copyAssetToFile2: List " + files2.length);
+		System.out.println("copyAssetToFile2: List " + files2.length);
+		for (int i = 0; i < files2.length; i++) {
+			Log.d("TAG", "*copyAssetToFile: List " + files2[0]);
+			System.out.println("copyAssetToFile: List " + files2[0]);
 		}
 		try (InputStream in = testContext.getAssets().open(assetName);
 		     FileOutputStream out = new FileOutputStream(destFile)) {
