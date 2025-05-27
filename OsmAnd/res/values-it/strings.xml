@@ -5774,4 +5774,5 @@
     <string name="show_debug_tile">Mostra informazioni riquadro</string>
     <string name="deactivated_map">Mappa disattivata</string>
     <string name="suggest_activate_map_msg">La mappa %1$s è disattivata,\nattivala per visualizzare quest\'area.</string>
+    <string name="unit_of_temperature_description">Scegli l\'unità di misura che verrà utilizzata per tutte le temperature nel profilo attuale.</string>
 </resources>
