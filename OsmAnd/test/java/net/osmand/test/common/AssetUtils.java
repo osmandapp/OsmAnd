@@ -51,16 +51,13 @@ public class AssetUtils {
 		Log.i("TAG", "*copyAssetToFile: List " + files.length);
 
 		for (int i = 0; i < files.length; i++) {
-			Log.d("TAG", "*copyAssetToFile: List " + files[0]);
-			System.out.println("copyAssetToFile: List " + files[0]);
+			Log.d("TAG", "*copyAssetToFile: List " + files[i]);
 		}
-		String[] files2 = testContext.getAssets().list("wiki");
 
+		String[] files2 = testContext.getAssets().list("wiki");
 		Log.d("TAG", "*copyAssetToFile2: List " + files2.length);
-		System.out.println("copyAssetToFile2: List " + files2.length);
 		for (int i = 0; i < files2.length; i++) {
-			Log.d("TAG", "*copyAssetToFile: List " + files2[0]);
-			System.out.println("copyAssetToFile: List " + files2[0]);
+			Log.d("TAG", "*copyAssetToFile2: List " + files2[i]);
 		}
 		try (InputStream in = testContext.getAssets().open(assetName);
 		     FileOutputStream out = new FileOutputStream(destFile)) {
