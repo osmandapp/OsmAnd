@@ -572,6 +572,8 @@ public class AmenitySearcher {
                     renderedObject.getOriginalNames());
             BaseDetailsObject detailsObject = searchDetailedObject(request, settings);
             if (detailsObject != null) {
+                detailsObject.addObject(renderedObject);
+
                 Amenity amenity = detailsObject.getSyntheticAmenity();
                 amenity.setX(renderedObject.getX());
                 amenity.setY(renderedObject.getY());

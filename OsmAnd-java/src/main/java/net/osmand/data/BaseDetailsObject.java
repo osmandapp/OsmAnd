@@ -2,12 +2,14 @@ package net.osmand.data;
 
 import static net.osmand.data.Amenity.DEFAULT_ELO;
 import static net.osmand.data.Amenity.WIKIDATA;
+import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.search.core.SearchResult.SearchResultResource;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -242,12 +244,22 @@ public class BaseDetailsObject {
 				if (amenity != null) {
 					processAmenity(amenity, contentLocales);
 				} else {
+					processId(transportStop);
 					syntheticAmenity.copyNames(transportStop);
 					if (syntheticAmenity.getLocation() == null) {
 						syntheticAmenity.setLocation(transportStop.getLocation());
 					}
 				}
 			} else if (object instanceof RenderedObject renderedObject) {
+				EntityType type = ObfConstants.getOsmEntityType(renderedObject);
+				if (type != null) {
+					long osmId = ObfConstants.getOsmObjectId(renderedObject);
+					long objectId = ObfConstants.createMapObjectIdFromOsmId(osmId, type);
+
+					if (syntheticAmenity.getId() == null && objectId > 0) {
+						syntheticAmenity.setId(objectId);
+					}
+				}
 				if (syntheticAmenity.getType() == null) {
 					syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
 				}
@@ -271,10 +283,15 @@ public class BaseDetailsObject {
 		}
 	}
 
-	protected void processAmenity(Amenity amenity, Set<String> contentLocales) {
-		if (syntheticAmenity.getId() == null && ObfConstants.isOsmUrlAvailable(amenity)) {
-			syntheticAmenity.setId(amenity.getId());
+	protected void processId(MapObject object) {
+		if (syntheticAmenity.getId() == null && ObfConstants.isOsmUrlAvailable(object)) {
+			syntheticAmenity.setId(object.getId());
 		}
+	}
+
+	protected void processAmenity(Amenity amenity, Set<String> contentLocales) {
+		processId(amenity);
+
 		LatLon location = amenity.getLocation();
 		if (syntheticAmenity.getLocation() == null && location != null) {
 			syntheticAmenity.setLocation(location);
