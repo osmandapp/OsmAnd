@@ -47,14 +47,8 @@ public class AssetUtils {
 
 
 	public static void copyAssetToFile(@NonNull Context testContext, String assetName, File destFile) throws IOException {
-		Bundle results = new Bundle();
-		results.putString("LOG", ">>> Hello from test");
-		InstrumentationRegistry.getInstrumentation().sendStatus(0, results);
-
 		String[] files = testContext.getAssets().list("");
 		Log.i("TAG", "*copyAssetToFile: List " + files.length);
-		System.out.println("copyAssetToFile: List " + files.length);
-		System.console().printf("log from test");
 
 		for (int i = 0; i < files.length; i++) {
 			Log.d("TAG", "*copyAssetToFile: List " + files[0]);
