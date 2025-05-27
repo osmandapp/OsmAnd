@@ -3,6 +3,7 @@ package net.osmand.test.common;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,10 @@ public class AssetUtils {
 
 
 	public static void copyAssetToFile(@NonNull Context testContext, String assetName, File destFile) throws IOException {
+		Bundle results = new Bundle();
+		results.putString("LOG", ">>> Hello from test");
+		InstrumentationRegistry.getInstrumentation().sendStatus(0, results);
+
 		String[] files = testContext.getAssets().list("");
 		Log.d("TAG", "*copyAssetToFile: List " + files.length);
 		System.out.println("copyAssetToFile: List " + files.length);
