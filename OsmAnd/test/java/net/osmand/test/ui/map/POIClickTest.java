@@ -14,7 +14,6 @@ import static net.osmand.test.common.OsmAndDialogInteractions.waitForAnyView;
 import static net.osmand.test.common.SystemDialogInteractions.findDescendantOfType;
 import static net.osmand.test.common.SystemDialogInteractions.getViewById;
 
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -77,7 +76,7 @@ public class POIClickTest extends AndroidTest {
 			File wikiFolder = new File(app.getAppPath(null), "wiki");
 			wikiFolder.mkdir();
 
-			copyAssetToFile(testContext, "wiki/Ukraine_kyiv_europe.wiki.obf", new File(app.getAppPath(null), "wiki/Ukraine_kyiv_europe.wiki.obf"));
+			copyAssetToFile(testContext, "wiki/Ukraine_kyiv_europe_2.wiki.obf", new File(app.getAppPath(null), "wiki/Ukraine_kyiv_europe_2.wiki.obf"));
 			copyAssetToFile(testContext, "World_basemap_mini.obf", new File(app.getAppPath(null), "World_basemap_mini.obf"));
 			copyAssetToFile(testContext, "Ukraine_kyiv-city_europe.obf", new File(app.getAppPath(null), "Ukraine_kyiv-city_europe.obf"));
 		} catch (IOException e) {
