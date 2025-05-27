@@ -11,7 +11,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailedObject;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -260,7 +260,7 @@ public class SearchUICore {
 		}
 
 		private void copyData(SearchResult unique, SearchResult iterated) {
-			BaseDetailedObject base = new BaseDetailedObject(unique.object, phrase.getSettings().getLang());
+			BaseDetailsObject base = new BaseDetailsObject(unique.object, phrase.getSettings().getLang());
 			base.addObject(iterated.object);
 
 			unique.object = base.getSyntheticAmenity();

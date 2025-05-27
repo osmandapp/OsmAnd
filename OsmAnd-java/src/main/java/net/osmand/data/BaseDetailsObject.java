@@ -16,7 +16,7 @@ import java.util.*;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class BaseDetailedObject {
+public class BaseDetailsObject {
 
 	private static final int MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS = 30;
 
@@ -39,16 +39,16 @@ public class BaseDetailedObject {
 		FULL
 	}
 
-	public BaseDetailedObject(String lang) {
+	public BaseDetailsObject(String lang) {
 		this.lang = lang;
 	}
 
-	public BaseDetailedObject(Object object, String lang) {
+	public BaseDetailsObject(Object object, String lang) {
 		this(lang != null ? lang : "en");
 		addObject(object);
 	}
 
-	public BaseDetailedObject(List<Amenity> amenities, String lang) {
+	public BaseDetailsObject(List<Amenity> amenities, String lang) {
 		this(lang != null ? lang : "en");
 
 		for (Amenity amenity : amenities) {
@@ -81,7 +81,7 @@ public class BaseDetailedObject {
 		if (!isSupportedObjectType(object)) {
 			return false;
 		}
-		if (object instanceof BaseDetailedObject detailsObject) {
+		if (object instanceof BaseDetailsObject detailsObject) {
 			for (Object obj : detailsObject.getObjects()) {
 				addObject(obj);
 			}
@@ -181,7 +181,7 @@ public class BaseDetailedObject {
 	}
 
 	public void merge(Object object) {
-		if (object instanceof BaseDetailedObject baseDetailsObject)
+		if (object instanceof BaseDetailsObject baseDetailsObject)
 			merge(baseDetailsObject);
 		if (object instanceof TransportStop transportStop)
 			merge(transportStop);
@@ -189,7 +189,7 @@ public class BaseDetailedObject {
 			merge(renderedObject);
 	}
 
-	private void merge(BaseDetailedObject other) {
+	private void merge(BaseDetailsObject other) {
 		osmIds.addAll(other.osmIds);
 		wikidataIds.addAll(other.wikidataIds);
 		objects.addAll(other.getObjects());
@@ -397,7 +397,7 @@ public class BaseDetailedObject {
 
 	public static boolean isSupportedObjectType(Object object) {
 		return object instanceof Amenity || object instanceof TransportStop
-				|| object instanceof RenderedObject || object instanceof BaseDetailedObject;
+				|| object instanceof RenderedObject || object instanceof BaseDetailsObject;
 	}
 
 	public List<Amenity> getAmenities() {
@@ -444,7 +444,7 @@ public class BaseDetailedObject {
 	}
 
 	private static SearchResultResource getResourceType(Object object) {
-		if (object instanceof BaseDetailedObject detailsObject) {
+		if (object instanceof BaseDetailsObject detailsObject) {
 			return detailsObject.getResourceType();
 		}
 		if (object instanceof Amenity amenity) {
@@ -458,8 +458,8 @@ public class BaseDetailedObject {
 		if (object instanceof Amenity) {
 			amenity = (Amenity) object;
 		}
-		if (object instanceof BaseDetailedObject) {
-			amenity = ((BaseDetailedObject) object).syntheticAmenity;
+		if (object instanceof BaseDetailsObject) {
+			amenity = ((BaseDetailsObject) object).syntheticAmenity;
 		}
 		if (amenity != null && getResourceType(object) == SearchResultResource.TRAVEL) {
 			String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
@@ -471,7 +471,7 @@ public class BaseDetailedObject {
 	}
 
 	private static int getClassOrder(Object object) {
-		if (object instanceof BaseDetailedObject) {
+		if (object instanceof BaseDetailsObject) {
 			return 1;
 		}
 		if (object instanceof Amenity) {
