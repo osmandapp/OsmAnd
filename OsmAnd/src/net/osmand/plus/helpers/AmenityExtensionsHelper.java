@@ -57,7 +57,7 @@ public class AmenityExtensionsHelper {
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
 		LatLon latLon = new LatLon(lat, lon);
 		List<String> names = Collections.singletonList(nameEn);
-		return app.getResourceManager().getAmenitySearcher().searchDetailsAmenity(latLon, null, names, null);
+		return app.getResourceManager().getAmenitySearcher().searchDetailedAmenity(latLon, null, names, null);
 	}
 
 	@NonNull

@@ -60,7 +60,8 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		objects.clear();
 		for (SelectedMapObject selectedMapObject : selectedObjects) {
 			Object object = selectedMapObject.object();
-			BaseDetailsObject detailsObject = getApplication().getResourceManager().getAmenitySearcher().searchDetailsObject(object);
+			BaseDetailsObject detailsObject =
+					getApplication().getResourceManager().getAmenitySearcher().searchDetailedObject(object);
 			if (detailsObject != null) {
 				object = detailsObject;
 			}

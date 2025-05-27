@@ -325,7 +325,7 @@ public class MapSelectionHelper {
 					List<String> names = getValues(jniAmenity.getLocalizedNames());
 					names.add(jniAmenity.getNativeName());
 					long id = jniAmenity.getId().getId().longValue();
-					detailsObject = amenitySearcher.searchDetailsObject(result.objectLatLon, id, names, null);
+					detailsObject = amenitySearcher.searchDetailedObject(result.objectLatLon, id, names, null);
 				} else {
 					MapObject mapObject;
 					try {
@@ -379,7 +379,8 @@ public class MapSelectionHelper {
 										addRenderedObject(result, symbolInfo, obfMapObject, tags);
 									} else {
 										long id = obfMapObject.getId().getId().longValue();
-										detailsObject = amenitySearcher.searchDetailsObject(latLon, id, getNames(obfMapObject, tags), tags.get(WIKIDATA));
+										detailsObject = amenitySearcher.searchDetailedObject(latLon, id,
+												getNames(obfMapObject, tags), tags.get(WIKIDATA));
 										if (detailsObject != null) {
 											detailsObject.setMapIconName(getMapIconName(symbolInfo));
 											addGeometry(detailsObject, obfMapObject);
@@ -619,7 +620,8 @@ public class MapSelectionHelper {
 	private boolean addAmenity(@NonNull MapSelectionResult result,
 			@NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
 		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
-		BaseDetailsObject detail = amenitySearcher.searchDetailsObject(searchLatLon, object.getId(), object.getOriginalNames(), null);
+		BaseDetailsObject detail = amenitySearcher.searchDetailedObject(searchLatLon, object.getId(),
+				object.getOriginalNames(), null);
 		if (detail != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
 				detail.setX(object.getX());

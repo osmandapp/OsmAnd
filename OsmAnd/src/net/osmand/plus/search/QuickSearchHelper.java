@@ -171,7 +171,7 @@ public class QuickSearchHelper implements ResourceListener {
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
 		AmenitySearcher amenitySearch = app.getResourceManager().getAmenitySearcher();
 		amenitySearch.updateLangAndTransliterate(lang, transliterate);
-		return amenitySearch.searchDetailsAmenity(new LatLon(lat, lon), null, Collections.singletonList(name), null);
+		return amenitySearch.searchDetailedAmenity(new LatLon(lat, lon), null, Collections.singletonList(name), null);
 	}
 
 	public static class SearchWptAPI extends SearchBaseAPI {

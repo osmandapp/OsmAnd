@@ -147,12 +147,12 @@ public class AmenitySearcher {
         return actualAmenities;
     }
 
-    public Amenity searchDetailsAmenity(LatLon latLon, Long id, Collection<String> names, String wikidata) {
-        BaseDetailsObject detail = searchDetailsObject(latLon, id, names, wikidata);
+    public Amenity searchDetailedAmenity(LatLon latLon, Long id, Collection<String> names, String wikidata) {
+        BaseDetailsObject detail = searchDetailedObject(latLon, id, names, wikidata);
         return detail != null ? detail.getSyntheticAmenity() : null;
     }
 
-    public BaseDetailsObject searchDetailsObject(Object object) {
+    public BaseDetailsObject searchDetailedObject(Object object) {
         LatLon latLon = null;
         Long id = null;
         Collection<String> names = null;
@@ -183,18 +183,18 @@ public class AmenitySearcher {
             }
             if (!detailsObject.getObjects().isEmpty()) {
                 Object obj = detailsObject.getObjects().get(0);
-                return searchDetailsObject(obj);
+                return searchDetailedObject(obj);
             }
         }
         BaseDetailsObject detailsObject = null;
         if (latLon != null) {
-            detailsObject = searchDetailsObject(latLon, id, names, wikidata);
+            detailsObject = searchDetailedObject(latLon, id, names, wikidata);
         }
         completeGeometry(detailsObject, object);
         return detailsObject;
     }
 
-	public BaseDetailsObject searchDetailsObject(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
+	public BaseDetailsObject searchDetailedObject(LatLon latLon, Long obId, Collection<String> names, String wikidata) {
 		if (latLon == null) {
             return null;
         }
@@ -544,14 +544,14 @@ public class AmenitySearcher {
         return list;
     }
 
-    public void searchDetailsAmenityAsync(LatLon latLon, long id, Collection<String> names, String wikidata, CallbackWithObject<Amenity> callbackWithAmenity) {
+    public void searchDetailedAmenityAsync(LatLon latLon, long id, Collection<String> names, String wikidata, CallbackWithObject<Amenity> callbackWithAmenity) {
         singleThreadedExecutor.submit(() -> {
-            Amenity amenity = searchDetailsAmenity(latLon, id, names, wikidata);
+            Amenity amenity = searchDetailedAmenity(latLon, id, names, wikidata);
             callbackWithAmenity.processResult(amenity);
         });
     }
 
-    public void searchBaseDetailsObjectAsync(RenderedObject renderedObject, CallbackWithObject<BaseDetailsObject> callback) {
+    public void searchBaseDetailedObjectAsync(RenderedObject renderedObject, CallbackWithObject<BaseDetailsObject> callback) {
         LatLon latLon = renderedObject.getLatLon();
         if (latLon == null) {
             callback.processResult(null);
@@ -561,7 +561,7 @@ public class AmenitySearcher {
         singleThreadedExecutor.submit(() -> {
             String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
             long osmId = ObfConstants.getOsmObjectId(renderedObject);
-            BaseDetailsObject detailsObject = searchDetailsObject(finalLatLon,
+            BaseDetailsObject detailsObject = searchDetailedObject(finalLatLon,
                     osmId << AMENITY_ID_RIGHT_SHIFT, renderedObject.getOriginalNames(), wikidata);
             if (detailsObject != null) {
                 Amenity amenity = detailsObject.getSyntheticAmenity();
@@ -572,9 +572,9 @@ public class AmenitySearcher {
         });
     }
 
-    public void searchDetailsObjectAsync(Object object, CallbackWithObject<Object> callback) {
+    public void searchDetailedObjectAsync(Object object, CallbackWithObject<Object> callback) {
         singleThreadedExecutor.submit(() -> {
-            Object fetched = searchDetailsObject(object);
+            Object fetched = searchDetailedObject(object);
             callback.processResult(fetched == null ? object : fetched);
         });
     }

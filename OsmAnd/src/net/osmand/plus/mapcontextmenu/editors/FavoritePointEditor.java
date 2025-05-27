@@ -73,7 +73,7 @@ public class FavoritePointEditor extends PointEditor {
 		} else if (object instanceof OpenstreetmapPoint point) {
 			Entity entity = point.getEntity();
 			AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
-			amenity = searcher.searchDetailsAmenity(latLon, entity.getId(), null, null);
+			amenity = searcher.searchDetailedAmenity(latLon, entity.getId(), null, null);
 		}
 		if (amenity != null) {
 			setAmenity(amenity);
