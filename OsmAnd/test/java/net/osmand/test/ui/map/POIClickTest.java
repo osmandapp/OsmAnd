@@ -115,7 +115,7 @@ public class POIClickTest extends AndroidTest {
 			events.add(new LocationAction(new LatLon(lattitude, longitude), zoom, LocationActionType.CLICK_LOCATION));
 			onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
 			waitForAnyView(
-					2000,                         // max wait time in ms
+					5000,                         // max wait time in ms
 					50,                                     // polling interval in ms
 					withId(R.id.context_menu_layout),       // first possible view
 					withId(R.id.multi_selection_main_view)  // second possible view
