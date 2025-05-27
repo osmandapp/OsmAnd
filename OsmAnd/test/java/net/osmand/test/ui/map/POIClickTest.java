@@ -54,6 +54,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -110,7 +111,6 @@ public class POIClickTest extends AndroidTest {
 			zoom = click.zoom;
 			events.add(new LocationAction(new LatLon(lattitude, longitude), zoom, LocationActionType.MOVE_LOCATION));
 			moveAndZoomMap(lattitude, longitude, zoom);
-			Thread.sleep(2000);
 			float x = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixXFromLatLon(lattitude, longitude);
 			float y = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixYFromLatLon(lattitude, longitude);
 			events.add(new LocationAction(new LatLon(lattitude, longitude), zoom, LocationActionType.CLICK_LOCATION));
@@ -175,6 +175,11 @@ public class POIClickTest extends AndroidTest {
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(events);
+
+		File file = new File(app.getAppPath(null), "check_result.json");
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(json.getBytes());
+		fos.close();
 
 		LOG.debug("\n\n\n\ntestClickOnMApPoint: \n" + json);
 	}
