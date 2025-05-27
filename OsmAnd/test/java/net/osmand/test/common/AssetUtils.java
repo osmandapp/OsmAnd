@@ -54,7 +54,7 @@ public class AssetUtils {
 			Log.d("TAG", "*copyAssetToFile: List " + files[0]);
 			System.out.println("copyAssetToFile: List " + files[0]);
 		}
-		String[] files2 = testContext.getAssets().list("");
+		String[] files2 = testContext.getAssets().list("wiki");
 
 		Log.d("TAG", "*copyAssetToFile2: List " + files2.length);
 		System.out.println("copyAssetToFile2: List " + files2.length);
