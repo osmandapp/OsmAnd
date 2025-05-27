@@ -451,27 +451,26 @@ public class QuickSearchListItem {
 		Object object = searchResult.object;
 		switch (searchResult.objectType) {
 			case POI:
-				Amenity detailedAmenity = getDetailedAmenity((Amenity) object, app, lang, transliterate);
+				Amenity detailedAmenity = (Amenity) object;
 				String poiSimpleFormat;
 				if (detailedAmenity.getType().isWiki()) {
 					poiSimpleFormat = detailedAmenity.getName(lang, transliterate);
 				} else {
-					poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(detailedAmenity, lang, transliterate);
+					poiSimpleFormat = Amenity.getPoiStringWithoutType(detailedAmenity, lang, transliterate);
 				}
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 				pointDescription.setIconName(getAmenityIconName(app, detailedAmenity));
-				object = detailedAmenity;
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
 				pointDescription = entry.getName();
 				if (pointDescription.isPoi() || pointDescription.isAddressTypeCity()) {
 					Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(),
-							entry.getLat(), entry.getLon(), lang, transliterate);
+							entry.getLat(), entry.getLon());
 					if (amenity != null) {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
-								OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
+								Amenity.getPoiStringWithoutType(amenity, lang, transliterate));
 						pointDescription.setIconName(getAmenityIconName(app, amenity));
 					}
 				} else if (pointDescription.isFavorite()) {
@@ -540,19 +539,6 @@ public class QuickSearchListItem {
 				break;
 		}
 		return new Pair<>(pointDescription, object);
-	}
-
-	@NonNull
-	private static Amenity getDetailedAmenity(@NonNull Amenity amenity, @NonNull OsmandApplication app,
-	                                          @NonNull String lang, boolean transliterate) {
-		if ("basemap".equals(amenity.getRegionName())) {
-			Amenity freshAmenity = app.getSearchUICore().findAmenity(amenity.getName(lang),
-					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), lang, transliterate);
-			if (freshAmenity != null) {
-				return freshAmenity;
-			}
-		}
-		return amenity;
 	}
 
 	private static Drawable getIcon(@NonNull OsmandApplication app, @DrawableRes int iconId) {

@@ -262,7 +262,7 @@ public class SearchUICore {
 		private void copyData(SearchResult unique, SearchResult iterated) {
 			BaseDetailsObject base = new BaseDetailsObject(unique.object, phrase.getSettings().getLang());
 			base.addObject(iterated.object);
-			base.combineData();
+
 			unique.object = base.getSyntheticAmenity();
 			if (iterated.otherNames != null) {
 				if (!iterated.localeName.equals(unique.localeName)) {
@@ -298,6 +298,10 @@ public class SearchUICore {
 
 					if (osmId != null && osmId < 0) {
 						osmId = null; // do not merge synthetic osmId such as wiki
+					}
+					if (that.isRouteTrack()) {
+						osmId = null;
+						wikidata = null; // do not merge routes
 					}
 
 					Integer foundOsmIdIndex = osmId == null ? null : osmIdMap.get(osmId);
@@ -1125,7 +1129,10 @@ public class SearchUICore {
 				}
 				break;
 			case OBF_RESOURCE:
-				// sort order: DETAILED, WIKIPEDIA, TRAVEL, BASEMAP
+				if (o1.isFullPhraseEqualLocaleName() || o2.isFullPhraseEqualLocaleName()) {
+					return 0;
+				}
+				// sort order: DETAILED, WIKIPEDIA, BASEMAP, TRAVEL
 				int ord1 = o1.getResourceType().ordinal();
 				int ord2 = o2.getResourceType().ordinal();
 				if (ord1 != ord2) {

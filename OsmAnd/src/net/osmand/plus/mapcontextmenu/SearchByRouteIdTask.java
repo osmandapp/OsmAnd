@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
     @Override
     protected List<Amenity> doInBackground(Void... params) {
         List<Amenity> amenities = new ArrayList<>();
-        FullAmenitySearch amenitySearcher = app.getResourceManager().getAmenitySearcher();
+        AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
         switch (searchType) {
             case MEMBERS:
                 if (!Algorithms.isEmpty(routeMembersIds)) {

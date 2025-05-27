@@ -95,6 +95,7 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	private fun searchNearestCity(latLon: KLatLon, callback: CityNameCallback) {
 		val cityTypes = City.CityType.entries.associateBy { it.name.lowercase() }
 		val rect = MapUtils.calculateLatLonBbox(latLon.latitude, latLon.longitude, CITY_SEARCH_RADIUS)
+		val travelFileVisibility = app.resourceManager.defaultAmenitySearchSettings.fileVisibility;
 		val cities = app.resourceManager.amenitySearcher.searchAmenities(object : SearchPoiTypeFilter {
 			override fun accept(type: PoiCategory, subcategory: String): Boolean {
 				return cityTypes.containsKey(subcategory)
@@ -103,7 +104,7 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 			override fun isEmpty(): Boolean {
 				return false
 			}
-		}, rect, false)
+		}, rect, false, travelFileVisibility)
 
 		if (cities.isNotEmpty()) {
 			sortAmenities(cities, cityTypes, latLon)
