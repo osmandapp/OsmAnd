@@ -11,12 +11,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarView;
 
 public class QuickSearchToolbarController extends TopToolbarController {
 
 	private final MapFragmentsHelper fragmentsHelper;
+	private PoiUIFilter selectedFilter;
 
 	public QuickSearchToolbarController(@NonNull MapActivity activity) {
 		super(QUICK_SEARCH);
@@ -58,5 +60,14 @@ public class QuickSearchToolbarController extends TopToolbarController {
 	@Nullable
 	private ExplorePlacesFragment getExplorePlacesFragment() {
 		return fragmentsHelper.getFragment(ExplorePlacesFragment.Companion.getTAG());
+	}
+
+	@Nullable
+	public PoiUIFilter getSelectedFilter() {
+		return selectedFilter;
+	}
+
+	public void setSelectedFilter(@Nullable PoiUIFilter filter) {
+		selectedFilter = filter;
 	}
 }
