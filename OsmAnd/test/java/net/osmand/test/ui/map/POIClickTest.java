@@ -77,7 +77,7 @@ public class POIClickTest extends AndroidTest {
 			File wikiFolder = new File(app.getAppPath(null), "wiki");
 			wikiFolder.mkdir();
 
-			copyAssetToFile(app, "wiki/Ukraine_kyiv_europe.wiki.obf", new File(app.getAppPath(null), "wiki/Ukraine_kyiv_europe.wiki.obf"));
+			copyAssetToFile(testContext, "wiki/Ukraine_kyiv_europe.wiki.obf", new File(app.getAppPath(null), "wiki/Ukraine_kyiv_europe.wiki.obf"));
 			copyAssetToFile(testContext, "World_basemap_mini.obf", new File(app.getAppPath(null), "World_basemap_mini.obf"));
 			copyAssetToFile(testContext, "Ukraine_kyiv-city_europe.obf", new File(app.getAppPath(null), "Ukraine_kyiv-city_europe.obf"));
 		} catch (IOException e) {
