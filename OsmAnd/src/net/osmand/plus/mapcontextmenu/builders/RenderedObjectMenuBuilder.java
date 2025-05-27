@@ -15,6 +15,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -38,7 +39,9 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 
 	private void searchAmenity(@NonNull ViewGroup view, @Nullable Object object) {
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(view);
-		app.getResourceManager().getAmenitySearcher().searchBaseDetailsObjectAsync(renderedObject, detailsObject -> {
+		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		searcher.searchBaseDetailedObjectAsync(renderedObject, settings, detailsObject -> {
 			app.runInUIThread(() -> {
 				ViewGroup viewGroup = viewGroupRef.get();
 				if (viewGroup == null || mapContextMenu == null) {

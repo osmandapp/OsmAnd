@@ -78,23 +78,34 @@ public class MapSelectionResult {
 	}
 
 	public void groupByOsmIdAndWikidataId() {
-		List<SelectedMapObject> plainObjects = new ArrayList<>();
+		if (allObjects.size() == 1) {
+			processedObjects.addAll(allObjects);
+			return;
+		}
+		List<SelectedMapObject> other = new ArrayList<>();
+		List<BaseDetailsObject> detailsObjects = processObjects(allObjects, other);
+
+		for (BaseDetailsObject object : detailsObjects) {
+			if (object.getObjects().size() > 1) {
+				processedObjects.add(new SelectedMapObject(object, poiProvider));
+			} else {
+				processedObjects.add(new SelectedMapObject(object.getObjects().get(0), poiProvider));
+			}
+		}
+		processedObjects.addAll(other);
+	}
+
+	@NonNull
+	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> selectedObjects,
+			@NonNull List<SelectedMapObject> other) {
 		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
-		for (SelectedMapObject selectedObject : allObjects) {
+		for (SelectedMapObject selectedObject : selectedObjects) {
 			Object object = selectedObject.object();
-			if (!BaseDetailsObject.shouldAdd(object)) {
-				plainObjects.add(selectedObject);
-				continue;
-			}
-			List<BaseDetailsObject> overlapped = new ArrayList<>();
-			for (BaseDetailsObject detailsObject : detailsObjects) {
-				if (detailsObject.overlapsWith(object)) {
-					overlapped.add(detailsObject);
-				}
-			}
+			List<BaseDetailsObject> overlapped = collectOverlappedObjects(object, detailsObjects);
+
 			BaseDetailsObject detailsObject;
 			if (Algorithms.isEmpty(overlapped)) {
-				detailsObject = new BaseDetailsObject(lang);
+				detailsObject = new BaseDetailsObject(this.lang);
 			} else {
 				detailsObject = overlapped.get(0);
 				for (int i = 1; i < overlapped.size(); i++) {
@@ -102,14 +113,25 @@ public class MapSelectionResult {
 				}
 				detailsObjects.removeAll(overlapped);
 			}
-			detailsObject.addObject(object);
-			detailsObjects.add(detailsObject);
+			if (detailsObject.addObject(object)) {
+				detailsObjects.add(detailsObject);
+			} else {
+				other.add(selectedObject);
+			}
 		}
-		for (BaseDetailsObject object : detailsObjects) {
-			object.combineData();
-			processedObjects.add(new SelectedMapObject(object, poiProvider));
+		return detailsObjects;
+	}
+
+	@NonNull
+	private List<BaseDetailsObject> collectOverlappedObjects(@NonNull Object object,
+			@NonNull List<BaseDetailsObject> detailsObjects) {
+		List<BaseDetailsObject> overlapped = new ArrayList<>();
+		for (BaseDetailsObject detailsObject : detailsObjects) {
+			if (detailsObject.overlapsWith(object)) {
+				overlapped.add(detailsObject);
+			}
 		}
-		processedObjects.addAll(plainObjects);
+		return overlapped;
 	}
 
 	public boolean isEmpty() {

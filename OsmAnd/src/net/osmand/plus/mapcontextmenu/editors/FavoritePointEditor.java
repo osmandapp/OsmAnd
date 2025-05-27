@@ -7,7 +7,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.activities.MapActivity;
@@ -72,8 +72,10 @@ public class FavoritePointEditor extends PointEditor {
 			amenity = detailsObject.getSyntheticAmenity();
 		} else if (object instanceof OpenstreetmapPoint point) {
 			Entity entity = point.getEntity();
-			FullAmenitySearch searcher = app.getResourceManager().getAmenitySearcher();
-			amenity = searcher.findAmenity(latLon, entity.getId(), null, null);
+			AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
+			AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+			AmenitySearcher.Request request = new AmenitySearcher.Request(latLon, entity.getId(),null, null);
+			amenity = searcher.searchDetailedAmenity(request, settings);
 		}
 		if (amenity != null) {
 			setAmenity(amenity);

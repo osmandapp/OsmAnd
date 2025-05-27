@@ -368,14 +368,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								Object object = searchResult.object;
 
 								if (word.getType() == ObjectType.CITY || word.getType() == ObjectType.VILLAGE) {
-									SearchSettings settings = searchResult.requiredSearchPhrase.getSettings();
-									String lang = settings != null ?
-											settings.getLang() : app.getSettings().MAP_PREFERRED_LOCALE.get();
-									boolean transliterate = settings != null ?
-											settings.isTransliterate() : app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 									Amenity amenity = app.getSearchUICore().findAmenity(searchResult.localeName,
-											searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-											lang, transliterate);
+											searchResult.location.getLatitude(), searchResult.location.getLongitude());
 									if (amenity != null) {
 										object = amenity;
 									}
