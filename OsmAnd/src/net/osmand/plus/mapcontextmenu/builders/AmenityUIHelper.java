@@ -77,7 +77,7 @@ import java.util.Map.Entry;
 
 public class AmenityUIHelper extends MenuBuilder {
 
-	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
+	public static final Log LOG = PlatformUtil.getLog(AmenityUIHelper.class);
 
 	private static final DecimalFormat DISTANCE_FORMAT = new DecimalFormat("#.##");
 

@@ -135,15 +135,29 @@ public class BaseDetailsObject {
 			return true;
 		}
 		if (object instanceof RenderedObject renderedObject) {
-			return overlapPublicTransport(renderedObject);
+			List<TransportStop> stops = getTransportStops();
+			return overlapPublicTransport(Collections.singletonList(renderedObject), stops);
+		}
+		if (object instanceof TransportStop transportStop) {
+			List<RenderedObject> renderedObjects = getRenderedObjects();
+			return overlapPublicTransport(renderedObjects, Collections.singletonList(transportStop));
 		}
 		return false;
 	}
 
-	private boolean overlapPublicTransport(RenderedObject renderedObject) {
-		List<String> transportTypes = MapPoiTypes.getDefault().getPublicTransportTypes();
+	private boolean overlapPublicTransport(List<RenderedObject> renderedObjects,
+			List<TransportStop> stops) {
+		for (RenderedObject renderedObject : renderedObjects) {
+			if (overlapPublicTransport(renderedObject, stops)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-		Collection<TransportStop> stops = getTransportStops();
+	private boolean overlapPublicTransport(RenderedObject renderedObject,
+			List<TransportStop> stops) {
+		List<String> transportTypes = MapPoiTypes.getDefault().getPublicTransportTypes();
 		if (Algorithms.isEmpty(stops) || Algorithms.isEmpty(transportTypes)) {
 			return false;
 		}
@@ -395,7 +409,7 @@ public class BaseDetailsObject {
 		return !this.syntheticAmenity.getX().isEmpty() && !this.syntheticAmenity.getY().isEmpty();
 	}
 
-	public static boolean isSupportedObjectType(Object object) {
+	private boolean isSupportedObjectType(Object object) {
 		return object instanceof Amenity || object instanceof TransportStop
 				|| object instanceof RenderedObject || object instanceof BaseDetailsObject;
 	}
@@ -480,7 +494,10 @@ public class BaseDetailsObject {
 		if (object instanceof TransportStop) {
 			return 3;
 		}
-		return 4;
+		if (object instanceof RenderedObject) {
+			return 4;
+		}
+		return 5;
 	}
 
 	@Override

@@ -5,11 +5,9 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.utils.NativeUtilities;
@@ -84,24 +82,9 @@ public class MapSelectionResult {
 			processedObjects.addAll(allObjects);
 			return;
 		}
-		List<SelectedMapObject> amenities = new ArrayList<>();
-		List<SelectedMapObject> supported = new ArrayList<>();
-		List<SelectedMapObject> stops = new ArrayList<>();
 		List<SelectedMapObject> other = new ArrayList<>();
-		for (SelectedMapObject selectedObject : allObjects) {
-			Object object = selectedObject.object();
-			if (object instanceof Amenity) {
-				amenities.add(selectedObject);
-			} else if (object instanceof TransportStop transportStop) {
-				stops.add(selectedObject);
-			} else if (BaseDetailsObject.isSupportedObjectType(object)) {
-				supported.add(selectedObject);
-			} else {
-				other.add(selectedObject);
-			}
-		}
+		List<BaseDetailsObject> detailsObjects = processObjects(allObjects, other);
 
-		List<BaseDetailsObject> detailsObjects = processObjects(amenities, stops, supported, other);
 		for (BaseDetailsObject object : detailsObjects) {
 			if (object.getObjects().size() > 1) {
 				processedObjects.add(new SelectedMapObject(object, poiProvider));
@@ -113,21 +96,10 @@ public class MapSelectionResult {
 	}
 
 	@NonNull
-	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> amenities,
-												@NonNull List<SelectedMapObject> stops,
-												@NonNull List<SelectedMapObject> supported,
-												@NonNull List<SelectedMapObject> other) {
+	private List<BaseDetailsObject> processObjects(@NonNull List<SelectedMapObject> selectedObjects,
+			@NonNull List<SelectedMapObject> other) {
 		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
-		processGroup(amenities, detailsObjects);
-		processGroup(stops, detailsObjects);
-		processGroup(supported, detailsObjects);
-		return detailsObjects;
-	}
-
-	private void processGroup(@NonNull List<SelectedMapObject> selectedMapObjects,
-							  @NonNull List<BaseDetailsObject> detailsObjects) {
-
-		for (SelectedMapObject selectedObject : selectedMapObjects) {
+		for (SelectedMapObject selectedObject : selectedObjects) {
 			Object object = selectedObject.object();
 			List<BaseDetailsObject> overlapped = collectOverlappedObjects(object, detailsObjects);
 
@@ -141,9 +113,13 @@ public class MapSelectionResult {
 				}
 				detailsObjects.removeAll(overlapped);
 			}
-			detailsObject.addObject(object);
-			detailsObjects.add(detailsObject);
+			if (detailsObject.addObject(object)) {
+				detailsObjects.add(detailsObject);
+			} else {
+				other.add(selectedObject);
+			}
 		}
+		return detailsObjects;
 	}
 
 	@NonNull
