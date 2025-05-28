@@ -446,7 +446,7 @@ public class RouteCalculationResult {
 						info.routeEndPointOffset = roundAboutEnd;
 					}
 					RouteSegmentResult current = (routeInd == lind) ? s : list.get(lind);
-					String lang = ctx.getSettings().MAP_PREFERRED_LOCALE.get();
+					String lang = ctx.getSettings().MAP_PREFERRED_LOCALE.get().toLowerCase();
 					boolean transliterate = ctx.getSettings().MAP_TRANSLITERATE_NAMES.get();
 					info.setStreetName(current.getStreetName(lang, transliterate, list, lind));
 					info.setDestinationName(current.getDestinationName(lang, transliterate, list, lind, false));
@@ -472,9 +472,9 @@ public class RouteCalculationResult {
 					}
 
 					if (info.getRef() == null) {
-						String ref = current.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+						String ref = current.getObject().getRef(lang,
 								ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), current.isForwardDirection());
-						String destRef = current.getObject().getDestinationRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+						String destRef = current.getObject().getDestinationRef(lang,
 								ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), current.isForwardDirection());
 						rdoWithoutShield = current.getObject();
 						if (ref != null && !ref.equals(destRef)) {
@@ -864,11 +864,13 @@ public class RouteCalculationResult {
 				RouteSegmentResult lastSegmentResult = segs.get(segs.size() - 1);
 				RouteDataObject routeDataObject = lastSegmentResult.getObject();
 				info.setRouteDataObject(routeDataObject);
-				info.setRef(routeDataObject.getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+				String lang = ctx.getSettings().MAP_PREFERRED_LOCALE.get().toLowerCase();
+
+				info.setRef(routeDataObject.getRef(lang,
 						ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), lastSegmentResult.isForwardDirection()));
-				info.setStreetName(routeDataObject.getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+				info.setStreetName(routeDataObject.getName(lang,
 						ctx.getSettings().MAP_TRANSLITERATE_NAMES.get()));
-				info.setDestinationName(routeDataObject.getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+				info.setDestinationName(routeDataObject.getDestinationName(lang,
 						ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), lastSegmentResult.isForwardDirection()));
 			}
 			info.distance = 0;
