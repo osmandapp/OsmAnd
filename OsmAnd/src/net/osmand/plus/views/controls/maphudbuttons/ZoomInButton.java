@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.views.mapwidgets.configure.buttons.ZoomInButtonState;
@@ -27,6 +28,9 @@ public class ZoomInButton extends MapButton {
 		buttonState = app.getMapButtonsHelper().getZoomInButtonState();
 
 		setOnClickListener(v -> {
+			MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
+			trackingUtils.resetBackToLocation();
+
 			if (mapActivity.getContextMenu().zoomInPressed()) {
 				return;
 			}
