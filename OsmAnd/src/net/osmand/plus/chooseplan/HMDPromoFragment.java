@@ -2,7 +2,7 @@ package net.osmand.plus.chooseplan;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_HMD_PROMO_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.*;
-import static net.osmand.plus.inapp.InAppPurchaseUtils.HMD_PROMO_MONTHS;
+import static net.osmand.plus.inapp.InAppPurchaseUtils.HMD_PROMO_YEARS;
 
 import android.view.View;
 import android.widget.TextView;
@@ -42,8 +42,8 @@ public class HMDPromoFragment extends PromoCompanyFragment {
 		TextView title = view.findViewById(R.id.title);
 		TextView description = view.findViewById(R.id.description);
 
-		title.setText(getString(R.string.hmd_promo, String.valueOf(HMD_PROMO_MONTHS)));
-		description.setText(getString(R.string.hmd_promo_description, String.valueOf(HMD_PROMO_MONTHS)));
+		title.setText(getString(R.string.hmd_promo_years, String.valueOf(HMD_PROMO_YEARS)));
+		description.setText(getString(R.string.hmd_promo_description_years, String.valueOf(HMD_PROMO_YEARS)));
 	}
 
 	public static boolean shouldShow(@NonNull OsmandApplication app) {

@@ -11,7 +11,7 @@ import java.util.Calendar;
 
 public class InAppPurchaseUtils {
 
-	public static final int HMD_PROMO_MONTHS = 12 * 3;
+	public static final int HMD_PROMO_YEARS = 3;
 	public static final int HUGEROCK_PROMO_MONTHS = 6;
 	public static final int TRIPLTEK_PROMO_MONTHS = 12;
 	private static final long ANDROID_AUTO_START_DATE_MS = 10L * 1000L * 60L * 60L * 24L; // 10 days
@@ -212,7 +212,7 @@ public class InAppPurchaseUtils {
 		if (Version.isHMDBuild()) {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTimeInMillis(Version.getInstallTime(app));
-			calendar.add(Calendar.MONTH, HMD_PROMO_MONTHS);
+			calendar.add(Calendar.YEAR, HMD_PROMO_YEARS);
 
 			return calendar.getTimeInMillis();
 		}
