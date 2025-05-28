@@ -2062,20 +2062,7 @@
 \n - 可选择在后台模式下记录行程（当设备处于睡眠模式时）。
 \n OsmAnd 是积极开发的开源软件。每个人都可以通过报告错误、改进翻译或编码新功能来为应用程序做出贡献。此外，该项目还依靠财政捐款来资助新功能的编码和测试。
 \n</string>
-    <string name="osmand_plus_extended_description_part8">大概的地图覆盖区域和品质： 
-\n• 西欧： **** 
-\n• 东欧： *** 
-\n• 俄罗斯： *** 
-\n• 北美洲： *** 
-\n• 南美洲： ** 
-\n• 亚洲：** 
-\n• 日本和韩国： *** 
-\n• 中东： ** 
-\n• 非洲： ** 
-\n• 南极洲： * 
-\n全球大多数国家都可以下载
-\n 从阿富汗到津巴布韦，从澳大利亚到美国。 阿根廷、巴西、加拿大、法国、德国、墨西哥、英国、 西班牙…
-\n</string>
+    <string name="osmand_plus_extended_description_part8">大概的地图覆盖区域和品质： \n• 西欧： **** \n• 东欧： *** \n• 俄罗斯： *** \n• 北美洲： *** \n• 南美洲： ** \n• 亚洲：** \n• 日本和韩国： *** \n• 中东： ** \n• 非洲： ** \n• 南极洲： * \n全球大多数国家都可以下载 \n 从阿富汗到津巴布韦，从澳大利亚到美国。 阿根廷、巴西、加拿大、法国、德国、墨西哥、英国、 西班牙…</string>
     <string name="route_updated_loc_found">等待定位以计算路线</string>
     <string name="osmand_parking_position_description_add_time">将车停在</string>
     <string name="native_app_allocated_memory_descr">本地存储总计由应用程序 %1$s MB（Dalvik %2$s MB，其它 %3$s MB）。
