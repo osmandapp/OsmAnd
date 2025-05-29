@@ -5314,7 +5314,7 @@
     <string name="allow_display_on_top_description">Kartentexte übereinander anzeigen lassen</string>
     <string name="show_debug_info">Debug-Informationen anzeigen</string>
     <string name="show_debug_info_description">Grafische Informationen über die Platzierung jedes Kartentextes anzeigen</string>
-    <string name="map_text">Kartentexte</string>
+    <string name="map_text">Karten-Rendering</string>
     <string name="routing_attr_avoid_cobblestone_name">Kopfsteinpflaster vermeiden</string>
     <string name="routing_attr_avoid_cobblestone_description">Kopfsteinpflaster vermeiden</string>
     <string name="track_vertical_exaggeration_description">Durch Ändern des Skalenwerts können Sie die Höhe des 3D-Tracks ändern.</string>
@@ -5781,4 +5781,8 @@
     <string name="save_to_device">Auf dem Gerät speichern</string>
     <string name="deactivated_map">Deaktivierte Karte</string>
     <string name="suggest_activate_map_msg">Die %1$s-Karte ist deaktiviert,\naktivieren um das Gebiet anzusehen.</string>
+    <string name="read_on">Weiterlesen %1$s</string>
+    <string name="show_debug_tile">Kachelinformationen anzeigen</string>
+    <string name="show_symbols_debug_info">Debug-Infos anzeigen</string>
+    <string name="show_debug_tile_description">Zeige Infos zu den Kartensymbolen der einzelnen Kacheln an</string>
 </resources>
