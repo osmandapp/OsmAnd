@@ -90,7 +90,7 @@ public class POIClickTest extends AndroidTest {
 	public void testClickOnMApPoint() throws Throwable {
 		showWikiOnMap(app);
 		showFavorites(app);
-		app.getSettings().WIKI_DATA_SOURCE_TYPE.set(DataSourceType.ONLINE);
+//		app.getSettings().WIKI_DATA_SOURCE_TYPE.set(DataSourceType.ONLINE);
 		activityRule.launchActivity(null);
 		double lattitude = 50.452880;
 		double longitude = 30.514269;
