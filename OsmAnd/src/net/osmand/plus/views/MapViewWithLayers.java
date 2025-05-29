@@ -164,8 +164,8 @@ public class MapViewWithLayers extends FrameLayout {
 			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
 				mapView.setMapRenderer(null);
 				resetMapRendererView();
+				atlasMapRendererView.handleOnDestroy();
 			}
-			atlasMapRendererView.handleOnDestroy();
 		}
 		mapView.clearTouchDetectors();
 		app.getOsmandMap().removeRenderingViewSetupListener(getRenderingViewSetupListener());
