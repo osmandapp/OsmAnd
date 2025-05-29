@@ -177,6 +177,7 @@ public class POIClickTest extends AndroidTest {
 		String json = gson.toJson(events);
 
 		File file = new File("/sdcard/check_result.json");
+		file.mkdir();
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.write(json.getBytes());
 		fos.close();
