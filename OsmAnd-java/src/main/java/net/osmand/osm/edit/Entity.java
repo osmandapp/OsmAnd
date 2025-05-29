@@ -78,12 +78,12 @@ public abstract class Entity implements Serializable {
 		}
 
 		public String getOsmUrl() {
+			long osmId = id >> 6;
 			final String browseUrl = "https://www.openstreetmap.org/";
-			if (type == EntityType.NODE)
-				return browseUrl + "node/" + (id >> 6);
-			if (type == EntityType.WAY)
-				return browseUrl + "way/" + (id >> 6);
-			return null;
+			if (type == EntityType.NODE) return browseUrl + "node/" + osmId;
+			if (type == EntityType.WAY) return browseUrl + "way/" + osmId;
+			if (type == EntityType.RELATION) return browseUrl + "relation/" + osmId;
+			return browseUrl;
 		}
 
 		@Override
