@@ -14,6 +14,11 @@ import static net.osmand.test.common.OsmAndDialogInteractions.waitForAnyView;
 import static net.osmand.test.common.SystemDialogInteractions.findDescendantOfType;
 import static net.osmand.test.common.SystemDialogInteractions.getViewById;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -57,6 +62,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,11 +182,38 @@ public class POIClickTest extends AndroidTest {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(events);
 
-		File file = new File("/sdcard/check_result.json");
-		file.mkdir();
-		FileOutputStream fos = new FileOutputStream(file);
-		fos.write(json.getBytes());
-		fos.close();
+//		File file = new File("/sdcard/0/check_result.json");
+//		file.mkdirs();
+//		FileOutputStream fos = new FileOutputStream(file);
+//		fos.write(json.getBytes());
+//		fos.close();
+
+
+
+		ContentResolver resolver = app.getContentResolver();
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "check_result.json");
+		contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "application/json"); // Or "text/plain"
+		contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS); // Or DIRECTORY_DOCUMENTS
+
+		Uri uri = null;
+		try {
+			uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
+			if (uri != null) {
+				OutputStream os = resolver.openOutputStream(uri);
+				if (os != null) {
+					os.write(json.getBytes());
+					os.close();
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			if (uri != null) {
+				resolver.delete(uri, null, null);
+			}
+		}
+
+
 
 		LOG.debug("\n\n\n\ntestClickOnMApPoint: \n" + json);
 	}
