@@ -108,23 +108,6 @@ public class QuadRect {
 		right -= dx;
 		bottom -= dy;
 	}
-	
-	public void smartOffset(double dx, double dy) {
-		if (left > right) {
-			left += dx;
-			right -= dx;
-		} else {
-			left -= dx;
-			right += dx;
-		}
-		if (top > bottom) {
-			top += dy;
-			bottom -= dy;
-		} else {
-			top -= dy;
-			bottom += dy;
-		}
-	}
 
 	public boolean hasInitialState() {
 		return left == 0 && right == 0 && top == 0 && bottom == 0;

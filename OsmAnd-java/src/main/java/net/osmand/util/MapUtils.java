@@ -885,4 +885,49 @@ public class MapUtils {
 		}
 		return dist;
 	}
+
+	public static void inflateBBox31(QuadRect bbox, int dx, int dy) {
+		if (bbox.left <= bbox.right) {
+			bbox.left -= dx;
+			bbox.right += dx;
+		} else {
+			bbox.left += dx;
+			bbox.right -= dx;
+		}
+		if (bbox.top <= bbox.bottom) {
+			bbox.top -= dy;
+			bbox.bottom += dy;
+		} else {
+			bbox.top += dy;
+			bbox.bottom -= dy;
+		}
+		int INT31_MAX = (1 << 31) - 1;
+		bbox.top = Math.min(Math.max(0, bbox.top), INT31_MAX);
+		bbox.left = Math.min(Math.max(0, bbox.left), INT31_MAX);
+		bbox.right = Math.min(Math.max(0, bbox.right), INT31_MAX);
+		bbox.bottom = Math.min(Math.max(0, bbox.bottom), INT31_MAX);
+	}
+
+	public static void inflateBBoxLatLon(QuadRect bbox, double dx, double dy) {
+		if (bbox.left <= bbox.right) {
+			bbox.left -= dx;
+			bbox.right += dx;
+		} else {
+			bbox.left += dx;
+			bbox.right -= dx;
+		}
+		if (bbox.top >= bbox.bottom) {
+			bbox.top += dy;
+			bbox.bottom -= dy;
+		} else {
+			bbox.top -= dy;
+			bbox.bottom += dy;
+		}
+		// clamp X/longitude [-180,180]
+		bbox.left = Math.max(-180.0, Math.min(180.0, bbox.left));
+		bbox.right = Math.max(-180.0, Math.min(180.0, bbox.right));
+		// clamp Y/latitude [-90,90]
+		bbox.top = Math.max(-90.0, Math.min(90.0, bbox.top));
+		bbox.bottom = Math.max(-90.0, Math.min(90.0, bbox.bottom));
+	}
 }
