@@ -155,14 +155,10 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		return app.getOsmandMap().getMapView();
 	}
 
-	public void setMapActivityAndUpdate(@NonNull MapActivity mapActivity) {
-		setMapActivity(mapActivity);
-		updatePositions(mapActivity);
-	}
-
 	public void setMapActivity(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
+		updatePositions(mapActivity);
 	}
 
 	public void updatePositions(@NonNull MapActivity mapActivity) {

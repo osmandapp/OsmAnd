@@ -548,9 +548,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					compassButton.setLayoutParams(getActionButtonLayoutParams(size));
 					compassButton.setMapActivity(mapActivity);
 					MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-					if (mapControlsLayer.getMapActivity() == null) {
-						mapControlsLayer.setMapActivity(mapActivity);
-					}
 					mapControlsLayer.addCustomMapButton(compassButton);
 				}
 			}

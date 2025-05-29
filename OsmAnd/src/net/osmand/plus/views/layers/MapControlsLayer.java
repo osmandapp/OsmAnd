@@ -152,7 +152,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@NonNull
 	private MapButton createMapButton(@NonNull LayoutInflater inflater, @LayoutRes int layoutId) {
 		MapButton button = (MapButton) inflater.inflate(layoutId, mapHudLayout, false);
-		button.setMapActivityAndUpdate(requireMapActivity());
+		button.setMapActivity(requireMapActivity());
 		return button;
 	}
 
@@ -167,9 +167,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapButton.setLongClickable(longClickable);
 		mapButton.setUseCustomPosition(useCustomPosition);
 		mapButton.setUseDefaultAppearance(useDefaultAppearance);
+
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapButton.setMapActivityAndUpdate(mapActivity);
+			mapButton.setMapActivity(mapActivity);
 		} else {
 			mapButton.updatePositions();
 		}

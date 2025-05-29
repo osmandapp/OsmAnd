@@ -65,8 +65,8 @@ public class CompassButton extends MapButton {
 	}
 
 	@Override
-	public void setMapActivityAndUpdate(@NonNull @NotNull MapActivity mapActivity) {
-		super.setMapActivityAndUpdate(mapActivity);
+	public void setMapActivity(@NonNull @NotNull MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
 		setupTouchListener();
 		setupAccessibilityActions();
 	}
