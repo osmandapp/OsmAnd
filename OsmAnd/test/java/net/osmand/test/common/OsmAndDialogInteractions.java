@@ -9,6 +9,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.Matchers.hasOnClickListener;
+import static net.osmand.test.common.SystemDialogInteractions.isViewVisible;
 import static org.hamcrest.Matchers.allOf;
 
 import android.content.Context;
@@ -19,6 +20,7 @@ import androidx.annotation.StringRes;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 
@@ -108,5 +110,23 @@ public class OsmAndDialogInteractions {
 
 	public static void writeText(@IdRes int id, @NonNull String text) {
 		onView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(typeText(text));
+	}
+
+	public static boolean isContextMenuOpened() {
+		return isViewVisible(withId(R.id.context_menu_layout));
+	}
+
+	public static boolean isMultiSelectionMenuOpened() {
+		return isViewVisible(withId(R.id.multi_selection_main_view));
+	}
+
+	public static void refreshMap(@NonNull OsmandApplication app) {
+		app.getOsmandMap().getMapView().refreshMap();
+	}
+
+	public static void moveAndZoomMap(@NonNull OsmandApplication app, double latitude, double longitude, int zoom) {
+		app.getOsmandMap().getMapView().setLatLon(latitude, longitude);
+		refreshMap(app);
+		app.getOsmandMap().getMapView().setIntZoom(zoom);
 	}
 }
