@@ -40,6 +40,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.mapcontextmenu.other.MenuObject;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.actions.GetViewAction;
 
@@ -189,7 +190,7 @@ public class POIClickTest extends AndroidTest {
 //		fos.close();
 
 
-
+/*
 		ContentResolver resolver = app.getContentResolver();
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "check_result.json");
@@ -214,6 +215,10 @@ public class POIClickTest extends AndroidTest {
 		}
 
 
+*/
+
+
+		FileUtils.saveFileToDownloads(json, app);
 
 		LOG.debug("\n\n\n\ntestClickOnMApPoint: \n" + json);
 	}

@@ -4,6 +4,14 @@ import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
@@ -450,6 +459,131 @@ public class FileUtils {
 		String fileName = appModeKey + OSMAND_SETTINGS_FILE_EXT;
 		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
 		return new File(backupDir, fileName);
+	}
+
+	public static void saveFileToDownloads(String jsonString, Context context) {
+		ContentResolver resolver = context.getContentResolver();
+		Uri existingUri = null;
+		String fileName = "check_result.json";
+		String mimeType = "application/json"; // Or "text/plain"
+		String relativePath = Environment.DIRECTORY_DOWNLOADS;
+
+		String selection = MediaStore.MediaColumns.DISPLAY_NAME + "=? AND " +
+				MediaStore.MediaColumns.RELATIVE_PATH + "=?";
+		String[] selectionArgs = new String[]{fileName, relativePath + File.separator}; // Note the File.separator for relative path
+
+		Uri collection = MediaStore.Downloads.EXTERNAL_CONTENT_URI;
+
+		try (Cursor cursor = resolver.query(collection,
+				new String[]{MediaStore.MediaColumns._ID, MediaStore.MediaColumns.DATA}, // _ID for Uri, DATA for path (though DATA is deprecated)
+				selection,
+				selectionArgs,
+				null)) {
+			if (cursor != null && cursor.moveToFirst()) {
+				long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID));
+				existingUri = Uri.withAppendedPath(collection, String.valueOf(id));
+				// Log.d("FileSave", "Existing file found, URI: " + existingUri.toString());
+			}
+		} catch (IllegalArgumentException e) {
+			// Handle cases where the column might not be found or other query issues
+			e.printStackTrace();
+			// Log.e("FileSave", "Error querying for existing file: " + e.getMessage());
+		}
+
+
+		Uri uriToUse = existingUri; // Start with the existing URI if found
+
+		// 2. If no existing URI, create new content values for insertion
+		if (uriToUse == null) {
+			ContentValues contentValues = new ContentValues();
+			contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName);
+			contentValues.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
+			contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, relativePath);
+
+			try {
+				uriToUse = resolver.insert(collection, contentValues);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return;
+			}
+		}
+		if (uriToUse != null) {
+			OutputStream os = null;
+			try {
+				os = resolver.openOutputStream(uriToUse, "w"); // "w" mode means write, truncating if it exists
+				if (os != null) {
+					os.write(jsonString.getBytes());
+					// File saved successfully
+					// Log.d("FileSave", "File saved/overwritten to Downloads: " + uriToUse.toString());
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				// Log.e("FileSave", "Error writing to file: " + e.getMessage());
+				// If it was a new file insertion and writing failed, you might want to delete it
+				if (existingUri == null && uriToUse != null) {
+					resolver.delete(uriToUse, null, null);
+					// Log.d("FileSave", "Deleted incomplete new file: " + uriToUse.toString());
+				}
+			} finally {
+				try {
+					if (os != null) {
+						os.close();
+					}
+				} catch (IOException e) {
+					PlatformUtil.getLog(FileUtils.class).error("");
+				}
+			}
+		}
+	}
+
+	public static void saveFileToPublicDownloads(String jsonString, Context context) {
+		if (!isExternalStorageWritable()) {
+			return;
+		}
+
+		File downloadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+		if (downloadDir == null) {
+			return;
+		}
+
+		if (!downloadDir.exists()) {
+			if (!downloadDir.mkdirs()) {
+				return;
+			}
+		}
+
+		File file = new File(downloadDir, "check_result.json");
+
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(file);
+			fos.write(jsonString.getBytes());
+
+			MediaScannerConnection.scanFile(context,
+					new String[]{file.getAbsolutePath()},
+					new String[]{"application/json"},
+					new MediaScannerConnection.OnScanCompletedListener() {
+						public void onScanCompleted(String path, Uri uri) {
+						}
+					});
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (fos != null) {
+				try {
+					fos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private static boolean isExternalStorageWritable() {
+		String state = Environment.getExternalStorageState();
+		return Environment.MEDIA_MOUNTED.equals(state);
 	}
 
 	public interface RenameCallback {
