@@ -3,12 +3,14 @@ package net.osmand.plus.mapcontextmenu.editors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
@@ -78,7 +80,7 @@ public class FavoritePointEditor extends PointEditor {
 
 			Amenity requestAmenity = new Amenity();
 			requestAmenity.setLocation(latLon);
-			requestAmenity.setId(entity.getId() << MapObject.AMENITY_ID_RIGHT_SHIFT);
+			requestAmenity.setId(ObfConstants.createMapObjectIdFromOsmId(entity.getId(), EntityType.valueOf(entity)));
 
 			AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity);
 			amenity = searcher.searchDetailedAmenity(request, settings);
