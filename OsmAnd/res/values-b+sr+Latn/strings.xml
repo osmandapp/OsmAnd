@@ -5741,4 +5741,5 @@
     <string name="deactivated_map">Deaktivirana mapa</string>
     <string name="suggest_activate_map_msg">%1$s mapa je deaktivirana,\naktivirajte da biste videli ovu oblast.</string>
     <string name="unit_of_temperature_description">Izabrane jedinice će se primenjivati na sve podatke vezane za temperaturu u trenutnom profilu.</string>
+    <string name="hmd_promo_years">HMD promocija za %1$s godina</string>
 </resources>
