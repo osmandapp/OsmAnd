@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/main_view"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		app:layout_behavior="net.osmand.plus.backup.ui.ScrollingFooterBehaviour">
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:indeterminate="true"
+			android:visibility="invisible"
+			app:mpb_progressStyle="horizontal"
+			app:mpb_setBothDrawables="true"
+			app:mpb_useIntrinsicPadding="false"
+			tools:visibility="visible" />
+
+		<androidx.core.widget.NestedScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:fillViewport="true">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingLeft="@dimen/content_padding"
+				android:paddingRight="@dimen/content_padding">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/description"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding"
+					android:layout_marginBottom="@dimen/content_padding"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					app:lineHeight="@dimen/default_title_line_height"
+					android:textStyle="normal"
+					tools:text="@string/osmand_cloud_create_account_descr" />
+
+				<include
+					android:id="@+id/sign_in_container"
+					layout="@layout/authorize_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small_half" />
+
+				<include
+					android:id="@+id/sign_up_container"
+					layout="@layout/authorize_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small_half"
+					android:visibility="gone" />
+
+				<include
+					android:id="@+id/delete_account_container"
+					layout="@layout/authorize_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small_half"
+					android:visibility="gone" />
+
+				<include
+					android:id="@+id/verify_email_container"
+					layout="@layout/verify_email_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small_half"
+					android:layout_marginBottom="@dimen/content_padding_small_half_inverted"
+					android:visibility="gone" />
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/get_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:dialogButtonType="secondary"
+					app:dialogButtonTitle="@string/shared_string_get"
+					app:dialogButtonHeight="@dimen/bottom_sheet_list_item_height"
+					app:dialogButtonTopMargin="@dimen/content_padding_small" />
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/continue_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:dialogButtonType="primary"
+					app:dialogButtonTitle="@string/shared_string_continue"
+					app:dialogButtonHeight="@dimen/bottom_sheet_list_item_height"
+					app:dialogButtonTopMargin="@dimen/dialog_content_margin"
+					app:dialogButtonBottomMargin="@dimen/content_padding"/>
+
+				<Space
+					android:id="@+id/space"
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_weight="1" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/contact_support_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:layout_marginBottom="@dimen/content_padding"
+					android:gravity="center_horizontal|bottom"
+					android:letterSpacing="@dimen/description_letter_spacing"
+					android:paddingTop="@dimen/text_margin_small"
+					android:paddingBottom="@dimen/text_margin_small"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size"
+					app:lineHeight="19.6sp"
+					android:textStyle="normal"
+					tools:text="@string/osmand_cloud_help_descr" />
+
+				<Space
+					android:id="@+id/keyboard_space"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/toolbar_height_expanded"
+					android:visibility="gone" />
+
+			</LinearLayout>
+
+		</androidx.core.widget.NestedScrollView>
+
+	</FrameLayout>
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:color/transparent"
+		android:stateListAnimator="@animator/appbar_always_elevated">
+
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+			android:id="@+id/toolbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height_expanded"
+			android:background="?attr/actionModeBackground"
+			app:collapsedTitleTextAppearance="@style/AppBarTitle"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMarginBottom="@dimen/content_padding_small"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitle"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:minHeight="@dimen/toolbar_height"
+				app:layout_collapseMode="pin"
+				app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				app:title="@string/shared_string_import"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp">
+
+			</androidx.appcompat.widget.Toolbar>
+
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
