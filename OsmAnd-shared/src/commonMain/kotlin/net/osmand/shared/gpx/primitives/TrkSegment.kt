@@ -1,8 +1,8 @@
 package net.osmand.shared.gpx.primitives
 
+import net.osmand.shared.gpx.ElevationApproximator
+import net.osmand.shared.gpx.ElevationDiffsCalculator
 import net.osmand.shared.gpx.ElevationDiffsCalculator.*
-import net.osmand.shared.gpx.ElevationWptApproximator
-import net.osmand.shared.gpx.ElevationWptDiffsCalculator
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.gpx.SplitMetric
@@ -42,7 +42,7 @@ class TrkSegment : GpxExtensions() {
 
 		for(i in points.indices){
 			val point = points[i]
-			val isExtremum = isPointExtremum(point, extremums)
+			val isExtremum = isPointExtremum(i, extremums)
 
 			if (i > 0) {
 				if (prevExtremumIndex != null && isExtremum) {
@@ -82,10 +82,10 @@ class TrkSegment : GpxExtensions() {
 		if (!approximator.approximate()) return emptyList()
 		val distances = approximator.getDistances() ?: return emptyList()
 		val elevations = approximator.getElevations() ?: return emptyList()
-		val wptPts = approximator.getApproximatedWpts()
+		val survivedIndexes = approximator.getSurvivedIndexes() ?: return emptyList()
 
 		if (distances.size < 2) return emptyList()
-		val elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations, wptPts)
+		val elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations, survivedIndexes)
 		elevationDiffsCalc.calculateElevationDiffs()
 		val extremums = elevationDiffsCalc.getExtremums()
 
@@ -112,23 +112,55 @@ class TrkSegment : GpxExtensions() {
 		return accumulatedDistances
 	}
 
-	private fun isPointExtremum(wptPt: WptPt, extremums: List<Extremum>): Boolean {
+	private fun isPointExtremum(index: Int, extremums: List<Extremum>): Boolean {
 		for (extremum in extremums) {
-			if (wptPt == extremum.wptPt) {
+			if (index == extremum.index) {
 				return true
 			}
 		}
 		return false
 	}
 
-	private fun getElevationApproximator(): ElevationWptApproximator {
-		return ElevationWptApproximator(points)
+	private fun getElevationApproximator(): ElevationApproximator {
+		return object : ElevationApproximator() {
+			override fun getPointLatitude(index: Int): Double {
+				return points[index].lat
+			}
+
+			override fun getPointLongitude(index: Int): Double {
+				return points[index].lon
+			}
+
+			override fun getPointElevation(index: Int): Double {
+				return points[index].ele
+			}
+
+			override fun getPointsCount(): Int {
+				return points.size
+			}
+		}
 	}
 
 	private fun getElevationDiffsCalculator(
-		distances: DoubleArray, elevations: DoubleArray, wptPts: MutableList<WptPt>
-	): ElevationWptDiffsCalculator {
-		return ElevationWptDiffsCalculator(distances, elevations, wptPts)
+		distances: DoubleArray, elevations: DoubleArray, indexes: IntArray
+	): ElevationDiffsCalculator {
+		return object : ElevationDiffsCalculator() {
+			override fun getPointDistance(index: Int): Double {
+				return distances[index]
+			}
+
+			override fun getPointIndex(index: Int): Int {
+				return indexes[index]
+			}
+
+			override fun getPointElevation(index: Int): Double {
+				return elevations[index]
+			}
+
+			override fun getPointsCount(): Int {
+				return distances.size
+			}
+		}
 	}
 
 	fun splitByUpDownHills(): List<GpxTrackAnalysis> {

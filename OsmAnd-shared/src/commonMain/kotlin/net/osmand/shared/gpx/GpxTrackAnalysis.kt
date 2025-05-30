@@ -459,7 +459,6 @@ class GpxTrackAnalysis {
 				}
 			}
 			processElevationDiff(s)
-			segmentSlopeType = s.segmentSlopeType
 		}
 
 
@@ -582,8 +581,9 @@ class GpxTrackAnalysis {
 		approximator.approximate()
 		val distances = approximator.getDistances()
 		val elevations = approximator.getElevations()
-		if (distances != null && elevations != null) {
-			val elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations)
+		val indexes = approximator.getSurvivedIndexes()
+		if (distances != null && elevations != null && indexes != null) {
+			val elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations, indexes)
 			elevationDiffsCalc.calculateElevationDiffs()
 			diffElevationUp += elevationDiffsCalc.getDiffElevationUp()
 			diffElevationDown += elevationDiffsCalc.getDiffElevationDown()
@@ -611,11 +611,15 @@ class GpxTrackAnalysis {
 	}
 
 	private fun getElevationDiffsCalculator(
-		distances: DoubleArray, elevations: DoubleArray
+		distances: DoubleArray, elevations: DoubleArray, indexes: IntArray
 	): ElevationDiffsCalculator {
 		return object : ElevationDiffsCalculator() {
 			override fun getPointDistance(index: Int): Double {
 				return distances[index]
+			}
+
+			override fun getPointIndex(index: Int): Int {
+				return indexes[index]
 			}
 
 			override fun getPointElevation(index: Int): Double {

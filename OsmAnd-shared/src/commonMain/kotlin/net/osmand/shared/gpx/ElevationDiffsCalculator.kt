@@ -1,6 +1,5 @@
 package net.osmand.shared.gpx
 
-import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KMapUtils
@@ -14,11 +13,12 @@ abstract class ElevationDiffsCalculator {
 	private var diffElevationDown = 0.0
 	private var extremums = mutableListOf<Extremum>()
 
-	data class Extremum(val dist: Double, val ele: Double, val wptPt: WptPt? = null)
+	data class Extremum(val dist: Double, val ele: Double, val index: Int)
 
 	abstract fun getPointDistance(index: Int): Double
 
 	abstract fun getPointElevation(index: Int): Double
+	abstract fun getPointIndex(index: Int): Int
 
 	abstract fun getPointsCount(): Int
 
@@ -32,10 +32,6 @@ abstract class ElevationDiffsCalculator {
 
 	fun getExtremums(): List<Extremum> {
 		return extremums.toList()
-	}
-
-	fun setExtremums(extremums: MutableList<Extremum>) {
-		this.extremums = extremums
 	}
 
 	private fun getProjectionDist(x: Double, y: Double, fromx: Double, fromy: Double, tox: Double, toy: Double): Double {
@@ -81,7 +77,12 @@ abstract class ElevationDiffsCalculator {
 		points[pointsCount - 1] = true
 		findMaximumExtremumBetween(0, pointsCount - 1, points)
 
-		collectExtremums(points)
+		extremums = mutableListOf()
+		for (i in points.indices) {
+			if (points[i]) {
+				extremums.add(Extremum(getPointDistance(i), getPointElevation(i), getPointIndex(i)))
+			}
+		}
 
 		for (i in 1 until extremums.size) {
 			val prevElevation = extremums[i - 1].ele
@@ -91,15 +92,6 @@ abstract class ElevationDiffsCalculator {
 				diffElevationUp += eleDiffSumm
 			} else {
 				diffElevationDown -= eleDiffSumm
-			}
-		}
-	}
-
-	open fun collectExtremums(points: BooleanArray){
-		extremums = mutableListOf()
-		for (i in points.indices) {
-			if (points[i]) {
-				extremums.add(Extremum(getPointDistance(i), getPointElevation(i)))
 			}
 		}
 	}
@@ -127,7 +119,8 @@ abstract class ElevationDiffsCalculator {
 			approximator.approximate()
 			val distances: DoubleArray? = approximator.getDistances()
 			val elevations: DoubleArray? = approximator.getElevations()
-			if (distances != null && elevations != null) {
+			val pointIndexes: IntArray? = approximator.getSurvivedIndexes()
+			if (distances != null && elevations != null && pointIndexes != null) {
 				var diffElevationUp = 0.0
 				var diffElevationDown = 0.0
 				val elevationDiffsCalc: ElevationDiffsCalculator =
@@ -138,6 +131,10 @@ abstract class ElevationDiffsCalculator {
 
 						override fun getPointElevation(index: Int): Double {
 							return elevations[index]
+						}
+
+						override fun getPointIndex(index: Int): Int {
+							return pointIndexes[index]
 						}
 
 						override fun getPointsCount(): Int {
