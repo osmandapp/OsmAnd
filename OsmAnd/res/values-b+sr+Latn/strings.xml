@@ -5674,7 +5674,7 @@
     <string name="no_photo_for_location_desc">Još uvek nije dodata nijedna korisnička fotografija na ovu lokaciju</string>
     <string name="no_places_available">Nema slobodnih mesta</string>
     <string name="shared_string_road_exit">Izlaz</string>
-    <string name="hmd_promo_description">Besplatan pristup funkcijama uključujući neograničeno preuzimanje mapa, 3D reljef itd. za %1$s mesec</string>
+    <string name="hmd_promo_description">Besplatan pristup funkcijama uključujući neograničeno preuzimanja mapa, 3D teren i još mnogo toga za %1$s mesečno</string>
     <string name="hmd_promo">HMD promocija za %1$s meseci</string>
     <string name="apply_to_all_points">Primeni na sve tačke</string>
     <string name="original_icon_description">Svaka bi tačka zadržala svoju ikonu.</string>
@@ -5741,5 +5741,6 @@
     <string name="deactivated_map">Deaktivirana mapa</string>
     <string name="suggest_activate_map_msg">%1$s mapa je deaktivirana,\naktivirajte da biste videli ovu oblast.</string>
     <string name="unit_of_temperature_description">Izabrane jedinice će se primenjivati na sve podatke vezane za temperaturu u trenutnom profilu.</string>
-    <string name="hmd_promo_years">HMD promocija za %1$s godina</string>
+    <string name="hmd_promo_years">HMD promocija %1$s godišnje</string>
+    <string name="hmd_promo_description_years">Besplatan pristup funkcijama uključujući neograničeno preuzimanja mapa, 3D teren i još mnogo toga za %1$s godišnje</string>
 </resources>
