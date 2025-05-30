@@ -5756,7 +5756,7 @@
     <string name="display_priority">Prioritet for visning</string>
     <string name="poi_source">IP-kilde</string>
     <string name="wiki_around">Populære steder i nærheden</string>
-    <string name="read_on_wiki">Læs på Wikipedia</string>
+    <string name="read_on">Læs på %1$s</string>
     <string name="prediction_time_description">Positionsikonet i OsmAnd animeres med hvert modtaget GPS-datapunkt (en gang i sekundet). En lille forsinkelse i bevægelsen kan være mærkbar, især når brugeren bevæger sig hurtigt, eller GPS-signalet svinger.</string>
     <string name="prediction_time">Forudsigelsestid</string>
     <string name="shared_string_no_animation">Ingen animation</string>

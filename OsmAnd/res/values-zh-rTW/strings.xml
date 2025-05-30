@@ -5672,7 +5672,7 @@
     <string name="no_places_available">沒有位置</string>
     <string name="no_photo_for_location_desc">此位置尚未新增使用者照片</string>
     <string name="hmd_promo_description">%1$s個月免費使用功能，包括無限制地圖下載、3D 浮雕等</string>
-    <string name="shared_string_road_exit">離開</string>
+    <string name="shared_string_road_exit">出口</string>
     <string name="hmd_promo">HMD 的%1$s個月促銷</string>
     <string name="original_shape_description">每個點都會維持其形狀。</string>
     <string name="save_favorite_default_appearance">對資料夾中的現有點套用變更，或是僅對新的點套用？</string>
@@ -5707,7 +5707,6 @@
     <string name="destination_first">目的地優先</string>
     <string name="display_priority">顯示優先程度</string>
     <string name="poi_source">POI 來源</string>
-    <string name="read_on_wiki">在維基百科上閱讀</string>
     <string name="prediction_time_advanced_description">調整預測時間以將延遲降至最低。</string>
     <string name="prediction_time">預測時間</string>
     <string name="shared_string_no_animation">無動畫</string>

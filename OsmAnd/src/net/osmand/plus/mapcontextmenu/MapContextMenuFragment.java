@@ -665,7 +665,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (needMoreItem) {
 			items.add(TRANSPORT_BADGE_MORE_ITEM);
 		}
-		TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(app, items, nightMode);
+		TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(requireActivity(), items, nightMode);
 		adapter.setListener(position -> {
 			Object object = adapter.getItem(position);
 			MapActivity mapActivity = getMapActivity();
@@ -1617,6 +1617,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								titleProgressHeight = titleProgressContainer.getMeasuredHeight();
 							}
 
+							int transportBadgesHeight = 0;
+							View transportBadgesContainer = view.findViewById(R.id.transport_badges_container);
+							if (transportBadgesContainer.getVisibility() == View.VISIBLE) {
+								transportBadgesHeight = transportBadgesContainer.getMeasuredHeight();
+							}
 							if (menuTopViewHeight != 0) {
 								int titleHeight = line1.getLineCount() * line1.getLineHeight()
 										+ line2LineCount * line2LineHeight + menuTitleTopBottomPadding;
@@ -1625,14 +1630,19 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								}
 								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight
 										+ titleButtonHeight + customAddressLineHeight + downloadButtonsHeight
-										+ titleBottomButtonHeight + additionalButtonsHeight + titleProgressHeight + line3Height;
+										+ titleBottomButtonHeight + additionalButtonsHeight
+										+ titleProgressHeight + transportBadgesHeight + line3Height;
 								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight
 										- (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 							} else {
-								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight - customAddressLineHeight
-										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - additionalButtonsHeight - titleProgressHeight - line3Height;
+								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight()
+										- line2MeasuredHeight - customAddressLineHeight	- titleButtonHeight
+										- downloadButtonsHeight - titleBottomButtonHeight - additionalButtonsHeight
+										- titleProgressHeight - transportBadgesHeight - line3Height;
+
 								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
 										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
+
 								menuButtonsHeight = view.findViewById(R.id.context_menu_bottom_buttons).getHeight()
 										+ view.findViewById(R.id.buttons_bottom_border).getHeight()
 										+ view.findViewById(R.id.context_menu_buttons).getHeight();

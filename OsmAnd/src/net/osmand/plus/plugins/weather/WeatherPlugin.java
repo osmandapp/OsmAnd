@@ -40,6 +40,7 @@ import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
@@ -193,7 +194,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnableByDefault() {
-		return true;
+		return !Version.isHMDBuild();
 	}
 
 	@Override

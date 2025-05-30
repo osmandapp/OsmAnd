@@ -52,7 +52,8 @@ import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandDashPathEffect;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
@@ -718,8 +719,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public Amenity getMapObjectByMarker(@NonNull MapMarker marker) {
 		if (marker.mapObjectName != null && marker.point != null) {
 			String mapObjName = marker.mapObjectName.split("_")[0];
-			FullAmenitySearch searcher = getApplication().getResourceManager().getAmenitySearcher();
-			return searcher.findAmenity(marker.point, null, Collections.singletonList(mapObjName), null);
+			ResourceManager resourceManager = getApplication().getResourceManager();
+			AmenitySearcher searcher = resourceManager.getAmenitySearcher();
+			AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
+			AmenitySearcher.Request request = new AmenitySearcher.Request(
+					marker.point, null, null, Collections.singletonList(mapObjName));
+			return searcher.searchDetailedAmenity(request, settings);
 		}
 		return null;
 	}

@@ -5705,4 +5705,5 @@
     <string name="unit_of_temperature_description">Az aktuális profil összes hőmérsékleti adata a kiválasztott mértékegységben fog megjelenni.</string>
     <string name="deactivated_map">Nem aktív térkép</string>
     <string name="suggest_activate_map_msg">%1$s térképe nem aktív,\naktiválja a terület megtekintéséhez.</string>
+    <string name="read_on">Olvassa el itt: %1$s</string>
 </resources>

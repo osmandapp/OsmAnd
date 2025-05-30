@@ -85,7 +85,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener, OnFileVisibilityChangeListener {
 	private static final int START_ZOOM = 5;
 	private static final int START_ZOOM_ROUTE_TRACK = 11;
-	private static final int END_ZOOM_ROUTE_TRACK = 13;
+	private static final int END_ZOOM_ROUTE_TRACK = 22;
 	private static final int TOP_PLACES_LIMIT = 20;
 	public static final int TILE_POINTS_LIMIT = 25;
 
@@ -1018,9 +1018,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (amenity != null) {
 			return amenity.getLocation();
 		} else if (object instanceof RenderedObject renderedObject) {
-			double lat = MapUtils.get31LatitudeY(renderedObject.getLabelY());
-			double lon = MapUtils.get31LongitudeX(renderedObject.getLabelX());
-			return new LatLon(lat, lon);
+			return renderedObject.getLatLon();
 		}
 		return null;
 	}
@@ -1207,7 +1205,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private int getBigIconSize() {
-		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale());
+		return (int) (AndroidUtils.dpToPxAuto(getContext(), IMAGE_ICON_SIZE_DP) * getTextScale() / app.getOsmandMap().getCarDensityScaleCoef());
 	}
 
 	@Override

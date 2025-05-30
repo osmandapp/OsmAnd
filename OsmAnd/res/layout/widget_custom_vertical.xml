@@ -37,14 +37,14 @@
 			android:textSize="@dimen/widget_custom_vertical_value_size"
 			tools:text="Value" />
 
-		<TextView
+		<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 			android:id="@+id/widget_name"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
 			android:visibility="gone"
 			tools:text="Widget name" />
 
-		<TextView
+		<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 			android:id="@+id/widget_text_small"
 			android:layout_width="wrap_content"
 			android:layout_height="13dp"

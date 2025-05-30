@@ -38,6 +38,11 @@ public enum DialogButtonType {
 			R.attr.dlg_btn_stroked,
 			R.attr.dlg_btn_ripple
 	),
+	STROKED_SECONDARY(
+			R.attr.dlg_btn_stroked_secondary_content,
+			R.attr.dlg_btn_stroked,
+			R.attr.dlg_btn_ripple
+	),
 	TERTIARY(
 			R.attr.dlg_btn_tertiary_text,
 			INVALID_ID,

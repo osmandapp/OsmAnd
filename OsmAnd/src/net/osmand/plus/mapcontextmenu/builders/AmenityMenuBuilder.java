@@ -10,6 +10,9 @@ import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.WPT_EXTRA_TAGS;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Pair;
 import android.view.View;
@@ -35,8 +38,12 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.PicassoUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
@@ -111,27 +118,54 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					updateDescriptionState(textView, descriptionToSet);
 				});
 				updateDescriptionState(textView, descriptionToSet);
-				String btnText = app.getString(hasDescriptionData ? R.string.context_menu_read_full_article : R.string.read_on_wiki);
-				buildReadFullButton((LinearLayout) view, btnText, (v) -> {
-					if (hasDescriptionData) {
-						WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
-					} else {
-						String wikipediaUrl = amenity.getAdditionalInfo(WIKIPEDIA);
-						if (wikipediaUrl == null && pair.second != null) {
-							String title = amenity.getName(pair.second.getLanguage());
-							wikipediaUrl = "https://" + pair.second.getLanguage() + WIKIPEDIA_ORG_WIKI_URL_PART + title.replace(' ', '_');
-						}
-						MapActivity activity = app.getOsmandMap().getMapView().getMapActivity();
-						if (activity != null) {
-							AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), app.getDaynightHelper().isNightMode());
-						}
-					}
-				});
+				buildReadFullWikiButton((LinearLayout) view, pair.second);
 			}
 			if (isCustomOnlinePhotosPosition()) {
 				buildNearestRows((ViewGroup) view, amenity);
 			}
 		}
+	}
+
+	protected void buildReadFullWikiButton(@NonNull ViewGroup container, @Nullable Locale locale) {
+		boolean light = isLightContent();
+		Context ctx = container.getContext();
+		int activeColor = ColorUtilities.getActiveColor(ctx, !light);
+
+		DialogButton button = (DialogButton) themedInflater.inflate(R.layout.context_menu_read_wiki_button, container, false);
+		if (hasDescriptionData) {
+			String text = app.getString(R.string.context_menu_read_full_article);
+			button.setTitle(UiUtilities.createColorSpannable(text, activeColor, text));
+		} else {
+			String wikipedia = app.getString(R.string.shared_string_wikipedia);
+			String text = app.getString(R.string.read_on, wikipedia);
+			button.setTitle(UiUtilities.createColorSpannable(text, activeColor, wikipedia));
+		}
+
+		Resources resources = ctx.getResources();
+		int size = resources.getDimensionPixelSize(R.dimen.small_icon_size);
+		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_plugin_wikipedia, light);
+		drawable = new BitmapDrawable(resources, AndroidUtils.drawableToBitmap(drawable, size, size, true));
+
+		TextViewEx textView = button.findViewById(R.id.button_text);
+		textView.setTypeface(FontCache.getNormalFont());
+		textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+
+		button.setOnClickListener((v) -> {
+			if (hasDescriptionData) {
+				WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
+			} else {
+				String wikipediaUrl = amenity.getAdditionalInfo(WIKIPEDIA);
+				if (wikipediaUrl == null && locale != null) {
+					String title = amenity.getName(locale.getLanguage());
+					wikipediaUrl = "https://" + locale.getLanguage() + WIKIPEDIA_ORG_WIKI_URL_PART + title.replace(' ', '_');
+				}
+				MapActivity activity = app.getOsmandMap().getMapView().getMapActivity();
+				if (activity != null) {
+					AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), app.getDaynightHelper().isNightMode());
+				}
+			}
+		});
+		container.addView(button);
 	}
 
 	@NonNull

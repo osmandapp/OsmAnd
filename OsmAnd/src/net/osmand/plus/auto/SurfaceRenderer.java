@@ -103,7 +103,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				if (surface != null) {
 					surface.release();
 				}
-				surfaceAdditionalWidth = (int)((float) surfaceContainer.getWidth() * surfaceWidthMultiply);
+
+				if (getApp().useOpenGlRenderer()) {
+					surfaceAdditionalWidth = (int)((float) surfaceContainer.getWidth() * surfaceWidthMultiply);
+				}
+
 				SurfaceRenderer.this.surfaceContainer = surfaceContainer;
 				surface = surfaceContainer.getSurface();
 				surfaceView.setSurfaceParams(surfaceContainer.getWidth() + surfaceAdditionalWidth,
@@ -127,7 +131,6 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				Log.i(TAG, "Visible area changed " + surface + ". stableArea: "
 						+ stableArea + " visibleArea:" + visibleArea);
 				SurfaceRenderer.this.visibleArea = visibleArea;
-				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (!visibleArea.isEmpty() && mapView != null) {
 					MapDisplayPositionManager displayPositionManager = getDisplayPositionManager();
 
@@ -138,16 +141,21 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					int centerX = visibleArea.centerX();
 					cachedRatioX = (float) centerX / containerWidth;
 
-					float dRatio = 0.5f + (1.0f - surfaceWidthMultiply) * (((1.0f - maxRatio) + minRatio) * 0.5f);
 					float cameraCenterShiftX = 0.5f;
+					if (offscreenMapRendererView != null) {
+						float dRatio = 0.5f + (1.0f - surfaceWidthMultiply) * (((1.0f - maxRatio) + minRatio) * 0.5f);
 
-					if (cachedRatioX < minRatio) {
-						cameraCenterShiftX = 0.5f - (minRatio - cachedRatioX) * dRatio;
-						cachedRatioX = minRatio;
+						if (cachedRatioX < minRatio) {
+							cameraCenterShiftX = 0.5f - (minRatio - cachedRatioX) * dRatio;
+							cachedRatioX = minRatio;
+						}
+						else if (cachedRatioX > maxRatio) {
+							cameraCenterShiftX = 0.5f + (cachedRatioX - maxRatio) * dRatio;
+							cachedRatioX = maxRatio;
+						}
 					}
-					else if (cachedRatioX > maxRatio) {
-						cameraCenterShiftX = 0.5f + (cachedRatioX - maxRatio) * dRatio;
-						cachedRatioX = maxRatio;
+					else {
+						cameraCenterShiftX = cachedRatioX;
 					}
 
 					float ratioY = cachedRatioY;

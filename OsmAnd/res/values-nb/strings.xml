@@ -5182,7 +5182,7 @@
     <string name="no_bt_permission">Blåtannstilgang ikke innvilget</string>
     <string name="beats_per_minute_short">slag per minutt</string>
     <string name="may_be_used_if_there_is_shortcut">Kan brukes hvis det finnes en snarvei</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Vil du slette din OsmAnd-sky for godt?</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Vil du slette OsmAnd Cloud-konto?\n\nDenne handlingen kan ikke gjøres om.</string>
     <string name="rendering_value_small_name">Liten</string>
     <string name="rssi_widget_desc">Viser RSSI-nivå for din eksterne enhet.</string>
     <string name="free_ride">Gratis tur</string>
@@ -5453,7 +5453,7 @@
     <string name="routing_attr_avoid_cobblestone_name">Unngå brostein</string>
     <string name="routing_attr_avoid_cobblestone_description">Unngå brostein</string>
     <string name="show_debug_info">Vis feilsøkingsinformasjon</string>
-    <string name="map_text">Karttekster</string>
+    <string name="map_text">Kartopptegning</string>
     <string name="wall_height">Vegghøyde</string>
     <string name="backup_error_failed_to_transfer_file">Klarte ikke å overføre sky-fil(er).</string>
     <string name="contact_support_retry">Prøv igjen eller kontakt brukerstøtte</string>
@@ -5588,7 +5588,7 @@
     <string name="detailed_track_guidance_description">OsmAnd anpasser ditt spor til veier i nærheten for bedret sving-for-sving -veileding.</string>
     <string name="detailed_track_guidance">Detaljert sporveiledning</string>
     <string name="quick_action_routes_summary">Bryter for visning eller skjuling av %1$s på kartet.</string>
-    <string name="use_3d_track_visualization">3D-opptegning</string>
+    <string name="use_3d_track_visualization">3D-visualisering</string>
     <string name="custom_buttons">Egendefinerte knapper</string>
     <string name="downward_gradient">Nedadgående gradient</string>
     <string name="gpx_approximation_geo_cpp">Geometribasert (C++, rask)</string>

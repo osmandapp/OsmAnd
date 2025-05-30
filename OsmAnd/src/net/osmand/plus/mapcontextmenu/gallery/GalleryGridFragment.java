@@ -199,7 +199,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), !nightMode);
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 

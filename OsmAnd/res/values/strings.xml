@@ -13,6 +13,7 @@
 
     <string name="shared_string_flat">Flat</string>
     <string name="uphill_downhill_split">Uphill / Downhill</string>
+    <string name="read_on">Read on %1$s</string>
     <string name="unit_of_temperature_description">Selected units will be applied to all temperature related data in the current profile.</string>
     <string name="deactivated_map">Deactivated map</string>
     <string name="suggest_activate_map_msg">%1$s map is deactivated,\nactivate to view this area.</string>
@@ -33,7 +34,6 @@
     <string name="multipoligon_related">Related</string>
     <string name="route_part_of">Part of</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Read on Wikipedia</string>
     <string name="prediction_time_description">Position icon in OsmAnd animates with each received GPS data point (once per second). A slight delay in its movement may be noticeable, especially when the user is moving quickly or the GPS signal fluctuates.</string>
     <string name="prediction_time_advanced_description">Adjust the prediction time to minimize delay.</string>
     <string name="prediction_time">Prediction time</string>
@@ -67,7 +67,9 @@
     <string name="original_shape_description">Each point would keep its own shape.</string>
     <string name="apply_to_all_points">Apply to all points</string>
     <string name="hmd_promo">HMD Promo for %1$s months</string>
-    <string name="hmd_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
+    <string name="hmd_promo_years">HMD Promo for %1$s years</string>
+    <string name="hmd_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s months</string>
+    <string name="hmd_promo_description_years">Free access to features including unlimited map downloads, 3D relief etc. for %1$s years</string>
     <string name="shared_string_road_exit">Exit</string>
     <string name="popular_places_nearby">Popular places nearby</string>
     <string name="recently_visited">Recently visited</string>
@@ -1508,7 +1510,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_hideIcons_name">POI icons</string>
     <string name="rendering_attr_hideWaterPolygons_name">Water</string>
     <string name="rendering_attr_hideWaterPolygons_description">Hide water</string>
-    <string name="rendering_attr_hideOverground_name">Overground objects</string>	
+    <string name="rendering_attr_hideOverground_name">Overground objects</string>
     <string name="rendering_attr_hideUnderground_name">Underground objects</string>
     <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
     <string name="rendering_attr_hideBuildings_name">Buildings</string>

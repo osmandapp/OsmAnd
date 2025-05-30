@@ -31,7 +31,7 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 
 	protected ImageView imageView;
 	protected OutlinedTextContainer textView;
-	protected TextView smallTextView;
+	protected OutlinedTextContainer smallTextView;
 	protected TextView smallTextViewShadow;
 	protected View container;
 	protected View emptyBanner;
