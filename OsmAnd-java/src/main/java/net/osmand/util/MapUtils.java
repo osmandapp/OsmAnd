@@ -34,6 +34,7 @@ public class MapUtils {
 	public static final double LONGITUDE_TURN = 360.0;
 	public static final double DEFAULT_LATLON_PRECISION = 0.00001;
 	public static final double HIGH_LATLON_PRECISION = 0.0000001;
+	public static final double METERS_IN_DEGREE = 111320;
 
 	// TODO change the hostname back to osm.org once HTTPS works for it
 	// https://github.com/openstreetmap/operations/issues/2
