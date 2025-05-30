@@ -22,13 +22,13 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.ObfConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.*;
 import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
 import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
+import net.osmand.core.jni.MapSymbol.ContentClass;
 import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -406,71 +406,7 @@ public class MapSelectionHelper {
 					result.collect(detailsObject, mapLayers.getPoiMapLayer());
 				}
 			}
-			Set<Long> osmIds = new HashSet<>();
-			for (Object object : result.getAllObjects()) {
-				if (object instanceof SelectedMapObject selectedMapObject) {
-					if (selectedMapObject.object() instanceof RenderedObject renderedObject) {
-						osmIds.add(ObfConstants.getOsmObjectId(renderedObject));
-					}
-				}
-			}
-			List<RenderedObject> list = findExpandedRenderedObject(osmIds, point);
-			if (!Algorithms.isEmpty(list) && list.size() > osmIds.size()) {
-				for (RenderedObject extendedObject : list) {
-					result.collect(extendedObject, null);
-				}
-			}
 		}
-	}
-
-	@NonNull
-	private List<RenderedObject> findExpandedRenderedObject(@NonNull Set<Long> osmIds,
-			@NonNull PointF point) {
-		List<RenderedObject> list = new ArrayList<>();
-
-		MapRendererView rendererView = view.getMapRenderer();
-		if (rendererView != null) {
-			int delta = 200;
-			PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
-			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
-			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
-
-			for (int i = 0; i < symbols.size(); i++) {
-				MapSymbolInformation symbolInfo = symbols.get(i);
-				if (symbolInfo.getMapSymbol().getIgnoreClick()) {
-					continue;
-				}
-				MapObject mapObject;
-				try {
-					mapObject = MapObjectSymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr()).getMapObject();
-				} catch (Exception eMapObject) {
-					mapObject = null;
-				}
-				if (mapObject != null) {
-					ObfMapObject obfMapObject;
-					try {
-						obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
-					} catch (Exception eObfMapObject) {
-						obfMapObject = null;
-					}
-					if (obfMapObject != null) {
-						Map<String, String> tags = getOrderedTags(obfMapObject.getResolvedAttributesListPairs());
-
-						IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
-						if (onPathMapSymbol == null) {
-							RenderedObject object = createRenderedObject(symbolInfo, obfMapObject, tags);
-							if (object != null) {
-								long osmId2 = ObfConstants.getOsmObjectId(object);
-								if (osmIds.contains(osmId2)) {
-									list.add(object);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		return list;
 	}
 
 	@Nullable
@@ -496,6 +432,10 @@ public class MapSelectionHelper {
 			@NonNull ObfMapObject obfMapObject, Map<String, String> tags) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null) {
+			MapSymbolsGroup group = rasterMapSymbol.getGroupPtr();
+			RasterMapSymbol symbolIcon = getRasterMapSymbol(group.getFirstSymbolWithContentClass(ContentClass.Icon));
+			RasterMapSymbol symbolCaption = getRasterMapSymbol(group.getFirstSymbolWithContentClass(ContentClass.Caption));
+
 			RenderedObject renderedObject = new RenderedObject();
 			renderedObject.setId(obfMapObject.getId().getId().longValue());
 			QVectorPointI points31 = obfMapObject.getPoints31();
@@ -507,11 +447,11 @@ public class MapSelectionHelper {
 			double lon = MapUtils.get31LongitudeX(obfMapObject.getLabelCoordinateX());
 			renderedObject.setLabelLatLon(new LatLon(lat, lon));
 
-			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Caption) {
-				renderedObject.setName(rasterMapSymbol.getContent());
+			if (symbolIcon != null) {
+				renderedObject.setIconRes(symbolIcon.getContent());
 			}
-			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
-				renderedObject.setIconRes(rasterMapSymbol.getContent());
+			if (symbolCaption != null) {
+				renderedObject.setName(symbolCaption.getContent());
 			}
 			for (Map.Entry<String, String> entry : tags.entrySet()) {
 				renderedObject.putTag(entry.getKey(), entry.getValue());
@@ -532,8 +472,13 @@ public class MapSelectionHelper {
 
 	@Nullable
 	private RasterMapSymbol getRasterMapSymbol(@NonNull MapSymbolInformation symbolInfo) {
+		return getRasterMapSymbol(symbolInfo.getMapSymbol());
+	}
+
+	@Nullable
+	private RasterMapSymbol getRasterMapSymbol(@NonNull MapSymbol mapSymbol) {
 		try {
-			return RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+			return RasterMapSymbol.dynamic_pointer_cast(mapSymbol);
 		} catch (Exception ignore) {
 		}
 		return null;
