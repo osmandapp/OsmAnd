@@ -2,6 +2,7 @@ package net.osmand.osm.edit;
 
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+import net.osmand.router.RouteResultPreparation;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
@@ -78,12 +79,11 @@ public abstract class Entity implements Serializable {
 		}
 
 		public String getOsmUrl() {
-			final String browseUrl = "https://www.openstreetmap.org/browse/";
-			if (type == EntityType.NODE)
-				return browseUrl + "node/" + id;
-			if (type == EntityType.WAY)
-				return browseUrl + "way/" + id;
-			return null;
+			final String browseUrl = "https://www.openstreetmap.org/";
+			if (type == EntityType.NODE) return browseUrl + "node/" + (id >> RouteResultPreparation.SHIFT_ID);
+			if (type == EntityType.WAY) return browseUrl + "way/" + (id >> RouteResultPreparation.SHIFT_ID);
+			if (type == EntityType.RELATION) return browseUrl + "relation/" + id;
+			return browseUrl;
 		}
 
 		@Override
