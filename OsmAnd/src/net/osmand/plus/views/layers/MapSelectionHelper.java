@@ -394,6 +394,8 @@ public class MapSelectionHelper {
 												detailsObject.setMapIconName(getMapIconName(symbolInfo));
 												addGeometry(detailsObject, obfMapObject);
 												detailsObject.setObfResourceName(obfMapObject.getObfSection().getName());
+											} else {
+												result.collect(renderedObject, null);
 											}
 										}
 									}
@@ -497,8 +499,7 @@ public class MapSelectionHelper {
 		}
 	}
 
-	private boolean addClickableWay(@NonNull MapSelectionResult result,
-			@Nullable ClickableWay clickableWay) {
+	private boolean addClickableWay(@NonNull MapSelectionResult result,	@Nullable ClickableWay clickableWay) {
 		if (clickableWay != null && isUniqueClickableWay(result.getAllObjects(), clickableWay)) {
 			result.collect(clickableWay, clickableWayHelper.getContextMenuProvider());
 			return true;
@@ -506,8 +507,7 @@ public class MapSelectionHelper {
 		return false;
 	}
 
-	private List<String> getNames(@NonNull ObfMapObject obfMapObject,
-			@NonNull Map<String, String> tags) {
+	private List<String> getNames(@NonNull ObfMapObject obfMapObject, @NonNull Map<String, String> tags) {
 		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
 		String caption = obfMapObject.getCaptionInNativeLanguage();
 		if (!caption.isEmpty()) {
@@ -519,8 +519,7 @@ public class MapSelectionHelper {
 		return names;
 	}
 
-	private void addGeometry(@Nullable BaseDetailsObject detailObj,
-			@NonNull ObfMapObject obfMapObject) {
+	private void addGeometry(@Nullable BaseDetailsObject detailObj,	@NonNull ObfMapObject obfMapObject) {
 		if (detailObj != null && !detailObj.hasGeometry() && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
 			for (int k = 0; k < points31.size(); k++) {
@@ -629,8 +628,7 @@ public class MapSelectionHelper {
 		return added > 0;
 	}
 
-	private boolean isUniqueOsmRoute(@NonNull List<SelectedMapObject> selectedObjects,
-			@NonNull RouteKey tmpKey) {
+	private boolean isUniqueOsmRoute(@NonNull List<SelectedMapObject> selectedObjects, @NonNull RouteKey tmpKey) {
 		for (SelectedMapObject selectedObject : selectedObjects) {
 			Object object = selectedObject.object();
 			if (object instanceof Pair && ((Pair<?, ?>) object).first instanceof RouteKey key && key.equals(tmpKey)) {
@@ -660,8 +658,7 @@ public class MapSelectionHelper {
 		return false;
 	}
 
-	private boolean isTransportStop(@NonNull List<SelectedMapObject> selectedObjects,
-			@NonNull BaseDetailsObject detail) {
+	private boolean isTransportStop(@NonNull List<SelectedMapObject> selectedObjects, @NonNull BaseDetailsObject detail) {
 		for (SelectedMapObject selectedObject : selectedObjects) {
 			Object sel = selectedObject.object();
 			if (sel instanceof TransportStop stop && stop.getName().startsWith(detail.getSyntheticAmenity().getName())) {
