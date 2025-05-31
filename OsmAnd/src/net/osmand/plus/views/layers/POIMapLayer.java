@@ -344,6 +344,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			LatLon location = place.getLocation();
 			if (latLonBounds.contains(location.getLongitude(), location.getLatitude(), location.getLongitude(), location.getLatitude())) {
 				res.add(place);
+				android.util.Log.d("Corwin", "updateVisiblePlaces: " + place.getLocation().getLatitude() + ", " + place.getLocation().getLongitude());
 			}
 		}
 		visiblePlaces = res;
