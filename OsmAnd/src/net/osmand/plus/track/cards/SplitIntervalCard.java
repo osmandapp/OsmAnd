@@ -57,7 +57,9 @@ public class SplitIntervalCard extends BaseCard {
 	private String getSplitInterval() {
 		String intervalStr = "";
 		int splitInterval = (int) trackDrawInfo.getSplitInterval();
-		if (splitInterval == 0) {
+		if (trackDrawInfo.getSplitType() == GpxSplitType.UPHILL_DOWNHILL.getType()) {
+			intervalStr = GpxSplitType.UPHILL_DOWNHILL.getHumanString(app);
+		} else if (splitInterval == 0) {
 			intervalStr = GpxSplitType.NO_SPLIT.getHumanString(app);
 		} else if (trackDrawInfo.getSplitType() == GpxSplitType.DISTANCE.getType()) {
 			intervalStr = OsmAndFormatter.getFormattedDistanceInterval(app, trackDrawInfo.getSplitInterval(), OsmAndFormatterParams.NO_TRAILING_ZEROS);

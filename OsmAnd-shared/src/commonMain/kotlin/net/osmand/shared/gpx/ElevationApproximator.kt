@@ -8,6 +8,7 @@ abstract class ElevationApproximator {
 
 	private var distances: DoubleArray? = null
 	private var elevations: DoubleArray? = null
+	private var survivedIndexes : IntArray? = null
 
 	abstract fun getPointLatitude(index: Int): Double
 
@@ -23,6 +24,10 @@ abstract class ElevationApproximator {
 
 	fun getElevations(): DoubleArray? {
 		return elevations
+	}
+
+	fun getSurvivedIndexes(): IntArray? {
+		return survivedIndexes
 	}
 
 	fun approximate(): Boolean {
@@ -78,6 +83,7 @@ abstract class ElevationApproximator {
 		survived[pointsCount - 1] = true
 		val distances = DoubleArray(survivedCount + 2)
 		val elevations = DoubleArray(survivedCount + 2)
+		val survivedIndexes = IntArray(survivedCount + 2)
 		var k = 0
 		lastSurvived = 0
 		for (i in 0 until pointsCount) {
@@ -89,11 +95,13 @@ abstract class ElevationApproximator {
 				getPointLatitude(lastSurvived), getPointLongitude(lastSurvived)
 			)
 			elevations[k] = getPointElevation(i)
+			survivedIndexes[k] = i
 			k++
 			lastSurvived = i
 		}
 		this.distances = distances
 		this.elevations = elevations
+		this.survivedIndexes = survivedIndexes
 		return true
 	}
 }
