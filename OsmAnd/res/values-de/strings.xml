@@ -5785,4 +5785,5 @@
     <string name="show_debug_tile">Kachelinformationen anzeigen</string>
     <string name="show_symbols_debug_info">Debug-Infos anzeigen</string>
     <string name="show_debug_tile_description">Zeige Infos zu den Kartensymbolen der einzelnen Kacheln an</string>
+    <string name="unit_of_temperature_description">Ausgewählte Einheiten werden im aktuellen Profil auf alle Daten mit Temperaturbezug angewandt.</string>
 </resources>
