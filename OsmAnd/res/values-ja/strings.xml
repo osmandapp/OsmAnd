@@ -5003,7 +5003,7 @@ POIの更新は利用できません</string>
     <string name="help_article_map_legend_ski_map_name">スキーマップのスタイル</string>
     <string name="tripltek_promo">%1$sか月間のTripltekプロモーション</string>
     <string name="tripltek_promo_description">%1$sか月間、無制限のマップダウンロード、3Dレリーフマップなどの機能に無料でアクセスできます。</string>
-    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_brouter_name">ブルーター</string>
     <string name="help_article_navigation_routing_boat_navigation_name">ボートルーティング</string>
     <string name="see_all_plans">すべてのプランを見る</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">自転車ルーティング (MTB)</string>

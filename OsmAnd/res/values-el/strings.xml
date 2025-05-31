@@ -4657,4 +4657,15 @@
     <string name="obd_fuel_consumption_rate_sensor_type">Χρήση επιλεγμένων μονάδων στο όνομα.</string>
     <string name="shared_strings_dimensions">Διαστάσεις</string>
     <string name="reset_average_value">Επαναφορά μέσης τιμής</string>
+    <string name="customize_grid_color">Προσαρμογή πλέγματος χρωμάτων</string>
+    <string name="shared_string_edges">Άκρες</string>
+    <string name="osmand_maps_plus_tagline">Αποκτήστε περισσότερες δυνατότητες</string>
+    <string name="osmand_pro_tagline">Αποκτήστε πλήρες δυνατότητες</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Καταγραφή σφαλμάτων</string>
+    <string name="external_sensors_plugin_description">Αποκτά πρόσβαση σε εξωτερικούς αισθητήρες για να διαβάζει, π.χ., τον καρδιακό σας ρυθμό, την ταχύτητα ποδηλάτου, την ισχύ ποδηλασίας ή το βήμα. Απαιτεί σύνδεση της συσκευής σας με τους αντίστοιχους αισθητήρες μέσω του προσωπικού δικτύου ασύρματου πρωτοκόλλου ANT+.</string>
+    <string name="original_shape_description">Κάθε σημείο θα διατηρήσει το δικό του σχήμα.</string>
+    <string name="original_color_description">Κάθε σημείο θα διατηρήσει το δικό του χρώμα.</string>
+    <string name="original_icon_description">Κάθε σημείο θα διατηρήσει το δικό του εικονίδιο.</string>
+    <string name="grid_color">Πλέγμα χρωμάτων</string>
+    <string name="horseback_riding">Ιππασία</string>
 </resources>
