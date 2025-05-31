@@ -358,10 +358,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
-		return mapRouteInfoMenu != null && mapRouteInfoMenu.onSingleTap(point, tileBox);
-	}
-
 	@Override
 	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		touchEvent = System.currentTimeMillis();

@@ -1,5 +1,7 @@
 package net.osmand.plus.dialogs;
 
+import android.graphics.PointF;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -86,13 +88,20 @@ public class SelectLocationController extends BaseDialogController implements IM
 			applyChanges = false;
 			onLocationSelected();
 		}
+		onScreenClosed();
 	}
 
 	private void onLocationSelected() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			LatLon targetLatLon = getMapTargetCoordinates(app);
-			handler.onLocationSelected(mapActivity, targetLatLon);
+			handler.onApplySelection(mapActivity);
+		}
+	}
+
+	private void onScreenClosed() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			handler.onScreenClosed(mapActivity);
 		}
 	}
 
@@ -140,6 +149,13 @@ public class SelectLocationController extends BaseDialogController implements IM
 		int centerX = tileBox.getCenterPixelX();
 		int centerY = tileBox.getCenterPixelY();
 		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, centerX, centerY);
+	}
+
+	@NonNull
+	public static PointF getCenterPixelPoint(@NonNull OsmandApplication app) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		RotatedTileBox tileBox = mapView.getRotatedTileBox();
+		return new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 	}
 
 	@Nullable

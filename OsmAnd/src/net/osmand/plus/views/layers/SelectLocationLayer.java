@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
 
 import androidx.annotation.NonNull;
 
@@ -23,6 +24,7 @@ public class SelectLocationLayer extends OsmandMapLayer {
 	private final Paint bitmapPaint;
 	private Bitmap defaultIconDay;
 	private Bitmap defaultIconNight;
+	private SelectLocationController selectLocationController;
 
 	public SelectLocationLayer(@NonNull Context context) {
 		super(context);
@@ -41,10 +43,10 @@ public class SelectLocationLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		OsmandApplication app = getApplication();
-		SelectLocationController controller = SelectLocationController.getExistedInstance(app);
+		selectLocationController = SelectLocationController.getExistedInstance(app);
 
-		if (controller != null) {
-			Object iconObject = controller.getCenterPointIcon();
+		if (selectLocationController != null) {
+			Object iconObject = selectLocationController.getCenterPointIcon();
 			if (iconObject instanceof PointImageDrawable drawable) {
 				drawTargetDrawable(canvas, tileBox, drawable);
 			} else if (iconObject instanceof ShiftedBitmap icon) {
@@ -79,5 +81,19 @@ public class SelectLocationLayer extends OsmandMapLayer {
 		float targetX = tileBox.getCenterPixelX();
 		float targetY = tileBox.getCenterPixelY();
 		canvas.drawBitmap(bitmap, targetX - marginX, targetY - marginY, bitmapPaint);
+	}
+
+	@Override
+	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
+		// Handle single tap if we're in Location Selection mode
+		// to prevent other layers from processing it
+		return selectLocationController != null;
+	}
+
+	@Override
+	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
+		// Handle long press f we're in Location Selection mode
+		// to prevent other layers from processing it
+		return selectLocationController != null;
 	}
 }
