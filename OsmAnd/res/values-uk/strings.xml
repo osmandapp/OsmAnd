@@ -5460,8 +5460,8 @@
     <string name="my_location_action_descr">Центрує мапу на вашій поточній локації.</string>
     <string name="contour_layers_action_descr">Змінити контурні шари</string>
     <string name="raster_layers_action_descr">Змінити растрові шари</string>
-    <string name="type_of_activity">Тип активності</string>
-    <string name="change_activity">Змінити активність</string>
+    <string name="type_of_activity">Вид діяльності</string>
+    <string name="change_activity">Зміна активності</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Стежки для ґрунтового велосипеда</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
     <string name="shared_string_decrease">Зменшити</string>
@@ -5664,8 +5664,8 @@
     <string name="shared_string_length">Довжина</string>
     <string name="shared_string_avg_altitude">Середнє висота</string>
     <string name="map_widget_route_information">Інформація про маршрут</string>
-    <string name="shared_string_default_view">Перегляд за замовчуванням</string>
-    <string name="map_widget_route_information_desc">Відображає приблизний час прибуття, час, що залишився в дорозі, і відстань для поточного маршруту навігації.</string>
+    <string name="shared_string_default_view">Вигляд за замовчуванням</string>
+    <string name="map_widget_route_information_desc">Відображає приблизний час прибуття, час, що залишився в дорозі, та відстань для поточного навігаційного маршруту.</string>
     <string name="ais_address_settings">Налаштування IP-адреси</string>
     <string name="ais_address_settings_description">Виберіть протокол NMEA (UDP/TCP) і визначте адреси</string>
     <string name="ais_nmea_protocol">Протокол прийому даних NMEA</string>
@@ -5699,7 +5699,7 @@
     <string name="map_grid">Картографічні сітки</string>
     <string name="no_places_available">Немає доступних місць</string>
     <string name="no_photo_for_location_desc">До цього місця ще не додано жодної фотографії користувача</string>
-    <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо протягом %1$s місяця</string>
+    <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо, протягом %1$s місяців</string>
     <string name="shared_string_road_exit">Вихід</string>
     <string name="hmd_promo">Промо HMD на %1$s місяців</string>
     <string name="original_color_description">Кожна точка збереже свій власний колір.</string>
@@ -5730,9 +5730,9 @@
     <string name="shared_string_online_only">Тільки онлайн</string>
     <string name="row_height">Висота рядка</string>
     <string name="add_widget">Додати віджет</string>
-    <string name="intermediate_first">Перший проміжний</string>
-    <string name="destination_first">Перше місце призначення</string>
-    <string name="display_priority">Пріоритет відображення</string>
+    <string name="intermediate_first">Середній рівень перший</string>
+    <string name="destination_first">Пункт призначення перший</string>
+    <string name="display_priority">Пріоритет дисплея</string>
     <string name="poi_source">Джерело POI</string>
     <string name="read_on">Прочитайте у %1$s</string>
     <string name="wikidata">Вікідані</string>
@@ -5766,4 +5766,6 @@
     <string name="deactivated_map">Деактивована карта</string>
     <string name="suggest_activate_map_msg">Карта %1$s деактивована,\nактивуйте її, щоб переглянути цю область.</string>
     <string name="unit_of_temperature_description">Вибрані одиниці вимірювання будуть застосовані до всіх даних, пов\'язаних з температурою, у поточному профілі.</string>
+    <string name="hmd_promo_years">Акція HMD на %1$s років</string>
+    <string name="hmd_promo_description_years">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо, протягом %1$s років</string>
 </resources>
