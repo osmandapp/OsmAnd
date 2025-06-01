@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.dialogs.selectlocation;
 
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +24,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class SelectLocationFragment extends ConfigureMapOptionFragment implements IAskRefreshDialogCompletely {
 
-	private SelectLocationController controller;
+	private SelectLocationController<?> controller;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,7 +109,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	@Override
 	protected void applyChanges() {
-		controller.onApplySelection();
+		controller.onConfirmSelection();
 	}
 
 	@Override

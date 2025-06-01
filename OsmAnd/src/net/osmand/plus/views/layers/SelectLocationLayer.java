@@ -14,7 +14,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ShiftedBitmap;
-import net.osmand.plus.dialogs.SelectLocationController;
+import net.osmand.plus.dialogs.selectlocation.SelectLocationController;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -24,7 +24,7 @@ public class SelectLocationLayer extends OsmandMapLayer {
 	private final Paint bitmapPaint;
 	private Bitmap defaultIconDay;
 	private Bitmap defaultIconNight;
-	private SelectLocationController selectLocationController;
+	private SelectLocationController<?> selectLocationController;
 
 	public SelectLocationLayer(@NonNull Context context) {
 		super(context);

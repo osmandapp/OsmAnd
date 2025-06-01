@@ -1,15 +1,11 @@
-package net.osmand.plus.dialogs;
-
-import android.graphics.PointF;
+package net.osmand.plus.dialogs.selectlocation;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -17,25 +13,32 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
+import net.osmand.plus.dialogs.selectlocation.extractor.IMapLocationExtractor;
+import net.osmand.plus.dialogs.selectlocation.extractor.CenterMapLatLonExtractor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 
-public class SelectLocationController extends BaseDialogController implements IMapLocationListener {
+public class SelectLocationController<ResultType> extends BaseDialogController
+		implements IMapLocationListener {
 
 	private static final String PROCESS_ID = "select_location_on_map";
 
-	private ILocationSelectionHandler handler;
+	private ILocationSelectionHandler<ResultType> handler;
+	private final IMapLocationExtractor<ResultType> preferredExtractor;
+	private final CenterMapLatLonExtractor latLonExtractor;
 	private boolean applyChanges = false;
 	private boolean landscape;
 
 	public SelectLocationController(@NonNull OsmandApplication app,
-	                                @NonNull ILocationSelectionHandler handler) {
+									@NonNull IMapLocationExtractor<ResultType> extractor,
+	                                @NonNull ILocationSelectionHandler<ResultType> handler) {
 		super(app);
 		setLocationSelectionHandler(handler);
+		this.preferredExtractor = extractor;
+		this.latLonExtractor = new CenterMapLatLonExtractor();
 	}
 
 	@NonNull
@@ -49,7 +52,7 @@ public class SelectLocationController extends BaseDialogController implements IM
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
-	public void setLocationSelectionHandler(@NonNull ILocationSelectionHandler handler) {
+	public void setLocationSelectionHandler(@NonNull ILocationSelectionHandler<ResultType> handler) {
 		this.handler = handler;
 	}
 
@@ -64,12 +67,12 @@ public class SelectLocationController extends BaseDialogController implements IM
 
 	@NonNull
 	public String getFormattedCoordinates() {
-		LatLon latLon = getMapTargetCoordinates(app);
+		LatLon latLon = latLonExtractor.extractLocation(app);
 		int format = app.getSettings().COORDINATES_FORMAT.get();
 		return OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format);
 	}
 
-	public void onApplySelection() {
+	public void onConfirmSelection() {
 		applyChanges = true;
 	}
 
@@ -84,24 +87,26 @@ public class SelectLocationController extends BaseDialogController implements IM
 	}
 
 	public void onDestroy(@Nullable FragmentActivity activity) {
-		if (finishProcessIfNeeded(activity) && applyChanges) {
+		if (finishProcessIfNeeded(activity)) {
+			if (applyChanges) {
+				onLocationSelected();
+			}
+			onScreenClosed(applyChanges);
 			applyChanges = false;
-			onLocationSelected();
 		}
-		onScreenClosed();
 	}
 
 	private void onLocationSelected() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			handler.onApplySelection(mapActivity);
+			handler.onLocationSelected(mapActivity, preferredExtractor.extractLocation(app));
 		}
 	}
 
-	private void onScreenClosed() {
+	private void onScreenClosed(boolean locationSelected) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			handler.onScreenClosed(mapActivity);
+			handler.onScreenClosed(mapActivity, locationSelected);
 		}
 	}
 
@@ -140,34 +145,18 @@ public class SelectLocationController extends BaseDialogController implements IM
 		return app.getOsmandMap().getMapView().getMapActivity();
 	}
 
-	@NonNull
-	public static LatLon getMapTargetCoordinates(@NonNull OsmandApplication app) {
-		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		MapRendererView mapRenderer = mapView.getMapRenderer();
-		RotatedTileBox tileBox = mapView.getRotatedTileBox();
-
-		int centerX = tileBox.getCenterPixelX();
-		int centerY = tileBox.getCenterPixelY();
-		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, centerX, centerY);
-	}
-
-	@NonNull
-	public static PointF getCenterPixelPoint(@NonNull OsmandApplication app) {
-		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		RotatedTileBox tileBox = mapView.getRotatedTileBox();
-		return new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-	}
-
 	@Nullable
-	public static SelectLocationController getExistedInstance(@NonNull OsmandApplication app) {
+	public static <ResultType> SelectLocationController<ResultType> getExistedInstance(@NonNull OsmandApplication app) {
 		DialogManager dialogManager = app.getDialogManager();
-		return (SelectLocationController) dialogManager.findController(PROCESS_ID);
+		return (SelectLocationController<ResultType>) dialogManager.findController(PROCESS_ID);
 	}
 
-	public static void showDialog(@NonNull FragmentActivity activity,
-								  @NonNull ILocationSelectionHandler handler) {
+	public static <ResultType> void showDialog(@NonNull FragmentActivity activity,
+	                                           @NonNull IMapLocationExtractor<ResultType> extractor,
+	                                           @NonNull ILocationSelectionHandler<ResultType> handler) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		SelectLocationController controller = new SelectLocationController(app, handler);
+		SelectLocationController<ResultType> controller =
+				new SelectLocationController<>(app, extractor, handler);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);

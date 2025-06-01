@@ -16,8 +16,9 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ILocationSelectionHandler;
-import net.osmand.plus.dialogs.SelectLocationController;
+import net.osmand.plus.dialogs.selectlocation.ILocationSelectionHandler;
+import net.osmand.plus.dialogs.selectlocation.SelectLocationController;
+import net.osmand.plus.dialogs.selectlocation.extractor.CenterMapPixelPointExtractor;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -42,7 +43,8 @@ public class SelectNavigationPointController {
 
 	public void selectOnMap(@NonNull MapActivity mapActivity,
 	                        @NonNull PointType pointType, @Nullable String dialogId) {
-		SelectLocationController.showDialog(mapActivity, new ILocationSelectionHandler() {
+		CenterMapPixelPointExtractor extractor = new CenterMapPixelPointExtractor();
+		SelectLocationController.showDialog(mapActivity, extractor, new ILocationSelectionHandler<>() {
 			@NonNull
 			@Override
 			public String getDialogTitle(@NonNull MapActivity activity) {
@@ -56,13 +58,12 @@ public class SelectNavigationPointController {
 			}
 
 			@Override
-			public void onApplySelection(@NonNull MapActivity activity) {
-				PointF point = SelectLocationController.getCenterPixelPoint(app);
-				handleSelectedMapLocation(activity, pointType, point);
+			public void onLocationSelected(@NonNull MapActivity activity, @NonNull PointF location) {
+				handleSelectedMapLocation(activity, pointType, location);
 			}
 
 			@Override
-			public void onScreenClosed(@NonNull MapActivity activity) {
+			public void onScreenClosed(@NonNull MapActivity activity, boolean locationSelected) {
 				if (Objects.equals(WaypointsFragment.TAG, dialogId)) {
 					WaypointsFragment.showInstance(activity, true);
 				} else {
