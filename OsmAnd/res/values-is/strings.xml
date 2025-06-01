@@ -5744,4 +5744,6 @@
     <string name="unit_of_temperature_description">Valdar einingar verða notaðar á öll hitastigstengd gögn í fyrirliggjandi notkunarsniði.</string>
     <string name="suggest_activate_map_msg">%1$s kort er óvirkt,\nvirkjaðu það til að skoða þetta svæði.</string>
     <string name="msg_favorites_skipped_as_existing">Eftirlætis-ferilpunktum (%1$d) var sleppt þar sem þeir voru þegar til staðar.</string>
+    <string name="hmd_promo_years">HMD-kynningarafsláttur í %1$s ár</string>
+    <string name="read_on">Lesa á %1$s</string>
 </resources>
