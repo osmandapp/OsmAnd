@@ -32,7 +32,7 @@ public class MoveMarkerBottomSheetHelper {
 
 		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_photo_dark, R.color.marker_green));
-		mView.findViewById(R.id.apply_button).setOnClickListener(v -> mContextMenuLayer.applyNewMarkerPosition());
+		mView.findViewById(R.id.apply_button).setOnClickListener(v -> mContextMenuLayer.applyNewMarkerPosition(null));
 		mView.findViewById(R.id.cancel_button).setOnClickListener(v -> {
 			hide();
 			mContextMenuLayer.cancelMovingMarker();
@@ -43,7 +43,6 @@ public class MoveMarkerBottomSheetHelper {
 		PointF point = mContextMenuLayer.getMovableCenterPoint(rt);
 		double lat = rt.getLatFromPixel(point.x, point.y);
 		double lon = rt.getLonFromPixel(point.x, point.y);
-		//mDescription.setText(mContext.getString(R.string.lat_lon_pattern, lat, lon));
 		mDescription.setText(PointDescription.getLocationName(mContext, lat, lon, true));
 	}
 	

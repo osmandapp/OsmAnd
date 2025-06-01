@@ -84,10 +84,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
-			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			drawPoint(canvas, pf.x, pf.y, true);
-			AvoidRoadInfo movableRoad = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
+		if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo movableRoad) {
 			setMovableObject(movableRoad.getLatitude(), movableRoad.getLongitude());
 		}
 		if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
@@ -211,11 +208,15 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
+	public Object getMoveableObjectIcon(@NonNull Object o) {
+		return null; // todo fetch icon here (see drawPoint method)
+	}
+
+	@Override
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon latLon,
 	                                   @Nullable ApplyMovedObjectCallback callback) {
 		MapActivity mapActivity = getMapActivity();
-		if (o instanceof AvoidRoadInfo && mapActivity != null) {
-			AvoidRoadInfo object = (AvoidRoadInfo) o;
+		if (o instanceof AvoidRoadInfo object && mapActivity != null) {
 			OsmandApplication application = getApplication();
 			application.getAvoidSpecificRoads().replaceImpassableRoad(mapActivity, object, latLon, false, new AvoidRoadsCallback() {
 				@Override
@@ -243,8 +244,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		mapMarkersCollection = new MapMarkersCollection();
 		for (AvoidRoadInfo road : avoidRoadsHelper.getImpassableRoads()) {
 			boolean isMoveable = false;
-			if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
-				AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
+			if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo object) {
 				if (object.getId() == road.getId()) {
 					isMoveable = true;
 				}

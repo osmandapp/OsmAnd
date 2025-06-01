@@ -289,26 +289,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		drawMovableWpt(canvas, tileBox);
-	}
-
-	private void drawMovableWpt(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
-		Object movableObject = contextMenuLayer.getMoveableObject();
-		if (movableObject instanceof WptPt wptPt) {
-			SelectedGpxFile gpxFile = pointFileMap.get(wptPt);
-			if (gpxFile != null) {
-				PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-				MapMarker mapMarker = mapMarkersHelper.getMapMarker(wptPt);
-				float textScale = getTextScale();
-				int fileColor = getFileColor(gpxFile);
-				int pointColor = getPointColor(wptPt, fileColor);
-
-				canvas.save();
-				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-				drawBigPoint(canvas, wptPt, pointColor, pf.x, pf.y, mapMarker, textScale);
-				canvas.restore();
-			}
-		}
 	}
 
 	@Override
@@ -1111,9 +1091,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawBigPoint(@NonNull Canvas canvas, @Nullable WptPt wpt, int pointColor,
 	                          float x, float y, @Nullable MapMarker marker, float textScale) {
-		PointImageDrawable drawable = createWaypointIcon(pointColor, wpt, marker != null);
+		PointImageDrawable drawable = createWaypointIcon(pointColor, wpt, marker);
 		boolean history = marker != null && marker.history;
 		drawable.drawPoint(canvas, x, y, textScale, history);
+	}
+
+	@NonNull
+	public PointImageDrawable createWaypointIcon(@ColorInt int pointColor, @Nullable WptPt wpt,
+	                                             @Nullable MapMarker marker) {
+		return createWaypointIcon(pointColor, wpt, marker != null);
 	}
 
 	@NonNull
@@ -1759,6 +1745,20 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public boolean isObjectMovable(Object o) {
 		return o instanceof WptPt;
+	}
+
+	@Override
+	public Object getMoveableObjectIcon(@NonNull Object o) {
+		if (o instanceof WptPt wptPt) {
+			SelectedGpxFile gpxFile = pointFileMap.get(wptPt);
+			if (gpxFile != null) {
+				MapMarker mapMarker = mapMarkersHelper.getMapMarker(wptPt);
+				int fileColor = getFileColor(gpxFile);
+				int pointColor = getPointColor(wptPt, fileColor);
+				return createWaypointIcon(pointColor, wptPt, mapMarker);
+			}
+		}
+		return null;
 	}
 
 	@Override

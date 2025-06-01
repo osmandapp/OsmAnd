@@ -108,11 +108,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint objectInMotion) {
-			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
-			float textScale = getTextScale();
-			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker, textScale);
+		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint) {
 			if (!changeMarkerPositionMode) {
 				changeMarkerPositionMode = true;
 				showFavorites();
@@ -239,14 +235,19 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y,
 	                          @Nullable MapMarker marker, float textScale) {
+		PointImageDrawable drawable = createBigPointIcon(favoritePoint, marker);
+		boolean history = marker != null && marker.history;
+		drawable.drawPoint(canvas, x, y, textScale, history);
+	}
+
+	@NonNull
+	private PointImageDrawable createBigPointIcon(@NonNull FavouritePoint favoritePoint,
+	                                              @Nullable MapMarker marker) {
 		int pointColor = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
 		int iconId = favoritePoint.getOverlayIconId(getContext());
 		BackgroundType backgroundType = favoritePoint.getBackgroundType();
 		boolean synced = marker != null;
-
-		PointImageDrawable drawable = createFavoriteIcon(pointColor, iconId, backgroundType, synced);
-		boolean history = marker != null && marker.history;
-		drawable.drawPoint(canvas, x, y, textScale, history);
+		return createFavoriteIcon(pointColor, iconId, backgroundType, synced);
 	}
 
 	@NonNull
@@ -435,6 +436,15 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public boolean isObjectMovable(Object o) {
 		return o instanceof FavouritePoint;
+	}
+
+	@Override
+	public Object getMoveableObjectIcon(@NonNull Object o) {
+		if (o instanceof FavouritePoint objectInMotion) {
+			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
+			return createBigPointIcon(objectInMotion, mapMarker);
+		}
+		return null;
 	}
 
 	@Override
