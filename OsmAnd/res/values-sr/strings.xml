@@ -5439,8 +5439,8 @@
     <string name="raster_layers_action_descr">Промени сликовне слојеве</string>
     <string name="drawer_button_description">Отвара главног изборника.</string>
     <string name="configure_map_description">Промени начин приказа карте, слојеве или друге поставке.</string>
-    <string name="type_of_activity">Врста дејства</string>
-    <string name="change_activity">Промени дејство</string>
+    <string name="type_of_activity">Тип активности</string>
+    <string name="change_activity">Промени активност</string>
     <string name="shared_string_increase">Повећај</string>
     <string name="shared_string_decrease">Смањи</string>
     <string name="open_in_browser">Отворити у интернет претраживачу</string>
@@ -5641,9 +5641,9 @@
     <string name="shared_string_length">Дужина</string>
     <string name="shared_string_avg_altitude">Просечна надморска висина</string>
     <string name="shared_string_avg_speed">Најмања брзина</string>
-    <string name="map_widget_route_information">Подаци о путањи</string>
+    <string name="map_widget_route_information">Информације о рути</string>
     <string name="shared_string_default_view">Подразумевани приказ</string>
-    <string name="map_widget_route_information_desc">Приказује процењено време доласка, преостало време путовања и удаљеност за тренутну путању навођења.</string>
+    <string name="map_widget_route_information_desc">Приказује процењено време доласка, преостало време путовања и удаљеност за тренутну навигациону руту.</string>
     <string name="ais_port_nmea_server">Прикључник ТЦП извора података извора података НМЕА</string>
     <string name="ais_port_nmea_server_description">Одредите број ТЦП прикључника извора података НМЕА</string>
     <string name="ais_load_data">Учитајте податке АИС из датотеке</string>
@@ -5677,7 +5677,7 @@
     <string name="map_grid">Мреже мапе</string>
     <string name="no_places_available">Нема слободних места</string>
     <string name="no_photo_for_location_desc">Још увек није додата ниједна корисничка слика на овај положај</string>
-    <string name="hmd_promo_description">Бесплатан приступ могућностима укључујући неограничено преузимање карата, просторног приказа итд. за %1$s месец</string>
+    <string name="hmd_promo_description">Бесплатан приступ могућностима укључујући неограничено преузимање карата, просторног приказа итд. за %1$s месеци</string>
     <string name="shared_string_road_exit">Излаз</string>
     <string name="hmd_promo">ХМД промоција за %1$s месеци</string>
     <string name="original_icon_description">Свака тачка би задржала своју сличицу.</string>
@@ -5710,9 +5710,9 @@
     <string name="row_height">Висина реда</string>
     <string name="add_widget">Додај справицу</string>
     <string name="poi_source">Извор ТОИ-а</string>
-    <string name="intermediate_first">Прво међуодредиште</string>
-    <string name="display_priority">Предност приказу</string>
-    <string name="destination_first">Прво одредиште</string>
+    <string name="intermediate_first">Међуодредиште прво</string>
+    <string name="display_priority">Приоритет приказа</string>
+    <string name="destination_first">Одредиште прво</string>
     <string name="position_animation_empty_banner_description">Сличица положаја се помера на сваки нови примљени положај без оживљавања.</string>
     <string name="wikidata">Викидата</string>
     <string name="shared_string_no_animation">Без исцртавања</string>
@@ -5746,4 +5746,6 @@
     <string name="unit_of_temperature_description">Изабране јединице ће бити примењене на све податке везане за температуру у тренутном профилу.</string>
     <string name="suggest_activate_map_msg">Карта %1$s је искључена,\nради прегледа ове области је укључите.</string>
     <string name="read_on">Читајте на %1$s</string>
+    <string name="hmd_promo_years">HMD промоција за %1$s година</string>
+    <string name="hmd_promo_description_years">Бесплатан приступ могућностима укључујући неограничено преузимање карата, просторног приказа итд. за %1$s година</string>
 </resources>
