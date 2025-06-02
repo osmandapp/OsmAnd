@@ -44,13 +44,8 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		AndroidUiHelper.setStatusBarContentColor(getView(), true);
 		return ColorUtilities.getAppBarColorId(nightMode);
-	}
-
-	@Override
-	public boolean getContentStatusBarNightMode() {
-		return !nightMode;
 	}
 
 	@Override

@@ -18,10 +18,12 @@ import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -39,7 +41,45 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class AmenitySearcher {
 
-    public record Request(LatLon latLon, Long osmId, String wikidata, Collection<String> names) {}
+    public static class Request {
+
+       private final LatLon latLon;
+       private final Long osmId;
+       private final EntityType type;
+       private final String wikidata;
+       private  Collection<String> names;
+
+        public Request(MapObject mapObject) {
+            osmId = ObfConstants.getOsmObjectId(mapObject);
+            type = ObfConstants.getOsmEntityType(mapObject);
+
+            if (mapObject instanceof Amenity amenity) {
+                latLon = mapObject.getLocation();
+                wikidata = amenity.getWikidata();
+                names = amenity.getOtherNames();
+                names.add(amenity.getName());
+            } else if (mapObject instanceof RenderedObject renderedObject) {
+                latLon = renderedObject.getLatLon();
+                names = renderedObject.getOriginalNames();
+                wikidata = renderedObject.getTagValue(WIKIDATA);
+            } else if (mapObject instanceof TransportStop stop) {
+                latLon = mapObject.getLocation();
+                names = stop.getOtherNames();
+                wikidata = null;
+                names.add(stop.getName());
+            } else {
+                latLon = mapObject.getLocation();
+                wikidata = null;
+                names = mapObject.getOtherNames();
+            }
+        }
+
+        public Request(MapObject mapObject, List<String> names) {
+            this(mapObject);
+            this.names = names;
+        }
+    }
+
     public record Settings(Supplier<String> language, Supplier<Boolean> transliterate, Predicate<String> fileVisibility) {}
 
     protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<>();
@@ -145,30 +185,10 @@ public class AmenitySearcher {
     }
 
     public BaseDetailsObject searchDetailedObject(Object object, Settings settings) {
-        LatLon latLon = null;
-        Long id = null;
-        Collection<String> names = null;
-        String wikidata = null;
-        if (object instanceof Amenity amenity) {
-            latLon = amenity.getLocation();
-            id = amenity.getId();
-            wikidata = amenity.getWikidata();
-            names = amenity.getOtherNames();
-            names.add(amenity.getName());
-        }
-        if (object instanceof RenderedObject renderedObject) {
-            latLon = renderedObject.getLatLon();
-            names = renderedObject.getOriginalNames();
-            id = ObfConstants.getOsmObjectId(renderedObject) << AMENITY_ID_RIGHT_SHIFT;
-            wikidata = renderedObject.getTagValue(WIKIDATA);
-        }
-        if (object instanceof TransportStop stop) {
-            latLon = stop.getLocation();
-            id = stop.getId();
-            names = stop.getOtherNames();
-            names.add(stop.getName());
-        }
-        if (object instanceof BaseDetailsObject detailsObject) {
+        Request request = null;
+        if (object instanceof MapObject mapObject) {
+            request = new Request(mapObject);
+        } else if (object instanceof BaseDetailsObject detailsObject) {
             if (detailsObject.isObjectFull()) {
                 completeGeometry(detailsObject, detailsObject.getObjects().get(0));
                 return detailsObject;
@@ -179,8 +199,7 @@ public class AmenitySearcher {
             }
         }
         BaseDetailsObject detailsObject = null;
-        if (latLon != null) {
-            Request request = new Request(latLon, id, wikidata, names);
+        if (request != null) {
             detailsObject = searchDetailedObject(request, settings);
         }
         completeGeometry(detailsObject, object);
@@ -189,21 +208,19 @@ public class AmenitySearcher {
 
     public BaseDetailsObject searchDetailedObject(Request request, Settings settings) {
         LatLon latLon = request.latLon;
-        Long obId = request.osmId;
+        Long osmId = request.osmId;
         String wikidata = request.wikidata;
         Collection<String> names = request.names;
 
 		if (latLon == null) {
             return null;
         }
-        long id = obId == null ? -1 : obId;
-        boolean relation = ObfConstants.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT);
-        int searchRadius = relation ? AMENITY_SEARCH_RADIUS_FOR_RELATION : AMENITY_SEARCH_RADIUS;
+        long id = osmId == null ? -1 : osmId;
+        int searchRadius = request.type == EntityType.RELATION ? AMENITY_SEARCH_RADIUS_FOR_RELATION : AMENITY_SEARCH_RADIUS;
         QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
 
         List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false, settings.fileVisibility);
 
-        long osmId = ObfConstants.isShiftedID(id) ? ObfConstants.getOsmId(id) : id >> AMENITY_ID_RIGHT_SHIFT;
         List<Amenity> filtered = new ArrayList<>();
         if (osmId > 0 || wikidata != null) {
             filtered = filterByOsmIdOrWikidata(amenities, osmId, latLon, wikidata);
@@ -566,10 +583,7 @@ public class AmenitySearcher {
         }
         final LatLon finalLatLon = latLon;
         singleThreadedExecutor.submit(() -> {
-            String wikidata = renderedObject.getTagValue(Amenity.WIKIDATA);
-            long osmId = ObfConstants.getOsmObjectId(renderedObject);
-            Request request = new Request(finalLatLon, osmId << AMENITY_ID_RIGHT_SHIFT, wikidata,
-                    renderedObject.getOriginalNames());
+            Request request = new Request(renderedObject);
             BaseDetailsObject detailsObject = searchDetailedObject(request, settings);
             if (detailsObject != null) {
                 detailsObject.addObject(renderedObject);

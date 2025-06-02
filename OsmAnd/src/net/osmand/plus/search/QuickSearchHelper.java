@@ -171,8 +171,11 @@ public class QuickSearchHelper implements ResourceListener {
 	public Amenity findAmenity(String name, double lat, double lon) {
 		AmenitySearcher amenitySearch = app.getResourceManager().getAmenitySearcher();
 		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
-		AmenitySearcher.Request request =
-				new AmenitySearcher.Request(new LatLon(lat, lon), null, null, Collections.singletonList(name));
+
+		Amenity requestAmenity = new Amenity();
+		requestAmenity.setLocation(new LatLon(lat, lon));
+		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, Collections.singletonList(name));
+
 		return amenitySearch.searchDetailedAmenity(request, settings);
 	}
 

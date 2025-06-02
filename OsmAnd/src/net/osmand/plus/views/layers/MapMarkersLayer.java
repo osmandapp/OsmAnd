@@ -722,8 +722,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			ResourceManager resourceManager = getApplication().getResourceManager();
 			AmenitySearcher searcher = resourceManager.getAmenitySearcher();
 			AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
-			AmenitySearcher.Request request = new AmenitySearcher.Request(
-					marker.point, null, null, Collections.singletonList(mapObjName));
+
+			Amenity requestAmenity = new Amenity();
+			requestAmenity.setLocation(marker.point);
+
+			AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, Collections.singletonList(mapObjName));
 			return searcher.searchDetailedAmenity(request, settings);
 		}
 		return null;

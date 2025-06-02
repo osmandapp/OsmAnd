@@ -56,11 +56,13 @@ public class AmenityExtensionsHelper {
 
 	@Nullable
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
-		LatLon latLon = new LatLon(lat, lon);
 		List<String> names = Collections.singletonList(nameEn);
 		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
 		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
-		AmenitySearcher.Request request = new AmenitySearcher.Request(latLon, null, null, names);
+
+		Amenity requestAmenity = new Amenity();
+		requestAmenity.setLocation(new LatLon(lat, lon));
+		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names);
 		return searcher.searchDetailedAmenity(request, settings);
 	}
 
