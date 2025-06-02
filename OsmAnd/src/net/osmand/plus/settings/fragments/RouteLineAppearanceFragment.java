@@ -519,9 +519,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	@Override
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		if (coloringStyle != null) {
-			if (!coloringStyle.getType().isGradient()) {
-				requireMapActivity().getMapLayers().getPreviewRouteLineLayer().clearPaintShader();
-			}
 			previewRouteLineInfo.setRouteColoringStyle(coloringStyle);
 			updateColorItems();
 			updateHeaderContent(RouteLineColorController.PROCESS_ID);

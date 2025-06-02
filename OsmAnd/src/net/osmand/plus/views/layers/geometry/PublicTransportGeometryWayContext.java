@@ -1,13 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.RectF;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
@@ -87,7 +81,9 @@ public class PublicTransportGeometryWayContext extends CommonGeometryWayContext 
 	@Override
 	public void clearCustomColor() {
 		super.clearCustomColor();
-		attrsPT.customColor = 0;
+		if (attrsPT != null) {
+			attrsPT.customColor = 0;
+		}
 	}
 
 	public Bitmap getStopShieldBitmap(int color, Drawable stopDrawable) {
