@@ -581,7 +581,6 @@ public class AmenitySearcher {
             callback.processResult(null);
             return;
         }
-        final LatLon finalLatLon = latLon;
         singleThreadedExecutor.submit(() -> {
             Request request = new Request(renderedObject);
             BaseDetailsObject detailsObject = searchDetailedObject(request, settings);
@@ -589,8 +588,10 @@ public class AmenitySearcher {
                 detailsObject.addObject(renderedObject);
 
                 Amenity amenity = detailsObject.getSyntheticAmenity();
-                amenity.setX(renderedObject.getX());
-                amenity.setY(renderedObject.getY());
+                if (detailsObject.getPointsLength() < renderedObject.getX().size()) {
+                    amenity.setX(renderedObject.getX());
+                    amenity.setY(renderedObject.getY());
+                }
             }
             callback.processResult(detailsObject);
         });
@@ -637,9 +638,12 @@ public class AmenitySearcher {
 
     private boolean copyCoordinates(BaseDetailsObject detailsObject, BinaryMapDataObject mapObject) {
         int pointsLength = mapObject.getPointsLength();
-        for (int i = 0; i < pointsLength; i++) {
-            detailsObject.addX(mapObject.getPoint31XTile(i));
-            detailsObject.addY(mapObject.getPoint31YTile(i));
+        if (detailsObject.getPointsLength() < pointsLength) {
+            detailsObject.clearGeometry();
+            for (int i = 0; i < pointsLength; i++) {
+                detailsObject.addX(mapObject.getPoint31XTile(i));
+                detailsObject.addY(mapObject.getPoint31YTile(i));
+            }
         }
         return pointsLength > 0;
     }

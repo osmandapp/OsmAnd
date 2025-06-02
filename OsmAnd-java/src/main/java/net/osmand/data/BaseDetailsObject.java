@@ -426,6 +426,15 @@ public class BaseDetailsObject {
 		return !this.syntheticAmenity.getX().isEmpty() && !this.syntheticAmenity.getY().isEmpty();
 	}
 
+	public int getPointsLength() {
+		return this.syntheticAmenity.getX().size();
+	}
+
+	public void clearGeometry() {
+		this.syntheticAmenity.getY().clear();
+		this.syntheticAmenity.getX().clear();
+	}
+
 	private boolean isSupportedObjectType(Object object) {
 		return object instanceof Amenity || object instanceof TransportStop
 				|| object instanceof RenderedObject || object instanceof BaseDetailsObject;
