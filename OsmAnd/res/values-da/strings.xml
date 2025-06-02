@@ -2504,11 +2504,11 @@
     <string name="first_intermediate_dest_description">Tilføjer første stop</string>
     <string name="subsequent_dest_description">Flyt destination op og opret den</string>
     <string name="make_as_start_point">Gør til udgangspunkt</string>
-    <string name="dd_mm_ss_format">GG°MM′SS″</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">GG.GGGGGG°</string>
-    <string name="dd_ddddd_format">GG.GGGGG°</string>
+    <string name="dd_ddddd_format">DD.DDDDD°</string>
     <string name="dd_mm_mmmm_format">GG°MM.MMMM′</string>
-    <string name="dd_mm_mmm_format">GG°MM.MMM′</string>
+    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
     <string name="east_abbreviation">Ø</string>
     <string name="west_abbreviation">V</string>
     <string name="south_abbreviation">S</string>
