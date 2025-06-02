@@ -25,14 +25,14 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.*;
-import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
+import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
 import net.osmand.core.jni.MapSymbol.ContentClass;
 import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
+import net.osmand.data.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.data.*;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.ConfigureMapUtils;
@@ -262,9 +262,11 @@ public class MapSelectionHelper {
 				if (allowAmenityObjects) {
 					boolean allowRenderedObjects = !isOsmRoute && !isClickableWay
 							&& !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
-					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
-					if (!amenityAdded && allowRenderedObjects) {
+
+					if (allowRenderedObjects) {
 						result.collect(renderedObject, null);
+					} else {
+						addAmenity(result, renderedObject, searchLatLon);
 					}
 				}
 
