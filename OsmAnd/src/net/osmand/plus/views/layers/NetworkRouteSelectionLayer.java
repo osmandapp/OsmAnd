@@ -209,7 +209,8 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 
 	private RouteKey findKeyByValue(@NonNull GpxFile gpxFile) {
 		for (Map.Entry<RouteKey, GpxFile> entry : routesCache.entrySet()) {
-			if (entry.getValue() == gpxFile) {
+			if (entry.getValue() == gpxFile ||
+					Algorithms.stringsEqual(entry.getValue().getPath(), gpxFile.getPath())) {
 				return entry.getKey();
 			}
 		}
