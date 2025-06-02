@@ -490,7 +490,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				if (success && !cancelApplyingNewMarkerPosition) {
 					quitMovingMarker();
 					menu.close();
-
 					view.refreshMap();
 				}
 				selectedObjectContextMenuProvider = null;
@@ -577,13 +576,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (mapActivity == null) {
 			return;
 		}
-
 		mInChangeMarkerPositionMode = false;
-		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-				R.id.map_ruler_layout,
-				R.id.map_left_widgets_panel,
-				R.id.map_right_widgets_panel,
-				R.id.map_center_info);
 	}
 
 	public void quitAddGpxPoint() {
