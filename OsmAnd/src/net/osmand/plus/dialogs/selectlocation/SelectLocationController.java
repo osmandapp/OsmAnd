@@ -141,6 +141,15 @@ public class SelectLocationController<ResultType> extends BaseDialogController
 	}
 
 	@Nullable
+	public String getCenterPointLabel() {
+		MapActivity mapActivity = getMapActivity();
+		if (handler != null && mapActivity != null) {
+			return handler.getCenterPointLabel(mapActivity);
+		}
+		return null;
+	}
+
+	@Nullable
 	private MapActivity getMapActivity() {
 		return app.getOsmandMap().getMapView().getMapActivity();
 	}

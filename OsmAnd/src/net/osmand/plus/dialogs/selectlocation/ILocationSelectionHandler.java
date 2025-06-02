@@ -9,6 +9,9 @@ public interface ILocationSelectionHandler<ResultType> {
 	@Nullable
 	Object getCenterPointIcon(@NonNull MapActivity mapActivity);
 
+	@Nullable
+	String getCenterPointLabel(@NonNull MapActivity mapActivity);
+
 	void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull ResultType location);
 
 	void onScreenClosed(@NonNull MapActivity mapActivity, boolean selected);

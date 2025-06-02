@@ -59,6 +59,12 @@ public abstract class SelectMapLocationAction extends QuickAction {
 				return getLocationIcon(mapActivity);
 			}
 
+			@Nullable
+			@Override
+			public String getCenterPointLabel(@NonNull MapActivity mapActivity) {
+				return getLocationLabel(mapActivity);
+			}
+
 			@Override
 			public void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon location) {
 				SelectMapLocationAction.this.onLocationSelected(mapActivity, location);
@@ -80,6 +86,11 @@ public abstract class SelectMapLocationAction extends QuickAction {
 
 	@Nullable
 	protected abstract Object getLocationIcon(@NonNull MapActivity mapActivity);
+
+	@Nullable
+	protected String getLocationLabel(@NonNull MapActivity mapActivity) {
+		return null;
+	}
 
 	@NonNull
 	protected String getDialogTitle(@NonNull Context context) {

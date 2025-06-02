@@ -1,10 +1,12 @@
 package net.osmand.plus.views.layers;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.PointF;
 import android.graphics.Rect;
 
@@ -24,8 +26,10 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 public class SelectLocationLayer extends OsmandMapLayer {
 
 	private final Paint bitmapPaint;
+	private final Paint mTextPaint;
 	private Bitmap defaultIconDay;
 	private Bitmap defaultIconNight;
+	private float textScale = 1f;
 	private SelectLocationController<?> selectLocationController;
 
 	public SelectLocationLayer(@NonNull Context context) {
@@ -33,6 +37,11 @@ public class SelectLocationLayer extends OsmandMapLayer {
 		bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		bitmapPaint.setFilterBitmap(true);
 		bitmapPaint.setDither(true);
+
+		mTextPaint = new Paint();
+		mTextPaint.setTextAlign(Align.CENTER);
+		mTextPaint.setAntiAlias(true);
+		updateTextSize();
 	}
 
 	@Override
@@ -48,16 +57,38 @@ public class SelectLocationLayer extends OsmandMapLayer {
 		selectLocationController = SelectLocationController.getExistedInstance(app);
 
 		if (selectLocationController != null) {
+			float textScale = getTextScale();
+			if (this.textScale != textScale) {
+				this.textScale = textScale;
+				updateTextSize();
+			}
+			float marginX, marginY = 0, iconWidth;
 			Object iconObject = selectLocationController.getCenterPointIcon();
 			if (iconObject instanceof PointImageDrawable drawable) {
 				drawTargetDrawable(canvas, tileBox, drawable);
+				iconWidth = drawable.getIntrinsicWidth();
 			} else if (iconObject instanceof ShiftedBitmap icon) {
-				drawTargetBitmap(canvas, tileBox, icon.getBitmap(), icon.getMarginX(), icon.getMarginY(), icon.getScale());
+				Bitmap bitmap = icon.getBitmap();
+				marginX = icon.getMarginX();
+				marginY = icon.getMarginY();
+				iconWidth = bitmap.getWidth();
+				drawTargetBitmap(canvas, tileBox, bitmap, marginX, marginY, icon.getScale());
 			} else {
 				Bitmap centerIcon = settings.isNightMode() ? defaultIconNight : defaultIconDay;
 				drawTargetBitmap(canvas, tileBox, centerIcon);
+				iconWidth = centerIcon.getWidth();
+			}
+			String label = selectLocationController.getCenterPointLabel();
+			if (label != null) {
+				marginX = iconWidth / 3f;
+				drawText(canvas, tileBox, label, marginX, marginY);
 			}
 		}
+	}
+
+	private void updateTextSize() {
+		mTextPaint.setTextSize(18f * Resources.getSystem().getDisplayMetrics().scaledDensity
+				* getApplication().getOsmandMap().getCarDensityScaleCoef());
 	}
 
 	@Override
@@ -88,6 +119,13 @@ public class SelectLocationLayer extends OsmandMapLayer {
 		}
 		Rect rect = getIconDestinationRect(x - marginX, y - marginY, bitmap.getWidth(), bitmap.getHeight(), scale);
 		canvas.drawBitmap(bitmap, null, rect, bitmapPaint);
+	}
+
+	private void drawText(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+	                      @NonNull String text, float marginX, float marginY) {
+		float x = tileBox.getCenterPixelX();
+		float y = tileBox.getCenterPixelY();
+		canvas.drawText(text, x + marginX, y - 3 * marginY / 5f, mTextPaint);
 	}
 
 	@Override

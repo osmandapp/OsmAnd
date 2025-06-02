@@ -319,6 +319,18 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		return null;
 	}
 
+	@Nullable
+	@Override
+	public String getMoveableObjectLabel(@NonNull Object o) {
+		if (o instanceof TargetPoint targetPoint) {
+			int index = targetPoints.getIntermediatePoints().indexOf(targetPoint);
+			if (index >= 0) {
+				return String.valueOf(++index);
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
 	                                   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {

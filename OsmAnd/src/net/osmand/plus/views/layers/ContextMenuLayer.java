@@ -654,6 +654,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				return null;
 			}
 
+			@Nullable
+			@Override
+			public String getCenterPointLabel(@NonNull MapActivity mapActivity) {
+				Object o = menu.getObject();
+				if (o != null && selectedObjectContextMenuProvider != null
+						&& selectedObjectContextMenuProvider instanceof IMoveObjectProvider l) {
+					return l.getMoveableObjectLabel(o);
+				}
+				return null;
+			}
+
 			@Override
 			public void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon location) {
 				applyNewMarkerPosition(location);
@@ -1031,9 +1042,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public interface IMoveObjectProvider {
 
-		boolean isObjectMovable(Object o);
+		boolean isObjectMovable(@Nullable Object o);
 
+		@Nullable
 		Object getMoveableObjectIcon(@NonNull Object o);
+
+		@Nullable
+		default String getMoveableObjectLabel(@NonNull Object o) {
+			return null;
+		}
 
 		void applyNewObjectPosition(@NonNull Object o,
 		                            @NonNull LatLon position,

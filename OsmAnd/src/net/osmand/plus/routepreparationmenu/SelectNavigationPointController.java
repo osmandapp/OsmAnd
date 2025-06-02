@@ -57,6 +57,16 @@ public class SelectNavigationPointController {
 				return getPointIcon(activity, pointType);
 			}
 
+			@Nullable
+			@Override
+			public String getCenterPointLabel(@NonNull MapActivity mapActivity) {
+				if (pointType == PointType.INTERMEDIATE) {
+					TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+					return String.valueOf(targetPointsHelper.getIntermediatePoints().size() + 1);
+				}
+				return null;
+			}
+
 			@Override
 			public void onLocationSelected(@NonNull MapActivity activity, @NonNull PointF location) {
 				handleSelectedMapLocation(activity, pointType, location);
