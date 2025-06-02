@@ -2024,7 +2024,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return true;
 	}
 
-	public void setMapRenderer(@Nullable MapRendererView mapRenderer) {
+	public void setMapRenderer(@Nullable MapRendererView mapRenderer, boolean disable) {
 		List<OsmandMapLayer> layers = getLayers();
 		for (OsmandMapLayer layer : layers) {
 			layer.onMapRendererChange(this.mapRenderer, mapRenderer);
@@ -2035,7 +2035,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.mapRenderer.resetElevationDataProvider();
 		}
 		this.mapRenderer = mapRenderer;
-		if (!isSteplessZoomSupported()) {
+		if (!isSteplessZoomSupported() && !disable) {
 			setZoomWithFloatPart(getZoom(), 0);
 		}
 	}
