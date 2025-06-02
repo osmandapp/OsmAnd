@@ -194,4 +194,26 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	public boolean drawInScreenPixels() {
 		return false;
 	}
+
+	public void clearCachedGpx(@NonNull GpxFile gpxFile) {
+		RouteKey routeKey = RouteKey.fromGpxFile(gpxFile);
+
+		if (!routesCache.containsKey(routeKey)) {
+			routeKey = findKeyByValue(gpxFile);
+		}
+
+		if (routeKey != null) {
+			routesCache.remove(routeKey);
+		}
+	}
+
+	private RouteKey findKeyByValue(@NonNull GpxFile gpxFile) {
+		for (Map.Entry<RouteKey, GpxFile> entry : routesCache.entrySet()) {
+			if (entry.getValue() == gpxFile ||
+					Algorithms.stringsEqual(entry.getValue().getPath(), gpxFile.getPath())) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
 }
