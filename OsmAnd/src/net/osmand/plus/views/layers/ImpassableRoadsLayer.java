@@ -30,6 +30,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.avoidroads.AvoidRoadsCallback;
+import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
@@ -107,8 +108,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				return;
 			}
 			for (AvoidRoadInfo road : avoidRoadsHelper.getImpassableRoads()) {
-				if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
-					AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
+				if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo object) {
 					if (object.getId() == road.getId()) {
 						continue;
 					}
@@ -195,8 +195,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof AvoidRoadInfo) {
-			AvoidRoadInfo route = (AvoidRoadInfo) o;
+		if (o instanceof AvoidRoadInfo route) {
 			return new PointDescription(POINT_TYPE_BLOCKED_ROAD, route.getName(getContext()));
 		}
 		return null;
@@ -209,7 +208,9 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	@Override
 	public Object getMoveableObjectIcon(@NonNull Object o) {
-		return null; // todo fetch icon here (see drawPoint method)
+		float textScale = getTextScale();
+		float marginY = roadWorkIcon.getHeight() / 2f * textScale;
+		return new ShiftedBitmap(roadWorkIcon, 0, marginY, textScale);
 	}
 
 	@Override

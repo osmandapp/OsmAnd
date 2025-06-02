@@ -65,7 +65,7 @@ public abstract class SelectMapLocationAction extends QuickAction {
 			}
 
 			@Override
-			public void onScreenClosed(@NonNull MapActivity mapActivity, boolean locationSelected) {
+			public void onScreenClosed(@NonNull MapActivity mapActivity, boolean selected) {
 			}
 
 			@NonNull

@@ -63,7 +63,7 @@ public class SelectNavigationPointController {
 			}
 
 			@Override
-			public void onScreenClosed(@NonNull MapActivity activity, boolean locationSelected) {
+			public void onScreenClosed(@NonNull MapActivity activity, boolean selected) {
 				if (Objects.equals(WaypointsFragment.TAG, dialogId)) {
 					WaypointsFragment.showInstance(activity, true);
 				} else {

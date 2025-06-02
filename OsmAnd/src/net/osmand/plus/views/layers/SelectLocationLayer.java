@@ -6,8 +6,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Rect;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.BackgroundType;
 import net.osmand.data.RotatedTileBox;
@@ -50,7 +52,7 @@ public class SelectLocationLayer extends OsmandMapLayer {
 			if (iconObject instanceof PointImageDrawable drawable) {
 				drawTargetDrawable(canvas, tileBox, drawable);
 			} else if (iconObject instanceof ShiftedBitmap icon) {
-				drawTargetBitmap(canvas, tileBox, icon.getBitmap(), icon.getMarginX(), icon.getMarginY());
+				drawTargetBitmap(canvas, tileBox, icon.getBitmap(), icon.getMarginX(), icon.getMarginY(), icon.getScale());
 			} else {
 				Bitmap centerIcon = settings.isNightMode() ? defaultIconNight : defaultIconDay;
 				drawTargetBitmap(canvas, tileBox, centerIcon);
@@ -73,14 +75,19 @@ public class SelectLocationLayer extends OsmandMapLayer {
 	}
 
 	private void drawTargetBitmap(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @NonNull Bitmap icon) {
-		drawTargetBitmap(canvas, tileBox, icon, icon.getWidth() / 2f, icon.getHeight() / 2f);
+		drawTargetBitmap(canvas, tileBox, icon, icon.getWidth() / 2f, icon.getHeight() / 2f, 1.0f);
 	}
 
 	private void drawTargetBitmap(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
-	                              @NonNull Bitmap bitmap, float marginX, float marginY) {
-		float targetX = tileBox.getCenterPixelX();
-		float targetY = tileBox.getCenterPixelY();
-		canvas.drawBitmap(bitmap, targetX - marginX, targetY - marginY, bitmapPaint);
+	                              @NonNull Bitmap bitmap, float marginX, float marginY, @Nullable Float scale) {
+		float x = tileBox.getCenterPixelX();
+		float y = tileBox.getCenterPixelY();
+		if (scale == null) {
+			canvas.drawBitmap(bitmap, x - marginX, y - marginY, bitmapPaint);
+			return;
+		}
+		Rect rect = getIconDestinationRect(x - marginX, y - marginY, bitmap.getWidth(), bitmap.getHeight(), scale);
+		canvas.drawBitmap(bitmap, null, rect, bitmapPaint);
 	}
 
 	@Override

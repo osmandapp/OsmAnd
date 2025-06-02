@@ -11,7 +11,7 @@ public interface ILocationSelectionHandler<ResultType> {
 
 	void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull ResultType location);
 
-	void onScreenClosed(@NonNull MapActivity mapActivity, boolean locationSelected);
+	void onScreenClosed(@NonNull MapActivity mapActivity, boolean selected);
 
 	@NonNull
 	String getDialogTitle(@NonNull MapActivity mapActivity);

@@ -97,9 +97,9 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 
 			DataTileManager<Recording> recs = plugin.getRecordings();
 			List<Recording> objects =  recs.getAllObjects();
-			int objectsInMoveCount = contextMenuLayer.isInChangeMarkerPositionMode()
+			int movableObjectsCount = contextMenuLayer.isInChangeMarkerPositionMode()
 					&& contextMenuLayer.getMoveableObject() instanceof Recording ? 1 : 0;
-			int objectsCount = objects.size() - objectsInMoveCount;
+			int objectsCount = objects.size() - movableObjectsCount;
 			if (audioNotesTileProvider != null && objectsCount != audioNotesTileProvider.getPoints31().size()) {
 				clearAudioVideoNotes();
 			}

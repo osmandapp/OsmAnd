@@ -13,8 +13,8 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
-import net.osmand.plus.dialogs.selectlocation.extractor.IMapLocationExtractor;
 import net.osmand.plus.dialogs.selectlocation.extractor.CenterMapLatLonExtractor;
+import net.osmand.plus.dialogs.selectlocation.extractor.IMapLocationExtractor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -33,7 +33,7 @@ public class SelectLocationController<ResultType> extends BaseDialogController
 	private boolean landscape;
 
 	public SelectLocationController(@NonNull OsmandApplication app,
-									@NonNull IMapLocationExtractor<ResultType> extractor,
+	                                @NonNull IMapLocationExtractor<ResultType> extractor,
 	                                @NonNull ILocationSelectionHandler<ResultType> handler) {
 		super(app);
 		setLocationSelectionHandler(handler);

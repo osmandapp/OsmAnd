@@ -667,8 +667,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 
 			@Override
-			public void onScreenClosed(@NonNull MapActivity mapActivity, boolean locationSelected) {
-				if (!locationSelected) {
+			public void onScreenClosed(@NonNull MapActivity mapActivity, boolean selected) {
+				if (!selected) {
 					cancelMovingMarker();
 				}
 			}
