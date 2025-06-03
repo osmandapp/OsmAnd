@@ -13,11 +13,12 @@ abstract class ElevationDiffsCalculator {
 	private var diffElevationDown = 0.0
 	private var extremums = mutableListOf<Extremum>()
 
-	data class Extremum(val dist: Double, val ele: Double)
+	data class Extremum(val dist: Double, val ele: Double, val index: Int)
 
 	abstract fun getPointDistance(index: Int): Double
 
 	abstract fun getPointElevation(index: Int): Double
+	abstract fun getPointIndex(index: Int): Int
 
 	abstract fun getPointsCount(): Int
 
@@ -79,7 +80,7 @@ abstract class ElevationDiffsCalculator {
 		extremums = mutableListOf()
 		for (i in points.indices) {
 			if (points[i]) {
-				extremums.add(Extremum(getPointDistance(i), getPointElevation(i)))
+				extremums.add(Extremum(getPointDistance(i), getPointElevation(i), getPointIndex(i)))
 			}
 		}
 
@@ -118,7 +119,8 @@ abstract class ElevationDiffsCalculator {
 			approximator.approximate()
 			val distances: DoubleArray? = approximator.getDistances()
 			val elevations: DoubleArray? = approximator.getElevations()
-			if (distances != null && elevations != null) {
+			val pointIndexes: IntArray? = approximator.getSurvivedIndexes()
+			if (distances != null && elevations != null && pointIndexes != null) {
 				var diffElevationUp = 0.0
 				var diffElevationDown = 0.0
 				val elevationDiffsCalc: ElevationDiffsCalculator =
@@ -129,6 +131,10 @@ abstract class ElevationDiffsCalculator {
 
 						override fun getPointElevation(index: Int): Double {
 							return elevations[index]
+						}
+
+						override fun getPointIndex(index: Int): Int {
+							return pointIndexes[index]
 						}
 
 						override fun getPointsCount(): Int {
