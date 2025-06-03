@@ -287,6 +287,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		boolean showMarker = false;
 		if (mInChangeMarkerPositionMode) {
+			// is it needed?
 			if (menu != null && menu.getObject() == null) {
 				canvas.translate(box.getPixWidth() / 2f - contextMarker.getWidth() / 2f, box.getPixHeight() / 2f - contextMarker.getHeight());
 				contextMarker.draw(canvas);
