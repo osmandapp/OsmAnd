@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.Amenity;
@@ -25,6 +26,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
 
 import java.util.List;
 
@@ -92,9 +94,11 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 			FragmentManager fragmentManager = dialogFragment.getFragmentManager();
 			if (fragmentManager != null && index >= 0 && index < getListAdapter().getCount()) {
 				QuickSearchListItem item = getListAdapter().getItem(index);
-				if (item != null && item.getSearchResult().object instanceof HistoryEntry) {
-					HistoryEntry entry = (HistoryEntry) item.getSearchResult().object;
-					HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), dialogFragment);
+				if (item != null) {
+					HistoryEntry entry = getEntryFromSearchItem(item);
+					if (entry != null) {
+						HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), dialogFragment);
+					}
 				}
 			}
 			return true;
@@ -110,6 +114,19 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 				getDialogFragment().reloadHistory();
 			}
 		});
+	}
+
+	@Nullable
+	private HistoryEntry getEntryFromSearchItem(@NonNull QuickSearchListItem item) {
+		SearchResult searchResult = item.getSearchResult();
+
+		if (searchResult.object instanceof HistoryEntry historyEntry) {
+			return historyEntry;
+		}
+		if (searchResult.relatedObject instanceof HistoryEntry historyEntry) {
+			return historyEntry;
+		}
+		return null;
 	}
 
 	@Override
@@ -136,7 +153,8 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 
 	private void setupNearByCard(@NonNull View view) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), !app.getSettings().isLightContent());
-		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this, ((QuickSearchDialogFragment) getParentFragment()).isNightMode());
+		QuickSearchDialogFragment dialogFragment = (QuickSearchDialogFragment) getParentFragment();
+		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this, dialogFragment.isNightMode(), !dialogFragment.isSearchHidden());
 		getListView().addHeaderView(nearbyPlacesCard, null, false);
 		getListView().addHeaderView(themedInflater.inflate(R.layout.recently_visited_header, getListView(), false));
 	}

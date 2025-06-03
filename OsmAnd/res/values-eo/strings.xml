@@ -5668,7 +5668,7 @@
     <string name="poi_source">Fonto de interesejoj</string>
     <string name="ais_load_data">Enlegi AIS-datumojn el dosiero</string>
     <string name="hmd_promo">Promocio HMD por %1$s monatoj</string>
-    <string name="hmd_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
+    <string name="hmd_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monatoj</string>
     <string name="shared_string_road_exit">Elveturejo</string>
     <string name="popular_places">Popularaj lokoj</string>
     <string name="show_list">Montri liston</string>
@@ -5752,4 +5752,7 @@
     <string name="deactivated_map">Malaktiva mapo</string>
     <string name="suggest_activate_map_msg">La mapo “%1$s” estas malaktiva,\naktivigu ĝin por bildigi tiun ĉi areon.</string>
     <string name="unit_of_temperature_description">Elektata mezurunuo estos aplikita al ĉiuj temperatur-rilataj datumoj en la nuna profilo.</string>
+    <string name="read_on">Legi en %1$s</string>
+    <string name="hmd_promo_years">Promocio HMD por %1$s jaroj</string>
+    <string name="hmd_promo_description_years">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s jaroj</string>
 </resources>

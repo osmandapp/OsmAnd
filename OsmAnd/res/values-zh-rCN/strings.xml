@@ -2062,20 +2062,7 @@
 \n - 可选择在后台模式下记录行程（当设备处于睡眠模式时）。
 \n OsmAnd 是积极开发的开源软件。每个人都可以通过报告错误、改进翻译或编码新功能来为应用程序做出贡献。此外，该项目还依靠财政捐款来资助新功能的编码和测试。
 \n</string>
-    <string name="osmand_plus_extended_description_part8">大概的地图覆盖区域和品质： 
-\n• 西欧： **** 
-\n• 东欧： *** 
-\n• 俄罗斯： *** 
-\n• 北美洲： *** 
-\n• 南美洲： ** 
-\n• 亚洲：** 
-\n• 日本和韩国： *** 
-\n• 中东： ** 
-\n• 非洲： ** 
-\n• 南极洲： * 
-\n全球大多数国家都可以下载
-\n 从阿富汗到津巴布韦，从澳大利亚到美国。 阿根廷、巴西、加拿大、法国、德国、墨西哥、英国、 西班牙…
-\n</string>
+    <string name="osmand_plus_extended_description_part8">大概的地图覆盖区域和品质： \n• 西欧： **** \n• 东欧： *** \n• 俄罗斯： *** \n• 北美洲： *** \n• 南美洲： ** \n• 亚洲：** \n• 日本和韩国： *** \n• 中东： ** \n• 非洲： ** \n• 南极洲： * \n全球大多数国家都可以下载 \n 从阿富汗到津巴布韦，从澳大利亚到美国。 阿根廷、巴西、加拿大、法国、德国、墨西哥、英国、 西班牙…</string>
     <string name="route_updated_loc_found">等待定位以计算路线</string>
     <string name="osmand_parking_position_description_add_time">将车停在</string>
     <string name="native_app_allocated_memory_descr">本地存储总计由应用程序 %1$s MB（Dalvik %2$s MB，其它 %3$s MB）。
@@ -5087,7 +5074,7 @@
     <string name="approximate_bearing_descr">根据导航路线推算方位。</string>
     <string name="app_mode_climbing">攀岩</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">语音提示 / 通知</string>
-    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_brouter_name">网桥路由器</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">直达点路线规划（船）</string>
     <string name="help_article_navigation_routing_moped_routing_name">轻便摩托车路线规划</string>
     <string name="help_article_navigation_routing_horse_routing_name">骑马路线规划</string>
@@ -5163,29 +5150,7 @@
     <string name="shared_string_foot">脚</string>
     <string name="number_of_tracks">%1$s 个轨迹</string>
     <string name="revolutions_per_minute_unit">每分钟转速</string>
-    <string name="release_4_6">- Android Auto： 新增 3D 模式
-\n
-\n - 轨迹： 引入了过滤器和智能文件夹，优化了内存以容纳较大文件
-\n
-\n - 增强了顶部和底部小部件面板，以容纳所有小部件
-\n
-\n - 改进了本地资源管理
-\n
-\n - 外部控制器的自定义按钮映射
-\n
-\n - 新小部件 \"滑翔比率 \"和 \"太阳位置
-\n
-\n - OsmAnd Cloud： 现在可访问已删除的文件
-\n
-\n - 使用新的对称梯度增强了斜坡模式下的轨道着色功能
-\n
-\n - 解决了透明状态栏的问题
-\n
-\n - 添加了对 ANT+ 温度部件的支持
-\n
-\n - 推出 \"可用内存 \"小部件
-\n
-\n</string>
+    <string name="release_4_6">- Android Auto： 新增 3D 模式 \n \n - 轨迹：引入了过滤器和智能文件夹，优化了内存以容纳较大文件 \n \n - 增强了顶部和底部小部件面板，以容纳所有小部件 \n \n - 改进了本地资源管理 \n \n - 外部控制器的自定义按钮映射 \n \n - 新小部件 \"滑翔比率 \"和 \"太阳位置 \n \n - OsmAnd Cloud： 现在可访问已删除的文件 \n \n - 使用新的对称梯度增强了斜坡模式下的轨道着色功能 \n \n - 解决了透明状态栏的问题 \n \n - 添加了对 ANT+ 温度部件的支持 \n \n - 推出 \"可用内存\" 小部件</string>
     <string name="help_article_navigation_routing_train_routing_name">火车路线规划</string>
     <string name="help_article_plan_route_web_name">网络路线规划器</string>
     <string name="help_article_purchases_giveaway_name">赠送</string>
@@ -5394,25 +5359,7 @@
 \n
 \n选择\"%1$s \"表示精确数字，或选择\"%2$s \"以便于阅读。</string>
     <string name="distance_during_navigation">导航时的距离显示</string>
-    <string name="release_4_7">- 与 Android Auto 兼容的新 \"速度计 \"小工具
-\n
-\n - 通过添加多个 \"快速操作 \"按钮配置地图屏幕
-\n
-\n - 提高图表中数据的可读性
-\n
-\n - 为轨迹添加了传感器数据过滤器
-\n
-\n - 改进轨迹分组的外观定制
-\n
-\n - 增加了对其他 GPX 标签的支持
-\n
-\n - 自定义 \"导航期间的距离显示\"：可选择精确数字或四舍五入数字
-\n
-\n - 统一的轨迹选择用户界面
-\n
-\n - OpenStreetMap登录改用OAuth 2.0
-\n
-\n</string>
+    <string name="release_4_7">- 与 Android Auto 兼容的新 \"速度计 \"小工具 \n \n - 通过添加多个 \"快速操作 \"按钮配置地图屏幕 \n \n - 提高图表中数据的可读性 \n \n - 为轨迹添加了传感器数据过滤器 \n \n - 改进轨迹分组的外观定制 \n \n - 增加了对其他 GPX 标签的支持 \n \n - 自定义 \"导航期间的距离显示\"：可选择精确数字或四舍五入数字 \n \n - 统一的轨迹选择用户界面 \n \n - OpenStreetMap登录改用OAuth 2.0</string>
     <string name="precise">精确</string>
     <string name="round_up">向上取整</string>
     <string name="download_cloud_versions">下载云端版本</string>
@@ -5940,7 +5887,7 @@
     <string name="original_color_description">每个点都会保留其颜色。</string>
     <string name="original_shape_description">每个点都会保留其形状。</string>
     <string name="apply_to_all_points">应用至所有点</string>
-    <string name="shared_string_road_exit">退出</string>
+    <string name="shared_string_road_exit">出口</string>
     <string name="ais_port_nmea_server">NMEA 数据源的 TCP 端口</string>
     <string name="ais_port_nmea_server_description">为 NMEA 数据源指定端口号</string>
     <string name="ais_object_lost_timeouts">AIS 信号接收的超时设置</string>

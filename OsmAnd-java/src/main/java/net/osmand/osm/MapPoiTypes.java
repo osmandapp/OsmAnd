@@ -14,21 +14,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 
 public class MapPoiTypes {
@@ -62,6 +49,8 @@ public class MapPoiTypes {
 
 	public Map<String, PoiType> topIndexPoiAdditional = new LinkedHashMap<String, PoiType>();
 	public static final String TOP_INDEX_ADDITIONAL_PREFIX = "top_index_";
+
+	private List<String> publicTransportTypes;
 
 	public MapPoiTypes(String fileName) {
 		this.resourceName = fileName;
@@ -1091,5 +1080,26 @@ public class MapPoiTypes {
 
 	public boolean isTypeForbidden(String typeName) {
 		return forbiddenTypes.contains(typeName);
+	}
+
+	public List<String> getPublicTransportTypes() {
+		if (publicTransportTypes == null && init) {
+			PoiCategory category = getPoiCategoryByName("transportation");
+			if (category != null) {
+				publicTransportTypes = new ArrayList<>();
+				List<PoiFilter> filters = category.getPoiFilters();
+				for (PoiFilter poiFilter : filters) {
+					if (poiFilter.getKeyName().equals("public_transport") || poiFilter.getKeyName().equals("water_transport")) {
+						for (PoiType poiType : poiFilter.getPoiTypes()) {
+							publicTransportTypes.add(poiType.getKeyName());
+							for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
+								publicTransportTypes.add(poiAdditionalType.getKeyName());
+							}
+						}
+					}
+				}
+			}
+		}
+		return publicTransportTypes;
 	}
 }

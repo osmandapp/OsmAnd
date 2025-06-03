@@ -5708,7 +5708,7 @@
     <string name="no_photo_for_location_desc">Ancora nessuna foto è stata aggiunta dagli utenti a questo luogo</string>
     <string name="no_places_available">Nessun luogo disponibile</string>
     <string name="shared_string_road_exit">Uscita</string>
-    <string name="hmd_promo_description">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s mese</string>
+    <string name="hmd_promo_description">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s mesi</string>
     <string name="hmd_promo">Promozione HMD per%1$s mesi</string>
     <string name="apply_to_all_points">Applica a tutti i punti</string>
     <string name="show_mercator_grids">Usa Mercator invece di WGS84 o UTM</string>
@@ -5772,4 +5772,9 @@
     <string name="show_symbols_debug_info">Mostra info dei simboli di debug</string>
     <string name="show_debug_tile_description">Mostra le informazioni sui simboli della mappa di ogni riquadro</string>
     <string name="show_debug_tile">Mostra informazioni riquadro</string>
+    <string name="deactivated_map">Mappa disattivata</string>
+    <string name="suggest_activate_map_msg">La mappa %1$s è disattivata,\nattivala per visualizzare quest\'area.</string>
+    <string name="unit_of_temperature_description">Scegli l\'unità di misura che verrà utilizzata per tutte le temperature nel profilo attuale.</string>
+    <string name="hmd_promo_years">HMD Promo per %1$s anni</string>
+    <string name="hmd_promo_description_years">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s anni</string>
 </resources>

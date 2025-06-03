@@ -2504,11 +2504,11 @@
     <string name="first_intermediate_dest_description">Tilføjer første stop</string>
     <string name="subsequent_dest_description">Flyt destination op og opret den</string>
     <string name="make_as_start_point">Gør til udgangspunkt</string>
-    <string name="dd_mm_ss_format">GG°MM′SS″</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">GG.GGGGGG°</string>
-    <string name="dd_ddddd_format">GG.GGGGG°</string>
+    <string name="dd_ddddd_format">DD.DDDDD°</string>
     <string name="dd_mm_mmmm_format">GG°MM.MMMM′</string>
-    <string name="dd_mm_mmm_format">GG°MM.MMM′</string>
+    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
     <string name="east_abbreviation">Ø</string>
     <string name="west_abbreviation">V</string>
     <string name="south_abbreviation">S</string>
@@ -5753,7 +5753,7 @@
     <string name="row_height">Rækkehøjde</string>
     <string name="intermediate_first">Mellemliggende først</string>
     <string name="destination_first">Destination først</string>
-    <string name="display_priority">Prioritet for visning</string>
+    <string name="display_priority">Visningsprioritet</string>
     <string name="poi_source">IP-kilde</string>
     <string name="wiki_around">Populære steder i nærheden</string>
     <string name="read_on">Læs på %1$s</string>
@@ -5787,4 +5787,6 @@
     <string name="deactivated_map">Deaktiveret kort</string>
     <string name="suggest_activate_map_msg">%1$s kort er deaktiveret,\naktiver for at se dette område.</string>
     <string name="unit_of_temperature_description">De valgte enheder vil blive anvendt på alle temperaturrelaterede data i den aktuelle profil.</string>
+    <string name="hmd_promo_years">HMD-kampagne i %1$s år</string>
+    <string name="hmd_promo_description_years">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief etc. i %1$s år</string>
 </resources>

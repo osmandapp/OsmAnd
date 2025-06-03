@@ -528,6 +528,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}, delay * 1000L);
 	}
 
+	public void resetBackToLocation() {
+		if (app.hasMessagesInUiThread(AUTO_FOLLOW_MSG_ID)) {
+			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
+			if (autoFollow > 0 && routingHelper.isFollowingMode() && !routePlanningMode) {
+				backToLocationWithDelay(autoFollow);
+			}
+		}
+	}
+
 	public boolean isMapLinkedToLocation() {
 		return isMapLinkedToLocation;
 	}

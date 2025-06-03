@@ -358,7 +358,15 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	private fun showPointInContextMenu(amenity: Amenity) {
-		app.osmandMap.mapLayers.poiMapLayer.runExclusiveAction(amenity, false)
+		mapActivity?.apply {
+			val contextMenuLayer = mapLayers.contextMenuLayer
+			val poiMapLayer = mapLayers.poiMapLayer
+			contextMenuLayer.showContextMenu(
+				amenity.location,
+				poiMapLayer.getObjectName(amenity),
+				amenity,
+				poiMapLayer)
+		}
 	}
 
 	override fun onNearbyItemClicked(amenity: Amenity) {
@@ -473,7 +481,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 	}
 
 	fun closeFragment() {
-		app.poiFilters.restoreSelectedPoiFilters()
 		mapActivity?.let { activity ->
 			val fragment = activity.fragmentsHelper.explorePlacesFragment
 			if (fragment != null) {

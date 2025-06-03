@@ -3955,7 +3955,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Linije jednakog pritiska</string>
     <string name="map_widget_trip_recording_uphill">Uzbrdo</string>
     <string name="map_widget_trip_recording_duration">Trajanje</string>
-    <string name="map_widget_distance">Rastojanje</string>
+    <string name="map_widget_distance">Udaljenost</string>
     <string name="routing_attr_hazmat_category_name">Vrsta opasnih materija</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (nema restrikcija)</string>
     <string name="coordinates_widget_secondary_desc">Oblik koordinata se može promeniti u %1$s – %2$s – %3$s.</string>
@@ -5436,7 +5436,7 @@
     <string name="map_3d_mode_action_descr">Promeni nagib karte.</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Prikaz staza terenskih motocikla</string>
     <string name="type_of_activity">Tip aktivnosti</string>
-    <string name="change_activity">Promeni aktivnost</string>
+    <string name="change_activity">Promenite aktivnost</string>
     <string name="shared_string_increase">Povećanje</string>
     <string name="shared_string_decrease">Smanjenje</string>
     <string name="open_in_browser">Otvori u internet pretraživaču</string>
@@ -5639,7 +5639,7 @@
     <string name="shared_string_avg_speed">Minimalna brzina</string>
     <string name="shared_string_default_view">Podrazumevani prikaz</string>
     <string name="map_widget_route_information">Informacije o ruti</string>
-    <string name="map_widget_route_information_desc">Prikazuje procenjeno vreme dolaska, preostalo vreme putovanja i udaljenost za trenutnu navigacionu rutu.</string>
+    <string name="map_widget_route_information_desc">Prikazuje procenjeno vreme dolaska, preostalo vreme putovanja i udaljenost za trenutnu rutu.</string>
     <string name="ais_object_lost_timeout_description">Podesi vremensko ograničenje za vidljivost AIS objekata: Nakon ovog vremena bez prijema signala, AIS objekat će biti uklonjen sa ekrana.</string>
     <string name="ais_address_settings">Podešavanja IP adrese</string>
     <string name="ais_address_settings_description">Izaberi NMEA protokol (UDP/TCP) i definiši adrese</string>
@@ -5674,7 +5674,7 @@
     <string name="no_photo_for_location_desc">Još uvek nije dodata nijedna korisnička fotografija na ovu lokaciju</string>
     <string name="no_places_available">Nema slobodnih mesta</string>
     <string name="shared_string_road_exit">Izlaz</string>
-    <string name="hmd_promo_description">Besplatan pristup funkcijama uključujući neograničeno preuzimanje mapa, 3D reljef itd. za %1$s mesec</string>
+    <string name="hmd_promo_description">Besplatan pristup funkcijama uključujući neograničeno preuzimanja mapa, 3D teren i još mnogo toga za %1$s mesečno</string>
     <string name="hmd_promo">HMD promocija za %1$s meseci</string>
     <string name="apply_to_all_points">Primeni na sve tačke</string>
     <string name="original_icon_description">Svaka bi tačka zadržala svoju ikonu.</string>
@@ -5706,7 +5706,7 @@
     <string name="add_widget">Dodajte widžet</string>
     <string name="row_height">Visina reda</string>
     <string name="intermediate_first">Prvo međuodredište</string>
-    <string name="destination_first">Prvo odredište</string>
+    <string name="destination_first">Prva destinacija</string>
     <string name="poi_source">Izvor TOI</string>
     <string name="display_priority">Prioritet prikaza</string>
     <string name="read_on">Pročitajte na %1$s</string>
@@ -5741,4 +5741,6 @@
     <string name="deactivated_map">Deaktivirana mapa</string>
     <string name="suggest_activate_map_msg">%1$s mapa je deaktivirana,\naktivirajte da biste videli ovu oblast.</string>
     <string name="unit_of_temperature_description">Izabrane jedinice će se primenjivati na sve podatke vezane za temperaturu u trenutnom profilu.</string>
+    <string name="hmd_promo_years">HMD promocija %1$s godišnje</string>
+    <string name="hmd_promo_description_years">Besplatan pristup funkcijama uključujući neograničeno preuzimanja mapa, 3D teren i još mnogo toga za %1$s godišnje</string>
 </resources>

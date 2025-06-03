@@ -4975,7 +4975,7 @@
     <string name="help_article_navigation_routing_bicycle_based_routing_name">單車導航 (登山車)</string>
     <string name="help_article_map_tracks_on_map_name">軌跡與路徑</string>
     <string name="help_article_navigation_routing_boat_navigation_name">船隻導航</string>
-    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_brouter_name">橋接路由器</string>
     <string name="help_article_navigation_routing_car_based_routing_name">汽車路線（卡車、摩托車）</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">直接到點路線規劃（船）</string>
     <string name="help_article_navigation_routing_horse_routing_name">騎馬路線</string>
@@ -5672,7 +5672,7 @@
     <string name="no_places_available">沒有位置</string>
     <string name="no_photo_for_location_desc">此位置尚未新增使用者照片</string>
     <string name="hmd_promo_description">%1$s個月免費使用功能，包括無限制地圖下載、3D 浮雕等</string>
-    <string name="shared_string_road_exit">離開</string>
+    <string name="shared_string_road_exit">出口</string>
     <string name="hmd_promo">HMD 的%1$s個月促銷</string>
     <string name="original_shape_description">每個點都會維持其形狀。</string>
     <string name="save_favorite_default_appearance">對資料夾中的現有點套用變更，或是僅對新的點套用？</string>
@@ -5738,4 +5738,5 @@
     <string name="deactivated_map">已停用的地圖</string>
     <string name="unit_of_temperature_description">選定的單位將會套用至目前設定檔中所有的溫度相關資料。</string>
     <string name="suggest_activate_map_msg">%1$s 地圖已停用，\n啟用以檢視此區域。</string>
+    <string name="read_on">在 %1$s 閱讀</string>
 </resources>

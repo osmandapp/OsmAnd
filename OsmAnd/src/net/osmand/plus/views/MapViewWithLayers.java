@@ -83,9 +83,9 @@ public class MapViewWithLayers extends FrameLayout {
 			setupAtlasMapRendererView();
 			mapLayersView.setMapView(mapView);
 			app.getMapViewTrackingUtilities().setMapView(mapView);
-			mapView.setMapRenderer(atlasMapRendererView);
+			mapView.setMapRenderer(atlasMapRendererView, false);
 		} else if (!useAndroidAuto) {
-			mapView.setMapRenderer(null);
+			mapView.setMapRenderer(null, false);
 			resetMapRendererView();
 		}
 		AndroidUiHelper.updateVisibility(surfaceView, !useAndroidAuto && !useOpenglRender);
@@ -108,7 +108,7 @@ public class MapViewWithLayers extends FrameLayout {
 			if (atlasMapRendererView != null && mapRendererContext.getMapRendererView() == atlasMapRendererView)
 				return;
 			if (mapView.getMapRenderer() != null)
-				mapView.setMapRenderer(null);
+				mapView.setMapRenderer(null, true);
 			if (mapRendererContext.getMapRendererView() != null) {
 				mapRendererView = mapRendererContext.getMapRendererView();
 				mapRendererContext.setMapRendererView(null);
@@ -162,10 +162,10 @@ public class MapViewWithLayers extends FrameLayout {
 		if (atlasMapRendererView != null) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
-				mapView.setMapRenderer(null);
+				mapView.setMapRenderer(null, true);
 				resetMapRendererView();
+				atlasMapRendererView.handleOnDestroy();
 			}
-			atlasMapRendererView.handleOnDestroy();
 		}
 		mapView.clearTouchDetectors();
 		app.getOsmandMap().removeRenderingViewSetupListener(getRenderingViewSetupListener());
