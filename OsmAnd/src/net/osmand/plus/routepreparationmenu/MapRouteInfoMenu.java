@@ -2243,7 +2243,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				cancelButtonsAnimations();
 				mapActivity.getMapPositionManager().setMapPositionShiftedX(false);
 				mapActivity.refreshMap();
-				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), true);
+				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), !isSelectFromMap());
 				if (switched) {
 					mapActivity.getMapActions().switchToRouteFollowingLayout();
 				}

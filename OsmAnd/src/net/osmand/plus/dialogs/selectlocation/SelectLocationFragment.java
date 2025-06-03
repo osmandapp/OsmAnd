@@ -127,12 +127,22 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	public void onResume() {
 		super.onResume();
 		controller.onResume();
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getWidgetsVisibilityHelper().hideWidgets();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		controller.onPause();
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getWidgetsVisibilityHelper().showWidgets();
+		}
 	}
 
 	@Override
