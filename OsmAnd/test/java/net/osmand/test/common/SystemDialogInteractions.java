@@ -56,6 +56,18 @@ public class SystemDialogInteractions {
 		);
 	}
 
+	public static ViewAction longClickInView(final float x, final float y) {
+		return new GeneralClickAction(
+				Tap.LONG,
+				view -> {
+					final int[] location = new int[2];
+					view.getLocationOnScreen(location);
+					return new float[] {location[0] + x, location[1] + y};
+				},
+				Press.FINGER
+		);
+	}
+
 
 	//finds n-th child of given type at one hierarchy level
 	public static <T extends View> T findDescendantOfType(View parent, Class<T> targetClass, int targetIndex) {
