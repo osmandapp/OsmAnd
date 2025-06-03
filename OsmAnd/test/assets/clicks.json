@@ -1,0 +1,19 @@
+{
+  "clicks": [
+    { "latitude": 50.43399, "longitude": 30.491957, "zoom": 14 },
+    { "latitude": 50.451134, "longitude": 30.50051, "zoom": 14 },
+    { "latitude": 50.440838, "longitude": 30.490225, "zoom": 14 },
+    { "latitude": 50.43229, "longitude": 30.47054, "zoom": 14 },
+    { "latitude": 50.459213, "longitude": 30.494196, "zoom": 14 },
+    { "latitude": 50.462906, "longitude": 30.485138, "zoom": 14 },
+    { "latitude": 50.447132, "longitude": 30.493187, "zoom": 14 },
+    { "latitude": 50.448353, "longitude": 30.478153, "zoom": 14 },
+    { "latitude": 50.439957, "longitude": 30.500834, "zoom": 14 },
+    { "latitude": 50.4506, "longitude": 30.4928, "zoom": 14 },
+    { "latitude": 50.46084, "longitude": 30.490677, "zoom": 14 },
+    { "latitude": 50.439857, "longitude": 30.488655, "zoom": 14 },
+    { "latitude": 50.463165, "longitude": 30.4785, "zoom": 14 },
+    { "latitude": 50.430557, "longitude": 30.471666, "zoom": 14 },
+    { "latitude": 50.446793, "longitude": 30.493048, "zoom": 14 }
+  ]
+}
