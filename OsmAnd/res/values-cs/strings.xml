@@ -5761,4 +5761,6 @@
     <string name="unit_of_temperature_description">Zvolené jednotky budou použity na všechna data týkající se teploty v aktuálním profilu.</string>
     <string name="hmd_promo_years">Propagační akce HMD na %1$s roky</string>
     <string name="hmd_promo_description_years">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu a dalších na %1$s roky</string>
+    <string name="shared_string_flat">Rovina</string>
+    <string name="uphill_downhill_split">Do kopce / z kopce</string>
 </resources>
