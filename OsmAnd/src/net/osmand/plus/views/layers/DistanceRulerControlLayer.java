@@ -123,11 +123,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
-				view.getMapRenderer().setSymbolsUpdateInterval(1);
-				view.getMapRenderer().resumeSymbolsUpdate();
 				view.refreshMap();
-				view.getMapRenderer().resumeSymbolsUpdate();
-				view.getMapRenderer().setSymbolsUpdateInterval(1);
 			}
 		};
 		addTextSizeListener();
