@@ -5739,4 +5739,7 @@
     <string name="unit_of_temperature_description">選定的單位將會套用至目前設定檔中所有的溫度相關資料。</string>
     <string name="suggest_activate_map_msg">%1$s 地圖已停用，\n啟用以檢視此區域。</string>
     <string name="read_on">在 %1$s 閱讀</string>
+    <string name="uphill_downhill_split">上坡 / 下坡</string>
+    <string name="hmd_promo_years">HMD 的%1$s年促銷</string>
+    <string name="shared_string_flat">平坦</string>
 </resources>
