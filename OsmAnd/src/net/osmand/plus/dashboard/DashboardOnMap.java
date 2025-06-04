@@ -942,7 +942,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void hide(boolean animation) {
 		if (compassButton != null) {
-			mapActivity.getMapLayers().getMapControlsLayer().clearCustomMapButtons();
+			mapActivity.getMapLayers().getMapControlsLayer().removeCustomMapButtons(compassButton);
 			compassButton = null;
 		}
 		if (!animation) {

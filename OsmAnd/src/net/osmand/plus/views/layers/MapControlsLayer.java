@@ -32,6 +32,7 @@ import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -191,8 +192,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return buttons;
 	}
 
-	public void clearCustomMapButtons() {
-		customMapButtons = new ArrayList<>();
+	public void removeCustomMapButtons(@NonNull MapButton ... mapButtons) {
+		customMapButtons = CollectionUtils.removeAllFromList(customMapButtons, List.of(mapButtons));
 	}
 
 	public void showMapControlsIfHidden() {

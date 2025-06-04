@@ -72,6 +72,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -111,6 +112,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private View solidToolbarView;
 	@Nullable
 	private View zoomButtonsView;
+	private MapButton zoomInButton;
+	private MapButton zoomOutButton;
+	private MapButton myLocationButton;
 	@Nullable
 	private ViewGroup pagesView;
 
@@ -281,7 +285,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-			mapControlsLayer.clearCustomMapButtons();
+			mapControlsLayer.removeCustomMapButtons(zoomInButton, zoomOutButton, myLocationButton);
 		}
 	}
 
@@ -393,10 +397,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		View zoomButtonsView = view.findViewById(R.id.map_hud_controls);
 		this.zoomButtonsView = zoomButtonsView;
 
+		zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+		zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+		myLocationButton = view.findViewById(R.id.map_my_location_button);
+
 		MapControlsLayer controlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_in_button));
-		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_out_button));
-		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_my_location_button));
+		controlsLayer.addCustomizedDefaultMapButton(zoomInButton);
+		controlsLayer.addCustomizedDefaultMapButton(zoomOutButton);
+		controlsLayer.addCustomizedDefaultMapButton(myLocationButton);
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 	}
