@@ -193,7 +193,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void removeCustomMapButtons(@NonNull MapButton ... mapButtons) {
-		customMapButtons = CollectionUtils.removeAllFromList(customMapButtons, List.of(mapButtons));
+		List<MapButton> list = new ArrayList<>();
+		for (MapButton mapButton : mapButtons) {
+			if (mapButton != null) {
+				list.add(mapButton);
+			}
+		}
+		customMapButtons = CollectionUtils.removeAllFromList(customMapButtons, list);
 	}
 
 	public void showMapControlsIfHidden() {
