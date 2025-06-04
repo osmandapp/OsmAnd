@@ -5742,4 +5742,5 @@
     <string name="uphill_downhill_split">上坡 / 下坡</string>
     <string name="hmd_promo_years">HMD 的%1$s年促銷</string>
     <string name="shared_string_flat">平坦</string>
+    <string name="hmd_promo_description_years">%1$s年免費使用功能，包括無限制地圖下載、3D 浮雕等</string>
 </resources>
