@@ -224,7 +224,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (descriptionCollapsed) {
 			text = description.substring(0, Math.min(description.length(), 200));
 			if (description.length() > text.length()) {
-				text += app.getString(R.string.shared_string_ellipsis);
+				int color = ColorUtilities.getActiveColor(app, !isLightContent());
+				String ellipsis = app.getString(R.string.shared_string_ellipsis);
+				text += ellipsis;
+				textView.setText(UiUtilities.createColorSpannable(text, color, ellipsis));
+				return;
 			}
 		}
 		textView.setText(text);
