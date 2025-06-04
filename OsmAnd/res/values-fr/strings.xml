@@ -5650,8 +5650,8 @@
     <string name="shared_string_avg_speed">Vitesse mini</string>
     <string name="shared_string_length">Longueur</string>
     <string name="map_widget_route_information">Informations sur l\'itinéraire</string>
-    <string name="map_widget_route_information_desc">Affiche l\'heure estimée d\'arrivée, la durée et la distance restantes sur l\'itinéraire actuel.</string>
-    <string name="shared_string_default_view">Affichage par défaut</string>
+    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps de trajet restant et la distance pour l\'itinéraire de navigation actuel.</string>
+    <string name="shared_string_default_view">Vue par défaut</string>
     <string name="ais_address_settings">Paramètres de l\'adresse IP</string>
     <string name="ais_address_settings_description">Choisir un protocole NMEA (UDP/TCP) et définir les adresses</string>
     <string name="ais_nmea_protocol">Protocole pour la réception de données NMEA</string>
@@ -5717,8 +5717,8 @@
     <string name="row_height">Hauteur de la ligne</string>
     <string name="shared_string_offline_only">Uniquement hors ligne</string>
     <string name="add_widget">Ajouter un gadget</string>
-    <string name="intermediate_first">Étape en premier</string>
-    <string name="destination_first">Destination en premier</string>
+    <string name="intermediate_first">Intermédiaire d\'abord</string>
+    <string name="destination_first">Destination d\'abord</string>
     <string name="display_priority">Priorité d\'affichage</string>
     <string name="poi_source">Source des PI</string>
     <string name="wikidata">Wikidata</string>
@@ -5756,4 +5756,6 @@
     <string name="read_on">Lire la suite sur %1$s</string>
     <string name="hmd_promo_years">Promo HMD pour %1$s ans</string>
     <string name="hmd_promo_description_years">Accès gratuit aux fonctionnalités comme le téléchargement illimité de cartes, le relief 3D, etc. pour %1$s ans</string>
+    <string name="uphill_downhill_split">Montée / Descente</string>
+    <string name="shared_string_flat">README : - La meilleure façon d\'aider à la traduction est via https://hosted.weblate.org/engage/osmand/ - Si vous modifiez directement un fichier strings.xml, veuillez vous assurer : 1. De ne pas produire de chaînes en double (vérifiez par nom si une chaîne existe déjà) 2. Chaque apostrophe (guillemet) est précédée d\'une barre oblique inverse. 3. Si vous modifiez le fichier de chaînes en anglais, veuillez ajouter de nouvelles chaînes en haut du fichier, cela facilite les révisions périodiques avant les publications. - Pour la formulation et la cohérence, veuillez noter https://docs.osmand.net/docs/technical/contributions/translating-osmand Merci - Hardy</string>
 </resources>
