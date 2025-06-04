@@ -123,7 +123,11 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
+				view.getMapRenderer().setSymbolsUpdateInterval(1);
+				view.getMapRenderer().resumeSymbolsUpdate();
 				view.refreshMap();
+				view.getMapRenderer().resumeSymbolsUpdate();
+				view.getMapRenderer().setSymbolsUpdateInterval(1);
 			}
 		};
 		addTextSizeListener();
@@ -151,7 +155,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
-		if (rulerModeOn() && !showTwoFingersDistance) {
+		if (rulerModeOn() && !showTwoFingersDistance && !showDistBetweenFingerAndLocation) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				touched = true;
 				touchOutside = false;
