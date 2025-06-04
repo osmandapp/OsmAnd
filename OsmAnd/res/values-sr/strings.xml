@@ -5748,4 +5748,6 @@
     <string name="read_on">Читајте на %1$s</string>
     <string name="hmd_promo_years">HMD промоција за %1$s година</string>
     <string name="hmd_promo_description_years">Бесплатан приступ могућностима укључујући неограничено преузимање карата, просторног приказа итд. за %1$s година</string>
+    <string name="uphill_downhill_split">Узбрдо / Низбрдо</string>
+    <string name="shared_string_flat">Равно</string>
 </resources>
