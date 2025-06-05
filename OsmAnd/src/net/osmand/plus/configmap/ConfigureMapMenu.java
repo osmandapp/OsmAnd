@@ -137,7 +137,7 @@ public class ConfigureMapMenu {
 
 		ResourceManager resourceManager = app.getResourceManager();
 		boolean hasPoiData = !Algorithms.isEmpty(resourceManager.getAmenityRepositories())
-				|| !resourceManager.isWikivoyageRepositoryEmpty();
+				|| resourceManager.hasTravelRepositories();
 		if (hasPoiData) {
 			PoiFiltersHelper poiFilters = app.getPoiFilters();
 			selected = poiFilters.isShowingAnyGeneralPoi();
