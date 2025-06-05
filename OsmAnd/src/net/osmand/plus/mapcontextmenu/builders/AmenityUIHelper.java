@@ -95,17 +95,17 @@ public class AmenityUIHelper extends MenuBuilder {
 	private PoiCategory poiCategory;
 	private PoiType poiType;
 	private String subtype;
-	private boolean hasWiki = false;
 	private AmenityInfoRow cuisineRow = null;
 	private Map<String, List<PoiType>> poiAdditionalCategories = new HashMap<>();
 	private Map<String, List<PoiType>> collectedPoiTypes = new HashMap<>();
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 	private boolean lastBuiltRowIsDescription = false;
 
-	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang, Map<String, String> additionalInfoMap) {
+	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang,
+			@NonNull AdditionalInfoBundle infoBundle) {
 		super(mapActivity);
 		this.preferredLang = preferredLang;
-		this.additionalInfo = new AdditionalInfoBundle(app, additionalInfoMap);
+		this.additionalInfo = infoBundle;
 		this.metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
 	}
 
@@ -264,7 +264,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			poiCategory = MapPoiTypes.getDefault().getOtherPoiCategory();
 		}
 		subtype = additionalInfo.get(SUBTYPE);
-		hasWiki = false;
 		poiTypes = app.getPoiTypes();
 		cuisineRow = null;
 		poiAdditionalCategories = new HashMap<>();

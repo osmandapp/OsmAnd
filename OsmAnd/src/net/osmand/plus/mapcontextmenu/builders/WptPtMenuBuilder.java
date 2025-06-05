@@ -122,7 +122,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
 			boolean light = isLightContent();
-			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), amenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, amenityExtensions);
+			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
 			helper.setLight(light);
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());
