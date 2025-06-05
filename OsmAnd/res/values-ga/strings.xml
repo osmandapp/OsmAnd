@@ -1114,7 +1114,7 @@
     <string name="rendering_value_sector4_name">Ceantar 4</string>
     <string name="backup_welcome_back">Fáilte ar ais!</string>
     <string name="logcat_buffer_descr">Seiceáil agus roinn mionlogaí an aip</string>
-    <string name="routing_attr_driving_style_balance_name">Cothrom</string>
+    <string name="routing_attr_driving_style_balance_name">Cothromaithe</string>
     <string name="nautical_depth">Doimhneacht fharraige</string>
     <string name="base_profile_descr_ski">Sciáil</string>
     <string name="shared_string_night_map">Léarscáil oíche</string>
@@ -5575,4 +5575,6 @@
     <string name="suggest_activate_map_msg">Tá léarscáil %1$s díghníomhachtaithe,\ngníomhachtaigh chun an ceantar seo a fheiceáil.</string>
     <string name="hmd_promo_years">Promóisean HMD ar feadh %1$s bliana</string>
     <string name="hmd_promo_description_years">Rochtain saor in aisce ar ghnéithe lena n-áirítear íoslódálacha léarscáileanna gan teorainn, faoiseamh 3D srl. ar feadh %1$s bliana</string>
+    <string name="uphill_downhill_split">Suas an Cnoc / Síos an Cnoc</string>
+    <string name="shared_string_flat">Maol</string>
 </resources>

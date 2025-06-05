@@ -5743,4 +5743,6 @@
     <string name="unit_of_temperature_description">Izabrane jedinice će se primenjivati na sve podatke vezane za temperaturu u trenutnom profilu.</string>
     <string name="hmd_promo_years">HMD promocija %1$s godišnje</string>
     <string name="hmd_promo_description_years">Besplatan pristup funkcijama uključujući neograničeno preuzimanja mapa, 3D teren i još mnogo toga za %1$s godišnje</string>
+    <string name="uphill_downhill_split">Uzbrdo/nizbrdo</string>
+    <string name="shared_string_flat">Ravno</string>
 </resources>

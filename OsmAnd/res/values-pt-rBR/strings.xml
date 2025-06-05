@@ -5664,7 +5664,7 @@
     <string name="fix_north_up">Ativar o norte fixo para cima</string>
     <string name="shared_string_unchanged">Inalterada</string>
     <string name="use_3d_track_visualization">Visualização 3D</string>
-    <string name="unchanged_parameter_summary">Cada trilha manterá seus próprios parâmetros.</string>
+    <string name="unchanged_parameter_summary"></string>
     <string name="gpx_approximation_cpp">Baseado em roteamento (C++)</string>
     <string name="gpx_approximation_java">Baseado em roteamento (Java)</string>
     <string name="missing_maps_ignore">Usar mapas baixados</string>
@@ -6108,4 +6108,14 @@
     <string name="save_to_device_error">Erro ao salvar no dispositivo</string>
     <string name="travel_guides">Guias</string>
     <string name="save_to_device">Salvar no dispositivo</string>
+    <string name="hmd_promo_years">Promoção HMD por %1$s anos</string>
+    <string name="show_debug_tile">Mostrar informações do mosaico</string>
+    <string name="show_symbols_debug_info">Mostrar informações de depuração de símbolos</string>
+    <string name="read_on">Ler no %1$s</string>
+    <string name="uphill_downhill_split">Subida / Descida</string>
+    <string name="hmd_promo_description_years">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s anos</string>
+    <string name="show_debug_tile_description">Exibir informações sobre os símbolos do mapa de cada mosaico</string>
+    <string name="unit_of_temperature_description">As unidades selecionadas serão aplicadas a todos os dados relacionados à temperatura no perfil atual.</string>
+    <string name="deactivated_map">Mapa desativado</string>
+    <string name="suggest_activate_map_msg">O mapa %1$s está desativado,\native para visualizar essa área.</string>
 </resources>
