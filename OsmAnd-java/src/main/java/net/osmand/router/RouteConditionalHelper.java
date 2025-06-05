@@ -80,20 +80,21 @@ public class RouteConditionalHelper {
 								if (vl != 0) {
 									BinaryMapRouteReaderAdapter.RouteTypeRule rtr = rdo.region.quickGetEncodingRule(vl);
 									String nonCondTag = rtr.getTag();
-									int ks;
-									for (ks = 0; ks < rdo.pointTypes[i].length; ks++) {
-										BinaryMapRouteReaderAdapter.RouteTypeRule toReplace = rdo.region.quickGetEncodingRule(rdo.pointTypes[i][ks]);
+									boolean appendAsNewType = true;
+									for (int ks = 0; ks < rdo.pointTypes[i].length; ks++) {
+										BinaryMapRouteReaderAdapter.RouteTypeRule toReplace =
+												rdo.region.quickGetEncodingRule(rdo.pointTypes[i][ks]);
 										if (toReplace != null && toReplace.getTag().contentEquals(nonCondTag)) {
-											break;
+											appendAsNewType = false;
+											pTypes[ks] = vl;
 										}
 									}
-									if (ks == pTypes.length) {
-										int[] ntypes = new int[pTypes.length + 1];
-										System.arraycopy(pTypes, 0, ntypes, 0, pTypes.length);
-										pTypes = ntypes;
+									if (appendAsNewType) {
+										int[] nTypes = new int[pTypes.length + 1];
+										System.arraycopy(pTypes, 0, nTypes, 0, pTypes.length);
+										nTypes[nTypes.length - 1] = vl;
+										pTypes = nTypes;
 									}
-									pTypes[ks] = vl;
-
 								}
 							}
 						}
@@ -115,19 +116,20 @@ public class RouteConditionalHelper {
 
 	public void updateTypesByTagRuleId(RouteDataObject rdo, String tag, int ruleId) {
 		if (ruleId > 0) {
-			int ks;
-			for (ks = 0; ks < rdo.types.length; ks++) {
+			boolean appendAsNewType = true;
+			for (int ks = 0; ks < rdo.types.length; ks++) {
 				BinaryMapRouteReaderAdapter.RouteTypeRule toReplace = rdo.region.quickGetEncodingRule(rdo.types[ks]);
 				if (toReplace != null && toReplace.getTag().equals(tag)) {
-					break;
+					appendAsNewType = false;
+					rdo.types[ks] = ruleId;
 				}
 			}
-			if (ks == rdo.types.length) {
-				int[] ntypes = new int[rdo.types.length + 1];
-				System.arraycopy(rdo.types, 0, ntypes, 0, rdo.types.length);
-				rdo.types = ntypes;
+			if (appendAsNewType) {
+				int[] nTypes = new int[rdo.types.length + 1];
+				System.arraycopy(rdo.types, 0, nTypes, 0, rdo.types.length);
+				nTypes[nTypes.length - 1] = ruleId;
+				rdo.types = nTypes;
 			}
-			rdo.types[ks] = ruleId;
 		}
 	}
 }
