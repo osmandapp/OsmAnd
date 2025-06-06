@@ -19,7 +19,6 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableP
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntAbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntBikeDistanceSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntBikeSpeedSensor;
-import net.osmand.util.Algorithms;
 
 import java.util.Collections;
 import java.util.List;
