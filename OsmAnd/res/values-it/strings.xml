@@ -5777,4 +5777,6 @@
     <string name="unit_of_temperature_description">Scegli l\'unità di misura che verrà utilizzata per tutte le temperature nel profilo attuale.</string>
     <string name="hmd_promo_years">HMD Promo per %1$s anni</string>
     <string name="hmd_promo_description_years">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s anni</string>
+    <string name="shared_string_flat">Pianeggiante</string>
+    <string name="uphill_downhill_split">Salita/Discesa</string>
 </resources>
