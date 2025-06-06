@@ -15,13 +15,10 @@ public class AppSettings {
 
 	public static void showWikiOnMap(@NonNull OsmandApplication app) {
 		PoiFiltersHelper helper = app.getPoiFilters();
-		WikipediaPlugin plugin = PluginsHelper.getActivePlugin(WikipediaPlugin.class);
-		if (plugin != null) {
-			PoiUIFilter filter = plugin.getTopWikiPoiFilter();
-			if (filter != null) {
-				helper.loadSelectedPoiFilters();
-				helper.addSelectedPoiFilter(filter);
-			}
+		PoiUIFilter filter = helper.getFilterById("std_osmwiki");
+		if (filter != null) {
+			helper.loadSelectedPoiFilters();
+			helper.addSelectedPoiFilter(filter);
 		}
 	}
 }

@@ -126,7 +126,6 @@ public class OsmAndDialogInteractions {
 
 	public static void moveAndZoomMap(@NonNull OsmandApplication app, double latitude, double longitude, int zoom) {
 		app.getOsmandMap().getMapView().setLatLon(latitude, longitude);
-		refreshMap(app);
 		app.getOsmandMap().getMapView().setIntZoom(zoom);
 	}
 }
