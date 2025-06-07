@@ -2606,7 +2606,7 @@
     <string name="poi_vending_bread">Хліб</string>
     <string name="poi_bridge_movable_swing">Вид розвідного моста: поворотний</string>
     <string name="poi_historic_aircraft">Історичний літак</string>
-    <string name="poi_protected_area">Природоохоронна природна/історична територія</string>
+    <string name="poi_protected_area">Природна/історична територія, що охороняється</string>
     <string name="poi_clothes_sports">Спортивна</string>
     <string name="poi_counselling_type_nutrition_nfire_hydo">Консультація з питань харчування: немає</string>
     <string name="poi_payment_troika_no">Картки Трійка не приймаються</string>
