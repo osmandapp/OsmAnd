@@ -110,7 +110,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	protected void setupPreferences() {
 		setupDisableBatteryOptimizationPref();
 		setupShowStartDialog();
-
+		setupSaveTrackUnfiltered();
 		setupSaveTrackToGpxPref();
 		setupSaveTrackIntervalPref();
 
@@ -145,6 +145,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		SwitchPreferenceEx showStartDialog = findPreference(settings.SHOW_TRIP_REC_START_DIALOG.getId());
 		showStartDialog.setDescription(getString(R.string.trip_recording_show_start_dialog_setting));
 		showStartDialog.setIcon(getPersistentPrefIcon(R.drawable.ic_action_dialog));
+	}
+
+	private void setupSaveTrackUnfiltered() {
+		SwitchPreferenceEx showStartDialog = findPreference(settings.SAVE_TRACK_UNFILTERED.getId());
+		showStartDialog.setDescription(getString(R.string.save_track_unfiltered_descr));
 	}
 
 	private void setupSaveTrackToGpxPref() {

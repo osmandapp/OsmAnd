@@ -1585,6 +1585,8 @@ public class OsmandSettings {
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
+	public final CommonPreference<Boolean> SAVE_TRACK_UNFILTERED = new BooleanPreference(this, "save_track_unfiltered", false).makeProfile().cache();
+
 	public static final Integer REC_DIRECTORY = 0;
 	public static final Integer MONTHLY_DIRECTORY = 1;
 //	public static final Integer DAILY_DIRECTORY = 2;

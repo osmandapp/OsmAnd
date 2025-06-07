@@ -90,6 +90,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.SAVE_TRACK_INTERVAL);
 		pluginPreferences.add(settings.SAVE_TRACK_MIN_DISTANCE);
 		pluginPreferences.add(settings.SAVE_TRACK_PRECISION);
+		pluginPreferences.add(settings.SAVE_TRACK_UNFILTERED);
 		pluginPreferences.add(settings.AUTO_SPLIT_RECORDING);
 		pluginPreferences.add(settings.DISABLE_RECORDING_ONCE_APP_KILLED);
 		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
