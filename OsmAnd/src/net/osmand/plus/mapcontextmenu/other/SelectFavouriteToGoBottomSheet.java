@@ -16,7 +16,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
+import net.osmand.plus.routepreparationmenu.data.PointType;
 
 import static net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog.ADD_FAVORITE_TO_ROUTE_REQUEST_CODE;
 

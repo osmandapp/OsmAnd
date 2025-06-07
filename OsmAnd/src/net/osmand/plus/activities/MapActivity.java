@@ -1532,7 +1532,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		if (mapRouteInfoMenu.isSelectFromMapTouch()) {
+		if (mapRouteInfoMenu.isSelectFromMap()) {
 			return;
 		}
 		refreshMap();

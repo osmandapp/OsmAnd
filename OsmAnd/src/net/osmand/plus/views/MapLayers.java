@@ -169,9 +169,6 @@ public class MapLayers {
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(app);
 		mapView.addLayer(navigationLayer, 7);
-		// 7.2 select location layer
-		selectLocationLayer = new SelectLocationLayer(app);
-		mapView.addLayer(selectLocationLayer, 7.2f);
 		// 7.3 map markers layer
 		mapMarkersLayer = new MapMarkersLayer(app);
 		mapView.addLayer(mapMarkersLayer, 7.3f);
@@ -192,6 +189,9 @@ public class MapLayers {
 		mapInfoLayer = new MapInfoLayer(app, routeLayer);
 		mapView.addLayer(mapInfoLayer, 9);
 
+		// 10. select location layer
+		selectLocationLayer = new SelectLocationLayer(app);
+		mapView.addLayer(selectLocationLayer, 10f);
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(app);
 		mapView.addLayer(mapControlsLayer, 11);

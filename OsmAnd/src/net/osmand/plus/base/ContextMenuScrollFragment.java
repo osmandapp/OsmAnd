@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
@@ -37,6 +38,9 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 
 	@Nullable
 	private RulerWidget rulerWidget;
+	private MapButton zoomInButton;
+	private MapButton zoomOutButton;
+	private MapButton myLocationButton;
 
 	public float getMiddleStateKoef() {
 		return 0.5f;
@@ -98,7 +102,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 			MapLayers mapLayers = mapActivity.getMapLayers();
 
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-			mapControlsLayer.clearCustomMapButtons();
+			mapControlsLayer.removeCustomMapButtons(zoomInButton, zoomOutButton, myLocationButton);
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
@@ -117,9 +121,13 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-		layer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_in_button));
-		layer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_out_button));
-		layer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_my_location_button));
+		zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+		zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+		myLocationButton = view.findViewById(R.id.map_my_location_button);
+
+		layer.addCustomizedDefaultMapButton(zoomInButton);
+		layer.addCustomizedDefaultMapButton(zoomOutButton);
+		layer.addCustomizedDefaultMapButton(myLocationButton);
 
 		setupMapRulerWidget(view, mapLayers);
 	}

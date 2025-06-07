@@ -85,7 +85,6 @@ public class MapHudLayout extends FrameLayout {
 
 		addPosition(findViewById(R.id.measurement_buttons));
 		addPosition(findViewById(R.id.recording_note_layout));
-		addPosition(findViewById(R.id.move_marker_bottom_sheet));
 		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
 	}
 
@@ -235,7 +234,7 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveDescendantsHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
-		} else if (id == R.id.add_gpx_point_bottom_sheet || id == R.id.move_marker_bottom_sheet || id == R.id.recording_note_layout) {
+		} else if (id == R.id.add_gpx_point_bottom_sheet || id == R.id.recording_note_layout) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_FULL_WIDTH);

@@ -39,6 +39,12 @@ public class NavAddFirstIntermediateAction extends SelectMapLocationAction {
 		return mapActivity.getMapLayers().getNavigationLayer().getIntermediatePointIcon();
 	}
 
+	@Nullable
+	@Override
+	protected String getLocationLabel(@NonNull MapActivity mapActivity) {
+		return String.valueOf(1);
+	}
+
 	@NonNull
 	@Override
 	protected String getDialogTitle(@NonNull Context context) {

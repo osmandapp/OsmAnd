@@ -108,8 +108,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer != null) {
 			if (contextMenuLayer.getMoveableObject() instanceof OsmPoint point) {
-				PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-				drawPoint(canvas, point, pf.x, pf.y);
 				setMovableObject(point.getLatitude(), point.getLongitude());
 			}
 			if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
@@ -362,6 +360,14 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	@Override
 	public boolean isObjectMovable(Object o) {
 		return o instanceof OsmPoint;
+	}
+
+	@Override
+	public Object getMoveableObjectIcon(@NonNull Object o) {
+		if (o instanceof OsmPoint osmPoint) {
+			return createOsmPointIcon(osmPoint);
+		}
+		return null;
 	}
 
 	@Override

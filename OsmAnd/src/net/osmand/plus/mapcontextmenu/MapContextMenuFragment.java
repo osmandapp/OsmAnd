@@ -116,6 +116,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private TextView localRoutesMoreTv;
 
 	private View zoomButtonsView;
+	private MapButton zoomInButton;
+	private MapButton zoomOutButton;
 
 	private MapContextMenu menu;
 	private OnLayoutChangeListener containerLayoutListener;
@@ -506,8 +508,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			MapLayers mapLayers = mapActivity.getMapLayers();
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-			MapButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
-			MapButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+			zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+			zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
 			layer.addCustomizedDefaultMapButton(zoomInButton);
 			layer.addCustomizedDefaultMapButton(zoomOutButton);
 			zoomInButton.setUseDefaultAppearance(false);
@@ -1356,7 +1358,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			MapLayers mapLayers = activity.getMapLayers();
-			mapLayers.getMapControlsLayer().clearCustomMapButtons();
+			mapLayers.getMapControlsLayer().removeCustomMapButtons(zoomInButton, zoomOutButton);
 		}
 	}
 

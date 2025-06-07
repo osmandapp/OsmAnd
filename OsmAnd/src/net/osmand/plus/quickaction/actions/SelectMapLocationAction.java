@@ -9,14 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.OnResultCallback;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
-import net.osmand.plus.dialogs.ILocationSelectionHandler;
-import net.osmand.plus.dialogs.SelectLocationController;
+import net.osmand.plus.dialogs.selectlocation.ILocationSelectionHandler;
+import net.osmand.plus.dialogs.selectlocation.SelectLocationController;
+import net.osmand.plus.dialogs.selectlocation.extractor.CenterMapLatLonExtractor;
 import net.osmand.plus.quickaction.PointLocationCardController;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -37,31 +37,41 @@ public abstract class SelectMapLocationAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		requestLocation(mapActivity, latLon -> onLocationSelected(mapActivity, latLon));
+		requestLocation(mapActivity);
 	}
 
-	private void requestLocation(@NonNull MapActivity mapActivity,
-	                             @NonNull OnResultCallback<LatLon> callback) {
+	private void requestLocation(@NonNull MapActivity mapActivity) {
+		CenterMapLatLonExtractor extractor = new CenterMapLatLonExtractor();
 		if (isManualLocationSelection()) {
-			SelectLocationController.showDialog(mapActivity, createHandler());
+			SelectLocationController.showDialog(mapActivity, extractor, createHandler());
 		} else {
 			OsmandApplication app = mapActivity.getMyApplication();
-			callback.onResult(SelectLocationController.getMapTargetCoordinates(app));
+			onLocationSelected(mapActivity, extractor.extractLocation(app));
 		}
 	}
 
 	@NonNull
-	private ILocationSelectionHandler createHandler() {
-		return new ILocationSelectionHandler() {
+	private ILocationSelectionHandler<LatLon> createHandler() {
+		return new ILocationSelectionHandler<>() {
 			@Nullable
 			@Override
 			public Object getCenterPointIcon(@NonNull MapActivity mapActivity) {
 				return getLocationIcon(mapActivity);
 			}
 
+			@Nullable
 			@Override
-			public void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
-				SelectMapLocationAction.this.onLocationSelected(mapActivity, latLon);
+			public String getCenterPointLabel(@NonNull MapActivity mapActivity) {
+				return getLocationLabel(mapActivity);
+			}
+
+			@Override
+			public void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon location) {
+				SelectMapLocationAction.this.onLocationSelected(mapActivity, location);
+			}
+
+			@Override
+			public void onScreenClosed(@NonNull MapActivity mapActivity, boolean selected) {
 			}
 
 			@NonNull
@@ -76,6 +86,11 @@ public abstract class SelectMapLocationAction extends QuickAction {
 
 	@Nullable
 	protected abstract Object getLocationIcon(@NonNull MapActivity mapActivity);
+
+	@Nullable
+	protected String getLocationLabel(@NonNull MapActivity mapActivity) {
+		return null;
+	}
 
 	@NonNull
 	protected String getDialogTitle(@NonNull Context context) {

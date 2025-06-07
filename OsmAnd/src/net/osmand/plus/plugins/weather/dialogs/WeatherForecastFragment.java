@@ -44,9 +44,7 @@ import net.osmand.plus.utils.TimeFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
@@ -94,6 +92,11 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private int animationStartStep;
 	private int animateStepCount;
 	private int animationStartStepCount;
+
+	private MapButton zoomInButton;
+	private MapButton zoomOutButton;
+	private MapButton myLocationButton;
+	private MapButton compassButton;
 
 	private enum AnimationState {
 		IDLE,
@@ -343,23 +346,27 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-		ZoomInButton zoomInBtn = view.findViewById(R.id.map_zoom_in_button);
-		if (zoomInBtn != null) {
-			layer.addCustomizedDefaultMapButton(zoomInBtn);
+		zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+		if (zoomInButton != null) {
+			layer.addCustomizedDefaultMapButton(zoomInButton);
 		}
-		ZoomOutButton zoomOutBtn = view.findViewById(R.id.map_zoom_out_button);
-		if (zoomOutBtn != null) {
-			layer.addCustomizedDefaultMapButton(zoomOutBtn);
+		zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+		if (zoomOutButton != null) {
+			layer.addCustomizedDefaultMapButton(zoomOutButton);
 		}
-		MyLocationButton myLocationBtn = view.findViewById(R.id.map_my_location_button);
-		if (myLocationBtn != null) {
-			layer.addCustomizedDefaultMapButton(myLocationBtn);
+		myLocationButton = view.findViewById(R.id.map_my_location_button);
+		if (myLocationButton != null) {
+			layer.addCustomizedDefaultMapButton(myLocationButton);
 		}
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
-		activity.getMapLayers().getMapControlsLayer().addCustomMapButton(view.findViewById(R.id.map_compass_button));
+
+		compassButton = view.findViewById(R.id.map_compass_button);
+		if (compassButton != null) {
+			layer.addCustomMapButton(compassButton);
+		}
 	}
 
 	private void setupDatesView(@NonNull View view) {
@@ -497,7 +504,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapLayers mapLayers = mapActivity.getMapLayers();
-			mapLayers.getMapControlsLayer().clearCustomMapButtons();
+			mapLayers.getMapControlsLayer().removeCustomMapButtons(
+					zoomInButton, zoomOutButton, myLocationButton, compassButton);
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
