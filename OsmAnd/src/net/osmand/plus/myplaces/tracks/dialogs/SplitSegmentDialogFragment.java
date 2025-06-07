@@ -309,7 +309,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		}
 		int color = app.getColor(colorId);
 		title.setTextColor(color);
-		String titleText = getString(R.string.gpx_split_interval);
+		String titleText = getString(R.string.shared_string_split_by);
 		title.setText(getString(R.string.ltr_or_rtl_combine_via_colon, titleText, ""));
 		text.setTextColor(color);
 		img.setImageDrawable(getIcon(R.drawable.ic_action_arrow_drop_down, colorId));
