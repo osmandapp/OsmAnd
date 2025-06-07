@@ -8,6 +8,7 @@ import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -853,5 +854,18 @@ public class FavouritesHelper {
 			favouritePoints.addAll(group.getPoints());
 		}
 		return favouritePoints;
+	}
+
+	public void doAddFavorite(String name, String category, String description, String address, @ColorInt int color,
+	                          BackgroundType backgroundType, @DrawableRes int iconId, @NonNull FavouritePoint favorite) {
+		favorite.setName(name);
+		favorite.setCategory(category);
+		favorite.setDescription(description);
+		favorite.setAddress(address);
+		favorite.setColor(color);
+		favorite.setBackgroundType(backgroundType);
+		favorite.setIconId(iconId);
+		app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
+		addFavourite(favorite);
 	}
 }

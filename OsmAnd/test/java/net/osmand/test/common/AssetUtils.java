@@ -10,8 +10,10 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -42,4 +44,10 @@ public class AssetUtils {
 		return AndroidUtils.getUriForFile(app, fileToShare);
 	}
 
+	public static void copyAssetToFile(@NonNull Context testContext, String assetName, File destFile) throws IOException {
+		try (InputStream in = testContext.getAssets().open(assetName);
+		     FileOutputStream out = new FileOutputStream(destFile)) {
+			Algorithms.streamCopy(in, out);
+		}
+	}
 }

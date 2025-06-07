@@ -20,14 +20,16 @@ import org.junit.Before;
 
 public abstract class AndroidTest {
 
+	protected Context testContext;
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected AppInitIdlingResource appInitIdlingResource;
 
 	@Before
 	public void setup() {
-		Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-		app = ((OsmandApplication) context.getApplicationContext());
+		Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+		testContext = InstrumentationRegistry.getInstrumentation().getContext();
+		app = ((OsmandApplication) targetContext.getApplicationContext());
 		settings = app.getSettings();
 
 		EspressoUtils.grantPermissions(app);
