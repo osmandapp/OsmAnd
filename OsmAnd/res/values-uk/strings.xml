@@ -5770,4 +5770,5 @@
     <string name="hmd_promo_description_years">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо, протягом %1$s років</string>
     <string name="uphill_downhill_split">Вгору / Спуск</string>
     <string name="shared_string_flat">Квартира</string>
+    <string name="shared_string_split_by">Розділити на</string>
 </resources>
