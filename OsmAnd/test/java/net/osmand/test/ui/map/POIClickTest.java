@@ -58,7 +58,7 @@ public class POIClickTest extends AndroidTest {
 		super.setup();
 		try {
 			copyAssetToFile(testContext, "World_basemap_mini.obf", new File(app.getAppPath(null), "World_basemap_mini.obf"));
-			copyAssetToFile(testContext, "Ukraine_kyiv-city_europe.obf", new File(app.getAppPath(null), "Ukraine_kyiv-city_europe.obf"));
+			copyAssetToFile(testContext, "Ukraine_kyiv-city_europe_2.obf", new File(app.getAppPath(null), "Ukraine_kyiv-city_europe.obf"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
