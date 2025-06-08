@@ -1708,7 +1708,7 @@
     <string name="poi_dolphin">Duc-d’Albe</string>
     <string name="poi_official_name">Nom officiel</string>
     <string name="poi_rc_car">Courses de voitures radio-commandées</string>
-    <string name="poi_futsal">Football en salle</string>
+    <string name="poi_futsal">Futsal</string>
     <string name="poi_judo">Judo</string>
     <string name="poi_badminton">Badminton</string>
     <string name="poi_karting">Karting</string>
@@ -4863,7 +4863,7 @@
     <string name="poi_network_cycling">Réseau d\'itinéraires (vélo)</string>
     <string name="poi_routes_driving">Conduite</string>
     <string name="poi_routes_winter_sport">Sports d\'hiver</string>
-    <string name="poi_routes_foot">Foot</string>
+    <string name="poi_routes_foot">À pied</string>
     <string name="poi_route_activity_type_karting">Karting</string>
     <string name="poi_route_activity_type_road_motorcycling">Motocyclisme sur route</string>
     <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Motocyclisme tout-terrain (motocross)</string>
