@@ -5630,7 +5630,7 @@
     <string name="unit_of_volume">Jednotka objemu</string>
     <string name="obd_engine_coolant_temp_desc">Ukazuje teplotu chladicí kapaliny motoru</string>
     <string name="obd_ambient_air_temp_desc">Zobrazuje teplotu vně vozidla.</string>
-    <string name="preview_next_turn">Ukázat příští odbočku</string>
+    <string name="preview_next_turn">Náhled další odbočky</string>
     <string name="av_audio_sample_rate">Vzorkovací frekvence zvuku</string>
     <string name="av_audio_sample_rate_descr">Vyberte vzorkovací frekvenci zvuku.</string>
     <string name="connect_new_scanner">Připojit nový skener</string>
@@ -5763,4 +5763,5 @@
     <string name="hmd_promo_description_years">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu a dalších na %1$s roky</string>
     <string name="shared_string_flat">Rovina</string>
     <string name="uphill_downhill_split">Do kopce / z kopce</string>
+    <string name="shared_string_split_by">Rozdělit podle</string>
 </resources>
