@@ -2628,7 +2628,7 @@
     <string name="quick_action_switch_day_night_descr">Bascule entre les modes Jour et Nuit d\'OsmAnd.</string>
     <string name="quick_action_switch_day_mode">Mode Jour</string>
     <string name="quick_action_switch_night_mode">Mode Nuit</string>
-    <string name="quick_action_day_night_switch_mode">Bascule les modes jour/nuit</string>
+    <string name="quick_action_day_night_switch_mode">Bascule entre les modes jour/nuit</string>
     <string name="lang_gn_py">Guarani</string>
     <string name="add_destination_point">Définir l\'arrivée</string>
     <string name="add_intermediate_point">Ajouter une étape</string>
@@ -2833,7 +2833,7 @@
     <string name="edit_profile_setup_title">Paramétrez le profil</string>
     <string name="edit_profile_setup_subtitle">Le profil conserve ses paramètres</string>
     <string name="edit_profile_setup_map_subtitle">Sélectionnez les paramètres de la carte pour ce profil</string>
-    <string name="edit_profile_screen_options_subtitle">Sélectionner les options d’écran du profil</string>
+    <string name="edit_profile_screen_options_subtitle">Sélectionnez les paramètres d\'affichage écran pour ce profil</string>
     <string name="edit_profile_nav_settings_subtitle">Sélectionnez les paramètres de guidage pour ce profil</string>
     <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de correspondances</string>
     <string name="turn_screen_on_router">Allumer lors des changements de direction</string>
