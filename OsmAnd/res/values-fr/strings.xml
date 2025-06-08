@@ -879,7 +879,7 @@
     <string name="srtm_paid_version_title">Extension « Topographie »</string>
     <string name="intermediate_points_change_order">Modifier l\'ordre</string>
     <string name="dropbox_plugin_name">Extension Dropbox</string>
-    <string name="dropbox_plugin_description">Synchronisez vos itinéraires et notes audio/vidéo avec votre compte Dropbox.</string>
+    <string name="dropbox_plugin_description">Synchronisez vos traces et notes audio/vidéo avec votre compte Dropbox.</string>
     <string name="recording_context_menu_show">Afficher</string>
     <string name="recording_photo_description">Photo %1$s %2$s</string>
     <string name="av_def_action_picture">Prendre une photo</string>
@@ -2135,7 +2135,7 @@
 \nL\'extension OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
     <string name="osmand_extended_description_part7">Contribuez à OpenStreetMap (OSM) \n • Signalez des anomalies \n • Téléversez des traces GPX vers OSM directement depuis l\'application \n • Ajoutez des POI et téléversez-les vers OSM (immédiatement ou plus tard si vous êtes hors ligne)</string>
     <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes : \n • Europe de l\'Ouest : **** \n • Europe de l\'Est : *** \n • Russie : *** \n • Amérique du Nord : *** \n • Amérique du Sud : ** \n • Asie : ** \n • Japon et Corée : *** \n • Moyen-Orient : ** \n • Afrique : ** \n • Antarctique : * \n La majorité des pays autour du Monde sont disponibles au téléchargement\nDe l\'Afghanistan au Zimbabwe, de l\'Australie aux États-Unis. Argentine, Brésil, Canada, France, Allemagne, Mexique, Royaume-Uni, Espagne, …</string>
-    <string name="fonts_header">Fontes de carte</string>
+    <string name="fonts_header">Polices de caractères sur la carte</string>
     <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité \n • Bascule automatique en mode jour/nuit (option) \n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option) \n • Zoom adapté à la vitesse (option) \n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
