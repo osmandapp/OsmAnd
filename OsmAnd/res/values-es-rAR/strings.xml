@@ -3800,7 +3800,7 @@
     <string name="delete_version_history">Borrar el historial de versiones</string>
     <string name="routing_attr_avoid_tunnels_description">Evita los túneles</string>
     <string name="routing_attr_avoid_tunnels_name">Evitar túneles</string>
-    <string name="backup_promocode">Código promocional</string>
+    <string name="backup_promocode">Código de oferta</string>
     <string name="send_crash_log">Enviar informe de errores</string>
     <string name="send_logcat_log">Enviar informe de logcat</string>
     <string name="purchases_feature_desc_nautical">Obtén acceso a la información de profundidad náutica</string>
@@ -3821,7 +3821,7 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
     <string name="continue_with">Continuar con %1$s</string>
     <string name="not_available_with">No disponible con %1$s</string>
-    <string name="redeem_promo_code">Canjear código promocional</string>
+    <string name="redeem_promo_code">Canjear código de oferta</string>
     <string name="osmand_maps_plus_tagline">Obtené funciones ampliadas</string>
     <string name="osmand_pro_tagline">Obtené todas las funciones</string>
     <string name="shared_string_learn_more">Más información</string>
@@ -3838,7 +3838,7 @@
     <string name="shared_string_view_all">Ver todo</string>
     <string name="backup_error_user_is_already_registered">Esta dirección de correo electrónico se usa en otra cuenta</string>
     <string name="backup_error_subscription_was_expired">Suscripción vencida</string>
-    <string name="backup_error_subscription_was_used">Suscripción o promoción usada en otra cuenta %1$s</string>
+    <string name="backup_error_subscription_was_used">Suscripción u oferta usada en otra cuenta %1$s</string>
     <string name="backup_error_size_is_exceeded">Tamaño máximo de OsmAnd Cloud excedido (%1$s)</string>
     <string name="backup_error_gzip_only_supported_upload">El archivo debe enviarse en formato «.gzip»</string>
     <string name="backup_error_file_not_available">Archivo no disponible</string>
@@ -5013,7 +5013,7 @@
     <string name="add_row">Agregar fila</string>
     <string name="discard_changes_prompt">¿Descartar cambios?</string>
     <string name="row_number">Fila %1$s</string>
-    <string name="tripltek_promo">Promoción de Tripltek por %1$s meses</string>
+    <string name="tripltek_promo">Oferta de Tripltek por %1$s meses</string>
     <string name="tripltek_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
     <string name="see_all_plans">Ver todos los planes</string>
     <string name="key_assignments">Asignaciones de teclas</string>
@@ -5274,7 +5274,7 @@
     <string name="driving_region_india">India</string>
     <string name="driving_region_uk">Reino Unido y similares</string>
     <string name="hugerock_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
-    <string name="hugerock_promo">Promoción de Hugerock por %1$s meses</string>
+    <string name="hugerock_promo">Oferta de Hugerock por %1$s meses</string>
     <string name="ask_every_time">Preguntar siempre</string>
     <string name="detailed_track_guidance">Guía detallada de la traza</string>
     <string name="detailed_track_guidance_description">OsmAnd hará coincidir la traza con los caminos cercanos para mejorar la navegación giro a giro.</string>
@@ -5559,8 +5559,8 @@
     <string name="no_places_available">Sin lugar disponible</string>
     <string name="no_photo_for_location_desc">Aún no se agregaron fotos de usuarios a esta ubicación</string>
     <string name="shared_string_road_exit">Salida</string>
-    <string name="hmd_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
-    <string name="hmd_promo">Promo de HMD por %1$s meses</string>
+    <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
+    <string name="hmd_promo">Oferta de HMD por %1$s meses</string>
     <string name="original_shape_description">Cada punto mantendría su propia forma.</string>
     <string name="save_favorite_default_appearance">¿Aplicar cambios a los puntos existentes en la carpeta o sólo a los nuevos?</string>
     <string name="original_color_description">Cada punto mantendría su propio color.</string>
@@ -5626,4 +5626,9 @@
     <string name="unit_of_temperature_description">Las unidades elegidas se aplicarán a todos los datos relacionados con la temperatura del perfil actual.</string>
     <string name="deactivated_map">Mapa desactivado</string>
     <string name="suggest_activate_map_msg">Se desactivó %1$s mapa(s),\nactivarlo para ver este área.</string>
+    <string name="hmd_promo_years">Oferta de HMD por %1$s años</string>
+    <string name="shared_string_split_by">Dividido por</string>
+    <string name="shared_string_flat">Plano (llanura)</string>
+    <string name="uphill_downhill_split">Ascenso / Descenso</string>
+    <string name="hmd_promo_description_years">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s años</string>
 </resources>

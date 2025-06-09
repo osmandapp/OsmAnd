@@ -13,6 +13,7 @@
 
     <string name="shared_string_switch">Switch</string>
     <string name="ski_route_switch_style_description">Explore ski slopes, lifts, and more with the "Winter and Ski" map style.</string>
+    <string name="shared_string_split_by">Split by</string>
     <string name="shared_string_flat">Flat</string>
     <string name="uphill_downhill_split">Uphill / Downhill</string>
     <string name="read_on">Read on %1$s</string>

@@ -5789,4 +5789,7 @@
     <string name="unit_of_temperature_description">De valgte enheder vil blive anvendt på alle temperaturrelaterede data i den aktuelle profil.</string>
     <string name="hmd_promo_years">HMD-kampagne i %1$s år</string>
     <string name="hmd_promo_description_years">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief etc. i %1$s år</string>
+    <string name="shared_string_flat">Flad</string>
+    <string name="uphill_downhill_split">Opad / nedad</string>
+    <string name="shared_string_split_by">Opdelt af</string>
 </resources>

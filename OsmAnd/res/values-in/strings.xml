@@ -5688,7 +5688,7 @@
     <string name="allow_display_on_top_description">Perbolehkan menampilkan teks peta di atas</string>
     <string name="show_debug_info">Tampilkan informasi pengawakutuan</string>
     <string name="show_debug_info_description">Tampilkan info grafis tentang penempatan setiap teks peta</string>
-    <string name="map_text">Teks peta</string>
+    <string name="map_text">Perenderan Peta</string>
     <string name="routing_attr_avoid_cobblestone_name">Hindari batu bulat</string>
     <string name="routing_attr_avoid_cobblestone_description">Hindari batu bulat</string>
     <string name="quick_action_map_style">Gaya peta</string>
@@ -6148,4 +6148,16 @@
     <string name="saved_to_device">Disimpan ke perangkat</string>
     <string name="cant_load_map_styles">Tidak dapat mengubah gaya peta.</string>
     <string name="travel_guides">Panduan</string>
+    <string name="read_on">Baca di %1$s</string>
+    <string name="shared_string_split_by">Dipisah berdasarkan</string>
+    <string name="hmd_promo_years">Promo HMD selama %1$s tahun</string>
+    <string name="show_symbols_debug_info">Tampilkan info pengawakutuan simbol</string>
+    <string name="shared_string_flat">Datar</string>
+    <string name="uphill_downhill_split">Naik / Turun</string>
+    <string name="hmd_promo_description_years">Akses gratis ke fitur termasuk unduhan peta, relief 3D tidak terbatas, dll. selama %1$s tahun</string>
+    <string name="show_debug_tile">Tampilkan informasi ubin</string>
+    <string name="suggest_activate_map_msg">Peta %1$s dinonaktifkan\naktifkan untuk melihat area ini.</string>
+    <string name="unit_of_temperature_description">Satuan yang dipilih akan diterapkan pada semua data berkaitan dengan suhu dalam profil saat ini.</string>
+    <string name="deactivated_map">Peta nonaktif</string>
+    <string name="show_debug_tile_description">Tampilkan informasi tentang setiap simbol peta dari setiap ubin</string>
 </resources>
