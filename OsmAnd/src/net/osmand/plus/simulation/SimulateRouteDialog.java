@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.GpxDialogs;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -23,7 +24,7 @@ public class SimulateRouteDialog {
 	                                @NonNull OsmAndLocationSimulation simulation,
 	                                @Nullable Runnable runnable) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		builder.setTitle(R.string.animate_route);
 
@@ -40,7 +41,8 @@ public class SimulateRouteDialog {
 
 		builder.setView(view);
 		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-			boolean mode = app.getDaynightHelper().isNightMode(activity instanceof MapActivity);
+			boolean usedOnMap = activity instanceof MapActivity;
+			boolean mode = app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 			GpxDialogs.selectGPXFile(activity, false, false, result -> {
 				simulation.startSimulationThread(app, result[0], 0, true, speedup.getValue() + 1);
 				if (runnable != null) {

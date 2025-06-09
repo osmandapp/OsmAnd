@@ -44,7 +44,9 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class ClickableWayHelper {
     public static final Set<String> CLICKABLE_TAGS =
-            Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale");
+            Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale",
+                    "snowmobile=yes", "snowmobile=designated", "snowmobile=permissive"
+            );
     public static final Map<String, String> FORBIDDEN_TAGS =
             Map.of("area", "yes", "access", "no", "aerialway", "*");
     public static final Set<String> REQUIRED_TAGS_ANY =
@@ -82,11 +84,13 @@ public class ClickableWayHelper {
     }
 
     public boolean isClickableWay(@NonNull RenderedObject renderedObject) {
-        return renderedObject.getX().size() > 1 && isClickableWayTags(renderedObject.getTags()); // v1
+        String name = renderedObject.getName();
+        return renderedObject.getX().size() > 1 && isClickableWayTags(name, renderedObject.getTags()); // v1
     }
 
     public boolean isClickableWay(@NonNull ObfMapObject obfMapObject, @NonNull Map<String, String> tags) {
-        return obfMapObject.getPoints31().size() > 1 && isClickableWayTags(tags); // v2 with prefetched tags
+        String name = obfMapObject.getCaptionInNativeLanguage();
+        return obfMapObject.getPoints31().size() > 1 && isClickableWayTags(name, tags); // v2 with prefetched tags
     }
 
     @Nullable
@@ -123,9 +127,10 @@ public class ClickableWayHelper {
                                           long osmId, String name, Map<String, String> tags) {
         GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
         RouteActivityHelper helper = app.getRouteActivityHelper();
-        for (String clickableTag : CLICKABLE_TAGS) {
-            if (tags.containsKey(clickableTag)) {
-                RouteActivity activity = helper.findActivityByTag(clickableTag);
+        for (String clickableTagValue : CLICKABLE_TAGS) {
+            String tag = clickableTagValue.split("=")[0];
+            if (tags.containsKey(tag)) {
+                RouteActivity activity = helper.findActivityByTag(clickableTagValue);
                 if (activity != null) {
                     String activityType = activity.getId();
                     gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
@@ -180,7 +185,7 @@ public class ClickableWayHelper {
         return bbox; // (int)MapUtils.measuredDist31((int)bbox.left, (int)bbox.top, (int)bbox.right, (int)bbox.bottom);
     }
 
-    private boolean isClickableWayTags(@NonNull Map<String, String> tags) {
+    private boolean isClickableWayTags(@Nullable String name, @NonNull Map<String, String> tags) {
         for (Map.Entry<String, String> forbidden : FORBIDDEN_TAGS.entrySet()) {
             if (forbidden.getValue().equals(tags.get(forbidden.getKey()))
                     || "*".equals(forbidden.getValue()) && tags.containsKey(forbidden.getKey())
@@ -189,9 +194,15 @@ public class ClickableWayHelper {
             }
         }
         for (String required : REQUIRED_TAGS_ANY) {
-            if (tags.containsKey(required)) {
+            // some objects have name passed from object props but not in the tags
+            boolean isRequiredNameFound = "name".equals(required) && !Algorithms.isEmpty(name);
+            if (tags.containsKey(required) || isRequiredNameFound) {
                 for (String key : tags.keySet()) {
                     if (CLICKABLE_TAGS.contains(key)) {
+                        return true;
+                    }
+                    String value = tags.get(key); // snowmobile=yes, etc
+                    if (value != null && CLICKABLE_TAGS.contains(key + "=" + value)) {
                         return true;
                     }
                 }

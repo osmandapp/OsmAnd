@@ -57,6 +57,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask;
 import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask.ShareFavoritesListener;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
@@ -167,7 +168,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		listView = view.findViewById(android.R.id.list);
 		adapter.synchronizeGroups();
 		if (!adapter.isEmpty()) {
-			boolean nightMode = !app.getSettings().isLightContent();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			View searchView = inflater.inflate(R.layout.search_fav_list_item, listView, false);
 			searchView.setBackgroundResource(ColorUtilities.getListBgColorId(nightMode));
 
@@ -192,7 +193,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		}
 		View emptyView = view.findViewById(android.R.id.empty);
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
-		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		emptyImageView.setImageResource(!nightMode ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
 		Button importButton = emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(view1 -> importFavourites());
 		listView.setEmptyView(emptyView);

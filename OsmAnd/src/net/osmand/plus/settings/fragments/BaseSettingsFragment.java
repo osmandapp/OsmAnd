@@ -59,6 +59,7 @@ import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSh
 import net.osmand.plus.settings.bottomsheets.EditTextPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.MultiSelectPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -138,7 +139,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	private boolean updateTheme() {
 		ApplicationMode appMode = getSelectedAppMode();
-		boolean nightMode = !settings.isLightContentForMode(appMode);
+		boolean nightMode = app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.APP);
 		boolean changed = this.nightMode != nightMode;
 		this.nightMode = nightMode;
 		this.themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;

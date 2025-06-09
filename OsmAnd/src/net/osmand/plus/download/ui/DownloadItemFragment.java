@@ -30,6 +30,7 @@ import net.osmand.plus.download.ui.DownloadDescriptionInfo.ActionButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.custom.CustomIndexItem;
 import net.osmand.plus.plugins.custom.CustomRegion;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -61,7 +62,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = !getMyApplication().getSettings().isLightContent();
+		nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}

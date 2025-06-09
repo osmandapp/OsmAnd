@@ -5710,4 +5710,5 @@
     <string name="hmd_promo_years">HMD Promo %1$s évre</string>
     <string name="shared_string_flat">Sík</string>
     <string name="uphill_downhill_split">Felfelé / lefelé</string>
+    <string name="shared_string_split_by">Felosztás eszerint:</string>
 </resources>

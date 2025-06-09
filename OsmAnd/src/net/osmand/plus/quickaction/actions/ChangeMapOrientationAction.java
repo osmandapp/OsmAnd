@@ -17,6 +17,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 
 public class ChangeMapOrientationAction extends QuickAction {
 
@@ -46,7 +47,8 @@ public class ChangeMapOrientationAction extends QuickAction {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandSettings settings = app.getSettings();
 		CompassMode compassMode = settings.getCompassMode();
-		return compassMode.getIconId(!settings.isLightContent());
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return compassMode.getIconId(nightMode);
 	}
 
 	@Override

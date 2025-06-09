@@ -20,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -200,9 +201,9 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 	}
 
 	private void showSeekbarSettingsDialog() {
-		boolean nightMode = !app.getSettings().isLightContentForMode(appMode);
+		boolean nightMode = app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.APP);
 		localSeekBarIntervalMillis = selectedIntervalMillis;
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		Context themedContext = UiUtilities.getThemedContext(requireActivity(), nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		View seekbarView = themedInflater.inflate(R.layout.map_marker_interval_dialog, null, false);
 		builder.setView(seekbarView);

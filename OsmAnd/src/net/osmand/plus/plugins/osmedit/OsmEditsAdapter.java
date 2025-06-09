@@ -20,6 +20,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
@@ -72,7 +73,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 	@NonNull
 	@Override
 	public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		Context themedCtx = UiUtilities.getThemedContext(getContext(), nightMode);
 		if (portrait) {
 			if (convertView == null) {
@@ -104,7 +105,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			FrameLayout fl = new FrameLayout(themedCtx);
 			LinearLayout ll = new LinearLayout(themedCtx);
 			ll.setOrientation(LinearLayout.VERTICAL);
-			ll.setBackgroundResource(app.getSettings().isLightContent() ? R.drawable.bg_card_light : R.drawable.bg_card_dark);
+			ll.setBackgroundResource(nightMode ? R.drawable.bg_card_dark : R.drawable.bg_card_light);
 			fl.addView(ll);
 			((FrameLayout.LayoutParams) ll.getLayoutParams()).setMargins(sideMargin, margin, sideMargin, margin);
 

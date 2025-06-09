@@ -43,7 +43,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -55,6 +54,7 @@ import net.osmand.plus.render.TravelRendererHelper.OnFileVisibilityChangeListene
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.listitems.QuickSearchWikiItem;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
@@ -62,7 +62,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.POITileProvider;
@@ -898,7 +897,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		TextView textView = new TextView(ctx);
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		int textMargin = dpToPx(app, 10f);
-		boolean light = app.getSettings().isLightContent();
+		boolean light = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		textView.setLayoutParams(llTextParams);
 		textView.setPadding(textMargin, textMargin, textMargin, textMargin);
 		textView.setTextSize(16);
@@ -920,7 +919,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		webView.setVerticalScrollBarEnabled(false);
 		webView.setBackgroundColor(Color.TRANSPARENT);
 		webView.getSettings().setTextZoom((int) (app.getResources().getConfiguration().fontScale * 100f));
-		boolean light = app.getSettings().isLightContent();
+		boolean light = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int textColor = ColorUtilities.getPrimaryTextColor(app, !light);
 		String rgbHex = Algorithms.colorToString(textColor);
 		html = "<body style=\"color:" + rgbHex + ";\">" + html + "</body>";
@@ -940,8 +939,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private static void showText(Context ctx, OsmandApplication app, View view, String title) {
-		Dialog dialog = new Dialog(ctx,
-				app.getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		boolean light = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		Dialog dialog = new Dialog(ctx, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
@@ -1162,7 +1161,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private Bitmap createImageBitmap(Bitmap bitmap, boolean isSelected) {
 		OsmandApplication app = getApplication();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		int borderWidth = AndroidUtils.dpToPxAuto(app, IMAGE_ICON_BORDER_DP);
 		int bigIconSize = getBigIconSize();
 		Bitmap circle = getCircle(bigIconSize);

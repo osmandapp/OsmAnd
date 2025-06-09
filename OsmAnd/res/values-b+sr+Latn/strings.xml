@@ -5612,7 +5612,7 @@
     <string name="obd_speed_desc">Prikazuje brzinu sa senzora brzine (VSS).</string>
     <string name="obd_ambient_air_temp_desc">Pokazuje spoljnu temperaturu.</string>
     <string name="obd_battery_voltage_desc">Prikazuje nivo napona akumulatora vozila</string>
-    <string name="preview_next_turn">Prikaz sledećeg skretanja</string>
+    <string name="preview_next_turn">Pregled sledećeg skretanja</string>
     <string name="av_audio_sample_rate">Brzina uzorkovanja zvuka</string>
     <string name="av_audio_sample_rate_descr">Izaberi brzinu uzorkovanja zvuka.</string>
     <string name="connect_new_scanner">Poveži novi skener</string>
@@ -5745,4 +5745,5 @@
     <string name="hmd_promo_description_years">Besplatan pristup funkcijama uključujući neograničeno preuzimanja mapa, 3D teren i još mnogo toga za %1$s godišnje</string>
     <string name="uphill_downhill_split">Uzbrdo/nizbrdo</string>
     <string name="shared_string_flat">Ravno</string>
+    <string name="shared_string_split_by">Razdvojiti po</string>
 </resources>

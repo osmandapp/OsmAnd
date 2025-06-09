@@ -47,6 +47,7 @@ import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -85,7 +86,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
 		accessibilityAssistant = new AccessibilityAssistant(requireActivity());
-		boolean isLightTheme = app.getSettings().isLightContent();
+		boolean isLightTheme = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
@@ -302,7 +303,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 			this.app = app;
 			this.helper = app.getFavoritesHelper();
 			location = app.getSettings().getLastKnownMapLocation();
-			boolean light = app.getSettings().isLightContent();
+			boolean light = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			enabledColor = ColorUtilities.getPrimaryTextColorId(!light);
 			disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
 			disabledIconColor = ColorUtilities.getDefaultIconColorId(!light);

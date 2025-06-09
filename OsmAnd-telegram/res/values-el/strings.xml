@@ -139,4 +139,5 @@
     <string name="shared_string_logout">Αποσύνδεση</string>
     <string name="enter_phone_number">Εισάγετε αριθμό τηλεφώνου</string>
     <string name="shared_string_group">Ομάδα</string>
+    <string name="location_source">Πηγή τοποθεσίας</string>
 </resources>

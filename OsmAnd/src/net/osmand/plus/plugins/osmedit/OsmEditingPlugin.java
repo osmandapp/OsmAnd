@@ -67,6 +67,7 @@ import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMEditsAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
@@ -484,7 +485,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				})
 				.setItemDeleteAction(SHOW_OSM_EDITS));
 
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		Iterator<RenderingRuleProperty> iterator = customRules.iterator();
 		while (iterator.hasNext()) {
 			RenderingRuleProperty property = iterator.next();

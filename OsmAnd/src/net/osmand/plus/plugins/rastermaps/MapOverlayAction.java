@@ -23,6 +23,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -182,7 +183,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 				OsmandApplication app = activity.getMyApplication();
 				Map<String, String> entriesMap = app.getSettings().getTileSourceEntries();
 				entriesMap.put(KEY_NO_OVERLAY, activity.getString(R.string.no_overlay));
-				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+				boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 				AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 				ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());

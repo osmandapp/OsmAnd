@@ -9,6 +9,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 import java.util.ArrayList;
@@ -70,7 +71,8 @@ public abstract class MapBitmapDrawer {
 		notifyDrawing();
 		createTileBox();
 
-		DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		DrawSettings drawSettings = new DrawSettings(nightMode, true);
 		ResourceManager resourceManager = app.getResourceManager();
 		MapRenderRepositories renderer = resourceManager.getRenderer();
 		if (resourceManager.updateRenderedMapNeeded(tileBox, drawSettings)) {

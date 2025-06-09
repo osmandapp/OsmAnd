@@ -49,7 +49,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.importfiles.tasks.CopyToFileTask;
-import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.AppInitializer;
@@ -599,7 +599,8 @@ public class ImportHelper {
 										BaseTransientBottomBar.LENGTH_LONG)
 								.setAction(R.string.shared_string_open, view -> openTrack(gpxFile, onGpxImport));
 
-						UiUtilities.setupSnackbar(snackbar, !app.getSettings().isLightContent());
+						boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+						UiUtilities.setupSnackbar(snackbar, nightMode);
 						snackbar.show();
 					} else {
 						openTrack(gpxFile, onGpxImport);

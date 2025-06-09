@@ -2189,8 +2189,8 @@
     <string name="rendering_value_low_name">Baixo</string>
     <string name="rendering_attr_contourWidth_description">Espessura das curvas de nível</string>
     <string name="rendering_attr_contourWidth_name">Espessura das curvas de nível</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Água</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Ocultar água</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Ocultar água</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Água</string>
     <string name="routing_attr_allow_motorway_name">Usar autoestradas</string>
     <string name="routing_attr_allow_motorway_description">Permite autoestradas.</string>
     <string name="search_map_hint">Cidade ou região</string>
@@ -4439,7 +4439,7 @@
     <string name="radius_rules_widget_desc">A ferramenta de régua de raio exibe círculos de distância ao redor de um ponto selecionado no mapa.</string>
     <string name="current_speed_widget_desc">Mostra a sua velocidade atual reportada via GPS.</string>
     <string name="shared_string_mode">Modo</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares</string>
     <string name="explore_plans">Explorar planos</string>
     <string name="time_to_navigation_point_widget_settings_desc">Toque no widget para alternar entre os modos.</string>
@@ -5646,7 +5646,7 @@
     <string name="allow_display_on_top_description">Permitir a exibição de textos de mapas uns sobre os outros</string>
     <string name="show_debug_info">Mostrar informações de depuração</string>
     <string name="show_debug_info_description">Exibir informações gráficas sobre o posicionamento de cada texto do mapa</string>
-    <string name="map_text">Textos do mapas</string>
+    <string name="map_text">Redefinição do mapa</string>
     <string name="routing_attr_avoid_cobblestone_name">Evitar paralelepípedos</string>
     <string name="routing_attr_avoid_cobblestone_description">Evitar paralelepípedos</string>
     <string name="change_terrain_color_scheme">Alterar esquema de cores do terreno</string>
@@ -5664,7 +5664,7 @@
     <string name="fix_north_up">Ativar o norte fixo para cima</string>
     <string name="shared_string_unchanged">Inalterada</string>
     <string name="use_3d_track_visualization">Visualização 3D</string>
-    <string name="unchanged_parameter_summary"></string>
+    <string name="unchanged_parameter_summary">Cada trilha manterá seus próprios parâmetros.</string>
     <string name="gpx_approximation_cpp">Baseado em roteamento (C++)</string>
     <string name="gpx_approximation_java">Baseado em roteamento (Java)</string>
     <string name="missing_maps_ignore">Usar mapas baixados</string>
@@ -5994,7 +5994,7 @@
     <string name="ais_address_nmea_server">Endereço IP da fonte de dados NMEA</string>
     <string name="ais_address_nmea_server_description">Definir o endereço IP da fonte de dados NMEA (se for usado TCP)</string>
     <string name="ais_port_nmea_server">Porta TCP da fonte de dados NMEA</string>
-    <string name="hmd_promo_description">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s mês</string>
+    <string name="hmd_promo_description">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s meses</string>
     <string name="shared_string_road_exit">Sair</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Selecione os parâmetros que serão registrados no arquivo GPX.</string>
@@ -6118,4 +6118,16 @@
     <string name="unit_of_temperature_description">As unidades selecionadas serão aplicadas a todos os dados relacionados à temperatura no perfil atual.</string>
     <string name="deactivated_map">Mapa desativado</string>
     <string name="suggest_activate_map_msg">O mapa %1$s está desativado,\native para visualizar essa área.</string>
+    <string name="default_buttons_corners_original_description">Cada botão manteria seu próprio raio de canto.</string>
+    <string name="original_icon_description">Cada ponto manteria seu próprio ícone.</string>
+    <string name="ais_cpa_warning_distance_description">As embarcações serão marcadas com a cor vermelha se o CPA for menor que esse valor e se o CPA for alcançado em um futuro próximo (consulte a configuração Tempo de aviso para alcançar o CPA).</string>
+    <string name="original_shape_description">Cada ponto manteria sua própria forma.</string>
+    <string name="ais_cpa_warning_time">Tempo de aviso para alcançar o ponto de aproximação mais próximo (CPA)</string>
+    <string name="wunderlinq_datagrid">Grade de dados WunderLINQ</string>
+    <string name="shared_string_split_by">Dividido por</string>
+    <string name="original_color_description">Cada ponto manteria sua própria cor.</string>
+    <string name="default_buttons_opacity_original_description">Cada botão manteria sua própria opacidade de fundo.</string>
+    <string name="shared_string_flat">Plano</string>
+    <string name="ais_cpa_warning_time_description">Se o TCPA (tempo para alcançar o CPA com outra embarcação) for menor que esse valor, a embarcação será marcada com a cor vermelha.</string>
+    <string name="ais_cpa_warning_distance">Distância de aviso para o Ponto de Aproximação Fechado (CPA)</string>
 </resources>

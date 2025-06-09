@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -26,7 +27,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 
 	private float marginSides;
 	private boolean iconHidden;
-	private boolean night;
+	private boolean nightMode;
 
 	private String delStr;
 	private String moveToHistoryStr;
@@ -43,9 +44,9 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 		this.mapActivity = mapActivity;
 		this.adapter = adapter;
 		marginSides = mapActivity.getResources().getDimension(R.dimen.list_content_padding);
-		night = !mapActivity.getMyApplication().getSettings().isLightContent();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
-		backgroundPaint.setColor(ColorUtilities.getDividerColor(mapActivity, night));
+		backgroundPaint.setColor(ColorUtilities.getDividerColor(mapActivity, nightMode));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		backgroundPaint.setAntiAlias(true);
 		textPaint.setTextSize(mapActivity.getResources().getDimension(R.dimen.default_desc_text_size));
@@ -104,8 +105,8 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 				colorIcon = R.color.map_widget_blue;
 				colorText = R.color.map_widget_blue;
 			} else {
-				colorIcon = ColorUtilities.getDefaultIconColorId(night);
-				colorText = ColorUtilities.getSecondaryTextColorId(night);
+				colorIcon = ColorUtilities.getDefaultIconColorId(nightMode);
+				colorText = ColorUtilities.getSecondaryTextColorId(nightMode);
 			}
 			textPaint.setColor(ContextCompat.getColor(mapActivity, colorText));
 			Drawable icon = app.getUIUtilities().getIcon(R.drawable.ic_action_history, colorIcon);

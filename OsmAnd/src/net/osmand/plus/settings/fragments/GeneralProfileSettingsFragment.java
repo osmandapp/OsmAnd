@@ -37,6 +37,7 @@ import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.TemperatureUnitsMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
@@ -110,7 +111,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		if (settings.isSystemThemeUsed(mode)) {
 			iconId = R.drawable.ic_action_android;
 		} else {
-			iconId = settings.isLightContentForMode(mode) ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;
+			boolean nightMode = app.getDaynightHelper().isNightMode(mode, ThemeUsageContext.APP);
+			iconId = nightMode ? R.drawable.ic_action_moon : R.drawable.ic_action_sun;
 		}
 		return getActiveIcon(iconId);
 	}
