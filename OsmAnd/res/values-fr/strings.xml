@@ -76,7 +76,7 @@
     <string name="pref_vector_rendering">Options pour l\'affichage vectoriel</string>
     <string name="pref_overlay">Surcouche / Sous-couche</string>
     <string name="pref_raster_map">Options pour la source de carte</string>
-    <string name="pref_vector_map">Options cartographie vectorielle</string>
+    <string name="pref_vector_map">Paramètres de carte vectorielle</string>
     <string name="delete_confirmation_msg">Supprimer %1$s ?</string>
     <string name="city_type_suburb">Banlieue</string>
     <string name="city_type_hamlet">Hameau</string>
@@ -128,7 +128,7 @@
     <string name="local_index_items_restored">%1$d élément(s) sur %2$d activé(s).</string>
     <string name="local_index_no_items_to_do">Aucun élément à %1$s</string>
     <string name="local_index_action_do">Vous allez %1$s %2$s éléments. Continuer ?</string>
-    <string name="local_index_descr_title">Gérer les cartes hors-ligne.</string>
+    <string name="local_index_descr_title">Gérer les fichiers de carte.</string>
     <string name="local_index_mi_restore">Activer</string>
     <string name="local_index_mi_backup">Désactiver</string>
     <string name="shared_string_download">Télécharger</string>
@@ -139,7 +139,7 @@
     <string name="local_indexes_cat_backup">Désactivé</string>
     <string name="local_indexes_cat_tts">Annonces vocales (synthèse vocale TTS)</string>
     <string name="local_indexes_cat_voice">Annonces vocales (voix enregistrée)</string>
-    <string name="local_indexes_cat_tile">Cartes en ligne ou en cache</string>
+    <string name="local_indexes_cat_tile">Cartes tuilées en ligne ou en cache</string>
     <string name="local_indexes_cat_map">Cartes standard (vectorielles)</string>
     <string name="local_indexes_cat_poi">Données des POI</string>
     <string name="ttsvoice">Voix de synthèse</string>
@@ -427,7 +427,7 @@
     <string name="search_offline_address">Hors-ligne</string>
     <string name="search_online_address">Internet</string>
     <string name="max_level_download_tile">Niveau de zoom maximum</string>
-    <string name="max_level_download_tile_descr">Ne pas télécharger les cartes (tuiles) en ligne en dessous de ce niveau de zoom.</string>
+    <string name="max_level_download_tile_descr">Ne pas télécharger les cartes en ligne en dessous de ce niveau de zoom.</string>
     <string name="route_general_information">Distance totale : %1$s, Durée estimée : %2$d h %3$d min.</string>
     <string name="router_service_descr">Service de guidage, en ligne ou hors-ligne.</string>
     <string name="router_service">Service de guidage</string>
@@ -540,7 +540,7 @@
     <string name="search_address_building">Numéro</string>
     <string name="search_address_building_option">Numéro</string>
     <string name="search_address_street_option">Intersection</string>
-    <string name="context_menu_item_update_map">Mettre à jour</string>
+    <string name="context_menu_item_update_map">Mettre à jour la carte</string>
     <string name="context_menu_item_create_poi">Créer un POI</string>
     <string name="shared_string_yes">Oui</string>
     <string name="shared_string_cancel">Annuler</string>
@@ -588,10 +588,10 @@
     <string name="confirm_interrupt_download">Annuler le téléchargement ?</string>
     <string name="basemap_was_selected_to_download">Le fond de carte mondial, nécessaire pour un fonctionnement de base, est en attente de téléchargement.</string>
     <string name="map_online_plugin_is_not_installed">Activez l’extension \'Cartes en ligne\' pour sélectionner différentes sources de cartes</string>
-    <string name="map_online_data">Carte en ligne (tuiles)</string>
+    <string name="map_online_data">Cartes tuilées en ligne</string>
     <string name="map_online_data_descr">Utiliser les cartes en ligne (télécharge et conserve en cache les tuiles sur la carte mémoire).</string>
     <string name="shared_string_online_maps">Cartes en ligne</string>
-    <string name="online_map_settings_descr">Sélectionnez des sources de cartes tuilées en ligne ou mises en cache.</string>
+    <string name="online_map_settings_descr">Sélectionnez les sources de cartes tuilées en ligne ou mises en cache.</string>
     <string name="osmand_rastermaps_plugin_description">Accédez à un grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) comme des tuiles OSM pré-rendues, des images satellites ou encore des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, l\'ombrage du relief, etc. \n \nChacune de ces cartes peut être affichée en tant que carte principale, surcouche ou sous-couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes et améliorer la lisibilité, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu « Paramétrer la carte ». \n \nLes cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et le guidage en arrière-plan (écran éteint) en réveillant périodiquement le GPS.</string>
     <string name="osmand_accessibility_description">Active, directement dans OsmAnd, les options d\'accessibilité de votre appareil (régler la vitesse de la synthèse vocale, utiliser le trackball pour zoomer ou activer les annonces vocales de votre position).</string>
@@ -775,7 +775,7 @@
 \nCoucher : %2$s</string>
     <string name="day_night_info">Information jour/nuit</string>
     <string name="filterpoi_activity">Créer un filtre de POI</string>
-    <string name="map_widget_renderer">Style de la carte</string>
+    <string name="map_widget_renderer">Style de carte</string>
     <string name="int_continuosly">En continu</string>
     <string name="osmand_short_description_80_chars">Logiciel de cartographie et de guidage fonctionnant avec des cartes OSM hors-ligne et en ligne</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de guidage pouvant fonctionner avec des cartes hors-ligne ou en ligne</string>
@@ -824,7 +824,7 @@
     <string name="rendering_attr_showRoadMaps_description">Sélectionnez quand afficher les cartes routières :</string>
     <string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
     <string name="download_roads_only_item">Routes uniquement</string>
-    <string name="download_regular_maps">Cartes standards</string>
+    <string name="download_regular_maps">Carte standard</string>
     <string name="download_roads_only_maps">Carte routière uniquement</string>
     <string name="incomplete_locale">incomplet</string>
     <string name="no_buildings_found">Aucun numéro de bâtiment trouvé.</string>
@@ -1011,7 +1011,7 @@
     <string name="av_camera_focus_continuous">L\'appareil photo essaie de faire la mise au point en continu</string>
     <string name="av_photo_play_sound">Émettre un son lors de la prise de vue</string>
     <string name="av_photo_play_sound_descr">Émettre un son ou non lors de la prise de vue.</string>
-    <string name="map_magnifier">Zoom de la carte</string>
+    <string name="map_magnifier">Zoom de carte</string>
     <string name="base_world_map">Carte de base du monde</string>
     <string name="shared_string_and">et</string>
     <string name="shared_string_or">ou</string>
@@ -1078,7 +1078,7 @@
     <string name="index_item_world_seamarks">Monde - Balisage maritime</string>
     <string name="index_item_world_bitcoin_payments">Monde - Paiement en bitcoin</string>
     <string name="index_item_world_basemap">Monde - Carte générale</string>
-    <string name="index_item_world_ski">Monde - Ski</string>
+    <string name="index_item_world_ski">Monde - Carte de ski</string>
     <string name="lang_hr">Croate</string>
     <string name="lang_zh">Chinois</string>
     <string name="lang_pt_br">Portugais (Brésil)</string>
@@ -1287,7 +1287,7 @@
     <string name="map_widget_right">Panneau de droite</string>
     <string name="map_widget_left">Panneau de gauche</string>
     <string name="shared_string_show">Afficher</string>
-    <string name="configure_map">Paramétrer la carte</string>
+    <string name="configure_map">Configurer la carte</string>
     <string name="search_radius_proximity">Dans</string>
     <string name="rendering_category_routes">Itinéraires</string>
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
@@ -1365,7 +1365,7 @@
     <string name="shared_string_enable">Activer</string>
     <string name="shared_string_disable">Désactiver</string>
     <string name="shared_string_get">Installer</string>
-    <string name="plugin_ski_name">Pistes de ski</string>
+    <string name="plugin_ski_name">Carte de ski</string>
     <string name="plugin_nautical_name">Carte marine</string>
     <string name="world_ski_missing">Téléchargez la carte hors-ligne dédiée pour afficher les pistes de ski.</string>
     <string name="nautical_maps_missing">Téléchargez la carte hors-ligne dédiée pour afficher les informations nautiques.</string>
@@ -1392,7 +1392,7 @@
 \nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards. 
 \n 
 \nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans « Paramétrer la carte ».</string>
-    <string name="plugin_touringview_name">Grand tourisme</string>
+    <string name="plugin_touringview_name">Carte touristique</string>
     <string name="plugin_nautical_descr">Enrichit la carte avec des informations sur les routes maritimes, le balisage, les zones de danger, les restrictions de mouillage, etc. Pour afficher cette vue, téléchargez la carte marine correspondante puis activez-la dans \"Paramétrer la carte\".
 \n
 \nPlus d\'informations sur %1$s.</string>
@@ -2038,7 +2038,7 @@
     <string name="quick_action_poi_show">Afficher %1$s</string>
     <string name="quick_action_poi_hide">Masquer %1$s</string>
     <string name="quick_action_add_category">Ajouter une catégorie</string>
-    <string name="quick_action_add_configure_map">Paramétrer la carte</string>
+    <string name="quick_action_add_configure_map">Configurer la carte</string>
     <string name="quick_action_fav_name_descr">Laisser vide pour utiliser automatiquement l\'adresse ou le nom du lieu.</string>
     <string name="quick_action_bug_message">Message</string>
     <string name="quick_action_category_descr">Catégorie du favori :</string>
@@ -4893,7 +4893,7 @@
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_map_legend_nautical_map_name">Style de carte marine</string>
-    <string name="help_article_map_legend_osmand_name">Style Carte OsmAnd</string>
+    <string name="help_article_map_legend_osmand_name">Style de carte OsmAnd</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_routing_name">Paramètres de l\'itinéraire</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Ligne droite (à vol d\'oiseau)</string>
@@ -4903,7 +4903,7 @@
     <string name="help_article_navigation_setup_route_details_name">Détails de l\'itinéraire</string>
     <string name="help_article_navigation_setup_route_navigation_name">Préparation de l\'itinéraire</string>
     <string name="help_article_personal_name">Mes données</string>
-    <string name="help_article_map_legend_ski_map_name">Style Carte Ski</string>
+    <string name="help_article_map_legend_ski_map_name">Style de carte de ski</string>
     <string name="help_article_personal_import_export_name">Import / Export</string>
     <string name="help_article_map_map_context_menu_name">Menu contextuel de la carte</string>
     <string name="help_article_map_track_context_menu_name">Menu contextuel des traces</string>
@@ -5687,7 +5687,7 @@
     <string name="travel_guides">Guides</string>
     <string name="show_debug_tile_description">Afficher les informations à propos des symboles de la carte sur chaque tuile</string>
     <string name="show_debug_tile">Afficher les informations de la tuile</string>
-    <string name="show_symbols_debug_info">Afficher les symboles pour débuguer</string>
+    <string name="show_symbols_debug_info">Afficher les symboles pour déboguer</string>
     <string name="deactivated_map">Carte désactivée</string>
     <string name="suggest_activate_map_msg">La carte %1$s est désactivée,\nactivez-la pour consulter cette zone.</string>
     <string name="unit_of_temperature_description">Les unités sélectionnées seront appliquées à toutes les données de température pour le profil actuel.</string>
