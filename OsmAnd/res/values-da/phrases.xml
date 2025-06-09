@@ -4240,4 +4240,11 @@
     <string name="poi_osmwiki">Populære steder (Wikipedia)</string>
     <string name="poi_to">Til</string>
     <string name="poi_from">Fra</string>
+    <string name="poi_route_activity_type_hiking">Vandreruter</string>
+    <string name="poi_network_nwn">Nationale vandreruter (NWN)</string>
+    <string name="poi_network_iwn">Internationale vandreruter (IWN)</string>
+    <string name="poi_us_maps_recreation_area_activity_day_hiking">Dagsvandring</string>
+    <string name="poi_us_maps_recreation_area_activity_hiking">Vandring</string>
+    <string name="poi_network_rwn">Regionale vandreruter (RWN)</string>
+    <string name="poi_network_lwn">Lokale vandreruter (LWN)</string>
 </resources>
