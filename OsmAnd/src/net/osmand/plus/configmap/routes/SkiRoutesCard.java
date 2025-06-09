@@ -1,8 +1,8 @@
 package net.osmand.plus.configmap.routes;
 
-import static net.osmand.osm.OsmRouteType.SKI;
 import static net.osmand.plus.render.RendererRegistry.WINTER_SKI_RENDER;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,21 +11,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapUtils;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
-import net.osmand.render.RenderingRulesStorage;
 
 public class SkiRoutesCard extends MapBaseCard {
 
@@ -43,6 +40,9 @@ public class SkiRoutesCard extends MapBaseCard {
 	@Override
 	protected void updateContent() {
 		View mapStyleButton = view.findViewById(R.id.map_style_button);
+		int profileColor = appMode.getProfileColor(nightMode);
+		Drawable background = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
+		AndroidUtils.setBackground(mapStyleButton, background);
 
 		TextView mapStyleTitle = mapStyleButton.findViewById(R.id.title);
 		mapStyleTitle.setText(R.string.map_widget_renderer);
@@ -51,7 +51,7 @@ public class SkiRoutesCard extends MapBaseCard {
 		mapStyleDescription.setText(ConfigureMapUtils.getRenderDescr(app));
 
 		ImageView mapStyleIcon = mapStyleButton.findViewById(R.id.icon);
-		mapStyleIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_map_style, settings.getApplicationMode().getProfileColor(nightMode)));
+		mapStyleIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_map_style, profileColor));
 
 		mapStyleButton.setOnClickListener(v -> {
 			SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager());
@@ -60,16 +60,18 @@ public class SkiRoutesCard extends MapBaseCard {
 		mapStyleButton.findViewById(R.id.divider).setVisibility(View.GONE);
 		mapStyleButton.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 
-		View switchBanner = view.findViewById(R.id.switch_banner);
-		if (!hideSwitchBanner) {
-			AndroidUiHelper.updateVisibility(switchBanner, true);
-			setupSwitchBanner();
-		} else {
-			AndroidUiHelper.updateVisibility(switchBanner, false);
-		}
+		setupSwitchBanner();
 	}
 
 	private void setupSwitchBanner() {
+		View switchBanner = view.findViewById(R.id.switch_banner);
+
+		boolean showBanner = !hideSwitchBanner && !app.getSettings().RENDERER.get().equals(RendererRegistry.WINTER_SKI_RENDER);
+		AndroidUiHelper.updateVisibility(switchBanner, showBanner);
+		if (!showBanner) {
+			return;
+		}
+
 		LinearLayout bottomButtons = view.findViewById(R.id.buttons_container);
 		bottomButtons.setPadding(0, 0, 0, 0);
 
@@ -93,25 +95,13 @@ public class SkiRoutesCard extends MapBaseCard {
 			updateContent();
 		});
 		AndroidUiHelper.updateVisibility(laterButton, true);
+
+		ImageView bannerIcon = view.findViewById(R.id.banner_icon);
+		Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_skiing, ColorUtilities.getDefaultIconColor(mapActivity, nightMode));
+		bannerIcon.setImageDrawable(icon);
 	}
 
 	private void switchToWinterSkiStyle() {
-		OsmandApplication app = getMyApplication();
-		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(WINTER_SKI_RENDER);
-		if (loaded != null) {
-			OsmandMapTileView view = mapActivity.getMapView();
-			OsmandSettings settings = view.getSettings();
-			settings.RENDERER.set(WINTER_SKI_RENDER);
-			CommonPreference<Boolean> pisteRoutesPref = settings.getCustomRenderBooleanProperty(SKI.getRenderingPropertyAttr());
-			if (pisteRoutesPref.get()) {
-				pisteRoutesPref.set(settings.RENDERER.get().equals(WINTER_SKI_RENDER));
-			}
-			app.getRendererRegistry().setCurrentSelectedRender(loaded);
-			mapActivity.refreshMapComplete();
-			DashboardOnMap dashboard = mapActivity.getDashboard();
-			dashboard.refreshContent(false);
-		} else {
-			app.showShortToastMessage(R.string.renderer_load_exception);
-		}
+		SelectMapStyleBottomSheetDialogFragment.setStyle(mapActivity, WINTER_SKI_RENDER);
 	}
 }

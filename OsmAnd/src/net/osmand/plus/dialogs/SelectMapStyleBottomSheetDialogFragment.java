@@ -140,7 +140,13 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (mapActivity == null) {
 			return;
 		}
-		OsmandApplication app = getMyApplication();
+
+		setStyle(mapActivity, selectedStyle);
+		dismiss();
+	}
+
+	public static void setStyle(@NonNull MapActivity mapActivity, @NonNull String selectedStyle) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(selectedStyle);
 		if (loaded != null) {
 			OsmandMapTileView view = mapActivity.getMapView();
@@ -157,7 +163,6 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		} else {
 			app.showShortToastMessage(R.string.renderer_load_exception);
 		}
-		dismiss();
 	}
 
 	@Override
