@@ -45,6 +45,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
 import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter;
 import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter.NotesAdapterListener;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -93,7 +94,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 		setHasOptionsMenu(true);
 
 		OsmandApplication app = getMyApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		View view = inflater.inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		ViewStub emptyStub = view.findViewById(R.id.empty_view_stub);
@@ -112,7 +113,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		OsmandApplication app = getMyApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		getListView().setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 

@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -271,7 +272,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FavouritePoint favorite = getFavorite();
 		if (activity != null && favorite != null) {
 			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setMessage(getString(R.string.favourites_remove_dialog_msg, favorite.getName()));
 			builder.setNegativeButton(R.string.shared_string_no, null);

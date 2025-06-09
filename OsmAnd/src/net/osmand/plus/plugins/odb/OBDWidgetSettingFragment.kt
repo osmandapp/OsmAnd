@@ -13,6 +13,7 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.preferences.OsmandPreference
+import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
@@ -158,7 +159,7 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 	}
 
 	private fun showSeekbarSettingsDialog() {
-		val nightMode = !app.settings.isLightContentForMode(appMode)
+		val nightMode = app.daynightHelper.isNightMode(appMode, ThemeUsageContext.APP)
 		seekBarIntervalMillis = selectedIntervalMillis
 		val themedContext = UiUtilities.getThemedContext(requireContext(), nightMode)
 		val builder = AlertDialog.Builder(themedContext)

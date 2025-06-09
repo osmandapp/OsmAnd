@@ -61,6 +61,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.UpdateRendererAsyncTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -1319,7 +1320,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	// this method could be called in non UI thread
 	public void refreshMap(boolean updateVectorRendering) {
 		if (view != null && view.isShown()) {
-			boolean nightMode = app.getDaynightHelper().isNightMode();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 			Boolean currentNightMode = this.nightMode;
 			boolean forceUpdateVectorDrawing = currentNightMode != null && currentNightMode != nightMode;
 			if (forceUpdateVectorDrawing) {

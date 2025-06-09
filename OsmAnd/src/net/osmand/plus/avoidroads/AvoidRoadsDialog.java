@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -36,7 +37,7 @@ public class AvoidRoadsDialog {
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			OsmandApplication app = activity.getMyApplication();
 			AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setTitle(R.string.impassable_road);

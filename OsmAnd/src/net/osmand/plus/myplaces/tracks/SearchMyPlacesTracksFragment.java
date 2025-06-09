@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
@@ -233,7 +233,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
 				SearchMyPlacesTracksFragment currentFragment = SearchMyPlacesTracksFragment.this;
 				foldersHelper.showItemsOptionsMenu(actionButton, null, trackItems, new HashSet<>(),
-						currentFragment, currentFragment, app.getDaynightHelper().isNightMode(false));
+						currentFragment, currentFragment, app.getDaynightHelper().isNightMode(ThemeUsageContext.APP));
 			}
 		});
 

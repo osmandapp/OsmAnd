@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -40,7 +41,7 @@ public class SaveExtraValidationDialogFragment extends DialogFragment {
 
 	private boolean isNightMode() {
 		OsmandApplication app = ((OsmandApplication) requireActivity().getApplication());
-		return app.getDaynightHelper().isNightMode(false);
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 	}
 
 	private String getMessageToShow() {

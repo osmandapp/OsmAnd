@@ -26,6 +26,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
@@ -229,7 +230,7 @@ public class GpsFilterHelper {
 				this.selectedMinValue = getMinValue();
 			}
 
-			nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 			blackTextSpan = new ForegroundColorSpan(ColorUtilities.getPrimaryTextColor(app, nightMode));
 			greyTextSpan = new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode));

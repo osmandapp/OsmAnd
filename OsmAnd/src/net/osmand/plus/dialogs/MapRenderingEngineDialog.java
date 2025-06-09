@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -35,7 +36,7 @@ public class MapRenderingEngineDialog {
 	}
 
 	private AlertDialog createDialog(@Nullable OnRenderChangeListener renderChangeListener) {
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		Context themedContext = UiUtilities.getThemedContext(fragmentActivity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		View alertDialogView = LayoutInflater.from(themedContext).inflate(R.layout.alert_dialog_message_with_choice_list, null, false);

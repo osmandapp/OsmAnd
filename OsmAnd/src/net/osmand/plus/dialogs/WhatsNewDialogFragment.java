@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 
 import java.lang.reflect.Field;
@@ -66,7 +67,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		if (mapActivity != null) {
 			OsmandApplication app = requireMyApplication();
 			Uri uri = Uri.parse(app.getString(R.string.docs_latest_version));
-			boolean nightMode = !app.getSettings().isLightContent();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			AndroidUtils.openUrl(mapActivity, uri, nightMode);
 		}
 	}

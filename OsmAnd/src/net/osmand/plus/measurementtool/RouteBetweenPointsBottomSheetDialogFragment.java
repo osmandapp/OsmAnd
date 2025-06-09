@@ -26,6 +26,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -84,7 +85,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 			dialogType = (RouteBetweenPointsDialogType) savedInstanceState.get(DIALOG_TYPE_KEY);
 			defaultDialogMode = (RouteBetweenPointsDialogMode) savedInstanceState.get(DEFAULT_DIALOG_MODE_KEY);
 		}
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		View mainView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.fragment_route_between_points_bottom_sheet_dialog,
 						null, false);

@@ -15,6 +15,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
@@ -33,33 +34,27 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		nightMode = !getMyApplication().getSettings().isLightContent();
+		nightMode = requiredMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		View view = inflater.inflate(R.layout.fragment_wikivoyage_show_images_first_time, container, false);
 		TextView buttonNo = view.findViewById(R.id.button_no);
 		buttonNo.setText(R.string.shared_string_only_with_wifi);
-		buttonNo.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.WIFI);
-				}
-				sendResult();
-				dismiss();
+		buttonNo.setOnClickListener(v -> {
+			OsmandApplication app = getMyApplication();
+			if (app != null) {
+				app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.WIFI);
 			}
+			sendResult();
+			dismiss();
 		});
 		TextView buttonDownload = view.findViewById(R.id.button_download);
 		buttonDownload.setText(R.string.shared_string_always);
-		buttonDownload.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.ON);
-				}
-				sendResult();
-				dismiss();
+		buttonDownload.setOnClickListener(v -> {
+			OsmandApplication app = getMyApplication();
+			if (app != null) {
+				app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.ON);
 			}
+			sendResult();
+			dismiss();
 		});
 		setupHeightAndBackground(view);
 		return view;

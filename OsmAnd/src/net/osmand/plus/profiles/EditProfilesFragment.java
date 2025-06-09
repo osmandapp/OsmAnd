@@ -31,6 +31,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -315,7 +316,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 			setHasStableIds(true);
 			this.app = app;
 			uiUtilities = app.getUIUtilities();
-			nightMode = !app.getSettings().isLightContent();
+			nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		}
 
 		public void setItems(List<Object> items) {

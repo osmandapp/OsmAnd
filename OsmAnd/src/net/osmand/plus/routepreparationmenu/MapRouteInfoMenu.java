@@ -55,6 +55,7 @@ import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParamete
 import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.shared.gpx.GpxFile;
@@ -553,7 +554,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		mainView = main;
 		OsmandApplication app = mapActivity.getMyApplication();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		updateStartPointView();
 		updateViaView();
@@ -583,7 +584,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 
 		OsmandApplication app = mapActivity.getMyApplication();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -602,7 +603,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		} else if (isTransportRouteCalculated()) {
 			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 			List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
-			if (routes != null && routes.size() > 0) {
+			if (routes != null && !routes.isEmpty()) {
 				TransportRouteResult route = routes.get(0);
 				int walkTimeReal = transportRoutingHelper.getWalkingTime(route.getSegments());
 				int walkTimePT = (int) route.getWalkTime();

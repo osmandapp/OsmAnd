@@ -21,6 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -134,7 +135,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	public static void setupButton(@NonNull View view, int iconId, @NonNull String title, boolean enabled,
 	                               boolean showDivider, @Nullable OnClickListener listener) {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		int activeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		ImageView ivIcon = view.findViewById(R.id.icon);

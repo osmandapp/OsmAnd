@@ -36,6 +36,7 @@ import net.osmand.plus.backup.ui.status.ItemViewHolder;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -56,7 +57,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 	}
 
 	@Nullable

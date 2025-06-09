@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -20,6 +19,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -179,7 +179,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 				List<Map.Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
-				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+				boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 				AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 

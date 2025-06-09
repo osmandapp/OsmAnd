@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -31,6 +30,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -660,7 +660,7 @@ public class MapRenderRepositories {
 		}
 		try {
 			// find selected rendering type
-			boolean nightMode = app.getDaynightHelper().isNightMode();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();

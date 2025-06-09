@@ -37,6 +37,7 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
@@ -156,7 +157,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				MapActivity activity = app.getOsmandMap().getMapView().getMapActivity();
 				if (activity != null) {
-					AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), app.getDaynightHelper().isNightMode());
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+					AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), nightMode);
 				}
 			}
 		});

@@ -51,6 +51,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
@@ -620,7 +621,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		private void bindFavoritePoint(ItemViewHolder favoriteViewHolder, FavouritePoint point) {
 			OsmandApplication app = getApp();
-			boolean nightMode = !app.getSettings().isLightContent();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
 			favoriteViewHolder.title.setText(point.getDisplayName(app));
 			if (point.getSpecialPointType() != null) {
