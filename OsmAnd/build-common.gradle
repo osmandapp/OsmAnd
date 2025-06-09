@@ -179,28 +179,6 @@ tasks.register('downloadWorldMiniBasemap', Download) {
 	onlyIfModified true
 }
 
-tasks.register('downloadTestAssets') {
-	dependsOn(doanloadTestAssetWorldBasemapMini, unzipTestAssetUkraineKyivCityEurope)
-}
-
-tasks.register('doanloadTestAssetWorldBasemapMini', Download) {
-	src 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf'
-	dest 'test/assets/World_basemap_mini.obf'
-	onlyIfModified true
-}
-
-tasks.register('doanloadTestAssetUkraineKyivCityEurope', Download) {
-	src 'https://download.osmand.net/download?event=2&osmandver=OsmAnd%2B+5.1.0&file=Ukraine_kyiv-city_europe_2.obf.zip'
-	dest 'test/assets/Ukraine_kyiv-city_europe_2.obf.zip'
-	onlyIfModified true
-}
-
-tasks.register('unzipTestAssetUkraineKyivCityEurope', Copy) {
-	dependsOn doanloadTestAssetUkraineKyivCityEurope
-	from zipTree('test/assets/Ukraine_kyiv-city_europe_2.obf.zip')
-	into 'test/assets'
-}
-
 tasks.register('downloadWorldMiniBasemapAnt') {
 	doLast {
 		ant.get(src: 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
@@ -290,7 +268,6 @@ tasks.register('copyLargePOIIcons', Sync) {
 }
 
 tasks.register('collectTestResources', Copy) {
-	dependsOn(downloadTestAssets)
 	into "test/assets/"
 	from("../../resources/test-resources/ui/") {
 		include "*"
