@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 
 public class DayNightModeAction extends QuickAction {
 
@@ -30,7 +31,7 @@ public class DayNightModeAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		if (mapActivity.getMyApplication().getDaynightHelper().isNightMode()) {
+		if (mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP)) {
 			mapActivity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.DAY);
 		} else {
 			mapActivity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.NIGHT);
@@ -49,13 +50,13 @@ public class DayNightModeAction extends QuickAction {
 	@Override
 	public int getIconRes(Context context) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		boolean nightMode = app.getDaynightHelper().isNightMode();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		return nightMode ? R.drawable.ic_action_map_day : R.drawable.ic_action_map_night;
 	}
 
 	@Override
 	public String getActionText(@NonNull OsmandApplication app) {
-		if (app.getDaynightHelper().isNightMode()) {
+		if (app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP)) {
 			return String.format(app.getString(R.string.quick_action_day_night_mode),
 				DayNightMode.DAY.toHumanString(app));
 		} else {

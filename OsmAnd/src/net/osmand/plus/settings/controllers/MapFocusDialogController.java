@@ -21,6 +21,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.enums.MapFocus;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -50,7 +51,7 @@ public class MapFocusDialogController extends BaseDialogController
 		int dividerStartPadding = app.getResources()
 				.getDimensionPixelSize(R.dimen.bottom_sheet_divider_margin_start);
 		UiUtilities iconsCache = app.getUIUtilities();
-		boolean nightMode = !settings.isLightContentForMode(appMode);
+		boolean nightMode = app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.APP);
 		int profileColor = appMode.getProfileColor(nightMode);
 		int profileColorAlpha = ColorUtilities.getColorWithAlpha(profileColor, 0.3f);
 

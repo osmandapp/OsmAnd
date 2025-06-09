@@ -21,6 +21,7 @@ import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.helpers.LocaleHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.render.RenderingIcons
+import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.PicassoUtils
@@ -64,7 +65,7 @@ class NearbyPlacesAdapter(
 	}
 
 	private fun isNightMode(): Boolean {
-		return !getApp().getSettings().isLightContent
+		return getApp().daynightHelper.isNightMode(ThemeUsageContext.APP)
 	}
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
@@ -120,7 +121,7 @@ class NearbyPlacesAdapter(
 			val poiIcon =
 				if (subType == null) null else RenderingIcons.getBigIcon(app, subType.keyName)
 			val uiUtilities = app.uiUtilities
-			val nightMode = app.daynightHelper.isNightMode
+			val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
 			val coloredIcon = if (poiIcon != null) {
 				uiUtilities.getRenderingIcon(
 					app,

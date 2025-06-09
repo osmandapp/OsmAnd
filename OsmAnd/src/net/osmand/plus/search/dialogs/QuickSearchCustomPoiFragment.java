@@ -45,6 +45,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -103,7 +104,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		app = (OsmandApplication) requireActivity().getApplication();
 		uiUtilities = app.getUIUtilities();
 		searchUICore = app.getSearchUICore().getCore();
-		this.nightMode = !app.getSettings().isLightContent();
+		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		poiCategoryList = app.getPoiTypes().getCategories(false);
 		Collections.sort(poiCategoryList, (category1, category2) ->
@@ -115,7 +116,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	                         @Nullable Bundle savedInstanceState) {
 		LayoutInflater layoutInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		helper = app.getPoiFilters();
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		if (getArguments() != null) {
 			filterId = getArguments().getString(QUICK_SEARCH_CUSTOM_POI_FILTER_ID_KEY);
 		} else if (savedInstanceState != null) {

@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.EnumWithTitleId;
@@ -183,7 +184,7 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode();
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 	}
 
 	@DrawableRes

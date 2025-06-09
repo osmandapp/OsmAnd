@@ -38,6 +38,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.ColorUtilities;
@@ -483,7 +484,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	}
 
 	public static boolean isNightMode(@NonNull OsmandApplication app, boolean usedOnMap) {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	@Override

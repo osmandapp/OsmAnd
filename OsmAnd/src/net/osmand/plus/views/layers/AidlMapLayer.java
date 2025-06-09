@@ -29,6 +29,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -117,7 +118,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		super.initLayer(view);
 
 		Resources res = view.getResources();
-		boolean night = getApplication().getDaynightHelper().isNightMode();
+		boolean nightMode = getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 
 		pointInnerCircle = new Paint();
 		pointInnerCircle.setColor(getColor(R.color.poi_background));
@@ -134,8 +135,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		bitmapPaint.setDither(true);
 		bitmapPaint.setFilterBitmap(true);
 
-		nightMode = night;
-		recreateBitmaps(night);
+		this.nightMode = nightMode;
+		recreateBitmaps(nightMode);
 
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}

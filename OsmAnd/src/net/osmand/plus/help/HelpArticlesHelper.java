@@ -11,7 +11,6 @@ import static net.osmand.plus.help.HelpArticleUtils.getUrlItemClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -21,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.help.LoadArticlesTask.LoadArticlesListener;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -197,7 +197,7 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 
 	private void createAboutCategory(@NonNull List<ContextMenuItem> items) {
 		items.add(createCategory(app.getString(R.string.about_osmand)));
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
 		items.add(createMenuItem(app.getString(R.string.about_osmand), null, R.drawable.ic_action_osmand_logo,
 				getArticleItemClickListener(activity, app.getString(R.string.about_osmand), app.getString(R.string.osmand_about)))

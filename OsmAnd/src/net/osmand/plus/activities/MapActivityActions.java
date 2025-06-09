@@ -12,7 +12,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -56,6 +55,7 @@ import net.osmand.plus.profiles.data.RoutingProfilesHolder;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -245,7 +245,8 @@ public class MapActivityActions extends MapActions {
 
 	public ContextMenuItemClickListener getContextMenuItemClickListener(MapActivity activity, double latitude,
 			double longitude, ContextMenuAdapter adapter) {
-		ViewCreator viewCreator = new ViewCreator(activity, !settings.isLightContent());
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		ViewCreator viewCreator = new ViewCreator(activity, nightMode);
 		ContextMenuListAdapter listAdapter = adapter.toListAdapter(activity, viewCreator);
 
 		return (view, position) -> {
@@ -344,7 +345,7 @@ public class MapActivityActions extends MapActions {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			if (drawerMode == DRAWER_MODE_SWITCH_PROFILE) {
 				return createSwitchProfileOptionsMenu(activity, adapter, nightMode);
 			}
@@ -358,7 +359,7 @@ public class MapActivityActions extends MapActions {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			return createNormalOptionsMenu(activity, adapter, nightMode);
 		}
 		return adapter;
@@ -760,7 +761,7 @@ public class MapActivityActions extends MapActions {
 		if (activity == null) {
 			return;
 		}
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		ListView menuItemsListView = activity.findViewById(R.id.menuItems);
 		menuItemsListView.setBackgroundColor(ColorUtilities.getListBgColor(activity, nightMode));
 		if (drawerLogoHeader != null) {

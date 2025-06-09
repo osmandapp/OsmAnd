@@ -34,6 +34,7 @@ import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -618,7 +619,8 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (activity == null || app == null) {
 			return false;
 		}
-		return app.getDaynightHelper().isNightMode(activity instanceof MapActivity);
+		boolean usedOnMap = activity instanceof MapActivity;
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	@Override

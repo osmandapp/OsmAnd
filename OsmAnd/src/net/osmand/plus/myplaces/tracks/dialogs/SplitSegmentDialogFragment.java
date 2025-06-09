@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -299,7 +300,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		TextView title = view.findViewById(R.id.split_interval_title);
 		TextView text = view.findViewById(R.id.split_interval_text);
 		ImageView img = view.findViewById(R.id.split_interval_arrow);
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int colorId;
 		List<GpxDisplayGroup> groups = getDisplayGroups();
 		if (!groups.isEmpty()) {

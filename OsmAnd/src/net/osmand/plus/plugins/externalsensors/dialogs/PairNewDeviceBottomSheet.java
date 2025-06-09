@@ -15,6 +15,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
@@ -66,7 +67,7 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 				.setOnClickListener(v -> {
 					dismiss();
 					FragmentActivity activity = getActivity();
-					boolean nightMode = getMyApplication().getDaynightHelper().isNightMode(false);
+					boolean nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 					AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
 				})
 				.create();

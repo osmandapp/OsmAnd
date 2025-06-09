@@ -27,6 +27,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -295,6 +296,6 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 	}
 
 	private boolean isNightMode() {
-		return mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		return mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 }

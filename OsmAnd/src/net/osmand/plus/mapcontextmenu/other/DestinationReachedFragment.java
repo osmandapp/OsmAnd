@@ -30,6 +30,7 @@ import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -56,7 +57,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 		app = mapActivity.getMyApplication();
 		iconsCache = app.getUIUtilities();
 		ctxMenu = mapActivity.getContextMenu();
-		nighMode = app.getDaynightHelper().isNightModeForMapControls();
+		nighMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		isLandscapeLayout = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		app.getRoutingHelper().addCalculationProgressListener(this);
 		if (savedInstanceState != null) {
