@@ -23,7 +23,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.OnMarkerSelectListener;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
+import net.osmand.plus.routepreparationmenu.data.PointType;
 
 import java.util.List;
 

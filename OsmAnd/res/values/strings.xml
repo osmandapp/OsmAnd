@@ -17,6 +17,11 @@
     <string name="shared_string_split_by">Split by</string>
     <string name="shared_string_flat">Flat</string>
     <string name="uphill_downhill_split">Uphill / Downhill</string>
+    <string name="set_parking_position">Set parking position</string>
+    <string name="set_work">Set work</string>
+    <string name="set_home">Set home</string>
+    <string name="set_intermediate_point">Set intermediate point</string>
+    <string name="set_start_point">Set start point</string>
     <string name="read_on">Read on %1$s</string>
     <string name="unit_of_temperature_description">Selected units will be applied to all temperature related data in the current profile.</string>
     <string name="deactivated_map">Deactivated map</string>
