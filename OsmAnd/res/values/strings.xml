@@ -14,8 +14,6 @@
     <string name="battery">battery</string>
     <string name="sensor_data">Sensor data</string>
     <string name="battery_level">Battery level</string>
-    <string name="sensor_show_source_data">Sensor data, show main data from sensor</string>
-    <string name="sensor_show_source_battery">Battery level, show sensor batter level as main value</string>
     <string name="shared_string_flat">Flat</string>
     <string name="uphill_downhill_split">Uphill / Downhill</string>
     <string name="read_on">Read on %1$s</string>

@@ -18,7 +18,7 @@ public class ExternalSensorWidgetState extends WidgetState {
 	private final OsmandPreference<ExternalDeviceShowMode> showModePreference;
 
 
-	public ExternalSensorWidgetState(@NonNull OsmandApplication app, @Nullable String customId, SensorWidgetDataFieldType widgetType) {
+	public ExternalSensorWidgetState(@NonNull OsmandApplication app, @Nullable String customId, @NonNull SensorWidgetDataFieldType widgetType) {
 		super(app);
 		this.widgetType = widgetType;
 		this.showModePreference = registerShowModePreference(customId);
@@ -43,11 +43,7 @@ public class ExternalSensorWidgetState extends WidgetState {
 	@Override
 	public void changeToNextState() {
 		ExternalDeviceShowMode currentMode = showModePreference.get();
-		if (currentMode.ordinal() == ExternalDeviceShowMode.values().length - 1) {
-			showModePreference.set(ExternalDeviceShowMode.values()[0]);
-		} else {
-			showModePreference.set(ExternalDeviceShowMode.values()[currentMode.ordinal() + 1]);
-		}
+		showModePreference.set(currentMode.next());
 	}
 
 	@Override

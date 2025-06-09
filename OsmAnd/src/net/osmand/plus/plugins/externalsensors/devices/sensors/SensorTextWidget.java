@@ -59,15 +59,20 @@ public class SensorTextWidget extends SimpleWidget {
 
 	@Override
 	public void setImageDrawable(int res) {
+		if (isDeviceConnected()) {
+			super.setImageDrawable(res);
+		} else {
+			setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
+			setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
+		}
+	}
+
+	private boolean isDeviceConnected() {
 		AbstractDevice<?> currentDevice = null;
 		if (sensor != null) {
 			currentDevice = this.sensor.getDevice();
 		}
-		if (currentDevice != null && currentDevice.isConnected()) {
-			super.setImageDrawable(res);
-		} else {
-			setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
-		}
+		return currentDevice != null && currentDevice.isConnected();
 	}
 
 	private void applyDeviceId() {
@@ -107,7 +112,6 @@ public class SensorTextWidget extends SimpleWidget {
 			forceUpdate = true;
 			widgetState.changeToNextState();
 			updateInfo(null);
-			mapActivity.refreshMap();
 			setImageDrawable(getIconId());
 			updateWidgetName();
 		};
@@ -143,11 +147,7 @@ public class SensorTextWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
-		AbstractDevice<?> currentDevice = null;
-		if (sensor != null) {
-			currentDevice = this.sensor.getDevice();
-		}
-		if (sensor != null && currentDevice.isConnected() && !Algorithms.isEmpty(sensor.getLastSensorDataList())) {
+		if (isDeviceConnected() && (sensor != null && !Algorithms.isEmpty(sensor.getLastSensorDataList()))) {
 			if (isShowSensorData()) {
 				List<SensorData> dataList = sensor.getLastSensorDataList();
 				SensorWidgetDataField field = null;
@@ -178,6 +178,10 @@ public class SensorTextWidget extends SimpleWidget {
 			}
 		} else {
 			setText(NO_VALUE, null);
+		}
+		AbstractDevice<?> currentDevice = null;
+		if (sensor != null) {
+			currentDevice = this.sensor.getDevice();
 		}
 		if (plugin.isAnyConnectedDeviceId(externalDeviceId) &&
 				(currentDevice == null || (!currentDevice.isConnected() && !currentDevice.isConnecting()))) {
