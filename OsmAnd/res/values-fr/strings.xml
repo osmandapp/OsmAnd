@@ -716,7 +716,7 @@
     <string name="osmand_parking_position_name">Lieu de stationnement</string>
     <string name="osmand_parking_plugin_description">Mémorisez la position de votre véhicule et soyez alertés avant la fin de durée du stationnement. Pour placer le marqueur, sélectionnez un point sur la carte, allez dans « Actions » et sélectionnez « Stationnement ».</string>
     <string name="osmand_parking_plugin_name">Stationnement</string>
-    <string name="context_menu_item_add_parking_point">Emplacement de stationnement</string>
+    <string name="context_menu_item_add_parking_point">Parking</string>
     <string name="context_menu_item_delete_parking_point">Supprimer l\'emplacement de stationnement</string>
     <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
     <string name="shared_location">Lieu partagé</string>
@@ -1078,7 +1078,7 @@
     <string name="index_item_world_seamarks">Monde - Balisage maritime</string>
     <string name="index_item_world_bitcoin_payments">Monde - Paiement en bitcoin</string>
     <string name="index_item_world_basemap">Monde - Carte générale</string>
-    <string name="index_item_world_ski">Monde - Carte de ski</string>
+    <string name="index_item_world_ski">Carte de ski mondiale</string>
     <string name="lang_hr">Croate</string>
     <string name="lang_zh">Chinois</string>
     <string name="lang_pt_br">Portugais (Brésil)</string>
