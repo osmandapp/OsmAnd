@@ -4132,7 +4132,7 @@
     <string name="save_track_to_gpx_descrp">Enregistrer automatiquement la trace pendant la navigation et la sauvegarder à la fin.</string>
     <string name="gpx_no_routes_title">Il n\'y a aucun itinéraire</string>
     <string name="gpx_no_routes_descr">Vous pouvez utiliser l’outil « %1$s » pour enregistrer l\'itinéraire dans un fichier.</string>
-    <string name="quick_action_add_route_descr">Bouton pour démarrer un itinéraire à partir du milieu de l\'écran.</string>
+    <string name="quick_action_add_route_descr">Bouton pour démarrer un itinéraire en partant du milieu de l\'écran.</string>
     <string name="please_provide_group_name_message">Veuillez saisir le nom du groupe.</string>
     <string name="selected_waypoints_descr">Les points sélectionnés seront ajoutés à la trace « %1$s »</string>
     <string name="shared_string_reading_file">Lecture du fichier…</string>
