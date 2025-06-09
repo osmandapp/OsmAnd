@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
 	android:orientation="vertical">
 
 	<include
@@ -12,11 +13,9 @@
 		android:id="@+id/switch_banner"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/bg_color"
 		android:orientation="vertical">
 
 		<include
-			android:id="@+id/map_style_button"
 			layout="@layout/divider" />
 
 		<LinearLayout
@@ -28,11 +27,11 @@
 			android:orientation="horizontal">
 
 			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/icon"
+				android:id="@+id/banner_icon"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="top|center_horizontal"
-				android:src="@drawable/ic_action_info_dark" />
+				android:src="@drawable/ic_action_skiing" />
 
 			<LinearLayout
 				android:layout_width="match_parent"

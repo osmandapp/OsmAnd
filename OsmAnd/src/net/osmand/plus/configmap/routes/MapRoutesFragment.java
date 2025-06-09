@@ -106,6 +106,14 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.header_divider), !enabled);
 	}
 
+	public void updateContent() {
+		View view = getView();
+		if (view != null) {
+			setupHeader(view);
+			setupContent(view);
+		}
+	}
+
 	protected void setupContent(@NonNull View view) {
 		createCards(view);
 		inflateCards(view);

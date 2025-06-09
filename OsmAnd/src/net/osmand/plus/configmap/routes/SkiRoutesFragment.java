@@ -11,6 +11,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class SkiRoutesFragment extends MapRoutesFragment {
+	private SkiRoutesCard skiRoutesCard;
+
 	@Override
 	protected boolean isEnabled() {
 		return routeLayersHelper.isSkiRoutesEnabled();
@@ -19,6 +21,7 @@ public class SkiRoutesFragment extends MapRoutesFragment {
 	@Override
 	protected void toggleMainPreference(@NonNull View view) {
 		routeLayersHelper.toggleSkiRoutes();
+		skiRoutesCard.updateContent();
 	}
 
 	protected void setupHeader(@NonNull View view) {
@@ -45,7 +48,8 @@ public class SkiRoutesFragment extends MapRoutesFragment {
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			addCard(new SkiRoutesCard(mapActivity));
+			skiRoutesCard = new SkiRoutesCard(mapActivity);
+			addCard(skiRoutesCard);
 		}
 	}
 }
