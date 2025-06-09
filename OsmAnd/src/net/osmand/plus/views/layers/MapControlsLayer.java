@@ -181,6 +181,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		addCustomMapButton(mapButton, true, false, false, true);
 	}
 
+	public void addCustomizedDefaultMapButtons(@NonNull List<MapButton> mapButtons) {
+		for (MapButton mapButton : mapButtons) {
+			addCustomizedDefaultMapButton(mapButton);
+		}
+	}
+
 	public void addCustomizedDefaultMapButton(@NonNull MapButton mapButton) {
 		addCustomMapButton(mapButton, true, false, false, false);
 	}
@@ -192,14 +198,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return buttons;
 	}
 
-	public void removeCustomMapButtons(@NonNull MapButton ... mapButtons) {
-		List<MapButton> list = new ArrayList<>();
-		for (MapButton mapButton : mapButtons) {
-			if (mapButton != null) {
-				list.add(mapButton);
-			}
-		}
-		customMapButtons = CollectionUtils.removeAllFromList(customMapButtons, list);
+	public void removeCustomMapButtons(@NonNull List<MapButton> mapButtons) {
+		customMapButtons = CollectionUtils.removeAllFromList(customMapButtons, mapButtons);
 	}
 
 	public void showMapControlsIfHidden() {

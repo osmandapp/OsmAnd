@@ -98,6 +98,7 @@ import net.osmand.render.RenderingClass;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -942,7 +943,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void hide(boolean animation) {
 		if (compassButton != null) {
-			mapActivity.getMapLayers().getMapControlsLayer().removeCustomMapButtons(compassButton);
+			mapActivity.getMapLayers().getMapControlsLayer().removeCustomMapButtons(Collections.singletonList(compassButton));
 			compassButton = null;
 		}
 		if (!animation) {

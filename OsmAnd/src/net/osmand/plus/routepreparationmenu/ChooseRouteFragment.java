@@ -112,9 +112,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private View solidToolbarView;
 	@Nullable
 	private View zoomButtonsView;
-	private MapButton zoomInButton;
-	private MapButton zoomOutButton;
-	private MapButton myLocationButton;
+	private List<MapButton> mapButtons = new ArrayList<>();
 	@Nullable
 	private ViewGroup pagesView;
 
@@ -285,7 +283,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-			mapControlsLayer.removeCustomMapButtons(zoomInButton, zoomOutButton, myLocationButton);
+			mapControlsLayer.removeCustomMapButtons(mapButtons);
 		}
 	}
 
@@ -397,14 +395,13 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		View zoomButtonsView = view.findViewById(R.id.map_hud_controls);
 		this.zoomButtonsView = zoomButtonsView;
 
-		zoomInButton = view.findViewById(R.id.map_zoom_in_button);
-		zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
-		myLocationButton = view.findViewById(R.id.map_my_location_button);
+		mapButtons = new ArrayList<>();
+		mapButtons.add(view.findViewById(R.id.map_zoom_in_button));
+		mapButtons.add(view.findViewById(R.id.map_zoom_out_button));
+		mapButtons.add(view.findViewById(R.id.map_my_location_button));
 
 		MapControlsLayer controlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-		controlsLayer.addCustomizedDefaultMapButton(zoomInButton);
-		controlsLayer.addCustomizedDefaultMapButton(zoomOutButton);
-		controlsLayer.addCustomizedDefaultMapButton(myLocationButton);
+		controlsLayer.addCustomizedDefaultMapButtons(mapButtons);
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 	}

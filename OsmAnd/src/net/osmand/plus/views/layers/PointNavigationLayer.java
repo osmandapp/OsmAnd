@@ -314,7 +314,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			} else if (targetPoints.getIntermediatePoints().contains(targetPoint)) {
 				return getIntermediatePointIcon();
 			}
-			setMovableObject(targetPoint.getLatitude(), targetPoint.getLongitude());
 		}
 		return null;
 	}

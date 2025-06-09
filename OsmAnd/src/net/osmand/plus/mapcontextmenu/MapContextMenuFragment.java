@@ -85,6 +85,7 @@ import net.osmand.util.Algorithms;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -1356,9 +1357,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		menu.setMapZoom(0);
 
 		MapActivity activity = getMapActivity();
-		if (activity != null) {
+		if (activity != null && zoomInButton != null && zoomOutButton != null) {
 			MapLayers mapLayers = activity.getMapLayers();
-			mapLayers.getMapControlsLayer().removeCustomMapButtons(zoomInButton, zoomOutButton);
+			List<MapButton> mapButtons = Arrays.asList(zoomInButton, zoomOutButton);
+			mapLayers.getMapControlsLayer().removeCustomMapButtons(mapButtons);
 		}
 	}
 

@@ -23,7 +23,9 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public abstract class ContextMenuScrollFragment extends ContextMenuFragment implements ContextMenuFragmentListener {
 
@@ -38,9 +40,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 
 	@Nullable
 	private RulerWidget rulerWidget;
-	private MapButton zoomInButton;
-	private MapButton zoomOutButton;
-	private MapButton myLocationButton;
+	private List<MapButton> mapButtons = new ArrayList<>();
 
 	public float getMiddleStateKoef() {
 		return 0.5f;
@@ -102,7 +102,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 			MapLayers mapLayers = mapActivity.getMapLayers();
 
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-			mapControlsLayer.removeCustomMapButtons(zoomInButton, zoomOutButton, myLocationButton);
+			mapControlsLayer.removeCustomMapButtons(mapButtons);
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
@@ -121,13 +121,11 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-		zoomInButton = view.findViewById(R.id.map_zoom_in_button);
-		zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
-		myLocationButton = view.findViewById(R.id.map_my_location_button);
-
-		layer.addCustomizedDefaultMapButton(zoomInButton);
-		layer.addCustomizedDefaultMapButton(zoomOutButton);
-		layer.addCustomizedDefaultMapButton(myLocationButton);
+		mapButtons = new ArrayList<>();
+		mapButtons.add(view.findViewById(R.id.map_zoom_in_button));
+		mapButtons.add(view.findViewById(R.id.map_zoom_out_button));
+		mapButtons.add(view.findViewById(R.id.map_my_location_button));
+		layer.addCustomizedDefaultMapButtons(mapButtons);
 
 		setupMapRulerWidget(view, mapLayers);
 	}

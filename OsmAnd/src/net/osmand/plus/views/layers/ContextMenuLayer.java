@@ -39,9 +39,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.dialogs.selectlocation.ILocationSelectionHandler;
-import net.osmand.plus.dialogs.selectlocation.SelectLocationController;
-import net.osmand.plus.dialogs.selectlocation.extractor.CenterMapLatLonExtractor;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -72,7 +69,7 @@ import java.util.Map.Entry;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class ContextMenuLayer extends OsmandMapLayer {
+public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPositionHandler {
 
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
@@ -477,6 +474,18 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 	}
 
+	@Nullable
+	@Override
+	public Object getChangeMarkerPositionObject() {
+		return menu.getObject();
+	}
+
+	@Nullable
+	@Override
+	public IContextMenuProvider getSelectedObjectContextMenuProvider() {
+		return selectedObjectContextMenuProvider;
+	}
+
 	public void applyNewMarkerPosition(@NonNull LatLon latLon) {
 		if (!mInChangeMarkerPositionMode) {
 			throw new IllegalStateException("Not in change marker position mode");
@@ -643,47 +652,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		mInChangeMarkerPositionMode = true;
-		SelectLocationController.showDialog(mapActivity, new CenterMapLatLonExtractor(), new ILocationSelectionHandler<>() {
-			@Nullable
-			@Override
-			public Object getCenterPointIcon(@NonNull MapActivity mapActivity) {
-				Object o = menu.getObject();
-				if (o != null && selectedObjectContextMenuProvider != null
-						&& selectedObjectContextMenuProvider instanceof IMoveObjectProvider l) {
-					return l.getMoveableObjectIcon(o);
-				}
-				return null;
-			}
-
-			@Nullable
-			@Override
-			public String getCenterPointLabel(@NonNull MapActivity mapActivity) {
-				Object o = menu.getObject();
-				if (o != null && selectedObjectContextMenuProvider != null
-						&& selectedObjectContextMenuProvider instanceof IMoveObjectProvider l) {
-					return l.getMoveableObjectLabel(o);
-				}
-				return null;
-			}
-
-			@Override
-			public void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon location) {
-				applyNewMarkerPosition(location);
-			}
-
-			@Override
-			public void onScreenClosed(@NonNull MapActivity mapActivity, boolean selected) {
-				if (!selected) {
-					cancelMovingMarker();
-				}
-			}
-
-			@NonNull
-			@Override
-			public String getDialogTitle(@NonNull MapActivity mapActivity) {
-				return getString(R.string.change_markers_position);
-			}
-		});
+		ChangeMarkerPositionController.showDialog(mapActivity, this);
 
 		view.refreshMap();
 	}
