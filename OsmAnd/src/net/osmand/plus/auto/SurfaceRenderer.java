@@ -107,6 +107,51 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		maxRatio = 1f - (1f - surfaceWidthMultiply) / 2.0f;
 	}
 
+	private void onVisibleAreaChangedCallback(@NonNull Rect visibleArea) {
+		cachedVisibleArea = visibleArea;
+		Log.i(TAG, "Visible area changed " + surface + ". stableArea: "
+				+ stableArea + " visibleArea:" + visibleArea);
+		SurfaceRenderer.this.visibleArea = visibleArea;
+		if (!visibleArea.isEmpty() && mapView != null && surfaceContainer != null) {
+			MapDisplayPositionManager displayPositionManager = getDisplayPositionManager();
+
+			int visibleAreaHeight = visibleArea.height();
+			int containerWidth = surfaceContainer.getWidth();
+			int containerHeight = surfaceContainer.getHeight();
+
+			int centerX = visibleArea.centerX();
+			cachedRatioX = (float) centerX / containerWidth;
+
+			float cameraCenterShiftX = 0.5f;
+			if (offscreenMapRendererView != null) {
+				float dRatio = 0.5f + (1.0f - surfaceWidthMultiply) * (((1.0f - maxRatio) + minRatio) * 0.5f);
+
+				if (cachedRatioX < minRatio) {
+					cameraCenterShiftX = 0.5f - (minRatio - cachedRatioX) * dRatio;
+					cachedRatioX = minRatio;
+				}
+				else if (cachedRatioX > maxRatio) {
+					cameraCenterShiftX = 0.5f + (cachedRatioX - maxRatio) * dRatio;
+					cachedRatioX = maxRatio;
+				}
+			}
+			else {
+				cameraCenterShiftX = cachedRatioX;
+			}
+
+			float ratioY = cachedRatioY;
+			float defaultRatioY = displayPositionManager.getNavigationMapPosition().getRatioY();
+			if (defaultRatioY != cachedDefaultRatioY || (float) containerHeight / visibleAreaHeight > VISIBLE_AREA_Y_MIN_DETECTION_SIZE) {
+				float centerY = (visibleAreaHeight * defaultRatioY) + visibleArea.top;
+				ratioY = centerY / containerHeight;
+				cachedRatioY = ratioY;
+				cachedDefaultRatioY = defaultRatioY;
+			}
+			displayPositionManager.setCustomMapRatio(cameraCenterShiftX, ratioY);
+		}
+		renderFrame();
+	}
+
 	public final SurfaceCallback mSurfaceCallback = new SurfaceCallback() {
 		@Override
 		public void onSurfaceAvailable(@NonNull SurfaceContainer surfaceContainer) {
@@ -121,7 +166,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				setUpSurfaceView(surfaceContainer);
 
 				if (cachedVisibleArea != null) {
-					mSurfaceCallback.onVisibleAreaChanged(cachedVisibleArea);
+					onVisibleAreaChangedCallback(cachedVisibleArea);
 				}
 
 				darkMode = carContext.isDarkMode();
@@ -136,48 +181,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		@Override
 		public void onVisibleAreaChanged(@NonNull Rect visibleArea) {
 			synchronized (SurfaceRenderer.this) {
-				cachedVisibleArea = visibleArea;
-				Log.i(TAG, "Visible area changed " + surface + ". stableArea: "
-						+ stableArea + " visibleArea:" + visibleArea);
-				SurfaceRenderer.this.visibleArea = visibleArea;
-				if (!visibleArea.isEmpty() && mapView != null) {
-					MapDisplayPositionManager displayPositionManager = getDisplayPositionManager();
-
-					int visibleAreaHeight = visibleArea.height();
-					int containerWidth = surfaceContainer.getWidth();
-					int containerHeight = surfaceContainer.getHeight();
-
-					int centerX = visibleArea.centerX();
-					cachedRatioX = (float) centerX / containerWidth;
-
-					float cameraCenterShiftX = 0.5f;
-					if (offscreenMapRendererView != null) {
-						float dRatio = 0.5f + (1.0f - surfaceWidthMultiply) * (((1.0f - maxRatio) + minRatio) * 0.5f);
-
-						if (cachedRatioX < minRatio) {
-							cameraCenterShiftX = 0.5f - (minRatio - cachedRatioX) * dRatio;
-							cachedRatioX = minRatio;
-						}
-						else if (cachedRatioX > maxRatio) {
-							cameraCenterShiftX = 0.5f + (cachedRatioX - maxRatio) * dRatio;
-							cachedRatioX = maxRatio;
-						}
-					}
-					else {
-						cameraCenterShiftX = cachedRatioX;
-					}
-
-					float ratioY = cachedRatioY;
-					float defaultRatioY = displayPositionManager.getNavigationMapPosition().getRatioY();
-					if (defaultRatioY != cachedDefaultRatioY || (float) containerHeight / visibleAreaHeight > VISIBLE_AREA_Y_MIN_DETECTION_SIZE) {
-						float centerY = (visibleAreaHeight * defaultRatioY) + visibleArea.top;
-						ratioY = centerY / containerHeight;
-						cachedRatioY = ratioY;
-						cachedDefaultRatioY = defaultRatioY;
-					}
-					displayPositionManager.setCustomMapRatio(cameraCenterShiftX, ratioY);
-				}
-				renderFrame();
+				onVisibleAreaChangedCallback(visibleArea);
 			}
 		}
 
@@ -421,7 +425,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							mapView.getAnimatedDraggingThread().toggleAnimations();
 
 							if (cachedVisibleArea != null) {
-								mSurfaceCallback.onVisibleAreaChanged(cachedVisibleArea);
+								onVisibleAreaChangedCallback(cachedVisibleArea);
 							}
 						}
 					}
