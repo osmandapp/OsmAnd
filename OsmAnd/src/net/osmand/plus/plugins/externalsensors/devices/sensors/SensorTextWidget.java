@@ -52,9 +52,6 @@ public class SensorTextWidget extends SimpleWidget {
 		setImageDrawable(getIconId());
 		setOnClickListener(getOnClickListener());
 		updateWidgetName();
-		if (this.widgetName != null) {
-			this.widgetName.requestLayout();
-		}
 	}
 
 	@Override
