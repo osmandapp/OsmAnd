@@ -37,6 +37,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -284,7 +285,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 */
 	void showSetTimeLimitDialog(MapActivity mapActivity, DialogInterface choose) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		View setTimeParking = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.parking_set_time_limit, null);
 		AlertDialog.Builder setTime = new AlertDialog.Builder(mapActivity);
 		setTime.setView(setTimeParking);

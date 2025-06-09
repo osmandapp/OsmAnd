@@ -33,6 +33,7 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.*;
@@ -590,7 +591,7 @@ public class MapLayers {
 	}
 
 	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightModeForMapControls();
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 
 	public RouteLayer getRouteLayer() {

@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -46,17 +47,17 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 	@Override
 	public void buildNearestRows(@NonNull ViewGroup viewGroup, @Nullable Object object) {
 		super.buildNearestRows(viewGroup, object);
-		//buildGuidesRow(viewGroup);
+		buildGuidesRow(viewGroup);
 	}
 
 	private void buildGuidesRow(@NonNull ViewGroup viewGroup) {
-		Map<String, Amenity> travelAmenities = getTravelAmenities();
-		if (Algorithms.isEmpty(travelAmenities)) {
+		Map<String, LatLon> routeIds = getTravelIds();
+		if (Algorithms.isEmpty(routeIds)) {
 			return;
 		}
 		int position = viewGroup.getChildCount();
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
-		searchTravelArticles(travelAmenities, articles -> {
+		searchTravelArticles(routeIds, articles -> {
 			ViewGroup group = viewGroupRef.get();
 			if (group != null && !Algorithms.isEmpty(articles)) {
 				int insertIndex = position == 0 ? 0 : position + 1;
@@ -76,9 +77,9 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 		});
 	}
 
-	private void searchTravelArticles(@NonNull Map<String, Amenity> amenities,
+	private void searchTravelArticles(@NonNull Map<String, LatLon> routeIds,
 			@Nullable CallbackWithObject<Map<String, Map<String, TravelArticle>>> callback) {
-		execute(new SearchTravelArticlesTask(app, amenities, callback));
+		execute(new SearchTravelArticlesTask(app, routeIds, callback));
 	}
 
 	@NonNull
@@ -113,17 +114,25 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 		return article != null ? article : articleMap.entrySet().iterator().next().getValue();
 	}
 
-	@NonNull
-	private Map<String, Amenity> getTravelAmenities() {
-		Map<String, Amenity> map = new LinkedHashMap<>();
-		for (Amenity amenity : detailsObject.getAmenities()) {
-			if (CollectionUtils.equalsToAny(amenity.getSubType(), ROUTE_ARTICLE_POINT, ROUTE_TRACK_POINT)) {
-				String routeId = amenity.getRouteId();
-				if (!map.containsKey(routeId)) {
-					map.put(amenity.getRouteId(), amenity);
+	@Nullable
+	private Map<String, LatLon> getTravelIds() {
+		if (app.getResourceManager().hasTravelRepositories()) {
+			Map<String, LatLon> map = new LinkedHashMap<>();
+
+			String routeId = amenity.getRouteId();
+			if (!Algorithms.isEmpty(routeId)) {
+				map.put(routeId, amenity.getLocation());
+			}
+			for (Amenity amenity : detailsObject.getAmenities()) {
+				if (CollectionUtils.equalsToAny(amenity.getSubType(), ROUTE_ARTICLE_POINT, ROUTE_TRACK_POINT)) {
+					routeId = amenity.getRouteId();
+					if (!Algorithms.isEmpty(routeId) && !map.containsKey(routeId)) {
+						map.put(routeId, amenity.getLocation());
+					}
 				}
 			}
+			return map;
 		}
-		return map;
+		return null;
 	}
 }

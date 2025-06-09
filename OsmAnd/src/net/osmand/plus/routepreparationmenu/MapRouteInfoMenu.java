@@ -53,6 +53,9 @@ import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParamete
 import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.views.layers.MapSelectionResult;
+import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -456,7 +459,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		mainView = main;
 		OsmandApplication app = mapActivity.getMyApplication();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		updateStartPointView();
 		updateViaView();
@@ -486,7 +489,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 
 		OsmandApplication app = mapActivity.getMyApplication();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();

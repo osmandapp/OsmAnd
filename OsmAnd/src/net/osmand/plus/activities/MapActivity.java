@@ -105,6 +105,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
@@ -116,6 +117,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -460,8 +462,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void setupProgressBar(@NonNull ProgressBar pb, boolean indeterminate) {
 		DayNightHelper dayNightHelper = getMyApplication().getDaynightHelper();
 
-		boolean nightMode = dayNightHelper.isNightModeForMapControls();
-		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode();
+		boolean nightMode = dayNightHelper.isNightMode(ThemeUsageContext.OVER_MAP);
+		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode(ThemeUsageContext.MAP);
 
 		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
 		int bgColor = ContextCompat.getColor(this, bgColorId);
@@ -1116,11 +1118,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void updateNavigationBarColor() {
-		if (getMyApplication().getDaynightHelper().isNightModeForMapControls() || getMyApplication().getDaynightHelper().isNightMode()) {
-			getWindow().setNavigationBarColor(ContextCompat.getColor(app, R.color.navigation_bar_bg_dark));
-		} else {
-			getWindow().setNavigationBarColor(ContextCompat.getColor(app, R.color.navigation_bar_bg_light));
-		}
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+		getWindow().setNavigationBarColor(ColorUtilities.getNavBarBackgroundColor(app, nightMode));
 	}
 
 	public void updateMapSettings(boolean updateMapRenderer) {

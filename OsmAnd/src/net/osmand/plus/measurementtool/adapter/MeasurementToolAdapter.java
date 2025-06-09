@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.plus.utils.ColorUtilities;
@@ -46,7 +47,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	@Override
 	public MeasureToolItemVH onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		View view = inflater.inflate(R.layout.measure_points_list_item, viewGroup, false);
 		if (!nightMode) {

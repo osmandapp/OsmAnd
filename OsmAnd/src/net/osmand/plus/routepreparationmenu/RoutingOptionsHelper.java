@@ -41,6 +41,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -597,7 +598,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightModeForMapControls();
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 
 	private List<String> getRoutingParametersForProfileType(ApplicationMode appMode) {

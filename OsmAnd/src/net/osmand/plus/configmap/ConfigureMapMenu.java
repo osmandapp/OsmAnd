@@ -51,6 +51,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
@@ -95,7 +96,7 @@ public class ConfigureMapMenu {
 
 	@NonNull
 	public ContextMenuAdapter createListAdapter(@NonNull MapActivity mapActivity) {
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 
@@ -137,7 +138,7 @@ public class ConfigureMapMenu {
 
 		ResourceManager resourceManager = app.getResourceManager();
 		boolean hasPoiData = !Algorithms.isEmpty(resourceManager.getAmenityRepositories())
-				|| !resourceManager.isWikivoyageRepositoryEmpty();
+				|| resourceManager.hasTravelRepositories();
 		if (hasPoiData) {
 			PoiFiltersHelper poiFilters = app.getPoiFilters();
 			selected = poiFilters.isShowingAnyGeneralPoi();

@@ -27,8 +27,6 @@ import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererView.MapRendererViewListener;
-import net.osmand.core.jni.AreaI;
-import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.AppInitializeListener;
@@ -74,7 +72,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	private float cachedRatioY = 0f;
 	private float cachedRatioX = 0f;
 	private float cachedDefaultRatioY = 0f;
-
+	private Rect cachedVisibleArea;
 
 	private boolean darkMode;
 
@@ -83,8 +81,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	private static final float surfaceWidthMultiply = 0.5f;
 	private int surfaceAdditionalWidth = 0;
 	// Ratios are calculated dynamically using surfaceWidthMultiply
-	private float minRatio = 0;
-	private float maxRatio = 1;
+	private float minRatio = 0.5f;
+	private float maxRatio = 0.5f;
 
 	public void setCallback(@Nullable SurfaceRendererCallback callback) {
 		this.callback = callback;
@@ -93,6 +91,63 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	public interface SurfaceRendererCallback {
 		void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea);
 		void onElevationChanging(float angle);
+	}
+
+	private void setupSurfaceView(@NonNull SurfaceContainer surfaceContainer){
+		if (getApp().useOpenGlRenderer()) {
+			surfaceAdditionalWidth = (int)((float) surfaceContainer.getWidth() * surfaceWidthMultiply);
+		}
+
+		surfaceView.setSurfaceParams(surfaceContainer.getWidth() + surfaceAdditionalWidth,
+				surfaceContainer.getHeight(), surfaceContainer.getDpi());
+
+		minRatio = (1f - surfaceWidthMultiply) / 2.0f;
+		maxRatio = 1f - (1f - surfaceWidthMultiply) / 2.0f;
+	}
+
+	private void changeVisibleArea(@NonNull Rect visibleArea) {
+		cachedVisibleArea = visibleArea;
+		Log.i(TAG, "Visible area changed " + surface + ". stableArea: "
+				+ stableArea + " visibleArea:" + visibleArea);
+		SurfaceRenderer.this.visibleArea = visibleArea;
+		if (!visibleArea.isEmpty() && mapView != null && surfaceContainer != null) {
+			MapDisplayPositionManager displayPositionManager = getDisplayPositionManager();
+
+			int visibleAreaHeight = visibleArea.height();
+			int containerWidth = surfaceContainer.getWidth();
+			int containerHeight = surfaceContainer.getHeight();
+
+			int centerX = visibleArea.centerX();
+			cachedRatioX = (float) centerX / containerWidth;
+
+			float cameraCenterShiftX = 0.5f;
+			if (offscreenMapRendererView != null) {
+				float dRatio = 0.5f + (1.0f - surfaceWidthMultiply) * (((1.0f - maxRatio) + minRatio) * 0.5f);
+
+				if (cachedRatioX < minRatio) {
+					cameraCenterShiftX = 0.5f - (minRatio - cachedRatioX) * dRatio;
+					cachedRatioX = minRatio;
+				}
+				else if (cachedRatioX > maxRatio) {
+					cameraCenterShiftX = 0.5f + (cachedRatioX - maxRatio) * dRatio;
+					cachedRatioX = maxRatio;
+				}
+			}
+			else {
+				cameraCenterShiftX = cachedRatioX;
+			}
+
+			float ratioY = cachedRatioY;
+			float defaultRatioY = displayPositionManager.getNavigationMapPosition().getRatioY();
+			if (defaultRatioY != cachedDefaultRatioY || (float) containerHeight / visibleAreaHeight > VISIBLE_AREA_Y_MIN_DETECTION_SIZE) {
+				float centerY = (visibleAreaHeight * defaultRatioY) + visibleArea.top;
+				ratioY = centerY / containerHeight;
+				cachedRatioY = ratioY;
+				cachedDefaultRatioY = defaultRatioY;
+			}
+			displayPositionManager.setCustomMapRatio(cameraCenterShiftX, ratioY);
+		}
+		renderFrame();
 	}
 
 	public final SurfaceCallback mSurfaceCallback = new SurfaceCallback() {
@@ -104,17 +159,13 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					surface.release();
 				}
 
-				if (getApp().useOpenGlRenderer()) {
-					surfaceAdditionalWidth = (int)((float) surfaceContainer.getWidth() * surfaceWidthMultiply);
-				}
-
 				SurfaceRenderer.this.surfaceContainer = surfaceContainer;
 				surface = surfaceContainer.getSurface();
-				surfaceView.setSurfaceParams(surfaceContainer.getWidth() + surfaceAdditionalWidth,
-						surfaceContainer.getHeight(), surfaceContainer.getDpi());
+				setupSurfaceView(surfaceContainer);
 
-				minRatio = (1f - surfaceWidthMultiply) / 2.0f;
-				maxRatio = 1f - (1f - surfaceWidthMultiply) / 2.0f;
+				if (cachedVisibleArea != null) {
+					changeVisibleArea(cachedVisibleArea);
+				}
 
 				darkMode = carContext.isDarkMode();
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
@@ -128,47 +179,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		@Override
 		public void onVisibleAreaChanged(@NonNull Rect visibleArea) {
 			synchronized (SurfaceRenderer.this) {
-				Log.i(TAG, "Visible area changed " + surface + ". stableArea: "
-						+ stableArea + " visibleArea:" + visibleArea);
-				SurfaceRenderer.this.visibleArea = visibleArea;
-				if (!visibleArea.isEmpty() && mapView != null) {
-					MapDisplayPositionManager displayPositionManager = getDisplayPositionManager();
-
-					int visibleAreaHeight = visibleArea.height();
-					int containerWidth = surfaceContainer.getWidth();
-					int containerHeight = surfaceContainer.getHeight();
-
-					int centerX = visibleArea.centerX();
-					cachedRatioX = (float) centerX / containerWidth;
-
-					float cameraCenterShiftX = 0.5f;
-					if (offscreenMapRendererView != null) {
-						float dRatio = 0.5f + (1.0f - surfaceWidthMultiply) * (((1.0f - maxRatio) + minRatio) * 0.5f);
-
-						if (cachedRatioX < minRatio) {
-							cameraCenterShiftX = 0.5f - (minRatio - cachedRatioX) * dRatio;
-							cachedRatioX = minRatio;
-						}
-						else if (cachedRatioX > maxRatio) {
-							cameraCenterShiftX = 0.5f + (cachedRatioX - maxRatio) * dRatio;
-							cachedRatioX = maxRatio;
-						}
-					}
-					else {
-						cameraCenterShiftX = cachedRatioX;
-					}
-
-					float ratioY = cachedRatioY;
-					float defaultRatioY = displayPositionManager.getNavigationMapPosition().getRatioY();
-					if (defaultRatioY != cachedDefaultRatioY || (float) containerHeight / visibleAreaHeight > VISIBLE_AREA_Y_MIN_DETECTION_SIZE) {
-						float centerY = (visibleAreaHeight * defaultRatioY) + visibleArea.top;
-						ratioY = centerY / containerHeight;
-						cachedRatioY = ratioY;
-						cachedDefaultRatioY = defaultRatioY;
-					}
-					displayPositionManager.setCustomMapRatio(cameraCenterShiftX, ratioY);
-				}
-				renderFrame();
+				changeVisibleArea(visibleArea);
 			}
 		}
 
@@ -386,6 +397,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 						NativeCoreContext.setMapRendererContext(getApp(), surfaceView.getDensity());
 						mapRendererContext = NativeCoreContext.getMapRendererContext();
 						if (mapRendererContext != null) {
+							if (surfaceContainer != null) {
+								setupSurfaceView(surfaceContainer);
+							}
+
 							offscreenMapRendererView = new AtlasMapRendererView(carContext);
 							mapRendererContext.presetMapRendererOptions(offscreenMapRendererView);
 							offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
@@ -406,6 +421,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							PluginsHelper.refreshLayers(getApp(), null);
 							offscreenMapRendererView.addListener(this);
 							mapView.getAnimatedDraggingThread().toggleAnimations();
+
+							if (cachedVisibleArea != null) {
+								changeVisibleArea(cachedVisibleArea);
+							}
 						}
 					}
 				}

@@ -2,7 +2,6 @@ package net.osmand.plus.settings.bottomsheets;
 
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
@@ -35,6 +34,7 @@ import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParamete
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
@@ -235,11 +235,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public boolean isNightMode(@NonNull OsmandApplication app) {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode);
-		} else {
-			return !app.getSettings().isLightContentForMode(appMode);
-		}
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	private List<RoutingParameter> getReliefParametersForMode(Map<String, RoutingParameter> parameters) {

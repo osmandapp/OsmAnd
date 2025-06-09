@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="battery">battery</string>
+    <string name="sensor_data">Sensor data</string>
+    <string name="battery_level">Battery level</string>
+    <string name="shared_string_split_by">Split by</string>
     <string name="shared_string_flat">Flat</string>
     <string name="uphill_downhill_split">Uphill / Downhill</string>
     <string name="set_parking_position">Set parking position</string>

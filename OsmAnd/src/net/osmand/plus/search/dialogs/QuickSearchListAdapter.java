@@ -1,13 +1,11 @@
 package net.osmand.plus.search.dialogs;
 
-import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +13,10 @@ import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.StringMatcher;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -30,13 +24,12 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.SearchResultViewHolder;
 import net.osmand.plus.search.WikiItemViewHolder;
-import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.search.listitems.*;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.*;
@@ -44,17 +37,13 @@ import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
@@ -640,7 +629,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private boolean isNightMode() {
-		return !app.getSettings().isLightContent();
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 	}
 
 	public void setPoiUIFilter(@Nullable PoiUIFilter poiUIFilter) {

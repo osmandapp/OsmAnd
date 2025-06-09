@@ -5720,7 +5720,7 @@
     <string name="no_places_available">Keine Plätze verfügbar</string>
     <string name="no_photo_for_location_desc">Es wurden noch keine Benutzerfotos zu diesem Ort hinzugefügt</string>
     <string name="shared_string_road_exit">Ausfahrt</string>
-    <string name="hmd_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für einen Monat (%1$s)</string>
+    <string name="hmd_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Monate</string>
     <string name="hmd_promo">HMD Promo für %1$s Monate</string>
     <string name="apply_to_all_points">Auf alle Punkte anwenden</string>
     <string name="save_favorite_default_appearance">Änderungen auf die vorhandenen Punkte im Ordner anwenden oder nur auf neue?</string>
@@ -5749,7 +5749,7 @@
     <string name="shared_string_offline_only">Nur offline</string>
     <string name="prime_meridian">Nullmeridian</string>
     <string name="meridian_180">180. Längengrad</string>
-    <string name="intermediate_first">Zwischenziel zuerst</string>
+    <string name="intermediate_first">Fortgeschrittene zuerst</string>
     <string name="destination_first">Ziel zuerst</string>
     <string name="display_priority">Priorität anzeigen</string>
     <string name="poi_source">POI-Quelle</string>
@@ -5788,4 +5788,5 @@
     <string name="unit_of_temperature_description">Ausgewählte Einheiten werden auf alle temperaturbezogenen Daten im aktuellen Profil angewendet.</string>
     <string name="travel_guides">Leitfäden</string>
     <string name="hmd_promo_description_years">Kostenloser Zugang zu Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Jahre</string>
+    <string name="uphill_downhill_split">Berg-/Talfahrt</string>
 </resources>

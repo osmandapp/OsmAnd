@@ -25,6 +25,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -129,7 +130,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			mapHudLayout.removeMapButton(button);
 		}
 
-		boolean nightMode = app.getDaynightHelper().isNightMode();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
 
 		addMapButton(createMapButton(inflater, R.layout.configure_map_button));

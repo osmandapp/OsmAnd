@@ -88,6 +88,7 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -623,7 +624,7 @@ public class MenuBuilder {
 	protected void buildNearestPhotosRow(View view) {
 		boolean needUpdateOnly = onlinePhotoCardsRow != null && onlinePhotoCardsRow.getMenuBuilder() == this;
 		onlinePhotoCardsRow = new CardsRowBuilder(this);
-		onlinePhotoCardsRow.build(galleryController, true, getApplication().getDaynightHelper().isNightModeForMapControls());
+		onlinePhotoCardsRow.build(galleryController, true, getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP));
 
 		LinearLayout parent = new LinearLayout(view.getContext());
 		parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -1353,7 +1354,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams typeTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		typeTextView.setLayoutParams(typeTextParams);
 		typeTextView.setText(route.getTypeStrRes());
-		AndroidUtils.setTextSecondaryColor(getMapActivity(), typeTextView, getApplication().getDaynightHelper().isNightModeForMapControls());
+		AndroidUtils.setTextSecondaryColor(getMapActivity(), typeTextView, getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP));
 		typeView.addView(typeTextView);
 
 		baseView.setOnClickListener(listener);

@@ -33,6 +33,7 @@ import net.osmand.plus.search.NearbyPlacesAdapter;
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 
@@ -151,7 +152,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 
 	private void updateExpandState() {
 		int iconRes = collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
-		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, !app.getSettings().isLightContent()));
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, nightMode));
 		boolean nearbyPointFound = getNearbyAdapter().hasData();
 		AndroidUiHelper.updateVisibility(cardContent, !collapsed && isDataSourceAvailable());
 		AndroidUiHelper.updateVisibility(noInternetCard, !collapsed && !isDataSourceAvailable());

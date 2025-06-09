@@ -37,6 +37,7 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
@@ -51,12 +52,7 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
@@ -98,9 +94,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected void buildDescription(View view) {
 		if (amenity != null) {
 			hasDescriptionData = true;
-			Map<String, String> extensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, extensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, additionalInfo);
 			Map<String, Object> filteredInfo = bundle.getFilteredLocalizedInfo();
+
 			Pair<String, Locale> pair = getDescriptionWithPreferredLang(filteredInfo);
 			String description = pair.first;
 
@@ -161,7 +157,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				MapActivity activity = app.getOsmandMap().getMapView().getMapActivity();
 				if (activity != null) {
-					AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), app.getDaynightHelper().isNightMode());
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+					AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), nightMode);
 				}
 			}
 		});
@@ -224,7 +221,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (descriptionCollapsed) {
 			text = description.substring(0, Math.min(description.length(), 200));
 			if (description.length() > text.length()) {
-				text += app.getString(R.string.shared_string_ellipsis);
+				int color = ColorUtilities.getActiveColor(app, !isLightContent());
+				String ellipsis = app.getString(R.string.shared_string_ellipsis);
+				text += ellipsis;
+				textView.setText(UiUtilities.createColorSpannable(text, color, ellipsis));
+				return;
 			}
 		}
 		textView.setText(text);
@@ -247,8 +248,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 	}
 
-	public void buildInternalRows(View view) {
-		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
+	public void buildInternalRows(@NonNull View view) {
+		AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, additionalInfo);
+		if (hasDescriptionData) {
+			bundle.setCustomHiddenExtensions(Collections.singletonList(DESCRIPTION));
+		}
+		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
 		rowsBuilder.setLight(isLightContent());
 		rowsBuilder.setLatLon(getLatLon());
 		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());

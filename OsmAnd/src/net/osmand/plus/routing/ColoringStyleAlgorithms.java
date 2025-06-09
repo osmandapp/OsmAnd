@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GradientScaleType;
@@ -102,12 +103,12 @@ public class ColoringStyleAlgorithms {
 			return false;
 		}
 
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		MapRenderRepositories maps = app.getResourceManager().getRenderer();
 		RenderingRuleSearchRequest currentSearchRequest =
-				maps.getSearchRequestWithAppliedCustomRules(currentRenderer, night);
+				maps.getSearchRequestWithAppliedCustomRules(currentRenderer, nightMode);
 		RenderingRuleSearchRequest defaultSearchRequest =
-				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, night);
+				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, nightMode);
 
 		List<RouteStatistics> routeStatisticsList =
 				RouteStatisticsHelper.calculateRouteStatistic(routeSegments,

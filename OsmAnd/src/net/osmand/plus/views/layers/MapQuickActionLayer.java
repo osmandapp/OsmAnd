@@ -33,6 +33,7 @@ import net.osmand.plus.quickaction.QuickAction.QuickActionSelectionListener;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MapPosition;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -122,7 +123,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	private void updateButtons() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			boolean nightMode = app.getDaynightHelper().isNightMode();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 			LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
 
 			for (QuickActionButton button : actionButtons) {
@@ -407,7 +408,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 	private void updateButton(@NonNull QuickActionButton button, boolean invalidated) {
 		button.setInvalidated(invalidated);
-		button.setNightMode(app.getDaynightHelper().isNightMode());
+		button.setNightMode(app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP));
 		button.update();
 	}
 }

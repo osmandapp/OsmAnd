@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -98,7 +99,7 @@ public class PurchasingUtils {
 	                                   @StringRes int titleId,
 	                                   @StringRes int descriptionId) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			ChoosePlanFragment.showInstance(mapActivity, feature);

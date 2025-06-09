@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -58,7 +59,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 	public GpxTrackAdapter(@NonNull Context ctx, @NonNull List<GPXInfo> gpxInfoList) {
 		app = (OsmandApplication) ctx.getApplicationContext();
-		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightModeForMapControls());
+		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP));
 		iconsCache = app.getUIUtilities();
 		this.gpxInfoList = gpxInfoList;
 	}

@@ -17,6 +17,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.fragments.ReadDescriptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
@@ -100,6 +101,6 @@ public class ArticleWebViewClient extends WebViewClient {
 	}
 
 	protected boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 	}
 }

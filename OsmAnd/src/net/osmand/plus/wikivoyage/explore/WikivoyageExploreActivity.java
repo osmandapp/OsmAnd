@@ -34,6 +34,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
@@ -69,7 +70,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	public void onCreate(Bundle savedInstanceState) {
 		app = getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		nightMode = !settings.isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
 		int themeId = nightMode ? R.style.OsmandDarkTheme_NoActionbar : R.style.OsmandLightTheme_NoActionbar_LightStatusBar;
 		app.getLocaleHelper().setLanguage(this);

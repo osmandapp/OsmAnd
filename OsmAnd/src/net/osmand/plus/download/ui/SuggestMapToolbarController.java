@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
@@ -45,7 +46,7 @@ public abstract class SuggestMapToolbarController extends TopToolbarController {
 		SuggestMapToolbarController.regionName = regionName;
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
-		this.nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		this.mainView = UiUtilities.inflate(mapActivity, nightMode, R.layout.banner_suggest_map);
 		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
