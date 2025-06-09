@@ -27,8 +27,6 @@ import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererView.MapRendererViewListener;
-import net.osmand.core.jni.AreaI;
-import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.AppInitializeListener;
@@ -95,7 +93,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		void onElevationChanging(float angle);
 	}
 
-	private void setUpSurfaceView(@NonNull SurfaceContainer surfaceContainer){
+	private void setupSurfaceView(@NonNull SurfaceContainer surfaceContainer){
 		if (getApp().useOpenGlRenderer()) {
 			surfaceAdditionalWidth = (int)((float) surfaceContainer.getWidth() * surfaceWidthMultiply);
 		}
@@ -107,7 +105,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		maxRatio = 1f - (1f - surfaceWidthMultiply) / 2.0f;
 	}
 
-	private void onVisibleAreaChangedCallback(@NonNull Rect visibleArea) {
+	private void changeVisibleArea(@NonNull Rect visibleArea) {
 		cachedVisibleArea = visibleArea;
 		Log.i(TAG, "Visible area changed " + surface + ". stableArea: "
 				+ stableArea + " visibleArea:" + visibleArea);
@@ -163,10 +161,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 				SurfaceRenderer.this.surfaceContainer = surfaceContainer;
 				surface = surfaceContainer.getSurface();
-				setUpSurfaceView(surfaceContainer);
+				setupSurfaceView(surfaceContainer);
 
 				if (cachedVisibleArea != null) {
-					onVisibleAreaChangedCallback(cachedVisibleArea);
+					changeVisibleArea(cachedVisibleArea);
 				}
 
 				darkMode = carContext.isDarkMode();
@@ -181,7 +179,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		@Override
 		public void onVisibleAreaChanged(@NonNull Rect visibleArea) {
 			synchronized (SurfaceRenderer.this) {
-				onVisibleAreaChangedCallback(visibleArea);
+				changeVisibleArea(visibleArea);
 			}
 		}
 
@@ -400,7 +398,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 						mapRendererContext = NativeCoreContext.getMapRendererContext();
 						if (mapRendererContext != null) {
 							if (surfaceContainer != null) {
-								setUpSurfaceView(surfaceContainer);
+								setupSurfaceView(surfaceContainer);
 							}
 
 							offscreenMapRendererView = new AtlasMapRendererView(carContext);
@@ -425,7 +423,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							mapView.getAnimatedDraggingThread().toggleAnimations();
 
 							if (cachedVisibleArea != null) {
-								onVisibleAreaChangedCallback(cachedVisibleArea);
+								changeVisibleArea(cachedVisibleArea);
 							}
 						}
 					}
