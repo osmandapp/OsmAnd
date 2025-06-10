@@ -5754,4 +5754,6 @@
     <string name="set_work">Podesite posao</string>
     <string name="battery">baterija</string>
     <string name="set_intermediate_point">Postavite međuodredište</string>
+    <string name="ski_route_switch_style_description">Istražite skijaške staze, žičare i još mnogo toga u stilu zimskih i skijaških mapa.</string>
+    <string name="shared_string_switch">Prekidač</string>
 </resources>
