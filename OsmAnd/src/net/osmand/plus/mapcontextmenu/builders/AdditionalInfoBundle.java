@@ -57,7 +57,7 @@ public class AdditionalInfoBundle {
 				String key;
 				if (origKey.equals(AMENITY_PREFIX + Amenity.OPENING_HOURS)) {
 					key = origKey.replace(AMENITY_PREFIX, "");
-				} else if (origKey.startsWith(AMENITY_PREFIX) || origKey.contains("route_point_category")) {
+				} else if (origKey.startsWith(AMENITY_PREFIX)) {
 					continue;
 				} else {
 					key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
