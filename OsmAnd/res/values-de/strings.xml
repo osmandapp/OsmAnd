@@ -5789,4 +5789,6 @@
     <string name="travel_guides">Leitfäden</string>
     <string name="hmd_promo_description_years">Kostenloser Zugang zu Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Jahre</string>
     <string name="uphill_downhill_split">Berg-/Talfahrt</string>
+    <string name="set_parking_position">Parkposition festlegen</string>
+    <string name="set_start_point">Startpunkt festlegen</string>
 </resources>
