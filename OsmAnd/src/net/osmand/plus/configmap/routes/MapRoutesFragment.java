@@ -4,6 +4,7 @@ import static net.osmand.osm.OsmRouteType.ALPINE;
 import static net.osmand.osm.OsmRouteType.BICYCLE;
 import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.osm.OsmRouteType.MTB;
+import static net.osmand.osm.OsmRouteType.SKI;
 
 import android.os.Bundle;
 import android.util.Pair;
@@ -201,7 +202,7 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 	public static boolean shouldShow(@NonNull OsmandApplication app, @NonNull String attrName) {
 		boolean defaultScreens = CollectionUtils.equalsToAny(attrName,
 				BICYCLE.getRenderingPropertyAttr(), MTB.getRenderingPropertyAttr(),
-				HIKING.getRenderingPropertyAttr(), ALPINE.getRenderingPropertyAttr());
+				HIKING.getRenderingPropertyAttr(), ALPINE.getRenderingPropertyAttr(), SKI.getRenderingPropertyAttr());
 
 		Pair<RenderingClass, List<RenderingClass>> pair = ConfigureMapUtils.getRenderingClassWithChildren(app, attrName);
 		return defaultScreens || pair != null;
@@ -217,6 +218,8 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 			return HikingRoutesFragment.class.getName();
 		} else if (Algorithms.stringsEqual(ALPINE.getRenderingPropertyAttr(), attrName)) {
 			return AlpineHikingScaleFragment.class.getName();
+		} else if (Algorithms.stringsEqual(SKI.getRenderingPropertyAttr(), attrName)) {
+			return SkiRoutesFragment.class.getName();
 		}
 		return CustomRoutesFragment.class.getName();
 	}
