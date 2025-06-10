@@ -1218,11 +1218,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						? this.analysis
 						: selectedGpxFile.getTrackAnalysis(app);
 				if (analysis.hasElevationData()) {
-					SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+					SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 					if (plugin != null && plugin.is3DReliefAllowed()) {
 						calculateOfflineSelected(-1);
-					} else {
-						calculateOnlineSelected(-1);
 					}
 				} else {
 					showTrackAltitudeDialog(-1);
