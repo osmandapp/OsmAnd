@@ -37,6 +37,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
@@ -82,8 +83,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), !app.getSettings().isLightContent());
-		return themedInflater.inflate(getLayoutId(), container, false);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return UiUtilities.inflate(requireContext(), nightMode, getLayoutId(), container, false);
 	}
 
 	@Override
@@ -146,7 +147,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
 		listAdapter = new QuickSearchListAdapter(app, requireMapActivity());
 		listAdapter.setAccessibilityAssistant(dialogFragment.getAccessibilityAssistant());

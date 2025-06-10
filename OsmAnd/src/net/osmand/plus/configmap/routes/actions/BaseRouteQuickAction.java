@@ -18,8 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.render.RenderingRuleProperty;
 
 public abstract class BaseRouteQuickAction extends QuickAction {
@@ -57,7 +56,7 @@ public abstract class BaseRouteQuickAction extends QuickAction {
 			mapActivity.refreshMapComplete();
 			mapActivity.updateLayers();
 		} else {
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			showRendererSnackbarForAttr(mapActivity, attrName, nightMode, null);
 		}
 	}

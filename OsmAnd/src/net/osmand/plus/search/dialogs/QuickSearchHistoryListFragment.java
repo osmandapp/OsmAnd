@@ -14,13 +14,13 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.SearchVisibilityListener;
 import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.search.SearchUICore;
@@ -152,9 +152,10 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	}
 
 	private void setupNearByCard(@NonNull View view) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), !app.getSettings().isLightContent());
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
 		QuickSearchDialogFragment dialogFragment = (QuickSearchDialogFragment) getParentFragment();
-		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this, dialogFragment.isNightMode(), !dialogFragment.isSearchHidden());
+		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this, nightMode, !dialogFragment.isSearchHidden());
 		getListView().addHeaderView(nearbyPlacesCard, null, false);
 		getListView().addHeaderView(themedInflater.inflate(R.layout.recently_visited_header, getListView(), false));
 	}

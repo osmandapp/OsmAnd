@@ -149,10 +149,14 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		for (String deviceId : devicesSettingsCollection.getDeviceIds()) {
 			DeviceSettings deviceSettings = devicesSettingsCollection.getDeviceSettings(deviceId);
 			if (deviceSettings != null && !devices.containsKey(deviceId)) {
-				AbstractDevice<?> device = createDevice(deviceSettings.getDeviceType(), deviceId);
-				if (device != null) {
-					devices.put(deviceId, device);
-					updateDeviceProperties(device);
+				if (deviceSettings.getDeviceType() == null) {
+					devicesSettingsCollection.removeDeviceSettings(deviceId);
+				} else {
+					AbstractDevice<?> device = createDevice(deviceSettings.getDeviceType(), deviceId);
+					if (device != null) {
+						devices.put(deviceId, device);
+						updateDeviceProperties(device);
+					}
 				}
 			}
 		}

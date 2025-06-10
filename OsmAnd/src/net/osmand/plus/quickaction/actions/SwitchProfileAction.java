@@ -5,7 +5,6 @@ import static net.osmand.plus.quickaction.QuickActionIds.SWITCH_PROFILE_ACTION_I
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -23,6 +22,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
@@ -208,7 +208,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	protected int getItemIconColor(OsmandApplication app, String item) {
 		ApplicationMode appMode = getModeForKey(item);
 		if (appMode != null) {
-			boolean nightMode = !app.getSettings().isLightContent();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			return appMode.getProfileColor(nightMode);
 		}
 		return super.getItemIconColor(app, item);
@@ -216,15 +216,12 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 
 	@Override
 	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
-		return new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CreateEditActionDialog targetFragment = (CreateEditActionDialog) activity
-						.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
-				List<String> selectedProfilesKeys = new ArrayList<>(adapter.getItemsList());
-				SelectMultipleProfilesBottomSheet.showInstance(activity, targetFragment,
-						selectedProfilesKeys, selectedProfilesKeys, false);
-			}
+		return v -> {
+			CreateEditActionDialog targetFragment = (CreateEditActionDialog) activity
+					.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
+			List<String> selectedProfilesKeys = new ArrayList<>(adapter.getItemsList());
+			SelectMultipleProfilesBottomSheet.showInstance(activity, targetFragment,
+					selectedProfilesKeys, selectedProfilesKeys, false);
 		};
 	}
 

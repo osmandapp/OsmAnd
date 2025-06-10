@@ -29,6 +29,7 @@ import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.search.core.CustomSearchPoiFilter;
@@ -357,8 +358,8 @@ public class QuickSearchListItem {
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
 				if (amenity.isRouteTrack()) {
-					boolean isNightMode = !app.getSettings().isLightContent();
-					Drawable shieldIcon = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, isNightMode);
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+					Drawable shieldIcon = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, nightMode);
 					if (shieldIcon != null) {
 						return shieldIcon;
 					}
@@ -542,8 +543,8 @@ public class QuickSearchListItem {
 	}
 
 	private static Drawable getIcon(@NonNull OsmandApplication app, @DrawableRes int iconId) {
-		return app.getUIUtilities().getIcon(iconId,
-				app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return app.getUIUtilities().getIcon(iconId, !nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark);
 	}
 
 	@DrawableRes

@@ -106,14 +106,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		if (getMapView().hasMapRenderer()) {
 			Object movableObject = contextMenuLayer.getMoveableObject();
 			if (movableObject instanceof TargetPoint targetPoint) {
-				//draw movable object on canvas
-				if (Algorithms.objectEquals(targetPoints.getPointToStart(), targetPoint)) {
-					drawStartPoint(canvas, tb, targetPoint);
-				} else if (Algorithms.objectEquals(targetPoints.getPointToNavigate(), targetPoint)) {
-					drawPointToNavigate(canvas, tb, targetPoint);
-				} else if (targetPoints.getIntermediatePoints().contains(targetPoint)) {
-					drawIntermediatePoint(canvas, tb, targetPoint, targetPoints.getIntermediatePoints().indexOf(targetPoint) + 1);
-				}
 				setMovableObject(targetPoint.getLatitude(), targetPoint.getLongitude());
 			}
 			if (this.movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
@@ -310,6 +302,32 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			return targetPointsHelper.getAllPoints().contains(o);
 		}
 		return false;
+	}
+
+	@Override
+	public Object getMoveableObjectIcon(@NonNull Object o) {
+		if (o instanceof TargetPoint targetPoint) {
+			if (Algorithms.objectEquals(targetPoints.getPointToStart(), targetPoint)) {
+				return getStartPointIcon();
+			} else if (Algorithms.objectEquals(targetPoints.getPointToNavigate(), targetPoint)) {
+				return getPointToNavigateIcon();
+			} else if (targetPoints.getIntermediatePoints().contains(targetPoint)) {
+				return getIntermediatePointIcon();
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public String getMoveableObjectLabel(@NonNull Object o) {
+		if (o instanceof TargetPoint targetPoint) {
+			int index = targetPoints.getIntermediatePoints().indexOf(targetPoint);
+			if (index >= 0) {
+				return String.valueOf(++index);
+			}
+		}
+		return null;
 	}
 
 	@Override

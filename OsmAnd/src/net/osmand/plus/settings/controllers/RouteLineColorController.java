@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
@@ -247,7 +248,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	}
 
 	public void onResume() {
-		initialNightMode = app.getDaynightHelper().isNightModeForMapControls();
+		initialNightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		setMapThemeProvider(this);
 	}
 

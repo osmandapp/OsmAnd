@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
@@ -26,7 +26,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 		ActionBar supportActionBar = getSupportActionBar();
 		if (supportActionBar != null) {
 			OsmandApplication app = getMyApplication();
-			boolean nightMode = !app.getSettings().isLightContent();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			int iconId = AndroidUtils.getNavigationIconResId(app);
 			int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 

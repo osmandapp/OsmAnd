@@ -5651,7 +5651,7 @@
     <string name="connect_new_scanner">Connetti il nuovo scanner</string>
     <string name="vehicle_metrics_recording_description">Seleziona i parametri da salvare nel file GPX.</string>
     <string name="shared_string_engine">Motore</string>
-    <string name="preview_next_turn">Anteprima della svolta successiva</string>
+    <string name="preview_next_turn">Anteprima della prossima svolta</string>
     <string name="location_interpolation_percent">Percentuale di interpolazione della posizione</string>
     <string name="location_interpolation_percent_desc">Imposta la percentuale di interpolazione della posizione durante la navigazione del percorso. Questo parametro riduce il ritardo della tua posizione sulla mappa durante l\'animazione.</string>
     <string name="shared_string_interpolation">Interpolazione</string>

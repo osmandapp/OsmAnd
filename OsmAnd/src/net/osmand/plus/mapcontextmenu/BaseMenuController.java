@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
@@ -56,7 +57,7 @@ public abstract class BaseMenuController {
 
 	public void updateNightMode() {
 		if (mapActivity != null) {
-			nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		}
 	}
 

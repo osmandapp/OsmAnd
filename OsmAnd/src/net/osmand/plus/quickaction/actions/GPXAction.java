@@ -24,6 +24,7 @@ import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
@@ -616,6 +617,6 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 	}
 
 	private boolean isNightMode(@NonNull MapActivity mapActivity) {
-		return mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		return mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 }

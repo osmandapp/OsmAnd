@@ -19,6 +19,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.R;
@@ -51,7 +52,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Activity activity = requireActivity();
-		nightMode = requiredMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = requiredMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		portrait = AndroidUiHelper.isOrientationPortrait(activity);
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		availableScreenH = AndroidUtils.getScreenHeight(activity) - AndroidUtils.getStatusBarHeight(activity);
@@ -69,24 +70,16 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		mainView.findViewById(R.id.divider).setBackgroundResource(nightMode
 				? R.color.card_and_list_background_dark : R.color.divider_color_light);
 
-		View.OnClickListener dismissOnClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		};
+		View.OnClickListener dismissOnClickListener = view -> dismiss();
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(dismissOnClickListener);
 		mainView.findViewById(R.id.scroll_view_container).setOnClickListener(dismissOnClickListener);
 
-		View.OnClickListener onClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.onItemClick(view, (int) view.getTag());
-				}
-				dismiss();
+		View.OnClickListener onClickListener = view -> {
+			if (listener != null) {
+				listener.onItemClick(view, (int) view.getTag());
 			}
+			dismiss();
 		};
 
 		if (adapter != null) {

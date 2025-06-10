@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 
@@ -21,18 +22,20 @@ public class QuickSearchButtonListItem extends QuickSearchListItem {
 
 	public QuickSearchButtonListItem(OsmandApplication app, int iconId, @NonNull String title, View.OnClickListener onClickListener) {
 		super(app, null);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		this.iconId = iconId;
 		this.title = title.toUpperCase();
 		this.onClickListener = onClickListener;
-		this.colorId = ColorUtilities.getActiveColorId(!app.getSettings().isLightContent());
+		this.colorId = ColorUtilities.getActiveColorId(nightMode);
 	}
 
 	public QuickSearchButtonListItem(OsmandApplication app, int iconId, @NonNull Spannable title, View.OnClickListener onClickListener) {
 		super(app, null);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		this.iconId = iconId;
 		this.spannableTitle = spannedToUpperCase(title);
 		this.onClickListener = onClickListener;
-		this.colorId = ColorUtilities.getActiveColorId(!app.getSettings().isLightContent());
+		this.colorId = ColorUtilities.getActiveColorId(nightMode);
 	}
 
 	public QuickSearchListItemType getType() {

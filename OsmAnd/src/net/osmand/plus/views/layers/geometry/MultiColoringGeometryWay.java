@@ -12,6 +12,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.ColorPaletteHelper;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.shared.routing.Gpx3DWallColorType;
@@ -263,14 +264,14 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 
 	private RouteStatisticComputer createRouteStatisticsComputer() {
 		OsmandApplication app = getContext().getApp();
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
 		MapRenderRepositories maps = app.getResourceManager().getRenderer();
 		RenderingRuleSearchRequest currentSearchRequest =
-				maps.getSearchRequestWithAppliedCustomRules(currentRenderer, night);
+				maps.getSearchRequestWithAppliedCustomRules(currentRenderer, nightMode);
 		RenderingRuleSearchRequest defaultSearchRequest =
-				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, night);
+				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, nightMode);
 
 		return new RouteStatisticComputer(currentRenderer, defaultRenderer,
 				currentSearchRequest, defaultSearchRequest);

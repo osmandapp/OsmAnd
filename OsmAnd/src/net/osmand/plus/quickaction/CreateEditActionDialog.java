@@ -33,6 +33,7 @@ import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickListener;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -74,7 +75,7 @@ public class CreateEditActionDialog extends DialogFragment
 			dismiss();
 		} else {
 			controller.registerDialog(TAG, this);
-			nightMode = !settings.isLightContent() || app.getDaynightHelper().isNightMode();
+			nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			setStyle(DialogFragment.STYLE_NORMAL, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 
 			Bundle args = requireArguments();

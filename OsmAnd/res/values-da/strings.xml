@@ -4349,7 +4349,7 @@
     <string name="max_speed_widget_desc">Viser hastighedsgrænsen for vejen, der aktuelt køres på.</string>
     <string name="current_speed_widget_desc">Viser din aktuelle hastighed registreret via GPS.</string>
     <string name="magnetic_bearing_widget_desc">Vinkel mellem det magnetiske nord og målpunktet observeret fra din placering.</string>
-    <string name="lanes_widgets_desc">Viser det aktuelle vejbane-layout og fremhæver de vejbaner, der skal benyttes under vejvisning.</string>
+    <string name="lanes_widgets_desc">Viser det aktuelle vejbane-layout og fremhæver de vejbaner, der skal benyttes under navigation.</string>
     <string name="street_name_widget_desc">Gadenavn-modulet viser det aktuelle gadenavn med en lige placeringspil eller det næste gadenavn med en pil, der angiver et kommende sving.</string>
     <string name="shared_string_widget">Modul</string>
     <string name="bearing_desc">Viser den absolutte eller relative pejling til et mål i vinkelenheder (i 180 graders, 360 graders eller milliradian-tilstand).</string>

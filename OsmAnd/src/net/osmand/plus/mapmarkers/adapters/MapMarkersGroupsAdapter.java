@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
@@ -84,7 +85,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity);
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		updateShowDirectionMarkers();
 		createDisplayGroups();
 	}

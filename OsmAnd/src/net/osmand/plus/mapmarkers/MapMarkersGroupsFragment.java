@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.Location;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -79,9 +80,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) getActivity();
-		boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
-		mainView = UiUtilities.getInflater(mapActivity, night).inflate(R.layout.fragment_map_markers_groups, container, false);
+		MapActivity mapActivity = (MapActivity) requireActivity();
+		OsmandApplication app = mapActivity.getMyApplication();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		mainView = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.fragment_map_markers_groups, container, false);
 
 		Fragment selectionMarkersGroupFragment = getChildFragmentManager().findFragmentByTag(SelectionMarkersGroupBottomSheetDialogFragment.TAG);
 		if (selectionMarkersGroupFragment != null) {
@@ -102,7 +104,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			}
 		});
 
-		backgroundPaint.setColor(ColorUtilities.getDividerColor(getActivity(), night));
+		backgroundPaint.setColor(ColorUtilities.getDividerColor(getActivity(), nightMode));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		backgroundPaint.setAntiAlias(true);
 		textPaint.setTextSize(getResources().getDimension(R.dimen.default_desc_text_size));
@@ -157,8 +159,8 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 						colorIcon = R.color.map_widget_blue;
 						colorText = R.color.map_widget_blue;
 					} else {
-						colorIcon = ColorUtilities.getDefaultIconColorId(night);
-						colorText = ColorUtilities.getSecondaryTextColorId(night);
+						colorIcon = ColorUtilities.getDefaultIconColorId(nightMode);
+						colorText = ColorUtilities.getSecondaryTextColorId(nightMode);
 					}
 					textPaint.setColor(ContextCompat.getColor(app, colorText));
 					Drawable icon = app.getUIUtilities().getIcon(
@@ -211,18 +213,15 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					}
 					updateAdapter();
 					snackbar = Snackbar.make(viewHolder.itemView, snackbarStringRes, Snackbar.LENGTH_LONG)
-							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									if (direction == ItemTouchHelper.RIGHT) {
-										app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
-									} else {
-										app.getMapMarkersHelper().addMarker(marker);
-									}
-									updateAdapter();
+							.setAction(R.string.shared_string_undo, view -> {
+								if (direction == ItemTouchHelper.RIGHT) {
+									app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+								} else {
+									app.getMapMarkersHelper().addMarker(marker);
 								}
+								updateAdapter();
 							});
-					UiUtilities.setupSnackbar(snackbar, night);
+					UiUtilities.setupSnackbar(snackbar, nightMode);
 					snackbar.show();
 				}
 			}
@@ -239,9 +238,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					return;
 				}
 				Object item = adapter.getItem(pos);
-				if (item instanceof MapMarker) {
-					MapMarker marker = (MapMarker) item;
-					OsmandApplication app = mapActivity.getMyApplication();
+				if (item instanceof MapMarker marker) {
 					if (!marker.history) {
 						if (app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
 							app.getMapMarkersHelper().moveMarkerToTop(marker);
@@ -276,7 +273,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			}
 
 			private void showMap(LatLon latLon, PointDescription desc, Object objToShow) {
-				mapActivity.getMyApplication().getSettings().setMapLocationToShow(latLon.getLatitude(),
+				app.getSettings().setMapLocationToShow(latLon.getLatitude(),
 						latLon.getLongitude(), 15, desc, true, objToShow);
 				MapActivity.launchMapActivityMoveToTop(mapActivity);
 				((DialogFragment) getParentFragment()).dismiss();
@@ -321,7 +318,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		});
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
-			emptyImageView.setImageResource(night ? R.drawable.ic_empty_state_marker_group_night : R.drawable.ic_empty_state_marker_group_day);
+			emptyImageView.setImageResource(nightMode ? R.drawable.ic_empty_state_marker_group_night : R.drawable.ic_empty_state_marker_group_day);
 		} else {
 			emptyImageView.setVisibility(View.INVISIBLE);
 		}
