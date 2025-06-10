@@ -15,6 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment.SelectStyleListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -27,9 +28,11 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 public class SkiRoutesCard extends MapBaseCard {
 
 	private static boolean hideSwitchBanner = false;
+	private final SelectStyleListener selectStyleListener;
 
-	public SkiRoutesCard(@NonNull MapActivity mapActivity) {
+	public SkiRoutesCard(@NonNull MapActivity mapActivity, SelectStyleListener selectStyleListener) {
 		super(mapActivity);
+		this.selectStyleListener = selectStyleListener;
 	}
 
 	@Override
@@ -54,7 +57,7 @@ public class SkiRoutesCard extends MapBaseCard {
 		mapStyleIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_map_style, profileColor));
 
 		mapStyleButton.setOnClickListener(v -> {
-			SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager());
+			SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), selectStyleListener);
 		});
 
 		mapStyleButton.findViewById(R.id.divider).setVisibility(View.GONE);

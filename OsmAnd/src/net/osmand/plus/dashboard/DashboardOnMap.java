@@ -49,7 +49,6 @@ import net.osmand.plus.configmap.CoordinatesGridFragment;
 import net.osmand.plus.configmap.routes.MapRoutesFragment;
 import net.osmand.plus.configmap.routes.RenderingClassFragment;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
-import net.osmand.plus.configmap.routes.SkiRoutesFragment;
 import net.osmand.plus.configmap.routes.TravelRoutesFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
@@ -779,13 +778,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					.attach(fragment)
 					.commitAllowingStateLoss();
 
-			updateFragmentContent(fragment);
-		}
-	}
-
-	private void updateFragmentContent(@NonNull Fragment fragment) {
-		if (fragment instanceof SkiRoutesFragment skiRoutesFragment) {
-			skiRoutesFragment.updateContent();
 		}
 	}
 

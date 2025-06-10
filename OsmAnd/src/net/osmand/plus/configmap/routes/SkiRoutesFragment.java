@@ -8,9 +8,10 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment.SelectStyleListener;
 import net.osmand.plus.utils.AndroidUtils;
 
-public class SkiRoutesFragment extends MapRoutesFragment {
+public class SkiRoutesFragment extends MapRoutesFragment implements SelectStyleListener {
 	private SkiRoutesCard skiRoutesCard;
 
 	@Override
@@ -48,8 +49,17 @@ public class SkiRoutesFragment extends MapRoutesFragment {
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			skiRoutesCard = new SkiRoutesCard(mapActivity);
+			skiRoutesCard = new SkiRoutesCard(mapActivity, this);
 			addCard(skiRoutesCard);
+		}
+	}
+
+	@Override
+	public void onMapStyleSelected() {
+		View view = getView();
+		if (view != null) {
+			setupHeader(view);
+			setupContent(view);
 		}
 	}
 }
