@@ -93,28 +93,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	protected void buildDescription(View view) {
 		if (amenity != null) {
-			hasDescriptionData = true;
 			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, additionalInfo);
 			Map<String, Object> filteredInfo = bundle.getFilteredLocalizedInfo();
 
-			Pair<String, Locale> pair = getDescriptionWithPreferredLang(filteredInfo);
-			String description = pair.first;
-
-			if (Algorithms.isEmpty(description)) {
-				hasDescriptionData = false;
-				description = createWikipediaArticleList(filteredInfo);
-			}
-			if (!Algorithms.isEmpty(description)) {
-				View rowView = buildRow(view, 0, null, description, 0, true,
-						null, false, 0, false, null, false);
-				TextViewEx textView = rowView.findViewById(R.id.text);
-				final String descriptionToSet = description;
-				textView.setOnClickListener(v -> {
-					descriptionCollapsed = !descriptionCollapsed;
-					updateDescriptionState(textView, descriptionToSet);
-				});
-				updateDescriptionState(textView, descriptionToSet);
-				buildReadFullWikiButton((LinearLayout) view, pair.second);
+			if (!buildShortWikiDescription(view, filteredInfo)) {
+				Pair<String, Locale> pair = getDescriptionWithPreferredLang(DESCRIPTION, filteredInfo);
+				if (pair != null) {
+					hasDescriptionData = true;
+					buildDescriptionRow(view, pair.first);
+				}
 			}
 			if (isCustomOnlinePhotosPosition()) {
 				buildNearestRows((ViewGroup) view, amenity);
@@ -122,13 +109,40 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 	}
 
-	protected void buildReadFullWikiButton(@NonNull ViewGroup container, @Nullable Locale locale) {
+	private boolean buildShortWikiDescription(@NonNull View view,
+			@NonNull Map<String, Object> filteredInfo) {
+		Pair<String, Locale> pair = getDescriptionWithPreferredLang(SHORT_DESCRIPTION, filteredInfo);
+		Locale locale = pair != null ? pair.second : null;
+		String description = pair != null ? pair.first : null;
+
+		boolean hasShortDescription = !Algorithms.isEmpty(description);
+		hasDescriptionData |= hasShortDescription;
+		if (!hasShortDescription) {
+			description = createWikipediaArticleList(filteredInfo);
+		}
+		if (!Algorithms.isEmpty(description)) {
+			View rowView = buildRow(view, 0, null, description, 0, true,
+					null, false, 0, false, null, false);
+			TextViewEx textView = rowView.findViewById(R.id.text);
+			final String descriptionToSet = description;
+			textView.setOnClickListener(v -> {
+				descriptionCollapsed = !descriptionCollapsed;
+				updateDescriptionState(textView, descriptionToSet);
+			});
+			updateDescriptionState(textView, descriptionToSet);
+			buildReadFullWikiButton((LinearLayout) view, locale, hasShortDescription);
+		}
+		return hasShortDescription;
+	}
+
+	protected void buildReadFullWikiButton(@NonNull ViewGroup container, @Nullable Locale locale,
+			boolean hasShortDescription) {
 		boolean light = isLightContent();
 		Context ctx = container.getContext();
 		int activeColor = ColorUtilities.getActiveColor(ctx, !light);
 
 		DialogButton button = (DialogButton) themedInflater.inflate(R.layout.context_menu_read_wiki_button, container, false);
-		if (hasDescriptionData) {
+		if (hasShortDescription) {
 			String text = app.getString(R.string.context_menu_read_full_article);
 			button.setTitle(UiUtilities.createColorSpannable(text, activeColor, text));
 		} else {
@@ -147,7 +161,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 
 		button.setOnClickListener((v) -> {
-			if (hasDescriptionData) {
+			if (hasShortDescription) {
 				WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
 			} else {
 				String wikipediaUrl = amenity.getAdditionalInfo(WIKIPEDIA);
@@ -165,20 +179,21 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		container.addView(button);
 	}
 
-	@NonNull
-	private Pair<String, Locale> getDescriptionWithPreferredLang(@NonNull Map<String, Object> map) {
-		Object object = map.get(SHORT_DESCRIPTION);
+	@Nullable
+	private Pair<String, Locale> getDescriptionWithPreferredLang(@NonNull String descriptionKey,
+			@NonNull Map<String, Object> map) {
+		Object object = map.get(descriptionKey);
 		if (object instanceof Map<?, ?>) {
 			Map<String, Object> descriptions = (Map<String, Object>) object;
 			Map<String, String> localizations = (Map<String, String>) descriptions.get("localizations");
 			Collection<String> locales = AmenityUIHelper.collectAvailableLocalesFromTags(localizations.keySet());
 
 			Locale locale = LocaleHelper.getPreferredNameLocale(app, locales);
-			String key = locale != null ? SHORT_DESCRIPTION + ":" + locale.getLanguage() : SHORT_DESCRIPTION;
+			String key = locale != null ? descriptionKey + ":" + locale.getLanguage() : descriptionKey;
 
 			String description = localizations.get(key);
 			if (description == null && locale != null && Algorithms.stringsEqual(locale.getLanguage(), "en")) {
-				description = localizations.get(SHORT_DESCRIPTION);
+				description = localizations.get(descriptionKey);
 			}
 			if (description == null) {
 				Map.Entry<String, String> entry = new ArrayList<>(localizations.entrySet()).get(0);
@@ -186,7 +201,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			}
 			return Pair.create(description, locale);
 		}
-		return Pair.create(amenity.getAdditionalInfo(SHORT_DESCRIPTION), null);
+		String description = amenity.getAdditionalInfo(descriptionKey);
+		if (!Algorithms.isEmpty(description)) {
+			return Pair.create(description, null);
+		}
+		return null;
 	}
 
 	@Nullable
@@ -274,25 +293,19 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private void processRoutePointAmenityTags(View view) {
-		if (!amenity.isRoutePoint()) {
-			return;
-		}
-		final String wptExtraTags = additionalInfo.get(WPT_EXTRA_TAGS);
-		if (!Algorithms.isEmpty(wptExtraTags)) {
-			Gson gson = new Gson();
-			Type type = new TypeToken<Map<String, String>>() {}.getType();
-			additionalInfo.putAll(gson.fromJson(wptExtraTags, type));
-			additionalInfo.remove(WPT_EXTRA_TAGS);
-		}
-		final String url = additionalInfo.get(TAG_URL);
-		if (PicassoUtils.isImageUrl(url)) {
-			AppCompatImageView imageView = inflateAndGetMainImageView(view);
-			PicassoUtils.setupImageViewByUrl(app, imageView, url, true);
-		}
-		final String description = additionalInfo.get(DESCRIPTION);
-		if (!Algorithms.isEmpty(description)) {
-			buildDescriptionRow(view, description);
-			additionalInfo.remove(DESCRIPTION);
+		if (amenity.isRoutePoint()) {
+			String wptExtraTags = additionalInfo.get(WPT_EXTRA_TAGS);
+			if (!Algorithms.isEmpty(wptExtraTags)) {
+				Gson gson = new Gson();
+				Type type = new TypeToken<Map<String, String>>() {}.getType();
+				additionalInfo.putAll(gson.fromJson(wptExtraTags, type));
+				additionalInfo.remove(WPT_EXTRA_TAGS);
+			}
+			String url = additionalInfo.get(TAG_URL);
+			if (PicassoUtils.isImageUrl(url)) {
+				AppCompatImageView imageView = inflateAndGetMainImageView(view);
+				PicassoUtils.setupImageViewByUrl(app, imageView, url, true);
+			}
 		}
 	}
 

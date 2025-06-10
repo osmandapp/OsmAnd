@@ -5068,6 +5068,5 @@
     <string name="poi_politician">Oficina política</string>
     <string name="poi_international_organization">Organización internacional</string>
     <string name="poi_airline">Oficina de aerolínea</string>
-    <string name="poi_route_point_category">Categoría de puntos de viaje</string>
     <string name="poi_adoption_agency">Organismo de adopción;Agencia de adopción</string>
 </resources>

@@ -159,11 +159,7 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public void setRepositoriesForSearchUICore(OsmandApplication app) {
-		List<String> ignoreExtensions = new ArrayList<>();
-		if (!app.getSettings().SHOW_TRAVEL.get()) {
-			ignoreExtensions.add(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
-		}
-		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles(ignoreExtensions);
+		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles(null);
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 		core.getSearchSettings().setRegions(app.getRegions());
 	}

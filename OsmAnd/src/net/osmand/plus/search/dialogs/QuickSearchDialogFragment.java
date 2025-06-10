@@ -1930,8 +1930,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 					bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
 
-				} else if (object instanceof PoiUIFilter) {
-					PoiUIFilter filter = (PoiUIFilter) object;
+				} else if (object instanceof PoiUIFilter filter) {
 					objectLocalizedName = filter.getName();
 					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
 					SearchPhrase phrase = searchUICore.resetPhrase();

@@ -60,8 +60,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 		searchTravelArticles(routeIds, articles -> {
 			ViewGroup group = viewGroupRef.get();
 			if (group != null && !Algorithms.isEmpty(articles)) {
-				int insertIndex = position == 0 ? 0 : position + 1;
-				firstRow = insertIndex == 0 || isDividerAtPosition(group, insertIndex - 1);
+				firstRow = position == 0 || isDividerAtPosition(group, position - 1);
 
 				int iconId = R.drawable.ic_action_travel_guides;
 				String title = app.getString(R.string.travel_guides);
@@ -70,8 +69,8 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 				buildRow(container, iconId, null, title, 0, true,
 						collapsableView, false, 1, false, null, false);
 
-				group.addView(container, insertIndex);
-				buildNearestRowDividerIfMissing(group, insertIndex);
+				group.addView(container, position);
+				buildNearestRowDividerIfMissing(group, position);
 			}
 			return true;
 		});
