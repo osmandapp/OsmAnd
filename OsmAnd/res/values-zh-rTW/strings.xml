@@ -5744,4 +5744,12 @@
     <string name="shared_string_flat">平坦</string>
     <string name="hmd_promo_description_years">%1$s年免費使用功能，包括無限制地圖下載、3D 浮雕等</string>
     <string name="shared_string_split_by">分割方式</string>
+    <string name="battery_level">電量</string>
+    <string name="sensor_data">感應器資料</string>
+    <string name="set_parking_position">設定停車位置</string>
+    <string name="set_work">設定工作</string>
+    <string name="set_home">設定家</string>
+    <string name="battery">電池</string>
+    <string name="set_intermediate_point">設定中繼點</string>
+    <string name="set_start_point">設定起始點</string>
 </resources>
