@@ -4,12 +4,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.action.GeneralClickAction;
 import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Tap;
+import androidx.test.espresso.action.Tapper;
 
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
@@ -45,20 +47,20 @@ public class SystemDialogInteractions {
 	}
 
 	public static ViewAction clickInView(final float x, final float y) {
-		return new GeneralClickAction(
-				Tap.SINGLE,
-				view -> {
-					final int[] location = new int[2];
-					view.getLocationOnScreen(location);
-					return new float[] {location[0] + x, location[1] + y};
-				},
-				Press.FINGER
-		);
+		return createClickInView(Tap.SINGLE, x, y);
 	}
 
 	public static ViewAction longClickInView(final float x, final float y) {
+		return createClickInView(Tap.LONG, x, y);
+	}
+
+	public static ViewAction doubleClickInView(final float x, final float y) {
+		return createClickInView(Tap.DOUBLE, x, y);
+	}
+
+	private static ViewAction createClickInView(@NonNull Tapper tapper, final float x, final float y) {
 		return new GeneralClickAction(
-				Tap.LONG,
+				tapper,
 				view -> {
 					final int[] location = new int[2];
 					view.getLocationOnScreen(location);
@@ -67,7 +69,6 @@ public class SystemDialogInteractions {
 				Press.FINGER
 		);
 	}
-
 
 	//finds n-th child of given type at one hierarchy level
 	public static <T extends View> T findDescendantOfType(View parent, Class<T> targetClass, int targetIndex) {

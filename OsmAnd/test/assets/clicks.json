@@ -1,8 +1,12 @@
 {
   "clicks": [
-    { "latitude": 50.43399, "longitude": 30.491957, "zoom": 14 },
-    { "latitude": 50.451134, "longitude": 30.50051, "zoom": 14 },
-    { "latitude": 50.440838, "longitude": 30.490225, "zoom": 14 },
+    { "latitude": 50.43399, "longitude": 30.491957, "zoom": 14 ,
+      "clickType":"LONG"
+    },
+    { "latitude": 50.451134, "longitude": 30.50051, "zoom": 14,
+      "clickType":"DOUBLE" },
+    { "latitude": 50.440838, "longitude": 30.490225, "zoom": 14 ,
+      "clickType":"SINGLE"},
     { "latitude": 50.43229, "longitude": 30.47054, "zoom": 14 },
     { "latitude": 50.459213, "longitude": 30.494196, "zoom": 14 },
     { "latitude": 50.462906, "longitude": 30.485138, "zoom": 14 },

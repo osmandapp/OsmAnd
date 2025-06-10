@@ -9,6 +9,8 @@ import static net.osmand.test.common.AppSettings.showWikiOnMap;
 import static net.osmand.test.common.AssetUtils.copyAssetToFile;
 import static net.osmand.test.common.AssetUtils.listAssetFiles;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
+import static net.osmand.test.common.SystemDialogInteractions.clickInView;
+import static net.osmand.test.common.SystemDialogInteractions.doubleClickInView;
 import static net.osmand.test.common.SystemDialogInteractions.findDescendantOfType;
 import static net.osmand.test.common.SystemDialogInteractions.getViewById;
 import static net.osmand.test.common.SystemDialogInteractions.isViewVisible;
@@ -47,9 +49,6 @@ import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.PoiTypesInitIdlingResource;
 import net.osmand.test.common.actions.GetViewAction;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -128,7 +127,21 @@ public class MapClickerTest extends AndroidTest {
 			float x = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixXFromLatLon(lattitude, longitude);
 			float y = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixYFromLatLon(lattitude, longitude);
 			testResult.events.add(new LocationAction(new LatLon(lattitude, longitude), zoom, LocationActionType.CLICK_LOCATION));
-			onView(withId(R.id.map_view_with_layers)).perform(longClickInView(x, y));
+			if (click.clickType != null) {
+				switch (click.clickType) {
+					case SINGLE -> {
+						onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
+					}
+					case LONG -> {
+						onView(withId(R.id.map_view_with_layers)).perform(longClickInView(x, y));
+					}
+					case DOUBLE -> {
+						onView(withId(R.id.map_view_with_layers)).perform(doubleClickInView(x, y));
+					}
+				}
+			} else {
+				onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
+			}
 			waitForAnyView(
 					5000,                         // max wait time in ms
 					50,                                     // polling interval in ms
@@ -222,7 +235,6 @@ public class MapClickerTest extends AndroidTest {
 	}
 
 	public List<ClickData> parseClicksJson(String fileName) {
-		List<ClickData> clickList = new ArrayList<>();
 		String jsonString;
 		try {
 			InputStream is = testContext.getAssets().open(fileName);
@@ -235,24 +247,16 @@ public class MapClickerTest extends AndroidTest {
 			fail("Can't read clicks.json");
 			return null;
 		}
-		try {
-			JSONObject jsonObject = new JSONObject(jsonString);
-			JSONArray clicksArray = jsonObject.getJSONArray("clicks");
-			for (int i = 0; i < clicksArray.length(); i++) {
-				JSONObject clickObject = clicksArray.getJSONObject(i);
-				double latitude = clickObject.getDouble("latitude");
-				double longitude = clickObject.getDouble("longitude");
-				int zoom = clickObject.getInt("zoom");
-				clickList.add(new ClickData(latitude, longitude, zoom));
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-			fail("Can't parse clicks.json");
-		}
-		return clickList;
+		Gson gson = new GsonBuilder().create();
+		return gson.fromJson(jsonString, ClicksData.class).clicks;
 	}
 
-	public record ClickData(double latitude, double longitude, int zoom) {
+	public class ClicksData {
+		public List<ClickData> clicks;
+	}
+
+	public record ClickData(double latitude, double longitude, int zoom,
+	                        @Nullable ClickType clickType) {
 	}
 
 	public enum MenuType {
@@ -297,6 +301,12 @@ public class MapClickerTest extends AndroidTest {
 	public enum ActionResultType {
 		OPEN,
 		NOT_OPEN
+	}
+
+	public enum ClickType {
+		SINGLE,
+		LONG,
+		DOUBLE
 	}
 
 	private class ClickTestResult {

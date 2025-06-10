@@ -48,6 +48,9 @@ public class AssetUtils {
 	}
 
 	public static void copyAssetToFile(@NonNull Context testContext, String assetName, File destFile) throws IOException {
+		if(destFile.exists()) {
+			destFile.delete();
+		}
 		try (InputStream in = testContext.getAssets().open(assetName);
 		     FileOutputStream out = new FileOutputStream(destFile)) {
 			Algorithms.streamCopy(in, out);

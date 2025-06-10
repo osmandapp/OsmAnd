@@ -34,11 +34,22 @@ public class OsmAndDialogInteractions {
 		skipNavigationRestoration(ctx);
 		skipWhatsNewDialog(ctx);
 		skipArrivedDestinationDialog();
+		skipSendAnalyticsDialog();
 	}
 
 	public static void skipFirstUsageDialog() {
 		try {
 			ViewInteraction skipButton = EspressoUtils.waitForView(allOf(withId(R.id.skip_button),
+					hasOnClickListener(),
+					isDisplayed()), 500);
+			skipButton.perform(click());
+		} catch (Throwable ignore) {
+		}
+	}
+
+	public static void skipSendAnalyticsDialog() {
+		try {
+			ViewInteraction skipButton = EspressoUtils.waitForView(allOf(withId(R.id.dismiss_button),
 					hasOnClickListener(),
 					isDisplayed()), 500);
 			skipButton.perform(click());
