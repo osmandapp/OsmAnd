@@ -5800,4 +5800,6 @@
     <string name="set_home">Indstil hjem</string>
     <string name="set_intermediate_point">Indstil mellemliggende punkt</string>
     <string name="set_start_point">Indstil startpunkt</string>
+    <string name="shared_string_switch">Skift</string>
+    <string name="ski_route_switch_style_description">Udforsk pister, lifte og meget mere med vinter- og skikortet.</string>
 </resources>
