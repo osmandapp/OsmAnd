@@ -5772,4 +5772,6 @@
     <string name="set_start_point">Nastavit začátek</string>
     <string name="sensor_data">Data ze senzorů</string>
     <string name="battery">baterie</string>
+    <string name="ski_route_switch_style_description">Procházejte sjezdovky, lanovky a další se zimním a lyžařským mapovým stylem.</string>
+    <string name="shared_string_switch">Přepnout</string>
 </resources>
