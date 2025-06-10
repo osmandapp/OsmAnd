@@ -779,7 +779,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					.detach(fragment)
 					.attach(fragment)
 					.commitAllowingStateLoss();
-
 		}
 	}
 
