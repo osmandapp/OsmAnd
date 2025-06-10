@@ -591,7 +591,7 @@ public class MapSelectionHelper {
 					CommonPreference<String> pref = settings.getCustomRenderProperty(attrName);
 					enabled = property.containsValue(pref.get());
 				} else {
-					enabled = settings.getRenderBooleanPropertyValue(attrName);
+					enabled = settings.getRenderBooleanPropertyValue(property);
 				}
 				if (enabled) {
 					filteredOsmRouteTypes.add(osmRouteType);

@@ -3090,6 +3090,10 @@ public class OsmandSettings {
 		RENDERER.setModeDefaultValue(ApplicationMode.SKI, RendererRegistry.WINTER_SKI_RENDER);
 	}
 
+	public boolean getRenderBooleanPropertyValue(@NonNull RenderingRuleProperty property) {
+		return getRenderBooleanPropertyValue(property.getAttrName());
+	}
+
 	public boolean getRenderBooleanPropertyValue(@NonNull String attrName) {
 		if (attrName.equals(NO_POLYGONS_ATTR)) {
 			return shouldHidePolygons(true);
@@ -3121,14 +3125,20 @@ public class OsmandSettings {
 
 	@NonNull
 	public CommonPreference<String> getCustomRenderProperty(@NonNull String attrName) {
-		if (!customRendersProps.containsKey(attrName)) {
-			registerCustomRenderProperty(attrName, "");
-		}
-		return customRendersProps.get(attrName);
+		return getCustomRenderProperty(attrName, "");
 	}
 
 	@NonNull
-	public CommonPreference<String> registerCustomRenderProperty(@NonNull String attrName, @Nullable String defaultValue) {
+	public CommonPreference<String> getCustomRenderProperty(@NonNull String attrName, @Nullable String defaultValue) {
+		CommonPreference<String> preference = customRendersProps.get(attrName);
+		if (preference == null) {
+			preference = registerCustomRenderProperty(attrName, defaultValue);
+		}
+		return preference;
+	}
+
+	@NonNull
+	private CommonPreference<String> registerCustomRenderProperty(@NonNull String attrName, @Nullable String defaultValue) {
 		String id = attrName.startsWith(RENDERER_PREFERENCE_PREFIX) ? attrName : RENDERER_PREFERENCE_PREFIX + attrName;
 		CommonPreference<String> preference = new StringPreference(this, id, defaultValue).makeProfile();
 		customRendersProps.put(attrName, preference);
@@ -3150,14 +3160,19 @@ public class OsmandSettings {
 
 	@NonNull
 	public CommonPreference<Boolean> getCustomRenderBooleanProperty(@NonNull String attrName) {
+		return getCustomRenderBooleanProperty(attrName, false);
+	}
+
+	@NonNull
+	public CommonPreference<Boolean> getCustomRenderBooleanProperty(@NonNull String attrName, boolean defaultValue) {
 		if (!customBooleanRendersProps.containsKey(attrName)) {
-			registerCustomRenderBooleanProperty(attrName, false);
+			registerCustomRenderBooleanProperty(attrName, defaultValue);
 		}
 		return customBooleanRendersProps.get(attrName);
 	}
 
 	@NonNull
-	public CommonPreference<Boolean> registerCustomRenderBooleanProperty(@NonNull String attrName, boolean defaultValue) {
+	private CommonPreference<Boolean> registerCustomRenderBooleanProperty(@NonNull String attrName, boolean defaultValue) {
 		String id = attrName.startsWith(RENDERER_PREFERENCE_PREFIX) ? attrName : RENDERER_PREFERENCE_PREFIX + attrName;
 		CommonPreference<Boolean> preference = new BooleanPreference(this, id, defaultValue).makeProfile();
 		customBooleanRendersProps.put(attrName, preference);
