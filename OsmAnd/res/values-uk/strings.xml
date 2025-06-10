@@ -5771,4 +5771,12 @@
     <string name="uphill_downhill_split">Вгору / Спуск</string>
     <string name="shared_string_flat">Квартира</string>
     <string name="shared_string_split_by">Розділити на</string>
+    <string name="sensor_data">Дані датчиків</string>
+    <string name="battery">акумулятор</string>
+    <string name="battery_level">Рівень заряду батареї</string>
+    <string name="set_parking_position">Встановити положення для паркування</string>
+    <string name="set_work">Встановити роботу</string>
+    <string name="set_home">Встановити домашній</string>
+    <string name="set_intermediate_point">Встановити проміжну точку</string>
+    <string name="set_start_point">Встановити початкову точку</string>
 </resources>
