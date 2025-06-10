@@ -5751,4 +5751,12 @@
     <string name="uphill_downhill_split">Узбрдо / Низбрдо</string>
     <string name="shared_string_flat">Равно</string>
     <string name="shared_string_split_by">Подели по</string>
+    <string name="sensor_data">Подаци сензора</string>
+    <string name="set_parking_position">Постави положај паркирања</string>
+    <string name="set_work">Додели посао</string>
+    <string name="set_start_point">Постави почетну тачку</string>
+    <string name="battery">батерија</string>
+    <string name="set_home">Додели дом</string>
+    <string name="battery_level">Ниво батерије</string>
+    <string name="set_intermediate_point">Постави међуодредишну тачку</string>
 </resources>
