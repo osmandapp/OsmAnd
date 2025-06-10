@@ -5708,4 +5708,7 @@
     <string name="read_on">Olvassa el itt: %1$s</string>
     <string name="hmd_promo_description_years">%1$s évig ingyenes hozzáférés a funkciókhoz, többek között korlátlan térképletöltés, 3D domborzat stb.</string>
     <string name="hmd_promo_years">HMD Promo %1$s évre</string>
+    <string name="shared_string_flat">Sík</string>
+    <string name="uphill_downhill_split">Felfelé / lefelé</string>
+    <string name="shared_string_split_by">Felosztás eszerint:</string>
 </resources>

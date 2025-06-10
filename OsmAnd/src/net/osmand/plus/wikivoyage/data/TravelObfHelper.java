@@ -389,7 +389,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public boolean isAnyTravelBookPresent() {
-		return !app.isApplicationInitializing() && !app.getResourceManager().isWikivoyageRepositoryEmpty();
+		return !app.isApplicationInitializing() && app.getResourceManager().hasTravelRepositories();
 	}
 
 	@NonNull

@@ -5066,4 +5066,7 @@
     <string name="poi_moving_company">Umzugsunternehmen</string>
     <string name="poi_construction_company">Bauunternehmen</string>
     <string name="poi_politician">Büro eines Politikers</string>
+    <string name="poi_landmark_church">Landmark Kirche</string>
+    <string name="poi_neo_pentecostal_church">Neocharismatische Kirchenbewegung</string>
+    <string name="poi_route_point_category">Reise Punkt Kategorie</string>
 </resources>

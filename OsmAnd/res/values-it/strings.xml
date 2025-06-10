@@ -5668,8 +5668,8 @@
     <string name="display_distance_to_first_intermediate">Mostra i dettagli del percorso per la prossima fermata</string>
     <string name="recently_visited">Visti di recente</string>
     <string name="popular_places_nearby">Luoghi popolari nelle vicinanze</string>
-    <string name="map_widget_route_information_desc">Mostra il tempo di arrivo stimato, il tempo di viaggio rimanente e la distanza per il percorso di navigazione corrente.</string>
-    <string name="shared_string_default_view">Vista predefinita</string>
+    <string name="map_widget_route_information_desc">Visualizza l\'orario di arrivo stimato, il tempo di percorrenza rimanente e la distanza per l\'attuale percorso di navigazione.</string>
+    <string name="shared_string_default_view">Vista di default</string>
     <string name="map_widget_route_information">Informazioni sul percorso</string>
     <string name="shared_string_length">Lunghezza</string>
     <string name="ais_load_data">Carica i dati AIS dal file</string>
@@ -5777,4 +5777,6 @@
     <string name="unit_of_temperature_description">Scegli l\'unità di misura che verrà utilizzata per tutte le temperature nel profilo attuale.</string>
     <string name="hmd_promo_years">HMD Promo per %1$s anni</string>
     <string name="hmd_promo_description_years">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s anni</string>
+    <string name="shared_string_flat">Pianeggiante</string>
+    <string name="uphill_downhill_split">Salita/Discesa</string>
 </resources>

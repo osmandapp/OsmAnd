@@ -1160,12 +1160,12 @@
     <string name="poi_genus">Slægt</string>
     <string name="poi_taxon">Takson</string>
     <string name="poi_cuisine">Køkken</string>
-    <string name="poi_information_guidepost">Vejvisning</string>
+    <string name="poi_information_guidepost">Vejviser</string>
     <string name="poi_information_board">Tavle</string>
     <string name="poi_information_map">Kort</string>
     <string name="poi_information_office">Kontor</string>
     <string name="poi_information_terminal">Terminal</string>
-    <string name="poi_information_route_marker">Ruteskilte</string>
+    <string name="poi_information_route_marker">Rutemarkør</string>
     <string name="poi_information_hikingmap">Vandrekort</string>
     <string name="poi_information_nature">Natur</string>
     <string name="poi_information_history">Historie</string>
@@ -4238,4 +4238,6 @@
     <string name="poi_network_foot">Rutenetværk (vandring)</string>
     <string name="poi_network_cycling">Rutenetværk (cykling)</string>
     <string name="poi_osmwiki">Populære steder (Wikipedia)</string>
+    <string name="poi_to">Til</string>
+    <string name="poi_from">Fra</string>
 </resources>

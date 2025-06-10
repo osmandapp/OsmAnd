@@ -5,7 +5,6 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.MULTISEARCH;
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.Amenity.WIKIDATA;
-import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.CollatorStringMatcher;
@@ -108,7 +107,7 @@ public class AmenitySearcher {
         for (String fileName : fileNames) {
             AmenityIndexRepository r = amenityRepositories.get(fileName);
             if (r != null && fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-                if (includeTravel && travelFileVisibility != null && !travelFileVisibility.test(fileName)) {
+                if (includeTravel && (travelFileVisibility == null || travelFileVisibility.test(fileName))) {
                     travelMaps.add(r);
                 }
             } else if (r != null && r.isWorldMap()) {
@@ -215,11 +214,10 @@ public class AmenitySearcher {
 		if (latLon == null) {
             return null;
         }
-        long id = osmId == null ? -1 : osmId;
         int searchRadius = request.type == EntityType.RELATION ? AMENITY_SEARCH_RADIUS_FOR_RELATION : AMENITY_SEARCH_RADIUS;
         QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
 
-        List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, false, settings.fileVisibility);
+        List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true, settings.fileVisibility);
 
         List<Amenity> filtered = new ArrayList<>();
         if (osmId > 0 || wikidata != null) {

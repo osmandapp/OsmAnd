@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.Arrays;
@@ -32,9 +33,10 @@ public class AdditionalInfoBundle {
 	private Map<String, String> filteredAdditionalInfo = null;
 	private Map<String, Object> localizedAdditionalInfo = null;
 
+	private List<String> customHiddenExtensions;
 
 	public AdditionalInfoBundle(@NonNull OsmandApplication app,
-	                            @Nullable Map<String, String> additionalInfo) {
+			@Nullable Map<String, String> additionalInfo) {
 		this.app = app;
 		this.additionalInfo = additionalInfo;
 	}
@@ -60,7 +62,8 @@ public class AdditionalInfoBundle {
 				} else {
 					key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
 				}
-				if (!HIDDEN_EXTENSIONS.contains(key)) {
+				if (!HIDDEN_EXTENSIONS.contains(key) && (Algorithms.isEmpty(customHiddenExtensions)
+						|| !customHiddenExtensions.contains(key))) {
 					result.put(key, get(key));
 				}
 			}
@@ -91,5 +94,9 @@ public class AdditionalInfoBundle {
 		String str = additionalInfo.get(key);
 		str = Amenity.unzipContent(str);
 		return str;
+	}
+
+	public void setCustomHiddenExtensions(List<String> customHiddenExtensions) {
+		this.customHiddenExtensions = customHiddenExtensions;
 	}
 }

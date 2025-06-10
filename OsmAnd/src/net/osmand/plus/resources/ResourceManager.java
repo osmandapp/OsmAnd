@@ -723,8 +723,8 @@ public class ResourceManager {
 		return new ArrayList<>(travelRepositories.values());
 	}
 
-	public boolean isWikivoyageRepositoryEmpty() {
-		return travelRepositories.isEmpty();
+	public boolean hasTravelRepositories() {
+		return !travelRepositories.isEmpty();
 	}
 
 	public void initMapBoundariesCacheNative() {

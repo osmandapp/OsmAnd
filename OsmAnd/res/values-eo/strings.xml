@@ -5755,4 +5755,7 @@
     <string name="read_on">Legi en %1$s</string>
     <string name="hmd_promo_years">Promocio HMD por %1$s jaroj</string>
     <string name="hmd_promo_description_years">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s jaroj</string>
+    <string name="uphill_downhill_split">Supreniro / malsupreniro</string>
+    <string name="shared_string_flat">Ebeno</string>
+    <string name="shared_string_split_by">Dividi laŭ</string>
 </resources>

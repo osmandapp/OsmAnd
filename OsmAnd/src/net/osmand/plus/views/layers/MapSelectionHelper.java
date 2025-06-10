@@ -396,8 +396,6 @@ public class MapSelectionHelper {
 												detailsObject.setMapIconName(getMapIconName(symbolInfo));
 												addGeometry(detailsObject, obfMapObject);
 												detailsObject.setObfResourceName(obfMapObject.getObfSection().getName());
-											} else {
-												result.collect(renderedObject, null);
 											}
 										}
 									}
