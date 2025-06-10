@@ -5792,4 +5792,12 @@
     <string name="shared_string_flat">Flad</string>
     <string name="uphill_downhill_split">Opad / nedad</string>
     <string name="shared_string_split_by">Opdelt af</string>
+    <string name="battery">batteri</string>
+    <string name="sensor_data">Sensordata</string>
+    <string name="battery_level">Batteriniveau</string>
+    <string name="set_parking_position">Indstil parkeringsposition</string>
+    <string name="set_work">Indstil arbejde</string>
+    <string name="set_home">Indstil hjem</string>
+    <string name="set_intermediate_point">Indstil mellemliggende punkt</string>
+    <string name="set_start_point">Indstil startpunkt</string>
 </resources>
