@@ -67,10 +67,17 @@ public class RendererRegistry {
 	private Map<String, File> externalRenderers = new LinkedHashMap<>();
 	private final Map<String, String> internalRenderers = new LinkedHashMap<>();
 	private final Map<String, RenderingRulesStorage> loadedRenderers = new LinkedHashMap<>();
-	private final List<IRendererLoadedEventListener> rendererLoadedListeners = new ArrayList<>();
+	private final List<RendererEventListener> rendererLoadedListeners = new ArrayList<>();
 
-	public interface IRendererLoadedEventListener {
-		void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source);
+	public interface RendererEventListener {
+		default void onRendererSelected(RenderingRulesStorage storage) {
+
+		}
+
+		default void onRendererLoaded(String name, RenderingRulesStorage rules,
+				InputStream source) {
+
+		}
 	}
 
 	public RendererRegistry(@NonNull OsmandApplication app) {
@@ -136,7 +143,7 @@ public class RendererRegistry {
 			defaultRender = storage;
 		}
 		if (currentSelectedRender == renderer) {
-			currentSelectedRender = storage;
+			setCurrentSelectedRender(storage);
 		}
 		loadedRenderers.put(storage.getName(), storage);
 	}
@@ -197,7 +204,7 @@ public class RendererRegistry {
 			}
 
 			if (!addon) {
-				for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
+				for (RendererEventListener listener : rendererLoadedListeners) {
 					listener.onRendererLoaded(name, main, getInputStream(name));
 				}
 			}
@@ -426,13 +433,17 @@ public class RendererRegistry {
 
 	public void setCurrentSelectedRender(RenderingRulesStorage currentSelectedRender) {
 		this.currentSelectedRender = currentSelectedRender;
+
+		for (RendererEventListener listener : rendererLoadedListeners) {
+			listener.onRendererSelected(currentSelectedRender);
+		}
 	}
 
-	public void addRendererLoadedEventListener(IRendererLoadedEventListener listener) {
+	public void addRendererEventListener(RendererEventListener listener) {
 		rendererLoadedListeners.add(listener);
 	}
 
-	public void removeRendererLoadedEventListener(IRendererLoadedEventListener listener) {
+	public void removeRendererEventListener(RendererEventListener listener) {
 		rendererLoadedListeners.remove(listener);
 	}
 
