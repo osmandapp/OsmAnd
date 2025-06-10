@@ -5779,4 +5779,6 @@
     <string name="set_home">Встановити домашній</string>
     <string name="set_intermediate_point">Встановити проміжну точку</string>
     <string name="set_start_point">Встановити початкову точку</string>
+    <string name="ski_route_switch_style_description">Досліджуйте гірськолижні схили, підйомники та багато іншого за допомогою карти в стилі «Зима та лижі».</string>
+    <string name="shared_string_switch">Перемикач</string>
 </resources>
