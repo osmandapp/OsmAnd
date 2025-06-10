@@ -5711,4 +5711,12 @@
     <string name="shared_string_flat">Sík</string>
     <string name="uphill_downhill_split">Felfelé / lefelé</string>
     <string name="shared_string_split_by">Felosztás eszerint:</string>
+    <string name="sensor_data">Érzékelőadatok</string>
+    <string name="battery_level">Akkumulátor töltöttsége</string>
+    <string name="set_parking_position">Parkolási hely megadása</string>
+    <string name="set_work">Munkahely megadása</string>
+    <string name="set_home">Otthon megadása</string>
+    <string name="set_intermediate_point">Köztes pont megadása</string>
+    <string name="set_start_point">Kiindulópont megadása</string>
+    <string name="battery">akkumulátor</string>
 </resources>
