@@ -25,14 +25,12 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
-public class SkiRoutesCard extends MapBaseCard {
+public class SkiRoutesCard extends MapBaseCard implements SelectStyleListener {
 
 	private static boolean hideSwitchBanner = false;
-	private final SelectStyleListener selectStyleListener;
 
-	public SkiRoutesCard(@NonNull MapActivity mapActivity, SelectStyleListener selectStyleListener) {
+	public SkiRoutesCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
-		this.selectStyleListener = selectStyleListener;
 	}
 
 	@Override
@@ -57,7 +55,7 @@ public class SkiRoutesCard extends MapBaseCard {
 		mapStyleIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_map_style, profileColor));
 
 		mapStyleButton.setOnClickListener(v -> {
-			SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), selectStyleListener);
+			SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(), this);
 		});
 
 		mapStyleButton.findViewById(R.id.divider).setVisibility(View.GONE);
@@ -106,5 +104,10 @@ public class SkiRoutesCard extends MapBaseCard {
 
 	private void switchToWinterSkiStyle() {
 		SelectMapStyleBottomSheetDialogFragment.setStyle(mapActivity, WINTER_SKI_RENDER);
+	}
+
+	@Override
+	public void onMapStyleSelected() {
+		notifyCardPressed();
 	}
 }
