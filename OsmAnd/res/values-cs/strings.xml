@@ -5764,4 +5764,12 @@
     <string name="shared_string_flat">Rovina</string>
     <string name="uphill_downhill_split">Do kopce / z kopce</string>
     <string name="shared_string_split_by">Rozdělit podle</string>
+    <string name="battery_level">Úroveň baterie</string>
+    <string name="set_parking_position">Nastavit parkovací pozici</string>
+    <string name="set_work">Nastavit práci</string>
+    <string name="set_home">Nastavit domov</string>
+    <string name="set_intermediate_point">Nastavit mezicíl</string>
+    <string name="set_start_point">Nastavit začátek</string>
+    <string name="sensor_data">Data ze senzorů</string>
+    <string name="battery">baterie</string>
 </resources>
