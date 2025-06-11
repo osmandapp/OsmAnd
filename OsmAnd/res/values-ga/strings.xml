@@ -219,7 +219,7 @@
     <string name="shared_string_address">Seoladh</string>
     <string name="route_from">Ó:</string>
     <string name="routing_attr_weight_name">Meáchan</string>
-    <string name="shared_string_change">Athraigh</string>
+    <string name="shared_string_change">Athrú</string>
     <string name="lang_iw">Eabhrais</string>
     <string name="icon_group_symbols">Siombailí</string>
     <string name="routing_attr_difficulty_preference_expert_name">Do shaineolaithe</string>
@@ -1081,7 +1081,7 @@
     <string name="no_recalculation_setting">Gan athríomh</string>
     <string name="ascent_descent">Ard/fána</string>
     <string name="coord_input_edit_point">Cuir pointe in eagar</string>
-    <string name="shared_string_swap">Athraigh</string>
+    <string name="shared_string_swap">Malartú</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="waypoint_appearance">Cuma an treoirphointe</string>
     <string name="shared_string_downloading_formatted">Ag íoslódáil %s</string>
@@ -5578,4 +5578,14 @@
     <string name="uphill_downhill_split">Suas an Cnoc / Síos an Cnoc</string>
     <string name="shared_string_flat">Maol</string>
     <string name="shared_string_split_by">Roinnte de réir</string>
+    <string name="ski_route_switch_style_description">Taiscéal fánaí sciála, ardaitheoirí agus tuilleadh leis an stíl léarscáile Geimhridh agus Sciála.</string>
+    <string name="set_work">Obair socraithe</string>
+    <string name="set_home">Socraigh baile</string>
+    <string name="set_intermediate_point">Socraigh pointe idirmheánach</string>
+    <string name="set_start_point">Socraigh túsphointe</string>
+    <string name="battery">ceallraí</string>
+    <string name="sensor_data">Sonraí braiteora</string>
+    <string name="battery_level">Leibhéal ceallraí</string>
+    <string name="set_parking_position">Socraigh suíomh páirceála</string>
+    <string name="shared_string_switch">Athraigh</string>
 </resources>
