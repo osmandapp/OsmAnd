@@ -85,6 +85,7 @@ public class SkiRoutesCard extends MapBaseCard implements SelectStyleListener {
 		switchButton.setTitleId(R.string.shared_string_switch);
 		switchButton.setOnClickListener(view -> {
 			switchToWinterSkiStyle();
+			notifyCardPressed();
 		});
 		AndroidUiHelper.updateVisibility(switchButton, true);
 
