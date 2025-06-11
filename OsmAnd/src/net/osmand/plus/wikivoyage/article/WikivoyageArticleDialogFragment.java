@@ -34,6 +34,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -59,6 +60,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -106,7 +108,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 		int appBarTextColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		articleToolbarText = mainView.findViewById(R.id.article_toolbar_text);
-		articleToolbarText.setTextColor(ContextCompat.getColor(getContext(), appBarTextColor));
+		articleToolbarText.setTextColor(ContextCompat.getColor(mainView.getContext(), appBarTextColor));
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
 				R.color.icon_color_default_light, R.color.active_color_primary_light,
@@ -118,32 +120,24 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
 		selectedLangTv.setBackgroundResource(nightMode
 				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
-		selectedLangTv.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showPopupLangMenu(v, selectedLang);
-			}
-		});
+		selectedLangTv.setOnClickListener(v -> showPopupLangMenu(v, selectedLang));
 
 		TextView contentsBtn = mainView.findViewById(R.id.contents_button);
 		contentsBtn.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_contents), null, null, null
 		);
-		contentsBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentManager fm = getFragmentManager();
-				if (article == null || fm == null) {
-					return;
-				}
-				Bundle args = new Bundle();
-				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
-				WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
-				fragment.setUsedOnMap(false);
-				fragment.setArguments(args);
-				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, WikivoyageArticleContentsFragment.SHOW_CONTENT_ITEM_REQUEST_CODE);
-				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
+		contentsBtn.setOnClickListener(v -> {
+			FragmentManager fm = getFragmentManager();
+			if (article == null || fm == null) {
+				return;
 			}
+			Bundle args = new Bundle();
+			args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
+			WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setArguments(args);
+			fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, WikivoyageArticleContentsFragment.SHOW_CONTENT_ITEM_REQUEST_CODE);
+			fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
 		});
 
 		trackButton = mainView.findViewById(R.id.gpx_button);
@@ -255,12 +249,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark));
 			saveBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
-			saveBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					helper.saveOrRemoveArticle(article, !saved);
-					updateSaveButton();
-				}
+			saveBtn.setOnClickListener(view -> {
+				helper.saveOrRemoveArticle(article, !saved);
+				updateSaveButton();
 			});
 		}
 	}
@@ -280,15 +271,12 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			String lang = e.getValue();
 			String langKey = e.getKey();
 			MenuItem item = popup.getMenu().add(lang);
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					if (!selectedLang.equals(langKey)) {
-						selectedLang = langKey;
-						populateArticle();
-					}
-					return true;
+			item.setOnMenuItemClickListener(i -> {
+				if (!selectedLang.equals(langKey)) {
+					selectedLang = langKey;
+					populateArticle();
 				}
+				return true;
 			});
 		}
 		popup.show();
@@ -307,7 +295,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			return;
 		}
 		if (selectedLang == null) {
-			selectedLang = langs.get(0);
+			Locale locale = LocaleHelper.getPreferredNameLocale(app, langs);
+			selectedLang = locale != null ? locale.getLanguage() : langs.get(0);
 		}
 		articleToolbarText.setText("");
 		article = app.getTravelHelper().getArticleById(articleId, selectedLang, true,
