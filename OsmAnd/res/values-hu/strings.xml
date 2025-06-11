@@ -5719,4 +5719,6 @@
     <string name="set_intermediate_point">Köztes pont megadása</string>
     <string name="set_start_point">Kiindulópont megadása</string>
     <string name="battery">akkumulátor</string>
+    <string name="shared_string_switch">Kapcsoló</string>
+    <string name="ski_route_switch_style_description">Fedezze fel a sípályákat, felvonókat és egyebeket a Tél és síelés térképstílussal.</string>
 </resources>
