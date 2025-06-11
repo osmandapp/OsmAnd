@@ -5752,4 +5752,6 @@
     <string name="battery">電池</string>
     <string name="set_intermediate_point">設定中繼點</string>
     <string name="set_start_point">設定起始點</string>
+    <string name="shared_string_switch">開關</string>
+    <string name="ski_route_switch_style_description">使用冬季與滑雪地圖風格探索滑雪場、纜車等。</string>
 </resources>

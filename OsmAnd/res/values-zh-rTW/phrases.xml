@@ -5069,4 +5069,5 @@
     <string name="poi_graphic_design">平面設計師辦公室</string>
     <string name="poi_visa">簽證協助</string>
     <string name="poi_airline">航空公司辦公室</string>
+    <string name="poi_route_point_category">旅行分類</string>
 </resources>

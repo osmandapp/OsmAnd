@@ -1917,7 +1917,7 @@
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
     <string name="replace_favorite_confirmation">¿Reemplazar el favorito «%1$s»?</string>
     <string name="routing_attr_short_way_name">Ruta corta (bajo consumo)</string>
-    <string name="shared_string_change">Cambiar</string>
+    <string name="shared_string_change">Cambio</string>
     <string name="get_started">Empezar</string>
     <string name="update_all_maps_now">¿Actualizar todos los mapas ahora?</string>
     <string name="clear_tile_data">Limpiar todas las teselas</string>
@@ -5631,4 +5631,14 @@
     <string name="shared_string_flat">Plano (llanura)</string>
     <string name="uphill_downhill_split">Ascenso / Descenso</string>
     <string name="hmd_promo_description_years">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s años</string>
+    <string name="battery_level">Nivel de batería</string>
+    <string name="set_parking_position">Definir ubicación de estacionamiento</string>
+    <string name="set_work">Definir trabajo</string>
+    <string name="set_start_point">Definir punto de inicio</string>
+    <string name="ski_route_switch_style_description">Explorá pistas de esquí, ascensores y más con el estilo de mapa de invierno y esquí.</string>
+    <string name="battery">batería</string>
+    <string name="sensor_data">Datos del sensor</string>
+    <string name="set_home">Definir casa</string>
+    <string name="set_intermediate_point">Definir punto intermedio</string>
+    <string name="shared_string_switch">Cambiar</string>
 </resources>
