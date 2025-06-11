@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import static net.osmand.gpx.GPXUtilities.*;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
@@ -715,6 +716,10 @@ public class Amenity extends MapObject {
 
 	public boolean isRoutePoint() {
 		return subType != null && (subType.equals(ROUTE_TRACK_POINT) || subType.equals(ROUTE_ARTICLE_POINT));
+	}
+
+	public boolean isRouteArticle() {
+		return Algorithms.stringsEqual(ROUTE_ARTICLE, subType);
 	}
 
 	public boolean isSuperRoute() {
