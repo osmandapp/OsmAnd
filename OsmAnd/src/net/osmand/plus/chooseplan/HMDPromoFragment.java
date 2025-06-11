@@ -1,13 +1,18 @@
 package net.osmand.plus.chooseplan;
 
+import static android.view.View.GONE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_HMD_PROMO_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.*;
 import static net.osmand.plus.inapp.InAppPurchaseUtils.HMD_PROMO_YEARS;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -22,6 +27,17 @@ import java.util.List;
 public class HMDPromoFragment extends PromoCompanyFragment {
 
 	public static final String TAG = HMDPromoFragment.class.getSimpleName();
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+		View buttonsContainer = view != null ? view.findViewById(R.id.buttons_container) : null;
+		if (buttonsContainer != null) {
+			buttonsContainer.setVisibility(GONE);
+		}
+		return view;
+	}
 
 	@Override
 	public void onResume() {
