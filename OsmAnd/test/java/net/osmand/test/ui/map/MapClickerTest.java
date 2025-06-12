@@ -8,7 +8,10 @@ import static net.osmand.test.common.AppSettings.isShowWikiOnMap;
 import static net.osmand.test.common.AppSettings.showWikiOnMap;
 import static net.osmand.test.common.AssetUtils.copyAssetToFile;
 import static net.osmand.test.common.AssetUtils.listAssetFiles;
+import static net.osmand.test.common.OsmAndDialogInteractions.isRenderingIdle;
+import static net.osmand.test.common.OsmAndDialogInteractions.moveAndZoomMap;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
+import static net.osmand.test.common.OsmAndDialogInteractions.waitForRenderingIdle;
 import static net.osmand.test.common.SystemDialogInteractions.clickInView;
 import static net.osmand.test.common.SystemDialogInteractions.doubleClickInView;
 import static net.osmand.test.common.SystemDialogInteractions.findDescendantOfType;
@@ -17,6 +20,7 @@ import static net.osmand.test.common.SystemDialogInteractions.isViewVisible;
 import static net.osmand.test.common.SystemDialogInteractions.longClickInView;
 import static net.osmand.test.common.SystemDialogInteractions.waitForAnyView;
 import static org.hamcrest.CoreMatchers.anything;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -110,8 +114,9 @@ public class MapClickerTest extends AndroidTest {
 		double lattitude = 50.452880;
 		double longitude = 30.514269;
 		int zoom = 14;
-
 		skipAppStartDialogs(app);
+		MapRendererView rendererView = app.getOsmandMap().getMapView().getMapRenderer();
+		assertNotNull(rendererView);
 		List<ClickData> clicks = parseClicksJson("clicks.json");
 		ClickTestResult testResult = new ClickTestResult();
 		PackageInfo pi = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
@@ -123,7 +128,9 @@ public class MapClickerTest extends AndroidTest {
 			longitude = click.longitude;
 			zoom = click.zoom;
 			testResult.events.add(new LocationAction(new LatLon(lattitude, longitude), zoom, LocationActionType.MOVE_LOCATION));
-			moveAndZoomMap(lattitude, longitude, zoom);
+			moveAndZoomMap(app, lattitude, longitude, zoom);
+			testResult.events.add(new WaitIdleRenderingEvent(false, waitForRenderingIdle(app, false)));
+			testResult.events.add(new WaitIdleRenderingEvent(true, waitForRenderingIdle(app, true)));
 			float x = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixXFromLatLon(lattitude, longitude);
 			float y = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixYFromLatLon(lattitude, longitude);
 			testResult.events.add(new LocationAction(new LatLon(lattitude, longitude), zoom, LocationActionType.CLICK_LOCATION));
@@ -228,12 +235,6 @@ public class MapClickerTest extends AndroidTest {
 		}
 	}
 
-	private void moveAndZoomMap(double latitude, double longitude, int zoom) {
-		app.getOsmandMap().getMapView().setLatLon(latitude, longitude);
-		app.getOsmandMap().getMapView().refreshMap();
-		app.getOsmandMap().getMapView().setIntZoom(zoom);
-	}
-
 	public List<ClickData> parseClicksJson(String fileName) {
 		String jsonString;
 		try {
@@ -326,6 +327,8 @@ public class MapClickerTest extends AndroidTest {
 		private final float cpuLoad;
 		private final long usedMemory;
 		private int frameId = 0;
+		private boolean renderingIdle;
+		private String name;
 
 		public Event() {
 			MapRendererView renderer = app.getOsmandMap().getMapView().getMapRenderer();
@@ -338,6 +341,8 @@ public class MapClickerTest extends AndroidTest {
 			Runtime runtime = Runtime.getRuntime();
 			usedMemory = runtime.totalMemory() - runtime.freeMemory();
 			timestamp = System.currentTimeMillis();
+			renderingIdle = isRenderingIdle(app);
+			name = getClass().getSimpleName();
 		}
 
 		public long getTimestamp() {
@@ -354,6 +359,17 @@ public class MapClickerTest extends AndroidTest {
 
 		public long getUsedMemory() {
 			return usedMemory;
+		}
+	}
+
+	private final class WaitIdleRenderingEvent extends Event {
+		private final boolean targetState;
+		private final boolean isSuccess;
+
+		public WaitIdleRenderingEvent(boolean targetState, boolean isSuccess) {
+			super();
+			this.targetState = targetState;
+			this.isSuccess = isSuccess;
 		}
 	}
 

@@ -20,6 +20,7 @@ import androidx.annotation.StringRes;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
@@ -138,5 +139,22 @@ public class OsmAndDialogInteractions {
 	public static void moveAndZoomMap(@NonNull OsmandApplication app, double latitude, double longitude, int zoom) {
 		app.getOsmandMap().getMapView().setLatLon(latitude, longitude);
 		app.getOsmandMap().getMapView().setIntZoom(zoom);
+	}
+
+	public static boolean waitForRenderingIdle(@NonNull OsmandApplication app, boolean isIdle) {
+		long startTime = System.currentTimeMillis();
+		boolean idleStateReached;
+		while ((idleStateReached = isRenderingIdle(app) != isIdle) && System.currentTimeMillis() - startTime < 2000) {
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException ignored) {
+			}
+		}
+		return idleStateReached;
+	}
+
+	public static boolean isRenderingIdle(@NonNull OsmandApplication app) {
+		MapRendererView rendererView = app.getOsmandMap().getMapView().getMapRenderer();
+		return rendererView == null || !rendererView.isSymbolsLoadingActive();
 	}
 }
