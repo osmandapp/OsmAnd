@@ -5759,4 +5759,6 @@
     <string name="set_home">Додели дом</string>
     <string name="battery_level">Ниво батерије</string>
     <string name="set_intermediate_point">Постави међуодредишну тачку</string>
+    <string name="ski_route_switch_style_description">Истражите скијашке стазе, жичаре и још много тога помоћу мапе у стилу Зиме и Скијања.</string>
+    <string name="shared_string_switch">Прекидач</string>
 </resources>
