@@ -447,7 +447,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							"\"productId\" : \"" + fullVersion.getSku() + "\"," +
 							"\"purchaseTime\" : " + Version.getInstallTime(ctx) + "," +
 							"\"purchaseState\" : 0," +
-							"\"purchaseToken\" : \"\"," +
+							"\"purchaseToken\" : \"" + OSMAND_PLUS_APP_ORDER_ID + "\"," +
 							"\"acknowledged\" : true }";
 					try {
 						Purchase purchase = new Purchase(json, "");
