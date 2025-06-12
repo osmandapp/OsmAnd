@@ -74,6 +74,8 @@ public abstract class InAppPurchaseHelper {
 	public static final String PLATFORM_HUAWEI = "huawei";
 	public static final String PLATFORM_FASTSPRING = "fastspring";
 
+	protected static final String OSMAND_PLUS_APP_ORDER_ID = "OSMAND_PLUS_APP";
+
 	private final boolean mDebugLog = true;
 
 	protected InAppPurchases purchases;

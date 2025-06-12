@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.amazon.device.iap.PurchasingService;
+import com.amazon.device.iap.internal.model.ReceiptBuilder;
 import com.amazon.device.iap.model.Product;
 import com.amazon.device.iap.model.ProductType;
 import com.amazon.device.iap.model.PurchaseResponse;
@@ -15,6 +16,7 @@ import com.amazon.device.iap.model.UserData;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
@@ -38,6 +40,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Currency;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -320,15 +323,19 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						}
 					}
 
+					Map<String, Receipt> completePurchases = new HashMap<>();
 					InAppPurchase fullVersion = getFullVersion();
+					Receipt fullVersionReceipt = fullVersion != null ? getReceipt(fullVersion.getSku()) : null;
 					if (fullVersion != null && hasDetails(fullVersion.getSku())) {
-						Receipt receipt = getReceipt(fullVersion.getSku());
 						Product productInfo = getProductInfo(fullVersion.getSku());
 						if (productInfo != null) {
-							fetchInAppPurchase(fullVersion, productInfo, receipt);
+							fetchInAppPurchase(fullVersion, productInfo, fullVersionReceipt);
 						}
 					}
-					if (fullVersion != null && getReceipt(fullVersion.getSku()) != null) {
+
+					boolean fullVersionPurchased = fullVersionReceipt != null;
+					if (fullVersionPurchased) {
+						completePurchases.put(fullVersion.getSku(), fullVersionReceipt);
 						ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 					} else if (fullVersion != null) {
 						for (InAppStateHolder holder : inAppStateMap.values()) {
@@ -339,17 +346,25 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						}
 					}
 
+					if (fullVersion != null && !fullVersionPurchased && Version.isFullVersion(ctx)) {
+						ReceiptBuilder receiptBuilder = new ReceiptBuilder()
+								.setSku(fullVersion.getSku())
+								.setReceiptId(OSMAND_PLUS_APP_ORDER_ID)
+								.setPurchaseDate(new Date(Version.getInstallTime(ctx)));
+						Receipt receipt = receiptBuilder.build();
+						completePurchases.put(receipt.getSku(), receipt);
+					}
+
 					// Do we have the live updates?
 					boolean subscribedToLiveUpdates = false;
 					boolean subscribedToOsmAndPro = false;
 					boolean subscribedToMaps = false;
 					InAppSubscription mapsSubscription = null;
-					Map<String, Receipt> subscriptionPurchases = new HashMap<>();
 					for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 						Receipt receipt = getReceipt(s.getSku());
 						if (receipt != null || s.getState().isActive()) {
 							if (receipt != null) {
-								subscriptionPurchases.put(s.getSku(), receipt);
+								completePurchases.put(s.getSku(), receipt);
 							}
 							if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
 								subscribedToLiveUpdates = true;
@@ -401,9 +416,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					settings.INAPPS_READ.set(true);
 
 					Map<String, Receipt> tokensToSend = new HashMap<>();
-					if (subscriptionPurchases.size() > 0) {
+					if (completePurchases.size() > 0) {
 						List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
-						for (Entry<String, Receipt> receiptEntry : subscriptionPurchases.entrySet()) {
+						for (Entry<String, Receipt> receiptEntry : completePurchases.entrySet()) {
 							String sku = receiptEntry.getKey();
 							if (!tokensSent.contains(sku)) {
 								tokensToSend.put(sku, receiptEntry.getValue());
