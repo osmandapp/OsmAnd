@@ -15,6 +15,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.search.core.SearchResult;
 
@@ -116,14 +117,8 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 	}
 
 	@Override
-	protected void deleteSelectedItems() {
-		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-		for (Object item : selectedItems) {
-			if (item instanceof SearchResult) {
-				SearchResult searchResult = (SearchResult) item;
-				helper.remove(searchResult.object);
-			}
-		}
+	protected DeleteHistoryType getDeleteHistoryType() {
+		return DeleteHistoryType.SEARCH;
 	}
 
 	@Override

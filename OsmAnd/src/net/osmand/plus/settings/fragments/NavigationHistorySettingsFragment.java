@@ -22,6 +22,7 @@ import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.search.core.SearchResult;
 
@@ -108,20 +109,8 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 	}
 
 	@Override
-	protected void deleteSelectedItems() {
-		boolean clearBackupPoints = false;
-		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-		for (Object item : selectedItems) {
-			if (item instanceof SearchResult) {
-				SearchResult searchResult = (SearchResult) item;
-				historyHelper.remove(searchResult.object);
-			} else if (item instanceof TargetPoint) {
-				clearBackupPoints = true;
-			}
-		}
-		if (clearBackupPoints) {
-			app.getTargetPointsHelper().clearBackupPoints();
-		}
+	protected DeleteHistoryType getDeleteHistoryType() {
+		return DeleteHistoryType.NAVIGATION;
 	}
 
 	@Override
