@@ -28,6 +28,14 @@ public class GPXRouteParams {
 
 	public static final String OSMAND_ROUTER = "OsmAndRouter";
 
+	public static final ReverseRouteStrategy defaultReverseRouteStrategy = ReverseRouteStrategy.IGNORE;
+	public enum ReverseRouteStrategy {
+		IGNORE,
+		RECALCULATE,
+		APPROXIMATE
+	};
+	public ReverseRouteStrategy reverseRouteStrategy = defaultReverseRouteStrategy;
+
 	protected GpxFile gpxFile;
 	protected List<LocationPoint> wpt;
 	protected List<RouteSegmentResult> route;
@@ -55,6 +63,10 @@ public class GPXRouteParams {
 
 	public List<RouteSegmentResult> getRoute() {
 		return route;
+	}
+
+	public boolean hasOsmAndRoute() {
+		return !Algorithms.isEmpty(route);
 	}
 
 	public List<LocationPoint> getWpt() {
@@ -139,7 +151,7 @@ public class GPXRouteParams {
 	}
 
 	public static class GPXRouteParamsBuilder {
-
+		public ReverseRouteStrategy reverseRouteStrategy = defaultReverseRouteStrategy;
 		private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(GPXRouteParamsBuilder.class);
 
 		boolean calculateOsmAndRoute;
@@ -167,6 +179,7 @@ public class GPXRouteParams {
 			this.calculateOsmAndRoute = params.calculateOsmAndRoute;
 			this.leftSide = params.leftSide;
 			this.reverse = params.reverse;
+			this.reverseRouteStrategy = params.reverseRouteStrategy;
 			this.passWholeRoute = params.passWholeRoute;
 			this.calculateOsmAndRouteParts = params.calculateOsmAndRouteParts;
 			this.calculatedRouteTimeSpeed = params.calculatedRouteTimeSpeed;

@@ -33,11 +33,28 @@ public class GpxRouteHelper {
 
     protected RouteCalculationResult calculateGpxRoute(RouteCalculationParams routeParams) throws IOException {
         GPXRouteParams gpxParams = routeParams.gpxRoute;
-        boolean calcWholeRoute = routeParams.gpxRoute.passWholeRoute && (routeParams.previousToRecalculate == null || !routeParams.onlyStartPointChanged);
+        boolean calcWholeRoute = gpxParams.passWholeRoute &&
+                (routeParams.previousToRecalculate == null || !routeParams.onlyStartPointChanged);
         boolean calculateOsmAndRouteParts = gpxParams.calculateOsmAndRouteParts;
-        List<RouteSegmentResult> gpxRouteResult = routeParams.gpxRoute.route;
 
-        if (!Algorithms.isEmpty(gpxRouteResult)) {
+        boolean followOsmAndRoute = gpxParams.hasOsmAndRoute();
+
+        if (gpxParams.reverse && followOsmAndRoute) {
+            switch (gpxParams.reverseRouteStrategy) {
+                case IGNORE -> {
+                    followOsmAndRoute = false;
+                }
+                case RECALCULATE -> {
+                    System.err.printf("XXX recalc\n");
+                }
+                case APPROXIMATE -> {
+                    System.err.printf("XXX approximate\n");
+                }
+            }
+        }
+
+        if (followOsmAndRoute) {
+            List<RouteSegmentResult> gpxRouteResult = routeParams.gpxRoute.route;
             if (!gpxParams.calculatedRouteTimeSpeed) {
                 calculateGpxRouteTimeSpeed(routeParams, gpxRouteResult);
             }
