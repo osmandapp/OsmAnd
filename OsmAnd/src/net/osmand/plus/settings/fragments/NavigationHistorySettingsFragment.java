@@ -112,9 +112,8 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 		boolean clearBackupPoints = false;
 		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
 		for (Object item : selectedItems) {
-			if (item instanceof SearchResult) {
-				SearchResult searchResult = (SearchResult) item;
-				historyHelper.remove(searchResult.object);
+			if (item instanceof SearchResult searchResult) {
+				historyHelper.remove(searchResult);
 			} else if (item instanceof TargetPoint) {
 				clearBackupPoints = true;
 			}
