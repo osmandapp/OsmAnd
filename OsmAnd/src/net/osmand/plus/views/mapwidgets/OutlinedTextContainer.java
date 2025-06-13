@@ -113,7 +113,7 @@ public class OutlinedTextContainer extends FrameLayout {
 			TextPaint paint = textView.getPaint();
 			paint.setStyle(Paint.Style.STROKE);
 			paint.setStrokeWidth(holder.outlineWidth);
-			//paint.setStrokeJoin(Paint.Join.ROUND);
+			paint.setStrokeJoin(Paint.Join.ROUND);
 		} else {
 			textView.setTextColor(holder.textColor);
 		}
