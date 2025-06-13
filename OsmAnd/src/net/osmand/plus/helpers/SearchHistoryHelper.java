@@ -3,6 +3,7 @@ package net.osmand.plus.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
@@ -21,6 +22,8 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SearchHistoryHelper {
+	private static final Log log = PlatformUtil.getLog(SearchHistoryHelper.class);
 
 	private static final int HISTORY_LIMIT = 1500;
 	private static final int[] DEF_INTERVALS_MIN = {
@@ -148,7 +152,28 @@ public class SearchHistoryHelper {
 		return new PointDescription(PointDescription.POINT_TYPE_GPX_FILE, gpxInfo.getFileName());
 	}
 
-	public void remove(Object item) {
+	public void remove(SearchResult searchResult) {
+		PointDescription pd = getPointDescription(searchResult.object);
+		if (pd == null) {
+			pd = getPointDescription(searchResult.relatedObject);
+		}
+
+		if (pd != null) {
+			remove(pd);
+		} else{
+			log.error(String.format(
+					"Can't get PointDescription from SearchResult: %s, object: %s (%s), relatedObject: %s (%s), objectType: %s",
+					searchResult,
+					searchResult.object,
+					searchResult.object.getClass(),
+					searchResult.relatedObject,
+					searchResult.relatedObject.getClass(),
+					searchResult.objectType
+			));
+		}
+	}
+
+	private PointDescription getPointDescription(Object item){
 		PointDescription pd = null;
 		if (item instanceof HistoryEntry) {
 			pd = ((HistoryEntry) item).getName();
@@ -159,9 +184,7 @@ public class SearchHistoryHelper {
 		} else if (item instanceof GPXInfo) {
 			pd = createPointDescription((GPXInfo) item);
 		}
-		if (pd != null) {
-			remove(pd);
-		}
+		return pd;
 	}
 
 	private void remove(PointDescription pd) {
