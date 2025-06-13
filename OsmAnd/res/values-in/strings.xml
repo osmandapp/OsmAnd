@@ -2180,7 +2180,7 @@
     <string name="move_map_to_select_area">Gerakkan peta untuk memilih area yang dibutuhkan.</string>
     <string name="edit_category">Sunting kategori</string>
     <string name="shared_string_shape">Bentuk</string>
-    <string name="default_appearance">Tampilan bawaan</string>
+    <string name="default_appearance">Penampilan bawaan</string>
     <string name="location_source_descr">Secara bawaan, OsmAnd yang terinstal dari Google Play menggunakan %1$s untuk menentukan lokasi.
 \n
 \nJika Anda mendapatkan informasi lokasi yang tidak akurat atau menggunakan perangkat tanpa %2$s, coba ubah ke \"%3$s\"</string>
@@ -6009,7 +6009,7 @@
     <string name="obd_engine_coolant_temp_desc">Menampilkan suhu pendingin kendaraan</string>
     <string name="obd_engine_runtime">Waktu Jalan Mesin</string>
     <string name="obd_throttle_position">Posisi Throttle</string>
-    <string name="preview_next_turn">Pratinjau belokan berikutnya</string>
+    <string name="preview_next_turn">Pratinjau putaran berikutnya</string>
     <string name="obd_battery_voltage_desc">Menampilkan tingkat voltase baterai kendaraan</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Gunakan satuan yang dipilih nama.</string>
     <string name="remaining_fuel_description">Menunjukkan jumlah bahan bakar yang tersisa di tangki kendaraan</string>
@@ -6051,7 +6051,7 @@
     <string name="shared_string_length">Panjang</string>
     <string name="shared_string_avg_speed">Kecepatan minimum</string>
     <string name="map_widget_route_information">Informasi rute</string>
-    <string name="map_widget_route_information_desc">Menampilkan waktu tiba, sisa waktu perjalanan, dan jarak untuk rute navigasi saat ini.</string>
+    <string name="map_widget_route_information_desc">Menampilkan perkiraan waktu kedatangan, waktu perjalanan tersisa, dan jarak untuk rute navigasi saat ini.</string>
     <string name="ais_nmea_protocol">Protokol untuk penerimaan data NMEA</string>
     <string name="ais_address_nmea_server">Alamat IP sumber data NMEA</string>
     <string name="ais_address_settings">Pengaturan alamat IP</string>
@@ -6091,11 +6091,11 @@
     <string name="show_dms_grids_description">Tampilkan kisi dalam derajat, menit, detik daripada derajat</string>
     <string name="show_dm_grids">Gunakan DM daripada derajat atau DMS</string>
     <string name="show_dm_grids_description">Tampilkan kisi dalam derajat dan menit daripada derajat atau DMS</string>
-    <string name="original_color_description">Setiap titik menyimpan warnanya sendiri.</string>
-    <string name="original_icon_description">Setiap titik menyimpan ikonnya sendiri.</string>
+    <string name="original_color_description">Setiap titik akan menjaga semua warnanya.</string>
+    <string name="original_icon_description">Setiap titik akan menjaga semua ikonnya.</string>
     <string name="apply_to_all_points">Tetapkan ke semua titik</string>
-    <string name="original_shape_description">Setiap titik menyimpan bentuknya sendiri.</string>
-    <string name="save_favorite_default_appearance">Tetapkan perubahan pada titik-titik yang sudah ada dalam folder atau hanya yang baru?</string>
+    <string name="original_shape_description">Setiap titik akan menjaga semua bentuknya.</string>
+    <string name="save_favorite_default_appearance">Terapkan perubahan pada semua titik yang sudah ada dalam folder</string>
     <string name="show_dms_grids">Gunakan DMS daripada derajat</string>
     <string name="hmd_promo">Promo HMD selama %1$s bulan</string>
     <string name="hmd_promo_description">Akses fitur secara gratis termasuk pengunduhan peta tidak terbatas, relief 3D, dll. selama %1$s bulan</string>
@@ -6108,17 +6108,17 @@
     <string name="popular_places">Tempat populer</string>
     <string name="choose_location">Pilih lokasi</string>
     <string name="show_image_previews">Tampilkan pratinjau gambar</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Tindakan mengendalikan keterlihatan kisi Koordinat pada peta.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Tindakan mengatur keterlihatan kisi Koordinat pada peta.</string>
     <string name="layer_coordinates_grid">Kisi koordinat</string>
-    <string name="prime_meridian">Meridian primer</string>
+    <string name="prime_meridian">Meridian utama</string>
     <string name="meridian_180">Meridian ke-180</string>
     <string name="equator">Ekuator</string>
     <string name="release_5_0">• Temukan POI peringkat teratas dengan mode Jelajahi baru\n\n• Semua rute OSM sekarang dapat dicari! Hiking, bersepeda, MTB, dan lainnya\n\n• Widget navigasi baru menggabungkan panah belokan dan petunjuk navigasi\n\n• Widget info rute saat ini: menampilkan ETA, waktu kedatangan, dan jarak\n\n• Pilih lereng ski dan jalur MTB di peta untuk informasi terperinci\n\n• Kemampuan memilih ukuran widget untuk panel kiri dan kanan\n\n• Ditambahkan grid koordinat dengan koordinat geografis\n\n• Ditambahkan kemampuan untuk menyesuaikan tampilan default grup favorit\n\n• Android Auto: lihat ETA dan jarak ke waypoint berikutnya; nama kota sekarang muncul dalam hasil pencarian\n• Puncak menonjol sekarang dapat ditemukan melalui peta dan pencarian\n\n• Ketinggian puncak gunung sekarang tersedia dalam satuan kaki\n\n• Ditambahkan: tebing dan area panjat tebing di peta\n\n• Pencarian alamat di Amerika Serikat telah ditingkatkan\n\n• Ditambahkan TTS Bahasa Ibrani untuk navigasi</string>
     <string name="shared_string_online_only">Hanya Daring</string>
     <string name="shared_string_offline_only">Hanya Luring</string>
-    <string name="intermediate_first">Perhentian terlebih dahulu</string>
-    <string name="destination_first">Tujuan terlebih dahulu</string>
-    <string name="display_priority">Tampilkan prioritas</string>
+    <string name="intermediate_first">Perantara dahulu</string>
+    <string name="destination_first">Tujuan dahulu</string>
+    <string name="display_priority">Prioritas tampilan</string>
     <string name="row_height">Ketinggian baris</string>
     <string name="add_widget">Tambahkan widget</string>
     <string name="poi_source">Sumber POI</string>
@@ -6127,7 +6127,7 @@
     <string name="position_animation">Animasi posisi</string>
     <string name="grid_color">Warna kisi</string>
     <string name="shared_string_edges">Ujung</string>
-    <string name="customize_grid_color">Ubah warna kisi</string>
+    <string name="customize_grid_color">Atur warna kisi</string>
     <string name="routing_attr_allow_ferries_description">Perbolehkan perutean dengan rute feri</string>
     <string name="labels_position">Posisi label</string>
     <string name="routing_attr_allow_ferries_name">Perbolehkan feri</string>
@@ -6160,4 +6160,14 @@
     <string name="unit_of_temperature_description">Satuan yang dipilih akan diterapkan pada semua data berkaitan dengan suhu dalam profil saat ini.</string>
     <string name="deactivated_map">Peta nonaktif</string>
     <string name="show_debug_tile_description">Tampilkan informasi tentang setiap simbol peta dari setiap ubin</string>
+    <string name="ski_route_switch_style_description">Jelajahi lereng ski, lift, dan lainnya dengan gaya musim dingin dan ski peta.</string>
+    <string name="shared_string_switch">Ganti</string>
+    <string name="set_intermediate_point">Atur titik perantara</string>
+    <string name="battery">baterai</string>
+    <string name="sensor_data">Data sensor</string>
+    <string name="set_home">Atur rumah</string>
+    <string name="set_parking_position">Atur posisi parkir</string>
+    <string name="battery_level">Daya baterai</string>
+    <string name="set_work">Atur kerja</string>
+    <string name="set_start_point">Atur titik mulai</string>
 </resources>

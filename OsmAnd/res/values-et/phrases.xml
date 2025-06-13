@@ -5061,4 +5061,5 @@
     <string name="poi_airline">Lennufirma kontor</string>
     <string name="poi_iglesia_ni_cristo_church">Iglesia ni cristo kirik</string>
     <string name="poi_neo_pentecostal_church">Uusnelipühilaste kirik</string>
+    <string name="poi_route_point_category">Reisikategooria</string>
 </resources>
