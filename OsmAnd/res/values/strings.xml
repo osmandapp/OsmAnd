@@ -10,8 +10,16 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
-	<string name="shared_string_switch">Switch</string>
+    <string name="release_5_1">
+        • Added support for web and cross-platform purchases\n\n
+        • Moved Temperature units to General settings for easier access\n\n
+        • Added battery level indicator for BLE sensors\n\n
+        • New, more intuitive UI for point selection in Navigation\n\n
+        • Improved widget visibility with a new outline\n\n
+        • Added Uphills/Downhills analyzer\n\n
+        • Expanded Wikipedia &amp; Wikivoyage integration for more POIs.\n\n
+    </string>
+    <string name="shared_string_switch">Switch</string>
 	<string name="ski_route_switch_style_description">Explore ski slopes, lifts, and more with the "Winter and Ski" map style.</string>
     <string name="battery">battery</string>
     <string name="sensor_data">Sensor data</string>
