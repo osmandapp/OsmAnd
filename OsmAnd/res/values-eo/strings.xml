@@ -1129,17 +1129,17 @@
     <string name="osmand_parking_delete_confirm">Ĉu forigi markon de parkumita aŭto?</string>
     <string name="osmand_parking_delete">Forigi markon de parkumita aŭto</string>
     <string name="osmand_parking_choose_type">Elekti specon de parkumejo</string>
-    <string name="osmand_parking_lim_text">Temp-limigita</string>
+    <string name="osmand_parking_lim_text">Templimigita</string>
     <string name="osmand_parking_no_lim_text">Sen templimo</string>
     <string name="osmand_parking_add_event">Aldoni averton al la aplikaĵo kalendaro</string>
-    <string name="osmand_parking_time_limit">Temp-limigita parkumejo</string>
-    <string name="osmand_parking_time_no_limit">Sen-templima parkumejo</string>
+    <string name="osmand_parking_time_limit">Templimigita parkumejo</string>
+    <string name="osmand_parking_time_no_limit">Sentemplima parkumejo</string>
     <string name="osmand_parking_position_description">La pozicio de via parkumata veturilo. %1$s</string>
     <string name="osmand_parking_position_description_add">Reprenu la veturilon je:</string>
     <string name="osmand_parking_pm">ptm.</string>
     <string name="osmand_parking_am">atm.</string>
     <string name="osmand_parking_position_name">Parkumejo</string>
-    <string name="context_menu_item_add_parking_point">Marki kiel pozicion de parkumado</string>
+    <string name="context_menu_item_add_parking_point">Marki kiel pozicion de parkumo</string>
     <string name="context_menu_item_delete_parking_point">Forigi markon de parkumita veturilo</string>
     <string name="gpxup_public">Publika</string>
     <string name="gpxup_identifiable">Identigebla</string>
@@ -1489,7 +1489,7 @@
     <string name="plugin_nautical_descr">Pliriĉigas la mapon per naŭtikaj kursoj, navigadaj lumoj, danĝerejoj, zonoj (mal)permesataj por navigi, alligi akvoveturilon, ktp. Por uzi la kromprogramon, elŝutu marajn mapojn kaj aktivigu la map-aspekton “Marnavigada” per la menuo “Agordi mapon”. \n \nPliaj informoj: %1$s</string>
     <string name="plugin_ski_name">Skiada map-vido</string>
     <string name="plugin_ski_descr">Projektita por navigi en vintraj sportejoj. Vidigas descendejojn, skiliftojn kaj skikuradajn kursojn kiel kolorajn liniojn, kiuj indikas malfacilecon. Por uzi la kromprogramon, aktivigu la map-aspekton “Vintro kaj skiado” en la menuo “Agordi mapon”.</string>
-    <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
+    <string name="osmand_parking_plugin_name">Pozicio de parkumo</string>
     <string name="osmand_parking_plugin_description">Ebligas marki kie vi parkumis vian aŭtomobilon kaj aldoni sciigon al via kalendaro pri parkumada templimo. Por aldoni markon, frapetadu lokon sur la mapo kaj elektu “Marki kiel pozicion de parkumado” el la menuo “Agoj”.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Ebligas difini kursojn per frapeti la mapon kaj modifi ekzistajn GPX‑dosierojn – por plani vojaĝon kaj mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX‑dosierojn, kiujn oni povas estonte uzi por gvidado.</string>
@@ -4311,7 +4311,7 @@
     <string name="colour_of_circles">Koloro de cirkloj</string>
     <string name="bearing_secondary_desc">Vi povas ŝanĝi formon de montrataj datumoj per la menuo “%1$s” → “%2$s” → “%3$s”.</string>
     <string name="coordinates_widget_secondary_desc">Vi povas ŝanĝi formon de koordinatoj per la menuo “%1$s” → “%2$s” → “%3$s”.</string>
-    <string name="parking_widget_desc">Fenestraĵo montranta distancon de la ekrana centro al la parkumeja pozicio.</string>
+    <string name="parking_widget_desc">Fenestraĵo montranta distancon de la ekrana centro al la pozicio de parkumo.</string>
     <string name="mapillary_widget_desc">Fenestraĵo liveranta rapidan aliron al aplikaĵo Mapillary por aldoni tien strat-nivelajn fotojn.</string>
     <string name="av_notes_choose_action_widget_desc">Elekti agon.</string>
     <string name="current_time_widget_desc">Fenestraĵo montranta la nunan horon (de la operaciumo).</string>
@@ -5346,7 +5346,7 @@
     <string name="quick_action_video_note">Filma noto</string>
     <string name="quick_action_photo_note">Fota noto</string>
     <string name="quick_action_track_waypoint">Navigadpunkto al spuro</string>
-    <string name="quick_action_parking_place">Parkumeja pozicio</string>
+    <string name="quick_action_parking_place">Pozicio de parkumo</string>
     <string name="quick_action_verb_pause_resume">Paŭzigi / daŭrigi</string>
     <string name="quick_action_verb_turn_on_off">Ŝalti / malŝalti</string>
     <string name="quick_action_map_style">Map-stilo</string>
@@ -5758,4 +5758,14 @@
     <string name="uphill_downhill_split">Supreniro / malsupreniro</string>
     <string name="shared_string_flat">Ebeno</string>
     <string name="shared_string_split_by">Dividi laŭ</string>
+    <string name="shared_string_switch">Ŝanĝi</string>
+    <string name="set_home">Agordi kiel hejmon</string>
+    <string name="set_intermediate_point">Agordi kiel intercelo</string>
+    <string name="set_start_point">Agordi kiel komencejon</string>
+    <string name="ski_route_switch_style_description">Esplori descendejojn, telferojn kaj pli kun la map-stilo Vintro kaj skiado.</string>
+    <string name="battery">baterio</string>
+    <string name="sensor_data">Datumoj de sentilo</string>
+    <string name="battery_level">Nivelo de baterio</string>
+    <string name="set_parking_position">Agordi kiel pozicion de parkumado</string>
+    <string name="set_work">Agordi kiel laborejon</string>
 </resources>
