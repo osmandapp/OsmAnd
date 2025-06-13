@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+	<string name="deleting_history">Deleting history…</string>
+	<string name="deleting">Deleting…</string>
 	<string name="shared_string_switch">Switch</string>
 	<string name="ski_route_switch_style_description">Explore ski slopes, lifts, and more with the "Winter and Ski" map style.</string>
     <string name="battery">battery</string>

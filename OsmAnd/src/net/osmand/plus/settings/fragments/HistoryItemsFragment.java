@@ -4,8 +4,10 @@ import static net.osmand.plus.settings.enums.HistorySource.NAVIGATION;
 import static net.osmand.plus.settings.enums.HistorySource.SEARCH;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
+import android.app.ProgressDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +37,7 @@ import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmD
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryListener;
 import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -50,7 +54,7 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener,
-		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener {
+		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener, DeleteHistoryListener {
 
 	protected final List<Object> items = new ArrayList<>();
 	protected final Set<Object> selectedItems = new HashSet<>();
@@ -68,6 +72,8 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	private Location location;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
+
+	private ProgressDialog progressDialog;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -264,13 +270,44 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 	@Override
 	public void onDeletionConfirmed() {
+		DeleteHistoryTask deleteHistoryTask = new DeleteHistoryTask(this);
+		deleteHistoryTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	@Override
+	public void deleteItems() {
 		deleteSelectedItems();
+	}
+
+	@Override
+	public void onEndDelete() {
+		showProgress(false);
 		updateHistoryItems();
 		updateButtonsState();
 		adapter.notifyDataSetChanged();
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnPreferenceChanged) {
 			((OnPreferenceChanged) fragment).onPreferenceChanged(settings.SEARCH_HISTORY.getId());
+		}
+	}
+
+	@Override
+	public void onStartDelete() {
+		showProgress(true);
+	}
+
+	public void showProgress(boolean visible) {
+		FragmentActivity activity = getActivity();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			if (visible) {
+				String dialogTitle = activity.getString(R.string.deleting);
+				String dialogMessage = activity.getString(R.string.deleting_history);
+				progressDialog = ProgressDialog.show(activity, dialogTitle, dialogMessage);
+			} else {
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+			}
 		}
 	}
 
