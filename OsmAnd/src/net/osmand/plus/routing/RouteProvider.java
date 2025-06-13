@@ -57,9 +57,9 @@ import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.zip.GZIPInputStream;
 
@@ -251,8 +251,8 @@ public class RouteProvider {
 					minDist = d;
 				}
 			}
-		} else {
-			startLoc = route.get(0);
+//		} else {
+//			startLoc = route.get(0); // no more used
 		}
 		Location l = new Location("temp"); //$NON-NLS-1$
 		l.setLatitude(endLoc.getLatitude());
@@ -300,7 +300,7 @@ public class RouteProvider {
 
 		OsmandSettings settings = params.ctx.getSettings();
 
-		router.CALCULATE_MISSING_MAPS = !settings.IGNORE_MISSING_MAPS;
+		RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = !OsmandSettings.IGNORE_MISSING_MAPS;
 
 		RoutingType routingType = settings.ROUTING_TYPE.getModeValue(params.mode);
 		if (routingType.isHHRouting()) {
@@ -400,14 +400,14 @@ public class RouteProvider {
 	}
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder builder, RouteCalculationParams params, OsmandSettings settings,
-	                                                     GeneralRouter generalRouter) throws IOException, FileNotFoundException {
+	                                                     GeneralRouter generalRouter) {
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		for (Map.Entry<String, RoutingParameter> e : RoutingHelperUtils.getParametersForDerivedProfile(params.mode, generalRouter).entrySet()) {
 			String key = e.getKey();
 			RoutingParameter pr = e.getValue();
 			String vl;
 			if (key.equals(GeneralRouter.USE_SHORTEST_WAY)) {
-				Boolean bool = !settings.FAST_ROUTE_MODE.getModeValue(params.mode);
+				boolean bool = !settings.FAST_ROUTE_MODE.getModeValue(params.mode);
 				vl = bool ? "true" : null;
 			} else if (pr.getType() == RoutingParameterType.BOOLEAN) {
 				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key, pr.getDefaultBoolean());
@@ -497,9 +497,8 @@ public class RouteProvider {
 				// something really strange better to see that message on the scren
 				return emptyResult();
 			} else {
-				RouteCalculationResult res = new RouteCalculationResult(result.getList(), params, ctx,
+				return new RouteCalculationResult(result.getList(), params, ctx,
 						params.gpxRoute == null ? null : params.gpxRoute.wpt, true);
-				return res;
 			}
 		} catch (RuntimeException e) {
 			log.error("Runtime error: " + e.getMessage(), e);
@@ -757,10 +756,10 @@ public class RouteProvider {
 			pt.setLat(ps.get(k).getLatitude());
 			pt.setLon(ps.get(k).getLongitude());
 			if (k < ps.size()) {
-				pt.setName(ps.get(k).getOnlyName() + "");
+				pt.setName(ps.get(k).getOnlyName());
 				if (k == ps.size() - 1) {
 					String target = ctx.getString(R.string.destination_point, "");
-					if (pt.getName().startsWith(target)) {
+					if (pt.getName() != null && pt.getName().startsWith(target)) {
 						pt.setName(ctx.getString(R.string.destination_point, pt.getName()));
 					}
 				} else {
@@ -856,7 +855,7 @@ public class RouteProvider {
 				bais.read(new byte[3]); // skip prefix
 				gpxStream = new GZIPInputStream(bais);
 			} else {
-				gpxStream = new ByteArrayInputStream(gpxMessage.getBytes("UTF-8"));
+				gpxStream = new ByteArrayInputStream(gpxMessage.getBytes(StandardCharsets.UTF_8));
 			}
 			GpxFile gpxFile = SharedUtil.loadGpxFile(gpxStream);
 			infos = parseOsmAndGPXRoute(res, gpxFile, segmentEndpoints, true, params.leftSide, params.mode.getDefaultSpeed(), -1);
@@ -958,7 +957,7 @@ public class RouteProvider {
 			Location pl = points.peek();
 			if (lastAdded == null || lastAdded.distanceTo(pl) < MIN_STRAIGHT_DIST) {
 				lastAdded = points.poll();
-				if (lastAdded.getProvider().equals("pnt")) {
+				if (lastAdded != null && lastAdded.getProvider().equals("pnt")) {
 					RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.straight());
 					previousInfo.routePointOffset = segments.size();
 					previousInfo.setDescriptionRoute(params.ctx.getString(R.string.route_head));
@@ -966,8 +965,10 @@ public class RouteProvider {
 				}
 				segments.add(lastAdded);
 			} else {
-				Location mp = MapUtils.calculateMidPoint(lastAdded, pl);
-				points.add(0, mp);
+				if (pl != null) {
+					Location mp = MapUtils.calculateMidPoint(lastAdded, pl);
+					points.add(0, mp);
+				}
 			}
 		}
 		return new RouteCalculationResult(segments, computeDirections, params, null, params.extraIntermediates);

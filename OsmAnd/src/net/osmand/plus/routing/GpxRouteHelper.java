@@ -95,7 +95,9 @@ public class GpxRouteHelper {
             if (firstSegmentRoute != null && !firstSegmentRoute.isEmpty()) {
                 newGpxRoute.addAll(firstSegmentRoute);
             }
-            newGpxRoute.addAll(gpxRoute);
+            if (gpxRoute != null) {
+                newGpxRoute.addAll(gpxRoute);
+            }
             if (lastSegmentRoute != null && !lastSegmentRoute.isEmpty()) {
                 newGpxRoute.addAll(lastSegmentRoute);
             }
@@ -277,7 +279,7 @@ public class GpxRouteHelper {
             Location routeEnd = points.get(points.size() - 1);
             LatLon e = routeEnd == null ? null : new LatLon(routeEnd.getLatitude(), routeEnd.getLongitude());
             LatLon finalEnd = routeParams.end;
-            if (finalEnd != null && MapUtils.getDistance(finalEnd, e) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
+            if (finalEnd != null && e != null && MapUtils.getDistance(finalEnd, e) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
                 RouteCalculationResult newRes = null;
                 if (calculateOsmAndRouteParts) {
                     newRes = findOfflineRouteSegment(routeParams, routeEnd, finalEnd);
@@ -366,7 +368,7 @@ public class GpxRouteHelper {
                     nearestSegmentIndex = segmentIndex;
                 }
 
-                checkedDistance += MapUtils.getDistance(prevRoutePoint, nextRoutePoint);
+                checkedDistance += (float) MapUtils.getDistance(prevRoutePoint, nextRoutePoint);
             }
         }
 
