@@ -536,7 +536,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 				} else if (fullVersion != null) {
 					for (InAppStateHolder holder : inAppStateMap.values()) {
-						if (holder.linkedPurchase == fullVersion) {
+						if (holder.linkedPurchase != null && holder.linkedPurchase.isFullVersion()) {
 							ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 							break;
 						}
@@ -555,7 +555,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				boolean subscribedToLiveUpdates = false;
 				boolean subscribedToOsmAndPro = false;
 				boolean subscribedToMaps = false;
-				InAppSubscription mapsSubscription = null;
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					InAppPurchaseData purchaseData = getPurchaseData(s.getSku());
 					if (purchaseData != null || s.getState().isActive()) {
@@ -572,14 +571,21 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							subscribedToMaps = true;
 						}
 					}
-					if (purchases.isMapsSubscription(s)) {
-						mapsSubscription = s;
-					}
 				}
 				if (!subscribedToMaps) {
 					for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
-						if (holder.linkedSubscription == mapsSubscription && holder.state == SubscriptionState.ACTIVE) {
+						if (holder.linkedSubscription != null && holder.linkedSubscription.isMaps()
+								&& holder.state == SubscriptionState.ACTIVE) {
 							subscribedToMaps = true;
+							break;
+						}
+					}
+				}
+				if (!subscribedToOsmAndPro) {
+					for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+						if (holder.linkedSubscription != null && holder.linkedSubscription.isOsmAndPro()
+								&& holder.state == SubscriptionState.ACTIVE) {
+							subscribedToOsmAndPro = true;
 							break;
 						}
 					}

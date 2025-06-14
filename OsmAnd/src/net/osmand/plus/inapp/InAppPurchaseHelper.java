@@ -21,8 +21,8 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
-import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseAnnualSubscription;
-import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseMonthlySubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseExternalInApp;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseExternalSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
@@ -55,7 +55,7 @@ public abstract class InAppPurchaseHelper {
 	protected static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(InAppPurchaseHelper.class);
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
 
-	public static final String SERVER_URL = "https://osmand.net";
+	public static final String SERVER_URL = "https://test.osmand.net";
 	public static final String SUBSCRIPTION_REGISTER_URL = SERVER_URL + "/subscription/register";
 	public static final String GET_ACTIVE_SUBSCRIPTIONS_SKU_URL = SERVER_URL + "/api/subscriptions/active";
 	public static final String GET_SUBSCRIPTIONS_URL = SERVER_URL + "/api/subscriptions/get";
@@ -614,7 +614,11 @@ public abstract class InAppPurchaseHelper {
 					stateHolder.startTime = subObj.optLong("start_time");
 					stateHolder.expireTime = subObj.optLong("expire_time");
 					stateHolder.origin = getPurchaseOriginBySku(sku);
-					stateHolder.linkedSubscription = getLinkedSubscriptionBySku(sku);
+					try {
+						stateHolder.linkedSubscription = InAppPurchaseExternalSubscription.buildFromJson(ctx, subObj);
+					} catch (Exception e) {
+						LOG.error("Subscription state json parsing error = " + subObj, e);
+					}
 
 					PeriodUnit periodUnit = null;
 					if (stateHolder.origin == PurchaseOrigin.PROMO || sku.contains("annual")) {
@@ -649,7 +653,11 @@ public abstract class InAppPurchaseHelper {
 					stateHolder.origin = getPurchaseOriginBySku(sku);
 					stateHolder.platform = platform;
 					stateHolder.purchaseTime = purchaseTime;
-					stateHolder.linkedPurchase = getLinkedPurchaseBySku(sku);
+					try {
+						stateHolder.linkedPurchase = InAppPurchaseExternalInApp.buildFromJson(ctx, subObj);
+					} catch (Exception e) {
+						LOG.error("InApp state json parsing error = " + subObj, e);
+					}
 					inappStateMap.put(sku, stateHolder);
 				}
 			}
@@ -1180,125 +1188,5 @@ public abstract class InAppPurchaseHelper {
 			case PLATFORM_FASTSPRING -> PurchaseOrigin.FASTSPRING;
 			default -> PurchaseOrigin.GOOGLE;
 		};
-	}
-
-	@Nullable
-	public InAppPurchase getLinkedPurchaseBySku(@NonNull String sku) {
-		final InAppPurchase fullVersion = getFullVersion();
-		final InAppPurchase depthContours = getDepthContours();
-		final InAppPurchase contourLines = getContourLines();
-		return switch (sku) {
-			// Google
-			case "osmand_full_version_price" -> fullVersion;
-			case "net.osmand.seadepth", "net.osmand.seadepth_plus" -> depthContours;
-			case "net.osmand.contourlines", "net.osmand.contourlines_plus" -> contourLines;
-
-			// iOS
-			case "net.osmand.maps.inapp.maps.plus" -> fullVersion;
-			case "net.osmand.maps.inapp.addon.nautical" -> depthContours;
-			case "net.osmand.maps.inapp.addon.srtm" -> contourLines;
-
-			// Amazon
-			case "net.osmand.amazon.maps.inapp" -> fullVersion;
-
-			// Huawei
-			case "net.osmand.huawei.full" -> fullVersion;
-			case "net.osmand.huawei.seadepth" -> depthContours;
-			case "net.osmand.huawei.contourlines" -> contourLines;
-
-			// FastSpring
-			case "net.osmand.fastspring.inapp.maps.plus" -> fullVersion;
-
-			default -> null;
-		};
-	}
-
-	@Nullable
-	public InAppSubscription getLinkedSubscriptionBySku(@NonNull String sku) {
-		InAppSubscription monthlyLiveUpdates = null;
-		InAppSubscription proMonthly = null;
-		InAppSubscription proAnnually = null;
-		InAppSubscription mapsAnnually = null;
-		List<InAppSubscription> subscriptions = getSubscriptions().getSubscriptions();
-		for (int i = subscriptions.size() - 1; i >= 0; i--) {
-			InAppSubscription subscription = subscriptions.get(i);
-			if (subscription.isLegacy() && subscription instanceof InAppPurchaseMonthlySubscription) {
-				if (monthlyLiveUpdates == null) {
-					monthlyLiveUpdates = subscription;
-				}
-			} else if (purchases.isOsmAndProSubscription(subscription) && subscription instanceof InAppPurchaseMonthlySubscription) {
-				proMonthly = subscription;
-			} else if (purchases.isOsmAndProSubscription(subscription) && subscription instanceof InAppPurchaseAnnualSubscription) {
-				proAnnually = subscription;
-			} else if (purchases.isMapsSubscription(subscription) && subscription instanceof InAppPurchaseAnnualSubscription) {
-				mapsAnnually = subscription;
-			}
-		}
-
-		// Google
-		if (sku.startsWith("osm_live_subscription_monthly_")) {
-			return monthlyLiveUpdates;
-		}
-		if (sku.startsWith("osmand_pro_monthly_")) {
-			return proMonthly;
-		}
-		if (sku.startsWith("osmand_pro_annual_")) {
-			return proAnnually;
-		}
-		if (sku.startsWith("osmand_maps_annual_")) {
-			return mapsAnnually;
-		}
-
-		// iOS
-		if (sku.equals("net.osmand.maps.subscription.monthly")) {
-			return monthlyLiveUpdates;
-		}
-		if (sku.startsWith("net.osmand.maps.subscription.pro.monthly")) {
-			return proMonthly;
-		}
-		if (sku.startsWith("net.osmand.maps.subscription.pro.annual")) {
-			return proAnnually;
-		}
-		if (sku.startsWith("net.osmand.maps.subscription.plus.annual")) {
-			return mapsAnnually;
-		}
-
-		// Amazon
-		if (sku.contains(".amazon.pro.monthly")) {
-			return proMonthly;
-		}
-		if (sku.contains(".amazon.pro.annual")) {
-			return proAnnually;
-		}
-		if (sku.contains(".amazon.maps.annual")) {
-			return mapsAnnually;
-		}
-
-		// Huawei
-		if (sku.startsWith("net.osmand.huawei.monthly")) {
-			return monthlyLiveUpdates;
-		}
-		if (sku.startsWith("net.osmand.huawei.monthly.pro")) {
-			return proMonthly;
-		}
-		if (sku.startsWith("net.osmand.huawei.annual.pro")) {
-			return proAnnually;
-		}
-		if (sku.startsWith("net.osmand.huawei.annual.maps")) {
-			return mapsAnnually;
-		}
-
-		// FastSpring
-		if (sku.startsWith("net.osmand.fastspring.subscription.pro.monthly")) {
-			return proMonthly;
-		}
-		if (sku.startsWith("net.osmand.fastspring.subscription.pro.annual")) {
-			return proAnnually;
-		}
-		if (sku.startsWith("net.osmand.fastspring.subscription.maps.annual")) {
-			return mapsAnnually;
-		}
-
-		return null;
 	}
 }

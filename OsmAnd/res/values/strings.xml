@@ -19,6 +19,10 @@
         • Added Uphills/Downhills analyzer\n\n
         • Expanded Wikipedia &amp; Wikivoyage integration for more POIs.\n\n
     </string>
+    <string name="osm_live_payment_renews_3_years">Renews every three years</string>
+    <string name="years_3">Three years</string>
+    <string name="osm_live_payment_3_years_title">Every three years</string>
+    <string name="three_years_subscription">Three years subscription</string>
     <string name="shared_string_switch">Switch</string>
 	<string name="ski_route_switch_style_description">Explore ski slopes, lifts, and more with the "Winter and Ski" map style.</string>
     <string name="battery">battery</string>
