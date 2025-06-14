@@ -55,7 +55,7 @@ public abstract class InAppPurchaseHelper {
 	protected static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(InAppPurchaseHelper.class);
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
 
-	public static final String SERVER_URL = "https://test.osmand.net";
+	public static final String SERVER_URL = "https://osmand.net";
 	public static final String SUBSCRIPTION_REGISTER_URL = SERVER_URL + "/subscription/register";
 	public static final String GET_ACTIVE_SUBSCRIPTIONS_SKU_URL = SERVER_URL + "/api/subscriptions/active";
 	public static final String GET_SUBSCRIPTIONS_URL = SERVER_URL + "/api/subscriptions/get";
