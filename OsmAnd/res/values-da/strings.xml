@@ -5802,4 +5802,5 @@
     <string name="set_start_point">Indstil startpunkt</string>
     <string name="shared_string_switch">Skift</string>
     <string name="ski_route_switch_style_description">Udforsk pister, lifte og meget mere med vinter- og skikortet.</string>
+    <string name="release_5_1">• Tilføjet understøttelse af køb på web og på tværs af platforme\n\n • Flyttede temperaturenheder til Generelle indstillinger for lettere adgang\n\n • Tilføjet batteriniveauindikator for BLE-sensorer\n\n • Ny, mere intuitiv brugerflade til valg af punkter i navigationen\n\n • Forbedret synlighed af widgets med en ny kantlinje\n\n • Tilføjet analyseværktøj for op- og nedkørsler\n\n • Udvidet Wikipedia- og Wikivoyage-integration for at få flere interessepunkter.</string>
 </resources>
