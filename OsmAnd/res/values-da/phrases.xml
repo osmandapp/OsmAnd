@@ -4247,4 +4247,14 @@
     <string name="poi_us_maps_recreation_area_activity_hiking">Vandring</string>
     <string name="poi_network_rwn">Regionale vandreruter (RWN)</string>
     <string name="poi_network_lwn">Lokale vandreruter (LWN)</string>
+    <string name="poi_butcher_pork">Svin</string>
+    <string name="poi_ice_cream_yes">Ja;Is</string>
+    <string name="poi_origin">Oprindelse</string>
+    <string name="poi_medical_supply_diabetic">Diabetisk</string>
+    <string name="poi_tobacco_yes">Ja;Tobak</string>
+    <string name="poi_membership_yes">Ja;Medlemsskab</string>
+    <string name="poi_coffee_no">Nej</string>
+    <string name="poi_butcher_halal">Halal</string>
+    <string name="poi_coffee_yes">Ja;Kaffe</string>
+    <string name="poi_membership_no">Nej</string>
 </resources>
