@@ -5685,4 +5685,5 @@
     <string name="set_start_point">Définir le point de départ</string>
     <string name="ski_route_switch_style_description">Explorez les pistes de ski, les remontées mécaniques et plus encore avec le style de carte Hiver et Ski.</string>
     <string name="shared_string_switch">Interrupteur</string>
+    <string name="release_5_1">• Ajout du support des achats en ligne et multiplateformes\n\n• Déplacement des unités de température dans les paramètres généraux pour un accès facilité\n\n• Ajout d’un indicateur de niveau de batterie pour les capteurs BLE\n\n• Nouvelle interface plus intuitive pour la sélection de points dans Navigation\n\n• Amélioration de la visibilité des widgets grâce à un nouveau contour\n\n• Ajout d’un analyseur de Montées/Descentes\n\n• Extension de l’intégration Wikipedia &amp; Wikivoyage pour davantage de POI.</string>
 </resources>
