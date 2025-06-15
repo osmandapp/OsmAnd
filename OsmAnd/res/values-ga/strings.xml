@@ -5588,4 +5588,9 @@
     <string name="battery_level">Leibhéal ceallraí</string>
     <string name="set_parking_position">Socraigh suíomh páirceála</string>
     <string name="shared_string_switch">Athraigh</string>
+    <string name="osm_live_payment_renews_3_years">Athnuaitear gach trí bliana</string>
+    <string name="years_3">Trí bliana</string>
+    <string name="release_5_1">• Tacaíocht curtha leis do cheannacháin ghréasáin agus tras-ardáin\n\n• Aonaid Teochta bogtha go Socruithe Ginearálta le haghaidh rochtain níos éasca\n\n• Táscaire leibhéal ceallraí curtha leis do braiteoirí BLE\n\n• Comhéadan úsáideora nua, níos iomasach le haghaidh roghnú pointí sa Loingseoireacht\n\n• Infheictheacht fheabhsaithe giuirléidí le himlíne nua\n\n• Anailíseoir Suas Cnoc/Síos Cnoc curtha leis\n\n• Comhtháthú leathnaithe Vicipéid &amp; Wikivoyage le haghaidh níos mó POIanna.</string>
+    <string name="three_years_subscription">Síntiús trí bliana</string>
+    <string name="osm_live_payment_3_years_title">Gach trí bliana</string>
 </resources>
