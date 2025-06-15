@@ -4508,6 +4508,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="stop_navigation_service">Stop</string>
     <string name="confirm_every_run">Always ask</string>
     <string name="save_global_track_interval">General logging interval</string>
+    <string name="save_track_unfiltered_title">Save full track</string>
+    <string name="save_track_unfiltered_descr">If enabled, both full and filtered tracks will be saved</string>
     <string name="background_service_int">GPS Wake-up interval</string>
     <string name="enable_sleep_mode">Enable GPS background mode</string>
     <string name="save_track_to_gpx_globally_headline">On demand track logging</string>
