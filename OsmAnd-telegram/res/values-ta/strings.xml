@@ -273,7 +273,7 @@
     <string name="shared_string_hour_short">ம</string>
     <string name="shared_string_minute_short">மணித்துளி</string>
     <string name="shared_string_second_short">நொடி</string>
-    <string name="welcome_descr">&lt;! &gt;</string>
+    <string name="welcome_descr"><![CDATA[<b>ஒஸ்மண்ட் டிராக்கர் </b> உங்கள் இருப்பிடத்தைப் பகிரவும், ஒஸ்மாண்டில் உள்ள மற்றவர்களைப் பார்க்கவும் உங்களை அனுமதிக்கிறது.]]></string>
     <string name="my_location">எனது இருப்பிடம்</string>
     <string name="live_now">இப்போது வாழ்க</string>
     <string name="timeline">காலவரிசை</string>
