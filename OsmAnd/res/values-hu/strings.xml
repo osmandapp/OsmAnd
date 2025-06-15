@@ -5544,7 +5544,7 @@
     <string name="us_gallons_unit">gallon</string>
     <string name="record_obd_data">A jármű mérési adatainak rögzítése</string>
     <string name="wunderlinq_datagrid">WunderLINQ adatrács</string>
-    <string name="shared_string_volume">Hangerő</string>
+    <string name="shared_string_volume">Térfogat</string>
     <string name="obd_air_intake_temp_desc">Megjeleníti a motor szívócsonkjába belépő levegő hőmérsékletét.</string>
     <string name="obd_fuel_consumption_rate_sensor_type">A kiválasztott mértékegységek használata a névben.</string>
     <string name="remaining_fuel">Maradék üzemanyag</string>
@@ -5600,7 +5600,7 @@
     <string name="recently_visited">Nemrég meglátogatott</string>
     <string name="shared_string_avg_altitude">Átlagos magasság</string>
     <string name="shared_string_avg_speed">Legkisebb sebesség</string>
-    <string name="shared_string_length">Hosszúság</string>
+    <string name="shared_string_length">Távolság</string>
     <string name="map_widget_route_information">Útvonalinformációk</string>
     <string name="shared_string_default_view">Alapértelmezett nézet</string>
     <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktuális navigációs útvonal távolságát.</string>
