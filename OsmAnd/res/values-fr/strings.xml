@@ -12,13 +12,13 @@
     <string name="offline_edition_descr">Si le mode d\'édition hors-ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>
     <string name="update_poi_does_not_change_indexes">Les modifications de POI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier de votre appareil.</string>
     <string name="local_openstreetmap_uploading">Téléversement…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} POI / Notes ont été téléversés</string>
+    <string name="local_openstreetmap_were_uploaded">{0} POI/Notes ont été téléversés</string>
     <string name="local_openstreetmap_uploadall">Tout téléverser</string>
     <string name="local_openstreetmap_upload">Téléverser les modifications vers OSM</string>
     <string name="local_openstreetmap_delete">Supprimer la modification</string>
     <string name="local_openstreetmap_descr_title">Modification asynchrone d\'OSM :</string>
-    <string name="local_openstreetmap_settings">POI / notes OSM enregistrés sur l\'appareil</string>
-    <string name="local_openstreetmap_settings_descr">Afficher et gérer les POI / notes OSM enregistrés dans l\'appareil.</string>
+    <string name="local_openstreetmap_settings">POI/notes OSM enregistrés sur l\'appareil</string>
+    <string name="local_openstreetmap_settings_descr">Afficher et gérer les POI/notes OSM enregistrés dans l\'appareil.</string>
     <string name="live_monitoring_interval_descr">Préciser l\'intervalle pour le suivi en ligne.</string>
     <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
     <string name="live_monitoring_url_descr">Préciser l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -74,7 +74,7 @@
     <string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant le guidage.</string>
     <string name="auto_follow_location_enabled">Recentrage automatique de la carte activé.</string>
     <string name="pref_vector_rendering">Options pour l\'affichage vectoriel</string>
-    <string name="pref_overlay">Surcouche / Sous-couche</string>
+    <string name="pref_overlay">Surcouche/Sous-couche</string>
     <string name="pref_raster_map">Options pour la source de carte</string>
     <string name="pref_vector_map">Paramètres de carte vectorielle</string>
     <string name="delete_confirmation_msg">Supprimer %1$s ?</string>
@@ -162,7 +162,7 @@
     <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal.</string>
     <string name="voice_stream_voice_call">Sortie audio appel téléphonique (interrompt le Bluetooth véhicule)</string>
     <string name="voice_stream_notification">Sortie notifications</string>
-    <string name="voice_stream_music">Sortie média / guidage</string>
+    <string name="voice_stream_music">Audio média/navigation</string>
     <string name="warning_tile_layer_not_downloadable">L\'application ne peut télécharger la couche de carte %1$s, veuillez tenter de la réinstaller.</string>
     <string name="overlay_transparency_descr">Modifier la transparence de la surcouche.</string>
     <string name="overlay_transparency">Transparence de la surcouche</string>
@@ -192,9 +192,9 @@
     <string name="shared_string_previous">Précédent</string>
     <string name="unit_of_length_descr">Modifier l\'unité de mesure de distance.</string>
     <string name="unit_of_length">Unités de longueur</string>
-    <string name="si_mi_feet">Miles / pieds</string>
-    <string name="si_mi_yard">Miles / yards</string>
-    <string name="si_km_m">Kilomètres / mètres</string>
+    <string name="si_mi_feet">Milles/pieds</string>
+    <string name="si_mi_yard">Milles/yards</string>
+    <string name="si_km_m">Kilomètres/mètres</string>
     <string name="yard">yd</string>
     <string name="foot">pieds</string>
     <string name="mile_per_hour">mph</string>
@@ -455,7 +455,7 @@
     <string name="auth_failed">Échec de l\\\'autorisation</string>
     <string name="failed_op">Échec</string>
     <string name="converting_names">Conversion des noms locaux/anglais…</string>
-    <string name="loading_streets_buildings">Chargement des rues / numéros…</string>
+    <string name="loading_streets_buildings">Chargement des rues/bâtiments…</string>
     <string name="loading_postcodes">Chargement des codes postaux…</string>
     <string name="loading_streets">Chargement des rues…</string>
     <string name="loading_cities">Chargement des villes…</string>
@@ -476,7 +476,7 @@
     <string name="use_online_routing_descr">Utiliser Internet pour calculer l\'itinéraire.</string>
     <string name="use_online_routing">Utiliser le guidage en ligne</string>
     <string name="osm_settings_descr">Indiquez les paramètres de connexion à OpenStreetMap.org (OSM) pour vos contributions.</string>
-    <string name="data_settings_descr">Indiquez la langue, télécharger / mettre à jour les données.</string>
+    <string name="data_settings_descr">Indiquez la langue, télécharger/mettre à jour les données.</string>
     <string name="data_settings">Données</string>
     <string name="osm_editing_plugin_name">Édition OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Zoom de la carte adapté à votre vitesse (lorsque que votre position est affichée sur la carte).</string>
@@ -828,7 +828,7 @@
     <string name="download_roads_only_maps">Carte routière uniquement</string>
     <string name="incomplete_locale">incomplet</string>
     <string name="no_buildings_found">Aucun numéro de bâtiment trouvé.</string>
-    <string name="search_villages_and_postcodes">Rechercher plus de villes / codes postaux</string>
+    <string name="search_villages_and_postcodes">Rechercher plus de villes/codes postaux</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="map_widget_max_speed">Limite de vitesse</string>
     <string name="rendering_attr_noAdminboundaries_name">Frontières</string>
@@ -990,7 +990,7 @@
     <string name="edit_tilesource_successfully">La source de tuiles %1$s a été enregistrée</string>
     <string name="edit_tilesource_elliptic_tile">Projection de Mercator elliptique</string>
     <string name="edit_tilesource_choose_existing">Sélectionner existant…</string>
-    <string name="maps_define_edit">Définir / Éditer…</string>
+    <string name="maps_define_edit">Définir/Éditer…</string>
     <string name="speak_descr">Paramétrer les annonces des noms de rue, alertes de circulation (bouchons, ralentissements), radars et limites de vitesse.</string>
     <string name="new_directions_point_dialog">Vous avez déjà défini des étapes.</string>
     <string name="context_menu_item_directions_to">Itinéraire vers</string>
@@ -1161,7 +1161,7 @@
     <string name="gpx_info_average_speed">Vitesse moyenne : %1$s </string>
     <string name="gpx_info_maximum_speed">Vitesse maximale : %1$s </string>
     <string name="gpx_info_avg_altitude">Altitude moyenne : %1$s</string>
-    <string name="gpx_info_diff_altitude">Amplitude altimétrique : %1$s</string>
+    <string name="gpx_info_diff_altitude">Plage d\'altitude : %1$s</string>
     <string name="gpx_info_asc_altitude">Dénivelés : %1$s</string>
     <string name="gpx_timespan">Durée : %1$s</string>
     <string name="gpx_timemoving">Durée de déplacement : %1$s</string>
@@ -1479,7 +1479,7 @@
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Supprimer %1$d notes \?</string>
     <string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
-    <string name="disable_recording_once_app_killed">Interdire la journalisation autonome</string>
+    <string name="disable_recording_once_app_killed">Empêcher l’enregistrement après fermeture de l’application</string>
     <string name="download_wikipedia_files">Télécharger des données Wikipédia supplémentaires (%1$s Mo) ?</string>
     <string name="lang_ms">Malaisien</string>
     <string name="lang_ht">Haïtien</string>
@@ -1595,13 +1595,13 @@
     <string name="default_speed_system_descr">Définir l\'unité de vitesse.</string>
     <string name="default_speed_system">Unité de vitesse</string>
     <string name="nm">mn</string>
-    <string name="si_nm">Miles nautiques</string>
+    <string name="si_nm">Milles nautiques</string>
     <string name="si_kmh">Kilomètres par heure</string>
-    <string name="si_mph">Miles par heure</string>
+    <string name="si_mph">Milles par heure</string>
     <string name="si_m_s">Mètres par seconde</string>
     <string name="si_min_km">Minutes par kilomètre</string>
     <string name="si_min_m">Minutes par mile</string>
-    <string name="si_nm_h">Miles nautiques par heure (nœuds)</string>
+    <string name="si_nm_h">Milles nautiques par heure (nœuds)</string>
     <string name="nm_h">nœuds</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
@@ -1865,7 +1865,7 @@
     <string name="access_smart_autoannounce">Annonces intelligentes</string>
     <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée.</string>
     <string name="access_autoannounce_period">Fréquence des annonces</string>
-    <string name="access_autoannounce_period_descr">Durée minimum entre deux annonces.</string>
+    <string name="access_autoannounce_period_descr">Durée minimale entre deux annonces.</string>
     <string name="access_no_destination">Extension d\'accessibilité : Aucune destination n\'est définie</string>
     <string name="map_widget_magnetic_bearing">Cap magnétique</string>
     <string name="map_widget_bearing">Cap relatif</string>
@@ -1935,7 +1935,7 @@
     <string name="storage_place_description">Stockage utilisé par OsmAnd (pour les cartes, les traces GPX, les paramètres, etc.) : %1$s.</string>
     <string name="first_usage_greeting">Suivez des itinéraires et découvrez de nouveaux lieux sans connexion Internet</string>
     <string name="get_for">Obtenir pour %1$s</string>
-    <string name="si_mi_meters">Miles / mètres</string>
+    <string name="si_mi_meters">Milles/mètres</string>
     <string name="get_it">Obtenir</string>
     <string name="osm_live_banner_desc">Téléchargez un nombre illimité de cartes et obtenez des mises à jour plus fréquentes (hebdomadaires ou quotidiennes voire horaires).</string>
     <string name="osmand_plus_banner_desc">Téléchargements illimités des cartes, des mises à jour et des données pour l\'extension Wikipédia.</string>
@@ -1970,8 +1970,8 @@
     <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
     <string name="save_track_min_speed_descr">Filtre : Aucun enregistrement de points en-dessous de cette vitesse.</string>
     <string name="save_track_min_distance">Déplacement minimal pour enregistrer</string>
-    <string name="save_track_min_distance_descr">Filtre : Définir une distance minimale entre points pour déclencher l\'enregistrement.</string>
-    <string name="save_track_precision">Précision minimale pour l\'enregistrement</string>
+    <string name="save_track_min_distance_descr">Filtre : définir la distance minimale à partir d’un point pour en enregistrer un nouveau.</string>
+    <string name="save_track_precision">Précision minimale pour enregistrer</string>
     <string name="save_track_precision_descr">Filtre : Aucun enregistrement avant que cette précision ne soit atteinte.</string>
     <string name="shared_string_continue">Continuer</string>
     <string name="shared_string_pause">Pause</string>
@@ -2068,8 +2068,8 @@
 \nVeuillez indiquer un code long</string>
     <string name="navigate_point_olc_info_area">Code d\'emplacement valide
 \nreprésentant la zone : %1$s x %2$s</string>
-    <string name="auto_split_recording_title">Découper automatiquement les enregistrements</string>
-    <string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
+    <string name="auto_split_recording_title">Découpage auto après pause</string>
+    <string name="auto_split_recording_descr">Débuter un nouveau segment après une pause de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
     <string name="quick_action_page_list_descr">Bouton pour faire défiler la liste ci-dessous.</string>
     <string name="rendering_attr_depthContours_description">Afficher les courbes et points de profondeur.</string>
     <string name="rendering_attr_depthContours_name">Courbes de profondeur nautique</string>
@@ -2093,7 +2093,7 @@
     <string name="max_speed">Vitesse maximale</string>
     <string name="average_speed">Vitesse moyenne</string>
     <string name="shared_string_time_moving">Durée de déplacement</string>
-    <string name="shared_string_time_span">Amplitude horaire</string>
+    <string name="shared_string_time_span">Durée</string>
     <string name="shared_string_gpx_track">Trace</string>
     <string name="points_delete_multiple_succesful">Point(s) supprimé(s) avec succès.</string>
     <string name="points_delete_multiple">Supprimer %1$d point(s) \?</string>
@@ -2226,18 +2226,18 @@
     <string name="mapillary_menu_filter_description">Filtrez les images par date, nom d\'utilisateur ou type. Le filtre n\'est appliqué qu\'après avoir zoomé.</string>
     <string name="shared_string_reset">Réinitialiser</string>
     <string name="average">Moyenne</string>
-    <string name="ascent_descent">Montée / Descente</string>
-    <string name="max_min">Max / Min</string>
+    <string name="ascent_descent">Montée/Descente</string>
+    <string name="max_min">Max/Min</string>
     <string name="store_tracks_in_monthly_directories">Enregistrer les traces dans des dossiers mensuels</string>
     <string name="store_tracks_in_monthly_directories_descrp">Enregistrer les traces dans des sous-dossiers organisés par mois (par exemple 2018-01).</string>
     <string name="of">%1$d de %2$d</string>
     <string name="moving_time">Durée de déplacement</string>
-    <string name="min_max">Min / Max</string>
+    <string name="min_max">Min/Max</string>
     <string name="rendering_value_translucent_pink_name">Rose translucide</string>
-    <string name="quick_action_resume_pause_navigation">Suspendre / Reprendre le guidage</string>
+    <string name="quick_action_resume_pause_navigation">Suspendre/Reprendre le guidage</string>
     <string name="quick_action_resume_pause_navigation_descr">Bouton pour suspendre ou reprendre le guidage.</string>
     <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre « Guidage terminé »</string>
-    <string name="quick_action_start_stop_navigation">Démarrer / Arrêter le guidage</string>
+    <string name="quick_action_start_stop_navigation">Démarrer/Arrêter le guidage</string>
     <string name="quick_action_start_stop_navigation_descr">Bouton pour démarrer ou arrêter le guidage.</string>
     <string name="mappilary_no_internet_desc">Vous devez être connectés à Internet pour afficher les photos Mapillary.</string>
     <string name="retry">Réessayer</string>
@@ -2322,7 +2322,7 @@
     <string name="add_location_as_first_point_descr">Ajoutez votre position comme point de départ pour calculer l\'itinéraire.</string>
     <string name="my_location">Ma position</string>
     <string name="shared_string_finish">Terminer</string>
-    <string name="plan_route">Ajouter une trace</string>
+    <string name="plan_route">Planifier un itinéraire</string>
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
@@ -2428,7 +2428,7 @@
     <string name="touring_view_renderer">Vue grand tourisme</string>
     <string name="nautical_renderer">Nautisme</string>
     <string name="will_open_tomorrow_at">Ouvre demain à</string>
-    <string name="copy_location_name">Copier l\'emplacement / le nom du POI</string>
+    <string name="copy_location_name">Copier l\'emplacement/le nom du POI</string>
     <string name="toast_empty_name_error">Emplacement sans nom</string>
     <string name="show_closed_notes">Afficher les notes fermées</string>
     <string name="switch_osm_notes_visibility_desc">Affiche ou masque les notes OSM sur la carte.</string>
@@ -2597,7 +2597,7 @@
     <string name="osm_live_payment_current_subscription">Abonnement en cours</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Fréquence de règlement :</string>
-    <string name="osm_live_payment_contribute_descr">Les dons financent la cartographie OSM / OpenStreetMap.</string>
+    <string name="osm_live_payment_contribute_descr">Les dons financent la cartographie OSM.</string>
     <string name="osm_live_plan_pricing">Abonnements &amp; tarifs</string>
     <string name="osm_live_payment_renews_monthly">Tous les mois</string>
     <string name="osm_live_payment_renews_quarterly">Tous les trimestres</string>
@@ -3118,7 +3118,7 @@
     <string name="monitoring_notification">Notification</string>
     <string name="monitoring_min_speed">Vitesse minimale</string>
     <string name="monitoring_min_accuracy">Précision minimale</string>
-    <string name="monitoring_min_distance">Déplacement minimum</string>
+    <string name="monitoring_min_distance">Déplacement minimal</string>
     <string name="reset_plugin_to_default">Restaurer les paramètres par défaut de l\'extension</string>
     <string name="multimedia_rec_split_title">Fractionner l\'enregistrement</string>
     <string name="multimedia_use_system_camera">Utiliser l\'application système</string>
@@ -3131,8 +3131,8 @@
     <string name="monitoring_min_distance_descr">Activer ce filtre limite l\'enregistrement de points en double lorsque les déplacements sont très lents, donnant une apparence plus régulière aux traces.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recommandation : paramétrez 5 mètres si vous ne souhaitez pas enregistrer les petits détails de votre itinéraire et que vous ne souhaitez pas non plus d\'informations supplémentaires sur vos pauses.</string>
     <string name="monitoring_min_speed_descr_side_effect">Effet secondaire : votre trace ne contiendra pas les parties où la vitesse minimale n\'a pas été atteinte (par exemple lorsque vous poussez votre vélo en montée ou pendant une pause). De ce fait certaines informations de votre trace seront faussées comme la durée de déplacement ou la vitesse moyenne.</string>
-    <string name="monitoring_min_speed_descr_recommendation">Recommandation : commencez par utiliser la détection de mouvement via le filtre de déplacement minimum (B) vous pourriez obtenir de meilleurs résultats en perdant moins de données. Si vos traces restent bruyantes à basse vitesse, essayez ici des valeurs non nulles. Veuillez noter que certaines mesures peuvent retourner une vitesse nulle (en raison de méthodes basées sur le réseau), dans ce cas rien ne sera enregistré.</string>
-    <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec un minimum de précision en mètres/pieds (information communiquée par votre puce GPS) seront enregistrés. La précision est la distance entre la position donnée par le GPS et votre position réelle. La précision est différente de la fluctuation qui est la dispersion de plusieurs mesures de position successives.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Recommandation : commencez par utiliser la détection de mouvement via le filtre de déplacement minimal (B) vous pourriez obtenir de meilleurs résultats en perdant moins de données. Si vos traces restent bruyantes à basse vitesse, essayez ici des valeurs non nulles. Veuillez noter que certaines mesures peuvent retourner une vitesse nulle (en raison de méthodes basées sur le réseau), dans ce cas rien ne sera enregistré.</string>
+    <string name="monitoring_min_accuracy_descr">Cela n’enregistrera que les points mesurés avec une précision minimale (en mètres/pieds, selon les données Android pour votre puce). La précision est la proximité des mesures de la position réelle, et ne correspond pas à la justesse, qui désigne la dispersion des mesures répétées.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Effet secondaire : avec le filtrage de précision certains points peuvent manquer ; par exemple : sous un pont, en forêt, entre de hauts bâtiments ou dans certaines conditions météorologiques.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remarque : si la localisation GPS est activée juste avant le début d\'enregistrement, la première position peut être imprécise. L\'application pourrait attendre quelques secondes avant d\'enregistrer un point (ou enregistrer le meilleur de 3 points successifs, etc), mais ces évolutions ne sont pas encore disponibles.</string>
     <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
@@ -3178,7 +3178,7 @@
     <string name="shared_string_angle_param">Angle : %s°</string>
     <string name="shared_string_angle">Angle</string>
     <string name="recalc_angle_dialog_descr">Un segment supplémentaire sera affiché entre ma position et l\'itinéraire initial jusqu\'à ce que l\'itinéraire soit recalculé</string>
-    <string name="recalc_angle_dialog_title">Angle minimum entre ma position et mon itinéraire</string>
+    <string name="recalc_angle_dialog_title">Angle minimal entre ma position et mon itinéraire</string>
     <string name="shared_string_preparing">Préparation en cours</string>
     <string name="shared_string_poi_types">Types de POI</string>
     <string name="shared_string_nothing_selected">Aucun élément sélectionné</string>
@@ -3583,8 +3583,8 @@
     <string name="app_mode_light_aircraft">Aviation légère</string>
     <string name="gpx_upload_trackable_visibility_descr">« Traçable » signifie que la trace ne s\'affichera pas dans les listes publiques, mais que les points de cheminement horodatés qu\'elle contient seront téléchargeables depuis l\'API GPS publique (ces points sont traités afin de n\'avoir aucun lien direct avec vous).</string>
     <string name="release_3_9">• Ajout d\'une option pour exporter et importer toutes les données, y compris les paramètres, les cartes téléchargées, les lieux favoris \n \n • Planifier l\'itinéraire : graphiques pour les segments de piste pour l\'itinéraire et ajout de la possibilité de créer et de modifier des pistes à segments multiples \n \n • Ajout de la méthode d\'authentification OAuth pour OpenStreetMap, amélioration de l\'interface utilisateur des boîtes de dialogue OSM \n \n • Support des couleurs personnalisées pour les favoris et les points de passage</string>
-    <string name="plan_route_split_before">Couper avant</string>
-    <string name="plan_route_split_after">Couper après</string>
+    <string name="plan_route_split_before">Séparer avant</string>
+    <string name="plan_route_split_after">Séparer après</string>
     <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
     <string name="gpx_upload_identifiable_visibility_descr">« Identifiable » signifie que la trace sera affichée publiquement dans « Mes traces GPS » ainsi que dans les listes de traces GPS publiques. Ainsi les autres utilisateurs pourront télécharger la trace brute et l\'associer avec votre nom d\'utilisateur. Les données de points de passage horodatés fournis par l\'API GPS publique feront référence à la page d\'origine de votre trace.</string>
     <string name="gpx_upload_public_visibility_descr">« Publique » signifie que la trace est affichée publiquement dans vos traces GPS et dans les listes de traces GPS publiques. Les données diffusées via l\'API ne font pas référence à votre page de traces. Les horodatages des points de trace ne sont pas disponibles via l\'API GPS publique et les points de trace ne sont pas classés par ordre chronologique.</string>
@@ -3704,7 +3704,7 @@
     <string name="select_category_descr">Sélectionnez une catégorie ou créez-en une nouvelle</string>
     <string name="track_recording_will_be_continued">L\'enregistrement se poursuivra.</string>
     <string name="copy_poi_name">Copier le nom du POI</string>
-    <string name="quick_action_show_hide_title">Afficher / masquer</string>
+    <string name="quick_action_show_hide_title">Afficher/masquer</string>
     <string name="shared_string_interval">Intervalle</string>
     <string name="track_has_no_altitude">La trace ne contient aucune donnée d\'altitude.</string>
     <string name="track_has_no_speed">La trace ne contient aucune donnée de vitesse.</string>
@@ -3956,7 +3956,7 @@
     <string name="routeInfo_roadClass_description">Colore les routes et chemins selon leur classification.</string>
     <string name="routeInfo_winter_ice_road_description">Colore les routes et chemins selon si ils sont praticables ou non en période hivernale.</string>
     <string name="routeInfo_smoothness_description">Classification des caractéristiques physiques des voies pour les véhicules à roues, notamment la nature et la régularité de leurs surfaces.</string>
-    <string name="routeInfo_surface_description">Fournit des informations sur la surface des routes / chemins.</string>
+    <string name="routeInfo_surface_description">Fournit des informations sur la surface des routes/chemins.</string>
     <string name="no_items_of_type_message">Vous n’avez aucun élément de ce type</string>
     <string name="release_4_0">• Sauvegarde dans le cloud \n \n• Ajout du mode nuit pour le style de carte « Topo » \n \n• Ajout d’une option pour télécharger les lignes de contour en pieds \n \n• Les pistes peuvent désormais être colorées par altitude, vitesse ou pente \n \n• Mise à jour de la boîte de dialogue « Enregistrement de trajet » \n \n• Distance par appui déplacé de la règle de rayon dans une option séparée \n \n• Planifier l’itinéraire : Vous pouvez maintenant modifier les options de navigation, accéder à la configuration de la carte et effectuer une recherche sans quitter la planification de l’itinéraire \n \n• Nouvel écran « Achat » avec des informations d’achat détaillées \n \n• Ajout d’une option pour modifier l’apparence de la ligne d’itinéraire \n \n• Les mises à jour OsmAnd Live ont été déplacées vers « Téléchargements &gt; Mises à jour »</string>
     <string name="add_group_to_markers">Ajouter un groupe à la liste des marques</string>
@@ -4062,7 +4062,7 @@
     <string name="not_enough_contributions_descr">Un minimum de %1$s modifications au cours des deux derniers mois %2$s est requis pour bénéficier de la mise à jour horaire des cartes en illimité.</string>
     <string name="show_parameter_seekbar">Afficher la barre de recherche des paramètres</string>
     <string name="migration_files_present">%1$d fichier(s) (%2$s) dans l\'emplacement sélectionné « %3$s » n\'ont pas été écrasés.</string>
-    <string name="fold_unfold">plier / déplier</string>
+    <string name="fold_unfold">plier/déplier</string>
     <string name="app_profile_type">Type de profil d’application</string>
     <string name="map_marker_options">Options pour les marques</string>
     <string name="add_to_group">Ajouter au groupe</string>
@@ -4512,7 +4512,7 @@
     <string name="weather_wind_kmh">km/h</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_knots">Nœuds</string>
-    <string name="weather_wind_miles_per_hour">Miles par heure</string>
+    <string name="weather_wind_miles_per_hour">Milles par heure</string>
     <string name="weather_wind_kilimeters_per_hour">Kilomètres par heure</string>
     <string name="weather_wind_meters_per_second">Mètres/seconde</string>
     <string name="weather_widgets_secondary_desc">Les unités de mesure peuvent être modifiées dans les paramètres du plugin météo.</string>
@@ -4581,7 +4581,7 @@
     <string name="cloud_all_changes_downloaded">Toutes les modifications ont été reçues</string>
     <string name="shared_string_do_not_exist">N\'existe pas</string>
     <string name="last_sync">Dernière synchro</string>
-    <string name="import_export">Importer / exporter</string>
+    <string name="import_export">Importer/exporter</string>
     <string name="shared_string_cloud">Cloud</string>
     <string name="upload_change">Envoyer la modification</string>
     <string name="cloud_version_will_be_removed">La version Cloud sera supprimée</string>
@@ -4594,8 +4594,8 @@
     <string name="cloud_no_conflicts">Il n\'y a aucun conflit.</string>
     <string name="cloud_all_changes_uploaded_descr">Toutes les modifications effectuées sur cet appareil sont synchronisées avec OsmAnd Cloud.</string>
     <string name="changes">Modifications %1$s</string>
-    <string name="si_nm_ft">Milles nautiques / pieds</string>
-    <string name="si_nm_mt">Milles nautiques / mètres</string>
+    <string name="si_nm_ft">Milles nautiques/pieds</string>
+    <string name="si_nm_mt">Milles nautiques/mètres</string>
     <string name="av_audio_format_bottom_sheet_descr">Sélectionnez un format audio. Les fichiers audio sont au format 3GPP (.3gp).</string>
     <string name="set_up_backup">Paramétrer la sauvegarde</string>
     <string name="x_axis">Axe des abscisses</string>
@@ -4648,7 +4648,7 @@
     <string name="approximate_bearing">Cap approximatif</string>
     <string name="approximate_bearing_descr">Estimer le cap à partir de l’itinéraire suivi.</string>
     <string name="app_mode_moped">Cyclomoteur</string>
-    <string name="release_4_4">• Amélioration du menu « Traces » dans « Configurer la carte » \n \n• Le menu contextuel affiche désormais les noms locaux des POI \n \n• Ajout d\'une option pour partager l\'itinéraire via lien \n \n• Ajout des unités de distance « Milles marins / pieds » \n \n• Nouveau mode fixe pour l\'orientation de la carte \n \n• Écran de démarrage simplifié \n \n• Android Auto : la position de la localisation est maintenant fixe en écrans scindés \n \n• Ajout des analyses « Pente / Vitesse » pour les traces \n \n• Android 13 : la sélection de la langue a été déplacée vers les paramètres de l\'appareil \n \n• Correction de bugs lors de l\'affichage de lieux végans \n \n• Ajout de la possibilité de télécharger des tuiles en ligne utilisées comme surcouches ou comme sous-couches. \n \n• Ajout de la prise en charge des unités impériales pour les « caractéristiques du véhicule » \n \n• Nouveau profil : cyclomoteur \n \n• Nouvelle option « Automatique » pour le paramètre « Emplacement sur l\'écran » \n \n• Correction des gestes pour incliner, zoomer et tourner la carte</string>
+    <string name="release_4_4">• Amélioration du menu « Traces » dans « Configurer la carte » \n \n• Le menu contextuel affiche désormais les noms locaux des POI \n \n• Ajout d\'une option pour partager l\'itinéraire via lien \n \n• Ajout des unités de distance « Milles nautiques / pieds » \n \n• Nouveau mode fixe pour l\'orientation de la carte \n \n• Écran de démarrage simplifié \n \n• Android Auto : la position de la localisation est maintenant fixe en écrans scindés \n \n• Ajout des analyses « Pente/Vitesse » pour les traces \n \n• Android 13 : la sélection de la langue a été déplacée vers les paramètres de l\'appareil \n \n• Correction de bugs lors de l\'affichage de lieux végans \n \n• Ajout de la possibilité de télécharger des tuiles en ligne utilisées comme surcouches ou comme sous-couches. \n \n• Ajout de la prise en charge des unités impériales pour les « caractéristiques du véhicule » \n \n• Nouveau profil : cyclomoteur \n \n• Nouvelle option « Automatique » pour le paramètre « Emplacement sur l\'écran » \n \n• Correction des gestes pour incliner, zoomer et tourner la carte</string>
     <string name="generate_hillshade_from_3d_maps">Générer des cartes matricielles d\'ombrages du relief à partir de cartes 3D</string>
     <string name="generate_slope_from_3d_maps">Générer des cartes matricielles des pentes à partir de cartes 3D</string>
     <string name="disable_vertex_hillshade_3d">Désactiver l\'ombrage des sommets en 3D</string>
@@ -5029,7 +5029,7 @@
     <string name="key_event_action_move_up">Déplacer vers le haut</string>
     <string name="key_event_action_open_search_view">Ouvrir la vue Recherche</string>
     <string name="key_event_action_zoom_out">Dézoomer</string>
-    <string name="key_event_action_toggle_drower">Afficher / masquer le menu latéral</string>
+    <string name="key_event_action_toggle_drower">Afficher/masquer le menu latéral</string>
     <string name="key_is_already_assigned_error">La touche « %1$s » est déjà affectée à l\'action : « %2$s »</string>
     <string name="key_event_action_open_navigation_view">Ouvrir la vue Navigation</string>
     <string name="key_event_action_move_to_my_location">Atteindre ma position</string>
@@ -5686,4 +5686,8 @@
     <string name="ski_route_switch_style_description">Explorez les pistes de ski, les remontées mécaniques et plus encore avec le style de carte Hiver et Ski.</string>
     <string name="shared_string_switch">Interrupteur</string>
     <string name="release_5_1">• Ajout du support des achats en ligne et multiplateformes\n\n• Déplacement des unités de température dans les paramètres généraux pour un accès facilité\n\n• Ajout d’un indicateur de niveau de batterie pour les capteurs BLE\n\n• Nouvelle interface plus intuitive pour la sélection de points dans Navigation\n\n• Amélioration de la visibilité des widgets grâce à un nouveau contour\n\n• Ajout d’un analyseur de Montées/Descentes\n\n• Extension de l’intégration Wikipedia &amp; Wikivoyage pour davantage de POI.</string>
+    <string name="osm_live_payment_renews_3_years">Renouvellement tous les trois ans</string>
+    <string name="three_years_subscription">Abonnement de trois ans</string>
+    <string name="years_3">Trois ans</string>
+    <string name="osm_live_payment_3_years_title">Tous les trois ans</string>
 </resources>
