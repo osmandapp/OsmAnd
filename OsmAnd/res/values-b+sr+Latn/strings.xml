@@ -3792,7 +3792,7 @@
     <string name="osmand_live">OsmAnd Lajv</string>
     <string name="annual_subscription">Godišnja pretplata</string>
     <string name="monthly_subscription">Mesečna pretplata</string>
-    <string name="three_months_subscription">Tromesečna članarina</string>
+    <string name="three_months_subscription">Tromesečna pretplata</string>
     <string name="next_billing_date">Sledeći datum naplate: %1$s</string>
     <string name="osmand_live_cancelled">Otkazano</string>
     <string name="renew_subscription">Obnavljanje pretplate</string>
@@ -5756,4 +5756,9 @@
     <string name="set_intermediate_point">Postavite međuodredište</string>
     <string name="ski_route_switch_style_description">Istražite skijaške staze, žičare i još mnogo toga u stilu zimskih i skijaških mapa.</string>
     <string name="shared_string_switch">Prekidač</string>
+    <string name="osm_live_payment_renews_3_years">Obnavlja se svake tri godine</string>
+    <string name="years_3">Tri godine</string>
+    <string name="osm_live_payment_3_years_title">Svake tri godine</string>
+    <string name="three_years_subscription">Trogodišnja pretplata</string>
+    <string name="release_5_1">• Dodata je podrška za kupovinu na vebu i preko platformi\n\n• Jedinice za temperaturu su premeštene u Opšta podešavanja radi lakšeg pristupa\n\n• Dodat je indikator nivoa baterije za BLE senzore\n\n• Novi, intuitivniji UI za izbor tačaka u Navigaciji\n\n• Poboljšana vidljivost vidžeta sa novim obrisom\n\n• Dodat je analizator Uspona/Spusta\n\n• Proširena integracija sa Vikipedijom i Vikivojažem za više TOI.</string>
 </resources>
