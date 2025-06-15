@@ -5779,4 +5779,9 @@
     <string name="hmd_promo_description_years">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s anni</string>
     <string name="shared_string_flat">Pianeggiante</string>
     <string name="uphill_downhill_split">Salita/Discesa</string>
+    <string name="osm_live_payment_renews_3_years">Si rinnova ogni tre anni</string>
+    <string name="years_3">Tre anni</string>
+    <string name="osm_live_payment_3_years_title">Ogni tre anni</string>
+    <string name="three_years_subscription">Abbonamento di tre anni</string>
+    <string name="shared_string_switch">Cambia</string>
 </resources>
