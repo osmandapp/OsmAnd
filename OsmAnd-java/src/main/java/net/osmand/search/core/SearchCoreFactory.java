@@ -1,7 +1,6 @@
 package net.osmand.search.core;
 
 
-
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS;
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
@@ -11,27 +10,6 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
-
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -45,15 +23,8 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CommonWords;
-import net.osmand.data.Amenity;
-import net.osmand.data.Building;
-import net.osmand.data.City;
+import net.osmand.data.*;
 import net.osmand.data.City.CityType;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -69,6 +40,13 @@ import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.LocationParser;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
+
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchCoreFactory {
 
@@ -1370,8 +1348,16 @@ public class SearchCoreFactory {
 					}
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getOtherNames(true);
-					if (Algorithms.isEmpty(res.localeName) && object.isRouteTrack()) {
-						res.localeName = object.getAdditionalInfo(Amenity.ROUTE_ID);
+
+					if (Algorithms.isEmpty(res.localeName)) {
+						if (object.isRouteTrack()) {
+							res.localeName = object.getAdditionalInfo(Amenity.ROUTE_ID);
+						} else if (object.isRouteArticle()) {
+							List<String> names = object.getOtherNames();
+							if (!Algorithms.isEmpty(names)) {
+								res.localeName = names.get(0);
+							}
+						}
 					}
 					if (Algorithms.isEmpty(res.localeName)) {
 						AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
