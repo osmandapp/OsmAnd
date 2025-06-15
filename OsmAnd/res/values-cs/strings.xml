@@ -5775,4 +5775,8 @@
     <string name="ski_route_switch_style_description">Procházejte sjezdovky, lanovky a další se zimním a lyžařským mapovým stylem.</string>
     <string name="shared_string_switch">Přepnout</string>
     <string name="release_5_1">• Přidána podpora pro webové a meziplatformní nákupy\n\n • Jednotky teploty přesunuty do Obecných nastavení pro jednodušší přístup\n\n • Přidán indikátor úrovně baterie pro senzory BLE\n\n • Nové, intuitivnější rozhraní pro výběr bodů v Navigaci\n\n • Vylepšena viditelnost widgetů s novým obrysem\n\n • Přidána analýza stoupání/klesání\n\n • Rozšířena integrace Wikimedia a Wikivoyage pro více bodů zájmu.</string>
+    <string name="osm_live_payment_renews_3_years">Obnovuje se každé tři roky</string>
+    <string name="years_3">Tři roky</string>
+    <string name="osm_live_payment_3_years_title">Každé tři roky</string>
+    <string name="three_years_subscription">Tříleté předplatné</string>
 </resources>
