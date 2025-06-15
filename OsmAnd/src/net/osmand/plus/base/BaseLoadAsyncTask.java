@@ -44,11 +44,19 @@ public abstract class BaseLoadAsyncTask<Params, Progress, Result> extends AsyncT
 		}
 	}
 
+	protected String getProgressTitle(){
+		return app.getString(R.string.loading_smth, "");
+	}
+
+	protected String getProgressDescription(){
+		return app.getString(R.string.loading_data);
+	}
+
 	protected void showProgress(boolean cancelableOnTouchOutside) {
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			String title = app.getString(R.string.loading_smth, "");
-			progress = ProgressDialog.show(activity, title, app.getString(R.string.loading_data));
+			String title = getProgressTitle();
+			progress = ProgressDialog.show(activity, title, getProgressDescription());
 			if (cancelableOnTouchOutside) {
 				progress.setCanceledOnTouchOutside(true);
 			}
