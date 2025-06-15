@@ -11,10 +11,10 @@
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Si le mode d\'édition hors-ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>
     <string name="update_poi_does_not_change_indexes">Les modifications de POI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier de votre appareil.</string>
-    <string name="local_openstreetmap_uploading">Téléversement…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} POI/Notes ont été téléversés</string>
-    <string name="local_openstreetmap_uploadall">Tout téléverser</string>
-    <string name="local_openstreetmap_upload">Téléverser les modifications vers OSM</string>
+    <string name="local_openstreetmap_uploading">Envoi en cours…</string>
+    <string name="local_openstreetmap_were_uploaded">{0} POI/Notes ont été envoyés</string>
+    <string name="local_openstreetmap_uploadall">Tout envoyer</string>
+    <string name="local_openstreetmap_upload">Envoyer les modifications vers OSM</string>
     <string name="local_openstreetmap_delete">Supprimer la modification</string>
     <string name="local_openstreetmap_descr_title">Modification asynchrone d\'OSM :</string>
     <string name="local_openstreetmap_settings">POI/notes OSM enregistrés sur l\'appareil</string>
@@ -108,8 +108,8 @@
     <string name="filename_input">Nom du fichier : </string>
     <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
     <string name="shared_string_save">Enregistrer</string>
-    <string name="local_index_upload_gpx_description">Téléverser les fichiers GPX à la communauté OSM. Ils seront utilisés pour améliorer les cartes.</string>
-    <string name="local_index_items_uploaded">%1$d sur %2$d élément(s) téléversé(s).</string>
+    <string name="local_index_upload_gpx_description">Envoyer les fichiers GPX à la communauté OSM. Ils seront utilisés pour améliorer les cartes.</string>
+    <string name="local_index_items_uploaded">%1$d sur %2$d élément(s) envoyé(s).</string>
     <string name="local_index_mi_upload_gpx">Envoyer à OSM</string>
     <string name="show_more_map_detail">Afficher plus de détails</string>
     <string name="show_more_map_detail_descr">Afficher certains détails des cartes vectorielles (routes, etc.) y compris aux niveaux de zooms inférieurs.</string>
@@ -417,8 +417,8 @@
     <string name="favorite">Favoris</string>
     <string name="shared_string_clear_all">Tout supprimer</string>
     <string name="shared_string_history">Historique</string>
-    <string name="uploading_data">Téléversement des données…</string>
-    <string name="uploading">Téléversement…</string>
+    <string name="uploading_data">Envoi des données…</string>
+    <string name="uploading">Envoi en cours …</string>
     <string name="search_nothing_found">Rien n\'a été trouvé</string>
     <string name="searching">Recherche en cours…</string>
     <string name="searching_address">Recherche de l\'adresse…</string>
@@ -476,7 +476,7 @@
     <string name="use_online_routing_descr">Utiliser Internet pour calculer l\'itinéraire.</string>
     <string name="use_online_routing">Utiliser le guidage en ligne</string>
     <string name="osm_settings_descr">Indiquez les paramètres de connexion à OpenStreetMap.org (OSM) pour vos contributions.</string>
-    <string name="data_settings_descr">Indiquez la langue, télécharger/mettre à jour les données.</string>
+    <string name="data_settings_descr">Indiquez la langue, télécharger / mettre à jour les données.</string>
     <string name="data_settings">Données</string>
     <string name="osm_editing_plugin_name">Édition OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Zoom de la carte adapté à votre vitesse (lorsque que votre position est affichée sur la carte).</string>
@@ -611,7 +611,7 @@
     <string name="gpx_visibility_txt">Visibilité</string>
     <string name="gpx_tags_txt">Étiquettes</string>
     <string name="shared_string_description">Description</string>
-    <string name="validate_gpx_upload_name_pwd">Veuillez renseigner le compte et le mot de passe OSM pour téléverser les fichiers GPX.</string>
+    <string name="validate_gpx_upload_name_pwd">Veuillez renseigner le compte et le mot de passe OSM pour envoyer les fichiers GPX.</string>
     <string name="default_buttons_support">Soutien</string>
     <string name="support_new_features">Soutenir le développement</string>
     <string name="show_ruler_level">Afficher l\'échelle</string>
@@ -1540,9 +1540,9 @@
     <string name="user_hates_app_get_feedback">Indiquez-nous pourquoi.</string>
     <string name="user_hates_app_get_feedback_long">Merci de nous faire part de ce que vous voudriez améliorer dans cette application.</string>
     <string name="download_live_updates">Mise à jour automatique</string>
-    <string name="failed_to_upload">Erreur lors du téléversement</string>
+    <string name="failed_to_upload">Erreur lors de l’envoi</string>
     <string name="delete_change">Supprimer les modifications</string>
-    <string name="successfully_uploaded_pattern">Téléversé avec succès {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">Envoyé {0}/{1}</string>
     <string name="try_again">Essayer à nouveau</string>
     <string name="error_message_pattern">Erreur : {0}</string>
     <string name="no_updates_available">Aucune mise à jour disponible</string>
@@ -1576,7 +1576,7 @@
     <string name="count_of_lines">Nombre de lignes</string>
     <string name="number_of_rows_in_dash">Nombre de lignes %1$s</string>
     <string name="saved_at_time">Enregistré avec succès à : %1$s</string>
-    <string name="poi_deleted_localy">Le POI sera supprimé par le téléversement de vos modifications</string>
+    <string name="poi_deleted_localy">Le POI sera supprimé après l’envoi de vos modifications</string>
     <string name="routing_attr_avoid_shuttle_train_description">Éviter les trains-navettes</string>
     <string name="shared_string_card_was_hidden">La carte a été masquée</string>
     <string name="routing_attr_avoid_shuttle_train_name">Éviter les trains-navettes</string>
@@ -1664,7 +1664,7 @@
     <string name="shared_string_contact">Contact</string>
     <string name="osm_edit_created_poi">POI OSM créé</string>
     <string name="map_legend">Légende de la carte</string>
-    <string name="shared_string_upload">Téléverser</string>
+    <string name="shared_string_upload">Envoyer</string>
     <string name="shared_string_update">Mettre à jour</string>
     <string name="read_more">En savoir +</string>
     <string name="whats_new">Nouveautés de la version</string>
@@ -1785,9 +1785,9 @@
     <string name="shared_string_toolbar">Barre d\'outils</string>
     <string name="shared_string_widgets">Widgets</string>
     <string name="consider_turning_polygons_off">Il est recommandé de désactiver le rendu des polygones.</string>
-    <string name="upload_anonymously">Téléverser anonymement</string>
+    <string name="upload_anonymously">Envoyer anonymement</string>
     <string name="upload_osm_note_description">Envoyez vos notes OSM en anonyme ou avec votre compte OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Téléverser la note OSM</string>
+    <string name="upload_osm_note">Envoyer la note OSM</string>
     <string name="download_files_error_not_enough_space">Espace insuffisant !
 \nCette opération requiert temporairement {3} Mo et {1} Mo seront utilisés de manière permanente.
 \n(actuellement seuls {2} Mo sont disponibles)</string>
@@ -1988,7 +1988,7 @@
     <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Très fin</string>
     <string name="route_calculation">Calcul de l\'itinéraire</string>
-    <string name="upload_poi">Téléverser les POI</string>
+    <string name="upload_poi">Envoyer les POI</string>
     <string name="route_roundabout_short">Prenez la sortie %1$d</string>
     <string name="search_map_hint">Ville ou région</string>
     <string name="routing_attr_allow_motorway_description">Autoriser les trajets sur autoroute.</string>
@@ -2121,7 +2121,7 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). \n \nProfitez d\'un guidage vocal comme visuel ; Découvrez des POI (points d\'intérêt) ; Créez et gérez des traces GPX ; Installez des extensions pour visualiser l\'altitude et les courbes de niveau ; Utilisez les modes Conduite, Piéton, Cycliste ; Contribuez à l\'amélioration des cartes OSM et bien plus encore.</string>
     <string name="osmand_extended_description_part4">Ski
 \nL\'extension OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
-    <string name="osmand_extended_description_part7">Contribuez à OpenStreetMap (OSM) \n • Signalez des anomalies \n • Téléversez des traces GPX vers OSM directement depuis l\'application \n • Ajoutez des POI et téléversez-les vers OSM (immédiatement ou plus tard si vous êtes hors ligne)</string>
+    <string name="osmand_extended_description_part7">Contribuez à OpenStreetMap (OSM) \n • Signalez des anomalies \n • Envoyez des traces GPX vers OSM directement depuis l\'application \n • Ajoutez des POI et envoyez-les vers OSM (immédiatement ou plus tard si vous êtes hors ligne)</string>
     <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes : \n • Europe de l\'Ouest : **** \n • Europe de l\'Est : *** \n • Russie : *** \n • Amérique du Nord : *** \n • Amérique du Sud : ** \n • Asie : ** \n • Japon et Corée : *** \n • Moyen-Orient : ** \n • Afrique : ** \n • Antarctique : * \n La majorité des pays autour du Monde sont disponibles au téléchargement\nDe l\'Afghanistan au Zimbabwe, de l\'Australie aux États-Unis. Argentine, Brésil, Canada, France, Allemagne, Mexique, Royaume-Uni, Espagne, …</string>
     <string name="fonts_header">Fontes de carte</string>
     <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité \n • Bascule automatique en mode jour/nuit (option) \n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option) \n • Zoom adapté à la vitesse (option) \n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
@@ -2597,7 +2597,7 @@
     <string name="osm_live_payment_current_subscription">Abonnement en cours</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Fréquence de règlement :</string>
-    <string name="osm_live_payment_contribute_descr">Les dons financent la cartographie OSM.</string>
+    <string name="osm_live_payment_contribute_descr">Les dons financent la cartographie OpenStreetMap.</string>
     <string name="osm_live_plan_pricing">Abonnements &amp; tarifs</string>
     <string name="osm_live_payment_renews_monthly">Tous les mois</string>
     <string name="osm_live_payment_renews_quarterly">Tous les trimestres</string>
@@ -3107,7 +3107,7 @@
     <string name="login_and_pass">Nom d\'utilisateur et mot de passe</string>
     <string name="plugin_global_prefs_info">Les paramètres de cette extension sont globaux et s\'appliquent à tous les profils</string>
     <string name="osm_editing">Édition OSM</string>
-    <string name="osm_edits_view_descr">Consultez vos modifications et vos bugs OSM non encore envoyés dans %1$s. Les modifications téléversées ne seront plus affichées dans OsmAnd.</string>
+    <string name="osm_edits_view_descr">Consultez vos modifications et vos bugs OSM non encore envoyés dans %1$s. Les modifications envoyées ne seront plus affichées dans OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icône affiché pendant la navigation ou en déplacement.</string>
     <string name="select_map_icon_descr">Icône affiché à l\'arrêt.</string>
@@ -3132,7 +3132,7 @@
     <string name="monitoring_min_distance_descr_recommendation">Recommandation : paramétrez 5 mètres si vous ne souhaitez pas enregistrer les petits détails de votre itinéraire et que vous ne souhaitez pas non plus d\'informations supplémentaires sur vos pauses.</string>
     <string name="monitoring_min_speed_descr_side_effect">Effet secondaire : votre trace ne contiendra pas les parties où la vitesse minimale n\'a pas été atteinte (par exemple lorsque vous poussez votre vélo en montée ou pendant une pause). De ce fait certaines informations de votre trace seront faussées comme la durée de déplacement ou la vitesse moyenne.</string>
     <string name="monitoring_min_speed_descr_recommendation">Recommandation : commencez par utiliser la détection de mouvement via le filtre de déplacement minimal (B) vous pourriez obtenir de meilleurs résultats en perdant moins de données. Si vos traces restent bruyantes à basse vitesse, essayez ici des valeurs non nulles. Veuillez noter que certaines mesures peuvent retourner une vitesse nulle (en raison de méthodes basées sur le réseau), dans ce cas rien ne sera enregistré.</string>
-    <string name="monitoring_min_accuracy_descr">Cela n’enregistrera que les points mesurés avec une précision minimale (en mètres/pieds, selon les données Android pour votre puce). La précision est la proximité des mesures de la position réelle, et ne correspond pas à la justesse, qui désigne la dispersion des mesures répétées.</string>
+    <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec la précision minimale indiquée seront enregistrés (la précision en mètres/pieds est la proximité entre les mesures et la position réelle, elle est fournie par votre puce GPS). La précision différe de la justesse qui désigne la dispersion de plusieurs mesures successives.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Effet secondaire : avec le filtrage de précision certains points peuvent manquer ; par exemple : sous un pont, en forêt, entre de hauts bâtiments ou dans certaines conditions météorologiques.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remarque : si la localisation GPS est activée juste avant le début d\'enregistrement, la première position peut être imprécise. L\'application pourrait attendre quelques secondes avant d\'enregistrer un point (ou enregistrer le meilleur de 3 points successifs, etc), mais ces évolutions ne sont pas encore disponibles.</string>
     <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
