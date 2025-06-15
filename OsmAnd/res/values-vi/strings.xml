@@ -434,7 +434,7 @@
     <string name="show_gps_coordinates_text">Hiện tọa độ GPS trên bản đồ</string>
     <string name="use_internet_to_download_tile">Tải xuống các mảng bản đồ bị thiếu</string>
     <string name="app_description">Ứng dụng điều hướng</string>
-    <string name="shared_string_exit">Thoát</string>
+    <string name="shared_string_exit">Lối ra</string>
     <string name="search_button">Tìm kiếm</string>
     <string name="search_activity">Tìm kiếm</string>
     <string name="searchpoi_activity">Chọn địa điểm</string>
@@ -2078,7 +2078,7 @@
     <string name="auto_zoom_farthest">Đến tầm xa</string>
     <string name="int_continuosly">Liên tục</string>
     <string name="rendering_attr_noPolygons_name">Hình đa giác</string>
-    <string name="shared_string_options">Những lựa chọn</string>
+    <string name="shared_string_options">Tùy chọn</string>
     <string name="shared_string_dismiss">Loại bỏ</string>
     <string name="shared_string_help">Trợ giúp</string>
     <string name="online_map_settings_descr">Chọn trực tuyến hoặc các nguồn bản đồ mảng đã lưu trong bộ nhớ đệm.</string>
@@ -4054,4 +4054,7 @@
     <string name="rendering_attr_currentTrackColor_name">Màu GPX</string>
     <string name="home_button">Nhà</string>
     <string name="keep_and_add_destination_point">Thêm thành điểm đến sau cùng</string>
+    <string name="route_roundabout">Vòng xuyến: Đi theo lối ra số %1$d và tiếp tục</string>
+    <string name="route_roundabout_short">Đi theo lối ra số %1$d và tiếp tục</string>
+    <string name="accessibility_options">Tùy chọn trợ năng</string>
 </resources>
