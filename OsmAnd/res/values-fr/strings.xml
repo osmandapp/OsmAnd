@@ -1272,7 +1272,7 @@
     <string name="print_route">Exporter l\'itinéraire</string>
     <string name="fav_point_emoticons_message">Favori renommé en « %1$s » (les émoticônes ne sont pas autorisés).</string>
     <string name="speed_limit_exceed">Marge de tolérance aux limites de vitesse</string>
-    <string name="speed_limit_exceed_message">Choisissez la marge de tolérance au-dessus de la limite de vitesse à partir de laquelle vous recevrez une alerte vocale.</string>
+    <string name="speed_limit_exceed_message">Choisissez la marge de tolérance à ajouter à la limitation de vitesse pour recevoir une alerte vocale.</string>
     <string name="anonymous_user_hint">Un utilisateur anonyme ne peut pas :
 \n- Créer de groupe ;
 \n- Synchroniser les groupes et les appareils avec le serveur ;
@@ -1774,7 +1774,7 @@
     <string name="add_time_span">Ajouter un laps de temps</string>
     <string name="data_is_not_available">Donnée indisponible</string>
     <string name="rendering_attr_hideUnderground_name">Objets souterrains</string>
-    <string name="shared_string_read_more">En savoir plus</string>
+    <string name="shared_string_read_more">Lire la suite</string>
     <string name="shared_string_email_address">Adresse courriel</string>
     <string name="shared_string_status">État</string>
     <string name="shared_string_save_changes">Enregistrer les modifications</string>
@@ -1870,7 +1870,7 @@
     <string name="map_widget_magnetic_bearing">Cap magnétique</string>
     <string name="map_widget_bearing">Cap relatif</string>
     <string name="access_disable_offroute_recalc">Ne pas recalculer l\'itinéraire après l\'avoir quitté</string>
-    <string name="access_disable_offroute_recalc_descr">Pas de recalcul d’itinéraire en cas de sortie du trajet.</string>
+    <string name="access_disable_offroute_recalc_descr">Pas de recalcul d’itinéraire en cas de sortie de l\'itinéraire prévu.</string>
     <string name="access_disable_wrong_direction_recalc_descr">Pas de recalcul d’itinéraire en cas de demi-tour.</string>
     <string name="access_disable_wrong_direction_recalc">Ne pas recalculer l\'itinéraire lors d\'un demi-tour</string>
     <string name="use_osm_live_routing_description">Activer le guidage avec les données OsmAnd Live.</string>
@@ -2073,7 +2073,7 @@
     <string name="quick_action_page_list_descr">Bouton pour faire défiler la liste ci-dessous.</string>
     <string name="rendering_attr_depthContours_description">Afficher les courbes et points de profondeur.</string>
     <string name="rendering_attr_depthContours_name">Courbes de profondeur nautique</string>
-    <string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
+    <string name="routing_attr_height_obstacles_name">Altitude prise en compte</string>
     <string name="average_altitude">Altitude moyenne</string>
     <string name="total_distance">Distance totale</string>
     <string name="shared_string_time">Durée</string>
@@ -2659,7 +2659,7 @@
     <string name="transfers_size">%1$d transferts</string>
     <string name="add_start_and_end_points">Ajouter un point de départ et d\'arrivée</string>
     <string name="route_add_start_point">Ajouter un point de départ</string>
-    <string name="route_descr_select_start_point">Sélectionnez un point de départ</string>
+    <string name="route_descr_select_start_point">Définir le départ</string>
     <string name="rendering_attr_surface_unpaved_name">Non revêtu</string>
     <string name="rendering_attr_surface_sand_name">Sable</string>
     <string name="rendering_attr_surface_grass_name">Herbe</string>
@@ -2713,7 +2713,7 @@
     <string name="avoid_pt_types">Éviter des types de transports …</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
     <string name="shared_string_degrees">Degrés</string>
-    <string name="shared_string_milliradians">Milliradiens</string>
+    <string name="shared_string_milliradians">Milliradians</string>
     <string name="angular_measeurement">Unité d\'angle</string>
     <string name="angular_measeurement_descr">Modifier l\'unité de mesure de l\'azimut.</string>
     <string name="routing_attr_avoid_tram_name">Éviter le tram</string>
@@ -2796,8 +2796,8 @@
     <string name="routing_attr_freeride_policy_name">Hors-piste</string>
     <string name="process_downloading_service">Service de téléchargement OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">Appuyez à nouveau pour modifier l\'orientation de la carte</string>
-    <string name="shared_string_min_speed">Vitesse minimale</string>
-    <string name="shared_string_max_speed">Vitesse Max.</string>
+    <string name="shared_string_min_speed">Vitesse min.</string>
+    <string name="shared_string_max_speed">Vitesse max.</string>
     <string name="default_speed_setting_title">Vitesse par défaut</string>
     <string name="minmax_speed_dialog_title">Définir la vitesse min/max</string>
     <string name="new_profile">Nouveau profil</string>
@@ -2815,8 +2815,8 @@
     <string name="app_mode_personal_transporter">Gyropode</string>
     <string name="edit_profile_setup_title">Paramétrez le profil</string>
     <string name="edit_profile_setup_subtitle">Le profil conserve ses paramètres</string>
-    <string name="edit_profile_setup_map_subtitle">Sélectionnez les paramètres de la carte pour ce profil</string>
-    <string name="edit_profile_screen_options_subtitle">Sélectionnez les paramètres d\'affichage écran pour ce profil</string>
+    <string name="edit_profile_setup_map_subtitle">Sélectionnez les options de la carte pour ce profil</string>
+    <string name="edit_profile_screen_options_subtitle">Sélectionnez les options d’affichage écran pour ce profil</string>
     <string name="edit_profile_nav_settings_subtitle">Sélectionnez les paramètres de guidage pour ce profil</string>
     <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de correspondances</string>
     <string name="turn_screen_on_router">Allumer lors des changements de direction</string>
@@ -2958,7 +2958,7 @@
     <string name="general_settings_profile_descr">Thème de l\'application, unités, région</string>
     <string name="reset_to_default">Rétablir les paramètres par défaut</string>
     <string name="screen_alerts">Alertes visuelles</string>
-    <string name="route_parameters_descr">Définir les paramètres de l\'itinéraire</string>
+    <string name="route_parameters_descr">Configurer les paramètres de l\'itinéraire</string>
     <string name="route_parameters">Paramètres de l\'itinéraire</string>
     <string name="application_profile_changed">Profil de l\'appli basculé à « %s »</string>
     <string name="logcat_buffer">Buffer Logcat</string>
@@ -3431,7 +3431,7 @@
     <string name="plan_route_select_track_file_for_open">Sélectionnez un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
     <string name="overwrite_track">Remplacer la trace</string>
-    <string name="route_between_points_desc">Choisissez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil ci-dessous.</string>
+    <string name="route_between_points_desc">Sélectionnez comment relier les points : en ligne droite ou en calculant un itinéraire avec le profil ci-dessous.</string>
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
     <string name="route_between_points_add_track_desc">Sélectionnez le fichier de trace auquel vous souhaitez ajouter un nouveau segment.</string>
@@ -4204,7 +4204,7 @@
     <string name="apply_to_existing_points_descr">Appliquer les modifications à tous les points du groupe ou seulement aux nouveaux \?</string>
     <string name="rendering_attr_showLightRailRoutes_name">Chemins de fer légers</string>
     <string name="map_widget_altitude">Altitude de l\'emplacement actuel</string>
-    <string name="map_widget_current_speed">Vitesse instantanée</string>
+    <string name="map_widget_current_speed">Vitesse actuelle</string>
     <string name="page_number">Page %1$s</string>
     <string name="map_widget_distance_to_destination">Distance jusqu\'à destination</string>
     <string name="add_page">Ajouter une page</string>
@@ -4395,7 +4395,7 @@
     <string name="shared_string_switch_mode">Basculer de mode</string>
     <string name="click_on_widget">Cliquer sur le widget</string>
     <string name="shared_string_shows">Afficher</string>
-    <string name="map_marker_interval_dialog_desc">Indiquez la durée sur laquelle mesurer la vitesse moyenne afin d\'estimer l\'heure d\'arrivée.</string>
+    <string name="map_marker_interval_dialog_desc">Indiquez la durée sur laquelle calculer la vitesse moyenne afin d\'estimer l\'heure d\'arrivée.</string>
     <string name="quick_action_current_location_widget_descr">Bouton pour afficher ou masquer le widget Position actuelle.</string>
     <string name="coordinates_widget_current_location_desc">Affiche les coordonnées de la position actuelle</string>
     <string name="coordinates_widget_map_center">Coordonnées : centre de la carte</string>
@@ -4944,7 +4944,7 @@
     <string name="help_article_widgets_name">Widgets de la carte</string>
     <string name="help_article_widgets_info_widgets_name">Widgets d\'information</string>
     <string name="help_article_widgets_map_buttons_name">Boutons de la carte</string>
-    <string name="live_monitoring_adress_descr">Indiquez l\'adresse web avec la syntaxe de paramètre suivants : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Indiquez l\'adresse web avec la syntaxe de paramètres suivante : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
     <string name="release_4_6">• Android Auto : ajout du mode 3D \n \n• Traces : Introduction de filtres et de dossiers intelligents, optimisation de la mémoire pour les fichiers plus volumineux \n \n• Amélioration des panneaux de widgets supérieur et inférieur pour accueillir tous les widgets \n \n• Amélioration de la gestion des ressources locales \n \n• Assignation des boutons personnalisable pour les contrôleurs externes \n \n• Nouveaux widgets : « Finesse » et « Position du soleil » \n \n• OsmAnd Cloud : Accès aux fichiers supprimés \n \n• Amélioration de la coloration des pistes en mode Pente avec un nouveau dégradé symétrique \n \n• Résolution des problèmes concernant la barre d\'état transparente \n \n• Ajout de la prise en charge du widget de température ANT+ \n \n• Introduction du widget \"RAM disponible\"</string>
@@ -5563,7 +5563,7 @@
     <string name="popular_places_nearby">Lieux populaires proches</string>
     <string name="recently_visited">Dernières visites</string>
     <string name="shared_string_avg_altitude">Altitude moyenne</string>
-    <string name="shared_string_avg_speed">Vitesse mini</string>
+    <string name="shared_string_avg_speed">Vitesse min.</string>
     <string name="shared_string_length">Longueur</string>
     <string name="map_widget_route_information">Informations sur l\'itinéraire</string>
     <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps de trajet restant et la distance pour l\'itinéraire de navigation actuel.</string>
