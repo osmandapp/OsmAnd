@@ -1,12 +1,14 @@
 package net.osmand.plus.routing;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -27,17 +29,34 @@ public class GpxRouteHelper {
 
     private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(GpxRouteHelper.class);
 
-    public GpxRouteHelper(RouteProvider provider) {
+    protected GpxRouteHelper(RouteProvider provider) {
         this.provider = provider;
     }
 
-    protected RouteCalculationResult calculateGpxRoute(RouteCalculationParams routeParams) throws IOException {
+    protected RouteCalculationResult calculateGpxRoute(@NonNull RouteCalculationParams routeParams) throws IOException {
         GPXRouteParams gpxParams = routeParams.gpxRoute;
-        boolean calcWholeRoute = routeParams.gpxRoute.passWholeRoute && (routeParams.previousToRecalculate == null || !routeParams.onlyStartPointChanged);
+        boolean calcWholeRoute = gpxParams.passWholeRoute &&
+                (routeParams.previousToRecalculate == null || !routeParams.onlyStartPointChanged);
         boolean calculateOsmAndRouteParts = gpxParams.calculateOsmAndRouteParts;
-        List<RouteSegmentResult> gpxRouteResult = routeParams.gpxRoute.route;
 
-        if (!Algorithms.isEmpty(gpxRouteResult)) {
+        boolean followOsmAndRoute = gpxParams.hasOsmAndRoute();
+        List<RouteSegmentResult> gpxRouteResult = gpxParams.route;
+
+        if (gpxParams.reverse && followOsmAndRoute) {
+            switch (gpxParams.reverseStrategy) {
+                case USE_ORIGINAL_GPX -> {
+                    followOsmAndRoute = false;
+                }
+                case RECALCULATE_ALL_ROUTE_POINTS -> {
+                    gpxRouteResult = recalculateByRoutePoints(routeParams, false);
+                }
+                case RECALCULATE_FROM_CLOSEST_ROUTE_POINT -> {
+                    gpxRouteResult = recalculateByRoutePoints(routeParams, true);
+                }
+            }
+        }
+
+        if (followOsmAndRoute) {
             if (!gpxParams.calculatedRouteTimeSpeed) {
                 calculateGpxRouteTimeSpeed(routeParams, gpxRouteResult);
             }
@@ -155,9 +174,8 @@ public class GpxRouteHelper {
         }
     }
 
-    private RouteCalculationResult calculateOsmAndRouteWithIntermediatePoints(RouteCalculationParams routeParams,
-                                                                              List<Location> intermediates,
-                                                                              boolean connectPointsStraightly) throws IOException {
+    @NonNull
+    private RouteCalculationParams copyRouteCalculationParams(@NonNull RouteCalculationParams routeParams) {
         RouteCalculationParams rp = new RouteCalculationParams();
         rp.calculationProgress = routeParams.calculationProgress;
         rp.ctx = routeParams.ctx;
@@ -168,14 +186,28 @@ public class GpxRouteHelper {
         rp.fast = routeParams.fast;
         rp.onlyStartPointChanged = routeParams.onlyStartPointChanged;
         rp.previousToRecalculate = routeParams.previousToRecalculate;
-        rp.extraIntermediates = true;
-        rp.intermediates = new ArrayList<>();
+        rp.extraIntermediates = routeParams.extraIntermediates;
+        rp.intermediates = routeParams.intermediates;
+        return rp;
+    }
 
-        int closest = findClosestIntermediate(routeParams, intermediates);
-        for (int i = closest; i < intermediates.size(); i++) {
-            Location w = intermediates.get(i);
-            rp.intermediates.add(new LatLon(w.getLatitude(), w.getLongitude()));
+    @NonNull
+    private RouteCalculationResult calculateOsmAndRouteWithIntermediatePoints(@NonNull RouteCalculationParams routeParams,
+                                                                              @Nullable List<Location> intermediates,
+                                                                              boolean connectPointsStraightly) throws IOException {
+        RouteCalculationParams rp = copyRouteCalculationParams(routeParams);
+
+        if (Algorithms.isEmpty(rp.intermediates) && intermediates != null) {
+            rp.intermediates = new ArrayList<>();
+            rp.extraIntermediates = true;
+
+            int closest = findClosestIntermediate(routeParams, intermediates);
+            for (int i = closest; i < intermediates.size(); i++) {
+                Location w = intermediates.get(i);
+                rp.intermediates.add(new LatLon(w.getLatitude(), w.getLongitude()));
+            }
         }
+
         RouteService routeService = routeParams.mode.getRouteService();
         if (routeService == RouteService.BROUTER) {
             try {
@@ -189,7 +221,7 @@ public class GpxRouteHelper {
         return provider.findVectorMapsRoute(rp, false);
     }
 
-    private int findClosestIntermediate(RouteCalculationParams params, List<Location> intermediates) {
+    private int findClosestIntermediate(@NonNull RouteCalculationParams params, @NonNull List<Location> intermediates) {
         int closest = 0;
         if (!params.gpxRoute.passWholeRoute) {
             double maxDist = Double.POSITIVE_INFINITY;
@@ -208,11 +240,47 @@ public class GpxRouteHelper {
         return closest;
     }
 
+    @NonNull
+    private List<RouteSegmentResult> recalculateByRoutePoints(@NonNull RouteCalculationParams routeParams,
+                                                              boolean optimizeUsingClosestRoutePoint)
+            throws IOException {
+        List<Location> locations = new ArrayList<>();
+        for (WptPt wpt : routeParams.gpxRoute.routePoints) {
+            locations.add(new Location("", wpt.getLat(), wpt.getLon()));
+        }
+
+        if (locations.size() > 1) {
+            int closest = optimizeUsingClosestRoutePoint ? findClosestIntermediate(routeParams, locations) : 0;
+
+            Location start = locations.get(closest);
+
+            Location last = locations.get(locations.size() - 1);
+            LatLon end = new LatLon(last.getLatitude(), last.getLongitude());
+
+            List<LatLon> intermediates = new ArrayList<>();
+            // catch intermediates between the closest and the last
+            for (int i = closest + 1; i < locations.size() - 1; i++) {
+                Location intermediate = locations.get(i);
+                intermediates.add(new LatLon(intermediate.getLatitude(), intermediate.getLongitude()));
+            }
+
+            RouteCalculationParams rp = copyRouteCalculationParams(routeParams);
+            rp.start = start;
+            rp.end = end;
+            rp.intermediates = intermediates;
+
+            RouteCalculationResult route = calculateOsmAndRouteWithIntermediatePoints(rp, null, false);
+            return route.getImmutableAllSegments();
+        }
+
+        return new ArrayList<>();
+    }
+
     private List<RouteSegmentResult> findRouteWithIntermediateSegments(RouteCalculationParams routeParams,
-                                                                      RouteCalculationResult result,
-                                                                      List<Location> gpxRouteLocations,
-                                                                      List<Location> segmentEndpoints,
-                                                                      int nearestGpxPointInd) {
+                                                                       RouteCalculationResult result,
+                                                                       List<Location> gpxRouteLocations,
+                                                                       List<Location> segmentEndpoints,
+                                                                       int nearestGpxPointInd) {
         List<RouteSegmentResult> newGpxRoute = new ArrayList<>();
 
         int lastIndex = nearestGpxPointInd;
