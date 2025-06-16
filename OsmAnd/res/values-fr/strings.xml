@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="routing_attr_motor_type_name">Carburant utilisé</string>
-    <string name="routing_attr_motor_type_description">Sélectionnez le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
+    <string name="routing_attr_motor_type_description">Sélectionner le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
@@ -21,7 +21,7 @@
     <string name="local_openstreetmap_settings_descr">Afficher et gérer les POI/notes OSM enregistrés dans l\'appareil.</string>
     <string name="live_monitoring_interval_descr">Indiquer l\'intervalle pour le suivi en ligne.</string>
     <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
-    <string name="live_monitoring_url_descr">Indiquez l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="live_monitoring_url_descr">Indiquer l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
     <string name="gpx_monitoring_disabled_warn">Enregistrer la trace via le widget GPX ou les paramètres d’« Enregistrement de trajet ».</string>
     <string name="show_current_gpx_title">Afficher la trace en cours</string>
@@ -264,7 +264,7 @@
     <string name="daynight_mode_night">Nuit</string>
     <string name="daynight_mode_auto">Lever/coucher du soleil</string>
     <string name="daynight_mode_sensor">Détecter la luminosité</string>
-    <string name="daynight_descr">Sélectionnez les règles de bascule pour les modes jour/nuit.</string>
+    <string name="daynight_descr">Sélectionner les règles de bascule pour les modes jour/nuit.</string>
     <string name="daynight">Mode jour/nuit</string>
     <string name="download_files_question">Voulez-vous télécharger {0} fichier(s) ({1} MB) ?</string>
     <string name="items_were_selected">{0} objet(s) sont sélectionnés</string>
@@ -343,7 +343,7 @@
     <string name="int_min">min.</string>
     <string name="background_service_int_descr">Intervalle d\'actualisation de votre position lors de l\'exécution en arrière-plan :</string>
     <string name="background_service_int">Intervalle de réveil du GPS</string>
-    <string name="background_service_provider_descr">Sélectionnez une méthode de géolocalisation pour le service arrière-plan :</string>
+    <string name="background_service_provider_descr">Sélectionner une méthode de géolocalisation pour le service arrière-plan :</string>
     <string name="background_service_provider">Fournisseur de géolocalisation</string>
     <string name="background_router_service_descr">Suit votre position lorsque l\'écran est éteint.</string>
     <string name="background_router_service">Exécuter OsmAnd en arrière-plan</string>
@@ -443,7 +443,7 @@
     <string name="only_show">Afficher seulement</string>
     <string name="follow">Démarrer le guidage</string>
     <string name="recalculate_route_to_your_location">Choisir le mode de transport :</string>
-    <string name="mark_final_location_first">Veuillez tout d\'abord définir une arrivée</string>
+    <string name="mark_final_location_first">Veuillez d\'abord définir l\'arrivée</string>
     <string name="get_directions">Guidages</string>
     <string name="opening_hours">Heures d\'ouverture</string>
     <string name="opening_changeset">Ouverture des modifications…</string>
@@ -473,7 +473,7 @@
     <string name="finished_task">Terminé</string>
     <string name="use_online_routing_descr">Utiliser Internet pour calculer l\'itinéraire.</string>
     <string name="use_online_routing">Utiliser le guidage en ligne</string>
-    <string name="osm_settings_descr">Indiquez les paramètres de connexion à OpenStreetMap.org (OSM) pour vos contributions.</string>
+    <string name="osm_settings_descr">Indiquer les paramètres de connexion à OpenStreetMap.org (OSM) pour vos contributions.</string>
     <string name="data_settings_descr">Indiquer la langue, télécharger / mettre à jour les données.</string>
     <string name="data_settings">Données</string>
     <string name="osm_editing_plugin_name">Édition OpenStreetMap</string>
@@ -483,7 +483,7 @@
     <string name="shared_string_settings">Paramètres</string>
     <string name="save_current_track_descr">Enregistrer la trace en cours comme fichier GPX.</string>
     <string name="save_current_track">Enregistrer la trace en cours</string>
-    <string name="save_track_interval_descr">Indiquez l\'intervalle d\'enregistrement de la trace pendant le guidage</string>
+    <string name="save_track_interval_descr">Indiquer l\'intervalle d\'enregistrement de la trace pendant le guidage</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant le guidage</string>
     <string name="update_tile">Mettre à jour</string>
     <string name="reload_tile">Actualiser la tuile</string>
@@ -502,7 +502,7 @@
     <string name="map_view_3d">Vue 3D</string>
     <string name="show_poi_over_map_description">Afficher la surcouche des derniers POI utilisés.</string>
     <string name="show_poi_over_map">Afficher la surcouche des POI</string>
-    <string name="map_tile_source_descr">Choisissez la source des tuiles de carte en ligne ou en cache.</string>
+    <string name="map_tile_source_descr">Choisir la source des tuiles de carte en ligne ou en cache.</string>
     <string name="map_tile_source">Source de carte tuilée</string>
     <string name="map_source">Source cartographique</string>
     <string name="use_internet">Utiliser Internet</string>
@@ -589,7 +589,7 @@
     <string name="map_online_data">Cartes tuilées en ligne</string>
     <string name="map_online_data_descr">Utiliser les cartes en ligne (télécharge et conserve en cache les tuiles sur la carte mémoire).</string>
     <string name="shared_string_online_maps">Cartes en ligne</string>
-    <string name="online_map_settings_descr">Sélectionnez les sources de cartes tuilées en ligne ou mises en cache.</string>
+    <string name="online_map_settings_descr">Sélectionner les sources de cartes tuilées en ligne ou mises en cache.</string>
     <string name="osmand_rastermaps_plugin_description">Accédez à un grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) comme des tuiles OSM pré-rendues, des images satellites ou encore des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, l\'ombrage du relief, etc. \n \nChacune de ces cartes peut être affichée en tant que carte principale, surcouche ou sous-couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes et améliorer la lisibilité, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu « Configurer la carte ». \n \nLes cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et le guidage en arrière-plan (écran éteint) en réveillant périodiquement le GPS.</string>
     <string name="osmand_accessibility_description">Active, directement dans OsmAnd, les options d\'accessibilité de votre appareil (régler la vitesse de la synthèse vocale, utiliser le trackball pour zoomer ou activer les annonces vocales de votre position).</string>
@@ -601,7 +601,7 @@
 \n
 \nPour découvrir comment modifier une carte, consultez notre site %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Les cartes vectorielles s\'affichent plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
-    <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et testez les annonces vocales :</string>
+    <string name="play_commands_of_currently_selected_voice">Sélectionner une voix et tester les annonces vocales</string>
     <string name="debugging_and_development">Débogage et développement OsmAnd</string>
     <string name="native_rendering">Rendu natif</string>
     <string name="test_voice_prompts">Tester les annonces vocales</string>
@@ -657,7 +657,7 @@
     <string name="direction_style_sidewise">Latéral (8 secteurs)</string>
     <string name="direction_style_clockwise">Sens horaire (12 secteurs)</string>
     <string name="settings_direction_style">Style de direction</string>
-    <string name="settings_direction_style_descr">Choisissez un style pour indiquer la direction générale lors du déplacement</string>
+    <string name="settings_direction_style_descr">Choisir un style pour indiquer la direction générale lors du déplacement</string>
     <string name="auto_announce_on">Démarrer les annonces automatiques</string>
     <string name="auto_announce_off">Arrêter les annonces automatiques</string>
     <string name="i_am_here">Je suis ici</string>
@@ -877,7 +877,7 @@
     <string name="srtm_paid_version_title">Extension Topographie</string>
     <string name="intermediate_points_change_order">Modifier l\'ordre</string>
     <string name="dropbox_plugin_name">Extension Dropbox</string>
-    <string name="dropbox_plugin_description">Synchronisez vos traces et notes audio/vidéo avec votre compte Dropbox.</string>
+    <string name="dropbox_plugin_description">Synchroniser vos traces et notes audio/vidéo avec votre compte Dropbox.</string>
     <string name="recording_context_menu_show">Afficher</string>
     <string name="recording_photo_description">Photo %1$s %2$s</string>
     <string name="av_def_action_picture">Prendre une photo</string>
@@ -975,7 +975,7 @@
     <string name="edit_tilesource_expiration_time">Expiration (en minutes)</string>
     <string name="edit_tilesource_minzoom">Zoom minimum</string>
     <string name="edit_tilesource_url_to_load">Lien</string>
-    <string name="driving_region_descr">Sélectionnez la région de conduite : États-Unis, Europe, Royaume-Uni, Asie ou autre.</string>
+    <string name="driving_region_descr">Sélectionner la région de conduite : États-Unis, Europe, Royaume-Uni, Asie ou autre.</string>
     <string name="driving_region">Région de conduite</string>
     <string name="driving_region_europe_asia">Europe, Asie, Amérique latine et équivalents</string>
     <string name="speak_title">Annoncer…</string>
@@ -1057,7 +1057,7 @@
     <string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
     <string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
     <string name="routing_attr_weight_name">Poids</string>
-    <string name="routing_attr_weight_description">Indiquez le poids maximal du véhicule autorisée sur les routes.</string>
+    <string name="routing_attr_weight_description">Indiquer le poids maximal du véhicule autorisée sur les routes.</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Définir l\'arrivée</string>
     <string name="shared_string_select_on_map">Sélectionnez sur la carte</string>
@@ -1266,7 +1266,7 @@
     <string name="text_size">Taille du texte</string>
     <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un favori</string>
     <string name="fav_point_dublicate_message">Favori renommé en %1$s pour éviter un doublon.</string>
-    <string name="text_size_descr">Sélectionnez la taille du texte sur la carte.</string>
+    <string name="text_size_descr">Sélectionner la taille du texte sur la carte.</string>
     <string name="print_route">Exporter l\'itinéraire</string>
     <string name="fav_point_emoticons_message">Favori renommé en « %1$s » (les émoticônes ne sont pas autorisés).</string>
     <string name="speed_limit_exceed">Marge de tolérance aux limites de vitesse</string>
@@ -1340,15 +1340,15 @@
     <string name="navigation_over_track">Démarrer le guidage en suivant cette trace \?</string>
     <string name="save_track_to_gpx_globally_headline">Enregistrement de parcours à la demande</string>
     <string name="proxy_pref_title">Proxy</string>
-    <string name="enable_proxy_descr">Configurez le proxy HTTP pour toutes les requêtes réseau.</string>
-    <string name="proxy_host_title">Serveur mandataire (Proxy)</string>
+    <string name="enable_proxy_descr">Configurer le proxy HTTP pour toutes les requêtes réseau.</string>
+    <string name="proxy_host_title">Serveur proxy</string>
     <string name="proxy_host_descr">Indiquer le nom d’hôte de votre proxy (par ex. 127.0.0.1).</string>
-    <string name="proxy_port_title">Port du mandataire (Proxy)</string>
-    <string name="proxy_port_descr">Indiquez le numéro de port de votre proxy (par ex. 8118).</string>
+    <string name="proxy_port_title">Port du proxy</string>
+    <string name="proxy_port_descr">Indiquer le numéro de port de votre proxy (par ex. 8118).</string>
     <string name="proxy_pref_descr">Indiquer un serveur proxy.</string>
     <string name="settings_privacy">Vie privée</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
-    <string name="enable_proxy_title">Activer le mandataire HTTP (Proxy)</string>
+    <string name="enable_proxy_title">Activer le proxy HTTP</string>
     <string name="version_settings_descr">Télécharger les versions en cours de développement.</string>
     <string name="version_settings">Versions de développement</string>
     <string name="shared_string_gpx_points">Points</string>
@@ -1418,7 +1418,7 @@
     <string name="parking_place_limited">Stationnement à durée limitée à</string>
     <string name="your_edits">Vos modifications</string>
     <string name="osmand_parking_overdue">Expiré</string>
-    <string name="delay_to_start_navigation_descr">Indiquez le délai d\'affichage de l\'itinéraire détaillé, avant de démarrer le guidage.</string>
+    <string name="delay_to_start_navigation_descr">Indiquer le délai d\'affichage de l\'itinéraire détaillé, avant de démarrer le guidage.</string>
     <string name="shared_string_go">Aller</string>
     <string name="confirmation_to_clear_history">Effacer l\'historique ?</string>
     <string name="local_osm_changes_upload_all_confirm">Envoyer %1$d modification(s) à OSM \?</string>
@@ -1461,7 +1461,7 @@
     <string name="rendering_attr_hideHouseNumbers_name">Numérotation des bâtiments</string>
     <string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières</string>
     <string name="routing_attr_height_name">Hauteur</string>
-    <string name="routing_attr_height_description">Indiquez la hauteur du véhicule autorisée sur les routes.</string>
+    <string name="routing_attr_height_description">Indiquer la hauteur du véhicule autorisée sur les routes.</string>
     <string name="use_fast_recalculation">Recalcul intelligent de l\'itinéraire</string>
     <string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire (utile pour les longs trajets).</string>
     <string name="shared_string_logoff">Se déconnecter</string>
@@ -1630,7 +1630,7 @@
     <string name="share_geo">géo :</string>
     <string name="share_menu_location">Partager ce lieu</string>
     <string name="shared_string_send">Envoyer</string>
-    <string name="application_dir_description">Choisissez l’emplacement de stockage des cartes et autres fichiers de données.</string>
+    <string name="application_dir_description">Choisir l’emplacement de stockage des cartes et autres fichiers de données.</string>
     <string name="simulate_initial_startup">Simuler un premier démarrage</string>
     <string name="simulate_initial_startup_descr">Définir le drapeau pour simuler un premier démarrage (conserve tous les autres paramètres).</string>
     <string name="show_on_start_description">« Inactif » affiche la carte dès le lancement de l\'application.</string>
@@ -1730,10 +1730,10 @@
     <string name="no_location_permission">Autoriser l\'accès aux données de localisation.</string>
     <string name="no_camera_permission">Autoriser l\'accès à l\'appareil photo.</string>
     <string name="no_microphone_permission">Autoriser l\'accès au microphone.</string>
-    <string name="impassable_road_desc">Sélectionnez les routes à éviter.</string>
+    <string name="impassable_road_desc">Sélectionner les routes à éviter.</string>
     <string name="shared_string_sound">Son</string>
     <string name="select_voice_provider">Sélectionnez la voix de guidage</string>
-    <string name="select_voice_provider_descr">Sélectionnez ou téléchargez le guidage vocal pour votre langue.</string>
+    <string name="select_voice_provider_descr">Sélectionner ou télécharger le guidage vocal pour votre langue.</string>
     <string name="live_updates">Mises à jour en temps réel</string>
     <string name="available_maps">Cartes disponibles</string>
     <string name="last_update">Dernière mise à jour : %s</string>
@@ -1958,12 +1958,12 @@
     <string name="rendering_value_light_brown_name">Marron clair</string>
     <string name="rendering_value_dark_brown_name">Marron foncé</string>
     <string name="search_hint">Saisissez une ville, une adresse ou un nom de POI</string>
-    <string name="rendering_attr_contourColorScheme_name">Couleurs des courbes de niveau</string>
+    <string name="rendering_attr_contourColorScheme_name">Couleur des courbes de niveau</string>
     <string name="rendering_attr_surfaceIntegrity_name">État de la route</string>
     <string name="christmas_poi">POI de Noël</string>
     <string name="christmas_desc">Anticipez Noël et le Nouvel An en affichant les POI associés à ces événements de fin d\'année comme : les arbres de Noël, les marchés, etc.</string>
     <string name="christmas_desc_q">Afficher les POI de Noël ?</string>
-    <string name="rendering_attr_contourColorScheme_description">Couleurs des courbes de niveau</string>
+    <string name="rendering_attr_contourColorScheme_description">Couleur des courbes de niveau</string>
     <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
     <string name="save_track_min_speed_descr">Filtre : Aucun enregistrement de points en-dessous de cette vitesse.</string>
     <string name="save_track_min_distance">Déplacement minimal pour enregistrer</string>
@@ -2029,7 +2029,7 @@
     <string name="quick_action_category_descr">Catégorie du favori :</string>
     <string name="quick_action_gpx_category_descr">Choisir une catégorie facultative.</string>
     <string name="quick_action_poi_list">Liste des POI</string>
-    <string name="quick_action_sh_poi_descr">Indiquez les catégories de POI à afficher sur la carte.</string>
+    <string name="quick_action_sh_poi_descr">Indiquer les catégories de POI à afficher sur la carte.</string>
     <string name="quick_action_map_style_action">Ajouter un style de carte</string>
     <string name="quick_action_empty_param_error">Renseignez tous les paramètres</string>
     <string name="quick_action_map_styles">Styles de carte</string>
@@ -2174,19 +2174,19 @@
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">Affiché à partir du niveau de zoom</string>
     <string name="route_is_too_long_v2">Pour les longues distances et si l\'itinéraire n\'est pas calculé dans 10 minutes, ajoutez des étapes.</string>
-    <string name="srtm_menu_download_descr">Téléchargez la carte « Courbes de niveau » de cette région.</string>
+    <string name="srtm_menu_download_descr">Télécharger la carte « Courbes de niveau » de cette région.</string>
     <string name="shared_string_plugin">Extension</string>
     <string name="srtm_purchase_header">Achetez et installez l\'extension « Topographie » pour mieux visualiser le relief.</string>
     <string name="hillshade_purchase_header">Téléchargez l\'extension « Topographie » pour mieux visualiser le relief.</string>
     <string name="hide_from_zoom_level">Masquer à partir du niveau de zoom</string>
-    <string name="hillshade_menu_download_descr">Téléchargez la surcouche « Ombrage du relief » pour mieux visualiser le relief.</string>
+    <string name="hillshade_menu_download_descr">Télécharger la surcouche « Ombrage du relief » pour mieux visualiser le relief.</string>
     <string name="quick_action_showhide_osmbugs_descr">Bouton pour afficher ou masquer les notes OSM sur la carte.</string>
     <string name="sorted_by_distance">Triés par distance</string>
     <string name="search_favorites">Rechercher dans les favoris</string>
     <string name="restart_search">Relancer la recherche</string>
     <string name="nothing_found">Aucun résultat</string>
     <string name="increase_search_radius">Augmenter le rayon de recherche</string>
-    <string name="nothing_found_descr">Modifiez votre recherche ou augmentez le rayon de recherche.</string>
+    <string name="nothing_found_descr">Modifier la recherche ou augmenter son rayon.</string>
     <string name="private_access_routing_req">Votre destination se situe dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour ce trajet ?</string>
     <string name="osmand_extended_description_part2">Navigation GPS \n • Naviguez en mode hors connexion (sans aucun frais de communication) ou en mode connecté \n • Guidage vocal pas-à-pas (voix enregistrées ou de synthèse) \n • L\'itinéraire est recalculé si vous vous en écartez \n • Indication des voies, des noms de rues et estimation de l\'horaire d\'arrivée faciliteront votre trajet \n • Pour rendre votre trajet plus sûr, le mode jour/nuit s\'active automatiquement \n • Affichez les limitations de vitesse et soyez averti en cas de dépassement \n • Le niveau de zoom de la carte s\'adapte à votre vitesse \n • Recherchez des destinations par adresse, type (par exemple : parking, restaurant, hôtel, station service, musée) ou par coordonnées géographiques \n • Possibilité d\'ajouter des points de passage à votre itinéraire \n • Enregistrez votre itinéraire au format GPX ou téléversez une trace GPX existante et suivez-la</string>
     <string name="osmand_extended_description_part3">Carte \n • Affichage des POI (points d’intérêt) autour de vous \n • Orientation de la carte selon votre direction de déplacement (ou selon la boussole) \n • Indication de votre position et de votre orientation \n • Partagez votre position pour que vos proches puissent vous trouver \n • Enregistrez vos endroits préférés dans « Favoris » \n • Choisissez les noms affichés sur la carte : en anglais, noms locaux ou phonétique \n • Affichez des tuiles en lignes spécialisées, la vue satellite (source Bing), un itinéraires GPX et bien d\'autres couches avec transparence personnalisée</string>
@@ -2198,7 +2198,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installer Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
     <string name="mapillary_action_descr">Partager votre vue de la rue via Mapillary.</string>
     <string name="mapillary_widget">Widget Mapillary</string>
     <string name="mapillary_widget_descr">Permet de contribuer facilement à Mapillary.</string>
@@ -2220,7 +2220,7 @@
     <string name="mapillary_menu_title_tile_cache">Cache des tuiles</string>
     <string name="mapillary_menu_descr_dates">Afficher uniquement les images ajoutées</string>
     <string name="mapillary_menu_descr_username">Afficher uniquement les images ajoutées par</string>
-    <string name="mapillary_menu_filter_description">Filtrez les images par date, nom d\'utilisateur ou type. Le filtre n\'est appliqué qu\'après avoir zoomé.</string>
+    <string name="mapillary_menu_filter_description">Filtrer les images par date, nom d\'utilisateur ou type. Le filtre n\'est appliqué qu\'après avoir zoomé.</string>
     <string name="shared_string_reset">Réinitialiser</string>
     <string name="average">Moyenne</string>
     <string name="ascent_descent">Montée/Descente</string>
@@ -2259,12 +2259,12 @@
     <string name="add_point_after">Ajouter un point après</string>
     <string name="shared_string_options">Options</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd va relier les points pour établir un itinéraire adapté au profil sélectionné.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Enregistrez les points soit comme points de passage soit comme ligne.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Enregistrer les points soit comme points de passage soit comme ligne.</string>
     <string name="choose_navigation_type">Sélectionnez le type de navigation</string>
     <string name="add_route_points">Ajouter des points à la route</string>
     <string name="add_line">Ajouter une ligne</string>
     <string name="empty_state_favourites">Ajouter des favoris</string>
-    <string name="empty_state_favourites_desc">Importez des favoris ou créez des favoris sur la carte.</string>
+    <string name="empty_state_favourites_desc">Importer des favoris ou créer des favoris sur la carte.</string>
     <string name="import_track">Importer le fichier GPX</string>
     <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
@@ -2308,7 +2308,7 @@
     <string name="ascendingly">A-Z</string>
     <string name="date_added">Ajouté</string>
     <string name="order_by">Trier par :</string>
-    <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
+    <string name="marker_show_distance_descr">Sélectionner comment indiquer sur la carte la distance et la direction des marques :</string>
     <string name="passed">Dernière utilisation : %1$s</string>
     <string name="show_guide_line">Afficher les indications de direction</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
@@ -2328,7 +2328,7 @@
     <string name="shared_string_markers">Marques</string>
     <string name="coordinates_format">Format des coordonnées</string>
     <string name="use_system_keyboard">Utiliser le clavier système</string>
-    <string name="fast_coordinates_input_descr">Définissez le format des coordonnées. Appuyez sur « Options » pour le modifier.</string>
+    <string name="fast_coordinates_input_descr">Définir le format des coordonnées. Appuyer sur « Options » pour le modifier.</string>
     <string name="fast_coordinates_input">Saisie rapide de coordonnées</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords.</string>
@@ -2371,15 +2371,15 @@
     <string name="add_group">Ajouter un groupe</string>
     <string name="add_group_descr">Importer des groupes depuis des favoris ou des points de passage GPX.</string>
     <string name="empty_state_markers_active">Ajoutez des marques sur la carte !</string>
-    <string name="empty_state_markers_active_desc">Sélectionnez des emplacements sur la carte puis appuyez sur le drapeau de marque.</string>
+    <string name="empty_state_markers_active_desc">Sélectionner des emplacements sur la carte puis appuyer sur le drapeau de marque.</string>
     <string name="empty_state_markers_groups">Importer des groupes</string>
-    <string name="empty_state_markers_groups_desc">Importez des groupes de favoris ou des points de passage comme marques.</string>
+    <string name="empty_state_markers_groups_desc">Importer des groupes de favoris ou des points de passage comme marques.</string>
     <string name="empty_state_markers_history_desc">Les marques visitées s\'afficheront sur cet écran.</string>
     <string name="shared_string_two">Deux</string>
     <string name="shared_string_one">Une</string>
     <string name="show_guide_line_descr">Afficher les instructions de guidage de votre position vers les marques actives.</string>
     <string name="show_arrows_descr">Afficher une ou deux flèches indiquant la direction vers les marques actives.</string>
-    <string name="distance_indication_descr">Choisissez comment afficher la distance jusqu\'aux marques actives.</string>
+    <string name="distance_indication_descr">Choisir comment afficher la distance jusqu\'aux marques actives.</string>
     <string name="active_markers_descr">Définir le nombre d\'indications de direction à afficher.</string>
     <string name="shared_string_more_without_dots">Plus</string>
     <string name="looking_for_tracks_with_waypoints">Recherche de fichiers de trace GPX avec points de passage</string>
@@ -2392,7 +2392,7 @@
     <string name="one_tap_active_descr">Appuyez sur une marque de la carte pour qu\'elle devienne immédiatement la première marque active sans utiliser le menu contextuel.</string>
     <string name="one_tap_active">Appui court sur une marque</string>
     <string name="empty_state_av_notes">Faites des notes !</string>
-    <string name="empty_state_av_notes_desc">Associez des notes sonore, vidéo ou photo à n\'importe quel point de la carte depuis le widget ou le menu contextuel.</string>
+    <string name="empty_state_av_notes_desc">Associer des notes sonore, vidéo ou photo à n\'importe quel point de la carte depuis le widget ou le menu contextuel.</string>
     <string name="notes_by_date">Notes A/V par date</string>
     <string name="by_date">Par date</string>
     <string name="by_type">Par type</string>
@@ -2520,7 +2520,7 @@
     <string name="start_editing">Démarrer les modifications</string>
     <string name="get_unlimited_access">Obtenir un accès illimité</string>
     <string name="welcome_to_open_beta">Bienvenue dans cette bêta publique</string>
-    <string name="download_wikipedia_description">Téléchargez les articles Wikipédia pour %1$s afin de pouvoir les lire hors ligne.</string>
+    <string name="download_wikipedia_description">Télécharger les articles Wikipédia pour %1$s afin de pouvoir les lire hors ligne.</string>
     <string name="download_wikipedia_label">Télécharger les données Wikipédia</string>
     <string name="open_in_browser_wiki">Ouvrir l\'article en ligne</string>
     <string name="open_in_browser_wiki_description">Afficher l\'article dans un navigateur.</string>
@@ -2537,7 +2537,7 @@
     <string name="maps_you_need">Cartes conseillées</string>
     <string name="shared_string_restart">Redémarrer l\'application</string>
     <string name="purchase_cancelled_dialog_title">Vous n\'êtes plus abonné à OsmAnd Live</string>
-    <string name="purchase_cancelled_dialog_descr">Renouvelez votre abonnement pour continuer à utiliser toutes les fonctionnalités :</string>
+    <string name="purchase_cancelled_dialog_descr">Renouvelez votre abonnement pour continuer à utiliser toutes les fonctionnalités :</string>
     <string name="open_wikipedia_link_online">Ouvrir le lien Wikipédia</string>
     <string name="open_wikipedia_link_online_description">Le lien s\'ouvrira dans votre navigateur Internet.</string>
     <string name="read_wikipedia_offline_description">Abonnez-vous à OsmAnd Live pour lire les articles Wikipédia et Wikivoyage hors ligne.</string>
@@ -2706,8 +2706,8 @@
     <string name="shared_string_walk">Marche</string>
     <string name="save_poi_value_exceed_length">Merci de réduire la taille de l\'étiquette « %s » à moins de 255 caractères.</string>
     <string name="save_poi_value_exceed_length_title">Taille de « %s »</string>
-    <string name="avoid_pt_types_descr">Sélectionnez les types de transport en commun à éviter pour le guidage :</string>
-    <string name="avoid_pt_types">Éviter des types de transports …</string>
+    <string name="avoid_pt_types_descr">Sélectionner les types de transport en commun à éviter pour le guidage :</string>
+    <string name="avoid_pt_types">Éviter des types de transports…</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
     <string name="shared_string_degrees">Degrés</string>
     <string name="shared_string_milliradians">Milliradians</string>
@@ -2747,7 +2747,7 @@
     <string name="choose_data_to_share">Choisissez le type de données que vous souhaitez partager :</string>
     <string name="downloaded_maps">Cartes téléchargées</string>
     <string name="visited_screens">Écrans visités</string>
-    <string name="collected_data_descr">Définissez quelles données vous autorisez OsmAnd à partager.</string>
+    <string name="collected_data_descr">Définir quelles données vous autorisez OsmAnd à partager.</string>
     <string name="settings_privacy_and_security">Vie privée et Sécurité</string>
     <string name="settings_privacy_and_security_desc">Sélectionner les données que vous souhaitez partager</string>
     <string name="shared_string_no_thank_you">Non, merci</string>
@@ -2837,7 +2837,7 @@
     <string name="base_profile_descr_ski">Ski</string>
     <string name="show_compass_ruler">Afficher la boussole</string>
     <string name="hide_compass_ruler">Masquer la boussole</string>
-    <string name="make_osmand_better_descr">Autoriser OsmAnd à collecter et analyser des données anonymes d\'utilisation de l\'application. Nous ne collectons aucune donnée liée à votre position et aucun emplacement consulté sur la carte. \n \nVous pouvez changer d\'avis à tout moment dans « Paramètres → Vie privée et Sécurité ».</string>
+    <string name="make_osmand_better_descr">Autoriser OsmAnd à collecter et traiter des données d’utilisation anonymes. Aucune information sur votre position ou les lieux affichés sur la carte n’est collectée.\n\nVous pouvez modifier ce paramètre à tout moment dans \'Paramètres\' → \'Confidentialité et sécurité\'.</string>
     <string name="downloaded_maps_collect_descr">Aidez nous à connaître les pays et régions les plus populaires.</string>
     <string name="privacy_and_security_change_descr">Appuyez sur « Autoriser » pour accepter nos %1$s</string>
     <string name="settings_derived_routing_mode_string">Mode utilisateur, dérive de : %s</string>
@@ -2853,7 +2853,7 @@
     <string name="custom_routing">Profil de calcul d\'itinéraire personnalisé</string>
     <string name="special_routing_type">Calcul d\'itinéraire spécial</string>
     <string name="third_party_routing_type">Calcul d\'itinéraire tiers</string>
-    <string name="application_profiles_descr">Sélectionnez les profils affichés dans l\'application.</string>
+    <string name="application_profiles_descr">Sélectionner les profils affichés dans l\'application.</string>
     <string name="application_profiles">Profils de l\'application</string>
     <string name="quick_action_need_to_add_item_to_list">Ajoutez au moins une action à la barre d\'« Actions rapides »</string>
     <string name="routing_attr_piste_type_downhill_name">Ski alpin</string>
@@ -2878,7 +2878,7 @@
     <string name="rendering_attr_highway_class_track_grade4_name">Niveau 4</string>
     <string name="rendering_attr_highway_class_track_grade5_name">Niveau 5</string>
     <string name="external_input_device">Périphériques externes d\'entrée</string>
-    <string name="external_input_device_descr">Sélectionnez un périphérique externe de contrôle comme un clavier ou un WunderLINQ.</string>
+    <string name="external_input_device_descr">Sélectionner un périphérique externe de contrôle comme un clavier ou un WunderLINQ.</string>
     <string name="sett_generic_ext_input">Clavier</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
@@ -2990,7 +2990,7 @@
     <string name="rendering_attr_piste_difficulty_undefined_name">Non défini</string>
     <string name="routeInfo_piste_difficulty_name">Difficulté de la piste</string>
     <string name="routing_attr_width_name">Largeur</string>
-    <string name="routing_attr_width_description">Indiquez la largeur maximale du véhicule autorisée sur les routes.</string>
+    <string name="routing_attr_width_description">Indiquer la largeur maximale du véhicule autorisée sur les routes.</string>
     <string name="avoid_in_routing_descr_">Éviter certains types de route</string>
     <string name="app_mode_utv">Côte à côte</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Connexion</string>
@@ -3165,7 +3165,7 @@
     <string name="shared_string_routing">Calcul d\'itinéraire</string>
     <string name="shared_string_include_data">Inclure des données supplémentaires</string>
     <string name="import_profile_dialog_description">Le profil contient des données supplémentaires. Appuyez sur « Importer » pour n\'importer que les données de profil ou sélectionnez les données supplémentaires à importer.</string>
-    <string name="export_profile_dialog_description">Sélectionnez des données supplémentaires à exporter en même temps que le profil.</string>
+    <string name="export_profile_dialog_description">Sélectionner des données supplémentaires à exporter en même temps que le profil.</string>
     <string name="index_name_antarctica">Antarctique</string>
     <string name="shared_string_app_default_w_val">Par défaut pour l\'application (%s)</string>
     <string name="no_recalculation_setting">Sans re-calcul</string>
@@ -3214,7 +3214,7 @@
     <string name="shared_string_terrain">Relief</string>
     <string name="hillshade_description">La carte avec ombrage du relief utilise des nuances sombres pour visualiser les pentes, les sommets et les plaines.</string>
     <string name="slope_description">La pente est colorée selon l\'inclinaison du terrain.</string>
-    <string name="terrain_slider_description">Définissez les niveaux de zoom minimum et maximum pour lesquels la couche sera affichée.</string>
+    <string name="terrain_slider_description">Définir les niveaux de zoom minimum et maximum pour lesquels la couche sera affichée.</string>
     <string name="hillshade_download_description">Des cartes supplémentaires sont nécessaires pour afficher l\'ombrage du relief sur la carte.</string>
     <string name="slope_download_description">Des cartes supplémentaires sont nécessaires pour afficher les pentes sur la carte.</string>
     <string name="slope_read_more">Pour en savoir plus sur les pentes, consultez %1$s.</string>
@@ -3246,7 +3246,7 @@
     <string name="shared_string_all_languages">Toutes les langues</string>
     <string name="wiki_menu_download_descr">Des cartes supplémentaires sont nécessaires pour afficher les POI Wikipédia sur la carte.</string>
     <string name="divider_descr">Éléments sous ce point isolés par un séparateur.</string>
-    <string name="ui_customization_description">Personnalisez le nombre d’éléments dans \'Panneau latéral\', \'Configurer la carte\' et \'Menu contextuel\'.\n \nVous pouvez désactiver les extensions inutilisées, pour masquer leurs contrôles. %1$s.</string>
+    <string name="ui_customization_description">Personnaliser le nombre d’éléments dans \'Panneau latéral\', \'Configurer la carte\' et \'Menu contextuel\'.\n \nDésactiver les extensions inutilisées pour masquer leurs contrôles. %1$s.</string>
     <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les extensions continueront à fonctionner.</string>
     <string name="reset_items_descr">Masquer les paramètres les réinitialise à leurs valeurs par défaut.</string>
     <string name="ui_customization_short_descr">Éléments du panneau latéral, menu contextuel</string>
@@ -3333,7 +3333,7 @@
     <string name="system_screen_timeout_descr">Éteint l\'écran en fonction du délai système.</string>
     <string name="map_source_zoom_levels_descr">Affecte l\'affichage de la carte ou des surcouche/sous-couche. \n \n%1$s : La carte est limitée aux zooms sélectionnés. \n \n%2$s sont les niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
     <string name="turn_screen_on_navigation_instructions_descr">L\'écran s\'allumera pour afficher les instructions de guidage.</string>
-    <string name="turn_screen_on_wake_time_descr">Sélectionnez la durée d\'affichage de l\'écran après allumage (« %1$s » signifie pas d\'extinction).</string>
+    <string name="turn_screen_on_wake_time_descr">Sélectionner la durée d\'affichage de l\'écran après allumage (« %1$s » signifie pas d\'extinction).</string>
     <string name="screen_timeout_descr">Si « %1$s » est activé, le temps d\'activité en dépendra.</string>
     <string name="expire_time_descr">Les tuiles en cache seront à nouveau téléchargées après ce délai (en minutes). Laissez ce champ vide pour ne jamais rafraîchir les tuiles pour cette source. 
 \n 
@@ -3366,9 +3366,9 @@
     <string name="shared_string_delete_all_q">Tout supprimer \?</string>
     <string name="delete_all_actions_message_q">Supprimer définitivement %d actions rapides \?</string>
     <string name="screen_timeout">Délai de veille de l’écran</string>
-    <string name="height_limit_description">Indiquez la hauteur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules hauts.</string>
-    <string name="weight_limit_description">Indiquez le poids de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules lourds.</string>
-    <string name="width_limit_description">Indiquez la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
+    <string name="height_limit_description">Indiquer la hauteur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules hauts.</string>
+    <string name="weight_limit_description">Indiquer le poids de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules lourds.</string>
+    <string name="width_limit_description">Indiquer la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
     <string name="shared_string_tones">tonnes</string>
     <string name="shared_string_meters">mètres</string>
     <string name="details_dialog_decr">Afficher ou masquer les autres détails sur la carte</string>
@@ -3392,14 +3392,14 @@
     <string name="shared_string_bearing">Direction</string>
     <string name="item_deleted">%1$s supprimé</string>
     <string name="shared_string_uninstall_and_restart">Désinstaller et redémarrer</string>
-    <string name="routing_attr_length_description">Indiquez la longueur du véhicule autorisée sur les routes.</string>
+    <string name="routing_attr_length_description">Indiquer la longueur du véhicule autorisée sur les routes.</string>
     <string name="routing_attr_length_name">Longueur</string>
     <string name="speed_cameras_removed_descr">Cet appareil n\'a pas de radars.</string>
     <string name="app_mode_inline_skates">Patins à roulettes en ligne</string>
     <string name="use_volume_buttons_as_zoom">Zoomer avec les boutons de volume</string>
     <string name="use_volume_buttons_as_zoom_descr">Contrôler le niveau de zoom de la carte avec les boutons de réglage du volume sonore.</string>
     <string name="quick_action_remove_next_destination_descr">Supprime la prochaine étape de votre route. S\'il s\'agit de la destination finale, le guidage s\'arrêtera.</string>
-    <string name="lenght_limit_description">Indiquez la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
+    <string name="lenght_limit_description">Indiquer la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
     <string name="please_provide_point_name_error">Veuillez renseigner un nom pour le point</string>
     <string name="plugin_wikipedia_description">Obtenez des informations sur les points d\'intérêt avec les articles Wikipédia, un guide disponible hors ligne.</string>
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
@@ -3416,7 +3416,7 @@
     <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté se trouve dans « %s ». Afficher ce groupe pour rendre le point visible sur la carte.</string>
     <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle auquel les marques de distance ou de temps sur la trace seront affichées.</string>
-    <string name="gpx_split_interval_none_descr">Sélectionnez l\'option de fractionnement souhaitée : par temps ou par distance.</string>
+    <string name="gpx_split_interval_none_descr">Sélectionner l\'option de fractionnement souhaitée : par temps ou par distance.</string>
     <string name="track_coloring_solid">Opaque</string>
     <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
     <string name="select_track_width">Sélectionner la largeur</string>
@@ -3428,10 +3428,10 @@
     <string name="plan_route_select_track_file_for_open">Sélectionnez un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
     <string name="overwrite_track">Remplacer la trace</string>
-    <string name="route_between_points_desc">Sélectionnez comment relier les points : en ligne droite ou en calculant un itinéraire avec le profil ci-dessous.</string>
+    <string name="route_between_points_desc">Sélectionner comment relier les points : en ligne droite ou en calculant un itinéraire avec le profil ci-dessous.</string>
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
-    <string name="route_between_points_add_track_desc">Sélectionnez le fichier de trace auquel vous souhaitez ajouter un nouveau segment.</string>
+    <string name="route_between_points_add_track_desc">Sélectionner le fichier de trace auquel ajouter le nouveau segment.</string>
     <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
     <string name="reverse_route">Inverser l\'itinéraire</string>
     <string name="whole_track">Trace entière</string>
@@ -3473,10 +3473,10 @@
     <string name="open_saved_track">Ouvrir la trace enregistrée</string>
     <string name="shared_string_is_saved">a été enregistré</string>
     <string name="one_point_error">Veuillez ajouter au moins deux points.</string>
-    <string name="import_track_descr">Choisissez le fichier de trace à suivre ou importez-le depuis votre appareil.</string>
+    <string name="import_track_descr">Choisir le fichier de trace à suivre ou en importer un depuis votre appareil.</string>
     <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
     <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
-    <string name="save_global_track_interval_descr">Indiquez l’intervalle d’enregistrement des points du trajet (activé via le widget « Enregistrement de trajet » sur la carte).</string>
+    <string name="save_global_track_interval_descr">Indiquer l’intervalle d’enregistrement des points du trajet (activé via le widget « Enregistrement de trajet » sur la carte).</string>
     <string name="disable_recording_once_app_killed_descrp">L\'enregistrement de la trace sera interrompu si l\'application est fermée via Applications récentes (les indications OsmAnd ne seront plus affichées dans la barre de notifications).</string>
     <string name="all_next_segments_will_be_recalc">Tous les segments suivants seront recalculés avec le profil sélectionné.</string>
     <string name="all_previous_segments_will_be_recalc">Tous les segments précédents seront recalculés avec le profil sélectionné.</string>
@@ -3588,7 +3588,7 @@
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil utilisateur</string>
     <string name="reverse_all_points">Inverser tous les points</string>
-    <string name="profile_by_default_description">Sélectionnez le profil utilisé au démarrage de l\'application.</string>
+    <string name="profile_by_default_description">Sélectionner le profil utilisé au démarrage de l\'application.</string>
     <string name="shared_string_last_used">Dernier utilisé</string>
     <string name="routing_attr_prefer_hiking_routes_name">Privilégier les itinéraires de randonnée</string>
     <string name="routing_attr_prefer_hiking_routes_description">Privilégier les itinéraires de randonnée</string>
@@ -3676,7 +3676,7 @@
     <string name="activity_type_offroad_name">Tout-terrain</string>
     <string name="activity_type_motorbike_name">Moto</string>
     <string name="activity_type_racing_name">Course</string>
-    <string name="temporary_conditional_routing_descr">Utilisez les limitations routières actuellement actives sur la carte</string>
+    <string name="temporary_conditional_routing_descr">Utiliser les limitations routières actuellement actives sur la carte</string>
     <string name="track_recording_description">Arrêter l\'enregistrement \?
 \nToutes les données non enregistrées seront perdues.</string>
     <string name="live_update_delete_updates_msg">Supprimer les %s mises à jour temps réel \?</string>
@@ -3698,7 +3698,7 @@
     <string name="update_frequency">Fréquence de mise à jour</string>
     <string name="delete_updates">Supprimer les mises à jour</string>
     <string name="purchases">Achats</string>
-    <string name="select_category_descr">Sélectionnez une catégorie ou créez-en une nouvelle</string>
+    <string name="select_category_descr">Sélectionner une catégorie ou en créer une nouvelle</string>
     <string name="track_recording_will_be_continued">L\'enregistrement se poursuivra.</string>
     <string name="copy_poi_name">Copier le nom du POI</string>
     <string name="quick_action_show_hide_title">Afficher/masquer</string>
@@ -3751,7 +3751,7 @@
     <string name="shared_string_max_height">Hauteur max.</string>
     <string name="use_system_language">Utiliser la langue du système</string>
     <string name="recorded_description">Une voix enregistrée est plus naturelle mais ne peut prononcer que des phrases préenregistrées comme les bifurcations ; elle ne peut pas prononcer le nom des rues ou des POI.</string>
-    <string name="language_description">Sélectionnez la langue et le type de guidage vocal.</string>
+    <string name="language_description">Sélectionner la langue et le type de guidage vocal.</string>
     <string name="tts_description">La synthèse vocale (Text-To-Speech ou TTS) peut prononcer tous types d\'instructions : nom de rue, bifurcation, nom de POI, etc.</string>
     <string name="tts_title">TTS</string>
     <string name="shared_string_itinerary">Itinéraire</string>
@@ -3806,7 +3806,7 @@
     <string name="delete_all_confirmation">Oui, supprimer tout</string>
     <string name="backup_delete_old_data">Supprimer les anciennes versions</string>
     <string name="backup_data">Sauvegarder les données</string>
-    <string name="select_backup_data_descr">Sélectionnez les données et dossiers à sauvegarder.</string>
+    <string name="select_backup_data_descr">Sélectionner les données et dossiers à sauvegarder.</string>
     <string name="osmand_online_routing_promo">Utiliser des modèles prédéfinis ou ajouter OSRM, GraphHopper, openrouteservice, ou un moteur de routage GPX en ligne.</string>
     <string name="failed_loading_predefined_engines">Impossible d\'actualiser la liste des modèles prédéfinis.
 \nVeuillez vérifier votre connexion Internet.</string>
@@ -3841,7 +3841,7 @@
     <string name="nautical_depth">Profondeur nautique</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
     <string name="purchases_feature_desc_terrain">Courbes de niveau, ombrage du relief, pentes colorées mettant en valeur sommets et plaines.</string>
-    <string name="purchases_feature_desc_nautical">Accédez aux informations de profondeur marine</string>
+    <string name="purchases_feature_desc_nautical">Accéder aux informations de profondeur marine</string>
     <string name="shared_string_includes">Inclus</string>
     <string name="complete_purchase">Finaliser l\'achat</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenez les mises à jour mensuelles pour les cartes hors ligne.</string>
@@ -3998,7 +3998,7 @@
     <string name="shared_storage_warning_description">À partir de novembre 2021, OsmAnd 4.2 n\'aura plus accès au stockage partagé, car Android va modifier les règles d\'accès au stockage.
 \n
 \nVeuillez remplacer le stockage partagé par une autre stockage disponible, sans quoi l\'application ne pourra plus accéder à vos données comme les cartes hors ligne ou vos traces GPX ...</string>
-    <string name="markers_history_is_disabled_descr">Activez l\'historique pour mémoriser les marques visitées.</string>
+    <string name="markers_history_is_disabled_descr">Activer l\'historique pour mémoriser les marques visitées.</string>
     <string name="is_disabled">%1$s est désactivé</string>
     <string name="shortcut_navigate_to">Naviguer vers…</string>
     <string name="clear_all_history_warning">Effacer tout l\'historique de l\'application comme les historiques de recherche, de navigation et de marques \?</string>
@@ -4013,10 +4013,10 @@
     <string name="shortcut_navigate_to_work">Naviguer vers « Travail »</string>
     <string name="transparent_status_bar_descr">Afficher la carte sous la barre d\'état</string>
     <string name="transparent_status_bar">Barre d\'état transparente</string>
-    <string name="history_is_disabled_descr">Activez l\'historique pour accéder rapidement aux derniers résultats de recherche.</string>
+    <string name="history_is_disabled_descr">Activer l\'historique pour accéder rapidement aux derniers résultats de recherche.</string>
     <string name="no_plugins_enabled">Aucune extension n\'est activée. Consultez la liste des extensions disponibles dans : « Menu → Extensions ».</string>
     <string name="use_external_timestamps">Utiliser des estimations externes</string>
-    <string name="use_external_timestamps_description">Utilisez les estimations de routeurs en ligne pour ajuster la durée et la vitesse moyenne</string>
+    <string name="use_external_timestamps_description">Utiliser les estimations de routeurs en ligne pour ajuster la durée et la vitesse moyenne</string>
     <string name="safe_settings">Précis</string>
     <string name="approx_safe_mode">Approximation précise des GPX</string>
     <string name="approx_safe_mode_description">Effectuer les approximations des GPX en utilisant Android (qui est plus lent) au lieu du code natif.</string>
@@ -4090,22 +4090,19 @@
     <string name="gps_filter_speed_altitude_desc">Seuls les points correspondant à l\'intervalle défini apparaîtront sur la carte et le graphique, les autres points de la trace seront masqués.</string>
     <string name="gps_filter_actions_description">OsmAnd modifiera uniquement l\'affichage de la trace. Si vous le souhaitez, vous pouvez enregistrer manuellement les modifications dans le fichier.</string>
     <string name="storage_migration_wrong_folder_warning">Aucune donnée OsmAnd n\'est présente dans le dossier sélectionné. Veuillez réessayer.</string>
-    <string name="gps_filter_smoothing_desc">Définissez la distance entre points.
-\nLes points de la trace en dessous de cette distance du dernier point visible seront masqués.
-\nAttention : plus cette distance est élevée, plus la forme de la trace sera simplifiée.</string>
+    <string name="gps_filter_smoothing_desc">Définir la distance entre points. \nLes points de la trace en dessous de cette distance du dernier point visible seront masqués. \nAttention : plus cette distance est élevée, plus la forme de la trace sera simplifiée.</string>
     <string name="use_routing_fallback_description">Utiliser la navigation hors ligne lorsque la navigation en ligne n\'est pas disponible.</string>
     <string name="use_routing_fallback">Routage de secours hors ligne</string>
     <string name="created_on">Créé le</string>
     <string name="shared_string_size">Taille</string>
-    <string name="gps_filter_hdop_desc">Définissez la valeur maximale acceptée pour HDOP.
-\nLes points de valeur supérieure seront masqués.</string>
+    <string name="gps_filter_hdop_desc">Définir la valeur maximale acceptée pour HDOP. \nLes points de valeur supérieure seront masqués.</string>
     <string name="turn_arrows_descr">Activer ou non l\'affichage des flèches de direction sur la route.</string>
     <string name="turn_arrows">Flèches de direction</string>
     <string name="track_file">Fichier de trace</string>
     <string name="shared_string_used">Utilisé</string>
     <string name="files_with_route_restrictions">Fichiers avec restrictions d\'itinéraire</string>
     <string name="waypoint_appearance">Apparence du point de passage</string>
-    <string name="track_file_description">Appuyez sur cette action affiche les traces disponibles.</string>
+    <string name="track_file_description">Appuyer sur cette action affiche les traces disponibles.</string>
     <string name="shared_string_not_used">Non utilisé</string>
     <string name="waypoint_template">Modèle de point de passage</string>
     <string name="navigate_point_format_swiss_grid_plus">Grille suisse (CH1903+)</string>
@@ -4159,7 +4156,7 @@
     <string name="rendering_attr_showFitnessTrails_description">Afficher les parcours de santé</string>
     <string name="rendering_attr_showRunningRoutes_name">Itinéraires de course à pied</string>
     <string name="rendering_attr_showRunningRoutes_description">Afficher les itinéraires de course à pied</string>
-    <string name="configure_screen_widgets_descr">Sélectionnez le côté de l\'écran pour ajouter ou réorganiser les widgets.</string>
+    <string name="configure_screen_widgets_descr">Sélectionner le côté de l\'écran pour ajouter ou réorganiser les widgets.</string>
     <string name="simulation_real_mode_desc">Sur les sections droites des routes, la vitesse sera fonction de la vitesse maximale autorisée.
 \nAux bifurcations, la simulation ralentira.
 \nD\'autres ralentissements seront appliqués en fonction des feux tricolores, des panneaux stop, etc.</string>
@@ -4221,7 +4218,7 @@
     <string name="routing_attr_difficulty_preference_expert_name">Expert</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Intermédiaire</string>
     <string name="release_4_2">• Refonte graphique des Widgets : nouveau \"Look &amp; Feel\", modification de l\'ordre d\'affichage à volonté \n \n • Itinéraires Rando / Vélo : appuyez sur le symbole de l\'itinéraire pour afficher plus d\'informations \n \n • Groupes de favoris : il est maintenant possible de modifier l\'apparence par défaut des nouveaux points du groupe \n \n • Corrigé : mise à jour automatique des tuiles en ligne</string>
-    <string name="turn_on_public_transport_description">Activez pour afficher les itinéraires de transport en commun sur la carte.</string>
+    <string name="turn_on_public_transport_description">Activer pour afficher les itinéraires de transport en commun sur la carte.</string>
     <string name="widget_secondary_desc_part_of">Fait partie de l\'extension %1$s.</string>
     <string name="av_notes_choose_action_widget_desc">Choisir l\'action.</string>
     <string name="coordinates_widget_secondary_desc">Vous pouvez modifier le format des coordonnées en %1$s - %2$s - %3$s.</string>
@@ -4289,14 +4286,14 @@
     <string name="map_widget_time_to_destination">Temps restant jusqu\'à destination</string>
     <string name="map_widget_time_to_intermediate">Temps restant jusqu\'au point intermédiaire</string>
     <string name="map_widget_distance_to_intermediate">Distance du point intermédiaire</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Tapez sur le widget pour basculer entre les modes.</string>
-    <string name="radius_ruler_mode_desc">Touchez le widget pour passer en mode règle de rayon.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Appuyer sur le widget bascule entre les modes.</string>
+    <string name="radius_ruler_mode_desc">Appuyer sur le widget passe en mode règle de rayon.</string>
     <string name="shared_string_mode">Mode</string>
     <string name="lang_sat">Santali</string>
     <string name="average_speed_skip_stops">Prendre en compte les arrêts</string>
     <string name="map_widget_average_speed">Vitesse moyenne</string>
     <string name="average_speed_widget_desc">Affiche la vitesse moyenne du trajet en cours.</string>
-    <string name="average_speed_time_interval_desc">Indiquez la durée sur laquelle calculer la moyenne.</string>
+    <string name="average_speed_time_interval_desc">Indiquer la durée sur laquelle calculer la moyenne.</string>
     <string name="transport_hazmat_yes_desc">Sélectionner la catégorie applicable.</string>
     <string name="transport_hazmat_title">Transport de matières dangereuses</string>
     <string name="transport_hazmat_no_desc">Certaines routes et certains tunnels peuvent interdire le transport de matières dangereuses.</string>
@@ -4317,8 +4314,8 @@
     <string name="next_live_update_time">Prochaine mise à jour à %1$s.</string>
     <string name="lang_ckb">Sorani</string>
     <string name="goods_delivery_desc">L\'accès aux véhicules transportant des marchandises peut être restreint à certaines routes.</string>
-    <string name="map_marker_average_speed_desc">Indiquez la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
-    <string name="switch_widget_mode_desc">Appuyez sur le widget pour basculer entre les modes.</string>
+    <string name="map_marker_average_speed_desc">Indiquer la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
+    <string name="switch_widget_mode_desc">Appuyer sur le widget bascule entre les modes.</string>
     <string name="marker_1st">Première marque</string>
     <string name="side_marker_eta">Heure d’arrivée estimée</string>
     <string name="marker_2nd">Seconde marque</string>
@@ -4337,7 +4334,7 @@
     <string name="auto_backup_title">Sauvegarde automatique</string>
     <string name="shared_string_duplicate">Dupliquer</string>
     <string name="rendering_attr_depthContourWidth_description">Largeur des courbes de profondeur</string>
-    <string name="compass_click_desc">Appuyez deux fois sur la boussole pour basculer entre les modes d\'orientation de la carte.</string>
+    <string name="compass_click_desc">Appuyer deux fois sur la boussole bascule entre les modes d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des courbes de profondeur</string>
     <string name="av_notes_photo_widget_desc">Appuyez sur le widget pour prendre une photo.</string>
     <string name="av_notes_video_widget_desc">Appuyez sur le widget pour enregistrer une vidéo.</string>
@@ -4386,13 +4383,13 @@
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Orientation manuelle</string>
     <string name="shared_string_large">Grand</string>
-    <string name="distance_by_tap_use_description">Tapez sur la carte pour afficher la distance entre l\'emplacement appuyé et votre position actuelle.\nTapez simultanément avec 2 doigts sur la carte pour afficher la distance séparant 2 points.</string>
+    <string name="distance_by_tap_use_description">Appuyez sur la carte pour afficher la distance entre votre position actuelle et le point sélectionné..\nAppuyez avec deux doigts sur la carte pour afficher la distance entre les deux points sélectionnés.</string>
     <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
     <string name="go_to_marker_location">Aller au marqueur</string>
     <string name="shared_string_switch_mode">Basculer de mode</string>
     <string name="click_on_widget">Cliquer sur le widget</string>
     <string name="shared_string_shows">Afficher</string>
-    <string name="map_marker_interval_dialog_desc">Indiquez la durée sur laquelle calculer la vitesse moyenne afin d\'estimer l\'heure d\'arrivée.</string>
+    <string name="map_marker_interval_dialog_desc">Indiquer la durée sur laquelle calculer la vitesse moyenne afin d\'estimer l\'heure d\'arrivée.</string>
     <string name="quick_action_current_location_widget_descr">Bouton pour afficher ou masquer le widget Position actuelle.</string>
     <string name="coordinates_widget_current_location_desc">Affiche les coordonnées de la position actuelle</string>
     <string name="coordinates_widget_map_center">Coordonnées : centre de la carte</string>
@@ -4496,7 +4493,7 @@
     <string name="map_widget_group_sunrise_sunset_desc">Ces widgets affichent des informations sur les prochains levers et couchers de soleil.</string>
     <string name="map_widget_group_sunrise_sunset">Lever de soleil, coucher de soleil</string>
     <string name="depth_contour_lines">Courbes de profondeur</string>
-    <string name="turn_on_nautical_depth_description">Activez pour afficher les données de profondeur sur la carte nautique.</string>
+    <string name="turn_on_nautical_depth_description">Activer pour afficher les données de profondeur sur la carte nautique.</string>
     <string name="map_settings_weather_cloud">Couverture nuageuse</string>
     <string name="map_settings_weather_precip">Précipitations</string>
     <string name="empty_screen_view_selected_weather_data">Activez pour afficher les données météorologiques sélectionnées sur la carte.</string>
@@ -4536,7 +4533,7 @@
     <string name="quick_action_wind_layer">Afficher ou masquer la couche des vents sur la carte.</string>
     <string name="quick_action_air_pressure_layer">Afficher ou masquer la couche barométrique sur la carte.</string>
     <string name="quick_action_cloud_layer">Afficher ou masquer la couche de couverture nuageuse sur la carte.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Couleurs des courbes</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Couleur des courbes</string>
     <string name="rendering_attr_showMtbScale_description">Afficher la difficulté des itinéraires VTT selon l\'échelle MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Afficher la difficulté VTT</string>
     <string name="storage_migration_fragment_close_descr">La copie est réalisée à seulement %1$s%%. Si vous l\'interrompez maintenant, l\'application pourrait ne plus fonctionner correctement.</string>
@@ -4593,7 +4590,7 @@
     <string name="changes">Modifications %1$s</string>
     <string name="si_nm_ft">Milles nautiques/pieds</string>
     <string name="si_nm_mt">Milles nautiques/mètres</string>
-    <string name="av_audio_format_bottom_sheet_descr">Sélectionnez un format audio. Les fichiers audio sont au format 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Sélectionner un format audio. Les fichiers audio sont au format 3GPP (.3gp).</string>
     <string name="set_up_backup">Paramétrer la sauvegarde</string>
     <string name="x_axis">Axe des abscisses</string>
     <string name="y_axis">Axe des ordonnées</string>
@@ -4611,7 +4608,7 @@
     <string name="last_synchronized">Dernière synchronisation</string>
     <string name="display_position_automatic_descr">Dépend de l\'orientation de la carte : en bas si l\'orientation suit le déplacement, centré dans tous les autres cas.</string>
     <string name="shared_string_apply_changes">Appliquer les modifications</string>
-    <string name="no_visible_tracks_description">Sélectionnez les traces à afficher sur la carte.</string>
+    <string name="no_visible_tracks_description">Sélectionner les traces à afficher sur la carte.</string>
     <string name="no_visible_tracks">Aucune trace sur la carte</string>
     <string name="empty_tracks_description">Vous pouvez importer, créer ou enregistrer des fichiers trace grâce à OsmAnd.</string>
     <string name="empty_tracks">Aucun fichier de trace.</string>
@@ -4641,7 +4638,7 @@
     <string name="shared_string_delete_file">Supprimer le fichier</string>
     <string name="delete_cloud_version">Supprimer le fichier Cloud</string>
     <string name="local_version_do_not_exist">Aucune version locale.</string>
-    <string name="simulation_position_description">Sélectionnez un fichier trace à utiliser pour simuler le déplacement.</string>
+    <string name="simulation_position_description">Sélectionner un fichier trace à utiliser pour simuler le déplacement.</string>
     <string name="approximate_bearing">Cap approximatif</string>
     <string name="approximate_bearing_descr">Estimer le cap à partir de l’itinéraire suivi.</string>
     <string name="app_mode_moped">Cyclomoteur</string>
@@ -4787,7 +4784,7 @@
     <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="terrain_map">Carte du terrain (3D)</string>
-    <string name="relief_3d_description">Observez et explorez le modèle réduit de votre quartier ou de tout un continent.</string>
+    <string name="relief_3d_description">Explorez le modèle réduit de votre quartier ou de tout un continent.</string>
     <string name="terrain_category_description">Courbes de niveaux, ombrage du relief par des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les plaines.</string>
     <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l\'inclinaison du terrain. Pour en savoir plus sur les pentes, consultez %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
@@ -4860,7 +4857,7 @@
     <string name="map_widget_glide_average_desc">Affiche la finesse moyenne sur l\'intervalle défini.</string>
     <string name="map_widget_group_glide_ratio">Finesse</string>
     <string name="glide_ratio_to_target">Finesse par rapport à la destination</string>
-    <string name="average_glide_time_interval_desc">Indiquez l’intervalle de temps pour le calcul de la finesse moyenne.</string>
+    <string name="average_glide_time_interval_desc">Indiquer l’intervalle de temps pour le calcul de la finesse moyenne.</string>
     <string name="map_widget_group_glide_desc">Les widgets affichent la finesse vers la cible ou la finesse moyenne pour le trajet en cours.</string>
     <string name="map_widget_glide_target_desc">Affiche la finesse nécessaire pour atteindre le point cible.</string>
     <string name="wheel_circumference">Circonférence de la roue</string>
@@ -4913,7 +4910,7 @@
     <string name="shared_string_setup">Configuration</string>
     <string name="telegram_chats">Chats Telegram</string>
     <string name="github_discussion">Discussions GitHub</string>
-    <string name="free_versions_descr">Téléchargez et installez la version gratuite d\'OsmAnd</string>
+    <string name="free_versions_descr">Télécharger et installer la version gratuite d\'OsmAnd</string>
     <string name="free_versions">Versions gratuites</string>
     <string name="about_osmand">À propos d\'OsmAnd</string>
     <string name="send_logcat_log_descr">Fichier d\'historique détaillé</string>
@@ -4941,7 +4938,7 @@
     <string name="help_article_widgets_name">Widgets de la carte</string>
     <string name="help_article_widgets_info_widgets_name">Widgets d\'information</string>
     <string name="help_article_widgets_map_buttons_name">Boutons de la carte</string>
-    <string name="live_monitoring_adress_descr">Indiquez l\'adresse web avec la syntaxe de paramètres suivante : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Indiquer l\'adresse web avec la syntaxe de paramètres suivante : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
     <string name="release_4_6">• Android Auto : ajout du mode 3D \n \n• Traces : Introduction de filtres et de dossiers intelligents, optimisation de la mémoire pour les fichiers plus volumineux \n \n• Amélioration des panneaux de widgets supérieur et inférieur pour accueillir tous les widgets \n \n• Amélioration de la gestion des ressources locales \n \n• Assignation des boutons personnalisable pour les contrôleurs externes \n \n• Nouveaux widgets : « Finesse » et « Position du soleil » \n \n• OsmAnd Cloud : Accès aux fichiers supprimés \n \n• Amélioration de la coloration des pistes en mode Pente avec un nouveau dégradé symétrique \n \n• Résolution des problèmes concernant la barre d\'état transparente \n \n• Ajout de la prise en charge du widget de température ANT+ \n \n• Introduction du widget \"RAM disponible\"</string>
@@ -5137,7 +5134,7 @@
     <string name="avg_sensor_cadence">Cadence vélo, moyenne</string>
     <string name="help_article_setup_a_route_name">Définir un itinéraire</string>
     <string name="special_routing_cpp">Type de navigation spéciale</string>
-    <string name="distance_during_navigation_description">Choisissez comment les informations numériques sont affichées dans les widgets de navigation (distance, bifurcation suivante, voies). \n \nChoisissez « %1$s » pour des chiffres exacts, ou « %2$s » pour faciliter la lecture.</string>
+    <string name="distance_during_navigation_description">Choisir comment les informations numériques sont affichées dans les widgets de navigation (distance, bifurcation suivante, voies). \n \nChoisir « %1$s » pour des chiffres exacts, ou « %2$s » pour faciliter la lecture.</string>
     <string name="shared_string_unchanged">Inchangé</string>
     <string name="unchanged_parameter_summary">Chaque trace conservera ses propres paramètres.</string>
     <string name="auto_zoom_discrete">Arrondi</string>
@@ -5194,7 +5191,7 @@
     <string name="routing_attr_avoid_cobblestone_name">Éviter les pavés</string>
     <string name="routing_attr_avoid_cobblestone_description">Éviter les routes pavées</string>
     <string name="map_text">Rendu de la carte</string>
-    <string name="allow_display_on_top">Autoriser l\'affichage par dessus</string>
+    <string name="allow_display_on_top">Autoriser l’affichage au-dessus des autres applications</string>
     <string name="allow_display_on_top_description">Permet d\'afficher les textes de carte les uns par dessus les autres</string>
     <string name="show_debug_info_description">Affiche les données graphiques de position pour chaque texte sur la carte</string>
     <string name="gpx_approximation_geo_cpp">Basé sur la géométrie (C++, rapide)</string>
@@ -5209,7 +5206,7 @@
     <string name="rendering_value_dark_orange_name">Orange foncé</string>
     <string name="contact_support_retry">Réessayez ou contactez le support</string>
     <string name="shared_string_colors">Couleurs</string>
-    <string name="no_assigned_keys_desc">Sélectionnez une action et affectez un raccourci en appuyant sur « Ajouter ».</string>
+    <string name="no_assigned_keys_desc">Sélectionner une action et affecter un raccourci en appuyant sur « Ajouter ».</string>
     <string name="no_assigned_keys">Aucun raccourci</string>
     <string name="shared_string_key">Touche</string>
     <string name="clear_key_assignment_summary">Le raccourci pour l\'action sélectionnée sera supprimé.</string>
@@ -5332,7 +5329,7 @@
     <string name="delete_widget">Supprimer le widget ?</string>
     <string name="battery_saving_mode">Mode économie d\'énergie</string>
     <string name="graph_axis">Axes du graphique</string>
-    <string name="y_axis_description">Sélectionnez jusqu\'à deux options pour l\'axe Y.</string>
+    <string name="y_axis_description">Sélectionner jusqu\'à deux options pour l\'axe Y.</string>
     <string name="app_mode_suv">SUV</string>
     <string name="shared_string_interface">Interface</string>
     <string name="quick_action_previous_screen_desc">Un interrupteur pour retourner à l\'écran précédent.</string>
@@ -5498,7 +5495,7 @@
     <string name="obd_connecting_to_device">Connexion en cours à %s</string>
     <string name="dynamic_icon_type_summary">L’icône change en fonction de l\'état de l\'action.</string>
     <string name="record_obd_data">Enregistrer les données du véhicule</string>
-    <string name="fuel_tank_capacity_description">Saisissez la capacité du réservoir pour suivre avec précision le niveau de carburant et la consommation</string>
+    <string name="fuel_tank_capacity_description">Saisir la capacité du réservoir pour suivre avec précision le niveau de carburant et la consommation</string>
     <string name="fuel_tank_capacity">Capacité du réservoir de carburant</string>
     <string name="shared_strings_dimensions">Dimensions</string>
     <string name="litres">Litres</string>
@@ -5522,7 +5519,7 @@
     <string name="obd_engine_oil_temperature">Température de l\'huile moteur</string>
     <string name="av_audio_sample_rate_descr">Sélectionner le taux d\'échantillonnage audio.</string>
     <string name="connect_new_scanner">Connecter un nouveau scanner</string>
-    <string name="vehicle_metrics_recording_description">Sélectionnez les informations à enregistrer dans le fichier GPX.</string>
+    <string name="vehicle_metrics_recording_description">Sélectionner les informations à enregistrer dans le fichier GPX.</string>
     <string name="av_audio_sample_rate">Taux d’échantillonnage audio</string>
     <string name="shared_string_engine">Moteur</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Suivez les données du véhicule en utilisant le protocole OBD-II comme la vitesse, le régime moteur, la consommation de carburant et plus encore.</string>
@@ -5532,9 +5529,9 @@
     <string name="obd_engine_coolant_temp_desc">Affiche la température du liquide de refroidissement du moteur</string>
     <string name="obd_battery_voltage_desc">Affiche la tension de la batterie du véhicule</string>
     <string name="obd_calculated_engine_load_desc">Affiche le pourcentage instantanée de puissance moteur disponible.</string>
-    <string name="average_value_slider_description">Sélectionnez la durée sur laquelle calculer la valeur moyenne.</string>
+    <string name="average_value_slider_description">Sélectionner la durée sur laquelle calculer la valeur moyenne.</string>
     <string name="obd_engine_oil_temperature_desc">Affiche la température de l\'huile moteur.</string>
-    <string name="average_temperature_slider_description">Sélectionnez la durée sur laquelle calculer la température moyenne.</string>
+    <string name="average_temperature_slider_description">Sélectionner la durée sur laquelle calculer la température moyenne.</string>
     <string name="remaining_fuel_description">Affiche la quantité de carburant restant dans le réservoir du véhicule</string>
     <string name="obd_ambient_air_temp_desc">Affiche la température de l\'air extérieur.</string>
     <string name="obd_calculated_engine_load">Charge moteur calculée</string>
@@ -5566,9 +5563,9 @@
     <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps de trajet restant et la distance pour l\'itinéraire de navigation actuel.</string>
     <string name="shared_string_default_view">Vue par défaut</string>
     <string name="ais_address_settings">Paramètres de l\'adresse IP</string>
-    <string name="ais_address_settings_description">Choisissez le protocole NMEA (UDP/TCP) et définissez les adresses</string>
+    <string name="ais_address_settings_description">Choisir un protocole NMEA (UDP/TCP) et définir les adresses</string>
     <string name="ais_nmea_protocol">Protocole pour la réception de données NMEA</string>
-    <string name="ais_nmea_protocol_description">Choisissez le protocole de réception des données NMEA</string>
+    <string name="ais_nmea_protocol_description">Choisir le protocole de réception des données NMEA</string>
     <string name="ais_port_nmea_server">Port TCP de la source des données NMEA</string>
     <string name="ais_port_nmea_server_description">Définir le numéro de port TCP de la source des données NMEA</string>
     <string name="ais_load_data">Charger des données AIS à partir d\'un fichier</string>
