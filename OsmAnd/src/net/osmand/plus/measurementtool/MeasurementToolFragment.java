@@ -54,7 +54,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
@@ -119,7 +119,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
+public class MeasurementToolFragment extends BaseFullScreenFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
 		SaveAsNewTrackFragmentListener, MapControlsThemeProvider, GpsFilterFragmentLister,
 		OnFileUploadCallback, CalculateAltitudeListener, IMapDisplayPositionProvider, CallbackWithObject<String> {
@@ -785,12 +785,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Nullable
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			return (MapActivity) activity;
-		}
-		return null;
+	@Override
+	public MapActivity getMapActivity() {
+		return getNotDestroyedMapActivity();
 	}
 
 	@NonNull

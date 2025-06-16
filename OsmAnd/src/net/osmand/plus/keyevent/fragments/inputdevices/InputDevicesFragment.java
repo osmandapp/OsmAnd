@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.listener.EventType;
@@ -28,7 +28,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class InputDevicesFragment extends BaseOsmAndFragment implements InputDevicesEventListener {
+public class InputDevicesFragment extends BaseFullScreenFragment implements InputDevicesEventListener {
 
 	public static final String TAG = InputDevicesFragment.class.getSimpleName();
 
@@ -120,11 +120,6 @@ public class InputDevicesFragment extends BaseOsmAndFragment implements InputDev
 		if (activity != null) {
 			activity.onBackPressed();
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
@@ -37,7 +37,7 @@ public class EditorColorController extends ColorsPaletteController implements ID
 
 	@Override
 	public void onAllColorsScreenClosed() {
-		if (getTargetFragment() instanceof BaseOsmAndFragment fragment) {
+		if (getTargetFragment() instanceof BaseFullScreenFragment fragment) {
 			fragment.updateStatusBar();
 		}
 	}

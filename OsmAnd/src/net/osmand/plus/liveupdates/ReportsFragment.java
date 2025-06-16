@@ -22,7 +22,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
 import net.osmand.plus.liveupdates.Protocol.RecipientsByMonth;
@@ -33,7 +33,7 @@ import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
-public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInteractionListener {
+public class ReportsFragment extends BaseFullScreenFragment implements OnFragmentInteractionListener {
 
 	public static final String DOMAIN = "https://osmand.net/";
 	public static final String TOTAL_CHANGES_BY_MONTH_URL_PATTERN = DOMAIN +

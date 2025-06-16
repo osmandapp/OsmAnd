@@ -1,12 +1,10 @@
 package net.osmand.plus.base;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -16,19 +14,32 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class BaseOsmAndFragment extends Fragment implements TransitionAnimator, AppModeDependentComponent {
+/**
+ * Base fragment class for all UI components in OsmAnd that directly extend Android's Fragment.
+ *
+ * This class provides centralized access to core components of the application,
+ * such as the current Application Mode, UI theming (night mode, theme context),
+ * and other shared utilities.
+ *
+ * All fragments in OsmAnd that would otherwise extend the standard Android Fragment
+ * must instead extend this class (or one of its subclasses such as {@link BaseFullScreenFragment}
+ * or {@link BaseNestedFragment}). This ensures proper theming behavior, access to application
+ * services, and consistent lifecycle handling.
+ *
+ * Note: Fragments based on DialogFragment or BottomSheetFragment should NOT inherit from this class.
+ */
+public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 
 	protected OsmandApplication app;
 	protected ApplicationMode appMode;
@@ -36,9 +47,6 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator, 
 	protected UiUtilities uiUtilities;
 	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
-
-	private int statusBarColor = -1;
-	private boolean transitionAnimationAllowed = true;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,26 +64,14 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator, 
 		saveAppModeToBundle(appMode, outState);
 	}
 
-	public void setAppMode(@NonNull ApplicationMode appMode) {
-		this.appMode = appMode;
-	}
-
-	@NonNull
-	public ApplicationMode getAppMode() {
-		return appMode;
-	}
-
 	protected void updateNightMode() {
-		nightMode = isNightMode(isUsedOnMap());
+		nightMode = resolveNightMode();
 		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 	}
 
-	public boolean isNightMode() {
-		return nightMode;
-	}
-
-	protected boolean isUsedOnMap() {
-		return false;
+	@NonNull
+	protected View inflate(@LayoutRes int layoutResId) {
+		return inflate(layoutResId, null);
 	}
 
 	@NonNull
@@ -88,94 +84,21 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator, 
 		return themedInflater.inflate(layoutResId, parent, attachToRoot);
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		Activity activity = getActivity();
-		if (activity != null) {
-			updateStatusBar(activity);
-			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
-				((MapActivity) activity).exitFromFullScreen(getView());
-			}
-		}
+	@NonNull
+	public ApplicationMode getAppMode() {
+		return appMode;
 	}
 
-	public void updateStatusBar() {
-		Activity activity = getActivity();
-		if (activity != null) {
-			updateStatusBar(activity);
-		}
+	public void setAppMode(@NonNull ApplicationMode appMode) {
+		this.appMode = appMode;
 	}
 
-	protected void updateStatusBar(@NonNull Activity activity) {
-		int colorId = getStatusBarColorId();
-		if (colorId != -1) {
-			if (activity instanceof MapActivity) {
-				((MapActivity) activity).updateStatusBarColor();
-			} else {
-				statusBarColor = activity.getWindow().getStatusBarColor();
-				activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
-			}
-		}
+	public boolean isNightMode() {
+		return nightMode;
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		Activity activity = getActivity();
-		if (activity != null) {
-			if (!(activity instanceof MapActivity) && statusBarColor != -1) {
-				activity.getWindow().setStatusBarColor(statusBarColor);
-			}
-			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
-				((MapActivity) activity).enterToFullScreen();
-			}
-		}
-	}
-
-	@Override
-	public void onDetach() {
-		super.onDetach();
-		if (getStatusBarColorId() != -1) {
-			Activity activity = getActivity();
-			if (activity instanceof MapActivity) {
-				((MapActivity) activity).updateStatusBarColor();
-			}
-		}
-	}
-
-	@Override
-	public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-		if (transitionAnimationAllowed) {
-			return super.onCreateAnimation(transit, enter, nextAnim);
-		}
-		Animation anim = new Animation() {
-		};
-		anim.setDuration(0);
-		return anim;
-	}
-
-	@Override
-	public void disableTransitionAnimation() {
-		transitionAnimationAllowed = false;
-	}
-
-	@Override
-	public void enableTransitionAnimation() {
-		transitionAnimationAllowed = true;
-	}
-
-	@ColorRes
-	public int getStatusBarColorId() {
-		return -1;
-	}
-
-	public boolean getContentStatusBarNightMode() {
-		return true;
-	}
-
-	protected boolean isFullScreenAllowed() {
-		return true;
+	protected boolean isUsedOnMap() {
+		return false;
 	}
 
 	@Nullable
@@ -214,7 +137,15 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator, 
 		return getResources().getDimensionPixelSize(resId);
 	}
 
-	protected boolean isNightMode(boolean usedOnMap) {
-		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
+	@NonNull
+	@Override
+	public ThemeUsageContext getThemeUsageContext() {
+		return ThemeUsageContext.valueOf(isUsedOnMap());
+	}
+
+	@NonNull
+	@Override
+	public OsmandApplication getApp() {
+		return app;
 	}
 }

@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.MapOptionSliderFragment;
 import net.osmand.plus.configmap.MapOptionSliderFragment.MapOptionSliderListener;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -26,7 +26,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
-public class Relief3DFragment extends BaseOsmAndFragment implements View.OnClickListener, DownloadEvents, MapOptionSliderListener {
+public class Relief3DFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents, MapOptionSliderListener {
 
 	public static final String TAG = Relief3DFragment.class.getSimpleName();
 
@@ -45,15 +45,6 @@ public class Relief3DFragment extends BaseOsmAndFragment implements View.OnClick
 	private View titleBottomDivider;
 
 	private DownloadMapsCard downloadMapsCard;
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity && !activity.isFinishing()) {
-			return (MapActivity) activity;
-		}
-		return null;
-	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -198,5 +189,11 @@ public class Relief3DFragment extends BaseOsmAndFragment implements View.OnClick
 		if (mapActivity != null) {
 			mapActivity.refreshMap();
 		}
+	}
+
+	@Nullable
+	@Override
+	public MapActivity getMapActivity() {
+		return getNotDestroyedMapActivity();
 	}
 }

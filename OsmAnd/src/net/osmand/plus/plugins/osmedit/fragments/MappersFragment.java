@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.chooseplan.BasePurchaseDialogFragment.ButtonBackground;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -48,7 +48,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class MappersFragment extends BaseOsmAndFragment {
+public class MappersFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = MappersFragment.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(MappersFragment.class);

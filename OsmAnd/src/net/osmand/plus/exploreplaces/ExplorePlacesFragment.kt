@@ -28,7 +28,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.base.BaseOsmAndFragment
+import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.poi.PoiUIFilter
@@ -47,7 +47,7 @@ import org.apache.commons.logging.Log
 import java.util.concurrent.Executors
 import kotlin.math.abs
 
-class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
+class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 	OsmAndLocationListener, OsmAndCompassListener, IMapLocationListener, MapZoomChangeListener {
 
 	private val log: Log = PlatformUtil.getLog(ExplorePlacesFragment::class.java)
@@ -488,11 +488,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener,
 			}
 		}
 	}
-
-	val mapActivity: MapActivity?
-		get() {
-			return activity as? MapActivity
-		}
 
 	companion object {
 

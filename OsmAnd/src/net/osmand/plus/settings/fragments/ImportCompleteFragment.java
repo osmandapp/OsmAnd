@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -45,7 +45,7 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.CustomMapButtonsFragme
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImportCompleteFragment extends BaseOsmAndFragment {
+public class ImportCompleteFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
 

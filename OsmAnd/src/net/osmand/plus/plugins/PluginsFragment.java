@@ -25,7 +25,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
@@ -38,7 +38,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 import org.apache.commons.logging.Log;
 
-public class PluginsFragment extends BaseOsmAndFragment implements PluginStateListener {
+public class PluginsFragment extends BaseFullScreenFragment implements PluginStateListener {
 
 	private static final Log log = PlatformUtil.getLog(PluginsFragment.class);
 

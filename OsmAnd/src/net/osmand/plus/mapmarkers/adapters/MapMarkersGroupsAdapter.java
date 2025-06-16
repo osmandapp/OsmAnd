@@ -670,6 +670,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	public interface MapMarkersGroupsAdapterListener {
 
-		void onItemClick(View view);
+		void onItemClick(@NonNull View view);
 	}
 }

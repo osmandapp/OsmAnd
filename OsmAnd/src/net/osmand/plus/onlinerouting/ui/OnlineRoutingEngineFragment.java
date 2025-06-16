@@ -31,7 +31,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
@@ -57,7 +57,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements OnSelectProfileCallback {
+public class OnlineRoutingEngineFragment extends BaseFullScreenFragment implements OnSelectProfileCallback {
 
 
 	public static final String TAG = OnlineRoutingEngineFragment.class.getSimpleName();
@@ -592,16 +592,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			if (!fragmentManager.isStateSaved()) {
 				fragmentManager.popBackStack();
 			}
-		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
 		}
 	}
 

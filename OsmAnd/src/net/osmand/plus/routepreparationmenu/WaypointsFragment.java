@@ -33,7 +33,7 @@ import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IContextDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -63,7 +63,7 @@ import java.util.List;
 
 import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
 
-public class WaypointsFragment extends BaseOsmAndFragment implements IContextDialog, ObservableScrollViewCallbacks,
+public class WaypointsFragment extends BaseFullScreenFragment implements IContextDialog, ObservableScrollViewCallbacks,
 		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback, AddPointBottomSheetDialog.DialogListener {
 
 	public static final String TAG = "WaypointsFragment";
@@ -330,11 +330,6 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 	@Override
 	public void onItemsSwapped(List<Object> items) {
 		controller.onApplyChanges(items);
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public void applyDayNightMode() {

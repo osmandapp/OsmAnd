@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragmentActivatedListener {
+public class BasicEditPoiFragment extends BaseFullScreenFragment implements OnFragmentActivatedListener {
 
 	private static final String OPENING_HOURS = "opening_hours";
 	private OpeningHoursAdapter openingHoursAdapter;

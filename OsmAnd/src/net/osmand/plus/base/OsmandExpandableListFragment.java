@@ -22,7 +22,7 @@ import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment implements OnChildClickListener {
+public abstract class OsmandExpandableListFragment extends BaseFullScreenFragment implements OnChildClickListener {
 
 	protected ExpandableListView listView;
 	protected ExpandableListAdapter adapter;

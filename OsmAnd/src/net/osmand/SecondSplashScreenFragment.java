@@ -17,14 +17,13 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class SecondSplashScreenFragment extends BaseOsmAndFragment {
+public class SecondSplashScreenFragment extends BaseFullScreenFragment {
 
 	private static final int LOGO_ID = 1001;
 	private static final int TEXT_ID = 1002;
@@ -34,10 +33,6 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	public static final int MIN_SCREEN_WIDTH_TABLET_DP = 600;
 	public static boolean SHOW = true;
 	public static boolean VISIBLE;
-
-	public MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
 
 	private int getNavigationBarWidth() {
 		if (!AndroidUtils.hasNavBar(getContext()) && !AndroidUtils.isNavBarVisible(getMapActivity()))

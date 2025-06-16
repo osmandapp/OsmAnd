@@ -34,7 +34,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.card.color.palette.gradient.GradientUiHelper;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -70,7 +70,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickListener, DownloadEvents {
+public class TerrainFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents {
 
 	public static final String TAG = TerrainFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
@@ -98,15 +98,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private GradientChart gradientChart;
 
 	private DownloadMapsCard downloadMapsCard;
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity && !activity.isFinishing()) {
-			return (MapActivity) activity;
-		}
-		return null;
-	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -426,6 +417,12 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	private boolean isColoringTypeAvailable() {
 		return InAppPurchaseUtils.isColoringTypeAvailable(app);
+	}
+
+	@Nullable
+	@Override
+	public MapActivity getMapActivity() {
+		return getNotDestroyedMapActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

@@ -24,7 +24,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -36,7 +36,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-public class EditKeyAssignmentFragment extends BaseOsmAndFragment
+public class EditKeyAssignmentFragment extends BaseFullScreenFragment
 		implements IAskRefreshDialogCompletely, IAskDismissDialog, InputDevicesEventListener {
 
 	public static final String TAG = EditKeyAssignmentFragment.class.getSimpleName();
@@ -200,11 +200,6 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		if (activity != null) {
 			activity.onBackPressed();
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	@Override

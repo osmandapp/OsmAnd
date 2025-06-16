@@ -25,7 +25,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.TrackApproximationType;
@@ -38,7 +38,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
+public class DetailedTrackGuidanceFragment extends BaseFullScreenFragment {
 
 	private static final String TAG = DetailedTrackGuidanceFragment.class.getSimpleName();
 	private static final String DETAILED_TRACK_GUIDANCE_KEY = "detailed_track_guidance_key";
@@ -233,17 +233,19 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMapActivity().disableDrawer();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMapActivity().enableDrawer();
-	}
-
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull ApplicationMode mode,

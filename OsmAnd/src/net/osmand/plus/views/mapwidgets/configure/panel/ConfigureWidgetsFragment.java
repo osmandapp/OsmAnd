@@ -38,8 +38,7 @@ import com.google.android.material.tabs.TabLayout.Tab;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -65,7 +64,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsConfigurationChangeListener,
+public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements WidgetsConfigurationChangeListener,
 		InAppPurchaseListener, AddWidgetListener, CopyAppModePrefsListener, ConfirmationDialogListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
@@ -411,7 +410,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	private void updateFabPosition(boolean isEditing) {
-		int translationY = isEditing ? -dpToPx(requireMapActivity(), 60) : 0;
+		int translationY = isEditing ? -dpToPx(60) : 0;
 		if (isDisableAnimations()) {
 			fabNewWidget.setTranslationY(translationY);
 		} else {
@@ -559,15 +558,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	public boolean getContentStatusBarNightMode() {
 		return nightMode;
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
 	}
 
 	@Override

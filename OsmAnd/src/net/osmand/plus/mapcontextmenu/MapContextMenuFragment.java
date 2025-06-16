@@ -42,7 +42,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -89,7 +89,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents,
+public class MapContextMenuFragment extends BaseFullScreenFragment implements DownloadEvents,
 		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
 	public static final String TAG = "MapContextMenuFragment";
 
@@ -2234,21 +2234,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	protected boolean isUsedOnMap() {
 		return true;
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return (MapActivity) requireActivity();
-	}
-
-	private int dpToPx(float dp) {
-		MapActivity mapActivity = getMapActivity();
-		return mapActivity != null ? AndroidUtils.dpToPx(mapActivity, dp) : (int) dp;
 	}
 
 	public void updateLocation(boolean centerChanged, boolean locationChanged, boolean compassChanged) {

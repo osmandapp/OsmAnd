@@ -1,7 +1,7 @@
 package net.osmand.plus.dashboard;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -26,26 +26,19 @@ public class DashSearchFragment extends DashBaseFragment {
 			};
 
 	@Override
-	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_search_fragment, container, false);
+	public View initView(@Nullable ViewGroup container, @Nullable Bundle savedState) {
+		View view = inflate(R.layout.dash_search_fragment, container, false);
 
-		TextView searchFor = view.findViewById(R.id.search_for);
-		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(searchFor,
-				getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
-		searchFor.setCompoundDrawablePadding(AndroidUtils.dpToPx(getActivity(), 16f));
+		TextView tvSearchFor = view.findViewById(R.id.search_for);
+		Drawable iconSearch = uiUtilities.getThemedIcon(R.drawable.ic_action_search_dark);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+				tvSearchFor, iconSearch, null, null, null);
+		tvSearchFor.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 16f));
 
-		view.findViewById(R.id.search_card).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				((MapActivity) getActivity()).getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW, false);
-				closeDashboard();
-			}
+		view.findViewById(R.id.search_card).setOnClickListener(v -> {
+			requireMapActivity().getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW, false);
+			closeDashboard();
 		});
-
 		return view;
-	}
-
-	@Override
-	public void onOpenDash() {
 	}
 }

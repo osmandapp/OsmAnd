@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SavedArticlesTabFragment extends BaseOsmAndFragment implements TravelLocalDataHelper.Listener {
+public class SavedArticlesTabFragment extends BaseFullScreenFragment implements TravelLocalDataHelper.Listener {
 
 	protected static final Log LOG = PlatformUtil.getLog(SavedArticlesTabFragment.class);
 

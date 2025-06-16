@@ -33,8 +33,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.UrlImageCard;
@@ -56,7 +55,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements DownloadMetadataListener {
+public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements DownloadMetadataListener {
 
 	public static final String TAG = GalleryPhotoPagerFragment.class.getSimpleName();
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
@@ -540,10 +539,6 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	public void onDestroy() {
 		super.onDestroy();
 		controller.removeMetaDataListener(this);
-	}
-
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, int selectedPosition) {

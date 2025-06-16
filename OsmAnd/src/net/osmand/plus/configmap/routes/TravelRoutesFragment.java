@@ -25,7 +25,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.TravelRendererHelper;
@@ -42,7 +42,7 @@ import net.osmand.util.Algorithms;
 import java.util.Collections;
 import java.util.List;
 
-public class TravelRoutesFragment extends BaseOsmAndFragment {
+public class TravelRoutesFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = TravelRoutesFragment.class.getSimpleName();
 	private static final String TRAVEL_TYPE_KEY = "travel_type_key";

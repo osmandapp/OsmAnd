@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
+public abstract class ImportDuplicatesFragment extends BaseFullScreenFragment {
 
 	protected List<SettingsItem> settingsItems;
 	protected List<? super Object> duplicatesList;

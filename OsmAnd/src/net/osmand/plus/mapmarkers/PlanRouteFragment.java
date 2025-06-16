@@ -35,7 +35,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
@@ -62,7 +62,7 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanRouteFragment extends BaseOsmAndFragment
+public class PlanRouteFragment extends BaseFullScreenFragment
 		implements OsmAndLocationListener, IMapDisplayPositionProvider {
 
 	public static final String TAG = "PlanRouteFragment";
@@ -397,10 +397,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 				});
 			}
 		}
-	}
-
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	private MapMarkersLayer getMapMarkersLayer() {

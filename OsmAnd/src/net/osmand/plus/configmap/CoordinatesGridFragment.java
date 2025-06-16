@@ -1,6 +1,5 @@
 package net.osmand.plus.configmap;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteElements;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -28,7 +27,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
-public class CoordinatesGridFragment extends BaseOsmAndFragment
+public class CoordinatesGridFragment extends BaseFullScreenFragment
 		implements ICoordinatesGridScreen, InAppPurchaseListener {
 
 	public static final String TAG = CoordinatesGridFragment.class.getSimpleName();
@@ -243,12 +242,9 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment
 	}
 
 	@Nullable
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity && !activity.isFinishing()) {
-			return (MapActivity) activity;
-		}
-		return null;
+	@Override
+	public MapActivity getMapActivity() {
+		return getNotDestroyedMapActivity();
 	}
 
 	@Override

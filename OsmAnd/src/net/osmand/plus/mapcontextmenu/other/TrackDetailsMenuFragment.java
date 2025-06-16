@@ -22,7 +22,7 @@ import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
@@ -35,7 +35,7 @@ import net.osmand.util.MapUtils;
 import java.util.Collections;
 import java.util.List;
 
-public class TrackDetailsMenuFragment extends BaseOsmAndFragment
+public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		implements OsmAndLocationListener, ICoveredScreenRectProvider {
 
 	public static final String TAG = "TrackDetailsMenuFragment";
@@ -46,16 +46,6 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 	private BoundsChangeListener boundsChangeListener;
 
 	private boolean locationUpdateStarted;
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
-	@NonNull
-	private MapActivity requireMapActivity() {
-		return (MapActivity) requireMyActivity();
-	}
 
 	@Override
 	protected boolean isUsedOnMap() {
