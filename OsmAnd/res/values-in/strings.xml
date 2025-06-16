@@ -6170,4 +6170,8 @@
     <string name="battery_level">Daya baterai</string>
     <string name="set_work">Atur kerja</string>
     <string name="set_start_point">Atur titik mulai</string>
+    <string name="osm_live_payment_renews_3_years">Diperbaharui setiap tiga tahun</string>
+    <string name="years_3">Tiga tahun</string>
+    <string name="three_years_subscription">Langganan tiga tahun</string>
+    <string name="osm_live_payment_3_years_title">Setiap tiga tahun</string>
 </resources>
