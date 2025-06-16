@@ -19,7 +19,7 @@
     <string name="local_openstreetmap_descr_title">Modification asynchrone d\'OSM :</string>
     <string name="local_openstreetmap_settings">POI/notes OSM enregistrés sur l\'appareil</string>
     <string name="local_openstreetmap_settings_descr">Afficher et gérer les POI/notes OSM enregistrés dans l\'appareil.</string>
-    <string name="live_monitoring_interval_descr">Indiquez l\'intervalle pour le suivi en ligne.</string>
+    <string name="live_monitoring_interval_descr">Indiquer l\'intervalle pour le suivi en ligne.</string>
     <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
     <string name="live_monitoring_url_descr">Indiquez l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
@@ -159,7 +159,7 @@
     <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
     <string name="switch_to_vector_map_to_see">Carte vectorielle hors ligne disponible pour cette position. \n\t \n\tPour activer : « Menu → Configurer la carte → Source de carte… → Cartes vectorielles hors ligne ».</string>
     <string name="choose_audio_stream">Sortie audio pour le guidage</string>
-    <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal.</string>
+    <string name="choose_audio_stream_descr">Sélectionner la sortie audio à utiliser pour le guidage vocal.</string>
     <string name="voice_stream_voice_call">Sortie audio appel téléphonique (interrompt le Bluetooth véhicule)</string>
     <string name="voice_stream_notification">Sortie notifications</string>
     <string name="voice_stream_music">Audio média/navigation</string>
@@ -171,11 +171,11 @@
     <string name="modify_transparency">Définir l\'opacité (0 - transparent, 255 - opaque)</string>
     <string name="layer_underlay">Fond de carte…</string>
     <string name="map_underlay">Fond de carte</string>
-    <string name="map_underlay_descr">Choisissez le fond de carte</string>
+    <string name="map_underlay_descr">Choisir le fond de carte</string>
     <string name="layer_overlay">Surcouche de carte…</string>
     <string name="shared_string_none">Aucun</string>
     <string name="map_overlay">Surcouche de carte</string>
-    <string name="map_overlay_descr">Choisissez la surcouche de carte</string>
+    <string name="map_overlay_descr">Choisir la surcouche de carte</string>
     <string name="tile_source_already_installed">Carte déjà installée, les paramètres seront mis à jour.</string>
     <string name="select_tile_source_to_install">Sélectionnez les sources de cartes tuilées :</string>
     <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération.</string>
@@ -285,7 +285,7 @@
     <string name="renderer_load_sucess">Moteur de rendu chargé</string>
     <string name="renderer_load_exception">Impossible de charger le moteur de rendu.</string>
     <string name="renderers">Affichage vectoriel</string>
-    <string name="renderers_descr">Choisissez le style de rendu</string>
+    <string name="renderers_descr">Choisir le style de rendu</string>
     <string name="poi_context_menu_website">Afficher le site web du POI</string>
     <string name="poi_context_menu_call">Afficher le numéro téléphone du POI</string>
     <string name="website">Site web</string>
@@ -353,7 +353,7 @@
     <string name="search_poi_filter">Filtre</string>
     <string name="menu_mute_off">Son activé</string>
     <string name="menu_mute_on">Son désactivé</string>
-    <string name="voice_provider_descr">Sélectionnez la langue de guidage vocal.</string>
+    <string name="voice_provider_descr">Sélectionner la langue de guidage vocal.</string>
     <string name="voice_provider">Guidage vocal</string>
     <string name="voice_data_initializing">Initialisation des données vocales…</string>
     <string name="voice_data_not_supported">Les données vocales utilisent une version non supportée</string>
@@ -474,7 +474,7 @@
     <string name="use_online_routing_descr">Utiliser Internet pour calculer l\'itinéraire.</string>
     <string name="use_online_routing">Utiliser le guidage en ligne</string>
     <string name="osm_settings_descr">Indiquez les paramètres de connexion à OpenStreetMap.org (OSM) pour vos contributions.</string>
-    <string name="data_settings_descr">Indiquez la langue, télécharger / mettre à jour les données.</string>
+    <string name="data_settings_descr">Indiquer la langue, télécharger / mettre à jour les données.</string>
     <string name="data_settings">Données</string>
     <string name="osm_editing_plugin_name">Édition OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Zoom de la carte adapté à votre vitesse (lorsque que votre position est affichée sur la carte).</string>
@@ -811,7 +811,7 @@
     <string name="map_widget_show_destination_arrow">Direction de l\'arrivée</string>
     <string name="enable_plugin_monitoring_services">Activez l\'extension « Enregistrement de trajet » pour utiliser les services d’enregistrement de position (enregistrement GPX, suivi en ligne)</string>
     <string name="non_optimal_route_calculation">Calcule un itinéraire éventuellement non optimal pour les trajets longues distances</string>
-    <string name="rendering_attr_roadColors_description">Sélectionnez un thème de couleurs pour les routes :</string>
+    <string name="rendering_attr_roadColors_description">Sélectionner un thème de couleurs pour les routes :</string>
     <string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
     <string name="zxing_barcode_scanner_not_found">L’application ZXing Barcode Scanner n\'est pas installée. Souhaitez-vous l\'installer depuis Google Play ?</string>
     <string name="close_changeset">Clôturer les modifications</string>
@@ -819,7 +819,7 @@
     <string name="safe_mode_description">Exécuter l\'application en mode sûr (mais plus lent).</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactivez ce mode dans « Paramètres »).</string>
-    <string name="rendering_attr_showRoadMaps_description">Choisissez quand afficher les cartes routières :</string>
+    <string name="rendering_attr_showRoadMaps_description">Choisir quand afficher les cartes routières :</string>
     <string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
     <string name="download_roads_only_item">Routes uniquement</string>
     <string name="download_regular_maps">Carte standard</string>
@@ -908,7 +908,7 @@
     <string name="hno">Numéro de bâtiment</string>
     <string name="monitoring_settings">Enregistrer le trajet</string>
     <string name="monitoring_settings_descr">Paramétrer l’enregistrement de vos trajets.</string>
-    <string name="choose_osmand_theme_descr">Personnalisez l\'apparence de l\'application.</string>
+    <string name="choose_osmand_theme_descr">Personnaliser l\'apparence de l\'application.</string>
     <string name="choose_osmand_theme">Thème de l\'application</string>
     <string name="accessibility_options">Options d\'accessibilité</string>
     <string name="select_address_activity">Définissez l\'adresse</string>
@@ -1027,11 +1027,11 @@
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Bateau</string>
     <string name="app_mode_aircraft">Avion</string>
-    <string name="app_modes_choose_descr">Sélectionnez les profils à afficher.</string>
+    <string name="app_modes_choose_descr">Sélectionner les profils à afficher.</string>
     <string name="app_modes_choose">Profils de l\'appli</string>
     <string name="map_widget_map_rendering">Rendu de la carte</string>
     <string name="amenity_type_seamark">Balise marine</string>
-    <string name="speech_rate_descr">Indiquez la vitesse d\'élocution de la voix de synthèse (TTS).</string>
+    <string name="speech_rate_descr">Indiquer la vitesse d\'élocution de la voix de synthèse (TTS).</string>
     <string name="speech_rate">Vitesse d\'élocution</string>
     <string name="complex_route_calculation_failed">Échec du calcul rapide de la route (%s), essai avec la méthode lente.</string>
     <string name="disable_complex_routing_descr">Désactiver le routage en 2 phases pour le guidage en voiture.</string>
@@ -1342,10 +1342,10 @@
     <string name="proxy_pref_title">Proxy</string>
     <string name="enable_proxy_descr">Configurez le proxy HTTP pour toutes les requêtes réseau.</string>
     <string name="proxy_host_title">Serveur mandataire (Proxy)</string>
-    <string name="proxy_host_descr">Indiquez le nom d’hôte de votre proxy (par ex. 127.0.0.1).</string>
+    <string name="proxy_host_descr">Indiquer le nom d’hôte de votre proxy (par ex. 127.0.0.1).</string>
     <string name="proxy_port_title">Port du mandataire (Proxy)</string>
     <string name="proxy_port_descr">Indiquez le numéro de port de votre proxy (par ex. 8118).</string>
-    <string name="proxy_pref_descr">Indiquez un serveur proxy.</string>
+    <string name="proxy_pref_descr">Indiquer un serveur proxy.</string>
     <string name="settings_privacy">Vie privée</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
     <string name="enable_proxy_title">Activer le mandataire HTTP (Proxy)</string>
@@ -1391,7 +1391,7 @@
     <string name="track_points">Points de la trace</string>
     <string name="route_points">Point de passage</string>
     <string name="track_segments">Segments de la trace</string>
-    <string name="simulate_your_location">Simulez votre position</string>
+    <string name="simulate_your_location">Simuler votre position</string>
     <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
     <string name="tips_and_tricks_descr">Questions fréquentes, notes de version et autres informations.</string>
     <string name="routing_settings_2">Paramètres de guidage</string>
@@ -1713,9 +1713,9 @@
     <string name="av_video_quality_low">Qualité la plus basse</string>
     <string name="av_video_quality_high">Qualité la plus élevée</string>
     <string name="av_video_quality">Qualité de la sortie vidéo</string>
-    <string name="av_video_quality_descr">Sélectionnez la qualité de la vidéo.</string>
+    <string name="av_video_quality_descr">Sélectionner la qualité de la vidéo.</string>
     <string name="av_audio_format">Format de la sortie audio</string>
-    <string name="av_audio_format_descr">Sélectionnez le format de sortie audio.</string>
+    <string name="av_audio_format_descr">Sélectionner le format de sortie audio.</string>
     <string name="av_audio_bitrate">Bitrate audio</string>
     <string name="av_audio_bitrate_descr">Sélectionnez le débit binaire audio.</string>
     <string name="no_address_found">Impossible de déterminer l\'adresse</string>
@@ -2027,7 +2027,7 @@
     <string name="quick_action_fav_name_descr">Laisser vide pour utiliser automatiquement l\'adresse ou le nom du lieu.</string>
     <string name="quick_action_bug_message">Message</string>
     <string name="quick_action_category_descr">Catégorie du favori :</string>
-    <string name="quick_action_gpx_category_descr">Choisissez une catégorie facultative.</string>
+    <string name="quick_action_gpx_category_descr">Choisir une catégorie facultative.</string>
     <string name="quick_action_poi_list">Liste des POI</string>
     <string name="quick_action_sh_poi_descr">Indiquez les catégories de POI à afficher sur la carte.</string>
     <string name="quick_action_map_style_action">Ajouter un style de carte</string>
@@ -2199,7 +2199,7 @@
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
-    <string name="mapillary_action_descr">Partagez votre vue de la rue via Mapillary.</string>
+    <string name="mapillary_action_descr">Partager votre vue de la rue via Mapillary.</string>
     <string name="mapillary_widget">Widget Mapillary</string>
     <string name="mapillary_widget_descr">Permet de contribuer facilement à Mapillary.</string>
     <string name="mapillary_descr">Des photos détaillées en ligne pour tous. Découvrez des lieux, collaborez, capturez le monde.</string>
@@ -2749,7 +2749,7 @@
     <string name="visited_screens">Écrans visités</string>
     <string name="collected_data_descr">Définissez quelles données vous autorisez OsmAnd à partager.</string>
     <string name="settings_privacy_and_security">Vie privée et Sécurité</string>
-    <string name="settings_privacy_and_security_desc">Sélectionnez les données que vous souhaitez partager</string>
+    <string name="settings_privacy_and_security_desc">Sélectionner les données que vous souhaitez partager</string>
     <string name="shared_string_no_thank_you">Non, merci</string>
     <string name="shared_string_allow">Autoriser</string>
     <string name="profile_name_hint">Nom du profil</string>
@@ -2815,7 +2815,7 @@
     <string name="edit_profile_setup_map_subtitle">Sélectionnez les options de la carte pour ce profil</string>
     <string name="edit_profile_screen_options_subtitle">Sélectionnez les options d’affichage écran pour ce profil</string>
     <string name="edit_profile_nav_settings_subtitle">Sélectionnez les paramètres de guidage pour ce profil</string>
-    <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de correspondances</string>
+    <string name="routing_attr_max_num_changes_description">Indiquer le nombre maximum de correspondances</string>
     <string name="turn_screen_on_router">Allumer lors des changements de direction</string>
     <string name="turn_screen_on_time_descr">Définir la durée pendant laquelle l\'écran restera allumé.</string>
     <string name="turn_screen_on_sensor_descr">Balayer l\'écran de la main allumera l\'écran.</string>
@@ -3091,7 +3091,7 @@
     <string name="monitoring_prefs_descr">Navigation, précision d\'enregistrement</string>
     <string name="multimedia_notes_prefs_descr">Taille de l\'image, qualité audio et vidéo</string>
     <string name="osm_editing_prefs_descr">Connexion, mot de passe, édition hors ligne</string>
-    <string name="accessibility_prefs_descr">Choisissez l\'icône, la couleur et le nom</string>
+    <string name="accessibility_prefs_descr">Choisir l\'icône, la couleur et le nom</string>
     <string name="live_monitoring_descr">Permet le partage de votre position grâce à l\'enregistrement du trajet.</string>
     <string name="live_monitoring">Suivi en ligne</string>
     <string name="save_track_logging_accuracy">Précision de l\'enregistrement</string>
@@ -3360,7 +3360,7 @@
     <string name="mercator_projection">Projection de Mercator</string>
     <string name="storage_format">Format de stockage</string>
     <string name="map_source_zoom_levels">Définissez les niveaux de zoom minimum et maximum pour afficher ou charger la carte en ligne.</string>
-    <string name="tiles_storage_descr">Choisissez comment stocker les tuiles téléchargées.</string>
+    <string name="tiles_storage_descr">Choisir comment stocker les tuiles téléchargées.</string>
     <string name="default_screen_timeout">Délai par défaut de veille écran</string>
     <string name="export_import_quick_actions_with_profiles_promo">Vous pouvez exporter et importer les actions rapides via les profils d’application.</string>
     <string name="shared_string_delete_all_q">Tout supprimer \?</string>
@@ -3459,7 +3459,7 @@
     <string name="map_widget_monitoring">Enregistrer le trajet</string>
     <string name="marker_save_as_track">Enregistrer comme fichier de trace</string>
     <string name="follow_track">Suivre la trace</string>
-    <string name="follow_track_descr">Choisissez un fichier de trace à suivre</string>
+    <string name="follow_track_descr">Choisir un fichier de trace à suivre</string>
     <string name="select_another_track">Sélectionner une autre trace</string>
     <string name="navigate_to_track_descr">Naviguer de ma position vers la trace</string>
     <string name="nearest_point">Point le plus proche</string>
@@ -3616,7 +3616,7 @@
     <string name="online_routing_engines">Moteurs de routage en ligne</string>
     <string name="shared_string_folders">Dossiers</string>
     <string name="select_folder">Sélectionnez le dossier</string>
-    <string name="select_folder_descr">Sélectionnez un dossier ou créez-en un nouveau</string>
+    <string name="select_folder_descr">Sélectionner un dossier ou en créer un nouveau</string>
     <string name="shared_string_empty">Vide</string>
     <string name="announcement_time_approach">Approche</string>
     <string name="announcement_time_prepare">Préparation</string>
@@ -4223,7 +4223,7 @@
     <string name="release_4_2">• Refonte graphique des Widgets : nouveau \"Look &amp; Feel\", modification de l\'ordre d\'affichage à volonté \n \n • Itinéraires Rando / Vélo : appuyez sur le symbole de l\'itinéraire pour afficher plus d\'informations \n \n • Groupes de favoris : il est maintenant possible de modifier l\'apparence par défaut des nouveaux points du groupe \n \n • Corrigé : mise à jour automatique des tuiles en ligne</string>
     <string name="turn_on_public_transport_description">Activez pour afficher les itinéraires de transport en commun sur la carte.</string>
     <string name="widget_secondary_desc_part_of">Fait partie de l\'extension %1$s.</string>
-    <string name="av_notes_choose_action_widget_desc">Choisissez l\'action.</string>
+    <string name="av_notes_choose_action_widget_desc">Choisir l\'action.</string>
     <string name="coordinates_widget_secondary_desc">Vous pouvez modifier le format des coordonnées en %1$s - %2$s - %3$s.</string>
     <string name="parking_widget_desc">Indique la distance séparant le centre de l\'écran de votre lieu de stationnement.</string>
     <string name="time_to_go_desc">Temps (en minutes ou en heures) nécessaire pour atteindre votre destination.</string>
@@ -4933,7 +4933,7 @@
     <string name="help_article_start_with_main_menu_name">Menu principal</string>
     <string name="help_article_troubleshooting_crash_logs_name">Journaux des plantages</string>
     <string name="user_guide">Guide utilisateur</string>
-    <string name="open_issue_on_github_descr">Posez des questions, proposez des fonctionnalités</string>
+    <string name="open_issue_on_github_descr">Poser des questions, proposer des fonctionnalités</string>
     <string name="open_issue_on_github">Ouvrir une issue sur GitHub</string>
     <string name="help_article_troubleshooting_general_name">Général</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Enregistrement de trace</string>
@@ -5520,7 +5520,7 @@
     <string name="average_temperature">Température moyenne</string>
     <string name="preview_next_turn">Aperçu de la prochaine bifurcation</string>
     <string name="obd_engine_oil_temperature">Température de l\'huile moteur</string>
-    <string name="av_audio_sample_rate_descr">Sélectionnez le taux d\'échantillonnage audio.</string>
+    <string name="av_audio_sample_rate_descr">Sélectionner le taux d\'échantillonnage audio.</string>
     <string name="connect_new_scanner">Connecter un nouveau scanner</string>
     <string name="vehicle_metrics_recording_description">Sélectionnez les informations à enregistrer dans le fichier GPX.</string>
     <string name="av_audio_sample_rate">Taux d’échantillonnage audio</string>
