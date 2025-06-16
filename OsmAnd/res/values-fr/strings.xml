@@ -4375,7 +4375,7 @@
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Orientation manuelle</string>
     <string name="shared_string_large">Grand</string>
-    <string name="distance_by_tap_use_description">Appuyez sur la carte pour afficher la distance entre votre position actuelle et le point sélectionné..\nAppuyez avec deux doigts sur la carte pour afficher la distance entre les deux points sélectionnés.</string>
+    <string name="distance_by_tap_use_description">Un appui sur la carte affiche la distance entre l\'emplacement d\'appui et votre position.\nUn appui simultané avec deux doigts affiche la distance entre les deux points d\'appui.</string>
     <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
     <string name="go_to_marker_location">Aller au marqueur</string>
     <string name="shared_string_switch_mode">Basculer de mode</string>
