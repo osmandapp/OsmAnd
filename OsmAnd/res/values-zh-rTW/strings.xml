@@ -5754,4 +5754,9 @@
     <string name="set_start_point">設定起始點</string>
     <string name="shared_string_switch">開關</string>
     <string name="ski_route_switch_style_description">使用冬季與滑雪地圖風格探索滑雪場、纜車等。</string>
+    <string name="osm_live_payment_renews_3_years">每三年續訂</string>
+    <string name="osm_live_payment_3_years_title">每三年</string>
+    <string name="three_years_subscription">三年訂閱</string>
+    <string name="release_5_1">• 新增網頁與跨平台購買支援\n\n • 將溫度單位移至一般設定，方便存取\n\n • 新增 BLE 感應器的電池電量顯示\n\n • 導航中的點選擇有了全新且更直覺的使用者介面\n\n • 使用新的輪廓改善小工具的可見度\n\n • 新增上坡/下坡分析程式\n\n • 擴充維基百科與維基導遊整合，提供更多興趣點。</string>
+    <string name="years_3">三年</string>
 </resources>
