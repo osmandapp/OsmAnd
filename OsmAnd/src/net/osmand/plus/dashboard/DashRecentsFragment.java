@@ -27,7 +27,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.search.history.SearchHistoryHelper;
-import net.osmand.plus.search.history.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
