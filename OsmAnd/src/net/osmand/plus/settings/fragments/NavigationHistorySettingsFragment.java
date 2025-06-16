@@ -108,22 +108,6 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 	}
 
 	@Override
-	protected void deleteSelectedItems() {
-		boolean clearBackupPoints = false;
-		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-		for (Object item : selectedItems) {
-			if (item instanceof SearchResult searchResult) {
-				historyHelper.remove(searchResult);
-			} else if (item instanceof TargetPoint) {
-				clearBackupPoints = true;
-			}
-		}
-		if (clearBackupPoints) {
-			app.getTargetPointsHelper().clearBackupPoints();
-		}
-	}
-
-	@Override
 	protected boolean isHistoryEnabled() {
 		return settings.NAVIGATION_HISTORY.get();
 	}

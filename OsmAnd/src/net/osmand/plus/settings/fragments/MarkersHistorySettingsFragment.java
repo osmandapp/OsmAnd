@@ -78,12 +78,6 @@ public class MarkersHistorySettingsFragment extends HistoryItemsFragment {
 		GpxUiHelper.saveAndShareGpx(app, requireActivity(), gpxFile);
 	}
 
-	@Override
-	protected void deleteSelectedItems() {
-		List<MapMarker> mapMarkers = getSelectedMarkers();
-		app.getMapMarkersHelper().removeMarkers(mapMarkers);
-	}
-
 	private List<MapMarker> getSelectedMarkers() {
 		List<MapMarker> mapMarkers = new ArrayList<>();
 		for (Object item : selectedItems) {

@@ -116,16 +116,6 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 	}
 
 	@Override
-	protected void deleteSelectedItems() {
-		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-		for (Object item : selectedItems) {
-			if (item instanceof SearchResult searchResult) {
-				helper.remove(searchResult);
-			}
-		}
-	}
-
-	@Override
 	protected boolean isHistoryEnabled() {
 		return settings.SEARCH_HISTORY.get();
 	}
