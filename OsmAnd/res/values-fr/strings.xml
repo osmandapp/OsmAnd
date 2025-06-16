@@ -3735,7 +3735,7 @@
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Abonnement annuel</string>
     <string name="monthly_subscription">Abonnement mensuel</string>
-    <string name="three_months_subscription">Abonnement pour 3 mois</string>
+    <string name="three_months_subscription">Abonnement de trois mois</string>
     <string name="next_billing_date">Prochaine facture le : %1$s</string>
     <string name="osmand_live_cancelled">Annulé</string>
     <string name="renew_subscription">Renouveler l’abonnement</string>
