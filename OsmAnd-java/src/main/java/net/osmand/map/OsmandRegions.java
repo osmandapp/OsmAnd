@@ -123,16 +123,16 @@ public class OsmandRegions {
 		File regionsTmpFile = new File(String.format("regions.%d.%d.ocbf", pid, threadId));
 
 		InputStream is = OsmandRegions.class.getResourceAsStream("regions.ocbf");
-		FileOutputStream fous = new FileOutputStream(regionsTmpFile);
 		if (is == null) {
 			throw new IOException("No regions.ocbf found in resources");
 		}
+		FileOutputStream fous = new FileOutputStream(regionsTmpFile);
 		Algorithms.streamCopy(is, fous);
 		fous.close();
 		is.close();
 
 		File regionsFinal = new File("regions.ocbf");
-		Files.move(regionsTmpFile.toPath(), regionsFinal.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		Files.move(regionsTmpFile.toPath(), regionsFinal.toPath(), StandardCopyOption.ATOMIC_MOVE);
 
 		return prepareFile(regionsFinal.getAbsolutePath());
 	}
