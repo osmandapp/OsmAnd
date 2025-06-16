@@ -35,7 +35,7 @@ class SearchHistoryExportType extends AbstractExportType {
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		boolean onlyPoints = false;
-		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper helper = app.getSearchHistoryHelper();
 		return helper.getHistoryEntries(HistorySource.SEARCH, onlyPoints);
 	}
 

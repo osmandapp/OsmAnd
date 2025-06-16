@@ -39,7 +39,7 @@ public class DeleteHistoryTask extends BaseLoadAsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 		boolean clearBackupPoints = false;
 		List<MapMarker> mapMarkers = new ArrayList<>();
 

@@ -47,7 +47,7 @@ public abstract class HistorySettingsItem extends CollectionSettingsItem<History
 	@Override
 	protected void init() {
 		super.init();
-		searchHistoryHelper = getInstance(app);
+		searchHistoryHelper = app.getSearchHistoryHelper();
 		existingItems = getHistoryEntries();
 	}
 

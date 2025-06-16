@@ -233,7 +233,7 @@ public class MapMarkersDbHelper {
 
 		PointDescription pointDescription = marker.getOriginalPointDescription();
 		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {
-			SearchHistoryHelper.getInstance(context)
+			context.getSearchHistoryHelper()
 					.addNewItemToHistory(marker.getLatitude(), marker.getLongitude(), pointDescription, HistorySource.SEARCH);
 		}
 

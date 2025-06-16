@@ -624,7 +624,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 				// History card
 				if (historyEnabled) {
-					SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+					SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 					List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, false);
 					if (!Algorithms.isEmpty(results)) {
 						HistoryCard historyCard = new HistoryCard(mapActivity, results);

@@ -90,7 +90,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			return;
 		}
 		OsmandApplication app = requireMyApplication();
-		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper helper = app.getSearchHistoryHelper();
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(true);
 
 		if (!app.getSettings().SEARCH_HISTORY.get() || Algorithms.isEmpty(historyEntries)) {
@@ -200,7 +200,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			String relativeGpxPath = pointDescription.getName();
 			File gpxFile = new File(tracksDir, relativeGpxPath);
 			if (gpxFile.isFile()) {
-				SearchHistoryHelper.getInstance(app).addNewItemToHistory(0, 0, pointDescription, HistorySource.SEARCH);
+				app.getSearchHistoryHelper().addNewItemToHistory(0, 0, pointDescription, HistorySource.SEARCH);
 				TrackMenuFragment.openTrack(activity, gpxFile, null);
 				closeDashboard();
 			}

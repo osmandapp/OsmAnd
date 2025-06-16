@@ -244,7 +244,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				TravelHelper travelHelper = app.getTravelHelper();
 				TravelGpx travelGpx = new TravelGpx(amenity);
 
-				SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+				SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 				historyHelper.addNewItemToHistory(searchResult.location.getLatitude(),
 						searchResult.location.getLongitude(), pair.first, HistorySource.SEARCH);
 
@@ -318,7 +318,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	private void showTrackMenuFragment(@NonNull GPXInfo gpxInfo) {
 		MapActivity mapActivity = requireMapActivity();
-		SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
+		app.getSearchHistoryHelper().addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
 		File file = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
 		String path = file.getAbsolutePath();
 		TrackMenuFragment.showInstance(mapActivity, path, false, false, null, QuickSearchDialogFragment.TAG, null);

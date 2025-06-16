@@ -90,7 +90,7 @@ class HistoryScreen(
     }
 
 	private fun prepareHistoryItems() {
-		val historyHelper = SearchHistoryHelper.getInstance(app)
+		val historyHelper = app.getSearchHistoryHelper()
 		val results = historyHelper.getHistoryEntries(true)
 		val resultsSize = results.size
 		searchItems = ArrayList()

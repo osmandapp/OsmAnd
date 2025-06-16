@@ -308,7 +308,7 @@ public class GpxSelectionHelper {
 		String relativePath = GpxUiHelper.getGpxFileRelativePath(app, gpx.getPath());
 		GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, relativePath);
 		if (gpxInfo != null) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
+			app.getSearchHistoryHelper().addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
 		}
 	}
 

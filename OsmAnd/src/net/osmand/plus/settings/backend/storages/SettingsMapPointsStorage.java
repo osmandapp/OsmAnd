@@ -95,7 +95,7 @@ abstract class SettingsMapPointsStorage {
 		ps.add(index, new LatLon(latitude, longitude));
 		ds.add(index, PointDescription.serializeToString(historyDescription));
 		if (historyDescription != null && !historyDescription.isSearchingAddress(settings.getContext())) {
-			SearchHistoryHelper.getInstance(settings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
+			settings.getContext().getSearchHistoryHelper().addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
 		}
 		return savePoints(ps, ds);
 	}
@@ -107,7 +107,7 @@ abstract class SettingsMapPointsStorage {
 		if (i != -1) {
 			ds.set(i, PointDescription.serializeToString(historyDescription));
 			if (historyDescription != null && !historyDescription.isSearchingAddress(settings.getContext())) {
-				SearchHistoryHelper.getInstance(settings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
+				settings.getContext().getSearchHistoryHelper().addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
 			}
 			return savePoints(ps, ds);
 		} else {

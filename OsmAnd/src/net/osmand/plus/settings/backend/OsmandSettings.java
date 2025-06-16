@@ -2487,7 +2487,7 @@ public class OsmandSettings {
 		edit.commit();
 		objectToShow = toShow;
 		if (addToHistory && pointDescription != null) {
-			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription, HistorySource.SEARCH);
+			ctx.getSearchHistoryHelper().addNewItemToHistory(latitude, longitude, pointDescription, HistorySource.SEARCH);
 		}
 	}
 
@@ -2815,7 +2815,7 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 		if (add && NAVIGATION_HISTORY.get()) {
 			if (p != null && !p.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, p, HistorySource.NAVIGATION);
+				ctx.getSearchHistoryHelper().addNewItemToHistory(latitude, longitude, p, HistorySource.NAVIGATION);
 			}
 		}
 		backupTargetPoints();

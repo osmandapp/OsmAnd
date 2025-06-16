@@ -2083,7 +2083,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				nFilter.setSavedFilterByName(filter.getFilterByName());
 			}
 			app.getPoiFilters().createPoiFilter(nFilter, true);
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory(nFilter, HistorySource.SEARCH);
+			app.getSearchHistoryHelper().addNewItemToHistory(nFilter, HistorySource.SEARCH);
 			reloadHistory();
 		}
 

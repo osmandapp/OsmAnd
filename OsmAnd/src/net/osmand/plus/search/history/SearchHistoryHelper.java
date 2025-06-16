@@ -32,8 +32,6 @@ public class SearchHistoryHelper {
 
 	private static final int HISTORY_LIMIT = 1500;
 
-	private static SearchHistoryHelper instance;
-
 	private final OsmandApplication app;
 	private final SearchHistoryDBHelper dbHelper;
 	private final Map<PointDescription, HistoryEntry> map = new ConcurrentHashMap<>();
@@ -45,13 +43,6 @@ public class SearchHistoryHelper {
 		this.dbHelper = new SearchHistoryDBHelper(app);
 	}
 
-	public static SearchHistoryHelper getInstance(@NonNull OsmandApplication app) {
-		if (instance == null) {
-			instance = new SearchHistoryHelper(app);
-		}
-		return instance;
-	}
-
 	public long getLastModifiedTime() {
 		return dbHelper.getLastModifiedTime();
 	}
@@ -60,7 +51,8 @@ public class SearchHistoryHelper {
 		dbHelper.setLastModifiedTime(lastModifiedTime);
 	}
 
-	public void addNewItemToHistory(double latitude, double longitude, PointDescription name, HistorySource source) {
+	public void addNewItemToHistory(double latitude, double longitude, PointDescription name,
+			HistorySource source) {
 		addNewItemToHistory(new HistoryEntry(latitude, longitude, name, source));
 	}
 
@@ -87,12 +79,14 @@ public class SearchHistoryHelper {
 	}
 
 	@NonNull
-	public List<HistoryEntry> getHistoryEntries(@Nullable HistorySource source, boolean onlyPoints) {
+	public List<HistoryEntry> getHistoryEntries(@Nullable HistorySource source,
+			boolean onlyPoints) {
 		return getHistoryEntries(source, onlyPoints, false);
 	}
 
 	@NonNull
-	public List<HistoryEntry> getHistoryEntries(@Nullable HistorySource source, boolean onlyPoints, boolean includeDeleted) {
+	public List<HistoryEntry> getHistoryEntries(@Nullable HistorySource source, boolean onlyPoints,
+			boolean includeDeleted) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
 		}
@@ -124,7 +118,8 @@ public class SearchHistoryHelper {
 	}
 
 	@NonNull
-	public List<SearchResult> getHistoryResults(@Nullable HistorySource source, boolean onlyPoints, boolean includeDeleted) {
+	public List<SearchResult> getHistoryResults(@Nullable HistorySource source, boolean onlyPoints,
+			boolean includeDeleted) {
 		List<SearchResult> searchResults = new ArrayList<>();
 
 		SearchPhrase phrase = SearchPhrase.emptyPhrase();

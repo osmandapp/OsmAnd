@@ -78,7 +78,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	private void setupSearchHistoryPref() {
 		Preference preference = findPreference(SEARCH_HISTORY);
 		if (settings.SEARCH_HISTORY.get()) {
-			SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+			SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 			int size = historyHelper.getHistoryResults(HistorySource.SEARCH, false, true).size();
 			String description = getString(R.string.shared_string_items);
 			preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, description, String.valueOf(size)));
@@ -180,7 +180,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 		mapMarkersHelper.removeMarkers(mapMarkersHelper.getMapMarkersHistory());
 
-		SearchHistoryHelper searchHistoryHelper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper searchHistoryHelper = app.getSearchHistoryHelper();
 		searchHistoryHelper.removeAll();
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
@@ -190,7 +190,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	}
 
 	private static int calculateNavigationItemsCount(@NonNull OsmandApplication app) {
-		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 		int count = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, true).size();
 		if (app.getTargetPointsHelper().isBackupPointsAvailable()) {
 			// Take "Previous Route" item into account during calculations

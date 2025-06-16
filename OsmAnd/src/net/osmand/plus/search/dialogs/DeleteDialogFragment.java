@@ -35,7 +35,7 @@ public class DeleteDialogFragment extends DialogFragment {
 				QuickSearchDialogFragment fragment = (QuickSearchDialogFragment) parentFragment;
 
 				OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-				SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+				SearchHistoryHelper helper = app.getSearchHistoryHelper();
 				for (QuickSearchListItem searchListItem : selectedItems) {
 					helper.remove(searchListItem.getSearchResult());
 				}

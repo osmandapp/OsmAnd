@@ -82,9 +82,9 @@ public class SearchUtils {
 
 	public static void selectSearchResult(@NonNull OsmandApplication app, @NonNull SearchResult result) {
 		if (result.object instanceof AbstractPoiType) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((AbstractPoiType) result.object, SEARCH);
+			app.getSearchHistoryHelper().addNewItemToHistory((AbstractPoiType) result.object, SEARCH);
 		} else if (result.object instanceof PoiUIFilter) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) result.object, SEARCH);
+			app.getSearchHistoryHelper().addNewItemToHistory((PoiUIFilter) result.object, SEARCH);
 		}
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 		if (result.object instanceof PoiType && ((PoiType) result.object).isAdditional()) {

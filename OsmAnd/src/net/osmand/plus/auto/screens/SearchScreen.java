@@ -275,7 +275,7 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 				}
 
 				// History
-				SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+				SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 				List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.SEARCH, true, false);
 				if (!Algorithms.isEmpty(results)) {
 					recentResults.addAll(results);
