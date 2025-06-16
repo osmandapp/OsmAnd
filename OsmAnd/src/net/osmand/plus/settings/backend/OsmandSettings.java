@@ -74,7 +74,7 @@ import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.OsmandBackupAgent;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
@@ -2487,7 +2487,7 @@ public class OsmandSettings {
 		edit.commit();
 		objectToShow = toShow;
 		if (addToHistory && pointDescription != null) {
-			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription, HistorySource.SEARCH);
+			ctx.getSearchHistoryHelper().addNewItemToHistory(latitude, longitude, pointDescription, HistorySource.SEARCH);
 		}
 	}
 
@@ -2815,7 +2815,7 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 		if (add && NAVIGATION_HISTORY.get()) {
 			if (p != null && !p.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, p, HistorySource.NAVIGATION);
+				ctx.getSearchHistoryHelper().addNewItemToHistory(latitude, longitude, p, HistorySource.NAVIGATION);
 			}
 		}
 		backupTargetPoints();

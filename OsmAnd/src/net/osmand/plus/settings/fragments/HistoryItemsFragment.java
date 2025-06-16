@@ -4,8 +4,10 @@ import static net.osmand.plus.settings.enums.HistorySource.NAVIGATION;
 import static net.osmand.plus.settings.enums.HistorySource.SEARCH;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
+import android.app.ProgressDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,7 @@ import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmD
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryListener;
 import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -50,7 +53,7 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener,
-		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener {
+		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener, DeleteHistoryListener {
 
 	protected final List<Object> items = new ArrayList<>();
 	protected final Set<Object> selectedItems = new HashSet<>();
@@ -107,8 +110,6 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected abstract void shareItems();
 
 	protected abstract void updateHistoryItems();
-
-	protected abstract void deleteSelectedItems();
 
 	protected abstract boolean isHistoryEnabled();
 
@@ -264,7 +265,11 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 	@Override
 	public void onDeletionConfirmed() {
-		deleteSelectedItems();
+		DeleteHistoryTask deleteHistoryTask = new DeleteHistoryTask(requireActivity(), selectedItems, this);
+		deleteHistoryTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public void onDeletionComplete() {
 		updateHistoryItems();
 		updateButtonsState();
 		adapter.notifyDataSetChanged();

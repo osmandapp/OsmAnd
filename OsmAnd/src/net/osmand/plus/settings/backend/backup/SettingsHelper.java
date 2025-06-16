@@ -11,7 +11,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -28,7 +28,6 @@ import net.osmand.plus.settings.backend.backup.items.*;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

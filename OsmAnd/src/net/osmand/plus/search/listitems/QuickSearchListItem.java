@@ -22,7 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;

@@ -15,7 +15,7 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.util.Algorithms;
 
 import java.io.File;

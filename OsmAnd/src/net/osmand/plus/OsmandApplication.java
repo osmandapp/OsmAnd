@@ -92,6 +92,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -184,6 +185,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
 	QuickSearchHelper searchUICore;
+	SearchHistoryHelper searchHistoryHelper;
 	TravelHelper travelHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
@@ -589,6 +591,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public QuickSearchHelper getSearchUICore() {
 		return searchUICore;
+	}
+
+	public SearchHistoryHelper getSearchHistoryHelper() {
+		return searchHistoryHelper;
 	}
 
 	public TravelHelper getTravelHelper() {

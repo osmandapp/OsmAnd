@@ -95,6 +95,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	private final SelectedGpxFile currentTrack;
 
 	private int currentTrackIndex = 1;
+	private boolean shouldRecordSimulation = false;
 	private boolean shouldAutomaticallyRecord = true;
 	private LatLon lastPoint;
 	private float distance;
@@ -541,7 +542,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
 		boolean record = false;
-		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
+		if (location != null && (SimulationProvider.isNotSimulatedLocation(location) || isShouldRecordSimulation())
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
@@ -912,5 +913,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	@Override
 	public void routeWasFinished() {
 		shouldAutomaticallyRecord = true;
+	}
+
+	public boolean isShouldRecordSimulation() {
+		return shouldRecordSimulation;
+	}
+
+	public void setShouldRecordSimulation(boolean shouldRecordSimulation) {
+		this.shouldRecordSimulation = shouldRecordSimulation;
 	}
 }

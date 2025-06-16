@@ -36,7 +36,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.*;
@@ -186,8 +186,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				} else {
 					menuController = new FavouritePointMenuController(mapActivity, pointDescription, (FavouritePoint) object);
 				}
-			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
-				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
+			} else if (object instanceof HistoryEntry) {
+				menuController = new HistoryMenuController(mapActivity, pointDescription, (HistoryEntry) object);
 			} else if (object instanceof TargetPoint) {
 				menuController = new TargetPointMenuController(mapActivity, pointDescription, (TargetPoint) object);
 			} else if (object instanceof Recording) {

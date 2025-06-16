@@ -51,7 +51,7 @@ import net.osmand.plus.auto.screens.RequestPermissionScreen.LocationPermissionCh
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routing.IRouteInformationListener;

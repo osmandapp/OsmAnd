@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="regions">অঞ্চল</string>
     <string name="region_maps">অঞ্চলভিত্তিক মানচিত্র</string>
@@ -27,4 +27,7 @@
     <string name="shared_string_navigation">দিক নির্ণয়</string>
     <string name="m_s">মি/সে</string>
     <string name="nm">নটিকাল মাইল</string>
+    <string name="three_years_subscription">তিন বছরের জন্য চাঁদা</string>
+    <string name="osmand_pro_tagline">সবরকমের বেশিষ্ট নিন</string>
+    <string name="osm_live_subscriptions">চাঁদাসমূহ</string>
 </resources>
