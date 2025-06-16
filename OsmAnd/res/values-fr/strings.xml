@@ -2620,7 +2620,7 @@
     <string name="points_of_interests">Points d\'intérêt (POI)</string>
     <string name="waiting_for_route_calculation">Calcul de l\'itinéraire en cours…</string>
     <string name="app_mode_public_transport">Transport en commun</string>
-    <string name="avoid_roads_descr">Sélectionnez une route à éviter pendant la navigation, soit sur la carte, soit depuis la liste ci-dessous :</string>
+    <string name="avoid_roads_descr">Sélectionnez une route à éviter pendant le guidage, soit sur la carte, soit depuis la liste ci-dessous :</string>
     <string name="show_along_the_route">Afficher sur l\'itinéraire</string>
     <string name="simulate_navigation">Simuler le guidage</string>
     <string name="choose_track_file_to_follow">Sélectionner un fichier de trace à suivre</string>
