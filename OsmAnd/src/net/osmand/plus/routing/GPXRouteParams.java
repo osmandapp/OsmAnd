@@ -34,7 +34,6 @@ public class GPXRouteParams {
 		RECALCULATE_FROM_CLOSEST_ROUTE_POINT // faster but less exact
 	}
 	public static final ReverseStrategy DEFAULT_REVERSE_STRATEGY = ReverseStrategy.RECALCULATE_ALL_ROUTE_POINTS;
-	public ReverseStrategy reverseStrategy = DEFAULT_REVERSE_STRATEGY;
 
 	protected GpxFile gpxFile;
 	protected List<LocationPoint> wpt;
@@ -44,6 +43,7 @@ public class GPXRouteParams {
 	protected List<Location> segmentEndpoints = new ArrayList<>();
 	protected List<WptPt> routePoints = new ArrayList<>();
 	protected boolean reverse;
+	protected ReverseStrategy reverseStrategy = DEFAULT_REVERSE_STRATEGY;
 	protected boolean passWholeRoute;
 	protected boolean calculateOsmAndRoute;
 	protected boolean connectPointsStraightly;
@@ -151,7 +151,6 @@ public class GPXRouteParams {
 	}
 
 	public static class GPXRouteParamsBuilder {
-		public ReverseStrategy reverseStrategy = DEFAULT_REVERSE_STRATEGY;
 		private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(GPXRouteParamsBuilder.class);
 
 		boolean calculateOsmAndRoute;
@@ -159,6 +158,7 @@ public class GPXRouteParams {
 		private final GpxFile file;
 		private final boolean leftSide;
 		private boolean reverse;
+		private ReverseStrategy reverseStrategy = DEFAULT_REVERSE_STRATEGY;
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
 		private boolean calculatedRouteTimeSpeed;
