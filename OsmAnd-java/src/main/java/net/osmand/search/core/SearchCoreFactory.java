@@ -1353,10 +1353,7 @@ public class SearchCoreFactory {
 						if (object.isRouteTrack()) {
 							res.localeName = object.getAdditionalInfo(Amenity.ROUTE_ID);
 						} else if (object.isRouteArticle()) {
-							List<String> names = object.getOtherNames();
-							if (!Algorithms.isEmpty(names)) {
-								res.localeName = names.get(0);
-							}
+							res.localeName = getMapObjectName(object, phrase.getSettings());
 						}
 					}
 					if (Algorithms.isEmpty(res.localeName)) {
@@ -1995,6 +1992,18 @@ public class SearchCoreFactory {
 		}
 
 		return result;
+	}
+
+	private static String getMapObjectName(MapObject mapObject, SearchSettings settings) {
+		return getMapObjectName(mapObject, settings.getLang(), settings.getAppLang(), settings.isTransliterate());
+	}
+
+	private static String getMapObjectName(MapObject mapObject, String mapLang, String appLang,	boolean transliterate) {
+		String name = mapObject.getName(mapLang, transliterate);
+		if (Algorithms.isEmpty(name) && !Algorithms.stringsEqual(appLang, mapLang)) {
+			name = mapObject.getName(appLang, transliterate);
+		}
+		return name;
 	}
 
 	private static class TopIndexMatch {
