@@ -5824,4 +5824,27 @@
     <string name="suggest_activate_map_msg">تم إلغاء تنشيط خريطة %1$s، \nقم بتنشيطها لعرض هذه المنطقة.</string>
     <string name="show_symbols_debug_info">إظهار معلومات تصحيح أخطاء الرموز</string>
     <string name="unit_of_temperature_description">سيتم تطبيق الوحدات المحددة على جميع البيانات المتعلقة بدرجة الحرارة في الملف الشخصي الحالي.</string>
+    <string name="shared_string_split_by">تقسيم على</string>
+    <string name="uphill_downhill_split">الصعود / الهبوط</string>
+    <string name="shared_string_flat">مسطح</string>
+    <string name="read_on">اقرأ على %1$s</string>
+    <string name="release_5_1">• دعم مضاف للمشتريات عبر النت والمنصات المتعددة\n\n• نقل وحدات درجة الحرارة إلى الاعدادات العامة لتيسير الوصول إليها\n\n• اظافة مؤشر مستوى البطاريات لمجسات BLE\n\n• واجهة مستخدم جديدة وأكثر سهولة في الاستخدام لاختيار النقاط في التنقل\n\n• تم تحسين رؤية الأدوات مع مخطط تفصيلي جديد\n\n• تمت إضافة محلل الصعود/الهبوط\n\n• توسيع نطاق التكامل بين ويكيبيديا وويكيفواياج للحصول على المزيد من نقاط الاهتمام.</string>
+    <string name="set_parking_position">تحديد موقف السيارة</string>
+    <string name="osm_live_payment_renews_3_years">يتجدد كل ثلاث سنوات</string>
+    <string name="years_3">ثلاث سنوات</string>
+    <string name="three_years_subscription">الاشتراك لمدة ثلاث سنوات</string>
+    <string name="osm_live_payment_3_years_title">كل ثلاث سنوات</string>
+    <string name="hmd_promo_years">عرض HMD ترويجي لـ %1$s سنوات</string>
+    <string name="deleting">جار الحذف…</string>
+    <string name="hmd_promo_description_years">حرية الوصول إلى المزايا بما في ذلك تحميل الخرائط غير المحدودة، والإغاثة ثلاثية الأبعاد وغيرها، لمدة %1$s سنوات</string>
+    <string name="deleting_history">حذف السجل…</string>
+    <string name="shared_string_switch">تبديل</string>
+    <string name="ski_route_switch_style_description">استكشف منحدرات التزلج، المصعد و غيرها مع نمط خريطة الشتاء و التزلج.</string>
+    <string name="battery">بطارية</string>
+    <string name="battery_level">مستوى البطارية</string>
+    <string name="set_work">تحديد مكان العمل</string>
+    <string name="set_home">تحديد مكان البيت</string>
+    <string name="sensor_data">بيانات المستشعر</string>
+    <string name="set_start_point">تحديد نقطة الانطلاق</string>
+    <string name="set_intermediate_point">تحديد النقطة الوسيطة</string>
 </resources>
