@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
@@ -77,11 +76,6 @@ public class MarkersHistorySettingsFragment extends HistoryItemsFragment {
 		ItineraryDataHelper dataHelper = app.getMapMarkersHelper().getDataHelper();
 		GpxFile gpxFile = dataHelper.generateGpx(mapMarkers, true);
 		GpxUiHelper.saveAndShareGpx(app, requireActivity(), gpxFile);
-	}
-
-	@Override
-	protected DeleteHistoryType getDeleteHistoryType() {
-		return DeleteHistoryType.MARKER;
 	}
 
 	private List<MapMarker> getSelectedMarkers() {

@@ -31,6 +31,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SearchHistoryHelper {
 	private static final Log log = PlatformUtil.getLog(SearchHistoryHelper.class);
@@ -44,7 +45,7 @@ public class SearchHistoryHelper {
 
 	private final OsmandApplication app;
 	private List<HistoryEntry> loadedEntries;
-	private final Map<PointDescription, HistoryEntry> mp = new HashMap<>();
+	private final Map<PointDescription, HistoryEntry> mp = new ConcurrentHashMap<>();
 
 	public SearchHistoryHelper(@NonNull OsmandApplication app) {
 		this.app = app;

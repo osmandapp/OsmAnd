@@ -37,7 +37,6 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryListener;
-import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryType;
 import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -72,8 +71,6 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	private Location location;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-
-	private ProgressDialog progressDialog;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,8 +110,6 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected abstract void shareItems();
 
 	protected abstract void updateHistoryItems();
-
-	protected abstract DeleteHistoryType getDeleteHistoryType();
 
 	protected abstract boolean isHistoryEnabled();
 
@@ -270,8 +265,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 	@Override
 	public void onDeletionConfirmed() {
-		DeleteHistoryTask deleteHistoryTask = new DeleteHistoryTask(requireActivity(), getDeleteHistoryType(), selectedItems, this);
-		deleteHistoryTask.setShouldShowProgress(true);
+		DeleteHistoryTask deleteHistoryTask = new DeleteHistoryTask(requireActivity(), selectedItems, this);
 		deleteHistoryTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

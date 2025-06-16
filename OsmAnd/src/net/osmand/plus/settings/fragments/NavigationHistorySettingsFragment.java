@@ -22,7 +22,6 @@ import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
 import net.osmand.plus.settings.enums.HistorySource;
-import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.search.core.SearchResult;
 
@@ -106,11 +105,6 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 		}
 		ShareHistoryAsyncTask exportTask = new ShareHistoryAsyncTask(app, historyEntries, null);
 		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	@Override
-	protected DeleteHistoryType getDeleteHistoryType() {
-		return DeleteHistoryType.NAVIGATION;
 	}
 
 	@Override
