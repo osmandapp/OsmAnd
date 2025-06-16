@@ -34,6 +34,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
@@ -118,20 +120,19 @@ public class OsmandRegions {
 	public BinaryMapIndexReader prepareFileAtomic() throws IOException {
 		long pid = ProcessHandle.current().pid();
 		long threadId = Thread.currentThread().getId();
-		File regionsUnique = new File(String.format("regions.%d.%d.ocbf", pid, threadId));
+		File regionsTmpFile = new File(String.format("regions.%d.%d.ocbf", pid, threadId));
 
 		InputStream is = OsmandRegions.class.getResourceAsStream("regions.ocbf");
-		FileOutputStream fous = new FileOutputStream(regionsUnique);
+		FileOutputStream fous = new FileOutputStream(regionsTmpFile);
 		if (is == null) {
 			throw new IOException("No regions.ocbf found in resources");
 		}
 		Algorithms.streamCopy(is, fous);
 		fous.close();
+		is.close();
 
 		File regionsFinal = new File("regions.ocbf");
-		if (!regionsUnique.renameTo(regionsFinal)) {
-			throw new IOException(String.format("Unable to rename %s to %s", regionsUnique, regionsFinal));
-		}
+		Files.move(regionsTmpFile.toPath(), regionsFinal.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
 		return prepareFile(regionsFinal.getAbsolutePath());
 	}
