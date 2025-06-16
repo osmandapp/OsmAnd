@@ -63,8 +63,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.LocaleHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.SearchHistoryHelper;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -2083,7 +2083,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				nFilter.setSavedFilterByName(filter.getFilterByName());
 			}
 			app.getPoiFilters().createPoiFilter(nFilter, true);
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory(nFilter, HistorySource.SEARCH);
+			app.getSearchHistoryHelper().addNewItemToHistory(nFilter, HistorySource.SEARCH);
 			reloadHistory();
 		}
 

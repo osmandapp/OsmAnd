@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.search.core.SearchResult;
@@ -39,7 +39,7 @@ public class DeleteHistoryTask extends BaseLoadAsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 		boolean clearBackupPoints = false;
 		List<MapMarker> mapMarkers = new ArrayList<>();
 

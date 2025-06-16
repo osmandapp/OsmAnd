@@ -54,8 +54,6 @@ import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingPara
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.views.layers.MapSelectionResult;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -70,7 +68,7 @@ import net.osmand.plus.avoidroads.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -626,7 +624,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 				// History card
 				if (historyEnabled) {
-					SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+					SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 					List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, false);
 					if (!Algorithms.isEmpty(results)) {
 						HistoryCard historyCard = new HistoryCard(mapActivity, results);

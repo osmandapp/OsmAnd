@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.SearchHistoryHelper;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
@@ -45,7 +45,7 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 	@Override
 	protected void updateHistoryItems() {
 		clearItems();
-		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 		List<SearchResult> searchResults = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, true);
 		sortSearchResults(searchResults);
 

@@ -1,6 +1,5 @@
 package net.osmand.plus.search;
 
-import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 
 import android.view.View;
@@ -29,8 +28,8 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.SearchHistoryHelper;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.poi.NominatimPoiFilter;
@@ -41,7 +40,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -54,7 +52,6 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -427,7 +424,7 @@ public class QuickSearchHelper implements ResourceListener {
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			int priority = 0;
-			SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+			SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 			for (HistoryEntry entry : historyHelper.getHistoryEntries(false)) {
 				SearchResult result = createSearchResult(app, entry, phrase);
 				result.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (priority++);
