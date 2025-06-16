@@ -5627,7 +5627,7 @@
     <string name="deactivated_map">Mapa desactivado</string>
     <string name="suggest_activate_map_msg">Se desactivó %1$s mapa(s),\nactivarlo para ver este área.</string>
     <string name="hmd_promo_years">Oferta de HMD por %1$s años</string>
-    <string name="shared_string_split_by">Dividido por</string>
+    <string name="shared_string_split_by">Dividir por</string>
     <string name="shared_string_flat">Plano (llanura)</string>
     <string name="uphill_downhill_split">Ascenso / Descenso</string>
     <string name="hmd_promo_description_years">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s años</string>

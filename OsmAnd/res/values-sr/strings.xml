@@ -3784,7 +3784,7 @@
     <string name="renew_subscription">Обнови чланарину</string>
     <string name="annual_subscription">Годишња чланарина</string>
     <string name="monthly_subscription">Месечна чланарина</string>
-    <string name="three_months_subscription">Тромесечна чланарина</string>
+    <string name="three_months_subscription">Тромесечна претплата</string>
     <string name="next_billing_date">Следећи датум наплате: %1$s</string>
     <string name="osmand_live_cancelled">Отказано</string>
     <string name="in_grace_period">У времену мировања</string>
@@ -5761,4 +5761,9 @@
     <string name="set_intermediate_point">Постави међуодредишну тачку</string>
     <string name="ski_route_switch_style_description">Истражите скијашке стазе, жичаре и још много тога помоћу мапе у стилу Зиме и Скијања.</string>
     <string name="shared_string_switch">Прекидач</string>
+    <string name="years_3">Три године</string>
+    <string name="three_years_subscription">Трогодишња претплата</string>
+    <string name="osm_live_payment_renews_3_years">Обнавља се сваке три године</string>
+    <string name="osm_live_payment_3_years_title">Сваке три године</string>
+    <string name="release_5_1">• Додата је подршка за куповину на вебу и преко платформи\n\n• Јединице за температуру су премештене у Општа подешавања ради лакшег приступа\n\n• Додат је индикатор нивоа батерије за BLE сензоре\n\n• Нови, интуитивнији КИ за избор тачака у Навигацији\n\n• Побољшана видљивост виџета са новим обрисом\n\n• Додат је анализатор Успона/Спуста\n\n• Проширена интеграција са Википедијом и Викивојажем за више ТОИ.</string>
 </resources>
