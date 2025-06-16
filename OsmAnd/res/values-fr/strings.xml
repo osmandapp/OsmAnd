@@ -8,8 +8,8 @@
     <string name="routing_attr_motor_type_electric_name">Électrique</string>
     <string name="routing_attr_motor_type_gas_name">GNV</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybride</string>
-    <string name="offline_edition">Modifications hors-ligne</string>
-    <string name="offline_edition_descr">Si le mode d\'édition hors-ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>
+    <string name="offline_edition">Modifications hors ligne</string>
+    <string name="offline_edition_descr">Si le mode d\'édition hors ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>
     <string name="update_poi_does_not_change_indexes">Les modifications de POI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier de votre appareil.</string>
     <string name="local_openstreetmap_uploading">Envoi en cours…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/Notes ont été envoyés</string>
@@ -43,7 +43,7 @@
     <string name="index_name_wiki">POI Wikipédia mondiaux</string>
     <string name="index_name_voice">Voix enregistrée (guidage limité)</string>
     <string name="index_name_tts_voice">Voix de synthèse (TTS, recommandée)</string>
-    <string name="amenity_type_osmwiki">Wikipédia (hors-ligne)</string>
+    <string name="amenity_type_osmwiki">Wikipédia (hors ligne)</string>
     <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
     <string name="fav_export_confirmation">Un fichier de favoris existe déjà. Voulez-vous l\'écraser ?</string>
     <string name="profile_settings">Paramètres pour le profil</string>
@@ -52,7 +52,7 @@
     <string name="routing_settings">Navigation</string>
     <string name="routing_settings_descr">Paramétrer les options de guidage.</string>
     <string name="global_settings">Paramètres globaux</string>
-    <string name="index_settings_descr">Télécharger ou mettre à jour les données pour l\'utilisation hors-ligne.</string>
+    <string name="index_settings_descr">Télécharger ou mettre à jour les données pour l\'utilisation hors ligne.</string>
     <string name="general_settings">Général</string>
     <string name="general_settings_descr">Configurer l\'affichage et les paramètres généraux de l\'application.</string>
     <string name="global_app_settings">Paramètres globaux de l\'application</string>
@@ -61,7 +61,7 @@
     <string name="user_password">Mot de passe</string>
     <string name="osmand_service">Mode arrière-plan</string>
     <string name="osmand_service_descr">OsmAnd s\'exécute en arrière-plan, écran éteint.</string>
-    <string name="switch_to_raster_map_to_see">Téléchargez une carte vectorielle hors-ligne pour ce lieu (depuis le menu principal « Télécharger les cartes ») ou utilisez l\'extension « Cartes en ligne ».</string>
+    <string name="switch_to_raster_map_to_see">Téléchargez une carte vectorielle hors ligne pour ce lieu (depuis le menu principal « Télécharger les cartes ») ou utilisez l\'extension « Cartes en ligne ».</string>
     <string name="download_files_not_enough_space">Il n\'y a pas suffisamment d\'espace pour télécharger %1$s Mo (disponible : %2$s).</string>
     <string name="download_files_question_space">Télécharger {0} fichier(s) \?
 \n{1} Mo (sur {2} Mo) seront utilisés.</string>
@@ -88,7 +88,7 @@
     <string name="file_can_not_be_renamed">Impossible de renommer le fichier.</string>
     <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
     <string name="poi_query_by_name_matches_categories">Plusieurs catégories de POI ont été trouvées.</string>
-    <string name="data_to_search_poi_not_available">Téléchargez des données hors-ligne pour rechercher des POI.</string>
+    <string name="data_to_search_poi_not_available">Téléchargez des données hors ligne pour rechercher des POI.</string>
     <string name="poi_filter_by_name">Rechercher par nom</string>
     <string name="old_poi_file_should_be_deleted">Le fichier de données POI « %1$s » est redondant et peut être supprimé.</string>
     <string name="update_poi_file_not_found">Fichier local de gestion des modifications de POI introuvable, et ne peut être créé.</string>
@@ -121,7 +121,7 @@
     <string name="shared_string_others">Autres</string>
     <string name="shared_string_no_thanks">Pas nécessaire</string>
     <string name="basemap_missing">Téléchargez la carte mondiale de base qui couvre le monde entier avec un niveau de zoom large.</string>
-    <string name="vector_data_missing">Téléchargez des données hors-ligne pour utiliser les cartes sans connexion.</string>
+    <string name="vector_data_missing">Téléchargez des données hors ligne pour utiliser les cartes sans connexion.</string>
     <string name="local_index_installed">Version locale</string>
     <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s).</string>
     <string name="local_index_items_deleted">Élément(s) %1$d sur %2$d supprimé(s).</string>
@@ -157,7 +157,7 @@
     <string name="gpx_option_reverse_route">Inverser le sens de la trace</string>
     <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
     <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
-    <string name="switch_to_vector_map_to_see">Carte vectorielle hors-ligne disponible pour cette position. \n\t \n\tPour activer : « Menu → Configurer la carte → Source de carte… → Cartes vectorielles hors-ligne ».</string>
+    <string name="switch_to_vector_map_to_see">Carte vectorielle hors ligne disponible pour cette position. \n\t \n\tPour activer : « Menu → Configurer la carte → Source de carte… → Cartes vectorielles hors ligne ».</string>
     <string name="choose_audio_stream">Sortie audio pour le guidage</string>
     <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal.</string>
     <string name="voice_stream_voice_call">Sortie audio appel téléphonique (interrompt le Bluetooth véhicule)</string>
@@ -183,7 +183,7 @@
     <string name="level_to_switch_vector_raster_descr">Utiliser les cartes matricielles (raster) à partir de ce niveau de zoom.</string>
     <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel minimal</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en ligne</u> classification des cartes avec images.</string>
-    <string name="error_doing_search">Impossible d\'effectuer la recherche hors-ligne.</string>
+    <string name="error_doing_search">Impossible d\'effectuer la recherche hors ligne.</string>
     <string name="search_osm_offline">Rechercher par geo location</string>
     <string name="system_locale">Système</string>
     <string name="preferred_locale_descr">Langue d\'affichage de l\'application (utilisée après redémarrage d\'OsmAnd).</string>
@@ -246,12 +246,10 @@
     <string name="reading_cached_tiles">Lecture des tuiles en cache…</string>
     <string name="version_index_is_big_for_memory">L\'index \'\'{0}\'\' est trop gros pour la mémoire</string>
     <string name="version_index_is_not_supported">La version de l\'index \'\'{0}\'\' n\'\'est pas supporté</string>
-    <string name="osmand_routing_experimental">Le guidage hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance supérieure à 20 km.
-\n
-\nAu-delà le guidage bascule automatiquement sur le service en ligne CloudMade.</string>
+    <string name="osmand_routing_experimental">Le guidage hors ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance supérieure à 20 km. \n \nAu-delà le guidage bascule automatiquement sur le service en ligne CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Le dossier spécifié est introuvable.</string>
     <string name="application_dir">Dossier de stockage</string>
-    <string name="osmand_net_previously_installed">Toutes les anciennes données hors-ligne peuvent être utilisées par la nouvelle application mais les favoris doivent être exportés de l\'ancienne application puis réimportés dans la nouvelle.</string>
+    <string name="osmand_net_previously_installed">Toutes les anciennes données hors ligne peuvent être utilisées par la nouvelle application mais les favoris doivent être exportés de l\'ancienne application puis réimportés dans la nouvelle.</string>
     <string name="build_installed">Version {0} installée avec succès ({1}).</string>
     <string name="downloading_build">Téléchargement de l\'application…</string>
     <string name="install_selected_build">Installer OsmAnd - {0} sur {1} {2} Mo ?</string>
@@ -304,7 +302,7 @@
     <string name="no_vector_map_loaded">Les cartes vectorielles n\'ont pas été chargées</string>
     <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier de traces</string>
     <string name="error_reading_gpx">Impossible de lire les données GPX.</string>
-    <string name="vector_data">Cartes vectorielles hors-ligne</string>
+    <string name="vector_data">Cartes vectorielles hors ligne</string>
     <string name="transport_context_menu">Recherche de transport pour cet arrêt</string>
     <string name="poi_context_menu_modify">Modifier le POI</string>
     <string name="poi_context_menu_delete">Supprimer le POI</string>
@@ -376,7 +374,7 @@
     <string name="route_head">Avancez</string>
     <string name="first_time_continue">Plus tard</string>
     <string name="first_time_download">Téléchargement des régions</string>
-    <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. Téléchargez des données de la région pour une utilisation hors-ligne via « Menu → Télécharger les cartes ». Vous pourrez ainsi afficher des cartes, rechercher une adresse, un point d\'intérêt ou un transport en commun, calculer et suivre des itinéraires et bien plus encore, sans utiliser vos données mobiles.</string>
+    <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. Téléchargez des données de la région pour une utilisation hors ligne via « Menu → Télécharger les cartes ». Vous pourrez ainsi afficher des cartes, rechercher une adresse, un point d\'intérêt ou un transport en commun, calculer et suivre des itinéraires et bien plus encore, sans utiliser vos données mobiles.</string>
     <string name="search_poi_location">Recherche du signal…</string>
     <string name="search_near_map">Rechercher autour du centre de la carte</string>
     <string name="search_nearby">Rechercher à proximité</string>
@@ -406,7 +404,7 @@
     <string name="update_poi_success">Mise à jour des POI ({0} ont été actualisés)</string>
     <string name="update_poi_error_local">Impossible de mettre à jour la liste des POI locaux.</string>
     <string name="update_poi_error_loading">Impossible de charger les données du serveur.</string>
-    <string name="update_poi_no_offline_poi_index">Il n\'y a pas de données POI hors-ligne pour cette région</string>
+    <string name="update_poi_no_offline_poi_index">Il n\'y a pas de données POI hors ligne pour cette région</string>
     <string name="update_poi_is_not_available_for_zoom">Zoomer permet de mettre à jour les POI</string>
     <string name="context_menu_item_update_poi">Mettre à jour les POI</string>
     <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales via Internet ?</string>
@@ -424,12 +422,12 @@
     <string name="searching_address">Recherche de l\'adresse…</string>
     <string name="search_osm_nominatim">Rechercher en ligne avec OSM Nominatim</string>
     <string name="hint_search_online">Recherche en ligne : Numéro, rue, ville</string>
-    <string name="search_offline_address">Hors-ligne</string>
+    <string name="search_offline_address">Recherche hors ligne</string>
     <string name="search_online_address">Internet</string>
     <string name="max_level_download_tile">Niveau de zoom maximum</string>
     <string name="max_level_download_tile_descr">Ne pas télécharger les cartes en ligne en dessous de ce niveau de zoom.</string>
     <string name="route_general_information">Distance totale : %1$s, Durée estimée : %2$d h %3$d min.</string>
-    <string name="router_service_descr">Service de guidage, en ligne ou hors-ligne.</string>
+    <string name="router_service_descr">Service de guidage, en ligne ou hors ligne.</string>
     <string name="router_service">Service de guidage</string>
     <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte mémoire est inaccessible !</string>
     <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
@@ -581,7 +579,7 @@
     <string name="edit_filter_delete_dialog_title">Supprimer ce filtre \?</string>
     <string name="edit_filter_delete_message">Le filtre « %1$s » a été supprimé</string>
     <string name="edit_filter_create_message">Le filtre « %1$s » a été créé</string>
-    <string name="offline_navigation_not_available">Guidage hors-ligne temporairement indisponible.</string>
+    <string name="offline_navigation_not_available">Guidage hors ligne temporairement indisponible.</string>
     <string name="left_side_navigation">Conduite à gauche</string>
     <string name="left_side_navigation_descr">Pour les pays où la circulation s\'effectue sur la partie gauche de la route.</string>
     <string name="unknown_from_location">Point de départ non défini.</string>
@@ -777,11 +775,11 @@
     <string name="filterpoi_activity">Créer un filtre de POI</string>
     <string name="map_widget_renderer">Style de carte</string>
     <string name="int_continuosly">En continu</string>
-    <string name="osmand_short_description_80_chars">Logiciel de cartographie et de guidage fonctionnant avec des cartes OSM hors-ligne et en ligne</string>
-    <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de guidage pouvant fonctionner avec des cartes hors-ligne ou en ligne</string>
+    <string name="osmand_short_description_80_chars">Logiciel de cartographie et de guidage fonctionnant avec des cartes OSM hors ligne et en ligne</string>
+    <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de guidage pouvant fonctionner avec des cartes hors ligne ou en ligne</string>
     <string name="snap_to_road">Déplacer sur la route</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \nOsmAnd est un logiciel libre de navigation par satellites utilisant les données du projet OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire de l\'appareil pour un usage hors-ligne. OsmAnd permet également le suivi d\'itinéraires en ligne et hors-ligne en fournissant des instructions visuelles et vocales pas à pas. \n \nFonctionnalités principales : \n- Fonctionne complètement hors-ligne \n- Cartes hors-lignes dans un format compact (vectoriel) disponibles pour le monde entier \n- Téléchargement des cartes pour un pays ou une région directement depuis l\'application \n- Possibilité de superposer plusieurs couches, telles que des traces GPX, des points d\'intérêt, des favoris, des données topographiques (courbes de niveau, ombrage du relief, pente), les arrêts de transport public et bien d\'autres cartes avec une transparence personnalisable \n- Recherche hors-ligne d\'adresses et de lieux (POI) \n- Navigation hors-ligne sur des distances moyennes \n- Mode voiture, vélo et piéton \n- Affichage jour/nuit automatique \n- Option de zoom automatique adapté à la vitesse de déplacement \n- Orientation de la carte paramétrable (vers le nord, selon le déplacement, fixe) \n- Affichage des limitations de vitesse et des voies de circulation à l\'approche des bifurcations \n- Guidage vocale par voix enregistrée ou voix de synthèse. \n \nLimitations de cette version gratuite d\'OsmAnd : \n- Nombre limité de téléchargements de carte \n- Pas d\'accès aux POI Wikipédia hors-ligne. \n \nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheter la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) \n \nOsmAnd+ est un logiciel open source de navigation utilisant les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal. \n \nOsmAnd+, version payante de l\'application, n\'est pas limitée en nombre de téléchargements et permet d\'obtenir de nouvelles cartes, des mises à jour des cartes existantes ou encore des extensions et d\'autres données (courbes de niveau, ...). En achetant OsmAnd+ vous contribuez au projet et financez le développement de nouvelles fonctionnalités. \n \nFonctionnalités principales : \n- Fonctionne complètement hors-ligne (après téléchargement des cartes sur l\'appareil) \n- Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application \n- Points d\'intérêt Wikipédia hors-ligne, idéal pour les visites touristiques \n- Possibilité de superposer plusieurs couches, telles que des traces, des points d\'intérêt, des favoris, des courbes de niveau, les transports public et bien d\'autres cartes (pistes de ski, chemins de randonnée, circuits à vélo, balisage maritime ...) avec une transparence personnalisable \n- Recherche hors-ligne d\'adresses et de POI\n- Navigation hors-ligne sur des itinéraires de moyenne distance \n- Plusieurs modes de navigation : voiture, cycliste et piéton \n- Options : affichage jour/nuit automatique, zoom automatique adaptée à la vitesse, plusieurs modes d\'orientation de la carte (vers le nord ou selon le déplacement), affichage des voies de circulation, guidage vocal par voix enregistrée ou par synthèse vocale</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \nOsmAnd est un logiciel libre de navigation par satellites utilisant les données du projet OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire de l\'appareil pour un usage hors ligne. OsmAnd permet également le suivi d\'itinéraires en ligne et hors ligne en fournissant des instructions visuelles et vocales pas à pas. \n \nFonctionnalités principales : \n- Fonctionne complètement hors ligne \n- Cartes hors lignes dans un format compact (vectoriel) disponibles pour le monde entier \n- Téléchargement des cartes pour un pays ou une région directement depuis l\'application \n- Possibilité de superposer plusieurs couches, telles que des traces GPX, des points d\'intérêt, des favoris, des données topographiques (courbes de niveau, ombrage du relief, pente), les arrêts de transport public et bien d\'autres cartes avec une transparence personnalisable \n- Recherche hors ligne d\'adresses et de lieux (POI) \n- Navigation hors ligne sur des distances moyennes \n- Mode voiture, vélo et piéton \n- Affichage jour/nuit automatique \n- Option de zoom automatique adapté à la vitesse de déplacement \n- Orientation de la carte paramétrable (vers le nord, selon le déplacement, fixe) \n- Affichage des limitations de vitesse et des voies de circulation à l\'approche des bifurcations \n- Guidage vocale par voix enregistrée ou voix de synthèse. \n \nLimitations de cette version gratuite d\'OsmAnd : \n- Nombre limité de téléchargements de carte \n- Pas d\'accès aux POI Wikipédia hors ligne. \n \nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheter la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) \n \nOsmAnd+ est un logiciel open source de navigation utilisant les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal. \n \nOsmAnd+, version payante de l\'application, n\'est pas limitée en nombre de téléchargements et permet d\'obtenir de nouvelles cartes, des mises à jour des cartes existantes ou encore des extensions et d\'autres données (courbes de niveau, ...). En achetant OsmAnd+ vous contribuez au projet et financez le développement de nouvelles fonctionnalités. \n \nFonctionnalités principales : \n- Fonctionne complètement hors ligne (après téléchargement des cartes sur l\'appareil) \n- Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application \n- Points d\'intérêt Wikipédia hors ligne, idéal pour les visites touristiques \n- Possibilité de superposer plusieurs couches, telles que des traces, des points d\'intérêt, des favoris, des courbes de niveau, les transports public et bien d\'autres cartes (pistes de ski, chemins de randonnée, circuits à vélo, balisage maritime ...) avec une transparence personnalisable \n- Recherche hors ligne d\'adresses et de POI\n- Navigation hors ligne sur des itinéraires de moyenne distance \n- Plusieurs modes de navigation : voiture, cycliste et piéton \n- Options : affichage jour/nuit automatique, zoom automatique adaptée à la vitesse, plusieurs modes d\'orientation de la carte (vers le nord ou selon le déplacement), affichage des voies de circulation, guidage vocal par voix enregistrée ou par synthèse vocale</string>
     <string name="avoid_motorway">Éviter les autoroutes</string>
     <string name="context_menu_item_last_intermediate_point">Ajouter comme dernière étape</string>
     <string name="context_menu_item_first_intermediate_point">Ajouter comme première étape</string>
@@ -845,7 +843,7 @@
     <string name="map_widget_audionotes">Notes audio</string>
     <string name="audionotes_plugin_description">Prenez des notes audio, photo ou vidéo pendant un trajet, via un bouton sur la carte ou le menu contextuel de n\'importe quel point.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
-    <string name="osmand_srtm_short_description_80_chars">Extension OsmAnd pour les courbes de niveau et l\'ombrage du relief hors-ligne</string>
+    <string name="osmand_srtm_short_description_80_chars">Extension OsmAnd pour les courbes de niveau et l\'ombrage du relief hors ligne</string>
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
     <string name="av_def_action_video">Enregistrer une vidéo</string>
     <string name="av_def_action_audio">Enregistrer une note audio</string>
@@ -1046,7 +1044,7 @@
     <string name="copying_osmand_one_file_descr">Copie du fichier (%s) vers le nouvel emplacement…</string>
     <string name="copying_osmand_files_descr">Copie des fichiers de données OsmAnd vers la nouvelle destination (%s)…</string>
     <string name="copying_osmand_files">Copie des fichiers de données OsmAnd…</string>
-    <string name="calculate_osmand_route_gpx">Calcul de la route OsmAnd hors-ligne</string>
+    <string name="calculate_osmand_route_gpx">Calcul de la route OsmAnd hors ligne</string>
     <string name="app_mode_truck">Camion</string>
     <string name="routing_attr_prefer_motorway_name">Privilégier les autoroutes</string>
     <string name="routing_attr_prefer_motorway_description">Privilégier les autoroutes</string>
@@ -1069,7 +1067,7 @@
     <string name="keep_and_add_destination_point">Ajouter comme destination</string>
     <string name="use_displayed_track_for_navigation">Souhaitez-vous suivre la trace affichée à l\'écran ?</string>
     <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
-    <string name="calculate_osmand_route_without_internet">Calcul de l\'itinéraire hors-ligne</string>
+    <string name="calculate_osmand_route_without_internet">Calcul de l\'itinéraire hors ligne</string>
     <string name="index_name_italy">Europe - Italie</string>
     <string name="index_name_gb">Europe - Grande-Bretagne</string>
     <string name="index_name_canada">Amérique du Nord - Canada</string>
@@ -1322,7 +1320,7 @@
     <string name="map_locale">Langue de la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transport en commun</string>
     <string name="voices">Guidage vocal</string>
-    <string name="dash_download_msg_none">Télécharger des cartes hors-ligne ?</string>
+    <string name="dash_download_msg_none">Télécharger des cartes hors ligne ?</string>
     <string name="dash_download_msg">Vous avez téléchargé %1$s carte(s)</string>
     <string name="dash_download_new_one">Télécharger une nouvelle carte</string>
     <string name="dash_download_manage">Gérer</string>
@@ -1367,8 +1365,8 @@
     <string name="shared_string_get">Installer</string>
     <string name="plugin_ski_name">Carte de ski</string>
     <string name="plugin_nautical_name">Carte nautique</string>
-    <string name="world_ski_missing">Téléchargez la carte hors-ligne dédiée pour afficher les pistes de ski.</string>
-    <string name="nautical_maps_missing">Téléchargez la carte hors-ligne dédiée pour afficher les informations nautiques.</string>
+    <string name="world_ski_missing">Téléchargez la carte hors ligne dédiée pour afficher les pistes de ski.</string>
+    <string name="nautical_maps_missing">Téléchargez la carte hors ligne dédiée pour afficher les informations nautiques.</string>
     <string name="rendering_attr_pisteGrooming_name">Damage des pistes</string>
     <string name="free">%1$s libre</string>
     <string name="device_memory">Stockage de l\'appareil</string>
@@ -1430,7 +1428,7 @@
     <string name="current_route">Itinéraire actuel</string>
     <string name="welmode_download_maps">Télécharger les cartes</string>
     <string name="welcome_select_region">Afin de prendre en compte la signalisation routière et le code de la route, veuillez sélectionner votre région :</string>
-    <string name="welcome_text">Avec OsmAnd visualisez des cartes hors-ligne et naviguez sans couverture réseau dans le monde entier.</string>
+    <string name="welcome_text">Avec OsmAnd visualisez des cartes hors ligne et naviguez sans couverture réseau dans le monde entier.</string>
     <string name="welcome_header">Bienvenue</string>
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, …) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez « Oui ».</string>
     <string name="agps_info">Données A-GPS</string>
@@ -1553,8 +1551,7 @@
     <string name="shared_string_undo">Annuler</string>
     <string name="shared_string_skip">Ignorer</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="offline_maps_and_navigation">Cartes hors-ligne
-\n&amp; Guidage</string>
+    <string name="offline_maps_and_navigation">Cartes hors ligne \n&amp; Guidage</string>
     <string name="commit_poi">Enregistrer le POI</string>
     <string name="plugin_settings">Extensions</string>
     <string name="tab_title_basic">Basique</string>
@@ -1695,7 +1692,7 @@
     <string name="osm_edit_commented_note">Note OSM commentée</string>
     <string name="osm_edit_modified_poi">POI OSM modifié</string>
     <string name="osm_edit_deleted_poi">POI OSM supprimé</string>
-    <string name="osm_save_offline">Enregistrer pour utiliser hors-ligne</string>
+    <string name="osm_save_offline">Enregistrer pour utiliser hors ligne</string>
     <string name="rendering_attr_currentTrackColor_description">Couleur GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Largeur GPX</string>
     <string name="rendering_attr_roadStyle_description">Style pour les routes</string>
@@ -2127,7 +2124,7 @@
     <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité \n • Bascule automatique en mode jour/nuit (option) \n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option) \n • Zoom adapté à la vitesse (option) \n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
-    <string name="osmand_plus_extended_description_part7">Contribuez concrètement à l\'amélioration d\'OpenStreetMap : \n • Signalez des erreurs de données \n • Téléversez des traces GPX à OpenStreetMap directement depuis l\'application \n • Ajoutez des POI et téléversez-les à OpenStreetMap (immédiatement si vous êtes en ligne ou plus tard si vous êtes hors-ligne) \n • Enregistrez vos trajets en arrière-plan (pendant que votre appareil est en veille). \nOsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute participation financière pour accélérer encore son développement.</string>
+    <string name="osmand_plus_extended_description_part7">Contribuez concrètement à l\'amélioration d\'OpenStreetMap : \n • Signalez des erreurs de données \n • Téléversez des traces GPX à OpenStreetMap directement depuis l\'application \n • Ajoutez des POI et téléversez-les à OpenStreetMap (immédiatement si vous êtes en ligne ou plus tard si vous êtes hors ligne) \n • Enregistrez vos trajets en arrière-plan (pendant que votre appareil est en veille). \nOsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute participation financière pour accélérer encore son développement.</string>
     <string name="analyze_on_map">Analyser sur la carte</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel ; découvrez des POI (points d\'intérêt) ; créez et gérez des traces GPX ; installez des extensions pour visualiser l\'altitude et les courbes de niveau ; utilisez les modes Voiture, Piéton, Cycliste ; contribuez à l\'amélioration des cartes et bien plus encore ! \n \nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités et recevez les dernières mises à jour. \n \nFonctionnalités principales :</string>
     <string name="sea_depth_thanks">Merci d\'avoir acheté l\'extension « Courbes de profondeur nautique »</string>
@@ -2507,9 +2504,9 @@
     <string name="in_app_purchase">Achat depuis l\'application</string>
     <string name="in_app_purchase_desc">Paiement en une fois</string>
     <string name="purchase_unlim_title">Acheter - %1$s</string>
-    <string name="wikivoyage_offline">Wikivoyage hors-ligne</string>
+    <string name="wikivoyage_offline">Wikivoyage hors ligne</string>
     <string name="unlimited_downloads">Téléchargements illimités</string>
-    <string name="wikipedia_offline">Wikipédia hors-ligne</string>
+    <string name="wikipedia_offline">Wikipédia hors ligne</string>
     <string name="unlock_all_features">Débloquer toutes les fonctionnalités d\'OsmAnd</string>
     <string name="monthly_map_updates">Mise à jour des cartes : mensuelle</string>
     <string name="daily_map_updates">Mise à jour des cartes : chaque heure</string>
@@ -2543,9 +2540,9 @@
     <string name="purchase_cancelled_dialog_descr">Renouvelez votre abonnement pour continuer à utiliser toutes les fonctionnalités :</string>
     <string name="open_wikipedia_link_online">Ouvrir le lien Wikipédia</string>
     <string name="open_wikipedia_link_online_description">Le lien s\'ouvrira dans votre navigateur Internet.</string>
-    <string name="read_wikipedia_offline_description">Abonnez-vous à OsmAnd Live pour lire les articles Wikipédia et Wikivoyage hors-ligne.</string>
+    <string name="read_wikipedia_offline_description">Abonnez-vous à OsmAnd Live pour lire les articles Wikipédia et Wikivoyage hors ligne.</string>
     <string name="how_to_open_link">Comment ouvrir le lien ?</string>
-    <string name="read_wikipedia_offline">Consultez Wikipédia hors-ligne</string>
+    <string name="read_wikipedia_offline">Consultez Wikipédia hors ligne</string>
     <string name="download_all">Télécharger tout</string>
     <string name="hide_full_description">Masquer la description complète</string>
     <string name="show_full_description">Afficher la description complète</string>
@@ -2852,7 +2849,7 @@
     <string name="base_profile_descr_public_transport">Types de transport en commun</string>
     <string name="base_profile_descr_boat">Bateau, aviron, voile</string>
     <string name="base_profile_descr_aircraft">Avion, parapente</string>
-    <string name="routing_profile_broutrer">BRouter (hors-ligne)</string>
+    <string name="routing_profile_broutrer">BRouter (hors ligne)</string>
     <string name="custom_routing">Profil de calcul d\'itinéraire personnalisé</string>
     <string name="special_routing_type">Calcul d\'itinéraire spécial</string>
     <string name="third_party_routing_type">Calcul d\'itinéraire tiers</string>
@@ -3093,7 +3090,7 @@
     <string name="import_profile">Importer un profil</string>
     <string name="monitoring_prefs_descr">Navigation, précision d\'enregistrement</string>
     <string name="multimedia_notes_prefs_descr">Taille de l\'image, qualité audio et vidéo</string>
-    <string name="osm_editing_prefs_descr">Connexion, mot de passe, édition hors-ligne</string>
+    <string name="osm_editing_prefs_descr">Connexion, mot de passe, édition hors ligne</string>
     <string name="accessibility_prefs_descr">Choisissez l\'icône, la couleur et le nom</string>
     <string name="live_monitoring_descr">Permet le partage de votre position grâce à l\'enregistrement du trajet.</string>
     <string name="live_monitoring">Suivi en ligne</string>
@@ -3404,7 +3401,7 @@
     <string name="quick_action_remove_next_destination_descr">Supprime la prochaine étape de votre route. S\'il s\'agit de la destination finale, le guidage s\'arrêtera.</string>
     <string name="lenght_limit_description">Indiquez la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
     <string name="please_provide_point_name_error">Veuillez renseigner un nom pour le point</string>
-    <string name="plugin_wikipedia_description">Obtenez des informations sur les points d\'intérêt avec les articles Wikipédia, un guide disponible hors-ligne.</string>
+    <string name="plugin_wikipedia_description">Obtenez des informations sur les points d\'intérêt avec les articles Wikipédia, un guide disponible hors ligne.</string>
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
     <string name="app_mode_motor_scooter">Scooter</string>
     <string name="app_mode_enduro_motorcycle">Moto enduro</string>
@@ -3785,7 +3782,7 @@
     <string name="cloud_email_not_registered">Cet email n\'est pas enregistré sur OsmAnd Cloud</string>
     <string name="backup_into_file">Sauvegarder dans un fichier</string>
     <string name="verification_code_missing_description">Le délai d\'envoi du code est de 10 minutes maximum, vérifiez votre dossier spam. Vous pouvez aussi utiliser le bouton ci-dessous.</string>
-    <string name="select_nav_profile_dialog_message">Le « type de navigation » détermine la façon dont les itinéraires sont calculés, avec un moteur de routage soit hors-ligne soit en ligne.</string>
+    <string name="select_nav_profile_dialog_message">Le « type de navigation » détermine la façon dont les itinéraires sont calculés, avec un moteur de routage soit hors ligne soit en ligne.</string>
     <string name="loading_list_of_routing_services">Actualisation des services de routage disponibles</string>
     <string name="backup_delete_all_data_descr">Toutes les données sur OsmAnd Cloud seront supprimées. Les versions locales resteront intactes.</string>
     <string name="backup_delete_old_data_descr">Vos données actuelles seront conservées sur OsmAnd Cloud</string>
@@ -3837,21 +3834,21 @@
     <string name="send_logcat_log">Envoyer le journal logcat</string>
     <string name="backup_promocode">Code promo</string>
     <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
-    <string name="purchases_feature_desc_wikipedia">Donne accès à tous les articles Wikipédia associés aux points d\'intérêts de la carte, permettant d\'en savoir plus sur un lieu en quelques clics. Pensez à télécharger les articles Wikipédia des régions de votre choix pour les consulter hors-ligne.</string>
+    <string name="purchases_feature_desc_wikipedia">Donne accès à tous les articles Wikipédia associés aux points d\'intérêts de la carte, permettant d\'en savoir plus sur un lieu en quelques clics. Pensez à télécharger les articles Wikipédia des régions de votre choix pour les consulter hors ligne.</string>
     <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obtenez des mises à jour de cartes plus fréquentes : horaires, quotidiennes ou hebdomadaires. Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
     <string name="purchases_feature_desc_osmand_cloud">Utilisez OsmAnd Cloud pour sauvegarder toutes les données d\'OsmAnd en ligne. Plus aucun risque de perdre vos données après une réinstallation. Sauvegardez et restaurez toutes vos informations sans difficulté.</string>
     <string name="nautical_depth">Profondeur nautique</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
     <string name="purchases_feature_desc_terrain">Courbes de niveau, ombrage du relief, pentes colorées mettant en valeur sommets et plaines.</string>
-    <string name="purchases_feature_desc_nautical">Accéder aux informations de profondeur nautique</string>
+    <string name="purchases_feature_desc_nautical">Accédez aux informations de profondeur nautique</string>
     <string name="shared_string_includes">Inclus</string>
     <string name="complete_purchase">Finaliser l\'achat</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenez les mises à jour mensuelles pour les cartes hors ligne.</string>
     <string name="unlimited_map_downloads">Téléchargements illimités de cartes</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia et Wikivoyage hors ligne</string>
     <string name="offline_wikipeadia">Wikipédia hors ligne</string>
-    <string name="offline_wikivoyage">Wikivoyage hors-ligne</string>
+    <string name="offline_wikivoyage">Wikivoyage hors ligne</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
     <string name="continue_with">Continuer avec %1$s</string>
     <string name="not_available_with">Non disponible avec %1$s</string>
@@ -4453,7 +4450,7 @@
     <string name="map_center_widget">Coordonnées : Centre de la carte</string>
     <string name="map_widget_rendering_fps_desc">Affiche la vitesse d\'affichage et d’actualisation de la carte et de ses éléments, exprimé en images par seconde (FPS).</string>
     <string name="terms_of_service_desc">En téléchargeant des cartes, vous acceptez les conditions de %1$s et %2$s.</string>
-    <string name="weather_offline_forecast">Prévisions hors-ligne</string>
+    <string name="weather_offline_forecast">Prévisions hors ligne</string>
     <string name="weather_online_cache">Cache en ligne</string>
     <string name="map_settings_weather_temp">Température</string>
     <string name="shared_string_weather">Météo</string>
@@ -4656,7 +4653,7 @@
     <string name="clear_online_cache_description">Cela videra le cache des tuiles météo en ligne.</string>
     <string name="clear_online_cache">Vider le cache en ligne</string>
     <string name="app_mode_climbing">Escalade</string>
-    <string name="offline_cache">Cache hors-ligne</string>
+    <string name="offline_cache">Cache hors ligne</string>
     <string name="shared_string_alt_name">Autre dénomination</string>
     <string name="token_is_not_valid">Le jeton n\'est pas valide</string>
     <string name="metric_lbs">livres</string>
@@ -4667,7 +4664,7 @@
     <string name="common_weight_limit_error">La valeur minimale est « %1$s » %2$s. Si le poids de votre véhicule est inférieur à cette valeur, utilisez le profil « %3$s ».</string>
     <string name="weather_forecast">Prévisions météo</string>
     <string name="offline_weather_forecast_desc">Vous pouvez télécharger les prévisions météo des 7 prochains jours.</string>
-    <string name="offline_weather_forecast">Prévisions météo hors-ligne</string>
+    <string name="offline_weather_forecast">Prévisions météo hors ligne</string>
     <string name="rendering_value_defaultMedium_name">Par défaut (moyen)</string>
     <string name="select_layer">Sélectionner la couche</string>
     <string name="camera_app">Application d\'appareil photo</string>
@@ -4790,7 +4787,7 @@
     <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="terrain_map">Carte du terrain (3D)</string>
-    <string name="relief_3d_description">Possédez et observez la maquette de votre quartier ou du continent tout entier.</string>
+    <string name="relief_3d_description">Possédez et explorez le modèle réduit de votre quartier ou de tout un continent.</string>
     <string name="terrain_category_description">Courbes de niveaux, ombrage du relief par des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les plaines.</string>
     <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l\'inclinaison du terrain. Pour en savoir plus sur les pentes, consultez %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
@@ -5170,7 +5167,7 @@
     <string name="use_terrain_maps">Utiliser les cartes de relief</string>
     <string name="use_nearby_roads">Utiliser les routes à proximité</string>
     <string name="use_terrain_maps_summary">Utilise les cartes de relief pour les données d\'altitude. La géométrie de la trace demeure inchangée.</string>
-    <string name="use_nearby_roads_summary">Utilise les cartes hors-ligne pour trouver les routes à proximité et les données d\'altitude. La géométrie de la trace peut être modifiée.</string>
+    <string name="use_nearby_roads_summary">Utilise les cartes hors ligne pour trouver les routes à proximité et les données d\'altitude. La géométrie de la trace peut être modifiée.</string>
     <string name="fixed_height">Hauteur fixe</string>
     <string name="top">En haut</string>
     <string name="bottom">En bas</string>
