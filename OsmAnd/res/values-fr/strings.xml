@@ -1801,7 +1801,7 @@
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
-    <string name="show_transparency_seekbar">Afficher le curseur de réglage de la transparence</string>
+    <string name="show_transparency_seekbar">Afficher le curseur de transparence</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
     <string name="storage_directory_shared">Mémoire partagée</string>
     <string name="shared_string_topbar">Barre supérieure</string>
@@ -3473,7 +3473,7 @@
     <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
     <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
     <string name="save_global_track_interval_descr">Indiquer l’intervalle d’enregistrement des points du trajet (activé via le widget « Enregistrement de trajet » sur la carte).</string>
-    <string name="disable_recording_once_app_killed_descrp">L\'enregistrement de la trace sera interrompu si l\'application est fermée via Applications récentes (les indications OsmAnd ne seront plus affichées dans la barre de notifications).</string>
+    <string name="disable_recording_once_app_killed_descrp">L\'enregistrement de la trace sera suspendu si l\'application est fermée via Applications récentes (les indications OsmAnd ne seront plus affichées dans la barre de notifications).</string>
     <string name="all_next_segments_will_be_recalc">Tous les segments suivants seront recalculés avec le profil sélectionné.</string>
     <string name="all_previous_segments_will_be_recalc">Tous les segments précédents seront recalculés avec le profil sélectionné.</string>
     <string name="all_next_segments">Tous les segments suivants</string>
@@ -5246,7 +5246,7 @@
     <string name="quick_action_audio_note">Note audio</string>
     <string name="quick_action_parking_place">Place de stationnement</string>
     <string name="quick_action_track_waypoint">Point de passage de trace</string>
-    <string name="quick_action_verb_pause_resume">Mettre en pause / Reprendre</string>
+    <string name="quick_action_verb_pause_resume">Suspendre / Reprendre</string>
     <string name="quick_action_verb_show_hide">Afficher / Masquer</string>
     <string name="quick_action_verb_turn_on_off">Activer / Désactiver</string>
     <string name="quick_action_verb_start_stop">Démarrer / Arrêter</string>
@@ -5416,7 +5416,7 @@
     <string name="new_segment_started_m">Enregistrement d’un nouveau segment de trace démarré.</string>
     <string name="quick_action_new_trip_segment">Bouton pour démarrer un nouveau segment dans l\'enregistrement GPX en cours.</string>
     <string name="quick_action_save_recorded_trip_and_continue">Trajet enregistré et Continuer</string>
-    <string name="quick_action_verb_start_pause">Démarrer / Mettre en pause</string>
+    <string name="quick_action_verb_start_pause">Démarrer / Suspendre</string>
     <string name="movies_list">Liste de films</string>
     <string name="track_does_not_contain_data_to_save">La trace ne contient aucune donnée.</string>
     <string name="start_trip_recording_first_m">Veuillez commencer par démarrer l\'enregistrement du trajet.</string>
@@ -5676,4 +5676,6 @@
     <string name="three_years_subscription">Abonnement de trois ans</string>
     <string name="years_3">Trois ans</string>
     <string name="osm_live_payment_3_years_title">Tous les trois ans</string>
+    <string name="deleting">Suppression…</string>
+    <string name="deleting_history">Suppression de l’historique…</string>
 </resources>
