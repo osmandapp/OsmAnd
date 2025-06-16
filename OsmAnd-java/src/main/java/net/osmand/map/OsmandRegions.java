@@ -114,7 +114,28 @@ public class OsmandRegions {
 //		}
 		return prepareFile(regions.getAbsolutePath());
 	}
-	
+
+	public BinaryMapIndexReader prepareFileAtomic() throws IOException {
+		long pid = ProcessHandle.current().pid();
+		long threadId = Thread.currentThread().getId();
+		File regionsUnique = new File(String.format("regions.%d.%d.ocbf", pid, threadId));
+
+		InputStream is = OsmandRegions.class.getResourceAsStream("regions.ocbf");
+		FileOutputStream fous = new FileOutputStream(regionsUnique);
+		if (is == null) {
+			throw new IOException("No regions.ocbf found in resources");
+		}
+		Algorithms.streamCopy(is, fous);
+		fous.close();
+
+		File regionsFinal = new File("regions.ocbf");
+		if (!regionsUnique.renameTo(regionsFinal)) {
+			throw new IOException(String.format("Unable to rename %s to %s", regionsUnique, regionsFinal));
+		}
+
+		return prepareFile(regionsFinal.getAbsolutePath());
+	}
+
 	public BinaryMapIndexReader prepareFile(String fileName) throws IOException {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), new File(fileName));
 //		final Collator clt = OsmAndCollator.primaryCollator();
