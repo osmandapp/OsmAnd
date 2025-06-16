@@ -23,8 +23,8 @@ import net.osmand.plus.shared.SharedUtil
 import net.osmand.data.LatLon
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripUtils
-import net.osmand.plus.helpers.SearchHistoryHelper
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry
+import net.osmand.plus.search.history.SearchHistoryHelper
+import net.osmand.plus.search.history.SearchHistoryHelper.HistoryEntry
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.track.data.GPXInfo

@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.backend.backup.items;
 
-import static net.osmand.plus.helpers.SearchHistoryHelper.*;
+import static net.osmand.plus.search.history.SearchHistoryHelper.*;
 
 import android.content.Context;
 
@@ -11,7 +11,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;

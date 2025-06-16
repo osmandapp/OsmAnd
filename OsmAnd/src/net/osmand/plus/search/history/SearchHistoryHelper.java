@@ -1,4 +1,4 @@
-package net.osmand.plus.helpers;
+package net.osmand.plus.search.history;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

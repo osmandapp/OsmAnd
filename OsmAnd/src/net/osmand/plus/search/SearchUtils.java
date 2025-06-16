@@ -20,7 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
