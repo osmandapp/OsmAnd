@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
@@ -20,16 +21,16 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public static final String TAG = "OptionsBottomSheetDialogFragment";
-	public static final String GROUPS_MARKERS_MENU = "groups_markers_menu";
-	public static final String HISTORY_MARKERS_MENU = "history_markers_menu";
+	public static final String TAG = OptionsBottomSheetDialogFragment.class.getSimpleName();
+	private static final String GROUPS_MARKERS_MENU = "groups_markers_menu";
+	private static final String HISTORY_MARKERS_MENU = "history_markers_menu";
 
 	private MarkerOptionsFragmentListener listener;
 	private boolean disableSortBy;
 	private boolean disableSaveAsTrack;
 	private boolean disableMoveAllToHistory;
 
-	public void setListener(MarkerOptionsFragmentListener listener) {
+	public void setListener(@NonNull MarkerOptionsFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -154,13 +155,13 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Override
 	public void onResume() {
 		super.onResume();
-		((MapMarkersDialogFragment) getParentFragment()).blurStatusBar();
+		((MapMarkersDialogFragment) getParentFragment()).setupBlurStatusBar();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		((MapMarkersDialogFragment) getParentFragment()).clearStatusBar();
+		((MapMarkersDialogFragment) getParentFragment()).restoreStatusBarColor();
 	}
 
 	@Override
@@ -185,20 +186,19 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		return scrH - stBarH - nBarH - AndroidUtils.dpToPx(activity, 56);
 	}
 
-	interface MarkerOptionsFragmentListener {
+	public static void showInstance(@NonNull FragmentManager fm, boolean group, boolean history,
+	                                @NonNull MarkerOptionsFragmentListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			Bundle args = new Bundle();
+			args.putBoolean(GROUPS_MARKERS_MENU, group);
+			args.putBoolean(HISTORY_MARKERS_MENU, history);
 
-		void sortByOnClick();
-
-		void showDirectionOnClick();
-
-		void coordinateInputOnClick();
-
-		void buildRouteOnClick();
-
-		void saveAsNewTrackOnClick();
-
-		void moveAllToHistoryOnClick();
-
-		void dismiss();
+			OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.setListener(listener);
+			fm.beginTransaction()
+					.add(R.id.menu_container, fragment, OptionsBottomSheetDialogFragment.TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

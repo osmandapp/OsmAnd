@@ -47,17 +47,12 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 	public static final String OPEN_PLUGINS = "open_plugins";
 
 	private PluginsListAdapter adapter;
-	private LayoutInflater themedInflater;
 	private boolean wasDrawerDisabled;
 	private ProgressBar progressBar;
 
 	@Override
 	public int getStatusBarColorId() {
 		return ColorUtilities.getStatusBarColorId(nightMode);
-	}
-
-	public LayoutInflater getThemedInflater() {
-		return themedInflater;
 	}
 
 	@Override
@@ -67,9 +62,8 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				FragmentActivity activity = getActivity();
-				if (activity instanceof MapActivity) {
+				if (activity instanceof MapActivity mapActivity) {
 					dismissImmediate();
-					MapActivity mapActivity = (MapActivity) activity;
 					mapActivity.launchPrevActivityIntent();
 				}
 			}
@@ -79,8 +73,7 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.plugins, container, false);
+		View view = inflate(R.layout.plugins, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		progressBar = view.findViewById(R.id.progress_bar);
 
@@ -132,8 +125,7 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 		Activity activity = getActivity();
 		PluginsHelper.checkInstalledMarketPlugins(app, activity);
 		adapter.notifyDataSetChanged();
-		if (activity instanceof MapActivity) {
-			MapActivity mapActivity = ((MapActivity) activity);
+		if (activity instanceof MapActivity mapActivity) {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();

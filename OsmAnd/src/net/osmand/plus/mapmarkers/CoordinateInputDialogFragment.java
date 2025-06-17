@@ -40,6 +40,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -83,7 +84,7 @@ import java.util.Locale;
 
 public class CoordinateInputDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
-	public static final String TAG = "CoordinateInputDialogFragment";
+	public static final String TAG = CoordinateInputDialogFragment.class.getSimpleName();
 	public static final String ADDED_POINTS_NUMBER_KEY = "added_points_number_key";
 
 	private static final String SELECTED_POINT_KEY = "selected_point_key";
@@ -1378,6 +1379,16 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			app.getLocationProvider().removeLocationListener(this);
 			app.getLocationProvider().removeCompassListener(this);
 			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm,
+	                                @NonNull OnPointsSavedListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
+			fragment.setRetainInstance(true);
+			fragment.setListener(listener);
+			fragment.show(fm, TAG);
 		}
 	}
 

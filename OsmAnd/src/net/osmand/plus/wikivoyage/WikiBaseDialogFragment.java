@@ -45,11 +45,6 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	@Override
-	protected Drawable getContentIcon(int id) {
-		return getIcon(id, R.color.icon_color_default_light);
-	}
-
 	protected Drawable getActiveIcon(@DrawableRes int iconId) {
 		return getIcon(iconId, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 	}

@@ -117,7 +117,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = themedInflater.inflate(R.layout.split_segments_layout, container, false);
+		View view = inflate(R.layout.split_segments_layout, container, false);
 
 		Toolbar toolbar = view.findViewById(R.id.split_interval_toolbar);
 		TextView title = toolbar.findViewById(R.id.title);

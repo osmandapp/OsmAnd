@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -169,7 +170,16 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		}
 	}
 
-	interface MarkerSaveAsTrackFragmentListener {
+	public static void showInstance(@NonNull FragmentManager fm,
+	                                @NonNull MarkerSaveAsTrackFragmentListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
+			fragment.setListener(listener);
+			fragment.show(fm, TAG);
+		}
+	}
+
+	public interface MarkerSaveAsTrackFragmentListener {
 		void saveGpx(String fileName);
 	}
 }
