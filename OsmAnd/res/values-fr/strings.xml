@@ -1427,7 +1427,7 @@
     <string name="mark_to_delete">Marquer pour suppression</string>
     <string name="current_route">Itinéraire actuel</string>
     <string name="welmode_download_maps">Télécharger les cartes</string>
-    <string name="welcome_select_region">Afin de prendre en compte la signalisation routière et le code de la route, veuillez sélectionner votre région :</string>
+    <string name="welcome_select_region">Pour refléter correctement la signalisation et la réglementation routière, veuillez sélectionner votre région de conduite :</string>
     <string name="welcome_text">Avec OsmAnd visualisez des cartes hors ligne et naviguez sans couverture réseau dans le monde entier.</string>
     <string name="welcome_header">Bienvenue</string>
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, …) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez « Oui ».</string>
@@ -1502,7 +1502,7 @@
     <string name="lang_nn">Norvégien Nynorsk</string>
     <string name="archive_wikipedia_data">Le format des données Wikipédia est obsolète. Souhaitez-vous les archiver ?</string>
     <string name="lang_te">Télougou</string>
-    <string name="restart_is_required">Il est nécessaire de redémarrer l\'application pour prendre en compte la modification.</string>
+    <string name="restart_is_required">Un redémarrage est nécessaire pour appliquer le changement.</string>
     <string name="rendering_attr_currentTrackColor_name">Couleur des traces GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Largeur des traces GPX</string>
     <string name="rendering_value_red_name">Rouge</string>
@@ -1816,7 +1816,7 @@
     <string name="shared_string_move_up">Déplacer ↑</string>
     <string name="shared_string_move_down">Déplacer ↓</string>
     <string name="finish_navigation">Terminer le guidage</string>
-    <string name="storage_permission_restart_is_required">L\'application est maintenant autorisée à écrire sur la mémoire externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
+    <string name="storage_permission_restart_is_required">L’application est désormais autorisée à écrire sur le stockage externe, mais doit être redémarrée pour que cela prenne effet.</string>
     <string name="full_report">Rapport complet</string>
     <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
     <string name="storage_directory_readonly_desc">Passage à la mémoire interne, le dossier de stockage sélectionné étant protégé en écriture. Veuillez choisir un répertoire de stockage accessible en écriture.</string>
@@ -2882,7 +2882,7 @@
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="select_base_profile_dialog_message">Basez votre profil personnel sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
-    <string name="temporary_conditional_routing">Prendre en compte les limitations temporaires</string>
+    <string name="temporary_conditional_routing">Tenir compte des limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
     <string name="app_mode_camper">Campeur</string>
     <string name="app_mode_campervan">Camping-car</string>
@@ -4172,7 +4172,7 @@
     <string name="simulation_preview_mode_desc">La vitesse de simulation sera maximale sur les sections droites et diminuera aux bifurcations.</string>
     <string name="simulation_preview_mode_title">Mode de prévisualisation rapide</string>
     <string name="routing_attr_carriage_restrictions_name">Restrictions de chariot</string>
-    <string name="routing_attr_carriage_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules hippomobiles</string>
+    <string name="routing_attr_carriage_restrictions_description">Tenir compte des autorisations d\'accès pour les véhicules hippomobiles</string>
     <string name="rendering_attr_showMonorailRoutes_name">Voies pour monorail</string>
     <string name="rendering_attr_showFunicularRoutes_name">Voies pour funiculaire</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Lignes de trolleybus</string>
@@ -4281,7 +4281,7 @@
     <string name="radius_ruler_mode_desc">Appuyer sur le widget passe en mode règle de rayon.</string>
     <string name="shared_string_mode">Mode</string>
     <string name="lang_sat">Santali</string>
-    <string name="average_speed_skip_stops">Prendre en compte les arrêts</string>
+    <string name="average_speed_skip_stops">Tenir compte des arrêts</string>
     <string name="map_widget_average_speed">Vitesse moyenne</string>
     <string name="average_speed_widget_desc">Affiche la vitesse moyenne du trajet en cours.</string>
     <string name="average_speed_time_interval_desc">Indiquer la durée sur laquelle calculer la moyenne.</string>
@@ -4290,7 +4290,7 @@
     <string name="transport_hazmat_no_desc">Certaines routes et certains tunnels peuvent interdire le transport de matières dangereuses.</string>
     <string name="import_as_one_track">Importer comme une seule trace</string>
     <string name="use_latin_name_if_missing">Utiliser le nom latin si manquant</string>
-    <string name="routing_attr_goods_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules légers de transport de marchandises</string>
+    <string name="routing_attr_goods_restrictions_description">Tenir compte des autorisations d\'accès pour les véhicules légers de transport de marchandises</string>
     <string name="kg">kg</string>
     <string name="co2_mission">Émissions de CO₂</string>
     <string name="live_update_frequency_day_variant">Les mises à jour de carte sont vérifiées chaque jour.</string>
