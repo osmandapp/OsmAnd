@@ -519,7 +519,7 @@
     <string name="incremental_search_street">Recherche de rue en temps réel</string>
     <string name="incremental_search_building">Recherche de numéro en temps réel</string>
     <string name="choose_available_region">Sélectionner une région dans la liste</string>
-    <string name="choose_intersected_street">Sélectionner une rue intersectante</string>
+    <string name="choose_intersected_street">Sélectionner une intersection de rue</string>
     <string name="Closest_Amenities">Équipements à proximité</string>
     <string name="app_mode_default">Parcourir la carte</string>
     <string name="app_mode_car">Voiture</string>
