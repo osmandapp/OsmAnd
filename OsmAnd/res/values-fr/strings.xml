@@ -169,9 +169,9 @@
     <string name="map_transparency_descr">Modifier la transparence du fond de carte.</string>
     <string name="map_transparency">Transparence de la carte</string>
     <string name="modify_transparency">Définir l\'opacité (0 - transparent, 255 - opaque)</string>
-    <string name="layer_underlay">Fond de carte…</string>
-    <string name="map_underlay">Fond de carte</string>
-    <string name="map_underlay_descr">Choisir le fond de carte</string>
+    <string name="layer_underlay">Sous-couche de carte…</string>
+    <string name="map_underlay">Sous-couche de carte</string>
+    <string name="map_underlay_descr">Choisir la sous-couche de carte</string>
     <string name="layer_overlay">Surcouche de carte…</string>
     <string name="shared_string_none">Aucun</string>
     <string name="map_overlay">Surcouche de carte</string>
@@ -423,7 +423,7 @@
     <string name="search_osm_nominatim">Rechercher en ligne avec OSM Nominatim</string>
     <string name="hint_search_online">Recherche en ligne : Numéro, rue, ville</string>
     <string name="search_offline_address">Recherche hors ligne</string>
-    <string name="search_online_address">Internet</string>
+    <string name="search_online_address">Recherche en ligne</string>
     <string name="max_level_download_tile">Niveau de zoom maximum</string>
     <string name="max_level_download_tile_descr">Ne pas télécharger les cartes en ligne en dessous de ce niveau de zoom.</string>
     <string name="route_general_information">Distance totale : %1$s, Durée estimée : %2$d h %3$d min.</string>
@@ -1206,7 +1206,7 @@
     <string name="rendering_attr_hideText_name">Texte</string>
     <string name="rendering_attr_hideWoodScrubs_name">Végétation</string>
     <string name="rendering_attr_buildings15zoom_name">Bâtiments en zoom 15</string>
-    <string name="rendering_attr_moreDetailed_name">Plus détaillé</string>
+    <string name="rendering_attr_moreDetailed_name">Plus de détails</string>
     <string name="rendering_attr_lessDetailed_name">Moins détaillé</string>
     <string name="rendering_attr_showAccess_name">Afficher les restrictions d\'accès</string>
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
@@ -1336,7 +1336,7 @@
     <string name="routing_attr_no_new_routing_description">Ne pas utiliser les règles de calcul d\'itinéraire ajoutées dans la version 1.9.</string>
     <string name="routing_attr_no_new_routing_name">Ne pas utiliser le calcul d\'itinéraire de la version 1.9</string>
     <string name="speak_pedestrian">Passages piétons</string>
-    <string name="avoid_roads_msg">Générez un itinéraire alternatif en sélectionnant les routes à éviter</string>
+    <string name="avoid_roads_msg">Générer un itinéraire alternatif en sélectionnant les routes à éviter</string>
     <string name="navigation_over_track">Démarrer le guidage en suivant cette trace \?</string>
     <string name="save_track_to_gpx_globally_headline">Enregistrement de parcours à la demande</string>
     <string name="proxy_pref_title">Proxy</string>
@@ -1444,7 +1444,7 @@
     <string name="shared_string_edit">Modifier</string>
     <string name="shared_string_is_open">Ouvert</string>
     <string name="filter_poi_hint">Filtrer par nom</string>
-    <string name="search_poi_category_hint">Saisir votre recherche</string>
+    <string name="search_poi_category_hint">Rechercher dans tout</string>
     <string name="index_name_netherlands">Europe - Pays-Bas</string>
     <string name="rendering_value__name">Par défaut</string>
     <string name="rendering_value_highContrastRoads_name">Routes avec fort contraste</string>
@@ -2098,7 +2098,7 @@
     <string name="track_points_category_name">Points de passage, points d’intérêt, points remarquables</string>
     <string name="shared_string_slope">Pente</string>
     <string name="lang_ber">Berbère</string>
-    <string name="relief_smoothness_factor_descr">Terrain préféré : Plat ou Vallonné.</string>
+    <string name="relief_smoothness_factor_descr">Terrain préféré : plat ou vallonné.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Moins vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plat</string>
@@ -2145,7 +2145,7 @@
     <string name="quick_action_auto_zoom_on">Activer le zoom automatique</string>
     <string name="quick_action_auto_zoom_off">Désactiver le zoom automatique</string>
     <string name="shared_string_paused">Mis en pause</string>
-    <string name="type_city_town">Saisir la ville ou le village</string>
+    <string name="type_city_town">Saisir une ville, un village ou un lieu-dit</string>
     <string name="type_postcode">Saisir le code postal</string>
     <string name="nearest_cities">Villes les plus proches</string>
     <string name="select_city">Sélectionner la ville</string>
@@ -2235,7 +2235,7 @@
     <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre « Guidage terminé »</string>
     <string name="quick_action_start_stop_navigation">Démarrer/Arrêter le guidage</string>
     <string name="quick_action_start_stop_navigation_descr">Bouton pour démarrer ou arrêter le guidage.</string>
-    <string name="mappilary_no_internet_desc">Vous devez être connectés à Internet pour afficher les photos Mapillary.</string>
+    <string name="mappilary_no_internet_desc">Les photos de Mapillary sont uniquement disponibles en ligne.</string>
     <string name="retry">Réessayer</string>
     <string name="measurement_tool_action_bar">Déplacez la carte et ajoutez des points</string>
     <string name="measurement_tool">Mesurer une distance</string>
@@ -2577,7 +2577,7 @@
     <string name="rendering_value_black_name">Noir</string>
     <string name="more_transport_on_stop_hint">Autres moyens de transport disponibles à cet arrêt.</string>
     <string name="search_street">Recherche par rue</string>
-    <string name="start_search_from_city">Recherche par ville</string>
+    <string name="start_search_from_city">Recherche par ville/village/lieu-dit</string>
     <string name="shared_string_restore">Restaurer</string>
     <string name="keep_passed_markers_descr">Les marques visitées resteront affichées sur la carte, que les marques appartiennent à un groupe de favoris ou qu\'il s\'agisse de points de passage GPX. Ces marques ne disparaîtront que lorsque le groupe ou la trace sera désactivé.</string>
     <string name="keep_passed_markers">Afficher sur la carte les marques visitées</string>
@@ -3292,7 +3292,7 @@
     <string name="lang_gu">Gujarati</string>
     <string name="osm_live_payment_subscription_management">Le paiement est prélevé sur votre compte Google Play lors de la confirmation de l’achat.\n\nL’abonnement est renouvelé automatiquement, sauf annulation avant la période de renouvellement choisie.\n\nVous pouvez gérer ou annuler vos abonnements à tout moment dans les paramètres Google Play.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="search_poi_types_descr">Combinez des POI de différentes catégories. Appuyez sur \"basculer\" pour tout sélectionner, le côté gauche sélectionne une catégorie.</string>
+    <string name="search_poi_types_descr">Combiner des POI de différentes catégories à l\'aide des interrupteurs et des cases à cocher.</string>
     <string name="search_poi_types">Rechercher des types de POI</string>
     <string name="radius_ruler_item">Règle de rayon</string>
     <string name="map_markers_item">Marques</string>
@@ -4367,7 +4367,7 @@
     <string name="favorite_delete_group">Supprimer le groupe</string>
     <string name="favorite_confirm_delete_group">Supprimer le groupe « %1$s » et ses points (%2$d) ?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
-    <string name="display_position">Emplacement sur l’écran</string>
+    <string name="display_position">Emplacement de l\'icône de position sur l\'écran</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Orientation manuelle</string>
@@ -4775,7 +4775,7 @@
     <string name="terrain_map">Carte du terrain (3D)</string>
     <string name="relief_3d_description">Explorez le modèle réduit de votre quartier ou de tout un continent.</string>
     <string name="terrain_category_description">Courbes de niveaux, ombrage du relief par des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les plaines.</string>
-    <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l’inclinaison du terrain. Vous pouvez en apprendre davantage sur les pentes dans %1$s.</string>
+    <string name="slope_legend_description">Pente utilise des couleurs pour visualiser la déclivité du terrain. Vous pouvez en apprendre davantage sur les pentes sur %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
 \n
 \nLes données de l\'appareil ne seront pas affectées.</string>
