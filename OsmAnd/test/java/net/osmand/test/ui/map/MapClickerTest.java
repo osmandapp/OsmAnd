@@ -64,6 +64,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @LargeTest
@@ -80,7 +81,6 @@ public class MapClickerTest extends AndroidTest {
 	@Before
 	public void setup() {
 		super.setup();
-		copyObfsFromAssetToAppFolder();
 		poiTypesInitIdlingResource = new PoiTypesInitIdlingResource("PoiTypesInit", app);
 		IdlingRegistry.getInstance().register(poiTypesInitIdlingResource);
 	}
@@ -126,14 +126,17 @@ public class MapClickerTest extends AndroidTest {
 		for (ClickData click : clicks) {
 			lattitude = click.latitude;
 			longitude = click.longitude;
+			LatLon location = new LatLon(lattitude, longitude);
 			zoom = click.zoom;
-			testResult.events.add(new LocationAction(new LatLon(lattitude, longitude), zoom, LocationActionType.MOVE_LOCATION));
+			long startMoveToLocation = System.currentTimeMillis();
 			moveAndZoomMap(app, lattitude, longitude, zoom);
-			testResult.events.add(new WaitIdleRenderingEvent(false, waitForRenderingIdle(app, false)));
-			testResult.events.add(new WaitIdleRenderingEvent(true, waitForRenderingIdle(app, true)));
+			boolean renderingStarted = waitForRenderingIdle(app, false);
+			waitForRenderingIdle(app, true);
+			long endMoveToLocation = System.currentTimeMillis();
+			testResult.events.add(new MoveToLocationEvent(location, click.zoom, startMoveToLocation, endMoveToLocation, renderingStarted));
 			float x = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixXFromLatLon(lattitude, longitude);
 			float y = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixYFromLatLon(lattitude, longitude);
-			testResult.events.add(new LocationAction(new LatLon(lattitude, longitude), zoom, LocationActionType.CLICK_LOCATION));
+			long startOpenMenu = System.currentTimeMillis();
 			if (click.clickType != null) {
 				switch (click.clickType) {
 					case SINGLE -> {
@@ -155,29 +158,41 @@ public class MapClickerTest extends AndroidTest {
 					withId(R.id.context_menu_layout),       // first possible view
 					withId(R.id.multi_selection_main_view)  // second possible view
 			);
+			long endOpenMenu = System.currentTimeMillis();
 			boolean menuOpened = false;
-			ActionResult actionResult = null;
+			OpenLocationEvent openLocationEvent = new OpenLocationEvent(location, zoom, startOpenMenu, endOpenMenu);
 			if (isViewVisible(withId(R.id.context_menu_layout))) {
 				ViewGroup menuLayout = (ViewGroup) getViewById(R.id.context_menu_layout);
 				menuOpened = true;
+				openLocationEvent.openType = OpenMenuResultType.OPEN;
+				openLocationEvent.type = MenuType.MENU;
 				ViewGroup menuBottomView = menuLayout.findViewById(R.id.context_menu_bottom_view);
-				MenuDescription menuDescription = new MenuDescription(MenuType.Menu);
 				for (int i = 0; i < menuBottomView.getChildCount(); i++) {
 					View child = menuBottomView.getChildAt(i); // item
+					List<View> l = null;
+					if (child instanceof ViewGroup) {
+						l = getAllChildren((ViewGroup) child);
+					}
+					if (l == null) {
+						continue;
+					}
+					List<String> textFields = l.stream()
+							.filter(view -> view instanceof TextView)
+							.map(tv -> ((TextView) tv).getText().toString())
+							.toList();
 					MenuItem item = new MenuItem(
 							getImageViewDescription(findDescendantOfType(child, ImageView.class, 0)),
-							getTextViewDescription(findDescendantOfType(child, TextView.class, 0)),
-							getTextViewDescription(findDescendantOfType(child, TextView.class, 1))
+							textFields
 					);
-					menuDescription.addItem(item);
+					openLocationEvent.addRow(item);
 				}
-				actionResult = new ActionResult(ActionResultType.OPEN, menuDescription);
 			}
 			if (isViewVisible(withId(R.id.multi_selection_main_view))) {
 				menuOpened = true;
+				openLocationEvent.openType = OpenMenuResultType.OPEN;
+				openLocationEvent.type = MenuType.MS;
 				ViewGroup menuLayout = (ViewGroup) getViewById(R.id.multi_selection_main_view);
 				ListView menuList = menuLayout.findViewById(R.id.list);
-				MenuDescription menuDescription = new MenuDescription(MenuType.MS);
 				int itemsCount = menuList.getAdapter().getCount();
 				for (int i = 1; i < itemsCount; i++) { // skip header
 					View[] viewHolder = new View[1];
@@ -190,24 +205,21 @@ public class MapClickerTest extends AndroidTest {
 					if (item != null) {
 						MenuItem itemDescription = new MenuItem(
 								getIconWithIdDescription(item.getRightIconId()),
-								((TextView) itemView.findViewById(R.id.context_menu_line1)).getText().toString(),
-								((TextView) itemView.findViewById(R.id.context_menu_line2)).getText().toString()
+								Arrays.asList(((TextView) itemView.findViewById(R.id.context_menu_line1)).getText().toString(),
+										((TextView) itemView.findViewById(R.id.context_menu_line1)).getText().toString())
 						);
-						menuDescription.addItem(itemDescription);
+						openLocationEvent.addRow(itemDescription);
 					}
 				}
-				actionResult = new ActionResult(ActionResultType.OPEN, menuDescription);
 			}
+			testResult.events.add(openLocationEvent);
 			if (menuOpened) {
 				pressBack();
-			} else {
-				actionResult = new ActionResult(ActionResultType.NOT_OPEN);
 			}
-			testResult.events.add(actionResult);
 		}
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(testResult);
-		FileUtils.saveJsonToDownloadsFolder(json, app, "check_result.json");
+		FileUtils.saveToFile(json, app, "check_result.json");
 		LOG.debug("\n\n\n\ntestClickOnMpPoint: \n" + json);
 	}
 
@@ -216,6 +228,25 @@ public class MapClickerTest extends AndroidTest {
 			return "icon " + app.getResources().getResourceEntryName(iconId);
 		} else {
 			return "NO_ICON";
+		}
+	}
+
+	public static List<View> getAllChildren(ViewGroup parentView) {
+		List<View> allChildren = new ArrayList<>();
+		if (parentView == null) {
+			return allChildren;
+		}
+		collectChildren(parentView, allChildren);
+		return allChildren;
+	}
+
+	private static void collectChildren(ViewGroup viewGroup, List<View> collectedViews) {
+		for (int i = 0; i < viewGroup.getChildCount(); i++) {
+			View child = viewGroup.getChildAt(i);
+			collectedViews.add(child);
+			if (child instanceof ViewGroup) {
+				collectChildren((ViewGroup) child, collectedViews);
+			}
 		}
 	}
 
@@ -262,10 +293,10 @@ public class MapClickerTest extends AndroidTest {
 
 	public enum MenuType {
 		MS,
-		Menu
+		MENU
 	}
 
-	public record MenuItem(String icon, String text1, String text2) {
+	public record MenuItem(String icon, List<String> textFields) {
 	}
 
 	public class MenuDescription {
@@ -294,12 +325,7 @@ public class MapClickerTest extends AndroidTest {
 		}
 	}
 
-	public enum LocationActionType {
-		CLICK_LOCATION,
-		MOVE_LOCATION
-	}
-
-	public enum ActionResultType {
+	public enum OpenMenuResultType {
 		OPEN,
 		NOT_OPEN
 	}
@@ -322,15 +348,17 @@ public class MapClickerTest extends AndroidTest {
 
 	}
 
-	public abstract class Event {
-		private final long timestamp;
+	private abstract class Event {
+		private final long start;
+		private final long end;
 		private final float cpuLoad;
 		private final long usedMemory;
 		private int frameId = 0;
 		private boolean renderingIdle;
 		private String name;
+		private EventType eventType;
 
-		public Event() {
+		public Event(@NonNull EventType eventType, long start, long end) {
 			MapRendererView renderer = app.getOsmandMap().getMapView().getMapRenderer();
 			float cpuBasic = 0;
 			if (renderer != null) {
@@ -340,85 +368,58 @@ public class MapClickerTest extends AndroidTest {
 			cpuLoad = cpuBasic > 0 ? cpuBasic : 0;
 			Runtime runtime = Runtime.getRuntime();
 			usedMemory = runtime.totalMemory() - runtime.freeMemory();
-			timestamp = System.currentTimeMillis();
+			this.start = start;
+			this.end = end;
 			renderingIdle = isRenderingIdle(app);
 			name = getClass().getSimpleName();
-		}
-
-		public long getTimestamp() {
-			return timestamp;
-		}
-
-		public float getCpuLoad() {
-			return cpuLoad;
-		}
-
-		public int getFrameId() {
-			return frameId;
-		}
-
-		public long getUsedMemory() {
-			return usedMemory;
+			this.eventType = eventType;
 		}
 	}
 
-	private final class WaitIdleRenderingEvent extends Event {
-		private final boolean targetState;
-		private final boolean isSuccess;
-
-		public WaitIdleRenderingEvent(boolean targetState, boolean isSuccess) {
-			super();
-			this.targetState = targetState;
-			this.isSuccess = isSuccess;
-		}
+	private enum EventType {
+		MOVE_TO_LOCATION,
+		OPEN_LOCATION
 	}
 
-	public final class LocationAction extends Event {
+	private class LocationEvent extends Event {
 		private final LatLon location;
 		private final int zoom;
-		private final LocationActionType type;
 
-		public LocationAction(LatLon location, int zoom, LocationActionType type) {
-			super();
+		public LocationEvent(@NonNull LatLon location, int zoom, @NonNull EventType eventType, long start, long end) {
+			super(eventType, start, end);
 			this.location = location;
 			this.zoom = zoom;
-			this.type = type;
-		}
-
-		public LatLon getLocation() {
-			return location;
-		}
-
-		public int getZoom() {
-			return zoom;
-		}
-
-		public LocationActionType getType() {
-			return type;
 		}
 	}
 
-	public final class ActionResult extends Event {
-		private final MenuDescription menuDescription;
-		private final ActionResultType type;
+	private class MoveToLocationEvent extends LocationEvent {
+		private boolean withRendering;
 
-		public ActionResult(@NonNull ActionResultType type) {
-			this(type, null);
+		public MoveToLocationEvent(@NonNull LatLon location, int zoom, long start, long end, boolean withRendering) {
+			super(location, zoom, EventType.MOVE_TO_LOCATION, start, end);
+			this.withRendering = withRendering;
+		}
+	}
+
+	private class OpenLocationEvent extends LocationEvent {
+		private OpenMenuResultType openType = OpenMenuResultType.NOT_OPEN;
+		private MenuType type;
+		private List<MenuItem> rows = new ArrayList<>();
+
+		public OpenLocationEvent(@NonNull LatLon location, int zoom, long start, long end) {
+			super(location, zoom, EventType.OPEN_LOCATION, start, end);
 		}
 
-		public ActionResult(@NonNull ActionResultType type, @Nullable MenuDescription menuDescription) {
-			super();
-			this.menuDescription = menuDescription;
+		public void setType(@NonNull MenuType type) {
 			this.type = type;
 		}
 
-		@Nullable
-		public MenuDescription getMenuDescription() {
-			return menuDescription;
+		public void setOpenType(OpenMenuResultType openType) {
+			this.openType = openType;
 		}
 
-		public ActionResultType getType() {
-			return type;
+		public void addRow(@NonNull MenuItem row) {
+			rows.add(row);
 		}
 	}
 }

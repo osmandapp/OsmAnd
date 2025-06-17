@@ -22,4 +22,7 @@
     <item name="elevation_widget_show_slopes" type="id"/>
     <item name="elevation_widget_hide_slopes" type="id"/>
 
+    <!--ids for test purposes to be used in tags-->
+    <item name="testId" type="id"/>
+
 </resources>

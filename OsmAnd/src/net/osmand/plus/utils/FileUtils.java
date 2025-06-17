@@ -476,88 +476,14 @@ public class FileUtils {
 		return new File(backupDir, fileName);
 	}
 
-	public static void saveJsonToDownloadsFolder(String jsonString, Context context, @NonNull String fileName) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-			saveJsonToDownloadsFolderQAndAbove(jsonString, context, fileName);
-		} else {
-			saveJsonToDownloadsFolderLegacy(jsonString, context, fileName);
+	public static void saveToFile(String jsonString, @NonNull OsmandApplication app, @NonNull String fileName) {
+		File outputFile = new File(app.getAppPath(null) + File.separator, fileName);
+		if (outputFile.exists()) {
+			outputFile.delete();
 		}
-	}
-
-	@RequiresApi(29)
-	private static void saveJsonToDownloadsFolderQAndAbove(String jsonString, Context context, @NonNull String fileName) {
-		ContentResolver resolver = context.getContentResolver();
-		Uri existingUri = null;
-		String mimeType = "application/json";
-		String relativePath = Environment.DIRECTORY_DOWNLOADS;
-		String selection = MediaStore.MediaColumns.DISPLAY_NAME + "=? AND " +
-				MediaStore.MediaColumns.RELATIVE_PATH + "=?";
-		String[] selectionArgs = new String[] {fileName, relativePath + File.separator};
-		Uri collection = MediaStore.Downloads.EXTERNAL_CONTENT_URI;
-
-		try (Cursor cursor = resolver.query(collection,
-				new String[] {MediaStore.MediaColumns._ID, MediaStore.MediaColumns.DATA},
-				selection,
-				selectionArgs,
-				null)) {
-			if (cursor != null && cursor.moveToFirst()) {
-				long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID));
-				existingUri = Uri.withAppendedPath(collection, String.valueOf(id));
-			}
-		} catch (IllegalArgumentException e) {
-			PlatformUtil.getLog(FileUtils.class).error(e);
-		}
-		Uri uriToUse = existingUri;
-		if (uriToUse == null) {
-			ContentValues contentValues = new ContentValues();
-			contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName);
-			contentValues.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
-			contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, relativePath);
-			try {
-				uriToUse = resolver.insert(collection, contentValues);
-			} catch (Exception e) {
-				PlatformUtil.getLog(FileUtils.class).error(e);
-				return;
-			}
-		}
-		if (uriToUse != null) {
-			OutputStream os = null;
-			try {
-				os = resolver.openOutputStream(uriToUse, "w");
-				if (os != null) {
-					os.write(jsonString.getBytes());
-				}
-			} catch (IOException e) {
-				PlatformUtil.getLog(FileUtils.class).error(e);
-				if (existingUri == null && uriToUse != null) {
-					resolver.delete(uriToUse, null, null);
-				}
-			} finally {
-				try {
-					if (os != null) {
-						os.close();
-					}
-				} catch (IOException e) {
-					PlatformUtil.getLog(FileUtils.class).error(e);
-				}
-			}
-		}
-	}
-
-	private static void saveJsonToDownloadsFolderLegacy(String jsonString, Context context, @NonNull String fileName) {
-		if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-				!= PackageManager.PERMISSION_GRANTED) {
-			PlatformUtil.getLog(FileUtils.class).error(new SecurityException("WRITE_EXTERNAL_STORAGE permission not granted. Cannot save file on API < 29."));
-			return;
-		}
-		File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-		if (!downloadsDir.exists()) {
-			downloadsDir.mkdirs();
-		}
-		File file = new File(downloadsDir, fileName);
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream(file);
+			fos = new FileOutputStream(outputFile);
 			fos.write(jsonString.getBytes());
 		} catch (IOException e) {
 			PlatformUtil.getLog(FileUtils.class).error(e);
