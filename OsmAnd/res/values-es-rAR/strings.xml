@@ -5645,4 +5645,6 @@
     <string name="osm_live_payment_renews_3_years">Renovar cada 3 años</string>
     <string name="release_5_1">• Se agregó compatibilidad al comprar por Internet y entre plataformas\n\n • Se movió la opción \"Unidades de temperatura\" a los ajustes generales para facilitar el acceso\n\n • Se añadió el indicador del nivel de batería para sensores BLE\n\n • Nueva interfaz de usuario más intuitiva para la elección de puntos en la navegación\n\n • Se mejoró la visibilidad de los widget con un contorno nuevo\n\n • Se agregó un analizador de ascenso y descenso\n\n • Mayor integración de Wikipedia y Wikiviajes para más PDI.</string>
     <string name="osm_live_payment_3_years_title">Cada 3 años</string>
+    <string name="deleting">Borrando…</string>
+    <string name="deleting_history">Borrando historial…</string>
 </resources>
