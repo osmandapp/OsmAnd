@@ -176,10 +176,13 @@ public class MapClickerTest extends AndroidTest {
 					if (l == null) {
 						continue;
 					}
-					List<String> textFields = l.stream()
-							.filter(view -> view instanceof TextView)
-							.map(tv -> ((TextView) tv).getText().toString())
-							.toList();
+					List<String> textFields = new ArrayList<>();
+					for (View view : l) {
+						if (view instanceof TextView) {
+							TextView tv = (TextView) view;
+							textFields.add(tv.getText().toString());
+						}
+					}
 					MenuItem item = new MenuItem(
 							getImageViewDescription(findDescendantOfType(child, ImageView.class, 0)),
 							textFields
