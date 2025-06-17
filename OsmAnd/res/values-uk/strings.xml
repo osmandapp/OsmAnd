@@ -5786,4 +5786,6 @@
     <string name="years_3">Три роки</string>
     <string name="three_years_subscription">Трирічна підписка</string>
     <string name="osm_live_payment_3_years_title">Кожні три роки</string>
+    <string name="deleting">Видалення…</string>
+    <string name="deleting_history">Видалення історії…</string>
 </resources>
