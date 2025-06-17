@@ -4953,7 +4953,7 @@
     <string name="poi_atv_yes">VTT : oui</string>
     <string name="poi_atv_no">VTT : non</string>
     <string name="poi_access_notes">Notes d\'accès</string>
-    <string name="poi_contact_website">Site Internet</string>
+    <string name="poi_contact_website">Site web</string>
     <string name="poi_network_lwn">Itinéraires de randonnée locaux (LWN)</string>
     <string name="poi_network_icn">Itinéraires cyclables internationaux (ICN)</string>
     <string name="poi_network_rcn">Itinéraires cyclables régionaux (RCN)</string>
