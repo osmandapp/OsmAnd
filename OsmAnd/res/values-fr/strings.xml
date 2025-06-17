@@ -1427,7 +1427,7 @@
     <string name="mark_to_delete">Marquer pour suppression</string>
     <string name="current_route">Itinéraire actuel</string>
     <string name="welmode_download_maps">Télécharger les cartes</string>
-    <string name="welcome_select_region">Pour refléter correctement la signalisation et la réglementation routière, veuillez sélectionner votre région de conduite :</string>
+    <string name="welcome_select_region">Pour appliquer correctement la signalisation et la réglementation routière, veuillez sélectionner votre région de conduite :</string>
     <string name="welcome_text">Avec OsmAnd visualisez des cartes hors ligne et naviguez sans couverture réseau dans le monde entier.</string>
     <string name="welcome_header">Bienvenue</string>
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, …) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez « Oui ».</string>
@@ -1502,7 +1502,7 @@
     <string name="lang_nn">Norvégien Nynorsk</string>
     <string name="archive_wikipedia_data">Le format des données Wikipédia est obsolète. Souhaitez-vous les archiver ?</string>
     <string name="lang_te">Télougou</string>
-    <string name="restart_is_required">Un redémarrage est nécessaire pour appliquer le changement.</string>
+    <string name="restart_is_required">Un redémarrage de l’application est nécessaire pour appliquer la modification.</string>
     <string name="rendering_attr_currentTrackColor_name">Couleur des traces GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Largeur des traces GPX</string>
     <string name="rendering_value_red_name">Rouge</string>
