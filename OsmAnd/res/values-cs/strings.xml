@@ -5779,4 +5779,6 @@
     <string name="years_3">Tři roky</string>
     <string name="osm_live_payment_3_years_title">Každé tři roky</string>
     <string name="three_years_subscription">Tříleté předplatné</string>
+    <string name="deleting_history">Mazání historie…</string>
+    <string name="deleting">Mazání…</string>
 </resources>

@@ -5760,5 +5760,7 @@
     <string name="years_3">Tri godine</string>
     <string name="osm_live_payment_3_years_title">Svake tri godine</string>
     <string name="three_years_subscription">Trogodišnja pretplata</string>
-    <string name="release_5_1">• Dodata je podrška za kupovinu na vebu i preko platformi\n\n• Jedinice za temperaturu su premeštene u Opšta podešavanja radi lakšeg pristupa\n\n• Dodat je indikator nivoa baterije za BLE senzore\n\n• Novi, intuitivniji UI za izbor tačaka u Navigaciji\n\n• Poboljšana vidljivost vidžeta sa novim obrisom\n\n• Dodat je analizator Uspona/Spusta\n\n• Proširena integracija sa Vikipedijom i Vikivojažem za više TOI.</string>
+    <string name="release_5_1">• Dodata je podrška za kupovinu na WEB-u i preko platformi\n\n• Jedinice za temperaturu su premeštene u Opšta podešavanja radi lakšeg pristupa\n\n• Dodat je indikator nivoa baterije za BLE senzore\n\n• Novi, intuitivniji UI za izbor tačaka u Navigaciji\n\n• Poboljšana vidljivost vidžeta sa novim obrisom\n\n• Dodat je analizator Uspona/Spusta\n\n• Proširena integracija sa Vikipedijom i Vikivojažem za više TOI.</string>
+    <string name="deleting">Brisanje…</string>
+    <string name="deleting_history">Brisanje istorije…</string>
 </resources>

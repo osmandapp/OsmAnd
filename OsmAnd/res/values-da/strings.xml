@@ -5807,4 +5807,6 @@
     <string name="osm_live_payment_3_years_title">Hvert tredje år</string>
     <string name="osm_live_payment_renews_3_years">Fornyes hvert tredje år</string>
     <string name="three_years_subscription">Tre års abonnement</string>
+    <string name="deleting">Sletter…</string>
+    <string name="deleting_history">Sletter historik…</string>
 </resources>

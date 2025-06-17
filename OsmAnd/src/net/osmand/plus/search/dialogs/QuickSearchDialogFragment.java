@@ -877,8 +877,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void setupSearch(MapActivity mapActivity) {
 		// Setup search core
-		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 		searchHelper = app.getSearchUICore();
 		searchUICore = searchHelper.getCore();
 		defaultResultListener = new SearchResultListener() {
@@ -924,9 +922,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchLatLon = centerLatLon;
 			useMapCenter = true;
 		}
+
+		String appLang = app.getLanguage();
+		String mapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		
 		SearchSettings settings = searchUICore.getSearchSettings().setOriginalLocation(
 				new LatLon(searchLatLon.getLatitude(), searchLatLon.getLongitude()));
-		settings = settings.setLang(locale, transliterate);
+		settings = settings.setLangs(appLang, mapLang, transliterate);
 		searchUICore.updateSettings(settings);
 
 		if (newSearch) {
