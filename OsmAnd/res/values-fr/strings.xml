@@ -2069,7 +2069,7 @@
     <string name="quick_action_page_list_descr">Bouton pour faire défiler la liste ci-dessous.</string>
     <string name="rendering_attr_depthContours_description">Afficher les courbes et points de profondeur.</string>
     <string name="rendering_attr_depthContours_name">Courbes de profondeur nautique</string>
-    <string name="routing_attr_height_obstacles_name">Altitude prise en compte</string>
+    <string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
     <string name="average_altitude">Altitude moyenne</string>
     <string name="total_distance">Distance totale</string>
     <string name="shared_string_time">Durée</string>
@@ -3673,7 +3673,7 @@
     <string name="live_update_delete_updates_msg">Supprimer les %s mises à jour temps réel \?</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
-    <string name="routing_attr_height_obstacles_description">La durée estimée prendra en compte l\'altitude. Ce paramètre peut aider à éviter les fortes ascensions :</string>
+    <string name="routing_attr_height_obstacles_description">Le temps de trajet estimé tiendra compte de l’impact de l’altitude. La préférence d’itinéraire peut aider à éviter les fortes montées :</string>
     <string name="map_widget_distance_by_tap">Distance par appui</string>
     <string name="latest_openstreetmap_update">Dernière mise à jour d\'OpenStreetMap disponible :</string>
     <string name="updated">Mis à jour : %s</string>
@@ -4777,7 +4777,7 @@
     <string name="terrain_map">Carte du terrain (3D)</string>
     <string name="relief_3d_description">Explorez le modèle réduit de votre quartier ou de tout un continent.</string>
     <string name="terrain_category_description">Courbes de niveaux, ombrage du relief par des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les plaines.</string>
-    <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l\'inclinaison du terrain. Pour en savoir plus sur les pentes, consultez %1$s.</string>
+    <string name="slope_legend_description">Pente utilise des couleurs pour visualiser la déclivité du terrain. Vous pouvez en apprendre davantage sur les pentes dans %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
 \n
 \nLes données de l\'appareil ne seront pas affectées.</string>
