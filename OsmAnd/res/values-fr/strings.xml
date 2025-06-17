@@ -1534,7 +1534,7 @@
     <string name="rendering_value_defaultTranslucentCyan_name">Par défaut (cyan translucide)</string>
     <string name="do_you_like_osmand">Aimez-vous OsmAnd ?</string>
     <string name="rate_this_app">Évaluer cette application</string>
-    <string name="rate_this_app_long">Merci de noter OsmAnd sur Google Play</string>
+    <string name="rate_this_app_long">Merci d\'évaluer OsmAnd sur Google Play</string>
     <string name="user_hates_app_get_feedback">Indiquez-nous pourquoi.</string>
     <string name="user_hates_app_get_feedback_long">N’hésitez pas à nous faire part de vos suggestions.</string>
     <string name="download_live_updates">Mise à jour automatique</string>
