@@ -9,11 +9,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class ChooseCoordsFormatDialogFragment extends DialogFragment {
+
+	private static final String TAG = ChooseCoordsFormatDialogFragment.class.getSimpleName();
 
 	@NonNull
 	@Override
@@ -42,5 +46,11 @@ public class ChooseCoordsFormatDialogFragment extends DialogFragment {
 					dialog.dismiss();
 				});
 		return builder.create();
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			new ChooseCoordsFormatDialogFragment().show(fm, TAG);
+		}
 	}
 }
