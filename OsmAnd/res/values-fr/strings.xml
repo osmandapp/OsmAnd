@@ -374,7 +374,7 @@
     <string name="route_head">Avancez</string>
     <string name="first_time_continue">Plus tard</string>
     <string name="first_time_download">Téléchargement des régions</string>
-    <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. Téléchargez des données de la région pour une utilisation hors ligne via « Menu → Télécharger les cartes ». Vous pourrez ainsi afficher des cartes, rechercher une adresse, un point d\'intérêt ou un transport en commun, calculer et suivre des itinéraires et bien plus encore, sans utiliser vos données mobiles.</string>
+    <string name="first_time_msg">Merci d’utiliser OsmAnd. Téléchargez des données régionales pour une utilisation hors ligne via « Menu → Télécharger des cartes » afin de consulter les cartes, localiser des adresses, rechercher des POI, trouver les transports en commun, et plus encore.</string>
     <string name="search_poi_location">Recherche du signal…</string>
     <string name="search_near_map">Rechercher autour du centre de la carte</string>
     <string name="search_nearby">Rechercher à proximité</string>
@@ -682,14 +682,14 @@
     <string name="route_roundabout">Giratoire : prenez la sortie %1$d puis continuez</string>
     <string name="route_kl">Serrez à gauche</string>
     <string name="route_kr">Serrez à droite</string>
-    <string name="rendering_attr_noPolygons_description">Rendre invisibles les surfaces représentant des éléments de terrain.</string>
+    <string name="rendering_attr_noPolygons_description">Rendre transparents tous les éléments de surface sur la carte.</string>
     <string name="rendering_attr_noPolygons_name">Polygones</string>
     <string name="rendering_attr_appMode_name">Mode de rendu</string>
     <string name="rendering_attr_appMode_description">Optimisation de la carte selon le profil d\'utilisation</string>
     <string name="rendering_attr_contourLines_description">Afficher à partir du niveau de zoom (données courbes de niveau requises) :</string>
     <string name="rendering_attr_contourLines_name">Afficher les courbes de niveau</string>
     <string name="rendering_attr_hmRendered_description">Augmenter le niveau de détail affiché.</string>
-    <string name="rendering_attr_hmRendered_name">Afficher plus de détail</string>
+    <string name="rendering_attr_hmRendered_name">Afficher plus de détails</string>
     <string name="asap">Dès que possible</string>
     <string name="gpxup_public">Publique</string>
     <string name="gpxup_identifiable">Identifiable</string>
@@ -1029,7 +1029,7 @@
     <string name="app_mode_aircraft">Avion</string>
     <string name="app_modes_choose_descr">Sélectionner les profils à afficher.</string>
     <string name="app_modes_choose">Profils de l\'appli</string>
-    <string name="map_widget_map_rendering">Rendu de la carte</string>
+    <string name="map_widget_map_rendering">Rendu de carte</string>
     <string name="amenity_type_seamark">Balise marine</string>
     <string name="speech_rate_descr">Indiquer la vitesse d\'élocution de la voix de synthèse (TTS).</string>
     <string name="speech_rate">Vitesse d\'élocution</string>
@@ -1534,9 +1534,9 @@
     <string name="rendering_value_defaultTranslucentCyan_name">Par défaut (cyan translucide)</string>
     <string name="do_you_like_osmand">Aimez-vous OsmAnd ?</string>
     <string name="rate_this_app">Évaluer cette application</string>
-    <string name="rate_this_app_long">Merci d\'évaluer OsmAnd sur Google Play</string>
+    <string name="rate_this_app_long">Merci de noter OsmAnd sur Google Play</string>
     <string name="user_hates_app_get_feedback">Indiquez-nous pourquoi.</string>
-    <string name="user_hates_app_get_feedback_long">Merci de nous faire part de ce que vous voudriez améliorer dans cette application.</string>
+    <string name="user_hates_app_get_feedback_long">N’hésitez pas à nous faire part de vos suggestions.</string>
     <string name="download_live_updates">Mise à jour automatique</string>
     <string name="failed_to_upload">Erreur lors de l’envoi</string>
     <string name="delete_change">Supprimer les modifications</string>
@@ -1632,7 +1632,7 @@
     <string name="shared_string_send">Envoyer</string>
     <string name="application_dir_description">Choisir l’emplacement de stockage des cartes et autres fichiers de données.</string>
     <string name="simulate_initial_startup">Simuler un premier démarrage</string>
-    <string name="simulate_initial_startup_descr">Définir le drapeau pour simuler un premier démarrage (conserve tous les autres paramètres).</string>
+    <string name="simulate_initial_startup_descr">Définir l\'indicateur pour simuler un premier démarrage (conserve tous les autres paramètres).</string>
     <string name="show_on_start_description">« Inactif » affiche la carte dès le lancement de l\'application.</string>
     <string name="map_downloaded">Carte téléchargée</string>
     <string name="go_to_map">Afficher la carte</string>
@@ -1798,8 +1798,7 @@
     <string name="osm_live_active">Actif</string>
     <string name="osm_live_not_active">Inactif</string>
     <string name="osm_live_enter_email">Veuillez saisir une adresse courriel valide</string>
-    <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
-\nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
+    <string name="osm_live_thanks">Merci de soutenir OsmAnd !\nRedémarrez l’application pour activer toutes les nouvelles fonctionnalités.</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
     <string name="show_transparency_seekbar">Afficher le curseur de transparence</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
@@ -1820,7 +1819,7 @@
     <string name="storage_permission_restart_is_required">L\'application est maintenant autorisée à écrire sur la mémoire externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
     <string name="full_report">Rapport complet</string>
     <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
-    <string name="storage_directory_readonly_desc">Basculé vers la mémoire interne car l\'emplacement de stockage précédemment sélectionné était protégé en écriture. Merci de sélectionner un dossier où l\'écriture est autorisée.</string>
+    <string name="storage_directory_readonly_desc">Passage à la mémoire interne, le dossier de stockage sélectionné étant protégé en écriture. Veuillez choisir un répertoire de stockage accessible en écriture.</string>
     <string name="osm_user_stat">Modifications %1$s, classement %2$s, nombre total de modifications %3$s</string>
     <string name="osm_live_subscription">Abonnement OsmAnd Live</string>
     <string name="no_map_markers_found">Veuillez ajouter des marques depuis la carte</string>
@@ -2106,7 +2105,7 @@
     <string name="routing_attr_driving_style_speed_name">Routes plus courtes</string>
     <string name="routing_attr_driving_style_balance_name">Équilibré</string>
     <string name="routing_attr_driving_style_safety_name">Privilégier les routes secondaires</string>
-    <string name="full_version_thanks">Merci d\'avoir acheté la version complète d\'OsmAnd.</string>
+    <string name="full_version_thanks">Merci d\'avoir acheté la version payante d\'OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Sélectionnez les préférences de relief</string>
     <string name="parking_options">Type de stationnement</string>
     <string name="do_not_send_anonymous_app_usage">N\'envoyer aucune information d\'usage sur les applications (même anonymes)</string>
@@ -2207,7 +2206,7 @@
     <string name="mapillary_image">Image Mapillary</string>
     <string name="distance_moving">Distance corrigée</string>
     <string name="shared_string_permissions">Autorisations</string>
-    <string name="import_gpx_failed_descr">Impossible d\'importer le fichier. Merci de vérifier qu\'OsmAnd possède l\'autorisation de lire le dossier et le fichier spécifiés.</string>
+    <string name="import_gpx_failed_descr">Impossible d’importer le fichier. Veuillez vérifier qu’OsmAnd a l’autorisation de le lire.</string>
     <string name="map_widget_ruler_control">Règle de rayon</string>
     <string name="wrong_user_name">Nom d\'utilisateur incorrect</string>
     <string name="shared_string_to">Vers</string>
@@ -2242,7 +2241,7 @@
     <string name="measurement_tool">Mesurer une distance</string>
     <string name="show_on_map_after_saving">Afficher sur la carte après enregistrement</string>
     <string name="route_point_one">Point 1 de l\'itinéraire</string>
-    <string name="none_point_error">Merci d\'ajouter au moins un point.</string>
+    <string name="none_point_error">Veuillez ajouter au moins un point.</string>
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
     <string name="waypoint_one">Étape 1</string>
     <string name="save_route_point">Enregistrer le point d\'itinéraire</string>
@@ -2559,7 +2558,7 @@
     <string name="unirs_render_descr">Modification du style par défaut pour augmenter le contraste des voies piétonnes et cyclables. Utilise les couleurs héritées de Mapnik.</string>
     <string name="get_osmand_live">Souscrivez à OsmAnd Live et vous pourrez utiliser toutes les fonctionnalités : Mise à jour quotidienne des cartes (avec un nombre illimité de téléchargements), Extensions, Wikipédia, Guides de voyage et bien plus encore ...</string>
     <string name="quick_action_edit_actions">Modifier les actions</string>
-    <string name="error_notification_desc">Merci d\'envoyer une capture écran de cette notification à support@osmand.net</string>
+    <string name="error_notification_desc">Merci d\'envoyer une capture d\'écran de cette notification à support@osmand.net</string>
     <string name="coord_input_edit_point">Modifier le point</string>
     <string name="coord_input_add_point">Ajouter un point</string>
     <string name="coord_input_save_as_track">Enregistrer comme trace</string>
@@ -2704,7 +2703,7 @@
     <string name="public_transport_warning_title">Les itinéraires en transport en commun sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
     <string name="add_intermediate">Ajouter un point intermédiaire</string>
     <string name="shared_string_walk">Marche</string>
-    <string name="save_poi_value_exceed_length">Merci de réduire la taille de l\'étiquette « %s » à moins de 255 caractères.</string>
+    <string name="save_poi_value_exceed_length">Réduisez la longueur d\'attribut « %s » à moins de 255 caractères.</string>
     <string name="save_poi_value_exceed_length_title">Taille de « %s »</string>
     <string name="avoid_pt_types_descr">Sélectionner les types de transport en commun à éviter pour le guidage :</string>
     <string name="avoid_pt_types">Éviter des types de transports…</string>
@@ -2775,7 +2774,7 @@
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">icône</string>
     <string name="collected_data">Données collectées</string>
-    <string name="rate_dialog_descr">Merci de nous donner votre avis et d\'évaluer notre travail sur Google Play.</string>
+    <string name="rate_dialog_descr">Merci de donner votre avis et d\'évaluer notre travail sur Google Play.</string>
     <string name="visited_screens_collect_descr">Aidez-nous à analyser quelles sont les fonctions d\'OsmAnd les plus utilisées.</string>
     <string name="select_icon_profile_dialog_title">Sélectionnez une icône</string>
     <string name="profile_alert_need_profile_name_msg">Vous devez d\'abord indiquer un nom de profil.</string>
@@ -2887,7 +2886,7 @@
     <string name="shared_string_default">Par défaut</string>
     <string name="app_mode_camper">Campeur</string>
     <string name="app_mode_campervan">Camping-car</string>
-    <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
+    <string name="rendering_attr_showLez_description">Afficher les zones à faibles émissions sur la carte. N’affecte pas le calcul d’itinéraire.</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
     <string name="new_route_calculated_dist_dbg">Itinéraire : distance %1$s, durée %2$s
 \nCalculs : %3$.1f secondes, %4$d routes, %5$d tuiles</string>
@@ -3084,7 +3083,7 @@
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="button_rate">Évaluer</string>
     <string name="file_does_not_contain_routing_rules">Aucune règle de routage n\'est présente dans le fichier « %1$s », veuillez choisir un autre fichier.</string>
-    <string name="not_support_file_type_with_ext">Fichier non pris en charge. Merci de sélectionner un fichier conforme ayant l\'extension %1$s.</string>
+    <string name="not_support_file_type_with_ext">Sélectionnez plutôt un fichier avec une extension %1$s prise en charge.</string>
     <string name="import_from_file">Importer depuis un fichier</string>
     <string name="import_routing_file">Importer un fichier d\'itinéraire</string>
     <string name="import_profile">Importer un profil</string>
@@ -3539,7 +3538,7 @@
     <string name="sign_in_with_open_street_map">Se connecter avec OpenStreetMap</string>
     <string name="markers_history">Historique des marqueurs</string>
     <string name="send_files_to_openstreetmap">Envoyer un fichier GPX vers OpenStreetMap</string>
-    <string name="enter_text_separated">Saisissez les étiquettes séparées par des virgules.</string>
+    <string name="enter_text_separated">Saisissez les attributs séparés par des virgules.</string>
     <string name="subscription_payment_issue_title">Appuyez sur le bouton pour configurer un mode de paiement sur Google Play pour résoudre le problème de votre abonnement.</string>
     <string name="osm_edit_comment_note">Commenter la note OSM</string>
     <string name="osm_edit_close_note">Fermer la note OSM</string>
@@ -3808,7 +3807,7 @@
     <string name="backup_delete_old_data_warning">Vous êtes sur le point de supprimer l\'historique des modifications.
 \n
 \nLa version actuelle des données va être sauvegardée sur le serveur mais vous ne pourrez pas revenir aux modifications supprimées.</string>
-    <string name="make_backup_descr">Il y a eu beaucoup de modifications sur cet appareil, merci de sauvegarder vos données et ainsi ne pas risquer de les perdre.</string>
+    <string name="make_backup_descr">De nombreuses modifications ont été détectées sur cet appareil. Veuillez sauvegarder vos données pour éviter toute perte.</string>
     <string name="backup_confilcts_descr">Certains fichiers n\'ont pas été envoyés sur le serveur car le serveur en possède une version plus récente.</string>
     <string name="backup_restore_data_descr">Restaurer des données sur l\'appareil à partir de sauvegardes en ligne.</string>
     <string name="backup_restore_data">Restaurer les données</string>
@@ -4105,10 +4104,10 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Représentation schématique des icônes à zoom faible</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Afficher les tunnels sur voie navigable</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Augmenter la visibilité des tunnels sur voie navigable</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_name">Étiquettes note</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_description">Afficher les étiquettes fixme</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les étiquettes note</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_name">Étiquettes fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Attributs note</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Afficher les attributs fixme</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les attributs note</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Attributs fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Catégorie</string>
     <string name="rendering_value_omit_name">Ignorer</string>
@@ -4326,7 +4325,7 @@
     <string name="auto_backup_title">Sauvegarde automatique</string>
     <string name="shared_string_duplicate">Dupliquer</string>
     <string name="rendering_attr_depthContourWidth_description">Largeur des courbes de profondeur</string>
-    <string name="compass_click_desc">Appuyer deux fois sur la boussole bascule entre les modes d\'orientation de la carte.</string>
+    <string name="compass_click_desc">Appuyez deux fois sur le bouton boussole pour basculer entre les modes d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des courbes de profondeur</string>
     <string name="av_notes_photo_widget_desc">Appuyez sur le widget pour prendre une photo.</string>
     <string name="av_notes_video_widget_desc">Appuyez sur le widget pour enregistrer une vidéo.</string>
@@ -4431,13 +4430,13 @@
     <string name="map_widget_altitude_current_location">Altitude : position actuelle</string>
     <string name="map_widget_altitude_map_center">Altitude : centre de la carte</string>
     <string name="map_widget_altitude_current_location_desc">Affiche l’altitude de la position actuelle.</string>
-    <string name="map_widget_rendering_fps">Rendu FPS de la carte</string>
+    <string name="map_widget_rendering_fps">IPS du rendu de carte</string>
     <string name="send_uuid_preference_desc">Un UUID aléatoire est utilisé pour télécharger les cartes hors ligne à partir des serveurs OsmAnd ; ce qui permet de garantir une utilisation équitable des ressources du serveur, de prévoir le trafic et de générer des rapports d\'utilisation mensuelle et anonyme des cartes.</string>
     <string name="map_widget_ant_bicycle_power">Puissance développée sur le vélo</string>
     <string name="external_sensors_plugin_description">Accède aux capteurs externes pour récupérer, par exemple, votre fréquence cardiaque, la vitesse du vélo, la puissance ou la cadence. Nécessite que votre appareil soit connecté aux capteurs via le protocole ANT+.</string>
     <string name="current_location_widget">Coordonnées : Emplacement actuel</string>
     <string name="map_center_widget">Coordonnées : Centre de la carte</string>
-    <string name="map_widget_rendering_fps_desc">Affiche la vitesse d\'affichage et d’actualisation de la carte et de ses éléments, exprimé en images par seconde (FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Indique la vitesse d’affichage et de rafraîchissement de la carte et de ses éléments, exprimée en images par seconde (IPS).</string>
     <string name="terms_of_service_desc">En téléchargeant des cartes, vous acceptez les conditions de %1$s et %2$s.</string>
     <string name="weather_offline_forecast">Prévisions hors ligne</string>
     <string name="weather_online_cache">Cache en ligne</string>
@@ -4511,7 +4510,7 @@
     <string name="speak_route_recalculation">Annoncer le recalcul de l’itinéraire</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine">Moteur de rendu de la carte</string>
+    <string name="map_rendering_engine">Moteur de rendu de carte</string>
     <string name="show_borders_of_downloaded_maps">Afficher les bordures des cartes téléchargées</string>
     <string name="rendering_engine_failed">Le rendu de carte OsmAnd a planté récemment.</string>
     <string name="share_crash_log">Partager le journal d\'erreur</string>
@@ -4536,9 +4535,9 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
-    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est plus rapide et permet l’affichage en 2.5D. La version 1 était utilisée jusqu\'à OsmAnd 4.3 et reste recommandée pour les smartphones plus anciens.</string>
+    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est un moteur de rendu de carte plus rapide, offrant également une vue en 2,5D. Le rendu version 1 était le mode par défaut avant OsmAnd 4.3 et reste recommandé pour les appareils plus anciens.</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolignes de vitesse de vent</string>
-    <string name="rendering_engine_failed_descr">OsmAnd utilise à nouveau la « Version 1 » du moteur de rendu de la carte. Pour essayer la « Version 2 (OpenGL) », allez dans les paramètres. \n \nAfin de nous aider à améliorer l\'application, merci de nous envoyer vos journaux d\'erreur.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd est repassé au mode de rendu de carte « Version 1 ». Vous pouvez tenter de réactiver le nouveau moteur « Version 2 (OpenGL) » dans les paramètres.\n\nMerci de contribuer aux améliorations en transmettant votre journal d’erreurs.</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Association Internationale de VTT</string>
     <string name="purchases_feature_desc_external_sensors">Affiche et enregistre les données des capteurs externes : vitesse du vélo, puissance du vélo, cadence et fréquence cardiaque.</string>
@@ -4812,7 +4811,7 @@
     <string name="cache_size">Taille du cache</string>
     <string name="shared_string_avoid">Éviter</string>
     <string name="may_be_used_if_there_is_shortcut">Peut être utilisé si un raccourci existe</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Utiliser raster sqltiedb pour l\'ombrage du relief et les pentes</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Utiliser une base raster SQLiteDB pour l\'ombrage du relief et les pentes</string>
     <string name="routing_attr_allow_via_ferrata_name">Itinéraire à flanc de montagne (Via ferrata)</string>
     <string name="free_settings_backup">Sauvegarde gratuite des paramètres</string>
     <string name="free_ride">Freeride</string>
@@ -5182,7 +5181,7 @@
     <string name="show_debug_info">Afficher les informations de debug</string>
     <string name="routing_attr_avoid_cobblestone_name">Éviter les pavés</string>
     <string name="routing_attr_avoid_cobblestone_description">Éviter les routes pavées</string>
-    <string name="map_text">Rendu de la carte</string>
+    <string name="map_text">Rendu de carte</string>
     <string name="allow_display_on_top">Autoriser l’affichage au-dessus des autres applications</string>
     <string name="allow_display_on_top_description">Permet d\'afficher les textes de carte les uns par dessus les autres</string>
     <string name="show_debug_info_description">Affiche les données graphiques de position pour chaque texte sur la carte</string>
