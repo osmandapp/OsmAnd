@@ -537,7 +537,7 @@
     <string name="search_address_street">Rue</string>
     <string name="search_address_building">Numéro</string>
     <string name="search_address_building_option">Numéro</string>
-    <string name="search_address_street_option">Rue intersectante</string>
+    <string name="search_address_street_option">Intersection de rue</string>
     <string name="context_menu_item_update_map">Mettre à jour la carte</string>
     <string name="context_menu_item_create_poi">Créer un POI</string>
     <string name="shared_string_yes">Oui</string>
