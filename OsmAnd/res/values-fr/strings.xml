@@ -1444,7 +1444,7 @@
     <string name="shared_string_edit">Modifier</string>
     <string name="shared_string_is_open">Ouvert</string>
     <string name="filter_poi_hint">Filtrer par nom</string>
-    <string name="search_poi_category_hint">Rechercher dans tout</string>
+    <string name="search_poi_category_hint">Rechercher partout</string>
     <string name="index_name_netherlands">Europe - Pays-Bas</string>
     <string name="rendering_value__name">Par défaut</string>
     <string name="rendering_value_highContrastRoads_name">Routes avec fort contraste</string>
