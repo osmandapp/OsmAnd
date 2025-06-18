@@ -320,9 +320,9 @@ public class DiscountHelper {
 					InAppPurchases purchases = purchaseHelper.getInAppPurchases();
 					for (InAppPurchase p : purchaseHelper.getSubscriptions().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
-							if (purchases.isMapsSubscription(p)) {
+							if (purchases.isMaps(p)) {
 								MapsPlusPlanFragment.showInstance(mapActivity, p.getSku());
-							} else if (purchases.isOsmAndProSubscription(p)) {
+							} else if (purchases.isOsmAndPro(p)) {
 								OsmAndProPlanFragment.showInstance(mapActivity, p.getSku());
 							} else {
 								ChoosePlanFragment.showDefaultInstance(mapActivity);

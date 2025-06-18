@@ -143,6 +143,7 @@ public abstract class InAppPurchaseHelper {
 		public PurchaseOrigin origin;
 		public String platform;
 		public long purchaseTime;
+		public long expireTime;
 		public InAppPurchase linkedPurchase;
 	}
 
@@ -328,11 +329,11 @@ public abstract class InAppPurchaseHelper {
 					if (p.isPurchased()) {
 						return true;
 					} else {
-						if (purchases.isLiveUpdatesSubscription(p) && InAppPurchaseUtils.isLiveUpdatesAvailable(ctx)) {
+						if (purchases.isLiveUpdates(p) && InAppPurchaseUtils.isLiveUpdatesAvailable(ctx)) {
 							return true;
-						} else if (purchases.isOsmAndProSubscription(p) && InAppPurchaseUtils.isOsmAndProAvailable(ctx)) {
+						} else if (purchases.isOsmAndPro(p) && InAppPurchaseUtils.isOsmAndProAvailable(ctx)) {
 							return true;
-						} else if (purchases.isMapsSubscription(p) && InAppPurchaseUtils.isMapsPlusAvailable(ctx)) {
+						} else if (purchases.isMaps(p) && InAppPurchaseUtils.isMapsPlusAvailable(ctx)) {
 							return true;
 						}
 					}
@@ -647,12 +648,14 @@ public abstract class InAppPurchaseHelper {
 				String sku = subObj.getString("sku");
 				String platform = subObj.optString("platform", null);
 				long purchaseTime = subObj.optLong("purchaseTime", 0);
+				long expireTime = subObj.optLong("expireTime", 0);
 				if (!Algorithms.isEmpty(sku)) {
 					InAppStateHolder stateHolder = new InAppStateHolder();
 					stateHolder.sku = sku;
 					stateHolder.origin = getPurchaseOriginBySku(sku);
 					stateHolder.platform = platform;
 					stateHolder.purchaseTime = purchaseTime;
+					stateHolder.expireTime = expireTime;
 					try {
 						stateHolder.linkedPurchase = InAppPurchaseExternalInApp.buildFromJson(ctx, subObj);
 					} catch (Exception e) {
@@ -833,9 +836,9 @@ public abstract class InAppPurchaseHelper {
 		InAppPurchase depthContours = getDepthContours();
 		InAppPurchase contourLines = getContourLines();
 		if (subscription != null) {
-			boolean maps = purchases.isMapsSubscription(subscription);
-			boolean liveUpdates = purchases.isLiveUpdatesSubscription(subscription);
-			boolean pro = purchases.isOsmAndProSubscription(subscription);
+			boolean maps = purchases.isMaps(subscription);
+			boolean liveUpdates = purchases.isLiveUpdates(subscription);
+			boolean pro = purchases.isOsmAndPro(subscription);
 			// bought live updates
 			if (maps) {
 				logDebug("Maps subscription purchased.");

@@ -61,17 +61,17 @@ public class InAppPurchasesImpl extends InAppPurchases {
 	}
 
 	@Override
-	public boolean isLiveUpdatesSubscription(InAppPurchase p) {
+	public boolean isLiveUpdates(InAppPurchase p) {
 		return p.getFeatureId() == LIVE_UPDATES_ID;
 	}
 
 	@Override
-	public boolean isOsmAndProSubscription(InAppPurchase p) {
+	public boolean isOsmAndPro(InAppPurchase p) {
 		return p.getFeatureId() == OSMAND_PRO_ID;
 	}
 
 	@Override
-	public boolean isMapsSubscription(InAppPurchase p) {
+	public boolean isMaps(InAppPurchase p) {
 		return p.getFeatureId() == MAPS_ID || p.getFeatureId() == FULL_VERSION_ID;
 	}
 

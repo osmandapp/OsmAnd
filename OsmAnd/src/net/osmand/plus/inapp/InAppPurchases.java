@@ -118,7 +118,7 @@ public abstract class InAppPurchases {
 	public InAppSubscription getAnyPurchasedOsmAndProSubscription() {
 		List<InAppSubscription> allSubscriptions = subscriptions.getAllSubscriptions();
 		for (InAppSubscription subscription : allSubscriptions) {
-			if (isOsmAndProSubscription(subscription) && subscription.isPurchased()) {
+			if (isOsmAndPro(subscription) && subscription.isPurchased()) {
 				return subscription;
 			}
 		}
@@ -166,11 +166,11 @@ public abstract class InAppPurchases {
 
 	public abstract boolean isContourLines(InAppPurchase p);
 
-	public abstract boolean isLiveUpdatesSubscription(InAppPurchase p);
+	public abstract boolean isLiveUpdates(InAppPurchase p);
 
-	public abstract boolean isOsmAndProSubscription(InAppPurchase p);
+	public abstract boolean isOsmAndPro(InAppPurchase p);
 
-	public abstract boolean isMapsSubscription(InAppPurchase p);
+	public abstract boolean isMaps(InAppPurchase p);
 
 	public abstract static class InAppSubscriptionList {
 
@@ -1502,12 +1502,15 @@ public abstract class InAppPurchases {
 			}
 			PurchaseOrigin origin = ctx.getInAppPurchaseHelper().getPurchaseOriginByPlatform(platform);
 
+			boolean featurePro = json.getString("feature_pro").equals("true");
 			boolean featureMaps = json.getString("feature_maps").equals("true");
 			boolean featureContour = json.getString("feature_contours").equals("true");
 			boolean featureNautical = json.getString("feature_nautical").equals("true");
 
 			int featureId;
-			if (featureMaps) {
+			if (featurePro) {
+				featureId = OSMAND_PRO_ID;
+			} else if (featureMaps) {
 				featureId = FULL_VERSION_ID;
 			} else if (featureContour) {
 				featureId = CONTOUR_LINES_ID;

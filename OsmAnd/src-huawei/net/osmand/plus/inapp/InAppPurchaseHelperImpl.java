@@ -561,13 +561,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						if (purchaseData != null) {
 							completePurchases.add(purchaseData);
 						}
-						if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
+						if (!subscribedToLiveUpdates && purchases.isLiveUpdates(s)) {
 							subscribedToLiveUpdates = true;
 						}
-						if (!subscribedToOsmAndPro && purchases.isOsmAndProSubscription(s)) {
+						if (!subscribedToOsmAndPro && purchases.isOsmAndPro(s)) {
 							subscribedToOsmAndPro = true;
 						}
-						if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
+						if (!subscribedToMaps && purchases.isMaps(s)) {
 							subscribedToMaps = true;
 						}
 					}
@@ -585,6 +585,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
 						if (holder.linkedSubscription != null && holder.linkedSubscription.isOsmAndPro()
 								&& holder.state == SubscriptionState.ACTIVE) {
+							subscribedToOsmAndPro = true;
+							break;
+						}
+					}
+					for (InAppStateHolder holder : inAppStateMap.values()) {
+						if (holder.linkedPurchase != null && holder.linkedPurchase.isOsmAndPro()) {
 							subscribedToOsmAndPro = true;
 							break;
 						}

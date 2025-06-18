@@ -365,13 +365,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							if (receipt != null) {
 								completePurchases.put(s.getSku(), receipt);
 							}
-							if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
+							if (!subscribedToLiveUpdates && purchases.isLiveUpdates(s)) {
 								subscribedToLiveUpdates = true;
 							}
-							if (!subscribedToOsmAndPro && purchases.isOsmAndProSubscription(s)) {
+							if (!subscribedToOsmAndPro && purchases.isOsmAndPro(s)) {
 								subscribedToOsmAndPro = true;
 							}
-							if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
+							if (!subscribedToMaps && purchases.isMaps(s)) {
 								subscribedToMaps = true;
 							}
 						}
@@ -393,7 +393,14 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 								break;
 							}
 						}
-					}					if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
+						for (InAppStateHolder holder : inAppStateMap.values()) {
+							if (holder.linkedPurchase != null && holder.linkedPurchase.isOsmAndPro()) {
+								subscribedToOsmAndPro = true;
+								break;
+							}
+						}
+					}
+					if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
 					} else if (subscribedToLiveUpdates) {
 						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
