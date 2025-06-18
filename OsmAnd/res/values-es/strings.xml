@@ -4292,15 +4292,7 @@
     <string name="rendering_attr_horse_scale_common_name">Común</string>
     <string name="rendering_attr_horse_scale_demanding_name">Exigente</string>
     <string name="routeInfo_horse_scale_description">Visualizar los caminos según la dificultad de los senderos ecuestres</string>
-    <string name="release_4_2">• Rediseño de widgets: nuevo Look &amp; Feel, agrupa por Páginas, cambia el orden y combina como quieras.
-\n
-\n • Senderismo / Ciclismo / Rutas de viaje: toque el símbolo de la ruta y obtenga información completa sobre la misma.
-\n
-\n • Grupos favoritos: establece la apariencia por defecto para los nuevos puntos del grupo
-\n
-\n • Correcciones: actualización automática de los mosaicos de los mapas en línea
-\n
-\n</string>
+    <string name="release_4_2">• Rediseño de widgets: nuevo Look &amp; Feel, agrupa por Páginas, cambia el orden y combina como quieras.\n\n • Senderismo / Ciclismo / Rutas de viaje: toque el símbolo de la ruta y obtenga información completa sobre la misma.\n\n • Grupos favoritos: establece la apariencia por defecto para los nuevos puntos del grupo\n\n • Correcciones: actualización automática de los mosaicos de los mapas en línea</string>
     <string name="simulation_real_mode_desc">En los tramos rectos, la velocidad será aproximada a la máxima permitida.
 \nEn las intersecciones, la simulación reducirá la velocidad.
 \nSe aplicarán penalizaciones adicionales en semáforos, señales de pare, etc.</string>
@@ -4560,31 +4552,7 @@
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de los sensores externos: velocidad, potencia y cadencia de la bicicleta y ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
-    <string name="release_4_3">- Nuevo y más rápido motor de renderizado de mapas de la versión 2 (OpenGL), con vista 2,5D.
-\n
-\n - Animación suave de los cambios de ubicación en movimiento
-\n
-\n - Nuevos widgets para las coordenadas del centro del mapa y la elevación de las geolocalizaciones
-\n
-\n - \"Distancia al grifo\": añadidas opciones de tamaño de texto
-\n
-\n - Widget \"Marcador del mapa\": añadida opción para cambiar el comportamiento del clic
-\n
-\n - Corregida la opción \"Colocación de posición
-\n
-\n - GPX: añadido soporte para etiquetas \"link\", \"cmt\", \"desc\" y para cualquier extensión personalizada
-\n
-\n - Reorganizada la lista de \"Mapas náuticos
-\n
-\n - Añadido soporte para sensores ANT
-\n
-\n - Añadida la opción de desactivar la descarga de UUID
-\n
-\n - Previsión ajustable de la velocidad por defecto para los tiempos de viaje a pie/senderismo/carrera dependientes de la elevación
-\n
-\n - Corregida la salida de audio y el comportamiento del deslizador de volumen
-\n
-\n</string>
+    <string name="release_4_3">• Nuevo y más rápido motor de renderizado de mapas de la versión 2 (OpenGL), con vista 2,5D\n\n • Animación suave de los cambios de ubicación en movimiento\n\n • Nuevos widgets para las coordenadas del centro del mapa y la elevación de las geolocalizaciones\n\n • \"Distancia al grifo\": añadidas opciones de tamaño de texto\n\n • Widget \"Marcador del mapa\": añadida opción para cambiar el comportamiento del clic\n\n • Corregida la opción \"Colocación de posición\n\n • GPX: añadido soporte para etiquetas \"link\", \"cmt\", \"desc\" y para cualquier extensión personalizada\n\n • Reorganizada la lista de \"Mapas náuticos\n\n • Añadido soporte para sensores ANT\n\n • Añadida la opción de desactivar la descarga de UUID\n\n • Previsión ajustable de la velocidad por defecto para los tiempos de viaje a pie/senderismo/carrera dependientes de la elevación\n\n • Corregida la salida de audio y el comportamiento del deslizador de volumen</string>
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
     <string name="speak_route_recalculation">Anunciar el recálculo de la ruta</string>
     <string name="rendering_engine_failed_descr">OsmAnd ha vuelto a la representación cartográfica «versión 1». Puede tratar de volver al motor de representación «versión 2 (OpenGL)» en Configuración. \n \nPor favor, ayude con las mejoras enviando el registro de errores.</string>
@@ -5816,4 +5784,6 @@
     <string name="unit_of_temperature_description">Las unidades elegidas se aplicarán a todos los datos relacionados con la temperatura del perfil actual.</string>
     <string name="prime_meridian">Meridiano cero</string>
     <string name="show_debug_tile">Mostrar información de la tesela</string>
+    <string name="deleting_history">Borrando historial…</string>
+    <string name="deleting">Borrando…</string>
 </resources>
