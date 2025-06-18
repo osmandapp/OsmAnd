@@ -4775,7 +4775,7 @@
     <string name="terrain_map">Carte du terrain (3D)</string>
     <string name="relief_3d_description">Explorez le modèle réduit de votre quartier ou de tout un continent.</string>
     <string name="terrain_category_description">Courbes de niveaux, ombrage du relief par des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les plaines.</string>
-    <string name="slope_legend_description">Pente utilise des couleurs pour visualiser l\'inclinaison du terrain. Vous pouvez en apprendre davantage sur les pentes sur %1$s.</string>
+    <string name="slope_legend_description">Pente représente l\'inclinaison du terrain grâce à des couleurs. Vous pouvez en apprendre davantage sur les pentes sur %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
 \n
 \nLes données de l\'appareil ne seront pas affectées.</string>
