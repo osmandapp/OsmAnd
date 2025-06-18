@@ -5768,7 +5768,7 @@
     <string name="battery_level">Nivelo de baterio</string>
     <string name="set_parking_position">Agordi kiel pozicion de parkumado</string>
     <string name="set_work">Agordi kiel laborejon</string>
-    <string name="release_5_1">• subteno por aĉeti retejan kaj pluroperaciuman version\n\n• movis elekton de temperaturaj unuoj al Ĝeneralaj agordoj\n\n• aldonis subteno por nivelo de baterio al BLE-sentiloj\n\n• nova, pli intuicia maniero elekti punktojn por navigi\n\n• plibonigita videblo de fenestraĵoj kun nova konturo\n\n• aldonis analizilon de (mal)supreniroj\n\n• plivastigita interago kun Vikipedio/Vikivojaĝoj al pliaj interesejoj</string>
+    <string name="release_5_1">• subteno por aĉeti retejan kaj pluroperaciuman version\n\n• movis elekton de temperaturaj unuoj al Ĝeneralaj agordoj\n\n• aldonis subtenon por nivelo de baterio al BLE-sentiloj\n\n• nova, pli intuicia maniero elekti punktojn por navigi\n\n• plibonigita videblo de fenestraĵoj kun nova konturo\n\n• aldonis analizilon de (mal)supreniroj\n\n• plivastigita interago kun Vikipedio/Vikivojaĝoj al pliaj interesejoj</string>
     <string name="years_3">tri jaroj</string>
     <string name="osm_live_payment_3_years_title">Ĉiu-3-jare</string>
     <string name="three_years_subscription">Trijara abono</string>
