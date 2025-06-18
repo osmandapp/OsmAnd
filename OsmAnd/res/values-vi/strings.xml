@@ -434,7 +434,7 @@
     <string name="show_gps_coordinates_text">Hiện tọa độ GPS trên bản đồ</string>
     <string name="use_internet_to_download_tile">Tải xuống các mảng bản đồ bị thiếu</string>
     <string name="app_description">Ứng dụng điều hướng</string>
-    <string name="shared_string_exit">Lối ra</string>
+    <string name="shared_string_exit">Thoát</string>
     <string name="search_button">Tìm kiếm</string>
     <string name="search_activity">Tìm kiếm</string>
     <string name="searchpoi_activity">Chọn địa điểm</string>
