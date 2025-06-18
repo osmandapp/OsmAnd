@@ -50,7 +50,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private static final Log LOG = PlatformUtil.getLog(SaveGPXBottomSheet.class);
 
-	private static final String FILE_KEY = "file_key";
+	private static final String FILE_PATH_KEY = "file_key";
 	private static final String OPEN_TRACK_ATTR = "open_track";
 	private static final String SHOW_ON_MAP_ATTR = "show_on_map";
 
@@ -70,8 +70,8 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		app = requiredMyApplication();
 
 		Bundle args = getArguments();
-		if (args != null && args.containsKey(FILE_KEY)) {
-			file = args.getSerializable(FILE_KEY, File.class);
+		if (args != null && args.containsKey(FILE_PATH_KEY)) {
+			file = new File(args.getString(FILE_PATH_KEY));
 			initialGpxName = Algorithms.getFileNameWithoutExtension(file);
 			newGpxName = initialGpxName;
 		} else {
@@ -245,7 +245,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull File file) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
-			args.putSerializable(FILE_KEY, file);
+			args.putString(FILE_PATH_KEY, file.getAbsolutePath());
 
 			SaveGPXBottomSheet fragment = new SaveGPXBottomSheet();
 			fragment.setArguments(args);
