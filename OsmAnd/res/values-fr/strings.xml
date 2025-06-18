@@ -3142,7 +3142,7 @@
     <string name="sunset_at">Coucher de soleil à %1$s</string>
     <string name="sunrise_at">Lever de soleil à %1$s</string>
     <string name="rearrange_categories">Réorganiser les catégories</string>
-    <string name="create_custom_categories_list_promo">Modifier l’ordre de la liste et masquer des catégories. Importer ou exporter toutes les modifications sous forme de profils.</string>
+    <string name="create_custom_categories_list_promo">Ordonner la liste et masquer des catégories. Importer ou exporter toutes vos modifications grâce aux profils.</string>
     <string name="reset_to_default_category_button_promo">« Restaurer les valeurs par défaut » réinitialisera l\'ordre de tri.</string>
     <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système Android.</string>
     <string name="add_new_custom_category_button_promo">Ajoutez une nouvelle catégorie personnelle en sélectionnant une ou plusieurs catégories.</string>
