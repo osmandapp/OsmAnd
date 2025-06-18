@@ -274,10 +274,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 				}
 
 				GpxDataItem item = new GpxDataItem(fKout);
+				setTrackAppearance(item);
 				item.setAnalysis(gpx.getAnalysis(fout.lastModified()));
+
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
-				saveTrackAppearance(item);
 			}
 			clearRecordedData(warnings.isEmpty());
 		}
@@ -295,7 +296,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		}
 	}
 
-	private void saveTrackAppearance(@NonNull GpxDataItem item) {
+	private void setTrackAppearance(@NonNull GpxDataItem item) {
 		ColoringType coloringType = settings.CURRENT_TRACK_COLORING_TYPE.get();
 		String routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 		ColoringStyle coloringStyle = new ColoringStyle(coloringType, routeInfoAttribute);
@@ -307,8 +308,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		item.setParameter(COLORING_TYPE, coloringStyle.getId());
 		item.setParameter(COLOR_PALETTE, settings.CURRENT_GRADIENT_PALETTE);
-
-		app.getGpxDbHelper().updateDataItem(item);
 	}
 
 	public void clearRecordedData(boolean clearDb) {
