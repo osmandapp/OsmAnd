@@ -525,8 +525,8 @@
     <string name="app_mode_car">Voiture</string>
     <string name="app_mode_bicycle">Vélo</string>
     <string name="app_mode_pedestrian">À pied</string>
-    <string name="position_on_map_center">Au centre</string>
-    <string name="position_on_map_bottom">En bas</string>
+    <string name="position_on_map_center">Au centre de l\'écran</string>
+    <string name="position_on_map_bottom">En bas de l\'écran</string>
     <string name="navigate_point_top_text">Entrez la latitude et la longitude au format sélectionné (D - degrés, M - minutes, S - secondes)</string>
     <string name="navigate_point_latitude">Latitude</string>
     <string name="navigate_point_longitude">Longitude</string>
@@ -2881,7 +2881,7 @@
     <string name="sett_generic_ext_input">Clavier</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="select_base_profile_dialog_message">Basez votre profil personnel sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
+    <string name="select_base_profile_dialog_message">Basez votre profil personnalisé sur l\'un des profils d\'application par défaut. Cela définit la configuration de base, comme la visibilité par défaut des widgets et les unités de vitesse et de distance. Voici les profils d\'application par défaut, ainsi que des exemples de profils personnalisés qui peuvent en être dérivés :</string>
     <string name="temporary_conditional_routing">Tenir compte des limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
     <string name="app_mode_camper">Campeur</string>
@@ -4367,7 +4367,7 @@
     <string name="favorite_delete_group">Supprimer le groupe</string>
     <string name="favorite_confirm_delete_group">Supprimer le groupe « %1$s » et ses points (%2$d) ?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
-    <string name="display_position">Emplacement de l\'icône de localisation</string>
+    <string name="display_position">Afficher la position</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Orientation manuelle</string>
@@ -4595,7 +4595,7 @@
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
     <string name="last_synchronized">Dernière synchronisation</string>
-    <string name="display_position_automatic_descr">Dépend de l\'orientation de la carte : en bas si l\'orientation suit le déplacement, centré dans tous les autres cas.</string>
+    <string name="display_position_automatic_descr">Dépend de l\'orientation de la carte : en bas si l\'orientation suit le déplacement, au centre dans tous les autres cas.</string>
     <string name="shared_string_apply_changes">Appliquer les modifications</string>
     <string name="no_visible_tracks_description">Sélectionner les traces à afficher sur la carte.</string>
     <string name="no_visible_tracks">Aucune trace sur la carte</string>
@@ -4945,7 +4945,7 @@
     <string name="filter_screen_title">Filtrer</string>
     <string name="shared_string_cache">Cache</string>
     <string name="widget_available_ram_desc">Affiche la mémoire disponible allouée pour OsmAnd.</string>
-    <string name="sort_size_descending">Gros en premier</string>
+    <string name="sort_size_descending">Taille grande en premier</string>
     <string name="delete_map">Supprimer la carte</string>
     <string name="standard_maps">Cartes standard</string>
     <string name="shared_string_created">Créé le</string>
@@ -4954,7 +4954,7 @@
     <string name="sort_country_name_ascending">Nom de pays : A – Z</string>
     <string name="weather_online">Météo en ligne</string>
     <string name="map_is_up_to_date">La carte %1$s est à jour.</string>
-    <string name="sort_size_ascending">Petit en premier</string>
+    <string name="sort_size_ascending">Taille petite en premier</string>
     <string name="widget_available_ram">RAM disponible</string>
     <string name="terrain_maps">Cartes de terrain</string>
     <string name="sort_country_name_descending">Nom de pays : Z – A</string>
