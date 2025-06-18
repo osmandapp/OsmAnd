@@ -472,6 +472,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 		});
 	}
 
+	public void startMoving(double finalLat, double finalLon) {
+		startMoving(finalLat, finalLon, tileView.getZoom());
+	}
+
 	public void startMoving(double finalLat, double finalLon, int finalIntZoom) {
 		startMoving(finalLat, finalLon, finalIntZoom, 0.0f);
 	}

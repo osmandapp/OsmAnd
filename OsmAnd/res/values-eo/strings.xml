@@ -5773,4 +5773,6 @@
     <string name="osm_live_payment_3_years_title">Ĉiu-3-jare</string>
     <string name="three_years_subscription">Trijara abono</string>
     <string name="osm_live_payment_renews_3_years">Reaboni ĉiutrijare</string>
+    <string name="deleting">Forigado…</string>
+    <string name="deleting_history">Forigado de historio…</string>
 </resources>

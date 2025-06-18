@@ -5726,4 +5726,6 @@
     <string name="years_3">3 év</string>
     <string name="osm_live_payment_3_years_title">3 évente</string>
     <string name="three_years_subscription">3 éves előfizetés</string>
+    <string name="deleting">Törlés…</string>
+    <string name="deleting_history">Előzmények törlése…</string>
 </resources>

@@ -5713,4 +5713,6 @@
     <string name="shared_string_split_by">Dividir por</string>
     <string name="uphill_downhill_split">Ascenso / Descenso</string>
     <string name="read_on">Leer en %1$s</string>
+    <string name="deleting">Borrando…</string>
+    <string name="deleting_history">Borrando historial…</string>
 </resources>
