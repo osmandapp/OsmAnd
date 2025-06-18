@@ -204,7 +204,7 @@
     <string name="send_location_email_pattern">Pour voir ce point, ouvrez le lien web %1$s ou Android %2$s</string>
     <string name="send_location">Envoyer le point</string>
     <string name="context_menu_item_share_location">Partager ce point</string>
-    <string name="add_waypoint_dialog_added">Point GPX \'\'{0}\'\' ajouté</string>
+    <string name="add_waypoint_dialog_added">Point de passage GPX \'\'{0}\'\' ajouté</string>
     <string name="add_waypoint_dialog_title">Ajouter un point de passage à la trace GPX</string>
     <string name="amenity_type_administrative">Territoire</string>
     <string name="amenity_type_barrier">Obstacle</string>
@@ -519,7 +519,7 @@
     <string name="incremental_search_street">Recherche de rue en temps réel</string>
     <string name="incremental_search_building">Recherche de numéro en temps réel</string>
     <string name="choose_available_region">Sélectionner une région dans la liste</string>
-    <string name="choose_intersected_street">Sélectionner une intersection de rue</string>
+    <string name="choose_intersected_street">Sélectionner une rue transversale</string>
     <string name="Closest_Amenities">Équipements à proximité</string>
     <string name="app_mode_default">Parcourir la carte</string>
     <string name="app_mode_car">Voiture</string>
@@ -537,7 +537,7 @@
     <string name="search_address_street">Rue</string>
     <string name="search_address_building">Numéro</string>
     <string name="search_address_building_option">Numéro</string>
-    <string name="search_address_street_option">Intersection de rue</string>
+    <string name="search_address_street_option">Rue transversale</string>
     <string name="context_menu_item_update_map">Mettre à jour la carte</string>
     <string name="context_menu_item_create_poi">Créer un POI</string>
     <string name="shared_string_yes">Oui</string>
@@ -1009,7 +1009,7 @@
     <string name="av_camera_focus_continuous">L\'appareil photo essaie de faire la mise au point en continu</string>
     <string name="av_photo_play_sound">Émettre un son lors de la prise de vue</string>
     <string name="av_photo_play_sound_descr">Émettre un son ou non lors de la prise de vue.</string>
-    <string name="map_magnifier">Zoom de carte</string>
+    <string name="map_magnifier">Loupe de carte</string>
     <string name="base_world_map">Carte de base du monde</string>
     <string name="shared_string_and">et</string>
     <string name="shared_string_or">ou</string>
@@ -1138,7 +1138,7 @@
     <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
     <string name="int_days">jours</string>
     <string name="osmo_connect_menu">Connecter</string>
-    <string name="import_file_favourites">Enregistrer les données comme fichier GPX ou transformer les étapes en « Favoris » ?</string>
+    <string name="import_file_favourites">Enregistrer les données comme fichier GPX ou transformer les points de passage en « Favoris » ?</string>
     <string name="rendering_value_pink_name">Rose</string>
     <string name="rendering_value_brown_name">Brun</string>
     <string name="osmo_edit_color">Sélectionner la couleur</string>
@@ -1673,8 +1673,8 @@
     <string name="share_osm_edits_subject">Éditions OSM partagées grâce à OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Enregistrer ce POI sans type ?</string>
     <string name="shared_string_location">Position</string>
-    <string name="context_menu_item_delete_waypoint">Supprimer l\'étape GPX ?</string>
-    <string name="context_menu_item_edit_waypoint">Modifier le waypoint GPX</string>
+    <string name="context_menu_item_delete_waypoint">Supprimer le point de passage GPX ?</string>
+    <string name="context_menu_item_edit_waypoint">Modifier le point de passage GPX</string>
     <string name="context_menu_item_open_note">Signaler une anomalie OSM</string>
     <string name="osm_edit_reopened_note">Note OSM réouverte</string>
     <string name="osm_edit_created_note">Note OSM créée</string>
@@ -1823,7 +1823,7 @@
     <string name="osm_user_stat">Modifications %1$s, classement %2$s, nombre total de modifications %3$s</string>
     <string name="osm_live_subscription">Abonnement OsmAnd Live</string>
     <string name="no_map_markers_found">Veuillez ajouter des marques depuis la carte</string>
-    <string name="no_waypoints_found">Aucun waypoint trouvé</string>
+    <string name="no_waypoints_found">Aucun point de passage trouvé</string>
     <string name="report">Rapport</string>
     <string name="select_map_marker">Sélectionner une marque</string>
     <string name="map_markers_other">Autres marques</string>
@@ -2042,7 +2042,7 @@
     <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
     <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran.</string>
     <string name="quick_action_add_marker_descr">Bouton pour ajouter une marque au centre de la carte.</string>
-    <string name="quick_action_add_gpx_descr">Bouton pour ajouter un point GPX au centre de la carte.</string>
+    <string name="quick_action_add_gpx_descr">Bouton pour ajouter un point de passage GPX au centre de la carte.</string>
     <string name="quick_action_take_audio_note_descr">Bouton pour ajouter une note audio au centre de la carte.</string>
     <string name="quick_action_take_video_note_descr">Bouton pour ajouter une note vidéo au centre de la carte.</string>
     <string name="quick_action_take_photo_note_descr">Bouton pour ajouter une note photo au centre de la carte.</string>
@@ -2243,10 +2243,10 @@
     <string name="route_point_one">Point 1 de l\'itinéraire</string>
     <string name="none_point_error">Veuillez ajouter au moins un point.</string>
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
-    <string name="waypoint_one">Étape 1</string>
+    <string name="waypoint_one">Point de passage 1</string>
     <string name="save_route_point">Enregistrer le point d\'itinéraire</string>
     <string name="add_waypoint">Ajouter un point de passage</string>
-    <string name="save_gpx_waypoint">Enregistrer le point GPX</string>
+    <string name="save_gpx_waypoint">Enregistrer le point de passage GPX</string>
     <string name="live_monitoring_max_interval_to_send">Durée de mémorisation pour le suivi en ligne</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Indiquez une durée de mémorisation des positions en l\'absence de connexion</string>
     <string name="line">Ligne</string>
@@ -2265,7 +2265,7 @@
     <string name="empty_state_favourites">Ajouter des favoris</string>
     <string name="empty_state_favourites_desc">Importer des favoris ou créer des favoris sur la carte.</string>
     <string name="import_track">Importer le fichier GPX</string>
-    <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
+    <string name="import_track_desc">Le fichier %1$s ne contient aucun point de passage, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
     <string name="keep_showing_on_map">Toujours afficher sur la carte</string>
     <string name="exit_without_saving">Quitter sans enregistrer ?</string>
@@ -2296,7 +2296,7 @@
     <string name="today">Aujourd\'hui</string>
     <string name="yesterday">Hier</string>
     <string name="all_markers_moved_to_history">Toutes les marques ont été déplacées vers l\'historique</string>
-    <string name="marker_moved_to_history">Marque déplacée vers l\'Historique</string>
+    <string name="marker_moved_to_history">Marque déplacée vers l\'historique</string>
     <string name="shared_string_list">Liste</string>
     <string name="shared_string_groups">Groupes</string>
     <string name="last_seven_days">Ces 7 derniers jours</string>
@@ -2347,7 +2347,7 @@
     <string name="enter_new_name">Entrez un nouveau nom</string>
     <string name="shared_string_back">Retour</string>
     <string name="shared_string_view">Afficher</string>
-    <string name="waypoints_added_to_map_markers">Étapes ajoutées comme marques</string>
+    <string name="waypoints_added_to_map_markers">Points de passage ajoutés comme marques</string>
     <string name="import_gpx_file_description">peut être importé comme Favoris ou Fichier GPX.</string>
     <string name="import_as_gpx">Importer comme fichier GPX</string>
     <string name="import_as_favorites">Importer comme favoris</string>
@@ -2381,7 +2381,7 @@
     <string name="distance_indication_descr">Choisir comment afficher la distance jusqu\'aux marques actives.</string>
     <string name="active_markers_descr">Définir le nombre d\'indications de direction à afficher.</string>
     <string name="shared_string_more_without_dots">Plus</string>
-    <string name="looking_for_tracks_with_waypoints">Recherche de fichiers de trace GPX avec points de passage</string>
+    <string name="looking_for_tracks_with_waypoints">Recherche de traces avec points de passage</string>
     <string name="empty_state_osm_edits">Créer ou modifier des objets OpenStreetMap</string>
     <string name="empty_state_osm_edits_descr">Créer ou modifier les POI OpenStreetMap, ouvrir ou commenter des Notes OSM et contribuer aux traces GPX enregistrées.</string>
     <string name="shared_string_deleted">Supprimé</string>
@@ -2466,10 +2466,10 @@
     <string name="rendering_attr_whiteWaterSports_name">Sports d\'eau douce</string>
     <string name="group_deleted">Groupe supprimé</string>
     <string name="clear_all_intermediates">Effacer toutes les étapes</string>
-    <string name="select_waypoints_category_description">Ajouter tous les points de la trace ou sélectionner des catégories différentes.</string>
+    <string name="select_waypoints_category_description">Ajouter tous les points de passage de la trace ou sélectionner des catégories différentes.</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">Aucun résultat :</string>
-    <string name="waypoints_removed_from_map_markers">Étape retirée des marques</string>
+    <string name="waypoints_removed_from_map_markers">Points de passage retirés des marques</string>
     <string name="shared_string_travel_guides">Guides de voyage</string>
     <string name="shared_string_result">Résultat</string>
     <string name="saved_articles">Articles favoris</string>
@@ -3482,7 +3482,7 @@
     <string name="plan_route_trim_after">Couper après</string>
     <string name="plan_route_change_route_type_before">Modifier le type d’itinéraire avant</string>
     <string name="plan_route_change_route_type_after">Modifier le type d’itinéraire après</string>
-    <string name="simplified_track_description">Seul l\'itinéraire sera enregistré, les étapes seront supprimées.</string>
+    <string name="simplified_track_description">Seul l\'itinéraire sera enregistré, les points de passage seront supprimés.</string>
     <string name="shared_string_redo">Rétablir</string>
     <string name="sort_last_modified">Récents</string>
     <string name="sort_name_descending">Nom : Z – A</string>
@@ -4117,7 +4117,7 @@
     <string name="gpx_no_routes_descr">Vous pouvez utiliser l’outil « %1$s » pour enregistrer l\'itinéraire dans un fichier.</string>
     <string name="quick_action_add_route_descr">Bouton pour démarrer un itinéraire en partant du milieu de l\'écran.</string>
     <string name="please_provide_group_name_message">Veuillez saisir le nom du groupe.</string>
-    <string name="selected_waypoints_descr">Les points sélectionnés seront ajoutés à la trace « %1$s »</string>
+    <string name="selected_waypoints_descr">Les points de passage sélectionnés seront ajoutés à la trace « %1$s »</string>
     <string name="shared_string_reading_file">Lecture du fichier…</string>
     <string name="all_groups">Tous les groupes</string>
     <string name="list_of_groups">Liste des groupes</string>
@@ -4388,7 +4388,7 @@
     <string name="map_widget_zoom_level_desc">Indique le niveau de zoom actuel.</string>
     <string name="map_widget_camera_distance_desc">Indique l\'altitude de l\'appareil photo au-dessus de la surface.</string>
     <string name="map_widget_camera_tilt_desc">Indique l\'angle de l\'appareil photo en mode perspective. La valeur par défaut est 90° (aucune inclinaison).</string>
-    <string name="developer_widgets">Gadgets pour les développeurs</string>
+    <string name="developer_widgets">Widgets de développement</string>
     <string name="map_widget_camera_tilt">Angle de l\'appareil photo</string>
     <string name="map_widget_target_distance_desc">Indique la distance entre l\'appareil photo et la destination.</string>
     <string name="map_widget_zoom_level">Niveau de zoom</string>
@@ -4443,10 +4443,10 @@
     <string name="explore_weather_forecast">Explorez les prévisions météorologiques.</string>
     <string name="shared_string_contours">Courbes de niveau</string>
     <string name="shared_string_layers">Couches</string>
-    <string name="empty_screen_weather_pressure_layer">Activez pour afficher la couche de pression atmosphérique sur la carte.</string>
-    <string name="empty_screen_weather_contours">Activez pour afficher les lignes d\'iso-niveaux météorologiques sur la carte.</string>
-    <string name="empty_screen_weather_clouds_layer">Activez pour afficher la couche de couverture nuageuse sur la carte.</string>
-    <string name="empty_screen_weather_wind_layer">Activez pour afficher la couche des vents sur la carte.</string>
+    <string name="empty_screen_weather_pressure_layer">Activer pour afficher la couche de pression atmosphérique sur la carte.</string>
+    <string name="empty_screen_weather_contours">Activer pour afficher les lignes d\'iso-niveaux météorologiques sur la carte.</string>
+    <string name="empty_screen_weather_clouds_layer">Activer pour afficher la couche de couverture nuageuse sur la carte.</string>
+    <string name="empty_screen_weather_wind_layer">Activer pour afficher la couche des vents sur la carte.</string>
     <string name="wind_widget_desc">Affiche la vitesse du vent pour le centre actuel de la carte.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="weather_pressure_inches_of_mercury">Pouces de mercure</string>
@@ -4454,7 +4454,7 @@
     <string name="weather_pressure_millimeters_of_mercury">Millimètres de mercure</string>
     <string name="show_map_symbols">Afficher les symboles</string>
     <string name="show_map_symbols_desc">Texte, panneaux de signalisation routière et autres.</string>
-    <string name="switch_mode_by_tapping_on_widget">Changez de mode en appuyant sur le widget.</string>
+    <string name="switch_mode_by_tapping_on_widget">Changer de mode en appuyant sur le widget.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="map_widget_sunrise_desc">Affiche l\'heure du prochain lever de soleil ou le temps restant jusqu\'à celui-ci.</string>
     <string name="map_widget_sunset_desc">Affiche l\'heure du prochain coucher de soleil ou le temps restant jusqu\'à celui-ci.</string>
@@ -4464,8 +4464,8 @@
     <string name="map_settings_weather_air_pressure">Pression atmosphérique</string>
     <string name="map_settings_weather_wind">Vent</string>
     <string name="measurement_units">Unités de mesure</string>
-    <string name="empty_screen_weather_temperature_layer">Activez pour afficher la couche des températures sur la carte.</string>
-    <string name="empty_screen_weather_precipitation_layer">Activez pour afficher la couche des précipitations sur la carte.</string>
+    <string name="empty_screen_weather_temperature_layer">Activer pour afficher la couche des températures sur la carte.</string>
+    <string name="empty_screen_weather_precipitation_layer">Activer pour afficher la couche des précipitations sur la carte.</string>
     <string name="clouds_widget_desc">Affiche la couverture nuageuse du centre actuel de la carte.</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="weather_prefs_descr">Prévisions de 24 heures à 7 jours, mises à jour toutes les 3 heures</string>
@@ -4485,7 +4485,7 @@
     <string name="turn_on_nautical_depth_description">Activer pour afficher les données de profondeur sur la carte nautique.</string>
     <string name="map_settings_weather_cloud">Couverture nuageuse</string>
     <string name="map_settings_weather_precip">Précipitations</string>
-    <string name="empty_screen_view_selected_weather_data">Activez pour afficher les données météorologiques sélectionnées sur la carte.</string>
+    <string name="empty_screen_view_selected_weather_data">Activer pour afficher les données météorologiques sélectionnées sur la carte.</string>
     <string name="weather_precip_in">in</string>
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Pouces</string>
@@ -4775,7 +4775,7 @@
     <string name="terrain_map">Carte du terrain (3D)</string>
     <string name="relief_3d_description">Explorez le modèle réduit de votre quartier ou de tout un continent.</string>
     <string name="terrain_category_description">Courbes de niveaux, ombrage du relief par des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les plaines.</string>
-    <string name="slope_legend_description">Pente utilise des couleurs pour visualiser la déclivité du terrain. Vous pouvez en apprendre davantage sur les pentes sur %1$s.</string>
+    <string name="slope_legend_description">Pente utilise des couleurs pour visualiser l\'inclinaison du terrain. Vous pouvez en apprendre davantage sur les pentes sur %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
 \n
 \nLes données de l\'appareil ne seront pas affectées.</string>
@@ -5310,10 +5310,10 @@
     <string name="route_roundabout_exit">Prendre la sortie %1$d</string>
     <string name="help_article_map_routes_name">Itinéraires</string>
     <string name="help_article_map_tracks_name">Traces</string>
-    <string name="add_widget_to_the_left">Ajouter le widget à gauche</string>
-    <string name="add_widget_above">Ajouter le widget au dessus</string>
-    <string name="add_widget_below">Ajouter le widget en dessous</string>
-    <string name="add_widget_to_the_right">Ajouter le widget à droite</string>
+    <string name="add_widget_to_the_left">Ajouter un widget à gauche</string>
+    <string name="add_widget_above">Ajouter un widget au-dessus</string>
+    <string name="add_widget_below">Ajouter un widget en dessous</string>
+    <string name="add_widget_to_the_right">Ajouter un widget à droite</string>
     <string name="delete_widget_description">Ce widget va être supprimé. Plus tard, vous pourrez le restaurer depuis \'Configurer l\'écran\'.</string>
     <string name="delete_widget">Supprimer le widget ?</string>
     <string name="battery_saving_mode">Mode économie d\'énergie</string>
