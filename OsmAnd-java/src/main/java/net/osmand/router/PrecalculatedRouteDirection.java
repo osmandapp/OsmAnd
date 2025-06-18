@@ -251,7 +251,7 @@ public class PrecalculatedRouteDirection {
 	}
 
 	private long calc(int x31, int y31) {
-		return ((long) x31) << 32l + ((long)y31);
+		return (((long) x31) << 32L) + ((long)y31);
 	}
 	
 	public void setFollowNext(boolean followNext) {
