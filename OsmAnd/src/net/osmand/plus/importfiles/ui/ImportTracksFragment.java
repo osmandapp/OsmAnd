@@ -35,7 +35,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
@@ -67,7 +67,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ImportTracksFragment extends BaseOsmAndDialogFragment implements OnExitConfirmedListener,
+public class ImportTracksFragment extends BaseFullScreenDialogFragment implements OnExitConfirmedListener,
 		FolderSelectionListener, OnTrackFolderAddListener, ImportTracksListener, PointsSelectionListener {
 
 	public static final String TAG = ImportTracksFragment.class.getSimpleName();

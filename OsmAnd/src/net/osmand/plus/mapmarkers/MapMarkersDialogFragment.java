@@ -17,7 +17,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
@@ -39,7 +39,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-public class MapMarkersDialogFragment extends BaseOsmAndDialogFragment implements OnGroupSyncedListener {
+public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment implements OnGroupSyncedListener {
 
 	public static final String TAG = MapMarkersDialogFragment.class.getSimpleName();
 

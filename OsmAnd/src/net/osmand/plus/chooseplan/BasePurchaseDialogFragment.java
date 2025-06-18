@@ -25,7 +25,7 @@ import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
@@ -34,7 +34,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragment
+public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFragment
 		implements InAppPurchaseListener, OnOffsetChangedListener, OnScrollChangedListener {
 
 	public static final String SCROLL_POSITION = "scroll_position";

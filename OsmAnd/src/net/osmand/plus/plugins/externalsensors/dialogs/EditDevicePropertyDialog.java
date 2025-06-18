@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
@@ -32,7 +32,7 @@ import net.osmand.util.Algorithms;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
+public class EditDevicePropertyDialog extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = "EditDeviceNameDialog";
 

@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseOsmAndDialogFragment
+import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
@@ -24,7 +24,7 @@ import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.util.Algorithms
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
-class RenameOBDDialog : BaseOsmAndDialogFragment() {
+class RenameOBDDialog : BaseFullScreenDialogFragment() {
 	private var textInput: ExtendedEditText? = null
 	private var propertyOldValueValue: String? = null
 	private var deviceAddress: String? = null

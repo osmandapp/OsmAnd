@@ -17,14 +17,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
+public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = EditDescriptionFragment.class.getSimpleName();
 

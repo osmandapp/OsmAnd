@@ -9,7 +9,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,7 +21,7 @@ import androidx.annotation.DrawableRes;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -33,7 +32,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
+public class CountrySelectionFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = CountrySelectionFragment.class.getSimpleName();
 

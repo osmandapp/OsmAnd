@@ -31,7 +31,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener,
+public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment implements OnItemSelectedListener,
 		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener {
 
 	protected final List<Object> items = new ArrayList<>();

@@ -43,7 +43,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -79,7 +79,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnLiveUpdatesForLocalChange, LiveUpdateListener {
+public class LiveUpdatesFragment extends BaseFullScreenDialogFragment implements OnLiveUpdatesForLocalChange, LiveUpdateListener {
 
 	public static final String URL = "https://osmand.net/api/osmlive_status";
 	public static final String TAG = LiveUpdatesFragment.class.getSimpleName();

@@ -78,8 +78,8 @@ public class BasicEditPoiFragment extends BaseFullScreenFragment implements OnFr
 					if (openingHoursAdapter.openingHours.getRules().isEmpty()) {
 						rule.setDays(new boolean[]{true, true, true, true, true, false, false});
 					}
-					OpeningHoursDaysDialogFragment fragment = OpeningHoursDaysDialogFragment.createInstance(rule, -1);
-					fragment.show(getChildFragmentManager(), "OpenTimeDialogFragment");
+					FragmentManager fragmentManager = getChildFragmentManager();
+					OpeningHoursDaysDialogFragment.showInstance(fragmentManager, rule, -1);
 				}
 			}
 

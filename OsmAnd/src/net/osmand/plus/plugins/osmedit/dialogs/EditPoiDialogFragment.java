@@ -56,7 +56,7 @@ import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.asynctasks.CommitEntityTask;
@@ -82,7 +82,7 @@ import java.util.Map.Entry;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
+public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = EditPoiDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(EditPoiDialogFragment.class);

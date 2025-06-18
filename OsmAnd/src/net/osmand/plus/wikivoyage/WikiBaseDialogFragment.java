@@ -17,9 +17,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 
-public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
+public class WikiBaseDialogFragment extends BaseFullScreenDialogFragment {
 
 	@NonNull
 	@Override

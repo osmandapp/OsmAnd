@@ -25,7 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.GpxSplitParams;
@@ -55,7 +55,7 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
+public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = "SPLIT_SEGMENT_DIALOG_FRAGMENT";
 

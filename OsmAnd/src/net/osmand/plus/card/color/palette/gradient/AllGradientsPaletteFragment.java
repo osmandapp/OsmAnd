@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.color.palette.main.IColorsPalette;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
@@ -32,7 +32,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class AllGradientsPaletteFragment extends BaseOsmAndDialogFragment implements IColorsPalette {
+public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment implements IColorsPalette {
 
 	public static final String TAG = AllGradientsPaletteFragment.class.getSimpleName();
 

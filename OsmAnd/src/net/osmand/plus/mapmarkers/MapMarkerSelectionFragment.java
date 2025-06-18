@@ -18,7 +18,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -27,7 +27,7 @@ import net.osmand.plus.routepreparationmenu.data.PointType;
 
 import java.util.List;
 
-public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
+public class MapMarkerSelectionFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = "MapMarkerSelectionFragment";
 	private static final String POINT_TYPE_KEY = "point_type";

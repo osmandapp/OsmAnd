@@ -2,20 +2,18 @@ package net.osmand.plus.base;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 
-public abstract class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment {
+public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -31,10 +29,7 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment implements
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
 		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
-
 		updateNightMode();
-		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
-		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 	}
 
 	@Override

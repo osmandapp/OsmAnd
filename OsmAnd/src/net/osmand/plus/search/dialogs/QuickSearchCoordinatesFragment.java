@@ -46,7 +46,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.search.dialogs.SearchCitiesTask.SearchCitiesListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -64,7 +64,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
 
-public class QuickSearchCoordinatesFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
+public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = QuickSearchCoordinatesFragment.class.getSimpleName();
 	private static final String QUICK_SEARCH_COORDS_LAT_KEY = "quick_search_coords_lat_key";

@@ -31,7 +31,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCal
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -42,7 +42,7 @@ import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 
 import java.util.LinkedList;
 
-public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment {
+public class DirectionIndicationDialogFragment extends BaseFullScreenDialogFragment {
 
 	private static final String TAG = DirectionIndicationDialogFragment.class.getSimpleName();
 

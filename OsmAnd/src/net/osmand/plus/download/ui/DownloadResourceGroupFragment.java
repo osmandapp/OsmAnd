@@ -30,7 +30,7 @@ import androidx.appcompat.widget.Toolbar;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.plugins.custom.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivity;
@@ -59,7 +59,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment implements DownloadEvents,
+public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment implements DownloadEvents,
 		InAppPurchaseListener, RemoveLocalForecastListener, OnChildClickListener {
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;

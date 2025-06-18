@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -37,7 +37,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
+public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = QuickSearchSubCategoriesFragment.class.getName();
 	private static final String CATEGORY_NAME_KEY = "category_key";
