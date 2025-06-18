@@ -177,14 +177,10 @@ public class PrecalculatedRouteDirection {
 			x31 = sx31;
 			y31 = sy31;
 		} else {
-			int startX = (int)(startPoint >> 32L);
-			int startY = (int) (startPoint & 0xFFFFFFFFL);
-			int endX = (int)(endPoint >> 32L);
-			int endY = (int) (endPoint & 0xFFFFFFFFL);
 			int sInd = getIndex(sx31, sy31);
-			int eInd = getIndex(sx31, sy31);
-			String err = String.format(Locale.US, "startPoint:%d %d, endPoint:%d %d, sx31:%d, sy31:%d, ex31:%d, ey31:%d, startIndex: %d, endIndex:%d",
-					startX, startY, endX, endY, sx31, sy31, ex31, ey31, sInd, eInd);
+			int eInd = getIndex(ex31, ey31);
+			String err = String.format(Locale.US, "startPoint:%d, endPoint:%d, l1:%d, l2:%d, sx31:%d, sy31:%d, ex31:%d, ey31:%d, startIndex: %d, endIndex:%d",
+					startPoint, endPoint, l1, l2, sx31, sy31, ex31, ey31, sInd, eInd);
 			throw new UnsupportedOperationException(err);
 		}
 		int ind = getIndex(x31, y31);
