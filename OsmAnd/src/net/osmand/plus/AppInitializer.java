@@ -538,7 +538,7 @@ public class AppInitializer implements IProgress {
 				importBundledSettingsSync();
 				notifyEvent(BUNDLED_OSF_IMPORTED);
 			}
-			app.getRendererRegistry().initRenderers();
+			app.getRendererRegistry().initRenderers(warnings);
 			notifyEvent(INIT_RENDERERS);
 			// native depends on renderers
 			initOpenGl();
@@ -569,7 +569,7 @@ public class AppInitializer implements IProgress {
 			checkLiveUpdatesAlerts();
 			connectToBRouter();
 		} catch (RuntimeException e) {
-			e.printStackTrace();
+			LOG.error(e);
 			warnings.add(e.getMessage());
 		} finally {
 			appInitializing = false;

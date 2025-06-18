@@ -75,7 +75,7 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 		List<InAppSubscription> subscriptions = new ArrayList<>();
 		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
 		for (InAppSubscription subscription : visibleSubscriptions) {
-			if (purchases.isOsmAndProSubscription(subscription)) {
+			if (purchases.isOsmAndPro(subscription)) {
 				subscriptions.add(subscription);
 			}
 		}

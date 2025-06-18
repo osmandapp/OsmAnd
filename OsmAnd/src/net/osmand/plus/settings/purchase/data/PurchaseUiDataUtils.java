@@ -62,7 +62,7 @@ public class PurchaseUiDataUtils {
 		String title = app.getString(R.string.shared_string_undefined);
 		int iconId;
 		String purchaseType;
-		boolean liveUpdateSubscription = purchases.isLiveUpdatesSubscription(purchase);
+		boolean liveUpdateSubscription = purchases.isLiveUpdates(purchase);
 		boolean autoRenewing = false;
 		boolean renewVisible = false;
 		if (subscriptionState == null) {
@@ -70,13 +70,13 @@ public class PurchaseUiDataUtils {
 		}
 		boolean isSubscription = purchase instanceof InAppSubscription;
 
-		if (purchases.isOsmAndProSubscription(purchase)) {
+		if (purchases.isOsmAndPro(purchase)) {
 			title = app.getString(R.string.osmand_pro);
 			iconId = R.drawable.ic_action_osmand_pro_logo_colored;
-		} else if (purchases.isLiveUpdatesSubscription(purchase)) {
+		} else if (purchases.isLiveUpdates(purchase)) {
 			title = app.getString(R.string.osm_live);
 			iconId = R.drawable.ic_action_subscription_osmand_live;
-		} else if (purchases.isMapsSubscription(purchase) || purchases.isFullVersion(purchase)) {
+		} else if (purchases.isMaps(purchase) || purchases.isFullVersion(purchase)) {
 			title = app.getString(R.string.maps_plus);
 			iconId = R.drawable.ic_action_osmand_maps_plus;
 		} else {
@@ -102,10 +102,10 @@ public class PurchaseUiDataUtils {
 					}
 				}
 				if (!autoRenewing && subscriptionState != ACTIVE && subscriptionState != CANCELLED) {
-					if (purchases.isMapsSubscription(subscription)) {
+					if (purchases.isMaps(subscription)) {
 						boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseUtils.isFullVersionAvailable(app, false);
 						renewVisible = !isFullVersion && !InAppPurchaseUtils.isSubscribedToAny(app, false);
-					} else if (purchases.isOsmAndProSubscription(subscription)) {
+					} else if (purchases.isOsmAndPro(subscription)) {
 						renewVisible = !InAppPurchaseUtils.isOsmAndProAvailable(app, false);
 					}
 				}
@@ -160,7 +160,7 @@ public class PurchaseUiDataUtils {
 			InAppPurchaseHelper helper = app.getInAppPurchaseHelper();
 			InAppPurchases purchases = helper.getInAppPurchases();
 			for (InAppPurchase purchase : mainPurchases) {
-				if (purchases.isOsmAndProSubscription(purchase)) {
+				if (purchases.isOsmAndPro(purchase)) {
 					String sku = purchase.getSku();
 					return settings.BACKUP_SUBSCRIPTION_ORIGIN.get() != helper.getPurchaseOriginBySku(sku);
 				}

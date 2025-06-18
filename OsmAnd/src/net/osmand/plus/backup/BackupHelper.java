@@ -178,7 +178,7 @@ public class BackupHelper {
 
 		boolean subscriptionsExpired = false;
 		for (InAppPurchase purchase : purchaseHelper.getEverMadeMainPurchases()) {
-			if (purchases.isOsmAndProSubscription(purchase) && purchase instanceof InAppSubscription subscription) {
+			if (purchases.isOsmAndPro(purchase) && purchase instanceof InAppSubscription subscription) {
 				SubscriptionState state = subscription.getState();
 				if (state.isActive() || subscription.isPurchased()) {
 					return false;
