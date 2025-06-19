@@ -65,9 +65,12 @@ class Metadata : GpxExtensions {
 	fun getRouteActivity(activities: List<RouteActivity>): RouteActivity? {
 		return findRouteActivity(getExtensionsToRead()[GpxUtilities.ACTIVITY_TYPE], activities)
 	}
-
+	
 	private fun findRouteActivity(id: String?, activities: List<RouteActivity>): RouteActivity? {
-		return id?.let { activities.firstOrNull { it.id == id } }
+		return id?.let {
+			val currentActivitiesCopy = activities.toList()
+			currentActivitiesCopy.firstOrNull { it.id == id }
+		}
 	}
 
 	fun setRouteActivity(activity: RouteActivity?) {
