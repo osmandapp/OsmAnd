@@ -270,13 +270,9 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		Object obj = listAdapter.getItem(position);
-		if (obj instanceof DownloadResourceGroup) {
-			String uniqueId = ((DownloadResourceGroup) obj).getUniqueId();
-			DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
-					.createInstance(uniqueId);
-			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
-		} else if (obj instanceof IndexItem) {
-			IndexItem indexItem = (IndexItem) obj;
+		if (obj instanceof DownloadResourceGroup group) {
+			DownloadResourceGroupFragment.showInstance(requireActivity(), group.getUniqueId());
+		} else if (obj instanceof IndexItem indexItem) {
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
 			View.OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
 			ls.onClick(v);

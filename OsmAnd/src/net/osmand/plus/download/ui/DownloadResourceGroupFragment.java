@@ -26,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.LockableViewPager;
@@ -59,8 +61,10 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment implements DownloadEvents,
-		InAppPurchaseListener, RemoveLocalForecastListener, OnChildClickListener {
+public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
+		implements DownloadEvents, InAppPurchaseListener, RemoveLocalForecastListener, OnChildClickListener {
+
+	private static final String TAG = DownloadResourceGroupFragment.class.getSimpleName();
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
 	public static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
@@ -71,7 +75,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 	private String groupId;
 	private DownloadResourceGroup group;
 
-	private View view;
 	private BannerAndDownloadFreeVersion banner;
 	private ExpandableListView listView;
 	private DownloadResourceGroupAdapter listAdapter;
@@ -88,7 +91,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 		super.onCreate(savedInstanceState);
 		downloadThread = app.getDownloadThread();
 		purchaseHelper = getDownloadActivity().getPurchaseHelper();
-		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		setHasOptionsMenu(true);
 	}
 
@@ -97,9 +99,10 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
+		View view = inflate(R.layout.maps_in_category_fragment, container, false);
 		if (savedInstanceState != null) {
 			groupId = savedInstanceState.getString(REGION_ID_DLG_KEY);
 		}
@@ -142,7 +145,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 
 	private void addSubscribeEmailRow() {
 		if (DownloadActivity.shouldShowFreeVersionBanner(app) && !settings.EMAIL_SUBSCRIBED.get()) {
-			subscribeEmailView = activity.getLayoutInflater().inflate(R.layout.subscribe_email_header, null, false);
+			subscribeEmailView = inflate(R.layout.subscribe_email_header, null, false);
 			subscribeEmailView.findViewById(R.id.subscribe_btn).setOnClickListener(v -> subscribe());
 			listView.addHeaderView(subscribeEmailView);
 			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
@@ -155,9 +158,9 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 
 	private void addRestorePurchasesRow() {
 		if (!openAsDialog() && purchaseHelper != null && !purchaseHelper.hasInventory()) {
-			restorePurchasesView = activity.getLayoutInflater().inflate(R.layout.restore_purchases_list_footer, null);
-			((ImageView) restorePurchasesView.findViewById(R.id.icon)).setImageDrawable(
-					getContentIcon(R.drawable.ic_action_reset_to_default_dark));
+			restorePurchasesView = inflate(R.layout.restore_purchases_list_footer, null);
+			((ImageView) restorePurchasesView.findViewById(R.id.icon))
+					.setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
 			restorePurchasesView.findViewById(R.id.button).setOnClickListener(v -> {
 				restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
 				purchaseHelper.requestInventory(true);
@@ -172,13 +175,13 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 	}
 
 	private void addDescriptionRow() {
-		descriptionView = activity.getLayoutInflater().inflate(R.layout.group_description_item, listView, false);
+		descriptionView = inflate(R.layout.group_description_item, listView, false);
 		listView.addHeaderView(descriptionView);
 	}
 
 	private void addSearchRow() {
 		if (!openAsDialog()) {
-			searchView = activity.getLayoutInflater().inflate(R.layout.simple_list_menu_item, null);
+			searchView = inflate(R.layout.simple_list_menu_item, null);
 			searchView.setBackgroundResource(android.R.drawable.list_selector_background);
 			TextView title = searchView.findViewById(R.id.title);
 			title.setCompoundDrawablesWithIntrinsicBounds(getContentIcon(R.drawable.ic_action_search_dark), null, null, null);
@@ -224,8 +227,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 
 	private void updateDescriptionView() {
 		if (descriptionView != null) {
-			if (group != null && group.getRegion() instanceof CustomRegion) {
-				CustomRegion customRegion = (CustomRegion) group.getRegion();
+			if (group != null && group.getRegion() instanceof CustomRegion customRegion) {
 				DownloadDescriptionInfo descriptionInfo = customRegion.getDescriptionInfo();
 				if (descriptionInfo != null) {
 					TextView description = descriptionView.findViewById(R.id.description);
@@ -248,7 +250,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 	private void updateFreeMapsView() {
 		if (shouldDisplayFreeMapsMessage()) {
 			if (freeMapsView == null) {
-				freeMapsView = activity.getLayoutInflater().inflate(R.layout.free_maps_header, null, false);
+				freeMapsView = inflate(R.layout.free_maps_header, null, false);
 				listView.addHeaderView(freeMapsView);
 			}
 			TextView description = freeMapsView.findViewById(R.id.description);
@@ -379,8 +381,8 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 							} else if (newDownloads > DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - 3) {
 								newDownloads = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - 3;
 							}
-							app.getSettings().NUMBER_OF_FREE_DOWNLOADS.set(newDownloads);
-							app.getSettings().EMAIL_SUBSCRIBED.set(true);
+							settings.NUMBER_OF_FREE_DOWNLOADS.set(newDownloads);
+							settings.EMAIL_SUBSCRIBED.set(true);
 							hideSubscribeEmailView();
 							activity.updateBanner();
 						}
@@ -433,13 +435,10 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 			activity.showDialog(getActivity(), SearchDialogFragment.createInstance(filter));
 		} else if (filterCat != null) {
 			if (filterCat.equals(DownloadActivityType.VOICE_FILE.getTag())) {
-				String uniqueId = DownloadResourceGroupType.getVoiceTTSId();
-				DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
-				((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
+				showInstance(requireActivity(), DownloadResourceGroupType.getVoiceTTSId());
 			}
 		} else if (filterGroup != null) {
-			DownloadResourceGroupFragment regionDialogFragment = createInstance(filterGroup);
-			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
+			showInstance(requireActivity(), filterGroup);
 		}
 	}
 
@@ -464,8 +463,8 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 			listAdapter.update(group);
 			toolbar.setTitle(group.getName(activity));
 			WorldRegion region = group.getRegion();
-			if (region instanceof CustomRegion) {
-				int headerColor = ((CustomRegion) region).getHeaderColor();
+			if (region instanceof CustomRegion customRegion) {
+				int headerColor = customRegion.getHeaderColor();
 				if (headerColor != CustomRegion.INVALID_ID) {
 					toolbar.setBackgroundColor(headerColor);
 				}
@@ -517,18 +516,13 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		Object child = listAdapter.getChild(groupPosition, childPosition);
-		if (child instanceof DownloadResourceGroup) {
-			String uniqueId = ((DownloadResourceGroup) child).getUniqueId();
-			DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
-			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
+		if (child instanceof DownloadResourceGroup downloadResourceGroup) {
+			showInstance(requireActivity(), downloadResourceGroup.getUniqueId());
 			return true;
 		} else if (child instanceof CustomIndexItem) {
 			String regionId = group.getGroupByIndex(groupPosition).getUniqueId();
-
-			DownloadItemFragment downloadItemFragment = DownloadItemFragment.createInstance(regionId, childPosition);
-			((DownloadActivity) getActivity()).showDialog(getActivity(), downloadItemFragment);
-		} else if (child instanceof DownloadItem) {
-			DownloadItem downloadItem = (DownloadItem) child;
+			DownloadItemFragment.showInstance(requireActivity(), regionId, childPosition);
+		} else if (child instanceof DownloadItem downloadItem) {
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
 			OnClickListener ls = vh.getRightButtonAction(downloadItem, vh.getClickAction(downloadItem));
 			ls.onClick(v);
@@ -548,12 +542,13 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 		super.onSaveInstanceState(outState);
 	}
 
+	@NonNull
 	private DownloadActivity getDownloadActivity() {
-		return (DownloadActivity) getActivity();
+		return (DownloadActivity) requireActivity();
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 		if (!openAsDialog()) {
 			int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 
@@ -568,7 +563,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		switch (item.getItemId()) {
 			case RELOAD_ID:
 				// re-create the thread
@@ -582,11 +577,14 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment 
 		}
 	}
 
-	public static DownloadResourceGroupFragment createInstance(String regionId) {
-		Bundle bundle = new Bundle();
-		bundle.putString(REGION_ID_DLG_KEY, regionId);
-		DownloadResourceGroupFragment fragment = new DownloadResourceGroupFragment();
-		fragment.setArguments(bundle);
-		return fragment;
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String regionId) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle bundle = new Bundle();
+			bundle.putString(REGION_ID_DLG_KEY, regionId);
+			DownloadResourceGroupFragment fragment = new DownloadResourceGroupFragment();
+			fragment.setArguments(bundle);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }
