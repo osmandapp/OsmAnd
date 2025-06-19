@@ -186,7 +186,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 			TextView title = searchView.findViewById(R.id.title);
 			title.setCompoundDrawablesWithIntrinsicBounds(getContentIcon(R.drawable.ic_action_search_dark), null, null, null);
 			title.setHint(R.string.search_map_hint);
-			searchView.setOnClickListener(v -> getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance("")));
+			searchView.setOnClickListener(v -> SearchDialogFragment.showInstance(requireActivity(), ""));
 			listView.addHeaderView(searchView);
 			listView.setHeaderDividersEnabled(true);
 			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
@@ -426,13 +426,10 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		String filter = activity.getFilterAndClear();
 		String filterCat = activity.getFilterCatAndClear();
 		String filterGroup = activity.getFilterGroupAndClear();
-		if (filter != null && filterCat != null
-				&& filterCat.equals(DownloadActivityType.WIKIPEDIA_FILE.getTag())) {
-			activity.showDialog(getActivity(),
-					SearchDialogFragment.createInstance(filter, false,
-							DownloadActivityType.WIKIPEDIA_FILE));
+		if (filter != null && filterCat != null && filterCat.equals(DownloadActivityType.WIKIPEDIA_FILE.getTag())) {
+			SearchDialogFragment.showInstance(requireActivity(), filter, false, DownloadActivityType.WIKIPEDIA_FILE);
 		} else if (filter != null) {
-			activity.showDialog(getActivity(), SearchDialogFragment.createInstance(filter));
+			SearchDialogFragment.showInstance(requireActivity(), filter);
 		} else if (filterCat != null) {
 			if (filterCat.equals(DownloadActivityType.VOICE_FILE.getTag())) {
 				showInstance(requireActivity(), DownloadResourceGroupType.getVoiceTTSId());
@@ -570,7 +567,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 				downloadThread.runReloadIndexFiles();
 				return true;
 			case SEARCH_ID:
-				getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
+				SearchDialogFragment.showInstance(requireActivity(), "");
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);

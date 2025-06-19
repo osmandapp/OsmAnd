@@ -162,9 +162,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			String region = bundle.getString(REGION_TO_SEARCH);
 			if (region != null && !region.isEmpty()) {
 				if (getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)) {
-					showDialog(this, SearchDialogFragment.createInstance(region, true, NORMAL_FILE, WIKIPEDIA_FILE));
+					SearchDialogFragment.showInstance(this, region, true, NORMAL_FILE, WIKIPEDIA_FILE);
 				} else {
-					showDialog(this, SearchDialogFragment.createInstance(region, true, NORMAL_FILE));
+					SearchDialogFragment.showInstance(this, region, true, NORMAL_FILE);
 				}
 			}
 			filter = bundle.getString(FILTER_KEY);
@@ -347,10 +347,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	public int getCurrentTab() {
 		return viewPager.getCurrentItem();
-	}
-
-	public void showDialog(FragmentActivity activity, DialogFragment fragment) {
-		fragment.show(activity.getSupportFragmentManager(), "dialog");
 	}
 
 	public static boolean isDownloadingPermitted(@NonNull OsmandSettings settings) {
