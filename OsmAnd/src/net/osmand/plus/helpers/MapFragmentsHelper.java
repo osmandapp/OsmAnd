@@ -307,7 +307,7 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	public void showXMasDialog() {
 		SecondSplashScreenFragment.SHOW = false;
 		dismissSecondSplashScreen();
-		new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
+		XMasDialogFragment.showInstance(getSupportFragmentManager());
 	}
 
 	public void dismissSecondSplashScreen() {

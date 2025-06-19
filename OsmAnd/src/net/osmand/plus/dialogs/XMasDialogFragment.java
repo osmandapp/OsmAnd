@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
@@ -16,13 +17,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseAlertDialogFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.Calendar;
 import java.util.Date;
 
 public class XMasDialogFragment extends BaseAlertDialogFragment {
 
-	public static final String TAG = "XMasDialogFragment";
+	public static final String TAG = XMasDialogFragment.class.getSimpleName();
 	private static boolean XmasDialogWasProcessed;
 
 	public static boolean shouldShowXmasDialog(@NonNull OsmandApplication app) {
@@ -107,5 +109,11 @@ public class XMasDialogFragment extends BaseAlertDialogFragment {
 	@Override
 	protected int getDialogThemeId() {
 		return R.style.XmasDialogTheme;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			new XMasDialogFragment().show(fragmentManager, TAG);
+		}
 	}
 }
