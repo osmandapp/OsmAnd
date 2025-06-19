@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.CoordinatesGridSettings;
 
 public class ShowHideCoordinatesGridAction extends QuickAction {
@@ -42,9 +43,8 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text)).setText(
 				R.string.quick_action_showhide_coordinates_grid_descr);
 		parent.addView(view);

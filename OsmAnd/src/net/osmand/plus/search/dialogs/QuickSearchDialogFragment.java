@@ -1201,7 +1201,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_search_dark, app.getString(R.string.custom_search), v -> {
 					PoiUIFilter filter = app.getPoiFilters().getCustomPOIFilter();
 					filter.clearFilter();
-					QuickSearchCustomPoiFragment.showDialog(QuickSearchDialogFragment.this, filter.getFilterId());
+					QuickSearchCustomPoiFragment.showInstance(QuickSearchDialogFragment.this, filter.getFilterId());
 				}));
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_item_move, app.getString(R.string.rearrange_categories), v -> {
 					ApplicationMode appMode = app.getSettings().getApplicationMode();

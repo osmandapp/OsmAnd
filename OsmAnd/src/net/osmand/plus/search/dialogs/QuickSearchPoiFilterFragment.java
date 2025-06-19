@@ -299,7 +299,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	private void editFilter() {
-		QuickSearchCustomPoiFragment.showDialog(this, filter.getFilterId());
+		QuickSearchCustomPoiFragment.showInstance(this, filter.getFilterId());
 	}
 
 	private void saveFilter() {
