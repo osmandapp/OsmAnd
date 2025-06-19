@@ -206,6 +206,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		syminfoPref.setIconSpaceReserved(false);
 		syminfoPref.setDescription(R.string.show_debug_info_description);
 
+		SwitchPreferenceEx symbboxPref = findPreference(plugin.SHOW_SYMBOLS_BBOXES.getId());
+		symbboxPref.setIconSpaceReserved(false);
+		symbboxPref.setDescription(R.string.show_debug_info_description);
+
 		SwitchPreferenceEx disableMapLayers = findPreference(settings.DISABLE_MAP_LAYERS.getId());
 		disableMapLayers.setDescription(getString(R.string.disable_map_layers_descr));
 		disableMapLayers.setIconSpaceReserved(false);
