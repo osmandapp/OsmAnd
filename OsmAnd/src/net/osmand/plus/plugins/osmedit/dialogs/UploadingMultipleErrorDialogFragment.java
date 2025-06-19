@@ -78,16 +78,16 @@ public final class UploadingMultipleErrorDialogFragment extends BaseAlertDialogF
 		if (plugin != null) {
 			OsmEditsUploadListenerHelper helper = new OsmEditsUploadListenerHelper(
 					activity, getString(R.string.local_openstreetmap_were_uploaded));
-
-			ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
-					R.string.uploading,
-					R.string.local_openstreetmap_uploading,
-					ProgressDialog.STYLE_HORIZONTAL);
-			dialog.show(activity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-					dialog, helper, plugin, toUpload.length, false, false);
+					showProgressDialog(), helper, plugin, toUpload.length, false, false);
 			uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toUpload);
 		}
+	}
+
+	@NonNull
+	private ProgressDialogFragment showProgressDialog() {
+		return ProgressDialogFragment.showInstance(requireActivity().getSupportFragmentManager(),
+				R.string.uploading, R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,

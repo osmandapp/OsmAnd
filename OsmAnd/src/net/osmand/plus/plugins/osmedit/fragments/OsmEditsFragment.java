@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.osmedit.fragments;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -27,7 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -66,6 +64,7 @@ import net.osmand.plus.plugins.osmedit.dialogs.OsmEditOptionsBottomSheetDialogFr
 import net.osmand.plus.plugins.osmedit.dialogs.ProgressDialogPoiUploader;
 import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment;
+import net.osmand.plus.plugins.osmedit.fragments.DeleteOsmEditsConfirmDialogFragment.DeleteOsmEditsConfirmDialogListener;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil.OnNodeCommittedListener;
 import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
@@ -83,7 +82,8 @@ import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment implements ProgressDialogPoiUploader,
-		OnNodeCommittedListener, FragmentStateHolder, OsmAuthorizationListener, ShareOsmPointsListener {
+		OnNodeCommittedListener, FragmentStateHolder, OsmAuthorizationListener,
+		ShareOsmPointsListener, DeleteOsmEditsConfirmDialogListener {
 
 	public static final int EXPORT_TYPE_ALL = 0;
 	public static final int EXPORT_TYPE_POI = 1;
@@ -341,7 +341,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 				enableSelectionMode(true);
 				MenuItem item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
 				item.setOnMenuItemClickListener(deleteItem -> {
-					deleteItems(osmEditsSelected);
+					askDeleteItems(osmEditsSelected);
 					mode.finish();
 					return true;
 				});
@@ -398,8 +398,26 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		return null;
 	}
 
-	private void deleteItems(ArrayList<OsmPoint> points) {
-		DeleteOsmEditsConfirmDialogFragment.createInstance(points).show(getChildFragmentManager(), DeleteOsmEditsConfirmDialogFragment.TAG);
+	private void askDeleteItems(@NonNull ArrayList<OsmPoint> points) {
+		DeleteOsmEditsConfirmDialogFragment.showInstance(getChildFragmentManager(), points);
+	}
+
+	@Override
+	public void onDeleteItemsConfirmed(@NonNull List<OsmPoint> points) {
+		int firstVisible = getListView().getFirstVisiblePosition();
+		Iterator<OsmPoint> it = points.iterator();
+		while (it.hasNext()) {
+			OsmPoint osmPoint = it.next();
+			assert plugin != null;
+			if (osmPoint.getGroup() == Group.POI) {
+				plugin.getDBPOI().deletePOI((OpenstreetmapPoint) osmPoint);
+			} else if (osmPoint.getGroup() == Group.BUG) {
+				plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) osmPoint);
+			}
+			it.remove();
+			deletePoint(osmPoint);
+		}
+		notifyDataSetChangedWithSelection(firstVisible);
 	}
 
 	@Override
@@ -424,7 +442,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	}
 
 	private void fetchData() {
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
 		osmEdits = new ArrayList<>();
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
 		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmBugsPoints();
@@ -434,7 +452,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		listView.setDivider(null);
 		listView.setEmptyView(emptyView);
 
-		if (osmEdits.size() > 0 && footerView == null && portrait) {
+		if (!osmEdits.isEmpty() && footerView == null && portrait) {
 			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, listView, false);
 			listView.addFooterView(footerView);
 		}
@@ -554,7 +572,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 			public void onDeleteClick(OsmPoint osmPoint) {
 				ArrayList<OsmPoint> points = new ArrayList<>();
 				points.add(osmPoint);
-				deleteItems(new ArrayList<>(points));
+				askDeleteItems(new ArrayList<>(points));
 			}
 		};
 	}
@@ -656,10 +674,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	}
 
 	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
-		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
-				R.string.uploading,
-				R.string.local_openstreetmap_uploading,
-				ProgressDialog.STYLE_HORIZONTAL);
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(requireActivity(),
 				getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override
@@ -673,7 +687,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 				recreateAdapterData();
 			}
 		};
-		dialog.show(requireActivity().getSupportFragmentManager(), ProgressDialogFragment.TAG);
+		ProgressDialogFragment dialog = ProgressDialogFragment.showInstance(requireActivity().getSupportFragmentManager(),
+				R.string.uploading, R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog, listener, plugin, points.length, closeChangeSet, anonymously);
 		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
 	}
@@ -692,10 +707,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		recreateAdapterData();
 	}
 
-	private int getFirstVisible() {
-		return getListView().getFirstVisiblePosition();
-	}
-
 	private void notifyDataSetChanged() {
 		listAdapter.notifyDataSetChanged();
 	}
@@ -703,50 +714,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	private void notifyDataSetChangedWithSelection(int firstVisible) {
 		listAdapter.notifyDataSetChanged();
 		getListView().setSelection(firstVisible);
-	}
-
-	public static class DeleteOsmEditsConfirmDialogFragment extends DialogFragment {
-
-		public static final String TAG = "DeleteOsmEditsConfirmDialogFragment";
-		private static final String POINTS_LIST = "points_list";
-
-		public static DeleteOsmEditsConfirmDialogFragment createInstance(ArrayList<OsmPoint> points) {
-			DeleteOsmEditsConfirmDialogFragment fragment = new DeleteOsmEditsConfirmDialogFragment();
-			Bundle args = new Bundle();
-			args.putSerializable(POINTS_LIST, points);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
-			OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
-			List<OsmPoint> points = (List<OsmPoint>) AndroidUtils.getSerializable(getArguments(), POINTS_LIST, ArrayList.class);
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			assert points != null;
-			builder.setMessage(getString(R.string.local_osm_changes_delete_all_confirm, points.size()));
-			builder.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-				int firstVisible = parentFragment.getFirstVisible();
-				Iterator<OsmPoint> it = points.iterator();
-				while (it.hasNext()) {
-					OsmPoint osmPoint = it.next();
-					assert plugin != null;
-					if (osmPoint.getGroup() == Group.POI) {
-						plugin.getDBPOI().deletePOI((OpenstreetmapPoint) osmPoint);
-					} else if (osmPoint.getGroup() == Group.BUG) {
-						plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) osmPoint);
-					}
-					it.remove();
-					parentFragment.deletePoint(osmPoint);
-				}
-				parentFragment.notifyDataSetChangedWithSelection(firstVisible);
-			});
-			builder.setNegativeButton(R.string.shared_string_cancel, null);
-			return builder.create();
-		}
 	}
 
 	@Override

@@ -156,8 +156,6 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		FragmentActivity activity = getActivity();
 		if (activity == null) return;
 
-		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(R.string.uploading,
-				R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(activity,
 				getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override
@@ -176,7 +174,8 @@ public class DashOsmEditsFragment extends DashBaseFragment
 				}
 			}
 		};
-		dialog.show(getChildFragmentManager(), ProgressDialogFragment.TAG);
+		ProgressDialogFragment dialog = ProgressDialogFragment.showInstance(getChildFragmentManager(),
+				R.string.uploading, R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
 				listener, plugin, points.length, closeChangeSet, anonymously);
 		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);

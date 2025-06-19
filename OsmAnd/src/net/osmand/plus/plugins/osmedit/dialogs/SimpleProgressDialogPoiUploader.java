@@ -28,10 +28,6 @@ public class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploade
 
 	@Override
 	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
-		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
-				R.string.uploading,
-				R.string.local_openstreetmap_uploading,
-				ProgressDialog.STYLE_HORIZONTAL);
 		OsmEditingPlugin plugin = PluginsHelper.requirePlugin(OsmEditingPlugin.class);
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(mapActivity,
 				mapActivity.getString(R.string.local_openstreetmap_were_uploaded)) {
@@ -46,9 +42,14 @@ public class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploade
 				}
 			}
 		};
-		dialog.show(mapActivity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-				dialog, listener, plugin, points.length, closeChangeSet, anonymously);
+				showProgressDialog(), listener, plugin, points.length, closeChangeSet, anonymously);
 		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
+	}
+
+	@NonNull
+	private ProgressDialogFragment showProgressDialog() {
+		return ProgressDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+				R.string.uploading, R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
 	}
 }
