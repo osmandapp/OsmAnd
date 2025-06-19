@@ -237,7 +237,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	@Override
 	@SuppressLint("PrivateResource, ValidFragment")
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = getMapActivity();
+		updateNightMode();
+		MapActivity mapActivity = requireMapActivity();
 		View view = inflate(R.layout.search_dialog_fragment, container, false);
 
 		toolbarController = new QuickSearchToolbarController(mapActivity);
