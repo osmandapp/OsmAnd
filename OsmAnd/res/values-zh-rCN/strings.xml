@@ -5996,4 +5996,20 @@
     <string name="shared_string_no_animation">没有动画</string>
     <string name="quick_action_verb_start_pause">开始/暂停</string>
     <string name="quick_action_search_view_title">搜索视图</string>
+    <string name="shared_string_switch">切换</string>
+    <string name="ski_route_switch_style_description">使用冬季滑雪地图样式，探索雪道、缆车等设施。</string>
+    <string name="deleting">正在删除…</string>
+    <string name="osm_live_payment_renews_3_years">每三年更新一次</string>
+    <string name="years_3">三年</string>
+    <string name="osm_live_payment_3_years_title">每三年</string>
+    <string name="three_years_subscription">三年订阅</string>
+    <string name="deactivated_map">已停用的地图</string>
+    <string name="battery">电池</string>
+    <string name="sensor_data">传感器数据</string>
+    <string name="battery_level">电池电量</string>
+    <string name="set_parking_position">设置停车位</string>
+    <string name="deleting_history">正在删除历史…</string>
+    <string name="shared_string_flat">平坦</string>
+    <string name="uphill_downhill_split">上坡/下坡</string>
+    <string name="suggest_activate_map_msg">%1$s 地图已停用，\n启用以查看此区域。</string>
 </resources>
