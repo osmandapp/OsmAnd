@@ -72,7 +72,7 @@ import java.util.Objects;
 @RunWith(AndroidJUnit4.class)
 public class MapClickerTest extends AndroidTest {
 
-	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ExplorePlacesOnlineProvider.class);
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(MapClickerTest.class);
 	// Rule to launch the main activity before each test
 	@Rule
 	public ActivityTestRule<MapActivity> activityRule = new ActivityTestRule<>(MapActivity.class, true, false);
@@ -84,20 +84,6 @@ public class MapClickerTest extends AndroidTest {
 		super.setup();
 		poiTypesInitIdlingResource = new PoiTypesInitIdlingResource("PoiTypesInit", app);
 		IdlingRegistry.getInstance().register(poiTypesInitIdlingResource);
-	}
-
-	private void copyObfsFromAssetToAppFolder() {
-		try {
-			File wikiFolder = new File(app.getAppPath(null), "wiki");
-			wikiFolder.mkdir();
-			for (String name : listAssetFiles(testContext, "")) {
-				if (name.endsWith(".obf")) {
-					copyAssetToFile(testContext, name, new File(app.getAppPath(null), name));
-				}
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	@After
@@ -124,7 +110,15 @@ public class MapClickerTest extends AndroidTest {
 		testResult.appVersion = pi.versionName;
 		testResult.events = new ArrayList<>();
 
+		LOG.info("MapClickerTest start. found " + clicks.size() + " clicks");
+		int progress = 0;
 		for (ClickData click : clicks) {
+			float clickIndex = clicks.indexOf(click);
+			int clicksProgress = (int) (clickIndex / clicks.size()) * 100;
+			if (clicksProgress > progress + 10) {
+				progress += 10;
+				LOG.info("MapClickerTest progress " + progress);
+			}
 			lattitude = click.latitude;
 			longitude = click.longitude;
 			LatLon location = new LatLon(lattitude, longitude);
@@ -234,7 +228,7 @@ public class MapClickerTest extends AndroidTest {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(testResult);
 		FileUtils.saveToFile(json, app, "check_result.json");
-		LOG.debug("\n\n\n\ntestClickOnMpPoint: \n" + json);
+		LOG.info("MapClickerTest finish");
 	}
 
 	private String getIconWithIdDescription(int iconId) {
@@ -269,14 +263,6 @@ public class MapClickerTest extends AndroidTest {
 		return Objects.requireNonNullElse(iconIdDescription, "NO_ICON");
 	}
 
-	private String getTextViewDescription(@Nullable TextView textView) {
-		if (textView == null) {
-			return "NO_TEXT";
-		} else {
-			return "text \"" + textView.getText() + "\"";
-		}
-	}
-
 	public List<ClickData> parseClicksJson(String fileName) {
 		String jsonString;
 		try {
@@ -308,32 +294,6 @@ public class MapClickerTest extends AndroidTest {
 	}
 
 	public record MenuItem(String icon, List<String> textFields) {
-	}
-
-	public class MenuDescription {
-		private final MenuType type;
-		private final List<MenuItem> items;
-
-		public MenuDescription(MenuType type) {
-			this.type = type;
-			this.items = new ArrayList<>();
-		}
-
-		public MenuType getType() {
-			return type;
-		}
-
-		public List<MenuItem> getItems() {
-			return items;
-		}
-
-		public void addItem(MenuItem newItem) {
-			this.items.add(newItem);
-		}
-
-		public void addAllItems(List<MenuItem> itemsToAdd) {
-			this.items.addAll(itemsToAdd);
-		}
 	}
 
 	public enum OpenMenuResultType {
