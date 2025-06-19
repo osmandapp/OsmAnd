@@ -660,10 +660,10 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 				R.string.uploading,
 				R.string.local_openstreetmap_uploading,
 				ProgressDialog.STYLE_HORIZONTAL);
-		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(getActivity(),
+		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(requireActivity(),
 				getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override
-			public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
+			public void uploadEnded(@NonNull Map<OsmPoint, String> loadErrorsMap) {
 				super.uploadEnded(loadErrorsMap);
 				for (Map.Entry<OsmPoint, String> entry : loadErrorsMap.entrySet()) {
 					if (entry.getValue() == null) {
@@ -673,7 +673,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 				recreateAdapterData();
 			}
 		};
-		dialog.show(getActivity().getSupportFragmentManager(), ProgressDialogFragment.TAG);
+		dialog.show(requireActivity().getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog, listener, plugin, points.length, closeChangeSet, anonymously);
 		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
 	}
@@ -683,7 +683,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
 		String type = osmPoint.getGroup() == Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
-		((MyPlacesActivity) getActivity()).showOnMap(this, osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
+		((MyPlacesActivity) requireActivity()).showOnMap(this, osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint);
 	}
 

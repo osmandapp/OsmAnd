@@ -315,10 +315,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 				if (expandButtonPressed) {
 					PoiCategory category = getCategory(mapActivity);
 					PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(mapActivity).getOtherPoiCategory();
-					PoiSubTypeDialogFragment f =
-							PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
-					f.setOnItemSelectListener(poiTypeEditText::setText);
-					f.show(mapActivity.getSupportFragmentManager(), "PoiSubTypeDialogFragment");
+					PoiSubTypeDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), tempPoiCategory, poiTypeEditText::setText);
 					return true;
 				}
 			}

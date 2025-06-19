@@ -1,17 +1,9 @@
 package net.osmand.plus.download;
 
-import static net.osmand.plus.Version.FULL_VERSION_NAME;
-
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
@@ -21,7 +13,6 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.AndroidUtils;
 
 import java.text.MessageFormat;
 
@@ -212,37 +203,6 @@ public class DownloadValidationManager {
 		});
 		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
-	}
-
-	public static class InstallPaidVersionDialogFragment extends DialogFragment {
-
-		public static final String TAG = InstallPaidVersionDialogFragment.class.getSimpleName();
-
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-			FragmentActivity activity = requireActivity();
-			OsmandApplication app = (OsmandApplication) activity.getApplication();
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-			builder.setTitle(R.string.free_version_title);
-			builder.setMessage(getFreeVersionMessage(app));
-
-			if (Version.isMarketEnabled()) {
-				builder.setPositiveButton(R.string.install_paid, (dialog, which) -> {
-					Context context = getContext();
-					if (context != null) {
-						Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, FULL_VERSION_NAME));
-						Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-						AndroidUtils.startActivityIfSafe(context, intent);
-					}
-				});
-				builder.setNegativeButton(R.string.shared_string_cancel, null);
-			} else {
-				builder.setNeutralButton(R.string.shared_string_ok, null);
-			}
-			return builder.create();
-		}
 	}
 
 	@NonNull

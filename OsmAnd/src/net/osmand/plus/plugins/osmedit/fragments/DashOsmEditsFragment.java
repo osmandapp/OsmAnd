@@ -161,7 +161,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(activity,
 				getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override
-			public void uploadUpdated(OsmPoint point) {
+			public void uploadUpdated(@NonNull OsmPoint point) {
 				super.uploadUpdated(point);
 				if (DashOsmEditsFragment.this.isAdded()) {
 					onOpenDash();
@@ -169,7 +169,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			}
 
 			@Override
-			public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
+			public void uploadEnded(@NonNull Map<OsmPoint, String> loadErrorsMap) {
 				super.uploadEnded(loadErrorsMap);
 				if (DashOsmEditsFragment.this.isAdded()) {
 					onOpenDash();

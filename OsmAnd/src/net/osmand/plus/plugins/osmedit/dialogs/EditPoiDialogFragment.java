@@ -263,10 +263,7 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 		expandButton.setOnClickListener(v -> {
 			PoiCategory category = editPoiData.getPoiCategory();
 			if (category != null) {
-				PoiSubTypeDialogFragment dialogFragment =
-						PoiSubTypeDialogFragment.createInstance(category);
-				dialogFragment.setOnItemSelectListener(this::setSubCategory);
-				dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
+				PoiSubTypeDialogFragment.showInstance(getChildFragmentManager(), category, this::setSubCategory);
 			}
 		});
 
