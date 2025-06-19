@@ -1583,7 +1583,7 @@
     <string name="moving_time">Време у покрету</string>
     <string name="max_min">Макс/Мин</string>
     <string name="min_max">Мин/Макс</string>
-    <string name="index_tours">Врста</string>
+    <string name="index_tours">Туре</string>
     <string name="rendering_value_pedestrian_name">Пешице</string>
     <string name="rendering_attr_coloredBuildings_name">Обоји зграде по врсти</string>
     <string name="lang_sw">Свахили</string>
@@ -5062,11 +5062,11 @@
     <string name="key_event_action_activity_back_pressed">Притиснута повратна акција</string>
     <string name="shared_string_rows">Редови</string>
     <string name="dont_ask_anymore">Не питај више</string>
-    <string name="battery_optimization_settings">Подешавање оптимизације батерије</string>
+    <string name="battery_optimization_settings">Поставке прилагођавања батерије</string>
     <string name="battery_optimization_desc">Побољшање употребе батерије андроида може довести до пропуста и нетачности снимљених трагова.
 \n
 \nАко уочите нешто од овога, можете покушати променити употребу батерије на „Неограничено“</string>
-    <string name="battery_optimization">Оптимизација батерије</string>
+    <string name="battery_optimization">Прилагођавање батерије</string>
     <string name="shared_string_extensions">Екстензије</string>
     <string name="shared_string_license">Лиценца</string>
     <string name="shared_string_link">Линк</string>
@@ -5132,10 +5132,10 @@
     <string name="shared_string_show_less">Приказати мање</string>
     <string name="empty_smart_folder_description">Подударајући трагови овде се јављају</string>
     <string name="discard_filter_changes">Одбаци промене филтера</string>
-    <string name="maps_and_resources">Мапе &amp; Ресурси</string>
+    <string name="maps_and_resources">Карте и извори</string>
     <string name="sort_size_ascending">Прво мала величина</string>
     <string name="error_calculate">Резултат рачунања је празан</string>
-    <string name="shared_string_activity">Активност</string>
+    <string name="shared_string_activity">Дејство</string>
     <string name="shared_string_keywords">Кључне речи</string>
     <string name="sort_country_name_ascending">Име државе: А - З</string>
     <string name="standard_maps">Стандардне мапе</string>
