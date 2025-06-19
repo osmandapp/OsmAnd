@@ -3221,7 +3221,7 @@
     <string name="terrain_empty_state_text">Affiche l\'ombrage du relief ou la pente sur la carte. Pour en savoir plus sur ces types de cartes, consultez notre site.</string>
     <string name="shared_string_hillshade">Ombrage du relief</string>
     <string name="download_slope_maps">Pentes</string>
-    <string name="quick_action_terrain_descr">Bouton affichant ou masquant la couche terrain sur la carte.</string>
+    <string name="quick_action_terrain_descr">Bouton affichant ou masquant la couche relief sur la carte.</string>
     <string name="delete_description">Supprimer la description</string>
     <string name="add_description">Ajouter une description</string>
     <string name="select_group">Sélectionner un groupe</string>
@@ -5247,7 +5247,7 @@
     <string name="quick_action_verb_show_hide">Afficher / Masquer</string>
     <string name="quick_action_verb_turn_on_off">Activer / Désactiver</string>
     <string name="quick_action_verb_start_stop">Démarrer / Arrêter</string>
-    <string name="weather_screen">Écran de la météo</string>
+    <string name="weather_screen">Écran météo</string>
     <string name="missing_maps_ignore_details">Les cartes téléchargées couvrent votre itinéraire ? Utilisez-les pour naviguer si vous connaissez la région.</string>
     <string name="quick_action_remove_next_destination">Prochaine étape</string>
     <string name="quick_action_terrain_color_scheme">Palette de couleurs du relief</string>
