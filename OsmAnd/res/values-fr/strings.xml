@@ -215,7 +215,7 @@
     <string name="amenity_type_geocache">Géocache</string>
     <string name="amenity_type_healthcare">Santé</string>
     <string name="amenity_type_historic">Historique</string>
-    <string name="amenity_type_landuse">Utilisation du sol</string>
+    <string name="amenity_type_landuse">Utilisation des sols</string>
     <string name="amenity_type_leisure">Loisir</string>
     <string name="amenity_type_man_made">Infrastructure</string>
     <string name="amenity_type_military">Militaire</string>
@@ -894,7 +894,7 @@
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="max_speed_none">Aucune</string>
     <string name="prefer_motorways">Privilégier les autoroutes</string>
-    <string name="prefer_in_routing_title">Privilégier les routes…</string>
+    <string name="prefer_in_routing_title">Privilégier…</string>
     <string name="prefer_in_routing_descr">Privilégier les itinéraires sur autoroutes.</string>
     <string name="item_checked">coché</string>
     <string name="item_unchecked">non vérifié</string>
