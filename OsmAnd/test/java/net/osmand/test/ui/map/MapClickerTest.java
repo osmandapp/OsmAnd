@@ -66,6 +66,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -183,8 +184,18 @@ public class MapClickerTest extends AndroidTest {
 							textFields.add(tv.getText().toString());
 						}
 					}
+					String iconIdDescription = null;
+					for (View view : l) {
+						if (view instanceof ImageView) {
+							Object tag = view.getTag(R.id.testId);
+							if (tag != null) {
+								iconIdDescription = (String) tag;
+								break;
+							}
+						}
+					}
 					MenuItem item = new MenuItem(
-							getImageViewDescription(findDescendantOfType(child, ImageView.class, 0)),
+							getIconIdDescription(iconIdDescription),
 							textFields
 					);
 					openLocationEvent.addRow(item);
@@ -253,12 +264,9 @@ public class MapClickerTest extends AndroidTest {
 		}
 	}
 
-	private String getImageViewDescription(@Nullable ImageView imageView) {
-		if (imageView == null) {
-			return "NO_ICON";
-		} else {
-			return "HAS_ICON";
-		}
+	@NonNull
+	private String getIconIdDescription(@Nullable String iconIdDescription) {
+		return Objects.requireNonNullElse(iconIdDescription, "NO_ICON");
 	}
 
 	private String getTextViewDescription(@Nullable TextView textView) {
