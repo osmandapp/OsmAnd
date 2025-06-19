@@ -41,7 +41,7 @@ public class SkiRoutesFragment extends MapRoutesFragment {
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
 		ImageView icon = container.findViewById(R.id.icon);
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_skiing, enabled ? selectedColor : disabledColor));
+		icon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_skiing, enabled ? selectedColor : disabledColor));
 	}
 
 	@Override

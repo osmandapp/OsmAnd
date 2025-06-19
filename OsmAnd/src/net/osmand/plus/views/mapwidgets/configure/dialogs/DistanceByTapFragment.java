@@ -148,7 +148,7 @@ public class DistanceByTapFragment extends BaseFullScreenFragment {
 	                                   OnClickListener listener) {
 		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
 
-		Drawable icon = getPaintedContentIcon(iconId, enabled
+		Drawable icon = getPaintedIcon(iconId, enabled
 				? ColorUtilities.getDefaultIconColor(app, nightMode)
 				: ColorUtilities.getSecondaryIconColor(app, nightMode));
 		ImageView ivIcon = view.findViewById(R.id.icon);

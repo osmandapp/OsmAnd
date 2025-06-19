@@ -1512,7 +1512,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 					snapToRoadBtn.setVisibility(View.VISIBLE);
 					profileWithConfig.setVisibility(View.GONE);
 				} else {
-					icon = getPaintedContentIcon(appMode.getIconRes(), appMode.getProfileColor(nightMode));
+					icon = getPaintedIcon(appMode.getIconRes(), appMode.getProfileColor(nightMode));
 					snapToRoadBtn.setVisibility(View.GONE);
 					profileWithConfig.setVisibility(View.VISIBLE);
 				}

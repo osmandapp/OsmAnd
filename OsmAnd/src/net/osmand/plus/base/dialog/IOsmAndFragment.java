@@ -159,7 +159,7 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 	}
 
 	@Nullable
-	default Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
+	default Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
 		return getIconsCache().getPaintedIcon(id, color);
 	}
 }

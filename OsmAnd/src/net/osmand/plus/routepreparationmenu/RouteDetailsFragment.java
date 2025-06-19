@@ -1040,7 +1040,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		});
 		baseView.addView(ll);
 
-		Drawable icon = getPaintedContentIcon(R.drawable.ic_action_pedestrian_dark, getActiveColor());
+		Drawable icon = getPaintedIcon(R.drawable.ic_action_pedestrian_dark, getActiveColor());
 		ImageView iconView = new ImageView(view.getContext());
 		iconView.setImageDrawable(AndroidUtils.getDrawableForDirection(view.getContext(), icon));
 		FrameLayout.LayoutParams imageViewLayoutParams = new FrameLayout.LayoutParams(dpToPx(24), dpToPx(24));

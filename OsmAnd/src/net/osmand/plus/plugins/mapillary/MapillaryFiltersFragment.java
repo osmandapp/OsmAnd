@@ -75,7 +75,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
             toggleIconColor = ColorUtilities.getDefaultIconColor(mapActivity, nightMode);
         }
         ((AppCompatTextView) toggleRow.findViewById(R.id.toggle_row_title)).setText(toggleActionStringId);
-        Drawable drawable = getPaintedContentIcon(toggleIconId, toggleIconColor);
+        Drawable drawable = getPaintedIcon(toggleIconId, toggleIconColor);
         ((AppCompatImageView) toggleRow.findViewById(R.id.toggle_row_icon)).setImageDrawable(drawable);
         CompoundButton toggle = toggleRow.findViewById(R.id.toggle_row_toggle);
 		toggle.setOnCheckedChangeListener(null);
@@ -132,7 +132,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
             }
         });
         ImageView imageView = view.findViewById(R.id.warning_image_view);
-        imageView.setImageDrawable(getPaintedContentIcon(R.drawable.ic_small_warning,
+        imageView.setImageDrawable(getPaintedIcon(R.drawable.ic_small_warning,
                 getColor(R.color.color_warning)));
 
 

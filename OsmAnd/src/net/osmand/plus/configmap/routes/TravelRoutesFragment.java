@@ -153,7 +153,7 @@ public class TravelRoutesFragment extends BaseFullScreenFragment {
 		int disabledColor = AndroidUtils.getColorFromAttr(itemView.getContext(), R.attr.default_icon_color);
 
 		title.setText(name);
-		icon.setImageDrawable(getPaintedContentIcon(imageId, selected ? selectedColor : disabledColor));
+		icon.setImageDrawable(getPaintedIcon(imageId, selected ? selectedColor : disabledColor));
 		if (description != null) {
 			switch (descriptionType) {
 				case HIDDEN:

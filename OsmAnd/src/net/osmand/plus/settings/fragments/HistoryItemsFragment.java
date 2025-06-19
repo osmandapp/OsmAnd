@@ -148,7 +148,7 @@ public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment 
 		} else {
 			int color = ContextCompat.getColor(app, R.color.active_buttons_and_links_text_light);
 			int colorWithAlpha = ColorUtilities.getColorWithAlpha(color, 0.5f);
-			shareButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_upload, colorWithAlpha));
+			shareButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_upload, colorWithAlpha));
 		}
 		shareButton.setEnabled(checked);
 

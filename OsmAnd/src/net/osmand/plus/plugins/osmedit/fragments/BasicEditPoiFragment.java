@@ -56,8 +56,8 @@ public class BasicEditPoiFragment extends BaseFullScreenFragment implements OnFr
 		};
 
 		int iconColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
-		Drawable clockDrawable = getPaintedContentIcon(R.drawable.ic_action_time, iconColor);
-		Drawable deleteDrawable = getPaintedContentIcon(R.drawable.ic_action_remove_dark, iconColor);
+		Drawable clockDrawable = getPaintedIcon(R.drawable.ic_action_time, iconColor);
+		Drawable deleteDrawable = getPaintedIcon(R.drawable.ic_action_remove_dark, iconColor);
 		if (savedInstanceState != null && savedInstanceState.containsKey(OPENING_HOURS)) {
 			OpeningHoursParser.OpeningHours openingHours = AndroidUtils.getSerializable(savedInstanceState, OPENING_HOURS, OpeningHoursParser.OpeningHours.class);
 			openingHoursAdapter = new OpeningHoursAdapter(app, openingHours,

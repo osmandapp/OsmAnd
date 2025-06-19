@@ -143,7 +143,7 @@ public class KeyAssignmentsFragment extends BaseFullScreenFragment
 		boolean enabled = controller.hasAssignments() || editMode;
 		int actionIconId = editMode ? R.drawable.ic_action_key_assignment_remove : R.drawable.ic_action_edit_outlined;
 		int actionIconColor = enabled ? ColorUtilities.getPrimaryIconColor(app, nightMode) : ColorUtilities.getDisabledTextColor(app, nightMode);
-		ivActionButton.setImageDrawable(getPaintedContentIcon(actionIconId, actionIconColor));
+		ivActionButton.setImageDrawable(getPaintedIcon(actionIconId, actionIconColor));
 		actionButton.setEnabled(enabled);
 	}
 

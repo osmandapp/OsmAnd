@@ -126,7 +126,7 @@ public class MappersFragment extends BaseFullScreenFragment {
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		int iconId = AndroidUtils.getNavigationIconResId(app);
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
-		toolbar.setNavigationIcon(getPaintedContentIcon(iconId, color));
+		toolbar.setNavigationIcon(getPaintedIcon(iconId, color));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> dismiss());
 	}

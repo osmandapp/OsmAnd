@@ -108,7 +108,7 @@ public class SelectKeyCodeFragment extends BaseFullScreenFragment implements Key
 
 		int color = getPrimaryIconColor(app, nightMode);
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
+		toolbar.setNavigationIcon(getPaintedIcon(R.drawable.ic_action_close, color));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
 			dismiss();

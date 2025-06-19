@@ -42,7 +42,7 @@ public class AlpineHikingScaleFragment extends MapRoutesFragment {
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
 		ImageView icon = container.findViewById(R.id.icon);
-		icon.setImageDrawable(getPaintedContentIcon(RouteUtils.getIconIdForAttr(
+		icon.setImageDrawable(getPaintedIcon(RouteUtils.getIconIdForAttr(
 				ALPINE.getRenderingPropertyAttr()), enabled ? selectedColor : disabledColor));
 	}
 

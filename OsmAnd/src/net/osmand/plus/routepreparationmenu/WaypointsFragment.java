@@ -355,14 +355,14 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 		TextView addButtonDescr = view.findViewById(R.id.add_button_descr);
 
 		addButtonDescr.setText(R.string.shared_string_add);
-		addButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getPaintedContentIcon(R.drawable.ic_action_plus, colorActive), null, null, null);
+		addButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getPaintedIcon(R.drawable.ic_action_plus, colorActive), null, null, null);
 		AndroidUtils.setBackground(mapActivity, addButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 		AndroidUtils.setBackground(mapActivity, addButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 
 		FrameLayout clearButton = view.findViewById(R.id.clear_all_button);
 		TextView clearButtonDescr = view.findViewById(R.id.clear_all_button_descr);
 		clearButtonDescr.setText(R.string.shared_string_clear_all);
-		clearButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getPaintedContentIcon(R.drawable.ic_action_clear_all, colorActive), null, null, null);
+		clearButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getPaintedIcon(R.drawable.ic_action_clear_all, colorActive), null, null, null);
 
 		AndroidUtils.setBackground(mapActivity, clearButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 		AndroidUtils.setBackground(mapActivity, clearButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);

@@ -166,7 +166,7 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 
 	private void setupToolbar(Toolbar toolbar) {
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
+		toolbar.setNavigationIcon(getPaintedIcon(R.drawable.ic_action_close, color));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
 			if (hasSelectedData()) {

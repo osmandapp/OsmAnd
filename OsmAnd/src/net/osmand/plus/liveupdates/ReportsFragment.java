@@ -274,11 +274,11 @@ public class ReportsFragment extends BaseFullScreenFragment implements OnFragmen
 	}
 
 	private void enableProgress() {
-		numberOfContributorsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
-		numberOfEditsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_map, inactiveColor));
-		numberOfRecipientsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
-		donationsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bitcoin, inactiveColor));
-		donationsTotalIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bitcoin, inactiveColor));
+		numberOfContributorsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_group, inactiveColor));
+		numberOfEditsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_map, inactiveColor));
+		numberOfRecipientsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_group, inactiveColor));
+		donationsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_bitcoin, inactiveColor));
+		donationsTotalIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_bitcoin, inactiveColor));
 
 		numberOfContributorsTitle.setTextColor(inactiveColor);
 		numberOfEditsTitle.setTextColor(inactiveColor);

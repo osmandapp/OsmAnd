@@ -78,11 +78,11 @@ public abstract class ImportDuplicatesFragment extends BaseFullScreenFragment {
 		description = root.findViewById(R.id.description);
 		progressBar = root.findViewById(R.id.progress_bar);
 		toolbarLayout = root.findViewById(R.id.toolbar_layout);
-		keepBothBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_keep_both, nightMode
+		keepBothBtn.setIcon(getPaintedIcon(R.drawable.ic_action_keep_both, nightMode
 				? getColor(R.color.icon_color_active_dark)
 				: getColor(R.color.icon_color_active_light))
 		);
-		replaceAllBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_replace,
+		replaceAllBtn.setIcon(getPaintedIcon(R.drawable.ic_action_replace,
 				ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode))
 		);
 		keepBothBtn.setOnClickListener(v -> importItems(false));
@@ -139,7 +139,7 @@ public abstract class ImportDuplicatesFragment extends BaseFullScreenFragment {
 
 	protected void setupToolbar(Toolbar toolbar) {
 		toolbar.setTitle(R.string.import_duplicates_title);
-		toolbar.setNavigationIcon(getPaintedContentIcon(
+		toolbar.setNavigationIcon(getPaintedIcon(
 				AndroidUtils.getNavigationIconResId(app),
 				ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode)));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);

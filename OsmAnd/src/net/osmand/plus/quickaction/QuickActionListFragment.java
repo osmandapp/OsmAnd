@@ -308,7 +308,7 @@ public class QuickActionListFragment extends BaseFullScreenFragment implements Q
 
 		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		button.setEnabled(hasActions);
-		button.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_delete_dark, color));
+		button.setImageDrawable(getPaintedIcon(R.drawable.ic_action_delete_dark, color));
 		button.setOnClickListener(view -> changeScreenType(SCREEN_TYPE_DELETE));
 		container.addView(button);
 	}
@@ -647,7 +647,7 @@ public class QuickActionListFragment extends BaseFullScreenFragment implements Q
 					h.container.setEnabled(true);
 					h.divider.setVisibility(View.VISIBLE);
 				}
-				h.icon.setImageDrawable(getPaintedContentIcon(buttonInfo.iconRes, iconColor));
+				h.icon.setImageDrawable(getPaintedIcon(buttonInfo.iconRes, iconColor));
 				h.title.setTextColor(titleColor);
 				Drawable background = UiUtilities.getColoredSelectableDrawable(app,
 						ContextCompat.getColor(app, activeColorResId), 0.3f);

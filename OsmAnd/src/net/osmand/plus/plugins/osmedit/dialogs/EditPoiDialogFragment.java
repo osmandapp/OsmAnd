@@ -211,7 +211,7 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 		});
 
 		int activeColor = ColorUtilities.getActiveColor(getContext(), nightMode);
-		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, activeColor));
+		onlineDocumentationButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_help, activeColor));
 		ImageButton poiTypeButton = view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(v -> {
 			PoiTypeDialogFragment fragment = PoiTypeDialogFragment.createInstance();

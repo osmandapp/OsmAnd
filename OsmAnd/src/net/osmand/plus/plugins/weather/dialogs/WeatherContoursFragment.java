@@ -148,7 +148,7 @@ public class WeatherContoursFragment extends BaseFullScreenFragment {
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
+		Drawable icon = getPaintedIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(icon);
 		ivIcon.setColorFilter(enabled ? activeColor : defColor);
@@ -186,7 +186,7 @@ public class WeatherContoursFragment extends BaseFullScreenFragment {
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
+		Drawable icon = getPaintedIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(icon);
 		ivIcon.setColorFilter(enabled ? activeColor : defColor);

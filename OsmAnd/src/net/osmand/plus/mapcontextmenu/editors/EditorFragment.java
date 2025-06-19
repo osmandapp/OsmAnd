@@ -442,10 +442,6 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		return nameEdit.getText().toString().trim();
 	}
 
-	protected Drawable getPaintedIcon(@DrawableRes int iconId, @ColorInt int color) {
-		return getPaintedContentIcon(iconId, color);
-	}
-
 	public void showExitDialog() {
 		hideKeyboard();
 		if (wasSaved()) {

@@ -355,19 +355,19 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		toolbar.setLayoutParams(params);
 
 		ImageView backButton = toolbar.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_close, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
+		backButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_close, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
 		backButton.setContentDescription(getString(R.string.shared_string_close));
 		backButton.setOnClickListener(v -> dismiss());
 		setupSelectableBackground(backButton);
 
 		ImageView shareButton = toolbar.findViewById(R.id.share_button);
 		shareButton.setOnClickListener(v -> shareImage());
-		shareButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_gshare_dark, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
+		shareButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_gshare_dark, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
 		setupSelectableBackground(shareButton);
 
 		ImageView optionsButton = toolbar.findViewById(R.id.options_button);
 		optionsButton.setOnClickListener(this::showContextWidgetMenu);
-		optionsButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_overflow_menu_white, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
+		optionsButton.setImageDrawable(getPaintedIcon(R.drawable.ic_overflow_menu_white, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
 		setupSelectableBackground(optionsButton);
 	}
 

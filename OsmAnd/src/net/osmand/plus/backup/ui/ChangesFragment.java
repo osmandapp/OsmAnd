@@ -231,7 +231,7 @@ public class ChangesFragment extends BaseFullScreenFragment implements OnPrepare
 				int activeColor = ColorUtilities.getButtonSecondaryTextColor(app, nightMode);
 
 				TextView textView = button.findViewById(R.id.button_text);
-				Drawable icon = getPaintedContentIcon(tabType.buttonIconId, enabled ? activeColor : defaultColor);
+				Drawable icon = getPaintedIcon(tabType.buttonIconId, enabled ? activeColor : defaultColor);
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 				textView.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.content_padding_small));
 			}

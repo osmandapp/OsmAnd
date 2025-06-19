@@ -144,7 +144,7 @@ public class EditKeyAssignmentFragment extends BaseFullScreenFragment
 	private Drawable getNavigationIcon() {
 		int color = getPrimaryIconColor(app, nightMode);
 		int navIconId = controller.isInEditMode() ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app);
-		return getPaintedContentIcon(navIconId, color);
+		return getPaintedIcon(navIconId, color);
 	}
 
 	private void updateViewContent() {
