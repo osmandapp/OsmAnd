@@ -37,6 +37,7 @@ public class OpeningHoursHoursDialogFragment extends BaseAlertDialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		updateNightMode();
 		AlertDialog.Builder builder = createDialogBuilder();
 		Context themedContext = getThemedContext();
 

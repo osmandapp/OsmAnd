@@ -20,6 +20,7 @@ public class PoiTypeDialogFragment extends BaseAlertDialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		AlertDialog.Builder builder = createDialogBuilder();
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		List<PoiCategory> categories = new ArrayList<PoiCategory>();

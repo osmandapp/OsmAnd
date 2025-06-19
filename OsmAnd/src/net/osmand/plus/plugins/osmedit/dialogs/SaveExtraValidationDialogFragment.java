@@ -21,6 +21,7 @@ public class SaveExtraValidationDialogFragment extends BaseAlertDialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		updateNightMode();
 		AlertDialog.Builder builder = createDialogBuilder();
 		builder.setTitle(getString(R.string.are_you_sure))
 				.setMessage(getMessageToShow())

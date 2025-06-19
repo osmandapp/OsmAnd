@@ -361,8 +361,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (isCurrentType(DASHBOARD)) {
 			settingsButton.setVisibility(View.VISIBLE);
 			settingsButton.setOnClickListener(v -> {
-				DashboardSettingsDialogFragment fragment = new DashboardSettingsDialogFragment();
-				fragment.show(mapActivity.getSupportFragmentManager(), "dashboard_settings");
+				DashboardSettingsDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 			});
 			lst.setVisibility(View.VISIBLE);
 			lst.setOnClickListener(v -> {

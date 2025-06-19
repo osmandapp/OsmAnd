@@ -70,6 +70,7 @@ public class XMasDialogFragment extends BaseAlertDialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		updateNightMode();
 		XmasDialogWasProcessed = true;
 		MapActivity mapActivity = requireMapActivity();
 

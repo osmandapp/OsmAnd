@@ -15,7 +15,6 @@ public class BaseAlertDialogFragment extends BaseOsmAndDialogFragment {
 	// TODO: temporally solution of theme resolving, we should use a better way
 	@NonNull
 	protected AlertDialog.Builder createDialogBuilder() {
-		updateNightMode();
 		return new Builder(getThemedContext());
 	}
 

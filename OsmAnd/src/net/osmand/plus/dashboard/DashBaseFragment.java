@@ -127,4 +127,8 @@ public abstract class DashBaseFragment extends BaseNestedFragment {
 		return dashboard.getParentView();
 	}
 
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 }
