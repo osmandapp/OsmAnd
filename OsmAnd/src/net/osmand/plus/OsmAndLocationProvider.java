@@ -629,13 +629,16 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private net.osmand.Location setLocationForRouting(net.osmand.Location location, RoutingHelper routingHelper) {
 		net.osmand.Location updatedLocation = location;
 		if (routingHelper.isFollowingMode()) {
+			LOG.error("XXX-provider-1\n" + (location != null ? location : "(null)"));
 			if (location == null || isPointAccurateForRouting(location)) {
 				// Update routing position and get location for sticking mode
 				updatedLocation = routingHelper.setCurrentLocation(location, app.getSettings().SNAP_TO_ROAD.get());
 			}
 		} else if (routingHelper.isRoutePlanningMode() && app.getSettings().getPointToStart() == null) {
+			LOG.error("XXX-provider-2\n" + (location != null ? location : "(null)"));
 			routingHelper.setCurrentLocation(location, false);
 		} else if (getLocationSimulation().isRouteAnimating()) {
+			LOG.error("XXX-provider-3\n" + (location != null ? location : "(null)"));
 			routingHelper.setCurrentLocation(location, false);
 		}
 		return updatedLocation;
