@@ -36,7 +36,7 @@
     <string name="set_parking_position">Set parking position</string>
     <string name="set_work">Set work</string>
     <string name="set_home">Set home</string>
-    <string name="set_intermediate_point">Set intermediate point</string>
+    <string name="set_intermediate_point">Set intermediate destination</string>
     <string name="set_start_point">Set start point</string>
     <string name="read_on">Read on %1$s</string>
     <string name="unit_of_temperature_description">Selected units will be applied to all temperature related data in the current profile.</string>
@@ -3133,7 +3133,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="save_poi_value_exceed_length_title">Length of \"%s\" value</string>
     <string name="public_transport_warning_descr_blog">Read more about OsmAnd routing on our blog.</string>
     <string name="public_transport_warning_title">Public transport navigation is currently in beta testing, expect errors and inaccuracies.</string>
-    <string name="add_intermediate">Add intermediate point</string>
+    <string name="add_intermediate">Add intermediate destination</string>
     <string name="transfers_size">%1$d transfers</string>
     <string name="add_start_and_end_points">Add departure and destination</string>
     <string name="route_add_start_point">Add point of departure</string>
@@ -3221,7 +3221,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="add_destination_point">Set destination</string>
     <string name="add_intermediate_point">Add intermediate</string>
     <string name="add_start_point">Set starting point</string>
-    <string name="intermediate_waypoint">Intermediate point</string>
+    <string name="intermediate_waypoint">Intermediate destination</string>
     <string name="transfers">Transfers</string>
     <string name="on_foot">On foot</string>
     <string name="route_way">Way</string>
@@ -3376,7 +3376,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="nothing_found_in_radius">Could not find anything:</string>
     <string name="select_waypoints_category_description">Add all of the track\'s waypoints, or select separate categories.</string>
     <string name="shared_string_total">Total</string>
-    <string name="clear_all_intermediates">Clear all intermediate points</string>
+    <string name="clear_all_intermediates">Clear all intermediate destinations</string>
     <string name="group_deleted">Group deleted</string>
     <string name="rendering_attr_whiteWaterSports_name">Whitewater sports</string>
     <string name="distance_farthest">Farthest first</string>
