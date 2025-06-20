@@ -83,8 +83,8 @@
     <string name="city_type_village">Village</string>
     <string name="city_type_town">Ville</string>
     <string name="city_type_city">Ville</string>
-    <string name="animate_route_off">Arrêter l\'animation</string>
-    <string name="animate_route">Démarrer l\'animation</string>
+    <string name="animate_route_off">Arrêter la simulation</string>
+    <string name="animate_route">Démarrer la simulation</string>
     <string name="file_can_not_be_renamed">Impossible de renommer le fichier.</string>
     <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
     <string name="poi_query_by_name_matches_categories">Plusieurs catégories de POI ont été trouvées.</string>
@@ -161,7 +161,7 @@
     <string name="choose_audio_stream">Sortie audio pour le guidage</string>
     <string name="choose_audio_stream_descr">Sélectionner la sortie audio à utiliser pour le guidage vocal.</string>
     <string name="voice_stream_voice_call">Sortie audio appel téléphonique (interrompt le Bluetooth véhicule)</string>
-    <string name="voice_stream_notification">Sortie notifications</string>
+    <string name="voice_stream_notification">Notification audio</string>
     <string name="voice_stream_music">Audio média/navigation</string>
     <string name="warning_tile_layer_not_downloadable">L\'application ne peut télécharger la couche de carte %1$s, veuillez tenter de la réinstaller.</string>
     <string name="overlay_transparency_descr">Modifier la transparence de la surcouche.</string>
@@ -263,7 +263,7 @@
     <string name="daynight_mode_day">Jour</string>
     <string name="daynight_mode_night">Nuit</string>
     <string name="daynight_mode_auto">Lever/coucher du soleil</string>
-    <string name="daynight_mode_sensor">Détecter la luminosité</string>
+    <string name="daynight_mode_sensor">Capteur de luminosité</string>
     <string name="daynight_descr">Sélectionner les règles de bascule pour les modes jour/nuit.</string>
     <string name="daynight">Mode jour/nuit</string>
     <string name="download_files_question">Voulez-vous télécharger {0} fichier(s) ({1} MB) ?</string>
@@ -440,7 +440,7 @@
     <string name="fav_points_edited">Le favori a été modifié</string>
     <string name="fav_points_not_exist">Il n\'existe aucun favori</string>
     <string name="update_existing">Remplacer</string>
-    <string name="only_show">Afficher seulement</string>
+    <string name="only_show">Afficher l’itinéraire</string>
     <string name="follow">Démarrer le guidage</string>
     <string name="recalculate_route_to_your_location">Choisir le mode de transport :</string>
     <string name="mark_final_location_first">Veuillez d\'abord définir l\'arrivée</string>
@@ -450,7 +450,7 @@
     <string name="closing_changeset">Fermeture des modifications…</string>
     <string name="commiting_node">Envoi des nœuds…</string>
     <string name="loading_poi_obj">Chargement des POI…</string>
-    <string name="auth_failed">Échec de l\\\'autorisation</string>
+    <string name="auth_failed">Autorisation refusée</string>
     <string name="failed_op">Échec</string>
     <string name="converting_names">Conversion des noms locaux/anglais…</string>
     <string name="loading_streets_buildings">Chargement des rues/bâtiments…</string>
@@ -602,7 +602,7 @@
 \nPour découvrir comment modifier une carte, consultez notre site %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Les cartes vectorielles s\'affichent plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
     <string name="play_commands_of_currently_selected_voice">Sélectionner une voix et tester les annonces vocales</string>
-    <string name="debugging_and_development">Débogage et développement OsmAnd</string>
+    <string name="debugging_and_development">Développement d\'OsmAnd</string>
     <string name="native_rendering">Rendu natif</string>
     <string name="test_voice_prompts">Tester les annonces vocales</string>
     <string name="send_files_to_osm">Envoyer les fichiers GPX à OSM ?</string>
@@ -1503,8 +1503,8 @@
     <string name="archive_wikipedia_data">Le format des données Wikipédia est obsolète. Souhaitez-vous les archiver ?</string>
     <string name="lang_te">Télougou</string>
     <string name="restart_is_required">Un redémarrage de l’application est nécessaire pour appliquer la modification.</string>
-    <string name="rendering_attr_currentTrackColor_name">Couleur des traces GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Largeur des traces GPX</string>
+    <string name="rendering_attr_currentTrackColor_name">Couleur GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Largeur GPX</string>
     <string name="rendering_value_red_name">Rouge</string>
     <string name="rendering_value_translucent_red_name">Rouge translucide</string>
     <string name="rendering_value_translucent_orange_name">Orange translucide</string>
@@ -4006,7 +4006,7 @@
     <string name="no_plugins_enabled">Aucune extension n\'est activée. Consultez la liste des extensions disponibles dans : « Menu → Extensions ».</string>
     <string name="use_external_timestamps">Utiliser des estimations externes</string>
     <string name="use_external_timestamps_description">Utiliser les estimations de routeurs en ligne pour ajuster la durée et la vitesse moyenne</string>
-    <string name="safe_settings">Précis</string>
+    <string name="safe_settings">Sans échec</string>
     <string name="approx_safe_mode">Approximation précise des GPX</string>
     <string name="approx_safe_mode_description">Effectuer les approximations des GPX en utilisant Android (qui est plus lent) au lieu du code natif.</string>
     <string name="shared_string_travelbooks">Carnets de voyage</string>
@@ -5647,7 +5647,7 @@
     <string name="save_to_device">Enregistrer sur l\'appareil</string>
     <string name="travel_guides">Guides</string>
     <string name="show_debug_tile_description">Afficher les informations à propos des symboles de la carte sur chaque tuile</string>
-    <string name="show_debug_tile">Afficher les informations de la tuile</string>
+    <string name="show_debug_tile">Afficher les informations de tuile</string>
     <string name="show_symbols_debug_info">Afficher les symboles pour déboguer</string>
     <string name="deactivated_map">Carte désactivée</string>
     <string name="suggest_activate_map_msg">La carte %1$s est désactivée,\nactivez-la pour consulter cette zone.</string>
