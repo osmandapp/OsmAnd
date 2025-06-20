@@ -3219,7 +3219,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_width">Width</string>
     <string name="shared_string_height">Height</string>
     <string name="add_destination_point">Set destination</string>
-    <string name="add_intermediate_point">Add intermediate</string>
+    <string name="add_intermediate_point">Add intermediate destination</string>
     <string name="add_start_point">Set starting point</string>
     <string name="intermediate_waypoint">Intermediate destination</string>
     <string name="transfers">Transfers</string>
