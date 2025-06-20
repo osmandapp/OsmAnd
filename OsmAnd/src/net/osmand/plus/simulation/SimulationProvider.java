@@ -24,7 +24,7 @@ public class SimulationProvider {
 	private final Location startLocation;
 	private final List<RouteSegmentResult> roads;
 
-	private int currentRoad; // TODO = -1;
+	private int currentRoad = -1;
 	private int currentSegment;
 	private QuadPointDouble currentPoint;
 
@@ -49,14 +49,9 @@ public class SimulationProvider {
 		}
 	}
 
-	private float proceedMeters(float meters, Location location) {
+	private double proceedMeters(double meters, Location location) {
 		if (currentRoad == -1) {
-			LOG.error("XXX proceed-meters currentRoad is -1");
-//			return -1; // TODO should never happen
-		}
-		if ((int) currentPoint.x == 0 || (int) currentPoint.y == 0) {
-			LOG.error(String.format(Locale.US, "XXX proceed-meters zero %d, %d",
-					(int) currentPoint.x, (int) currentPoint.y));
+			return -1;
 		}
 		for (int i = currentRoad; i < roads.size(); i++) {
 			RouteSegmentResult road = roads.get(i);
@@ -77,15 +72,19 @@ public class SimulationProvider {
 				double dd = MapUtils.measuredDist31(st31x, st31y, end31x, end31y);
 				if (meters > dd && !last) {
 					meters -= dd;
-				} else {
+				} else if (dd > 0) {
 					int prx = (int) (st31x + (end31x - st31x) * (meters / dd));
 					int pry = (int) (st31y + (end31y - st31y) * (meters / dd));
-					LOG.error(String.format(Locale.US,
-							"XXX proceed-meters firstRoad(%b) first(%b) last(%b) i(%d) j(%d) sx(%d) sy(%d) ex(%d) ey(%d) px(%d) py(%d) meters(%f) dd (%f) ret(%f)",
-							firstRoad, first, last, i, j, st31x, st31y, end31x, end31y, prx, pry, meters, dd, Math.max(meters - dd, 0)));
+					if (prx == 0 || pry == 0) {
+						LOG.error(String.format(Locale.US, "proceedMeters zero x/y (%d,%d)", prx, pry));
+						return -1;
+					}
 					location.setLongitude(MapUtils.get31LongitudeX(prx));
 					location.setLatitude(MapUtils.get31LatitudeY(pry));
-					return (float) Math.max(meters - dd, 0);
+					return Math.max(meters - dd, 0);
+				} else {
+					LOG.error("proceedMeters dd=0 (avoid division by zero)");
+					return -1;
 				}
 				j += plus ? 1 : -1;
 			}
@@ -106,8 +105,8 @@ public class SimulationProvider {
 		location.setSpeed(startLocation.getSpeed());
 		location.setAltitude(startLocation.getAltitude());
 		location.setTime(System.currentTimeMillis());
-		float meters = startLocation.getSpeed() * ((System.currentTimeMillis() - startLocation.getTime()) / 1000); // TODO .f
-		float proc = proceedMeters(meters, location);
+		double meters = startLocation.getSpeed() * ((System.currentTimeMillis() - startLocation.getTime()) / 1000.0f);
+		double proc = proceedMeters(meters, location);
 		if (proc < 0 || proc >= 100) {
 			return null;
 		}
