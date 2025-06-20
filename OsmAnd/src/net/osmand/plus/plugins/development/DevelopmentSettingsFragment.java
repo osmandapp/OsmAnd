@@ -198,9 +198,13 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference textsCategory = findPreference("texts");
 		textsCategory.setIconSpaceReserved(false);
 
-		SwitchPreferenceEx symtilePref = findPreference(plugin.SHOW_TILES_DEBUG_INFO.getId());
+		SwitchPreferenceEx symtilePref = findPreference(plugin.SHOW_TILES_PRIMITIVISATION_DEBUG_INFO.getId());
 		symtilePref.setIconSpaceReserved(false);
 		symtilePref.setDescription(R.string.show_debug_tile_description);
+
+		SwitchPreferenceEx symRasterTilePref = findPreference(plugin.SHOW_TILES_RASTERIZATION_DEBUG_INFO.getId());
+		symRasterTilePref.setIconSpaceReserved(false);
+		symRasterTilePref.setDescription(R.string.show_debug_tile_description);
 
 		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_SYMBOLS_DEBUG_INFO.getId());
 		syminfoPref.setIconSpaceReserved(false);

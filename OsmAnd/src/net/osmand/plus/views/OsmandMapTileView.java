@@ -2587,7 +2587,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			mapRenderer.setDebugSettings(debugSettings);
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null) {
-				mapContext.showDebugTiles = plugin.SHOW_TILES_DEBUG_INFO.get();
+				mapContext.showDebugPrimivitisationTiles = plugin.SHOW_TILES_PRIMITIVISATION_DEBUG_INFO.get();
+				mapContext.showDebugRasterizationTiles = plugin.SHOW_TILES_RASTERIZATION_DEBUG_INFO.get();
 				mapContext.recreateRasterAndSymbolsProvider(MapRendererContext.ProviderType.MAIN);
 			}
 		}
