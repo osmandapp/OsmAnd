@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.router.RouteSegmentResult;
@@ -18,6 +17,7 @@ public class SimulationProvider {
 
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
 	public static final String SIMULATED_PROVIDER_GPX = "GPX";
+	public static final String SIMULATED_PROVIDER_TUNNEL = "TUNNEL";
 
 	private final Location startLocation;
 	private final List<RouteSegmentResult> roads;
@@ -84,12 +84,12 @@ public class SimulationProvider {
 	 * @return null if it is not available of far from boundaries
 	 */
 	@Nullable
-	public Location getSimulatedLocation() {
+	public Location getSimulatedLocationForTunnel() {
 		if (!isSimulatedDataAvailable()) {
 			return null;
 		}
 
-		Location location = new Location(SIMULATED_PROVIDER);
+		Location location = new Location(SIMULATED_PROVIDER_TUNNEL);
 		location.setSpeed(startLocation.getSpeed());
 		location.setAltitude(startLocation.getAltitude());
 		location.setTime(System.currentTimeMillis());
@@ -107,7 +107,9 @@ public class SimulationProvider {
 
 	public static boolean isNotSimulatedLocation(@Nullable Location location) {
 		if (location != null) {
-			return !SIMULATED_PROVIDER.equals(location.getProvider());
+			return !(SIMULATED_PROVIDER.equals(location.getProvider())
+					|| SIMULATED_PROVIDER_GPX.equals(location.getProvider())
+					|| SIMULATED_PROVIDER_TUNNEL.equals(location.getProvider()));
 		}
 		return true;
 	}
