@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.router.RouteSegmentResult;
@@ -22,7 +21,7 @@ public class SimulationProvider {
 	private final Location startLocation;
 	private final List<RouteSegmentResult> roads;
 
-	private int currentRoad;
+	private int currentRoad = -1;
 	private int currentSegment;
 	private QuadPointDouble currentPoint;
 
@@ -48,6 +47,9 @@ public class SimulationProvider {
 	}
 
 	private float proceedMeters(float meters, Location location) {
+		if (currentRoad == -1) {
+			return -1;
+		}
 		for (int i = currentRoad; i < roads.size(); i++) {
 			RouteSegmentResult road = roads.get(i);
 			boolean firstRoad = i == currentRoad;
@@ -64,7 +66,7 @@ public class SimulationProvider {
 					st31x = (int) currentPoint.x;
 					st31y = (int) currentPoint.y;
 				}
-				double dd = MapUtils.measuredDist31(st31x, st31y, end31x, end31y);
+				float dd = (float) MapUtils.measuredDist31(st31x, st31y, end31x, end31y);
 				if (meters > dd && !last) {
 					meters -= dd;
 				} else {
@@ -72,7 +74,7 @@ public class SimulationProvider {
 					int pry = (int) (st31y + (end31y - st31y) * (meters / dd));
 					location.setLongitude(MapUtils.get31LongitudeX(prx));
 					location.setLatitude(MapUtils.get31LatitudeY(pry));
-					return (float) Math.max(meters - dd, 0);
+					return Math.max(meters - dd, 0);
 				}
 				j += plus ? 1 : -1;
 			}
@@ -93,7 +95,7 @@ public class SimulationProvider {
 		location.setSpeed(startLocation.getSpeed());
 		location.setAltitude(startLocation.getAltitude());
 		location.setTime(System.currentTimeMillis());
-		float meters = startLocation.getSpeed() * ((System.currentTimeMillis() - startLocation.getTime()) / 1000);
+		float meters = startLocation.getSpeed() * ((System.currentTimeMillis() - startLocation.getTime()) / 1000.0f);
 		float proc = proceedMeters(meters, location);
 		if (proc < 0 || proc >= 100) {
 			return null;

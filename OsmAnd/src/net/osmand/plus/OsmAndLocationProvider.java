@@ -589,6 +589,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				// Speed 120kmh, 2 seconds -> 60 m
 				List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(UPCOMING_TUNNEL_DISTANCE);
 				if (tunnel != null) {
+					LOG.error(String.format("XXX-start-simulation (%d)\n%s\n", tunnel.size(), location));
 					simulatePosition = new SimulationProvider(location, tunnel);
 					simulatePosition.startSimulation();
 					simulatePositionImpl();
