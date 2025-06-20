@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimulationProvider {
+	public static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(SimulationProvider.class);
 
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
 	public static final String SIMULATED_PROVIDER_GPX = "GPX";
@@ -48,6 +50,7 @@ public class SimulationProvider {
 
 	private float proceedMeters(float meters, Location location) {
 		if (currentRoad == -1) {
+			LOG.error("XXX-proceed-meters currentRoad is -1");
 			return -1;
 		}
 		for (int i = currentRoad; i < roads.size(); i++) {
@@ -72,6 +75,9 @@ public class SimulationProvider {
 				} else {
 					int prx = (int) (st31x + (end31x - st31x) * (meters / dd));
 					int pry = (int) (st31y + (end31y - st31y) * (meters / dd));
+					LOG.error(String.format(
+							"XXX-proceed-meters sx(%d) sy(%d) ex(%d) ey(%d) px(%d) py(%d) meters(%f) dd (%f) ret(%f)",
+							st31x, st31y, end31x, end31y, prx, pry, meters, dd, Math.max(meters - dd, 0)));
 					location.setLongitude(MapUtils.get31LongitudeX(prx));
 					location.setLatitude(MapUtils.get31LatitudeY(pry));
 					return Math.max(meters - dd, 0);
