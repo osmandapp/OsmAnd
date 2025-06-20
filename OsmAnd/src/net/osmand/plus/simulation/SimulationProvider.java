@@ -76,8 +76,8 @@ public class SimulationProvider {
 					int prx = (int) (st31x + (end31x - st31x) * (meters / dd));
 					int pry = (int) (st31y + (end31y - st31y) * (meters / dd));
 					LOG.error(String.format(
-							"XXX-proceed-meters sx(%d) sy(%d) ex(%d) ey(%d) px(%d) py(%d) meters(%f) dd (%f) ret(%f)",
-							st31x, st31y, end31x, end31y, prx, pry, meters, dd, Math.max(meters - dd, 0)));
+							"XXX-proceed-meters firstRoad(%b) first(%b) i(%d) j(%d) sx(%d) sy(%d) ex(%d) ey(%d) px(%d) py(%d) meters(%f) dd (%f) ret(%f)",
+							firstRoad, first, i, j, st31x, st31y, end31x, end31y, prx, pry, meters, dd, Math.max(meters - dd, 0)));
 					location.setLongitude(MapUtils.get31LongitudeX(prx));
 					location.setLatitude(MapUtils.get31LatitudeY(pry));
 					return Math.max(meters - dd, 0);
