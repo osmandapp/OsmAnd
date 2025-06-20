@@ -123,6 +123,8 @@ public class SplitCardController extends BaseMultiStateCardController {
 			} else if (splitType == GpxSplitType.TIME.getType()) {
 				String formattedTime = OsmAndFormatter.getFormattedTimeInterval(app, splitInterval);
 				summary = app.getString(R.string.ltr_or_rtl_combine_via_comma, GpxSplitType.TIME.getHumanString(app), formattedTime);
+			} else if (splitType == GpxSplitType.UPHILL_DOWNHILL.getType()) {
+				summary = app.getString(R.string.uphill_downhill_split);
 			}
 		}
 		return summary;

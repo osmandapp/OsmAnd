@@ -10,7 +10,38 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+	<string name="deleting_history">Deleting history…</string>
+	<string name="deleting">Deleting…</string>
+    <string name="release_5_1">
+        • Added support for web and cross-platform purchases\n\n
+        • Moved Temperature units to General settings for easier access\n\n
+        • Added battery level indicator for BLE sensors\n\n
+        • New, more intuitive UI for point selection in Navigation\n\n
+        • Improved widget visibility with a new outline\n\n
+        • Added Uphills/Downhills analyzer\n\n
+        • Expanded Wikipedia &amp; Wikivoyage integration for more POIs.\n\n
+    </string>
+    <string name="osm_live_payment_renews_3_years">Renews every three years</string>
+    <string name="years_3">Three years</string>
+    <string name="osm_live_payment_3_years_title">Every three years</string>
+    <string name="three_years_subscription">Three years subscription</string>
+    <string name="shared_string_switch">Switch</string>
+	<string name="ski_route_switch_style_description">Explore ski slopes, lifts, and more with the "Winter and Ski" map style.</string>
+    <string name="battery">battery</string>
+    <string name="sensor_data">Sensor data</string>
+    <string name="battery_level">Battery level</string>
+    <string name="shared_string_split_by">Split by</string>
+    <string name="shared_string_flat">Flat</string>
+    <string name="uphill_downhill_split">Uphill / Downhill</string>
+    <string name="set_parking_position">Set parking position</string>
+    <string name="set_work">Set work</string>
+    <string name="set_home">Set home</string>
+    <string name="set_intermediate_point">Set intermediate destination</string>
+    <string name="set_start_point">Set start point</string>
+    <string name="read_on">Read on %1$s</string>
+    <string name="unit_of_temperature_description">Selected units will be applied to all temperature related data in the current profile.</string>
+    <string name="deactivated_map">Deactivated map</string>
+    <string name="suggest_activate_map_msg">%1$s map is deactivated,\nactivate to view this area.</string>
     <string name="travel_guides">Guides</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favorites.</string>
     <string name="msg_favorites_skipped_as_existing">Favorite points (%1$d) were skipped as already existing.</string>
@@ -28,7 +59,6 @@
     <string name="multipoligon_related">Related</string>
     <string name="route_part_of">Part of</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Read on Wikipedia</string>
     <string name="prediction_time_description">Position icon in OsmAnd animates with each received GPS data point (once per second). A slight delay in its movement may be noticeable, especially when the user is moving quickly or the GPS signal fluctuates.</string>
     <string name="prediction_time_advanced_description">Adjust the prediction time to minimize delay.</string>
     <string name="prediction_time">Prediction time</string>
@@ -62,7 +92,9 @@
     <string name="original_shape_description">Each point would keep its own shape.</string>
     <string name="apply_to_all_points">Apply to all points</string>
     <string name="hmd_promo">HMD Promo for %1$s months</string>
-    <string name="hmd_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
+    <string name="hmd_promo_years">HMD Promo for %1$s years</string>
+    <string name="hmd_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s months</string>
+    <string name="hmd_promo_description_years">Free access to features including unlimited map downloads, 3D relief etc. for %1$s years</string>
     <string name="shared_string_road_exit">Exit</string>
     <string name="popular_places_nearby">Popular places nearby</string>
     <string name="recently_visited">Recently visited</string>
@@ -216,7 +248,7 @@
 – Vehicle engine is running\n
 – Make sure your device is within range of the scanner.</string>
     <string name="obd_nothing_found_text">No scanners found</string>
-    <string name="obd_bluetooth_off_description">Turn on Bluetooth find and connect scanners.</string>
+    <string name="obd_bluetooth_off_description">Turn on Bluetooth to find and connect scanners.</string>
     <string name="obd_searching_text_description">Please keep your device close to the scanner. Ensure the vehicle\'s engine is running.</string>
     <string name="obd_searching_text">Searching for scanners</string>
     <string name="obd_device_forget_sensor">Forget scanner</string>
@@ -499,9 +531,12 @@ You will be able to pair this scanner again at any time.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
+    <string name="show_debug_tile">Show tile information</string>
+    <string name="show_rasterization_debug_tile">Show tile rasterization information</string>
+    <string name="show_debug_tile_description">Display information about map symbols of each tile</string>
     <string name="show_debug_info">Show debug information</string>
     <string name="show_debug_info_description">Display graphical info about placement of each map text</string>
-    <string name="map_text">Map texts</string>
+    <string name="map_text">Map Rendering</string>
     <string name="show_grids">Show map grid</string>
     <string name="show_grids_description">Allow displaying grid over the map</string>
     <string name="show_utm_grids">Use UTM instead of WGS84</string>
@@ -1495,8 +1530,19 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="map_widget_distance_to_intermediate">Distance to intermediate</string>
     <string name="radius_ruler_mode_desc">Tapping the widget switches to \“Radius ruler\” mode.</string>
     <string name="explore_plans">Explore Plans</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Hide military areas</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Military areas</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Hide military areas</string>
+    <string name="rendering_attr_hidePOILabels_name">POI labels</string>
+    <string name="rendering_attr_hideIcons_name">POI icons</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Water</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Hide water</string>
+    <string name="rendering_attr_hideOverground_name">Overground objects</string>
+    <string name="rendering_attr_hideUnderground_name">Underground objects</string>
+    <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
+    <string name="rendering_attr_hideBuildings_name">Buildings</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>
+    <string name="rendering_attr_hideText_name">Text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Wood and scrubs</string>
     <string name="map_widget_true_bearing">True bearing</string>
     <string name="routing_attr_allow_private_for_truck_description">Allow access to private areas for trucks.</string>
     <string name="routing_attr_allow_private_for_truck_name">Allow private access (truck)</string>
@@ -3088,7 +3134,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="save_poi_value_exceed_length_title">Length of \"%s\" value</string>
     <string name="public_transport_warning_descr_blog">Read more about OsmAnd routing on our blog.</string>
     <string name="public_transport_warning_title">Public transport navigation is currently in beta testing, expect errors and inaccuracies.</string>
-    <string name="add_intermediate">Add intermediate point</string>
+    <string name="add_intermediate">Add intermediate destination</string>
     <string name="transfers_size">%1$d transfers</string>
     <string name="add_start_and_end_points">Add departure and destination</string>
     <string name="route_add_start_point">Add point of departure</string>
@@ -3174,9 +3220,9 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_width">Width</string>
     <string name="shared_string_height">Height</string>
     <string name="add_destination_point">Set destination</string>
-    <string name="add_intermediate_point">Add intermediate</string>
+    <string name="add_intermediate_point">Add intermediate destination</string>
     <string name="add_start_point">Set starting point</string>
-    <string name="intermediate_waypoint">Intermediate point</string>
+    <string name="intermediate_waypoint">Intermediate destination</string>
     <string name="transfers">Transfers</string>
     <string name="on_foot">On foot</string>
     <string name="route_way">Way</string>
@@ -3331,7 +3377,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="nothing_found_in_radius">Could not find anything:</string>
     <string name="select_waypoints_category_description">Add all of the track\'s waypoints, or select separate categories.</string>
     <string name="shared_string_total">Total</string>
-    <string name="clear_all_intermediates">Clear all intermediate points</string>
+    <string name="clear_all_intermediates">Clear all intermediate destinations</string>
     <string name="group_deleted">Group deleted</string>
     <string name="rendering_attr_whiteWaterSports_name">Whitewater sports</string>
     <string name="distance_farthest">Farthest first</string>
@@ -3370,7 +3416,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="all_data">All data</string>
     <string name="osm_notes">OSM notes</string>
     <string name="will_open_tomorrow_at">Opens tomorrow at</string>
-    <string name="rendering_attr_hidePOILabels_name">POI labels</string>
     <string name="shared_string_without_name">Without name</string>
     <string name="what_is_here">What\'s here:</string>
     <string name="parked_at">parked at</string>
@@ -3710,8 +3755,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_value_low_name">Low</string>
     <string name="rendering_attr_contourWidth_description">Contour line width</string>
     <string name="rendering_attr_contourWidth_name">Contour line width</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Water</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
     <string name="routing_attr_allow_motorway_name">Use motorways</string>
     <string name="routing_attr_allow_motorway_description">Allows motorways.</string>
     <string name="upload_osm_note_description">Upload your OSM note anonymously or by using your OpenStreetMap.org profile.</string>
@@ -3798,7 +3841,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>
     <string name="replace_favorite_confirmation">Replace the \"%1$s\" Favorite?</string>
-    <string name="rendering_attr_hideOverground_name">Overground objects</string>
     <string name="shared_string_change">Change</string>
     <string name="get_started">Get started</string>
     <string name="route_stops_before">%1$s stops before</string>
@@ -3953,7 +3995,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Save changes</string>
     <string name="shared_string_email_address">E-mail address</string>
-    <string name="rendering_attr_hideUnderground_name">Underground objects</string>
     <string name="data_is_not_available">Data not available</string>
     <string name="shared_string_remove">Remove</string>
     <string name="shared_string_read_more">Read more</string>
@@ -3962,7 +4003,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="road_blocked">Road blocked</string>
     <string name="shared_string_select">Select</string>
     <string name="switch_start_finish">Reverse starting point &amp; destination</string>
-    <string name="rendering_attr_hideIcons_name">POI icons</string>
     <string name="item_removed">Item removed</string>
     <string name="n_items_removed">items removed</string>
     <string name="shared_string_undo_all">Undo all</string>
@@ -4186,7 +4226,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Network affiliation</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Log Off</string>
-    <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
     <string name="application_dir_change_warning3">Move OsmAnd data files to the new destination?</string>
     <string name="specified_directiory_not_writeable">Maps could not be created in specified directory</string>
     <string name="copying_osmand_file_failed">Moving files failed</string>
@@ -4414,7 +4453,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="download_tab_downloads">All Downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Local</string>
-    <string name="no_internet_connection">Unable to download, please check your Internet connection.</string>
+    <string name="no_internet_connection">No Internet connection</string>
     <string name="everything_up_to_date">All files up to date</string>
     <string name="use_opengl_render">Use OpenGL rendering</string>
     <string name="use_opengl_render_descr">Use hardware accelerated OpenGL rendering (may use more battery, or not work on very old devices).</string>
@@ -4523,10 +4562,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="live_monitoring_start">Start online tracking</string>
     <string name="live_monitoring_stop">Stop online tracking</string>
     <string name="gpx_start_new_segment">Start new segment</string>
-    <string name="rendering_attr_hideBuildings_name">Buildings</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>
-    <string name="rendering_attr_hideText_name">Text</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Wood and scrubs</string>
     <string name="rendering_attr_buildings15zoom_name">Buildings on zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
@@ -6108,4 +6143,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
+    <string name="show_symbols_debug_info">Show symbols debug info</string>
+    <string name="show_symbols_bboxes">Show symbols bboxes</string>
 </resources>

@@ -27,6 +27,7 @@ import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -173,7 +174,7 @@ class InputDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 	}
 
 	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap, appMode);
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	private int getDimen(@DimenRes int resId) {

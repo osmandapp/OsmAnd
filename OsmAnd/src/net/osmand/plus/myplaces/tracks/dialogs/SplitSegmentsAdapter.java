@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
+import static net.osmand.shared.gpx.primitives.TrkSegment.*;
 
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
@@ -22,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
@@ -73,12 +75,12 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 			convertView = activity.getLayoutInflater().inflate(R.layout.gpx_split_segment_fragment, parent, false);
 		}
 		convertView.setOnClickListener(null);
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		TextView overviewTextView = convertView.findViewById(R.id.overview_text);
 		ImageView overviewImageView = convertView.findViewById(R.id.overview_image);
 		if (position == 0) {
-			overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+			overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_time_span_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 			if (defaultTextColor == null) {
 				defaultTextColor = overviewTextView.getTextColors();
 			}
@@ -97,7 +99,7 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 		} else {
 			if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
 				overviewTextView.setTextColor(app.getColor(activeColorId));
-				if (trackGroup != null && trackGroup.isSplitDistance()) {
+				if (trackGroup != null && (trackGroup.isSplitDistance() || currentGpxDisplayItem.analysis.getSegmentSlopeType() != null)) {
 					overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, activeColorId));
 					overviewTextView.setText("");
 					double metricStart = currentGpxDisplayItem.analysis.getMetricEnd() - currentGpxDisplayItem.analysis.getTotalDistance();
@@ -105,6 +107,20 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 					overviewTextView.append(" - ");
 					overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.getMetricEnd(), app));
 					overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
+					SegmentSlopeType slopeType = currentGpxDisplayItem.analysis.getSegmentSlopeType();
+
+					if (slopeType != null) {
+						String slopeName;
+						if (slopeType == SegmentSlopeType.FLAT) {
+							slopeName = getString(R.string.shared_string_flat);
+						} else if (slopeType == SegmentSlopeType.UPHILL) {
+							slopeName = getString(R.string.shared_string_uphill);
+						} else {
+							slopeName = getString(R.string.shared_string_downhill);
+						}
+
+						overviewTextView.append(" - " + slopeName);
+					}
 				} else if (trackGroup != null && trackGroup.isSplitTime()) {
 					overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_time_span_16, activeColorId));
 					overviewTextView.setText("");
@@ -119,21 +135,21 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 		}
 
 		((ImageView) convertView.findViewById(R.id.start_time_image))
-				.setImageDrawable(getIcon(R.drawable.ic_action_time_start_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+				.setImageDrawable(getIcon(R.drawable.ic_action_time_start_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 		((ImageView) convertView.findViewById(R.id.end_time_image))
-				.setImageDrawable(getIcon(R.drawable.ic_action_time_end_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+				.setImageDrawable(getIcon(R.drawable.ic_action_time_end_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 		((ImageView) convertView.findViewById(R.id.average_altitude_image))
-				.setImageDrawable(getIcon(R.drawable.ic_action_altitude_average_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+				.setImageDrawable(getIcon(R.drawable.ic_action_altitude_average_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 		((ImageView) convertView.findViewById(R.id.altitude_range_image))
-				.setImageDrawable(getIcon(R.drawable.ic_action_altitude_range_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+				.setImageDrawable(getIcon(R.drawable.ic_action_altitude_range_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 		((ImageView) convertView.findViewById(R.id.ascent_descent_image))
-				.setImageDrawable(getIcon(R.drawable.ic_action_altitude_descent_ascent_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+				.setImageDrawable(getIcon(R.drawable.ic_action_altitude_descent_ascent_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 		((ImageView) convertView.findViewById(R.id.moving_time_image))
-				.setImageDrawable(getIcon(R.drawable.ic_action_time_moving_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+				.setImageDrawable(getIcon(R.drawable.ic_action_time_moving_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 		((ImageView) convertView.findViewById(R.id.average_speed_image))
-				.setImageDrawable(getIcon(R.drawable.ic_action_speed_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+				.setImageDrawable(getIcon(R.drawable.ic_action_speed_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 		((ImageView) convertView.findViewById(R.id.max_speed_image))
-				.setImageDrawable(getIcon(R.drawable.ic_action_max_speed_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+				.setImageDrawable(getIcon(R.drawable.ic_action_max_speed_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 
 		if (currentGpxDisplayItem != null) {
 			GpxTrackAnalysis analysis = currentGpxDisplayItem.analysis;
@@ -142,13 +158,13 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 				TextView distanceOrTimeSpanValue = convertView.findViewById(R.id.distance_or_time_span_value);
 				TextView distanceOrTimeSpanText = convertView.findViewById(R.id.distance_or_time_span_text);
 				if (position == 0) {
-					distanceOrTimeSpanImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+					distanceOrTimeSpanImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 					float totalDistance = displayItem.isGeneralTrack() ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
 					distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 					distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 				} else {
 					if (trackGroup != null && trackGroup.isSplitDistance()) {
-						distanceOrTimeSpanImageView.setImageDrawable(getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+						distanceOrTimeSpanImageView.setImageDrawable(getIcon(R.drawable.ic_action_time_span_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 						if (analysis.getDurationInMs() > 0) {
 							distanceOrTimeSpanValue.setText(Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
 						} else {
@@ -156,7 +172,7 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 						}
 						distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
 					} else if (trackGroup != null && trackGroup.isSplitTime()) {
-						distanceOrTimeSpanImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+						distanceOrTimeSpanImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 						distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 					}

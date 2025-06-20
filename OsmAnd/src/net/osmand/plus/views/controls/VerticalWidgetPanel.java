@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.MapHudLayout.ViewChangeListener;
 import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
@@ -65,7 +66,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 		super(context, attrs, defStyleAttr, defStyleRes);
 		app = (OsmandApplication) context.getApplicationContext();
 		settings = app.getSettings();
-		nightMode = app.getDaynightHelper().isNightMode();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		definePanelSide(context, attrs);
 		init();

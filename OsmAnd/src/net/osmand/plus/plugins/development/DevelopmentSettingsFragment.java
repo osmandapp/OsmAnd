@@ -82,8 +82,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupBatterySavingModePref();
 		setupSimulateOBDDataPref();
-		setupDebugRenderingInfoPref();
-		setupDisableMapLayersPref();
 		setupSimulateInitialStartupPref();
 		setupFullscreenMapDrawingModePref();
 		setupShouldShowFreeVersionBannerPref();
@@ -93,7 +91,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupTripRecordingPrefs();
 
-		setupMapTextsPrefs();
+		setupMapRenderingPrefs();
 		setupAisTrackerPrefs();
 
 		Preference info = findPreference("info");
@@ -147,17 +145,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		debugRenderingInfo.setIconSpaceReserved(false);
 	}
 
-	private void setupDebugRenderingInfoPref() {
-		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
-		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
-		debugRenderingInfo.setIconSpaceReserved(false);
-	}
-
-	private void setupDisableMapLayersPref() {
-		SwitchPreferenceEx disableMapLayers = findPreference(settings.DISABLE_MAP_LAYERS.getId());
-		disableMapLayers.setDescription(getString(R.string.disable_map_layers_descr));
-		disableMapLayers.setIconSpaceReserved(false);
-	}
 
 	private void setupSimulateInitialStartupPref() {
 		Preference simulateInitialStartup = findPreference(SIMULATE_INITIAL_STARTUP);
@@ -207,17 +194,37 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		headingPref.setDescription(R.string.write_heading_description);
 	}
 
-	private void setupMapTextsPrefs() {
+	private void setupMapRenderingPrefs() {
 		Preference textsCategory = findPreference("texts");
 		textsCategory.setIconSpaceReserved(false);
+
+		SwitchPreferenceEx symtilePref = findPreference(plugin.SHOW_TILES_PRIMITIVISATION_DEBUG_INFO.getId());
+		symtilePref.setIconSpaceReserved(false);
+		symtilePref.setDescription(R.string.show_debug_tile_description);
+
+		SwitchPreferenceEx symRasterTilePref = findPreference(plugin.SHOW_TILES_RASTERIZATION_DEBUG_INFO.getId());
+		symRasterTilePref.setIconSpaceReserved(false);
+		symRasterTilePref.setDescription(R.string.show_debug_tile_description);
 
 		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_SYMBOLS_DEBUG_INFO.getId());
 		syminfoPref.setIconSpaceReserved(false);
 		syminfoPref.setDescription(R.string.show_debug_info_description);
 
+		SwitchPreferenceEx symbboxPref = findPreference(plugin.SHOW_SYMBOLS_BBOXES.getId());
+		symbboxPref.setIconSpaceReserved(false);
+		symbboxPref.setDescription(R.string.show_debug_info_description);
+
+		SwitchPreferenceEx disableMapLayers = findPreference(settings.DISABLE_MAP_LAYERS.getId());
+		disableMapLayers.setDescription(getString(R.string.disable_map_layers_descr));
+		disableMapLayers.setIconSpaceReserved(false);
+
 		SwitchPreferenceEx symtopPref = findPreference(plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.getId());
 		symtopPref.setIconSpaceReserved(false);
 		symtopPref.setDescription(R.string.allow_display_on_top_description);
+
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
+		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
+		debugRenderingInfo.setIconSpaceReserved(false);
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {

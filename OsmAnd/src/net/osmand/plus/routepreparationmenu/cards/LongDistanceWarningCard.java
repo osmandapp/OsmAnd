@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.data.PointType;
 
 public class LongDistanceWarningCard extends WarningCard {
 
@@ -18,6 +18,6 @@ public class LongDistanceWarningCard extends WarningCard {
 
 	@Override
 	protected void onLinkClicked() {
-		AddPointBottomSheetDialog.showInstance(mapActivity, MapRouteInfoMenu.PointType.INTERMEDIATE);
+		AddPointBottomSheetDialog.showInstance(mapActivity, PointType.INTERMEDIATE);
 	}
 }

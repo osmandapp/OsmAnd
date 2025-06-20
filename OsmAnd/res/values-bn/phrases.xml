@@ -122,5 +122,5 @@
     <string name="poi_archaeological_site_type">ধরণ</string>
     <string name="poi_free_flying_characteristics">বিশিষ্ট</string>
     <string name="poi_healthcare_alternative_types">বিশিষ্টতা</string>
-    <string name="poi_site_type_fortification">দুর্গপ্রাকার</string>
+    <string name="poi_archaeological_site_fortification">দুর্গপ্রাকার</string>
 </resources>

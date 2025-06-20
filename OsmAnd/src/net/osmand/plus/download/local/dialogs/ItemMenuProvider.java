@@ -115,10 +115,6 @@ public class ItemMenuProvider implements MenuProvider {
 		}
 		LocalItemType type = item.getType();
 		if (item instanceof LocalItem localItem) {
-			boolean backuped = localItem.isBackuped(app);
-			if (type.isBackupSupported() || backuped) {
-				addOperationItem(menu, localItem, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
-			}
 			if (type.isUpdateSupported()) {
 				menuItem = menu.add(0, R.string.shared_string_update, Menu.NONE, R.string.shared_string_update);
 				menuItem.setIcon(getIcon(R.drawable.ic_action_update, colorId));
@@ -127,6 +123,10 @@ public class ItemMenuProvider implements MenuProvider {
 					updateItem(localItem);
 					return true;
 				});
+			}
+			boolean backuped = localItem.isBackuped(app);
+			if (type.isBackupSupported() || backuped) {
+				addOperationItem(menu, localItem, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
 			}
 			if (type == TILES_DATA) {
 				menuItem = menu.add(0, R.string.calculate_size, Menu.NONE, R.string.calculate_size);

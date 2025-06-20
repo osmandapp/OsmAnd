@@ -41,6 +41,8 @@ import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.LocationPointWrapper;
+import net.osmand.plus.routepreparationmenu.data.PointType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -199,7 +201,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
 				Bundle arguments = new Bundle();
-				arguments.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, MapRouteInfoMenu.PointType.INTERMEDIATE.name());
+				arguments.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, PointType.INTERMEDIATE.name());
 				AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 				fragment.setArguments(arguments);
 				fragment.setUsedOnMap(true);
@@ -341,7 +343,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 			return;
 		}
 		boolean landscapeLayout = !portrait;
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		int colorActive = ContextCompat.getColor(mapActivity, ColorUtilities.getActiveColorId(nightMode));
 		if (!landscapeLayout) {
 			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.route_info_menu_bg_light, R.drawable.route_info_menu_bg_dark);
@@ -740,10 +742,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 	}
 
 	@Override
-	public void onSelectOnMap(AddPointBottomSheetDialog dialog) {
+	public void onRequestToSelectOnMap(@NonNull PointType pointType) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapRouteInfoMenu().selectOnScreen(dialog.getPointType(), true);
+			mapActivity.getMapRouteInfoMenu().selectOnScreen(pointType, TAG);
 			controller.setUseRouteInfoMenu(false);
 			dismiss();
 		}

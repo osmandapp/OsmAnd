@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 
 import java.util.List;
@@ -35,9 +35,9 @@ public class DeleteDialogFragment extends DialogFragment {
 				QuickSearchDialogFragment fragment = (QuickSearchDialogFragment) parentFragment;
 
 				OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-				SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+				SearchHistoryHelper helper = app.getSearchHistoryHelper();
 				for (QuickSearchListItem searchListItem : selectedItems) {
-					helper.remove(searchListItem.getSearchResult().object);
+					helper.remove(searchListItem.getSearchResult());
 				}
 				fragment.reloadHistory();
 				fragment.enableSelectionMode(false, -1);

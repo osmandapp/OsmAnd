@@ -70,6 +70,7 @@ import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil.OnNodeComm
 import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
@@ -153,7 +154,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		app = getMyApplication();
 		settings = app.getSettings();
 		plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
-		nightMode = !settings.isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 	}
 
 	@Override

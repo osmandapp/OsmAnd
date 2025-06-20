@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.data.LatLon;
@@ -60,6 +61,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.UpdateRendererAsyncTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -1318,7 +1320,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	// this method could be called in non UI thread
 	public void refreshMap(boolean updateVectorRendering) {
 		if (view != null && view.isShown()) {
-			boolean nightMode = app.getDaynightHelper().isNightMode();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 			Boolean currentNightMode = this.nightMode;
 			boolean forceUpdateVectorDrawing = currentNightMode != null && currentNightMode != nightMode;
 			if (forceUpdateVectorDrawing) {
@@ -2023,7 +2025,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return true;
 	}
 
-	public void setMapRenderer(@Nullable MapRendererView mapRenderer) {
+	public void setMapRenderer(@Nullable MapRendererView mapRenderer, boolean disable) {
 		List<OsmandMapLayer> layers = getLayers();
 		for (OsmandMapLayer layer : layers) {
 			layer.onMapRendererChange(this.mapRenderer, mapRenderer);
@@ -2034,7 +2036,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.mapRenderer.resetElevationDataProvider();
 		}
 		this.mapRenderer = mapRenderer;
-		if (!isSteplessZoomSupported()) {
+		if (!isSteplessZoomSupported() && !disable) {
 			setZoomWithFloatPart(getZoom(), 0);
 		}
 	}
@@ -2573,15 +2575,22 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (plugin != null) {
 			boolean show = plugin.SHOW_SYMBOLS_DEBUG_INFO.get();
 			boolean allow = plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.get();
+			boolean showBboxes = plugin.SHOW_SYMBOLS_BBOXES.get();
 			MapRendererDebugSettings debugSettings = mapRenderer.getDebugSettings();
 			debugSettings.setDebugStageEnabled(show);
-			debugSettings.setShowSymbolsMarksRejectedByViewpoint(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByIntersectionCheck(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByMinDistanceToSameContentFromOtherSymbolCheck(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByPresentationMode(show);
-			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(show);
-			debugSettings.setSkipSymbolsIntersectionCheck(allow);
+			debugSettings.setShowSymbolsMarksRejectedByViewpoint(showBboxes);
+			debugSettings.setShowSymbolsBBoxesRejectedByIntersectionCheck(showBboxes);
+			debugSettings.setShowSymbolsBBoxesRejectedByMinDistanceToSameContentFromOtherSymbolCheck(showBboxes);
+			debugSettings.setShowSymbolsBBoxesRejectedByPresentationMode(showBboxes);
+			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(showBboxes);
+			debugSettings.setSkipSymbolsIntersectionCheck(showBboxes);
 			mapRenderer.setDebugSettings(debugSettings);
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			if (mapContext != null) {
+				mapContext.showDebugPrimivitisationTiles = plugin.SHOW_TILES_PRIMITIVISATION_DEBUG_INFO.get();
+				mapContext.showDebugRasterizationTiles = plugin.SHOW_TILES_RASTERIZATION_DEBUG_INFO.get();
+				mapContext.recreateRasterAndSymbolsProvider(MapRendererContext.ProviderType.MAIN);
+			}
 		}
 	}
 

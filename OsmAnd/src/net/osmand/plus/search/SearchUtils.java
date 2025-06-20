@@ -20,7 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
@@ -82,9 +82,9 @@ public class SearchUtils {
 
 	public static void selectSearchResult(@NonNull OsmandApplication app, @NonNull SearchResult result) {
 		if (result.object instanceof AbstractPoiType) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((AbstractPoiType) result.object, SEARCH);
+			app.getSearchHistoryHelper().addNewItemToHistory((AbstractPoiType) result.object, SEARCH);
 		} else if (result.object instanceof PoiUIFilter) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) result.object, SEARCH);
+			app.getSearchHistoryHelper().addNewItemToHistory((PoiUIFilter) result.object, SEARCH);
 		}
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 		if (result.object instanceof PoiType && ((PoiType) result.object).isAdditional()) {

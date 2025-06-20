@@ -207,9 +207,7 @@
     <string name="poi_cuisine_ukrainian">Tukranit</string>
     <string name="poi_cuisine_mongolian">Tamungulit</string>
     <string name="poi_cuisine_latin_american">Taspanit n temrikt talatinit</string>
-    <string name="poi_cuisine_cuban">![]({{ site.baseurl }}/assets/posts/2017-07-03-cuba/child_apps.jpg)&lt;br/&gt;
-\n*Agrud n Kuba yettnadin isnasen yella i usiggez*
-\n</string>
+    <string name="poi_cuisine_cuban"></string>
     <string name="poi_cuisine_czech">Taččikit</string>
     <string name="poi_cuisine_uzbek">Tuzbikt</string>
     <string name="poi_cuisine_european">Asulay VAT n Turuft</string>
@@ -255,7 +253,7 @@
     <string name="poi_temperature">Tifestiniwin n lḥamu</string>
     <string name="poi_artist_name">Anaẓur</string>
     <string name="poi_square">Amkuẓ</string>
-    <string name="poi_site_type_city">Tiɣremt</string>
+    <string name="poi_archaeological_site_city">Tiɣremt</string>
     <string name="poi_animal_training_dog">&lt;strong&gt;Amarraw&lt;/strong&gt; &amp;mdash; Tzemreḍ ad tsettefeḍ isebtar-inek s umyellel. deg umedya tzemreḍ ad tesɛuḍ asebtar &amp;#8220;Awal ɣef&amp;#8221; i yesɛan isebtar &amp;#8220;Tudert-iw&amp;#8221; aked&amp;#8220;Aqjun-iw&amp;#8221; d isebtar inadayen. Ulac tilist i isebtar inadayen.</string>
     <string name="poi_theatre_genre_chamber_music">Musique de chambre</string>
     <string name="poi_theatre_genre_comedy">Comédie</string>

@@ -304,9 +304,27 @@ public class WorldRegion implements Serializable {
 
 	public List<List<LatLon>> getPolygons() {
 		List<List<LatLon>> polygons = new ArrayList<>();
-		polygons.add(polygon);
+		if (polygon != null) {
+			polygons.add(polygon);
+		}
 		polygons.addAll(additionalPolygons);
 		return polygons;
+	}
+
+	public List<QuadRect> getAllPolygonsBounds() {
+		List<QuadRect> allBounds = new ArrayList<>();
+
+		for (List<LatLon> polygon : getPolygons()) {
+			QuadRect bounds = new QuadRect();
+			for (LatLon ll : polygon) {
+				double x = ll.getLongitude();
+				double y = ll.getLatitude();
+				bounds.expand(x, y, x, y);
+			}
+			allBounds.add(bounds);
+		}
+
+		return allBounds;
 	}
 
 	@Override

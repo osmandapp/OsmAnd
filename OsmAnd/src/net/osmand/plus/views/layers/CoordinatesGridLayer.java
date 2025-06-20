@@ -27,6 +27,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
@@ -335,7 +336,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 	}
 
 	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode();
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 	}
 
 	@Override

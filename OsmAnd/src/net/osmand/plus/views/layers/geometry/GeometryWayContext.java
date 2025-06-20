@@ -134,13 +134,13 @@ public abstract class GeometryWayContext {
 	}
 
 	public void clearCustomColor() {
-		if (hasAttrs()) {
+		if (attrs != null) {
 			attrs.customColor = 0;
 		}
 	}
 
 	public void clearCustomShader() {
-		if (hasAttrs()) {
+		if (attrs != null) {
 			attrs.customColorPaint.setShader(null);
 		}
 	}

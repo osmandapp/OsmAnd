@@ -35,6 +35,7 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -87,7 +88,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 		app = (OsmandApplication) requireContext().getApplicationContext();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		settings = app.getSettings();
-		nightMode = !settings.isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		selectedAppMode = settings.getApplicationMode();
 		iconsHelper = new WidgetIconsHelper(app, selectedAppMode.getProfileColor(nightMode), nightMode);
 

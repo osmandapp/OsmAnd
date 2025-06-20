@@ -491,7 +491,7 @@
     <string name="poi_filter_custom_filter">Benutzerdefinierter Filter</string>
     <string name="poi_filter_food_shop">Lebensmittelgeschäft</string>
     <string name="poi_filter_for_tourists">Für Touristen</string>
-    <string name="poi_filter_fuel">Tankstelle</string>
+    <string name="poi_filter_fuel">Kraftstoff</string>
     <string name="poi_filter_namefinder">Online-Namensfinder</string>
     <string name="reading_cached_tiles">Zwischengespeicherte Kacheln werden gelesen …</string>
     <string name="version_index_is_big_for_memory">Nicht genügend Speicher für Index \'\'{0}\'\'</string>
@@ -1372,7 +1372,7 @@
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Rendering verwenden</string>
     <string name="use_opengl_render_descr">Hardware-beschleunigtes OpenGL-Rendering verwenden (Könnte mehr Akkuleistung verbrauchen und nicht auf allen Geräten funktionieren).</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich. Bitte die Internet-Verbindung prüfen.</string>
+    <string name="no_internet_connection">Keine Internet Verbindung</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
@@ -1618,7 +1618,7 @@
     <string name="shared_string_undo">Rückgängig machen</string>
     <string name="shared_string_skip">Überspringen</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="traffic_warning_hazard">Gefährdung</string>
+    <string name="traffic_warning_hazard">Gefahr</string>
     <string name="rendering_value_boldOutline_name">Hervorgehobene Umrisse</string>
     <string name="delete_change">Änderung löschen</string>
     <string name="shared_string_card_was_hidden">Karte wurde versteckt</string>
@@ -2529,11 +2529,11 @@
     <string name="enter_lon">Längengrad eingeben</string>
     <string name="enter_lat">Breitengrad eingeben</string>
     <string name="enter_lat_and_lon">Breiten- und Längengrad eingeben</string>
-    <string name="dd_mm_ss_format">DD°MM\'SS\"</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
     <string name="dd_mm_mmmm_format">DD°MM.MMMM\'</string>
-    <string name="dd_mm_mmm_format">DD°MM.MMM\'</string>
+    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
     <string name="east_abbreviation">E</string>
     <string name="west_abbreviation">W</string>
     <string name="south_abbreviation">S</string>
@@ -2773,7 +2773,7 @@
     <string name="rendering_attr_highway_class_road_name">Landstraße</string>
     <string name="rendering_attr_highway_class_street_name">Straße</string>
     <string name="rendering_attr_highway_class_service_name">Erschließungsweg</string>
-    <string name="rendering_attr_highway_class_footway_name">Gehweg</string>
+    <string name="rendering_attr_highway_class_footway_name">Fußweg</string>
     <string name="rendering_attr_highway_class_track_name">Wirtschaftsweg</string>
     <string name="rendering_attr_highway_class_bridleway_name">Reitweg</string>
     <string name="rendering_attr_highway_class_steps_name">Stufen</string>
@@ -3664,18 +3664,12 @@
     <string name="osm_edit_comment_note">OSM-Hinweis kommentieren</string>
     <string name="osm_login_descr">Melden Sie sich mit der OAuth-Methode oder mit Ihrem OSM-Benutzernamen und -Passwort an.</string>
     <string name="shared_string_add_photo">Foto hinzufügen</string>
-    <string name="register_on_openplacereviews">Registrieren bei
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Neues Konto erstellen</string>
     <string name="register_opr_have_account">Ich habe bereits ein Konto</string>
     <string name="shared_string_search_history">Suchverlauf</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorboot</string>
     <string name="add_to_mapillary">Zu Mapillary hinzufügen</string>
-    <string name="add_photos_descr">OsmAnd zeigt Fotos aus verschiedenen Quellen:
-\nOpenPlaceReviews - POI Fotos;
-\nMapillary - Bilder auf Straßenebene;
-\nWeb / Wikimedia - POI-Fotos gemäß OpenStreetMap-Daten.</string>
     <string name="shared_string_resources">Quellen</string>
     <string name="approximate_file_size">Ungefähre Dateigröße</string>
     <string name="select_data_to_export">Wählen Sie die Daten aus, die in die Datei exportiert werden sollen.</string>
@@ -3769,9 +3763,6 @@
     <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
     <string name="toast_select_edits_for_upload">Bearbeitungen zum Hochladen auswählen</string>
     <string name="hillshade_slope_contour_lines">Höhenlinien / Relief / Hangneigung</string>
-    <string name="open_place_reviews_plugin_description">Tragen Sie zum OpenPlaceReviews-Projekt bei, z. B. mit Fotos, Bewertungen oder Links für öffentliche Orte wie Restaurants, Hotels oder Museen.
-\n
-\nAuf unserer Website %1$s finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
     <string name="activity_type_water_name">Wasser</string>
     <string name="activity_type_winter_name">Winter</string>
     <string name="activity_type_snowmobile_name">Schneemobil</string>
@@ -4260,7 +4251,7 @@
     <string name="import_tracks">Tracks importieren</string>
     <string name="shared_string_shape">Form</string>
     <string name="default_appearance_desc">Standardfarbe, Symbol und Form werden auf die hinzugefügten Favoritenpunkte in der Gruppe angewendet.</string>
-    <string name="default_appearance">Standarddarstellung</string>
+    <string name="default_appearance">Standardmäßiges Aussehen</string>
     <string name="edit_category">Kategorie bearbeiten</string>
     <string name="stop_download">Download abbrechen</string>
     <string name="shared_string_complete">komplett</string>
@@ -4345,7 +4336,7 @@
     <string name="circle_settings">Kreiseinstellungen</string>
     <string name="map_widget_distance">Entfernung</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Militärische Bereiche ausblenden</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Militärische Bereiche</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Militärgelände</string>
     <string name="routing_attr_hazmat_category_name">Gefahrgutkategorie</string>
     <string name="average_speed_skip_stops">Zwischenstopps berücksichtigen</string>
     <string name="map_widget_true_bearing">Tatsächliche Peilung</string>
@@ -5323,7 +5314,7 @@
     <string name="allow_display_on_top_description">Kartentexte übereinander anzeigen lassen</string>
     <string name="show_debug_info">Debug-Informationen anzeigen</string>
     <string name="show_debug_info_description">Grafische Informationen über die Platzierung jedes Kartentextes anzeigen</string>
-    <string name="map_text">Kartentexte</string>
+    <string name="map_text">Karten-Rendering</string>
     <string name="routing_attr_avoid_cobblestone_name">Kopfsteinpflaster vermeiden</string>
     <string name="routing_attr_avoid_cobblestone_description">Kopfsteinpflaster vermeiden</string>
     <string name="track_vertical_exaggeration_description">Durch Ändern des Skalenwerts können Sie die Höhe des 3D-Tracks ändern.</string>
@@ -5411,10 +5402,6 @@
 \nEnergieverbrauch (mAh): %2$s</string>
     <string name="rendering_avg_info">Rendering-Statistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
     <string name="energy_avg_info">Energiestatistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
-    <string name="rendering_avg_info_description">FPS der letzten 1000 Frames: %1$s
-\nCPU-Basis: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Kartenorientierung wählen</string>
     <string name="rendering_value_pale_name">Blass</string>
     <string name="shared_string_all_icons">Alle Icons</string>
@@ -5628,14 +5615,14 @@
     <string name="obd_connected_to_device">Verbunden mit %s</string>
     <string name="obd_not_connected_to_device">Getrennt von %s</string>
     <string name="dynamic_icon_type_summary">Symbol ändert sich je nach Aktionsstatus.</string>
-    <string name="fuel_tank_capacity_description">Tankinhalt eingeben, um Kraftstoffstand und -verbrauch genau zu verfolgen</string>
+    <string name="fuel_tank_capacity_description">Geben Sie das Fassungsvermögen Ihres Tanks ein, um Kraftstoffstand und -verbrauch genau zu verfolgen</string>
     <string name="shared_strings_dimensions">Abmessungen</string>
-    <string name="fuel_tank_capacity">Volumen des Kraftstofftanks</string>
+    <string name="fuel_tank_capacity">Fassungsvermögen des Kraftstofftanks</string>
     <string name="litres">Liter</string>
     <string name="us_gallons_unit">gal</string>
-    <string name="imperial_gallons">Imperiale Gallone</string>
-    <string name="us_gallons">US-Gallone</string>
-    <string name="unit_of_volume_description">Ausgewählte Einheiten werden auf alle volumenbezogenen Daten im aktuellen Profil angewendet.</string>
+    <string name="imperial_gallons">Imperiale Gallonen</string>
+    <string name="us_gallons">US-Gallonen</string>
+    <string name="unit_of_volume_description">Ausgewählte Einheiten werden für alle volumenabhängigen Daten im aktuellen Profil genutzt.</string>
     <string name="unit_of_volume">Volumeneinheit</string>
     <string name="record_obd_data">Fahrzeugdaten aufzeichnen</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
@@ -5696,9 +5683,9 @@
     <string name="shared_string_avg_altitude">Durchschnittliche Höhe</string>
     <string name="shared_string_avg_speed">Mindestgeschwindigkeit</string>
     <string name="shared_string_length">Länge</string>
-    <string name="map_widget_route_information">Routeninformationen</string>
+    <string name="map_widget_route_information">Informationen zur Route</string>
     <string name="shared_string_default_view">Standardansicht</string>
-    <string name="map_widget_route_information_desc">Zeigt die geschätzte Ankunftszeit, die verbleibende Reisezeit und die Distanz für die aktuelle Navigationsroute an.</string>
+    <string name="map_widget_route_information_desc">Zeigt die geschätzte Ankunftszeit, die verbleibende Reisezeit und die Entfernung für die aktuelle Navigationsroute an.</string>
     <string name="ais_nmea_protocol_description">Protokoll für NMEA-Datenempfang auswählen</string>
     <string name="ais_ship_lost_timeout_description">Timeout für Schiffssichtbarkeit einstellen: Nach dieser Zeit ohne Signalempfang ändert das Schiffssymbol seinen Status auf dem Bildschirm: Es wird durchgestrichen.</string>
     <string name="plugin_ais_tracker_name">AIS-Schiffstracker</string>
@@ -5733,7 +5720,7 @@
     <string name="no_places_available">Keine Plätze verfügbar</string>
     <string name="no_photo_for_location_desc">Es wurden noch keine Benutzerfotos zu diesem Ort hinzugefügt</string>
     <string name="shared_string_road_exit">Ausfahrt</string>
-    <string name="hmd_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für einen Monat (%1$s)</string>
+    <string name="hmd_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Monate</string>
     <string name="hmd_promo">HMD Promo für %1$s Monate</string>
     <string name="apply_to_all_points">Auf alle Punkte anwenden</string>
     <string name="save_favorite_default_appearance">Änderungen auf die vorhandenen Punkte im Ordner anwenden oder nur auf neue?</string>
@@ -5754,17 +5741,72 @@
     <string name="popular_places">Beliebte Orte</string>
     <string name="point_location">Punktortung</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Aktion zur Steuerung der Sichtbarkeit des Koordinatengitters auf der Karte.</string>
-    <string name="layer_coordinates_grid">Koordinatenraster</string>
+    <string name="layer_coordinates_grid">Koordinatengitter</string>
     <string name="show_image_previews">Bildvorschauen anzeigen</string>
     <string name="equator">Äquator</string>
     <string name="add_widget">Widget hinzufügen</string>
     <string name="shared_string_online_only">Nur online</string>
     <string name="shared_string_offline_only">Nur offline</string>
     <string name="prime_meridian">Nullmeridian</string>
-    <string name="meridian_180">180. Meridian</string>
-    <string name="intermediate_first">Zwischenziel zuerst</string>
-    <string name="destination_first">Endziel zuerst</string>
-    <string name="display_priority">Anzeigepriorität</string>
+    <string name="meridian_180">180. Längengrad</string>
+    <string name="intermediate_first">Fortgeschrittene zuerst</string>
+    <string name="destination_first">Ziel zuerst</string>
+    <string name="display_priority">Priorität anzeigen</string>
     <string name="poi_source">POI-Quelle</string>
     <string name="row_height">Zeilenhöhe</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="read_on_wiki">Auf Wikipedia lesen</string>
+    <string name="prediction_time">Vorhersagezeit</string>
+    <string name="shared_string_no_animation">Keine Animation</string>
+    <string name="routing_attr_allow_ferries_description">Routenführung über Fährverbindungen zulassen</string>
+    <string name="routing_attr_allow_ferries_name">Fähren zulassen</string>
+    <string name="prediction_time_advanced_description">Vorhersagezeit anpassen, um Verzögerung zu minimieren.</string>
+    <string name="position_animation_empty_banner_description">Positionssymbol bewegt sich ohne Animation zu jedem neu empfangenen Standort.</string>
+    <string name="position_animation">Animation der Position</string>
+    <string name="prediction_time_description">Animation des Positionssymbols in OsmAnd bei jedem empfangenen GPS-Datenpunkt (einmal pro Sekunde). Kann zu einer merkbaren Verzögerung seiner Bewegung führen, insbesondere wenn der Nutzer sich schnell bewegt oder die GPS-Signalstärke schwankt.</string>
+    <string name="wiki_around">Nahegelegene beliebte Orte</string>
+    <string name="grid_color">Gitterfarbe</string>
+    <string name="shared_string_edges">Kanten</string>
+    <string name="labels_position">Position der Beschriftungen</string>
+    <string name="customize_grid_color">Gitterfarbe anpassen</string>
+    <string name="route_members">Mitglieder</string>
+    <string name="multipoligon_related">Zugehörig</string>
+    <string name="route_part_of">Teil von</string>
+    <string name="cant_load_map_styles">Kartenstile können nicht geladen werden.</string>
+    <string name="add_to_navigation">Zur Navigation hinzufügen</string>
+    <string name="msg_favorites_skipped_as_existing">Favorisierte Punkte (%1$d) wurden übersprungen, da bereits vorhanden.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX-Wegpunkte (%1$d) in die Favoriten kopiert.</string>
+    <string name="save_to_device_error">Fehler beim Speichern auf dem Gerät</string>
+    <string name="saved_to_device">Auf dem Gerät gespeichert</string>
+    <string name="save_to_device">Auf dem Gerät speichern</string>
+    <string name="deactivated_map">Deaktivierte Karte</string>
+    <string name="suggest_activate_map_msg">Die %1$s-Karte ist deaktiviert,\naktivieren um das Gebiet anzusehen.</string>
+    <string name="read_on">Weiterlesen %1$s</string>
+    <string name="show_debug_tile">Kachelinformationen anzeigen</string>
+    <string name="show_symbols_debug_info">Debug-Infos anzeigen</string>
+    <string name="show_debug_tile_description">Zeige Infos zu den Kartensymbolen der einzelnen Kacheln an</string>
+    <string name="unit_of_temperature_description">Ausgewählte Einheiten werden auf alle temperaturbezogenen Daten im aktuellen Profil angewendet.</string>
+    <string name="travel_guides">Leitfäden</string>
+    <string name="hmd_promo_description_years">Kostenloser Zugang zu Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Jahre</string>
+    <string name="uphill_downhill_split">Berg-/Talfahrt</string>
+    <string name="set_parking_position">Parkposition festlegen</string>
+    <string name="set_start_point">Startpunkt festlegen</string>
+    <string name="release_5_1">• Unterstützung für Web- und Cross-Plattform-Käufe\n\n• Temperatureinheiten für einfacheren Zugriff auf Allgemeine Einstellungen verschoben\n\n• Batteriestandsanzeige für BLE-Sensoren hinzugefügt\n\n• Neue, intuitivere UI für Punktauswahl in Navigation\n\n• Verbesserte Widget Sichtbarkeit mit einem neuen Umriss\n\n• Uphills/Downhills Analysator hinzugefügt\n\n• Wikipedia &amp; Wikivoyage-Integration für mehr POIs erweitert.</string>
+    <string name="years_3">Drei Jahre</string>
+    <string name="osm_live_payment_3_years_title">Alle drei Jahre</string>
+    <string name="deleting_history">Lösche Verlauf…</string>
+    <string name="deleting">Lösche…</string>
+    <string name="osm_live_payment_renews_3_years">Wird alle drei Jahre erneuert</string>
+    <string name="three_years_subscription">Drei-Jahres-Abonnement</string>
+    <string name="ski_route_switch_style_description">Entdecken Sie Skipisten, Lifte und mehr mit dem Winter- und Skikartenstil.</string>
+    <string name="battery_level">Batteriestand</string>
+    <string name="set_work">Arbeit einstellen</string>
+    <string name="battery">Batterie</string>
+    <string name="sensor_data">Sensordaten</string>
+    <string name="set_home">Zuhause einstellen</string>
+    <string name="set_intermediate_point">Zwischenhalt einstellen</string>
+    <string name="hmd_promo_years">HMD Promo für %1$s Jahre</string>
+    <string name="shared_string_split_by">Getrennt durch</string>
+    <string name="shared_string_flat">Flach</string>
+    <string name="shared_string_switch">Umschalten</string>
 </resources>

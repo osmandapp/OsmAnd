@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -249,12 +250,15 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 	private void updateSplit(@NonNull List<GpxDisplayGroup> groups, @NonNull SelectedGpxFile selectedGpxFile) {
 		double splitInterval = 0;
 		GpxSplitType splitType = GpxSplitType.NO_SPLIT;
-		if (distanceSplit.get(selectedSplitInterval) > 0) {
+		if (selectedSplitInterval == 1) {
+			splitType = GpxSplitType.UPHILL_DOWNHILL;
+			splitInterval = 1;
+		} else if (distanceSplit.get(selectedSplitInterval) > 1) {
 			splitType = GpxSplitType.DISTANCE;
-			splitInterval = distanceSplit.get(selectedSplitInterval);
-		} else if (timeSplit.get(selectedSplitInterval) > 0) {
+			splitInterval = distanceSplit.get(selectedSplitInterval - 1);
+		} else if (timeSplit.get(selectedSplitInterval) > 1) {
 			splitType = GpxSplitType.TIME;
-			splitInterval = timeSplit.get(selectedSplitInterval);
+			splitInterval = timeSplit.get(selectedSplitInterval - 1);
 		}
 		saveNewSplit(splitType, splitInterval);
 
@@ -296,7 +300,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		TextView title = view.findViewById(R.id.split_interval_title);
 		TextView text = view.findViewById(R.id.split_interval_text);
 		ImageView img = view.findViewById(R.id.split_interval_arrow);
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int colorId;
 		List<GpxDisplayGroup> groups = getDisplayGroups();
 		if (!groups.isEmpty()) {
@@ -306,7 +310,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		}
 		int color = app.getColor(colorId);
 		title.setTextColor(color);
-		String titleText = getString(R.string.gpx_split_interval);
+		String titleText = getString(R.string.shared_string_split_by);
 		title.setText(getString(R.string.ltr_or_rtl_combine_via_colon, titleText, ""));
 		text.setTextColor(color);
 		img.setImageDrawable(getIcon(R.drawable.ic_action_arrow_drop_down, colorId));
@@ -316,6 +320,8 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		TextView text = view.findViewById(R.id.split_interval_text);
 		if (selectedSplitInterval == 0) {
 			text.setText(getString(R.string.shared_string_none));
+		} else if (selectedSplitInterval == 1) {
+			text.setText(getString(R.string.uphill_downhill_split));
 		} else {
 			text.setText(options.get(selectedSplitInterval));
 		}
@@ -334,6 +340,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		List<GpxDisplayGroup> groups = getDisplayGroups();
 
 		options.add(app.getString(R.string.shared_string_none));
+		options.add(app.getString(R.string.uphill_downhill_split));
 		distanceSplit.add(-1d);
 		timeSplit.add(-1);
 		addOptionSplit(30, true, groups); // 50 feet, 20 yards, 20
@@ -361,6 +368,12 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		addOptionSplit(900, false, groups);
 		addOptionSplit(1800, false, groups);
 		addOptionSplit(3600, false, groups);
+
+		GpxDisplayGroup group = groups.get(0);
+		TrackDisplayGroup trackGroup = getTrackDisplayGroup(group);
+		if (trackGroup != null && trackGroup.isSplitUphillDownhill()) {
+			selectedSplitInterval = 1;
+		}
 	}
 
 	@NonNull

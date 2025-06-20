@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BottomSheetDialogFragment
+import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 
@@ -27,7 +28,7 @@ abstract class ForgetDeviceBaseDialog : BottomSheetDialogFragment() {
 		super.onCreate(savedInstanceState)
 		val context = requireContext()
 		app = context.applicationContext as OsmandApplication
-		nightMode = app.daynightHelper.isNightModeForMapControls
+		nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.OVER_MAP)
 		val deviceId = arguments?.getString(DEVICE_ID_KEY)
 		deviceId?.let { initDevice(it) }
 	}

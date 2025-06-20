@@ -8,10 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.Arrays;
@@ -34,9 +33,10 @@ public class AdditionalInfoBundle {
 	private Map<String, String> filteredAdditionalInfo = null;
 	private Map<String, Object> localizedAdditionalInfo = null;
 
+	private List<String> customHiddenExtensions;
 
 	public AdditionalInfoBundle(@NonNull OsmandApplication app,
-	                            @Nullable Map<String, String> additionalInfo) {
+			@Nullable Map<String, String> additionalInfo) {
 		this.app = app;
 		this.additionalInfo = additionalInfo;
 	}
@@ -57,12 +57,13 @@ public class AdditionalInfoBundle {
 				String key;
 				if (origKey.equals(AMENITY_PREFIX + Amenity.OPENING_HOURS)) {
 					key = origKey.replace(AMENITY_PREFIX, "");
-				} else if (origKey.startsWith(AMENITY_PREFIX) || origKey.contains("route_point_category")) {
+				} else if (origKey.startsWith(AMENITY_PREFIX)) {
 					continue;
 				} else {
 					key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
 				}
-				if (!HIDDEN_EXTENSIONS.contains(key)) {
+				if (!HIDDEN_EXTENSIONS.contains(key) && (Algorithms.isEmpty(customHiddenExtensions)
+						|| !customHiddenExtensions.contains(key))) {
 					result.put(key, get(key));
 				}
 			}
@@ -93,5 +94,9 @@ public class AdditionalInfoBundle {
 		String str = additionalInfo.get(key);
 		str = Amenity.unzipContent(str);
 		return str;
+	}
+
+	public void setCustomHiddenExtensions(List<String> customHiddenExtensions) {
+		this.customHiddenExtensions = customHiddenExtensions;
 	}
 }

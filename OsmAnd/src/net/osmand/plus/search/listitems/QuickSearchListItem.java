@@ -22,13 +22,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.search.core.CustomSearchPoiFilter;
@@ -357,8 +358,8 @@ public class QuickSearchListItem {
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
 				if (amenity.isRouteTrack()) {
-					boolean isNightMode = !app.getSettings().isLightContent();
-					Drawable shieldIcon = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, isNightMode);
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+					Drawable shieldIcon = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, nightMode);
 					if (shieldIcon != null) {
 						return shieldIcon;
 					}
@@ -451,27 +452,26 @@ public class QuickSearchListItem {
 		Object object = searchResult.object;
 		switch (searchResult.objectType) {
 			case POI:
-				Amenity detailedAmenity = getDetailedAmenity((Amenity) object, app, lang, transliterate);
+				Amenity detailedAmenity = (Amenity) object;
 				String poiSimpleFormat;
 				if (detailedAmenity.getType().isWiki()) {
 					poiSimpleFormat = detailedAmenity.getName(lang, transliterate);
 				} else {
-					poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(detailedAmenity, lang, transliterate);
+					poiSimpleFormat = Amenity.getPoiStringWithoutType(detailedAmenity, lang, transliterate);
 				}
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 				pointDescription.setIconName(getAmenityIconName(app, detailedAmenity));
-				object = detailedAmenity;
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
 				pointDescription = entry.getName();
 				if (pointDescription.isPoi() || pointDescription.isAddressTypeCity()) {
 					Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(),
-							entry.getLat(), entry.getLon(), lang, transliterate);
+							entry.getLat(), entry.getLon());
 					if (amenity != null) {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
-								OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
+								Amenity.getPoiStringWithoutType(amenity, lang, transliterate));
 						pointDescription.setIconName(getAmenityIconName(app, amenity));
 					}
 				} else if (pointDescription.isFavorite()) {
@@ -542,22 +542,9 @@ public class QuickSearchListItem {
 		return new Pair<>(pointDescription, object);
 	}
 
-	@NonNull
-	private static Amenity getDetailedAmenity(@NonNull Amenity amenity, @NonNull OsmandApplication app,
-	                                          @NonNull String lang, boolean transliterate) {
-		if ("basemap".equals(amenity.getRegionName())) {
-			Amenity freshAmenity = app.getSearchUICore().findAmenity(amenity.getName(lang),
-					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), lang, transliterate);
-			if (freshAmenity != null) {
-				return freshAmenity;
-			}
-		}
-		return amenity;
-	}
-
 	private static Drawable getIcon(@NonNull OsmandApplication app, @DrawableRes int iconId) {
-		return app.getUIUtilities().getIcon(iconId,
-				app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return app.getUIUtilities().getIcon(iconId, !nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark);
 	}
 
 	@DrawableRes

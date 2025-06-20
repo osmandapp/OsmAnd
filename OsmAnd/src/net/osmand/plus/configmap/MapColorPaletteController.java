@@ -19,6 +19,7 @@ import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController.OnP
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
 import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +51,7 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 		super(app);
 		this.colorDay = this.initialColorDay = initialColorDay;
 		this.colorNight = this.initialColorNight = initialColorNight;
-		initialNightMode = app.getDaynightHelper().isNightModeForMapControls();
+		initialNightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 
 	@NonNull

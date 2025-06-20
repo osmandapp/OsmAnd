@@ -78,6 +78,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -85,6 +86,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -97,6 +99,7 @@ import net.osmand.render.RenderingClass;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -507,7 +510,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			return;
 		}
 		mapActivity.getRoutingHelper().removeListener(this);
-		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		this.visible = visible;
 		updateVisibilityStack(type, visible);
 
@@ -545,7 +548,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					compassButton = dashboardView.findViewById(R.id.map_compass_button);
 					compassButton.setVisibility(View.VISIBLE);
 					compassButton.setLayoutParams(getActionButtonLayoutParams(size));
-					mapActivity.getMapLayers().getMapControlsLayer().addCustomMapButton(compassButton);
+					compassButton.setMapActivity(mapActivity);
+					MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+					mapControlsLayer.addCustomMapButton(compassButton);
 				}
 			}
 			updateDownloadBtn();
@@ -691,7 +696,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		OsmandSettings settings = app.getSettings();
 		ApplicationMode appMode = settings.getApplicationMode();
 
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		if (this.nightMode != nightMode) {
 			this.nightMode = nightMode;
 			applyDayNightMode();
@@ -939,7 +944,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void hide(boolean animation) {
 		if (compassButton != null) {
-			mapActivity.getMapLayers().getMapControlsLayer().clearCustomMapButtons();
+			mapActivity.getMapLayers().getMapControlsLayer().removeCustomMapButtons(Collections.singletonList(compassButton));
 			compassButton = null;
 		}
 		if (!animation) {

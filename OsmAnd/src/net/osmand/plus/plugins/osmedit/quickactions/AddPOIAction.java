@@ -57,6 +57,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
@@ -231,10 +232,10 @@ public class AddPOIAction extends SelectMapLocationAction {
 				.inflate(R.layout.quick_action_add_poi_layout, parent, false);
 		setupPointLocationView(view.findViewById(R.id.point_location_container), mapActivity);
 
-		OsmandApplication application = mapActivity.getMyApplication();
-		boolean isLightTheme = application.getSettings().isLightContent();
+		OsmandApplication app = mapActivity.getMyApplication();
+		boolean isLightTheme = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
-		Drawable deleteDrawable = application.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
+		Drawable deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
 
 		LinearLayout editTagsLineaLayout = view.findViewById(R.id.editTagsList);
 
@@ -242,7 +243,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
 		HashSet<String> tagKeys = new HashSet<>();
 		HashSet<String> valueKeys = new HashSet<>();
-		for (AbstractPoiType abstractPoiType : getAllTranslatedNames(application).values()) {
+		for (AbstractPoiType abstractPoiType : getAllTranslatedNames(app).values()) {
 			addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
 		}
 		addPoiToStringSet(getPoiTypes(mapActivity).getOtherMapCategory(), tagKeys, valueKeys);
@@ -273,13 +274,13 @@ public class AddPOIAction extends SelectMapLocationAction {
 			public void afterTextChanged(Editable s) {
 				String tp = s.toString();
 				putTagIntoParams(POI_TYPE_TAG, tp);
-				PoiCategory category = getCategory(application);
+				PoiCategory category = getCategory(app);
 
 				if (category != null) {
 					poiTypeTextInputLayout.setHint(category.getTranslation());
 				}
 
-				String add = application.getString(R.string.shared_string_add);
+				String add = app.getString(R.string.shared_string_add);
 
 				if (title != null) {
 
@@ -288,7 +289,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 							|| title.getText().toString().equals((add + " "))) {
 
 						if (!tp.isEmpty()) {
-							title.setText(application.getString(R.string.ltr_or_rtl_combine_via_space, add, tp));
+							title.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, add, tp));
 							prevType = title.getText().toString();
 						}
 					}
@@ -328,7 +329,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 
 		ImageButton onlineDocumentationButton = view.findViewById(R.id.onlineDocumentationButton);
 		onlineDocumentationButton.setOnClickListener(v -> {
-			String url = application.getString(R.string.url_osm_wiki_map_features);
+			String url = app.getString(R.string.url_osm_wiki_map_features);
 			Uri uri = Uri.parse(url);
 			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 			AndroidUtils.startActivityIfSafe(mapActivity, intent);

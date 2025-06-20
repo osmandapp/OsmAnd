@@ -6,8 +6,6 @@ import net.osmand.osm.edit.Node;
 
 public class JarvisAlgorithm {
 
-    private static final double METERS_IN_DEGREE = 111000;
-
     public static ArrayList<Node> createConvexPolygon(List<Node> points) {
         if (points == null) {
             return null;
@@ -50,7 +48,7 @@ public class JarvisAlgorithm {
         if (polygon == null || polygon.size() < 3) {
             return polygon;
         }
-        double radius = (double) meters / METERS_IN_DEGREE;
+        double radius = (double) meters / MapUtils.METERS_IN_DEGREE;
         List<Node> expanded = new ArrayList<>();
         for (Node p : polygon) {
             List<Node> l = findPointsAroundPoint(p, radius,16);

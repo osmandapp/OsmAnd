@@ -20,13 +20,9 @@ import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
-import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailsObject;
-import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -59,7 +55,7 @@ import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.router.TransportStopsRouteReader;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -161,7 +157,7 @@ public class ResourceManager {
 	private boolean depthContours;
 	private boolean indexesLoadedOnStart;
 
-	private final FullAmenitySearch fullAmenitySearch;
+	private final AmenitySearcher amenitySearcher;
 
 	public ResourceManager(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -192,9 +188,7 @@ public class ResourceManager {
 			path.mkdir();
 		}
 
-		fullAmenitySearch = new FullAmenitySearch(searchAmenitiesInProgress,
-				fileName -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get(),
-				app.getLanguage());
+		amenitySearcher = new AmenitySearcher(app.getPoiTypes());
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {
@@ -228,18 +222,14 @@ public class ResourceManager {
 	}
 
 	public boolean checkIfObjectDownloaded(String downloadName) {
-		String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
-				+ BINARY_MAP_INDEX_EXT;
-		String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
-				+ BINARY_MAP_INDEX_EXT;
+		String regionName = getMapFileName(downloadName);
+		String roadsRegionName = getRoadMapFileName(downloadName);
 		return indexFileNames.containsKey(regionName) || indexFileNames.containsKey(roadsRegionName);
 	}
 
 	public boolean checkIfObjectBackuped(String downloadName) {
-		String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
-				+ BINARY_MAP_INDEX_EXT;
-		String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
-				+ BINARY_MAP_INDEX_EXT;
+		String regionName = getMapFileName(downloadName);
+		String roadsRegionName = getRoadMapFileName(downloadName);
 		return backupedFileNames.containsKey(regionName) || backupedFileNames.containsKey(roadsRegionName);
 	}
 
@@ -355,7 +345,6 @@ public class ResourceManager {
 	}
 
 	private GeoidAltitudeCorrection geoidAltitudeCorrection;
-	private boolean searchAmenitiesInProgress;
 
 	@Nullable
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
@@ -639,7 +628,7 @@ public class ResourceManager {
 					boolean isTravelObf = resource.getFileName().endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
 					if (mapReader.containsPoiData()) {
 						AmenityIndexRepositoryBinary amenityResource = new AmenityIndexRepositoryBinary(f, resource, app);
-						fullAmenitySearch.addAmenityRepository(fileName, amenityResource);
+						amenitySearcher.addAmenityRepository(fileName, amenityResource);
 						if (isTravelObf) {
 							// reuse until new BinaryMapReaderResourceType.TRAVEL_GPX
 							travelRepositories.put(resource.getFileName(), amenityResource);
@@ -676,7 +665,7 @@ public class ResourceManager {
 			}
 		}
 		Map<PoiCategory, Map<String, PoiType>> toAddPoiTypes = new HashMap<>();
-		for (AmenityIndexRepository repo : fullAmenitySearch.getAmenityRepositories()) {
+		for (AmenityIndexRepository repo : amenitySearcher.getAmenityRepositories()) {
 			Map<String, List<String>> categories = ((AmenityIndexRepositoryBinary) repo).getDeltaPoiCategories();
 			if (!categories.isEmpty()) {
 				for (Map.Entry<String, List<String>> entry : categories.entrySet()) {
@@ -726,15 +715,16 @@ public class ResourceManager {
 	}
 
 	public List<AmenityIndexRepository> getTravelGpxRepositories() {
-		return fullAmenitySearch.getAmenityRepositories(true);
+		AmenitySearcher.Settings settings = getDefaultAmenitySearchSettings();
+		return amenitySearcher.getAmenityRepositories(true, settings.fileVisibility());
 	}
 
 	public List<AmenityIndexRepository> getWikivoyageRepositories() {
 		return new ArrayList<>(travelRepositories.values());
 	}
 
-	public boolean isWikivoyageRepositoryEmpty() {
-		return travelRepositories.isEmpty();
+	public boolean hasTravelRepositories() {
+		return !travelRepositories.isEmpty();
 	}
 
 	public void initMapBoundariesCacheNative() {
@@ -749,7 +739,8 @@ public class ResourceManager {
 
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<AmenityIndexRepository> getAmenityRepositories() {
-		return fullAmenitySearch.getAmenityRepositories(true);
+		AmenitySearcher.Settings settings = getDefaultAmenitySearchSettings();
+		return amenitySearcher.getAmenityRepositories(true, settings.fileVisibility());
 	}
 
 	@NonNull
@@ -767,7 +758,7 @@ public class ResourceManager {
 	}
 
 	public AmenityIndexRepositoryBinary getAmenityRepositoryByFileName(String filename) {
-		return (AmenityIndexRepositoryBinary) fullAmenitySearch.getAmenityRepository(filename);
+		return (AmenityIndexRepositoryBinary) amenitySearcher.getAmenityRepository(filename);
 	}
 
 	public RegionAddressRepository getRegionRepository(String name) {
@@ -852,10 +843,6 @@ public class ResourceManager {
 		renderer.interruptLoadingMap();
 	}
 
-	public boolean isSearchAmenitiesInProgress() {
-		return searchAmenitiesInProgress;
-	}
-
 	public MapRenderRepositories getRenderer() {
 		return renderer;
 	}
@@ -863,7 +850,7 @@ public class ResourceManager {
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
 
 	public void closeFile(String fileName) {
-		fullAmenitySearch.removeAmenityRepository(fileName);
+		amenitySearcher.removeAmenityRepository(fileName);
 		addressMap.remove(fileName);
 		transportRepositories.remove(fileName);
 		indexFileNames.remove(fileName);
@@ -897,7 +884,7 @@ public class ResourceManager {
 		transportRepositories.clear();
 		travelRepositories.clear();
 		addressMap.clear();
-		fullAmenitySearch.clearAmenityRepositories();
+		amenitySearcher.clearAmenityRepositories();
 		for (BinaryMapReaderResource res : fileReaders.values()) {
 			res.close();
 		}
@@ -1093,55 +1080,23 @@ public class ResourceManager {
 		return modifiedTime != null && file.setLastModified(modifiedTime);
 	}
 
-	public FullAmenitySearch getAmenitySearcher() {
-		return fullAmenitySearch;
+	public AmenitySearcher getAmenitySearcher() {
+		return amenitySearcher;
 	}
 
-	@Nullable
-	public Object fetchOtherData(@NonNull OsmandApplication app, @Nullable Object object) {
-		BaseDetailsObject detailsObject = null;
-		long time = System.currentTimeMillis();
-		if (object instanceof Amenity amenity) {
-			if (amenity.isContainsFullInfo()) {
-				detailsObject = new BaseDetailsObject(amenity, app.getLanguage());
-			} else {
-				LatLon latLon = amenity.getLocation();
-				BaseDetailsObject baseObject = fullAmenitySearch.findPlaceDetails(latLon, amenity.getId(), null, amenity.getWikidata());
-				if (baseObject != null) {
-					detailsObject = new BaseDetailsObject(baseObject, app.getLanguage());
-					detailsObject.addObject(amenity);
-					detailsObject.combineData();
-				}
-			}
-		}
-
-		if (object instanceof BaseDetailsObject) {
-			detailsObject = (BaseDetailsObject) object;
-		}
-
-		if (detailsObject == null) {
-			return object;
-		}
-
-		if (!detailsObject.hasGeometry()) {
-			List<BinaryMapDataObject> dataObjects = fullAmenitySearch.searchBinaryMapDataForAmenity(detailsObject.getSyntheticAmenity(), 1);
-			for (BinaryMapDataObject dataObject : dataObjects) {
-				if (copyCoordinates(detailsObject, dataObject)) {
-					break;
-				}
-			}
-		}
-		log.debug("fetchOtherData time " + (System.currentTimeMillis() - time));
-		return detailsObject;
+	public AmenitySearcher.Settings getDefaultAmenitySearchSettings() {
+		return new AmenitySearcher.Settings(
+				() -> app.getSettings().MAP_PREFERRED_LOCALE.get(),
+				() -> app.getSettings().MAP_TRANSLITERATE_NAMES.get(),
+				(fileName) -> app.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()
+		);
 	}
 
-	private static boolean copyCoordinates(@NonNull BaseDetailsObject detailsObject,
-										   @NonNull BinaryMapDataObject mapObject) {
-		int pointsLength = mapObject.getPointsLength();
-		for (int i = 0; i < pointsLength; i++) {
-			detailsObject.addX(mapObject.getPoint31XTile(i));
-			detailsObject.addY(mapObject.getPoint31YTile(i));
-		}
-		return pointsLength > 0;
+	public static String getMapFileName(String regionName) {
+		return Algorithms.capitalizeFirstLetterAndLowercase(regionName) + BINARY_MAP_INDEX_EXT;
+	}
+
+	public static String getRoadMapFileName(String regionName) {
+		return Algorithms.capitalizeFirstLetterAndLowercase(regionName) + BINARY_ROAD_MAP_INDEX_EXT;
 	}
 }

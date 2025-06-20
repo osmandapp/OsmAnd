@@ -20,6 +20,7 @@ import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
 import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.MapPrimitivesProvider.Mode;
+import net.osmand.core.jni.MapRasterMetricsLayerProvider;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
@@ -92,6 +93,9 @@ public class MapRendererContext {
 
 	private float cachedReferenceTileSize;
 	private boolean heightmapsActive;
+
+	public boolean showDebugPrimivitisationTiles = false;
+	public boolean showDebugRasterizationTiles = false;
 
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
@@ -259,7 +263,7 @@ public class MapRendererContext {
 				recreateRasterAndSymbolsProvider(providerType);
 			} else if (languageParamsChanged) {
 				if (mapPrimitivesProvider != null || updateMapPrimitivesProvider(providerType)) {
-					updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
+					updateOrRemoveObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
 				}
 			}
 			setMapBackgroundColor();
@@ -389,7 +393,7 @@ public class MapRendererContext {
 	public void recreateRasterAndSymbolsProvider(@NonNull ProviderType providerType) {
 		if (updateMapPrimitivesProvider(providerType)) {
 			updateObfMapRasterLayerProvider(mapPrimitivesProvider, providerType);
-			updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
+			updateOrRemoveObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
 			this.providerType = providerType;
 		}
 	}
@@ -443,9 +447,17 @@ public class MapRendererContext {
 	}
 
 	private void updateObfMapRasterLayerProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
-	                                             @NonNull ProviderType providerType) {
+												 @NonNull ProviderType providerType) {
 		// Create new OBF map raster layer provider
-		obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground);
+		if (showDebugRasterizationTiles) {
+			obfMapRasterLayerProvider = new MapRasterMetricsLayerProvider(
+				new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground));
+		}
+		else if (showDebugPrimivitisationTiles) {
+			obfMapRasterLayerProvider = new MapPrimitivesMetricsLayerProvider(mapPrimitivesProvider);
+		} else {
+			obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground);
+		}
 		// In case there's bound view and configured layer, perform setup
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
@@ -472,6 +484,16 @@ public class MapRendererContext {
 		}
 	}
 
+	private void updateOrRemoveObfMapSymbolsProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
+											 @NonNull ProviderType providerType) {
+		if (showDebugPrimivitisationTiles || showDebugRasterizationTiles) {
+			if (obfMapSymbolsProvider != null && mapRendererView != null && this.providerType == providerType) {
+				mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
+			}
+		} else {
+			updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
+		}
+	}
 	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView) {
 		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(1);
 	}

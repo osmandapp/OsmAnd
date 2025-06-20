@@ -39,6 +39,7 @@ import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -347,7 +348,7 @@ public class EditKeyAssignmentController extends BaseDialogController implements
 	}
 
 	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(false, appMode);
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.APP);
 	}
 
 	@Nullable

@@ -112,6 +112,11 @@ public class DevicesSettingsCollection {
 	public DeviceSettings getDeviceSettings(@NonNull String deviceId) {
 		return settings.get(deviceId);
 	}
+
+	public void removeDeviceSettings(@NonNull String deviceId) {
+		settings.remove(deviceId);
+	}
+
 	public static DeviceSettings createDeviceSettings(String deviceId, @NonNull AbstractDevice<?> device, boolean deviceEnabled) {
 		return new DeviceSettings(deviceId, device, deviceEnabled);
 	}

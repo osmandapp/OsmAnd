@@ -18,7 +18,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -29,6 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickActionListFragment.OnStartDragListener;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
@@ -363,9 +363,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@ColorInt
 	protected int getItemIconColor(OsmandApplication app, T item) {
-		boolean nightMode = !app.getSettings().isLightContent();
-		int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
-		return ContextCompat.getColor(app, colorRes);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return ColorUtilities.getDefaultIconColor(app, nightMode);
 	}
 
 	@StringRes

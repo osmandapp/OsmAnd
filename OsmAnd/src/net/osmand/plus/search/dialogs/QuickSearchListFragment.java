@@ -1,5 +1,7 @@
 package net.osmand.plus.search.dialogs;
 
+import static net.osmand.search.core.ObjectType.*;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Pair;
@@ -28,7 +30,7 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
@@ -37,15 +39,17 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
+import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
@@ -82,8 +86,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), !app.getSettings().isLightContent());
-		return themedInflater.inflate(getLayoutId(), container, false);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return UiUtilities.inflate(requireContext(), nightMode, getLayoutId(), container, false);
 	}
 
 	@Override
@@ -114,20 +118,20 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
 					SearchResult sr = item.getSearchResult();
 
-					if (sr.objectType == ObjectType.POI
-							|| sr.objectType == ObjectType.LOCATION
-							|| sr.objectType == ObjectType.HOUSE
-							|| sr.objectType == ObjectType.FAVORITE
-							|| sr.objectType == ObjectType.RECENT_OBJ
-							|| sr.objectType == ObjectType.WPT
-							|| sr.objectType == ObjectType.STREET_INTERSECTION
-							|| sr.objectType == ObjectType.GPX_TRACK) {
+					if (sr.objectType == POI
+							|| sr.objectType == LOCATION
+							|| sr.objectType == HOUSE
+							|| sr.objectType == FAVORITE
+							|| sr.objectType == RECENT_OBJ
+							|| sr.objectType == WPT
+							|| sr.objectType == STREET_INTERSECTION
+							|| sr.objectType == GPX_TRACK) {
 
 						showResult(sr);
-					} else if (sr.objectType == ObjectType.INDEX_ITEM) {
+					} else if (sr.objectType == INDEX_ITEM) {
 						processIndexItemClick((IndexItem) sr.relatedObject);
 					} else {
-						if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE || sr.objectType == ObjectType.STREET) {
+						if (sr.objectType == CITY || sr.objectType == VILLAGE || sr.objectType == STREET) {
 							showResult = true;
 						}
 						dialogFragment.completeQueryWithObject(sr);
@@ -146,7 +150,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
 		listAdapter = new QuickSearchListAdapter(app, requireMapActivity());
 		listAdapter.setAccessibilityAssistant(dialogFragment.getAccessibilityAssistant());
@@ -193,22 +197,46 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		return showResult;
 	}
 
-	public void showResult(SearchResult searchResult) {
-		showResult = false;
-		if (searchResult.objectType == ObjectType.GPX_TRACK) {
+	public void showResult(@NonNull SearchResult searchResult) {
+		this.showResult = false;
+
+		if (searchResult.objectType == GPX_TRACK) {
 			showGpxTrackResult(searchResult);
-		} else if (searchResult.location != null) {
+			return;
+		}
+		if (searchResult.objectType == POI && searchResult.object instanceof Amenity amenity) {
+			if (amenity.isRouteArticle() && showTravelArticle(amenity)) {
+				return;
+			}
+		}
+		if (searchResult.location != null) {
 			showResultWithLocation(searchResult);
 		}
 	}
 
-	private void showResultWithLocation(SearchResult searchResult) {
+	private boolean showTravelArticle(@NonNull Amenity amenity) {
+		FragmentActivity activity = getActivity();
+		String routeId = amenity.isRouteArticle() ? amenity.getRouteId() : null;
+		if (!Algorithms.isEmpty(routeId) && activity != null) {
+			dialogFragment.hideToolbar();
+			dialogFragment.hide();
+
+			List<String> locales = new ArrayList<>(amenity.getSupportedContentLocales());
+			TravelArticleIdentifier identifier = new TravelArticleIdentifier(null,
+					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), null, routeId, null);
+			return WikivoyageArticleDialogFragment.showInstance(activity.getSupportFragmentManager(), identifier, locales);
+		}
+		return false;
+	}
+
+	private void showResultWithLocation(@NonNull SearchResult searchResult) {
+		MapActivity activity = getMapActivity();
 		Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
 
 		dialogFragment.hideToolbar();
 		dialogFragment.hide();
 
-		if (getMapActivity() == null) {
+		if (activity == null) {
 			return;
 		}
 		if (pair.second instanceof Amenity amenity) {
@@ -216,15 +244,15 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				TravelHelper travelHelper = app.getTravelHelper();
 				TravelGpx travelGpx = new TravelGpx(amenity);
 
-				SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+				SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 				historyHelper.addNewItemToHistory(searchResult.location.getLatitude(),
 						searchResult.location.getLongitude(), pair.first, HistorySource.SEARCH);
 
-				travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
+				travelHelper.openTrackMenu(travelGpx, activity, amenity.getGpxFileName(null), amenity.getLocation(), true);
 				return; // TravelGpx
 			}
 		}
-		showOnMap(getMapActivity(), dialogFragment,
+		showOnMap(activity, dialogFragment,
 				searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 				searchResult.preferredZoom, pair.first, pair.second);
 	}
@@ -290,7 +318,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	private void showTrackMenuFragment(@NonNull GPXInfo gpxInfo) {
 		MapActivity mapActivity = requireMapActivity();
-		SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
+		app.getSearchHistoryHelper().addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
 		File file = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
 		String path = file.getAbsolutePath();
 		TrackMenuFragment.showInstance(mapActivity, path, false, false, null, QuickSearchDialogFragment.TAG, null);

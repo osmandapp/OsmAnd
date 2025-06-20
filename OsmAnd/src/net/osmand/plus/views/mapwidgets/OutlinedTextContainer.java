@@ -93,6 +93,7 @@ public class OutlinedTextContainer extends FrameLayout {
 		textView.setIncludeFontPadding(holder.includeFontPadding);
 		textView.setLetterSpacing(holder.letterSpacing);
 		textView.setLineSpacing(holder.lineSpacingExtra, holder.lineSpacingMultiplier);
+		textView.setAllCaps(holder.textAllCaps);
 
 		if (holder.autoSizeTextType != TextView.AUTO_SIZE_TEXT_TYPE_NONE && VERSION.SDK_INT >= VERSION_CODES.O) {
 			textView.setAutoSizeTextTypeWithDefaults(holder.autoSizeTextType);
@@ -112,7 +113,7 @@ public class OutlinedTextContainer extends FrameLayout {
 			TextPaint paint = textView.getPaint();
 			paint.setStyle(Paint.Style.STROKE);
 			paint.setStrokeWidth(holder.outlineWidth);
-			//paint.setStrokeJoin(Paint.Join.ROUND);
+			paint.setStrokeJoin(Paint.Join.ROUND);
 		} else {
 			textView.setTextColor(holder.textColor);
 		}
@@ -299,6 +300,7 @@ public class OutlinedTextContainer extends FrameLayout {
 		TextUtils.TruncateAt ellipsize = null;
 		boolean includeFontPadding = true;
 		float letterSpacing = 0f;
+		boolean textAllCaps = false;
 		float lineSpacingExtra = 0f;
 		float lineSpacingMultiplier = 1.0f;
 		int autoSizeTextType = 0;
@@ -360,6 +362,7 @@ public class OutlinedTextContainer extends FrameLayout {
 				includeFontPadding = a.getBoolean(R.styleable.OutlinedTextContainer_android_includeFontPadding, includeFontPadding);
 
 				letterSpacing = a.getFloat(R.styleable.OutlinedTextContainer_android_letterSpacing, letterSpacing);
+				textAllCaps = a.getBoolean(R.styleable.OutlinedTextContainer_android_textAllCaps, textAllCaps);
 
 				lineSpacingExtra = a.getDimension(R.styleable.OutlinedTextContainer_android_lineSpacingExtra, lineSpacingExtra);
 				lineSpacingMultiplier = a.getFloat(R.styleable.OutlinedTextContainer_android_lineSpacingMultiplier, lineSpacingMultiplier);

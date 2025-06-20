@@ -30,6 +30,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -61,6 +62,7 @@ import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -622,6 +624,17 @@ public class UiUtilities {
 	}
 
 	@NonNull
+	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId) {
+		return inflate(ctx, nightMode, layoutId, null, false);
+	}
+
+	@NonNull
+	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId,
+	                           @Nullable ViewGroup root, boolean attachToRoot) {
+		return getInflater(ctx, nightMode).inflate(layoutId, root, attachToRoot);
+	}
+
+	@NonNull
 	public static LayoutInflater getInflater(@NonNull Context ctx, boolean nightMode) {
 		return LayoutInflater.from(getThemedContext(ctx, nightMode));
 	}
@@ -746,19 +759,19 @@ public class UiUtilities {
 		int color = TopToolbarController.NO_COLOR;
 		boolean mapControlsVisible = activity.findViewById(R.id.map_hud_layout).getVisibility() == View.VISIBLE;
 		boolean topToolbarVisible = mapLayers.getMapInfoLayer().isTopToolbarViewVisible();
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		TopToolbarController toolbarController = mapLayers.getMapInfoLayer().getTopToolbarController();
 		if (toolbarController != null && mapControlsVisible && topToolbarVisible) {
-			color = toolbarController.getStatusBarColor(activity, night);
+			color = toolbarController.getStatusBarColor(activity, nightMode);
 		}
 		if (color == TopToolbarController.NO_COLOR) {
 			ApplicationMode appMode = settings.getApplicationMode();
 			MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
-			int defaultColorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, night);
+			int defaultColorId = nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, nightMode);
 			if (colorIdForTopWidget != -1) {
-				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(appMode, night);
+				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(appMode, nightMode);
 			}
 
 			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;

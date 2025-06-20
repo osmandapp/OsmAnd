@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.Route;
 import net.osmand.shared.gpx.primitives.Track;
@@ -41,7 +42,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 
 	public TrackSelectSegmentAdapter(@NonNull Context ctx, @NonNull GpxFile gpxFile) {
 		app = (OsmandApplication) ctx.getApplicationContext();
-		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightModeForMapControls());
+		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP));
 		iconsCache = app.getUIUtilities();
 		this.gpxItems = getGpxItems(gpxFile);
 	}

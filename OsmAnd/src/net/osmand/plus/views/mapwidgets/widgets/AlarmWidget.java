@@ -107,25 +107,17 @@ public class AlarmWidget {
 	public boolean updateInfo(DrawSettings drawSettings, boolean drawBitmap) {
 		boolean showRoutingAlarms = settings.SHOW_ROUTING_ALARMS.get();
 		boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
-		boolean cams = settings.SHOW_CAMERAS.get();
+		boolean showCameras = settings.SHOW_CAMERAS.get();
 		boolean browseMap = settings.APPLICATION_MODE.get() == ApplicationMode.DEFAULT;
+		boolean shouldProcess = routingHelper.isFollowingMode()
+				|| trackingUtilities.isMapLinkedToLocation() && !browseMap;
 		boolean visible = false;
-		if ((routingHelper.isFollowingMode() || trackingUtilities.isMapLinkedToLocation() && !browseMap)
-				&& showRoutingAlarms && (trafficWarnings || cams)) {
-			AlarmInfo alarm;
-			if (routingHelper.isFollowingMode() && !routingHelper.isDeviatedFromRoute()
-					&& (routingHelper.getCurrentGPXRoute() == null || routingHelper.isCurrentGPXRouteV2())) {
-				alarm = wh.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), cams);
-			} else {
-				RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
-				Location loc = locationProvider.getLastKnownLocation();
-				if (ro != null && loc != null) {
-					alarm = wh.calculateMostImportantAlarm(ro, loc, settings.METRIC_SYSTEM.get(),
-							settings.SPEED_SYSTEM.get(), cams);
-				} else {
-					alarm = null;
-				}
-			}
+
+		AlarmInfo alarm = null;
+		if (shouldProcess) {
+			alarm = getMostImportantAlarm(showCameras);
+		}
+		if (shouldProcess && showRoutingAlarms && (trafficWarnings || showCameras)) {
 			boolean changed = false;
 			AlarmWidgetInfo info = null;
 			if (alarm != null) {
@@ -200,6 +192,22 @@ public class AlarmWidget {
 			widgetBitmap = null;
 		}
 		return true;
+	}
+
+	@Nullable
+	private AlarmInfo getMostImportantAlarm(boolean showCameras) {
+		if (routingHelper.isFollowingMode() && !routingHelper.isDeviatedFromRoute()
+				&& (routingHelper.getCurrentGPXRoute() == null || routingHelper.isCurrentGPXRouteV2())) {
+			return wh.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), showCameras);
+		} else {
+			Location location = locationProvider.getLastKnownLocation();
+			RouteDataObject routeObject = locationProvider.getLastKnownRouteSegment();
+			if (routeObject != null && location != null) {
+				return wh.calculateMostImportantAlarm(routeObject, location,
+						settings.METRIC_SYSTEM.get(), settings.SPEED_SYSTEM.get(), showCameras);
+			}
+		}
+		return null;
 	}
 
 	@NonNull

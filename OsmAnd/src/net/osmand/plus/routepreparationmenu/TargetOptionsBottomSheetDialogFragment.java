@@ -15,6 +15,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.routepreparationmenu.data.PointType;
 import net.osmand.util.Algorithms;
 
 public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -104,7 +105,7 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	private void openAddPointDialog(MapActivity mapActivity) {
 		Bundle args = new Bundle();
-		args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, MapRouteInfoMenu.PointType.INTERMEDIATE.name());
+		args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, PointType.INTERMEDIATE.name());
 		AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 		fragment.setArguments(args);
 		fragment.setUsedOnMap(false);

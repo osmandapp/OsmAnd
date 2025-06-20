@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.ROUTE_ID;
-import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
@@ -26,16 +25,17 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.*;
-import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
+import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
+import net.osmand.core.jni.MapSymbol.ContentClass;
 import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
-import net.osmand.data.LatLon;
 import net.osmand.data.*;
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.ConfigureMapUtils;
-import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -53,7 +53,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.router.network.NetworkRouteSelector;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -77,8 +77,6 @@ public class MapSelectionHelper {
 	private final OsmandMapTileView view;
 	private final MapLayers mapLayers;
 
-	private final TransportStopHelper transportStopHelper;
-
 	private Map<LatLon, BackgroundType> touchedFullMapObjects = new HashMap<>();
 	private Map<LatLon, BackgroundType> touchedSmallMapObjects = new HashMap<>();
 
@@ -89,7 +87,6 @@ public class MapSelectionHelper {
 		settings = app.getSettings();
 		view = app.getOsmandMap().getMapView();
 		mapLayers = app.getOsmandMap().getMapLayers();
-		transportStopHelper = new TransportStopHelper(app);
 		clickableWayHelper = new ClickableWayHelper(app, view);
 	}
 
@@ -123,9 +120,6 @@ public class MapSelectionHelper {
 		if (result.isEmpty()) {
 			collectObjectsFromLayers(result, showUnknownLocation, true);
 		}
-//		if (result.getAllObjects().size() > 1) {
-//			recollectForMultiselectMenu(result);
-//		}
 		result.groupByOsmIdAndWikidataId();
 		return result;
 	}
@@ -137,22 +131,6 @@ public class MapSelectionHelper {
 			selectObjectsFromOpenGl(result, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
-		}
-	}
-
-	private void recollectForMultiselectMenu(MapSelectionResult result) {
-		List<SelectedMapObject> selectedObjects = result.getAllObjects();
-		for (int i = 0; i < selectedObjects.size(); i++) {
-			SelectedMapObject sel = selectedObjects.get(i);
-			if (sel.object() instanceof RenderedObject renderedObject) {
-				LatLon l = renderedObject.getLatLon();
-				if (l != null) {
-					BaseDetailsObject pdo = findPlaceDetails(l, renderedObject.getId(), renderedObject.getOriginalNames(), renderedObject.getTagValue(WIKIDATA));
-					if (pdo != null) {
-						selectedObjects.set(i, new SelectedMapObject(pdo, sel.provider()));
-					}
-				}
-			}
 		}
 	}
 
@@ -279,9 +257,13 @@ public class MapSelectionHelper {
 				boolean allowAmenityObjects = !isTravelGpx;
 
 				if (allowAmenityObjects) {
-					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
-					if (!amenityAdded) {
+					boolean allowRenderedObjects = !isOsmRoute && !isClickableWay
+							&& !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
+
+					if (allowRenderedObjects) {
 						result.collect(renderedObject, null);
+					} else {
+						addAmenity(result, renderedObject, searchLatLon);
 					}
 				}
 
@@ -301,6 +283,7 @@ public class MapSelectionHelper {
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
 			boolean osmRoutesAlreadyAdded = false;
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
+			AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
 				if (symbolInfo.getMapSymbol().getIgnoreClick()) {
@@ -342,7 +325,13 @@ public class MapSelectionHelper {
 					List<String> names = getValues(jniAmenity.getLocalizedNames());
 					names.add(jniAmenity.getNativeName());
 					long id = jniAmenity.getId().getId().longValue();
-					detailsObject = findPlaceDetails(result.objectLatLon, id, names, null);
+					Amenity requestAmenity = new Amenity();
+					requestAmenity.setId(id);
+					requestAmenity.setLocation(result.objectLatLon);
+
+					AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+					AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names);
+					detailsObject = amenitySearcher.searchDetailedObject(request, settings);
 				} else {
 					MapObject mapObject;
 					try {
@@ -392,15 +381,19 @@ public class MapSelectionHelper {
 									boolean allowRenderedObjects = !isOsmRoute && !isClickableWay
 											&& !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
 
-									if (allowRenderedObjects) {
-										addRenderedObject(result, symbolInfo, obfMapObject, tags);
-									} else {
-										long id = obfMapObject.getId().getId().longValue();
-										detailsObject = findPlaceDetails(latLon, id, getNames(obfMapObject, tags), tags.get(WIKIDATA));
-										if (detailsObject != null) {
-											detailsObject.setMapIconName(getMapIconName(symbolInfo));
-											addGeometry(detailsObject, obfMapObject);
-											detailsObject.setObfResourceName(obfMapObject.getObfSection().getName());
+									RenderedObject renderedObject = createRenderedObject(symbolInfo, obfMapObject, tags);
+									if (renderedObject != null) {
+										if (allowRenderedObjects) {
+											result.collect(renderedObject, null);
+										} else {
+											AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+											AmenitySearcher.Request request = new AmenitySearcher.Request(renderedObject);
+											detailsObject = amenitySearcher.searchDetailedObject(request, settings);
+											if (detailsObject != null) {
+												detailsObject.setMapIconName(getMapIconName(symbolInfo));
+												addGeometry(detailsObject, obfMapObject);
+												detailsObject.setObfResourceName(obfMapObject.getObfSection().getName());
+											}
 										}
 									}
 								}
@@ -433,11 +426,15 @@ public class MapSelectionHelper {
 		return null;
 	}
 
-	private void addRenderedObject(@NonNull MapSelectionResult result,
-			@NonNull MapSymbolInformation symbolInfo,
+	@Nullable
+	private RenderedObject createRenderedObject(@NonNull MapSymbolInformation symbolInfo,
 			@NonNull ObfMapObject obfMapObject, Map<String, String> tags) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null) {
+			MapSymbolsGroup group = rasterMapSymbol.getGroupPtr();
+			RasterMapSymbol symbolIcon = getRasterMapSymbol(group.getFirstSymbolWithContentClass(ContentClass.Icon));
+			RasterMapSymbol symbolCaption = getRasterMapSymbol(group.getFirstSymbolWithContentClass(ContentClass.Caption));
+
 			RenderedObject renderedObject = new RenderedObject();
 			renderedObject.setId(obfMapObject.getId().getId().longValue());
 			QVectorPointI points31 = obfMapObject.getPoints31();
@@ -449,17 +446,18 @@ public class MapSelectionHelper {
 			double lon = MapUtils.get31LongitudeX(obfMapObject.getLabelCoordinateX());
 			renderedObject.setLabelLatLon(new LatLon(lat, lon));
 
-			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Caption) {
-				renderedObject.setName(rasterMapSymbol.getContent());
+			if (symbolIcon != null) {
+				renderedObject.setIconRes(symbolIcon.getContent());
 			}
-			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
-				renderedObject.setIconRes(rasterMapSymbol.getContent());
+			if (symbolCaption != null) {
+				renderedObject.setName(symbolCaption.getContent());
 			}
 			for (Map.Entry<String, String> entry : tags.entrySet()) {
 				renderedObject.putTag(entry.getKey(), entry.getValue());
 			}
-			result.collect(renderedObject, null);
+			return renderedObject;
 		}
+		return null;
 	}
 
 	@Nullable
@@ -473,8 +471,13 @@ public class MapSelectionHelper {
 
 	@Nullable
 	private RasterMapSymbol getRasterMapSymbol(@NonNull MapSymbolInformation symbolInfo) {
+		return getRasterMapSymbol(symbolInfo.getMapSymbol());
+	}
+
+	@Nullable
+	private RasterMapSymbol getRasterMapSymbol(@NonNull MapSymbol mapSymbol) {
 		try {
-			return RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+			return RasterMapSymbol.dynamic_pointer_cast(mapSymbol);
 		} catch (Exception ignore) {
 		}
 		return null;
@@ -493,8 +496,7 @@ public class MapSelectionHelper {
 		}
 	}
 
-	private boolean addClickableWay(@NonNull MapSelectionResult result,
-			@Nullable ClickableWay clickableWay) {
+	private boolean addClickableWay(@NonNull MapSelectionResult result,	@Nullable ClickableWay clickableWay) {
 		if (clickableWay != null && isUniqueClickableWay(result.getAllObjects(), clickableWay)) {
 			result.collect(clickableWay, clickableWayHelper.getContextMenuProvider());
 			return true;
@@ -514,7 +516,7 @@ public class MapSelectionHelper {
 		return names;
 	}
 
-	private void addGeometry(@Nullable BaseDetailsObject detailObj, @NonNull ObfMapObject obfMapObject) {
+	private void addGeometry(@Nullable BaseDetailsObject detailObj,	@NonNull ObfMapObject obfMapObject) {
 		if (detailObj != null && !detailObj.hasGeometry() && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
 			for (int k = 0; k < points31.size(); k++) {
@@ -522,16 +524,6 @@ public class MapSelectionHelper {
 				detailObj.addY(points31.get(k).getY());
 			}
 		}
-	}
-
-	@Nullable
-	private BaseDetailsObject findPlaceDetails(LatLon latLon, long id, @Nullable Collection<String> names, String wikidata) {
-		FullAmenitySearch fullAmenitySearch = app.getResourceManager().getAmenitySearcher();
-		BaseDetailsObject base = fullAmenitySearch.findPlaceDetails(latLon, id, names, wikidata);
-		if (base != null) {
-			return new BaseDetailsObject(base, LocaleHelper.getPreferredPlacesLanguage(app));
-		}
-		return null;
 	}
 
 	private boolean isUniqueGpxFileName(@NonNull List<SelectedMapObject> selectedObjects,
@@ -599,7 +591,7 @@ public class MapSelectionHelper {
 					CommonPreference<String> pref = settings.getCustomRenderProperty(attrName);
 					enabled = property.containsValue(pref.get());
 				} else {
-					enabled = settings.getRenderBooleanPropertyValue(attrName);
+					enabled = settings.getRenderBooleanPropertyValue(property);
 				}
 				if (enabled) {
 					filteredOsmRouteTypes.add(osmRouteType);
@@ -645,7 +637,10 @@ public class MapSelectionHelper {
 
 	private boolean addAmenity(@NonNull MapSelectionResult result,
 			@NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
-		BaseDetailsObject detail = findPlaceDetails(searchLatLon, object.getId(), object.getOriginalNames(), null);
+		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		AmenitySearcher.Request request = new AmenitySearcher.Request(object);
+		BaseDetailsObject detail = amenitySearcher.searchDetailedObject(request, settings);
 		if (detail != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
 				detail.setX(object.getX());

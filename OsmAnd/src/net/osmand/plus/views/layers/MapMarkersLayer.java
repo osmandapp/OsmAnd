@@ -52,7 +52,8 @@ import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandDashPathEffect;
-import net.osmand.search.FullAmenitySearch;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
@@ -456,7 +457,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		Object movableObject = contextMenuLayer.getMoveableObject();
 		if (movableObject instanceof MapMarker movableMarker) {
 			setMovableObject(movableMarker.getLatitude(), movableMarker.getLongitude());
-			drawMovableMarker(canvas, tileBox, movableMarker);
 		}
 		if (this.movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
 			cancelMovableObject();
@@ -544,18 +544,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 		return false;
-	}
-
-	private void drawMovableMarker(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @NonNull MapMarker movableMarker) {
-		PointF point = contextMenuLayer.getMovableCenterPoint(tileBox);
-		ShiftedBitmap bitmap = getMapMarkerShiftedBitmap(movableMarker.colorIndex);
-		float marginX = bitmap.getMarginX();
-		float marginY = bitmap.getMarginY();
-
-		canvas.save();
-		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		canvas.drawBitmap(bitmap.getBitmap(), point.x - marginX, point.y - marginY, bitmapPaint);
-		canvas.restore();
 	}
 
 	@Override
@@ -718,8 +706,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public Amenity getMapObjectByMarker(@NonNull MapMarker marker) {
 		if (marker.mapObjectName != null && marker.point != null) {
 			String mapObjName = marker.mapObjectName.split("_")[0];
-			FullAmenitySearch searcher = getApplication().getResourceManager().getAmenitySearcher();
-			return searcher.findAmenity(marker.point, null, Collections.singletonList(mapObjName), null);
+			ResourceManager resourceManager = getApplication().getResourceManager();
+			AmenitySearcher searcher = resourceManager.getAmenitySearcher();
+			AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
+
+			Amenity requestAmenity = new Amenity();
+			requestAmenity.setLocation(marker.point);
+
+			AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, Collections.singletonList(mapObjName));
+			return searcher.searchDetailedAmenity(request, settings);
 		}
 		return null;
 	}
@@ -761,13 +756,20 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
+	public Object getMoveableObjectIcon(@NonNull Object o) {
+		if (o instanceof MapMarker movableMarker) {
+			return getMapMarkerShiftedBitmap(movableMarker.colorIndex);
+		}
+		return null;
+	}
+
+	@Override
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
 	                                   @Nullable ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		MapMarker newObject = null;
-		if (o instanceof MapMarker) {
+		if (o instanceof MapMarker marker) {
 			MapMarkersHelper markersHelper = getApplication().getMapMarkersHelper();
-			MapMarker marker = (MapMarker) o;
 
 			PointDescription originalDescription = marker.getOriginalPointDescription();
 			if (originalDescription.isLocation()) {

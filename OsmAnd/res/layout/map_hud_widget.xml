@@ -100,7 +100,7 @@
 							android:textSize="@dimen/map_widget_text_size_small"
 							tools:text="km" />
 
-						<TextView
+						<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 							android:id="@+id/widget_text_small"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"

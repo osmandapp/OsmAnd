@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/map_style_button"
+		layout="@layout/list_item_icon_and_menu" />
+
+	<LinearLayout
+		android:id="@+id/switch_banner"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<include
+			layout="@layout/divider" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_marginTop="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding_round_medium"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/banner_icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="top|center_horizontal"
+				android:src="@drawable/ic_action_skiing" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:orientation="vertical">
+
+
+				<androidx.appcompat.widget.AppCompatTextView
+					android:id="@+id/title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/ski_route_switch_style_description"
+					android:textAppearance="@style/TextAppearance.ListItemTitle" />
+
+				<include layout="@layout/bottom_buttons" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+
+</LinearLayout>

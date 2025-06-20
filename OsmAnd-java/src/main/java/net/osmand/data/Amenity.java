@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import static net.osmand.gpx.GPXUtilities.*;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
@@ -18,7 +19,6 @@ import net.osmand.shared.wiki.WikiHelper;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.wiki.WikiCoreHelper;
 
 import org.json.JSONObject;
 
@@ -98,9 +98,6 @@ public class Amenity extends MapObject {
 	private String wikiIconUrl;
 	private String wikiImageStubUrl;
 	private int travelElo = 0;
-
-	private boolean containsFullInfo;
-
 	private Set<String> contentLocales;
 
 	public int getOrder() {
@@ -288,7 +285,10 @@ public class Amenity extends MapObject {
 	}
 
 	public void copyAdditionalInfo(Amenity amenity, boolean overwrite) {
-		Map<String, String> map = amenity.getInternalAdditionalInfoMap();
+		copyAdditionalInfo(amenity.getInternalAdditionalInfoMap(), overwrite);
+	}
+
+	public void copyAdditionalInfo(Map<String, String> map, boolean overwrite) {
 		if (overwrite || additionalInfo == null) {
 			setAdditionalInfo(map);
 		} else {
@@ -321,9 +321,9 @@ public class Amenity extends MapObject {
 					if (pt2 != null) {
 						String cat = pt2.getCategory().getKeyName();
 						if (poi_type.containsKey(cat)) {
-							val = poi_type.get(cat) + ";" + val;
+							key = poi_type.get(cat) + ";" + key;
 						}
-						poi_type.put(pt2.getCategory().getKeyName(), val);
+						poi_type.put(pt2.getCategory().getKeyName(), key);
 					} else {
 						text.put(key, val);
 					}
@@ -718,6 +718,10 @@ public class Amenity extends MapObject {
 		return subType != null && (subType.equals(ROUTE_TRACK_POINT) || subType.equals(ROUTE_ARTICLE_POINT));
 	}
 
+	public boolean isRouteArticle() {
+		return Algorithms.stringsEqual(ROUTE_ARTICLE, subType);
+	}
+
 	public boolean isSuperRoute() {
 		return additionalInfo != null && additionalInfo.containsKey(ROUTE_MEMBERS_IDS);
 	}
@@ -949,12 +953,23 @@ public class Amenity extends MapObject {
 		}
 	}
 
-	public boolean isContainsFullInfo() {
-		return containsFullInfo;
-	}
-
-	public void setContainsFullInfo(boolean containsFullInfo) {
-		this.containsFullInfo = containsFullInfo;
+	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
+		String typeName = amenity.getSubTypeStr();
+		String localName = amenity.getName(locale, transliterate);
+		if (typeName != null && localName.contains(typeName)) {
+			// type is contained in name e.g.
+			// localName = "Bakery the Corner"
+			// type = "Bakery"
+			// no need to repeat this
+			return localName;
+		}
+		if (Algorithms.isEmpty(localName) && amenity.isRouteTrack()) {
+			localName = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+		}
+		if (Algorithms.isEmpty(localName)) {
+			return typeName;
+		}
+		return typeName + " " + localName; // $NON-NLS-1$
 	}
 
 }

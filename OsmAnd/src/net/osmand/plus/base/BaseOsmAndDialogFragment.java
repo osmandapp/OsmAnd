@@ -17,9 +17,9 @@ import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.RequestThemeParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -110,7 +110,6 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment implements
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		RequestThemeParams params = new RequestThemeParams(appMode, true);
-		return app.getDaynightHelper().isNightMode(usedOnMap, params);
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 }

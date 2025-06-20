@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.builders;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.*;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
@@ -76,7 +77,7 @@ import java.util.Map.Entry;
 
 public class AmenityUIHelper extends MenuBuilder {
 
-	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
+	public static final Log LOG = PlatformUtil.getLog(AmenityUIHelper.class);
 
 	private static final DecimalFormat DISTANCE_FORMAT = new DecimalFormat("#.##");
 
@@ -94,17 +95,17 @@ public class AmenityUIHelper extends MenuBuilder {
 	private PoiCategory poiCategory;
 	private PoiType poiType;
 	private String subtype;
-	private boolean hasWiki = false;
 	private AmenityInfoRow cuisineRow = null;
 	private Map<String, List<PoiType>> poiAdditionalCategories = new HashMap<>();
 	private Map<String, List<PoiType>> collectedPoiTypes = new HashMap<>();
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 	private boolean lastBuiltRowIsDescription = false;
 
-	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang, Map<String, String> additionalInfoMap) {
+	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang,
+			@NonNull AdditionalInfoBundle infoBundle) {
 		super(mapActivity);
 		this.preferredLang = preferredLang;
-		this.additionalInfo = new AdditionalInfoBundle(app, additionalInfoMap);
+		this.additionalInfo = infoBundle;
 		this.metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
 	}
 
@@ -129,6 +130,9 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
 					|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
+				continue;
+			}
+			if (ROUTE_ARTICLE.equals(subtype) && key.contains(DESCRIPTION)) {
 				continue;
 			}
 			if (key.equals(NAME)) {
@@ -260,7 +264,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			poiCategory = MapPoiTypes.getDefault().getOtherPoiCategory();
 		}
 		subtype = additionalInfo.get(SUBTYPE);
-		hasWiki = false;
 		poiTypes = app.getPoiTypes();
 		cuisineRow = null;
 		poiAdditionalCategories = new HashMap<>();

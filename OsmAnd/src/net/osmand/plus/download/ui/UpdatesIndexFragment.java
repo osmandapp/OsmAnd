@@ -50,6 +50,7 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
@@ -242,7 +243,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		}
 		OsmandApplication app = getMyApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
 		if (app.getAppCustomization().showDownloadExtraActions()) {
 			int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
@@ -352,7 +353,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 					view.setTag(new ItemViewHolder(view, getMyActivity()));
 				} else if (viewType == OSM_LIVE_BANNER) {
 					OsmandApplication app = getMyApplication();
-					boolean nightMode = !app.getSettings().isLightContent();
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 					if (showSubscriptionPurchaseBanner) {
 						view = inflater.inflate(R.layout.osm_subscription_banner_list_item, parent, false);
 						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,

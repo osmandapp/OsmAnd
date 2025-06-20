@@ -85,6 +85,7 @@ import net.osmand.util.Algorithms;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -116,6 +117,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private TextView localRoutesMoreTv;
 
 	private View zoomButtonsView;
+	private MapButton zoomInButton;
+	private MapButton zoomOutButton;
 
 	private MapContextMenu menu;
 	private OnLayoutChangeListener containerLayoutListener;
@@ -506,8 +509,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			MapLayers mapLayers = mapActivity.getMapLayers();
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-			MapButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
-			MapButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+			zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+			zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
 			layer.addCustomizedDefaultMapButton(zoomInButton);
 			layer.addCustomizedDefaultMapButton(zoomOutButton);
 			zoomInButton.setUseDefaultAppearance(false);
@@ -665,7 +668,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (needMoreItem) {
 			items.add(TRANSPORT_BADGE_MORE_ITEM);
 		}
-		TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(app, items, nightMode);
+		TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(requireActivity(), items, nightMode);
 		adapter.setListener(position -> {
 			Object object = adapter.getItem(position);
 			MapActivity mapActivity = getMapActivity();
@@ -1354,9 +1357,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		menu.setMapZoom(0);
 
 		MapActivity activity = getMapActivity();
-		if (activity != null) {
+		if (activity != null && zoomInButton != null && zoomOutButton != null) {
 			MapLayers mapLayers = activity.getMapLayers();
-			mapLayers.getMapControlsLayer().clearCustomMapButtons();
+			List<MapButton> mapButtons = Arrays.asList(zoomInButton, zoomOutButton);
+			mapLayers.getMapControlsLayer().removeCustomMapButtons(mapButtons);
 		}
 	}
 
@@ -1617,6 +1621,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								titleProgressHeight = titleProgressContainer.getMeasuredHeight();
 							}
 
+							int transportBadgesHeight = 0;
+							View transportBadgesContainer = view.findViewById(R.id.transport_badges_container);
+							if (transportBadgesContainer.getVisibility() == View.VISIBLE) {
+								transportBadgesHeight = transportBadgesContainer.getMeasuredHeight();
+							}
 							if (menuTopViewHeight != 0) {
 								int titleHeight = line1.getLineCount() * line1.getLineHeight()
 										+ line2LineCount * line2LineHeight + menuTitleTopBottomPadding;
@@ -1625,14 +1634,19 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								}
 								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight
 										+ titleButtonHeight + customAddressLineHeight + downloadButtonsHeight
-										+ titleBottomButtonHeight + additionalButtonsHeight + titleProgressHeight + line3Height;
+										+ titleBottomButtonHeight + additionalButtonsHeight
+										+ titleProgressHeight + transportBadgesHeight + line3Height;
 								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight
 										- (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 							} else {
-								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight - customAddressLineHeight
-										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - additionalButtonsHeight - titleProgressHeight - line3Height;
+								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight()
+										- line2MeasuredHeight - customAddressLineHeight	- titleButtonHeight
+										- downloadButtonsHeight - titleBottomButtonHeight - additionalButtonsHeight
+										- titleProgressHeight - transportBadgesHeight - line3Height;
+
 								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
 										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
+
 								menuButtonsHeight = view.findViewById(R.id.context_menu_bottom_buttons).getHeight()
 										+ view.findViewById(R.id.buttons_bottom_border).getHeight()
 										+ view.findViewById(R.id.context_menu_buttons).getHeight();

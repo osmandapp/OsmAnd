@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import net.osmand.NativeLibrary;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.OnCompleteCallback;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
@@ -17,7 +17,6 @@ import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -59,11 +58,11 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		this.selectedObjects.addAll(selectedObjects);
 		objects.clear();
 		for (SelectedMapObject selectedMapObject : selectedObjects) {
-			Object selectedObj = selectedMapObject.object();
-			IContextMenuProvider contextObject = selectedMapObject.provider();
+			Object object = selectedMapObject.object();
+			IContextMenuProvider provider = selectedMapObject.provider();
 
-			MenuObject menuObject = MenuObjectUtils.createMenuObject(selectedObj, contextObject, latLon, getMapActivity());
-			if (menuObject.hasEmptyNameStr() && selectedObj instanceof NativeLibrary.RenderedObject) {
+			MenuObject menuObject = MenuObjectUtils.createMenuObject(object, provider, latLon, getMapActivity());
+			if (menuObject.hasEmptyNameStr() && object instanceof RenderedObject) {
 				// Do not display nameless RenderedObject(s). Explanation:
 				// Actual menuObject.nameStr is calculated from name-tags and iconRes.
 				// Default Map Style renders some objects using different icon names, for example:
@@ -76,11 +75,11 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			}
 			objects.add(menuObject);
 
-			if (contextObject instanceof ContextMenuLayer.IContextMenuProviderSelection) {
-				menuObject.setOrder(((ContextMenuLayer.IContextMenuProviderSelection) contextObject).getOrder(selectedObj));
+			if (provider instanceof IContextMenuProviderSelection providerSelection) {
+				menuObject.setOrder(providerSelection.getOrder(object));
 			}
 		}
-		Collections.sort(objects, new MultiSelectionMenuComparator(getAppMode()));
+		objects.sort(new MultiSelectionMenuComparator(getAppMode()));
 	}
 
 	private ApplicationMode getAppMode() {

@@ -286,7 +286,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		if (properties.osmid > 0) {
 			amenity.setId(createMapObjectIdFromOsmId(properties.osmid, Entity.EntityType.valueOf(properties.osmtype)));
 		} else {
-			amenity.setId(-Long.parseLong(featureData.properties.id));
+			amenity.setId(-Long.parseLong(properties.id));
 		}
 		//amenity.setTravelTopic(properties.wikiTitle);
 		//amenity.setWikiCategory(properties.wikiDesc);

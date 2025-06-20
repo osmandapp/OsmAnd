@@ -255,8 +255,8 @@
     <string name="local_index_no_items_to_do">Žiadne položky pre akciu: %1$s</string>
     <string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
     <string name="local_index_descr_title">Spravovať mapové súbory.</string>
-    <string name="local_index_mi_restore">Obnoviť</string>
-    <string name="local_index_mi_backup">Zálohovať (vypnúť)</string>
+    <string name="local_index_mi_restore">Zapnúť</string>
+    <string name="local_index_mi_backup">Vypnúť</string>
     <string name="local_index_poi_data">POI údaje</string>
     <string name="local_index_address_data">Adresné údaje</string>
     <string name="local_index_transport_data">Údaje hromadnej dopravy</string>
@@ -1277,7 +1277,7 @@
     <string name="everything_up_to_date">Všetky súbory sú aktuálne</string>
     <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (môže používať viac batérie a nemusí na niektorých starých zariadeniach fungovať).</string>
-    <string name="no_internet_connection">Nepodarilo sa stiahnuť, prosím skontrolujte pripojenie na Internet.</string>
+    <string name="no_internet_connection">Žiadne pripojenie na Internet</string>
     <string name="navigate_point_zone">Zóna</string>
     <string name="download_tab_downloads">Všetky sťahovania</string>
     <string name="download_tab_updates">Aktualizácie</string>
@@ -2031,13 +2031,13 @@
     <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
     <string name="rendering_attr_contourWidth_description">Hrúbka vrstevníc</string>
     <string name="rendering_attr_contourWidth_name">Hrúbka vrstevníc</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Skryť vodu</string>
     <string name="rendering_attr_contourDensity_description">Hustota vrstevníc</string>
     <string name="rendering_attr_contourDensity_name">Hustota vrstevníc</string>
     <string name="rendering_value_high_name">Vysoká</string>
     <string name="rendering_value_medium_w_name">Stredná</string>
     <string name="rendering_value_low_name">Nízka</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Skryť vodu</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Vodu</string>
     <string name="quick_action_navigation_voice">Hlas zapnúť/vypnúť</string>
     <string name="quick_action_navigation_voice_off">Zapnúť hlas</string>
     <string name="quick_action_navigation_voice_on">Stlmiť hlas</string>
@@ -2276,7 +2276,7 @@
     <string name="mapillary_action_descr">Zdieľajte vlastný pohľad z úrovne ulice cez Mapillary.</string>
     <string name="mapillary_widget_descr">Umožňuje rýchle prispievanie do Mapillary.</string>
     <string name="mapillary_descr">Online fotografie z ulíc pre každého. Objavte miesta, spolupracuje, zachyťte svet.</string>
-    <string name="plugin_mapillary_descr">Fotografie z úrovne ulice. Môžete prispieť aj vy. Pre zobrazenie existujúcich údajov ako vrstvu na mape zapnite \"Snímky z úrovne ulice\" v menu \"Nastaviť mapu\".</string>
+    <string name="plugin_mapillary_descr">Fotografie z úrovne ulice. Môžete prispieť aj vy. Pre zobrazenie existujúcich údajov ako vrstvy na mape zapnite \"Snímky z úrovne ulice\" v menu \"Nastaviť mapu\".</string>
     <string name="mapillary_widget">Nástroj Mapillary</string>
     <string name="mapillary_image">Obrázok Mapillary</string>
     <string name="distance_moving">Vzdialenosť opravená</string>
@@ -2943,8 +2943,8 @@
     <string name="shared_string_track_is_saved">Stopa %s je uložená</string>
     <string name="app_mode_camper">Obytný príves</string>
     <string name="app_mode_campervan">Obytné vozidlo</string>
-    <string name="rendering_attr_showLez_description">Zobraziť Zóny s nízkymi emisiami na mape. Neovplyvňuje navigáciu.</string>
-    <string name="rendering_attr_showLez_name">Zobraziť Zóny s nízkymi emisiami</string>
+    <string name="rendering_attr_showLez_description">Zobraziť zóny s nízkymi emisiami na mape. Neovplyvňuje navigáciu.</string>
+    <string name="rendering_attr_showLez_name">Zobraziť zóny s nízkymi emisiami</string>
     <string name="temporary_conditional_routing">Zohľadniť dočasné obmedzenia</string>
     <string name="shared_string_default">Predvolené</string>
     <string name="new_route_calculated_dist_dbg">Trasa: vzdialenosť %1$s, potrebný čas %2$s \nVýpočet: %3$.1f sekúnd, %4$d ciest, %5$d dlaždíc)</string>
@@ -3644,18 +3644,12 @@
     <string name="osm_edit_comment_note">Komentovať OSM poznámku</string>
     <string name="osm_login_descr">Prihláste sa metódou OAuth alebo pomocou mena a hesla v OSM.</string>
     <string name="shared_string_add_photo">Pridať foto</string>
-    <string name="register_on_openplacereviews">Zaregistrovať na
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Vytvoriť nový účet</string>
     <string name="register_opr_have_account">Už mám účet</string>
     <string name="shared_string_search_history">História hľadania</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorový čln</string>
     <string name="add_to_mapillary">Pridať do Mapillary</string>
-    <string name="add_photos_descr">OsmAnd zobrazuje fotografie z rôznych zdrojov:
-\nOpenPlaceReviews - fotografie bodov záujmu;
-\nMapillary - fotografie z ulice;
-\nWeb / Wikimedia - fotografie bodov záujmu špeficikované v údajoch OpenStreetMap.</string>
     <string name="shared_string_resources">Zdroje</string>
     <string name="approximate_file_size">Približná veľkosť súboru</string>
     <string name="select_data_to_export">Zvoľte údaje na export do súboru.</string>
@@ -3757,9 +3751,6 @@
     <string name="uploaded_count">Odoslané %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
     <string name="hillshade_slope_contour_lines">Vrstevnice / Tieňované svahy / Sklony svahov</string>
-    <string name="open_place_reviews_plugin_description">Prispievajte do projektu OpenPlaceReviews, napríklad fotografiami, recenziami, odkazmi o verejných miestach ako sú reštaurácie, hotely alebo múzeá.
-\n
-\nInštrukcie ako prispievať nájdete na našej webstránke %1$s.</string>
     <string name="activity_type_water_name">Voda</string>
     <string name="activity_type_winter_name">Zima</string>
     <string name="activity_type_snowmobile_name">Snežný skúter</string>
@@ -3842,7 +3833,7 @@
     <string name="shared_string_feet">stopy</string>
     <string name="srtm_unit_format">Variant jednotiek vrstevníc</string>
     <string name="srtm_download_list_help_message">OsmAnd poskytuje údaje vrstevníc v metroch a stopách. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
-    <string name="srtm_download_single_help_message">Prosím zvoľte variant. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
+    <string name="srtm_download_single_help_message">Prosím zvoľte variant. Pre následnú zmenu formátu budete musieť znovu stiahnuť tento súbor.</string>
     <string name="route_line_use_gradient_coloring">Čiara trasy je vyfarbená podľa svahu prevýšenia.</string>
     <string name="shared_string_min_height">Min. výška</string>
     <string name="shared_string_max_height">Max. výška</string>
@@ -4358,7 +4349,7 @@
     <string name="track_attach_to_the_roads_descr">Stopa bude prichytená k ceste pomocou offline máp, geometria stopy bude zmenená.</string>
     <string name="turn_on_public_transport_description">Zapnite pre zobrazenie liniek hromadnej dopravy na mape.</string>
     <string name="explore_plans">Preskúmať možnosti predplatného</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Skryť vojenské oblasti</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Vojenské oblasti</string>
     <string name="routing_attr_hazmat_category_description">Kategória nebezpečného nákladu / Zohľadniť obmedzenia pre nebezpečný náklad</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Bez obmedzení)</string>
     <string name="routing_attr_avoid_fords_name">Vyhnúť sa brodom</string>
@@ -5315,7 +5306,7 @@
     <string name="allow_display_on_top_description">Povoliť zobrazovanie textov na mape jeden cez druhý</string>
     <string name="show_debug_info">Zobraziť informácie pre ladenie</string>
     <string name="show_debug_info_description">Zobraziť grafické informácie o umiestnení každého textu na mape</string>
-    <string name="map_text">Mapové texty</string>
+    <string name="map_text">Vykresľovanie mapy</string>
     <string name="routing_attr_avoid_cobblestone_name">Vyhnúť sa okrúhlym kameňom</string>
     <string name="routing_attr_avoid_cobblestone_description">Vyhnúť sa okrúhlym kameňom</string>
     <string name="steps_per_minute_unit">k/m</string>
@@ -5402,10 +5393,6 @@
     <string name="energy_avg_info_description">Úroveň batérie za minútu: %1$s
 \nSpotreba energie (mAh): %2$s</string>
     <string name="rendering_avg_info">Štatistika vykresľovania (priemer za 1 / 5 / 15 minút)</string>
-    <string name="rendering_avg_info_description">FPS za posledných 1k snímok: %1$s
-\nProcesor: %2$s
-\nGrafika 1k: %3$s
-\nNečinné 1k: %4$s</string>
     <string name="choose_map_orientation">Zvoľte orientáciu mapy</string>
     <string name="rendering_attr_alpineHiking_name">Stupeň náročnosti turistických trás</string>
     <string name="driving_region_uk">Veľká Británia a podobné krajiny</string>
@@ -5623,7 +5610,7 @@
     <string name="obd_nothing_found_description">Prosím skontrujte nasledujúce:\n – Zabezpečte, že je zapnutý Bluetooth\n – Motor vozidla beží\n – Zabezpečte, že je vaše zariadenie v dosahu skeneru.</string>
     <string name="obd_device_forget_sensor">Zabudnúť skener</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="obd_bluetooth_off_description">Zapnite Bluetooth hľadanie a pripojenie skenerov.</string>
+    <string name="obd_bluetooth_off_description">Zapnite Bluetooth pre hľadanie a pripojenie skenerov.</string>
     <string name="obd_searching_text_description">Udržujte svoje zariadenie blízko skeneru. Uistite sa, že motor vozidla beží.</string>
     <string name="obd_searching_text">Hľadanie skenerov</string>
     <string name="connect_obd_instructions_step4">Stlačte \'%1$s\' a zvoľte váš skener zo zoznamu.</string>
@@ -5758,4 +5745,59 @@
     <string name="poi_source">Zdroj bodu záujmu</string>
     <string name="destination_first">Najprv cieľ</string>
     <string name="display_priority">Priorita zobrazenia</string>
+    <string name="grid_color">Farba mriežky</string>
+    <string name="shared_string_edges">Okraje</string>
+    <string name="labels_position">Umiestnenie nápisov</string>
+    <string name="routing_attr_allow_ferries_name">Povoliť trajekty</string>
+    <string name="routing_attr_allow_ferries_description">Povoliť navigáciu po trasách trajektov</string>
+    <string name="wiki_around">Populárne miesta v okolí</string>
+    <string name="customize_grid_color">Prispôsobiť farbu mriežky</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="read_on_wiki">Prečítať na Wikipédii</string>
+    <string name="prediction_time_description">Ikona polohy v OsmAnde je animovaná podľa bodov získaných z GPS (raz za sekundu). Môže byť viditeľné drobné oneskorenie jej pohybu, najmä ak sa používateľ rýchlo pohybuje alebo je signál GPS nestabilný.</string>
+    <string name="prediction_time_advanced_description">Upraviť čas predpovede pre minimalizáciu oneskorenia.</string>
+    <string name="prediction_time">Čas predpovede</string>
+    <string name="shared_string_no_animation">Žiadna animácia</string>
+    <string name="position_animation_empty_banner_description">Ikona polohy sa presunie na novú prijatú pozíciu bez animácie.</string>
+    <string name="position_animation">Animácia polohy</string>
+    <string name="route_part_of">Súčasť</string>
+    <string name="route_members">Členy</string>
+    <string name="multipoligon_related">Súvisiace</string>
+    <string name="cant_load_map_styles">Nepodarilo sa načítať mapové štýly.</string>
+    <string name="add_to_navigation">Pridať do navigácie</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Body trasy GPX (%1$d) skopírované do obľúbených položiek.</string>
+    <string name="msg_favorites_skipped_as_existing">Obľúbené body (%1$d) boli preskočené pretože už existovali.</string>
+    <string name="save_to_device_error">Chyba pri ukladaní do zariadenia</string>
+    <string name="save_to_device">Uložiť do zariadenia</string>
+    <string name="saved_to_device">Uložené do zariadenia</string>
+    <string name="travel_guides">Sprievodcovia</string>
+    <string name="shared_string_switch">Prepnúť</string>
+    <string name="sensor_data">Údaje zo senzorov</string>
+    <string name="battery_level">Úroveň batérie</string>
+    <string name="set_home">Nastaviť domov</string>
+    <string name="years_3">Tri roky</string>
+    <string name="three_years_subscription">Trojročné predplatné</string>
+    <string name="battery">batéria</string>
+    <string name="deleting">Vymazávanie…</string>
+    <string name="release_5_1">• Pridaná podpora pre webové a multi-platformové nákupy\n\n • Teplotné jednotky boli presunutú do Všeobecných nastavení pre jednoduchší prístup\n\n • Pridaný ukazovateľ úrovne batérie pre sensory BLE\n\n • Nvé intuitévnejšie rozhranie pre výber bodov v navigácii\n\n • Zlepšená viditeľnosť nástrojov s novým obrysom\n\n • Pridaný analyzátor stúpania/klesania\n\n • Rozšírená integrácia Wikipédie a Wikivoyage pre viac bodov záujmu.</string>
+    <string name="osm_live_payment_renews_3_years">Obnovuje sa každé tri roky</string>
+    <string name="osm_live_payment_3_years_title">Každé tri roky</string>
+    <string name="ski_route_switch_style_description">Skúmajte lyžiarske svahy, vleky a ďalšie objekty s mapovým štýlom Zima a lyžovanie.</string>
+    <string name="set_intermediate_point">Nastaviť prechodný bod</string>
+    <string name="set_start_point">Nastaviť počiatočný bod</string>
+    <string name="hmd_promo_description_years">Bezplatný prístup k funkciám ako neobmedzené sťahovanie máp, 3D reliéf, atď. na %1$s rokov</string>
+    <string name="hmd_promo_years">Propagačná akcia HMD na %1$s roky</string>
+    <string name="deleting_history">Odstraňovanie histórie…</string>
+    <string name="show_debug_tile">Zobraziť informácie o dlaždiciach</string>
+    <string name="show_debug_tile_description">Zobraziť informácie o mapových symboloch jednotlivých dlaždíc</string>
+    <string name="show_symbols_debug_info">Zobraziť informácie ladenia pre symboly</string>
+    <string name="shared_string_flat">Rovina</string>
+    <string name="uphill_downhill_split">Do kopca / Z kopca</string>
+    <string name="read_on">Prečítať na %1$s</string>
+    <string name="shared_string_split_by">Rozdeliť podľa</string>
+    <string name="set_parking_position">Nastaviť polohu parkovania</string>
+    <string name="set_work">Nastaviť prácu</string>
+    <string name="deactivated_map">Vypnutá mapa</string>
+    <string name="unit_of_temperature_description">Zvolené jednotky budú použité na všetky údaje o teplote v zvolenom profile.</string>
+    <string name="suggest_activate_map_msg">Mapa %1$s je vypnutá,\nzapnite (obnovte) ju pre zobrazenie tejto oblasti.</string>
 </resources>

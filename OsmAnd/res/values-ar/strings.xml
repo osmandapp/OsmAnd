@@ -1028,7 +1028,7 @@
     <string name="download_tab_downloads">تحميلات متاحة</string>
     <string name="download_tab_updates">التحديثات</string>
     <string name="download_tab_local">على الهاتف</string>
-    <string name="no_internet_connection">تعذر التنزيل ، يرجى التحقق من اتصالك بالإنترنت.</string>
+    <string name="no_internet_connection">لا يوجد اتصال بالإنترنت</string>
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
     <string name="use_opengl_render">استخدام عرض 3D</string>
     <string name="use_opengl_render_descr">استخدام أداء الرسومات المفتوحة 3D (قد لا تعمل على بعض الأجهزة).</string>
@@ -1070,7 +1070,7 @@
     <string name="voice_provider">التوجيه الصوتي</string>
     <string name="enable_proxy_title">تمكين بروكسي HTTP</string>
     <string name="enable_proxy_descr">تكوين بروكسي HTTP لكافة طلبات شبكة الاتصال.</string>
-    <string name="int_hour">h</string>
+    <string name="int_hour">س</string>
     <string name="duration">المدة</string>
     <string name="distance">المسافة</string>
     <string name="index_tours">الجولات</string>
@@ -1654,7 +1654,7 @@
     <string name="si_m_s">م/ث</string>
     <string name="si_min_km">دقيقة/كم</string>
     <string name="si_min_m">دقيقة/ميل</string>
-    <string name="si_nm_h">ميل بحري في الساعة (عقدة)</string>
+    <string name="si_nm_h">الأميال البحرية في الساعة (العقدة)</string>
     <string name="min_mile">د/م</string>
     <string name="min_km">د/كم</string>
     <string name="m_s">م/ث</string>
@@ -2032,7 +2032,7 @@
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">صربي (لاتيني)</string>
     <string name="lang_zh_hk">الصينية (هونج كونج)</string>
-    <string name="rendering_attr_hideWaterPolygons_description">ماء</string>
+    <string name="rendering_attr_hideWaterPolygons_description">إخفاء المياه</string>
     <string name="rendering_attr_contourWidth_description">عرض الخطوط الكنتورية</string>
     <string name="rendering_attr_contourWidth_name">عرض الخطوط الكنتورية</string>
     <string name="rendering_attr_contourDensity_description">كثافة الخط الكنتوري</string>
@@ -2040,7 +2040,7 @@
     <string name="rendering_value_high_name">عال</string>
     <string name="rendering_value_medium_w_name">وسط</string>
     <string name="rendering_value_low_name">منخفض</string>
-    <string name="rendering_attr_hideWaterPolygons_name">إخفاء المياه</string>
+    <string name="rendering_attr_hideWaterPolygons_name">المياه</string>
     <string name="configure_screen_quick_action">إجراءات سريعة</string>
     <string name="quick_action_item_action">إجراء %d</string>
     <string name="quick_action_item_screen">شاشة %d</string>
@@ -2660,7 +2660,7 @@
     <string name="add_home">إضافة المنزل</string>
     <string name="add_work">إضافة العمل</string>
     <string name="work_button">العمل</string>
-    <string name="metric_ton">t</string>
+    <string name="metric_ton">طُن</string>
     <string name="shared_string_capacity">السعة</string>
     <string name="shared_string_width">العرض</string>
     <string name="shared_string_height">الارتفاع</string>
@@ -3695,8 +3695,6 @@
     <string name="osm_edit_comment_note">تعليق ملاحظة OSM</string>
     <string name="osm_login_descr">سجل دخولك باستخدام طريقة المصادقة الآمنة OAuth أو استخدم اسم مستخدم OSM وكلمة المرور.</string>
     <string name="shared_string_add_photo">إضافة صورة</string>
-    <string name="register_on_openplacereviews">سجل في 
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">إنشاء حساب جديد</string>
     <string name="register_opr_have_account">لدي حساب بالفعل</string>
     <string name="app_mode_kayak">كاياك (قوارب صغيرة فردية)</string>
@@ -3709,10 +3707,6 @@
     <string name="file_size_needed_for_import">مطلوب للاستيراد</string>
     <string name="export_not_enough_space">لا يوجد مساحة كافية</string>
     <string name="add_to_mapillary">أضف إلى مابيلاي</string>
-    <string name="add_photos_descr">يعرض صورا من عدة مصادر: 
-\nOpenPlaceReviews - صور POI ؛ 
-\nMapillary - صور على مستوى الشارع ؛ 
-\nالويب / ويكيميديا - صور POI المحددة في بيانات OpenStreetMap.</string>
     <string name="select_groups_for_import">حدد المجموعات التي سيتم استيرادها.</string>
     <string name="select_items_for_import">حدد العناصر التي سيتم استيرادها.</string>
     <string name="use_dev_url_descr">قم بالتبديل لاستخدام dev.openstreetmap.org بدلاً من openstreetmap.org لاختبار تحميل OSM Note / POI / GPX.</string>
@@ -3804,9 +3798,6 @@
     <string name="uploaded_count">تم رفع %1$d من %2$d</string>
     <string name="toast_select_edits_for_upload">تحديد التعديلات للتحميل</string>
     <string name="hillshade_slope_contour_lines">التضاريس / الانحدار / الخطوط المحيطية</string>
-    <string name="open_place_reviews_plugin_description">قدم مساهمات في مشروع OpenPlaceReviews ، مثل الصور أو المراجعات أو الروابط للأماكن العامة مثل المطاعم أو الفنادق أو المتاحف.
-\n
-\nاعثر على إرشادات حول كيفية المساهمة على موقعنا %1$s.</string>
     <string name="activity_type_water_name">ماء</string>
     <string name="activity_type_winter_name">شتاء</string>
     <string name="activity_type_snowmobile_name">الثلج</string>
@@ -4429,7 +4420,7 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (لا قيود)</string>
     <string name="routing_attr_avoid_fords_description">تجنب الوحل</string>
     <string name="map_widget_trip_recording_duration">المدة</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">إخفاء المناطق العسكرية</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">المناطق العسكرية</string>
     <string name="rendering_attr_hideMilitaryAreas_description">إخفاء المناطق العسكرية</string>
     <string name="explore_plans">استكشف الخطط</string>
     <string name="map_widget_true_bearing">تأثير حقيقي</string>
@@ -5078,7 +5069,7 @@
     <string name="help_article_navigation_setup_markers_navigation_name">التنقل بعلامات التوجيه المباشر</string>
     <string name="help_article_navigation_setup_route_navigation_name">تحضير الطريق</string>
     <string name="help_article_purchases_ios_name">مشتريات iOS</string>
-    <string name="help_article_troubleshooting_maps_data_name">بيانات الخرائط</string>
+    <string name="help_article_troubleshooting_maps_data_name">الخرائط والبيانات</string>
     <string name="help_article_widgets_map_buttons_name">أزرار الخريطة</string>
     <string name="send_logcat_log_descr">تفاصيل ملف السجل</string>
     <string name="help_article_navigation_routing_train_routing_name">توجيه القطار</string>
@@ -5368,7 +5359,7 @@
     <string name="allow_display_on_top_description">السماح بعرض نصوص الخريطة فوق بعضها البعض</string>
     <string name="show_debug_info">إظهار معلومات التصحيح</string>
     <string name="show_debug_info_description">عرض معلومات رسومية حول موضع كل نص للخريطة</string>
-    <string name="map_text">نصوص الخريطة</string>
+    <string name="map_text">عرض الخريطة</string>
     <string name="routing_attr_avoid_cobblestone_name">تجنب الحصى</string>
     <string name="routing_attr_avoid_cobblestone_description">تجنب الحصى</string>
     <string name="release_4_8">• خيار تلوين التضاريس الجديد \"الارتفاع\" \n \n • لوحات الألوان المخصصة للتضاريس، والمسارات، والطرق \n \n • متغير ثلاثي الأبعاد لأيقونات موضع الموقع \n \n • يمكن الآن تخصيص الإجراءات السريعة للوحات المفاتيح الخارجية \n \n • الطقس: تحديث واجهة المستخدم، وأضاف الرسوم المتحركة الرياح \n \n • تحسينات المسار ثلاثي الأبعاد: خيارات التصور والتلوين الجديدة \n \n • توسيع نطاق اختيار الطرق السياحية على الخريطة \n \n • تمت إضافة خيار موضوع التطبيق لمتابعة وضع الخريطة \n \n • احصائيات المسار الثابت، والفرز والبحث \n \n • تحرير OSM: حذف طريقة ترخيص تسجيل الدخول / كلمة المرور \n \n • التبديل إلى صفحة مشاركة النظام بدءا من Android 14</string>
@@ -5634,7 +5625,7 @@
     <string name="show_minor_turns">عرض على التقاطعات الثانوية عند القيادة بشكل مستقيم</string>
     <string name="show_minor_turns_descr">سيتم عرض المسارات على جميع التقاطعات المارة بغض النظر عن التعليمات الصوتية</string>
     <string name="obd_searching_text">البحث عن الماسحات الضوئية</string>
-    <string name="obd_bluetooth_off_description">قم بتشغيل البلوتوث للبحث عن الماسحات الضوئية وتوصيلها.</string>
+    <string name="obd_bluetooth_off_description">قم بتشغيل البلوتوث للعثور على الماسحات الضوئية والاتصال بها.</string>
     <string name="obd_searching_text_description">يرجى إبقاء جهازك قريبًا من الماسح الضوئي. تأكد من تشغيل محرك السيارة.</string>
     <string name="obd_device_forget_sensor">حذف الماسح الضوئي</string>
     <string name="obd_device_forget_sensor_description">سيتم إزالة الماسح الضوئي من القائمة. ستتمكن من إقران هذا الماسح الضوئي مرة أخرى في أي وقت.</string>
@@ -5792,5 +5783,68 @@
     <string name="prime_meridian">خط الطول الأول</string>
     <string name="meridian_180">خط الطول 180</string>
     <string name="show_image_previews">إظهار معاينات الصور</string>
-    <string name="release_5_0">• اكتشف أفضل النقاط المهمة مع وضع الاستكشاف الجديد\n\n• جميع مسارات OSM، متاحة الآن للبحث! المشي لمسافات طويلة، ركوب الدراجات، الدراجات الجبلية، والمزيد\n\n• أداة تنقل جديدة تجمع بين سهم الانعطاف وتعليمات التنقل\n\n• أداة معلومات المسار الحالي: تعرض وقت الوصول المتوقع، ووقت الوصول، والمسافة\n\n• حدد منحدرات التزلج ومسارات الدراجات الجبلية على الخريطة للحصول على معلومات مفصلة\n\n• إمكانية تحديد حجم الأداة للوحتين اليمنى واليسرى\n\n• إضافة شبكة إحداثيات مع إحداثيات جغرافية\n\n• إمكانية تخصيص المظهر الافتراضي للمجموعات المفضلة\n\n• أندرويد أوتو: عرض وقت الوصول المتوقع والمسافة إلى نقطة الطريق التالية؛ تظهر أسماء المدن الآن في نتائج البحث\n\n• يمكن الآن اكتشاف القمم البارزة عبر الخريطة والبحث\n\n• ارتفاعات قمم الجبال بالأقدام\n\n• إضافة: المنحدرات ومناطق التسلق على الخريطة\n\n• تم تحسين البحث عن العناوين في الولايات المتحدة الأمريكية\n\n• إضافة ترجمة عبرية للملاحة</string>
+    <string name="release_5_0">• اكتشف نقاط الاهتمام الأعلى تصنيفًا مع وضع الاستكشاف الجديد\n\n• جميع مسارات OSM الآن قابلة للبحث! رياضة المشي، ركوب الدراجات، الدراجات الجبلية، والمزيد\n\n• أداة التنقل الجديدة تجمع بين سهم التحول والتعليمات الخاصة بالتوجيه\n\n• أداة معلومات المسار الحالية: تعرض الوقت المتوقع للوصول، وقت الوصول، والمسافة\n\n• اختيار المنحدرات للتزلج ومسارات الدراجات الجبلية على الخريطة للحصول على معلومات تفصيلية\n\n• إمكانية اختيار حجم الأداة للوحين الأيسر والأيمن\n\n• إضافة شبكة الإحداثيات مع الإحداثيات الجغرافية\n\n• إضافة إمكانية تخصيص المظهر الافتراضي لمجموعات المفضلة\n\n• أندرويد أوتو: عرض الوقت المتوقع للوصول والمسافة إلى النقطة التالية؛ أسماء المدن تظهر الآن في نتائج البحث\n\n• القِمم البارزة أصبحت الآن قابلة للاكتشاف عبر الخريطة والبحث\n\n• ارتفاعات القمم الجبلية بالأقدام\n\n• إضافة: الصخور ومناطق التسلق على الخريطة\n\n• تحسين البحث عن العناوين في الولايات المتحدة الأمريكية\n\n• إضافة اللغة العبرية للنطق التلقائي أثناء التنقل (TTS)</string>
+    <string name="shared_string_no_animation">لا مؤثرات حركية</string>
+    <string name="shared_string_offline_only">فقط دون اتصال بالإنترنت</string>
+    <string name="routing_attr_allow_ferries_description">السماح بالعبور عبر ممرات العبّارات البحرية</string>
+    <string name="position_animation_empty_banner_description">تنتقل أيقونة تحديد المواقع إلى كل موقع جديد يتم استلامه بدون أي مؤثرات حركية.</string>
+    <string name="routing_attr_allow_ferries_name">السماح للعبّارات البحرية</string>
+    <string name="shared_string_online_only">فقط عبر الإنترنت</string>
+    <string name="add_widget">إضافة أداة (عنصر واجهة مستخدم)</string>
+    <string name="wiki_around">الأماكن المشهورة القريبة</string>
+    <string name="wikidata">ويكيداتا Wikidata</string>
+    <string name="read_on_wiki">اقرأ على مستوى ويكيبيديا</string>
+    <string name="prediction_time_advanced_description">عدل الوقت التوقع لتقليل التأخير.</string>
+    <string name="prediction_time">وقت التوقع</string>
+    <string name="position_animation">مؤثرات الموقع الحركية</string>
+    <string name="destination_first">الوجهة أولا</string>
+    <string name="display_priority">أولوية العرض</string>
+    <string name="poi_source">مصدر نقاط الاهتمام (POI)</string>
+    <string name="intermediate_first">المتوسط أولاً</string>
+    <string name="grid_color">لون الشبكة</string>
+    <string name="cant_load_map_styles">تعذر تحميل أنماط الخريطة.</string>
+    <string name="shared_string_edges">الحواف</string>
+    <string name="labels_position">موضع التسميات</string>
+    <string name="saved_to_device">تم الحفظ على الجهاز</string>
+    <string name="route_members">أعضاء</string>
+    <string name="multipoligon_related">متعلّق</string>
+    <string name="prediction_time_description">تتحرك أيقونة الموقع في تطبيق OsmAnd مع كل نقطة بيانات GPS يتم استلامها (مرة كل ثانية). قد يكون هناك تأخير طفيف في حركتها، خاصة عندما يتحرك المستخدم بسرعة أو عندماتتقلب إشارة GPS.</string>
+    <string name="customize_grid_color">تخصيص لون الشبكة</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">تم نسخ نقاط مسار GPX (%1$d) إلى المفضلة.</string>
+    <string name="msg_favorites_skipped_as_existing">تم تخطي النقاط المفضلة (%1$d) باعتبارها موجودة بالفعل.</string>
+    <string name="add_to_navigation">أضف إلى التنقل</string>
+    <string name="save_to_device_error">خطأ في الحفظ على الجهاز</string>
+    <string name="save_to_device">الحفظ على الجهاز</string>
+    <string name="route_part_of">جزء من</string>
+    <string name="row_height">ارتفاع الصف</string>
+    <string name="travel_guides">أدلة إرشادية</string>
+    <string name="show_debug_tile">عرض معلومات المربع</string>
+    <string name="show_debug_tile_description">عرض معلومات حول رموز الخريطة لكل مربع</string>
+    <string name="deactivated_map">خريطة معطلة</string>
+    <string name="suggest_activate_map_msg">تم إلغاء تنشيط خريطة %1$s، \nقم بتنشيطها لعرض هذه المنطقة.</string>
+    <string name="show_symbols_debug_info">إظهار معلومات تصحيح أخطاء الرموز</string>
+    <string name="unit_of_temperature_description">سيتم تطبيق الوحدات المحددة على جميع البيانات المتعلقة بدرجة الحرارة في الملف الشخصي الحالي.</string>
+    <string name="shared_string_split_by">تقسيم على</string>
+    <string name="uphill_downhill_split">الصعود / الهبوط</string>
+    <string name="shared_string_flat">مسطح</string>
+    <string name="read_on">اقرأ على %1$s</string>
+    <string name="release_5_1">• دعم مضاف للمشتريات عبر النت والمنصات المتعددة\n\n• نقل وحدات درجة الحرارة إلى الاعدادات العامة لتيسير الوصول إليها\n\n• اظافة مؤشر مستوى البطاريات لمجسات BLE\n\n• واجهة مستخدم جديدة وأكثر سهولة في الاستخدام لاختيار النقاط في التنقل\n\n• تم تحسين رؤية الأدوات مع مخطط تفصيلي جديد\n\n• تمت إضافة محلل الصعود/الهبوط\n\n• توسيع نطاق التكامل بين ويكيبيديا وويكيفواياج للحصول على المزيد من نقاط الاهتمام.</string>
+    <string name="set_parking_position">تحديد موقف السيارة</string>
+    <string name="osm_live_payment_renews_3_years">يتجدد كل ثلاث سنوات</string>
+    <string name="years_3">ثلاث سنوات</string>
+    <string name="three_years_subscription">الاشتراك لمدة ثلاث سنوات</string>
+    <string name="osm_live_payment_3_years_title">كل ثلاث سنوات</string>
+    <string name="hmd_promo_years">عرض HMD ترويجي لـ %1$s سنوات</string>
+    <string name="deleting">جار الحذف…</string>
+    <string name="hmd_promo_description_years">حرية الوصول إلى المزايا بما في ذلك تحميل الخرائط غير المحدودة، والإغاثة ثلاثية الأبعاد وغيرها، لمدة %1$s سنوات</string>
+    <string name="deleting_history">حذف السجل…</string>
+    <string name="shared_string_switch">تبديل</string>
+    <string name="ski_route_switch_style_description">استكشف منحدرات التزلج، المصعد و غيرها مع نمط خريطة الشتاء و التزلج.</string>
+    <string name="battery">بطارية</string>
+    <string name="battery_level">مستوى البطارية</string>
+    <string name="set_work">تحديد مكان العمل</string>
+    <string name="set_home">تحديد مكان البيت</string>
+    <string name="sensor_data">بيانات المستشعر</string>
+    <string name="set_start_point">تحديد نقطة الانطلاق</string>
+    <string name="set_intermediate_point">تحديد النقطة الوسيطة</string>
 </resources>

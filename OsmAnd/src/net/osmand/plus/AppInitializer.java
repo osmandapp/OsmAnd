@@ -1,9 +1,35 @@
 package net.osmand.plus;
 
 import static net.osmand.IndexConstants.SETTINGS_DIR;
-import static net.osmand.plus.AppInitEvents.*;
+import static net.osmand.plus.AppInitEvents.BROUTER_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.BUNDLED_OSF_IMPORTED;
+import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.GPX_DB_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.INDEXES_RELOADED;
+import static net.osmand.plus.AppInitEvents.INDEX_REGION_BOUNDARIES;
+import static net.osmand.plus.AppInitEvents.INIT_RENDERERS;
+import static net.osmand.plus.AppInitEvents.LIVE_UPDATES_ALERTS_CHECKED;
+import static net.osmand.plus.AppInitEvents.LOAD_GPX_TRACKS;
+import static net.osmand.plus.AppInitEvents.MARKERS_GROUPS_SYNCED;
+import static net.osmand.plus.AppInitEvents.NATIVE_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.POI_FILTERS_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.POI_TYPES_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.ROUTING_CONFIG_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.SAVE_GPX_TRACKS;
+import static net.osmand.plus.AppInitEvents.SEARCH_UI_CORE_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.TASK_CHANGED;
+import static net.osmand.plus.AppInitEvents.TRAVEL_INITIALIZED;
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.*;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,6 +38,7 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.os.Build;
 
@@ -40,7 +67,13 @@ import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
-import net.osmand.plus.helpers.*;
+import net.osmand.plus.helpers.ColorPaletteHelper;
+import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.LauncherShortcutsHelper;
+import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.Model3dHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -68,9 +101,12 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -98,12 +134,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 public class AppInitializer implements IProgress {
 
@@ -312,6 +351,7 @@ public class AppInitializer implements IProgress {
 		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
+		app.searchHistoryHelper = startupInit(new SearchHistoryHelper(app), SearchHistoryHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
 		app.osmandMap = startupInit(new OsmandMap(app), OsmandMap.class);
 
@@ -494,7 +534,11 @@ public class AppInitializer implements IProgress {
 		try {
 			notifyStart();
 			startBgTime = System.currentTimeMillis();
-			app.getRendererRegistry().initRenderers();
+			if (isFirstTime()) {
+				importBundledSettingsSync();
+				notifyEvent(BUNDLED_OSF_IMPORTED);
+			}
+			app.getRendererRegistry().initRenderers(warnings);
 			notifyEvent(INIT_RENDERERS);
 			// native depends on renderers
 			initOpenGl();
@@ -525,7 +569,7 @@ public class AppInitializer implements IProgress {
 			checkLiveUpdatesAlerts();
 			connectToBRouter();
 		} catch (RuntimeException e) {
-			e.printStackTrace();
+			LOG.error(e);
 			warnings.add(e.getMessage());
 		} finally {
 			appInitializing = false;
@@ -673,6 +717,73 @@ public class AppInitializer implements IProgress {
 			app.getResourceManager().initMapBoundariesCacheNative();
 		}
 		notifyEvent(NATIVE_INITIALIZED);
+	}
+
+	private void importBundledSettingsSync() {
+		AssetManager assets = app.getAssets();
+		String[] osfFiles;
+		try {
+			osfFiles = assets.list("osf");
+			if (osfFiles == null) {
+				return;
+			}
+		} catch (IOException e) {
+			return;
+		}
+		Arrays.sort(osfFiles);
+
+		File cacheDir = app.getCacheDir();
+		for (String filename : osfFiles) {
+			String assetOsfPath = "osf/" + filename;
+			File tempOsfFile = new File(cacheDir, filename + ".tmp");
+			try {
+				ResourceManager.copyAssets(assets, assetOsfPath, tempOsfFile, null);
+				importBundledOsf(tempOsfFile, 30);
+			} catch (IOException e) {
+				LOG.error("Error importing bundled settings file: " + assetOsfPath, e);
+			}
+			LOG.info("Imported bundled settings file: " + filename);
+		}
+	}
+
+	private void importBundledOsf(@NonNull File file, int timeoutSec) {
+		final Semaphore semaphore = new Semaphore(0);
+		long start = System.currentTimeMillis();
+		app.getFileSettingsHelper().collectSettings(file, "", 1, (succeed, empty, items) -> {
+			if (succeed && !items.isEmpty()) {
+				for (SettingsItem item : items) {
+					item.setShouldReplace(true);
+				}
+				app.getFileSettingsHelper().importSettings(file, items, "", 1, new ImportListener() {
+							@Override
+							public void onImportFinished(boolean succeed, boolean needRestart,
+														 @NonNull List<SettingsItem> importedItems) {
+								if (!succeed) {
+									LOG.error("Import bundled settings failed for " + file.getName());
+								}
+								LOG.info("Import bundled settings done for " + file.getName() + " in " + (System.currentTimeMillis() - start) + " ms");
+								semaphore.release();
+							}
+						}
+				);
+			} else {
+				LOG.error("Error importing bundled settings file: " + file.getName() + " succeed=" + succeed
+						+ " items=" + items.size() + " empty=" + empty);
+				semaphore.release();
+			}
+		}
+		);
+
+		try {
+			boolean acquired = semaphore.tryAcquire(timeoutSec, TimeUnit.SECONDS);
+			if (!acquired) {
+				LOG.warn("Import bundled settings (Semaphore) still running after "
+						+ timeoutSec + " seconds, continuing startup.");
+			}
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			LOG.error("Interrupted while waiting for settings import (Semaphore)", e);
+		}
 	}
 
 	public void notifyStart() {

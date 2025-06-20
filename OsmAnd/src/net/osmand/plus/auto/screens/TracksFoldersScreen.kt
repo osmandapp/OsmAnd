@@ -17,6 +17,7 @@ import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.configmap.tracks.TrackTabsHelper
+import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.settings.enums.TracksSortMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -101,7 +102,8 @@ class TracksFoldersScreen(
                 break
             }
             val title = trackTab.getName()
-            val iconColorId = ColorUtilities.getDefaultIconColorId(app.daynightHelper.isNightMode)
+            val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
+            val iconColorId = ColorUtilities.getDefaultIconColorId(nightMode)
             val iconDrawable = app.uiUtilities.getIcon(trackTab.type.iconId, iconColorId)
             val icon = CarIcon.Builder(
                 IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(iconDrawable))).build()
