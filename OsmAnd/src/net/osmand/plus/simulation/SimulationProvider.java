@@ -76,7 +76,7 @@ public class SimulationProvider {
 					int prx = (int) (st31x + (end31x - st31x) * (meters / dd));
 					int pry = (int) (st31y + (end31y - st31y) * (meters / dd));
 					if (prx == 0 || pry == 0) {
-						LOG.error(String.format(Locale.US, "proceedMeters zero x/y (%d,%d)", prx, pry));
+						LOG.error(String.format(Locale.US, "proceedMeters zero x or y (%d,%d)", prx, pry));
 						return -1;
 					}
 					location.setLongitude(MapUtils.get31LongitudeX(prx));

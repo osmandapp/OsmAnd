@@ -59,7 +59,6 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class OsmAndLocationProvider implements SensorEventListener {
@@ -355,9 +354,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public static boolean isPointAccurateForRouting(net.osmand.Location loc) {
-//		if (loc != null && SimulationProvider.SIMULATED_PROVIDER.equals(loc.getProvider())) {
-//			return false; // TODO
-//		}
 		return loc != null && (!loc.hasAccuracy() || loc.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING);
 	}
 
@@ -593,7 +589,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				// Speed 120kmh, 2 seconds -> 60 m
 				List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(UPCOMING_TUNNEL_DISTANCE);
 				if (tunnel != null) {
-					LOG.error(String.format(Locale.US, "XXX start-simulation (%d)\n%s", tunnel.size(), location));
 					simulatePosition = new SimulationProvider(location, tunnel);
 					simulatePosition.startSimulation();
 					simulatePositionImpl();
