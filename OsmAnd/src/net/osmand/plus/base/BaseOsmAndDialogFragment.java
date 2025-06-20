@@ -1,12 +1,16 @@
 package net.osmand.plus.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -32,15 +36,47 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		updateNightMode();
 	}
 
+	protected void updateNightMode() {
+		nightMode = resolveNightMode();
+		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+	}
+
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		saveAppModeToBundle(appMode, outState);
 	}
 
-	protected void updateNightMode() {
-		nightMode = resolveNightMode();
-		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+	@NonNull
+	protected Context getThemedContext() {
+		return new ContextThemeWrapper(requireActivity(), getDialogThemeId());
+	}
+
+	@StyleRes
+	protected int getDialogThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+	}
+
+	@NonNull
+	@Override
+	public OsmandApplication getApp() {
+		return app;
+	}
+
+	@NonNull
+	@Override
+	public LayoutInflater getThemedInflater() {
+		return themedInflater;
+	}
+
+	protected boolean isUsedOnMap() {
+		return false;
+	}
+
+	@NonNull
+	@Override
+	public ThemeUsageContext getThemeUsageContext() {
+		return ThemeUsageContext.valueOf(isUsedOnMap());
 	}
 
 	public void setAppMode(@NonNull ApplicationMode appMode) {
@@ -54,30 +90,8 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 
 	@NonNull
 	@Override
-	public ThemeUsageContext getThemeUsageContext() {
-		return ThemeUsageContext.valueOf(isUsedOnMap());
-	}
-
-	protected boolean isUsedOnMap() {
-		return false;
-	}
-
-	@NonNull
-	@Override
-	public LayoutInflater getThemedInflater() {
-		return themedInflater;
-	}
-
-	@NonNull
-	@Override
 	public UiUtilities getIconsCache() {
 		return iconsCache;
-	}
-
-	@NonNull
-	@Override
-	public OsmandApplication getApp() {
-		return app;
 	}
 
 	public boolean isNightMode() {

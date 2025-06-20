@@ -163,7 +163,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 	private void setListener(@NonNull View view, @NonNull OsmandPlugin plugin,
 	                         @NonNull CompoundButton btnEnableDisable) {
 		btnEnableDisable.setOnCheckedChangeListener((buttonView, isChecked) -> {
-			if (PluginsHelper.enablePluginIfNeeded(getActivity(), getApp(), plugin, isChecked)) {
+			if (PluginsHelper.enablePluginIfNeeded(getActivity(), app, plugin, isChecked)) {
 				updatePluginState(view, plugin);
 			}
 		});

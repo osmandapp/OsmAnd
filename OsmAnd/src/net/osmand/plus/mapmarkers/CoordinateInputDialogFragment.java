@@ -231,6 +231,7 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		if (savedInstanceState != null) {
 			int pos = savedInstanceState.getInt(SELECTED_POINT_KEY, -1);
 			if (pos != -1) {
@@ -245,7 +246,7 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 			((CoordinateInputBottomSheetDialogFragment) optionsFragment).setListener(createCoordinateInputFormatChangeListener());
 		}
 
-		mainView = inflater.inflate(R.layout.fragment_coordinate_input_dialog, container);
+		mainView = inflate(R.layout.fragment_coordinate_input_dialog, container);
 
 		ImageButton backBtn = mainView.findViewById(R.id.back_button);
 		backBtn.setOnClickListener(view -> quit());
@@ -806,7 +807,7 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 		View.OnLongClickListener inputEditTextOnLongClickListener = view -> {
 			if (isOsmandKeyboardOn()) {
 				EditText inputEditText = (EditText) view;
-				PopupMenu popupMenu = new PopupMenu(requireActivity(), inputEditText);
+				PopupMenu popupMenu = new PopupMenu(getThemedContext(), inputEditText);
 				Menu menu = popupMenu.getMenu();
 				popupMenu.getMenuInflater().inflate(R.menu.copy_paste_menu, menu);
 				ClipboardManager clipboardManager = ((ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE));

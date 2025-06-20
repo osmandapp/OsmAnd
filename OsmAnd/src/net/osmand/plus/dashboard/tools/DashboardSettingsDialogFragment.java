@@ -128,7 +128,7 @@ public class DashboardSettingsDialogFragment extends BaseAlertDialogFragment imp
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBooleanArray(CHECKED_ITEMS, mAdapter.getCheckedItems());
 		outState.putIntArray(NUMBER_OF_ROWS_ARRAY, mAdapter.getNumbersOfRows());
 		super.onSaveInstanceState(outState);

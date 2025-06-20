@@ -208,7 +208,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putString(SEARCH_TEXT_DLG_KEY, searchText);
 		outState.putBoolean(SHOW_GROUP_KEY, showGroup);
 		outState.putStringArrayList(DOWNLOAD_TYPES_TO_SHOW_KEY, downloadTypesToShow);

@@ -17,7 +17,6 @@ import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter;
@@ -177,13 +176,6 @@ public class MapMarkersActiveFragment extends BaseNestedFragment implements OsmA
 		}
 	}
 
-	private OsmandApplication getMyApplication() {
-		if (getActivity() != null) {
-			return ((MapActivity) getActivity()).getMyApplication();
-		}
-		return null;
-	}
-
 	void setShowDirectionEnabled(boolean showDirectionEnabled) {
 		if (adapter != null) {
 			adapter.setShowDirectionEnabled(showDirectionEnabled);
@@ -219,7 +211,6 @@ public class MapMarkersActiveFragment extends BaseNestedFragment implements OsmA
 	}
 
 	void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
 		if (app != null && !locationUpdateStarted) {
 			locationUpdateStarted = true;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
@@ -231,7 +222,6 @@ public class MapMarkersActiveFragment extends BaseNestedFragment implements OsmA
 	}
 
 	void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
 		if (app != null && locationUpdateStarted) {
 			locationUpdateStarted = false;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
