@@ -508,9 +508,6 @@ public class RoutingHelper {
 	}
 
 	private boolean isLocationJumping(@NonNull Location currentLocation, boolean targetPointsChanged) {
-		if (SimulationProvider.isTunnelLocationSimulated(currentLocation)) {
-			return true;
-		}
 		if (route.hasMissingMaps() && lastGoodRouteLocation != null && !targetPointsChanged) {
 			double time = currentLocation.getTime() - lastGoodRouteLocation.getTime();
 			double dist = currentLocation.distanceTo(lastGoodRouteLocation);
