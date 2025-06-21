@@ -2270,7 +2270,7 @@
     <string name="dashboard_or_drawer_description">Постоји избор да ли желите да управљате програмом изборником или управљачком таблом. Ваш избор увек можете променити у подешавањима управљачке.</string>
     <string name="nothing_found_in_radius">Није нађено ништа:</string>
     <string name="shared_string_total">Укупно</string>
-    <string name="clear_all_intermediates">Очисти све пролазне тачке</string>
+    <string name="clear_all_intermediates">Очисти сва пролазна одредишта</string>
     <string name="transport_nearby_routes">Близу</string>
     <string name="speech_rate_descr">Одаберите брзину изговора вештачког гласа ТТС.</string>
     <string name="local_osm_changes_backup">Прави складишни умножак измена ОСМ-а</string>
@@ -2666,9 +2666,9 @@
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висина</string>
     <string name="add_destination_point">Постави одредиште</string>
-    <string name="add_intermediate_point">Додај успутну станицу</string>
+    <string name="add_intermediate_point">Додај успутно одредиште</string>
     <string name="add_start_point">Постави почетну тачку</string>
-    <string name="intermediate_waypoint">Успутне тачке</string>
+    <string name="intermediate_waypoint">Успутно одредиште</string>
     <string name="transfers">преседања</string>
     <string name="on_foot">пешице</string>
     <string name="route_way">Пут</string>
@@ -2710,7 +2710,7 @@
     <string name="save_poi_value_exceed_length_title">Дужина вредности \"%s\"</string>
     <string name="public_transport_warning_descr_blog">Прочитајте како ОсмАнд израчунава путеве на нашем блогу.</string>
     <string name="public_transport_warning_title">Навођење јавним превозом је тренутно у бета пробању, очекујте грешке и неправилности.</string>
-    <string name="add_intermediate">Додај пролазну тачку</string>
+    <string name="add_intermediate">Додај пролазно одредиште</string>
     <string name="transfers_size">%1$d преузимања</string>
     <string name="add_start_and_end_points">Додај полазиште и одредиште</string>
     <string name="route_add_start_point">Додај тачку поласка</string>
@@ -5752,7 +5752,7 @@
     <string name="battery">батерија</string>
     <string name="set_home">Постави дом</string>
     <string name="battery_level">Попуњеност батерије</string>
-    <string name="set_intermediate_point">Постави међуодредишну тачку</string>
+    <string name="set_intermediate_point">Постави међуодредиште</string>
     <string name="ski_route_switch_style_description">Истражите скијашке стазе, жичаре и још много тога помоћу приказа зимске и скијашке карте.</string>
     <string name="shared_string_switch">Прекидач</string>
     <string name="years_3">Три године</string>
@@ -5762,4 +5762,6 @@
     <string name="release_5_1">• Додата је подршка за куповину на мрежи и преко платформи\n\n• Јединице за температуру су премештене у опште поставке ради лакшег приступа\n\n• Додат је указивач попуњености батерије за пријемнике БЛЕ\n\n• Ново, разумније корисничко сучеље означавања тачака у навођењу\n\n• Побољшана видљивост справица са новим обрисом\n\n• Додат је рашчлањивач Успона/Спуста\n\n• Проширено општење са Википедијом и Викивојажем за више тачака занимања.</string>
     <string name="deleting">Бришем…</string>
     <string name="deleting_history">Бришем повест…</string>
+    <string name="show_rasterization_debug_tile">Прикажи информације о растеризацији плочица</string>
+    <string name="show_symbols_bboxes">Прикажи симболе бокс оквирног поља</string>
 </resources>
