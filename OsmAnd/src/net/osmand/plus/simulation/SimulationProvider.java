@@ -88,7 +88,8 @@ public class SimulationProvider {
 					location.setLatitude(MapUtils.get31LatitudeY(pry));
 					return Math.max(meters - dd, 0);
 				} else {
-					LOG.error("XXX proceedMeters dd=0 (avoid division by zero)");
+					LOG.error(String.format(Locale.US,
+							"XXX proceedMeters avoid division by zero (dd=0, sx=%d, sy=%d)", st31x, st31y));
 					return -1;
 				}
 			}
