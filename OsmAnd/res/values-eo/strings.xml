@@ -5760,7 +5760,7 @@
     <string name="shared_string_split_by">Dividi laŭ</string>
     <string name="shared_string_switch">Ŝanĝi</string>
     <string name="set_home">Agordi kiel hejmon</string>
-    <string name="set_intermediate_point">Agordi kiel intercelo</string>
+    <string name="set_intermediate_point">Agordi kiel intercelon</string>
     <string name="set_start_point">Agordi kiel komencejon</string>
     <string name="ski_route_switch_style_description">Esplori descendejojn, telferojn kaj pli kun la map-stilo Vintro kaj skiado.</string>
     <string name="battery">baterio</string>
@@ -5775,4 +5775,6 @@
     <string name="osm_live_payment_renews_3_years">Reaboni ĉiutrijare</string>
     <string name="deleting">Forigado…</string>
     <string name="deleting_history">Forigado de historio…</string>
+    <string name="show_rasterization_debug_tile">Montri informojn pro bildigado de kaheloj</string>
+    <string name="show_symbols_bboxes">Montri limigajn kestojn de simboloj</string>
 </resources>
