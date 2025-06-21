@@ -105,7 +105,7 @@ public class SimulationProvider {
 		location.setSpeed(startLocation.getSpeed());
 		location.setAltitude(startLocation.getAltitude());
 		location.setTime(System.currentTimeMillis());
-		double meters = startLocation.getSpeed() * ((System.currentTimeMillis() - startLocation.getTime()) / 1000.0f);
+		double meters = startLocation.getSpeed() * ((System.currentTimeMillis() - startLocation.getTime()) / 1000.0);
 		double proc = proceedMeters(meters, location);
 		if (proc < 0 || proc >= 100) {
 			return null;
