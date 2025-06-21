@@ -5593,4 +5593,6 @@
     <string name="release_5_1">• Tacaíocht curtha leis do cheannacháin ghréasáin agus tras-ardáin\n\n• Aonaid Teochta bogtha go Socruithe Ginearálta le haghaidh rochtain níos éasca\n\n• Táscaire leibhéal ceallraí curtha leis do braiteoirí BLE\n\n• Comhéadan úsáideora nua, níos iomasach le haghaidh roghnú pointí sa Loingseoireacht\n\n• Infheictheacht fheabhsaithe giuirléidí le himlíne nua\n\n• Anailíseoir Suas Cnoc/Síos Cnoc curtha leis\n\n• Comhtháthú leathnaithe Vicipéid &amp; Wikivoyage le haghaidh níos mó POIanna.</string>
     <string name="three_years_subscription">Síntiús trí bliana</string>
     <string name="osm_live_payment_3_years_title">Gach trí bliana</string>
+    <string name="deleting">Ag scriosadh…</string>
+    <string name="deleting_history">Stair á scriosadh…</string>
 </resources>
