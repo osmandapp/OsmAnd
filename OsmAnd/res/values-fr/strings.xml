@@ -601,7 +601,7 @@
 \n
 \nPour découvrir comment modifier une carte, consultez notre site %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Les cartes vectorielles s\'affichent plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
-    <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et testez en diffusant des annonces :</string>
+    <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et essayez-la en écoutant une annonce :</string>
     <string name="debugging_and_development">Développement d\'OsmAnd</string>
     <string name="native_rendering">Rendu natif</string>
     <string name="test_voice_prompts">Tester les annonces vocales</string>
@@ -1503,8 +1503,8 @@
     <string name="archive_wikipedia_data">Le format des données Wikipédia est obsolète. Souhaitez-vous les archiver ?</string>
     <string name="lang_te">Télougou</string>
     <string name="restart_is_required">Un redémarrage de l’application est nécessaire pour appliquer la modification.</string>
-    <string name="rendering_attr_currentTrackColor_name">Couleur GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Largeur GPX</string>
+    <string name="rendering_attr_currentTrackColor_name">Couleur de la trace GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Largeur de la trace GPX</string>
     <string name="rendering_value_red_name">Rouge</string>
     <string name="rendering_value_translucent_red_name">Rouge translucide</string>
     <string name="rendering_value_translucent_orange_name">Orange translucide</string>
@@ -1693,8 +1693,8 @@
     <string name="osm_edit_modified_poi">POI OSM modifié</string>
     <string name="osm_edit_deleted_poi">POI OSM supprimé</string>
     <string name="osm_save_offline">Enregistrer pour utiliser hors ligne</string>
-    <string name="rendering_attr_currentTrackColor_description">Couleur GPX</string>
-    <string name="rendering_attr_currentTrackWidth_description">Largeur GPX</string>
+    <string name="rendering_attr_currentTrackColor_description">Couleur de la trace GPX sur la carte</string>
+    <string name="rendering_attr_currentTrackWidth_description">Largeur de la trace GPX sur la carte</string>
     <string name="rendering_attr_roadStyle_description">Style pour les routes</string>
     <string name="copied_to_clipboard">Copié dans le presse-papiers</string>
     <string name="use_dashboard_btn">Utiliser le tableau de bord</string>
@@ -3825,7 +3825,7 @@
     <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_wikipedia">Donne accès à tous les articles Wikipédia associés aux points d\'intérêts de la carte, permettant d\'en savoir plus sur un lieu en quelques clics. Pensez à télécharger les articles Wikipédia des régions de votre choix pour les consulter hors ligne.</string>
     <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Accédez à des mises à jour cartographiques plus fréquentes : horaires, quotidiennes ou hebdomadaires. Les mises à jour sont téléchargées progressivement, uniquement pour la zone de modification.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Obtenez des mises à jour des cartes plus fréquentes : horaires, quotidiennes ou hebdomadaires. Le téléchargement ne s\'effectue que pour les zones ayant des nouveautés et seuls les éléments ayant reçu des mises à jour sont téléchargés.</string>
     <string name="purchases_feature_desc_osmand_cloud">Utilisez OsmAnd Cloud pour sauvegarder toutes les données d\'OsmAnd en ligne. Plus aucun risque de perdre vos données après une réinstallation. Sauvegardez et restaurez toutes vos informations sans difficulté.</string>
     <string name="nautical_depth">Profondeur nautique</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
