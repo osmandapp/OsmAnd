@@ -260,7 +260,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 				addWidgetViewToPage(rowWidgetMap, widgetInfo.pageIndex, widgetInfo);
 				widgetsToShow.add(widgetInfo.widget);
 			} else {
-				widgetInfo.widget.detachView(getWidgetsPanel());
+				widgetInfo.widget.detachView(getWidgetsPanel(), new ArrayList<>(allPanelWidget), mode);
 			}
 		}
 		return new ArrayList<>(rowWidgetMap.values());
@@ -351,7 +351,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 				if (widgetInfo.isEnabledForAppMode(appMode)) {
 					enabledMapWidgets.add(widgetInfo);
 				} else {
-					widgetInfo.widget.detachView(getWidgetsPanel());
+					widgetInfo.widget.detachView(getWidgetsPanel(), rowWidgets, appMode);
 				}
 			}
 			AndroidUiHelper.updateVisibility(topDivider, false);
