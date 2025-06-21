@@ -601,7 +601,7 @@
 \n
 \nPour découvrir comment modifier une carte, consultez notre site %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Les cartes vectorielles s\'affichent plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
-    <string name="play_commands_of_currently_selected_voice">Sélectionner une voix et tester les annonces vocales</string>
+    <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et testez en diffusant des annonces :</string>
     <string name="debugging_and_development">Développement d\'OsmAnd</string>
     <string name="native_rendering">Rendu natif</string>
     <string name="test_voice_prompts">Tester les annonces vocales</string>
@@ -2369,7 +2369,7 @@
     <string name="favourites_group">Catégorie de favoris</string>
     <string name="add_group">Ajouter un groupe</string>
     <string name="add_group_descr">Importer des groupes depuis des favoris ou des points de passage GPX.</string>
-    <string name="empty_state_markers_active">Ajouter des marques</string>
+    <string name="empty_state_markers_active">Créez des marqueurs de carte !</string>
     <string name="empty_state_markers_active_desc">Sélectionner des emplacements sur la carte puis appuyer sur le drapeau de marque.</string>
     <string name="empty_state_markers_groups">Importer des groupes</string>
     <string name="empty_state_markers_groups_desc">Importer des groupes de favoris ou des points de passage comme marques.</string>
@@ -2390,7 +2390,7 @@
     <string name="marker_activated">Marque %s activée.</string>
     <string name="one_tap_active_descr">Appuyez sur une marque de la carte pour qu\'elle devienne immédiatement la première marque active sans utiliser le menu contextuel.</string>
     <string name="one_tap_active">Appui court sur une marque</string>
-    <string name="empty_state_av_notes">Ajouter des notes</string>
+    <string name="empty_state_av_notes">Prenez des notes !</string>
     <string name="empty_state_av_notes_desc">Associer des notes sonore, vidéo ou photo à n\'importe quel point de la carte depuis le widget ou le menu contextuel.</string>
     <string name="notes_by_date">Notes A/V par date</string>
     <string name="by_date">Par date</string>
@@ -2792,7 +2792,7 @@
     <string name="routing_attr_freeride_policy_name">Hors-piste</string>
     <string name="process_downloading_service">Service de téléchargement OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">Appuyez à nouveau pour modifier l\'orientation de la carte</string>
-    <string name="shared_string_min_speed">Vitesse min.</string>
+    <string name="shared_string_min_speed">Vitesse minimale</string>
     <string name="shared_string_max_speed">Vitesse max.</string>
     <string name="default_speed_setting_title">Vitesse par défaut</string>
     <string name="minmax_speed_dialog_title">Définir la vitesse min/max</string>
@@ -3825,7 +3825,7 @@
     <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_wikipedia">Donne accès à tous les articles Wikipédia associés aux points d\'intérêts de la carte, permettant d\'en savoir plus sur un lieu en quelques clics. Pensez à télécharger les articles Wikipédia des régions de votre choix pour les consulter hors ligne.</string>
     <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Obtenez des mises à jour de cartes plus fréquentes : horaires, quotidiennes ou hebdomadaires. Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Accédez à des mises à jour cartographiques plus fréquentes : horaires, quotidiennes ou hebdomadaires. Les mises à jour sont téléchargées progressivement, uniquement pour la zone de modification.</string>
     <string name="purchases_feature_desc_osmand_cloud">Utilisez OsmAnd Cloud pour sauvegarder toutes les données d\'OsmAnd en ligne. Plus aucun risque de perdre vos données après une réinstallation. Sauvegardez et restaurez toutes vos informations sans difficulté.</string>
     <string name="nautical_depth">Profondeur nautique</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
