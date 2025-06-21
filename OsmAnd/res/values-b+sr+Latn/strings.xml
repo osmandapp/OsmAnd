@@ -3133,7 +3133,7 @@
     <string name="transfers">Transferi</string>
     <string name="intermediate_waypoint">Prolazno odredište</string>
     <string name="add_start_point">Postavi početnu tačku</string>
-    <string name="add_intermediate_point">Dodaj usputno odredište</string>
+    <string name="add_intermediate_point">Dodaj međuodredište</string>
     <string name="add_destination_point">Postavi odredište</string>
     <string name="shared_string_height">Visina</string>
     <string name="shared_string_width">Širina</string>
