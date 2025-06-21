@@ -57,7 +57,9 @@ public class SimulationProvider {
 			RouteSegmentResult road = roads.get(i);
 			boolean firstRoad = i == currentRoad;
 			boolean plus = road.getStartPointIndex() < road.getEndPointIndex();
-			for (int j = firstRoad ? currentSegment : road.getStartPointIndex() + 1; j <= road.getEndPointIndex(); ) {
+			for (int j = firstRoad ? currentSegment : (road.getStartPointIndex() + (plus ? +1 : -1));
+			     plus ? j <= road.getEndPointIndex() : j >= road.getEndPointIndex();
+			     j += plus ? +1 : -1) {
 				RouteDataObject obj = road.getObject();
 				int st31x = obj.getPoint31XTile(j - 1);
 				int st31y = obj.getPoint31YTile(j - 1);
@@ -86,7 +88,6 @@ public class SimulationProvider {
 					LOG.error("proceedMeters dd=0 (avoid division by zero)");
 					return -1;
 				}
-				j += plus ? 1 : -1;
 			}
 		}
 		return -1;
