@@ -384,6 +384,7 @@ public class RoutingHelper {
 
 	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation,
 	                                    RouteCalculationResult previousRoute, boolean targetPointsChanged) {
+		log.error("XXX helper\n" + (currentLocation != null ? currentLocation : "(null)"));
 		Location locationProjection = currentLocation;
 		if (isPublicTransportMode() && currentLocation != null && finalLocation != null &&
 				(targetPointsChanged || transportRoutingHelper.getStartLocation() == null)) {

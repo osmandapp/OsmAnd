@@ -77,15 +77,18 @@ public class SimulationProvider {
 				} else if (dd > 0) {
 					int prx = (int) (st31x + (end31x - st31x) * (meters / dd));
 					int pry = (int) (st31y + (end31y - st31y) * (meters / dd));
+					LOG.error(String.format(Locale.US,
+							"XXX proceedMeters plus(%b) firstRoad(%b) first(%b) last(%b) i(%d) j(%d) sx(%d) sy(%d) ex(%d) ey(%d) px(%d) py(%d) meters(%f) dd (%f) ret(%f)",
+							plus, firstRoad, first, last, i, j, st31x, st31y, end31x, end31y, prx, pry, meters, dd, Math.max(meters - dd, 0)));
 					if (prx == 0 || pry == 0) {
-						LOG.error(String.format(Locale.US, "proceedMeters zero x or y (%d,%d)", prx, pry));
+						LOG.error(String.format(Locale.US, "XXX proceedMeters zero x or y (%d,%d)", prx, pry));
 						return -1;
 					}
 					location.setLongitude(MapUtils.get31LongitudeX(prx));
 					location.setLatitude(MapUtils.get31LatitudeY(pry));
 					return Math.max(meters - dd, 0);
 				} else {
-					LOG.error("proceedMeters dd=0 (avoid division by zero)");
+					LOG.error("XXX proceedMeters dd=0 (avoid division by zero)");
 					return -1;
 				}
 			}
