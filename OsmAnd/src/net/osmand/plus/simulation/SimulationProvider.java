@@ -61,8 +61,8 @@ public class SimulationProvider {
 			     plus ? j <= road.getEndPointIndex() : j >= road.getEndPointIndex();
 			     j += plus ? +1 : -1) {
 				RouteDataObject obj = road.getObject();
-				int st31x = obj.getPoint31XTile(j - 1);
-				int st31y = obj.getPoint31YTile(j - 1);
+				int st31x = obj.getPoint31XTile(j - (plus ? +1 : -1));
+				int st31y = obj.getPoint31YTile(j - (plus ? +1 : -1));
 				int end31x = obj.getPoint31XTile(j);
 				int end31y = obj.getPoint31YTile(j);
 				boolean last = i == roads.size() - 1 && j == road.getEndPointIndex();
