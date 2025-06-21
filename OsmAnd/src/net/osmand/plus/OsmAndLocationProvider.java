@@ -354,9 +354,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public static boolean isPointAccurateForRouting(net.osmand.Location loc) {
-		if (loc != null && SimulationProvider.SIMULATED_PROVIDER_TUNNEL.equals(loc.getProvider())) {
-			return false;
-		}
 		return loc != null && (!loc.hasAccuracy() || loc.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING);
 	}
 

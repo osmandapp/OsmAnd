@@ -113,4 +113,8 @@ public class SimulationProvider {
 		}
 		return true;
 	}
+
+	public static boolean isTunnelLocationSimulated(@Nullable Location location) {
+		return location != null && SIMULATED_PROVIDER_TUNNEL.equals(location.getProvider());
+	}
 }
