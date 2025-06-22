@@ -2575,18 +2575,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (plugin != null) {
 			boolean show = plugin.SHOW_SYMBOLS_DEBUG_INFO.get();
 			boolean allow = plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.get();
+			boolean showBboxes = plugin.SHOW_SYMBOLS_BBOXES.get();
 			MapRendererDebugSettings debugSettings = mapRenderer.getDebugSettings();
 			debugSettings.setDebugStageEnabled(show);
-			debugSettings.setShowSymbolsMarksRejectedByViewpoint(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByIntersectionCheck(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByMinDistanceToSameContentFromOtherSymbolCheck(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByPresentationMode(show);
-			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(show);
-			debugSettings.setSkipSymbolsIntersectionCheck(allow);
+			debugSettings.setShowSymbolsMarksRejectedByViewpoint(showBboxes);
+			debugSettings.setShowSymbolsBBoxesRejectedByIntersectionCheck(showBboxes);
+			debugSettings.setShowSymbolsBBoxesRejectedByMinDistanceToSameContentFromOtherSymbolCheck(showBboxes);
+			debugSettings.setShowSymbolsBBoxesRejectedByPresentationMode(showBboxes);
+			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(showBboxes);
+			debugSettings.setSkipSymbolsIntersectionCheck(showBboxes);
 			mapRenderer.setDebugSettings(debugSettings);
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null) {
-				mapContext.showDebugTiles = plugin.SHOW_TILES_DEBUG_INFO.get();
+				mapContext.showDebugPrimivitisationTiles = plugin.SHOW_TILES_PRIMITIVISATION_DEBUG_INFO.get();
+				mapContext.showDebugRasterizationTiles = plugin.SHOW_TILES_RASTERIZATION_DEBUG_INFO.get();
 				mapContext.recreateRasterAndSymbolsProvider(MapRendererContext.ProviderType.MAIN);
 			}
 		}

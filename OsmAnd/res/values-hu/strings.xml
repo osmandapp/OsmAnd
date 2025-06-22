@@ -2508,7 +2508,7 @@
     <string name="waypoints_removed_from_map_markers">Útpontok eltávolítva a térképjelölők közül</string>
     <string name="nothing_found_in_radius">Nincs találat:</string>
     <string name="select_waypoints_category_description">A nyomvonal összes útpontjának hozzáadása vagy külön kategóriák kijelölése.</string>
-    <string name="clear_all_intermediates">Összes köztes pont törlése</string>
+    <string name="clear_all_intermediates">Minden köztes célpont törlése</string>
     <string name="group_deleted">Csoport törölve</string>
     <string name="rendering_attr_whiteWaterSports_name">Vadvízi sportok</string>
     <string name="transport_nearby_routes_within">Közeli útvonalak ezen belül:</string>
@@ -2587,7 +2587,7 @@
     <string name="shared_string_width">Szélesség</string>
     <string name="shared_string_height">Magasság</string>
     <string name="add_destination_point">Úti cél megadása</string>
-    <string name="add_intermediate_point">Köztes pont hozzáadása</string>
+    <string name="add_intermediate_point">Köztes célpont hozzáadása</string>
     <string name="add_start_point">Kiindulópont megadása</string>
     <string name="intermediate_waypoint">Köztes célpont</string>
     <string name="transfers">Átszállások</string>
@@ -2678,7 +2678,7 @@
     <string name="shared_string_walk">Séta</string>
     <string name="public_transport_warning_descr_blog">Az OsmAnd útvonaltervezés módjáról a blogunkon olvashat.</string>
     <string name="public_transport_warning_title">A tömegközlekedési útvonaltervezés jelenleg bétatesztelési fázisban van, hibák és pontatlanságok előfordulhatnak.</string>
-    <string name="add_intermediate">Köztes pont hozzáadása</string>
+    <string name="add_intermediate">Köztes célpont hozzáadása</string>
     <string name="transfers_size">%1$d átszállás</string>
     <string name="shared_string_degrees">Fok</string>
     <string name="shared_string_milliradians">Milliradián</string>
@@ -5716,7 +5716,7 @@
     <string name="set_parking_position">Parkolási hely megadása</string>
     <string name="set_work">Munkahely megadása</string>
     <string name="set_home">Otthon megadása</string>
-    <string name="set_intermediate_point">Köztes pont megadása</string>
+    <string name="set_intermediate_point">Köztes célpont megadása</string>
     <string name="set_start_point">Kiindulópont megadása</string>
     <string name="battery">akkumulátor</string>
     <string name="shared_string_switch">Kapcsoló</string>
@@ -5728,4 +5728,6 @@
     <string name="three_years_subscription">3 éves előfizetés</string>
     <string name="deleting">Törlés…</string>
     <string name="deleting_history">Előzmények törlése…</string>
+    <string name="show_rasterization_debug_tile">Csempe raszterezési információk mutatása</string>
+    <string name="show_symbols_bboxes">Szimbólum határolókeretek mutatása</string>
 </resources>

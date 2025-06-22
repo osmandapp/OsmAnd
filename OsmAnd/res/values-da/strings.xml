@@ -2527,8 +2527,8 @@
     <string name="nothing_found_in_radius">Kunne ikke finde noget:</string>
     <string name="select_waypoints_category_description">Tilføj alle sporets rutepunkter, eller vælg forskellige kategorier.</string>
     <string name="shared_string_total">I alt</string>
-    <string name="clear_all_intermediates">Ryd alle mellemliggende punkter</string>
-    <string name="group_deleted">Gruppen slettet</string>
+    <string name="clear_all_intermediates">Ryd alle mellemliggende destinationer</string>
+    <string name="group_deleted">Gruppe slettet</string>
     <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
     <string name="waypoints_removed_from_map_markers">Rutepunkter fjernet fra kortmarkører</string>
     <string name="shared_string_travel_guides">Rejseguider</string>
@@ -2668,11 +2668,11 @@
     <string name="run_full_osmand_header">Start OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
     <string name="add_destination_point">Angiv destination</string>
-    <string name="add_intermediate_point">Tilføj mellemliggende</string>
+    <string name="add_intermediate_point">Tilføj mellemliggende destination</string>
     <string name="add_start_point">Angiv startpunkt</string>
-    <string name="intermediate_waypoint">Mellemliggende punkt</string>
-    <string name="transfers">overførsler</string>
-    <string name="on_foot">til fods</string>
+    <string name="intermediate_waypoint">Mellemliggende destination</string>
+    <string name="transfers">Overførsler</string>
+    <string name="on_foot">Til fods</string>
     <string name="points_of_interests">Interessepunkter (IP)</string>
     <string name="waiting_for_route_calculation">Beregner rute…</string>
     <string name="app_mode_public_transport">Offentlig transport</string>
@@ -2748,7 +2748,7 @@
     <string name="rendering_attr_undefined_name">Ikke defineret</string>
     <string name="public_transport_warning_descr_blog">Læs mere om OsmAnd-ruteberegning på vores blog.</string>
     <string name="public_transport_warning_title">Offentlig transportruter er nu i beta testfasen, så fejl og unøjagtigheder kan forekomme.</string>
-    <string name="add_intermediate">Tilføj mellemliggende punkt</string>
+    <string name="add_intermediate">Tilføj mellemliggende destination</string>
     <string name="transfers_size">%1$d overførsler</string>
     <string name="shared_string_walk">Gang</string>
     <string name="save_poi_value_exceed_length_title">Længden af \"%s\" værdien</string>
@@ -5798,7 +5798,7 @@
     <string name="set_parking_position">Indstil parkeringsposition</string>
     <string name="set_work">Indstil arbejde</string>
     <string name="set_home">Indstil hjem</string>
-    <string name="set_intermediate_point">Indstil mellemliggende punkt</string>
+    <string name="set_intermediate_point">Indstil mellemliggende destination</string>
     <string name="set_start_point">Indstil startpunkt</string>
     <string name="shared_string_switch">Skift</string>
     <string name="ski_route_switch_style_description">Udforsk pister, lifte og meget mere med vinter- og skikortet.</string>
@@ -5809,4 +5809,6 @@
     <string name="three_years_subscription">Tre års abonnement</string>
     <string name="deleting">Sletter…</string>
     <string name="deleting_history">Sletter historik…</string>
+    <string name="show_rasterization_debug_tile">Vis oplysninger om rasterisering af kortfliser</string>
+    <string name="show_symbols_bboxes">Vis symbolers bboxer</string>
 </resources>

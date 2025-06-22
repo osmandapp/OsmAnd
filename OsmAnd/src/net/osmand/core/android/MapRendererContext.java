@@ -20,6 +20,7 @@ import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
 import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.MapPrimitivesProvider.Mode;
+import net.osmand.core.jni.MapRasterMetricsLayerProvider;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
@@ -93,7 +94,8 @@ public class MapRendererContext {
 	private float cachedReferenceTileSize;
 	private boolean heightmapsActive;
 
-	public boolean showDebugTiles = false;
+	public boolean showDebugPrimivitisationTiles = false;
+	public boolean showDebugRasterizationTiles = false;
 
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
@@ -445,9 +447,13 @@ public class MapRendererContext {
 	}
 
 	private void updateObfMapRasterLayerProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
-	                                             @NonNull ProviderType providerType) {
+												 @NonNull ProviderType providerType) {
 		// Create new OBF map raster layer provider
-		if (showDebugTiles) {
+		if (showDebugRasterizationTiles) {
+			obfMapRasterLayerProvider = new MapRasterMetricsLayerProvider(
+				new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground));
+		}
+		else if (showDebugPrimivitisationTiles) {
 			obfMapRasterLayerProvider = new MapPrimitivesMetricsLayerProvider(mapPrimitivesProvider);
 		} else {
 			obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground);
@@ -480,7 +486,7 @@ public class MapRendererContext {
 
 	private void updateOrRemoveObfMapSymbolsProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
 											 @NonNull ProviderType providerType) {
-		if (showDebugTiles) {
+		if (showDebugPrimivitisationTiles || showDebugRasterizationTiles) {
 			if (obfMapSymbolsProvider != null && mapRendererView != null && this.providerType == providerType) {
 				mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 			}

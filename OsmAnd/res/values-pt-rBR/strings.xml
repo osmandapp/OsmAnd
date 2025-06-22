@@ -3957,7 +3957,7 @@
     <string name="osmand_live">OsmAnd Em tempo real</string>
     <string name="annual_subscription">Assinatura anual</string>
     <string name="monthly_subscription">Assinatura mensal</string>
-    <string name="three_months_subscription">Três meses de assinatura</string>
+    <string name="three_months_subscription">Assinatura de três meses</string>
     <string name="next_billing_date">Próxima data de faturamento: %1$s</string>
     <string name="osmand_live_cancelled">Cancelado</string>
     <string name="renew_subscription">Renovar assinatura</string>
@@ -6130,4 +6130,19 @@
     <string name="shared_string_flat">Plano</string>
     <string name="ais_cpa_warning_time_description">Se o TCPA (tempo para alcançar o CPA com outra embarcação) for menor que esse valor, a embarcação será marcada com a cor vermelha.</string>
     <string name="ais_cpa_warning_distance">Distância de aviso para o Ponto de Aproximação Fechado (CPA)</string>
+    <string name="years_3">Três anos</string>
+    <string name="osm_live_payment_renews_3_years">Renovação a cada três anos</string>
+    <string name="set_home">Definir casa</string>
+    <string name="set_work">Definir trabalho</string>
+    <string name="sensor_data">Dados do sensor</string>
+    <string name="set_intermediate_point">Definir ponto intermediário</string>
+    <string name="set_start_point">Definir ponto de início</string>
+    <string name="battery_level">Nível da bateria</string>
+    <string name="set_parking_position">Definir posição de estacionamento</string>
+    <string name="three_years_subscription">Três anos de assinatura</string>
+    <string name="deleting">Apagando…</string>
+    <string name="osm_live_payment_3_years_title">A cada três anos</string>
+    <string name="battery">bateria</string>
+    <string name="shared_string_switch">Alternar</string>
+    <string name="deleting_history">Excluindo o histórico…</string>
 </resources>

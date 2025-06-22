@@ -4864,4 +4864,6 @@
     <string name="obd_fuel_consumption_rate">Ρυθμός κατανάλωσης καυσίμου</string>
     <string name="obd_fuel_consumption_rate_desc">Εμφανίζει τον ρυθμό κατανάλωσης καυσίμου του οχήματος βάσει του OBD και της τοποθεσίας</string>
     <string name="obd_fuel_type_desc">Εμφανίζει το είδος καυσίμου του οχήματος, βάσει αισθητήρα OBD</string>
+    <string name="years_3">Τρία έτη</string>
+    <string name="help_article_purchases_giveaway_name">Προσφορά</string>
 </resources>

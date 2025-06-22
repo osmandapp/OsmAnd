@@ -17,6 +17,7 @@ import net.osmand.plus.dialogs.selectlocation.extractor.CenterMapLatLonExtractor
 import net.osmand.plus.dialogs.selectlocation.extractor.IMapLocationExtractor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -128,7 +129,9 @@ public class SelectLocationController<ResultType> extends BaseDialogController
 
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
-		dialogManager.askRefreshDialogCompletely(getProcessId());
+		app.runInUIThread(() -> {
+			dialogManager.askRefreshDialogCompletely(getProcessId());
+		});
 	}
 
 	@Nullable

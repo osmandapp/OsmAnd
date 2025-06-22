@@ -46,7 +46,7 @@ object RouteActivityHelper {
 		if (cachedActivities.isEmpty()) {
 			collectRouteActivities()
 		}
-		return cachedActivities
+		return cachedActivities.toList()
 	}
 
 	fun findActivityByTag(tag: String): RouteActivity? {

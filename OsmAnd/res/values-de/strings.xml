@@ -5791,4 +5791,22 @@
     <string name="uphill_downhill_split">Berg-/Talfahrt</string>
     <string name="set_parking_position">Parkposition festlegen</string>
     <string name="set_start_point">Startpunkt festlegen</string>
+    <string name="release_5_1">• Unterstützung für Web- und Cross-Plattform-Käufe\n\n• Temperatureinheiten für einfacheren Zugriff auf Allgemeine Einstellungen verschoben\n\n• Batteriestandsanzeige für BLE-Sensoren hinzugefügt\n\n• Neue, intuitivere UI für Punktauswahl in Navigation\n\n• Verbesserte Widget Sichtbarkeit mit einem neuen Umriss\n\n• Uphills/Downhills Analysator hinzugefügt\n\n• Wikipedia &amp; Wikivoyage-Integration für mehr POIs erweitert.</string>
+    <string name="years_3">Drei Jahre</string>
+    <string name="osm_live_payment_3_years_title">Alle drei Jahre</string>
+    <string name="deleting_history">Lösche Verlauf…</string>
+    <string name="deleting">Lösche…</string>
+    <string name="osm_live_payment_renews_3_years">Wird alle drei Jahre erneuert</string>
+    <string name="three_years_subscription">Drei-Jahres-Abonnement</string>
+    <string name="ski_route_switch_style_description">Entdecken Sie Skipisten, Lifte und mehr mit dem Winter- und Skikartenstil.</string>
+    <string name="battery_level">Batteriestand</string>
+    <string name="set_work">Arbeit einstellen</string>
+    <string name="battery">Batterie</string>
+    <string name="sensor_data">Sensordaten</string>
+    <string name="set_home">Zuhause einstellen</string>
+    <string name="set_intermediate_point">Zwischenhalt einstellen</string>
+    <string name="hmd_promo_years">HMD Promo für %1$s Jahre</string>
+    <string name="shared_string_split_by">Getrennt durch</string>
+    <string name="shared_string_flat">Flach</string>
+    <string name="shared_string_switch">Umschalten</string>
 </resources>

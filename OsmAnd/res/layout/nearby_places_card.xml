@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/shimmer_layout"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	app:shimmer_base_alpha="1.0"
@@ -56,10 +55,11 @@
 			app:mpb_useIntrinsicPadding="false"
 			tools:visibility="visible" />
 
-		<FrameLayout
+		<com.facebook.shimmer.ShimmerFrameLayout
 			android:id="@+id/card_content"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			app:shimmer_auto_start="false">
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -108,7 +108,7 @@
 
 			</LinearLayout>
 
-		</FrameLayout> <!--Card content-->
+		</com.facebook.shimmer.ShimmerFrameLayout> <!--Card content-->
 
 		<include layout="@layout/nearby_places_no_internet" />
 
@@ -117,4 +117,4 @@
 		<include layout="@layout/list_item_divider" />
 
 	</LinearLayout>
-</com.facebook.shimmer.ShimmerFrameLayout>
+</FrameLayout>
