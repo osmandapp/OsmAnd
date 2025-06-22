@@ -62,9 +62,9 @@ public class AlarmWidget {
 	private final RoutingHelper routingHelper;
 	private final MapViewTrackingUtilities trackingUtilities;
 	private final OsmAndLocationProvider locationProvider;
-	private final WaypointHelper wh;
+	private final WaypointHelper waypointHelper;
 
-	private int imgId;
+	private int imageResourceId;
 	private String cachedText;
 	private String cachedBottomText;
 	private DrivingRegion cachedRegion;
@@ -73,7 +73,7 @@ public class AlarmWidget {
 		public AlarmInfo alarm;
 		public boolean americanType;
 		public boolean isCanadianRegion;
-		public int locImgId;
+		public int locationImageResId;
 		public String text;
 		public String bottomText;
 		public DrivingRegion region;
@@ -96,7 +96,7 @@ public class AlarmWidget {
 		trackingUtilities = app.getMapViewTrackingUtilities();
 		settings = app.getSettings();
 		locationProvider = app.getLocationProvider();
-		wh = app.getWaypointHelper();
+		waypointHelper = app.getWaypointHelper();
 	}
 
 	@Nullable
@@ -127,11 +127,11 @@ public class AlarmWidget {
 					if (layout != null) {
 						layout.setContentDescription(alarm.getType().getVisualName(app));
 					}
-					if (info.locImgId != imgId) {
+					if (info.locationImageResId != imageResourceId) {
 						changed = true;
-						imgId = info.locImgId;
+						imageResourceId = info.locationImageResId;
 						if (icon != null) {
-							icon.setImageResource(info.locImgId);
+							icon.setImageResource(info.locationImageResId);
 						}
 					}
 					if (!Algorithms.objectEquals(info.text, cachedText) || cachedRegion != info.region) {
@@ -198,12 +198,12 @@ public class AlarmWidget {
 	private AlarmInfo getMostImportantAlarm(boolean showCameras) {
 		if (routingHelper.isFollowingMode() && !routingHelper.isDeviatedFromRoute()
 				&& (routingHelper.getCurrentGPXRoute() == null || routingHelper.isCurrentGPXRouteV2())) {
-			return wh.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), showCameras);
+			return waypointHelper.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), showCameras);
 		} else {
 			Location location = locationProvider.getLastKnownLocation();
 			RouteDataObject routeObject = locationProvider.getLastKnownRouteSegment();
 			if (routeObject != null && location != null) {
-				return wh.calculateMostImportantAlarm(routeObject, location,
+				return waypointHelper.calculateMostImportantAlarm(routeObject, location,
 						settings.METRIC_SYSTEM.get(), settings.SPEED_SYSTEM.get(), showCameras);
 			}
 		}
@@ -216,9 +216,9 @@ public class AlarmWidget {
 				(int) (WIDGET_BITMAP_SIZE_DP * density), Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 
-		Drawable locImg = app.getUIUtilities().getIcon(info.locImgId);
-		locImg.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-		locImg.draw(canvas);
+		Drawable locationDrawable = app.getUIUtilities().getIcon(info.locationImageResId);
+		locationDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+		locationDrawable.draw(canvas);
 
 		if (!Algorithms.isEmpty(info.text)) {
 			TextPaint textPaint = new TextPaint();
@@ -264,59 +264,59 @@ public class AlarmWidget {
 		boolean tunnels = settings.SHOW_TUNNELS.get();
 		boolean americanType = region.isAmericanTypeSigns();
 
-		int locImgId = R.drawable.warnings_limit;
+		int locationImageResId = R.drawable.warnings_limit;
 		String text = "";
 		String bottomText = "";
 		boolean isCanadianRegion = region == DrivingRegion.CANADA;
 		if (alarm.getType() == SPEED_LIMIT) {
 			if (isCanadianRegion) {
-				locImgId = R.drawable.warnings_speed_limit_ca;
+				locationImageResId = R.drawable.warnings_speed_limit_ca;
 				bottomText = settings.SPEED_SYSTEM.get().toShortString();
 			} else if (americanType) {
-				locImgId = R.drawable.warnings_speed_limit_us;
+				locationImageResId = R.drawable.warnings_speed_limit_us;
 				//else case is done by drawing red ring
 			}
 			text = String.valueOf(alarm.getIntValue());
 		} else if (alarm.getType() == SPEED_CAMERA) {
-			locImgId = R.drawable.warnings_speed_camera;
+			locationImageResId = R.drawable.warnings_speed_camera;
 		} else if (alarm.getType() == BORDER_CONTROL) {
-			locImgId = R.drawable.warnings_border_control;
+			locationImageResId = R.drawable.warnings_border_control;
 		} else if (alarm.getType() == HAZARD) {
 			if (americanType) {
-				locImgId = R.drawable.warnings_hazard_us;
+				locationImageResId = R.drawable.warnings_hazard_us;
 			} else {
-				locImgId = R.drawable.warnings_hazard;
+				locationImageResId = R.drawable.warnings_hazard;
 			}
 		} else if (alarm.getType() == TOLL_BOOTH) {
 			//image done by drawing red ring
 			text = "$";
 		} else if (alarm.getType() == TRAFFIC_CALMING) {
 			if (americanType) {
-				locImgId = R.drawable.warnings_traffic_calming_us;
+				locationImageResId = R.drawable.warnings_traffic_calming_us;
 			} else {
-				locImgId = R.drawable.warnings_traffic_calming;
+				locationImageResId = R.drawable.warnings_traffic_calming;
 			}
 		} else if (alarm.getType() == STOP) {
-			locImgId = R.drawable.warnings_stop;
+			locationImageResId = R.drawable.warnings_stop;
 		} else if (alarm.getType() == RAILWAY) {
 			if (isCanadianRegion) {
-				locImgId = R.drawable.warnings_railways_ca;
+				locationImageResId = R.drawable.warnings_railways_ca;
 			} else if (americanType) {
-				locImgId = R.drawable.warnings_railways_us;
+				locationImageResId = R.drawable.warnings_railways_us;
 			} else {
-				locImgId = R.drawable.warnings_railways;
+				locationImageResId = R.drawable.warnings_railways;
 			}
 		} else if (alarm.getType() == PEDESTRIAN) {
 			if (americanType) {
-				locImgId = R.drawable.warnings_pedestrian_us;
+				locationImageResId = R.drawable.warnings_pedestrian_us;
 			} else {
-				locImgId = R.drawable.warnings_pedestrian;
+				locationImageResId = R.drawable.warnings_pedestrian;
 			}
 		} else if (alarm.getType() == TUNNEL) {
 			if (americanType) {
-				locImgId = R.drawable.warnings_tunnel_us;
+				locationImageResId = R.drawable.warnings_tunnel_us;
 			} else {
-				locImgId = R.drawable.warnings_tunnel;
+				locationImageResId = R.drawable.warnings_tunnel;
 			}
 			bottomText = OsmAndFormatter.getFormattedAlarmInfoDistance(settings.getContext(), alarm.getFloatValue());
 		} else {
@@ -340,7 +340,7 @@ public class AlarmWidget {
 			info.alarm = alarm;
 			info.americanType = americanType;
 			info.isCanadianRegion = isCanadianRegion;
-			info.locImgId = locImgId;
+			info.locationImageResId = locationImageResId;
 			info.text = text;
 			info.bottomText = bottomText;
 			info.region = region;
