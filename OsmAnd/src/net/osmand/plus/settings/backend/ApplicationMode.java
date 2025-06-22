@@ -610,8 +610,8 @@ public class ApplicationMode {
 		builder.setCustomIconColor(modeBean.customIconColor);
 		builder.setRoutingProfile(modeBean.routingProfile);
 		builder.setRouteService(modeBean.routeService);
-		builder.setLocationIcon(modeBean.locIcon);
-		builder.setNavigationIcon(modeBean.navIcon);
+		builder.setLocationIcon(modeBean.locationIcon);
+		builder.setNavigationIcon(modeBean.navigationIcon);
 		builder.setOrder(modeBean.order);
 		builder.setVersion(modeBean.version);
 
@@ -633,8 +633,8 @@ public class ApplicationMode {
 		mb.parent = parentAppMode != null ? parentAppMode.getStringKey() : null;
 		mb.routeService = getRouteService();
 		mb.routingProfile = getRoutingProfile();
-		mb.locIcon = getLocationIcon();
-		mb.navIcon = getNavigationIcon();
+		mb.locationIcon = getLocationIcon();
+		mb.navigationIcon = getNavigationIcon();
 		mb.order = getOrder();
 		mb.version = getVersion();
 		return mb;
@@ -801,13 +801,13 @@ public class ApplicationMode {
 			return this;
 		}
 
-		public ApplicationModeBuilder setLocationIcon(String locIcon) {
-			this.locationIcon = locIcon;
+		public ApplicationModeBuilder setLocationIcon(String locationIcon) {
+			this.locationIcon = locationIcon;
 			return this;
 		}
 
-		public ApplicationModeBuilder setNavigationIcon(String navIcon) {
-			this.navigationIcon = navIcon;
+		public ApplicationModeBuilder setNavigationIcon(String navigationIcon) {
+			this.navigationIcon = navigationIcon;
 			return this;
 		}
 
