@@ -137,7 +137,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
 		if (savedInstanceState != null) {
 			Map<String, String> map = (Map<String, String>) AndroidUtils.getSerializable(savedInstanceState, TAGS_LIST, LinkedHashMap.class);
-			editPoiData.updateTags(map);
+			if (!Algorithms.isEmpty(map)) {
+				editPoiData.updateTags(map);
+			}
 		}
 
 		boolean isAddingPoi = getArguments().getBoolean(IS_ADDING_POI);

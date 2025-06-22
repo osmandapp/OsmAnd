@@ -40,14 +40,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public class ExportSettingsFragment extends BaseSettingsListFragment {
 
@@ -261,11 +256,16 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		if (exportListener == null) {
 			exportListener = new SettingsExportListener() {
 
+				WeakReference<FragmentActivity> activityRef = new WeakReference<>(requireActivity());
+
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
 					dismissExportProgressDialog();
 					if (succeed) {
-						shareProfile(file);
+						FragmentActivity activity = activityRef.get();
+						if (activity != null) {
+							shareProfile(file, activity);
+						}
 						dismissFragment();
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
@@ -292,7 +292,11 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 				app.getFileSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissExportProgressDialog();
-				shareProfile(file);
+
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					shareProfile(file, activity);
+				}
 				dismissFragment();
 			}
 		}
@@ -311,9 +315,9 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		return new File(tempDir, fileName + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
 	}
 
-	private void shareProfile(@NonNull File file) {
+	private void shareProfile(@NonNull File file, @NonNull FragmentActivity activity) {
 		new NativeShareDialogBuilder()
-				.addFileWithSaveAction(file, app, requireActivity(), false)
+				.addFileWithSaveAction(file, app, activity, false)
 				.setChooserTitle(getString(R.string.shared_string_share))
 				.setExtraStream(AndroidUtils.getUriForFile(app, file))
 				.setExtraSubject(file.getName())
