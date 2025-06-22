@@ -61,8 +61,8 @@ public class SimulationProvider {
 			     plus ? j <= road.getEndPointIndex() : j >= road.getEndPointIndex();
 			     j += plus ? +1 : -1) {
 				RouteDataObject obj = road.getObject();
-				int st31x = obj.getPoint31XTile(j - (plus ? +1 : -1));
-				int st31y = obj.getPoint31YTile(j - (plus ? +1 : -1));
+				int st31x = obj.getPoint31XTile(plus ? j - 1 : j + 1);
+				int st31y = obj.getPoint31YTile(plus ? j - 1 : j + 1);
 				int end31x = obj.getPoint31XTile(j);
 				int end31y = obj.getPoint31YTile(j);
 				boolean last = i == roads.size() - 1 && j == road.getEndPointIndex();
@@ -81,7 +81,8 @@ public class SimulationProvider {
 							"XXX proceedMeters plus(%b) firstRoad(%b) first(%b) last(%b) i(%d) j(%d) sx(%d) sy(%d) ex(%d) ey(%d) px(%d) py(%d) meters(%f) dd (%f) ret(%f)",
 							plus, firstRoad, first, last, i, j, st31x, st31y, end31x, end31y, prx, pry, meters, dd, Math.max(meters - dd, 0)));
 					if (prx == 0 || pry == 0) {
-						LOG.error(String.format(Locale.US, "XXX proceedMeters zero x or y (%d,%d)", prx, pry));
+						LOG.error(String.format(Locale.US,
+								"XXX proceedMeters zero x or y (%d,%d) (%s)", prx, pry, road));
 						return -1;
 					}
 					location.setLongitude(MapUtils.get31LongitudeX(prx));
@@ -89,8 +90,9 @@ public class SimulationProvider {
 					return Math.max(meters - dd, 0);
 				} else {
 					LOG.error(String.format(Locale.US,
-							"XXX proceedMeters avoid division by zero (dd=0, sx=%d, sy=%d)", st31x, st31y));
-					return -1;
+							"XXX proceedMeters break at the end of the road (dd=0, sx=%d, sy=%d) (%s)",
+							st31x, st31y, road));
+					break;
 				}
 			}
 		}
