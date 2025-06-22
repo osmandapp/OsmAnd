@@ -1489,7 +1489,7 @@
     <string name="shared_string_automatic">Uathoibríoch</string>
     <string name="shortcut_navigate_to">Téigh go dtí…</string>
     <string name="osm_live_payment_renews_monthly">Athnuaitear é gach mí</string>
-    <string name="add_intermediate_point">Cuir pointe idirmheánach leis</string>
+    <string name="add_intermediate_point">Cuir ceann scríbe idirmheánach leis</string>
     <string name="navigation_profile">Próifíl loingseoireachta</string>
     <string name="sort_last_modified">An mionathrú deireanach</string>
     <string name="lang_ckb">Coirdis láir</string>
@@ -1563,7 +1563,7 @@
     <string name="west_abbreviation">I</string>
     <string name="shared_string_view">Amharc ar</string>
     <string name="today">Inniu</string>
-    <string name="intermediate_waypoint">Point idirmheánach</string>
+    <string name="intermediate_waypoint">Ceann scríbe idirmheánach</string>
     <string name="lang_zhminnan">Minis Theas</string>
     <string name="routing_profile_broutrer">BRouter (as líne)</string>
     <string name="travel_routes">Bealaí taistil</string>
@@ -3808,7 +3808,7 @@
     <string name="monthly_map_updates">Nuashonruithe míosúla léarscáile</string>
     <string name="wikivoyage_download_pics_descr">Is féidir íomhánna Airteagal a íoslódáil lena n-úsáid as líne.\nAr fáil i gcónaí in \'Fiosraigh\' → \'Roghanna\'.</string>
     <string name="waypoints_removed_from_map_markers">Waypoints bainte as marcóirí léarscáile</string>
-    <string name="clear_all_intermediates">Glan gach pointe idirmheánach</string>
+    <string name="clear_all_intermediates">Glan gach ceann scríbe idirmheánach</string>
     <string name="enter_lat_and_lon">Iontráil domhanleithead agus domhanfhad</string>
     <string name="av_locations_all_desc">Comhad GPX le comhordanáidí agus sonraí na nótaí go léir.</string>
     <string name="modify_the_search_query">Athraigh do chuardach.</string>
@@ -4713,7 +4713,7 @@
     <string name="get_discount_title">Faigh %1$d%2$s ag%3$s as.</string>
     <string name="files_present">Tá comhaid %1$d (%2$s) sa suíomh roimhe seo \'%3$s\'.</string>
     <string name="public_transport_try_change_settings">Bain triail as na socruithe a athrú.</string>
-    <string name="add_intermediate">Cuir pointe idirmheánach leis</string>
+    <string name="add_intermediate">Cuir ceann scríbe idirmheánach leis</string>
     <string name="rendering_attr_surface_concrete_name">Coincréit</string>
     <string name="rendering_attr_surface_metal_name">Miotal</string>
     <string name="rendering_attr_smoothness_good_name">Go maith</string>
@@ -5581,7 +5581,7 @@
     <string name="ski_route_switch_style_description">Taiscéal fánaí sciála, ardaitheoirí agus tuilleadh leis an stíl léarscáile Geimhridh agus Sciála.</string>
     <string name="set_work">Obair socraithe</string>
     <string name="set_home">Socraigh baile</string>
-    <string name="set_intermediate_point">Socraigh pointe idirmheánach</string>
+    <string name="set_intermediate_point">Socraigh ceann scríbe idirmheánach</string>
     <string name="set_start_point">Socraigh túsphointe</string>
     <string name="battery">ceallraí</string>
     <string name="sensor_data">Sonraí braiteora</string>
@@ -5595,4 +5595,6 @@
     <string name="osm_live_payment_3_years_title">Gach trí bliana</string>
     <string name="deleting">Ag scriosadh…</string>
     <string name="deleting_history">Stair á scriosadh…</string>
+    <string name="show_symbols_bboxes">Taispeáin boscaí siombailí</string>
+    <string name="show_rasterization_debug_tile">Taispeáin faisnéis rastaireachta tíleanna</string>
 </resources>
