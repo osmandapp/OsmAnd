@@ -8,18 +8,18 @@ actual object LoggerFactory {
 
 class AndroidLogger(private val tag: String) : Logger {
 	override fun debug(message: String) {
-		Log.d(tag, message)
+		Log.d(tag, message + " {${Thread.currentThread().name}}")
 	}
 
 	override fun info(message: String) {
-		Log.i(tag, message)
+		Log.i(tag, message + " {${Thread.currentThread().name}}")
 	}
 
 	override fun warn(message: String) {
-		Log.w(tag, message)
+		Log.w(tag, message + " {${Thread.currentThread().name}}")
 	}
 
 	override fun error(message: String?, throwable: Throwable?) {
-		Log.e(tag, message, throwable)
+		Log.e(tag, message + " {${Thread.currentThread().name}}", throwable)
 	}
 }

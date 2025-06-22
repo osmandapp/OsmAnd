@@ -12,7 +12,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
 
-class OBDSimulationSource {
+class OBDSimulationSource : UnderlyingTransport{
 
 	private var bufferToRead: String? = null
 	private var fuelLeftLvl = 255
@@ -126,5 +126,17 @@ class OBDSimulationSource {
 		override fun timeout(): Timeout {
 			return Timeout.NONE
 		}
+	}
+
+	override fun write(bytes: ByteArray) {
+		val buffer = Buffer().apply { write(bytes) }
+		writer.write(buffer, buffer.size)
+	}
+
+	override fun cleanupResources() {
+	}
+
+	override fun readResponse(): String {
+		return bufferToRead ?: ""
 	}
 }

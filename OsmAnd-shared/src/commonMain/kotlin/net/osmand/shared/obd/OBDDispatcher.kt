@@ -12,8 +12,7 @@ import kotlin.coroutines.CoroutineContext
 class OBDDispatcher(val debug: Boolean = false) {
 
 	private var commandQueue = listOf<OBDCommand>()
-	private var inputStream: Source? = null
-	private var outputStream: Sink? = null
+	private var underlyingTransport: UnderlyingTransport? = null
 	private val log = LoggerFactory.getLogger("OBDDispatcher")
 	private var readStatusListener: OBDReadStatusListener? = null
 	private var sensorDataCache = HashMap<OBDCommand, OBDDataField<Any>?>()
@@ -26,13 +25,11 @@ class OBDDispatcher(val debug: Boolean = false) {
 	fun connect(connector: OBDConnector) {
 		scope.launch {
 			try {
-				val connectionResult = connector.connect()
-				if (connectionResult == null) {
+				underlyingTransport = connector.connect()
+				if (underlyingTransport == null) {
 					connector.onConnectionFailed()
 				} else {
 					connector.onConnectionSuccess()
-					inputStream = connectionResult.first
-					outputStream = connectionResult.second
 					startReadObdLooper(coroutineContext)
 				}
 			} catch (cancelError: CancellationException) {
@@ -48,36 +45,26 @@ class OBDDispatcher(val debug: Boolean = false) {
 	}
 
 	private fun startReadObdLooper(context: CoroutineContext) {
-		log("Start reading obd with $inputStream and $outputStream")
-		val connection = Obd2Connection(createTransport(), this)
-		try {
-			while (isConnected(connection)) {
-				commandQueue.forEach { command ->
+		log("Start reading obd with $underlyingTransport")
+		underlyingTransport?.let { transport ->
+			val connection = Obd2Connection(transport, this)
+			try {
+				while (isConnected(connection)) {
+					commandQueue.forEach { command ->
+						context.ensureActive()
+						handleCommand(command, connection)
+					}
 					context.ensureActive()
-					handleCommand(command, connection)
+					OBDDataComputer.acceptValue(sensorDataCache)
 				}
-				context.ensureActive()
-				OBDDataComputer.acceptValue(sensorDataCache)
+			} finally {
+				connection.finish()
 			}
-		} finally {
-			connection.finish()
-		}
-	}
-
-	private fun createTransport(): UnderlyingTransport = object : UnderlyingTransport {
-		override fun write(bytes: ByteArray) {
-			val buffer = Buffer().apply { write(bytes) }
-			outputStream?.write(buffer, buffer.size)
-		}
-
-		override fun readByte(): Byte? {
-			val readBuffer = Buffer()
-			return if (inputStream?.read(readBuffer, 1) == 1L) readBuffer.readByte() else null
 		}
 	}
 
 	private fun isConnected(connection: Obd2Connection): Boolean =
-		inputStream != null && outputStream != null && !connection.isFinished()
+		underlyingTransport != null && !connection.isFinished()
 
 	private fun handleCommand(command: OBDCommand, connection: Obd2Connection) {
 		if (command.isStale && sensorDataCache[command] != null) {
@@ -118,8 +105,8 @@ class OBDDispatcher(val debug: Boolean = false) {
 	}
 
 	private fun cleanupResources() {
-		inputStream = null
-		outputStream = null
+		underlyingTransport?.cleanupResources()
+		underlyingTransport = null
 		OBDDataComputer.clearCache()
 		readStatusListener = null
 	}

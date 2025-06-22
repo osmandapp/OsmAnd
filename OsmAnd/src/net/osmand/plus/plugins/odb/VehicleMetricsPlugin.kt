@@ -57,6 +57,7 @@ import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDispatcher
 import net.osmand.shared.obd.OBDDispatcher.OBDReadStatusListener
 import net.osmand.shared.obd.OBDSimulationSource
+import net.osmand.shared.obd.UnderlyingTransport
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.util.Algorithms
 import okio.IOException
@@ -405,8 +406,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		createOBDDispatcher().connect(object : OBDConnector {
 			val deviceToConnect = deviceInfo
 			val simulator = OBDSimulationSource()
-			override fun connect(): Pair<Source, Sink> {
-				return Pair(simulator.reader, simulator.writer)
+			override fun connect(): UnderlyingTransport {
+				return simulator
 			}
 
 			override fun onConnectionSuccess() {
@@ -435,11 +436,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			}
 
 			@Throws(IOException::class)
-			override fun connect(): Pair<Source, Sink>? {
+			override fun connect(): OBDDeviceUnderlyingTransport? {
 				socket?.apply {
 					connect()
 					if (isConnected) {
-						return Pair(inputStream.source(), outputStream.sink())
+						return OBDDeviceUnderlyingTransport(inputStream.source(), outputStream.sink())
 					}
 				}
 				return null

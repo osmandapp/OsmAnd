@@ -1,6 +1,7 @@
 package net.osmand.shared.obd
 
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.PlatformUtil
 import okio.IOException
 
 class Obd2Connection(
@@ -32,19 +33,13 @@ class Obd2Connection(
 	}
 
 	private fun runImpl(command: String): String {
-		val response = StringBuilder()
+		var response = ""
 		connection.write((command + "\r").encodeToByteArray())
-		while (!finished) {
-			val value = connection.readByte() ?: continue
-			val c = value.toChar()
-			// this is the prompt, stop here
-			if (c == '>') break
-			if (c == '\r' || c == '\n' || c == ' ' || c == '\t' || c == '.') continue
-			response.append(c)
+		if (!finished) {
+			response = connection.readResponse()
 		}
-		val responseValue = response.toString()
-		log("runImpl($command) returned $responseValue")
-		return responseValue
+		log("runImpl($command) returned $response")
+		return response
 	}
 
 	fun run(
@@ -191,5 +186,6 @@ class Obd2Connection(
 
 interface UnderlyingTransport {
 	fun write(bytes: ByteArray)
-	fun readByte(): Byte?
+	fun cleanupResources()
+	fun readResponse(): String
 }
