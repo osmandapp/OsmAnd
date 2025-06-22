@@ -101,7 +101,7 @@ public class WaypointHelper {
 	}
 
 	private void registerPreferenceListener(@NonNull OsmandPreference<Boolean> preference, int type) {
-		StateChangedListener<Boolean> listener = aBoolean -> recalculatePointsAsync(type, null);
+		StateChangedListener<Boolean> listener = newValue -> recalculatePointsAsync(type, null);
 		registeredPrefListeners.put(preference.getId(), listener);
 		preference.addListener(listener);
 	}
@@ -143,28 +143,28 @@ public class WaypointHelper {
 		return false;
 	}
 
-	public void removeVisibleLocationPoint(LocationPointWrapper lp) {
-		if (lp.type < locationPoints.size()) {
-			locationPoints.get(lp.type).remove(lp);
+	public void removeVisibleLocationPoint(LocationPointWrapper locationPointWrapper) {
+		if (locationPointWrapper.type < locationPoints.size()) {
+			locationPoints.get(locationPointWrapper.type).remove(locationPointWrapper);
 		}
 	}
 
 	public void removeVisibleLocationPoint(List<LocationPointWrapper> points) {
 		List<TargetPoint> ps = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 		boolean[] checkedIntermediates = null;
-		for (LocationPointWrapper lp : points) {
-			if (lp.type == TARGETS) {
+		for (LocationPointWrapper locationPointWrapper : points) {
+			if (locationPointWrapper.type == TARGETS) {
 				if (checkedIntermediates == null) {
 					checkedIntermediates = new boolean[ps.size()];
 					Arrays.fill(checkedIntermediates, true);
 				}
-				if (((TargetPoint) lp.point).intermediate) {
-					checkedIntermediates[((TargetPoint) lp.point).index] = false;
+				if (((TargetPoint) locationPointWrapper.point).intermediate) {
+					checkedIntermediates[((TargetPoint) locationPointWrapper.point).index] = false;
 				} else {
 					checkedIntermediates[ps.size() - 1] = false;
 				}
-			} else if (lp.type < locationPoints.size()) {
-				locationPoints.get(lp.type).remove(lp);
+			} else if (locationPointWrapper.type < locationPoints.size()) {
+				locationPoints.get(locationPointWrapper.type).remove(locationPointWrapper);
 			}
 		}
 		if (checkedIntermediates != null) {
@@ -208,18 +208,18 @@ public class WaypointHelper {
 				continue;
 			}
 			int kIterator = pointsProgress.get(type);
-			List<LocationPointWrapper> lp = locationPoints.get(type);
-			while (kIterator < lp.size()) {
-				LocationPointWrapper lwp = lp.get(kIterator);
-				if (lp.get(kIterator).routeIndex < route.getCurrentRoute()) {
+			List<LocationPointWrapper> locationPointWrapper = locationPoints.get(type);
+			while (kIterator < locationPointWrapper.size()) {
+				LocationPointWrapper locationPointWrapper = locationPointWrapper.get(kIterator);
+				if (locationPointWrapper.get(kIterator).routeIndex < route.getCurrentRoute()) {
 					// skip
 				} else {
 					if (atd.isTurnStateActive(0,
-							route.getDistanceToPoint(lwp.routeIndex), STATE_LONG_PNT_APPROACH)) {
-						if (found == null || found.routeIndex < lwp.routeIndex) {
-							found = lwp;
+							route.getDistanceToPoint(locationPointWrapper.routeIndex), STATE_LONG_PNT_APPROACH)) {
+						if (found == null || found.routeIndex < locationPointWrapper.routeIndex) {
+							found = locationPointWrapper;
 							if (list != null) {
-								list.add(lwp);
+								list.add(locationPointWrapper);
 							}
 						}
 					}
@@ -341,22 +341,22 @@ public class WaypointHelper {
 	}
 
 	@Nullable
-	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
-	                                             SpeedConstants sc, boolean showCameras) {
-		float maxSpeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.getRouteTypeProfile());
+	public AlarmInfo calculateMostImportantAlarm(RouteDataObject routeDataObject, Location location, MetricsConstants mc,
+												 SpeedConstants sc, boolean showCameras) {
+		float maxSpeed = routeDataObject.getMaximumSpeed(routeDataObject.bearingVsRouteDirection(location), appMode.getRouteTypeProfile());
 		float delta = settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
-		AlarmInfo speedAlarm = createSpeedAlarm(sc, maxSpeed, loc, delta);
+		AlarmInfo speedAlarm = createSpeedAlarm(sc, maxSpeed, location, delta);
 		if (speedAlarm != null) {
-			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), loc.getSpeed());
+			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), location.getSpeed());
 			return speedAlarm;
 		}
-		for (int i = 0; i < ro.getPointsLength(); i++) {
-			int[] pointTypes = ro.getPointTypes(i);
-			RouteRegion reg = ro.region;
+		for (int i = 0; i < routeDataObject.getPointsLength(); i++) {
+			int[] pointTypes = routeDataObject.getPointTypes(i);
+			RouteRegion reg = routeDataObject.region;
 			if (pointTypes != null) {
 				for (int pointType : pointTypes) {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointType);
-					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
+					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, location);
 					if (info != null) {
 						if (info.getType() != SPEED_CAMERA || showCameras) {
 							return info;
@@ -392,12 +392,12 @@ public class WaypointHelper {
 				int currentRoute = route.getCurrentRoute();
 				List<LocationPointWrapper> approachPoints = new ArrayList<>();
 				List<LocationPointWrapper> announcePoints = new ArrayList<>();
-				List<LocationPointWrapper> lp = locationPoints.get(type);
-				if (lp != null) {
+				List<LocationPointWrapper> locationPointWrapper = locationPoints.get(type);
+				if (locationPointWrapper != null) {
 					int kIterator = pointsProgress.get(type);
-					while (kIterator < lp.size() && lp.get(kIterator).routeIndex < currentRoute) {
+					while (kIterator < locationPointWrapper.size() && locationPointWrapper.get(kIterator).routeIndex < currentRoute) {
 						if (type == ALARMS) {
-							AlarmInfo alarm = (AlarmInfo) lp.get(kIterator).getPoint();
+							AlarmInfo alarm = (AlarmInfo) locationPointWrapper.get(kIterator).getPoint();
 							if (alarm.getLastLocationIndex() >= currentRoute) {
 								break;
 							}
@@ -410,25 +410,25 @@ public class WaypointHelper {
 					AnnounceTimeDistances atd = voiceRouter.getAnnounceTimeDistances();
 					RouteDirectionInfo nextRoute = voiceRouter.getNextRouteDirection();
 					float atdSpeed = atd.getSpeed(lastKnownLocation);
-					while (kIterator < lp.size()) {
-						LocationPointWrapper lwp = lp.get(kIterator);
-						if (lwp.announce) {
+					while (kIterator < locationPointWrapper.size()) {
+						LocationPointWrapper locationPointWrapper = locationPointWrapper.get(kIterator);
+						if (locationPointWrapper.announce) {
 							if (!atd.isTurnStateActive(atdSpeed,
-									route.getDistanceToPoint(lwp.routeIndex) / 2f, STATE_LONG_PNT_APPROACH)) {
+									route.getDistanceToPoint(locationPointWrapper.routeIndex) / 2f, STATE_LONG_PNT_APPROACH)) {
 								break;
 							}
-							LocationPoint point = lwp.point;
-							double d1 = Math.max(0.0, route.getDistanceToPoint(lastKnownLocation, lwp.routeIndex - 1)
-									- lwp.getDeviationDistance());
+							LocationPoint point = locationPointWrapper.point;
+							double d1 = Math.max(0.0, route.getDistanceToPoint(lastKnownLocation, locationPointWrapper.routeIndex - 1)
+									- locationPointWrapper.getDeviationDistance());
 							Integer state = locationPointsStates.get(point);
 							if (state != null && state == ANNOUNCED_ONCE
 									&& atd.isTurnStateActive(atdSpeed, d1, STATE_SHORT_PNT_APPROACH)) {
 								locationPointsStates.put(point, ANNOUNCED_DONE);
-								announcePoints.add(lwp);
+								announcePoints.add(locationPointWrapper);
 							} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
 									&& atd.isTurnStateActive(atdSpeed, d1, STATE_LONG_PNT_APPROACH)) {
 								locationPointsStates.put(point, ANNOUNCED_ONCE);
-								approachPoints.add(lwp);
+								approachPoints.add(locationPointWrapper);
 							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)) {
 								AlarmInfo alarm = (AlarmInfo) point;
 								AlarmInfoType t = alarm.getType();
@@ -476,7 +476,7 @@ public class WaypointHelper {
 								}
 								if (proceed) {
 									locationPointsStates.put(point, ANNOUNCED_ONCE);
-									approachPoints.add(lwp);
+									approachPoints.add(locationPointWrapper);
 								}
 							}
 						}
@@ -633,7 +633,7 @@ public class WaypointHelper {
 		}
 	}
 
-	private float dist(LocationPoint l, List<Location> locations, int[] ind, boolean[] devDirRight) {
+	private float dist(LocationPoint l, List<Location> locations, int[] nearestPointIndex, boolean[] isDeviationToRight) {
 		float dist = Float.POSITIVE_INFINITY;
 		// Special iterations because points stored by pairs!
 		for (int i = 1; i < locations.size(); i++) {
@@ -642,16 +642,16 @@ public class WaypointHelper {
 					locations.get(i - 1).getLatitude(), locations.get(i - 1).getLongitude(),
 					locations.get(i).getLatitude(), locations.get(i).getLongitude());
 			if (ld < dist) {
-				if (ind != null) {
-					ind[0] = i;
+				if (nearestPointIndex != null) {
+					nearestPointIndex[0] = i;
 				}
 				dist = (float) ld;
 			}
 		}
 
-		if (ind != null && dist < Float.POSITIVE_INFINITY) {
-			int i = ind[0];
-			devDirRight[0] = MapUtils.rightSide(l.getLatitude(), l.getLongitude(),
+		if (nearestPointIndex != null && dist < Float.POSITIVE_INFINITY) {
+			int i = nearestPointIndex[0];
+			isDeviationToRight[0] = MapUtils.rightSide(l.getLatitude(), l.getLongitude(),
 					locations.get(i - 1).getLatitude(), locations.get(i - 1).getLongitude(),
 					locations.get(i).getLatitude(), locations.get(i).getLongitude());
 		}
@@ -685,15 +685,15 @@ public class WaypointHelper {
 
 	protected void calculatePoi(RouteCalculationResult route, List<LocationPointWrapper> locationPoints, boolean announcePOI) {
 		if (app.getPoiFilters().isShowingAnyPoi()) {
-			List<Location> locs = route.getImmutableAllLocations();
+			List<Location> routeLocations = route.getImmutableAllLocations();
 			List<Amenity> amenities = new ArrayList<>();
 			for (PoiUIFilter pf : app.getPoiFilters().getSelectedPoiFilters()) {
-				amenities.addAll(pf.searchAmenitiesOnThePath(locs, poiSearchDeviationRadius));
+				amenities.addAll(pf.searchAmenitiesOnThePath(routeLocations, poiSearchDeviationRadius));
 			}
 			for (Amenity amenity : amenities) {
 				AmenityRoutePoint routePoint = amenity.getRoutePoint();
 				if (routePoint != null) {
-					int i = locs.indexOf(routePoint.pointA);
+					int i = routeLocations.indexOf(routePoint.pointA);
 					if (i >= 0) {
 						AmenityLocationPoint point = new AmenityLocationPoint(amenity);
 						LocationPointWrapper wrapper = new LocationPointWrapper(POI, point, (float) routePoint.deviateDistance, i);
@@ -760,14 +760,14 @@ public class WaypointHelper {
 	private void findLocationPoints(RouteCalculationResult rt, int type, List<LocationPointWrapper> locationPoints,
 	                                List<? extends LocationPoint> points, boolean announce) {
 		List<Location> immutableAllLocations = rt.getImmutableAllLocations();
-		int[] ind = new int[1];
-		boolean[] devDirRight = new boolean[1];
+		int[] nearestPointIndex = new int[1];
+		boolean[] isDeviationToRight = new boolean[1];
 		for (LocationPoint p : points) {
-			float dist = dist(p, immutableAllLocations, ind, devDirRight);
-			int rad = getSearchDeviationRadius(type);
-			if (dist <= rad) {
-				LocationPointWrapper lpw = new LocationPointWrapper(type, p, dist, ind[0]);
-				lpw.deviationDirectionRight = devDirRight[0];
+			float dist = dist(p, immutableAllLocations, nearestPointIndex, isDeviationToRight);
+			int searchRadius = getSearchDeviationRadius(type);
+			if (dist <= searchRadius) {
+				LocationPointWrapper lpw = new LocationPointWrapper(type, p, dist, nearestPointIndex[0]);
+				lpw.deviationDirectionRight = isDeviationToRight[0];
 				lpw.setAnnounce(announce);
 				locationPoints.add(lpw);
 			}
