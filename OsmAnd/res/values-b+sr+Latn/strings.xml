@@ -409,7 +409,7 @@
     <string name="save_route_point">Sačuvaj tačku rute</string>
     <string name="save_gpx_waypoint">Sačuvaj međuodredište GPX-a</string>
     <string name="add_line">Dodaj liniju</string>
-    <string name="add_waypoint">Dodaj međuodredište</string>
+    <string name="add_waypoint">Dodaj prolaznu tačku</string>
     <string name="add_route_points">Dodaj tačku na ruti</string>
     <string name="retry">Pokušaj ponovo</string>
     <string name="mappilary_no_internet_desc">Slike sa Mapilarija je moguće videti samo ako ste povezani na internet.</string>
