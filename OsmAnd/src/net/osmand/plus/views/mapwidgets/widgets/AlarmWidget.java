@@ -258,7 +258,7 @@ public class AlarmWidget {
 	public AlarmWidgetInfo createWidgetInfo(@NonNull AlarmInfo alarm) {
 		DrivingRegion region = settings.DRIVING_REGION.get();
 		boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
-		boolean cams = settings.SHOW_CAMERAS.get();
+		boolean showCameras = settings.SHOW_CAMERAS.get();
 		boolean peds = settings.SHOW_PEDESTRIAN.get();
 		boolean speedLimitExceed = settings.SHOW_SPEED_LIMIT_WARNINGS.get();
 		boolean tunnels = settings.SHOW_TUNNELS.get();
@@ -325,7 +325,7 @@ public class AlarmWidget {
 		}
 		boolean visible;
 		if (alarm.getType() == SPEED_CAMERA) {
-			visible = cams;
+			visible = showCameras;
 		} else if (alarm.getType() == PEDESTRIAN) {
 			visible = peds;
 		} else if (alarm.getType() == SPEED_LIMIT) {
