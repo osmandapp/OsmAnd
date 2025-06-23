@@ -1,7 +1,6 @@
 package net.osmand.shared.obd
 
 import net.osmand.shared.util.LoggerFactory
-import okio.IOException
 
 class Obd2Connection(
 	private val connection: UnderlyingTransport,
@@ -14,9 +13,11 @@ class Obd2Connection(
 	private var initialized = false
 	private var finished = false
 
-	init {
-		runInitCommands()
-		initialized = true
+	suspend fun initialize() {
+		if (!initialized) {
+			runInitCommands()
+			initialized = true
+		}
 	}
 
 	fun isFinished() = finished
@@ -25,13 +26,13 @@ class Obd2Connection(
 		finished = true
 	}
 
-	private fun runInitCommands() {
+	private suspend fun runInitCommands() {
 		for (command in initCommands) {
 			runImpl(command)
 		}
 	}
 
-	private fun runImpl(command: String): String {
+	private suspend fun runImpl(command: String): String {
 		val response = StringBuilder()
 		connection.write((command + "\r").encodeToByteArray())
 		while (!finished) {
@@ -47,7 +48,7 @@ class Obd2Connection(
 		return responseValue
 	}
 
-	fun run(
+	suspend fun run(
 		fullCommand: String,
 		command: Int,
 		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
@@ -190,6 +191,6 @@ class Obd2Connection(
 }
 
 interface UnderlyingTransport {
-	fun write(bytes: ByteArray)
-	fun readByte(): Byte?
+	suspend fun write(bytes: ByteArray)
+	suspend fun readByte(): Byte?
 }
