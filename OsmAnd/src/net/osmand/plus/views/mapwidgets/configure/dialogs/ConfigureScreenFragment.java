@@ -55,7 +55,6 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 
 	private MapWidgetRegistry widgetRegistry;
 	private WidgetsSettingsHelper widgetsSettingsHelper;
-	private ApplicationMode selectedAppMode;
 
 	private MapActivity mapActivity;
 
@@ -80,9 +79,8 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mapActivity = (MapActivity) requireMyActivity();
-		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
-		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, selectedAppMode);
+		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, appMode);
 	}
 
 	@Nullable
@@ -219,7 +217,7 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 			item.bgSelectedColor = bgSelectedColor;
 			item.contentDescription = mode.toHumanString();
 			item.tag = mode;
-			if (Algorithms.objectEquals(selectedAppMode, mode)) {
+			if (Algorithms.objectEquals(appMode, mode)) {
 				selectedItem = item;
 			}
 			items.add(item);
@@ -227,10 +225,9 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		modesToggle.setItems(items);
 		modesToggle.setSelected(selectedItem);
 		modesToggle.setOnSelectChipListener(chip -> {
-			if (chip.tag instanceof ApplicationMode) {
-				ApplicationMode mode = (ApplicationMode) chip.tag;
-				if (!Algorithms.stringsEqual(mode.getStringKey(), selectedAppMode.getStringKey())) {
-					selectedAppMode = mode;
+			if (chip.tag instanceof ApplicationMode mode) {
+				if (!Algorithms.stringsEqual(mode.getStringKey(), appMode.getStringKey())) {
+					setAppMode(mode);
 					modesToggle.scrollTo(chip);
 					settings.setApplicationMode(mode);
 					updateFragment();
@@ -271,7 +268,7 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		if (mapActivity == null) {
 			return;
 		}
-		widgetsSettingsHelper.setAppMode(selectedAppMode);
+		widgetsSettingsHelper.setAppMode(appMode);
 		widgetsSettingsHelper.resetConfigureScreenSettings();
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
@@ -283,7 +280,7 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		if (mapActivity == null) {
 			return;
 		}
-		widgetsSettingsHelper.setAppMode(selectedAppMode);
+		widgetsSettingsHelper.setAppMode(appMode);
 		widgetsSettingsHelper.copyConfigureScreenSettings(fromAppMode);
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
