@@ -83,8 +83,8 @@
     <string name="city_type_village">Village</string>
     <string name="city_type_town">Ville</string>
     <string name="city_type_city">Ville</string>
-    <string name="animate_route_off">Arrêter l\'animation</string>
-    <string name="animate_route">Démarrer l\'animation</string>
+    <string name="animate_route_off">Arrêter la simulation</string>
+    <string name="animate_route">Démarrer la simulation</string>
     <string name="file_can_not_be_renamed">Impossible de renommer le fichier.</string>
     <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
     <string name="poi_query_by_name_matches_categories">Plusieurs catégories de POI ont été trouvées.</string>
@@ -161,7 +161,7 @@
     <string name="choose_audio_stream">Sortie audio pour le guidage</string>
     <string name="choose_audio_stream_descr">Sélectionner la sortie audio à utiliser pour le guidage vocal.</string>
     <string name="voice_stream_voice_call">Sortie audio appel téléphonique (interrompt le Bluetooth véhicule)</string>
-    <string name="voice_stream_notification">Sortie notifications</string>
+    <string name="voice_stream_notification">Notification audio</string>
     <string name="voice_stream_music">Audio média/navigation</string>
     <string name="warning_tile_layer_not_downloadable">L\'application ne peut télécharger la couche de carte %1$s, veuillez tenter de la réinstaller.</string>
     <string name="overlay_transparency_descr">Modifier la transparence de la surcouche.</string>
@@ -215,7 +215,7 @@
     <string name="amenity_type_geocache">Géocache</string>
     <string name="amenity_type_healthcare">Santé</string>
     <string name="amenity_type_historic">Historique</string>
-    <string name="amenity_type_landuse">Utilisation du sol</string>
+    <string name="amenity_type_landuse">Utilisation des sols</string>
     <string name="amenity_type_leisure">Loisir</string>
     <string name="amenity_type_man_made">Infrastructure</string>
     <string name="amenity_type_military">Militaire</string>
@@ -263,7 +263,7 @@
     <string name="daynight_mode_day">Jour</string>
     <string name="daynight_mode_night">Nuit</string>
     <string name="daynight_mode_auto">Lever/coucher du soleil</string>
-    <string name="daynight_mode_sensor">Détecter la luminosité</string>
+    <string name="daynight_mode_sensor">Capteur de luminosité</string>
     <string name="daynight_descr">Sélectionner les règles de bascule pour les modes jour/nuit.</string>
     <string name="daynight">Mode jour/nuit</string>
     <string name="download_files_question">Voulez-vous télécharger {0} fichier(s) ({1} MB) ?</string>
@@ -440,7 +440,7 @@
     <string name="fav_points_edited">Le favori a été modifié</string>
     <string name="fav_points_not_exist">Il n\'existe aucun favori</string>
     <string name="update_existing">Remplacer</string>
-    <string name="only_show">Afficher seulement</string>
+    <string name="only_show">Afficher l’itinéraire</string>
     <string name="follow">Démarrer le guidage</string>
     <string name="recalculate_route_to_your_location">Choisir le mode de transport :</string>
     <string name="mark_final_location_first">Veuillez d\'abord définir l\'arrivée</string>
@@ -450,7 +450,7 @@
     <string name="closing_changeset">Fermeture des modifications…</string>
     <string name="commiting_node">Envoi des nœuds…</string>
     <string name="loading_poi_obj">Chargement des POI…</string>
-    <string name="auth_failed">Échec de l\\\'autorisation</string>
+    <string name="auth_failed">Autorisation refusée</string>
     <string name="failed_op">Échec</string>
     <string name="converting_names">Conversion des noms locaux/anglais…</string>
     <string name="loading_streets_buildings">Chargement des rues/bâtiments…</string>
@@ -601,8 +601,8 @@
 \n
 \nPour découvrir comment modifier une carte, consultez notre site %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Les cartes vectorielles s\'affichent plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
-    <string name="play_commands_of_currently_selected_voice">Sélectionner une voix et tester les annonces vocales</string>
-    <string name="debugging_and_development">Débogage et développement OsmAnd</string>
+    <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et essayez-la en écoutant une annonce :</string>
+    <string name="debugging_and_development">Développement d\'OsmAnd</string>
     <string name="native_rendering">Rendu natif</string>
     <string name="test_voice_prompts">Tester les annonces vocales</string>
     <string name="send_files_to_osm">Envoyer les fichiers GPX à OSM ?</string>
@@ -894,7 +894,7 @@
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="max_speed_none">Aucune</string>
     <string name="prefer_motorways">Privilégier les autoroutes</string>
-    <string name="prefer_in_routing_title">Privilégier les routes…</string>
+    <string name="prefer_in_routing_title">Privilégier…</string>
     <string name="prefer_in_routing_descr">Privilégier les itinéraires sur autoroutes.</string>
     <string name="item_checked">coché</string>
     <string name="item_unchecked">non vérifié</string>
@@ -1503,8 +1503,8 @@
     <string name="archive_wikipedia_data">Le format des données Wikipédia est obsolète. Souhaitez-vous les archiver ?</string>
     <string name="lang_te">Télougou</string>
     <string name="restart_is_required">Un redémarrage de l’application est nécessaire pour appliquer la modification.</string>
-    <string name="rendering_attr_currentTrackColor_name">Couleur des traces GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Largeur des traces GPX</string>
+    <string name="rendering_attr_currentTrackColor_name">Couleur de la trace GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Largeur de la trace GPX</string>
     <string name="rendering_value_red_name">Rouge</string>
     <string name="rendering_value_translucent_red_name">Rouge translucide</string>
     <string name="rendering_value_translucent_orange_name">Orange translucide</string>
@@ -1693,8 +1693,8 @@
     <string name="osm_edit_modified_poi">POI OSM modifié</string>
     <string name="osm_edit_deleted_poi">POI OSM supprimé</string>
     <string name="osm_save_offline">Enregistrer pour utiliser hors ligne</string>
-    <string name="rendering_attr_currentTrackColor_description">Couleur GPX</string>
-    <string name="rendering_attr_currentTrackWidth_description">Largeur GPX</string>
+    <string name="rendering_attr_currentTrackColor_description">Couleur de la trace GPX sur la carte</string>
+    <string name="rendering_attr_currentTrackWidth_description">Largeur de la trace GPX sur la carte</string>
     <string name="rendering_attr_roadStyle_description">Style pour les routes</string>
     <string name="copied_to_clipboard">Copié dans le presse-papiers</string>
     <string name="use_dashboard_btn">Utiliser le tableau de bord</string>
@@ -2369,7 +2369,7 @@
     <string name="favourites_group">Catégorie de favoris</string>
     <string name="add_group">Ajouter un groupe</string>
     <string name="add_group_descr">Importer des groupes depuis des favoris ou des points de passage GPX.</string>
-    <string name="empty_state_markers_active">Ajouter des marques</string>
+    <string name="empty_state_markers_active">Créez des marqueurs de carte !</string>
     <string name="empty_state_markers_active_desc">Sélectionner des emplacements sur la carte puis appuyer sur le drapeau de marque.</string>
     <string name="empty_state_markers_groups">Importer des groupes</string>
     <string name="empty_state_markers_groups_desc">Importer des groupes de favoris ou des points de passage comme marques.</string>
@@ -2390,7 +2390,7 @@
     <string name="marker_activated">Marque %s activée.</string>
     <string name="one_tap_active_descr">Appuyez sur une marque de la carte pour qu\'elle devienne immédiatement la première marque active sans utiliser le menu contextuel.</string>
     <string name="one_tap_active">Appui court sur une marque</string>
-    <string name="empty_state_av_notes">Ajouter des notes</string>
+    <string name="empty_state_av_notes">Prenez des notes !</string>
     <string name="empty_state_av_notes_desc">Associer des notes sonore, vidéo ou photo à n\'importe quel point de la carte depuis le widget ou le menu contextuel.</string>
     <string name="notes_by_date">Notes A/V par date</string>
     <string name="by_date">Par date</string>
@@ -2701,7 +2701,7 @@
     <string name="rendering_attr_surface_compacted_name">Compacté</string>
     <string name="public_transport_warning_descr_blog">Pour savoir comment OsmAnd calcule les itinéraires, visitez notre blog.</string>
     <string name="public_transport_warning_title">Les itinéraires en transports en commun sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
-    <string name="add_intermediate">Ajouter un point intermédiaire</string>
+    <string name="add_intermediate">Ajouter une étape</string>
     <string name="shared_string_walk">Marche</string>
     <string name="save_poi_value_exceed_length">Réduisez la longueur d\'attribut « %s » à moins de 255 caractères.</string>
     <string name="save_poi_value_exceed_length_title">Taille de « %s »</string>
@@ -2792,7 +2792,7 @@
     <string name="routing_attr_freeride_policy_name">Hors-piste</string>
     <string name="process_downloading_service">Service de téléchargement OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">Appuyez à nouveau pour modifier l\'orientation de la carte</string>
-    <string name="shared_string_min_speed">Vitesse min.</string>
+    <string name="shared_string_min_speed">Vitesse minimale</string>
     <string name="shared_string_max_speed">Vitesse max.</string>
     <string name="default_speed_setting_title">Vitesse par défaut</string>
     <string name="minmax_speed_dialog_title">Définir la vitesse min/max</string>
@@ -3825,7 +3825,7 @@
     <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_wikipedia">Donne accès à tous les articles Wikipédia associés aux points d\'intérêts de la carte, permettant d\'en savoir plus sur un lieu en quelques clics. Pensez à télécharger les articles Wikipédia des régions de votre choix pour les consulter hors ligne.</string>
     <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Obtenez des mises à jour de cartes plus fréquentes : horaires, quotidiennes ou hebdomadaires. Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Bénéficiez de mises à jour de cartes plus régulières : horaires, quotidiennes ou hebdomadaires. Seules les zones modifiées sont mises à jour.</string>
     <string name="purchases_feature_desc_osmand_cloud">Utilisez OsmAnd Cloud pour sauvegarder toutes les données d\'OsmAnd en ligne. Plus aucun risque de perdre vos données après une réinstallation. Sauvegardez et restaurez toutes vos informations sans difficulté.</string>
     <string name="nautical_depth">Profondeur nautique</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
@@ -4006,7 +4006,7 @@
     <string name="no_plugins_enabled">Aucune extension n\'est activée. Consultez la liste des extensions disponibles dans : « Menu → Extensions ».</string>
     <string name="use_external_timestamps">Utiliser des estimations externes</string>
     <string name="use_external_timestamps_description">Utiliser les estimations de routeurs en ligne pour ajuster la durée et la vitesse moyenne</string>
-    <string name="safe_settings">Précis</string>
+    <string name="safe_settings">Sans échec</string>
     <string name="approx_safe_mode">Approximation précise des GPX</string>
     <string name="approx_safe_mode_description">Effectuer les approximations des GPX en utilisant Android (qui est plus lent) au lieu du code natif.</string>
     <string name="shared_string_travelbooks">Carnets de voyage</string>
@@ -5647,7 +5647,7 @@
     <string name="save_to_device">Enregistrer sur l\'appareil</string>
     <string name="travel_guides">Guides</string>
     <string name="show_debug_tile_description">Afficher les informations à propos des symboles de la carte sur chaque tuile</string>
-    <string name="show_debug_tile">Afficher les informations de la tuile</string>
+    <string name="show_debug_tile">Afficher les informations des tuiles</string>
     <string name="show_symbols_debug_info">Afficher les symboles pour déboguer</string>
     <string name="deactivated_map">Carte désactivée</string>
     <string name="suggest_activate_map_msg">La carte %1$s est désactivée,\nactivez-la pour consulter cette zone.</string>
@@ -5664,7 +5664,7 @@
     <string name="set_parking_position">Définir l\'emplacement de stationnement</string>
     <string name="set_work">Définir le lieu de travail</string>
     <string name="set_home">Définir l’emplacement du domicile</string>
-    <string name="set_intermediate_point">Définir une étape intermédiaire</string>
+    <string name="set_intermediate_point">Définir une étape</string>
     <string name="set_start_point">Définir le départ</string>
     <string name="ski_route_switch_style_description">Explorez les pistes de ski, les remontées mécaniques et plus encore avec le style de carte Hiver et Ski.</string>
     <string name="shared_string_switch">Interrupteur</string>
@@ -5675,4 +5675,6 @@
     <string name="osm_live_payment_3_years_title">Tous les trois ans</string>
     <string name="deleting">Suppression…</string>
     <string name="deleting_history">Suppression de l’historique…</string>
+    <string name="show_rasterization_debug_tile">Afficher les informations de rasterisation des tuiles</string>
+    <string name="show_symbols_bboxes">Afficher les boîtes englobantes des symboles</string>
 </resources>

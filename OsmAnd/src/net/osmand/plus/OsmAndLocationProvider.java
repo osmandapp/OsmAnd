@@ -603,7 +603,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private void simulatePositionImpl() {
 		if (simulatePosition != null) {
-			net.osmand.Location location = simulatePosition.getSimulatedLocation();
+			net.osmand.Location location = simulatePosition.getSimulatedLocationForTunnel();
 			if (location != null) {
 				setLocation(location);
 				simulatePosition();

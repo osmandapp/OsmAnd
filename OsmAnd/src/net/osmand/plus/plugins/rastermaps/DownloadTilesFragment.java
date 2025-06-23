@@ -140,7 +140,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 					latLon = savedLatLon;
 				}
 			}
-		} else {
+		} else if (tileSource != null) {
 			selectedMaxZoom = tileSource.getMaximumZoomSupported();
 			selectedMinZoom = Math.min(mapView.getZoom(), selectedMaxZoom);
 			if (args != null) {
@@ -160,6 +160,10 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		portraitMode = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
 		view = themedInflater.inflate(R.layout.download_tiles_fragment, container, false);
 
+		if (tileSource == null) {
+			dismiss();
+			return view;
+		}
 		mapWindow = view.findViewById(R.id.map_window);
 
 		View minZoomPreviewContainer = view.findViewById(R.id.min_zoom_tile_preview);
@@ -242,7 +246,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		return (v, v1, o) -> updateLatLon();
 	}
 
-	private void updateLatLon(){
+	private void updateLatLon() {
 		QuadRect rect = getLatLonRectOfMapWindow();
 		LatLon mapWindowCenter = new LatLon(rect.centerY(), rect.centerX());
 		latLon = mapWindowCenter;
@@ -721,7 +725,8 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		return false;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles, @NonNull MapLayerType layerType) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles,
+			@NonNull MapLayerType layerType) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			DownloadType downloadType = updateTiles ? DownloadType.ONLY_MISSING : DownloadType.ALL;

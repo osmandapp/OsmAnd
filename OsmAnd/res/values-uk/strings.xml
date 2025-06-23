@@ -2577,7 +2577,7 @@
     <string name="welcome_to_open_beta">Ласкаво просимо на відкрите бета-тестування</string>
     <string name="wikivoyage_travel_guide">Туристичні путівники</string>
     <string name="wikivoyage_travel_guide_descr">Путівники до найцікавіших місць на планеті – всередині OsmAnd і без підключення до Інтернету.</string>
-    <string name="clear_all_intermediates">Очистити усі проміжні точки</string>
+    <string name="clear_all_intermediates">Очистити всі проміжні пункти призначення</string>
     <string name="increase_search_radius_to">Розширити ділянку пошуку до %1$s</string>
     <string name="send_search_query_description">Ваш пошуковий запит разом із вашим положенням буде надіслано до: \"%1$s\".
 \n
@@ -2687,9 +2687,9 @@
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висота</string>
     <string name="add_destination_point">Додати пункт призначення</string>
-    <string name="add_intermediate_point">Додати проміжний пункт</string>
+    <string name="add_intermediate_point">Додати проміжний пункт призначення</string>
     <string name="add_start_point">Додати пункт відправлення</string>
-    <string name="intermediate_waypoint">Проміжна точка</string>
+    <string name="intermediate_waypoint">Проміжний пункт призначення</string>
     <string name="transfers">Пересадки</string>
     <string name="on_foot">Пішки</string>
     <string name="route_way">Шлях</string>
@@ -2714,7 +2714,7 @@
     <string name="save_poi_value_exceed_length">Довжина теґу \"%s\" має бути меншою за 255 символів.</string>
     <string name="public_transport_warning_descr_blog">Докладніше про те, як OsmAnd прокладає маршрути, читайте в нашому блозі.</string>
     <string name="public_transport_warning_title">Навігація громадським транспортом на даний час проходить тестування, можливі помилки та неточності.</string>
-    <string name="add_intermediate">Додати проміжну точку</string>
+    <string name="add_intermediate">Додати проміжний пункт призначення</string>
     <string name="transfers_size">%1$d пересадки</string>
     <string name="add_start_and_end_points">Додати пункти відправлення та призначення</string>
     <string name="route_add_start_point">Додати точку відправлення</string>
@@ -5777,7 +5777,7 @@
     <string name="set_parking_position">Встановити положення для паркування</string>
     <string name="set_work">Встановити роботу</string>
     <string name="set_home">Встановити домашній</string>
-    <string name="set_intermediate_point">Встановити проміжну точку</string>
+    <string name="set_intermediate_point">Встановити проміжний пункт призначення</string>
     <string name="set_start_point">Встановити початкову точку</string>
     <string name="ski_route_switch_style_description">Досліджуйте гірськолижні схили, підйомники та багато іншого за допомогою карти в стилі «Зима та лижі».</string>
     <string name="shared_string_switch">Перемикач</string>
@@ -5788,4 +5788,6 @@
     <string name="osm_live_payment_3_years_title">Кожні три роки</string>
     <string name="deleting">Видалення…</string>
     <string name="deleting_history">Видалення історії…</string>
+    <string name="show_rasterization_debug_tile">Показати інформацію про растеризацію плиток</string>
+    <string name="show_symbols_bboxes">Показати символи bboxes</string>
 </resources>
