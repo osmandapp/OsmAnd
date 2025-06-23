@@ -62,9 +62,9 @@ public class AlarmWidget {
 	private final RoutingHelper routingHelper;
 	private final MapViewTrackingUtilities trackingUtilities;
 	private final OsmAndLocationProvider locationProvider;
-	private final WaypointHelper waypointHelper;
+	private final WaypointHelper wh;
 
-	private int imageResourceId;
+	private int imgId;
 	private String cachedText;
 	private String cachedBottomText;
 	private DrivingRegion cachedRegion;
@@ -96,7 +96,7 @@ public class AlarmWidget {
 		trackingUtilities = app.getMapViewTrackingUtilities();
 		settings = app.getSettings();
 		locationProvider = app.getLocationProvider();
-		waypointHelper = app.getWaypointHelper();
+		wh = app.getWaypointHelper();
 	}
 
 	@Nullable
@@ -127,9 +127,9 @@ public class AlarmWidget {
 					if (layout != null) {
 						layout.setContentDescription(alarm.getType().getVisualName(app));
 					}
-					if (info.locationImageResId != imageResourceId) {
+					if (info.locationImageResId != imgId) {
 						changed = true;
-						imageResourceId = info.locationImageResId;
+						imgId = info.locationImageResId;
 						if (icon != null) {
 							icon.setImageResource(info.locationImageResId);
 						}
@@ -198,12 +198,12 @@ public class AlarmWidget {
 	private AlarmInfo getMostImportantAlarm(boolean showCameras) {
 		if (routingHelper.isFollowingMode() && !routingHelper.isDeviatedFromRoute()
 				&& (routingHelper.getCurrentGPXRoute() == null || routingHelper.isCurrentGPXRouteV2())) {
-			return waypointHelper.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), showCameras);
+			return wh.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), showCameras);
 		} else {
 			Location location = locationProvider.getLastKnownLocation();
 			RouteDataObject routeObject = locationProvider.getLastKnownRouteSegment();
 			if (routeObject != null && location != null) {
-				return waypointHelper.calculateMostImportantAlarm(routeObject, location,
+				return wh.calculateMostImportantAlarm(routeObject, location,
 						settings.METRIC_SYSTEM.get(), settings.SPEED_SYSTEM.get(), showCameras);
 			}
 		}
