@@ -91,8 +91,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 				if (bytesRead == 1L) {
 					return readBuffer.readByte()
 				}
-				if (bytesRead == -1L) { // End of stream
-					return null
+				if (bytesRead == -1L) { // End of stream. Skip it and wait for data.
 				}
 				// Suspend for a short duration to avoid hammering the CPU
 				delay(100)
