@@ -101,7 +101,7 @@ public class WaypointHelper {
 	}
 
 	private void registerPreferenceListener(@NonNull OsmandPreference<Boolean> preference, int type) {
-		StateChangedListener<Boolean> listener = newValue -> recalculatePointsAsync(type, null);
+		StateChangedListener<Boolean> listener = aBoolean -> recalculatePointsAsync(type, null);
 		registeredPrefListeners.put(preference.getId(), listener);
 		preference.addListener(listener);
 	}
@@ -341,18 +341,18 @@ public class WaypointHelper {
 	}
 
 	@Nullable
-	public AlarmInfo calculateMostImportantAlarm(RouteDataObject routeDataObject, Location location, MetricsConstants mc,
+	public AlarmInfo calculateMostImportantAlarm(RouteDataObject routeObject, Location location, MetricsConstants mc,
 												 SpeedConstants sc, boolean showCameras) {
-		float maxSpeed = routeDataObject.getMaximumSpeed(routeDataObject.bearingVsRouteDirection(location), appMode.getRouteTypeProfile());
+		float maxSpeed = routeObject.getMaximumSpeed(routeObject.bearingVsRouteDirection(location), appMode.getRouteTypeProfile());
 		float delta = settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, maxSpeed, location, delta);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), location.getSpeed());
 			return speedAlarm;
 		}
-		for (int i = 0; i < routeDataObject.getPointsLength(); i++) {
-			int[] pointTypes = routeDataObject.getPointTypes(i);
-			RouteRegion reg = routeDataObject.region;
+		for (int i = 0; i < routeObject.getPointsLength(); i++) {
+			int[] pointTypes = routeObject.getPointTypes(i);
+			RouteRegion reg = routeObject.region;
 			if (pointTypes != null) {
 				for (int pointType : pointTypes) {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointType);
@@ -633,7 +633,7 @@ public class WaypointHelper {
 		}
 	}
 
-	private float dist(LocationPoint l, List<Location> locations, int[] nearestPointIndex, boolean[] isDeviationToRight) {
+	private float dist(LocationPoint l, List<Location> locations, int[] ind, boolean[] devDirRight) {
 		float dist = Float.POSITIVE_INFINITY;
 		// Special iterations because points stored by pairs!
 		for (int i = 1; i < locations.size(); i++) {
@@ -642,16 +642,16 @@ public class WaypointHelper {
 					locations.get(i - 1).getLatitude(), locations.get(i - 1).getLongitude(),
 					locations.get(i).getLatitude(), locations.get(i).getLongitude());
 			if (ld < dist) {
-				if (nearestPointIndex != null) {
-					nearestPointIndex[0] = i;
+				if (ind != null) {
+					ind[0] = i;
 				}
 				dist = (float) ld;
 			}
 		}
 
-		if (nearestPointIndex != null && dist < Float.POSITIVE_INFINITY) {
-			int i = nearestPointIndex[0];
-			isDeviationToRight[0] = MapUtils.rightSide(l.getLatitude(), l.getLongitude(),
+		if (ind != null && dist < Float.POSITIVE_INFINITY) {
+			int i = ind[0];
+			devDirRight[0] = MapUtils.rightSide(l.getLatitude(), l.getLongitude(),
 					locations.get(i - 1).getLatitude(), locations.get(i - 1).getLongitude(),
 					locations.get(i).getLatitude(), locations.get(i).getLongitude());
 		}
@@ -760,14 +760,14 @@ public class WaypointHelper {
 	private void findLocationPoints(RouteCalculationResult rt, int type, List<LocationPointWrapper> locationPoints,
 	                                List<? extends LocationPoint> points, boolean announce) {
 		List<Location> immutableAllLocations = rt.getImmutableAllLocations();
-		int[] nearestPointIndex = new int[1];
-		boolean[] isDeviationToRight = new boolean[1];
+		int[] ind = new int[1];
+		boolean[] devDirRight = new boolean[1];
 		for (LocationPoint p : points) {
-			float dist = dist(p, immutableAllLocations, nearestPointIndex, isDeviationToRight);
+			float dist = dist(p, immutableAllLocations, ind, devDirRight);
 			int searchRadius = getSearchDeviationRadius(type);
 			if (dist <= searchRadius) {
-				LocationPointWrapper lpw = new LocationPointWrapper(type, p, dist, nearestPointIndex[0]);
-				lpw.deviationDirectionRight = isDeviationToRight[0];
+				LocationPointWrapper lpw = new LocationPointWrapper(type, p, dist, ind[0]);
+				lpw.deviationDirectionRight = devDirRight[0];
 				lpw.setAnnounce(announce);
 				locationPoints.add(lpw);
 			}
