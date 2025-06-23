@@ -33,11 +33,25 @@ class Obd2Connection(
 	}
 
 	private suspend fun runImpl(command: String): String {
-		val response = StringBuilder()
+		var response = StringBuilder()
 		connection.write((command + "\r").encodeToByteArray())
 		while (!finished) {
-			val value = connection.readByte() ?: continue
-			val c = value.toChar()
+			val readByte = connection.readByte()
+			when (readByte) {
+				UnderlyingTransport.READ_END_OF_STREAM -> {
+					response = StringBuilder("UNABLETOREAD")
+					break
+				}
+				UnderlyingTransport.READ_CONTEXT_INACTIVE -> {
+					response = StringBuilder("CONTEXTINACTIVE")
+					break
+				}
+				UnderlyingTransport.READ_TIMEOUT -> {
+					response = StringBuilder("TIMEOUT")
+					break
+				}
+			}
+			val c = readByte.toInt().toChar()
 			// this is the prompt, stop here
 			if (c == '>') break
 			if (c == '\r' || c == '\n' || c == ' ' || c == '\t' || c == '.') continue
@@ -80,7 +94,20 @@ class Obd2Connection(
 				log.error("connection failure")
 				return OBDResponse.ERROR
 			}
-
+			"CONTEXTINACTIVE" -> {
+				finished = true
+				log.error("context inactive")
+				return OBDResponse.ERROR
+			}
+			"UNABLETOREAD" -> {
+				finished = true
+				log.error("unable to read from stream")
+				return OBDResponse.ERROR
+			}
+			"TIMEOUT" -> {
+				log.error("reading timeout")
+				return OBDResponse.ERROR
+			}
 			"CANERROR" -> {
 				log.error("CAN bus error")
 				return OBDResponse.ERROR
@@ -191,6 +218,12 @@ class Obd2Connection(
 }
 
 interface UnderlyingTransport {
+	companion object {
+		val READ_END_OF_STREAM: Byte = -1
+		val READ_CONTEXT_INACTIVE: Byte = -2
+		val READ_TIMEOUT: Byte = -3
+	}
+
 	suspend fun write(bytes: ByteArray)
-	suspend fun readByte(): Byte?
+	suspend fun readByte(): Byte
 }
