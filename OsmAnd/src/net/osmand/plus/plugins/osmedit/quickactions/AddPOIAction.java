@@ -153,10 +153,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 		EditPoiData editPoiData = new EditPoiData(node, mapActivity.getMyApplication());
 		if (Boolean.parseBoolean(getParams().get(KEY_DIALOG)) || editPoiData.hasEmptyValue()) {
 			Entity newEntity = editPoiData.getEntity();
-			EditPoiDialogFragment editPoiDialogFragment =
-					EditPoiDialogFragment.createInstance(newEntity, true, getTagsFromParams());
-			editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
-					EditPoiDialogFragment.TAG);
+			EditPoiDialogFragment.showInstance(mapActivity, newEntity, true, getTagsFromParams());
 		} else {
 			OpenstreetmapUtil mOpenstreetmapUtil;
 			if (plugin.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {

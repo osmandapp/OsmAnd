@@ -52,6 +52,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private final FragmentActivity activity;
 	private AccessibilityAssistant accessibilityAssistant;
 	private final LayoutInflater inflater;
+	private final boolean nightMode;
 	@Nullable
 	private PoiUIFilter poiUIFilter;
 
@@ -75,11 +76,13 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		void reloadData();
 	}
 
-	public QuickSearchListAdapter(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
+	public QuickSearchListAdapter(@NonNull OsmandApplication app,
+	                              @NonNull FragmentActivity activity, boolean nightMode) {
 		super(activity, R.layout.search_list_item);
 		this.app = app;
 		this.activity = activity;
-		this.inflater = UiUtilities.getInflater(activity, isNightMode());
+		this.nightMode = nightMode;
+		this.inflater = UiUtilities.getInflater(activity, nightMode);
 
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
@@ -295,14 +298,14 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		TextView description = view.findViewById(R.id.description);
 		description.setText(R.string.search_history_is_disabled_descr);
 
-		int color = ColorUtilities.getActivityBgColor(app, isNightMode());
+		int color = ColorUtilities.getActivityBgColor(app, nightMode);
 		View cardContainer = view.findViewById(R.id.card_container);
 		AndroidUtils.setBackground(cardContainer, new ColorDrawable(color));
 
 		TextView analyseButtonDescr = view.findViewById(R.id.settings_button);
 		FrameLayout analyseButton = view.findViewById(R.id.settings_button_container);
-		AndroidUtils.setBackground(app, analyseButton, isNightMode(), R.drawable.btn_border_light, R.drawable.btn_border_dark);
-		AndroidUtils.setBackground(app, analyseButtonDescr, isNightMode(), R.drawable.ripple_light, R.drawable.ripple_dark);
+		AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 		analyseButton.setOnClickListener(disabledHistoryItem.getOnClickListener());
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), false);
@@ -419,7 +422,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private LinearLayout bindWikiItem(@Nullable View convertView, @NonNull QuickSearchListItem item) {
 		QuickSearchWikiItem wikiItem = new QuickSearchWikiItem(app, item.getSearchResult());
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
-		WikiItemViewHolder holder = new WikiItemViewHolder(view, updateLocationViewCache, isNightMode());
+		WikiItemViewHolder holder = new WikiItemViewHolder(view, updateLocationViewCache, nightMode);
 		holder.bindItem(wikiItem, poiUIFilter, useMapCenter);
 		return view;
 	}
@@ -435,7 +438,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				// remove item after downloading
 				remove(listItem);
 			} else {
-				bindIndexItem(view, indexItem, activity, isNightMode());
+				bindIndexItem(view, indexItem, activity, nightMode);
 			}
 		} else if (searchResult != null && searchResult.objectType == ObjectType.GPX_TRACK) {
 			view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
@@ -533,7 +536,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private void setupBackground(View view) {
-		view.setBackgroundColor(ColorUtilities.getListBgColor(app, isNightMode()));
+		view.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 
 	private void setupDivider(int position,
@@ -626,10 +629,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			toloc = item.getSearchResult().location;
 		}
 		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
-	}
-
-	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 	}
 
 	public void setPoiUIFilter(@Nullable PoiUIFilter poiUIFilter) {

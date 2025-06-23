@@ -94,11 +94,6 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 		return (OsmandActionBarActivity) requireActivity();
 	}
 
-	@Dimension
-	protected int getDimensionPixelSize(@DimenRes int resId) {
-		return getResources().getDimensionPixelSize(resId);
-	}
-
 	@NonNull
 	@Override
 	public ThemeUsageContext getThemeUsageContext() {

@@ -2,7 +2,9 @@ package net.osmand.plus.plugins.osmedit.dialogs;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -12,10 +14,11 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment.FileTypesDef;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "FileTypeBottomSheetDialogFragment";
+	public static final String TAG = FileTypeBottomSheetDialogFragment.class.getSimpleName();
 
 	private FileTypeFragmentListener listener;
 
@@ -34,14 +37,11 @@ public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 				.setIcon(fileIcon)
 				.setTitle(getString(R.string.osc_file))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onClick(OsmEditsFragment.FILE_TYPE_OSC);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onClick(OsmEditsFragment.FILE_TYPE_OSC);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(oscItem);
@@ -53,17 +53,24 @@ public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 				.setIcon(fileIcon)
 				.setTitle(getString(R.string.shared_string_gpx_file))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onClick(OsmEditsFragment.FILE_TYPE_GPX);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onClick(OsmEditsFragment.FILE_TYPE_GPX);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(gpxItem);
+	}
+
+	public static void showInstance(@NonNull FragmentManager childFragmentManager,
+	                                @NonNull FileTypeFragmentListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			FileTypeBottomSheetDialogFragment fragment = new FileTypeBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setListener(listener);
+			fragment.show(childFragmentManager, FileTypeBottomSheetDialogFragment.TAG);
+		}
 	}
 
 	public interface FileTypeFragmentListener {

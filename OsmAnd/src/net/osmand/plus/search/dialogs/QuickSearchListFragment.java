@@ -2,7 +2,6 @@ package net.osmand.plus.search.dialogs;
 
 import static net.osmand.search.core.ObjectType.*;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -22,11 +21,12 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.base.BaseNestedListFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
@@ -39,13 +39,11 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
 import net.osmand.plus.settings.enums.HistorySource;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
@@ -60,34 +58,34 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class QuickSearchListFragment extends OsmAndListFragment {
+public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 	private static final Log LOG = PlatformUtil.getLog(QuickSearchListFragment.class);
 
-	protected OsmandApplication app;
 	private QuickSearchDialogFragment dialogFragment;
 	private QuickSearchListAdapter listAdapter;
 	private boolean touching;
 	private boolean scrolling;
 	private boolean showResult;
 
-	enum SearchListFragmentType {
+	public enum SearchListFragmentType {
 		HISTORY,
 		CATEGORIES,
 		ADDRESS,
 		MAIN
 	}
 
+	@NonNull
 	public abstract SearchListFragmentType getType();
+
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
+		return inflate(getLayoutId(), container, false);
+	}
 
 	@LayoutRes
 	protected int getLayoutId() {
 		return R.layout.search_dialog_list_layout;
-	}
-
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		return UiUtilities.inflate(requireContext(), nightMode, getLayoutId(), container, false);
 	}
 
 	@Override
@@ -142,17 +140,10 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	}
 
 	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		app = getMyApplication();
-	}
-
-	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
-		listAdapter = new QuickSearchListAdapter(app, requireMapActivity());
+		listAdapter = new QuickSearchListAdapter(app, requireMapActivity(), nightMode);
 		listAdapter.setAccessibilityAssistant(dialogFragment.getAccessibilityAssistant());
 		listAdapter.setUseMapCenter(dialogFragment.isUseMapCenter());
 		setListAdapter(listAdapter);
@@ -222,8 +213,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			dialogFragment.hide();
 
 			List<String> locales = new ArrayList<>(amenity.getSupportedContentLocales());
+			LatLon location = amenity.getLocation();
 			TravelArticleIdentifier identifier = new TravelArticleIdentifier(null,
-					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), null, routeId, null);
+					location.getLatitude(), location.getLongitude(), null, routeId, null);
 			return WikivoyageArticleDialogFragment.showInstance(activity.getSupportFragmentManager(), identifier, locales);
 		}
 		return false;
@@ -395,15 +387,5 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				}
 			}
 		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		return (MapActivity) requireActivity();
 	}
 }

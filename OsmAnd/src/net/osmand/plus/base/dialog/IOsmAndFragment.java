@@ -1,5 +1,6 @@
 package net.osmand.plus.base.dialog;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DimenRes;
+import androidx.annotation.Dimension;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -18,12 +20,15 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.AppModeDependentComponent;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.util.Objects;
 
 /**
  * Interface that defines common functionality for OsmAnd fragments
@@ -50,6 +55,11 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 
 	@Nullable
 	FragmentActivity getActivity();
+
+	@NonNull
+	default Context getThemedContext() {
+		return getThemedInflater().getContext();
+	}
 
 	@NonNull
 	LayoutInflater getThemedInflater();
@@ -93,6 +103,14 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 		throw new IllegalStateException("Fragment " + this + " not attached to MapActivity.");
 	}
 
+	@Nullable
+	default OsmandActionBarActivity getActionBarActivity() {
+		if (getActivity() instanceof OsmandActionBarActivity) {
+			return (OsmandActionBarActivity) getActivity();
+		}
+		return null;
+	}
+
 	// === Theme and night mode resolution ===
 
 	/**
@@ -127,7 +145,8 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 		return AndroidUtils.dpToPx(getApp(), dp);
 	}
 
-	default int getDimension(@DimenRes int resId) {
+	@Dimension
+	default int getDimensionPixelSize(@DimenRes int resId) {
 		return getApp().getResources().getDimensionPixelSize(resId);
 	}
 
@@ -143,9 +162,19 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 
 	// === Icon access and customization ===
 
+	@NonNull
+	default Drawable requireIcon(@DrawableRes int id) {
+		return Objects.requireNonNull(getIcon(id));
+	}
+
 	@Nullable
 	default Drawable getIcon(@DrawableRes int id) {
 		return getIconsCache().getIcon(id);
+	}
+
+	@NonNull
+	default Drawable requireIcon(@DrawableRes int id, @ColorRes int colorId) {
+		return Objects.requireNonNull(getIcon(id, colorId));
 	}
 
 	@Nullable

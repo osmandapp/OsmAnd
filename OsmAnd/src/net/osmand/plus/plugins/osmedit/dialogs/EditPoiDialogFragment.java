@@ -581,39 +581,17 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 		}
 	}
 
-	public static EditPoiDialogFragment createAddPoiInstance(double latitude, double longitude,
-			OsmandApplication application) {
+	public static void showAddPoiInstance(@NonNull FragmentActivity activity,
+	                                      double latitude, double longitude) {
 		Node node = new Node(latitude, longitude, -1);
-		return createInstance(node, true);
+		showInstance(activity, node, true);
 	}
 
-	public static EditPoiDialogFragment createInstance(Entity entity, boolean isAddingPoi) {
-		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
-		Bundle args = new Bundle();
-		args.putSerializable(KEY_AMENITY_ENTITY, entity);
-		args.putBoolean(IS_ADDING_POI, isAddingPoi);
-		editPoiDialogFragment.setArguments(args);
-		return editPoiDialogFragment;
-	}
-
-	public static EditPoiDialogFragment createInstance(Entity entity, boolean isAddingPoi,
-			Map<String, String> tagList) {
-		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
-		Bundle args = new Bundle();
-		args.putSerializable(KEY_AMENITY_ENTITY, entity);
-		args.putBoolean(IS_ADDING_POI, isAddingPoi);
-		args.putSerializable(TAGS_LIST, (Serializable) Collections.unmodifiableMap(tagList));
-		editPoiDialogFragment.setArguments(args);
-		return editPoiDialogFragment;
-	}
-
-	public static void showEditInstance(@NonNull FragmentActivity activity,
-			@NonNull MapObject mapObject) {
+	public static void showEditInstance(@NonNull FragmentActivity activity, @NonNull MapObject mapObject) {
 		OsmandApplication app = AndroidUtils.getApp(activity);
 		LoadEntityTask task = new LoadEntityTask(app, mapObject, entity -> {
 			if (entity != null) {
-				EditPoiDialogFragment fragment = createInstance(entity, false);
-				fragment.show(activity.getSupportFragmentManager(), TAG);
+				showInstance(activity, entity, false);
 			} else {
 				app.showToastMessage(R.string.poi_cannot_be_found);
 			}
@@ -622,18 +600,42 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private final TextView.OnEditorActionListener mOnEditorActionListener =
-			new TextView.OnEditorActionListener() {
-				@Override
-				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-					boolean handled = false;
-					if (actionId == EditorInfo.IME_ACTION_SEND) {
-						trySave();
-						handled = true;
-					}
-					return handled;
-				}
-			};
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull Entity entity, boolean isAddingPoi) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			EditPoiDialogFragment fragment = new EditPoiDialogFragment();
+			Bundle args = new Bundle();
+			args.putSerializable(KEY_AMENITY_ENTITY, entity);
+			args.putBoolean(IS_ADDING_POI, isAddingPoi);
+			fragment.setArguments(args);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull Entity entity, boolean isAddingPoi,
+	                                @NonNull Map<String, String> tagList) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			EditPoiDialogFragment fragment = new EditPoiDialogFragment();
+			Bundle args = new Bundle();
+			args.putSerializable(KEY_AMENITY_ENTITY, entity);
+			args.putBoolean(IS_ADDING_POI, isAddingPoi);
+			args.putSerializable(TAGS_LIST, (Serializable) Collections.unmodifiableMap(tagList));
+			fragment.setArguments(args);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	private final TextView.OnEditorActionListener mOnEditorActionListener = (v, actionId, event) -> {
+		boolean handled = false;
+		if (actionId == EditorInfo.IME_ACTION_SEND) {
+			trySave();
+			handled = true;
+		}
+		return handled;
+	};
 
 	public interface OnFragmentActivatedListener {
 		void onFragmentActivated();

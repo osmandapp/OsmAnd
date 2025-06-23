@@ -1,7 +1,9 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import android.os.Bundle;
-import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -11,6 +13,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment.ExportTypesDef;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -45,14 +48,11 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setTitle(getString(R.string.poi))
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setDisabled(!(poiCount > 0))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onClick(OsmEditsFragment.EXPORT_TYPE_POI);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onClick(OsmEditsFragment.EXPORT_TYPE_POI);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(poiItem);
@@ -63,14 +63,11 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setTitle(getString(R.string.osm_notes))
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setDisabled(!(osmNotesCount > 0))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onClick(OsmEditsFragment.EXPORT_TYPE_NOTES);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onClick(OsmEditsFragment.EXPORT_TYPE_NOTES);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(osmNotesItem);
@@ -81,17 +78,29 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setTitle(getString(R.string.all_data))
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setDisabled(!(poiCount + osmNotesCount > 0))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onClick(OsmEditsFragment.EXPORT_TYPE_ALL);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onClick(OsmEditsFragment.EXPORT_TYPE_ALL);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(allDataItem);
+	}
+
+	public static void showInstance(@NonNull FragmentManager childFragmentManager,
+	                                @NonNull ExportOptionsFragmentListener listener,
+	                                int poiCount, int notesCount) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putInt(POI_COUNT_KEY, poiCount);
+			args.putInt(NOTES_COUNT_KEY, notesCount);
+			ExportOptionsBottomSheetDialogFragment fragment = new ExportOptionsBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(false);
+			fragment.setListener(listener);
+			fragment.show(childFragmentManager, TAG);
+		}
 	}
 
 	public interface ExportOptionsFragmentListener {

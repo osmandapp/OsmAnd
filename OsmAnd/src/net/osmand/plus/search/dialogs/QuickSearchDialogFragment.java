@@ -2089,9 +2089,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (fabVisible) {
 			int bottomMargin;
 			if (sendEmptySearchBottomBarVisible) {
-				bottomMargin = getDimension(R.dimen.fab_margin_bottom_big);
+				bottomMargin = getDimensionPixelSize(R.dimen.fab_margin_bottom_big);
 			} else {
-				bottomMargin = getDimension(R.dimen.fab_margin_right);
+				bottomMargin = getDimensionPixelSize(R.dimen.fab_margin_right);
 			}
 			FrameLayout.LayoutParams parameter = (FrameLayout.LayoutParams) fab.getLayoutParams();
 			parameter.setMargins(parameter.leftMargin, parameter.topMargin, parameter.rightMargin, bottomMargin);

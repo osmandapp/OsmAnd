@@ -59,7 +59,7 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_edit_poi_advanced_new, container, false);
+		View view = inflate(R.layout.fragment_edit_poi_advanced_new, container, false);
 
 		recyclerView = view.findViewById(R.id.content_recycler_view);
 
@@ -115,7 +115,7 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 			}
 		};
 
-		contentAdapter = new EditPoiContentAdapter((MapActivity) requireActivity(), getContentList(),
+		contentAdapter = new EditPoiContentAdapter(requireActivity(), getContentList(),
 				valueAdapter, tagAdapter, null, nightMode, getEditPoiFragment(), editPoiListener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(contentAdapter);

@@ -487,16 +487,6 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 		}
 	}
 
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
-	}
-
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull GpxFile gpxFile,
 	                                @NonNull String fileName,

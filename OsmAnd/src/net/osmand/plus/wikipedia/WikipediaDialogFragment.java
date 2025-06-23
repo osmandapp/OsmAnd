@@ -22,6 +22,7 @@ import android.webkit.WebSettings;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
@@ -270,10 +271,10 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	}
 
 	@Override
-	@Nullable
-	public Drawable getIcon(int resId) {
+	@NonNull
+	public Drawable getIcon(@DrawableRes int resId) {
 		int colorId = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
-		return getIcon(resId, colorId);
+		return requireIcon(resId, colorId);
 	}
 
 	@Override
@@ -286,10 +287,10 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, @NonNull Amenity amenity,
-			@Nullable String lang) {
-		FragmentManager manager = activity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull Amenity amenity, @Nullable String lang) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
 			WikipediaPlugin plugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
 			if (lang == null && plugin != null) {
 				OsmandApplication app = (OsmandApplication) activity.getApplication();

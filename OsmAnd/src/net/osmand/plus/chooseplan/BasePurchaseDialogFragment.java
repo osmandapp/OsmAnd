@@ -17,7 +17,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -99,7 +98,7 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(ContextCompat.getColor(ctx, getStatusBarColorId()));
+			window.setStatusBarColor(getColor(getStatusBarColorId()));
 		}
 		return dialog;
 	}
@@ -107,7 +106,7 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-			@Nullable Bundle savedInstanceState) {
+	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		mainView = themedInflater.inflate(getLayoutId(), container, false);
 		appBar = mainView.findViewById(R.id.appbar);
@@ -178,15 +177,6 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 
 	protected boolean isRequestingInventory() {
 		return purchaseHelper != null && purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY;
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 
 	@Override

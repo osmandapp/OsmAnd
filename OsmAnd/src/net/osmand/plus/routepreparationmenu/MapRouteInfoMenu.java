@@ -54,8 +54,6 @@ import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingPara
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.views.layers.MapSelectionResult;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -1986,8 +1984,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				selectNavPointController.selectMapMarker(mapActivity, marker, pointType);
 				updateMenu();
 			} else {
-				MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);
-				selectionFragment.show(mapActivity.getSupportFragmentManager(), MapMarkerSelectionFragment.TAG);
+				MapMarkerSelectionFragment.showInstance(mapActivity, pointType);
 			}
 		}
 	}

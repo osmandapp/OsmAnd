@@ -1,39 +1,57 @@
 package net.osmand.plus.base;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.ArrayAdapter;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.StyleRes;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.DialogFragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.ListFragment;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.UiUtilities;
 
-public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment {
+/**
+ * Base fragment class for list-based screens in the OsmAnd application
+ * that directly inherit from Android's {@link androidx.fragment.app.ListFragment}.
+ * <p>
+ * This class ensures consistent access to essential application-level components such as
+ * {@link OsmandApplication}, {@link OsmandSettings}, and {@link UiUtilities}, and also
+ * handles theming (day/night mode) based on the current {@link ApplicationMode}.
+ * <p>
+ * Every list fragment in the app that would otherwise directly extend {@link ListFragment}
+ * must instead extend this class (or one of its descendants like {@link BaseNestedListFragment})
+ * to ensure proper UI behavior and access to shared resources.
+ */
+public abstract class BaseOsmAndListFragment extends ListFragment implements IOsmAndFragment {
 
 	protected OsmandApplication app;
-	protected OsmandSettings settings;
 	protected ApplicationMode appMode;
+	protected OsmandSettings settings;
 	protected UiUtilities iconsCache;
 	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = (OsmandApplication) requireActivity().getApplication();
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
 		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
 		updateNightMode();
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		getListView().setBackgroundColor(getBackgroundColor());
 	}
 
 	protected void updateNightMode() {
@@ -45,16 +63,6 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		saveAppModeToBundle(appMode, outState);
-	}
-
-	@NonNull
-	public Context getThemedContext() {
-		return new ContextThemeWrapper(requireActivity(), getDialogThemeId());
-	}
-
-	@StyleRes
-	protected int getDialogThemeId() {
-		return nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	@NonNull
@@ -97,4 +105,12 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	public boolean isNightMode() {
 		return nightMode;
 	}
+	
+	public abstract ArrayAdapter<?> getAdapter();
+
+	@ColorInt
+	protected int getBackgroundColor() {
+		return ColorUtilities.getListBgColor(app, nightMode);
+	}
+	
 }
