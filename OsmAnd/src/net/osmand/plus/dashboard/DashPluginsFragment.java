@@ -151,11 +151,12 @@ public class DashPluginsFragment extends DashBaseFragment {
 			ivPluginLogo.setBackgroundResource(R.drawable.bg_plugin_logo_enabled_light);
 			ivPluginLogo.setContentDescription(getString(R.string.shared_string_disable));
 		} else {
-			try (TypedArray attributes = requireActivity().getTheme().obtainStyledAttributes(
+			try (TypedArray attributes = getThemedContext().getTheme().obtainStyledAttributes(
 					new int[]{R.attr.bg_plugin_logo_disabled})) {
 				ivPluginLogo.setBackground(attributes.getDrawable(0));
-				ivPluginLogo.setContentDescription(getString(plugin.isLocked() ? R.string.access_shared_string_not_installed : R.string.shared_string_enable));
-				attributes.recycle();
+				ivPluginLogo.setContentDescription(getString(plugin.isLocked()
+						? R.string.access_shared_string_not_installed
+						: R.string.shared_string_enable));
 			}
 		}
 	}
