@@ -332,9 +332,8 @@ public class MenuBuilder {
 			buildTitleRow(view);
 		}
 		buildWithinRow(view);
-		buildNearestWikiRow(view);
-		buildNearestPoiRow(view);
-		buildRouteRows(view);
+		buildNearestRows(view, object);
+
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
@@ -345,15 +344,17 @@ public class MenuBuilder {
 			buildCoordinatesRow(view);
 		}
 		if (!isCustomOnlinePhotosPosition()) {
-			buildNearestRows(view, object);
+			buildPhotosRow(view, object);
 		}
 	}
 
 	public void buildNearestRows(@NonNull ViewGroup view, @Nullable Object object) {
-		buildNearestPhotos(view, object);
+		buildNearestWikiRow(view);
+		buildNearestPoiRow(view);
+		buildRouteRows(view);
 	}
 
-	public void buildNearestPhotos(@NonNull ViewGroup view, @Nullable Object object) {
+	public void buildPhotosRow(@NonNull ViewGroup view, @Nullable Object object) {
 		galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos && galleryController != null) {
 			buildNearestPhotosRow(view);
