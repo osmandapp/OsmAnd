@@ -67,7 +67,7 @@ public class SimulationProvider {
 			int lastIdx = startIndex - increment;
 
 			for (int j = startIndex; increment > 0 ? j <= endIndex : j >= endIndex; j += increment) {
-        			int st31x = obj.getPoint31XTile(lastIdx);
+				int st31x = obj.getPoint31XTile(lastIdx);
 				int st31y = obj.getPoint31YTile(lastIdx);
 				int end31x = obj.getPoint31XTile(j);
 				int end31y = obj.getPoint31YTile(j);
@@ -94,9 +94,9 @@ public class SimulationProvider {
 						return -1;
 					}
 
-                			location.setLongitude(MapUtils.get31LongitudeX(prx));
-               				location.setLatitude(MapUtils.get31LatitudeY(pry));
-               				return Math.max(meters - dist, 0);
+					location.setLongitude(MapUtils.get31LongitudeX(prx));
+					location.setLatitude(MapUtils.get31LatitudeY(pry));
+					return Math.max(meters - dist, 0);
 				} else {
 					LOG.error(String.format(Locale.US,
 							"proceedMeters break at the end of the road (sx=%d, sy=%d) (%s)", st31x, st31y, road));
