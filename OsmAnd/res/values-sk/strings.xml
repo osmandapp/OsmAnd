@@ -2525,7 +2525,7 @@
     <string name="nothing_found_in_radius">Nič sa nenašlo:</string>
     <string name="select_waypoints_category_description">Pridať všetky body trasy alebo vybrať jednotlivé kategórie.</string>
     <string name="shared_string_total">Spolu</string>
-    <string name="clear_all_intermediates">Zmazať všetky prechodné body</string>
+    <string name="clear_all_intermediates">Zmazať všetky medziciele</string>
     <string name="shared_string_travel_guides">Cestovní sprievodcovia</string>
     <string name="use_two_digits_longitude">Použiť 2 číslice pre dĺžku</string>
     <string name="online_webpage_warning">Stránka je dostupná len online. Otvoriť vo webovom prehliadači?</string>
@@ -2674,7 +2674,7 @@
     <string name="add_destination_point">Zadať cieľ</string>
     <string name="add_intermediate_point">Pridať medzicieľ</string>
     <string name="add_start_point">Zadať štartovací bod</string>
-    <string name="intermediate_waypoint">Prechodný bod</string>
+    <string name="intermediate_waypoint">Medzicieľ</string>
     <string name="transfers">Prestupy</string>
     <string name="on_foot">Peši</string>
     <string name="route_way">Cesta</string>
@@ -2758,7 +2758,7 @@
     <string name="rendering_attr_undefined_name">Neurčené</string>
     <string name="public_transport_warning_descr_blog">Prečítajte si viac o výpočte trasy v OsmAnd na našom blogu.</string>
     <string name="public_transport_warning_title">Navigácia pomocou hromadnej dopravy je zatiaľ v testovaní, môžu sa vyskytnúť chyby a nepresnosti.</string>
-    <string name="add_intermediate">Pridať prechodný bod</string>
+    <string name="add_intermediate">Pridať medzicieľ</string>
     <string name="shared_string_degrees">Stupne</string>
     <string name="shared_string_milliradians">Miliradiány</string>
     <string name="angular_measeurement">Jednotky pre uhly</string>
@@ -5783,7 +5783,7 @@
     <string name="osm_live_payment_renews_3_years">Obnovuje sa každé tri roky</string>
     <string name="osm_live_payment_3_years_title">Každé tri roky</string>
     <string name="ski_route_switch_style_description">Skúmajte lyžiarske svahy, vleky a ďalšie objekty s mapovým štýlom Zima a lyžovanie.</string>
-    <string name="set_intermediate_point">Nastaviť prechodný bod</string>
+    <string name="set_intermediate_point">Nastaviť medzicieľ</string>
     <string name="set_start_point">Nastaviť počiatočný bod</string>
     <string name="hmd_promo_description_years">Bezplatný prístup k funkciám ako neobmedzené sťahovanie máp, 3D reliéf, atď. na %1$s rokov</string>
     <string name="hmd_promo_years">Propagačná akcia HMD na %1$s roky</string>
@@ -5800,4 +5800,6 @@
     <string name="deactivated_map">Vypnutá mapa</string>
     <string name="unit_of_temperature_description">Zvolené jednotky budú použité na všetky údaje o teplote v zvolenom profile.</string>
     <string name="suggest_activate_map_msg">Mapa %1$s je vypnutá,\nzapnite (obnovte) ju pre zobrazenie tejto oblasti.</string>
+    <string name="show_rasterization_debug_tile">Zobraziť informácie o rastrovaní dlaždíc</string>
+    <string name="show_symbols_bboxes">Zobraziť ohraničujúce rámce symbolov</string>
 </resources>

@@ -4132,7 +4132,7 @@
     <string name="display_route_tracks_as_poi">Tracks als POI anzeigen</string>
     <string name="delete_history_items">%1$s Verlaufseinträge löschen\?</string>
     <string name="quick_action_toggle_preference">Ein Schalter zum Ändern der Voreinstellung.</string>
-    <string name="delete_history_items_descr">Ausgewählte Verlaufseinträge löschen\?</string>
+    <string name="delete_history_items_descr">Diese Einträge werden aus dem Verlauf entfernt.</string>
     <string name="copying_file">Kopieren der Datei %1$s …</string>
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
