@@ -281,6 +281,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String url = extensions.get(TAG_URL);
 			if (PicassoUtils.isImageUrl(url)) {
 				AppCompatImageView imageView = inflateAndGetMainImageView(view);
+				imageView.setTag(R.id.testId, url);
 				PicassoUtils.setupImageViewByUrl(app, imageView, url, true);
 			}
 		}

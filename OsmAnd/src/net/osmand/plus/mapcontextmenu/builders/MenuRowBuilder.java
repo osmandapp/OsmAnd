@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -58,7 +57,7 @@ public class MenuRowBuilder {
 	public void buildDetailsRow(@NonNull View view, @Nullable Drawable icon, @Nullable String text,
 	                            @Nullable String textPrefix, @Nullable String textSuffix,
 	                            @Nullable CollapsableView collapsableView, boolean firstRow,
-	                            boolean parentRow, @Nullable OnClickListener onClickListener) {
+	                            boolean parentRow, @Nullable OnClickListener onClickListener, @Nullable String iconIdDescription) {
 		if (!firstRow && !parentRow) {
 			View horizontalLine = new View(view.getContext());
 			horizontalLine.setTag(DIVIDER_ROW_KEY);
@@ -104,6 +103,7 @@ public class MenuRowBuilder {
 			iconView.setLayoutParams(llIconParams);
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconView.setImageDrawable(icon);
+			iconView.setTag(R.id.testId, iconIdDescription);
 			llIcon.addView(iconView);
 		}
 

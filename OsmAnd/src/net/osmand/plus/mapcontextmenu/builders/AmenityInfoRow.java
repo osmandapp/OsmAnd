@@ -2,11 +2,14 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 
 public class AmenityInfoRow {
 
 	public final String key;
+	public final String iconIdDescription;
 	public Drawable icon;
 	public int iconId;
 	public final String textPrefix;
@@ -30,7 +33,7 @@ public class AmenityInfoRow {
 	                      CollapsableView collapsableView, int textColor, boolean isWiki,
 	                      boolean isText, boolean needLinks, int order, String name,
 	                      boolean isPhoneNumber, boolean isUrl,
-	                      boolean matchWidthDivider, int textLinesLimit) {
+	                      boolean matchWidthDivider, int textLinesLimit, @Nullable String iconIdDescription) {
 		this.key = key;
 		this.icon = icon;
 		this.textPrefix = textPrefix;
@@ -48,6 +51,7 @@ public class AmenityInfoRow {
 		this.isUrl = isUrl;
 		this.matchWidthDivider = matchWidthDivider;
 		this.textLinesLimit = textLinesLimit;
+		this.iconIdDescription = iconIdDescription;
 	}
 
 	public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
@@ -73,5 +77,6 @@ public class AmenityInfoRow {
 		this.isUrl = isUrl;
 		this.matchWidthDivider = matchWidthDivider;
 		this.textLinesLimit = textLinesLimit;
+		this.iconIdDescription = null;
 	}
 }

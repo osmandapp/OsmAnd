@@ -66,14 +66,14 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 		buildRow(view, getThemedIcon(R.drawable.ic_action_polygom_dark), null, app.getString(R.string.distance),
 				OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app), 0, null,
-				false, null, false, 0, false, false, false, null, false);
+				false, null, false, 0, false, false, false, null, false, "ic_action_polygom_dark");
 
 		String timeSpan = Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled());
 		String timeMoving = Algorithms.formatDuration((int) (analysis.getTimeMoving() / 1000), app.accessibilityEnabled());
 		String timeSpanTitle = app.getString(R.string.shared_string_time_span) + " / " + app.getString(R.string.moving_time);
 		buildRow(view, getThemedIcon(R.drawable.ic_action_time_span), null, timeSpanTitle,
 				timeSpan + " / " + timeMoving, 0, null,
-				false, null, false, 0, false, false, false, null, false);
+				false, null, false, 0, false, false, false, null, false, "ic_action_time_span");
 
 		Date start = new Date(analysis.getStartTime());
 		Date end = new Date(analysis.getEndTime());
@@ -87,7 +87,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		String startEndTimeTitle = app.getString(R.string.shared_string_start_time) + " - " + app.getString(R.string.shared_string_end_time);
 		buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, startEndTimeTitle,
 				startFormat.format(start) + " - " + endFormat.format(end), 0, null,
-				false, null, false, 0, false, false, false, null, true);
+				false, null, false, 0, false, false, false, null, true, "ic_action_time_start");
 	}
 
 	public void buildElevationRows(View view) {
@@ -96,23 +96,23 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_average), null, app.getString(R.string.average_altitude),
 					OsmAndFormatter.getFormattedAlt(analysis.getAvgElevation(), app), 0, null,
-					false, null, false, 0, false, false, false, null, false);
+					false, null, false, 0, false, false, false, null, false, "ic_action_altitude_average");
 
 			String min = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
 			String max = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
 			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_range), null, app.getString(R.string.altitude_range),
 					min + " - " + max, 0, null,
-					false, null, false, 0, false, false, false, null, false);
+					false, null, false, 0, false, false, false, null, false, "ic_action_altitude_range");
 
 			String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
 			String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
 			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_descent), null, app.getString(R.string.ascent_descent),
 					asc + " / " + desc, 0, null,
-					false, null, false, 0, false, false, false, null, true);
+					false, null, false, 0, false, false, false, null, true, "ic_action_altitude_descent");
 
 			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_descent), null, app.getString(R.string.distance_moving),
 					OsmAndFormatter.getFormattedDistance(analysis.getTotalDistanceMoving(), app), 0, null,
-					false, null, false, 0, false, false, false, null, true);
+					false, null, false, 0, false, false, false, null, true, "ic_action_altitude_descent");
 		}
 	}
 
@@ -122,11 +122,11 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.average_speed),
 					OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app), 0, null,
-					false, null, false, 0, false, false, false, null, false);
+					false, null, false, 0, false, false, false, null, false, "ic_action_speed");
 
 			buildRow(view, getThemedIcon(R.drawable.ic_action_max_speed), null, app.getString(R.string.max_speed),
 					OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app), 0, null,
-					false, null, false, 0, false, false, false, null, false);
+					false, null, false, 0, false, false, false, null, false, "ic_action_max_speed");
 		}
 	}
 
@@ -135,28 +135,28 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 		buildRow(view, getThemedIcon(R.drawable.ic_action_polygom_dark), null, app.getString(R.string.distance),
 				OsmAndFormatter.getFormattedDistance((float) selectedPoint.getDistance(), app), 0, null,
-				false, null, false, 0, false, false, false, null, false);
+				false, null, false, 0, false, false, false, null, false, "ic_action_polygom_dark");
 
 		if (selectedPoint.getTime() != 0) {
 			DateFormat format = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
 			buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, app.getString(R.string.shared_string_time),
 					format.format(selectedPoint.getTime()), 0, null,
-					false, null, false, 0, false, false, false, null, true);
+					false, null, false, 0, false, false, false, null, true, "ic_action_time_start");
 		}
 		if (!Double.isNaN(selectedPoint.getEle())) {
 			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude), null, app.getString(R.string.altitude),
 					OsmAndFormatter.getFormattedAlt(selectedPoint.getEle(), app), 0, null,
-					false, null, false, 0, false, false, false, null, false);
+					false, null, false, 0, false, false, false, null, false, "ic_action_altitude");
 		}
 		if (!Double.isNaN(selectedPoint.getSpeed())) {
 			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.shared_string_speed),
 					OsmAndFormatter.getFormattedSpeed((float) selectedPoint.getSpeed(), app), 0, null,
-					false, null, false, 0, false, false, false, null, false);
+					false, null, false, 0, false, false, false, null, false, "ic_action_speed");
 		}
 		if (!Float.isNaN(selectedGpxPoint.getBearing())) {
 			buildRow(view, getThemedIcon(R.drawable.ic_action_relative_bearing), null, app.getString(R.string.shared_string_bearing),
 					OsmAndFormatter.getFormattedAzimuth(selectedGpxPoint.getBearing(), app), 0, null,
-					false, null, false, 0, false, false, false, null, false);
+					false, null, false, 0, false, false, false, null, false, "ic_action_relative_bearing");
 		}
 	}
 
