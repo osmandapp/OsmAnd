@@ -1784,8 +1784,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_migration">Migration</string>
     <string name="icon_group_education">Education</string>
     <string name="icon_group_industrial">Industrial</string>
-    <string name="delete_history_items_descr">Delete selected history items?</string>
-    <string name="delete_history_items">Delete %1$s history items?</string>
+    <string name="delete_history_items_descr">Selected entries get removed from the list.</string>
+    <string name="delete_history_items">Delete %1$s history item(s)?</string>
     <string name="quick_action_toggle_preference">A toggle to change preference.</string>
     <string name="display_route_tracks">Display tracks</string>
     <string name="display_route_tracks_as_poi">Display tracks as POI</string>
