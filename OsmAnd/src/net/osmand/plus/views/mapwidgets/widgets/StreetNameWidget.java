@@ -48,11 +48,13 @@ import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -398,7 +400,9 @@ public class StreetNameWidget extends MapWidget {
 				useSpecialPosition = false;
 			}
 		}
+
 		if (useSpecialPosition) {
+			specialContainer.removeAllViews();
 			specialContainer.addView(view);
 		} else {
 			container.addView(view);
@@ -406,13 +410,22 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	@Override
-	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
-		super.detachView(widgetsPanel);
+	public void detachView(@NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+		super.detachView(widgetsPanel, widgets, mode);
 		// Clear in case link to previous view of StreetNameWidget is lost
 		ViewGroup specialContainer = getSpecialContainer();
-		if (specialContainer != null) {
+		if (specialContainer != null && !isAnyStreetNameEnabledForMode(widgets, mode)) {
 			specialContainer.removeAllViews();
 		}
+	}
+
+	private boolean isAnyStreetNameEnabledForMode(@NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+		for (MapWidgetInfo widgetInfo : widgets) {
+			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Nullable

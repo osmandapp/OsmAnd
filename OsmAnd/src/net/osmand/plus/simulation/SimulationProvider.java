@@ -57,13 +57,13 @@ public class SimulationProvider {
 		for (int i = currentRoad; i < roads.size(); i++) {
 			RouteSegmentResult road = roads.get(i);
 			boolean firstRoad = i == currentRoad;
-			boolean plus = road.getStartPointIndex() < road.getEndPointIndex();
-			for (int j = firstRoad ? currentSegment : (road.getStartPointIndex() + (plus ? +1 : -1));
-			     plus ? j <= road.getEndPointIndex() : j >= road.getEndPointIndex();
-			     j += plus ? +1 : -1) {
+			int increment = road.getStartPointIndex() < road.getEndPointIndex() ? +1 : -1;
+			for (int j = firstRoad ? currentSegment : (road.getStartPointIndex() + increment);
+			     increment > 0 ? j <= road.getEndPointIndex() : j >= road.getEndPointIndex();
+			     j += increment) {
 				RouteDataObject obj = road.getObject();
-				int st31x = obj.getPoint31XTile(plus ? j - 1 : j + 1);
-				int st31y = obj.getPoint31YTile(plus ? j - 1 : j + 1);
+				int st31x = obj.getPoint31XTile(j - increment);
+				int st31y = obj.getPoint31YTile(j - increment);
 				int end31x = obj.getPoint31XTile(j);
 				int end31y = obj.getPoint31YTile(j);
 				boolean last = i == roads.size() - 1 && j == road.getEndPointIndex();

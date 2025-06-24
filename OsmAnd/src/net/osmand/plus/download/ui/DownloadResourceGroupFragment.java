@@ -329,15 +329,15 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 	private void doSubscribe(String email) {
 		new AsyncTask<Void, Void, String>() {
 
-			ProgressDialog dlg;
+			ProgressDialog progress;
 
 			@Override
 			protected void onPreExecute() {
-				dlg = new ProgressDialog(getActivity());
-				dlg.setTitle("");
-				dlg.setMessage(getString(R.string.wait_current_task_finished));
-				dlg.setCancelable(false);
-				dlg.show();
+				progress = new ProgressDialog(getActivity());
+				progress.setTitle("");
+				progress.setMessage(getString(R.string.wait_current_task_finished));
+				progress.setCancelable(false);
+				progress.show();
 			}
 
 			@Override
@@ -360,9 +360,8 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 
 			@Override
 			protected void onPostExecute(String response) {
-				if (dlg != null) {
-					dlg.dismiss();
-					dlg = null;
+				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+					progress.dismiss();
 				}
 				if (response == null) {
 					app.showShortToastMessage(activity.getString(R.string.shared_string_unexpected_error));

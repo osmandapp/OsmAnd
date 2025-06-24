@@ -31,14 +31,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
-import net.osmand.plus.myplaces.tracks.DialogClosedListener;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksComparator;
 import net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController;
@@ -50,6 +48,7 @@ import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
@@ -62,6 +61,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFil
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
@@ -189,7 +189,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
+		if (requestCode == IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK && selectedFolder != null) {
 			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 			if (foldersHelper != null) {
 				foldersHelper.handleImport(data, SharedUtil.jFile(selectedFolder.getDirFile()));

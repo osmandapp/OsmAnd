@@ -21,16 +21,13 @@ public class SaveGpxHelper {
 		saveGpx(new File(gpx.getPath()), gpx, listener);
 	}
 
-	public static void saveGpx(@NonNull File file, @NonNull GpxFile gpx) {
-		saveGpx(file, gpx, null);
-	}
-
 	public static void saveGpx(@NonNull File file, @NonNull GpxFile gpx,
 	                           @Nullable SaveGpxListener listener) {
 		new SaveGpxAsyncTask(file, gpx, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	// TODO Do we need this? OsmandMonitoringPlugin.saveCurrentTrack() should be enough
 	public static void saveCurrentTrack(@NonNull OsmandApplication app, @NonNull GpxFile gpx,
 	                                    @NonNull SaveGpxListener listener) {
 		new SaveCurrentTrackTask(app, gpx, listener)
