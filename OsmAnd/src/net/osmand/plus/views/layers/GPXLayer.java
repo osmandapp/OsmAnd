@@ -184,7 +184,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
 	private long trackMarkersChangedTime;
-	private boolean isCarSessionEnabled = false;
 
 	private ContextMenuLayer contextMenuLayer;
 
@@ -220,7 +219,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		defaultColorPref = settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).cache();
 		defaultWidthPref = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).cache();
 
-		isCarSessionEnabled = app.isAppInForegroundOnAndroidAuto();
 		initUI();
 	}
 
@@ -1125,9 +1123,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	                                       List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		SelectedGpxFile currentTrack = null;
 		int baseOrder = getBaseOrder();
-
-		checkForCarSessionChanges();
-
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			GpxFile gpxFile = selectedGpxFile.getGpxFile();
 			String width = gpxAppearanceHelper.getTrackWidth(gpxFile, defaultWidthPref.get());
@@ -1144,15 +1139,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		if (currentTrack != null) {
 			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, baseOrder);
-		}
-	}
-
-	private void checkForCarSessionChanges(){
-		boolean newCarSessionState = app.isAppInForegroundOnAndroidAuto();
-		boolean carSessionChanged = isCarSessionEnabled != newCarSessionState;
-		if (carSessionChanged) {
-			isCarSessionEnabled = newCarSessionState;
-			segmentsCache.clear();
 		}
 	}
 

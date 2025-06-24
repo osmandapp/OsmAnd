@@ -190,7 +190,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public void onMapRendererChange(@Nullable MapRendererView currentMapRenderer,
 	                                @Nullable MapRendererView newMapRenderer) {
-		if (newMapRenderer == null) {
+		if (newMapRenderer == null || currentMapRenderer != newMapRenderer) {
 			cleanupResources();
 		} else {
 			mapRendererChanged = true;
