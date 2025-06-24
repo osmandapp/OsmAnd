@@ -276,9 +276,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		if (!settings.isLastKnownMapLocation()) {
 			// show first time when application ran
-			net.osmand.Location location = app.getLocationProvider().getFirstTimeRunDefaultLocation(loc -> {
+			net.osmand.Location location = app.getLocationProvider().getFirstTimeRunDefaultLocation(location -> {
 				if (app.getLocationProvider().getLastKnownLocation() == null) {
-					setMapInitialLatLon(getMapView(), loc);
+					setMapInitialLatLon(getMapView(), location);
 				}
 			});
 			getMapViewTrackingUtilities().setMapLinkedToLocation(true);
@@ -828,9 +828,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		if (status != 0) {
 			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
-			Location loc = new Location("map");
-			loc.setLatitude(mapView.getLatitude());
-			loc.setLongitude(mapView.getLongitude());
+			Location location = new Location("map");
+			location.setLatitude(mapView.getLatitude());
+			location.setLongitude(mapView.getLongitude());
 			getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
 			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();

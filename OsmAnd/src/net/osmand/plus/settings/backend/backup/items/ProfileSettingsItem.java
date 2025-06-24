@@ -13,7 +13,6 @@ import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.*;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.util.Algorithms;
@@ -179,8 +178,8 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 					.setRoutingProfile(modeBean.routingProfile)
 					.setRouteService(modeBean.routeService)
 					.setIconColor(modeBean.iconColor)
-					.setLocationIcon(modeBean.locIcon)
-					.setNavigationIcon(modeBean.navIcon);
+					.setLocationIcon(modeBean.locationIcon)
+					.setNavigationIcon(modeBean.navigationIcon);
 			getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode(), true);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		} else if (!shouldReplace && exists()) {
