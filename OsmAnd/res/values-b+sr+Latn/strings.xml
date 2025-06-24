@@ -409,7 +409,7 @@
     <string name="save_route_point">Sačuvaj tačku rute</string>
     <string name="save_gpx_waypoint">Sačuvaj međuodredište GPX-a</string>
     <string name="add_line">Dodaj liniju</string>
-    <string name="add_waypoint">Dodaj međuodredište</string>
+    <string name="add_waypoint">Dodaj prolaznu tačku</string>
     <string name="add_route_points">Dodaj tačku na ruti</string>
     <string name="retry">Pokušaj ponovo</string>
     <string name="mappilary_no_internet_desc">Slike sa Mapilarija je moguće videti samo ako ste povezani na internet.</string>
@@ -2994,7 +2994,7 @@
     <string name="distance_farthest">Prvo najudaljeniji</string>
     <string name="rendering_attr_whiteWaterSports_name">Sportovi na vodi</string>
     <string name="group_deleted">Grupa je izbrisana</string>
-    <string name="clear_all_intermediates">Očisti sva međuodredišta</string>
+    <string name="clear_all_intermediates">Očisti sva prolazna odredišta</string>
     <string name="shared_string_total">Ukupno</string>
     <string name="select_waypoints_category_description">Dodaj sva međuodredišta sa trasa ili odaberi zasebne kategorije.</string>
     <string name="nothing_found_in_radius">Nije nađeno ništa:</string>
@@ -3131,7 +3131,7 @@
     <string name="route_way">Put</string>
     <string name="on_foot">Peške</string>
     <string name="transfers">Transferi</string>
-    <string name="intermediate_waypoint">Međuodredište</string>
+    <string name="intermediate_waypoint">Prolazno odredište</string>
     <string name="add_start_point">Postavi početnu tačku</string>
     <string name="add_intermediate_point">Dodaj međuodredište</string>
     <string name="add_destination_point">Postavi odredište</string>
@@ -3167,7 +3167,7 @@
     <string name="route_add_start_point">Dodaj početnu tačku</string>
     <string name="add_start_and_end_points">Dodaj start i odredište</string>
     <string name="transfers_size">%1$d preuzimanja</string>
-    <string name="add_intermediate">Dodaj međuodredište</string>
+    <string name="add_intermediate">Dodaj prolazno odredište</string>
     <string name="public_transport_warning_title">Navođenje javnim prevozom je trenutno u beta fazi, očekuj greške i nepravilnosti.</string>
     <string name="public_transport_warning_descr_blog">Pročitaj kako OsmAnd izračunava puteve na našem blogu.</string>
     <string name="save_poi_value_exceed_length_title">Dužina vrednosti \"%s\"</string>
@@ -3792,7 +3792,7 @@
     <string name="osmand_live">OsmAnd Lajv</string>
     <string name="annual_subscription">Godišnja pretplata</string>
     <string name="monthly_subscription">Mesečna pretplata</string>
-    <string name="three_months_subscription">Tromesečna članarina</string>
+    <string name="three_months_subscription">Tromesečna pretplata</string>
     <string name="next_billing_date">Sledeći datum naplate: %1$s</string>
     <string name="osmand_live_cancelled">Otkazano</string>
     <string name="renew_subscription">Obnavljanje pretplate</string>
@@ -5746,4 +5746,23 @@
     <string name="uphill_downhill_split">Uzbrdo/nizbrdo</string>
     <string name="shared_string_flat">Ravno</string>
     <string name="shared_string_split_by">Razdvojiti po</string>
+    <string name="battery_level">Nivo baterije</string>
+    <string name="set_parking_position">Podesite parking poziciju</string>
+    <string name="set_start_point">Podesite polaznu tačku</string>
+    <string name="sensor_data">Podaci senzora</string>
+    <string name="set_home">Podesite kuću</string>
+    <string name="set_work">Podesite posao</string>
+    <string name="battery">baterija</string>
+    <string name="set_intermediate_point">Postavite prolazno odredište</string>
+    <string name="ski_route_switch_style_description">Istražite skijaške staze, žičare i još mnogo toga u stilu zimskih i skijaških mapa.</string>
+    <string name="shared_string_switch">Prekidač</string>
+    <string name="osm_live_payment_renews_3_years">Obnavlja se svake tri godine</string>
+    <string name="years_3">Tri godine</string>
+    <string name="osm_live_payment_3_years_title">Svake tri godine</string>
+    <string name="three_years_subscription">Trogodišnja pretplata</string>
+    <string name="release_5_1">• Dodata je podrška za kupovinu na WEB-u i preko platformi\n\n• Jedinice za temperaturu su premeštene u Opšta podešavanja radi lakšeg pristupa\n\n• Dodat je indikator nivoa baterije za BLE senzore\n\n• Novi, intuitivniji UI za izbor tačaka u Navigaciji\n\n• Poboljšana vidljivost vidžeta sa novim obrisom\n\n• Dodat je analizator Uspona/Spusta\n\n• Proširena integracija sa Vikipedijom i Vikivojažem za više TOI.</string>
+    <string name="deleting">Brisanje…</string>
+    <string name="deleting_history">Brisanje istorije…</string>
+    <string name="show_rasterization_debug_tile">Prikaži informacije o rasterizaciji pločica</string>
+    <string name="show_symbols_bboxes">Prikaži simbole boks okvirnih polja</string>
 </resources>

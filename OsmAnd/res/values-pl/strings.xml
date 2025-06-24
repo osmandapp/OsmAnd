@@ -5882,4 +5882,9 @@
     <string name="choose_location_on_map">Wybierz lokalizację na mapie.</string>
     <string name="ais_cpa_warning_distance_description">Statki są oznaczane kolorem czerwonym, jeśli CPA jest mniejsze od tej wartości i zostanie osiągnięte w niedalekiej przyszłości (patrz ustawienie Czasu ostrzeżenia o osiągnięciu CPA).</string>
     <string name="display_distance_to_first_intermediate">Pokaż szczegóły trasy dla następnego przystanku</string>
+    <string name="battery">akumulator</string>
+    <string name="ski_route_switch_style_description">Odkrywaj stoki narciarskie, wyciągi i nie tylko dzięki mapom w stylu zimowym i narciarskim.</string>
+    <string name="deleting">Usuwanie…</string>
+    <string name="shared_string_split_by">Podziel według</string>
+    <string name="deleting_history">Usuwanie historii…</string>
 </resources>

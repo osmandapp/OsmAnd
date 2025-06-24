@@ -4953,7 +4953,7 @@
     <string name="poi_atv_yes">VTT : oui</string>
     <string name="poi_atv_no">VTT : non</string>
     <string name="poi_access_notes">Notes d\'accès</string>
-    <string name="poi_contact_website">Site Internet</string>
+    <string name="poi_contact_website">Site web</string>
     <string name="poi_network_lwn">Itinéraires de randonnée locaux (LWN)</string>
     <string name="poi_network_icn">Itinéraires cyclables internationaux (ICN)</string>
     <string name="poi_network_rcn">Itinéraires cyclables régionaux (RCN)</string>
@@ -5041,7 +5041,6 @@
     <string name="poi_interior_design">Architecte d\'intérieur</string>
     <string name="poi_chamber">Chambre</string>
     <string name="poi_politician">Bureau politique</string>
-    <string name="poi_route_point_category">Catégorie de point de voyage</string>
     <string name="poi_mennonite_church">Église mennonite</string>
     <string name="poi_office_charity">Bureau de charité</string>
     <string name="poi_iglesia_ni_cristo_church">Église du Christ</string>
@@ -5070,4 +5069,5 @@
     <string name="poi_christian_church">Église chrétienne</string>
     <string name="poi_tutoring">Tutorat</string>
     <string name="poi_adoption_agency">Agence d\'adoption</string>
+    <string name="poi_route_point_category">Catégorie de point de voyage</string>
 </resources>

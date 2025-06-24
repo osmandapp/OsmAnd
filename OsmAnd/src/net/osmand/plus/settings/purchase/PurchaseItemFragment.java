@@ -61,6 +61,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	private PurchaseOrigin purchaseOrigin;
 	private PurchaseUiData purchase;
 	private InAppPurchaseHelper inAppPurchaseHelper;
+	private boolean externalInapp;
 
 	private View view;
 	private boolean isToolbarInitialized;
@@ -113,7 +114,9 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 					for (InAppStateHolder holder : inAppPurchaseHelper.getExternalInApps()) {
 						InAppPurchase inapp = holder.linkedPurchase;
 						if (inapp != null && holder.origin == purchaseOrigin && purchaseSku.equals(inapp.getSku())) {
-							purchase = PurchaseUiDataUtils.createUiData(app, inapp, holder.purchaseTime, UNDEFINED_TIME, holder.origin, null);
+							purchase = PurchaseUiDataUtils.createUiData(app, inapp, holder.purchaseTime,
+									holder.expireTime == 0 ? UNDEFINED_TIME : holder.expireTime, holder.origin, null);
+							externalInapp = true;
 							break;
 						}
 					}
@@ -164,6 +167,9 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		ViewGroup cardContainer = view.findViewById(R.id.card_container);
 		cardContainer.removeAllViews();
 		PurchaseItemCard card = new PurchaseItemCard(context, inAppPurchaseHelper, purchase);
+		if (externalInapp) {
+			card.setPreferPurchasedTimeTitle(true);
+		}
 		cardContainer.addView(card.build(context));
 
 		// Info blocks
@@ -184,11 +190,18 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 			updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
 		} else {
 			long purchaseTime = purchase.getPurchaseTime();
-			boolean hasTime = purchaseTime > 0;
+			long expireTime = purchase.getExpireTime();
+			boolean hasTime = purchaseTime > 0 || expireTime > 0;
 			if (hasTime) {
-				purchaseDesc = PurchaseUiDataUtils.DATE_FORMAT.format(purchaseTime);
-				purchaseTitle = app.getString(R.string.shared_string_purchased);
-				updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
+				if (expireTime > 0) {
+					purchaseDesc = PurchaseUiDataUtils.DATE_FORMAT.format(expireTime);
+					purchaseTitle = app.getString(R.string.shared_string_expires);
+					updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
+				} else {
+					purchaseDesc = PurchaseUiDataUtils.DATE_FORMAT.format(purchaseTime);
+					purchaseTitle = app.getString(R.string.shared_string_purchased);
+					updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
+				}
 			}
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.purchasing_period_block), hasTime);
 		}

@@ -5764,4 +5764,23 @@
     <string name="shared_string_flat">Rovina</string>
     <string name="uphill_downhill_split">Do kopce / z kopce</string>
     <string name="shared_string_split_by">Rozdělit podle</string>
+    <string name="battery_level">Úroveň baterie</string>
+    <string name="set_parking_position">Nastavit parkovací pozici</string>
+    <string name="set_work">Nastavit práci</string>
+    <string name="set_home">Nastavit domov</string>
+    <string name="set_intermediate_point">Nastavit mezicíl</string>
+    <string name="set_start_point">Nastavit začátek</string>
+    <string name="sensor_data">Data ze senzorů</string>
+    <string name="battery">baterie</string>
+    <string name="ski_route_switch_style_description">Procházejte sjezdovky, lanovky a další se zimním a lyžařským mapovým stylem.</string>
+    <string name="shared_string_switch">Přepnout</string>
+    <string name="release_5_1">• Přidána podpora pro webové a meziplatformní nákupy\n\n • Jednotky teploty přesunuty do Obecných nastavení pro jednodušší přístup\n\n • Přidán indikátor úrovně baterie pro senzory BLE\n\n • Nové, intuitivnější rozhraní pro výběr bodů v Navigaci\n\n • Vylepšena viditelnost widgetů s novým obrysem\n\n • Přidána analýza stoupání/klesání\n\n • Rozšířena integrace Wikimedia a Wikivoyage pro více bodů zájmu.</string>
+    <string name="osm_live_payment_renews_3_years">Obnovuje se každé tři roky</string>
+    <string name="years_3">Tři roky</string>
+    <string name="osm_live_payment_3_years_title">Každé tři roky</string>
+    <string name="three_years_subscription">Tříleté předplatné</string>
+    <string name="deleting_history">Mazání historie…</string>
+    <string name="deleting">Mazání…</string>
+    <string name="show_rasterization_debug_tile">Zobrazit informace o rasterizaci dlaždic</string>
+    <string name="show_symbols_bboxes">Zobrazit bboxy znaků</string>
 </resources>

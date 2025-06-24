@@ -28,7 +28,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
@@ -43,6 +43,7 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 	private final OsmandApplication app;
 	private final IProgress progress;
 	private final CheckAssetsListener listener;
+	private final List<String> warnings = new ArrayList<>();
 
 	private final boolean forceCheck;
 	private final boolean forceUpdate;
@@ -65,11 +66,12 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 
 	@Override
 	protected List<String> doInBackground(Void... params) {
-		return checkAssets();
+		checkAssets();
+		return warnings;
 	}
 
 	@NonNull
-	private List<String> checkAssets() {
+	private void checkAssets() {
 		if (app.getAppInitializer().isAppVersionChanged()) {
 			copyMissingJSAssets();
 		}
@@ -98,11 +100,11 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 						}
 					}
 				} catch (SQLiteException | IOException | XmlPullParserException e) {
+					warnings.add(e.getMessage());
 					log.error(e.getMessage(), e);
 				}
 			}
 		}
-		return Collections.emptyList();
 	}
 
 	public void copyMissingJSAssets() {
@@ -130,6 +132,7 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 				}
 			}
 		} catch (IOException e) {
+			warnings.add(e.getMessage());
 			log.error("Error while loading tts files from assets", e);
 		}
 	}
@@ -144,6 +147,7 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 				fout.close();
 			}
 		} catch (Exception e) {
+			warnings.add(e.getMessage());
 			log.error(e.getMessage(), e);
 		}
 	}

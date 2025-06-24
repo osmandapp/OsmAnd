@@ -14,14 +14,15 @@ import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,7 +33,6 @@ import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
-import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -52,7 +52,12 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.StringJoiner;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
@@ -60,10 +65,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public static final String WIKIPEDIA_ORG_WIKI_URL_PART = ".wikipedia.org/wiki/";
 
 	protected Amenity amenity;
-	private AmenityUIHelper rowsBuilder;
-	protected Map<String, String> additionalInfo;
-	boolean descriptionCollapsed = true;
-	boolean hasDescriptionData;
+
+	protected AmenityUIHelper amenityUIHelper;
+	protected Map<String, String> extensions;
+	protected AdditionalInfoBundle infoBundle;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
@@ -71,15 +76,20 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		setAmenity(amenity);
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
-		additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
-		if (additionalInfo.containsKey(WIKIDATA)) {
-			setCustomOnlinePhotosPosition(true);
-		}
 	}
 
 	@NonNull
 	public Amenity getAmenity() {
 		return amenity;
+	}
+
+	@Override
+	public void build(@NonNull ViewGroup view, @Nullable Object object) {
+		extensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
+		setCustomOnlinePhotosPosition(extensions.containsKey(WIKIDATA));
+		infoBundle = new AdditionalInfoBundle(app, extensions);
+
+		super.build(view, object);
 	}
 
 	@Override
@@ -92,43 +102,57 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected void buildDescription(View view) {
-		if (amenity != null) {
-			hasDescriptionData = true;
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, additionalInfo);
-			Map<String, Object> filteredInfo = bundle.getFilteredLocalizedInfo();
-
-			Pair<String, Locale> pair = getDescriptionWithPreferredLang(filteredInfo);
-			String description = pair.first;
-
-			if (Algorithms.isEmpty(description)) {
-				hasDescriptionData = false;
-				description = createWikipediaArticleList(filteredInfo);
+		Map<String, Object> filteredInfo = infoBundle.getFilteredLocalizedInfo();
+		if (!buildShortWikiDescription(view, filteredInfo, true)) {
+			Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(app, amenity, DESCRIPTION, filteredInfo);
+			if (pair != null) {
+				buildDescriptionRow(view, pair.first);
+				infoBundle.setCustomHiddenExtensions(Collections.singletonList(DESCRIPTION));
 			}
-			if (!Algorithms.isEmpty(description)) {
-				View rowView = buildRow(view, 0, null, description, 0, true,
-						null, false, 0, false, null, false);
-				TextViewEx textView = rowView.findViewById(R.id.text);
-				final String descriptionToSet = description;
-				textView.setOnClickListener(v -> {
-					descriptionCollapsed = !descriptionCollapsed;
-					updateDescriptionState(textView, descriptionToSet);
-				});
-				updateDescriptionState(textView, descriptionToSet);
-				buildReadFullWikiButton((LinearLayout) view, pair.second);
-			}
-			if (isCustomOnlinePhotosPosition()) {
-				buildNearestRows((ViewGroup) view, amenity);
-			}
+		}
+		if (isCustomOnlinePhotosPosition()) {
+			buildPhotosRow((ViewGroup) view, amenity);
 		}
 	}
 
-	protected void buildReadFullWikiButton(@NonNull ViewGroup container, @Nullable Locale locale) {
+	protected boolean buildShortWikiDescription(@NonNull View view,
+			@NonNull Map<String, Object> filteredInfo, boolean allowOnlineWiki) {
+		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(app, amenity, SHORT_DESCRIPTION, filteredInfo);
+		Locale locale = pair != null ? pair.second : null;
+		String description = pair != null ? pair.first : null;
+
+		boolean hasShortDescription = !Algorithms.isEmpty(description);
+		if (hasShortDescription) {
+			infoBundle.setCustomHiddenExtensions(Collections.singletonList(DESCRIPTION));
+		}
+		if (!hasShortDescription && allowOnlineWiki) {
+			description = createWikipediaArticleList(filteredInfo);
+		}
+		boolean descriptionCollapsed[] = {true};
+		if (!Algorithms.isEmpty(description)) {
+			View rowView = buildRow(view, 0, null, description, 0, true,
+					null, false, 0, false, null, false);
+			TextViewEx textView = rowView.findViewById(R.id.text);
+			final String descriptionToSet = description;
+			textView.setOnClickListener(v -> {
+				boolean collapsed = !descriptionCollapsed[0];
+				descriptionCollapsed[0] = collapsed;
+				updateDescriptionState(textView, descriptionToSet, collapsed);
+			});
+			updateDescriptionState(textView, descriptionToSet, descriptionCollapsed[0]);
+			buildReadFullWikiButton((LinearLayout) view, locale, hasShortDescription);
+		}
+		return hasShortDescription;
+	}
+
+	protected void buildReadFullWikiButton(@NonNull ViewGroup container, @Nullable Locale locale,
+			boolean hasShortDescription) {
 		boolean light = isLightContent();
 		Context ctx = container.getContext();
 		int activeColor = ColorUtilities.getActiveColor(ctx, !light);
 
 		DialogButton button = (DialogButton) themedInflater.inflate(R.layout.context_menu_read_wiki_button, container, false);
-		if (hasDescriptionData) {
+		if (hasShortDescription) {
 			String text = app.getString(R.string.context_menu_read_full_article);
 			button.setTitle(UiUtilities.createColorSpannable(text, activeColor, text));
 		} else {
@@ -147,7 +171,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 
 		button.setOnClickListener((v) -> {
-			if (hasDescriptionData) {
+			if (hasShortDescription) {
 				WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
 			} else {
 				String wikipediaUrl = amenity.getAdditionalInfo(WIKIPEDIA);
@@ -163,30 +187,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			}
 		});
 		container.addView(button);
-	}
-
-	@NonNull
-	private Pair<String, Locale> getDescriptionWithPreferredLang(@NonNull Map<String, Object> map) {
-		Object object = map.get(SHORT_DESCRIPTION);
-		if (object instanceof Map<?, ?>) {
-			Map<String, Object> descriptions = (Map<String, Object>) object;
-			Map<String, String> localizations = (Map<String, String>) descriptions.get("localizations");
-			Collection<String> locales = AmenityUIHelper.collectAvailableLocalesFromTags(localizations.keySet());
-
-			Locale locale = LocaleHelper.getPreferredNameLocale(app, locales);
-			String key = locale != null ? SHORT_DESCRIPTION + ":" + locale.getLanguage() : SHORT_DESCRIPTION;
-
-			String description = localizations.get(key);
-			if (description == null && locale != null && Algorithms.stringsEqual(locale.getLanguage(), "en")) {
-				description = localizations.get(SHORT_DESCRIPTION);
-			}
-			if (description == null) {
-				Map.Entry<String, String> entry = new ArrayList<>(localizations.entrySet()).get(0);
-				description = entry.getValue();
-			}
-			return Pair.create(description, locale);
-		}
-		return Pair.create(amenity.getAdditionalInfo(SHORT_DESCRIPTION), null);
 	}
 
 	@Nullable
@@ -216,9 +216,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		return null;
 	}
 
-	private void updateDescriptionState(TextViewEx textView, String description) {
+	private void updateDescriptionState(TextView textView, String description, boolean collapsed) {
 		String text = description;
-		if (descriptionCollapsed) {
+		if (collapsed) {
 			text = description.substring(0, Math.min(description.length(), 200));
 			if (description.length() > text.length()) {
 				int color = ColorUtilities.getActiveColor(app, !isLightContent());
@@ -237,27 +237,23 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		buildInternalRows(view);
 
 		if (PluginsHelper.getActivePlugin(OsmEditingPlugin.class) != null) {
-			rowsBuilder.buildWikiDataRow(view);
+			amenityUIHelper.buildWikiDataRow(view);
 		}
 
 		buildNearestRows((ViewGroup) view);
 		buildAltNamesRow((ViewGroup) view);
 		buildNamesRow((ViewGroup) view);
-		if (!rowsBuilder.isFirstRow()) {
-			firstRow = rowsBuilder.isFirstRow();
+		if (!amenityUIHelper.isFirstRow()) {
+			firstRow = amenityUIHelper.isFirstRow();
 		}
 	}
 
 	public void buildInternalRows(@NonNull View view) {
-		AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, additionalInfo);
-		if (hasDescriptionData) {
-			bundle.setCustomHiddenExtensions(Collections.singletonList(DESCRIPTION));
-		}
-		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
-		rowsBuilder.setLight(isLightContent());
-		rowsBuilder.setLatLon(getLatLon());
-		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
-		rowsBuilder.buildInternal(view);
+		amenityUIHelper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), infoBundle);
+		amenityUIHelper.setLight(isLightContent());
+		amenityUIHelper.setLatLon(getLatLon());
+		amenityUIHelper.setCollapseExpandListener(getCollapseExpandListener());
+		amenityUIHelper.buildInternal(view);
 	}
 
 	private void buildNamesRow(ViewGroup view) {
@@ -266,34 +262,28 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			names.put("", amenity.getName());
 		}
 		names.putAll(amenity.getNamesMap(true));
-		rowsBuilder.buildNamesRow(view, names, false);
+		amenityUIHelper.buildNamesRow(view, names, false);
 	}
 
 	private void buildAltNamesRow(ViewGroup view) {
-		rowsBuilder.buildNamesRow(view, amenity.getAltNamesMap(), true);
+		amenityUIHelper.buildNamesRow(view, amenity.getAltNamesMap(), true);
 	}
 
 	private void processRoutePointAmenityTags(View view) {
-		if (!amenity.isRoutePoint()) {
-			return;
-		}
-		final String wptExtraTags = additionalInfo.get(WPT_EXTRA_TAGS);
-		if (!Algorithms.isEmpty(wptExtraTags)) {
-			Gson gson = new Gson();
-			Type type = new TypeToken<Map<String, String>>() {}.getType();
-			additionalInfo.putAll(gson.fromJson(wptExtraTags, type));
-			additionalInfo.remove(WPT_EXTRA_TAGS);
-		}
-		final String url = additionalInfo.get(TAG_URL);
-		if (PicassoUtils.isImageUrl(url)) {
-			AppCompatImageView imageView = inflateAndGetMainImageView(view);
-			imageView.setTag(R.id.testId, url);
-			PicassoUtils.setupImageViewByUrl(app, imageView, url, true);
-		}
-		final String description = additionalInfo.get(DESCRIPTION);
-		if (!Algorithms.isEmpty(description)) {
-			buildDescriptionRow(view, description);
-			additionalInfo.remove(DESCRIPTION);
+		if (amenity.isRoutePoint()) {
+			String wptExtraTags = extensions.get(WPT_EXTRA_TAGS);
+			if (!Algorithms.isEmpty(wptExtraTags)) {
+				Gson gson = new Gson();
+				Type type = new TypeToken<Map<String, String>>() {}.getType();
+				extensions.putAll(gson.fromJson(wptExtraTags, type));
+				extensions.remove(WPT_EXTRA_TAGS);
+			}
+			String url = extensions.get(TAG_URL);
+			if (PicassoUtils.isImageUrl(url)) {
+				AppCompatImageView imageView = inflateAndGetMainImageView(view);
+				imageView.setTag(R.id.testId, url);
+				PicassoUtils.setupImageViewByUrl(app, imageView, url, true);
+			}
 		}
 	}
 
@@ -325,7 +315,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
 
 			firstRow = position == 0 || isDividerAtPosition(group, position - 1);
-			rowsBuilder.buildAmenityRow(amenitiesRow, wikiInfo);
+			amenityUIHelper.buildAmenityRow(amenitiesRow, wikiInfo);
 			group.addView(amenitiesRow, position);
 
 			buildNearestRowDividerIfMissing(group, position);
@@ -358,7 +348,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
 			firstRow = insertIndex == 0 || isDividerAtPosition(group, insertIndex - 1);
-			rowsBuilder.buildAmenityRow(amenitiesRow, poiInfo);
+			amenityUIHelper.buildAmenityRow(amenitiesRow, poiInfo);
 			group.addView(amenitiesRow, insertIndex);
 
 			buildNearestRowDividerIfMissing(group, insertIndex);
@@ -367,6 +357,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected Map<String, String> getAdditionalCardParams() {
-		return AmenityExtensionsHelper.getImagesParams(additionalInfo);
+		return AmenityExtensionsHelper.getImagesParams(extensions);
 	}
 }

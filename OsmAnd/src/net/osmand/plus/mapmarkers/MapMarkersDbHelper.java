@@ -8,7 +8,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupUtils;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidDbUtils;
 
@@ -233,7 +233,7 @@ public class MapMarkersDbHelper {
 
 		PointDescription pointDescription = marker.getOriginalPointDescription();
 		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {
-			SearchHistoryHelper.getInstance(context)
+			context.getSearchHistoryHelper()
 					.addNewItemToHistory(marker.getLatitude(), marker.getLongitude(), pointDescription, HistorySource.SEARCH);
 		}
 

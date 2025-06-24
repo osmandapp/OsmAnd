@@ -44,6 +44,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.LocaleHelper;
@@ -1050,5 +1051,35 @@ public class AmenityUIHelper extends MenuBuilder {
 	@Nullable
 	private Locale getPreferredLocale(Collection<String> locales) {
 		return LocaleHelper.getPreferredNameLocale(app, locales);
+	}
+
+
+	@Nullable
+	public static Pair<String, Locale> getDescriptionWithPreferredLang(@NonNull OsmandApplication app,
+			@NonNull Amenity amenity, @NonNull String key, @NonNull Map<String, Object> map) {
+		Object object = map.get(key);
+		if (object instanceof Map<?, ?>) {
+			Map<String, Object> descriptions = (Map<String, Object>) object;
+			Map<String, String> localizations = (Map<String, String>) descriptions.get("localizations");
+			Collection<String> locales = AmenityUIHelper.collectAvailableLocalesFromTags(localizations.keySet());
+
+			Locale locale = LocaleHelper.getPreferredNameLocale(app, locales);
+			String localeKey = locale != null ? key + ":" + locale.getLanguage() : key;
+
+			String description = localizations.get(localeKey);
+			if (description == null && locale != null && Algorithms.stringsEqual(locale.getLanguage(), "en")) {
+				description = localizations.get(key);
+			}
+			if (description == null) {
+				Map.Entry<String, String> entry = new ArrayList<>(localizations.entrySet()).get(0);
+				description = entry.getValue();
+			}
+			return Pair.create(description, locale);
+		}
+		String description = amenity.getAdditionalInfo(key);
+		if (!Algorithms.isEmpty(description)) {
+			return Pair.create(description, null);
+		}
+		return null;
 	}
 }

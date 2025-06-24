@@ -77,8 +77,6 @@ public class MapSelectionHelper {
 	private final OsmandMapTileView view;
 	private final MapLayers mapLayers;
 
-	private final TransportStopHelper transportStopHelper;
-
 	private Map<LatLon, BackgroundType> touchedFullMapObjects = new HashMap<>();
 	private Map<LatLon, BackgroundType> touchedSmallMapObjects = new HashMap<>();
 
@@ -89,7 +87,6 @@ public class MapSelectionHelper {
 		settings = app.getSettings();
 		view = app.getOsmandMap().getMapView();
 		mapLayers = app.getOsmandMap().getMapLayers();
-		transportStopHelper = new TransportStopHelper(app);
 		clickableWayHelper = new ClickableWayHelper(app, view);
 	}
 
@@ -594,7 +591,7 @@ public class MapSelectionHelper {
 					CommonPreference<String> pref = settings.getCustomRenderProperty(attrName);
 					enabled = property.containsValue(pref.get());
 				} else {
-					enabled = settings.getRenderBooleanPropertyValue(attrName);
+					enabled = settings.getRenderBooleanPropertyValue(property);
 				}
 				if (enabled) {
 					filteredOsmRouteTypes.add(osmRouteType);

@@ -20,11 +20,9 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.Version;
-import net.osmand.shared.data.KQuadRect;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
@@ -44,6 +42,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -359,7 +359,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	private void adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && selectedGpxFile != null) {
 			GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 			KQuadRect r = gpxFile.getRect();
 

@@ -79,13 +79,14 @@ public class MapDisplayPositionManager implements ViewportListener {
 
 	@Nullable
 	public PointF projectRatioToVisibleMapRect(@NonNull PointF ratio) {
-		if (visibleMapRect == null || mapView == null) {
+		Rect rect = visibleMapRect;
+		if (rect == null || mapView == null) {
 			return null;
 		}
 
 		RotatedTileBox tileBox = mapView.getRotatedTileBox();
-		float projectedRatioX = (visibleMapRect.left + visibleMapRect.width() * ratio.x) / tileBox.getPixWidth();
-		float projectedRatioY = (visibleMapRect.top + visibleMapRect.height() * ratio.y) / tileBox.getPixHeight();
+		float projectedRatioX = (rect.left + rect.width() * ratio.x) / tileBox.getPixWidth();
+		float projectedRatioY = (rect.top + rect.height() * ratio.y) / tileBox.getPixHeight();
 		return new PointF(projectedRatioX, projectedRatioY);
 	}
 

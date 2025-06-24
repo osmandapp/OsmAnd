@@ -85,6 +85,7 @@ import net.osmand.util.Algorithms;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -116,6 +117,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private TextView localRoutesMoreTv;
 
 	private View zoomButtonsView;
+	private MapButton zoomInButton;
+	private MapButton zoomOutButton;
 
 	private MapContextMenu menu;
 	private OnLayoutChangeListener containerLayoutListener;
@@ -506,8 +509,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			MapLayers mapLayers = mapActivity.getMapLayers();
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-			MapButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
-			MapButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+			zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+			zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
 			layer.addCustomizedDefaultMapButton(zoomInButton);
 			layer.addCustomizedDefaultMapButton(zoomOutButton);
 			zoomInButton.setUseDefaultAppearance(false);
@@ -1354,9 +1357,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		menu.setMapZoom(0);
 
 		MapActivity activity = getMapActivity();
-		if (activity != null) {
+		if (activity != null && zoomInButton != null && zoomOutButton != null) {
 			MapLayers mapLayers = activity.getMapLayers();
-			mapLayers.getMapControlsLayer().clearCustomMapButtons();
+			List<MapButton> mapButtons = Arrays.asList(zoomInButton, zoomOutButton);
+			mapLayers.getMapControlsLayer().removeCustomMapButtons(mapButtons);
 		}
 	}
 

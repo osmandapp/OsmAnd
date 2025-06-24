@@ -180,7 +180,7 @@ public class ConfigureMapUtils {
 		return enabled + "/" + count;
 	}
 
-	protected static String getRenderDescr(OsmandApplication app) {
+	public static String getRenderDescr(OsmandApplication app) {
 		RendererRegistry registry = app.getRendererRegistry();
 		RenderingRulesStorage storage = registry.getCurrentSelectedRenderer();
 		if (storage == null) {

@@ -846,6 +846,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
+	@Deprecated
 	private void calculateSrtmTrack() {
 		if (isCalculateSrtmMode() && calculateSrtmTask == null) {
 			try {
@@ -1596,9 +1597,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		WptPt oldPoint = editingCtx.getOriginalPointToMove();
 		WptPt newPoint = measurementLayer.getMovedPointToApply();
-		int position = editingCtx.getSelectedPointPosition();
-		editingCtx.getCommandManager().execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
-		editingCtx.addPoint(newPoint);
+		if (oldPoint != null && newPoint != null) {
+			int position = editingCtx.getSelectedPointPosition();
+			editingCtx.getCommandManager().execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
+			editingCtx.addPoint(newPoint);
+		}
 		exitMovePointMode(false);
 		doAddOrMovePointCommonStuff();
 		measurementLayer.refreshMap();
@@ -1616,7 +1619,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	void exitMovePointMode(boolean cancelled) {
 		if (cancelled) {
 			WptPt pt = editingCtx.getOriginalPointToMove();
-			editingCtx.addPoint(pt);
+			if (pt != null) {
+				editingCtx.addPoint(pt);
+			}
 		}
 		editingCtx.setOriginalPointToMove(null);
 		editingCtx.setSelectedPointPosition(-1);

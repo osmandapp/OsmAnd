@@ -5734,4 +5734,9 @@
     <string name="wiki_around">Populære steder i nærheten</string>
     <string name="prime_meridian">Nullmeridian</string>
     <string name="meridian_180">180. meridian</string>
+    <string name="deactivated_map">Deaktivert kart</string>
+    <string name="battery">batteri</string>
+    <string name="sensor_data">Sensordata</string>
+    <string name="battery_level">Batterinivå</string>
+    <string name="suggest_activate_map_msg">%1$s-kartet er deaktivert,\naktiver for å vise dette området.</string>
 </resources>

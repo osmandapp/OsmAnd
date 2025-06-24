@@ -5651,7 +5651,7 @@
     <string name="connect_new_scanner">Connetti il nuovo scanner</string>
     <string name="vehicle_metrics_recording_description">Seleziona i parametri da salvare nel file GPX.</string>
     <string name="shared_string_engine">Motore</string>
-    <string name="preview_next_turn">Anteprima della svolta successiva</string>
+    <string name="preview_next_turn">Anteprima della prossima svolta</string>
     <string name="location_interpolation_percent">Percentuale di interpolazione della posizione</string>
     <string name="location_interpolation_percent_desc">Imposta la percentuale di interpolazione della posizione durante la navigazione del percorso. Questo parametro riduce il ritardo della tua posizione sulla mappa durante l\'animazione.</string>
     <string name="shared_string_interpolation">Interpolazione</string>
@@ -5779,4 +5779,19 @@
     <string name="hmd_promo_description_years">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s anni</string>
     <string name="shared_string_flat">Pianeggiante</string>
     <string name="uphill_downhill_split">Salita/Discesa</string>
+    <string name="osm_live_payment_renews_3_years">Si rinnova ogni tre anni</string>
+    <string name="years_3">Tre anni</string>
+    <string name="osm_live_payment_3_years_title">Ogni tre anni</string>
+    <string name="three_years_subscription">Abbonamento di tre anni</string>
+    <string name="shared_string_switch">Cambia</string>
+    <string name="deleting">Cancellazione …</string>
+    <string name="deleting_history">Cancellazione della cronologia …</string>
+    <string name="release_5_1">• Aggiunto il supporto per acquisti web e tra piattaforme diverse\n\n • Spostato l\'unità di misura della Temperatura in Preferenze Generali per un accesso più semplice\n\n • Aggiunto l\'indicatore del livello di carica della batteria per i sensori BLE\n\n • Nuova, più intuitiva UI per la selezione dei punti nella Navigazione\n\n • Migliorata la visibilità del widget con un nuovo aspetto\n\n • Aggiunto l\'analizzatore delle salite/discese\n\n • Ampliata l\'integrazione di Wikipedia &amp; Wikivoyage con più PDI.</string>
+    <string name="set_home">Imposta casa</string>
+    <string name="set_intermediate_point">Imposta un punto intermedio</string>
+    <string name="set_start_point">Imposta un punto di partenza</string>
+    <string name="shared_string_split_by">Dividi per</string>
+    <string name="battery_level">Livello batteria</string>
+    <string name="set_parking_position">Imposta la posizione di parcheggio</string>
+    <string name="set_work">Imposta lavoro</string>
 </resources>

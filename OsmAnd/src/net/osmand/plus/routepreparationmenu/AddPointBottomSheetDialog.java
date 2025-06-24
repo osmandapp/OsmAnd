@@ -48,7 +48,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
+import net.osmand.plus.routepreparationmenu.data.PointType;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -76,7 +76,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private DialogListener listener;
 
 	public interface DialogListener {
-		void onSelectOnMap(AddPointBottomSheetDialog dialog);
+		void onRequestToSelectOnMap(@NonNull PointType pointType);
 	}
 
 	public DialogListener getListener() {
@@ -97,15 +97,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		if (args != null && args.containsKey(POINT_TYPE_KEY)) {
 			pointType = PointType.valueOf(args.getString(POINT_TYPE_KEY));
 		}
-		String title = switch (pointType) {
-			case START -> getString(R.string.add_start_point);
-			case TARGET -> getString(R.string.add_destination_point);
-			case INTERMEDIATE -> getString(R.string.add_intermediate_point);
-			case HOME -> getString(R.string.add_home);
-			case WORK -> getString(R.string.add_work);
-			default -> "";
-		};
-		items.add(new TitleItem(title));
+		items.add(new TitleItem(pointType.getTitle(requireContext())));
 
 		createSearchItem();
 
@@ -265,11 +257,12 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				.setOnClickListener(v -> {
 					MapActivity activity = (MapActivity) getActivity();
 					if (activity != null) {
-						MapRouteInfoMenu menu = activity.getMapRouteInfoMenu();
-						menu.selectOnScreen(pointType);
 						DialogListener listener = getListener();
 						if (listener != null) {
-							listener.onSelectOnMap(AddPointBottomSheetDialog.this);
+							listener.onRequestToSelectOnMap(pointType);
+						} else {
+							MapRouteInfoMenu menu = activity.getMapRouteInfoMenu();
+							menu.selectOnScreen(pointType);
 						}
 					}
 					dismiss();

@@ -2508,7 +2508,7 @@
     <string name="waypoints_removed_from_map_markers">Útpontok eltávolítva a térképjelölők közül</string>
     <string name="nothing_found_in_radius">Nincs találat:</string>
     <string name="select_waypoints_category_description">A nyomvonal összes útpontjának hozzáadása vagy külön kategóriák kijelölése.</string>
-    <string name="clear_all_intermediates">Összes köztes pont törlése</string>
+    <string name="clear_all_intermediates">Minden köztes célpont törlése</string>
     <string name="group_deleted">Csoport törölve</string>
     <string name="rendering_attr_whiteWaterSports_name">Vadvízi sportok</string>
     <string name="transport_nearby_routes_within">Közeli útvonalak ezen belül:</string>
@@ -2587,7 +2587,7 @@
     <string name="shared_string_width">Szélesség</string>
     <string name="shared_string_height">Magasság</string>
     <string name="add_destination_point">Úti cél megadása</string>
-    <string name="add_intermediate_point">Köztes pont hozzáadása</string>
+    <string name="add_intermediate_point">Köztes célpont hozzáadása</string>
     <string name="add_start_point">Kiindulópont megadása</string>
     <string name="intermediate_waypoint">Köztes célpont</string>
     <string name="transfers">Átszállások</string>
@@ -2678,7 +2678,7 @@
     <string name="shared_string_walk">Séta</string>
     <string name="public_transport_warning_descr_blog">Az OsmAnd útvonaltervezés módjáról a blogunkon olvashat.</string>
     <string name="public_transport_warning_title">A tömegközlekedési útvonaltervezés jelenleg bétatesztelési fázisban van, hibák és pontatlanságok előfordulhatnak.</string>
-    <string name="add_intermediate">Köztes pont hozzáadása</string>
+    <string name="add_intermediate">Köztes célpont hozzáadása</string>
     <string name="transfers_size">%1$d átszállás</string>
     <string name="shared_string_degrees">Fok</string>
     <string name="shared_string_milliradians">Milliradián</string>
@@ -5544,7 +5544,7 @@
     <string name="us_gallons_unit">gallon</string>
     <string name="record_obd_data">A jármű mérési adatainak rögzítése</string>
     <string name="wunderlinq_datagrid">WunderLINQ adatrács</string>
-    <string name="shared_string_volume">Hangerő</string>
+    <string name="shared_string_volume">Térfogat</string>
     <string name="obd_air_intake_temp_desc">Megjeleníti a motor szívócsonkjába belépő levegő hőmérsékletét.</string>
     <string name="obd_fuel_consumption_rate_sensor_type">A kiválasztott mértékegységek használata a névben.</string>
     <string name="remaining_fuel">Maradék üzemanyag</string>
@@ -5600,7 +5600,7 @@
     <string name="recently_visited">Nemrég meglátogatott</string>
     <string name="shared_string_avg_altitude">Átlagos magasság</string>
     <string name="shared_string_avg_speed">Legkisebb sebesség</string>
-    <string name="shared_string_length">Hosszúság</string>
+    <string name="shared_string_length">Távolság</string>
     <string name="map_widget_route_information">Útvonalinformációk</string>
     <string name="shared_string_default_view">Alapértelmezett nézet</string>
     <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktuális navigációs útvonal távolságát.</string>
@@ -5711,4 +5711,23 @@
     <string name="shared_string_flat">Sík</string>
     <string name="uphill_downhill_split">Felfelé / lefelé</string>
     <string name="shared_string_split_by">Felosztás eszerint:</string>
+    <string name="sensor_data">Érzékelőadatok</string>
+    <string name="battery_level">Akkumulátor töltöttsége</string>
+    <string name="set_parking_position">Parkolási hely megadása</string>
+    <string name="set_work">Munkahely megadása</string>
+    <string name="set_home">Otthon megadása</string>
+    <string name="set_intermediate_point">Köztes célpont megadása</string>
+    <string name="set_start_point">Kiindulópont megadása</string>
+    <string name="battery">akkumulátor</string>
+    <string name="shared_string_switch">Kapcsoló</string>
+    <string name="ski_route_switch_style_description">Fedezze fel a sípályákat, felvonókat és egyebeket a Tél és síelés térképstílussal.</string>
+    <string name="release_5_1">• Hozzáadott támogatás webes és platformfüggetlen vásárlásokhoz\n\n • A hőmérsékleti mértékegységek átkerültek az Általános beállításokba a könnyebb hozzáférés érdekében\n\n • Hozzáadott akkumulátorszint-jelző a BLE érzékelőkhöz\n\n • Új, intuitívabb felhasználói felület a pontok kiválasztásához a Navigációban\n\n • Widget láthatóság javítása új körvonallal\n\n • Hozzáadott emelkedők/lejtők elemző\n\n • Bővített Wikipédia és Wikivoyage integráció további érdekes helyekhez (POI).</string>
+    <string name="osm_live_payment_renews_3_years">Megújul 3 évente</string>
+    <string name="years_3">3 év</string>
+    <string name="osm_live_payment_3_years_title">3 évente</string>
+    <string name="three_years_subscription">3 éves előfizetés</string>
+    <string name="deleting">Törlés…</string>
+    <string name="deleting_history">Előzmények törlése…</string>
+    <string name="show_rasterization_debug_tile">Csempe raszterezési információk mutatása</string>
+    <string name="show_symbols_bboxes">Szimbólum határolókeretek mutatása</string>
 </resources>

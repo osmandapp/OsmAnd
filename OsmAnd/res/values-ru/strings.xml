@@ -5743,4 +5743,15 @@
     <string name="hmd_promo_years">Акция HMD на %1$s лет</string>
     <string name="show_symbols_debug_info">Показать информацию для отладки</string>
     <string name="shared_string_flat">Плоско</string>
+    <string name="shared_string_switch">Переключатель</string>
+    <string name="battery_level">Уровень заряда батареи</string>
+    <string name="sensor_data">Данные датчика</string>
+    <string name="set_home">Установить дом</string>
+    <string name="set_intermediate_point">Установить промежуточную точку</string>
+    <string name="set_work">Установить роботу</string>
+    <string name="ski_route_switch_style_description">Исследуйте горнолыжные склоны, подъёмники и другое с помощью карты в стиле «Зима и лыжи» .</string>
+    <string name="set_parking_position">Установить место для парковки</string>
+    <string name="battery">батарея</string>
+    <string name="shared_string_split_by">Разделить по</string>
+    <string name="set_start_point">Установить начальную точку</string>
 </resources>

@@ -49,8 +49,12 @@ abstract class ElevationApproximator {
 				survivedCount++
 			}
 		}
-		survived[pointsCount - 1] = true
-		survivedCount++
+
+		if (!getPointElevation(pointsCount - 1).isNaN()) {
+			survived[pointsCount - 1] = true
+			survivedCount++
+		}
+
 		if (survivedCount < 2) {
 			return false
 		}
@@ -79,11 +83,18 @@ abstract class ElevationApproximator {
 			return false
 		}
 
-		survived[0] = true
-		survived[pointsCount - 1] = true
-		val distances = DoubleArray(survivedCount + 2)
-		val elevations = DoubleArray(survivedCount + 2)
-		val survivedIndexes = IntArray(survivedCount + 2)
+		if (!getPointElevation(0).isNaN()) {
+			survived[0] = true
+			survivedCount++
+		}
+		if (!getPointElevation(pointsCount - 1).isNaN()) {
+			survived[pointsCount - 1] = true
+			survivedCount++
+		}
+
+		val distances = DoubleArray(survivedCount)
+		val elevations = DoubleArray(survivedCount)
+		val survivedIndexes = IntArray(survivedCount)
 		var k = 0
 		lastSurvived = 0
 		for (i in 0 until pointsCount) {

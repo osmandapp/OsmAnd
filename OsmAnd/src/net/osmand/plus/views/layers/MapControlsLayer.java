@@ -33,6 +33,7 @@ import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -181,6 +182,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		addCustomMapButton(mapButton, true, false, false, true);
 	}
 
+	public void addCustomizedDefaultMapButtons(@NonNull List<MapButton> mapButtons) {
+		for (MapButton mapButton : mapButtons) {
+			addCustomizedDefaultMapButton(mapButton);
+		}
+	}
+
 	public void addCustomizedDefaultMapButton(@NonNull MapButton mapButton) {
 		addCustomMapButton(mapButton, true, false, false, false);
 	}
@@ -192,8 +199,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return buttons;
 	}
 
-	public void clearCustomMapButtons() {
-		customMapButtons = new ArrayList<>();
+	public void removeCustomMapButtons(@NonNull List<MapButton> mapButtons) {
+		customMapButtons = CollectionUtils.removeAllFromList(customMapButtons, mapButtons);
 	}
 
 	public void showMapControlsIfHidden() {
@@ -357,10 +364,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			mapButton.setShowBottomButtons(showBottomMenuButtons);
 			mapButton.update();
 		}
-	}
-
-	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
-		return mapRouteInfoMenu != null && mapRouteInfoMenu.onSingleTap(point, tileBox);
 	}
 
 	@Override

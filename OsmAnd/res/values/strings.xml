@@ -10,13 +10,34 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+	<string name="deleting_history">Deleting history…</string>
+	<string name="deleting">Deleting…</string>
+    <string name="release_5_1">
+        • Added support for web and cross-platform purchases\n\n
+        • Moved Temperature units to General settings for easier access\n\n
+        • Added battery level indicator for BLE sensors\n\n
+        • New, more intuitive UI for point selection in Navigation\n\n
+        • Improved widget visibility with a new outline\n\n
+        • Added Uphills/Downhills analyzer\n\n
+        • Expanded Wikipedia &amp; Wikivoyage integration for more POIs.\n\n
+    </string>
+    <string name="osm_live_payment_renews_3_years">Renews every three years</string>
+    <string name="years_3">Three years</string>
+    <string name="osm_live_payment_3_years_title">Every three years</string>
+    <string name="three_years_subscription">Three years subscription</string>
+    <string name="shared_string_switch">Switch</string>
+	<string name="ski_route_switch_style_description">Explore ski slopes, lifts, and more with the "Winter and Ski" map style.</string>
     <string name="battery">battery</string>
     <string name="sensor_data">Sensor data</string>
     <string name="battery_level">Battery level</string>
     <string name="shared_string_split_by">Split by</string>
     <string name="shared_string_flat">Flat</string>
     <string name="uphill_downhill_split">Uphill / Downhill</string>
+    <string name="set_parking_position">Set parking position</string>
+    <string name="set_work">Set work</string>
+    <string name="set_home">Set home</string>
+    <string name="set_intermediate_point">Set intermediate destination</string>
+    <string name="set_start_point">Set start point</string>
     <string name="read_on">Read on %1$s</string>
     <string name="unit_of_temperature_description">Selected units will be applied to all temperature related data in the current profile.</string>
     <string name="deactivated_map">Deactivated map</string>
@@ -511,6 +532,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
     <string name="show_debug_tile">Show tile information</string>
+    <string name="show_rasterization_debug_tile">Show tile rasterization information</string>
     <string name="show_debug_tile_description">Display information about map symbols of each tile</string>
     <string name="show_debug_info">Show debug information</string>
     <string name="show_debug_info_description">Display graphical info about placement of each map text</string>
@@ -1762,8 +1784,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_migration">Migration</string>
     <string name="icon_group_education">Education</string>
     <string name="icon_group_industrial">Industrial</string>
-    <string name="delete_history_items_descr">Delete selected history items?</string>
-    <string name="delete_history_items">Delete %1$s history items?</string>
+    <string name="delete_history_items_descr">Selected entries get removed from the list.</string>
+    <string name="delete_history_items">Delete %1$s history item(s)?</string>
     <string name="quick_action_toggle_preference">A toggle to change preference.</string>
     <string name="display_route_tracks">Display tracks</string>
     <string name="display_route_tracks_as_poi">Display tracks as POI</string>
@@ -3112,7 +3134,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="save_poi_value_exceed_length_title">Length of \"%s\" value</string>
     <string name="public_transport_warning_descr_blog">Read more about OsmAnd routing on our blog.</string>
     <string name="public_transport_warning_title">Public transport navigation is currently in beta testing, expect errors and inaccuracies.</string>
-    <string name="add_intermediate">Add intermediate point</string>
+    <string name="add_intermediate">Add intermediate destination</string>
     <string name="transfers_size">%1$d transfers</string>
     <string name="add_start_and_end_points">Add departure and destination</string>
     <string name="route_add_start_point">Add point of departure</string>
@@ -3198,9 +3220,9 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_width">Width</string>
     <string name="shared_string_height">Height</string>
     <string name="add_destination_point">Set destination</string>
-    <string name="add_intermediate_point">Add intermediate</string>
+    <string name="add_intermediate_point">Add intermediate destination</string>
     <string name="add_start_point">Set starting point</string>
-    <string name="intermediate_waypoint">Intermediate point</string>
+    <string name="intermediate_waypoint">Intermediate destination</string>
     <string name="transfers">Transfers</string>
     <string name="on_foot">On foot</string>
     <string name="route_way">Way</string>
@@ -3355,7 +3377,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="nothing_found_in_radius">Could not find anything:</string>
     <string name="select_waypoints_category_description">Add all of the track\'s waypoints, or select separate categories.</string>
     <string name="shared_string_total">Total</string>
-    <string name="clear_all_intermediates">Clear all intermediate points</string>
+    <string name="clear_all_intermediates">Clear all intermediate destinations</string>
     <string name="group_deleted">Group deleted</string>
     <string name="rendering_attr_whiteWaterSports_name">Whitewater sports</string>
     <string name="distance_farthest">Farthest first</string>
@@ -6122,4 +6144,5 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
     <string name="show_symbols_debug_info">Show symbols debug info</string>
+    <string name="show_symbols_bboxes">Show symbols bboxes</string>
 </resources>

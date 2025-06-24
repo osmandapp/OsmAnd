@@ -1,6 +1,7 @@
 package net.osmand.plus.render;
 
 import static net.osmand.IndexConstants.ADDON_RENDERER_INDEX_EXT;
+import static net.osmand.IndexConstants.RENDERERS_DIR;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 
 import android.content.Context;
@@ -8,7 +9,6 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -67,10 +67,17 @@ public class RendererRegistry {
 	private Map<String, File> externalRenderers = new LinkedHashMap<>();
 	private final Map<String, String> internalRenderers = new LinkedHashMap<>();
 	private final Map<String, RenderingRulesStorage> loadedRenderers = new LinkedHashMap<>();
-	private final List<IRendererLoadedEventListener> rendererLoadedListeners = new ArrayList<>();
+	private final List<RendererEventListener> rendererLoadedListeners = new ArrayList<>();
 
-	public interface IRendererLoadedEventListener {
-		void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source);
+	public interface RendererEventListener {
+		default void onRendererSelected(RenderingRulesStorage storage) {
+
+		}
+
+		default void onRendererLoaded(String name, RenderingRulesStorage rules,
+				InputStream source) {
+
+		}
 	}
 
 	public RendererRegistry(@NonNull OsmandApplication app) {
@@ -104,27 +111,31 @@ public class RendererRegistry {
 
 	@Nullable
 	public RenderingRulesStorage getRenderer(String name) {
+		return getRenderer(name, null);
+	}
+
+	@Nullable
+	public RenderingRulesStorage getRenderer(@NonNull String name, @Nullable List<String> warnings) {
 		if (loadedRenderers.containsKey(name)) {
 			return loadedRenderers.get(name);
 		}
-
 		if (!hasRender(name)) {
 			return null;
 		}
-
 		try {
 			Map<String, String> renderingConstants = new LinkedHashMap<>();
 			RenderingRulesStorage renderer = loadRenderer(null, name, new LinkedHashMap<>(), renderingConstants);
 			if (renderer != null) {
 				for (String addonName : getRendererAddons().keySet()) {
 					loadRenderer(renderer, addonName, loadedRenderers, renderingConstants);
-//					renderer.mergeDependsOrAddon(storage);
 				}
 				loadedRenderers.put(name, renderer);
 			}
-
 			return renderer;
-		} catch (IOException | XmlPullParserException e) {
+		} catch (Exception e) {
+			if (warnings != null) {
+				warnings.add(e.getMessage());
+			}
 			log.error("Error loading renderer", e);
 		}
 		return null;
@@ -136,7 +147,7 @@ public class RendererRegistry {
 			defaultRender = storage;
 		}
 		if (currentSelectedRender == renderer) {
-			currentSelectedRender = storage;
+			setCurrentSelectedRender(storage);
 		}
 		loadedRenderers.put(storage.getName(), storage);
 	}
@@ -197,7 +208,7 @@ public class RendererRegistry {
 			}
 
 			if (!addon) {
-				for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
+				for (RendererEventListener listener : rendererLoadedListeners) {
 					listener.onRendererLoaded(name, main, getInputStream(name));
 				}
 			}
@@ -280,24 +291,24 @@ public class RendererRegistry {
 
 	public File getFileForInternalStyle(String name) {
 		String file = getInternalRender(name);
-		return file == null
-				? new File(app.getAppPath(IndexConstants.RENDERERS_DIR), "default.render.xml")
-				: new File(app.getAppPath(IndexConstants.RENDERERS_DIR), file);
+		File dir = app.getAppPath(RENDERERS_DIR);
+		return file == null ? new File(dir, DEFAULT_RENDER_FILE_PATH) : new File(dir, file);
 	}
 
-	public void initRenderers() {
+	public void initRenderers(@NonNull List<String> warnings) {
 		updateExternalRenderers();
-		String r = app.getSettings().RENDERER.get();
-		if (r != null) {
-			RenderingRulesStorage obj = getRenderer(r);
-			if (obj != null) {
-				setCurrentSelectedRender(obj);
+
+		String name = app.getSettings().RENDERER.get();
+		if (name != null) {
+			RenderingRulesStorage renderer = getRenderer(name, warnings);
+			if (renderer != null) {
+				setCurrentSelectedRender(renderer);
 			}
 		}
 	}
 
 	public void updateExternalRenderers() {
-		File file = app.getAppPath(IndexConstants.RENDERERS_DIR);
+		File file = app.getAppPath(RENDERERS_DIR);
 		file.mkdirs();
 		Map<String, File> externalRenderers = new LinkedHashMap<>();
 		if (file.exists() && file.canRead()) {
@@ -426,13 +437,17 @@ public class RendererRegistry {
 
 	public void setCurrentSelectedRender(RenderingRulesStorage currentSelectedRender) {
 		this.currentSelectedRender = currentSelectedRender;
+
+		for (RendererEventListener listener : rendererLoadedListeners) {
+			listener.onRendererSelected(currentSelectedRender);
+		}
 	}
 
-	public void addRendererLoadedEventListener(IRendererLoadedEventListener listener) {
+	public void addRendererEventListener(RendererEventListener listener) {
 		rendererLoadedListeners.add(listener);
 	}
 
-	public void removeRendererLoadedEventListener(IRendererLoadedEventListener listener) {
+	public void removeRendererEventListener(RendererEventListener listener) {
 		rendererLoadedListeners.remove(listener);
 	}
 

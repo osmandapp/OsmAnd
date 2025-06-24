@@ -127,10 +127,6 @@
 			tools:visibility="gone" />
 
 		<include
-			layout="@layout/move_marker_bottom_sheet"
-			tools:visibility="gone" />
-
-		<include
 			layout="@layout/add_gpx_point_bottom_sheet"
 			tools:visibility="gone" />
 

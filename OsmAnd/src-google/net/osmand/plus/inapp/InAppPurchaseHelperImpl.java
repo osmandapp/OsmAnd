@@ -19,6 +19,7 @@ import com.android.billingclient.api.Purchase;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -32,6 +33,8 @@ import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
+
+import org.json.JSONException;
 
 import java.lang.ref.WeakReference;
 import java.text.ParseException;
@@ -431,10 +434,26 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 				} else if (fullVersion != null) {
 					for (InAppStateHolder holder : inAppStateMap.values()) {
-						if (holder.linkedPurchase == fullVersion) {
+						if (holder.linkedPurchase != null && holder.linkedPurchase.isFullVersion()) {
 							ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 							break;
 						}
+					}
+				}
+
+				if (fullVersion != null && !fullVersionPurchased && Version.isFullVersion(ctx)) {
+					String json = "{ \"orderId\" : \"" + OSMAND_PLUS_APP_ORDER_ID + "\"," +
+							"\"packageName\" : \"" + ctx.getPackageName() + "\"," +
+							"\"productId\" : \"" + fullVersion.getSku() + "\"," +
+							"\"purchaseTime\" : " + Version.getInstallTime(ctx) + "," +
+							"\"purchaseState\" : 0," +
+							"\"purchaseToken\" : \"" + OSMAND_PLUS_APP_ORDER_ID + "\"," +
+							"\"acknowledged\" : true }";
+					try {
+						Purchase purchase = new Purchase(json, "");
+						completePurchases.add(purchase);
+					} catch (JSONException e) {
+						LOG.error("Error creating full version purchase", e);
 					}
 				}
 
@@ -448,31 +467,43 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				boolean subscribedToLiveUpdates = false;
 				boolean subscribedToOsmAndPro = false;
 				boolean subscribedToMaps = false;
-				InAppSubscription mapsSubscription = null;
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					Purchase purchase = getPurchase(s.getSku());
 					if (purchase != null || s.getState().isActive()) {
 						if (purchase != null) {
 							completePurchases.add(purchase);
 						}
-						if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
+						if (!subscribedToLiveUpdates && purchases.isLiveUpdates(s)) {
 							subscribedToLiveUpdates = true;
 						}
-						if (!subscribedToOsmAndPro && purchases.isOsmAndProSubscription(s)) {
+						if (!subscribedToOsmAndPro && purchases.isOsmAndPro(s)) {
 							subscribedToOsmAndPro = true;
 						}
-						if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
+						if (!subscribedToMaps && purchases.isMaps(s)) {
 							subscribedToMaps = true;
 						}
-					}
-					if (purchases.isMapsSubscription(s)) {
-						mapsSubscription = s;
 					}
 				}
 				if (!subscribedToMaps) {
 					for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
-						if (holder.linkedSubscription == mapsSubscription && holder.state == SubscriptionState.ACTIVE) {
+						if (holder.linkedSubscription != null && holder.linkedSubscription.isMaps()
+								&& holder.state == SubscriptionState.ACTIVE) {
 							subscribedToMaps = true;
+							break;
+						}
+					}
+				}
+				if (!subscribedToOsmAndPro) {
+					for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+						if (holder.linkedSubscription != null && holder.linkedSubscription.isOsmAndPro()
+								&& holder.state == SubscriptionState.ACTIVE) {
+							subscribedToOsmAndPro = true;
+							break;
+						}
+					}
+					for (InAppStateHolder holder : inAppStateMap.values()) {
+						if (holder.linkedPurchase != null && holder.linkedPurchase.isOsmAndPro()) {
+							subscribedToOsmAndPro = true;
 							break;
 						}
 					}
