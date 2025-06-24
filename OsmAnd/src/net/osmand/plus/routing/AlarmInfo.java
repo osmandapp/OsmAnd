@@ -94,31 +94,31 @@ public class AlarmInfo implements LocationPoint {
 	}
 
 	@Nullable
-	public static AlarmInfo createAlarmInfo(@NonNull RouteTypeRule ruleType, int locationIndex, @NonNull Location location) {
+	public static AlarmInfo createAlarmInfo(@NonNull RouteTypeRule ruleType, int locInd, @NonNull Location loc) {
 		AlarmInfo alarmInfo = null;
 		if ("highway".equals(ruleType.getTag())) {
 			if ("speed_camera".equals(ruleType.getValue())) {
-				alarmInfo = new AlarmInfo(SPEED_CAMERA, locationIndex);
+				alarmInfo = new AlarmInfo(SPEED_CAMERA, locInd);
 			} else if ("stop".equals(ruleType.getValue())) {
-				alarmInfo = new AlarmInfo(STOP, locationIndex);
+				alarmInfo = new AlarmInfo(STOP, locInd);
 			}
 		} else if ("barrier".equals(ruleType.getTag())) {
 			if ("toll_booth".equals(ruleType.getValue())) {
-				alarmInfo = new AlarmInfo(TOLL_BOOTH, locationIndex);
+				alarmInfo = new AlarmInfo(TOLL_BOOTH, locInd);
 			} else if ("border_control".equals(ruleType.getValue())) {
-				alarmInfo = new AlarmInfo(BORDER_CONTROL, locationIndex);
+				alarmInfo = new AlarmInfo(BORDER_CONTROL, locInd);
 			}
 		} else if ("traffic_calming".equals(ruleType.getTag())) {
-			alarmInfo = new AlarmInfo(TRAFFIC_CALMING, locationIndex);
+			alarmInfo = new AlarmInfo(TRAFFIC_CALMING, locInd);
 		} else if ("hazard".equals(ruleType.getTag())) {
-			alarmInfo = new AlarmInfo(HAZARD, locationIndex);
+			alarmInfo = new AlarmInfo(HAZARD, locInd);
 		} else if ("railway".equals(ruleType.getTag()) && "level_crossing".equals(ruleType.getValue())) {
-			alarmInfo = new AlarmInfo(RAILWAY, locationIndex);
+			alarmInfo = new AlarmInfo(RAILWAY, locInd);
 		} else if ("crossing".equals(ruleType.getTag()) && "uncontrolled".equals(ruleType.getValue())) {
-			alarmInfo = new AlarmInfo(PEDESTRIAN, locationIndex);
+			alarmInfo = new AlarmInfo(PEDESTRIAN, locInd);
 		}
 		if (alarmInfo != null) {
-			alarmInfo.setLatLon(location.getLatitude(), location.getLongitude());
+			alarmInfo.setLatLon(loc.getLatitude(), loc.getLongitude());
 		}
 		return alarmInfo;
 	}

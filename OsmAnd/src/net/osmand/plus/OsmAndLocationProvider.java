@@ -353,8 +353,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 	}
 
-	public static boolean isPointAccurateForRouting(net.osmand.Location location) {
-		return location != null && (!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING);
+	public static boolean isPointAccurateForRouting(net.osmand.Location loc) {
+		return loc != null && (!loc.hasAccuracy() || loc.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING);
 	}
 
 	public static boolean isRunningOnEmulator() {
@@ -429,9 +429,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private float calcGeoMagneticCorrection(float val) {
-		net.osmand.Location location = getLastKnownLocation();
-		if (previousCorrectionValue == 360 && location != null) {
-			GeomagneticField gf = new GeomagneticField((float) location.getLatitude(), (float) location.getLongitude(), (float) location.getAltitude(),
+		net.osmand.Location l = getLastKnownLocation();
+		if (previousCorrectionValue == 360 && l != null) {
+			GeomagneticField gf = new GeomagneticField((float) l.getLatitude(), (float) l.getLongitude(), (float) l.getAltitude(),
 					System.currentTimeMillis());
 			previousCorrectionValue = gf.getDeclination();
 		}
@@ -525,36 +525,36 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		registerOrUnregisterCompassListener(false);
 	}
 
-	public static net.osmand.Location convertLocation(Location location, OsmandApplication app) {
-		if (location == null) {
+	public static net.osmand.Location convertLocation(Location l, OsmandApplication app) {
+		if (l == null) {
 			return null;
 		}
-		net.osmand.Location r = new net.osmand.Location(location.getProvider());
-		r.setLatitude(location.getLatitude());
-		r.setLongitude(location.getLongitude());
-		r.setTime(location.getTime());
-		if (location.hasAccuracy()) {
-			r.setAccuracy(location.getAccuracy());
+		net.osmand.Location r = new net.osmand.Location(l.getProvider());
+		r.setLatitude(l.getLatitude());
+		r.setLongitude(l.getLongitude());
+		r.setTime(l.getTime());
+		if (l.hasAccuracy()) {
+			r.setAccuracy(l.getAccuracy());
 		}
 		if (VERSION.SDK_INT >= VERSION_CODES.O) {
-			if (location.hasVerticalAccuracy()) {
-				r.setVerticalAccuracy(location.getVerticalAccuracyMeters());
+			if (l.hasVerticalAccuracy()) {
+				r.setVerticalAccuracy(l.getVerticalAccuracyMeters());
 			}
 		}
-		if (location.hasSpeed()) {
-			r.setSpeed(location.getSpeed());
+		if (l.hasSpeed()) {
+			r.setSpeed(l.getSpeed());
 		}
-		if (location.hasAltitude()) {
-			r.setAltitude(location.getAltitude());
+		if (l.hasAltitude()) {
+			r.setAltitude(l.getAltitude());
 		}
-		if (location.hasBearing()) {
-			r.setBearing(location.getBearing());
+		if (l.hasBearing()) {
+			r.setBearing(l.getBearing());
 		}
-		if (location.hasAltitude() && app != null) {
-			double alt = location.getAltitude();
+		if (l.hasAltitude() && app != null) {
+			double alt = l.getAltitude();
 			GeoidAltitudeCorrection geo = app.getResourceManager().getGeoidAltitudeCorrection();
 			if (geo != null) {
-				alt -= geo.getGeoidHeight(location.getLatitude(), location.getLongitude());
+				alt -= geo.getGeoidHeight(l.getLatitude(), l.getLongitude());
 				r.setAltitude(alt);
 			}
 		}
@@ -603,9 +603,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private void simulatePositionImpl() {
 		if (simulatePosition != null) {
-			net.osmand.Location location = simulatePosition.getSimulatedLocationForTunnel();
-			if (location != null) {
-				setLocation(location);
+			net.osmand.Location loc = simulatePosition.getSimulatedLocationForTunnel();
+			if (loc != null) {
+				setLocation(loc);
 				simulatePosition();
 			} else {
 				simulatePosition = null;
@@ -762,29 +762,29 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return currentPositionHelper.getLastKnownRouteSegment(getLastKnownLocation());
 	}
 
-	public boolean getRouteSegment(net.osmand.Location location,
+	public boolean getRouteSegment(net.osmand.Location loc,
 	                               @Nullable ApplicationMode appMode,
 	                               boolean cancelPreviousSearch,
 	                               ResultMatcher<RouteDataObject> result) {
-		return currentPositionHelper.getRouteSegment(location, appMode, cancelPreviousSearch, result);
+		return currentPositionHelper.getRouteSegment(loc, appMode, cancelPreviousSearch, result);
 	}
 
-	public boolean getGeocodingResult(net.osmand.Location location, ResultMatcher<GeocodingResult> result) {
-		return currentPositionHelper.getGeocodingResult(location, result);
+	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
+		return currentPositionHelper.getGeocodingResult(loc, result);
 	}
 
 	@Nullable
 	public net.osmand.Location getLastKnownLocation() {
-		net.osmand.Location location = this.location;
-		if (location != null) {
+		net.osmand.Location loc = this.location;
+		if (loc != null) {
 			int counter = locationRequestsCounter.incrementAndGet();
 			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && locationRequestsCounter.compareAndSet(counter, 0)) {
 				if (System.currentTimeMillis() - lastTimeLocationFixed > LOCATION_TIMEOUT_TO_BE_STALE) {
-					this.location = null;
+					location = null;
 				}
 			}
 		}
-		return this.location;
+		return location;
 	}
 
 	@Nullable
