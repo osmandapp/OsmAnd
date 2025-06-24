@@ -54,49 +54,37 @@ public class SimulationProvider {
 		if (currentRoad == -1) {
 			return -1;
 		}
-
 		for (int i = currentRoad; i < roads.size(); i++) {
 			RouteSegmentResult road = roads.get(i);
-			boolean firstRoad = (i == currentRoad);
-			int increment = road.getStartPointIndex() < road.getEndPointIndex() ? 1 : -1;
-
-			int startIndex = firstRoad ? currentSegment : road.getStartPointIndex() + increment;
-			int endIndex = road.getEndPointIndex();
-
-			RouteDataObject obj = road.getObject();
-			int lastIdx = startIndex - increment;
-
-			for (int j = startIndex; increment > 0 ? j <= endIndex : j >= endIndex; j += increment) {
-        			int st31x = obj.getPoint31XTile(lastIdx);
-				int st31y = obj.getPoint31YTile(lastIdx);
+			boolean firstRoad = i == currentRoad;
+			int increment = road.getStartPointIndex() < road.getEndPointIndex() ? +1 : -1;
+			for (int j = firstRoad ? currentSegment : (road.getStartPointIndex() + increment);
+			     increment > 0 ? j <= road.getEndPointIndex() : j >= road.getEndPointIndex();
+			     j += increment) {
+				RouteDataObject obj = road.getObject();
+				int st31x = obj.getPoint31XTile(j - increment);
+				int st31y = obj.getPoint31YTile(j - increment);
 				int end31x = obj.getPoint31XTile(j);
 				int end31y = obj.getPoint31YTile(j);
-				lastIdx = j;
-
-				boolean isLast = (i == roads.size() - 1) && (j == endIndex);
-				boolean isFirst = firstRoad && (j == currentSegment);
-
-				if (isFirst) {
+				boolean last = i == roads.size() - 1 && j == road.getEndPointIndex();
+				boolean first = firstRoad && j == currentSegment;
+				if (first) {
 					st31x = (int) currentPoint.x;
 					st31y = (int) currentPoint.y;
 				}
-
-				double dist = MapUtils.measuredDist31(st31x, st31y, end31x, end31y);
-				if (meters > dist && !isLast) {
-					meters -= dist;
-				} else if (dist > 0) {
-					double ratio = meters / dist;
-					int prx = st31x + (int) ((end31x - st31x) * ratio);
-					int pry = st31y + (int) ((end31y - st31y) * ratio);
-
+				double dd = MapUtils.measuredDist31(st31x, st31y, end31x, end31y);
+				if (meters > dd && !last) {
+					meters -= dd;
+				} else if (dd > 0) {
+					int prx = (int) (st31x + (end31x - st31x) * (meters / dd));
+					int pry = (int) (st31y + (end31y - st31y) * (meters / dd));
 					if (prx == 0 || pry == 0) {
 						LOG.error(String.format(Locale.US, "proceedMeters zero x or y (%d,%d) (%s)", prx, pry, road));
 						return -1;
 					}
-
-                			location.setLongitude(MapUtils.get31LongitudeX(prx));
-               				location.setLatitude(MapUtils.get31LatitudeY(pry));
-               				return Math.max(meters - dist, 0);
+					location.setLongitude(MapUtils.get31LongitudeX(prx));
+					location.setLatitude(MapUtils.get31LatitudeY(pry));
+					return Math.max(meters - dd, 0);
 				} else {
 					LOG.error(String.format(Locale.US,
 							"proceedMeters break at the end of the road (sx=%d, sy=%d) (%s)", st31x, st31y, road));
