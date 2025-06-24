@@ -84,28 +84,28 @@ class OBDDispatcher(val debug: Boolean = false) {
 			outputStream?.write(buffer, buffer.size)
 		}
 
-		override suspend fun readByte(): Byte {
+		override suspend fun read(): String {
 			val readBuffer = Buffer()
 			val loopDelay = 100L
 			var ticks = 0L
 			val timeout = 15000L
 			val timeoutTicks = timeout / loopDelay
 			while (coroutineContext.isActive) {
-				val bytesRead = inputStream?.read(readBuffer, 1)
-				if (bytesRead == 1L) {
-					return readBuffer.readByte()
+				val bytesRead = inputStream?.read(readBuffer, 20)
+				if (bytesRead != null && bytesRead > 0) {
+					return readBuffer.readUtf8()
 				}
 				if (bytesRead == -1L) { // End of stream
-					return UnderlyingTransport.READ_END_OF_STREAM
+					return UnderlyingTransport.UNABLETOREAD
 				}
 				if (ticks > timeoutTicks) {
-					return UnderlyingTransport.READ_TIMEOUT
+					return UnderlyingTransport.TIMEOUT
 				}
 				// Suspend for a short duration to avoid hammering the CPU
 				delay(loopDelay)
 				ticks++
 			}
-			return UnderlyingTransport.READ_CONTEXT_INACTIVE
+			return UnderlyingTransport.CONTEXTINACTIVE
 		}
 	}
 

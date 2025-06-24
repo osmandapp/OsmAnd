@@ -36,26 +36,28 @@ class Obd2Connection(
 		var response = StringBuilder()
 		connection.write((command + "\r").encodeToByteArray())
 		while (!finished) {
-			val readByte = connection.readByte()
-			when (readByte) {
-				UnderlyingTransport.READ_END_OF_STREAM -> {
-					response = StringBuilder("UNABLETOREAD")
-					break
-				}
-				UnderlyingTransport.READ_CONTEXT_INACTIVE -> {
-					response = StringBuilder("CONTEXTINACTIVE")
-					break
-				}
-				UnderlyingTransport.READ_TIMEOUT -> {
-					response = StringBuilder("TIMEOUT")
-					break
+			var responseRead = connection.read()
+			when (responseRead) {
+				UnderlyingTransport.TIMEOUT,
+				UnderlyingTransport.CONTEXTINACTIVE,
+				UnderlyingTransport.UNABLETOREAD -> {
+					response = StringBuilder(responseRead)
+					return response.toString()
 				}
 			}
-			val c = readByte.toInt().toChar()
-			// this is the prompt, stop here
-			if (c == '>') break
-			if (c == '\r' || c == '\n' || c == ' ' || c == '\t' || c == '.') continue
-			response.append(c)
+			responseRead = responseRead.replace("\r", "")
+				.replace("\n","")
+				.replace(" ", "")
+				.replace("\t", "")
+				.replace(".", "")
+			val endFlagPosition = responseRead.indexOf(">")
+			if(endFlagPosition != -1) {
+				responseRead = responseRead.substring(0, endFlagPosition)
+			}
+			response.append(responseRead)
+			if(endFlagPosition != -1) {
+				break
+			}
 		}
 		val responseValue = response.toString()
 		log("runImpl($command) returned $responseValue")
@@ -94,20 +96,24 @@ class Obd2Connection(
 				log.error("connection failure")
 				return OBDResponse.ERROR
 			}
-			"CONTEXTINACTIVE" -> {
+
+			UnderlyingTransport.CONTEXTINACTIVE -> {
 				finished = true
 				log.error("context inactive")
 				return OBDResponse.ERROR
 			}
-			"UNABLETOREAD" -> {
+
+			UnderlyingTransport.UNABLETOREAD -> {
 				finished = true
 				log.error("unable to read from stream")
 				return OBDResponse.ERROR
 			}
-			"TIMEOUT" -> {
+
+			UnderlyingTransport.TIMEOUT -> {
 				log.error("reading timeout")
 				return OBDResponse.ERROR
 			}
+
 			"CANERROR" -> {
 				log.error("CAN bus error")
 				return OBDResponse.ERROR
@@ -219,11 +225,11 @@ class Obd2Connection(
 
 interface UnderlyingTransport {
 	companion object {
-		val READ_END_OF_STREAM: Byte = -1
-		val READ_CONTEXT_INACTIVE: Byte = -2
-		val READ_TIMEOUT: Byte = -3
+		val UNABLETOREAD = "UNABLETOREAD"
+		val CONTEXTINACTIVE = "CONTEXTINACTIVE"
+		val TIMEOUT = "TIMEOUT"
 	}
 
 	suspend fun write(bytes: ByteArray)
-	suspend fun readByte(): Byte
+	suspend fun read(): String
 }

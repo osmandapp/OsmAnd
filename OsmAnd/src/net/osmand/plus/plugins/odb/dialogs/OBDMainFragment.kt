@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.odb.dialogs
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.HandlerThread
 import android.os.Looper
 import android.view.View
 import android.widget.ImageButton
@@ -26,8 +27,9 @@ import net.osmand.util.Algorithms
 
 class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ConnectionStateListener,
 	RenameOBDDialog.OnDeviceNameChangedCallback, ForgetOBDDeviceDialog.ForgetDeviceListener {
+	private val handlerThread = HandlerThread("Update OBD Widgets")
 
-	enum class OBDDataType (var widgetType: OBDTypeWidget, val icon: Int?) {
+	enum class OBDDataType(var widgetType: OBDTypeWidget, val icon: Int?) {
 		VIN(OBDTypeWidget.VIN, null),
 		FUEL_TYPE(OBDTypeWidget.FUEL_TYPE, R.drawable.ic_action_fuel_tank),
 		TEMPERATURE_INTAKE(OBDTypeWidget.TEMPERATURE_INTAKE, R.drawable.ic_action_obd_temperature_intake),
@@ -47,7 +49,8 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	data class OBDDataItem(val dataType: OBDDataType, val widget: OBDComputerWidget)
 
-	private val handler = Handler(Looper.getMainLooper())
+	private val uiHandler = Handler(Looper.getMainLooper())
+	private var updateWidgetsHandler: Handler? = null
 	private val items = mutableListOf<Any>()
 
 	private lateinit var adapter: OBDMainFragmentAdapter
@@ -107,7 +110,9 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	private fun setupList(view: View) {
 		adapter = OBDMainFragmentAdapter(app, nightMode, requireMapActivity(), device, this)
-		view.findViewById<RecyclerView>(R.id.recycler_view)?.adapter = adapter
+		val recycler = view.findViewById<RecyclerView>(R.id.recycler_view)
+		recycler?.adapter = adapter
+		recycler?.itemAnimator = null
 		adapter.items = ArrayList(items)
 	}
 
@@ -254,7 +259,15 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	override fun onStart() {
 		super.onStart()
+		handlerThread.start()
+		updateWidgetsHandler = Handler(handlerThread.looper)
 		updateWidgets()
+	}
+
+	override fun onStop() {
+		super.onStop()
+		updateWidgetsHandler = null
+		handlerThread.quitSafely()
 	}
 
 	private fun updateWidgets() {
@@ -266,10 +279,9 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 				adapter.let { obdAdapter ->
 					val savedValue = obdAdapter.lastSavedValueMap[widget]
 					if (!savedValue?.first.equals(value) or !savedValue?.second.equals(unit)) {
-						obdAdapter.notifyItemChanged(
-							items.indexOf(it),
-							OBDMainFragmentAdapter.UPDATE_VALUE_PAYLOAD_TYPE
-						)
+						uiHandler.post {
+							adapter.notifyItemChanged(items.indexOf(it))
+						}
 					}
 				}
 			}
@@ -284,7 +296,8 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	}
 
 	private fun startHandler() {
-		handler.postDelayed({
+		updateWidgetsHandler?.postDelayed({
+			updateWidgetsHandler?.removeCallbacksAndMessages(null)
 			if (view != null && updateEnable) {
 				updateWidgets()
 				startHandler()
