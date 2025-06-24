@@ -1,10 +1,12 @@
 package net.osmand.plus.auto.screens
 
 import androidx.car.app.CarContext
+import androidx.car.app.HostException
 import androidx.car.app.Screen
 import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.Action
 import androidx.car.app.model.CarIcon
+import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -35,18 +37,25 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		private set
 	var session = app.carNavigationSession
 
-	init {
-		initContentLimit()
-	}
-
 	private fun initContentLimit() {
 		val manager = carContext.getCarService(
 			ConstraintManager::class.java
 		)
-		contentLimit = DEFAULT_CONTENT_LIMIT.coerceAtMost(
-			manager.getContentLimit(getConstraintLimitType())
-		)
+		try {
+			contentLimit = DEFAULT_CONTENT_LIMIT.coerceAtMost(
+				manager.getContentLimit(getConstraintLimitType())
+			)
+		} catch (e: HostException) {
+			contentLimit = DEFAULT_CONTENT_LIMIT
+		}
 	}
+
+	final override fun onGetTemplate(): Template {
+		initContentLimit()
+		return getTemplate()
+	}
+
+	abstract fun getTemplate(): Template
 
 	protected open fun shouldRestoreMapState(): Boolean = false
 

@@ -65,7 +65,7 @@ class HistoryScreen(
 	}
 
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val templateBuilder = ListTemplate.Builder()
         val app = app
 	    val isLoading = updateItemsTask.status != AsyncTask.Status.FINISHED

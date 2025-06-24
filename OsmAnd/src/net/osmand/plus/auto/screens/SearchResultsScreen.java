@@ -37,6 +37,7 @@ public final class SearchResultsScreen extends BaseSearchScreen implements Defau
 	private boolean loading;
 	private boolean destroyed;
 	private boolean showResult;
+	private boolean firstTimeGetTemplate = true;
 
 	public SearchResultsScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
 	                           @NonNull String searchText) {
@@ -47,16 +48,19 @@ public final class SearchResultsScreen extends BaseSearchScreen implements Defau
 		this.loading = getApp().isApplicationInitializing();
 		getLifecycle().addObserver(this);
 		getApp().getAppInitializer().addListener(this);
-		if (!loading) {
-			if (!Algorithms.isEmpty(searchText)) {
-				getSearchHelper().runSearch(searchText);
-			}
-		}
 	}
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
+		if(firstTimeGetTemplate) {
+			firstTimeGetTemplate = false;
+			if (!loading) {
+				if (!Algorithms.isEmpty(searchText)) {
+					getSearchHelper().runSearch(searchText);
+				}
+			}
+		}
 		PlaceListNavigationTemplate.Builder builder = new PlaceListNavigationTemplate.Builder();
 		builder.setTitle(getApp().getString(R.string.search_title, searchText))
 				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build())

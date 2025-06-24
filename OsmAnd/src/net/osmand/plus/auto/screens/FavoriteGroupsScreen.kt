@@ -23,7 +23,7 @@ class FavoriteGroupsScreen(
         })
     }
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         setupFavoriteGroups(listBuilder)
         return PlaceListNavigationTemplate.Builder()
