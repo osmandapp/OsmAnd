@@ -73,7 +73,7 @@ public class AlarmWidget {
 		public AlarmInfo alarm;
 		public boolean americanType;
 		public boolean isCanadianRegion;
-		public int locationImageResId;
+		public int locImgId;
 		public String text;
 		public String bottomText;
 		public DrivingRegion region;
@@ -127,11 +127,11 @@ public class AlarmWidget {
 					if (layout != null) {
 						layout.setContentDescription(alarm.getType().getVisualName(app));
 					}
-					if (info.locationImageResId != imgId) {
+					if (info.locImgId != imgId) {
 						changed = true;
-						imgId = info.locationImageResId;
+						imgId = info.locImgId;
 						if (icon != null) {
-							icon.setImageResource(info.locationImageResId);
+							icon.setImageResource(info.locImgId);
 						}
 					}
 					if (!Algorithms.objectEquals(info.text, cachedText) || cachedRegion != info.region) {
@@ -216,9 +216,9 @@ public class AlarmWidget {
 				(int) (WIDGET_BITMAP_SIZE_DP * density), Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 
-		Drawable locationDrawable = app.getUIUtilities().getIcon(info.locationImageResId);
-		locationDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-		locationDrawable.draw(canvas);
+		Drawable locImg = app.getUIUtilities().getIcon(info.locImgId);
+		locImg.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+		locImg.draw(canvas);
 
 		if (!Algorithms.isEmpty(info.text)) {
 			TextPaint textPaint = new TextPaint();
@@ -258,65 +258,65 @@ public class AlarmWidget {
 	public AlarmWidgetInfo createWidgetInfo(@NonNull AlarmInfo alarm) {
 		DrivingRegion region = settings.DRIVING_REGION.get();
 		boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
-		boolean showCameras = settings.SHOW_CAMERAS.get();
+		boolean cams = settings.SHOW_CAMERAS.get();
 		boolean peds = settings.SHOW_PEDESTRIAN.get();
 		boolean speedLimitExceed = settings.SHOW_SPEED_LIMIT_WARNINGS.get();
 		boolean tunnels = settings.SHOW_TUNNELS.get();
 		boolean americanType = region.isAmericanTypeSigns();
 
-		int locationImageResId = R.drawable.warnings_limit;
+		int locImgId = R.drawable.warnings_limit;
 		String text = "";
 		String bottomText = "";
 		boolean isCanadianRegion = region == DrivingRegion.CANADA;
 		if (alarm.getType() == SPEED_LIMIT) {
 			if (isCanadianRegion) {
-				locationImageResId = R.drawable.warnings_speed_limit_ca;
+				locImgId = R.drawable.warnings_speed_limit_ca;
 				bottomText = settings.SPEED_SYSTEM.get().toShortString();
 			} else if (americanType) {
-				locationImageResId = R.drawable.warnings_speed_limit_us;
+				locImgId = R.drawable.warnings_speed_limit_us;
 				//else case is done by drawing red ring
 			}
 			text = String.valueOf(alarm.getIntValue());
 		} else if (alarm.getType() == SPEED_CAMERA) {
-			locationImageResId = R.drawable.warnings_speed_camera;
+			locImgId = R.drawable.warnings_speed_camera;
 		} else if (alarm.getType() == BORDER_CONTROL) {
-			locationImageResId = R.drawable.warnings_border_control;
+			locImgId = R.drawable.warnings_border_control;
 		} else if (alarm.getType() == HAZARD) {
 			if (americanType) {
-				locationImageResId = R.drawable.warnings_hazard_us;
+				locImgId = R.drawable.warnings_hazard_us;
 			} else {
-				locationImageResId = R.drawable.warnings_hazard;
+				locImgId = R.drawable.warnings_hazard;
 			}
 		} else if (alarm.getType() == TOLL_BOOTH) {
 			//image done by drawing red ring
 			text = "$";
 		} else if (alarm.getType() == TRAFFIC_CALMING) {
 			if (americanType) {
-				locationImageResId = R.drawable.warnings_traffic_calming_us;
+				locImgId = R.drawable.warnings_traffic_calming_us;
 			} else {
-				locationImageResId = R.drawable.warnings_traffic_calming;
+				locImgId = R.drawable.warnings_traffic_calming;
 			}
 		} else if (alarm.getType() == STOP) {
-			locationImageResId = R.drawable.warnings_stop;
+			locImgId = R.drawable.warnings_stop;
 		} else if (alarm.getType() == RAILWAY) {
 			if (isCanadianRegion) {
-				locationImageResId = R.drawable.warnings_railways_ca;
+				locImgId = R.drawable.warnings_railways_ca;
 			} else if (americanType) {
-				locationImageResId = R.drawable.warnings_railways_us;
+				locImgId = R.drawable.warnings_railways_us;
 			} else {
-				locationImageResId = R.drawable.warnings_railways;
+				locImgId = R.drawable.warnings_railways;
 			}
 		} else if (alarm.getType() == PEDESTRIAN) {
 			if (americanType) {
-				locationImageResId = R.drawable.warnings_pedestrian_us;
+				locImgId = R.drawable.warnings_pedestrian_us;
 			} else {
-				locationImageResId = R.drawable.warnings_pedestrian;
+				locImgId = R.drawable.warnings_pedestrian;
 			}
 		} else if (alarm.getType() == TUNNEL) {
 			if (americanType) {
-				locationImageResId = R.drawable.warnings_tunnel_us;
+				locImgId = R.drawable.warnings_tunnel_us;
 			} else {
-				locationImageResId = R.drawable.warnings_tunnel;
+				locImgId = R.drawable.warnings_tunnel;
 			}
 			bottomText = OsmAndFormatter.getFormattedAlarmInfoDistance(settings.getContext(), alarm.getFloatValue());
 		} else {
@@ -325,7 +325,7 @@ public class AlarmWidget {
 		}
 		boolean visible;
 		if (alarm.getType() == SPEED_CAMERA) {
-			visible = showCameras;
+			visible = cams;
 		} else if (alarm.getType() == PEDESTRIAN) {
 			visible = peds;
 		} else if (alarm.getType() == SPEED_LIMIT) {
@@ -340,7 +340,7 @@ public class AlarmWidget {
 			info.alarm = alarm;
 			info.americanType = americanType;
 			info.isCanadianRegion = isCanadianRegion;
-			info.locationImageResId = locationImageResId;
+			info.locImgId = locImgId;
 			info.text = text;
 			info.bottomText = bottomText;
 			info.region = region;

@@ -33,9 +33,9 @@ public class ApplicationModeBean {
 	@Expose
 	public RouteService routeService = RouteService.OSMAND;
 	@Expose
-	public String locationIcon;
+	public String locIcon;
 	@Expose
-	public String navigationIcon;
+	public String navIcon;
 	@Expose
 	public int order = -1;
 	@Expose

@@ -871,10 +871,10 @@ public class RouteDataObject {
 		return directionRoute(startPoint, plus, 5);
 	}
 
-	public boolean bearingVsRouteDirection(Location location) {
+	public boolean bearingVsRouteDirection(Location loc) {
 		boolean direction = true;
-		if (location != null && location.hasBearing()) {
-			double diff = MapUtils.alignAngleDifference(directionRoute(0, true) - location.getBearing() / 180f * Math.PI);
+		if (loc != null && loc.hasBearing()) {
+			double diff = MapUtils.alignAngleDifference(directionRoute(0, true) - loc.getBearing() / 180f * Math.PI);
 			direction = Math.abs(diff) < Math.PI / 2f;
 		}
 		return direction;
