@@ -2392,7 +2392,7 @@
     <string name="shared_string_migration">Migrasi</string>
     <string name="icon_group_education">Edukasi</string>
     <string name="icon_group_industrial">Industri</string>
-    <string name="delete_history_items_descr">Hapus item riwayat yang dipilih\?</string>
+    <string name="delete_history_items_descr">Hapus item riwayat yang dipilih?</string>
     <string name="safe_settings">Aman</string>
     <string name="approx_safe_mode">Perkiraan GPX aman</string>
     <string name="approx_safe_mode_description">Lakukan perkiraan GPX menggunakan Android yang lebih lambat daripada kode asli.</string>
@@ -2735,7 +2735,7 @@
     <string name="quick_action_showhide_favorites_descr">Sebuah alihan untuk menampilkan atau menyembunyikan titik Favorit pada peta.</string>
     <string name="quick_action_showhide_poi_descr">Sebuah alihan untuk menampilkan atau menyembunyikan POI pada peta.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
-    <string name="delete_history_items">Hapus %1$s item riwayat\?</string>
+    <string name="delete_history_items">Hapus %1$s item riwayat?</string>
     <string name="transparent_status_bar_descr">Tampilkan peta di bawah bilah status</string>
     <string name="transparent_status_bar">Bilah status transparan</string>
     <string name="map_view_3d_descr">Aktifkan tampilan 3D dari peta.</string>
