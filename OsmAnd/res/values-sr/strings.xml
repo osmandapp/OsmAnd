@@ -4054,8 +4054,8 @@
     <string name="shared_string_migration">Пренос</string>
     <string name="icon_group_education">Образовање</string>
     <string name="icon_group_industrial">Индустрија</string>
-    <string name="delete_history_items_descr">Обрисати одабране ставке из историјата\?</string>
-    <string name="delete_history_items">Обрисати %1$s ставки из историјата\?</string>
+    <string name="delete_history_items_descr">Обрисати одабране ставке из историјата?</string>
+    <string name="delete_history_items">Обрисати %1$s ставки из историјата?</string>
     <string name="quick_action_toggle_preference">Прекидач промене подешавања.</string>
     <string name="display_route_tracks_as_poi">Приказуј трагове као тачке занимања</string>
     <string name="shared_string_travelbooks">Дневници путовања</string>
