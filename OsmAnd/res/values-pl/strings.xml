@@ -5856,7 +5856,7 @@
     <string name="location_interpolation_percent">Procent interpolacji lokalizacji</string>
     <string name="apply_to_all_points">Zastosuj do wszystkich punktów</string>
     <string name="original_shape_description">Każdy punkt zachowałby swój własny kształt.</string>
-    <string name="hmd_promo_description">Bezpłatny dostęp do funkcji, w tym nieograniczonego pobierania map, trójwymiarowej rzeźby terenu itp. za %1$s na miesiąc</string>
+    <string name="hmd_promo_description">Bezpłatny dostęp do funkcji, w tym nieograniczonego pobierania map, map 3D itp., przez %1$s miesięcy</string>
     <string name="map_widget_route_information">Informacje o trasie</string>
     <string name="calculating_indication_message">Obliczanie…</string>
     <string name="reset_average_speed">Zresetuj średnią prędkość</string>
@@ -5887,4 +5887,22 @@
     <string name="deleting">Usuwanie…</string>
     <string name="shared_string_split_by">Podziel według</string>
     <string name="deleting_history">Usuwanie historii…</string>
+    <string name="release_5_1">• Dodano obsługę zakupów internetowych i międzyplatformowych\n\n• Przeniesiono jednostki temperatury do ustawień ogólnych dla łatwiejszego dostępu\n\n• Dodano wskaźnik poziomu naładowania baterii dla czujników BLE\n\n• Nowy, bardziej intuicyjny interfejs użytkownika do wyboru punktów w Nawigacji\n\n• Ulepszona widoczność widżetów dzięki nowemu obrysowi\n\n• Dodano analizator podjazdów i zjazdów\n\n• Rozszerzono integrację z Wikipedią i Wikivoyage o więcej punktów POI.</string>
+    <string name="sensor_data">Dane z czujników</string>
+    <string name="battery_level">Poziom naładowania baterii</string>
+    <string name="set_parking_position">Ustaw pozycję parkowania</string>
+    <string name="three_years_subscription">Trzyletnia subskrypcja</string>
+    <string name="set_work">Ustaw parametry pracy</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s na %2$s</string>
+    <string name="osm_live_payment_renews_3_years">Odnawia się co trzy lata</string>
+    <string name="years_3">Trzy lata</string>
+    <string name="osm_live_payment_3_years_title">Co trzy lata</string>
+    <string name="show_toast_about_key_pressed">Pokaż komunikat typu „toast” po naciśnięciu klawisza</string>
+    <string name="key_event_category_map_interactions">Interakcje z mapą</string>
+    <string name="tripltek_promo">Promocja Tripltek na %1$s miesięcy</string>
+    <string name="uphill_downhill_split">Pod górę / Z góry</string>
+    <string name="unit_of_temperature_description">Wybrane jednostki zostaną zastosowane do wszystkich danych związanych z temperaturą w bieżącym profilu.</string>
+    <string name="deactivated_map">Dezaktywowana mapa</string>
+    <string name="suggest_activate_map_msg">mapa %1$s jest dezaktywowana,\naktywuj ją, aby wyświetlić ten obszar.</string>
+    <string name="travel_guides">Przewodniki</string>
 </resources>
