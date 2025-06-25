@@ -4313,8 +4313,8 @@
     <string name="use_external_timestamps">Użyj zewnętrznych znaczników czasu</string>
     <string name="use_external_timestamps_description">Użyj znaczników czasu routera online, aby dostosować szacowany czas i średnią prędkość</string>
     <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę dostępnych wtyczek znajdziesz w \'Menu\' → \'Wtyczki\'.</string>
-    <string name="delete_history_items_descr">Usunąć wybrane elementy historii\?</string>
-    <string name="delete_history_items">Liczba elementów historii do usunięcia %1$s. Usunąć\?</string>
+    <string name="delete_history_items_descr">Usunąć wybrane elementy historii?</string>
+    <string name="delete_history_items">Liczba elementów historii do usunięcia %1$s. Usunąć?</string>
     <string name="display_route_tracks">Wyświetlanie ścieżek</string>
     <string name="display_route_tracks_as_poi">Wyświetl ścieżki jako punkty POI</string>
     <string name="quick_action_toggle_preference">Zmiana preferencji.</string>
