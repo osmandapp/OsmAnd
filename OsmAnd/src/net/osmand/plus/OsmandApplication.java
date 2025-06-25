@@ -1038,9 +1038,13 @@ public class OsmandApplication extends MultiDexApplication {
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
-				if (isAppInForeground()) {
-					LOG.info(">>>> APP startForegroundService = " + usageIntent);
-					context.startForegroundService(intent);
+				try {
+					if (isAppInForeground()) {
+						LOG.info(">>>> APP startForegroundService = " + usageIntent);
+						context.startForegroundService(intent);
+					}
+				} catch (IllegalStateException e) {
+					LOG.error("Failed to start foreground service: " + e.getMessage(), e);
 				}
 			});
 		} else {
