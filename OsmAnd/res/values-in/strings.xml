@@ -2116,7 +2116,7 @@
     <string name="rendering_attr_horse_scale_common_name">Biasa</string>
     <string name="add_online_routing_engine">Tambahkan mesin perutean luring</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
-    <string name="add_intermediate_point">Tambahkan perantara</string>
+    <string name="add_intermediate_point">Tambahkan tujuan perantara</string>
     <string name="favorite_category_add_new">Tambahkan baru</string>
     <string name="rendering_value_default13_name">Standar (13)</string>
     <string name="local_index_tile_data_maxzoom">Perbesaran maksimum: %1$s</string>
@@ -2238,7 +2238,7 @@
     <string name="shared_string_all_languages">Semua bahasa</string>
     <string name="add_description">Tambahkan deskripsi</string>
     <string name="added_profiles">Profil ditambahkan</string>
-    <string name="add_intermediate">Tambahkan titik perantara</string>
+    <string name="add_intermediate">Tambahkan tujuan perantara</string>
     <string name="last_intermediate_dest_description">Menambahkan perhentian perantara</string>
     <string name="shared_string_add_to_map_markers">Tambahkan ke penanda peta</string>
     <string name="show_map_markers_description">Aktifkan fitur penanda peta.</string>
@@ -3431,7 +3431,7 @@
     <string name="search_poi_types_descr">Gabungkan jenis POI dari berbagai kategori. Ketuk sakelar untuk memilih semua, ketuk sisi kiri untuk pilihan kategori.</string>
     <string name="lang_war">Waray</string>
     <string name="shared_string_routing">Perutean</string>
-    <string name="clear_all_intermediates">Hapus semua titik perantara</string>
+    <string name="clear_all_intermediates">Hapus semua tujuan perantara</string>
     <string name="lang_fy">Frysk</string>
     <string name="lang_mn">Mongolia</string>
     <string name="lang_my">Birma</string>
@@ -3930,7 +3930,7 @@
     <string name="routing_attr_avoid_share_taxi_description">Menghindari taksi berbagi</string>
     <string name="rendering_attr_highway_class_track_grade5_name">Tingkat 5</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tombol untuk menampilkan atau menyembunyikan trek yang dipilih pada peta.</string>
-    <string name="intermediate_waypoint">Titik perantara</string>
+    <string name="intermediate_waypoint">Titik tujuan perantara</string>
     <string name="choose_track_file_to_follow">Pilih file trek untuk diikuti</string>
     <string name="voice_announcements">Perintah suara</string>
     <string name="intermediate_destinations">Tujuan perantara</string>
@@ -6162,7 +6162,7 @@
     <string name="show_debug_tile_description">Tampilkan informasi tentang setiap simbol peta dari setiap ubin</string>
     <string name="ski_route_switch_style_description">Jelajahi lereng ski, lift, dan lainnya dengan gaya musim dingin dan ski peta.</string>
     <string name="shared_string_switch">Ganti</string>
-    <string name="set_intermediate_point">Atur titik perantara</string>
+    <string name="set_intermediate_point">Atur tujuan perantara</string>
     <string name="battery">baterai</string>
     <string name="sensor_data">Data sensor</string>
     <string name="set_home">Atur rumah</string>
@@ -6177,4 +6177,6 @@
     <string name="deleting_history">Menghapus riwayat…</string>
     <string name="deleting">Menghapus…</string>
     <string name="release_5_1">• Menambahkan dukungan untuk pembelian web dan lintas platform\n\n • Memindahkan unit Suhu ke pengaturan Umum untuk akses yang lebih mudah\n\n • Menambahkan indikator daya baterai untuk sensor BLE\n\n • UI baru yang lebih intuitif untuk pemilihan titik di Navigasi\n\n • Visibilitas widget yang ditingkatkan dengan garis besar baru\n\n • Menambahkan penganalisis Tanjakan/Turunan\n\n • Integrasi Wikipedia &amp; Wikivoyage yang diperluas untuk lebih banyak POI.</string>
+    <string name="show_symbols_bboxes">Tampilkan kotak simbol</string>
+    <string name="show_rasterization_debug_tile">Tampilkan informasi rasterisasi ubin</string>
 </resources>
