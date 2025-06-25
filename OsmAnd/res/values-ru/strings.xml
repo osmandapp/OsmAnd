@@ -4109,8 +4109,8 @@
     <string name="display_route_tracks">Показать треки</string>
     <string name="shared_string_travelbooks">Путеводители</string>
     <string name="display_route_tracks_as_poi">Показать треки как POI</string>
-    <string name="delete_history_items">Удалить записи истории (%1$s шт.)\?</string>
-    <string name="delete_history_items_descr">Удалить выбранные записи\?</string>
+    <string name="delete_history_items">Удалить записи истории (%1$s шт.)?</string>
+    <string name="delete_history_items_descr">Удалить выбранные записи?</string>
     <string name="quick_action_toggle_preference">Переключатель для изменения предпочтений.</string>
     <string name="from_to_with_params">Из %1$s в %2$s</string>
     <string name="progress_complete">%1$s завершено</string>
