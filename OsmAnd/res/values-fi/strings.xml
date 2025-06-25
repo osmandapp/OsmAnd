@@ -3893,8 +3893,8 @@
 \n
 \nOhjelma käynnistetään käyttäen uutta tietokansiota.</string>
     <string name="shared_string_copy_to">Kopioi tänne</string>
-    <string name="delete_history_items_descr">Poistetaanko valitut historiasta\?</string>
-    <string name="delete_history_items">Poistetaanko %1$s kohtia historiasta\?</string>
+    <string name="delete_history_items_descr">Poistetaanko valitut historiasta?</string>
+    <string name="delete_history_items">Poistetaanko %1$s kohtia historiasta?</string>
     <string name="display_route_tracks_as_poi">Näytä reitit kuten KP</string>
     <string name="exit_import_descr">Haluatko poistua tallentamatta muutoksia?</string>
     <string name="list_of_groups">Lista ryhmistä</string>
