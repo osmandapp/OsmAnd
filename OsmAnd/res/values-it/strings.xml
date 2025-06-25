@@ -4104,8 +4104,8 @@
     <string name="use_external_timestamps">Utilizza le marche temporali esterne</string>
     <string name="use_external_timestamps_description">Utilizza le marche temporali del navigatore online per correggere il tempo stimato e la velocità media</string>
     <string name="no_plugins_enabled">Non hai alcun componente aggiuntivo abilitato. Puoi vedere la lista dei componenti aggiuntivi nel \'Menu\' → \'Componenti aggiuntivi\'.</string>
-    <string name="delete_history_items_descr">Eliminare elementi della cronologia selezionati\?</string>
-    <string name="delete_history_items">Eliminare gli elementi della cronologia %1$s\?</string>
+    <string name="delete_history_items_descr">Eliminare elementi della cronologia selezionati?</string>
+    <string name="delete_history_items">Eliminare gli elementi della cronologia %1$s?</string>
     <string name="quick_action_toggle_preference">Un pulsante per modificare le preferenze.</string>
     <string name="shared_storage_warning_description">A causa delle nuove regole di Android, a partire da novembre 2021 OsmAnd 4.2 perderà l\'accesso alla memoria condivisa.
 \n
