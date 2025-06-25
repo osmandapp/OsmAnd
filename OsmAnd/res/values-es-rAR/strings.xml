@@ -2448,7 +2448,7 @@
     <string name="distance_nearest">Más cerca primero</string>
     <string name="rendering_attr_whiteWaterSports_name">Deportes acuáticos</string>
     <string name="group_deleted">Grupo borrado</string>
-    <string name="clear_all_intermediates">Limpiar todos los puntos intermedios</string>
+    <string name="clear_all_intermediates">Limpiar todos los destinos intermedios</string>
     <string name="select_waypoints_category_description">Agregá todos los puntos de referencia de la traza o elegí categorías separadas.</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">No se pudo encontrar nada:</string>
@@ -2594,9 +2594,9 @@
     <string name="quick_action_switch_night_mode">Modo nocturno</string>
     <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
     <string name="add_destination_point">Definir destino</string>
-    <string name="add_intermediate_point">Agregar punto intermedio</string>
+    <string name="add_intermediate_point">Agregar destino intermedio</string>
     <string name="add_start_point">Definir punto de partida</string>
-    <string name="intermediate_waypoint">Punto intermedio</string>
+    <string name="intermediate_waypoint">Destino intermedio</string>
     <string name="transfers">Transbordos</string>
     <string name="on_foot">A pie</string>
     <string name="route_way">Trayecto</string>
@@ -2685,7 +2685,7 @@
     <string name="rendering_attr_undefined_name">Indefinido</string>
     <string name="public_transport_warning_descr_blog">Leé más sobre el cálculo de las rutas de OsmAnd en nuestro blog.</string>
     <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de pruebas beta, se esperan errores e imprecisiones.</string>
-    <string name="add_intermediate">Agregar punto intermedio</string>
+    <string name="add_intermediate">Agregar destino intermedio</string>
     <string name="shared_string_walk">Caminar</string>
     <string name="save_poi_value_exceed_length">Acortá la longitud de la etiqueta «%s» a menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
@@ -4979,7 +4979,7 @@
     <string name="enable_to_use_external_input_device">Activar para usar un dispositivo de entrada externo con OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Cambiar orientación del mapa</string>
     <string name="key_event_action_previous_app_profile">Perfil de aplicación anterior</string>
-    <string name="show_toast_about_key_pressed">Mostrar notificación sobre la tecla pulsada</string>
+    <string name="show_toast_about_key_pressed">Mostrar notificación de la tecla pulsada</string>
     <string name="key_event_action_move_left">Mover a la izquierda</string>
     <string name="press_button_to_link_with_action">Pulsá el botón en el dispositivo para asignarle la acción: %1$s</string>
     <string name="deletion_error">Error de borrado</string>
@@ -5638,7 +5638,7 @@
     <string name="battery">batería</string>
     <string name="sensor_data">Datos del sensor</string>
     <string name="set_home">Definir casa</string>
-    <string name="set_intermediate_point">Definir punto intermedio</string>
+    <string name="set_intermediate_point">Definir destino intermedio</string>
     <string name="shared_string_switch">Cambiar</string>
     <string name="years_3">3 años</string>
     <string name="three_years_subscription">3 años de suscripción</string>
@@ -5647,4 +5647,6 @@
     <string name="osm_live_payment_3_years_title">Cada 3 años</string>
     <string name="deleting">Borrando…</string>
     <string name="deleting_history">Borrando historial…</string>
+    <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
+    <string name="show_symbols_bboxes">Mostrar símbolos de bboxes</string>
 </resources>
