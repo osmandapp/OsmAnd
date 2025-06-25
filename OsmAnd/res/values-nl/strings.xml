@@ -4201,7 +4201,7 @@
 \n
 \n</string>
     <string name="no_plugins_enabled">Je hebt geen plug-ins ingeschakeld. Je kan een lijst van beschikbare plug-ins vinden onder \'Menu\' → \'Plug-ins\'.</string>
-    <string name="delete_history_items_descr">Ben je zeker dat je de geselecteerde items uit je geschiedenis wil verwijderen\?</string>
+    <string name="delete_history_items_descr">Ben je zeker dat je de geselecteerde items uit je geschiedenis wil verwijderen?</string>
     <string name="use_external_timestamps">Gebruik externe tijdstempels</string>
     <string name="display_route_tracks">Tracks weergeven</string>
     <string name="android_auto_purchase_request_title">Koop OsmAnd Pro of Maps+ om OsmAnd met Android Auto te gebruiken</string>
@@ -4227,7 +4227,7 @@
     <string name="location_access_request_result">Goedgekeurd: %1$s Afgewezen: %2$s</string>
     <string name="safe_settings">Veilig</string>
     <string name="use_external_timestamps_description">Gebruik de tijdstempels van de online router om de geschatte tijd en gemiddelde snelheid aan te passen</string>
-    <string name="delete_history_items">Verwijder %1$s items uit je geschiedenis\?</string>
+    <string name="delete_history_items">Verwijder %1$s items uit je geschiedenis?</string>
     <string name="quick_action_toggle_preference">Een knop om te schakelen tussen je voorkeursstatus.</string>
     <string name="display_route_tracks_as_poi">Geef tracks weer als POI</string>
     <string name="android_auto_map_placeholder_title">De kaart wordt op het wagenscherm weergegeven.</string>
