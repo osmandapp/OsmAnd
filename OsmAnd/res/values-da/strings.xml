@@ -4119,8 +4119,8 @@
     <string name="shared_storage_warning_description">Fra november 2021 vil OsmAnd 4.2 miste adgangen til delt lagerplads på grund af ændrede regler for adgang til lagerplads i Android.
 \n
 \nDu bedes ændre lageret fra Delt lager til tilgængeligt lager. Hvis dette ikke gøres, vil appen miste adgangen til dine data: herunder offline-kort, GPX-spor, etc.</string>
-    <string name="delete_history_items_descr">Slet valgte historikelementer\?</string>
-    <string name="delete_history_items">Slet %1$s historikelementer\?</string>
+    <string name="delete_history_items_descr">Slet valgte historikelementer?</string>
+    <string name="delete_history_items">Slet %1$s historikelementer?</string>
     <string name="quick_action_toggle_preference">Et skifter til at ændre præference.</string>
     <string name="copying_file">Kopierer fil %1$s…</string>
     <string name="from_to_with_params">Fra %1$s til %2$s</string>
