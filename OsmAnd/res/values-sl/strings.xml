@@ -3483,8 +3483,8 @@
 \nPremaknite mapo s podatki iz skupne shrambe v razpoložljivo shrambo, sicer bo aplikacija izgubila dostop do vaših podatkov, kot so zemljevidi brez povezave, sledi GPX itd.</string>
     <string name="search_history_is_disabled_descr">Zgodovino iskanja lahko omogočiš v nastavitvah.</string>
     <string name="map_markers_history">Zgodovina oznak zemljevida</string>
-    <string name="delete_history_items_descr">Izbrisati izbrane elemente zgodovine\?</string>
-    <string name="delete_history_items">Brisati %1$s elementov zgodovine\?</string>
+    <string name="delete_history_items_descr">Izbrisati izbrane elemente zgodovine?</string>
+    <string name="delete_history_items">Brisati %1$s elementov zgodovine?</string>
     <string name="quick_action_toggle_preference">Stikalo za spremembo nastavitev.</string>
     <string name="display_route_tracks_as_poi">Prikaži sledi kot POI</string>
     <string name="use_external_timestamps">Uporabi zunanje časovne žige</string>
