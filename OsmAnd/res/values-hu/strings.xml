@@ -4056,7 +4056,7 @@
     <string name="no_plugins_enabled">Nincs engedélyezett bővítmény. Az elérhető bővítmények felsorolását megtalálja a Menü → Bővítmények menüpontban.</string>
     <string name="display_route_tracks_as_poi">Nyomvonalak megjelenítése érdekes pontként (POI-ként)</string>
     <string name="quick_action_toggle_preference">A preferenciát módosító kapcsoló.</string>
-    <string name="delete_history_items_descr">Törli a kijelölt előzményeket?</string>
+    <string name="delete_history_items_descr">A kiválasztott bejegyzések törlődnek a listából.</string>
     <string name="delete_history_items">%1$s előzmény törlése?</string>
     <string name="files_remaining">Hátralévő fájlok: %1$s %2$s</string>
     <string name="from_to_with_params">Innen: %1$s, ide: %2$s</string>
