@@ -764,6 +764,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					return o1.extraParam < o2.extraParam ? -1 : 1;
 				} else if (o1.matchParam != o2.matchParam) {
 					return o1.matchParam > o2.matchParam ? -1 : 1;
+				} else if (o1.edition != o2.edition) {
+					return o1.edition > o2.edition ? -1 : 1;
 				}
 				return -Double.compare(o1.sumIntersects, o2.sumIntersects); // higher is better
 			}
