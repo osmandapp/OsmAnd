@@ -4258,8 +4258,8 @@
     <string name="shared_string_travelbooks">Reisebøker</string>
     <string name="display_route_tracks_as_poi">Vis spor som interessepunkter</string>
     <string name="quick_action_toggle_preference">En bryter for å veksle valgt innstilling.</string>
-    <string name="delete_history_items_descr">Slett valgte historikkelementer\?</string>
-    <string name="delete_history_items">Slett %1$s-historikkelementer\?</string>
+    <string name="delete_history_items_descr">Slett valgte historikkelementer?</string>
+    <string name="delete_history_items">Slett %1$s-historikkelementer?</string>
     <string name="fold_unfold">fold sammen/utvid</string>
     <string name="app_profile_type">Programprofiltype</string>
     <string name="add_to_group">Legg til i gruppe</string>
