@@ -4109,8 +4109,8 @@
     <string name="shared_string_travelbooks">Путівники</string>
     <string name="display_route_tracks">Показати треки</string>
     <string name="display_route_tracks_as_poi">Показувати треки як POI</string>
-    <string name="delete_history_items_descr">Вилучити виділені елементи історії\?</string>
-    <string name="delete_history_items">Вилучити елементи історії %1$s\?</string>
+    <string name="delete_history_items_descr">Вилучити виділені елементи історії?</string>
+    <string name="delete_history_items">Вилучити елементи історії %1$s?</string>
     <string name="quick_action_toggle_preference">Перемикач для зміни налаштувань.</string>
     <string name="copying_file">Копіювання файлу %1$s…</string>
     <string name="from_to_with_params">З %1$s до %2$s</string>
