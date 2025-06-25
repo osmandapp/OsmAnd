@@ -194,7 +194,7 @@
     <string name="shared_storage_migration">Migracija na podeluvačko skladiranje</string>
     <string name="shared_string_migration">Migracija</string>
     <string name="icon_group_industrial">Industriski</string>
-    <string name="delete_history_items_descr">Dali da se izbrišat izbranite stavki vo istorijata\?</string>
+    <string name="delete_history_items_descr">Dali da se izbrišat izbranite stavki vo istorijata?</string>
     <string name="quick_action_toggle_preference">Prefrluvanje za promena na pretpočitanje.</string>
     <string name="display_route_tracks_as_poi">Prikaži gi zapisite kako POI</string>
     <string name="shared_string_travelbooks">Patnički knigi</string>
@@ -559,7 +559,7 @@
     <string name="icon_group_education">Edukacija</string>
     <string name="use_external_timestamps_description">opis Koristete gi vremenskite oznaki na onlajn ruterot za da go prilagodite procenetoto vreme i prosečnata brzina</string>
     <string name="no_plugins_enabled">Nemate ovozmoženi dodatoci. Možete da najdete spisok na dostapni priklučoci pod „Meni“ → „Priklučoci“.</string>
-    <string name="delete_history_items">Dali da se izbrišat %1$s stavkite vo istorijata\?</string>
+    <string name="delete_history_items">Dali da se izbrišat %1$s stavkite vo istorijata?</string>
     <string name="display_route_tracks">Prikaži gi zapisite</string>
     <string name="shared_storage_warning_description">Poradi novite pravila na Android, od noemvri 2021 godina, OsmAnd 4.2 ḱe go izgubi pristapot do Zaedničkata memorija.
 \n
