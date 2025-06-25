@@ -4111,9 +4111,9 @@
     <string name="no_plugins_enabled">Nemáte zapnuté žiadne zásuvné moduly. Zoznam dostupných modulov môžete nájsť v \'Menu\' → \'Zásuvné moduly\'.</string>
     <string name="display_route_tracks">Zobraziť stopy</string>
     <string name="approx_safe_mode_description">Vykonať aproximácie GPX pomocou pomalšieho kódu pre Android namiesto natívneho kódu.</string>
-    <string name="delete_history_items_descr">Vymazať zvolené položky histórie\?</string>
+    <string name="delete_history_items_descr">Vymazať zvolené položky histórie?</string>
     <string name="quick_action_toggle_preference">Prepínač na zmenu nastavenia.</string>
-    <string name="delete_history_items">Vymazať %1$s položiek histórie\?</string>
+    <string name="delete_history_items">Vymazať %1$s položiek histórie?</string>
     <string name="from_to_with_params">Z %1$s do %2$s</string>
     <string name="progress_complete">%1$s hotovo</string>
     <string name="storage_copying_files_size">Kopíruje sa %1$s súborov %2$s</string>
