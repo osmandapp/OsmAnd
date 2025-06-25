@@ -4358,9 +4358,9 @@
     <string name="routing_attr_carriage_restrictions_description">Улічваць дазволы на доступу для гужавых транспартных сродкаў</string>
     <string name="add_group_to_markers">Дадаць групу ў спіс адзнак</string>
     <string name="wikipedia_and_wikivoyage_offline">Вікіпедыя і Wikivoyage ў аўтаномным рэжыме</string>
-    <string name="delete_history_items">Выдаліць %1$s элемент(аў) гісторыі\?</string>
+    <string name="delete_history_items">Выдаліць %1$s элемент(аў) гісторыі?</string>
     <string name="folder_access_denied">Патрабуецца дазвол на доступ да выбранага каталога.</string>
-    <string name="delete_history_items_descr">Выдаліць вылучаныя элементы гісторыі\?</string>
+    <string name="delete_history_items_descr">Выдаліць вылучаныя элементы гісторыі?</string>
     <string name="routeInfo_horse_scale_name">Складанасць конных сцежак</string>
     <string name="transparent_status_bar">Празрыстая панэль стану</string>
     <string name="save_as_copy">Захаваць як копію</string>

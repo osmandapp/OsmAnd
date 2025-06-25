@@ -4029,8 +4029,8 @@
     <string name="shared_string_migration">Yfirfærsla</string>
     <string name="icon_group_education">Menntun</string>
     <string name="icon_group_industrial">Iðnaðar</string>
-    <string name="delete_history_items">Eyða %1$s aðgerðaferlum\?</string>
-    <string name="delete_history_items_descr">Eyða völdum atriðum í aðgerðaferlinum\?</string>
+    <string name="delete_history_items">Eyða %1$s aðgerðaferlum?</string>
+    <string name="delete_history_items_descr">Eyða völdum atriðum í aðgerðaferlinum?</string>
     <string name="use_external_timestamps">Nota utanaðkomandi tímamerki</string>
     <string name="clear_all_history">Hreinsa allan aðgerðaferil</string>
     <string name="approx_safe_mode_description">Framkvæma GPX-nálgun með hægvirkari Android-kóða í stað þess innbyggða.</string>

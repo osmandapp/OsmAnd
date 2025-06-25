@@ -81,10 +81,15 @@ public abstract class ImageCard extends AbstractCard {
 					this.location = new LatLon(latitude, longitude);
 				}
 				if (imageObject.has("timestamp")) {
+					String timeStampObject = imageObject.getString("timestamp");
 					try {
-						this.timestamp = DATE_FORMAT.parse(imageObject.getString("timestamp"));
-					} catch (ParseException e) {
-						e.printStackTrace();
+						this.timestamp = DATE_FORMAT.parse(timeStampObject);
+					} catch (ParseException parseDateFormat) {
+						try {
+							this.timestamp = new Date(Long.parseLong(timeStampObject));
+						} catch (NumberFormatException e) {
+							LOG.error("Failed to parse date " + timeStampObject);
+						}
 					}
 				}
 				if (imageObject.has("key")) {

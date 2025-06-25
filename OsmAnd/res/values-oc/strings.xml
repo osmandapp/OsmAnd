@@ -513,7 +513,7 @@
     <string name="save_as_copy">Sauvagardar en còpia</string>
     <string name="shared_string_gps_filter">Filtre dau GPS</string>
     <string name="copying_file">A copiar lo fichier %1$s…</string>
-    <string name="delete_history_items">Eliminar leis elements de l\'istoric %1$s\?</string>
+    <string name="delete_history_items">Eliminar leis elements de l\'istoric %1$s?</string>
     <string name="shared_string_travelbooks">Guida de viatge</string>
     <string name="days_2_4">Jorns</string>
     <string name="days_5">Jorns</string>
@@ -592,7 +592,7 @@
     <string name="shared_string_migration">Migracion</string>
     <string name="icon_group_education">Educacion</string>
     <string name="shared_storage_migration">Migracion de memorizacion partejada</string>
-    <string name="delete_history_items_descr">Suprimir leis elements de l\'istoric chausits \?</string>
+    <string name="delete_history_items_descr">Suprimir leis elements de l\'istoric chausits ?</string>
     <string name="app_mode_pickup_truck">Camioneta descobèrta</string>
     <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="rendering_value_browse_map_name">Exploracion de la mapa</string>

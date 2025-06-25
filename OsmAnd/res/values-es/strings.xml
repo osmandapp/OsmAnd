@@ -4137,7 +4137,7 @@
     <string name="shared_string_travelbooks">Libros de viajes</string>
     <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
     <string name="shared_storage_third_step">Concede acceso a la carpeta. Sin esto, OsmAnd no puede copiar los archivos.</string>
-    <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial\?</string>
+    <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial?</string>
     <string name="app_profile_type">Tipo de perfil de la aplicación</string>
     <string name="map_marker_options">Opciones del marcador de mapa</string>
     <string name="add_to_group">Añadir al grupo</string>
@@ -4165,7 +4165,7 @@
     <string name="shared_string_migration">Migración</string>
     <string name="icon_group_education">Educación</string>
     <string name="icon_group_industrial">Industrial</string>
-    <string name="delete_history_items">¿Borrar %1$s elementos del historial\?</string>
+    <string name="delete_history_items">¿Borrar %1$s elementos del historial?</string>
     <string name="quick_action_toggle_preference">Un botón que cambia las preferencias.</string>
     <string name="display_route_tracks_as_poi">Mostrar trazas como PDI</string>
     <string name="approx_safe_mode">Aproximación segura de GPX</string>

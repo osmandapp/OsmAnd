@@ -4260,7 +4260,7 @@
     <string name="shared_string_gps_filter">GPS filtresi</string>
     <string name="exit_without_saving_warning">Değişiklikleri kaydetmeden çıkılsın mı\?</string>
     <string name="icon_group_industrial">Sanayi</string>
-    <string name="delete_history_items">%1$s geçmiş ögesi silinsin mi\?</string>
+    <string name="delete_history_items">%1$s geçmiş ögesi silinsin mi?</string>
     <string name="quick_action_toggle_preference">Tercihi değiştirmek için bir geçiş.</string>
     <string name="display_route_tracks_as_poi">İzlenen yolları POI olarak göster</string>
     <string name="clear_all_history_warning">Arama, gezinme ve işaretleyici geçmişi dahil tüm uygulama geçmişi girdileri silinsin mi\?</string>
@@ -4332,7 +4332,7 @@
     <string name="reading_files">Dosyalar okunuyor…</string>
     <string name="shared_storage_second_step">\"Bu klasörü kullan\" seçeneğine tıklayın.</string>
     <string name="icon_group_education">Eğitim</string>
-    <string name="delete_history_items_descr">Seçili geçmiş ögeleri silinsin mi\?</string>
+    <string name="delete_history_items_descr">Seçili geçmiş ögeleri silinsin mi?</string>
     <string name="skip_confirmation">Evet, atla</string>
     <string name="shared_storage">Paylaşılan depolama alanı</string>
     <string name="shared_storage_migration">Paylaşılan depolama alanı geçişi</string>

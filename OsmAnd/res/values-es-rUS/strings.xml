@@ -4033,8 +4033,8 @@
     <string name="transparent_status_bar">Barra de estado transparente</string>
     <string name="is_disabled">%1$s desactivado</string>
     <string name="clear_all_history_warning">¿Borrar todos los registros del historial de la aplicación, incluyendo el historial de búsqueda, navegación y marcadores\?</string>
-    <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial\?</string>
-    <string name="delete_history_items">¿Borrar %1$s elementos del historial\?</string>
+    <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial?</string>
+    <string name="delete_history_items">¿Borrar %1$s elementos del historial?</string>
     <string name="quick_action_toggle_preference">Un botón que cambia las preferencias.</string>
     <string name="display_route_tracks_as_poi">Mostrar trazas como PDI</string>
     <string name="safe_settings">Modo seguro</string>

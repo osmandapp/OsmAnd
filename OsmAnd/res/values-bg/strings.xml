@@ -3638,7 +3638,7 @@
     <string name="routing_attr_piste_type_downhill_description">Склонове за алпийски ски или спускане и достъп до ски лифтове.</string>
     <string name="shared_string_size">Размер</string>
     <string name="storage_found_files_descr">Докоснете „%1$s“, за да бъдат копирани %2$s файла от „%3$s“ към „%4$s“. Може да отнеме известно време.</string>
-    <string name="delete_history_items_descr">Премахване на избраните записи\?</string>
+    <string name="delete_history_items_descr">Премахване на избраните записи?</string>
     <string name="folder_access_denied">За достъп до тази папка е необходим достъп.</string>
     <string name="storage_copying_files_size">Копиране на файлове: %1$s %2$s</string>
     <string name="shared_string_copy_to">Копиране в</string>
@@ -3646,7 +3646,7 @@
     <string name="skip_confirmation">Да, пропускане</string>
     <string name="copying_file">Копиране на файл %1$s…</string>
     <string name="icon_group_education">Образование</string>
-    <string name="delete_history_items">Премахване на %1$s записа от историята\?</string>
+    <string name="delete_history_items">Премахване на %1$s записа от историята?</string>
     <string name="shared_storage_second_step">Докоснете „Използване на тази папка“.</string>
     <string name="shared_storage">Споделено хранилище</string>
     <string name="storage_found_files_size">Намерени %1$s файла %2$s</string>
