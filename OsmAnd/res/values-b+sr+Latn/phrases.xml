@@ -403,7 +403,7 @@
     <string name="poi_landfill_waste_nuclear">Nuklearni otpad</string>
     <string name="poi_waste_disposal">Odlaganje smeća</string>
     <string name="poi_waste_basket">Kanta za smeće</string>
-    <string name="poi_residential">Stambeni prostor</string>
+    <string name="poi_residential">Stambena oblast</string>
     <string name="poi_industrial">Industrijska zona</string>
     <string name="poi_landuse_railway">Železnički kolodvor</string>
     <string name="poi_commercial">Komercijalna zona</string>
@@ -1429,7 +1429,7 @@
     <string name="poi_man_made">Građevine</string>
     <string name="poi_transport_construction">Saobraćajna konstrukcija</string>
     <string name="poi_water_supply">Dostava vode</string>
-    <string name="poi_landuse">Korišćenje zemljišta</string>
+    <string name="poi_landuse">Klasifikacija zemljišta</string>
     <string name="poi_accomodation">Smeštaj</string>
     <string name="poi_entertainment">Slobodno vreme</string>
     <string name="poi_service">Servisi</string>
