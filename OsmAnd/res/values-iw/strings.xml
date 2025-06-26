@@ -5001,4 +5001,5 @@
     <string name="default_buttons_size_original_description">על כל כפתור לשמור את הגודל שלו.</string>
     <string name="calculating_indication_message">מתבצע חישוב…</string>
     <string name="cant_load_map_styles">לא ניתן לטעון סגנונות מפה.</string>
+    <string name="wiki_around">מקומות נפוצים בקרבת מקום</string>
 </resources>
