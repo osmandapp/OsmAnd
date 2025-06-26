@@ -40,7 +40,7 @@ class MapMarkersScreen(
 
     override fun shouldRestoreMapState() = true
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val markersSize = app.mapMarkersHelper.mapMarkers.size
         val markers =

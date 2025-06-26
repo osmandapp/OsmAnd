@@ -89,7 +89,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		ItemList.Builder listBuilder = new ItemList.Builder();
 		setupFavorites(listBuilder);
 		return new PlaceListNavigationTemplate.Builder()
