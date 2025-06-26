@@ -45,7 +45,7 @@ class POICategoriesScreen(
 
     private var selectedCategoryResult: SearchResult? = null
 
-	override fun onGetTemplate(): Template {
+	override fun getTemplate(): Template {
 		val templateBuilder = PlaceListNavigationTemplate.Builder()
 		if (!loading) {
 			val listBuilder = ItemList.Builder()

@@ -51,8 +51,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -63,8 +61,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.LocaleHelper;
-import net.osmand.plus.search.history.SearchHistoryHelper;
-import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -78,6 +74,7 @@ import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.SearchUtils;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
 import net.osmand.plus.search.ShareHistoryAsyncTask.OnShareHistoryListener;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
@@ -1162,15 +1159,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void reloadCategories() {
 		if (app.isApplicationInitializing()) {
 			showProgressBar();
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onFinish(@NonNull AppInitializer init) {
-					init.removeListener(this);
-					if (!paused) {
-						reloadCategoriesInternal();
-						if (!searching) {
-							hideProgressBar();
-						}
+			app.getAppInitializer().addOnFinishListener(result -> {
+				if (!paused) {
+					reloadCategoriesInternal();
+					if (!searching) {
+						hideProgressBar();
 					}
 				}
 			});
@@ -1262,15 +1255,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void reloadCities() {
 		if (app.isApplicationInitializing()) {
 			showProgressBar();
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onFinish(@NonNull AppInitializer init) {
-					init.removeListener(this);
-					if (!paused) {
-						reloadCitiesInternal();
-						if (!searching) {
-							hideProgressBar();
-						}
+			app.getAppInitializer().addOnFinishListener(result -> {
+				if (!paused) {
+					reloadCitiesInternal();
+					if (!searching) {
+						hideProgressBar();
 					}
 				}
 			});
@@ -1431,15 +1420,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void reloadHistory() {
 		if (app.isApplicationInitializing()) {
 			showProgressBar();
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onFinish(@NonNull AppInitializer init) {
-					init.removeListener(this);
-					if (!paused) {
-						reloadHistoryInternal();
-						if (!searching) {
-							hideProgressBar();
-						}
+			app.getAppInitializer().addOnFinishListener(result -> {
+				if (!paused) {
+					reloadHistoryInternal();
+					if (!searching) {
+						hideProgressBar();
 					}
 				}
 			});
@@ -1554,13 +1539,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		cancelPrev = true;
 
 		if (app.isApplicationInitializing() && text.length() > 0) {
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onFinish(@NonNull AppInitializer init) {
-					init.removeListener(this);
-					if (!paused) {
-						runCoreSearchInternal(text, showQuickResult, searchMore, resultListener);
-					}
+			app.getAppInitializer().addOnFinishListener(result -> {
+				if (!paused) {
+					runCoreSearchInternal(text, showQuickResult, searchMore, resultListener);
 				}
 			});
 		} else {

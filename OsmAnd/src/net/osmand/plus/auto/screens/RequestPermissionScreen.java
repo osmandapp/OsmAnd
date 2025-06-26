@@ -43,7 +43,7 @@ public class RequestPermissionScreen extends BaseAndroidAutoScreen {
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		List<String> permissions = new ArrayList<>();
 		permissions.add(ACCESS_FINE_LOCATION);
 		permissions.add(ACCESS_COARSE_LOCATION);

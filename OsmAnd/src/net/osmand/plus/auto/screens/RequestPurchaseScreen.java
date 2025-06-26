@@ -25,7 +25,7 @@ public class RequestPurchaseScreen extends BaseAndroidAutoScreen {
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 
 		String message = getCarContext().getString(R.string.android_auto_purchase_request_title);
 

@@ -44,13 +44,17 @@ class POIScreen(
     private var initialCompassMode: CompassMode? = null
 
     init {
-        loadPOI()
         lifecycle.addObserver(this)
     }
 
     override fun shouldRestoreMapState() = true
 
-    override fun onGetTemplate(): Template {
+    override fun onFirstGetTemplate() {
+        super.onFirstGetTemplate()
+        loadPOI()
+    }
+
+    override fun getTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
         if (loading) {
             templateBuilder.setLoading(true)

@@ -42,7 +42,7 @@ class TracksFoldersScreen(
         })
     }
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
         setupTrackFolders(templateBuilder)
         val actionStripBuilder = ActionStrip.Builder()
