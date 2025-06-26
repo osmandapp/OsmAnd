@@ -2392,7 +2392,7 @@
     <string name="shared_string_migration">Migrasi</string>
     <string name="icon_group_education">Edukasi</string>
     <string name="icon_group_industrial">Industri</string>
-    <string name="delete_history_items_descr">Hapus item riwayat yang dipilih?</string>
+    <string name="delete_history_items_descr">Entri yang dipilih akan dihapus dari daftar.</string>
     <string name="safe_settings">Aman</string>
     <string name="approx_safe_mode">Perkiraan GPX aman</string>
     <string name="approx_safe_mode_description">Lakukan perkiraan GPX menggunakan Android yang lebih lambat daripada kode asli.</string>
