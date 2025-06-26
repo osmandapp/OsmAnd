@@ -62,7 +62,6 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 	private boolean destroyed;
 	private List<SearchResult> recentResults;
 	private boolean showResult;
-	private boolean firstGetTemplate = true;
 
 	public SearchScreen(@NonNull CarContext carContext, @NonNull Action settingsAction) {
 		super(carContext);
@@ -85,14 +84,15 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 		destroyed = true;
 	}
 
+	@Override
+	protected void onFirstGetTemplate() {
+		super.onFirstGetTemplate();
+		reloadHistory();
+	}
+
 	@NonNull
 	@Override
 	public Template getTemplate() {
-		if(firstGetTemplate) {
-			firstGetTemplate = false;
-			reloadHistory();
-		}
-
 		String searchQuery = getSearchHelper().getSearchQuery();
 		String searchHint = getSearchHelper().getSearchHint();
 		SearchTemplate.Builder builder = new SearchTemplate.Builder(new SearchCallback() {

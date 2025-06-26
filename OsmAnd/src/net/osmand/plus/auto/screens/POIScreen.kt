@@ -42,7 +42,6 @@ class POIScreen(
     private lateinit var itemList: ItemList
     private var searchRadius = 0.0
     private var initialCompassMode: CompassMode? = null
-    private var firstGetTemplate = true
 
     init {
         lifecycle.addObserver(this)
@@ -50,11 +49,12 @@ class POIScreen(
 
     override fun shouldRestoreMapState() = true
 
+    override fun onFirstGetTemplate() {
+        super.onFirstGetTemplate()
+        loadPOI()
+    }
+
     override fun getTemplate(): Template {
-        if(firstGetTemplate) {
-            firstGetTemplate = false
-            loadPOI()
-        }
         val templateBuilder = PlaceListNavigationTemplate.Builder()
         if (loading) {
             templateBuilder.setLoading(true)
