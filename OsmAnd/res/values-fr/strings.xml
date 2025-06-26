@@ -4012,7 +4012,7 @@
     <string name="shared_string_travelbooks">Carnets de voyage</string>
     <string name="display_route_tracks">Afficher les traces</string>
     <string name="display_route_tracks_as_poi">Afficher les traces en tant que POI</string>
-    <string name="delete_history_items_descr">Les entrées sélectionnées sont supprimées de la liste.</string>
+    <string name="delete_history_items_descr">Les éléments sélectionnés sont supprimés de la liste.</string>
     <string name="delete_history_items">Supprimer %1$s élément(s) d\'historique ?</string>
     <string name="quick_action_toggle_preference">Un interrupteur pour changer le paramètre.</string>
     <string name="release_4_1">- Première prise en charge d\'Android Auto \n \n - Mise à jour de l\'interface utilisateur pour la recherche de coordonnées UTM \n \n- Filtre GPS pour les traces GPX \n \n- Widget d\'altitude (Pro) \n \n - Favoris : possibilité d\'afficher les icônes récemment utilisés \n \n - Planification d\'itinéraire : le profil sélectionné est désormais utilisé \n \n - Correction de la couche Mapillary, l\'extension est maintenant désactivé par défaut \n \n - Ajout d\'un écran pour gérer tout l\'historique dans l\'application \n \n - L\'orientation de la carte n\'est pas réinitialisée après le redémarrage de l\'application \n \n - Amélioration du rendu des marqueurs de hauteur SRTM \n \n - Correction des légendes de cartes en arabe \n \n - Correction de différents problèmes de routage</string>

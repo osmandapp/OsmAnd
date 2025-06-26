@@ -4084,7 +4084,7 @@
     <string name="display_route_tracks">顯示軌跡</string>
     <string name="delete_history_items">刪除 %1$s 歷史紀錄項目嗎？</string>
     <string name="quick_action_toggle_preference">用於變更偏好設定的開關。</string>
-    <string name="delete_history_items_descr">刪除選定的歷史紀錄項目嗎？</string>
+    <string name="delete_history_items_descr">選定的項目將會從清單中移除。</string>
     <string name="files_remaining">檔案剩餘：%1$s %2$s</string>
     <string name="copying_file">正在複製檔案 %1$s……</string>
     <string name="from_to_with_params">從 %1$s 到 %2$s</string>
