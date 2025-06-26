@@ -80,7 +80,7 @@ class TracksScreen(
         }
     }
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
         val title = if (trackTab.type == TrackTabType.ALL) {
             app.getString(R.string.sort_last_modified)
