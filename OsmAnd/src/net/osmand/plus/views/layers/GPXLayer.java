@@ -326,6 +326,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged || mapRendererChanged;
+			if (mapRendererChanged) {
+				clearSelectedFilesSegments();
+			}
 			if (!visibleGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, visibleGPXFiles, settings);
 			}
