@@ -197,7 +197,9 @@ public class WaypointDialogHelper {
 
 		TargetPoint finish = targetsHelper.getPointToNavigate();
 		TargetPoint start = targetsHelper.getPointToStart();
-		switchStartAndFinish(app, start, finish, false);
+		if (finish != null) {
+			switchStartAndFinish(app, start, finish, false);
+		}
 
 		List<TargetPoint> points = targetsHelper.getIntermediatePoints();
 		Collections.reverse(points);
