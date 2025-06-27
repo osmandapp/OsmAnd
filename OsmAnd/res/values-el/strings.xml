@@ -3644,7 +3644,7 @@
     <string name="shared_string_gpx_route">Διαδρομή ίχνους</string>
     <string name="add_to_mapillary">Προσθήκη στο Mapillary</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Δρομολόγια shuttle</string>
-    <string name="rendering_attr_showMonorailRoutes_name">Δρομολόγια monorail</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Δρομολόγια μονοτρόχιου σιδηρόδροµου</string>
     <string name="register_opr_create_new_account">Δημιουργία νέου λογαριασμού</string>
     <string name="send_files_to_openstreetmap">Αποστολή αρχείου GPX στο OpenStreetMap</string>
     <string name="select_another_track">Επιλογή άλλου ίχνους</string>
