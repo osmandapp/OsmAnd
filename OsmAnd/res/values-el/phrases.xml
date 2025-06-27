@@ -1967,7 +1967,7 @@
     <string name="poi_route_tram_ref">Τροχιόδρομος (τραμ)</string>
     <string name="poi_route_train_ref">Σιδηρόδρομος</string>
     <string name="poi_route_light_rail_ref">Ελαφρύς σιδηρόδρομος</string>
-    <string name="poi_route_monorail_ref">Μονή σιδηροτροχιά</string>
+    <string name="poi_route_monorail_ref">Μονοτρόχιος σιδηρόδροµος</string>
     <string name="poi_route_funicular_ref">Καλωδιωτός σιδηρόδρομος</string>
     <string name="poi_route_ferry_ref">Πορθμείο</string>
     <string name="poi_route_subway_ref">Υπόγειος σιδηρόδρομος (μετρό)</string>
@@ -3854,4 +3854,7 @@
     <string name="poi_dog">Σκυλιά</string>
     <string name="poi_hiking_filter">Κατάλληλο για πεζοπορία</string>
     <string name="poi_cafe_filter">Καφέ</string>
+    <string name="poi_route_point_category">Κατηγορία ταξιδιών</string>
+    <string name="poi_international_organization">Διεθνής οργανισμός</string>
+    <string name="poi_adoption_agency">Οργανισμός υιοθεσίας</string>
 </resources>
