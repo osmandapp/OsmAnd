@@ -3902,7 +3902,7 @@
     <string name="poi_protestant_church">Προτεσταντική εκκλησία</string>
     <string name="poi_anglican_church">Αγγλικανική εκκλησία</string>
     <string name="poi_methodist_church">Μεθοδιστική εκκλησία</string>
-    <string name="poi_greek_orthodox_church">Ελληνορθόδοξη εκκλησία</string>
+    <string name="poi_greek_orthodox_church">Ελληνική ορθόδοξη εκκλησία</string>
     <string name="poi_russian_orthodox_church">Ρωσική ορθόδοξη εκκλησία</string>
     <string name="poi_romanian_orthodox_church">Ρουμάνικη ορθόδοξη εκκλησία</string>
     <string name="poi_serbian_orthodox_church">Σέρβικη ορθόδοξη εκκλησία</string>
@@ -3911,4 +3911,10 @@
     <string name="poi_ukrainian_orthodox_church">Ουκρανική ορθόδοξη εκκλησία</string>
     <string name="poi_armenian_apostolic_church">Αρμένικη αποστολική εκκλησία</string>
     <string name="poi_ukrainian_greek_catholic_church">Ουκρανική ελληνοκαθολική εκκλησία</string>
+    <string name="poi_contact_website">Ιστότοπος</string>
+    <string name="poi_lit">Φωτισμός</string>
+    <string name="poi_piste_type">Είδος πίστας</string>
+    <string name="poi_piste_oneway">Πίστα μιας κατεύθυνσης</string>
+    <string name="poi_cafe_yes">Ναι</string>
+    <string name="poi_access_notes">Σημειώσεις πρόσβασης</string>
 </resources>
