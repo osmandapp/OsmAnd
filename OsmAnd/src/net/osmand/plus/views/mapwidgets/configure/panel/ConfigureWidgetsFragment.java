@@ -538,6 +538,13 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		super.onResume();
 		setupController();
 		updateStatusBar();
+		WidgetsTabAdapter adapter = (WidgetsTabAdapter) viewPager.getAdapter();
+		if (adapter != null) {
+			WidgetsListFragment fragment = adapter.getFragment(viewPager.getCurrentItem());
+			if(fragment != null) {
+				fragment.onParentFragmentResumed();
+			}
+		}
 	}
 
 	@Override

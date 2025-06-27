@@ -137,6 +137,10 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 		}
 	}
 
+	public void onParentFragmentResumed() {
+		adapter.notifyDataSetChanged();
+	}
+
 	@Override
 	public void onPause() {
 		super.onPause();
