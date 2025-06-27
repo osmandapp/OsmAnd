@@ -5920,4 +5920,14 @@
     <string name="release_4_9">• Dodano przeglądarkę obrazów w trybie pełnoekranowym dla zdjęć z Wikimedia\n\n• Wprowadzono nową wtyczkę „Vehicle Metrics” do monitorowania parametrów pojazdu za pomocą protokołu OBD-II\n\n• Dodano możliwość przypisywania aktywności do śladów i filtrowania ich według aktywności\n\n• Wprowadzono nowe szybkie akcje do rejestrowania podróży i blokowania ekranu dotykowego\n\n• Dodano możliwość dostosowania wyglądu przycisków mapy oraz dokładną siatkę\n\n• Dodano menu kontekstowe i akcję „Zresetuj średnią prędkość” dla widżetów\n\n• Dodano nową warstwę trasy: „Szlaki dla motocykli terenowych”\n\n• Naprawiono automatyczne nagrywanie śladu podczas nawigacji\n\n• Naprawiono problem z odwróconymi współrzędnymi w trybie RTL (od prawej do lewej)\n\n• Naprawiono pominięte dane z czujników podczas nagrywania bieżącego śladu\n\n• Dodano informacje o okolicznych terenach dla wybranego punktu\n\n• Dodano szybką akcję do kontrolowania widoczności edycji OSM\n\n• Rozdzielono parametry widoczności dla opcji koloryzacji terenu\n\n• Dodano ikonę z możliwością kliknięcia w celu wyświetlenia informacji o dostępie lub innych cechach drogi lub ścieżki</string>
     <string name="obd_fuel_type_hybrid_gasoline">Silnik hybrydowy zasilany benzyną</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Przycisk do zapisania aktualnie rejestrowanej trasy jako pliku GPX i kontynuowania nagrywania nowego śladu bez przerwy.</string>
+    <string name="quick_action_switch_compass_desc">Przełącznik do zmiany orientacji mapy</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="add_widget_above">Dodaj widżet powyżej</string>
+    <string name="hmd_promo_years">Promocja HMD na %1$s lat</string>
+    <string name="read_on">Czytaj dalej na %1$s</string>
+    <string name="route_roundabout_exit">Zjedź zjazdem numer %1$d</string>
+    <string name="add_widget_to_the_left">Dodaj widżet po lewej</string>
+    <string name="add_widget_to_the_right">Dodaj widżet po prawej</string>
+    <string name="hmd_promo_description_years">Bezpłatny dostęp do funkcji, w tym nieograniczonego pobierania map, trójwymiarowej rzeźby terenu itp., przez %1$s lat</string>
+    <string name="add_widget_below">Dodaj widżet poniżej</string>
 </resources>
