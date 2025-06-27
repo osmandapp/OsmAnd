@@ -959,6 +959,14 @@ public class BinaryMapIndexReader {
 		req.numberOfAcceptedObjects = 0;
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
+
+		CodedInputStream stream = codedIS;
+		if (stream == null) {
+			if (req.log) {
+				log.warn("CodedInputStream is null, reader closed");
+			}
+			return req.getSearchResults();
+		}
 		List<MapTree> foundSubtrees = new ArrayList<MapTree>();
 		for (MapIndex mapIndex : mapIndexes) {
 			if(filterMapIndex != null && mapIndex != filterMapIndex) {
@@ -966,10 +974,10 @@ public class BinaryMapIndexReader {
 			}
 			// lazy initializing rules
 			if (mapIndex.encodingRules.isEmpty()) {
-				codedIS.seek(mapIndex.filePointer);
-				long oldLimit = codedIS.pushLimitLong((long) mapIndex.length);
+				stream.seek(mapIndex.filePointer);
+				long oldLimit = stream.pushLimitLong((long) mapIndex.length);
 				readMapIndex(mapIndex, true);
-				codedIS.popLimit(oldLimit);
+				stream.popLimit(oldLimit);
 			}
 			for (MapRoot index : mapIndex.getRoots()) {
 				if (index.minZoom <= req.zoom && index.maxZoom >= req.zoom) {
@@ -984,10 +992,10 @@ public class BinaryMapIndexReader {
 					// lazy initializing trees
 					if (index.trees == null) {
 						index.trees = new ArrayList<MapTree>();
-						codedIS.seek(index.filePointer);
-						long oldLimit = codedIS.pushLimitLong((long) index.length);
+						stream.seek(index.filePointer);
+						long oldLimit = stream.pushLimitLong((long) index.length);
 						readMapLevel(index);
-						codedIS.popLimit(oldLimit);
+						stream.popLimit(oldLimit);
 					}
 
 					for (MapTree tree : index.trees) {
@@ -998,10 +1006,10 @@ public class BinaryMapIndexReader {
 								!req.containsSearchBox(tree.left, tree.top, tree.right, tree.bottom)) {
 							continue;
 						}
-						codedIS.seek(tree.filePointer);
-						long oldLimit = codedIS.pushLimitLong((long) tree.length);
+						stream.seek(tree.filePointer);
+						long oldLimit = stream.pushLimitLong((long) tree.length);
 						searchMapTreeBounds(tree, index, req, foundSubtrees);
-						codedIS.popLimit(oldLimit);
+						stream.popLimit(oldLimit);
 					}
 
 					Collections.sort(foundSubtrees, new Comparator<MapTree>() {
@@ -1012,16 +1020,15 @@ public class BinaryMapIndexReader {
 					});
 					for (MapTree tree : foundSubtrees) {
 						if (!req.isCancelled()) {
-							codedIS.seek(tree.mapDataBlock);
-							int length = codedIS.readRawVarint32();
-							long oldLimit = codedIS.pushLimitLong((long) length);
+							stream.seek(tree.mapDataBlock);
+							int length = stream.readRawVarint32();
+							long oldLimit = stream.pushLimitLong((long) length);
 							readMapDataBlocks(req, tree, mapIndex);
-							codedIS.popLimit(oldLimit);
+							stream.popLimit(oldLimit);
 						}
 					}
 					foundSubtrees.clear();
 				}
-
 			}
 		}
 		if (req.numberOfVisitedObjects > 0 && req.log) {
@@ -1392,13 +1399,16 @@ public class BinaryMapIndexReader {
 	}
 
 	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
-		for (AddressRegion reg : addressIndexes) {
-			if (reg.indexNameOffset != -1) {
-				codedIS.seek(reg.indexNameOffset);
-				long len = readInt();
-				long old = codedIS.pushLimitLong((long) len);
-				addressAdapter.searchAddressDataByName(reg, req, typeFilter);
-				codedIS.popLimit(old);
+		CodedInputStream stream = codedIS;
+		if (stream != null) {
+			for (AddressRegion reg : addressIndexes) {
+				if (reg.indexNameOffset != -1) {
+					stream.seek(reg.indexNameOffset);
+					long len = readInt();
+					long old = stream.pushLimitLong((long) len);
+					addressAdapter.searchAddressDataByName(reg, req, typeFilter);
+					stream.popLimit(old);
+				}
 			}
 		}
 		return req.getSearchResults();
@@ -1422,12 +1432,15 @@ public class BinaryMapIndexReader {
 		if (req.nameQuery == null || req.nameQuery.length() == 0) {
 			throw new IllegalArgumentException();
 		}
-		for (PoiRegion poiIndex : poiIndexes) {
-			poiAdapter.initCategories(poiIndex);
-			codedIS.seek(poiIndex.filePointer);
-			long old = codedIS.pushLimitLong((long) poiIndex.length);
-			poiAdapter.searchPoiByName(poiIndex, req);
-			codedIS.popLimit(old);
+		CodedInputStream stream = codedIS;
+		if (stream != null) {
+			for (PoiRegion poiIndex : poiIndexes) {
+				poiAdapter.initCategories(poiIndex);
+				stream.seek(poiIndex.filePointer);
+				long old = stream.pushLimitLong((long) poiIndex.length);
+				poiAdapter.searchPoiByName(poiIndex, req);
+				stream.popLimit(old);
+			}
 		}
 		return req.getSearchResults();
 	}
@@ -1494,14 +1507,17 @@ public class BinaryMapIndexReader {
 		req.numberOfAcceptedObjects = 0;
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
-		for (PoiRegion poiIndex : poiIndexes) {
-			poiAdapter.initCategories(poiIndex);
-			codedIS.seek(poiIndex.filePointer);
-			long old = codedIS.pushLimitLong((long) poiIndex.length);
-			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
-			codedIS.popLimit(old);
-		}
 
+		CodedInputStream stream = codedIS;
+		if (stream != null) {
+			for (PoiRegion poiIndex : poiIndexes) {
+				poiAdapter.initCategories(poiIndex);
+				stream.seek(poiIndex.filePointer);
+				long old = stream.pushLimitLong((long) poiIndex.length);
+				poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
+				stream.popLimit(old);
+			}
+		}
 		return req.getSearchResults();
 	}
 
@@ -1511,11 +1527,14 @@ public class BinaryMapIndexReader {
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
 
-		poiAdapter.initCategories(poiIndex);
-		codedIS.seek(poiIndex.filePointer);
-		long old = codedIS.pushLimitLong((long) poiIndex.length);
-		poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
-		codedIS.popLimit(old);
+		CodedInputStream stream = codedIS;
+		if (stream != null) {
+			poiAdapter.initCategories(poiIndex);
+			stream.seek(poiIndex.filePointer);
+			long old = stream.pushLimitLong((long) poiIndex.length);
+			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
+			stream.popLimit(old);
+		}
 		return req.getSearchResults();
 	}
 
@@ -2909,12 +2928,16 @@ public class BinaryMapIndexReader {
 	public TLongObjectHashMap<IncompleteTransportRoute> getIncompleteTransportRoutes() throws InvalidProtocolBufferException, IOException {
 		if (incompleteTransportRoutes == null) {
 			incompleteTransportRoutes = new TLongObjectHashMap<>();
-			for (TransportIndex ti : transportIndexes) {
-				if (ti.incompleteRoutesLength > 0) {
-					codedIS.seek(ti.incompleteRoutesOffset);
-					long oldLimit = codedIS.pushLimitLong((long) ti.incompleteRoutesLength);
-					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.filePointer);
-					codedIS.popLimit(oldLimit);
+
+			CodedInputStream stream = codedIS;
+			if (stream != null) {
+				for (TransportIndex ti : transportIndexes) {
+					if (ti.incompleteRoutesLength > 0) {
+						stream.seek(ti.incompleteRoutesOffset);
+						long oldLimit = stream.pushLimitLong((long) ti.incompleteRoutesLength);
+						transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.filePointer);
+						stream.popLimit(oldLimit);
+					}
 				}
 			}
 		}
