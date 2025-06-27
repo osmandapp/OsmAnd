@@ -760,6 +760,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			public int compare(HHRouteRegionsGroup<T> o1, HHRouteRegionsGroup<T> o2) {
 				if (o1.containsStartEnd != o2.containsStartEnd) {
 					return o1.containsStartEnd ? -1 : 1;
+				} else if (o1.edition != o2.edition) {
+					return o1.edition > o2.edition ? -1 : 1;
 				} else if (o1.extraParam != o2.extraParam) {
 					return o1.extraParam < o2.extraParam ? -1 : 1;
 				} else if (o1.matchParam != o2.matchParam) {
