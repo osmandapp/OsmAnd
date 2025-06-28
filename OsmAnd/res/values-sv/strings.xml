@@ -5912,5 +5912,19 @@
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spåra viktiga fordonsdata, genom användning av OBD-II-protokollet. Övervaka nyckeltal som hastighet, motorvarvtal, bränsleförbrukning, med mera.</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
     <string name="obd_throttle_position">Gaspedalens läge</string>
-    <string name="obd_calculated_engine_load_desc">Visar hur många procent av motorns tillgängliga effekt som används vid en given tidpunkt</string>
+    <string name="obd_calculated_engine_load_desc">Visar hur många procent av motorns tillgängliga effekt som används vid en given tidpunkt.</string>
+    <string name="fuel_tank_capacity_description">Ange tankstorlek, för att tillförlitligt spåra bränslenivåer och -förbrukning</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="route_guidance_desc">Ger ruttvägledning i realtid, inklusive avstånd till nästa sväng, vägnamn, aktuellt gatunamn och körfältsinformation. Widgetar är aktiva under navigering.</string>
+    <string name="background_opacity">Bakgrundens genomskinlighet</string>
+    <string name="quick_action_previous_screen_title">Föregående skärmbild</string>
+    <string name="quick_action_switch_compass_desc">En knapp för att ändra kartorientering.</string>
+    <string name="y_axis_description">Välj upp till två valmöjligheter för Y-axeln.</string>
+    <string name="delete_widget_description">Denna wiget kommer att tas bort. Du kan återställa den senare i Konfigurera skärmen.</string>
+    <string name="delete_widget">Ta bort widget?</string>
+    <string name="add_widget_below">Lägg till widget nedanför</string>
+    <string name="add_widget_above">Lägg till widget ovanför</string>
+    <string name="add_widget_to_the_right">Lägg till widget till höger</string>
+    <string name="add_widget_to_the_left">Lägg till widget till vänster</string>
+    <string name="shared_string_key">Tangent</string>
 </resources>
