@@ -2333,7 +2333,7 @@
     <string name="empty_state_av_notes_desc">Lägg till ljud-, video- eller foto-notering för varje punkt på kartan med hjälp av widgeten eller menyn.</string>
     <string name="add_track_to_markers_descr">Välj ett spår för att lägga till dess vägpunkter bland markörerna.</string>
     <string name="add_favourites_group_to_markers_descr">Välj en favoritkategori att lägga till i markörerna.</string>
-    <string name="shared_string_gpx_waypoints">Spåra waypoints</string>
+    <string name="shared_string_gpx_waypoints">Spåra vägpunkter</string>
     <string name="favourites_group">Kategorin Favoriter</string>
     <string name="add_group">Lägg till en grupp</string>
     <string name="add_group_descr">Importera grupper från favoriter eller GPX-punkter.</string>
@@ -4707,7 +4707,7 @@
     <string name="data_storage_space_description">%1$s GB ledigt (av %2$s GB)</string>
     <string name="listed_exist">Angivna %1$s, finns redan i OsmAnd.</string>
     <string name="replace_all_desc">Nuvarande objekt kommer att ersättas med objekt från filen</string>
-    <string name="live_monitoring">Online spårning</string>
+    <string name="live_monitoring">Online-spårning</string>
     <string name="rendering_attr_highway_class_track_grade4_name">Grad 4</string>
     <string name="shared_string_app_default_w_val">App-standard (%s)</string>
     <string name="shared_string_routing">Navigering</string>
@@ -5865,5 +5865,27 @@
     <string name="backup_error_failed_to_transfer_file">Misslyckades med att överföra molnfil(er).</string>
     <string name="cant_load_map_styles">Kan inte ladda kartstilar.</string>
     <string name="shared_string_switch">Byt</string>
-    <string name="ski_route_switch_style_description">Utforska skidbackar, -liftar, med mera, med kartstilen Vinter och skidor</string>
+    <string name="ski_route_switch_style_description">Utforska skidbackar, -liftar, med mera, med kartstilen Vinter och skidor.</string>
+    <string name="set_parking_position">Ställ in parkeringsposition</string>
+    <string name="set_home">Ställ in hem</string>
+    <string name="read_on">Läs på %1$s</string>
+    <string name="travel_guides">Guider</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX-vägpunkter (%1$d) kopierade till favoriter.</string>
+    <string name="msg_favorites_skipped_as_existing">Favoritpunkter (%1$d) hoppades över, eftersom de redan fanns.</string>
+    <string name="add_to_navigation">Lägg till i Navigering</string>
+    <string name="shared_string_edges">Kanter</string>
+    <string name="labels_position">Etiketters position</string>
+    <string name="routing_attr_allow_ferries_description">Tillåt färjerutter vid ruttplanering</string>
+    <string name="route_members">Medlemmar</string>
+    <string name="multipoligon_related">Besläktat</string>
+    <string name="prediction_time_description">Positionsikonen i OsmAnd animeras i takt med varje mottagen GPS-datapunkt (en gång per sekund). En liten fördröjning i dess rörelse kan märkas, särskilt när användaren rör sig snabbt eller GPS-signalen fluktuerar.</string>
+    <string name="position_animation">Positionsanimering</string>
+    <string name="poi_source">POI-källa</string>
+    <string name="add_widget">Lägg till widget</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Åtgärd för att kontrollera Koordinat-rutnätets synlighet på kartan.</string>
+    <string name="layer_coordinates_grid">Koordinatrutnät</string>
+    <string name="shared_string_manual">Manuell</string>
+    <string name="shared_string_map_center">Kartans mitt</string>
+    <string name="original_color_description">Varje punkt skulle behålla dess egen färg.</string>
+    <string name="original_icon_description">Varje punkt skulle behålla sin egen ikon.</string>
 </resources>
