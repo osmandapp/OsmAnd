@@ -5524,7 +5524,7 @@
     <string name="obd_fuel_left_liters">Preostalo gorivo (litara)</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="obd_vehicle_info">Informacije o vozilu</string>
-    <string name="connect_obd_instructions_title">OsmAnd podržava Bluetooth veze sa OBD-II skenerima.</string>
+    <string name="connect_obd_instructions_title">OsmAnd podržava Bluetooth veze sa OBD-II senzorima.</string>
     <string name="connect_obd_instructions_step2">Pokreni motor vozila</string>
     <string name="obd_how_to_connect">Kako se povezati:</string>
     <string name="connect_obd_instructions_step1">Spoj skener na OBD-II priključak u vozilu.</string>
@@ -5534,15 +5534,15 @@
     <string name="route_guidance">Navođenje rutom</string>
     <string name="obd_widget_vehicle_speed">Brzina vozila</string>
     <string name="obd_widget_engine_speed">Broj obrtaja motora</string>
-    <string name="obd_nothing_found_text">Nema skenera</string>
-    <string name="obd_searching_text">Traženje skenera</string>
+    <string name="obd_nothing_found_text">Nisu pronađeni skeneri</string>
+    <string name="obd_searching_text">Pretraga skenera</string>
     <string name="obd_device_forget_sensor">Zaboravi skener</string>
     <string name="obd_device_forget_sensor_description">Skener će biti uklonjen s liste. Možeš ponovo upariti ovaj skener u bilo kojem trenutku.</string>
     <string name="connect_obd_instructions_step">1. Spoj skener na OBD-II priključak vozila.\n\n2. Uključi motor vozila\n\n3. Omogući Bluetooth na svom uređaju\n\n4. Dodirni \'%1$s\' i odaberi svoj skener s liste.</string>
     <string name="route_guidance_desc">Omogućuje navođenje rutom u stvarnom vremenu, uključujući udaljenost do sledećeg skretanja, naziv ulice, trenutni naziv ulice i informacije o traci. Widžeti su aktivni tokom navigacije.</string>
     <string name="obd_nothing_found_description">Proveriti sledeće:\n – Proveri je li Bluetooth uključen\n – Motor vozila radi\n – Proveri je li uređaj u dometu skenera.</string>
     <string name="obd_bluetooth_off_description">Uključite Bluetooth da biste pronašli i povezali skenere.</string>
-    <string name="obd_searching_text_description">Drži uređaj blizu skenera. Proveri da li radi motor vozila.</string>
+    <string name="obd_searching_text_description">Držite uređaj blizu skenera. Uverite se da motor vozila radi.</string>
     <string name="obd_fuel_consumption_rate_sensor">Potrošnja goriva (senzor)</string>
     <string name="obd_fuel_level_liter">Nivo goriva (l)</string>
     <string name="obd_fuel_left_km">Preostalo gorivo (km)</string>
