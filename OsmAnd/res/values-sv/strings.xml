@@ -575,7 +575,7 @@
     <string name="no_vector_map_loaded">Vektorkartorna lästes inte in</string>
     <string name="gpx_files_not_found">Hittar inga GPX-filer i spårmappen</string>
     <string name="error_reading_gpx">Kunde inte läsa GPX-data.</string>
-    <string name="vector_data">Offline vektorkartor</string>
+    <string name="vector_data">Offline-vektorkartor</string>
     <string name="transport_context_menu">Sök efter transport vid hållplats</string>
     <string name="poi_context_menu_modify">Ändra Intressepunkt</string>
     <string name="poi_context_menu_delete">Ta bort POI</string>
@@ -4110,7 +4110,7 @@
     <string name="switch_mode_by_tapping_on_widget">Växla läge genom att trycka på widgeten.</string>
     <string name="map_widget_sunrise_desc">Visar klockslag för eller återstående tid till kommande soluppgång.</string>
     <string name="turn_on_nautical_depth_description">Slå på för att visa information om vattendjup på kartan.</string>
-    <string name="weather_online_cache">Online cache</string>
+    <string name="weather_online_cache">Online-cache</string>
     <string name="map_settings_weather_temp">Temperatur</string>
     <string name="map_settings_weather_air_pressure">Lufttryck</string>
     <string name="explore_weather_forecast">Utforska väderprognos.</string>
@@ -5864,4 +5864,6 @@
     <string name="ais_port_nmea_local">UDP-port för lokal NMEA-datamottagare</string>
     <string name="backup_error_failed_to_transfer_file">Misslyckades med att överföra molnfil(er).</string>
     <string name="cant_load_map_styles">Kan inte ladda kartstilar.</string>
+    <string name="shared_string_switch">Byt</string>
+    <string name="ski_route_switch_style_description">Utforska skidbackar, -liftar, med mera, med kartstilen Vinter och skidor</string>
 </resources>
