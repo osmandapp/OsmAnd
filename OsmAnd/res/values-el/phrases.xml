@@ -3976,5 +3976,10 @@
     <string name="poi_membership_no">Όχι</string>
     <string name="poi_beauty_salon_spa">Σπα</string>
     <string name="poi_beauty_salon_skin_care">Φροντίδα δέρματος</string>
-    <string name="poi_beauty_salon_waxing">Αποτρίχωση</string>
+    <string name="poi_beauty_salon_waxing">Αποτρίχωση με κερί</string>
+    <string name="poi_beauty_salon_hair_removal">Αποτρίχωση</string>
+    <string name="poi_beauty_salon_aesthetic">Αισθητική</string>
+    <string name="poi_beauty_salon_massage">Μασάζ</string>
+    <string name="poi_beauty_salon_pedicure">Πεντικιούρ</string>
+    <string name="poi_massage_chiropractic">Χειροπρακτικός</string>
 </resources>
