@@ -3258,7 +3258,7 @@
     <string name="recalculate_route_distance_promo">如果從路徑到目前位置的距離大於選定的值，將會重新計算路徑。</string>
     <string name="select_distance_route_will_recalc">選取要重新計算路徑的距離。</string>
     <string name="recalculate_route_in_deviation">發生偏離時重新計算路線</string>
-    <string name="shared_string_min">分鐘</string>
+    <string name="shared_string_min">最小</string>
     <string name="n_items_of_z">%2$s 的 %1$s</string>
     <string name="shared_string_terrain">地形</string>
     <string name="hillshade_description">地形陰影地圖用黑色的陰影來顯示坡度、山峰與低地。</string>
