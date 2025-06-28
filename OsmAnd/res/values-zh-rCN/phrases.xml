@@ -3211,6 +3211,8 @@
     <string name="poi_tunnel_name">隧道名称</string>
     <string name="poi_cemt_via">VIa</string>
     <string name="poi_cemt_vic">VIc</string>
-    <string name="poi_healthcare_speciality_allergology">过敏病科/变态反应科</string>
+    <string name="poi_healthcare_speciality_allergology">过敏学/变态反应学</string>
     <string name="poi_healthcare_speciality_cardiac_surgery">心脏外科</string>
+    <string name="poi_healthcare_speciality_endodontics">牙髓病学</string>
+    <string name="poi_healthcare_speciality_geriatrics">老年医学</string>
 </resources>
