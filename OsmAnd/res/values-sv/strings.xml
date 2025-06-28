@@ -5886,6 +5886,9 @@
     <string name="layer_coordinates_grid">Koordinatrutnät</string>
     <string name="shared_string_manual">Manuell</string>
     <string name="shared_string_map_center">Kartans mitt</string>
-    <string name="original_color_description">Varje punkt skulle behålla dess egen färg.</string>
+    <string name="original_color_description">Varje punkt skulle behålla sin egen färg.</string>
     <string name="original_icon_description">Varje punkt skulle behålla sin egen ikon.</string>
+    <string name="original_shape_description">Varje punkt skulle behålla sin egen form.</string>
+    <string name="hmd_promo_description">Gratis tillgång till funktioner som obegränsade kartnedladdningar, 3D-reliefer m.m. i %1$s månader</string>
+    <string name="hmd_promo_description_years">Gratis tillgång till funktioner som obegränsade kartnedladdningar, 3D-reliefer o.s.v. i %1$s år</string>
 </resources>
