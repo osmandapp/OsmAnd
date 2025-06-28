@@ -5459,9 +5459,9 @@
     <string name="obd_fuel_level_liter">Niveau de carburant (l)</string>
     <string name="obd_fuel_level_percent">Niveau de carburant (%)</string>
     <string name="obd_fuel_left_km">Carburant restant (km)</string>
-    <string name="obd_fuel_consumption_rate_scanner">Carburant restant (km)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Consommation de carburant</string>
-    <string name="obd_fuel_consumption_rate_percent_hour">Consommation de carburant %/h</string>
+    <string name="obd_fuel_consumption_rate_scanner">Taux de consommation de carburant (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Taux de consommation de carburant</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Taux de consommation de carburant %/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Taux de consommation de carburant (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Taux de consommation de carburant (capteur)</string>
     <string name="speedometer_maximum">Maximum</string>
@@ -5469,10 +5469,10 @@
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (%/h)</string>
     <string name="l_100km">L/100 km</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (L/100 km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Affiche le taux de consommation de carburant du véhicule basé sur des calculs (L/100 km)</string>
     <string name="kpa_unit">kPa</string>
-    <string name="simulate_obd">Simuler des données OBD</string>
-    <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (L/100 km)</string>
+    <string name="simulate_obd">Simuler les données OBD</string>
+    <string name="obd_fuel_consumption_rate_l_km">Taux de consommation de carburant (L/100 km)</string>
     <string name="obd_engine_runtime_desc">Affiche la durée pendant laquelle le moteur a fonctionné depuis son démarrage.</string>
     <string name="obd_throttle_position_desc">Affiche l\'angle de la plaque d\'accélérateur dans le corps de papillon.</string>
     <string name="obd_throttle_position">Position du papillon des gaz</string>
