@@ -2,19 +2,23 @@ package net.osmand.plus.resources;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 
-import java.io.IOException;
-import java.util.Map;
+import org.apache.commons.logging.Log;
 
-import androidx.annotation.NonNull;
+import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public class DetectRegionTask extends AsyncTask<LatLon, Void, WorldRegion> {
+
+	private static final Log log = PlatformUtil.getLog(DetectRegionTask.class);
 
 	private final OsmandApplication app;
 	private final CallbackWithObject<WorldRegion> callback;
@@ -34,8 +38,8 @@ public class DetectRegionTask extends AsyncTask<LatLon, Void, WorldRegion> {
 					return reg.getKey();
 				}
 			}
-		} catch (IOException e) {
-			// ignore
+		} catch (Exception e) {
+			log.error(e);
 		}
 		return null;
 	}

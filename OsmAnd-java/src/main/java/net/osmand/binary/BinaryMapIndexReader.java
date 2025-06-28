@@ -1021,7 +1021,6 @@ public class BinaryMapIndexReader {
 					}
 					foundSubtrees.clear();
 				}
-
 			}
 		}
 		if (req.numberOfVisitedObjects > 0 && req.log) {
@@ -1501,7 +1500,6 @@ public class BinaryMapIndexReader {
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
 		}
-
 		return req.getSearchResults();
 	}
 
