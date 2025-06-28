@@ -104,7 +104,7 @@
     <string name="poi_chocolate">巧克力店</string>
     <string name="poi_coffee">咖啡馆</string>
     <string name="poi_beverages">饮料店</string>
-    <string name="poi_ice_cream">冰淇淋馆</string>
+    <string name="poi_ice_cream">冰淇淋店</string>
     <string name="poi_tea">茶馆</string>
     <string name="poi_wine">葡萄酒商店</string>
     <string name="poi_books">书店</string>
@@ -2244,7 +2244,7 @@
     <string name="poi_volcano_status_extinct">死火山</string>
     <string name="poi_volcano_status_dormant">休眠火山</string>
     <string name="poi_volcano_status_active">活火山</string>
-    <string name="poi_volcano_number_of_eruptions">爆发次数</string>
+    <string name="poi_volcano_number_of_eruptions">喷发次数</string>
     <string name="poi_memorial_ghost_bike">幽灵单车</string>
     <string name="poi_volcano_status_inactive">不活跃火山</string>
     <string name="poi_paintball">彩弹射击</string>
@@ -2784,7 +2784,7 @@
     <string name="poi_denomination_russian_orthodox">俄罗斯东正教</string>
     <string name="poi_architecture_victorian">建筑风格：维多利亚</string>
     <string name="poi_architecture_baroque">建筑风格：巴洛克式</string>
-    <string name="poi_waste_accepted">接受的废弃物</string>
+    <string name="poi_waste_accepted">接受废弃物</string>
     <string name="poi_denomination_greek_orthodox">希腊东正教</string>
     <string name="poi_denomination_shia">什叶派</string>
     <string name="poi_authentication_short_message_number">用于验证的短信号码</string>
@@ -2874,7 +2874,7 @@
     <string name="poi_access_yes">允许通行</string>
     <string name="poi_trade_plumbing">管道供应</string>
     <string name="poi_waste_dog_excrement">狗排泄物</string>
-    <string name="poi_assembly_point">集合点</string>
+    <string name="poi_assembly_point">紧急集合点</string>
     <string name="poi_vehicle_yes">车辆通行：是</string>
     <string name="reddit">Reddit</string>
     <string name="poi_product_lime">产品：石灰</string>
@@ -3203,4 +3203,16 @@
     <string name="poi_denomination_uniting">合一教会</string>
     <string name="poi_denomination_church_of_england">英格兰教会</string>
     <string name="poi_religion_spiritualist">灵修</string>
+    <string name="poi_cemt">欧洲内河航道等级</string>
+    <string name="poi_cemt_va">Va</string>
+    <string name="poi_bridge_name">桥梁名称</string>
+    <string name="poi_cemt_vii">VII</string>
+    <string name="poi_cemt_vb">Vb</string>
+    <string name="poi_tunnel_name">隧道名称</string>
+    <string name="poi_cemt_via">VIa</string>
+    <string name="poi_cemt_vic">VIc</string>
+    <string name="poi_healthcare_speciality_allergology">过敏学/变态反应学</string>
+    <string name="poi_healthcare_speciality_cardiac_surgery">心脏外科</string>
+    <string name="poi_healthcare_speciality_endodontics">牙髓病学</string>
+    <string name="poi_healthcare_speciality_geriatrics">老年医学</string>
 </resources>
