@@ -4896,4 +4896,5 @@
     <string name="fuel_tank_capacity_description">Εισάγετε την χωρητικότητα του ρεζερβουάρ για επακριβή παρακολούθηση των επιπέδων καυσίμου και κατανάλωσης</string>
     <string name="remaining_fuel_description">Εμφανίζει την ποσότητα καυσίμου που απομένει στο ντεπόζιτο του οχήματος</string>
     <string name="us_gallons">Γαλόνια ΗΠΑ</string>
+    <string name="ski_route_switch_style_description">Εξερευνήστε πίστες σκι, αναβατήρες και πολλά άλλα με το στυλ χάρτη Χειμώνα και Σκι.</string>
 </resources>
