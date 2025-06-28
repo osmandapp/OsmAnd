@@ -3215,4 +3215,9 @@
     <string name="poi_healthcare_speciality_cardiac_surgery">心脏外科</string>
     <string name="poi_healthcare_speciality_endodontics">牙髓病学</string>
     <string name="poi_healthcare_speciality_geriatrics">老年医学</string>
+    <string name="poi_healthcare_speciality_haematology">血液病学</string>
+    <string name="poi_healthcare_speciality_paediatric_dentistry">儿童牙科</string>
+    <string name="poi_healthcare_speciality_paediatric_surgery">小儿外科</string>
+    <string name="poi_healthcare_speciality_periodontics">牙周病学</string>
+    <string name="poi_healthcare_speciality_rheumatology">风湿病学</string>
 </resources>
