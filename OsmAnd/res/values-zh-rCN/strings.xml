@@ -137,7 +137,7 @@
     <string name="right">向右</string>
     <string name="back_right">右后方</string>
     <string name="accuracy">准确性</string>
-    <string name="altitude">海拔</string>
+    <string name="altitude">海拔高度</string>
     <string name="no_info">没有信息</string>
     <string name="i_am_here">我在这里</string>
     <string name="accessibility_preferences_descr">无障碍相关的首选项。</string>
@@ -195,7 +195,7 @@
     <string name="internet_not_available">在没有连接到互联网的情况下，无法进行操作。</string>
     <string name="shared_string_next">下一个</string>
     <string name="shared_string_previous">上一个</string>
-    <string name="unit_of_length_descr">改变测量的距离。</string>
+    <string name="unit_of_length_descr">更改距离的测量单位。</string>
     <string name="unit_of_length">长度单位</string>
     <string name="si_mi_feet">英里/英尺</string>
     <string name="si_mi_yard">英里/码</string>
@@ -1029,7 +1029,7 @@
     <string name="shared_string_edit">编辑</string>
     <string name="shared_string_manage">管理</string>
     <string name="shared_string_places">地点</string>
-    <string name="shared_string_search">搜索</string>
+    <string name="shared_string_search">查找</string>
     <string name="shared_string_show_description">显示描述。</string>
     <string name="shared_string_message">信息</string>
     <string name="agps_data_last_downloaded">A-GPS 数据最后下载于：%1$s</string>
