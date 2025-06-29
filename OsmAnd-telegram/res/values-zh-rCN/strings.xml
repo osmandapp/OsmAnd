@@ -66,5 +66,7 @@
     <string name="altitude">海拔高度</string>
     <string name="bearing">方位角</string>
     <string name="search_contacts">查找联系人</string>
-    <string name="search_contacts_descr">在所有群组和联系人中搜索。</string>
+    <string name="search_contacts_descr">在您的所有群组和联系人中搜索。</string>
+    <string name="type_contact_or_group_name">输入联系人或群组名称</string>
+    <string name="shared_string_search">搜索</string>
 </resources>
