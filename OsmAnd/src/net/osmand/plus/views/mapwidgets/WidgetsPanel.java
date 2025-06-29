@@ -126,7 +126,7 @@ public enum WidgetsPanel {
 		List<String> pages = preference.getStringsListForProfile(appMode);
 		if (!Algorithms.isEmpty(pages)) {
 			if ((this == TOP || this == BOTTOM) &&
-					preference.getRawModeValue(appMode).equals(preference.getProfileDefaultValue(appMode))) {
+					Algorithms.stringsEqual(preference.getRawModeValue(appMode), preference.getProfileDefaultValue(appMode))) {
 				return getDefaultPagedOrder(pages, appMode, widgetId, settings);
 			} else {
 				for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {

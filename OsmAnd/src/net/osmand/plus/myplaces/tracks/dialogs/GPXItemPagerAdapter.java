@@ -560,10 +560,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				selectedMainAxisType = gpxDataSetAxisType;
 				selectedMainSetTypes = gpxDataSetTypes;
 				if (xAxisPreference != null) {
-					xAxisPreference.clearAll();
+					List<String> names = new ArrayList<>();
 					for (GPXDataSetType type : gpxDataSetTypes) {
-						xAxisPreference.addValue(type.name());
+						names.add(type.name());
 					}
+					xAxisPreference.setStringsList(names);
 				}
 				if (yAxisPreference != null) {
 					yAxisPreference.set(gpxDataSetAxisType);
