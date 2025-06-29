@@ -632,7 +632,7 @@
     <string name="unit_of_length">Мерни единици за дължина</string>
     <string name="si_mi_feet">Мили/фута</string>
     <string name="si_mi_yard">Мили/ярда</string>
-    <string name="si_km_m">Километри/метри</string>
+    <string name="si_km_m">Километри / метри</string>
     <string name="yard">ярда</string>
     <string name="foot">фута</string>
     <string name="mile_per_hour">мили/час</string>
@@ -2027,7 +2027,7 @@
     <string name="export_profile_dialog_description">Иизберете допълнителни данни, които да бъдат изнесени заедно с профила.</string>
     <string name="shared_string_app_default_w_val">Приложение по подразбиране (%s)</string>
     <string name="no_recalculation_setting">Спиране на преизчисляването</string>
-    <string name="route_recalculation_dist_title">Минимално разстояние до преизчисленият маршрут</string>
+    <string name="route_recalculation_dist_title">При отклонение</string>
     <string name="route_recalculation_dist_descr">Маршрутът ще бъде преизчислен, ако разстоянието до него е повече от зададената стойност</string>
     <string name="shared_string_angle_param">Ъгъл: %s°</string>
     <string name="shared_string_angle">Ъгъл</string>
@@ -2492,7 +2492,7 @@
     <string name="shared_string_symbol">Символ</string>
     <string name="no_widgets_descr">Добавете едно или няколко приспосибления от възможните.</string>
     <string name="snackbar_page_removed">Страницата %1$s е премахната.</string>
-    <string name="width_limit_description">Задайте ширината на автомобила, по маршрута може да има ограничения за широки превозни средства.</string>
+    <string name="width_limit_description">Задайте ширината на превозното средство, по маршрута може да има ограничения за широки превозни средства.</string>
     <string name="lang_be_by">Беларуски (латиница)</string>
     <string name="follow_track">Следване на трасе</string>
     <string name="show_gpx">Трасета</string>
@@ -4247,7 +4247,7 @@
     <string name="rename_track">Преименуване на трасе</string>
     <string name="change_folder">Смяна на папката</string>
     <string name="whole_track">Цялото трасе</string>
-    <string name="temporary_conditional_routing">Отчитане на временните ограничения</string>
+    <string name="temporary_conditional_routing">Отчитане на временни ограничения</string>
     <string name="routeInfo_winter_ice_road_name">Зимни и ледени пътища</string>
     <string name="coord_input_edit_point">Променяне на точка</string>
     <string name="welcome_to_open_beta_description">В момента пътеводитешите използват Wikivoyage. Пробвайте всички възможности безплатно по време на отворената бета.</string>
@@ -4730,5 +4730,15 @@
     <string name="add_widget_to_the_left">Добавяне отляво</string>
     <string name="map_during_navigation_info">Картата при маршрутизиране</string>
     <string name="map_during_navigation">Картата при маршрутизиране</string>
-    <string name="help_article_navigation_routing_name">Настройни на маршрутизацията</string>
+    <string name="help_article_navigation_routing_name">Настройки на маршрутизацията</string>
+    <string name="route_parameters_descr">Настройки на маршрутизацията</string>
+    <string name="route_parameters">Настройки на маршрутизацията</string>
+    <string name="height_limit_description">Задайте височината на превозното средство, по маршрута може да има ограничения за високи превозни средства.</string>
+    <string name="weight_limit_description">Задайте масата на превозното средство, по маршрута може да има ограничения за тежки превозни средства.</string>
+    <string name="lenght_limit_description">Задайте дължината на превозното средство, по маршрута може да има ограничения за дълги превозни средства.</string>
+    <string name="screen_control">Управление на екрана</string>
+    <string name="screen_alerts">Предупреждения на екрана</string>
+    <string name="screen_alerts_descr">Предупрежденията се показват долу вляво по време на маршрутизиране.</string>
+    <string name="dialogs_and_notifications_title">Диалози и извстия</string>
+    <string name="dialogs_and_notifications_descr">Управление на изскачащи прозорци, диалози и известия</string>
 </resources>
