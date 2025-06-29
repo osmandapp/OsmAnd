@@ -10,6 +10,8 @@ import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.Subscriptio
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.IN_GRACE_PERIOD;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.UNDEFINED;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
@@ -46,14 +48,16 @@ public class PurchaseUiDataUtils {
 			expireTime = ((InAppSubscription) purchase).getExpireTime();
 			subscriptionState = ((InAppSubscription) purchase).getState();
 		}
-		return createUiData(app, purchase, null, purchase.getPurchaseTime(),
-				expireTime, app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()), subscriptionState);
+		return createUiData(app, purchase, null, null, purchase.getPurchaseTime(), expireTime,
+				app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()), subscriptionState);
 	}
 
+	@SuppressLint("DiscouragedApi")
 	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app,
 											  @NonNull InAppPurchase purchase,
-											  @Nullable String name, long purchaseTime, long expireTime,
+											  @Nullable String name, @Nullable String icon,
+											  long purchaseTime, long expireTime,
 											  @NonNull PurchaseOrigin origin,
 											  @Nullable SubscriptionState subscriptionState) {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
@@ -61,7 +65,7 @@ public class PurchaseUiDataUtils {
 
 		String sku = purchase.getSku();
 		String title = name;
-		int iconId;
+		int iconId = !Algorithms.isEmpty(icon) ? app.getResources().getIdentifier(icon, "drawable", app.getPackageName()) : 0;
 		String purchaseType;
 		boolean liveUpdateSubscription = purchases.isLiveUpdates(purchase);
 		boolean autoRenewing = false;
@@ -73,13 +77,13 @@ public class PurchaseUiDataUtils {
 
 		if (purchases.isOsmAndPro(purchase)) {
 			title = Algorithms.isEmpty(title) ? app.getString(R.string.osmand_pro) : title;
-			iconId = R.drawable.ic_action_osmand_pro_logo_colored;
+			iconId = iconId == 0 ? R.drawable.ic_action_osmand_pro_logo_colored : iconId;
 		} else if (purchases.isLiveUpdates(purchase)) {
 			title = Algorithms.isEmpty(title) ? app.getString(R.string.osm_live) : title;
-			iconId = R.drawable.ic_action_subscription_osmand_live;
+			iconId = iconId == 0 ? R.drawable.ic_action_subscription_osmand_live : iconId;
 		} else if (purchases.isMaps(purchase) || purchases.isFullVersion(purchase)) {
 			title = Algorithms.isEmpty(title) ? app.getString(R.string.maps_plus) : title;
-			iconId = R.drawable.ic_action_osmand_maps_plus;
+			iconId = iconId == 0 ? R.drawable.ic_action_osmand_maps_plus : iconId;
 		} else {
 			return null;
 		}

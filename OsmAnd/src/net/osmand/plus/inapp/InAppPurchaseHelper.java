@@ -131,6 +131,8 @@ public abstract class InAppPurchaseHelper {
 
 	public static class SubscriptionStateHolder {
 		public String sku;
+		public String name;
+		public String icon;
 		public SubscriptionState state = SubscriptionState.UNDEFINED;
 		public long startTime;
 		public long expireTime;
@@ -142,6 +144,7 @@ public abstract class InAppPurchaseHelper {
 	public static class InAppStateHolder {
 		public String sku;
 		public String name;
+		public String icon;
 		public PurchaseOrigin origin;
 		public String platform;
 		public long purchaseTime;
@@ -620,10 +623,14 @@ public abstract class InAppPurchaseHelper {
 				}
 				String sku = subObj.getString("sku");
 				String state = subObj.getString("state");
+				String name = subObj.optString("name", null);
+				String icon = subObj.optString("icon", null);
 
 				if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
 					SubscriptionStateHolder stateHolder = new SubscriptionStateHolder();
 					stateHolder.sku = sku;
+					stateHolder.name = name;
+					stateHolder.icon = icon;
 					stateHolder.state = SubscriptionState.getByStateStr(state);
 					stateHolder.startTime = subObj.optLong("start_time");
 					stateHolder.expireTime = subObj.optLong("expire_time");
@@ -660,6 +667,7 @@ public abstract class InAppPurchaseHelper {
 				JSONObject subObj = subArrJson.getJSONObject(i);
 				String sku = subObj.getString("sku");
 				String name = subObj.optString("name", null);
+				String icon = subObj.optString("icon", null);
 				String platform = subObj.optString("platform", null);
 				long purchaseTime = subObj.optLong("purchaseTime", 0);
 				long expireTime = subObj.optLong("expireTime", 0);
@@ -667,6 +675,7 @@ public abstract class InAppPurchaseHelper {
 					InAppStateHolder stateHolder = new InAppStateHolder();
 					stateHolder.sku = sku;
 					stateHolder.name = name;
+					stateHolder.icon = icon;
 					stateHolder.origin = getPurchaseOriginBySku(sku);
 					stateHolder.platform = platform;
 					stateHolder.purchaseTime = purchaseTime;
