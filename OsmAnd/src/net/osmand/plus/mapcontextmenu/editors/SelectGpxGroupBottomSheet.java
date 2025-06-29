@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,7 +15,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 
 public class SelectGpxGroupBottomSheet extends SelectPointsCategoryBottomSheet {
 
@@ -46,9 +44,7 @@ public class SelectGpxGroupBottomSheet extends SelectPointsCategoryBottomSheet {
 
 	@NonNull
 	protected BaseBottomSheetItem createCategoriesListItem() {
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-
-		View view = inflater.inflate(R.layout.favorite_categories_dialog, null);
+		View view = inflate(R.layout.favorite_categories_dialog);
 		ViewGroup container = view.findViewById(R.id.list_container);
 
 		for (PointsGroup pointsGroup : pointsGroups.values()) {

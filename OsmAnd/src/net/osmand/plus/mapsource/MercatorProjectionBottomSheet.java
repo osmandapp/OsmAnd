@@ -3,8 +3,6 @@ package net.osmand.plus.mapsource;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -21,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class MercatorProjectionBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -29,31 +28,21 @@ public class MercatorProjectionBottomSheet extends MenuBottomSheetDialogFragment
 	private LinearLayout valuesContainer;
 	private MercatorProjection mercatorProjection;
 
-	public static void showInstance(@NonNull FragmentManager fm,
-									@Nullable Fragment targetFragment,
-									boolean elliptic) {
-		MercatorProjectionBottomSheet bottomSheet = new MercatorProjectionBottomSheet();
-		bottomSheet.setTargetFragment(targetFragment, 0);
-		bottomSheet.setMercatorProjection(elliptic);
-		bottomSheet.show(fm, TAG);
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
 			setMercatorProjection(savedInstanceState.getBoolean(ELLIPTIC_KEY));
 		}
-		Context context = requireContext();
+		Context themedContext = getThemedContext();
 		TitleItem titleItem = new TitleItem(getString(R.string.mercator_projection));
 		items.add(titleItem);
-		NestedScrollView nestedScrollView = new NestedScrollView(context);
-		valuesContainer = new LinearLayout(context);
+		NestedScrollView nestedScrollView = new NestedScrollView(themedContext);
+		valuesContainer = new LinearLayout(themedContext);
 		valuesContainer.setLayoutParams((new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)));
 		valuesContainer.setOrientation(LinearLayout.VERTICAL);
-		valuesContainer.setPadding(0, getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small), 0, 0);
+		valuesContainer.setPadding(0, getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small), 0, 0);
 		for (int i = 0; i < MercatorProjection.values().length; i++) {
-			LayoutInflater.from(new ContextThemeWrapper(context, themeRes))
-					.inflate(R.layout.bottom_sheet_item_with_radio_btn_left, valuesContainer, true);
+			inflate(R.layout.bottom_sheet_item_with_radio_btn_left, valuesContainer, true);
 		}
 		nestedScrollView.addView(valuesContainer);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(nestedScrollView).create());
@@ -101,6 +90,16 @@ public class MercatorProjectionBottomSheet extends MenuBottomSheetDialogFragment
 
 	private void setMercatorProjection(boolean elliptic) {
 		mercatorProjection = elliptic ? MercatorProjection.ELLIPTIC : MercatorProjection.PSEUDO;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @Nullable Fragment targetFragment, boolean elliptic) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			MercatorProjectionBottomSheet bottomSheet = new MercatorProjectionBottomSheet();
+			bottomSheet.setTargetFragment(targetFragment, 0);
+			bottomSheet.setMercatorProjection(elliptic);
+			bottomSheet.show(fragmentManager, TAG);
+		}
 	}
 
 	public enum MercatorProjection {

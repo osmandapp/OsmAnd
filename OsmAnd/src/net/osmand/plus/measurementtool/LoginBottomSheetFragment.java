@@ -13,9 +13,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
@@ -34,7 +32,6 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment impl
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		OsmandApplication app = requiredMyApplication();
 		osmOAuthHelper = app.getOsmOAuthHelper();
 	}
 
@@ -56,40 +53,32 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment impl
 	@Override
 	protected void setupRightButton() {
 		super.setupRightButton();
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			Drawable icon = getIcon(R.drawable.ic_action_openstreetmap_logo, R.color.popup_text_color);
-			TextView buttonText = rightButton.findViewById(R.id.button_text);
-			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(buttonText, icon, null, null, null);
-		}
+		Drawable icon = getIcon(R.drawable.ic_action_openstreetmap_logo, R.color.popup_text_color);
+		TextView buttonText = rightButton.findViewById(R.id.button_text);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(buttonText, icon, null, null, null);
 	}
 
 	@Override
 	public int getFirstDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.card_content_padding_large);
+		return getDimensionPixelSize(R.dimen.card_content_padding_large);
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
 		View view = getView();
 		if (view != null) {
-			Fragment fragment = getTargetFragment();
-			if (!(getActivity() instanceof MapActivity) && fragment instanceof OsmAuthorizationListener) {
-				osmOAuthHelper.addListener((OsmAuthorizationListener) fragment);
+			if (getMapActivity() == null && getTargetFragment() instanceof OsmAuthorizationListener l) {
+				osmOAuthHelper.addListener(l);
 			}
 			osmOAuthHelper.startOAuth((ViewGroup) view, nightMode);
 		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {
-		try {
-			if (!fragmentManager.isStateSaved()) {
-				LoginBottomSheetFragment fragment = new LoginBottomSheetFragment();
-				fragment.setTargetFragment(targetFragment, 0);
-				fragment.show(fragmentManager, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			LoginBottomSheetFragment fragment = new LoginBottomSheetFragment();
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 

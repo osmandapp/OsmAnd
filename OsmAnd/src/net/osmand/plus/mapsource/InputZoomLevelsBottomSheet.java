@@ -69,7 +69,6 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			minZoom = savedInstanceState.getInt(MIN_ZOOM_KEY);
 			maxZoom = savedInstanceState.getInt(MAX_ZOOM_KEY);
@@ -77,10 +76,9 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			sliderDescrRes = savedInstanceState.getInt(SLIDER_DESCR_RES_KEY);
 			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE);
 		}
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
 		items.add(titleItem);
-		View sliderView = inflater.inflate(R.layout.zoom_levels_with_descr, null);
+		View sliderView = inflate(R.layout.zoom_levels_with_descr);
 		((TextView) sliderView.findViewById(R.id.slider_descr)).setText(sliderDescrRes);
 		TextView dialogDescrTv = sliderView.findViewById(R.id.dialog_descr);
 		if (dialogDescrRes == R.string.map_source_zoom_levels_descr) {
@@ -96,19 +94,16 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		TextView maxZoomValue = sliderView.findViewById(R.id.zoom_value_max);
 		maxZoomValue.setText(String.valueOf(maxZoom));
 		RangeSlider slider = sliderView.findViewById(R.id.zoom_slider);
-		int colorProfile = app.getSettings().getApplicationMode().getProfileColor(nightMode);
+		int colorProfile = appMode.getProfileColor(nightMode);
 		UiUtilities.setupSlider(slider, nightMode, colorProfile, true);
 		slider.setValueFrom(SLIDER_FROM);
 		slider.setValueTo(SLIDER_TO);
 		slider.setValues((float) minZoom, (float) maxZoom);
-		slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-			@Override
-			public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-				List<Float> values = slider.getValues();
-				if (values.size() > 0) {
-					minZoomValue.setText(String.valueOf(values.get(0).intValue()));
-					maxZoomValue.setText(String.valueOf(values.get(1).intValue()));
-				}
+		slider.addOnChangeListener((slider1, value, fromUser) -> {
+			List<Float> values = slider1.getValues();
+			if (!values.isEmpty()) {
+				minZoomValue.setText(String.valueOf(values.get(0).intValue()));
+				maxZoomValue.setText(String.valueOf(values.get(1).intValue()));
 			}
 		});
 		slider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
@@ -119,16 +114,13 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			@Override
 			public void onStopTrackingTouch(@NonNull RangeSlider slider) {
 				List<Float> values = slider.getValues();
-				if (values.size() > 0) {
+				if (!values.isEmpty()) {
 					minZoom = values.get(0).intValue();
 					maxZoom = values.get(1).intValue();
 				}
 			}
 		});
-		SimpleBottomSheetItem sliderItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(sliderView)
-				.create();
-		items.add(sliderItem);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(sliderView).create());
 	}
 
 	@Override
@@ -144,12 +136,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected void onRightBottomButtonClick() {
 		if (!newMapSource) {
-			showClearTilesWarningDialog(requireActivity(), nightMode, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					applySelectedZooms();
-				}
-			});
+			showClearTilesWarningDialog(requireActivity(), nightMode, (dialog, which) -> applySelectedZooms());
 		} else {
 			applySelectedZooms();
 		}
@@ -176,9 +163,8 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void applySelectedZooms() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnZoomSetListener) {
-			((OnZoomSetListener) fragment).onZoomSet(minZoom, maxZoom);
+		if (getTargetFragment() instanceof OnZoomSetListener listener) {
+			listener.onZoomSet(minZoom, maxZoom);
 		}
 		dismiss();
 	}

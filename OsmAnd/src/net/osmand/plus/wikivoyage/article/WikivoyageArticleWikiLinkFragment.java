@@ -5,13 +5,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -72,18 +69,14 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				.setIcon(downloadIcon)
 				.setTitle(getString(R.string.download_wikipedia_label))
 				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					OsmandApplication app = getMyApplication();
-					if (activity != null && app != null) {
-						Intent newIntent = new Intent(activity, app.getAppCustomization().getDownloadActivity());
-						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-						newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
-						newIntent.putExtra(SHOW_WIKI_KEY, true);
-						AndroidUtils.startActivityIfSafe(activity, newIntent);
-						dismiss();
-					}
-				})
+				.setOnClickListener(v -> callActivity(activity -> {
+					Intent newIntent = new Intent(activity, app.getAppCustomization().getDownloadActivity());
+					newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
+					newIntent.putExtra(SHOW_WIKI_KEY, true);
+					AndroidUtils.startActivityIfSafe(activity, newIntent);
+					dismiss();
+				}))
 				.create();
 		items.add(wikiDownloadItem);
 
@@ -94,12 +87,9 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				.setIcon(viewOnlineIcon)
 				.setTitle(getString(R.string.open_in_browser_wiki))
 				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-				   		AndroidUtils.openUrl(getContext(), Uri.parse(articleUrl), nightMode);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					AndroidUtils.openUrl(getContext(), Uri.parse(articleUrl), nightMode);
+					dismiss();
 				})
 				.create();
 		items.add(wikiArticleOnlineItem);
@@ -118,9 +108,8 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,
-									   @NonNull String region,
-									   @NonNull String articleUrl) {
-		try {
+									   @NonNull String region, @NonNull String articleUrl) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(ARTICLE_URL_KEY, articleUrl);
 			args.putString(WIKI_REGION, region);
@@ -129,8 +118,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 			fragment.setArguments(args);
 			fragment.show(fm, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

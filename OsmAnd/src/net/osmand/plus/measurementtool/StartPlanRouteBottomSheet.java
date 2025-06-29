@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
@@ -46,20 +45,12 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 	public static final int BOTTOM_SHEET_HEIGHT_DP = 427;
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1001;
 
-	private View mainView;
-	private GpxTrackAdapter adapter;
 	private ImportHelper importHelper;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
 		importHelper = app.getImportHelper();
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.bottom_sheet_plan_route_start, null);
+		View mainView = inflate(R.layout.bottom_sheet_plan_route_start);
 
 		items.add(new TitleItem(getString(R.string.plan_route)));
 
@@ -108,7 +99,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		List<GPXInfo> gpxList = getSortedGPXFilesInfo(gpxDir, null, false);
 		Collections.sort(gpxList, (lhs, rhs) -> Long.compare(rhs.getLastModified(), lhs.getLastModified()));
 		List<GPXInfo> gpxTopList = gpxList.subList(0, Math.min(5, gpxList.size()));
-		adapter = new GpxTrackAdapter(requireContext(), gpxTopList);
+		GpxTrackAdapter adapter = new GpxTrackAdapter(requireContext(), gpxTopList);
 		adapter.setShowCurrentGpx(false);
 		adapter.setShowFolderName(true);
 		adapter.setAdapterListener(position -> onItemClick(position, gpxTopList));
@@ -118,7 +109,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 	@Override
 	protected int getPeekHeight() {
-		return AndroidUtils.dpToPx(requiredMyApplication(), BOTTOM_SHEET_HEIGHT_DP);
+		return dpToPx(BOTTOM_SHEET_HEIGHT_DP);
 	}
 
 	private void onItemClick(int position, List<GPXInfo> gpxInfoList) {
@@ -164,30 +155,12 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		}
 	}
 
-	public static void showInstance(FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
-			StartPlanRouteBottomSheet fragment = new StartPlanRouteBottomSheet();
-			fragment.setRetainInstance(true);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
 	protected void hideBottomSheet() {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
 					.hide(this)
-					.commitAllowingStateLoss();
-		}
-	}
-
-	protected void showBottomSheet() {
-		MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity != null) {
-			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			manager.beginTransaction()
-					.show(this)
 					.commitAllowingStateLoss();
 		}
 	}
@@ -205,5 +178,13 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), filePath, true);
 		}
 		return true;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			StartPlanRouteBottomSheet fragment = new StartPlanRouteBottomSheet();
+			fragment.setRetainInstance(true);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

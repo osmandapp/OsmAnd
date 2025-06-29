@@ -3,28 +3,19 @@ package net.osmand.plus.dialogs;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class SpeedCamerasUninstallRestartBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SpeedCamerasUninstallRestartBottomSheet.class.getSimpleName();
-
-	public static void showInstance(@NonNull FragmentManager fm) {
-		if (!fm.isStateSaved()) {
-			SpeedCamerasUninstallRestartBottomSheet bottomSheet = new SpeedCamerasUninstallRestartBottomSheet();
-			bottomSheet.show(fm, TAG);
-		}
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -49,15 +40,16 @@ public class SpeedCamerasUninstallRestartBottomSheet extends MenuBottomSheetDial
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = requiredMyApplication();
-		OsmandSettings settings = app.getSettings();
 		settings.SPEED_CAMERAS_UNINSTALLED.set(true);
 		settings.SPEAK_SPEED_CAMERA.set(false);
 		settings.SHOW_CAMERAS.set(false);
+		callActivity(RestartActivity::doRestartSilent);
+	}
 
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			RestartActivity.doRestartSilent(activity);
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SpeedCamerasUninstallRestartBottomSheet bottomSheet = new SpeedCamerasUninstallRestartBottomSheet();
+			bottomSheet.show(fragmentManager, TAG);
 		}
 	}
 }

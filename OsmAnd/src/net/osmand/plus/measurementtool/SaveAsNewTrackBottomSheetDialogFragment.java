@@ -56,8 +56,6 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	public static final String DEST_FILE_NAME_KEY = "dest_file_name_key";
 	public static final String SHOW_SIMPLIFIED_BUTTON_KEY = "show_simplified_button_key";
 
-	private OsmandApplication app;
-
 	private FolderListAdapter adapter;
 	private TextInputLayout nameTextBox;
 	private RecyclerView recyclerView;
@@ -71,9 +69,6 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		int highlightColorId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		if (savedInstanceState != null) {
 			showOnMap = savedInstanceState.getBoolean(SHOW_ON_MAP_KEY);
@@ -88,7 +83,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new TitleItem(getString(R.string.save_as_new_track)));
 
-		View editNameView = View.inflate(themedCtx, R.layout.track_name_edit_text, null);
+		View editNameView = inflate(R.layout.track_name_edit_text, null);
 		nameTextBox = editNameView.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(highlightColorId);
 		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_file_name));
@@ -109,12 +104,12 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		updateFileNameFromEditText(destFileName);
 
-		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		int contentPaddingHalf = app.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		int contentPaddingSmall = getDimensionPixelSize(R.dimen.content_padding_small);
+		int contentPaddingHalf = getDimensionPixelSize(R.dimen.content_padding_half);
 
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
-		View selectFolderView = View.inflate(themedCtx, R.layout.select_folder_row, null);
+		View selectFolderView = inflate(R.layout.select_folder_row, null);
 		selectFolderView.findViewById(R.id.select_folder_button).setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -133,7 +128,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		adapter.setItems(getAdapterItems());
 		if (adapter.getItemCount() > 0) {
 			adapter.setListener(createFolderSelectListener());
-			View view = View.inflate(themedCtx, R.layout.bottom_sheet_item_recyclerview, null);
+			View view = inflate(R.layout.bottom_sheet_item_recyclerview, null);
 			recyclerView = view.findViewById(R.id.recycler_view);
 			recyclerView.setPadding(contentPaddingHalf, 0, contentPaddingHalf, 0);
 			BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()
@@ -243,10 +238,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof SaveAsNewTrackFragmentListener) {
-			((SaveAsNewTrackFragmentListener) targetFragment)
-					.onSaveAsNewTrack(folderPath, destFileName, showOnMap, simplifiedTrack);
+		if (getTargetFragment() instanceof SaveAsNewTrackFragmentListener listener) {
+			listener.onSaveAsNewTrack(folderPath, destFileName, showOnMap, simplifiedTrack);
 		}
 		dismiss();
 	}

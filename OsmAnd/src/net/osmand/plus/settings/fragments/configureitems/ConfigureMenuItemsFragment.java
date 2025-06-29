@@ -167,21 +167,13 @@ public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implement
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).disableDrawer();
-		}
+		callMapActivity(MapActivity::disableDrawer);
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).enableDrawer();
-		}
+		callMapActivity(MapActivity::enableDrawer);
 	}
 
 	@Override

@@ -47,14 +47,12 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			expireValue = savedInstanceState.getInt(EXPIRE_VALUE_KEY, EXPIRE_TIME_NEVER);
 		}
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.expire_time));
 		items.add(titleItem);
-		View inputValueLayout = inflater.inflate(R.layout.edit_text_with_descr, null);
+		View inputValueLayout = inflate(R.layout.edit_text_with_descr);
 		((TextView) inputValueLayout.findViewById(R.id.dialog_descr)).setText(R.string.expire_time_descr);
 		editText = inputValueLayout.findViewById(R.id.value_edit_text);
 		if (expireValue > 0) {
@@ -80,9 +78,8 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected void onRightBottomButtonClick() {
 		AndroidUtils.hideSoftKeyboard(requireActivity(), editText);
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnExpireValueSetListener) {
-			((OnExpireValueSetListener) fragment).onExpireValueSet(getExpireValue());
+		if (getTargetFragment() instanceof OnExpireValueSetListener listener) {
+			listener.onExpireValueSet(getExpireValue());
 		}
 		dismiss();
 	}

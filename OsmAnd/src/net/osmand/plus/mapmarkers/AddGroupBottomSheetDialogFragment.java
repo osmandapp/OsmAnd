@@ -29,13 +29,10 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 		RecyclerView recyclerView = mainView.findViewById(R.id.groups_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		adapter = createAdapter();
-		adapter.setAdapterListener(new GroupsAdapter.GroupsAdapterListener() {
-			@Override
-			public void onItemClick(View view) {
-				int position = recyclerView.getChildAdapterPosition(view);
-				if (position != RecyclerView.NO_POSITION) {
-					AddGroupBottomSheetDialogFragment.this.onItemClick(position);
-				}
+		adapter.setAdapterListener(view -> {
+			int position = recyclerView.getChildAdapterPosition(view);
+			if (position != RecyclerView.NO_POSITION) {
+				AddGroupBottomSheetDialogFragment.this.onItemClick(position);
 			}
 		});
 		recyclerView.setAdapter(adapter);

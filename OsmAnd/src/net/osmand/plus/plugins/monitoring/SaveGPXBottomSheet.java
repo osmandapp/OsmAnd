@@ -42,6 +42,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.Objects;
 
 public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -53,7 +54,6 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String OPEN_TRACK_ATTR = "open_track";
 	private static final String SHOW_ON_MAP_ATTR = "show_on_map";
 
-	private OsmandApplication app;
 	private boolean openTrack;
 	private boolean showOnMap;
 	private File savedGpxFile;
@@ -62,10 +62,9 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
 		Bundle args = getArguments();
 		if (args != null && args.containsKey(KEY_FILE_NAME)) {
-			String fileName = args.getString(KEY_FILE_NAME);
+			String fileName = Objects.requireNonNull(args.getString(KEY_FILE_NAME));
 			savedGpxFile = new File(fileName);
 			initialGpxName = Algorithms.getFileNameWithoutExtension(savedGpxFile);
 			newGpxName = initialGpxName;
@@ -73,11 +72,8 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 			dismiss();
 		}
 
-		Context ctx = requireContext();
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
-		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.save_gpx_fragment, null);
+		View mainView = inflate(R.layout.save_gpx_fragment);
 
 		if (savedInstanceState != null) {
 			openTrack = savedInstanceState.getBoolean(OPEN_TRACK_ATTR);
@@ -95,7 +91,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 		EditText nameEditText = mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(initialGpxName);
-		nameEditText.setTextColor(ContextCompat.getColor(ctx, textPrimaryColor));
+		nameEditText.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 		nameEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -123,11 +119,10 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 		nameEditText.setOnFocusChangeListener((v, hasFocus) -> {
 			if (hasFocus) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
+				callActivity(activity -> {
 					nameEditText.setSelection(nameEditText.getText().length());
 					AndroidUtils.showSoftKeyboard(activity, nameEditText);
-				}
+				});
 			}
 		});
 
@@ -135,10 +130,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		showOnMapButton.setChecked(showOnMap);
 		showOnMapButton.setOnCheckedChangeListener((buttonView, isChecked) -> showOnMap = !showOnMap);
 
-		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(mainView)
-				.create();
-		items.add(titleItem);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(mainView).create());
 	}
 
 	@Override
@@ -217,8 +209,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 			WptPt loc = gpxFile.findPointToShow();
 			if (loc != null) {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
-				if (AndroidUtils.isActivityNotDestroyed(activity) && activity instanceof MapActivity) {
-					MapActivity mapActivity = (MapActivity) activity;
+				if (AndroidUtils.isActivityNotDestroyed(activity) && activity instanceof MapActivity mapActivity) {
 					OsmandMapTileView mapView = mapActivity.getMapView();
 					mapView.getAnimatedDraggingThread().startMoving(loc.getLat(), loc.getLon(), mapView.getZoom());
 					mapView.refreshMap();

@@ -36,9 +36,6 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesClearBottomSheet.class);
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private String fileName;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, String fileName) {
@@ -53,9 +50,6 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = getMyApplication();
-		settings = app.getSettings();
-
 		if (savedInstanceState != null && savedInstanceState.containsKey(LOCAL_INDEX_FILE_NAME)) {
 			fileName = savedInstanceState.getString(LOCAL_INDEX_FILE_NAME);
 		}
@@ -125,5 +119,4 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 	protected DialogButtonType getRightBottomButtonType() {
 		return DialogButtonType.SECONDARY_HARMFUL;
 	}
-
 }

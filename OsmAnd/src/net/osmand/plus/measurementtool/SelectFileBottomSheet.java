@@ -92,11 +92,8 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		Context context = requireContext();
-		OsmandApplication app = requiredMyApplication();
-		mainView = View.inflate(new ContextThemeWrapper(context, themeRes),
-				R.layout.bottom_sheet_plan_route_select_file, null);
+		mainView = inflate(R.layout.bottom_sheet_plan_route_select_file, null);
 		TextView titleView = mainView.findViewById(R.id.title);
 		titleView.setText(fragmentMode.title);
 		TextView descriptionView = mainView.findViewById(R.id.description);
@@ -109,7 +106,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		ImageButton sortButton = mainView.findViewById(R.id.sort_button);
 		int backgroundColorId = ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
-		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark, backgroundColorId);
+		Drawable background = getIcon(R.drawable.bg_dash_line_dark, backgroundColorId);
 		AndroidUtils.setBackground(sortButton, background);
 		sortButton.setImageResource(sortByMode.getIconId());
 		sortButton.setVisibility(View.VISIBLE);
@@ -326,7 +323,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, SelectFileListener listener, Mode mode) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectFileBottomSheet fragment = new SelectFileBottomSheet();
 			fragment.setRetainInstance(true);
 			fragment.setListener(listener);

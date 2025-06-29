@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.IndexConstants;
@@ -20,6 +21,7 @@ import net.osmand.plus.mapmarkers.adapters.TracksGroupsAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
@@ -35,7 +37,6 @@ import java.util.List;
 
 public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
 
-	private OsmandApplication app;
 	private GpxDbHelper dbHelper;
 
 	private ProcessGpxTask asyncProcessor;
@@ -64,7 +65,6 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 		dbHelper = app.getGpxDbHelper();
 	}
 
@@ -147,6 +147,15 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		lookingForTracksText.setVisibility(View.GONE);
 		recyclerView.setVisibility(View.VISIBLE);
 		setupHeightAndBackground(getView());
+	}
+
+	public static void showInstance(@NonNull FragmentManager childFragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			AddGroupBottomSheetDialogFragment fragment = new AddTracksGroupBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setReenterTransition(true);
+			fragment.show(childFragmentManager, TAG);
+		}
 	}
 
 	@SuppressLint("StaticFieldLeak")
