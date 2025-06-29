@@ -64,5 +64,7 @@
     <string name="direction">方向</string>
     <string name="precision">精确度</string>
     <string name="altitude">海拔高度</string>
-    <string name="bearing">方位</string>
+    <string name="bearing">方位角</string>
+    <string name="search_contacts">查找联系人</string>
+    <string name="search_contacts_descr">在所有群组和联系人中搜索。</string>
 </resources>
