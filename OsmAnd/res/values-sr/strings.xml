@@ -5536,7 +5536,7 @@
     <string name="obd_bluetooth_off_description">Укључите Блутут да бисте пронашли и повезали пријемнике.</string>
     <string name="obd_searching_text">Тражење пријемника</string>
     <string name="obd_device_forget_sensor">Заборави пријемник</string>
-    <string name="obd_searching_text_description">Држите уређај близу пријемника. Проверите да мотор возила ради.</string>
+    <string name="obd_searching_text_description">Држите уређај близу скенера. Уверите се да мотор возила ради.</string>
     <string name="route_guidance_desc">Пружа тренутачно навођење путањом, укључујући удаљеност до следећег скретања, назив пута, тренутни назив улице и податке о траци. Справице се приказују током навођења.</string>
     <string name="obd_nothing_found_description">Молимо проверите следеће:\n – Уверите се да је Блутут укључен\n – Мотор возила ради\n – Уверите се да је ваш уређај у домету пријемника мерача.</string>
     <string name="obd_device_forget_sensor_description">Пријемник ће бити уклоњен са списка. Моћи ћете поново да упарите овај пријемник у било ком тренутку.</string>
