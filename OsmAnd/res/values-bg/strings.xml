@@ -4746,5 +4746,9 @@
     <string name="select_map_icon">Икона по време на покой</string>
     <string name="master_profile">Основен профил</string>
     <string name="select_color">Избиране на цвят</string>
-    <string name="desert_render_descr">За пустини и други слабозаселени райони. По-подробно.</string>
+    <string name="desert_render_descr">За пустини и други слабо заселени райони. По-подробно.</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
+    <string name="personal_category_name">Лични</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Мрежа от възлите на велосипедните маршрути</string>
 </resources>
