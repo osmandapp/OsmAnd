@@ -3269,5 +3269,22 @@
     <string name="poi_state_disused">状态：已停用</string>
     <string name="poi_state_closed">状态：已关闭</string>
     <string name="poi_state_abandoned">状态：已废弃</string>
-    <string name="poi_state_approved">状态：已批准</string>
+    <string name="poi_state_approved">状态：已核准</string>
+    <string name="poi_state_active">状态：启用</string>
+    <string name="poi_state_under_construction">状态：建设中</string>
+    <string name="poi_state_main">状态：主要</string>
+    <string name="poi_state_suspended">状态：已暂停</string>
+    <string name="poi_state_detour">状态：绕道</string>
+    <string name="poi_ascent">上升</string>
+    <string name="poi_descent">下降</string>
+    <string name="poi_direction">方向</string>
+    <string name="poi_roundtrip_yes">往返：是</string>
+    <string name="poi_roundtrip_no">往返：否</string>
+    <string name="poi_border_zone">边境地区</string>
+    <string name="poi_hang_gliding">滑翔翼</string>
+    <string name="poi_live_music_yes">是</string>
+    <string name="poi_padus_area">美国国家保护地数据库土地范围</string>
+    <string name="poi_padus_category_proclamation">类别： 公告</string>
+    <string name="poi_padus_category_fee">分类：收费</string>
+    <string name="poi_padus_category_designation">分类：指定</string>
 </resources>
