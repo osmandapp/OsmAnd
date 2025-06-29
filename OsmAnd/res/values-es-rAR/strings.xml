@@ -5464,7 +5464,7 @@
     <string name="unit_of_volume">Unidad de volumen</string>
     <string name="record_obd_data">Grabar estadísticas del vehículo</string>
     <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registrá datos esenciales del vehículo mediante el protocolo OBD-II. Supervisá métricas clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registrá los datos esenciales del vehículo mediante el protocolo OBD-II. Supervisá métricas clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
     <string name="vehicle_metrics_obd_ii">Estadísticas del vehículo (OBD-II)</string>
     <string name="shared_string_volume">Volumen</string>
     <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
