@@ -22,5 +22,26 @@
     <string name="osmand_service">后台模式</string>
     <string name="foot">英尺</string>
     <string name="mile_per_hour">英里/时</string>
-    <string name="location_source_summary">默认情况下，从 Google Play 安装的 OsmAnd 使用 Google Play 服务确定位置。\n\n如果获取的位置信息不准确或使用的设备没有 Google Play 服务，请尝试切换到 Android API。</string>
+    <string name="location_source_summary">默认情况下，从 Google Play 安装的 OsmAnd 使用 Google Play 服务确定位置。\n\n如果获取的位置信息不准确或使用的设备没有 Google Play 服务，请尝试切换到 Android API</string>
+    <string name="location_source">位置来源</string>
+    <string name="buffer_time_descr">在缓冲区中储存点的最长时间</string>
+    <string name="buffer_time">缓冲区过期时间</string>
+    <string name="time_zone_descr">选择要在定位信息中显示的时区。</string>
+    <string name="unit_of_length_descr">更改距离的测量单位。</string>
+    <string name="unit_of_length">长度单位</string>
+    <string name="unit_of_speed_system_descr">定义速度单位。</string>
+    <string name="unit_of_speed_system">速度单位</string>
+    <string name="saved_messages">已保存的信息</string>
+    <string name="shared_string_end">结束</string>
+    <string name="shared_string_start">开始</string>
+    <string name="shared_string_apply">应用</string>
+    <string name="set_time_timeline_descr">选择要显示的时间</string>
+    <string name="start_end_date">开始日期 - 结束日期</string>
+    <string name="timeline_no_data_descr">我们没有收集到所选日期的数据</string>
+    <string name="timeline_no_data">暂无数据</string>
+    <string name="shared_string_select">选择</string>
+    <string name="min_logging_distance">最小记录距离</string>
+    <string name="min_logging_distance_descr">筛选：记录新点的最小距离</string>
+    <string name="min_logging_accuracy">最低记录精度</string>
+    <string name="min_logging_accuracy_descr">过滤：除非达到精度，否则不记录</string>
 </resources>
