@@ -2173,7 +2173,7 @@
     <string name="custom_color">Друг цвят</string>
     <string name="wiki_menu_download_descr">Необходими са допълнителни карти, за да видите обектите на Уикипедия на картата.</string>
     <string name="download_unsupported_action">Неподдържано действие %1$s</string>
-    <string name="select_navigation_icon">Икона на позицията по време на движение</string>
+    <string name="select_navigation_icon">Икона по време на движение</string>
     <string name="reset_all_profile_settings">Нулиране на всички настройки на профила\?</string>
     <string name="reset_all_profile_settings_descr">Настройките на профила ще бъдат нулирани до подразбираните.</string>
     <string name="reset_confirmation_descr">Докосването на %1$s ще отхвърли всичките ви промени.</string>
@@ -4739,6 +4739,12 @@
     <string name="screen_control">Управление на екрана</string>
     <string name="screen_alerts">Предупреждения на екрана</string>
     <string name="screen_alerts_descr">Предупрежденията се показват долу вляво по време на маршрутизиране.</string>
-    <string name="dialogs_and_notifications_title">Диалози и извстия</string>
-    <string name="dialogs_and_notifications_descr">Управление на изскачащи прозорци, диалози и известия</string>
+    <string name="dialogs_and_notifications_title">Диалози и известия</string>
+    <string name="dialogs_and_notifications_descr">Управление на изскачащи прозорци, диалози и известия.</string>
+    <string name="download_map_dialog">Диалог за изтегляне на карти</string>
+    <string name="add_new_profile_q">Добявяне на нов профил „%1$s“?</string>
+    <string name="select_map_icon">Икона по време на покой</string>
+    <string name="master_profile">Основен профил</string>
+    <string name="select_color">Избиране на цвят</string>
+    <string name="desert_render_descr">За пустини и други слабозаселени райони. По-подробно.</string>
 </resources>
