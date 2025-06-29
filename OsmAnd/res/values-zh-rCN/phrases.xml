@@ -977,7 +977,7 @@
     <string name="poi_liaison_filter">联络处</string>
     <string name="poi_access_motorcar">机动车通行</string>
     <string name="poi_access_bicycle">自行车通行</string>
-    <string name="poi_access_scooter">滑板车通行</string>
+    <string name="poi_access_scooter">踏板摩托车通行</string>
     <string name="poi_authentication_contactless">非接触式认证</string>
     <string name="poi_authentication_chip_card">芯片卡认证</string>
     <string name="poi_lift_gate">吊杆屏障</string>
@@ -991,7 +991,7 @@
     <string name="poi_volcano_type">类型</string>
     <string name="poi_bath_open_air">露天</string>
     <string name="poi_bath_type">类型</string>
-    <string name="poi_cash_withdrawal_bank_card">现金返还</string>
+    <string name="poi_cash_withdrawal_bank_card">借记卡返现</string>
     <string name="poi_access_disabled">身障人士车辆通行</string>
     <string name="poi_access_motorcycle">摩托车通行</string>
     <string name="poi_socket_schuko_output_filter">Schuko 连接器插头</string>
@@ -1024,7 +1024,7 @@
     <string name="poi_post_office_type">类型</string>
     <string name="poi_butcher_type">主要肉类</string>
     <string name="poi_agrarian_type">农业用品</string>
-    <string name="poi_service_fleurop_filter">Fleurop 鲜花配送服务</string>
+    <string name="poi_service_fleurop_filter">Fleurop 鲜花配送</string>
     <string name="poi_furniture_filter">家具</string>
     <string name="poi_fridge_filter">冰箱</string>
     <string name="poi_heating_filter">暖气</string>
@@ -3220,4 +3220,9 @@
     <string name="poi_healthcare_speciality_paediatric_surgery">小儿外科</string>
     <string name="poi_healthcare_speciality_periodontics">牙周病学</string>
     <string name="poi_healthcare_speciality_rheumatology">风湿病学</string>
+    <string name="poi_healthcare_speciality_community">社区医学</string>
+    <string name="poi_healthcare_speciality_dialysis">透析</string>
+    <string name="poi_healthcare_speciality_covid19">新冠病毒</string>
+    <string name="poi_healthcare_speciality_weight_loss">减重</string>
+    <string name="poi_healthcare_speciality_blood_check">血液检查</string>
 </resources>
