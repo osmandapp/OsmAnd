@@ -33,10 +33,6 @@ import java.util.Map;
 
 public abstract class SelectionBottomSheet<T> extends MenuBottomSheetDialogFragment {
 
-	protected OsmandApplication app;
-	protected LayoutInflater inflater;
-	protected UiUtilities uiUtilities;
-
 	protected TextView title;
 	protected TextView titleDescription;
 	protected TextView primaryDescription;
@@ -71,9 +67,6 @@ public abstract class SelectionBottomSheet<T> extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		uiUtilities = app.getUIUtilities();
-		inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		activeColorRes = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 		secondaryColorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
 
@@ -84,8 +77,9 @@ public abstract class SelectionBottomSheet<T> extends MenuBottomSheetDialogFragm
 		items.add(createSelectionView());
 	}
 
+	@NonNull
 	private BaseBottomSheetItem createHeaderView() {
-		View view = inflater.inflate(R.layout.settings_group_title, null);
+		View view = inflate(R.layout.settings_group_title);
 
 		title = view.findViewById(R.id.title);
 		titleDescription = view.findViewById(R.id.title_description);
@@ -105,9 +99,9 @@ public abstract class SelectionBottomSheet<T> extends MenuBottomSheetDialogFragm
 		return new SimpleBottomSheetItem.Builder().setCustomView(view).create();
 	}
 
+	@NonNull
 	private BaseBottomSheetItem createSelectionView() {
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-		listContainer = new LinearLayout(themedCtx);
+		listContainer = new LinearLayout(getThemedContext());
 		listContainer.setLayoutParams(new LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -183,7 +177,7 @@ public abstract class SelectionBottomSheet<T> extends MenuBottomSheetDialogFragm
 		listViews.clear();
 		listContainer.removeAllViews();
 		for (SelectableItem<T> item : allItems) {
-			setupItemView(item, inflater.inflate(getItemLayoutId(), null));
+			setupItemView(item, inflate(getItemLayoutId(), null));
 		}
 	}
 

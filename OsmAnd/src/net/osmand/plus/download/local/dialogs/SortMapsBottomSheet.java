@@ -44,9 +44,6 @@ public class SortMapsBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		OsmandApplication app = requiredMyApplication();
-
 		type = AndroidUtils.getSerializable(requireArguments(), ITEM_TYPE_KEY, LocalItemType.class);
 		if (savedInstanceState != null) {
 			sortMode = AndroidUtils.getSerializable(savedInstanceState, SORT_MODE_KEY, LocalSortMode.class);
@@ -57,25 +54,23 @@ public class SortMapsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
-		View view = themedInflater.inflate(R.layout.bottom_sheet_track_group_list, null);
+		Context themedContext = getThemedContext();
+		View view = inflate(R.layout.bottom_sheet_track_group_list);
 
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.sort_by);
-		title.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
+		title.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(context));
+		recyclerView.setLayoutManager(new LinearLayoutManager(themedContext));
 		recyclerView.setAdapter(new SortModesAdapter());
 
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
 	}
 
 	private void setMapsSortMode(@NonNull LocalSortMode sortMode) {
-		Fragment target = getTargetFragment();
-		if (target instanceof MapsSortModeListener) {
-			((MapsSortModeListener) target).setMapsSortMode(sortMode);
+		if (getTargetFragment() instanceof MapsSortModeListener listener) {
+			listener.setMapsSortMode(sortMode);
 		}
 	}
 
@@ -89,8 +84,7 @@ public class SortMapsBottomSheet extends MenuBottomSheetDialogFragment {
 		@NonNull
 		@Override
 		public SortModeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
-			return new SortModeViewHolder(inflater.inflate(R.layout.list_item_two_icons, parent, false));
+			return new SortModeViewHolder(inflate(R.layout.list_item_two_icons, parent));
 		}
 
 		@Override

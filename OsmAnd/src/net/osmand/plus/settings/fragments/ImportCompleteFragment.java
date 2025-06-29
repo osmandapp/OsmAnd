@@ -191,8 +191,7 @@ public class ImportCompleteFragment extends BaseFullScreenFragment {
 				break;
 			case AVOID_ROADS:
 				if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-					new AvoidRoadsBottomSheetDialogFragment()
-							.show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
+					AvoidRoadsBottomSheetDialogFragment.showInstance(activity, null, null, null, null);
 				}
 				break;
 			case TRACKS:

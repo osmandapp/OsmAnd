@@ -32,11 +32,11 @@ public class RateUsHelper {
 		this.rateUsState = RateUsState.IGNORED;
 	}
 
-	public void storeRateResult(FragmentActivity activity) {
+	public void storeRateResult(@Nullable FragmentActivity activity) {
 		storeRateResult(activity, rateUsState);
 	}
 
-	private static void storeRateResult(FragmentActivity activity, RateUsState state) {
+	private static void storeRateResult(@Nullable FragmentActivity activity, @Nullable RateUsState state) {
 		if (state != null && activity != null && !activity.isChangingConfigurations()) {
 			OsmandApplication app = (OsmandApplication) activity.getApplication();
 			OsmandSettings settings = app.getSettings();

@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 
@@ -37,7 +38,7 @@ public class ModeSelectionBottomSheet<T> extends SelectionBottomSheet<T> {
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescr = view.findViewById(R.id.description);
 
-		Drawable icon = uiUtilities.getIcon(item.getIconId(), activeColorRes);
+		Drawable icon = getIcon(item.getIconId(), activeColorRes);
 		ivIcon.setImageDrawable(icon);
 		tvTitle.setText(item.getTitle());
 		tvDescr.setText(item.getDescription());

@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
@@ -85,7 +86,7 @@ public class SaveGroupConfirmationBottomSheet extends MenuBottomSheetDialogFragm
 
 	@Override
 	public int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
+		return getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
 	}
 
 	@Override
@@ -113,7 +114,7 @@ public class SaveGroupConfirmationBottomSheet extends MenuBottomSheetDialogFragm
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
 	                                @NonNull String editorTag, int pointsSize) {
-		if (!manager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle bundle = new Bundle();
 			bundle.putString(EDITOR_TAG_KEY, editorTag);
 			bundle.putInt(POINTS_SIZE_KEY, pointsSize);

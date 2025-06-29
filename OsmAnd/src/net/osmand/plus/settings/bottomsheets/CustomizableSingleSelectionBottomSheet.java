@@ -20,6 +20,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
@@ -70,7 +71,7 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 					.setTag(i)
 					.setLayoutId(displayItem.getLayoutId())
 					.setOnClickListener(displayItem.isClickable() ? v -> {
-						displayData.putExtra(SELECTED_INDEX, (int) rowItem[0].getTag());
+						displayData.putExtra(SELECTED_INDEX, rowItem[0].getTag());
 						onItemSelected(displayItem);
 						dismiss();
 					} : null)
@@ -92,16 +93,14 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 
 	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull String processId,
 	                                   @Nullable ApplicationMode appMode, boolean usedOnMap) {
-		try {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
 			fragment.setProcessId(processId);
 			fragment.setAppMode(appMode);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.show(manager, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
-
 }

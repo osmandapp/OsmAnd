@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -45,11 +44,9 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
 		Bundle args = getArguments();
-		if (app == null || args == null) {
-			return;
-		}
+		if (args == null) return;
+
 		int cancelTitleRes = args.getInt(CANCEL_TITLE_RES_KEY);
 		String prefId = args.getString(PREFERENCE_ID);
 		newValue = AndroidUtils.getSerializable(args, NEW_VALUE_KEY, Serializable.class);
@@ -65,7 +62,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setIcon(getActiveIcon(R.drawable.ic_action_copy))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
-					app.getSettings().setPreferenceForAllModes(prefId, newValue);
+					settings.setPreferenceForAllModes(prefId, newValue);
 					updateTargetSettings(false, true);
 					if (listener != null) {
 						listener.onPreferenceApplied(false);
@@ -82,7 +79,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setIcon(getActiveIcon(selectedAppMode.getIconRes()))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
-					app.getSettings().setPreference(prefId, newValue, getAppMode());
+					settings.setPreference(prefId, newValue, getAppMode());
 					updateTargetSettings(false, false);
 					if (listener != null) {
 						listener.onPreferenceApplied(true);
@@ -147,45 +144,30 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 									Fragment target,
 									boolean usedOnMap,
 									@Nullable ApplicationMode appMode) {
-		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, 0, appMode, null);
+		showInstance(fm, prefId, newValue, target, usedOnMap, 0, appMode, null);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm,
-									@Nullable String prefId,
-									@Nullable Serializable newValue,
-									Fragment target,
-									boolean usedOnMap,
-									@StringRes int cancelTitleRes,
-									@Nullable ApplicationMode appMode,
-									@Nullable OnChangeSettingListener listener) {
-		showFragmentInstance(fm, prefId, newValue, target, usedOnMap, cancelTitleRes, appMode, listener);
-	}
+	                                 @Nullable String prefId,
+	                                 @Nullable Serializable newValue,
+	                                 Fragment target,
+	                                 boolean usedOnMap,
+	                                 @StringRes int cancelTitleRes,
+	                                 @Nullable ApplicationMode appMode,
+	                                 @Nullable OnChangeSettingListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG, true)) {
+			Bundle args = new Bundle();
+			args.putString(PREFERENCE_ID, prefId);
+			args.putSerializable(NEW_VALUE_KEY, newValue);
+			args.putInt(CANCEL_TITLE_RES_KEY, cancelTitleRes);
 
-	private static void showFragmentInstance(@NonNull FragmentManager fm,
-											 @Nullable String prefId,
-											 @Nullable Serializable newValue,
-											 Fragment target,
-											 boolean usedOnMap,
-											 @StringRes int cancelTitleRes,
-											 @Nullable ApplicationMode appMode,
-											 @Nullable OnChangeSettingListener listener) {
-		try {
-			if (fm.findFragmentByTag(TAG) == null) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, prefId);
-				args.putSerializable(NEW_VALUE_KEY, newValue);
-				args.putInt(CANCEL_TITLE_RES_KEY, cancelTitleRes);
-
-				ChangeGeneralProfilesPrefBottomSheet fragment = new ChangeGeneralProfilesPrefBottomSheet();
-				fragment.setArguments(args);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setTargetFragment(target, 0);
-				fragment.setListener(listener);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+			ChangeGeneralProfilesPrefBottomSheet fragment = new ChangeGeneralProfilesPrefBottomSheet();
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
+			fragment.setListener(listener);
+			fragment.show(fm, TAG);
 		}
 	}
 

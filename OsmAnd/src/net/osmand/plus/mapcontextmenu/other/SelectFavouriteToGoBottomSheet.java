@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -37,7 +35,6 @@ public class SelectFavouriteToGoBottomSheet extends SelectFavouriteBottomSheet {
 
 	@Override
 	protected void onFavouriteSelected(@NonNull FavouritePoint point) {
-		OsmandApplication app = getMyApplication();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		FavouritesHelper favorites = app.getFavoritesHelper();
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
@@ -85,14 +82,10 @@ public class SelectFavouriteToGoBottomSheet extends SelectFavouriteBottomSheet {
 		}
 	}
 
+	@Nullable
 	private MapRouteInfoMenu getMapRouteInfoMenu() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			MapActivity map = ((MapActivity) activity);
-			return map.getMapRouteInfoMenu();
-		} else {
-			return null;
-		}
+		MapActivity mapActivity = getMapActivity();
+		return mapActivity != null ? mapActivity.getMapRouteInfoMenu() : null;
 	}
 
 	@Override
@@ -107,7 +100,6 @@ public class SelectFavouriteToGoBottomSheet extends SelectFavouriteBottomSheet {
 		args.putString(POINT_TYPE_KEY, pointType.name());
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, ADD_FAVORITE_TO_ROUTE_REQUEST_CODE);
-		showFragment(activity, fragment);
+		showInstance(activity, fragment);
 	}
-
 }

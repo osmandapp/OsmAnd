@@ -41,8 +41,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			showCreateNewRouteButton = savedInstanceState.getBoolean(SHOW_CREATE_NEW_ROUTE_BUTTON);
 		}
 
-		View mainView = View.inflate(UiUtilities.getThemedContext(getMyApplication(), nightMode),
-				R.layout.measure_track_is_saved, null);
+		View mainView = inflate(R.layout.measure_track_is_saved);
 		TextView fileNameView = mainView.findViewById(R.id.file_name);
 		fileNameView.setText(Algorithms.getFileWithoutDirs(fileName));
 		items.add(new SimpleBottomSheetItem.Builder()

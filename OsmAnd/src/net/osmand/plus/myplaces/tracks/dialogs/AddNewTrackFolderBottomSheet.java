@@ -38,8 +38,6 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 	private static final String FOLDER_NAME_KEY = "folder_name_key";
 	private static final String FOLDER_PATH_KEY = "folder_path_key";
 
-	private OsmandApplication app;
-
 	private TextInputEditText editText;
 	private TextInputLayout nameTextBox;
 
@@ -51,7 +49,6 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 
 		if (savedInstanceState != null) {
 			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);

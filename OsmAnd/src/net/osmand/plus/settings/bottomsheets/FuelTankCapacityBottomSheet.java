@@ -39,6 +39,7 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 
 	private VolumeUnit volumeUnit;
 
+	@NonNull
 	@SuppressLint("ClickableViewAccessibility")
 	protected BaseBottomSheetItem createBottomSheetItem(@NonNull OsmandApplication app, @NonNull View mainView) {
 		volumeUnit = app.getSettings().UNIT_OF_VOLUME.getModeValue(getAppMode());

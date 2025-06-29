@@ -11,10 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -32,7 +30,7 @@ public abstract class SideMenuBottomSheetDialogFragment extends MenuBottomSheetD
 		if (dialog != null) {
 			View container = dialog.findViewById(R.id.content_container);
 			ViewGroup.LayoutParams layoutParams = container.getLayoutParams();
-			layoutParams.width = getDimen(R.dimen.dashboard_land_width);
+			layoutParams.width = getDimensionPixelSize(R.dimen.dashboard_land_width);
 			layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
 			container.setLayoutParams(layoutParams);
 
@@ -65,14 +63,5 @@ public abstract class SideMenuBottomSheetDialogFragment extends MenuBottomSheetD
 		}
 		return AndroidUtils.isLayoutRtl(context) ?
 				R.style.Animations_PopUpMenu_MiddleHeightRight : R.style.Animations_PopUpMenu_MiddleHeightLeft;
-	}
-
-	@Nullable
-	protected MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 }

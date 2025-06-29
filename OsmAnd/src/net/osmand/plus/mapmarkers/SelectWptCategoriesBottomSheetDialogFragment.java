@@ -5,7 +5,6 @@ import android.os.Bundle;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -35,8 +34,6 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	public static final String UPDATE_CATEGORIES_KEY = "update_categories";
 	public static final String ACTIVE_CATEGORIES_KEY = "active_categories";
 
-	private OsmandApplication app;
-
 	private GpxFile gpxFile;
 
 	private final Set<String> selectedCategories = new HashSet<>();
@@ -47,8 +44,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		getGpxFile();
+		loadGpxFile();
 	}
 
 	@Override
@@ -57,8 +53,9 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 			return;
 		}
 		int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
-		isUpdateMode = getArguments().getBoolean(UPDATE_CATEGORIES_KEY);
-		List<String> categories = getArguments().getStringArrayList(ACTIVE_CATEGORIES_KEY);
+		Bundle args = requireArguments();
+		isUpdateMode = args.getBoolean(UPDATE_CATEGORIES_KEY);
+		List<String> categories = args.getStringArrayList(ACTIVE_CATEGORIES_KEY);
 
 		items.add(new TitleItem(getGpxName(gpxFile)));
 
@@ -162,8 +159,8 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 				.replace("_", " ");
 	}
 
-	private void getGpxFile() {
-		String filePath = getArguments().getString(GPX_FILE_PATH_KEY);
+	private void loadGpxFile() {
+		String filePath = requireArguments().getString(GPX_FILE_PATH_KEY);
 		if (filePath != null) {
 			SelectedGpxFile selectedGpx = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 			if (selectedGpx != null && selectedGpx.getGpxFile() != null) {

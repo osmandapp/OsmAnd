@@ -3,12 +3,10 @@ package net.osmand.plus.wikipedia;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -26,8 +24,7 @@ public class WikipediaOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
-		CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
+		CommonPreference<WikiArticleShowImages> showImagesPref = settings.WIKI_ARTICLE_SHOW_IMAGES;
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
@@ -37,24 +34,18 @@ public class WikipediaOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 				.setIcon(getContentIcon(R.drawable.ic_type_img))
 				.setTitle(getString(R.string.download_images))
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						PopupMenu popup = new PopupMenu(v.getContext(), v, Gravity.END);
-						for (WikiArticleShowImages showImages : WikiArticleShowImages.values()) {
-							MenuItem item = popup.getMenu().add(getString(showImages.name));
-							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-								@Override
-								public boolean onMenuItemClick(MenuItem item) {
-									showImagesPref.set(showImages);
-									sendResult();
-									dismiss();
-									return true;
-								}
-							});
-						}
-						popup.show();
+				.setOnClickListener(v -> {
+					PopupMenu popup = new PopupMenu(v.getContext(), v, Gravity.END);
+					for (WikiArticleShowImages showImages : WikiArticleShowImages.values()) {
+						MenuItem menuItem = popup.getMenu().add(getString(showImages.name));
+						menuItem.setOnMenuItemClickListener(item -> {
+							showImagesPref.set(showImages);
+							sendResult();
+							dismiss();
+							return true;
+						});
 					}
+					popup.show();
 				})
 				.create();
 		items.add(showImagesItem);

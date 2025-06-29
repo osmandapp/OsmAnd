@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -34,14 +33,11 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 
 	private static final String SEGMENT_INDEX_KEY = "segment_index_key";
 
-	private OsmandApplication app;
 	private int segmentIndex;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-
 		if (savedInstanceState != null) {
 			segmentIndex = savedInstanceState.getInt(SEGMENT_INDEX_KEY, -1);
 		}
@@ -52,7 +48,7 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 		items.add(new TitleItem(getString(R.string.get_altitude_data)));
 		createUseNearbyRoadsItem();
 		if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-			int margin = getResources().getDimensionPixelSize(R.dimen.divider_color_light_margin_start);
+			int margin = getDimensionPixelSize(R.dimen.divider_color_light_margin_start);
 			DividerItem dividerItem = new DividerItem(app);
 			dividerItem.setMargins(margin, 0, 0, 0);
 			items.add(dividerItem);
@@ -73,9 +69,8 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 				.setIcon(getActiveIcon(R.drawable.ic_action_attach_track))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_active)
 				.setOnClickListener(v -> {
-					Fragment fragment = getTargetFragment();
-					if (fragment instanceof CalculateAltitudeListener) {
-						((CalculateAltitudeListener) fragment).attachToRoadsSelected(segmentIndex);
+					if (getTargetFragment() instanceof CalculateAltitudeListener listener) {
+						listener.attachToRoadsSelected(segmentIndex);
 					}
 					dismiss();
 				})
@@ -90,9 +85,8 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 				.setIcon(getActiveIcon(R.drawable.ic_action_terrain))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_active)
 				.setOnClickListener(v -> {
-					Fragment fragment = getTargetFragment();
-					if (fragment instanceof CalculateAltitudeListener) {
-						((CalculateAltitudeListener) fragment).calculateOfflineSelected(segmentIndex);
+					if (getTargetFragment() instanceof CalculateAltitudeListener listener) {
+						listener.calculateOfflineSelected(segmentIndex);
 					}
 					dismiss();
 				})
@@ -101,17 +95,15 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 	}
 
 	private void createOsmAndProItem() {
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.online_srtm_promo_item, itemsContainer, false);
+		View view = inflate(R.layout.online_srtm_promo_item, itemsContainer, false);
 
-		UiUtilities utilities = app.getUIUtilities();
 		int color = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.switch_button_active);
-		view.setBackground(utilities.getPaintedIcon(R.drawable.promo_banner_bg, color));
+		view.setBackground(getPaintedIcon(R.drawable.promo_banner_bg, color));
 
 		DialogButton button = view.findViewById(R.id.button_action);
 		button.findViewById(R.id.button_container).setBackground(null);
 
-		Drawable icon = utilities.getIcon(R.drawable.ic_action_osmand_pro_logo_colored);
+		Drawable icon = getIcon(R.drawable.ic_action_osmand_pro_logo_colored);
 		TextView textView = button.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));
 		textView.setCompoundDrawablesRelativeWithIntrinsicBounds(icon, null, null, null);

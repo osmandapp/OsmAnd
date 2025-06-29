@@ -10,11 +10,10 @@ import android.provider.Settings;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -37,11 +36,8 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
 		Context context = getContext();
-		if (context == null || app == null) {
-			return;
-		}
+		if (context == null) return;
 
 		if (savedInstanceState != null) {
 			pluginId = savedInstanceState.getString(PLUGIN_ID_KEY);
@@ -53,9 +49,7 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 
 		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
-		if (plugin == null) {
-			return;
-		}
+		if (plugin == null) return;
 
 		BaseBottomSheetItem titleItem = new TitleItem.Builder()
 				.setTitle(getString(R.string.plugin_disabled))
@@ -94,11 +88,10 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			Intent intent = getPluginSettingsIntent();
 			AndroidUtils.startActivityIfSafe(activity, intent);
-		}
+		});
 		dismiss();
 	}
 
@@ -108,12 +101,12 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putString(PLUGIN_ID_KEY, pluginId);
 	}
 
+	@Nullable
 	private Intent getPluginSettingsIntent() {
 		Intent intent = null;
 
-		OsmandApplication app = getMyApplication();
 		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
-		if (plugin != null && app != null) {
+		if (plugin != null) {
 			String installedPackage = null;
 			if (PluginsHelper.isPackageInstalled(plugin.getComponentId1(), app)) {
 				installedPackage = plugin.getComponentId1();
@@ -132,18 +125,14 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String pluginId, Boolean usedOnMap) {
-		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PLUGIN_ID_KEY, pluginId);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PLUGIN_ID_KEY, pluginId);
 
-				PluginDisabledBottomSheet dialog = new PluginDisabledBottomSheet();
-				dialog.setArguments(args);
-				dialog.setUsedOnMap(usedOnMap);
-				dialog.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+			PluginDisabledBottomSheet dialog = new PluginDisabledBottomSheet();
+			dialog.setArguments(args);
+			dialog.setUsedOnMap(usedOnMap);
+			dialog.show(fm, TAG);
 		}
 	}
 }

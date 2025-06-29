@@ -3,7 +3,6 @@ package net.osmand.plus.track.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
@@ -21,7 +20,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.bottomsheets.CustomizableBottomSheet;
 import net.osmand.plus.track.fragments.controller.IColorPickerDialogController;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -55,8 +53,7 @@ public class ColorPickerBottomSheet extends CustomizableBottomSheet implements O
 	}
 
 	private View createPickerView() {
-		LayoutInflater themedInflater = UiUtilities.getInflater(getActivity(), nightMode);
-		View colorView = themedInflater.inflate(R.layout.custom_color_picker, null);
+		View colorView = inflate(R.layout.custom_color_picker);
 		colorPicker = colorView.findViewById(R.id.color_picker_view);
 		colorPanel = colorView.findViewById(R.id.color_panel_new);
 		hexEditText = colorView.findViewById(R.id.color_hex_edit_text);

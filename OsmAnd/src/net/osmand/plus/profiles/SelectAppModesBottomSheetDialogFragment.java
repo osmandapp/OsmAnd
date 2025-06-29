@@ -39,7 +39,7 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 	@Override
 	public void onResume() {
 		super.onResume();
-		activeModes = new ArrayList<>(ApplicationMode.values(getMyApplication()));
+		activeModes = new ArrayList<>(ApplicationMode.values(app));
 		adapter.updateItemsList(activeModes);
 		setupHeightAndBackground(getView());
 	}
@@ -54,12 +54,12 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 
 	@Override
 	protected void getData() {
-		activeModes.addAll(ApplicationMode.values(getMyApplication()));
+		activeModes.addAll(ApplicationMode.values(app));
 	}
 
 	@Override
 	protected SelectProfileMenuAdapter getMenuAdapter() {
-		return new SelectProfileMenuAdapter(activeModes, requiredMyApplication(), getString(R.string.shared_string_manage), nightMode, appMode);
+		return new SelectProfileMenuAdapter(activeModes, app, getString(R.string.shared_string_manage), nightMode, appMode);
 	}
 
 	@Override
@@ -69,14 +69,12 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 
 	@Override
 	public void onProfilePressed(ApplicationMode appMode) {
-		OsmandSettings settings = getMyApplication().getSettings();
 		if (appMode != this.appMode) {
 			if (appModeChangeable) {
 				settings.setApplicationMode(appMode);
 			}
 			Fragment targetFragment = getTargetFragment();
-			if (targetFragment instanceof AppModeChangedListener) {
-				AppModeChangedListener listener = (AppModeChangedListener) targetFragment;
+			if (targetFragment instanceof AppModeChangedListener listener) {
 				listener.onAppModeChanged(appMode);
 			}
 		}

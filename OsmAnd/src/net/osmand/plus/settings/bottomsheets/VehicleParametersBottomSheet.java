@@ -22,6 +22,7 @@ import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -40,6 +41,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 
 	private SizePreference sizePreference;
 
+	@NonNull
 	@SuppressLint("ClickableViewAccessibility")
 	protected BaseBottomSheetItem createBottomSheetItem(@NonNull OsmandApplication app, @NonNull View mainView) {
 		sizePreference = (SizePreference) getPreference();
@@ -86,9 +88,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 		chipsView.setItems(chips);
 		ChipItem selected = chipsView.findChipByTag(currentValue);
 		chipsView.setSelected(selected);
-		return new BaseBottomSheetItem.Builder()
-				.setCustomView(mainView)
-				.create();
+		return new BaseBottomSheetItem.Builder().setCustomView(mainView).create();
 	}
 
 	private void onCorrectInput() {
@@ -110,8 +110,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Fragment target = getTargetFragment();
-		if (target instanceof OnConfirmPreferenceChange callback) {
+		if (getTargetFragment() instanceof OnConfirmPreferenceChange callback) {
 			String preferenceId = getPreference().getKey();
 			VehicleSizes vehicleSizes = sizePreference.getVehicleSizes();
 			String value = String.valueOf(vehicleSizes.prepareValueToSave(sizePreference, currentValue));
@@ -131,19 +130,15 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 
 	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
 	                                boolean usedOnMap, @Nullable ApplicationMode appMode) {
-		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, key);
-				VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
-				fragment.setArguments(args);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PREFERENCE_ID, key);
+			VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fm, TAG);
 		}
 	}
 }

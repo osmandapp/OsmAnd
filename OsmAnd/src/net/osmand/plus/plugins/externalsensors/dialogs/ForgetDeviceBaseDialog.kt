@@ -6,17 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BottomSheetDialogFragment
-import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 
 
 abstract class ForgetDeviceBaseDialog : BottomSheetDialogFragment() {
-	private var nightMode = false
-	private lateinit var app: OsmandApplication
 	open val layoutId = R.layout.forget_obd_device_dialog
 
 	companion object {
@@ -26,12 +22,11 @@ abstract class ForgetDeviceBaseDialog : BottomSheetDialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		val context = requireContext()
-		app = context.applicationContext as OsmandApplication
-		nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.OVER_MAP)
 		val deviceId = arguments?.getString(DEVICE_ID_KEY)
 		deviceId?.let { initDevice(it) }
 	}
+
+	override fun isUsedOnMap() = true
 
 	abstract fun initDevice(deviceId: String)
 	abstract fun onForgetSensorConfirmed()
@@ -42,7 +37,8 @@ abstract class ForgetDeviceBaseDialog : BottomSheetDialogFragment() {
 		savedInstanceState: Bundle?
 	): View {
 
-		val view: View = inflater.inflate(layoutId, container, false)
+		updateNightMode()
+		val view: View = inflate(layoutId, container, false)
 
 		val forgetButton = view.findViewById<View>(R.id.forget_btn)
 		val forgetButtonText = forgetButton.findViewById<TextView>(R.id.button_text)

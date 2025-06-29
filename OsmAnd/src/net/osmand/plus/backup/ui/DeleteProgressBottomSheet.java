@@ -49,7 +49,7 @@ public class DeleteProgressBottomSheet extends MenuBottomSheetDialogFragment imp
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		backupHelper = requiredMyApplication().getBackupHelper();
+		backupHelper = app.getBackupHelper();
 		if (savedInstanceState != null) {
 			progress = savedInstanceState.getInt(PROGRESS_KEY);
 			maxProgress = savedInstanceState.getInt(MAX_PROGRESS_KEY);
@@ -76,22 +76,17 @@ public class DeleteProgressBottomSheet extends MenuBottomSheetDialogFragment imp
 				.create();
 		items.add(descriptionItem);
 
-		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		items.add(new DividerSpaceItem(requireContext(), padding));
+		int padding = getDimensionPixelSize(R.dimen.content_padding_small);
+		items.add(new DividerSpaceItem(getThemedContext(), padding));
 	}
 
 	private BaseBottomSheetItem createProgressItem() {
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_progress_with_description, null);
-
+		View view = inflate(R.layout.bottom_sheet_progress_with_description);
 		percentage = view.findViewById(R.id.percentage);
 		progressBar = view.findViewById(R.id.progress_bar);
 		progressBar.setMax(maxProgress);
 		updateProgress();
-
-		return new BaseBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create();
+		return new BaseBottomSheetItem.Builder().setCustomView(view).create();
 	}
 
 	@Override

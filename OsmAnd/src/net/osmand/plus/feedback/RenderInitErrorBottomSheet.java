@@ -49,23 +49,22 @@ public class RenderInitErrorBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = requiredMyApplication();
 		app.getFeedbackHelper().sendCrashLog();
 		dismiss();
 	}
 
-	public static boolean shouldShow(@NonNull OsmandSettings settings, @NonNull MapActivity activity) {
-		OsmandApplication app = activity.getMyApplication();
+	public static boolean shouldShow(@NonNull OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
 		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_RENDER_INIT_ERROR_ID)) {
 			return settings.USE_OPENGL_RENDER.get() && settings.OPENGL_RENDER_FAILED.get() > 3;
 		}
 		return true;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			RenderInitErrorBottomSheet fragment = new RenderInitErrorBottomSheet();
-			fragment.show(manager, TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }

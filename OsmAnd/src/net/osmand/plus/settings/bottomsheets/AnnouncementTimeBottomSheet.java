@@ -2,7 +2,6 @@ package net.osmand.plus.settings.bottomsheets;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -11,10 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
-import com.google.android.material.slider.Slider.OnChangeListener;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -36,14 +33,12 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 	public static final String TAG = AnnouncementTimeBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(AnnouncementTimeBottomSheet.class);
 
-	private OsmandApplication app;
 	private AnnounceTimeDistances announceTimeDistances;
 
 	private ListPreferenceEx listPreference;
 	private int selectedEntryIndex = -1;
 
 	private TextViewEx tvSeekBarLabel;
-	private Slider slider;
 	private ImageView ivArrow;
 	private TextViewEx tvIntervalsDescr;
 
@@ -51,7 +46,6 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
 		announceTimeDistances = new AnnounceTimeDistances(getAppMode(), app);
 
 		listPreference = getListPreference();
@@ -98,54 +92,43 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 			if (listPreference.callChangeListener(value)) {
 				listPreference.setValue(value);
 			}
-			Fragment target = getTargetFragment();
-			if (target instanceof OnPreferenceChanged) {
-				((OnPreferenceChanged) target).onPreferenceChanged(listPreference.getKey());
+			if (getTargetFragment() instanceof OnPreferenceChanged listener) {
+				listener.onPreferenceChanged(listPreference.getKey());
 			}
 		}
-
 		dismiss();
 	}
 
+	@Nullable
 	private ListPreferenceEx getListPreference() {
 		return (ListPreferenceEx) getPreference();
 	}
 
+	@NonNull
 	private BaseBottomSheetItem createBottomSheetItem() {
-		View rootView = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.bottom_sheet_announcement_time, null);
+		View rootView = inflate(R.layout.bottom_sheet_announcement_time);
 
 		tvSeekBarLabel = rootView.findViewById(R.id.tv_seek_bar_label);
-		slider = rootView.findViewById(R.id.arrival_slider);
+		Slider arrivalSlider = rootView.findViewById(R.id.arrival_slider);
 		ivArrow = rootView.findViewById(R.id.iv_arrow);
 		tvIntervalsDescr = rootView.findViewById(R.id.tv_interval_descr);
 		int appModeColor = getAppMode().getProfileColor(nightMode);
 
-		slider.setValue(selectedEntryIndex);
-		slider.setValueFrom(0);
-		slider.setValueTo(listPreference.getEntries().length - 1);
-		slider.setStepSize(1);
-		slider.addOnChangeListener(new OnChangeListener() {
-			@Override
-			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-				int intValue = (int) value;
-				if (intValue != selectedEntryIndex) {
-					selectedEntryIndex = intValue;
-					updateViews();
-				}
+		arrivalSlider.setValue(selectedEntryIndex);
+		arrivalSlider.setValueFrom(0);
+		arrivalSlider.setValueTo(listPreference.getEntries().length - 1);
+		arrivalSlider.setStepSize(1);
+		arrivalSlider.addOnChangeListener((slider, value, fromUser) -> {
+			int intValue = (int) value;
+			if (intValue != selectedEntryIndex) {
+				selectedEntryIndex = intValue;
+				updateViews();
 			}
 		});
-		UiUtilities.setupSlider(slider, nightMode, appModeColor, true);
-		rootView.findViewById(R.id.description_container).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				toggleDescriptionVisibility();
-			}
-		});
+		UiUtilities.setupSlider(arrivalSlider, nightMode, appModeColor, true);
+		rootView.findViewById(R.id.description_container).setOnClickListener(v -> toggleDescriptionVisibility());
 
-		return new Builder()
-				.setCustomView(rootView)
-				.create();
+		return new Builder().setCustomView(rootView).create();
 	}
 
 	private void updateViews() {

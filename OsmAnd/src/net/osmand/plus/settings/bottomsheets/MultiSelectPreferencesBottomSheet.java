@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
@@ -17,6 +15,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -46,9 +45,8 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
 		multiSelectBooleanPreference = getListPreference();
-		if (app == null || multiSelectBooleanPreference == null) {
+		if (multiSelectBooleanPreference == null) {
 			return;
 		}
 		readSavedState(savedInstanceState);
@@ -73,17 +71,14 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 					.setChecked(selected)
 					.setTitle(prefTitle)
 					.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							boolean checked = !item[0].isChecked();
-							if (checked) {
-								prefChanged |= enabledPrefs.add(prefsIds[index]);
-							} else {
-								prefChanged |= enabledPrefs.remove(prefsIds[index]);
-							}
-							item[0].setChecked(checked);
+					.setOnClickListener(v -> {
+						boolean checked = !item[0].isChecked();
+						if (checked) {
+							prefChanged |= enabledPrefs.add(prefsIds[index]);
+						} else {
+							prefChanged |= enabledPrefs.remove(prefsIds[index]);
 						}
+						item[0].setChecked(checked);
 					})
 					.setTag(prefId)
 					.create();
@@ -115,9 +110,8 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 			if (multiSelectBooleanPreference.callChangeListener(values)) {
 				multiSelectBooleanPreference.setValues(values);
 
-				Fragment target = getTargetFragment();
-				if (target instanceof OnPreferenceChanged) {
-					((OnPreferenceChanged) target).onPreferenceChanged(multiSelectBooleanPreference.getKey());
+				if (getTargetFragment() instanceof OnPreferenceChanged listener) {
+					listener.onPreferenceChanged(multiSelectBooleanPreference.getKey());
 				}
 			}
 		}
@@ -125,6 +119,7 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 		dismiss();
 	}
 
+	@Nullable
 	private MultiSelectBooleanPreference getListPreference() {
 		return (MultiSelectBooleanPreference) getPreference();
 	}
@@ -149,9 +144,10 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String prefId, Fragment target,
-									   boolean usedOnMap, @Nullable ApplicationMode appMode, boolean profileDependent) {
-		try {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull String prefId,
+	                                   @NonNull Fragment targetFragment, boolean usedOnMap,
+	                                   @Nullable ApplicationMode appMode, boolean profileDependent) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, prefId);
 
@@ -159,12 +155,11 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setAppMode(appMode);
-			fragment.setTargetFragment(target, 0);
+			fragment.setTargetFragment(targetFragment, 0);
 			fragment.show(fragmentManager, TAG);
 			fragment.setProfileDependent(profileDependent);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

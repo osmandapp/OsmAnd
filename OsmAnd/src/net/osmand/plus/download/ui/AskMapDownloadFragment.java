@@ -13,12 +13,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 
@@ -35,8 +37,6 @@ public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		OsmandApplication app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			String itemFileName = savedInstanceState.getString(ITEM_FILENAME_KEY);
 			if (itemFileName != null) {
@@ -48,7 +48,8 @@ public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.ask_map_download_fragment, container, false);
+		updateNightMode();
+		View view = inflate(R.layout.ask_map_download_fragment, container, false);
 
 		ImageView icon = view.findViewById(R.id.titleIconImageView);
 		icon.setImageDrawable(getIcon(R.drawable.ic_map, R.color.osmand_orange));
@@ -82,6 +83,15 @@ public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		if (indexItem != null) {
 			outState.putString(ITEM_FILENAME_KEY, indexItem.getFileName());
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull IndexItem item) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			AskMapDownloadFragment fragment = new AskMapDownloadFragment();
+			fragment.setIndexItem(item);
+			fragment.show(fragmentManager, AskMapDownloadFragment.TAG);
 		}
 	}
 }

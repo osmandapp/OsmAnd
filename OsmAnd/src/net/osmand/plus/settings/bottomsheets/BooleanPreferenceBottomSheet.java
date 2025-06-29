@@ -44,27 +44,21 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
 		SwitchPreferenceEx switchPreference = getSwitchPreferenceEx();
 		if (switchPreference == null) {
 			return;
 		}
-		OsmandPreference preference = app.getSettings().getPreference(switchPreference.getKey());
+		OsmandPreference preference = settings.getPreference(switchPreference.getKey());
 		if (!(preference instanceof BooleanPreference)) {
 			return;
 		}
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-
 		String title = switchPreference.getTitle().toString();
 		items.add(new TitleItem(title));
 
 		String on = getSummary(switchPreference, true);
 		String off = getSummary(switchPreference, false);
-		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
-		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
+		int activeColor = ColorUtilities.getActiveColorId(nightMode);
+		int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);
 		boolean checked = switchPreference.isChecked();
 
 		Context context = requireContext();
@@ -77,13 +71,11 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				.setOnClickListener(v -> {
 					boolean newValue = !switchPreference.isChecked();
 					Fragment targetFragment = getTargetFragment();
-					if (targetFragment instanceof OnConfirmPreferenceChange) {
+					if (targetFragment instanceof OnConfirmPreferenceChange confirmationInterface) {
 						ApplyQueryType applyQueryType = getApplyQueryType();
 						if (applyQueryType == ApplyQueryType.SNACK_BAR) {
 							applyQueryType = ApplyQueryType.NONE;
 						}
-						OnConfirmPreferenceChange confirmationInterface =
-								(OnConfirmPreferenceChange) targetFragment;
 						if (confirmationInterface.onConfirmPreferenceChange(
 								switchPreference.getKey(), newValue, applyQueryType)) {
 							switchPreference.setChecked(newValue);
@@ -149,10 +141,10 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			bgColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
 			selectedColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 		} else {
-			bgColor = ContextCompat.getColor(context, checked
+			bgColor = ColorUtilities.getColor(context, checked
 					? getActiveColorId(nightMode) : getSecondaryIconColorId(nightMode));
 			selectedColor = ColorUtilities.getColorWithAlpha(
-					ContextCompat.getColor(context, getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
+					ColorUtilities.getColor(context, getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
 		}
 
 		int bgResId = isLayoutRtl ? R.drawable.rectangle_rounded_left : R.drawable.rectangle_rounded_right;

@@ -40,24 +40,16 @@ import java.util.List;
 
 public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBehaviourDialogFragment {
 
-
 	private static final Log LOG = PlatformUtil.getLog(RouteBetweenPointsBottomSheetDialogFragment.class);
 	public static final String TAG = RouteBetweenPointsBottomSheetDialogFragment.class.getSimpleName();
 	public static final int STRAIGHT_LINE_TAG = -1;
 	public static final String DIALOG_TYPE_KEY = "dialog_type_key";
 	public static final String DEFAULT_DIALOG_MODE_KEY = "default_dialog_mode_key";
-	public static final String ROUTE_APP_MODE_KEY = "route_app_mode";
 
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
-
-	private ApplicationMode appMode;
 	private RouteBetweenPointsDialogType dialogType = WHOLE_ROUTE_CALCULATION;
 	private RouteBetweenPointsDialogMode defaultDialogMode = RouteBetweenPointsDialogMode.SINGLE;
 
 	private TextView btnDescription;
-	private LinearLayout customRadioButton;
-	private boolean nightMode;
 
 	public enum RouteBetweenPointsDialogType {
 		WHOLE_ROUTE_CALCULATION,
@@ -72,12 +64,8 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		uiUtilities = app.getUIUtilities();
-
 		Bundle args = getArguments();
 		if (args != null) {
-			appMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
 			dialogType = (RouteBetweenPointsDialogType) args.get(DIALOG_TYPE_KEY);
 			defaultDialogMode = (RouteBetweenPointsDialogMode) args.get(DEFAULT_DIALOG_MODE_KEY);
 		}
@@ -85,13 +73,10 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 			dialogType = (RouteBetweenPointsDialogType) savedInstanceState.get(DIALOG_TYPE_KEY);
 			defaultDialogMode = (RouteBetweenPointsDialogMode) savedInstanceState.get(DEFAULT_DIALOG_MODE_KEY);
 		}
-		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		View mainView = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.fragment_route_between_points_bottom_sheet_dialog,
-						null, false);
+		View mainView = inflate(R.layout.fragment_route_between_points_bottom_sheet_dialog);
 		btnDescription = mainView.findViewById(R.id.button_description);
-		customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
-		customRadioButton.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.route_info_control_buttons_height));
+		LinearLayout customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
+		customRadioButton.setMinimumHeight(getDimensionPixelSize(R.dimen.route_info_control_buttons_height));
 
 		TextRadioItem allMode = createRadioButton(RouteBetweenPointsDialogMode.ALL, getButtonText(RouteBetweenPointsDialogMode.ALL));
 		TextRadioItem singleMode = createRadioButton(RouteBetweenPointsDialogMode.SINGLE, getButtonText(RouteBetweenPointsDialogMode.SINGLE));
@@ -120,11 +105,10 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 	}
 
 	private void createRecalculateAllRow(@NonNull ViewGroup container) {
-		View row = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.preference_with_descr, container, false);
+		View row = inflate(R.layout.preference_with_descr, container, false);
 
 		ImageView imageView = row.findViewById(android.R.id.icon);
-		imageView.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_plan_route, nightMode));
+		imageView.setImageDrawable(getContentIcon(R.drawable.ic_action_plan_route));
 
 		((TextView) row.findViewById(android.R.id.title)).setText(R.string.recalculate_route);
 		((TextView) row.findViewById(android.R.id.summary)).setText(R.string.without_profiles_changing);
@@ -154,15 +138,15 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 			dismiss();
 		};
 
-		Drawable icon = uiUtilities.getIcon(R.drawable.ic_action_split_interval, nightMode);
+		Drawable icon = getContentIcon(R.drawable.ic_action_split_interval);
 		addProfileView(container, onClickListener, STRAIGHT_LINE_TAG, icon,
-				app.getText(R.string.routing_profile_straightline), appMode == DEFAULT_APP_MODE);
+				getText(R.string.routing_profile_straightline), appMode == DEFAULT_APP_MODE);
 		addDelimiterView(container);
 
 		for (int i = 0; i < modes.size(); i++) {
 			ApplicationMode mode = modes.get(i);
 			if (!PUBLIC_TRANSPORT_KEY.equals(mode.getRoutingProfile())) {
-				icon = uiUtilities.getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
+				icon = getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
 				addProfileView(container, onClickListener, i, icon, mode.toHumanString(), mode.equals(appMode));
 			}
 		}
@@ -170,7 +154,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 
 	@Override
 	protected int getPeekHeight() {
-		return AndroidUtils.dpToPx(requireContext(), BOTTOM_SHEET_HEIGHT_DP);
+		return dpToPx(BOTTOM_SHEET_HEIGHT_DP);
 	}
 
 	@Override
@@ -188,18 +172,23 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 	@Override
 	public void onDestroyView() {
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof RouteBetweenPointsFragmentListener) {
-			((RouteBetweenPointsFragmentListener) fragment).onCloseRouteDialog();
+		if (fragment instanceof RouteBetweenPointsFragmentListener listener) {
+			listener.onCloseRouteDialog();
 		}
 		super.onDestroyView();
 	}
 
+	@Override
+	public boolean isUsedOnMap() {
+		return true;
+	}
+
 	private void addDelimiterView(@NonNull ViewGroup container) {
-		View row = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.divider, container, false);
+		View row = inflate(R.layout.divider, container, false);
 		View divider = row.findViewById(R.id.divider);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
-		params.topMargin = row.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
-		params.bottomMargin = row.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
+		params.topMargin = getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
+		params.bottomMargin = getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
 		container.addView(row);
 	}
 
@@ -214,13 +203,12 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 
 	private void addProfileView(@NonNull ViewGroup container, View.OnClickListener onClickListener, Object tag,
 	                            Drawable icon, CharSequence title, boolean check) {
-		View row = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.bottom_sheet_item_with_radio_btn, container, false);
+		View row = inflate(R.layout.bottom_sheet_item_with_radio_btn, container, false);
 		((RadioButton) row.findViewById(R.id.compound_button)).setChecked(check);
 		ImageView imageView = row.findViewById(R.id.icon);
 		imageView.setImageDrawable(icon);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
-		params.rightMargin = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
+		params.rightMargin = getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 		((TextView) row.findViewById(R.id.title)).setText(title);
 		row.setOnClickListener(onClickListener);
 		row.setTag(tag);
@@ -327,19 +315,15 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 	                                RouteBetweenPointsDialogType dialogType,
 	                                RouteBetweenPointsDialogMode defaultDialogMode,
 	                                ApplicationMode applicationMode) {
-		try {
-			if (!fm.isStateSaved()) {
-				RouteBetweenPointsBottomSheetDialogFragment fragment = new RouteBetweenPointsBottomSheetDialogFragment();
-				Bundle args = new Bundle();
-				args.putString(ROUTE_APP_MODE_KEY, applicationMode != null ? applicationMode.getStringKey() : null);
-				args.putSerializable(DIALOG_TYPE_KEY, dialogType);
-				args.putSerializable(DEFAULT_DIALOG_MODE_KEY, defaultDialogMode);
-				fragment.setArguments(args);
-				fragment.setTargetFragment(targetFragment, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			RouteBetweenPointsBottomSheetDialogFragment fragment = new RouteBetweenPointsBottomSheetDialogFragment();
+			Bundle args = new Bundle();
+			args.putSerializable(DIALOG_TYPE_KEY, dialogType);
+			args.putSerializable(DEFAULT_DIALOG_MODE_KEY, defaultDialogMode);
+			fragment.setArguments(args);
+			fragment.setAppMode(applicationMode);
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.show(fm, TAG);
 		}
 	}
 

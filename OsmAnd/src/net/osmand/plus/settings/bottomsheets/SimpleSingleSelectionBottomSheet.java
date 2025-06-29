@@ -69,7 +69,6 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 		appMode = getAppMode();
 		if (savedInstanceState != null) {
 			restoreSavedState(savedInstanceState);
@@ -78,10 +77,7 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = requireContext();
-		inflater = UiUtilities.getInflater(context, nightMode);
-
-		View view = inflater.inflate(R.layout.bottom_sheet_simple_single_selection, null);
+		View view = inflate(R.layout.bottom_sheet_simple_single_selection);
 		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setText(title);
 		TextView tvDesc = view.findViewById(R.id.description);
@@ -95,7 +91,7 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 		LinearLayout llItems = view.findViewById(R.id.items);
 
 		for (int i = 0; i < names.length; i++) {
-			View v = inflater.inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems, false);
+			View v = inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems);
 			v.setTag(i);
 
 			TextView tvTitle = v.findViewById(R.id.title);

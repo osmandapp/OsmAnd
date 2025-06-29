@@ -47,9 +47,7 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 
 	@NonNull
 	protected BaseBottomSheetItem createCategoriesListItem() {
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-
-		View view = inflater.inflate(R.layout.favorite_categories_dialog, null);
+		View view = inflate(R.layout.favorite_categories_dialog);
 		ViewGroup container = view.findViewById(R.id.list_container);
 
 		List<FavoriteGroup> favoriteGroups = app.getFavoritesHelper().getFavoriteGroups();

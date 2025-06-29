@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -45,7 +44,6 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	public static final String SHOW_SURFACE_GRADE = "showSurfaceGrade";
 	public static final String COLORED_BUILDINGS = "coloredBuildings";
 
-	private OsmandApplication app;
 	private List<RenderingRuleProperty> properties;
 	private List<CommonPreference<Boolean>> preferences;
 	private OnDataChangeUiAdapter uiAdapter;
@@ -54,28 +52,12 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	private int paddingSmall;
 	private int paddingHalf;
 
-	public static void showInstance(@NonNull FragmentManager fm,
-									List<RenderingRuleProperty> properties,
-									List<CommonPreference<Boolean>> preferences,
-									OnDataChangeUiAdapter uiAdapter,
-	                                ContextMenuItem item) {
-		if (!fm.isStateSaved()) {
-			DetailsBottomSheet bottomSheet = new DetailsBottomSheet();
-			bottomSheet.setProperties(properties);
-			bottomSheet.setPreferences(preferences);
-			bottomSheet.setUiAdapter(uiAdapter);
-			bottomSheet.setMenuItem(item);
-			bottomSheet.show(fm, TAG);
-		}
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		padding = (int) getResources().getDimension(R.dimen.content_padding);
-		paddingSmall = (int) getResources().getDimension(R.dimen.content_padding_small);
-		paddingHalf = (int) getResources().getDimension(R.dimen.content_padding_half);
-		app = requiredMyApplication();
+		padding = (int) getDimension(R.dimen.content_padding);
+		paddingSmall = (int) getDimension(R.dimen.content_padding_small);
+		paddingHalf = (int) getDimension(R.dimen.content_padding_half);
 		if (properties == null || preferences == null) {
 			properties = new ArrayList<>();
 			preferences = new ArrayList<>();
@@ -84,8 +66,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 			for (RenderingRuleProperty pr : customRules) {
 				if (UI_CATEGORY_DETAILS.equals(pr.getCategory()) && pr.isBoolean()) {
 					properties.add(pr);
-					CommonPreference<Boolean> pref = app.getSettings()
-							.getCustomRenderBooleanProperty(pr.getAttrName());
+					CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(pr.getAttrName());
 					preferences.add(pref);
 				}
 			}
@@ -94,8 +75,8 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		int selectedProfileColor = app.getSettings().APPLICATION_MODE.get().getProfileColor(nightMode);
-		float spacing = getResources().getDimension(R.dimen.line_spacing_extra_description);
+		int selectedProfileColor = settings.getApplicationMode().getProfileColor(nightMode);
+		float spacing = getDimension(R.dimen.line_spacing_extra_description);
 		LinearLayout linearLayout = new LinearLayout(app);
 		linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -104,14 +85,14 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		title.setPadding(padding, paddingHalf, padding, 0);
 		title.setTypeface(FontCache.getMediumFont());
 		title.setText(R.string.rendering_category_details);
-		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
+		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getDimensionPixelSize(R.dimen.default_list_text_size));
 		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 
 		TextView description = new TextView(app);
 		description.setLineSpacing(spacing, 1.0f);
 		description.setPadding(padding, 0, padding, paddingSmall);
 		description.setText(R.string.details_dialog_decr);
-		description.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
+		description.setTextSize(TypedValue.COMPLEX_UNIT_PX, getDimensionPixelSize(R.dimen.default_desc_text_size));
 		description.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		linearLayout.addView(title);
 		linearLayout.addView(description);
@@ -212,8 +193,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 			uiAdapter.onDataSetInvalidated();
 		}
 		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) activity;
+		if (activity instanceof MapActivity mapActivity) {
 			mapActivity.refreshMapComplete();
 			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
@@ -234,5 +214,20 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
 	public void setMenuItem(ContextMenuItem item) {
 		this.item = item;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm,
+	                                List<RenderingRuleProperty> properties,
+	                                List<CommonPreference<Boolean>> preferences,
+	                                OnDataChangeUiAdapter uiAdapter,
+	                                ContextMenuItem item) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			DetailsBottomSheet fragment = new DetailsBottomSheet();
+			fragment.setProperties(properties);
+			fragment.setPreferences(preferences);
+			fragment.setUiAdapter(uiAdapter);
+			fragment.setMenuItem(item);
+			fragment.show(fm, TAG);
+		}
 	}
 }

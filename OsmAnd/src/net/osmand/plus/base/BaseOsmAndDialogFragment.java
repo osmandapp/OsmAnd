@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.DialogFragment;
@@ -69,22 +70,22 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		return themedInflater;
 	}
 
-	protected boolean isUsedOnMap() {
-		return false;
-	}
-
 	@NonNull
 	@Override
 	public ThemeUsageContext getThemeUsageContext() {
 		return ThemeUsageContext.valueOf(isUsedOnMap());
 	}
 
-	public void setAppMode(@NonNull ApplicationMode appMode) {
+	protected boolean isUsedOnMap() {
+		return false;
+	}
+
+	public final void setAppMode(@Nullable ApplicationMode appMode) {
 		this.appMode = appMode;
 	}
 
 	@NonNull
-	public ApplicationMode getAppMode() {
+	public final ApplicationMode getAppMode() {
 		return appMode;
 	}
 
