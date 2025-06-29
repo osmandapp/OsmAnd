@@ -4683,4 +4683,22 @@
     <string name="show_dms_grids_description">Показване на решетката в градуси, минути и секунди вместо в десетични градуси</string>
     <string name="show_dm_grids">Използване на ГМ вместо десетични градуси или ГМС</string>
     <string name="show_dm_grids_description">Показване на решетката в градуси и минути вместо десетични градуси или ГМС</string>
+    <string name="deleting_history">Премахване на история…</string>
+    <string name="deleting">Премахване…</string>
+    <string name="osm_live_payment_renews_3_years">Подновяване на три години</string>
+    <string name="years_3">Три години</string>
+    <string name="osm_live_payment_3_years_title">Всеки три години</string>
+    <string name="three_years_subscription">Тригодишен абонамент</string>
+    <string name="shared_string_switch">Превключване</string>
+    <string name="ski_route_switch_style_description">Изследвайте писти за спускане, лифтове и други обекти с картата в стил „Зима и ски“.</string>
+    <string name="battery">батерия</string>
+    <string name="sensor_data">Данни от сензор</string>
+    <string name="battery_level">Ниво на заряда на батерия</string>
+    <string name="shared_string_split_by">Разделяне по</string>
+    <string name="shared_string_flat">Плоско</string>
+    <string name="uphill_downhill_split">Изкачване / спускане</string>
+    <string name="set_parking_position">Задаване на място на паркиране</string>
+    <string name="set_work">Задаване на работа</string>
+    <string name="set_home">Задаване на вкъщи</string>
+    <string name="set_intermediate_point">Междинно местоназначение</string>
 </resources>
