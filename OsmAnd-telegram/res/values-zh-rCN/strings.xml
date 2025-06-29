@@ -76,5 +76,18 @@
     <string name="timeline_description">启用监控以便将所有位置保存为历史记录。</string>
     <string name="app_name_short">OsmAnd 追踪器</string>
     <string name="shared_string_telegram">Telegram</string>
-    <string name="privacy_policy_use_telegram">Telegram（消息应用程序）用于与人联系和交流。</string>
+    <string name="privacy_policy_use_telegram">Telegram（即时通讯应用程序）用于与人联系和交流。</string>
+    <string name="privacy_policy_telegram_client">OsmAnd 追踪器是使用 Telegram 开放平台的客户端之一。您的联系人可以使用任何其他 Telegram 客户端。</string>
+    <string name="privacy_policy_agree">点击 “继续 ”即表示您同意 Telegram 和 OsmAnd 隐私政策的条件。</string>
+    <string name="shared_string_accept">接受</string>
+    <string name="telegram_privacy_policy">Telegram 隐私政策</string>
+    <string name="osmand_privacy_policy">OsmAnd 隐私政策</string>
+    <string name="how_it_works">如何运作</string>
+    <string name="received_gps_points">已收到 GPX 点： %1$s</string>
+    <string name="shared_string_appearance">外观</string>
+    <string name="show_gps_points">显示 GPS 点</string>
+    <string name="show_gps_points_descr">显示已收集和发送的 GPS 点数量。</string>
+    <string name="please_update_osmand">请更新 OsmAnd 以在地图上查看数据</string>
+    <string name="shared_string_update">更新</string>
+    <string name="gps_points_in_buffer">已发送（ %1$d 在缓冲区中）。</string>
 </resources>
