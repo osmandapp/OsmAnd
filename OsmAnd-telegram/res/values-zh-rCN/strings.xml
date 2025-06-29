@@ -72,5 +72,9 @@
     <string name="shared_string_ok">确定</string>
     <string name="timeline_available_for_free_now">时间轴是目前免费提供的一项功能。</string>
     <string name="disable_monitoring">禁用监测</string>
-    <string name="location_recording_enabled">已启用位置记录功能</string>
+    <string name="location_recording_enabled">已启用位置记录</string>
+    <string name="timeline_description">启用监控以便将所有位置保存为历史记录。</string>
+    <string name="app_name_short">OsmAnd 追踪器</string>
+    <string name="shared_string_telegram">Telegram</string>
+    <string name="privacy_policy_use_telegram">Telegram（消息应用程序）用于与人联系和交流。</string>
 </resources>
