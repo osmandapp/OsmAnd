@@ -140,6 +140,7 @@ public abstract class InAppPurchaseHelper {
 
 	public static class InAppStateHolder {
 		public String sku;
+		public String name;
 		public PurchaseOrigin origin;
 		public String platform;
 		public long purchaseTime;
@@ -646,12 +647,14 @@ public abstract class InAppPurchaseHelper {
 			for (int i = 0; i < subArrJson.length(); i++) {
 				JSONObject subObj = subArrJson.getJSONObject(i);
 				String sku = subObj.getString("sku");
+				String name = subObj.optString("name", null);
 				String platform = subObj.optString("platform", null);
 				long purchaseTime = subObj.optLong("purchaseTime", 0);
 				long expireTime = subObj.optLong("expireTime", 0);
 				if (!Algorithms.isEmpty(sku)) {
 					InAppStateHolder stateHolder = new InAppStateHolder();
 					stateHolder.sku = sku;
+					stateHolder.name = name;
 					stateHolder.origin = getPurchaseOriginBySku(sku);
 					stateHolder.platform = platform;
 					stateHolder.purchaseTime = purchaseTime;

@@ -4030,7 +4030,7 @@
     <string name="pro_features">Pokročilé funkce</string>
     <string name="exit_pan_mode_descr">Stisknutím \"Zvolit\" opustíte režim posouvání</string>
     <string name="upload_gpx_description_hint">Ponecháte-li prázdné, názvy stop se použijí jako popis. Zadaný popis se aplikuje na každou stopu.</string>
-    <string name="delete_history_items_descr">Smazat vybrané položky historie?</string>
+    <string name="delete_history_items_descr">Vybrané položky budou smazány ze seznamu.</string>
     <string name="routeInfo_winter_ice_road_description">Obarvit čáru trasy nebo stopy podle její zimní klasifikace.</string>
     <string name="connect_track_points_as">Spojit body trasy</string>
     <string name="benefits_for_contributors_primary_descr">Aktivní přispěvatelé na OpenStreetMap.org mohou mít nárok na neomezené hodinové aktualizace map.</string>

@@ -3258,7 +3258,7 @@
     <string name="recalculate_route_distance_promo">如果從路徑到目前位置的距離大於選定的值，將會重新計算路徑。</string>
     <string name="select_distance_route_will_recalc">選取要重新計算路徑的距離。</string>
     <string name="recalculate_route_in_deviation">發生偏離時重新計算路線</string>
-    <string name="shared_string_min">分鐘</string>
+    <string name="shared_string_min">最小</string>
     <string name="n_items_of_z">%2$s 的 %1$s</string>
     <string name="shared_string_terrain">地形</string>
     <string name="hillshade_description">地形陰影地圖用黑色的陰影來顯示坡度、山峰與低地。</string>
@@ -4084,7 +4084,7 @@
     <string name="display_route_tracks">顯示軌跡</string>
     <string name="delete_history_items">刪除 %1$s 歷史紀錄項目嗎？</string>
     <string name="quick_action_toggle_preference">用於變更偏好設定的開關。</string>
-    <string name="delete_history_items_descr">刪除選定的歷史紀錄項目嗎？</string>
+    <string name="delete_history_items_descr">選定的項目將會從清單中移除。</string>
     <string name="files_remaining">檔案剩餘：%1$s %2$s</string>
     <string name="copying_file">正在複製檔案 %1$s……</string>
     <string name="from_to_with_params">從 %1$s 到 %2$s</string>

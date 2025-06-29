@@ -183,4 +183,5 @@
     <string name="by_distance">Κατά απόσταση</string>
     <string name="by_name">Κατά όνομα</string>
     <string name="turn_off_all">Απενεργοποίηση όλων</string>
+    <string name="location_source_summary">Από προεπιλογή, το OsmAnd το οποίο εγκαθίσταται από το Google Play χρησιμοποιεί Υπηρεσίες Google Play για να προσδιορίσει την τοποθεσία.\n\nΕάν λαμβάνετε πληροφορίες για ανακριβή τοποθεσία ή χρησιμοποιείται συσκευή χωρίς Υπηρεσίες Google Play, δοκιμάστε να αλλάξετε σε Android API</string>
 </resources>

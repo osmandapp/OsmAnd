@@ -63,7 +63,7 @@ public class MergeAssetFilesVersionAlgorithm {
 						// If content has not been changed, we can set version from assets
 						boolean updated = destFile.setLastModified(versionTime);
 					}
-				} catch (IOException e) {
+				} catch (Exception e) {
 					LOG.error("Error while checking files content equality: " + e.getMessage());
 				}
 			}

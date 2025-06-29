@@ -585,7 +585,7 @@ public class ResourceManager {
 					if (mapReader.getVersion() != BINARY_MAP_VERSION) {
 						mapReader = null;
 					}
-				} catch (IOException e) {
+				} catch (Exception e) {
 					log.error(String.format("File %s could not be read", fileName), e);
 				}
 				boolean wikiMap = WikipediaPlugin.containsWikipediaExtension(fileName);
@@ -605,7 +605,7 @@ public class ResourceManager {
 						if (!toUse) {
 							try {
 								mapReader.close();
-							} catch (IOException e) {
+							} catch (Exception e) {
 								log.error(e.getMessage(), e);
 							}
 							continue;

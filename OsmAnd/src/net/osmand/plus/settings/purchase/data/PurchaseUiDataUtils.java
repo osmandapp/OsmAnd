@@ -26,6 +26,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,21 +46,21 @@ public class PurchaseUiDataUtils {
 			expireTime = ((InAppSubscription) purchase).getExpireTime();
 			subscriptionState = ((InAppSubscription) purchase).getState();
 		}
-		return createUiData(app, purchase, purchase.getPurchaseTime(), expireTime,
-				app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()), subscriptionState);
+		return createUiData(app, purchase, null, purchase.getPurchaseTime(),
+				expireTime, app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()), subscriptionState);
 	}
 
 	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app,
 											  @NonNull InAppPurchase purchase,
-											  long purchaseTime, long expireTime,
+											  @Nullable String name, long purchaseTime, long expireTime,
 											  @NonNull PurchaseOrigin origin,
 											  @Nullable SubscriptionState subscriptionState) {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 		InAppPurchases purchases = purchaseHelper.getInAppPurchases();
 
 		String sku = purchase.getSku();
-		String title = app.getString(R.string.shared_string_undefined);
+		String title = name;
 		int iconId;
 		String purchaseType;
 		boolean liveUpdateSubscription = purchases.isLiveUpdates(purchase);
@@ -71,13 +72,13 @@ public class PurchaseUiDataUtils {
 		boolean isSubscription = purchase instanceof InAppSubscription;
 
 		if (purchases.isOsmAndPro(purchase)) {
-			title = app.getString(R.string.osmand_pro);
+			title = Algorithms.isEmpty(title) ? app.getString(R.string.osmand_pro) : title;
 			iconId = R.drawable.ic_action_osmand_pro_logo_colored;
 		} else if (purchases.isLiveUpdates(purchase)) {
-			title = app.getString(R.string.osm_live);
+			title = Algorithms.isEmpty(title) ? app.getString(R.string.osm_live) : title;
 			iconId = R.drawable.ic_action_subscription_osmand_live;
 		} else if (purchases.isMaps(purchase) || purchases.isFullVersion(purchase)) {
-			title = app.getString(R.string.maps_plus);
+			title = Algorithms.isEmpty(title) ? app.getString(R.string.maps_plus) : title;
 			iconId = R.drawable.ic_action_osmand_maps_plus;
 		} else {
 			return null;
