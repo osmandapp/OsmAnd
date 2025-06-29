@@ -3982,8 +3982,8 @@
     <string name="shared_string_travelbooks">Libros de viajes</string>
     <string name="display_route_tracks">Mostrar trazas</string>
     <string name="quick_action_toggle_preference">Un botón que cambia las preferencias.</string>
-    <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial?</string>
-    <string name="delete_history_items">¿Borrar %1$s elementos del historial?</string>
+    <string name="delete_history_items_descr">Las entradas marcadas se borrarán de la lista.</string>
+    <string name="delete_history_items">¿Borrar %1$s elemento(s) del historial?</string>
     <string name="copying_file">Copiando archivo %1$s…</string>
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="progress_complete">%1$s completo</string>
@@ -4333,7 +4333,7 @@
     <string name="without_profiles_changing">Sin cambios de perfiles</string>
     <string name="shared_string_only_missing">Solo faltantes</string>
     <string name="download_tiles">Descargar teselas</string>
-    <string name="attach_roads_descr">Aproxima la traza a los caminos obteniendo información detallada de la ruta con indicaciones de giro y atributos de los caminos.</string>
+    <string name="attach_roads_descr">Adjunta la traza a los caminos obteniendo información detallada de la ruta, incluyendo indicaciones de giro y atributos de los caminos.</string>
     <string name="attach_roads_warning">Solo se puede adjuntar al camino una traza grabada.</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
@@ -5464,7 +5464,7 @@
     <string name="unit_of_volume">Unidad de volumen</string>
     <string name="record_obd_data">Grabar estadísticas del vehículo</string>
     <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registra los datos vitales del vehículo usando el protocolo OBD-II. Supervisá valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registrá datos esenciales del vehículo mediante el protocolo OBD-II. Supervisá métricas clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
     <string name="vehicle_metrics_obd_ii">Estadísticas del vehículo (OBD-II)</string>
     <string name="shared_string_volume">Volumen</string>
     <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
