@@ -1327,7 +1327,7 @@
     <string name="moving_time">Vreme u pokretu</string>
     <string name="ascent_descent">Uspon/Spust</string>
     <string name="of">%1$d od %2$d</string>
-    <string name="average">Prosečno</string>
+    <string name="average">Prosečna</string>
     <string name="distance">Rastojanje</string>
     <string name="duration">Trajanje</string>
     <string name="int_hour">h</string>
@@ -5539,7 +5539,7 @@
     <string name="obd_device_forget_sensor">Zaboravi skener</string>
     <string name="obd_device_forget_sensor_description">Skener će biti uklonjen s liste. Možeš ponovo upariti ovaj skener u bilo kojem trenutku.</string>
     <string name="connect_obd_instructions_step">1. Spoj skener na OBD-II priključak vozila.\n\n2. Uključi motor vozila\n\n3. Omogući Bluetooth na svom uređaju\n\n4. Dodirni \'%1$s\' i odaberi svoj skener s liste.</string>
-    <string name="route_guidance_desc">Omogućuje navođenje rutom u stvarnom vremenu, uključujući udaljenost do sledećeg skretanja, naziv ulice, trenutni naziv ulice i informacije o traci. Widžeti su aktivni tokom navigacije.</string>
+    <string name="route_guidance_desc">Pruža informacije o putu u realnom vremenu, uključujući udaljenost do sledećeg skretanja, ime puteva, sadašnji naziv ulice i trake. Dodaci su aktivni tokom navigacije.</string>
     <string name="obd_nothing_found_description">Proveriti sledeće:\n – Proveri je li Bluetooth uključen\n – Motor vozila radi\n – Proveri je li uređaj u dometu skenera.</string>
     <string name="obd_bluetooth_off_description">Uključite Bluetooth da biste pronašli i povezali skenere.</string>
     <string name="obd_searching_text_description">Držite uređaj blizu skenera. Uverite se da motor vozila radi.</string>
@@ -5586,14 +5586,14 @@
     <string name="obd_fuel_consumption_rate_sensor_type">Koristite izabrane jedinice u imenu.</string>
     <string name="obd_fuel_consumption_desc">Prikazuje stopu potrošnje goriva od strane motora, izračunato na osnovu preostalog goriva, veličine rezervoara i udaljenosti pokrivene kao što je određeno GPS-om.</string>
     <string name="obd_fuel_consumption">Potrošnja goriva</string>
-    <string name="reset_average_value">Resetuj prosečnu vrednost</string>
+    <string name="reset_average_value">Reset srednje vrednosti</string>
     <string name="shared_string_instant">Instant</string>
     <string name="current_temperature">Trenutna temperatura</string>
     <string name="show_minor_turns">Prikaz na manjim raskrsnicama kada se krećeš pravo</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Pratite vitalne podatke o vozilu koristeći OBD-II protokol. Pratite ključne metrike kao što su brzina, broj obrtaja motora, potrošnja goriva i još mnogo toga.</string>
     <string name="vehicle_metrics_obd_ii">Metrika vozila (OBD-II)</string>
-    <string name="shared_string_hour">Čas</string>
-    <string name="shared_string_volume">Jačina</string>
+    <string name="shared_string_hour">Sat</string>
+    <string name="shared_string_volume">Volumen</string>
     <string name="obd_throttle_position_desc">Prikazuje ugao gasa ploče u kućištu gasa.</string>
     <string name="obd_engine_oil_temperature">Temperatura motornog ulja</string>
     <string name="average_temperature">Prosečna temperatura</string>
