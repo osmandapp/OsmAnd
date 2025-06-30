@@ -34,6 +34,7 @@ public class RoutePlannerFrontEnd {
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
+	protected final int MAX_SQR_DIST_TO_PROJ = 5000 * 5000; // meters
 	public static boolean CALCULATE_MISSING_MAPS = true;
 	static boolean TRACE_ROUTING = false;
 	private boolean useSmartRouteRecalculation = true;
@@ -163,7 +164,7 @@ public class RoutePlannerFrontEnd {
 						road.preciseY = (int) pr.y;
 					}
 				}
-				if (road != null) {
+				if (road != null && road.distToProj < MAX_SQR_DIST_TO_PROJ) {
 					if (!transportStop) {
 						float prio = ctx.getRouter().defineDestinationPriority(road.road);
 						if (prio > 0) {
