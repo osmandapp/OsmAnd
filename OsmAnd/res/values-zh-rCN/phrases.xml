@@ -3302,5 +3302,23 @@
     <string name="poi_us_maps_recreation_area_activity_beachcombing">海滩搜集</string>
     <string name="poi_us_maps_recreation_area_activity_bicycling">单车骑行</string>
     <string name="poi_us_maps_recreation_area_activity_big_game_hunting">大型狩猎</string>
-    <string name="poi_us_maps_recreation_area_activity_boating_motorized">机动船只活动</string>
+    <string name="poi_us_maps_recreation_area_activity_boating_motorized">机动船只航行</string>
+    <string name="poi_us_maps_recreation_area_activity_boating_non_motorized">非机动船只航行</string>
+    <string name="poi_us_maps_recreation_area_activity_campground_camping">露营地露营</string>
+    <string name="poi_us_maps_recreation_area_activity_camping_and_cabins">露营和小木屋</string>
+    <string name="poi_us_maps_recreation_area_activity_caving">洞穴探险</string>
+    <string name="poi_us_maps_recreation_area_activity_climbing">攀爬</string>
+    <string name="poi_us_maps_recreation_area_activity_day_hiking">日间徒步</string>
+    <string name="poi_us_maps_recreation_area_activity_disc_golf">飞盘高尔夫</string>
+    <string name="poi_us_maps_recreation_area_activity_dispersed_camping">分散露营</string>
+    <string name="poi_us_maps_recreation_area_activity_dog_sledding">狗拉雪橇</string>
+    <string name="poi_us_maps_recreation_area_activity_estuary_fishing">河口捕鱼</string>
+    <string name="poi_us_maps_recreation_area_activity_fishing">捕鱼</string>
+    <string name="poi_us_maps_recreation_area_activity_fossil_collecting">化石采集</string>
+    <string name="poi_us_maps_recreation_area_activity_game_bird_waterfowl">水禽类猎鸟</string>
+    <string name="poi_us_maps_recreation_area_activity_geocaching_and_letterboxing">地理藏宝与信箱寻宝</string>
+    <string name="poi_us_maps_recreation_area_activity_gold_panning">淘金</string>
+    <string name="poi_us_maps_recreation_area_activity_group_camping">团体露营</string>
+    <string name="poi_us_maps_recreation_area_activity_group_picnicking">团体野餐</string>
+    <string name="poi_us_maps_recreation_area_activity_hang_gliding">滑翔翼</string>
 </resources>
