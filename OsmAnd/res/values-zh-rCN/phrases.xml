@@ -3300,5 +3300,7 @@
     <string name="poi_padus_public_access_closed">通行：已关闭</string>
     <string name="poi_us_maps_recreation_area_activity_backpacking">背包旅行</string>
     <string name="poi_us_maps_recreation_area_activity_beachcombing">海滩搜集</string>
-    <string name="poi_us_maps_recreation_area_activity_bicycling">骑自行车</string>
+    <string name="poi_us_maps_recreation_area_activity_bicycling">单车骑行</string>
+    <string name="poi_us_maps_recreation_area_activity_big_game_hunting">大型狩猎</string>
+    <string name="poi_us_maps_recreation_area_activity_boating_motorized">机动船只活动</string>
 </resources>
