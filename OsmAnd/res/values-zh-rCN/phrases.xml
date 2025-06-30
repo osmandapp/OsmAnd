@@ -3281,7 +3281,7 @@
     <string name="poi_roundtrip_yes">往返：是</string>
     <string name="poi_roundtrip_no">往返：否</string>
     <string name="poi_border_zone">边境地区</string>
-    <string name="poi_hang_gliding">滑翔翼</string>
+    <string name="poi_hang_gliding">滑翔翼/悬挂式滑翔</string>
     <string name="poi_live_music_yes">是</string>
     <string name="poi_padus_area">美国国家保护地数据库土地范围</string>
     <string name="poi_padus_category_proclamation">类别： 公告</string>
@@ -3320,5 +3320,8 @@
     <string name="poi_us_maps_recreation_area_activity_gold_panning">淘金</string>
     <string name="poi_us_maps_recreation_area_activity_group_camping">团体露营</string>
     <string name="poi_us_maps_recreation_area_activity_group_picnicking">团体野餐</string>
-    <string name="poi_us_maps_recreation_area_activity_hang_gliding">滑翔翼</string>
+    <string name="poi_us_maps_recreation_area_activity_hang_gliding">滑翔翼/悬挂式滑翔</string>
+    <string name="poi_free_flying_hanggliding_yes">滑翔翼/悬挂式滑翔</string>
+    <string name="poi_free_flying_hanggliding_no">滑翔翼/悬挂式滑翔：否</string>
+    <string name="poi_route_activity_type_hang_gliding">滑翔翼/悬挂式滑翔</string>
 </resources>
