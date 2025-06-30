@@ -110,7 +110,7 @@
     <string name="accessibility_mode">无障碍模式</string>
     <string name="accessibility_mode_descr">为残障用户打开功能。</string>
     <string name="shared_string_on">开</string>
-    <string name="shared_string_off">关</string>
+    <string name="shared_string_off">关闭</string>
     <string name="accessibility_default">根据 Android 系统设置</string>
     <string name="backToMenu">回到菜单</string>
     <string name="zoomOut">缩小</string>
@@ -1056,7 +1056,7 @@
     <string name="shared_string_dismiss">放弃</string>
     <string name="shared_string_do_not_use">不使用</string>
     <string name="shared_string_enable">启用</string>
-    <string name="shared_string_disable">禁用</string>
+    <string name="shared_string_disable">停用</string>
     <string name="shared_string_enabled">已启用</string>
     <string name="shared_string_disabled">已禁用</string>
     <string name="shared_string_selected">已选择</string>
@@ -1698,7 +1698,7 @@
     <string name="plugin_nautical_descr">通过航行路线、导航灯、航海危险区、限制航行或停靠区等信息丰富地图内容。在使用前，请下载相应的航海地图，并在 “配置地图 ”下启用 “航海地图 ”样式。 \n \n了解更多 %1$s。</string>
     <string name="plugin_ski_descr">专为冬季运动场地导航而设计： 查看滑雪道、滑雪缆车和越野滑雪道，并用彩色线条标示难度等级。使用时，请启用此插件，并进入 \"配置地图\"，选择 \"冬季和滑雪 \"地图样式。</string>
     <string name="index_tours">旅游</string>
-    <string name="shared_string_all">全部</string>
+    <string name="shared_string_all">所有</string>
     <string name="shared_string_waypoints">路径点</string>
     <string name="download_additional_maps">要下载缺少的地图 %1$s (%2$d MB) 吗？</string>
     <string name="rendering_value_browse_map_name">浏览地图</string>
@@ -2403,7 +2403,7 @@
     <string name="coordinates_format">坐标格式</string>
     <string name="use_system_keyboard">使用系统键盘</string>
     <string name="use_location">使用位置</string>
-    <string name="shared_string_sort">排序</string>
+    <string name="shared_string_sort">分类</string>
     <string name="coordinate_input">坐标输入</string>
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
