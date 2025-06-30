@@ -3044,7 +3044,7 @@
     <string name="save_favorite_default_appearance">Áp dụng các thay đổi cho các điểm hiện tại trong thư mục hay chỉ những điểm mới?</string>
     <string name="original_color_description">Mỗi điểm sẽ có màu riêng.</string>
     <string name="original_icon_description">Mỗi điểm sẽ có biểu tượng riêng.</string>
-    <string name="no_places_available">Không nơi nào có sẵn</string>
+    <string name="no_places_available">Không địa điểm nào có sẵn</string>
     <string name="show_mercator_grids">Dùng Mercator thay cho WGS84 hoặc UTM</string>
     <string name="show_mercator_grids_description">Hiện lưới theo km Mercator thay cho WGS84 hoặc UTM</string>
     <string name="show_dms_grids">Dùng DMS thay cho độ</string>
@@ -4277,5 +4277,18 @@
     <string name="notes_by_date">Ghi chú A/V theo ngày</string>
     <string name="by_date">Theo ngày</string>
     <string name="by_type">Theo loại</string>
-    <string name="looking_for_tracks_with_waypoints">Tìm những cung đường với điểm dừng</string>
+    <string name="looking_for_tracks_with_waypoints">Đang tìm những cung đường với điểm dừng</string>
+    <string name="shared_string_more_without_dots">Thêm</string>
+    <string name="appearance_on_the_map">Cách hiển thị trên bản đồ</string>
+    <string name="add_track_to_markers_descr">Chọn một cung đường để thêm các điểm dừng của nó vào điểm đánh dấu.</string>
+    <string name="add_favourites_group_to_markers_descr">Chọn một danh mục Yêu thích để thêm vào điểm đánh dấu.</string>
+    <string name="favourites_group">Danh mục Yêu thích</string>
+    <string name="add_group_descr">Nhập các nhóm từ Yêu thích hoặc điểm dừng GPX.</string>
+    <string name="empty_state_markers_active">Tạo điểm đánh dấu bản đồ!</string>
+    <string name="empty_state_markers_active_desc">Chạm hoặc nhấn giữ \'Địa điểm\', sau đó chạm nút cờ điểm đánh dấu.</string>
+    <string name="recent_places">Địa điểm gần đây</string>
+    <string name="wiki_around">Địa điểm nổi tiếng ở gần</string>
+    <string name="first_usage_greeting">Nhận chỉ dẫn hướng đi và khám phá các địa điểm mới mà không cần kết nối mạng</string>
+    <string name="mapillary_descr">Hình ảnh đường phố trực tuyến cho tất cả mọi người. Khám phá các địa điểm, cộng tác, chụp lại thế giới.</string>
+    <string name="osmand_plus_extended_description_part2">Điều hướng\nHoạt động trực tuyến (nhanh) hoặc ngoại tuyến (không mất phí chuyển vùng khi ra nước ngoài)\n\nHướng dẫn bằng giọng nói từng chặng (hỗ trợ giọng nói ghi âm sẵn và giọng tổng hợp tự động)\n\nTùy chọn hướng đi theo làn đường, hiển thị tên đường, và ước tính thời gian đến nơi\n\nHỗ trợ các điểm trung gian trong hành trình của bạn\n\nTự động tính lại lộ trình khi bạn đi chệch đường\n\nTìm kiếm địa điểm theo địa chỉ, theo loại hình (ví dụ: nhà hàng, khách sạn, trạm xăng, bảo tàng), hoặc theo tọa độ địa lý</string>
 </resources>
