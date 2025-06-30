@@ -3287,4 +3287,18 @@
     <string name="poi_padus_category_proclamation">类别： 公告</string>
     <string name="poi_padus_category_fee">分类：收费</string>
     <string name="poi_padus_category_designation">分类：指定</string>
+    <string name="poi_padus_category_easement">分类：地役权</string>
+    <string name="poi_padus_local_designation">地方指定</string>
+    <string name="poi_padus_local_manager">地方管理员</string>
+    <string name="poi_padus_owner_fullname">所有者</string>
+    <string name="poi_padus_manager_type_fullname">管理者类型</string>
+    <string name="poi_padus_manager_fullname">管理者</string>
+    <string name="poi_padus_designation_type_fullname">指定类型</string>
+    <string name="poi_padus_public_access_open">通行：开放</string>
+    <string name="poi_padus_public_access_restricted">通行：受限制</string>
+    <string name="poi_padus_public_access_unknown">通行：未知</string>
+    <string name="poi_padus_public_access_closed">通行：已关闭</string>
+    <string name="poi_us_maps_recreation_area_activity_backpacking">背包旅行</string>
+    <string name="poi_us_maps_recreation_area_activity_beachcombing">海滩搜集</string>
+    <string name="poi_us_maps_recreation_area_activity_bicycling">骑自行车</string>
 </resources>
