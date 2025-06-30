@@ -4072,7 +4072,7 @@
     <string name="shared_string_next_sunset">Propera posta de sol</string>
     <string name="shared_string_next_sunrise">Propera alba</string>
     <string name="shared_string_time_left">Temps restant</string>
-    <string name="shared_string_sunset">Orto</string>
+    <string name="shared_string_sunset">Posta de sol</string>
     <string name="shared_string_sunrise">Sol ixent</string>
     <string name="map_widget_group_sunrise_sunset_desc">Els ginys mostren informació de la propera posta de sol i alba.</string>
     <string name="map_widget_group_sunrise_sunset">Alba, posta de sol</string>
