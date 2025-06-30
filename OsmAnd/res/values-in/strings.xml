@@ -5833,14 +5833,14 @@
     <string name="obd_fuel_type_unknown">Jenis Bahan Bakar Tidak Diketahui</string>
     <string name="shared_string_obd">OBD</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hidrogen hibrida</string>
-    <string name="obd_widget_group">Metrik kendaraan</string>
+    <string name="obd_widget_group">Metrik Kendaraan</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_rpm_desc">Menampilkan tachometer RPM kendaraan melalui sensor OBD</string>
     <string name="obd_air_intake_temp">Suhu masukan</string>
     <string name="obd_battery_voltage">Voltase baterai</string>
     <string name="obd_engine_coolant_temp">Suhu pendingin</string>
-    <string name="obd_ambient_air_temp">Suhu sekitar</string>
-    <string name="obd_fuel_consumption_rate_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan berdasarkan OBD lokasi</string>
+    <string name="obd_ambient_air_temp">Suhu lingkungan</string>
+    <string name="obd_fuel_consumption_rate_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan pada OBD dan lokasi</string>
     <string name="y_axis_description">Pilih sampai dengan dua opsi untuk axis Y.</string>
     <string name="energy_avg_info">Statistik energi (rata-rata 1 / 5 / 15 menit)</string>
     <string name="help_article_map_tracks_name">Trek</string>
@@ -5903,7 +5903,7 @@
     <string name="screen_is_unlocked">Layar sentuh dibuka.</string>
     <string name="screen_is_locked_by_action_button">Layar sentuh dikunci. Ketuk pada tombol untuk membuka.</string>
     <string name="background_opacity">Opasitas latar belakang</string>
-    <string name="obd_fuel_level">Efisiensi bahan bakar (%)</string>
+    <string name="obd_fuel_level">Efisiensi Bahan Bakar (%)</string>
     <string name="obd_plugin_name">Metrik kendaraan</string>
     <string name="obd_fuel_consumption_rate">Tingkat konsumsi bahan bakar</string>
     <string name="obd_fuel_type_desc">Menampilkan jenis bahan bakar kendaraan melalui sensor OBD</string>
