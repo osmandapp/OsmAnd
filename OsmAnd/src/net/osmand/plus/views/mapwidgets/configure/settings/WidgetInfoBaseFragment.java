@@ -414,7 +414,7 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 			fragment.setTargetFragment(target, 0);
 
 			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, tag)
+					.replace(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(tag)
 					.commitAllowingStateLoss();
 		}

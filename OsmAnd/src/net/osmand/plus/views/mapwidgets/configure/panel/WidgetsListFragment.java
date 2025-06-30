@@ -135,6 +135,7 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 		if (fragment instanceof ConfigureWidgetsFragment) {
 			((ConfigureWidgetsFragment) fragment).setSelectedFragment(this);
 		}
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
