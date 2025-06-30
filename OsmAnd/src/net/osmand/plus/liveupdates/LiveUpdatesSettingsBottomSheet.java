@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -43,7 +42,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.resources.IncrementalChangesManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -51,7 +49,6 @@ import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -74,9 +71,6 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
 	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm", Locale.US);
-
-	private OsmandApplication app;
-	private OsmandSettings settings;
 
 	private BaseBottomSheetItem itemTitle;
 	private BaseBottomSheetItem itemUpdateTimeInfo;

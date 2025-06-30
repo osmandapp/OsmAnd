@@ -5,7 +5,6 @@ import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.SLOPE;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,7 +32,6 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.card.color.palette.gradient.GradientUiHelper;
 import net.osmand.plus.charts.ChartUtils;
@@ -115,8 +113,8 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_terrain, container, false);
-		profileColor = settings.getApplicationMode().getProfileColor(nightMode);
+		View root = inflate(R.layout.fragment_terrain, container, false);
+		profileColor = getAppMode().getProfileColor(nightMode);
 
 		showHideTopShadow(root);
 
@@ -152,18 +150,15 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		switchCompat.setOnClickListener(this);
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
 
-		modifyButton.setOnClickListener(view -> {
-			MapActivity activity = getMapActivity();
-			if (activity != null) {
-				if (isColoringTypeAvailable()) {
-					activity.getDashboard().hideDashboard();
-					FragmentManager manager = activity.getSupportFragmentManager();
-					ModifyGradientFragment.showInstance(manager, srtmPlugin.getTerrainMode().getType());
-				} else {
-					ChoosePlanFragment.showInstance(activity, OsmAndFeature.ADVANCED_WIDGETS);
-				}
+		modifyButton.setOnClickListener(view -> callMapActivity(mapActivity -> {
+			if (isColoringTypeAvailable()) {
+				mapActivity.getDashboard().hideDashboard();
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				ModifyGradientFragment.showInstance(manager, srtmPlugin.getTerrainMode().getType());
+			} else {
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.ADVANCED_WIDGETS);
 			}
-		});
+		}));
 
 		setupColorSchemeCard(root);
 		setupCacheSizeCard();
@@ -244,20 +239,15 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		View visibilityBtn = root.findViewById(R.id.visibility_button);
 		View zoomLevelsBtn = root.findViewById(R.id.zoom_levels_button);
 
-		visibilityBtn.setOnClickListener(view -> {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				mapActivity.getDashboard().hideDashboard();
-				TerrainVisibilityFragment.showInstance(mapActivity.getSupportFragmentManager());
-			}
-		});
-		zoomLevelsBtn.setOnClickListener(view -> {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				mapActivity.getDashboard().hideDashboard();
-				TerrainZoomLevelsController.showDialog(mapActivity, srtmPlugin);
-			}
-		});
+		visibilityBtn.setOnClickListener(v -> callMapActivity(mapActivity -> {
+			mapActivity.getDashboard().hideDashboard();
+			TerrainVisibilityFragment.showInstance(mapActivity.getSupportFragmentManager());
+		}));
+
+		zoomLevelsBtn.setOnClickListener(v -> callMapActivity(mapActivity -> {
+			mapActivity.getDashboard().hideDashboard();
+			TerrainZoomLevelsController.showDialog(mapActivity, srtmPlugin);
+		}));
 	}
 
 	private void setupCacheSizeCard() {
@@ -315,13 +305,9 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 			} else if (mode.getType() == HEIGHT) {
 				descriptionTv.setText(R.string.height_legend_description);
 			}
-			downloadMapsCard.updateDownloadSection(getMapActivity());
+			callMapActivity(downloadMapsCard::updateDownloadSection);
 		} else {
-			iconIv.setImageDrawable(uiUtilities.getIcon(
-					R.drawable.ic_action_hillshade_dark,
-					nightMode
-							? R.color.icon_color_secondary_dark
-							: R.color.icon_color_secondary_light));
+			iconIv.setImageDrawable(getIcon(R.drawable.ic_action_hillshade_dark, ColorUtilities.getSecondaryIconColorId(nightMode)));
 			stateTv.setText(R.string.shared_string_disabled);
 		}
 		AndroidUiHelper.updateVisibility(proIv, !isColoringTypeAvailable());
@@ -389,15 +375,12 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 	}
 
 	private void updateLayers() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			srtmPlugin.updateLayers(mapActivity, mapActivity);
-		}
+		callMapActivity(srtmPlugin::updateLayers);
 	}
 
 	@Override
 	public void onUpdatedIndexesList() {
-		downloadMapsCard.updateDownloadSection(getMapActivity());
+		callMapActivity(downloadMapsCard::updateDownloadSection);
 	}
 
 	@Override
@@ -407,22 +390,17 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 
 	@Override
 	public void downloadHasFinished() {
-		downloadMapsCard.updateDownloadSection(getMapActivity());
-		MapActivity mapActivity = getMapActivity();
-		SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
-		if (mapActivity != null && plugin != null && plugin.isTerrainLayerEnabled()) {
-			plugin.registerLayers(mapActivity, mapActivity);
-		}
+		callMapActivity(mapActivity -> {
+			downloadMapsCard.updateDownloadSection(mapActivity);
+			SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+			if (plugin != null && plugin.isTerrainLayerEnabled()) {
+				plugin.registerLayers(mapActivity, mapActivity);
+			}
+		});
 	}
 
 	private boolean isColoringTypeAvailable() {
 		return InAppPurchaseUtils.isColoringTypeAvailable(app);
-	}
-
-	@Nullable
-	@Override
-	public MapActivity getMapActivity() {
-		return getNotDestroyedMapActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

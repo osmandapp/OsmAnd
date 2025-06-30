@@ -75,14 +75,14 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 
 	default void callActivity(@NonNull OnResultCallback<FragmentActivity> callback) {
 		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			callback.onResult(activity);
 		}
 	}
 
 	default void callMapActivity(@NonNull OnResultCallback<MapActivity> callback) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			callback.onResult(mapActivity);
 		}
 	}
@@ -91,15 +91,6 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 	default MapActivity getMapActivity() {
 		FragmentActivity activity = getActivity();
 		if (activity instanceof MapActivity mapActivity) {
-			return mapActivity;
-		}
-		return null;
-	}
-
-	@Nullable
-	default MapActivity getNotDestroyedMapActivity() {
-		MapActivity mapActivity = getMapActivity();
-		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			return mapActivity;
 		}
 		return null;

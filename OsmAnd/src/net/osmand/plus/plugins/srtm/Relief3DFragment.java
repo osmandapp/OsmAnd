@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +23,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 public class Relief3DFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents, MapOptionSliderListener {
@@ -62,7 +62,7 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_relief_3d, container, false);
+		View root = inflate(R.layout.fragment_relief_3d, container, false);
 		profileColor = settings.getApplicationMode().getProfileColor(nightMode);
 		showHideTopShadow(root);
 
@@ -94,13 +94,10 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 	private void setupContentCard(@NonNull View root) {
 		downloadDescriptionTv.setText(R.string.relief_3d_download_description);
 		View verticalExaggerationBtn = root.findViewById(R.id.vertical_exaggeration_button);
-		verticalExaggerationBtn.setOnClickListener(view -> {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				mapActivity.getDashboard().hideDashboard();
-				Relief3DExaggerationFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
-			}
-		});
+		verticalExaggerationBtn.setOnClickListener(view -> callMapActivity(mapActivity -> {
+			mapActivity.getDashboard().hideDashboard();
+			Relief3DExaggerationFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+		}));
 	}
 
 	private void showHideTopShadow(@NonNull View view) {
@@ -118,15 +115,11 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 
 	private void updateUiMode() {
 		if (relief3DEnabled) {
-			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_3d_relief, profileColor));
+			iconIv.setImageDrawable(getPaintedIcon(R.drawable.ic_action_3d_relief, profileColor));
 			stateTv.setText(R.string.shared_string_on);
-			downloadMapsCard.updateDownloadSection(getMapActivity());
+			callMapActivity(downloadMapsCard::updateDownloadSection);
 		} else {
-			iconIv.setImageDrawable(uiUtilities.getIcon(
-					R.drawable.ic_action_3d_relief,
-					nightMode
-							? R.color.icon_color_secondary_dark
-							: R.color.icon_color_secondary_light));
+			iconIv.setImageDrawable(getIcon(R.drawable.ic_action_3d_relief, ColorUtilities.getSecondaryIconColorId(nightMode)));
 			stateTv.setText(R.string.shared_string_off);
 		}
 		exaggerationValueTv.setText(MapOptionSliderFragment.getFormattedValue(app, getElevationScaleFactor()));
@@ -142,17 +135,15 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 		relief3DEnabled = !relief3DEnabled;
 		switchCompat.setChecked(relief3DEnabled);
 		settings.ENABLE_3D_MAPS.set(relief3DEnabled);
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		callMapActivity(mapActivity -> {
 			app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(mapActivity));
-		}
-
+		});
 		updateUiMode();
 	}
 
 	@Override
 	public void onUpdatedIndexesList() {
-		downloadMapsCard.updateDownloadSection(getMapActivity());
+		callMapActivity(downloadMapsCard::updateDownloadSection);
 	}
 
 	@Override
@@ -162,20 +153,13 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 
 	@Override
 	public void downloadHasFinished() {
-		downloadMapsCard.updateDownloadSection(getMapActivity());
-		MapActivity mapActivity = getMapActivity();
-		SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
-		if (mapActivity != null && plugin != null && plugin.isTerrainLayerEnabled()) {
-			plugin.registerLayers(mapActivity, mapActivity);
-		}
-	}
-
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			fragmentManager.beginTransaction()
-					.replace(R.id.content, new Relief3DFragment(), TAG)
-					.commitAllowingStateLoss();
-		}
+		callMapActivity(mapActivity -> {
+			downloadMapsCard.updateDownloadSection(mapActivity);
+			SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+			if (plugin != null && plugin.isTerrainLayerEnabled()) {
+				plugin.registerLayers(mapActivity, mapActivity);
+			}
+		});
 	}
 
 	@Override
@@ -185,15 +169,14 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 	}
 
 	protected void refreshMap() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.refreshMap();
-		}
+		callMapActivity(MapActivity::refreshMap);
 	}
 
-	@Nullable
-	@Override
-	public MapActivity getMapActivity() {
-		return getNotDestroyedMapActivity();
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.content, new Relief3DFragment(), TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

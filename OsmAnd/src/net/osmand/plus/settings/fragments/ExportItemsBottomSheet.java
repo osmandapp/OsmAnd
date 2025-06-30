@@ -21,7 +21,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -61,7 +60,6 @@ import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedLi
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
@@ -85,9 +83,6 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String EXPORT_TYPE_KEY = "export_type_key";
 	private static final String EXPORT_MODE_KEY = "export_mode_key";
 
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
-
 	private ExportType type;
 	private final List<Object> allItems = new ArrayList<>();
 	private final List<Object> selectedItems = new ArrayList<>();
@@ -107,8 +102,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			type = ExportType.valueOf(savedInstanceState.getString(EXPORT_TYPE_KEY));
 		}
 		Fragment target = getTargetFragment();
-		if (target instanceof BaseSettingsListFragment) {
-			BaseSettingsListFragment fragment = (BaseSettingsListFragment) target;
+		if (target instanceof BaseSettingsListFragment fragment) {
 			List<?> items = fragment.getItemsForType(type);
 			if (items != null) {
 				allItems.addAll(items);

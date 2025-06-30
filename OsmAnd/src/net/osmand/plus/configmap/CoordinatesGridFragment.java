@@ -11,11 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteElements;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -135,11 +133,10 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 		View button = view.findViewById(R.id.zoom_levels_button);
 		updateZoomLevelsButton();
 		button.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity instanceof MapActivity mapActivity) {
+			callMapActivity(mapActivity -> {
 				mapActivity.getDashboard().hideDashboard();
 				controller.onZoomLevelsClicked(mapActivity);
-			}
+			});
 		});
 		setupSelectableBackground(button);
 	}
@@ -183,17 +180,14 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 			UiUtilities.setupDialogButton(nightMode, btnGet, DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
 		}
 
-		button.setOnClickListener(v -> {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				if (purchased) {
-					mapActivity.getDashboard().hideDashboard();
-					controller.onSelectGridColorClicked(mapActivity);
-				} else {
-					ChoosePlanFragment.showDefaultInstance(mapActivity);
-				}
+		button.setOnClickListener(v -> callMapActivity(mapActivity -> {
+			if (purchased) {
+				mapActivity.getDashboard().hideDashboard();
+				controller.onSelectGridColorClicked(mapActivity);
+			} else {
+				ChoosePlanFragment.showDefaultInstance(mapActivity);
 			}
-		});
+		}));
 
 		setupSelectableBackground(button);
 		AndroidUiHelper.setVisibility(!purchased, btnGet, view.findViewById(R.id.grid_color_summary));
@@ -230,21 +224,12 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 	}
 
 	private void dismiss() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getDashboard().onBackPressed();
-		}
+		callMapActivity(mapActivity -> mapActivity.getDashboard().onBackPressed());
 	}
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		setupGridColorButton();
-	}
-
-	@Nullable
-	@Override
-	public MapActivity getMapActivity() {
-		return getNotDestroyedMapActivity();
 	}
 
 	@Override
