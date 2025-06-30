@@ -59,8 +59,12 @@ public class SensorTextWidget extends SimpleWidget {
 		if (isDeviceConnected()) {
 			super.setImageDrawable(res);
 		} else {
-			setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
-			setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
+			if (shouldShowIcon()) {
+				setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
+				imageView.setVisibility(View.VISIBLE);
+			} else {
+				imageView.setVisibility(View.GONE);
+			}
 		}
 	}
 
@@ -285,5 +289,11 @@ public class SensorTextWidget extends SimpleWidget {
 		} else {
 			return isShowSensorData() ? fieldType.disconnectedIconId : fieldType.disconnectedBatteryIconId;
 		}
+	}
+
+	@DrawableRes
+	@Override
+	public int getMapIconId(boolean nightMode) {
+		return isShowSensorData() ? nightMode ? fieldType.nightIconId : fieldType.dayIconId : nightMode ? fieldType.nightBatteryIconId : fieldType.dayBatteryIconId;
 	}
 }
