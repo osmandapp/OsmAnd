@@ -777,7 +777,7 @@
     <string name="poi_generator_source_nuclear">能源：核能</string>
     <string name="poi_generator_source_diesel">能源：柴油</string>
     <string name="poi_generator_source_solar">能源：太阳能</string>
-    <string name="poi_generator_source_geothermal">能源：地热能</string>
+    <string name="poi_generator_source_geothermal">能量来源：地热能</string>
     <string name="poi_generator_source_wind">能源：风能</string>
     <string name="poi_generator_source_oil">能源：石油</string>
     <string name="poi_emergency_phone">急救电话</string>
