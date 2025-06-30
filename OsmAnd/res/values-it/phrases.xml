@@ -4684,4 +4684,6 @@
     <string name="poi_graphic_design">Ufficio di grafica</string>
     <string name="poi_international_organization">Organizzazione internazionale</string>
     <string name="poi_transport">Ufficio trasporti</string>
+    <string name="poi_bicycle_parking_streetpod">Baccello stradale</string>
+    <string name="poi_motorcycle_type_dualsport">Dual Sport</string>
 </resources>
