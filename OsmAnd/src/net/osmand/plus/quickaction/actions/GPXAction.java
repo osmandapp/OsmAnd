@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,9 +103,9 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
 		unselectGpxFileIfMissing();
-		super.execute(mapActivity);
+		super.execute(mapActivity, event);
 	}
 
 	@Override

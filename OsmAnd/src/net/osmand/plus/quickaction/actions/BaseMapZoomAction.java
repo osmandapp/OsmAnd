@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
@@ -48,7 +49,7 @@ public abstract class BaseMapZoomAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
 		changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
 	}
 

@@ -14,7 +14,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -25,7 +25,7 @@ public class QuickAction {
 
 	public interface QuickActionSelectionListener {
 
-		void onActionSelected(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action);
+		void onActionSelected(@NonNull QuickAction action, @Nullable KeyEvent event, boolean forceUpdate);
 	}
 
 	private static int SEQ;
@@ -183,7 +183,7 @@ public class QuickAction {
 	}
 
 	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
-		execute(mapActivity);
+		onActionSelected(mapActivity, event);
 		return true;
 	}
 
@@ -191,7 +191,12 @@ public class QuickAction {
 		return true;
 	}
 
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void onActionSelected(@NonNull MapActivity mapActivity, @Nullable KeyEvent event){
+		MapQuickActionLayer actionLayer = mapActivity.getMapLayers().getMapQuickActionLayer();
+		actionLayer.onActionSelected(this, event, true);
+	}
+
+	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
 	}
 
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {

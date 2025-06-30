@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -194,7 +195,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		boolean buttonChanged = selectedButton != button;
 		boolean modeEnabled = currentWidgetState != null && currentWidgetState || isWidgetVisible();
 		boolean modeDisabled = currentWidgetState == null || !currentWidgetState || !isWidgetVisible();
-		if (mapActivity == null || modeEnabled == visible && modeDisabled == !visible && !buttonChanged) {
+		if (mapActivity == null || modeEnabled == visible && modeDisabled == !visible && !buttonChanged && !invalidated) {
 			return false;
 		}
 		selectedButton = button;
@@ -218,6 +219,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		}
 		mapActivity.updateStatusBarColor();
 
+		setInvalidated(false);
 		return true;
 	}
 
@@ -381,10 +383,13 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	}
 
 	@Override
-	public void onActionSelected(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action) {
+	public void onActionSelected(@NonNull QuickAction action, @Nullable KeyEvent event, boolean forceUpdate) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			MapButtonsHelper.produceAction(action).execute(mapActivity);
+			MapButtonsHelper.produceAction(action).execute(mapActivity, event);
+			if (forceUpdate) {
+				setInvalidated(true);
+			}
 			setSelectedButton(null);
 		}
 	}

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -47,7 +48,7 @@ public abstract class BaseMapScrollAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
 		MapScrollHelper scrollHelper = mapActivity.getMapScrollHelper();
 		scrollHelper.scrollMapAction(getScrollingDirection());
 	}

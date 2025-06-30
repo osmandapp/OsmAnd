@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.osmedit.quickactions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.ADD_OSM_BUG_ACTION_ID;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,10 +44,10 @@ public class AddOSMBugAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
-			super.execute(mapActivity);
+			super.execute(mapActivity, event);
 		}
 	}
 

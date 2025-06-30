@@ -37,14 +37,8 @@ public class LockScreenAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
-		toggleLockScreen(mapActivity, null);
-	}
-
-	@Override
-	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
 		toggleLockScreen(mapActivity, event);
-		return true;
 	}
 
 	private void toggleLockScreen(@NonNull MapActivity mapActivity, @Nullable KeyEvent event){
