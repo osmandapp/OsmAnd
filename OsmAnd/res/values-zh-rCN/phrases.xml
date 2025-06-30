@@ -564,7 +564,7 @@
     <string name="poi_washing_machine_yes">是；洗衣机</string>
     <string name="poi_shower_filter_yes">是；淋浴过滤器</string>
     <string name="poi_caravans_yes">是；大篷车</string>
-    <string name="poi_power_supply_yes">是；电源供应</string>
+    <string name="poi_power_supply_yes">是；有供电</string>
     <string name="poi_power_supply_no">供电：否</string>
     <string name="poi_ramp_wheelchair_yes">无障碍坡道：有</string>
     <string name="poi_ramp_wheelchair_no">无障碍坡道：无</string>
@@ -817,7 +817,7 @@
     <string name="poi_wetland_fen">碱性泥炭沼泽</string>
     <string name="poi_wetland_swamp">林泽</string>
     <string name="poi_wetland_marsh">草泽</string>
-    <string name="poi_generator_source_hydro">能量来源：水能</string>
+    <string name="poi_generator_source_hydro">能量来源：水力</string>
     <string name="poi_generator_source_gas">能量来源：天然气</string>
     <string name="poi_military_landuse">军事用地</string>
     <string name="poi_seamark_building">海标建筑</string>
@@ -904,7 +904,7 @@
     <string name="poi_drive_in">驶入</string>
     <string name="poi_access_caravan">大篷车通行</string>
     <string name="poi_socket">插座</string>
-    <string name="poi_water_place_access">水域出入口</string>
+    <string name="poi_water_place_access">水上活动接入点</string>
     <string name="poi_dish">菜品</string>
     <string name="poi_operational_status">运行状况</string>
     <string name="poi_climbing_crag_filter">攀岩峭壁</string>
