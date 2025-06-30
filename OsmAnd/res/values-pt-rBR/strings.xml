@@ -6145,4 +6145,7 @@
     <string name="battery">bateria</string>
     <string name="shared_string_switch">Alternar</string>
     <string name="deleting_history">Excluindo o histórico…</string>
+    <string name="ski_route_switch_style_description">Explore as pistas de esqui, os teleféricos e muito mais com o estilo de mapa Inverno e esqui.</string>
+    <string name="show_rasterization_debug_tile">Mostrar informações de rasterização de ladrilhos</string>
+    <string name="show_symbols_bboxes">Mostrar símbolos bboxes</string>
 </resources>
