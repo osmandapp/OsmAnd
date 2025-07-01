@@ -938,16 +938,16 @@
     <string name="favorite_category_select">选择分类</string>
     <string name="default_speed_system_descr">定义速度单位。</string>
     <string name="default_speed_system">速度测量</string>
-    <string name="nm">浬</string>
+    <string name="nm"></string>
     <string name="si_nm">海里</string>
     <string name="si_kmh">千米每小时</string>
-    <string name="si_mph">英里/小时</string>
-    <string name="si_m_s">米/秒</string>
+    <string name="si_mph">英里每小时</string>
+    <string name="si_m_s">米每秒</string>
     <string name="si_min_km">分钟每千米</string>
-    <string name="si_min_m">分钟/英里</string>
+    <string name="si_min_m">分钟每英里</string>
     <string name="si_nm_h">海里每小时（节）</string>
     <string name="nm_h">节</string>
-    <string name="min_mile">分钟每米</string>
+    <string name="min_mile">分/米</string>
     <string name="min_km">分/千米</string>
     <string name="m_s">米/秒</string>
     <string name="shared_string_navigation">导航</string>
@@ -1948,15 +1948,7 @@
 \n - 支持行程中的中间点
 \n - 录制自己的或上传GPX轨迹，并进行跟踪。
 \n</string>
-    <string name="osmand_extended_description_part3">地图
-\n - 显示您周围的POI（兴趣点）。
-\n - 根据你的运动方向（或指南针）调整地图。
-\n - 显示您的位置和您正在寻找的方向。
-\n - 分享你的位置，让你的朋友可以找到你。
-\n - 将您最重要的地方保存在 \"收藏夹 \"中。
-\n - 允许您选择如何在地图上显示名称。用英文、本地或音标拼写
-\n - 显示专门的在线瓦片，卫星视图（来自Bing），不同的覆盖，如旅游/导航GPX轨迹和附加层，可自定义透明度。
-\n</string>
+    <string name="osmand_extended_description_part3">"地图 \n  • 显示您周围的POI（兴趣点）。 \n  • 根据你的运动方向（或指南针）调整地图。 \n  • 显示您的位置和当前朝向 \n  • 分享你的位置，让你的朋友可以找到你。 \n  • 将您最重要的地点保存在 \"收藏夹 \"中。 \n  • 允许您选择如何在地图上显示名称。用英文、本地或音标拼写 \n  • 显示专门的在线瓦片，卫星视图（来自Bing），不同的叠加层（如旅游/导航 GPX 轨迹）以及可自定义透明度的额外图层"</string>
     <string name="osmand_extended_description_part4">滑雪
 \n OsmAnd 滑雪地图插件可以让你看到滑雪道和复杂程度，以及一些额外的信息，比如缆车和其他设施的位置。</string>
     <string name="osmand_extended_description_part5">自行车
@@ -5914,6 +5906,14 @@
     <string name="movies_list">电影列表</string>
     <string name="release_5_1">- 增加了对网页和跨平台购买的支持\n\n - 将温度单位移至常规设置，以方便使用\n\n - 为低功耗蓝牙传感器添加电池电量指示器\n\n - 新的、更直观的在导航中选中点时的用户界面\n\n - 使用新轮廓改进了部件的可见性\n\n - 添加了上坡/下坡分析器\n\n - 已扩展维基百科和维基导游融合，以获取更多兴趣点。</string>
     <string name="shared_string_split_by">分割方式</string>
-    <string name="set_work">设置工作</string>
+    <string name="set_work">设置工作地</string>
     <string name="set_home">设置家</string>
+    <string name="set_intermediate_point">设置中间目的地</string>
+    <string name="set_start_point">设置起点</string>
+    <string name="read_on">在 %1$s 上阅读</string>
+    <string name="unit_of_temperature_description">所选单位将应用于当前配置文件中所有与温度相关的数据。</string>
+    <string name="route_part_of">所属于</string>
+    <string name="prediction_time_description">OsmAnd 中的位置图标会随着接收到的 GPS 数据点进行动画更新（每秒一次）。当用户移动较快或 GPS 信号不稳定时，图标的移动可能会出现轻微的延迟。</string>
+    <string name="prediction_time_advanced_description">调整预测时间以尽量减少延迟。</string>
+    <string name="prediction_time">预测时间</string>
 </resources>
