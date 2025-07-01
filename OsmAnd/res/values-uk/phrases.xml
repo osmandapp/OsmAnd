@@ -5091,5 +5091,23 @@
     <string name="poi_denomination_free_evangelical">Вільна євангельська церква</string>
     <string name="poi_denomination_alevi">Алеві</string>
     <string name="poi_denomination_bektashi">Бекташі</string>
-    <string name="poi_denomination_ibadi">Стегна</string>
+    <string name="poi_denomination_ibadi">Ібаді</string>
+    <string name="poi_denomination_ismaili">Ісмаїлі</string>
+    <string name="poi_denomination_sufi">Суфій</string>
+    <string name="poi_denomination_rinzai">Риндзай</string>
+    <string name="poi_denomination_old_catholic">Старий католик</string>
+    <string name="poi_denomination_shaivism">Шиваїзм</string>
+    <string name="poi_denomination_pkn">Протестантська церква в Нідерландах</string>
+    <string name="poi_denomination_zen">Дзен</string>
+    <string name="poi_denomination_vaishnavism">Вайшнавізм</string>
+    <string name="poi_denomination_hare_krishna">Харе Крішна</string>
+    <string name="poi_denomination_foursquare">Чотирикутник</string>
+    <string name="poi_denomination_conservative">Консервативний</string>
+    <string name="poi_denomination_ashkenazi">Ашкеназі</string>
+    <string name="poi_denomination_hasidic">Хасидський</string>
+    <string name="poi_denomination_lubavitch">Любавич</string>
+    <string name="poi_denomination_theravada">Тхеравада</string>
+    <string name="poi_denomination_tiantai">Тяньтай</string>
+    <string name="poi_denomination_scottish_episcopal">Шотландська єпископальна церква</string>
+    <string name="poi_denomination_polish_catholic">польський католик</string>
 </resources>
