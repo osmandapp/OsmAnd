@@ -5110,5 +5110,17 @@
     <string name="poi_denomination_tiantai">Тяньтай</string>
     <string name="poi_denomination_scottish_episcopal">Шотландська єпископальна церква</string>
     <string name="poi_denomination_polish_catholic">Польський католик</string>
-    <string name="poi_denomination_moravian">Moravian</string>
+    <string name="poi_denomination_moravian">Моравський</string>
+    <string name="poi_denomination_disciples_of_christ">Учні Христа</string>
+    <string name="poi_denomination_charismatic">Харизматичний</string>
+    <string name="poi_denomination_ecumenical">Вселенський</string>
+    <string name="poi_denomination_fsspx">Товариство Святого Пія X</string>
+    <string name="poi_denomination_syriac_orthodox">Сирійська православна церква</string>
+    <string name="poi_denomination_laestadian">Лаестадіан</string>
+    <string name="poi_denomination_philippine_independent">Філіппінський незалежний</string>
+    <string name="poi_denomination_exclusive_brethren">Ексклюзивні брати</string>
+    <string name="poi_denomination_church_of_god_in_christ">Церква Бога у Христі</string>
+    <string name="poi_denomination_czechoslovak_hussite">Чехословацькі гусити</string>
+    <string name="poi_denomination_la_luz_del_mundo">Ла Лус Дель Мундо</string>
+    <string name="poi_denomination_christadelphian">христадельфіянський</string>
 </resources>
