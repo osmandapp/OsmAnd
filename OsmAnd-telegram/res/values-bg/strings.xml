@@ -152,4 +152,5 @@
     <string name="si_min_m">Минути на миля</string>
     <string name="shared_string_minute_short">мин</string>
     <string name="m">м</string>
+    <string name="si_km_m">Километри / метри</string>
 </resources>

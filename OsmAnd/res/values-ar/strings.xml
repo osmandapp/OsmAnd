@@ -4159,7 +4159,7 @@
     <string name="display_route_tracks">عرض المسارات</string>
     <string name="shared_string_travelbooks">كتب السفر</string>
     <string name="display_route_tracks_as_poi">عرض المسارات على هيئة POI</string>
-    <string name="delete_history_items_descr">حذف عناصر السجل المحددة؟</string>
+    <string name="delete_history_items_descr">تتم إزالة الإدخالات المحددة من القائمة.</string>
     <string name="delete_history_items">حذف %1$s عنصر سجل؟</string>
     <string name="quick_action_toggle_preference">كبسة لتبديل الخيارات المفضلة.</string>
     <string name="copying_file">نسخ الملف %1$s …</string>

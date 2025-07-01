@@ -5538,7 +5538,7 @@
     <string name="obd_plugin_name">Målinger af køretøj</string>
     <string name="unknown_bt_device">Ukendt enhed</string>
     <string name="obd_vin">VIN</string>
-    <string name="obd_vin_desc">VIN-kode via OBD</string>
+    <string name="obd_vin_desc">VIN-kode over OBD</string>
     <string name="vehicle_metrics_plugin_settings">Indstillinger for køretøjsparametre</string>
     <string name="reset_average_speed">Nulstil gennemsnitshastighed</string>
     <string name="quick_action_finish_trip_recording_summary">En knap til at gemme GPX-sporet og afslutte optagelse af tur.</string>
@@ -5571,8 +5571,8 @@
     <string name="connect_obd_instructions_step2">Tænd køretøjets motor</string>
     <string name="connect_obd_instructions_step3">Aktivér Bluetooth på din enhed</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="obd_vehicle_info">Info om køretøj</string>
-    <string name="obd_how_to_connect">Sådan får du forbindelse:</string>
+    <string name="obd_vehicle_info">Info om køretøjet</string>
+    <string name="obd_how_to_connect">Sådan skaber du forbindelse:</string>
     <string name="connect_obd_instructions_step1">Tilslut scanneren til køretøjets OBD-II-stik.</string>
     <string name="connect_obd_instructions_step4">Tryk på \'%1$s,\' og vælg din scanner på listen.</string>
     <string name="learn_more_about_obd_sensors">Få mere at vide om sensorer.</string>
@@ -5583,8 +5583,8 @@
     <string name="obd_widget_engine_speed">Motorens omdrejningshastighed</string>
     <string name="obd_nothing_found_description">Tjek venligst følgende:\n – Sørg for, at Bluetooth er slået til\n – Køretøjets motor er i gang\n – Sørg for, at din enhed er inden for scannerens rækkevidde.</string>
     <string name="obd_nothing_found_text">Ingen scannere fundet</string>
-    <string name="obd_bluetooth_off_description">Slå Bluetooth til for at finde og tilslutte scannere.</string>
-    <string name="obd_searching_text_description">Hold din enhed tæt på scanneren. Sørg for, at køretøjets motor er i gang.</string>
+    <string name="obd_bluetooth_off_description">Slå Bluetooth til for at finde og forbinde scannere.</string>
+    <string name="obd_searching_text_description">Hold din enhed tæt på scanneren. Sørg for, at køretøjets motor kører.</string>
     <string name="obd_device_forget_sensor">Glem scanner</string>
     <string name="obd_device_forget_sensor_description">Scanneren fjernes fra listen. Du vil til enhver tid kunne parre denne scanner igen.</string>
     <string name="obd_searching_text">Søger efter scannere</string>
@@ -5636,9 +5636,9 @@
     <string name="show_minor_turns_descr">Der vises vognbaner i alle overkørsler uanset stemmeinstruktioner</string>
     <string name="show_minor_turns">Vis på mindre vejkryds, når man navigerer ligeud</string>
     <string name="remaining_fuel">Resterende brændstof</string>
-    <string name="vehicle_metrics_obd_ii">Køretøjsmålinger (OBD-II)</string>
+    <string name="vehicle_metrics_obd_ii">Køretøjets målinger (OBD-II)</string>
     <string name="shared_string_hour">Time</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spor vigtige køretøjsdata ved hjælp af OBD-II-protokollen. Overvåg nøgletal som hastighed, motoromdrejninger, brændstofforbrug og meget mere.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Følg vigtige køretøjsdata ved hjælp af OBD-II-protokollen. Overvåg nøgletal som hastighed, motoromdrejninger, brændstofforbrug og meget mere.</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s pr. %2$s</string>
     <string name="obd_fuel_pressure_desc">Viser trykket i brændstofsystemet</string>
     <string name="current_temperature">Nuværende temperatur</string>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
@@ -55,7 +56,7 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 		AbstractDevice<?> device = (AbstractDevice<?>) items.get(position);
 		DeviceType deviceType = device.getDeviceType();
 		holder.name.setText(plugin.getDeviceName(device));
-		holder.icon.setImageResource(device.isConnected() ? (nightMode ? deviceType.nightIconId : deviceType.dayIconId) : deviceType.disconnectedIconId);
+		holder.icon.setImageDrawable(device.isConnected() ? getConnectedDeviceIcon(deviceType) : getDisconnectedDeviceIcon(deviceType));
 		int rssi = device.getRssi();
 		Drawable signalLevelIcon;
 		UiUtilities uiUtils = app.getUIUtilities();
@@ -90,6 +91,15 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 				deviceClickListener.onDeviceClicked(device);
 			}
 		});
+	}
+
+	private Drawable getConnectedDeviceIcon(DeviceType deviceType) {
+		int iconId = nightMode ? deviceType.nightIconId : deviceType.dayIconId;
+		return AppCompatResources.getDrawable(app, iconId);
+	}
+
+	private Drawable getDisconnectedDeviceIcon(DeviceType deviceType) {
+		return app.getUIUtilities().getIcon(deviceType.disconnectedIconId, nightMode);
 	}
 
 	@Override

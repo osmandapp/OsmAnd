@@ -347,7 +347,7 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 
 		if (slopeType == SegmentSlopeType.UPHILL) {
-			return getIcon(R.drawable.ic_action_descent_arrow_16, activeColorId);
+			return getIcon(R.drawable.ic_action_ascent_arrow_16, activeColorId);
 		} else if (slopeType == SegmentSlopeType.DOWNHILL) {
 			return getIcon(R.drawable.ic_action_descent_arrow_16, activeColorId);
 		} else {
