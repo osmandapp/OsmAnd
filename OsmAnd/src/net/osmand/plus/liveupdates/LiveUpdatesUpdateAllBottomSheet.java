@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -33,14 +33,6 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 
 	private BaseBottomSheetItem itemTitle;
 	private BaseBottomSheetItem itemDescription;
-
-	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
-			LiveUpdatesUpdateAllBottomSheet fragment = new LiveUpdatesUpdateAllBottomSheet();
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -66,10 +58,10 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, parent, savedInstanceState);
-		((TextViewEx) itemTitle.getView()).setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
+		((TextViewEx) itemTitle.getView()).setTextSize(TypedValue.COMPLEX_UNIT_PX, getDimensionPixelSize(R.dimen.default_list_text_size));
 		TextView textDescription = (TextView) itemDescription.getView();
-		textDescription.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
-		textDescription.setMinHeight(getResources().getDimensionPixelSize(R.dimen.context_menu_sub_info_height));
+		textDescription.setTextSize(TypedValue.COMPLEX_UNIT_PX, getDimensionPixelSize(R.dimen.default_list_text_size));
+		textDescription.setMinHeight(getDimensionPixelSize(R.dimen.context_menu_sub_info_height));
 		return view;
 	}
 
@@ -96,8 +88,11 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 		return R.string.update_now;
 	}
 
-	@Override
-	protected DialogButtonType getRightBottomButtonType() {
-		return DialogButtonType.PRIMARY;
+	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			LiveUpdatesUpdateAllBottomSheet fragment = new LiveUpdatesUpdateAllBottomSheet();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

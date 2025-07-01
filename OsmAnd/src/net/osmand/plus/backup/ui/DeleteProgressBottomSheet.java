@@ -2,7 +2,6 @@ package net.osmand.plus.backup.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,7 +13,6 @@ import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;

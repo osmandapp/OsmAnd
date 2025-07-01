@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -382,15 +381,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment) {
-		try {
-			if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-				SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
-				fragment.setRetainInstance(true);
-				fragment.setTargetFragment(targetFragment, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
+			fragment.setRetainInstance(true);
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.show(fm, TAG);
 		}
 	}
 

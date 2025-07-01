@@ -8,9 +8,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
@@ -101,16 +99,12 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target,
 	                                boolean usedOnMap, @NonNull ApplicationMode currentMode) {
-		try {
-			if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-				SelectCopyAppModeBottomSheet fragment = new SelectCopyAppModeBottomSheet();
-				fragment.setTargetFragment(target, 0);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(currentMode);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG, true)) {
+			SelectCopyAppModeBottomSheet fragment = new SelectCopyAppModeBottomSheet();
+			fragment.setTargetFragment(target, 0);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(currentMode);
+			fragment.show(fm, TAG);
 		}
 	}
 

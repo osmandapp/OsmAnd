@@ -13,6 +13,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem.Builder;
@@ -145,20 +146,16 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String prefKey, Fragment target,
-									@Nullable ApplicationMode appMode, boolean usedOnMap) {
-		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, prefKey);
-				AnnouncementTimeBottomSheet fragment = new AnnouncementTimeBottomSheet();
-				fragment.setArguments(args);
-				fragment.setAppMode(appMode);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	                                @Nullable ApplicationMode appMode, boolean usedOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PREFERENCE_ID, prefKey);
+			AnnouncementTimeBottomSheet fragment = new AnnouncementTimeBottomSheet();
+			fragment.setArguments(args);
+			fragment.setAppMode(appMode);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fm, TAG);
 		}
 	}
 }

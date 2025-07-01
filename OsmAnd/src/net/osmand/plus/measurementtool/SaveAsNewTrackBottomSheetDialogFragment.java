@@ -4,7 +4,6 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.VIEW_TYPE_ADD;
 import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.getFolders;
 
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,7 +21,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -137,7 +135,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					.create();
 			this.items.add(scrollItem);
 
-			items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
+			items.add(new DividerSpaceItem(app, getDimensionPixelSize(R.dimen.dialog_content_margin)));
 		}
 
 		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
@@ -161,7 +159,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					.create();
 			items.add(simplifiedTrackItem[0]);
 
-			items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding)));
+			items.add(new DividerSpaceItem(app, getDimensionPixelSize(R.dimen.content_padding)));
 		}
 
 		BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];

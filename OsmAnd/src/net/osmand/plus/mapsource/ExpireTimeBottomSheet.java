@@ -1,13 +1,11 @@
 package net.osmand.plus.mapsource;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -16,12 +14,11 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -36,15 +33,6 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 	private int expireValue;
 	private TextInputEditText editText;
 
-	public static void showInstance(@NonNull FragmentManager fm,
-									@Nullable Fragment targetFragment,
-									int expireValue) {
-		ExpireTimeBottomSheet bottomSheet = new ExpireTimeBottomSheet();
-		bottomSheet.setTargetFragment(targetFragment, 0);
-		bottomSheet.setExpireValue(expireValue);
-		bottomSheet.show(fm, TAG);
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
@@ -58,9 +46,7 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 		if (expireValue > 0) {
 			editText.setText(String.valueOf(expireValue));
 		}
-		int boxStrokeColor = nightMode
-				? ContextCompat.getColor(app, R.color.icon_color_osmand_dark)
-				: ContextCompat.getColor(app, R.color.icon_color_osmand_light);
+		int boxStrokeColor = ColorUtilities.getOsmandIconColor(app, nightMode);
 		TextInputLayout textInputLayout = inputValueLayout.findViewById(R.id.value_input_layout);
 		textInputLayout.setBoxStrokeColor(boxStrokeColor);
 		SimpleBottomSheetItem editTextItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -111,6 +97,16 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void setExpireValue(int expireValue) {
 		this.expireValue = expireValue;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @Nullable Fragment targetFragment, int expireValue) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ExpireTimeBottomSheet bottomSheet = new ExpireTimeBottomSheet();
+			bottomSheet.setTargetFragment(targetFragment, 0);
+			bottomSheet.setExpireValue(expireValue);
+			bottomSheet.show(fragmentManager, TAG);
+		}
 	}
 
 	public interface OnExpireValueSetListener {

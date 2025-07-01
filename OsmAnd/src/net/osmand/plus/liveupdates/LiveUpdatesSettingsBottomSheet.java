@@ -84,16 +84,6 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	private String fileName;
 	private OnLiveUpdatesForLocalChange onLiveUpdatesForLocalChange;
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, String fileName) {
-		if (!fragmentManager.isStateSaved()) {
-			LiveUpdatesSettingsBottomSheet fragment = new LiveUpdatesSettingsBottomSheet();
-			fragment.usedOnMap = false;
-			fragment.setTargetFragment(target, 0);
-			fragment.fileName = fileName;
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		if (getTargetFragment() instanceof OnLiveUpdatesForLocalChange) {
@@ -584,5 +574,15 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, String fileName) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			LiveUpdatesSettingsBottomSheet fragment = new LiveUpdatesSettingsBottomSheet();
+			fragment.usedOnMap = false;
+			fragment.setTargetFragment(target, 0);
+			fragment.fileName = fileName;
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

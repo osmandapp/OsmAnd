@@ -1,8 +1,5 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
-import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -14,10 +11,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -105,20 +100,17 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
 				.setTitle(getString(R.string.change_default_appearance))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						PointsGroup pointsGroup = group != null ? group.toPointsGroup(app) : null;
-						FragmentManager manager = activity.getSupportFragmentManager();
-						if (pointsGroup != null) {
-							Fragment fragment = getParentFragment();
-							if (fragment instanceof FavoritesTreeFragment) {
-								FavoriteAppearanceFragment.showInstance(manager, pointsGroup, fragment);
-								dismiss();
-							}
+				.setOnClickListener(v -> callActivity(activity -> {
+					PointsGroup pointsGroup = group != null ? group.toPointsGroup(app) : null;
+					FragmentManager manager = activity.getSupportFragmentManager();
+					if (pointsGroup != null) {
+						Fragment fragment = getParentFragment();
+						if (fragment instanceof FavoritesTreeFragment) {
+							FavoriteAppearanceFragment.showInstance(manager, pointsGroup, fragment);
+							dismiss();
 						}
 					}
-				})
+				}))
 				.create();
 		items.add(changeColorItem);
 

@@ -24,6 +24,7 @@ import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.DismissTarget
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.ItemType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
@@ -61,7 +62,7 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			TripRecordingOptionsBottomSheet fragment = new TripRecordingOptionsBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);

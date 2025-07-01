@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -26,7 +25,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
@@ -44,7 +42,6 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 
 	private static final String CURRENT_VALUE = "current_value";
 
-	private ApplicationMode appMode;
 	private CommonPreference<Float> preference;
 
 	private Slider slider;

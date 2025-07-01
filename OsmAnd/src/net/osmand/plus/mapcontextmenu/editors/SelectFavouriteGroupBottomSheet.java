@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,7 +16,6 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
 

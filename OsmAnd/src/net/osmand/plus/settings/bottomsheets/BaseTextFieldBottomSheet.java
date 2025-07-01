@@ -20,7 +20,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 

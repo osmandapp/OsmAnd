@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.SelectFavouriteBottomSheet;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -47,8 +46,7 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 		FavouritesHelper helper = app.getFavoritesHelper();
 		if (helper.editFavourite(favourite, point.getLatitude(), point.getLongitude())) {
 			helper.deleteFavourite(point);
-			Activity activity = getActivity();
-			if (activity instanceof MapActivity mapActivity) {
+			callMapActivity(mapActivity -> {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				Fragment fragment = fragmentManager.findFragmentByTag(FavoritePointEditor.TAG);
 				if (fragment instanceof FavoritePointEditorFragment editorFragment) {
@@ -56,9 +54,9 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 				}
 				dismiss();
 				MapContextMenu contextMenu = mapActivity.getContextMenu();
-				contextMenu.show(new LatLon(point.getLatitude(), point.getLongitude()), favourite.getPointDescription(activity), favourite);
+				contextMenu.show(new LatLon(point.getLatitude(), point.getLongitude()), favourite.getPointDescription(mapActivity), favourite);
 				mapActivity.refreshMap();
-			}
+			});
 		}
 	}
 

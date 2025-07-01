@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;

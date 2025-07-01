@@ -5,7 +5,6 @@ import static net.osmand.plus.utils.OsmAndFormatter.getFormattedSpeedValue;
 import static net.osmand.plus.utils.OsmAndFormatter.getMpSFromFormattedValue;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,7 +15,6 @@ import androidx.preference.Preference;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;

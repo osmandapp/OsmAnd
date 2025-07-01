@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 

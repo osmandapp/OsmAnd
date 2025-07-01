@@ -25,7 +25,7 @@ public class AreYouSureBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create());
 
-		int spaceHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin);
+		int spaceHeight = getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin);
 		items.add(new DividerSpaceItem(getContext(), spaceHeight));
 	}
 
@@ -67,7 +67,7 @@ public class AreYouSureBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	@Override
 	protected int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
+		return getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {

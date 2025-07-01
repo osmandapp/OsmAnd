@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -123,7 +122,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static View getCustomButtonView(@NonNull Context context, ApplicationMode mode, boolean checked, boolean nightMode) {
-		View customView = UiUtilities.getInflater(context, nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
+		View customView = UiUtilities.inflate(context, nightMode, R.layout.bottom_sheet_item_preference_switch);
 		updateCustomButtonView(context, mode, customView, checked, nightMode);
 		return customView;
 	}
@@ -160,13 +159,9 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		return (SwitchPreferenceEx) getPreference();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull String prefId,
-	                                @NonNull ApplyQueryType applyQueryType,
-	                                @Nullable Fragment target,
-	                                @Nullable ApplicationMode appMode,
-	                                boolean usedOnMap,
-	                                boolean profileDependent) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull String prefId,
+	                                @NonNull ApplyQueryType applyQueryType, @Nullable Fragment target,
+	                                @Nullable ApplicationMode appMode, boolean usedOnMap, boolean profileDependent) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, prefId);

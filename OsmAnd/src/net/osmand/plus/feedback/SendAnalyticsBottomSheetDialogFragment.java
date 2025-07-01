@@ -9,12 +9,10 @@ import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 

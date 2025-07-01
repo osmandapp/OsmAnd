@@ -182,7 +182,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected void addMessageWithRoundedBackground(@NonNull String message) {
-		View view = inflate(R.layout.bottom_sheet_item_description_on_rounded_bg, null);
+		View view = inflate(R.layout.bottom_sheet_item_description_on_rounded_bg);
 		int marginBottom = getDimensionPixelSize(R.dimen.content_padding_half);
 
 		TextView tvMessage = view.findViewById(R.id.title);

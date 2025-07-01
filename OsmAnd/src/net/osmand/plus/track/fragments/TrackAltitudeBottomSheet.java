@@ -2,14 +2,12 @@ package net.osmand.plus.track.fragments;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
@@ -24,7 +22,6 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment implements InAppPurchaseListener {
@@ -105,17 +102,12 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 
 		Drawable icon = getIcon(R.drawable.ic_action_osmand_pro_logo_colored);
 		TextView textView = button.findViewById(R.id.button_text);
-		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));
+		textView.setCompoundDrawablePadding(dpToPx(12));
 		textView.setCompoundDrawablesRelativeWithIntrinsicBounds(icon, null, null, null);
 
 		BaseBottomSheetItem item = new BaseBottomSheetItem.Builder()
 				.setCustomView(view)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						OsmAndProPlanFragment.showInstance(activity);
-					}
-				})
+				.setOnClickListener(v -> callActivity(OsmAndProPlanFragment::showInstance))
 				.create();
 		items.add(item);
 	}

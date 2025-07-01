@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,11 +18,11 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -49,23 +48,6 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	private int minZoom;
 	private int maxZoom;
 	private boolean newMapSource;
-
-	public static void showInstance(@NonNull FragmentManager fm,
-									@Nullable Fragment targetFragment,
-									int sliderDescr,
-									int dialogDescr,
-									int minZoom,
-									int maxZoom,
-									boolean newMapSource) {
-		InputZoomLevelsBottomSheet bottomSheet = new InputZoomLevelsBottomSheet();
-		bottomSheet.setTargetFragment(targetFragment, 0);
-		bottomSheet.setSliderDescrRes(sliderDescr);
-		bottomSheet.setDialogDescrRes(dialogDescr);
-		bottomSheet.setMinZoom(Math.max(minZoom, SLIDER_FROM));
-		bottomSheet.setMaxZoom(Math.min(maxZoom, SLIDER_TO));
-		bottomSheet.setNewMapSource(newMapSource);
-		bottomSheet.show(fm, TAG);
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -191,5 +173,20 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public interface OnZoomSetListener {
 		void onZoomSet(int min, int max);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment,
+	                                int sliderDescr, int dialogDescr, int minZoom, int maxZoom,
+	                                boolean newMapSource) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			InputZoomLevelsBottomSheet bottomSheet = new InputZoomLevelsBottomSheet();
+			bottomSheet.setTargetFragment(targetFragment, 0);
+			bottomSheet.setSliderDescrRes(sliderDescr);
+			bottomSheet.setDialogDescrRes(dialogDescr);
+			bottomSheet.setMinZoom(Math.max(minZoom, SLIDER_FROM));
+			bottomSheet.setMaxZoom(Math.min(maxZoom, SLIDER_TO));
+			bottomSheet.setNewMapSource(newMapSource);
+			bottomSheet.show(fm, TAG);
+		}
 	}
 }

@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -67,7 +68,7 @@ public class SelectFolderBottomSheet extends BasePreferenceBottomSheet {
 			items.add(new TitleItem(dialogTitle));
 		}
 
-		View mainView = View.inflate(ctx, R.layout.bottom_sheet_select_folder, null);
+		View mainView = inflate(R.layout.bottom_sheet_select_folder);
 
 		TextView tvDescription = mainView.findViewById(R.id.description);
 		TextView tvBtnTitle = mainView.findViewById(R.id.title);
@@ -104,7 +105,7 @@ public class SelectFolderBottomSheet extends BasePreferenceBottomSheet {
 	public static boolean showInstance(FragmentManager fm, String prefId, String currentPath, Fragment target,
 	                                   String dialogTitle, String description, String btnTitle, boolean usedOnMap) {
 		try {
-			if (fm.findFragmentByTag(TAG) == null) {
+			if (AndroidUtils.isFragmentCanBeAdded(fm, TAG, true)) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, prefId);
 

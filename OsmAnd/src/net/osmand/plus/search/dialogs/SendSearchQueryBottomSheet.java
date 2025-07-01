@@ -4,12 +4,8 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -20,7 +16,6 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 

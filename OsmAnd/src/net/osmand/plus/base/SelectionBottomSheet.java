@@ -1,6 +1,5 @@
 package net.osmand.plus.base;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +12,12 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.multistatetoggle.MultiStateToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -67,8 +65,8 @@ public abstract class SelectionBottomSheet<T> extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		activeColorRes = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
-		secondaryColorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
+		activeColorRes = ColorUtilities.getActiveIconColorId(nightMode);
+		secondaryColorRes = ColorUtilities.getSecondaryIconColorId(nightMode);
 
 		items.add(createHeaderView());
 		if (shouldShowDivider()) {

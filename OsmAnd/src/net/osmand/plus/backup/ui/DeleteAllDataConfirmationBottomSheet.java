@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -20,8 +20,7 @@ public class DeleteAllDataConfirmationBottomSheet extends MenuBottomSheetDialogF
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View titleView = themedInflater.inflate(R.layout.backup_delete_all_confirmation, null);
+		View titleView = inflate(R.layout.backup_delete_all_confirmation);
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
 				.create();
@@ -59,11 +58,11 @@ public class DeleteAllDataConfirmationBottomSheet extends MenuBottomSheetDialogF
 
 	@Override
 	public int getFirstDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+		return getDimensionPixelSize(R.dimen.dialog_content_margin);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			DeleteAllDataConfirmationBottomSheet fragment = new DeleteAllDataConfirmationBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);

@@ -52,7 +52,6 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = ElevationDateBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(ElevationDateBottomSheet.class);
 
-	private ApplicationMode appMode;
 	private List<RoutingParameter> parameters;
 	private CommonPreference<Boolean> useHeightPref;
 	private LocalRoutingParameter heightObstacleParameter;
@@ -72,9 +71,6 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
-		}
 		super.onCreate(savedInstanceState);
 
 		GeneralRouter router = app.getRouter(appMode);
@@ -256,7 +252,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	                                @NonNull ApplicationMode appMode, Fragment target, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
 			ElevationDateBottomSheet fragment = new ElevationDateBottomSheet();
-			fragment.appMode = appMode;
+			fragment.setAppMode(appMode);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);

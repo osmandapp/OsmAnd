@@ -174,8 +174,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		blockStatisticsBuilder.setBlocksView(statBlocks, false);
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
-		blockStatisticsBuilder.initStatBlocks(null,
-				ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode)), null);
+		blockStatisticsBuilder.initStatBlocks(
+				null, ColorUtilities.getActiveColor(app, nightMode), null);
 	}
 
 	@Override

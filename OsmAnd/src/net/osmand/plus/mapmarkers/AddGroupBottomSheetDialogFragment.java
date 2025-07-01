@@ -2,7 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,9 +21,7 @@ public abstract class AddGroupBottomSheetDialogFragment extends MenuBottomSheetD
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.fragment_marker_add_group_bottom_sheet_dialog, null);
+		mainView = inflate(R.layout.fragment_marker_add_group_bottom_sheet_dialog);
 
 		RecyclerView recyclerView = mainView.findViewById(R.id.groups_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

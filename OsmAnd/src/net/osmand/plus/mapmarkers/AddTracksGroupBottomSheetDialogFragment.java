@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.shared.SharedUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 import net.osmand.plus.mapmarkers.adapters.TracksGroupsAdapter;
@@ -32,8 +31,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-;
 
 public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
 
@@ -189,7 +186,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		private void processGPXFolder(File gpxPath, String gpxSubfolder) {
 			for (File gpxFile : listFilesSorted(gpxPath)) {
 				if (gpxFile.isDirectory()) {
-					String sub = gpxSubfolder.length() == 0 ?
+					String sub = gpxSubfolder.isEmpty() ?
 							gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
 					processGPXFolder(gpxFile, sub);
 				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {

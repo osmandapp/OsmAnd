@@ -5,7 +5,6 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -108,9 +107,9 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 		slider.setStepSize(1);
 		slider.setValue(getRangeIndex(currentValue));
 
-		slider.addOnChangeListener((slider1, value, fromUser) -> {
+		slider.addOnChangeListener((sliderView, value, fromUser) -> {
 			if (fromUser) {
-				currentValue = range[(int) slider1.getValue()];
+				currentValue = range[(int) sliderView.getValue()];
 				summary.setText(getFormattedMb(currentValue));
 			}
 		});

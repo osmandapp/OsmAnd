@@ -1,19 +1,17 @@
 package net.osmand.plus.measurementtool;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
@@ -49,8 +47,8 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				.create());
 
 		DividerItem divider = new DividerItem(getContext());
-		int contextPadding = getResources().getDimensionPixelSize(R.dimen.content_padding);
-		int contextPaddingSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int contextPadding = getDimensionPixelSize(R.dimen.content_padding);
+		int contextPaddingSmall = getDimensionPixelSize(R.dimen.content_padding_small);
 		divider.setMargins(contextPadding, contextPadding, contextPadding, contextPaddingSmall);
 		items.add(divider);
 
@@ -93,7 +91,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	@Override
 	protected int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		return getDimensionPixelSize(R.dimen.content_padding_small);
 	}
 
 	@Override
@@ -108,17 +106,16 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			MeasurementToolFragment.showInstance(((MapActivity) activity).getSupportFragmentManager(),
-					((MapActivity) activity).getMapLocation());
-		}
+		callMapActivity(activity -> {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			MeasurementToolFragment.showInstance(fragmentManager, activity.getMapLocation());
+		});
 		dismiss();
 	}
 
 	@Override
 	protected int getFirstDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.context_menu_sub_info_height);
+		return getDimensionPixelSize(R.dimen.context_menu_sub_info_height);
 	}
 
 	@Override
@@ -135,7 +132,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, String fileName,
 	                                boolean showCreateNewRouteButton) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SavedTrackBottomSheetDialogFragment fragment = new SavedTrackBottomSheetDialogFragment();
 			fragment.fileName = fileName;
 			fragment.showCreateNewRouteButton = showCreateNewRouteButton;

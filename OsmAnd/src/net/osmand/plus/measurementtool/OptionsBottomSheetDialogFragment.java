@@ -57,7 +57,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		}
 
 		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithDescriptionDifHeight.Builder()
-				.setMinHeight(getResources().getDimensionPixelSize(R.dimen.card_row_min_height))
+				.setMinHeight(getDimensionPixelSize(R.dimen.card_row_min_height))
 				.setDescription(description)
 				.setIcon(icon)
 				.setTitle(getString(R.string.route_between_points))
@@ -261,7 +261,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		super.onViewCreated(view, savedInstanceState);
 		ImageView icon = view.findViewById(R.id.icon);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) icon.getLayoutParams();
-		params.rightMargin = view.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
+		params.rightMargin = getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 	}
 
 	@Override

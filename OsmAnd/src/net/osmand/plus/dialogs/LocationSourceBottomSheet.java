@@ -1,7 +1,6 @@
 package net.osmand.plus.dialogs;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.MarginLayoutParams;
 
@@ -20,7 +19,6 @@ import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 public class LocationSourceBottomSheet extends MenuBottomSheetDialogFragment {

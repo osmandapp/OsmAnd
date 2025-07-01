@@ -336,7 +336,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setTitle(group.getDisplayName(app));
 			int color;
 			if (selectedItems.contains(object)) {
-				color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
+				color = group.getColor() == 0 ? getColor(R.color.color_favorite) : group.getColor();
 			} else {
 				color = ContextCompat.getColor(app, secondaryColorRes);
 			}

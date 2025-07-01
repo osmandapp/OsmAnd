@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,9 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -32,7 +29,6 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;

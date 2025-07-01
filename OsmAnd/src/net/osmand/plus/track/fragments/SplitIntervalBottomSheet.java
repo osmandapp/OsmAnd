@@ -3,7 +3,6 @@ package net.osmand.plus.track.fragments;
 import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;

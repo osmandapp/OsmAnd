@@ -61,7 +61,7 @@ public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSh
 
 	@Override
 	protected int getDismissButtonTextId() {
-		return 	R.string.shared_string_close;
+		return R.string.shared_string_close;
 	}
 
 	interface AddMarkersGroupFragmentListener {

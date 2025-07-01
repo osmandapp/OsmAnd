@@ -43,7 +43,6 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	private static final int SORT_TYPE_NAME = 2;
 	private static final int SORT_TYPE_CATEGORY = 3;
 
-	protected OsmandApplication app;
 	protected FavouritesHelper mFavouritesHelper;
 	private final List<FavouritePoint> mPoints = new ArrayList<>();
 

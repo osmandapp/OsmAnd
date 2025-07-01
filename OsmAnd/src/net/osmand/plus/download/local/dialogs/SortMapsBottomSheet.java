@@ -6,7 +6,6 @@ import static net.osmand.plus.settings.enums.LocalSortMode.NAME_DESCENDING;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -29,7 +27,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 
 public class SortMapsBottomSheet extends MenuBottomSheetDialogFragment {
 

@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Pair;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -303,8 +302,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				.setIcon(getContentIcon(R.drawable.ic_action_change_navigation_points))
 				.setCustomView(switchStartAndEndView)
 				.setOnClickListener(v -> {
-					MapActivity activity = (MapActivity) getActivity();
-					if (activity != null) {
+					callMapActivity(activity -> {
 						OsmandApplication app = activity.getMyApplication();
 						TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 						TargetPoint startPoint = targetsHelper.getPointToStart();
@@ -313,7 +311,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							return;
 						}
 						WaypointDialogHelper.switchStartAndFinish(activity, true);
-					}
+					});
 					dismiss();
 				}).create();
 		items.add(switchStartAndEndItem);

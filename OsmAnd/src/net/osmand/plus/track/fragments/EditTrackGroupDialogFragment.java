@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;

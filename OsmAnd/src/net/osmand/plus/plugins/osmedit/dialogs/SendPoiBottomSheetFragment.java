@@ -79,7 +79,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points) {
 		try {
-			if (!fm.isStateSaved()) {
+			if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 				SendPoiBottomSheetFragment fragment = new SendPoiBottomSheetFragment();
 				Bundle bundle = new Bundle();
 				bundle.putSerializable(OPENSTREETMAP_POINT, points);

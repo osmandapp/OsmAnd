@@ -295,18 +295,14 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String pluginId, Boolean usedOnMap) {
-		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PLUGIN_ID_KEY, pluginId);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PLUGIN_ID_KEY, pluginId);
 
-				PluginInstalledBottomSheetDialog dialog = new PluginInstalledBottomSheetDialog();
-				dialog.setArguments(args);
-				dialog.setUsedOnMap(usedOnMap);
-				dialog.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+			PluginInstalledBottomSheetDialog dialog = new PluginInstalledBottomSheetDialog();
+			dialog.setArguments(args);
+			dialog.setUsedOnMap(usedOnMap);
+			dialog.show(fm, TAG);
 		}
 	}
 
