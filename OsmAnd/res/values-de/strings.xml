@@ -5717,7 +5717,7 @@
     <string name="show_grids_description">Anzeige eines Rasters über der Karte erlauben</string>
     <string name="show_utm_grids">UTM statt WGS84 verwenden</string>
     <string name="show_utm_grids_description">Gitter in UTM-Metern statt in WGS84 anzeigen</string>
-    <string name="no_places_available">Keine Orte im sichtbaren Bereich</string>
+    <string name="no_places_available">Keine Orte im Kartenausschnitt</string>
     <string name="no_photo_for_location_desc">Es wurden noch keine Benutzerfotos zu diesem Ort hinzugefügt</string>
     <string name="shared_string_road_exit">Ausfahrt</string>
     <string name="hmd_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Monate</string>
