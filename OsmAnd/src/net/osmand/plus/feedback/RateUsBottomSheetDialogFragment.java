@@ -1,11 +1,9 @@
 package net.osmand.plus.feedback;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -13,7 +11,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -32,18 +29,9 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = getContext();
-		if (context == null) {
-			return;
-		}
-
 		rateUsHelper = new RateUsHelper();
-
-		View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.rate_us_title, null);
-		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(titleView)
-				.create();
-		items.add(titleItem);
+		View titleView = inflate(R.layout.rate_us_title);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(titleView).create());
 	}
 
 	@Override
@@ -53,10 +41,10 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
 			rateUsHelper.updateState(null);
-			DislikeOsmAndBottomSheetDialogFragment.showInstance(fm);
+			DislikeOsmAndBottomSheetDialogFragment.showInstance(fragmentManager);
 		}
 	}
 
@@ -67,14 +55,11 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			rateUsHelper.updateState(RateUsState.LIKED);
-			Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, app.getPackageName()));
-			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-			AndroidUtils.startActivityIfSafe(app, intent);
-			dismiss();
-		}
+		rateUsHelper.updateState(RateUsState.LIKED);
+		Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, app.getPackageName()));
+		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		AndroidUtils.startActivityIfSafe(app, intent);
+		dismiss();
 	}
 
 	@Override
@@ -84,15 +69,10 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 		rateUsHelper.storeRateResult(activity);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm) {
-		try {
-			if (fm.findFragmentByTag(TAG) == null) {
-				RateUsBottomSheetDialogFragment fragment = new RateUsBottomSheetDialogFragment();
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
+			RateUsBottomSheetDialogFragment fragment = new RateUsBottomSheetDialogFragment();
+			fragment.show(fragmentManager, TAG);
 		}
 	}
-
 }

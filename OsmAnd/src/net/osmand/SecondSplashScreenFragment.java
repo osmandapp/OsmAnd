@@ -41,7 +41,7 @@ public class SecondSplashScreenFragment extends BaseFullScreenFragment {
 		if (orientation == Configuration.ORIENTATION_LANDSCAPE && isSmartphone()) {
 			int id = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
 			if (id > 0)
-				return getResources().getDimensionPixelSize(id);
+				return (id);
 		}
 		return 0;
 	}
@@ -112,9 +112,9 @@ public class SecondSplashScreenFragment extends BaseFullScreenFragment {
 		osmTextLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
-		int defaultLogoMarginTop = getResources().getDimensionPixelSize(R.dimen.splash_screen_logo_top);
-		int textMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_text_bottom);
-		int osmTextMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_osm_text_bottom);
+		int defaultLogoMarginTop = getDimensionPixelSize(R.dimen.splash_screen_logo_top);
+		int textMarginBottom = getDimensionPixelSize(R.dimen.splash_screen_text_bottom);
+		int osmTextMarginBottom = getDimensionPixelSize(R.dimen.splash_screen_osm_text_bottom);
 		int elementsPaddingLeft = 0;
 		int elementsPaddingRight = 0;
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {

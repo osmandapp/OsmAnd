@@ -8,9 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.dialog.DialogManager;
@@ -31,7 +29,6 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 
 	private static final String PROCESS_ID_ATTR = "process_id";
 
-	protected OsmandApplication app;
 	protected DialogManager manager;
 	protected DisplayData displayData;
 	protected String processId;
@@ -43,7 +40,6 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.app = requiredMyApplication();
 		this.manager = app.getDialogManager();
 		if (savedInstanceState != null) {
 			processId = savedInstanceState.getString(PROCESS_ID_ATTR);
@@ -63,13 +59,14 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 	@Override
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
-		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
-			manager.onDialogDismissed(processId, activity);
-			// Automatically unregister controller when close the dialog
-			// to avoid any possible memory leaks
-			manager.unregister(processId);
-		}
+		callActivity(activity -> {
+			if (!activity.isChangingConfigurations()) {
+				manager.onDialogDismissed(processId, activity);
+				// Automatically unregister controller when close the dialog
+				// to avoid any possible memory leaks
+				manager.unregister(processId);
+			}
+		});
 	}
 
 	private void refreshDisplayData() {
@@ -119,10 +116,5 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 			return divider;
 		}
 		return null;
-	}
-
-	@Override
-	public boolean isNightMode() {
-		return super.isNightMode(app);
 	}
 }

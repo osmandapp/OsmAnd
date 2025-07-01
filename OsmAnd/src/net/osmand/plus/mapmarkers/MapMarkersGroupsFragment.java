@@ -364,17 +364,11 @@ public class MapMarkersGroupsFragment extends BaseNestedFragment implements OsmA
 		fragment.show(getChildFragmentManager(), SelectionMarkersGroupBottomSheetDialogFragment.TAG);
 	}
 
-	private void openAddGroupMenu(AddGroupBottomSheetDialogFragment fragment) {
-		fragment.setUsedOnMap(false);
-		fragment.setRetainInstance(true);
-		fragment.show(getChildFragmentManager(), AddGroupBottomSheetDialogFragment.TAG);
-	}
-
 	private AddMarkersGroupFragmentListener createAddMarkersGroupFragmentListener() {
 		return new AddMarkersGroupFragmentListener() {
 			@Override
 			public void favouritesOnClick() {
-				openAddGroupMenu(new AddFavouritesGroupBottomSheetDialogFragment());
+				AddFavouritesGroupBottomSheetDialogFragment.showInstance(getChildFragmentManager());
 			}
 
 			@Override

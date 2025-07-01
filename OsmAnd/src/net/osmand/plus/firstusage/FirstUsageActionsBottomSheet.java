@@ -21,16 +21,16 @@ public class FirstUsageActionsBottomSheet extends BaseFirstUsageBottomSheet {
 
 	@Override
 	protected void setupItems(@NonNull ViewGroup container, @NonNull LayoutInflater inflater) {
-		container.addView(createItemView(inflater, getString(R.string.restore_from_osmand_cloud), R.drawable.ic_action_restore, view -> {
+		container.addView(createItemView(getString(R.string.restore_from_osmand_cloud), R.drawable.ic_action_restore, view -> {
 			processActionClick(RESTORE_FROM_CLOUD);
 			dismiss();
 		}));
-		container.addView(createItemView(inflater, getString(R.string.restore_from_file), R.drawable.ic_action_read_from_file, view -> {
+		container.addView(createItemView(getString(R.string.restore_from_file), R.drawable.ic_action_read_from_file, view -> {
 			processActionClick(RESTORE_FROM_FILE);
 			dismiss();
 		}));
 		if (wizardType != WizardType.MAP_DOWNLOAD) {
-			container.addView(createItemView(inflater, getString(R.string.application_dir), R.drawable.ic_action_folder, view -> {
+			container.addView(createItemView(getString(R.string.application_dir), R.drawable.ic_action_folder, view -> {
 				processActionClick(SELECT_STORAGE_FOLDER);
 				dismiss();
 			}));

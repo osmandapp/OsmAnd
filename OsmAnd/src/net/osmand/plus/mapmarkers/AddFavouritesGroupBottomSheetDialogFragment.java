@@ -2,16 +2,18 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 
-import net.osmand.plus.OsmandApplication;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.mapmarkers.adapters.FavouritesGroupsAdapter;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
 
-	private OsmandApplication app;
 	private FavouritesHelper favouritesHelper;
 
 	private FavoritesListener listener;
@@ -19,7 +21,6 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 		favouritesHelper = app.getFavoritesHelper();
 	}
 
@@ -55,5 +56,14 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 		}
 		app.getMapMarkersHelper().addOrEnableGroup(favoriteGroup);
 		dismiss();
+	}
+
+	public static void showInstance(@NonNull FragmentManager childFragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			AddGroupBottomSheetDialogFragment fragment = new AddFavouritesGroupBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setRetainInstance(true);
+			fragment.show(childFragmentManager, TAG);
+		}
 	}
 }

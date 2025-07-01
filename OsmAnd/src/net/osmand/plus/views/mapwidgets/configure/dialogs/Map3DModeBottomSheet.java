@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -14,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -29,38 +27,34 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = Map3DModeBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
 	private Map3DButtonState buttonState;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 		buttonState = app.getMapButtonsHelper().getMap3DButtonState();
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(createView())
-				.create());
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(createView()).create());
 	}
 
 	@NonNull
 	private View createView() {
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.fragment_map_3d_mode_bottom_sheet, null);
+		View view = inflate(R.layout.fragment_map_3d_mode_bottom_sheet);
 		LinearLayout itemsContainer = view.findViewById(R.id.items_container);
 
 		for (Map3DModeVisibility visibility : Map3DModeVisibility.values()) {
-			itemsContainer.addView(createVisibilityItem(visibility, inflater));
+			itemsContainer.addView(createVisibilityItem(visibility));
 		}
 
 		return view;
 	}
 
-	private View createVisibilityItem(@NonNull Map3DModeVisibility itemVisibility, LayoutInflater inflater) {
-		View item = inflater.inflate(R.layout.compass_visibility_item, null);
+	@NonNull
+	private View createVisibilityItem(@NonNull Map3DModeVisibility itemVisibility) {
+		View item = inflate(R.layout.compass_visibility_item);
 		ImageView ivIcon = item.findViewById(R.id.icon);
 		TextView tvTitle = item.findViewById(R.id.title);
 		CompoundButton compoundButton = item.findViewById(R.id.compound_button);
@@ -73,9 +67,8 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 
 		item.setOnClickListener(v -> {
 			buttonState.getVisibilityPref().setModeValue(appMode, itemVisibility);
-			Fragment targetFragment = getTargetFragment();
-			if (targetFragment instanceof Map3DModeUpdateListener) {
-				((Map3DModeUpdateListener) targetFragment).onMap3DModeUpdated(itemVisibility);
+			if (getTargetFragment() instanceof Map3DModeUpdateListener listener) {
+				listener.onMap3DModeUpdated(itemVisibility);
 			}
 			dismiss();
 		});
@@ -117,9 +110,7 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-
 	public interface Map3DModeUpdateListener {
-
 		void onMap3DModeUpdated(@NonNull Map3DModeVisibility visibility);
 	}
 }
