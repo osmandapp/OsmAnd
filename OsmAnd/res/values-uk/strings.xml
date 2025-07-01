@@ -5543,7 +5543,7 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="quick_action_showhide_osm_edits_descr">Кнопка для показу або приховування локальних редагувань OSM на мапі.</string>
     <string name="release_4_9">• Додано повноекранний переглядач зображень Wikimedia \n\n • Представлено новий плагін «Vehicle Metrics» для моніторингу продуктивності автомобіля за допомогою протоколу OBD-II \n\n • Додано можливість призначати дії трекам і фільтрувати їх відповідно \n\n • Реалізовано нові швидкі дії для запису поїздки та блокування сенсорного екрана \n\n • Представлено настроюваний вигляд кнопки карти та точну сітку \n\n • До віджетів додано контекстне меню та дію «Скинути середню швидкість». \n\n • Додано новий шар маршруту «Велосипедні стежки» \n\n • Виправлено «Автозапис треку під час навігації» \n\n • Виправлена проблема з перевернутими координатами в RTL \n\n • Виправлено пропущені дані датчика для треку, що записується \n\n • Додано інформацію про прилеглі території для вибраної точки \n\n • Додано швидку дію для керування видимістю редагувань OSM \n\n • Окремі параметри видимості для параметрів забарвлення ландшафту \n\n • Додано піктограму, яку можна торкнутися, щоб відобразити доступ або інші атрибути дороги чи шляху</string>
-    <string name="liter_per_hour">л/год</string>
+    <string name="liter_per_hour">Л/год</string>
     <string name="screen_is_unlocked">Сенсорний екран розблоковано.</string>
     <string name="screen_is_locked_by_action_button">Сенсорний екран заблоковано. Натисніть на кнопку, щоб розблокувати.</string>
     <string name="screen_is_locked_by_external_button">Сенсорний екран заблоковано. Для розблокування натисніть кнопку %1$s або торкніться кнопки на екрані.</string>
@@ -5557,7 +5557,7 @@
     <string name="bt_start_pair_failed">Не вдається ініціювати сполучення з пристроєм</string>
     <string name="obd_fuel_pressure">Тиск палива</string>
     <string name="obd_fuel_pressure_desc">Показує тиск у паливній системі</string>
-    <string name="kpa_unit">KPA</string>
+    <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Показує швидкість споживання палива транспортного засобу на основі датчика (L/H)</string>
     <string name="obd_bluetooth_off_description">Увімкніть Bluetooth, щоб знайти та підключити сканери.</string>
     <string name="shared_string_dynamic">Динамічний</string>
@@ -5641,10 +5641,10 @@
     <string name="auto_zoom_3d_angle">Автомасштаб кута 3D</string>
     <string name="preview_next_turn">Попередній перегляд наступного повороту</string>
     <string name="av_audio_sample_rate">Швидкість вибірки аудіо</string>
-    <string name="vehicle_metrics_recording_description">Виберіть параметри для запису в файлі GPX.</string>
+    <string name="vehicle_metrics_recording_description">Виберіть параметри, які слід записати у файл gpx.</string>
     <string name="av_audio_sample_rate_descr">Виберіть рівень звуку.</string>
     <string name="connect_new_scanner">Підключення нового сканера</string>
-    <string name="shared_string_engine">Двигуни</string>
+    <string name="shared_string_engine">Двигун</string>
     <string name="shared_string_interpolation">Інтерполяція</string>
     <string name="location_interpolation_percent">Відсоток інтерполяції розташування</string>
     <string name="location_interpolation_percent_desc">Встановіть відсоток інтерполяції розташування під час навігації по маршруту. Цей параметр зменшує затримку вашого розташування на карті під час анімації.</string>
