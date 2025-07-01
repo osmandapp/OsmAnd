@@ -857,7 +857,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	@Override
 	public MapPosition getMapDisplayPosition() {
 		if (isInPlanRouteMode) {
-			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_RIGHT;
+			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_END;
 		}
 		return null;
 	}

@@ -137,7 +137,7 @@ public class SelectLocationController<ResultType> extends BaseDialogController
 	@Nullable
 	@Override
 	public MapPosition getMapDisplayPosition() {
-		return landscape ? MapPosition.LANDSCAPE_MIDDLE_RIGHT : MapPosition.CENTER;
+		return landscape ? MapPosition.LANDSCAPE_MIDDLE_END : MapPosition.CENTER;
 	}
 
 	@Nullable
