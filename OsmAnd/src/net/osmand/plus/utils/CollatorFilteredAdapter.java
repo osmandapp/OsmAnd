@@ -1,6 +1,6 @@
 package net.osmand.plus.utils;
 
-import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -9,7 +9,7 @@ import android.widget.Filter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.CollatorStringMatcher;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class CollatorFilteredAdapter extends ArrayAdapter<String> {
 					suggestions.addAll(originalCollection);
 				} else {
 					String filterPattern = constraint.toString().toLowerCase().trim();
-					CollatorStringMatcher matcher = new CollatorStringMatcher(filterPattern, CHECK_STARTS_FROM_SPACE);
+					NameStringMatcher matcher = new NameStringMatcher(filterPattern, CHECK_CONTAINS);
 					for (String poiType : originalCollection) {
 						if (matcher.matches(poiType)) {
 							suggestions.add(poiType);
