@@ -229,6 +229,11 @@
     <string name="logging_out">已登出</string>
     <string name="closing">正在关闭</string>
     <string name="gps_network_not_enabled">打开 “位置”？</string>
-    <string name="not_logged_in">您尚未登录</string>
+    <string name="not_logged_in">您尚未登入</string>
     <string name="shared_string_continue">继续</string>
+    <string name="shared_string_cancel">取消</string>
+    <string name="shared_string_settings">设置</string>
+    <string name="no_location_permission">应用程序缺少访问位置数据的权限。</string>
+    <string name="gps_not_available">请在系统设置中打开 “位置 ”选项</string>
+    <string name="location_service_no_gps_available">选择其中一个位置提供商来共享您的位置。</string>
 </resources>
