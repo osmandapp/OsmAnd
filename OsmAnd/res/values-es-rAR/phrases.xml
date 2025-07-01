@@ -5070,4 +5070,18 @@
     <string name="poi_airline">Oficina de aerolínea</string>
     <string name="poi_adoption_agency">Organismo de adopción;Agencia de adopción</string>
     <string name="poi_route_point_category">Categoría turística</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Católica greco-ucraniana</string>
+    <string name="poi_denomination_ukrainian_orthodox">Ucraniana ortodoxa</string>
+    <string name="poi_denomination_neo_pentecostal">Neopentecostal</string>
+    <string name="poi_denomination_evangelical_lutheran">Evangélica luterana</string>
+    <string name="poi_denomination_macedonian_orthodox">Macedonian Orthodox</string>
+    <string name="poi_denomination_church_of_god">Ciencia de Cristo</string>
+    <string name="poi_denomination_foursquare">Iglesia Cuadrangular</string>
+    <string name="poi_denomination_landmark">Landmarkismo</string>
+    <string name="poi_denomination_anabaptist">Anabaptista</string>
+    <string name="poi_denomination_thai_thammayut">Dhammayuttika Nikaya</string>
+    <string name="poi_denomination_african_methodist_episcopal">Episcopal Metodista Africana</string>
+    <string name="poi_denomination_thai_mahanikaya">Maha Nikaya tailandés</string>
+    <string name="poi_denomination_soto">Sōtō</string>
+    <string name="poi_denomination_southern_baptist">Bautistas del sur</string>
 </resources>
