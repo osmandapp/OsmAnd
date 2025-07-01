@@ -5489,8 +5489,8 @@
     <string name="rpm_unit">об/хв</string>
     <string name="obd_rpm_desc">Віджет показує оберти з тахометра машини за датчиком OBD</string>
     <string name="obd_fuel_type_desc">Віджет показує тип пального машини за датчиком OBD</string>
-    <string name="obd_air_intake_temp">Температура на вході</string>
-    <string name="obd_ambient_air_temp">Температура довкілля</string>
+    <string name="obd_air_intake_temp">Температура прийому</string>
+    <string name="obd_ambient_air_temp">Температура навколишнього середовища</string>
     <string name="obd_battery_voltage">Напруга акумулятора</string>
     <string name="obd_support">Підтримка OBD</string>
     <string name="obd_plugin_name">Показники машини</string>
@@ -5512,7 +5512,7 @@
     <string name="obd_widget_group">Показники машини</string>
     <string name="vehicle_metrics_plugin_settings">Налаштування показників машини</string>
     <string name="obd_fuel_left_distance_desc">Віджет показує відстань, яку може проїхати машина на залишковому рівні пального за датчиком OBD</string>
-    <string name="obd_engine_coolant_temp">Температура охолоджувальної рідини</string>
+    <string name="obd_engine_coolant_temp">Температура теплоносія</string>
     <string name="obd_fuel_level">Паливна ефективність (%)</string>
     <string name="obd_fuel_consumption_rate">Споживання пального</string>
     <string name="reset_average_speed">Скинути середню швидкість</string>
@@ -5547,8 +5547,8 @@
     <string name="screen_is_unlocked">Сенсорний екран розблоковано.</string>
     <string name="screen_is_locked_by_action_button">Сенсорний екран заблоковано. Натисніть на кнопку, щоб розблокувати.</string>
     <string name="screen_is_locked_by_external_button">Сенсорний екран заблоковано. Для розблокування натисніть кнопку %1$s або торкніться кнопки на екрані.</string>
-    <string name="route_guidance">Маршрутні вказівки</string>
-    <string name="route_guidance_desc">Забезпечує прокладання маршруту в реальному часі, включаючи відстань до наступного повороту, назву дороги, поточну назву вулиці та інформацію про смугу руху. Віджети активні під час навігації.</string>
+    <string name="route_guidance">Керівництво маршрутів</string>
+    <string name="route_guidance_desc">Забезпечує рекомендації щодо маршруту в режимі реального часу, включаючи відстань до наступного повороту, назву дороги, поточну назву вулиці та інформацію про смугу руху. Віджети активні під час навігації.</string>
     <string name="obd_widget_vehicle_speed">Швидкість транспортного засобу</string>
     <string name="obd_widget_engine_speed">Оберти двигуна</string>
     <string name="obd_nothing_found_description">Переконайтеся що:\n – Bluetooth увімкнено\n – Двигун автомобіля працює\n – Ваш пристрій перебуває в зоні дії сканера.</string>
@@ -5618,9 +5618,9 @@
     <string name="shared_string_volume">Обсяг</string>
     <string name="obd_battery_voltage_desc">Показує рівень напруги акумулятора автомобіля</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Використовуйте вибрані одиниці в назві.</string>
-    <string name="remaining_fuel_description">Показує кількість пального, що залишилося в баку автомобіля</string>
-    <string name="remaining_fuel">Залишок палива</string>
-    <string name="obd_fuel_consumption">Витрата палива</string>
+    <string name="remaining_fuel_description">Показує кількість палива, залишеного в резервуарі транспортного засобу</string>
+    <string name="remaining_fuel">Залишився паливо</string>
+    <string name="obd_fuel_consumption">ПИТАННЯ Палива</string>
     <string name="reset_average_value">Скинути середнє значення</string>
     <string name="shared_string_instant">Миттєво</string>
     <string name="show_minor_turns">Відображення на незначних перехрестях при прямому русі</string>
@@ -5634,8 +5634,8 @@
     <string name="show_minor_turns_descr">Смуги руху відображатимуться на всіх перехрестях незалежно від голосових інструкцій</string>
     <string name="current_temperature">Теперішня температура</string>
     <string name="average_temperature">Середня температура</string>
-    <string name="obd_speed_desc">Показує температуру охолоджувальної рідини двигуна.</string>
-    <string name="obd_ambient_air_temp_desc">Показує температуру ззовні автомобіля.</string>
+    <string name="obd_speed_desc">Показує швидкість від датчика швидкості автомобіля (VSS).</string>
+    <string name="obd_ambient_air_temp_desc">Показує температуру поза транспортним засобом.</string>
     <string name="obd_engine_coolant_temp_desc">Показує температуру охолоджувальної рідини двигуна</string>
     <string name="obd_air_intake_temp_desc">Показує температуру повітря, що надходить у впускний колектор двигуна.</string>
     <string name="auto_zoom_3d_angle">Автомасштаб кута 3D</string>
@@ -5697,7 +5697,7 @@
     <string name="show_utm_grids">Використовувати UTM замість WGS84</string>
     <string name="show_utm_grids_description">Показати сітку в метрах UTM замість WGS84</string>
     <string name="map_grid">Картографічні сітки</string>
-    <string name="no_places_available">Немає доступних місць</string>
+    <string name="no_places_available">Ніяких місць у видимій регіоні</string>
     <string name="no_photo_for_location_desc">До цього місця ще не додано жодної фотографії користувача</string>
     <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо, протягом %1$s місяців</string>
     <string name="shared_string_road_exit">Вихід</string>
