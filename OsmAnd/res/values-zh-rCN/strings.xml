@@ -587,7 +587,7 @@
     <string name="map_text_size_descr">地图上地名的文字大小：</string>
     <string name="map_text_size">地图字体大小</string>
     <string name="trace_rendering_descr">显示渲染和导航性能。</string>
-    <string name="installing_new_resources">解包新数据…</string>
+    <string name="installing_new_resources">正在解压新数据…</string>
     <string name="internet_connection_required_for_online_route">在线导航不能离线工作。</string>
     <string name="tts_language_not_supported_title">不支持的语言</string>
     <string name="tts_missing_language_data_title">数据丢失</string>
@@ -1473,7 +1473,7 @@
     <string name="access_hint_enter_name">输入名称</string>
     <string name="access_hint_enter_category">输入类别</string>
     <string name="access_hint_enter_description">输入描述。</string>
-    <string name="access_map_linked_to_location">地图被链接到一个位置</string>
+    <string name="access_map_linked_to_location">地图已链接到位置</string>
     <string name="access_collapsed_list">折叠的列表</string>
     <string name="access_expanded_list">扩展的列表</string>
     <string name="access_empty_list">空列表</string>
@@ -2428,7 +2428,7 @@
     <string name="empty_state_osm_edits_descr">创建或修改 OpenStreetMap 兴趣点，打开或评论 OSM 注记并贡献 GPX 轨迹文件。</string>
     <string name="shared_string_deleted">已删除</string>
     <string name="shared_string_edited">已编辑</string>
-    <string name="shared_string_added">已添加</string>
+    <string name="shared_string_added">添加于</string>
     <string name="marker_activated">标记%s 已激活。</string>
     <string name="one_tap_active_descr">点击地图上的标记将其移动到活动标记的顶端, 而不打开上下文菜单。</string>
     <string name="one_tap_active">\'轻触\' 激活</string>
@@ -3303,15 +3303,7 @@
     <string name="plan_route_split_after">拆分之后</string>
     <string name="profile_type_osmand_string">OsmAnd 配置文件</string>
     <string name="profile_type_user_string">用户配置文件</string>
-    <string name="release_3_9">• 添加了用于导出和导入所有数据的选项，包括设置，资源，我的位置
-\n
-\n• 规划路线：路线中的轨迹区间图表，并添加了创建和编辑多段轨迹区间的功能
-\n
-\n• 为 OpenStreetMap 添加了 OAuth 身份验证方法，改进了 OSM 对话框的 UI
-\n
-\n• 支持收藏夹和路径点的颜色自定义
-\n
-\n</string>
+    <string name="release_3_9">• 添加了用于导出和导入所有数据的选项，包括设置，资源，我的位置 \n \n• 规划路线：路线中的轨迹区间图表，并添加了创建和编辑多段轨迹区间的功能 \n \n• 为 OpenStreetMap 添加了 OAuth 身份验证方法，改进 OSM 对话框的 UI \n \n• 支持收藏夹和路径点的颜色自定义</string>
     <string name="reverse_all_points">反转所有点</string>
     <string name="profile_by_default_description">选择将在应用程序启动时使用的配置文件。</string>
     <string name="shared_string_last_used">上次使用</string>
@@ -3608,27 +3600,7 @@
     <string name="backup_error_user_is_not_registered">不存在用该电子邮件地址注册的用户</string>
     <string name="backup_error_no_valid_subscription">没有有效的订阅</string>
     <string name="contour_lines_hillshade_slope">等高线、丘陵阴影、坡度</string>
-    <string name="release_4_0">- 云备份
-\n
-\n - 为 \"Topo \"地图风格增加了夜间模式
-\n
-\n - 增加了下载以英尺为单位等高线的选项
-\n
-\n - 现在可以按海拔高度、速度或坡度对轨迹进行着色
-\n
-\n - 更新了 \"行程记录 \"对话框
-\n
-\n - 点击的距离从半径标尺移到一个单独的选项中
-\n
-\n - 规划路线：你现在可以改变导航选项，访问地图配置和搜索，而不必离开路线规划。
-\n
-\n - 新的 \"购买 \"屏幕上有详细的购买信息
-\n
-\n - 增加了改变航线外观的选项
-\n
-\n - OsmAnd实时更新移至 \"下载&gt;更新\"。
-\n
-\n</string>
+    <string name="release_4_0">- 云备份 \n \n - 为 \"Topo \"地图风格增加了夜间模式 \n \n - 增加下载以英尺为单位等高线的选项 \n \n - 现在可以按海拔高度、速度或坡度对轨迹进行着色 \n \n - 更新了 \"行程记录 \"对话框 \n \n - 点击的距离从半径标尺移到一个单独的选项中 \n \n - 规划路线：现在可以改变导航选项，访问地图配置和搜索，而不必离开路线规划。 \n \n - 新的 \"购买 \"屏幕上有详细的购买信息 \n \n - 增加改变航线外观的选项 \n \n - OsmAnd实时更新移至 \"下载&gt;更新\"。</string>
     <string name="duration_moment_ago">刚才</string>
     <string name="logout_from_osmand_cloud">退出 OsmAnd Cloud 登录</string>
     <string name="logout_from_osmand_cloud_decsr">退出登录？
@@ -3860,7 +3832,7 @@
     <string name="backup_data">备份数据</string>
     <string name="backup_delete_old_data_descr">当前版本的数据将保留在 OsmAnd 云上</string>
     <string name="delete_all_confirmation">是，删除全部</string>
-    <string name="shared_string_logout">退出登录</string>
+    <string name="shared_string_logout">登出</string>
     <string name="download_server_version">下载服务器版本</string>
     <string name="upload_local_version">上传本地版本</string>
     <string name="backup_pause_all">暂停全部</string>
@@ -4333,7 +4305,7 @@
     <string name="compass_always_visible">始终可见</string>
     <string name="goods_delivery_desc_4">对超过 3.5 吨的车辆使用卡车配置文件。</string>
     <string name="routing_attr_freeride_policy_description">“自由式滑雪(Freeride)”和“越野滑雪(Off-piste)”是非官方的路线和通道。通常未经修饰，没有维护，晚上没有检查。请自行承担风险。</string>
-    <string name="release_4_0_beta">- 增加了以英尺为单位下载等高线的选项 \n \n - 规划路线景观：增加了在点或图表之间切换的选项卡 \n \n - OsmAnd实时更新移至 “下载 &gt; 更新” \n \n - 轨迹现在可以按高度、速度或坡度进行着色。 \n \n - 增加了改变路线外观的选项。 \n \n - 更新了“行程录制”对话框 \n \n</string>
+    <string name="release_4_0_beta">- 新增以英尺为单位下载等高线的选项 \n \n - 规划路线景观：增加了在点或图表之间切换的选项卡 \n \n - OsmAnd实时更新移至 “下载 &gt; 更新” \n \n - 轨迹现在可以按高度、速度或坡度进行着色。 \n \n - 增加改变路线外观的选项。 \n \n - 更新了“行程录制”对话框</string>
     <string name="release_3_5">- 更新了应用程序和配置文件设置。设置现在按类型排列。每个配置文件都可以单独定制。
 \n
 \n - 新的地图下载对话框，建议在浏览时下载地图
@@ -4491,31 +4463,7 @@
     <string name="ant_read_data">读取数据</string>
     <string name="ant_write_to_gpx">将数据写入轨迹</string>
     <string name="purchases_feature_desc_external_sensors">显示和记录来自外部传感器的数据：自行车速度、自行车功率、踏频和心率。</string>
-    <string name="release_4_3">• 新的、更快的第 2 版（OpenGL）地图渲染引擎，带有2.5D视图
-\n
-\n • 运动中位置变化的平滑动画
-\n
-\n • 为地图中心坐标和地理位置的高程提供新的小部件
-\n
-\n • \"点击测距\"：增加了文字大小的选项
-\n
-\n • \"地图标记 \"小组件：增加了改变点击行为的选项
-\n
-\n • 修正了 \"位置显置\"选项
-\n
-\n • GPX：增加了对 \"link\"、\"cmt\"、\"desc \"标签和任何自定义扩展的支持
-\n
-\n • 重新组织了 \"航海地图 \"列表
-\n
-\n • 增加了对ANT+传感器的支持
-\n
-\n • 增加了禁止下载UUID的选项
-\n
-\n • 默认速度可调预测依赖于海拔的步行/远足/跑步旅行时间
-\n
-\n • 修复了音频输出和音量滑块行为
-\n
-\n</string>
+    <string name="release_4_3">• 新的、更快的第 2 版（OpenGL）地图渲染引擎，带有2.5D视图 \n \n • 运动中位置变化的平滑动画 \n \n • 为地图中心坐标和地理位置的高程提供新的小部件 \n \n • \"点击测距\"：增加文字大小的选项 \n \n • \"地图标记 \"小组件：增加改变点击行为的选项 \n\n • 修复 \"位置放置 \"选项\n \n • GPX：增加了对 \"link\"、\"cmt\"、\"desc \"标签和任何自定义扩展的支持 \n \n • 整顿 \"航海地图 \"列表 \n \n • 增加对ANT+传感器的支持 \n \n • 增加禁止下载UUID的选项 \n \n • 可根据海拔高度调节默认速度来预测步行/徒步/跑步的行程时间\n \n • 修复音频输出和音量滑块行为</string>
     <string name="map_widget_altitude_map_center_desc">显示当前地图中心的海拔高度。</string>
     <string name="location_simulation_cutoff">模拟跳过第一米</string>
     <string name="send_uuid_preference_desc">一个随机的UUID被用来从OsmAnd服务器下载离线地图，以监测服务器资源的公平使用，预测流量模式，并生成匿名的月度地图报告。</string>
@@ -4604,15 +4552,7 @@
     <string name="show_borders_of_downloaded_maps">显示已下载地图的边框</string>
     <string name="widget_with_dot">小工具。</string>
     <string name="track_attach_to_the_roads_descr">轨迹将吸附到使用离线地图的道路上，轨迹的几何形状将改变。</string>
-    <string name="release_4_2">• 重新设计小工具：全新外观和感觉，按页面分组，更改顺序并根据需要进行组合。
-\n
-\n•远足/骑行/旅行路线：点击路线符号并获取有关路线的完整信息。
-\n
-\n• 收藏组：为组中的新点设置默认外观
-\n
-\n• 修复：在线瓦片地图自动更新
-\n
-\n</string>
+    <string name="release_4_2">• 重新设计小工具：全新外观和感觉，按页面分组，更改顺序并根据需要进行组合。 \n \n•远足/骑行/旅行路线：点击路线符号并获取有关路线的完整信息。 \n \n• 收藏组：为组中的新点设置默认外观 \n \n• 修复：在线瓦片地图自动更新</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">显示注记标签</string>
     <string name="waypoint_appearance">路径点外观</string>
     <string name="predefined_waypoint_appearance_description">点击此操作将自动保存带有预定义参数的路径点。</string>
@@ -5018,49 +4958,7 @@
     <string name="map_2d_mode_action">2D 模式</string>
     <string name="map_3d_mode_action">3D 模式</string>
     <string name="mtb_imba_full">国际山地自行车协会</string>
-    <string name="release_4_5">- BLE/ANT+ 传感器：重新设计的连接，将接收到的数据写入 GPX 并查看
-\n
-\n - 向 \"OsmAnd 云 \"免费备份收藏夹和设置
-\n
-\n - 支持 3D 地形的新地形图形式
-\n
-\n - 轨迹管理：更新用户界面，增加排序功能，支持嵌套文件夹
-\n
-\n - Android Auto：用于访问收藏、轨迹和 POI 类别的新开始菜单
-\n
-\n - 顶部/底部面板的部件列表
-\n
-\n - 新的 \"火车 \"配置文件，允许计算铁路路线
-\n
-\n - 轮廓线可与任何 \"地图源 \"配合使用
-\n
-\n - 扩展了外部键盘的默认操作列表
-\n
-\n - 自定义路线文件，增加了删除或覆盖选项
-\n
-\n - 增加了 \"宣布路线偏离 \"选项
-\n
-\n - 开始屏幕：添加了从文件恢复 OsmAnd 状态的选项
-\n
-\n - 添加了 \"危险材料 \"类别 北美地区的卡车导航
-\n
-\n - 为步行路线添加了 \"铁索攀岩\"支持
-\n
-\n - 为路线难度分类添加了 \"CAI \"分级表
-\n
-\n - 修复了每个应用程序的语言选择
-\n
-\n - 添加了对主题图标的支持
-\n
-\n - OsmAnd 云：添加了删除账户选项
-\n
-\n - 可访问性：按钮的触摸目标尺寸改为 48 dp；修复了屏幕阅读器可看到地图 UI 的问题
-\n
-\n - 重新制作了日语语音提示
-\n
-\n - 重新设计了海拔变化和坡度评估
-\n
-\n</string>
+    <string name="release_4_5">- BLE/ANT+ 传感器：重新设计的连接，将接收到的数据写入 GPX 并查看 \n \n - 向 \"OsmAnd 云 \"免费备份收藏夹和设置 \n \n - 支持 3D 地形的新地形图形式 \n \n - 轨迹管理：更新用户界面，增加排序功能，支持嵌套文件夹 \n \n - Android Auto：用于访问收藏、轨迹和 POI 类别的新开始菜单 \n \n - 顶部/底部面板的部件列表 \n \n - 新的 \"火车 \"配置文件，允许计算铁路路线 \n \n - 轮廓线可与任何 \"地图源 \"配合使用 \n \n - 扩展了外部键盘的默认操作列表 \n \n - 自定义路线文件，增加了删除或覆盖选项 \n \n - 增加了 \"宣布路线偏离 \"选项 \n \n - 开始屏幕：添加了从文件恢复 OsmAnd 状态的选项 \n \n - 添加了 \"危险材料 \"类别 北美地区的卡车导航 \n \n - 为步行路线添加了 \"铁索攀岩\"支持 \n \n - 为路线难度分类添加了 \"CAI \"分级表 \n \n - 修复了每个应用程序的语言选择 \n \n - 添加了对主题图标的支持 \n \n - OsmAnd 云：添加了删除账户选项 \n \n - 可访问性：按钮的触摸目标尺寸改为 48 dp；修复了屏幕阅读器可看到地图 UI 的问题 \n \n - 重新制作了日语语音提示 \n \n - 重新设计了海拔变化和坡度评估</string>
     <string name="help_article_map_tracks_on_map_name">轨迹与路线</string>
     <string name="help_article_map_map_context_menu_name">地图情景菜单</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
@@ -5827,7 +5725,7 @@
     <string name="display_distance_to_first_intermediate">显示下一站的路线详情</string>
     <string name="external_device_characteristic_systolic">收缩压</string>
     <string name="shared_string_modify">修改</string>
-    <string name="shared_string_source">源</string>
+    <string name="shared_string_source">来源</string>
     <string name="external_device_characteristic_diastolic">舒张压</string>
     <string name="track_line">轨迹线</string>
     <string name="map_text">地图文字</string>
@@ -6012,4 +5910,10 @@
     <string name="shared_string_flat">平坦</string>
     <string name="uphill_downhill_split">上坡/下坡</string>
     <string name="suggest_activate_map_msg">%1$s 地图已停用，\n启用以查看此区域。</string>
+    <string name="third_links">第三链接</string>
+    <string name="movies_list">电影列表</string>
+    <string name="release_5_1">- 增加了对网页和跨平台购买的支持\n\n - 将温度单位移至常规设置，以方便使用\n\n - 为低功耗蓝牙传感器添加电池电量指示器\n\n - 新的、更直观的在导航中选中点时的用户界面\n\n - 使用新轮廓改进了部件的可见性\n\n - 添加了上坡/下坡分析器\n\n - 已扩展维基百科和维基导游融合，以获取更多兴趣点。</string>
+    <string name="shared_string_split_by">分割方式</string>
+    <string name="set_work">设置工作</string>
+    <string name="set_home">设置家</string>
 </resources>
