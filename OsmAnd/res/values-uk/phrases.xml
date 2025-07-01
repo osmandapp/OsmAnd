@@ -5122,5 +5122,12 @@
     <string name="poi_denomination_church_of_god_in_christ">Церква Бога у Христі</string>
     <string name="poi_denomination_czechoslovak_hussite">Чехословацькі гусити</string>
     <string name="poi_denomination_la_luz_del_mundo">Ла Лус Дель Мундо</string>
-    <string name="poi_denomination_christadelphian">христадельфіянський</string>
+    <string name="poi_denomination_christadelphian">Христадельфіянський</string>
+    <string name="poi_denomination_eritrean_orthodox">Еритрейська православна</string>
+    <string name="poi_denomination_antiochian_orthodox">Антіохійська православна церква</string>
+    <string name="poi_denomination_mariavite">Маріавіт</string>
+    <string name="poi_denomination_mission_covenant_church_of_sweden">Церква Місійного Заповіту Швеції</string>
+    <string name="poi_denomination_gelug">Гелуг</string>
+    <string name="poi_denomination_vajrayana">Ваджраяна</string>
+    <string name="poi_denomination_slavic">слов\'янський</string>
 </resources>
