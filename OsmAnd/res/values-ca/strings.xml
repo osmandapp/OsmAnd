@@ -4073,7 +4073,7 @@
     <string name="shared_string_next_sunrise">Propera alba</string>
     <string name="shared_string_time_left">Temps restant</string>
     <string name="shared_string_sunset">Posta de sol</string>
-    <string name="shared_string_sunrise">Alba</string>
+    <string name="shared_string_sunrise">Sol ixent</string>
     <string name="map_widget_group_sunrise_sunset_desc">Els ginys mostren informació de la propera posta de sol i alba.</string>
     <string name="map_widget_group_sunrise_sunset">Alba, posta de sol</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de les línies</string>
@@ -4744,4 +4744,11 @@
     <string name="help_article_navigation_routing_car_based_routing_name">Rutes en cotxe (camió, moto)</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Ruta directa al punt (vaixell)</string>
     <string name="help_article_navigation_routing_moped_routing_name">Rutes per ciclomotors</string>
+    <string name="deleting_history">esborrant l\'historial…</string>
+    <string name="deleting">Esborrant…</string>
+    <string name="release_5_1">• S\'ha afegit suport per a compres web entre plataformes\n\n• S\'han desplaçat les unitats de temperatura a la configuració general per facilitar-ne l\'accés\n\n• S\'ha afegit l\'indicador de nivell de bateria per a sensors BLE\n\n• Nova interfície d\'usuari més intuïtiva per a la selecció de punts durant la navegació\n\n• S\'ha millorat la visibilitat dels ginys amb un nou contorn\n\n• S\'ha afegit l\'analitzador Pujades/Baixades\n\n• Integració ampliada a Wikipedia i Wikivoyage per a més PDIs.</string>
+    <string name="osm_live_payment_renews_3_years">Renovació cada tres anys</string>
+    <string name="years_3">Tres anys</string>
+    <string name="osm_live_payment_3_years_title">Cada tres anys</string>
+    <string name="three_years_subscription">Subscripció de tres anys</string>
 </resources>

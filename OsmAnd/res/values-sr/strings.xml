@@ -5529,7 +5529,7 @@
     <string name="connect_obd_instructions_step3">Омогућите Блутут на свом уређају</string>
     <string name="learn_more_about_obd_sensors">Сазнајте више о пријемницима.</string>
     <string name="obd_fuel_left_liters">Преостало гориво (литара)</string>
-    <string name="route_guidance">Усмеравање путањом</string>
+    <string name="route_guidance">Усмеравање руте</string>
     <string name="obd_widget_vehicle_speed">Брзина возила</string>
     <string name="obd_widget_engine_speed">Брзина мотора</string>
     <string name="obd_nothing_found_text">Није пронађен ни један пријемник</string>
@@ -5583,13 +5583,13 @@
     <string name="remaining_fuel_description">Приказује преосталу количину горива у резервоару возила</string>
     <string name="remaining_fuel">Преостало гориво</string>
     <string name="obd_fuel_consumption">Потрошња горива</string>
-    <string name="reset_average_value">Поништи просечну вредност</string>
+    <string name="reset_average_value">Ресетујт просечну вредност</string>
     <string name="average_value_slider_description">Изаберите међувреме мерења просечне вредности.</string>
     <string name="vehicle_metrics_obd_ii">Метрика возила (ДНВ-ИИ)</string>
     <string name="average_temperature_slider_description">Изаберите међувреме мерења просечне температуре.</string>
     <string name="shared_string_instant">Тренутно</string>
-    <string name="current_temperature">Тренутна топлота</string>
-    <string name="average_temperature">Просечна топлота</string>
+    <string name="current_temperature">Тренутна температура</string>
+    <string name="average_temperature">Просечна температура</string>
     <string name="show_minor_turns_descr">Траке ће бити приказане на свим пролазним раскрсницама без обзира на гласовна упутства</string>
     <string name="show_minor_turns">Приказ на мањим раскрсницама када се крећете право</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Пратите битне податке о возилу користећи правилник ДНВ-ИИ. Пратите кључна мерења као што су брзина, обртаје мотора, потрошња горива и још много тога.</string>

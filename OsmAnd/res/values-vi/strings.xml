@@ -2391,7 +2391,7 @@
     <string name="rendering_attr_surface_dirt_name">Đất</string>
     <string name="shared_string_notifications">Thông báo</string>
     <string name="shared_string_share">Chia sẻ</string>
-    <string name="shared_string_undo">Làm ngược lại</string>
+    <string name="shared_string_undo">Hoàn tác</string>
     <string name="analyze_by_intervals">Phân tích theo các quãng thời gian</string>
     <string name="provided_by">Cung cấp bởi %1$s</string>
     <string name="routing_attr_avoid_ferry_name">Không đi phà</string>

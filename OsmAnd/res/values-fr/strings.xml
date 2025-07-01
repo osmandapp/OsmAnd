@@ -5442,13 +5442,13 @@
     <string name="connect_obd_instructions_step4">Appuyez sur « %1$s » et sélectionnez votre scanneur dans la liste.</string>
     <string name="learn_more_about_obd_sensors">En savoir plus sur les capteurs.</string>
     <string name="obd_fuel_left_liters">Carburant restant (litres)</string>
-    <string name="route_guidance">Guidage routier</string>
+    <string name="route_guidance">Guidage d\'itinéraire</string>
     <string name="obd_widget_vehicle_speed">Vitesse du véhicule</string>
     <string name="obd_widget_engine_speed">Régime moteur</string>
     <string name="obd_nothing_found_text">Aucun scanner trouvé</string>
     <string name="obd_searching_text">Recherche de scanners</string>
     <string name="obd_device_forget_sensor">Oublier le scanner</string>
-    <string name="route_guidance_desc">Fournit un guidage routier en temps réel, y compris la distance jusqu\'au prochain virage, le nom de la route, le nom de la rue actuelle et des informations sur les voies de circulation. Les widgets sont actifs pendant la navigation.</string>
+    <string name="route_guidance_desc">Fournit un guidage routier en temps réel, incluant la distance jusqu\'au prochain virage, le nom de la route, le nom de la rue actuelle et les informations sur les voies. Les widgets sont actifs pendant la navigation.</string>
     <string name="obd_nothing_found_description">Veuillez vérifiez les points suivants :\n – Assurez-vous que la fonction Bluetooth est activée\n – Le moteur du véhicule est en marche\n – Assurez-vous que votre appareil est à portée du scanner.</string>
     <string name="obd_bluetooth_off_description">Activez le Bluetooth pour rechercher et connecter des scanners.</string>
     <string name="obd_device_forget_sensor_description">Le scanner sera retiré de la liste. Vous pourrez ré-appairer ce scanner à tout moment.</string>
@@ -5500,8 +5500,8 @@
     <string name="shared_string_volume">Volume</string>
     <string name="remaining_fuel">Carburant restant</string>
     <string name="obd_fuel_consumption">Consommation de carburant</string>
-    <string name="shared_string_instant">Instantané</string>
-    <string name="reset_average_value">Effacer la valeur moyenne</string>
+    <string name="shared_string_instant">Instantanée</string>
+    <string name="reset_average_value">Réinitialiser la valeur moyenne</string>
     <string name="current_temperature">Température actuelle</string>
     <string name="average_temperature">Température moyenne</string>
     <string name="preview_next_turn">Aperçu de la prochaine bifurcation</string>
