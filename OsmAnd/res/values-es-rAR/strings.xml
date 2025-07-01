@@ -5555,7 +5555,7 @@
     <string name="show_grids">Mostrar cuadrícula del mapa</string>
     <string name="show_grids_description">Permite mostrar la cuadrícula sobre el mapa</string>
     <string name="map_grid">Cuadrículas de mapas</string>
-    <string name="no_places_available">Sin lugar disponible</string>
+    <string name="no_places_available">Sin lugares en la región visible</string>
     <string name="no_photo_for_location_desc">Aún no se agregaron fotos de usuarios a esta ubicación</string>
     <string name="shared_string_road_exit">Salida</string>
     <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
