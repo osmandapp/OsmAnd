@@ -5690,7 +5690,7 @@
     <string name="sensor_data">Datos del sensor</string>
     <string name="set_work">Definir trabajo</string>
     <string name="set_home">Definir casa</string>
-    <string name="set_intermediate_point">Definir punto intermedio</string>
+    <string name="set_intermediate_point">Definir destino intermedio</string>
     <string name="set_start_point">Definir punto de inicio</string>
     <string name="osm_live_payment_renews_3_years">Renovar cada 3 años</string>
     <string name="years_3">3 años</string>
@@ -5715,4 +5715,5 @@
     <string name="read_on">Leer en %1$s</string>
     <string name="deleting">Borrando…</string>
     <string name="deleting_history">Borrando historial…</string>
+    <string name="show_symbols_bboxes">Mostrar cuadros delimitadores de los símbolos</string>
 </resources>
