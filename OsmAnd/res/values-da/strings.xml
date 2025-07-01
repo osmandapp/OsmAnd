@@ -5465,7 +5465,7 @@
     <string name="quick_action_navigation_view_desc">En skifter til at åbne eller lukke navigationsvisning.</string>
     <string name="quick_action_search_view_title">Søgevisning</string>
     <string name="quick_action_navigation_view_title">Navigationsvisning</string>
-    <string name="background_opacity">Baggrundens gennemsigtighed</string>
+    <string name="background_opacity">Baggrundens ugennemsigtighed</string>
     <string name="corner_radius">Hjørneradius</string>
     <string name="shared_string_dp">dp</string>
     <string name="contour_layers_action_descr">Skift konturlag</string>
@@ -5670,7 +5670,7 @@
     <string name="location_interpolation_percent">Interpolation af placering i procent</string>
     <string name="selected_delayed_profile">Valgte profil \"%s\"</string>
     <string name="default_buttons_corners_original_description">Hver knap beholder sin egen hjørneradius.</string>
-    <string name="default_buttons_opacity_original_description">Hver knap beholder sin egen baggrundsgennemsigtighed.</string>
+    <string name="default_buttons_opacity_original_description">Hver knap beholder sin egen baggrundsugennemsigtighed.</string>
     <string name="default_buttons_size_original_description">Hver knap beholder sin egen størrelse.</string>
     <string name="calculating_indication_message">Beregner…</string>
     <string name="calculate_size">Beregn størrelse</string>
