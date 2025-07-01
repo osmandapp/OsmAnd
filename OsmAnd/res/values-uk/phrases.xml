@@ -5137,5 +5137,7 @@
     <string name="poi_denomination_kardecista">Кардечіста</string>
     <string name="poi_denomination_free_church_of_scotland">Вільна церква Шотландії</string>
     <string name="poi_denomination_catholic_apostolic">Католицька Апостольська</string>
-    <string name="poi_denomination_iglesia_filipina_independiente">Iglesia Filipina Independiente</string>
+    <string name="poi_denomination_iglesia_filipina_independiente">Філіппінська незалежна церква</string>
+    <string name="poi_denomination_sephardi">Сефарди</string>
+    <string name="poi_denomination_welsh_independent">Валлійський незалежний</string>
 </resources>
