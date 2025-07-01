@@ -5074,7 +5074,7 @@
     <string name="poi_denomination_ukrainian_orthodox">Ucraniana ortodoxa</string>
     <string name="poi_denomination_neo_pentecostal">Neopentecostal</string>
     <string name="poi_denomination_evangelical_lutheran">Evangélica luterana</string>
-    <string name="poi_denomination_macedonian_orthodox">Macedonian Orthodox</string>
+    <string name="poi_denomination_macedonian_orthodox">Ortodoxa macedonia</string>
     <string name="poi_denomination_church_of_god">Iglesia de Dios</string>
     <string name="poi_denomination_foursquare">Iglesia Cuadrangular</string>
     <string name="poi_denomination_landmark">Landmarkismo</string>
@@ -5121,5 +5121,23 @@
     <string name="poi_denomination_exclusive_brethren">Hermanos exclusivistas</string>
     <string name="poi_denomination_church_of_god_in_christ">Iglesia de Dios en Cristo</string>
     <string name="poi_denomination_czechoslovak_hussite">Husita checoslovaca</string>
-    <string name="poi_denomination_la_luz_del_mundo">La Luz Del Mundo</string>
+    <string name="poi_denomination_la_luz_del_mundo">La Luz del Mundo</string>
+    <string name="poi_denomination_christadelphian">Cristadelfianos</string>
+    <string name="poi_denomination_eritrean_orthodox">Católica eritrea</string>
+    <string name="poi_denomination_antiochian_orthodox">Artodoxa de Antioquía</string>
+    <string name="poi_denomination_mariavite">Mariavitismo</string>
+    <string name="poi_denomination_mission_covenant_church_of_sweden">Iglesia del Pacto Misionero de Suecia</string>
+    <string name="poi_denomination_gelug">Gelug</string>
+    <string name="poi_denomination_vajrayana">Vajrayāna</string>
+    <string name="poi_denomination_slavic">Eslavo</string>
+    <string name="poi_denomination_celtic">Celta</string>
+    <string name="poi_denomination_marthoma">Mar Thoma</string>
+    <string name="poi_denomination_free_methodist">Metodista Libre</string>
+    <string name="poi_denomination_churches_of_christ">Iglesias de Cristo</string>
+    <string name="poi_denomination_kardecista">Kardecista</string>
+    <string name="poi_denomination_free_church_of_scotland">Iglesia Libre de Escocia</string>
+    <string name="poi_denomination_catholic_apostolic">Católica apostólica</string>
+    <string name="poi_denomination_iglesia_filipina_independiente">Iglesia Filipina Independiente</string>
+    <string name="poi_denomination_sephardi">Sefardí</string>
+    <string name="poi_denomination_welsh_independent">Independiente de Gales</string>
 </resources>
