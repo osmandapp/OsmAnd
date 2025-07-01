@@ -938,7 +938,7 @@
     <string name="favorite_category_select">选择分类</string>
     <string name="default_speed_system_descr">定义速度单位。</string>
     <string name="default_speed_system">速度测量</string>
-    <string name="nm"></string>
+    <string name="nm"/>
     <string name="si_nm">海里</string>
     <string name="si_kmh">千米每小时</string>
     <string name="si_mph">英里每小时</string>
