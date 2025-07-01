@@ -740,10 +740,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
 			String downloadName = Algorithms.getRegionName(r.getFile().getName());
 			WorldRegion worldRegion = or.getRegionDataByDownloadName(downloadName);
-			if (!QuadRect.intersects(qr, worldRegion.getBoundingBox())) {
+			if (worldRegion != null && !QuadRect.intersects(qr, worldRegion.getBoundingBox())) {
 				continue;
 			}
-			if (!worldRegion.containsPoint(start) && !worldRegion.containsPoint(end)) {
+			if (worldRegion != null &&  !worldRegion.containsPoint(start) && !worldRegion.containsPoint(end)) {
 				continue;
 			}
 			for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
