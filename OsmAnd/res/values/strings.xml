@@ -127,7 +127,7 @@
     <string name="shared_string_length">Length</string>
     <string name="shared_string_avg_altitude">Avg. altitude</string>
     <string name="shared_string_avg_speed">Min. speed</string>
-    <string name="no_places_available">No places available</string>
+    <string name="no_places_available">No places in visible region</string>
     <string name="no_photo_for_location_desc">No user photos have been added to this location yet</string>
     <string name="shared_string_default_view">Default view</string>
     <string name="map_widget_route_information">Route information</string>
