@@ -5070,4 +5070,26 @@
     <string name="poi_tutoring">Tutorat</string>
     <string name="poi_adoption_agency">Agence d\'adoption</string>
     <string name="poi_route_point_category">Catégorie de point de voyage</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Ukrainienne gréco-catholique</string>
+    <string name="poi_denomination_ukrainian_orthodox">Orthodoxe ukrainienne</string>
+    <string name="poi_denomination_neo_pentecostal">Néo-pentecôtistes</string>
+    <string name="poi_denomination_evangelical_lutheran">Évangélique luthérienne</string>
+    <string name="poi_denomination_landmark">Point de repère</string>
+    <string name="poi_denomination_anabaptist">Anabaptiste</string>
+    <string name="poi_denomination_thai_mahanikaya">Mahanikaya thaïlandais</string>
+    <string name="poi_denomination_thai_thammayut">Thammayut thaïlandais</string>
+    <string name="poi_denomination_african_methodist_episcopal">Église épiscopale méthodiste africaine</string>
+    <string name="poi_denomination_soto">Soto</string>
+    <string name="poi_denomination_macedonian_orthodox">Orthodoxe macédonienne</string>
+    <string name="poi_denomination_southern_baptist">Baptiste du Sud</string>
+    <string name="poi_denomination_jodo_shinshu">Jodo Shinshu</string>
+    <string name="poi_denomination_african_methodist_episcopal_zion">Église épiscopale méthodiste africaine de Sion</string>
+    <string name="poi_denomination_christ_scientist">Christ Scientiste</string>
+    <string name="poi_denomination_nichiren">Nichiren</string>
+    <string name="poi_denomination_church_of_god">Église de Dieu</string>
+    <string name="poi_denomination_brethren">Frères</string>
+    <string name="poi_denomination_free_evangelical">Évangélique libre</string>
+    <string name="poi_denomination_alevi">Alévi</string>
+    <string name="poi_denomination_bektashi">Bektashi</string>
+    <string name="poi_denomination_ibadi">Ibadi</string>
 </resources>
