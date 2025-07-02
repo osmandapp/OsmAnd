@@ -3709,7 +3709,7 @@
     <string name="map_markers_history">地图标记历史记录</string>
     <string name="navigation_history">导航历史</string>
     <string name="shared_storage_last_step">你可以之后指定一个新的数据文件夹。</string>
-    <string name="delete_history_items_descr">删除所选历史条目吗？</string>
+    <string name="delete_history_items_descr">被选中的条目将会从列表中删除。</string>
     <string name="delete_history_items">删除 %1$s 条历史项吗？</string>
     <string name="quick_action_toggle_preference">更改首选项的开关。</string>
     <string name="approx_safe_mode_description">使用较慢的 Android 而非原生代码执行 GPX 粗略计算。</string>
@@ -5736,7 +5736,7 @@
     <string name="shared_string_avg_altitude">平均海拔</string>
     <string name="no_places_available">可见区域内没有地点</string>
     <string name="ais_cpa_settings">与最近接近点相关的设置</string>
-    <string name="no_photo_for_location_desc">此地点尚未添加任何用户照片</string>
+    <string name="no_photo_for_location_desc">此地点尚未添加任何用户的照片</string>
     <string name="map_widget_route_information_desc">显示预计到达时间、剩余旅行时间以及当前导航路线的距离。</string>
     <string name="default_buttons_corners_original_description">每个按钮都会保留其转角半径。</string>
     <string name="default_buttons_size_original_description">每个按钮都会保留其大小。</string>
