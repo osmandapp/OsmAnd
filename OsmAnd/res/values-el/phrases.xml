@@ -4064,6 +4064,12 @@
     <string name="poi_planetarium">Πλανητάριο</string>
     <string name="poi_refugee_site">Χώρος φιλοξενίας προσφύγων</string>
     <string name="poi_windsock">Ανεμοδείκτης</string>
-    <string name="poi_operator_type_public">Είδος χειριστή: δημόσιο</string>
+    <string name="poi_operator_type_public">Είδος χειριστή: δημόσιος</string>
     <string name="poi_operator_type_private">Είδος χειριστή: ιδιωτικός</string>
+    <string name="poi_operator_type_government">Είδος χειριστή: κυβερνητικός</string>
+    <string name="poi_operator_type_religious">Είδος χειριστή: θρησκευτικός</string>
+    <string name="poi_operator_type_ngo">Είδος χειριστή: ΜΚΟ</string>
+    <string name="poi_operator_type_community">Είδος χειριστή: κοινότητας</string>
+    <string name="poi_operator_type_consortium">Είδος χειριστή: κοινοπραξία</string>
+    <string name="poi_operator_type_cooperative">Είδος χειριστή: συναιτερικό</string>
 </resources>
