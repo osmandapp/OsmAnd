@@ -1562,7 +1562,7 @@
     <string name="nothing_found_in_radius">Κανένα αποτέλεσμα:</string>
     <string name="select_waypoints_category_description">Προσθέσετε όλα τα σημεία διαδρομής του ίχνους, ή επιλέξετε ξεχωριστές κατηγορίες.</string>
     <string name="shared_string_total">Σύνολο</string>
-    <string name="clear_all_intermediates">Καθαρισμός όλων των ενδιάμεσων σημείων</string>
+    <string name="clear_all_intermediates">Καθαρισμός όλων των ενδιάμεσων προορισμών</string>
     <string name="group_deleted">Η ομάδα καταργήθηκε</string>
     <string name="rendering_attr_whiteWaterSports_name">Αθλήματα ορμητικών νερών</string>
     <string name="distance_farthest">Μακρινότερο πρώτο</string>
@@ -2711,7 +2711,7 @@
     <string name="save_poi_value_exceed_length_title">Μήκος της τιμής \"%s\"</string>
     <string name="public_transport_warning_descr_blog">Μάθετε περισσότερα για το πώς δρομολογεί το OsmAnd στο ιστολόγιό μας.</string>
     <string name="public_transport_warning_title">Η περιήγηση με τα δημόσια Μ.Μ.Μ είναι προς το παρόν σε δοκιμαστικό έλεγχο, αναμένονται λάθη και ανακρίβειες.</string>
-    <string name="add_intermediate">Προσθήκη ενδιάμεσου σημείου</string>
+    <string name="add_intermediate">Προσθήκη ενδιάμεσου προορισμού</string>
     <string name="transfers_size">%1$d μετεπιβιβάσεις</string>
     <string name="add_start_and_end_points">Προσθέστε εκκίνηση και προορισμό</string>
     <string name="route_add_start_point">Προσθέστε σημείο εκκίνησης</string>
@@ -2782,9 +2782,9 @@
     <string name="shared_string_width">Πλάτος</string>
     <string name="shared_string_height">Ύψος</string>
     <string name="add_destination_point">Ορίστε προορισμού</string>
-    <string name="add_intermediate_point">Προσθήκη ενδιάμεσου σημείου</string>
+    <string name="add_intermediate_point">Προσθήκη ενδιάμεσου προορισμού</string>
     <string name="add_start_point">Ορίστε σημείο εκκίνησης</string>
-    <string name="intermediate_waypoint">Ενδιάμεσο σημείο</string>
+    <string name="intermediate_waypoint">Ενδιάμεσος προορισμός</string>
     <string name="transfers">Μετακινήσεις</string>
     <string name="on_foot">Με τα πόδια</string>
     <string name="route_way">Δρόμος</string>
@@ -3209,7 +3209,7 @@
     <string name="live_monitoring_tracking_interval">Χρονικά διαστήματα ιχνηλάτησης</string>
     <string name="search_offline_geo_error">Αδυναμία ανάλυσης γεωγραφικού στόχου \'%s\'.</string>
     <string name="rearrange_categories">Αναδιάταξη κατηγοριών</string>
-    <string name="create_custom_categories_list_promo">Η αλλαγή της σειράς διάταξης του καταλόγου, αποκρύπτει τις κατηγορίες. Μπορείτε να εισάγετε ή να εξάγετε όλες τις αλλαγές με κατατομές (προφίλ).</string>
+    <string name="create_custom_categories_list_promo">Αλλάξτε την σειρά διάταξης και αποκρύψτε τις κατηγορίες. Εισάγετε ή εξάγετε όλες τις αλλαγές ως προφίλ.</string>
     <string name="add_new_custom_category_button_promo">Προσθέστε μια νέα προσαρμοσμένη κατηγορία επιλέγοντας μία ή περισσότερες κατηγορίες.</string>
     <string name="reset_to_default_category_button_promo">Το \'Επαναφορά στην προεπιλογή\' θα επαναφέρει τη σειρά ταξινόμησης στην προεπιλεγμένη εγκατάσταση.</string>
     <string name="shared_string_available">Διαθέσιμα</string>
@@ -3313,7 +3313,7 @@
     <string name="add_online_source">Προσθήκη διαδικτυακής πηγής</string>
     <string name="clear_tiles_warning">Η εφαρμογή αυτών των αλλαγών θα καθαρίσει τα κρυμμένα δεδομένα της πηγής πλακιδίου</string>
     <string name="vessel_height_warning_link">Ορισμός ύψους σκάφους</string>
-    <string name="vessel_height_warning">Μπορείτε να ορίσετε ύψος σκάφους για να αποφύγετε χαμηλές γέφυρες. Σημειώστε ότι εάν η γέφυρα είναι κινητή, θα χρησιμοποιηθεί το ύψος της ανοικτής κατάστασης.</string>
+    <string name="vessel_height_warning">Ορίστε ένα ύψος σκάφους για να αποφύγετε χαμηλές γέφυρες. Εάν η γέφυρα είναι κινητή, θα χρησιμοποιηθεί το ύψος της ανοικτής κατάστασης.</string>
     <string name="vessel_height_limit_description">Ορίστε ύψος σκάφος για αποφυγή χαμηλών γεφυρών. Σημειώστε ότι εάν η γέφυρα είναι κινητή, θα χρησιμοποιηθεί το ύψος της στην ανοικτή κατάσταση.</string>
     <string name="vessel_width_limit_description">Ορίστε πλάτος σκάφους για αποφυγή στενών γεφυρών</string>
     <string name="quick_action_showhide_mapillary_descr">Εναλλαγή εμφάνισης ή απόκρυψης της στρώσης Mapillary του χάρτη.</string>
@@ -4642,7 +4642,7 @@
     <string name="prime_meridian">Πρώτος μεσημβρινός</string>
     <string name="shared_string_map_center">Κέντρο χάρτη</string>
     <string name="shared_string_avg_speed">Ελάχ. ταχύτητα</string>
-    <string name="no_places_available">Δεν υπάρχουν διαθέσιμα μέρη</string>
+    <string name="no_places_available">Δεν υπάρχουν μέρη στην ορατή περιοχή</string>
     <string name="no_photo_for_location_desc">Καμία φωτογραφία χρήστη δεν προστέθηκε ακόμη γι\' αυτή την τοποθεσία</string>
     <string name="calculating_indication_message">Υπολογίζεται…</string>
     <string name="shared_string_default_view">Προεπιλεγμένη προβολή</string>

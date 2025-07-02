@@ -141,13 +141,6 @@
 		android:title="@string/disable_map_layers" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="show_tiles_primitivisation_debug_info"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/show_debug_tile" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="show_tiles_rasterization_debug_info"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
@@ -160,13 +153,6 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/show_symbols_debug_info" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="show_symbols_bboxes"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/show_symbols_bboxes" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="allow_symbols_display_on_top"
