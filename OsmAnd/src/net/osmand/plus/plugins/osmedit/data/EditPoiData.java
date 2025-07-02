@@ -35,7 +35,7 @@ public class EditPoiData {
 
 	private final Set<String> changedTags = Collections.synchronizedSet(new HashSet<>());
 
-	public EditPoiData(Entity entity, OsmandApplication app) {
+	public EditPoiData(Entity entity, OsmandApplication app, boolean isNew) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
 		category = app.getPoiTypes().getOtherPoiCategory();
 		this.entity = entity;
