@@ -1123,7 +1123,7 @@
     <string name="poi_denomination_spiritist">Spiritiste</string>
     <string name="poi_denomination_church_of_christ">Église du Christ</string>
     <string name="poi_denomination_united_church_of_christ">Église unie du Christ</string>
-    <string name="poi_denomination_georgian_orthodox">Orthodoxe georgien</string>
+    <string name="poi_denomination_georgian_orthodox">Orthodoxe géorgien</string>
     <string name="poi_internet_access_yes">Accès Internet : oui</string>
     <string name="poi_internet_access_no">Accès Internet : non</string>
     <string name="poi_content_water">Contenu : eau</string>
@@ -1691,7 +1691,7 @@
     <string name="poi_denomination_nondenominational">Sans dénomination</string>
     <string name="poi_denomination_congregational">Congrégationaliste</string>
     <string name="poi_denomination_dutch_reformed">Église réformée néerlandaise</string>
-    <string name="poi_denomination_ethiopian_orthodox_tewahedo">Église éthiopienne orthodoxe</string>
+    <string name="poi_denomination_ethiopian_orthodox_tewahedo">Église orthodoxe éthiopienne Tewahedo</string>
     <string name="poi_denomination_unitarian">Unitariste</string>
     <string name="poi_denomination_coptic_orthodox">Église copte orthodoxe</string>
     <string name="poi_denomination_wesleyan">Wesleyaniste</string>
