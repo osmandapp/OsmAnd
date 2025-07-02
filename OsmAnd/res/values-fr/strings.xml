@@ -5508,7 +5508,7 @@
     <string name="obd_engine_oil_temperature">Température de l\'huile moteur</string>
     <string name="av_audio_sample_rate_descr">Sélectionner le taux d\'échantillonnage audio.</string>
     <string name="connect_new_scanner">Connecter un nouveau scanner</string>
-    <string name="vehicle_metrics_recording_description">Sélectionner les informations à enregistrer dans le fichier GPX.</string>
+    <string name="vehicle_metrics_recording_description">Sélectionnez les paramètres à enregistrer dans le fichier GPX.</string>
     <string name="av_audio_sample_rate">Taux d’échantillonnage audio</string>
     <string name="shared_string_engine">Moteur</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Suivez les données vitales du véhicule grâce au protocole OBD-II. Surveillez les indicateurs clés comme la vitesse, le régime moteur, la consommation de carburant, etc.</string>
