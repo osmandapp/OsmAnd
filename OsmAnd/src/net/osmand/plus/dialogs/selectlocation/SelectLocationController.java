@@ -17,13 +17,14 @@ import net.osmand.plus.dialogs.selectlocation.extractor.CenterMapLatLonExtractor
 import net.osmand.plus.dialogs.selectlocation.extractor.IMapLocationExtractor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public class SelectLocationController<ResultType> extends BaseDialogController
-		implements IMapLocationListener {
+		implements IMapLocationListener, IMapDisplayPositionProvider {
 
 	private static final String PROCESS_ID = "select_location_on_map";
 
@@ -79,12 +80,12 @@ public class SelectLocationController<ResultType> extends BaseDialogController
 
 	public void onResume() {
 		updateMapLocationListener(true);
-		updateMapPositionShiftedX(landscape);
+		updateDisplayPositionListener(true);
 	}
 
 	public void onPause() {
 		updateMapLocationListener(false);
-		updateMapPositionShiftedX(false);
+		updateDisplayPositionListener(false);
 	}
 
 	public void onDestroy(@Nullable FragmentActivity activity) {
@@ -121,17 +122,22 @@ public class SelectLocationController<ResultType> extends BaseDialogController
 		}
 	}
 
-	private void updateMapPositionShiftedX(boolean shifted) {
-		MapViewTrackingUtilities mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
-		MapDisplayPositionManager positionManager = mapViewTrackingUtilities.getMapDisplayPositionManager();
-		positionManager.setMapPositionShiftedX(shifted);
-	}
-
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
-		app.runInUIThread(() -> {
-			dialogManager.askRefreshDialogCompletely(getProcessId());
-		});
+		app.runInUIThread(() -> dialogManager.askRefreshDialogCompletely(getProcessId()));
+	}
+
+	private void updateDisplayPositionListener(boolean register) {
+		MapViewTrackingUtilities utilities = app.getMapViewTrackingUtilities();
+		MapDisplayPositionManager manager = utilities.getMapDisplayPositionManager();
+		manager.updateMapPositionProviders(this, register);
+		manager.updateMapDisplayPosition(true);
+	}
+
+	@Nullable
+	@Override
+	public MapPosition getMapDisplayPosition() {
+		return landscape ? MapPosition.LANDSCAPE_MIDDLE_END : MapPosition.CENTER;
 	}
 
 	@Nullable
@@ -167,8 +173,7 @@ public class SelectLocationController<ResultType> extends BaseDialogController
 	                                           @NonNull IMapLocationExtractor<ResultType> extractor,
 	                                           @NonNull ILocationSelectionHandler<ResultType> handler) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		SelectLocationController<ResultType> controller =
-				new SelectLocationController<>(app, extractor, handler);
+		SelectLocationController<ResultType> controller = new SelectLocationController<>(app, extractor, handler);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);
