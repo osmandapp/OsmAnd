@@ -89,7 +89,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 		buildRow(view, null, null, textPrefix, wpt.getDesc(), 0,
 				null, false, null, true, 10,
-				false, false, false, clickListener, matchWidthDivider);
+				false, false, false, clickListener, matchWidthDivider, null);
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				int color = getPointColor(wpt, getFileColor(selectedGpxFile));
 				buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_type_waypoints_group, color), null, title, 0, gpxName,
 						true, getCollapsableWaypointsView(view.getContext(), true, gpx, wpt),
-						false, 0, false, null, false);
+						false, 0, false, null, false, "ic_type_waypoints_group");
 			}
 		}
 	}
