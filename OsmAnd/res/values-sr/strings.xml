@@ -2996,7 +2996,7 @@
     <string name="turn_screen_on">Укључивање заслона</string>
     <string name="map_during_navigation_info">Карта за време навођења</string>
     <string name="map_during_navigation">Карта за време навођења</string>
-    <string name="shared_string_other">Остало</string>
+    <string name="shared_string_other">Друго</string>
     <string name="vehicle_parameters_descr">Тежина, висина, дужина, брзина</string>
     <string name="vehicle_parameters">Одреднице возила</string>
     <string name="voice_announces_info">Гласовна обавештења су дешавају само за време навођења.</string>
@@ -5615,7 +5615,7 @@
     <string name="av_audio_sample_rate_descr">Изабери брзину узорковања звука.</string>
     <string name="connect_new_scanner">Повежи нови пријемник</string>
     <string name="auto_zoom_3d_angle">Самостално приближавање просторног угла</string>
-    <string name="vehicle_metrics_recording_description">Изаберите одреднице које ће бити снимљене у датотеци ГПИКС-а.</string>
+    <string name="vehicle_metrics_recording_description">Изаберите параметре који ће бити снимљени у ГПКС фајлу.</string>
     <string name="shared_string_engine">Мотор</string>
     <string name="shared_string_interpolation">Интерполација</string>
     <string name="location_interpolation_percent_desc">Поставите постотак интерполације положаја током навођења путем. Ова одредница смањује кашњење положаја на карти током оживљавања.</string>
@@ -5669,7 +5669,7 @@
     <string name="show_utm_grids">Користи UTM уместо WGS84</string>
     <string name="show_utm_grids_description">Прикажи мрежу у UTM метрима уместо WGS84</string>
     <string name="map_grid">Мреже мапе</string>
-    <string name="no_places_available">Нема слободних места</string>
+    <string name="no_places_available">Нема места у видљивом региону</string>
     <string name="no_photo_for_location_desc">Још увек није додата ниједна корисничка слика на овај положај</string>
     <string name="hmd_promo_description">Бесплатан приступ могућностима укључујући неограничено преузимање карата, просторног приказа итд. за %1$s месеци</string>
     <string name="shared_string_road_exit">Излаз</string>

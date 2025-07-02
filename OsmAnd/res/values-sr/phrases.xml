@@ -5070,4 +5070,9 @@
     <string name="poi_translator">Преводилац</string>
     <string name="poi_private_investigator">Приватни детектив</string>
     <string name="poi_route_point_category">Категорија путовања</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Украјинска Грчкокатоличка</string>
+    <string name="poi_denomination_ukrainian_orthodox">Украјинска Православна</string>
+    <string name="poi_denomination_neo_pentecostal">Нео-пентекостална</string>
+    <string name="poi_denomination_evangelical_lutheran">Евангелистичка Лутеранска</string>
+    <string name="poi_denomination_landmark">Ознака места</string>
 </resources>

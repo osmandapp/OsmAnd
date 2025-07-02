@@ -251,7 +251,7 @@
     <string name="shared_string_welcome">欢迎</string>
     <string name="yard">码</string>
     <string name="m">米</string>
-    <string name="nm"></string>
+    <string name="nm">海里</string>
     <string name="km">千米</string>
     <string name="min_mile">分/米</string>
     <string name="min_km">分/千米</string>
@@ -273,4 +273,8 @@
     <string name="shared_string_minute_short">分</string>
     <string name="shared_string_second_short">秒</string>
     <string name="my_location">我的位置</string>
+    <string name="welcome_descr"><b>OsmAnd 追踪器</b> 能让您在 OsmAnd 中分享你的位置，并查看他人的位置。 <br/><br/>该应用程序使用 Telegram API，因此您需要一个 Telegram 账号。</string>
+    <string name="live_now">实时在线</string>
+    <string name="timeline">时间轴</string>
+    <string name="mile">英里</string>
 </resources>

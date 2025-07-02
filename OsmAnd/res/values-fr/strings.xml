@@ -5508,7 +5508,7 @@
     <string name="obd_engine_oil_temperature">Température de l\'huile moteur</string>
     <string name="av_audio_sample_rate_descr">Sélectionner le taux d\'échantillonnage audio.</string>
     <string name="connect_new_scanner">Connecter un nouveau scanner</string>
-    <string name="vehicle_metrics_recording_description">Sélectionner les informations à enregistrer dans le fichier GPX.</string>
+    <string name="vehicle_metrics_recording_description">Sélectionnez les paramètres à enregistrer dans le fichier GPX.</string>
     <string name="av_audio_sample_rate">Taux d’échantillonnage audio</string>
     <string name="shared_string_engine">Moteur</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Suivez les données vitales du véhicule grâce au protocole OBD-II. Surveillez les indicateurs clés comme la vitesse, le régime moteur, la consommation de carburant, etc.</string>
@@ -5571,7 +5571,7 @@
     <string name="ais_object_lost_timeouts_description">Définir les délais au-delà desquels les objets sont considérés comme perdus parce qu\'aucun signal AIS n\'a été reçu.</string>
     <string name="ais_object_lost_timeout">Délai avant masquage d\'un objet perdu</string>
     <string name="plugin_ais_tracker_name">Suivi AIS du navire</string>
-    <string name="no_places_available">Aucun lieu disponible</string>
+    <string name="no_places_available">Aucun lieu dans la zone visible</string>
     <string name="no_photo_for_location_desc">Aucune photo d\'utilisateur n\'a encore été ajoutée pour ce lieu</string>
     <string name="ais_object_lost_timeout_description">Définir le délai d\'expiration pour la visibilité des objets AIS : après ce délai sans réception de signal, l\'objet sera retiré de l\'écran.</string>
     <string name="ais_cpa_warning_time">Délai d\'avertissement pour atteindre le Point d\'Approche le plus proche (CPA)</string>

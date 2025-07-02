@@ -3379,7 +3379,7 @@
     <string name="voice_announces_info">Glasovna obaveštenja su samo za vreme navigacije.</string>
     <string name="vehicle_parameters">Parametri vozila</string>
     <string name="vehicle_parameters_descr">Težina, visina, dužina, brzina</string>
-    <string name="shared_string_other">Ostalo</string>
+    <string name="shared_string_other">Drugi</string>
     <string name="map_during_navigation">Mapa za vreme navođenja</string>
     <string name="map_during_navigation_info">Mapa za vreme navođenja</string>
     <string name="turn_screen_on">Uključivanje ekrana</string>
@@ -5617,7 +5617,7 @@
     <string name="av_audio_sample_rate_descr">Izaberi brzinu uzorkovanja zvuka.</string>
     <string name="connect_new_scanner">Poveži novi skener</string>
     <string name="auto_zoom_3d_angle">Auto zum 3D ugao</string>
-    <string name="vehicle_metrics_recording_description">Izaberi parametre koji će biti snimljeni u GPX fajlu.</string>
+    <string name="vehicle_metrics_recording_description">Izaberite parametre koji će biti snimljeni u GPX fajlu.</string>
     <string name="shared_string_engine">Motor</string>
     <string name="location_interpolation_percent">Procenat interpolacije pozicije</string>
     <string name="shared_string_interpolation">Interpolacija</string>
@@ -5672,7 +5672,7 @@
     <string name="show_grids_description">Dozvoli prikaz mreže preko mape</string>
     <string name="show_utm_grids">Koristite UTM umesto WGS84</string>
     <string name="no_photo_for_location_desc">Još uvek nije dodata nijedna korisnička fotografija na ovu lokaciju</string>
-    <string name="no_places_available">Nema slobodnih mesta</string>
+    <string name="no_places_available">Nema mesta u vidljivom regionu</string>
     <string name="shared_string_road_exit">Izlaz</string>
     <string name="hmd_promo_description">Besplatan pristup funkcijama uključujući neograničeno preuzimanja mapa, 3D teren i još mnogo toga za %1$s mesečno</string>
     <string name="hmd_promo">HMD promocija za %1$s meseci</string>

@@ -1581,7 +1581,7 @@
     <string name="offline_maps_and_navigation">離線地圖\n和導航</string>
     <string name="commit_poi">提交 POI</string>
     <string name="routing_attr_avoid_shuttle_train_name">避開穿梭頻繁的鐵路</string>
-    <string name="routing_attr_avoid_shuttle_train_description">避開來往頻繁的鐵路</string>
+    <string name="routing_attr_avoid_shuttle_train_description">避開汽車接駁列車</string>
     <string name="plugin_settings">外掛元件</string>
     <string name="tab_title_basic">基本</string>
     <string name="tab_title_advanced">展開</string>
@@ -5669,7 +5669,7 @@
     <string name="map_grid">地圖網格</string>
     <string name="shared_string_default_view">預設檢視</string>
     <string name="ais_address_settings_description">選擇 NMEA 通訊協定 (UDP/TCP) 並定義位址</string>
-    <string name="no_places_available">沒有位置</string>
+    <string name="no_places_available">可見區域中沒有位置</string>
     <string name="no_photo_for_location_desc">此位置尚未新增使用者照片</string>
     <string name="hmd_promo_description">%1$s個月免費使用功能，包括無限制地圖下載、3D 浮雕等</string>
     <string name="shared_string_road_exit">出口</string>

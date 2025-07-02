@@ -938,7 +938,7 @@
     <string name="favorite_category_select">选择分类</string>
     <string name="default_speed_system_descr">定义速度单位。</string>
     <string name="default_speed_system">速度测量</string>
-    <string name="nm"></string>
+    <string name="nm">海里</string>
     <string name="si_nm">海里</string>
     <string name="si_kmh">千米每小时</string>
     <string name="si_mph">英里每小时</string>
@@ -1156,7 +1156,7 @@
     <string name="wake_on_voice">点亮屏幕</string>
     <string name="impassable_road_desc">选择您在导航时想要避开的道路。</string>
     <string name="routing_attr_avoid_shuttle_train_name">无区间列车</string>
-    <string name="routing_attr_avoid_shuttle_train_description">避免使用区间列车</string>
+    <string name="routing_attr_avoid_shuttle_train_description">避开汽车接驳列车</string>
     <string name="impassable_road">避开道路…</string>
     <string name="routing_attr_avoid_toll_name">无收费公路</string>
     <string name="routing_attr_avoid_toll_description">避开收费公路</string>
@@ -1440,7 +1440,7 @@
     <string name="dist_away_from_my_location">搜索 %1$s 开外</string>
     <string name="share_history_subject">通过 OsmAnd 分享</string>
     <string name="postcode">邮政编码</string>
-    <string name="shared_string_from">之于</string>
+    <string name="shared_string_from">从</string>
     <string name="city_type_district">区</string>
     <string name="city_type_neighbourhood">邻里</string>
     <string name="map_widget_search">搜索</string>
@@ -2276,7 +2276,7 @@
     <string name="quick_action_interim_dialog">显示临时的对话框</string>
     <string name="favorite_autofill_toast_text">" 保存到 "</string>
     <string name="favorite_empty_place_name">地点</string>
-    <string name="quick_action_duplicates">快捷操作被重命名为 %1$s 以避免重复。</string>
+    <string name="quick_action_duplicates">快捷操作已被重命名为 %1$s 以避免重复。</string>
     <string name="quick_action_duplicate">快速动作的名称重复</string>
     <string name="quick_action_showhide_favorites_descr">用以在地图上显示或隐藏收藏点的切换按钮。</string>
     <string name="quick_action_showhide_poi_descr">用以在地图上显示或隐藏兴趣点的切换按钮。</string>
@@ -2385,7 +2385,7 @@
     <string name="shared_string_more_without_dots">更多</string>
     <string name="appearance_on_the_map">在地图上的外观</string>
     <string name="add_track_to_markers_descr">选择一条轨迹以添加它的路径点到地图标记。</string>
-    <string name="add_favourites_group_to_markers_descr">选择一个收藏夹类别以便添加到标记。</string>
+    <string name="add_favourites_group_to_markers_descr">选择要添加到地图标记中的收藏类别。</string>
     <string name="shared_string_gpx_waypoints">轨迹路径点</string>
     <string name="favourites_group">收藏夹类别</string>
     <string name="add_group">添加组</string>
@@ -2452,7 +2452,7 @@
     <string name="map_import_error">地图导入错误</string>
     <string name="map_imported_successfully">地图已导入</string>
     <string name="shared_string_current">当前</string>
-    <string name="clear_all_intermediates">清空所有中间点</string>
+    <string name="clear_all_intermediates">清除所有中间目的地</string>
     <string name="in_app_purchase">应用内购买</string>
     <string name="in_app_purchase_desc">一次性付款</string>
     <string name="in_app_purchase_desc_ex">购买后将对您永久可用。</string>
@@ -2534,30 +2534,30 @@
     <string name="mapillary_menu_title_pano">仅显示 360° 图像</string>
     <string name="wiki_article_search_text">搜索对应的维基条目</string>
     <string name="run_full_osmand_header">启动 OsmAnd？</string>
-    <string name="routing_attr_avoid_subway_name">不乘坐地铁</string>
+    <string name="routing_attr_avoid_subway_name">避开地铁</string>
     <string name="quick_action_day_night_mode">%s模式</string>
-    <string name="avoid_pt_types">避免特定交通类型……</string>
+    <string name="avoid_pt_types">避开特定交通类型……</string>
     <string name="rendering_attr_undefined_name">未定义</string>
     <string name="use_osm_live_public_transport">OsmAnd Live 公共交通</string>
     <string name="total_donations">捐赠总计</string>
     <string name="winter_and_ski_renderer">冬季与滑雪</string>
     <string name="toast_empty_name_error">未命名的位置</string>
-    <string name="routing_attr_avoid_share_taxi_name">不乘坐共享出租车</string>
-    <string name="routing_attr_avoid_share_taxi_description">避免共享出租车</string>
-    <string name="routing_attr_avoid_train_name">不乘坐火车</string>
-    <string name="routing_attr_avoid_train_description">避免火车</string>
-    <string name="routing_attr_avoid_subway_description">避免地铁和轻轨交通</string>
+    <string name="routing_attr_avoid_share_taxi_name">避开共享出租车</string>
+    <string name="routing_attr_avoid_share_taxi_description">避开共享出租车</string>
+    <string name="routing_attr_avoid_train_name">避开火车</string>
+    <string name="routing_attr_avoid_train_description">避开火车</string>
+    <string name="routing_attr_avoid_subway_description">避开地铁和轻轨交通</string>
     <string name="routing_attr_avoid_ferry_name">避开轮渡</string>
     <string name="routing_attr_avoid_ferry_description">避开轮渡</string>
     <string name="shared_string_degrees">度</string>
     <string name="shared_string_milliradians">毫弧度</string>
-    <string name="avoid_pt_types_descr">选择导航时要避免的公共交通类型：</string>
+    <string name="avoid_pt_types_descr">选择导航时要避开的公共交通类型：</string>
     <string name="shared_string_walk">步行</string>
     <string name="save_poi_value_exceed_length">将“%s”标签的长度缩短为 255 个字符以下。</string>
     <string name="save_poi_value_exceed_length_title">“%s”值的长度</string>
     <string name="public_transport_warning_descr_blog">在我们的博客上了解更多与 OsmAnd 路线计算相关的信息。</string>
     <string name="public_transport_warning_title">公共交通导航目前处于测试阶段，可能出现错误和信息不准确。</string>
-    <string name="add_intermediate">添加中继点</string>
+    <string name="add_intermediate">新增中间目的地</string>
     <string name="route_add_start_point">添加出发地</string>
     <string name="route_descr_select_start_point">选择出发地</string>
     <string name="quick_action_switch_day_mode">日间模式</string>
@@ -2571,13 +2571,13 @@
     <string name="routeInfo_steepness_name">坡度</string>
     <string name="unirs_render_descr">更改默认风格以突出显示人行道和非机动车道，使用旧版Mapnik配色。</string>
     <string name="run_full_osmand_msg">你正在使用基于 OsmAnd 的 {0} 地图。是否启动完整版 OsmAnd？</string>
-    <string name="transfers_size">%1$d 次中转</string>
+    <string name="transfers_size">%1$d 次换乘</string>
     <string name="rendering_attr_surface_mud_name">泥路</string>
     <string name="rendering_attr_surface_asphalt_name">沥青路</string>
-    <string name="routing_attr_avoid_tram_name">不乘坐电车</string>
-    <string name="routing_attr_avoid_tram_description">避免电车</string>
-    <string name="routing_attr_avoid_bus_name">不乘坐公交</string>
-    <string name="routing_attr_avoid_bus_description">避免公交和无轨电车</string>
+    <string name="routing_attr_avoid_tram_name">避开电车</string>
+    <string name="routing_attr_avoid_tram_description">避开有轨电车</string>
+    <string name="routing_attr_avoid_bus_name">避开公共汽车</string>
+    <string name="routing_attr_avoid_bus_description">避开公交车和无轨电车</string>
     <string name="send_log">发送日志</string>
     <string name="files_moved">已移动 %1$d 个文件 (%2$s)。</string>
     <string name="files_copied">已复制 %1$d 个文件 (%2$s)。</string>
@@ -2595,9 +2595,9 @@
     <string name="markers_remove_dialog_msg">删除地图标记 \'%s\' 吗？</string>
     <string name="edit_map_marker">编辑地图标记</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="add_intermediate_point">添加中间点</string>
+    <string name="add_intermediate_point">新增中间目的地</string>
     <string name="add_start_point">设置出发地</string>
-    <string name="intermediate_waypoint">中间点</string>
+    <string name="intermediate_waypoint">中间目的地</string>
     <string name="on_foot">步行</string>
     <string name="waiting_for_route_calculation">计算路线中……</string>
     <string name="app_mode_public_transport">公共交通</string>
@@ -2620,7 +2620,7 @@
     <string name="by_transport_type">乘坐 %1$s</string>
     <string name="step_by_step">路线转向规划</string>
     <string name="routeInfo_road_types_name">道路类型</string>
-    <string name="exit_at">在该站下车</string>
+    <string name="exit_at">此站下车</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地图上显示或隐藏所选轨迹的按钮。</string>
     <string name="add_destination_query">请先设置目的地</string>
     <string name="use_osm_live_public_transport_description">为OsmAnd Live启用公共交通的变更情况。</string>
@@ -2810,9 +2810,9 @@
     <string name="shared_string_uninstall">卸载</string>
     <string name="speed_cameras_alert">在某些国家法律禁止使用测速摄像警报。</string>
     <string name="vessel_height_warning_link">设置船只高度</string>
-    <string name="vessel_height_warning">设置船只高度以避免低桥。如果桥是可移动的，则使用打开时的高度。</string>
-    <string name="vessel_height_limit_description">设置船只高度，以避免过低桥梁。请记住，如果桥是可移动的，我们将使用它在打开状态下的高度。</string>
-    <string name="vessel_width_limit_description">设置船只宽度以避免狭窄的桥梁</string>
+    <string name="vessel_height_warning">设置船只高度以避开过低桥梁。如果桥是可移动的，则使用打开时的高度。</string>
+    <string name="vessel_height_limit_description">设置船只高度，以避开过低桥梁。请记住，如果桥是可移动的，我们将使用它在打开状态下的高度。</string>
+    <string name="vessel_width_limit_description">设置船只宽度以避开狭窄的桥梁</string>
     <string name="item_deleted">%1$s 已删除</string>
     <string name="shared_string_uninstall_and_restart">卸载并重新启动</string>
     <string name="use_volume_buttons_as_zoom_descr">启用以使用设备音量键控制地图缩放级别。</string>
@@ -3385,7 +3385,7 @@
 \n所有未保存的数据都将丢失。</string>
     <string name="on_pause">暂停中</string>
     <string name="app_restart_required">应用程序需要重新启动以应用某些设置。</string>
-    <string name="routing_attr_height_obstacles_description">预计行程时间将反映海拔影响。路线偏好有助于避免陡峭的上坡：</string>
+    <string name="routing_attr_height_obstacles_description">预计行程时间将反映海拔影响。路线偏好有助于避开陡峭的上坡：</string>
     <string name="quick_action_coordinates_widget_descr">显示或隐藏地图上坐标小部件的开关。</string>
     <string name="map_widget_distance_by_tap">点击测距</string>
     <string name="latest_openstreetmap_update">最新的 OpenStreetMap 更新可用：</string>
@@ -3511,7 +3511,7 @@
     <string name="map_updates_are_unavailable_yet">地图尚无更新可用。 :-(</string>
     <string name="connect_track_points_as">连接路线点</string>
     <string name="pro_features">专业版功能</string>
-    <string name="sit_on_the_stop">在该站上车</string>
+    <string name="sit_on_the_stop">此站上车</string>
     <string name="shared_string_relation">关系</string>
     <string name="use_login_and_password">使用用户名和密码</string>
     <string name="available_until">在 %1$s 前可用</string>
@@ -3610,7 +3610,7 @@
     <string name="add_group_to_markers">添加组别到标记列表</string>
     <string name="remove_group_from_markers">从标记列表中移除群组</string>
     <string name="last_intermediate_dest_description">添加中间站</string>
-    <string name="more_transport_on_stop_hint">自该站有更多的交通方式。</string>
+    <string name="more_transport_on_stop_hint">从此站可以选择更多交通工具。</string>
     <string name="routing_attr_avoid_tunnels_description">避开隧道</string>
     <string name="send_crash_log">发送崩溃日志</string>
     <string name="offline_wikipeadia">离线维基百科</string>
@@ -3709,7 +3709,7 @@
     <string name="map_markers_history">地图标记历史记录</string>
     <string name="navigation_history">导航历史</string>
     <string name="shared_storage_last_step">你可以之后指定一个新的数据文件夹。</string>
-    <string name="delete_history_items_descr">删除所选历史条目吗？</string>
+    <string name="delete_history_items_descr">被选中的条目将会从列表中删除。</string>
     <string name="delete_history_items">删除 %1$s 条历史项吗？</string>
     <string name="quick_action_toggle_preference">更改首选项的开关。</string>
     <string name="approx_safe_mode_description">使用较慢的 Android 而非原生代码执行 GPX 粗略计算。</string>
@@ -4010,7 +4010,7 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s数据仅在道路上可用，使用 \"点与点之间的路线 \"计算路线以查看图表。</string>
     <string name="copy_coordinates">复制坐标</string>
     <string name="replace_all_desc">当前项目将被文件中的项目取代</string>
-    <string name="hillshade_description">使用深色阴影来显示斜坡、山峰和低地的地形阴影图。</string>
+    <string name="hillshade_description">使用深色阴影来显示斜坡、山峰和低地的山体阴影图。</string>
     <string name="recalculate_route_in_deviation">在出现偏离的情况下重新计算路线</string>
     <string name="terrain_empty_state_text">在地图上显示山体阴影或坡度。在我们的网站上阅读更多关于此类地图类型的信息。</string>
     <string name="slope_download_description">需要额外的地图才能查看地图上的坡度。</string>
@@ -4288,7 +4288,7 @@
     <string name="arrival_time_widget_desc">到达目标地点的时间。</string>
     <string name="altitude_widget_desc">显示当前地理位置的海拔高度。</string>
     <string name="max_speed_widget_desc">显示当前行驶道路的速度限制。</string>
-    <string name="map_markers_bar_widget_desc">在顶部栏微件上，您可以看到从当前位置到标记处的距离和方向。可以配置为在小部件中看到 1 或 2 个顶部标记。</string>
+    <string name="map_markers_bar_widget_desc">顶栏小工具显示从您当前位置到下一个地图标记的距离和方向。该小工具可配置为显示 1 个或 2 个标记。</string>
     <string name="audio_video_notes_desc">提供开始/停止录制音频、视频或照片记录的快捷访问。</string>
     <string name="navigation_points_desc">导航小工具将在导航期间启用，以显示距离、到达或剩余时间、下个转弯、方位、当前 / 下一街道名称、车道信息、最大速度、接近警示、兴趣点、路径点等信息。</string>
     <string name="navigation_points">导航点</string>
@@ -4328,7 +4328,7 @@
     <string name="shared_string_wikivoyage">维基导游</string>
     <string name="remove_from_map_markers">从“地图标记”中移除</string>
     <string name="routing_attr_piste_type_nordic_name">越野滑雪和北欧滑雪</string>
-    <string name="routing_attr_allow_intermediate_description">难度较高的路线，路段较为陡峭。一般来说，应避免一些障碍物。</string>
+    <string name="routing_attr_allow_intermediate_description">更困难的路线，带有较陡的路段。通常会有一些应当避开的障碍物。</string>
     <string name="routing_attr_allow_classic_only_name">只允许经典路线</string>
     <string name="wikivoyage_travel_guide_descr">在 OsmAnd 内无需连接互联网，即可获得地球上最有趣地方的指南。</string>
     <string name="all_markers_moved_to_history">所有地图标记都已移至历史记录</string>
@@ -4745,37 +4745,7 @@
     <string name="shared_string_in_progress">进行中</string>
     <string name="approximate_bearing">大致方位</string>
     <string name="movement_speed">移动速度</string>
-    <string name="release_4_4">• 改进了 “配置地图” 中的 “轨迹”菜单
-\n
-\n • 上下文菜单现在会显示POI的本地化名称
-\n
-\n • 增加了通过链接分享路线的选项
-\n
-\n • 增加了 “海里 / 英尺”的长度单位
-\n
-\n • 地图方向增加了新的固定模式
-\n
-\n • 简化了开始屏幕
-\n
-\n • 修复了Android Auto的分屏模式中的地点位置
-\n
-\n • 增加了用于轨迹分析的 “速度 / 坡度”图表
-\n
-\n • 安卓13将应用语言选择移至系统设置
-\n
-\n • 修正了显示素食区的问题
-\n
-\n • 增加了下载为 \"叠加 \"或 \"底层 \"地图使用的在线磁贴的可能性
-\n
-\n • 为 \"车辆参数 \"增加了对英制单位的支持
-\n
-\n • 新的轻便摩托车配置文件
-\n
-\n • \"显示位置 \"增加了新选项 \"自动\"
-\n
-\n • 修正了倾斜、缩放和旋转的地图手势
-\n
-\n</string>
+    <string name="release_4_4">• 改进了 “配置地图” 中的 “轨迹”菜单 \n \n • 上下文菜单现在会显示POI的本地化名称 \n \n • 新增通过链接分享路线的选项 \n \n • 新增 “海里 / 英尺”的长度单位 \n \n • 地图方向增加了新的固定模式 \n \n • 简化了开始屏幕 \n \n • 修复Android Auto的分屏模式中的地点位置 \n \n • 新增用于轨迹分析的 “速度 / 坡度”图表 \n \n • 安卓13将应用语言选择移至系统设置 \n \n • 修正显示素食区的问题 \n \n • 新增下载为 \"叠加 \"或 \"底层 \"地图使用的在线磁贴的可能性 \n \n • 为 \"车辆参数 \"增加了对英制单位的支持 \n \n • 新的轻便摩托车配置文件 \n \n • \"显示位置 \"增加了新选项 \"自动\" \n \n • 修正了倾斜、缩放和旋转的地图手势</string>
     <string name="get_discount_second_part">接着 %1$s</string>
     <string name="empty_tracks">您没有轨迹文件。</string>
     <string name="shared_string_select_recent">选择最近的</string>
@@ -5734,9 +5704,9 @@
     <string name="ais_port_nmea_server_description">为 NMEA 数据源指定端口号</string>
     <string name="ais_object_lost_timeouts">AIS 信号接收的超时设置</string>
     <string name="shared_string_avg_altitude">平均海拔</string>
-    <string name="no_places_available">没有可用的地点</string>
+    <string name="no_places_available">可见区域内没有地点</string>
     <string name="ais_cpa_settings">与最近接近点相关的设置</string>
-    <string name="no_photo_for_location_desc">此地点尚未添加用户照片</string>
+    <string name="no_photo_for_location_desc">此地点尚未添加任何用户的照片</string>
     <string name="map_widget_route_information_desc">显示预计到达时间、剩余旅行时间以及当前导航路线的距离。</string>
     <string name="default_buttons_corners_original_description">每个按钮都会保留其转角半径。</string>
     <string name="default_buttons_size_original_description">每个按钮都会保留其大小。</string>
@@ -5883,4 +5853,13 @@
     <string name="plugin_ais_tracker_description">显示 AIS 位置和周围船只的信息。AIS 数据通过网络从外部 AIS 接收器接收。</string>
     <string name="plugin_ais_tracker_disclaimer">免责声明\n\n本插件仅为业余爱好项目，并非为可靠性和正确性而设计。请勿以任何方式依赖本软件，包括导航和/或人身安全。</string>
     <string name="rendering_attr_showClimbingRoutes_description">显示攀岩路线</string>
+    <string name="release_5_0">• 利用新的 “探索 ”模式发现排名靠前的兴趣点\n\n • 现在可搜索所有 OSM 路线！徒步旅行、骑自行车、山地车等\n\n • 导航小工具新结合了转向箭头和导航指示\n\n • 当前路线信息小工具：显示预计到达时间、到达时间和距离\n\n • 在地图上选择滑雪场和山地车路线，查看详细信息\n\n • 可为左右面板选择小工具尺寸\n\n • 添加带有地理坐标的坐标网格\n\n • 增加自定义收藏组默认外观的功能\n\n • Android Auto：查看到下一个航点的 ETA 和距离；城市名称现在出现在搜索结果中\n • 现在可通过地图和搜索发现著名山峰\n\n • 以英尺为单位的山峰高度\n\n • 新增：地图上的峭壁和攀岩区\n\n • 改进美国的地址搜索\n\n • 新增希伯来语 TTS 导航功能</string>
+    <string name="learn_more_about_obd_sensors">了解有关传感器的更多信息。</string>
+    <string name="reset_average_speed">重置平均速度</string>
+    <string name="contour_layers_action_descr">更改等高线图层</string>
+    <string name="quick_action_search_view_desc">打开或关闭搜索视图的开关。</string>
+    <string name="quick_action_navigation_view_desc">打开或关闭导航视图的开关。</string>
+    <string name="quick_action_switch_compass_desc">切换地图方向的切换按钮。</string>
+    <string name="graph_axis">图表轴</string>
+    <string name="y_axis_description">最多为 Y 轴选择两个选项。</string>
 </resources>
