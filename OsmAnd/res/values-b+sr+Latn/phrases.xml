@@ -612,7 +612,7 @@
     <string name="poi_religion_zoroastrian">Zoroastrijanizam</string>
     <string name="poi_denomination_catholic">Katolicizam</string>
     <string name="poi_denomination_baptist">Baptizam</string>
-    <string name="poi_denomination_roman_catholic">Rimokatolicizam</string>
+    <string name="poi_denomination_roman_catholic">Rimo Katolicizam</string>
     <string name="poi_denomination_orthodox">Pravoslavlje</string>
     <string name="poi_denomination_sunni">Suni</string>
     <string name="poi_denomination_protestant">Protestantizam</string>
@@ -629,7 +629,7 @@
     <string name="poi_denomination_bulgarian_orthodox">Bugarska pravoslavna</string>
     <string name="poi_denomination_adventist">Adventisti</string>
     <string name="poi_denomination_serbian_orthodox">Srpska pravoslavna</string>
-    <string name="poi_denomination_church_of_christ">Crkva Isusa Hrista</string>
+    <string name="poi_denomination_church_of_christ">Crkva Hrista</string>
     <string name="poi_denomination_georgian_orthodox">Jermenska pravoslavna</string>
     <string name="poi_denomination_romanian_orthodox">Rumunska pravoslavna</string>
     <string name="poi_denomination_mahayana">Mahajana</string>
