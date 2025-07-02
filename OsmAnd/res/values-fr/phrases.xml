@@ -5091,5 +5091,6 @@
     <string name="poi_denomination_free_evangelical">Évangélique libre</string>
     <string name="poi_denomination_alevi">Alévi</string>
     <string name="poi_denomination_bektashi">Bektashi</string>
-    <string name="poi_denomination_ibadi">Ibadi</string>
+    <string name="poi_denomination_ibadi">Ibadite</string>
+    <string name="poi_denomination_ismaili">ismaélien</string>
 </resources>
