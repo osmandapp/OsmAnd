@@ -4288,7 +4288,7 @@
     <string name="arrival_time_widget_desc">到达目标地点的时间。</string>
     <string name="altitude_widget_desc">显示当前地理位置的海拔高度。</string>
     <string name="max_speed_widget_desc">显示当前行驶道路的速度限制。</string>
-    <string name="map_markers_bar_widget_desc">在顶部栏微件上，您可以看到从当前位置到标记处的距离和方向。可以配置为在小部件中看到 1 或 2 个顶部标记。</string>
+    <string name="map_markers_bar_widget_desc">顶栏小工具显示从您当前位置到下一个地图标记的距离和方向。该小工具可配置为显示 1 个或 2 个标记。</string>
     <string name="audio_video_notes_desc">提供开始/停止录制音频、视频或照片记录的快捷访问。</string>
     <string name="navigation_points_desc">导航小工具将在导航期间启用，以显示距离、到达或剩余时间、下个转弯、方位、当前 / 下一街道名称、车道信息、最大速度、接近警示、兴趣点、路径点等信息。</string>
     <string name="navigation_points">导航点</string>
@@ -5734,9 +5734,9 @@
     <string name="ais_port_nmea_server_description">为 NMEA 数据源指定端口号</string>
     <string name="ais_object_lost_timeouts">AIS 信号接收的超时设置</string>
     <string name="shared_string_avg_altitude">平均海拔</string>
-    <string name="no_places_available">没有可用的地点</string>
+    <string name="no_places_available">可见区域内没有地点</string>
     <string name="ais_cpa_settings">与最近接近点相关的设置</string>
-    <string name="no_photo_for_location_desc">此地点尚未添加用户照片</string>
+    <string name="no_photo_for_location_desc">此地点尚未添加任何用户照片</string>
     <string name="map_widget_route_information_desc">显示预计到达时间、剩余旅行时间以及当前导航路线的距离。</string>
     <string name="default_buttons_corners_original_description">每个按钮都会保留其转角半径。</string>
     <string name="default_buttons_size_original_description">每个按钮都会保留其大小。</string>
