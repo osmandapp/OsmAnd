@@ -2545,7 +2545,7 @@
     <string name="routing_attr_avoid_share_taxi_name">避开共享出租车</string>
     <string name="routing_attr_avoid_share_taxi_description">避开共享出租车</string>
     <string name="routing_attr_avoid_train_name">避开火车</string>
-    <string name="routing_attr_avoid_train_description">避开火车a</string>
+    <string name="routing_attr_avoid_train_description">避开火车</string>
     <string name="routing_attr_avoid_subway_description">避开地铁和轻轨交通</string>
     <string name="routing_attr_avoid_ferry_name">避开轮渡</string>
     <string name="routing_attr_avoid_ferry_description">避开轮渡</string>
@@ -2575,7 +2575,7 @@
     <string name="rendering_attr_surface_mud_name">泥路</string>
     <string name="rendering_attr_surface_asphalt_name">沥青路</string>
     <string name="routing_attr_avoid_tram_name">避开电车</string>
-    <string name="routing_attr_avoid_tram_description">避免电车</string>
+    <string name="routing_attr_avoid_tram_description">避开有轨电车</string>
     <string name="routing_attr_avoid_bus_name">避开公共汽车</string>
     <string name="routing_attr_avoid_bus_description">避开公交车和无轨电车</string>
     <string name="send_log">发送日志</string>
@@ -5883,4 +5883,5 @@
     <string name="plugin_ais_tracker_description">显示 AIS 位置和周围船只的信息。AIS 数据通过网络从外部 AIS 接收器接收。</string>
     <string name="plugin_ais_tracker_disclaimer">免责声明\n\n本插件仅为业余爱好项目，并非为可靠性和正确性而设计。请勿以任何方式依赖本软件，包括导航和/或人身安全。</string>
     <string name="rendering_attr_showClimbingRoutes_description">显示攀岩路线</string>
+    <string name="release_5_0">• 利用新的 “探索 ”模式发现排名靠前的兴趣点\n\n • 现在可搜索所有 OSM 路线！徒步旅行、骑自行车、山地车等\n\n • 导航小工具新结合了转向箭头和导航指示\n\n • 当前路线信息小工具：显示预计到达时间、到达时间和距离\n\n • 在地图上选择滑雪场和山地车路线，查看详细信息\n\n • 可为左右面板选择小工具尺寸\n\n • 添加带有地理坐标的坐标网格\n\n • 增加自定义收藏组默认外观的功能\n\n • Android Auto：查看到下一个航点的 ETA 和距离；城市名称现在出现在搜索结果中\n\n • 现在可通过地图和搜索发现著名山峰\n\n • 以英尺为单位的山峰高度\n\n • 新增：地图上的峭壁和攀岩区\n\n • 改进美国的地址搜索\n\n • 新增希伯来语 TTS 导航功能</string>
 </resources>
