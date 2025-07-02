@@ -1156,7 +1156,7 @@
     <string name="wake_on_voice">点亮屏幕</string>
     <string name="impassable_road_desc">选择您在导航时想要避开的道路。</string>
     <string name="routing_attr_avoid_shuttle_train_name">无区间列车</string>
-    <string name="routing_attr_avoid_shuttle_train_description">避免使用接驳列车</string>
+    <string name="routing_attr_avoid_shuttle_train_description">避开汽车接驳列车</string>
     <string name="impassable_road">避开道路…</string>
     <string name="routing_attr_avoid_toll_name">无收费公路</string>
     <string name="routing_attr_avoid_toll_description">避开收费公路</string>
@@ -2543,9 +2543,9 @@
     <string name="winter_and_ski_renderer">冬季与滑雪</string>
     <string name="toast_empty_name_error">未命名的位置</string>
     <string name="routing_attr_avoid_share_taxi_name">避开共享出租车</string>
-    <string name="routing_attr_avoid_share_taxi_description">避免共享出租车</string>
+    <string name="routing_attr_avoid_share_taxi_description">避开共享出租车</string>
     <string name="routing_attr_avoid_train_name">避开火车</string>
-    <string name="routing_attr_avoid_train_description">避免火车</string>
+    <string name="routing_attr_avoid_train_description">避开火车a</string>
     <string name="routing_attr_avoid_subway_description">避开地铁和轻轨交通</string>
     <string name="routing_attr_avoid_ferry_name">避开轮渡</string>
     <string name="routing_attr_avoid_ferry_description">避开轮渡</string>
@@ -2577,7 +2577,7 @@
     <string name="routing_attr_avoid_tram_name">避开电车</string>
     <string name="routing_attr_avoid_tram_description">避免电车</string>
     <string name="routing_attr_avoid_bus_name">避开公共汽车</string>
-    <string name="routing_attr_avoid_bus_description">避免公交和无轨电车</string>
+    <string name="routing_attr_avoid_bus_description">避开公交车和无轨电车</string>
     <string name="send_log">发送日志</string>
     <string name="files_moved">已移动 %1$d 个文件 (%2$s)。</string>
     <string name="files_copied">已复制 %1$d 个文件 (%2$s)。</string>
@@ -4328,7 +4328,7 @@
     <string name="shared_string_wikivoyage">维基导游</string>
     <string name="remove_from_map_markers">从“地图标记”中移除</string>
     <string name="routing_attr_piste_type_nordic_name">越野滑雪和北欧滑雪</string>
-    <string name="routing_attr_allow_intermediate_description">难度较高的路线，路段较为陡峭。一般来说，应避免一些障碍物。</string>
+    <string name="routing_attr_allow_intermediate_description">更困难的路线，带有较陡的路段。通常会有一些应当避开的障碍物。</string>
     <string name="routing_attr_allow_classic_only_name">只允许经典路线</string>
     <string name="wikivoyage_travel_guide_descr">在 OsmAnd 内无需连接互联网，即可获得地球上最有趣地方的指南。</string>
     <string name="all_markers_moved_to_history">所有地图标记都已移至历史记录</string>
