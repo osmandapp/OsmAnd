@@ -69,7 +69,7 @@ public class OutlinedTextContainer extends FrameLayout {
 		}
 
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
 		addView(outlineTextView, params);
 		addView(mainTextView, params);
@@ -182,6 +182,9 @@ public class OutlinedTextContainer extends FrameLayout {
 	public void setText(@Nullable CharSequence text) {
 		outlineTextView.setText(text);
 		mainTextView.setText(text);
+
+		requestLayout();
+		invalidate();
 	}
 
 	public CharSequence getText() {
