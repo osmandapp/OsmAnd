@@ -204,13 +204,16 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	}
 
 	@Nullable
-	public ConfigureMapOptionFragment getConfigureMapOptionFragment() {
-		return getFragment(ConfigureMapOptionFragment.TAG);
+	public SelectLocationFragment getSelectMapLocationFragment() {
+		if (getConfigureMapOptionFragment() instanceof SelectLocationFragment fragment) {
+			return fragment;
+		}
+		return null;
 	}
 
 	@Nullable
-	public SelectLocationFragment getSelectMapLocationFragment() {
-		return getFragment(SelectLocationFragment.TAG);
+	public ConfigureMapOptionFragment getConfigureMapOptionFragment() {
+		return getFragment(ConfigureMapOptionFragment.TAG);
 	}
 
 	@Nullable
