@@ -477,6 +477,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			recreateBitmaps();
 			textSize = app.getResources().getDimensionPixelSize(R.dimen.guide_line_text_size) * textScale;
 			verticalOffset = app.getResources().getDimensionPixelSize(R.dimen.guide_line_vertical_offset) * textScale;
+			clearVectorLinesCollections();
 		}
 	}
 

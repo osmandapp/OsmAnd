@@ -342,7 +342,7 @@ public abstract class InAppPurchases {
 		}
 
 		public boolean isMaps() {
-			return featureId == MAPS_ID;
+			return featureId == MAPS_ID || featureId == FULL_VERSION_ID;
 		}
 
 		public int getFeatureId() {
