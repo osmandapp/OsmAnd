@@ -569,9 +569,7 @@
     <string name="favourites_delete_multiple_succesful">收藏点已删除。</string>
     <string name="favorite_delete_multiple">删除 %1$d 收藏夹和 %2$d 收藏组？</string>
     <string name="basemap_missing">下载基本的世界地图，以在低倍缩放下了解全球概况。</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\n长按选项"</string>
+    <string name="local_index_gpx_info_show">\n\n长按打开选项</string>
     <string name="local_index_installed">本地版本</string>
     <string name="local_index_descr_title">管理地图文件。</string>
     <string name="shared_string_download">下载</string>
@@ -1738,9 +1736,7 @@
     <string name="layer_amenity_label">点状标签（兴趣点、收藏）</string>
     <string name="loading_smth">正在加载 %1$s…</string>
     <string name="shared_string_waypoint">路径点</string>
-    <string name="selected_gpx_info_show">"
-\n
-\n长按以在地图上查看"</string>
+    <string name="selected_gpx_info_show">\n\n长按以在地图上查看</string>
     <string name="delay_navigation_start">自动启动转向指引</string>
     <string name="gpx_info_subtracks">子轨迹：%1$s</string>
     <string name="gpx_info_waypoints">路径点：%1$s</string>
@@ -1936,19 +1932,8 @@
     <string name="osmand_extended_description_part1">OsmAnd（OSM Automated Navigation Directions）是一款地图和导航应用程序，可访问免费的全球高质量 OSM 数据。
 \n
 \n 享用使用语音和光学导航仪，查看 POI（兴趣点），创建和管理 GPX 轨迹，使用等高线可视化和地形信息（通过插件），选择驾驶、骑行和步行模式， OSM 编辑及更多。</string>
-    <string name="osmand_extended_description_part2">GPS导航
-\n - 可选择离线（在国外时无漫游费）或在线（更快）模式。
-\n - 语音导览带领您一路前行（真人和合成声音）。
-\n - 每当你偏离路线时，路线就会被重建。
-\n - 车道指引、街道名称和预计到达时间将有助于沿途的发展
-\n - 为了让您的旅行更安全，日/夜模式自动切换。
-\n - 显示速度限制，并在你超速时得到提醒。
-\n - 地图缩放可根据你的速度调整
-\n - 按地址、类型（如：停车场、餐厅、酒店、加油站、博物馆）或地理坐标搜索目的地。
-\n - 支持行程中的中间点
-\n - 录制自己的或上传GPX轨迹，并进行跟踪。
-\n</string>
-    <string name="osmand_extended_description_part3">"地图 \n • 显示您周围的POI（兴趣点）。 \n • 根据你的移动方向（或指南针）调整地图。 \n  • 显示您的位置和当前朝向 \n  • 分享你的位置，让你的朋友可以找到你。 \n  • 将您最重要的地点保存在 \"收藏夹 \"中。 \n  • 允许您选择如何在地图上显示名称。用英文、本地或音标拼写 \n  • 显示专门的在线瓦片，卫星视图（来自Bing），不同的叠加层（如旅游/导航 GPX 轨迹）以及可自定义透明度的额外图层"</string>
+    <string name="osmand_extended_description_part2">GPS导航 \n - 可选择离线（出国时无漫游费）或在线模式（更快） \n - 逐路语音导航引导你前进（真人和合成声音） \n - 偏离路线时自动重新规划\n - 车道指引、街道名称和预计到达时间会在沿途提供帮助 \n - 昼夜模式自动切换，让你的旅程更安全\n - 显示速度限制，并在你超速时收到提醒 \n - 地图缩放可根据你的速度调整 \n - 按地址、类型（如：停车场、餐厅、酒店、加油站、博物馆）或地理坐标搜索目的地 \n - 支持添加中途经停点 \n - 录制自己的轨迹或上传 GPX 轨迹并进行跟随</string>
+    <string name="osmand_extended_description_part3">地图 \n • 显示您周围的POI（兴趣点）。 \n • 根据你的移动方向（或指南针）调整地图。 \n • 显示您的位置和当前朝向 \n • 分享你的位置，让你的朋友可以找到你。 \n • 将您最重要的地点保存在 \"收藏夹 \"中。 \n • 允许您选择如何在地图上显示名称。用英文、本地或音标拼写 \n • 显示专门的在线瓦片，卫星视图（来自Bing），不同的叠加层（如旅游/导航 GPX 轨迹）以及可自定义透明度的额外图层</string>
     <string name="osmand_extended_description_part4">滑雪
 \n OsmAnd 滑雪地图插件可以让你看到滑雪道和复杂程度，以及一些额外的信息，比如缆车和其他设施的位置。</string>
     <string name="osmand_extended_description_part5">自行车
@@ -1957,7 +1942,7 @@
 \n - 查看你的速度和高度
 \n - GPX 记录选项使你能够记录你的行程并分享它
 \n - 通过一个额外的插件，你可以启用等高线和山体阴影</string>
-    <string name="osmand_extended_description_part6">"步行、远足、城市观光 \n  • 地图显示步行和徒步路径 \n  • 在城市观光过程中，用您偏好的语言编写的维基百科可以为您提供很多信息 \n  • 公共交通站点（公共汽车、有轨电车、火车），包括线路名称，有助于在新城市中导航 \n  • 在步行模式下，GPS 导航会使用步行路径为您建立路线 \n  • 上传并跟随 GPX 路线，或记录并分享您自己的路线"</string>
+    <string name="osmand_extended_description_part6">步行、远足、城市观光 \n • 地图显示步行和徒步路径 \n • 在城市观光过程中，用您偏好的语言编写的维基百科可以为您提供很多信息 \n • 公共交通站点（公共汽车、有轨电车、火车），包括线路名称，有助于在新城市中导航 \n • 在步行模式下，GPS 导航会使用步行路径为您建立路线 \n • 上传并跟随 GPX 路线，或记录并分享您自己的路线</string>
     <string name="osmand_extended_description_part7">为 OSM 做出贡献 \n• 报告数据错误 \n• 从应用程序直接将 GPX 轨迹上传到 OSM \n• 添加兴趣点并直接将其上传到 OSM（或如果脱机则之后上传）</string>
     <string name="osmand_extended_description_part8">OsmAnd是积极开发的开源软件。每个人都可以通过报告错误、改进翻译或编码新功能来为应用程序做出贡献。此外，该项目还依靠财政捐款来资助新功能的代码和测试。
 \n大致的地图覆盖范围和质量：
@@ -1980,15 +1965,8 @@
 \n OsmAnd+ 是付费应用程序版本。通过购买，您可以支持该项目，为开发新功能提供资金，并获得最新更新。
 \n
 \n 部分主要功能：</string>
-    <string name="osmand_plus_extended_description_part2">导航
-\n - 可在线（快速）或离线工作（当您在国外时，没有漫游费用）
-\n - 逐向语音引导（真人和合成语音）。
-\n - 可选车道引导、街道名称显示和预计到达时间。
-\n - 支持行程中的中间点
-\n - 当您偏离路线时，将自动重新规划路线。
-\n - 按地址、按类型（如：餐厅、酒店、加油站、博物馆）或地理坐标搜索地方。
-\n</string>
-    <string name="osmand_plus_extended_description_part3">"地图浏览\n  • 显示您的位置和朝向 \n  • 可选择根据指南针或您的移动方向对齐图片 \n  • 将最重要的地点保存为收藏夹 \n  • 显示您周围的 POI（兴趣点） \n  • 显示专门的在线瓦片、卫星视图（来自必应）、不同的叠加层（如旅游/导航 GPX 轨迹）以及可自定义透明度的附加图层 \n  • 可选择以英文、本地或拼音显示地名"</string>
+    <string name="osmand_plus_extended_description_part2">导航 \n - 可在线（快速）或离线工作（出国时无漫游费） \n - 逐向语音引导（真人和合成语音）。 \n - 可选车道引导、街道名称显示和预计到达时间。 \n - 支持行程中的中间点 \n - 偏离路线时将自动重新规划路线。 \n - 按地址、按类型（如：餐厅、酒店、加油站、博物馆）或地理坐标搜索地点</string>
+    <string name="osmand_plus_extended_description_part3">地图浏览\n • 显示您的位置和朝向 \n • 可选择根据指南针或您的移动方向对齐图片 \n • 将最重要的地点保存为收藏夹 \n • 显示您周围的 POI（兴趣点） \n • 显示专门的在线瓦片、卫星视图（来自必应）、不同的叠加层（如旅游/导航 GPX 轨迹）以及可自定义透明度的附加图层 \n • 可选择以英文、本地或拼音显示地名</string>
     <string name="osmand_plus_extended_description_part4">使用 OSM 和维基百科数据
 \n - 来自全球最佳协作项目的高质量信息
 \n - 按国家或地区提供 OSM 数据
@@ -1997,7 +1975,7 @@
 \n - 小巧的离线矢量地图，每月至少更新一次
 \n
 \n - 可选择完整的地区数据或仅路网数据（例如：全日本为 700 MB，路网部分为 200 MB）</string>
-    <string name="osmand_plus_extended_description_part5">"安全功能\n  • 可选的自动日/夜视图切换\n  • 可选的限速显示，超速将会提醒\n  • 可选的根据速度缩放地图\n  • 分享您的位置，以便朋友找到您"</string>
+    <string name="osmand_plus_extended_description_part5">安全功能\n • 可选的自动日/夜视图切换\n • 可选的限速显示，超速将会提醒\n • 可选的根据速度缩放地图\n • 分享您的位置，以便朋友找到您</string>
     <string name="osmand_plus_extended_description_part6">自行车和行人设施
 \n - 观赏徒步、登山、自行车道，非常适合户外活动。
 \n - 自行车和行人的特殊路线和显示模式。
@@ -2005,7 +1983,7 @@
 \n - 可选择将行程记录到本地GPX文件或在线服务中
 \n - 可选速度和高度显示
 \n - 显示等高线和山体阴影（通过附加插件）</string>
-    <string name="osmand_plus_extended_description_part7">"直接向 OSM 贡献\n  • 报告数据错误\n  • 直接从应用上传 GPX 轨迹到 OSM\n  • 添加 兴趣点并直接上传到 OSM（离线时可稍后上传）\n  • 可选择在后台模式（设备处于睡眠模式时）记录行程\n OsmAnd 是一款积极开发的开源软件。每个人都可以通过报告错误、改进翻译或编码新功能为应用程序做出贡献。此外，该项目还依靠资金捐助来资助新功能的编码和测试。"</string>
+    <string name="osmand_plus_extended_description_part7">直接向 OSM 贡献\n • 报告数据错误\n • 直接从应用上传 GPX 轨迹到 OSM\n • 添加 兴趣点并直接上传到 OSM（离线时可稍后上传）\n • 可选择在后台模式（设备处于睡眠模式时）记录行程\n OsmAnd 是一款积极开发的开源软件。每个人都可以通过报告错误、改进翻译或编码新功能为应用程序做出贡献。此外，该项目还依靠资金捐助来资助新功能的编码和测试。</string>
     <string name="osmand_plus_extended_description_part8">大概的地图覆盖区域和品质： \n• 西欧： **** \n• 东欧： *** \n• 俄罗斯： *** \n• 北美洲： *** \n• 南美洲： ** \n• 亚洲：** \n• 日本和韩国： *** \n• 中东： ** \n• 非洲： ** \n• 南极洲： * \n全球大多数国家都可以下载 \n 从阿富汗到津巴布韦，从澳大利亚到美国。 阿根廷、巴西、加拿大、法国、德国、墨西哥、英国、 西班牙…</string>
     <string name="route_updated_loc_found">等待定位以计算路线</string>
     <string name="osmand_parking_position_description_add_time">将车停在</string>
@@ -5825,4 +5803,24 @@
     <string name="graph_axis">图表轴</string>
     <string name="y_axis_description">最多为 Y 轴选择两个选项。</string>
     <string name="show_symbols_debug_info">显示符号调试信息</string>
+    <string name="visualized_by">可视化方式</string>
+    <string name="downward_gradient">下坡坡度</string>
+    <string name="upward_gradient">上坡坡度</string>
+    <string name="top_and_bottom">顶部和底部</string>
+    <string name="maps_that_also_be_used">将同时使用的地图： %1$s</string>
+    <string name="getting_list_of_required_maps">正在获取所需地图的列表…</string>
+    <string name="rendering_attr_lightDetail_description">默认：海标名称（灯光特征.组.周期），可选择第1至第3扇区或第1、2、3、4、5扇区灯光特征的附加信息</string>
+    <string name="shared_string_ear_lobe">耳垂</string>
+    <string name="external_device_characteristic_cadence">踏频</string>
+    <string name="external_device_characteristic_cuff_pressure">袖带压力</string>
+    <string name="cant_load_map_styles">无法载入地图样式。</string>
+    <string name="n_items_of_z">%1$s 中的 %2$s</string>
+    <string name="navigate_point_format_swiss_grid">瑞士网格坐标 (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">瑞士网格坐标 (CH1903+)</string>
+    <string name="obd_vin_desc">通过车载诊断系统获取车辆识别号码</string>
+    <string name="raster_layers_action_descr">更改光栅图层</string>
+    <string name="hugerock_promo">Hugerock 推广优惠，为期 %1$s 个月</string>
+    <string name="quick_action_previous_app_profile">将应用程序配置文件切换到上一个</string>
+    <string name="quick_action_next_app_profile">切换到下一个配置文件</string>
+    <string name="app_profile">配置文件</string>
 </resources>
