@@ -239,8 +239,8 @@ public class WorldRegion implements Serializable {
 				Algorithms.isFirstPolygonInsideSecond(another, polygon);
 	}
 
-	public boolean containsPoint(LatLon latLon, boolean checkAdditional) {
-		if (checkAdditional && !additionalPolygons.isEmpty()) {
+	public boolean containsPoint(LatLon latLon, boolean checkAdditionalPolygons) {
+		if (checkAdditionalPolygons && !additionalPolygons.isEmpty()) {
 			for (List<LatLon> p : additionalPolygons) {
 				if (p != null && Algorithms.isPointInsidePolygon(latLon, p)) {
 					return true;
