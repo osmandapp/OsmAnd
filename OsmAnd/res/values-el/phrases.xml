@@ -103,7 +103,7 @@
     <string name="poi_socket_cee_blue_output_filter">Έξοδος βύσματος γαλάζια CEE</string>
     <string name="poi_socket_schuko_output_filter">Έξοδος βύσματος σούκο</string>
     <string name="poi_service_car">Υπηρεσία αυτοκινήτου</string>
-    <string name="poi_shop">Κατάστημα</string>
+    <string name="poi_shop">Μαγαζί</string>
     <string name="poi_shop_food">Παντοπωλείο και υπεραγορά</string>
     <string name="poi_emergency">Επείγοντα</string>
     <string name="poi_emergency_infrastructure">Υποδομή επειγόντων</string>
@@ -4092,4 +4092,15 @@
     <string name="poi_shelter_no">Καταφύγιο: όχι</string>
     <string name="poi_shelter_yes">Ναι;Καταφύγιο</string>
     <string name="poi_arch">Αψίδα</string>
+    <string name="poi_butcher_type">Κύριος τύπος κρέατος</string>
+    <string name="poi_service_fleurop_filter">Υπηρεσία Fleurop</string>
+    <string name="poi_faculty_filter">Σχολή</string>
+    <string name="poi_post_office_type">Είδος</string>
+    <string name="poi_laundry_service_filter">Υπηρεσία πλυντηρίου</string>
+    <string name="poi_dry_cleaning_filter">Στεγνωτήριο</string>
+    <string name="poi_impromptu">Αυτοσχέδιο</string>
+    <string name="poi_second_hand_filter">Μεταχειρισμένα αγαθά</string>
+    <string name="poi_healthcare_speciality_clinic">Ειδικότητα υγειονομικής περίθαλψης: κλινική</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Ειδικότητα υγειονομικής περίθαλψης: ψυχοθεραπευτής</string>
+    <string name="poi_healthcare_speciality_laboratory">Ειδικότητα υγειονομικής περίθαλψης: εργαστήριο</string>
 </resources>
