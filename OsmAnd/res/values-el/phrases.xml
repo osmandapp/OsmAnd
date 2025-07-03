@@ -4158,5 +4158,10 @@
     <string name="poi_climbing_boulder">Βράχος ορειβασίας</string>
     <string name="poi_name_etymology">Ετυμολογία ονομασίας</string>
     <string name="poi_name_left">Όνομα στην αριστερή πλευρά</string>
-    <string name="poi_name_right">Όνομα στην δεξιά πλευρά</string>
+    <string name="poi_name_right">Όνομα στη δεξιά πλευρά</string>
+    <string name="poi_route_activity_type_mushrooms_picking">Μάζεμα μανιταριών</string>
+    <string name="poi_route_activity_type_harvesting">Συγκομιδή</string>
+    <string name="poi_route_activity_type_tree_climbing">Σκαρφάλωμα δέντρων</string>
+    <string name="poi_route_activity_type_caving">Εξερεύνηση σπηλαίων</string>
+    <string name="poi_route_activity_type_horse_riding">Ιππασία</string>
 </resources>
