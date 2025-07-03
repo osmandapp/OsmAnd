@@ -5693,7 +5693,7 @@
     <string name="show_utm_grids_description">Zobraziť mriežku v metroch UTM namiesto WGS84</string>
     <string name="ais_object_lost_timeouts">Časový limit pre príjem signálu AIS</string>
     <string name="ais_object_lost_timeouts_description">Nastavte hodnoty pre rozoznanie stratených objektov AIS, ak nebol obdržaný žiadny signál v zadanom čase.</string>
-    <string name="no_places_available">Nie sú dostupné žiadne miesta</string>
+    <string name="no_places_available">Vo viditeľnej oblasti nie sú žiadne miesta</string>
     <string name="shared_string_default_view">Predvolené zobrazenie</string>
     <string name="map_widget_route_information_desc">Zobrazuje odhadovaný čas príjazdu, zostávajúci čas jazdy a vzdialenosť pre aktuálnu navigačnú trasu.</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Akcia pre ovládanie viditeľnosti súradnicovej siete na mape.</string>
