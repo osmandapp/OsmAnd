@@ -1948,7 +1948,7 @@
 \n - 支持行程中的中间点
 \n - 录制自己的或上传GPX轨迹，并进行跟踪。
 \n</string>
-    <string name="osmand_extended_description_part3">"地图 \n  • 显示您周围的POI（兴趣点）。 \n  • 根据你的移动方向（或指南针）调整地图。 \n  • 显示您的位置和当前朝向 \n  • 分享你的位置，让你的朋友可以找到你。 \n  • 将您最重要的地点保存在 \"收藏夹 \"中。 \n  • 允许您选择如何在地图上显示名称。用英文、本地或音标拼写 \n  • 显示专门的在线瓦片，卫星视图（来自Bing），不同的叠加层（如旅游/导航 GPX 轨迹）以及可自定义透明度的额外图层"</string>
+    <string name="osmand_extended_description_part3">"地图 \n • 显示您周围的POI（兴趣点）。 \n • 根据你的移动方向（或指南针）调整地图。 \n  • 显示您的位置和当前朝向 \n  • 分享你的位置，让你的朋友可以找到你。 \n  • 将您最重要的地点保存在 \"收藏夹 \"中。 \n  • 允许您选择如何在地图上显示名称。用英文、本地或音标拼写 \n  • 显示专门的在线瓦片，卫星视图（来自Bing），不同的叠加层（如旅游/导航 GPX 轨迹）以及可自定义透明度的额外图层"</string>
     <string name="osmand_extended_description_part4">滑雪
 \n OsmAnd 滑雪地图插件可以让你看到滑雪道和复杂程度，以及一些额外的信息，比如缆车和其他设施的位置。</string>
     <string name="osmand_extended_description_part5">自行车
@@ -4301,7 +4301,7 @@
     <string name="off_road_render_descr">基于“Topo”风格的越野驾驶，并与绿色卫星图像一起使用作为底图。减少了主干道的厚度，增加了轨迹、小路及自行车和其他路线的厚度。</string>
     <string name="routing_attr_piste_type_nordic_description">适合北欧或越野滑雪的小径。</string>
     <string name="routing_attr_allow_skating_only_name">允许滑行 / 自由式滑雪路线</string>
-    <string name="routing_attr_difficulty_preference_description">优先选择此难度等级的路线，尽管当距离更短时，仍可能使用更难或容易的滑雪路线。</string>
+    <string name="routing_attr_difficulty_preference_description">优先选择此难度等级的路线，尽管当距离很短时，仍可能使用更难或容易的滑雪路线。</string>
     <string name="visited_screens">访问过的屏幕</string>
     <string name="make_active">设为活跃</string>
     <string name="index_item_world_wikivoyage">全球维基导游条目</string>
@@ -5824,4 +5824,5 @@
     <string name="quick_action_switch_compass_desc">切换地图方向的切换按钮。</string>
     <string name="graph_axis">图表轴</string>
     <string name="y_axis_description">最多为 Y 轴选择两个选项。</string>
+    <string name="show_symbols_debug_info">显示符号调试信息</string>
 </resources>
