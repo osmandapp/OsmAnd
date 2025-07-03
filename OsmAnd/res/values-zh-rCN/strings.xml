@@ -2916,7 +2916,7 @@
     <string name="shared_preference">共享</string>
     <string name="shared_string_maps">地图</string>
     <string name="shared_string_tiles">图块</string>
-    <string name="rendering_attr_piste_difficulty_aerialway_name">空中航线</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">缆索交通系统</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">未定义</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">极限</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">自由滑雪</string>
@@ -3001,7 +3001,7 @@
     <string name="app_mode_monowheel">独轮</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="shared_string_icon">图标</string>
-    <string name="routing_attr_freeride_policy_name">越野滑雪</string>
+    <string name="routing_attr_freeride_policy_name">野雪滑行</string>
     <string name="routing_attr_piste_type_sled_name">雪橇</string>
     <string name="routing_profile_geocoding">地理编码</string>
     <string name="button_rate">评分</string>
@@ -3333,21 +3333,7 @@
     <string name="simplified_track">简化轨迹</string>
     <string name="system_default_theme">系统默认值</string>
     <string name="all_previous_segments">之前的所有部分</string>
-    <string name="release_3_8">• 更新计划路线功能：允许每个航段使用不同的导航类型和包含轨迹
-\n
-\n• 轨道的新外观菜单：选择颜色、厚度、显示方向箭头、开始和完成图标
-\n
-\n•提高自行车节点的能见度。
-\n
-\n•轨迹现在可点击，拥有上下文菜单与基本信息。
-\n
-\n• 改进的搜索算法
-\n
-\n• 改进了导航中的跟踪选项
-\n
-\n• 配置文件设置导入/导出的固定问题
-\n
-\n</string>
+    <string name="release_3_8">• 更新计划路线功能：允许每个航段使用不同的导航类型和包含轨迹 \n \n• 新增轨迹外观菜单：选择颜色、厚度、显示方向箭头、开始和完成图标 \n \n•提高自行车节点的能见度。 \n \n•轨迹现在可点击，拥有上下文菜单与基本信息。 \n \n• 改进搜索算法 \n \n• 改进导航中的 “跟随轨迹 ”选项 \n \n• 修正导入/导出配置文件设置的问题</string>
     <string name="osm_live_payment_subscription_management_hw">购买确认时，将向您的 AppGallery 帐户收费。
 \n
 \n除非在指定续订周期之前取消订阅，否则订阅将自动延长。
@@ -3920,31 +3906,7 @@
     <string name="save_track_to_gpx_descrp">导航开始时自动记录轨迹，并在导航结束后自动保存。</string>
     <string name="reset_to_default_category_button_promo">“重置为默认值”会将排序顺序恢复为安装时的默认值。</string>
     <string name="import_complete_description">已从%1$s导入所有数据。使用下面的按钮，打开应用程序的任何部分来管理它。</string>
-    <string name="release_3_6">- 概况：现在你可以改变顺序，为地图设置图标，更改基本配置文件的所有设置，并将它们恢复为默认状态。
-\n
-\n - 在导航中增加了出口号
-\n
-\n - 重做了插件设置
-\n
-\n - 重新设计了设置屏幕，以便快速访问所有配置文件
-\n
-\n - 增加了从另一个配置文件复制设置的选项
-\n
-\n - 增加了在搜索中改变顺序或隐藏POI类别的能力
-\n
-\n - 正确对齐地图上的POI图标
-\n
-\n - 在配置地图中增加了日落/日出数据
-\n
-\n - 在地图上添加了家庭/工作图标
-\n
-\n - 在设置中增加了对多行描述的支持
-\n
-\n - 在日本地图中添加了正确的音译
-\n
-\n - 添加了南极洲地图
-\n
-\n</string>
+    <string name="release_3_6">- 配置文件：现在可以更改顺序、设置地图图标、更改基础配置文件的所有设置并将其恢复为默认值\n \n - 在导航中增加出口号 \n \n - 重做插件设置 \n \n - 重新设计 “设置 ”屏幕，以便快速访问所有配置文件 \n \n - 增加了从其他配置文件复制设置的选项 \n \n - 增加了在搜索中改变顺序或隐藏兴趣点类别的能力 \n \n - 正确对齐地图上的兴趣点图标 \n \n - 在“配置地图”中增加日落/日出数据 \n \n - 在地图上添加 “家”/“工作 ” 图标 \n \n - 在设置中增加了对多行描述的支持 \n \n - 为日本地图添加正确的音译 \n \n - 添加南极洲地图</string>
     <string name="export_profile_dialog_description">选择要与配置文件一起导出的其它数据。</string>
     <string name="monitoring_min_speed_descr_side_effect">副作用：你的轨迹将缺少所有不符合最低速度标准的部分（例如，你推着自行车上陡坡的部分）。另外，也不会有关于休息时间的信息，比如休息时间。这对任何分析或后续处理都有影响，比如在试图确定你的行程总长度、运动时间或你的平均速度时。</string>
     <string name="monitoring_min_speed_descr_recommendation">建议。先尝试通过记录最小位移过滤器（B）使用运动检测，它可能会产生更好的结果，而且你会损失更少的数据。如果你的轨迹在低速时仍有干扰，可以在这里尝试非零值。请注意，有些测量可能根本不报告任何速度值（一些基于网络的方法），在这种情况下，你将不会记录任何东西。</string>
@@ -4248,7 +4210,7 @@
     <string name="compass_always_hidden">始终隐藏</string>
     <string name="compass_always_visible">始终可见</string>
     <string name="goods_delivery_desc_4">对超过 3.5 吨的车辆使用卡车配置文件。</string>
-    <string name="routing_attr_freeride_policy_description">“自由式滑雪(Freeride)”和“越野滑雪(Off-piste)”是非官方的路线和通道。通常未经修饰，没有维护，晚上没有检查。请自行承担风险。</string>
+    <string name="routing_attr_freeride_policy_description">“自由式滑雪(Freeride)”和“野雪滑(Off-piste)”属于非官方路线和通道。通常未 经整修、无人维护，且晚上不进行巡查。请自行承担风险。</string>
     <string name="release_4_0_beta">- 新增以英尺为单位下载等高线的选项 \n \n - 规划路线景观：增加了在点或图表之间切换的选项卡 \n \n - OsmAnd实时更新移至 “下载 &gt; 更新” \n \n - 轨迹现在可以按高度、速度或坡度进行着色。 \n \n - 增加改变路线外观的选项。 \n \n - 更新了“行程录制”对话框</string>
     <string name="release_3_5">- 更新了应用程序和配置文件设置。设置现在按类型排列。每个配置文件都可以单独定制。
 \n
@@ -4315,8 +4277,8 @@
     <string name="welcome_to_open_beta_description">旅行指南目前基于维基导游。在开放测试期间可免费测试所有功能。</string>
     <string name="routing_attr_avoid_sett_description">避免原石铺砖</string>
     <string name="quick_action_need_to_add_item_to_list">在“快捷操作”设置中将至少一个项目添加到列表中</string>
-    <string name="routing_attr_allow_skating_only_description">只为自由式滑冰或滑冰而铺设的路线，没有经典赛道。</string>
-    <string name="routing_attr_allow_classic_only_description">仅为经典风格的滑雪路线，不含滑冰道。这包括由小型雪地摩托开辟的松软滑雪道和滑雪者人工开辟的滑雪道。</string>
+    <string name="routing_attr_allow_skating_only_description">仅为自由式或滑行滑雪整修的路线，不设传统滑道。</string>
+    <string name="routing_attr_allow_classic_only_description">仅针对传统滑雪方式整修的路线，不含滑行滑雪道。这包括由小型雪地摩托整修的松软滑雪道和滑雪者人工开辟的滑雪道。</string>
     <string name="custom_routing">自订路径规划配置文件</string>
     <string name="default_render_descr">通用风格。密集的城市清晰地显示出来。具有路线、路面质量、通行限制、公路护栏、根据 SAC 比例绘制的路径、白水运动项目，等高线等地形特征。</string>
     <string name="add_location_as_first_point_descr">将您的位置添加为出发点，以计划完美的路线。</string>
@@ -4338,8 +4300,8 @@
     <string name="optional_point_name">可选的点名称</string>
     <string name="off_road_render_descr">基于“Topo”风格的越野驾驶，并与绿色卫星图像一起使用作为底图。减少了主干道的厚度，增加了轨迹、小路及自行车和其他路线的厚度。</string>
     <string name="routing_attr_piste_type_nordic_description">适合北欧或越野滑雪的小径。</string>
-    <string name="routing_attr_allow_skating_only_name">只允许滑冰路线</string>
-    <string name="routing_attr_difficulty_preference_description">倾向于这种难度的路线，尽管如果时间较短，使用更难或更容易的滑雪道的路线仍是可能的。</string>
+    <string name="routing_attr_allow_skating_only_name">允许滑行 / 自由式滑雪路线</string>
+    <string name="routing_attr_difficulty_preference_description">优先选择此难度等级的路线，尽管当距离更短时，仍可能使用更难或容易的滑雪路线。</string>
     <string name="visited_screens">访问过的屏幕</string>
     <string name="make_active">设为活跃</string>
     <string name="index_item_world_wikivoyage">全球维基导游条目</string>
