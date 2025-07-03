@@ -971,7 +971,7 @@ public class OsmandRegions {
 
 		boolean outside = true;
 		for (LatLon point : polygon) {
-			if (worldRegion.containsPoint(point)) {
+			if (worldRegion.containsPoint(point, false)) {
 				outside = false;
 				break;
 			}
