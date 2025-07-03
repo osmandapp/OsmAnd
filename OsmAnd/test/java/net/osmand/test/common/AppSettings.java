@@ -25,12 +25,8 @@ public class AppSettings {
 		}
 	}
 
-	public static void setLocale(@NonNull OsmandApplication app, String language, String country) {
-		Locale locale = new Locale(language, country);
+	public static void setLocale(@NonNull OsmandApplication app, Locale locale) {
 		Locale.setDefault(locale);
-		Resources res = app.getResources();
-		Configuration config = res.getConfiguration();
-		config.locale = locale;
-		res.updateConfiguration(config, res.getDisplayMetrics());
+		app.getLocaleHelper().checkPreferredLocale();
 	}
 }
