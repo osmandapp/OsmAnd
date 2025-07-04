@@ -108,6 +108,8 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 					if (file.getName().endsWith(SQLiteTileSource.EXT)) {
 						createLocalFile(result, item, fileName, file, file.lastModified());
 					}
+				} else if (fileItem.getSubtype() == FileSubtype.GPX) {
+					createLocalFile(result, item, fileName, file, item.getLastModifiedTime());
 				} else {
 					createLocalFile(result, item, fileName, file, file.lastModified());
 				}
