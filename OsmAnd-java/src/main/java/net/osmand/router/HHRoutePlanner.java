@@ -724,11 +724,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				return true;
 			}
 			for (BinaryMapIndexReader reader : readers) {
-				String fileNameLowerCase = reader.getFile().getName().toLowerCase();
-				for (String region : regionsCoveringStartAndTargets) {
-					if (fileNameLowerCase.startsWith(region)) {
-						return true;
+				for (RouteRegion index : reader.getRoutingIndexes()) {
+					for (String region : regionsCoveringStartAndTargets) {
+						if (region.equalsIgnoreCase(index.getName())) {
+							return true;
+						}
 					}
+
 				}
 			}
 			return false;
