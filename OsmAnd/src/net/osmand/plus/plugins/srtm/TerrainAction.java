@@ -3,12 +3,14 @@ package net.osmand.plus.plugins.srtm;
 import static net.osmand.plus.quickaction.QuickActionIds.TERRAIN_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -33,7 +35,7 @@ public class TerrainAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			plugin.toggleTerrain(!plugin.isTerrainLayerEnabled(), () -> {

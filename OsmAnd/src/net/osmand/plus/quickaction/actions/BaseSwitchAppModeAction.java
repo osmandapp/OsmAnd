@@ -2,6 +2,7 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_CONTROLS;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -72,7 +74,7 @@ public abstract class BaseSwitchAppModeAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		delayedSwitchAppMode(mapActivity);
 	}
 
