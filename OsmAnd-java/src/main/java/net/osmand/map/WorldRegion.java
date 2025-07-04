@@ -220,9 +220,9 @@ public class WorldRegion implements Serializable {
 		}
 
 		// Finally check inner point
-		boolean isInnerPoint = another.containsPoint(another.regionCenter, false);
+		boolean isInnerPoint = another.containsPoint(another.regionCenter);
 		if (isInnerPoint) {
-			return containsPoint(another.regionCenter, false);
+			return containsPoint(another.regionCenter);
 		} else {
 			// in this case we should find real inner point and check it
 		}
@@ -239,14 +239,7 @@ public class WorldRegion implements Serializable {
 				Algorithms.isFirstPolygonInsideSecond(another, polygon);
 	}
 
-	public boolean containsPoint(LatLon latLon, boolean checkAdditional) {
-		if (checkAdditional && !additionalPolygons.isEmpty()) {
-			for (List<LatLon> p : additionalPolygons) {
-				if (p != null && Algorithms.isPointInsidePolygon(latLon, p)) {
-					return true;
-				}
-			}
-		}
+	public boolean containsPoint(LatLon latLon) {
 		return polygon != null && Algorithms.isPointInsidePolygon(latLon, polygon);
 	}
 

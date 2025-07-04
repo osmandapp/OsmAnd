@@ -743,7 +743,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (worldRegion != null && !QuadRect.intersects(qr, worldRegion.getBoundingBox())) {
 				continue;
 			}
-			if (worldRegion != null &&  !worldRegion.containsPoint(start, true) && !worldRegion.containsPoint(end, true)) {
+			if (worldRegion != null &&  !worldRegion.containsPoint(start) && !worldRegion.containsPoint(end)) {
 				continue;
 			}
 			for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
