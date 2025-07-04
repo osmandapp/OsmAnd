@@ -3,7 +3,7 @@ package net.osmand.plus.plugins.audionotes;
 import static net.osmand.plus.quickaction.QuickActionIds.TAKE_VIDEO_NOTE_ACTION_ID;
 
 import android.content.Context;
-import android.view.KeyEvent;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,10 +33,10 @@ public class TakeVideoNoteAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
-			super.execute(mapActivity, event);
+			super.execute(mapActivity, params);
 		}
 	}
 

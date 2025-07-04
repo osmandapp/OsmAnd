@@ -2,7 +2,7 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.NAV_AUTO_ZOOM_MAP_ACTION_ID;
 
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +36,7 @@ public class NavAutoZoomMapAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		settings.AUTO_ZOOM_MAP.set(!settings.AUTO_ZOOM_MAP.get());

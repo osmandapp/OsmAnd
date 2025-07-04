@@ -3,7 +3,7 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.DISPLAY_POSITION_ACTION_ID;
 
 import android.content.Context;
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +41,7 @@ public class DisplayPositionAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		CommonPreference<Integer> pref = getPreference(mapActivity);
 		int currentState = pref.get();
 		pref.set((currentState == 2) ? 0 : currentState + 1);

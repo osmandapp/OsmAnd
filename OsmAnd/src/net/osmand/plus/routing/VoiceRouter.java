@@ -90,7 +90,7 @@ public class VoiceRouter {
 
 	private VoiceCommandPending pendingCommand;
 	private RouteDirectionInfo nextRouteDirection;
-
+	private StateChangedListener<Boolean> stateChangedListener;
 
 	public interface VoiceMessageListener {
 		void onVoiceMessage(List<String> listCommands, List<String> played);
@@ -115,16 +115,21 @@ public class VoiceRouter {
 		if (!isMute()) {
 			loadCameraSound();
 		}
-		settings.VOICE_MUTE.addListener(new StateChangedListener<Boolean>() {
-			@Override
-			public void stateChanged(Boolean change) {
-				app.runInUIThread(() -> {
-					if (!isMute() && soundPool == null) {
-						loadCameraSound();
-					}
-				});
+		stateChangedListener = change -> app.runInUIThread(() -> {
+			if (!isMute() && soundPool == null) {
+				loadCameraSound();
+			}
+			if (isMute()) {
+				stopPlayer();
 			}
 		});
+		settings.VOICE_MUTE.addListener(stateChangedListener);
+	}
+
+	private void stopPlayer(){
+		if (player != null) {
+			player.stop();
+		}
 	}
 
 	private void loadCameraSound() {

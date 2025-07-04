@@ -5,7 +5,7 @@ import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_POI_ACTION_ID
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +102,7 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		PoiFiltersHelper helper = app.getPoiFilters();
 		List<PoiUIFilter> poiFilters = loadPoiFilters(helper);

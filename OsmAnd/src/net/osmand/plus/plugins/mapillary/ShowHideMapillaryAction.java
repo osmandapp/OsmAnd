@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.mapillary;
 
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_MAPILLARY_ACTION_ID;
 
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +36,7 @@ public class ShowHideMapillaryAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 		if (plugin != null) {
 			plugin.SHOW_MAPILLARY.set(!plugin.SHOW_MAPILLARY.get());

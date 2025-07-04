@@ -4,7 +4,7 @@ import static net.osmand.plus.quickaction.QuickActionIds.MAP_SOURCE_ACTION_ID;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -103,7 +103,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();

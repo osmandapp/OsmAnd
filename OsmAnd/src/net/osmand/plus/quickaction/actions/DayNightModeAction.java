@@ -3,7 +3,7 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.DAY_NIGHT_MODE_ACTION_ID;
 
 import android.content.Context;
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +32,7 @@ public class DayNightModeAction extends QuickAction {
 	public DayNightModeAction(QuickAction quickAction) {super(quickAction);}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		if (mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP)) {
 			mapActivity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.DAY);
 		} else {

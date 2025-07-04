@@ -1,8 +1,10 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.MapButtonsHelper.KEY_EVENT_KEY;
 import static net.osmand.plus.quickaction.QuickActionIds.LOCK_SCREEN_ACTION;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +39,11 @@ public class LockScreenAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
+		KeyEvent event = null;
+		if (params != null && params.containsKey(KEY_EVENT_KEY)) {
+			event = params.getParcelable(KEY_EVENT_KEY);
+		}
 		toggleLockScreen(mapActivity, event);
 	}
 

@@ -3,8 +3,8 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.SWITCH_PROFILE_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
@@ -93,7 +93,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		List<String> profiles = loadListFromParams();
 		if (profiles.size() == 0) {
 			AndroidUtils.getApp(mapActivity).showShortToastMessage(R.string.profiles_for_action_not_found);

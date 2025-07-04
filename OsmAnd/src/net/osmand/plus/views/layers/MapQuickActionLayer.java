@@ -2,10 +2,13 @@ package net.osmand.plus.views.layers;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+import static net.osmand.plus.quickaction.MapButtonsHelper.KEY_EVENT_KEY;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -386,7 +389,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	public void onActionSelected(@NonNull QuickAction action, @Nullable KeyEvent event, boolean forceUpdate) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			MapButtonsHelper.produceAction(action).execute(mapActivity, event);
+			Bundle params = null;
+			if (event != null) {
+				params = new Bundle();
+				params.putParcelable(KEY_EVENT_KEY, event);
+			}
+			MapButtonsHelper.produceAction(action).execute(mapActivity, params);
 			if (forceUpdate) {
 				setInvalidated(true);
 			}

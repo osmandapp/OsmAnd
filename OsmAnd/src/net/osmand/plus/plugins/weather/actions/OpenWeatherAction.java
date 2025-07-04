@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.weather.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.OPEN_WEATHER_ACTION_ID;
 
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +36,7 @@ public class OpenWeatherAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		if (weatherPlugin != null) {
 			if(!PluginsHelper.isEnabled(WeatherPlugin.class)){

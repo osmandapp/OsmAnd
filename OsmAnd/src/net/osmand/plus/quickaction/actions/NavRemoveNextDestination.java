@@ -2,7 +2,7 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.NAV_REMOVE_NEXT_DESTINATION_ACTION_ID;
 
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +38,7 @@ public class NavRemoveNextDestination extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		TargetPointsHelper targetsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
 		if (!targetsHelper.getIntermediatePoints().isEmpty()) {
 			targetsHelper.removeWayPoint(true, 0);

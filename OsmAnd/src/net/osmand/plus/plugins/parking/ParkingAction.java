@@ -3,7 +3,7 @@ package net.osmand.plus.plugins.parking;
 import static net.osmand.plus.quickaction.QuickActionIds.PARKING_ACTION_ID;
 
 import android.content.Context;
-import android.view.KeyEvent;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,9 +32,9 @@ public class ParkingAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		if (PluginsHelper.isActive(ParkingPositionPlugin.class)) {
-			super.execute(mapActivity, event);
+			super.execute(mapActivity, params);
 		}
 	}
 

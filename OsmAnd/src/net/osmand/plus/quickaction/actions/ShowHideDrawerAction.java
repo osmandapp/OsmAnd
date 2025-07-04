@@ -2,7 +2,7 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_DRAWER_ACTION;
 
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +35,7 @@ public class ShowHideDrawerAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		// event.getRepeatCount() repeat count 0 doesn't work for samsung, 1 doesn't work for lg
 		mapActivity.toggleDrawer();
 	}

@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.weather.actions;
 
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +38,7 @@ public abstract class BaseWeatherQuickAction extends QuickAction {
 	public abstract int getQuickActionDescription();
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		WeatherHelper weatherHelper = app.getWeatherHelper();
 		WeatherBand weatherBand = weatherHelper.getWeatherBand(getWeatherBand());

@@ -2,6 +2,7 @@ package net.osmand.plus.quickaction;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -196,7 +197,7 @@ public class QuickAction {
 		actionLayer.onActionSelected(this, event, true);
 	}
 
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 	}
 
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {

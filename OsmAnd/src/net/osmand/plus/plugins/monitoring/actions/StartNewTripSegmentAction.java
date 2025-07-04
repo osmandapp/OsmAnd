@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.monitoring.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.START_NEW_TRIP_SEGMENT_ACTION;
 
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +37,7 @@ public class StartNewTripSegmentAction extends BaseMonitoringAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandMonitoringPlugin plugin = getPlugin();
 		if (plugin != null) {
 			OsmandApplication app = mapActivity.getMyApplication();

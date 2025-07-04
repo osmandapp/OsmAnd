@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.osmedit.quickactions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_OSM_EDITS_ACTION;
 
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +38,7 @@ public class ShowHideOSMEditsAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			plugin.SHOW_OSM_EDITS.set(!plugin.SHOW_OSM_EDITS.get());

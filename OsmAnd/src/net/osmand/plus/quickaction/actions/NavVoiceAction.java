@@ -2,7 +2,7 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.NAV_VOICE_ACTION_ID;
 
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,13 +33,9 @@ public class NavVoiceAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		boolean oldMuteState = mapActivity.getMyApplication().getSettings().VOICE_MUTE.get();
 		mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(!oldMuteState);
-
-		if (!oldMuteState) {
-			mapActivity.getMyApplication().getPlayer().stop();
-		}
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package net.osmand.plus.plugins.rastermaps;
 import static net.osmand.plus.quickaction.QuickActionIds.MAP_UNDERLAY_ACTION_ID;
 
 import android.content.Context;
-import android.view.KeyEvent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -102,7 +102,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
