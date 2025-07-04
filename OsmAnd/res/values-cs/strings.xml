@@ -5689,7 +5689,7 @@
     <string name="show_utm_grids">Použít UTM namísto WGS84</string>
     <string name="show_utm_grids_description">Zobrazit mřížku v metrech UTM namísto WGS84</string>
     <string name="map_grid">Mapové mřížky</string>
-    <string name="no_places_available">Žádná volná místa</string>
+    <string name="no_places_available">Žádná místa v zobrazené oblasti</string>
     <string name="no_photo_for_location_desc">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
     <string name="hmd_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu a dalších na %1$s měsíců</string>
     <string name="shared_string_road_exit">Výjezd</string>
