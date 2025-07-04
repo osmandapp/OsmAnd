@@ -718,6 +718,18 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			return false;
 		}
+
+		public boolean containsRegion(List<String> regionsWithAllRoutePoints) {
+			for (BinaryMapIndexReader reader : readers) {
+				String fileNameLowerCase = reader.getFile().getName().toLowerCase();
+				for (String region : regionsWithAllRoutePoints) {
+					if (fileNameLowerCase.startsWith(region)) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 	}
 
 	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx) throws IOException {
@@ -740,8 +752,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 			}
 		}
+		List<String> regionsWithAllRoutePoints = Arrays.asList(hctx.rctx.regionsWithAllRoutePoints);
 		for (HHRouteRegionsGroup<T> g : groups) {
-			g.containsStartEnd = g.contains(start) && g.contains(end);
+			g.containsStartEnd = g.contains(start) && g.contains(end) && g.containsRegion(regionsWithAllRoutePoints);
 			String[] params = g.profileParams.split(",");
 			for (String p : params) {
 				if (p.trim().length() == 0) {
