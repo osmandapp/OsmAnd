@@ -719,10 +719,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			return false;
 		}
 
-		public boolean containsRegion(List<String> regionsWithAllRoutePoints) {
+		public boolean containsStartEndRegion(String[] regionsCoveringStartAndTargets) {
+			if (regionsCoveringStartAndTargets.length == 0) {
+				return true;
+			}
 			for (BinaryMapIndexReader reader : readers) {
 				String fileNameLowerCase = reader.getFile().getName().toLowerCase();
-				for (String region : regionsWithAllRoutePoints) {
+				for (String region : regionsCoveringStartAndTargets) {
 					if (fileNameLowerCase.startsWith(region)) {
 						return true;
 					}
@@ -752,9 +755,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 			}
 		}
-		List<String> regionsWithAllRoutePoints = Arrays.asList(hctx.rctx.regionsWithAllRoutePoints);
 		for (HHRouteRegionsGroup<T> g : groups) {
-			g.containsStartEnd = g.contains(start) && g.contains(end) && g.containsRegion(regionsWithAllRoutePoints);
+			g.containsStartEnd = g.contains(start) && g.contains(end)
+					&& g.containsStartEndRegion(hctx.rctx.regionsCoveringStartAndTargets);
 			String[] params = g.profileParams.split(",");
 			for (String p : params) {
 				if (p.trim().length() == 0) {

@@ -503,7 +503,7 @@ public class RoutePlannerFrontEnd {
 			}
 		}
 
-		ctx.regionsWithAllRoutePoints = result.toArray(new String[0]);
+		ctx.regionsCoveringStartAndTargets = result.toArray(new String[0]);
 	}
 
 	private void getRegionsOfPoint(LatLon ll, Map<String, Integer> regionCounter, OsmandRegions or) throws IOException {

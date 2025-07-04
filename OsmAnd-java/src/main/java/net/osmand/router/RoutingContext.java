@@ -75,7 +75,7 @@ public class RoutingContext {
 	public int dijkstraMode;
 	public boolean publicTransport;
 	public HashSet<BinaryMapIndexReader> mapIndexReaderFilter = new HashSet<>();
-	public String[] regionsWithAllRoutePoints = new String[0];
+	public String[] regionsCoveringStartAndTargets = new String[0];
 
 	
 	public RouteCalculationProgress calculationProgress;
