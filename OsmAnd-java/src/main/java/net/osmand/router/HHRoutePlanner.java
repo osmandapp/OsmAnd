@@ -22,8 +22,6 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
-
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -31,8 +29,6 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.MultiFinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -51,7 +47,6 @@ import net.osmand.router.RouteCalculationProgress.HHIteration;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class HHRoutePlanner<T extends NetworkDBPoint> {
@@ -729,23 +724,15 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		List<HHRouteRegionsGroup<T>> groups = new ArrayList<>();
 	
 		GeneralRouter router = hctx.rctx.config.router;
+//		String profile = router.getProfileName();
 		String profile = router.getProfile().toString().toLowerCase(); // use base profile
 		List<String> ls = router.serializeParameterValues(router.getParameterValues());
-		OsmandRegions or = PlatformUtil.getOsmandRegions();
 		QuadRect qr = new QuadRect(Math.min(start.getLongitude(), end.getLongitude()),
 				Math.max(start.getLatitude(), end.getLatitude()),
 				Math.max(start.getLongitude(), end.getLongitude()),
 				Math.min(start.getLatitude(), end.getLatitude()));
 		
 		for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
-			String downloadName = Algorithms.getRegionName(r.getFile().getName());
-			WorldRegion worldRegion = or.getRegionDataByDownloadName(downloadName);
-			if (!QuadRect.intersects(qr, worldRegion.getBoundingBox())) {
-				continue;
-			}
-			if (!worldRegion.containsPoint(start) && !worldRegion.containsPoint(end)) {
-				continue;
-			}
 			for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
 				if (hhregion.profile.equals(profile) && QuadRect.intersects(hhregion.getLatLonBbox(), qr)) {
 					double intersect = QuadRect.intersectionArea(hhregion.getLatLonBbox(), qr);
