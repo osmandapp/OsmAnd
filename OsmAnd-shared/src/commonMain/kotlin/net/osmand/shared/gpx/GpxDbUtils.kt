@@ -305,22 +305,23 @@ object GpxDbUtils {
 		return (GpxDatabase.DB_VERSION shl 10) + analysisVersion
 	}
 
-	private fun getCreateAppearanceTriggerQuery(): String = buildString {
+	private fun getCreateAppearanceTriggerQuery(): String {
 		val stampColumn = GpxParameter.APPEARANCE_LAST_MODIFIED_TIME.columnName
 		val appearance = GpxParameter.getAppearanceParameters()
 		val columnNames  = appearance.joinToString(", ") { it.columnName }
 		val changeCondition = appearance.joinToString(" OR ") {
 			"OLD.${it.columnName} IS NOT NEW.${it.columnName}"
 		}
-
-		appendLine("CREATE TRIGGER IF NOT EXISTS $GPX_APPEARANCE_TRIGGER")
-		appendLine("AFTER UPDATE OF $columnNames ON $GPX_TABLE_NAME")
-		appendLine("FOR EACH ROW")
-		appendLine("WHEN $changeCondition")
-		appendLine("BEGIN")
-		appendLine("UPDATE $GPX_TABLE_NAME")
-		appendLine("SET $stampColumn = CAST(strftime('%s','now') AS INTEGER) * 1000")
-		appendLine("WHERE rowid = NEW.rowid;")
-		append("END;")
+		val sb = StringBuilder()
+		sb.appendLine("CREATE TRIGGER IF NOT EXISTS $GPX_APPEARANCE_TRIGGER")
+		sb.appendLine("AFTER UPDATE OF $columnNames ON $GPX_TABLE_NAME")
+		sb.appendLine("FOR EACH ROW")
+		sb.appendLine("WHEN $changeCondition")
+		sb.appendLine("BEGIN")
+		sb.appendLine("UPDATE $GPX_TABLE_NAME")
+		sb.appendLine("SET $stampColumn = CAST(strftime('%s','now') AS INTEGER) * 1000")
+		sb.appendLine("WHERE rowid = NEW.rowid;")
+		sb.append("END;")
+		return sb.toString()
 	}
 }
