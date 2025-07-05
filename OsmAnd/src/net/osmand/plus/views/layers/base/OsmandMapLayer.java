@@ -197,6 +197,10 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 	}
 
+	public void setMapRendererChanged(boolean mapRendererChanged) {
+		this.mapRendererChanged = mapRendererChanged;
+	}
+
 	@NonNull
 	public MapActivity requireMapActivity() {
 		MapActivity mapActivity = getMapActivity();
