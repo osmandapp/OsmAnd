@@ -5743,4 +5743,6 @@
     <string name="deleting">Sletter…</string>
     <string name="set_intermediate_point">Sett mellomliggende mål</string>
     <string name="set_start_point">Sett startpunkt</string>
+    <string name="uphill_downhill_split">Oppover-/nedoverbakke</string>
+    <string name="no_places_available">Ingen steder i synlig region</string>
 </resources>
