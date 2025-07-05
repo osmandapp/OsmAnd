@@ -1015,17 +1015,17 @@
     <string name="poi_denomination_tibetan">Tibetana</string>
     <string name="poi_denomination_church_of_scotland">Iglesia de Escocia</string>
     <string name="poi_denomination_salvation_army">Ejército de salvación</string>
-    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
     <string name="poi_denomination_mennonite">Menonita</string>
     <string name="poi_denomination_bulgarian_orthodox">Ortodoxa búlgara</string>
     <string name="poi_denomination_assemblies_of_god">Asambleas de Dios</string>
     <string name="poi_denomination_nondenominational">Sin denominación</string>
     <string name="poi_denomination_adventist">Adventista</string>
     <string name="poi_denomination_nazarene">Nazarena</string>
-    <string name="poi_denomination_united_methodist">Metodista Unida</string>
+    <string name="poi_denomination_united_methodist">Metodista unida</string>
     <string name="poi_denomination_congregational">Congregacional</string>
     <string name="poi_denomination_old_believers">Antiguos creyentes</string>
-    <string name="poi_denomination_serbian_orthodox">Ortodoxa Serbia</string>
+    <string name="poi_denomination_serbian_orthodox">Ortodoxa serbia</string>
     <string name="poi_denomination_spiritist">Espiritista</string>
     <string name="poi_denomination_armenian_apostolic">Apostólico armenio</string>
     <string name="poi_denomination_dutch_reformed">Holandés reformado</string>
@@ -1033,11 +1033,11 @@
     <string name="poi_denomination_reform">Reformista</string>
     <string name="poi_denomination_latter_day_saints">Santos del último día</string>
     <string name="poi_denomination_church_of_christ">Iglesia de Cristo</string>
-    <string name="poi_denomination_united_church_of_christ">Iglesia Unida de Cristo</string>
+    <string name="poi_denomination_united_church_of_christ">Iglesia unida de Cristo</string>
     <string name="poi_denomination_georgian_orthodox">Ortodoxa georgiana</string>
     <string name="poi_denomination_scientist">Científica</string>
     <string name="poi_denomination_romanian_orthodox">Ortodoxa rumana</string>
-    <string name="poi_denomination_ethiopian_orthodox_tewahedo">Tewahedo ortodoxa etíope</string>
+    <string name="poi_denomination_ethiopian_orthodox_tewahedo">Ortodoxa tewahedo etíope</string>
     <string name="poi_denomination_unitarian">Unitariana</string>
     <string name="poi_denomination_coptic_orthodox">Ortodoxa copto</string>
     <string name="poi_denomination_maronite">Maronita</string>
@@ -5006,4 +5006,7 @@
     <string name="poi_route_activity_type_skiing">Rutas de esquí</string>
     <string name="poi_route_activity_type_snowboarding">Tabla sobre nieve (snowboarding)</string>
     <string name="poi_route_activity_type_snowmobiling">Moto de nieve</string>
+    <string name="poi_mormon_church">Iglesia mormona</string>
+    <string name="poi_reformed_church">Iglesia reformada</string>
+    <string name="poi_ethiopian_orthodox_church">Igreja ortodoxa etíope</string>
 </resources>
