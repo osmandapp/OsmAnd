@@ -5705,7 +5705,7 @@
     <string name="add_widget">Додај справицу</string>
     <string name="poi_source">Извор тачака занимања</string>
     <string name="intermediate_first">Међуодредиште прво</string>
-    <string name="display_priority"></string>
+    <string name="display_priority">Приоритет приказа</string>
     <string name="destination_first">Одредиште прво</string>
     <string name="position_animation_empty_banner_description">Сличица положаја се помера на сваки нови примљени положај без оживљавања.</string>
     <string name="wikidata">Вики-подаци</string>
