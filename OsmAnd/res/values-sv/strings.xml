@@ -3311,7 +3311,7 @@
     <string name="on_hold">Pausad</string>
     <string name="shared_string_night_map">Nattkarta</string>
     <string name="add_online_source">Lägg till onlinekälla</string>
-    <string name="clear_tiles_warning">Om du tillämpar dessa ändringar raderas cachade data för denna raster-kartkälla</string>
+    <string name="clear_tiles_warning">Utförandet av dessa ändringar kommer att radera den cachade datan för denna kartrutekälla.</string>
     <string name="vessel_height_warning_link">Ställ in fartygets höjd</string>
     <string name="vessel_height_warning">Ställ in fartygets höjd för att undvika låga broar. Om bron är rörlig kommer dess höjd i öppet tillstånd att användas.</string>
     <string name="vessel_height_limit_description">Ställ in fartygets höjd för att undvika låga broar. Tänk på att om bron är rörlig kommer vi att använda dess höjd i öppet tillstånd.</string>
@@ -4138,7 +4138,7 @@
     <string name="map_widget_camera_tilt">Kamerans lutning</string>
     <string name="developer_widgets">Widgetar för utvecklare</string>
     <string name="coordinates_widget_current_location_desc">Visar koordinaterna för aktuell position</string>
-    <string name="download_tiles">Ladda ner karttiles</string>
+    <string name="download_tiles">Ladda ner kartrutor</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="rendering_attr_showMtbScale_name">Visa MTB-svårighetsgrad</string>
@@ -4407,8 +4407,8 @@
     <string name="y_axis">Y-axel</string>
     <string name="stop_download">Avbryt nedladdning</string>
     <string name="send_log">Skicka loggfil</string>
-    <string name="number_of_tiles">Antal raster-tiles</string>
-    <string name="stop_download_desc">Nedladdningen är inte klar. Om du avbryter nu, kommer bara delar av rasterkartan vara tillgänglig för visning.</string>
+    <string name="number_of_tiles">Antal kartrutor</string>
+    <string name="stop_download_desc">Nedladdningen är inte klar. Om du avbryter nu kommer inte alla kartrutor vara tillgängliga för visning.</string>
     <string name="stop_and_exit">Stoppa och avsluta</string>
     <string name="shared_string_shape">Figur</string>
     <string name="location_source">Platskälla</string>
@@ -4450,7 +4450,7 @@
     <string name="generate_hillshade_from_3d_maps">Generera terrängskuggningsraster från 3D-kartor</string>
     <string name="weather_offline_forecast">Offline väderprognos</string>
     <string name="common_weight_limit_error">Minsta värde är \"%1$s\" %2$s. Använd profilen \"%3$s\" om fordonets vikt är lägre än minimivärdet.</string>
-    <string name="clear_online_cache_description">Detta kommer rensa cacheminnet för online väderleksraster.</string>
+    <string name="clear_online_cache_description">Detta kommer rensa cacheminnet för online-väderleksrutor.</string>
     <string name="offline_weather_forecast">Väderprognos offline</string>
     <string name="map_marker_average_speed_desc">Ange tidsintervallet för medelhastigheten (används för beräknad ankomsttid).</string>
     <string name="marker_2nd">Andra markören</string>
@@ -4458,7 +4458,7 @@
     <string name="rendering_attr_showWaterwayTunnels_name">Ökad synlighet för tunnlar för vattendrag</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Ökad synlighet för tunnlar för vattendrag</string>
     <string name="app_mode_climbing">Klättring</string>
-    <string name="weather_download_error">Kunde inte ladda ned %1$s rastertiles.</string>
+    <string name="weather_download_error">Kunde inte ladda ned %1$s rutor.</string>
     <string name="select_layer">Välj lager</string>
     <string name="release_4_4">• Förbättrad \"Spår\"-meny i \"Konfigurera karta\"
 \n
@@ -5927,4 +5927,16 @@
     <string name="add_widget_to_the_right">Lägg till widget till höger</string>
     <string name="add_widget_to_the_left">Lägg till widget till vänster</string>
     <string name="shared_string_key">Tangent</string>
+    <string name="resting_position">Viloposition</string>
+    <string name="navigation_position">Navigeringsposition</string>
+    <string name="resting_navigation_position">Vilo- och navigeringsposition</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Rekommendation: Det är svårt att förutsäga vad som kommer respektive inte kommer att spelas in, så det är kanske bäst att slå av detta filter.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Biverkan: Ett resultat av att filtrera med avseende på noggrannhet kan vara att punkter helt saknas, t.ex. för under broar, under träd, mellan höga byggnader eller under vissa väderförhållanden.</string>
+    <string name="monitoring_min_accuracy_descr">Detta kommer göra att bara punkter uppmätta som indikeras ha en viss minsta noggrannhet (i meter/fot, enligt vad som rapporteras av Android för ditt chipset) spelas in. Noggrannhet är mätningars närhet till den faktiska positionen, och är inte direkt relaterat till precision, vilken är spridningen av upprepade mätningar.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Anmärkning: Om GPS:en varit avslagen omedelbart innan inspelning, så kan den först uppmätta punkten ha en försämrad noggrannhet,så i vår kod skulle vi kanske vilja vänta en sekund eller så innan vi spelar in en punkt (eller spela in den bästa av 3 på varandra följande punkter, o.s.v.), men detta är inte implementerat ännu.</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="graph_axis">Grafaxel</string>
+    <string name="hugerock_promo">Hugerock-kampanj i %1$s månader</string>
+    <string name="rendering_avg_info_details">FPS för senaste 1000 bilderna: %1$s\nCPU (kartrutor): %2$s\nCPU (inaktiv tid): %3$s\nCPU (väntar på GPU): %4$s</string>
+    <string name="show_debug_tile_description">Visa information om kartsymboler på varje kartruta</string>
 </resources>
