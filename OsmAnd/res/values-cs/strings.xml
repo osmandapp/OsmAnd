@@ -5505,7 +5505,7 @@
     <string name="obd_fuel_type_hybrid_diesel">Hybridní dieselový</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hybridní vodíkový</string>
     <string name="obd_fuel_type_unknown">Neznámý typ paliva</string>
-    <string name="obd_air_intake_temp">Teplota na vstupu</string>
+    <string name="obd_air_intake_temp">Teplota nasávaného vzduchu</string>
     <string name="obd_fuel_consumption_rate">Míra spotřeby paliva</string>
     <string name="obd_fuel_type">Typ paliva</string>
     <string name="import_export">Import/export</string>
@@ -5549,7 +5549,7 @@
     <string name="screen_is_unlocked">Dotyková obrazovka je odemčená.</string>
     <string name="screen_is_locked_by_action_button">Dotyková obrazovka je zamčená. Klepnutím ji odemknete.</string>
     <string name="release_4_9">• Přidán celoobrazovkový prohlížeč galerií pro obrázky Wikimedia\n\n • Přidán nový modul „Metriky vozidla“ pro sledování výkonu vozidla pomocí protokolu OBD-II.\n\n • Přidána možnost přiřazovat činnosti ke stopám a podle toho je filtrovat\n\n • Implementovány nové rychlé akce pro záznam jízdy a uzamčení dotykové obrazovky\n\n • Zaveden přizpůsobitelný vzhled tlačítek mapy a přesná mřížka\n\n • Přidána kontextová nabídka a akce „Obnovit průměrnou rychlost“ k widgetům\n\n • Přidána nová vrstva tras „Trasy pro terénní kola“\n\n • Opravena funkce „Automatický záznam trasy během navigace“\n\n • Opraven problém s převrácenými souřadnicemi v jazyce RTL\n\n • Opravena chybějící data snímačů pro aktuálně zaznamenávanou stopu\n\n • Přidány informace o okolních oblastech pro vybraný bod\n\n • Přidána rychlá akce pro ovládání viditelnosti úprav OSM\n\n • Oddělené parametry viditelnosti pro možnosti zabarvení terénu\n\n • Přidána ikona pro zobrazení přístupu nebo jiných atributů silnice či cesty, na kterou lze klepnout</string>
-    <string name="route_guidance_desc">Poskytuje navádění trasy v reálném čase, včetně vzdálenosti k další odbočce, názvu silnice, názvu aktuální ulice a informací o jízdních pruzích. Widgety jsou aktivní během navigace.</string>
+    <string name="route_guidance_desc">Poskytuje navádění na trasu v reálném čase, včetně vzdálenosti k další odbočce, názvu silnice, aktuálního názvu ulice a informací o jízdních pruzích. Widgety jsou aktivní během navigace.</string>
     <string name="obd_nothing_found_description">Zkontrolujte prosím následující:\n – Ujistěte se, že je Bluetooth zapnutý\n – Motor vozidla běží\n – Ujistěte se, že je vaše zařízení v dosahu skeneru.</string>
     <string name="obd_bluetooth_off_description">Zapněte Bluetooth pro nalezení a připojení skenerů.</string>
     <string name="obd_searching_text_description">Udržujte své zařízení blízko skeneru. Ujistěte se, že motor vozidla běží.</string>
@@ -5692,7 +5692,7 @@
     <string name="no_places_available">Žádná místa v zobrazené oblasti</string>
     <string name="no_photo_for_location_desc">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
     <string name="hmd_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu a dalších na %1$s měsíců</string>
-    <string name="shared_string_road_exit">Výjezd</string>
+    <string name="shared_string_road_exit">Odbočka</string>
     <string name="hmd_promo">HMD Promo na %1$s měsíců</string>
     <string name="original_color_description">Každý bod by si zachoval svou vlastní barvu.</string>
     <string name="original_icon_description">Každý bod by si ponechal vlastní ikonu.</string>
