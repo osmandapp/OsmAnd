@@ -5483,7 +5483,7 @@
     <string name="obd_plugin_name">Metriky vozidla</string>
     <string name="obd_plugin_description">Monitorujte klíčové metriky vozidla pomocí protokolu OBD-II. Přístup k datům zahrnuje:\n • Otáčky motoru, doba běhu motoru, vypočtené zatížení motoru\n • Spotřeba paliva, tlak paliva, zbývající palivo\n • Teplota sání, teplota okolí, teplota chladicí kapaliny, teplota motorového oleje\n • Rychlost vozidla, poloha škrticí klapky, napětí baterie\n</string>
     <string name="obd_support">Podpora OBD</string>
-    <string name="obd_ambient_air_temp">Teplota okolí</string>
+    <string name="obd_ambient_air_temp">Okolní teplota</string>
     <string name="obd_battery_voltage">Napětí baterie</string>
     <string name="new_trip_segment">Nový segment výletu</string>
     <string name="quick_action_verb_start_pause">Spustit / Pozastavit</string>
@@ -5591,7 +5591,7 @@
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
     <string name="fuel_tank_capacity_description">Zadejte kapacitu vaší palivové nádrže pro přesnější sledování úrovně a spotřeby paliva</string>
     <string name="fuel_tank_capacity">Kapacita palivové nádrže</string>
-    <string name="obd_engine_oil_temperature_desc">Ukazuje teplotu motorového oleje.</string>
+    <string name="obd_engine_oil_temperature_desc">Zobrazuje teplotu motorového oleje.</string>
     <string name="obd_throttle_position_desc">Ukazuje úhel škrticí klapky v tělese škrticí klapky.</string>
     <string name="vehicle_metrics_obd_ii">Metriky vozidla (OBD-II)</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s za %2$s</string>
@@ -5612,7 +5612,7 @@
     <string name="shared_string_hour">Hodiny</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Sledování důležitých údajů o vozidle pomocí protokolu OBD-II. Sledujte klíčové ukazatele, jako je rychlost, otáčky motoru, spotřeba paliva a další.</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Použít vybrané jednotky v názvu.</string>
-    <string name="remaining_fuel_description">Zobrazuje zbývající množství paliva v nádrži vozidla</string>
+    <string name="remaining_fuel_description">Zobrazuje zbývající množství paliva v nádrži vozidla.</string>
     <string name="average_value_slider_description">Vyberte časový interval pro měření průměrné hodnoty.</string>
     <string name="obd_fuel_consumption_desc">Zobrazuje míru spotřeby paliva v motoru vypočítanou na základě zbývajícího paliva, velikosti nádrže a ujeté vzdálenosti podle GPS.</string>
     <string name="average_temperature">Průměrná teplota</string>
