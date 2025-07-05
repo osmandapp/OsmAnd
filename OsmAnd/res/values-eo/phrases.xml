@@ -725,7 +725,7 @@
     <string name="poi_denomination_apostolic">Apostola Eklezio</string>
     <string name="poi_denomination_reform">Reformita Eklezio</string>
     <string name="poi_denomination_latter_day_saints">Eklezio de Jesuo Kristo de la Sanktuloj de la Lastaj Tagoj</string>
-    <string name="poi_denomination_united_church_of_christ">Unuigita Eklezio de Kristo</string>
+    <string name="poi_denomination_united_church_of_christ">Unuiĝinta Eklezio de Kristo</string>
     <string name="poi_denomination_church_of_christ">Eklezio de Kristo</string>
     <string name="poi_denomination_georgian_orthodox">Kartvela Ortodoksa Eklezio</string>
     <string name="poi_denomination_scientist">Kristana Scienco</string>
@@ -5070,4 +5070,8 @@
     <string name="poi_evangelical_lutheran_church">Evangelia-luterana kirko</string>
     <string name="poi_african_methodist_episcopal_church">Preĝejo de Afrika Metodisma Episkopa Eklezio</string>
     <string name="poi_route_point_category">Kategorio de vojaĝa punkto</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Ukraina Grekkatolika Eklezio</string>
+    <string name="poi_denomination_ukrainian_orthodox">Ukraina Ortodoksa Eklezio</string>
+    <string name="poi_denomination_neo_pentecostal">Noc-karisma Movado (Nov-pentekosta)</string>
+    <string name="poi_denomination_evangelical_lutheran">Evangelia Luterana Eklezio en Usono</string>
 </resources>

@@ -4190,23 +4190,7 @@
     <string name="goods_delivery_desc_4">对超过 3.5 吨的车辆使用卡车配置文件。</string>
     <string name="routing_attr_freeride_policy_description">“自由式滑雪(Freeride)”和“野雪滑(Off-piste)”属于非官方路线和通道。通常未 经整修、无人维护，且晚上不进行巡查。请自行承担风险。</string>
     <string name="release_4_0_beta">- 新增以英尺为单位下载等高线的选项 \n \n - 规划路线景观：增加了在点或图表之间切换的选项卡 \n \n - OsmAnd实时更新移至 “下载 &gt; 更新” \n \n - 轨迹现在可以按高度、速度或坡度进行着色。 \n \n - 增加改变路线外观的选项。 \n \n - 更新了“行程录制”对话框</string>
-    <string name="release_3_5">- 更新了应用程序和配置文件设置。设置现在按类型排列。每个配置文件都可以单独定制。
-\n
-\n - 新的地图下载对话框，建议在浏览时下载地图
-\n
-\n - 深色主题的修复
-\n
-\n - 修复了世界范围内的几个路径规划问题
-\n
-\n - 更新了基础地图，增加了更详细的道路网络
-\n
-\n - 修正了世界上的水灾地区
-\n
-\n - 滑雪路线。在路线细节中增加了海拔剖面和路线的复杂性
-\n
-\n - 其他错误修正
-\n
-\n</string>
+    <string name="release_3_5">• 更新应用程序和配置文件设置。设置现在按类型排列，每个配置文件都可以单独定制。 \n \n • 新增地图下载对话框，会在浏览地图时建议下载 \n \n • 深色主题修复 \n \n • 修复了世界范围内的若干路径规划问题 \n \n • 更新基础地图，提供更详细的道路网络 \n \n • 修复世界各地的水淹区域 \n \n • 滑雪路线：在路线细节中新增海拔概况和路线复杂性 \n \n • 其他错误修复</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">显示山地自行车 IMBA 路径</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">显示山地自行车专用路径。</string>
     <string name="connect_with_straight_line">用直线连接</string>
@@ -4393,7 +4377,7 @@
     <string name="shared_string_speed">速度</string>
     <string name="map_widget_camera_tilt_desc">显示透视模式下的相机倾斜角度。默认为90°（无倾斜）。</string>
     <string name="shared_string_not_used">未使用</string>
-    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="shared_string_open_street_map">开放街道地图</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 标签</string>
     <string name="favorite_confirm_delete_group">您确定要删除“%1$s”组和所有包含的点（%2$d）吗？</string>
     <string name="rendering_attr_showWaterwayTunnels_name">提高水路隧道的能见度</string>
@@ -4575,27 +4559,7 @@
     <string name="rendering_attr_piste_type_snow_park_name">地形公园</string>
     <string name="mgrs_format_descr">OsmAnd使用MGRS，类似于UTM NATO格式。</string>
     <string name="pref_selected_by_default_for_profiles">默认情况下为配置文件选择此设置：%s</string>
-    <string name="release_3_4">• 应用配置文件：根据自己的需要创建自定义配置文件，并带有自定义图标和颜色
-\n
-\n•现在自定义任何配置文件的默认和最小/最大速度
-\n
-\n• 为当前坐标添加了小部件
-\n
-\n• 添加了在地图上显示指南针和半径标尺的选项
-\n
-\n• 修复后台跟踪日志记录
-\n
-\n• 改进了背景地图下载
-\n
-\n•返回“打开屏幕”选项
-\n
-\n• 修复了维基百科语言选择
-\n
-\n• 修复了导航过程中指南针按钮的行为
-\n
-\n• 其他错误修复
-\n
-\n</string>
+    <string name="release_3_4">• 应用程序配置文件：根据自己的需要创建自定义配置文件，并可自定义图标和颜色 \n \n•现在可自定义任何配置文件的默认速度和最小/最大速度 \n \n• 新增当前坐标小工具\n \n• 新增在地图上显示指南针和半径量尺的选项 \n \n• 修复后台轨迹记录 \n \n• 改进后台地图下载 \n \n•恢复 “打开屏幕 ”选项 \n \n• 修复维基百科的语言选择 \n \n• 修复导航过程中指南针按钮的行为 \n \n• 其他错误修复</string>
     <string name="quick_action_directions_from_desc">使屏幕中心成为出发点的按钮。然后会要求设置目的地或触发路线计算。</string>
     <string name="search_offline_geo_error">无法解析地理意图“%s”。</string>
     <string name="map_during_navigation">导航期间的地图</string>
@@ -5134,7 +5098,7 @@
     <string name="relief_3d_download_description">需要额外的地图数据才能在地图上查看地形。</string>
     <string name="vertical_exaggeration_description">通过改变比例值，您可以加强三维地形的显示效果。</string>
     <string name="vertical_exaggeration">垂直夸大</string>
-    <string name="fix_north_up">启用固定北方朝上</string>
+    <string name="fix_north_up">启用固定北朝上</string>
     <string name="use_3d_track_visualization">3D 可视化</string>
     <string name="auto_zoom">自动缩放</string>
     <string name="speed_limit_warning">速限警告</string>
@@ -5586,7 +5550,7 @@
     <string name="key_assignment_add_key">添加键</string>
     <string name="key_assignment_add_action">添加动作</string>
     <string name="shared_string_length">长度</string>
-    <string name="routing_type_a_star_2_phase">A* 2-相</string>
+    <string name="routing_type_a_star_2_phase">两阶段 A*</string>
     <string name="obd_fuel_left_km">剩餘燃料（公里）</string>
     <string name="connect_obd_instructions_step4">按 “%1$s”，然后从列表中选择您的扫描器。</string>
     <string name="connect_obd_instructions_step3">在您的设备上启用蓝牙</string>
@@ -5619,9 +5583,9 @@
     <string name="bottom">底部</string>
     <string name="shared_string_dp">dp</string>
     <string name="top">顶部</string>
-    <string name="gpx_approximation_java">基于路线的（Java）</string>
+    <string name="gpx_approximation_java">基于路径规划（Java）</string>
     <string name="routing_attr_avoid_cobblestone_name">避免鹅卵石</string>
-    <string name="gpx_approximation">GPX 估计</string>
+    <string name="gpx_approximation">GPX 近似</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="title_3d_track">3D 轨迹</string>
     <string name="key_name_pattern">按键 “%1$s”</string>
@@ -5635,7 +5599,7 @@
     <string name="travel_topics">旅行话题</string>
     <string name="action_icon">动作图标</string>
     <string name="routing_type_a_star_classic">A* 经典</string>
-    <string name="gpx_approximation_cpp">基于路线的（C++）</string>
+    <string name="gpx_approximation_cpp">基于路径规划（C++）</string>
     <string name="original_color_description">每个点都会保留其颜色。</string>
     <string name="original_shape_description">每个点都会保留其形状。</string>
     <string name="apply_to_all_points">应用至所有点</string>
@@ -5823,4 +5787,12 @@
     <string name="quick_action_previous_app_profile">切换到上一个配置文件</string>
     <string name="quick_action_next_app_profile">切换到下一个配置文件</string>
     <string name="app_profile">配置文件</string>
+    <string name="show_rasterization_debug_tile">显示瓦片光栅化信息</string>
+    <string name="show_debug_tile_description">显示每个瓦片的地图符号信息</string>
+    <string name="required_maps_calculate_online_summary">缺失地图列表基于直线路线。为了获得准确的地图列表，OsmAnd 可以在线预先计算您的路线。</string>
+    <string name="route_line_use_coloring_speed">路线线条按移动速度着色。</string>
+    <string name="route_line_use_coloring_altitude">路线线条按海拔高度着色。</string>
+    <string name="delete_actions_button_confirmation">您确定要删除“%1$s ”和所有已添加的操作吗？</string>
+    <string name="gpx_approximation_geo_cpp">基于几何（C++，快速）</string>
+    <string name="gpx_approximation_geo_java">基于几何（Java，快速）</string>
 </resources>

@@ -50,7 +50,7 @@
     <string name="poi_compressed_air_filter">Ваздух под притиском</string>
     <string name="poi_vacuum_cleaner_filter">Усисивач</string>
     <string name="poi_self_service">Самоуслуга</string>
-    <string name="poi_automated">Аутоматизовано</string>
+    <string name="poi_automated">Осамостаљено</string>
     <string name="poi_parking_type">Врста</string>
     <string name="poi_covered">Прекривен</string>
     <string name="poi_subway_station_filter">Подземна станица</string>
@@ -58,7 +58,7 @@
     <string name="poi_bicycle_parking_type">Врста</string>
     <string name="poi_aerialway_bicycle">Превоз бициклом</string>
     <string name="poi_aerialway_heating">Грејање</string>
-    <string name="poi_pump">Пумпа</string>
+    <string name="poi_pump">Црпна станица</string>
     <string name="poi_telescope_type">Врста</string>
     <string name="poi_animal_training_type">Врста</string>
     <string name="poi_diplomatic_filter">Дипломатска установа</string>
