@@ -23,7 +23,7 @@ class GpxDatabase {
 	companion object {
 		val log = LoggerFactory.getLogger("GpxDatabase")
 
-		const val DB_VERSION = 30
+		const val DB_VERSION = 31
 		const val DB_NAME = "gpx_database"
 		const val GPX_TABLE_NAME = "gpxTable"
 		const val GPX_DIR_TABLE_NAME = "gpxDirTable"
@@ -84,7 +84,12 @@ class GpxDatabase {
 	private fun updateGpxParameters(item: DataItem, map: Map<GpxParameter, Any?>): Boolean {
 		val file = item.file
 		val tableName = GpxDbUtils.getTableName(file)
-		return updateGpxParameters(map, tableName, GpxDbUtils.getItemRowsToSearch(file))
+		val success = updateGpxParameters(map, tableName, GpxDbUtils.getItemRowsToSearch(file))
+
+		if (success && item is GpxDataItem) {
+			updateAppearanceTimestamp(item)
+		}
+		return success
 	}
 
 	private fun updateGpxParameters(
@@ -521,5 +526,29 @@ class GpxDatabase {
 		}
 		return false
 	}
-}
 
+	private fun updateAppearanceTimestamp(item: GpxDataItem) {
+		var db: SQLiteConnection? = null
+		try {
+			db = openConnection(true)
+			db?.let {
+				var cursor: SQLiteCursor? = null
+				try {
+					val fileName = item.file.name()
+					val fileDir = GpxDbUtils.getGpxFileDir(item.file)
+					val query = "${GpxDbUtils.getSelectGpxQuery(APPEARANCE_LAST_MODIFIED_TIME)} $GPX_FIND_BY_NAME_AND_DIR"
+
+					cursor = it.rawQuery(query, arrayOf(fileName, fileDir))
+					if (cursor != null && cursor.moveToFirst()) {
+						val timestamp = cursor.getLong(0)
+						item.setParameter(APPEARANCE_LAST_MODIFIED_TIME, timestamp)
+					}
+				} finally {
+					cursor?.close()
+				}
+			}
+		} finally {
+			db?.close()
+		}
+	}
+}
