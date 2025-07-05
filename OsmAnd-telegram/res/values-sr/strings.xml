@@ -262,9 +262,9 @@
     <string name="shared_string_suggested">Предложено</string>
     <string name="back_to_osmand">Повратак на ОсмАнд</string>
     <string name="duration_ago">Пре %1$s</string>
-    <string name="last_response_duration">Последњи одзив: пре %1$</string>
+    <string name="last_response_duration">Последњи одзив: пре %1$s</string>
     <string name="last_update_from_telegram_duration">Последње освежење из Телеграма: пре %1$s</string>
-    <string name="last_response_date">Последњи одзив: %1$</string>
+    <string name="last_response_date">Последњи одзив: %1$s</string>
     <string name="last_update_from_telegram_date">Последње освежавање из Телеграма: %1$s</string>
     <string name="shared_string_error_short">Грешка</string>
     <string name="shared_string_export">Извези</string>
@@ -276,5 +276,5 @@
     <string name="shared_string_error">Грeшкa</string>
     <string name="send_live_location_error">Пошаљи грешку положаја уживо: %1$s</string>
     <string name="location_source">Извор добављања положаја</string>
-    <string name="location_source_summary">"ОсмАнд уграђен из Гуглове Продавнице подразумевано употребљава услуге Гуглове Продавнице  ради добављања положаја.\n\nУколико добијете податак нетачног положаја или употребом уређаја без услуге Гуглове Продавнице, пробајте да пребаците на АПИ андроида"</string>
+    <string name="location_source_summary">ОсмАнд уграђен из Гуглове Продавнице подразумевано употребљава услуге Гуглове Продавнице ради добављања положаја.\n\nУколико добијете податак нетачног положаја или употребом уређаја без услуге Гуглове Продавнице, пробајте да пребаците на АПИ андроида</string>
 </resources>
