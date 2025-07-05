@@ -146,18 +146,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	@Override
-	public long getLocalModifiedTime() {
-		long time = getAppearanceLastModifiedTime();
-		return Math.max(time, super.getLocalModifiedTime());
-	}
-
-	@Override
-	public boolean needMd5Digest() {
-		long time = getAppearanceLastModifiedTime();
-		return super.needMd5Digest() && time <= file.lastModified();
-	}
-
-	private long getAppearanceLastModifiedTime() {
+	public long getInfoModifiedTime() {
 		GpxDataItem dataItem = app.getGpxDbHelper().getItem(SharedUtil.kFile(file));
 		return dataItem != null ? dataItem.getParameter(APPEARANCE_LAST_MODIFIED_TIME) : 0;
 	}
