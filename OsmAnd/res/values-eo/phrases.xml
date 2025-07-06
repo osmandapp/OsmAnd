@@ -706,7 +706,7 @@
     <string name="poi_denomination_united_reformed">Unuiĝinta Reformita Eklezio</string>
     <string name="poi_denomination_church_of_scotland">Eklezio de Skotlando</string>
     <string name="poi_denomination_salvation_army">Armeo de Savo</string>
-    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
+    <string name="poi_denomination_iglesia_ni_cristo">Eklezio de Kristo («Iglesia ni Cristo»)</string>
     <string name="poi_denomination_uniting">Unuigata Eklezio de Aŭstralio</string>
     <string name="poi_denomination_mennonite">Menoanismo</string>
     <string name="poi_denomination_quaker">Kvakerismo</string>
@@ -5102,7 +5102,7 @@
     <string name="poi_denomination_hare_krishna">Internacia Socio por Kriŝna Konscio</string>
     <string name="poi_denomination_foursquare">Eklezio de Kvarobla Evangelio</string>
     <string name="poi_denomination_conservative">Konservema Judismo</string>
-    <string name="poi_denomination_ashkenazi">Aŝkenaza</string>
+    <string name="poi_denomination_ashkenazi">Aŝkenaza Judismo</string>
     <string name="poi_denomination_hasidic">Ĥasidismo</string>
     <string name="poi_denomination_lubavitch">Ĥabad-Lubaviĉ</string>
     <string name="poi_denomination_theravada">Teravado</string>
@@ -5128,6 +5128,15 @@
     <string name="poi_denomination_mission_covenant_church_of_sweden">Sveda Misia Eklezio</string>
     <string name="poi_denomination_gelug">Gelugo</string>
     <string name="poi_denomination_vajrayana">Vaĝrajano</string>
-    <string name="poi_denomination_slavic">slava</string>
-    <string name="poi_denomination_celtic">kelta</string>
+    <string name="poi_denomination_slavic">Slava Paganismo</string>
+    <string name="poi_denomination_celtic">Kelta Paganismo</string>
+    <string name="poi_denomination_marthoma">Kristanoj de Sankta Tomaso (Mar Thoma)</string>
+    <string name="poi_denomination_free_methodist">Libera Metodisma Eklezio</string>
+    <string name="poi_denomination_churches_of_christ">Eklezioj de Kristo</string>
+    <string name="poi_denomination_kardecista">Kardecismo</string>
+    <string name="poi_denomination_free_church_of_scotland">Libera Eklezio de Skotlando</string>
+    <string name="poi_denomination_catholic_apostolic">Katolika Apostola Eklezio</string>
+    <string name="poi_denomination_iglesia_filipina_independiente">Sendependa Eklezio de Filipinoj</string>
+    <string name="poi_denomination_sephardi">Sefarda Judismo</string>
+    <string name="poi_denomination_welsh_independent">Sendependuloj (Kimrujo)</string>
 </resources>
