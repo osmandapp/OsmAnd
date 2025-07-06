@@ -757,9 +757,9 @@
     <string name="navigate_point_top_text">Εισαγωγή γ. πλάτους και γ. μήκους στην επιλεγμένη μορφή (D - μοίρες, M - λεπτά, S - δεύτερα)</string>
     <string name="navigate_point_latitude">Γεωγραφικό πλάτος</string>
     <string name="navigate_point_longitude">Γεωγραφικό μήκος</string>
-    <string name="navigate_point_format_D">DDD.DDDDD</string>
-    <string name="navigate_point_format_DM">DDD MM.MMM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
+    <string name="navigate_point_format_D">ΜΜΜ.ΜΜΜΜΜ</string>
+    <string name="navigate_point_format_DM">ΜΜΜ ΛΛ.ΛΛΛ</string>
+    <string name="navigate_point_format_DMS">ΜΜΜ ΛΛ ΔΔ.Δ</string>
     <string name="search_address_top_text">Διεύθυνση</string>
     <string name="search_address_region">Περιοχή</string>
     <string name="search_address_city">Πόλη</string>
@@ -1570,11 +1570,11 @@
     <string name="enter_lon">Εισάγετε το γεωγραφικό μήκος</string>
     <string name="enter_lat">Εισάγετε το γεωγραφικό πλάτος</string>
     <string name="enter_lat_and_lon">Εισάγετε γεωγραφικό πλάτος και μήκος</string>
-    <string name="dd_mm_ss_format">ΜΜ°ΠΠ′ΔΔ″</string>
+    <string name="dd_mm_ss_format">ΜΜ°ΛΛ′ΔΔ″</string>
     <string name="dd_dddddd_format">ΜΜ.ΜΜΜΜΜΜ°</string>
     <string name="dd_ddddd_format">ΜΜ.ΜΜΜΜΜ°</string>
-    <string name="dd_mm_mmmm_format">ΜΜ°ΠΠ.ΠΠΠΠ′</string>
-    <string name="dd_mm_mmm_format">ΜΜ°ΠΠ.ΠΠΠ′</string>
+    <string name="dd_mm_mmmm_format">ΜΜ°ΛΛ.ΛΛΛΛ′</string>
+    <string name="dd_mm_mmm_format">ΜΜ°ΛΛ.ΛΛΛ′</string>
     <string name="east_abbreviation">Α</string>
     <string name="west_abbreviation">Δ</string>
     <string name="south_abbreviation">Ν</string>
@@ -2252,7 +2252,7 @@
     <string name="proxy_pref_descr">Καθορίστε έναν διακομιστή μεσολάβησης.</string>
     <string name="settings_privacy">Ιδιωτικότητα</string>
     <string name="rendering_attr_roadStyle_description">Μορφή δρόμου</string>
-    <string name="navigate_point_olc">Κωδικός Ανοιχτής Τοποθεσίας (OLC)</string>
+    <string name="navigate_point_olc">Κωδικός Ανοιχτής Τοποθεσίας</string>
     <string name="navigate_point_olc_info_invalid">Άκυρο OLC
 \n</string>
     <string name="navigate_point_olc_info_short">Σύντομος OLC
@@ -2992,7 +2992,7 @@
     <string name="utm_format_descr">Το OsmAnd χρησιμοποιεί το πρότυπο UTM, το οποίο είναι παρόμοιο αλλά όχι ίδιο με τη μορφή UTM NATO.</string>
     <string name="shared_string_example">Παράδειγμα</string>
     <string name="navigate_point_format_utm">Πρότυπο UTM</string>
-    <string name="navigate_point_format_olc">Άνοιγμα κωδικού τοποθεσίας</string>
+    <string name="navigate_point_format_olc">Κωδικός Ανοιχτής Τοποθεσίας</string>
     <string name="coordinates_format_info">Η επιλεγμένη μορφή θα εφαρμοστεί σε όλες τις εφαρμογές.</string>
     <string name="pref_selected_by_default_for_profiles">Η ρύθμιση αυτή επιλέγεται από προεπιλογή για προφίλ: %s</string>
     <string name="change_default_settings">Αλλαγή ρύθμισης</string>
@@ -4967,4 +4967,11 @@
     <string name="no_poi_for_category">ΣΕ δεν βρέθηκε</string>
     <string name="rendering_attr_lightDetail_name">Λεπτομέρεια φωτός</string>
     <string name="rendering_attr_lightDetail_description">Προεπιλογή: ονομασία θαλάσσιου σημαδιού (χαρακτήρας φωτός.ομάδα.περίοδος), επιλογή πρόσθετων πληροφοριών στους τομείς 1 έως 3 ή τους τομείς 1,2,3,4,5 χαρακτήρα φωτός</string>
+    <string name="help_article_personal_color_palette_schemes_name">Χρωματικά Σχέδια</string>
+    <string name="history_preferences_descr">Μπορείτε να απενεργοποιήσετε την καταγραφή ιστορικού ξεχωριστά για κάθε είδος ιστορικού.</string>
+    <string name="copy_build_version">Αντιγραφή έκδοσης build</string>
+    <string name="distance_circles">Κύκλοι απόστασης</string>
+    <string name="map_widget_rendering_fps_desc">Δείχνει πόσο γρήγορα ο χάρτης και τα στοιχεία του χάρτη προβάλλονται και ανανεώνονται, εκφρασμένο σε πλαίσια ανά δευτερόλεπτο (FPS).</string>
+    <string name="map_widget_target_distance_desc">Δείχνει την απόσταση μεταξύ κάμερας και τοποθεσίας στόχου.</string>
+    <string name="trip_recording_downhill_widget_desc">Δείχνει το άρθροισμα όλων των καταβάσεων στην τρέχουσα καταγεγραμμένη διαδρομή.</string>
 </resources>
