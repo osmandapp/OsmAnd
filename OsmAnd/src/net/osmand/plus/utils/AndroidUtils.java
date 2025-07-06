@@ -888,7 +888,7 @@ public class AndroidUtils {
 
 	@NonNull
 	public static Rect getViewBoundOnScreen(@NonNull View view) {
-		if (view.getVisibility() == View.VISIBLE) {
+		if (view.getVisibility() != View.GONE) {
 			int[] pixel = getLocationOnScreen(view);
 			int left = pixel[0];
 			int top = pixel[1];
@@ -899,7 +899,7 @@ public class AndroidUtils {
 
 	@NonNull
 	public static Rect getViewBoundOnWindow(@NonNull View view) {
-		if (view.getVisibility() == View.VISIBLE) {
+		if (view.getVisibility() != View.GONE) {
 			int[] pixel = new int[2];
 			view.getLocationInWindow(pixel);
 			int left = pixel[0];
@@ -911,7 +911,7 @@ public class AndroidUtils {
 
 	public static int[] getCenterViewCoordinates(@NonNull View view) {
 		int[] coordinates = new int[2];
-		if (view.getVisibility() == View.VISIBLE) {
+		if (view.getVisibility() != View.GONE) {
 			view.getLocationOnScreen(coordinates);
 			coordinates[0] += view.getWidth() / 2;
 			coordinates[1] += view.getHeight() / 2;
