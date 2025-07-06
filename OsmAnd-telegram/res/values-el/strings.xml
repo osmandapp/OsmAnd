@@ -224,5 +224,5 @@
     <string name="stale_location">Καμία κίνηση</string>
     <string name="my_location_search_hint">Αναζήτηση: Ομάδα ή επαφή</string>
     <string name="set_time">Ορισμός χρόνου</string>
-    <string name="set_time_description">Ορίστε τον χρόνο όπου οι επιλεγμένες επαφές και ομάδες θα βλέπουν την τοποθεσία σας σε πραγματικό χρόνο.</string>
+    <string name="set_time_description">Ορίστε το χρόνο όπου οι επιλεγμένες επαφές και ομάδες θα βλέπουν την τοποθεσία σας σε πραγματικό χρόνο.</string>
 </resources>
