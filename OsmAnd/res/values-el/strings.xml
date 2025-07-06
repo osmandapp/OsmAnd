@@ -2244,7 +2244,7 @@
     <string name="osmand_distance_planning_plugin_description">Δημιουργείστε μονοπάτια πατώντας τον χάρτη, ή χρησιμοποιώντας ή τροποποιώντας υφιστάμενα αρχεία GPX, για τη σχεδίαση ταξιδιού και μέτρηση της απόστασης μεταξύ σημείων. Το αποτέλεσμα μπορεί να αποθηκευτεί ως αρχείο GPX για μεταγενέστερη χρήση στην καθοδήγηση.</string>
     <string name="watch">Παρακολούθηση</string>
     <string name="online_map">Χάρτης με σύνδεση</string>
-    <string name="rendering_attr_pisteRoutes_name">Πίστες χιονοδρομιών</string>
+    <string name="rendering_attr_pisteRoutes_name">Χιονοδρομικές διαδρομές</string>
     <string name="rendering_attr_pisteGrooming_name">Συντήρηση πίστας</string>
     <string name="world_ski_missing">Μεταφορτώστε τον ειδικό χάρτη χωρίς σύνδεση για να εμφανίσετε εγκαταστάσεις χιονοδρομίας.</string>
     <string name="nautical_maps_missing">Μεταφορτώστε τον ειδικό χάρτη χωρίς σύνδεση για να εμφανίσετε ναυτικές λεπτομέρειες.</string>
@@ -2252,7 +2252,7 @@
     <string name="proxy_pref_descr">Καθορίστε έναν διακομιστή μεσολάβησης.</string>
     <string name="settings_privacy">Ιδιωτικότητα</string>
     <string name="rendering_attr_roadStyle_description">Μορφή δρόμου</string>
-    <string name="navigate_point_olc">Κώδικας Ανοιχτής Τοποθεσίας (OLC)</string>
+    <string name="navigate_point_olc">Κωδικός Ανοιχτής Τοποθεσίας (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Άκυρο OLC
 \n</string>
     <string name="navigate_point_olc_info_short">Σύντομος OLC
@@ -3578,7 +3578,7 @@
     <string name="shared_string_search_history">Ιστορικό αναζήτησης</string>
     <string name="development">Ανάπτυξη</string>
     <string name="mtb_imba">IMBA</string>
-    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
+    <string name="mtb_imba_full">Διεθνής Ένωση Ορεινής Ποδηλασίας</string>
     <string name="wind_layer">Επίπεδο ανέμου</string>
     <string name="cloud_layer">Επίπεδο νεφώσεων</string>
     <string name="precipitation_layer">Στρώμα υετού</string>
@@ -3807,7 +3807,7 @@
     <string name="relief_3d">3D Ανάγλυφο</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Αποφεύγει τις ζώνες χαμηλής εκπομπής ρύπων</string>
     <string name="deletion_error">Σφάλμα διαγραφής</string>
-    <string name="beats_per_minute_short">bpm</string>
+    <string name="beats_per_minute_short">bpm (παλμοί ανά λεπτό)</string>
     <string name="no_visible_tracks">Καθόλου ίχνη στο χάρτη</string>
     <string name="cloud_version_confirm_delete">Διαγραφή \"%1$s\" από OsmAnd Cloud;</string>
     <string name="bluetooth_connected">Συνδέθηκε, %s</string>
@@ -4095,7 +4095,7 @@
     <string name="routing_attr_motor_type_description">Επιλέξτε τον τύπο καυσίμου του κινητήρα σας, αυτό είναι απαραίτητο για την εκτίμηση των εκπομπών CO2.</string>
     <string name="enable_to_use_external_input_device">Ενεργοποιήστε για χρήση εξωτερικής συσκευής εισόδου με το OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Αλλαγή προσανατολισμού Χάρτη</string>
-    <string name="activity_type_snowmobile_name">Snowmobile</string>
+    <string name="activity_type_snowmobile_name">Σνόουμομπιλ</string>
     <string name="add_page">Προσθήκη σελίδας</string>
     <string name="reset_key_assignments_desc">Όλες οι αναθέσεις κουμπιών για τον συγκεκριμένο τύπο θα αφαιρεθούν.</string>
     <string name="key_event_action_previous_app_profile">Προηγούμενο προφίλ εφαρμογής</string>
@@ -4950,5 +4950,21 @@
     <string name="resting_position_icon_summary">Εικονίδιο που εμφανίζεται όταν δεν κινείστε.</string>
     <string name="navigation_position_icon_summary">Εικονίδιο που εμφανίζεται όταν πλοηγείστε ή κινείστε.</string>
     <string name="weather_data_sources_prompt">Το OsmAnd παρέχει δεδομένα καιρού από δύο πηγές:</string>
-    <string name="weather_source_GFS_description">Παγκόσμιο Σύστημα Πρόγνωσης από τα Εθνικά Κέντρα Περιβαλλοντικής Πρόβλεψης</string>
+    <string name="weather_source_GFS_description">Παγκόσμιο Σύστημα Πρόγνωσης (GFS) από τα Εθνικά Κέντρα Περιβαλλοντικής Πρόβλεψης</string>
+    <string name="contact_support_retry">Δοκιμάστε ξανά ή επικοινωνήστε με την υποστήριξη</string>
+    <string name="assigned_keys">Ανατιθέμενα κλειδιά</string>
+    <string name="steps_per_minute_unit">ΒΤΛ (βήματα το λεπτό)</string>
+    <string name="show_grids">Εμφάνιση πλέγμα χάρτη</string>
+    <string name="show_grids_description">Επιτρέπει την εμφάνιση πλέγματος πάνω στον χάρτη</string>
+    <string name="show_utm_grids">Χρήση UTM αντί του WGS84</string>
+    <string name="show_utm_grids_description">Εμφανίζει το πλέγμα σε μέτρα UTM αντί σε WGS84</string>
+    <string name="map_grid">Πλέγματα χάρτη</string>
+    <string name="disable_map_layers">Απενεργοποίηση επικαλύψεων χάρτη</string>
+    <string name="disable_map_layers_descr">Απενεργοποιεί όλες τις επικαλύψεις χάρτη πάνω στον διανυσματικό χάρτη (απαιτείται επανεκκίνηση).</string>
+    <string name="delete_track_folder_dialog_message">Αυτό θα διαγράψει τον φάκελο \"%1$s\" και όλα τα %2$s ίχνη που περιλαμβάνει.</string>
+    <string name="track_not_recorded">Δεν έχει καταγραφεί</string>
+    <string name="tracks_empty_folder_description">Αυτός ο φάκελος δεν έχει κανένα ίχνος ακόμη.</string>
+    <string name="no_poi_for_category">ΣΕ δεν βρέθηκε</string>
+    <string name="rendering_attr_lightDetail_name">Λεπτομέρεια φωτός</string>
+    <string name="rendering_attr_lightDetail_description">Προεπιλογή: ονομασία θαλάσσιου σημαδιού (χαρακτήρας φωτός.ομάδα.περίοδος), επιλογή πρόσθετων πληροφοριών στους τομείς 1 έως 3 ή τους τομείς 1,2,3,4,5 χαρακτήρα φωτός</string>
 </resources>
