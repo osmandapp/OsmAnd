@@ -4930,4 +4930,25 @@
     <string name="kpa_unit">kPa</string>
     <string name="obd_nothing_found_description">Παρακαλούμε ελέγξτε τα ακόλουθα:\n – Βεβαιωθείτε ότι το Bluetooth είναι ενεργοποιημένο\n – Η μηχανή του οχήματος είναι σε λειτουργία\n – Βεβαιωθείτε ότι η συσκευή σας είναι εντός εμβέλειας του σαρωτή.</string>
     <string name="obd_searching_text_description">Παρακαλούμε κρατήστε την συσκευή σας κοντά στον σαρωτή. Βεβαιωθείτε ότι η μηχανή του οχήματος είναι σε λειτουργία.</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="reset_average_speed">Επαναφορά μέσης ταχύτητας</string>
+    <string name="movies_list">Λίστα ταινιών</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Διαδρομές μηχανής εκτός δρόμου</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Εμφάνιση διαδρομών μηχανής εκτός δρόμου</string>
+    <string name="compass_click_north_is_up">Για να αλλάξετε τη λειτουργία προσανατολισμού, πατήστε και κρατήστε πατημένο</string>
+    <string name="view_angle">Γωνία θέασης</string>
+    <string name="view_angle_description">Εμφανίζει την περιοχή σε σχήμα κώνου όπου κοιτάτε την τρέχουσα στιγμή</string>
+    <string name="resting_position">Θέση ακινησίας</string>
+    <string name="navigation_position">Θέση πλοήγησης</string>
+    <string name="resting_navigation_position">Στάση &amp; θέση πλοήγησης</string>
+    <string name="location_radius">Ακτίνα τοποθεσίας</string>
+    <string name="location_radius_description">Εμφανίζει την κυκλική περιοχή η οποία αναπαριστά την προσέγγιση της τρέχουσας τοποθεσίας σας</string>
+    <string name="choose_map_orientation">Επιλογή προσανατολισμού χάρτη</string>
+    <string name="quick_action_display_position_in_center">Εμφάνιση θέσης πάντα στο κέντρο</string>
+    <string name="data_source">Πηγή δεδομένων</string>
+    <string name="resting_position_icon">Εικονίδιο θέσης ακινησίας</string>
+    <string name="resting_position_icon_summary">Εικονίδιο που εμφανίζεται όταν δεν κινείστε.</string>
+    <string name="navigation_position_icon_summary">Εικονίδιο που εμφανίζεται όταν πλοηγείστε ή κινείστε.</string>
+    <string name="weather_data_sources_prompt">Το OsmAnd παρέχει δεδομένα καιρού από δύο πηγές:</string>
+    <string name="weather_source_GFS_description">Παγκόσμιο Σύστημα Πρόγνωσης από τα Εθνικά Κέντρα Περιβαλλοντικής Πρόβλεψης</string>
 </resources>
