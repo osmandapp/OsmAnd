@@ -5128,5 +5128,6 @@
     <string name="poi_denomination_mission_covenant_church_of_sweden">Sveda Misia Eklezio</string>
     <string name="poi_denomination_gelug">Gelugo</string>
     <string name="poi_denomination_vajrayana">Vaĝrajano</string>
-    <string name="poi_denomination_slavic">Slava</string>
+    <string name="poi_denomination_slavic">slava</string>
+    <string name="poi_denomination_celtic">kelta</string>
 </resources>
