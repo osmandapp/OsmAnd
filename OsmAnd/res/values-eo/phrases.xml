@@ -5101,4 +5101,10 @@
     <string name="poi_denomination_vaishnavism">Viŝnuismo</string>
     <string name="poi_denomination_hare_krishna">Internacia Socio por Kriŝna Konscio</string>
     <string name="poi_denomination_foursquare">Eklezio de Kvarobla Evangelio</string>
+    <string name="poi_denomination_conservative">Konservema Judismo</string>
+    <string name="poi_denomination_ashkenazi">Aŝkenaza</string>
+    <string name="poi_denomination_hasidic">Ĥasidismo</string>
+    <string name="poi_denomination_lubavitch">Ĥabad-Lubaviĉ</string>
+    <string name="poi_denomination_theravada">Teravado</string>
+    <string name="poi_denomination_tiantai">Tiāntāi</string>
 </resources>
