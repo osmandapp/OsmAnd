@@ -6084,7 +6084,7 @@
     <string name="show_utm_grids_description">Tampilkan kisi dalam meter UTM daripada WGS84</string>
     <string name="show_grids_description">Perbolehkan menampilkan kisi pada peta</string>
     <string name="show_grids">Tampilkan kisi peta</string>
-    <string name="no_places_available">Tidak ada tempat yang tersedia</string>
+    <string name="no_places_available">Tidak ada tempat dalam wilayah terlihat</string>
     <string name="no_photo_for_location_desc">Belum ada foto pengguna yang ditambahkan ke tempat ini</string>
     <string name="show_mercator_grids">Gunakan Mercator daripada WGS84 atau UTM</string>
     <string name="show_mercator_grids_description">Tampilkan kisi dalam km Mercator daripada WGS84 atau UTM</string>
