@@ -5090,4 +5090,15 @@
     <string name="poi_denomination_free_evangelical">Libera Evangeliismo</string>
     <string name="poi_denomination_alevi">Alevismo</string>
     <string name="poi_denomination_bektashi">Bektaŝismo</string>
+    <string name="poi_denomination_ibadi">Ibadiismo</string>
+    <string name="poi_denomination_ismaili">Ismailismo</string>
+    <string name="poi_denomination_sufi">Sufiismo</string>
+    <string name="poi_denomination_rinzai">Rinzajo</string>
+    <string name="poi_denomination_old_catholic">Prakatolika Eklezio</string>
+    <string name="poi_denomination_shaivism">Ŝivismo</string>
+    <string name="poi_denomination_pkn">Protestanta Eklezio de Nederlando</string>
+    <string name="poi_denomination_zen">Zeno</string>
+    <string name="poi_denomination_vaishnavism">Viŝnuismo</string>
+    <string name="poi_denomination_hare_krishna">Internacia Socio por Kriŝna Konscio</string>
+    <string name="poi_denomination_foursquare">Eklezio de Kvarobla Evangelio</string>
 </resources>
