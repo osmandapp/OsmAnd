@@ -5074,4 +5074,20 @@
     <string name="poi_denomination_ukrainian_orthodox">Ukraina Ortodoksa Eklezio</string>
     <string name="poi_denomination_neo_pentecostal">Noc-karisma Movado (Nov-pentekosta)</string>
     <string name="poi_denomination_evangelical_lutheran">Evangelia Luterana Eklezio en Usono</string>
+    <string name="poi_denomination_anabaptist">Anabaptismo</string>
+    <string name="poi_denomination_thai_mahanikaya">Taja «Mahā Nikāya»</string>
+    <string name="poi_denomination_thai_thammayut">Taja «Thammayuttika Nikai»</string>
+    <string name="poi_denomination_african_methodist_episcopal">Afrika Metodisma Episkopa Eklezio</string>
+    <string name="poi_denomination_soto">Soto</string>
+    <string name="poi_denomination_macedonian_orthodox">Makedona Ortodoksa Eklezio</string>
+    <string name="poi_denomination_southern_baptist">Sudusona Baptismo</string>
+    <string name="poi_denomination_jodo_shinshu">Vera Skolo de la Pura Lando («Jōdo Shinshū»)</string>
+    <string name="poi_denomination_african_methodist_episcopal_zion">Afrika Metodisma Episkopa Eklezio de Ciono</string>
+    <string name="poi_denomination_christ_scientist">Eklezio de Kristo Sciencisto</string>
+    <string name="poi_denomination_nichiren">Niĉiren-Budaismo</string>
+    <string name="poi_denomination_church_of_god">Eklezio de Dio</string>
+    <string name="poi_denomination_brethren">Fratoj</string>
+    <string name="poi_denomination_free_evangelical">Libera Evangeliismo</string>
+    <string name="poi_denomination_alevi">Alevismo</string>
+    <string name="poi_denomination_bektashi">Bektaŝismo</string>
 </resources>

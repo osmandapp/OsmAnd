@@ -434,7 +434,7 @@
     <string name="map_overlay">Överläggskarta</string>
     <string name="map_overlay_descr">Välj överläggskarta</string>
     <string name="tile_source_already_installed">Kartan är redan installerad, \'Inställningar\' kommer att uppdateras.</string>
-    <string name="select_tile_source_to_install">Välj källor för rasterkartor:</string>
+    <string name="select_tile_source_to_install">Välj källor för kartrutor:</string>
     <string name="internet_not_available">Åtgärden kan inte utföras utan uppkoppling mot Internet.</string>
     <string name="install_more">Lägg till fler …</string>
     <string name="level_to_switch_vector_raster_descr">Använd rasterkartor för allt över denna zoomnivå.</string>
@@ -566,7 +566,7 @@
     <string name="phone">Telefon</string>
     <string name="download_type_to_filter">Skriv för att filtrera</string>
     <string name="use_high_res_maps">Skärm med hög upplösning</string>
-    <string name="use_high_res_maps_descr">Sträck inte ut (och blurra) rasterkartor på högupplösta skärmar.</string>
+    <string name="use_high_res_maps_descr">Sträck inte ut (och blurra) kartrutor på högupplösta skärmar.</string>
     <string name="context_menu_item_search_transport">Sök kollektivtrafik</string>
     <string name="transport_searching_transport">Transportresultat (ingen destination):</string>
     <string name="transport_searching_route">Transportresultat ({0} till destinationen):</string>
@@ -849,7 +849,7 @@
     <string name="save_track_interval_descr">Ange loggningsintervallet för spårinspelning under navigering</string>
     <string name="save_track_to_gpx">Spela in spår automatiskt under navigering</string>
     <string name="update_tile">Uppdatera</string>
-    <string name="reload_tile">Läs om kartbit</string>
+    <string name="reload_tile">Ladda in kartbit på nytt</string>
     <string name="mark_point">Mål</string>
     <string name="use_english_names_descr">Välj mellan lokala och engelska namn på kartorna.</string>
     <string name="use_english_names">Använd engelska namn på kartorna</string>
@@ -995,7 +995,7 @@
     <string name="local_index_tile_data_maxzoom">Max-zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Min-zoom: %1$s</string>
     <string name="local_index_tile_data_name">Kartbitsdata: %1$s</string>
-    <string name="edit_tilesource_successfully">Rasterkartskällan %1$s sparades</string>
+    <string name="edit_tilesource_successfully">Kartrutekällan %1$s sparades</string>
     <string name="edit_tilesource_elliptic_tile">Elliptisk Mercator-projektion</string>
     <string name="edit_tilesource_maxzoom">Maximal zoom</string>
     <string name="edit_tilesource_expiration_time">Utgångstid (minuter)</string>
@@ -1977,7 +1977,7 @@
     <string name="shared_string_change">Ändra</string>
     <string name="get_started">Kom igång</string>
     <string name="replace_favorite_confirmation">Ersätt favoriten \"%1$s\"\?</string>
-    <string name="clear_tile_data">Rensa alla rutor</string>
+    <string name="clear_tile_data">Rensa alla kartrutor</string>
     <string name="search_hint">Ange stad, adress och POI-namn</string>
     <string name="donation_to_osm">Donation till OSM-communityn</string>
     <string name="get_it">Skaffa det</string>
@@ -2362,8 +2362,8 @@
     <string name="marker_show_distance_descr">Välj hur avstånd och riktning till kartmarkörer ska anges på kartan:</string>
     <string name="show_direction">Avståndsindikering</string>
     <string name="measurement_tool_snap_to_road_descr">Charlott ansluter punkter med vägar för den valda profilen.</string>
-    <string name="mapillary_menu_descr_tile_cache">Uppdatera rutor för att se aktuell data.</string>
-    <string name="mapillary_menu_title_tile_cache">Tile-cache</string>
+    <string name="mapillary_menu_descr_tile_cache">Ladda in kartrutor på nytt för att se uppdaterad data.</string>
+    <string name="mapillary_menu_title_tile_cache">Cache för kartrutor</string>
     <string name="mapillary_menu_filter_description">Filtrera bilder efter avsändare, efter datum eller typ. Endast aktiv i närbildszoom.</string>
     <string name="map_widget_ruler_control">Radielinjal</string>
     <string name="improve_coverage_install_mapillary_desc">Installera Mapillary för att lägga till bilder till denna plats på kartan.</string>
@@ -2614,7 +2614,7 @@
     <string name="shared_string_do">Gör</string>
     <string name="shared_string_only_with_wifi">Endast på Wi-Fi</string>
     <string name="wikivoyage_download_pics">Ladda ner bilder</string>
-    <string name="wikivoyage_download_pics_descr">Bilder från artiklar kan laddas ner för användning frånkopplad. \nDu kan alltid ändra inställningen i tforska → lternativ</string>
+    <string name="wikivoyage_download_pics_descr">Artikelbilder kan laddas ner för frånkopplad användning. \nKan alltid ändras under \'Utforska\' → \'Alternativ\'.</string>
     <string name="shared_string_wifi_only">Endast på Wi-Fi</string>
     <string name="select_travel_book">Välj en resebok</string>
     <string name="shared_string_travel_book">Resebok</string>
@@ -3311,7 +3311,7 @@
     <string name="on_hold">Pausad</string>
     <string name="shared_string_night_map">Nattkarta</string>
     <string name="add_online_source">Lägg till onlinekälla</string>
-    <string name="clear_tiles_warning">Om du tillämpar dessa ändringar raderas cachade data för denna raster-kartkälla</string>
+    <string name="clear_tiles_warning">Utförandet av dessa ändringar kommer att radera den cachade datan för denna kartrutekälla</string>
     <string name="vessel_height_warning_link">Ställ in fartygets höjd</string>
     <string name="vessel_height_warning">Ställ in fartygets höjd för att undvika låga broar. Om bron är rörlig kommer dess höjd i öppet tillstånd att användas.</string>
     <string name="vessel_height_limit_description">Ställ in fartygets höjd för att undvika låga broar. Tänk på att om bron är rörlig kommer vi att använda dess höjd i öppet tillstånd.</string>
@@ -3863,7 +3863,7 @@
     <string name="save_track_to_gpx_descrp">Starta spårinspelning automatiskt vid navigering och spara spåret automatiskt efteråt.</string>
     <string name="shared_string_revert">Återställ</string>
     <string name="shared_preference">Delad</string>
-    <string name="shared_string_tiles">Rasterkartor</string>
+    <string name="shared_string_tiles">Kartrutor</string>
     <string name="connect_track_points_as">Sammanlänka ruttpunkter</string>
     <string name="rendering_attr_piste_type_downhill_name">Utförsåkning</string>
     <string name="sett_parrot_ext_input">Parrot</string>
@@ -4138,7 +4138,7 @@
     <string name="map_widget_camera_tilt">Kamerans lutning</string>
     <string name="developer_widgets">Widgetar för utvecklare</string>
     <string name="coordinates_widget_current_location_desc">Visar koordinaterna för aktuell position</string>
-    <string name="download_tiles">Ladda ner karttiles</string>
+    <string name="download_tiles">Ladda ner kartrutor</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="rendering_attr_showMtbScale_name">Visa MTB-svårighetsgrad</string>
@@ -4407,8 +4407,8 @@
     <string name="y_axis">Y-axel</string>
     <string name="stop_download">Avbryt nedladdning</string>
     <string name="send_log">Skicka loggfil</string>
-    <string name="number_of_tiles">Antal raster-tiles</string>
-    <string name="stop_download_desc">Nedladdningen är inte klar. Om du avbryter nu, kommer bara delar av rasterkartan vara tillgänglig för visning.</string>
+    <string name="number_of_tiles">Antal kartrutor</string>
+    <string name="stop_download_desc">Nedladdningen är inte klar. Om du avbryter nu kommer inte alla kartrutor vara tillgängliga för visning.</string>
     <string name="stop_and_exit">Stoppa och avsluta</string>
     <string name="shared_string_shape">Figur</string>
     <string name="location_source">Platskälla</string>
@@ -4450,7 +4450,7 @@
     <string name="generate_hillshade_from_3d_maps">Generera terrängskuggningsraster från 3D-kartor</string>
     <string name="weather_offline_forecast">Offline väderprognos</string>
     <string name="common_weight_limit_error">Minsta värde är \"%1$s\" %2$s. Använd profilen \"%3$s\" om fordonets vikt är lägre än minimivärdet.</string>
-    <string name="clear_online_cache_description">Detta kommer rensa cacheminnet för online väderleksraster.</string>
+    <string name="clear_online_cache_description">Detta kommer rensa cacheminnet för online-väderleksrutor.</string>
     <string name="offline_weather_forecast">Väderprognos offline</string>
     <string name="map_marker_average_speed_desc">Ange tidsintervallet för medelhastigheten (används för beräknad ankomsttid).</string>
     <string name="marker_2nd">Andra markören</string>
@@ -4458,7 +4458,7 @@
     <string name="rendering_attr_showWaterwayTunnels_name">Ökad synlighet för tunnlar för vattendrag</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Ökad synlighet för tunnlar för vattendrag</string>
     <string name="app_mode_climbing">Klättring</string>
-    <string name="weather_download_error">Kunde inte ladda ned %1$s rastertiles.</string>
+    <string name="weather_download_error">Kunde inte ladda ned %1$s rutor.</string>
     <string name="select_layer">Välj lager</string>
     <string name="release_4_4">• Förbättrad \"Spår\"-meny i \"Konfigurera karta\"
 \n
@@ -4933,7 +4933,7 @@
     <string name="osmand_cloud_deletion_secondary_devices_warning">Sekundära enheter kommer att loggas ut från OsmAnd Cloud och förlorar tillgång till betalda funktioner.</string>
     <string name="import_as_one_track">Importera som ett spår</string>
     <string name="compass_visible_if_map_rotated_desc">Dold när norr är uppåt</string>
-    <string name="one_image_per_tile">En bildfil per raster-ruta</string>
+    <string name="one_image_per_tile">En bildfil per kartruta</string>
     <string name="map_3d_mode_action">3D-läge</string>
     <string name="routing_attr_hazmat_category_description">Kategori av farligt gods / Ta hänsyn till åtkomstbegränsningar för farligt gods</string>
     <string name="routing_attr_carriage_restrictions_description">Ta hänsyn till åtkomstbegränsningar för vagn som dras av häst</string>
@@ -5191,7 +5191,7 @@
 \n
 \nDet kan ta lite tid.</string>
     <string name="additional_actions_descr">Öppna dessa åtgärder genom att klicka på \"%1$s\"-knappen.</string>
-    <string name="tiles_storage_descr">Välj hur nedladdade raster-rutor ska lagras.</string>
+    <string name="tiles_storage_descr">Välj hur nedladdade kartrutor ska lagras.</string>
     <string name="divider_descr">Objekt nedanför denna punkt åtskiljs med en avgränsare.</string>
     <string name="context_menu_actions">Åtgärder i kontextmenyn</string>
     <string name="expire_time">Förfallotid</string>
@@ -5213,11 +5213,7 @@
     <string name="import_duplicates_title">Några objekt finns redan</string>
     <string name="terrain_slider_description">Ange minsta och maximala zoomnivån där lagrets ska visas.</string>
     <string name="turn_screen_on_wake_time_descr">Ange hur länge skärmen är på efter väckning. (\"%1$s\" innebär ingen tidsgräns.)</string>
-    <string name="expire_time_descr">Förfallotid i minuter. Cachelagrade raster-rutor läses om efter angiven tid. Lämna tomt för att aldrig läsa om rutor för den här källan.
-\n
-\nEn dag är 1440 minuter.
-\nEn vecka är 10 080 minuter.
-\nEn månad är ca 43 800 minuter.</string>
+    <string name="expire_time_descr">Cachelagrade kartrutor kommer att laddas ner på nytt det angivna antal minuter. Lämna detta fält tomt för att aldrig uppdatera kartrutor för den här källan. \n \nEn dag är 1440 minuter. \nEn vecka är 10 080 minuter. \nEn månad är 43 829 minuter.</string>
     <string name="not_support_file_type_with_ext">Välj en fil som stöds med filändelsen %1$s istället.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Exportera eller importera snabbåtgärder med app-profilerna.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
@@ -5927,4 +5923,17 @@
     <string name="add_widget_to_the_right">Lägg till widget till höger</string>
     <string name="add_widget_to_the_left">Lägg till widget till vänster</string>
     <string name="shared_string_key">Tangent</string>
+    <string name="resting_position">Viloposition</string>
+    <string name="navigation_position">Navigeringsposition</string>
+    <string name="resting_navigation_position">Vilo- och navigeringsposition</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Rekommendation: Det är svårt att förutsäga vad som kommer respektive inte kommer att spelas in, så det är kanske bäst att slå av detta filter.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Biverkan: Ett resultat av att filtrera med avseende på noggrannhet kan vara att punkter helt saknas, t.ex. för under broar, under träd, mellan höga byggnader eller under vissa väderförhållanden.</string>
+    <string name="monitoring_min_accuracy_descr">Detta kommer göra att bara punkter uppmätta som indikeras ha en viss minsta noggrannhet (i meter/fot, enligt vad som rapporteras av Android för ditt chipset) spelas in. Noggrannhet är mätningars närhet till den faktiska positionen, och är inte direkt relaterat till precision, vilken är spridningen av upprepade mätningar.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Anmärkning: Om GPS:en varit avslagen omedelbart innan inspelning, så kan den först uppmätta punkten ha en försämrad noggrannhet,så i vår kod skulle vi kanske vilja vänta en sekund eller så innan vi spelar in en punkt (eller spela in den bästa av 3 på varandra följande punkter, o.s.v.), men detta är inte implementerat ännu.</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="graph_axis">Grafaxel</string>
+    <string name="hugerock_promo">Hugerock-kampanj i %1$s månader</string>
+    <string name="rendering_avg_info_details">FPS för senaste 1000 bilderna: %1$s\nCPU (kartrutor): %2$s\nCPU (inaktiv tid): %3$s\nCPU (väntar på GPU): %4$s</string>
+    <string name="show_debug_tile_description">Visa information om kartsymboler på varje kartruta</string>
+    <string name="shared_string_not_checked">Inte kontrollerad</string>
 </resources>

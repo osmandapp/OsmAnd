@@ -266,7 +266,7 @@
     <string name="poi_power_generator">Générateur d\'énergie</string>
     <string name="poi_power_substation">Poste électrique</string>
     <string name="poi_prison">Prison</string>
-    <string name="poi_pub">Bar</string>
+    <string name="poi_pub">Pub</string>
     <string name="poi_public_transport_platform">Transport en commun (attente des voyageurs)</string>
     <string name="poi_public_transport_station">Transport en commun (gare)</string>
     <string name="poi_quarry">Carrière</string>
@@ -465,8 +465,8 @@
     <string name="poi_mountain_pass">Col</string>
     <string name="poi_garages">Garages</string>
     <string name="poi_aerialway_rope_tow">Télécorde</string>
-    <string name="poi_aerialway_t_bar">Téléski</string>
-    <string name="poi_aerialway_j_bar">Téléski</string>
+    <string name="poi_aerialway_t_bar">Téléski T-bar</string>
+    <string name="poi_aerialway_j_bar">Téléski J-bar</string>
     <string name="poi_aerialway_magic_carpet">Tapis-roulant</string>
     <string name="poi_observatory">Observatoire</string>
     <string name="poi_astronomical_observatory">Astronomique</string>
