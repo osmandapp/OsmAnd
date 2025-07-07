@@ -41,7 +41,7 @@ public class QuickActionButton extends MapButton {
 			if (!buttonState.isDefaultButton() && buttonState.isSingleAction()) {
 				layer.setSelectedButton(this, false);
 				List<QuickAction> actions = buttonState.getQuickActions();
-				layer.onActionSelected(buttonState, actions.get(0));
+				layer.onActionSelected(actions.get(0), null, false);
 			} else if (!showTutorialIfNeeded()) {
 				boolean visible = layer.isWidgetVisibleForButton(this);
 				layer.setSelectedButton(visible ? null : this);

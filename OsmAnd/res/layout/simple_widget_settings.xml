@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/show_icon_container"
 	android:layout_width="match_parent"
 	android:layout_height="56dp"
 	android:background="?attr/list_background_color"
@@ -12,7 +13,7 @@
 		android:layout_marginStart="@dimen/content_padding" />
 
 	<LinearLayout
-		android:id="@+id/show_icon_container"
+
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="horizontal"

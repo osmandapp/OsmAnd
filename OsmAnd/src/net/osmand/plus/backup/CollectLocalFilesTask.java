@@ -109,7 +109,7 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 						createLocalFile(result, item, fileName, file, file.lastModified());
 					}
 				} else {
-					createLocalFile(result, item, fileName, file, file.lastModified());
+					createLocalFile(result, item, fileName, file, file.lastModified(), item.getInfoModifiedTime());
 				}
 			} else {
 				createLocalFile(result, item, fileName, null, item.getLastModifiedTime());
@@ -120,16 +120,27 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 
 	private void createLocalFile(@NonNull List<LocalFile> result, @NonNull SettingsItem item,
 			@NonNull String fileName, @Nullable File file, long lastModifiedTime) {
+		createLocalFile(result, item, fileName, file, lastModifiedTime, 0);
+	}
+
+	private void createLocalFile(@NonNull List<LocalFile> result, @NonNull SettingsItem item,
+			@NonNull String fileName, @Nullable File file, long lastModifiedTime, long infoModifiedTime) {
 		LocalFile localFile = new LocalFile();
 		localFile.file = file;
 		localFile.item = item;
 		localFile.fileName = fileName;
 		localFile.localModifiedTime = lastModifiedTime;
+
+		if (infoModifiedTime > 0) {
+			localFile.localModifiedTime = Math.max(lastModifiedTime, infoModifiedTime);
+		} else {
+			localFile.localModifiedTime = lastModifiedTime;
+		}
 		if (infos != null) {
 			UploadedFileInfo fileInfo = infos.get(item.getType().name() + "___" + fileName);
 			if (fileInfo != null) {
 				localFile.uploadTime = fileInfo.getUploadTime();
-				checkM5Digest(localFile, fileInfo, lastModifiedTime);
+				checkM5Digest(localFile, fileInfo, lastModifiedTime, infoModifiedTime);
 			}
 		}
 		result.add(localFile);
@@ -137,13 +148,15 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 	}
 
 	private void checkM5Digest(@NonNull LocalFile localFile, @NonNull UploadedFileInfo fileInfo,
-			long lastModifiedTime) {
+			long lastModifiedTime, long infoModifiedTime) {
 		SettingsItem item = localFile.item;
 		String lastMd5 = fileInfo.getMd5Digest();
+
 		boolean needM5Digest = item instanceof StreamSettingsItem
 				&& ((StreamSettingsItem) item).needMd5Digest()
 				&& localFile.uploadTime < lastModifiedTime
-				&& !Algorithms.isEmpty(lastMd5);
+				&& !Algorithms.isEmpty(lastMd5)
+				&& infoModifiedTime <= lastModifiedTime;
 
 		if (needM5Digest && localFile.file != null && localFile.file.exists()) {
 			FileInputStream is = null;

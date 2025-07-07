@@ -74,18 +74,22 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 		IconToggleButton.IconRadioItem item = new IconToggleButton.IconRadioItem(widgetSize.iconId);
 		item.setOnClickListener((radioItem, v) -> {
 			selectedWidgetSize = widgetSize;
-
 			setupToggleButtons(view);
+			onWidgetSizeChanged();
 			return true;
 		});
 		return item;
+	}
+
+	protected void onWidgetSizeChanged() {
+
 	}
 
 	private boolean isMediumHeight() {
 		return selectedWidgetSize == WidgetSize.MEDIUM;
 	}
 
-	private boolean isSmallHeight() {
+	protected boolean isSmallHeight() {
 		return selectedWidgetSize == WidgetSize.SMALL;
 	}
 

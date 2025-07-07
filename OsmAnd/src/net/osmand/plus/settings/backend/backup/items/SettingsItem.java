@@ -112,6 +112,10 @@ public abstract class SettingsItem {
 
 	public abstract long getEstimatedSize();
 
+	public long getInfoModifiedTime() {
+		return 0;
+	}
+
 	public boolean applyFileName(@NonNull String fileName) {
 		// Case: this.fileName could be a folder so all remote files will be collected for it ?
 		// + Subfolder check correct

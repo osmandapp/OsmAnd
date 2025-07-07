@@ -38,6 +38,8 @@ import java.util.*;
 
 public class MapButtonsHelper {
 
+	public final static String KEY_EVENT_KEY = "key_event";
+
 	public interface QuickActionUpdatesListener {
 
 		void onActionsUpdated();

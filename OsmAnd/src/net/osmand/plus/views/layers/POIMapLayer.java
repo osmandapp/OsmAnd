@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.core.android.MapRendererContext.SELECTED_POI_SECTION;
+import static net.osmand.core.android.MapRendererContext.TOP_PLACES_POI_SECTION;
 import static net.osmand.data.PointDescription.POINT_TYPE_POI;
 import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
@@ -182,6 +184,11 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				if (isDefferedResults()) {
 					clearPoiTileProvider();
 					setDefferedResults(false);
+				}
+				MapRendererView mapRenderer = getMapRenderer();
+				if (mapRenderer != null) {
+					mapRenderer.updateSubsection(TOP_PLACES_POI_SECTION);
+					mapRenderer.updateSubsection(SELECTED_POI_SECTION);
 				}
 				topPlacesBox = null;
                 app.getOsmandMap().refreshMap();
@@ -528,7 +535,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 					.buildAndAddToCollection(mapMarkersCollection);
 		}
-		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+		mapRenderer.addSymbolsProvider(TOP_PLACES_POI_SECTION, mapMarkersCollection);
 	}
 
 	@Override
@@ -1142,7 +1149,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
 					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 					.buildAndAddToCollection(selectedTopPlaceCollection);
-			mapRenderer.addSymbolsProvider(selectedTopPlaceCollection);
+			mapRenderer.addSymbolsProvider(SELECTED_POI_SECTION, selectedTopPlaceCollection);
 		}
 		if (previousSelectedMarker != null) {
 			selectedTopPlaceCollection.removeMarker(previousSelectedMarker);

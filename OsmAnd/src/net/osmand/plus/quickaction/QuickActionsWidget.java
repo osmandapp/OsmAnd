@@ -229,7 +229,7 @@ public class QuickActionsWidget extends LinearLayout {
 
 				view.setOnClickListener(v -> {
 					if (selectionListener != null) {
-						selectionListener.onActionSelected(buttonState, action);
+						selectionListener.onActionSelected(action, null, false);
 					}
 				});
 //				if (action.isActionEditable()) {

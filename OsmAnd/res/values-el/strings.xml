@@ -185,7 +185,7 @@
 \nΟι χάρτες πλακιδίων μπορούν να ληφθούν μέσω διαδικτυακών πηγών, ή να προετοιμαστούν για χρήση χωρίς σύνδεση (μέσω χειροκίνητης αντιγραφής στον φάκελο δεδομένων του OsmAnd) ως μία βάση δεδομένων SQLite που μπορεί να παραχθεί από διάφορα εργαλεία προετοιμασίας χαρτών τρίτων.</string>
     <string name="osmand_background_plugin_description">Εμφάνιση των ρυθμίσεων για ενεργοποίηση ιχνογράφησης και πλοήγησης παρασκηνίου μέσω περιοδικής αφύπνισης της συσκευής GPS (με την οθόνη σβηστή).</string>
     <string name="osmand_accessibility_description">Κάνει τα χαρακτηριστικά προσβασιμότητας της συσκευής διαθέσιμα απευθείας στο OsmAnd. Διευκολύνει π.χ. τη ρύθμιση του ρυθμού ομιλίας για φωνές κειμένου σε λόγο, διαμορφώνοντας πλοήγηση οθόνης του κατευθυντήρα, χρήση ιχνόσφαιρας για έλεγχο εστίασης, ή ανατροφοδότηση κειμένου σε ομιλία, π.χ. για αυτόματη ανακοίνωση της θέσης σας.</string>
-    <string name="osmand_development_plugin_description">Ρυθμίσεις για τα χαρακτηριστικά ανάπτυξης και αποσφαλμάτωσης όπως απόδοση απεικόνισης, ή η φωνητική καθοδήγηση. Αυτές οι ρυθμίσεις προορίζονται για τους προγραμματιστές και δεν χρειάζονται στην κανονική χρήση της εφαρμογής.</string>
+    <string name="osmand_development_plugin_description">Παρέχει λειτουργικότητα για δοκιμή και αποσφαλμάτωση του OsmAnd: προσομοίωση διαδρομών πλοήγησης, παρακολούθηση της απεικόνισης οθόνης, έλεγχος απόδοσης, κλπ. Αυτό το πρόσθετο δεν απαιτείται για κανονική χρήση της εφαρμογής.</string>
     <string name="plugins_screen">Πρόσθετα</string>
     <string name="prefs_plugins_descr">Τα πρόσθετα ενεργοποιούν προχωρημένες ρυθμίσεις και επιπλέον λειτουργικότητα.</string>
     <string name="prefs_plugins">Πρόσθετα</string>
@@ -2950,7 +2950,7 @@
     <string name="routing_attr_piste_type_nordic_description">Πίστες για σκανδιναβική ή εκτός δρόμου χιονοδρομία.</string>
     <string name="routing_attr_piste_type_skitour_name">Χιονοδρομικές βόλτες</string>
     <string name="routing_attr_piste_type_skitour_description">Διαδρομές για χιονοδρομικές βόλτες.</string>
-    <string name="routing_attr_piste_type_sled_name">Έλκηθρο</string>
+    <string name="routing_attr_piste_type_sled_name">Έλκηθρο κατάβασης</string>
     <string name="routing_attr_piste_type_sled_description">Πίστες για χρήση ελκήθρων.</string>
     <string name="routing_attr_allow_intermediate_name">Να επιτρέπονται ενδιάμεσες διαδρομές</string>
     <string name="routing_attr_allow_intermediate_description">Πιο δύσκολες διαδρομές με πιο απότομα τμήματα. Γενικά, πρέπει να αποφεύγονται μερικά εμπόδια.</string>
@@ -3049,8 +3049,8 @@
     <string name="move_maps_to_new_destination">Μετακίνηση στον νέο προορισμό</string>
     <string name="change_data_storage_folder">Αλλαγή φακέλου αποθήκευσης</string>
     <string name="rendering_attr_piste_type_snow_park_name">Χιονοδρομικό πάρκο</string>
-    <string name="rendering_attr_piste_type_sleigh_name">Έλκηθρο</string>
-    <string name="rendering_attr_piste_type_sled_name">Έλκηθρο</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Ελκούμενο έλκηθρο</string>
+    <string name="rendering_attr_piste_type_sled_name">Έλκηθρο κατάβασης</string>
     <string name="rendering_attr_piste_type_hike_name">Πεζοπορία</string>
     <string name="rendering_attr_piste_type_connection_name">Σύνδεση</string>
     <string name="rendering_attr_piste_type_skitour_name">Γύρος με σκι</string>
@@ -3204,7 +3204,7 @@
     <string name="monitoring_min_distance_descr">Η ενεργοποίηση αυτού του φίλτρου σας επιτρέπει να αποφύγεται την εγγραφή πρόσθετων δεδομένων όταν η μετακίνηση σχεδόν δεν ανιχνεύεται. Βελτιώνει επίσης τη χωροταξική εμφάνιση των ιχνών χωρίς να χρειάζεται μετέπειτα επεξεργασία.</string>
     <string name="button_rate">Βαθμολόγηση</string>
     <string name="monitoring_min_distance_descr_side_effect">Παράπλευρα αποτελέσματα: Περίοδοι σε ακινησία δεν καταγράφονται καθόλου ή μόνο με ένα σημείο καθεμιά. Μικρές κινήσεις (π.χ. στην άκρη του δρόμου για να σημειωθεί μια πιθανή στροφή στο ταξίδι σας) μπορεί να φιλτραριστούν. Σημειώστε ότι το αρχείο σας θα περιέχει λιγότερες πληροφορίες για μετεπεξεργασία, και ταυτόχρονα μπορεί να αποθηκεύσει παράσιτα GPS που προκαλούνται από κακή λήψη ή επιπτώσεις κυκλωμάτων.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Σύσταση: Ρύθμιση 5 μέτρων μπορεί να λειτουργήσει καλά για σας, εάν δεν χρειάζεστε να πιάσετε λεπτομέρειες πιο ακριβείς από αυτό και δεν θέλετε να πάρετε δεδομένα σε ακινησία.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Σύσταση: Ορίστε 5 μέτρα μετατόπισης εάν δεν χρειάζεστε να πιάσετε μικρότερες λεπτομέρειες της διαδρομής σας και δεν χρειάζεστε πρόσθετα δεδομένα σε ακινησία.</string>
     <string name="live_monitoring_time_buffer">Ενδιάμεσος χρόνος</string>
     <string name="live_monitoring_tracking_interval">Χρονικά διαστήματα ιχνηλάτησης</string>
     <string name="search_offline_geo_error">Αδυναμία ανάλυσης γεωγραφικού στόχου \'%s\'.</string>
@@ -3330,7 +3330,7 @@
     <string name="please_provide_point_name_error">Παρακαλούμε, ονομάστε το σημείο</string>
     <string name="quick_action_remove_next_destination_descr">Διαγράφει τον επόμενο προορισμό στη διαδρομή σας. Εάν είναι ο τελικός προορισμός, θα σταματήσει η πλοήγηση.</string>
     <string name="search_download_wikipedia_maps">Κατεβάστε τους χάρτες της βικιπαιδείας</string>
-    <string name="plugin_wikipedia_description">Πάρτε πληροφορίες για τα σημεία ενδιαφέροντος από τη βικιπαίδεια. Είναι ο οδηγός τσέπης χωρίς σύνδεση - ενεργοποιήστε απλά το πρόσθετο Wikipedia και απολαύστε άρθρα για τα αντικείμενα γύρω σας.</string>
+    <string name="plugin_wikipedia_description">Πάρτε πληροφορίες για τα σημεία ενδιαφέροντος από τη Βικιπαίδεια, έναν οδηγό τσέπης χωρίς σύνδεση διαδικτύου προβάλλοντας άρθρα για μέρη και προορισμούς.</string>
     <string name="add_hidden_group_info">Το σημείο που προστέθηκε δεν θα είναι ορατό στον κατάλογο, επειδή η επιλεγμένη ομάδα είναι κρυμμένη, μπορείτε να το βρείτε στο \"%s\".</string>
     <string name="app_mode_enduro_motorcycle">Εντούρο</string>
     <string name="app_mode_motor_scooter">Σκούτερ</string>
@@ -4897,4 +4897,37 @@
     <string name="remaining_fuel_description">Εμφανίζει την ποσότητα καυσίμου που απομένει στο ντεπόζιτο του οχήματος</string>
     <string name="us_gallons">Γαλόνια ΗΠΑ</string>
     <string name="ski_route_switch_style_description">Εξερευνήστε πίστες σκι, αναβατήρες και πολλά άλλα με το στυλ χάρτη Χειμώνα και Σκι.</string>
+    <string name="search_title">Αναζήτηση: %1$s</string>
+    <string name="included_categories">Συμπεριλαμβανόμενες κατηγορίες</string>
+    <string name="icon_group_nautical">Ναυτικός</string>
+    <string name="transparent_status_bar_descr">Προβολή χάρτη κάτω από την μπάρα κατάστασης</string>
+    <string name="transparent_status_bar">Διαφανής μπάρα κατάστασης</string>
+    <string name="location_access_request_result">Εγκρίθηκε: %1$s Απορρίφθηκε: %2$s</string>
+    <string name="continue_on_phone">Συνέχεια στην κινητή συσκευή</string>
+    <string name="location_access_request_title">Το OsmAnd χρειάζεται άδεια Τοποθεσίας για την πλοήγηση.</string>
+    <string name="location_access_request_action">Παραχώρηση πρόσβασης</string>
+    <string name="history_actions_descr">Μπορείτε να εξάγετε το ιστορικό σε αρχείο.</string>
+    <string name="safe_settings">Ασφαλής</string>
+    <string name="approx_safe_mode">Ασφαλής προσέγγιση GPX</string>
+    <string name="display_route_tracks">Προβολή ιχνών</string>
+    <string name="display_route_tracks_as_poi">Προβολή ιχνών ως ΣΕ</string>
+    <string name="delete_history_items">Διαγραφή %1$s στοιχείου/ων ιστορικού;</string>
+    <string name="quick_action_toggle_preference">Ένας διακόπτης για αλλαγή της προτίμησης.</string>
+    <string name="delete_history_items_descr">Οι επιλεγμένες καταχωρήσεις θα αφαιρεθούν από την λίστα.</string>
+    <string name="is_disabled">%1$s είναι απενεργοποιημένο</string>
+    <string name="history_is_disabled_descr">Ενεργοποιήστε το ιστορικό για να έχετε γρηγορότερη πρόσβαση στα τελευταία χρησιμοποιούμενα αποτελέσματα.</string>
+    <string name="toast_select_edits_for_upload">Επιλέξτε επεξεργασίες για ανέβασμα</string>
+    <string name="uploaded_count">Ανέβηκαν %1$d από %2$d</string>
+    <string name="segments_count">Τμήμα %1$d</string>
+    <string name="select_segments_description">%1$s περιλαμβάνει περισσότερα από ένα τμήματα, πρέπει να προσδιορίσετε το κομμάτι για την πλοήγηση.</string>
+    <string name="select_segments">Επιλογή τμημάτων</string>
+    <string name="uploading_count">Ανέβασμα %1$d από %2$d</string>
+    <string name="upload_photo_completed">Ανέβασμα ολοκληρώθηκε</string>
+    <string name="upload_photo">Ανέβασμα</string>
+    <string name="message_name_is_already_exists">Το όνομα υπάρχει ήδη</string>
+    <string name="message_server_error">Σφάλμα διακομιστή: %1$s</string>
+    <string name="delete_online_routing_engine">Αφαίρεση αυτής της διαδικτυακής μηχανής δρομολόγησης;</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_nothing_found_description">Παρακαλούμε ελέγξτε τα ακόλουθα:\n – Βεβαιωθείτε ότι το Bluetooth είναι ενεργοποιημένο\n – Η μηχανή του οχήματος είναι σε λειτουργία\n – Βεβαιωθείτε ότι η συσκευή σας είναι εντός εμβέλειας του σαρωτή.</string>
+    <string name="obd_searching_text_description">Παρακαλούμε κρατήστε την συσκευή σας κοντά στον σαρωτή. Βεβαιωθείτε ότι η μηχανή του οχήματος είναι σε λειτουργία.</string>
 </resources>
