@@ -13,7 +13,6 @@ import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.*;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.util.Algorithms;
@@ -168,7 +167,9 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	@Override
 	public void apply() {
+		boolean isNewProfile;
 		if (!appMode.isCustomProfile() && !shouldReplace) {
+			isNewProfile = true;
 			ApplicationMode parent = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
 			renameProfile();
 
@@ -184,14 +185,18 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 			getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode(), true);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		} else if (!shouldReplace && exists()) {
+			isNewProfile = true;
 			renameProfile();
 			builder = ApplicationMode.fromModeBean(app, modeBean);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		} else {
+			isNewProfile = !exists();
 			builder = ApplicationMode.fromModeBean(app, modeBean);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		}
-		ApplicationMode.changeProfileAvailability(appMode, true, app);
+		if (isNewProfile) {
+			ApplicationMode.changeProfileAvailability(appMode, true, app);
+		}
 	}
 
 	@Override
