@@ -287,10 +287,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		return null;
 	}
 
-	public void showIcon(boolean showIcon) {
-		imageView.invalidate();
-	}
-
 	public void setImageDrawable(int res) {
 		Drawable imageDrawable = iconsCache.getIcon(res, 0);
 		if (shouldShowIcon()) {
