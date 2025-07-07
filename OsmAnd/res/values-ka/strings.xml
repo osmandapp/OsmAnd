@@ -3285,4 +3285,8 @@
     <string name="weather_wind_kilimeters_per_hour">კილომეტრი საათში</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="wiki_around">უახლოესი პოპულარული ადგილები</string>
+    <string name="deleting_history">ისტორიის წაშლა…</string>
+    <string name="deleting">წაშლა…</string>
+    <string name="release_5_1">• დამატებულია ვებ და მრავალპლატფორმული შეძენების მხარდაჭერა\n\n• გადატანილია ტემპერატურის ერთეულები ზოგად პარამეტრებში უფრო მარტივი ხელმისაწვდომობისთვის\n\n• დამატებულია ელემენტის დატენვის დონე BLE სენსორებისთვის\n\n• ახალი, უფრო ინტუიციური ინტერფეისი ნავიგაციაში წერტილების არჩევისთვის\n\n• გაუმჯობესებულია ვიჯეტის ხილვადობა ახალი კონტურის დამატებით\n\n• დამატებულია აღმავალი/დაღმავალი ფერდობების ანალიზატორი\n\n• გაფართოვებულია Wikipedia &amp; Wikivoyage ინტეგრაცია მეტი POI–ებისთვის.</string>
+    <string name="osm_live_payment_renews_3_years">განახლდება ყოველ სამ წელიწადში</string>
 </resources>

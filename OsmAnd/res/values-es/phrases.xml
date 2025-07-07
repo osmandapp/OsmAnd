@@ -1044,7 +1044,7 @@
     <string name="poi_denomination_mahayana">Mahāyāna</string>
     <string name="poi_denomination_reformed">Reformado</string>
     <string name="poi_denomination_united">Unido</string>
-    <string name="poi_denomination_united_reformed">Unidos reformado</string>
+    <string name="poi_denomination_united_reformed">Unida reformada</string>
     <string name="poi_denomination_uniting">Uniendo</string>
     <string name="poi_denomination_quaker">Cuáquero</string>
     <string name="poi_denomination_shaktism">Shaktismo</string>
@@ -5095,7 +5095,7 @@
     <string name="poi_denomination_ismaili">Ismailí</string>
     <string name="poi_denomination_sufi">Sufí</string>
     <string name="poi_denomination_rinzai">Rinzai</string>
-    <string name="poi_denomination_old_catholic">Viejo católico</string>
+    <string name="poi_denomination_old_catholic">Veterocatólica</string>
     <string name="poi_denomination_shaivism">Shaivismo</string>
     <string name="poi_denomination_pkn">Iglesia protestante en los Países Bajos</string>
     <string name="poi_denomination_zen">Zen</string>
@@ -5137,7 +5137,7 @@
     <string name="poi_denomination_kardecista">Kardecista</string>
     <string name="poi_denomination_free_church_of_scotland">Iglesia libre de Escocia</string>
     <string name="poi_denomination_catholic_apostolic">Católico apostólico</string>
-    <string name="poi_denomination_iglesia_filipina_independiente">Iglesia filipina independiente</string>
+    <string name="poi_denomination_iglesia_filipina_independiente"></string>
     <string name="poi_denomination_sephardi">Sefardí</string>
     <string name="poi_denomination_welsh_independent">Independiente galés</string>
 </resources>

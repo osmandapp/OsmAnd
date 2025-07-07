@@ -1,1 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources/>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poi_fuel_type">საწვავის ტიპი</string>
+    <string name="poi_fuel_avia_type">საწვავის ტიპი (ავიაცია)</string>
+    <string name="poi_payment_type">გადახდის ტიპი</string>
+    <string name="poi_payment_fuel_type">საწვავის ბარათები</string>
+    <string name="poi_additional_type">დამატებითი</string>
+</resources>
