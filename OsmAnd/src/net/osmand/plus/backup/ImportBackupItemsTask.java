@@ -53,7 +53,7 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 			PrepareBackupResult backup = app.getBackupHelper().getBackup();
 			Collection<RemoteFile> remoteFiles = backup.getRemoteFiles(filesType).values();
 			importer.importItems(items, remoteFiles, forceReadData, restoreDeleted);
-			return importer.isCancelled();
+			return !importer.isCancelled();
 		} catch (IllegalArgumentException e) {
 			NetworkSettingsHelper.LOG.error("Failed to import items from backup", e);
 		}
