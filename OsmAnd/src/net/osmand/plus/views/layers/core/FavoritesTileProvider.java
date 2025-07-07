@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.core;
 
+import static net.osmand.core.android.MapRendererContext.FAVORITES_SECTION;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -49,7 +51,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		if (providerInstance == null) {
 			providerInstance = instantiateProxy();
 		}
-		mapRenderer.addSymbolsProvider(providerInstance);
+		mapRenderer.addSymbolsProvider(FAVORITES_SECTION, providerInstance);
 	}
 
 	public void clearSymbols(@NonNull MapRendererView mapRenderer) {

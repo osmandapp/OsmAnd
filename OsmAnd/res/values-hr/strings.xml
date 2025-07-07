@@ -702,7 +702,7 @@
     <string name="settings_preset">Korisnički profil</string>
     <string name="profile_settings">Specifične Postavke Profila</string>
     <string name="fav_export_confirmation">Datoteka s prethodno izvezenim favoritima već postoji. Želite li je zamijeniti?</string>
-    <string name="amenity_type_user_defined">Korisnički zadano</string>
+    <string name="amenity_type_user_defined">Korisnički određeno</string>
     <string name="index_name_tts_voice">Glasovni paketi (TTS)</string>
     <string name="index_name_voice">Glasovni paketi (snimljeni)</string>
     <string name="index_name_north_america">Sjeverna Amerika</string>
@@ -1734,4 +1734,10 @@
     <string name="verify_account">Potvrdi tvoj račun</string>
     <string name="manage_subscriptions">Upravljaj pretplatama.</string>
     <string name="deleting_complete">Brisanje je završeno</string>
+    <string name="nautical_renderer">Pomorstvo</string>
+    <string name="icon_group_nautical">Pomorstvo</string>
+    <string name="icon_group_industrial">Industrija</string>
+    <string name="show_tunnels">Tuneli</string>
+    <string name="shared_string_widget">Widget</string>
+    <string name="av_def_action_choose">Na zahtjev</string>
 </resources>
