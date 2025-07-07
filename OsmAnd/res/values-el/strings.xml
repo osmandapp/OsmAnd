@@ -4978,4 +4978,13 @@
     <string name="trip_recording_duration_widget_desc">Εμφανίζει τον χρόνο της τρέχουσας καταγεγραμμένης διαδρομής.</string>
     <string name="trip_recording_distance_widget_desc">Εμφανίζει την απόσταση της τρέχουσας καταγεγραμμένης διαδρομής.</string>
     <string name="average_speed_skip_stops">Λαμβάνει τις στάσεις υπ\'όψιν</string>
+    <string name="map_widget_distance_to_intermediate">Απόσταση μέχρι ενδιάμεση</string>
+    <string name="map_widget_time_to_destination">Χρόνος μέχρι προορισμό</string>
+    <string name="map_widget_time_to_intermediate">Χρόνος μέχρι ενδιάμεση</string>
+    <string name="go_to_marker_location">Πήγαινε στην τοποθεσία δείκτη</string>
+    <string name="side_marker_eta">Εκτιμώμενος χρόνος άφιξης</string>
+    <string name="map_markers_bar">Μπάρα δεικτών χάρτη</string>
+    <string name="map_widget_zoom_level">Επίπεδο μεγέθυνσης</string>
+    <string name="map_widget_target_distance">Απόσταση από κάμερα προς στόχο</string>
+    <string name="map_widget_camera_distance">Ανύψωση κάμερας</string>
 </resources>
