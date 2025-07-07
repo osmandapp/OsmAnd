@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers.core;
 
+import static net.osmand.core.android.MapRendererContext.POI_SYMBOL_SECTION;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 
 import android.content.Context;
@@ -146,7 +147,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		if (providerInstance == null) {
 			providerInstance = instantiateProxy();
 		}
-		mapRenderer.addSymbolsProvider(providerInstance);
+		mapRenderer.addSymbolsProvider(POI_SYMBOL_SECTION, providerInstance);
 	}
 
 	public void clearSymbols(@NonNull MapRendererView mapRenderer) {
