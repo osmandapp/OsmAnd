@@ -4986,5 +4986,5 @@
     <string name="map_markers_bar">Μπάρα δεικτών χάρτη</string>
     <string name="map_widget_zoom_level">Επίπεδο μεγέθυνσης</string>
     <string name="map_widget_target_distance">Απόσταση από κάμερα προς στόχο</string>
-    <string name="map_widget_camera_distance">Ανύψωση κάμερας</string>
+    <string name="map_widget_camera_distance">Υψόμετρο κάμερας</string>
 </resources>
