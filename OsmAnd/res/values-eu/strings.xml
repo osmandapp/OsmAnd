@@ -5893,4 +5893,22 @@
     <string name="prediction_time_advanced_description">Doitu iragarpen-denbora atzerapena minimizatzeko.</string>
     <string name="prediction_time">Iragarpen-denbora</string>
     <string name="shared_string_no_animation">Animaziorik gabe</string>
+    <string name="deleting_history">Historia ezabatzen…</string>
+    <string name="deleting">Ezabatzen…</string>
+    <string name="osm_live_payment_renews_3_years">Berritu hiru urtero</string>
+    <string name="years_3">Hiru urte</string>
+    <string name="osm_live_payment_3_years_title">Hiru urtero</string>
+    <string name="three_years_subscription">Hiru urteko harpidetza</string>
+    <string name="shared_string_switch">Aldatu</string>
+    <string name="ski_route_switch_style_description">Arakatu eski pistak, igogailuak eta gehiago Negua eta Eskia mapa estiloarekin.</string>
+    <string name="battery">bateria</string>
+    <string name="sensor_data">Sentsoreen datuak</string>
+    <string name="battery_level">Bateriaren maila</string>
+    <string name="shared_string_split_by">Honen arabera zatitu</string>
+    <string name="shared_string_flat">Laua</string>
+    <string name="uphill_downhill_split">Maldan gora / Maldan behera</string>
+    <string name="set_parking_position">Ezarri aparkalekuaren kokapena</string>
+    <string name="set_work">Ezarri lana</string>
+    <string name="set_home">Zehaztu etxea</string>
+    <string name="set_intermediate_point">Ezarri tarteko helmuga</string>
 </resources>
