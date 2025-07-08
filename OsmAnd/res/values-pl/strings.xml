@@ -4225,7 +4225,7 @@
     <string name="add_group_to_markers">Dodaj grupę do listy znaczników</string>
     <string name="remove_group_from_markers">Usuń grupę z listy znaczników</string>
     <string name="routeInfo_tracktype_description">Pokoloruj trasę lub linię śladu według składu powierzchni. Zwykle stosuje się, gdy sieć dróg jest w dużej mierze nieutwardzona.</string>
-    <string name="start_point">Start</string>
+    <string name="start_point">Początek</string>
     <string name="mapillary_menu_filter_description_new">Filtrowanie obrazów według daty lub typu. Aktywne tylko w zbliżeniu.</string>
     <string name="service_is_not_available_please_try_later">Usługa niedostępna. Spróbuj ponownie później.</string>
     <string name="shared_string_files">Pliki</string>
@@ -5638,7 +5638,7 @@
     <string name="obd_fuel_consumption_rate_sensor">Wskaźnik zużycia paliwa (czujnik)</string>
     <string name="obd_battery_voltage_desc">Pokazuje poziom napięcia akumulatora pojazdu</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Użyj wybranych jednostek w nazwie.</string>
-    <string name="route_guidance_desc">Zapewnia w czasie rzeczywistym wskazówki dotyczące trasy, w tym odległość do następnego zakrętu, nazwę drogi, nazwę bieżącej ulicy i informacje o pasie. Widżety są aktywne podczas nawigacji.</string>
+    <string name="route_guidance_desc">Wyświetla wskazówki nawigacyjne w czasie rzeczywistym, w tym odległość od następnego skrętu, nazwa ulicy, oraz informacje o pasach drogowych. Widżety są aktywne podczas nawigacji.</string>
     <string name="rendering_attr_padusHideBoundaries_name">Ukryj granice gruntów publicznych</string>
     <string name="obd_plugin_name">Metryki pojazdu</string>
     <string name="rendering_attr_alpineHiking_name">Stopień trudności szlaków turystycznych</string>
@@ -5664,7 +5664,7 @@
     <string name="reset_average_value">Zresetuj średnią wartość</string>
     <string name="obd_fuel_consumption">Zużycie paliwa</string>
     <string name="driving_region_uk">Wielka Brytania i podobne</string>
-    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="tracker_item">Monitor OsmAnd</string>
     <string name="quick_action_map_style">Styl mapy</string>
     <string name="obd_engine_oil_temperature">Temperatura oleju silnikowego</string>
     <string name="quick_action_photo_note">Uwaga fotograficzna</string>
@@ -5692,7 +5692,7 @@
     <string name="connect_obd_instructions_step4">Kliknij \'%1$s\' i wybierz swój skaner z listy.</string>
     <string name="screen_is_unlocked">Ekran dotykowy jest odblokowany.</string>
     <string name="percent_unit">%</string>
-    <string name="route_guidance">Prowadzenie po trasie</string>
+    <string name="route_guidance">Wskazówki nawigacyjne</string>
     <string name="new_trip_segment">Nowy odcinek podróży</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Wskaźnik zużycia paliwa %/h</string>
@@ -5751,11 +5751,11 @@
     <string name="search_action_descr">Otwiera wyszukiwanie.</string>
     <string name="map_3d_mode_action_descr">Zmień nachylenie mapy.</string>
     <string name="drawer_button_description">Otwiera menu główne.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Terenowe szlaki rowerowe</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Terenowa trasa rowerowa</string>
     <string name="obd_fuel_type_not_provided">Nie podano rodzaju paliwa</string>
     <string name="obd_fuel_type_gasoline">Benzyna</string>
     <string name="obd_fuel_type_ethanol">Etanol</string>
-    <string name="obd_widget_group">Wskaźniki pojazdu</string>
+    <string name="obd_widget_group">Jednostki pojazdu</string>
     <string name="average_value_slider_description">Wybierz przedział czasu dla pomiaru wartości średniej.</string>
     <string name="obd_fuel_consumption_rate_scanner">Wskaźnik zużycia paliwa (obd)</string>
     <string name="obd_nothing_found_description">Sprawdź następujące elementy:\n – Upewnij się, że Bluetooth jest włączony\n – Silnik pojazdu pracuje\n – Upewnij się, że Twoje urządzenie znajduje się w zasięgu skanera.</string>
@@ -5870,7 +5870,7 @@
     <string name="obd_fuel_type_bifuel_lpg">Dwupaliwowy zasilany LPG</string>
     <string name="ais_cpa_warning_time">Czas ostrzegawczy przed osiągnięciem najbliższego punktu podejścia (CPA)</string>
     <string name="ais_cpa_warning_distance">Odległość ostrzegawcza dla najbliższego punktu podejścia (CPA)</string>
-    <string name="no_places_available">Brak dostępnych miejsc</string>
+    <string name="no_places_available">Brak miejsc w widocznym regionie</string>
     <string name="map_widget_route_information_desc">Wyświetla dla bieżącej trasy nawigacyjnej szacowany czas przyjazdu, pozostały czas podróży i odległość.</string>
     <string name="rendering_attr_showClimbingRoutes_name">Trasy wspinaczkowe</string>
     <string name="rendering_attr_showClimbingRoutes_description">Pokaż trasy wspinaczkowe</string>
@@ -5904,7 +5904,7 @@
     <string name="unit_of_temperature_description">Wybrane jednostki zostaną zastosowane do wszystkich danych związanych z temperaturą w bieżącym profilu.</string>
     <string name="deactivated_map">Dezaktywowana mapa</string>
     <string name="suggest_activate_map_msg">mapa %1$s jest dezaktywowana,\naktywuj ją, aby wyświetlić ten obszar.</string>
-    <string name="travel_guides">Przewodniki</string>
+    <string name="travel_guides">Przewodnik</string>
     <string name="quick_action_search_view_title">Okno wyszukiwania</string>
     <string name="obd_engine_coolant_temp">Temperatura płynu chłodzącego</string>
     <string name="quick_action_new_trip_segment">Przycisk do rozpoczęcia nowego segmentu w trwającym nagrywaniu śladu GPX.</string>
@@ -5930,4 +5930,23 @@
     <string name="add_widget_to_the_right">Dodaj widżet po prawej</string>
     <string name="hmd_promo_description_years">Bezpłatny dostęp do funkcji, w tym nieograniczonego pobierania map, trójwymiarowej rzeźby terenu itp., przez %1$s lat</string>
     <string name="add_widget_below">Dodaj widżet poniżej</string>
+    <string name="shared_string_switch">Przełącz</string>
+    <string name="shared_string_flat">Płaski</string>
+    <string name="set_start_point">Ustaw pozycję początkową</string>
+    <string name="help_article_map_tracks_name">Ścieżki</string>
+    <string name="third_links">Linki trzecie</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Pokaż terenowe trasy rowerowe</string>
+    <string name="obd_fuel_type_bifuel_propane">Dwupaliwowe zasilanie propanem</string>
+    <string name="obd_fuel_type_bifuel_electricity">Dwupaliwowe zasilanie elektryczne</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Dwupalinowe zasilanie elektryczne i silnik spalinowy</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Etanol hybrydowy</string>
+    <string name="obd_fuel_type_hybrid_diesel">Diesel hybrydowy</string>
+    <string name="obd_fuel_type_hybrid_electric">Elektryczny hybrydowy</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Elektryczny hybrydowy i silnik spalinowy</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Regeneracyjny hybrydowy</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Wodorowy hybrydowy</string>
+    <string name="obd_fuel_type_hydrogen">Wodorowy</string>
+    <string name="obd_fuel_type_unknown">Nieznany typ paliwa</string>
+    <string name="vehicle_metrics_plugin_settings">Ustawienia jednostek pojazdu</string>
+    <string name="rpm_unit">rpm</string>
 </resources>
