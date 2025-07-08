@@ -54,8 +54,8 @@ public class CleanGpxLayerResourcesTest extends AndroidTest {
 	private File file;
 	private GpxFile importedGpxFile;
 
-	int originalHash;
-	int newHash;
+	private int originalHash;
+	private int newHash;
 
 	@Before
 	@Override
@@ -87,7 +87,6 @@ public class CleanGpxLayerResourcesTest extends AndroidTest {
 	@Test
 	public void test() throws Throwable {
 		skipAppStartDialogs(app);
-		moveMapToGpx();
 
 		IdlingResource idlingResource = new GpxRendererChangeIdlingResource(app);
 		registerIdlingResources(idlingResource);
