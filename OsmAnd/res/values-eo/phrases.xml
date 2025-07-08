@@ -733,7 +733,7 @@
     <string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiopia Ortodoksa Eklezio Taŭahedo</string>
     <string name="poi_denomination_unitarian">Unitarismo</string>
     <string name="poi_denomination_coptic_orthodox">Kopta Ortodoksa Eklezio</string>
-    <string name="poi_denomination_wesleyan">Vesliismo (Wesleyanism)</string>
+    <string name="poi_denomination_wesleyan">Veslejanismo (Metodismo)</string>
     <string name="poi_denomination_shaktism">Ŝaktiismo</string>
     <string name="poi_denomination_shingon_shu">Shingon-shū</string>
     <string name="poi_denomination_maronite">Maronita Eklezio</string>
@@ -5130,7 +5130,7 @@
     <string name="poi_denomination_vajrayana">Vaĝrajano</string>
     <string name="poi_denomination_slavic">Slava Paganismo</string>
     <string name="poi_denomination_celtic">Kelta Paganismo</string>
-    <string name="poi_denomination_marthoma">Kristanoj de Sankta Tomaso (Mar Thoma)</string>
+    <string name="poi_denomination_marthoma">Kristanoj de Sankta Tomaso («Mar Thoma»)</string>
     <string name="poi_denomination_free_methodist">Libera Metodisma Eklezio</string>
     <string name="poi_denomination_churches_of_christ">Eklezioj de Kristo</string>
     <string name="poi_denomination_kardecista">Kardecismo</string>
