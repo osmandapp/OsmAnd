@@ -36,7 +36,7 @@
     <string name="avoid_motorway">Όχι αυτοκινητόδρομους</string>
     <string name="auto_zoom_map_descr">Επίπεδο εστίασης χάρτη ανάλογα με την ταχύτητά σας (ενώ ο χάρτης συγχρονίζεται με την τρέχουσα θέση).</string>
     <string name="auto_zoom_map">Αυτόματη εστίαση χάρτη</string>
-    <string name="snap_to_road">Προσανατολισμός στο δρόμο</string>
+    <string name="snap_to_road">Προσκόλληση στο δρόμο</string>
     <string name="osmand_short_description_80_chars">Προβολή φορητού παγκόσμιου χάρτη &amp; πλοήγηση για χάρτες OSM χωρίς και με διαδίκτυο</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης)
 \n
@@ -2270,7 +2270,7 @@
     <string name="enable_proxy_descr">Διαμόρφωση μεσολαβητή HTTP για όλες τις αιτήσεις δικτύου.</string>
     <string name="proxy_host_descr">Προσδιορίστε τον υπολογιστή μεσολάβησης (π.χ. 127.0.0.1).</string>
     <string name="proxy_port_descr">Προσδιορίστε τη θύρας του μεσολαβητή σας (π.χ. 8118).</string>
-    <string name="average">Μέσος όρος</string>
+    <string name="average">Μέσο</string>
     <string name="of">%1$d από %2$d</string>
     <string name="ascent_descent">Αυξανόμενος/Μειούμενος</string>
     <string name="moving_time">Χρόνος σε κίνηση</string>
@@ -3004,7 +3004,7 @@
     <string name="turn_screen_on_info">Εμφάνιση χάρτη στην οθόνη κλειδώματος κατά την πλοήγηση.</string>
     <string name="route_parameters_info">Ρυθμίσεις δρομολόγησης στο επιλεγμένο προφίλ \"%1$s\".</string>
     <string name="wake_time">Αναμονή μετά την αφύπνιση</string>
-    <string name="units_and_formats">Μονάδες μέτρησης &amp; φορμά</string>
+    <string name="units_and_formats">Μονάδες μέτρησης &amp; μορφές</string>
     <string name="map_look_descr">Εμφάνιση χάρτη</string>
     <string name="map_look">Όψη χάρτη</string>
     <string name="list_of_installed_plugins">Εγκατεστημένα πρόσθετα</string>
@@ -3023,7 +3023,7 @@
     <string name="turn_screen_on">Ενεργοποίηση οθόνης</string>
     <string name="map_during_navigation_info">Χάρτης κατά την πλοήγηση</string>
     <string name="map_during_navigation">Χάρτης κατά την πλοήγηση</string>
-    <string name="shared_string_other">Άλλα</string>
+    <string name="shared_string_other">Άλλο</string>
     <string name="vehicle_parameters_descr">Βάρος, ύψος, μήκος, ταχύτητα</string>
     <string name="vehicle_parameters">Παράμετροι οχήματος</string>
     <string name="voice_announces_info">Οι φωνητικές ανακοινώσεις να γίνονται μόνο κατά την πλοήγηση.</string>
@@ -4453,7 +4453,7 @@
     <string name="how_to_use">Πως να το χρησιμοποιήσετε:</string>
     <string name="shared_string_offline">Εκτός σύνδεσης</string>
     <string name="weather_wind_kilimeters_per_hour">Χιλιόμετρα ανά ώρα</string>
-    <string name="simulate_obd">Προσομοίωση δεδομένων obd</string>
+    <string name="simulate_obd">Προσομοιώστε δεδομένα obd</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Εμφανίζει τον ρυθμό κατανάλωσης καυσίμου του οχήματος βάσει υπολογισμών (Λ/100 χλμ)</string>
     <string name="obd_vehicle_info">Πληροφορίες οχήματος</string>
     <string name="connect_obd_instructions_title">Το OsmAnd υποστηρίζει Bluetooth συνδέσεις προς OBD-II σαρωτές.</string>
@@ -4647,7 +4647,7 @@
     <string name="calculating_indication_message">Υπολογίζεται…</string>
     <string name="shared_string_default_view">Προεπιλεγμένη προβολή</string>
     <string name="litres">Λίτρα</string>
-    <string name="shared_string_instant">Άμεσα</string>
+    <string name="shared_string_instant">Άμεσο</string>
     <string name="unit_of_volume">Μονάδα όγκου</string>
     <string name="dynamic_icon_type_summary">Τα εικονίδεια αλλάζουν με βάση την κατάσταση ενέργειας.</string>
     <string name="shared_string_dynamic">Δυναμικά</string>
@@ -4839,7 +4839,7 @@
     <string name="obd_battery_voltage">Τάση μπαταρίας</string>
     <string name="rpm_unit">σαλ</string>
     <string name="obd_battery_voltage_desc">Εμφανίζει το επίπεδο τάσης της μπαταρίας του οχήματος</string>
-    <string name="obd_widget_engine_speed">Ταχύτητα κινητήρα</string>
+    <string name="obd_widget_engine_speed">Ταχύτητα μηχανής</string>
     <string name="obd_fuel_type_propane">Προπάνιο</string>
     <string name="obd_fuel_type_bifuel_electric_combustion">Διπλό καύσιμο που τρέχει Ηλεκτρικό και Κινητήρα Καύσης</string>
     <string name="obd_fuel_type_bifuel_methanol">Διπλό καύσιμο που τρέχει Μεθανόλη</string>
@@ -4986,5 +4986,11 @@
     <string name="map_markers_bar">Μπάρα δεικτών χάρτη</string>
     <string name="map_widget_zoom_level">Επίπεδο μεγέθυνσης</string>
     <string name="map_widget_target_distance">Απόσταση από κάμερα προς στόχο</string>
-    <string name="map_widget_camera_distance">Υψόμετρο κάμερας</string>
+    <string name="map_widget_camera_distance">Ανύψωση κάμερας</string>
+    <string name="markers_history">Ιστορικό δεικτών</string>
+    <string name="move_map_to_select_area">Μετακινήστε τον χάρτη για να επιλέξετε την απαιτούμενη περιοχή.</string>
+    <string name="map_settings_weather_cloud">Σύννεφα</string>
+    <string name="distance_during_navigation">Απόσταση κατά την πλοήγηση</string>
+    <string name="map_widget_distance">Απόσταση</string>
+    <string name="map_widget_map_scale">Κλίμακα χάρτη</string>
 </resources>
