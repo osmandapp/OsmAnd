@@ -167,9 +167,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	@Override
 	public void apply() {
-		boolean isNewProfile;
 		if (!appMode.isCustomProfile() && !shouldReplace) {
-			isNewProfile = true;
 			ApplicationMode parent = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
 			renameProfile();
 
@@ -185,17 +183,12 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 			getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode(), true);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		} else if (!shouldReplace && exists()) {
-			isNewProfile = true;
 			renameProfile();
 			builder = ApplicationMode.fromModeBean(app, modeBean);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		} else {
-			isNewProfile = !exists();
 			builder = ApplicationMode.fromModeBean(app, modeBean);
 			appMode = ApplicationMode.saveProfile(builder, app);
-		}
-		if (isNewProfile) {
-			ApplicationMode.changeProfileAvailability(appMode, true, app);
 		}
 	}
 
