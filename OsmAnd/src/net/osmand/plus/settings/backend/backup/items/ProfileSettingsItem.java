@@ -13,7 +13,6 @@ import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.*;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.util.Algorithms;
@@ -191,7 +190,6 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 			builder = ApplicationMode.fromModeBean(app, modeBean);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		}
-		ApplicationMode.changeProfileAvailability(appMode, true, app);
 	}
 
 	@Override
