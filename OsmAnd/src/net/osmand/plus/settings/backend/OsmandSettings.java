@@ -724,16 +724,16 @@ public class OsmandSettings {
 		updateLastPreferencesEditTime(globalPreferences, lastModifiedTime);
 	}
 
-	private long getLastPreferencesEditTime(Object preferences) {
+	private long getLastPreferencesEditTime(@NonNull Object preferences) {
 		return settingsAPI.getLong(preferences, LAST_PREFERENCES_EDIT_TIME, 0);
 	}
 
-	public void updateLastPreferencesEditTime(Object preferences) {
+	public void updateLastPreferencesEditTime(@NonNull Object preferences) {
 		long time = System.currentTimeMillis();
 		updateLastPreferencesEditTime(preferences, time);
 	}
 
-	protected void updateLastPreferencesEditTime(Object preferences, long time) {
+	protected void updateLastPreferencesEditTime(@NonNull Object preferences, long time) {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
