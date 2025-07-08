@@ -3001,7 +3001,7 @@
     <string name="poi_telecommunication">Telecomunicazioni</string>
     <string name="poi_authentication_app">Autenticazione tramite applicazione</string>
     <string name="poi_handwashing_hand_disinfection_no">Disinfettante per mani: no</string>
-    <string name="poi_access_general">Accesso generico</string>
+    <string name="poi_access_general">Accesso generale</string>
     <string name="poi_access_bicycle">Accesso biciclette</string>
     <string name="poi_access_scooter">Accesso motocicli</string>
     <string name="poi_authentication_contactless">Autenticazione contactless</string>
@@ -4686,4 +4686,11 @@
     <string name="poi_transport">Ufficio trasporti</string>
     <string name="poi_bicycle_parking_streetpod">Baccello stradale</string>
     <string name="poi_motorcycle_type_dualsport">Dual Sport</string>
+    <string name="poi_denomination_catholic_apostolic">Cattolica apostolica</string>
+    <string name="poi_denomination_free_church_of_scotland">Chiesa libera di Scozia</string>
+    <string name="poi_denomination_churches_of_christ">Chiesa di Cristo</string>
+    <string name="poi_denomination_free_methodist">Libera metodista</string>
+    <string name="poi_denomination_celtic">Celtica</string>
+    <string name="poi_denomination_slavic">Slava</string>
+    <string name="poi_denomination_ecumenical">Ecumenica</string>
 </resources>
