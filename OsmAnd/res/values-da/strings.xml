@@ -5523,14 +5523,14 @@
     <string name="obd_fuel_left_distance_desc">Viser, hvor langt køretøjet kan køre på det resterende brændstofniveau via OBD-sensor</string>
     <string name="obd_fuel_type_desc">Viser køretøjets brændstoftype via OBD-sensor</string>
     <string name="obd_air_intake_temp">Luftindtagets temperatur</string>
-    <string name="obd_ambient_air_temp">Omgivende temperatur</string>
+    <string name="obd_ambient_air_temp">Omgivelsernes temperatur</string>
     <string name="obd_battery_voltage">Batterispænding</string>
     <string name="obd_fuel_consumption_rate_desc">Viser køretøjets brændstofforbrug baseret på OBD og placering</string>
     <string name="obd_support">OBD-understøttelse</string>
     <string name="obd_fuel_type_bifuel_ethanol">To-brændstofkøretøj, der kører på ethanol</string>
     <string name="obd_fuel_type_bifuel_gasoline">To-brændstofkøretøj, der kører på benzin</string>
     <string name="obd_fuel_type_bifuel_methanol">To-brændstofkøretøj, der kører på metanol</string>
-    <string name="obd_engine_coolant_temp">Kølevæsketemperatur</string>
+    <string name="obd_engine_coolant_temp">Kølevæskens temperatur</string>
     <string name="obd_fuel_level">Brændstoføkonomi (%)</string>
     <string name="obd_fuel_consumption_rate">Brændstofforbrug</string>
     <string name="obd_fuel_type">Brændstoftype</string>
@@ -5628,7 +5628,7 @@
     <string name="wunderlinq_datagrid">WunderLINQ-datanetværk</string>
     <string name="shared_string_volume">Volumen</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Brug valgte enheder i navnet.</string>
-    <string name="remaining_fuel_description">Viser mængden af brændstof, der er tilbage i køretøjets tank</string>
+    <string name="remaining_fuel_description">Viser mængden af brændstof, der er tilbage i bilens tank</string>
     <string name="obd_fuel_consumption">Brændstofforbrug</string>
     <string name="reset_average_value">Nulstil gennemsnitsværdi</string>
     <string name="average_value_slider_description">Vælg tidsintervallet for måling af gennemsnitsværdien.</string>
@@ -5650,9 +5650,9 @@
     <string name="obd_engine_runtime_desc">Viser, hvor længe motoren har kørt, siden den blev startet.</string>
     <string name="obd_calculated_engine_load">Beregnet motorbelastning</string>
     <string name="obd_calculated_engine_load_desc">Viser den procentdel af motorens tilgængelige effekt, der bruges på et givet tidspunkt.</string>
-    <string name="obd_engine_oil_temperature">Temperatur på motorolien</string>
+    <string name="obd_engine_oil_temperature">Motoroliens temperatur</string>
     <string name="obd_engine_oil_temperature_desc">Viser temperaturen på motorolien.</string>
-    <string name="obd_ambient_air_temp_desc">Viser temperaturen uden for køretøjet.</string>
+    <string name="obd_ambient_air_temp_desc">Viser temperaturen uden for bilen.</string>
     <string name="obd_battery_voltage_desc">Viser spændingsniveauet på køretøjets batteri</string>
     <string name="preview_next_turn">Forhåndsvis næste sving</string>
     <string name="av_audio_sample_rate">Lydsamplingsfrekvens</string>
