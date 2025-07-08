@@ -209,9 +209,11 @@ public class MapTileLayer extends BaseMapLayer {
 				CommonPreference<Float> paramMaxPref = getParamMaxPref();
 				CommonPreference<Float> paramStepPref = getParamStepPref();
 				if (paramMinPref != null && paramMaxPref != null && paramStepPref != null) {
-					paramMinPref.set((float) paramMin);
-					paramMaxPref.set((float) paramMax);
-					paramStepPref.set((float) paramStep);
+					settings.executePreservingPrefTimestamp(() -> {
+						paramMinPref.set((float) paramMin);
+						paramMaxPref.set((float) paramMax);
+						paramStepPref.set((float) paramStep);
+					});
 				}
 				updateParameter();
 			}
