@@ -624,8 +624,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
-				settings.setLastKnownMapRotation(prevAppMode, getMapRotateTarget());
-				settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+				settings.executePreservingPrefTimestamp(prevAppMode, () -> {
+					settings.setLastKnownMapRotation(prevAppMode, getMapRotateTarget());
+					settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+				});
 				updateApplicationModeSettings();
 			}
 		});
