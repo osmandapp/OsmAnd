@@ -5520,7 +5520,7 @@
     <string name="obd_rpm_desc">Viser køretøjets omdrejningstæller via OBD-sensoren</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_fuel_level_desc">Viser køretøjets brændstofniveau via OBD-sensor</string>
-    <string name="obd_fuel_left_distance_desc">Viser, hvor langt køretøjet kan køre på det resterende brændstofniveau via OBD-sensor</string>
+    <string name="obd_fuel_left_distance_desc">Viser, hvor langt køretøjet kan køre på resterende brændstofniveau via OBD-sensor</string>
     <string name="obd_fuel_type_desc">Viser køretøjets brændstoftype via OBD-sensor</string>
     <string name="obd_air_intake_temp">Luftindtagets temperatur</string>
     <string name="obd_ambient_air_temp">Omgivelsernes temperatur</string>
@@ -5531,7 +5531,7 @@
     <string name="obd_fuel_type_bifuel_gasoline">To-brændstofkøretøj, der kører på benzin</string>
     <string name="obd_fuel_type_bifuel_methanol">To-brændstofkøretøj, der kører på metanol</string>
     <string name="obd_engine_coolant_temp">Kølevæskens temperatur</string>
-    <string name="obd_fuel_level">Brændstoføkonomi (%)</string>
+    <string name="obd_fuel_level">Brændstofeffektivitet (%)</string>
     <string name="obd_fuel_consumption_rate">Brændstofforbrug</string>
     <string name="obd_fuel_type">Brændstoftype</string>
     <string name="obd_plugin_description">Overvåg vigtige køretøjsmålinger ved hjælp af OBD-II-protokollen. Få adgang til data, herunder:\n • Motoromdrejningshastighed, motorens driftstid, beregnet motorbelastning \n • Brændstofforbrug, brændstoftryk, resterende brændstof\n • Indtagstemperatur, omgivelsestemperatur, kølevæskes temperatur, motoroliens temperatur\n • Køretøjets hastighed, gasspjældets position, batterispænding\n</string>
@@ -5576,7 +5576,7 @@
     <string name="connect_obd_instructions_step1">Tilslut scanneren til køretøjets OBD-II-stik.</string>
     <string name="connect_obd_instructions_step4">Tryk på \'%1$s,\' og vælg din scanner på listen.</string>
     <string name="learn_more_about_obd_sensors">Få mere at vide om sensorer.</string>
-    <string name="obd_fuel_left_liters">Resterende brændstof (liter)</string>
+    <string name="obd_fuel_left_liters">Brændstof tilbage (liter)</string>
     <string name="route_guidance_desc">Giver rutevejledning i realtid, herunder afstand til næste sving, vejnavn, aktuelt gadenavn og oplysninger om vognbane. Moduler er aktive under navigation.</string>
     <string name="route_guidance">Rutevejledning</string>
     <string name="obd_widget_vehicle_speed">Køretøjets hastighed</string>
@@ -5589,10 +5589,10 @@
     <string name="obd_device_forget_sensor_description">Scanneren fjernes fra listen. Du vil til enhver tid kunne parre denne scanner igen.</string>
     <string name="obd_searching_text">Søger efter scannere</string>
     <string name="connect_obd_instructions_step">1. Tilslut scanneren til bilens OBD-II-indgang.\n\n 2. Tænd for køretøjets motor\n\n 3. Aktivér Bluetooth på din enhed\n\n 4. Tryk på \'%1$s\' og vælg din scanner fra listen.</string>
-    <string name="obd_fuel_consumption_rate_l_h">Brændstofforbrug (L/t)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Brændstofforbrug (l/t)</string>
     <string name="obd_fuel_consumption_rate_sensor">Brændstofforbrug (sensor)</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Viser køretøjets brændstofforbrug baseret på beregninger (L/t)</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Viser køretøjets brændstofforbrug baseret på sensor (L/t)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Viser køretøjets brændstofforbrug baseret på beregninger ( l/t)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Viser køretøjets brændstofforbrug baseret på sensor (l/t)</string>
     <string name="obd_fuel_level_liter">Brændstofniveau (l)</string>
     <string name="obd_fuel_level_percent">Brændstofniveau (%)</string>
     <string name="obd_fuel_left_km">Brændstof tilbage (km)</string>
@@ -5627,8 +5627,8 @@
     <string name="unit_of_volume">Enhed for volumen</string>
     <string name="wunderlinq_datagrid">WunderLINQ-datanetværk</string>
     <string name="shared_string_volume">Volumen</string>
-    <string name="obd_fuel_consumption_rate_sensor_type">Brug valgte enheder i navnet.</string>
-    <string name="remaining_fuel_description">Viser mængden af brændstof, der er tilbage i bilens tank</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Brug valgte enheder i navn.</string>
+    <string name="remaining_fuel_description">Viser mængden af brændstof, der er tilbage i køretøjets tank</string>
     <string name="obd_fuel_consumption">Brændstofforbrug</string>
     <string name="reset_average_value">Nulstil gennemsnitsværdi</string>
     <string name="average_value_slider_description">Vælg tidsintervallet for måling af gennemsnitsværdien.</string>
@@ -5662,7 +5662,7 @@
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Vælg de parametre, der skal registreres i GPX-filen.</string>
     <string name="obd_throttle_position">Gasspjældets position</string>
-    <string name="obd_throttle_position_desc">Viser vinklen på gasspjældspladen i gasspjældshuset.</string>
+    <string name="obd_throttle_position_desc">Viser gasspjældets vinkel i gasspjældshuset.</string>
     <string name="obd_speed_desc">Viser hastighed fra køretøjets hastighedssensor (VSS).</string>
     <string name="obd_air_intake_temp_desc">Viser temperaturen på den luft, der kommer ind i motorens indsugningsmanifold.</string>
     <string name="shared_string_interpolation">Interpolation</string>
