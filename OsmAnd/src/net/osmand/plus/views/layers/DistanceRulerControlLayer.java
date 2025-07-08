@@ -293,6 +293,11 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		TextRasterizer.Style style = MapTextLayer.getTextStyle(getContext(), nightMode,
 				getApplication().getOsmandMap().getMapDensity(), view.getDensity());
 
+		DistanceByTapTextSize textSize = app.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get();
+		float lineTextSize = app.getResources().getDimension(textSize.getTextSizeId());
+
+		style.setSize(lineTextSize);
+
 		MapMarkerBuilder markerBuilder = new MapMarkerBuilder();
 		markerBuilder.setIsHidden(false);
 		markerBuilder.setCaption(text);

@@ -226,6 +226,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		this.trackChartPoints = trackChartPoints;
 	}
 
+	public int getSegmentsCacheHash() {
+		return segmentsCache.hashCode();
+	}
+
 	public boolean isInTrackAppearanceMode() {
 		return gpxAppearanceHelper.isInTrackAppearanceMode();
 	}

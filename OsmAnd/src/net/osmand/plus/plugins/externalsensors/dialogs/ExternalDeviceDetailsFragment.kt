@@ -172,7 +172,11 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
                 } else {
                     if (nightMode) R.drawable.bg_widget_type_disconnected_icon_dark else R.drawable.bg_widget_type_disconnected_icon_light
                 })
-            widgetIcon.setImageResource(if (!isConnected) it.disconnectedIconId else if (nightMode) it.nightIconId else it.dayIconId)
+	        if (!isConnected) {
+		        widgetIcon.setImageDrawable(getContentIcon(it.disconnectedIconId))
+	        } else {
+		        widgetIcon.setImageResource(if (nightMode) it.nightIconId else it.dayIconId)
+	        }
         }
     }
 

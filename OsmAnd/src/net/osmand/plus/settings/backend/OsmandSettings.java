@@ -194,10 +194,27 @@ public class OsmandSettings {
 		ApplicationMode appMode = APPLICATION_MODE.get();
 		ApplicationMode parentAppMode = APPLICATION_MODE.get().getParent();
 
-		getCustomRenderProperty(A_APP_MODE).setModeValue(appMode, appMode.getStringKey());
-		getCustomRenderProperty(A_BASE_APP_MODE).setModeValue(appMode, parentAppMode != null
-				? parentAppMode.getStringKey()
-				: appMode.getStringKey());
+		executePreservingPrefTimestamp(appMode, () -> {
+			CommonPreference<String> appModePref = getCustomRenderProperty(A_APP_MODE);
+			CommonPreference<String> baseAppModePref = getCustomRenderProperty(A_BASE_APP_MODE);
+
+			appModePref.setModeValue(appMode, appMode.getStringKey());
+			baseAppModePref.setModeValue(appMode, parentAppMode != null
+					? parentAppMode.getStringKey() : appMode.getStringKey());
+		});
+	}
+
+	public void executePreservingPrefTimestamp(@NonNull Runnable action) {
+		executePreservingPrefTimestamp(getApplicationMode(), action);
+	}
+
+	public void executePreservingPrefTimestamp(@NonNull ApplicationMode mode, @NonNull Runnable action) {
+		long time = getLastModePreferencesEditTime(mode);
+		try {
+			action.run();
+		} finally {
+			setLastModePreferencesEditTime(mode, time);
+		}
 	}
 
 	@NonNull

@@ -11,8 +11,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -50,31 +48,27 @@ public class ButtonStateBean {
 		return AndroidUtils.getDrawableId(app, icon, R.drawable.ic_quick_action);
 	}
 
-	public void setupButtonState(@NonNull OsmandApplication app,
-			@NonNull QuickActionButtonState buttonState) {
-		OsmandSettings settings = app.getSettings();
-		ApplicationMode appMode = settings.getApplicationMode();
-		MapButtonsHelper buttonsHelper = app.getMapButtonsHelper();
-		long time = settings.getLastModePreferencesEditTime(appMode);
+	public void setupButtonState(@NonNull OsmandApplication app, @NonNull QuickActionButtonState buttonState) {
+		app.getSettings().executePreservingPrefTimestamp(() -> {
+			buttonState.setName(name);
+			buttonState.setEnabled(enabled);
 
-		buttonState.setName(name);
-		buttonState.setEnabled(enabled);
-
-		if (!Algorithms.isEmpty(icon)) {
-			buttonState.getIconPref().set(icon);
-		}
-		if (size > 0) {
-			buttonState.getSizePref().set(size);
-		}
-		if (cornerRadius >= 0) {
-			buttonState.getCornerRadiusPref().set(cornerRadius);
-		}
-		if (opacity >= 0) {
-			buttonState.getOpacityPref().set(opacity);
-		}
-		buttonsHelper.updateQuickActions(buttonState, quickActions);
-		buttonsHelper.updateActiveActions();
-		settings.setLastModePreferencesEditTime(appMode, time);
+			if (!Algorithms.isEmpty(icon)) {
+				buttonState.getIconPref().set(icon);
+			}
+			if (size > 0) {
+				buttonState.getSizePref().set(size);
+			}
+			if (cornerRadius >= 0) {
+				buttonState.getCornerRadiusPref().set(cornerRadius);
+			}
+			if (opacity >= 0) {
+				buttonState.getOpacityPref().set(opacity);
+			}
+			MapButtonsHelper buttonsHelper = app.getMapButtonsHelper();
+			buttonsHelper.updateQuickActions(buttonState, quickActions);
+			buttonsHelper.updateActiveActions();
+		});
 	}
 
 	@NonNull

@@ -5630,7 +5630,6 @@
 	<string name="poi_latter_day_saints_church">Latter day saints church</string>
 	<string name="poi_evangelical_lutheran_church">Evangelical lutheran church</string>
 	<string name="poi_mennonite_church">Mennonite church</string>
-	<string name="poi_landmark_church">Landmark church</string>
 	<string name="poi_adventist_church">Adventist church</string>
 	<string name="poi_uniting_church">Uniting church</string>
 	<string name="poi_apostolic_church">Apostolic church</string>
@@ -5675,7 +5674,6 @@
 	<string name="poi_denomination_ukrainian_orthodox">Ukrainian Orthodox</string>
 	<string name="poi_denomination_neo_pentecostal">Neo-pentecostal</string>
 	<string name="poi_denomination_evangelical_lutheran">Evangelical Lutheran</string>
-	<string name="poi_denomination_landmark">Landmark</string>
 	<string name="poi_denomination_anabaptist">Anabaptist</string>
 	<string name="poi_denomination_thai_mahanikaya">Thai Mahanikaya</string>
 	<string name="poi_denomination_thai_thammayut">Thai Thammayut</string>
@@ -5738,7 +5736,6 @@
 	<string name="poi_denomination_kardecista">Kardecista</string>
 	<string name="poi_denomination_free_church_of_scotland">Free Church Of Scotland</string>
 	<string name="poi_denomination_catholic_apostolic">Catholic Apostolic</string>
-	<string name="poi_denomination_iglesia_filipina_independiente">Iglesia Filipina Independiente</string>
 	<string name="poi_denomination_sephardi">Sephardi</string>
 	<string name="poi_denomination_welsh_independent">Welsh Independent</string>
 
