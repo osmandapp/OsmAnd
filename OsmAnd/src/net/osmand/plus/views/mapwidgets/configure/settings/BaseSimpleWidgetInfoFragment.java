@@ -50,7 +50,7 @@ public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFrag
 	}
 
 	private void updateShowIconContainerVisibility() {
-		AndroidUiHelper.updateVisibility(showIconContainer, !isSmallHeight());
+		AndroidUiHelper.updateVisibility(showIconContainer, !isSmallHeight() || isVerticalPanel);
 	}
 
 	@Override
