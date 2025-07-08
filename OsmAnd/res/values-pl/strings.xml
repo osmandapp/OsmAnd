@@ -5948,5 +5948,8 @@
     <string name="obd_fuel_type_hydrogen">Wodorowy</string>
     <string name="obd_fuel_type_unknown">Nieznany typ paliwa</string>
     <string name="vehicle_metrics_plugin_settings">Ustawienia jednostek pojazdu</string>
-    <string name="rpm_unit">rpm</string>
+    <string name="rpm_unit">obroty/s</string>
+    <string name="obd_rpm_desc">Wyświetla tachometr obrotów/s pojazdu nad sensorem OBD</string>
+    <string name="obd_fuel_level_desc">Wyświetla poziom paliwa pojazdu nad sensorem OBD</string>
+    <string name="obd_fuel_left_distance_desc">Wyświetla szacowany dystans, przez który pojazd może przejechać na pozostałym paliwie, nad sensorem OBD.</string>
 </resources>
