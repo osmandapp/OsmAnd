@@ -98,7 +98,7 @@
     <string name="lang_tr">Taṭurkit</string>
     <string name="index_name_italy">Turuft - Ṭelyan</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="route_to">I :</string>
+    <string name="route_to">Ar:</string>
     <string name="route_via">S :</string>
     <string name="route_from">Seg :</string>
     <string name="plugin_distance_point_time">akud</string>
@@ -187,7 +187,7 @@
     <string name="app_name_osmand">OsmAnd</string>
     <string name="building_number">Uṭṭun n Uzadaɣ</string>
     <string name="roads">Iberdan</string>
-    <string name="buy">AΓ</string>
+    <string name="buy">AƔ</string>
     <string name="value_downloaded_of_max">%1$.1f ɣef %2$.1f MAṬ</string>
     <string name="file_size_in_mb">%.1f MAṬ</string>
     <string name="update_all">Sedɣi iten akk (%1$s MB)</string>
@@ -508,7 +508,7 @@
     <string name="poi_filter_fuel">Aserɣu</string>
     <string name="map_widget_parking">Aneɣsar</string>
     <string name="osmand_parking_minutes">Tisdatin</string>
-    <string name="osmand_parking_warning">Γur-k</string>
+    <string name="osmand_parking_warning">Ɣur-k</string>
     <string name="osmand_parking_pm">MD</string>
     <string name="osmand_parking_am">FT</string>
     <string name="gpxup_public">Azayez</string>
@@ -1066,7 +1066,7 @@
     <string name="commit_poi">Wennet</string>
     <string name="dahboard_options_dialog_title">Sbadu tafelwit n tedbelt</string>
     <string name="error_message_pattern">Tuccḍa:</string>
-    <string name="av_photo_play_sound">Γeṛ ameslaw n tkamirat</string>
+    <string name="av_photo_play_sound">Ɣeṛ ameslaw n tkamirat</string>
     <string name="poi_remove_title">Kkes</string>
     <string name="poi_create_title">rnu</string>
     <string name="poi_edit_title">Ẓreg</string>
