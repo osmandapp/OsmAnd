@@ -140,7 +140,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	public boolean shouldShowIcon() {
-		return widgetState.getShowIconPref().get() || isSmallSize();
+		return widgetState.getShowIconPref().get() || (isSmallSize() && !isVerticalWidget());
 	}
 
 	@NonNull
