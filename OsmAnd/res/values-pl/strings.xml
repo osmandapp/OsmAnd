@@ -4015,7 +4015,7 @@
     <string name="shared_string_max_height">Max. wysokość</string>
     <string name="language_description">Wybierz preferowany język i rodzaj nawigacji głosowej.</string>
     <string name="tts_description">Funkcja Text-to-speech (TTS) potrafi wymówić wszystkie rodzaje instrukcji: nazwy ulic, instrukcje skrętu, nazwy punktów POI itp.</string>
-    <string name="tts_title">TTS</string>
+    <string name="tts_title">Tekst na mowę</string>
     <string name="recorded_description">Nagrany głos brzmi lepiej, ale może wymówić tylko wcześniej nagrane frazy: instrukcje skrętu. Nie można wypowiadać nazw ulic ani punktów POI.</string>
     <string name="use_system_language">Użyj języka systemu</string>
     <string name="shared_string_itinerary">Plan podróży</string>
@@ -5524,7 +5524,7 @@
     <string name="routing_attr_avoid_cobblestone_description">Unikaj kocich łbów</string>
     <string name="change_terrain_color_scheme">Zmień schemat kolorów terenu</string>
     <string name="travel_topics">Tematyka podróży</string>
-    <string name="missing_maps_ignore">Skorzystaj z istniejących map</string>
+    <string name="missing_maps_ignore">Skorzystaj z pobranych map</string>
     <string name="play_weather_forecast">Odtwórz prognozę pogody</string>
     <string name="rendering_value_dark_orange_name">Ciemnopomarańczowy</string>
     <string name="clear_all_key_shortcuts_summary">Wszystkie przypisania klawiszy dla wybranego typu zostaną usunięte.</string>
@@ -5570,8 +5570,8 @@
     <string name="daynight_mode_day_summary">Zawsze wyświetla mapę w jasnym motywie, idealnym do widoczności w ciągu dnia.</string>
     <string name="daynight_mode_app_theme_summary">Wyświetlanie mapy jest zgodne z ogólnym motywem aplikacji - tryb dzienny dla jasnego motywu i tryb nocny dla ciemnego motywu</string>
     <string name="daynight_mode_app_theme">Motyw aplikacji</string>
-    <string name="key_event_action_continuous_zoom_out">Ciągłe pomniejszanie</string>
-    <string name="key_event_action_continuous_zoom_in">Ciągłe powiększanie</string>
+    <string name="key_event_action_continuous_zoom_out">Pomniejszanie mapy</string>
+    <string name="key_event_action_continuous_zoom_in">Powiększanie mapy</string>
     <string name="remove_key_assignment_summary">Przypisanie klawisza dla wybranej akcji zostanie usunięte.</string>
     <string name="remove_key_assignment">Usuń przypisanie klawisza</string>
     <string name="map_settings_weather_wind_animation">Animacja wiatru</string>
@@ -5590,7 +5590,7 @@
     <string name="upload_local_versions">Prześlij wersje lokalne</string>
     <string name="download_cloud_versions">Pobieranie wersji chmurowych</string>
     <string name="weather_source_GFS_description">Globalny system prognoz z Krajowych Centrów Prognoz Środowiskowych</string>
-    <string name="missing_maps_ignore_details">Niektóre już pobrane mapy mogą być odpowiednie dla danej trasy. Jeśli znasz obszar i mapy, możesz spróbować wyznaczyć trasę przy użyciu istniejących map.</string>
+    <string name="missing_maps_ignore_details">Pobrane mapy zasłaniają twoją trasę? Nawiguj z nimi jeżeli okolica jest Tobie znana.</string>
     <string name="use_nearby_roads_summary">Korzysta z mapy offline, aby znaleźć pobliskie drogi i dane wysokościowe. Może dostosować geometrię toru.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd może pobierać dane o wysokości z pobliskich dróg lub map terenu.</string>
     <string name="relief_3d_download_description">Do wyświetlania terenu na mapie wymagane są dodatkowe mapy.</string>
@@ -6012,5 +6012,19 @@
     <string name="shared_string_simulate">Symuluj</string>
     <string name="quick_action_display_position_in_center">Pozycja zawsze na środku</string>
     <string name="quick_action_terrain">Typ koloryzacji terenu</string>
-    <string name="quick_action_map_underlay">Podłóż pod spód</string>
+    <string name="quick_action_map_underlay">Podłóż</string>
+    <string name="quick_action_audio_note">Notatka audio</string>
+    <string name="quick_action_video_note">Notatka wideo</string>
+    <string name="quick_action_track_waypoint">Punkt ścieżki</string>
+    <string name="quick_action_parking_place">Miejsce parkowania</string>
+    <string name="quick_action_verb_show_hide">Pokaż / Ukryj</string>
+    <string name="quick_action_verb_pause_resume">Wstrzymaj / Wznów</string>
+    <string name="quick_action_verb_turn_on_off">Włącz / Wyłącz</string>
+    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="weather_screen">Ekran pogodowy</string>
+    <string name="profile_icon">Ikona profilu</string>
+    <string name="navigation_position_icon_summary">Ikona wyświetla się, gdy włączona jest nawigacja lub poruszasz się.</string>
+    <string name="navigation_position_icon">Pozycja ikony nawigacji</string>
+    <string name="resting_position_icon_summary">Ikona wyświetla się, gdy nie poruszasz się.</string>
+    <string name="resting_position_icon">Pozycja ikony spoczynku</string>
 </resources>
