@@ -4996,5 +4996,14 @@
     <string name="show_symbols_debug_info">Εμφάνιση πληροφοριών για τα σύμβολα απασφαλμάτωσης</string>
     <string name="special_routing_cpp">Είδος ειδικής δρομολόγησης</string>
     <string name="plan_route_exit_dialog_descr">Απόρριψη όλων των αλλαγών στη σχεδιασμένη διαδρομή;</string>
-    <string name="follow_track_descr">Επιλογή αρχείου ίχνους για ακολούθηση</string>
+    <string name="follow_track_descr">Επιλέξτε αρχείο ίχνους για ακολούθηση</string>
+    <string name="import_track_descr">Επιλέξτε αρχείο ίχνους για ακολούθηση ή εισάγετε το από την συσκευή σας.</string>
+    <string name="navigate_to_track_descr">Πλοήγηση από την τοποθεσία μου προς το ίχνος</string>
+    <string name="pass_whole_track_descr">Σημείο του ίχνους για πλοήγηση</string>
+    <string name="cannot_upload_image">Δεν είναι δυνατή η μεταφόρτωση εικόνας, παρακαλούμε, δοκιμάστε ξανά αργότερα</string>
+    <string name="select_items_for_import">Επιλέξτε αντικείμενα που θα εισαχθούν.</string>
+    <string name="select_groups_for_import">Επιλέξτε ομάδες που θα εισαχθούν.</string>
+    <string name="plan_route_add_new_segment">Προσθήκη ενός νέου τμήματος</string>
+    <string name="plan_route_split_after">Διαχωρισμός μετά από</string>
+    <string name="plan_route_split_before">Διαχωρισμός πριν από</string>
 </resources>
