@@ -4834,7 +4834,7 @@
     <string name="configure_map_description">Αλλάζει το στυλ χάρτη, τα επίπεδα ή και άλλες ρυθμίσεις.</string>
     <string name="obd_fuel_type_electric">Ηλεκτρικό</string>
     <string name="obd_fuel_type_diesel">Ντίζελ</string>
-    <string name="obd_bluetooth_off_description">Ενεργοποιεί το Bluetooth για να αναζητήσει και να συνδεθεί σε σαρωτές.</string>
+    <string name="obd_bluetooth_off_description">Ενεργοποιήστε το Bluetooth για να αναζητήσετε και να συνδέσετε σαρωτές.</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Υβριδικό Υδρογόνο</string>
     <string name="obd_battery_voltage">Τάση μπαταρίας</string>
     <string name="rpm_unit">σαλ</string>
