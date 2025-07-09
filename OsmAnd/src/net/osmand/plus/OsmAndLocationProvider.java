@@ -563,8 +563,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return r;
 	}
 
-
-	private void scheduleCheckIfGpsLost(net.osmand.Location location) {
+	private void scheduleCheckIfGpsLost(@NonNull net.osmand.Location location) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0 && simulatePosition == null) {
 			long fixTime = location.getTime();
@@ -636,13 +635,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 		return updatedLocation;
 	}
+
 	public void setLocationFromService(net.osmand.Location location) {
 		if (locationSimulation.isRouteAnimating() || shouldIgnoreLocation(location)) {
 			return;
 		}
 		prevLocation = location;
-		if (location != null && isPointAccurateForRouting(location) &&
-				!isTunnelLocationSimulated(location)) {
+		if (location != null && isPointAccurateForRouting(location) && !isTunnelLocationSimulated(location)) {
 			lastTimeLocationFixed = System.currentTimeMillis();
 			simulatePosition = null;
 			notifyGpsLocationRecovered();
@@ -662,14 +661,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			this.location = updatedLocation;
 			updateLocation(this.location);
 		}
-
 	}
 
 	public void setLocationFromSimulation(net.osmand.Location location) {
 		setLocation(location);
 	}
 
-	private void setLocation(net.osmand.Location location) {
+	private void setLocation(@Nullable net.osmand.Location location) {
 		if (shouldIgnoreLocation(location)) {
 			return;
 		}
@@ -679,8 +677,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 		enhanceLocation(location);
 
-		if (location != null && isPointAccurateForRouting(location) &&
-				!isTunnelLocationSimulated(location)) {
+		if (location != null && isPointAccurateForRouting(location) && !isTunnelLocationSimulated(location)) {
 			// use because there is a bug on some devices with location.getTime()
 			lastTimeLocationFixed = System.currentTimeMillis();
 			simulatePosition = null;
