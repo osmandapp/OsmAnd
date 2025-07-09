@@ -5785,7 +5785,7 @@
     <string name="three_years_subscription">Abbonamento di tre anni</string>
     <string name="shared_string_switch">Cambia</string>
     <string name="deleting">Sto cancellando…</string>
-    <string name="deleting_history">Cancellazione della cronologia …</string>
+    <string name="deleting_history">Cancellazione cronologia …</string>
     <string name="release_5_1">• Aggiunto il supporto per acquisti web e tra piattaforme diverse\n\n • Spostato l\'unità di misura della Temperatura in Preferenze Generali per un accesso più semplice\n\n • Aggiunto l\'indicatore del livello di carica della batteria per i sensori BLE\n\n • Nuova, più intuitiva UI per la selezione dei punti nella Navigazione\n\n • Migliorata la visibilità del widget con un nuovo aspetto\n\n • Aggiunto l\'analizzatore delle salite/discese\n\n • Ampliata l\'integrazione di Wikipedia &amp; Wikivoyage con più PDI.</string>
     <string name="set_home">Imposta casa</string>
     <string name="set_intermediate_point">Imposta una destinazione intermedia</string>

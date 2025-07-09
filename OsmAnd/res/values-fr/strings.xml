@@ -712,7 +712,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Lieu de stationnement</string>
-    <string name="osmand_parking_plugin_description">Mémorisez la position de votre véhicule et soyez alertés avant la fin de durée du stationnement. Pour placer le marqueur, sélectionnez un point sur la carte, allez dans « Actions » et sélectionnez « Stationnement ».</string>
+    <string name="osmand_parking_plugin_description">Enregistrez la position de votre véhicule et soyez alertés avant la fin du temps de stationnement. Pour placer une marque, sélectionnez un point sur la carte, allez dans « Actions » et sélectionnez « Stationnement ».</string>
     <string name="osmand_parking_plugin_name">Stationnement</string>
     <string name="context_menu_item_add_parking_point">Parking</string>
     <string name="context_menu_item_delete_parking_point">Supprimer l\'emplacement de stationnement</string>
@@ -1832,7 +1832,7 @@
     <string name="add_points_to_map_markers_q">Ajouter tous les points comme marques ?</string>
     <string name="shared_string_add_to_map_markers">Ajouter comme marque</string>
     <string name="select_map_markers">Sélectionner les marques</string>
-    <string name="show_map_markers_description">Activer la fonction marqueurs.</string>
+    <string name="show_map_markers_description">Activer la fonction marques.</string>
     <string name="clear_active_markers_q">Supprimer toutes les marques actives ?</string>
     <string name="clear_markers_history_q">Effacer l\'Historique des marques ?</string>
     <string name="active_markers">Marques actives</string>
@@ -2320,7 +2320,7 @@
     <string name="shared_string_finish">Terminer</string>
     <string name="plan_route">Planifier un itinéraire</string>
     <string name="shared_string_sort">Trier</string>
-    <string name="coordinate_input">Saisie des coordonnées</string>
+    <string name="coordinate_input">Saisir des coordonnées</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
     <string name="move_to_history">Déplacer vers l\'historique</string>
     <string name="group_will_be_removed_after_restart">Le groupe sera supprimé au prochain démarrage de l\'application.</string>
@@ -2369,7 +2369,7 @@
     <string name="favourites_group">Catégorie de favoris</string>
     <string name="add_group">Ajouter un groupe</string>
     <string name="add_group_descr">Importer des groupes depuis des favoris ou des points de passage GPX.</string>
-    <string name="empty_state_markers_active">Créez des marqueurs de carte !</string>
+    <string name="empty_state_markers_active">Ajoutez des marques sur la carte !</string>
     <string name="empty_state_markers_active_desc">Sélectionner des emplacements sur la carte puis appuyer sur le drapeau de marque.</string>
     <string name="empty_state_markers_groups">Importer des groupes</string>
     <string name="empty_state_markers_groups_desc">Importer des groupes de favoris ou des points de passage comme marques.</string>
@@ -2580,7 +2580,7 @@
     <string name="start_search_from_city">Recherche par ville/village/lieu-dit</string>
     <string name="shared_string_restore">Restaurer</string>
     <string name="keep_passed_markers_descr">Les marques visitées resteront affichées sur la carte, que les marques appartiennent à un groupe de favoris ou qu\'il s\'agisse de points de passage GPX. Ces marques ne disparaîtront que lorsque le groupe ou la trace sera désactivé.</string>
-    <string name="keep_passed_markers">Afficher sur la carte les marques visitées</string>
+    <string name="keep_passed_markers">Afficher les marques visitées sur la carte</string>
     <string name="markers_remove_dialog_msg">Supprimer la marque « %s » ?</string>
     <string name="edit_map_marker">Modifier la marque</string>
     <string name="third_party_application">Application tierce</string>
@@ -3534,7 +3534,7 @@
     <string name="login_account">Compte</string>
     <string name="manage_subscription">Gérer l\'abonnement</string>
     <string name="sign_in_with_open_street_map">Se connecter avec OpenStreetMap</string>
-    <string name="markers_history">Historique des marqueurs</string>
+    <string name="markers_history">Historique des marques</string>
     <string name="send_files_to_openstreetmap">Envoyer un fichier GPX vers OpenStreetMap</string>
     <string name="enter_text_separated">Saisir les attributs séparés par des virgules.</string>
     <string name="subscription_payment_issue_title">Appuyez sur le bouton pour configurer un mode de paiement sur Google Play pour résoudre le problème de votre abonnement.</string>
@@ -4158,7 +4158,7 @@
     <string name="rendering_attr_showTrainRoutes_name">Voies de chemin de fer</string>
     <string name="rendering_attr_showBusRoutes_name">Lignes d\'autobus</string>
     <string name="speed_mode">Mode de vitesse</string>
-    <string name="map_markers_bar">Barre de marqueurs</string>
+    <string name="map_markers_bar">Barre de marques</string>
     <string name="shared_string_visible_widgets">Widgets visibles</string>
     <string name="top_widgets_panel">Panneau supérieur</string>
     <string name="bottom_widgets_panel">Panneau inférieur</string>
@@ -4347,7 +4347,7 @@
     <string name="second_next_turn_widget_desc">Le widget vous informe de la seconde bifurcation à venir et s\'active à l\'approche de cette bifurcation.</string>
     <string name="duplacate_widget_added_snackbar">Une copie du widget est en cours d\'ajout à la liste.</string>
     <string name="second_marker_widget_desc">Vous pouvez configurer le widget pour afficher la Distance restante ou l\'Heure estimée d’arrivée jusqu\'au second marqueur.</string>
-    <string name="first_marker_widget_desc">Vous pouvez configurer le widget pour afficher la Distance restante ou l\'Heure estimée d\'arrivée jusqu’au premier marqueur.</string>
+    <string name="first_marker_widget_desc">Vous pouvez configurer le widget pour afficher la Distance restante ou l\'Heure estimée d\'arrivée jusqu’à la première marque.</string>
     <string name="time_to_intermediate_widget_desc">Le widget affiche « L\'heure d\'arrivée » ou « La durée restante » jusqu\'au prochain point intermédiaire. Ces informations sont actualisées pendant le guidage et une fois ce point intermédiaire atteint, les informations seront calculées pour le point intermédiaire suivant.</string>
     <string name="distance_to_destination_widget_desc">Le widget affiche la distance restante jusqu\'à destination.</string>
     <string name="time_to_destination_widget_desc">Le widget affiche « L\'heure d\'arrivée » ou « La durée restante » jusqu\'à destination. Ces informations sont actualisées pendant le guidage et calculées à partir de votre position actuelle.</string>
@@ -4373,7 +4373,7 @@
     <string name="rotate_map_manual_opt">Orientation manuelle</string>
     <string name="shared_string_large">Grand</string>
     <string name="distance_by_tap_use_description">Un appui sur la carte affiche la distance entre l\'emplacement d\'appui et votre position.\nUn appui simultané avec deux doigts affiche la distance entre les deux points d\'appui.</string>
-    <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
+    <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premières marques de la liste des marques de la carte.</string>
     <string name="go_to_marker_location">Aller au marqueur</string>
     <string name="shared_string_switch_mode">Basculer de mode</string>
     <string name="click_on_widget">Cliquer sur le widget</string>
@@ -4905,8 +4905,8 @@
     <string name="send_logcat_log_descr">Fichier d\'historique détaillé</string>
     <string name="send_crash_log_descr">Contient uniquement les information concernant les plantages</string>
     <string name="report_an_issues">Signaler un problème</string>
-    <string name="help_article_navigation_setup_markers_navigation_name">Naviguer par marqueurs</string>
-    <string name="help_article_plan_route_coordinate_input_name">Saisie de coordonnées</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Guidage par marques</string>
+    <string name="help_article_plan_route_coordinate_input_name">Saisir des coordonnées</string>
     <string name="help_article_plan_route_web_name">Planificateur d\'itinéraire en ligne</string>
     <string name="help_article_purchases_ios_name">Achats iOS</string>
     <string name="help_article_troubleshooting_maps_data_name">Cartes &amp; données</string>
