@@ -1870,7 +1870,7 @@
     <string name="shared_string_status">Status</string>
     <string name="add_time_span">Dodaj przedział czasowy</string>
     <string name="road_blocked">Droga zablokowana</string>
-    <string name="switch_start_finish">Zamień punkt początkowy i cel trasy</string>
+    <string name="switch_start_finish">Zamień punkt początkowy z celem trasy</string>
     <string name="rendering_attr_hideIcons_name">Ikony użytecznych miejsc</string>
     <string name="rec_split">Dzielenie nagrań</string>
     <string name="rec_split_title">Dzielenie rejestrowanych nagrań</string>
@@ -5729,7 +5729,7 @@
     <string name="obd_fuel_type_diesel">Diesel</string>
     <string name="obd_fuel_type_cng">CNG</string>
     <string name="obd_fuel_type_propane">Propan</string>
-    <string name="obd_air_intake_temp">Temperatura wlotu</string>
+    <string name="obd_air_intake_temp">Temperatura nawiewu wewnętrznego</string>
     <string name="obd_fuel_consumption_rate_l_h">Wskaźnik zużycia paliwa (L/h)</string>
     <string name="obd_fuel_level_percent">Poziom paliwa (%)</string>
     <string name="raster_layers_action_descr">Zmień warstwy rastrowe</string>
@@ -5790,7 +5790,7 @@
     <string name="ais_cpa_settings_description">Wartości te określają sposób prezentacji obiektów AIS, które mogą znajdować się zbyt blisko własnej pozycji.</string>
     <string name="popular_places_nearby">Popularne miejsca w pobliżu</string>
     <string name="recently_visited">Ostatnio odwiedzone</string>
-    <string name="shared_string_road_exit">Wyjdź</string>
+    <string name="shared_string_road_exit">Wyjedź</string>
     <string name="hmd_promo">Promocja HMD na %1$s miesięcy</string>
     <string name="show_image_previews">Pokaż podgląd obrazu</string>
     <string name="choose_location">Wybierz lokalizację</string>
@@ -5920,7 +5920,7 @@
     <string name="release_4_9">• Dodano przeglądarkę obrazów w trybie pełnoekranowym dla zdjęć z Wikimedia\n\n• Wprowadzono nową wtyczkę „Vehicle Metrics” do monitorowania parametrów pojazdu za pomocą protokołu OBD-II\n\n• Dodano możliwość przypisywania aktywności do śladów i filtrowania ich według aktywności\n\n• Wprowadzono nowe szybkie akcje do rejestrowania podróży i blokowania ekranu dotykowego\n\n• Dodano możliwość dostosowania wyglądu przycisków mapy oraz dokładną siatkę\n\n• Dodano menu kontekstowe i akcję „Zresetuj średnią prędkość” dla widżetów\n\n• Dodano nową warstwę trasy: „Szlaki dla motocykli terenowych”\n\n• Naprawiono automatyczne nagrywanie śladu podczas nawigacji\n\n• Naprawiono problem z odwróconymi współrzędnymi w trybie RTL (od prawej do lewej)\n\n• Naprawiono pominięte dane z czujników podczas nagrywania bieżącego śladu\n\n• Dodano informacje o okolicznych terenach dla wybranego punktu\n\n• Dodano szybką akcję do kontrolowania widoczności edycji OSM\n\n• Rozdzielono parametry widoczności dla opcji koloryzacji terenu\n\n• Dodano ikonę z możliwością kliknięcia w celu wyświetlenia informacji o dostępie lub innych cechach drogi lub ścieżki</string>
     <string name="obd_fuel_type_hybrid_gasoline">Silnik hybrydowy zasilany benzyną</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Przycisk do zapisania aktualnie rejestrowanej trasy jako pliku GPX i kontynuowania nagrywania nowego śladu bez przerwy.</string>
-    <string name="quick_action_switch_compass_desc">Przełącznik do zmiany orientacji mapy</string>
+    <string name="quick_action_switch_compass_desc">Przełącznik do zmiany orientacji mapy.</string>
     <string name="app_mode_suv">SUV</string>
     <string name="add_widget_above">Dodaj widżet powyżej</string>
     <string name="hmd_promo_years">Promocja HMD na %1$s lat</string>
@@ -5951,5 +5951,29 @@
     <string name="rpm_unit">obroty/s</string>
     <string name="obd_rpm_desc">Wyświetla tachometr obrotów/s pojazdu nad sensorem OBD</string>
     <string name="obd_fuel_level_desc">Wyświetla poziom paliwa pojazdu nad sensorem OBD</string>
-    <string name="obd_fuel_left_distance_desc">Wyświetla szacowany dystans, przez który pojazd może przejechać na pozostałym paliwie, nad sensorem OBD.</string>
+    <string name="obd_fuel_left_distance_desc">Wyświetla szacowany dystans, przez który pojazd może przejechać na pozostałym paliwie, nad sensorem OBD</string>
+    <string name="obd_fuel_type_desc">Wyświetla typ paliwa pojazdu nad sensorem OBD</string>
+    <string name="obd_ambient_air_temp">Temperatura powietrza</string>
+    <string name="obd_battery_voltage">Moc baterii w woltach</string>
+    <string name="obd_fuel_level">Efektywność paliwowa (%)</string>
+    <string name="obd_fuel_consumption_rate">Częstotliwość konsumpcji paliwa</string>
+    <string name="obd_fuel_left_liters">Pozostałe paliwo (litry)</string>
+    <string name="obd_fuel_type">Typ paliwa</string>
+    <string name="obd_support">Wsparcie OBD</string>
+    <string name="background_opacity">Przezroczystość tła</string>
+    <string name="corner_radius">Zaokrąglenie krawędzi</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="quick_action_search_view_desc">Przełącznik do otwierania lub zamykania widoku szukania.</string>
+    <string name="quick_action_navigation_view_desc">Przełącznik do otwierania lub zamykania widoku nawigacji.</string>
+    <string name="quick_action_navigation_view_title">Widok nawigacji</string>
+    <string name="detailed_track_guidance">Szczegółowy przewodnik po trasie</string>
+    <string name="quick_action_routes_summary">Przełącznik do pokazania lub ukrycia %1$s na mapie.</string>
+    <string name="hugerock_promo">Promocja Hugerock na %1$s miesiące</string>
+    <string name="hugerock_promo_description">Darmowy dostęp do funkcji w tym nielimitowane pobieranie map, widok 3D itp. przez %1$s miesięcy</string>
+    <string name="driving_region_india">Indie</string>
+    <string name="auto_25_chars_route_kl">Trzymaj się lewej strony</string>
+    <string name="auto_25_chars_route_kr">Trzymaj się prawej strony</string>
+    <string name="auto_25_chars_route_tr">Skręć w prawo</string>
+    <string name="auto_25_chars_route_tshr">Skręć ostro w prawo</string>
+    <string name="auto_25_chars_route_tslr">Skręc lekko w prawo</string>
 </resources>
