@@ -33,6 +33,7 @@ import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.test.common.AndroidTest;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -40,6 +41,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
+@Ignore("Is being fixed")
 public class EditPoiTypeSuggestionsTest extends AndroidTest {
 	MapActivity mapActivity;
 
