@@ -3683,7 +3683,7 @@
     <string name="add_segment_to_the_track">Dodaj do pliku trasy</string>
     <string name="shared_string_gpx_files">Trasy</string>
     <string name="layer_gpx_layer">Trasy</string>
-    <string name="monitoring_control_start">REC</string>
+    <string name="monitoring_control_start">Nagraj</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie trasy do pliku GPX</string>
     <string name="shared_string_gpx_route">Śledź trasę</string>
     <string name="empty_state_my_tracks">Dodaj pliki trasy</string>
@@ -5975,5 +5975,14 @@
     <string name="auto_25_chars_route_kr">Trzymaj się prawej strony</string>
     <string name="auto_25_chars_route_tr">Skręć w prawo</string>
     <string name="auto_25_chars_route_tshr">Skręć ostro w prawo</string>
-    <string name="auto_25_chars_route_tslr">Skręc lekko w prawo</string>
+    <string name="auto_25_chars_route_tslr">Skręć lekko w prawo</string>
+    <string name="auto_25_chars_route_tl">Skręć w lewo</string>
+    <string name="auto_25_chars_route_tshl">Skręć ostro w lewo</string>
+    <string name="auto_25_chars_route_tsll">Skręć lekko w lewo</string>
+    <string name="auto_25_chars_route_tu">Zawróć</string>
+    <string name="resting_position">Pozycja spoczynkowa</string>
+    <string name="navigation_position">Pozycja nawigacyjna</string>
+    <string name="resting_navigation_position">Pozycja spoczynkowa i nawigacyjna</string>
+    <string name="view_angle_description">Wyświetla obszar ukształtowany w stożek w którym jesteś skierowany</string>
+    <string name="view_angle">Kąt widzenia</string>
 </resources>
