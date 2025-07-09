@@ -4,6 +4,8 @@ import static android.content.Context.LOCATION_SERVICE;
 import static android.location.LocationManager.GPS_PROVIDER;
 import static android.location.LocationManager.NETWORK_PROVIDER;
 
+import static net.osmand.plus.simulation.SimulationProvider.isTunnelLocationSimulated;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -564,8 +566,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private void scheduleCheckIfGpsLost(net.osmand.Location location) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (location != null && routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
-				&& simulatePosition == null) {
+		if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0 && simulatePosition == null) {
 			long fixTime = location.getTime();
 			app.runInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, () -> {
 				net.osmand.Location lastKnown = getLastKnownLocation();
@@ -590,23 +591,18 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(UPCOMING_TUNNEL_DISTANCE);
 				if (tunnel != null) {
 					simulatePosition = new SimulationProvider(location, tunnel);
-					simulatePosition.startSimulation();
-					simulatePositionImpl();
+					scheduleSimulatedPositionRun();
 				}
 			}, START_LOCATION_SIMULATION_DELAY);
 		}
 	}
 
-	public void simulatePosition() {
-		app.runInUIThreadAndCancelPrevious(RUN_SIMULATE_LOCATION_MSG_ID, this::simulatePositionImpl, 600);
-	}
-
-	private void simulatePositionImpl() {
+	private void scheduleSimulatedPositionRun() {
 		if (simulatePosition != null) {
 			net.osmand.Location loc = simulatePosition.getSimulatedLocationForTunnel();
 			if (loc != null) {
 				setLocation(loc);
-				simulatePosition();
+				app.runInUIThreadAndCancelPrevious(RUN_SIMULATE_LOCATION_MSG_ID, this::scheduleSimulatedPositionRun, 600);
 			} else {
 				simulatePosition = null;
 			}
@@ -645,13 +641,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			return;
 		}
 		prevLocation = location;
-		if (location != null) {
+		if (location != null && isPointAccurateForRouting(location) &&
+				!isTunnelLocationSimulated(location)) {
 			lastTimeLocationFixed = System.currentTimeMillis();
+			simulatePosition = null;
 			notifyGpsLocationRecovered();
+			scheduleCheckIfGpsLost(location);
 		}
-		// notify about lost location
-		scheduleCheckIfGpsLost(location);
-
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		app.getSavingTrackHelper().updateLocation(location, heading);
 		app.getAverageSpeedComputer().updateLocation(location);
@@ -681,14 +677,17 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location == null) {
 			gpsInfo.reset();
 		}
-		if (location != null) {
+		enhanceLocation(location);
+
+		if (location != null && isPointAccurateForRouting(location) &&
+				!isTunnelLocationSimulated(location)) {
 			// use because there is a bug on some devices with location.getTime()
 			lastTimeLocationFixed = System.currentTimeMillis();
 			simulatePosition = null;
 			notifyGpsLocationRecovered();
+			scheduleCheckIfGpsLost(location);
 		}
-		enhanceLocation(location);
-		scheduleCheckIfGpsLost(location);
+
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		// 1. Logging services
 		if (location != null) {
