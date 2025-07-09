@@ -673,7 +673,7 @@
     <string name="poi_religion_hindu">Hinduismo</string>
     <string name="poi_religion_shinto">Ŝintoismo</string>
     <string name="poi_religion_unitarian_universalist">Unitaria Universalismo</string>
-    <string name="poi_religion_multifaith">Multreligia</string>
+    <string name="poi_religion_multifaith">plurreligia</string>
     <string name="poi_religion_jain">Ĝajnismo</string>
     <string name="poi_religion_spiritualist">Spiritualismo</string>
     <string name="poi_religion_bahai">Bahaismo</string>
@@ -712,7 +712,7 @@
     <string name="poi_denomination_quaker">Kvakerismo</string>
     <string name="poi_denomination_bulgarian_orthodox">Bulgara Ortodoksa Eklezio</string>
     <string name="poi_denomination_assemblies_of_god">Asembleoj de Dio</string>
-    <string name="poi_denomination_nondenominational">Senkonfesia</string>
+    <string name="poi_denomination_nondenominational">senkonfesia</string>
     <string name="poi_denomination_adventist">Adventismo</string>
     <string name="poi_denomination_nazarene">Eklezio de Nazaretano</string>
     <string name="poi_denomination_united_methodist">Unuiĝinta Metodisma Eklezio</string>
@@ -735,7 +735,7 @@
     <string name="poi_denomination_coptic_orthodox">Kopta Ortodoksa Eklezio</string>
     <string name="poi_denomination_wesleyan">Veslejanismo (Metodismo)</string>
     <string name="poi_denomination_shaktism">Ŝaktiismo</string>
-    <string name="poi_denomination_shingon_shu">Shingon-shū</string>
+    <string name="poi_denomination_shingon_shu">Ŝingono</string>
     <string name="poi_denomination_maronite">Maronita Eklezio</string>
     <string name="poi_denomination_mahayana">Mahajano</string>
     <string name="poi_internet_access_terminal">Interret-aliro: terminalo</string>
@@ -1940,8 +1940,8 @@
     <string name="poi_shower_indoor">Duŝejo: endome</string>
     <string name="poi_caravans_yes">jes;kampadveturiloj;loĝaŭtoj;loghautoj;domaŭtoj</string>
     <string name="poi_caravans_no">Kampad‑veturiloj: malpermesataj</string>
-    <string name="poi_impromptu_yes">Jes</string>
-    <string name="poi_impromptu_no">Ne</string>
+    <string name="poi_impromptu_yes">jes</string>
+    <string name="poi_impromptu_no">ne</string>
     <string name="poi_sanitary_dump_station_yes">Stacio de forigo de fekaĵoj: jes</string>
     <string name="poi_sanitary_dump_station_no">Stacio de forigo de fekaĵoj: ne</string>
     <string name="poi_power_supply_yes">jes;energifonto;kurento;elektro</string>
@@ -2737,7 +2737,7 @@
     <string name="poi_fuel_avia_type">Brulaĵ-tipo (aviada)</string>
     <string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>
     <string name="poi_internet_access_type">Interret-aliro</string>
-    <string name="poi_vending_type">Vendado de</string>
+    <string name="poi_vending_type">Vendo de</string>
     <string name="poi_bicycle_service">Bicikla servo</string>
     <string name="poi_clothes_type">Vestaĵoj</string>
     <string name="poi_shoes_type">Ŝuoj</string>
@@ -2776,7 +2776,7 @@
     <string name="poi_information_contents">Informoj pri</string>
     <string name="poi_clock_option">Aliaj informoj</string>
     <string name="poi_scout_camp">Skolta kampadejo</string>
-    <string name="poi_backcountry">Sovaĝa</string>
+    <string name="poi_backcountry">Sovaĝa kampadejo</string>
     <string name="poi_resort_type">Speco de turisma centro</string>
     <string name="poi_piste_difficulty">Skivoja facilo</string>
     <string name="poi_piste_grooming">Skivoja preparado</string>
@@ -4815,7 +4815,7 @@
     <string name="poi_us_maps_recreation_area_accessibility_info">Informoj pri aliro</string>
     <string name="poi_nfs_yes">Administrata de Usona Arbara Agentejo (USFS)</string>
     <string name="poi_blm_yes">Administrata de Usona Ofico de Tera Administrado (US BLM)</string>
-    <string name="poi_impromptu">Neformala</string>
+    <string name="poi_impromptu">Kampadejo kun minimumaj oportunaĵoj</string>
     <string name="poi_reservation">Rezervado</string>
     <string name="poi_live_music">Koncerta muziko</string>
     <string name="poi_us_maps_recreation_area_activity_poi">interesejo</string>
@@ -5072,7 +5072,7 @@
     <string name="poi_route_point_category">Kategorio de vojaĝa punkto</string>
     <string name="poi_denomination_ukrainian_greek_catholic">Ukraina Grekkatolika Eklezio</string>
     <string name="poi_denomination_ukrainian_orthodox">Ukraina Ortodoksa Eklezio</string>
-    <string name="poi_denomination_neo_pentecostal">Noc-karisma Movado (Nov-pentekosta)</string>
+    <string name="poi_denomination_neo_pentecostal">Novkarisma Movado (Novpentekosta)</string>
     <string name="poi_denomination_evangelical_lutheran">Evangelia Luterana Eklezio en Usono</string>
     <string name="poi_denomination_anabaptist">Anabaptismo</string>
     <string name="poi_denomination_thai_mahanikaya">Taja «Mahā Nikāya»</string>
