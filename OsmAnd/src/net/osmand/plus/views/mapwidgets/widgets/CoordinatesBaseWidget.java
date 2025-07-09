@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
@@ -172,15 +173,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 	private void showOlcCoordinates(double lat, double lon) {
 		setupForNonStandardFormat();
-
-		String olcCoordinates;
-		try {
-			olcCoordinates = PointDescription.getLocationOlcName(lat, lon);
-		} catch (RuntimeException e) {
-			log.error("Failed to define OLC location", e);
-			olcCoordinates = "0, 0";
-		}
-		setFirstCoordinateText(olcCoordinates);
+		setFirstCoordinateText(OsmAndFormatter.getOpenLocationCode(lat, lon));
 	}
 
 	private void showSwissGrid(double lat, double lon, boolean swissGridPlus) {

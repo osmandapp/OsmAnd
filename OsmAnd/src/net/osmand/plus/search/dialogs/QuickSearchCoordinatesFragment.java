@@ -628,8 +628,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				}
 			} else if (CURRENT_FORMAT == PointDescription.OLC_FORMAT) {
 				if (latLon != null) {
-					String olc = OpenLocationCode.encode(latLon.getLatitude(), latLon.getLongitude());
-					olcEdit.setText(olc);
+					String code = OsmAndFormatter.getOpenLocationCode(latLon.getLatitude(), latLon.getLongitude());
+					olcEdit.setText(code);
 				} else if (prevFormat == PointDescription.UTM_FORMAT) {
 					olcEdit.setText(zoneEdit.getText());
 				} else if (prevFormat == PointDescription.MGRS_FORMAT) {
