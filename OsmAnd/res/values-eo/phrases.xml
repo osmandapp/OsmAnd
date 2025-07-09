@@ -2737,7 +2737,7 @@
     <string name="poi_fuel_avia_type">Brulaĵ-tipo (aviada)</string>
     <string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>
     <string name="poi_internet_access_type">Interret-aliro</string>
-    <string name="poi_vending_type">Vendo de</string>
+    <string name="poi_vending_type">Vendado de</string>
     <string name="poi_bicycle_service">Bicikla servo</string>
     <string name="poi_clothes_type">Vestaĵoj</string>
     <string name="poi_shoes_type">Ŝuoj</string>
@@ -3065,9 +3065,9 @@
     <string name="poi_stands">Spektoteraso</string>
     <string name="poi_motorcycle_services">Servo</string>
     <string name="poi_motorcycle_type">Speco de motorciklo</string>
-    <string name="poi_motorcycle_sales_yes">vendo</string>
-    <string name="poi_motorcycle_sales_no">vendo: ne</string>
-    <string name="poi_motorcycle_sales_yes_used">vendo, brokanto</string>
+    <string name="poi_motorcycle_sales_yes">vendado</string>
+    <string name="poi_motorcycle_sales_no">vendado: ne</string>
+    <string name="poi_motorcycle_sales_yes_used">vendado, brokanto</string>
     <string name="poi_motorcycle_sales_used">brokanto</string>
     <string name="poi_motorcycle_rental_yes">luo</string>
     <string name="poi_motorcycle_rental_no">Luo: ne</string>
@@ -3694,8 +3694,8 @@
     <string name="poi_charge">Pago</string>
     <string name="poi_pet_grooming">Hejmbesta beligejo</string>
     <string name="poi_atm_yes">Bankaŭtomato: jes</string>
-    <string name="poi_cash_withdrawal_bank_card">Elpago de mono</string>
-    <string name="poi_cash_withdrawal_yes">Elpago de mono: jes</string>
+    <string name="poi_cash_withdrawal_bank_card">Mon-elpago</string>
+    <string name="poi_cash_withdrawal_yes">jes</string>
     <string name="poi_cash_withdrawal">Elpago de mono</string>
     <string name="poi_cash_withdrawal_operator">Peristo de mon‑elpago</string>
     <string name="poi_cash_withdrawal_type_checkout">Speco de mon‑elpago: per homo</string>
@@ -4200,12 +4200,12 @@
     <string name="poi_faculty_psychology">psiĥologio</string>
     <string name="poi_tool_hire">Pruntejo de iloj</string>
     <string name="poi_escape_game">Ĉambro de enigmoj</string>
-    <string name="poi_computer_sales">Vendo de komputiloj</string>
+    <string name="poi_computer_sales">Vendado de komputiloj</string>
     <string name="poi_computer_repair">Riparo de komputiloj</string>
     <string name="poi_computer_sales_yes">jes;komputiloj;komputoroj;tekkomputiloj;PC</string>
     <string name="poi_computer_sales_used">uzitaj;komputiloj;komputoroj;tekkomputiloj;PC</string>
     <string name="poi_computer_repair_yes">jes;komputiloj;komputoroj;tekkomputiloj;riparo</string>
-    <string name="poi_computer_sales_no">Vendo de komputiloj: ne</string>
+    <string name="poi_computer_sales_no">Vendado de komputiloj: ne</string>
     <string name="poi_diet_vegan_limited">Senbestaĵa dieto: parta</string>
     <string name="poi_computer_parts">Komputilaj partoj</string>
     <string name="poi_computer_repair_no">Riparo de komputiloj: ne</string>
