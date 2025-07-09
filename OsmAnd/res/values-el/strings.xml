@@ -5064,6 +5064,9 @@
     <string name="mtb_segment_classification">Ταξινόμηση τμήματος</string>
     <string name="checking_progress">Έλεγχος…</string>
     <string name="co2_mission">Εκπομπή CO2</string>
-    <string name="map_updates_are_unavailable_yet">Δεν υπάρχουν ακόμη διαθέσιμες ενημερώσεις χάρτη. :-(</string>
+    <string name="map_updates_are_unavailable_yet">Δεν υπάρχουν ακόμη διαθέσιμες ενημερώσεις χαρτών. :-(</string>
     <string name="benefits_for_contributors">Οφέλη για ενεργούς συνεισφέροντες OSM</string>
+    <string name="map_updates_for_mappers">Ενημερώσεις χαρτών για χαρτογράφους</string>
+    <string name="compass_visible_if_map_rotated">Ορατή αν ο χάρτης έχει περιστραφεί</string>
+    <string name="track_has_no_needed_data">Λείπουν τα αντίστοιχα δεδομένα από το ίχνος.</string>
 </resources>
