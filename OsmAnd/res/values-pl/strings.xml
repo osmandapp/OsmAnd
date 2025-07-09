@@ -1071,7 +1071,7 @@
     <string name="route_descr_destination">Cel</string>
     <string name="base_world_map">Mapa podstawowa</string>
     <string name="map_magnifier">Przybliżenie</string>
-    <string name="auto_zoom_none">Brak automatycznego przybliżania</string>
+    <string name="auto_zoom_none">Wyłącz automatyczne zbliżanie mapy</string>
     <string name="auto_zoom_close">Zbliżenie</string>
     <string name="auto_zoom_far">Widok pośredni</string>
     <string name="auto_zoom_farthest">Widok szeroki</string>
@@ -5519,7 +5519,7 @@
     <string name="round_up">Zaokrąglij w górę</string>
     <string name="apply_only_to_new">Stosuj tylko do nowych</string>
     <string name="shared_string_unchanged">Niezmienione</string>
-    <string name="map_text">Napisy na mapie</string>
+    <string name="map_text">Renderowanie mapy</string>
     <string name="allow_display_on_top_description">Zezwalaj na wyświetlanie tekstów map jeden na drugim</string>
     <string name="routing_attr_avoid_cobblestone_description">Unikaj kocich łbów</string>
     <string name="change_terrain_color_scheme">Zmień schemat kolorów terenu</string>
@@ -5590,7 +5590,7 @@
     <string name="upload_local_versions">Prześlij wersje lokalne</string>
     <string name="download_cloud_versions">Pobieranie wersji chmurowych</string>
     <string name="weather_source_GFS_description">Globalny system prognoz z Krajowych Centrów Prognoz Środowiskowych</string>
-    <string name="missing_maps_ignore_details">Pobrane mapy zasłaniają twoją trasę? Nawiguj z nimi jeżeli okolica jest Tobie znana.</string>
+    <string name="missing_maps_ignore_details">Pobrane mapy zasłaniają Twoją trasę? Nawiguj z nimi jeżeli okolica jest Tobie znana.</string>
     <string name="use_nearby_roads_summary">Korzysta z mapy offline, aby znaleźć pobliskie drogi i dane wysokościowe. Może dostosować geometrię toru.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd może pobierać dane o wysokości z pobliskich dróg lub map terenu.</string>
     <string name="relief_3d_download_description">Do wyświetlania terenu na mapie wymagane są dodatkowe mapy.</string>
@@ -6027,4 +6027,8 @@
     <string name="navigation_position_icon">Pozycja ikony nawigacji</string>
     <string name="resting_position_icon_summary">Ikona wyświetla się, gdy nie poruszasz się.</string>
     <string name="resting_position_icon">Pozycja ikony spoczynku</string>
+    <string name="show_rasterization_debug_tile">Wyświetl informacje o rasteryzacji kafelków</string>
+    <string name="show_debug_tile_description">Wyświetl informacje o symbolach na każdym kafelku</string>
+    <string name="show_grids">Wyświetl siatkę na mapie</string>
+    <string name="show_grids_description">Zezwól na wyświetlanie siatki za</string>
 </resources>
