@@ -17,6 +17,7 @@ import net.osmand.plus.R
 import net.osmand.plus.views.Zoom
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
+import kotlin.math.max
 import kotlin.math.min
 
 abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext),
@@ -50,7 +51,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		} catch (e: HostException) {
 			contentLimit = DEFAULT_CONTENT_LIMIT
 		}
-		contentLimit = min(2, contentLimit)
+		contentLimit = max(2, contentLimit)
 	}
 
 	final override fun onGetTemplate(): Template {
