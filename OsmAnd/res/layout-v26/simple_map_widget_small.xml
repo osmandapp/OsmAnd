@@ -32,7 +32,7 @@
 			android:lines="1"
 			android:maxLines="1"
 			android:textColor="@color/text_color_primary_light"
-			app:textViewClass="net.osmand.plus.widgets.AutoScaleTextView"
+			app:textViewType="autoScale"
 			app:autoScale_maxTextSize="@dimen/simple_widget_value_small_size"
 			app:autoScale_minTextSize="@dimen/simple_widget_value_minimum_size"
 			tools:text="155" />
