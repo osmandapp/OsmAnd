@@ -5119,5 +5119,23 @@
     <string name="poi_denomination_philippine_independent">菲律賓獨立教會</string>
     <string name="poi_denomination_exclusive_brethren">閉關弟兄會</string>
     <string name="poi_denomination_church_of_god_in_christ">基督在神教會</string>
-    <string name="poi_denomination_czechoslovak_hussite">捷克斯洛伐克胡斯</string>
+    <string name="poi_denomination_czechoslovak_hussite">捷克斯洛伐克胡斯派</string>
+    <string name="poi_denomination_la_luz_del_mundo">世界之光教會</string>
+    <string name="poi_denomination_christadelphian">基督弟兄會</string>
+    <string name="poi_denomination_eritrean_orthodox">厄利垂亞正教</string>
+    <string name="poi_denomination_antiochian_orthodox">安提阿正教</string>
+    <string name="poi_denomination_mariavite">瑪利亞維特派</string>
+    <string name="poi_denomination_mission_covenant_church_of_sweden">瑞典宣教聖約教會</string>
+    <string name="poi_denomination_gelug">格魯派</string>
+    <string name="poi_denomination_vajrayana">密宗</string>
+    <string name="poi_denomination_slavic">斯拉夫</string>
+    <string name="poi_denomination_celtic">凱爾特</string>
+    <string name="poi_denomination_marthoma">瑪爾托馬</string>
+    <string name="poi_denomination_free_methodist">自由循道會</string>
+    <string name="poi_denomination_churches_of_christ">基督的教會</string>
+    <string name="poi_denomination_kardecista">卡甸主義者</string>
+    <string name="poi_denomination_free_church_of_scotland">蘇格蘭自由教會</string>
+    <string name="poi_denomination_catholic_apostolic">天主教使徒教會</string>
+    <string name="poi_denomination_sephardi">塞法迪</string>
+    <string name="poi_denomination_welsh_independent">威爾斯獨立教會</string>
 </resources>
