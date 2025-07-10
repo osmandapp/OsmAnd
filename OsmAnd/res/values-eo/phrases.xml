@@ -3713,7 +3713,7 @@
     <string name="poi_cash_withdrawal_girocard">Girocard (ec-Karte)</string>
     <string name="poi_cash_withdrawal_postbank">Postbank</string>
     <string name="poi_bath_type">Speco de banejo</string>
-    <string name="poi_bath_open_air">Sub libera areo</string>
+    <string name="poi_bath_open_air">Sub libera aero</string>
     <string name="poi_bath_type_hot_spring">tervarma akvofonto</string>
     <string name="poi_bath_type_onsen">onsen (japana varma akvofonto)</string>
     <string name="poi_bath_type_hammam">hammam (turka varmbanejo)</string>
@@ -4849,7 +4849,7 @@
     <string name="poi_engineer">Oficejo de inĝeniero</string>
     <string name="poi_mcdonalds">McDonald\'s</string>
     <string name="poi_cash_in_yes">jes</string>
-    <string name="poi_cash_in">Enpagoj</string>
+    <string name="poi_cash_in">Mon-enpagoj</string>
     <string name="poi_cash_in_no">ne</string>
     <string name="poi_cash_in_customers">nur klientoj</string>
     <string name="poi_diet_pescetarian_no">Senvianda (escepte fiŝoj) dieto: ne</string>
