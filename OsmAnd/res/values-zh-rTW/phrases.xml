@@ -5070,4 +5070,15 @@
     <string name="poi_visa">簽證協助</string>
     <string name="poi_airline">航空公司辦公室</string>
     <string name="poi_route_point_category">旅行分類</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">烏克蘭希臘天主教</string>
+    <string name="poi_denomination_ukrainian_orthodox">烏克蘭東正教</string>
+    <string name="poi_denomination_neo_pentecostal">新五旬節派</string>
+    <string name="poi_denomination_evangelical_lutheran">福音路德會</string>
+    <string name="poi_denomination_anabaptist">再洗禮派</string>
+    <string name="poi_denomination_thai_mahanikaya">泰國大宗派</string>
+    <string name="poi_denomination_thai_thammayut">泰國法宗派</string>
+    <string name="poi_denomination_african_methodist_episcopal">非洲衛理公會</string>
+    <string name="poi_denomination_soto">日本曹洞宗</string>
+    <string name="poi_denomination_macedonian_orthodox">馬其頓東正教</string>
+    <string name="poi_denomination_southern_baptist">南方浸信會</string>
 </resources>
