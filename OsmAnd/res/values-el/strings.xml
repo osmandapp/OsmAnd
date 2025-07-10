@@ -5087,4 +5087,8 @@
     <string name="avg_sensor_speed">Αισθητήρας ταχύτητας, μέση</string>
     <string name="max_sensor_heartrate">Καρδιακός παλμός, μέγιστος</string>
     <string name="avg_sensor_heartrate">Καρδιακός παλμός, μέσος</string>
+    <string name="max_sensor_bycicle_power">Ισχύς ποδηλάτου, μέγιστη</string>
+    <string name="avg_sensor_bycicle_power">Ισχύς ποδηλάτου, μέση</string>
+    <string name="max_sensor_temperature">Θερμοκρασία, μέγιστη</string>
+    <string name="avg_sensor_temperature">Θερμοκρασία, μέση</string>
 </resources>
