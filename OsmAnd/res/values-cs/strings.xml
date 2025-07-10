@@ -5783,4 +5783,5 @@
     <string name="deleting">Mazání…</string>
     <string name="show_rasterization_debug_tile">Zobrazit informace o rasterizaci dlaždic</string>
     <string name="show_symbols_bboxes">Zobrazit bboxy znaků</string>
+    <string name="release_5_2">• V přípravě…</string>
 </resources>
