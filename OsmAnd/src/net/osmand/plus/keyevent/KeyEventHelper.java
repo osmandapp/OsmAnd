@@ -126,7 +126,7 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 
 	@Nullable
 	private QuickAction findAction(int keyCode) {
-		if (mapActivity == null || isLetterKeyCode(keyCode) && !mapActivity.isMapVisible()) {
+		if (mapActivity == null || isLetterForbid(keyCode)) {
 			// Reject using of letter keycodes when the focus isn't on the Activity
 			return null;
 		}
@@ -140,6 +140,12 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 		InputDeviceProfile device = deviceHelper.getFunctionalityDevice(appMode);
 		return device != null ? device.findAction(keyCode) : null;
 	}
+
+	private boolean isLetterForbid(int keyCode){
+		boolean letterAllowedScreens = mapActivity.isMapVisible() || mapActivity.getMapRouteInfoMenu().isVisible();
+		return isLetterKeyCode(keyCode) && !letterAllowedScreens;
+	}
+
 
 	private void bindCommand(int keyCode, @NonNull String commandId) {
 		QuickAction action = CommandToActionConverter.createQuickAction(commandId);
