@@ -5677,4 +5677,5 @@
     <string name="deleting_history">Suppression de l’historique…</string>
     <string name="show_rasterization_debug_tile">Afficher les informations de rasterisation des tuiles</string>
     <string name="show_symbols_bboxes">Afficher les boîtes englobantes des symboles</string>
+    <string name="release_5_2">• En cours ...</string>
 </resources>
