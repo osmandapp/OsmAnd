@@ -912,7 +912,7 @@ public class OsmandAidlApi {
 				if (actionNumber != -1 && mapActivity != null) {
 					List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 					if (actionNumber < actionsList.size()) {
-						MapButtonsHelper.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
+						MapButtonsHelper.produceAction(actionsList.get(actionNumber)).onActionSelected(mapActivity, null);
 					}
 				}
 			}

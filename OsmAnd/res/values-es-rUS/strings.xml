@@ -2479,7 +2479,7 @@
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Nombre de punto opcional</string>
     <string name="rendering_attr_whiteWaterSports_name">Deportes acuáticos</string>
-    <string name="clear_all_intermediates">Limpiar todos los puntos intermedios</string>
+    <string name="clear_all_intermediates">Limpiar todos los destinos intermedios</string>
     <string name="group_deleted">Grupo borrado</string>
     <string name="select_waypoints_category_description">Agregar todos los puntos de referencia de la traza o elegir categorías separadas.</string>
     <string name="shared_string_total">Total</string>
@@ -2626,9 +2626,9 @@
     <string name="quick_action_switch_night_mode">Modo nocturno</string>
     <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
     <string name="add_destination_point">Definir destino</string>
-    <string name="add_intermediate_point">Agregar punto intermedio</string>
+    <string name="add_intermediate_point">Agregar destino intermedio</string>
     <string name="add_start_point">Definir punto de partida</string>
-    <string name="intermediate_waypoint">Punto intermedio</string>
+    <string name="intermediate_waypoint">Destino intermedio</string>
     <string name="transfers">Transbordos</string>
     <string name="on_foot">A pie</string>
     <string name="route_way">Trayecto</string>
@@ -2717,7 +2717,7 @@
     <string name="rendering_attr_undefined_name">Indefinido</string>
     <string name="public_transport_warning_descr_blog">Lee más sobre el cálculo de las rutas de OsmAnd en nuestro blog.</string>
     <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de pruebas beta, se esperan errores e imprecisiones.</string>
-    <string name="add_intermediate">Agregar punto intermedio</string>
+    <string name="add_intermediate">Agregar destino intermedio</string>
     <string name="shared_string_walk">Caminar</string>
     <string name="save_poi_value_exceed_length">Acorta la longitud de la etiqueta «%s» a menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
@@ -4033,8 +4033,8 @@
     <string name="transparent_status_bar">Barra de estado transparente</string>
     <string name="is_disabled">%1$s desactivado</string>
     <string name="clear_all_history_warning">¿Borrar todos los registros del historial de la aplicación, incluyendo el historial de búsqueda, navegación y marcadores\?</string>
-    <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial\?</string>
-    <string name="delete_history_items">¿Borrar %1$s elementos del historial\?</string>
+    <string name="delete_history_items_descr">Las entradas marcadas se borrarán de la lista.</string>
+    <string name="delete_history_items">¿Borrar %1$s elemento(s) del historial?</string>
     <string name="quick_action_toggle_preference">Un botón que cambia las preferencias.</string>
     <string name="display_route_tracks_as_poi">Mostrar trazas como PDI</string>
     <string name="safe_settings">Modo seguro</string>
@@ -5616,7 +5616,7 @@
     <string name="ais_cpa_settings_description">Estos valores definen la presentación de los objetos AIS que pueden acercarse demasiado respecto a tu propia ubicación.</string>
     <string name="ais_cpa_warning_time">Tiempo de aviso para alcanzar el Punto de Aproximación más Cercano (CPA)</string>
     <string name="plugin_ais_tracker_name">Localizador de buques AIS</string>
-    <string name="no_places_available">Sin lugar disponible</string>
+    <string name="no_places_available">Sin lugares en la región visible</string>
     <string name="no_photo_for_location_desc">Aún no se agregaron fotos de usuarios a esta ubicación</string>
     <string name="map_widget_route_information">Información sobre la ruta</string>
     <string name="map_widget_route_information_desc">Muestra la hora estimada de llegada, el tiempo de viaje restante y la distancia para la ruta de navegación actual.</string>
@@ -5690,7 +5690,7 @@
     <string name="sensor_data">Datos del sensor</string>
     <string name="set_work">Definir trabajo</string>
     <string name="set_home">Definir casa</string>
-    <string name="set_intermediate_point">Definir punto intermedio</string>
+    <string name="set_intermediate_point">Definir destino intermedio</string>
     <string name="set_start_point">Definir punto de inicio</string>
     <string name="osm_live_payment_renews_3_years">Renovar cada 3 años</string>
     <string name="years_3">3 años</string>
@@ -5715,4 +5715,6 @@
     <string name="read_on">Leer en %1$s</string>
     <string name="deleting">Borrando…</string>
     <string name="deleting_history">Borrando historial…</string>
+    <string name="show_symbols_bboxes">Mostrar cuadros delimitadores de los símbolos</string>
+    <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
 </resources>

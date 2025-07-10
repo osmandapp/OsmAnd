@@ -3,6 +3,7 @@ package net.osmand.plus.auto.screens
 import android.os.AsyncTask
 import android.text.SpannableString
 import android.text.Spanned
+import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.Action
@@ -44,14 +45,10 @@ class HistoryScreen(
 	private lateinit var searchItems: ArrayList<QuickSearchListItem>
 	val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
 
-	init {
-		lifecycle.addObserver(object : DefaultLifecycleObserver {
-			override fun onCreate(owner: LifecycleOwner) {
-				super.onCreate(owner)
-				updateItemsTask = UpdateHistoryItemsTask()
-				updateItemsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-			}
-		})
+	override fun onFirstGetTemplate() {
+		super.onFirstGetTemplate()
+		updateItemsTask = UpdateHistoryItemsTask()
+		updateItemsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
 	}
 
 	private inner class UpdateHistoryItemsTask : AsyncTask<Unit, Unit, Unit>() {
@@ -65,7 +62,7 @@ class HistoryScreen(
 	}
 
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val templateBuilder = ListTemplate.Builder()
         val app = app
 	    val isLoading = updateItemsTask.status != AsyncTask.Status.FINISHED

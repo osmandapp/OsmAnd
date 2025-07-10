@@ -434,7 +434,7 @@
     <string name="map_overlay">Överläggskarta</string>
     <string name="map_overlay_descr">Välj överläggskarta</string>
     <string name="tile_source_already_installed">Kartan är redan installerad, \'Inställningar\' kommer att uppdateras.</string>
-    <string name="select_tile_source_to_install">Välj källor för rasterkartor:</string>
+    <string name="select_tile_source_to_install">Välj källor för kartrutor:</string>
     <string name="internet_not_available">Åtgärden kan inte utföras utan uppkoppling mot Internet.</string>
     <string name="install_more">Lägg till fler …</string>
     <string name="level_to_switch_vector_raster_descr">Använd rasterkartor för allt över denna zoomnivå.</string>
@@ -566,7 +566,7 @@
     <string name="phone">Telefon</string>
     <string name="download_type_to_filter">Skriv för att filtrera</string>
     <string name="use_high_res_maps">Skärm med hög upplösning</string>
-    <string name="use_high_res_maps_descr">Sträck inte ut (och blurra) rasterkartor på högupplösta skärmar.</string>
+    <string name="use_high_res_maps_descr">Sträck inte ut (och blurra) kartrutor på högupplösta skärmar.</string>
     <string name="context_menu_item_search_transport">Sök kollektivtrafik</string>
     <string name="transport_searching_transport">Transportresultat (ingen destination):</string>
     <string name="transport_searching_route">Transportresultat ({0} till destinationen):</string>
@@ -575,7 +575,7 @@
     <string name="no_vector_map_loaded">Vektorkartorna lästes inte in</string>
     <string name="gpx_files_not_found">Hittar inga GPX-filer i spårmappen</string>
     <string name="error_reading_gpx">Kunde inte läsa GPX-data.</string>
-    <string name="vector_data">Offline vektorkartor</string>
+    <string name="vector_data">Offline-vektorkartor</string>
     <string name="transport_context_menu">Sök efter transport vid hållplats</string>
     <string name="poi_context_menu_modify">Ändra Intressepunkt</string>
     <string name="poi_context_menu_delete">Ta bort POI</string>
@@ -849,7 +849,7 @@
     <string name="save_track_interval_descr">Ange loggningsintervallet för spårinspelning under navigering</string>
     <string name="save_track_to_gpx">Spela in spår automatiskt under navigering</string>
     <string name="update_tile">Uppdatera</string>
-    <string name="reload_tile">Läs om kartbit</string>
+    <string name="reload_tile">Ladda in kartbit på nytt</string>
     <string name="mark_point">Mål</string>
     <string name="use_english_names_descr">Välj mellan lokala och engelska namn på kartorna.</string>
     <string name="use_english_names">Använd engelska namn på kartorna</string>
@@ -995,7 +995,7 @@
     <string name="local_index_tile_data_maxzoom">Max-zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Min-zoom: %1$s</string>
     <string name="local_index_tile_data_name">Kartbitsdata: %1$s</string>
-    <string name="edit_tilesource_successfully">Rasterkartskällan %1$s sparades</string>
+    <string name="edit_tilesource_successfully">Kartrutekällan %1$s sparades</string>
     <string name="edit_tilesource_elliptic_tile">Elliptisk Mercator-projektion</string>
     <string name="edit_tilesource_maxzoom">Maximal zoom</string>
     <string name="edit_tilesource_expiration_time">Utgångstid (minuter)</string>
@@ -1301,7 +1301,7 @@
     <string name="everything_up_to_date">Alla filer är uppdaterade</string>
     <string name="use_opengl_render">Använd OpenGL-rendering</string>
     <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (kan förbruka mer batteri och fungerar kanske inte på väldigt gamla enheter).</string>
-    <string name="no_internet_connection">Kan inte hämta, kontrollera din internetsanslutning.</string>
+    <string name="no_internet_connection">Ingen Internetanslutning</string>
     <string name="rendering_attr_roadStyle_name">Vägtyp</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Brandgul</string>
@@ -1977,7 +1977,7 @@
     <string name="shared_string_change">Ändra</string>
     <string name="get_started">Kom igång</string>
     <string name="replace_favorite_confirmation">Ersätt favoriten \"%1$s\"\?</string>
-    <string name="clear_tile_data">Rensa alla rutor</string>
+    <string name="clear_tile_data">Rensa alla kartrutor</string>
     <string name="search_hint">Ange stad, adress och POI-namn</string>
     <string name="donation_to_osm">Donation till OSM-communityn</string>
     <string name="get_it">Skaffa det</string>
@@ -2333,7 +2333,7 @@
     <string name="empty_state_av_notes_desc">Lägg till ljud-, video- eller foto-notering för varje punkt på kartan med hjälp av widgeten eller menyn.</string>
     <string name="add_track_to_markers_descr">Välj ett spår för att lägga till dess vägpunkter bland markörerna.</string>
     <string name="add_favourites_group_to_markers_descr">Välj en favoritkategori att lägga till i markörerna.</string>
-    <string name="shared_string_gpx_waypoints">Spåra waypoints</string>
+    <string name="shared_string_gpx_waypoints">Spåra vägpunkter</string>
     <string name="favourites_group">Kategorin Favoriter</string>
     <string name="add_group">Lägg till en grupp</string>
     <string name="add_group_descr">Importera grupper från favoriter eller GPX-punkter.</string>
@@ -2362,8 +2362,8 @@
     <string name="marker_show_distance_descr">Välj hur avstånd och riktning till kartmarkörer ska anges på kartan:</string>
     <string name="show_direction">Avståndsindikering</string>
     <string name="measurement_tool_snap_to_road_descr">Charlott ansluter punkter med vägar för den valda profilen.</string>
-    <string name="mapillary_menu_descr_tile_cache">Uppdatera rutor för att se aktuell data.</string>
-    <string name="mapillary_menu_title_tile_cache">Tile-cache</string>
+    <string name="mapillary_menu_descr_tile_cache">Ladda in kartrutor på nytt för att se uppdaterad data.</string>
+    <string name="mapillary_menu_title_tile_cache">Cache för kartrutor</string>
     <string name="mapillary_menu_filter_description">Filtrera bilder efter avsändare, efter datum eller typ. Endast aktiv i närbildszoom.</string>
     <string name="map_widget_ruler_control">Radielinjal</string>
     <string name="improve_coverage_install_mapillary_desc">Installera Mapillary för att lägga till bilder till denna plats på kartan.</string>
@@ -2614,7 +2614,7 @@
     <string name="shared_string_do">Gör</string>
     <string name="shared_string_only_with_wifi">Endast på Wi-Fi</string>
     <string name="wikivoyage_download_pics">Ladda ner bilder</string>
-    <string name="wikivoyage_download_pics_descr">Bilder från artiklar kan laddas ner för användning frånkopplad. \nDu kan alltid ändra inställningen i tforska → lternativ</string>
+    <string name="wikivoyage_download_pics_descr">Artikelbilder kan laddas ner för frånkopplad användning. \nKan alltid ändras under \'Utforska\' → \'Alternativ\'.</string>
     <string name="shared_string_wifi_only">Endast på Wi-Fi</string>
     <string name="select_travel_book">Välj en resebok</string>
     <string name="shared_string_travel_book">Resebok</string>
@@ -2765,9 +2765,9 @@
     <string name="shared_string_width">Bredd</string>
     <string name="shared_string_height">Höjd</string>
     <string name="add_destination_point">Lägg till destination</string>
-    <string name="add_intermediate_point">Lägg till mellanstopp</string>
+    <string name="add_intermediate_point">Lägg till mellanliggande destination</string>
     <string name="add_start_point">Ställ in startpunkt</string>
-    <string name="intermediate_waypoint">Mellanliggande punkt</string>
+    <string name="intermediate_waypoint">Mellanliggande destination</string>
     <string name="transfers">övergångar</string>
     <string name="on_foot">till fots</string>
     <string name="route_way">Väg</string>
@@ -3311,7 +3311,7 @@
     <string name="on_hold">Pausad</string>
     <string name="shared_string_night_map">Nattkarta</string>
     <string name="add_online_source">Lägg till onlinekälla</string>
-    <string name="clear_tiles_warning">Om du tillämpar dessa ändringar raderas cachade data för denna raster-kartkälla</string>
+    <string name="clear_tiles_warning">Utförandet av dessa ändringar kommer att radera den cachade datan för denna kartrutekälla</string>
     <string name="vessel_height_warning_link">Ställ in fartygets höjd</string>
     <string name="vessel_height_warning">Ställ in fartygets höjd för att undvika låga broar. Om bron är rörlig kommer dess höjd i öppet tillstånd att användas.</string>
     <string name="vessel_height_limit_description">Ställ in fartygets höjd för att undvika låga broar. Tänk på att om bron är rörlig kommer vi att använda dess höjd i öppet tillstånd.</string>
@@ -3473,7 +3473,7 @@
     <string name="rendering_attr_surface_grass_name">Gräs</string>
     <string name="rendering_attr_surface_sand_name">Sand</string>
     <string name="transfers_size">%1$d byten</string>
-    <string name="add_intermediate">Lägg till mellanliggande punkt</string>
+    <string name="add_intermediate">Lägg till mellanliggande destination</string>
     <string name="public_transport_warning_title">Kollektivtrafiksnavigering är för närvarande på betastadiet, var beredd på felaktigheter.</string>
     <string name="avoid_pt_types">Undvik transporttyper…</string>
     <string name="avoid_pt_types_descr">Välj typer av kollektivtrafik som ska undvikas vid navigaton:</string>
@@ -3863,7 +3863,7 @@
     <string name="save_track_to_gpx_descrp">Starta spårinspelning automatiskt vid navigering och spara spåret automatiskt efteråt.</string>
     <string name="shared_string_revert">Återställ</string>
     <string name="shared_preference">Delad</string>
-    <string name="shared_string_tiles">Rasterkartor</string>
+    <string name="shared_string_tiles">Kartrutor</string>
     <string name="connect_track_points_as">Sammanlänka ruttpunkter</string>
     <string name="rendering_attr_piste_type_downhill_name">Utförsåkning</string>
     <string name="sett_parrot_ext_input">Parrot</string>
@@ -4061,7 +4061,7 @@
     <string name="mtb_scale">MTB svårighetsgrad</string>
     <string name="set_up_backup">Ställ in säkerhetskopiering</string>
     <string name="choose_what_to_sync">Välj vad som ska synkroniseras</string>
-    <string name="cloud_sync_progress">Synkar…%1$s</string>
+    <string name="cloud_sync_progress">Synkar… %1$s</string>
     <string name="checking_progress">Kontrollerar…</string>
     <string name="shared_string_modified">Ändrad</string>
     <string name="res_unknown">Okänd</string>
@@ -4110,7 +4110,7 @@
     <string name="switch_mode_by_tapping_on_widget">Växla läge genom att trycka på widgeten.</string>
     <string name="map_widget_sunrise_desc">Visar klockslag för eller återstående tid till kommande soluppgång.</string>
     <string name="turn_on_nautical_depth_description">Slå på för att visa information om vattendjup på kartan.</string>
-    <string name="weather_online_cache">Online cache</string>
+    <string name="weather_online_cache">Online-cache</string>
     <string name="map_settings_weather_temp">Temperatur</string>
     <string name="map_settings_weather_air_pressure">Lufttryck</string>
     <string name="explore_weather_forecast">Utforska väderprognos.</string>
@@ -4138,7 +4138,7 @@
     <string name="map_widget_camera_tilt">Kamerans lutning</string>
     <string name="developer_widgets">Widgetar för utvecklare</string>
     <string name="coordinates_widget_current_location_desc">Visar koordinaterna för aktuell position</string>
-    <string name="download_tiles">Ladda ner karttiles</string>
+    <string name="download_tiles">Ladda ner kartrutor</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="rendering_attr_showMtbScale_name">Visa MTB-svårighetsgrad</string>
@@ -4407,8 +4407,8 @@
     <string name="y_axis">Y-axel</string>
     <string name="stop_download">Avbryt nedladdning</string>
     <string name="send_log">Skicka loggfil</string>
-    <string name="number_of_tiles">Antal raster-tiles</string>
-    <string name="stop_download_desc">Nedladdningen är inte klar. Om du avbryter nu, kommer bara delar av rasterkartan vara tillgänglig för visning.</string>
+    <string name="number_of_tiles">Antal kartrutor</string>
+    <string name="stop_download_desc">Nedladdningen är inte klar. Om du avbryter nu kommer inte alla kartrutor vara tillgängliga för visning.</string>
     <string name="stop_and_exit">Stoppa och avsluta</string>
     <string name="shared_string_shape">Figur</string>
     <string name="location_source">Platskälla</string>
@@ -4450,7 +4450,7 @@
     <string name="generate_hillshade_from_3d_maps">Generera terrängskuggningsraster från 3D-kartor</string>
     <string name="weather_offline_forecast">Offline väderprognos</string>
     <string name="common_weight_limit_error">Minsta värde är \"%1$s\" %2$s. Använd profilen \"%3$s\" om fordonets vikt är lägre än minimivärdet.</string>
-    <string name="clear_online_cache_description">Detta kommer rensa cacheminnet för online väderleksraster.</string>
+    <string name="clear_online_cache_description">Detta kommer rensa cacheminnet för online-väderleksrutor.</string>
     <string name="offline_weather_forecast">Väderprognos offline</string>
     <string name="map_marker_average_speed_desc">Ange tidsintervallet för medelhastigheten (används för beräknad ankomsttid).</string>
     <string name="marker_2nd">Andra markören</string>
@@ -4458,7 +4458,7 @@
     <string name="rendering_attr_showWaterwayTunnels_name">Ökad synlighet för tunnlar för vattendrag</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Ökad synlighet för tunnlar för vattendrag</string>
     <string name="app_mode_climbing">Klättring</string>
-    <string name="weather_download_error">Kunde inte ladda ned %1$s rastertiles.</string>
+    <string name="weather_download_error">Kunde inte ladda ned %1$s rutor.</string>
     <string name="select_layer">Välj lager</string>
     <string name="release_4_4">• Förbättrad \"Spår\"-meny i \"Konfigurera karta\"
 \n
@@ -4707,7 +4707,7 @@
     <string name="data_storage_space_description">%1$s GB ledigt (av %2$s GB)</string>
     <string name="listed_exist">Angivna %1$s, finns redan i OsmAnd.</string>
     <string name="replace_all_desc">Nuvarande objekt kommer att ersättas med objekt från filen</string>
-    <string name="live_monitoring">Online spårning</string>
+    <string name="live_monitoring">Online-spårning</string>
     <string name="rendering_attr_highway_class_track_grade4_name">Grad 4</string>
     <string name="shared_string_app_default_w_val">App-standard (%s)</string>
     <string name="shared_string_routing">Navigering</string>
@@ -4933,7 +4933,7 @@
     <string name="osmand_cloud_deletion_secondary_devices_warning">Sekundära enheter kommer att loggas ut från OsmAnd Cloud och förlorar tillgång till betalda funktioner.</string>
     <string name="import_as_one_track">Importera som ett spår</string>
     <string name="compass_visible_if_map_rotated_desc">Dold när norr är uppåt</string>
-    <string name="one_image_per_tile">En bildfil per raster-ruta</string>
+    <string name="one_image_per_tile">En bildfil per kartruta</string>
     <string name="map_3d_mode_action">3D-läge</string>
     <string name="routing_attr_hazmat_category_description">Kategori av farligt gods / Ta hänsyn till åtkomstbegränsningar för farligt gods</string>
     <string name="routing_attr_carriage_restrictions_description">Ta hänsyn till åtkomstbegränsningar för vagn som dras av häst</string>
@@ -5191,7 +5191,7 @@
 \n
 \nDet kan ta lite tid.</string>
     <string name="additional_actions_descr">Öppna dessa åtgärder genom att klicka på \"%1$s\"-knappen.</string>
-    <string name="tiles_storage_descr">Välj hur nedladdade raster-rutor ska lagras.</string>
+    <string name="tiles_storage_descr">Välj hur nedladdade kartrutor ska lagras.</string>
     <string name="divider_descr">Objekt nedanför denna punkt åtskiljs med en avgränsare.</string>
     <string name="context_menu_actions">Åtgärder i kontextmenyn</string>
     <string name="expire_time">Förfallotid</string>
@@ -5213,11 +5213,7 @@
     <string name="import_duplicates_title">Några objekt finns redan</string>
     <string name="terrain_slider_description">Ange minsta och maximala zoomnivån där lagrets ska visas.</string>
     <string name="turn_screen_on_wake_time_descr">Ange hur länge skärmen är på efter väckning. (\"%1$s\" innebär ingen tidsgräns.)</string>
-    <string name="expire_time_descr">Förfallotid i minuter. Cachelagrade raster-rutor läses om efter angiven tid. Lämna tomt för att aldrig läsa om rutor för den här källan.
-\n
-\nEn dag är 1440 minuter.
-\nEn vecka är 10 080 minuter.
-\nEn månad är ca 43 800 minuter.</string>
+    <string name="expire_time_descr">Cachelagrade kartrutor kommer att laddas ner på nytt det angivna antal minuter. Lämna detta fält tomt för att aldrig uppdatera kartrutor för den här källan. \n \nEn dag är 1440 minuter. \nEn vecka är 10 080 minuter. \nEn månad är 43 829 minuter.</string>
     <string name="not_support_file_type_with_ext">Välj en fil som stöds med filändelsen %1$s istället.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Exportera eller importera snabbåtgärder med app-profilerna.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
@@ -5395,7 +5391,7 @@
 \n
 \nKanske någon karta saknas, du kan köra en kontroll online efter nödvändiga kartor.</string>
     <string name="previous_row_has_complex_widget">Föregående rad har komplex widget</string>
-    <string name="delete_history_items_descr">Radera valda historikobjekt?</string>
+    <string name="delete_history_items_descr">Valda poster tas bort från listan.</string>
     <string name="setting_supported_by_style">Inställningen tillhandahålls av kartstilen \'%1$s\'</string>
     <string name="use_routing_fallback">Offline-alternativ för ruttberäkning</string>
     <string name="location_access_request_title">OsmAnd behöver Platsåtkomst för navigering.</string>
@@ -5731,7 +5727,7 @@
     <string name="obd_searching_text">Söker efter skannrar</string>
     <string name="obd_engine_runtime_desc">Visar hur länge motorn varit igång sedan den startades.</string>
     <string name="obd_fuel_pressure_desc">Visar trycket i bränslesystemet</string>
-    <string name="obd_bluetooth_off_description">Slå på Bluetooth och anslut skannrar.</string>
+    <string name="obd_bluetooth_off_description">Slå på Bluetooth för att hitta och ansluta skannrar.</string>
     <string name="connect_obd_instructions_step3">Aktivera Bluetooth på din enhet</string>
     <string name="obd_fuel_left_liters">Återstående bränsle (liter)</string>
     <string name="obd_engine_oil_temperature">Motoroljetemperatur</string>
@@ -5814,4 +5810,130 @@
     <string name="set_work">Ställ in arbetsplats</string>
     <string name="ais_nmea_protocol">Protokoll för mottagande av NMEA-data</string>
     <string name="show_dms_grids">Använd DMS istället för grader</string>
+    <string name="calculate_size">Beräkna storlek</string>
+    <string name="shared_string_avg_altitude">Medelaltitud</string>
+    <string name="map_grid">Kartrutnät</string>
+    <string name="row_height">Radhöjd</string>
+    <string name="shared_string_offline_only">Endast offline</string>
+    <string name="shared_string_online_only">Endast online</string>
+    <string name="ais_port_nmea_server_description">Definiera TCP-portnumret för NMEA-datakällan</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="popular_places">Populära platser</string>
+    <string name="shared_string_avg_speed">Minsta hastighet</string>
+    <string name="shared_string_default_view">Standardvy</string>
+    <string name="show_grids">Visa kartrutnät</string>
+    <string name="shared_string_length">Längd</string>
+    <string name="map_widget_route_information">Ruttinformation</string>
+    <string name="shared_string_no_animation">Ingen animation</string>
+    <string name="position_animation_empty_banner_description">Positionsikonen flyttar sig till varje ny mottagen plats utan animation.</string>
+    <string name="shared_string_road_exit">Avfart</string>
+    <string name="no_photo_for_location_desc">Inga användarfoton har lagts till på denna plats ännu</string>
+    <string name="ais_port_nmea_server">TCP-port för NMEA-datakällan</string>
+    <string name="show_dms_grids_description">Visa rutnät i grader, minuter, sekunder, istället för grader</string>
+    <string name="popular_places_nearby">Populära platser i närheten</string>
+    <string name="recently_visited">Nyligen besökta</string>
+    <string name="ais_address_nmea_server">IP-adress för NMEA-datakällan</string>
+    <string name="ais_address_nmea_server_description">Definiera IP-adressen för NMEA-datakällan (om TCP används)</string>
+    <string name="no_places_available">Inga platser tillgängliga</string>
+    <string name="calculating_indication_message">Beräknar…</string>
+    <string name="rendering_avg_info">Renderingsstatistik (medel 1 / 5 / 15 minuter)</string>
+    <string name="intermediate_first">Mellanliggande först</string>
+    <string name="destination_first">Destination först</string>
+    <string name="corner_radius">Hörnradie</string>
+    <string name="prime_meridian">Nollmeridian</string>
+    <string name="meridian_180">180°-meridianen</string>
+    <string name="choose_location_on_map">Välj en plats på kartan.</string>
+    <string name="wiki_around">Närliggande populära platser</string>
+    <string name="suggest_activate_map_msg">Karta %1$s är inaktiverad,\naktivera för att visa detta område.</string>
+    <string name="route_part_of">Del av</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="prediction_time">Prediktionstid</string>
+    <string name="prediction_time_advanced_description">Anpassa prediktionstiden för att minimera fördröjning.</string>
+    <string name="show_image_previews">Visa förhandsgranskning av bild</string>
+    <string name="choose_location">Välj en plats</string>
+    <string name="ais_object_lost_timeouts">Timeout-inställningar för AIS-signalmottagning</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Klätterrutter</string>
+    <string name="set_intermediate_point">Ställ in mellanliggande destination</string>
+    <string name="set_start_point">Ställ in startpunkt</string>
+    <string name="ais_port_nmea_local_description">Definiera den UDP-port genom vilken OsmAnd tar emot NMEA-data</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Visa klätterrutter</string>
+    <string name="ais_port_nmea_local">UDP-port för lokal NMEA-datamottagare</string>
+    <string name="backup_error_failed_to_transfer_file">Misslyckades med att överföra molnfil(er).</string>
+    <string name="cant_load_map_styles">Kan inte ladda kartstilar.</string>
+    <string name="shared_string_switch">Byt</string>
+    <string name="ski_route_switch_style_description">Utforska skidbackar, -liftar, med mera, med kartstilen Vinter och skidor.</string>
+    <string name="set_parking_position">Ställ in parkeringsposition</string>
+    <string name="set_home">Ställ in hem</string>
+    <string name="read_on">Läs på %1$s</string>
+    <string name="travel_guides">Guider</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">GPX-vägpunkter (%1$d) kopierade till favoriter.</string>
+    <string name="msg_favorites_skipped_as_existing">Favoritpunkter (%1$d) hoppades över, eftersom de redan fanns.</string>
+    <string name="add_to_navigation">Lägg till i Navigering</string>
+    <string name="shared_string_edges">Kanter</string>
+    <string name="labels_position">Etiketters position</string>
+    <string name="routing_attr_allow_ferries_description">Tillåt färjerutter vid ruttplanering</string>
+    <string name="route_members">Medlemmar</string>
+    <string name="multipoligon_related">Besläktat</string>
+    <string name="prediction_time_description">Positionsikonen i OsmAnd animeras i takt med varje mottagen GPS-datapunkt (en gång per sekund). En liten fördröjning i dess rörelse kan märkas, särskilt när användaren rör sig snabbt eller GPS-signalen fluktuerar.</string>
+    <string name="position_animation">Positionsanimering</string>
+    <string name="poi_source">POI-källa</string>
+    <string name="add_widget">Lägg till widget</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Åtgärd för att kontrollera Koordinat-rutnätets synlighet på kartan.</string>
+    <string name="layer_coordinates_grid">Koordinatrutnät</string>
+    <string name="shared_string_manual">Manuell</string>
+    <string name="shared_string_map_center">Kartans mitt</string>
+    <string name="original_color_description">Varje punkt behåller sin egen färg.</string>
+    <string name="original_icon_description">Varje punkt behåller sin egen ikon.</string>
+    <string name="original_shape_description">Varje punkt behåller sin egen form.</string>
+    <string name="hmd_promo_description">Gratis tillgång till funktioner som obegränsade kartnedladdningar, 3D-reliefer o.s.v. i %1$s månader</string>
+    <string name="hmd_promo_description_years">Gratis tillgång till funktioner som obegränsade kartnedladdningar, 3D-reliefer o.s.v. i %1$s år</string>
+    <string name="ais_object_lost_timeouts_description">Ställ in timeout-värde för att identifiera AIS-objekt som försvunna om ingen signal mottagits under en specifik tid.</string>
+    <string name="ais_object_lost_timeout">Timeout för synlighet när objekt försvunnit</string>
+    <string name="ais_object_lost_timeout_description">Ställ in Timeout för AIS-objekts synlighet: Om ingen signal mottagits under denna tid kommer AIS-objektet att tas bort från skärmen.</string>
+    <string name="ais_ship_lost_timeout">Timeout för fartygs synlighet när ingen signal mottagits</string>
+    <string name="ais_ship_lost_timeout_description">Ställ in timeout för fartygs synlighet: Om ingen signal mottagits under denna tid kommer fartygssymbolen att ändra tillstånd på skärmen: Den kommer att kryssas över.</string>
+    <string name="ais_cpa_settings">CPA-relaterade inställningar</string>
+    <string name="ais_cpa_settings_description">Dessa värden definierar hur AIS-objekt, som kan komma för nära den egna positionen, presenteras.</string>
+    <string name="plugin_ais_tracker_name">AIS-fartygsspårning</string>
+    <string name="plugin_ais_tracker_description">Visa AIS-positioner och information om fartyg i omgivningen. AIS-datan mottas via nätverk från en extern AIS-mottagare.</string>
+    <string name="map_widget_route_information_desc">Visar den beräknade ankomsttiden, återstående restiden och avståndet för nuvarande navigeringsrutt.</string>
+    <string name="display_distance_to_first_intermediate">Visa ruttdetaljer för nästa stopp</string>
+    <string name="display_distance_to_first_intermediate_summary">Visar tid och avstånd för nästa stopp först. Stäng av för att alltid visa detaljer för destinationen.</string>
+    <string name="default_buttons_size_original_description">Varje knapp behåller sin egen storlek.</string>
+    <string name="plugin_ais_tracker_disclaimer">ANSVARSFRISKRIVELSE\n\nDenna insticksmodul är ett hobbyprojekt och inte designad för att vara pålitlig eller korrekt. Förlita dig INTE på denna mjukvara på något sätt, såsom för navigering och/eller livssäkerhet.</string>
+    <string name="default_buttons_corners_original_description">Varje knapp behåller sin egen hörnradie.</string>
+    <string name="default_buttons_opacity_original_description">Varje knapp behåller sin egen bakgrundsgenomskinlighet.</string>
+    <string name="selected_delayed_profile">Vald profil \"%s\"</string>
+    <string name="location_interpolation_percent">Platsinterpolation i procent</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spåra viktiga fordonsdata, genom användning av OBD-II-protokollet. Övervaka nyckeltal som hastighet, motorvarvtal, bränsleförbrukning, med mera.</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
+    <string name="obd_throttle_position">Gaspedalens läge</string>
+    <string name="obd_calculated_engine_load_desc">Visar hur många procent av motorns tillgängliga effekt som används vid en given tidpunkt.</string>
+    <string name="fuel_tank_capacity_description">Ange tankstorlek, för att tillförlitligt spåra bränslenivåer och -förbrukning</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="route_guidance_desc">Ger ruttvägledning i realtid, inklusive avstånd till nästa sväng, vägnamn, aktuellt gatunamn och körfältsinformation. Widgetar är aktiva under navigering.</string>
+    <string name="background_opacity">Bakgrundens genomskinlighet</string>
+    <string name="quick_action_previous_screen_title">Föregående skärmbild</string>
+    <string name="quick_action_switch_compass_desc">En knapp för att ändra kartorientering.</string>
+    <string name="y_axis_description">Välj upp till två valmöjligheter för Y-axeln.</string>
+    <string name="delete_widget_description">Denna wiget kommer att tas bort. Du kan återställa den senare i Konfigurera skärmen.</string>
+    <string name="delete_widget">Ta bort widget?</string>
+    <string name="add_widget_below">Lägg till widget nedanför</string>
+    <string name="add_widget_above">Lägg till widget ovanför</string>
+    <string name="add_widget_to_the_right">Lägg till widget till höger</string>
+    <string name="add_widget_to_the_left">Lägg till widget till vänster</string>
+    <string name="shared_string_key">Tangent</string>
+    <string name="resting_position">Viloposition</string>
+    <string name="navigation_position">Navigeringsposition</string>
+    <string name="resting_navigation_position">Vilo- och navigeringsposition</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Rekommendation: Det är svårt att förutsäga vad som kommer respektive inte kommer att spelas in, så det är kanske bäst att slå av detta filter.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Biverkan: Ett resultat av att filtrera med avseende på noggrannhet kan vara att punkter helt saknas, t.ex. för under broar, under träd, mellan höga byggnader eller under vissa väderförhållanden.</string>
+    <string name="monitoring_min_accuracy_descr">Detta kommer göra att bara punkter uppmätta som indikeras ha en viss minsta noggrannhet (i meter/fot, enligt vad som rapporteras av Android för ditt chipset) spelas in. Noggrannhet är mätningars närhet till den faktiska positionen, och är inte direkt relaterat till precision, vilken är spridningen av upprepade mätningar.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Anmärkning: Om GPS:en varit avslagen omedelbart innan inspelning, så kan den först uppmätta punkten ha en försämrad noggrannhet,så i vår kod skulle vi kanske vilja vänta en sekund eller så innan vi spelar in en punkt (eller spela in den bästa av 3 på varandra följande punkter, o.s.v.), men detta är inte implementerat ännu.</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="graph_axis">Grafaxel</string>
+    <string name="hugerock_promo">Hugerock-kampanj i %1$s månader</string>
+    <string name="rendering_avg_info_details">FPS för senaste 1000 bilderna: %1$s\nCPU (kartrutor): %2$s\nCPU (inaktiv tid): %3$s\nCPU (väntar på GPU): %4$s</string>
+    <string name="show_debug_tile_description">Visa information om kartsymboler på varje kartruta</string>
+    <string name="shared_string_not_checked">Inte kontrollerad</string>
 </resources>

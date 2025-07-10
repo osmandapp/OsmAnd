@@ -1976,7 +1976,7 @@
     <string name="copying_completed">복사됨</string>
     <string name="icon_group_education">교육</string>
     <string name="icon_group_industrial">공업</string>
-    <string name="delete_history_items_descr">선택한 기록 항목을 삭제하시겠습니까\?</string>
+    <string name="delete_history_items_descr">선택한 기록 항목을 삭제하시겠습니까?</string>
     <string name="quick_action_toggle_preference">기본 설정을 변경하도록 전환합니다.</string>
     <string name="display_route_tracks">트랙 표시</string>
     <string name="display_route_tracks_as_poi">트랙을 POI로 표시</string>
@@ -2277,7 +2277,7 @@
     <string name="search_title">검색: %1$s</string>
     <string name="progress_complete">%1$s 완성</string>
     <string name="is_disabled">%1$s 비활성화됨</string>
-    <string name="delete_history_items">삭제 %1$s 기록 항목\?</string>
+    <string name="delete_history_items">삭제 %1$s 기록 항목?</string>
     <string name="routing_attr_prefer_horse_routes_description">승마 경로 선호</string>
     <string name="sample_wikivoyage">위키보이지 예제</string>
     <string name="travel_route_types">경로 유형</string>

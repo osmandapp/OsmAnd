@@ -81,6 +81,7 @@ public abstract class InAppPurchaseHelper {
 	protected InAppPurchases purchases;
 	protected long lastValidationCheckTime;
 	protected boolean inventoryRequested;
+	protected boolean externalPurchasesRequested;
 	protected Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 	protected Map<String, InAppStateHolder> inAppStateMap = new HashMap<>();
 
@@ -130,6 +131,8 @@ public abstract class InAppPurchaseHelper {
 
 	public static class SubscriptionStateHolder {
 		public String sku;
+		public String name;
+		public String icon;
 		public SubscriptionState state = SubscriptionState.UNDEFINED;
 		public long startTime;
 		public long expireTime;
@@ -140,6 +143,8 @@ public abstract class InAppPurchaseHelper {
 
 	public static class InAppStateHolder {
 		public String sku;
+		public String name;
+		public String icon;
 		public PurchaseOrigin origin;
 		public String platform;
 		public long purchaseTime;
@@ -160,7 +165,7 @@ public abstract class InAppPurchaseHelper {
 		InAppCommandResultHandler resultHandler;
 
 		// return true if done and false if async task started
-		abstract void run(InAppPurchaseHelper helper);
+		abstract void run(@NonNull InAppPurchaseHelper helper);
 
 		protected boolean userRequested() {
 			return false;
@@ -222,6 +227,16 @@ public abstract class InAppPurchaseHelper {
 	public InAppSubscription getAnyPurchasedOsmAndProSubscription() {
 		return purchases.getAnyPurchasedOsmAndProSubscription();
 	}
+
+	public abstract boolean isPurchasedLocalFullVersion();
+
+	public abstract boolean isPurchasedLocalDeepContours();
+
+	public abstract boolean isSubscribedToLocalLiveUpdates();
+
+	public abstract boolean isSubscribedToLocalOsmAndPro();
+
+	public abstract boolean isSubscribedToLocalMaps();
 
 	public InAppPurchaseHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
@@ -590,6 +605,7 @@ public abstract class InAppPurchaseHelper {
 				inventoryRequested = true;
 				inAppStateMap = parseInAppStates(inappsStateJson);
 			}
+			externalPurchasesRequested = subscriptionsStateJson != null && inappsStateJson != null;
 			exec(InAppPurchaseTaskType.REQUEST_INVENTORY, getRequestInventoryCommand(userRequested));
 		}
 	}
@@ -607,10 +623,14 @@ public abstract class InAppPurchaseHelper {
 				}
 				String sku = subObj.getString("sku");
 				String state = subObj.getString("state");
+				String name = subObj.optString("name", null);
+				String icon = subObj.optString("icon", null);
 
 				if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
 					SubscriptionStateHolder stateHolder = new SubscriptionStateHolder();
 					stateHolder.sku = sku;
+					stateHolder.name = name;
+					stateHolder.icon = icon;
 					stateHolder.state = SubscriptionState.getByStateStr(state);
 					stateHolder.startTime = subObj.optLong("start_time");
 					stateHolder.expireTime = subObj.optLong("expire_time");
@@ -646,12 +666,16 @@ public abstract class InAppPurchaseHelper {
 			for (int i = 0; i < subArrJson.length(); i++) {
 				JSONObject subObj = subArrJson.getJSONObject(i);
 				String sku = subObj.getString("sku");
+				String name = subObj.optString("name", null);
+				String icon = subObj.optString("icon", null);
 				String platform = subObj.optString("platform", null);
 				long purchaseTime = subObj.optLong("purchaseTime", 0);
 				long expireTime = subObj.optLong("expireTime", 0);
 				if (!Algorithms.isEmpty(sku)) {
 					InAppStateHolder stateHolder = new InAppStateHolder();
 					stateHolder.sku = sku;
+					stateHolder.name = name;
+					stateHolder.icon = icon;
 					stateHolder.origin = getPurchaseOriginBySku(sku);
 					stateHolder.platform = platform;
 					stateHolder.purchaseTime = purchaseTime;
@@ -668,6 +692,87 @@ public abstract class InAppPurchaseHelper {
 			logError("Inapp state json parsing error", e);
 		}
 		return inappStateMap;
+	}
+
+	protected void applyPurchases() {
+		boolean externalPurchasesHandled = !ctx.getBackupHelper().isRegistered()
+				|| this.externalPurchasesRequested;
+
+		boolean purchasedFullVersion = isPurchasedLocalFullVersion() || isPurchasedExternalFullVersion();
+		boolean depthContoursPurchased = isPurchasedLocalDeepContours();
+		if (purchasedFullVersion) {
+			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+		}
+		if (depthContoursPurchased) {
+			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+		}
+
+		boolean subscribedToLiveUpdates = isSubscribedToLocalLiveUpdates();
+		boolean subscribedToMaps = isSubscribedToLocalMaps() || isSubscribedToExternalMaps();
+		boolean subscribedToOsmAndPro = isSubscribedToLocalOsmAndPro() || isSubscribedToExternalOsmAndPro() || isPurchasedExternalOsmAndPro();
+		if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get() && externalPurchasesHandled) {
+			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
+		} else if (subscribedToLiveUpdates) {
+			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+		}
+		if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get() && externalPurchasesHandled) {
+			ctx.getSettings().OSMAND_PRO_PURCHASED.set(false);
+		} else if (subscribedToOsmAndPro) {
+			ctx.getSettings().OSMAND_PRO_PURCHASED.set(true);
+		}
+		if (!subscribedToMaps && ctx.getSettings().OSMAND_MAPS_PURCHASED.get() && externalPurchasesHandled) {
+			ctx.getSettings().OSMAND_MAPS_PURCHASED.set(false);
+		} else if (subscribedToMaps) {
+			ctx.getSettings().OSMAND_MAPS_PURCHASED.set(true);
+		}
+		if (!subscribedToLiveUpdates && !subscribedToOsmAndPro && !subscribedToMaps && externalPurchasesHandled) {
+			if (!InAppPurchaseUtils.isDepthContoursAvailable(ctx)) {
+				ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
+			}
+		}
+
+		logDebug("User " + (purchasedFullVersion ? "HAS" : "DOES NOT HAVE") + " Full Version purchased.");
+		logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " Live Updates purchased.");
+		logDebug("User " + (subscribedToOsmAndPro ? "HAS" : "DOES NOT HAVE") + " OsmAnd Pro purchased.");
+		logDebug("User " + (subscribedToMaps ? "HAS" : "DOES NOT HAVE") + " Maps purchased.");
+	}
+
+	protected boolean isPurchasedExternalFullVersion() {
+		for (InAppStateHolder holder : inAppStateMap.values()) {
+			if (holder.linkedPurchase != null && holder.linkedPurchase.isFullVersion()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isPurchasedExternalOsmAndPro() {
+		for (InAppStateHolder holder : inAppStateMap.values()) {
+			if (holder.linkedPurchase != null && holder.linkedPurchase.isOsmAndPro()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isSubscribedToExternalOsmAndPro() {
+		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+			if (holder.linkedSubscription != null && holder.linkedSubscription.isOsmAndPro()
+					&& holder.state == SubscriptionState.ACTIVE) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isSubscribedToExternalMaps() {
+		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+			if (holder.linkedSubscription != null && holder.linkedSubscription.isMaps()
+					&& holder.state == SubscriptionState.ACTIVE) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void checkPromoAsync(@Nullable CallbackWithObject<Boolean> listener) {
@@ -945,10 +1050,14 @@ public abstract class InAppPurchaseHelper {
 
 	protected abstract boolean isBillingManagerExists();
 
+	protected abstract boolean isBillingUnavailable();
+
 	protected abstract void destroyBillingManager();
 
 	protected void stop(boolean taskDone) {
 		logDebug("Destroying helper.");
+		InAppPurchaseTaskType task = activeTask;
+		boolean billingUnavailable = isBillingUnavailable();
 		if (isBillingManagerExists()) {
 			if (taskDone) {
 				processingTask = false;
@@ -964,6 +1073,10 @@ public abstract class InAppPurchaseHelper {
 		if (inventoryRequestPending) {
 			inventoryRequestPending = false;
 			requestInventory(false);
+		} else {
+			if (task == InAppPurchaseTaskType.REQUEST_INVENTORY && billingUnavailable) {
+				applyPurchases();
+			}
 		}
 	}
 

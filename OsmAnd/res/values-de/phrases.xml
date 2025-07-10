@@ -5070,4 +5070,21 @@
     <string name="poi_neo_pentecostal_church">Neocharismatische Kirchenbewegung</string>
     <string name="poi_route_point_category">Reisekategorie</string>
     <string name="poi_african_methodist_episcopal_church">Afrikanische Methodistische Bischofskirche</string>
+    <string name="poi_denomination_ukrainian_orthodox">Ukrainisch-orthodox</string>
+    <string name="poi_denomination_evangelical_lutheran">Evangelisch-lutherisch</string>
+    <string name="poi_denomination_macedonian_orthodox">Mazedonisch-orthodox</string>
+    <string name="poi_denomination_church_of_god">Kirche Gottes</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Ukrainisch Griechisch-Katholisch</string>
+    <string name="poi_denomination_neo_pentecostal">Neocharismatisch</string>
+    <string name="poi_denomination_landmark">Wahrzeichen</string>
+    <string name="poi_denomination_anabaptist">Täufer</string>
+    <string name="poi_denomination_thai_mahanikaya">Thailändisches Mahanikaya</string>
+    <string name="poi_denomination_thai_thammayut">Thailändisches Thammayut</string>
+    <string name="poi_denomination_african_methodist_episcopal">African Methodist Episcopal</string>
+    <string name="poi_denomination_soto">Soto</string>
+    <string name="poi_denomination_southern_baptist">Southern Baptist</string>
+    <string name="poi_denomination_jodo_shinshu">Jodo Shinshu</string>
+    <string name="poi_denomination_african_methodist_episcopal_zion">African Methodist Episcopal Zion</string>
+    <string name="poi_denomination_christ_scientist">Christ Scientist</string>
+    <string name="poi_denomination_nichiren">Nichiren</string>
 </resources>

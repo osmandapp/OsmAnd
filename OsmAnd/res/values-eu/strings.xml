@@ -4136,8 +4136,8 @@
     <string name="quick_action_toggle_preference">Hobespenak aldatzeko botoia.</string>
     <string name="waypoint_appearance">Bide-puntuaren itxura</string>
     <string name="track_file_description">Ekintza hau sakatzean eskuragarri dauden arrastoak erakusten dira.</string>
-    <string name="delete_history_items_descr">Hautatutako historiako elementuak ezabatu nahi dituzu\?</string>
-    <string name="delete_history_items">Ezabatu %1$s elementu historiatik\?</string>
+    <string name="delete_history_items_descr">Hautatutako historiako elementuak ezabatu nahi dituzu?</string>
+    <string name="delete_history_items">Ezabatu %1$s elementu historiatik?</string>
     <string name="shared_storage_warning_description">Android arau berriak direla eta, 2021eko azarotik aurrera OsmAnd 4.2-k biltegiratze partekaturako sarbidea galduko du.
 \n
 \nMugitu datu-karpeta Biltegiratze partekatutik biltegiratze erabilgarrira; bestela, aplikazioak zure datuetarako sarbidea galduko du, hala nola lineaz kanpoko mapak, GPX arrastoak, etab.</string>
@@ -5893,4 +5893,28 @@
     <string name="prediction_time_advanced_description">Doitu iragarpen-denbora atzerapena minimizatzeko.</string>
     <string name="prediction_time">Iragarpen-denbora</string>
     <string name="shared_string_no_animation">Animaziorik gabe</string>
+    <string name="deleting_history">Historia ezabatzen…</string>
+    <string name="deleting">Ezabatzen…</string>
+    <string name="osm_live_payment_renews_3_years">Berritu hiru urtero</string>
+    <string name="years_3">Hiru urte</string>
+    <string name="osm_live_payment_3_years_title">Hiru urtero</string>
+    <string name="three_years_subscription">Hiru urteko harpidetza</string>
+    <string name="shared_string_switch">Aldatu</string>
+    <string name="ski_route_switch_style_description">Arakatu eski pistak, igogailuak eta gehiago Negua eta Eskia mapa estiloarekin.</string>
+    <string name="battery">bateria</string>
+    <string name="sensor_data">Sentsoreen datuak</string>
+    <string name="battery_level">Bateriaren maila</string>
+    <string name="shared_string_split_by">Honen arabera zatitu</string>
+    <string name="shared_string_flat">Laua</string>
+    <string name="uphill_downhill_split">Maldan gora / Maldan behera</string>
+    <string name="set_parking_position">Ezarri aparkalekuaren kokapena</string>
+    <string name="set_work">Ezarri lana</string>
+    <string name="set_home">Ezarri etxea</string>
+    <string name="set_intermediate_point">Ezarri tarteko helmuga</string>
+    <string name="set_start_point">Ezarri abiapuntua</string>
+    <string name="position_animation_empty_banner_description">Kokapenaren ikonoa animaziorik gabeko kokapen berrietara mugitzen da.</string>
+    <string name="position_animation">Kokapenaren animazioa</string>
+    <string name="poi_source">Interesgunearen jatorria</string>
+    <string name="intermediate_first">Tarteko lehenengoa</string>
+    <string name="destination_first">Lehenengo helmuga</string>
 </resources>

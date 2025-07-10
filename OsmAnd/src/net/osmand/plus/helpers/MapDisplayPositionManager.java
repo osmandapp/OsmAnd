@@ -12,7 +12,6 @@ import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.ViewportListener;
-import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -100,8 +99,8 @@ public class MapDisplayPositionManager implements ViewportListener {
 		}
 	}
 
-	public void updateMapPositionProviders(@NonNull IMapDisplayPositionProvider provider, boolean shouldRegister) {
-		if (shouldRegister) {
+	public void updateMapPositionProviders(@NonNull IMapDisplayPositionProvider provider, boolean register) {
+		if (register) {
 			registerMapPositionProvider(provider);
 		} else {
 			unregisterMapPositionProvider(provider);

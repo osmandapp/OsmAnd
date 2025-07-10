@@ -1,14 +1,17 @@
 package net.osmand.test.common;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
+
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.wikipedia.WikipediaPlugin;
+
+import java.util.Locale;
 
 import java.util.Set;
 
@@ -24,6 +27,11 @@ public class AppSettings {
 			helper.loadSelectedPoiFilters();
 			helper.addSelectedPoiFilter(filter);
 		}
+	}
+
+	public static void setLocale(@NonNull OsmandApplication app, Locale locale) {
+		Locale.setDefault(locale);
+		app.getLocaleHelper().checkPreferredLocale();
 	}
 
 	public static boolean isShowWikiOnMap(@NonNull OsmandApplication app) {

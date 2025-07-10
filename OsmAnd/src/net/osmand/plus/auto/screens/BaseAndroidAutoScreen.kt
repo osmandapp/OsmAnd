@@ -1,10 +1,12 @@
 package net.osmand.plus.auto.screens
 
 import androidx.car.app.CarContext
+import androidx.car.app.HostException
 import androidx.car.app.Screen
 import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.Action
 import androidx.car.app.model.CarIcon
+import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -15,6 +17,8 @@ import net.osmand.plus.R
 import net.osmand.plus.views.Zoom
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
+import kotlin.math.max
+import kotlin.math.min
 
 abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext),
 	DefaultLifecycleObserver {
@@ -26,6 +30,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	private var prevZoom: Zoom? = null
 	private var prevMapLinkedToLocation = false
 	private var prevStateSaved = false
+	protected var firstTimeGetTemplate = true
 
 	protected val app: OsmandApplication
 		get() {
@@ -35,17 +40,32 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		private set
 	var session = app.carNavigationSession
 
-	init {
-		initContentLimit()
-	}
-
 	private fun initContentLimit() {
 		val manager = carContext.getCarService(
 			ConstraintManager::class.java
 		)
-		contentLimit = DEFAULT_CONTENT_LIMIT.coerceAtMost(
-			manager.getContentLimit(getConstraintLimitType())
-		)
+		try {
+			contentLimit = DEFAULT_CONTENT_LIMIT.coerceAtMost(
+				manager.getContentLimit(getConstraintLimitType())
+			)
+		} catch (e: HostException) {
+			contentLimit = DEFAULT_CONTENT_LIMIT
+		}
+		contentLimit = max(2, contentLimit)
+	}
+
+	final override fun onGetTemplate(): Template {
+		if(firstTimeGetTemplate) {
+			onFirstGetTemplate()
+			firstTimeGetTemplate = false
+		}
+		return getTemplate()
+	}
+
+	abstract fun getTemplate(): Template
+
+	protected open fun onFirstGetTemplate() {
+		initContentLimit()
 	}
 
 	protected open fun shouldRestoreMapState(): Boolean = false

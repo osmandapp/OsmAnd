@@ -1,29 +1,35 @@
 package net.osmand.test.common;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.ViewAssertion;
 import androidx.test.espresso.action.GeneralClickAction;
 import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Tap;
 import androidx.test.espresso.action.Tapper;
 
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.Espresso.onView;
-
-
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
+import org.hamcrest.StringDescription;
 import org.jetbrains.annotations.NotNull;
 
 public class SystemDialogInteractions {
+	private static final long DEFAULT_TIMEOUT_MS = 5000;
+	private static final long POLLING_INTERVAL_MS = 100;
 
 	public static View getViewById(@IdRes int id) {
 		final View[] capturedView = new View[1];
@@ -146,4 +152,40 @@ public class SystemDialogInteractions {
 		}
 	}
 
+
+	public static ViewAssertion hasTextEventually(@NonNull String text) {
+		Matcher<String> textMatcher = Matchers.equalTo(text);
+		return (view, noViewFoundException) -> {
+			if (noViewFoundException != null) {
+				throw noViewFoundException;
+			}
+			if (!(view instanceof TextView)) {
+				throw new IllegalArgumentException("The view is not a TextView or a subclass (e.g., EditText). Found: " + view.getClass().getName());
+			}
+			TextView textView = (TextView) view;
+			long startTime = System.currentTimeMillis();
+			String currentText = textView.getText().toString();
+			while (System.currentTimeMillis() - startTime < DEFAULT_TIMEOUT_MS) {
+				if (textMatcher.matches(currentText)) {
+					Log.d("Corwin", "found text within " + (System.currentTimeMillis() - startTime) + " ms");
+					return;
+				}
+				try {
+					Thread.sleep(POLLING_INTERVAL_MS);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+					throw new RuntimeException("Waiting for text to change was interrupted.", e);
+				}
+				currentText = textView.getText().toString();
+			}
+
+			// If we reach here, the timeout occurred. Throw an assertion error.
+			StringDescription description = new StringDescription();
+			textMatcher.describeTo(description);
+			throw new AssertionError(
+					"Waited " + (DEFAULT_TIMEOUT_MS / 1000) + " seconds for view's text to match '" + description +
+							"', but found '" + currentText + "'."
+			);
+		};
+	}
 }

@@ -9,6 +9,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.Matchers.hasOnClickListener;
+import static net.osmand.test.common.SystemDialogInteractions.hasTextEventually;
 import static net.osmand.test.common.SystemDialogInteractions.isViewVisible;
 import static org.hamcrest.Matchers.allOf;
 
@@ -19,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.action.ViewActions;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmandApplication;
@@ -122,6 +124,18 @@ public class OsmAndDialogInteractions {
 
 	public static void writeText(@IdRes int id, @NonNull String text) {
 		onView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(typeText(text));
+	}
+
+	public static void checkViewText(@IdRes int id, @NonNull String text) {
+		onView(withId(id)).check(hasTextEventually(text));
+	}
+
+	public static void clearText(@IdRes int id) {
+		replaceText(id, "");
+	}
+
+	public static void replaceText(@IdRes int id, @NonNull String newText) {
+		onView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(ViewActions.replaceText(newText));
 	}
 
 	public static boolean isContextMenuOpened() {

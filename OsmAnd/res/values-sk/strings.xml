@@ -4111,9 +4111,9 @@
     <string name="no_plugins_enabled">Nemáte zapnuté žiadne zásuvné moduly. Zoznam dostupných modulov môžete nájsť v \'Menu\' → \'Zásuvné moduly\'.</string>
     <string name="display_route_tracks">Zobraziť stopy</string>
     <string name="approx_safe_mode_description">Vykonať aproximácie GPX pomocou pomalšieho kódu pre Android namiesto natívneho kódu.</string>
-    <string name="delete_history_items_descr">Vymazať zvolené položky histórie\?</string>
+    <string name="delete_history_items_descr">Zvolené položky budú odstránené zo zoznamu.</string>
     <string name="quick_action_toggle_preference">Prepínač na zmenu nastavenia.</string>
-    <string name="delete_history_items">Vymazať %1$s položiek histórie\?</string>
+    <string name="delete_history_items">Vymazať %1$s položiek histórie?</string>
     <string name="from_to_with_params">Z %1$s do %2$s</string>
     <string name="progress_complete">%1$s hotovo</string>
     <string name="storage_copying_files_size">Kopíruje sa %1$s súborov %2$s</string>
@@ -5693,7 +5693,7 @@
     <string name="show_utm_grids_description">Zobraziť mriežku v metroch UTM namiesto WGS84</string>
     <string name="ais_object_lost_timeouts">Časový limit pre príjem signálu AIS</string>
     <string name="ais_object_lost_timeouts_description">Nastavte hodnoty pre rozoznanie stratených objektov AIS, ak nebol obdržaný žiadny signál v zadanom čase.</string>
-    <string name="no_places_available">Nie sú dostupné žiadne miesta</string>
+    <string name="no_places_available">Vo viditeľnej oblasti nie sú žiadne miesta</string>
     <string name="shared_string_default_view">Predvolené zobrazenie</string>
     <string name="map_widget_route_information_desc">Zobrazuje odhadovaný čas príjazdu, zostávajúci čas jazdy a vzdialenosť pre aktuálnu navigačnú trasu.</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Akcia pre ovládanie viditeľnosti súradnicovej siete na mape.</string>
@@ -5779,7 +5779,7 @@
     <string name="three_years_subscription">Trojročné predplatné</string>
     <string name="battery">batéria</string>
     <string name="deleting">Vymazávanie…</string>
-    <string name="release_5_1">• Pridaná podpora pre webové a multi-platformové nákupy\n\n • Teplotné jednotky boli presunutú do Všeobecných nastavení pre jednoduchší prístup\n\n • Pridaný ukazovateľ úrovne batérie pre sensory BLE\n\n • Nvé intuitévnejšie rozhranie pre výber bodov v navigácii\n\n • Zlepšená viditeľnosť nástrojov s novým obrysom\n\n • Pridaný analyzátor stúpania/klesania\n\n • Rozšírená integrácia Wikipédie a Wikivoyage pre viac bodov záujmu.</string>
+    <string name="release_5_1">• Pridaná podpora pre webové a multi-platformové nákupy\n\n • Teplotné jednotky boli presunuté do Všeobecných nastavení pre jednoduchší prístup\n\n • Pridaný ukazovateľ úrovne batérie pre sensory BLE\n\n • Nové intuitívnejšie rozhranie pre výber bodov v navigácii\n\n • Zlepšená viditeľnosť nástrojov s novým obrysom\n\n • Pridaný analyzátor stúpania/klesania\n\n • Rozšírená integrácia Wikipédie a Wikivoyage pre viac bodov záujmu.</string>
     <string name="osm_live_payment_renews_3_years">Obnovuje sa každé tri roky</string>
     <string name="osm_live_payment_3_years_title">Každé tri roky</string>
     <string name="ski_route_switch_style_description">Skúmajte lyžiarske svahy, vleky a ďalšie objekty s mapovým štýlom Zima a lyžovanie.</string>

@@ -43,7 +43,7 @@ class RouteRenderState {
 				&& this.shouldShowDirectionArrows == shouldShowDirectionArrows;
 
 		this.shouldUpdateActionPoints = this.shouldRebuildRoute
-				|| this.shouldUpdateRoute
+				|| this.startLocationIndex != startLocationIndex
 				|| this.shouldShowTurnArrows != shouldShowTurnArrows
 				|| this.currentRoute != currentRoute
 				|| this.zoom != zoom;

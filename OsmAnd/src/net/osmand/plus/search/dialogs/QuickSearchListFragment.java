@@ -30,9 +30,9 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -372,7 +372,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				}
 			}
 			listAdapter.setListItems(list);
-			if (!append) {
+			if (!append && isVisible()) {
 				getListView().setSelection(0);
 			}
 		}

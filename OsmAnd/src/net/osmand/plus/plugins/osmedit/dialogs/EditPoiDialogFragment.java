@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -58,6 +57,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.utils.CollatorFilteredAdapter;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.asynctasks.CommitEntityTask;
 import net.osmand.plus.plugins.osmedit.asynctasks.LoadEntityTask;
@@ -555,8 +555,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
 			}
 		}
-		ArrayAdapter<Object> adapter = new ArrayAdapter<>(getActivity(),
-				R.layout.list_textview, subCategories.keySet().toArray());
+		CollatorFilteredAdapter adapter = new CollatorFilteredAdapter(getActivity(),
+				R.layout.list_textview, new ArrayList<>(subCategories.keySet()));
 		adapter.sort(new Comparator<Object>() {
 			@Override
 			public int compare(Object lhs, Object rhs) {

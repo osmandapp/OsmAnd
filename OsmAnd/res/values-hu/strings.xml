@@ -4056,8 +4056,8 @@
     <string name="no_plugins_enabled">Nincs engedélyezett bővítmény. Az elérhető bővítmények felsorolását megtalálja a Menü → Bővítmények menüpontban.</string>
     <string name="display_route_tracks_as_poi">Nyomvonalak megjelenítése érdekes pontként (POI-ként)</string>
     <string name="quick_action_toggle_preference">A preferenciát módosító kapcsoló.</string>
-    <string name="delete_history_items_descr">Törli a kijelölt előzményeket\?</string>
-    <string name="delete_history_items">%1$s előzmény törlése\?</string>
+    <string name="delete_history_items_descr">A kiválasztott bejegyzések törlődnek a listából.</string>
+    <string name="delete_history_items">%1$s előzmény törlése?</string>
     <string name="files_remaining">Hátralévő fájlok: %1$s %2$s</string>
     <string name="from_to_with_params">Innen: %1$s, ide: %2$s</string>
     <string name="storage_copying_files_size">%1$s fájl (%2$s) másolása</string>
@@ -5636,7 +5636,7 @@
     <string name="show_grids">Térképrács megjelenítése</string>
     <string name="show_utm_grids_description">Rács megjelenítése UTM méterben (WGS84 helyett)</string>
     <string name="no_photo_for_location_desc">Még nem adtak hozzá felhasználói fényképeket ehhez a helyhez</string>
-    <string name="no_places_available">Nincsenek helyek</string>
+    <string name="no_places_available">Nincsenek helyek a látható területen</string>
     <string name="hmd_promo_description">%1$s hónapig ingyenes hozzáférés a funkciókhoz, többek között korlátlan térképletöltés, 3D domborzat stb.</string>
     <string name="shared_string_road_exit">Kijárat</string>
     <string name="hmd_promo">%1$s hónapos HMD promóció</string>

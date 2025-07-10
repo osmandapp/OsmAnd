@@ -3649,7 +3649,7 @@
     <string name="shared_storage_first_step">Brúigh \" %1$s\".\nOsclaíonn an bainisteoir comhad nuair is gá duit an fillteán osmand a aimsiú agus a oscailt.</string>
     <string name="shared_storage_migration_descr">Mar gheall ar athruithe ar rochtain stórála Android, ní féidir le OsmAnd %1$s a úsáid a thuilleadh.\n\nCóipeáil do chuid sonraí go léir chuig an bhfillteán nua.</string>
     <string name="folder_access_denied">Cead ag teastáil chun an fillteán roghnaithe a rochtain.</string>
-    <string name="delete_history_items">Scrios míreanna staire %1$s?</string>
+    <string name="delete_history_items">Scrios %1$s mír(eanna) staire?</string>
     <string name="display_route_tracks_as_poi">Taispeáin rianta mar POI</string>
     <string name="shared_storage_warning_description">Mar gheall ar rialacha nua Android, ag tosú Samhain 2021 Caillfidh OsmAnd 4.2 rochtain ar stóráil roinnte.\n\nBog an fillteán sonraí ó stóráil chomhroinnte go stóráil atá ar fáil, ar shlí eile caillfidh an aip rochtain ar do shonraí cosúil le léarscáileanna as líne, rianta GPX, etc.</string>
     <string name="release_4_1">• Tacaíocht tosaigh curtha leis do Android Auto\n\n• Nuashonrú comhéadan úsáideora le haghaidh cuardaigh comhordanáidí UTM\n\n• Scagaire GPS le haghaidh Rianta GPX\n\n• Giuirléid Ingearchló (Pro)\n\n• Ceanáin: cumas breise chun deilbhíní a úsáideadh le déanaí a fheiceáil\n\n• Pleanáil bealaigh: úsáidfear an phróifíl roghnaithe tar éis an tseolta\n\n• Seasta ciseal Mapillary, tá an breiseán díchumasaithe anois de réir réamhshocraithe\n\n• Scáileán breise chun gach stair san aip a bhainistiú\n\n• Ní athshocraítear treoshuíomh na léarscáile tar éis an feidhmchlár a atosú\n\n• Rindreáil marcóir airde SRTM feabhsaithe\n\n• Fotheidil léarscáile Araibise seasta\n\n• Saincheisteanna ródaithe éagsúla seasta</string>
@@ -5273,7 +5273,7 @@
     <string name="saved_at_time">Sábháilte anois ag: %1$s</string>
     <string name="quick_action_map_underlay">Fo-bhrat</string>
     <string name="live_update">Nuashonrú beo</string>
-    <string name="delete_history_items_descr">Scrios míreanna staire roghnaithe?</string>
+    <string name="delete_history_items_descr">Baintear iontrálacha roghnaithe den liosta.</string>
     <string name="map_updates_are_unavailable_yet">Níl nuashonruithe léarscáile ar fáil go fóill. :-(</string>
     <string name="online_map_url_helper_text">Iontráil nó greamaigh an URL don fhoinse ar líne.</string>
     <string name="turn_screen_on_power_button_disabled">Díchumasaithe. Éilíonn \'Coinnigh an scáileán ar\' faoi \'Timeout after wake-up\'.</string>
@@ -5502,7 +5502,7 @@
     <string name="map_grid">Greillí léarscáileanna</string>
     <string name="show_grids_description">Ceadaigh greille a thaispeáint ar an léarscáil</string>
     <string name="show_utm_grids">Úsáid UTM in ionad WGS84</string>
-    <string name="no_places_available">Níl áiteanna ar fáil</string>
+    <string name="no_places_available">Gan aon áiteanna sa réigiún infheicthe</string>
     <string name="no_photo_for_location_desc">Níor cuireadh aon ghrianghraif úsáideora leis an suíomh seo fós</string>
     <string name="hmd_promo">Promo HMD ar feadh %1$s mí</string>
     <string name="hmd_promo_description">Rochtain saor in aisce ar ghnéithe lena n-áirítear íoslódálacha léarscáileanna gan teorainn, faoiseamh 3T srl. ar feadh %1$s mí</string>

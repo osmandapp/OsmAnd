@@ -2496,7 +2496,7 @@
     <string name="winter_and_ski_renderer">Inverno e sci</string>
     <string name="touring_view_renderer">Vista turistica</string>
     <string name="group_deleted">Gruppo cancellato</string>
-    <string name="clear_all_intermediates">Cancella tutti i punti intermedi</string>
+    <string name="clear_all_intermediates">Cancella tutte le destinazioni intermedie</string>
     <string name="osm_recipients_label">Destinatari OSM</string>
     <string name="waypoints_removed_from_map_markers">Punti intermedi rimossi dai marcatori della mappa</string>
     <string name="nothing_found_in_radius">Nessun risultato trovato:</string>
@@ -2663,9 +2663,9 @@
     <string name="shared_string_width">Larghezza</string>
     <string name="shared_string_height">Altezza</string>
     <string name="add_destination_point">Imposta destinazione</string>
-    <string name="add_intermediate_point">Aggiungi punto intermedio</string>
+    <string name="add_intermediate_point">Aggiungi una destinazione intermedia</string>
     <string name="add_start_point">Imposta punto di partenza</string>
-    <string name="intermediate_waypoint">Punto intermedio</string>
+    <string name="intermediate_waypoint">Destinazione intermedia</string>
     <string name="transfers">Trasferimenti</string>
     <string name="on_foot">a piedi</string>
     <string name="route_way">Via</string>
@@ -2702,7 +2702,7 @@
     <string name="save_poi_value_exceed_length_title">Lunghezza del valore di \"%s\"</string>
     <string name="public_transport_warning_descr_blog">Leggi di più sul calcolo dei percorsi di OsmAnd sul nostro blog.</string>
     <string name="public_transport_warning_title">La navigazione sui mezzi pubblici è al momento in fase di test, potrebbero esserci errori o imprecisioni.</string>
-    <string name="add_intermediate">Aggiungi un punto intermedio</string>
+    <string name="add_intermediate">Aggiungi una destinazione intermedia</string>
     <string name="transfers_size">%1$d trasferimenti</string>
     <string name="add_start_and_end_points">Aggiungi partenza e destinazione</string>
     <string name="route_add_start_point">Aggiungi il punto di partenza</string>
@@ -4104,8 +4104,8 @@
     <string name="use_external_timestamps">Utilizza le marche temporali esterne</string>
     <string name="use_external_timestamps_description">Utilizza le marche temporali del navigatore online per correggere il tempo stimato e la velocità media</string>
     <string name="no_plugins_enabled">Non hai alcun componente aggiuntivo abilitato. Puoi vedere la lista dei componenti aggiuntivi nel \'Menu\' → \'Componenti aggiuntivi\'.</string>
-    <string name="delete_history_items_descr">Eliminare elementi della cronologia selezionati\?</string>
-    <string name="delete_history_items">Eliminare gli elementi della cronologia %1$s\?</string>
+    <string name="delete_history_items_descr">Le voci selezionate saranno rimosse dalla lista.</string>
+    <string name="delete_history_items">Eliminare gli elementi %1$s dalla cronologia?</string>
     <string name="quick_action_toggle_preference">Un pulsante per modificare le preferenze.</string>
     <string name="shared_storage_warning_description">A causa delle nuove regole di Android, a partire da novembre 2021 OsmAnd 4.2 perderà l\'accesso alla memoria condivisa.
 \n
@@ -5784,14 +5784,18 @@
     <string name="osm_live_payment_3_years_title">Ogni tre anni</string>
     <string name="three_years_subscription">Abbonamento di tre anni</string>
     <string name="shared_string_switch">Cambia</string>
-    <string name="deleting">Cancellazione …</string>
-    <string name="deleting_history">Cancellazione della cronologia …</string>
+    <string name="deleting">Sto cancellando…</string>
+    <string name="deleting_history">Cancellazione cronologia …</string>
     <string name="release_5_1">• Aggiunto il supporto per acquisti web e tra piattaforme diverse\n\n • Spostato l\'unità di misura della Temperatura in Preferenze Generali per un accesso più semplice\n\n • Aggiunto l\'indicatore del livello di carica della batteria per i sensori BLE\n\n • Nuova, più intuitiva UI per la selezione dei punti nella Navigazione\n\n • Migliorata la visibilità del widget con un nuovo aspetto\n\n • Aggiunto l\'analizzatore delle salite/discese\n\n • Ampliata l\'integrazione di Wikipedia &amp; Wikivoyage con più PDI.</string>
     <string name="set_home">Imposta casa</string>
-    <string name="set_intermediate_point">Imposta un punto intermedio</string>
+    <string name="set_intermediate_point">Imposta una destinazione intermedia</string>
     <string name="set_start_point">Imposta un punto di partenza</string>
     <string name="shared_string_split_by">Dividi per</string>
     <string name="battery_level">Livello batteria</string>
     <string name="set_parking_position">Imposta la posizione di parcheggio</string>
     <string name="set_work">Imposta lavoro</string>
+    <string name="ski_route_switch_style_description">Esplora posti per sciare e altro con lo stile mappa Winter and Ski.</string>
+    <string name="battery">batteria</string>
+    <string name="sensor_data">Dati dei sensori</string>
+    <string name="show_rasterization_debug_tile">Mostra informazioni sulla rasterizzazione dei tile</string>
 </resources>

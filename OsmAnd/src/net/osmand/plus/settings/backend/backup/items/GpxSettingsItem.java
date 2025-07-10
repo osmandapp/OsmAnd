@@ -1,35 +1,27 @@
 package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.shared.gpx.GpxParameter.COLOR;
-import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
-import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.WIDTH;
+import static net.osmand.shared.gpx.GpxParameter.*;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
-import net.osmand.plus.shared.SharedUtil;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.io.KFile;
 
@@ -133,7 +125,9 @@ public class GpxSettingsItem extends FileSettingsItem {
 		dataItem.setParameter(SPLIT_INTERVAL, appearanceInfo.splitInterval);
 		dataItem.setParameter(COLORING_TYPE, appearanceInfo.coloringType);
 		dataItem.setParameter(COLOR_PALETTE, appearanceInfo.gradientPaletteName);
+
 		app.getGpxDbHelper().updateDataItem(dataItem);
+		app.getGpxDbHelper().updateDataItemParameter(dataItem, APPEARANCE_LAST_MODIFIED_TIME, file.lastModified());
 	}
 
 	private void createGpxAppearanceInfo() {
@@ -149,6 +143,12 @@ public class GpxSettingsItem extends FileSettingsItem {
 				|| fileName.contains(File.separator + subtypeFolder))) {
 			this.file = new File(app.getAppPath(subtypeFolder), fileName);
 		}
+	}
+
+	@Override
+	public long getInfoModifiedTime() {
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(SharedUtil.kFile(file));
+		return dataItem != null ? dataItem.getParameter(APPEARANCE_LAST_MODIFIED_TIME) : 0;
 	}
 
 	@Nullable

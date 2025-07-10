@@ -2448,7 +2448,7 @@
     <string name="distance_nearest">Más cerca primero</string>
     <string name="rendering_attr_whiteWaterSports_name">Deportes acuáticos</string>
     <string name="group_deleted">Grupo borrado</string>
-    <string name="clear_all_intermediates">Limpiar todos los puntos intermedios</string>
+    <string name="clear_all_intermediates">Limpiar todos los destinos intermedios</string>
     <string name="select_waypoints_category_description">Agregá todos los puntos de referencia de la traza o elegí categorías separadas.</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">No se pudo encontrar nada:</string>
@@ -2594,9 +2594,9 @@
     <string name="quick_action_switch_night_mode">Modo nocturno</string>
     <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
     <string name="add_destination_point">Definir destino</string>
-    <string name="add_intermediate_point">Agregar punto intermedio</string>
+    <string name="add_intermediate_point">Agregar destino intermedio</string>
     <string name="add_start_point">Definir punto de partida</string>
-    <string name="intermediate_waypoint">Punto intermedio</string>
+    <string name="intermediate_waypoint">Destino intermedio</string>
     <string name="transfers">Transbordos</string>
     <string name="on_foot">A pie</string>
     <string name="route_way">Trayecto</string>
@@ -2685,7 +2685,7 @@
     <string name="rendering_attr_undefined_name">Indefinido</string>
     <string name="public_transport_warning_descr_blog">Leé más sobre el cálculo de las rutas de OsmAnd en nuestro blog.</string>
     <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de pruebas beta, se esperan errores e imprecisiones.</string>
-    <string name="add_intermediate">Agregar punto intermedio</string>
+    <string name="add_intermediate">Agregar destino intermedio</string>
     <string name="shared_string_walk">Caminar</string>
     <string name="save_poi_value_exceed_length">Acortá la longitud de la etiqueta «%s» a menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
@@ -3982,8 +3982,8 @@
     <string name="shared_string_travelbooks">Libros de viajes</string>
     <string name="display_route_tracks">Mostrar trazas</string>
     <string name="quick_action_toggle_preference">Un botón que cambia las preferencias.</string>
-    <string name="delete_history_items_descr">¿Borrar los elementos marcados en el historial\?</string>
-    <string name="delete_history_items">¿Borrar %1$s elementos del historial\?</string>
+    <string name="delete_history_items_descr">Las entradas marcadas se borrarán de la lista.</string>
+    <string name="delete_history_items">¿Borrar %1$s elemento(s) del historial?</string>
     <string name="copying_file">Copiando archivo %1$s…</string>
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="progress_complete">%1$s completo</string>
@@ -4333,7 +4333,7 @@
     <string name="without_profiles_changing">Sin cambios de perfiles</string>
     <string name="shared_string_only_missing">Solo faltantes</string>
     <string name="download_tiles">Descargar teselas</string>
-    <string name="attach_roads_descr">Aproxima la traza a los caminos obteniendo información detallada de la ruta con indicaciones de giro y atributos de los caminos.</string>
+    <string name="attach_roads_descr">Adjunta la traza a los caminos obteniendo información detallada de la ruta, incluyendo indicaciones de giro y atributos de los caminos.</string>
     <string name="attach_roads_warning">Solo se puede adjuntar al camino una traza grabada.</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
@@ -4979,7 +4979,7 @@
     <string name="enable_to_use_external_input_device">Activar para usar un dispositivo de entrada externo con OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Cambiar orientación del mapa</string>
     <string name="key_event_action_previous_app_profile">Perfil de aplicación anterior</string>
-    <string name="show_toast_about_key_pressed">Mostrar notificación sobre la tecla pulsada</string>
+    <string name="show_toast_about_key_pressed">Mostrar notificación de la tecla pulsada</string>
     <string name="key_event_action_move_left">Mover a la izquierda</string>
     <string name="press_button_to_link_with_action">Pulsá el botón en el dispositivo para asignarle la acción: %1$s</string>
     <string name="deletion_error">Error de borrado</string>
@@ -5464,7 +5464,7 @@
     <string name="unit_of_volume">Unidad de volumen</string>
     <string name="record_obd_data">Grabar estadísticas del vehículo</string>
     <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registra los datos vitales del vehículo usando el protocolo OBD-II. Supervisá valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registrá los datos esenciales del vehículo mediante el protocolo OBD-II. Supervisá métricas clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
     <string name="vehicle_metrics_obd_ii">Estadísticas del vehículo (OBD-II)</string>
     <string name="shared_string_volume">Volumen</string>
     <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
@@ -5555,7 +5555,7 @@
     <string name="show_grids">Mostrar cuadrícula del mapa</string>
     <string name="show_grids_description">Permite mostrar la cuadrícula sobre el mapa</string>
     <string name="map_grid">Cuadrículas de mapas</string>
-    <string name="no_places_available">Sin lugar disponible</string>
+    <string name="no_places_available">Sin lugares en la región visible</string>
     <string name="no_photo_for_location_desc">Aún no se agregaron fotos de usuarios a esta ubicación</string>
     <string name="shared_string_road_exit">Salida</string>
     <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
@@ -5638,7 +5638,7 @@
     <string name="battery">batería</string>
     <string name="sensor_data">Datos del sensor</string>
     <string name="set_home">Definir casa</string>
-    <string name="set_intermediate_point">Definir punto intermedio</string>
+    <string name="set_intermediate_point">Definir destino intermedio</string>
     <string name="shared_string_switch">Cambiar</string>
     <string name="years_3">3 años</string>
     <string name="three_years_subscription">3 años de suscripción</string>
@@ -5647,4 +5647,6 @@
     <string name="osm_live_payment_3_years_title">Cada 3 años</string>
     <string name="deleting">Borrando…</string>
     <string name="deleting_history">Borrando historial…</string>
+    <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
+    <string name="show_symbols_bboxes">Mostrar cuadros delimitadores de los símbolos</string>
 </resources>

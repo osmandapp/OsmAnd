@@ -19,8 +19,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.MissingMapsCalculator;
 import net.osmand.router.RoutingConfiguration;
@@ -56,8 +56,8 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 		MissingMapsCalculator calculator = new MissingMapsCalculator(app.getRegions());
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		MissingMapsCalculationResult previousResult = route.getMissingMapsCalculationResult();
-		RoutingContext routingContext = previousResult.getMissingMapsRoutingContext();
-		List<LatLon> routePoints = previousResult.getMissingMapsPoints();
+		RoutingContext routingContext = previousResult != null ? previousResult.getMissingMapsRoutingContext() : null;
+		List<LatLon> routePoints = previousResult != null ? previousResult.getMissingMapsPoints() : null;
 
 		TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
 		TargetPoint start = pointsHelper.getPointToStart();
@@ -73,11 +73,11 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 			);
 		}
 
-		if (routingContext != null && routePoints != null)  {
+		if (routingContext != null && routePoints != null) {
 			StringBuilder url = new StringBuilder(ONLINE_CALCULATION_URL)
 					.append(getRoutingProfile())
 					.append(getFormattedRoutingParameters());
-			for(LatLon point : routePoints) {
+			for (LatLon point : routePoints) {
 				url.append("&").append(formatPointString(point));
 			}
 			try {
@@ -178,6 +178,7 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 
 	public interface CalculateMissingMapsOnlineListener {
 		void onSuccess();
+
 		void onError(@Nullable String error);
 	}
 }

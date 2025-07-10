@@ -239,4 +239,9 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	public int getIconId(boolean nightMode) {
 		return nightMode ? nightIconId : dayIconId;
 	}
+
+	@DrawableRes
+	public int getMapIconId(boolean nightMode) {
+		return getIconId(nightMode);
+	}
 }

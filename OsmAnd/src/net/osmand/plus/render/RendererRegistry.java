@@ -120,6 +120,9 @@ public class RendererRegistry {
 			return loadedRenderers.get(name);
 		}
 		if (!hasRender(name)) {
+			String message = "Renderer not available " + name;
+			log.warn(message);
+			if (warnings != null) warnings.add(message);
 			return null;
 		}
 		try {
@@ -130,13 +133,15 @@ public class RendererRegistry {
 					loadRenderer(renderer, addonName, loadedRenderers, renderingConstants);
 				}
 				loadedRenderers.put(name, renderer);
+			} else {
+				String message = "Cannot load renderer " + name;
+				log.warn(message);
+				if (warnings != null) warnings.add(message);
 			}
 			return renderer;
 		} catch (Exception e) {
-			if (warnings != null) {
-				warnings.add(e.getMessage());
-			}
 			log.error("Error loading renderer", e);
+			if (warnings != null) warnings.add(e.getMessage());
 		}
 		return null;
 	}

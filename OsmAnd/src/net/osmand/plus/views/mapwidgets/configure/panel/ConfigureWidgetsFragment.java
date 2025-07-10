@@ -381,7 +381,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 				bottomButtons.setVisibility(View.GONE);
 				bottomButtonsShadow.setVisibility(View.GONE);
 			} else {
-				animateView(tabLayout, 0, true, () -> appBar.setElevation(getResources().getDimension(R.dimen.abp__shadow_height)));
+				animateView(tabLayout, 0, true, () -> appBar.setElevation(view.getResources().getDimension(R.dimen.abp__shadow_height)));
 				animateView(viewPager, 0, null, null);
 				animateView(shadowView, 0, null, null);
 				animateView(bottomButtons, bottomButtons.getHeight(), false, () -> bottomButtons.setVisibility(View.INVISIBLE));

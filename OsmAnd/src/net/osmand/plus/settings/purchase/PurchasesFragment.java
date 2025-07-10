@@ -96,7 +96,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 				continue;
 			}
 			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app,
-					holder.linkedSubscription, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
+					holder.linkedSubscription, null, null, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
 			if (purchaseData != null) {
 				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 				PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchaseData);
@@ -109,7 +109,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		List<InAppStateHolder> externalInApps = purchaseHelper.getExternalInApps();
 		for (InAppStateHolder holder : externalInApps) {
 			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app,
-					holder.linkedPurchase, holder.purchaseTime, holder.expireTime == 0
+					holder.linkedPurchase, holder.name, holder.icon, holder.purchaseTime, holder.expireTime == 0
 							? UNDEFINED_TIME : holder.expireTime, holder.origin, null);
 			if (purchaseData != null) {
 				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);

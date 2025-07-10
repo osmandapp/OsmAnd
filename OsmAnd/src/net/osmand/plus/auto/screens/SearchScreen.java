@@ -69,7 +69,6 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 
 		getLifecycle().addObserver(this);
 		getApp().getAppInitializer().addListener(this);
-		reloadHistory();
 	}
 
 	@NonNull
@@ -85,9 +84,15 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 		destroyed = true;
 	}
 
+	@Override
+	protected void onFirstGetTemplate() {
+		super.onFirstGetTemplate();
+		reloadHistory();
+	}
+
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		String searchQuery = getSearchHelper().getSearchQuery();
 		String searchHint = getSearchHelper().getSearchHint();
 		SearchTemplate.Builder builder = new SearchTemplate.Builder(new SearchCallback() {

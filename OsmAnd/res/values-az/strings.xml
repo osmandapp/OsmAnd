@@ -2648,7 +2648,7 @@
     <string name="profile_appearance">Profilin görünüşü</string>
     <string name="speed_cameras_alert">Bəzi ölkələrdə sürət kameralarının xəbərdarlığı qanunla qadağandır.</string>
     <string name="step_by_step">Addım-addım</string>
-    <string name="delete_history_items">%1$s tarixçə elementi silinsin\?</string>
+    <string name="delete_history_items">%1$s tarixçə elementi silinsin?</string>
     <string name="history_preferences_descr">Hər bir tarixçə növü üçün fərdi olaraq tarixçə qeydini söndürə bilərsiniz.</string>
     <string name="map_markers_history">Xəritə işarələri tarixçəsi</string>
     <string name="clear_all_history_warning">Axtarış, naviqasiya və işarə tarixçəsi daxil olmaqla bütün proqram tarixçəsi qeydləri silinsin\?</string>
@@ -2676,7 +2676,7 @@
     <string name="downloaded_maps_collect_descr">Ölkə və region xəritəsinin populyarlığını anlamağımıza kömək edir.</string>
     <string name="collected_data_descr">OsmAnd-a hansı məlumatları paylaşmağa icazə verdiyinizi müəyyənləşdirin.</string>
     <string name="routeInfo_road_types_name">Yol növləri</string>
-    <string name="delete_history_items_descr">Seçilən tarixçə elementləri silinsin\?</string>
+    <string name="delete_history_items_descr">Seçilən tarixçə elementləri silinsin?</string>
     <string name="replace_all_desc">Hazırkı elementlər fayldakı elementlərlə əvəz olunacaq</string>
     <string name="select_navigation_icon">Hərəkət vaxtı mövqe ikonu</string>
     <string name="routeInfo_steepness_name">Diklik</string>

@@ -64,6 +64,10 @@ public class MapRendererContext {
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
 	public static final int OBF_SYMBOL_SECTION = 1;
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
+	public static final int POI_SYMBOL_SECTION = 1000;
+	public static final int TOP_PLACES_POI_SECTION = 1001;
+	public static final int SELECTED_POI_SECTION = 1002;
+	public static final int FAVORITES_SECTION = 1003;
 	public static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;

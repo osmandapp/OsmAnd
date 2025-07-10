@@ -51,6 +51,7 @@ import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.ValueHolder;
@@ -74,7 +75,6 @@ import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.OsmandBackupAgent;
-import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
@@ -101,7 +101,6 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
-import net.osmand.data.DataSourceType;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -195,10 +194,27 @@ public class OsmandSettings {
 		ApplicationMode appMode = APPLICATION_MODE.get();
 		ApplicationMode parentAppMode = APPLICATION_MODE.get().getParent();
 
-		getCustomRenderProperty(A_APP_MODE).setModeValue(appMode, appMode.getStringKey());
-		getCustomRenderProperty(A_BASE_APP_MODE).setModeValue(appMode, parentAppMode != null
-				? parentAppMode.getStringKey()
-				: appMode.getStringKey());
+		executePreservingPrefTimestamp(appMode, () -> {
+			CommonPreference<String> appModePref = getCustomRenderProperty(A_APP_MODE);
+			CommonPreference<String> baseAppModePref = getCustomRenderProperty(A_BASE_APP_MODE);
+
+			appModePref.setModeValue(appMode, appMode.getStringKey());
+			baseAppModePref.setModeValue(appMode, parentAppMode != null
+					? parentAppMode.getStringKey() : appMode.getStringKey());
+		});
+	}
+
+	public void executePreservingPrefTimestamp(@NonNull Runnable action) {
+		executePreservingPrefTimestamp(getApplicationMode(), action);
+	}
+
+	public void executePreservingPrefTimestamp(@NonNull ApplicationMode mode, @NonNull Runnable action) {
+		long time = getLastModePreferencesEditTime(mode);
+		try {
+			action.run();
+		} finally {
+			setLastModePreferencesEditTime(mode, time);
+		}
 	}
 
 	@NonNull
@@ -708,16 +724,16 @@ public class OsmandSettings {
 		updateLastPreferencesEditTime(globalPreferences, lastModifiedTime);
 	}
 
-	private long getLastPreferencesEditTime(Object preferences) {
+	private long getLastPreferencesEditTime(@NonNull Object preferences) {
 		return settingsAPI.getLong(preferences, LAST_PREFERENCES_EDIT_TIME, 0);
 	}
 
-	public void updateLastPreferencesEditTime(Object preferences) {
+	public void updateLastPreferencesEditTime(@NonNull Object preferences) {
 		long time = System.currentTimeMillis();
 		updateLastPreferencesEditTime(preferences, time);
 	}
 
-	protected void updateLastPreferencesEditTime(Object preferences, long time) {
+	protected void updateLastPreferencesEditTime(@NonNull Object preferences, long time) {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
@@ -1192,11 +1208,16 @@ public class OsmandSettings {
 	public TemperatureUnit getTemperatureUnit(@NonNull ApplicationMode appMode) {
 		TemperatureUnitsMode unitsMode = UNIT_OF_TEMPERATURE.getModeValue(appMode);
 		if (unitsMode == TemperatureUnitsMode.SYSTEM_DEFAULT) {
-			String unit = LocalePreferences.getTemperatureUnit();
-			boolean fahrenheit = Objects.equals(unit, LocalePreferences.TemperatureUnit.FAHRENHEIT);
-			return fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
+			try {
+				String unit = LocalePreferences.getTemperatureUnit();
+				boolean fahrenheit = Algorithms.stringsEqual(unit, LocalePreferences.TemperatureUnit.FAHRENHEIT);
+				return fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
+			} catch (IllegalArgumentException e) {
+				LOG.error(e);
+				return TemperatureUnit.CELSIUS;
+			}
 		}
-		return Objects.requireNonNull(unitsMode.getTemperatureUnit());
+		return unitsMode.getTemperatureUnit();
 	}
 
 	// fuel tank capacity stored in litres

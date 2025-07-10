@@ -1498,8 +1498,8 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="winter_and_ski_renderer">Gaeaf a sgïo</string>
     <string name="day_off_label">i ffwrdd</string>
-    <string name="delete_history_items_descr">Dileu\'r eitemau hanes dan sylw\?</string>
-    <string name="delete_history_items">Dileu %1$s eitem hanes\?</string>
+    <string name="delete_history_items_descr">Dileu\'r eitemau hanes dan sylw?</string>
+    <string name="delete_history_items">Dileu %1$s eitem hanes?</string>
     <string name="quick_action_toggle_preference">Togl i newid dewis.</string>
     <string name="routing_attr_prefer_horse_routes_name">Ffafrio llwybrau marchogaeth</string>
     <string name="backup_welcome_back_descr">Adfer data ar y ddyfais hon gan ddefnyddio copïau wrth gefn neu gadw data wrth gefn ar OsmAnd Cloud.</string>

@@ -143,7 +143,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 			if (reader != null) {
 				poiSubTypes.addAll(reader.searchPoiSubTypesByPrefix(query));
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("Error searching poiSubTypes", e);
 		}
 		return poiSubTypes;
@@ -168,7 +168,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 							query, System.currentTimeMillis() - now, amenities.size(), nm, index.getFile().getName())); //$NON-NLS-1$
 				}
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
 		}
 		return amenities;
@@ -186,7 +186,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 			if (reader != null) {
 				result = reader.searchPoi(req);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
 		}
 		if (log.isDebugEnabled() && result != null) {
@@ -207,7 +207,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 			if (reader != null) {
 				result = reader.searchPoi(req);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
 			return result;
 		}
@@ -236,7 +236,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		if (reader != null) {
 			try {
 				reader.searchMapIndex(searchRequest);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
 		} else {
@@ -250,7 +250,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		if (reader != null) {
 			try {
 				reader.searchPoi(searchRequest);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error(e.getMessage(), e);
             }
         } else {
@@ -265,7 +265,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		if (reader != null) {
 			try {
 				return reader.searchPoiByName(searchRequest);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
 		} else {

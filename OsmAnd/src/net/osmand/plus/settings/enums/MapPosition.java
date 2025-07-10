@@ -10,7 +10,7 @@ public enum MapPosition {
 	CENTER(0.5f),
 	MIDDLE_BOTTOM(0.70f),
 	BOTTOM(0.85f),
-	LANDSCAPE_MIDDLE_RIGHT(0.5f);
+	LANDSCAPE_MIDDLE_END(0.5f);
 
 	private final float ratioY;
 
@@ -27,10 +27,9 @@ public enum MapPosition {
 	}
 
 	public float getRatioX(boolean shifted, boolean rtl) {
-		if (this == LANDSCAPE_MIDDLE_RIGHT) {
-			return 0.7f;
+		if (this == LANDSCAPE_MIDDLE_END) {
+			return rtl ? 0.3f : 0.7f;
 		}
-
 		if (shifted) {
 			return rtl ? 0.25f : 0.75f;
 		} else {

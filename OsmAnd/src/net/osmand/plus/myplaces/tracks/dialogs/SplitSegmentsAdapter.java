@@ -99,15 +99,21 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 		} else {
 			if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
 				overviewTextView.setTextColor(app.getColor(activeColorId));
-				if (trackGroup != null && (trackGroup.isSplitDistance() || currentGpxDisplayItem.analysis.getSegmentSlopeType() != null)) {
-					overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, activeColorId));
+				SegmentSlopeType slopeType = currentGpxDisplayItem.analysis.getSegmentSlopeType();
+
+				if (trackGroup != null && (trackGroup.isSplitDistance() || slopeType != null)) {
+					if (slopeType != null) {
+						overviewImageView.setImageDrawable(getSlopeDrawable(slopeType, nightMode));
+					} else {
+						overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, activeColorId));
+					}
+
 					overviewTextView.setText("");
 					double metricStart = currentGpxDisplayItem.analysis.getMetricEnd() - currentGpxDisplayItem.analysis.getTotalDistance();
 					overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) metricStart, app));
 					overviewTextView.append(" - ");
 					overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.getMetricEnd(), app));
 					overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
-					SegmentSlopeType slopeType = currentGpxDisplayItem.analysis.getSegmentSlopeType();
 
 					if (slopeType != null) {
 						String slopeName;
@@ -335,6 +341,18 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 			}
 		}
 		return convertView;
+	}
+
+	private Drawable getSlopeDrawable(@NonNull SegmentSlopeType slopeType, boolean nightMode) {
+		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
+
+		if (slopeType == SegmentSlopeType.UPHILL) {
+			return getIcon(R.drawable.ic_action_ascent_arrow_16, activeColorId);
+		} else if (slopeType == SegmentSlopeType.DOWNHILL) {
+			return getIcon(R.drawable.ic_action_descent_arrow_16, activeColorId);
+		} else {
+			return getIcon(R.drawable.ic_action_terrain_flat_16, activeColorId);
+		}
 	}
 
 	@NonNull

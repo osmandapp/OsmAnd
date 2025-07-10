@@ -114,8 +114,8 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 					for (InAppStateHolder holder : inAppPurchaseHelper.getExternalInApps()) {
 						InAppPurchase inapp = holder.linkedPurchase;
 						if (inapp != null && holder.origin == purchaseOrigin && purchaseSku.equals(inapp.getSku())) {
-							purchase = PurchaseUiDataUtils.createUiData(app, inapp, holder.purchaseTime,
-									holder.expireTime == 0 ? UNDEFINED_TIME : holder.expireTime, holder.origin, null);
+							purchase = PurchaseUiDataUtils.createUiData(app, inapp, holder.name, holder.icon,
+									holder.purchaseTime, holder.expireTime == 0 ? UNDEFINED_TIME : holder.expireTime, holder.origin, null);
 							externalInapp = true;
 							break;
 						}
@@ -124,7 +124,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 						for (SubscriptionStateHolder holder : inAppPurchaseHelper.getExternalSubscriptions()) {
 							InAppSubscription subscription = holder.linkedSubscription;
 							if (subscription != null && holder.origin == purchaseOrigin && purchaseSku.equals(subscription.getSku())) {
-								purchase = PurchaseUiDataUtils.createUiData(app, subscription, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
+								purchase = PurchaseUiDataUtils.createUiData(app, subscription, null, null, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
 								break;
 							}
 						}

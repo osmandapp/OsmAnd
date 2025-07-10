@@ -43,7 +43,7 @@ public class RoutingContext {
 
 	public static boolean SHOW_GC_SIZE = false;
 	public static boolean PRINT_ROUTING_ALERTS = false;
-	 
+
 	
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);
 	
@@ -75,7 +75,8 @@ public class RoutingContext {
 	public int dijkstraMode;
 	public boolean publicTransport;
 	public HashSet<BinaryMapIndexReader> mapIndexReaderFilter = new HashSet<>();
-	
+	public String[] regionsCoveringStartAndTargets = new String[0];
+
 	
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgress calculationProgressFirstPhase;

@@ -226,6 +226,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		this.trackChartPoints = trackChartPoints;
 	}
 
+	public int getSegmentsCacheHash() {
+		return segmentsCache.hashCode();
+	}
+
 	public boolean isInTrackAppearanceMode() {
 		return gpxAppearanceHelper.isInTrackAppearanceMode();
 	}
@@ -326,6 +330,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged || mapRendererChanged;
+			if (mapRendererChanged) {
+				clearSelectedFilesSegments();
+			}
 			if (!visibleGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, visibleGPXFiles, settings);
 			}

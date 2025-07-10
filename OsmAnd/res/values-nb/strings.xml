@@ -2435,7 +2435,7 @@
     <string name="west_abbreviation">V</string>
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
-    <string name="clear_all_intermediates">Slett alle mellomliggende punkter</string>
+    <string name="clear_all_intermediates">Slett alle mellomliggende mål</string>
     <string name="group_deleted">Gruppe slettet</string>
     <string name="shared_string_total">Totalt</string>
     <string name="osm_recipient_stat">Redigeringer %1$s, tilsammen %2$s mBTC</string>
@@ -2760,9 +2760,9 @@
     <string name="quick_action_day_night_switch_mode">Bytt dag/natt-modus</string>
     <string name="app_mode_public_transport">Offentlig transport</string>
     <string name="add_destination_point">Sett reisemål</string>
-    <string name="add_intermediate_point">Legg til mellomliggende</string>
+    <string name="add_intermediate_point">Legg til mellomliggende mål</string>
     <string name="add_start_point">Sett startpunkt</string>
-    <string name="intermediate_waypoint">Mellomliggende punkt</string>
+    <string name="intermediate_waypoint">Mellomliggende mål</string>
     <string name="transfers">overføringer</string>
     <string name="on_foot">til fots</string>
     <string name="route_way">Vei</string>
@@ -2773,7 +2773,7 @@
     <string name="simulate_navigation">Simuler navigering</string>
     <string name="choose_track_file_to_follow">Velg sporfil å følge</string>
     <string name="voice_announcements">Talemeldinger</string>
-    <string name="intermediate_destinations">Mellomstasjoner</string>
+    <string name="intermediate_destinations">Mellomliggende mål</string>
     <string name="arrive_at_time">Ankom klokken %1$s</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
@@ -2850,7 +2850,7 @@
     <string name="rendering_attr_undefined_name">Udefinert</string>
     <string name="public_transport_warning_descr_blog">Lær mer om OsmAnd-ruting på bloggen vår.</string>
     <string name="public_transport_warning_title">Offentlig transportnavigasjon er nå i betatestingsstadie. Forvent feil og unøyaktigheter.</string>
-    <string name="add_intermediate">Legg til mellomliggende punkt</string>
+    <string name="add_intermediate">Legg til mellomliggende mål</string>
     <string name="shared_string_walk">Gå</string>
     <string name="save_poi_value_exceed_length">Reduser \"%s\"-taggen til mindre enn 255 tegn.</string>
     <string name="save_poi_value_exceed_length_title">Lengden på \"%s\"-verdien</string>
@@ -4258,8 +4258,8 @@
     <string name="shared_string_travelbooks">Reisebøker</string>
     <string name="display_route_tracks_as_poi">Vis spor som interessepunkter</string>
     <string name="quick_action_toggle_preference">En bryter for å veksle valgt innstilling.</string>
-    <string name="delete_history_items_descr">Slett valgte historikkelementer\?</string>
-    <string name="delete_history_items">Slett %1$s-historikkelementer\?</string>
+    <string name="delete_history_items_descr">Slett valgte historikkelementer?</string>
+    <string name="delete_history_items">Slette %1$s historikkelement(er)?</string>
     <string name="fold_unfold">fold sammen/utvid</string>
     <string name="app_profile_type">Programprofiltype</string>
     <string name="add_to_group">Legg til i gruppe</string>
@@ -5739,4 +5739,10 @@
     <string name="sensor_data">Sensordata</string>
     <string name="battery_level">Batterinivå</string>
     <string name="suggest_activate_map_msg">%1$s-kartet er deaktivert,\naktiver for å vise dette området.</string>
+    <string name="deleting_history">Sletter historikk…</string>
+    <string name="deleting">Sletter…</string>
+    <string name="set_intermediate_point">Sett mellomliggende mål</string>
+    <string name="set_start_point">Sett startpunkt</string>
+    <string name="uphill_downhill_split">Oppover-/nedoverbakke</string>
+    <string name="no_places_available">Ingen steder i synlig region</string>
 </resources>

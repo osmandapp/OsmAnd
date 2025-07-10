@@ -2543,7 +2543,7 @@
     <string name="transport_nearby_routes">Innerhalb</string>
     <string name="group_deleted">Gruppe gelöscht</string>
     <string name="rendering_attr_whiteWaterSports_name">Wildwasser-Sportarten</string>
-    <string name="clear_all_intermediates">Alle Zwischenpunkte löschen</string>
+    <string name="clear_all_intermediates">Alle Zwischenziele löschen</string>
     <string name="shared_string_travel_guides">Reiseführer</string>
     <string name="waypoints_removed_from_map_markers">Wegpunkte aus Kartenmarkierungen entfernt</string>
     <string name="nothing_found_in_radius">Nichts gefunden:</string>
@@ -2688,9 +2688,9 @@
     <string name="quick_action_day_night_switch_mode">Tag-/Nacht-Modus umschalten</string>
     <string name="run_full_osmand_msg">Sie verwenden {0} Karte, die von OsmAnd unterstützt wird. Möchten Sie die OsmAnd-Vollversion starten\?</string>
     <string name="add_destination_point">Ziel festlegen</string>
-    <string name="add_intermediate_point">Zwischenpunkt hinzufügen</string>
+    <string name="add_intermediate_point">Zwischenziel hinzufügen</string>
     <string name="add_start_point">Startpunkt festlegen</string>
-    <string name="intermediate_waypoint">Zwischenpunkt</string>
+    <string name="intermediate_waypoint">Zwischenziel</string>
     <string name="transfers">Umstiege</string>
     <string name="on_foot">Zu Fuß</string>
     <string name="route_way">Weg</string>
@@ -2732,7 +2732,7 @@
     <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
     <string name="public_transport_warning_descr_blog">Mehr über die OsmAnd-Routenführung in unserem Blog.</string>
     <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, rechnen Sie mit Fehlern und Ungenauigkeiten.</string>
-    <string name="add_intermediate">Zwischenpunkt hinzufügen</string>
+    <string name="add_intermediate">Zwischenziel hinzufügen</string>
     <string name="transfers_size">%1$d Umstieg(e)</string>
     <string name="add_start_and_end_points">Start- und Endpunkte hinzufügen</string>
     <string name="route_add_start_point">Startpunkt hinzufügen</string>
@@ -4130,7 +4130,7 @@
     <string name="display_route_tracks">Tracks anzeigen</string>
     <string name="shared_string_travelbooks">Reiseführer</string>
     <string name="display_route_tracks_as_poi">Tracks als POI anzeigen</string>
-    <string name="delete_history_items">%1$s Verlaufseinträge löschen\?</string>
+    <string name="delete_history_items">%1$s Verlaufseinträge löschen?</string>
     <string name="quick_action_toggle_preference">Ein Schalter zum Ändern der Voreinstellung.</string>
     <string name="delete_history_items_descr">Diese Einträge werden aus dem Verlauf entfernt.</string>
     <string name="copying_file">Kopieren der Datei %1$s …</string>
@@ -4763,7 +4763,7 @@
     <string name="selected_value">Ausgewählter Wert</string>
     <string name="shared_string_nearest">Am nächsten</string>
     <string name="app_mode_moped">Mofa</string>
-    <string name="generate_slope_from_3d_maps">Erzeugen von Hangrasterkarten aus 3D-Karten</string>
+    <string name="generate_slope_from_3d_maps">Hangrasterkarten aus 3D-Karten erzeugen</string>
     <string name="disable_vertex_hillshade_3d">Eckpunkt-Schummerung in 3D deaktivieren</string>
     <string name="enable_3d_maps">3D-Karten aktivieren</string>
     <string name="generate_hillshade_from_3d_maps">Schummerungs-Rasterkarten aus 3D-Karten erzeugen</string>
@@ -5717,7 +5717,7 @@
     <string name="show_grids_description">Anzeige eines Rasters über der Karte erlauben</string>
     <string name="show_utm_grids">UTM statt WGS84 verwenden</string>
     <string name="show_utm_grids_description">Gitter in UTM-Metern statt in WGS84 anzeigen</string>
-    <string name="no_places_available">Keine Plätze verfügbar</string>
+    <string name="no_places_available">Keine Orte im Kartenausschnitt</string>
     <string name="no_photo_for_location_desc">Es wurden noch keine Benutzerfotos zu diesem Ort hinzugefügt</string>
     <string name="shared_string_road_exit">Ausfahrt</string>
     <string name="hmd_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Monate</string>
@@ -5791,11 +5791,11 @@
     <string name="uphill_downhill_split">Berg-/Talfahrt</string>
     <string name="set_parking_position">Parkposition festlegen</string>
     <string name="set_start_point">Startpunkt festlegen</string>
-    <string name="release_5_1">• Unterstützung für Web- und Cross-Plattform-Käufe\n\n• Temperatureinheiten für einfacheren Zugriff auf Allgemeine Einstellungen verschoben\n\n• Batteriestandsanzeige für BLE-Sensoren hinzugefügt\n\n• Neue, intuitivere UI für Punktauswahl in Navigation\n\n• Verbesserte Widget Sichtbarkeit mit einem neuen Umriss\n\n• Uphills/Downhills Analysator hinzugefügt\n\n• Wikipedia &amp; Wikivoyage-Integration für mehr POIs erweitert.</string>
+    <string name="release_5_1">• Unterstützung für Web- und plattformübergreifende Käufe hinzugefügt\n\n• Temperatureinheiten für einfacheren Zugriff auf Allgemeine Einstellungen verschoben\n\n• Batteriestandsanzeige für BLE-Sensoren hinzugefügt\n\n• Neue, intuitivere UI für die Punktauswahl in der Navigation\n\n• Widget-Sichtbarkeit mit einem neuen Umriss verbessert\n\n• Uphills- und Downhills-Analysator hinzugefügt\n\n• Wikipedia- und Wikivoyage-Integration für mehr POIs erweitert.</string>
     <string name="years_3">Drei Jahre</string>
     <string name="osm_live_payment_3_years_title">Alle drei Jahre</string>
-    <string name="deleting_history">Lösche Verlauf…</string>
-    <string name="deleting">Lösche…</string>
+    <string name="deleting_history">Verlauf wird gelöscht …</string>
+    <string name="deleting">Wird gelöscht …</string>
     <string name="osm_live_payment_renews_3_years">Wird alle drei Jahre erneuert</string>
     <string name="three_years_subscription">Drei-Jahres-Abonnement</string>
     <string name="ski_route_switch_style_description">Entdecken Sie Skipisten, Lifte und mehr mit dem Winter- und Skikartenstil.</string>
@@ -5804,9 +5804,10 @@
     <string name="battery">Batterie</string>
     <string name="sensor_data">Sensordaten</string>
     <string name="set_home">Zuhause einstellen</string>
-    <string name="set_intermediate_point">Zwischenhalt einstellen</string>
+    <string name="set_intermediate_point">Zwischenziel festlegen</string>
     <string name="hmd_promo_years">HMD Promo für %1$s Jahre</string>
     <string name="shared_string_split_by">Getrennt durch</string>
     <string name="shared_string_flat">Flach</string>
     <string name="shared_string_switch">Umschalten</string>
+    <string name="show_rasterization_debug_tile">Informationen zur Kachelrasterung anzeigen</string>
 </resources>

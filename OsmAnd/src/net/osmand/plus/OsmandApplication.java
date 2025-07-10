@@ -1038,9 +1038,13 @@ public class OsmandApplication extends MultiDexApplication {
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
-				if (isAppInForeground()) {
-					LOG.info(">>>> APP startForegroundService = " + usageIntent);
-					context.startForegroundService(intent);
+				try {
+					if (isAppInForeground()) {
+						LOG.info(">>>> APP startForegroundService = " + usageIntent);
+						context.startForegroundService(intent);
+					}
+				} catch (IllegalStateException e) {
+					LOG.error("Failed to start foreground service: " + e.getMessage(), e);
 				}
 			});
 		} else {
@@ -1049,21 +1053,24 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void setupDrivingRegion(@NonNull WorldRegion worldRegion) {
-		DrivingRegion drivingRegion = null;
-		RegionParams params = worldRegion.getParams();
+		DrivingRegion drivingRegion = getDrivingRegion(worldRegion.getParams());
+		if (drivingRegion != null) {
+			settings.executePreservingPrefTimestamp(() -> settings.DRIVING_REGION.set(drivingRegion));
+		}
+	}
+
+	@Nullable
+	private DrivingRegion getDrivingRegion(@NonNull RegionParams params) {
 //		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
 		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ? MILES_AND_FEET : KILOMETERS_AND_METERS;
 		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ? MILES_AND_METERS : KILOMETERS_AND_METERS;
 		for (DrivingRegion region : DrivingRegion.values()) {
 			if (region.leftHandDriving == leftHand && (region.defMetrics == mc1 || region.defMetrics == mc2)) {
-				drivingRegion = region;
-				break;
+				return region;
 			}
 		}
-		if (drivingRegion != null) {
-			settings.DRIVING_REGION.set(drivingRegion);
-		}
+		return null;
 	}
 
 	@NonNull

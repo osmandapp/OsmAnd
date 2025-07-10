@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
@@ -255,10 +256,10 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 			splitInterval = 1;
 		} else if (distanceSplit.get(selectedSplitInterval) > 1) {
 			splitType = GpxSplitType.DISTANCE;
-			splitInterval = distanceSplit.get(selectedSplitInterval - 1);
+			splitInterval = distanceSplit.get(selectedSplitInterval);
 		} else if (timeSplit.get(selectedSplitInterval) > 1) {
 			splitType = GpxSplitType.TIME;
-			splitInterval = timeSplit.get(selectedSplitInterval - 1);
+			splitInterval = timeSplit.get(selectedSplitInterval);
 		}
 		saveNewSplit(splitType, splitInterval);
 
@@ -336,13 +337,18 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
+	private void addLabelOption(@StringRes int resId){
+		options.add(app.getString(resId));
+		distanceSplit.add(-1d);
+		timeSplit.add(-1);
+	}
+
 	private void prepareSplitIntervalAdapterData() {
 		List<GpxDisplayGroup> groups = getDisplayGroups();
 
-		options.add(app.getString(R.string.shared_string_none));
-		options.add(app.getString(R.string.uphill_downhill_split));
-		distanceSplit.add(-1d);
-		timeSplit.add(-1);
+		addLabelOption(R.string.shared_string_none);
+		addLabelOption(R.string.uphill_downhill_split);
+
 		addOptionSplit(30, true, groups); // 50 feet, 20 yards, 20
 		// m
 		addOptionSplit(60, true, groups); // 100 feet, 50 yards,

@@ -6,8 +6,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.openlocationcode.OpenLocationCode;
-
 import net.osmand.LocationConvert;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -253,10 +251,6 @@ public class PointDescription {
 		OsmandApplication app = AndroidUtils.getApp(ctx);
 		int format = app.getSettings().COORDINATES_FORMAT.get();
 		return OsmAndFormatter.getFormattedCoordinates(lat, lon, format);
-	}
-
-	public static String getLocationOlcName(double lat, double lon) {
-		return OpenLocationCode.encode(lat, lon);
 	}
 
 	public boolean contextMenuDisabled() {

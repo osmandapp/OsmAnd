@@ -10,7 +10,6 @@ import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +41,7 @@ public class BinaryMapReaderResource {
 				RandomAccessFile raf = new RandomAccessFile(file, "r");
 				r = new BinaryMapIndexReader(raf, initialReader);
 				readers.set(type.ordinal(), r);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error("Fail to initialize " + file.getName(), e);
 			}
 		}
@@ -80,7 +79,7 @@ public class BinaryMapReaderResource {
 	private void close(@NonNull BinaryMapIndexReader r) {
 		try {
 			r.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("Fail to close " + file.getName(), e);
 		}
 	}

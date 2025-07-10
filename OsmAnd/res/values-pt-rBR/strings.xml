@@ -4297,8 +4297,8 @@
     <string name="display_route_tracks">Exibir trilhas</string>
     <string name="display_route_tracks_as_poi">Exibir trilhas como POI</string>
     <string name="quick_action_toggle_preference">Um botão de alternância para alterar a preferência.</string>
-    <string name="delete_history_items_descr">Excluir itens de histórico selecionados\?</string>
-    <string name="delete_history_items">Apagar itens do histórico %1$s\?</string>
+    <string name="delete_history_items_descr">Excluir itens de histórico selecionados?</string>
+    <string name="delete_history_items">Apagar itens do histórico %1$s?</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Toque em \"%1$s\" para copiar %2$s arquivos de \"%3$s\" para \"%4$s\". Pode levar algum tempo.</string>
     <string name="storage_copied_files_size">%1$s arquivo(s) processado(s), %2$s</string>
@@ -6145,4 +6145,7 @@
     <string name="battery">bateria</string>
     <string name="shared_string_switch">Alternar</string>
     <string name="deleting_history">Excluindo o histórico…</string>
+    <string name="ski_route_switch_style_description">Explore as pistas de esqui, os teleféricos e muito mais com o estilo de mapa Inverno e esqui.</string>
+    <string name="show_rasterization_debug_tile">Mostrar informações de rasterização de ladrilhos</string>
+    <string name="show_symbols_bboxes">Mostrar símbolos bboxes</string>
 </resources>

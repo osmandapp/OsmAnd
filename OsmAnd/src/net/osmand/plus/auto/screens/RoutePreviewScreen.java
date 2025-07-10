@@ -190,7 +190,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		ItemList.Builder listBuilder = new ItemList.Builder();
 		listBuilder
 				.setOnSelectedListener(this::onRouteSelected)

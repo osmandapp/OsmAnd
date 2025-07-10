@@ -4098,8 +4098,8 @@
     <string name="shared_string_travelbooks">Vojaĝ-gvidiloj</string>
     <string name="display_route_tracks_as_poi">Montri kursojn kiel interesejojn</string>
     <string name="display_route_tracks">Montri kursojn</string>
-    <string name="delete_history_items_descr">Ĉu forigi la elektitajn objektojn el historio\?</string>
-    <string name="delete_history_items">Ĉu forigi %1$s objektojn el historio\?</string>
+    <string name="delete_history_items_descr">La elektitaj objektoj foriĝos el la listo.</string>
+    <string name="delete_history_items">Ĉu forigi %1$s objekto(j)n el historio?</string>
     <string name="quick_action_toggle_preference">Ŝaltilo por ŝanĝi agordon.</string>
     <string name="icon_group_education">Edukado</string>
     <string name="add_to_group">Aldoni al grupo</string>
@@ -5701,7 +5701,7 @@
     <string name="ais_address_nmea_server_description">Difini IP-adreson por NMEA-datum-fonto (se TCP estas uzata)</string>
     <string name="ais_port_nmea_server">TCP-pordo de NMEA-datum-fonto</string>
     <string name="map_widget_route_information">Informoj pri kurso</string>
-    <string name="no_places_available">Neniu disponebla loko</string>
+    <string name="no_places_available">Neniu loko en la videbla regiono</string>
     <string name="show_grids_description">Vidigas koordinatan kradon sur la mapo</string>
     <string name="show_utm_grids">Uzi UTM anstataŭ WGS84</string>
     <string name="ais_cpa_warning_time">Averta tempo por atingi la plej proksiman punkton de alproksimiĝo (CPA)</string>

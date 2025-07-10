@@ -4159,7 +4159,7 @@
     <string name="display_route_tracks">عرض المسارات</string>
     <string name="shared_string_travelbooks">كتب السفر</string>
     <string name="display_route_tracks_as_poi">عرض المسارات على هيئة POI</string>
-    <string name="delete_history_items_descr">حذف عناصر السجل المحددة؟</string>
+    <string name="delete_history_items_descr">تتم إزالة الإدخالات المحددة من القائمة.</string>
     <string name="delete_history_items">حذف %1$s عنصر سجل؟</string>
     <string name="quick_action_toggle_preference">كبسة لتبديل الخيارات المفضلة.</string>
     <string name="copying_file">نسخ الملف %1$s …</string>
@@ -5761,7 +5761,7 @@
     <string name="show_dms_grids_description">إظهار الشبكة بالدرجات والدقائق والثواني بدلاً من الدرجات</string>
     <string name="location_interpolation_percent_desc">قم بتعيين نسبة استيفاء الموقع أثناء التنقل عبر المسار. تعمل هذه على تقليل تأخر موضع موقعك على الخريطة أثناء التحرك.</string>
     <string name="no_photo_for_location_desc">لم تتم إضافة صور المستخدم إلى هذا الموقع بعد</string>
-    <string name="no_places_available">لا توجد أماكن متاحة</string>
+    <string name="no_places_available">لا توجد أماكن في المنطقة المرئية</string>
     <string name="plugin_ais_tracker_disclaimer">إخلاء المسؤولية\n\nهذه الإضافة مشروع هواية وليست مصممة للموثوقية والدقة. لا تعتمد على هذا البرنامج بأي شكل من الأشكال بما في ذلك للملاحة و/أو سلامة الحياة.</string>
     <string name="ais_cpa_warning_distance_description">يتم تمييز السفن باللون الأحمر إذا كان ال CPA أقل من هذه القيمة وتم الوصول إلى CPA في المستقبل القريب (راجع ضبط وقت التحذير للوصول إلى CPA).</string>
     <string name="ais_cpa_settings_description">تعرف هذه القيم على عرض عناصر AIS التي قد تقترب كثيرًا من موضعها.</string>

@@ -33,7 +33,9 @@ import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.VectorDouble;
+import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.Amenity;
@@ -85,6 +87,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final long USE_FINGER_LOCATION_DELAY = 1000;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 	protected static final int DIST_TO_SHOW = 80;
+	private static final int LABEL_OFFSET = 20;
 
 	private MarkersWidgetsHelper markersWidgetsHelper;
 
@@ -138,6 +141,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	//OpenGL
 	private int markersCount;
 	private VectorLinesCollection vectorLinesCollection;
+	private MapMarkersCollection distanceMarkersCollection;
 	private boolean needDrawLines = true;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
 	private int displayedWidgets;
@@ -473,6 +477,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			recreateBitmaps();
 			textSize = app.getResources().getDimensionPixelSize(R.dimen.guide_line_text_size) * textScale;
 			verticalOffset = app.getResources().getDimensionPixelSize(R.dimen.guide_line_vertical_offset) * textScale;
+			clearVectorLinesCollections();
 		}
 	}
 
@@ -833,7 +838,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	/**
 	 * OpenGL
 	 */
-	private void initVectorLinesCollection(LatLon loc, MapMarker marker, int color, boolean isLast) {
+	private void initVectorLinesCollection(LatLon loc, MapMarker marker, int color, boolean isLast,
+		   String distance, boolean nightMode) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null || !needDrawLines) {
 			return;
@@ -844,6 +850,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (vectorLinesCollection == null) {
 			vectorLinesCollection = new VectorLinesCollection();
+		}
+
+		if (distanceMarkersCollection == null) {
+			distanceMarkersCollection = new MapMarkersCollection();
 		}
 
 		QVectorPointI points = new QVectorPointI();
@@ -865,7 +875,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				.setLineDash(outlinePattern)
 				.setPoints(points)
 				.setFillColor(outlineColor);
-		outlineBuilder.buildAndAddToCollection(vectorLinesCollection);
+		VectorLine outline = outlineBuilder.buildAndAddToCollection(vectorLinesCollection);
 
 		VectorLineBuilder inlineBuilder = new VectorLineBuilder();
 		VectorDouble inlinePattern = new VectorDouble();
@@ -880,8 +890,22 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				.setPoints(points)
 				.setFillColor(NativeUtilities.createFColorARGB(color));
 		inlineBuilder.buildAndAddToCollection(vectorLinesCollection);
+
+		TextRasterizer.Style style = MapTextLayer.getTextStyle(getContext(), nightMode, getTextScale(), view.getDensity());
+
+		MapMarkerBuilder distanceMarkerBuilder = new MapMarkerBuilder();
+		distanceMarkerBuilder.setBaseOrder(getBaseOrder());
+		distanceMarkerBuilder.setIsHidden(false);
+		distanceMarkerBuilder.setCaption(distance);
+		distanceMarkerBuilder.setCaptionStyle(style);
+
+		net.osmand.core.jni.MapMarker distanceMarker = distanceMarkerBuilder.buildAndAddToCollection(distanceMarkersCollection);
+		distanceMarker.setOffsetFromLine(LABEL_OFFSET);
+		outline.attachMarker(distanceMarker);
+
 		if (isLast) {
 			mapRenderer.addSymbolsProvider(vectorLinesCollection);
+			mapRenderer.addSymbolsProvider(distanceMarkersCollection);
 			needDrawLines = false;
 		}
 	}
@@ -891,9 +915,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	 */
 	protected void clearVectorLinesCollections() {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && vectorLinesCollection != null) {
+		if (mapRenderer != null && vectorLinesCollection != null && distanceMarkersCollection != null) {
 			mapRenderer.removeSymbolsProvider(vectorLinesCollection);
+			mapRenderer.removeSymbolsProvider(distanceMarkersCollection);
 			vectorLinesCollection = null;
+			distanceMarkersCollection = null;
 			needDrawLines = true;
 		}
 	}
@@ -1002,9 +1028,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			float markerY;
 			int color = colors[marker.colorIndex];
 			if (mapRenderer != null) {
-				boolean isLast = (i == activeMapMarkers.size() - 1) || (i == displayedWidgets - 1);
-				//draw line in OpenGL
-				initVectorLinesCollection(loc, marker, color, isLast);
 				displayedMarkers.add(marker);
 
 				PointI lineStart31 = NativeUtilities.getPoint31FromLatLon(loc);
@@ -1056,25 +1079,32 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			String distSt = OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
 			String text = distSt + (drawMarkerName ? " • " + marker.getName(getContext()) : "");
 			text = TextUtils.ellipsize(text, textPaint, pm.getLength(), TextUtils.TruncateAt.END).toString();
-			Rect bounds = new Rect();
-			textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
-			float hOffset = pm.getLength() / 2 - bounds.width() / 2f;
-			lineAttrs.paint.setColor(color);
 
-			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-			if (mapRenderer == null) {
-				canvas.drawPath(linePath, lineAttrs.paint);
-			}
-			if (locX >= markerX) {
-				canvas.rotate(180, pos[0], pos[1]);
-				canvas.drawTextOnPath(text, linePath, hOffset, bounds.height() + verticalOffset, textAttrs.paint2);
-				canvas.drawTextOnPath(text, linePath, hOffset, bounds.height() + verticalOffset, textAttrs.paint);
-				canvas.rotate(-180, pos[0], pos[1]);
+			if (mapRenderer != null) {
+				boolean isLast = (i == activeMapMarkers.size() - 1) || (i == displayedWidgets - 1);
+				//draw line in OpenGL
+				initVectorLinesCollection(loc, marker, color, isLast, text, nightMode.isNightMode());
 			} else {
-				canvas.drawTextOnPath(text, linePath, hOffset, -verticalOffset, textAttrs.paint2);
-				canvas.drawTextOnPath(text, linePath, hOffset, -verticalOffset, textAttrs.paint);
+				Rect bounds = new Rect();
+				textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
+				float hOffset = pm.getLength() / 2 - bounds.width() / 2f;
+				lineAttrs.paint.setColor(color);
+
+				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+				if (mapRenderer == null) {
+					canvas.drawPath(linePath, lineAttrs.paint);
+				}
+				if (locX >= markerX) {
+					canvas.rotate(180, pos[0], pos[1]);
+					canvas.drawTextOnPath(text, linePath, hOffset, bounds.height() + verticalOffset, textAttrs.paint2);
+					canvas.drawTextOnPath(text, linePath, hOffset, bounds.height() + verticalOffset, textAttrs.paint);
+					canvas.rotate(-180, pos[0], pos[1]);
+				} else {
+					canvas.drawTextOnPath(text, linePath, hOffset, -verticalOffset, textAttrs.paint2);
+					canvas.drawTextOnPath(text, linePath, hOffset, -verticalOffset, textAttrs.paint);
+				}
+				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
-			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		}
 	}
 
