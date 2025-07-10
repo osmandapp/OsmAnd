@@ -2019,7 +2019,7 @@
     <string name="osm_editors_ranking">Ταξινόμηση επεξεργαστή OSM</string>
     <string name="osm_live_subscription">Εγγραφή στο OsmAnd Live</string>
     <string name="osm_live_email_desc">Απαιτείται για να σας ενημερώσει για τις συνεισφορές σας.</string>
-    <string name="osm_live_hide_user_name">Να μην εμφανίζεται το όνομά μου στις αναφορές</string>
+    <string name="osm_live_hide_user_name">Να μην εμφανίζεται το όνομα μου στις αναφορές</string>
     <string name="osm_live_support_region">Υποστηριζόμενη περιοχή</string>
     <string name="osm_live_month_cost">Μηνιαίο κόστος</string>
     <string name="osm_live_month_cost_desc">Μηνιαία πληρωμή</string>
@@ -3936,7 +3936,7 @@
     <string name="icon_group_industrial">Βιομηχανία</string>
     <string name="help_article_plan_route_name">Σχεδιασμός διαδρομής</string>
     <string name="rendering_value_small_name">Μικρή</string>
-    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="revolutions_per_minute_unit">ΣΑΛ</string>
     <string name="help_article_widgets_map_buttons_name">Κουμπιά χάρτη</string>
     <string name="help_article_map_track_context_menu_name">Μενού περιεχομένου ιχνών</string>
     <string name="date_of_creation">Ημερομηνία δημιουργίας</string>
@@ -5091,4 +5091,13 @@
     <string name="avg_sensor_bycicle_power">Ισχύς ποδηλάτου, μέση</string>
     <string name="max_sensor_temperature">Θερμοκρασία, μέγιστη</string>
     <string name="avg_sensor_temperature">Θερμοκρασία, μέση</string>
+    <string name="discard_filter_changes_prompt">Επαναφορά όλων των φίλτρων;</string>
+    <string name="weather_temperature_celsius">Κελσίου</string>
+    <string name="weather_temperature_fahrenheit">Φαρενάιτ</string>
+    <string name="weather_pressure_hectopascals">Εκτοπασκάλ</string>
+    <string name="weather_pressure_millimeters_of_mercury">Χιλιοστά στήλης υδραργύρου</string>
+    <string name="weather_pressure_inches_of_mercury">Ίντσες στήλης υδραργύρου</string>
+    <string name="weather_wind_knots">Κόμβοι</string>
+    <string name="weather_precip_milimeters">Χιλιοστά</string>
+    <string name="weather_precip_inches">Ίντσες</string>
 </resources>
