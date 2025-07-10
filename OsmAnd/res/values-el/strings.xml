@@ -5085,4 +5085,6 @@
     <string name="kg">κιλά</string>
     <string name="max_sensor_speed">Αισθητήρας ταχύτητας, μέγιστη</string>
     <string name="avg_sensor_speed">Αισθητήρας ταχύτητας, μέση</string>
+    <string name="max_sensor_heartrate">Καρδιακός παλμός, μέγιστος</string>
+    <string name="avg_sensor_heartrate">Καρδιακός παλμός, μέσος</string>
 </resources>
