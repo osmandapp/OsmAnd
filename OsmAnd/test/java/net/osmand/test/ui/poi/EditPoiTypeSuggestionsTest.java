@@ -25,6 +25,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 
 import net.osmand.data.LatLon;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -67,6 +68,12 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 	public void testPoiTypeSuggestions() throws InterruptedException {
 		setLocale(app, Locale.FRANCE);
 		activityRule.launchActivity(null);
+		if(app.getPoiTypes().isInit()) {
+			MapPoiTypes.reInit();
+		}
+		while (!app.getPoiTypes().isInit()){
+			Thread.sleep(50);
+		}
 		skipAppStartDialogs(app);
 
 		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
@@ -85,7 +92,6 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 
 		//check: magasin de v
 		writeText(R.id.poiTypeEditText, "magasin de v");
-		Thread.sleep(200);
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
@@ -93,7 +99,6 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		clearText(R.id.poiTypeEditText);
 		//check: magasin de ve
 		writeText(R.id.poiTypeEditText, "magasin de ve");
-		Thread.sleep(200);
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
@@ -103,7 +108,6 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		//check: magasin de vé
 		replaceText(R.id.poiTypeEditText, "magasin de vé");
 		writeText(R.id.poiTypeEditText, "l");
-		Thread.sleep(200);
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
