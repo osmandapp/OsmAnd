@@ -843,8 +843,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		   String distance, boolean nightMode) {
 		MapRendererView mapRenderer = getMapRenderer();
 
-		if (mapRenderer == null)
-		{
+		if (mapRenderer == null) {
 			return;
 		}
 
