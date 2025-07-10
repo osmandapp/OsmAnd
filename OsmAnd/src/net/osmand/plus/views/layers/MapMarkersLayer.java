@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.Location;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -808,6 +809,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 		mapMarkersCollection = new MapMarkersCollection();
+		mapRenderer.addSymbolsProvider(MapRendererContext.MAP_MARKERS_SECTION, mapMarkersCollection);
 		OsmandApplication app = getApplication();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		updateBitmaps(false);
@@ -832,7 +834,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 						.buildAndAddToCollection(mapMarkersCollection);
 			}
 		}
-		mapRenderer.addSymbolsProvider(mapMarkersCollection);
 	}
 
 	/**
@@ -841,7 +842,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private void initVectorLinesCollection(LatLon loc, MapMarker marker, int color, boolean isLast,
 		   String distance, boolean nightMode) {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer == null || !needDrawLines) {
+
+		if (mapRenderer == null)
+		{
+			return;
+		}
+
+		mapRenderer.updateSubsection(MapRendererContext.MAP_MARKERS_SECTION);
+
+		if (!needDrawLines) {
 			return;
 		}
 
@@ -854,6 +863,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (distanceMarkersCollection == null) {
 			distanceMarkersCollection = new MapMarkersCollection();
+		}
+
+		if (isLast) {
+			mapRenderer.addSymbolsProvider(vectorLinesCollection);
+			mapRenderer.addSymbolsProvider(MapRendererContext.MAP_MARKERS_SECTION, distanceMarkersCollection);
+			needDrawLines = false;
 		}
 
 		QVectorPointI points = new QVectorPointI();
@@ -902,12 +917,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		net.osmand.core.jni.MapMarker distanceMarker = distanceMarkerBuilder.buildAndAddToCollection(distanceMarkersCollection);
 		distanceMarker.setOffsetFromLine(LABEL_OFFSET);
 		outline.attachMarker(distanceMarker);
-
-		if (isLast) {
-			mapRenderer.addSymbolsProvider(vectorLinesCollection);
-			mapRenderer.addSymbolsProvider(distanceMarkersCollection);
-			needDrawLines = false;
-		}
 	}
 
 	/**
