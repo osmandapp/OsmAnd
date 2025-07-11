@@ -75,7 +75,7 @@
     <string name="rendering_attr_showAccess_name">Amosar as restricións de acceso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Amosar a calidade das estradas</string>
     <string name="rendering_attr_showSurfaces_name">Amosar a superficie das estradas</string>
-    <string name="rendering_attr_showCycleRoutes_name">Amosar os carrís bici (ciclovías)</string>
+    <string name="rendering_attr_showCycleRoutes_name">Rotas ciclistas</string>
     <string name="no_index_file_to_download">Non foi posíbel atopar as descargas; comproba a túa conexión á Internet.</string>
     <string name="select_index_file_to_download">Non se atopou ren. Se non dás atopado a túa rexión, a podes facer ti mesmo (ollar https://osmand.net).</string>
     <string name="none_selected_gpx">Especifica primeiro un ficheiro GPX mantendo premido.</string>
@@ -3707,7 +3707,7 @@
     <string name="layer_gpx_layer">Pistas</string>
     <string name="show_gpx">Pistas</string>
     <string name="save_track_to_gpx_globally">Gardar pista en ficheiro GPX</string>
-    <string name="shared_string_gpx_route">Ruta da pista</string>
+    <string name="shared_string_gpx_route">Gardar a ruta</string>
     <string name="empty_state_my_tracks">Engadir ficheiros de pista</string>
     <string name="empty_state_my_tracks_desc">Importar ou gravar ficheiros de pista</string>
     <string name="context_menu_item_add_waypoint">Engadir punto de referencia da pista</string>
