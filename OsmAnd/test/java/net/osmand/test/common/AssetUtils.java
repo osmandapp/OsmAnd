@@ -3,6 +3,7 @@ package net.osmand.test.common;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -18,6 +19,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AssetUtils {
 
@@ -45,9 +48,38 @@ public class AssetUtils {
 	}
 
 	public static void copyAssetToFile(@NonNull Context testContext, String assetName, File destFile) throws IOException {
+		if(destFile.exists()) {
+			destFile.delete();
+		}
 		try (InputStream in = testContext.getAssets().open(assetName);
 		     FileOutputStream out = new FileOutputStream(destFile)) {
 			Algorithms.streamCopy(in, out);
 		}
+	}
+
+	public static List<String> listAssetFiles(Context context, String path) {
+		List<String> fileList = new ArrayList<>();
+		AssetManager assetManager = context.getAssets();
+		try {
+			String[] list = assetManager.list(path);
+			if (list != null) {
+				for (String item : list) {
+					String fullPath = path.isEmpty() ? item : path + "/" + item;
+					try {
+						String[] subList = assetManager.list(fullPath);
+						if (subList != null && subList.length > 0) {
+							fileList.addAll(listAssetFiles(context, fullPath));
+						} else {
+							fileList.add(fullPath);
+						}
+					} catch (IOException e) {
+						fileList.add(fullPath);
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return fileList;
 	}
 }

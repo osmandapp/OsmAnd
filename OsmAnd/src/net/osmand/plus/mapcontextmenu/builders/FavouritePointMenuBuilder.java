@@ -125,7 +125,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);
 			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,
 					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, point),
-					false, 0, false, null, false);
+					false, 0, false, null, false, "ic_action_folder");
 		}
 	}
 

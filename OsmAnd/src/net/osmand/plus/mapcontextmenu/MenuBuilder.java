@@ -450,7 +450,7 @@ public class MenuBuilder {
 				buildDetailsRow(rowContainer, getRowIcon(R.drawable.ic_action_pin_location),
 						app.getString(R.string.transport_nearby_routes), null,
 						MenuObjectUtils.getMenuObjectsNamesByComma(menuObjects),
-						getWithinCollapsableView(menuObjects), true, null);
+						getWithinCollapsableView(menuObjects), true, null, "ic_action_pin_location");
 				viewGroup.addView(rowContainer);
 			}
 		}
@@ -480,7 +480,7 @@ public class MenuBuilder {
 					contextMenuLayer.showContextMenu(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), contextObject);
 				}
 			};
-			buildDetailsRow(container, null, rowText, rowTextPrefix, null, null, false, onClickListener);
+			buildDetailsRow(container, null, rowText, rowTextPrefix, null, null, false, onClickListener, null);
 			llv.addView(container);
 		}
 		return new CollapsableView(llv, this, true);
@@ -489,9 +489,9 @@ public class MenuBuilder {
 	protected void buildDetailsRow(@NonNull View view, @Nullable Drawable icon, @Nullable String text,
 	                               @Nullable String textPrefix, @Nullable String textSuffix,
 	                               @Nullable CollapsableView collapsableView, boolean parentRow,
-	                               @Nullable OnClickListener onClickListener) {
+	                               @Nullable OnClickListener onClickListener, @Nullable String iconIdDescription) {
 		menuRowBuilder.buildDetailsRow(view, icon, text, textPrefix, textSuffix,
-				collapsableView, isFirstRow(), parentRow, onClickListener);
+				collapsableView, isFirstRow(), parentRow, onClickListener, iconIdDescription);
 		rowBuilt();
 	}
 
@@ -790,27 +790,29 @@ public class MenuBuilder {
 	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
 	                     boolean collapsable, @Nullable CollapsableView collapsableView,
 	                     boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+		String iconIdDescription = iconId > 0 ? app.getResources().getResourceEntryName(iconId) : null;
 		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, text, textColor, null, collapsable, collapsableView,
-				needLinks, textLinesLimit, isUrl, onClickListener, matchWidthDivider);
+				needLinks, textLinesLimit, isUrl, onClickListener, matchWidthDivider, iconIdDescription);
 	}
 
 	public View buildRow(View view, Drawable icon, String buttonText, String text, int textColor, String secondaryText,
 	                     boolean collapsable, @Nullable CollapsableView collapsableView, boolean needLinks,
-	                     int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+	                     int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider, @Nullable String iconIdDescription) {
 		return buildRow(view, icon, buttonText, null, text, textColor, secondaryText, collapsable, collapsableView,
-				needLinks, textLinesLimit, isUrl, false, false, onClickListener, matchWidthDivider);
+				needLinks, textLinesLimit, isUrl, false, false, onClickListener, matchWidthDivider, iconIdDescription);
 	}
 
 	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
 	                     boolean collapsable, @Nullable CollapsableView collapsableView,
 	                     boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+		String iconIdDescription = iconId > 0 ? app.getResources().getResourceEntryName(iconId) : null;
 		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, null, text, textColor, null, collapsable, collapsableView,
-				needLinks, textLinesLimit, isUrl, isNumber, isEmail, onClickListener, matchWidthDivider);
+				needLinks, textLinesLimit, isUrl, isNumber, isEmail, onClickListener, matchWidthDivider, iconIdDescription);
 	}
 
 	public View buildRow(View view, Drawable icon, String buttonText, String textPrefix, String text,
 	                     int textColor, String secondaryText, boolean collapsable, @Nullable CollapsableView collapsableView, boolean needLinks,
-	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider, @Nullable String iconIdDescription) {
 		boolean light = isLightContent();
 
 		if (!isFirstRow()) {
@@ -853,6 +855,7 @@ public class MenuBuilder {
 			iconView.setLayoutParams(llIconParams);
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconView.setImageDrawable(icon);
+			iconView.setTag(R.id.testId, iconIdDescription);
 			llIcon.addView(iconView);
 		}
 
@@ -1348,6 +1351,7 @@ public class MenuBuilder {
 		AndroidUtils.setMargins(typeImageParams, dpToPx(4), 0, dpToPx(4), 0);
 		typeImageView.setLayoutParams(typeImageParams);
 		int drawableResId = route.type == null ? R.drawable.ic_action_polygom_dark : route.type.getResourceId();
+		typeImageView.setTag(R.id.testId, app.getResources().getResourceEntryName(drawableResId));
 		typeImageView.setImageDrawable(getRowIcon(drawableResId));
 		typeView.addView(typeImageView);
 
