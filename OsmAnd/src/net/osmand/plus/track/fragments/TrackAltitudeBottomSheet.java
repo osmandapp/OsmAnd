@@ -25,6 +25,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
@@ -89,8 +90,10 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 		BaseBottomSheetItem attachToRoadsItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.calculate_online_altitude_descr))
 				.setTitle(getString(R.string.calculate_online))
-				.setIcon(getActiveIcon(R.drawable.ic_action_world_globe))
+				.setTitleColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
+				.setIcon(getContentIcon(R.drawable.ic_action_world_globe))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_active)
+				.setDisabled(true)
 				.setOnClickListener(v -> {
 					Fragment fragment = getTargetFragment();
 					if (fragment instanceof CalculateAltitudeListener) {
