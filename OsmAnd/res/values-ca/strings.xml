@@ -2351,7 +2351,7 @@
     <string name="mapillary_widget">Giny Mapillary</string>
     <string name="mapillary_widget_descr">Permet aportacions directes a Mapillary.</string>
     <string name="mapillary_descr">Fotografies a nivell de carrer a la xarxa per tothom. Descobriu llocs, col·laboreu, enregistreu el món.</string>
-    <string name="mapillary">Mapil·lar</string>
+    <string name="mapillary">Mapillary</string>
     <string name="shared_string_add_photos">Afegeix fotos</string>
     <string name="mapillary_action_descr">Compartiu la vostra perspectiva arran de carrer amb Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotografies a nivell de carrer per a tothom. Descobriu llocs, col·laboreu, enregistreu el món.</string>
@@ -4751,7 +4751,7 @@
     <string name="years_3">Tres anys</string>
     <string name="osm_live_payment_3_years_title">Cada tres anys</string>
     <string name="three_years_subscription">Subscripció de tres anys</string>
-    <string name="release_5_2">Treball en curs...</string>
+    <string name="release_5_2">• Treball en curs...</string>
     <string name="shared_string_switch">Commuta</string>
     <string name="ski_route_switch_style_description">Explora les pistes d\'esquí, els remuntadors, i més amb l\'estil de mapa d\'hivern i esquí.</string>
     <string name="battery">bateria</string>
@@ -5878,7 +5878,7 @@
     <string name="osm_live_payment_desc_hw">La subscripció es cobra pel període seleccionat. Cancel·la-ho a la teva AppGallery en qualsevol moment.</string>
     <string name="pass_whole_track_descr">Punt de la pista a navegar</string>
     <string name="shared_string_gpx_route">Ruta de la pista</string>
-    <string name="app_mode_go_cart">Ves-hi</string>
+    <string name="app_mode_go_cart">Kart</string>
     <string name="app_mode_wheelchair_forward">Cadira de rodes cap endavant</string>
     <string name="app_mode_motor_scooter">Escúter de motor</string>
     <string name="default_screen_timeout">Temps d\'espera per defecte de la pantalla</string>
