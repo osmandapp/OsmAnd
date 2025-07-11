@@ -72,23 +72,22 @@ public class SimulationProvider {
 			boolean plus = road.getStartPointIndex() < road.getEndPointIndex();
 			int increment = plus ? +1 : -1;
 			int start = road.getStartPointIndex();
-			if (firstRoad && start != currentSegment) {
-				if (plus && currentSegment >= road.getEndPointIndex()) {
-					continue;
-				} else if (!plus && currentSegment <= road.getEndPointIndex()) {
-					continue;
+			if (firstRoad) {
+				// first segment is [currentSegment - 1, currentSegment]
+				if (plus) {
+					start = currentSegment - increment;
 				} else {
 					start = currentSegment;
 				}
 			}
-			for (int j = start + increment; j != road.getEndPointIndex(); j += increment) {
+			for (int j = start; j != road.getEndPointIndex(); j += increment) {
 				RouteDataObject obj = road.getObject();
-				int st31x = obj.getPoint31XTile(j - increment);
-				int st31y = obj.getPoint31YTile(j - increment);
-				int end31x = obj.getPoint31XTile(j);
-				int end31y = obj.getPoint31YTile(j);
-				boolean last = i == roads.size() - 1 && j == road.getEndPointIndex();
-				boolean first = firstRoad && j == currentSegment;
+				int st31x = obj.getPoint31XTile(j);
+				int st31y = obj.getPoint31YTile(j);
+				int end31x = obj.getPoint31XTile(j + increment);
+				int end31y = obj.getPoint31YTile(j + increment);
+				boolean last = i == roads.size() - 1 && j == road.getEndPointIndex() - increment;
+				boolean first = firstRoad && j == start;
 				if (first) {
 					st31x = (int) currentPoint.x;
 					st31y = (int) currentPoint.y;
