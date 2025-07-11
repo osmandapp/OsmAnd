@@ -5076,5 +5076,16 @@
     <string name="poi_denomination_evangelical_lutheran">Evangelická luteránská</string>
     <string name="poi_denomination_anabaptist">Anabaptistická</string>
     <string name="poi_denomination_thai_mahanikaya">Thajská Mahanikaya</string>
-    <string name="poi_denomination_thai_thammayut">Thai Thammayut</string>
+    <string name="poi_denomination_thai_thammayut">Thajský Thammayut</string>
+    <string name="poi_denomination_african_methodist_episcopal">Africká metodistická episkopální</string>
+    <string name="poi_denomination_soto">Soto</string>
+    <string name="poi_denomination_macedonian_orthodox">Makedonská pravoslavná</string>
+    <string name="poi_denomination_southern_baptist">Jižní baptistická</string>
+    <string name="poi_denomination_jodo_shinshu">Jodo Shinshu</string>
+    <string name="poi_denomination_african_methodist_episcopal_zion">Africká metodistická episkopální sion</string>
+    <string name="poi_denomination_christ_scientist">Christ Scientist</string>
+    <string name="poi_denomination_nichiren">Nichiren</string>
+    <string name="poi_denomination_church_of_god">Boží církev</string>
+    <string name="poi_denomination_brethren">Bratři</string>
+    <string name="poi_denomination_free_evangelical">Svobodní evangelíci</string>
 </resources>
