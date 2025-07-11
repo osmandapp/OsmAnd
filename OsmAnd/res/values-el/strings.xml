@@ -5110,5 +5110,14 @@
     <string name="map_widget_distance_by_tap">Απόσταση κατά πάτημα</string>
     <string name="map_markers_history">Ιστορικό δεικτών χάρτη</string>
     <string name="attribute">Χαρακτηριστικό</string>
-    <string name="shared_string_author">Συντάκτης</string>
+    <string name="shared_string_author">Δημιουργός</string>
+    <string name="output">Έξοδος</string>
+    <string name="poi_routes">Διαδρομές</string>
+    <string name="route_line_use_map_style_color">Χρήση προεπιλεγμένου χρώματος του στυλ χάρτη (%1$s).</string>
+    <string name="route_line_use_map_style_width">Χρήση προεπιλεγμένου πλάτους του στυλ χάρτη (%1$s).</string>
+    <string name="shared_string_itinerary">Δρομολόγιο</string>
+    <string name="shared_string_uphill">Ανηφόρα</string>
+    <string name="shared_string_downhill">Κατηφόρα</string>
+    <string name="backup_and_restore">Αντίγραφο ασφαλείας &amp; επαναφορά</string>
+    <string name="osmand_cloud_help_descr">Χρειάζεστε βοήθεια; Παρακαλούμε επικοινωνήστε μαζί μας στο %1$s</string>
 </resources>
