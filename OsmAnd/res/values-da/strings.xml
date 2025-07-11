@@ -5811,4 +5811,5 @@
     <string name="deleting_history">Sletter historik…</string>
     <string name="show_rasterization_debug_tile">Vis oplysninger om rasterisering af kortfliser</string>
     <string name="show_symbols_bboxes">Vis symbolers bboxer</string>
+    <string name="release_5_2">• Arbejde i gang...</string>
 </resources>

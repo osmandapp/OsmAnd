@@ -5592,7 +5592,7 @@
     <string name="fuel_tank_capacity_description">Zadejte kapacitu vaší palivové nádrže pro přesnější sledování úrovně a spotřeby paliva</string>
     <string name="fuel_tank_capacity">Kapacita palivové nádrže</string>
     <string name="obd_engine_oil_temperature_desc">Zobrazuje teplotu motorového oleje.</string>
-    <string name="obd_throttle_position_desc">Ukazuje úhel škrticí klapky v tělese škrticí klapky.</string>
+    <string name="obd_throttle_position_desc">Zobrazuje úhel škrticí klapky v těle škrticí klapky.</string>
     <string name="vehicle_metrics_obd_ii">Metriky vozidla (OBD-II)</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s za %2$s</string>
     <string name="shared_string_volume">Objem</string>
@@ -5611,7 +5611,7 @@
     <string name="record_obd_data">Záznam metrik vozidla</string>
     <string name="shared_string_hour">Hodiny</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Sledování důležitých údajů o vozidle pomocí protokolu OBD-II. Sledujte klíčové ukazatele, jako je rychlost, otáčky motoru, spotřeba paliva a další.</string>
-    <string name="obd_fuel_consumption_rate_sensor_type">Použít vybrané jednotky v názvu.</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Použijte vybrané jednotky v názvu.</string>
     <string name="remaining_fuel_description">Zobrazuje zbývající množství paliva v nádrži vozidla</string>
     <string name="average_value_slider_description">Vyberte časový interval pro měření průměrné hodnoty.</string>
     <string name="obd_fuel_consumption_desc">Zobrazuje míru spotřeby paliva v motoru vypočítanou na základě zbývajícího paliva, velikosti nádrže a ujeté vzdálenosti podle GPS.</string>
@@ -5619,16 +5619,16 @@
     <string name="show_minor_turns_descr">Na všech průjezdních křižovatkách se zobrazí jízdní pruhy bez ohledu na hlasové pokyny</string>
     <string name="us_gallons_unit">gal</string>
     <string name="unit_of_volume_description">Zvolené jednotky budou použity na všechna data týkající se objemu v aktuálním profilu.</string>
-    <string name="obd_fuel_pressure_desc">Ukazuje tlak v palivovém systému</string>
+    <string name="obd_fuel_pressure_desc">Zobrazuje tlak v palivovém systému</string>
     <string name="obd_battery_voltage_desc">Zobrazuje úroveň napětí baterie vozidla</string>
-    <string name="obd_engine_runtime_desc">Ukazuje, jak dlouho motor běží od jeho nastartování.</string>
+    <string name="obd_engine_runtime_desc">Zobrazuje, jak dlouho motor běží od jeho spuštění.</string>
     <string name="obd_throttle_position">Poloha škrticí klapky</string>
-    <string name="obd_calculated_engine_load_desc">Zobrazuje procento výkonu motoru, které je v daném okamžiku k dispozici.</string>
-    <string name="obd_engine_runtime">Provozní doba motoru</string>
+    <string name="obd_calculated_engine_load_desc">Zobrazuje procento dostupného výkonu motoru, které je v daném okamžiku využíváno.</string>
+    <string name="obd_engine_runtime">Doba chodu motoru</string>
     <string name="obd_speed_desc">Zobrazuje rychlost ze snímače rychlosti vozidla (VSS).</string>
     <string name="obd_air_intake_temp_desc">Ukazuje teplotu vzduchu vstupujícího do sacího potrubí motoru.</string>
     <string name="unit_of_volume">Jednotka objemu</string>
-    <string name="obd_engine_coolant_temp_desc">Ukazuje teplotu chladicí kapaliny motoru</string>
+    <string name="obd_engine_coolant_temp_desc">Zobrazuje teplotu chladicí kapaliny motoru</string>
     <string name="obd_ambient_air_temp_desc">Zobrazuje teplotu vně vozidla.</string>
     <string name="preview_next_turn">Náhled další odbočky</string>
     <string name="av_audio_sample_rate">Vzorkovací frekvence zvuku</string>
@@ -5783,4 +5783,5 @@
     <string name="deleting">Mazání…</string>
     <string name="show_rasterization_debug_tile">Zobrazit informace o rasterizaci dlaždic</string>
     <string name="show_symbols_bboxes">Zobrazit bboxy znaků</string>
+    <string name="release_5_2">• V přípravě…</string>
 </resources>

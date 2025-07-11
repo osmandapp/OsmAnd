@@ -1490,7 +1490,7 @@
     <!-- string name="lat_lon_pattern">Γ. Πλ:%1$.5f Γ. Μηκ: %2$.5f</string -->
     <string name="follow_us">Ακολούθησε μας</string>
     <string name="access_no_destination">Πρόσθετο προσβασημότητας: Δεν έχει οριστεί προορισμός</string>
-    <string name="map_widget_magnetic_bearing">Μαγνητική ανοχή</string>
+    <string name="map_widget_magnetic_bearing">Μαγνητικός προσανατολισμός</string>
     <string name="access_default_color">Προεπιλεγμένο χρώμα</string>
     <string name="access_category_choice">Επιλογή κατηγορίας</string>
     <string name="access_hint_enter_name">Εισαγωγή ονόματος</string>
@@ -1977,7 +1977,7 @@
     <string name="access_direction_haptic_feedback_descr">Υπόδειξη κατεύθυνσης σημείου προορισμού με δόνηση.</string>
     <string name="use_osm_live_routing_description">Ενεργοποίηση πλοήγησης για αλλαγές του OsmAnd Live.</string>
     <string name="use_osm_live_routing">Πλοήγηση OsmAnd Live</string>
-    <string name="map_widget_bearing">Σχετική ανοχή</string>
+    <string name="map_widget_bearing">Σχετικός προσανατολισμός</string>
     <string name="access_disable_offroute_recalc">Χωρίς επανυπολογισμό της διαδρομής αφού το πέρασε</string>
     <string name="access_disable_offroute_recalc_descr">Χωρίς επανυπολογισμό της διαδρομής αφού βγήκε εκτός πορείας</string>
     <string name="access_disable_wrong_direction_recalc">Χωρίς επανυπολογισμό της διαδρομής για την αντίθετη κατεύθυνση</string>
@@ -5100,4 +5100,24 @@
     <string name="weather_wind_knots">Κόμβοι</string>
     <string name="weather_precip_milimeters">Χιλιοστά</string>
     <string name="weather_precip_inches">Ίντσες</string>
+    <string name="max_speed_widget_desc">Εμφανίζει το όριο ταχύτητας του δρόμου στον οποίο οδηγείτε εκείνη την στιγμή.</string>
+    <string name="arrival_time_widget_desc">Χρόνος άφιξης στο σημείο προορισμού.</string>
+    <string name="map_widget_true_bearing">Πραγματικός προσανατολισμός</string>
+    <string name="map_widget_sunrise_desc">Εμφανίζει την ώρα της επόμενης ανατολής του ηλίου ή τον χρόνο που απομένει μέχρι την ανατολή του ηλίου.</string>
+    <string name="map_widget_sunset_desc">Εμφανίζει την ώρα της επόμενης δύσης του ηλίου ή τον χρόνο που απομένει μέχρι την δύση του ηλίου.</string>
+    <string name="map_widget_trip_recording_downhill">Κατηφόρα</string>
+    <string name="map_widget_trip_recording_uphill">Ανηφόρα</string>
+    <string name="map_widget_distance_by_tap">Απόσταση κατά πάτημα</string>
+    <string name="map_markers_history">Ιστορικό δεικτών χάρτη</string>
+    <string name="attribute">Χαρακτηριστικό</string>
+    <string name="shared_string_author">Δημιουργός</string>
+    <string name="output">Έξοδος</string>
+    <string name="poi_routes">Διαδρομές</string>
+    <string name="route_line_use_map_style_color">Χρήση προεπιλεγμένου χρώματος του στυλ χάρτη (%1$s).</string>
+    <string name="route_line_use_map_style_width">Χρήση προεπιλεγμένου πλάτους του στυλ χάρτη (%1$s).</string>
+    <string name="shared_string_itinerary">Δρομολόγιο</string>
+    <string name="shared_string_uphill">Ανηφόρα</string>
+    <string name="shared_string_downhill">Κατηφόρα</string>
+    <string name="backup_and_restore">Αντίγραφο ασφαλείας &amp; επαναφορά</string>
+    <string name="osmand_cloud_help_descr">Χρειάζεστε βοήθεια; Παρακαλούμε επικοινωνήστε μαζί μας στο %1$s</string>
 </resources>

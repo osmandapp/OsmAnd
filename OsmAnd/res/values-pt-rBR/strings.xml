@@ -2531,7 +2531,7 @@
     <string name="make_as_start_point">Converter em ponto de partida</string>
     <string name="select_waypoints_category_description">Adicione todos os pontos da trilha, ou selecione categorias separadas.</string>
     <string name="shared_string_total">Total</string>
-    <string name="clear_all_intermediates">Limpar todos os pontos intermédios</string>
+    <string name="clear_all_intermediates">Limpar todos os destinos intermédios</string>
     <string name="group_deleted">Grupo excluído</string>
     <string name="nothing_found_in_radius">Nada encontrado:</string>
     <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres, mundiais e de alta qualidade do OSM.
@@ -2746,9 +2746,9 @@
     <string name="shared_string_launch">Iniciar</string>
     <string name="run_full_osmand_header">Iniciar OsmAnd\?</string>
     <string name="add_destination_point">Defina destino</string>
-    <string name="add_intermediate_point">Adicionar intermediário</string>
+    <string name="add_intermediate_point">Adicionar destino intermediário</string>
     <string name="add_start_point">Defina o ponto de partida</string>
-    <string name="intermediate_waypoint">Ponto intermediário</string>
+    <string name="intermediate_waypoint">Destino intermediário</string>
     <string name="transfers">Transferências</string>
     <string name="on_foot">A pé</string>
     <string name="route_way">Via</string>
@@ -2843,7 +2843,7 @@
     <string name="rendering_attr_highway_class_bridleway_name">Estrada equestre</string>
     <string name="public_transport_warning_descr_blog">Leia mais sobre o roteamento OsmAnd em nosso blog.</string>
     <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, espere erros e imprecisões.</string>
-    <string name="add_intermediate">Adicionar ponto intermediário</string>
+    <string name="add_intermediate">Adicionar destino intermediário</string>
     <string name="shared_string_walk">A pé</string>
     <string name="save_poi_value_exceed_length">Reduza o comprimento da tag \"%s\" para menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Comprimento do valor \"%s\"</string>
@@ -4297,7 +4297,7 @@
     <string name="display_route_tracks">Exibir trilhas</string>
     <string name="display_route_tracks_as_poi">Exibir trilhas como POI</string>
     <string name="quick_action_toggle_preference">Um botão de alternância para alterar a preferência.</string>
-    <string name="delete_history_items_descr">Excluir itens de histórico selecionados?</string>
+    <string name="delete_history_items_descr">As entradas selecionadas são removidas da lista.</string>
     <string name="delete_history_items">Apagar itens do histórico %1$s?</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Toque em \"%1$s\" para copiar %2$s arquivos de \"%3$s\" para \"%4$s\". Pode levar algum tempo.</string>
@@ -5823,7 +5823,7 @@
     <string name="type_of_activity">Tipo de atividade</string>
     <string name="change_activity">Alterar atividade</string>
     <string name="shared_string_increase">Aumentar</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para motos fora de estrada</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas para bicicletas sujas</string>
     <string name="shared_string_decrease">Diminuir</string>
     <string name="unit_volt">V</string>
     <string name="wikimedia">Wikimedia</string>
@@ -5897,7 +5897,7 @@
     <string name="connect_obd_instructions_step3">Ative o Bluetooth no seu dispositivo</string>
     <string name="learn_more_about_obd_sensors">Saiba mais sobre sensores.</string>
     <string name="screen_is_locked_by_action_button">A tela sensível ao toque está bloqueada. Toque no botão para desbloquear.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para motos fora de estrada</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas para bicicletas de terra</string>
     <string name="obd_fuel_type_bifuel_ethanol">Funcionamento bicombustível a etanol</string>
     <string name="liter_per_hour">L/h</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido elétrico e motor a combustão</string>
@@ -6088,7 +6088,7 @@
     <string name="show_dms_grids">Use DMS em vez de graus</string>
     <string name="plugin_ais_tracker_name">Rastreador de embarcações AIS</string>
     <string name="plugin_ais_tracker_description">Exibe posições AIS e informações sobre embarcações próximas. Os dados AIS são recebidos via rede a partir de um receptor AIS externo.</string>
-    <string name="no_places_available">Não há lugares disponíveis</string>
+    <string name="no_places_available">Nenhum lugar na região visível</string>
     <string name="selected_delayed_profile">Perfil selecionado \"%s\"</string>
     <string name="preview_next_turn">Prévia da próxima curva</string>
     <string name="obd_fuel_consumption">Consumo de combustível</string>
@@ -6135,7 +6135,7 @@
     <string name="set_home">Definir casa</string>
     <string name="set_work">Definir trabalho</string>
     <string name="sensor_data">Dados do sensor</string>
-    <string name="set_intermediate_point">Definir ponto intermediário</string>
+    <string name="set_intermediate_point">Definir destino intermediário</string>
     <string name="set_start_point">Definir ponto de início</string>
     <string name="battery_level">Nível da bateria</string>
     <string name="set_parking_position">Definir posição de estacionamento</string>
@@ -6148,4 +6148,5 @@
     <string name="ski_route_switch_style_description">Explore as pistas de esqui, os teleféricos e muito mais com o estilo de mapa Inverno e esqui.</string>
     <string name="show_rasterization_debug_tile">Mostrar informações de rasterização de ladrilhos</string>
     <string name="show_symbols_bboxes">Mostrar símbolos bboxes</string>
+    <string name="release_5_2">• Trabalho em andamento...</string>
 </resources>

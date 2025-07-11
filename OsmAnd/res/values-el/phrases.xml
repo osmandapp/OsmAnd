@@ -3463,7 +3463,7 @@
     <string name="poi_checkpoint_type_notebook">Σημειωματάριο</string>
     <string name="poi_checkpoint_type_needler">Ένεση</string>
     <string name="poi_checkpoint_type_electronic">Ηλεκτρονικό</string>
-    <string name="poi_course">Πορεία</string>
+    <string name="poi_course">Διαδρομή</string>
     <string name="poi_rock">Πέτρα</string>
     <string name="poi_end_date">Τελική ημερομηνία</string>
     <string name="poi_appliance">Κατάστημα συσκευών</string>
@@ -3556,7 +3556,7 @@
     <string name="poi_motorcycle_permissive">Ανεκτή</string>
     <string name="poi_motorcycle_yes">Ναι</string>
     <string name="poi_trailer_designated">Δηλωμένη</string>
-    <string name="poi_trailer_yes">Ναι</string>
+    <string name="poi_trailer_yes">Ναι;Τρέιλερ</string>
     <string name="poi_motorhome_designated">Δηλωμένη</string>
     <string name="poi_motorhome_yes">Ναι;Αυτοκινούμενο</string>
     <string name="poi_caravan_designated">Δηλωμένη</string>
@@ -3747,9 +3747,9 @@
     <string name="poi_cellar_entrance">Είσοδος κάβας</string>
     <string name="poi_disabled_designated">Δηλωμένη</string>
     <string name="poi_goods_designated">Δηλωμένη</string>
-    <string name="poi_hgv_delivery">Διανομή</string>
+    <string name="poi_hgv_delivery">Διανομή;Πρόσβαση για φορτηγά παράδοσης</string>
     <string name="poi_hgv_designated">Δηλωμένη</string>
-    <string name="poi_hgv_destination">Προορισμός</string>
+    <string name="poi_hgv_destination">Προορισμός;Πρόσβαση προορισμού φορτηγών</string>
     <string name="poi_hgv_yes">Ναι</string>
     <string name="poi_mofa_designated">Δηλωμένη</string>
     <string name="poi_snowmobile_private">Πρόσβαση χιονοοχήματος: ιδιωτική</string>
@@ -4205,4 +4205,5 @@
     <string name="poi_socket_typee_voltage_medium">Μεσαία</string>
     <string name="poi_socket_typee_voltage_low">Χαμηλή</string>
     <string name="poi_climbing_rock_basalt">Πέτρωμα αναρρίχησης: βασάλτης</string>
+    <string name="poi_osmwiki">Δημοφιλή μέρη (Βικιπαίδεια)</string>
 </resources>
