@@ -4478,13 +4478,13 @@
     <string name="poi_socket_chademo_voltage_filter">CHAdeMO-Anschluss Spannung</string>
     <string name="poi_socket_schuko_voltage_filter">Schuko-Anschluss Spannung</string>
     <string name="poi_socket_type2_cable_voltage_filter">Typ 2 Kabelanschluss Spannung</string>
-    <string name="poi_self_checkout">Automatenzahlung</string>
+    <string name="poi_self_checkout">SB-Kasse</string>
     <string name="poi_recycling_plastic_bottle_caps">Flaschenverschlüsse aus Kunststoff</string>
     <string name="poi_recycling_aluminium_cans">Aluminiumdosen</string>
     <string name="poi_recycling_pet_drink_bottles">PET-Getränkeflaschen</string>
     <string name="poi_recycling_textiles">Textilien</string>
     <string name="poi_self_checkout_yes">Ja</string>
-    <string name="poi_self_checkout_no">Automatenzahlung: nein</string>
+    <string name="poi_self_checkout_no">SB-Kasse: nein</string>
     <string name="poi_lifeguard">Rettungsschwimmer</string>
     <string name="poi_lifeguard_tower">Rettungsschwimmerturm</string>
     <string name="poi_self_checkout_only">Ausschließlich</string>
