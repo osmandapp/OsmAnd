@@ -57,9 +57,11 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 			dividerItem.setMargins(margin, 0, 0, 0);
 			items.add(dividerItem);
 
-			SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+			SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
 			if (plugin != null && plugin.is3DReliefAllowed()) {
 				createOfflineItem();
+			} else {
+				createOnlineItem();
 			}
 		} else {
 			createOsmAndProItem();
@@ -76,6 +78,23 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 					Fragment fragment = getTargetFragment();
 					if (fragment instanceof CalculateAltitudeListener) {
 						((CalculateAltitudeListener) fragment).attachToRoadsSelected(segmentIndex);
+					}
+					dismiss();
+				})
+				.create();
+		items.add(attachToRoadsItem);
+	}
+
+	private void createOnlineItem() {
+		BaseBottomSheetItem attachToRoadsItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.calculate_online_altitude_descr))
+				.setTitle(getString(R.string.calculate_online))
+				.setIcon(getActiveIcon(R.drawable.ic_action_world_globe))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_active)
+				.setOnClickListener(v -> {
+					Fragment fragment = getTargetFragment();
+					if (fragment instanceof CalculateAltitudeListener) {
+						((CalculateAltitudeListener) fragment).calculateOnlineSelected(segmentIndex);
 					}
 					dismiss();
 				})
@@ -157,7 +176,6 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 
 		void attachToRoadsSelected(int segmentIndex);
 
-		@Deprecated
 		void calculateOnlineSelected(int segmentIndex);
 
 		void calculateOfflineSelected(int segmentIndex);
