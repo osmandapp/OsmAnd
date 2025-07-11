@@ -5819,7 +5819,7 @@
     <string name="delete_online_routing_engine">Voleu suprimir aquest motor d\'encaminament en línia?</string>
     <string name="message_name_is_already_exists">El nom ja existeix</string>
     <string name="message_server_error">Error del servidor: %1$s</string>
-    <string name="routing_engine_vehicle_type_racingbike">Motociclisme</string>
+    <string name="routing_engine_vehicle_type_racingbike">Bicicleta de carreres</string>
     <string name="routing_engine_vehicle_type_small_truck">Camió petit</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Ciclisme regular</string>
     <string name="routing_engine_vehicle_type_cycling_road">Cicloturisme</string>
@@ -5831,7 +5831,7 @@
     <string name="announcement_time_descr">El temps d\'anunci dels diferents senyals de veu depèn del tipus de sol·licitud, la velocitat de navegació actual i la velocitat de navegació per defecte.</string>
     <string name="announcement_time_intervals">Intervals de temps i distància</string>
     <string name="announcement_time_arrive">Arriba a la destinació</string>
-    <string name="announcement_time_off_route">Ruta fora</string>
+    <string name="announcement_time_off_route">Fora de la ruta</string>
     <string name="announcement_time_prepare">Prepara</string>
     <string name="announcement_time_prepare_long">Preparació llarga</string>
     <string name="announcement_time_approach">Aproximació</string>
@@ -5879,8 +5879,8 @@
     <string name="pass_whole_track_descr">Punt de la pista a navegar</string>
     <string name="shared_string_gpx_route">Guardar la ruta</string>
     <string name="app_mode_go_cart">Kart</string>
-    <string name="app_mode_wheelchair_forward">Cadira de rodes cap endavant</string>
-    <string name="app_mode_motor_scooter">Escúter</string>
+    <string name="app_mode_wheelchair_forward">Cadira de rodes (cap endavant)</string>
+    <string name="app_mode_motor_scooter">Escúter (amb motor)</string>
     <string name="default_screen_timeout">Temps d\'espera per defecte de la pantalla</string>
     <string name="map_source_zoom_levels_descr">Afecta la pantalla quan s\'utilitza com a mapa o superposició/underlay.\n\n%1$s: El mapa està limitat a l\'interval de nivell de zoom seleccionat.\n\n%2$s són els nivells en què les fitxes originals seran visibles, l\'escalat o la baixada es produiran fora d\'aquests valors.</string>
     <string name="turn_screen_on_wake_time_descr">Selecciona el temps d\'espera de la pantalla després de despertar. (\"%1$s\" no aplica temps d\'espera.)</string>
