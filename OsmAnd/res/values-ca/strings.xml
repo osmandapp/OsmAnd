@@ -4802,7 +4802,7 @@
     <string name="shared_string_offline_only">Només fora de línia</string>
     <string name="meridian_180">180è meridià</string>
     <string name="prime_meridian">Meridià primer</string>
-    <string name="equator">Equator</string>
+    <string name="equator">Equador</string>
     <string name="show_image_previews">Mostra les vistes prèvies de la imatge</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Acció per a controlar la visibilitat de la quadrícula de coordenades en el mapa.</string>
     <string name="layer_coordinates_grid">Quadrícula de coordenades</string>
@@ -4906,7 +4906,7 @@
     <string name="reset_average_value">Restableix el valor mitjà</string>
     <string name="average_value_slider_description">Seleccioneu l\'interval de temps per a mesurar el valor mitjà.</string>
     <string name="average_temperature_slider_description">Seleccioneu l\'interval de temps per a mesurar la temperatura mitjana.</string>
-    <string name="shared_string_instant">Intant</string>
+    <string name="shared_string_instant">Instantani</string>
     <string name="current_temperature">Temperatura actual</string>
     <string name="average_temperature">Temperatura mitjana</string>
     <string name="show_minor_turns_descr">Els carrils es mostraran en totes les interseccions que passen independentment de les instruccions de veu</string>
@@ -4964,7 +4964,7 @@
     <string name="height_legend_description">Els mapes de color d\'altitud s\'utilitzen per a visualitzar el relleu.</string>
     <string name="action_icon">Icona d\'acció</string>
     <string name="assigned_keys">Claus assignades</string>
-    <string name="steps_per_minute_unit">SPM</string>
+    <string name="steps_per_minute_unit">PPM (passos per minut)</string>
     <string name="allow_display_on_top">Permet mostrar a la part superior</string>
     <string name="allow_display_on_top_description">Permet mostrar els textos del mapa un damunt de l\'altre</string>
     <string name="show_rasterization_debug_tile">Mostra la informació de rasterització del mosaic</string>
@@ -5021,14 +5021,14 @@
     <string name="fix_north_up">Habilita el nord fix</string>
     <string name="fix_north_up_descr">No giris el mapa amb gestos en l\'orientació del mapa North Up</string>
     <string name="unchanged_parameter_summary">Cada pista conservarà els seus propis paràmetres.</string>
-    <string name="shared_string_unchanged">Sense canviar</string>
+    <string name="shared_string_unchanged">Sense canvis</string>
     <string name="map_widget_map_scale">Escala del mapa</string>
     <string name="upload_local_versions">Puja les versions locals</string>
     <string name="download_cloud_versions">Baixa les versions al núvol</string>
     <string name="use_3d_track_visualization">Visualització 3D</string>
     <string name="distance_during_navigation_description">Seleccioneu com es mostra la informació de la distància als ginys de navegació (distància a punt, següent torn, carrils).\n\nTrieu «%1$s» per als números exactes o «%2$s» per a una llegibilitat més fàcil.</string>
     <string name="distance_during_navigation">Distància durant la navegació</string>
-    <string name="precise">Preci</string>
+    <string name="precise">Precís</string>
     <string name="round_up">Arrodoni</string>
     <string name="release_4_7">with Nou giny \"Speedometer\" compatible amb Android Auto\n\nthe Configura la pantalla del mapa afegint múltiples botons \"Acció ràpida\"\n\nof Millora de la llegibilitat de les dades en gràfics\n\ned S\'han afegit filtres per dades del sensor per a les pistes\n\nof Millora de la personalització de l\'aparença per al grup de pistes\n\ns S\'ha afegit la implementació per a etiquetes GPX addicionals\n\n: Personalitza \"Distància durant la navegació\": tria entre números precisos o arrodonits\n\nIU unificada per a la selecció de pistes\n\nS\'ha canviat l\'inici de sessió d\'OpenStreetMap a OAuth 2.0</string>
     <string name="lang_ta_in">Tàmil (Índia)</string>
@@ -5835,7 +5835,7 @@
     <string name="announcement_time_prepare">Prepara</string>
     <string name="announcement_time_prepare_long">Preparació llarga</string>
     <string name="announcement_time_approach">Aproximació</string>
-    <string name="announcement_time_passing">Passat</string>
+    <string name="announcement_time_passing">Passant</string>
     <string name="change_folder">Canvia la carpeta</string>
     <string name="rename_track">Reanomena la pista</string>
     <string name="edit_track">Edita la pista</string>
@@ -5922,4 +5922,9 @@
     <string name="lang_zh_hant">Xinès tradicional</string>
     <string name="battery_saving_mode">Mode de desament de bateria</string>
     <string name="show_symbols_debug_info">Mostra la informació de depuració dels símbols</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d pista)</item>
+        <item quantity="many">%1$d (%2$d pistes)</item>
+        <item quantity="other">%1$d (%2$d pistes)</item>
+    </plurals>
 </resources>
