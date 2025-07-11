@@ -5295,7 +5295,7 @@
     <string name="widget_available_ram">Dostępna pamięć RAM</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="terrain_maps">Mapy terenu</string>
-    <string name="delete_map_description">Uunąć mapę %1$s?</string>
+    <string name="delete_map_description">Usunąć mapę %1$s?</string>
     <string name="open_issue_on_github">Otwórz problem na GitHubie</string>
     <string name="about_osmand">O aplikacji OsmAnd</string>
     <string name="user_guide">Samouczek</string>
