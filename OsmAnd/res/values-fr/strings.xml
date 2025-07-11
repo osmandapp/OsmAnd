@@ -5656,7 +5656,7 @@
     <string name="hmd_promo_years">Promo HMD pour %1$s ans</string>
     <string name="hmd_promo_description_years">Accès gratuit aux fonctionnalités comme le téléchargement illimité de cartes, le relief 3D, etc. pour %1$s ans</string>
     <string name="uphill_downhill_split">Montée / Descente</string>
-    <string name="shared_string_flat">README : - La meilleure façon d\'aider à la traduction est via https://hosted.weblate.org/engage/osmand/ - Si vous modifiez directement un fichier strings.xml, veuillez vous assurer : 1. De ne pas produire de chaînes en double (vérifiez par nom si une chaîne existe déjà) 2. Chaque apostrophe (guillemet) est précédée d\'une barre oblique inverse. 3. Si vous modifiez le fichier de chaînes en anglais, veuillez ajouter de nouvelles chaînes en haut du fichier, cela facilite les révisions périodiques avant les publications. - Pour la formulation et la cohérence, veuillez noter https://docs.osmand.net/docs/technical/contributions/translating-osmand Merci - Hardy</string>
+    <string name="shared_string_flat">Plane</string>
     <string name="shared_string_split_by">Séparer par</string>
     <string name="battery">batterie</string>
     <string name="sensor_data">Données du capteur</string>
