@@ -5231,7 +5231,7 @@
     <string name="weather_source_ecmwf_description">Centro Europeo de Previsiones Meteorológicas a Plazo Medio</string>
     <string name="weather_source_GFS_description">Sistema Global de Predicción de los Centros Nacionales de Predicción Medioambiental</string>
     <string name="weather_source_ecmwf_title">CEPMPM (ECMWF)</string>
-    <string name="weather_source_GFS_title">Local</string>
+    <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Proveedor de datos</string>
     <string name="weather_data_sources_prompt">OsmAnd ofrece datos meteorológicos de dos proveedores:</string>
     <string name="shared_string_modify">Modificar</string>
@@ -5360,7 +5360,7 @@
     <string name="no_internet_descr">Compruebe la conexión y vuelva a intentarlo.</string>
     <string name="no_photos_available_descr">Aún no se han añadido fotos de usuarios a esta ubicación</string>
     <string name="no_photos_available">Sin fotos disponibles</string>
-    <string name="wikimedia">Imagen descargada a Documentos/Descargar.</string>
+    <string name="wikimedia">Wikimedia</string>
     <string name="obd_fuel_type_not_provided">No se indica el tipo de combustible</string>
     <string name="obd_fuel_type_gasoline">Gasolina</string>
     <string name="obd_fuel_type_methanol">Metanol</string>
