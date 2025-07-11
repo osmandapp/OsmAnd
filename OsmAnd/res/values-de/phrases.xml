@@ -3410,7 +3410,7 @@
     <string name="poi_socket_schuko_output_low">Niedrig</string>
     <string name="poi_flooring">Bodenleger</string>
     <string name="poi_pottery">Töpferei</string>
-    <string name="poi_whitewater_rapid_name">Name der Stromschnellen</string>
+    <string name="poi_rapids_name">Name der Stromschnellen</string>
     <string name="poi_outpost">Anlieferungsstelle des Geschäftes</string>
     <string name="poi_barbecue_grill">Barbecue-Grill: ja</string>
     <string name="poi_amusement_arcade">Spielhalle</string>

@@ -3410,7 +3410,7 @@
     <string name="poi_socket_schuko_output_low">Χαμηλή</string>
     <string name="poi_flooring">Κατάστημα δαπέδων</string>
     <string name="poi_pottery">Κεραμικά</string>
-    <string name="poi_whitewater_rapid_name">Όνομα των γρήγορων ποταμιών</string>
+    <string name="poi_rapids_name">Όνομα των γρήγορων ποταμιών</string>
     <string name="poi_outpost">Σημείο παράδοσης καταστήματος</string>
     <string name="poi_barbecue_grill">Σχάρα ψησταριάς: ναι</string>
     <string name="poi_water_utility">Γραφείο υπηρεσίας νερού</string>

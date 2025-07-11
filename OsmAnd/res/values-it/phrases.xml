@@ -4165,7 +4165,7 @@
     <string name="poi_seamark_water_level_dry">Livello dell\'acqua: asciutto</string>
     <string name="poi_water_source_groundwater">Acqua di falda</string>
     <string name="poi_climbing_bolted_yes">Ancoraggi fissi: sì</string>
-    <string name="poi_whitewater_rapid_name">Nome delle rapide del fiume</string>
+    <string name="poi_rapids_name">Nome delle rapide del fiume</string>
     <string name="poi_service_vehicle_muffler_yes">Silenziatore</string>
     <string name="poi_appliance">Negozio di elettrodomestici</string>
     <string name="poi_bath_type_foot_bath">Pediluvio</string>

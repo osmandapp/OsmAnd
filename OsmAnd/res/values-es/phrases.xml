@@ -3407,7 +3407,7 @@
     <string name="poi_socket_schuko_output_low">Baja</string>
     <string name="poi_flooring">Tienda de suelos</string>
     <string name="poi_pottery">Alfarería</string>
-    <string name="poi_whitewater_rapid_name">Nombre de los rápidos del río</string>
+    <string name="poi_rapids_name">Nombre de los rápidos del río</string>
     <string name="poi_outpost">Punto de entrega de la tienda</string>
     <string name="poi_barbecue_grill">Parrilla de barbacoa: sí</string>
     <string name="poi_water_utility">Oficina de servicio de agua</string>

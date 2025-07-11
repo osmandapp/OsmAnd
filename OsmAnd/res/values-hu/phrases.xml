@@ -3407,7 +3407,7 @@
     <string name="poi_socket_schuko_output_low">kicsi</string>
     <string name="poi_flooring">Parkettabolt</string>
     <string name="poi_pottery">Kerámiatermék-bolt</string>
-    <string name="poi_whitewater_rapid_name">Zúgó (sellő) neve</string>
+    <string name="poi_rapids_name">Zúgó (sellő) neve</string>
     <string name="poi_service_car">Autós szolgáltatás</string>
     <string name="poi_barbecue_grill">Barbecue, grill</string>
     <string name="poi_water_utility">Vízmű irodája</string>

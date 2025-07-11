@@ -3412,7 +3412,7 @@
     <string name="poi_socket_schuko_output_low">Низька</string>
     <string name="poi_flooring">Фабрика</string>
     <string name="poi_pottery">Гончарство</string>
-    <string name="poi_whitewater_rapid_name">Назва річкових порогів</string>
+    <string name="poi_rapids_name">Назва річкових порогів</string>
     <string name="poi_service_car">Автопослуги</string>
     <string name="poi_glacier_type">Вид льодовика</string>
     <string name="poi_checkpoint_type">Вид контрольного пункту</string>

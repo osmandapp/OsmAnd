@@ -3420,7 +3420,7 @@
     <string name="poi_socket_schuko_output_low">Baixa</string>
     <string name="poi_flooring">Loja de revestimentos para o chão</string>
     <string name="poi_pottery">Oleiro</string>
-    <string name="poi_whitewater_rapid_name">Nome dos rápidos</string>
+    <string name="poi_rapids_name">Nome dos rápidos</string>
     <string name="poi_outpost">Ponto de entrega da loja</string>
     <string name="poi_barbecue_grill">Grelha de churrasco: sim</string>
     <string name="poi_water_utility">Companhia de água</string>
