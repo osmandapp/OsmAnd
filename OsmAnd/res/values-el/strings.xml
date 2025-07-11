@@ -5106,5 +5106,9 @@
     <string name="map_widget_sunrise_desc">Εμφανίζει την ώρα της επόμενης ανατολής του ηλίου ή τον χρόνο που απομένει μέχρι την ανατολή του ηλίου.</string>
     <string name="map_widget_sunset_desc">Εμφανίζει την ώρα της επόμενης δύσης του ηλίου ή τον χρόνο που απομένει μέχρι την δύση του ηλίου.</string>
     <string name="map_widget_trip_recording_downhill">Κατηφόρα</string>
-    <string name="map_widget_trip_recording_uphill">Ανάβαση</string>
+    <string name="map_widget_trip_recording_uphill">Ανηφόρα</string>
+    <string name="map_widget_distance_by_tap">Απόσταση κατά πάτημα</string>
+    <string name="map_markers_history">Ιστορικό δεικτών χάρτη</string>
+    <string name="attribute">Χαρακτηριστικό</string>
+    <string name="shared_string_author">Συντάκτης</string>
 </resources>
