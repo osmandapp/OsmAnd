@@ -5656,7 +5656,7 @@
     <string name="hmd_promo_years">Promo HMD pour %1$s ans</string>
     <string name="hmd_promo_description_years">Accès gratuit aux fonctionnalités comme le téléchargement illimité de cartes, le relief 3D, etc. pour %1$s ans</string>
     <string name="uphill_downhill_split">Montée / Descente</string>
-    <string name="shared_string_flat">Plane</string>
+    <string name="shared_string_flat">Plat</string>
     <string name="shared_string_split_by">Séparer par</string>
     <string name="battery">batterie</string>
     <string name="sensor_data">Données du capteur</string>
