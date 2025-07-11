@@ -5509,7 +5509,7 @@
     <string name="show_minor_turns">Visualizar en intersecciones menores al navegar en línea recta</string>
     <string name="vehicle_metrics_obd_ii">Métricas del vehículo (OBD-II)</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Monitorea datos vitales del vehículo mediante el protocolo OBD-II. Monitorea métricas clave como velocidad, RPM del motor, consumo de combustible y más.</string>
-    <string name="remaining_fuel_description">Muestra la cantidad de combustible restante en el tanque del vehículo.</string>
+    <string name="remaining_fuel_description">Muestra la cantidad de combustible restante en el tanque del vehículo</string>
     <string name="remaining_fuel">Combustible restante</string>
     <string name="obd_fuel_consumption_desc">Muestra la tasa de consumo de combustible del motor, calculada en función del combustible restante, el tamaño del tanque y la distancia recorrida, según lo determinado por el GPS.</string>
     <string name="show_minor_turns_descr">Los carriles se mostrarán en todas las intersecciones de paso independientemente de las indicaciones por voz</string>
@@ -5518,7 +5518,7 @@
     <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
     <string name="obd_throttle_position">Posición del acelerador</string>
     <string name="obd_ambient_air_temp_desc">Muestra la temperatura exterior del vehículo.</string>
-    <string name="obd_battery_voltage_desc">Muestra el nivel de voltaje de la batería del vehículo.</string>
+    <string name="obd_battery_voltage_desc">Muestra el nivel de voltaje de la batería del vehículo</string>
     <string name="obd_calculated_engine_load">Carga calculada del motor</string>
     <string name="obd_engine_oil_temperature">Temperatura del aceite del motor</string>
     <string name="obd_engine_runtime_desc">Muestra el tiempo que el motor ha estado funcionando desde que se arrancó.</string>
@@ -5566,7 +5566,7 @@
     <string name="shared_string_length">Longitud</string>
     <string name="shared_string_avg_altitude">Alt. promedio</string>
     <string name="shared_string_avg_speed">Vel. mínima</string>
-    <string name="release_5_0">• Descubre los PDI mejor clasificados con el nuevo modo «Explorar»\n\n • Todas las rutas de OSM, ¡ahora con opción de búsqueda! Senderismo, ciclismo, BTT y mucho más\n\n • El nuevo widget de navegación combina la flecha de giro y las indicaciones de navegación\n\n • Widget de información de la ruta actual: muestra el tiempo estimado de llegada, la hora de llegada y la distancia\n\n • Marca pistas de esquí y BTT en el mapa para obtener información detallada\n\n • Posibilidad de cambiar el tamaño del widget para los paneles izquierdo y derecho\n\n • Se ha añadido una cuadrícula de coordenadas con coordenadas geográficas\n\n • Se ha añadido la posibilidad de personalizar el aspecto predefinido de los grupos favoritos\n\n • Android Auto: vista del tiempo estimado de llegada y de la distancia hasta el siguiente punto de ruta; los nombres de las ciudades aparecen ahora en los resultados de búsqueda\n\n • Los picos prominentes ahora se pueden descubrir a través del mapa y la búsqueda\n\n • Alturas de picos de montaña en pies\n\n • Se añadieron peñascos y zonas de escalada en el mapa\n\n • Se ha mejorado la búsqueda de direcciones en EE.UU.\n\n • Se ha añadido voz de habla sintetizada (TTS) al hebreo para la navegación</string>
+    <string name="release_5_0">• Descubre los mejores PDI con el nuevo modo Explorar\n\n• ¡Todas las rutas OSM ahora disponibles para buscar! Senderismo, ciclismo, MTB y más\n\n• El nuevo widget de navegación combina flechas de giro e instrucciones de navegación\n\n• Widget de información de ruta actual: muestra el tiempo estimado de llegada (ETA), la hora de llegada y la distancia\n\n• Selecciona pistas de esquí y rutas de MTB en el mapa para obtener información detallada\n\n• Posibilidad de seleccionar el tamaño del widget para los paneles izquierdo y derecho\n\n• Se ha añadido la cuadrícula de coordenadas con coordenadas geográficas\n\n• Se ha añadido la posibilidad de personalizar la apariencia predeterminada de los grupos de favoritos\n\n• Android Auto: consulta el tiempo estimado de llegada (ETA) y la distancia al siguiente punto de referencia; los nombres de las ciudades ahora aparecen en los resultados de búsqueda\n\n• Ahora puedes descubrir picos destacados a través del mapa y la búsqueda\n\n• Alturas de los picos de las montañas en pies\n\n• Se ha añadido: Peñascos y zonas de escalada en el mapa\n\n• Se ha mejorado la búsqueda de direcciones en EE. UU.\n\n• Se ha añadido el texto a voz en hebreo para la navegación</string>
     <string name="show_dm_grids">Usar DM en lugar de grados o DMS</string>
     <string name="shared_string_online_only">Sólo al conectarse</string>
     <string name="shared_string_offline_only">Sólo desconectado</string>
