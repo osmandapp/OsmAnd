@@ -5295,7 +5295,7 @@
     <string name="widget_available_ram">Dostępna pamięć RAM</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="terrain_maps">Mapy terenu</string>
-    <string name="delete_map_description">Czy na pewno chcesz usunąć mapę %1$s?</string>
+    <string name="delete_map_description">Uunąć mapę %1$s?</string>
     <string name="open_issue_on_github">Otwórz problem na GitHubie</string>
     <string name="about_osmand">O aplikacji OsmAnd</string>
     <string name="user_guide">Samouczek</string>
@@ -5415,7 +5415,7 @@
     <string name="any_connected_with_device">Każde połączone: %s</string>
     <string name="max_sensor_temperature">Temperatura, wartość max</string>
     <string name="max_sensor_heartrate">Tętno, maksymalne</string>
-    <string name="shared_string_next_event">Następne zdarzenie</string>
+    <string name="shared_string_next_event">Następne wydarzenie</string>
     <string name="key_assignments_already_cleared_message">Wszystkie przypisania klawiszowe są już wyczyszczone</string>
     <string name="shared_string_eta">ETA</string>
     <string name="zoom_animated">Animacja powiększenia</string>
@@ -5425,7 +5425,7 @@
     <string name="key_assignments">Przypisania klawiszy</string>
     <string name="any_connected">Każde połączone</string>
     <string name="complex_widget_alert">Widżet %1$s można umieścić tylko w osobnym wierszu.</string>
-    <string name="previous_row_has_complex_widget">Poprzedni wiersz ma złożony widżet</string>
+    <string name="previous_row_has_complex_widget">Poprzedni rząd ma złożony widżet</string>
     <string name="see_all_plans">Zobacz wszystkie plany</string>
     <string name="battery_optimization_banner_content">Optymalizacja baterii systemu Android może powodować niedokładności w nagranych ścieżkach.</string>
     <string name="dont_ask_anymore">Nie pytaj więcej</string>
@@ -5548,7 +5548,7 @@
     <string name="user_palette">Paleta użytkownika</string>
     <string name="track_line">Linia trasy</string>
     <string name="fixed_height">Stała wysokość</string>
-    <string name="downward_gradient">Nachylenie w dół</string>
+    <string name="downward_gradient">Przejście w dół</string>
     <string name="explore_3d_track_description">Przeglądaj trasę w interaktywnym widoku 3D! Wizualizuj wysokość, prędkość i inne parametry bezpośrednio na mapie.</string>
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="steps_per_minute_unit">SPM</string>
@@ -5583,7 +5583,7 @@
     <string name="weather_source_ecmwf_description">Europejskie Centrum Prognoz Średnioterminowych</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
-    <string name="upward_gradient">Nachylenie w górę</string>
+    <string name="upward_gradient">Przejście w górę</string>
     <string name="route_line_use_coloring_speed">Linia trasy jest kolorowana według prędkości ruchu.</string>
     <string name="change_default_tracks_appearance_confirmation">Zastosować zmiany do istniejących ścieżek w folderze czy tylko do nowych?</string>
     <string name="fix_north_up_descr">Nie obracaj mapy za pomocą gestów w orientacji Północ na górze</string>
@@ -6073,4 +6073,6 @@
         <item quantity="many">%1$d (%2$d ścieżek)</item>
         <item quantity="other">%1$d (%2$d ścieżek)</item>
     </plurals>
+    <string name="release_5_2">• Praca w trakcie...</string>
+    <string name="quick_action_first_intermediate">Pierwszy od dołu</string>
 </resources>
