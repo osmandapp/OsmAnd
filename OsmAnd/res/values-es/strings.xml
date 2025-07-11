@@ -2735,27 +2735,7 @@
     <string name="searching_gps">Buscando GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
     <string name="app_mode_ufo">Ovni</string>
-    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado.
-\n
-\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil
-\n
-\n • Se ha añadido un widget para las coordenadas actuales
-\n
-\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa
-\n
-\n • Se ha corregido la grabación de trazas en segundo plano
-\n
-\n • Se mejoraron las descargas de mapas en segundo plano
-\n
-\n • Se ha vuelto a añadir la opción «Encender pantalla»
-\n
-\n • Se ha corregido la selección de idioma de Wikipedia
-\n
-\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación
-\n
-\n • Otras correcciones de errores
-\n
-\n</string>
+    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado. \n \n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil \n \n • Se ha añadido un widget para las coordenadas actuales \n \n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa \n \n • Se ha corregido la grabación de trazas en segundo plano \n \n • Se mejoraron las descargas de mapas en segundo plano \n \n • Se ha vuelto a añadir la opción «Encender pantalla» \n \n • Se ha corregido la selección de idioma de Wikipedia \n \n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación \n \n • Otras correcciones de errores</string>
     <string name="app_mode_personal_transporter">Transportador personal</string>
     <string name="app_mode_monowheel">Monociclo</string>
     <string name="app_mode_scooter">Escúter (motoneta)</string>
@@ -2992,23 +2972,7 @@
     <string name="routeInfo_piste_difficulty_name">Dificultad de la pista</string>
     <string name="routing_attr_width_name">Anchura</string>
     <string name="routing_attr_width_description">Especifica el límite de anchura permitida del vehículo en rutas.</string>
-    <string name="release_3_5">• Ajustes de la aplicación y del perfil actualizados. Cómoda distribución de los ajustes por tipo y posibilidad de personalizar cada perfil
-\n
-\n • Nuevo cuadro de diálogo de descarga de mapas que sugiere un mapa para descargar mientras se navega
-\n
-\n • Arreglos en el modo nocturno
-\n
-\n • Se corrigieron algunos problemas de navegación en todo el mundo
-\n
-\n • Se ha actualizado el mapa base con más detalles en la red de caminos.
-\n
-\n • Se corrigieron las zonas inundadas en todo el mundo
-\n
-\n • Navegación de esquí: perfil de elevación y complejidad de la ruta añadidos a los detalles de la ruta
-\n
-\n • Otras correcciones de errores
-\n
-\n</string>
+    <string name="release_3_5">• Ajustes de la aplicación y del perfil actualizados. Cómoda distribución de los ajustes por tipo y posibilidad de personalizar cada perfil \n \n • Nuevo cuadro de diálogo de descarga de mapas que sugiere un mapa para descargar mientras se navega \n \n • Arreglos en el modo nocturno \n \n • Se corrigieron algunos problemas de navegación en todo el mundo \n \n • Se ha actualizado el mapa base con más detalles en la red de caminos. \n \n • Se corrigieron las zonas inundadas en todo el mundo \n \n • Navegación de esquí: perfil de elevación y complejidad de la ruta añadidos a los detalles de la ruta \n \n • Otras correcciones de errores</string>
     <string name="change_data_storage_full_description">¿Mover los archivos de datos de OsmAnd al nuevo destino\?
 \n%1$s → %2$s</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
@@ -3152,31 +3116,7 @@
     <string name="multimedia_use_system_camera">Usar la aplicación del sistema</string>
     <string name="multimedia_photo_play_sound">Reproducir sonido al fotografiar</string>
     <string name="osm_authorization_success">Autorización exitosa</string>
-    <string name="release_3_6">• Perfiles: ahora puedes cambiar el orden, definir el icono para el mapa, cambiar todos los ajustes para los perfiles base y restaurarlos de nuevo a los valores predefinidos
-\n
-\n • Se han añadido los números de salida en la navegación
-\n
-\n • Se han rediseñado los ajustes de los complementos
-\n
-\n • Se ha rediseñado la pantalla de ajustes, para un acceso rápido a todos los perfiles
-\n
-\n • Se ha añadido la opción de copiar los ajustes de otro perfil
-\n
-\n • Se ha añadido la posibilidad de cambiar el orden u ocultar las categorías de PDI en la búsqueda
-\n
-\n • Se han alineado correctamente en el mapa los iconos de PDI
-\n
-\n • Se han añadido datos del amanecer y ocaso en «Configurar mapa»
-\n
-\n • Se han añadido iconos de «Casa» y «Trabajo» en el mapa
-\n
-\n • Se ha añadido soporte para las múltiples lineas de descripción en «Ajustes»
-\n
-\n • Se ha añadido la correcta transliteración en el mapa de Japón
-\n
-\n • Se ha añadido el mapa de la Antártida
-\n
-\n</string>
+    <string name="release_3_6">• Perfiles: ahora puedes cambiar el orden, definir el icono para el mapa, cambiar todos los ajustes para los perfiles base y restaurarlos de nuevo a los valores predefinidos \n \n • Se han añadido los números de salida en la navegación \n \n • Se han rediseñado los ajustes de los complementos \n \n • Se ha rediseñado la pantalla de ajustes, para un acceso rápido a todos los perfiles \n \n • Se ha añadido la opción de copiar los ajustes de otro perfil \n \n • Se ha añadido la posibilidad de cambiar el orden u ocultar las categorías de PDI en la búsqueda \n \n • Se han alineado correctamente en el mapa los iconos de PDI \n \n • Se han añadido datos del amanecer y ocaso en «Configurar mapa» \n \n • Se han añadido iconos de «Casa» y «Trabajo» en el mapa \n \n • Se ha añadido soporte para las múltiples lineas de descripción en «Ajustes» \n \n • Se ha añadido la correcta transliteración en el mapa de Japón \n \n • Se ha añadido el mapa de la Antártida</string>
     <string name="monitoring_min_speed_descr">Se trata de un filtro de corte de baja velocidad para no grabar puntos por debajo de una cierta velocidad. Esto puede hacer que las trazas grabadas se vean más suaves cuando se muestran en el mapa.</string>
     <string name="monitoring_min_speed_descr_recommendation">• Recomendación: Prueba primero a usar la detección de movimiento mediante el filtro de desplazamiento mínimo de registro (B), puede producir mejores resultados y perderá menos datos. Si las trazas siguen siendo ruidosas a bajas velocidades, prueba aquí con valores distintos de cero. Tenga en cuenta que algunas mediciones pueden no informar ningún valor de velocidad (algunos métodos basados en la red), en cuyo caso no se registraría nada.</string>
     <string name="monitoring_min_speed_descr_remark">• Observación: comprobar velocidad &gt; 0: La mayoría de los chipsets de GPS informan un valor de velocidad sólo si el algoritmo determina que está en movimiento. Por lo tanto, el uso del ajuste &gt; 0 en este filtro, en cierto sentido usa la detección de movimiento del conjunto de chips del GPS. Pero incluso si no se filtra aquí en el momento de la grabación, seguimos usando esta función en nuestro análisis GPX para determinar la distancia corregida, es decir, el valor que se muestra en ese campo es la distancia grabada en movimiento.</string>
@@ -3545,21 +3485,7 @@
     <string name="plan_route_change_route_type_after">Cambiar el tipo de ruta posterior</string>
     <string name="disable_recording_once_app_killed_descrp">La grabación de la traza se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="shared_string_redo">Rehacer</string>
-    <string name="release_3_8">• Se ha actualizado la función «Planificar ruta»: permite usar diferentes tipos de navegación por segmento y la inclusión de trazas
-\n
-\n • Nuevo menú con el aspecto de las trazas: elegir el color, el grosor, mostrar las flechas de dirección y los iconos de inicio y fin.
-\n
-\n • Mejoras en la visibilidad de los nodos de bicicleta.
-\n
-\n • Las trazas ahora se pueden pulsar, contiene un menú contextual con información básica.
-\n
-\n • Algoritmos de búsqueda mejorados
-\n
-\n • Mejoras en las opciones de seguimiento de la navegación
-\n
-\n • Se han solucionado los problemas de la importación y exportación en los ajustes de los perfiles
-\n
-\n</string>
+    <string name="release_3_8">• Se ha actualizado la función «Planificar ruta»: permite usar diferentes tipos de navegación por segmento y la inclusión de trazas \n \n • Nuevo menú con el aspecto de las trazas: elegir el color, el grosor, mostrar las flechas de dirección y los iconos de inicio y fin. \n \n • Mejoras en la visibilidad de los nodos de bicicleta. \n \n • Las trazas ahora se pueden pulsar, contiene un menú contextual con información básica. \n \n • Algoritmos de búsqueda mejorados \n \n • Mejoras en las opciones de seguimiento de la navegación \n \n • Se han solucionado los problemas de la importación y exportación en los ajustes de los perfiles</string>
     <string name="sort_last_modified">Último modificado</string>
     <string name="sort_name_descending">Nombre: Z – A</string>
     <string name="sort_name_ascending">Nombre: A – Z</string>
@@ -3599,15 +3525,7 @@
     <string name="select_data_to_export">Marca los datos a exportar al archivo.</string>
     <string name="file_size_needed_for_import">Necesario para importar</string>
     <string name="export_not_enough_space">Sin espacio suficiente</string>
-    <string name="release_3_9">• Se ha añadido la opción de exportar e importar todos los datos, incluyendo los ajustes, los recursos y «Mis sitios»
-\n
-\n • Planificar ruta: se añadieron gráficos para los segmentos de trazas con la ruta y capacidad de crear o editar trazas de segmentos múltiples
-\n
-\n • Se ha añadido el método de autenticación OAuth para OpenStreetMap y se ha mejorado la interfaz de usuario de los diálogos de OSM
-\n
-\n • Se añadieron colores personalizados para los favoritos y los puntos de referencia de la traza
-\n
-\n</string>
+    <string name="release_3_9">• Se ha añadido la opción de exportar e importar todos los datos, incluyendo los ajustes, los recursos y «Mis sitios» \n \n • Planificar ruta: se añadieron gráficos para los segmentos de trazas con la ruta y capacidad de crear o editar trazas de segmentos múltiples \n \n • Se ha añadido el método de autenticación OAuth para OpenStreetMap y se ha mejorado la interfaz de usuario de los diálogos de OSM \n \n • Se añadieron colores personalizados para los favoritos y los puntos de referencia de la traza</string>
     <string name="osm_live_payment_desc_hw">La suscripción se cobra por el período elegido. Puedes cancelarlo en AppGallery en cualquier momento.</string>
     <string name="osm_live_payment_subscription_management_hw">El pago se carga en la cuenta de AppGallery al confirmar la compra.
 \n
@@ -3813,7 +3731,7 @@
     <string name="in_grace_period">En período de gracia</string>
     <string name="on_hold">En espera</string>
     <string name="expired">Expirado</string>
-    <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies. \n \n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos \n \n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones». \n \n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente. \n \n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta. \n \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje» \n \n</string>
+    <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies. \n \n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos \n \n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones». \n \n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente. \n \n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta. \n \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»</string>
     <string name="update_all_maps_added">¿Actualizar todos los mapas añadidos a %1$s\?</string>
     <string name="exit_number">Número de salida</string>
     <string name="announce_when_exceeded">Anunciar al excederse</string>
@@ -3823,7 +3741,7 @@
     <string name="shared_string_min_height">Altura mín.</string>
     <string name="shared_string_max_height">Altura máx.</string>
     <string name="shared_string_itinerary">Itinerario</string>
-    <string name="release_4_0">• Copia de seguridad en la nube. \n \n• Se ha añadido el modo nocturno para el estilo de mapa «Topo». \n \n• Se ha añadido la opción de descargar las curvas de nivel en pies. \n \n• Las trazas ahora pueden ser coloreadas por altitud, velocidad o pendiente. \n \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje». \n \n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada. \n \n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta. \n \n• Se ha añadido la opción de «Compra» con información detallada de las compras. \n \n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta. \n \n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones». \n \n</string>
+    <string name="release_4_0">• Copia de seguridad en la nube. \n \n• Se ha añadido el modo nocturno para el estilo de mapa «Topo». \n \n• Se ha añadido la opción de descargar las curvas de nivel en pies. \n \n• Las trazas ahora pueden ser coloreadas por altitud, velocidad o pendiente. \n \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje». \n \n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada. \n \n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta. \n \n• Se ha añadido la opción de «Compra» con información detallada de las compras. \n \n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta. \n \n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».</string>
     <string name="duration_moment_ago">hace instantes</string>
     <string name="logout_from_osmand_cloud">Salir de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar sesión? \nDeberás volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
@@ -3956,31 +3874,7 @@
     <string name="regular_price">Precio normal</string>
     <string name="offline_wikivoyage">Wikiviajes sin conexión</string>
     <string name="backup_delete_types_descr">¿Borrar de OsmAnd Cloud todos los tipos de datos obsoletos\?</string>
-    <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto
-\n
-\n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM
-\n
-\n• Filtro del GPS para la traza GPX
-\n
-\n• Widget de elevación (Pro)
-\n
-\n• Favoritos: se ha añadido la posibilidad de ver los iconos usados recientemente
-\n
-\n• Planificación de rutas: se usa el perfil elegido tras la ejecución
-\n
-\n• Se ha corregido la capa de Mapillary, el complemento se desactivada de forma predefinida
-\n
-\n• Se ha añadido una pantalla para gestionar todo el historial de la aplicación
-\n
-\n• La orientación del mapa no se restablece luego de reiniciar la aplicación
-\n
-\n• Se ha mejorado la visualización del marcador SRTM de altura
-\n
-\n• Se han corregido los subtítulos de los mapas en árabe
-\n
-\n• Se ha corregido diferentes problemas de navegación
-\n
-\n</string>
+    <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto \n \n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM \n \n• Filtro del GPS para la traza GPX \n \n• Widget de elevación (Pro) \n \n• Favoritos: se ha añadido la posibilidad de ver los iconos usados recientemente \n \n• Planificación de rutas: se usa el perfil elegido tras la ejecución \n \n• Se ha corregido la capa de Mapillary, el complemento se desactivada de forma predefinida \n \n• Se ha añadido una pantalla para gestionar todo el historial de la aplicación \n \n• La orientación del mapa no se restablece luego de reiniciar la aplicación \n \n• Se ha mejorado la visualización del marcador SRTM de altura \n \n• Se han corregido los subtítulos de los mapas en árabe \n \n• Se ha corregido diferentes problemas de navegación</string>
     <string name="upload_gpx_description_hint">Al dejarlo vacío, serán usados los nombres de las trazas como descripción. La descripción ingresada se aplica a cada traza.</string>
     <string name="routing_attr_allow_gate_name">Permitir usar puertas</string>
     <string name="routing_attr_allow_gate_description">Permitir el uso de puertas</string>
@@ -5787,4 +5681,5 @@
     <string name="deleting_history">Borrando historial…</string>
     <string name="deleting">Borrando…</string>
     <string name="show_rasterization_debug_tile">Mostrar información de rasterización de teselas</string>
+    <string name="release_5_2">• En progreso...</string>
 </resources>
