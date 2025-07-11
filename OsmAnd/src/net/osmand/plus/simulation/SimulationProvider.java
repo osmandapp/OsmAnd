@@ -21,9 +21,12 @@ public class SimulationProvider {
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
 	public static final String SIMULATED_PROVIDER_GPX = "GPX";
 	public static final String SIMULATED_PROVIDER_TUNNEL = "TUNNEL";
+	private static final float MAX_SPEED_TUNNELS = 25.0f; // 25 m/s, 90 kmh, 56 mph
 
 	private final Location startLocation;
 	private final List<RouteSegmentResult> roads;
+
+	private float minOfMaxSpeedInTunnel;
 
 	private int currentRoad = -1;
 	private int currentSegment;
@@ -32,12 +35,16 @@ public class SimulationProvider {
 	public SimulationProvider(@NonNull Location location, @NonNull List<RouteSegmentResult> roads) {
 		this.startLocation = new Location(location);
 		this.roads = new ArrayList<>(roads);
-	}
-
-	public void startSimulation() {
 		long time = System.currentTimeMillis();
 		if (time - startLocation.getTime() > 5000 || time < startLocation.getTime()) {
 			startLocation.setTime(time);
+		}
+		minOfMaxSpeedInTunnel = MAX_SPEED_TUNNELS;
+		for (RouteSegmentResult r : roads) {
+			float tunnelSpeed = r.getObject().getMaximumSpeed(r.isForwardDirection());
+			if (tunnelSpeed > 0) {
+				minOfMaxSpeedInTunnel = Math.min(minOfMaxSpeedInTunnel, tunnelSpeed);
+			}
 		}
 		RouteSegmentSearchResult searchResult = RouteSegmentSearchResult.searchRouteSegment(
 				startLocation.getLatitude(), startLocation.getLongitude(), -1, roads);
@@ -48,26 +55,39 @@ public class SimulationProvider {
 		} else {
 			currentRoad = -1;
 		}
+		LOG.info(String.format(Locale.US, "Start simulation road %d, segment %d - time %d, location %s",
+				currentRoad, currentSegment, startLocation.getTime(), startLocation));
 	}
 
-	private double proceedMeters(double meters, Location location) {
+
+	private double proceedMetersFromStartLocation(double meters, Location location) {
+		// Location tried to be precise, but can be overshot for last segment
+		// return how many meters overshot for the last point
 		if (currentRoad == -1) {
 			return -1;
 		}
 		for (int i = currentRoad; i < roads.size(); i++) {
 			RouteSegmentResult road = roads.get(i);
 			boolean firstRoad = i == currentRoad;
-			int increment = road.getStartPointIndex() < road.getEndPointIndex() ? +1 : -1;
-			for (int j = firstRoad ? currentSegment : (road.getStartPointIndex() + increment);
-			     increment > 0 ? j <= road.getEndPointIndex() : j >= road.getEndPointIndex();
-			     j += increment) {
+			boolean plus = road.getStartPointIndex() < road.getEndPointIndex();
+			int increment = plus ? +1 : -1;
+			int start = road.getStartPointIndex();
+			if (firstRoad) {
+				// first segment is [currentSegment - 1, currentSegment]
+				if (plus) {
+					start = currentSegment - increment;
+				} else {
+					start = currentSegment;
+				}
+			}
+			for (int j = start; j != road.getEndPointIndex(); j += increment) {
 				RouteDataObject obj = road.getObject();
-				int st31x = obj.getPoint31XTile(j - increment);
-				int st31y = obj.getPoint31YTile(j - increment);
-				int end31x = obj.getPoint31XTile(j);
-				int end31y = obj.getPoint31YTile(j);
-				boolean last = i == roads.size() - 1 && j == road.getEndPointIndex();
-				boolean first = firstRoad && j == currentSegment;
+				int st31x = obj.getPoint31XTile(j);
+				int st31y = obj.getPoint31YTile(j);
+				int end31x = obj.getPoint31XTile(j + increment);
+				int end31y = obj.getPoint31YTile(j + increment);
+				boolean last = i == roads.size() - 1 && j == road.getEndPointIndex() - increment;
+				boolean first = firstRoad && j == start;
 				if (first) {
 					st31x = (int) currentPoint.x;
 					st31y = (int) currentPoint.y;
@@ -103,14 +123,20 @@ public class SimulationProvider {
 		if (!isSimulatedDataAvailable()) {
 			return null;
 		}
-
 		Location location = new Location(SIMULATED_PROVIDER_TUNNEL);
-		location.setSpeed(startLocation.getSpeed());
+		float spd = Math.min(minOfMaxSpeedInTunnel, startLocation.getSpeed());
+
+		location.setSpeed(spd);
 		location.setAltitude(startLocation.getAltitude());
 		location.setTime(System.currentTimeMillis());
-		double meters = startLocation.getSpeed() * ((System.currentTimeMillis() - startLocation.getTime()) / 1000.0);
-		double proc = proceedMeters(meters, location);
-		if (proc < 0 || proc >= 100) {
+		// here we can decrease speed - startLocation.getSpeed() or we can real speed BLE sensor
+		double metersToPass = spd * ((System.currentTimeMillis() - startLocation.getTime()) / 1000.0);
+		double metersSimLocationFromDesiredLocation = proceedMetersFromStartLocation(metersToPass, location);
+		if (metersSimLocationFromDesiredLocation < 0) { // error simulation
+			return null;
+		}
+		// limit 100m if we overpass tunnel
+		if (metersSimLocationFromDesiredLocation >= 100) {
 			return null;
 		}
 		return location;

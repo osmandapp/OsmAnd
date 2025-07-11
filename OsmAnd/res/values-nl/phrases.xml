@@ -3346,7 +3346,7 @@
     <string name="poi_socket_cee_blue">Stopcontact: CEE-blauw (campingstekker)</string>
     <string name="poi_water_place_access_family">Gezin</string>
     <string name="poi_water_place_access_multifamilies">Meerdere gezinnen</string>
-    <string name="poi_whitewater_rapid_name">Naam van de stroomversnelling</string>
+    <string name="poi_rapids_name">Naam van de stroomversnelling</string>
     <string name="poi_pottery">Pottenbakkerij</string>
     <string name="poi_flooring">Vloerenwinkel</string>
     <string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>

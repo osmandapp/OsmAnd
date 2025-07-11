@@ -7,42 +7,45 @@
 	android:layout_height="@dimen/simple_widget_small_height"
 	android:orientation="vertical">
 
-	<LinearLayout
+	<RelativeLayout
 		android:id="@+id/container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="horizontal"
-		android:paddingHorizontal="@dimen/content_padding">
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small_half"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small_half">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/widget_icon"
 			android:layout_width="@dimen/map_widget_icon"
 			android:layout_height="@dimen/map_widget_icon"
-			android:layout_gravity="start|center_vertical"
-			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_alignParentStart="true"
+			android:layout_centerVertical="true"
 			app:srcCompat="@drawable/ic_action_remove_dark" />
 
 		<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 			android:id="@+id/widget_text"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_gravity="center_vertical|start"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:layout_centerVertical="true"
 			android:gravity="center_vertical|start"
 			android:includeFontPadding="false"
-			android:lines="1"
 			android:maxLines="1"
 			android:textColor="@color/text_color_primary_light"
-			app:textViewType="autoScale"
-			app:autoScale_maxTextSize="@dimen/simple_widget_value_small_size"
-			app:autoScale_minTextSize="@dimen/simple_widget_value_minimum_size"
+			android:textSize="@dimen/simple_widget_value_small_size"
 			tools:text="155" />
 
 		<LinearLayout
 			android:id="@+id/linearLayout"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_marginStart="@dimen/content_padding"
+			android:layout_alignParentEnd="true"
+			android:layout_centerVertical="true"
+			android:layout_marginStart="16dp"
+			android:layout_toEndOf="@+id/widget_text"
 			android:orientation="vertical">
 
 			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
@@ -51,6 +54,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="end"
 				android:ellipsize="end"
+				android:includeFontPadding="false"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
 				android:maxLines="1"
@@ -64,6 +68,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="end"
+				android:includeFontPadding="false"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
 				android:maxLines="1"
@@ -74,6 +79,6 @@
 
 		</LinearLayout>
 
-	</LinearLayout>
+	</RelativeLayout>
 
 </LinearLayout>

@@ -24,6 +24,8 @@ public class RouteSegmentSearchResult {
 	}
 
 	public int getSegmentIndex() {
+		// returns segment index higher [1, endPointIndex]
+		// segment is represented by [segmentIndex - 1, segmentIndex]
 		return segmentIndex;
 	}
 

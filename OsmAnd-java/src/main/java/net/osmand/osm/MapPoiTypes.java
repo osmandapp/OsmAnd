@@ -375,6 +375,13 @@ public class MapPoiTypes {
 		this.categories = categories;
 	}
 
+	public static void reInit() {
+		if(DEFAULT_INSTANCE != null) {
+			DEFAULT_INSTANCE.init = false;
+			DEFAULT_INSTANCE.init();
+		}
+	}
+
 	public void init() {
 		init(null);
 	}

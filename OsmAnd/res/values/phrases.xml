@@ -3949,7 +3949,7 @@
 	<string name="poi_flooring">Flooring store</string>
 	<string name="poi_pottery">Pottery</string>
 
-	<string name="poi_whitewater_rapid_name">Name of the river rapids</string>
+	<string name="poi_rapids_name">Name of the river rapids</string>
 
 	<string name="poi_outpost">Shop\'s delivery point</string>
 
@@ -5738,5 +5738,10 @@
 	<string name="poi_denomination_catholic_apostolic">Catholic Apostolic</string>
 	<string name="poi_denomination_sephardi">Sephardi</string>
 	<string name="poi_denomination_welsh_independent">Welsh Independent</string>
+
+	<string name="poi_canoe_put_in">Canoe launch</string>
+	<string name="poi_canoe_egress">Canoe take-out</string>
+	<string name="poi_canoe_put_in_egress">Canoe launch and take-out</string>
+	<string name="poi_whitewater_hazard">Whitewater hazard</string>
 
 </resources>

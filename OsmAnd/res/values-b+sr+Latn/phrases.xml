@@ -3355,7 +3355,7 @@
     <string name="poi_amusement_arcade">Zabavna arkadna igra</string>
     <string name="poi_water_utility">Vodovod</string>
     <string name="poi_outpost">Mesto isporuke u trgovini</string>
-    <string name="poi_whitewater_rapid_name">Ime rečnih brzaka</string>
+    <string name="poi_rapids_name">Ime rečnih brzaka</string>
     <string name="poi_pottery">Keramika</string>
     <string name="poi_flooring">Podovi</string>
     <string name="poi_socket_schuko_output_low">Nizak</string>

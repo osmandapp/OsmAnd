@@ -45,7 +45,7 @@
             android:maxLines="1"
             android:textColor="?android:textColorPrimary"
             android:textSize="24sp"
-            app:textViewClass="net.osmand.plus.widgets.MultiTextViewEx"
+            app:textViewType="multi"
             app:multiTextViewEx_primaryText="20:33"
             app:multiTextViewEx_secondaryText="13 h 2 m"
             app:multiTextViewEx_tertiaryText="331 km"

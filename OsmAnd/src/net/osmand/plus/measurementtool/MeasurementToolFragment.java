@@ -846,7 +846,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	@Deprecated
 	private void calculateSrtmTrack() {
 		if (isCalculateSrtmMode() && calculateSrtmTask == null) {
 			try {

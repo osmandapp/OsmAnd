@@ -5649,4 +5649,5 @@
     <string name="deleting_history">Borrando historial…</string>
     <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
     <string name="show_symbols_bboxes">Mostrar cuadros delimitadores de los símbolos</string>
+    <string name="release_5_2">• Trabajo en progreso...</string>
 </resources>

@@ -258,7 +258,11 @@
 
 		<attr name="outlineColor" format="color" />
 		<attr name="outlineWidth" format="dimension" />
-		<attr name="textViewClass" format="string" />
+		<attr name="textViewType" format="enum">
+			<enum name="normal" value="0" />
+			<enum name="autoScale" value="1" />
+			<enum name="multi" value="2" />
+		</attr>
 
 		<!-- AutoScaleTextView attributes -->
 		<attr name="autoScale_minTextSize" format="dimension" />

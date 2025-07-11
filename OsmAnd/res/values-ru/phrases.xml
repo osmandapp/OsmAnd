@@ -3322,7 +3322,7 @@
     <string name="poi_socket">Разъём</string>
     <string name="poi_flooring">Напольные покрытия</string>
     <string name="poi_pottery">Глиняная посуда</string>
-    <string name="poi_whitewater_rapid_name">Название речного порога</string>
+    <string name="poi_rapids_name">Название речного порога</string>
     <string name="poi_outpost">Пункт выдачи заказов</string>
     <string name="poi_barbecue_grill">Мангал: есть</string>
     <string name="poi_water_utility">Офис водоснабжения</string>
