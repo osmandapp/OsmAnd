@@ -1315,7 +1315,7 @@
     <string name="home">Übersichtsseite</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
     <string name="record_plugin_name">Streckenaufzeichnung</string>
-    <string name="int_hour">std</string>
+    <string name="int_hour">Stunden</string>
     <string name="duration">Dauer</string>
     <string name="distance">Entfernung</string>
     <string name="index_tours">Touren</string>
