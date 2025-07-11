@@ -5070,5 +5070,11 @@
     <string name="poi_bail_bond_agent">Agent pro kauce</string>
     <string name="poi_visa">Visa</string>
     <string name="poi_airline">Kancelář letecké společnosti</string>
-    <string name="poi_denomination_ukrainian_greek_catholic">Ukrajinská řeckokatolická církev</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Ukrajinská řeckokatolická</string>
+    <string name="poi_denomination_ukrainian_orthodox">Ukrajinská pravoslavná</string>
+    <string name="poi_denomination_neo_pentecostal">Neopentekostální</string>
+    <string name="poi_denomination_evangelical_lutheran">Evangelická luteránská</string>
+    <string name="poi_denomination_anabaptist">Anabaptistická</string>
+    <string name="poi_denomination_thai_mahanikaya">Thajská Mahanikaya</string>
+    <string name="poi_denomination_thai_thammayut">Thai Thammayut</string>
 </resources>
