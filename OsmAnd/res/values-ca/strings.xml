@@ -1235,7 +1235,7 @@
     <string name="rendering_attr_showAccess_name">Mostra les restriccions d\'accés i els peatges</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualitat de la via</string>
     <string name="rendering_attr_showSurfaces_name">Mostra el tipus de superfície de la via</string>
-    <string name="rendering_attr_showCycleRoutes_name">Rutes de cicle</string>
+    <string name="rendering_attr_showCycleRoutes_name">Rutes ciclistes</string>
     <string name="map_preferred_locale_descr">Llengua que preferiu a les etiquetes del mapa (si no està disponible s\'utilitzarà l\'anglès o els noms locals).</string>
     <string name="map_preferred_locale">Llengua preferida al mapa</string>
     <string name="local_map_names">Denominacions locals</string>
@@ -1280,7 +1280,7 @@
     <string name="download_additional_maps">Voleu baixar els mapes que us manquen %1$s (%2$d MB)?</string>
     <string name="shared_string_waypoints">Fites</string>
     <string name="way_alarms">Notificacions de trànsit</string>
-    <string name="speak_favorites">favorits propers</string>
+    <string name="speak_favorites">Favorits propers</string>
     <string name="speak_poi">PDI propers</string>
     <string name="index_tours">Itineraris</string>
     <string name="shared_string_all">Tot</string>
@@ -2131,7 +2131,7 @@
     <string name="average_altitude">Altitud mitjana</string>
     <string name="shared_string_time">Durada</string>
     <string name="total_distance">Distància total</string>
-    <string name="routing_attr_driving_style_name">Estil de l\'esquerda</string>
+    <string name="routing_attr_driving_style_name">Estil de conducció</string>
     <string name="shared_string_gpx_tracks">Pistes</string>
     <string name="select_gpx_folder">Seleccioneu la carpeta fitxers GPX</string>
     <string name="file_can_not_be_moved">No s\'ha pogut moure el fitxer.</string>
@@ -2245,7 +2245,7 @@
     <string name="index_item_depth_points_northern_hemisphere">Fondària marina puntual a l\'hemisferi nord</string>
     <string name="download_depth_countours">Isòbates</string>
     <string name="nautical_maps">Cartes nàutiques</string>
-    <string name="quick_action_auto_zoom">Mapa de zoom automàtic</string>
+    <string name="quick_action_auto_zoom">Zoom automàtic del mapa</string>
     <string name="quick_action_auto_zoom_desc">Botó per activar o desactivar l\'auto-zooming controlat per la velocitat.</string>
     <string name="quick_action_auto_zoom_on">Activa el zoom automàtic</string>
     <string name="quick_action_auto_zoom_off">Desactiva el zoom automàtic</string>
@@ -2854,8 +2854,8 @@
     <string name="shared_string_milliradians">Mil·liradiants</string>
     <string name="angular_measeurement">Unitat angular</string>
     <string name="angular_measeurement_descr">Canvia la unitat de mesura de l\'azimut.</string>
-    <string name="routing_attr_avoid_sett_name">Sense sett</string>
-    <string name="routing_attr_avoid_sett_description">Evita sett</string>
+    <string name="routing_attr_avoid_sett_name">Sense llambordes</string>
+    <string name="routing_attr_avoid_sett_description">Evita les llambordes</string>
     <string name="routing_attr_avoid_tram_name">Sense el tram</string>
     <string name="routing_attr_avoid_tram_description">Evita el tram</string>
     <string name="routing_attr_avoid_bus_name">Sense autobús</string>
@@ -4758,7 +4758,7 @@
     <string name="sensor_data">Dades del sensor</string>
     <string name="battery_level">Nivell de bateria</string>
     <string name="shared_string_split_by">Divideix per</string>
-    <string name="shared_string_flat">Pis</string>
+    <string name="shared_string_flat">Pla</string>
     <string name="uphill_downhill_split">Pujada / Baixada</string>
     <string name="set_parking_position">Estableix la posició d\'estacionament</string>
     <string name="set_work">Estableix el treball</string>
@@ -5877,10 +5877,10 @@
     <string name="osm_live_payment_subscription_management_hw">El pagament es cobra des del teu compte d\'AppGallery en confirmar la compra.\n\nEs renova llevat que es cancel·li abans del període de renovació seleccionat.\n\nGestioneu o cancel·leu les vostres subscripcions de la configuració de l\'AppGallery en qualsevol moment.</string>
     <string name="osm_live_payment_desc_hw">La subscripció es cobra pel període seleccionat. Cancel·la-ho a la teva AppGallery en qualsevol moment.</string>
     <string name="pass_whole_track_descr">Punt de la pista a navegar</string>
-    <string name="shared_string_gpx_route">Ruta de la pista</string>
+    <string name="shared_string_gpx_route">Guardar la ruta</string>
     <string name="app_mode_go_cart">Kart</string>
     <string name="app_mode_wheelchair_forward">Cadira de rodes cap endavant</string>
-    <string name="app_mode_motor_scooter">Escúter de motor</string>
+    <string name="app_mode_motor_scooter">Escúter</string>
     <string name="default_screen_timeout">Temps d\'espera per defecte de la pantalla</string>
     <string name="map_source_zoom_levels_descr">Afecta la pantalla quan s\'utilitza com a mapa o superposició/underlay.\n\n%1$s: El mapa està limitat a l\'interval de nivell de zoom seleccionat.\n\n%2$s són els nivells en què les fitxes originals seran visibles, l\'escalat o la baixada es produiran fora d\'aquests valors.</string>
     <string name="turn_screen_on_wake_time_descr">Selecciona el temps d\'espera de la pantalla després de despertar. (\"%1$s\" no aplica temps d\'espera.)</string>
@@ -5891,7 +5891,7 @@
     <string name="profiles_for_action_not_found">No s\'ha pogut trobar cap d\'aquests perfils.</string>
     <string name="quick_action_switch_profile_descr">El botó d\'acció canvia entre els perfils seleccionats.</string>
     <string name="legend_item_description">La guia de la simbologia d\'un mapa.</string>
-    <string name="tracker_item">Seguidor OsmAnd</string>
+    <string name="tracker_item">Rastrejador de OsmAnd</string>
     <string name="search_poi_types_descr">Combinar tipus POI de diferents categories. Toca commutador per seleccionar-ho tot, toca el costat esquerre a la selecció de categories.</string>
     <string name="osm_live_payment_subscription_management">El pagament es cobra des del teu compte de Google Play en confirmar la compra.\n\nEs renova llevat que es cancel·li abans del període de renovació seleccionat.\n\nGestioneu o cancel·leu les vostres subscripcions de la configuració de Google Play en qualsevol moment.</string>
     <string name="lang_ckb">Kurd central</string>
@@ -5902,7 +5902,7 @@
     <string name="monitoring_min_distance_descr">Activar aquest filtre permet evitar l\'enregistrament de dades addicionals quan el moviment gairebé no es detecta. També millora l\'aspecte espacial de les pistes sense més processament.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efectes secundaris: Els períodes de descans no es registren en absolut o només com un punt cadascun. Els moviments menors (per exemple, al costat de la carretera per marcar un possible gir en el seu viatge) es poden filtrar. Tingueu en compte que el vostre fitxer contindrà menys informació per al postprocessament, i al mateix temps pot estalviar potencialment els artefactes GPS causats per una mala recepció o efectes de xipset.\"</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomanació: Establiu 5 metres de desplaçament si no voleu registrar detalls menors de la vostra ruta, i no necessiteu dades addicionals sobre el vostre període de descans.</string>
-    <string name="live_monitoring_time_buffer">Memòria intermèdia de temps</string>
+    <string name="live_monitoring_time_buffer">Memòria intermèdia</string>
     <string name="live_monitoring_tracking_interval">Interval de seguiment</string>
     <string name="multimedia_rec_split_title">Divisió de l\'enregistrament</string>
     <string name="mgrs_format_descr">OsmAnd utilitza MGRS, que és similar al format UTM de l\'OTAN.</string>
