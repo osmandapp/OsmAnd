@@ -42,11 +42,14 @@ import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalOperationTask;
+import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
+import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.custom.CustomIndexItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -560,7 +563,14 @@ public class ItemViewHolder {
 				params[i] = new LocalItem(file, type);
 			}
 		}
-		LocalOperationTask removeTask = new LocalOperationTask(app, DELETE_OPERATION, null);
+		LocalOperationTask removeTask = new LocalOperationTask(app, DELETE_OPERATION, new OperationListener() {
+			@Override
+			public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
+				if (AndroidUtils.isActivityNotDestroyed(context)) {
+					context.onUpdatedIndexesList();
+				}
+			}
+		});
 		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}
 
