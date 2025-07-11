@@ -3428,7 +3428,7 @@
     <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia, una guía de bolsillo sin conexión que incluye artículos sobre objetos y destinos.</string>
     <string name="add_hidden_group_info">El punto añadido se encuentra en «%s». Desoculta el grupo elegido para mostrarlo en el mapa.</string>
     <string name="app_mode_enduro_motorcycle">Motocicleta de enduro</string>
-    <string name="app_mode_motor_scooter">Motoneta (scooter)</string>
+    <string name="app_mode_motor_scooter">Motoneta/Scooter (con motor)</string>
     <string name="app_mode_wheelchair">Silla de ruedas</string>
     <string name="app_mode_wheelchair_forward">Silla de ruedas (hacia adelante)</string>
     <string name="app_mode_go_cart">Go-kart</string>
