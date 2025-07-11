@@ -3707,7 +3707,7 @@
     <string name="layer_gpx_layer">Pistas</string>
     <string name="show_gpx">Pistas</string>
     <string name="save_track_to_gpx_globally">Gardar pista en ficheiro GPX</string>
-    <string name="shared_string_gpx_route">Gardar a ruta</string>
+    <string name="shared_string_gpx_route">Gardar a rota</string>
     <string name="empty_state_my_tracks">Engadir ficheiros de pista</string>
     <string name="empty_state_my_tracks_desc">Importar ou gravar ficheiros de pista</string>
     <string name="context_menu_item_add_waypoint">Engadir punto de referencia da pista</string>
