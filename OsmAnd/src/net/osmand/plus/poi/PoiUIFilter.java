@@ -1,7 +1,7 @@
 package net.osmand.plus.poi;
 
 
-import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
@@ -528,7 +528,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		if (nameFilter.length() == 0) {
 			return true;
 		}
-		CollatorStringMatcher matcher = new CollatorStringMatcher(nameFilter.trim(), CHECK_STARTS_FROM_SPACE);
+		CollatorStringMatcher matcher = new CollatorStringMatcher(nameFilter.trim(), CHECK_CONTAINS);
 		OsmandSettings settings = app.getSettings();
 		List<String> names = OsmAndFormatter.getPoiStringsWithoutType(amenity,
 				settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());

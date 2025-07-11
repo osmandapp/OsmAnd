@@ -51,8 +51,8 @@ public class SearchUtils {
 					}
 				} else {
 					filter = app.getPoiFilters().getSearchByNamePOIFilter();
-					if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
-						filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
+					if (!Algorithms.isEmpty(searchPhrase.getFullSearchPhrase())) {
+						filter.setFilterByName(searchPhrase.getFullSearchPhrase());
 						filter.clearCurrentResults();
 					}
 				}
