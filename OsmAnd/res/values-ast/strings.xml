@@ -4098,27 +4098,7 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
     <string name="continue_with">Siguir con %1$s</string>
     <string name="contour_lines_hillshade_slope">Contour lines, hillshades, slope</string>
-    <string name="release_4_0">• Cloud backup
-\n
-\n • Added night mode for \"Topo\" map style
-\n
-\n • Added option to download contour lines in feet
-\n
-\n • Tracks can now be colored by altitude, speed, or slope
-\n
-\n • Updated \"Trip recording\" dialog
-\n
-\n • Distance by tap moved from the Radius ruler into a separate option
-\n
-\n • Plan Route: You can now change navigation options, access the map configuration and search without leaving the route planning
-\n
-\n • New \"Purchase\" screen with detailed purchasing info
-\n
-\n • Added option to change the route line appearance
-\n
-\n • OsmAnd Live updates moved to \"Downloads &gt; Updates\"
-\n
-\n</string>
+    <string name="release_4_0">• Cloud backup \n \n • Added night mode for \"Topo\" map style \n \n • Added option to download contour lines in feet \n \n • Tracks can now be colored by altitude, speed, or slope \n \n • Updated \"Trip recording\" dialog \n \n • Distance by tap moved from the Radius ruler into a separate option \n \n • Plan Route: You can now change navigation options, access the map configuration and search without leaving the route planning \n \n • New \"Purchase\" screen with detailed purchasing info \n \n • Added option to change the route line appearance \n \n • OsmAnd Live updates moved to \"Downloads &gt; Updates\"</string>
     <string name="duration_moment_ago">hai un momentu</string>
     <string name="logout_from_osmand_cloud">Logout from OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Log out\?

@@ -5764,4 +5764,5 @@
     <string name="deleting_history">Бришем повест…</string>
     <string name="show_rasterization_debug_tile">Прикажи информације о растеризацији плочица</string>
     <string name="show_symbols_bboxes">Прикажи симболе бокс оквирног поља</string>
+    <string name="release_5_2">• Рад у току...</string>
 </resources>

@@ -5802,4 +5802,5 @@
     <string name="suggest_activate_map_msg">Mapa %1$s je vypnutá,\nzapnite (obnovte) ju pre zobrazenie tejto oblasti.</string>
     <string name="show_rasterization_debug_tile">Zobraziť informácie o rastrovaní dlaždíc</string>
     <string name="show_symbols_bboxes">Zobraziť ohraničujúce rámce symbolov</string>
+    <string name="release_5_2">• V príprave…</string>
 </resources>

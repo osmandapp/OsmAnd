@@ -2913,7 +2913,7 @@
     <string name="settings_derived_routing_mode_string">Κατάσταση χρήστη, συμπληρούμενη από: %s</string>
     <string name="routing_profile_ski">Σκι</string>
     <string name="profile_type_descr_string">Τύπος: %s</string>
-    <string name="profile_type_base_string">Κατατομή (προφίλ) βάσης</string>
+    <string name="profile_type_base_string">Προφίλ βάσης</string>
     <string name="profile_alert_need_routing_type_title">Επιλέξτε τύπο πλοήγησης</string>
     <string name="profile_alert_need_routing_type_msg">Παρακαλούμε, επιλέξτε έναν τύπο πλοήγησης για τη νέα κατατομή της εφαρμογής</string>
     <string name="profile_alert_need_profile_name_title">Εισάγετε το όνομα κατατομής</string>
@@ -2942,7 +2942,7 @@
     <string name="special_routing_type">Ειδική δρομολόγηση</string>
     <string name="third_party_routing_type">Δρομολόγηση τρίτων</string>
     <string name="application_profiles_descr">Επιλέξτε τις κατατομές (προφίλ) που θα είναι ορατές στην εφαρμογή.</string>
-    <string name="application_profiles">Κατατομές (προφίλ) εφαρμογής</string>
+    <string name="application_profiles">Προφίλ εφαρμογής</string>
     <string name="quick_action_need_to_add_item_to_list">Προσθέστε τουλάχιστον ένα στοιχείο στον κατάλογο ρυθμίσεων \'Quick action\'</string>
     <string name="routing_attr_piste_type_downhill_name">Αλπική και κατηφορική χιονοδρομία</string>
     <string name="routing_attr_piste_type_downhill_description">Πίστες για αλπική ή κατηφορική χιονοδρομία και πρόσβαση σε αναβατόρια.</string>
@@ -3150,7 +3150,7 @@
     <string name="profile_appearance">Εμφάνιση κατατομής (προφίλ)</string>
     <string name="choose_icon_color_name">Εικονίδιο, χρώμα και όνομα</string>
     <string name="reorder_profiles">Επεξεργασία καταλόγου κατατομών (προφίλ)</string>
-    <string name="selected_profile">Επιλεγμένη κατατομή (προφίλ)</string>
+    <string name="selected_profile">Επιλεγμένο προφίλ</string>
     <string name="reset_confirmation_descr">Το πάτημα του %1$s θα απορρίψει όλες τις αλλαγές σας.</string>
     <string name="reset_all_profile_settings_descr">Επαναφορά όλων των ρυθμίσεων κατατομών (προφίλ) στις προεπιλογές εγκατάστασης.</string>
     <string name="reset_all_profile_settings">Να επαναφερθούν όλες οι ρυθμίσεις κατατομών (προφίλ);</string>
@@ -5120,4 +5120,11 @@
     <string name="shared_string_downhill">Κατηφόρα</string>
     <string name="backup_and_restore">Αντίγραφο ασφαλείας &amp; επαναφορά</string>
     <string name="osmand_cloud_help_descr">Χρειάζεστε βοήθεια; Παρακαλούμε επικοινωνήστε μαζί μας στο %1$s</string>
+    <string name="bearing_desc">Εμφανίζει την απόλυτη ή σχετική διόπτευση σε σχέση με έναν στόχο σε γωνιακές μονάδες (σε λειτουργία 180 μοιρών, 360 μοιρών ή χιλιοστοακτίνιων).</string>
+    <string name="display_position_automatic_descr">Βασίζεται στον προσανατολισμό του χάρτη: κάτω μέρος για κατεύθυνση κίνησης, κέντρο για όλα τα άλλα.</string>
+    <string name="only_selected_segment_recalc">Μόνο το επιλεγμένο τμήμα θα επαναυπολογιστεί χρησιμοποιώντας το επιλεγμένο προφίλ.</string>
+    <string name="save_as_smart_folder">Αποθήκευση ως έξυπνου φακέλου</string>
+    <string name="empty_smart_folder_title">Δεν υπάρχει αντιστοιχισμένο ίχνος</string>
+    <string name="smart_folder_name_present">Υπάρχει ήδη τέτοιος έξυπνος φάκελος</string>
+    <string name="osmand_live">OsmAnd Live</string>
 </resources>
