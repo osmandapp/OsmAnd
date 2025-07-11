@@ -5557,7 +5557,7 @@
     <string name="shared_string_skip_warning">Skip the migration? L\'OsmAnd ja no té accés als vostres fitxers en emmagatzematge compartit.\n\nL\'aplicació començarà a utilitzar la carpeta de dades nova</string>
     <string name="shared_storage_last_step">Després podeu especificar una carpeta de dades nova.</string>
     <string name="shared_storage_third_step">Atorga permís per accedir a la carpeta. Sense ell l\'OsmAnd no pot copiar fitxers.</string>
-    <string name="shared_storage_first_step">«Press» (en anglès).\nEl gestor de fitxers s\'obre on cal trobar i obrir la carpeta osmand.</string>
+    <string name="shared_storage_first_step">Prem «%1$s» (en anglès).\nEl gestor de fitxers s\'obre on cal trobar i obrir la carpeta osmand.</string>
     <string name="shared_storage_migration_descr">A causa dels canvis en l\'accés d\'emmagatzematge d\'Android, OsmAnd ja no pot utilitzar %1$s.\n\nCopia totes les teves dades a la nova carpeta,</string>
     <string name="shared_storage_second_step">«Clic \"\"Utilitza aquesta carpeta\"\"».</string>
     <string name="folder_access_denied">Permís necessari per accedir a la carpeta seleccionada.</string>
