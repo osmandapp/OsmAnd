@@ -1372,7 +1372,7 @@
     <string name="rendering_attr_depthContours_description">显示等深线和标记。</string>
     <string name="rendering_attr_depthContours_name">航海等深线</string>
     <string name="auto_split_recording_title">自动拆分录制之后的间隔</string>
-    <string name="auto_split_recording_descr">间隔 6 分钟后开始新分段，间隔 2 小时后开始新轨迹。或在日期发生变化时，建立新文件。</string>
+    <string name="auto_split_recording_descr">在间隔 6 分钟后开始新的轨迹段，在间隔 2 小时后开始新的轨迹，在更长时间间隔且日期发生变化时则生成新文件。</string>
     <string name="rendering_attr_contourDensity_description">等高线密度</string>
     <string name="rendering_attr_contourDensity_name">等高线密度</string>
     <string name="rendering_value_high_name">高</string>
@@ -3048,7 +3048,7 @@
     <string name="add_hidden_group_info">添加的点可以在\"%s\"中被找到。解除指定组的隐藏以在地图上展示它。</string>
     <string name="gpx_split_interval_descr">选择显示轨迹上带有距离或时间标记的间隔。</string>
     <string name="gpx_split_interval_none_descr">选择所需的拆分选项：“按时间”或“按距离”。</string>
-    <string name="route_between_points_next_segment_button_desc">只有下一个区段将使用所选择的配置文件重新计算。</string>
+    <string name="route_between_points_next_segment_button_desc">只有下一个分段将使用所选的配置文件重新计算。</string>
     <string name="whole_track">整个轨迹</string>
     <string name="plan_route_last_edited">最后编辑</string>
     <string name="plan_route_import_track">导入轨迹</string>
@@ -3062,10 +3062,10 @@
     <string name="reverse_route">反转路线</string>
     <string name="route_between_points_whole_track_button_desc">整条轨迹都将以所选择的配置文件进行重新计算。</string>
     <string name="route_between_points_desc">选择连接各点的方式，是用直线连接，还是计算出它们之间的路线，如下所示。</string>
-    <string name="next_segment">下一段</string>
+    <string name="next_segment">下一分段</string>
     <string name="threshold_distance">起始距离</string>
     <string name="navigation_profile">导航文件</string>
-    <string name="route_between_points_add_track_desc">选择一个要添加新片段的轨迹文件。</string>
+    <string name="route_between_points_add_track_desc">选择一个要添加新分段的轨迹文件。</string>
     <string name="street_level_imagery">街道等级图像</string>
     <string name="in_case_of_reverse_direction">防止相反的方向</string>
     <string name="delete_address">删除地址</string>
@@ -3891,7 +3891,7 @@
     <string name="monitoring_min_accuracy_descr_remark">备注:如果在记录之前GPS已经关闭，那么第一个测量点的精度可能会下降，所以在我们的代码中，我们可能希望在记录一个点之前等待一秒钟左右（或者记录连续3个点中最好的一个，等等），但这还没有实现。</string>
     <string name="icon_group_service">服务</string>
     <string name="slope_read_more">在%1$s中阅读更多关于坡度的信息。</string>
-    <string name="recalc_angle_dialog_descr">将显示我的位置和计算的路径之间的额外直线段，直到重新计算路径</string>
+    <string name="recalc_angle_dialog_descr">在路线重新计算之前，会显示一段从我的位置到已计算路线之间的额外直线线段</string>
     <string name="import_duplicates_title">有些项目已经存在</string>
     <string name="listed_exist">列出的%1$s，已存在于OsmAnd中。</string>
     <string name="plugin_disabled_descr">此插件是一个单独的应用程序，禁用并不会删除它。
