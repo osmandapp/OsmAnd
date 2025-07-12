@@ -2,13 +2,15 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 
 public class AmenityInfoRow {
 
 	public final String key;
-	public Drawable icon;
-	public int iconId;
+	public final Drawable icon;
+	public final int iconId;
 	public final String textPrefix;
 	public final String text;
 	public final String hiddenUrl;
@@ -25,53 +27,65 @@ public class AmenityInfoRow {
 	public final boolean matchWidthDivider;
 	public final int textLinesLimit;
 
-	public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
-	                      String hiddenUrl, boolean collapsable,
-	                      CollapsableView collapsableView, int textColor, boolean isWiki,
-	                      boolean isText, boolean needLinks, int order, String name,
-	                      boolean isPhoneNumber, boolean isUrl,
-	                      boolean matchWidthDivider, int textLinesLimit) {
-		this.key = key;
-		this.icon = icon;
-		this.textPrefix = textPrefix;
-		this.text = text;
-		this.hiddenUrl = hiddenUrl;
-		this.collapsable = collapsable;
-		this.collapsableView = collapsableView;
-		this.textColor = textColor;
-		this.isWiki = isWiki;
-		this.isText = isText;
-		this.needLinks = needLinks;
-		this.order = order;
-		this.name = name;
-		this.isPhoneNumber = isPhoneNumber;
-		this.isUrl = isUrl;
-		this.matchWidthDivider = matchWidthDivider;
-		this.textLinesLimit = textLinesLimit;
+	private AmenityInfoRow(@NonNull Builder builder) {
+		this.key = builder.key;
+		this.icon = builder.icon;
+		this.iconId = builder.iconId;
+		this.textPrefix = builder.textPrefix;
+		this.text = builder.text;
+		this.hiddenUrl = builder.hiddenUrl;
+		this.collapsableView = builder.collapsableView;
+		this.collapsable = builder.collapsable;
+		this.textColor = builder.textColor;
+		this.isWiki = builder.isWiki;
+		this.isText = builder.isText;
+		this.needLinks = builder.needLinks;
+		this.isPhoneNumber = builder.isPhoneNumber;
+		this.isUrl = builder.isUrl;
+		this.order = builder.order;
+		this.name = builder.name;
+		this.matchWidthDivider = builder.matchWidthDivider;
+		this.textLinesLimit = builder.textLinesLimit;
 	}
 
-	public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
-	                      String hiddenUrl, boolean collapsable,
-	                      CollapsableView collapsableView, int textColor, boolean isWiki,
-	                      boolean isText, boolean needLinks, int order, String name,
-	                      boolean isPhoneNumber, boolean isUrl,
-	                      boolean matchWidthDivider, int textLinesLimit) {
-		this.key = key;
-		this.iconId = iconId;
-		this.textPrefix = textPrefix;
-		this.text = text;
-		this.hiddenUrl = hiddenUrl;
-		this.collapsable = collapsable;
-		this.collapsableView = collapsableView;
-		this.textColor = textColor;
-		this.isWiki = isWiki;
-		this.isText = isText;
-		this.needLinks = needLinks;
-		this.order = order;
-		this.name = name;
-		this.isPhoneNumber = isPhoneNumber;
-		this.isUrl = isUrl;
-		this.matchWidthDivider = matchWidthDivider;
-		this.textLinesLimit = textLinesLimit;
+	public static class Builder {
+		private final String key;
+		private Drawable icon;
+		private int iconId;
+		private String textPrefix;
+		private String text;
+		private String hiddenUrl;
+		private CollapsableView collapsableView;
+		private boolean collapsable;
+		private int textColor;
+		private boolean isWiki;
+		private boolean isText;
+		private boolean needLinks;
+		private boolean isPhoneNumber;
+		private boolean isUrl;
+		private int order;
+		private String name;
+		private boolean matchWidthDivider;
+		private int textLinesLimit = 0;
+
+		public Builder(@NonNull String key) { this.key = key; }
+		public Builder setIcon(Drawable icon) { this.icon = icon; return this; }
+		public Builder setIconId(int iconId) { this.iconId = iconId; return this; }
+		public Builder setTextPrefix(String textPrefix) { this.textPrefix = textPrefix; return this; }
+		public Builder setText(String text) { this.text = text; return this; }
+		public Builder setHiddenUrl(String hiddenUrl) { this.hiddenUrl = hiddenUrl; return this; }
+		public Builder setCollapsableView(CollapsableView view) { this.collapsableView = view; return this; }
+		public Builder setCollapsable(boolean collapsable) { this.collapsable = collapsable; return this; }
+		public Builder setTextColor(int color) { this.textColor = color; return this; }
+		public Builder setIsWiki(boolean wiki) { this.isWiki = wiki; return this; }
+		public Builder setIsText(boolean textFlag) { this.isText = textFlag; return this; }
+		public Builder setNeedLinks(boolean needLinks) { this.needLinks = needLinks; return this; }
+		public Builder setIsPhoneNumber(boolean isPhoneNumber) { this.isPhoneNumber = isPhoneNumber; return this; }
+		public Builder setIsUrl(boolean isUrl) { this.isUrl = isUrl; return this; }
+		public Builder setOrder(int order) { this.order = order; return this; }
+		public Builder setName(String name) { this.name = name; return this; }
+		public Builder setMatchWidthDivider(boolean match) { this.matchWidthDivider = match; return this; }
+		public Builder setTextLinesLimit(int limit) { this.textLinesLimit = limit; return this; }
+		public AmenityInfoRow build() { return new AmenityInfoRow(this); }
 	}
 }

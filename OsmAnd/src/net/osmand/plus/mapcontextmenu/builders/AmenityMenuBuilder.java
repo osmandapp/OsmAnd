@@ -306,10 +306,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String text = app.getString(R.string.ltr_or_rtl_combine_via_space, title, count);
 
 			Context context = group.getContext();
-			AmenityInfoRow wikiInfo = new AmenityInfoRow(
-					NEAREST_WIKI_KEY, R.drawable.ic_action_popular_places, null, text,
-					null, true, getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY),
-					0, false, false, false, 1000, null, false, false, false, 0);
+			AmenityInfoRow wikiInfo = new AmenityInfoRow.Builder(NEAREST_WIKI_KEY)
+					.setIconId(R.drawable.ic_action_popular_places).setText(text)
+					.setCollapsable(true)
+					.setCollapsableView(getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY))
+					.setOrder(1000)
+					.build();
 
 			View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
 
@@ -335,10 +337,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 
 			Context context = group.getContext();
-			AmenityInfoRow poiInfo = new AmenityInfoRow(
-					NEAREST_POI_KEY, AmenityMenuController.getRightIconId(app, amenity), null, text,
-					null, true, getCollapsableView(context, true, amenities, NEAREST_POI_KEY),
-					0, false, false, false, 1000, null, false, false, false, 0);
+			AmenityInfoRow poiInfo = new AmenityInfoRow.Builder(NEAREST_POI_KEY)
+					.setIconId(AmenityMenuController.getRightIconId(app, amenity)).setText(text)
+					.setCollapsable(true)
+					.setCollapsableView(getCollapsableView(context, true, amenities, NEAREST_POI_KEY))
+					.setOrder(1000)
+					.build();
 
 			View wikiRow = group.findViewWithTag(NEAREST_WIKI_KEY);
 			int insertIndex = wikiRow != null

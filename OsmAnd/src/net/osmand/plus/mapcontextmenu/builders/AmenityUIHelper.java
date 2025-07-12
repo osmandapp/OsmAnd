@@ -50,6 +50,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.builders.AmenityInfoRow.Builder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -196,16 +197,18 @@ public class AmenityUIHelper extends MenuBuilder {
 					boolean cuisineOrDish = CollectionUtils.equalsToAny(e.getKey(), Amenity.CUISINE, Amenity.DISH);
 					CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true,
 							categoryTypes, true, cuisineOrDish ? cuisineRow : null, poiCategory);
-					infoRows.add(new AmenityInfoRow(poiAdditionalCategoryName, icon,
-							pType.getPoiAdditionalCategoryTranslation(), sb.toString(), null,
-							true, collapsableView, 0, false, false,
-							false, pType.getOrder(), pType.getKeyName(), false,
-							false, false, 1));
+					infoRows.add(new AmenityInfoRow.Builder(poiAdditionalCategoryName)
+							.setIcon(icon).setTextPrefix(pType.getPoiAdditionalCategoryTranslation())
+							.setText(sb.toString()).setCollapsable(true).setCollapsableView(collapsableView)
+							.setOrder(pType.getOrder())
+							.setName(pType.getKeyName())
+							.setTextLinesLimit(1)
+							.build());
 				}
 			}
 		}
 
-		if (collectedPoiTypes.size() > 0) {
+		if (!collectedPoiTypes.isEmpty()) {
 			for (Map.Entry<String, List<PoiType>> e : collectedPoiTypes.entrySet()) {
 				List<PoiType> poiTypeList = e.getValue();
 				CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true, poiTypeList, false, null, poiCategory);
@@ -219,10 +222,11 @@ public class AmenityUIHelper extends MenuBuilder {
 					poiCategory = pt.getCategory();
 				}
 				Drawable icon = getRowIcon(view.getContext(), poiCategory.getIconKeyName());
-				infoRows.add(new AmenityInfoRow(poiCategory.getKeyName(), icon,
-						poiCategory.getTranslation(), sb.toString(), null, true,
-						collapsableView, 0, false, false, false, 40,
-						poiCategory.getKeyName(), false, false, false, 1));
+				infoRows.add(new AmenityInfoRow.Builder(poiCategory.getKeyName())
+						.setIcon(icon).setTextPrefix(poiCategory.getTranslation())
+						.setText(sb.toString()).setCollapsable(true).setCollapsableView(collapsableView)
+						.setOrder(40).setName(poiCategory.getKeyName())
+						.setTextLinesLimit(1).build());
 			}
 		}
 
@@ -240,16 +244,17 @@ public class AmenityUIHelper extends MenuBuilder {
 	public void buildWikiDataRow(@NonNull View view) {
 		String wikidataValue = additionalInfo.get(WIKIDATA);
 		if (wikidataValue != null) {
-			int iconId = R.drawable.ic_action_logo_wikidata;
-			PoiType pType;
 			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(WIKIDATA);
-			if (pt != null) {
-				pType = (PoiType) pt;
-				String textPrefix = pType.getTranslation();
-				String hiddenUrl = getSocialMediaUrl(WIKIDATA, wikidataValue);
-				AmenityInfoRow infoRow = new AmenityInfoRow(WIKIDATA, iconId, textPrefix, wikidataValue, hiddenUrl, false,
-						null, 0, false, true, true, pType.getOrder(),
-						pType.getKeyName(), false, true, matchWidthDivider, 0);
+			PoiType pType = pt != null ? (PoiType) pt : null;
+			if (pType != null) {
+				AmenityInfoRow infoRow = new AmenityInfoRow.Builder(WIKIDATA)
+						.setIconId(R.drawable.ic_action_logo_wikidata)
+						.setTextPrefix(pType.getTranslation()).setText(wikidataValue)
+						.setHiddenUrl(getSocialMediaUrl(WIKIDATA, wikidataValue))
+						.setIsText(true).setNeedLinks(true)
+						.setOrder(pType.getOrder()).setName(pType.getKeyName())
+						.setMatchWidthDivider(matchWidthDivider).setIsUrl(true)
+						.build();
 				buildAmenityRow(view, infoRow);
 			}
 		}
@@ -547,17 +552,62 @@ public class AmenityUIHelper extends MenuBuilder {
 		boolean matchWidthDivider = !isDescription && isWiki;
 		AmenityInfoRow row;
 		if (isDescription) {
-			row = new AmenityInfoRow(key, R.drawable.ic_action_note_dark, textPrefix,
-					vl, null, collapsable, collapsableView, 0, false,
-					true, true, 0, "", false, false, matchWidthDivider, 0);
+			row = new AmenityInfoRow.Builder(key)
+					.setIconId(R.drawable.ic_action_note_dark)
+					.setTextPrefix(textPrefix)
+					.setText(vl)
+					.setHiddenUrl(null)
+					.setCollapsable(collapsable)
+					.setCollapsableView(collapsableView)
+					.setTextColor(0)
+					.setIsWiki(false)
+					.setIsText(true)
+					.setNeedLinks(true)
+					.setOrder(0)
+					.setName("")
+					.setIsPhoneNumber(false)
+					.setIsUrl(false)
+					.setMatchWidthDivider(matchWidthDivider)
+					.setTextLinesLimit(0)
+					.build();
 		} else if (icon != null) {
-			row = new AmenityInfoRow(key, icon, textPrefix, vl, hiddenUrl, collapsable,
-					collapsableView, textColor, isWiki, isText, needLinks, poiTypeOrder,
-					poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider, 0);
+			row = new Builder(key)
+					.setIcon(icon)
+					.setTextPrefix(textPrefix)
+					.setText(vl)
+					.setHiddenUrl(hiddenUrl)
+					.setCollapsable(collapsable)
+					.setCollapsableView(collapsableView)
+					.setTextColor(textColor)
+					.setIsWiki(isWiki)
+					.setIsText(isText)
+					.setNeedLinks(needLinks)
+					.setOrder(poiTypeOrder)
+					.setName(poiTypeKeyName)
+					.setIsPhoneNumber(isPhoneNumber)
+					.setIsUrl(isUrl)
+					.setMatchWidthDivider(matchWidthDivider)
+					.setTextLinesLimit(0)
+					.build();
 		} else {
-			row = new AmenityInfoRow(key, iconId, textPrefix, vl, hiddenUrl, collapsable,
-					collapsableView, textColor, isWiki, isText, needLinks, poiTypeOrder,
-					poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider, 0);
+			row = new Builder(key)
+					.setIconId(iconId)
+					.setTextPrefix(textPrefix)
+					.setText(vl)
+					.setHiddenUrl(hiddenUrl)
+					.setCollapsable(collapsable)
+					.setCollapsableView(collapsableView)
+					.setTextColor(textColor)
+					.setIsWiki(isWiki)
+					.setIsText(isText)
+					.setNeedLinks(needLinks)
+					.setOrder(poiTypeOrder)
+					.setName(poiTypeKeyName)
+					.setIsPhoneNumber(isPhoneNumber)
+					.setIsUrl(isUrl)
+					.setMatchWidthDivider(matchWidthDivider)
+					.setTextLinesLimit(0)
+					.build();
 		}
 		return row;
 	}
