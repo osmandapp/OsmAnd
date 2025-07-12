@@ -4394,7 +4394,7 @@
     <string name="map_marker_interval_dialog_desc">指定测量平均速度的时间间隔，计算预估的到达时间。</string>
     <string name="calculate_online">在线计算</string>
     <string name="no_altitude_data">没有海拔数据</string>
-    <string name="turn_on_public_transport_description">打开以在地图上查看公共交通路线。</string>
+    <string name="turn_on_public_transport_description">开启打开以在地图上查看公共交通路线。</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低缩放层级的图标</string>
     <string name="rendering_value_all_name">全部</string>
     <string name="available_as_part_of_subscription_plan">作为 %1$s 订阅的一部分提供。</string>
