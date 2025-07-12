@@ -50,7 +50,8 @@ public class RoutePlannerFrontEnd {
 	}
 	
 	public static HHRoutingConfig defaultHHConfig() {
-		return HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
+		return HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED)
+				.applyCalculateMissingMaps(RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS);
 	}
 	
 	public enum RouteCalculationMode {
