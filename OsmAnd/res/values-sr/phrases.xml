@@ -5140,4 +5140,8 @@
     <string name="poi_denomination_iglesia_filipina_independiente">Филипинска независна црква</string>
     <string name="poi_denomination_sephardi">Сефардска</string>
     <string name="poi_denomination_welsh_independent">Велшка независна</string>
+    <string name="poi_canoe_put_in">Спуштање кануа</string>
+    <string name="poi_canoe_egress">Изношење кануа</string>
+    <string name="poi_canoe_put_in_egress">Спуштање и изношење кануа</string>
+    <string name="poi_whitewater_hazard">Опасност од дивљих вода</string>
 </resources>
