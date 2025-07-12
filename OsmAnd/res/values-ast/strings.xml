@@ -3388,7 +3388,7 @@
     <string name="layer_gpx_layer">Trazaos</string>
     <string name="show_gpx">Trazaos</string>
     <string name="save_track_to_gpx_globally">Log track to GPX file</string>
-    <string name="shared_string_gpx_route">Track route</string>
+    <string name="shared_string_gpx_route">Guardar la ruta</string>
     <string name="empty_state_my_tracks">Add track files</string>
     <string name="empty_state_my_tracks_desc">Importa o rexistra ficheros de trazáu</string>
     <string name="context_menu_item_add_waypoint">Add track waypoint</string>

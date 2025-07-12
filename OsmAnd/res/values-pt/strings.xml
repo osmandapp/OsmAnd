@@ -3545,7 +3545,7 @@
     <string name="street_level_imagery">Imagens das ruas</string>
     <string name="plan_route_exit_dialog_descr">Descartar todas as alterações na rota planeada\?</string>
     <string name="in_case_of_reverse_direction">Em caso de inversão de direção</string>
-    <string name="shared_string_gpx_route">Rota de trilho</string>
+    <string name="shared_string_gpx_route">Guardar a rota</string>
     <string name="shared_string_gpx_files">Trilhos</string>
     <string name="marker_save_as_track">Guardar como ficheiro de trilho</string>
     <string name="add_segment_to_the_track">Adicionar a um ficheiro de trilho</string>
