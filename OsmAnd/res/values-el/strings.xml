@@ -5127,4 +5127,8 @@
     <string name="empty_smart_folder_title">Δεν υπάρχει αντιστοιχισμένο ίχνος</string>
     <string name="smart_folder_name_present">Υπάρχει ήδη τέτοιος έξυπνος φάκελος</string>
     <string name="osmand_live">OsmAnd Live</string>
+    <string name="distance_to_destination_widget_desc">Το γραφικό στοιχείο δείχνει την απόσταση που απομένει μέχρι το τελευταίο σημείο προορισμού.</string>
+    <string name="second_next_turn_widget_desc">Το γραφικό στοιχείο δείχνει πληροφορίες για την μεθεπόμενη στροφή σας το οποίο ενεργοποιείται αν η στροφή είναι σε απόσταση προσέγγισης.</string>
+    <string name="next_turn_widget_desc">Το γραφικό στοιχείο δείχνει πληροφορίες για την επόμενη στροφή σας με μια εικόνα ελιγμού και απόστασης μέχρι αυτής.</string>
+    <string name="average_speed_widget_desc">Δείχνει την τρέχουσα μέση ταχύτητα του ταξιδιού.</string>
 </resources>
