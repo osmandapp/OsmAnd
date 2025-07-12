@@ -1372,7 +1372,7 @@
     <string name="rendering_attr_depthContours_description">显示等深线和标记。</string>
     <string name="rendering_attr_depthContours_name">航海等深线</string>
     <string name="auto_split_recording_title">自动拆分录制之后的间隔</string>
-    <string name="auto_split_recording_descr">间隔 6 分钟后开始新片段，间隔 2 小时后开始新轨迹。或间隔更长时间后，如在日期发生变化时，建立新文件。</string>
+    <string name="auto_split_recording_descr">间隔 6 分钟后开始新分段，间隔 2 小时后开始新轨迹。或在日期发生变化时，建立新文件。</string>
     <string name="rendering_attr_contourDensity_description">等高线密度</string>
     <string name="rendering_attr_contourDensity_name">等高线密度</string>
     <string name="rendering_value_high_name">高</string>
@@ -5310,7 +5310,7 @@
     <string name="key_event_action_open_wunderlinq_datagrid">开启 WunderLINQ 数据网格</string>
     <string name="rendering_value_name_only_name">仅名称</string>
     <string name="external_device_ant">ANT</string>
-    <string name="mtb_segment_classification">路段难度分级</string>
+    <string name="mtb_segment_classification">路径难度分类</string>
     <string name="lang_zh_hans">简体中文</string>
     <string name="battery_saving_mode">省电模式</string>
     <string name="app_mode_suv">SUV</string>
