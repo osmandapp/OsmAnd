@@ -5310,7 +5310,7 @@
     <string name="key_event_action_open_wunderlinq_datagrid">开启 WunderLINQ 数据网格</string>
     <string name="rendering_value_name_only_name">仅名称</string>
     <string name="external_device_ant">ANT</string>
-    <string name="mtb_segment_classification">段分类</string>
+    <string name="mtb_segment_classification">路段难度分级</string>
     <string name="lang_zh_hans">简体中文</string>
     <string name="battery_saving_mode">省电模式</string>
     <string name="app_mode_suv">SUV</string>
