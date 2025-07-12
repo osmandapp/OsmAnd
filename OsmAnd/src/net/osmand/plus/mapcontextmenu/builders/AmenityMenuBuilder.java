@@ -308,7 +308,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			Context context = group.getContext();
 			AmenityInfoRow wikiInfo = new AmenityInfoRow.Builder(NEAREST_WIKI_KEY)
 					.setIconId(R.drawable.ic_action_popular_places).setText(text)
-					.setCollapsable(true)
 					.setCollapsableView(getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY))
 					.setOrder(1000)
 					.build();
@@ -339,7 +338,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			Context context = group.getContext();
 			AmenityInfoRow poiInfo = new AmenityInfoRow.Builder(NEAREST_POI_KEY)
 					.setIconId(AmenityMenuController.getRightIconId(app, amenity)).setText(text)
-					.setCollapsable(true)
 					.setCollapsableView(getCollapsableView(context, true, amenities, NEAREST_POI_KEY))
 					.setOrder(1000)
 					.build();

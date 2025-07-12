@@ -35,7 +35,7 @@ public class AmenityInfoRow {
 		this.text = builder.text;
 		this.hiddenUrl = builder.hiddenUrl;
 		this.collapsableView = builder.collapsableView;
-		this.collapsable = builder.collapsable;
+		this.collapsable = builder.collapsableView != null;
 		this.textColor = builder.textColor;
 		this.isWiki = builder.isWiki;
 		this.isText = builder.isText;
@@ -56,7 +56,6 @@ public class AmenityInfoRow {
 		private String text;
 		private String hiddenUrl;
 		private CollapsableView collapsableView;
-		private boolean collapsable;
 		private int textColor;
 		private boolean isWiki;
 		private boolean isText;
@@ -75,7 +74,6 @@ public class AmenityInfoRow {
 		public Builder setText(String text) { this.text = text; return this; }
 		public Builder setHiddenUrl(String hiddenUrl) { this.hiddenUrl = hiddenUrl; return this; }
 		public Builder setCollapsableView(CollapsableView view) { this.collapsableView = view; return this; }
-		public Builder setCollapsable(boolean collapsable) { this.collapsable = collapsable; return this; }
 		public Builder setTextColor(int color) { this.textColor = color; return this; }
 		public Builder setIsWiki(boolean wiki) { this.isWiki = wiki; return this; }
 		public Builder setIsText(boolean textFlag) { this.isText = textFlag; return this; }

@@ -199,7 +199,7 @@ public class AmenityUIHelper extends MenuBuilder {
 							categoryTypes, true, cuisineOrDish ? cuisineRow : null, poiCategory);
 					infoRows.add(new AmenityInfoRow.Builder(poiAdditionalCategoryName)
 							.setIcon(icon).setTextPrefix(pType.getPoiAdditionalCategoryTranslation())
-							.setText(sb.toString()).setCollapsable(true).setCollapsableView(collapsableView)
+							.setText(sb.toString()).setCollapsableView(collapsableView)
 							.setOrder(pType.getOrder())
 							.setName(pType.getKeyName())
 							.setTextLinesLimit(1)
@@ -224,7 +224,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				Drawable icon = getRowIcon(view.getContext(), poiCategory.getIconKeyName());
 				infoRows.add(new AmenityInfoRow.Builder(poiCategory.getKeyName())
 						.setIcon(icon).setTextPrefix(poiCategory.getTranslation())
-						.setText(sb.toString()).setCollapsable(true).setCollapsableView(collapsableView)
+						.setText(sb.toString()).setCollapsableView(collapsableView)
 						.setOrder(40).setName(poiCategory.getKeyName())
 						.setTextLinesLimit(1).build());
 			}
@@ -352,12 +352,11 @@ public class AmenityUIHelper extends MenuBuilder {
 		Drawable icon = null;
 		String hiddenUrl = null;
 		String textPrefix = "";
-		boolean collapsable = collapsableView != null;
 		boolean isWikipediaLink = false;
 		boolean isWiki = false;
 		boolean isText = false;
 		boolean isDescription = false;
-		boolean needLinks = !(CollectionUtils.equalsToAny(key, OPENING_HOURS, "population", "height")) && !collapsable;
+		boolean needLinks = !(CollectionUtils.equalsToAny(key, OPENING_HOURS, "population", "height")) && collapsableView == null;
 		boolean needIntFormatting = "population".equals(key);
 		boolean isPhoneNumber = false;
 		boolean isUrl = false;
@@ -387,7 +386,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			Pair<String, String> wikiParams = WikiAlgorithms.getWikiParams(key, vl);
 			vl = wikiParams.first;
 			hiddenUrl = wikiParams.second;
-			isWikipediaLink = isUrl = true;
+			isWikipediaLink = isUrl = isWiki = true;
 		} else if (!isUrl && needLinks) {
 			hiddenUrl = getSocialMediaUrl(key, vl);
 			if (hiddenUrl != null) {
@@ -398,12 +397,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (pType != null && !pType.isText()) {
 			String categoryName = pType.getPoiAdditionalCategory();
 			if (!Algorithms.isEmpty(categoryName)) {
-				List<PoiType> poiAdditionalCategoryTypes = poiAdditionalCategories.get(categoryName);
-				if (poiAdditionalCategoryTypes == null) {
-					poiAdditionalCategoryTypes = new ArrayList<>();
-					poiAdditionalCategories.put(categoryName, poiAdditionalCategoryTypes);
-				}
-				poiAdditionalCategoryTypes.add(pType);
+				poiAdditionalCategories.computeIfAbsent(categoryName, k -> new ArrayList<>()).add(pType);
 				return null;
 			}
 		}
@@ -417,7 +411,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			iconId = R.drawable.ic_action_time;
 			collapsableView = getCollapsableTextView(context, true,
 					vl.replace("; ", "\n").replace(",", ", "));
-			collapsable = true;
 			OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(vl);
 			if (rs != null) {
 				vl = rs.toLocalString();
@@ -465,7 +458,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				iconId = R.drawable.ic_action_note_dark;
 			} else if (isWikipediaLink) {
 				iconId = R.drawable.ic_plugin_wikipedia;
-			} else if (baseKey.equals("addr:housename") || baseKey.equals("whitewater:rapid_name")) {
+			} else if (key.equals("addr:housename") || key.equals("whitewater:rapid_name")) {
 				iconId = R.drawable.ic_action_poi_name;
 			} else if (baseKey.equals("operator") || baseKey.equals("brand")) {
 				iconId = R.drawable.ic_action_poi_brand;
@@ -503,9 +496,6 @@ public class AmenityUIHelper extends MenuBuilder {
 						textPrefix = "";
 					}
 				}
-				if (icon == null && isText && iconId == 0) {
-					iconId = R.drawable.ic_action_note_dark;
-				}
 			} else if (poiType != null) {
 				String catKey = poiType.getCategory().getKeyName();
 				if (MapPoiTypes.OTHER_MAP_CATEGORY.equals(catKey)) {
@@ -542,7 +532,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				Set<String> elevationData = new HashSet<>();
 				elevationData.add(collapsibleVal);
 				collapsableView = getDistanceCollapsableView(elevationData);
-				collapsable = true;
+				needLinks = false;
 			} catch (NumberFormatException ex) {
 				LOG.error(ex);
 			}
@@ -557,7 +547,6 @@ public class AmenityUIHelper extends MenuBuilder {
 					.setTextPrefix(textPrefix)
 					.setText(vl)
 					.setHiddenUrl(null)
-					.setCollapsable(collapsable)
 					.setCollapsableView(collapsableView)
 					.setTextColor(0)
 					.setIsWiki(false)
@@ -576,7 +565,6 @@ public class AmenityUIHelper extends MenuBuilder {
 					.setTextPrefix(textPrefix)
 					.setText(vl)
 					.setHiddenUrl(hiddenUrl)
-					.setCollapsable(collapsable)
 					.setCollapsableView(collapsableView)
 					.setTextColor(textColor)
 					.setIsWiki(isWiki)
@@ -595,7 +583,6 @@ public class AmenityUIHelper extends MenuBuilder {
 					.setTextPrefix(textPrefix)
 					.setText(vl)
 					.setHiddenUrl(hiddenUrl)
-					.setCollapsable(collapsable)
 					.setCollapsableView(collapsableView)
 					.setTextColor(textColor)
 					.setIsWiki(isWiki)
