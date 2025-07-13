@@ -956,7 +956,7 @@
     <string name="local_indexes_cat_tile">Internet i keš sličica mape</string>
     <string name="basemap_was_selected_to_download">Osnovna mapa je potrebna za osnovni rad.</string>
     <string name="first_time_msg">Hvala što koristiš OsmAnd. Preuzmi regionalne podatke preko \'Podešavanja\' → \'Preuzmi mape\' za pregled mapa, nađe adrese, TOI, javni prevoz i još mnogo toga.</string>
-    <string name="confirm_interrupt_download">Otkaži preuzimanje?</string>
+    <string name="confirm_interrupt_download">Otkazuješ preuzimanje?</string>
     <string name="modify_transparency">Postavi prozirnost (0 - skroz prozirno, 255 - potpuno neprovidno)</string>
     <string name="unknown_location">Pozicija još nije poznata.</string>
     <string name="unknown_from_location">Polazna tačka još nije određena.</string>
@@ -4796,7 +4796,7 @@
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Brzina kretanja</string>
     <string name="shared_string_apply_changes">Primeni izmene</string>
-    <string name="shared_string_all_world">Ceo svet</string>
+    <string name="shared_string_all_world">Svetska vremenska prognoza</string>
     <string name="offline_weather_forecast_desc">Možeš preuzeti sedmodnevnu vremensku prognozu.</string>
     <string name="share_as_file">Deli kao fajl</string>
     <string name="precipitation_layer">Nivo padavina</string>

@@ -1169,12 +1169,12 @@
     <string name="poi_denomination_episcopal">Piiskoplik</string>
     <string name="poi_denomination_shia">Šiism</string>
     <string name="poi_denomination_united">Ühine</string>
-    <string name="poi_denomination_greek_catholic">Kreeka katoliku</string>
+    <string name="poi_denomination_greek_catholic">Kreekakatoliku</string>
     <string name="poi_denomination_tibetan">Tiibeti</string>
-    <string name="poi_denomination_united_reformed">Ühendatud reformitud</string>
+    <string name="poi_denomination_united_reformed">Ühendatud reformikiriku</string>
     <string name="poi_denomination_church_of_scotland">Šotimaa kirik</string>
     <string name="poi_denomination_salvation_army">Päästearmee</string>
-    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
     <string name="poi_denomination_uniting">Ühendav</string>
     <string name="poi_denomination_mennonite">Mennoniit</string>
     <string name="poi_denomination_quaker">Kveeker</string>
@@ -1759,7 +1759,7 @@
     <string name="poi_wetland_reedbed">Roostik</string>
     <string name="poi_wetland_swamp">Soo</string>
     <string name="poi_wetland_saltern">Soolaväli</string>
-    <string name="poi_wetland_tidalflat">Tõusuveetasandik</string>
+    <string name="poi_wetland_tidalflat">Loodeline tasandik</string>
     <string name="poi_wetland_saltmarsh">Soolaraba</string>
     <string name="poi_wetland_mangrove">Mangroov</string>
     <string name="poi_wetland_string_bog">Madalsoo</string>
@@ -5062,4 +5062,6 @@
     <string name="poi_iglesia_ni_cristo_church">Iglesia ni cristo kirik</string>
     <string name="poi_neo_pentecostal_church">Uusnelipühilaste kirik</string>
     <string name="poi_route_point_category">Reisikategooria</string>
+    <string name="poi_denomination_ukrainian_orthodox">Ukraina õigeusu</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Ukraina kreekakatoliku</string>
 </resources>

@@ -5127,4 +5127,18 @@
     <string name="empty_smart_folder_title">Δεν υπάρχει αντιστοιχισμένο ίχνος</string>
     <string name="smart_folder_name_present">Υπάρχει ήδη τέτοιος έξυπνος φάκελος</string>
     <string name="osmand_live">OsmAnd Live</string>
+    <string name="distance_to_destination_widget_desc">Το γραφικό στοιχείο εμφανίζει την απόσταση που απομένει μέχρι το τελευταίο σημείο προορισμού.</string>
+    <string name="second_next_turn_widget_desc">Το γραφικό στοιχείο εμφανίζει πληροφορίες για την μεθεπόμενη στροφή σας το οποίο ενεργοποιείται αν η στροφή είναι σε απόσταση προσέγγισης.</string>
+    <string name="next_turn_widget_desc">Το γραφικό στοιχείο εμφανίζει πληροφορίες για την επόμενη στροφή σας με μια εικόνα ελιγμού και απόστασης μέχρι αυτής.</string>
+    <string name="average_speed_widget_desc">Εμφανίζει την τρέχουσα μέση ταχύτητα του ταξιδιού.</string>
+    <string name="parking_widget_desc">Εμφανίζει την απόσταση από το κέντρο της οθόνης μέχρι την θέση στάθμευσης σας.</string>
+    <string name="mapillary_widget_desc">Παρέχει γρήγορη πρόσβαση στην εφαρμογή Mapillary για να προσθέσετε φωτογραφίες στο επίπεδο του δρόμου.</string>
+    <string name="quick_action_coordinates_widget_descr">Ένας διακόπτης για να εμφανίσει ή να κρύψει το γραφικό στοιχείο Συντεταγμένες στο χάρτη.</string>
+    <string name="true_bearing_wdiget_desc">Γωνία μεταξύ του πραγματικού βορρά και του σημείου στόχου που παρατηρείτε από την τοποθεσία σας.</string>
+    <string name="relative_bearing_widget_desc">Εμφανίζει την γωνία μεταξύ της κατεύθυνσης εμπρόσθιας κίνησης και του σημείου στόχου.</string>
+    <string name="second_marker_widget_desc">Μπορείτε να ρυθμίσετε το γραφικό στοιχείο να εμφανίζει την απόσταση ή τον εκτιμώμενο χρόνο άφιξης που απομένει για τον δεύτερο δείκτη χάρτη.</string>
+    <string name="first_marker_widget_desc">Μπορείτε να ρυθμίσετε το γραφικό στοιχείο να εμφανίζει την απόσταση ή τον εκτιμώμενο χρόνο άφιξης που απομένει για τον πρώτο δείκτη χάρτη.</string>
+    <string name="weather_widget_group_desc">Ένα σύνολο από γραφικά στοιχεία που εμφανίζουν διάφορες πληροφορίες καιρού.</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Αυτά τα γραφικά στοιχεία εμφανίζουν πληροφορίες σχετικά με την επόμενη ανατολή και δύση ηλίου.</string>
+    <string name="route_maneuvers">Μανούβρες διαδρομής</string>
 </resources>

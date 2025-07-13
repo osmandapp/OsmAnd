@@ -4322,7 +4322,7 @@
     <string name="allow_display_on_top">Luba kuvamist kõige peal</string>
     <string name="allow_display_on_top_description">Luba kaarditekstide kuvamist üksteise peal</string>
     <string name="show_debug_info">Näita silumisteavet</string>
-    <string name="map_text">Kaarditekstid</string>
+    <string name="map_text">Kaardi visualiseerimine</string>
     <string name="show_debug_info_description">Näita iga kaarditeksti asetuse kohta graafilist teavet</string>
     <string name="routing_attr_avoid_cobblestone_name">Väldi munakiviteid</string>
     <string name="routing_attr_avoid_cobblestone_description">Väldi munakiviteid</string>
@@ -4376,7 +4376,7 @@
     <string name="maps_and_resources">Kaardid ja andmed</string>
     <string name="release_4_8">• Koostamisel versiooni 4.8 jaoks</string>
     <string name="delete_history_items">Kas kustutame %1$s ajalookirjet?</string>
-    <string name="delete_history_items_descr">Kas kustutame valitud ajalookirjed?</string>
+    <string name="delete_history_items_descr">Valitud kirjed eemaldatakse loendist.</string>
     <string name="quick_action_toggle_preference">Võimalus eelistust sisse/välja lülitada.</string>
     <string name="rendering_attr_alpineHiking_description">Radade keerukuse klassifikatsioonitüübid.</string>
     <string name="quick_action_remove_next_destination">Järgmine sihtpunkt</string>
@@ -5302,7 +5302,7 @@
     <string name="row_height">Rea kõrgus</string>
     <string name="ais_load_data">Laadi AIS-i andmed failist</string>
     <string name="wiki_around">Lähedalasuvad populaarsed kohad</string>
-    <string name="no_places_available">Kohti pole saadaval</string>
+    <string name="no_places_available">Nähtaval alala pole asukohti</string>
     <string name="shared_string_online_only">Vaid võrgus</string>
     <string name="travel_guides">Reisijuhid</string>
     <string name="ais_address_settings_description">Vali NMEA protokoll (UDP/TCP) ja määra aadressid</string>
@@ -5338,4 +5338,5 @@
     <string name="dangerous_goods_description">Mõnedel teedel ja mõnedes tunnelites on ohtlike kaupade vedu keelatud.</string>
     <string name="default_appearance_desc">Vaikimisi värv, ikoon ja kuju, mis kehtib sellesse gruppi lisatud lemmikpunktidele.</string>
     <string name="default_appearance">Vaikimisi välimus</string>
+    <string name="apply_to_all_points">Rakenda kõikidele punktidele</string>
 </resources>
