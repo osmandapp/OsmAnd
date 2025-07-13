@@ -2455,7 +2455,7 @@
     <string name="shared_string_language">Glas</string>
     <string name="shared_string_all_languages">Svi jezici</string>
     <string name="wiki_menu_download_descr">Za prikaz Wikipedia TOI su potrebne dodatne mape.</string>
-    <string name="select_wikipedia_article_langs">Odaberi jezik za Vikipedie članke na mapi. Prebaci na bilo koji drugi dostupni jezik dok čitaš članak.</string>
+    <string name="select_wikipedia_article_langs">Odaberi jezik za Vikipedia članke na mapi. Prebaci na bilo koji drugi dostupni jezik dok čitaš članak.</string>
     <string name="some_articles_may_not_available_in_lang">Neki članci sa Vikipedije su možda dostupni na jeziku.</string>
     <string name="lang_zhyue">Kantonski</string>
     <string name="lang_zhminnan">Južnominski</string>
@@ -3379,7 +3379,7 @@
     <string name="voice_announces_info">Glasovna obaveštenja su samo za vreme navigacije.</string>
     <string name="vehicle_parameters">Parametri vozila</string>
     <string name="vehicle_parameters_descr">Težina, visina, dužina, brzina</string>
-    <string name="shared_string_other">Drugi</string>
+    <string name="shared_string_other">GPS najave</string>
     <string name="map_during_navigation">Mapa za vreme navođenja</string>
     <string name="map_during_navigation_info">Mapa za vreme navođenja</string>
     <string name="turn_screen_on">Uključivanje ekrana</string>
@@ -4801,7 +4801,7 @@
     <string name="share_as_file">Deli kao fajl</string>
     <string name="precipitation_layer">Nivo padavina</string>
     <string name="purchases_feature_desc_external_sensors">Prikazuj i snimaj podatke iz spoljašnjih senzora: brzinu bicikla, snagu bicikla, brzinu i broj otkucaja srca.</string>
-    <string name="speak_route_recalculation">Obaveštava o preračunavanju rute</string>
+    <string name="speak_route_recalculation">Obaveštenje o preračunavanju rute</string>
     <string name="external_sensors_plugin_description">Pristup spoljnim prijemnicima, npr. otkucajima srca, brzini bicikla, snazi kretanja bicikla, ili taktu. Zahteva da uređaj bude povezan sa odgovarajućim prijemnicima preko ANT + bežični lični mrežni protokol.</string>
     <string name="location_simulation_cutoff">Simuliranje preskače prve metre</string>
     <string name="favorites_backup">Omiljeno skladište</string>
@@ -4838,7 +4838,7 @@
     <string name="map_widget_rssi">Jačina signala</string>
     <string name="select_layer">Odaberi nivo</string>
     <string name="shutter_sound">Zvuk okidača</string>
-    <string name="speak_route_deviation">Obaveštava o napuštanju rute</string>
+    <string name="speak_route_deviation">Obaveštenje o napuštanju rute</string>
     <string name="clear_online_cache_description">Ovo će očistiti keš, tilove za vreme.</string>
     <string name="weather_widget_group_desc">Skup vidžeta koji prikazuju razne podatke o vremenskim prilikama.</string>
     <string name="precipitation_widget_desc">Prikazuje padavine na trenutnom središtu mape.</string>
@@ -5079,7 +5079,7 @@
     <string name="map_widget_ant_bicycle_speed_desc">Prikazuje brzinu putovanja</string>
     <string name="nautical_depth_points">Tačke dubine mora</string>
     <string name="release_4_3">• Novo, brža verzija 2, motora za obradu mape (OpenGL), sa pogledom u 2,5 dimenzije\n\n • Glatko oživljavanje izmene lokacija pri kretanju\n\n • Novi widžet za koordinate središta mape i visinu za geografske lokacije\n\n • \"Razmak za kucanje\" dodata mogućnost veličine dodatog slova\n\n • Vidžet \"Map marker\": dodata je mogućnost izmene ponašanja na klik.\n\n • Ispravka mogućnosti \"Prikaži lokaciju\"\n\n • GPX: dodata podrška za oznake \"vezu\", \"cmt\", \"opis\" i bilo koje proizvoljno proširenje\n\n • Preuređen spisak \"Plovne mape\"\n\n • Dodatna podrška za ANT + senzore\n\n • Dodatna mogućnost za onemogućavanje jedinstvenog ličnog broja preuzimanja\n\n • Podesiva podrazumevana brzina vremenskih prilika za hodanje/planinarenje/trčanje zavisno od nadmorske visine\n\n • Ispravljeno ponašanje zvučnog izlaza i klizača glasnoće</string>
-    <string name="speak_gps_signal_status">Najavljuje gubljenje jačine signala GPS-a i povratak</string>
+    <string name="speak_gps_signal_status">Najava gubljenja jačine signala GPS-a i povratak</string>
     <string name="map_widget_rendering_fps">Obrada mape u slikama po sekundi</string>
     <string name="purchases_feature_desc_cross_buy">Koristi svoje mogućnosti pretplate na različitim platformama (Andorid/Ios/veb) bez dodatnih troškova.</string>
     <string name="ant_go_to_store">Idi u prodavnicu</string>
