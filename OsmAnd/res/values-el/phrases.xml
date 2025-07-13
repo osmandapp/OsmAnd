@@ -4267,4 +4267,13 @@
     <string name="poi_tunnel_name">Όνομα σήραγγας</string>
     <string name="poi_bridge_name">Όνομα γέφυρας</string>
     <string name="poi_vending_machine_fuel">Ναι</string>
+    <string name="poi_from">Από</string>
+    <string name="poi_to">Προς</string>
+    <string name="poi_via">Μέσω</string>
+    <string name="poi_distance">Απόσταση</string>
+    <string name="poi_cycle_network">Ποδηλατικό δίκτυο</string>
+    <string name="poi_state_proposed">Κατάσταση: προτεινόμενο</string>
+    <string name="poi_state_alternate">Κατάσταση: εναλλακτικό</string>
+    <string name="poi_state_connection">Κατάσταση: σύνδεση</string>
+    <string name="poi_state_inuse">Κατάσταση: σε χρήση</string>
 </resources>
