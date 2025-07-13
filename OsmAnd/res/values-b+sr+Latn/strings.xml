@@ -2455,7 +2455,7 @@
     <string name="shared_string_language">Glas</string>
     <string name="shared_string_all_languages">Svi jezici</string>
     <string name="wiki_menu_download_descr">Za prikaz Wikipedia TOI su potrebne dodatne mape.</string>
-    <string name="select_wikipedia_article_langs">Odaberi jezik za Vikipedijine članke na mapi. Prebaci na bilo koji drugi dostupni jezik dok čitaš članak.</string>
+    <string name="select_wikipedia_article_langs">Odaberi jezik za Vikipedie članke na mapi. Prebaci na bilo koji drugi dostupni jezik dok čitaš članak.</string>
     <string name="some_articles_may_not_available_in_lang">Neki članci sa Vikipedije su možda dostupni na jeziku.</string>
     <string name="lang_zhyue">Kantonski</string>
     <string name="lang_zhminnan">Južnominski</string>
