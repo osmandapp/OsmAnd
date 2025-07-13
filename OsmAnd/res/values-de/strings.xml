@@ -993,7 +993,7 @@
     <string name="recording_context_menu_delete">Aufnahme löschen</string>
     <string name="layer_recordings">Audio-/Videonotizen</string>
     <string name="map_widget_av_notes">Audio-/Videonotizen</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-Erweiterung für offline Höhenlinien, Relief und Hangneigung</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-Erweiterung für Offline-Geländeeigenschaften wie Höhenlinien, Relief und Hangneigung</string>
     <string name="map_widget_distancemeasurement">Entfernungsmessung</string>
     <string name="monitoring_settings">Streckenaufzeichnung</string>
     <string name="monitoring_settings_descr">Konfiguration der Streckenaufzeichnung.</string>
@@ -1492,7 +1492,7 @@
     <string name="local_osm_changes_upload_all_confirm">%1$d Änderung(en) zu OSM hochladen\?</string>
     <string name="confirmation_to_clear_history">Verlauf löschen?</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="shared_string_minute_lowercase">Min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">verbleibend</string>
     <string name="osm_changes_added_to_local_edits">Die Änderungen an den OSM-Daten wurden dem lokalen Änderungssatz hinzugefügt</string>
     <string name="shared_string_go">Los</string>
@@ -3181,7 +3181,7 @@
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
     <string name="file_does_not_contain_routing_rules">Die Datei \'%1$s\' enthält keine Routing-Regeln. Bitte eine andere Datei wählen.</string>
     <string name="monitoring_min_speed_descr">Dies ist ein Filter, der Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Nebeneffekt: In ihrem Track fehlen alle Abschnitte, in denen das Mindestgeschwindigkeitskriterium nicht erfüllt wurde (z. B., wenn Sie Ihr Fahrrad einen steilen Hügel hinaufschieben). Außerdem wird es keine Informationen über Ruhezeiten wie Pausen geben. Dies hat Auswirkungen auf jede Analyse oder Nachbearbeitung, z. B., wenn Sie versuchen, die Gesamtlänge Ihrer Reise, die Zeit in Bewegung oder Ihre Durchschnittsgeschwindigkeit zu bestimmen.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Nebeneffekt: In Ihrem Track fehlen alle Abschnitte, in denen das Mindestgeschwindigkeitskriterium nicht erfüllt wurde (z. B., wenn Sie Ihr Fahrrad einen steilen Hügel hinaufschieben). Außerdem wird es keine Informationen über Ruhezeiten wie Pausen geben. Dies hat Auswirkungen auf jede Analyse oder Nachbearbeitung, wenn Sie z. B. versuchen, die Gesamtlänge Ihrer Reise, die Fahrzeit oder Ihre Durchschnittsgeschwindigkeit zu bestimmen.</string>
     <string name="plugin_global_prefs_info">Diese Erweiterungseinstellungen sind global und gelten für alle Profile</string>
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
     <string name="live_monitoring_tracking_interval">Aufzeichnungsintervall</string>
@@ -3218,7 +3218,7 @@
     <string name="copy_coordinates">Koordinaten kopieren</string>
     <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
-    <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht. Es ist vielleicht am besten, diesen Filter auszuschalten.</string>
     <string name="monitoring_min_distance_descr">Wenn Sie diesen Filter aktivieren, können Sie eine zusätzliche Datenaufzeichnung vermeiden, wenn fast keine Bewegung erkannt wird. Außerdem wird das räumliche Erscheinungsbild von Tracks ohne weitere Bearbeitung verbessert.</string>
     <string name="monitoring_min_distance_descr_side_effect">Nebeneffekte: Ruhezeiten werden nicht oder nur mit jeweils einem Punkt erfasst. Kleinere Bewegungen (z. B. zum Straßenrand, um eine mögliche Abzweigung zu markieren) können herausgefiltert werden. Beachten Sie, dass Ihre Datei weniger Informationen für die Nachbearbeitung enthält und gleichzeitig möglicherweise GPS-Artefakte aufgrund von schlechtem Empfang oder Chipsatz-Effekten vermieden werden können.</string>
     <string name="monitoring_min_distance_descr_recommendation">Empfehlung: Stellen Sie einen Versatz von 5 Metern ein, wenn Sie keine kleinen Details Ihrer Route aufzeichnen möchten und keine zusätzlichen Daten über Ihre Ruhezeit benötigen.</string>
