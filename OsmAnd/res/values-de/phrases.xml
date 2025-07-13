@@ -5108,4 +5108,10 @@
     <string name="poi_canoe_egress">Kanuausstieg</string>
     <string name="poi_canoe_put_in_egress">Kanu-Startplatz und -ausstieg</string>
     <string name="poi_whitewater_hazard">Wildwasser-Gefahr</string>
+    <string name="poi_denomination_hasidic">Chassidisch</string>
+    <string name="poi_denomination_lubavitch">Lubawitsch</string>
+    <string name="poi_denomination_theravada">Theravada</string>
+    <string name="poi_denomination_tiantai">Tiantai</string>
+    <string name="poi_denomination_scottish_episcopal">Schottisch Episkopal</string>
+    <string name="poi_denomination_polish_catholic">Polnisch-katholisch</string>
 </resources>
