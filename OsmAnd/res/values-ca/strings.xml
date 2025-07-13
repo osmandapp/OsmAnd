@@ -4772,7 +4772,7 @@
     <string name="travel_guides">Guies</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Punts de pas GPX (%1$d) copiats als preferits.</string>
     <string name="msg_favorites_skipped_as_existing">Els punts preferits (%1$d) s\'han omès com a ja existents.</string>
-    <string name="saved_to_device">Desat al dispositiu</string>
+    <string name="saved_to_device">S\'ha desat al dispositiu</string>
     <string name="save_to_device_error">Error en desar al dispositiu</string>
     <string name="save_to_device">Desa al dispositiu</string>
     <string name="add_to_navigation">Afegeix a la navegació</string>
