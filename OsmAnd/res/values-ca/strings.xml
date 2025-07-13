@@ -4761,8 +4761,8 @@
     <string name="shared_string_flat">Pla</string>
     <string name="uphill_downhill_split">Pujada / Baixada</string>
     <string name="set_parking_position">Estableix la posició d\'estacionament</string>
-    <string name="set_work">Estableix el treball</string>
-    <string name="set_home">Estableix l\'inici</string>
+    <string name="set_work">Estableix el lloc de treball</string>
+    <string name="set_home">Estableix la teva casa</string>
     <string name="set_intermediate_point">Estableix la destinació intermèdia</string>
     <string name="set_start_point">Estableix el punt d\'inici</string>
     <string name="read_on">Llegeix el %1$s</string>
