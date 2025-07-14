@@ -5138,4 +5138,8 @@
     <string name="poi_denomination_catholic_apostolic">天主教使徒教會</string>
     <string name="poi_denomination_sephardi">塞法迪</string>
     <string name="poi_denomination_welsh_independent">威爾斯獨立教會</string>
+    <string name="poi_canoe_put_in">獨木舟下水</string>
+    <string name="poi_canoe_egress">獨木舟上岸</string>
+    <string name="poi_canoe_put_in_egress">獨木舟下水與上岸</string>
+    <string name="poi_whitewater_hazard">急流危害</string>
 </resources>
