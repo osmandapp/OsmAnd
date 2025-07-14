@@ -79,11 +79,7 @@ public class RotatedTileBox {
 			tileRT = new QuadPointDouble(r.tileRT);
 			tileRB = new QuadPointDouble(r.tileRB);
 			tileLB = new QuadPointDouble(r.tileLB);
-
-			rotatedLatLonBounds = new ArrayList<>();
-			for (LatLon latLon : r.rotatedLatLonBounds) {
-				rotatedLatLonBounds.add(new LatLon(latLon.getLatitude(), latLon.getLongitude()));
-			}
+			rotatedLatLonBounds = new ArrayList<>(r.rotatedLatLonBounds);
 		}
 	}
 
@@ -208,11 +204,12 @@ public class RotatedTileBox {
 		tileBounds = bounds;
 		latLonBounds = new QuadRect(left, top, right, bottom);
 
-		rotatedLatLonBounds = new ArrayList<>();
-		rotatedLatLonBounds.add(new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(y1)), MapUtils.getLongitudeFromTile(zoom, alignTile(x1))));
-		rotatedLatLonBounds.add(new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(y2)), MapUtils.getLongitudeFromTile(zoom, alignTile(x2))));
-		rotatedLatLonBounds.add(new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(y3)), MapUtils.getLongitudeFromTile(zoom, alignTile(x3))));
-		rotatedLatLonBounds.add(new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(y4)), MapUtils.getLongitudeFromTile(zoom, alignTile(x4))));
+		List<LatLon> crotatedLatLonBounds = new ArrayList<>();
+		crotatedLatLonBounds.add(new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(y1)), MapUtils.getLongitudeFromTile(zoom, alignTile(x1))));
+		crotatedLatLonBounds.add(new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(y2)), MapUtils.getLongitudeFromTile(zoom, alignTile(x2))));
+		crotatedLatLonBounds.add(new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(y3)), MapUtils.getLongitudeFromTile(zoom, alignTile(x3))));
+		crotatedLatLonBounds.add(new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(y4)), MapUtils.getLongitudeFromTile(zoom, alignTile(x4))));
+		rotatedLatLonBounds = crotatedLatLonBounds;
 	}
 	
 	private double alignTile(double tile) {
