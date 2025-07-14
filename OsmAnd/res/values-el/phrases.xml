@@ -60,7 +60,7 @@
     <string name="poi_microbrewery">Μικροζυθοποιία</string>
     <string name="poi_beauty_salon_service">Υπηρεσία</string>
     <string name="poi_recycling_type">Τύπος</string>
-    <string name="poi_recycling_accepted_waste">Αποδεκτά απόβλητα</string>
+    <string name="poi_recycling_accepted_waste">Αποδεκτά απορρίμματα</string>
     <string name="poi_shelter_type">Τύπος</string>
     <string name="poi_fireplace">Τζάκι</string>
     <string name="poi_seasonal">Εποχιακός</string>
@@ -4309,4 +4309,7 @@
     <string name="poi_us_maps_recreation_area_facility_lighthouse">Φάρος</string>
     <string name="poi_route_activity_type_hiking">Διαδρομές πεζοπορίας</string>
     <string name="poi_route_activity_type_diving">Κατάδυση</string>
+    <string name="poi_self_checkout">Αυτοεξυπηρέτηση</string>
+    <string name="poi_self_checkout_no">Αυτοεξυπηρέτηση: όχι</string>
+    <string name="poi_waste_accepted">Αποδεκτά απορρίμματα</string>
 </resources>

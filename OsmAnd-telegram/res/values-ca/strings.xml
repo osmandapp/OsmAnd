@@ -156,7 +156,7 @@
     <string name="enter_password">Introduïu la contrasenya</string>
     <string name="password_descr">Contrasenya de Telegram</string>
     <string name="shared_string_login">Inicia sessió</string>
-    <string name="shared_string_logout">Surt</string>
+    <string name="shared_string_logout">Tanca sessió</string>
     <string name="initialization">S\'està iniciant</string>
     <string name="logging_out">S\'està tancant</string>
     <string name="gps_network_not_enabled">Voleu activa la ubicació\?</string>
@@ -265,7 +265,7 @@
     <string name="last_response_date">Darrera resposta: %1$s</string>
     <string name="last_update_from_telegram_duration">Darrera actualització des de Telegram: fa %1$s</string>
     <string name="last_response_duration">Darrera resposta: fa %1$s</string>
-    <string name="duration_ago">\'fa %1$s\'</string>
+    <string name="duration_ago">fa %1$s</string>
     <string name="shared_string_error_short">ERR</string>
     <string name="shared_string_export">Exporta</string>
     <string name="logcat_buffer">Memòria intermèdia del Logcat</string>

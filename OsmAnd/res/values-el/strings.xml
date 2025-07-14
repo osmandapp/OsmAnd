@@ -467,7 +467,7 @@
     <string name="amenity_type_military">Στρατιωτικά</string>
     <string name="amenity_type_natural">Φύση</string>
     <string name="amenity_type_office">Γραφείο</string>
-    <string name="amenity_type_other">Άλλα</string>
+    <string name="amenity_type_other">Άλλο</string>
     <string name="amenity_type_shop">Κατάστημα</string>
     <string name="amenity_type_sport">Αθλητισμός</string>
     <string name="amenity_type_sustenance">Διατροφή</string>
@@ -2445,7 +2445,7 @@
     <string name="begin_with_osmand_menu_group">Πρώτα βήματα με το OsmAnd</string>
     <string name="features_menu_group">Χαρακτηριστικά</string>
     <string name="help_us_to_improve_menu_group">Βοηθήστε στη βελτίωση του OsmAnd</string>
-    <string name="other_menu_group">Άλλα</string>
+    <string name="other_menu_group">Άλλο</string>
     <string name="plugins_menu_group">Πρόσθετα</string>
     <string name="first_usage_item">Πρώτη χρήση</string>
     <string name="navigation_item_description">Διαμόρφωση πλοήγησης.</string>
