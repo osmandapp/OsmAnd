@@ -5927,4 +5927,16 @@
     <string name="ais_cpa_warning_time_description">Om TCPA (tiden att nå CPA med ett annat fartyg) är mindre än detta värde markeras fartyget med röd färg.</string>
     <string name="ais_cpa_warning_distance">Varningsavstånd för närmaste infartspunkt (CPA)</string>
     <string name="ais_cpa_warning_distance_description">Fartyg är märkta med röd färg om CPA är mindre än detta värde och CPA nås inom en snar framtid (se varningstid för att nå CPA).</string>
+    <string name="location_interpolation_percent_desc">Ange andelen platsinterpolering under ruttnavigering. Denna parameter minskar fördröjningen av din position på kartan under animation.</string>
+    <string name="auto_zoom_3d_angle">Auto zoom 3D vinkel</string>
+    <string name="vehicle_metrics_obd_ii">Fordonsmetri (OBD-II)</string>
+    <string name="obd_throttle_position_desc">Visar vinkeln på gasspjällsplattan i gasspjällshuset.</string>
+    <string name="obd_calculated_engine_load">Beräknad motor last</string>
+    <string name="obd_engine_coolant_temp_desc">Visar temperaturen på motorns kylvätska</string>
+    <string name="obd_speed_desc">Visar hastighet från fordonshastighetssensorn (VSS).</string>
+    <string name="obd_air_intake_temp_desc">Visar temperaturen på luften som kommer in i motorns insugningsgrenrör.</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Använd valda enheter i namn.</string>
+    <string name="obd_fuel_consumption_desc">Visar bränsleförbrukningen av motorn, beräknad utifrån återstående bränsle, tankstorlek och avstånd som bestäms av GPS.</string>
+    <string name="shared_string_instant">Omedelbar</string>
+    <string name="show_minor_turns_descr">Filer visas i alla korsningar oavsett röstinstruktioner.</string>
 </resources>
