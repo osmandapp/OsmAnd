@@ -4392,8 +4392,21 @@
     <string name="poi_medical_supply_home_care">Οικιακή φροντίδα</string>
     <string name="poi_butcher_halal">Χαλάλ</string>
     <string name="poi_butcher_poultry">Πουλερικό</string>
-    <string name="poi_butcher_beef">Μοσχαρίσιο</string>
+    <string name="poi_butcher_beef">Μοσχάρι</string>
     <string name="poi_butcher_horse">Άλογο</string>
     <string name="poi_butcher_lamb">Αρνί</string>
     <string name="poi_butcher_pork">Χοιρινό</string>
+    <string name="poi_wine_type">Είδος;Είδος κρασιού</string>
+    <string name="poi_driver_training">Χώρος εκπαίδευσης οδηγών</string>
+    <string name="poi_diplomatic_embassy">Πρεσβεία</string>
+    <string name="poi_diplomatic_liaison">Σύνδεσμος (Διπλωματία)</string>
+    <string name="poi_fuel_lng">Υγροποιημένο Φυσικό Αέριο</string>
+    <string name="poi_beehive">Μελίσσι</string>
+    <string name="poi_parking_rooftop">Ταράτσα</string>
+    <string name="poi_parking_sheds">Υπόστεγα</string>
+    <string name="poi_parking_layby">Χώρος στάθμευσης σε δρόμο</string>
+    <string name="poi_radar_tower">Πύργος ραντάρ</string>
+    <string name="poi_lavoir">Δημόσιο πλυσταριό</string>
+    <string name="poi_geodesist">Γεωδαίτης</string>
+    <string name="poi_local_ref">Τοπική αναφορά</string>
 </resources>
