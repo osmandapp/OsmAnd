@@ -5814,7 +5814,7 @@
     <string name="recently_visited">Nyligen besökta</string>
     <string name="ais_address_nmea_server">IP-adress för NMEA-datakällan</string>
     <string name="ais_address_nmea_server_description">Definiera IP-adressen för NMEA-datakällan (om TCP används)</string>
-    <string name="no_places_available">Inga platser tillgängliga</string>
+    <string name="no_places_available">Inga platser i det synliga området</string>
     <string name="calculating_indication_message">Beräknar…</string>
     <string name="rendering_avg_info">Renderingsstatistik (medel 1 / 5 / 15 minuter)</string>
     <string name="intermediate_first">Mellanliggande först</string>
@@ -5922,5 +5922,9 @@
     <string name="display_priority">Visningsprioritet</string>
     <string name="point_location">Punktens placering</string>
     <string name="hmd_promo">HMD-kampanj i %1$s månader</string>
-    <string name="hmd_promo_years">HMD Promo för %1$s år</string>
+    <string name="hmd_promo_years">HMD-kampanj i %1$s år</string>
+    <string name="ais_cpa_warning_time">Varningstid för att nå närmaste ankomstpunkt (CPA)</string>
+    <string name="ais_cpa_warning_time_description">Om TCPA (tiden att nå CPA med ett annat fartyg) är mindre än detta värde markeras fartyget med röd färg.</string>
+    <string name="ais_cpa_warning_distance">Varningsavstånd för närmaste infartspunkt (CPA)</string>
+    <string name="ais_cpa_warning_distance_description">Fartyg är märkta med röd färg om CPA är mindre än detta värde och CPA nås inom en snar framtid (se varningstid för att nå CPA).</string>
 </resources>
