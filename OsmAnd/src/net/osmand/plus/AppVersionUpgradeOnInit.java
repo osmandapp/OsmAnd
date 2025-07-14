@@ -145,8 +145,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_0_01 = 5001;
 	// 5005 - (Resend user purchases)
 	public static final int VERSION_5_0_05 = 5005;
+	public static final int VERSION_5_1_00 = 5100;
 
-	public static final int LAST_APP_VERSION = VERSION_5_0_05;
+	public static final int LAST_APP_VERSION = VERSION_5_1_00;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -277,7 +278,9 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_8_02) {
 					migrateTerrainModeDefaultPreferences(settings);
 				}
+				boolean mergingAssets = false;
 				if (prevAppVersion < VERSION_5_0_00) {
+					mergingAssets = true;
 					app.getAppInitializer().addOnFinishListener(
 							init -> MergeAssetFilesVersionAlgorithm.execute(app)
 					);
@@ -287,6 +290,11 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_0_05) {
 					settings.BILLING_PURCHASE_TOKENS_SENT.set("");
+				}
+				if (prevAppVersion < VERSION_5_1_00 && !mergingAssets) {
+					app.getAppInitializer().addOnFinishListener(
+							init -> MergeAssetFilesVersionAlgorithm.execute(app)
+					);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
