@@ -130,7 +130,7 @@ public class MenuBuilder {
 
 	protected static final String[] arrowChars = {"=>", " - "};
 
-	protected OsmandApplication app;
+	public OsmandApplication app;
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
 	protected OsmAndAppCustomization customization;
@@ -653,7 +653,10 @@ public class MenuBuilder {
 		String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
 		locationData.remove(PointDescription.LOCATION_LIST_HEADER);
 		CollapsableView cv = getLocationCollapsableView(locationData);
-		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv, false, 1,
+		Drawable icon = getRowIcon(R.drawable.ic_action_get_my_location);
+		String textPrefix = app.getString(R.string.coordinates);
+		buildRow(view, icon,null, textPrefix, title, 0, null,
+				true, cv, false, 1, false, false,
 				false, null, false);
 	}
 
@@ -1170,7 +1173,7 @@ public class MenuBuilder {
 
 	}
 
-	protected CollapsableView getDistanceCollapsableView(Set<String> distanceData) {
+	public CollapsableView getDistanceCollapsableView(Set<String> distanceData) {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (String distance : distanceData) {
 			TextView button = buildButtonInCollapsableView(mapActivity, false, false);
@@ -1421,7 +1424,7 @@ public class MenuBuilder {
 		};
 	}
 
-	protected CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
+	public CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
 		TextViewEx textView = new TextViewEx(context);
 		textView.setVisibility(collapsed ? View.GONE : View.VISIBLE);
 		LinearLayout.LayoutParams llTextDescParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

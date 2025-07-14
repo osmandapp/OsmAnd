@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_sting_osm_link">OSM link</string>
 	<string name="deleting_history">Deleting history…</string>
 	<string name="deleting">Deleting…</string>
     <string name="release_5_1">

@@ -7,15 +7,11 @@ import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKIPEDIA;
+import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_DATA_BASE_URL;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_LINK;
-import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
-import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
-import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_YARDS;
-import static net.osmand.shared.settings.enums.MetricsConstants.NAUTICAL_MILES_AND_FEET;
-import static net.osmand.util.Algorithms.isUrl;
+import static net.osmand.util.CollectionUtils.equalsToAny;
+import static net.osmand.util.CollectionUtils.startsWithAny;
 
 import android.content.Context;
 import android.content.Intent;
@@ -50,29 +46,23 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.mapcontextmenu.builders.AmenityInfoRow.Builder;
+import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
+import net.osmand.plus.mapcontextmenu.builders.rows.PoiAdditionalUiRule;
+import net.osmand.plus.mapcontextmenu.builders.rows.PoiAdditionalUiRules;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
-import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
-import net.osmand.util.CollectionUtils;
-import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -81,14 +71,10 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityUIHelper.class);
 
-	private static final DecimalFormat DISTANCE_FORMAT = new DecimalFormat("#.##");
-
 	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + "cuisine";
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + "dish";
-	private static final String US_MAPS_RECREATION_AREA = "us_maps_recreation_area";
-	private static final String WIKI_DATA_BASE_URL = "https://www.wikidata.org/wiki/";
+	public static final String US_MAPS_RECREATION_AREA = "us_maps_recreation_area";
 
-	private final MetricsConstants metricSystem;
 	private final AdditionalInfoBundle additionalInfo;
 
 	private String preferredLang;
@@ -108,7 +94,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		super(mapActivity);
 		this.preferredLang = preferredLang;
 		this.additionalInfo = infoBundle;
-		this.metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
 	}
 
 	public void setPreferredLang(String lang) {
@@ -142,7 +127,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			AmenityInfoRow infoRow = null;
 			if (value instanceof String strValue) {
-				infoRow = createAmenityInfoRow(context, key, strValue, null);
+				infoRow = createPoiAdditionalInfoRow(context, key, strValue, null);
 			} else if (value != null) {
 				infoRow = createLocalizedAmenityInfoRow(context, key, value);
 			}
@@ -194,7 +179,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					if (icon == null) {
 						icon = getRowIcon(R.drawable.ic_action_note_dark);
 					}
-					boolean cuisineOrDish = CollectionUtils.equalsToAny(e.getKey(), Amenity.CUISINE, Amenity.DISH);
+					boolean cuisineOrDish = equalsToAny(e.getKey(), Amenity.CUISINE, Amenity.DISH);
 					CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true,
 							categoryTypes, true, cuisineOrDish ? cuisineRow : null, poiCategory);
 					infoRows.add(new AmenityInfoRow.Builder(poiAdditionalCategoryName)
@@ -242,15 +227,15 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	public void buildWikiDataRow(@NonNull View view) {
-		String wikidataValue = additionalInfo.get(WIKIDATA);
-		if (wikidataValue != null) {
+		String value = additionalInfo.get(WIKIDATA);
+		if (value != null) {
 			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(WIKIDATA);
 			PoiType pType = pt != null ? (PoiType) pt : null;
 			if (pType != null) {
 				AmenityInfoRow infoRow = new AmenityInfoRow.Builder(WIKIDATA)
 						.setIconId(R.drawable.ic_action_logo_wikidata)
-						.setTextPrefix(pType.getTranslation()).setText(wikidataValue)
-						.setHiddenUrl(getSocialMediaUrl(WIKIDATA, wikidataValue))
+						.setTextPrefix(pType.getTranslation()).setText(value)
+						.setHiddenUrl(getSocialMediaUrl(WIKIDATA, value))
 						.setIsText(true).setNeedLinks(true)
 						.setOrder(pType.getOrder()).setName(pType.getKeyName())
 						.setMatchWidthDivider(matchWidthDivider).setIsUrl(true)
@@ -313,7 +298,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				String localizedKey = localizedEntry.getKey();
 				String localizedValue = localizedEntry.getValue();
 				if (localizedKey != null && localizedValue != null && !Objects.equals(headerKey, localizedKey)) {
-					AmenityInfoRow infoRow = createAmenityInfoRow(context, localizedKey, localizedValue, null);
+					AmenityInfoRow infoRow = createPoiAdditionalInfoRow(context, localizedKey, localizedValue, null);
 					if (infoRow != null) {
 						infoRows.add(infoRow);
 					}
@@ -330,70 +315,25 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			collapsableView = new CollapsableView(llv, this, true);
 		}
-		return createAmenityInfoRow(context, headerKey, headerValue, collapsableView);
+		return createPoiAdditionalInfoRow(context, headerKey, headerValue, collapsableView);
 	}
 
 	@Nullable
-	private AmenityInfoRow createAmenityInfoRow(@NonNull Context context,
-	                                            @NonNull String key, @NonNull String vl,
-	                                            @Nullable CollapsableView collapsableView) {
-		if (key.startsWith(COLLAPSABLE_PREFIX) || key.startsWith(ALT_NAME_WITH_LANG_PREFIX)) {
+	private AmenityInfoRow createPoiAdditionalInfoRow(@NonNull Context context,
+	                                                  @NonNull String key, @NonNull String vl,
+	                                                  @Nullable CollapsableView collapsableView) {
+		if (isKeyToSkip(key)) return null;
+
+		PoiType pType = fetchPoiAdditionalType(key, vl);
+		if (pType == null) {
+			String altKey = key.replaceAll(":", "_");
+			pType = fetchPoiAdditionalType(altKey, vl);
+		}
+		if (pType != null && pType.isFilterOnly()) {
 			return null;
 		}
-		if (CollectionUtils.equalsToAny(key, "image", "mapillary", "subway_region")
-				|| (key.equals("note") && !osmEditingEnabled)
-				|| key.startsWith("lang_yes")) {
-			return null;
-		}
-		String baseKey = key.contains(":") ? key.split(":")[0] : key;
 
-		int iconId = 0;
-		int textColor = 0;
-		Drawable icon = null;
-		String hiddenUrl = null;
-		String textPrefix = "";
-		boolean isWikipediaLink = false;
-		boolean isWiki = false;
-		boolean isText = false;
-		boolean isDescription = false;
-		boolean needLinks = !(CollectionUtils.equalsToAny(key, OPENING_HOURS, "population", "height")) && collapsableView == null;
-		boolean needIntFormatting = "population".equals(key);
-		boolean isPhoneNumber = false;
-		boolean isUrl = false;
-		int poiTypeOrder = 0;
-		String poiTypeKeyName = "";
-
-		poiType = poiCategory.getPoiTypeByKeyName(key);
-		AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-		if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
-			pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
-		}
-		if (poiType == null && pt == null) {
-			poiType = poiTypes.getPoiTypeByKey(key);
-		}
-		PoiType pType = null;
-		if (pt != null) {
-			pType = (PoiType) pt;
-			if (pType.isFilterOnly()) {
-				return null;
-			}
-			poiTypeOrder = pType.getOrder();
-			poiTypeKeyName = pType.getKeyName();
-		}
-
-		isUrl = isUrl(vl);
-		if (key.contains(WIKIPEDIA)) {
-			Pair<String, String> wikiParams = WikiAlgorithms.getWikiParams(key, vl);
-			vl = wikiParams.first;
-			hiddenUrl = wikiParams.second;
-			isWikipediaLink = isUrl = isWiki = true;
-		} else if (!isUrl && needLinks) {
-			hiddenUrl = getSocialMediaUrl(key, vl);
-			if (hiddenUrl != null) {
-				isUrl = true;
-			}
-		}
-
+		// filter poi additional categories on this step, they will be processed separately
 		if (pType != null && !pType.isText()) {
 			String categoryName = pType.getPoiAdditionalCategory();
 			if (!Algorithms.isEmpty(categoryName)) {
@@ -402,201 +342,46 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 		}
 
-		if (MapObject.isNameLangTag(key)) {
-			return null;
-		} else if (Amenity.COLLECTION_TIMES.equals(baseKey) || Amenity.SERVICE_TIMES.equals(baseKey)) {
-			iconId = R.drawable.ic_action_time;
-			needLinks = false;
-		} else if (OPENING_HOURS.equals(baseKey)) {
-			iconId = R.drawable.ic_action_time;
-			collapsableView = getCollapsableTextView(context, true,
-					vl.replace("; ", "\n").replace(",", ", "));
-			OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(vl);
-			if (rs != null) {
-				vl = rs.toLocalString();
-				Calendar inst = Calendar.getInstance();
-				inst.setTimeInMillis(System.currentTimeMillis());
-				boolean opened = rs.isOpenedForTime(inst);
-				if (opened) {
-					textColor = R.color.color_ok;
-				} else {
-					textColor = R.color.color_invalid;
-				}
-			}
-			vl = vl.replace("; ", "\n");
-			needLinks = false;
+		AmenityInfoRow.Builder rowBuilder = new AmenityInfoRow.Builder(key);
+		rowBuilder.setCollapsableView(collapsableView);
 
-		} else if (Amenity.PHONE.equals(baseKey)) {
-			iconId = R.drawable.ic_action_call_dark;
-			isPhoneNumber = true;
-		} else if (Amenity.MOBILE.equals(baseKey)) {
-			iconId = R.drawable.ic_action_phone;
-			isPhoneNumber = true;
-		} else if (Amenity.WEBSITE.equals(baseKey)) {
-			iconId = R.drawable.ic_world_globe_dark;
-			isUrl = true;
-		} else if (Amenity.CUISINE.equals(baseKey)) {
-			iconId = R.drawable.ic_action_cuisine;
-			StringBuilder sb = new StringBuilder();
-			for (String c : vl.split(";")) {
-				if (sb.length() > 0) {
-					sb.append(", ");
-					sb.append(poiTypes.getPoiTranslation("cuisine_" + c).toLowerCase());
-				} else {
-					sb.append(poiTypes.getPoiTranslation("cuisine_" + c));
-				}
+		if (pType != null) {
+			PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
+			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, pType, key, vl, subtype);
+		} else if (poiType != null) {
+			String category = poiType.getCategory().getKeyName();
+			if (MapPoiTypes.OTHER_MAP_CATEGORY.equals(category)) {
+				return null; // the "Others" value is already displayed as a title
 			}
-			textPrefix = app.getString(R.string.poi_cuisine);
-			vl = sb.toString();
-		} else if (key.contains(Amenity.ROUTE)
-				|| key.equals(Amenity.WIKI_PHOTO)
-				|| key.equals(Amenity.WIKIDATA)
-				|| key.equals(Amenity.WIKIMEDIA_COMMONS)) {
-			return null;
+			collectedPoiTypes.computeIfAbsent(category, s -> new ArrayList<>()).add(poiType);
 		} else {
-			if (baseKey.contains(Amenity.DESCRIPTION)) {
-				iconId = R.drawable.ic_action_note_dark;
-			} else if (isWikipediaLink) {
-				iconId = R.drawable.ic_plugin_wikipedia;
-			} else if (key.equals("addr:housename") || key.equals("whitewater:rapid_name")) {
-				iconId = R.drawable.ic_action_poi_name;
-			} else if (baseKey.equals("operator") || baseKey.equals("brand")) {
-				iconId = R.drawable.ic_action_poi_brand;
-			} else if (baseKey.equals("internet_access_fee_yes")) {
-				iconId = R.drawable.ic_action_internet_access_fee;
-			} else if (baseKey.equals("instagram")) {
-				iconId = R.drawable.ic_action_social_instagram;
-			} else {
-				iconId = R.drawable.ic_action_info_dark;
-			}
-			if (pType != null) {
-				String cat = pType.getOsmTag().replace(':', '_');
-				if (!cat.isEmpty()) {
-					int catIconId = app.getResources().getIdentifier("mx_" + cat, "drawable", app.getPackageName());
-					iconId = catIconId != 0 ? catIconId : iconId;
-				}
-				poiTypeOrder = pType.getOrder();
-				poiTypeKeyName = pType.getKeyName();
-				if (pType.getParentType() != null && pType.getParentType() instanceof PoiType) {
-					icon = getRowIcon(context, ((PoiType) pType.getParentType()).getOsmTag() + "_" + cat + "_" + pType.getOsmValue());
-				}
-				if (!pType.isText()) {
-					vl = pType.getTranslation();
-				} else {
-					isText = true;
-					isDescription = iconId == R.drawable.ic_action_note_dark;
-					textPrefix = pType.getTranslation();
-					if (needIntFormatting) {
-						vl = getFormattedInt(vl);
-					}
-				}
-				if (!isDescription && icon == null) {
-					icon = getRowIcon(context, pType.getIconKeyName());
-					if (isText && icon != null) {
-						textPrefix = "";
-					}
-				}
-			} else if (poiType != null) {
-				String catKey = poiType.getCategory().getKeyName();
-				if (MapPoiTypes.OTHER_MAP_CATEGORY.equals(catKey)) {
-					return null; // the "Others" value is already displayed as a title
-				}
-				List<PoiType> list = collectedPoiTypes.computeIfAbsent(catKey, s -> new ArrayList<>());
-				list.add(poiType);
-			} else if (baseKey.startsWith(US_MAPS_RECREATION_AREA)) {
-				String translatedUsMapsKey = app.getPoiTypes().getPoiTranslator().getTranslation(baseKey);
-				if (!Algorithms.isEmpty(translatedUsMapsKey)) {
-					textPrefix = translatedUsMapsKey;
-				} else {
-					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
-				}
-			} else {
-				return null; // skip non-translatable NON-poiType tags
-			}
+			return null; // skip non-translatable NON-poiType tags
 		}
 
-		String[] formattedPrefixAndText = getFormattedPrefixAndText(key, textPrefix, vl, subtype);
-		textPrefix = formattedPrefixAndText[0];
-		vl = formattedPrefixAndText[1];
+		lastBuiltRowIsDescription = rowBuilder.isDescription();
+		rowBuilder.setMatchWidthDivider(!rowBuilder.isDescription() && rowBuilder.isWiki());
+		return rowBuilder.build();
+	}
 
-		if ("ele".equals(key)) {
-			try {
-				float distance = Float.parseFloat(vl);
-				vl = OsmAndFormatter.getFormattedAlt(distance, app, metricSystem);
-				String collapsibleVal;
-				if (metricSystem == MILES_AND_FEET || metricSystem == MILES_AND_YARDS || metricSystem == NAUTICAL_MILES_AND_FEET) {
-					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, KILOMETERS_AND_METERS);
-				} else {
-					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MILES_AND_FEET);
-				}
-				Set<String> elevationData = new HashSet<>();
-				elevationData.add(collapsibleVal);
-				collapsableView = getDistanceCollapsableView(elevationData);
-				needLinks = false;
-			} catch (NumberFormatException ex) {
-				LOG.error(ex);
-			}
-		}
+	private boolean isKeyToSkip(@NonNull String key) {
+		return startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, "lang_yes")
+				|| equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
+				|| (key.equals("note") && !osmEditingEnabled)
+				|| MapObject.isNameLangTag(key)
+				|| key.contains(ROUTE);
+	}
 
-		lastBuiltRowIsDescription = isDescription;
-		boolean matchWidthDivider = !isDescription && isWiki;
-		AmenityInfoRow row;
-		if (isDescription) {
-			row = new AmenityInfoRow.Builder(key)
-					.setIconId(R.drawable.ic_action_note_dark)
-					.setTextPrefix(textPrefix)
-					.setText(vl)
-					.setHiddenUrl(null)
-					.setCollapsableView(collapsableView)
-					.setTextColor(0)
-					.setIsWiki(false)
-					.setIsText(true)
-					.setNeedLinks(true)
-					.setOrder(0)
-					.setName("")
-					.setIsPhoneNumber(false)
-					.setIsUrl(false)
-					.setMatchWidthDivider(matchWidthDivider)
-					.setTextLinesLimit(0)
-					.build();
-		} else if (icon != null) {
-			row = new Builder(key)
-					.setIcon(icon)
-					.setTextPrefix(textPrefix)
-					.setText(vl)
-					.setHiddenUrl(hiddenUrl)
-					.setCollapsableView(collapsableView)
-					.setTextColor(textColor)
-					.setIsWiki(isWiki)
-					.setIsText(isText)
-					.setNeedLinks(needLinks)
-					.setOrder(poiTypeOrder)
-					.setName(poiTypeKeyName)
-					.setIsPhoneNumber(isPhoneNumber)
-					.setIsUrl(isUrl)
-					.setMatchWidthDivider(matchWidthDivider)
-					.setTextLinesLimit(0)
-					.build();
-		} else {
-			row = new Builder(key)
-					.setIconId(iconId)
-					.setTextPrefix(textPrefix)
-					.setText(vl)
-					.setHiddenUrl(hiddenUrl)
-					.setCollapsableView(collapsableView)
-					.setTextColor(textColor)
-					.setIsWiki(isWiki)
-					.setIsText(isText)
-					.setNeedLinks(needLinks)
-					.setOrder(poiTypeOrder)
-					.setName(poiTypeKeyName)
-					.setIsPhoneNumber(isPhoneNumber)
-					.setIsUrl(isUrl)
-					.setMatchWidthDivider(matchWidthDivider)
-					.setTextLinesLimit(0)
-					.build();
+	@Nullable
+	private PoiType fetchPoiAdditionalType(@NonNull String key, @Nullable String vl) {
+		poiType = poiCategory.getPoiTypeByKeyName(key);
+		AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
+		if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
+			pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
 		}
-		return row;
+		if (poiType == null && pt == null) {
+			poiType = poiTypes.getPoiTypeByKey(key);
+		}
+		return pt != null ? (PoiType) pt : null;
 	}
 
 	public void buildNamesRow(ViewGroup viewGroup, Map<String, String> namesMap, boolean altName) {
@@ -658,7 +443,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	@Nullable
-	private String getSocialMediaUrl(String key, String value) {
+	public static String getSocialMediaUrl(String key, String value) {
 		// Remove leading and closing slashes
 		value = value.trim();
 		if (Algorithms.isEmpty(value)) {
@@ -693,95 +478,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			return String.format(url, value);
 		}
 		return null;
-	}
-
-	private String getFormattedInt(String value) {
-		try {
-			int number = Integer.parseInt(value);
-			DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(Locale.US);
-			DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
-			symbols.setGroupingSeparator(' ');
-			formatter.setDecimalFormatSymbols(symbols);
-			return formatter.format(number);
-		} catch (NumberFormatException e) {
-			return value;
-		}
-	}
-
-	private String[] getFormattedPrefixAndText(String key, String prefix, String value, String subtype) {
-		DISTANCE_FORMAT.setRoundingMode(RoundingMode.CEILING);
-		String formattedValue = value;
-		String formattedPrefix = prefix;
-		boolean formatted = true;
-		switch (key) {
-			case "width":
-			case "height":
-				if (key.equals("width")) {
-					formattedPrefix = app.getString(R.string.shared_string_width);
-				} else {
-					formattedPrefix = app.getString(R.string.shared_string_height);
-				}
-			case "depth":
-			case "seamark_height":
-				double valueAsDouble = Algorithms.parseDoubleSilently(value, 0);
-				if (valueAsDouble > 0) {
-					if (metricSystem == MILES_AND_FEET || metricSystem == NAUTICAL_MILES_AND_FEET) {
-						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * FEET_IN_ONE_METER) + " " + app.getString(R.string.foot);
-					} else if (metricSystem == MILES_AND_YARDS) {
-						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * YARDS_IN_ONE_METER) + " " + app.getString(R.string.yard);
-					} else {
-						formattedValue = value + " " + app.getString(R.string.m);
-					}
-				}
-				break;
-			case "distance":
-				try {
-					float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
-					if (metricSystem == KILOMETERS_AND_METERS) {
-						formattedValue = value + " " + app.getString(R.string.km);
-					} else {
-						formattedValue = OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters, app);
-					}
-					formattedPrefix = formatPrefix(prefix, app.getString(R.string.distance));
-				} catch (RuntimeException e) {
-					LOG.error(e.getMessage(), e);
-				}
-				break;
-			case "capacity":
-				if (subtype.equals("water_tower") || subtype.equals("storage_tank")) {
-					formattedValue = value + " " + app.getString(R.string.cubic_m);
-				}
-				break;
-			case "maxweight":
-				if (Algorithms.isInt(value)) {
-					formattedValue = value + " " + app.getString(R.string.metric_ton);
-				}
-				break;
-			case "students":
-			case "spots":
-			case "seats":
-				if (Algorithms.isInt(value)) {
-					formattedPrefix = formatPrefix(prefix, app.getString(R.string.shared_string_capacity));
-				}
-				break;
-			case "wikipedia":
-				formattedPrefix = app.getString(R.string.shared_string_wikipedia);
-				break;
-			default:
-				formatted = false;
-		}
-		if (!formatted && formattedPrefix.contains(" (")) {
-			String[] prefixParts = formattedPrefix.split(" [(]");
-			if (prefixParts.length == 2) {
-				formattedPrefix = app.getString(R.string.ltr_or_rtl_combine_via_colon, prefixParts[0],
-						Algorithms.capitalizeFirstLetterAndLowercase(prefixParts[1]).replaceAll("[()]", ""));
-			}
-		}
-		return new String[] {formattedPrefix, formattedValue};
-	}
-
-	private String formatPrefix(String prefix, String units) {
-		return (!prefix.isEmpty()) ? (prefix + ", " + units) : units;
 	}
 
 	private void buildRow(View view, int iconId, String text, String textPrefix, String hiddenUrl,
