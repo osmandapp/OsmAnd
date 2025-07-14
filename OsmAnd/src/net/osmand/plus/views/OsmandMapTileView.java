@@ -2577,11 +2577,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			boolean allow = plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.get();
 			MapRendererDebugSettings debugSettings = mapRenderer.getDebugSettings();
 			debugSettings.setDebugStageEnabled(show);
-			debugSettings.setShowSymbolsMarksRejectedByViewpoint(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByIntersectionCheck(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByMinDistanceToSameContentFromOtherSymbolCheck(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByPresentationMode(show);
-			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(show);
+			debugSettings.setShowSymbolsMarksRejectedByViewpoint(allow);
+			debugSettings.setShowSymbolsBBoxesRejectedByIntersectionCheck(allow);
+			debugSettings.setShowSymbolsBBoxesRejectedByMinDistanceToSameContentFromOtherSymbolCheck(allow);
+			debugSettings.setShowSymbolsBBoxesRejectedByPresentationMode(allow);
+			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(allow);
 			debugSettings.setSkipSymbolsIntersectionCheck(allow);
 			mapRenderer.setDebugSettings(debugSettings);
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();

@@ -664,7 +664,7 @@
     <string name="poi_castle">Замок</string>
     <string name="poi_city_gate">Міські ворота</string>
     <string name="poi_fort">Фортифікаційні споруди</string>
-    <string name="poi_fountain">Водограй</string>
+    <string name="poi_fountain">Фонтан</string>
     <string name="poi_historic_ruins">Історичні руїни</string>
     <string name="poi_rune_stone">Рунічний камінь</string>
     <string name="poi_wreck">Місце кораблетрощі</string>
@@ -1948,7 +1948,7 @@
     <string name="poi_tomb_rock_cut">Вид: вирізана в камені</string>
     <string name="poi_summer_camp">Дитячий літній табір</string>
     <string name="poi_payment_cibus_no">Картки Cibus не приймаються</string>
-    <string name="poi_artwork_type_fountain">Вид: водограй</string>
+    <string name="poi_artwork_type_fountain">Тип твору мистецтва: фонтан</string>
     <string name="poi_tomb_hypogeum">Вид: гіпогей</string>
     <string name="poi_recreation_center">Оздоровчий центр, база відпочинку</string>
     <string name="poi_payment_wire_transfer_yes">Грошові перекази</string>
@@ -5140,4 +5140,8 @@
     <string name="poi_denomination_iglesia_filipina_independiente">Філіппінська незалежна церква</string>
     <string name="poi_denomination_sephardi">Сефарди</string>
     <string name="poi_denomination_welsh_independent">Валлійський незалежний</string>
+    <string name="poi_canoe_put_in">Спуск на воду каное</string>
+    <string name="poi_canoe_egress">Винос каное</string>
+    <string name="poi_canoe_put_in_egress">Спуск і витяг каное</string>
+    <string name="poi_whitewater_hazard">Небезпека бурхливої води</string>
 </resources>
