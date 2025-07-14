@@ -415,8 +415,7 @@
     <string name="gpx_option_reverse_route">Omvänd spår-riktning</string>
     <string name="gpx_option_destination_point">Använd aktuell destination</string>
     <string name="gpx_option_from_start_point">Passera längs hela spåret</string>
-    <string name="switch_to_vector_map_to_see"><![CDATA[En offline vektor-karta finns tillgänglig för den här platsen.
-\n\t\n\tFör användning aktivera \'Meny\' -> \'Konfigurera karta\' -> \'Kartkälla…\' -> \'Offline vektor-kartor\'.]]></string>
+    <string name="switch_to_vector_map_to_see">En offline vektor-karta finns tillgänglig för den här platsen. \n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Konfigurera karta\' -&gt; \'Kartkälla…\' -&gt; \'Offline vektor-kartor\'.</string>
     <string name="choose_audio_stream">Röstväglednings-output</string>
     <string name="choose_audio_stream_descr">Välj högtalare för röstvägledning.</string>
     <string name="voice_stream_voice_call">Ljud för telefonsamtal (för att avbryta Bluetooth-stereo i bilar)</string>
@@ -2650,27 +2649,8 @@
 \n• GPS-spårinspelning till lokal GPX-fil eller onlinetjänst
 \n• Valbar visning av hastighet och höjd
 \n• Visa höjdkurvor och terrängskuggning (via särskild insticksmodul)</string>
-    <string name="osmand_plus_extended_description_part7">Bidra direkt till OSM
-\n• Rapportera databuggar
-\n• Ladda upp GPX-spår till OSM direkt från appen
-\n• Lägg till Intressepunkter och ladda upp dem direkt till OSM (eller senare om offline)
-\n• Valfri reseinspelning i bakgrundsläge (när enheten är i strömsparläge)
-\nOsmAnd utvecklas aktivt med öppen källkod. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller koda nya funktioner. Dock är projektet beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner.
-\n</string>
-    <string name="osmand_plus_extended_description_part8">Ungefärlig karttäckning och kvalitet:
-\n • Västeuropa: ****
-\n • Östeuropa: ***
-\n • Ryssland: ***
-\n • Nordamerika: ***
-\n • Sydamerika: **
-\n • Asien: **
-\n • Japan och Korea: ***
-\n • Mellanöstern: **
-\n • Afrika: **
-\n • Antarktis: *
-\nDe flesta länder runt om i världen finns som nedladdningar
-\nFrån Afghanistan till Zimbabwe, från Australien till USA. Argentina, Brasilien, Kanada, Frankrike, Tyskland, Mexiko, Storbritannien, Spanien, ...
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Bidra direkt till OSM \n• Rapportera databuggar \n• Ladda upp GPX-spår till OSM direkt från appen \n• Lägg till Intressepunkter och ladda upp dem direkt till OSM (eller senare om offline) \n• Valfri reseinspelning i bakgrundsläge (när enheten är i strömsparläge) \nOsmAnd utvecklas aktivt med öppen källkod. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller koda nya funktioner. Dock är projektet beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner.</string>
+    <string name="osmand_plus_extended_description_part8">Ungefärlig karttäckning och kvalitet: \n • Västeuropa: **** \n • Östeuropa: *** \n • Ryssland: *** \n • Nordamerika: *** \n • Sydamerika: ** \n • Asien: ** \n • Japan och Korea: *** \n • Mellanöstern: ** \n • Afrika: ** \n • Antarktis: * \nDe flesta länder runt om i världen finns som nedladdningar \nFrån Afghanistan till Zimbabwe, från Australien till USA. Argentina, Brasilien, Kanada, Frankrike, Tyskland, Mexiko, Storbritannien, Spanien, …</string>
     <string name="quick_action_bug_descr">Detta meddelande ingår i kommentarsfältet.</string>
     <string name="quick_action_category_descr">Kategori för att spara favoriten i:</string>
     <string name="quick_action_gpx_category_descr">Välj en valfri kategori.</string>
@@ -4880,7 +4860,7 @@
     <string name="help_article_map_legend_ski_map_name">Vinter och skidor-kartstil</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Om OsmAnds ruttberäkning</string>
     <string name="terrain_category_description">Höjdkurvor, terrängskuggning i gråskala och lutningskartor i färg, för att visa toppar och dalar.</string>
-    <string name="location_source_descr">Som standard använder OsmAnd installerad från Google Play %1$s för att fastställa plats. \n \nOm du ges felaktig platsinformation, eller om enheten saknar %2$s, pröva att byta till \"%3$s\".</string>
+    <string name="location_source_descr">Som standard använder OsmAnd installerad från Google Play %1$s för att fastställa plats. \n \nOm du ges felaktig platsinformation, eller om enheten saknar %2$s, pröva att byta till \"%3$s\"</string>
     <string name="rendering_value_sector2_name">Sektor 2</string>
     <string name="ant_plus_help_title">Jag vet inte vilken typ av sensor jag har</string>
     <string name="time_to_intermediate_widget_desc">Visar \"Ankomsttid\" eller \"Återstående restid\" till första mellanliggande punkt. Tiden uppdateras kontinuerligt under navigeringen, och så fort en punkt passeras uppdateras den till nästa mellanliggande punkt.</string>
@@ -5936,4 +5916,7 @@
     <string name="rendering_avg_info_details">FPS för senaste 1000 bilderna: %1$s\nCPU (kartrutor): %2$s\nCPU (inaktiv tid): %3$s\nCPU (väntar på GPU): %4$s</string>
     <string name="show_debug_tile_description">Visa information om kartsymboler på varje kartruta</string>
     <string name="shared_string_not_checked">Inte kontrollerad</string>
+    <string name="release_5_2">•• Arbete pågår...</string>
+    <string name="release_5_1">• Lade till stöd för webb- och plattformsoberoende köp\n\n• Flyttade temperaturenheter till allmänna inställningar för enklare åtkomst\n\n• Lade till batterinivåindikator för BLE-sensorer\n\n• Nytt, mer intuitivt användargränssnitt för punktval i navigering\n\n• Förbättrad widgetsynlighet med en ny kontur\n\n• Lade till analysator för uppförsbackar/nedförsbackar\n\n• Utökad Wikipedia- och Wikivoyage-integration för fler intressepunkter.</string>
+    <string name="uphill_downhill_split">Uppförsbacke / Nedförsbacke</string>
 </resources>
