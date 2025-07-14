@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarker.PinIconHorisontalAlignment;
@@ -391,6 +392,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 					drawTextOnCenterOfPathOpenGl(formattedDistance, nightMode);
 				}
 			}
+
+			mapRenderer.updateSubsection(MapRendererContext.RULER_MARKERS_SECTION);
 		} else if (showTwoFingersDistance) {
 			if (vectorLinesCollection == null) {
 				drawLineBetweenLocationsOpenGl(mapRenderer, cachedFirstTouchLatLon, cachedSecondTouchLatLon);
@@ -406,6 +409,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 					drawTextOnCenterOfPathOpenGl(formattedDistance, nightMode);
 				}
 			}
+
+			mapRenderer.updateSubsection(MapRendererContext.RULER_MARKERS_SECTION);
 		}
 	}
 
@@ -467,7 +472,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		builder.buildAndAddToCollection(mapMarkersCollection);
 
 		if (!mapRenderer.hasSymbolsProvider(mapMarkersCollection)) {
-			mapRenderer.addSymbolsProvider(mapMarkersCollection);
+			mapRenderer.addSymbolsProvider(MapRendererContext.RULER_MARKERS_SECTION, mapMarkersCollection);
 		}
 	}
 
