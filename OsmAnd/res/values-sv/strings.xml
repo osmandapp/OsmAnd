@@ -5919,4 +5919,8 @@
     <string name="release_5_2">•• Arbete pågår...</string>
     <string name="release_5_1">• Lade till stöd för webb- och plattformsoberoende köp\n\n• Flyttade temperaturenheter till allmänna inställningar för enklare åtkomst\n\n• Lade till batterinivåindikator för BLE-sensorer\n\n• Nytt, mer intuitivt användargränssnitt för punktval i navigering\n\n• Förbättrad widgetsynlighet med en ny kontur\n\n• Lade till analysator för uppförsbackar/nedförsbackar\n\n• Utökad Wikipedia- och Wikivoyage-integration för fler intressepunkter.</string>
     <string name="uphill_downhill_split">Uppförsbacke / Nedförsbacke</string>
+    <string name="display_priority">Visningsprioritet</string>
+    <string name="point_location">Punktens placering</string>
+    <string name="hmd_promo">HMD-kampanj i %1$s månader</string>
+    <string name="hmd_promo_years">HMD Promo för %1$s år</string>
 </resources>
