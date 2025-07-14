@@ -9,10 +9,10 @@ object EleRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
     val LOG = PlatformUtil.getLog(EleRowBehaviour::class.java)!!
 
     override fun applyCustomRules(
-	    params: PoiRowParams
-    ) {
-        super.applyCustomRules(params)
-	    with(params) {
+		params: PoiRowParams
+	) {
+		super.applyCustomRules(params)
+		with(params) {
 		    var vl = value
 		    val metricSystem = app.settings.METRIC_SYSTEM.get()
 		    try {

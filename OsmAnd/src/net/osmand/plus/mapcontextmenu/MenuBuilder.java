@@ -607,7 +607,7 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
-		if (nearestAmenities.size() > 0) {
+		if (!nearestAmenities.isEmpty()) {
 			String count = "(" + nearestAmenities.size() + ")";
 			text = app.getString(R.string.ltr_or_rtl_combine_via_space, text, count);
 			CollapsableView collapsableView = getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey);

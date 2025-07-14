@@ -9,11 +9,11 @@ object DistanceRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
 
     val LOG = PlatformUtil.getLog(DistanceRowBehaviour::class.java)!!
 
-    override fun applyCustomRules(
+    override fun applyCommonRules(
 	    params: PoiRowParams
     ) {
-        super.applyCustomRules(params)
-	    with(params) {
+		super.applyCommonRules(params)
+		with(params) {
 		    val metricSystem = app.settings.METRIC_SYSTEM.get()
 		    try {
 			    val valueAsFloatInMeters = value.toFloat() * 1000

@@ -8,8 +8,8 @@ object PopulationRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
     override fun applyCustomRules(
 	    params: PoiRowParams
     ) {
-        super.applyCustomRules(params)
-	    with(params) {
+		super.applyCustomRules(params)
+		with(params) {
 		    val formatted = try {
 			    val number = value.toInt()
 			    val formatter = DecimalFormat.getInstance(Locale.US) as DecimalFormat

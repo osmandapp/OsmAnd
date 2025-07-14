@@ -7,8 +7,8 @@ object CuisineRowBehavior : DefaultPoiAdditionalRowBehaviour() {
     override fun applyCustomRules(
 	    params: PoiRowParams
 	) {
-        super.applyCustomRules(params)
-	    with(params) {
+		super.applyCustomRules(params)
+		with(params) {
 		    val sb = StringBuilder()
 		    val cuisines = value.split(";")
 		    for (name in cuisines) {

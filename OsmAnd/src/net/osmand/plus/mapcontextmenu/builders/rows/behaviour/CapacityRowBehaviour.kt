@@ -5,8 +5,8 @@ import net.osmand.util.Algorithms
 
 object CapacityRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
 
-    override fun applyCustomRules(params: PoiRowParams) {
-	    super.applyCustomRules(params)
+    override fun applyCommonRules(params: PoiRowParams) {
+	    super.applyCommonRules(params)
 	    with(params) {
 		    if (Algorithms.isInt(value)) {
 			    val prefix = builder.textPrefix

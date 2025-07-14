@@ -6,9 +6,9 @@ object UsMapsRecreationAreaRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
 
     override fun applyCustomRules(
 	    params: PoiRowParams
-    ) {
-        super.applyCustomRules(params)
-	    with(params) {
+	) {
+		super.applyCustomRules(params)
+		with(params) {
 		    val translatedUsMapsKey: String = app.poiTypes.poiTranslator.getTranslation(key)
 		    builder.setTextPrefix(
 			    if (!Algorithms.isEmpty(translatedUsMapsKey)) {

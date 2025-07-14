@@ -14,9 +14,9 @@ object MetricRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
 
     override fun applyCustomRules(
 	    params: PoiRowParams
-    ) {
-        super.applyCustomRules(params)
-	    with(params) {
+	) {
+		super.applyCustomRules(params)
+		with(params) {
 		    val metricSystem = app.settings.METRIC_SYSTEM.get()
 		    val valueAsDouble = Algorithms.parseDoubleSilently(value, 0.0)
 		    if (valueAsDouble > 0) {

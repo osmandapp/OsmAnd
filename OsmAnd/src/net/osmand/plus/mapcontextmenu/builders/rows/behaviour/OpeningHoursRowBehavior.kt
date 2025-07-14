@@ -9,8 +9,8 @@ object OpeningHoursRowBehavior : DefaultPoiAdditionalRowBehaviour() {
     override fun applyCustomRules(
 	    params: PoiRowParams
     ) {
-        super.applyCustomRules(params)
-	    with(params) {
+		super.applyCustomRules(params)
+		with(params) {
 		    var vl = value
 		    val formattedValue = vl.replace("; ", "\n").replace(",", ", ")
 		    builder.setCollapsableView(

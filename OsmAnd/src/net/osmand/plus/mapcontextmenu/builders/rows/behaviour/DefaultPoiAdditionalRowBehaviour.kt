@@ -63,13 +63,7 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
                     builder.setIconId(iconId)
 
                     if (!builder.hasIcon()) {
-                        builder.setIconId(
-                            if (poiType.isText) {
-                                R.drawable.ic_action_note_dark
-                            } else {
-                                R.drawable.ic_action_info_dark
-                            }
-                        )
+                        builder.setIconId(R.drawable.ic_action_info_dark)
                     }
                 }
 
