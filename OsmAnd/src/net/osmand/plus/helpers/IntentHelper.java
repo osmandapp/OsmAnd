@@ -82,11 +82,7 @@ import net.osmand.util.GeoPointParserUtil;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -159,7 +155,15 @@ public class IntentHelper {
 								MapActivity.FRAGMENT_CONTAINER_VIEW_ID,
 								MainSettingsFragment.class,
 								app.getSettings().AVAILABLE_APP_MODES,
-								app.getTileSourceTemplatesProvider()));
+								app.getTileSourceTemplatesProvider()),
+				getLocale());
+	}
+
+	private Locale getLocale() {
+		final LocaleHelper localeHelper = app.getLocaleHelper();
+		return Optional
+				.ofNullable(localeHelper.getPreferredLocale())
+				.orElseGet(localeHelper::getDefaultLocale);
 	}
 
 	private boolean parseNavigationIntent() {

@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProviderFactory;
 import de.KnollFrank.lib.settingssearch.db.preference.db.DatabaseResetter;
 
 class InstallMapLayersDialogFragmentFactory {
@@ -108,7 +109,7 @@ class InstallMapLayersDialogFragmentFactory {
 
 							private void resetSearchDatabase() {
 								// FK-TODO: nur den Teil der Suchdatenbank neu berechnen, der sich geändert hat.
-								DatabaseResetter.resetDatabases(activity);
+								DatabaseResetter.resetDatabase(DAOProviderFactory.getDAOProvider(activity));
 							}
 						});
 	}
