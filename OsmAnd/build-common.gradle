@@ -179,6 +179,66 @@ tasks.register('downloadWorldMiniBasemap', Download) {
 	onlyIfModified true
 }
 
+tasks.register('copyObfToEmulator', DefaultTask) {
+    description = "Copies *.obf files from test/assets to the emulator's sdcard/Download/osmand, preserving folder structure"
+    group = "TestSetup"
+
+    def adbPath = getAdbPath()
+    def sourceDir = layout.projectDirectory.dir("test/assets").asFile
+    // Use layout for better path handling
+    def destinationBaseDir = "/sdcard/Android/data/${android.namespace}/files/"
+
+    inputs.dir sourceDir
+    outputs.upToDateWhen { false }
+
+    doFirst {
+        println "Starting to copy .obf files to emulator, preserving folder structure..."
+        println "Source base directory: $sourceDir"
+        println "Destination base directory on emulator: $destinationBaseDir"
+        if (!sourceDir.exists() || !sourceDir.isDirectory()) {
+            throw new GradleException("Source directory '$sourceDir' does not exist or is not a directory. Please create it or adjust the path.")
+        }
+        def obfFiles = fileTree(dir: sourceDir, include: '**/*.obf')
+        if (obfFiles.empty) {
+            println "No .obf files found in $sourceDir. Skipping copy."
+            return
+        }
+        obfFiles.each { obfFile ->
+            def relativePath = sourceDir.toPath().relativize(obfFile.toPath()).getParent()
+            def targetDirOnEmulator
+            if (relativePath != null) {
+                targetDirOnEmulator = "${destinationBaseDir}/${relativePath.toString().replace('\\', '/')}"
+            } else {
+                targetDirOnEmulator = destinationBaseDir
+            }
+            def fileName = obfFile.name
+            def fullDestinationPath = "${targetDirOnEmulator}/${fileName}"
+            println "Processing: ${obfFile.absolutePath}"
+            println "  Relative path: ${relativePath ?: ' (root of sourceDir)'}"
+            println "  Target directory on emulator: ${targetDirOnEmulator}"
+            println "  Full destination path on emulator: ${fullDestinationPath}"
+            project.exec {
+                commandLine adbPath, 'shell', 'mkdir', '-p', targetDirOnEmulator
+                ignoreExitValue = false // Ensure command fails if mkdir fails
+            }
+            project.exec {
+                commandLine adbPath, 'push', obfFile.absolutePath, fullDestinationPath
+                ignoreExitValue = false // Ensure command fails if push fails
+            }
+        }
+        println "Finished copying .obf files with preserved folder structure."
+    }
+}
+
+// Helper function to get adb path
+def getAdbPath() {
+    def androidHome = System.getenv("ANDROID_HOME")
+    if (androidHome == null) {
+        throw new GradleException("ANDROID_HOME environment variable is not set. Please set it or specify the full path to adb in the task.")
+    }
+    return "${androidHome}/platform-tools/adb"
+}
+
 tasks.register('downloadWorldMiniBasemapAnt') {
 	doLast {
 		ant.get(src: 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')

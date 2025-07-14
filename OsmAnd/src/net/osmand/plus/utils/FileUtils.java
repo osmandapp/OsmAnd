@@ -1,17 +1,40 @@
 package net.osmand.plus.utils;
 
-import static net.osmand.IndexConstants.*;
+import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
+import static net.osmand.IndexConstants.DOWNLOAD_EXT;
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
+import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
+import static net.osmand.IndexConstants.MAPS_PATH;
+import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
+import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
+import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
+import static net.osmand.IndexConstants.TEMP_DIR;
+import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
+import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
-import android.widget.Toast;
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
@@ -451,6 +474,28 @@ public class FileUtils {
 		String fileName = appModeKey + OSMAND_SETTINGS_FILE_EXT;
 		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
 		return new File(backupDir, fileName);
+	}
+
+	public static void saveToFile(String jsonString, @NonNull OsmandApplication app, @NonNull String fileName) {
+		File outputFile = new File(app.getAppPath(null) + File.separator, fileName);
+		if (outputFile.exists()) {
+			outputFile.delete();
+		}
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(outputFile);
+			fos.write(jsonString.getBytes());
+		} catch (IOException e) {
+			PlatformUtil.getLog(FileUtils.class).error(e);
+		} finally {
+			try {
+				if (fos != null) {
+					fos.close();
+				}
+			} catch (IOException e) {
+				PlatformUtil.getLog(FileUtils.class).error(e);
+			}
+		}
 	}
 
 	public interface RenameCallback {

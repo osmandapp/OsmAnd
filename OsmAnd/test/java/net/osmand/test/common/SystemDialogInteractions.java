@@ -20,6 +20,7 @@ import androidx.test.espresso.ViewAssertion;
 import androidx.test.espresso.action.GeneralClickAction;
 import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Tap;
+import androidx.test.espresso.action.Tapper;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -52,8 +53,20 @@ public class SystemDialogInteractions {
 	}
 
 	public static ViewAction clickInView(final float x, final float y) {
+		return createClickInView(Tap.SINGLE, x, y);
+	}
+
+	public static ViewAction longClickInView(final float x, final float y) {
+		return createClickInView(Tap.LONG, x, y);
+	}
+
+	public static ViewAction doubleClickInView(final float x, final float y) {
+		return createClickInView(Tap.DOUBLE, x, y);
+	}
+
+	private static ViewAction createClickInView(@NonNull Tapper tapper, final float x, final float y) {
 		return new GeneralClickAction(
-				Tap.SINGLE,
+				tapper,
 				view -> {
 					final int[] location = new int[2];
 					view.getLocationOnScreen(location);
@@ -62,7 +75,6 @@ public class SystemDialogInteractions {
 				Press.FINGER
 		);
 	}
-
 
 	//finds n-th child of given type at one hierarchy level
 	public static <T extends View> T findDescendantOfType(View parent, Class<T> targetClass, int targetIndex) {
