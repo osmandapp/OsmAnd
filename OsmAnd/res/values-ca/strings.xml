@@ -4786,13 +4786,13 @@
     <string name="multipoligon_related">Relació</string>
     <string name="route_part_of">Part de</string>
     <string name="wikidata">Wikidata</string>
-    <string name="prediction_time_description">«Position icon in OsmAnd animates with each received GPS data point (once per second). Un lleuger retard en el seu moviment pot ser notable, especialment quan l\'usuari es mou ràpidament o el senyal GPS fluctua.\"</string>
+    <string name="prediction_time_description">Icona de posició en OsmAnd anima amb cada punt de dades GPS rebut (un cop per segon). Un lleuger retard en el seu moviment pot ser notable, especialment quan l\'usuari es mou ràpidament o el senyal GPS fluctua.</string>
     <string name="prediction_time_advanced_description">Ajusta el temps de predicció per minimitzar el retard.</string>
     <string name="prediction_time">Temps de predicció</string>
     <string name="shared_string_no_animation">Sense animació</string>
     <string name="position_animation_empty_banner_description">La icona de posició es mou a cada nova ubicació rebuda sense animació.</string>
     <string name="position_animation">Animació de posició</string>
-    <string name="poi_source">Font POI</string>
+    <string name="poi_source">Origen del PDI</string>
     <string name="intermediate_first">Intermedi primer</string>
     <string name="destination_first">Destinació primer</string>
     <string name="display_priority">Mostra la prioritat</string>
