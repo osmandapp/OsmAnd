@@ -5938,5 +5938,8 @@
     <string name="obd_fuel_consumption_rate_sensor_type">Använd valda enheter i namn.</string>
     <string name="obd_fuel_consumption_desc">Visar bränsleförbrukningen av motorn, beräknad utifrån återstående bränsle, tankstorlek och avstånd som bestäms av GPS.</string>
     <string name="shared_string_instant">Omedelbar</string>
-    <string name="show_minor_turns_descr">Filer visas i alla korsningar oavsett röstinstruktioner.</string>
+    <string name="show_minor_turns_descr">Filer visas i alla korsningar oavsett röstinstruktioner</string>
+    <string name="show_minor_turns">Visas vid mindre korsningar vid rak körning</string>
+    <string name="us_gallons">Amerikanska gallon</string>
+    <string name="record_obd_data">Registrera fordonsstatistik</string>
 </resources>
