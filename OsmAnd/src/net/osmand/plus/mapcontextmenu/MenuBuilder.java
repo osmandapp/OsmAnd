@@ -338,6 +338,7 @@ public class MenuBuilder {
 			buildTitleRow(view);
 		}
 		buildWithinRow(view);
+		buildReviewsRow(view);
 		buildNearestRows(view, object);
 
 		if (needBuildPlainMenuItems()) {
@@ -352,6 +353,16 @@ public class MenuBuilder {
 		if (!isCustomOnlinePhotosPosition()) {
 			buildPhotosRow(view, object);
 		}
+	}
+
+	private void buildReviewsRow(ViewGroup view) {
+		// TODO: review record: (rating, text, author, date)
+		List<String> reviewData = new ArrayList<>();
+		reviewData.add("dummy review 1");
+		reviewData.add("dummy review 2");
+		CollapsableView cv = getReviewCollapsibleView(reviewData);
+		buildRow(view, R.drawable.ic_action_review, null, app.getString(R.string.reviews), 0, true, cv, false, 1,
+				false, null, false);
 	}
 
 	public void buildNearestRows(@NonNull ViewGroup view, @Nullable Object object) {
@@ -1144,6 +1155,21 @@ public class MenuBuilder {
 
 	protected void copyToClipboard(String text, Context ctx) {
 		menuRowBuilder.copyToClipboard(text, ctx);
+	}
+
+	protected CollapsableView getReviewCollapsibleView(List<String> reviewData) {
+		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
+		for (String review : reviewData) {
+			View container = createRowContainer(mapActivity, null);
+			buildReviewRow(container, review);
+			llv.addView(container);
+		}
+		return new CollapsableView(llv, this, true);
+	}
+
+	private void buildReviewRow(View container, String review) {
+		// TODO: custom builder
+		buildDetailsRow(container, null, review, "TODO: date", "TODO: author", null, false, null);
 	}
 
 	protected CollapsableView getLocationCollapsableView(Map<Integer, String> locationData) {
