@@ -87,6 +87,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.reviews.Review;
+import net.osmand.plus.reviews.Reviews;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -122,6 +124,9 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.*;
 
 public class MenuBuilder {
@@ -338,6 +343,7 @@ public class MenuBuilder {
 			buildTitleRow(view);
 		}
 		buildWithinRow(view);
+		// TODO: only if there are reviews
 		buildReviewsRow(view);
 		buildNearestRows(view, object);
 
@@ -356,13 +362,17 @@ public class MenuBuilder {
 	}
 
 	private void buildReviewsRow(ViewGroup view) {
-		// TODO: review record: (rating, text, author, date)
-		List<String> reviewData = new ArrayList<>();
-		reviewData.add("dummy review 1");
-		reviewData.add("dummy review 2");
+		// TODO: read reviews from file
+		List<Review> reviewData = new ArrayList<>();
+		reviewData.add(new Review(80, "excellent espresso", "enigal", LocalDate.of(2025, Month.JULY, 13)));
+		reviewData.add(new Review(55, "The service could be better.", "pangloss", LocalDate.of(2025, Month.JULY, 11)));
 		CollapsableView cv = getReviewCollapsibleView(reviewData);
-		buildRow(view, R.drawable.ic_action_review, null, app.getString(R.string.reviews), 0, true, cv, false, 1,
-				false, null, false);
+
+		// TODO: these should be precalculated for a POI
+		int meanRating = reviewData.stream().mapToInt(Review::getRating).sum() / reviewData.size();
+		String title = app.getString(R.string.aggregate_rating, Reviews.INSTANCE.formatStarRating(meanRating), reviewData.size());
+		buildRow(view, getRowIcon(R.drawable.ic_action_review), null, app.getString(R.string.reviews), title, 0, null, true, cv, false, 1,
+				false, false, false, null, false);
 	}
 
 	public void buildNearestRows(@NonNull ViewGroup view, @Nullable Object object) {
@@ -1157,9 +1167,9 @@ public class MenuBuilder {
 		menuRowBuilder.copyToClipboard(text, ctx);
 	}
 
-	protected CollapsableView getReviewCollapsibleView(List<String> reviewData) {
+	protected CollapsableView getReviewCollapsibleView(List<Review> reviewData) {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
-		for (String review : reviewData) {
+		for (Review review : reviewData) {
 			View container = createRowContainer(mapActivity, null);
 			buildReviewRow(container, review);
 			llv.addView(container);
@@ -1167,9 +1177,10 @@ public class MenuBuilder {
 		return new CollapsableView(llv, this, true);
 	}
 
-	private void buildReviewRow(View container, String review) {
-		// TODO: custom builder
-		buildDetailsRow(container, null, review, "TODO: date", "TODO: author", null, false, null);
+	private void buildReviewRow(View container, Review review) {
+		String starRating = Reviews.INSTANCE.formatStarRating(review.getRating());
+		String footer = String.format("%s - %s", review.getDate(), review.getAuthor());
+		buildDetailsRow(container, null, review.getOpinion(), starRating, footer, null, false, null);
 	}
 
 	protected CollapsableView getLocationCollapsableView(Map<Integer, String> locationData) {

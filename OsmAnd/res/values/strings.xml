@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="aggregate_rating">%1$s (%2$d)</string>
     <string name="reviews">Reviews</string>
     <string name="efficient_grid">Efficient grid</string>
     <string name="slots">Slots</string>
