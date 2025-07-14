@@ -1049,6 +1049,8 @@ public class ResourceManager {
 	@NonNull
 	private AssetsCollection readBundledAssets() throws IOException {
 		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+		DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+
 		AssetManager assetManager = app.getAssets();
 		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.json");
 		AssetEntryList lst = new Gson().fromJson(new InputStreamReader(isBundledAssetsXml), AssetEntryList.class);
