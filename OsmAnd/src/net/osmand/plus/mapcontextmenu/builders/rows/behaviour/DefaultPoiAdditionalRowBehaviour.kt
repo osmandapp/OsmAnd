@@ -81,10 +81,10 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
                         builder.setTextIfNotPresent(value)
                     } else if (translation.contains(":")) {
                         val parts = translation.split(":")
-                        builder.setTextPrefix(parts[0].trim())
-                        builder.setText(Algorithms.capitalizeFirstLetter(parts[1].trim()))
+                        builder.setTextPrefixIfNotPresent(parts[0].trim())
+                        builder.setTextIfNotPresent(Algorithms.capitalizeFirstLetter(parts[1].trim()))
                     } else {
-                        builder.setText(translation)
+                        builder.setTextIfNotPresent(translation)
                     }
                 }
 
