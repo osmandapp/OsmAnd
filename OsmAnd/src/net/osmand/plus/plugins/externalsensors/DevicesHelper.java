@@ -64,8 +64,10 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -100,8 +102,8 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	private BluetoothAdapter bluetoothAdapter;
 	private BluetoothLeScanner bleScanner;
 	private final ExternalSensorsPlugin externalSensorsPlugin;
-	private ScheduledExecutorService reconnectToDeviceScheduler = Executors.newSingleThreadScheduledExecutor();
-	private final List<String> reconnectingDevices = new ArrayList<>();
+	private ScheduledExecutorService reconnectToDeviceScheduler;
+	private final Set<String> reconnectingDevices = ConcurrentHashMap.newKeySet();
 
 	DevicesHelper(@NonNull OsmandApplication app, @NonNull ExternalSensorsPlugin plugin) {
 		this.app = app;
@@ -110,9 +112,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	void setActivity(@Nullable Activity activity) {
-		if (this.activity != activity && reconnectToDeviceScheduler != null) {
-			shutdownScheduler();
-		}
 		if (this.activity != null) {
 			dropUnpairedDevices();
 			deinitBLE();
@@ -123,7 +122,11 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			initBLE();
 			initDevices();
 			devicesSettingsCollection.addListener(this);
-			reconnectToDeviceScheduler = Executors.newSingleThreadScheduledExecutor();
+			if (reconnectToDeviceScheduler == null) {
+				reconnectToDeviceScheduler = Executors.newSingleThreadScheduledExecutor();
+			}
+		} else {
+			shutdownScheduler();
 		}
 	}
 
@@ -486,11 +489,12 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	private void tryToReconnectToDevice(@NonNull AbstractDevice<?> device) {
-		if (!device.isDisconnected() && !reconnectingDevices.contains(device.getDeviceId())) {
+		ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
+		if (!device.isDisconnected() && !reconnectingDevices.contains(device.getDeviceId()) && scheduler != null) {
 			reconnectingDevices.add(device.getDeviceId());
-			reconnectToDeviceScheduler.schedule(() -> {
+			scheduler.schedule(() -> {
 				device.connect(app, activity);
-				reconnectToDeviceScheduler.schedule(() -> {
+				scheduler.schedule(() -> {
 					checkReconnectDeviceResult(device.getDeviceId());
 				}, RECONNECT_DEVICE_TIMEOUT, TimeUnit.SECONDS);
 			}, RECONNECT_DEVICE_DELAY, TimeUnit.SECONDS);
