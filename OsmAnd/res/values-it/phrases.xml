@@ -156,7 +156,7 @@
     <string name="poi_cricket_nets">Campo da cricket circondato da reti</string>
     <string name="poi_driving_school">Scuola guida</string>
     <string name="poi_school">Scuola</string>
-    <string name="poi_kindergarten">Asilo</string>
+    <string name="poi_kindergarten">Scuola dell\'infanzia</string>
     <string name="poi_college">Università</string>
     <string name="poi_university">Università</string>
     <string name="poi_social_facility">Struttura che fornisce servizi sociali</string>
@@ -1240,8 +1240,8 @@
     <string name="poi_denomination_reform">Riforma</string>
     <string name="poi_denomination_latter_day_saints">Santi degli Ultimi Giorni</string>
     <string name="poi_denomination_united_church_of_christ">Chiesa unita di Cristo</string>
-    <string name="poi_denomination_romanian_orthodox">Romano-Ortodossa</string>
-    <string name="poi_denomination_ethiopian_orthodox_tewahedo">Ortodosso etiope Tewahedo</string>
+    <string name="poi_denomination_romanian_orthodox">Rumena-Ortodossa</string>
+    <string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiope-Ortodossa Tewahedo</string>
     <string name="poi_denomination_maronite">Maronita</string>
     <string name="poi_wine_cellar">Cantina per vini</string>
     <string name="poi_craft_winery">Azienda vinicola</string>
@@ -2233,7 +2233,7 @@
     <string name="poi_denomination_united">Unito</string>
     <string name="poi_denomination_bulgarian_orthodox">Bulgaro-Ortodossa</string>
     <string name="poi_denomination_armenian_apostolic">Apostolica Armena</string>
-    <string name="poi_denomination_coptic_orthodox">Ortodosso copto</string>
+    <string name="poi_denomination_coptic_orthodox">Copto-Ortodossa</string>
     <string name="poi_anchor_berth">Ormeggio ancoraggio</string>
     <string name="poi_berth">Ormeggio</string>
     <string name="poi_wiki_lang_af">Wiki in Africaans</string>
@@ -3351,7 +3351,7 @@
     <string name="poi_paintball">Paintball</string>
     <string name="poi_beauty_salon_pedicure">Pedicure</string>
     <string name="poi_museum_person">Persona</string>
-    <string name="poi_free_flying_rigid_yes">Rigido</string>
+    <string name="poi_free_flying_rigid_yes">Deltaplani rigidi: sì</string>
     <string name="poi_mattress_yes">Sì;Materasso</string>
     <string name="poi_service_fleurop_yes">Sì;Fleurop</string>
     <string name="poi_bandstand">Palcoscenico</string>
@@ -4693,4 +4693,10 @@
     <string name="poi_denomination_celtic">Celtica</string>
     <string name="poi_denomination_slavic">Slava</string>
     <string name="poi_denomination_ecumenical">Ecumenica</string>
+    <string name="poi_climbing_toprope_yes">Corda dall\'alto: sì</string>
+    <string name="poi_climbing_toprope_no">Corda dall\'alto: no</string>
+    <string name="poi_meadow_transitional">Tipo: transitorio</string>
+    <string name="poi_church_of_christ">Chiesa di Cristo</string>
+    <string name="poi_free_flying_rigid_no">Deltaplani rigidi: no</string>
+    <string name="poi_climbing_adventure">Percorso di arrampicata</string>
 </resources>
