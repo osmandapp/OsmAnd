@@ -2039,9 +2039,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (!isSteplessZoomSupported() && !disable) {
 			setZoomWithFloatPart(getZoom(), 0);
 		}
-		if (mapRenderer != null && settings.MAX_RENDERING_THREADS.get() > 0) {
-			mapRenderer.setResourceWorkerThreadsLimit(settings.MAX_RENDERING_THREADS.get());
-		}
 	}
 
 	public void detachMapRenderer() {

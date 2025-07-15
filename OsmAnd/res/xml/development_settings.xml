@@ -168,13 +168,6 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/trace_rendering" />
 
-	<Preference
-		android:key="max_rendering_threads"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:title="@string/threads_allocated_for_rendering"
-		tools:summary="8 threads" />
-
 	<PreferenceCategory
 		android:key="aistracker"
 		android:layout="@layout/preference_category_with_descr"
