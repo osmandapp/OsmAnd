@@ -688,7 +688,16 @@ public class ResourceManager {
 				}
 			}
 		}
+		Set<String> standardPoiTypesKeyNames = new HashSet<>();
 		Iterator<Entry<PoiCategory, Map<String, PoiType>>> it = toAddPoiTypes.entrySet().iterator();
+		if (it.hasNext()) {
+			MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
+			for (PoiCategory poiCategory : mapPoiTypes.getCategories()) {
+				for (PoiType poiType : poiCategory.getPoiTypes()) {
+					standardPoiTypesKeyNames.add(poiType.getKeyName());
+				}
+			}
+		}
 		while (it.hasNext()) {
 			Entry<PoiCategory, Map<String, PoiType>> next = it.next();
 			PoiCategory category = next.getKey();
