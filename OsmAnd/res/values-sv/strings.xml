@@ -664,7 +664,7 @@
     <string name="transport_stops_to_pass">hållplatser att passera</string>
     <string name="transport_route_distance">Resvägssträcka</string>
     <string name="transport">Transporter</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Ok</string>
     <string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan.</string>
     <string name="show_transport_over_map">Visa hållplatser</string>
     <string name="hello">Navigationsappen OsmAnd</string>
@@ -1387,7 +1387,7 @@
     <string name="track_segments">Spårsegment</string>
     <string name="track_points">Spårpunkter</string>
     <string name="route_points">Ruttpunkter</string>
-    <string name="shared_string_ellipsis">..…</string>
+    <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_selected">Markerad(e)</string>
     <string name="shared_string_selected_lowercase">markerade</string>
     <string name="shared_string_never">Aldrig</string>
@@ -6010,4 +6010,6 @@
     <string name="rendering_attr_padusHideBoundaries_description">Dölj gränser för offentlig mark men lämna områden</string>
     <string name="any_connected">Alla anslutna</string>
     <string name="any_connected_with_device">Alla anslutna: %s</string>
+    <string name="shared_string_checked">markerad</string>
+    <string name="auto_backup_preference_desc">Som standard sparar Android säkerhetskopior av favoriter, karttokens och OsmAnd-inställningar för att återställa dem på nya enheter eller efter ominstallation. Denna backup är begränsad till 25 MB.\nNär du använder OsmAnd Cloud kan detta leda till missförstånd efter ominstallation.</string>
 </resources>
