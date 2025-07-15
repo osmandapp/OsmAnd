@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,6 +85,11 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		backupHelper.addPrepareBackupListener(this);
 		settingsHelper.addBackupSyncListener(this);
 		updateAdapter();
+
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ChangesFragment changesFragment) {
+			changesFragment.setupBottomButtons();
+		}
 	}
 
 	@Override

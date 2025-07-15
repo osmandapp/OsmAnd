@@ -2,6 +2,7 @@ package net.osmand.osm.edit;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -161,19 +162,23 @@ public class EntityParser {
 				String key = e.getKey();
 				if (value.indexOf(';') != -1) {
 					String[] vls = value.split(";");
-					Amenity multiAmenity = null;
+					Map<String, Amenity> multiAmenitiesByType = new LinkedHashMap<>();
 					for(String v : vls) {
 						v = v.trim();
 						Amenity am = poiTypes.parseAmenity(key, v, purerelation, ts);
 						if (am != null) {
+							String type = am.getType().getKeyName();
+							Amenity multiAmenity = multiAmenitiesByType.get(type);
 							if (multiAmenity != null) {
 								multiAmenity.setSubType(multiAmenity.getSubType() + ";" + am.getSubType());
 							} else {
-								multiAmenity = am;
+								multiAmenitiesByType.put(type, am);
 							}
 						}
 					}
-					addAmenity(entity, amenitiesList, ts, multiAmenity);
+					for (Amenity am : multiAmenitiesByType.values()) {
+						addAmenity(entity, amenitiesList, ts, am);
+					}
 				} else {
 					Amenity am = poiTypes.parseAmenity(key, value, purerelation, ts);
 					addAmenity(entity, amenitiesList, ts, am);
