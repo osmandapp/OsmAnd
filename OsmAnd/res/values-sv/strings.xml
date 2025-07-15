@@ -5976,5 +5976,25 @@
     <string name="obd_fuel_left_distance_desc">Visar avstånd fordon kan köra på vänster bränslenivå över OBD sensor</string>
     <string name="obd_fuel_type_desc">Visar fordonsbränsle typ över OBD sensor</string>
     <string name="obd_air_intake_temp">Inloppstemperatur</string>
-    <string name="obd_ambient_air_temp">Omgivningstemperatur:</string>
+    <string name="obd_ambient_air_temp">Omgivningstemperatur</string>
+    <string name="obd_engine_coolant_temp">Kylvätsketemperatur</string>
+    <string name="obd_fuel_consumption_rate_desc">Visar fordons bränsleförbrukningshastighet baserat på OBD en plats</string>
+    <string name="obd_plugin_description">Övervaka viktiga fordonsmätningar med OBD-II-protokollet. Access-data inklusive:\nMotorhastighet, motor Runtime, beräknad motor last\n• Bränsleförbrukning, bränsletryck, återstående bränsle\n• Intagstemperatur, omgivningstemperatur,kyltemperatur, motoroljetemperatur\n• Fordonshastighet, gasposition, batterispänning\n</string>
+    <string name="obd_support">OBD stöd</string>
+    <string name="app_mode_suv">suv</string>
+    <string name="weather_source_GFS_description">Globala prognossystemet från National Centers for Environmental Prediction</string>
+    <string name="remove_key_assignment_summary">Tangenttilldelningen för den valda åtgärden kommer att tas bort.</string>
+    <string name="remove_key_assignment">Ta bort tangenttilldelning</string>
+    <string name="change_terrain_color_scheme">Ändra terrängens färgschema</string>
+    <string name="clear_key_assignment_summary">Tangenttilldelningen för den valda åtgärden kommer att tas bort.</string>
+    <string name="clear_all_key_shortcuts_summary">Alla knapp-kopplingar för den valda typen kommer tas bort.</string>
+    <string name="clear_all_key_shortcuts">Rensa alla kortkommandon</string>
+    <string name="no_assigned_keys_desc">Välj en åtgärd och tilldela en nyckel genom att trycka på knappen \"Lägg till\".</string>
+    <string name="no_assigned_keys">Inga tilldelade nycklar</string>
+    <string name="new_key_assignment">Ny nyckel tilldelning</string>
+    <string name="key_name_pattern">Nyckeln \"%1$s\"</string>
+    <string name="key_assignment_add_key">Lägg till nyckel</string>
+    <string name="key_assignment_add_action">Lägg till åtgärd</string>
+    <string name="assigned_keys">Tilldelade nycklar</string>
+    <string name="show_rasterization_debug_tile">Visa kakel rasterization information</string>
 </resources>
