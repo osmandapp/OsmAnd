@@ -75,11 +75,7 @@ public class RouteDirectionInfo {
 	}
 
 	public String getDescriptionRoutePart(boolean forceTurnType) {
-		if (forceTurnType) {
-			return !Algorithms.isEmpty(descriptionRoute) ? descriptionRoute : turnType.toString();
-		} else {
-			return descriptionRoute;
-		}
+		return forceTurnType && Algorithms.isEmpty(descriptionRoute) ? turnType.toString() : descriptionRoute;
 	}
 
 	public String getRef() {
