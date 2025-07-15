@@ -5687,7 +5687,7 @@
     <string name="shared_string_default_view">Standardansicht</string>
     <string name="map_widget_route_information_desc">Zeigt die geschätzte Ankunftszeit, die verbleibende Reisezeit und die Entfernung für die aktuelle Navigationsroute an.</string>
     <string name="ais_nmea_protocol_description">Protokoll für NMEA-Datenempfang auswählen</string>
-    <string name="ais_ship_lost_timeout_description">Timeout für Schiffssichtbarkeit einstellen: Nach dieser Zeit ohne Signalempfang ändert das Schiffssymbol seinen Status auf dem Bildschirm: Es wird durchgestrichen.</string>
+    <string name="ais_ship_lost_timeout_description">Timeout für die Schiffssichtbarkeit einstellen: Nach dieser Zeit ohne Signalempfang ändert das Schiffssymbol seinen Status auf dem Bildschirm: Es wird durchgestrichen.</string>
     <string name="plugin_ais_tracker_name">AIS-Schiffstracker</string>
     <string name="ais_cpa_warning_time_description">Wenn die TCPA (Zeit bis zum Erreichen des CPA mit einem anderen Schiff) kleiner als dieser Wert ist, wird das Schiff rot markiert.</string>
     <string name="ais_port_nmea_local_description">UDP-Port definieren, an dem OsmAnd NMEA-Daten empfängt</string>
@@ -5696,7 +5696,7 @@
     <string name="ais_load_data">AIS-Daten aus Datei laden</string>
     <string name="ais_address_nmea_server">IP-Adresse der NMEA-Datenquelle</string>
     <string name="ais_port_nmea_local">UDP-Port des lokalen NMEA-Datenempfängers</string>
-    <string name="ais_object_lost_timeout">Timeout für Sichtbarkeit bei Objektverlust</string>
+    <string name="ais_object_lost_timeout">Timeout für die Sichtbarkeit bei Objektverlust</string>
     <string name="ais_ship_lost_timeout">Timeout für die Sichtbarkeit des Schiffes, wenn kein Signal empfangen wird</string>
     <string name="ais_cpa_warning_distance_description">Schiffe werden rot markiert, wenn der CPA unter diesem Wert liegt und der CPA in naher Zukunft erreicht wird (siehe Einstellung „Warnzeit bis zum Erreichen des Punktes der größten Annäherung (CPA)“).</string>
     <string name="plugin_ais_tracker_disclaimer">HAFTUNGSAUSSCHLUSS\n\nDieses Plugin ist ein Hobbyprojekt und nicht auf Zuverlässigkeit und Korrektheit ausgelegt. Verlassen Sie sich NICHT auf diese Software, auch nicht für die Navigation und/oder die Sicherheit von Menschenleben.</string>
