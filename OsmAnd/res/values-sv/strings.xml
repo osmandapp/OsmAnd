@@ -5996,6 +5996,11 @@
     <string name="key_assignment_add_key">Lägg till nyckel</string>
     <string name="key_assignment_add_action">Lägg till åtgärd</string>
     <string name="assigned_keys">Tilldelade nycklar</string>
-    <string name="show_rasterization_debug_tile">Visa kakel rasterization information</string>
+    <string name="show_rasterization_debug_tile">Visa information om rasterisering av rutnät</string>
     <string name="show_utm_grids_description">Visa rutnät i UTM meter istället för WGS84</string>
+    <string name="show_mercator_grids_description">Visa rutnät i Mercator km istället för WGS84 eller UTM</string>
+    <string name="show_dm_grids">Använd DM istället för grader eller DMS</string>
+    <string name="show_dm_grids_description">Visa rutnät i grader och minuter istället för grader eller DMS</string>
+    <string name="release_4_7">Ny \"Speedometer\" widget kompatibel med Android Auto\n\n• Konfigurera kartskärmen genom att lägga till flera knappar \"Quick Action\"\n\n• Förbättrad läsbarhet av data i grafer\n\n• Lägga till filter genom sensordata för spår\n\n• Förbättrad utseende anpassning för grupp av spår\n\n• Lägg till stöd för ytterligare GPX-taggar\n\nAnpassa \"Distans under navigering\": välj mellan exakta eller runda upp siffror\n\nUnified UI för spårval\n\nOpenStreetMap-inloggningen bytt till OAuth 2.0</string>
+    <string name="rendering_attr_padusDisplayMode_name">Offentliga marker display läge</string>
 </resources>
