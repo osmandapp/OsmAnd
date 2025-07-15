@@ -211,7 +211,7 @@
     <string name="location_recording_enabled">Platsinspelning aktiverad</string>
     <string name="disable_monitoring">Deaktivera övervakning</string>
     <string name="timeline_available_for_free_now">Tidslinje är nu tillgängligt utan extra kostnad.</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Ok</string>
     <string name="shared_string_search">Sök</string>
     <string name="type_contact_or_group_name">Skriv kontakt eller gruppnamn</string>
     <string name="search_contacts_descr">Sök i alla dina grupper och kontakter.</string>
