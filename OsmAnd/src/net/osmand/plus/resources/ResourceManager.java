@@ -686,11 +686,22 @@ public class ResourceManager {
 				}
 			}
 		}
+		Set<String> standardPoiTypesKeyNames = new HashSet<>();
 		Iterator<Entry<PoiCategory, Map<String, PoiType>>> it = toAddPoiTypes.entrySet().iterator();
+		if (it.hasNext()) {
+			MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
+			for (PoiCategory poiCategory : mapPoiTypes.getCategories()) {
+				for (PoiType poiType : poiCategory.getPoiTypes()) {
+					standardPoiTypesKeyNames.add(poiType.getKeyName());
+				}
+			}
+		}
 		while (it.hasNext()) {
 			Entry<PoiCategory, Map<String, PoiType>> next = it.next();
 			PoiCategory category = next.getKey();
-			category.addExtraPoiTypes(next.getValue());
+			Map<String, PoiType> categoryDeltaPoiTypes = next.getValue();
+			categoryDeltaPoiTypes.keySet().removeAll(standardPoiTypesKeyNames);
+			category.addExtraPoiTypes(categoryDeltaPoiTypes);
 		}
 		log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
 		if (files.size() > 0 && (!indCache.exists() || indCache.canWrite())) {
