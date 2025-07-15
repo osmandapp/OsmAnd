@@ -64,7 +64,10 @@ public class RoutingHelperUtils {
 			if (formattedStreetName.length() > 0) {
 				formattedStreetName.append(" ");
 			}
-			formattedStreetName.append(towards).append(" ").append(destination);
+			if (!Algorithms.isEmpty(towards)) {
+				formattedStreetName.append(towards).append(" ");
+			}
+			formattedStreetName.append(destination);
 		}
 		return formattedStreetName.toString().replace(";", ", ");
 	}
