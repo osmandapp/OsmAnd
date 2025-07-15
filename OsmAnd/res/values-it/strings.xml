@@ -5508,11 +5508,11 @@
     <string name="obd_fuel_type_bifuel_electric_combustion">Biocarburante con motore a combustione e elettrico</string>
     <string name="obd_fuel_type_unknown">Tipo di carburante sconosciuto</string>
     <string name="shared_string_obd">OBD</string>
-    <string name="obd_widget_group">Misure del veicolo</string>
+    <string name="obd_widget_group">Metriche del veicolo</string>
     <string name="rpm_unit">giri/min</string>
     <string name="obd_fuel_consumption_rate">Tasso di consumo del carburante</string>
     <string name="obd_fuel_type">Tipo di carburante</string>
-    <string name="obd_plugin_name">Misure del veicolo</string>
+    <string name="obd_plugin_name">Metriche del veicolo</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm_desc">Mostra il tachimetro giri/minuto sopra il sensore OBD</string>
     <string name="fuel_tank_capacity_description">Inserisci la capacità del tuo serbatoio per monitorare con precisione i livelli e i consumi di carburante</string>
@@ -5522,7 +5522,7 @@
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galloni imperiali</string>
     <string name="us_gallons">Galloni USA</string>
-    <string name="obd_how_to_connect">Come connettere:</string>
+    <string name="obd_how_to_connect">Come connettersi:</string>
     <string name="connect_obd_instructions_step">1. Connettere lo scanner alla porta OBD-II del veicolo.\n\n2. Avviare il motore del veicolo\n\n3. Abilitare il Bluetooth sul dispositivo\n\n4. Premere \'%1$s\' e selezionare lo scanner dalla lista.</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
     <string name="record_obd_data">Inserisci metriche del veicolo</string>
@@ -5553,7 +5553,7 @@
     <string name="route_guidance_desc">Fornisce la guida in tempo reale del percorso, compresa la distanza alla svolta successiva, il nome della strada, il nome della strada percorsa e le informazioni sulla corsia. I widget sono attivi durante la navigazione.</string>
     <string name="obd_widget_vehicle_speed">Velocità del veicolo</string>
     <string name="obd_widget_engine_speed">Velocità del motore</string>
-    <string name="obd_nothing_found_text">Nessun scanner trovato</string>
+    <string name="obd_nothing_found_text">Nessuno scanner trovato</string>
     <string name="shared_string_dynamic">Dinamico</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/100km)</string>
     <string name="obd_fuel_level_liter">Livello carburante (l)</string>
@@ -5798,4 +5798,5 @@
     <string name="battery">batteria</string>
     <string name="sensor_data">Dati dei sensori</string>
     <string name="show_rasterization_debug_tile">Mostra informazioni sulla rasterizzazione dei tile</string>
+    <string name="release_5_2">• Lavori in corso…</string>
 </resources>
