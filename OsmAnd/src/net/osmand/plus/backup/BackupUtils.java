@@ -242,6 +242,9 @@ public class BackupUtils {
 	}
 
 	public static void updateCacheForItems(@NonNull OsmandApplication app, @NonNull List<SettingsItem> items) {
+		if (Algorithms.isEmpty(items)) {
+			return;
+		}
 		boolean updateIndexes = false;
 		boolean updateRouting = false;
 		boolean updateRenderers = false;
