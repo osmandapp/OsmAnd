@@ -1387,7 +1387,7 @@
     <string name="track_segments">Spårsegment</string>
     <string name="track_points">Spårpunkter</string>
     <string name="route_points">Ruttpunkter</string>
-    <string name="shared_string_ellipsis">…</string>
+    <string name="shared_string_ellipsis">..…</string>
     <string name="shared_string_selected">Markerad(e)</string>
     <string name="shared_string_selected_lowercase">markerade</string>
     <string name="shared_string_never">Aldrig</string>
@@ -6002,5 +6002,12 @@
     <string name="show_dm_grids">Använd DM istället för grader eller DMS</string>
     <string name="show_dm_grids_description">Visa rutnät i grader och minuter istället för grader eller DMS</string>
     <string name="release_4_7">Ny \"Speedometer\" widget kompatibel med Android Auto\n\n• Konfigurera kartskärmen genom att lägga till flera knappar \"Quick Action\"\n\n• Förbättrad läsbarhet av data i grafer\n\n• Lägga till filter genom sensordata för spår\n\n• Förbättrad utseende anpassning för grupp av spår\n\n• Lägg till stöd för ytterligare GPX-taggar\n\nAnpassa \"Distans under navigering\": välj mellan exakta eller runda upp siffror\n\nUnified UI för spårval\n\nOpenStreetMap-inloggningen bytt till OAuth 2.0</string>
-    <string name="rendering_attr_padusDisplayMode_name">Offentliga marker display läge</string>
+    <string name="rendering_attr_padusDisplayMode_name">Visningsläge för allmän mark</string>
+    <string name="rendering_attr_padusDisplayMode_description">Efter åtkomsttyp eller administratörsnamn</string>
+    <string name="rendering_value_access_name">Efter åtkomsttyp</string>
+    <string name="rendering_value_managerName_name">Efter chefens namn</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Dölj gränser för offentlig mark</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Dölj gränser för offentlig mark men lämna områden</string>
+    <string name="any_connected">Alla anslutna</string>
+    <string name="any_connected_with_device">Alla anslutna: %s</string>
 </resources>
