@@ -177,7 +177,7 @@ public class EntityParser {
 						}
 					}
 					for (Amenity am : multiAmenitiesByType.values()) {
-						addAmenity(entity, amenitiesList, ts, am); // TODO: How to deal with duplicated OSM id?
+						addAmenity(entity, amenitiesList, ts, am);
 					}
 				} else {
 					Amenity am = poiTypes.parseAmenity(key, value, purerelation, ts);
