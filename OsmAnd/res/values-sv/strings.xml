@@ -5997,4 +5997,5 @@
     <string name="key_assignment_add_action">Lägg till åtgärd</string>
     <string name="assigned_keys">Tilldelade nycklar</string>
     <string name="show_rasterization_debug_tile">Visa kakel rasterization information</string>
+    <string name="show_utm_grids_description">Visa rutnät i UTM meter istället för WGS84</string>
 </resources>
