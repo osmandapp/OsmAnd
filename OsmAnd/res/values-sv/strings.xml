@@ -1536,7 +1536,7 @@
     <string name="dark_theme">Mörkt</string>
     <string name="lang_pms">Piemontesiska</string>
     <string name="lang_bn">Bengaliska</string>
-    <string name="lang_tl">Tagalog</string>
+    <string name="lang_tl">Tagalogiska</string>
     <string name="lang_sh">Serbokroatiska</string>
     <string name="lang_az">Azerbajdzjanska</string>
     <string name="lang_br">Bretonska</string>
@@ -1548,7 +1548,7 @@
     <string name="lang_la">Latin</string>
     <string name="lang_ku">Kurdiska</string>
     <string name="lang_ta">Tamilska</string>
-    <string name="lang_ml"></string>
+    <string name="lang_ml">Malayalam</string>
     <string name="lang_lb">Luxemburgiska</string>
     <string name="lang_os">Ossetiska</string>
     <string name="lang_eo">Esperanto</string>
