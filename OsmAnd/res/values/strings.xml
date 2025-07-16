@@ -10,9 +10,6 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="release_5_2">
-        • Work in progress...
-    </string> 
 	<string name="deleting_history">Deleting history…</string>
 	<string name="deleting">Deleting…</string>
     <string name="release_5_1">
@@ -24,9 +21,6 @@
         • Added Uphills/Downhills analyzer\n\n
         • Expanded Wikipedia &amp; Wikivoyage integration for more POIs.\n\n
     </string>
-    <string name="shared_string_threads">Threads</string>
-    <string name="threads_allocated_for_rendering">Threads allocated for rendering</string>
-    <string name="threads_allocated_for_rendering_desc">Lower thread allocation may speed up the map rendering in some cases.</string>
     <string name="osm_live_payment_renews_3_years">Renews every three years</string>
     <string name="years_3">Three years</string>
     <string name="osm_live_payment_3_years_title">Every three years</string>
@@ -3553,8 +3547,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="move_all_to_history">Move all to history</string>
     <string name="show_direction">Distance indication</string>
     <string name="sort_by">Sort by</string>
-    <string name="do_not_use_animations">No animations</string>
-    <string name="do_not_use_animations_descr">Turns off map animations.</string>
+    <string name="do_not_use_animations">Remove animations</string>
+    <string name="do_not_use_animations_descr">Turns off map and UI animations.</string>
     <string name="keep_showing_on_map">Keep showing on map</string>
     <string name="exit_without_saving">Exit without saving?</string>
     <string name="line">Line</string>
