@@ -40,6 +40,8 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import static org.hamcrest.Matchers.allOf;
+import java.util.EnumSet;
 import java.util.Locale;
 
 public class EditPoiTypeSuggestionsTest extends AndroidTest {
@@ -91,6 +93,8 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 
 		//check: magasin de v
 		writeText(R.id.poiTypeEditText, "magasin de v");
+		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
+//		Thread.sleep(100)
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
@@ -98,6 +102,7 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		clearText(R.id.poiTypeEditText);
 		//check: magasin de ve
 		writeText(R.id.poiTypeEditText, "magasin de ve");
+		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
@@ -107,6 +112,7 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		//check: magasin de vé
 		replaceText(R.id.poiTypeEditText, "magasin de vé");
 		writeText(R.id.poiTypeEditText, "l");
+		waitForAnyView(1000, 10, RootMatchers.isPlatformPopup(), allOf(withText("Magasin de vélos"), isDisplayed()));
 		onView(withText("Magasin de vélos"))
 				.inRoot(RootMatchers.isPlatformPopup())
 				.check(ViewAssertions.matches(isDisplayed()));
