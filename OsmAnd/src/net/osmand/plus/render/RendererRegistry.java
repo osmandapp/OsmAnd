@@ -269,30 +269,30 @@ public class RendererRegistry {
 				}
 
 				File internalFile = getFileForInternalStyle(name);
-					if (internalFile.exists() && !IGNORE_CACHED_STYLES) {
-						is = new FileInputStream(internalFile);
-					} else {
-						copyFileForInternalStyle(name);
-						String internalRender = getInternalRender(name);
-						if (!Algorithms.isEmpty(internalRender)) {
-							is = RenderingRulesStorage.class.getResourceAsStream(internalRender);
-							if (is == null) {
-								log.warn("Resource not found in classpath: " + internalRender);
-							}
-						} else {
-							log.warn("Internal render path is empty after copy: " + name);
+				if (internalFile.exists() && !IGNORE_CACHED_STYLES) {
+					is = new FileInputStream(internalFile);
+				} else {
+					copyFileForInternalStyle(name);
+					String internalRender = getInternalRender(name);
+					if (!Algorithms.isEmpty(internalRender)) {
+						is = RenderingRulesStorage.class.getResourceAsStream(internalRender);
+						if (is == null) {
+							log.warn("Resource not found in classpath: " + internalRender);
 						}
+					} else {
+						log.warn("Internal render path is empty after copy: " + name);
 					}
 				}
-			} catch (FileNotFoundException e) {
-				log.error("File not found while retrieving InputStream for: " + name, e);
-			} catch (Exception e) {
-				log.error("Unexpected error while getting InputStream for: " + name, e);
 			}
+		} catch (FileNotFoundException e) {
+			log.error("File not found while retrieving InputStream for: " + name, e);
+		} catch (Exception e) {
+			log.error("Unexpected error while getting InputStream for: " + name, e);
+		}
 
-			if (is == null) {
-				log.warn("Returning null InputStream for render style: " + name);
-			}
+		if (is == null) {
+			log.warn("Returning null InputStream for render style: " + name);
+		}
 
 		return is;
 	}
