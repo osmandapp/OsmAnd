@@ -34,7 +34,6 @@ import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.test.common.AndroidTest;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
