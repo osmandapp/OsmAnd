@@ -148,7 +148,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 				if (location == null) {
 					location = app.getLocationProvider().getLastKnownLocation();
 				}
-				adapter.notifyDataSetChanged();
+				adapter.notifyItemRangeChanged(0, adapter.getItemCount());
 			});
 		}
 	}

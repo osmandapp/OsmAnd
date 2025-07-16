@@ -5597,4 +5597,5 @@
     <string name="deleting_history">Stair á scriosadh…</string>
     <string name="show_symbols_bboxes">Taispeáin boscaí siombailí</string>
     <string name="show_rasterization_debug_tile">Taispeáin faisnéis rastaireachta tíleanna</string>
+    <string name="release_5_2">• Obair ar siúl...</string>
 </resources>
