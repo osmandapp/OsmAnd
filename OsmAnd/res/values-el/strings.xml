@@ -3614,8 +3614,8 @@
     <string name="user_login">Σύνδεση</string>
     <string name="sign_in_with_open_street_map">Σύνδεση μέσω OpenStreetMap</string>
     <string name="start_of_the_track">Έναρξη του ίχνους</string>
-    <string name="shared_string_server_url">Σύνδεσμος εξυπηρετητή</string>
-    <string name="shared_string_enter_param">Προσθήκη παραμ</string>
+    <string name="shared_string_server_url">Σύνδεσμος διακομιστή</string>
+    <string name="shared_string_enter_param">Προσθήκη παραμέτρου</string>
     <string name="shared_string_resources">Πηγές</string>
     <string name="sort_last_modified">Τελευταία επεξεργασία</string>
     <string name="speed_mode">Λειτουργία ταχύτητας</string>
@@ -5148,6 +5148,13 @@
     <string name="message_need_calculate_route_before_show_graph">Τα δεδομένα %1$s είναι διαθέσιμα μόνο σε δρόμους, υπολογίστε διαδρομή χρησιμοποιώντας την “Διαδρομή μεταξύ σημειών” για να δείτε γραφήματα.</string>
     <string name="enter_text_separated">Εισάγετε ετικέτες χωρισμένες με κόμμα.</string>
     <string name="subscription_on_hold_title">Η συνδρομή OsmAnd Live είναι σε αναμονή</string>
-    <string name="subscription_paused_title">Η συνδρομή OsmAnd Live είναι σε παύση</string>
+    <string name="subscription_paused_title">Η συνδρομή OsmAnd Live έχει παύσει</string>
     <string name="subscription_expired_title">Η συνδρομή OsmAnd Live έχει λήξει</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="app_mode_light_aircraft">Ελαφρύ αεροσκάφος</string>
+    <string name="reverse_all_points">Αντιστροφή όλων των σημείων</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Απέτυχε η ανάκτηση της λίστας αρχείων από το διακομιστή.</string>
+    <string name="export_to_file">Εξαγωγή σε αρχείο</string>
+    <string name="download_cloud_version">Λήψη έκδοσης cloud</string>
+    <string name="cloud_version_will_be_removed">Η cloud έκδοση θα αφαιρεθεί</string>
 </resources>
