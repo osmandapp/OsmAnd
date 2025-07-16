@@ -1515,7 +1515,7 @@
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Visa detaljer</string>
     <string name="local_recordings_delete_all_confirm">Ta bort %1$d anteckningar\?</string>
-    <string name="download_wikipedia_maps">Replace Wikipedia links</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importera till OsmAnd</string>
     <string name="gps_network_not_enabled">Platstjänsten är av. Vill du slå på den\?</string>
     <string name="archive_wikipedia_data">Du har gamla och inkompatibla data från Wikipedia. Vill du arkivera dem?</string>
@@ -3226,7 +3226,7 @@
     <string name="activity_type_winter_name">Vinter</string>
     <string name="activity_type_snowmobile_name">Snöskoter</string>
     <string name="activity_type_riding_name">Ridning</string>
-    <string name="activity_type_racing_name">Racing</string>
+    <string name="activity_type_racing_name">Tävling</string>
     <string name="activity_type_mountainbike_name">Mountainbike</string>
     <string name="activity_type_cycling_name">Cykling</string>
     <string name="activity_type_hiking_name">Vandring</string>
