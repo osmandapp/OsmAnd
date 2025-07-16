@@ -9,7 +9,6 @@ import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
