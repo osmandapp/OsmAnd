@@ -5183,6 +5183,20 @@
     <string name="location_simulation_cutoff">Η προσομοίωση πηδάει τα πρώτα μέτρα</string>
     <string name="favorites_backup">Αντίγραφο ασφαλείας αγαπημένων</string>
     <string name="next_live_update_time">Επόμενη ενημέρωση στις %1$s.</string>
-    <string name="live_update_frequency_hour_variant">Οι ενημερώσεις χαρτών ελέγχονται ωριαία.</string>
+    <string name="live_update_frequency_hour_variant">Οι ενημερώσεις χαρτών ελέγχονται ωριαίως.</string>
     <string name="live_update_frequency_day_variant">Οι ενημερώσεις χαρτών ελέγχονται ημερησίως.</string>
+    <string name="live_update_frequency_week_variant">Οι ενημερώσεις χαρτών ελέγχονται εβδομαδιαίως.</string>
+    <string name="reset_all_settings_desc">Επαναφορά όλων των ρυθμίσεων στην προεπιλογή;</string>
+    <string name="marker_2nd">Δεύτερος δείκτης</string>
+    <string name="marker_1st">Πρώτος δείκτης</string>
+    <string name="widget_with_dot">Γραφικό στοιχείο.</string>
+    <string name="compass_visible_if_map_rotated_desc">Κρυφή αν ο Βορράς είναι πάνω</string>
+    <string name="compass_desc">Εμφανίζει την κατεύθυνση προς το βορρά.</string>
+    <string name="download_complete">Λήψη ολοκληρώθηκε</string>
+    <string name="next_live_update_date_and_time">Επόμενη ενημέρωση στις %1$s στις %2$s.</string>
+    <string name="includes_osm_changes_until">Περιλαμβάνει OSM αλλαγές που έγιναν μέχρι τις %1$s.</string>
+    <string name="receiving_data_from_server">Λαμβάνονται δεδομένα από το διακομιστή…</string>
+    <string name="delete_version_history">Διαγραφή ιστορικού έκδοσης</string>
+    <string name="restore_complete">Αποκαταστάθηκε</string>
+    <string name="restore_selected_data">Αποκατάσταση επιλεγμένων δεδομένων</string>
 </resources>
