@@ -5141,4 +5141,9 @@
     <string name="weather_widget_group_desc">Ένα σύνολο από γραφικά στοιχεία που εμφανίζουν διάφορες πληροφορίες καιρού.</string>
     <string name="map_widget_group_sunrise_sunset_desc">Αυτά τα γραφικά στοιχεία εμφανίζουν πληροφορίες σχετικά με την επόμενη ανατολή και δύση ηλίου.</string>
     <string name="route_maneuvers">Μανούβρες διαδρομής</string>
+    <string name="use_live_public_transport">Δεδομένα OsmAnd Live</string>
+    <string name="use_live_routing">Δεδομένα OsmAnd Live</string>
+    <string name="file_already_imported">Το αρχείο έχει ήδη εισαχθεί στο OsmAnd</string>
+    <string name="message_graph_will_be_available_after_recalculation">Παρακαλούμε περιμένε.\nΤο γράφημα θα είναι διαθέσιμο μετά τον επανυπολογισμό διαδρομής.</string>
+    <string name="message_need_calculate_route_before_show_graph">Τα δεδομένα %1$s είναι διαθέσιμα μόνο σε δρόμους, υπολογίστε διαδρομή χρησιμοποιώντας την “Διαδρομή μεταξύ σημειών” για να δείτε γραφήματα.</string>
 </resources>
