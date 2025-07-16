@@ -5144,6 +5144,10 @@
     <string name="use_live_public_transport">Δεδομένα OsmAnd Live</string>
     <string name="use_live_routing">Δεδομένα OsmAnd Live</string>
     <string name="file_already_imported">Το αρχείο έχει ήδη εισαχθεί στο OsmAnd</string>
-    <string name="message_graph_will_be_available_after_recalculation">Παρακαλούμε περιμένε.\nΤο γράφημα θα είναι διαθέσιμο μετά τον επανυπολογισμό διαδρομής.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Παρακαλούμε περιμένετε.\nΓράφημα θα είναι διαθέσιμο μετά τον επανυπολογισμό διαδρομής.</string>
     <string name="message_need_calculate_route_before_show_graph">Τα δεδομένα %1$s είναι διαθέσιμα μόνο σε δρόμους, υπολογίστε διαδρομή χρησιμοποιώντας την “Διαδρομή μεταξύ σημειών” για να δείτε γραφήματα.</string>
+    <string name="enter_text_separated">Εισάγετε ετικέτες χωρισμένες με κόμμα.</string>
+    <string name="subscription_on_hold_title">Η συνδρομή OsmAnd Live είναι σε αναμονή</string>
+    <string name="subscription_paused_title">Η συνδρομή OsmAnd Live είναι σε παύση</string>
+    <string name="subscription_expired_title">Η συνδρομή OsmAnd Live έχει λήξει</string>
 </resources>
