@@ -137,7 +137,7 @@
     <string name="poi_search_desc">Αναζήτηση ΣΕ (σημείο ενδιαφέροντος)</string>
     <string name="address_search_desc">Αναζήτηση διεύθυνσης</string>
     <string name="navpoint_search_desc">Συντεταγμένες</string>
-    <string name="transport_search_desc">Αναζήτηση δημοσίων συγκοινωνιών</string>
+    <string name="transport_search_desc">Αναζήτηση για δημόσια συγκοινωνία</string>
     <string name="favourites_search_desc">Ένας τρόπος αναζήτησης αγαπημένων</string>
     <string name="offline_navigation_not_available">Η εκτός διαδικτύου πλοήγηση του OsmAnd δεν είναι διαθέσιμη προσωρινά.</string>
     <string name="left_side_navigation">Οδήγηση στα αριστερά</string>
@@ -514,16 +514,16 @@
     <string name="download_type_to_filter">πληκτρ/στε. για φιλτράρισμα</string>
     <string name="use_high_res_maps">Οθόνη υψηλής ανάλυσης</string>
     <string name="use_high_res_maps_descr">Χωρίς επέκταση (και θόλωμα) των πλακιδίων χάρτη σε οθόνες υψηλής πυκνότητας.</string>
-    <string name="context_menu_item_search_transport">Αναζήτηση δημοσίων Μ.Μ.Μ</string>
+    <string name="context_menu_item_search_transport">Αναζήτηση δημοσίων συγκοινωνιών</string>
     <string name="transport_searching_transport">Αποτελέσματα μέσων μεταφοράς (χωρίς προορισμό):</string>
     <string name="transport_searching_route">Αποτελέσματα μέσων μεταφοράς ({0} μέχρι τον προορισμό):</string>
-    <string name="transport_search_again">Καθαρισμός αναζήτησης Μ.Μ.Μ</string>
+    <string name="transport_search_again">Καθαρισμός αναζήτησης συγκοινωνίας</string>
     <string name="voice">Ηχογραφημένη φωνή</string>
     <string name="no_vector_map_loaded">Οι διανυσματικοί χάρτες δεν φορτώθηκαν</string>
     <string name="gpx_files_not_found">Δεν βρέθηκαν αρχεία GPX στον κατάλογο ιχνών</string>
     <string name="error_reading_gpx">Αδυναμία ανάγνωσης δεδομένων GPX.</string>
     <string name="vector_data">Διανυσματικοί χάρτες χωρίς σύνδεση</string>
-    <string name="transport_context_menu">Αναζήτηση Μ.Μ.Μ στη στάση</string>
+    <string name="transport_context_menu">Αναζήτηση για συγκοινωνία στη στάση</string>
     <string name="poi_context_menu_modify">Τροποποίηση ΣΕ</string>
     <string name="poi_context_menu_delete">Διαγραφή ΣΕ</string>
     <string name="rotate_map_compass_opt">Κατεύθυνση πυξίδας</string>
@@ -616,7 +616,7 @@
     <string name="transport">Μεταφορές</string>
     <string name="shared_string_ok">Εντάξει</string>
     <string name="show_transport_over_map_description">Εμφάνιση στάσεων δημόσιων συγκοινωνιών στον χάρτη.</string>
-    <string name="show_transport_over_map">Εμφάνιση στάσεων Μ.Μ.Μ</string>
+    <string name="show_transport_over_map">Εμφάνιση στάσεων συγκοινωνίας</string>
     <string name="hello">Εφαρμογή πλοήγησης OsmAnd</string>
     <string name="update_poi_success">Τα δεδομένα ΣΕ ενημερώθηκαν ({0} είχαν φορτωθεί)</string>
     <string name="update_poi_error_local">Αδυναμία ενημέρωσης τοπικής λίστας ΣΕ.</string>
@@ -4115,7 +4115,7 @@
     <string name="map_settings_weather_wind">Άνεμος</string>
     <string name="purchases_feature_desc_external_sensors">Εμφάνιση και καταγραφή δεδομένων από εξωτερικούς αισθητήρες: ταχύτητα ποδηλάτου, ισχύ ποδηλάτου, ρυθμός, και καρδιακός ρυθμός.</string>
     <string name="external_sensors_support">Υποστήριξη εξωτερικών αισθητήρων</string>
-    <string name="external_sensors_plugin_name">Εξωτερικοί Αισθητήρες</string>
+    <string name="external_sensors_plugin_name">Εξωτερικοί αισθητήρες</string>
     <string name="map_settings_weather_temp">Θερμοκρασία</string>
     <string name="start_point">Έναρξη</string>
     <string name="routing_type">Είδος διαδρομής</string>
@@ -5170,4 +5170,6 @@
     <string name="empty_smart_folder_description">Τα αντιστοιχισμένα ίχνη εμφανίζονται εδώ</string>
     <string name="delete_smart_folder_dialog_message">Αυτό θα αφαιρέσει τον έξυπνο φάκελο \"%1$s\". (Κανένα ίχνος δε θα αφαιρεθεί.)</string>
     <string name="rendering_styles">Στυλ απεικόνισης</string>
+    <string name="quick_action_routes_summary">Ένας διακόπτης για να εμφανίσει ή να κρύψει %1$s στο χάρτη.</string>
+    <string name="wall_color">Χρώμα τοίχοι</string>
 </resources>
