@@ -5197,6 +5197,6 @@
     <string name="includes_osm_changes_until">Περιλαμβάνει OSM αλλαγές που έγιναν μέχρι τις %1$s.</string>
     <string name="receiving_data_from_server">Λαμβάνονται δεδομένα από το διακομιστή…</string>
     <string name="delete_version_history">Διαγραφή ιστορικού έκδοσης</string>
-    <string name="restore_complete">Αποκαταστάθηκε</string>
-    <string name="restore_selected_data">Αποκατάσταση επιλεγμένων δεδομένων</string>
+    <string name="restore_complete">Αποκαταστάθηκαν</string>
+    <string name="restore_selected_data">Επαναφορά επιλεγμένων δεδομένων</string>
 </resources>
