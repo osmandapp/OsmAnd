@@ -142,6 +142,8 @@ public class ResourceManager {
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<>();
 	private final Map<String, String> backupedFileNames = new ConcurrentHashMap<>();
 
+	private Set<String> standardPoiTypesKeyNames = null;
+
 	protected final IncrementalChangesManager changesManager = new IncrementalChangesManager(this);
 
 	protected final MapRenderRepositories renderer;
@@ -686,21 +688,12 @@ public class ResourceManager {
 				}
 			}
 		}
-		Set<String> standardPoiTypesKeyNames = new HashSet<>();
 		Iterator<Entry<PoiCategory, Map<String, PoiType>>> it = toAddPoiTypes.entrySet().iterator();
-		if (it.hasNext()) {
-			MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
-			for (PoiCategory poiCategory : mapPoiTypes.getCategories()) {
-				for (PoiType poiType : poiCategory.getPoiTypes()) {
-					standardPoiTypesKeyNames.add(poiType.getKeyName());
-				}
-			}
-		}
 		while (it.hasNext()) {
 			Entry<PoiCategory, Map<String, PoiType>> next = it.next();
 			PoiCategory category = next.getKey();
 			Map<String, PoiType> categoryDeltaPoiTypes = next.getValue();
-			categoryDeltaPoiTypes.keySet().removeAll(standardPoiTypesKeyNames);
+			categoryDeltaPoiTypes.keySet().removeAll(getStandardPoiTypesKeyNames());
 			category.addExtraPoiTypes(categoryDeltaPoiTypes);
 		}
 		log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
@@ -717,6 +710,20 @@ public class ResourceManager {
 			l.onMapsIndexed();
 		}
 		return warnings;
+	}
+
+	private Set<String> getStandardPoiTypesKeyNames() {
+		if (standardPoiTypesKeyNames == null) {
+			MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
+			Set<String> allPoiTypesKeyNames = new HashSet<>();
+			for (PoiCategory poiCategory : mapPoiTypes.getCategories()) {
+				for (PoiType poiType : poiCategory.getPoiTypes()) {
+					allPoiTypesKeyNames.add(poiType.getKeyName());
+				}
+			}
+			standardPoiTypesKeyNames = allPoiTypesKeyNames;
+		}
+		return standardPoiTypesKeyNames;
 	}
 
 	public List<String> getTravelRepositoryNames() {
