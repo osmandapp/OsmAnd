@@ -5179,5 +5179,10 @@
     <string name="show_map_symbols_desc">Κείμενο, πινακίδες σήμανσης και άλλα.</string>
     <string name="external_sensor_widgets">Εξωτερικοί αισθητήρες</string>
     <string name="location_simulation_speedup">Επιτάχυνση προσομοίωσης</string>
-    <string name="simulate_location_by_gpx">Προσομοίωση τοποθεσία από GPX</string>
+    <string name="simulate_location_by_gpx">Προσομοίωση τοποθεσίας από GPX</string>
+    <string name="location_simulation_cutoff">Η προσομοίωση πηδάει τα πρώτα μέτρα</string>
+    <string name="favorites_backup">Αντίγραφο ασφαλείας αγαπημένων</string>
+    <string name="next_live_update_time">Επόμενη ενημέρωση στις %1$s.</string>
+    <string name="live_update_frequency_hour_variant">Οι ενημερώσεις χαρτών ελέγχονται ωριαία.</string>
+    <string name="live_update_frequency_day_variant">Οι ενημερώσεις χαρτών ελέγχονται ημερησίως.</string>
 </resources>
