@@ -86,7 +86,7 @@
     <string name="poi_cafeteria">Καφετέρια</string>
     <string name="poi_zoo_type">Τύπος</string>
     <string name="poi_motorcycle_services">Υπηρεσίες</string>
-    <string name="poi_motorcycle_type">Τύπος μοτοποδηλάτου</string>
+    <string name="poi_motorcycle_type">Τύπος μοτοσυκλέτας</string>
     <string name="poi_animal_shelter_type">Αποδοχή ζώων</string>
     <string name="poi_animal_shelter_purpose">Σκοπός</string>
     <string name="poi_boat_rental_type">Ενοικιαζόμενα σκάφη</string>
@@ -326,11 +326,11 @@
     <string name="poi_motorcycle_parking">Χώρος στάθμευσης μοτοσικλέτας</string>
     <string name="poi_parking_entrance">Είσοδος χώρου στάθμευσης</string>
     <string name="poi_garages">Συνεργεία</string>
-    <string name="poi_public_transport_platform">Στάση δημόσιων συγκοινωνιών</string>
+    <string name="poi_public_transport_platform">Στάση δημόσιας συγκοινωνίας</string>
     <string name="poi_public_transport_platform_bus">Στάση λεωφορείου</string>
     <string name="poi_public_transport_platform_trolleybus">Στάση τρόλεϊ</string>
     <string name="poi_bus_stop">Στάση λεωφορείου</string>
-    <string name="poi_public_transport_stop_position">Θέση στάσης δημόσιων συγκοινωνιών</string>
+    <string name="poi_public_transport_stop_position">Θέση στάσης δημόσιας συγκοινωνίας</string>
     <string name="poi_public_transport_platform_tram">Στάση τραμ</string>
     <string name="poi_tram_stop">Στάση τραμ</string>
     <string name="poi_public_transport_station">Σταθμός δημόσιων συγκοινωνιών</string>
@@ -554,7 +554,7 @@
     <string name="poi_suburb">Προάστιο</string>
     <string name="poi_quarter">Συνοικία</string>
     <string name="poi_neighbourhood">Γειτονιά</string>
-    <string name="poi_locality">Κοινότητα</string>
+    <string name="poi_locality">Τοποθεσία</string>
     <string name="poi_place_allotments">Μικροί κήποι</string>
     <string name="poi_place_farm">Αγρόκτημα</string>
     <string name="poi_pharmacy">Φαρμακείο</string>
@@ -1168,15 +1168,15 @@
     <string name="poi_wiki_lang_mn">Μονγκολική βίκι</string>
     <string name="poi_wiki_lang_nap">Ναπολιτάνικη βίκι</string>
     <string name="poi_bollard">Οδικό κολωνάκι</string>
-    <string name="poi_cycle_barrier">Φράγμα ποδηλάτου</string>
-    <string name="poi_motorcycle_barrier">Φράγμα μοτοσικλέτας</string>
+    <string name="poi_cycle_barrier">Εμπόδιο ποδηλάτου</string>
+    <string name="poi_motorcycle_barrier">Εμπόδιο μοτοσικλέτας</string>
     <string name="poi_bus_trap">Δίοδος λεωφορείων</string>
     <string name="poi_cattle_grid">Φράγμα βοοειδών</string>
     <string name="poi_full_height_turnstile">Περιστρεφόμενη πόρτα πλήρους ύψους</string>
-    <string name="poi_general_barrier">Γενικό φράγμα</string>
+    <string name="poi_general_barrier">Γενικό εμπόδιο</string>
     <string name="poi_stile">Σειρά από σκαλοπάτια σε φράχτη</string>
     <string name="poi_debris">Συντρίμμια</string>
-    <string name="poi_jersey_barrier">Φράγμα Τζέρσεϊ</string>
+    <string name="poi_jersey_barrier">Εμπόδιο Τζέρσεϊ</string>
     <string name="poi_height_restrictor">Περιοριστής ύψους</string>
     <string name="poi_block">Ογκόλιθος</string>
     <string name="poi_bump_gate">Φράγμα ζώων-διέλευση αυτοκινήτων</string>
@@ -3550,11 +3550,11 @@
     <string name="poi_volcano_status">Κατάσταση</string>
     <string name="poi_mofa_yes">Ναι</string>
     <string name="poi_moped_designated">Δηλωμένη</string>
-    <string name="poi_moped_yes">Ναι</string>
+    <string name="poi_moped_yes">Ναι;Σκούτερ</string>
     <string name="poi_motorcycle_designated">Δηλωμένη</string>
     <string name="poi_motorcycle_destination">Προορισμός</string>
     <string name="poi_motorcycle_permissive">Ανεκτή</string>
-    <string name="poi_motorcycle_yes">Ναι</string>
+    <string name="poi_motorcycle_yes">Ναι;Μοτοσυκλέτα</string>
     <string name="poi_trailer_designated">Δηλωμένη</string>
     <string name="poi_trailer_yes">Ναι;Τρέιλερ</string>
     <string name="poi_motorhome_designated">Δηλωμένη</string>
@@ -4409,4 +4409,5 @@
     <string name="poi_lavoir">Δημόσιο πλυσταριό</string>
     <string name="poi_geodesist">Γεωδαίτης</string>
     <string name="poi_local_ref">Τοπική αναφορά</string>
+    <string name="poi_barrier_planter">Γλάστρα</string>
 </resources>
