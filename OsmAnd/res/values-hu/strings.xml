@@ -5730,4 +5730,5 @@
     <string name="deleting_history">Előzmények törlése…</string>
     <string name="show_rasterization_debug_tile">Csempe raszterezési információk mutatása</string>
     <string name="show_symbols_bboxes">Szimbólum határolókeretek mutatása</string>
+    <string name="release_5_2">• Folyamatban lévő munka...</string>
 </resources>
