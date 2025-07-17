@@ -725,7 +725,7 @@ public class VoiceRouter {
 
 	private void playMakeTurnIn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
+		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
 			ExitInfo exitInfo = next.getExitInfo();
@@ -800,7 +800,7 @@ public class VoiceRouter {
 
 	private void playMakeTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, NextDirectionInfo nextNextInfo) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
+		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
 			String tParam = getTurnType(next.getTurnType());
 			ExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;
