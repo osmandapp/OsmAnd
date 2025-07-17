@@ -1918,7 +1918,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="option_available_only_in_osmand_pro">Available as part of the OsmAnd Pro subscription.</string>
     <string name="track_has_no_needed_data">The track is missing the respective data.</string>
     <string name="promo_subscription">Promo subscription</string>
-    <string name="active_till">Active till %1$s</string>
+    <string name="active_till">Active \'til %1$s</string>
     <string name="on_hold_since">On hold since %1$s</string>
     <string name="explore_wikipedia_offline">Explore Wikipedia offline.</string>
     <string name="shared_string_purchased">Purchased</string>
@@ -3432,7 +3432,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="context_menu_read_article">Read article</string>
     <string name="context_menu_points_of_group">All points of the group</string>
     <string name="open_from">Open from</string>
-    <string name="open_till">Open till</string>
+    <string name="open_till">Open \'til</string>
     <string name="will_close_at">Closes at</string>
     <string name="will_open_at">Opens at</string>
     <string name="will_open_on">Opens at</string>
