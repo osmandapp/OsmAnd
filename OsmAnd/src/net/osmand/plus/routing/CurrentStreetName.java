@@ -42,19 +42,6 @@ public class CurrentStreetName {
 		setupCurrentName(routingHelper, info);
 	}
 
-	@NonNull
-	private static String getRouteSegmentStreetName(@NonNull RoutingHelper routingHelper, @NonNull RouteSegmentResult rs, boolean includeRef) {
-		OsmandSettings settings = routingHelper.getSettings();
-		String lang = settings.MAP_PREFERRED_LOCALE.get();
-		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
-
-		RouteDataObject object = rs.getObject();
-		String name = object.getName(lang, transliterate);
-		String ref = object.getRef(lang, transliterate, rs.isForwardDirection());
-		String destinationName = object.getDestinationName(lang, transliterate, rs.isForwardDirection());
-		return RoutingHelperUtils.formatStreetName(name, includeRef ? ref : null, destinationName, "»");
-	}
-
 	public void setupCurrentName(@NonNull RoutingHelper routingHelper, @NonNull NextDirectionInfo info) {
 		Location l = routingHelper.getLastFixedLocation();
 		AnnounceTimeDistances adt = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
@@ -125,5 +112,18 @@ public class CurrentStreetName {
 			}
 		}
 		return isSet;
+	}
+
+	@NonNull
+	private static String getRouteSegmentStreetName(@NonNull RoutingHelper routingHelper, @NonNull RouteSegmentResult rs, boolean includeRef) {
+		OsmandSettings settings = routingHelper.getSettings();
+		String lang = settings.MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+
+		RouteDataObject object = rs.getObject();
+		String name = object.getName(lang, transliterate);
+		String ref = object.getRef(lang, transliterate, rs.isForwardDirection());
+		String destinationName = object.getDestinationName(lang, transliterate, rs.isForwardDirection());
+		return RoutingHelperUtils.formatStreetName(name, includeRef ? ref : null, destinationName, "»");
 	}
 }
