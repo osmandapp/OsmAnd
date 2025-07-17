@@ -138,6 +138,7 @@ public class MapViewWithLayers extends FrameLayout {
 			mapRendererContext.setMapRendererView(atlasMapRendererView);
 			mapView.applyBatterySavingModeSetting(atlasMapRendererView);
 			mapView.applyDebugSettings(atlasMapRendererView);
+			mapView.applyMSAASetting(atlasMapRendererView);
 		}
 	}
 

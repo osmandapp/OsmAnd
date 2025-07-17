@@ -34,6 +34,7 @@ import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
+import net.osmand.core.android.MapRendererView;
 
 import java.text.SimpleDateFormat;
 
@@ -213,6 +214,15 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx symtopPref = findPreference(plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.getId());
 		symtopPref.setIconSpaceReserved(false);
 		symtopPref.setDescription(R.string.allow_display_on_top_description);
+
+		SwitchPreferenceEx model3DMSAAPref = findPreference(plugin.ENABLE_MODEL3D_MSAA.getId());
+		model3DMSAAPref.setIconSpaceReserved(false);
+		// Only show MSAA option if device supports it
+		boolean msaaSupported = MapRendererView.isMSAASupported();
+		model3DMSAAPref.setVisible(msaaSupported);
+		if (msaaSupported) {
+			model3DMSAAPref.setDescription(R.string.enable_model3d_msaa_description);
+		}
 
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
 		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));

@@ -162,6 +162,13 @@
 		android:title="@string/allow_display_on_top" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="enable_model3d_msaa"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/enable_model3d_msaa" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="debug_rendering"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
