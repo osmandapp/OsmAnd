@@ -5766,4 +5766,7 @@
     <string name="show_rasterization_debug_tile">Prikaži informacije o rasterizaciji pločica</string>
     <string name="show_symbols_bboxes">Prikaži simbole boks okvirnih polja</string>
     <string name="release_5_2">• Rad u toku...</string>
+    <string name="threads_allocated_for_rendering_desc">U nekim slučajevima, manja brzina rendrovanja mape može da ubrza prikaz mape.</string>
+    <string name="shared_string_threads">Nit</string>
+    <string name="threads_allocated_for_rendering">Teme dodeljene za rendering</string>
 </resources>
