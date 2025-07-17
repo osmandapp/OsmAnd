@@ -2018,8 +2018,8 @@
     <string name="line">Linija</string>
     <string name="exit_without_saving">Izađi bez snimanja?</string>
     <string name="keep_showing_on_map">Nastavi prikazivati na mapi</string>
-    <string name="do_not_use_animations_descr">Isključuje animaciju u programu.</string>
-    <string name="do_not_use_animations">Bez animacije interfejsa</string>
+    <string name="do_not_use_animations_descr">Isključiti animacije mape.</string>
+    <string name="do_not_use_animations">Uklonite animacije</string>
     <string name="sort_by">Sortiraj po</string>
     <string name="show_direction">Prikaz udaljenosti</string>
     <string name="move_all_to_history">Sve premesti u istoriju</string>
@@ -5767,6 +5767,6 @@
     <string name="show_symbols_bboxes">Prikaži simbole boks okvirnih polja</string>
     <string name="release_5_2">• Rad u toku...</string>
     <string name="threads_allocated_for_rendering_desc">U nekim slučajevima, manja brzina rendrovanja mape može da ubrza prikaz mape.</string>
-    <string name="shared_string_threads">Nit</string>
+    <string name="shared_string_threads">Teme</string>
     <string name="threads_allocated_for_rendering">Teme dodeljene za rendering</string>
 </resources>
