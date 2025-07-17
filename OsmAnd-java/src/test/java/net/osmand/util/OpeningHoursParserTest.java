@@ -46,7 +46,7 @@ public class OpeningHoursParserTest {
 	 * @param expected    the expected string in format:
 	 *                         "Open from HH:mm"     - open in 5 hours
 	 *                         "Will open at HH:mm"  - open in 2 hours
-	 *                         "Open till HH:mm"     - close in 5 hours
+	 *                         "Open 'til HH:mm"     - close in 5 hours
 	 *                         "Will close at HH:mm" - close in 2 hours
 	 *                         "Will open on HH:mm (Mo,Tu,We,Th,Fr,Sa,Su)" - open in >5 hours
 	 *                         "Will open tomorrow at HH:mm" - open in >5 hours tomorrow
@@ -64,7 +64,7 @@ public class OpeningHoursParserTest {
 	 * @param expected    the expected string in format:
 	 *                         "Open from HH:mm"     - open in 5 hours
 	 *                         "Will open at HH:mm"  - open in 2 hours
-	 *                         "Open till HH:mm"     - close in 5 hours
+	 *                         "Open 'til HH:mm"     - close in 5 hours
 	 *                         "Will close at HH:mm" - close in 2 hours
 	 *                         "Will open on HH:mm (Mo,Tu,We,Th,Fr,Sa,Su)" - open in >5 hours
 	 *                         "Will open tomorrow at HH:mm" - open in >5 hours tomorrow
@@ -500,7 +500,7 @@ public class OpeningHoursParserTest {
 		hours = OpeningHoursParser.parseOpenedHoursHandleErrors(hoursString);
 		testParsedAndAssembledCorrectly("mo-fr 11:00-21:00; PH off", hours);
 
-		// test open from/till
+		// test open from/'til
 		hours = parseOpenedHours("Mo-Fr 08:30-17:00; 12:00-12:40 off;");
 		System.out.println(hours);
 		testInfo("15.01.2018 09:00", hours, "Open \'til 12:00");

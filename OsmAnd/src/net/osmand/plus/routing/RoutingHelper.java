@@ -658,7 +658,7 @@ public class RoutingHelper {
 					processed = true;
 				}
 			} else if (newDist < dist || newDist < posTolerance / 8) {
-				// newDist < posTolerance / 8 - 4-8 m (avoid distance 0 till next turn)
+				// newDist < posTolerance / 8 - 4-8 m (avoid distance 0 until next turn)
 				if (dist > posTolerance) {
 					processed = true;
 					if (ENABLE_LOG_POS_PROCESSED) {

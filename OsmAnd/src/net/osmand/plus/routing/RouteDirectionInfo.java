@@ -18,7 +18,7 @@ public class RouteDirectionInfo {
 	private final TurnType turnType;
 	// Description of the turn and route after
 	private String descriptionRoute = ""; //$NON-NLS-1$
-	// Speed after the action till next turn
+	// Speed after the action until next turn
 	private float averageSpeed;
 
 	private String ref;
