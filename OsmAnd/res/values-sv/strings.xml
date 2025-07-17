@@ -1536,7 +1536,7 @@
     <string name="dark_theme">Mörkt</string>
     <string name="lang_pms">Piemontesiska</string>
     <string name="lang_bn">Bengaliska</string>
-    <string name="lang_tl">Tagalog</string>
+    <string name="lang_tl">Tagalogiska</string>
     <string name="lang_sh">Serbokroatiska</string>
     <string name="lang_az">Azerbajdzjanska</string>
     <string name="lang_br">Bretonska</string>
@@ -3226,7 +3226,7 @@
     <string name="activity_type_winter_name">Vinter</string>
     <string name="activity_type_snowmobile_name">Snöskoter</string>
     <string name="activity_type_riding_name">Ridning</string>
-    <string name="activity_type_racing_name">Racing</string>
+    <string name="activity_type_racing_name">Tävling</string>
     <string name="activity_type_mountainbike_name">Mountainbike</string>
     <string name="activity_type_cycling_name">Cykling</string>
     <string name="activity_type_hiking_name">Vandring</string>
@@ -6012,4 +6012,21 @@
     <string name="any_connected_with_device">Alla anslutna: %s</string>
     <string name="shared_string_checked">markerad</string>
     <string name="auto_backup_preference_desc">Som standard sparar Android säkerhetskopior av favoriter, karttokens och OsmAnd-inställningar för att återställa dem på nya enheter eller efter ominstallation. Denna backup är begränsad till 25 MB.\nNär du använder OsmAnd Cloud kan detta leda till missförstånd efter ominstallation.</string>
+    <string name="shared_string_split_by">Dela upp efter</string>
+    <string name="shared_string_flat">Slätt</string>
+    <string name="imperial_gallons">Imperial gallons</string>
+    <string name="third_links">Tredje länkar</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="release_3_7">• Ny offline Slope kartor\n\n• Full anpassning av favoriter och GPX Vägpunkter - anpassade färger, ikoner, former\n\nAnpassa objekt beställning i \"Context Menu\", \"Configure Map\" och \"Drawer\"\n\n• Wikipedia som ett separat lager i Konfigurera karta, välj endast nödvändiga språk\n\nSkapa ditt eget POI-filter/kartor med total flexibilitet\n\n• Lägga till alternativ för att återställa inställningar för anpassade profiler\n\n• Full GPX-rutter från navigationsstödstrafikbanor och kompletta turninstruktioner\n\n• Fix UI-storlekar på tabletter\n\n• Fix buggar med RTL\n\n</string>
+    <string name="release_3_6">• Profiler: Nu kan du ändra ordning, ställa in ikon för karta, ändra alla inställningar för basprofiler och återställa dem tillbaka till standarder\n\n• Lägg till exitnummer i navigeringen\n\n• Omarbetade plugin inställningar\n\n• Omarbetade inställningar skärmen för snabb åtkomst till alla profiler\n\n• Lägg till alternativ för att kopiera inställningar från en annan profil\n\n• Tillagd förmåga att ändra en beställning eller dölja POI-kategorier i Sök\n\n• Korrekt anpassade POI-ikoner på kartan\n\n• Lägg till Sunset / Sunrise-data för att konfigurera kartan\n\n• Tillagda hem / arbetsikoner på kartan\n\n• Tillagt stöd för multilinebeskrivning i Inställningar\n\nTillagd korrekt transkribering i kartan över Japan\n\n• Lägg till Antarktis karta</string>
+    <string name="monitoring_min_speed_descr">Detta är ett låghastighetsavskärningsfilter för att inte registrera punkter under en viss hastighet. Detta kan göra att inspelade spår ser jämnare ut när de visas på kartan.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Sidoeffekt: Ditt spår kommer att saknas alla sektioner där minsta hastighet kriterium inte uppfylldes (t.ex. där du trycker på din cykel upp en brant kulle). Det kommer inte att finnas någon information om perioder i vila, som raster. Detta har effekter på alla analyser eller efterbehandling, som när du försöker bestämma den totala längden på din resa, tid i rörelse eller din genomsnittliga hastighet.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Rekommendation: Försök att använda rörelsedetektering via loggningsminimifiltret (B) först, det kan ge bättre resultat, och du kommer att förlora mindre data. Om dina spår förblir bullriga med låga hastigheter, prova icke-nollvärden här. Observera att vissa mätningar kanske inte rapporterar något hastighetsvärde alls (vissa nätverksbaserade metoder), i vilket fall du inte skulle spela in något.</string>
+    <string name="monitoring_min_speed_descr_remark">Anmärkning: hastighet &gt; 0 kontroll: De flesta GPS-chipset rapporterar ett hastighetsvärde endast om algoritmen avgör att du är i rörelse, och inget om du inte är det. Därför använder inställningen &gt; 0 i detta filter i viss mening GPS-chipsetets rörelsedetektering. Men även om det inte filtreras här vid inspelningstillfället använder vi fortfarande den här funktionen i vår GPX-analys för att bestämma det korrigerade avståndet, d.v.s. värdet som visas i det fältet är det avstånd som registrerats under rörelse.</string>
+    <string name="monitoring_min_distance_descr">Om du vrider det här filtret på kan du undvika ytterligare datainspelning när rörelsen nästan inte upptäcks. Det förbättrar också det rumsliga utseendet av spår utan vidare bearbetning.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Biverkningar: Viloperioder registreras inte alls eller precis som en punkt vardera. Mindre rörelser (till exempel till sidan av vägen för att markera en möjlig svängning i din resa) kan filtreras ut. Observera att din fil kommer att innehålla mindre information för efterbehandling, och samtidigt kan potentiellt spara GPS-artefakter orsakade av dålig mottagning eller chipseteffekter.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Rekommendation: Ställ in 5 meter förskjutning om du inte vill spela in mindre detaljer om din rutt, och behöver inte ytterligare data om din viloperiod.</string>
+    <string name="release_3_5">• Uppdaterade app- och profilinställningar: Inställningar är nu ordnade efter typ. Varje profil kan anpassas separat.\n\n• Ny karta nedladdning dialog föreslår en karta för att ladda ner medan du surfar\n\n• Mörka temafixar\n\n• Fast flera routingproblem runt om i världen\n\nUppdaterad baskarta med mer detaljerat vägnät\n\n• Fasta översvämmade områden runt om i världen\n\nSki Routing: Tillagd höjdprofil och ruttkomplexitet till ruttens detaljer\n\n• Andra bugfix</string>
+    <string name="release_3_4">• Appprofiler: Skapa en anpassad profil för dina egna behov, med en anpassad ikon och färg\n\n• Nu anpassa någon profils standard och min/max hastigheter\n\n• Lägg till en widget för de aktuella koordinaterna\n\n• Lägga till alternativ för att visa kompassen och en radie härskare på kartan\n\n• Fix bakgrund track logging\n\n• Förbättrad bakgrundskarta nedladdningar\n\n• Returnerad \"Turn screen on\" -alternativ\n\n• Fast Wikipedia språkval\n\n• Fast kompassknapp beteende under navigering\n\n• Andra buggfixar</string>
+    <string name="show_symbols_debug_info">Visa felsökningsinformation för symboler</string>
 </resources>

@@ -106,6 +106,15 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		setupSpeakCamerasPref();
 		setupSpeedCamerasAlert();
 		setupSpeedLimitExceedPref();
+		setupTurnByTurnDirections();
+	}
+
+	private void setupTurnByTurnDirections() {
+		SwitchPreferenceCompat speakStreetNames = findPreference(settings.SPEAK_STREET_NAMES.getId());
+		if(speakStreetNames != null) {
+			ApplicationMode mode = getSelectedAppMode();
+			speakStreetNames.setVisible(settings.TURN_BY_TURN_DIRECTIONS.getModeValue(mode));
+		}
 	}
 
 	private void setupSpeedTolerance() {

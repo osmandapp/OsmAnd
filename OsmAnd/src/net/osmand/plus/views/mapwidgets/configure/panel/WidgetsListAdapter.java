@@ -1,11 +1,11 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.isComplexWidget;
-import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_DIVIDER_STATE_CHANGED;
-import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_EDIT_MODE_CHANGED;
-import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_MOVE_STATE_CHANGED;
-import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_UPDATE_ALL;
-import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.WidgetsListDiffCallback.PAYLOAD_UPDATE_POSITION;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListDiffCallback.PAYLOAD_DIVIDER_STATE_CHANGED;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListDiffCallback.PAYLOAD_EDIT_MODE_CHANGED;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListDiffCallback.PAYLOAD_MOVE_STATE_CHANGED;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListDiffCallback.PAYLOAD_UPDATE_ALL;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListDiffCallback.PAYLOAD_UPDATE_POSITION;
 import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.getRowWidgetIds;
 import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.isFirstPage;
 import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.rowHasComplexWidget;

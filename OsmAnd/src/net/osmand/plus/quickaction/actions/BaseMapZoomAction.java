@@ -35,18 +35,17 @@ public abstract class BaseMapZoomAction extends QuickAction {
 	@Override
 	public boolean onKeyDown(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
 		if (isContinuous()) {
-			changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
-			return true;
+			onActionSelected(mapActivity, event);
 		}
-		return super.onKeyDown(mapActivity, keyCode, event);
+		return true;
 	}
 
 	@Override
 	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
 		if (!isContinuous()) {
-			changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
+			return super.onKeyUp(mapActivity, keyCode, event);
 		}
-		return super.onKeyUp(mapActivity, keyCode, event);
+		return true;
 	}
 
 	@Override

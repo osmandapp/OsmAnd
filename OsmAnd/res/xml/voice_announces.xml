@@ -29,6 +29,11 @@
 		android:title="@string/accessibility_announce" />
 
 	<SwitchPreferenceCompat
+		android:key="turn_by_turn_directions"
+		android:layout="@layout/preference_switch"
+		android:title="@string/turn_by_turn_directions" />
+
+	<SwitchPreferenceCompat
 		android:key="speak_street_names"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_street_names" />
