@@ -21,6 +21,7 @@
         • Added Uphills/Downhills analyzer\n\n
         • Expanded Wikipedia &amp; Wikivoyage integration for more POIs.\n\n
     </string>
+    <string name="turn_by_turn_directions">Turn-by-Turn directions</string>
     <string name="osm_live_payment_renews_3_years">Renews every three years</string>
     <string name="years_3">Three years</string>
     <string name="osm_live_payment_3_years_title">Every three years</string>
