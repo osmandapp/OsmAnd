@@ -145,7 +145,7 @@ public class OpeningHoursParserTest {
 
 		hours = parseOpenedHours("Mo 09:00-12:00; We,Sa 13:30-17:00, Apr 01-Oct 31 We,Sa 17:00-18:30; PH off");
 		System.out.println(hours);
-		testInfo("03.10.2020 14:00", hours, "Open till 18:30");
+		testInfo("03.10.2020 14:00", hours, "Open \'til 18:30");
 		hours = parseOpenedHours("PH,Mo-Su 09:00-22:00");
 		System.out.println(hours);
 		testOpened("13.10.2021 11:54", hours, true);
@@ -503,17 +503,17 @@ public class OpeningHoursParserTest {
 		// test open from/till
 		hours = parseOpenedHours("Mo-Fr 08:30-17:00; 12:00-12:40 off;");
 		System.out.println(hours);
-		testInfo("15.01.2018 09:00", hours, "Open till 12:00");
+		testInfo("15.01.2018 09:00", hours, "Open \'til 12:00");
 		testInfo("15.01.2018 11:00", hours, "Will close at 12:00");
 		testInfo("15.01.2018 12:00", hours, "Will open at 12:40");
 
 		hours = parseOpenedHours("Mo-Fr: 9:00-13:00, 14:00-18:00");
 		System.out.println(hours);
 		testInfo("15.01.2018 08:00", hours, "Will open at 09:00");
-		testInfo("15.01.2018 09:00", hours, "Open till 13:00");
+		testInfo("15.01.2018 09:00", hours, "Open \'til 13:00");
 		testInfo("15.01.2018 12:00", hours, "Will close at 13:00");
 		testInfo("15.01.2018 13:10", hours, "Will open at 14:00");
-		testInfo("15.01.2018 14:00", hours, "Open till 18:00");
+		testInfo("15.01.2018 14:00", hours, "Open \'til 18:00");
 		testInfo("15.01.2018 16:00", hours, "Will close at 18:00");
 		testInfo("15.01.2018 18:10", hours, "Will open tomorrow at 09:00");
 
@@ -524,7 +524,7 @@ public class OpeningHoursParserTest {
 		hours = parseOpenedHours("Mo-Sa 23:00-02:00; Th off");
 		System.out.println(hours);
 		testInfo("15.01.2018 22:00", hours, "Will open at 23:00");
-		testInfo("15.01.2018 23:00", hours, "Open till 02:00");
+		testInfo("15.01.2018 23:00", hours, "Open \'til 02:00");
 		testInfo("16.01.2018 00:30", hours, "Will close at 02:00");
 		testInfo("16.01.2018 02:00", hours, "Open from 23:00");
 
@@ -537,7 +537,7 @@ public class OpeningHoursParserTest {
 		testInfo("22.01.2018 02:00", hours, "Open from 08:30");
 		testInfo("22.01.2018 04:00", hours, "Open from 08:30");
 		testInfo("22.01.2018 07:00", hours, "Will open at 08:30");
-		testInfo("23.01.2018 10:00", hours, "Open till 17:00");
+		testInfo("23.01.2018 10:00", hours, "Open \'til 17:00");
 		testInfo("23.01.2018 16:00", hours, "Will close at 17:00");
 
 		hours = parseOpenedHours("24/7");
@@ -568,9 +568,9 @@ public class OpeningHoursParserTest {
 		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 - Restaurant", 0);
 		testInfo("26.01.2018 00:00", hours, "Will close at 01:00 - Restaurant", 0);
 		testInfo("22.01.2018 05:00", hours, "Will open at 07:00 - McDrive", 1);
-		testInfo("22.01.2018 00:00", hours, "Open till 04:00 - McDrive", 1);
+		testInfo("22.01.2018 00:00", hours, "Open \'til 04:00 - McDrive", 1);
 		testInfo("22.01.2018 02:00", hours, "Will close at 04:00 - McDrive", 1);
-		testInfo("27.01.2018 02:00", hours, "Open till 24:00 - McDrive", 1);
+		testInfo("27.01.2018 02:00", hours, "Open \'til 24:00 - McDrive", 1);
 
 		hours = parseOpenedHours("07:00-03:00 open \"Restaurant\" || 24/7 open \"McDrive\"");
 		System.out.println(hours);
@@ -585,10 +585,10 @@ public class OpeningHoursParserTest {
 		testOpened("16.02.2018 16:00", hours, false);
 		testOpened("16.02.2018 17:00", hours, true);
 		testInfo("16.02.2018 9:45", hours, "Open from 12:00");
-		testInfo("16.02.2018 12:00", hours, "Open till 15:00");
+		testInfo("16.02.2018 12:00", hours, "Open \'til 15:00");
 		testInfo("16.02.2018 14:00", hours, "Will close at 15:00");
 		testInfo("16.02.2018 16:00", hours, "Will open at 17:00");
-		testInfo("16.02.2018 18:00", hours, "Open till 23:00");
+		testInfo("16.02.2018 18:00", hours, "Open \'til 23:00");
 
 		hours = parseOpenedHours("Mo-Fr 08:00-12:00, Mo,Tu,Th 15:00-17:00; PH off");
 		System.out.println(hours);
@@ -617,7 +617,7 @@ public class OpeningHoursParserTest {
 		testOpened("25.03.2025 13:30", hours, false);
 		testOpened("25.03.2025 17:50", hours, true);
 		testInfo("24.03.2025 16:00", hours, "Will open tomorrow at 9:00 AM"); // Mo
-		testInfo("25.03.2025 10:00", hours, "Open till 1:00 PM"); // Tu
+		testInfo("25.03.2025 10:00", hours, "Open \'til 1:00 PM"); // Tu
 		testInfo("25.03.2025 13:30", hours, "Will open at 2:00 PM");
 		testInfo("25.03.2025 17:50", hours, "Will close at 6:00 PM");
 		testInfo("25.03.2025 18:50", hours, "Will open on 9:00 AM Thu."); // not ok
@@ -630,10 +630,10 @@ public class OpeningHoursParserTest {
 		OpeningHours hours = parseOpenedHours("Mo-Fr: 9:00-13:00, 14:00-18:00");
 		System.out.println(hours);
 		testInfo("15.01.2018 08:00", hours, "Will open at 9:00 AM");
-		testInfo("15.01.2018 09:00", hours, "Open till 1:00 PM");
+		testInfo("15.01.2018 09:00", hours, "Open \'til 1:00 PM");
 		testInfo("15.01.2018 12:00", hours, "Will close at 1:00 PM");
 		testInfo("15.01.2018 13:10", hours, "Will open at 2:00 PM");
-		testInfo("15.01.2018 14:00", hours, "Open till 6:00 PM");
+		testInfo("15.01.2018 14:00", hours, "Open \'til 6:00 PM");
 		testInfo("15.01.2018 16:00", hours, "Will close at 6:00 PM");
 		testInfo("15.01.2018 18:10", hours, "Will open tomorrow at 9:00 AM");
 

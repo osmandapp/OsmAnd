@@ -54,7 +54,7 @@ public class OpeningHoursParser {
 		additionalStrings.put("will_open_at", "Will open at");
 		additionalStrings.put("open_from", "Open from");
 		additionalStrings.put("will_close_at", "Will close at");
-		additionalStrings.put("open_till", "Open till");
+		additionalStrings.put("open_till", "Open \'til");
 		additionalStrings.put("will_open_tomorrow_at", "Will open tomorrow at");
 		additionalStrings.put("will_open_on", "Will open on");
 	}
