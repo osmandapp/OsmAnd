@@ -2592,6 +2592,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	public void applyMSAASetting(MapRendererView mapRenderer) {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null) {
+			boolean enableMSAA = plugin.ENABLE_MODEL3D_MSAA.get();
+			mapRenderer.setModel3DMSAAEnabled(enableMSAA);
+		}
+	}
+
 	private boolean isUseOpenGL() {
 		return getApplication().useOpenGlRenderer();
 	}

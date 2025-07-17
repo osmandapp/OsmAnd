@@ -80,9 +80,11 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SHOW_TILES_RASTERIZATION_DEBUG_INFO;
 	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
+	public final OsmandPreference<Boolean> ENABLE_MODEL3D_MSAA;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 	private final StateChangedListener<Boolean> batterySavingModeListener;
+	private final StateChangedListener<Boolean> model3DMSAAListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -110,6 +112,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SHOW_TILES_RASTERIZATION_DEBUG_INFO = registerBooleanPreference("show_tiles_rasterization_debug_info", false).makeGlobal().makeShared().cache();
 		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
+		ENABLE_MODEL3D_MSAA = registerBooleanPreference("enable_model3d_msaa", false).makeGlobal().makeShared().cache();
+
+		pluginPreferences.add(USE_RASTER_SQLITEDB);
+		pluginPreferences.add(SAVE_BEARING_TO_GPX);
+		pluginPreferences.add(SAVE_HEADING_TO_GPX);
+		pluginPreferences.add(SHOW_TILES_RASTERIZATION_DEBUG_INFO);
+		pluginPreferences.add(SHOW_SYMBOLS_DEBUG_INFO);
+		pluginPreferences.add(ALLOW_SYMBOLS_DISPLAY_ON_TOP);
+		pluginPreferences.add(ENABLE_MODEL3D_MSAA);
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -129,6 +140,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SHOW_TILES_RASTERIZATION_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
+
+		model3DMSAAListener = change -> {
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
+				mapView.applyMSAASetting(mapRenderer);
+			}
+		};
+		ENABLE_MODEL3D_MSAA.addListener(model3DMSAAListener);
 
 		batterySavingModeListener = change -> {
 			OsmandMapTileView mapView = app.getOsmandMap().getMapView();

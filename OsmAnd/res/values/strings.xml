@@ -6143,4 +6143,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
     <string name="show_symbols_debug_info">Show symbols debug info</string>
+    <string name="enable_model3d_msaa">Enable 3D model MSAA</string>
+    <string name="enable_model3d_msaa_description">Enable multisample anti-aliasing for 3D models to improve visual quality</string>
 </resources>
