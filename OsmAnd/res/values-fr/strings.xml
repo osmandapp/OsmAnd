@@ -5678,4 +5678,7 @@
     <string name="show_rasterization_debug_tile">Afficher les informations de rasterisation des tuiles</string>
     <string name="show_symbols_bboxes">Afficher les boîtes englobantes des symboles</string>
     <string name="release_5_2">• En cours ...</string>
+    <string name="shared_string_threads">Fils</string>
+    <string name="threads_allocated_for_rendering">Fils alloués au rendu</string>
+    <string name="threads_allocated_for_rendering_desc">Une allocation de fils inférieure peut accélérer le rendu de la carte dans certains cas.</string>
 </resources>
