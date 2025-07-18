@@ -139,7 +139,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
 		reconnectToDeviceScheduler = null;
 		if (scheduler != null) {
-			scheduler.shutdown();
+			scheduler.shutdownNow();
 		}
 	}
 
@@ -449,9 +449,8 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 		switch (result) {
 			case SUCCESS:
-				ScheduledFuture<?> reconnectingFuture = reconnectingDevices.get(device.getDeviceId());
+				ScheduledFuture<?> reconnectingFuture = reconnectingDevices.remove(device.getDeviceId());
 				if (reconnectingFuture != null) {
-					reconnectingDevices.remove(device.getDeviceId());
 					reconnectingFuture.cancel(true);
 				}
 				LOG.debug(device + " sensor connected");
@@ -501,7 +500,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
 		if (!device.isDisconnected() && !reconnectingDevices.containsKey(device.getDeviceId()) && scheduler != null) {
 			ScheduledFuture<?> future = scheduler.schedule(() -> {
-				if(device.connect(app, activity)) {
+				if(activity != null && device.connect(app, activity)) {
 					ScheduledFuture<?> checkFuture = scheduler.schedule(() -> {
 						checkReconnectDeviceResult(device.getDeviceId());
 					}, RECONNECT_DEVICE_TIMEOUT, TimeUnit.SECONDS);
@@ -514,7 +513,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	private void checkReconnectDeviceResult(@NonNull String deviceId) {
 		Activity activity = this.activity;
-		if (reconnectingDevices.containsKey(deviceId) && activity != null) {
+		if (reconnectingDevices.remove(deviceId) != null && activity != null) {
 			reconnectingDevices.remove(deviceId);
 			AbstractDevice<?> device = getAnyDevice(deviceId);
 			if (device != null) {
