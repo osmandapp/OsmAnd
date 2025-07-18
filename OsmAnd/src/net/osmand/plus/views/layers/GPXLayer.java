@@ -89,6 +89,7 @@ import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.*;
 import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.TrkSegment.SegmentSlopeType;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.routing.ColoringType;
@@ -618,16 +619,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				List<GpxDisplayGroup> groups = selectedGpxFile.getSplitGroups(app);
 				if (!Algorithms.isEmpty(groups)) {
-					int color = getTrackColor(gpxFile, cachedColor);
+					int trackColor = getTrackColor(gpxFile, cachedColor);
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
 						WptPt point = item.locationEnd;
-						String name = item.splitName;
+						String name = getSplitName(item);
+						int color = getSplitColor(item, trackColor);
+
 						if (name != null) {
-							int ind = name.indexOf(' ');
-							if (ind > 0) {
-								name = name.substring(0, ind);
-							}
 							SplitLabel splitLabel;
 							PointI point31 = new PointI(Utilities.get31TileNumberX(point.getLon()), Utilities.get31TileNumberY(point.getLat()));
 							if (visualizationType == Gpx3DVisualizationType.NONE || trackLinePosition != Gpx3DLinePositionType.TOP) {
@@ -657,6 +656,40 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			splitLabelsCountCached = 0;
 			clearSelectedFilesSplits();
 		}
+	}
+
+	@Nullable
+	private String getSplitName(@NonNull GpxDisplayItem item) {
+		String name = item.splitName;
+		if (name != null) {
+			int ind = name.indexOf(' ');
+			if (ind > 0) {
+				name = name.substring(0, ind);
+			}
+			SegmentSlopeType slopeType = item.analysis.getSegmentSlopeType();
+			if (slopeType != null) {
+				if (slopeType == SegmentSlopeType.UPHILL) {
+					name = getString(R.string.ltr_or_rtl_combine_via_space, "↗", name);
+				} else if (slopeType == SegmentSlopeType.DOWNHILL) {
+					name = getString(R.string.ltr_or_rtl_combine_via_space, "↘", name);
+				}
+			}
+		}
+		return name;
+	}
+
+	@ColorInt
+	private int getSplitColor(@NonNull GpxDisplayItem item, int trackColor) {
+		int color = trackColor;
+		SegmentSlopeType slopeType = item.analysis.getSegmentSlopeType();
+		if (slopeType != null) {
+			if (slopeType == SegmentSlopeType.UPHILL) {
+				color = ColorUtilities.getColor(app, R.color.gpx_altitude_asc);
+			} else if (slopeType == SegmentSlopeType.DOWNHILL) {
+				color = ColorUtilities.getColor(app, R.color.gpx_altitude_desc);
+			}
+		}
+		return color;
 	}
 
 	private boolean updateBitmaps() {

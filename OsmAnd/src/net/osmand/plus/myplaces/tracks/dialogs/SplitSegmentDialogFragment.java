@@ -26,8 +26,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentsAdapter.SplitAdapterListener;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
@@ -56,7 +58,7 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
+public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment implements SplitAdapterListener {
 
 	public static final String TAG = "SPLIT_SEGMENT_DIALOG_FRAGMENT";
 
@@ -137,7 +139,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		listView.setDivider(null);
 		listView.setDividerHeight(0);
 
-		adapter = new SplitSegmentsAdapter(requireActivity(), new ArrayList<>(), displayItem);
+		adapter = new SplitSegmentsAdapter(requireActivity(), new ArrayList<>(), displayItem, this);
 		headerView = view.findViewById(R.id.header_layout);
 
 		ImageView splitImage = headerView.findViewById(R.id.header_split_image);
@@ -484,5 +486,10 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}
+	}
+
+	@Override
+	public void onDismiss() {
+		dismiss();
 	}
 }
