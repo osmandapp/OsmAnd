@@ -24,6 +24,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.io.KFile;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,6 +118,10 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	private void updateGpxParams(@NonNull GpxDataItem dataItem) {
+		int splitType = GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType).getType();
+		boolean splitChanged = Algorithms.objectEquals(dataItem.getParameter(SPLIT_TYPE), splitType)
+				|| Algorithms.objectEquals(dataItem.getParameter(SPLIT_INTERVAL), appearanceInfo.splitInterval);
+
 		dataItem.setParameter(COLOR, appearanceInfo.color);
 		dataItem.setParameter(WIDTH, appearanceInfo.width);
 		dataItem.setParameter(SHOW_ARROWS, appearanceInfo.showArrows);
@@ -128,6 +133,14 @@ public class GpxSettingsItem extends FileSettingsItem {
 
 		app.getGpxDbHelper().updateDataItem(dataItem);
 		app.getGpxDbHelper().updateDataItemParameter(dataItem, APPEARANCE_LAST_MODIFIED_TIME, file.lastModified());
+
+		if (splitChanged) {
+			GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
+			SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
+			if (selectedGpxFile != null) {
+				selectedGpxFile.resetSplitProcessed();
+			}
+		}
 	}
 
 	private void createGpxAppearanceInfo() {
