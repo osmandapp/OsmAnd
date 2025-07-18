@@ -402,7 +402,15 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							}
 
 							offscreenMapRendererView = new AtlasMapRendererView(carContext);
-							mapRendererContext.presetMapRendererOptions(offscreenMapRendererView);
+
+							boolean enableMSAA = false;
+							net.osmand.plus.plugins.development.OsmandDevelopmentPlugin devPlugin = 
+								PluginsHelper.getPlugin(net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.class);
+							if (devPlugin != null) {
+								enableMSAA = devPlugin.ENABLE_MSAA.get();
+							}
+
+							mapRendererContext.presetMapRendererOptions(offscreenMapRendererView, enableMSAA);
 							offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
 							offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 							offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
