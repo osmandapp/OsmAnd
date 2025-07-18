@@ -5769,4 +5769,5 @@
     <string name="threads_allocated_for_rendering_desc">U nekim slučajevima, manja brzina rendrovanja mape može da ubrza prikaz mape.</string>
     <string name="shared_string_threads">Teme</string>
     <string name="threads_allocated_for_rendering">Teme dodeljene za rendering</string>
+    <string name="turn_by_turn_directions">Navođenje</string>
 </resources>
