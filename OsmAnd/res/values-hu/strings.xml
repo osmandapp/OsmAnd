@@ -1468,7 +1468,7 @@
     <string name="index_name_netherlands">Európa – Hollandia</string>
     <string name="application_dir_change_warning3">Az OsmAnd adatfájljait áthelyezzük az új helyre\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok</string>
-    <string name="routing_attr_avoid_borders_description">Elkerüli országhatár átlépését</string>
+    <string name="routing_attr_avoid_borders_description">Elkerüli az országhatár átlépését</string>
     <string name="routing_attr_height_name">Magasság</string>
     <string name="routing_attr_height_description">Adja meg az útvonalakon a járművekre vonatkozó magasságkorlátozást.</string>
     <string name="use_fast_recalculation">Intelligens útvonal újratervezés</string>
@@ -2704,7 +2704,7 @@
     <string name="rendering_attr_surface_paved_name">Burkolt</string>
     <string name="rendering_attr_surface_concrete_name">Beton</string>
     <string name="rendering_attr_surface_sett_name">Macskakő</string>
-    <string name="rendering_attr_surface_cobblestone_name">Nagy kavics (görgeteg)</string>
+    <string name="rendering_attr_surface_cobblestone_name">Durva kőburkolat</string>
     <string name="rendering_attr_surface_paving_stones_name">Térkő</string>
     <string name="rendering_attr_surface_pebblestone_name">Kavics</string>
     <string name="rendering_attr_surface_stone_name">Kő</string>
@@ -5237,8 +5237,8 @@
     <string name="show_debug_info">Hibakeresési adatok megjelenítése</string>
     <string name="show_debug_info_description">Grafikus információk megjelenítése az egyes térképszövegek elhelyezéséről</string>
     <string name="map_text">Térkép renderelés</string>
-    <string name="routing_attr_avoid_cobblestone_name">Macskakő elkerülése</string>
-    <string name="routing_attr_avoid_cobblestone_description">Macskakő elkerülése</string>
+    <string name="routing_attr_avoid_cobblestone_name">Durva kőburkolat elkerülése</string>
+    <string name="routing_attr_avoid_cobblestone_description">Durva kőburkolat elkerülése</string>
     <string name="track_vertical_exaggeration_description">A skála értékének változtatásával módosíthatja a 3D nyomvonal magasságát.</string>
     <string name="steps_per_minute_unit">lépés/p</string>
     <string name="disable_map_layers_descr">Tiltsa le az összes térképréteget a vektortérkép felett (újraindítás szükséges).</string>
