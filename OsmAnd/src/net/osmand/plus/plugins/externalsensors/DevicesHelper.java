@@ -501,11 +501,12 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
 		if (!device.isDisconnected() && !reconnectingDevices.containsKey(device.getDeviceId()) && scheduler != null) {
 			ScheduledFuture<?> future = scheduler.schedule(() -> {
-				device.connect(app, activity);
-				ScheduledFuture<?> checkFuture = scheduler.schedule(() -> {
-					checkReconnectDeviceResult(device.getDeviceId());
-				}, RECONNECT_DEVICE_TIMEOUT, TimeUnit.SECONDS);
-				reconnectingDevices.put(device.getDeviceId(), checkFuture);
+				if(device.connect(app, activity)) {
+					ScheduledFuture<?> checkFuture = scheduler.schedule(() -> {
+						checkReconnectDeviceResult(device.getDeviceId());
+					}, RECONNECT_DEVICE_TIMEOUT, TimeUnit.SECONDS);
+					reconnectingDevices.put(device.getDeviceId(), checkFuture);
+				}
 			}, RECONNECT_DEVICE_DELAY, TimeUnit.SECONDS);
 			reconnectingDevices.put(device.getDeviceId(), future);
 		}
