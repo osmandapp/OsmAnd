@@ -139,7 +139,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
 		reconnectToDeviceScheduler = null;
 		if (scheduler != null) {
-			scheduler.shutdownNow();
+			scheduler.shutdown();
 		}
 	}
 
