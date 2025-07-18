@@ -111,7 +111,8 @@ public class StreetNameWidget extends MapWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		StreetNameWidgetParams params = new StreetNameWidgetParams(mapActivity);
+		boolean showNextTurn = settings.SHOW_NEXT_TURN_INFO.get();
+		StreetNameWidgetParams params = new StreetNameWidgetParams(mapActivity, showNextTurn);
 		CurrentStreetName streetName = params.streetName;
 		int turnArrowColorId = params.turnArrowColorId;
 		boolean showClosestWaypointFirstInAddress = params.showClosestWaypointFirstInAddress;
@@ -120,8 +121,7 @@ public class StreetNameWidget extends MapWidget {
 			turnDrawable.setRouteDirectionColor(turnArrowColorId);
 		}
 
-		boolean shouldHide = shouldHide();
-		if (shouldHide) {
+		if (shouldHide() || streetName == null) {
 			updateVisibility(false);
 		} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {
 			updateVisibility(true);
@@ -130,8 +130,6 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(turnIcon, false);
 			AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
 			AndroidUiHelper.updateVisibility(exitRefText, false);
-		} else if (streetName == null) {
-			updateVisibility(false);
 		} else {
 			updateVisibility(true);
 			AndroidUiHelper.updateVisibility(waypointInfoBar, false);
@@ -439,69 +437,70 @@ public class StreetNameWidget extends MapWidget {
 		private final OsmandSettings settings;
 		private final MapActivity mapActivity;
 		private final RoutingHelper routingHelper;
+		private final boolean showNextTurn;
 
 		public CurrentStreetName streetName;
 		@ColorRes
 		public int turnArrowColorId;
 		public boolean showClosestWaypointFirstInAddress = true;
 
-		public StreetNameWidgetParams(@NonNull MapActivity mapActivity) {
+		public StreetNameWidgetParams(@NonNull MapActivity mapActivity, boolean showNextTurn) {
 			this.app = mapActivity.getMyApplication();
 			this.mapActivity = mapActivity;
 			this.settings = app.getSettings();
 			this.routingHelper = app.getRoutingHelper();
+			this.showNextTurn = showNextTurn;
 
 			computeParams();
 		}
 
 		private void computeParams() {
-			boolean onRoute = routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute();
-			boolean mapLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
-			if (onRoute) {
+			if (routingHelper.isOnRoute()) {
 				if (routingHelper.isFollowingMode()) {
-					NextDirectionInfo nextDirInfo =
-							routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-					streetName = routingHelper.getCurrentName(nextDirInfo);
+					setupCurrentStreetName(showNextTurn);
 					turnArrowColorId = R.color.nav_arrow;
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
 					boolean routeMenuVisible = mapActivity.getMapRouteInfoMenu().isVisible();
 					if (di >= 0 && routeMenuVisible && di < routingHelper.getRouteDirections().size()) {
-						NextDirectionInfo nextDirectionInfo =
-								routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-						streetName = routingHelper.getCurrentName(nextDirectionInfo);
+						setupCurrentStreetName(showNextTurn);
 						turnArrowColorId = R.color.nav_arrow_distant;
 						showClosestWaypointFirstInAddress = false;
 					}
 				}
-			} else if (mapLinkedToLocation) {
-				streetName = new CurrentStreetName();
-				OsmAndLocationProvider locationProvider = app.getLocationProvider();
-				RouteDataObject lastKnownSegment = locationProvider.getLastKnownRouteSegment();
-				Location lastKnownLocation = locationProvider.getLastKnownLocation();
-				if (lastKnownSegment != null && lastKnownLocation != null) {
-					updateParamsByLastKnown(lastKnownSegment, lastKnownLocation);
-				}
+			} else if (app.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+				setupLastKnownStreetName();
 			}
 		}
 
-		private void updateParamsByLastKnown(@NonNull RouteDataObject lastKnownSegment,
-				@NonNull Location lastKnownLocation) {
-			String preferredLocale = settings.MAP_PREFERRED_LOCALE.get();
-			boolean transliterateNames = settings.MAP_TRANSLITERATE_NAMES.get();
-			boolean direction = lastKnownSegment.bearingVsRouteDirection(lastKnownLocation);
+		private void setupCurrentStreetName(boolean showNextTurn) {
+			NextDirectionInfo nextDirInfo = new NextDirectionInfo();
+			nextDirInfo = routingHelper.getNextRouteDirectionInfo(nextDirInfo, true);
+			streetName = routingHelper.getCurrentName(nextDirInfo, showNextTurn);
+		}
 
-			String name = lastKnownSegment.getName(preferredLocale, transliterateNames);
-			String ref = lastKnownSegment.getRef(preferredLocale, transliterateNames, direction);
-			String destination = lastKnownSegment.getDestinationName(preferredLocale, transliterateNames, direction);
+		private void setupLastKnownStreetName() {
+			streetName = new CurrentStreetName();
+			OsmAndLocationProvider locationProvider = app.getLocationProvider();
+			RouteDataObject lastKnownSegment = locationProvider.getLastKnownRouteSegment();
+			Location lastKnownLocation = locationProvider.getLastKnownLocation();
+			if (lastKnownSegment != null && lastKnownLocation != null) {
+				String locale = settings.MAP_PREFERRED_LOCALE.get();
+				boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+				boolean direction = lastKnownSegment.bearingVsRouteDirection(lastKnownLocation);
 
-			streetName.text = RoutingHelperUtils.formatStreetName(name, ref, destination, "»");
-			if (!Algorithms.isEmpty(streetName.text)) {
-				double dist = CurrentPositionHelper.getOrthogonalDistance(lastKnownSegment, lastKnownLocation);
-				if (dist < MAX_MARKER_DISTANCE) {
-					streetName.showMarker = true;
-				} else {
-					streetName.text = app.getString(R.string.shared_string_near) + " " + streetName.text;
+				String name = lastKnownSegment.getName(locale, transliterate);
+				String ref = lastKnownSegment.getRef(locale, transliterate, direction);
+				String destination = lastKnownSegment.getDestinationName(locale, transliterate, direction);
+
+				streetName.text = RoutingHelperUtils.formatStreetName(name, ref, destination, "»");
+				if (!Algorithms.isEmpty(streetName.text)) {
+					double dist = CurrentPositionHelper.getOrthogonalDistance(lastKnownSegment, lastKnownLocation);
+					if (dist < MAX_MARKER_DISTANCE) {
+						streetName.showMarker = true;
+					} else {
+						streetName.text = app.getString(R.string.shared_string_near) + " " + streetName.text;
+					}
 				}
 			}
 		}
