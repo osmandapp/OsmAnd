@@ -143,7 +143,7 @@ public class MaxRenderingThreadsBottomSheet extends BasePreferenceBottomSheet {
 
 	private String getFormattedThreads(int value) {
 		if (value == 0) {
-			value = getMaxLimit();
+			value = getMaxLimit() / 2;
 		}
 		return String.valueOf(value);
 	}
@@ -158,7 +158,7 @@ public class MaxRenderingThreadsBottomSheet extends BasePreferenceBottomSheet {
 					if (currentValue > 0) {
 						mapRenderer.setResourceWorkerThreadsLimit(currentValue);
 					} else {
-						mapRenderer.setResourceWorkerThreadsLimit(getMapRenderer().getDefaultWorkerThreadsLimit());
+						mapRenderer.setResourceWorkerThreadsLimit(getMapRenderer().getDefaultWorkerThreadsLimit() / 2);
 					}
 				}
 				fragment.onApplyPreferenceChange(preference.getId(), false, currentValue);
@@ -183,7 +183,7 @@ public class MaxRenderingThreadsBottomSheet extends BasePreferenceBottomSheet {
 
 	private int getMaxLimit() {
 		MapRendererView mapRenderer = getMapRenderer();
-		return mapRenderer != null ? mapRenderer.getDefaultWorkerThreadsLimit() : 10;
+		return mapRenderer != null ? mapRenderer.getDefaultWorkerThreadsLimit() : 16;
 	}
 
 	@Nullable
@@ -197,7 +197,7 @@ public class MaxRenderingThreadsBottomSheet extends BasePreferenceBottomSheet {
 				return i;
 			}
 		}
-		return range.length - 1;
+		return range.length / 2 - 1;
 	}
 
 	private boolean isChanged() {

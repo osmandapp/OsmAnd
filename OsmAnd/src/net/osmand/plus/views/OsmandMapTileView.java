@@ -2039,8 +2039,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (!isSteplessZoomSupported() && !disable) {
 			setZoomWithFloatPart(getZoom(), 0);
 		}
-		if (mapRenderer != null && settings.MAX_RENDERING_THREADS.get() > 0) {
-			mapRenderer.setResourceWorkerThreadsLimit(settings.MAX_RENDERING_THREADS.get());
+		if (mapRenderer != null) {
+			int maxRederingThreadsLimit = settings.MAX_RENDERING_THREADS.get();
+			if (maxRederingThreadsLimit > 0) {
+				mapRenderer.setResourceWorkerThreadsLimit(maxRederingThreadsLimit);
+			} else {
+				mapRenderer.setResourceWorkerThreadsLimit(mapRenderer.getDefaultWorkerThreadsLimit() / 2);
+			}
 		}
 	}
 
