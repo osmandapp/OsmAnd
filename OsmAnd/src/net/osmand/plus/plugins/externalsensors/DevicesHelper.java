@@ -514,7 +514,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	private void checkReconnectDeviceResult(@NonNull String deviceId) {
 		Activity activity = this.activity;
 		if (reconnectingDevices.remove(deviceId) != null && activity != null) {
-			reconnectingDevices.remove(deviceId);
 			AbstractDevice<?> device = getAnyDevice(deviceId);
 			if (device != null) {
 				app.showShortToastMessage(R.string.failed_to_connect, device.getName());
