@@ -2273,8 +2273,8 @@
     <string name="this_year">Idén</string>
     <string name="show_direction">Távolság jelzése</string>
     <string name="sort_by">Rendezés eszerint:</string>
-    <string name="do_not_use_animations">Ne használjon animációkat</string>
-    <string name="do_not_use_animations_descr">Térképanimációk kikapcsolása.</string>
+    <string name="do_not_use_animations">Animációk eltávolítása</string>
+    <string name="do_not_use_animations_descr">Térkép- és alkalmazásanimációk kikapcsolása.</string>
     <string name="keep_showing_on_map">Továbbra is mutassa a térképen</string>
     <string name="exit_without_saving">Kilépés mentés nélkül?</string>
     <string name="line">Vonal</string>
@@ -5731,4 +5731,8 @@
     <string name="show_rasterization_debug_tile">Csempe raszterezési információk mutatása</string>
     <string name="show_symbols_bboxes">Szimbólum határolókeretek mutatása</string>
     <string name="release_5_2">• Folyamatban lévő munka...</string>
+    <string name="shared_string_threads">Szálak</string>
+    <string name="threads_allocated_for_rendering">Rendereléshez lefoglalt szálak</string>
+    <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép renderelését.</string>
+    <string name="turn_by_turn_directions">Részletes navigáció</string>
 </resources>
