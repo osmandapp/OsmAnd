@@ -13,7 +13,6 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.squareup.picasso.Picasso;
 
 import net.osmand.StateChangedListener;
-import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.auto.NavigationSession;
@@ -138,7 +137,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
 
 		msaaListener = change -> {
-			recreateNormalRenderer();
+			recreateRenderer();
 			recreateAndroidAutoRenderer();
 		};
 		ENABLE_MSAA.addListener(msaaListener);
@@ -425,7 +424,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		return new AvgStatsEntry(avgStats, periodMinutes);
 	}
 
-	private void recreateNormalRenderer() {
+	private void recreateRenderer() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		MapRendererView currentMapRenderer = mapView.getMapRenderer();
 		if (currentMapRenderer != null) {
