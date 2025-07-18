@@ -21,16 +21,23 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -49,14 +56,17 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 
 	private final Paint minMaxSpeedPaint = new Paint();
 	private ColorStateList defaultTextColor;
+	private final SplitAdapterListener listener;
 
 	SplitSegmentsAdapter(@NonNull FragmentActivity activity,
 	                     @NonNull List<GpxDisplayItem> items,
-	                     @NonNull GpxDisplayItem displayItem) {
+	                     @NonNull GpxDisplayItem displayItem,
+	                     @NonNull SplitAdapterListener listener) {
 		super(activity, 0, items);
 		this.activity = activity;
 		this.app = (OsmandApplication) activity.getApplicationContext();
 		this.displayItem = displayItem;
+		this.listener = listener;
 
 		minMaxSpeedPaint.setTextSize(app.getResources().getDimension(R.dimen.default_split_segments_data));
 		minMaxSpeedPaint.setTypeface(FontCache.getMediumFont());
@@ -77,6 +87,7 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 		convertView.setOnClickListener(null);
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
+		View headerButton = convertView.findViewById(R.id.header_button);
 		TextView overviewTextView = convertView.findViewById(R.id.overview_text);
 		ImageView overviewImageView = convertView.findViewById(R.id.overview_image);
 		if (position == 0) {
@@ -104,6 +115,26 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 				if (trackGroup != null && (trackGroup.isSplitDistance() || slopeType != null)) {
 					if (slopeType != null) {
 						overviewImageView.setImageDrawable(getSlopeDrawable(slopeType, nightMode));
+
+						int color = app.getSettings().getApplicationMode().getProfileColor(nightMode);
+						Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
+						AndroidUtils.setBackground(headerButton, background);
+
+						headerButton.setOnClickListener(v -> {
+							SelectedGpxFile selectedGpxFile;
+							selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(currentGpxDisplayItem.group.getGpxFile().getPath());
+
+							if (selectedGpxFile != null) {
+								listener.onDismiss();
+								MapLayers mapLayers = app.getOsmandMap().getMapLayers();
+								WptPt wptPt = currentGpxDisplayItem.locationEnd;
+
+								SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wptPt);
+								LatLon latLon = new LatLon(wptPt.getLatitude(), wptPt.getLongitude());
+								PointDescription pointDescription = mapLayers.getGpxLayer().getObjectName(gpxPoint);
+								mapLayers.getContextMenuLayer().showContextMenu(latLon, pointDescription, gpxPoint, null);
+							}
+						});
 					} else {
 						overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, activeColorId));
 					}
@@ -363,5 +394,9 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 	@NonNull
 	private String getString(@StringRes int resId, Object... formatArgs) {
 		return app.getString(resId, formatArgs);
+	}
+
+	interface SplitAdapterListener{
+		void onDismiss();
 	}
 }
