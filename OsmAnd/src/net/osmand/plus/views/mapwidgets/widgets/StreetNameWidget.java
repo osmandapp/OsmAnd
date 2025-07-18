@@ -56,6 +56,7 @@ import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
+import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -90,8 +91,8 @@ public class StreetNameWidget extends MapWidget {
 		return R.layout.street_name_widget;
 	}
 
-	public StreetNameWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
-			@Nullable WidgetsPanel panel) {
+	public StreetNameWidget(@NonNull MapActivity mapActivity,
+	                        @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, STREET_NAME, customId, panel);
 
 		waypointHelper = app.getWaypointHelper();
@@ -106,7 +107,15 @@ public class StreetNameWidget extends MapWidget {
 
 		turnDrawable = new TurnDrawable(mapActivity, true);
 
+		setupLongClickListener();
 		updateVisibility(false);
+	}
+
+	private void setupLongClickListener() {
+		view.setOnLongClickListener(v -> {
+			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode);
+			return true;
+		});
 	}
 
 	@Override

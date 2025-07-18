@@ -62,7 +62,6 @@ public class CurrentStreetName {
 		}
 		if (!showNextTurn) {
 			turnType = null;
-			shields.clear();
 		}
 		if (turnType == null) {
 			showMarker = true;

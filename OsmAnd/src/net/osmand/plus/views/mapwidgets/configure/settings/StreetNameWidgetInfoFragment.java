@@ -43,23 +43,32 @@ public class StreetNameWidgetInfoFragment extends WidgetInfoBaseFragment {
 	}
 
 	private void setupShowNextTurnInfoPref(@NonNull View view) {
-		ImageView icon = view.findViewById(R.id.icon);
-		int iconColor = ColorUtilities.getActiveColor(app, nightMode);
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_next_turn, iconColor));
-		icon.setVisibility(View.VISIBLE);
-
 		TextView title = view.findViewById(R.id.title);
 		TextView description = view.findViewById(R.id.description);
 
 		title.setText(R.string.next_turn_information);
 		description.setText(R.string.next_turn_information_desc);
+		updateShowNextTurnInfoPrefIcon(view);
 
 		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(showNextTurnInfo);
-		compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> showNextTurnInfo = isChecked);
+		compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			showNextTurnInfo = isChecked;
+			updateShowNextTurnInfoPrefIcon(view);
+		});
 
 		view.setOnClickListener(v -> compoundButton.setChecked(!compoundButton.isChecked()));
 		view.setBackground(getPressedStateDrawable());
+
+	}
+
+	private void updateShowNextTurnInfoPrefIcon(@NonNull View view) {
+		ImageView icon = view.findViewById(R.id.icon);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		int iconColor = showNextTurnInfo ? activeColor : defaultColor;
+		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_next_turn, iconColor));
+		icon.setVisibility(View.VISIBLE);
 	}
 
 	@Override
