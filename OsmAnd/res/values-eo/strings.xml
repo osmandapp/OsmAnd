@@ -2348,8 +2348,8 @@
     <string name="move_point">Movi punkton</string>
     <string name="keep_showing_on_map">Daŭre montri sur mapo</string>
     <string name="exit_without_saving">Ĉu eliri sen konservi?</string>
-    <string name="do_not_use_animations">Sen movbildoj</string>
-    <string name="do_not_use_animations_descr">Malaktivigi animaciojn en la aplikaĵo.</string>
+    <string name="do_not_use_animations">Forigi movbildojn</string>
+    <string name="do_not_use_animations_descr">Malaktivigi movbildojn de mapo kaj aplikaĵa fasado.</string>
     <string name="move_all_to_history">Movi ĉiujn al historio</string>
     <string name="show_direction">Distanc-vidigo</string>
     <string name="sort_by">Ordigi laŭ</string>
@@ -3815,7 +3815,7 @@
     <string name="update_all_maps_added">Ĉu ĝisdatigi ĉiujn mapojn aldonitajn al %1$s\?</string>
     <string name="announce_when_exceeded">Sciigi kiam superita</string>
     <string name="exit_number">Numero de elirejo</string>
-    <string name="user_points">Poentoj de uzanto</string>
+    <string name="user_points">Objektoj de uzanto</string>
     <string name="output">Eligo</string>
     <string name="shared_string_feet">futoj</string>
     <string name="srtm_unit_format">Unuo por nivelkurboj</string>
@@ -3828,7 +3828,7 @@
     <string name="tts_description">Uzante parolsintezitajn voĉojn la aplikaĵo povas elparoli ĉiujn specojn de instrukcioj: gvidiloj pri kurbiĝoj, nomoj de stratoj kaj interesejoj, ktp.</string>
     <string name="tts_title">Parolsintezita</string>
     <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri kurbiĝoj. Ĝi ne povas elparoli nomojn de stratoj aŭ de interesejoj.</string>
-    <string name="use_system_language">Uzi sisteman lingvon</string>
+    <string name="use_system_language">Uzi lingvon de operaciumo</string>
     <string name="shared_string_itinerary">Kurso</string>
     <string name="route_line_use_map_style_width">Uzi implicitan larĝon de la map‑stilo %1$s.</string>
     <string name="route_line_use_map_style_color">Uzi implicitan koloron de la map‑stilo %1$s.</string>
@@ -5780,4 +5780,5 @@
     <string name="shared_string_threads">Fadenoj</string>
     <string name="threads_allocated_for_rendering">Fadenoj asignitaj por bildigado</string>
     <string name="threads_allocated_for_rendering_desc">Malpliigo de asignitaj fadenoj povas iuokaze plirapidigi map-bildigadon.</string>
+    <string name="turn_by_turn_directions">Gvidiloj pri kurso</string>
 </resources>
