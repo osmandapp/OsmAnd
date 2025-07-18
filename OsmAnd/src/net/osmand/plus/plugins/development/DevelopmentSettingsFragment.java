@@ -21,6 +21,7 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisLoadTask;
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -201,6 +202,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx symRasterTilePref = findPreference(plugin.SHOW_TILES_RASTERIZATION_DEBUG_INFO.getId());
 		symRasterTilePref.setIconSpaceReserved(false);
 		symRasterTilePref.setDescription(R.string.show_debug_tile_description);
+
+		SwitchPreferenceEx msaaPref = findPreference(plugin.ENABLE_MSAA.getId());
+		msaaPref.setIconSpaceReserved(false);
+		msaaPref.setVisible(MapRendererView.isMSAASupported());
 
 		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_SYMBOLS_DEBUG_INFO.getId());
 		syminfoPref.setIconSpaceReserved(false);

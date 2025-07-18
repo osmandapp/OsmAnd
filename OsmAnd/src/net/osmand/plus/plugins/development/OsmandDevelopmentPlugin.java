@@ -13,7 +13,11 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.squareup.picasso.Picasso;
 
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.MapRendererContext;
+import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
@@ -80,8 +84,10 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SHOW_TILES_RASTERIZATION_DEBUG_INFO;
 	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
+	public final OsmandPreference<Boolean> ENABLE_MSAA;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
+	private final StateChangedListener<Boolean> msaaListener;
 	private final StateChangedListener<Boolean> batterySavingModeListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
@@ -110,6 +116,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SHOW_TILES_RASTERIZATION_DEBUG_INFO = registerBooleanPreference("show_tiles_rasterization_debug_info", false).makeGlobal().makeShared().cache();
 		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
+		ENABLE_MSAA = registerBooleanPreference("enable_msaa", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -129,6 +136,12 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SHOW_TILES_RASTERIZATION_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
+
+		msaaListener = change -> {
+			recreateNormalRenderer();
+			recreateAndroidAutoRenderer();
+		};
+		ENABLE_MSAA.addListener(msaaListener);
 
 		batterySavingModeListener = change -> {
 			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
@@ -410,5 +423,35 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	protected AvgStatsEntry getAvgStats(int periodMinutes) {
 		return new AvgStatsEntry(avgStats, periodMinutes);
+	}
+
+	private void recreateNormalRenderer() {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		MapRendererView currentMapRenderer = mapView.getMapRenderer();
+		if (currentMapRenderer != null) {
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				MapRendererView oldMapRendererView = mapRendererContext.getMapRendererView();
+				mapView.setMapRenderer(null, true);
+				mapRendererContext.setMapRendererView(null);
+				mapRendererContext.presetMapRendererOptions(currentMapRenderer, ENABLE_MSAA.get());
+				currentMapRenderer.setupRenderer(app, 0, 0, oldMapRendererView);
+				mapRendererContext.setMapRendererView(currentMapRenderer);
+				mapView.setMapRenderer(currentMapRenderer, false);
+			}
+		}
+	}
+
+	private void recreateAndroidAutoRenderer() {
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession != null && carNavigationSession.hasStarted()) {
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				mapRendererContext.setMapRendererView(null);
+			}
+			
+			NativeCoreContext.setMapRendererContext(app, 1.0f);
+			app.getOsmandMap().setupRenderingView();
+		}
 	}
 }
