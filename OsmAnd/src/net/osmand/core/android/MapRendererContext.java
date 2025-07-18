@@ -420,9 +420,11 @@ public class MapRendererContext {
 		if (obfsCollection == null) {
 			return false;
 		}
-
+		int renderingThreadsLimit = app.getSettings().MAX_RENDERING_THREADS.get();
 		mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
-		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection);
+		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection,
+				ObfMapObjectsProvider.Mode.BinaryMapObjectsAndRoads,
+				renderingThreadsLimit > 3 || renderingThreadsLimit == 0 ? 2 : 1);
 		mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider,
 				mapPrimitiviser, getRasterTileSize(), providerType.surfaceMode);
 		return true;

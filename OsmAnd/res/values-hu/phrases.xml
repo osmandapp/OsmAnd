@@ -1606,7 +1606,7 @@
     <string name="poi_surface_asphalt">Felület: aszfalt</string>
     <string name="poi_surface_concrete">Felület: beton</string>
     <string name="poi_surface_sett">Felület: macskakő</string>
-    <string name="poi_surface_cobblestone">Felület: nagy kavics (görgeteg)</string>
+    <string name="poi_surface_cobblestone">Felület: durva kőburkolat</string>
     <string name="poi_surface_paving_stones">Felület: térkő</string>
     <string name="poi_surface_pebblestone">Felület: kavics</string>
     <string name="poi_surface_stone">Felület: kő</string>

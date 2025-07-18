@@ -115,6 +115,9 @@ public class SensorTextWidget extends SimpleWidget {
 			updateInfo(null);
 			setImageDrawable(getIconId());
 			updateWidgetName();
+			if (this.sensor != null && this.sensor.device.isDisconnected()) {
+				plugin.connectDevice(mapActivity, this.sensor.device);
+			}
 		};
 	}
 

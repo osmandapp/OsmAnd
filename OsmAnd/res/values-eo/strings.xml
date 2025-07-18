@@ -5777,4 +5777,7 @@
     <string name="deleting_history">Forigado de historio…</string>
     <string name="show_rasterization_debug_tile">Montri informojn pro bildigado de kaheloj</string>
     <string name="show_symbols_bboxes">Montri limigajn kestojn de simboloj</string>
+    <string name="shared_string_threads">Fadenoj</string>
+    <string name="threads_allocated_for_rendering">Fadenoj asignitaj por bildigado</string>
+    <string name="threads_allocated_for_rendering_desc">Malpliigo de asignitaj fadenoj povas iuokaze plirapidigi map-bildigadon.</string>
 </resources>

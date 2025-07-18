@@ -15,7 +15,8 @@
     </string>
 
     <string name="deleting_history">Deleting history…</string>
-	<string name="deleting">Deleting…</string>
+    <string name="failed_to_connect">Failed to connect to %1s</string>
+   <string name="deleting">Deleting…</string>
     <string name="release_5_1">
         • Added support for web and cross-platform purchases\n\n
         • Moved Temperature units to General settings for easier access\n\n

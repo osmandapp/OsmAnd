@@ -2287,8 +2287,8 @@
     <string name="move_all_to_history">Přesunout vše do historie</string>
     <string name="show_direction">Indikace vzdálenosti</string>
     <string name="sort_by">Seřadit podle</string>
-    <string name="do_not_use_animations">Bez animací</string>
-    <string name="do_not_use_animations_descr">Vypne animace mapy.</string>
+    <string name="do_not_use_animations">Odstranit animace</string>
+    <string name="do_not_use_animations_descr">Vypne animace mapy a uživatelského rozhraní.</string>
     <string name="keep_showing_on_map">Stále zobrazovat na mapě</string>
     <string name="exit_without_saving">Ukončit bez uložení?</string>
     <string name="all_markers_moved_to_history">Všechny mapové značky přesunuty do historie</string>
@@ -5784,4 +5784,8 @@
     <string name="show_rasterization_debug_tile">Zobrazit informace o rasterizaci dlaždic</string>
     <string name="show_symbols_bboxes">Zobrazit bboxy znaků</string>
     <string name="release_5_2">• V přípravě…</string>
+    <string name="shared_string_threads">Vlákna</string>
+    <string name="threads_allocated_for_rendering">Vlákna alokovaná pro vykreslování</string>
+    <string name="threads_allocated_for_rendering_desc">Menší počet alokovaných vláken může v některých případech zrychlit vykreslování mapy.</string>
+    <string name="turn_by_turn_directions">Podrobné navigační pokyny</string>
 </resources>

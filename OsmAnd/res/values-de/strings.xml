@@ -2364,8 +2364,8 @@
     <string name="import_track">GPX-Datei importieren</string>
     <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte. Soll sie als Track importiert werden\?</string>
     <string name="move_point">Punkt verschieben</string>
-    <string name="do_not_use_animations">Keine Animationen</string>
-    <string name="do_not_use_animations_descr">Schaltet Kartenanimationen aus.</string>
+    <string name="do_not_use_animations">Animationen entfernen</string>
+    <string name="do_not_use_animations_descr">Schaltet Karten- und Benutzeroberflächenanimationen aus.</string>
     <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
     <string name="exit_without_saving">Beenden, ohne zu speichern\?</string>
     <string name="move_all_to_history">Alles in den Verlauf verschieben</string>
@@ -5811,4 +5811,8 @@
     <string name="shared_string_switch">Umschalten</string>
     <string name="show_rasterization_debug_tile">Informationen zur Kachelrasterung anzeigen</string>
     <string name="release_5_2">In Bearbeitung …</string>
+    <string name="shared_string_threads">Threads</string>
+    <string name="threads_allocated_for_rendering">Für das Rendern zugewiesene Threads</string>
+    <string name="threads_allocated_for_rendering_desc">Eine niedrigere Threadzuweisung kann die Kartendarstellung in einigen Fällen beschleunigen.</string>
+    <string name="turn_by_turn_directions">Schritt-für-Schritt-Navigationsanweisungen</string>
 </resources>

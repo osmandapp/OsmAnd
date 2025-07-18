@@ -4955,4 +4955,10 @@
     <string name="poi_interior_design">Inredningsarkitektur</string>
     <string name="poi_chamber">Kammare</string>
     <string name="poi_tutoring">Läxhjälp</string>
+    <string name="poi_us_maps_recreation_area_facility_lighthouse">Fyr</string>
+    <string name="poi_us_maps_recreation_area_facility_rapid">Fors</string>
+    <string name="poi_us_maps_recreation_area_facility_warming_hut">Värmestuga</string>
+    <string name="poi_nfs_yes">Förvaltas av United States Forest Service</string>
+    <string name="poi_blm_yes">Förvaltas av Bureau Of Land Management</string>
+    <string name="poi_engineer">Ingenjörskontor</string>
 </resources>
