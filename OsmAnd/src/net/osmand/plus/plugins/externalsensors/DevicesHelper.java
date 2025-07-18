@@ -64,14 +64,13 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 
@@ -103,12 +102,23 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	private BluetoothLeScanner bleScanner;
 	private final ExternalSensorsPlugin externalSensorsPlugin;
 	private ScheduledExecutorService reconnectToDeviceScheduler;
-	private final Set<String> reconnectingDevices = ConcurrentHashMap.newKeySet();
+	private final Map<String, ScheduledFuture<?>> reconnectingDevices = new ConcurrentHashMap<>();
 
 	DevicesHelper(@NonNull OsmandApplication app, @NonNull ExternalSensorsPlugin plugin) {
 		this.app = app;
 		this.devicesSettingsCollection = new DevicesSettingsCollection(plugin);
 		externalSensorsPlugin = plugin;
+	}
+
+	public void onPluginInit() {
+		shutdownScheduler();
+		reconnectToDeviceScheduler = Executors.newSingleThreadScheduledExecutor();
+	}
+
+	public void onPluginDisabled() {
+		disconnectDevices();
+		deinitBLE();
+		shutdownScheduler();
 	}
 
 	void setActivity(@Nullable Activity activity) {
@@ -122,11 +132,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			initBLE();
 			initDevices();
 			devicesSettingsCollection.addListener(this);
-			if (reconnectToDeviceScheduler == null) {
-				reconnectToDeviceScheduler = Executors.newSingleThreadScheduledExecutor();
-			}
-		} else {
-			shutdownScheduler();
 		}
 	}
 
@@ -444,7 +449,11 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 		switch (result) {
 			case SUCCESS:
-				reconnectingDevices.remove(device.getDeviceId());
+				ScheduledFuture<?> reconnectingFuture = reconnectingDevices.get(device.getDeviceId());
+				if (reconnectingFuture != null) {
+					reconnectingDevices.remove(device.getDeviceId());
+					reconnectingFuture.cancel(true);
+				}
 				LOG.debug(device + " sensor connected");
 				if (antScanning && isAntDevice(device)) {
 					devices.put(device.getDeviceId(), device);
@@ -483,27 +492,29 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public void onDeviceDisconnect(@NonNull AbstractDevice<?> device) {
 		LOG.debug(device + " disconnected");
 		app.showShortToastMessage(R.string.device_disconnected, getFormattedDevicePropertyValue(device, NAME));
-		if (!device.isDisconnected() && !reconnectingDevices.contains(device.getDeviceId())) {
+		if (!device.isDisconnected() && !reconnectingDevices.containsKey(device.getDeviceId())) {
 			tryToReconnectToDevice(device);
 		}
 	}
 
 	private void tryToReconnectToDevice(@NonNull AbstractDevice<?> device) {
 		ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
-		if (!device.isDisconnected() && !reconnectingDevices.contains(device.getDeviceId()) && scheduler != null) {
-			reconnectingDevices.add(device.getDeviceId());
-			scheduler.schedule(() -> {
+		if (!device.isDisconnected() && !reconnectingDevices.containsKey(device.getDeviceId()) && scheduler != null) {
+			ScheduledFuture<?> future = scheduler.schedule(() -> {
 				device.connect(app, activity);
-				scheduler.schedule(() -> {
+				ScheduledFuture<?> checkFuture = scheduler.schedule(() -> {
 					checkReconnectDeviceResult(device.getDeviceId());
 				}, RECONNECT_DEVICE_TIMEOUT, TimeUnit.SECONDS);
+				reconnectingDevices.put(device.getDeviceId(), checkFuture);
 			}, RECONNECT_DEVICE_DELAY, TimeUnit.SECONDS);
+			reconnectingDevices.put(device.getDeviceId(), future);
 		}
 	}
 
 	private void checkReconnectDeviceResult(@NonNull String deviceId) {
 		Activity activity = this.activity;
-		if (reconnectingDevices.contains(deviceId) && activity != null) {
+		if (reconnectingDevices.containsKey(deviceId) && activity != null) {
+			reconnectingDevices.remove(deviceId);
 			AbstractDevice<?> device = getAnyDevice(deviceId);
 			if (device != null) {
 				app.showShortToastMessage(R.string.failed_to_connect, device.getName());
