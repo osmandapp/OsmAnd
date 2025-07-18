@@ -372,6 +372,8 @@ public enum WidgetType {
 			return new LanesWidgetInfoFragment();
 		} else if (this == ROUTE_INFO) {
 			return new RouteInfoWidgetInfoFragment();
+		} else if (this == STREET_NAME) {
+			return new StreetNameWidgetInfoFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {

@@ -3,9 +3,20 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="horizontal"
 	android:paddingHorizontal="@dimen/content_padding"
 	android:paddingVertical="@dimen/content_padding_small">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		android:layout_marginEnd="@dimen/content_padding_double"
+		android:visibility="gone"
+		app:srcCompat="@drawable/ic_action_next_turn"
+		tools:visibility="visible" />
 
 	<LinearLayout
 		android:layout_width="0dp"
