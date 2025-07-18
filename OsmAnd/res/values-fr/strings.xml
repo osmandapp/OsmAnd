@@ -2270,7 +2270,7 @@
     <string name="keep_showing_on_map">Toujours afficher sur la carte</string>
     <string name="exit_without_saving">Quitter sans enregistrer ?</string>
     <string name="do_not_use_animations">Aucune animation</string>
-    <string name="do_not_use_animations_descr">Désactive les animations de la carte.</string>
+    <string name="do_not_use_animations_descr">Désactive les animations sur la carte.</string>
     <string name="osmand_extended_description_part6">Marche, randonnée, visite guidée \n• Carte des sentiers pédestres et de randonnée \n• Articles Wikipédia dans la langue de votre choix pour découvrir les lieux visités \n• Arrêts de transports publics (bus, tram, train), incluant les noms de lignes, pour vous aider dans vos déplacements en ville \n• Guidage de navigation piéton en suivant les itinéraires piétons \n• Vous pouvez téléverser et suivre une trace GPX existante ; enregistrer et partager un nouvel itinéraire GPX</string>
     <string name="move_all_to_history">Déplacer tout dans l\'historique</string>
     <string name="show_direction">Indication de distance</string>
@@ -5678,4 +5678,8 @@
     <string name="show_rasterization_debug_tile">Afficher les informations de rasterisation des tuiles</string>
     <string name="show_symbols_bboxes">Afficher les boîtes englobantes des symboles</string>
     <string name="release_5_2">• En cours ...</string>
+    <string name="shared_string_threads">Threads</string>
+    <string name="threads_allocated_for_rendering">Threads alloués au rendu</string>
+    <string name="threads_allocated_for_rendering_desc">L\'allocation d\'un faible nombre de threads peut, dans certains cas, accélérer le rendu de la carte.</string>
+    <string name="turn_by_turn_directions">Indications de guidage pas à pas</string>
 </resources>

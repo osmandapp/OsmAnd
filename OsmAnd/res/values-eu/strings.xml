@@ -5917,4 +5917,7 @@
     <string name="poi_source">Interesgunearen jatorria</string>
     <string name="intermediate_first">Tarteko lehenengoa</string>
     <string name="destination_first">Lehenengo helmuga</string>
+    <string name="release_5_2">• Lana martxan...</string>
+    <string name="release_5_1">• Web erosketarako laguntza gehitu da\n\n • Sarbide errazagoa lortzeko tenperatura unitateak ezarpen orokorretara mugitu dira\n\n • Sentsoreen araberako bateriaren maila adierazlea gehitu da\n\n • Nabigazioan Puntuen Aukeraketarako interfaze berria eta intuitiboagoa\n\n • Trepeten ikusgarritasuna hobetzea eskema berri batekin\n\n • Gehitu da malda gorabeheren analizatzailea\n\n • Interesguneen gehiagorako Wikipedia eta Wikivoyageren integrazioa.</string>
+    <string name="shared_string_threads">Hariak</string>
 </resources>
