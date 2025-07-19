@@ -15,7 +15,7 @@ public class SubscriptionButton extends PriceButton<InAppSubscription> {
 	@Override
 	public void onApply(@NonNull FragmentActivity activity, @NonNull InAppPurchaseHelper purchaseHelper) {
 		if (purchaseItem.isPurchased()) {
-			purchaseHelper.manageSubscription(activity, purchaseItem.getSku());
+			purchaseHelper.manageSubscription(activity, purchaseItem.getSku(), null);
 		} else {
 			InAppPurchaseHelper.subscribe(activity, purchaseHelper, purchaseItem.getSku());
 		}

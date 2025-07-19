@@ -422,7 +422,7 @@ public abstract class InAppPurchaseHelper {
 
 	public abstract void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException;
 
-	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku);
+	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable Boolean isFastspringOrigin);
 
 	protected boolean isUserInfoSupported() {
 		return true;

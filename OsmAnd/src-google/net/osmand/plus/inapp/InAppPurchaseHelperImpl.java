@@ -310,11 +310,17 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
-	public void manageSubscription(@NonNull Context ctx, @Nullable String sku) {
-		String url = "https://play.google.com/store/account/subscriptions?package=" + ctx.getPackageName();
-		if (!Algorithms.isEmpty(sku)) {
-			url += "&sku=" + sku;
+	public void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable Boolean isFastspringOrigin) {
+		String url;
+		if (isFastspringOrigin != null && isFastspringOrigin) {
+			url = "https://osmand.onfastspring.com/account";
+		} else {
+			url = "https://play.google.com/store/account/subscriptions?package=" + ctx.getPackageName();
+			if (!Algorithms.isEmpty(sku)) {
+				url += "&sku=" + sku;
+			}
 		}
+
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		AndroidUtils.startActivityIfSafe(ctx, intent);
 	}

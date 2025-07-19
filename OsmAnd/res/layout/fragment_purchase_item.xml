@@ -50,6 +50,10 @@
 				layout="@layout/simple_divider_item" />
 
 			<include
+				android:id="@+id/description_block"
+				layout="@layout/purchase_subscription_item" />
+
+			<include
 				android:id="@+id/manage_subscription"
 				layout="@layout/preference_button" />
 
