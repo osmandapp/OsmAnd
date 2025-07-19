@@ -3199,7 +3199,7 @@
     <string name="routing_engine_vehicle_type_cycling_mountain">Bergscykling</string>
     <string name="routing_engine_vehicle_type_cycling_road">Vägcyckling</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Vanlig cyckling</string>
-    <string name="routing_engine_vehicle_type_hgv">Lastbil</string>
+    <string name="routing_engine_vehicle_type_hgv">Tung lastbil</string>
     <string name="routing_engine_vehicle_type_small_truck">Liten lastbil</string>
     <string name="routing_engine_vehicle_type_truck">Lastbil</string>
     <string name="routing_engine_vehicle_type_scooter">Skoter</string>
