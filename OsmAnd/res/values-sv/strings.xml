@@ -5669,7 +5669,7 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Visa leder för off-road motorcykel (cross, enduro)</string>
     <string name="type_of_activity">Aktivitetstyp</string>
     <string name="change_activity">Byt aktivitet</string>
-    <string name="obd_searching_text_description">Vänliga ha din enhet nära skannern. Försäkra dig om att fordonets motor är igång.</string>
+    <string name="obd_searching_text_description">Håll din enhet nära skannern. Försäkra dig om att fordonets motor är igång.</string>
     <string name="liter">l</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Visar fordents bränsleförbrukningstakt baserat på beräkningar (l/100 km)</string>
     <string name="obd_fuel_left_km">Återstående bränsle (km)</string>
@@ -5736,7 +5736,7 @@
     <string name="obd_not_connected_to_device">Bortkopplad från %s</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Bränsleförbrukningstakt</string>
     <string name="obd_nothing_found_text">Inga skannrar hittade</string>
-    <string name="obd_device_forget_sensor_description">Skannern kommer att tas bort från listan. Du kommer när som helst att kunna parkoppla denna skanner på nytt.</string>
+    <string name="obd_device_forget_sensor_description">Skannern kommer att tas bort från listan. Du kan när som helst parkoppla denna skanner på nytt.</string>
     <string name="connect_obd_instructions_step1">Anslut skannern till ditt fordons OBD-II-port.</string>
     <string name="connect_obd_instructions_step2">Starta ditt fordons motor</string>
     <string name="key_event_action_continuous_zoom_in">Kontinuerlig inzoomning</string>
@@ -5885,7 +5885,7 @@
     <string name="default_buttons_opacity_original_description">Varje knapp behåller sin egen bakgrundsgenomskinlighet.</string>
     <string name="selected_delayed_profile">Vald profil \"%s\"</string>
     <string name="location_interpolation_percent">Platsinterpolation i procent</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spåra viktiga fordonsdata, genom användning av OBD-II-protokollet. Övervaka nyckeltal som hastighet, motorvarvtal, bränsleförbrukning, med mera.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Håll koll på viktiga fordonsdata genom användning av OBD-II-protokollet. Övervaka nyckeltal som hastighet, motorvarvtal, bränsleförbrukning, med mera.</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
     <string name="obd_throttle_position">Gaspedalens läge</string>
     <string name="obd_calculated_engine_load_desc">Visar hur många procent av motorns tillgängliga effekt som används vid en given tidpunkt.</string>
@@ -5979,7 +5979,7 @@
     <string name="obd_ambient_air_temp">Omgivningstemperatur</string>
     <string name="obd_engine_coolant_temp">Kylvätsketemperatur</string>
     <string name="obd_fuel_consumption_rate_desc">Visar fordons bränsleförbrukningshastighet baserat på OBD en plats</string>
-    <string name="obd_plugin_description">Övervaka viktiga fordonsmätningar med OBD-II-protokollet. Access-data inklusive:\nMotorhastighet, motor Runtime, beräknad motor last\n• Bränsleförbrukning, bränsletryck, återstående bränsle\n• Intagstemperatur, omgivningstemperatur,kyltemperatur, motoroljetemperatur\n• Fordonshastighet, gasposition, batterispänning\n</string>
+    <string name="obd_plugin_description">Övervaka viktiga fordonsdata med OBD-II-protokollet. Få tillgång till information som:\n• Motorhastighet, motorns körtid, beräknad motorbelastning\n• Bränsleförbrukning, bränsletryck, återstående bränsle\n• Intagstemperatur, omgivningstemperatur, kylartemperatur, motoroljetemperatur\n• Fordonshastighet, gasposition, batterispänning\n</string>
     <string name="obd_support">OBD stöd</string>
     <string name="app_mode_suv">suv</string>
     <string name="weather_source_GFS_description">Globala prognossystemet från National Centers for Environmental Prediction</string>
@@ -6033,4 +6033,5 @@
     <string name="threads_allocated_for_rendering">Trådar allokerade för rendering</string>
     <string name="threads_allocated_for_rendering_desc">Lägre tråd-allokering kan i vissa fall snabba upp kartrenderingen.</string>
     <string name="turn_by_turn_directions">Sväng för sväng vägbeskrivning</string>
+    <string name="failed_to_connect">Kunde inte ansluta till %1s</string>
 </resources>

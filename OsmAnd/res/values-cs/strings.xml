@@ -2240,7 +2240,7 @@
     <string name="mapillary_menu_filter_description">Filtrovat snímky podle odesílatele, data nebo typu. Aktivní pouze při vysokém přiblížení.</string>
     <string name="store_tracks_in_monthly_directories">Ukládat zaznamenané trasy v adresářích po měsících</string>
     <string name="store_tracks_in_monthly_directories_descrp">Ukládat zaznamenané trasy v podadresářích podle měsíce záznamu (např. 2018-01).</string>
-    <string name="average">Průměr</string>
+    <string name="average">Průměrný</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Stoupání/Klesání</string>
     <string name="moving_time">Doba v pohybu</string>
@@ -5479,7 +5479,7 @@
     <string name="obd_fuel_left_distance_desc">Ukazuje vzdálenost, kterou může vozidlo ujet na zbývající hladinu paliva přes snímač OBD</string>
     <string name="obd_fuel_type_desc">Zobrazuje typ paliva vozidla přes snímač OBD</string>
     <string name="obd_engine_coolant_temp">Teplota chladicí kapaliny</string>
-    <string name="obd_fuel_level">Spotřeba paliva (%)</string>
+    <string name="obd_fuel_level">Úspornost paliva (%)</string>
     <string name="obd_plugin_name">Metriky vozidla</string>
     <string name="obd_plugin_description">Monitorujte klíčové metriky vozidla pomocí protokolu OBD-II. Přístup k datům zahrnuje:\n • Otáčky motoru, doba běhu motoru, vypočtené zatížení motoru\n • Spotřeba paliva, tlak paliva, zbývající palivo\n • Teplota sání, teplota okolí, teplota chladicí kapaliny, teplota motorového oleje\n • Rychlost vozidla, poloha škrticí klapky, napětí baterie\n</string>
     <string name="obd_support">Podpora OBD</string>
@@ -5516,7 +5516,7 @@
     <string name="obd_fuel_type_bifuel_lpg">Hybridní pohon na LPG</string>
     <string name="obd_fuel_type_bifuel_cng">Hybridní pohon na CNG</string>
     <string name="obd_fuel_type_hybrid_electric">Hybridní elektrický</string>
-    <string name="obd_fuel_consumption_rate_desc">Zobrazuje míru spotřeby paliva vozidla podle OBD a polohy</string>
+    <string name="obd_fuel_consumption_rate_desc">Zobrazuje míru spotřeby paliva vozidla na základě umístění OBD</string>
     <string name="obd_rpm_desc">Zobrazuje otáčky otáčkoměru vozidla přes snímač OBD</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
@@ -5531,7 +5531,7 @@
     <string name="obd_widget_group">Metriky vozidel</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hybridní na vodík</string>
     <string name="vehicle_metrics_plugin_settings">Nastavení metrik vozidla</string>
-    <string name="rpm_unit">rpm</string>
+    <string name="rpm_unit">ot/min</string>
     <string name="quick_action_showhide_osm_edits_descr">Tlačítko pro zobrazení nebo skrytí místních úprav OSM na mapě.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Stezky pro terénní kola</string>
     <string name="obd_vehicle_info">Informace o vozidle</string>
@@ -5567,9 +5567,9 @@
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Tlak paliva</string>
     <string name="percent_hour">%/h</string>
-    <string name="obd_fuel_consumption_rate_l_h">Spotřeba paliva (L/h)</string>
-    <string name="obd_fuel_consumption_rate_sensor">Spotřeba paliva (senzor)</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (L/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Spotřeba paliva (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Míra spotřeby paliva (snímač)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtu (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Zobrazuje spotřebu paliva vozidla na základě senzoru (L/h)</string>
     <string name="obd_fuel_level_liter">Hladina paliva (l)</string>
     <string name="obd_fuel_level_percent">Hladina paliva (%)</string>
@@ -5600,7 +5600,7 @@
     <string name="obd_engine_oil_temperature">Teplota motorového oleje</string>
     <string name="remaining_fuel">Zbývající palivo</string>
     <string name="obd_fuel_consumption">Spotřeba paliva</string>
-    <string name="reset_average_value">Reset průměrné hodnoty</string>
+    <string name="reset_average_value">Obnovit průměrnou hodnotu</string>
     <string name="average_temperature_slider_description">Zvolte časový interval pro měření průměrné teploty.</string>
     <string name="shared_string_instant">Okamžitý</string>
     <string name="current_temperature">Aktuální teplota</string>
@@ -5609,7 +5609,7 @@
     <string name="imperial_gallons">Imperiální galony</string>
     <string name="us_gallons">Americké galony</string>
     <string name="record_obd_data">Záznam metrik vozidla</string>
-    <string name="shared_string_hour">Hodiny</string>
+    <string name="shared_string_hour">Hodina</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Sledování důležitých údajů o vozidle pomocí protokolu OBD-II. Sledujte klíčové ukazatele, jako je rychlost, otáčky motoru, spotřeba paliva a další.</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Použijte vybrané jednotky v názvu.</string>
     <string name="remaining_fuel_description">Zobrazuje zbývající množství paliva v nádrži vozidla</string>
@@ -5788,4 +5788,5 @@
     <string name="threads_allocated_for_rendering">Vlákna alokovaná pro vykreslování</string>
     <string name="threads_allocated_for_rendering_desc">Menší počet alokovaných vláken může v některých případech zrychlit vykreslování mapy.</string>
     <string name="turn_by_turn_directions">Podrobné navigační pokyny</string>
+    <string name="failed_to_connect">Nepodařilo se připojit k %1s</string>
 </resources>
