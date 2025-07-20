@@ -5770,4 +5770,5 @@
     <string name="shared_string_threads">Teme</string>
     <string name="threads_allocated_for_rendering">Teme dodeljene za rendering</string>
     <string name="turn_by_turn_directions">Navođenje</string>
+    <string name="failed_to_connect">Nije uspelo povezivanje sa %1s</string>
 </resources>
