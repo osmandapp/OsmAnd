@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.NativeCore;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
@@ -82,6 +83,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
+	private final StateChangedListener<Boolean> debugRenderingInfoListener;
 	private final StateChangedListener<Boolean> batterySavingModeListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
@@ -129,6 +131,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SHOW_TILES_RASTERIZATION_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
+
+		debugRenderingInfoListener = NativeCore::enablePerformanceLogs;
+		settings.DEBUG_RENDERING_INFO.addListener(debugRenderingInfoListener);
 
 		batterySavingModeListener = change -> {
 			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
