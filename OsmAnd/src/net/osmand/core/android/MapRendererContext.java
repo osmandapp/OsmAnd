@@ -502,8 +502,9 @@ public class MapRendererContext {
 			updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
 		}
 	}
-	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView) {
+	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView, boolean MSAAEnabled) {
 		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(1);
+		mapRendererView.setMSAAEnabled(MSAAEnabled);
 	}
 
 	private void applyCurrentContextToView() {
