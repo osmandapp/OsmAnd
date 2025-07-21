@@ -1615,7 +1615,7 @@
     <string name="later">Plus tard</string>
     <string name="get_full_version">Version complète</string>
     <string name="regions">Régions</string>
-    <string name="region_maps">Cartes régionales</string>
+    <string name="region_maps">Cartes nationales</string>
     <string name="world_maps">Cartes mondiales</string>
     <string name="downloads">Télécharger</string>
     <string name="favorite_category_name">Nom de la catégorie</string>
@@ -3830,7 +3830,7 @@
     <string name="nautical_depth">Profondeur nautique</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
     <string name="purchases_feature_desc_terrain">Courbes de niveau, ombrage du relief, pentes colorées mettant en valeur sommets et plaines.</string>
-    <string name="purchases_feature_desc_nautical">Accéder aux informations de profondeur marine</string>
+    <string name="purchases_feature_desc_nautical">Accéder aux informations de profondeur des fonds marins</string>
     <string name="shared_string_includes">Inclus</string>
     <string name="complete_purchase">Finaliser l\'achat</string>
     <string name="purchases_feature_desc_monthly_map_updates">Bénéficiez des mises à jour mensuelles pour les cartes hors ligne.</string>
