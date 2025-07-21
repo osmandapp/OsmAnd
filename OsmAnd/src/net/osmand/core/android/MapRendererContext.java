@@ -101,7 +101,6 @@ public class MapRendererContext {
 	private boolean heightmapsActive;
 
 	public boolean showDebugPrimivitisationTiles = false;
-	public boolean showDebugRasterizationTiles = false;
 
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
@@ -457,11 +456,7 @@ public class MapRendererContext {
 	private void updateObfMapRasterLayerProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
 												 @NonNull ProviderType providerType) {
 		// Create new OBF map raster layer provider
-		if (showDebugRasterizationTiles) {
-			obfMapRasterLayerProvider = new MapRasterMetricsLayerProvider(
-				new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground));
-		}
-		else if (showDebugPrimivitisationTiles) {
+		if (showDebugPrimivitisationTiles) {
 			obfMapRasterLayerProvider = new MapPrimitivesMetricsLayerProvider(mapPrimitivesProvider);
 		} else {
 			obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground);
@@ -494,7 +489,7 @@ public class MapRendererContext {
 
 	private void updateOrRemoveObfMapSymbolsProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
 											 @NonNull ProviderType providerType) {
-		if (showDebugPrimivitisationTiles || showDebugRasterizationTiles) {
+		if (showDebugPrimivitisationTiles) {
 			if (obfMapSymbolsProvider != null && mapRendererView != null && this.providerType == providerType) {
 				mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 			}
