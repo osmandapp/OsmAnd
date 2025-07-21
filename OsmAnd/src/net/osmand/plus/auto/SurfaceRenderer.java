@@ -402,7 +402,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							}
 
 							offscreenMapRendererView = new AtlasMapRendererView(carContext);
-							mapRendererContext.presetMapRendererOptions(offscreenMapRendererView);
+
+							boolean enableMSAA = getApp().getSettings().ENABLE_MSAA.get();
+
+							mapRendererContext.presetMapRendererOptions(offscreenMapRendererView, enableMSAA);
 							offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
 							offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 							offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));

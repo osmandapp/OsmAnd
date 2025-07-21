@@ -28,6 +28,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap.RenderingViewSetupListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.plugins.PluginsHelper;
 
 public class MapViewWithLayers extends FrameLayout {
 
@@ -125,7 +126,9 @@ public class MapViewWithLayers extends FrameLayout {
 			} else {
 				atlasMapRendererView.handleOnCreate(null);
 			}
-			mapRendererContext.presetMapRendererOptions(atlasMapRendererView);
+			// Get MSAA setting from development plugin
+			boolean enableMSAA = settings.ENABLE_MSAA.get();
+			mapRendererContext.presetMapRendererOptions(atlasMapRendererView, enableMSAA);
 			atlasMapRendererView.setupRenderer(getContext(), 0, 0, mapRendererView);
 			atlasMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 			atlasMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));

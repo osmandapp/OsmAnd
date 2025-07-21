@@ -5816,4 +5816,5 @@
     <string name="threads_allocated_for_rendering">Tråde allokeret til rendering</string>
     <string name="threads_allocated_for_rendering_desc">Lavere trådallokering kan i nogle tilfælde gøre kortgengivelsen hurtigere.</string>
     <string name="turn_by_turn_directions">Sving-for-sving-vejledning</string>
+    <string name="failed_to_connect">Kunne ikke forbinde til %1s</string>
 </resources>

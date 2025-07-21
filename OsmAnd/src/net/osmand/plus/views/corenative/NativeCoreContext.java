@@ -54,6 +54,8 @@ public class NativeCoreContext {
 					NativeCore.load(assets, "");
 			}
 			if (NativeCore.isLoaded() && (NativeCore.is64Bit() || app.getSettings().USE_OPENGL_RENDER.isSet())) {
+				NativeCore.enablePerformanceLogs(app.getSettings().DEBUG_RENDERING_INFO.get());
+
 				File directory = app.getAppPath("");
 				Logger.get().addLogSink(QIODeviceLogSink.createFileLogSink(new File(directory, LOG_FILE_NAME).getAbsolutePath()));
 

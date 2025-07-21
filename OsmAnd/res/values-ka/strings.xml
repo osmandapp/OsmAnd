@@ -4,7 +4,7 @@
     <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
     <string name="left_side_navigation_descr">მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის.</string>
     <string name="unknown_from_location">საწყისი პოზიცია ნაპოვნი ჯერ არაა.</string>
-    <string name="unknown_location">პოზიცია უცნობია.</string>
+    <string name="unknown_location">პოზიცია ჯერ უცნობია.</string>
     <string name="modify_transparency">გამჭირვალობა (0 - გამჭირვალე, 255 - გაუმჭირვალე)</string>
     <string name="confirm_interrupt_download">გნებავთ ჩამოტვირთვის შეწყვეტა?</string>
     <string name="first_time_msg">პროგრამის მთავარი თვისებების გამოსაყენებლად თქვენ გჭირდებათ მონაცემები რომლებიც გამოიყენება გათიშულ რეჟიმში, რომელიც შეგიძლიათ ჩამოტვირთოთ (მენიუ-&gt;რუკების გადმოწერა). ამის შემდეგ თქვენ შეგეძლებათ ძებნა როგორც მისამართის, ასევე საჯარო ტრანსპორტის მიხედვით.</string>
@@ -355,7 +355,7 @@
     <string name="shared_string_select_all">ყველაფრის არჩევა</string>
     <string name="shared_string_refresh">განახლება</string>
     <string name="fast_route_mode">უსწრაფესი გზა</string>
-    <string name="fast_route_mode_descr">ჩართეთ უსწრაფესი გზის დასათვლელად ან გამორთეთ უმოკლესისათვის.</string>
+    <string name="fast_route_mode_descr">ჩართეთ უსწრაფესი გზის დასათვლელად ან გამორთეთ საწვავის დაზოგვის გზისთვის.</string>
     <string name="tiles_to_download_estimated_size">გადიდებისას {0} გადმოსაწერია {1} ნაწილი ({2} MB)</string>
     <string name="shared_string_download_map">რუკის გადმოწერა</string>
     <string name="select_max_zoom_preload_area">მაქსიმალური გადიდება ჩასატვირთად</string>
@@ -1096,7 +1096,7 @@
     <string name="routing_attr_driving_style_speed_name">უფრო მოკლე გზები</string>
     <string name="routing_attr_driving_style_balance_name">ბალანსი</string>
     <string name="routing_attr_driving_style_safety_name">მირჩევნია შემოვლითი გზები</string>
-    <string name="relief_smoothness_factor_descr">პრიორიტეტის ველების ან ბორცვებისთვის მინიჭება.</string>
+    <string name="relief_smoothness_factor_descr">გირჩევნიათ რელიეფი: ბრტყელი, ან ბორცვებიანი.</string>
     <string name="shared_string_slope">დაქანება</string>
     <string name="add_new_folder">ახალი დასტის დამატება</string>
     <string name="points_delete_multiple_succesful">წერტილები წაშლილია.</string>
@@ -1161,7 +1161,7 @@
     <string name="shared_string_edited">ჩასწორებულია</string>
     <string name="shared_string_added">დამატებულია</string>
     <string name="shared_string_action_name">მოქმედების სახელი</string>
-    <string name="osm_live_plan_pricing">ფასი</string>
+    <string name="osm_live_plan_pricing">გეგმა &amp; ფასი</string>
     <string name="osm_live_payment_monthly_title">თვიურად</string>
     <string name="osm_live_payment_3_months_title">ყოველ 3 თვეში გადახდა</string>
     <string name="osm_live_payment_annual_title">წელიწადში ერთხელ გადახდა</string>
@@ -1486,7 +1486,7 @@
     <string name="rendering_value_low_name">დაბალი</string>
     <string name="rendering_value_medium_w_name">საშუალო</string>
     <string name="rendering_value_high_name">მაღალი</string>
-    <string name="rendering_attr_hideWaterPolygons_description">წყალი</string>
+    <string name="rendering_attr_hideWaterPolygons_description">წყლის დამალვა</string>
     <string name="rendering_value_fine_name">კარგი</string>
     <string name="shared_string_record">ჩაწერა</string>
     <string name="shared_string_recorded">ჩანაწერი</string>
@@ -1576,7 +1576,7 @@
     <string name="app_name_osmand">OsmAnd</string>
     <string name="shared_string_skip">გამოტოვება</string>
     <string name="shared_string_undo">გაუქმება</string>
-    <string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="download_wikipedia_maps">ვიკიპედია</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="rendering_value_disabled_name">გამორთულია</string>
     <string name="shared_string_copy">ასლი</string>
@@ -1629,7 +1629,7 @@
     <string name="rendering_category_details">დეტალები</string>
     <string name="distance">მანძილი</string>
     <string name="duration">ხანგრძლივობა</string>
-    <string name="int_hour">h</string>
+    <string name="int_hour">სთ</string>
     <string name="index_tours">ტური</string>
     <string name="rendering_value_bicycle_name">ველოსიპედი</string>
     <string name="rendering_value_car_name">მანქანა</string>
@@ -1788,8 +1788,8 @@
     <string name="app_mode_public_transport">საზოგადოებრივი ტრანსპორტი</string>
     <string name="waiting_for_route_calculation">გზის დათვლა…</string>
     <string name="on_foot">ფეხით</string>
-    <string name="intermediate_waypoint">შუალედური წერტილი</string>
-    <string name="add_intermediate_point">შუალედურის დამატება</string>
+    <string name="intermediate_waypoint">შუალედური სამიზნე წეერტილი</string>
+    <string name="add_intermediate_point">შუალედური სამიზნე წერტილის დამატება</string>
     <string name="add_destination_point">დანიშნულების პუნქტის დაყენება</string>
     <string name="quick_action_switch_night_mode">ღამის რეჟიმი</string>
     <string name="quick_action_switch_day_mode">დღის რეჟიმი</string>
@@ -1944,7 +1944,7 @@
     <string name="quick_action_item_screen">ეკრანი %d</string>
     <string name="quick_action_item_action">მოქმედება %d</string>
     <string name="configure_screen_quick_action">სწრაფი მოქმედება</string>
-    <string name="rendering_attr_hideWaterPolygons_name">წყლის დამალვა</string>
+    <string name="rendering_attr_hideWaterPolygons_name">წყალი</string>
     <string name="lang_zh_tw">ჩინური (ტრადიციული)</string>
     <string name="lang_zh_cn">ჩინური (გამარტივებული)</string>
     <string name="lang_be_by">ბელარუსული (ლათინური)</string>
@@ -2066,7 +2066,7 @@
     <string name="shared_string_items">ნივთები</string>
     <string name="days_behind">დღე გავიდა</string>
     <string name="roads_only">მხოლოდ გზები</string>
-    <string name="rendering_attr_pisteRoutes_name">სასრიალო ქანობები</string>
+    <string name="rendering_attr_pisteRoutes_name">სასრიალო ტრასები</string>
     <string name="device_memory">მოწყობილობის მეხსიერება</string>
     <string name="free">თავისუფალია %1$s</string>
     <string name="rendering_attr_pisteGrooming_name">თხილამურების მოვლა</string>
@@ -2434,7 +2434,7 @@
     <string name="points_of_interests">ინტერესის წერტილი (POI)</string>
     <string name="use_two_digits_longitude">ორრიცხვიანი სიგანის გამოყენება</string>
     <string name="nothing_found_in_radius">ვერაფერი ვიპოვე:</string>
-    <string name="clear_all_intermediates">ყველა შუალედური წერტილის გასუფთავება</string>
+    <string name="clear_all_intermediates">ყველა შუალედური სამიზნის გასუფთავება</string>
     <string name="enter_lat_and_lon">შეიყვანეთ გრძედი და განედი</string>
     <string name="appearance_on_the_map">რუკაზე გამოჩენა</string>
     <string name="digits_quantity">ციფრების რაოდენობა</string>
@@ -2460,7 +2460,7 @@
     <string name="begin_with_osmand_menu_group">პირველი ნაბიჯები OsmAnd-თან ერტად</string>
     <string name="update_all">ყველას განახლება (%1$s მბ)</string>
     <string name="downloading_number_of_files">გადმოწერა %1$d …</string>
-    <string name="default_speed_system_descr">სიჩქარის ერთეული.</string>
+    <string name="default_speed_system_descr">აირჩიეთ სიჩქარის ერთეული.</string>
     <string name="simulate_your_location_stop_descr">თქვენი მდებარეობის სიმულაციის შეწყვეტა.</string>
     <string name="saved_at_time">შენახულია: %1$s-თან</string>
     <string name="offline_maps_and_navigation">გათიშული რუკები
@@ -2492,7 +2492,7 @@
     <string name="plan_a_route">გზის დაგეგმვა</string>
     <string name="search_download_wikipedia_maps">Wikipedia-ის რუკების გადმოწერა</string>
     <string name="change_application_profile">აპის პროფილის შეცვლა</string>
-    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="mapillary_item">OsmAnd და Mapillary</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="download_unsupported_action">მოქმედების შეცდომა %1$s</string>
     <string name="shared_string_app_default_w_val">ნაგულისხმევია (%s)</string>
@@ -2538,7 +2538,7 @@
     <string name="hide_compass_ruler">კომპასის სახაზავის დამალვა</string>
     <string name="show_compass_ruler">კომპასის სახაზავი</string>
     <string name="avoid_pt_types">ტრანსპორტის ტიპების თავიდან აცილება…</string>
-    <string name="add_intermediate">შუალედური წერტილის დამატება</string>
+    <string name="add_intermediate">შუალედური სამიზნე წერტილის დამატება</string>
     <string name="time_of_day">დღის დრო</string>
     <string name="arrive_at_time">ჩასვლის დროა %1$s</string>
     <string name="add_start_point">საწყისი წერტილის დაყენება</string>
@@ -2585,7 +2585,7 @@
     <string name="open_till">გახსნის საბოლოო წერტილი</string>
     <string name="open_from">გახსნის საწყისი წერტილი</string>
     <string name="what_is_here">რა არის აქ:</string>
-    <string name="do_not_use_animations">ანიმაციების გარეშე</string>
+    <string name="do_not_use_animations">ანიმაციების მოცილება</string>
     <string name="waypoint_one">ათვლის წერტილი 1</string>
     <string name="add_waypoint">ათვლის წერტილის დამატება</string>
     <string name="shared_string_enter_param">შეიყვანეთ პარამეტრი</string>
@@ -2810,7 +2810,7 @@
     <string name="shared_string_feet">ფუტი</string>
     <string name="shared_string_relation">ურთიერთობა</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">შენიშვნების ჭდეების ჩვენება</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">წყლის გვირაბები</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">წყლის გვირაბების ხილვადობის გაზრდა</string>
     <string name="activity_type_cycling_name">ველოსიპედით</string>
     <string name="activity_type_racing_name">მანქანით</string>
     <string name="activity_type_hiking_name">ლაშქრობა</string>
@@ -2844,7 +2844,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">შენიშვნების ჭდეები</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">ხატულები დაბალი გადიდებისას</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">დაბალი გადიდებისას ხატულების სქემატური ჩვენება</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">წყლის გვირაბების ჩვენება</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">წყლის გვირაბების ხილვადობის გაზრდა</string>
     <string name="shared_string_grade">დონე</string>
     <string name="shared_string_uphill">აღმართი</string>
     <string name="shared_string_interval">დაყოვნება</string>
@@ -3022,7 +3022,7 @@
     <string name="live_monitoring_tracking_interval">ტრეკინგს ინტერვალი</string>
     <string name="track_saved">ტრეკი შენახულია</string>
     <string name="shared_string_created">შექმნის დრო</string>
-    <string name="help_article_navigation_guidance_name">სახელმძღვანელო</string>
+    <string name="help_article_navigation_guidance_name">ნავიგაციის სახელმძღვანელო</string>
     <string name="shared_string_checked">შემოწმებულია</string>
     <string name="save_track_external_sensors_data">მონაცემები</string>
     <string name="shared_string_wrist">მაჯა</string>
@@ -3289,4 +3289,30 @@
     <string name="deleting">წაშლა…</string>
     <string name="release_5_1">• დამატებულია ვებ და მრავალპლატფორმული შეძენების მხარდაჭერა\n\n• გადატანილია ტემპერატურის ერთეულები ზოგად პარამეტრებში უფრო მარტივი ხელმისაწვდომობისთვის\n\n• დამატებულია ელემენტის დატენვის დონე BLE სენსორებისთვის\n\n• ახალი, უფრო ინტუიციური ინტერფეისი ნავიგაციაში წერტილების არჩევისთვის\n\n• გაუმჯობესებულია ვიჯეტის ხილვადობა ახალი კონტურის დამატებით\n\n• დამატებულია აღმავალი/დაღმავალი ფერდობების ანალიზატორი\n\n• გაფართოვებულია Wikipedia &amp; Wikivoyage ინტეგრაცია მეტი POI–ებისთვის.</string>
     <string name="osm_live_payment_renews_3_years">განახლდება ყოველ სამ წელიწადში</string>
+    <string name="map_widget_altitude">მიმდინარე მდებარეობის სიმაღლე ზღვის დონიდან</string>
+    <string name="poi_categories">POI კატეგორიები</string>
+    <string name="quick_action_map_overlay">ზემოდან დადება</string>
+    <string name="quick_action_map_underlay">ქვემოთ დადება</string>
+    <string name="worldwide_maps">მსოფლიოს რუკები</string>
+    <string name="first_intermediate_dest_description">დაამატებს საწყის გაჩერებას</string>
+    <string name="last_intermediate_dest_description">დაამატებს შუალედურ გაჩერებას</string>
+    <string name="rendering_attr_showAccess_name">წვდომის შეზღუდვების ჩვენება</string>
+    <string name="add_point_before">წერტილის დამატება მანამდე</string>
+    <string name="add_point_after">წერტილის დამატება შემდეგ</string>
+    <string name="edit_tilesource_elliptic_tile">ოვალური მერკატორის პროექცია</string>
+    <string name="osm_edit_reopened_note">OSM-ის შენიშვნა თავიდან გაიხსნა</string>
+    <string name="upload_osm_note">OSM შენიშვნის ატვირთვა</string>
+    <string name="context_menu_item_open_note">OSM შენიშვნის გახსნა</string>
+    <string name="plugin_nautical_name">საზღვაო რუკის ხედი</string>
+    <string name="plugin_ski_name">სასრიალო რუკის ხედი</string>
+    <string name="srtm_unit_format">კონტურის ხაზის ერთეულის ვარიანტი</string>
+    <string name="save_poi_without_poi_type_message">შევინახო POI ტიპის გარეშე?</string>
+    <string name="routing_attr_piste_type_downhill_name">ალპური და დაღმართზე სრიალი</string>
+    <string name="dialogs_and_notifications_descr">საკონტროლო მხტუნარები, დიალოგები და გაფრთხილებები.</string>
+    <string name="always_center_position_on_map">მდებარეობის მოთავსება ყოველთვის ცენტრში</string>
+    <string name="interrupt_music_descr">ხმოვანი შეტყობინება შეაჩერებს მუსიკის დაკვრას.</string>
+    <string name="use_displayed_track_for_navigation">გამოვიყენო ნაჩვენები გზა ნავიგაციისტვის?</string>
+    <string name="si_nm_h">საზღვაი მილი საათში (კვანძი)</string>
+    <string name="donation_to_osm">შეწირულობა OSM-ის საზოგადოებისთვის</string>
+    <string name="osm_live_enter_user_name">შეიყვანეთ საჯარო სახელი</string>
 </resources>
