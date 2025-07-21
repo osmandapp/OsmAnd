@@ -2581,7 +2581,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void applyDebugSettings(MapRendererView mapRenderer) {
 		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 		if (plugin != null) {
-			boolean show = plugin.SHOW_SYMBOLS_DEBUG_INFO.get();
+			boolean show = settings.DEBUG_RENDERING_INFO.get();
 			boolean allow = plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.get();
 			MapRendererDebugSettings debugSettings = mapRenderer.getDebugSettings();
 			debugSettings.setDebugStageEnabled(show);
