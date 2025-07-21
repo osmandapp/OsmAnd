@@ -42,7 +42,7 @@ public class ImageCardsHolder {
 
 	@NonNull
 	public List<ImageCard> getOrderedCards() {
-		return getCardsWithTypes(OTHER, MAPILLARY_AMENITY, WIKIDATA, WIKIMEDIA);
+		return getCardsWithTypes(MAPILLARY_AMENITY, WIKIDATA, WIKIMEDIA, OTHER);
 	}
 
 	@NonNull
