@@ -127,12 +127,7 @@ public class MapViewWithLayers extends FrameLayout {
 				atlasMapRendererView.handleOnCreate(null);
 			}
 			// Get MSAA setting from development plugin
-			boolean enableMSAA = false;
-			net.osmand.plus.plugins.development.OsmandDevelopmentPlugin devPlugin = 
-				PluginsHelper.getPlugin(net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.class);
-			if (devPlugin != null) {
-				enableMSAA = devPlugin.ENABLE_MSAA.get();
-			}
+			boolean enableMSAA = settings.ENABLE_MSAA.get();
 			mapRendererContext.presetMapRendererOptions(atlasMapRendererView, enableMSAA);
 			atlasMapRendererView.setupRenderer(getContext(), 0, 0, mapRendererView);
 			atlasMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));

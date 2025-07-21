@@ -203,7 +203,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		symRasterTilePref.setIconSpaceReserved(false);
 		symRasterTilePref.setDescription(R.string.show_debug_tile_description);
 
-		SwitchPreferenceEx msaaPref = findPreference(plugin.ENABLE_MSAA.getId());
+		SwitchPreferenceEx msaaPref = findPreference(settings.ENABLE_MSAA.getId());
 		msaaPref.setIconSpaceReserved(false);
 		msaaPref.setVisible(MapRendererView.isMSAASupported());
 

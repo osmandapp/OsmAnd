@@ -83,7 +83,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SHOW_TILES_RASTERIZATION_DEBUG_INFO;
 	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
-	public final OsmandPreference<Boolean> ENABLE_MSAA;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 	private final StateChangedListener<Boolean> msaaListener;
@@ -115,7 +114,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SHOW_TILES_RASTERIZATION_DEBUG_INFO = registerBooleanPreference("show_tiles_rasterization_debug_info", false).makeGlobal().makeShared().cache();
 		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
-		ENABLE_MSAA = registerBooleanPreference("enable_msaa", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -140,7 +138,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			recreateRenderer();
 			recreateAndroidAutoRenderer();
 		};
-		ENABLE_MSAA.addListener(msaaListener);
+		settings.ENABLE_MSAA.addListener(msaaListener);
 
 		batterySavingModeListener = change -> {
 			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
@@ -433,7 +431,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				MapRendererView oldMapRendererView = mapRendererContext.getMapRendererView();
 				mapView.setMapRenderer(null, true);
 				mapRendererContext.setMapRendererView(null);
-				mapRendererContext.presetMapRendererOptions(currentMapRenderer, ENABLE_MSAA.get());
+				mapRendererContext.presetMapRendererOptions(currentMapRenderer, settings.ENABLE_MSAA.get());
 				currentMapRenderer.setupRenderer(app, 0, 0, oldMapRendererView);
 				mapRendererContext.setMapRendererView(currentMapRenderer);
 				mapView.setMapRenderer(currentMapRenderer, false);
