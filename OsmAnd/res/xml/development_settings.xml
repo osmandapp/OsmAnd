@@ -141,11 +141,11 @@
 		android:title="@string/disable_map_layers" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="show_tiles_rasterization_debug_info"
+		android:key="show_primitives_debug_info"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/show_rasterization_debug_tile" />
+		android:title="@string/show_debug_tile" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="enable_msaa"
