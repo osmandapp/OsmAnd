@@ -1673,6 +1673,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_NEARBY_FAVORITES = new BooleanPreference(this, "show_nearby_favorites", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SHOW_NEARBY_POI = new BooleanPreference(this, "show_nearby_poi", false).makeProfile().cache();
 
+	public final OsmandPreference<Boolean> TURN_BY_TURN_DIRECTIONS = new BooleanPreference(this, "turn_by_turn_directions", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference(this, "speak_street_names", true).makeProfile().cache();
 	public final CommonPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference(this, "speak_traffic_warnings", true).makeProfile().cache();
 	public final CommonPreference<Boolean> SPEAK_PEDESTRIAN = new BooleanPreference(this, "speak_pedestrian", false).makeProfile().cache();
@@ -3459,4 +3460,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> HMD_PROMO_SHOWED = new BooleanPreference(this, "hmd_promo_showed", false).makeGlobal().makeShared();
 	public final CommonPreference<Integer> CONTEXT_GALLERY_SPAN_GRID_COUNT = new IntPreference(this, "context_gallery_span_grid_count", 3).makeProfile();
 	public final CommonPreference<Integer> CONTEXT_GALLERY_SPAN_GRID_COUNT_LANDSCAPE = new IntPreference(this, "context_gallery_span_grid_count_landscape", 7).makeProfile();
+
+	public final CommonPreference<Boolean> ENABLE_MSAA = new BooleanPreference(this, "enable_msaa", false).makeGlobal().makeShared().cache();
 }

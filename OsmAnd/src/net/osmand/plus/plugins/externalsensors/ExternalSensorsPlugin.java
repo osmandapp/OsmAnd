@@ -248,14 +248,14 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		devicesHelper.setActivity(activity);
+		devicesHelper.onPluginInit();
 		return true;
 	}
 
 	@Override
 	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
-		devicesHelper.disconnectDevices();
-		devicesHelper.deinitBLE();
+		devicesHelper.onPluginDisabled();
 	}
 
 	@Override
