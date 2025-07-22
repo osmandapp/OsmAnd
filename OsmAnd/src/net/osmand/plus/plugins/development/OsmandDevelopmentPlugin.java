@@ -82,7 +82,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
 	public final OsmandPreference<Boolean> SHOW_PRIMITIVES_DEBUG_INFO;
-	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
@@ -114,7 +113,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SAVE_BEARING_TO_GPX = registerBooleanPreference("save_bearing_to_gpx", false).makeGlobal().makeShared().cache();
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
 		SHOW_PRIMITIVES_DEBUG_INFO = registerBooleanPreference("show_primitives_debug_info", false).makeGlobal().makeShared().cache();
-		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
@@ -133,8 +131,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			}
 		};
 		SHOW_PRIMITIVES_DEBUG_INFO.addListener(symbolsDebugInfoListener);
-		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
+		settings.DEBUG_RENDERING_INFO.addListener(symbolsDebugInfoListener);
 
 		debugRenderingInfoListener = NativeCore::enablePerformanceLogs;
 		settings.DEBUG_RENDERING_INFO.addListener(debugRenderingInfoListener);
