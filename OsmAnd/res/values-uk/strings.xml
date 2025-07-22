@@ -5796,4 +5796,5 @@
     <string name="threads_allocated_for_rendering_desc">У деяких випадках менший розподіл потоків може пришвидшити рендеринг карти.</string>
     <string name="turn_by_turn_directions">Покрокові вказівки</string>
     <string name="failed_to_connect">Не вдалося підключитися до %1s</string>
+    <string name="enable_msaa">Увімкнути MSAA</string>
 </resources>
