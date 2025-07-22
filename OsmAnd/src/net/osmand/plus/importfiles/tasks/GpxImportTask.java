@@ -13,9 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.shared.GpxImport;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.plus.helpers.Kml2Gpx;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
@@ -121,7 +121,7 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GpxFile> {
 
 	@Nullable
 	private InputStream convertKmlToGpxStream(@NonNull InputStream is) {
-		String result = Kml2Gpx.toGpx(is);
+		String result = GpxImport.kml2Gpx(is);
 		if (result != null) {
 			try {
 				return new ByteArrayInputStream(result.getBytes("UTF-8"));
