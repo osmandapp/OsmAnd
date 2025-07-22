@@ -132,6 +132,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		};
 		SHOW_PRIMITIVES_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
+		settings.DEBUG_RENDERING_INFO.addListener(symbolsDebugInfoListener);
 
 		debugRenderingInfoListener = NativeCore::enablePerformanceLogs;
 		settings.DEBUG_RENDERING_INFO.addListener(debugRenderingInfoListener);
