@@ -31,6 +31,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.purchase.data.PurchaseUiData;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -308,13 +309,18 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			AndroidUtils.startActivityIfSafe(activity, intent);
 		}
 	}
-
 	@Override
-	public void manageSubscription(@NonNull Context ctx, @Nullable String sku) {
-		String url = "https://play.google.com/store/account/subscriptions?package=" + ctx.getPackageName();
-		if (!Algorithms.isEmpty(sku)) {
-			url += "&sku=" + sku;
+	public void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable PurchaseOrigin origin) {
+		String url;
+		if (PurchaseOrigin.FASTSPRING == origin) {
+			url = "https://osmand.onfastspring.com/account";
+		} else {
+			url = "https://play.google.com/store/account/subscriptions?package=" + ctx.getPackageName();
+			if (!Algorithms.isEmpty(sku)) {
+				url += "&sku=" + sku;
+			}
 		}
+
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		AndroidUtils.startActivityIfSafe(ctx, intent);
 	}

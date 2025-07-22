@@ -515,7 +515,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		wikivoyageMapsGroup.addGroup(wikivoyageMapsScreen);
 		addGroup(wikivoyageMapsGroup);
 
-		if (otherMaps.size() > 0) {
+		if (!otherMaps.isEmpty()) {
 			addGroup(otherMapsGroup);
 		}
 
@@ -555,7 +555,7 @@ public class DownloadResources extends DownloadResourceGroup {
 						srtmIndexes.add((IndexItem) item);
 					}
 				}
-				if (srtmIndexes.size() > 0) {
+				if (!srtmIndexes.isEmpty()) {
 					individualItems.removeAll(srtmIndexes);
 					group.addItem(new SrtmDownloadItem(srtmIndexes, useMetersByDefault));
 				}
@@ -574,9 +574,20 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 	}
 
-	private void createMultipleDownloadItems(@NonNull WorldRegion region) {
+	private void createMultipleDownloadItems(@NonNull WorldRegion world) {
+		for (WorldRegion topRegion : world.getSubregions()) {
+			createMultipleDownloadItems(topRegion, topRegion.isContinent());
+		}
+	}
+
+	private void createMultipleDownloadItems(@NonNull WorldRegion region,
+	                                         boolean includeMultipleDownloadContent) {
 		List<WorldRegion> subRegions = region.getSubregions();
 		if (Algorithms.isEmpty(subRegions)) return;
+
+		for (WorldRegion subRegion : subRegions) {
+			createMultipleDownloadItems(subRegion, includeMultipleDownloadContent);
+		}
 
 		DownloadResourceGroup group = getRegionMapsGroup(region);
 		if (group != null) {
@@ -585,19 +596,18 @@ public class DownloadResources extends DownloadResourceGroup {
 			List<WorldRegion> uniqueSubRegions = WorldRegion.removeDuplicates(subRegions);
 			for (DownloadActivityType type : DownloadActivityType.values()) {
 				if (!isListContainsType(downloadItems, type)) {
-					List<DownloadItem> itemsFromSubRegions = collectItemsOfType(uniqueSubRegions, type);
+					List<DownloadItem> itemsFromSubRegions =
+							collectItemsOfType(uniqueSubRegions, type, includeMultipleDownloadContent);
 					if (itemsFromSubRegions != null) {
 						group.addItem(new MultipleDownloadItem(region, itemsFromSubRegions, type));
 						listModified = true;
 					}
 				}
 			}
+
 			if (listModified) {
 				sortDownloadItems(group.getIndividualDownloadItems());
 			}
-		}
-		for (WorldRegion subRegion : subRegions) {
-			createMultipleDownloadItems(subRegion);
 		}
 	}
 
@@ -611,14 +621,22 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	@Nullable
 	private List<DownloadItem> collectItemsOfType(@NonNull List<WorldRegion> regions,
-	                                              @NonNull DownloadActivityType type) {
+	                                              @NonNull DownloadActivityType type,
+	                                              boolean includeMultipleDownloadContent) {
 		List<DownloadItem> collectedItems = new ArrayList<>();
 		for (WorldRegion region : regions) {
 			boolean found = false;
 			for (DownloadItem item : getDownloadItems(region)) {
 				if (item.getType() == type) {
-					found = true;
-					collectedItems.add(item);
+					if (item instanceof MultipleDownloadItem mdi) {
+						if (includeMultipleDownloadContent) {
+							collectedItems.addAll(mdi.getItemsToDownload());
+							found = true;
+						}
+					} else {
+						collectedItems.add(item);
+						found = true;
+					}
 					break;
 				}
 			}
@@ -628,8 +646,8 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private void buildRegionsGroups(WorldRegion region, DownloadResourceGroup group) {
-		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
-		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
+		LinkedList<WorldRegion> queue = new LinkedList<>();
+		LinkedList<DownloadResourceGroup> parent = new LinkedList<>();
 		queue.add(region);
 		parent.add(group);
 		while (!queue.isEmpty()) {

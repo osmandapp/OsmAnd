@@ -209,10 +209,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		msaaPref.setIconSpaceReserved(false);
 		msaaPref.setVisible(MapRendererView.isMSAASupported());
 
-		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_SYMBOLS_DEBUG_INFO.getId());
-		syminfoPref.setIconSpaceReserved(false);
-		syminfoPref.setDescription(R.string.show_debug_info_description);
-
 		SwitchPreferenceEx disableMapLayers = findPreference(settings.DISABLE_MAP_LAYERS.getId());
 		disableMapLayers.setDescription(getString(R.string.disable_map_layers_descr));
 		disableMapLayers.setIconSpaceReserved(false);

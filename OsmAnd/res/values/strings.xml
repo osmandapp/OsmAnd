@@ -13,10 +13,14 @@
     <string name="release_5_2">
         • Work in progress...
     </string>
-
     <string name="deleting_history">Deleting history…</string>
+    <string name="next_turn_information">Next turn information</string>
+    <string name="next_turn_information_desc">Shows the upcoming turn direction and street name.</string>
+	<string name="description_purchases_fastspring">You can manage your purchases through FastSpring account management portal.</string>
+	<string name="description_subscription_fastspring">You can manage or cancel your subscription through FastSpring account management portal.</string>
+	<string name="manage_purchases">Manage purchases</string>
     <string name="failed_to_connect">Failed to connect to %1s</string>
-   <string name="deleting">Deleting…</string>
+    <string name="deleting">Deleting…</string>
     <string name="release_5_1">
         • Added support for web and cross-platform purchases\n\n
         • Moved Temperature units to General settings for easier access\n\n
@@ -6153,5 +6157,4 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
-    <string name="show_symbols_debug_info">Show symbols debug info</string>
 </resources>

@@ -325,6 +325,10 @@ public class RoutingHelper {
 		return intermediatePoints;
 	}
 
+	public boolean isOnRoute() {
+		return isRouteCalculated() && !isDeviatedFromRoute();
+	}
+
 	public boolean isRouteCalculated() {
 		return route.isCalculated();
 	}
@@ -808,8 +812,8 @@ public class RoutingHelper {
 	}
 
 	@NonNull
-	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n) {
-		return new CurrentStreetName(this, n);
+	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n, boolean showNextTurn) {
+		return new CurrentStreetName(this, n, showNextTurn);
 	}
 
 	public RouteSegmentResult getCurrentSegmentResult() {

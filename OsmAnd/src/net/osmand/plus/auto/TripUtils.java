@@ -18,7 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.NextDirectionInfo;
-import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
@@ -224,7 +223,7 @@ public class TripUtils {
 	}
 
 	@NonNull
-	public static CurrentStreetName getStreetName(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo) {
+	public static CurrentStreetName getStreetName(@NonNull NextDirectionInfo info) {
 		return new CurrentStreetName(info, true);
 	}
 }

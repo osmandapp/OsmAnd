@@ -1623,6 +1623,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_MINOR_TURNS = new BooleanPreference(this, "show_minor_turns", true).makeProfile();
+	public final CommonPreference<Boolean> SHOW_NEXT_TURN_INFO = new BooleanPreference(this, "show_next_turn_info", false).makeProfile();
 
 	public boolean simulateNavigation;
 	public boolean simulateNavigationStartedFromAdb;

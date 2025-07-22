@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -21,6 +22,7 @@ import net.osmand.core.jni.SymbolSubsectionConfiguration;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -183,10 +185,17 @@ public class MapVectorLayer extends BaseMapLayer {
 					// view.getHeight() / 2);
 					RotatedTileBox copy = tilesRect.copy();
 					copy.increasePixelDimensions(copy.getPixWidth() / 3, copy.getPixHeight() / 4);
-					resourceManager.updateRendererMap(copy);
+					resourceManager.updateRendererMap(copy, new AsyncLoadingThread.OnMapLoadedListener() {
+						@Override
+						public void onMapLoaded(boolean interrupted) {
+//							Log.i("net.osmand",">>> New map render loaded ");
+							view.refreshMap();
+						}
+					}, false);
 				}
 			}
 			MapRenderRepositories renderer = resourceManager.getRenderer();
+//			Log.i("net.osmand",">>> Map render refreshed ");
 			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
 			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
 		}

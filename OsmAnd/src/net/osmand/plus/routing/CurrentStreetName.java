@@ -30,69 +30,56 @@ public class CurrentStreetName {
 	}
 
 	public CurrentStreetName(@NonNull NextDirectionInfo info) {
-		setupStreetName(info);
+		setupNextTurnStreetName(info);
 	}
 
 	public CurrentStreetName(@NonNull NextDirectionInfo info, boolean useDestination) {
 		this.useDestination = useDestination;
-		setupStreetName(info);
+		setupNextTurnStreetName(info);
 	}
 
-	public CurrentStreetName(@NonNull RoutingHelper routingHelper, @NonNull NextDirectionInfo info) {
-		setupCurrentName(routingHelper, info);
+	public CurrentStreetName(@NonNull RoutingHelper routingHelper,
+	                         @NonNull NextDirectionInfo info, boolean showNextTurn) {
+		setupCurrentName(routingHelper, info, showNextTurn);
 	}
 
-	@NonNull
-	private static String getRouteSegmentStreetName(@NonNull RoutingHelper routingHelper, @NonNull RouteSegmentResult rs, boolean includeRef) {
-		OsmandSettings settings = routingHelper.getSettings();
-		String lang = settings.MAP_PREFERRED_LOCALE.get();
-		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
-
-		RouteDataObject object = rs.getObject();
-		String name = object.getName(lang, transliterate);
-		String ref = object.getRef(lang, transliterate, rs.isForwardDirection());
-		String destinationName = object.getDestinationName(lang, transliterate, rs.isForwardDirection());
-		return RoutingHelperUtils.formatStreetName(name, includeRef ? ref : null, destinationName, "»");
-	}
-
-	public void setupCurrentName(@NonNull RoutingHelper routingHelper, @NonNull NextDirectionInfo info) {
-		Location l = routingHelper.getLastFixedLocation();
-		AnnounceTimeDistances adt = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
+	private void setupCurrentName(@NonNull RoutingHelper helper,
+	                              @NonNull NextDirectionInfo info, boolean showNextTurn) {
 		boolean isSet = false;
-		// 1. turn is imminent
-		if (info.distanceTo > 0 && adt.isTurnStateActive(adt.getSpeed(l), info.distanceTo * 1.3, STATE_PREPARE_TURN)) {
+		// 1. display next turn and turn is imminent
+		if (showNextTurn && isTurnIsImminent(helper, info)) {
 			useDestination = true;
-			isSet = setupStreetName(info);
+			isSet = setupNextTurnStreetName(info);
 		}
 		// 2. display current road street name
 		if (!isSet) {
 			useDestination = false;
-			RouteSegmentResult rs = routingHelper.getCurrentSegmentResult();
-			if (rs != null) {
-				text = getRouteSegmentStreetName(routingHelper, rs, false);
-				showMarker = true;
-				shields = RoadShield.create(rs.getObject());
-				if (Algorithms.isEmpty(text) && shields.isEmpty()) {
-					text = getRouteSegmentStreetName(routingHelper, rs, true);
-				}
-				isSet = !Algorithms.isEmpty(text) || !shields.isEmpty();
-			}
+			isSet = setupCurrentRoadStreetName(helper);
 		}
 		// 3. display next road street name if this one empty
 		if (!isSet) {
-			RouteSegmentResult rs = routingHelper.getNextStreetSegmentResult();
-			if (rs != null) {
-				text = getRouteSegmentStreetName(routingHelper, rs, false);
-				turnType = TurnType.valueOf(TurnType.C, false);
-				shields = RoadShield.create(rs.getObject());
-			}
+			setupNextRoadStreetName(helper);
+		}
+		if (!showNextTurn) {
+			turnType = null;
 		}
 		if (turnType == null) {
 			showMarker = true;
 		}
 	}
 
-	public boolean setupStreetName(@NonNull NextDirectionInfo info) {
+	private boolean isTurnIsImminent(@NonNull RoutingHelper helper, @NonNull NextDirectionInfo info) {
+		if (info.distanceTo > 0 ) {
+			AnnounceTimeDistances timeDistances = helper.getVoiceRouter().getAnnounceTimeDistances();
+			Location location = helper.getLastFixedLocation();
+			float speed = timeDistances.getSpeed(location);
+			double increasedDistance = info.distanceTo * 1.3;
+			return timeDistances.isTurnStateActive(speed, increasedDistance, STATE_PREPARE_TURN);
+		}
+		return false;
+	}
+
+	private boolean setupNextTurnStreetName(@NonNull NextDirectionInfo info) {
 		boolean isSet = false;
 		if (info.directionInfo != null && !info.directionInfo.getTurnType().isSkipToSpeak()) {
 			String name = info.directionInfo.getStreetName();
@@ -125,5 +112,42 @@ public class CurrentStreetName {
 			}
 		}
 		return isSet;
+	}
+
+	private boolean setupCurrentRoadStreetName(@NonNull RoutingHelper helper) {
+		RouteSegmentResult rs = helper.getCurrentSegmentResult();
+		if (rs != null) {
+			text = getRouteSegmentStreetName(helper, rs, false);
+			showMarker = true;
+			shields = RoadShield.create(rs.getObject());
+			if (Algorithms.isEmpty(text) && shields.isEmpty()) {
+				text = getRouteSegmentStreetName(helper, rs, true);
+			}
+			return !Algorithms.isEmpty(text) || !shields.isEmpty();
+		}
+		return false;
+	}
+
+	private void setupNextRoadStreetName(@NonNull RoutingHelper helper) {
+		RouteSegmentResult rs = helper.getNextStreetSegmentResult();
+		if (rs != null) {
+			text = getRouteSegmentStreetName(helper, rs, false);
+			turnType = TurnType.valueOf(TurnType.C, false);
+			shields = RoadShield.create(rs.getObject());
+		}
+	}
+
+	@NonNull
+	private String getRouteSegmentStreetName(@NonNull RoutingHelper routingHelper,
+	                                         @NonNull RouteSegmentResult rs, boolean includeRef) {
+		OsmandSettings settings = routingHelper.getSettings();
+		String lang = settings.MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+
+		RouteDataObject object = rs.getObject();
+		String name = object.getName(lang, transliterate);
+		String ref = object.getRef(lang, transliterate, rs.isForwardDirection());
+		String destinationName = object.getDestinationName(lang, transliterate, rs.isForwardDirection());
+		return RoutingHelperUtils.formatStreetName(name, includeRef ? ref : null, destinationName, "»");
 	}
 }

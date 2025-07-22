@@ -28,6 +28,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.purchase.data.PurchaseUiData;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnSendRequestsListener;
@@ -422,7 +423,7 @@ public abstract class InAppPurchaseHelper {
 
 	public abstract void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException;
 
-	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku);
+	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable PurchaseOrigin origin);
 
 	protected boolean isUserInfoSupported() {
 		return true;
