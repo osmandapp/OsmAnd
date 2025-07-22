@@ -22,6 +22,7 @@ public class WikiAlgorithms {
 	public static final String WIKIPEDIA = "wikipedia";
 	public static final String WIKIPEDIA_DOMAIN = ".wikipedia.org/";
 	public static final String WIKI_LINK = WIKIPEDIA_DOMAIN + "wiki/";
+	public static final String WIKI_DATA_BASE_URL = "https://www.wikidata.org/wiki/";
 
 	@NonNull
 	public static String getWikiUrl(@NonNull String text) {
