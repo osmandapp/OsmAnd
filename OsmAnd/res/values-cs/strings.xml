@@ -5789,4 +5789,5 @@
     <string name="threads_allocated_for_rendering_desc">Menší počet alokovaných vláken může v některých případech zrychlit vykreslování mapy.</string>
     <string name="turn_by_turn_directions">Podrobné navigační pokyny</string>
     <string name="failed_to_connect">Nepodařilo se připojit k %1s</string>
+    <string name="enable_msaa">Povolit MSAA</string>
 </resources>
