@@ -21,23 +21,17 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.MapLayers;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -87,7 +81,6 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 		convertView.setOnClickListener(null);
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
-		View headerButton = convertView.findViewById(R.id.header_button);
 		TextView overviewTextView = convertView.findViewById(R.id.overview_text);
 		ImageView overviewImageView = convertView.findViewById(R.id.overview_image);
 		if (position == 0) {
@@ -109,32 +102,14 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 			}
 		} else {
 			if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
+				setupHeaderClick(currentGpxDisplayItem, convertView, nightMode);
+
 				overviewTextView.setTextColor(app.getColor(activeColorId));
 				SegmentSlopeType slopeType = currentGpxDisplayItem.analysis.getSegmentSlopeType();
 
 				if (trackGroup != null && (trackGroup.isSplitDistance() || slopeType != null)) {
 					if (slopeType != null) {
 						overviewImageView.setImageDrawable(getSlopeDrawable(slopeType, nightMode));
-
-						int color = app.getSettings().getApplicationMode().getProfileColor(nightMode);
-						Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
-						AndroidUtils.setBackground(headerButton, background);
-
-						headerButton.setOnClickListener(v -> {
-							SelectedGpxFile selectedGpxFile;
-							selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(currentGpxDisplayItem.group.getGpxFile().getPath());
-
-							if (selectedGpxFile != null) {
-								listener.onDismiss();
-								MapLayers mapLayers = app.getOsmandMap().getMapLayers();
-								WptPt wptPt = currentGpxDisplayItem.locationEnd;
-
-								SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wptPt);
-								LatLon latLon = new LatLon(wptPt.getLatitude(), wptPt.getLongitude());
-								PointDescription pointDescription = mapLayers.getGpxLayer().getObjectName(gpxPoint);
-								mapLayers.getContextMenuLayer().showContextMenu(latLon, pointDescription, gpxPoint, null);
-							}
-						});
 					} else {
 						overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, activeColorId));
 					}
@@ -374,6 +349,18 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 		return convertView;
 	}
 
+	private void setupHeaderClick(@NonNull GpxDisplayItem currentGpxDisplayItem, View convertView, boolean nightMode) {
+		View headerButton = convertView.findViewById(R.id.header_button);
+
+		int color = app.getSettings().getApplicationMode().getProfileColor(nightMode);
+		Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
+		AndroidUtils.setBackground(headerButton, background);
+
+		headerButton.setOnClickListener(v -> {
+			listener.onOpenSegment(currentGpxDisplayItem);
+		});
+	}
+
 	private Drawable getSlopeDrawable(@NonNull SegmentSlopeType slopeType, boolean nightMode) {
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 
@@ -397,6 +384,6 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 	}
 
 	interface SplitAdapterListener{
-		void onDismiss();
+		void onOpenSegment(@NonNull GpxDisplayItem currentGpxDisplayItem);
 	}
 }

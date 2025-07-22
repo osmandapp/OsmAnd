@@ -25,10 +25,12 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentsAdapter.SplitAdapterListener;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.GpxSplitParams;
@@ -45,11 +47,13 @@ import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -489,7 +493,19 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment impleme
 	}
 
 	@Override
-	public void onDismiss() {
-		dismiss();
+	public void onOpenSegment(@NonNull GpxDisplayItem currentGpxDisplayItem) {
+		SelectedGpxFile selectedGpxFile;
+		selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(currentGpxDisplayItem.group.getGpxFile().getPath());
+
+		if (selectedGpxFile != null) {
+			dismiss();
+			MapLayers mapLayers = app.getOsmandMap().getMapLayers();
+			WptPt wptPt = currentGpxDisplayItem.locationEnd;
+
+			SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wptPt);
+			LatLon latLon = new LatLon(wptPt.getLatitude(), wptPt.getLongitude());
+			PointDescription pointDescription = mapLayers.getGpxLayer().getObjectName(gpxPoint);
+			mapLayers.getContextMenuLayer().showContextMenu(latLon, pointDescription, gpxPoint, null);
+		}
 	}
 }

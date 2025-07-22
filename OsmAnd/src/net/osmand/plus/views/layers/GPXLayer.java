@@ -196,6 +196,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private int grayColor;
 	@ColorInt
 	private int disabledColor;
+	@ColorInt
+	private int altitudeAscColor;
+	@ColorInt
+	private int altitudeDescColor;
 
 	private CommonPreference<String> defaultColorPref;
 	private CommonPreference<String> defaultWidthPref;
@@ -282,6 +286,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		defPointColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 		grayColor = ContextCompat.getColor(app, R.color.color_favorite_gray);
 		disabledColor = ContextCompat.getColor(app, R.color.gpx_disabled_color);
+		altitudeAscColor = ContextCompat.getColor(app, R.color.gpx_altitude_asc);
+		altitudeDescColor = ContextCompat.getColor(app, R.color.gpx_altitude_desc);
 
 		wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
 	}
@@ -666,6 +672,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (ind > 0) {
 				name = name.substring(0, ind);
 			}
+
+			if (item.analysis == null) {
+				return name;
+			}
+
 			SegmentSlopeType slopeType = item.analysis.getSegmentSlopeType();
 			if (slopeType != null) {
 				if (slopeType == SegmentSlopeType.UPHILL) {
@@ -681,12 +692,17 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@ColorInt
 	private int getSplitColor(@NonNull GpxDisplayItem item, int trackColor) {
 		int color = trackColor;
+
+		if (item.analysis == null) {
+			return color;
+		}
+
 		SegmentSlopeType slopeType = item.analysis.getSegmentSlopeType();
 		if (slopeType != null) {
 			if (slopeType == SegmentSlopeType.UPHILL) {
-				color = ColorUtilities.getColor(app, R.color.gpx_altitude_asc);
+				color = altitudeAscColor;
 			} else if (slopeType == SegmentSlopeType.DOWNHILL) {
-				color = ColorUtilities.getColor(app, R.color.gpx_altitude_desc);
+				color = altitudeDescColor;
 			}
 		}
 		return color;
