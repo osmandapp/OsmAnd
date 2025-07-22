@@ -1,19 +1,16 @@
 package net.osmand.plus.download;
 
-import android.view.View;
-
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.ModeSelectionBottomSheet;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
-import net.osmand.plus.base.MultipleSelectionBottomSheet.SelectionUpdateListener;
 import net.osmand.plus.base.MultipleSelectionWithModeBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.OnApplySelectionListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.util.Algorithms;
 
@@ -23,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
@@ -78,9 +76,10 @@ public class SelectIndexesHelper {
 		MultipleDownloadItem mdi = (MultipleDownloadItem) downloadItem;
 		List<SelectableItem<DownloadItem>> allItems = new ArrayList<>();
 		List<SelectableItem<DownloadItem>> selectedItems = new ArrayList<>();
+		WorldRegion baseParentRegion = mdi.getRelatedRegion();
 
 		for (DownloadItem di : mdi.getAllItems()) {
-			SelectableItem<DownloadItem> si = createSelectableItem(di);
+			SelectableItem<DownloadItem> si = createSelectableItem(baseParentRegion, di);
 			allItems.add(si);
 			if (itemsToDownload.contains(di)) {
 				selectedItems.add(si);
@@ -107,17 +106,18 @@ public class SelectIndexesHelper {
 		MultipleDownloadItem mdi = (MultipleDownloadItem) downloadItem;
 		List<SelectableItem<DownloadItem>> allItems = new ArrayList<>();
 		List<SelectableItem<DownloadItem>> selectedItems = new ArrayList<>();
+		WorldRegion baseParentRegion = mdi.getRelatedRegion();
 
 		for (DownloadItem di : mdi.getAllItems()) {
-			SelectableItem<DownloadItem> si = createSrtmSelectableItem((SrtmDownloadItem) di);
+			SelectableItem<DownloadItem> si = createSrtmSelectableItem((SrtmDownloadItem) di, baseParentRegion);
 			allItems.add(si);
 			if (itemsToDownload.contains(di)) {
 				selectedItems.add(si);
 			}
 		}
 
-		RadioItem meterBtn = createSrtmRadioBtn(true);
-		RadioItem feetBtn = createSrtmRadioBtn(false);
+		RadioItem meterBtn = createSrtmRadioBtn(baseParentRegion, true);
+		RadioItem feetBtn = createSrtmRadioBtn(baseParentRegion,false);
 		List<RadioItem> radioItems = new ArrayList<>();
 		radioItems.add(meterBtn);
 		radioItems.add(feetBtn);
@@ -148,13 +148,13 @@ public class SelectIndexesHelper {
 	private void showSrtmTypeSelectionDialog() {
 		SrtmDownloadItem srtmItem = (SrtmDownloadItem) downloadItem;
 
-		RadioItem meterBtn = createSrtmRadioBtn(true);
-		RadioItem feetBtn = createSrtmRadioBtn(false);
+		RadioItem meterBtn = createSrtmRadioBtn(null, true);
+		RadioItem feetBtn = createSrtmRadioBtn(null, false);
 		List<RadioItem> radioItems = new ArrayList<>();
 		radioItems.add(meterBtn);
 		radioItems.add(feetBtn);
 
-		SelectableItem<DownloadItem> preview = createSrtmSelectableItem(srtmItem);
+		SelectableItem<DownloadItem> preview = createSrtmSelectableItem(srtmItem, null);
 
 		dialog = ModeSelectionBottomSheet.showInstance(activity, preview, radioItems, true);
 
@@ -176,44 +176,42 @@ public class SelectIndexesHelper {
 		dialog.setOnApplySelectionListener(getOnApplySelectionListener(listener));
 	}
 
-	private RadioItem createSrtmRadioBtn(boolean useMeters) {
+	private RadioItem createSrtmRadioBtn(@Nullable WorldRegion baseParentRegion, boolean useMeters) {
 		int titleId = useMeters ? R.string.shared_string_meters : R.string.shared_string_feet;
 		String title = Algorithms.capitalizeFirstLetter(app.getString(titleId));
 		RadioItem radioItem = new TextRadioItem(title);
-		radioItem.setOnClickListener(new OnRadioItemClickListener() {
-			@Override
-			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				setUseMetersForAllItems(useMeters);
-				updateListItems();
-				updateSize();
-				return true;
-			}
+		radioItem.setOnClickListener((item, view) -> {
+			setUseMetersForAllItems(useMeters);
+			updateListItems(baseParentRegion);
+			updateSize();
+			return true;
 		});
 		return radioItem;
 	}
 
-	private SelectableItem<DownloadItem> createSelectableItem(DownloadItem item) {
+	private SelectableItem<DownloadItem> createSelectableItem(WorldRegion baseParentRegion, DownloadItem item) {
 		SelectableItem<DownloadItem> selectableItem = new SelectableItem<>();
-		updateSelectableItem(selectableItem, item);
+		updateSelectableItem(selectableItem, item, baseParentRegion);
 		selectableItem.setObject(item);
 		return selectableItem;
 	}
 
-	private SelectableItem<DownloadItem> createSrtmSelectableItem(SrtmDownloadItem item) {
+	private SelectableItem<DownloadItem> createSrtmSelectableItem(SrtmDownloadItem item,
+	                                                              WorldRegion baseParentRegion) {
 		SelectableItem<DownloadItem> selectableItem = new SelectableItem<>();
-		updateSelectableItem(selectableItem, item.getDefaultIndexItem());
+		updateSelectableItem(selectableItem, item.getDefaultIndexItem(), baseParentRegion);
 		selectableItem.setObject(item);
 		return selectableItem;
 	}
 
-	private void updateListItems() {
+	private void updateListItems(@Nullable WorldRegion baseParentRegion) {
 		List<SelectableItem<DownloadItem>> items = new ArrayList<>(dialog.getAllItems());
 		for (SelectableItem<DownloadItem> selectableItem : items) {
 			DownloadItem di = selectableItem.getObject();
 			if (di instanceof SrtmDownloadItem) {
 				di = ((SrtmDownloadItem) di).getDefaultIndexItem();
 			}
-			updateSelectableItem(selectableItem, di);
+			updateSelectableItem(selectableItem, di, baseParentRegion);
 		}
 		dialog.setItems(items);
 	}
@@ -226,16 +224,16 @@ public class SelectIndexesHelper {
 	private void setUseMetersForAllItems(boolean useMeters) {
 		for (SelectableItem<DownloadItem> item : dialog.getAllItems()) {
 			DownloadItem downloadItem = item.getObject();
-			if (downloadItem instanceof SrtmDownloadItem) {
-				SrtmDownloadItem srtmItem = (SrtmDownloadItem) downloadItem;
+			if (downloadItem instanceof SrtmDownloadItem srtmItem) {
 				srtmItem.setUseMetric(useMeters);
 			}
 		}
 	}
 
 	private void updateSelectableItem(@NonNull SelectableItem<DownloadItem> selectableItem,
-	                                  @NonNull DownloadItem downloadItem) {
-		selectableItem.setTitle(downloadItem.getVisibleName(app, app.getRegions(), false));
+	                                  @NonNull DownloadItem downloadItem,
+	                                  @Nullable WorldRegion baseParentRegion) {
+		selectableItem.setTitle(downloadItem.getVisibleName(app, app.getRegions(), true, baseParentRegion, false));
 
 		String size = downloadItem.getSizeDescription(app);
 		String addDescr = downloadItem.getAdditionalDescription(app);
@@ -279,8 +277,7 @@ public class SelectIndexesHelper {
 		double totalSizeMb = 0.0d;
 		for (SelectableItem<DownloadItem> i : selectableItems) {
 			DownloadItem downloadItem = i.getObject();
-			if (downloadItem instanceof SrtmDownloadItem) {
-				SrtmDownloadItem srtm = (SrtmDownloadItem) downloadItem;
+			if (downloadItem instanceof SrtmDownloadItem srtm) {
 				totalSizeMb += srtm.getDefaultIndexItem().getSizeToDownloadInMb();
 			} else if (downloadItem != null) {
 				totalSizeMb += downloadItem.getSizeToDownloadInMb();
