@@ -13,12 +13,10 @@
     <string name="release_5_2">
         • Work in progress...
     </string>
-    <string name="deleting_history">Deleting history…</string>
 	<string name="description_purchases_fastspring">You can manage your purchases through FastSpring account management portal.</string>
 	<string name="description_subscription_fastspring">You can manage or cancel your subscription through FastSpring account management portal.</string>
 	<string name="manage_purchases">Manage purchases</string>
     <string name="failed_to_connect">Failed to connect to %1s</string>
-    <string name="deleting">Deleting…</string>
     <string name="shared_sting_osm_link">OSM link</string>
 	<string name="deleting_history">Deleting history…</string>
 	<string name="deleting">Deleting…</string>

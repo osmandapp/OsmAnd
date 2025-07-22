@@ -392,7 +392,6 @@ public class MapButtonsHelper {
 		allTypes.add(ShowHideFitnessTrailsAction.TYPE);
 		allTypes.add(ShowHideRunningRoutesAction.TYPE);
 		allTypes.add(ShowHideCoordinatesGridAction.TYPE);
-		allTypes.add(TestPoiTypeQuickAction.TYPE);
 		// navigation
 		allTypes.add(NavVoiceAction.TYPE);
 		allTypes.add(NavDirectionsFromAction.TYPE);
