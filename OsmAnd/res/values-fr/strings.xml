@@ -5683,4 +5683,5 @@
     <string name="threads_allocated_for_rendering_desc">L\'allocation d\'un faible nombre de threads peut, dans certains cas, accélérer le rendu de la carte.</string>
     <string name="turn_by_turn_directions">Indications de guidage pas à pas</string>
     <string name="failed_to_connect">Échec de connexion à %1s</string>
+    <string name="enable_msaa">Activer MSAA</string>
 </resources>
