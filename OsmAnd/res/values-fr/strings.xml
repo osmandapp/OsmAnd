@@ -2245,7 +2245,7 @@
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
     <string name="waypoint_one">Point de passage 1</string>
     <string name="save_route_point">Enregistrer le point d\'itinéraire</string>
-    <string name="add_waypoint">Ajouter un point de passage</string>
+    <string name="add_waypoint">Ajouter une étape</string>
     <string name="save_gpx_waypoint">Enregistrer le point de passage GPX</string>
     <string name="live_monitoring_max_interval_to_send">Tampon temporel pour le suivi en ligne</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Indiquer la durée pendant laquelle les positions sont conservées sans connexion</string>
