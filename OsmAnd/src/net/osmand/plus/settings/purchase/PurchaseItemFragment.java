@@ -265,7 +265,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		manageSubscription.setOnClickListener(v -> {
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
-				purchaseHelper.manageSubscription(activity, purchase);
+				purchaseHelper.manageSubscription(activity, purchase.getSku(), purchase.getOrigin());
 			}
 		});
 		setupSelectableBackground(manageSubscription);

@@ -423,9 +423,7 @@ public abstract class InAppPurchaseHelper {
 
 	public abstract void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException;
 
-	public abstract void manageSubscription(@NonNull Context ctx, @NonNull InAppPurchase purchase);
-
-	public abstract void manageSubscription(@NonNull Context ctx, @NonNull PurchaseUiData purchaseUiData);
+	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable PurchaseOrigin origin);
 
 	protected boolean isUserInfoSupported() {
 		return true;

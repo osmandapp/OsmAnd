@@ -310,16 +310,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 	@Override
-	public void manageSubscription(@NonNull Context ctx, @NonNull InAppPurchase purchase) {
-		manageSubscription(ctx, purchase.getSku(), null);
-	}
-
-	@Override
-	public void manageSubscription(@NonNull Context ctx, @NonNull PurchaseUiData purchaseUiData) {
-		manageSubscription(ctx, purchaseUiData.getSku(), purchaseUiData.getOrigin());
-	}
-
-	private void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable PurchaseOrigin origin) {
+	public void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable PurchaseOrigin origin) {
 		String url;
 		if (PurchaseOrigin.FASTSPRING == origin) {
 			url = "https://osmand.onfastspring.com/account";
