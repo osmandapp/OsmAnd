@@ -14,6 +14,8 @@
         • Work in progress...
     </string>
     <string name="deleting_history">Deleting history…</string>
+    <string name="next_turn_information">Next turn information</string>
+    <string name="next_turn_information_desc">Shows the upcoming turn direction and street name.</string>
 	<string name="description_purchases_fastspring">You can manage your purchases through FastSpring account management portal.</string>
 	<string name="description_subscription_fastspring">You can manage or cancel your subscription through FastSpring account management portal.</string>
 	<string name="manage_purchases">Manage purchases</string>
