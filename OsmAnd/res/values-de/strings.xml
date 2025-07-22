@@ -5815,4 +5815,5 @@
     <string name="threads_allocated_for_rendering">Für das Rendern zugewiesene Threads</string>
     <string name="threads_allocated_for_rendering_desc">Eine niedrigere Threadzuweisung kann die Kartendarstellung in einigen Fällen beschleunigen.</string>
     <string name="turn_by_turn_directions">Schritt-für-Schritt-Navigationsanweisungen</string>
+    <string name="failed_to_connect">Verbindung zu %1s fehlgeschlagen</string>
 </resources>

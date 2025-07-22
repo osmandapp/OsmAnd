@@ -5654,4 +5654,5 @@
     <string name="threads_allocated_for_rendering">Hilos asignados a la representación</string>
     <string name="threads_allocated_for_rendering_desc">La asignación de hilos inferiores podría acelerar la representación del mapa en algunos casos.</string>
     <string name="turn_by_turn_directions">Indicaciones de giros</string>
+    <string name="failed_to_connect">Falló al conectar con %1s</string>
 </resources>

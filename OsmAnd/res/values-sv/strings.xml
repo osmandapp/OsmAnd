@@ -2915,7 +2915,7 @@
     <string name="move_inside_category">Objekt kan flyttas endast inom den här kategorin.</string>
     <string name="developer_plugin">Utvecklar-plugin</string>
     <string name="replace_point_descr">Ersätt en annan punkt med den här.</string>
-    <string name="app_mode_ski_touring">Skid-touring</string>
+    <string name="app_mode_ski_touring">Turskidor/Randonee</string>
     <string name="app_mode_ski_snowmobile">Snöskoter</string>
     <string name="custom_osmand_plugin">Anpassad OsmAnd-plugin</string>
     <string name="shared_string_items">Objekt</string>

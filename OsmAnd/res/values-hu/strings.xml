@@ -4862,8 +4862,8 @@
     <string name="free_settings_backup">Beállítások ingyenes lementése</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Raszteres sqlitedb használata domborzatárnyékoláshoz/lejtőhöz</string>
     <string name="may_be_used_if_there_is_shortcut">Használható, ha van parancsikon</string>
-    <string name="routing_attr_allow_via_ferrata_description">Hegyi útvonal rögzített kábelekkel, fellépőkkel, létrákkal és hidakkal.</string>
-    <string name="routing_attr_allow_via_ferrata_name">Hegyoldali útvonal (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">Mászóútvonal rögzített kábelekkel, fellépőkkel, létrákkal és hidakkal.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Mászóútvonal (Via ferrata)</string>
     <string name="free_ride">Szabad vezetés</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Robbanóanyagok</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gázok</string>

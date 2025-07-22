@@ -5237,4 +5237,20 @@
     <string name="backup_delete_types">Διαγραφή απενεργοποιημένων τύπων δεδομένων</string>
     <string name="cancel_anytime_in_gplay">Ακυρώστε οποιαδήποτε στιγμή στο Google Play.</string>
     <string name="cancel_anytime_in_huawei_appgallery">Ακυρώστε οποιαδήποτε στιγμή στο Huawei AppGallery</string>
+    <string name="failed_to_connect">Αποτυχία σύνδεσης στο %1s</string>
+    <string name="shared_string_threads">Νήματα</string>
+    <string name="threads_allocated_for_rendering">Ανατεθειμένα νήματα για απεικόνιση</string>
+    <string name="threads_allocated_for_rendering_desc">Χαμηλότερη ανάθεση νημάτων ίσως επιταχύνει την απεικόνιση χάρτη σε κάποιες περιπτώσεις.</string>
+    <string name="turn_by_turn_directions">Οδηγίες βήμα-βήμα</string>
+    <string name="quick_action_navigation_view_title">Όψη πλοήγησης</string>
+    <string name="quick_action_switch_compass_desc">Διακόπτης για την εναλλαγή προσανατολισμού του χάρτη.</string>
+    <string name="y_axis_description">Επιλέξτε το πολύ δύο επιλογές για τον άξονα Υ.</string>
+    <string name="delete_widget_description">Αυτό το γραφικό στοιχείο θα διαγραφεί. Μπορείτε να το επαναφέρετε αργότερα στην Οθόνη ρύθμισης.</string>
+    <string name="delete_widget">Διαγραφή γραφικού στοιχείου;</string>
+    <string name="quick_action_navigation_view_desc">Διακόπτης για άνοιγμα ή κλείσιμο της όψης πλοήγησης.</string>
+    <string name="add_widget_below">Προσθήκη γραφικού στοιχείου από κάτω</string>
+    <string name="add_widget_above">Προσθήκη γραφικού στοιχείου από πάνω</string>
+    <string name="add_widget_to_the_right">Προσθήκη γραφικού στοιχείου στα δεξιά</string>
+    <string name="add_widget_to_the_left">Προσθήκη γραφικού στοιχείου στα αριστερά</string>
+    <string name="shared_string_route_line">Γραμμή διαδρομής</string>
 </resources>
