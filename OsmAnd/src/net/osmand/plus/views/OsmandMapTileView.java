@@ -2039,6 +2039,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (!isSteplessZoomSupported() && !disable) {
 			setZoomWithFloatPart(getZoom(), 0);
 		}
+		if (mapRenderer != null) {
+			int maxRederingThreadsLimit = settings.MAX_RENDERING_THREADS.get();
+			if (maxRederingThreadsLimit > 0) {
+				mapRenderer.setResourceWorkerThreadsLimit(maxRederingThreadsLimit);
+			} else {
+				mapRenderer.setResourceWorkerThreadsLimit(mapRenderer.getDefaultWorkerThreadsLimit() / 2);
+			}
+		}
 	}
 
 	public void detachMapRenderer() {
@@ -2577,16 +2585,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			boolean allow = plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.get();
 			MapRendererDebugSettings debugSettings = mapRenderer.getDebugSettings();
 			debugSettings.setDebugStageEnabled(show);
-			debugSettings.setShowSymbolsMarksRejectedByViewpoint(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByIntersectionCheck(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByMinDistanceToSameContentFromOtherSymbolCheck(show);
-			debugSettings.setShowSymbolsBBoxesRejectedByPresentationMode(show);
-			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(show);
+			debugSettings.setShowSymbolsMarksRejectedByViewpoint(allow);
+			debugSettings.setShowSymbolsBBoxesRejectedByIntersectionCheck(allow);
+			debugSettings.setShowSymbolsBBoxesRejectedByMinDistanceToSameContentFromOtherSymbolCheck(allow);
+			debugSettings.setShowSymbolsBBoxesRejectedByPresentationMode(allow);
+			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(allow);
 			debugSettings.setSkipSymbolsIntersectionCheck(allow);
 			mapRenderer.setDebugSettings(debugSettings);
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null) {
-				mapContext.showDebugRasterizationTiles = plugin.SHOW_TILES_RASTERIZATION_DEBUG_INFO.get();
+				mapContext.showDebugPrimivitisationTiles = plugin.SHOW_PRIMITIVES_DEBUG_INFO.get();
 				mapContext.recreateRasterAndSymbolsProvider(MapRendererContext.ProviderType.MAIN);
 			}
 		}

@@ -1468,7 +1468,7 @@
     <string name="index_name_netherlands">Európa – Hollandia</string>
     <string name="application_dir_change_warning3">Az OsmAnd adatfájljait áthelyezzük az új helyre\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok</string>
-    <string name="routing_attr_avoid_borders_description">Elkerüli országhatár átlépését</string>
+    <string name="routing_attr_avoid_borders_description">Elkerüli az országhatár átlépését</string>
     <string name="routing_attr_height_name">Magasság</string>
     <string name="routing_attr_height_description">Adja meg az útvonalakon a járművekre vonatkozó magasságkorlátozást.</string>
     <string name="use_fast_recalculation">Intelligens útvonal újratervezés</string>
@@ -2273,8 +2273,8 @@
     <string name="this_year">Idén</string>
     <string name="show_direction">Távolság jelzése</string>
     <string name="sort_by">Rendezés eszerint:</string>
-    <string name="do_not_use_animations">Ne használjon animációkat</string>
-    <string name="do_not_use_animations_descr">Térképanimációk kikapcsolása.</string>
+    <string name="do_not_use_animations">Animációk eltávolítása</string>
+    <string name="do_not_use_animations_descr">Térkép- és alkalmazásanimációk kikapcsolása.</string>
     <string name="keep_showing_on_map">Továbbra is mutassa a térképen</string>
     <string name="exit_without_saving">Kilépés mentés nélkül?</string>
     <string name="line">Vonal</string>
@@ -2704,7 +2704,7 @@
     <string name="rendering_attr_surface_paved_name">Burkolt</string>
     <string name="rendering_attr_surface_concrete_name">Beton</string>
     <string name="rendering_attr_surface_sett_name">Macskakő</string>
-    <string name="rendering_attr_surface_cobblestone_name">Nagy kavics (görgeteg)</string>
+    <string name="rendering_attr_surface_cobblestone_name">Durva kőburkolat</string>
     <string name="rendering_attr_surface_paving_stones_name">Térkő</string>
     <string name="rendering_attr_surface_pebblestone_name">Kavics</string>
     <string name="rendering_attr_surface_stone_name">Kő</string>
@@ -4862,8 +4862,8 @@
     <string name="free_settings_backup">Beállítások ingyenes lementése</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Raszteres sqlitedb használata domborzatárnyékoláshoz/lejtőhöz</string>
     <string name="may_be_used_if_there_is_shortcut">Használható, ha van parancsikon</string>
-    <string name="routing_attr_allow_via_ferrata_description">Hegyi útvonal rögzített kábelekkel, fellépőkkel, létrákkal és hidakkal.</string>
-    <string name="routing_attr_allow_via_ferrata_name">Hegyoldali útvonal (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">Mászóútvonal rögzített kábelekkel, fellépőkkel, létrákkal és hidakkal.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Mászóútvonal (Via ferrata)</string>
     <string name="free_ride">Szabad vezetés</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Robbanóanyagok</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gázok</string>
@@ -5237,8 +5237,8 @@
     <string name="show_debug_info">Hibakeresési adatok megjelenítése</string>
     <string name="show_debug_info_description">Grafikus információk megjelenítése az egyes térképszövegek elhelyezéséről</string>
     <string name="map_text">Térkép renderelés</string>
-    <string name="routing_attr_avoid_cobblestone_name">Macskakő elkerülése</string>
-    <string name="routing_attr_avoid_cobblestone_description">Macskakő elkerülése</string>
+    <string name="routing_attr_avoid_cobblestone_name">Durva kőburkolat elkerülése</string>
+    <string name="routing_attr_avoid_cobblestone_description">Durva kőburkolat elkerülése</string>
     <string name="track_vertical_exaggeration_description">A skála értékének változtatásával módosíthatja a 3D nyomvonal magasságát.</string>
     <string name="steps_per_minute_unit">lépés/p</string>
     <string name="disable_map_layers_descr">Tiltsa le az összes térképréteget a vektortérkép felett (újraindítás szükséges).</string>
@@ -5730,4 +5730,10 @@
     <string name="deleting_history">Előzmények törlése…</string>
     <string name="show_rasterization_debug_tile">Csempe raszterezési információk mutatása</string>
     <string name="show_symbols_bboxes">Szimbólum határolókeretek mutatása</string>
+    <string name="release_5_2">• Folyamatban lévő munka...</string>
+    <string name="shared_string_threads">Szálak</string>
+    <string name="threads_allocated_for_rendering">Rendereléshez lefoglalt szálak</string>
+    <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép renderelését.</string>
+    <string name="turn_by_turn_directions">Részletes navigáció</string>
+    <string name="failed_to_connect">Sikertelen csatlakozás ehhez: %1s</string>
 </resources>

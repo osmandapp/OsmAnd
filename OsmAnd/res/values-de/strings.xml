@@ -993,7 +993,7 @@
     <string name="recording_context_menu_delete">Aufnahme löschen</string>
     <string name="layer_recordings">Audio-/Videonotizen</string>
     <string name="map_widget_av_notes">Audio-/Videonotizen</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-Erweiterung für offline Höhenlinien, Relief und Hangneigung</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-Erweiterung für Offline-Geländeeigenschaften wie Höhenlinien, Relief und Hangneigung</string>
     <string name="map_widget_distancemeasurement">Entfernungsmessung</string>
     <string name="monitoring_settings">Streckenaufzeichnung</string>
     <string name="monitoring_settings_descr">Konfiguration der Streckenaufzeichnung.</string>
@@ -1199,7 +1199,7 @@
     <string name="sort_by_name">Nach Namen sortieren</string>
     <string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen.</string>
     <string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
-    <string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen.</string>
+    <string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internetverbindung überprüfen.</string>
     <string name="none_selected_gpx">Wählen Sie zuerst eine GPX-Datei durch langes Antippen aus.</string>
     <string name="local_index_select_gpx_file">Einen Track auswählen</string>
     <string name="rendering_attr_hideBuildings_name">Gebäude</string>
@@ -1315,7 +1315,7 @@
     <string name="home">Übersichtsseite</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
     <string name="record_plugin_name">Streckenaufzeichnung</string>
-    <string name="int_hour">std</string>
+    <string name="int_hour">Stunden</string>
     <string name="duration">Dauer</string>
     <string name="distance">Entfernung</string>
     <string name="index_tours">Touren</string>
@@ -1372,7 +1372,7 @@
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Rendering verwenden</string>
     <string name="use_opengl_render_descr">Hardware-beschleunigtes OpenGL-Rendering verwenden (Könnte mehr Akkuleistung verbrauchen und nicht auf allen Geräten funktionieren).</string>
-    <string name="no_internet_connection">Keine Internet Verbindung</string>
+    <string name="no_internet_connection">Keine Internetverbindung</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
@@ -1492,7 +1492,7 @@
     <string name="local_osm_changes_upload_all_confirm">%1$d Änderung(en) zu OSM hochladen\?</string>
     <string name="confirmation_to_clear_history">Verlauf löschen?</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="shared_string_minute_lowercase">Min</string>
+    <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">verbleibend</string>
     <string name="osm_changes_added_to_local_edits">Die Änderungen an den OSM-Daten wurden dem lokalen Änderungssatz hinzugefügt</string>
     <string name="shared_string_go">Los</string>
@@ -1568,7 +1568,7 @@
     <string name="lang_ml">Malayalam</string>
     <string name="lang_lb">Luxemburgisch</string>
     <string name="lang_os">Ossetisch</string>
-    <string name="lang_eo">Esparanto</string>
+    <string name="lang_eo">Esperanto</string>
     <string name="lang_nb">Norwegisch (Bokmål)</string>
     <string name="lang_nn">Norwegisch (Neunorwegisch)</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
@@ -1597,7 +1597,7 @@
     <string name="lang_nv">Navajo</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_new">Newari / Nepal Bhasa</string>
-    <string name="lang_ceb">Cenuano</string>
+    <string name="lang_ceb">Cebuano</string>
     <string name="local_recordings_delete_all_confirm">%1$d Notizen löschen\?</string>
     <string name="lang_te">Telugu</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Netzwerkzugehörigkeit</string>
@@ -2288,9 +2288,9 @@
     <string name="mapillary_widget_descr">Ermöglicht schnelle Beiträge zu Mapillary.</string>
     <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jeden. Orte entdecken, mitwirken und die Welt in Bildern festhalten.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="mapillary_action_descr">Straßen-Anzeige teilen via Mapillary.</string>
+    <string name="mapillary_action_descr">Straßenansicht via Mapillary teilen.</string>
     <string name="shared_string_install">Installieren</string>
-    <string name="online_photos">Online Bilder</string>
+    <string name="online_photos">Online-Fotos</string>
     <string name="no_photos_descr">Keine Fotos hier.</string>
     <string name="plugin_mapillary_descr">Bildmaterial von Straßenansichten. Sie können auch selbst einen Beitrag leisten. Um die vorhandenen Daten als Kartenebene zu sehen, aktivieren Sie „Bilder auf Straßenebene“ im Menü „Karte konfigurieren“.</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
@@ -2364,8 +2364,8 @@
     <string name="import_track">GPX-Datei importieren</string>
     <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte. Soll sie als Track importiert werden\?</string>
     <string name="move_point">Punkt verschieben</string>
-    <string name="do_not_use_animations">Keine Animationen</string>
-    <string name="do_not_use_animations_descr">Schaltet Kartenanimationen aus.</string>
+    <string name="do_not_use_animations">Animationen entfernen</string>
+    <string name="do_not_use_animations_descr">Schaltet Karten- und Benutzeroberflächenanimationen aus.</string>
     <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
     <string name="exit_without_saving">Beenden, ohne zu speichern\?</string>
     <string name="move_all_to_history">Alles in den Verlauf verschieben</string>
@@ -3181,7 +3181,7 @@
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
     <string name="file_does_not_contain_routing_rules">Die Datei \'%1$s\' enthält keine Routing-Regeln. Bitte eine andere Datei wählen.</string>
     <string name="monitoring_min_speed_descr">Dies ist ein Filter, der Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Nebeneffekt: In ihrem Track fehlen alle Abschnitte, in denen das Mindestgeschwindigkeitskriterium nicht erfüllt wurde (z. B., wenn Sie Ihr Fahrrad einen steilen Hügel hinaufschieben). Außerdem wird es keine Informationen über Ruhezeiten wie Pausen geben. Dies hat Auswirkungen auf jede Analyse oder Nachbearbeitung, z. B., wenn Sie versuchen, die Gesamtlänge Ihrer Reise, die Zeit in Bewegung oder Ihre Durchschnittsgeschwindigkeit zu bestimmen.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Nebeneffekt: In Ihrem Track fehlen alle Abschnitte, in denen das Mindestgeschwindigkeitskriterium nicht erfüllt wurde (z. B., wenn Sie Ihr Fahrrad einen steilen Hügel hinaufschieben). Außerdem wird es keine Informationen über Ruhezeiten wie Pausen geben. Dies hat Auswirkungen auf jede Analyse oder Nachbearbeitung, wenn Sie z. B. versuchen, die Gesamtlänge Ihrer Reise, die Fahrzeit oder Ihre Durchschnittsgeschwindigkeit zu bestimmen.</string>
     <string name="plugin_global_prefs_info">Diese Erweiterungseinstellungen sind global und gelten für alle Profile</string>
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
     <string name="live_monitoring_tracking_interval">Aufzeichnungsintervall</string>
@@ -3218,7 +3218,7 @@
     <string name="copy_coordinates">Koordinaten kopieren</string>
     <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
-    <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht. Es ist vielleicht am besten, diesen Filter auszuschalten.</string>
     <string name="monitoring_min_distance_descr">Wenn Sie diesen Filter aktivieren, können Sie eine zusätzliche Datenaufzeichnung vermeiden, wenn fast keine Bewegung erkannt wird. Außerdem wird das räumliche Erscheinungsbild von Tracks ohne weitere Bearbeitung verbessert.</string>
     <string name="monitoring_min_distance_descr_side_effect">Nebeneffekte: Ruhezeiten werden nicht oder nur mit jeweils einem Punkt erfasst. Kleinere Bewegungen (z. B. zum Straßenrand, um eine mögliche Abzweigung zu markieren) können herausgefiltert werden. Beachten Sie, dass Ihre Datei weniger Informationen für die Nachbearbeitung enthält und gleichzeitig möglicherweise GPS-Artefakte aufgrund von schlechtem Empfang oder Chipsatz-Effekten vermieden werden können.</string>
     <string name="monitoring_min_distance_descr_recommendation">Empfehlung: Stellen Sie einen Versatz von 5 Metern ein, wenn Sie keine kleinen Details Ihrer Route aufzeichnen möchten und keine zusätzlichen Daten über Ihre Ruhezeit benötigen.</string>
@@ -3330,7 +3330,7 @@
     <string name="reset_items_descr">Das Ausblenden von Einstellungen setzt sie auf ihren ursprünglichen Zustand zurück.</string>
     <string name="main_actions">Hauptaktionen</string>
     <string name="move_inside_category">Elemente können nur innerhalb dieser Kategorie verschoben werden.</string>
-    <string name="shared_string_items">Gegenstände</string>
+    <string name="shared_string_items">Elemente</string>
     <string name="some_articles_may_not_available_in_lang">Einige Wikipedia-Artikel sind möglicherweise nicht in Ihrer Sprache verfügbar.</string>
     <string name="lang_zhyue">Kantonesisch</string>
     <string name="lang_zhminnan">Minnan</string>
@@ -3412,7 +3412,7 @@
     <string name="create_edit_poi">POI erstellen oder bearbeiten</string>
     <string name="parking_positions">Parkpositionen</string>
     <string name="add_edit_favorite">Favorit hinzufügen oder bearbeiten</string>
-    <string name="reset_deafult_order">Standard-Reihenfolge der Elemente wiederherstellen</string>
+    <string name="reset_deafult_order">Standardreihenfolge der Elemente wiederherstellen</string>
     <string name="back_to_editing">Zurück zur Bearbeitung</string>
     <string name="quick_action_switch_profile_descr">Die Aktionsschaltfläche schaltet zwischen den ausgewählten Profilen um.</string>
     <string name="shared_string_add_profile">Profil hinzufügen</string>
@@ -4484,7 +4484,7 @@
     <string name="download_tiles">Kacheln herunterladen</string>
     <string name="connect_with_straight_line">Mit gerader Linie verbinden</string>
     <string name="average_speed_skip_stops_desc">Geschwindigkeiten unter %1$s werden berücksichtigt und beeinflussen die Durchschnittsgeschwindigkeit.</string>
-    <string name="attach_roads_descr">Verbinde dein Track mit Straßen, um detaillierte Routeninformationen zu erhalten, einschließlich Abbiegehinweisen und Straßenattributen.</string>
+    <string name="attach_roads_descr">Verbinden Sie Ihren Track mit Straßen, um detaillierte Routeninformationen zu erhalten, einschließlich Abbiegehinweisen und Straßenattributen.</string>
     <string name="attach_roads_warning">Nur ein aufgezeichneter Track kann an Straßen angehängt werden.</string>
     <string name="without_profiles_changing">Ohne Profilwechsel</string>
     <string name="shared_string_only_missing">Nur fehlende</string>
@@ -4857,7 +4857,7 @@
     <string name="beats_per_minute_short">HF</string>
     <string name="shared_string_chest">Brust</string>
     <string name="shared_string_wrist">Handgelenk</string>
-    <string name="shared_string_finger">Hinweis</string>
+    <string name="shared_string_finger">Finger</string>
     <string name="shared_string_hand">Hand</string>
     <string name="shared_string_ear_lobe">Ohrläppchen</string>
     <string name="number_of_tracks">%1$s Tracks</string>
@@ -5076,7 +5076,7 @@
     <string name="rendering_styles">Darstellungsstile</string>
     <string name="app_mode_hang_gliding">Drachenfliegen</string>
     <string name="weather_online">Online-Wetter</string>
-    <string name="smart_folder_name_present">Dieser Smart Folder existiert bereits</string>
+    <string name="smart_folder_name_present">Solch ein intelligenter Ordner ist bereits vorhanden</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Geradlinige Streckenführung (Flugzeug)</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
@@ -5086,12 +5086,12 @@
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Punkt-zu-Punkt-Routing (Boot)</string>
     <string name="app_mode_baby_transport">Kindertransport</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigieren nach Track</string>
-    <string name="add_smart_folder">Smart Folder hinzufügen</string>
+    <string name="add_smart_folder">Intelligenten Ordner hinzufügen</string>
     <string name="empty_name">Leerer Name</string>
     <string name="edit_filter">Filter bearbeiten</string>
     <string name="help_article_widgets_radius_ruler_name">Radius-Maßstab und Lineal</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Trackaufzeichnung</string>
-    <string name="save_as_smart_folder">Speichern als Smart Folder</string>
+    <string name="save_as_smart_folder">Als intelligenten Ordner speichern</string>
     <string name="help_article_widgets_map_buttons_name">Schaltflächen der Karte</string>
     <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“. (Tracks werden nicht gelöscht.)</string>
     <string name="help_article_widgets_info_widgets_name">Informations-Widgets</string>
@@ -5103,8 +5103,8 @@
     <string name="no_config_smart_folder_title">Nicht konfiguriert</string>
     <string name="discard_filter_changes">Filteränderungen verwerfen</string>
     <string name="discard_filter_changes_prompt">Alle Filter zurücksetzen?</string>
-    <string name="empty_smart_folder_title">Kein passender Track gefunden</string>
-    <string name="empty_smart_folder_description">Übereinstimmende Tracks werden hier angezeigt</string>
+    <string name="empty_smart_folder_title">Keinen passenden Track gefunden</string>
+    <string name="empty_smart_folder_description">Passende Tracks werden hier angezeigt</string>
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d Track)</item>
         <item quantity="other">%1$d (%2$d Tracks)</item>
@@ -5247,7 +5247,7 @@
     <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
     <string name="auto_zoom_smooth">Glatt</string>
     <string name="auto_zoom_discrete">Schrittweise</string>
-    <string name="auto_zoom">Auto Zoom</string>
+    <string name="auto_zoom">Autozoom</string>
     <string name="java_safe">Java (sicher)</string>
     <string name="gpx_approximation">GPX-Annäherung</string>
     <string name="routing_type">Routing-Typ</string>
@@ -5427,8 +5427,8 @@
     <string name="auto_25_chars_route_tshr">Scharf rechts abbiegen</string>
     <string name="auto_25_chars_route_tslr">Leicht rechts abbiegen</string>
     <string name="auto_25_chars_route_tl">Links abbiegen</string>
-    <string name="auto_25_chars_route_tshl">Scharf Links abbiegen</string>
-    <string name="auto_25_chars_route_tsll">Leicht Links abbiegen</string>
+    <string name="auto_25_chars_route_tshl">Scharf links abbiegen</string>
+    <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
     <string name="auto_25_chars_route_tu">Wenden</string>
     <string name="driving_region_india">Indien</string>
     <string name="driving_region_uk">UK und andere</string>
@@ -5437,7 +5437,7 @@
     <string name="shared_string_automatically">Automatisch</string>
     <string name="ask_every_time">Jedes Mal fragen</string>
     <string name="detailed_track_guidance">Detaillierte Spurführung</string>
-    <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Weg mit nahegelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
+    <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Weg mit nahe gelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
     <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
     <string name="compass_click_north_is_up">Um den Ausrichtungsmodus zu ändern, klicken und halten Sie</string>
     <string name="help_article_map_tracks_name">Tracks</string>
@@ -5487,8 +5487,8 @@
     <string name="shared_string_source">Quelle</string>
     <string name="shared_string_no_internet_connection">Keine Internetverbindung</string>
     <string name="no_internet_descr">Bitte Verbindung prüfen und erneut versuchen.</string>
-    <string name="no_photos_available_descr">Keine Bilder wurden für diesen Standort hinzugefügt</string>
-    <string name="no_photos_available">Keine Bilder verfügbar</string>
+    <string name="no_photos_available_descr">Es wurden noch keine Benutzerfotos für diesen Standort hinzugefügt</string>
+    <string name="no_photos_available">Keine Fotos verfügbar</string>
     <string name="obd_fuel_type_not_provided">Keine Kraftstoffart angegeben</string>
     <string name="obd_fuel_type_gasoline">Benzin</string>
     <string name="obd_fuel_type_methanol">Methanol</string>
@@ -5687,7 +5687,7 @@
     <string name="shared_string_default_view">Standardansicht</string>
     <string name="map_widget_route_information_desc">Zeigt die geschätzte Ankunftszeit, die verbleibende Reisezeit und die Entfernung für die aktuelle Navigationsroute an.</string>
     <string name="ais_nmea_protocol_description">Protokoll für NMEA-Datenempfang auswählen</string>
-    <string name="ais_ship_lost_timeout_description">Timeout für Schiffssichtbarkeit einstellen: Nach dieser Zeit ohne Signalempfang ändert das Schiffssymbol seinen Status auf dem Bildschirm: Es wird durchgestrichen.</string>
+    <string name="ais_ship_lost_timeout_description">Timeout für die Schiffssichtbarkeit einstellen: Nach dieser Zeit ohne Signalempfang ändert das Schiffssymbol seinen Status auf dem Bildschirm: Es wird durchgestrichen.</string>
     <string name="plugin_ais_tracker_name">AIS-Schiffstracker</string>
     <string name="ais_cpa_warning_time_description">Wenn die TCPA (Zeit bis zum Erreichen des CPA mit einem anderen Schiff) kleiner als dieser Wert ist, wird das Schiff rot markiert.</string>
     <string name="ais_port_nmea_local_description">UDP-Port definieren, an dem OsmAnd NMEA-Daten empfängt</string>
@@ -5696,7 +5696,7 @@
     <string name="ais_load_data">AIS-Daten aus Datei laden</string>
     <string name="ais_address_nmea_server">IP-Adresse der NMEA-Datenquelle</string>
     <string name="ais_port_nmea_local">UDP-Port des lokalen NMEA-Datenempfängers</string>
-    <string name="ais_object_lost_timeout">Timeout für Sichtbarkeit bei Objektverlust</string>
+    <string name="ais_object_lost_timeout">Timeout für die Sichtbarkeit bei Objektverlust</string>
     <string name="ais_ship_lost_timeout">Timeout für die Sichtbarkeit des Schiffes, wenn kein Signal empfangen wird</string>
     <string name="ais_cpa_warning_distance_description">Schiffe werden rot markiert, wenn der CPA unter diesem Wert liegt und der CPA in naher Zukunft erreicht wird (siehe Einstellung „Warnzeit bis zum Erreichen des Punktes der größten Annäherung (CPA)“).</string>
     <string name="plugin_ais_tracker_disclaimer">HAFTUNGSAUSSCHLUSS\n\nDieses Plugin ist ein Hobbyprojekt und nicht auf Zuverlässigkeit und Korrektheit ausgelegt. Verlassen Sie sich NICHT auf diese Software, auch nicht für die Navigation und/oder die Sicherheit von Menschenleben.</string>
@@ -5729,10 +5729,10 @@
     <string name="original_shape_description">Jeder Punkt würde seine eigene Form behalten.</string>
     <string name="show_mercator_grids">Mercator statt WGS84 oder UTM verwenden</string>
     <string name="show_mercator_grids_description">Gitter in Mercator km statt WGS84 oder UTM anzeigen</string>
-    <string name="show_dms_grids">Verwende Dezimeter statt Grad</string>
-    <string name="show_dm_grids">Verwende Dezimeter statt Grad oder Dezimeter pro Meter</string>
-    <string name="show_dm_grids_description">Zeige Gitter in Grad und Minuten statt in Grad oder DMS</string>
-    <string name="show_dms_grids_description">Gitter in Grad, Minuten, Sekunden anzeigen statt in Grad</string>
+    <string name="show_dms_grids">DMS statt Grad verwenden</string>
+    <string name="show_dm_grids">DM statt Grad oder DMS verwenden</string>
+    <string name="show_dm_grids_description">Gitter in Grad und Minuten statt in Grad oder DMS anzeigen</string>
+    <string name="show_dms_grids_description">Gitter in Grad, Minuten und Sekunden statt in Grad anzeigen</string>
     <string name="show_list">Liste anzeigen</string>
     <string name="choose_location">Wählen Sie einen Standort</string>
     <string name="shared_string_manual">Manuell</string>
@@ -5764,7 +5764,7 @@
     <string name="position_animation_empty_banner_description">Positionssymbol bewegt sich ohne Animation zu jedem neu empfangenen Standort.</string>
     <string name="position_animation">Animation der Position</string>
     <string name="prediction_time_description">Animation des Positionssymbols in OsmAnd bei jedem empfangenen GPS-Datenpunkt (einmal pro Sekunde). Kann zu einer merkbaren Verzögerung seiner Bewegung führen, insbesondere wenn der Nutzer sich schnell bewegt oder die GPS-Signalstärke schwankt.</string>
-    <string name="wiki_around">Nahegelegene beliebte Orte</string>
+    <string name="wiki_around">Nahe gelegene beliebte Orte</string>
     <string name="grid_color">Gitterfarbe</string>
     <string name="shared_string_edges">Kanten</string>
     <string name="labels_position">Position der Beschriftungen</string>
@@ -5780,11 +5780,11 @@
     <string name="saved_to_device">Auf dem Gerät gespeichert</string>
     <string name="save_to_device">Auf dem Gerät speichern</string>
     <string name="deactivated_map">Deaktivierte Karte</string>
-    <string name="suggest_activate_map_msg">Die %1$s-Karte ist deaktiviert,\naktivieren um das Gebiet anzusehen.</string>
+    <string name="suggest_activate_map_msg">Die %1$s-Karte ist deaktiviert,\naktivieren, um das Gebiet anzusehen.</string>
     <string name="read_on">Weiterlesen %1$s</string>
     <string name="show_debug_tile">Kachelinformationen anzeigen</string>
     <string name="show_symbols_debug_info">Debug-Infos anzeigen</string>
-    <string name="show_debug_tile_description">Zeige Infos zu den Kartensymbolen der einzelnen Kacheln an</string>
+    <string name="show_debug_tile_description">Infos zu den Kartensymbolen der einzelnen Kacheln anzeigen</string>
     <string name="unit_of_temperature_description">Ausgewählte Einheiten werden auf alle temperaturbezogenen Daten im aktuellen Profil angewendet.</string>
     <string name="travel_guides">Leitfäden</string>
     <string name="hmd_promo_description_years">Kostenloser Zugang zu Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Jahre</string>
@@ -5810,4 +5810,10 @@
     <string name="shared_string_flat">Flach</string>
     <string name="shared_string_switch">Umschalten</string>
     <string name="show_rasterization_debug_tile">Informationen zur Kachelrasterung anzeigen</string>
+    <string name="release_5_2">In Bearbeitung …</string>
+    <string name="shared_string_threads">Threads</string>
+    <string name="threads_allocated_for_rendering">Für das Rendern zugewiesene Threads</string>
+    <string name="threads_allocated_for_rendering_desc">Eine niedrigere Threadzuweisung kann die Kartendarstellung in einigen Fällen beschleunigen.</string>
+    <string name="turn_by_turn_directions">Schritt-für-Schritt-Navigationsanweisungen</string>
+    <string name="failed_to_connect">Verbindung zu %1s fehlgeschlagen</string>
 </resources>

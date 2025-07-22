@@ -3407,7 +3407,7 @@
     <string name="poi_socket_schuko_output_low">Baja</string>
     <string name="poi_flooring">Venta de pisos</string>
     <string name="poi_pottery">Alfarería</string>
-    <string name="poi_whitewater_rapid_name">Nombre de los rápidos del río</string>
+    <string name="poi_rapids_name">Nombre de los rápidos del río</string>
     <string name="poi_outpost">Punto de entrega de la tienda</string>
     <string name="poi_barbecue_grill">Parrilla de barbacoa: sí</string>
     <string name="poi_water_utility">Oficina de servicio de agua</string>
@@ -5140,4 +5140,8 @@
     <string name="poi_denomination_iglesia_filipina_independiente">Iglesia Filipina Independiente</string>
     <string name="poi_denomination_sephardi">Sefardí</string>
     <string name="poi_denomination_welsh_independent">Independiente de Gales</string>
+    <string name="poi_canoe_put_in">Ingreso de canoas</string>
+    <string name="poi_canoe_egress">Egreso de canoas</string>
+    <string name="poi_canoe_put_in_egress">Embarcadero de canoas</string>
+    <string name="poi_whitewater_hazard">Riesgo de aguas bravas</string>
 </resources>

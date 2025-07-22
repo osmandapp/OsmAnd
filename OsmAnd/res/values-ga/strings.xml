@@ -4372,7 +4372,7 @@
     <string name="empty_state_markers_groups_desc">Iompórtáil grúpaí is fearr leat nó waypoints mar marcóirí.</string>
     <string name="plan_route">Pleanáil bealach</string>
     <string name="all_markers_moved_to_history">Bhog gach marcóir léarscáile go dtí an stair</string>
-    <string name="do_not_use_animations_descr">Múch beochan léarscáile.</string>
+    <string name="do_not_use_animations_descr">Múchann sé beochan léarscáile agus chomhéadain úsáideora.</string>
     <string name="keep_showing_on_map">Coinnigh ort ag taispeáint ar an léarscáil</string>
     <string name="exit_without_saving">Scoir gan sábháil?</string>
     <string name="auto_split_recording_descr">Tosaigh deighleog nua tar éis bearna 6 nóiméad, rian nua tar éis bearna 2 h, nó comhad nua tar éis bearna níos faide má tá an dáta athraithe.</string>
@@ -4448,7 +4448,7 @@
     <string name="last_intermediate_dest_description">Cuir stad idirmheánach leis</string>
     <string name="empty_state_osm_edits">Cruthaigh nó mionathraigh réada OpenStreetMap</string>
     <string name="save_as_line">Sábháil mar líne</string>
-    <string name="do_not_use_animations">Gan beochan</string>
+    <string name="do_not_use_animations">Bain beochan</string>
     <string name="measurement_tool_save_as_new_track_descr">Sábháil na pointí mar phointí bealaigh nó mar líne.</string>
     <string name="none_point_error">Cuir pointe amháin ar a laghad leis.</string>
     <string name="srtm_menu_download_descr">Íoslódáil léarscáil \'Línte comhrianta\' an réigiúin seo.</string>
@@ -5597,4 +5597,9 @@
     <string name="deleting_history">Stair á scriosadh…</string>
     <string name="show_symbols_bboxes">Taispeáin boscaí siombailí</string>
     <string name="show_rasterization_debug_tile">Taispeáin faisnéis rastaireachta tíleanna</string>
+    <string name="release_5_2">• Obair ar siúl...</string>
+    <string name="shared_string_threads">Snáitheanna</string>
+    <string name="threads_allocated_for_rendering">Snáitheanna leithdháilte le haghaidh rindreála</string>
+    <string name="threads_allocated_for_rendering_desc">D’fhéadfadh leithdháileadh snáithe níos ísle luas a chur le rindreáil an léarscáil i gcásanna áirithe.</string>
+    <string name="turn_by_turn_directions">Treoracha Cas ar Chas</string>
 </resources>

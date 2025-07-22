@@ -2349,8 +2349,8 @@
     <string name="move_point">Flyt punkt</string>
     <string name="keep_showing_on_map">Fortsæt med at vise på kortet</string>
     <string name="exit_without_saving">Afslut uden at gemme?</string>
-    <string name="do_not_use_animations">Ingen animationer</string>
-    <string name="do_not_use_animations_descr">Deaktiverer kortanimationer.</string>
+    <string name="do_not_use_animations">Fjern animationer</string>
+    <string name="do_not_use_animations_descr">Slå kort- og brugerflade-animationer fra.</string>
     <string name="move_all_to_history">Flyt alle til historik</string>
     <string name="show_direction">Afstandsangivelse</string>
     <string name="sort_by">Sorter efter</string>
@@ -4942,7 +4942,7 @@
     <string name="shared_string_avoid">Undgå</string>
     <string name="may_be_used_if_there_is_shortcut">Kan bruges, hvis der er en genvej</string>
     <string name="free_settings_backup">Gratis sikkerhedskopiering af indstillinger</string>
-    <string name="free_ride">Gratis tur</string>
+    <string name="free_ride">Freeride</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Sprængstoffer</string>
     <string name="routing_attr_hazmat_category_usa_5_name">Oxiderende stoffer og organiske peroxider</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Giftige og smitsomme stoffer</string>
@@ -5811,4 +5811,10 @@
     <string name="deleting_history">Sletter historik…</string>
     <string name="show_rasterization_debug_tile">Vis oplysninger om rasterisering af kortfliser</string>
     <string name="show_symbols_bboxes">Vis symbolers bboxer</string>
+    <string name="release_5_2">• Arbejde i gang...</string>
+    <string name="shared_string_threads">Tråde</string>
+    <string name="threads_allocated_for_rendering">Tråde allokeret til rendering</string>
+    <string name="threads_allocated_for_rendering_desc">Lavere trådallokering kan i nogle tilfælde gøre kortgengivelsen hurtigere.</string>
+    <string name="turn_by_turn_directions">Sving-for-sving-vejledning</string>
+    <string name="failed_to_connect">Kunne ikke forbinde til %1s</string>
 </resources>

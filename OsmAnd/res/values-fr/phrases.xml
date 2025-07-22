@@ -2991,7 +2991,7 @@
     <string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
     <string name="poi_socket_schuko_yes">Schuko</string>
     <string name="poi_socket_bs1363_yes">BS 1363</string>
-    <string name="poi_whitewater_rapid_name">Nom des rapides</string>
+    <string name="poi_rapids_name">Nom des rapides</string>
     <string name="poi_glacier_type">Type de glacier</string>
     <string name="poi_frozen_food">Nourriture surgelée</string>
     <string name="poi_shop_fireplace">Vente de cheminée</string>
@@ -5140,4 +5140,8 @@
     <string name="poi_denomination_iglesia_filipina_independiente">Église indépendante des Philippines</string>
     <string name="poi_denomination_sephardi">Séfarade</string>
     <string name="poi_denomination_welsh_independent">Indépendant gallois</string>
+    <string name="poi_canoe_put_in">Mise à l\'eau du canoë</string>
+    <string name="poi_canoe_egress">Canoë à emporter</string>
+    <string name="poi_canoe_put_in_egress">Mise à l\'eau et sortie des canoës</string>
+    <string name="poi_whitewater_hazard">Danger d\'eau vive</string>
 </resources>

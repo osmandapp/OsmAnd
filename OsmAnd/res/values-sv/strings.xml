@@ -415,8 +415,7 @@
     <string name="gpx_option_reverse_route">Omvänd spår-riktning</string>
     <string name="gpx_option_destination_point">Använd aktuell destination</string>
     <string name="gpx_option_from_start_point">Passera längs hela spåret</string>
-    <string name="switch_to_vector_map_to_see"><![CDATA[En offline vektor-karta finns tillgänglig för den här platsen.
-\n\t\n\tFör användning aktivera \'Meny\' -> \'Konfigurera karta\' -> \'Kartkälla…\' -> \'Offline vektor-kartor\'.]]></string>
+    <string name="switch_to_vector_map_to_see">En offline vektor-karta finns tillgänglig för den här platsen. \n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Konfigurera karta\' -&gt; \'Kartkälla…\' -&gt; \'Offline vektor-kartor\'.</string>
     <string name="choose_audio_stream">Röstväglednings-output</string>
     <string name="choose_audio_stream_descr">Välj högtalare för röstvägledning.</string>
     <string name="voice_stream_voice_call">Ljud för telefonsamtal (för att avbryta Bluetooth-stereo i bilar)</string>
@@ -665,7 +664,7 @@
     <string name="transport_stops_to_pass">hållplatser att passera</string>
     <string name="transport_route_distance">Resvägssträcka</string>
     <string name="transport">Transporter</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Ok</string>
     <string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan.</string>
     <string name="show_transport_over_map">Visa hållplatser</string>
     <string name="hello">Navigationsappen OsmAnd</string>
@@ -1537,7 +1536,7 @@
     <string name="dark_theme">Mörkt</string>
     <string name="lang_pms">Piemontesiska</string>
     <string name="lang_bn">Bengaliska</string>
-    <string name="lang_tl">Tagalog</string>
+    <string name="lang_tl">Tagalogiska</string>
     <string name="lang_sh">Serbokroatiska</string>
     <string name="lang_az">Azerbajdzjanska</string>
     <string name="lang_br">Bretonska</string>
@@ -2650,27 +2649,8 @@
 \n• GPS-spårinspelning till lokal GPX-fil eller onlinetjänst
 \n• Valbar visning av hastighet och höjd
 \n• Visa höjdkurvor och terrängskuggning (via särskild insticksmodul)</string>
-    <string name="osmand_plus_extended_description_part7">Bidra direkt till OSM
-\n• Rapportera databuggar
-\n• Ladda upp GPX-spår till OSM direkt från appen
-\n• Lägg till Intressepunkter och ladda upp dem direkt till OSM (eller senare om offline)
-\n• Valfri reseinspelning i bakgrundsläge (när enheten är i strömsparläge)
-\nOsmAnd utvecklas aktivt med öppen källkod. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller koda nya funktioner. Dock är projektet beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner.
-\n</string>
-    <string name="osmand_plus_extended_description_part8">Ungefärlig karttäckning och kvalitet:
-\n • Västeuropa: ****
-\n • Östeuropa: ***
-\n • Ryssland: ***
-\n • Nordamerika: ***
-\n • Sydamerika: **
-\n • Asien: **
-\n • Japan och Korea: ***
-\n • Mellanöstern: **
-\n • Afrika: **
-\n • Antarktis: *
-\nDe flesta länder runt om i världen finns som nedladdningar
-\nFrån Afghanistan till Zimbabwe, från Australien till USA. Argentina, Brasilien, Kanada, Frankrike, Tyskland, Mexiko, Storbritannien, Spanien, ...
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Bidra direkt till OSM \n• Rapportera databuggar \n• Ladda upp GPX-spår till OSM direkt från appen \n• Lägg till Intressepunkter och ladda upp dem direkt till OSM (eller senare om offline) \n• Valfri reseinspelning i bakgrundsläge (när enheten är i strömsparläge) \nOsmAnd utvecklas aktivt med öppen källkod. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller koda nya funktioner. Dock är projektet beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner.</string>
+    <string name="osmand_plus_extended_description_part8">Ungefärlig karttäckning och kvalitet: \n • Västeuropa: **** \n • Östeuropa: *** \n • Ryssland: *** \n • Nordamerika: *** \n • Sydamerika: ** \n • Asien: ** \n • Japan och Korea: *** \n • Mellanöstern: ** \n • Afrika: ** \n • Antarktis: * \nDe flesta länder runt om i världen finns som nedladdningar \nFrån Afghanistan till Zimbabwe, från Australien till USA. Argentina, Brasilien, Kanada, Frankrike, Tyskland, Mexiko, Storbritannien, Spanien, …</string>
     <string name="quick_action_bug_descr">Detta meddelande ingår i kommentarsfältet.</string>
     <string name="quick_action_category_descr">Kategori för att spara favoriten i:</string>
     <string name="quick_action_gpx_category_descr">Välj en valfri kategori.</string>
@@ -2935,7 +2915,7 @@
     <string name="move_inside_category">Objekt kan flyttas endast inom den här kategorin.</string>
     <string name="developer_plugin">Utvecklar-plugin</string>
     <string name="replace_point_descr">Ersätt en annan punkt med den här.</string>
-    <string name="app_mode_ski_touring">Skid-touring</string>
+    <string name="app_mode_ski_touring">Turskidor/Randonee</string>
     <string name="app_mode_ski_snowmobile">Snöskoter</string>
     <string name="custom_osmand_plugin">Anpassad OsmAnd-plugin</string>
     <string name="shared_string_items">Objekt</string>
@@ -3219,7 +3199,7 @@
     <string name="routing_engine_vehicle_type_cycling_mountain">Bergscykling</string>
     <string name="routing_engine_vehicle_type_cycling_road">Vägcyckling</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Vanlig cyckling</string>
-    <string name="routing_engine_vehicle_type_hgv">Lastbil</string>
+    <string name="routing_engine_vehicle_type_hgv">Tung lastbil</string>
     <string name="routing_engine_vehicle_type_small_truck">Liten lastbil</string>
     <string name="routing_engine_vehicle_type_truck">Lastbil</string>
     <string name="routing_engine_vehicle_type_scooter">Skoter</string>
@@ -3246,7 +3226,7 @@
     <string name="activity_type_winter_name">Vinter</string>
     <string name="activity_type_snowmobile_name">Snöskoter</string>
     <string name="activity_type_riding_name">Ridning</string>
-    <string name="activity_type_racing_name">Racing</string>
+    <string name="activity_type_racing_name">Tävling</string>
     <string name="activity_type_mountainbike_name">Mountainbike</string>
     <string name="activity_type_cycling_name">Cykling</string>
     <string name="activity_type_hiking_name">Vandring</string>
@@ -4880,7 +4860,7 @@
     <string name="help_article_map_legend_ski_map_name">Vinter och skidor-kartstil</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Om OsmAnds ruttberäkning</string>
     <string name="terrain_category_description">Höjdkurvor, terrängskuggning i gråskala och lutningskartor i färg, för att visa toppar och dalar.</string>
-    <string name="location_source_descr">Som standard använder OsmAnd installerad från Google Play %1$s för att fastställa plats. \n \nOm du ges felaktig platsinformation, eller om enheten saknar %2$s, pröva att byta till \"%3$s\".</string>
+    <string name="location_source_descr">Som standard använder OsmAnd installerad från Google Play %1$s för att fastställa plats. \n \nOm du ges felaktig platsinformation, eller om enheten saknar %2$s, pröva att byta till \"%3$s\"</string>
     <string name="rendering_value_sector2_name">Sektor 2</string>
     <string name="ant_plus_help_title">Jag vet inte vilken typ av sensor jag har</string>
     <string name="time_to_intermediate_widget_desc">Visar \"Ankomsttid\" eller \"Återstående restid\" till första mellanliggande punkt. Tiden uppdateras kontinuerligt under navigeringen, och så fort en punkt passeras uppdateras den till nästa mellanliggande punkt.</string>
@@ -5679,7 +5659,7 @@
     <string name="connect_obd_instructions_title">OsmAnd stödjer Bluetooth-anslutning till OBD-II skannrar.</string>
     <string name="obd_how_to_connect">Så ansluter du:</string>
     <string name="obd_vehicle_info">Fordonsinformation</string>
-    <string name="route_guidance">Ruttvägledning</string>
+    <string name="route_guidance">Vägledning</string>
     <string name="obd_fuel_consumption_rate_sensor">Bränsleförbrukning (sensor)</string>
     <string name="obd_fuel_level_liter">Bränslenivå (l)</string>
     <string name="obd_fuel_level_percent">Bränslenivå (%)</string>
@@ -5689,7 +5669,7 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Visa leder för off-road motorcykel (cross, enduro)</string>
     <string name="type_of_activity">Aktivitetstyp</string>
     <string name="change_activity">Byt aktivitet</string>
-    <string name="obd_searching_text_description">Vänliga ha din enhet nära skannern. Försäkra dig om att fordonets motor är igång.</string>
+    <string name="obd_searching_text_description">Håll din enhet nära skannern. Försäkra dig om att fordonets motor är igång.</string>
     <string name="liter">l</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Visar fordents bränsleförbrukningstakt baserat på beräkningar (l/100 km)</string>
     <string name="obd_fuel_left_km">Återstående bränsle (km)</string>
@@ -5756,7 +5736,7 @@
     <string name="obd_not_connected_to_device">Bortkopplad från %s</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Bränsleförbrukningstakt</string>
     <string name="obd_nothing_found_text">Inga skannrar hittade</string>
-    <string name="obd_device_forget_sensor_description">Skannern kommer att tas bort från listan. Du kommer när som helst att kunna parkoppla denna skanner på nytt.</string>
+    <string name="obd_device_forget_sensor_description">Skannern kommer att tas bort från listan. Du kan när som helst parkoppla denna skanner på nytt.</string>
     <string name="connect_obd_instructions_step1">Anslut skannern till ditt fordons OBD-II-port.</string>
     <string name="connect_obd_instructions_step2">Starta ditt fordons motor</string>
     <string name="key_event_action_continuous_zoom_in">Kontinuerlig inzoomning</string>
@@ -5834,7 +5814,7 @@
     <string name="recently_visited">Nyligen besökta</string>
     <string name="ais_address_nmea_server">IP-adress för NMEA-datakällan</string>
     <string name="ais_address_nmea_server_description">Definiera IP-adressen för NMEA-datakällan (om TCP används)</string>
-    <string name="no_places_available">Inga platser tillgängliga</string>
+    <string name="no_places_available">Inga platser i det synliga området</string>
     <string name="calculating_indication_message">Beräknar…</string>
     <string name="rendering_avg_info">Renderingsstatistik (medel 1 / 5 / 15 minuter)</string>
     <string name="intermediate_first">Mellanliggande först</string>
@@ -5905,7 +5885,7 @@
     <string name="default_buttons_opacity_original_description">Varje knapp behåller sin egen bakgrundsgenomskinlighet.</string>
     <string name="selected_delayed_profile">Vald profil \"%s\"</string>
     <string name="location_interpolation_percent">Platsinterpolation i procent</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spåra viktiga fordonsdata, genom användning av OBD-II-protokollet. Övervaka nyckeltal som hastighet, motorvarvtal, bränsleförbrukning, med mera.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Håll koll på viktiga fordonsdata genom användning av OBD-II-protokollet. Övervaka nyckeltal som hastighet, motorvarvtal, bränsleförbrukning, med mera.</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
     <string name="obd_throttle_position">Gaspedalens läge</string>
     <string name="obd_calculated_engine_load_desc">Visar hur många procent av motorns tillgängliga effekt som används vid en given tidpunkt.</string>
@@ -5936,4 +5916,122 @@
     <string name="rendering_avg_info_details">FPS för senaste 1000 bilderna: %1$s\nCPU (kartrutor): %2$s\nCPU (inaktiv tid): %3$s\nCPU (väntar på GPU): %4$s</string>
     <string name="show_debug_tile_description">Visa information om kartsymboler på varje kartruta</string>
     <string name="shared_string_not_checked">Inte kontrollerad</string>
+    <string name="release_5_2">•• Arbete pågår...</string>
+    <string name="release_5_1">• Lade till stöd för webb- och plattformsoberoende köp\n\n• Flyttade temperaturenheter till allmänna inställningar för enklare åtkomst\n\n• Lade till batterinivåindikator för BLE-sensorer\n\n• Nytt, mer intuitivt användargränssnitt för punktval i navigering\n\n• Förbättrad widgetsynlighet med en ny kontur\n\n• Lade till analysator för uppförsbackar/nedförsbackar\n\n• Utökad Wikipedia- och Wikivoyage-integration för fler intressepunkter.</string>
+    <string name="uphill_downhill_split">Uppförsbacke / Nedförsbacke</string>
+    <string name="display_priority">Visningsprioritet</string>
+    <string name="point_location">Punktens placering</string>
+    <string name="hmd_promo">HMD-kampanj i %1$s månader</string>
+    <string name="hmd_promo_years">HMD-kampanj i %1$s år</string>
+    <string name="ais_cpa_warning_time">Varningstid för att nå närmaste ankomstpunkt (CPA)</string>
+    <string name="ais_cpa_warning_time_description">Om TCPA (tiden att nå CPA med ett annat fartyg) är mindre än detta värde markeras fartyget med röd färg.</string>
+    <string name="ais_cpa_warning_distance">Varningsavstånd för närmaste infartspunkt (CPA)</string>
+    <string name="ais_cpa_warning_distance_description">Fartyg är märkta med röd färg om CPA är mindre än detta värde och CPA nås inom en snar framtid (se varningstid för att nå CPA).</string>
+    <string name="location_interpolation_percent_desc">Ange andelen platsinterpolering under ruttnavigering. Denna parameter minskar fördröjningen av din position på kartan under animation.</string>
+    <string name="auto_zoom_3d_angle">Auto zoom 3D vinkel</string>
+    <string name="vehicle_metrics_obd_ii">Fordonsmetri (OBD-II)</string>
+    <string name="obd_throttle_position_desc">Visar vinkeln på gasspjällsplattan i gasspjällshuset.</string>
+    <string name="obd_calculated_engine_load">Beräknad motor last</string>
+    <string name="obd_engine_coolant_temp_desc">Visar temperaturen på motorns kylvätska</string>
+    <string name="obd_speed_desc">Visar hastighet från fordonshastighetssensorn (VSS).</string>
+    <string name="obd_air_intake_temp_desc">Visar temperaturen på luften som kommer in i motorns insugningsgrenrör.</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Använd valda enheter i namn.</string>
+    <string name="obd_fuel_consumption_desc">Visar bränsleförbrukningen av motorn, beräknad utifrån återstående bränsle, tankstorlek och avstånd som bestäms av GPS.</string>
+    <string name="shared_string_instant">Omedelbar</string>
+    <string name="show_minor_turns_descr">Filer visas i alla korsningar oavsett röstinstruktioner</string>
+    <string name="show_minor_turns">Visas vid mindre korsningar vid rak körning</string>
+    <string name="us_gallons">Amerikanska gallon</string>
+    <string name="record_obd_data">Registrera fordonsstatistik</string>
+    <string name="obd_plugin_name">Fordonsmetri</string>
+    <string name="dynamic_icon_type_summary">Ikonen ändras baserat på åtgärdsstatus.</string>
+    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="release_4_9">•• Tillagd en helskärm galleri tittare för Wikimedia bilder\n\n• Införde ett nytt plugin \"Vehicle Metrics\" för att övervaka fordonets prestanda med OBD-II-protokollet\n\n• Lägg till möjligheten att tilldela aktiviteter för att spåra och filtrera dem därefter\n\n• Implementerade nya snabba åtgärder för reseinspelning och pekskärmslås\n\n• Introducerad anpassningsbar kartknapp utseende och ett exakt nät\n\n• Lägg till en kontextmeny och en \"Reset medelhastighet\" -åtgärd till widgets\n\nTillagt nytt ruttskikt \"Dirt Bike Trails\"\n\n• Fast \"Auto-record spår under navigering\"\n\n• Fasta problem med flippade koordinater i RTL\n\n• Fast missad sensordata för närvarande inspelningsspår\n\n• Lägg till information om omgivande områden för den valda punkten\n\n• Tillagd snabb åtgärd för att kontrollera OSM Edits synlighet\n\n• Separerade synlighetsparametrar för Terrain-färgningsalternativ\n\n• Lägg till en knappbar ikon för att visa åtkomst eller andra väg- eller vägattribut</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Inspelad resa &amp; fortsätt</string>
+    <string name="obd_vin_desc">VIN-kod över OBD</string>
+    <string name="obd_fuel_type_lpg">Motorgas (LPG)</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Bifuel som kör bensin</string>
+    <string name="obd_fuel_type_bifuel_methanol">Bifuel springa Metanol</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Bifuel kör etanol</string>
+    <string name="obd_fuel_type_bifuel_lpg">Bifuel kör LPG</string>
+    <string name="obd_fuel_type_bifuel_cng">Bifuel kör CNG</string>
+    <string name="obd_fuel_type_bifuel_propane">Bifuel kör Propan</string>
+    <string name="obd_fuel_type_bifuel_electricity">Bifuel på El-drift</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Bifuel som kör elektrisk och förbränningsmotor</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Hybrid bensin</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Hybrid etanol</string>
+    <string name="obd_fuel_type_hybrid_diesel">Hybrid Diesel</string>
+    <string name="obd_fuel_type_hybrid_electric">Hybridelektrisk</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Hybrid el- och förbränningsmotor</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
+    <string name="obd_vin">Chassinummer</string>
+    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hybrid regenerativ</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Bifuel-driven vätgas</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Hybrid vätgas</string>
+    <string name="obd_fuel_type_hydrogen">Väte</string>
+    <string name="obd_widget_group">Fordonsmetri</string>
+    <string name="vehicle_metrics_plugin_settings">Fordonsmetri inställningar</string>
+    <string name="obd_rpm_desc">Visar fordonets varvräknare via OBD-sensorn</string>
+    <string name="obd_fuel_level_desc">Visar fordonets bränslenivå över OBD-sensorn</string>
+    <string name="obd_fuel_left_distance_desc">Visar avstånd fordon kan köra på vänster bränslenivå över OBD sensor</string>
+    <string name="obd_fuel_type_desc">Visar fordonsbränsle typ över OBD sensor</string>
+    <string name="obd_air_intake_temp">Inloppstemperatur</string>
+    <string name="obd_ambient_air_temp">Omgivningstemperatur</string>
+    <string name="obd_engine_coolant_temp">Kylvätsketemperatur</string>
+    <string name="obd_fuel_consumption_rate_desc">Visar fordons bränsleförbrukningshastighet baserat på OBD en plats</string>
+    <string name="obd_plugin_description">Övervaka viktiga fordonsdata med OBD-II-protokollet. Få tillgång till information som:\n• Motorhastighet, motorns körtid, beräknad motorbelastning\n• Bränsleförbrukning, bränsletryck, återstående bränsle\n• Intagstemperatur, omgivningstemperatur, kylartemperatur, motoroljetemperatur\n• Fordonshastighet, gasposition, batterispänning\n</string>
+    <string name="obd_support">OBD stöd</string>
+    <string name="app_mode_suv">suv</string>
+    <string name="weather_source_GFS_description">Globala prognossystemet från National Centers for Environmental Prediction</string>
+    <string name="remove_key_assignment_summary">Tangenttilldelningen för den valda åtgärden kommer att tas bort.</string>
+    <string name="remove_key_assignment">Ta bort tangenttilldelning</string>
+    <string name="change_terrain_color_scheme">Ändra terrängens färgschema</string>
+    <string name="clear_key_assignment_summary">Tangenttilldelningen för den valda åtgärden kommer att tas bort.</string>
+    <string name="clear_all_key_shortcuts_summary">Alla knapp-kopplingar för den valda typen kommer tas bort.</string>
+    <string name="clear_all_key_shortcuts">Rensa alla kortkommandon</string>
+    <string name="no_assigned_keys_desc">Välj en åtgärd och tilldela en nyckel genom att trycka på knappen \"Lägg till\".</string>
+    <string name="no_assigned_keys">Inga tilldelade nycklar</string>
+    <string name="new_key_assignment">Ny nyckel tilldelning</string>
+    <string name="key_name_pattern">Nyckeln \"%1$s\"</string>
+    <string name="key_assignment_add_key">Lägg till nyckel</string>
+    <string name="key_assignment_add_action">Lägg till åtgärd</string>
+    <string name="assigned_keys">Tilldelade nycklar</string>
+    <string name="show_rasterization_debug_tile">Visa information om rasterisering av rutnät</string>
+    <string name="show_utm_grids_description">Visa rutnät i UTM meter istället för WGS84</string>
+    <string name="show_mercator_grids_description">Visa rutnät i Mercator km istället för WGS84 eller UTM</string>
+    <string name="show_dm_grids">Använd DM istället för grader eller DMS</string>
+    <string name="show_dm_grids_description">Visa rutnät i grader och minuter istället för grader eller DMS</string>
+    <string name="release_4_7">Ny \"Speedometer\" widget kompatibel med Android Auto\n\n• Konfigurera kartskärmen genom att lägga till flera knappar \"Quick Action\"\n\n• Förbättrad läsbarhet av data i grafer\n\n• Lägga till filter genom sensordata för spår\n\n• Förbättrad utseende anpassning för grupp av spår\n\n• Lägg till stöd för ytterligare GPX-taggar\n\nAnpassa \"Distans under navigering\": välj mellan exakta eller runda upp siffror\n\nUnified UI för spårval\n\nOpenStreetMap-inloggningen bytt till OAuth 2.0</string>
+    <string name="rendering_attr_padusDisplayMode_name">Visningsläge för allmän mark</string>
+    <string name="rendering_attr_padusDisplayMode_description">Efter åtkomsttyp eller administratörsnamn</string>
+    <string name="rendering_value_access_name">Efter åtkomsttyp</string>
+    <string name="rendering_value_managerName_name">Efter chefens namn</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Dölj gränser för offentlig mark</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Dölj gränser för offentlig mark men lämna områden</string>
+    <string name="any_connected">Alla anslutna</string>
+    <string name="any_connected_with_device">Alla anslutna: %s</string>
+    <string name="shared_string_checked">markerad</string>
+    <string name="auto_backup_preference_desc">Som standard sparar Android säkerhetskopior av favoriter, karttokens och OsmAnd-inställningar för att återställa dem på nya enheter eller efter ominstallation. Denna backup är begränsad till 25 MB.\nNär du använder OsmAnd Cloud kan detta leda till missförstånd efter ominstallation.</string>
+    <string name="shared_string_split_by">Dela upp efter</string>
+    <string name="shared_string_flat">Slätt</string>
+    <string name="imperial_gallons">Imperial gallons</string>
+    <string name="third_links">Tredje länkar</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="release_3_7">• Ny offline Slope kartor\n\n• Full anpassning av favoriter och GPX Vägpunkter - anpassade färger, ikoner, former\n\nAnpassa objekt beställning i \"Context Menu\", \"Configure Map\" och \"Drawer\"\n\n• Wikipedia som ett separat lager i Konfigurera karta, välj endast nödvändiga språk\n\nSkapa ditt eget POI-filter/kartor med total flexibilitet\n\n• Lägga till alternativ för att återställa inställningar för anpassade profiler\n\n• Full GPX-rutter från navigationsstödstrafikbanor och kompletta turninstruktioner\n\n• Fix UI-storlekar på tabletter\n\n• Fix buggar med RTL\n\n</string>
+    <string name="release_3_6">• Profiler: Nu kan du ändra ordning, ställa in ikon för karta, ändra alla inställningar för basprofiler och återställa dem tillbaka till standarder\n\n• Lägg till exitnummer i navigeringen\n\n• Omarbetade plugin inställningar\n\n• Omarbetade inställningar skärmen för snabb åtkomst till alla profiler\n\n• Lägg till alternativ för att kopiera inställningar från en annan profil\n\n• Tillagd förmåga att ändra en beställning eller dölja POI-kategorier i Sök\n\n• Korrekt anpassade POI-ikoner på kartan\n\n• Lägg till Sunset / Sunrise-data för att konfigurera kartan\n\n• Tillagda hem / arbetsikoner på kartan\n\n• Tillagt stöd för multilinebeskrivning i Inställningar\n\nTillagd korrekt transkribering i kartan över Japan\n\n• Lägg till Antarktis karta</string>
+    <string name="monitoring_min_speed_descr">Detta är ett låghastighetsavskärningsfilter för att inte registrera punkter under en viss hastighet. Detta kan göra att inspelade spår ser jämnare ut när de visas på kartan.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Sidoeffekt: Ditt spår kommer att saknas alla sektioner där minsta hastighet kriterium inte uppfylldes (t.ex. där du trycker på din cykel upp en brant kulle). Det kommer inte att finnas någon information om perioder i vila, som raster. Detta har effekter på alla analyser eller efterbehandling, som när du försöker bestämma den totala längden på din resa, tid i rörelse eller din genomsnittliga hastighet.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Rekommendation: Försök att använda rörelsedetektering via loggningsminimifiltret (B) först, det kan ge bättre resultat, och du kommer att förlora mindre data. Om dina spår förblir bullriga med låga hastigheter, prova icke-nollvärden här. Observera att vissa mätningar kanske inte rapporterar något hastighetsvärde alls (vissa nätverksbaserade metoder), i vilket fall du inte skulle spela in något.</string>
+    <string name="monitoring_min_speed_descr_remark">Anmärkning: hastighet &gt; 0 kontroll: De flesta GPS-chipset rapporterar ett hastighetsvärde endast om algoritmen avgör att du är i rörelse, och inget om du inte är det. Därför använder inställningen &gt; 0 i detta filter i viss mening GPS-chipsetets rörelsedetektering. Men även om det inte filtreras här vid inspelningstillfället använder vi fortfarande den här funktionen i vår GPX-analys för att bestämma det korrigerade avståndet, d.v.s. värdet som visas i det fältet är det avstånd som registrerats under rörelse.</string>
+    <string name="monitoring_min_distance_descr">Om du vrider det här filtret på kan du undvika ytterligare datainspelning när rörelsen nästan inte upptäcks. Det förbättrar också det rumsliga utseendet av spår utan vidare bearbetning.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Biverkningar: Viloperioder registreras inte alls eller precis som en punkt vardera. Mindre rörelser (till exempel till sidan av vägen för att markera en möjlig svängning i din resa) kan filtreras ut. Observera att din fil kommer att innehålla mindre information för efterbehandling, och samtidigt kan potentiellt spara GPS-artefakter orsakade av dålig mottagning eller chipseteffekter.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Rekommendation: Ställ in 5 meter förskjutning om du inte vill spela in mindre detaljer om din rutt, och behöver inte ytterligare data om din viloperiod.</string>
+    <string name="release_3_5">• Uppdaterade app- och profilinställningar: Inställningar är nu ordnade efter typ. Varje profil kan anpassas separat.\n\n• Ny karta nedladdning dialog föreslår en karta för att ladda ner medan du surfar\n\n• Mörka temafixar\n\n• Fast flera routingproblem runt om i världen\n\nUppdaterad baskarta med mer detaljerat vägnät\n\n• Fasta översvämmade områden runt om i världen\n\nSki Routing: Tillagd höjdprofil och ruttkomplexitet till ruttens detaljer\n\n• Andra bugfix</string>
+    <string name="release_3_4">• Appprofiler: Skapa en anpassad profil för dina egna behov, med en anpassad ikon och färg\n\n• Nu anpassa någon profils standard och min/max hastigheter\n\n• Lägg till en widget för de aktuella koordinaterna\n\n• Lägga till alternativ för att visa kompassen och en radie härskare på kartan\n\n• Fix bakgrund track logging\n\n• Förbättrad bakgrundskarta nedladdningar\n\n• Returnerad \"Turn screen on\" -alternativ\n\n• Fast Wikipedia språkval\n\n• Fast kompassknapp beteende under navigering\n\n• Andra buggfixar</string>
+    <string name="show_symbols_debug_info">Visa felsökningsinformation för symboler</string>
+    <string name="shared_string_threads">Trådar</string>
+    <string name="threads_allocated_for_rendering">Trådar allokerade för rendering</string>
+    <string name="threads_allocated_for_rendering_desc">Lägre tråd-allokering kan i vissa fall snabba upp kartrenderingen.</string>
+    <string name="turn_by_turn_directions">Sväng för sväng vägbeskrivning</string>
+    <string name="failed_to_connect">Kunde inte ansluta till %1s</string>
 </resources>

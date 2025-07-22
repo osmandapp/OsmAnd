@@ -1441,8 +1441,8 @@
     <string name="move_all_to_history">Све премести у историју</string>
     <string name="show_direction">Приказ удаљености</string>
     <string name="sort_by">Распореди по</string>
-    <string name="do_not_use_animations">Без оживљавања</string>
-    <string name="do_not_use_animations_descr">Искључује оживљавање у програму.</string>
+    <string name="do_not_use_animations">Уклони оживљавања</string>
+    <string name="do_not_use_animations_descr">Искључује оживљавање мапа и КИ.</string>
     <string name="keep_showing_on_map">Приказуј на карти</string>
     <string name="exit_without_saving">Изађи пре чувања?</string>
     <string name="line">Линија</string>
@@ -5764,4 +5764,10 @@
     <string name="deleting_history">Бришем повест…</string>
     <string name="show_rasterization_debug_tile">Прикажи информације о растеризацији плочица</string>
     <string name="show_symbols_bboxes">Прикажи симболе бокс оквирног поља</string>
+    <string name="release_5_2">• Рад у току...</string>
+    <string name="shared_string_threads">Нити</string>
+    <string name="threads_allocated_for_rendering">Нити додељене за приказивање</string>
+    <string name="threads_allocated_for_rendering_desc">Мања алокација нити може убрзати приказивање мапе у неким случајевима.</string>
+    <string name="turn_by_turn_directions">Упутства корак-по-корак</string>
+    <string name="failed_to_connect">Није успело повезивање са %1s</string>
 </resources>

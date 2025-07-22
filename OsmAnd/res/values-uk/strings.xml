@@ -2356,8 +2356,8 @@
     <string name="move_all_to_history">Перемістити усе до історії</string>
     <string name="show_direction">Показ відстані</string>
     <string name="sort_by">Сортувати за</string>
-    <string name="do_not_use_animations">Без анімації</string>
-    <string name="do_not_use_animations_descr">Вимикає анімацію мапи.</string>
+    <string name="do_not_use_animations">Вилучити анімацію</string>
+    <string name="do_not_use_animations_descr">Вимикає анімацію карти та інтерфейсу користувача.</string>
     <string name="marker_show_distance_descr">Вибрати як показувати відстань і напрямок до позначок на мапі:</string>
     <string name="all_markers_moved_to_history">Усі позначки перенесено до історії</string>
     <string name="marker_moved_to_history">Позначку мапи перенесено до історії</string>
@@ -5790,4 +5790,10 @@
     <string name="deleting_history">Видалення історії…</string>
     <string name="show_rasterization_debug_tile">Показати інформацію про растеризацію плиток</string>
     <string name="show_symbols_bboxes">Показати символи bboxes</string>
+    <string name="release_5_2">• Робота триває...</string>
+    <string name="shared_string_threads">Теми</string>
+    <string name="threads_allocated_for_rendering">Потоки, виділені для рендерингу</string>
+    <string name="threads_allocated_for_rendering_desc">У деяких випадках менший розподіл потоків може пришвидшити рендеринг карти.</string>
+    <string name="turn_by_turn_directions">Покрокові вказівки</string>
+    <string name="failed_to_connect">Не вдалося підключитися до %1s</string>
 </resources>

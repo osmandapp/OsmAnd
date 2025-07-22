@@ -5917,4 +5917,22 @@
     <string name="poi_source">Interesgunearen jatorria</string>
     <string name="intermediate_first">Tarteko lehenengoa</string>
     <string name="destination_first">Lehenengo helmuga</string>
+    <string name="release_5_2">• Lana martxan...</string>
+    <string name="release_5_1">• Web erosketarako laguntza gehitu da\n\n • Sarbide errazagoa lortzeko tenperatura unitateak ezarpen orokorretara mugitu dira\n\n • Sentsoreen araberako bateriaren maila adierazlea gehitu da\n\n • Nabigazioan Puntuen Aukeraketarako interfaze berria eta intuitiboagoa\n\n • Trepeten ikusgarritasuna hobetzea eskema berri batekin\n\n • Gehitu da malda gorabeheren analizatzailea\n\n • Interesguneen gehiagorako Wikipedia eta Wikivoyageren integrazioa.</string>
+    <string name="shared_string_threads">Hariak</string>
+    <string name="display_priority">Bistaratze lehentasuna</string>
+    <string name="row_height">Errenkadaren altuera</string>
+    <string name="add_widget">Gehitu trepeta</string>
+    <string name="shared_string_online_only">Bakarrik konektatuta</string>
+    <string name="shared_string_offline_only">Bakarrik deskonektatuta</string>
+    <string name="meridian_180">180 meridianoa</string>
+    <string name="prime_meridian">Zero meridianoa</string>
+    <string name="equator">Ekuatorea</string>
+    <string name="show_image_previews">Erakutsi irudien aurrebista</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Maparen koordenatuen saretaren ikusgarritasuna kontrolatzeko ekintza.</string>
+    <string name="layer_coordinates_grid">Koordenatuen sarea</string>
+    <string name="choose_location">Aukeratu kokapen bat</string>
+    <string name="point_location">Puntuaren kokapena</string>
+    <string name="shared_string_map_center">Maparen erdigunea</string>
+    <string name="choose_location_on_map">Aukeratu kokapen bat mapan.</string>
 </resources>

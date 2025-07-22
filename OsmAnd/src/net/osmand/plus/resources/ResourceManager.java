@@ -142,6 +142,8 @@ public class ResourceManager {
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<>();
 	private final Map<String, String> backupedFileNames = new ConcurrentHashMap<>();
 
+	private Set<String> standardPoiTypesKeyNames = null;
+
 	protected final IncrementalChangesManager changesManager = new IncrementalChangesManager(this);
 
 	protected final MapRenderRepositories renderer;
@@ -690,7 +692,9 @@ public class ResourceManager {
 		while (it.hasNext()) {
 			Entry<PoiCategory, Map<String, PoiType>> next = it.next();
 			PoiCategory category = next.getKey();
-			category.addExtraPoiTypes(next.getValue());
+			Map<String, PoiType> categoryDeltaPoiTypes = next.getValue();
+			categoryDeltaPoiTypes.keySet().removeAll(getStandardPoiTypesKeyNames());
+			category.addExtraPoiTypes(categoryDeltaPoiTypes);
 		}
 		log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
 		if (files.size() > 0 && (!indCache.exists() || indCache.canWrite())) {
@@ -706,6 +710,20 @@ public class ResourceManager {
 			l.onMapsIndexed();
 		}
 		return warnings;
+	}
+
+	private Set<String> getStandardPoiTypesKeyNames() {
+		if (standardPoiTypesKeyNames == null) {
+			MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
+			Set<String> allPoiTypesKeyNames = new HashSet<>();
+			for (PoiCategory poiCategory : mapPoiTypes.getCategories()) {
+				for (PoiType poiType : poiCategory.getPoiTypes()) {
+					allPoiTypesKeyNames.add(poiType.getKeyName());
+				}
+			}
+			standardPoiTypesKeyNames = allPoiTypesKeyNames;
+		}
+		return standardPoiTypesKeyNames;
 	}
 
 	public List<String> getTravelRepositoryNames() {
@@ -1049,6 +1067,8 @@ public class ResourceManager {
 	@NonNull
 	private AssetsCollection readBundledAssets() throws IOException {
 		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+		DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+
 		AssetManager assetManager = app.getAssets();
 		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.json");
 		AssetEntryList lst = new Gson().fromJson(new InputStreamReader(isBundledAssetsXml), AssetEntryList.class);

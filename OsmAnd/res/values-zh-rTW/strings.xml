@@ -2334,8 +2334,8 @@
     <string name="move_point">移動標點</string>
     <string name="keep_showing_on_map">在地圖上維持著顯示</string>
     <string name="exit_without_saving">離開而不儲存嗎？</string>
-    <string name="do_not_use_animations">無動畫</string>
-    <string name="do_not_use_animations_descr">關閉地圖動畫。</string>
+    <string name="do_not_use_animations">移除動畫</string>
+    <string name="do_not_use_animations_descr">關閉地圖與使用者介面動畫。</string>
     <string name="move_all_to_history">全部移動到歷程</string>
     <string name="show_direction">距離指示</string>
     <string name="sort_by">排序方式</string>
@@ -5763,4 +5763,10 @@
     <string name="deleting_history">正在刪除歷史紀錄……</string>
     <string name="show_symbols_bboxes">顯示符號方塊</string>
     <string name="show_rasterization_debug_tile">顯示圖磚點陣化資訊</string>
+    <string name="release_5_2">• 正在進行中……</string>
+    <string name="shared_string_threads">執行緒</string>
+    <string name="threads_allocated_for_rendering">分配用於繪製的執行緒</string>
+    <string name="threads_allocated_for_rendering_desc">在某些情況下，較低的執行緒分配可能會加速地圖繪製的速度。</string>
+    <string name="turn_by_turn_directions">轉向指示</string>
+    <string name="failed_to_connect">無法連線至 %1s</string>
 </resources>

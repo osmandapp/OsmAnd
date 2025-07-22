@@ -13,13 +13,17 @@ import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.Root;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewAssertion;
+import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.GeneralClickAction;
 import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Tap;
+import androidx.test.espresso.matcher.RootMatchers;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -90,14 +94,22 @@ public class SystemDialogInteractions {
 		return null;
 	}
 
-
 	public static void waitForAnyView(long timeoutMs, long pollIntervalMs, Matcher<View>... matchers) {
+		waitForAnyView(timeoutMs, pollIntervalMs, null, matchers);
+	}
+
+	public static void waitForAnyView(long timeoutMs, long pollIntervalMs,
+	                                  @Nullable Matcher<Root> inRoot, Matcher<View>... matchers) {
 		long startTime = System.currentTimeMillis();
 
 		while (System.currentTimeMillis() - startTime < timeoutMs) {
 			for (Matcher<View> matcher : matchers) {
 				try {
-					onView(matcher).check(matches(isDisplayed()));
+					ViewInteraction interaction = onView(matcher);
+					if (inRoot != null) {
+						interaction.inRoot(inRoot);
+					}
+					interaction.check(matches(isDisplayed()));
 					return; // One of the views is displayed
 				} catch (NoMatchingViewException | AssertionError e) {
 					// Ignore and try next

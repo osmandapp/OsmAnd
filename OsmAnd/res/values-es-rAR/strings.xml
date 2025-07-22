@@ -2271,8 +2271,8 @@
     <string name="move_point">Mover punto</string>
     <string name="keep_showing_on_map">Mantener en el mapa</string>
     <string name="exit_without_saving">¿Salir sin guardar?</string>
-    <string name="do_not_use_animations">Sin animaciones</string>
-    <string name="do_not_use_animations_descr">Desactiva las animaciones del mapa.</string>
+    <string name="do_not_use_animations">Quitar animaciones</string>
+    <string name="do_not_use_animations_descr">Desactiva las animaciones del mapa y la interfaz.</string>
     <string name="move_all_to_history">Mover todo al historial</string>
     <string name="show_direction">Indicación de distancia</string>
     <string name="sort_by">Ordenar por</string>
@@ -5649,4 +5649,10 @@
     <string name="deleting_history">Borrando historial…</string>
     <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
     <string name="show_symbols_bboxes">Mostrar cuadros delimitadores de los símbolos</string>
+    <string name="release_5_2">• Trabajo en progreso...</string>
+    <string name="shared_string_threads">Hilos</string>
+    <string name="threads_allocated_for_rendering">Hilos asignados a la representación</string>
+    <string name="threads_allocated_for_rendering_desc">La asignación de hilos inferiores podría acelerar la representación del mapa en algunos casos.</string>
+    <string name="turn_by_turn_directions">Indicaciones de giros</string>
+    <string name="failed_to_connect">Falló al conectar con %1s</string>
 </resources>

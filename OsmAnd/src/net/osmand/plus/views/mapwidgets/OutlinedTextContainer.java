@@ -175,6 +175,9 @@ public class OutlinedTextContainer extends FrameLayout {
 	public void setText(@Nullable CharSequence text) {
 		outlineTextView.setText(text);
 		mainTextView.setText(text);
+
+		outlineTextView.requestLayout();
+		mainTextView.requestLayout();
 	}
 
 	public CharSequence getText() {
