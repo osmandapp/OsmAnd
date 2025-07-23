@@ -233,9 +233,7 @@
     <string name="shared_string_no_thanks">Ні, дякую</string>
     <string name="basemap_missing">Завантажте базову мапу світу, щоб оглядати весь світ на загальних масштабах.</string>
     <string name="vector_data_missing">Завантажте (\'офлайн\') дані для використання мап без зʼєднання з Інтернетом.</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nЗатисніть, щоб відкрити опції"</string>
+    <string name="local_index_gpx_info_show">\n\nЗатисніть, щоб відкрити опції</string>
     <string name="local_index_installed">Локальна версія</string>
     <string name="local_index_items_backuped">%1$d з %2$d обʼєктів вимкнено.</string>
     <string name="local_index_items_deleted">%1$d з %2$d обʼєктів вилучено.</string>
@@ -1086,9 +1084,7 @@
     <string name="loading_smth">Завантаження %1$s…</string>
     <string name="map_widget_plain_time">Поточний час</string>
     <string name="shared_string_waypoint">Маршрутна точка</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nЗатисніть, щоб переглянути на мапі"</string>
+    <string name="selected_gpx_info_show">\n\nЗатисніть, щоб переглянути на мапі</string>
     <string name="delay_navigation_start">Запускати навігацію автоматично</string>
     <string name="shared_string_selected_lowercase">виділені</string>
     <string name="gpx_info_subtracks">Субтреки: %1$s</string>
@@ -5797,4 +5793,9 @@
     <string name="turn_by_turn_directions">Покрокові вказівки</string>
     <string name="failed_to_connect">Не вдалося підключитися до %1s</string>
     <string name="enable_msaa">Увімкнути MSAA</string>
+    <string name="next_turn_information">Інформація про наступний поворот</string>
+    <string name="next_turn_information_desc">Показує напрямок майбутнього повороту та назву вулиці.</string>
+    <string name="description_purchases_fastspring">Ви можете керувати своїми покупками через портал керування обліковим записом FastSpring.</string>
+    <string name="description_subscription_fastspring">Ви можете керувати своєю підпискою або скасувати її через портал керування обліковим записом FastSpring.</string>
+    <string name="manage_purchases">Керування покупками</string>
 </resources>
