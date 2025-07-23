@@ -23,6 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
@@ -31,7 +32,6 @@ import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +52,9 @@ public class MapHudLayout extends FrameLayout {
 	private final float dpToPx;
 	private final int statusBarHeight;
 
+	private final boolean tablet;
+	private final boolean portrait;
+
 	public MapHudLayout(@NonNull Context context) {
 		this(context, null);
 	}
@@ -70,6 +73,8 @@ public class MapHudLayout extends FrameLayout {
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.dpToPx = AndroidUtils.dpToPxF(context, 1);
 		this.statusBarHeight = AndroidUtils.getStatusBarHeight(context);
+		this.tablet = AndroidUiHelper.isTablet(context);
+		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
 	}
 
 	@Override
@@ -221,7 +226,7 @@ public class MapHudLayout extends FrameLayout {
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(panel.rightSide ? POS_RIGHT : POS_LEFT);
 
-			if (AndroidUiHelper.isOrientationPortrait(getContext())) {
+			if (portrait) {
 				position.setMoveDescendantsVertical();
 			} else {
 				position.setMoveDescendantsHorizontal();
@@ -353,40 +358,5 @@ public class MapHudLayout extends FrameLayout {
 
 	private int getAdjustedHeight() {
 		return getHeight() - statusBarHeight;
-	}
-
-	public interface ViewChangeListener {
-		void onSizeChanged(@NonNull View view, int w, int h, int oldWidth, int oldHeight);
-
-		void onVisibilityChanged(@NonNull View view, int visibility);
-	}
-
-	public interface ViewChangeProvider {
-
-		default void addViewChangeListener(@NonNull ViewChangeListener listener) {
-			Collection<ViewChangeListener> listeners = getViewChangeListeners();
-			if (!listeners.contains(listener)) {
-				listeners.add(listener);
-			}
-		}
-
-		default void removeViewChangeListener(@NonNull ViewChangeListener listener) {
-			getViewChangeListeners().remove(listener);
-		}
-
-		default void notifySizeChanged(@NonNull View view, int w, int h, int oldWidth, int oldHeight) {
-			for (ViewChangeListener listener : getViewChangeListeners()) {
-				listener.onSizeChanged(view, w, h, oldWidth, oldHeight);
-			}
-		}
-
-		default void notifyVisibilityChanged(@NonNull View view, int visibility) {
-			for (ViewChangeListener listener : getViewChangeListeners()) {
-				listener.onVisibilityChanged(view, visibility);
-			}
-		}
-
-		@NonNull
-		Collection<ViewChangeListener> getViewChangeListeners();
 	}
 }
