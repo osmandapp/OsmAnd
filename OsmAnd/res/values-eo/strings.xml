@@ -5782,4 +5782,5 @@
     <string name="threads_allocated_for_rendering_desc">Malpliigo de asignitaj fadenoj povas iuokaze plirapidigi map-bildigadon.</string>
     <string name="turn_by_turn_directions">Gvidiloj pri kurso</string>
     <string name="failed_to_connect">Malsukcesis konekti al %1s</string>
+    <string name="enable_msaa">Aktivigi plurspecimenan glatigon (MSAA)</string>
 </resources>

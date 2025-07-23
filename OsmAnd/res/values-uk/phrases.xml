@@ -203,11 +203,11 @@
     <string name="poi_motorcycle_parking">Стоянка для мотоциклів</string>
     <string name="poi_parking_entrance">В’їзд на стоянку</string>
     <string name="poi_garages">Гаражі</string>
-    <string name="poi_public_transport_platform">Зупинка громадського транспорту</string>
+    <string name="poi_public_transport_platform">Зупинка громадського транспортy</string>
     <string name="poi_public_transport_platform_bus">Автобусна зупинка</string>
     <string name="poi_public_transport_platform_trolleybus">Тролейбусна зупинка</string>
     <string name="poi_bus_stop">Автобусна зупинка</string>
-    <string name="poi_public_transport_stop_position">Зупинка громадського транспорту</string>
+    <string name="poi_public_transport_stop_position">Розташування зупинки громадського транспорту</string>
     <string name="poi_public_transport_platform_tram">Трамвайна зупинка</string>
     <string name="poi_tram_stop">Трамвайна зупинка</string>
     <string name="poi_public_transport_station">Станція громадського транспорту</string>
@@ -738,7 +738,7 @@
     <string name="poi_denomination_seventh_day_adventist">Адвентист сьомого дня</string>
     <string name="poi_denomination_new_apostolic">Новий апостольський</string>
     <string name="poi_denomination_church_of_england">Церква Англії</string>
-    <string name="poi_denomination_episcopal">Єпископальна церква</string>
+    <string name="poi_denomination_episcopal">Єпископальна</string>
     <string name="poi_denomination_shia">Шиїзм</string>
     <string name="poi_denomination_united">Об’єднана церква</string>
     <string name="poi_denomination_greek_catholic">Грецький католик</string>
@@ -1816,7 +1816,7 @@
     <string name="poi_bin_no">Без сміттєвого кошика</string>
     <string name="poi_impromptu_yes">Так</string>
     <string name="poi_office_midwife">Кабінет акушерки</string>
-    <string name="poi_shelter_type_public_transport">Зупинка громадського транспорту</string>
+    <string name="poi_shelter_type_public_transport">Громадський транспорт</string>
     <string name="poi_payment_routex_no">Паливні картки Routex не приймаються</string>
     <string name="poi_impromptu_no">Ні</string>
     <string name="poi_fire_hydrant_diameter">Діаметр гідранта</string>

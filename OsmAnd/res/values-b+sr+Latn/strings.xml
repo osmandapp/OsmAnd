@@ -5771,4 +5771,5 @@
     <string name="threads_allocated_for_rendering">Teme dodeljene za rendering</string>
     <string name="turn_by_turn_directions">Navođenje</string>
     <string name="failed_to_connect">Nije uspelo povezivanje sa %1s</string>
+    <string name="enable_msaa">Uključiti MSAA</string>
 </resources>
