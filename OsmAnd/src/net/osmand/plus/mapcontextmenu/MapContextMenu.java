@@ -43,6 +43,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -1256,22 +1257,16 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private void addNewWptToGPXFileImpl(@NonNull MapActivity mapActivity,
 	                                    @Nullable String title, @Nullable Amenity amenity) {
-		GpxUiHelper.selectSingleGPXFile(mapActivity, true, result -> {
+		SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				GpxFile gpxFile;
-				if (result != null && result.length > 0) {
-					gpxFile = result[0];
-				} else {
-					gpxFile = activity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-				}
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
 					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
 				}
 			}
-			return true;
-		});
+		};
+		SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileSelectionListener);
 	}
 
 	@Nullable
