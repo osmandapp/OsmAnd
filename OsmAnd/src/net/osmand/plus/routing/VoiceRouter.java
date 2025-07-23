@@ -554,11 +554,13 @@ public class VoiceRouter {
 	}
 
 	void playThen() {
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
-			p.then();
+		if (router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
+			CommandBuilder p = getNewCommandPlayerToPlay();
+			if (p != null) {
+				p.then();
+			}
+			play(p);
 		}
-		play(p);
 	}
 
 	private void playGoAhead(int dist, RouteDirectionInfo next, StreetName streetName) {
@@ -679,7 +681,7 @@ public class VoiceRouter {
 
 	private void playPrepareTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
+		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
 			String tParam = getTurnType(next.getTurnType());
 			if (tParam != null) {
 				p.prepareTurn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
