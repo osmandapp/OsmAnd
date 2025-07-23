@@ -5770,4 +5770,5 @@
     <string name="threads_allocated_for_rendering_desc">Мања алокација нити може убрзати приказивање мапе у неким случајевима.</string>
     <string name="turn_by_turn_directions">Упутства корак-по-корак</string>
     <string name="failed_to_connect">Није успело повезивање са %1s</string>
+    <string name="enable_msaa">Омогући MSAA</string>
 </resources>

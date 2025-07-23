@@ -11,6 +11,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.importfiles.ui.ImportTrackItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -84,6 +85,10 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 				}
 				trackFile.setAdditionalExaggeration(gpxFile.getAdditionalExaggeration());
 				trackFile.setElevationMeters(gpxFile.getElevationMeters());
+
+				Metadata metadata = new Metadata(gpxFile.getMetadata());
+				metadata.setName(null);
+				trackFile.setMetadata(metadata);
 
 				SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
 				selectedGpxFile.setGpxFile(trackFile, app);

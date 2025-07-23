@@ -5769,4 +5769,5 @@
     <string name="threads_allocated_for_rendering_desc">在某些情況下，較低的執行緒分配可能會加速地圖繪製的速度。</string>
     <string name="turn_by_turn_directions">轉向指示</string>
     <string name="failed_to_connect">無法連線至 %1s</string>
+    <string name="enable_msaa">啟用 MSAA</string>
 </resources>

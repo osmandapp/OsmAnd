@@ -5736,4 +5736,5 @@
     <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép renderelését.</string>
     <string name="turn_by_turn_directions">Részletes navigáció</string>
     <string name="failed_to_connect">Sikertelen csatlakozás ehhez: %1s</string>
+    <string name="enable_msaa">MSAA engedélyezése</string>
 </resources>

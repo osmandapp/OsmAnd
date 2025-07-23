@@ -58,6 +58,11 @@ public class ButtonPositionSize {
 		return this;
 	}
 
+	public ButtonPositionSize setMoveDescendantsAny() {
+		this.moveDescendants = MOVE_DESCENDANTS_ANY;
+		return this;
+	}
+
 	public ButtonPositionSize setMoveDescendantsVertical() {
 		this.moveDescendants = MOVE_DESCENDANTS_VERTICAL;
 		return this;

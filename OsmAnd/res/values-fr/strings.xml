@@ -2245,7 +2245,7 @@
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
     <string name="waypoint_one">Point de passage 1</string>
     <string name="save_route_point">Enregistrer le point d\'itinéraire</string>
-    <string name="add_waypoint">Ajouter un point de passage</string>
+    <string name="add_waypoint">Ajouter une étape</string>
     <string name="save_gpx_waypoint">Enregistrer le point de passage GPX</string>
     <string name="live_monitoring_max_interval_to_send">Tampon temporel pour le suivi en ligne</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Indiquer la durée pendant laquelle les positions sont conservées sans connexion</string>
@@ -5683,4 +5683,5 @@
     <string name="threads_allocated_for_rendering_desc">L\'allocation d\'un faible nombre de threads peut, dans certains cas, accélérer le rendu de la carte.</string>
     <string name="turn_by_turn_directions">Indications de guidage pas à pas</string>
     <string name="failed_to_connect">Échec de connexion à %1s</string>
+    <string name="enable_msaa">Activer MSAA</string>
 </resources>

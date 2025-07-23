@@ -817,8 +817,8 @@
     <string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
     <string name="share_route_subject">Ruta compartida vía OsmAnd</string>
     <string name="route_roundabout">Rotonda: Toma la %1$dª salida en</string>
-    <string name="route_kl">Mantente a la izquierda y sigue por</string>
-    <string name="route_kr">Mantente a la derecha y sigue por</string>
+    <string name="route_kl">Mantente por la izquierda y sigue por</string>
+    <string name="route_kr">Mantente por la derecha y sigue por</string>
     <string name="rendering_attr_noPolygons_description">Hacer todas las funciones del terreno transparentes en el mapa.</string>
     <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de dibujo</string>
@@ -1933,7 +1933,7 @@
     <string name="search_my_location">Encontrar mi ubicación</string>
     <string name="skip_map_downloading">Omitir descargas de mapas</string>
     <string name="skip_map_downloading_desc">Sin mapas descargados. Puedes elegir uno de la lista o descargarlos después a través de «Menú - %1$s».</string>
-    <string name="search_another_country">Elegir otra región</string>
+    <string name="search_another_country">Elige otra región</string>
     <string name="search_map">Buscando mapas…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas a descargar para esa región.</string>
     <string name="location_not_found">Ubicación no encontrada</string>
@@ -2192,7 +2192,7 @@
     <string name="type_city_town">Escribe la ciudad, pueblo o localidad</string>
     <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades cercanas</string>
-    <string name="select_city">Elegir la ciudad o pueblo</string>
+    <string name="select_city">Elige la ciudad o pueblo</string>
     <string name="select_postcode">Buscar por código postal</string>
     <string name="type_address">Escribe la dirección</string>
     <string name="select_street">Elige la calle</string>
@@ -2227,7 +2227,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
-    <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre sitios, colabora, captura el mundo.</string>
+    <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre sitios, colabora y captura el mundo.</string>
     <string name="shared_string_add_photos">Agregar fotos</string>
     <string name="mapillary_action_descr">Comparte tus imágenes a nivel de calle a través de Mapillary.</string>
     <string name="plugin_mapillary_descr">Imágenes de vistas a nivel de calle. También puedes contribuir tú mismo. Para ver los datos existentes como una capa en el mapa, activa las «Imágenes a nivel de calle» en el menú «Configurar mapa».</string>
@@ -2303,8 +2303,8 @@
     <string name="move_point">Mover punto</string>
     <string name="keep_showing_on_map">Mantener en el mapa</string>
     <string name="exit_without_saving">¿Salir sin guardar?</string>
-    <string name="do_not_use_animations">Sin animaciones</string>
-    <string name="do_not_use_animations_descr">Desactiva las animaciones del mapa.</string>
+    <string name="do_not_use_animations">Quitar animaciones</string>
+    <string name="do_not_use_animations_descr">Desactiva las animaciones del mapa y la interfaz.</string>
     <string name="move_all_to_history">Mover todo al historial</string>
     <string name="show_direction">Indicación de distancia</string>
     <string name="sort_by">Ordenar por</string>
@@ -4353,7 +4353,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados al ciclismo de montaña.</string>
     <string name="connect_with_straight_line">Conectar con una línea recta</string>
-    <string name="attach_roads_descr">Aproxima la traza a los caminos obteniendo información detallada de la ruta con indicaciones de giro y atributos de los caminos.</string>
+    <string name="attach_roads_descr">Adjunta la traza a los caminos obteniendo información detallada de la ruta, incluyendo indicaciones de giro y atributos de los caminos.</string>
     <string name="attach_roads_warning">Solo se puede adjuntar al camino una traza grabada.</string>
     <string name="without_profiles_changing">Sin cambios de perfiles</string>
     <string name="shared_string_only_missing">Solo faltantes</string>
@@ -5040,7 +5040,7 @@
     <string name="key_event_action_change_map_orientation">Cambiar orientación del mapa</string>
     <string name="root_folder">Carpeta raíz</string>
     <string name="key_event_action_previous_app_profile">Perfil de aplicación anterior</string>
-    <string name="show_toast_about_key_pressed">Mostrar notificación sobre la tecla pulsada</string>
+    <string name="show_toast_about_key_pressed">Mostrar notificación de la tecla pulsada</string>
     <string name="shared_string_rows">Filas</string>
     <string name="key_event_action_move_left">Mover a la izquierda</string>
     <string name="all_folders">Todas las carpetas</string>
@@ -5598,7 +5598,7 @@
     <string name="obd_speed_desc">Muestra la velocidad del sensor de velocidad del vehículo (VSS).</string>
     <string name="display_distance_to_first_intermediate_summary">Muestra primero el tiempo y la distancia a la siguiente parada. Desactivarla mostrará siempre los detalles del destino.</string>
     <string name="av_audio_sample_rate_descr">Marca la frecuencia de muestreo del audio.</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registra los datos vitales del vehículo usando el protocolo OBD-II. Supervisa valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registra los datos esenciales del vehículo usando el protocolo OBD-II. Supervisa valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
     <string name="shared_string_volume">Volumen</string>
     <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
     <string name="shared_string_road_exit">Salida</string>
@@ -5717,4 +5717,11 @@
     <string name="deleting_history">Borrando historial…</string>
     <string name="show_symbols_bboxes">Mostrar cuadros delimitadores de los símbolos</string>
     <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
+    <string name="release_5_2">• Trabajo en progreso...</string>
+    <string name="failed_to_connect">Falló al conectar con %1s</string>
+    <string name="shared_string_threads">Hilos</string>
+    <string name="threads_allocated_for_rendering">Hilos asignados a la representación</string>
+    <string name="threads_allocated_for_rendering_desc">La asignación de hilos inferiores podría acelerar la representación del mapa en algunos casos.</string>
+    <string name="turn_by_turn_directions">Indicaciones de giros</string>
+    <string name="enable_msaa">Activar MSAA</string>
 </resources>

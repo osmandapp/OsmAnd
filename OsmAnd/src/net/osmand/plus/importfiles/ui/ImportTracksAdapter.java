@@ -95,18 +95,14 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		if (holder instanceof HeaderViewHolder) {
-			((HeaderViewHolder) holder).bindView(app, fileName, trackItems.size(), nightMode);
-		} else if (holder instanceof ImportTrackViewHolder) {
-			ImportTrackViewHolder viewHolder = (ImportTrackViewHolder) holder;
-
+		if (holder instanceof HeaderViewHolder viewHolder) {
+			viewHolder.bindView(app, fileName, trackItems.size(), nightMode);
+		} else if (holder instanceof ImportTrackViewHolder viewHolder) {
 			ImportTrackItem item = (ImportTrackItem) getItem(position);
 			boolean checked = selectedTracks.contains(item);
 			MapBitmapDrawerListener listener = getBitmapDrawerListener(item, viewHolder);
-
 			viewHolder.bindView(item, gpxFile.getPointsList(), checked, listener);
-		} else if (holder instanceof FoldersViewHolder) {
-			FoldersViewHolder viewHolder = (FoldersViewHolder) holder;
+		} else if (holder instanceof FoldersViewHolder viewHolder) {
 			viewHolder.bindView(selectedFolder);
 		}
 	}
