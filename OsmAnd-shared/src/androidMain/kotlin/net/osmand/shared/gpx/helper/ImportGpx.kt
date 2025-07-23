@@ -5,7 +5,7 @@ import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxUtilities.loadGpxFile
 import net.osmand.shared.io.SourceInputStream
 import net.osmand.shared.util.LoggerFactory
-import okio.buffer
+import okio.Source
 import okio.source
 import java.io.ByteArrayInputStream
 import java.io.IOException
@@ -14,7 +14,6 @@ import java.io.StringWriter
 import java.io.UnsupportedEncodingException
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import javax.xml.transform.Source
 import javax.xml.transform.TransformerException
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.TransformerFactoryConfigurationError
@@ -25,10 +24,11 @@ actual object ImportGpx {
 
 	private val LOG = LoggerFactory.getLogger(ImportGpx::class.simpleName!!)
 
-	private fun toGpx(kml: okio.Source): String? {
+	private fun kml2Gpx(kml: Source): String? {
 		try {
-			val xmlSource: Source = StreamSource(SourceInputStream(kml))
-			val xsltSource: Source = StreamSource(this::class.java.getResourceAsStream("/kml2gpx.xslt"))
+			val xmlSource: javax.xml.transform.Source = StreamSource(SourceInputStream(kml))
+			val xsltSource: javax.xml.transform.Source =
+				StreamSource(this::class.java.getResourceAsStream("/kml2gpx.xslt"))
 
 			val sw = StringWriter()
 
@@ -44,31 +44,19 @@ actual object ImportGpx {
 	}
 
 	@Throws(IOException::class)
-	actual fun loadGpx(source: okio.Source, fileName: String): Pair<GpxFile, Long>? {
-		val inputStream: InputStream = source.buffer().inputStream()
-		val zis: ZipInputStream
-		var gpxInfo: Pair<GpxFile, Long>? = null
-		if (fileName.endsWith(IndexConstants.KML_SUFFIX)) {
-			gpxInfo = loadGPXFileFromKml(inputStream)
-		} else if (fileName.endsWith(IndexConstants.KMZ_SUFFIX)) {
-			zis = ZipInputStream(inputStream)
-			gpxInfo = loadGPXFileFromKmz(zis)
-			zis.close()
-		} else if (fileName.endsWith(IndexConstants.ZIP_EXT)) {
-			zis = ZipInputStream(inputStream)
-			gpxInfo = loadGPXFileFromZip(zis)
-			zis.close()
+	actual fun loadGpx(source: Source, fileName: String): Pair<GpxFile, Long>? {
+		val gpxInfo: Pair<GpxFile, Long>? = when {
+			fileName.endsWith(IndexConstants.KML_SUFFIX) -> loadGPXFileFromKml(source)
+			fileName.endsWith(IndexConstants.KMZ_SUFFIX) -> loadGPXFileFromKmz(source)
+			fileName.endsWith(IndexConstants.ZIP_EXT) -> loadGPXFileFromZip(source)
+			else -> null
 		}
 		return gpxInfo
 	}
 
-	private fun kml2Gpx(inputStream: InputStream): String? {
-		return ImportGpx.toGpx(inputStream.source())
-	}
-
 	@Throws(IOException::class)
-	private fun loadGPXFileFromKml(stream: InputStream): Pair<GpxFile, Long>? {
-		val gpxStream: InputStream? = convertKmlToGpxStream(stream)
+	fun loadGPXFileFromKml(source: Source): Pair<GpxFile, Long>? {
+		val gpxStream: InputStream? = convertKmlToGpxStream(source)
 		if (gpxStream != null) {
 			val fileSize = gpxStream.available().toLong()
 			return Pair(loadGpxFile(gpxStream.source()), fileSize)
@@ -76,8 +64,8 @@ actual object ImportGpx {
 		return null
 	}
 
-	private fun convertKmlToGpxStream(`is`: InputStream): InputStream? {
-		val result = kml2Gpx(`is`)
+	private fun convertKmlToGpxStream(source: Source): InputStream? {
+		val result = kml2Gpx(source)
 		if (result != null) {
 			try {
 				return ByteArrayInputStream(result.toByteArray(charset("UTF-8")))
@@ -89,18 +77,20 @@ actual object ImportGpx {
 	}
 
 	@Throws(IOException::class)
-	private fun loadGPXFileFromKmz(stream: ZipInputStream): Pair<GpxFile, Long>? {
+	private fun loadGPXFileFromKmz(source: Source): Pair<GpxFile, Long>? {
+		val stream = ZipInputStream(SourceInputStream(source))
 		var entry: ZipEntry
 		while ((stream.nextEntry.also { entry = it }) != null) {
 			if (entry.name.endsWith(IndexConstants.KML_SUFFIX)) {
-				return loadGPXFileFromKml(stream)
+				return loadGPXFileFromKml(stream.source())
 			}
 		}
 		return null
 	}
 
 	@Throws(IOException::class)
-	private fun loadGPXFileFromZip(stream: ZipInputStream): Pair<GpxFile, Long>? {
+	private fun loadGPXFileFromZip(source: Source): Pair<GpxFile, Long>? {
+		val stream = ZipInputStream(SourceInputStream(source))
 		var entry: ZipEntry
 		while ((stream.nextEntry.also { entry = it }) != null) {
 			if (entry.name.endsWith(IndexConstants.GPX_FILE_EXT)) {
