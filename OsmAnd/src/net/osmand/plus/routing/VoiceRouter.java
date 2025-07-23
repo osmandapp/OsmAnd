@@ -680,18 +680,20 @@ public class VoiceRouter {
 	}
 
 	private void playPrepareTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
-			String tParam = getTurnType(next.getTurnType());
-			if (tParam != null) {
-				p.prepareTurn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
-			} else if (next.getTurnType().isRoundAbout()) {
-				p.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
-			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
-				p.prepareMakeUT(dist, getSpeakableStreetName(currentSegment, next, true));
+		if(router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
+			CommandBuilder p = getNewCommandPlayerToPlay();
+			if (p != null) {
+				String tParam = getTurnType(next.getTurnType());
+				if (tParam != null) {
+					p.prepareTurn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
+				} else if (next.getTurnType().isRoundAbout()) {
+					p.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
+				} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
+					p.prepareMakeUT(dist, getSpeakableStreetName(currentSegment, next, true));
+				}
 			}
+			play(p);
 		}
-		play(p);
 	}
 
 	private String getSpeakableExitRef(String exit) {
