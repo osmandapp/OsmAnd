@@ -313,8 +313,8 @@ public class RenderingRuleProperty {
 				}
 				
 				int k = val.indexOf('=');
-				boolean emptyAdditional = k >= val.length() - 1;
-				if (k != -1 && !emptyAdditional) {
+				boolean negateTag = val.startsWith("!");
+				if (k != -1 && !negateTag) {
 					String ts = val.substring(0, k);
 					String vs = val.substring(k + 1);
 					Integer ruleInd = req.getObject().getMapIndex().getRule(ts, vs);
@@ -324,19 +324,19 @@ public class RenderingRuleProperty {
 						}
 					}
 				} else {
-					String ts = emptyAdditional ? val.substring(0, k) : val;
+					String tagToCheck = negateTag ? val.substring(1) : val;
 					int[] additionalTypes = obj.getAdditionalTypes();
 					for (int i = 0; i < additionalTypes.length; i++) {
 						TagValuePair vp = obj.getMapIndex().decodeType(additionalTypes[i]);
-						if (vp != null && ts.equals(vp.tag)) {
-							if (emptyAdditional) {
+						if (vp != null && tagToCheck.equals(vp.tag)) {
+							if (negateTag) {
 								return false;
 							} else {
 								return true;
 							}
 						}
 					}
-					if (emptyAdditional) {
+					if (negateTag) {
 						return true;
 					}
 				}
