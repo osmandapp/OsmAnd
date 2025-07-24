@@ -4339,7 +4339,7 @@
     <string name="routing_attr_motor_type_diesel_name">Gázolaj</string>
     <string name="routing_attr_motor_type_petrol_name">Benzin</string>
     <string name="routing_attr_motor_type_lpg_name">LPG (cseppfolyósított földgáz)</string>
-    <string name="routing_attr_motor_type_electric_name">Elektromos áram</string>
+    <string name="routing_attr_motor_type_electric_name">Elektromos</string>
     <string name="routing_attr_motor_type_gas_name">CNG (sűrített földgáz)</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
     <string name="routing_attr_motor_type_description">A CO₂-kibocsátás megbecsüléséhez válassza ki a motor által használt üzemanyag típusát.</string>
