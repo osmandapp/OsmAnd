@@ -5770,4 +5770,9 @@
     <string name="turn_by_turn_directions">轉向指示</string>
     <string name="failed_to_connect">無法連線至 %1s</string>
     <string name="enable_msaa">啟用 MSAA</string>
+    <string name="next_turn_information">下個轉彎的資訊</string>
+    <string name="next_turn_information_desc">顯示即將到來的轉彎方向與街道名稱。</string>
+    <string name="description_purchases_fastspring">您可以透過 FastSpring 帳號管理入口網站管理您的購買。</string>
+    <string name="description_subscription_fastspring">您可以透過 FastSpring 帳號管理入口網站管理或取消訂閱。</string>
+    <string name="manage_purchases">管理購買</string>
 </resources>
