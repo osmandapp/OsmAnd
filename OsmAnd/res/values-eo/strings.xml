@@ -5783,4 +5783,9 @@
     <string name="turn_by_turn_directions">Gvidiloj pri kurso</string>
     <string name="failed_to_connect">Malsukcesis konekti al %1s</string>
     <string name="enable_msaa">Aktivigi plurspecimenan glatigon (MSAA)</string>
+    <string name="next_turn_information">Informoj pri sekva kurbiĝo</string>
+    <string name="next_turn_information_desc">Montras direkton de la sekva manovro kaj nomon de strato.</string>
+    <string name="description_purchases_fastspring">Vi povas administri viajn aĉetoj per kont-agordoj en la retejo FastSpring.</string>
+    <string name="description_subscription_fastspring">Vi povas administri aŭ nuligi vian abonon per kont-agordoj en la retejo FastSpring.</string>
+    <string name="manage_purchases">Administri aĉetojn</string>
 </resources>

@@ -5737,4 +5737,9 @@
     <string name="turn_by_turn_directions">Részletes navigáció</string>
     <string name="failed_to_connect">Sikertelen csatlakozás ehhez: %1s</string>
     <string name="enable_msaa">MSAA engedélyezése</string>
+    <string name="next_turn_information">Következő kanyarodás információ</string>
+    <string name="next_turn_information_desc">Mutatja a következő kanyarodás irányát és az utca nevét.</string>
+    <string name="description_purchases_fastspring">Vásárlásait a FastSpring fiókkezelő portálon keresztül kezelheti.</string>
+    <string name="description_subscription_fastspring">Előfizetését a FastSpring fiókkezelési portálon keresztül kezelheti, illetve mondhatja le.</string>
+    <string name="manage_purchases">Vásárlások kezelése</string>
 </resources>

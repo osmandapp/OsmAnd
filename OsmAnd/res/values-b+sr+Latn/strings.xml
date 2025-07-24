@@ -5772,4 +5772,9 @@
     <string name="turn_by_turn_directions">Navođenje</string>
     <string name="failed_to_connect">Nije uspelo povezivanje sa %1s</string>
     <string name="enable_msaa">Uključiti MSAA</string>
+    <string name="description_purchases_fastspring">Svojim kupovinama možete upravljati putem portala za upravljanje FastSpring računom.</string>
+    <string name="description_subscription_fastspring">Možete upravljati ili otkazati pretplatu putem FastSpring portala za upravljanje nalogom.</string>
+    <string name="manage_purchases">Upravljajte kupovinama</string>
+    <string name="next_turn_information">Sledeća informacije o skretanju</string>
+    <string name="next_turn_information_desc">Prikazuje predstojeće skretanje i ime ulice.</string>
 </resources>

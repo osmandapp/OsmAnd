@@ -5818,4 +5818,9 @@
     <string name="turn_by_turn_directions">Sving-for-sving-vejledning</string>
     <string name="failed_to_connect">Kunne ikke forbinde til %1s</string>
     <string name="enable_msaa">Aktiver MSAA</string>
+    <string name="next_turn_information">Information om næste sving</string>
+    <string name="next_turn_information_desc">Viser den kommende svingretning og gadenavn.</string>
+    <string name="description_purchases_fastspring">Du kan administrere dine køb via FastSprings portal for kontoadministration.</string>
+    <string name="description_subscription_fastspring">Du kan administrere eller opsige dit abonnement via FastSprings portal for kontoadministration.</string>
+    <string name="manage_purchases">Administrer køb</string>
 </resources>

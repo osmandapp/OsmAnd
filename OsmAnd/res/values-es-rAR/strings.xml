@@ -5656,4 +5656,9 @@
     <string name="turn_by_turn_directions">Indicaciones de giros</string>
     <string name="failed_to_connect">Falló al conectar con %1s</string>
     <string name="enable_msaa">Activar MSAA</string>
+    <string name="next_turn_information">Información del siguiente giro</string>
+    <string name="next_turn_information_desc">Indica la dirección del siguiente giro y el nombre de la calle.</string>
+    <string name="description_purchases_fastspring">Podés gestionar tus compras a través del portal de gestión de cuentas FastSpring.</string>
+    <string name="description_subscription_fastspring">Podés gestionar o cancelar su suscripción a través del portal de gestión de cuentas FastSpring.</string>
+    <string name="manage_purchases">Gestionar compras</string>
 </resources>

@@ -5771,4 +5771,9 @@
     <string name="turn_by_turn_directions">Упутства корак-по-корак</string>
     <string name="failed_to_connect">Није успело повезивање са %1s</string>
     <string name="enable_msaa">Омогући MSAA</string>
+    <string name="next_turn_information">Информације о следећем скретању</string>
+    <string name="next_turn_information_desc">Приказује смер надолазећег скретања и назив улице.</string>
+    <string name="description_purchases_fastspring">Можете управљати својим куповинама путем портала за управљање FastSpring налозима.</string>
+    <string name="description_subscription_fastspring">Можете управљати или отказати претплату путем портала за управљање FastSpring налозима.</string>
+    <string name="manage_purchases">Управљање куповинама</string>
 </resources>
