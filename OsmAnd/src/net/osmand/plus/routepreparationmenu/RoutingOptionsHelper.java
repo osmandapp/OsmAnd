@@ -227,7 +227,7 @@ public class RoutingOptionsHelper {
 				rp.setReverse(selected);
 				TargetPointsHelper tg = app.getTargetPointsHelper();
 				List<Location> ps = rp.getPoints(app);
-				if (ps.size() > 0) {
+				if (!ps.isEmpty()) {
 					Location firstLoc = ps.get(0);
 					Location lastLoc = ps.get(ps.size() - 1);
 					TargetPoint pointToStart = tg.getPointToStart();
