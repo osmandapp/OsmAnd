@@ -225,6 +225,7 @@ public class RoutingOptionsHelper {
 		if (rp != null) {
 			if (gpxParam.id == R.string.gpx_option_reverse_route) {
 				rp.setReverse(selected);
+				rp.setReverseStrategy(settings.GPX_REVERSE_STRATEGY.get());
 				TargetPointsHelper tg = app.getTargetPointsHelper();
 				List<Location> ps = rp.getPoints(app);
 				if (!ps.isEmpty()) {
