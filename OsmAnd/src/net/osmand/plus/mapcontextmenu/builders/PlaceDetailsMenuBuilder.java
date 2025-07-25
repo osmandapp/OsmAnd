@@ -70,6 +70,9 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 
 	private boolean buildDescription(@NonNull View view, @NonNull List<Amenity> amenities,
 			boolean allowOnlineWiki) {
+		if (detailsObject != null && buildDescription(view, detailsObject.getSyntheticAmenity(), allowOnlineWiki)) {
+			return true;
+		}
 		for (Amenity amenity : amenities) {
 			if (buildDescription(view, amenity, allowOnlineWiki)) {
 				return true;
@@ -186,9 +189,14 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 			}
 			for (Amenity amenity : detailsObject.getAmenities()) {
 				if (CollectionUtils.equalsToAny(amenity.getSubType(), ROUTE_ARTICLE_POINT, ROUTE_TRACK_POINT)) {
-					routeId = amenity.getRouteId();
-					if (!Algorithms.isEmpty(routeId) && !map.containsKey(routeId)) {
-						map.put(routeId, amenity.getLocation());
+					String id = amenity.getRouteId();
+					String wikidata = amenity.getWikidata();
+
+					if (!Algorithms.isEmpty(id) && !map.containsKey(id)) {
+						map.put(id, amenity.getLocation());
+					}
+					if (!Algorithms.isEmpty(wikidata) && !map.containsKey(wikidata)) {
+						map.put(wikidata, amenity.getLocation());
 					}
 				}
 			}
