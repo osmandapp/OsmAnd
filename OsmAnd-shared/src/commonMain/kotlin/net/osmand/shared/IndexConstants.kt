@@ -50,6 +50,8 @@ object IndexConstants {
 
 	const val GPX_FILE_EXT = ".gpx"
 	const val GPX_GZ_FILE_EXT = ".gpx.gz"
+	const val KML_SUFFIX = ".kml"
+	const val KMZ_SUFFIX = ".kmz"
 
 	const val WPT_CHART_FILE_EXT = ".wpt.chart"
 	const val SQLITE_CHART_FILE_EXT = ".3d.chart"

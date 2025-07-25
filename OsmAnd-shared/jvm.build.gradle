@@ -96,3 +96,25 @@ publishing {
 		}
 	}
 }
+
+tasks.register("copyResources") {
+    doLast {
+        def sourceDir = file("../../resources/misc/kmz2gpx/")
+        def androidMainResDir = file("src/androidMain/resources/")
+        def jvmMainResDir = file("src/jvmMain/resources/")
+
+        copy {
+            from(sourceDir)
+            into(androidMainResDir)
+        }
+
+        copy {
+            from(sourceDir)
+            into(jvmMainResDir)
+        }
+    }
+}
+
+tasks.named("jvmProcessResources") {
+    dependsOn("copyResources")
+}

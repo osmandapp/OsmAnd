@@ -126,3 +126,25 @@ publishing {
 tasks.named("publishIvyOsmAndSharedAndroidPublicationToIvyRepository") {
 	dependsOn("bundleDebugAar", "bundleReleaseAar")
 }
+
+tasks.register("copyResources") {
+	doLast {
+		val sourceDir = file("../../resources/misc/kmz2gpx/")
+		val androidMainResDir = file("src/androidMain/resources/")
+		val jvmMainResDir = file("src/jvmMain/resources/")
+
+		copy {
+			from(sourceDir)
+			into(androidMainResDir)
+		}
+
+		copy {
+			from(sourceDir)
+			into(jvmMainResDir)
+		}
+	}
+}
+
+tasks.named("jvmProcessResources") {
+	dependsOn("copyResources")
+}
