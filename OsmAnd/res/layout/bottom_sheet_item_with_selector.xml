@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_sheet_list_item_height"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/bottom_sheet_list_item_height"
+    android:paddingHorizontal="@dimen/content_padding">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+        tools:src="@drawable/ic_action_info_dark" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/content_padding"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.ListItemTitle"
+        tools:text="Title" />
+
+    <LinearLayout
+        android:id="@+id/card_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/bottom_sheet_list_item_height"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/text_margin_small"
+        android:duplicateParentState="true"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/content_padding_small">
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:id="@+id/selector_title"
+            style="@style/TitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="?android:textColorSecondary"
+            tools:text="Option" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/drop_down_icon"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dashFavIconMargin"
+            android:clickable="false"
+            android:duplicateParentState="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_action_arrow_down"
+            android:tint="?attr/default_icon_color" />
+
+    </LinearLayout>
+
+</LinearLayout>
