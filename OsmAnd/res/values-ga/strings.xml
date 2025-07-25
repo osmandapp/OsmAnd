@@ -5602,4 +5602,11 @@
     <string name="threads_allocated_for_rendering">Snáitheanna leithdháilte le haghaidh rindreála</string>
     <string name="threads_allocated_for_rendering_desc">D’fhéadfadh leithdháileadh snáithe níos ísle luas a chur le rindreáil an léarscáil i gcásanna áirithe.</string>
     <string name="turn_by_turn_directions">Treoracha Cas ar Chas</string>
+    <string name="next_turn_information">Faisnéis faoin gcéad chasadh eile</string>
+    <string name="next_turn_information_desc">Taispeánann sé treo an chasaidh atá le teacht agus ainm na sráide.</string>
+    <string name="description_purchases_fastspring">Is féidir leat do cheannacháin a bhainistiú trí thairseach bainistíochta cuntais FastSpring.</string>
+    <string name="description_subscription_fastspring">Is féidir leat do shíntiús a bhainistiú nó a chealú trí thairseach bainistíochta cuntais FastSpring.</string>
+    <string name="manage_purchases">Bainistigh ceannacháin</string>
+    <string name="failed_to_connect">Theip ar cheangal le %1s</string>
+    <string name="enable_msaa">Cumasaigh MSAA</string>
 </resources>

@@ -5471,7 +5471,7 @@
     <string name="obd_fuel_type_gasoline">Бензин</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
     <string name="obd_fuel_type_ethanol">Етанол</string>
-    <string name="obd_fuel_type_lpg">Зріджений газ</string>
+    <string name="obd_fuel_type_lpg">LPG</string>
     <string name="obd_fuel_type_propane">Пропан</string>
     <string name="unknown_bt_device">Невідомий пристрій</string>
     <string name="obd_fuel_type_not_provided">Тип палива не вказано</string>

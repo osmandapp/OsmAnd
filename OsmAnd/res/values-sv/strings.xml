@@ -3701,7 +3701,7 @@
     <string name="routing_attr_difficulty_preference_name">Föredragen svårighetsgrad</string>
     <string name="routing_attr_difficulty_preference_description">Prioritera rutter av denna svårighetsgrad, även om rutter över svårare eller lättare pister är tillåtna om de är kortare.</string>
     <string name="routing_attr_freeride_policy_name">Offpist</string>
-    <string name="quick_action_need_to_add_item_to_list">Lägg till minst ett objekt i listan bland inställningarna för \'Snabbhandlingar\'</string>
+    <string name="quick_action_need_to_add_item_to_list">Lägg till minst ett objekt i listan i inställningarna för \'Snabbåtgärder\'</string>
     <string name="clear_all_history_warning">Rensa alla poster i appens historik, inklusive sök-, navigerings- och markeringshistorik\?</string>
     <string name="clear_all_history">Radera all historik</string>
     <string name="history_actions_descr">Du kan exportera historiken till en fil.</string>
@@ -6034,4 +6034,7 @@
     <string name="threads_allocated_for_rendering_desc">Lägre tråd-allokering kan i vissa fall snabba upp kartrenderingen.</string>
     <string name="turn_by_turn_directions">Sväng för sväng vägbeskrivning</string>
     <string name="failed_to_connect">Kunde inte ansluta till %1s</string>
+    <string name="next_turn_information">Information om nästa sväng</string>
+    <string name="next_turn_information_desc">Visar nästkommande svängriktning och gatunamn.</string>
+    <string name="manage_purchases">Hantera köp</string>
 </resources>

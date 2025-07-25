@@ -179,7 +179,7 @@
     <string name="poi_fuel_gtl_diesel">Високоякісний дизель</string>
     <string name="poi_fuel_hgv_diesel">TIR дизель</string>
     <string name="poi_fuel_biodiesel">Біо-дизель</string>
-    <string name="poi_fuel_lpg">Пропан</string>
+    <string name="poi_fuel_lpg">LPG</string>
     <string name="poi_fuel_octane_80">Октан 80</string>
     <string name="poi_fuel_octane_91">Октан 91</string>
     <string name="poi_fuel_octane_92">Октан 92</string>
@@ -4892,7 +4892,7 @@
     <string name="poi_route_activity_type_off_road">бздоріжжя</string>
     <string name="poi_route_activity_type_all_terrain_vehicle">ATV (Всюдихід)</string>
     <string name="poi_route_activity_type_truck_hgv">Вантажівка (HGV)</string>
-    <string name="poi_route_activity_type_karting">картинг</string>
+    <string name="poi_route_activity_type_karting">Картинг</string>
     <string name="poi_route_activity_type_motocross">Мотокрос</string>
     <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Мотоцикл по бездоріжжю (байк)</string>
     <string name="poi_route_activity_type_track_racing">Гонки на треку</string>
@@ -4919,7 +4919,7 @@
     <string name="poi_route_activity_type_hot_air_ballooning">Політ на повітряній кулі</string>
     <string name="poi_route_activity_type_hang_gliding">Дельтапланеризм</string>
     <string name="poi_route_activity_type_fitness">Фітнес</string>
-    <string name="poi_route_activity_type_car">автомобіль</string>
+    <string name="poi_route_activity_type_car">Автомобіль</string>
     <string name="poi_route_activity_type_ski_touring">Лижний Туризм</string>
     <string name="poi_route_activity_type_e_biking">Електричний Велосипед</string>
     <string name="poi_route_activity_type_touring">Гастролі</string>
@@ -4940,7 +4940,7 @@
     <string name="poi_route_activity_type_swimming_outdoor">Плавання на відкритому повітрі</string>
     <string name="poi_cafe_filter">Кафе</string>
     <string name="poi_climbing_area">Зона скелелазіння</string>
-    <string name="poi_cafe_yes">Иак</string>
+    <string name="poi_cafe_yes">Так</string>
     <string name="poi_climbing_route">Маршрут сходження</string>
     <string name="poi_climbing_route_bottom">Нижня частина маршруту сходження</string>
     <string name="poi_sled_yes">Сани: так</string>
