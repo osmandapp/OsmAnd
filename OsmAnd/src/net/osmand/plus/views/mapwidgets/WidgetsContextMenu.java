@@ -79,7 +79,7 @@ public class WidgetsContextMenu {
 							WidgetInfoBaseFragment.showFragment(manager, fragment, null, appMode, widgetInfo.key, widgetsPanel);
 						})
 						.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_settings_outlined, iconColor))
-						.showTopDivider(Algorithms.isEmpty(widgetActions))
+						.showTopDivider(Algorithms.isEmpty(widgetActions) && !items.isEmpty())
 						.create());
 			}
 
