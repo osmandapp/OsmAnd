@@ -57,9 +57,7 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, Pair<GpxFile,
 				is = app.getContentResolver().openInputStream(uri);
 				if (is != null) {
 					kotlin.Pair<GpxFile, Long> gpxInfo = ImportGpx.INSTANCE.loadGpx(Okio.source(is), fileName);
-					if (gpxInfo != null) {
-						return new Pair<>(gpxInfo.getFirst(), gpxInfo.getSecond());
-					}
+					return new Pair<>(gpxInfo.getFirst(), gpxInfo.getSecond());
 				}
 			}
 		} catch (IOException | SecurityException | IllegalStateException e) {

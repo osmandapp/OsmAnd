@@ -5,5 +5,5 @@ import okio.Source
 
 expect object ImportHelper {
 	fun kml2Gpx(kml: Source): String?
-	fun loadGPXFileFromZip(source: Source): Pair<GpxFile, Long>?
+	fun loadGPXFileFromArchive(source: Source): Pair<GpxFile, Long>
 }

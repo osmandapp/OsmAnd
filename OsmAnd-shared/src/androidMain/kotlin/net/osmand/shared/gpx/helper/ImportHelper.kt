@@ -3,6 +3,7 @@ package net.osmand.shared.gpx.helper
 import net.osmand.shared.IndexConstants
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxUtilities.loadGpxFile
+import net.osmand.shared.gpx.helper.ImportGpx.errorImport
 import net.osmand.shared.gpx.helper.ImportGpx.loadGPXFileFromKml
 import net.osmand.shared.io.SourceInputStream
 import net.osmand.shared.util.LoggerFactory
@@ -41,7 +42,7 @@ actual object ImportHelper {
 	}
 
 	@Throws(IOException::class)
-	actual fun loadGPXFileFromZip(source: Source): Pair<GpxFile, Long>? {
+	actual fun loadGPXFileFromArchive(source: Source): Pair<GpxFile, Long> {
 		val stream = ZipInputStream(SourceInputStream(source))
 		var entry: ZipEntry
 		while ((stream.nextEntry.also { entry = it }) != null) {
@@ -53,6 +54,6 @@ actual object ImportHelper {
 				return loadGPXFileFromKml(stream.source())
 			}
 		}
-		return null
+		return errorImport("Archive doesn't have GPX/KLM files")
 	}
 }

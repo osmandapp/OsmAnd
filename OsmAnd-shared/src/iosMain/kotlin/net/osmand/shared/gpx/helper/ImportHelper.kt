@@ -8,7 +8,7 @@ actual object ImportHelper {
 		throw NotImplementedError("KML to GPX conversion using XSLT not supported on iOS")
 	}
 
-	actual fun loadGPXFileFromZip(source: Source): Pair<GpxFile, Long>? {
+	actual fun loadGPXFileFromArchive(source: Source): Pair<GpxFile, Long> {
 		throw NotImplementedError("loadGPXFileFromZip not supported on iOS")
 	}
 }
