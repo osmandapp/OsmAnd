@@ -1,5 +1,6 @@
 package net.osmand.test.ui.layout;
 
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.CELL_SIZE_DP;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 
 import android.os.Handler;
@@ -16,6 +17,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.MapButtonsHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
@@ -113,7 +115,12 @@ public class MapHudOverlapTest extends AndroidTest {
 				LOG.info(b + " value = " + b.toLongValue());
 			}
 			LOG.info("--------");
-			boolean overlapFixed = ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()));
+
+			float dpToPx = AndroidUtils.dpToPxF(app, 1);
+			int width = Math.round(mapHudLayout.getWidth() / dpToPx / CELL_SIZE_DP);
+			int height = Math.round(mapHudLayout.getAdjustedHeight() / dpToPx / CELL_SIZE_DP);
+
+			boolean overlapFixed = ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()), width, height);
 			if (!overlapFixed) {
 				throw new AssertionError("Relayout is broken");
 			}
