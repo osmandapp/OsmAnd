@@ -244,7 +244,7 @@
     <string name="map_text_size_descr">Veličinu slova za imena na mapama:</string>
     <string name="map_text_size">Veličina slova na mapi</string>
     <string name="trace_rendering">Informacije o otklanjanju pogrešaka</string>
-    <string name="trace_rendering_descr">Prikazati performanse prikazivanja i navigacije.</string>
+    <string name="trace_rendering_descr">Prikaži performanse prikazivanja i navigacije.</string>
     <string name="installing_new_resources">Raspakivanje novih podataka…</string>
     <string name="internet_connection_required_for_online_route">Navođenje preko interneta ne radi kad niste na internetu.</string>
     <string name="tts_language_not_supported_title">Jezik nije podržan</string>
@@ -5272,7 +5272,7 @@
     <string name="allow_display_on_top_description">Omogući prikaz teksta s mape jedan iznad drugog</string>
     <string name="show_debug_info">Pokaži debug informacije</string>
     <string name="show_debug_info_description">Prikaži grafičke informacije o položaju svakog teksta mape</string>
-    <string name="map_text">Rendering mape</string>
+    <string name="map_text">Prikaz mape</string>
     <string name="routing_attr_avoid_cobblestone_name">Izbegavati kaldrmu</string>
     <string name="routing_attr_avoid_cobblestone_description">Izbegavati kaldrmu</string>
     <string name="steps_per_minute_unit">KPM</string>
