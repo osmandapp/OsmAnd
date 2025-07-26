@@ -483,7 +483,7 @@
     <string name="index_name_oceania">Австралия и Океания</string>
     <string name="index_name_other">Географски и тематични карти</string>
     <string name="index_name_wiki">Уикипедия POI</string>
-    <string name="index_name_voice">Гласови напътствия (предварително записана, непълни)</string>
+    <string name="index_name_voice">Гласови напътствия (предварително записани, непълни)</string>
     <string name="index_name_tts_voice">Гласови напътствия (синтезирани, препоръчително)</string>
     <string name="amenity_type_osmwiki">Уикипедия (офлайн)</string>
     <string name="amenity_type_user_defined">определено от Вас</string>
@@ -579,7 +579,7 @@
     <string name="local_index_map_data">Данни от картата</string>
     <string name="local_indexes_cat_backup">Изключено</string>
     <string name="local_indexes_cat_tts">Гласови напътствия (синтезирани)</string>
-    <string name="local_indexes_cat_voice">Гласови напътствия (предварително записана)</string>
+    <string name="local_indexes_cat_voice">Гласови напътствия (предварително записани)</string>
     <string name="local_indexes_cat_poi">POI данни</string>
     <string name="ttsvoice">Синтезиран глас</string>
     <string name="search_offline_clear_search">Ново търсене</string>
@@ -713,7 +713,7 @@
     <string name="continuous_rendering">Непрекъснато изчертаване</string>
     <string name="continuous_rendering_descr">Екранът непрекъснато се изчертава, вместо да зарежда изображения</string>
     <string name="rendering_exception">Възникна грешка при изчертаване на избрания район</string>
-    <string name="show_point_options">Ползвай мястото…</string>
+    <string name="show_point_options">Ползване на местоположението…</string>
     <string name="renderer_load_sucess">Програмата за изчертаване беше успешно заредена</string>
     <string name="renderer_load_exception">Възникна грешка: програмата за изчертаване не беше заредена</string>
     <string name="renderers">Векторни програми за изчертаване</string>
@@ -3373,8 +3373,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Променяйте увеличението на картата от бутоните за сила на звука.</string>
     <string name="in_case_of_reverse_direction">При направление в обратна посока</string>
     <string name="location_simulation_speedup">Скорост на симулация</string>
-    <string name="distance_by_tap_use_description">Докоснете картата, за да видите разстоянието между текущото местоположение и докоснатата точка.
-\nДокоснете с 2 пръста картата, за да видите разстоянието между докоснатите точки</string>
+    <string name="distance_by_tap_use_description">Докоснете картата, за да видите разстоянието между текущото местоположение и докоснатата точка.\nДокоснете с 2 пръста картата, за да видите разстоянието между докоснатите точки.</string>
     <string name="trip_recording_duration_widget_desc">Показва текущото записано време на пътуване.</string>
     <string name="shared_string_add_photo">Добавяне на снимка</string>
     <string name="save_global_track_interval_descr">Изберете общ интервал за запис на трасета (включва се от приспособле ието „Запис на маршрут“ на картата.</string>
@@ -3616,7 +3615,7 @@
     <string name="shared_string_show_slope">Показване на склоновете</string>
     <string name="route_line_use_gradient_coloring">Линията на маршрута е оцветена в зависимост от стръмността на денивелацията.</string>
     <string name="gpx_no_routes_title">Няма маршрути</string>
-    <string name="quick_action_add_route_descr">Запопва маршрут от средата на екрана.</string>
+    <string name="quick_action_add_route_descr">Започва маршрут от средата на екрана.</string>
     <string name="rendering_attr_seabedDetail_name">Подробности</string>
     <string name="estimated_download_size">Очакван размер на изтегляне</string>
     <string name="please_provide_group_name_message">Посочете име на групата.</string>
@@ -4515,13 +4514,13 @@
     <string name="quick_action_destination">Местоназначение</string>
     <string name="quick_action_directions_from">Маршрут от тук</string>
     <string name="quick_action_move_map_down">Движение надолу</string>
-    <string name="quick_action_verb_start_stop">Пискане/спиране</string>
+    <string name="quick_action_verb_start_stop">Пускане/спиране</string>
     <string name="rendering_attr_showToll_description">Показване на ограничените с пътна такса пътища</string>
     <string name="quick_action_previous_app_profile">Предишен профил</string>
     <string name="quick_action_first_intermediate">Първа междинна точка</string>
     <string name="quick_action_move_map_up">Движение нагоре</string>
     <string name="quick_action_next_app_profile">Следващ профил</string>
-    <string name="quick_action_start_stop_navigation">Пискане/спиране маршрутизиране</string>
+    <string name="quick_action_start_stop_navigation">Пускане/спиране маршрутизиране</string>
     <string name="quick_action_auto_zoom">Автом. мащабиране на карта</string>
     <string name="quick_action_navigation_voice_off">Включване на звука</string>
     <string name="quick_action_switch_day_mode">Дневен режим</string>
@@ -4589,7 +4588,7 @@
     <string name="quick_action_interim_dialog">Показване на междинен диалогов прозорец</string>
     <string name="quick_action_save_recorded_trip_and_continue">Запазване на пътуването и напред</string>
     <string name="quick_action_display_position_in_center">Показване на позицията винаги в центъра</string>
-    <string name="quick_action_show_navigation_finish_dialog">Показване на диалога за край на маршрутизиране</string>
+    <string name="quick_action_show_navigation_finish_dialog">Диалог за край на маршрутизиране</string>
     <string name="map_mode">Режим на картата</string>
     <string name="quick_action_need_to_add_item_to_list">Добавете най-малко един елемент в списъка „Бързи действия“ в настройкте</string>
     <string name="quick_actions_delete">Премахване на действие</string>
@@ -4751,4 +4750,27 @@
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Лични</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Мрежа от възлите на велосипедните маршрути</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Внесяйте или изнесяйте бързи действия с профилите на приложението.</string>
+    <string name="app_profile">Профил на приложението</string>
+    <string name="layer_coordinates_grid">Координатна мрежа</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Действието управлява видиността на координатната мрежа на картата.</string>
+    <string name="point_location">Местоположение на точката</string>
+    <string name="shared_string_manual">Ръчно</string>
+    <string name="shared_string_map_center">Център на картата</string>
+    <string name="navigate_point_olc">Отворен код за местоположение (OLC)</string>
+    <string name="add_group">Добавяне на група</string>
+    <string name="by_date">По дата</string>
+    <string name="by_type">По вид</string>
+    <string name="select_icon_profile_dialog_title">Избиране на пиктограма</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="select_category_descr">Изберете категория или добавете нова</string>
+    <string name="shared_string_default_view">Подразбирана подредба</string>
+    <string name="display_priority">Ред на показване</string>
+    <string name="row_height">Височина на реда</string>
+    <string name="intermediate_first">Първо междинната точка</string>
+    <string name="destination_first">Първо местоназначението</string>
+    <string name="poi_source">Източник на POI</string>
+    <string name="row_number">Ред %1$s</string>
+    <string name="show_minor_turns_descr">Пътните платна ще бъдат показвани за всички преминавани кръстовища независимо от гласовите напътствия</string>
+    <string name="show_minor_turns">Показванне и на малките кръстовища при движение направо</string>
 </resources>
