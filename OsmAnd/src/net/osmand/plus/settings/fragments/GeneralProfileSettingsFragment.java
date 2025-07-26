@@ -129,26 +129,41 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupMapScreenOrientationPref() {
-		ListPreferenceEx mapScreenOrientation = findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
-		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
-		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
+		ListPreferenceEx mapScreenOrientation = requirePreference(settings.MAP_SCREEN_ORIENTATION.getId());
+		mapScreenOrientation.setEntries(new String[] {
+				getString(R.string.map_orientation_portrait),
+				getString(R.string.map_orientation_portrait_inverted),
+				getString(R.string.map_orientation_landscape),
+				getString(R.string.map_orientation_landscape_inverted),
+				getString(R.string.map_orientation_default)
+		});
+		mapScreenOrientation.setEntryValues(new Integer[] {
+				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+				ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT,
+				ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+				ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE,
+				ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+		});
 		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
 	}
 
 	private void setupTurnScreenOnPref() {
-		Preference screenControl = findPreference("screen_control");
+		Preference screenControl = requirePreference("screen_control");
 		screenControl.setIcon(getContentIcon(R.drawable.ic_action_turn_screen_on));
 	}
 
+	@NonNull
 	private Drawable getMapScreenOrientationIcon() {
-		switch (settings.MAP_SCREEN_ORIENTATION.getModeValue(getSelectedAppMode())) {
-			case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
-				return getActiveIcon(R.drawable.ic_action_phone_portrait_orientation);
-			case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
-				return getActiveIcon(R.drawable.ic_action_phone_landscape_orientation);
-			default:
-				return getActiveIcon(R.drawable.ic_action_phone_device_orientation);
-		}
+		int orientation = settings.MAP_SCREEN_ORIENTATION.getModeValue(getSelectedAppMode());
+		return switch (orientation) {
+			case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+			     ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT ->
+					getActiveIcon(R.drawable.ic_action_phone_portrait_orientation);
+			case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
+			     ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE ->
+					getActiveIcon(R.drawable.ic_action_phone_landscape_orientation);
+			default -> getActiveIcon(R.drawable.ic_action_phone_device_orientation);
+		};
 	}
 
 	private void setupDrivingRegionPref() {
