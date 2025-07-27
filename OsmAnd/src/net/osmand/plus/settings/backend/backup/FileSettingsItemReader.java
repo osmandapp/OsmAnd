@@ -43,7 +43,7 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 
 		savedFile = item.getFile();
 		String dirName = fileName.endsWith(File.separator) ? fileName : fileName + File.separator;
-		if (savedFile.isDirectory() || entryName.startsWith(dirName)) { // TODO: problem here
+		if (savedFile.isDirectory() || entryName.startsWith(dirName)) {
 			savedFile = new File(savedFile, entryName.substring(fileName.length()));
 		}
 		if (savedFile.exists() && !item.isShouldReplace()) {

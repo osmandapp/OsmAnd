@@ -96,7 +96,7 @@ public class PluginSettingsItem extends SettingsItem {
 					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {
 						plugin.addRouter(fileItem.getName());
 					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.OTHER) {
-						plugin.setResourceDirName(item.getFileName()); // TODO
+						plugin.setResourceDirName(item.getFileName());
 					}
 				} else if (item instanceof SuggestedDownloadsItem) {
 					plugin.updateSuggestedDownloads(((SuggestedDownloadsItem) item).getItems());
