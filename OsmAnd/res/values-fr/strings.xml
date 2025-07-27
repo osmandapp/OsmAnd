@@ -3404,7 +3404,7 @@
     <string name="app_mode_wheelchair_forward">Fauteuil roulant vers l\'avant</string>
     <string name="set_working_days_to_continue">Définissez les jours travaillés pour continuer</string>
     <string name="route_between_points">Itinéraire entre points</string>
-    <string name="plan_a_route">Planifier un itinéraire</string>
+    <string name="plan_a_route">Ajouter une trace</string>
     <string name="add_to_a_track">Ajouter à une trace</string>
     <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté se trouve dans « %s ». Afficher ce groupe pour rendre le point visible sur la carte.</string>
@@ -3417,7 +3417,7 @@
     <string name="plan_route_last_edited">Modifiés récemment</string>
     <string name="plan_route_import_track">Importer une trace</string>
     <string name="plan_route_open_existing_track">Ouvrir une trace existante</string>
-    <string name="plan_route_create_new_route">Créer un nouvel itinéraire</string>
+    <string name="plan_route_create_new_route">Créer une nouvelle trace</string>
     <string name="plan_route_select_track_file_for_open">Sélectionner un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
     <string name="overwrite_track">Remplacer la trace</string>
