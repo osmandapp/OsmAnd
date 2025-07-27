@@ -128,11 +128,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 				for (SettingsItem item : oldItemsToDelete) {
 					SettingsItem remoteFileItem = remoteFile.item;
 					if (remoteFileItem != null && item.getType() == remoteFileItem.getType()) {
-						String itemFileName = item.getFileName();
-						if (itemFileName != null && itemFileName.startsWith("/")) {
-							itemFileName = itemFileName.substring(1);
-						}
-						if (Algorithms.stringsEqual(itemFileName, remoteFileItem.getFileName())) {
+						String itemFileName = item.getUnifiedFileName();
+						String remoteFileName = remoteFileItem.getUnifiedFileName();
+						if (Algorithms.stringsEqual(itemFileName, remoteFileName)) {
 							size += APPROXIMATE_FILE_SIZE_BYTES;
 						}
 					}

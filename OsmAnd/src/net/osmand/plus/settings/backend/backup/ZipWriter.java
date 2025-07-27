@@ -37,8 +37,7 @@ public class ZipWriter extends AbstractWriter {
 
 	private void writeEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 							@NonNull String fileName, @NonNull ZipOutputStream zos) throws IOException {
-		if (itemWriter.getItem() instanceof FileSettingsItem) {
-			FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
+		if (itemWriter.getItem() instanceof FileSettingsItem fileSettingsItem) {
 			writeDirWithFiles(itemWriter, fileSettingsItem.getFile(), zos);
 		} else {
 			writeItemToStream(itemWriter, fileName, zos);
@@ -55,12 +54,8 @@ public class ZipWriter extends AbstractWriter {
 
 	protected ZipEntry createNewEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 									  @NonNull String fileName) {
-		if (fileName.startsWith(File.separator)) {
-			fileName = fileName.substring(1);
-		}
-		ZipEntry entry = new ZipEntry(fileName);
-		if (itemWriter.getItem() instanceof FileSettingsItem) {
-			FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
+		ZipEntry entry = new ZipEntry(SettingsItem.unifyFileName(fileName));
+		if (itemWriter.getItem() instanceof FileSettingsItem fileSettingsItem) {
 			entry.setTime(fileSettingsItem.getFile().lastModified());
 		}
 		return entry;

@@ -88,9 +88,27 @@ public abstract class SettingsItem {
 		return pluginId;
 	}
 
+	public String getUnifiedFileName() {
+		return unifyFileName(getFileName());
+	}
+
 	@Nullable
 	public String getFileName() {
 		return fileName;
+	}
+
+	/**
+	 * Returns a normalized file name for reliable comparison and ZipEntry usage.
+	 * <p>
+	 * Starting from Android API 34, ZipEntry paths must not begin with a slash ('/').
+	 * To ensure compatibility and consistency across the codebase, this method removes the
+	 * leading slash from the file name (if present).
+	 * <p>
+	 * Use this method when comparing or processing file paths that interact with
+	 * ZIP contents, remote file keys, or similar.
+	 */
+	public static String unifyFileName(String name) {
+		return name != null && name.startsWith("/") ? name.substring(1) : name;
 	}
 
 	public long getLastModifiedTime() {
@@ -120,7 +138,7 @@ public abstract class SettingsItem {
 		// Case: this.fileName could be a folder so all remote files will be collected for it ?
 		// + Subfolder check correct
 		// - Where is type prefix ? filename same for different types
-		String n = getFileName();
+		String n = getUnifiedFileName();
 		return n != null && (n.endsWith(fileName) || fileName.startsWith(n + File.separator));
 	}
 
@@ -293,11 +311,9 @@ public abstract class SettingsItem {
 		if (other == this) {
 			return true;
 		}
-		if (!(other instanceof SettingsItem)) {
+		if (!(other instanceof SettingsItem item)) {
 			return false;
 		}
-
-		SettingsItem item = (SettingsItem) other;
 		return item.getType() == getType()
 				&& item.getName().equals(getName())
 				&& Algorithms.stringsEqual(item.getFileName(), getFileName());
@@ -306,6 +322,6 @@ public abstract class SettingsItem {
 	@NonNull
 	@Override
 	public String toString() {
-		return "SettingsItem { " + getType().name() + ", " + getName() + ", " + getFileName() + " }";
+		return "SettingsItem { " + getType().name() + ", " + getName() + ", " + getUnifiedFileName() + " }";
 	}
 }

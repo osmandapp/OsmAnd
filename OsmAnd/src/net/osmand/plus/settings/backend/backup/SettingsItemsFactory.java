@@ -103,8 +103,9 @@ public class SettingsItemsFactory {
 
 	@Nullable
 	public SettingsItem getItemByFileName(@NonNull String fileName) {
+		fileName = SettingsItem.unifyFileName(fileName);
 		for (SettingsItem item : items) {
-			if (Algorithms.stringsEqual(item.getFileName(), fileName)) {
+			if (Algorithms.stringsEqual(item.getUnifiedFileName(), fileName)) {
 				return item;
 			}
 		}

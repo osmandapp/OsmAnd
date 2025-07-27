@@ -149,13 +149,13 @@ public class CloudTrashAdapter extends RecyclerView.Adapter<ViewHolder> implemen
 
 	@Nullable
 	private TrashItem getChangeItem(@NonNull String type, @NonNull String fileName) {
+		fileName = SettingsItem.unifyFileName(fileName);
 		for (Object object : items) {
-			if (object instanceof TrashItem) {
-				TrashItem trashItem = (TrashItem) object;
+			if (object instanceof TrashItem trashItem) {
 				SettingsItem settingsItem = trashItem.getSettingsItem();
-
-				if (settingsItem != null && SettingsItemType.fromName(type) == settingsItem.getType()
-						&& Algorithms.stringsEqual(settingsItem.getFileName(), fileName)) {
+				if (settingsItem != null
+						&& SettingsItemType.fromName(type) == settingsItem.getType()
+						&& Algorithms.stringsEqual(settingsItem.getUnifiedFileName(), fileName)) {
 					return trashItem;
 				}
 			}
