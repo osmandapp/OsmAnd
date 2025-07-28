@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="reverse_mode_calculate_route">Calculate route</string>
+    <string name="reverse_mode_calculate_route_desc">Calculate a new, optimized route to the start.</string>
+    <string name="reverse_mode_original_track">Original track</string>
+    <string name="reverse_mode_original_track_desc">Follow the exact track back to the start.\nWarning: This can be dangerous as it ignores one-way traffic on roads.</string>
+    <string name="reverse_mode">Reverse mode</string>
     <string name="map_orientation_portrait_inverted">Portrait (inverted)</string>
     <string name="map_orientation_landscape_inverted">Landscape (inverted)</string>
     <string name="release_5_2">

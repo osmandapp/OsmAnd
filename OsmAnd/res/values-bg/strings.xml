@@ -4772,5 +4772,5 @@
     <string name="poi_source">Източник на POI</string>
     <string name="row_number">Ред %1$s</string>
     <string name="show_minor_turns_descr">Пътните платна ще бъдат показвани за всички преминавани кръстовища независимо от гласовите напътствия</string>
-    <string name="show_minor_turns">Показванне и на малките кръстовища при движение направо</string>
+    <string name="show_minor_turns">Показване и на малките кръстовища при движение направо</string>
 </resources>
