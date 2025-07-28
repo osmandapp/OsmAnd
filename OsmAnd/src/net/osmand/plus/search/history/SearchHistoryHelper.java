@@ -1,5 +1,8 @@
 package net.osmand.plus.search.history;
 
+import static net.osmand.plus.settings.enums.HistorySource.SEARCH;
+import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -7,12 +10,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.CollectionUtils;
@@ -283,5 +289,35 @@ public class SearchHistoryHelper {
 			double r = rhs.getRank(time);
 			return -Double.compare(l, r);
 		}
+	}
+
+	public void selectSearchResult(@NonNull SearchResult result) {
+		if (result.object instanceof AbstractPoiType) {
+			addNewItemToHistory((AbstractPoiType) result.object, SEARCH);
+		} else if (result.object instanceof PoiUIFilter) {
+			addNewItemToHistory((PoiUIFilter) result.object, SEARCH);
+		}
+		SearchUICore searchUICore = app.getSearchUICore().getCore();
+		if (result.object instanceof PoiType && ((PoiType) result.object).isAdditional()) {
+			PoiType additional = (PoiType) result.object;
+			AbstractPoiType parent = additional.getParentType();
+			if (parent != null) {
+				PoiUIFilter custom = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + parent.getKeyName());
+				if (custom != null) {
+					custom.clearFilter();
+					custom.updateTypesToAccept(parent);
+					custom.setFilterByName(additional.getKeyName().replace('_', ':').toLowerCase());
+
+					SearchPhrase phrase = searchUICore.getPhrase();
+					result = new SearchResult(phrase);
+					result.localeName = custom.getName();
+					result.object = custom;
+					result.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+					result.priorityDistance = 0;
+					result.objectType = ObjectType.POI_TYPE;
+				}
+			}
+		}
+		searchUICore.selectSearchResult(result);
 	}
 }
