@@ -1228,23 +1228,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void addNewWptToGPXFile(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			CallbackWithObject<GpxFile[]> callbackWithObject = new CallbackWithObject<GpxFile[]>() {
-				@Override
-				public boolean processResult(GpxFile[] result) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						GpxFile gpxFile = result != null && result.length > 0
-								? result[0]
-								: mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
-						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
-						}
+
+			SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					WptPtEditor wptPtPointEditor = getWptPtPointEditor();
+					if (wptPtPointEditor != null) {
+						wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
 					}
-					return true;
 				}
 			};
-			GpxUiHelper.selectSingleGPXFile(mapActivity, true, callbackWithObject);
+			SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileSelectionListener);
 		}
 	}
 
