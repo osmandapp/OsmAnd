@@ -3361,7 +3361,7 @@
     <string name="screen_timeout">Délai de veille de l’écran</string>
     <string name="height_limit_description">Indiquer la hauteur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules hauts.</string>
     <string name="weight_limit_description">Indiquer le poids de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules lourds.</string>
-    <string name="width_limit_description">Indiquer la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
+    <string name="width_limit_description">Indiquez la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
     <string name="shared_string_tones">tonnes</string>
     <string name="shared_string_meters">mètres</string>
     <string name="details_dialog_decr">Afficher ou masquer les autres détails sur la carte</string>
@@ -3417,7 +3417,7 @@
     <string name="plan_route_last_edited">Modifiés récemment</string>
     <string name="plan_route_import_track">Importer une trace</string>
     <string name="plan_route_open_existing_track">Ouvrir une trace existante</string>
-    <string name="plan_route_create_new_route">Créer un nouvel itinéraire</string>
+    <string name="plan_route_create_new_route">Créer une nouvelle trace</string>
     <string name="plan_route_select_track_file_for_open">Sélectionner un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
     <string name="overwrite_track">Remplacer la trace</string>
