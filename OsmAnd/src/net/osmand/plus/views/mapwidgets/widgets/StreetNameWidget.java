@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -358,7 +357,7 @@ public class StreetNameWidget extends MapWidget {
 		shadowRadius = textState.textShadowRadius;
 
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		view.setBackgroundResource(portrait ? textState.boxTop : textState.boxFree);
+		view.setBackgroundResource(textState.widgetBackgroundId);
 
 		TextView waypointText = view.findViewById(R.id.waypoint_text);
 		TextView waypointTextShadow = view.findViewById(R.id.waypoint_text_shadow);
@@ -394,38 +393,6 @@ public class StreetNameWidget extends MapWidget {
 		return updatedVisibility;
 	}
 
-	@Override
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
-			@NonNull List<MapWidget> followingWidgets) {
-		ViewGroup specialContainer = getSpecialContainer();
-		boolean useSpecialPosition = panel == WidgetsPanel.TOP && specialContainer != null;
-		if (useSpecialPosition) {
-			specialContainer.removeAllViews();
-
-			boolean showTopCoordinates = visibilityHelper.shouldShowTopCoordinatesWidget();
-			if (!followingWidgets.isEmpty() && showTopCoordinates) {
-				useSpecialPosition = false;
-			}
-		}
-
-		if (useSpecialPosition) {
-			specialContainer.removeAllViews();
-			specialContainer.addView(view);
-		} else {
-			container.addView(view);
-		}
-	}
-
-	@Override
-	public void detachView(@NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
-		super.detachView(widgetsPanel, widgets, mode);
-		// Clear in case link to previous view of StreetNameWidget is lost
-		ViewGroup specialContainer = getSpecialContainer();
-		if (specialContainer != null && !isAnyStreetNameEnabledForMode(widgets, mode)) {
-			specialContainer.removeAllViews();
-		}
-	}
-
 	private boolean isAnyStreetNameEnabledForMode(@NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
 		for (MapWidgetInfo widgetInfo : widgets) {
 			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode)) {
@@ -433,11 +400,6 @@ public class StreetNameWidget extends MapWidget {
 			}
 		}
 		return false;
-	}
-
-	@Nullable
-	private ViewGroup getSpecialContainer() {
-		return mapActivity.findViewById(R.id.street_name_widget_special_container);
 	}
 
 	static class StreetNameWidgetParams {

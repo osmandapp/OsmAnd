@@ -27,12 +27,6 @@
 			android:orientation="vertical"
 			app:topPanel="true" />
 
-		<!-- Street name widget (default position) -->
-		<FrameLayout
-			android:id="@+id/street_name_widget_special_container"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
-
 		<!-- Toolbar -->
 		<include layout="@layout/widget_top_bar" />
 
