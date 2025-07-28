@@ -96,20 +96,20 @@ public class MapHudLayout extends FrameLayout {
 		topBarPanelContainer = findViewById(R.id.top_bar_panel_container);
 		bottomWidgetsPanel = findViewById(R.id.map_bottom_widgets_panel);
 
-		if (portrait) {
-			addPosition(findViewById(R.id.widget_top_bar));
-			addPosition(findViewById(R.id.top_widgets_panel));
-			addPosition(bottomWidgetsPanel);
-
-			addPosition(leftWidgetsPanel);
-			addPosition(rightWidgetsPanel);
-		} else {
+		if (shouldCenterVerticalPanels()) {
 			addPosition(leftWidgetsPanel, this::updateVerticalPanels);
 			addPosition(rightWidgetsPanel, this::updateVerticalPanels);
 
 			addPosition(findViewById(R.id.widget_top_bar));
 			addPosition(findViewById(R.id.top_widgets_panel));
 			addPosition(bottomWidgetsPanel);
+		} else {
+			addPosition(findViewById(R.id.widget_top_bar));
+			addPosition(findViewById(R.id.top_widgets_panel));
+			addPosition(bottomWidgetsPanel);
+
+			addPosition(leftWidgetsPanel);
+			addPosition(rightWidgetsPanel);
 		}
 		addPosition(findViewById(R.id.measurement_buttons));
 		addPosition(findViewById(R.id.recording_note_layout));
@@ -259,7 +259,7 @@ public class MapHudLayout extends FrameLayout {
 		if (view instanceof VerticalWidgetPanel panel) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(panel.isTopPanel() ? POS_TOP : POS_BOTTOM);
-			position.setPositionHorizontal(portrait ? POS_FULL_WIDTH : POS_LEFT);
+			position.setPositionHorizontal(shouldCenterVerticalPanels() ? POS_LEFT : POS_FULL_WIDTH);
 		} else if (view instanceof SideWidgetsPanel panel) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
@@ -267,7 +267,7 @@ public class MapHudLayout extends FrameLayout {
 		} else if (id == R.id.widget_top_bar) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
-			position.setPositionHorizontal(portrait ? POS_FULL_WIDTH : POS_LEFT);
+			position.setPositionHorizontal(shouldCenterVerticalPanels() ? POS_LEFT : POS_FULL_WIDTH);
 		} else if (id == R.id.measurement_buttons) {
 			position.setMoveDescendantsHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
@@ -301,7 +301,7 @@ public class MapHudLayout extends FrameLayout {
 		int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
 		position.setSize(width, height);
 
-		if (view instanceof SideWidgetsPanel || view instanceof VerticalWidgetPanel && !portrait
+		if (view instanceof SideWidgetsPanel || view instanceof VerticalWidgetPanel && shouldCenterVerticalPanels()
 				|| id == R.id.measurement_buttons) {
 			int parentWidth = getWidth();
 			int parentHeight = getAdjustedHeight();
@@ -397,6 +397,10 @@ public class MapHudLayout extends FrameLayout {
 		return getHeight() - statusBarHeight;
 	}
 
+	private boolean shouldCenterVerticalPanels() {
+		return !portrait || tablet;
+	}
+
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
@@ -421,7 +425,7 @@ public class MapHudLayout extends FrameLayout {
 			int leftMargin = 0;
 			int rightMargin = 0;
 
-			if (!portrait) {
+			if (shouldCenterVerticalPanels()) {
 				int defaultWidth = (int) (totalWidth * TOP_BAR_MAX_WIDTH_PERCENTAGE);
 				int defaultMargin = (totalWidth - defaultWidth) / 2;
 
