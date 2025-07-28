@@ -2,8 +2,17 @@ package net.osmand.plus.search.dialogs;
 
 import static net.osmand.plus.search.dialogs.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
 import static net.osmand.plus.search.dialogs.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
+import static net.osmand.search.core.ObjectType.CITY;
+import static net.osmand.search.core.ObjectType.HOUSE;
+import static net.osmand.search.core.ObjectType.LOCATION;
+import static net.osmand.search.core.ObjectType.ONLINE_SEARCH;
+import static net.osmand.search.core.ObjectType.PARTIAL_LOCATION;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
+import static net.osmand.search.core.ObjectType.POSTCODE;
 import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
+import static net.osmand.search.core.ObjectType.STREET;
+import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
+import static net.osmand.search.core.ObjectType.VILLAGE;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 import android.annotation.SuppressLint;
@@ -71,7 +80,6 @@ import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
-import net.osmand.plus.search.SearchUtils;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
 import net.osmand.plus.search.ShareHistoryAsyncTask.OnShareHistoryListener;
 import net.osmand.plus.search.history.HistoryEntry;
@@ -351,7 +359,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								return;
 							}
 						} else {
-							filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
+							filter = app.getPoiFilters().getShowOnMapFilter(searchPhrase);
 						}
 						showFilterOnMap(filter, getText());
 					} else {
@@ -518,7 +526,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				updateClearButtonAndHint();
 				updateClearButtonVisibility(true);
 				boolean textEmpty = newQueryText.length() == 0;
-				updateTabBarVisibility(textEmpty && !SearchUtils.isOnlineSearch(searchUICore));
+				updateTabBarVisibility(textEmpty && !searchUICore.isOnlineSearch());
 				updateSendEmptySearchBottomBar(false);
 				if (textEmpty) {
 					if (addressSearch) {
@@ -1090,7 +1098,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		} else {
 			tabToolbarView.setVisibility(View.GONE);
 			SearchWord lastWord = searchUICore.getPhrase().getLastSelectedWord();
-			boolean buttonToolbarVisible = (SearchUtils.isOnlineSearch(searchUICore) && !isTextEmpty())
+			boolean buttonToolbarVisible = (searchUICore.isOnlineSearch() && !isTextEmpty())
 					|| !searchUICore.getSearchSettings().isCustomSearch();
 			if (searchType.isTargetPoint() && (lastWord == null || lastWord.getLocation() == null)) {
 				buttonToolbarVisible = false;
@@ -1476,34 +1484,63 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void startOnlineSearch() {
-		searchUICore.updateSettings(SearchUtils.setupOnlineSearchSettings(searchUICore.getSearchSettings()));
+		SearchSettings onlineSettings = searchUICore.getSearchSettings().setSearchTypes(ONLINE_SEARCH)
+				.setEmptyQueryAllowed(false)
+				.setSortByName(false)
+				.setRadiusLevel(1);
+		searchUICore.updateSettings(onlineSettings);
 		setResultCollection(null);
 	}
 
 	private void startAddressSearch() {
-		searchUICore.updateSettings(SearchUtils.setupAddressSearchSettings(searchUICore.getSearchSettings()));
+		SearchSettings addressSettings = searchUICore.getSearchSettings().setEmptyQueryAllowed(true)
+				.setSortByName(false)
+				.setSearchTypes(CITY, VILLAGE, POSTCODE, HOUSE, STREET_INTERSECTION, STREET, LOCATION, PARTIAL_LOCATION)
+				.setRadiusLevel(1);
+		searchUICore.updateSettings(addressSettings);
 	}
 
 	private void startCitySearch() {
-		searchUICore.updateSettings(SearchUtils.setupCitySearchSettings(searchUICore.getSearchSettings()));
+		SearchSettings citySettings = searchUICore.getSearchSettings().setEmptyQueryAllowed(true)
+				.setSortByName(true)
+				.setSearchTypes(CITY, VILLAGE)
+				.setRadiusLevel(1);
+		searchUICore.updateSettings(citySettings);
 	}
 
 	private void startNearestCitySearch() {
-		searchUICore.updateSettings(SearchUtils.setupNearestCitySearchSettings(searchUICore.getSearchSettings()));
+		SearchSettings nearestSettings = searchUICore.getSearchSettings().setEmptyQueryAllowed(true)
+				.setSortByName(false)
+				.setSearchTypes(CITY)
+				.setRadiusLevel(1);
+		searchUICore.updateSettings(nearestSettings);
 	}
 
 	private void startLastCitySearch(@NonNull LatLon latLon) {
-		SearchSettings settings = searchUICore.getSearchSettings();
+		SearchSettings settings = searchUICore.getSearchSettings()
+				.setEmptyQueryAllowed(true)
+				.setSortByName(false)
+				.setSearchTypes(CITY)
+				.setRadiusLevel(1);
 		storedOriginalLocation = settings.getOriginalLocation();
-		searchUICore.updateSettings(SearchUtils.setupLastCitySearchSettings(settings, latLon));
+		settings.setOriginalLocation(latLon);
+		searchUICore.updateSettings(settings);
 	}
 
 	private void startPostcodeSearch() {
-		searchUICore.updateSettings(SearchUtils.setupPostcodeSearchSettings(searchUICore.getSearchSettings()));
+		SearchSettings postcodeSettings = searchUICore.getSearchSettings().setSearchTypes(POSTCODE)
+				.setEmptyQueryAllowed(false)
+				.setSortByName(true)
+				.setRadiusLevel(1);
+		searchUICore.updateSettings(postcodeSettings);
 	}
 
 	private void stopAddressSearch() {
-		searchUICore.updateSettings(SearchUtils.setupStopAddressSearchSettings(searchUICore.getSearchSettings()));
+		SearchSettings stopAddressSettings = searchUICore.getSearchSettings().resetSearchTypes()
+				.setEmptyQueryAllowed(false)
+				.setSortByName(false)
+				.setRadiusLevel(1);
+		searchUICore.updateSettings(stopAddressSettings);
 	}
 
 	private void cancelSearch() {
@@ -1733,7 +1770,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void completeQueryWithObject(@NonNull SearchResult result) {
-		SearchUtils.selectSearchResult(app, result);
+		app.getSearchHistoryHelper().selectSearchResult(result);
 
 		if (result.object instanceof AbstractPoiType || result.object instanceof PoiUIFilter) {
 			reloadHistory();
@@ -1849,7 +1886,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			moreListItem.setInterruptedSearch(interruptedSearch);
 			moreListItem.setEmptySearch(isResultEmpty());
 			moreListItem.setSearchMoreAvailable(searchMoreAvailable);
-			moreListItem.setSecondaryButtonVisible(SearchUtils.isOnlineSearch(searchUICore));
+			moreListItem.setSecondaryButtonVisible(searchUICore.isOnlineSearch());
 			mainSearchFragment.addListItem(moreListItem);
 			updateSendEmptySearchBottomBar(isResultEmpty() && !interruptedSearch);
 		}
