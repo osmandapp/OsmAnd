@@ -13,9 +13,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
 
-public class TakeAudioNoteAction extends SelectMapLocationAction {
+public class TakeAudioNoteAction extends TakeMediaNoteAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(TAKE_AUDIO_NOTE_ACTION_ID,
 			"audio.note", TakeAudioNoteAction.class).
@@ -31,11 +30,9 @@ public class TakeAudioNoteAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
-		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-		if (plugin != null) {
-			plugin.recordAudio(latLon.getLatitude(), latLon.getLongitude(), mapActivity);
-		}
+	protected void takeNote(@NonNull MapActivity mapActivity,
+	                        @NonNull AudioVideoNotesPlugin plugin, @NonNull LatLon latLon) {
+		plugin.recordAudio(latLon.getLatitude(), latLon.getLongitude(), mapActivity);
 	}
 
 	@Override
