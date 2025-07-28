@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.externalsensors.DeviceType
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
+import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
@@ -162,9 +165,9 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	private fun updatePairedSensorsList() {
 		if (view != null) {
 			vehicleMetricsPlugin.let { plugin ->
-				val connectedDevice = plugin.getConnectedDeviceInfo()
-				val connectedDevices: List<BTDeviceInfo> =
-					if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
+				var connectedDevice = plugin.getConnectedDeviceInfo()
+				val connectedDevices: MutableList<BTDeviceInfo> =
+					if (connectedDevice == null) ArrayList() else mutableListOf(connectedDevice)
 				val usedDevices = plugin.getUsedOBDDevicesList().toMutableList()
 				if (settings.SIMULATE_OBD_DATA.get()) {
 					usedDevices.add(BTDeviceInfo("Simulation Device", ""))
@@ -172,6 +175,14 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 				val disconnectedDevices =
 					usedDevices.filter { it.address != connectedDevice?.address }
 						.toMutableList()
+				//todo obd check devices from vehicle plugin
+				val devices: List<BLEOBDDevice> = vehicleMetricsPlugin.getPairedDevices()
+				for (device in devices) {
+					if (device.deviceType == DeviceType.BLE_OBD && device.isConnected) {
+						connectedDevice = BTDeviceInfo(device.name, "", true)
+						connectedDevices.add(connectedDevice)
+					}
+				}
 				if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
 					emptyView?.visibility = View.VISIBLE
 					contentView?.visibility = View.GONE

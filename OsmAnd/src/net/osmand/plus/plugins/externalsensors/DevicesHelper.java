@@ -34,6 +34,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DevicePreferencesListener;
 import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DeviceSettings;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
@@ -49,12 +50,15 @@ import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBPICPDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBikeSCDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEHeartRateDevice;
+import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLERunningSCDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLETemperatureDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
+import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.BLEUtils;
 import net.osmand.plus.utils.FormattedValue;
@@ -77,13 +81,14 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	private static final Log LOG = PlatformUtil.getLog(DevicesHelper.class);
 
 	private final static List<UUID> SUPPORTED_BLE_SERVICE_UUIDS = Arrays.asList(
+			BLEOBDDevice.Companion.getServiceUUID(),
 			BLEBikeSCDDevice.getServiceUUID(),
 			BLEHeartRateDevice.getServiceUUID(),
 			BLERunningSCDDevice.getServiceUUID(),
 			BLETemperatureDevice.getServiceUUID());
 
-	private final OsmandApplication app;
-	private final DevicesSettingsCollection devicesSettingsCollection;
+	private OsmandApplication app;
+	private DevicesSettingsCollection devicesSettingsCollection;
 	private final Map<String, AbstractDevice<?>> devices = new ConcurrentHashMap<>();
 	private List<AntAbstractDevice<?>> antSearchableDevices = new ArrayList<>();
 
@@ -94,15 +99,26 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	private boolean installAntPluginAsked;
 	private BluetoothAdapter bluetoothAdapter;
 	private BluetoothLeScanner bleScanner;
-	private final ExternalSensorsPlugin externalSensorsPlugin;
+	private ExternalSensorsPlugin externalSensorsPlugin = null;
+	private VehicleMetricsPlugin vehicleMetricsPlugin = null;
+	public static final String DEVICES_SETTINGS_PREF_ID = "external_devices_settings";
 
-	DevicesHelper(@NonNull OsmandApplication app, @NonNull ExternalSensorsPlugin plugin) {
-		this.app = app;
-		this.devicesSettingsCollection = new DevicesSettingsCollection(plugin);
+	public DevicesHelper(@NonNull OsmandApplication app, @NonNull ExternalSensorsPlugin plugin, @NonNull CommonPreferenceProvider<String> preferenceProvider) {
+		init(app, preferenceProvider);
 		externalSensorsPlugin = plugin;
 	}
 
-	void setActivity(@Nullable Activity activity) {
+	public DevicesHelper(@NonNull OsmandApplication app, @NonNull VehicleMetricsPlugin plugin, @NonNull CommonPreferenceProvider<String> preferenceProvider) {
+		init(app, preferenceProvider);
+		vehicleMetricsPlugin = plugin;
+	}
+
+	private void init(@NonNull OsmandApplication app, @NonNull CommonPreferenceProvider<String> preferenceProvider) {
+		this.app = app;
+		this.devicesSettingsCollection = new DevicesSettingsCollection(preferenceProvider);
+	}
+
+	public void setActivity(@Nullable Activity activity) {
 		if (this.activity != null) {
 			dropUnpairedDevices();
 			deinitBLE();
@@ -126,7 +142,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 	}
 
-	void deinitBLE() {
+	public void deinitBLE() {
 		try {
 			if (bluetoothAdapter != null) {
 				if (bleScanner != null && bluetoothAdapter.isEnabled()) {
@@ -186,6 +202,8 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				return new AntBikeSpeedCadenceDevice(deviceId);
 			case ANT_BICYCLE_SD:
 				return new AntBikeSpeedDistanceDevice(deviceId);
+			case BLE_OBD:
+				return bluetoothAdapter != null ? new BLEOBDDevice(bluetoothAdapter, deviceId) : null;
 			case BLE_TEMPERATURE:
 				return bluetoothAdapter != null ? new BLETemperatureDevice(bluetoothAdapter, deviceId) : null;
 			case BLE_HEART_RATE:
@@ -252,7 +270,13 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 							bluetoothAdapter, uuid.getUuid(), address, deviceName, result.getRssi());
 					if (device != null) {
 						if (!devices.containsKey(device.getDeviceId())) {
-							devices.put(device.getDeviceId(), device);
+							boolean isOBDDevice = device instanceof BLEOBDDevice;
+							if (isOBDDevice && vehicleMetricsPlugin != null || !isOBDDevice && externalSensorsPlugin != null) {
+								devices.put(device.getDeviceId(), device);
+								if (isOBDDevice && vehicleMetricsPlugin != null) {
+									vehicleMetricsPlugin.onBLEDeviceFound((BLEOBDDevice) device);
+								}
+							}
 						}
 						break;
 					}
@@ -283,12 +307,12 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		return false;
 	}
 
-	void connectDevice(@Nullable Activity activity, @NonNull AbstractDevice<?> device) {
+	public void connectDevice(@Nullable Activity activity, @NonNull AbstractDevice<?> device) {
 		device.addListener(this);
 		device.connect(app, activity);
 	}
 
-	void disconnectDevice(@NonNull AbstractDevice<?> device) {
+	public void disconnectDevice(@NonNull AbstractDevice<?> device) {
 		disconnectDevice(device, true);
 	}
 
@@ -307,7 +331,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 	}
 
-	void disconnectDevices() {
+	public void disconnectDevices() {
 		for (AbstractDevice<?> device : getDevices()) {
 			disconnectDevice(device);
 		}
@@ -332,7 +356,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		devices.remove(device.getDeviceId());
 	}
 
-	void dropUnpairedDevices() {
+	public void dropUnpairedDevices() {
 		for (AbstractDevice<?> device : getUnpairedDevices()) {
 			dropUnpairedDevice(device);
 		}
@@ -347,12 +371,12 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	@NonNull
-	List<AbstractDevice<?>> getDevices() {
+	public List<AbstractDevice<?>> getDevices() {
 		return new ArrayList<>(devices.values());
 	}
 
 	@NonNull
-	List<AbstractDevice<?>> getPairedDevices() {
+	public List<AbstractDevice<?>> getPairedDevices() {
 		List<AbstractDevice<?>> res = new ArrayList<>();
 		for (AbstractDevice<?> device : getDevices()) {
 			if (isDevicePaired(device)) {
@@ -363,7 +387,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	@Nullable
-	AbstractDevice<?> getPairedDeviceById(@NonNull String deviceId) {
+	public AbstractDevice<?> getPairedDeviceById(@NonNull String deviceId) {
 		for (AbstractDevice<?> device : getDevices()) {
 			if (isDevicePaired(device) && deviceId.equals(device.getDeviceId())) {
 				return device;
@@ -373,7 +397,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	@NonNull
-	List<AbstractDevice<?>> getUnpairedDevices() {
+	public List<AbstractDevice<?>> getUnpairedDevices() {
 		List<AbstractDevice<?>> res = new ArrayList<>();
 		for (AbstractDevice<?> device : getDevices()) {
 			if (!isDevicePaired(device)) {
@@ -384,7 +408,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	@Nullable
-	AbstractDevice<?> getAnyDevice(@NonNull String deviceId) {
+	public AbstractDevice<?> getAnyDevice(@NonNull String deviceId) {
 		for (AbstractDevice<?> device : getDevices()) {
 			if (Algorithms.stringsEqual(device.getDeviceId(), deviceId)) {
 				return device;
@@ -428,6 +452,20 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				} else if (bleScanning && isBLEDevice(device)) {
 					// skip
 				} else {
+					if (device instanceof BLEOBDDevice) {
+						((BLEOBDDevice) device).setDeviceReadyListener(new BLEOBDDevice.DeviceReadyListener() {
+							@Override
+							public void onDeviceReadyStateChange(boolean isReady) {
+								//todo check reconnect on user disconnect (+reconnect on start after user disconect)
+								if (isReady) {
+									VehicleMetricsPlugin vehicleMetricsPlugin = PluginsHelper.getActivePlugin(VehicleMetricsPlugin.class);
+									if(vehicleMetricsPlugin != null) {
+										vehicleMetricsPlugin.connectToDevice((BLEOBDDevice) device);
+									}
+								}
+							}
+						});
+					}
 					if (!isDeviceEnabled(device)) {
 						updateDevice(activity, device);
 					} else {
@@ -490,7 +528,9 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 					settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device, true);
 					devicesSettingsCollection.setDeviceSettings(deviceId, settings);
 					updateDeviceProperties(device);
-					externalSensorsPlugin.onDevicePaired(device);
+					if (externalSensorsPlugin != null) {
+						externalSensorsPlugin.onDevicePaired(device);
+					}
 				}
 			}
 			//connectDevice(activity, device);

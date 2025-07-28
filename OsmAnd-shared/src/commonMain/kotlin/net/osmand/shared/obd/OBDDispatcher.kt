@@ -10,7 +10,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
 import net.osmand.shared.extensions.format
+import net.osmand.shared.obd.Obd2Connection.COMMAND_TYPE.LIVE
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.LoggerFactory
 import okio.Buffer
@@ -23,10 +25,14 @@ class OBDDispatcher(val debug: Boolean = false) {
 	private var commandQueue = listOf<OBDCommand>()
 	private var inputStream: Source? = null
 	private var outputStream: Sink? = null
-	private val log = LoggerFactory.getLogger("OBDDispatcher")
+//	private val log = LoggerFactory.getLogger("OBDDispatcher")
+	private val log = LoggerFactory.getLogger("Obd2Connection")
 	private var readStatusListener: OBDReadStatusListener? = null
 	private var sensorDataCache = HashMap<OBDCommand, OBDDataField<Any>?>()
 	private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+
+	private val initOBDTimeout = 30000
+	private val initOBDRetryOffset = 2000L
 
 	interface OBDReadStatusListener {
 		fun onIOError()
@@ -47,7 +53,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 			} catch (cancelError: CancellationException) {
 				log("OBD reading canceled")
 			} catch (e: Exception) {
-				log("Unexpected error in connect: ${e.message}")
+				log.error("Unexpected error in connect: ${e.message}", e)
 				readStatusListener?.onIOError()
 			} finally {
 				connector.disconnect()
@@ -59,13 +65,26 @@ class OBDDispatcher(val debug: Boolean = false) {
 	private suspend fun startReadObdLooper() {
 		log("Start reading obd with $inputStream and $outputStream")
 		val connection = Obd2Connection(createTransport(), this)
-		connection.initialize()
+		val startInitTime = Clock.System.now().toEpochMilliseconds()
+		while (!connection.initialize()) {
+			delay(initOBDRetryOffset)
+			if (Clock.System.now().toEpochMilliseconds() - startInitTime > initOBDTimeout) {
+				break
+			}
+		}
+		if (!connection.isInitialized()) {
+			connection.finish()
+			return
+		}
 		try {
-			while (isConnected(connection) && coroutineContext.isActive) {
+			var cycleIndex = 0 //todo remove after testing
+			while (isConnected(connection)) {
 				if (commandQueue.isEmpty()) {
 					delay(500) // Prevent busy-looping when there are no commands
 					continue
 				}
+				log.debug("Start new commandsRound $cycleIndex")
+				cycleIndex++
 				commandQueue.forEach { command ->
 					coroutineContext.ensureActive()
 					handleCommand(command, connection)
@@ -112,9 +131,9 @@ class OBDDispatcher(val debug: Boolean = false) {
 	private fun isConnected(connection: Obd2Connection): Boolean =
 		inputStream != null && outputStream != null && !connection.isFinished()
 
-	private suspend fun handleCommand(command: OBDCommand, connection: Obd2Connection) {
+	private suspend fun handleCommand(command: OBDCommand, connection: Obd2Connection): OBDResponse {
 		if (command.isStale && sensorDataCache[command] != null) {
-			return
+			return OBDResponse.OK
 		}
 
 		val fullCommand = "%02X%02X".format(command.commandGroup, command.command)
@@ -126,10 +145,11 @@ class OBDDispatcher(val debug: Boolean = false) {
 				}
 
 				it == OBDResponse.NO_DATA -> sensorDataCache[command] = OBDDataField.NO_DATA
-				it == OBDResponse.ERROR -> readStatusListener?.onIOError()
+				it == OBDResponse.CONNECTION_FAILURE -> readStatusListener?.onIOError()
 				else -> log("Incorrect response length or unknown error for command $command")
 			}
 		}
+		return commandResult
 	}
 
 	fun addCommand(commandToRead: OBDCommand) {

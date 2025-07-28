@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -81,9 +82,9 @@ public class DevicesSettingsCollection {
 		void onDeviceDisabled(@NonNull String deviceId);
 	}
 
-	public DevicesSettingsCollection(@NonNull ExternalSensorsPlugin plugin) {
+	public DevicesSettingsCollection(@NonNull CommonPreferenceProvider<String> preferenceProvider) {
 		gson = new GsonBuilder().create();
-		preference = plugin.registerStringPref(DEVICES_SETTINGS_PREF_ID, "");
+		preference = preferenceProvider.getPreference();
 		readSettings();
 	}
 

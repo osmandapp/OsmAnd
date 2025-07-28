@@ -27,7 +27,7 @@ import net.osmand.util.Algorithms
 
 class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ConnectionStateListener,
 	RenameOBDDialog.OnDeviceNameChangedCallback, ForgetOBDDeviceDialog.ForgetDeviceListener {
-	private val handlerThread = HandlerThread("Update OBD Widgets")
+	private var handlerThread: HandlerThread? = null
 
 	enum class OBDDataType(var widgetType: OBDTypeWidget, val icon: Int?) {
 		VIN(OBDTypeWidget.VIN, null),
@@ -67,6 +67,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 			val connectedDevice = vehicleMetricsPlugin.getConnectedDeviceInfo()
 			val deviceName = getString(DEVICE_NAME_KEY) ?: ""
 			val deviceAddress = getString(DEVICE_ADDRESS_KEY) ?: ""
+			val isBLE = getBoolean(DEVICE_IS_BLE_KEY)
 			device = if (connectedDevice != null &&
 				(deviceAddress == connectedDevice.address ||
 						(Algorithms.isEmpty(deviceAddress) && Algorithms.isEmpty(deviceName)))) {
@@ -74,7 +75,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 				connectedDevice
 			} else {
 				deviceConnectionState = OBDConnectionState.DISCONNECTED
-				BTDeviceInfo(deviceName, deviceAddress)
+				BTDeviceInfo(deviceName, deviceAddress, isBLE)
 			}
 		}
 	}
@@ -259,15 +260,17 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	override fun onStart() {
 		super.onStart()
-		handlerThread.start()
-		updateWidgetsHandler = Handler(handlerThread.looper)
+		handlerThread = HandlerThread("Update OBD Widgets")
+		handlerThread?.start()
+		handlerThread?.apply { updateWidgetsHandler = Handler(looper) }
 		updateWidgets()
 	}
 
 	override fun onStop() {
 		super.onStop()
 		updateWidgetsHandler = null
-		handlerThread.quitSafely()
+		handlerThread?.quitSafely()
+		handlerThread = null
 	}
 
 	private fun updateWidgets() {
@@ -316,6 +319,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		const val UPDATE_INTERVAL_MILLIS = 100L
 		const val DEVICE_NAME_KEY = "DEVICE_NAME_KEY"
 		const val DEVICE_ADDRESS_KEY = "DEVICE_ADDRESS_KEY"
+		const val DEVICE_IS_BLE_KEY = "DEVICE_IS_BLE_KEY"
 
 		fun showInstance(manager: FragmentManager, device: BTDeviceInfo) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
@@ -323,6 +327,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 				val args = Bundle()
 				args.putString(DEVICE_NAME_KEY, device.name)
 				args.putString(DEVICE_ADDRESS_KEY, device.address)
+				args.putBoolean(DEVICE_IS_BLE_KEY, device.isBLE)
 				fragment.arguments = args
 				fragment.retainInstance = true
 				manager.beginTransaction()
