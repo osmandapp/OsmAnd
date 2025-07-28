@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="map_orientation_portrait_inverted">Portrait (inverted)</string>
+    <string name="map_orientation_landscape_inverted">Landscape (inverted)</string>
     <string name="reverse_mode_calculate_route">Calculate route</string>
     <string name="reverse_mode_calculate_route_desc">Calculate a new, optimized route to the start.</string>
     <string name="reverse_mode_original_track">Original track</string>
