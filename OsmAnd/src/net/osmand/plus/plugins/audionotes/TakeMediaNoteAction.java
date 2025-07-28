@@ -29,7 +29,7 @@ public abstract class TakeMediaNoteAction extends SelectMapLocationAction {
 			if (plugin.isRecording()) {
 				plugin.stopRecording(mapActivity, false);
 			} else {
-				execute(mapActivity, params);
+				super.execute(mapActivity, params);
 			}
 		}
 	}
