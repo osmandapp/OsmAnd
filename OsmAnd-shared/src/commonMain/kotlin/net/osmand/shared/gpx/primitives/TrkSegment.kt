@@ -7,6 +7,7 @@ import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.gpx.SplitMetric
 import net.osmand.shared.gpx.SplitSegment
+import kotlin.math.absoluteValue
 
 class TrkSegment : GpxExtensions() {
 	var name: String? = null
@@ -40,7 +41,13 @@ class TrkSegment : GpxExtensions() {
 		var prevExtremumIndex: Int? = null
 		var sp: SplitSegment? = null
 
-		for(i in points.indices){
+		val slopeCounters = mutableMapOf(
+			SegmentSlopeType.UPHILL to 0,
+			SegmentSlopeType.DOWNHILL to 0,
+			SegmentSlopeType.FLAT to 0
+		)
+
+		for (i in points.indices) {
 			val point = points[i]
 			val isExtremum = isPointExtremum(i, extremums)
 
@@ -48,19 +55,37 @@ class TrkSegment : GpxExtensions() {
 				if (prevExtremumIndex != null && isExtremum) {
 					val prevExtremumPoint = points[prevExtremumIndex]
 					val extremumElevDiff = prevExtremumPoint.ele - point.ele
+
 					val slopeType =
-						if (extremumElevDiff.toInt() == 0) SegmentSlopeType.FLAT
-						else if(extremumElevDiff < 0) SegmentSlopeType.UPHILL
+						if (extremumElevDiff.absoluteValue < 1) SegmentSlopeType.FLAT
+						else if (extremumElevDiff < 0) SegmentSlopeType.UPHILL
 						else SegmentSlopeType.DOWNHILL
 					if (sp != null && sp.segmentSlopeType == slopeType) {
 						sp.metricEnd = accumulatedDistances[i]
 						sp.endPointInd = i - 1
+
+						val segmentStartPoint = points[sp.startPointInd]
+						val segmentDistance = point.distance - segmentStartPoint.distance
+						val segmentElevDiff = point.ele - segmentStartPoint.ele
+						val segmentSlope = segmentElevDiff / segmentDistance * 100
+						sp.slopeValue = segmentSlope
 					} else {
+						val count = (slopeCounters[slopeType] ?: 0) + 1
+						slopeCounters[slopeType] = count
+
 						sp = SplitSegment(this)
 						sp.startPointInd = prevExtremumIndex
 						sp.endPointInd = i - 1
 						sp.metricEnd = accumulatedDistances[i]
 						sp.segmentSlopeType = slopeType
+						sp.slopeCount = count
+
+						val segmentStartPoint = points[sp.startPointInd]
+						val segmentDistance = point.distance - segmentStartPoint.distance
+						val segmentElevDiff = point.ele - segmentStartPoint.ele
+						val segmentSlope = segmentElevDiff / segmentDistance * 100
+						sp.slopeValue = segmentSlope
+
 						splitSegments.add(sp)
 					}
 				}

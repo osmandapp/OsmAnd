@@ -347,8 +347,10 @@ object GpxUtilities {
 		for (segment in splitSegments) {
 			val analysis = GpxTrackAnalysis()
 			analysis.prepareInformation(0, null, segment)
-			if (segment.segmentSlopeType != null) {
+			if (segment.segmentSlopeType != null && segment.slopeCount != null && segment.slopeValue != null) {
 				analysis.segmentSlopeType = segment.segmentSlopeType
+				analysis.slopeCount = segment.slopeCount
+				analysis.slopeValue = segment.slopeValue
 			}
 			list.add(analysis)
 		}

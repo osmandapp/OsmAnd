@@ -105,7 +105,9 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 				setupHeaderClick(currentGpxDisplayItem, convertView, nightMode);
 
 				overviewTextView.setTextColor(app.getColor(activeColorId));
+
 				SegmentSlopeType slopeType = currentGpxDisplayItem.analysis.getSegmentSlopeType();
+				Integer slopeCount = currentGpxDisplayItem.analysis.getSlopeCount();
 
 				if (trackGroup != null && (trackGroup.isSplitDistance() || slopeType != null)) {
 					if (slopeType != null) {
@@ -121,14 +123,19 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 					overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.getMetricEnd(), app));
 					overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
 
-					if (slopeType != null) {
+
+					if (slopeType != null && slopeCount != null) {
+						String slopeNumber = "#" + slopeCount;
 						String slopeName;
 						if (slopeType == SegmentSlopeType.FLAT) {
-							slopeName = getString(R.string.shared_string_flat);
+							String flat = getString(R.string.shared_string_flat);
+							slopeName = getString(R.string.ltr_or_rtl_combine_via_space, flat, slopeNumber);
 						} else if (slopeType == SegmentSlopeType.UPHILL) {
-							slopeName = getString(R.string.shared_string_uphill);
+							String uphill = getString(R.string.shared_string_uphill);
+							slopeName = getString(R.string.ltr_or_rtl_combine_via_space, uphill, slopeNumber);
 						} else {
-							slopeName = getString(R.string.shared_string_downhill);
+							String downhill = getString(R.string.shared_string_downhill);
+							slopeName = getString(R.string.ltr_or_rtl_combine_via_space, downhill, slopeNumber);
 						}
 
 						overviewTextView.append(" - " + slopeName);
