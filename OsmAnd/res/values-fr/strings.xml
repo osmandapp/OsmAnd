@@ -5689,4 +5689,10 @@
     <string name="description_purchases_fastspring">Vous pouvez gérer vos achats via le portail FastSpring.</string>
     <string name="description_subscription_fastspring">Vous pouvez gérer et annuler votre abonnement via le portail FastSpring.</string>
     <string name="manage_purchases">Gérer vos achats</string>
+    <string name="map_orientation_portrait_inverted">Portrait (inversé)</string>
+    <string name="map_orientation_landscape_inverted">Paysage (inversé)</string>
+    <string name="reverse_mode_calculate_route">Calculer l\'itinéraire</string>
+    <string name="reverse_mode_calculate_route_desc">Calculez un nouvel itinéraire optimisé jusqu\'au départ.</string>
+    <string name="reverse_mode_original_track">Chemin original</string>
+    <string name="reverse_mode_original_track_desc">Suivez le chemin exact jusqu\'au départ.\nAttention : ce parcours peut être dangereux car il ignore la circulation à sens unique.</string>
 </resources>
