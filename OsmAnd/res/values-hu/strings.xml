@@ -5742,4 +5742,11 @@
     <string name="description_purchases_fastspring">Vásárlásait a FastSpring fiókkezelő portálon keresztül kezelheti.</string>
     <string name="description_subscription_fastspring">Előfizetését a FastSpring fiókkezelési portálon keresztül kezelheti, illetve mondhatja le.</string>
     <string name="manage_purchases">Vásárlások kezelése</string>
+    <string name="map_orientation_portrait_inverted">Álló (fordított)</string>
+    <string name="map_orientation_landscape_inverted">Fekvő(fordított)</string>
+    <string name="reverse_mode_calculate_route">Útvonal kiszámítása</string>
+    <string name="reverse_mode_calculate_route_desc">Számítson ki egy új, optimalizált útvonalat a kiindulóponthoz.</string>
+    <string name="reverse_mode_original_track">Eredeti nyomvonal</string>
+    <string name="reverse_mode_original_track_desc">Kövesse pontosan a nyomvonalat vissza a kiindulópontig.\nFigyelmeztetés: Ez veszélyes lehet, mivel figyelmen kívül hagyja az egyirányú forgalmat az utakon.</string>
+    <string name="reverse_mode">Fordított mód</string>
 </resources>
