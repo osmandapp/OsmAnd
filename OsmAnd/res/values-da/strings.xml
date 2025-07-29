@@ -5823,4 +5823,11 @@
     <string name="description_purchases_fastspring">Du kan administrere dine køb via FastSprings portal for kontoadministration.</string>
     <string name="description_subscription_fastspring">Du kan administrere eller opsige dit abonnement via FastSprings portal for kontoadministration.</string>
     <string name="manage_purchases">Administrer køb</string>
+    <string name="map_orientation_portrait_inverted">Portræt (omvendt)</string>
+    <string name="map_orientation_landscape_inverted">Landskab (omvendt)</string>
+    <string name="reverse_mode_calculate_route">Beregn rute</string>
+    <string name="reverse_mode_calculate_route_desc">Beregn en ny, optimeret rute til starten.</string>
+    <string name="reverse_mode_original_track">Originalt spor</string>
+    <string name="reverse_mode_original_track_desc">Følg det nøjagtige spor tilbage til starten.\nAdvarsel: Dette kan være farligt, da det ignorerer envejs trafik på veje.</string>
+    <string name="reverse_mode">Omvendt tilstand</string>
 </resources>
