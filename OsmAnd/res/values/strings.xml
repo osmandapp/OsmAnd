@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="n_a">N/A</string>
     <string name="next_turn_information">Next turn information</string>
     <string name="next_turn_information_desc">Shows the upcoming turn direction and street name.</string>
 	<string name="description_purchases_fastspring">You can manage your purchases through FastSpring account management portal.</string>
