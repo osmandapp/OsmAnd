@@ -14,7 +14,6 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -38,14 +37,12 @@ import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.widgets.FrameLayoutEx;
 import net.osmand.util.Algorithms;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, ViewChangeProvider {
+public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer {
 
 	private static final int BORDER_WIDTH_DP = 2;
 	private static final int BORDER_RADIUS_DP = 5;
@@ -62,7 +59,6 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, V
 	protected WidgetsPagerAdapter adapter;
 	protected LinearLayout dots;
 
-	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 	private int screenWidth = -1;
 
 	public SideWidgetsPanel(@NonNull Context context) {
@@ -319,24 +315,6 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, V
 	@NonNull
 	protected OsmandApplication getMyApplication() {
 		return ((OsmandApplication) getContext().getApplicationContext());
-	}
-
-	@NonNull
-	@Override
-	public Collection<ViewChangeListener> getViewChangeListeners() {
-		return viewChangeListeners;
-	}
-
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		super.onSizeChanged(w, h, oldw, oldh);
-		notifySizeChanged(this, w, h, oldw, oldh);
-	}
-
-	@Override
-	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-		super.onVisibilityChanged(changedView, visibility);
-		notifyVisibilityChanged(changedView, visibility);
 	}
 
 	public void setScreenWidth(@NonNull Activity activity) {

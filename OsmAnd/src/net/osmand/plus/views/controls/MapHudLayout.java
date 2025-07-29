@@ -230,13 +230,15 @@ public class MapHudLayout extends FrameLayout {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = createWidgetPosition(view);
-				map.put(view, position);
+				if (position.height > 0 && position.width > 0) {
+					map.put(view, position);
+				}
 			}
 		}
 		for (MapButton button : mapButtons) {
 			if (button.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = button.getDefaultPositionSize();
-				if (position != null) {
+				if (position != null && position.height > 0 && position.width > 0) {
 					map.put(button, position);
 				}
 			}
@@ -245,7 +247,9 @@ public class MapHudLayout extends FrameLayout {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = updateWidgetPosition(view, entry.getValue());
-				map.put(view, position);
+				if (position.height > 0 && position.width > 0) {
+					map.put(view, position);
+				}
 			}
 		}
 		return map;

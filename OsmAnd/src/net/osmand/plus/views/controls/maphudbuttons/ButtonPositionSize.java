@@ -6,12 +6,17 @@ import net.osmand.data.QuadRect;
 
 import org.apache.commons.logging.Log;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class ButtonPositionSize {
 
 	private static final Log LOG = PlatformUtil.getLog(ButtonPositionSize.class);
+
+	private static final int MAX_ITERATIONS = 1000;
+	private static final int MAX_STUCK_ATTEMPTS = 20;
 
 	public static final int CELL_SIZE_DP = 8;
 	public static final int DEF_MARGIN_DP = 4;
@@ -231,12 +236,13 @@ public class ButtonPositionSize {
 	}
 
 	public static boolean computeNonOverlap(int space, List<ButtonPositionSize> buttons, int totalWidth, int totalHeight) {
-		int MAX_ITERATIONS = 1000, iter = 0;
-		for (ButtonPositionSize button : buttons)
+		for (ButtonPositionSize button : buttons) {
 			button.updateBounds(totalWidth, totalHeight);
-
+		}
+		int iteration = 0;
+		Map<ButtonPositionSize, Integer> moveAttempts = new HashMap<>();
 		for (int fixedPos = buttons.size() - 1; fixedPos >= 0; ) {
-			if (iter++ > MAX_ITERATIONS) {
+			if (iteration++ > MAX_ITERATIONS) {
 				LOG.error("Relayout is broken");
 				return false;
 			}
@@ -245,12 +251,16 @@ public class ButtonPositionSize {
 			for (int i = fixedPos + 1; i < buttons.size(); i++) {
 				ButtonPositionSize check = buttons.get(i);
 				if (button.overlap(check)) {
-					overlap = true;
-					if (moveButton(space, check, button, totalWidth, totalHeight)) {
+					int attempts = moveAttempts.getOrDefault(check, 0);
+					if (attempts >= MAX_STUCK_ATTEMPTS) {
+						LOG.warn("Skipping move for " + check + " (max attempts reached)");
+					} else if (moveButton(space, check, button, totalWidth, totalHeight)) {
+						overlap = true;
 						check.updateBounds(totalWidth, totalHeight);
+						moveAttempts.put(check, attempts + 1);
+						fixedPos = i;
+						break;
 					}
-					fixedPos = i;
-					break;
 				}
 			}
 			if (!overlap) {
@@ -291,7 +301,7 @@ public class ButtonPositionSize {
 	}
 
 	private static boolean moveButton(int space, ButtonPositionSize toMove,
-			ButtonPositionSize overlap,	int totalWidth, int totalHeight) {
+			ButtonPositionSize overlap, int totalWidth, int totalHeight) {
 		boolean xMove = false;
 		boolean yMove = false;
 		if (overlap.moveDescendants == MOVE_DESCENDANTS_ANY) {
@@ -331,6 +341,9 @@ public class ButtonPositionSize {
 			}
 		}
 		boolean moved = (newX != toMove.marginX) || (newY != toMove.marginY);
+//		LOG.debug("moveButton toMove " + toMove + " overlap " + overlap + " newX " + newX + " newY " + newY
+//				+ " toMove.marginX " + toMove.marginX + " toMove.marginY " + toMove.marginY
+//				+ " totalWidth " + totalWidth + " totalHeight " + totalHeight);
 		toMove.marginX = newX;
 		toMove.marginY = newY;
 
