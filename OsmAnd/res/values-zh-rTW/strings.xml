@@ -5775,4 +5775,11 @@
     <string name="description_purchases_fastspring">您可以透過 FastSpring 帳號管理入口網站管理您的購買。</string>
     <string name="description_subscription_fastspring">您可以透過 FastSpring 帳號管理入口網站管理或取消訂閱。</string>
     <string name="manage_purchases">管理購買</string>
+    <string name="map_orientation_portrait_inverted">縱向（翻轉）</string>
+    <string name="map_orientation_landscape_inverted">橫向（翻轉）</string>
+    <string name="reverse_mode_calculate_route">計算路線</string>
+    <string name="reverse_mode_calculate_route_desc">計算前往起點的最佳化新路線。</string>
+    <string name="reverse_mode_original_track">原始軌跡</string>
+    <string name="reverse_mode_original_track_desc">沿著確切的路徑回到起點。\n警告：這可能會很危險，因為其會忽略單行道。</string>
+    <string name="reverse_mode">反向模式</string>
 </resources>
