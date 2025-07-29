@@ -46,12 +46,12 @@ public class BaseDetailsObject {
 	}
 
 	public BaseDetailsObject(Object object, String lang) {
-		this(lang != null ? lang : "en");
+		this(Algorithms.isEmpty(lang) ? "en" : lang);
 		addObject(object);
 	}
 
 	public BaseDetailsObject(List<Amenity> amenities, String lang) {
-		this(lang != null ? lang : "en");
+		this(Algorithms.isEmpty(lang) ? "en" : lang);
 
 		for (Amenity amenity : amenities) {
 			addObject(amenity);
@@ -321,7 +321,10 @@ public class BaseDetailsObject {
 			syntheticAmenity.setTravelEloNumber(travelElo);
 		}
 		syntheticAmenity.copyNames(amenity);
-		syntheticAmenity.copyAdditionalInfo(amenity, false);
+		if (getResourceType(amenity) != SearchResultResource.TRAVEL
+				|| getLangForTravel(amenity).equals(this.lang)) {
+			syntheticAmenity.copyAdditionalInfo(amenity, false);
+		}
 		processPolygonCoordinates(amenity.getX(), amenity.getY());
 
 		contentLocales.addAll(amenity.getSupportedContentLocales());
