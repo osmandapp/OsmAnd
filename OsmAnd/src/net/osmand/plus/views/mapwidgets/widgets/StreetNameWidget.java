@@ -57,6 +57,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgetstates.StreetNameWidgetState;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -70,6 +71,7 @@ public class StreetNameWidget extends MapWidget {
 
 	private final WaypointHelper waypointHelper;
 	private final RendererRegistry rendererRegistry;
+	private final StreetNameWidgetState widgetState;
 
 	private LocationPointWrapper lastPoint;
 
@@ -96,6 +98,7 @@ public class StreetNameWidget extends MapWidget {
 
 		waypointHelper = app.getWaypointHelper();
 		rendererRegistry = app.getRendererRegistry();
+		widgetState = new StreetNameWidgetState(app, customId);
 
 		addressText = view.findViewById(R.id.map_address_text);
 		addressTextShadow = view.findViewById(R.id.map_address_text_shadow);
@@ -119,7 +122,9 @@ public class StreetNameWidget extends MapWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean showNextTurn = settings.SHOW_NEXT_TURN_INFO.get();
+		ApplicationMode appMode = settings.getApplicationMode();
+		boolean showNextTurn = isShowNextTurnEnabled(appMode);
+
 		StreetNameWidgetParams params = new StreetNameWidgetParams(mapActivity, showNextTurn);
 		CurrentStreetName streetName = params.streetName;
 		int turnArrowColorId = params.turnArrowColorId;
@@ -400,6 +405,19 @@ public class StreetNameWidget extends MapWidget {
 			}
 		}
 		return false;
+	}
+
+	@NonNull
+	public StreetNameWidgetState getWidgetState() {
+		return widgetState;
+	}
+
+	public boolean isShowNextTurnEnabled(@NonNull ApplicationMode appMode) {
+		return widgetState.isShowNextTurnEnabled(appMode);
+	}
+
+	public void setShowNextTurnEnabled(@NonNull ApplicationMode appMode, boolean value) {
+		widgetState.setShowNextTurnEnabled(appMode, value);
 	}
 
 	static class StreetNameWidgetParams {
