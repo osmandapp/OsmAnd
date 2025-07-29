@@ -204,20 +204,20 @@ public class MapHudLayout extends FrameLayout {
 	@NonNull
 	private Map<View, ButtonPositionSize> getButtonPositionSizes() {
 		Map<View, ButtonPositionSize> map = collectPositions();
-		LOG.info("--------START--------");
-		for (ButtonPositionSize b : map.values()) {
-			LOG.info(b + " value = " + b.toLongValue());
-		}
-		LOG.info("--------");
+//		LOG.info("--------START--------");
+//		for (ButtonPositionSize b : map.values()) {
+//			LOG.info(b + " value = " + b.toLongValue());
+//		}
+//		LOG.info("--------");
 
 		int width = Math.round(getWidth() / dpToPx / CELL_SIZE_DP);
 		int height = Math.round(getAdjustedHeight() / dpToPx / CELL_SIZE_DP);
 		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()), width, height);
 
-		for (ButtonPositionSize b : map.values()) {
-			LOG.info(b + " value = " + b.toLongValue());
-		}
-		LOG.info("--------END--------");
+//		for (ButtonPositionSize b : map.values()) {
+//			LOG.info(b + " value = " + b.toLongValue());
+//		}
+//		LOG.info("--------END--------");
 
 		return map;
 	}
