@@ -14,7 +14,7 @@ object ImportGpx {
 	val LOG = LoggerFactory.getLogger(this::class.simpleName!!)
 
 	@Throws(IOException::class)
-	fun loadGpx(source: Source, fileName: String): Pair<GpxFile, Long> {
+	fun loadGpxWithFileSize(source: Source, fileName: String): Pair<GpxFile, Long> {
 		val gpxInfo: Pair<GpxFile, Long> = when {
 			fileName.endsWith(IndexConstants.KML_SUFFIX) -> loadGPXFileFromKml(source)
 			fileName.endsWith(IndexConstants.KMZ_SUFFIX) -> ImportHelper.loadGPXFileFromArchive(source)
@@ -22,6 +22,13 @@ object ImportGpx {
 			else -> errorImport("Unsupported file extension")
 		}
 		return gpxInfo
+	}
+
+	@Throws(IOException::class)
+	// Used by the web server
+	fun importFile(source: Source, fileName: String): GpxFile {
+		val gpxInfo = loadGpxWithFileSize(source, fileName)
+		return gpxInfo.first
 	}
 
 	@Throws(IOException::class)
