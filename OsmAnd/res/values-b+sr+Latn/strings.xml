@@ -5777,4 +5777,11 @@
     <string name="manage_purchases">Upravljajte kupovinama</string>
     <string name="next_turn_information">Sledeća informacije o skretanju</string>
     <string name="next_turn_information_desc">Prikazuje predstojeće skretanje i ime ulice.</string>
+    <string name="map_orientation_portrait_inverted">Uspravno (obrnuto)</string>
+    <string name="map_orientation_landscape_inverted">Vodoravno (obrnuto)</string>
+    <string name="reverse_mode_calculate_route">Izračunajte rutu</string>
+    <string name="reverse_mode_calculate_route_desc">Izračunajte novi optimizovanu rutu pre početka.</string>
+    <string name="reverse_mode_original_track">Originalna staza</string>
+    <string name="reverse_mode_original_track_desc">Pratite tačno trasu pre početka.\nNapomena: To može biti opasno, jer ignoriše jedan od načina saobraćaj na putevima.</string>
+    <string name="reverse_mode">Obrnut mod</string>
 </resources>

@@ -88,7 +88,7 @@
     <string name="default_buttons_support">Parama</string>
     <string name="support_new_features">Paremti naują funkcionalumą</string>
     <string name="show_ruler_level">Rodyti liniuotę</string>
-    <string name="info_button">Info</string>
+    <string name="info_button">Informacija</string>
     <string name="back_to_location">Grįžti į vietą</string>
     <string name="shared_string_help">Pagalba</string>
     <string name="accessibility_mode">Prieigos režimas</string>
@@ -311,7 +311,7 @@
     <string name="map_overlay">Viršutinis žemėlapio sluoksnis</string>
     <string name="map_overlay_descr">Pasirinkti viršutinį žemėlapio sluoksnį</string>
     <string name="tile_source_already_installed">Žemėlapis jau įdiegtas, nustatymai bus atnaujinti.</string>
-    <string name="select_tile_source_to_install">Pasirinkite žemėlapius įdiegimui ar atnaujinimui.</string>
+    <string name="select_tile_source_to_install">Pasirinkite kal. žemėlapių šaltinius:</string>
     <string name="internet_not_available">Nėra šiam veiksmui reikalingo interneto ryšio.</string>
     <string name="install_more">Įdiegti daugiau…</string>
     <string name="level_to_switch_vector_raster_descr">Mažiausias dydis, kuriuo rodyti vektorinius žemėlapius.</string>
@@ -1927,7 +1927,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="search_map">Ieškomi žemėlapiai…</string>
     <string name="search_location">Nustatoma vietos padėtis…</string>
     <string name="storage_free_space">Laisva vieta</string>
-    <string name="edit_filter">Redaguoti kategorijas</string>
+    <string name="edit_filter">Redaguoti filtrą</string>
     <string name="subcategories">Subkategorijos</string>
     <string name="selected_categories">Pasirinktos kategorijos</string>
     <string name="create_custom_poi">Sukurti pasirinktiną filtravimą</string>
@@ -1997,9 +1997,9 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_value_high_name">Aukštas</string>
     <string name="rendering_value_medium_w_name">Vidutinis</string>
     <string name="rendering_value_low_name">Žemas</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Vanduo</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Slėpti vandenį</string>
-    <string name="search_map_hint">Ieškoti miesto arba regiono</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Slėpti vandenį</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Vanduo</string>
+    <string name="search_map_hint">Miestas arba regionas</string>
     <string name="upload_poi">Įkelti POI</string>
     <string name="shared_string_appearance">Išvaizda</string>
     <string name="shared_string_pause">Pauzė</string>
@@ -2134,7 +2134,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_to">Iki</string>
     <string name="mapillary_menu_filter_description">Vaizdus galima filtruoti pagal pateikėją, datą arba tipą. Filtrai veikia tik labai priartinus.</string>
     <string name="map_widget_ruler_control">Spindulio liniuotė</string>
-    <string name="improve_coverage_install_mapillary_desc">Įdiekite Mapillary jei norite pridėti vieną ar daugiau fotografijų šioje žemėlapio vietoje.</string>
+    <string name="improve_coverage_install_mapillary_desc">Įdiekite Mapillary jei norite pridėti fotografijas šioje žemėlapio vietoje.</string>
     <string name="private_access_routing_req">Jūsų kelionės tikslas yra privačioje teritorijoje. Ar leisti keliauti privačiais keliais šioje kelionėje\?</string>
     <string name="quick_action_showhide_osmbugs_descr">Paspaudus aktyvinimo mygtuką OSM užrašai bus parodomi ant žemėlapio arba paslepiami.</string>
     <string name="hillshade_menu_download_descr">Norėdami pamatyti kalnų reljefo šešėlių žemėlapį turite parsisiųsti kalnų šešėlių sluoksnio žemėlapį šiam regionui.</string>
@@ -2236,7 +2236,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="show_direction">Atstumo nuoroda</string>
     <string name="sort_by">Rūšiuoti pagal</string>
     <string name="do_not_use_animations">Be animacijos</string>
-    <string name="do_not_use_animations_descr">Išjungia animacijas žemėlapyje.</string>
+    <string name="do_not_use_animations_descr">Išjungia animacijas žemėlapyje ir naudotojo sąsajoje.</string>
     <string name="keep_showing_on_map">Nuolat rodyti žemėlapyje</string>
     <string name="exit_without_saving">Ar norite išeiti neįrašę?</string>
     <string name="line">Linija</string>
@@ -2433,7 +2433,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="delete_search_history">Pašalinti paieškos instoiją</string>
     <string name="download_images">Atsisiųsti paveikslėlius</string>
     <string name="download_maps_travel">Kelionių vadovai</string>
-    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="shared_string_wikivoyage">„Wikivoyage“</string>
     <string name="article_removed">Straipsnis pašalintas</string>
     <string name="wikivoyage_search_hint">Ieškoti šalies, miesto ar provincijos</string>
     <string name="shared_string_read">Skaityti</string>
@@ -2522,7 +2522,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="save_poi_value_exceed_length_title">„%s“ reikšmės ilgis</string>
     <string name="public_transport_warning_descr_blog">Apie Osmand maršrutus skaitykite daugiau mūsų dienoraštyje.</string>
     <string name="public_transport_warning_title">Viešojo transporto navigacija šiuo metu beta testavime, tikėkitės klaidų ir netikslumų.</string>
-    <string name="add_intermediate">Pridėti tarpinį tašką</string>
+    <string name="add_intermediate">Pridėti tarpinį tikslą</string>
     <string name="transfers_size">%1$d persėdimai</string>
     <string name="add_start_and_end_points">Pridėti išvykimo pradžią ir tikslą</string>
     <string name="route_add_start_point">Pridėti išvykimo pradžios tašką</string>
@@ -2578,9 +2578,9 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_width">Plotis</string>
     <string name="shared_string_height">Aukštis</string>
     <string name="add_destination_point">Nustatyti tikslą</string>
-    <string name="add_intermediate_point">Pridėti tarpinį</string>
+    <string name="add_intermediate_point">Pridėti tarpinį tikslą</string>
     <string name="add_start_point">Nustatyti pradžios tašką</string>
-    <string name="intermediate_waypoint">Tarpinis taškas</string>
+    <string name="intermediate_waypoint">Tarpinis tikslas</string>
     <string name="on_foot">Pėsčiomis</string>
     <string name="route_way">Kelias</string>
     <string name="app_mode_camper">Kemperis</string>
@@ -2685,7 +2685,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_uninstall">Išinstaliuoti</string>
     <string name="shared_string_night_map">Naktinis žemėlapis</string>
     <string name="shared_string_meters">metrai</string>
-    <string name="routing_attr_length_name">Ilgio limitas</string>
+    <string name="routing_attr_length_name">Ilgis</string>
     <string name="shared_string_bearing">Kryptis</string>
     <string name="item_deleted">%1$s ištrinta</string>
     <string name="speed_cameras_restart_descr">Perkrovimas reikalingas kad būtų galima ištrinti greičio kamerų duomenis.</string>
@@ -2747,7 +2747,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_attr_height_obstacles_description">Numatomas kelionės laikas atspindės aukščio poveikį. Maršruto pasirinkimas gali padėti išvengti stačių įkalnių:</string>
     <string name="regular_price">Įprasta kaina</string>
     <string name="shared_preference">Bendri</string>
-    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_wunderlinq_ext_input">„WunderLINQ“</string>
     <string name="shared_string_discussion">Diskusija</string>
     <string name="shared_string_view_all">Žiūrėti visus</string>
     <string name="shared_string_importing">Importuojama</string>
@@ -2769,7 +2769,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_attr_piste_type_hike_name">Žygis</string>
     <string name="monitoring_control_start">REC</string>
     <string name="from_with_param">Iš %1$s</string>
-    <string name="backup_delete_types_descr">Ar norite iš debesies ištrinti neįgalintų tipų duomenis\?</string>
+    <string name="backup_delete_types_descr">Ar norite iš „OsmAnd Cloud“ ištrinti pasenusių tipų duomenis?</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s arba %2$s</string>
     <string name="continue_with">Tęsti su %1$s</string>
     <string name="not_available_with">Neprieinama su %1$s</string>
@@ -2855,7 +2855,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_details">Išsami informacija</string>
     <string name="map_markers_history">Žemėlapio žymeklių istorija</string>
     <string name="android_auto_map_placeholder_title">Žemėlapis rodomas transporto priemonės ekrane.</string>
-    <string name="continue_on_phone">Tęsti telefone</string>
+    <string name="continue_on_phone">Tęsti mobiliame įrenginyje</string>
     <string name="location_access_request_action">Suteikti prieigą</string>
     <string name="location_access_request_result">Patvirtinta: %1$s Atmesta: %2$s</string>
     <string name="shared_string_articles">Straipsniai</string>
@@ -2936,7 +2936,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="mtb_segment_classification">Segmentų klasifikavimas</string>
     <string name="map_settings_weather_precip">Krituliai</string>
     <string name="measurement_units">Matavimo vienetai</string>
-    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="shared_string_open_street_map">„OpenStreetMap“</string>
     <string name="contact_support">Susisiekite su palaikymo tarnyba</string>
     <string name="customize_route_line">Tinkinti maršruto liniją</string>
     <string name="horseback_riding">Jodinėjimas žirgais</string>
@@ -3076,7 +3076,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="allow_display_on_top_description">Leisti rodyti žemėlapio tekstus vieną ant kito</string>
     <string name="show_debug_info">Rodyti derinimo informaciją</string>
     <string name="show_debug_info_description">Rodyti grafinę informaciją apie kiekvieno žemėlapio teksto išdėstymą</string>
-    <string name="map_text">Žemėlapio tekstai</string>
+    <string name="map_text">Žemėlapio atvaizdavimas</string>
     <string name="routing_attr_avoid_cobblestone_name">Vengti trinkelių</string>
     <string name="routing_attr_avoid_cobblestone_description">Vengti trinkelių</string>
     <string name="shared_string_action">Veiksmas</string>
@@ -3180,8 +3180,8 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="external_device_details_received_data">Gauti duomenys</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Tik esant reikalui</string>
     <string name="no_items_selected_warning">Pasirinkite bent vieną elementą</string>
-    <string name="delete_history_items_descr">Ištrinti pasirinktus istorijos elementus?</string>
-    <string name="delete_history_items">Ištrinti %1$s istorijos elementus?</string>
+    <string name="delete_history_items_descr">Pasirinkti elementai išsitrina iš sąrašo.</string>
+    <string name="delete_history_items">Ištrinti %1$s istorijos elementą (-us)?</string>
     <string name="external_sensors_plugin_name">Išoriniai jutikliai</string>
     <string name="external_device_details_disconnect">Atjungti</string>
     <string name="external_device_ant">ANT</string>
@@ -3359,7 +3359,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="route_parameters_info">Maršruto nustatymai pasirinktame profilyje „%1$s“.</string>
     <string name="map_look_descr">Žemėlapio išvaizda</string>
     <string name="start_up_message_pref">Paleidimo pranešimas</string>
-    <string name="cloud_sync_progress">Sinch…%1$s</string>
+    <string name="cloud_sync_progress">Sinch… %1$s</string>
     <string name="determine_location">Leiskite mums nustatyti jūsų buvimo vietą</string>
     <string name="shared_string_uploaded">Įkelta</string>
     <string name="get_altitude_information">Gauti aukščio informaciją</string>
@@ -3396,4 +3396,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="driving_region_india">Indija</string>
     <string name="auto_25_chars_route_kl">Laikykitės kairės</string>
     <string name="delete_widget_description">Šis valdiklis bus ištrintas. Galėsite vėliau jį atkurti Konfigūravimo ekrane.</string>
+    <string name="popular_places">Populiarios vietos</string>
+    <string name="show_list">Rodyti sąrašą</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometrai per valandą</string>
 </resources>

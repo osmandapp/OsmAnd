@@ -5776,4 +5776,11 @@
     <string name="description_purchases_fastspring">Можете управљати својим куповинама путем портала за управљање FastSpring налозима.</string>
     <string name="description_subscription_fastspring">Можете управљати или отказати претплату путем портала за управљање FastSpring налозима.</string>
     <string name="manage_purchases">Управљање куповинама</string>
+    <string name="map_orientation_portrait_inverted">Портрет (обрнуто)</string>
+    <string name="map_orientation_landscape_inverted">Пејзаж (обрнуто)</string>
+    <string name="reverse_mode_calculate_route">Израчунај руту</string>
+    <string name="reverse_mode_calculate_route_desc">Израчунајте нову, оптимизовану руту до почетка.</string>
+    <string name="reverse_mode_original_track">Оригинална путања</string>
+    <string name="reverse_mode_original_track_desc">Пратите тачну путању назад до почетка.\nУпозорење: Ово може бити опасно јер игнорише једносмерни саобраћај на путевима.</string>
+    <string name="reverse_mode">Обрнути режим</string>
 </resources>
