@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,12 +19,9 @@ import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.ViewChangeProvider;
+import net.osmand.plus.widgets.FrameLayoutEx;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-public class RulerWidget extends FrameLayout implements ViewChangeProvider {
+public class RulerWidget extends FrameLayoutEx implements ViewChangeProvider {
 
 	private final OsmandApplication app;
 	private final OsmandMap osmandMap;
@@ -40,8 +36,6 @@ public class RulerWidget extends FrameLayout implements ViewChangeProvider {
 	private float cacheMapDensity;
 	private double cacheRulerTileX;
 	private double cacheRulerTileY;
-
-	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 
 	public RulerWidget(@NonNull Context context) {
 		this(context, null);
@@ -123,23 +117,5 @@ public class RulerWidget extends FrameLayout implements ViewChangeProvider {
 		double pixDensity = tileBox.getPixDensity();
 		int maxWidth = app.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 		return OsmAndFormatter.calculateRoundedDist(maxWidth / pixDensity, app);
-	}
-
-	@NonNull
-	@Override
-	public Collection<ViewChangeListener> getViewChangeListeners() {
-		return viewChangeListeners;
-	}
-
-	@Override
-	protected void onSizeChanged(int w, int h, int oldWidth, int oldHeight) {
-		super.onSizeChanged(w, h, oldWidth, oldHeight);
-		notifySizeChanged(this, w, h, oldWidth, oldHeight);
-	}
-
-	@Override
-	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-		super.onVisibilityChanged(changedView, visibility);
-		notifyVisibilityChanged(changedView, visibility);
 	}
 }
