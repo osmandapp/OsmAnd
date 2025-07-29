@@ -5798,4 +5798,11 @@
     <string name="description_purchases_fastspring">Ви можете керувати своїми покупками через портал керування обліковим записом FastSpring.</string>
     <string name="description_subscription_fastspring">Ви можете керувати своєю підпискою або скасувати її через портал керування обліковим записом FastSpring.</string>
     <string name="manage_purchases">Керування покупками</string>
+    <string name="map_orientation_portrait_inverted">Портрет (перевернутий)</string>
+    <string name="map_orientation_landscape_inverted">Пейзаж (перевернутий)</string>
+    <string name="reverse_mode_calculate_route">Розрахувати маршрут</string>
+    <string name="reverse_mode_calculate_route_desc">Розрахуйте новий, оптимізований маршрут до початку.</string>
+    <string name="reverse_mode_original_track">Оригінальна композиція</string>
+    <string name="reverse_mode_original_track_desc">Слідкуйте за точним маршрутом назад до початку.\nПопередження: Це може бути небезпечно, оскільки ігнорується односторонній рух на дорогах.</string>
+    <string name="reverse_mode">Режим зворотного руху</string>
 </resources>
