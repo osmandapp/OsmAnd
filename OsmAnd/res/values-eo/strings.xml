@@ -3770,7 +3770,7 @@
     <string name="track_has_no_altitude">La spuro ne enhavas datumojn pri altitudo.</string>
     <string name="track_has_no_speed">La spuro ne enhavas datumojn pri rapido.</string>
     <string name="select_another_colorization">Elektu alian specon de kolorigo.</string>
-    <string name="routing_attr_short_way_description">Optimumigita pli mallonga kurso (energiŝpara)</string>
+    <string name="routing_attr_short_way_description">Plejbonigita pli mallonga kurso (energiŝpara)</string>
     <string name="latest_openstreetmap_update">Lasta disponebla ĝisdatigo de OpenStreetMap:</string>
     <string name="last_time_checked">Lastfoje kontrolita: %s</string>
     <string name="segments_count">Segmento %1$d</string>
@@ -5788,4 +5788,12 @@
     <string name="description_purchases_fastspring">Vi povas administri viajn aĉetoj per kont-agordoj en la retejo FastSpring.</string>
     <string name="description_subscription_fastspring">Vi povas administri aŭ nuligi vian abonon per kont-agordoj en la retejo FastSpring.</string>
     <string name="manage_purchases">Administri aĉetojn</string>
+    <string name="map_orientation_portrait_inverted">Vertikala (inversa)</string>
+    <string name="map_orientation_landscape_inverted">Horizontala (inversa)</string>
+    <string name="reverse_mode_calculate_route">Kalkuli kurson</string>
+    <string name="reverse_mode_calculate_route_desc">Kalkuli novan plejbonigitan kurson al la komenco.</string>
+    <string name="reverse_mode_original_track">Origina kurso</string>
+    <string name="reverse_mode_original_track_desc">Gvidas la ekzaktan inversan kurson al la starto.\nAverto: tio ĉi povas esti danĝera pro ignori unudirektecon de vojoj.</string>
+    <string name="reverse_mode">Inversa reĝimo</string>
+    <string name="n_a">n/a</string>
 </resources>
