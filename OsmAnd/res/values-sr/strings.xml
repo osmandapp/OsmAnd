@@ -5783,4 +5783,5 @@
     <string name="reverse_mode_original_track">Оригинална путања</string>
     <string name="reverse_mode_original_track_desc">Пратите тачну путању назад до почетка.\nУпозорење: Ово може бити опасно јер игнорише једносмерни саобраћај на путевима.</string>
     <string name="reverse_mode">Обрнути режим</string>
+    <string name="n_a">Н/А</string>
 </resources>
