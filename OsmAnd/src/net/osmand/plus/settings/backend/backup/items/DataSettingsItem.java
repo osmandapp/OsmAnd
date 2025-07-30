@@ -72,7 +72,7 @@ public class DataSettingsItem extends StreamSettingsItem {
 	@Override
 	void readFromJson(@NonNull JSONObject json) throws JSONException {
 		super.readFromJson(json);
-		String fileName = getFileName();
+		String fileName = getUnifiedFileName();
 		if (!Algorithms.isEmpty(fileName)) {
 			name = Algorithms.getFileNameWithoutExtension(new File(fileName));
 		}

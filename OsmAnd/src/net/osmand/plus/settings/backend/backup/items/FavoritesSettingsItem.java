@@ -118,7 +118,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	public String getPublicName(@NonNull Context ctx) {
 		FavoriteGroup singleGroup = getSingleGroup();
 		String groupName = singleGroup != null ? singleGroup.getName() : null;
-		String fileName = getFileName();
+		String fileName = getUnifiedFileName();
 		if (!Algorithms.isEmpty(groupName)) {
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, ctx.getString(R.string.shared_string_favorites), groupName);
 		} else if (!Algorithms.isEmpty(fileName)) {

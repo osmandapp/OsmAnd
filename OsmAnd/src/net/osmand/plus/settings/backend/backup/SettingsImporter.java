@@ -89,9 +89,8 @@ class SettingsImporter {
 			ZipEntry zipEntry = zipEnum.nextElement();
 			long size = zipEntry.getSize();
 			for (SettingsItem settingsItem : settingsItemList) {
-				if (settingsItem instanceof FileSettingsItem
-						&& zipEntry.getName().equals(settingsItem.getFileName())) {
-					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
+				if (settingsItem instanceof FileSettingsItem fileSettingsItem
+						&& zipEntry.getName().equals(settingsItem.getUnifiedFileName())) {
 					fileSettingsItem.setSize(size);
 					fileSettingsItem.setLastModifiedTime(zipEntry.getTime());
 					break;

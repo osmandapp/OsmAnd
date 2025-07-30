@@ -285,7 +285,7 @@ public class BackupHelper {
 			}
 			for (RemoteFile remoteFile : info.filesToDownload) {
 				if (remoteFile.item instanceof FileSettingsItem) {
-					String fileName = remoteFile.item.getFileName();
+					String fileName = remoteFile.item.getUnifiedFileName();
 					if (fileName != null && item.applyFileName(fileName)) {
 						filesToUpload.add(((FileSettingsItem) remoteFile.item).getFile());
 					}
@@ -590,7 +590,7 @@ public class BackupHelper {
 		long size = remoteFile.getFilesize();
 		if (remoteFile.item != null && remoteFile.item.getType() == SettingsItemType.FILE) {
 			FileSettingsItem fileItem = (FileSettingsItem) remoteFile.item;
-			String fileName = fileItem.getFileName();
+			String fileName = fileItem.getUnifiedFileName();
 			if (fileItem.getSubtype() == FileSubtype.OBF_MAP && fileName != null) {
 				File file = app.getResourceManager().getIndexFiles().get(fileName.toLowerCase());
 				if (file != null) {

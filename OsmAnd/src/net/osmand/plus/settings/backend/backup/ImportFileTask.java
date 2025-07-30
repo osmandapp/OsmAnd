@@ -109,7 +109,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 				this.duplicates = getDuplicatesData(selectedItems);
 				return selectedItems;
 			case IMPORT:
-				if (items != null && items.size() > 0) {
+				if (items != null && !items.isEmpty()) {
 					for (SettingsItem item : items) {
 						item.apply();
 					}
@@ -138,7 +138,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 				}
 				break;
 			case IMPORT:
-				if (items != null && items.size() > 0) {
+				if (items != null && !items.isEmpty()) {
 					new ImportFileItemsTask(helper, file, importListener, items)
 							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}

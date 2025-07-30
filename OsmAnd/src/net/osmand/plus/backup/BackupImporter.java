@@ -121,7 +121,7 @@ class BackupImporter {
 		for (RemoteFile remoteFile : remoteFiles) {
 			SettingsItem item = null;
 			for (SettingsItem settingsItem : items) {
-				String fileName = remoteFile.item != null ? remoteFile.item.getFileName() : null;
+				String fileName = remoteFile.item != null ? remoteFile.item.getUnifiedFileName() : null;
 				if (fileName != null && settingsItem.applyFileName(fileName)) {
 					item = settingsItem;
 					remoteFileItems.put(remoteFile, item);
@@ -379,8 +379,7 @@ class BackupImporter {
 			if (fileName.charAt(0) != '/') {
 				fileName = "/" + fileName;
 			}
-			if (item instanceof GpxSettingsItem) {
-				GpxSettingsItem gpxItem = (GpxSettingsItem) item;
+			if (item instanceof GpxSettingsItem gpxItem) {
 				String folder = gpxItem.getSubtype().getSubtypeFolder();
 				if (!Algorithms.isEmpty(folder) && folder.charAt(0) != '/') {
 					folder = "/" + folder;
@@ -554,7 +553,7 @@ class BackupImporter {
 		FileInputStream is = null;
 		try {
 			is = new FileInputStream(tempFile);
-			reader.readFromStream(is, tempFile, item.getFileName());
+			reader.readFromStream(is, tempFile, item.getUnifiedFileName());
 			item.applyAdditionalParams(reader);
 		} catch (IllegalArgumentException | IOException e) {
 			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));

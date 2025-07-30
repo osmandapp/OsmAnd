@@ -21,7 +21,7 @@ public class ResourcesSettingsItem extends FileSettingsItem {
 	public ResourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
 		shouldReplace = true;
-		String fileName = getFileName();
+		String fileName = getUnifiedFileName();
 		if (!Algorithms.isEmpty(fileName) && !fileName.endsWith(File.separator)) {
 			this.fileName = fileName + File.separator;
 		}
@@ -48,7 +48,7 @@ public class ResourcesSettingsItem extends FileSettingsItem {
 	@Override
 	void writeToJson(@NonNull JSONObject json) throws JSONException {
 		super.writeToJson(json);
-		String fileName = getFileName();
+		String fileName = getUnifiedFileName();
 		if (!Algorithms.isEmpty(fileName)) {
 			if (fileName.endsWith(File.separator)) {
 				fileName = fileName.substring(0, fileName.length() - 1);
@@ -62,7 +62,7 @@ public class ResourcesSettingsItem extends FileSettingsItem {
 		if (fileName.endsWith(File.separator)) {
 			return false;
 		}
-		String itemFileName = getFileName();
+		String itemFileName = getUnifiedFileName();
 		if (itemFileName != null && itemFileName.endsWith(File.separator)) {
 			if (fileName.startsWith(itemFileName)) {
 				this.file = new File(getPluginPath(), fileName);

@@ -180,7 +180,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
 		this.file = file;
 		this.appPath = app.getAppPath(null);
-		String fileName = getFileName();
+		String fileName = getUnifiedFileName();
 		if (fileName != null) {
 			this.subtype = FileSubtype.getSubtypeByFileName(fileName);
 		}
@@ -280,7 +280,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Override
 	void readFromJson(@NonNull JSONObject json) throws JSONException {
 		super.readFromJson(json);
-		String fileName = getFileName();
+		String fileName = getUnifiedFileName();
 		if (subtype == null) {
 			String subtypeStr = json.has("subtype") ? json.getString("subtype") : null;
 			if (!Algorithms.isEmpty(subtypeStr)) {
