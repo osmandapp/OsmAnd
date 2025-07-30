@@ -2,6 +2,7 @@ package net.osmand.plus.views.controls;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.CELL_SIZE_DP;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_FULL_WIDTH;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
@@ -39,7 +40,9 @@ import java.util.Map;
 public class MapHudLayout extends FrameLayout {
 
 	private static final int REFRESH_UI_ID = UI_HANDLER_MAP_HUD + 1;
+	private static final int REFRESH_VERTICAL_PANELS_ID = UI_HANDLER_MAP_HUD + 2;
 	private static final int UI_REFRESH_INTERVAL_MILLIS = 100;
+	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE = 0.6f;
 
 	private static final Log LOG = PlatformUtil.getLog(MapHudLayout.class);
 
@@ -49,7 +52,13 @@ public class MapHudLayout extends FrameLayout {
 	private final Map<View, ButtonPositionSize> widgetPositions = new LinkedHashMap<>();
 	private final Map<View, ButtonPositionSize> additionalWidgetPositions = new LinkedHashMap<>();
 
+	private View topBarPanelContainer;
+	private SideWidgetsPanel leftWidgetsPanel;
+	private SideWidgetsPanel rightWidgetsPanel;
+	private VerticalWidgetPanel bottomWidgetsPanel;
+
 	private final float dpToPx;
+	private final int panelsMargin;
 	private final int statusBarHeight;
 
 	private final boolean tablet;
@@ -72,6 +81,7 @@ public class MapHudLayout extends FrameLayout {
 
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.dpToPx = AndroidUtils.dpToPxF(context, 1);
+		this.panelsMargin = AndroidUtils.dpToPx(context, 16);
 		this.statusBarHeight = AndroidUtils.getStatusBarHeight(context);
 		this.tablet = AndroidUiHelper.isTablet(context);
 		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
@@ -81,37 +91,61 @@ public class MapHudLayout extends FrameLayout {
 	protected void onFinishInflate() {
 		super.onFinishInflate();
 
-		addPosition(findViewById(R.id.widget_top_bar));
+		leftWidgetsPanel = findViewById(R.id.map_left_widgets_panel);
+		rightWidgetsPanel = findViewById(R.id.map_right_widgets_panel);
+		topBarPanelContainer = findViewById(R.id.top_bar_panel_container);
+		bottomWidgetsPanel = findViewById(R.id.map_bottom_widgets_panel);
 
-		addPosition(findViewById(R.id.top_widgets_panel));
+		if (shouldCenterVerticalPanels()) {
+			addPosition(leftWidgetsPanel, this::updateVerticalPanels);
+			addPosition(rightWidgetsPanel, this::updateVerticalPanels);
 
-		addPosition(findViewById(R.id.map_left_widgets_panel));
-		addPosition(findViewById(R.id.map_right_widgets_panel));
+			addPosition(findViewById(R.id.widget_top_bar));
+			addPosition(findViewById(R.id.top_widgets_panel));
+			addPosition(bottomWidgetsPanel);
+		} else {
+			addPosition(findViewById(R.id.widget_top_bar));
+			addPosition(findViewById(R.id.top_widgets_panel));
+			addPosition(bottomWidgetsPanel);
 
+			addPosition(leftWidgetsPanel);
+			addPosition(rightWidgetsPanel);
+		}
 		addPosition(findViewById(R.id.measurement_buttons));
 		addPosition(findViewById(R.id.recording_note_layout));
 		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
 	}
 
 	private void addPosition(@Nullable View view) {
+		addPosition(view, null);
+	}
+
+	private void addPosition(@Nullable View view, @Nullable Runnable callback) {
 		if (view != null) {
-			addViewChangeListener(view);
+			addViewChangeListener(view, callback);
 			widgetPositions.put(view, createWidgetPosition(view));
 		}
 	}
 
-	private void addViewChangeListener(@NonNull View view) {
+	private void addViewChangeListener(@NonNull View view, @Nullable Runnable callback) {
 		if (view instanceof ViewChangeProvider provider) {
 			provider.addViewChangeListener(new ViewChangeListener() {
 				@Override
-				public void onSizeChanged(@NonNull View view, int width, int height, int oldWidth, int oldHeight) {
+				public void onSizeChanged(@NonNull View view, int width, int height, int oldWidth,
+						int oldHeight) {
 					if (width != oldWidth || height != oldHeight) {
+						if (callback != null) {
+							callback.run();
+						}
 						refresh();
 					}
 				}
 
 				@Override
 				public void onVisibilityChanged(@NonNull View view, int visibility) {
+					if (callback != null) {
+						callback.run();
+					}
 					refresh();
 				}
 			});
@@ -128,7 +162,7 @@ public class MapHudLayout extends FrameLayout {
 		if (position != null) {
 			updateButtonParams(params, position);
 		}
-		addViewChangeListener(button);
+		addViewChangeListener(button, null);
 
 		addView(button, params);
 		mapButtons.add(button);
@@ -139,7 +173,7 @@ public class MapHudLayout extends FrameLayout {
 		LayoutParams params = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
 
 		updateButtonParams(params, position);
-		addViewChangeListener(view);
+		addViewChangeListener(view, null);
 
 		addView(view, params);
 		additionalWidgetPositions.put(view, position);
@@ -175,7 +209,11 @@ public class MapHudLayout extends FrameLayout {
 //			LOG.info(b + " value = " + b.toLongValue());
 //		}
 //		LOG.info("--------");
-		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()));
+
+		int width = Math.round(getWidth() / dpToPx / CELL_SIZE_DP);
+		int height = Math.round(getAdjustedHeight() / dpToPx / CELL_SIZE_DP);
+		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()), width, height);
+
 //		for (ButtonPositionSize b : map.values()) {
 //			LOG.info(b + " value = " + b.toLongValue());
 //		}
@@ -192,13 +230,15 @@ public class MapHudLayout extends FrameLayout {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = createWidgetPosition(view);
-				map.put(view, position);
+				if (position.height > 0 && position.width > 0) {
+					map.put(view, position);
+				}
 			}
 		}
 		for (MapButton button : mapButtons) {
 			if (button.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = button.getDefaultPositionSize();
-				if (position != null) {
+				if (position != null && position.height > 0 && position.width > 0) {
 					map.put(button, position);
 				}
 			}
@@ -207,7 +247,9 @@ public class MapHudLayout extends FrameLayout {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = updateWidgetPosition(view, entry.getValue());
-				map.put(view, position);
+				if (position.height > 0 && position.width > 0) {
+					map.put(view, position);
+				}
 			}
 		}
 		return map;
@@ -221,20 +263,15 @@ public class MapHudLayout extends FrameLayout {
 		if (view instanceof VerticalWidgetPanel panel) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(panel.isTopPanel() ? POS_TOP : POS_BOTTOM);
-			position.setPositionHorizontal(POS_FULL_WIDTH);
+			position.setPositionHorizontal(shouldCenterVerticalPanels() ? POS_LEFT : POS_FULL_WIDTH);
 		} else if (view instanceof SideWidgetsPanel panel) {
+			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(panel.rightSide ? POS_RIGHT : POS_LEFT);
-
-			if (portrait) {
-				position.setMoveDescendantsVertical();
-			} else {
-				position.setMoveDescendantsHorizontal();
-			}
 		} else if (id == R.id.widget_top_bar) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
-			position.setPositionHorizontal(POS_FULL_WIDTH);
+			position.setPositionHorizontal(shouldCenterVerticalPanels() ? POS_LEFT : POS_FULL_WIDTH);
 		} else if (id == R.id.measurement_buttons) {
 			position.setMoveDescendantsHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
@@ -261,20 +298,24 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	@NonNull
-	private ButtonPositionSize updateWidgetPosition(@NonNull View view, @NonNull ButtonPositionSize position) {
+	private ButtonPositionSize updateWidgetPosition(@NonNull View view,
+			@NonNull ButtonPositionSize position) {
 		int id = view.getId();
 		int width = (int) AndroidUtils.pxToDpF(getContext(), view.getWidth()) / 8;
 		int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
 		position.setSize(width, height);
 
-		if (view instanceof SideWidgetsPanel || id == R.id.measurement_buttons) {
+		if (view instanceof SideWidgetsPanel || view instanceof VerticalWidgetPanel && shouldCenterVerticalPanels()
+				|| id == R.id.measurement_buttons) {
 			int parentWidth = getWidth();
 			int parentHeight = getAdjustedHeight();
 			int[] margins = AndroidUtils.getRelativeMargins(this, view);
 			if (margins[0] >= 0 && margins[1] >= 0 && margins[2] >= 0 && margins[3] >= 0) {
-				position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight,
-						position.isLeft(), position.isLeft() ? margins[0] : margins[2],
-						position.isTop(), position.isTop() ? margins[1] - statusBarHeight : margins[3] - statusBarHeight);
+				boolean top = position.isTop();
+				boolean left = position.isLeft();
+				int x = left ? margins[0] : margins[2];
+				int y = top ? margins[1] - statusBarHeight : margins[3] - statusBarHeight;
+				position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight, left, x, top, y);
 			}
 		} else if (view instanceof RulerWidget) {
 			position.marginX = 0;
@@ -356,7 +397,53 @@ public class MapHudLayout extends FrameLayout {
 		updateButtons(); // relayout to avoid overlap
 	}
 
-	private int getAdjustedHeight() {
+	public int getAdjustedHeight() {
 		return getHeight() - statusBarHeight;
+	}
+
+	private boolean shouldCenterVerticalPanels() {
+		return !portrait || tablet;
+	}
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+		if (w > 0 && w != oldw) {
+			updateVerticalPanels();
+		}
+	}
+
+	public void updateVerticalPanels() {
+		app.runInUIThreadAndCancelPrevious(REFRESH_VERTICAL_PANELS_ID, () -> {
+			updateHorizontalMargins(topBarPanelContainer);
+			updateHorizontalMargins(bottomWidgetsPanel);
+		}, UI_REFRESH_INTERVAL_MILLIS);
+	}
+
+	private void updateHorizontalMargins(@Nullable View view) {
+		int totalWidth = getWidth();
+		if (view == null || leftWidgetsPanel == null || rightWidgetsPanel == null || totalWidth <= 0) {
+			return;
+		}
+		if (view.getLayoutParams() instanceof MarginLayoutParams params) {
+			int leftMargin = 0;
+			int rightMargin = 0;
+
+			if (shouldCenterVerticalPanels()) {
+				int defaultWidth = (int) (totalWidth * TOP_BAR_MAX_WIDTH_PERCENTAGE);
+				int defaultMargin = (totalWidth - defaultWidth) / 2;
+
+				int leftWidth = leftWidgetsPanel.getVisibility() == VISIBLE ? leftWidgetsPanel.getWidth() : 0;
+				int rightWidth = rightWidgetsPanel.getVisibility() == VISIBLE ? rightWidgetsPanel.getWidth() : 0;
+
+				leftMargin = Math.max(defaultMargin, leftWidth > 0 ? leftWidth + panelsMargin : 0);
+				rightMargin = Math.max(defaultMargin, rightWidth > 0 ? rightWidth + panelsMargin : 0);
+			}
+			if (params.leftMargin != leftMargin || params.rightMargin != rightMargin) {
+				params.leftMargin = leftMargin;
+				params.rightMargin = rightMargin;
+				view.setLayoutParams(params);
+			}
+		}
 	}
 }

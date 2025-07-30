@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,14 +27,12 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ViewChangeProvider;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
+import net.osmand.plus.widgets.FrameLayoutEx;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Set;
 
-public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
+public class TopToolbarView extends FrameLayoutEx implements ViewChangeProvider {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
@@ -57,8 +54,6 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 	private TextView textBtn;
 	private SwitchCompat topBarSwitch;
 	private View shadowView;
-
-	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 
 	private boolean nightMode;
 
@@ -414,23 +409,5 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 
 	public boolean isNightMode() {
 		return nightMode;
-	}
-
-	@NonNull
-	@Override
-	public Collection<ViewChangeListener> getViewChangeListeners() {
-		return viewChangeListeners;
-	}
-
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		super.onSizeChanged(w, h, oldw, oldh);
-		notifySizeChanged(this, w, h, oldw, oldh);
-	}
-
-	@Override
-	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-		super.onVisibilityChanged(changedView, visibility);
-		notifyVisibilityChanged(changedView, visibility);
 	}
 }
