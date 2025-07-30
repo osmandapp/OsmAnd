@@ -23,10 +23,10 @@ class TrkSegment : GpxExtensions() {
 		return routeSegments.isNotEmpty() && routeTypes.isNotEmpty()
 	}
 
-	enum class SegmentSlopeType {
-		UPHILL,
-		DOWNHILL,
-		FLAT
+	enum class SegmentSlopeType(val symbol: String) {
+		UPHILL("↗"),
+		DOWNHILL("↘"),
+		FLAT("➡");
 	}
 
 	private fun TrkSegment.splitBySlopeTypeUsingExtremums(): List<SplitSegment> {
@@ -63,12 +63,7 @@ class TrkSegment : GpxExtensions() {
 					if (sp != null && sp.segmentSlopeType == slopeType) {
 						sp.metricEnd = accumulatedDistances[i]
 						sp.endPointInd = i - 1
-
-						val segmentStartPoint = points[sp.startPointInd]
-						val segmentDistance = point.distance - segmentStartPoint.distance
-						val segmentElevDiff = point.ele - segmentStartPoint.ele
-						val segmentSlope = segmentElevDiff / segmentDistance * 100
-						sp.slopeValue = segmentSlope
+						sp.slopeValue = getSlopeValue(sp, point)
 					} else {
 						val count = (slopeCounters[slopeType] ?: 0) + 1
 						slopeCounters[slopeType] = count
@@ -79,12 +74,7 @@ class TrkSegment : GpxExtensions() {
 						sp.metricEnd = accumulatedDistances[i]
 						sp.segmentSlopeType = slopeType
 						sp.slopeCount = count
-
-						val segmentStartPoint = points[sp.startPointInd]
-						val segmentDistance = point.distance - segmentStartPoint.distance
-						val segmentElevDiff = point.ele - segmentStartPoint.ele
-						val segmentSlope = segmentElevDiff / segmentDistance * 100
-						sp.slopeValue = segmentSlope
+						sp.slopeValue = getSlopeValue(sp, point)
 
 						splitSegments.add(sp)
 					}
@@ -100,6 +90,14 @@ class TrkSegment : GpxExtensions() {
 		}
 
 		return splitSegments
+	}
+
+	private fun getSlopeValue(sp: SplitSegment, point: WptPt): Double {
+		val segmentStartPoint = points[sp.startPointInd]
+		val segmentDistance = point.distance - segmentStartPoint.distance
+		val segmentElevDiff = point.ele - segmentStartPoint.ele
+		val segmentSlope = segmentElevDiff / segmentDistance * 100
+		return segmentSlope
 	}
 
 	private fun getExtremums(): List<Extremum>{

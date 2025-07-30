@@ -609,6 +609,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				Gpx3DLinePositionType trackLinePosition = track3DStyle.getLinePositionType();
 				Gpx3DVisualizationType visualizationType = track3DStyle.getVisualizationType();
 
+				boolean shouldHideStartPoint = shouldHideStartPoint(gpxFile);
 				if (isShowStartFinishForTrack(gpxFile)) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 					for (TrkSegment segment : segments) {
@@ -619,7 +620,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(start, track3DStyle, heightmapsActive));
 								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(finish, track3DStyle, heightmapsActive));
 							}
-							if (!shouldHideStartPoint(gpxFile)) {
+							if (!shouldHideStartPoint) {
 								startFinishPoints.add(new PointI(Utilities.get31TileNumberX(start.getLon()), Utilities.get31TileNumberY(start.getLat())));
 							}
 							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(finish.getLon()), Utilities.get31TileNumberY(finish.getLat())));
@@ -631,7 +632,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					int trackColor = getTrackColor(gpxFile, cachedColor);
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
-						WptPt point = item.locationStart;
+						WptPt point;
+						if(shouldHideStartPoint){
+							point = item.locationStart;
+						} else {
+							point = item.locationEnd;
+						}
 						String name = getLabelName(item);
 						int color = getSplitColor(item, trackColor);
 
@@ -684,13 +690,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (slopeType == null || slopeCount == null || slopeValue == null)
 			return getSplitName(item);
 
-		String icon;
-		switch (slopeType) {
-			case UPHILL: icon = "↗"; break;
-			case DOWNHILL: icon = "↘"; break;
-			case FLAT: icon = "➡"; break;
-			default: return getSplitName(item);
-		}
+		String icon = slopeType.getSymbol();
+
 
 		if (slopeType == SegmentSlopeType.FLAT) {
 			return getString(R.string.ltr_or_rtl_combine_via_space, icon, OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app) );
