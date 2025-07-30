@@ -5696,4 +5696,5 @@
     <string name="reverse_mode_original_track">Trace originale</string>
     <string name="reverse_mode_original_track_desc">Suivez précisément la trace pour revenir au point de départ.\nAttention : les voies à sens unique ne sont pas prises en compte !</string>
     <string name="reverse_mode">Mode inversé</string>
+    <string name="n_a">N/A</string>
 </resources>
