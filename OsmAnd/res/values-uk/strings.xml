@@ -5805,4 +5805,5 @@
     <string name="reverse_mode_original_track">Оригінальна композиція</string>
     <string name="reverse_mode_original_track_desc">Слідкуйте за точним маршрутом назад до початку.\nПопередження: Це може бути небезпечно, оскільки ігнорується односторонній рух на дорогах.</string>
     <string name="reverse_mode">Режим зворотного руху</string>
+    <string name="n_a">N/A</string>
 </resources>
