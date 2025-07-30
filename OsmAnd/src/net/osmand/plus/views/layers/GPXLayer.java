@@ -63,6 +63,7 @@ import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
@@ -608,6 +609,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				Gpx3DLinePositionType trackLinePosition = track3DStyle.getLinePositionType();
 				Gpx3DVisualizationType visualizationType = track3DStyle.getVisualizationType();
 
+				boolean shouldHideStartPoint = shouldHideStartPoint(gpxFile);
 				if (isShowStartFinishForTrack(gpxFile)) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 					for (TrkSegment segment : segments) {
@@ -618,7 +620,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(start, track3DStyle, heightmapsActive));
 								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(finish, track3DStyle, heightmapsActive));
 							}
-							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(start.getLon()), Utilities.get31TileNumberY(start.getLat())));
+							if (!shouldHideStartPoint) {
+								startFinishPoints.add(new PointI(Utilities.get31TileNumberX(start.getLon()), Utilities.get31TileNumberY(start.getLat())));
+							}
 							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(finish.getLon()), Utilities.get31TileNumberY(finish.getLat())));
 						}
 					}
@@ -628,8 +632,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					int trackColor = getTrackColor(gpxFile, cachedColor);
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
-						WptPt point = item.locationEnd;
-						String name = getSplitName(item);
+						WptPt point;
+						if(shouldHideStartPoint){
+							point = item.locationStart;
+						} else {
+							point = item.locationEnd;
+						}
+						String name = getLabelName(item);
 						int color = getSplitColor(item, trackColor);
 
 						if (name != null) {
@@ -664,6 +673,35 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
+	private boolean shouldHideStartPoint(@NonNull GpxFile gpxFile) {
+		return gpxAppearanceHelper.isUphillDownhillSplit(gpxFile);
+	}
+
+	private String getLabelName(@NonNull GpxDisplayItem item) {
+		GpxTrackAnalysis analysis = item.analysis;
+		if (analysis == null) {
+			return getSplitName(item);
+		}
+
+		SegmentSlopeType slopeType = analysis.getSegmentSlopeType();
+		Integer slopeCount = analysis.getSlopeCount();
+		Double slopeValue = analysis.getSlopeValue();
+
+		if (slopeType == null || slopeCount == null || slopeValue == null)
+			return getSplitName(item);
+
+		String icon = slopeType.getSymbol();
+
+
+		if (slopeType == SegmentSlopeType.FLAT) {
+			return getString(R.string.ltr_or_rtl_combine_via_space, icon, OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app) );
+		} else {
+			String slopeCountText = slopeCount + ".";
+			String slopePercentText = Math.round(slopeValue) + "%";
+			return getString(R.string.ltr_or_rtl_triple_combine_via_space, icon, slopeCountText, slopePercentText);
+		}
+	}
+
 	@Nullable
 	private String getSplitName(@NonNull GpxDisplayItem item) {
 		String name = item.splitName;
@@ -671,19 +709,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			int ind = name.indexOf(' ');
 			if (ind > 0) {
 				name = name.substring(0, ind);
-			}
-
-			if (item.analysis == null) {
-				return name;
-			}
-
-			SegmentSlopeType slopeType = item.analysis.getSegmentSlopeType();
-			if (slopeType != null) {
-				if (slopeType == SegmentSlopeType.UPHILL) {
-					name = getString(R.string.ltr_or_rtl_combine_via_space, "↗", name);
-				} else if (slopeType == SegmentSlopeType.DOWNHILL) {
-					name = getString(R.string.ltr_or_rtl_combine_via_space, "↘", name);
-				}
 			}
 		}
 		return name;

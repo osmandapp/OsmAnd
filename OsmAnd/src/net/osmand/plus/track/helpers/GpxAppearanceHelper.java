@@ -1,11 +1,13 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.plus.track.GpxSplitType.UPHILL_DOWNHILL;
 import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
@@ -19,6 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.plus.track.TrackDrawInfo;
@@ -194,6 +197,22 @@ public class GpxAppearanceHelper {
 			gradientPalette = getAppearanceParameter(new File(gpxFile.getPath()), COLOR_PALETTE);
 		}
 		return gradientPalette != null ? gradientPalette : gpxFile.getGradientColorPalette();
+	}
+
+	public boolean isUphillDownhillSplit(@NonNull GpxFile gpxFile) {
+		Boolean uphillDownhillSplit = null;
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			uphillDownhillSplit = UPHILL_DOWNHILL.getType() == trackDrawInfo.getSplitType();
+		}
+		if (uphillDownhillSplit == null) {
+			Integer splitType = getAppearanceParameter(new File(gpxFile.getPath()), SPLIT_TYPE);
+			if (splitType != null) {
+				uphillDownhillSplit = UPHILL_DOWNHILL.getType() == splitType;
+			}
+		}
+		return uphillDownhillSplit != null
+				? uphillDownhillSplit
+				: UPHILL_DOWNHILL.getType() == GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
 	}
 
 	@Nullable
