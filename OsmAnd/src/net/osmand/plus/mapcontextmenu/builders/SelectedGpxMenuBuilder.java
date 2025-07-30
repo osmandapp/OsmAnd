@@ -15,6 +15,7 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -167,7 +168,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 	}
 
 	@Nullable
-	private GpxDisplayItem getPointSegment() {
+	private TrackDisplayGroup getTrackGroup() {
 		List<GpxDisplayGroup> gpxDisplayGroups = selectedGpxPoint.getSelectedGpxFile().getSplitGroups(app);
 		if (Algorithms.isEmpty(gpxDisplayGroups)) {
 			return null;
@@ -181,24 +182,48 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 			}
 		}
 
+		return trackDisplayGroup;
+	}
+
+	@Nullable
+	private GpxDisplayItem findDisplayItem() {
+		TrackDisplayGroup trackDisplayGroup = getTrackGroup();
 		if (trackDisplayGroup == null) {
 			return null;
 		}
 
-		GpxDisplayItem currentSegment = null;
-		for (GpxDisplayItem gpxDisplayItem : trackDisplayGroup.getDisplayItems()) {
-			double distance = selectedPoint.getDistance();
-			if (distance < gpxDisplayItem.locationEnd.getDistance()) {
-				currentSegment = gpxDisplayItem;
-				break;
+		List<TrkSegment> segments = selectedGpxPoint.getSelectedGpxFile().getPointsToDisplay();
+		for (TrkSegment segment : segments) {
+
+			List<WptPt> wptPts = segment.getPoints();
+			int currentPointIndex;
+			if (selectedGpxPoint.getNextPoint() != null) {
+				currentPointIndex = wptPts.indexOf(selectedGpxPoint.getNextPoint());
+			} else if (selectedGpxPoint.getPrevPoint() != null) {
+				currentPointIndex = wptPts.indexOf(selectedGpxPoint.getPrevPoint());
+			} else {
+				currentPointIndex = wptPts.indexOf(selectedPoint);
+			}
+
+			if (currentPointIndex == -1) {
+				return null;
+			}
+			for (GpxDisplayItem gpxDisplayItem : trackDisplayGroup.getDisplayItems()) {
+				int startItemPointIndex = wptPts.indexOf(gpxDisplayItem.locationStart);
+				int endItemPointIndex = wptPts.indexOf(gpxDisplayItem.locationEnd);
+				boolean hasStartEndIndex = startItemPointIndex != -1 && endItemPointIndex != -1;
+
+				if (hasStartEndIndex && currentPointIndex >= startItemPointIndex
+						&& currentPointIndex < endItemPointIndex) {
+					return gpxDisplayItem;
+				}
 			}
 		}
-
-		return currentSegment;
+		return null;
 	}
 
 	private void buildUphillDownhill(View view) {
-		GpxDisplayItem currentSegment = getPointSegment();
+		GpxDisplayItem currentSegment = findDisplayItem();
 		if (currentSegment == null || currentSegment.analysis == null) {
 			return;
 		}
