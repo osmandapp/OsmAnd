@@ -149,7 +149,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 
 		Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
 		node.replaceTags(getTagsFromParams());
-		EditPoiData editPoiData = new EditPoiData(node, mapActivity.getMyApplication(), true);
+		EditPoiData editPoiData = new EditPoiData(node, mapActivity.getMyApplication());
 		if (Boolean.parseBoolean(getParams().get(KEY_DIALOG)) || editPoiData.hasEmptyValue()) {
 			Entity newEntity = editPoiData.getEntity();
 			EditPoiDialogFragment editPoiDialogFragment =

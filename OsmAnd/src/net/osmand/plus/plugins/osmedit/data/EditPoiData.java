@@ -35,7 +35,7 @@ public class EditPoiData {
 
 	private final Set<String> changedTags = Collections.synchronizedSet(new HashSet<>());
 
-	public EditPoiData(Entity entity, OsmandApplication app, boolean isNew) {
+	public EditPoiData(Entity entity, OsmandApplication app) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
 		category = app.getPoiTypes().getOtherPoiCategory();
 		this.entity = entity;
@@ -263,6 +263,10 @@ public class EditPoiData {
 			tagValues.remove(currentPoiType.getEditOsmTag2());
 			changedTags.removeAll(Arrays.asList(currentPoiType.getEditOsmTag(), currentPoiType.getEditOsmTag2(), currentPoiType.getOsmTag2()));
 		}
+	}
+
+	public boolean isPoiTypeChanged() {
+		return getChangedTags().contains(POI_TYPE_TAG);
 	}
 
 	public boolean hasEmptyValue() {

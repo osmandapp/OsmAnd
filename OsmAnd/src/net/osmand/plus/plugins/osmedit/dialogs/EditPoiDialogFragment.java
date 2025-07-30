@@ -126,10 +126,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			openstreetmapUtil = plugin.getPoiModificationRemoteUtil();
 		}
 
-		Bundle arguments = getArguments();
-		boolean isAddingPoi = arguments.getBoolean(IS_ADDING_POI);
-		Entity entity = AndroidUtils.getSerializable(arguments, KEY_AMENITY_ENTITY, Entity.class);
-		editPoiData = new EditPoiData(entity, app, isAddingPoi);
+		Entity entity = AndroidUtils.getSerializable(getArguments(), KEY_AMENITY_ENTITY, Entity.class);
+		editPoiData = new EditPoiData(entity, app);
 	}
 
 	@Override
@@ -365,7 +363,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			onSaveButtonClickListener.onSaveButtonClick();
 		}
 		String tagWithExceedingValue = isTextLengthInRange();
-		boolean poiTypeChanged = editPoiData.getChangedTags().contains(POI_TYPE_TAG)
+		boolean poiTypeChanged = editPoiData.isPoiTypeChanged()
 				&& !Algorithms.stringsEqual(editPoiData.getPoiTypeString(), editPoiData.getTag(POI_TYPE_TAG));
 		if (!Algorithms.isEmpty(tagWithExceedingValue)) {
 			ValueExceedLimitDialogFragment.showInstance(getChildFragmentManager(), tagWithExceedingValue);
