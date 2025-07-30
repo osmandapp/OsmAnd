@@ -363,6 +363,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			onSaveButtonClickListener.onSaveButtonClick();
 		}
 		String tagWithExceedingValue = isTextLengthInRange();
+		boolean poiTypeChanged = editPoiData.isPoiTypeChanged()
+				&& !Algorithms.stringsEqual(editPoiData.getPoiTypeString(), editPoiData.getTag(POI_TYPE_TAG));
 		if (!Algorithms.isEmpty(tagWithExceedingValue)) {
 			ValueExceedLimitDialogFragment.showInstance(getChildFragmentManager(), tagWithExceedingValue);
 		} else if (TextUtils.isEmpty(poiTypeEditText.getText())) {
@@ -375,9 +377,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		} else if (testTooManyCapitalLetters(editPoiData.getTag(OSMTagKey.NAME.getValue()))) {
 			int messageId = R.string.save_poi_too_many_uppercase;
 			SaveExtraValidationDialogFragment.showInstance(getChildFragmentManager(), messageId);
-		} else if (editPoiData.getPoiCategory() == app.getPoiTypes().getOtherPoiCategory()) {
+		} else if (editPoiData.getPoiCategory() == app.getPoiTypes().getOtherPoiCategory()
+				&& poiTypeChanged) {
 			poiTypeEditText.setError(getString(R.string.please_specify_poi_type));
-		} else if (editPoiData.getPoiTypeDefined() == null) {
+		} else if (editPoiData.getPoiTypeDefined() == null && poiTypeChanged) {
 			poiTypeEditText.setError(getString(R.string.please_specify_poi_type_only_from_list));
 		} else {
 			save();
