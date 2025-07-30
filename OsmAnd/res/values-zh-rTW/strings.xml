@@ -5782,4 +5782,5 @@
     <string name="reverse_mode_original_track">原始軌跡</string>
     <string name="reverse_mode_original_track_desc">沿著確切的路徑回到起點。\n警告：這可能會很危險，因為其會忽略單行道。</string>
     <string name="reverse_mode">反向模式</string>
+    <string name="n_a">N/A</string>
 </resources>
