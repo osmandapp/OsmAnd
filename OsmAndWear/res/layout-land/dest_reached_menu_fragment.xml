@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@+id/share_fragment_layout"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
+             android:clickable="true"
+             android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/main_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:background="?attr/left_menu_view_bg"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/titleIconImageView"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:scaleType="center"
+                        android:translationX="15dp"
+                        android:translationY="40dp"
+                        app:srcCompat="@drawable/list_destination" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical"
+	                android:layout_marginStart="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/titleTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="8dp"
+                            android:layout_gravity="center"
+                            android:text="@string/arrived_at_destination"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="12sp"
+	                        android:paddingEnd="8dp" />
+
+                        <ImageButton
+                            android:id="@+id/closeImageButton"
+                            android:contentDescription="@string/shared_string_close"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="top"
+                            android:translationX="-25dp"
+                            android:translationY="10dp"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            app:srcCompat="@drawable/ic_action_remove_dark"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/findParkingButton"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:drawablePadding="12dp"
+                        android:gravity="top"
+                        android:minHeight="@dimen/dialog_button_ex_height"
+                        android:paddingStart="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@string/find_parking"
+                        android:textSize="12sp"
+                        android:textColor="?android:textColorPrimary"
+                        app:drawableLeftCompat="@drawable/ic_action_parking_dark"
+                        app:drawableStartCompat="@drawable/ic_action_parking_dark" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/dashboard_divider"/>
+
+                    <Button
+                        android:id="@+id/recalcDestButton"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:drawablePadding="12dp"
+                        android:gravity="start|center_vertical"
+                        android:minHeight="@dimen/dialog_button_ex_height"
+                        android:paddingStart="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@string/recalculate_route"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="9sp"
+                        app:drawableLeftCompat="@drawable/ic_action_gdirections_dark"
+                        app:drawableStartCompat="@drawable/ic_action_gdirections_dark" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/dashboard_divider"/>
+
+                    <Button
+                        android:id="@+id/removeDestButton"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:gravity="start|center_vertical"
+                        android:minHeight="@dimen/dialog_button_ex_height"
+                        android:paddingStart="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@string/finish_navigation"
+                        android:textColor="?android:textColorPrimary"
+                        app:drawableLeftCompat="@drawable/ic_action_done"
+                        app:drawableStartCompat="@drawable/ic_action_done" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
