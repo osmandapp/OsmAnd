@@ -13,6 +13,7 @@ import co.touchlab.sqliter.longForQuery
 import co.touchlab.sqliter.setVersion
 import co.touchlab.sqliter.stringForQuery
 import co.touchlab.sqliter.withStatement
+import co.touchlab.sqliter.interop.SQLiteException
 import net.osmand.shared.api.SQLiteAPI.*
 import okio.Path.Companion.toPath
 
@@ -72,9 +73,19 @@ class SQLiteAPIImpl : SQLiteAPI {
 						is Float -> bindDouble(index + 1, obj.toDouble())
 						is ByteArray -> bindBlob(index + 1, obj)
 						null -> bindNull(index + 1)
+						else -> error("Unsupported SQL bind type: ${obj::class} at index $index")
 					}
 				}
-				execute()
+
+				try {
+					execute()
+				} catch (e: SQLiteException) {
+					println("SQLiteException during execSQL:")
+					println("Query: $query")
+					println("Params: ${objects.joinToString { it?.toString() ?: "null" }}")
+					println("Error: ${e.message}")
+					throw e
+				}
 			}
 		}
 
