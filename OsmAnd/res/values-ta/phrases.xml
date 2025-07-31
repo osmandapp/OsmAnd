@@ -696,7 +696,7 @@
     <string name="poi_generator_type_epr">செனரேட்டர் வகை: ஈபிஆர்</string>
     <string name="poi_generator_type_kaplan_turbine">செனரேட்டர் வகை: கபிலன் விசையாழி</string>
     <string name="poi_generator_type_heat_pump">செனரேட்டர் வகை: வெப்ப பம்ப்</string>
-    <string name="poi_service_fleurop_yes">ஆம்;</string>
+    <string name="poi_service_fleurop_yes">ஆம்;ஃப்ளூரோப்</string>
     <string name="poi_mattress_yes">ஆம்; மெத்தை</string>
     <string name="poi_furniture_yes">ஆம்; தளபாடங்கள்</string>
     <string name="poi_furniture_bed">படுக்கை; தளபாடங்கள்</string>
@@ -4071,7 +4071,7 @@
     <string name="poi_cash_withdrawal_fee_no">பணம் திரும்பப் பெறும் கட்டணம்: இல்லை</string>
     <string name="poi_cash_withdrawal_postfinance_card">போச்ட்ஃபைனான்ச் அட்டை</string>
     <string name="poi_cash_withdrawal_migros_bank">இடம்பெயர்வு வங்கி</string>
-    <string name="poi_cash_withdrawal_girocard">Girocard</string>
+    <string name="poi_cash_withdrawal_girocard">சீரோஅட்டை</string>
     <string name="poi_cash_withdrawal_postbank">போச்ட்பேங்க்</string>
     <string name="poi_bath_type_hot_spring">சூடான வேனில்</string>
     <string name="poi_bath_type_onsen">ஒன்சென்</string>
@@ -4168,7 +4168,7 @@
     <string name="poi_embassy_high_commission">உயர் ச்தானிகராலயம்</string>
     <string name="poi_embassy_interests_section">ஆர்வங்கள் பிரிவு</string>
     <string name="poi_embassy_mission">மிசன்</string>
-    <string name="poi_embassy_nunciature">Nunciature</string>
+    <string name="poi_embassy_nunciature">செய்திகள்</string>
     <string name="poi_embassy_residence">குடியிருப்பு</string>
     <string name="poi_liaison_liaison_office">அலுவலகம்</string>
     <string name="poi_liaison_representative_office">சார்பாளர் அலுவலகம்</string>
@@ -4480,7 +4480,7 @@
     <string name="poi_handwashing_hand_cleaning_paste_yes">கை தூய்மை பேச்ட்: ஆம்</string>
     <string name="poi_handwashing_hand_cleaning_paste_no">கை தூய்மை பேச்ட்: இல்லை</string>
     <string name="poi_handwashing_creme_yes">க்ரீம்: ஆம்</string>
-    <string name="poi_handwashing_creme_no">கிரீம்:</string>
+    <string name="poi_handwashing_creme_no">கிரீம்: இல்லை</string>
     <string name="poi_hot_water_yes">சூடான நீர்: ஆம்</string>
     <string name="poi_post_office_bureau">பணியகம்</string>
     <string name="poi_post_office_post_annex">இடுகை இணைப்பு</string>
@@ -4530,7 +4530,7 @@
     <string name="poi_dry_cleaning_yes">ஆம்</string>
     <string name="poi_dry_cleaning_no">இல்லை</string>
     <string name="poi_termite_mound">டெர்மைட் மவுண்ட்</string>
-    <string name="poi_anthill">Anthill</string>
+    <string name="poi_anthill">எறும்புப் புற்று</string>
     <string name="poi_board_type_wildlife">வனவிலங்குகள்</string>
     <string name="poi_board_type_nature">இயற்கை</string>
     <string name="poi_food_no">உணவு: இல்லை</string>
@@ -4805,7 +4805,7 @@
     <string name="poi_us_maps_recreation_area_activity_boating_motorized">மின்னோடி பொருத்தப்பட்ட படகு சவாரி</string>
     <string name="poi_us_maps_recreation_area_activity_boating_non_motorized">மின்னோடி அல்லாத படகு சவாரி</string>
     <string name="poi_us_maps_recreation_area_facility_cabin_rentals">கேபின் வாடகை</string>
-    <string name="poi_us_maps_recreation_area_activity_campground_camping">முகாம் முகாம்</string>
+    <string name="poi_us_maps_recreation_area_activity_campground_camping">முகாம் மைதான முகாம்</string>
     <string name="poi_us_maps_recreation_area_activity_camping_and_cabins">முகாம் மற்றும் அறைகள்</string>
     <string name="poi_us_maps_recreation_area_activity_caving">கேவிங்</string>
     <string name="poi_us_maps_recreation_area_activity_climbing">ஏறுதல்</string>
@@ -5002,7 +5002,7 @@
     <string name="poi_translator">மொழிபெயர்</string>
     <string name="poi_airline">விமான அலுவலகம்</string>
     <string name="poi_atv_yes">ஏடிவி: ஆம்</string>
-    <string name="poi_atv_no">ஒரு டிவி:</string>
+    <string name="poi_atv_no">ஏடிவி: இல்லை</string>
     <string name="poi_access_notes">குறிப்புகள் அணுகல்</string>
     <string name="poi_contact_website">வலைத்தளம்</string>
     <string name="poi_lit">லைட்டிங்</string>

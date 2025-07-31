@@ -265,6 +265,10 @@ public class EditPoiData {
 		}
 	}
 
+	public boolean isPoiTypeChanged() {
+		return getChangedTags().contains(POI_TYPE_TAG);
+	}
+
 	public boolean hasEmptyValue() {
 		for (Map.Entry<String, String> tag : tagValues.entrySet()) {
 			if (tag.getValue().isEmpty() && !POI_TYPE_TAG.equals(tag.getKey())) {

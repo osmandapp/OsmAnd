@@ -2,8 +2,7 @@ package net.osmand.search;
 
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
-import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.search.core.ObjectType.ONLINE_SEARCH;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
@@ -1231,6 +1230,10 @@ public class SearchUICore {
 			}
 		}
 		return retName;
+	}
+
+	public boolean isOnlineSearch() {
+		return searchSettings.hasCustomSearchType(ONLINE_SEARCH);
 	}
 
 	public static class SearchResultComparator implements Comparator<SearchResult> {

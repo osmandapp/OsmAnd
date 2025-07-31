@@ -2041,8 +2041,8 @@
     <string name="move_point">Flytt punkt</string>
     <string name="add_route_points">Legg til rutepunkter</string>
     <string name="add_line">Legg til linje</string>
-    <string name="do_not_use_animations">Ingen animasjoner</string>
-    <string name="do_not_use_animations_descr">Slår av kartanimasjoner.</string>
+    <string name="do_not_use_animations">Fjern animasjoner</string>
+    <string name="do_not_use_animations_descr">Slår av kart- og brukerflateanimasjoner.</string>
     <string name="keep_showing_on_map">Fortsett å vise på kartet</string>
     <string name="exit_without_saving">Avslutte uten å lagre\?</string>
     <string name="mapillary_menu_descr_username">Vis bare bilder lagt til av</string>
@@ -5745,4 +5745,8 @@
     <string name="set_start_point">Sett startpunkt</string>
     <string name="uphill_downhill_split">Oppover-/nedoverbakke</string>
     <string name="no_places_available">Ingen steder i synlig region</string>
+    <string name="failed_to_connect">Klarte ikke å koble til %1s</string>
+    <string name="labels_position">Påskrifters posisjon</string>
+    <string name="customize_grid_color">Tilpass rutenettfarge</string>
+    <string name="grid_color">Rutenettfarge</string>
 </resources>

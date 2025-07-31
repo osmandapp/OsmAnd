@@ -5,7 +5,6 @@ import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INP
 import static net.osmand.plus.settings.fragments.SettingsScreenType.POSITION_ANIMATION;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -36,6 +35,7 @@ import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.ScreenOrientation;
 import net.osmand.plus.settings.enums.TemperatureUnitsMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.enums.VolumeUnit;
@@ -129,26 +129,32 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupMapScreenOrientationPref() {
-		ListPreferenceEx mapScreenOrientation = findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
-		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
-		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
-		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
+		ListPreferenceEx preference = requirePreference(settings.MAP_SCREEN_ORIENTATION.getId());
+		ScreenOrientation[] values = ScreenOrientation.values();
+		String[] entries = new String[values.length];
+		Integer[] entryValues = new Integer[values.length];
+
+		for (int i = 0; i < values.length; i++) {
+			ScreenOrientation orientation = values[i];
+			entries[i] = getString(orientation.getTitleId());
+			entryValues[i] = orientation.getValue();
+		}
+
+		preference.setEntries(entries);
+		preference.setEntryValues(entryValues);
+		preference.setIcon(getMapScreenOrientationIcon());
 	}
 
 	private void setupTurnScreenOnPref() {
-		Preference screenControl = findPreference("screen_control");
+		Preference screenControl = requirePreference("screen_control");
 		screenControl.setIcon(getContentIcon(R.drawable.ic_action_turn_screen_on));
 	}
 
+	@NonNull
 	private Drawable getMapScreenOrientationIcon() {
-		switch (settings.MAP_SCREEN_ORIENTATION.getModeValue(getSelectedAppMode())) {
-			case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
-				return getActiveIcon(R.drawable.ic_action_phone_portrait_orientation);
-			case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
-				return getActiveIcon(R.drawable.ic_action_phone_landscape_orientation);
-			default:
-				return getActiveIcon(R.drawable.ic_action_phone_device_orientation);
-		}
+		int value = settings.MAP_SCREEN_ORIENTATION.getModeValue(getSelectedAppMode());
+		ScreenOrientation orientation = ScreenOrientation.fromValue(value);
+		return getActiveIcon(orientation.getIconId());
 	}
 
 	private void setupDrivingRegionPref() {

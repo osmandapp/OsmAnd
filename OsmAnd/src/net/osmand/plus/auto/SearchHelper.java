@@ -15,7 +15,6 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.search.SearchUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -239,8 +238,7 @@ public class SearchHelper {
 	}
 
 	public void completeQueryWithObject(@NonNull SearchResult result) {
-		SearchUtils.selectSearchResult(app, result);
-
+		app.getSearchHistoryHelper().selectSearchResult(result);
 		String searchQuery = searchUICore.getPhrase().getText(true);
 		if (searchRadiusLevel != 1) {
 			searchRadiusLevel = minSearchRadiusLevel;

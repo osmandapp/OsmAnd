@@ -43,6 +43,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -1227,23 +1228,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void addNewWptToGPXFile(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			CallbackWithObject<GpxFile[]> callbackWithObject = new CallbackWithObject<GpxFile[]>() {
-				@Override
-				public boolean processResult(GpxFile[] result) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						GpxFile gpxFile = result != null && result.length > 0
-								? result[0]
-								: mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
-						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
-						}
+
+			SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					WptPtEditor wptPtPointEditor = getWptPtPointEditor();
+					if (wptPtPointEditor != null) {
+						wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
 					}
-					return true;
 				}
 			};
-			GpxUiHelper.selectSingleGPXFile(mapActivity, true, callbackWithObject);
+			SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileSelectionListener);
 		}
 	}
 
@@ -1256,22 +1251,16 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private void addNewWptToGPXFileImpl(@NonNull MapActivity mapActivity,
 	                                    @Nullable String title, @Nullable Amenity amenity) {
-		GpxUiHelper.selectSingleGPXFile(mapActivity, true, result -> {
+		SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				GpxFile gpxFile;
-				if (result != null && result.length > 0) {
-					gpxFile = result[0];
-				} else {
-					gpxFile = activity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-				}
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
 					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
 				}
 			}
-			return true;
-		});
+		};
+		SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileSelectionListener);
 	}
 
 	@Nullable

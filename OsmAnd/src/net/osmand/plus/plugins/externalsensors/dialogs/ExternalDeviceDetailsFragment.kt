@@ -156,7 +156,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         connectionState?.setCompoundDrawablesWithIntrinsicBounds(signalLevelIcon, null, null, null);
 
         var batteryLevelValue = device.batteryLevel.toString()
-        batteryLevel?.text = batteryLevelValue
+        batteryLevel?.text = if(device.hasBatteryLevel()) batteryLevelValue else app.getString(R.string.n_a)
         if (device.batteryLevel == BATTERY_UNKNOWN_LEVEL_VALUE) {
             batteryLevelValue = app.getString(R.string.res_unknown)
         }

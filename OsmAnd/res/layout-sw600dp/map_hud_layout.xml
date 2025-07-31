@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/map_hud_container"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fitsSystemWindows="true"
+	android:orientation="vertical">
+
+	<net.osmand.plus.views.controls.MapHudLayout
+		android:id="@+id/map_hud_layout"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+
+		<include
+			android:id="@+id/MapHudButtonsOverlayTop"
+			layout="@layout/map_hud_top" />
+
+		<FrameLayout
+			android:id="@+id/left_side_menu"
+			android:layout_width="0dp"
+			android:layout_height="0dp" />
+
+		<include
+			android:id="@+id/MapHudButtonsOverlayBottom"
+			layout="@layout/map_hud_bottom" />
+
+		<net.osmand.plus.quickaction.QuickActionsWidget
+			android:id="@+id/quick_action_widget"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:visibility="gone" />
+
+		<net.osmand.plus.views.controls.VerticalWidgetPanel
+			android:id="@+id/map_bottom_widgets_panel"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:orientation="vertical"
+			app:topPanel="false" />
+
+	</net.osmand.plus.views.controls.MapHudLayout>
+
+	<FrameLayout
+		android:id="@+id/bottomFragmentContainer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+</LinearLayout>

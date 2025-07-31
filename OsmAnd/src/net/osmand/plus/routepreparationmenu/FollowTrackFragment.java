@@ -202,7 +202,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackPaths(app);
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
-			if (list.size() > 0) {
+			if (!list.isEmpty()) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
 				tracksCard = new TracksToFollowCard(mapActivity, this, list, defaultCategory);
 				tracksCard.setListener(this);

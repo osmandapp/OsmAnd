@@ -34,18 +34,18 @@ import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.widgets.LinearLayoutEx;
 import net.osmand.util.Algorithms;
 
 import java.util.*;
 
-public class VerticalWidgetPanel extends LinearLayout implements WidgetsContainer, ViewChangeProvider {
+public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContainer {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
 	private final List<Row> visibleRows = new ArrayList<>();
 	private boolean topPanel;
-	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 	private boolean nightMode;
 
 	public VerticalWidgetPanel(@NonNull Context context) {
@@ -306,24 +306,6 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 
 	private void addVerticalDivider(@NonNull ViewGroup container) {
 		inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_divider, container);
-	}
-
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		super.onSizeChanged(w, h, oldw, oldh);
-		notifySizeChanged(this, w, h, oldw, oldh);
-	}
-
-	@NonNull
-	@Override
-	public Collection<ViewChangeListener> getViewChangeListeners() {
-		return viewChangeListeners;
-	}
-
-	@Override
-	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-		super.onVisibilityChanged(changedView, visibility);
-		notifyVisibilityChanged(changedView, visibility);
 	}
 
 	private class Row {

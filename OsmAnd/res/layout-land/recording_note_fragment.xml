@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<net.osmand.plus.widgets.FrameLayoutEx
     android:id="@+id/recording_note_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -177,4 +177,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</net.osmand.plus.widgets.FrameLayoutEx>

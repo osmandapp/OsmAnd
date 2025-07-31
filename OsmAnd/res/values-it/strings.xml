@@ -2292,8 +2292,8 @@
     <string name="measurement_tool_save_as_new_track_descr">Salva i punti o come punti di un percorso oppure come linea.</string>
     <string name="choose_navigation_type">Seleziona profilo di navigazione</string>
     <string name="exit_without_saving">Uscire senza salvare?</string>
-    <string name="do_not_use_animations">Senza animazioni</string>
-    <string name="do_not_use_animations_descr">Disabilita animazioni mappa.</string>
+    <string name="do_not_use_animations">Rimuovi le animazioni</string>
+    <string name="do_not_use_animations_descr">Disabilita le animazioni della mappa e dell\'interfaccia.</string>
     <string name="keep_showing_on_map">Mantieni visualizzato nella mappa</string>
     <string name="live_monitoring_max_interval_to_send">Buffer temporale per il tracciamento online</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Specifica un tempo della memoria tampone per memorizzare le localizzazioni quando non c\'è connessione</string>

@@ -22,7 +22,7 @@ public class OverlapButtonsTest {
 			System.out.println(b);
 		}
 		System.out.println("--------");
-		ButtonPositionSize.computeNonOverlap(1, positions);
+		ButtonPositionSize.computeNonOverlap(1, positions, 100, 100);
 		for (ButtonPositionSize b : positions) {
 			System.out.println(b);
 		}

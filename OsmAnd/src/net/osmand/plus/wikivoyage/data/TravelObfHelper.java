@@ -71,7 +71,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.travel.obf";
-	private static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
+	private static final int ARTICLE_SEARCH_RADIUS = 500 * 1000;
 	private static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
 	private static final int MAX_SEARCH_RADIUS = 800 * 1000;
 	private static final int TRAVEL_GPX_SEARCH_RADIUS = 10 * 1000; // Ref: POI_SEARCH_POINTS_INTERVAL_M in tools

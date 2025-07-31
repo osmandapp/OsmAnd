@@ -5088,4 +5088,18 @@
     <string name="poi_denomination_church_of_god">Boží církev</string>
     <string name="poi_denomination_brethren">Bratři</string>
     <string name="poi_denomination_free_evangelical">Svobodní evangelíci</string>
+    <string name="poi_denomination_alevi">Alevité</string>
+    <string name="poi_denomination_bektashi">Bektášíja</string>
+    <string name="poi_denomination_ibadi">Ibádíja</string>
+    <string name="poi_denomination_ismaili">Ismá\'ílíja</string>
+    <string name="poi_denomination_sufi">Súfismus</string>
+    <string name="poi_denomination_rinzai">Rinzai šú</string>
+    <string name="poi_denomination_old_catholic">Starokatolická církev</string>
+    <string name="poi_denomination_shaivism">Šivaismus</string>
+    <string name="poi_denomination_pkn">Protestantská církev v Nizozemsku</string>
+    <string name="poi_denomination_zen">Zen</string>
+    <string name="poi_canoe_put_in">Nástupní místo pro kánoe</string>
+    <string name="poi_canoe_egress">Výstupní místo pro kánoe</string>
+    <string name="poi_canoe_put_in_egress">Nástupní a výstupní místo pro kánoe</string>
+    <string name="poi_whitewater_hazard">Nebezpečí divoké vody</string>
 </resources>

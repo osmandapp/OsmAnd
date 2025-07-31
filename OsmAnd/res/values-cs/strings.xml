@@ -314,8 +314,8 @@
     <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS není nainstalovaná. Hledat v obchodě?</string>
     <string name="voice_is_not_available_msg">Hlasové navádění je nedostupné. Přejděte do „Nastavení“ → „Nastavení navigace“ → „Hlasová data“ a vyberte nebo stáhněte balíček s hlasovými pokyny.</string>
     <string name="voice_is_not_available_title">Zvolte balíček hlasových údajů</string>
-    <string name="trace_rendering_descr">Zobrazení výkonu vykreslování a navigace.</string>
-    <string name="trace_rendering">Informace pro ladění výkonu</string>
+    <string name="trace_rendering_descr">Zobrazit výkon vykreslování a navigace.</string>
+    <string name="trace_rendering">Výkonnostní ladicí informace</string>
     <string name="daynight_mode_day">Den</string>
     <string name="daynight_mode_night">Noc</string>
     <string name="daynight_mode_auto">Východ/západ slunce</string>
@@ -5356,7 +5356,7 @@
     <string name="no_assigned_keys">Žádné přiřazené klávesy</string>
     <string name="action_icon">Ikona akce</string>
     <string name="assigned_keys">Přiřazené klávesy</string>
-    <string name="map_text">Vykreslení mapy</string>
+    <string name="map_text">Vykreslování mapy</string>
     <string name="top">Nahoře</string>
     <string name="bottom">Dole</string>
     <string name="title_3d_track">3D stopa</string>
@@ -5573,7 +5573,7 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Zobrazuje spotřebu paliva vozidla na základě senzoru (L/h)</string>
     <string name="obd_fuel_level_liter">Hladina paliva (l)</string>
     <string name="obd_fuel_level_percent">Hladina paliva (%)</string>
-    <string name="obd_fuel_left_km">Zbývá palivo (km)</string>
+    <string name="obd_fuel_left_km">Zbývající palivo (km)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Míra spotřeby paliva</string>
     <string name="obd_fuel_consumption_rate_scanner">Spotřeba paliva (OBD)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Spotřeba paliva %/h</string>
@@ -5635,7 +5635,7 @@
     <string name="av_audio_sample_rate_descr">Vyberte vzorkovací frekvenci zvuku.</string>
     <string name="connect_new_scanner">Připojit nový skener</string>
     <string name="shared_string_engine">Motor</string>
-    <string name="vehicle_metrics_recording_description">Vyberte parametry, které se mají zaznamenat do GPX souboru.</string>
+    <string name="vehicle_metrics_recording_description">Vyberte parametry, které se mají zaznamenat do souboru GPX.</string>
     <string name="auto_zoom_3d_angle">Úhel automatického 3D zoomu</string>
     <string name="location_interpolation_percent">Procento interpolace polohy</string>
     <string name="location_interpolation_percent_desc">Nastavení procenta interpolace polohy během navigace po trase. Tento parametr snižuje zpoždění polohy na mapě během animace.</string>
@@ -5790,4 +5790,9 @@
     <string name="turn_by_turn_directions">Podrobné navigační pokyny</string>
     <string name="failed_to_connect">Nepodařilo se připojit k %1s</string>
     <string name="enable_msaa">Povolit MSAA</string>
+    <string name="next_turn_information">Informace o dalším odbočení</string>
+    <string name="next_turn_information_desc">Zobrazit směr a název ulice nadcházejícího odbočení.</string>
+    <string name="description_purchases_fastspring">Své nákupy můžete spravovat prostřednictvím portálu správy účtu FastSpring.</string>
+    <string name="description_subscription_fastspring">Své předplatné můžete spravovat nebo zrušit prostřednictvím portálu správy účtu FastSpring.</string>
+    <string name="manage_purchases">Správa nákupů</string>
 </resources>

@@ -23,7 +23,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -34,13 +33,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -163,30 +158,6 @@ public class GpxUiHelper {
 			description.append(nl).append(app.getString(R.string.gpx_info_maximum_speed, max));
 		}
 		return description.toString();
-	}
-
-	public static void selectSingleGPXFile(FragmentActivity activity, boolean showCurrentGpx,
-	                                       CallbackWithObject<GpxFile[]> callbackWithObject) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
-		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
-		List<GPXInfo> list = new ArrayList<>(selectedGpxFiles.size() + 1);
-		if (!PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			showCurrentGpx = false;
-		}
-		if (!selectedGpxFiles.isEmpty() || showCurrentGpx) {
-			if (showCurrentGpx) {
-				list.add(new GPXInfo(activity.getString(R.string.shared_string_currently_recording_track), null));
-			}
-
-			for (SelectedGpxFile selectedGpx : selectedGpxFiles) {
-				GpxFile gpxFile = selectedGpx.getGpxFile();
-				if (!gpxFile.isShowCurrentTrack() && gpxFile.getPath().length() > gpxDirLength + 1) {
-					list.add(new GPXInfo(gpxFile.getPath().substring(gpxDirLength + 1), new File(gpxFile.getPath())));
-				}
-			}
-			SelectGpxTrackBottomSheet.showInstance(activity.getSupportFragmentManager(), showCurrentGpx, callbackWithObject, list);
-		}
 	}
 
 	@NonNull

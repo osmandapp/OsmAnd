@@ -18,6 +18,7 @@ import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.HorizontalSpaceItemDecoration;
 import net.osmand.shared.ColorPalette;
@@ -70,7 +71,7 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 		ColorPalette colorPalette = ((PaletteGradientColor) controller.selectedPaletteColor).getColorPalette();
 		GradientChart chart = view.findViewById(R.id.chart);
 
-		int labelsColor = ContextCompat.getColor(app, R.color.text_color_secondary_light);
+		int labelsColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
 
 		ChartUtils.setupGradientChart(getMyApplication(), chart, 9, 24, false, xAxisGridColor, labelsColor);

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/bottom_sheet_large_list_item_height"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/descriptionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/bottom_sheet_large_list_item_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/list_content_padding">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/compound_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+            android:background="@null"
+            android:clickable="false"
+            android:focusable="false"
+            android:saveEnabled="false" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:paddingVertical="@dimen/content_padding_small"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/TextAppearance.ListItemTitle"
+                android:textColor="?android:textColorPrimary"
+                tools:text="Item Title" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textColor="?android:textColorSecondary"
+                tools:text="Item additional desription" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:src="@drawable/ic_action_coordinates_latitude"
+            tools:tint="?attr/default_icon_color" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+        android:background="?attr/divider_color"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>

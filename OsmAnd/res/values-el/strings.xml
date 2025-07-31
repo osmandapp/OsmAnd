@@ -5253,4 +5253,6 @@
     <string name="add_widget_to_the_right">Προσθήκη γραφικού στοιχείου στα δεξιά</string>
     <string name="add_widget_to_the_left">Προσθήκη γραφικού στοιχείου στα αριστερά</string>
     <string name="shared_string_route_line">Γραμμή διαδρομής</string>
+    <string name="use_latin_name_if_missing">Χρήση λατινικού ονόματος εάν λείπει</string>
+    <string name="transport_hazmat_yes_desc">Επιλέξτε την εφαρμόσιμη κατηγορία.</string>
 </resources>
