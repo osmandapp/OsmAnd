@@ -5749,4 +5749,5 @@
     <string name="reverse_mode_original_track">Eredeti nyomvonal</string>
     <string name="reverse_mode_original_track_desc">Kövesse pontosan a nyomvonalat vissza a kiindulópontig.\nFigyelmeztetés: Ez veszélyes lehet, mivel figyelmen kívül hagyja az egyirányú forgalmat az utakon.</string>
     <string name="reverse_mode">Fordított mód</string>
+    <string name="n_a">n.a</string>
 </resources>
