@@ -19,6 +19,7 @@ import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
 import kotlin.math.max
 import kotlin.math.min
+import net.osmand.data.RotatedTileBox
 
 abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext),
 	DefaultLifecycleObserver {
@@ -126,13 +127,16 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		app.carNavigationSession?.navigationCarSurface?.let { surfaceRenderer ->
 			if (!mapRect.hasInitialState()) {
 				val mapView = app.osmandMap.mapView
-				val tb = mapView.rotatedTileBox
+				val tb = RotatedTileBox(mapView.rotatedTileBox)
+				val surfaceAdditionalWidth = surfaceRenderer.surfaceAdditionalWidth
+				val adjustedPixWidth = tb.pixWidth - surfaceAdditionalWidth
+				tb.setPixelDimensions(adjustedPixWidth, tb.pixHeight, surfaceRenderer.cachedRatioX, surfaceRenderer.cachedRatioY)
 				tb.rotate = 0f;
 				tb.setZoomAndAnimation(tb.zoom, 0.0, 0.0);
 //				tb.mapDensity = surfaceRenderer.density.toDouble() * app.settings.MAP_DENSITY.get();
 				tb.mapDensity = surfaceRenderer.density.toDouble() * app.osmandMap.mapDensity;
 				val rtl = false; // panel is always on the left
-				val leftPanel =  tb.pixWidth / 2; // assume panel takes half screen
+				val leftPanel = tb.pixWidth / 2; // assume panel takes half screen
 				val tileBoxWidthPx = tb.pixWidth - leftPanel;
 				mapView.fitRectToMap(tb, mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
 					tileBoxWidthPx, 0, 0, 0, rtl, 0.75f,true)
