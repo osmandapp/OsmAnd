@@ -208,7 +208,7 @@
     <string name="traffic_warning_stop">Señal de detención</string>
     <string name="traffic_warning_calming">Reductor de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
-    <string name="traffic_warning">Advertencia del camino</string>
+    <string name="traffic_warning">Advertencia vial</string>
     <string name="speak_favorites">Favoritos cercanos</string>
     <string name="speak_poi">PDI cercanos</string>
     <string name="way_alarms">Advertencias del camino</string>
@@ -513,11 +513,11 @@
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europa, Asia, Latinoamérica y similares</string>
     <string name="speak_title">Anunciar…</string>
-    <string name="speak_descr">Configurá los anuncios para nombres de calles, advertencias del camino (paradas, lomadas), radares y límites de velocidad.</string>
+    <string name="speak_descr">Configurá los anuncios para nombres de calles, advertencias viales (paradas, lomadas), radares y límites de velocidad.</string>
     <string name="speak_street_names">Nombres de calles (TTS)</string>
     <string name="speak_speed_limit">Límite de velocidad</string>
     <string name="speak_cameras">Radares de velocidad</string>
-    <string name="speak_traffic_warnings">Advertencias del camino</string>
+    <string name="speak_traffic_warnings">Advertencias viales</string>
     <string name="osb_author_or_password_not_specified">Indicá el usuario y contraseña de OSM en «Ajustes»</string>
     <string name="clear_intermediate_points">Limpiar destinos intermedios</string>
     <string name="keep_intermediate_points">Mantener destinos intermedios</string>
@@ -694,7 +694,7 @@
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustible</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configurá advertencias del camino (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
+    <string name="show_warnings_descr">Configurá advertencias viales (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
     <string name="use_compass_navigation_descr">Usá la brújula si no se detecta el rumbo.</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Sin autopistas</string>
@@ -768,7 +768,7 @@
     <string name="bg_service_screen_lock_toast">Pantalla bloqueada</string>
     <string name="bg_service_interval">Definir intervalo de activación:</string>
     <string name="show_cameras">Radares de velocidad</string>
-    <string name="show_traffic_warnings">Advertencias del camino</string>
+    <string name="show_traffic_warnings">Advertencias viales</string>
     <string name="avoid_toll_roads">Sin peajes</string>
     <string name="continue_follow_previous_route_auto">¿Reanudar la navegación anterior no finalizada? (%1$s segundos)</string>
     <string name="route_updated_loc_found">Esperando la ubicación para calcular la ruta</string>
@@ -5659,7 +5659,7 @@
     <string name="next_turn_information">Información del siguiente giro</string>
     <string name="next_turn_information_desc">Indica la dirección del siguiente giro y el nombre de la calle.</string>
     <string name="description_purchases_fastspring">Podés gestionar tus compras a través del portal de gestión de cuentas FastSpring.</string>
-    <string name="description_subscription_fastspring">Podés gestionar o cancelar su suscripción a través del portal de gestión de cuentas FastSpring.</string>
+    <string name="description_subscription_fastspring">Podés gestionar o cancelar tu suscripción a través del portal de gestión de cuentas FastSpring.</string>
     <string name="manage_purchases">Gestionar compras</string>
     <string name="reverse_mode_original_track_desc">Sigue el recorrido exacto hasta el inicio.\nAdvertencia: Esto puede ser peligroso, ya que ignora el sentido unidireccional de los caminos.</string>
     <string name="map_orientation_portrait_inverted">Vertical (invertido)</string>
@@ -5668,4 +5668,5 @@
     <string name="reverse_mode_calculate_route_desc">Calcular una nueva ruta optimizada hasta el inicio.</string>
     <string name="reverse_mode_original_track">Traza original</string>
     <string name="reverse_mode">Modo inverso</string>
+    <string name="n_a">N/C</string>
 </resources>

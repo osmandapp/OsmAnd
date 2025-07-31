@@ -5830,4 +5830,5 @@
     <string name="reverse_mode_original_track">Originalt spor</string>
     <string name="reverse_mode_original_track_desc">Følg det nøjagtige spor tilbage til starten.\nAdvarsel: Dette kan være farligt, da det ignorerer envejs trafik på veje.</string>
     <string name="reverse_mode">Omvendt tilstand</string>
+    <string name="n_a">Ikke relevant</string>
 </resources>
