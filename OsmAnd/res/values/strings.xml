@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="map_orientations_choose_description">Leave empty to switch between all available modes, or add only your preferred ones.</string>
+    <string name="map_orientations">Map orientations</string>
     <string name="map_orientation_portrait_inverted">Portrait (inverted)</string>
     <string name="map_orientation_landscape_inverted">Landscape (inverted)</string>
     <string name="reverse_mode_calculate_route">Calculate route</string>
