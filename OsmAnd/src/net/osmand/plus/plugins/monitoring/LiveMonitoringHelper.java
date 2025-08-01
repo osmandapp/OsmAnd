@@ -15,6 +15,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.shared.gpx.GpxFormatter;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -247,10 +248,10 @@ public class LiveMonitoringHelper {
 		for (int i = 0; i < maxLen + 1; i++) {
 			switch (i) {
 				case 0:
-					prm.add(data.lat + "");
+					prm.add(GpxFormatter.INSTANCE.formatLatLon(data.lat));
 					break;
 				case 1:
-					prm.add(data.lon + "");
+					prm.add(GpxFormatter.INSTANCE.formatLatLon(data.lon));
 					break;
 				case 2:
 					prm.add(data.time + "");
