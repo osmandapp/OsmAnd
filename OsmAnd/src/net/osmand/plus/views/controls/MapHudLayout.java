@@ -41,6 +41,7 @@ public class MapHudLayout extends FrameLayout {
 
 	private static final int REFRESH_UI_ID = UI_HANDLER_MAP_HUD + 1;
 	private static final int REFRESH_VERTICAL_PANELS_ID = UI_HANDLER_MAP_HUD + 2;
+	private static final int REFRESH_ALARMS_CONTAINER_ID = UI_HANDLER_MAP_HUD + 3;
 	private static final int UI_REFRESH_INTERVAL_MILLIS = 100;
 	private static final float TOP_BAR_MAX_WIDTH_PERCENTAGE = 0.6f;
 
@@ -52,6 +53,7 @@ public class MapHudLayout extends FrameLayout {
 	private final Map<View, ButtonPositionSize> widgetPositions = new LinkedHashMap<>();
 	private final Map<View, ButtonPositionSize> additionalWidgetPositions = new LinkedHashMap<>();
 
+	private View alarmsContainer;
 	private View topBarPanelContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
@@ -91,6 +93,7 @@ public class MapHudLayout extends FrameLayout {
 	protected void onFinishInflate() {
 		super.onFinishInflate();
 
+		alarmsContainer = findViewById(R.id.alarms_container);
 		leftWidgetsPanel = findViewById(R.id.map_left_widgets_panel);
 		rightWidgetsPanel = findViewById(R.id.map_right_widgets_panel);
 		topBarPanelContainer = findViewById(R.id.top_bar_panel_container);
@@ -102,7 +105,7 @@ public class MapHudLayout extends FrameLayout {
 
 			addPosition(findViewById(R.id.widget_top_bar));
 			addPosition(findViewById(R.id.top_widgets_panel));
-			addPosition(bottomWidgetsPanel);
+			addPosition(bottomWidgetsPanel, this::updateAlarmsContainer);
 		} else {
 			addPosition(findViewById(R.id.widget_top_bar));
 			addPosition(findViewById(R.id.top_widgets_panel));
@@ -410,6 +413,10 @@ public class MapHudLayout extends FrameLayout {
 		super.onSizeChanged(w, h, oldw, oldh);
 		if (w > 0 && w != oldw) {
 			updateVerticalPanels();
+
+			if (shouldCenterVerticalPanels()) {
+				updateAlarmsContainer();
+			}
 		}
 	}
 
@@ -445,5 +452,24 @@ public class MapHudLayout extends FrameLayout {
 				view.setLayoutParams(params);
 			}
 		}
+	}
+
+	private void updateAlarmsContainer() {
+		app.runInUIThreadAndCancelPrevious(REFRESH_ALARMS_CONTAINER_ID, () -> {
+			if (alarmsContainer != null && alarmsContainer.getLayoutParams() instanceof MarginLayoutParams params) {
+				int marginId = portrait ? R.dimen.map_alarm_bottom_margin : R.dimen.map_alarm_bottom_margin_land;
+				int baseMargin = getResources().getDimensionPixelSize(marginId);
+
+				int panelMargin = 0;
+				if (shouldCenterVerticalPanels() && bottomWidgetsPanel != null && bottomWidgetsPanel.getVisibility() == VISIBLE) {
+					panelMargin = bottomWidgetsPanel.getHeight();
+				}
+				int bottomMargin = Math.max(baseMargin, panelMargin);
+				if (params.bottomMargin != bottomMargin) {
+					params.bottomMargin = bottomMargin;
+					alarmsContainer.setLayoutParams(params);
+				}
+			}
+		}, UI_REFRESH_INTERVAL_MILLIS);
 	}
 }
