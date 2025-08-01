@@ -166,7 +166,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	@NonNull
 	public List<TrackTab> getSortedTrackTabs() {
-		return getSortedTrackTabs(false);
+		return getSortedTrackTabs(true);
 	}
 
 	@NonNull

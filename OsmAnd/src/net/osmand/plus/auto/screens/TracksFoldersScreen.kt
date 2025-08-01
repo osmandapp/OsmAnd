@@ -94,14 +94,14 @@ class TracksFoldersScreen(
         }
         templateBuilder.setLoading(false)
         var itemsCount = 1
-        for (trackTab in trackTabsHelper.getSortedTrackTabs(false)) {
+        for (trackTab in trackTabsHelper.getSortedTrackTabs(true)) {
             if (trackTab.type != TrackTabType.FOLDER) {
                 continue
             }
             if (itemsCount == contentLimit) {
                 break
             }
-            val title = trackTab.getName()
+            val title = trackTab.getDirName(includingSubdirs = true)
             val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
             val iconColorId = ColorUtilities.getDefaultIconColorId(nightMode)
             val iconDrawable = app.uiUtilities.getIcon(trackTab.type.iconId, iconColorId)

@@ -112,9 +112,10 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	@Override
 	public String getDirName(boolean includingSubdirs) {
-		return directory != null && includingSubdirs
-				? GpxUiHelper.getFolderPath(directory, initialName)
-				: initialName;
+		if (directory != null) {
+			return GpxUiHelper.getRelativeFolderPath(directory, initialName, includingSubdirs);
+		}
+		return initialName;
 	}
 
 	@Override
