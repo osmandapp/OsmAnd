@@ -56,7 +56,7 @@ public class LiveMonitoringHelper {
 		long locationTime = System.currentTimeMillis();
 
 		if (shouldRecordLocation(location, locationTime)) {
-			LiveMonitoringData data = new LiveMonitoringData((float) location.getLatitude(), (float) location.getLongitude(),
+			LiveMonitoringData data = new LiveMonitoringData(location.getLatitude(), location.getLongitude(),
 					(float) location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
 			setupLiveDataTimeAndDistance(data, location, locationTime);
 			queue.add(data);
@@ -128,8 +128,8 @@ public class LiveMonitoringHelper {
 	private static class LiveMonitoringData {
 		public static final int NUMBER_OF_LIVE_DATA_FIELDS = 11;    //change the value after each addition\deletion of data field
 
-		private final float lat;
-		private final float lon;
+		private final double lat;
+		private final double lon;
 		private final float alt;
 		private final float speed;
 		private final float bearing;
@@ -147,7 +147,7 @@ public class LiveMonitoringHelper {
 			this.distanceToIntermediateOrFinish = distanceToIntermediateOrFinish;
 		}
 
-		public LiveMonitoringData(float lat, float lon, float alt, float speed, float hdop, float bearing, long time) {
+		public LiveMonitoringData(double lat, double lon, float alt, float speed, float hdop, float bearing, long time) {
 			this.lat = lat;
 			this.lon = lon;
 			this.alt = alt;
