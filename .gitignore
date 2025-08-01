@@ -52,3 +52,6 @@ OsmAnd-java/src/test/resources/rendering/*
 OsmAnd-shared/bin
 # ApproximationTest resources
 OsmAnd-java/src/test/resources/approximation/*
+#Shared library resources
+OsmAnd-shared/src/androidMain/resources/
+OsmAnd-shared/src/jvmMain/resources/

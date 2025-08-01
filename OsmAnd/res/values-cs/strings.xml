@@ -5795,4 +5795,12 @@
     <string name="description_purchases_fastspring">Své nákupy můžete spravovat prostřednictvím portálu správy účtu FastSpring.</string>
     <string name="description_subscription_fastspring">Své předplatné můžete spravovat nebo zrušit prostřednictvím portálu správy účtu FastSpring.</string>
     <string name="manage_purchases">Správa nákupů</string>
+    <string name="map_orientation_portrait_inverted">Na výšku (stranově obrácený)</string>
+    <string name="map_orientation_landscape_inverted">Na šířku (stranově obrácená)</string>
+    <string name="reverse_mode_calculate_route">Vypočítat trasu</string>
+    <string name="reverse_mode_calculate_route_desc">Vypočítat novou, optimalizovanou trasu ke startu.</string>
+    <string name="reverse_mode_original_track">Původní stopa</string>
+    <string name="reverse_mode_original_track_desc">Vraťte se přesně po stejné stopě zpět na start.\nUpozornění: To může být nebezpečné, protože se tím ignoruje jednosměrný provoz na silnicích.</string>
+    <string name="reverse_mode">Obrácený režim</string>
+    <string name="n_a">N/A</string>
 </resources>
