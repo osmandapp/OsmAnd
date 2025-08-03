@@ -1,45 +1,45 @@
 package net.osmand.plus.backup.ui;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
-
-import org.apache.commons.logging.Log;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class VersionHistoryFragment extends BaseBackupTypesFragment {
+public class VersionHistoryController extends BaseBackupTypesController {
 
-	public static final String TAG = VersionHistoryFragment.class.getSimpleName();
-	private static final Log log = PlatformUtil.getLog(VersionHistoryFragment.class);
+	private static final String PROCESS_ID = "select_types_to_manage_version_history";
+
+	public VersionHistoryController(@NonNull OsmandApplication app) {
+		super(app, BackupClearType.HISTORY, RemoteFilesType.OLD);
+	}
+
+	@NonNull
+	@Override
+	public String getProcessId() {
+		return PROCESS_ID;
+	}
 
 	@Override
-	protected int getTitleId() {
+	public int getTitleId() {
 		return R.string.backup_version_history;
 	}
 
 	@Override
-	protected BackupClearType getClearType() {
-		return BackupClearType.HISTORY;
-	}
-
-	@Override
-	protected RemoteFilesType getRemoteFilesType() {
-		return RemoteFilesType.OLD;
-	}
-
-	@Override
-	protected Map<ExportType, List<?>> getSelectedItems() {
+	@NonNull
+	protected Map<ExportType, List<?>> collectSelectedItems() {
 		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 		for (ExportType exportType : ExportType.values()) {
 			if (backupHelper.getVersionHistoryTypePref(exportType).get()) {
@@ -52,7 +52,6 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 	@Override
 	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
 		super.onCategorySelected(exportCategory, selected);
-
 		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
 		for (ExportType exportType : categoryItems.getTypes()) {
 			backupHelper.getVersionHistoryTypePref(exportType).set(selected);
@@ -66,24 +65,16 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 	}
 
 	@Override
-	public void onClearTypesConfirmed(@NonNull List<ExportType> types) {
-		try {
-			updateProgressVisibility(true);
-			backupHelper.deleteOldFiles(types);
-		} catch (UserNotRegisteredException e) {
-			updateProgressVisibility(false);
-			log.error(e);
-		}
+	public void clearDataForTypes(@NonNull List<ExportType> types) throws UserNotRegisteredException {
+		backupHelper.deleteOldFiles(types);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
-		if (manager.findFragmentByTag(TAG) == null) {
-			VersionHistoryFragment fragment = new VersionHistoryFragment();
-			fragment.setRetainInstance(true);
-			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(null)
-					.commitAllowingStateLoss();
-		}
+	public static void showScreen(@NonNull FragmentActivity activity) {
+		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+		DialogManager dialogManager = app.getDialogManager();
+		dialogManager.register(PROCESS_ID, new VersionHistoryController(app));
+
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		BackupTypesFragment.showInstance(fragmentManager, PROCESS_ID);
 	}
 }
