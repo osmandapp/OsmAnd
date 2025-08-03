@@ -39,7 +39,7 @@ public abstract class SwitchBackupTypesController extends BaseBackupTypesControl
 
 	@NonNull
 	@Override
-	public SwitchBackupTypesAdapter createUiAdapter(@NonNull Context context) {
+	public BackupTypesAdapter createUiAdapter(@NonNull Context context) {
 		return new SwitchBackupTypesAdapter(context, this);
 	}
 

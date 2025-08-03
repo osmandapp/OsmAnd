@@ -64,7 +64,7 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 	}
 
 	@NonNull
-	public abstract SwitchBackupTypesAdapter createUiAdapter(@NonNull Context context);
+	public abstract BackupTypesAdapter createUiAdapter(@NonNull Context context);
 
 	@StringRes
 	public abstract int getTitleId();

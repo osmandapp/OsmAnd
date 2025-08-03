@@ -169,11 +169,12 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull String processId) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
+		String fullTag = TAG + "_" + processId;
+		if (AndroidUtils.isFragmentCanBeAdded(manager, fullTag, true)) {
 			BackupTypesFragment fragment = new BackupTypesFragment();
 			fragment.processId = processId;
 			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, fullTag)
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 		}
