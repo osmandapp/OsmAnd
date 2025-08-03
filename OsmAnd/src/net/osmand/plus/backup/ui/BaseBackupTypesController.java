@@ -1,8 +1,9 @@
 package net.osmand.plus.backup.ui;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -10,39 +11,38 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.BackupTypesAdapter.OnItemSelectedListener;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.OnClearTypesListener;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
-import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class BaseBackupTypesController extends BaseDialogController
 		implements OnItemSelectedListener, OnClearTypesListener, OnDeleteFilesListener {
 
-	private static final Log LOG = PlatformUtil.getLog(BaseBackupTypesController.class);
+	protected static final Log LOG = PlatformUtil.getLog(BaseBackupTypesController.class);
 
 	protected final BackupHelper backupHelper;
 	protected final BackupClearType clearType;
 	protected final RemoteFilesType remoteFilesType;
-	protected Map<ExportCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
-	protected Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
+	protected Map<ExportCategory, SettingsCategoryItems> data = new LinkedHashMap<>();
+	protected List<ExportCategory> categories;
 	protected BackupTypesFragment screen;
 	protected boolean cloudRestore;
 
@@ -63,34 +63,48 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 		updateData();
 	}
 
-	public void onResume() {
-		backupHelper.getBackupListeners().addDeleteFilesListener(this);
-	}
-
-	public void onPause() {
-		backupHelper.getBackupListeners().removeDeleteFilesListener(this);
-	}
+	@NonNull
+	public abstract SwitchBackupTypesAdapter createUiAdapter(@NonNull Context context);
 
 	@StringRes
 	public abstract int getTitleId();
 
 	public void updateData() {
-		this.dataList = collectAllItems();
-		this.selectedItemsMap = collectSelectedItems();
+		this.data = collectData();
+		this.categories = new ArrayList<>(data.keySet());
+		Collections.sort(categories);
+	}
+
+	public void updateListeners(boolean register) {
+		if (register) {
+			backupHelper.getBackupListeners().addDeleteFilesListener(this);
+		} else {
+			backupHelper.getBackupListeners().removeDeleteFilesListener(this);
+		}
 	}
 
 	@NonNull
-	public Map<ExportCategory, SettingsCategoryItems> getDataList() {
-		return dataList;
+	public Map<ExportCategory, SettingsCategoryItems> getData() {
+		return data;
 	}
 
 	@NonNull
-	public Map<ExportType, List<?>> getSelectedItems() {
-		return selectedItemsMap;
+	public Collection<ExportCategory> getCategories() {
+		return categories;
 	}
 
 	@NonNull
-	private Map<ExportCategory, SettingsCategoryItems> collectAllItems() {
+	public ExportCategory getCategory(int position) {
+		return categories.get(position);
+	}
+
+	@NonNull
+	public SettingsCategoryItems getCategoryItems(@NonNull ExportCategory category) {
+		return Objects.requireNonNull(data.get(category));
+	}
+
+	@NonNull
+	private Map<ExportCategory, SettingsCategoryItems> collectData() {
 		Map<String, RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(remoteFilesType);
 		if (remoteFiles == null) {
 			remoteFiles = Collections.emptyMap();
@@ -107,81 +121,6 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 		}
 		return SettingsHelper.categorizeSettingsToOperate(dataToOperate, true);
 	}
-
-	@NonNull
-	protected abstract Map<ExportType, List<?>> collectSelectedItems();
-
-	@NonNull
-	public List<?> getItemsForType(@NonNull ExportType exportType) {
-		for (SettingsCategoryItems categoryItems : dataList.values()) {
-			if (categoryItems.getTypes().contains(exportType)) {
-				return categoryItems.getItemsForType(exportType);
-			}
-		}
-		return Collections.emptyList();
-	}
-
-	@Override
-	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
-		boolean hasItemsToDelete = false;
-		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
-		List<ExportType> exportTypes = categoryItems.getTypes();
-		for (ExportType exportType : exportTypes) {
-			if (isExportTypeAvailable(exportType)) {
-				List<?> items = getItemsForType(exportType);
-				hasItemsToDelete |= !Algorithms.isEmpty(items);
-				selectedItemsMap.put(exportType, selected ? items : null);
-			}
-		}
-		if (!selected && hasItemsToDelete) {
-			showClearTypesBottomSheet(exportTypes);
-		}
-	}
-
-	@Override
-	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
-		if (isExportTypeAvailable(exportType)) {
-			List<?> items = getItemsForType(exportType);
-			selectedItemsMap.put(exportType, selected ? items : null);
-			if (!selected && !Algorithms.isEmpty(items)) {
-				showClearTypesBottomSheet(Collections.singletonList(exportType));
-			}
-		} else {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				OsmAndProPlanFragment.showInstance(activity);
-			}
-		}
-	}
-
-	protected void showClearTypesBottomSheet(List<ExportType> types) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			ClearTypesBottomSheet.showInstance(activity, this, types);
-		}
-	}
-
-	// TODO: delete
-	protected boolean isExportTypeAvailable(@NonNull ExportType exportType) {
-		return InAppPurchaseUtils.isExportTypeAvailable(app, exportType) || cloudRestore;
-	}
-
-	protected boolean isBackupAvailable() {
-		return InAppPurchaseUtils.isBackupAvailable(app) || cloudRestore;
-	}
-
-	@Override
-	public void onClearTypesConfirmed(@NonNull List<ExportType> types) {
-		try {
-			screen.updateProgressVisibility(true);
-			clearDataForTypes(types);
-		} catch (UserNotRegisteredException e) {
-			screen.updateProgressVisibility(false);
-			LOG.error(e);
-		}
-	}
-
-	protected abstract void clearDataForTypes(@NonNull List<ExportType> types) throws UserNotRegisteredException;
 
 	@Override
 	public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
@@ -200,7 +139,21 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 		backupHelper.prepareBackup();
 	}
 
-	public boolean isCloudRestore() {
-		return cloudRestore;
+	protected boolean isExportTypeAvailable(@NonNull ExportType exportType) {
+		return InAppPurchaseUtils.isExportTypeAvailable(app, exportType) || cloudRestore;
+	}
+
+	protected boolean isBackupAvailable() {
+		return InAppPurchaseUtils.isBackupAvailable(app) || cloudRestore;
+	}
+
+	@NonNull
+	public List<?> getItemsForType(@NonNull ExportType exportType) {
+		for (SettingsCategoryItems categoryItems : data.values()) {
+			if (categoryItems.getTypes().contains(exportType)) {
+				return categoryItems.getItemsForType(exportType);
+			}
+		}
+		return Collections.emptyList();
 	}
 }

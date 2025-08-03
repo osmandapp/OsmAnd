@@ -18,7 +18,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class VersionHistoryController extends BaseBackupTypesController {
+public class VersionHistoryController extends SwitchBackupTypesController {
 
 	private static final String PROCESS_ID = "select_types_to_manage_version_history";
 
@@ -52,7 +52,8 @@ public class VersionHistoryController extends BaseBackupTypesController {
 	@Override
 	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
 		super.onCategorySelected(exportCategory, selected);
-		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
+
+		SettingsCategoryItems categoryItems = getCategoryItems(exportCategory);
 		for (ExportType exportType : categoryItems.getTypes()) {
 			backupHelper.getVersionHistoryTypePref(exportType).set(selected);
 		}
@@ -65,7 +66,7 @@ public class VersionHistoryController extends BaseBackupTypesController {
 	}
 
 	@Override
-	public void clearDataForTypes(@NonNull List<ExportType> types) throws UserNotRegisteredException {
+	public void clearDataTypes(@NonNull List<ExportType> types) throws UserNotRegisteredException {
 		backupHelper.deleteOldFiles(types);
 	}
 

@@ -62,16 +62,12 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 		View view = inflate(R.layout.fragment_backup_types, container);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
-
 		progressBar = view.findViewById(R.id.progress_bar);
 
-		adapter = new BackupTypesAdapter(view.getContext(), controller);
-		adapter.updateSettingsItems();
-
+		adapter = controller.createUiAdapter(view.getContext());
 		ExpandableListView expandableList = view.findViewById(R.id.list);
 		expandableList.setAdapter(adapter);
 		BaseSettingsListFragment.setupListView(expandableList);
-
 		return view;
 	}
 
@@ -100,7 +96,7 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
-			controller.onResume();
+			controller.updateListeners(true);
 		}
 	}
 
@@ -111,7 +107,7 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 		if (mapActivity != null && !wasDrawerDisabled) {
 			mapActivity.enableDrawer();
 		}
-		controller.onPause();
+		controller.updateListeners(false);
 	}
 
 	@Override
@@ -135,7 +131,7 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 	public void onItemPurchased(String sku, boolean active) {
 		controller.updateData();
 		if (isResumed() && adapter != null) {
-			adapter.updateSettingsItems();
+			adapter.notifyDataSetChanged();
 		}
 	}
 

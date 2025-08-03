@@ -19,7 +19,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class BackupTypesController extends BaseBackupTypesController {
+public class BackupTypesController extends SwitchBackupTypesController {
 
 	private static final String PROCESS_ID = "select_cloud_backup_types";
 
@@ -54,10 +54,10 @@ public class BackupTypesController extends BaseBackupTypesController {
 	}
 
 	@Override
-	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
-		super.onCategorySelected(exportCategory, selected);
+	public void onCategorySelected(ExportCategory category, boolean selected) {
+		super.onCategorySelected(category, selected);
 
-		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
+		SettingsCategoryItems categoryItems = getCategoryItems(category);
 		for (ExportType exportType : categoryItems.getTypes()) {
 			backupHelper.getBackupTypePref(exportType).set(selected);
 		}
@@ -70,7 +70,7 @@ public class BackupTypesController extends BaseBackupTypesController {
 	}
 
 	@Override
-	public void clearDataForTypes(@NonNull List<ExportType> types) throws UserNotRegisteredException {
+	public void clearDataTypes(@NonNull List<ExportType> types) throws UserNotRegisteredException {
 		backupHelper.deleteAllFiles(types);
 	}
 
