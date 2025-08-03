@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -85,6 +86,19 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 			}
 		});
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
+
+		// TODO: temporally code to open new UI
+		if (controller instanceof BackupTypesController) {
+			ImageButton actionButton = toolbar.findViewById(R.id.action_button);
+			actionButton.setImageDrawable(getIcon(R.drawable.ic_action_storage));
+			actionButton.setOnClickListener(v -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					ManageCloudStorageController.showScreen(activity);
+				}
+			});
+			actionButton.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override
