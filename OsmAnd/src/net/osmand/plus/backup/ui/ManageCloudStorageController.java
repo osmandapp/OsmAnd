@@ -1,20 +1,31 @@
 package net.osmand.plus.backup.ui;
 
+import static android.graphics.Typeface.BOLD;
+import static net.osmand.plus.utils.UiUtilities.createSpannableString;
+
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.OnCompleteCallback;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ManageCloudStorageController extends BaseBackupTypesController {
@@ -44,23 +55,42 @@ public class ManageCloudStorageController extends BaseBackupTypesController {
 
 	@Override
 	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
-		showConfirmClearDialog(null, exportType);
+		String name = getString(exportType.getTitleId());
+		List<ExportType> typesToDelete = Collections.singletonList(exportType);
+		showConfirmDeleteDataDialog(name, () -> onClearTypesConfirmed(typesToDelete));
 	}
 
 	@Override
 	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
-		showConfirmClearDialog(exportCategory, null);
+		String name = getString(exportCategory.getTitleId());
+		List<ExportType> typesToDelete = new ArrayList<>(getCategoryItems(exportCategory).getTypes());
+		showConfirmDeleteDataDialog(name, () -> onClearTypesConfirmed(typesToDelete));
 	}
 
-	private void showConfirmClearDialog(@Nullable ExportCategory category,
-	                                    @Nullable ExportType exportType) {
-		// TODO: implement
-		app.showShortToastMessage((category != null ? category.name() : exportType.name()) + " deleted");
+	private void showConfirmDeleteDataDialog(@NonNull String name,
+	                                         @NonNull OnCompleteCallback callback) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			int warningColor = ColorUtilities.getColor(app, R.color.deletion_color_warning);
+			int textColor = ColorUtilities.getSecondaryTextColor(activity, isNightMode());
+
+			AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
+					.setTitle(getString(R.string.delete_data))
+					.setNegativeButton(R.string.shared_string_cancel, null)
+					.setPositiveButton(R.string.shared_string_delete, ((dialog, which) -> callback.onComplete()))
+					.setPositiveButtonTextColor(warningColor);
+
+			String description = getString(R.string.manage_storage_delete_data_dialog_summary, name);
+			SpannableString spannable = createSpannableString(description, BOLD, name);
+			UiUtilities.setSpan(spannable, new ForegroundColorSpan(textColor), description, description);
+			CustomAlert.showSimpleMessage(dialogData, spannable);
+		}
 	}
 
 	@Override
 	public void onClearTypesConfirmed(@NonNull List<ExportType> types) {
-
+		// TODO: implement
+		app.showShortToastMessage("All data removed for types: " + types);
 	}
 
 	@Nullable
