@@ -30,6 +30,7 @@ import net.osmand.plus.chooseplan.MapsPlusPlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -49,10 +50,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 
 public class DiscountHelper {
@@ -87,6 +90,12 @@ public class DiscountHelper {
 	private static final String CHOOSE_PLAN_TYPE_PRO = "osmand-pro";
 	private static final String CHOOSE_PLAN_TYPE_MAPS_PLUS = "osmand-maps-plus";
 
+	private static final String FEATURE_PRO = "pro";
+	private static final String FEATURE_MAPS = "maps";
+	private static final String FEATURE_LIVE = "live_maps";
+	private static final String FEATURE_CONTOURS = "contours";
+	private static final String FEATURE_NAUTICAL = "nautical";
+
 	public static void checkAndDisplay(MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
@@ -108,6 +117,10 @@ public class DiscountHelper {
 		pms.put("nd", String.valueOf(app.getAppInitializer().getFirstInstalledDays()));
 		pms.put("ns", String.valueOf(app.getAppInitializer().getNumberOfStarts()));
 		pms.put("lang", app.getLanguage() + "");
+		List<String> features = getFeatures(app);
+		if (!features.isEmpty()) {
+			pms.put("features", TextUtils.join(",", features));
+		}
 		try {
 			if (app.isUserAndroidIdAllowed()) {
 				pms.put("aid", app.getUserAndroidId());
@@ -221,6 +234,26 @@ public class DiscountHelper {
 		} catch (Exception e) {
 			logError("JSON parsing error: ", e);
 		}
+	}
+
+	private static List<String> getFeatures(@NonNull OsmandApplication app) {
+		List<String> res = new ArrayList<>();
+		if (InAppPurchaseUtils.isOsmAndProPurchased(app) || InAppPurchaseUtils.isPromoSubscribed(app)) {
+			res.add(FEATURE_PRO);
+		}
+		if (InAppPurchaseUtils.isMapsPlusPurchased(app) || InAppPurchaseUtils.isFullVersionPurchased(app)) {
+			res.add(FEATURE_MAPS);
+		}
+		if (InAppPurchaseUtils.isLiveUpdatesPurchased(app)) {
+			res.add(FEATURE_LIVE);
+		}
+		if (InAppPurchaseUtils.isContourLinesPurchased(app)) {
+			res.add(FEATURE_CONTOURS);
+		}
+		if (InAppPurchaseUtils.isDepthContoursPurchased(app)) {
+			res.add(FEATURE_NAUTICAL);
+		}
+		return res;
 	}
 
 	public static boolean validateUrl(OsmandApplication app, String url) {
@@ -565,6 +598,31 @@ public class DiscountHelper {
 
 	}
 
+	private static class NotPurchasedFeatureCondition extends Condition {
+
+		NotPurchasedFeatureCondition(OsmandApplication app) {
+			super(app);
+		}
+
+		@Override
+		String getId() {
+			return "not_purchased_feature";
+		}
+
+		@Override
+		boolean matches(@NonNull String value) {
+			return switch (value) {
+				case FEATURE_PRO -> !InAppPurchaseUtils.isOsmAndProPurchased(app) && !InAppPurchaseUtils.isPromoSubscribed(app);
+				case FEATURE_MAPS ->
+						!InAppPurchaseUtils.isMapsPlusPurchased(app) && !InAppPurchaseUtils.isFullVersionPurchased(app);
+				case FEATURE_LIVE -> !InAppPurchaseUtils.isLiveUpdatesPurchased(app);
+				case FEATURE_CONTOURS -> !InAppPurchaseUtils.isContourLinesPurchased(app);
+				case FEATURE_NAUTICAL -> !InAppPurchaseUtils.isDepthContoursPurchased(app);
+				default -> false;
+			};
+		}
+	}
+
 	private abstract static class InAppPurchaseCondition extends Condition {
 
 		InAppPurchases inAppPurchases;
@@ -701,6 +759,7 @@ public class DiscountHelper {
 		Conditions(OsmandApplication app) {
 			this.app = app;
 			conditions = new Condition[] {
+					new NotPurchasedFeatureCondition(app),
 					new NotPurchasedSubscriptionCondition(app),
 					new PurchasedSubscriptionCondition(app),
 					new NotPurchasedInAppPurchaseCondition(app),

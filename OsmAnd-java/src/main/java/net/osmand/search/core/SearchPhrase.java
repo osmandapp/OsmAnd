@@ -332,6 +332,10 @@ public class SearchPhrase {
 				}
 			}
 		}
+		if (ArabicNormalizer.isSpecialArabic(mainUnknownWordToSearch)) {
+			String normalized = ArabicNormalizer.normalize(mainUnknownWordToSearch);
+			mainUnknownWordToSearch = normalized == null ? mainUnknownWordToSearch : normalized;
+		}
 	}
 
 	public List<SearchWord> getWords() {

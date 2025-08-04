@@ -16,36 +16,35 @@ public class InAppPurchaseUtils {
 	public static final int TRIPLTEK_PROMO_MONTHS = 12;
 	private static final long ANDROID_AUTO_START_DATE_MS = 10L * 1000L * 60L * 60L * 24L; // 10 days
 
-
-	protected static boolean isFullVersionPurchased(@NonNull OsmandApplication app) {
+	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app) {
 		return app.getSettings().FULL_VERSION_PURCHASED.get();
 	}
 
-	protected static boolean isLiveUpdatesPurchased(@NonNull OsmandApplication app) {
+	public static boolean isLiveUpdatesPurchased(@NonNull OsmandApplication app) {
 		return app.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
-	protected static boolean isMapsPlusPurchased(@NonNull OsmandApplication app) {
+	public static boolean isMapsPlusPurchased(@NonNull OsmandApplication app) {
 		return app.getSettings().OSMAND_MAPS_PURCHASED.get();
 	}
 
-	protected static boolean isOsmAndProPurchased(@NonNull OsmandApplication app) {
+	public static boolean isOsmAndProPurchased(@NonNull OsmandApplication app) {
 		return app.getSettings().OSMAND_PRO_PURCHASED.get();
 	}
 
-	protected static boolean isContourLinesPurchased(@NonNull OsmandApplication app) {
+	public static boolean isContourLinesPurchased(@NonNull OsmandApplication app) {
 		return app.getSettings().CONTOUR_LINES_PURCHASED.get();
 	}
 
-	protected static boolean isDepthContoursPurchased(@NonNull OsmandApplication app) {
+	public static boolean isDepthContoursPurchased(@NonNull OsmandApplication app) {
 		return app.getSettings().DEPTH_CONTOURS_PURCHASED.get();
 	}
 
-	protected static boolean isPromoSubscribed(@NonNull OsmandApplication app) {
+	public static boolean isPromoSubscribed(@NonNull OsmandApplication app) {
 		return app.getSettings().BACKUP_PURCHASE_ACTIVE.get();
 	}
 
-	protected static boolean isMapperUpdatesSubscribed(@NonNull OsmandApplication app) {
+	public static boolean isMapperUpdatesSubscribed(@NonNull OsmandApplication app) {
 		return app.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.get() > System.currentTimeMillis();
 	}
 

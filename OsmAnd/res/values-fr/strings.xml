@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routing_attr_motor_type_name">Carburant utilisé</string>
+    <string name="routing_attr_motor_type_name">Énergie utilisée par le moteur</string>
     <string name="routing_attr_motor_type_description">Sélectionner le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>

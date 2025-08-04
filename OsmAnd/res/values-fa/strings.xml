@@ -4401,4 +4401,5 @@
     <string name="precipitation_widget_desc">نمایش بارش کنونی در مرکز نقشه.</string>
     <string name="send_uuid_preference_desc">از یک UUID تصادفی برای بارگیری نقشه های آفلاین از سرورهای OSMAND برای نظارت بر به‌کارگیری عادلانه منابع سرور ، پیش‌بینی الگوهای ترافیک و تولید گزارش نقشه ماهانه ناشناس استفاده می شود.</string>
     <string name="precipitation_layer">لایه بارش</string>
+    <string name="driving_region_uk">انگلستان یا مشابه آن</string>
 </resources>
