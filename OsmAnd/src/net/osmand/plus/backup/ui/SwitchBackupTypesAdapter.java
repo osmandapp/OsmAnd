@@ -8,7 +8,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -133,17 +132,6 @@ public class SwitchBackupTypesAdapter extends BackupTypesAdapter {
 			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
 			AndroidUtils.setBackground(selectableView, drawable);
 		}
-	}
-
-	private void setupChildIcon(@NonNull View view, @DrawableRes int iconRes, boolean selected) {
-		int colorRes;
-		if (selected) {
-			colorRes = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_osmand_light;
-		} else {
-			colorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
-		}
-		ImageView icon = view.findViewById(R.id.explicit_indicator);
-		icon.setImageDrawable(iconsCache.getIcon(iconRes, colorRes));
 	}
 
 	@NonNull

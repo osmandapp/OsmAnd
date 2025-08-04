@@ -4,14 +4,12 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.OsmandApplication;
+import net.osmand.OnCompleteCallback;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -22,8 +20,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
-
-import java.util.List;
 
 public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 
@@ -44,23 +40,19 @@ public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 			view = themedInflater.inflate(R.layout.backup_type_item_with_action_button, parent, false);
 		}
 		ExportCategory category = controller.getCategory(groupPosition);
+		long size = calculateExportCategorySize(category);
 
 		String name = getString(category.getTitleId());
 		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), name, name));
 
 		TextView tvSummary = view.findViewById(R.id.description);
-		tvSummary.setText(getGroupSummary(category));
+		tvSummary.setText(formatSize(size));
 
-		View actionButtonContainer = view.findViewById(R.id.action_button_container);
-		actionButtonContainer.setOnClickListener(v -> {
+		setupDeleteButton(view, size > 0, () -> {
 			controller.onCategorySelected(category, true);
-			notifyDataSetChanged(); // TODO we may not need this
+			notifyDataSetChanged();
 		});
-
-		ImageButton actionButton = view.findViewById(R.id.action_button);
-		actionButton.setImageDrawable(iconsCache.getPaintedIcon(R.drawable.ic_action_delete_dark, primaryIconColor));
-		// TODO: setup action button
 
 		setupSelectableBackground(view);
 		adjustIndicator(app, groupPosition, isExpanded, view, !nightMode);
@@ -81,23 +73,20 @@ public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 		SettingsCategoryItems categoryItems = controller.getCategoryItems(category);
 
 		ExportType exportType = categoryItems.getTypes().get(childPosition);
-		List<?> items = categoryItems.getItemsForType(exportType);
+		long size = calculateExportTypeSize(exportType);
 
 		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setText(exportType.getTitleId());
 
 		TextView tvSummary = view.findViewById(R.id.description);
-		tvSummary.setText(getChildSummary(app, items));
+		tvSummary.setText(formatSize(size));
 
-		View actionButtonContainer = view.findViewById(R.id.action_button_container);
-		actionButtonContainer.setOnClickListener(v -> {
+		boolean enabled = size > 0;
+		setupChildIcon(view, exportType.getIconId(), enabled);
+		setupDeleteButton(view, enabled, () -> {
 			controller.onTypeSelected(exportType, true);
-			notifyDataSetChanged(); // TODO we may not need this
+			notifyDataSetChanged();
 		});
-
-		ImageButton actionButton = view.findViewById(R.id.action_button);
-		actionButton.setImageDrawable(iconsCache.getPaintedIcon(R.drawable.ic_action_delete_dark, primaryIconColor));
-		// TODO: setup action button
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.pro_icon), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), false);
@@ -116,37 +105,36 @@ public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 		}
 	}
 
-	private void setupChildIcon(@NonNull View view, @DrawableRes int iconRes, boolean selected) {
-		int colorRes;
-		if (selected) {
-			colorRes = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_osmand_light;
-		} else {
-			colorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
-		}
-		ImageView icon = view.findViewById(R.id.explicit_indicator);
-		icon.setImageDrawable(iconsCache.getIcon(iconRes, colorRes));
+	private void setupDeleteButton(@NonNull View view, boolean enabled,
+	                               @NonNull OnCompleteCallback callback) {
+		View container = view.findViewById(R.id.action_button_container);
+		container.setOnClickListener(enabled ? v -> callback.onComplete() : null);
+
+		ImageView ivIcon = view.findViewById(R.id.action_button);
+		int color = enabled ? primaryIconColor : secondaryIconColor;
+		ivIcon.setImageDrawable(iconsCache.getPaintedIcon(R.drawable.ic_action_delete_dark, color));
 	}
 
-	@NonNull
-	private String getGroupSummary(@NonNull ExportCategory category) {
-		long itemsSize = 0;
+	private long calculateExportCategorySize(@NonNull ExportCategory category) {
+		long size = 0;
 		SettingsCategoryItems items = controller.getCategoryItems(category);
 		for (ExportType exportType : items.getTypes()) {
-			itemsSize += ExportSettingsAdapter.calculateItemsSize(items.getItemsForType(exportType));
+			size += ExportSettingsAdapter.calculateItemsSize(items.getItemsForType(exportType));
 		}
-		return itemsSize == 0
-				? getString(R.string.shared_string_none)
-				: AndroidUtils.formatSize(app, itemsSize);
+		return size;
 	}
 
-	@NonNull
-	public String getChildSummary(@NonNull OsmandApplication app, @NonNull List<?> items) {
-		long itemsSize = 0;
-		for (Object object : items) {
-			itemsSize += getItemSize(object);
+	private long calculateExportTypeSize(@NonNull ExportType exportType) {
+		long size = 0;
+		for (Object object : controller.getItemsForType(exportType)) {
+			size += getItemSize(object);
 		}
-		return itemsSize == 0
+		return size;
+	}
+
+	private String formatSize(long size) {
+		return size == 0
 				? getString(R.string.shared_string_none)
-				: AndroidUtils.formatSize(app, itemsSize);
+				: AndroidUtils.formatSize(app, size);
 	}
 }

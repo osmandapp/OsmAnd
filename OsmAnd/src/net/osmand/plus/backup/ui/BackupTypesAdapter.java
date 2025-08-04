@@ -2,11 +2,15 @@ package net.osmand.plus.backup.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -53,6 +57,17 @@ public abstract class BackupTypesAdapter extends OsmandBaseExpandableListAdapter
 			}
 		}
 		return 0;
+	}
+
+	protected void setupChildIcon(@NonNull View view, @DrawableRes int iconRes, boolean selected) {
+		int colorRes;
+		if (selected) {
+			colorRes = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_osmand_light;
+		} else {
+			colorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
+		}
+		ImageView icon = view.findViewById(R.id.explicit_indicator);
+		icon.setImageDrawable(iconsCache.getIcon(iconRes, colorRes));
 	}
 
 	@Override
