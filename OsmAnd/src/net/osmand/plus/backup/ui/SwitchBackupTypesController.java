@@ -62,42 +62,52 @@ public abstract class SwitchBackupTypesController extends BaseBackupTypesControl
 
 	@Override
 	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
-		boolean hasItemsToDelete = false;
-		SettingsCategoryItems categoryItems = data.get(exportCategory);
+		SettingsCategoryItems categoryItems = getCategoryItems(exportCategory);
 		List<ExportType> exportTypes = categoryItems.getTypes();
-		for (ExportType exportType : exportTypes) {
-			if (isExportTypeAvailable(exportType)) {
-				List<?> items = getItemsForType(exportType);
-				hasItemsToDelete |= !Algorithms.isEmpty(items);
-				selectedItemsMap.put(exportType, selected ? items : null);
-			}
-		}
-		if (!selected && hasItemsToDelete) {
-			showClearTypesBottomSheet(exportTypes);
-		}
+		applyTypesSelection(exportTypes, selected);
 	}
 
 	@Override
 	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
 		if (isExportTypeAvailable(exportType)) {
-			List<?> items = getItemsForType(exportType);
-			selectedItemsMap.put(exportType, selected ? items : null);
-			if (!selected && !Algorithms.isEmpty(items)) {
-				showClearTypesBottomSheet(Collections.singletonList(exportType));
-			}
+			applyTypesSelection(Collections.singletonList(exportType), selected);
 		} else {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				OsmAndProPlanFragment.showInstance(activity);
-			}
+			showProPlanFragment();
 		}
 	}
 
-	// TODO: delete
-	protected void showClearTypesBottomSheet(List<ExportType> types) {
+	protected void applyTypesSelection(@NonNull List<ExportType> exportTypes, boolean selected) {
+		boolean hasItems = false;
+		for (ExportType exportType : exportTypes) {
+			if (isExportTypeAvailable(exportType)) {
+				List<?> items = getItemsForType(exportType);
+				selectedItemsMap.put(exportType, selected ? items : null);
+				applyTypePreference(exportType, selected);
+				hasItems |= !Algorithms.isEmpty(items);
+			}
+		}
+		if (!selected && hasItems && shouldProposeToClearData()) {
+			showClearTypesBottomSheet(exportTypes);
+		}
+	}
+
+	protected abstract void applyTypePreference(@NonNull ExportType exportType, boolean selected);
+
+	protected boolean shouldProposeToClearData() {
+		return false;
+	}
+
+	protected void showClearTypesBottomSheet(@NonNull List<ExportType> types) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			ClearTypesBottomSheet.showInstance(activity, this, types);
+		}
+	}
+
+	protected void showProPlanFragment() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			OsmAndProPlanFragment.showInstance(activity);
 		}
 	}
 

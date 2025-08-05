@@ -10,9 +10,7 @@ import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -50,19 +48,13 @@ public class VersionHistoryController extends SwitchBackupTypesController {
 	}
 
 	@Override
-	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
-		super.onCategorySelected(exportCategory, selected);
-
-		SettingsCategoryItems categoryItems = getCategoryItems(exportCategory);
-		for (ExportType exportType : categoryItems.getTypes()) {
-			backupHelper.getVersionHistoryTypePref(exportType).set(selected);
-		}
+	protected void applyTypePreference(@NonNull ExportType exportType, boolean selected) {
+		backupHelper.getVersionHistoryTypePref(exportType).set(selected);
 	}
 
 	@Override
-	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
-		super.onTypeSelected(exportType, selected);
-		backupHelper.getVersionHistoryTypePref(exportType).set(selected);
+	protected boolean shouldProposeToClearData() {
+		return true;
 	}
 
 	@Override

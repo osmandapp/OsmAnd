@@ -54,18 +54,7 @@ public class BackupTypesController extends SwitchBackupTypesController {
 	}
 
 	@Override
-	public void onCategorySelected(ExportCategory category, boolean selected) {
-		super.onCategorySelected(category, selected);
-
-		SettingsCategoryItems categoryItems = getCategoryItems(category);
-		for (ExportType exportType : categoryItems.getTypes()) {
-			backupHelper.getBackupTypePref(exportType).set(selected);
-		}
-	}
-
-	@Override
-	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
-		super.onTypeSelected(exportType, selected);
+	protected void applyTypePreference(@NonNull ExportType exportType, boolean selected) {
 		backupHelper.getBackupTypePref(exportType).set(selected);
 	}
 
