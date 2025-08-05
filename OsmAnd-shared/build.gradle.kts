@@ -55,6 +55,7 @@ kotlin {
 
 	sourceSets {
 		commonMain.dependencies {
+			implementation("io.github.pdvrieze.xmlutil:serialization:0.91.2")
 			implementation("org.jetbrains.kotlin:kotlin-stdlib")
 			implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
 			implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")

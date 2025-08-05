@@ -11,6 +11,7 @@ import okio.Source
 import okio.source
 import java.io.IOException
 import java.io.StringWriter
+import java.nio.file.Files
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 import javax.xml.transform.TransformerException
@@ -18,6 +19,9 @@ import javax.xml.transform.TransformerFactory
 import javax.xml.transform.TransformerFactoryConfigurationError
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
+import kotlin.io.path.Path
+import kotlin.io.path.readText
+import kotlin.io.path.writeText
 
 actual object ImportHelper {
 	private val LOG = LoggerFactory.getLogger(this::class.simpleName!!)
@@ -55,4 +59,8 @@ actual object ImportHelper {
 		}
 		return errorImport("Archive doesn't have GPX/KLM files")
 	}
+	actual fun readFileContent(filePath: String): String = Path(filePath).readText()
+	actual fun writeFileContent(filePath: String, content: String) = Path(filePath).writeText(content)
+	actual fun fileExists(filePath: String): Boolean = Files.exists(Path(filePath))
+	actual fun printError(message: String) = System.err.println(message)
 }

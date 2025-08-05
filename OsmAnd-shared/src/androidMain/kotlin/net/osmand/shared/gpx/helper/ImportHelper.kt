@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx.helper
 
+import android.util.Log
 import net.osmand.shared.IndexConstants
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxUtilities.loadGpxFile
@@ -9,6 +10,7 @@ import net.osmand.shared.io.SourceInputStream
 import net.osmand.shared.util.LoggerFactory
 import okio.Source
 import okio.source
+import java.io.File
 import java.io.IOException
 import java.io.StringWriter
 import java.util.zip.ZipEntry
@@ -55,5 +57,12 @@ actual object ImportHelper {
 			}
 		}
 		return errorImport("Archive doesn't have GPX/KLM files")
+	}
+
+	actual fun readFileContent(filePath: String): String = File(filePath).readText()
+	actual fun writeFileContent(filePath: String, content: String) = File(filePath).writeText(content)
+	actual fun fileExists(filePath: String): Boolean = File(filePath).exists()
+	actual fun printError(message: String) {
+		Log.e("KmlGpxConverter", message)
 	}
 }
