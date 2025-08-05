@@ -564,6 +564,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		importHelper.setUiActivity(this);
+		app.getLocationProvider().ensureLatestLocation();
 
 		long time = System.currentTimeMillis();
 		FragmentManager fragmentManager = getSupportFragmentManager();
