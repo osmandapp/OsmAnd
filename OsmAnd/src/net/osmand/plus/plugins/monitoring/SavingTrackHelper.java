@@ -580,7 +580,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
 		try {
 			OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-			if (settings.SAVE_TRACK_PRECISION.get() == 0) {
+			if (plugin.SAVE_LOCATION_PROVIDER_TO_GPX.get()) {
 				json.put("provider", location.getProvider());
 			}
 			boolean writeBearing = plugin != null && plugin.SAVE_BEARING_TO_GPX.get();

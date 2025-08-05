@@ -81,6 +81,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
+	public final OsmandPreference<Boolean> SAVE_LOCATION_PROVIDER_TO_GPX;
 	public final OsmandPreference<Boolean> SHOW_PRIMITIVES_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
@@ -112,6 +113,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
 		SAVE_BEARING_TO_GPX = registerBooleanPreference("save_bearing_to_gpx", false).makeGlobal().makeShared().cache();
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
+		SAVE_LOCATION_PROVIDER_TO_GPX = registerBooleanPreference("save_location_provider_to_gpx", false).makeGlobal().makeShared().cache();
 		SHOW_PRIMITIVES_DEBUG_INFO = registerBooleanPreference("show_primitives_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
 
