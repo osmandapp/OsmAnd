@@ -5740,7 +5740,7 @@
     <string name="show_symbols_debug_info">Prikaži simbol informacije o otklanjanju grešaka</string>
     <string name="deactivated_map">Deaktivirana mapa</string>
     <string name="suggest_activate_map_msg">%1$s mapa je deaktivirana,\naktivirajte da biste videli ovu oblast.</string>
-    <string name="unit_of_temperature_description">Izabrane jedinice će se primenjivati na sve podatke vezane za temperaturu u trenutnom profilu.</string>
+    <string name="unit_of_temperature_description">Izabrane jedinice će biti primenjene na sve podatke vezane za temperaturu u trenutnom profilu.</string>
     <string name="hmd_promo_years">HMD promocija %1$s godišnje</string>
     <string name="hmd_promo_description_years">Besplatan pristup funkcijama uključujući neograničeno preuzimanja mapa, 3D teren i još mnogo toga za %1$s godišnje</string>
     <string name="uphill_downhill_split">Uzbrdo/nizbrdo</string>
