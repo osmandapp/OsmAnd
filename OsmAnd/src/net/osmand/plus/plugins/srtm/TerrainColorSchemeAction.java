@@ -259,7 +259,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected String getTitle(List<String> filters) {
+	protected String getTitle(List<String> filters, @NonNull Context ctx) {
 		if (filters.isEmpty()) return "";
 
 		String translatedFirstItem = TerrainMode.getByKey(filters.get(0)).getDescription();

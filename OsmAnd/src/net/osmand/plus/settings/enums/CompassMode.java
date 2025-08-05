@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.enums;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -12,41 +14,51 @@ public enum CompassMode {
 	MANUALLY_ROTATED(
 			OsmandSettings.ROTATE_MAP_MANUAL,
 			R.string.rotate_map_manual_opt,
-			new ThemedIconId(R.drawable.ic_compass_manual, R.drawable.ic_compass_manual_white)
+			new ThemedIconId(R.drawable.ic_compass_manual, R.drawable.ic_compass_manual_white),
+			"manually_rotated"
 	),
 
 	MOVEMENT_DIRECTION(
 			OsmandSettings.ROTATE_MAP_BEARING,
 			R.string.rotate_map_bearing_opt,
-			new ThemedIconId(R.drawable.ic_compass_bearing, R.drawable.ic_compass_bearing_white)
+			new ThemedIconId(R.drawable.ic_compass_bearing, R.drawable.ic_compass_bearing_white),
+			"movement_direction"
 	),
 
 	COMPASS_DIRECTION(
 			OsmandSettings.ROTATE_MAP_COMPASS,
 			R.string.rotate_map_compass_opt,
-			new ThemedIconId(R.drawable.ic_compass, R.drawable.ic_compass_white)
+			new ThemedIconId(R.drawable.ic_compass, R.drawable.ic_compass_white),
+			"compass_direction"
 	),
 
 	NORTH_IS_UP(
 			OsmandSettings.ROTATE_MAP_NONE,
 			R.string.rotate_map_north_opt,
-			new ThemedIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white)
+			new ThemedIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white),
+			"north_is_up"
 	);
 
 	@StringRes
 	private final int titleId;
 	private final ThemedIconId themedIconId;
 	private final int value;
+	private final String key;
 
-	CompassMode(int value, @StringRes int titleId, @NonNull ThemedIconId themedIconId) {
+	CompassMode(int value, @StringRes int titleId, @NonNull ThemedIconId themedIconId, @NonNull String key) {
 		this.value = value;
 		this.titleId = titleId;
 		this.themedIconId = themedIconId;
+		this.key = key;
 	}
 
 	@StringRes
 	public int getTitleId() {
 		return titleId;
+	}
+
+	public String getTitle(@NonNull Context ctx) {
+		return ctx.getString(titleId);
 	}
 
 	@NonNull
@@ -61,6 +73,11 @@ public enum CompassMode {
 
 	public int getValue() {
 		return value;
+	}
+
+	@NonNull
+	public String getKey() {
+		return key;
 	}
 
 	@NonNull
