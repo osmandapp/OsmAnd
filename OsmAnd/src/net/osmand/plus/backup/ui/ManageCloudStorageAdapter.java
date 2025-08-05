@@ -83,10 +83,13 @@ public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 
 		boolean enabled = size > 0;
 		setupChildIcon(view, exportType.getIconId(), enabled);
-		setupDeleteButton(view, enabled, () -> {
+
+		OnCompleteCallback callback = () -> {
 			controller.onTypeSelected(exportType, true);
 			notifyDataSetChanged();
-		});
+		};
+		setupDeleteButton(view, enabled, callback);
+		view.setOnClickListener(enabled ? v -> callback.onComplete() : null);
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.pro_icon), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), false);
