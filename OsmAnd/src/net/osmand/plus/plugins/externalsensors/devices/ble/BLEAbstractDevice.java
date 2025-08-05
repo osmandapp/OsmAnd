@@ -230,7 +230,6 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		public void onCharacteristicChanged(BluetoothGatt gatt,
 		                                    BluetoothGattCharacteristic characteristic) {
 			callbackHandler.post(() -> {
-				LOG.debug("got data from ble " + new String(characteristic.getValue()));
 				for (BLEAbstractSensor sensor : sensors) {
 					sensor.onCharacteristicChanged(gatt, characteristic);
 				}

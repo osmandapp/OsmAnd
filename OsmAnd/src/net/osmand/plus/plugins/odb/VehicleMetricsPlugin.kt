@@ -1044,10 +1044,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		}
 	}
 
-//	fun getPairedDevices(): List<BLEOBDDevice> {
-//		return devicesHelper.getPairedDevices().filterIsInstance<BLEOBDDevice>().map { it }
-//	}
-
 	fun getBLEOBDDeviceById(deviceId: String): BLEOBDDevice? {
 		val device = devicesHelper.getAnyDevice(deviceId)
 		return if (device is BLEOBDDevice) device else null

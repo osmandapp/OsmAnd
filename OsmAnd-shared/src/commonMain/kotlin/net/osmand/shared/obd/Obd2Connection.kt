@@ -258,7 +258,7 @@ class Obd2Connection(
 
 	companion object {
 		private val initCommands =
-			arrayOf(/*"ATD", */"ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
+			arrayOf("ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
 
 		fun isInitCommand(command: String): Boolean {
 			return initCommands.contains(command)

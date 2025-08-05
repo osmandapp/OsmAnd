@@ -91,7 +91,6 @@ class OBDDispatcher(val debug: Boolean = false) {
 				}
 				coroutineContext.ensureActive()
 				OBDDataComputer.acceptValue(sensorDataCache)
-//				delay(100)
 			}
 		} finally {
 			connection.finish()
