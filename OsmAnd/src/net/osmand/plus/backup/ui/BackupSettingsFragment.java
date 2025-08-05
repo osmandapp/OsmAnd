@@ -136,7 +136,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				BackupTypesFragment.showInstance(activity.getSupportFragmentManager());
+				BackupTypesController.showScreen(activity);
 			}
 		});
 		setupSelectableBackground(container);
@@ -188,7 +188,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				VersionHistoryFragment.showInstance(activity.getSupportFragmentManager());
+				VersionHistoryController.showScreen(activity);
 			}
 		});
 		setupSelectableBackground(container);
