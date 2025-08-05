@@ -26,6 +26,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -277,7 +278,7 @@ public class TerrainLayer extends MapTileLayer {
 				return rs;
 			}
 		};
-		executeTaskInBackground(task);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	private SQLiteTileSource createTileSource(@NonNull OsmandApplication app) {

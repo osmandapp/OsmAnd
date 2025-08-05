@@ -517,7 +517,7 @@ object OsmandLocationUtils {
 		if (!gpxFile.isEmpty) {
 			val dir = File(app.getExternalFilesDir(null), TRACKS_DIR)
 			val task = SaveGPXTrackToFileTask(listener, gpxFile, dir)
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+			OsmAndTaskManager.executeTask(task)
 		}
 	}
 

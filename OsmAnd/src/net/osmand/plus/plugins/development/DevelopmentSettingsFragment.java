@@ -6,7 +6,6 @@ import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimula
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Debug;
 
@@ -16,13 +15,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisLoadTask;
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
-import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -396,7 +395,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				Uri uri = data.getData();
 				if (uri != null) {
 					AisLoadTask task = new AisLoadTask(app, uri);
-					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					OsmAndTaskManager.executeTask(task);
 				}
 			}
 		} else {
@@ -489,7 +488,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		if (!NativeOsmandLibrary.isLoaded() && activity != null) {
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 			NativeLibraryLoadTask nativeLibraryLoadTask = new NativeLibraryLoadTask(activity, storage);
-			nativeLibraryLoadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(nativeLibraryLoadTask);
 		}
 	}
 }
