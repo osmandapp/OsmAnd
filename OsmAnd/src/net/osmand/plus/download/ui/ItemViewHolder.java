@@ -309,18 +309,24 @@ public class ItemViewHolder {
 		tvDesc.setText(fullDescription);
 	}
 
-	private void setupCommonDescription(@NonNull DownloadItem downloadItem) {
+	private void setupCommonDescription(@NonNull DownloadItem item) {
+		String size = item.getSizeDescription(context);
+		String date = item.getDate(dateFormat, showRemoteDate);
+		String additional = item.getAdditionalDescription(context);
 		String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
-		String size = downloadItem.getSizeDescription(context);
-		String addDesc = downloadItem.getAdditionalDescription(context);
-		if (addDesc != null) {
-			size += " " + addDesc;
-		}
-		String date = downloadItem.getDate(dateFormat, showRemoteDate);
-		String fullDescription = String.format(pattern, size, date);
+
+		String fullDescription;
 		if (showTypeInDesc) {
-			String type = downloadItem.getType().getString(context);
-			fullDescription = String.format(pattern, type, fullDescription);
+			String type = item.getType().getString(context);
+			if (additional != null) {
+				type += " " + additional;
+			}
+			fullDescription = String.format(pattern, type, String.format(pattern, size, date));
+		} else {
+			if (additional != null) {
+				size += " " + additional;
+			}
+			fullDescription = String.format(pattern, size, date);
 		}
 		tvDesc.setText(fullDescription);
 	}
