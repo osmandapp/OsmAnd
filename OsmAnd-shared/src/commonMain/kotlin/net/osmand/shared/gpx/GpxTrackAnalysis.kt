@@ -123,6 +123,8 @@ class GpxTrackAnalysis {
 		get() = getGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE) as Int
 		set(value) = setGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE, value)
 
+	var minSensorHr: Int = 0
+
 	var points: Int
 		get() = getGpxParameter(GpxParameter.POINTS) as Int
 		set(value) = setGpxParameter(GpxParameter.POINTS, value)
@@ -441,6 +443,11 @@ class GpxTrackAnalysis {
 
 				if (attribute.heartRate > 0) {
 					maxSensorHr = maxOf(attribute.heartRate.toInt(), maxSensorHr)
+					minSensorHr = if (minSensorHr == 0) {
+						attribute.heartRate.toInt()
+					} else {
+						minOf(attribute.heartRate.toInt(), minSensorHr)
+					}
 					sensorHrCount++
 					totalSensorHrSum += attribute.heartRate
 				}
