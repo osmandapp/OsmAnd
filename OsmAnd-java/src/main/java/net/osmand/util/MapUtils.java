@@ -931,4 +931,23 @@ public class MapUtils {
 		bbox.top = Math.max(-90.0, Math.min(90.0, bbox.top));
 		bbox.bottom = Math.max(-90.0, Math.min(90.0, bbox.bottom));
 	}
+
+	public static QuadRect roundBoundingBox31(QuadRect bbox31, int zoom)
+	{
+		int tilesCount = 1 << (31 - zoom);
+		int roundingMask = tilesCount - 1;
+		QuadRect roundedBBox31 = new QuadRect();
+		roundedBBox31.top = ((int) bbox31.top) & ~roundingMask;
+		roundedBBox31.left = ((int) bbox31.left) & ~roundingMask;
+		roundedBBox31.bottom = ((int) bbox31.bottom) & ~roundingMask;
+		if ((((int) bbox31.bottom) & roundingMask) != 0)
+			roundedBBox31.bottom += tilesCount;
+		roundedBBox31.bottom -= 1;
+		roundedBBox31.right = ((int) bbox31.right) & ~roundingMask;
+		if ((((int) bbox31.right) & roundingMask) != 0)
+			roundedBBox31.right += tilesCount;
+		roundedBBox31.right -= 1;
+
+		return roundedBBox31;
+	}
 }

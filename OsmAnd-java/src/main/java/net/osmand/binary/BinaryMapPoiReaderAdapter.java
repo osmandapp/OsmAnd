@@ -42,6 +42,7 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int BASE_POI_ZOOM = 31 - BASE_POI_SHIFT;// 24 zoom
 	private static final int FINAL_POI_ZOOM = 31 - FINAL_POI_SHIFT;// 26 zoom
 
+	private static final int MAX_POI_NAME_INDEX_ZOOM = 16;
 
 	public static class PoiSubType {
 		public boolean text;
@@ -411,6 +412,15 @@ public class BinaryMapPoiReaderAdapter {
 		List<TIntArrayList> listOffsets = null;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 		long offset = 0;
+		SearchRequest<Amenity> overlapedReq = new SearchRequest<>();
+		QuadRect overlappedBBox = MapUtils.roundBoundingBox31(new QuadRect(req.left, req.top, req.right, req.bottom), MAX_POI_NAME_INDEX_ZOOM);
+		// max POI name index zoom of box equal 16
+		overlapedReq.left = (int) overlappedBBox.left;
+		overlapedReq.top = (int) overlappedBBox.top;
+		overlapedReq.right = (int) overlappedBBox.right;
+		overlapedReq.bottom = (int) overlappedBBox.bottom;
+		overlapedReq.x = req.x;
+		overlapedReq.y = req.y;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -442,7 +452,7 @@ public class BinaryMapPoiReaderAdapter {
 							codedIS.seek(dataOffsets.get(i) + offset);
 							int len = codedIS.readRawVarint32();
 							long oldLim = codedIS.pushLimitLong((long) len);
-							readPoiNameIndexData(offsetMap, req, region, nameIndexCoordinates);
+							readPoiNameIndexData(offsetMap, overlapedReq, region, nameIndexCoordinates);
 							codedIS.popLimit(oldLim);
 							if (req.isCancelled()) {
 								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
