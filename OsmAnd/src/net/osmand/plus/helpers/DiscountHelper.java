@@ -21,6 +21,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -127,7 +128,7 @@ public class DiscountHelper {
 			}
 		} catch (Exception ignore) {
 		}
-		new AsyncTask<Void, Void, String>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... params) {
@@ -146,7 +147,7 @@ public class DiscountHelper {
 					processDiscountResponse(response, mapActivity);
 				}
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 	@SuppressLint("SimpleDateFormat")

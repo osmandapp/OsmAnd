@@ -42,12 +42,7 @@ import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.plus.AppInitEvents;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
+import net.osmand.plus.*;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.views.CarSurfaceView;
@@ -1342,7 +1337,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void updateMapSettings(boolean updateMapRenderer, @Nullable CallbackWithObject<Boolean> callback) {
 		app.getAppInitializer().addOnFinishListener(init -> {
 			UpdateRendererAsyncTask task = new UpdateRendererAsyncTask(app, updateMapRenderer, callback);
-			task.executeOnExecutor(singleThreadExecutor);
+			OsmAndTaskManager.executeTask(task, singleThreadExecutor);
 		});
 	}
 

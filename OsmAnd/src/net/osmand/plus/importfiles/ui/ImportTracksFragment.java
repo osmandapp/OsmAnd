@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
@@ -296,12 +297,12 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		File folder = new File(selectedFolder);
 		SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveTracksTask = null);
 		saveTracksTask = new SaveTracksTask(app, new ArrayList<>(selectedTracks), folder, saveGpxListener);
-		saveTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(saveTracksTask);
 	}
 
 	private void collectTracks() {
 		collectTracksTask = new CollectTracksTask(app, gpxFile, fileName, getCollectTracksListener());
-		collectTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(collectTracksTask);
 	}
 
 	@NonNull
@@ -325,7 +326,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			File destinationDir = new File(selectedFolder);
 			SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveAsOneTrackTask = null);
 			saveAsOneTrackTask = new SaveGpxAsyncTask(app, gpxFile, destinationDir, fileName, saveGpxListener, false);
-			saveAsOneTrackTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(saveAsOneTrackTask);
 		}
 	}
 
