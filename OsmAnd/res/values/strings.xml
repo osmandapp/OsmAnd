@@ -14,6 +14,8 @@
         • Work in progress...
     </string>
 
+    <string name="ble_prefix_pattern">%s • </string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Response</string>
     <string name="deleting_history">Deleting history…</string>
 	<string name="deleting">Deleting…</string>

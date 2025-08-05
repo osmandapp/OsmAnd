@@ -173,16 +173,8 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 					usedDevices.add(BTDeviceInfo("Simulation Device", ""))
 				}
 				val disconnectedDevices =
-					usedDevices.filter { it.address != connectedDevice?.address }
+					usedDevices.filter { !(it.address == connectedDevice?.address && it.isBLE == connectedDevice?.isBLE) }
 						.toMutableList()
-				//todo obd check devices from vehicle plugin
-				val devices: List<BLEOBDDevice> = vehicleMetricsPlugin.getPairedDevices()
-				for (device in devices) {
-					if (device.deviceType == DeviceType.BLE_OBD && device.isConnected) {
-						connectedDevice = BTDeviceInfo(device.name, "", true)
-						connectedDevices.add(connectedDevice)
-					}
-				}
 				if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
 					emptyView?.visibility = View.VISIBLE
 					contentView?.visibility = View.GONE
@@ -231,11 +223,11 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		ForgetOBDDeviceDialog.showInstance(
 			requireActivity().supportFragmentManager,
 			this,
-			device.address)
+			device.address, device.isBLE)
 	}
 
-	override fun onForgetSensorConfirmed(deviceId: String) {
-		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId)
+	override fun onForgetSensorConfirmed(deviceId: String, isBLE: Boolean) {
+		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId, isBLE)
 		updatePairedSensorsList()
 	}
 

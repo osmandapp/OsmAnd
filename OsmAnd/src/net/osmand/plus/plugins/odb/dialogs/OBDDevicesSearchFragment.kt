@@ -113,7 +113,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 			val usedDevices = plugin.getUsedOBDDevicesList()
 			pairedDevicesAdapter.items = plugin.getPairedOBDDevicesList(requireActivity())
 				.filterNot { pairedDevice ->
-					usedDevices.any { usedDevice -> usedDevice.address == pairedDevice.address }
+					usedDevices.any { usedDevice -> usedDevice.address == pairedDevice.address && usedDevice.isBLE == pairedDevice.isBLE}
 				}
 			updateCurrentStateView()
 		}

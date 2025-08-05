@@ -91,7 +91,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.HEART_RATE.getPreferenceId(), "").makeProfile().cache();
 		TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.TEMPERATURE.getPreferenceId(), "").makeProfile().cache();
 
-		devicesHelper = new DevicesHelper(app, this, deviceSettingsPreferenceProvider);
+		devicesHelper = new ExternalSensorsDeviceHelper(this, app, deviceSettingsPreferenceProvider);
 		settings = app.getSettings();
 	}
 
@@ -144,7 +144,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	@NonNull
 	public List<AbstractDevice<?>> getDevices() {
-		return devicesHelper.getDevices();
+		return devicesHelper.getAllDevices();
 	}
 
 	@NonNull
@@ -221,7 +221,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 			AbstractDevice<?> deviceById = devicesHelper.getAnyDevice(deviceId);
 			ArrayList<AbstractDevice<?>> devices = new ArrayList<>();
 			if(anyConnected) {
-				devices.addAll(devicesHelper.getDevices());
+				devices.addAll(devicesHelper.getAllDevices());
 			} else if(deviceById != null) {
 				devices.add(deviceById);
 			}

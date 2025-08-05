@@ -61,7 +61,6 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 	}
 
 	fun resetData() {
-		log1.debug("resetData")
 		lastOBDData.clear()
 	}
 
@@ -70,9 +69,6 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 		characteristic: BluetoothGattCharacteristic,
 		status: Int) {
 		//"characteristic.value" is deprecated but should be used inside onCharacteristicRead callback
-		log1.debug(
-			"OBD onCharacteristicRead " + characteristic.uuid + ". data " + String(
-				characteristic.value))
 		if (status == BluetoothGatt.GATT_SUCCESS) {
 			if (requestedCharacteristicUUID == characteristic.uuid) {
 				extrudeOBDData(characteristic.value)
@@ -85,9 +81,6 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 		characteristic: BluetoothGattCharacteristic) {
 		val charaUUID = characteristic.uuid
 		//"characteristic.value" is deprecated but should be used inside onCharacteristicChanged callback
-		log1.debug(
-			"OBD onCharacteristicChanged " + characteristic.uuid + ". data " + String(
-				characteristic.value))
 		if (requestedCharacteristicUUID == charaUUID) {
 			extrudeOBDData(characteristic.value)
 		}
@@ -95,7 +88,6 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 
 	private fun extrudeOBDData(data: ByteArray?) {
 		if (data != null) {
-			log1.debug("add last ${String(data)}")
 			lastOBDData.add(OBDData(System.currentTimeMillis(), String(data)))
 		}
 	}
@@ -107,8 +99,6 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 	}
 
 	companion object {
-		private val log1: Log = PlatformUtil.getLog("Corwin")
-		private val log: Log = PlatformUtil.getLog("Obd2Connection")
-//		private val log: Log = PlatformUtil.getLog("OBD2")
+		private val log: Log = PlatformUtil.getLog("OBD2")
 	}
 }

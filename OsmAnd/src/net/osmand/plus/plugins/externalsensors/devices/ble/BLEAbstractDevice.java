@@ -45,7 +45,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor> {
 
 	protected static final Log LOG = PlatformUtil.getLog(BLEAbstractDevice.class);
-	protected static final Log LOG1 = PlatformUtil.getLog("Corwin");
 
 	protected BluetoothAdapter bluetoothAdapter;
 	protected BluetoothDevice device;
@@ -162,6 +161,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				setCurrentState(DeviceConnectionState.DISCONNECTED);
 			}
 		} else {
+			LOG.debug("GATT disconnected");
 			fireDeviceDisconnectedEvent();
 			gatt.close();
 			bluetoothGatt = null;
@@ -248,7 +248,6 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		@Override
 		public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
 			super.onDescriptorWrite(gatt, descriptor, status);
-			LOG1.debug("onDescriptorWrite");
 			completedCommand();
 		}
 	};
@@ -394,7 +393,6 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	}
 
 	private void completedCommand() {
-		LOG1.debug("completedCommand");
 		commandQueueBusy = false;
 		commandQueue.poll();
 		nextCommand();

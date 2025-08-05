@@ -22,10 +22,8 @@ import kotlin.math.min
 
 class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 	BLEAbstractDevice(bluetoothAdapter, deviceId), Source, Sink {
-	private val log1 = PlatformUtil.getLog("Corwin")
-	private val log = PlatformUtil.getLog("Obd2Connection")
+	private val log = PlatformUtil.getLog("OBD2")
 
-	//	private val log = PlatformUtil.getLog("OBD2")
 	var response: String = ""
 
 	private var bufferToRead: String? = null
@@ -85,11 +83,9 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 						)
 						result = sendResult == BluetoothStatusCodes.SUCCESS
 						errorMessage = "Send result code {$sendResult}"
-						log.debug("Відправлено команду: $command; result $sendResult")
 					} else {
 						result = gatt.writeCharacteristic(it)
 						errorMessage = "writeCharacteristic failed"
-						log.debug("Відправлено команду: $command; result $result")
 					}
 					val writeDuration = System.currentTimeMillis() - startTime
 					if (writeDuration > 10000) {
@@ -111,11 +107,8 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 
 	override fun write(source: Buffer, byteCount: Long) {
 		val fullCommand = source.readUtf8()
-		log1.debug("try sendCommand $fullCommand")
 		if (writeCharacteristic != null) {
-			log.debug("write tryReset")
 			bleReadSensor.resetData()
-			log1.debug("write sendCommand $fullCommand")
 			sendCommand(fullCommand)
 		}
 	}

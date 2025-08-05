@@ -69,13 +69,20 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 			val deviceAddress = getString(DEVICE_ADDRESS_KEY) ?: ""
 			val isBLE = getBoolean(DEVICE_IS_BLE_KEY)
 			device = if (connectedDevice != null &&
-				(deviceAddress == connectedDevice.address ||
+				(deviceAddress == connectedDevice.address && isBLE == connectedDevice.isBLE||
 						(Algorithms.isEmpty(deviceAddress) && Algorithms.isEmpty(deviceName)))) {
 				deviceConnectionState = OBDConnectionState.CONNECTED
 				connectedDevice
 			} else {
+
 				deviceConnectionState = OBDConnectionState.DISCONNECTED
 				BTDeviceInfo(deviceName, deviceAddress, isBLE)
+			}
+			if(isBLE) {
+				val bleDevice = vehicleMetricsPlugin.getBLEOBDDeviceById(deviceAddress)
+				if(bleDevice?.isConnecting == true) {
+					deviceConnectionState = OBDConnectionState.CONNECTING
+				}
 			}
 		}
 	}
@@ -124,10 +131,11 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 			if (connected) R.string.external_device_connected else R.string.external_device_disconnected
 		)
 		view.findViewById<TextView>(R.id.device_name).text = device.name
+		val protocolStringId = if(device.isBLE)  R.string.external_device_ble else R.string.shared_string_bluetooth
 		view.findViewById<TextView>(R.id.connection_state).text = app.getString(
 			R.string.ltr_or_rtl_combine_via_comma,
 			connectedText,
-			app.getString(R.string.shared_string_bluetooth)
+			app.getString(protocolStringId)
 		)
 
 		view.findViewById<ImageView?>(R.id.widget_icon).apply {
@@ -226,7 +234,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	override fun onStateChanged(
 		state: OBDConnectionState,
 		deviceInfo: BTDeviceInfo) {
-		if (device.address == deviceInfo.address) {
+		if (device.address == deviceInfo.address && device.isBLE == deviceInfo.isBLE) {
 			deviceConnectionState = state
 		}
 		view?.let {
@@ -343,8 +351,8 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		adapter.notifyDataSetChanged()
 	}
 
-	override fun onForgetSensorConfirmed(deviceId: String) {
-		vehicleMetricsPlugin?.removeDeviceToUsedOBDDevicesList(deviceId)
+	override fun onForgetSensorConfirmed(deviceId: String, isBLE: Boolean) {
+		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId, isBLE)
 		view?.let { setupUI(it) }
 	}
 }

@@ -25,8 +25,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 	private var commandQueue = listOf<OBDCommand>()
 	private var inputStream: Source? = null
 	private var outputStream: Sink? = null
-//	private val log = LoggerFactory.getLogger("OBDDispatcher")
-	private val log = LoggerFactory.getLogger("Obd2Connection")
+	private val log = LoggerFactory.getLogger("OBDDispatcher")
 	private var readStatusListener: OBDReadStatusListener? = null
 	private var sensorDataCache = HashMap<OBDCommand, OBDDataField<Any>?>()
 	private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
@@ -55,6 +54,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 			} catch (e: Exception) {
 				log.error("Unexpected error in connect: ${e.message}", e)
 				readStatusListener?.onIOError()
+				connector.onConnectionFailed()
 			} finally {
 				connector.disconnect()
 				cleanupResources()
@@ -66,7 +66,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 		log("Start reading obd with $inputStream and $outputStream")
 		val connection = Obd2Connection(createTransport(), this)
 		val startInitTime = Clock.System.now().toEpochMilliseconds()
-		while (!connection.initialize()) {
+		while (!connection.initialize() && coroutineContext.isActive) {
 			delay(initOBDRetryOffset)
 			if (Clock.System.now().toEpochMilliseconds() - startInitTime > initOBDTimeout) {
 				break
@@ -78,7 +78,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 		}
 		try {
 			var cycleIndex = 0 //todo remove after testing
-			while (isConnected(connection)) {
+			while (isConnected(connection) && coroutineContext.isActive) {
 				if (commandQueue.isEmpty()) {
 					delay(500) // Prevent busy-looping when there are no commands
 					continue
@@ -91,6 +91,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 				}
 				coroutineContext.ensureActive()
 				OBDDataComputer.acceptValue(sensorDataCache)
+//				delay(100)
 			}
 		} finally {
 			connection.finish()
