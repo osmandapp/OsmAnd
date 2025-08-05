@@ -5333,4 +5333,9 @@
     <string name="approximate_bearing">Προσανατολισμός κατά προσέγγιση</string>
     <string name="approximate_bearing_descr">Πηγάζει τον προσανατολισμό από την διαδρομή πλοήγησης που ακολουθείται.</string>
     <string name="simulation_position_description">Επιλέξτε το αρχείο ίχνους που θα χρησιμοποιηθεί ως πηγή για τη μετακίνηση τοποθεσίας.</string>
+    <string name="amz_manage_subscription_descr">Διαχειριστείτε την συνδρομή σας μέσω της εφαρμογής Amazon ή του ιστότοπου Amazon.</string>
+    <string name="contour_lines_hillshade_slope">Ισοϋψείς καμπύλες, σκίαση ανάγλυφου, κλίση εδάφους</string>
+    <string name="hillshade_slope">Σκίαση ανάγλυφου, κλίση εδάφους</string>
+    <string name="backup_error_user_is_already_registered">Αυτή η διεύθυνση email χρησιμοποιείται ήδη σε άλλον λογαριασμό</string>
+    <string name="backup_no_internet_descr">Ελέγξτε τη σύνδεση σας στο διαδίκτυο και κατεβάστε ξανά.</string>
 </resources>

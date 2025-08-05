@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="write_location_provider_description">Save location provider to each track point while recording</string>
+    <string name="write_location_provider">Write Location Provider</string>
     <string name="map_orientation_portrait_inverted">Portrait (inverted)</string>
     <string name="map_orientation_landscape_inverted">Landscape (inverted)</string>
     <string name="reverse_mode_calculate_route">Calculate route</string>

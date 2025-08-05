@@ -10,6 +10,7 @@ import android.graphics.Shader;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -53,7 +54,7 @@ public class Renderable {
     };
 
     private static final BlockingQueue<Runnable> sPoolWorkQueue = new LinkedBlockingQueue<>(128);
-    public static final Executor THREAD_POOL_EXECUTOR;
+    private static final Executor THREAD_POOL_EXECUTOR;
 
     static {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
@@ -426,7 +427,7 @@ public class Renderable {
                 double cullDistance = Math.pow(2.0, segmentSize - zoom);    // segmentSize == epsilon
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
                 try {
-                    culler.executeOnExecutor(THREAD_POOL_EXECUTOR, "");
+                    OsmAndTaskManager.executeTask(culler, THREAD_POOL_EXECUTOR, "");
                 } catch (RejectedExecutionException e) {
                     culler = null;
                 }

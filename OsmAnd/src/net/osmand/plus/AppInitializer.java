@@ -441,7 +441,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	public static void loadRoutingFiles(@NonNull OsmandApplication app, @Nullable LoadRoutingFilesCallback callback) {
-		new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
 
 			@Override
 			protected Map<String, RoutingConfiguration.Builder> doInBackground(Void... voids) {
@@ -494,7 +494,7 @@ public class AppInitializer implements IProgress {
 				return defaultAttributes;
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 
@@ -635,7 +635,7 @@ public class AppInitializer implements IProgress {
 
 	@SuppressLint("StaticFieldLeak")
 	public void initOpenglAsync(@Nullable InitOpenglListener listener) {
-		new AsyncTask<Void, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Void>() {
 
 			@Override
 			protected Void doInBackground(Void... voids) {
@@ -649,7 +649,7 @@ public class AppInitializer implements IProgress {
 					listener.onOpenglInitialized();
 				}
 			}
-		}.executeOnExecutor(initOpenglSingleThreadExecutor);
+		}, initOpenglSingleThreadExecutor);
 	}
 
 	private void initOpenGl() {

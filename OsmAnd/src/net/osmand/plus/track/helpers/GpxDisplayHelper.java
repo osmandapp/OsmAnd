@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxParameter;
@@ -213,7 +214,7 @@ public class GpxDisplayHelper {
 		List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
 		SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, params, groups, null);
 		try {
-			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor).get();
+			OsmAndTaskManager.executeTask(splitTask, splitTrackSingleThreadExecutor).get();
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}
@@ -260,7 +261,7 @@ public class GpxDisplayHelper {
 				}
 			});
 			splitTrackTasks.put(path, splitTask);
-			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor);
+			OsmAndTaskManager.executeTask(splitTask, splitTrackSingleThreadExecutor);
 		}
 	}
 

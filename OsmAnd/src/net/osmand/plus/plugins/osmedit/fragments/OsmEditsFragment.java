@@ -7,15 +7,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewStub;
+import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,6 +27,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Entity;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
@@ -56,16 +50,10 @@ import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Group;
-import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
-import net.osmand.plus.plugins.osmedit.dialogs.ExportOptionsBottomSheetDialogFragment;
+import net.osmand.plus.plugins.osmedit.dialogs.*;
 import net.osmand.plus.plugins.osmedit.dialogs.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
-import net.osmand.plus.plugins.osmedit.dialogs.FileTypeBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
-import net.osmand.plus.plugins.osmedit.dialogs.OsmEditOptionsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
-import net.osmand.plus.plugins.osmedit.dialogs.ProgressDialogPoiUploader;
-import net.osmand.plus.plugins.osmedit.dialogs.SendOsmNoteBottomSheetFragment;
-import net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil.OnNodeCommittedListener;
 import net.osmand.plus.plugins.osmedit.helpers.OsmEditsUploadListenerHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
@@ -570,7 +558,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		return type -> {
 			List<OsmPoint> points = getPointsToExport();
 			ShareOsmPointsAsyncTask backupTask = new ShareOsmPointsAsyncTask(app, type, exportType, OsmEditsFragment.this);
-			backupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points.toArray(new OsmPoint[0]));
+			OsmAndTaskManager.executeTask(backupTask, points.toArray(new OsmPoint[0]));
 		};
 	}
 
@@ -675,7 +663,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		};
 		dialog.show(getActivity().getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog, listener, plugin, points.length, closeChangeSet, anonymously);
-		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
+		OsmAndTaskManager.executeTask(uploadTask, points);
 	}
 
 	private void showOnMap(OsmPoint osmPoint, int itemPosition) {

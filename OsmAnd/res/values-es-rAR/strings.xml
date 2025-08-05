@@ -484,9 +484,9 @@
     <string name="animate_routing_route">Simular, usando la ruta calculada</string>
     <string name="animate_routing_gpx">Simular, usando la traza GPX</string>
     <string name="auto_zoom_none">Sin zum automático</string>
-    <string name="auto_zoom_close">Para corto alcance</string>
-    <string name="auto_zoom_far">Para mediano alcance</string>
-    <string name="auto_zoom_farthest">Para largo alcance</string>
+    <string name="auto_zoom_close">Vista cercana</string>
+    <string name="auto_zoom_far">Vista amplia</string>
+    <string name="auto_zoom_farthest">Vista muy amplia</string>
     <string name="map_magnifier">Lupa del mapa</string>
     <string name="base_world_map">Mapa base mundial</string>
     <string name="about_version">Versión:</string>
@@ -699,7 +699,7 @@
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Sin autopistas</string>
     <string name="auto_zoom_map_descr">Nivel de zum según la velocidad (mientras el mapa se sincroniza con la ubicación actual).</string>
-    <string name="auto_zoom_map">Zum automático del mapa</string>
+    <string name="auto_zoom_map">Ajuste automático del zum</string>
     <string name="snap_to_road">Ajustar al camino</string>
     <string name="interrupt_music_descr">Las indicaciones por voz pausan la reproducción de música.</string>
     <string name="interrupt_music">Pausar música</string>

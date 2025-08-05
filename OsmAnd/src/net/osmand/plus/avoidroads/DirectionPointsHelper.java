@@ -3,8 +3,6 @@ package net.osmand.plus.avoidroads;
 import static net.osmand.IndexConstants.AVOID_ROADS_FILE_EXT;
 import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -13,6 +11,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -83,8 +82,7 @@ public class DirectionPointsHelper {
 	}
 
 	public void getDirectionPointsForFileAsync(@NonNull File file, @Nullable CallbackWithObject<QuadTree<Node>> callback) {
-		DirectionPointsTask task = new DirectionPointsTask(file, callback);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		OsmAndTaskManager.executeTask(new DirectionPointsTask(file, callback));
 	}
 
 	public void setSelectedFilesForMode(@NonNull ApplicationMode appMode, @NonNull List<String> enabledFiles) {

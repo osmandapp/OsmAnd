@@ -323,7 +323,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	private void createInUiThread() {
 		new Toast(AndroidUtils.createDisplayContext(this)); // activate in UI thread to avoid further exceptions
-		new AsyncTask<View, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<View, Void, Void>() {
 			@Override
 			protected Void doInBackground(View... params) {
 				return null;
@@ -331,7 +331,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 			protected void onPostExecute(Void result) {
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 	@NonNull

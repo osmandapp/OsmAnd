@@ -14,6 +14,7 @@ import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -145,8 +146,7 @@ public class AndroidNetworkUtils {
 										 @NonNull List<Request> requests,
 										 @Nullable OnSendRequestsListener listener,
 										 Executor executor) {
-
-		new AsyncTask<Void, Object, List<RequestResponse>>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Object, List<RequestResponse>>() {
 
 			@Override
 			protected List<RequestResponse> doInBackground(Void... params) {
@@ -190,7 +190,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(executor, (Void) null);
+		}, executor);
 	}
 
 	public static void sendRequestAsync(@Nullable OsmandApplication app,
@@ -200,7 +200,7 @@ public class AndroidNetworkUtils {
 	                                    boolean toastAllowed,
 	                                    boolean post,
 	                                    @Nullable OnRequestResultListener listener) {
-		new AsyncTask<Void, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Void>() {
 
 			private String result;
 			private String error;
@@ -227,14 +227,13 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		});
 	}
 
 	public static void downloadFileAsync(String url,
 	                                     File fileToSave,
 	                                     CallbackWithObject<String> listener) {
-
-		new AsyncTask<Void, Void, String>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... params) {
@@ -247,7 +246,7 @@ public class AndroidNetworkUtils {
 					listener.processResult(error);
 				}
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		});
 	}
 
 	private static void publishFilesDownloadProgress(@NonNull File file, int progress,
@@ -324,8 +323,7 @@ public class AndroidNetworkUtils {
 	                                      @NonNull Map<String, String> parameters,
 	                                      @Nullable OnFilesDownloadCallback callback,
 	                                      Executor executor) {
-
-		new AsyncTask<Void, Object, Map<File, String>>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Object, Map<File, String>>() {
 
 			@Override
 			@NonNull
@@ -394,7 +392,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(executor, (Void) null);
+		}, executor);
 	}
 
 	public static String sendRequest(@Nullable OsmandApplication ctx, @NonNull Request request) {
@@ -852,8 +850,7 @@ public class AndroidNetworkUtils {
 	                                    @Nullable Map<String, String> headers,
 	                                    OnFilesUploadCallback callback,
 	                                    Executor executor) {
-
-		new AsyncTask<Void, Object, Map<File, String>>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Object, Map<File, String>>() {
 
 			@Override
 			@NonNull
@@ -912,7 +909,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(executor, (Void) null);
+		}, executor);
 	}
 
 	public static UploadFileTask uploadFileAsync(@NonNull String url,
@@ -972,7 +969,7 @@ public class AndroidNetworkUtils {
 	                                             OnFileUploadCallback callback,
 	                                             Executor executor) {
 		UploadFileTask uploadFileTask = new UploadFileTask(url, streamWriter, fileName, gzip, parameters, headers, callback);
-		uploadFileTask.executeOnExecutor(executor, (Void) null);
+		OsmAndTaskManager.executeTask(uploadFileTask, executor);
 		return uploadFileTask;
 	}
 

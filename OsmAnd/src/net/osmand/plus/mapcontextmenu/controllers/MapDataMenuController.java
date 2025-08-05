@@ -18,6 +18,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -493,7 +494,7 @@ public class MapDataMenuController extends MenuController {
 				confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						new DeleteFileTask(activity, file).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+						OsmAndTaskManager.executeTask(new DeleteFileTask(activity, file));
 					}
 				});
 				confirm.setNegativeButton(R.string.shared_string_no, null);
@@ -520,7 +521,7 @@ public class MapDataMenuController extends MenuController {
 				restoreFromBackupTask = new RestoreFromBackupTask(mapActivity, indexItem);
 			}
 			if (restoreFromBackupTask != null) {
-				restoreFromBackupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+				OsmAndTaskManager.executeTask(restoreFromBackupTask);
 			}
 		}
 	}

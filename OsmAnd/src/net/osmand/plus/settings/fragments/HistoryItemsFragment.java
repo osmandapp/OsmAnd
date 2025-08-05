@@ -4,10 +4,8 @@ import static net.osmand.plus.settings.enums.HistorySource.NAVIGATION;
 import static net.osmand.plus.settings.enums.HistorySource.SEARCH;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
-import android.app.ProgressDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +28,7 @@ import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
@@ -266,7 +265,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	@Override
 	public void onDeletionConfirmed() {
 		DeleteHistoryTask deleteHistoryTask = new DeleteHistoryTask(requireActivity(), selectedItems, this);
-		deleteHistoryTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(deleteHistoryTask);
 	}
 
 	public void onDeletionComplete() {

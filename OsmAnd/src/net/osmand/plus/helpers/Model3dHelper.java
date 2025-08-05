@@ -12,6 +12,7 @@ import net.osmand.core.jni.ObjParser;
 import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -114,7 +115,7 @@ public class Model3dHelper {
 		}
 
 		modelsInProgress.add(modelName);
-		new Load3dModelTask(dir, model -> {
+		OsmAndTaskManager.executeTask(new Load3dModelTask(dir, model -> {
 			if (model == null) {
 				failedModels.add(modelName);
 			} else {
@@ -123,7 +124,7 @@ public class Model3dHelper {
 			modelsInProgress.remove(modelName);
 			processCallback(modelName, model, callback);
 			return true;
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}));
 	}
 
 	@NonNull

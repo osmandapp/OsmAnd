@@ -14,7 +14,6 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.view.LayoutInflater;
@@ -37,6 +36,7 @@ import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -158,7 +158,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				adapter.synchronizeGroups();
 			}
 		});
-		task.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(task, singleThreadExecutor);
 	}
 
 	@Override
@@ -594,7 +594,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	public void shareFavorites(@Nullable FavoriteGroup group) {
 		ShareFavoritesAsyncTask shareFavoritesTask = new ShareFavoritesAsyncTask(app, group, this);
-		shareFavoritesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(shareFavoritesTask);
 	}
 
 	private void initListExpandedState() {

@@ -32,6 +32,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -1494,7 +1495,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			};
 			ParseGpxRouteTask task = new ParseGpxRouteTask(gpxFile, trackParams, nonEmptySegmentIdx, listener);
 			parseGpxRouteTasks.put(gpxFile.getPath(), task);
-			task.executeOnExecutor(parseGpxRouteSingleThreadExecutor);
+			OsmAndTaskManager.executeTask(task, parseGpxRouteSingleThreadExecutor);
 		}
 	}
 

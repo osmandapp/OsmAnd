@@ -148,6 +148,13 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 		}
 	}
 
+	public void onStop() {
+		QuickSearchDialogFragment quickSearchFragment = getQuickSearchDialogFragment();
+		if (quickSearchFragment != null && quickSearchFragment.isSearchHidden()) {
+			quickSearchFragment.closeSearch();
+		}
+	}
+
 	@Nullable
 	public QuickSearchDialogFragment getQuickSearchDialogFragment() {
 		return getFragment(QuickSearchDialogFragment.TAG);

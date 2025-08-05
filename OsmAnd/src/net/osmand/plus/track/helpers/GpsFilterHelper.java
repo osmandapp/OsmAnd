@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -75,7 +76,7 @@ public class GpsFilterHelper {
 			gpsFilterTask.cancel(false);
 		}
 		gpsFilterTask = new GpsFilterTask(app, filteredSelectedGpxFile, listeners);
-		gpsFilterTask.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(gpsFilterTask, singleThreadExecutor);
 	}
 
 	@SuppressWarnings("deprecation")

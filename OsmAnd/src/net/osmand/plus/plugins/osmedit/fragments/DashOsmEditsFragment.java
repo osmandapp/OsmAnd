@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.osmedit.fragments;
 import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
@@ -187,7 +187,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		dialog.show(getChildFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
 				listener, plugin, toUpload.length, closeChangeSet, anonymously);
-		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toUpload);
+		OsmAndTaskManager.executeTask(uploadTask, toUpload);
 	}
 
 	private void getOsmPoints(ArrayList<OsmPoint> dataPoints) {

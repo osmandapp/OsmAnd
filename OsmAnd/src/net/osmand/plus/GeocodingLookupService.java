@@ -85,7 +85,7 @@ public class GeocodingLookupService {
 
 			if (currentRequestedLocation == null && !lookupLocations.isEmpty()) {
 				currentRequestedLocation = lookupLocations.peek();
-				execute(new AddressLookupRequestsAsyncTask(app));
+				OsmAndTaskManager.executeTask(new AddressLookupRequestsAsyncTask(app));
 			}
 		}
 	}
@@ -113,11 +113,6 @@ public class GeocodingLookupService {
 			List<AddressLookupRequest> requests = addressLookupRequestsMap.get(latLon);
 			return requests != null && requests.size() > 0;
 		}
-	}
-
-	@SuppressWarnings("unchecked")
-	private <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 	}
 
 	private boolean geocode(LatLon latLon) {

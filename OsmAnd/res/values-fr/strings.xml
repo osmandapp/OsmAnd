@@ -237,7 +237,7 @@
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Le format de la carte \'\'{0}\'\' n\'est pas supporté</string>
     <string name="poi_filter_car_aid">Pour conducteurs</string>
-    <string name="poi_filter_closest_poi">POI les plus proches</string>
+    <string name="poi_filter_closest_poi">Points d\'intérêt les plus proches</string>
     <string name="poi_filter_custom_filter">Filtre personnalisé</string>
     <string name="poi_filter_food_shop">Alimentation</string>
     <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -1240,7 +1240,7 @@
     <string name="shared_string_waypoints">Points de passage</string>
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Favoris à proximité</string>
-    <string name="speak_poi">POI à proximité</string>
+    <string name="speak_poi">Point d\'intérêt à proximité</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Enregistrez vos trajets ou entraînements et analysez les données : vitesse, dénivelés, altitude, etc. Les traces enregistrées peuvent être archivées, partagées avec des amis, modifiées et retravaillées.

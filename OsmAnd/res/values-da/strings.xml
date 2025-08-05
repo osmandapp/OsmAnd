@@ -5786,7 +5786,7 @@
     <string name="show_symbols_debug_info">Vis symboler fejlfindinginfo</string>
     <string name="deactivated_map">Deaktiveret kort</string>
     <string name="suggest_activate_map_msg">%1$s kort er deaktiveret,\naktiver for at se dette område.</string>
-    <string name="unit_of_temperature_description">De valgte enheder vil blive anvendt på alle temperaturrelaterede data i den aktuelle profil.</string>
+    <string name="unit_of_temperature_description">De valgte enheder anvendes på alle temperaturrelaterede data i den aktuelle profil.</string>
     <string name="hmd_promo_years">HMD-kampagne i %1$s år</string>
     <string name="hmd_promo_description_years">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief etc. i %1$s år</string>
     <string name="shared_string_flat">Flad</string>

@@ -17,6 +17,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -138,7 +139,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 				return true;
 			};
 			selectionTask = new NetworkRouteSelectionTask(activity, pair.first, pair.second, callback);
-			selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(selectionTask);
 		}
 	}
 

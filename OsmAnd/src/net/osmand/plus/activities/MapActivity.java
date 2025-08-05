@@ -564,6 +564,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		importHelper.setUiActivity(this);
+		app.getLocationProvider().ensureLatestLocation();
 
 		long time = System.currentTimeMillis();
 		FragmentManager fragmentManager = getSupportFragmentManager();
@@ -948,6 +949,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		stopped = true;
 		lockHelper.onStop(this);
 		extendedMapActivity.onStop(this);
+		fragmentsHelper.onStop();
+
 		super.onStop();
 	}
 

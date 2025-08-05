@@ -34,6 +34,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -406,14 +407,14 @@ public class ResourceManager {
 	public void reloadIndexesAsync(@Nullable IProgress progress,
 			@Nullable ReloadIndexesListener listener) {
 		reloadIndexesTask = new ReloadIndexesTask(app, progress, listener);
-		reloadIndexesTask.executeOnExecutor(reloadIndexesSingleThreadExecutor);
+		OsmAndTaskManager.executeTask(reloadIndexesTask, reloadIndexesSingleThreadExecutor);
 	}
 
 	public List<String> reloadIndexes(@Nullable IProgress progress,
 			@NonNull List<String> warnings) {
 		reloadIndexesTask = new ReloadIndexesTask(app, progress, null);
 		try {
-			warnings.addAll(reloadIndexesTask.executeOnExecutor(reloadIndexesSingleThreadExecutor).get());
+			warnings.addAll(OsmAndTaskManager.executeTask(reloadIndexesTask, reloadIndexesSingleThreadExecutor).get());
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}
@@ -475,7 +476,7 @@ public class ResourceManager {
 	public void checkAssetsAsync(@Nullable IProgress progress, boolean forceUpdate,
 			boolean forceCheck, @Nullable CheckAssetsListener listener) {
 		CheckAssetsTask task = new CheckAssetsTask(app, progress, forceUpdate, forceCheck, listener);
-		task.executeOnExecutor(checkAssetsSingleThreadExecutor);
+		OsmAndTaskManager.executeTask(task, checkAssetsSingleThreadExecutor);
 	}
 
 	public List<String> checkAssets(@Nullable IProgress progress, boolean forceUpdate,
@@ -483,7 +484,7 @@ public class ResourceManager {
 		List<String> warnings = new ArrayList<>();
 		CheckAssetsTask task = new CheckAssetsTask(app, progress, forceUpdate, forceCheck, null);
 		try {
-			warnings.addAll(task.executeOnExecutor(checkAssetsSingleThreadExecutor).get());
+			warnings.addAll(OsmAndTaskManager.executeTask(task, checkAssetsSingleThreadExecutor).get());
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}

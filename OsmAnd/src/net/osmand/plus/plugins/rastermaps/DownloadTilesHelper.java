@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 
 import androidx.annotation.NonNull;
@@ -9,6 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.resources.BitmapTilesCache;
 import net.osmand.util.MapUtils;
@@ -49,7 +49,7 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 	public void downloadTiles(int minZoom, int maxZoom, @NonNull QuadRect latLonRect,
 			@NonNull ITileSource tileSource, @NonNull DownloadType downloadType) {
 		downloadTilesTask = new DownloadTilesTask(app, minZoom, maxZoom, latLonRect, tileSource, downloadType, this);
-		downloadTilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(downloadTilesTask);
 	}
 
 	public void setListener(@Nullable TilesDownloadListener listener) {

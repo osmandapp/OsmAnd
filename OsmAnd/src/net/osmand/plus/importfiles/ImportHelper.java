@@ -48,6 +48,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.importfiles.tasks.CopyToFileTask;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -774,12 +775,12 @@ public class ImportHelper {
 				@Override
 				public void onFinish(@NonNull AppInitializer init) {
 					if (importTask.getStatus() == Status.PENDING) {
-						importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
+						OsmAndTaskManager.executeTask(importTask, requests);
 					}
 				}
 			});
 		} else {
-			importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
+			OsmAndTaskManager.executeTask(importTask, requests);
 		}
 	}
 }

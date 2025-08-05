@@ -1,13 +1,16 @@
 package net.osmand.plus.settings.backend.backup;
 
+import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,8 +18,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 
 /*
 	Usage:
@@ -112,20 +113,17 @@ public class FileSettingsHelper extends SettingsHelper {
 
 	public void collectSettings(@NonNull File settingsFile, String latestChanges, int version,
 								@Nullable CollectListener listener) {
-		new ImportFileTask(this, settingsFile, latestChanges, version, listener)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new ImportFileTask(this, settingsFile, latestChanges, version, listener));
 	}
 
 	public void checkDuplicates(@NonNull File settingsFile, @NonNull List<SettingsItem> items,
 								@NonNull List<SettingsItem> selectedItems, CheckDuplicatesListener listener) {
-		new ImportFileTask(this, settingsFile, items, selectedItems, listener)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new ImportFileTask(this, settingsFile, items, selectedItems, listener));
 	}
 
 	public void importSettings(@NonNull File settingsFile, @NonNull List<SettingsItem> items,
 							   String latestChanges, int version, @Nullable ImportListener listener) {
-		new ImportFileTask(this, settingsFile, items, latestChanges, version, listener)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new ImportFileTask(this, settingsFile, items, latestChanges, version, listener));
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,
@@ -134,7 +132,7 @@ public class FileSettingsHelper extends SettingsHelper {
 		File file = new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT);
 		ExportFileTask exportAsyncTask = new ExportFileTask(this, file, listener, items, exportItemsFiles);
 		exportAsyncTasks.put(file, exportAsyncTask);
-		exportAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(exportAsyncTask);
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,

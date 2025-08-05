@@ -23,6 +23,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LocationPoint;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.AlarmInfo;
@@ -787,7 +788,7 @@ public class WaypointHelper {
 	}
 
 	private void runAsync(@NonNull Runnable runnable, @Nullable OnCompleteCallback callback) {
-		new AsyncTask<Void, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... voids) {
 				runnable.run();
@@ -800,6 +801,6 @@ public class WaypointHelper {
 					callback.onComplete();
 				}
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 }

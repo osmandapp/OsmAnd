@@ -140,7 +140,8 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		setupPromoCard(activity);
 
 		boolean hasMainPurchases = !Algorithms.isEmpty(mainPurchases);
-		if (!needToShowFreeAccountSubscriptionCard && (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription))) {
+		boolean hasExternalPurchases = !Algorithms.isEmpty(externalInApps) || !Algorithms.isEmpty(externalSubscriptions);
+		if (!needToShowFreeAccountSubscriptionCard && (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription && !hasExternalPurchases))) {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			cardsContainer.addView(new NoPurchasesCard(activity, this).build(activity));
 		} else {

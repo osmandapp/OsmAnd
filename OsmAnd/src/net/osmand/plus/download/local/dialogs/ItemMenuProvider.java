@@ -8,7 +8,6 @@ import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +29,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -202,8 +202,7 @@ public class ItemMenuProvider implements MenuProvider {
 	}
 
 	public void performOperation(@NonNull LocalItem localItem, @NonNull OperationType type) {
-		LocalOperationTask task = new LocalOperationTask(app, type, fragment);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
+		OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, fragment), localItem);
 	}
 
 	private void exportItem(@NonNull LocalItem localItem, @NonNull ExportType settingsType) {
@@ -223,7 +222,7 @@ public class ItemMenuProvider implements MenuProvider {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 			LocalOperationTask task = new LocalOperationTask(app, CLEAR_TILES_OPERATION, fragment);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
+			OsmAndTaskManager.executeTask(task, localItem);
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setMessage(app.getString(R.string.clear_confirmation_msg, localItem.getName(context)));

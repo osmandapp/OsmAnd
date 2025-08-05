@@ -12,6 +12,7 @@ import androidx.appcompat.app.ActionBar;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -50,7 +51,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			progress.setOnCancelListener(dialog -> task.cancel(true));
 			progress.setCancelable(true);
 
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(task);
 			setIntent(null);
 		}
 	}

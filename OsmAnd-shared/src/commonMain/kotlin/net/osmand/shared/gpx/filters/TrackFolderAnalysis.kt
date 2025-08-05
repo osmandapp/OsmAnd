@@ -44,7 +44,7 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 					fileSize += file.length()
 				}
 				if (analysis.isTimeSpecified()) {
-					timeSpanSum += analysis.getDurationInMs() / 1000.0
+					timeSpanSum += analysis.getDurationInSeconds()
 				}
 			}
 		}

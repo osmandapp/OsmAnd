@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -65,7 +66,7 @@ public class WikiArticleHelper {
 	public void showWikiArticle(@Nullable List<LatLon> locations, @NonNull String url) {
 		if (!Algorithms.isEmpty(locations)) {
 			articleSearchTask = new WikiArticleSearchTask(locations, url, activity, nightMode);
-			articleSearchTask.execute();
+			OsmAndTaskManager.executeTask(articleSearchTask);
 		}
 	}
 

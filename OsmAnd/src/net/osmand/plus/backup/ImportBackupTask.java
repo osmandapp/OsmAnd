@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupImporter.CollectItemsResult;
 import net.osmand.plus.backup.BackupImporter.NetworkImportProgressListener;
@@ -183,8 +184,8 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 						helper.importAsyncTasks.remove(key);
 						helper.finishImport(importListener, succeed, items, needRestart);
 					};
-					new ImportBackupItemsTask(app, importer, items, filesType, itemsListener, forceReadData, restoreDeleted)
-							.executeOnExecutor(app.getBackupHelper().getExecutor());
+					OsmAndTaskManager.executeTask(new ImportBackupItemsTask(app, importer, items,
+							filesType, itemsListener, forceReadData, restoreDeleted), app.getBackupHelper().getExecutor());
 				} else {
 					helper.importAsyncTasks.remove(key);
 					helper.finishImport(importListener, false, Collections.emptyList(), false);

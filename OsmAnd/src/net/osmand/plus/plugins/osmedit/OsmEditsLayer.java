@@ -11,7 +11,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.os.AsyncTask;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -33,6 +32,7 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.asynctasks.SaveOsmChangeAsyncTask;
@@ -52,9 +52,9 @@ import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.MapTextLayer;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
-import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -377,12 +377,12 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 				Entity entity = objectInMotion.getEntity();
 				entity.setLatitude(position.getLatitude());
 				entity.setLongitude(position.getLongitude());
-				new SaveOsmChangeAsyncTask(mOsmChangeUtil, objectInMotion, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				OsmAndTaskManager.executeTask(new SaveOsmChangeAsyncTask(mOsmChangeUtil, objectInMotion, callback));
 			} else if (o instanceof OsmNotesPoint objectInMotion) {
 				objectInMotion.setLatitude(position.getLatitude());
 				objectInMotion.setLongitude(position.getLongitude());
-				new SaveOsmNoteAsyncTask(getApplication(), mOsmBugsUtil, objectInMotion.getText(), callback)
-						.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, objectInMotion);
+				OsmAndTaskManager.executeTask(new SaveOsmNoteAsyncTask(getApplication(),
+								mOsmBugsUtil, objectInMotion.getText(), callback), objectInMotion);
 			}
 			applyMovableObject(position);
 		}

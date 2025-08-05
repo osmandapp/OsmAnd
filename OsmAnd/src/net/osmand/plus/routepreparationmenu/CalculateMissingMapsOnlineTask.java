@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -172,7 +173,7 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	public static CalculateMissingMapsOnlineTask execute(@NonNull OsmandApplication app,
 	                                                     @NonNull CalculateMissingMapsOnlineListener listener) {
 		CalculateMissingMapsOnlineTask task = new CalculateMissingMapsOnlineTask(app, listener);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 		return task;
 	}
 

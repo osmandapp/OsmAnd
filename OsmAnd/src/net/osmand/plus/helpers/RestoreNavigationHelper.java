@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -119,7 +120,7 @@ public class RestoreNavigationHelper {
 				return builder;
 			}
 		};
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxPath);
+		OsmAndTaskManager.executeTask(task, gpxPath);
 	}
 
 	public void enterRoutingMode(@Nullable GPXRouteParamsBuilder gpxRoute) {

@@ -20,7 +20,6 @@ import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
 import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.MapPrimitivesProvider.Mode;
-import net.osmand.core.jni.MapRasterMetricsLayerProvider;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
@@ -312,11 +311,7 @@ public class MapRendererContext {
 			String name = addonEntry.getKey();
 			String fileName = addonEntry.getValue();
 			if (mapStylesCollection.getStyleByName(fileName) == null) {
-				try {
-					loadStyleFromStream(fileName, app.getRendererRegistry().getInputStream(name));
-				} catch (IOException e) {
-					Log.e(TAG, "Failed to load '" + fileName + "'", e);
-				}
+				loadStyleFromStream(fileName, app.getRendererRegistry().getInputStream(name));
 			}
 		}
 	}
@@ -324,13 +319,9 @@ public class MapRendererContext {
 	private void loadRenderer(String rendName) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getRenderer(rendName);
 		if ((mapStylesCollection.getStyleByName(rendName) == null || IGNORE_CORE_PRELOADED_STYLES) && renderer != null) {
-			try {
-				loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
-				if (renderer.getDependsName() != null) {
-					loadRenderer(renderer.getDependsName());
-				}
-			} catch (IOException e) {
-				Log.e(TAG, "Failed to load '" + rendName + "'", e);
+			loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
+			if (renderer.getDependsName() != null) {
+				loadRenderer(renderer.getDependsName());
 			}
 		}
 	}

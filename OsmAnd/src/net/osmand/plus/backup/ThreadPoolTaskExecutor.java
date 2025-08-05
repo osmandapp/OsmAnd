@@ -6,19 +6,13 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmAndTaskManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> extends ThreadPoolExecutor {
 
@@ -115,7 +109,7 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 
 	public void runAsync(@NonNull List<T> tasks, @Nullable Executor executor) {
 		asyncTask = new AsyncTaskExecutor(tasks);
-		asyncTask.executeOnExecutor(executor != null ? executor : AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(asyncTask, executor != null ? executor : AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void initTasks(List<T> tasks) {

@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
@@ -372,7 +373,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, result -> {
 					OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result, null);
-					detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					OsmAndTaskManager.executeTask(detailsTask);
 					dismiss();
 					return true;
 				}))
@@ -477,7 +478,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				reloadTracks();
 			}
 		});
-		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(deleteFilesTask);
 	}
 
 	@Override

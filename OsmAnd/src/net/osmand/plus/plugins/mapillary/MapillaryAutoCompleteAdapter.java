@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.mapillary;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -81,7 +81,7 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> {
 							wrong = true;
 						} else {
 							GetMapillaryUserAsyncTask task = new GetMapillaryUserAsyncTask();
-							Pair<String, String> user = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, constraint.toString()).get();
+							Pair<String, String> user = OsmAndTaskManager.executeTask(task, constraint.toString()).get();
 							if (user != null) {
 								plugin.MAPILLARY_FILTER_USER_KEY.set(user.first);
 								plugin.MAPILLARY_FILTER_USERNAME.set(user.second);

@@ -22,6 +22,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.shared.SharedUtil
 import net.osmand.data.LatLon
+import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripUtils
 import net.osmand.plus.search.history.SearchHistoryHelper
@@ -48,7 +49,7 @@ class HistoryScreen(
 	override fun onFirstGetTemplate() {
 		super.onFirstGetTemplate()
 		updateItemsTask = UpdateHistoryItemsTask()
-		updateItemsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+		OsmAndTaskManager.executeTask(updateItemsTask)
 	}
 
 	private inner class UpdateHistoryItemsTask : AsyncTask<Unit, Unit, Unit>() {

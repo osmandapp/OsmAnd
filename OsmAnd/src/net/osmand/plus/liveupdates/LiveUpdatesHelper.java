@@ -6,19 +6,19 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.util.Algorithms;
 
 import java.util.Calendar;
@@ -250,7 +250,7 @@ public class LiveUpdatesHelper {
 		String fnExt = Algorithms.getFileNameWithoutExtensionAndRoadSuffix(fileName);
 		PerformLiveUpdateAsyncTask task = new PerformLiveUpdateAsyncTask(context, fileName, userRequested);
 		task.setRunOnSuccess(runOnSuccess);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
+		OsmAndTaskManager.executeTask(task, fnExt);
 	}
 
 	public static void runLiveUpdate(Context context, boolean userRequested, LiveUpdateListener listener) {

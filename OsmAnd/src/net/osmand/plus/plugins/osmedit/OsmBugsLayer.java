@@ -23,6 +23,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -371,7 +372,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		bug.setLatitude(latitude);
 		bug.setLongitude(longitude);
 		if (autofill) {
-			executeTaskInBackground(new HandleOsmNoteAsyncTask(getOsmBugsUtil(bug), local, bug, null, message,
+			OsmAndTaskManager.executeTask(new HandleOsmNoteAsyncTask(getOsmBugsUtil(bug), local, bug, null, message,
 					Action.CREATE, getHandleBugListener(mapActivity)));
 		} else {
 			showBugDialog(mapActivity, bug, Action.CREATE, message);

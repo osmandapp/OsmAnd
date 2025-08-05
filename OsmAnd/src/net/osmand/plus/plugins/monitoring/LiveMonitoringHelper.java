@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -65,7 +66,7 @@ public class LiveMonitoringHelper {
 			lastTimeUpdated = locationTime;
 		}
 		if (isLiveMonitoringEnabled() && !queue.isEmpty())  {
-			new LiveSender().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, queue);
+			OsmAndTaskManager.executeTask(new LiveSender(), queue);
 		}
 	}
 

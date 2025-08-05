@@ -6,7 +6,6 @@ import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
-import android.os.AsyncTask;
 import android.view.Display;
 
 import androidx.annotation.NonNull;
@@ -25,6 +24,7 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -229,8 +229,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void detectCurrentRegion(@NonNull LatLon latLon,
 	                                @NonNull CallbackWithObject<WorldRegion> onRegionDetected) {
-		new DetectRegionTask(app, onRegionDetected)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
+		OsmAndTaskManager.executeTask(new DetectRegionTask(app, onRegionDetected), latLon);
 	}
 
 	@Override

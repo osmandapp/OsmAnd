@@ -2,7 +2,6 @@ package net.osmand.plus.search.listitems;
 
 import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,6 +17,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import net.osmand.data.Amenity;
 import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -224,7 +224,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 				onLoadingFinished();
 				return false;
 			});
-			searchAmenitiesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(searchAmenitiesTask);
 			AndroidUiHelper.updateVisibility(progressBar, true);
 			if(!getNearbyAdapter().hasData()) {
 				cardContent.startShimmer();

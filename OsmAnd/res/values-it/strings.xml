@@ -5799,4 +5799,17 @@
     <string name="sensor_data">Dati dei sensori</string>
     <string name="show_rasterization_debug_tile">Mostra informazioni sulla rasterizzazione dei tile</string>
     <string name="release_5_2">• Lavori in corso…</string>
+    <string name="map_orientation_portrait_inverted">Ritratto (capovolto)</string>
+    <string name="map_orientation_landscape_inverted">Paesaggio (capovolto)</string>
+    <string name="reverse_mode_calculate_route">Calcola percorso</string>
+    <string name="reverse_mode_calculate_route_desc">Calcola un nuovo percorso ottimizzato fino al punto di partenza.</string>
+    <string name="reverse_mode_original_track">Track originale</string>
+    <string name="reverse_mode_original_track_desc">Segui esattamente lo stesso track fino al punto di partenza.\nAttenzione: questa operazione può essere pericolosa poiché ignora il senso unico sulle strade.</string>
+    <string name="reverse_mode">Modalità inversa</string>
+    <string name="n_a">N/A</string>
+    <string name="next_turn_information">Informazioni sul prossimo turn</string>
+    <string name="description_purchases_fastspring">Puoi gestire i tuoi acquisti tramite il portale di gestione dell\'account FastSpring.</string>
+    <string name="description_subscription_fastspring">Puoi gestire o cancellare il tuo abbonamento tramite il portale di gestione dell\'account FastSpring.</string>
+    <string name="manage_purchases">Gestisci gli acquisti</string>
+    <string name="failed_to_connect">Impossibile connettersi a %1s</string>
 </resources>

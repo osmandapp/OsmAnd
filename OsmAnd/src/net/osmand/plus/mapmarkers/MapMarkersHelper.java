@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -258,7 +259,7 @@ public class MapMarkersHelper {
 	}
 
 	public void runSynchronization(@NonNull MapMarkersGroup group) {
-		ctx.runInUIThread(() -> new SyncGroupTask(ctx, group, syncListeners).executeOnExecutor(executorService));
+		ctx.runInUIThread(() -> OsmAndTaskManager.executeTask(new SyncGroupTask(ctx, group, syncListeners), executorService));
 	}
 
 	public MapMarkersGroup getMarkersGroup(GpxFile gpx) {

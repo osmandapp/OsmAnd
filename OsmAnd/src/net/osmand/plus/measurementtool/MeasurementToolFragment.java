@@ -49,6 +49,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -890,7 +891,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 				updateInfoView();
 			});
-			calculateHeightmapTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(calculateHeightmapTask);
 		}
 	}
 
@@ -1845,7 +1846,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		SaveGpxRouteListener listener = (warning, savedGpxFile, backupFile) -> onGpxSaved(warning, savedGpxFile, outFile, backupFile, finalSaveAction, showOnMap);
 		SaveGpxRouteAsyncTask saveTask = new SaveGpxRouteAsyncTask(this, outFile, gpxFile, simplified,
 				addToTrack, showOnMap, listener);
-		saveTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(saveTask);
 	}
 
 	private void onGpxSaved(Exception warning, GpxFile savedGpxFile, File outFile, File backupFile,

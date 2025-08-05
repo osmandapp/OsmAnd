@@ -29,6 +29,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.LockableViewPager;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.plugins.custom.CustomRegion;
@@ -327,7 +328,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 
 	@SuppressLint("StaticFieldLeak")
 	private void doSubscribe(String email) {
-		new AsyncTask<Void, Void, String>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
 
 			ProgressDialog progress;
 
@@ -391,7 +392,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 					}
 				}
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		});
 	}
 
 	@Override

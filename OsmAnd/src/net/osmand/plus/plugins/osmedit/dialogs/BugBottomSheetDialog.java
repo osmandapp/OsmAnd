@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import android.content.res.ColorStateList;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,21 +10,22 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
-import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
+import net.osmand.plus.plugins.osmedit.asynctasks.HandleOsmNoteAsyncTask;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
+import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import org.apache.commons.logging.Log;
 
@@ -82,8 +82,8 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		new HandleOsmNoteAsyncTask(osmBugsUtil, local, bug, point, noteText.getText().toString(), action,
-				handleBugListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new HandleOsmNoteAsyncTask(osmBugsUtil, local, bug, point,
+				noteText.getText().toString(), action, handleBugListener));
 		dismiss();
 	}
 

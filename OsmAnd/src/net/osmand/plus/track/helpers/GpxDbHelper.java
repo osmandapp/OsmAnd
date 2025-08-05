@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
@@ -311,7 +312,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	private void startReading() {
 		readerTask = new GpxReaderTask(app, readingItems, readingItemsMap, this);
-		readerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(readerTask);
 	}
 
 	private void stopReading() {

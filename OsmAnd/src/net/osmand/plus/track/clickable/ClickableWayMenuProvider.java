@@ -1,7 +1,5 @@
 package net.osmand.plus.track.clickable;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -9,6 +7,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.binary.HeightDataLoader.CancellableCallback;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
@@ -34,8 +33,7 @@ public class ClickableWayMenuProvider implements ContextMenuLayer.IContextMenuPr
         if (object instanceof ClickableWay that) {
             MapActivity mapActivity = view.getMapActivity();
             if (mapActivity != null) {
-                (new ClickableWayAsyncTask(mapActivity, that, readHeightData, openAsGpxFile))
-                        .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                OsmAndTaskManager.executeTask(new ClickableWayAsyncTask(mapActivity, that, readHeightData, openAsGpxFile));
                 return true;
             }
         }

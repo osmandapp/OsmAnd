@@ -48,6 +48,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -181,7 +182,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				showSaveDialog();
 			} else {
 				GpxFile gpx = getGpx();
-				new SaveGpxAsyncTask(app, gpx, null, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				OsmAndTaskManager.executeTask(new SaveGpxAsyncTask(app, gpx, null, false));
 				syncGpx(gpx);
 				if (listener != null) {
 					listener.onPointsSaved();
@@ -1006,7 +1007,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			@Override
 			public void saveGpx(String fileName) {
-				new SaveGpxAsyncTask(app, getGpx(), fileName, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				OsmAndTaskManager.executeTask(new SaveGpxAsyncTask(app, getGpx(), fileName, false));
 				hasUnsavedChanges = false;
 				app.getMapMarkersHelper().addOrEnableGroup(getGpx());
 				if (listener != null) {

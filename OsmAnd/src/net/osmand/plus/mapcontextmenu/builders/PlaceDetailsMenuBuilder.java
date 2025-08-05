@@ -17,6 +17,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -143,7 +144,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 
 	private void searchTravelArticles(@NonNull Map<String, LatLon> routeIds,
 			@Nullable CallbackWithObject<Map<String, Map<String, TravelArticle>>> callback) {
-		execute(new SearchTravelArticlesTask(app, routeIds, callback));
+		OsmAndTaskManager.executeTask(new SearchTravelArticlesTask(app, routeIds, callback));
 	}
 
 	@NonNull

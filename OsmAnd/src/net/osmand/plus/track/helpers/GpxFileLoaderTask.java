@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
@@ -33,7 +34,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GpxFile> {
 	public static void loadGpxFile(@NonNull File file,
 	                               @Nullable Activity progressContext,
 	                               @Nullable CallbackWithObject<GpxFile> callback) {
-		new GpxFileLoaderTask(file, progressContext, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new GpxFileLoaderTask(file, progressContext, callback));
 	}
 
 	/**
@@ -42,7 +43,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GpxFile> {
 	public static void loadGpxFile(@NonNull InputStream inputStream,
 	                               @Nullable Activity progressContext,
 	                               @Nullable CallbackWithObject<GpxFile> callback) {
-		new GpxFileLoaderTask(inputStream, progressContext, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new GpxFileLoaderTask(inputStream, progressContext, callback));
 	}
 
 	/**
