@@ -37,7 +37,7 @@ public class SearchHelper {
 	private final OsmandApplication app;
 	private final SearchUICore searchUICore;
 	private final boolean showDescription;
-	private final int contentLimit;
+	private int contentLimit;
 
 	@Nullable
 	private String searchQuery;
@@ -78,6 +78,10 @@ public class SearchHelper {
 
 	public int getContentLimit() {
 		return contentLimit;
+	}
+
+	public void setContentLimit(int contentLimit) {
+		this.contentLimit = contentLimit;
 	}
 
 	public void resetSearchRadius() {
