@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
     <string name="altitude_metrics_description">Sets the display unit for altitude in widgets and statistics.</string>
+    <string name="write_location_provider_description">Save location provider to each track point while recording</string>
+    <string name="write_location_provider">Write Location Provider</string>
     <string name="map_orientation_portrait_inverted">Portrait (inverted)</string>
     <string name="map_orientation_landscape_inverted">Landscape (inverted)</string>
     <string name="reverse_mode_calculate_route">Calculate route</string>

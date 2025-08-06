@@ -194,6 +194,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx headingPref = findPreference(plugin.SAVE_HEADING_TO_GPX.getId());
 		headingPref.setIconSpaceReserved(false);
 		headingPref.setDescription(R.string.write_heading_description);
+
+		SwitchPreferenceEx locationProviderPref = findPreference(plugin.SAVE_LOCATION_PROVIDER_TO_GPX.getId());
+		locationProviderPref.setIconSpaceReserved(false);
+		locationProviderPref.setDescription(R.string.write_location_provider_description);
 	}
 
 	private void setupMapRenderingPrefs() {
@@ -420,7 +424,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	public void onDisplayPreferenceDialog(Preference preference) {
 		String prefId = preference.getKey();
 
-		if (plugin.SAVE_BEARING_TO_GPX.getId().equals(prefId) || plugin.SAVE_HEADING_TO_GPX.getId().equals(prefId)) {
+		if (plugin.SAVE_BEARING_TO_GPX.getId().equals(prefId) || plugin.SAVE_HEADING_TO_GPX.getId().equals(prefId)
+				|| plugin.SAVE_LOCATION_PROVIDER_TO_GPX.getId().equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				BooleanRadioButtonsBottomSheet.showInstance(manager, prefId, getApplyQueryType(),
