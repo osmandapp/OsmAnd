@@ -6041,4 +6041,9 @@
     <string name="msg_gpx_waypoints_copied_to_favorites">Puncte de referință GPX (%1$d) copiate în favorite.</string>
     <string name="save_to_device_error">Eroare la salvarea pe dispozitiv</string>
     <string name="save_to_device">Salvare pe dispozitiv</string>
+    <string name="map_orientation_portrait_inverted">Portret (inversat)</string>
+    <string name="map_orientation_landscape_inverted">Peisaj (inversat)</string>
+    <string name="reverse_mode_calculate_route">Calculează ruta</string>
+    <string name="reverse_mode_calculate_route_desc">Calculează o nouă rută optimizată până la pornire.</string>
+    <string name="reverse_mode_original_track">Ruta originală</string>
 </resources>

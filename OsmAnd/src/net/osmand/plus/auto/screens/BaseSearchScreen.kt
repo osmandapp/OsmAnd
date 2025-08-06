@@ -25,4 +25,9 @@ abstract class BaseSearchScreen(carContext: CarContext) : BaseAndroidAutoScreen(
 		searchHelper.setupSearchSettings(true)
 		return searchHelper
 	}
+
+	override fun onFirstGetTemplate() {
+		super.onFirstGetTemplate()
+		searchHelper.contentLimit = contentLimit
+	}
 }

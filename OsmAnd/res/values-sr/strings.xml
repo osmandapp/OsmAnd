@@ -4390,7 +4390,7 @@
 \nТапније на карту са 2 прста ради прегледа размака између кликнутих тачака</string>
     <string name="coordinates_widget_current_location">Координате: тренутни положај</string>
     <string name="click_on_widget">Кликните на справицу</string>
-    <string name="shared_string_normal">Обично</string>
+    <string name="shared_string_normal">Нормално</string>
     <string name="how_to_use">Како да користите:</string>
     <string name="auto_25_chars_route_tu_kr">Направите полукружно и држите десно</string>
     <string name="auto_25_chars_route_roundabout_kr">Изађите на излазу %1$d и држите десно</string>
@@ -4411,7 +4411,7 @@
     <string name="map_widget_zoom_level">Разина увећања</string>
     <string name="map_widget_camera_distance">Висина камере</string>
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
-    <string name="shared_string_large">Увећано</string>
+    <string name="shared_string_large">Велико</string>
     <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
     <string name="favorite_confirm_delete_group">Да ли обрисати групу \"%1$s\" и све придружене тачке (%2$d)?</string>
     <string name="av_notes_audio_widget_desc">Тап по справици ће снимити звучну белешку.</string>

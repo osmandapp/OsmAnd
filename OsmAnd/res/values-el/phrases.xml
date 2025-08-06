@@ -3227,7 +3227,7 @@
     <string name="poi_water_place_access_family">Οικογένεια</string>
     <string name="poi_water_place_access_multifamilies">Πολλές οικογένειες</string>
     <string name="poi_socket_cee_blue">Ρευματοδότης: γαλάζιος CEE</string>
-    <string name="poi_socket_cee_blue_current">Ρευματοδότης: Γαλάζιος CEE: ρεύμα</string>
+    <string name="poi_socket_cee_blue_current">Ρευματοδότης: γαλάζιος CEE: ρεύμα</string>
     <string name="poi_socket_cee_blue_output">Ρευματοδότης: γαλάζιος CEE: έξοδος</string>
     <string name="poi_socket_cee_red_16a">Ρευματοδότης: κόκκινος CEE 16Α</string>
     <string name="poi_socket_cee_red_16a_current">Ρευματοδότης: κόκκινος CEE 16A: ρεύμα</string>
@@ -4410,4 +4410,10 @@
     <string name="poi_geodesist">Γεωδαίτης</string>
     <string name="poi_local_ref">Τοπική αναφορά</string>
     <string name="poi_barrier_planter">Γλάστρα</string>
+    <string name="poi_socket_type3a_output_filter">Έξοδος βύσματος τύπου 3a</string>
+    <string name="poi_socket_typee_output_filter">Έξοδος βύσματος τύπου E</string>
+    <string name="poi_socket_type3c_output_filter">Έξοδος βύσματος τύπου 3c</string>
+    <string name="poi_socket_typee_yes">Τύπος E</string>
+    <string name="poi_zurkhaneh_sport">Άθλημα zurkhaneh</string>
+    <string name="poi_sports_hall">Κλειστό αθλητικό κέντρο</string>
 </resources>

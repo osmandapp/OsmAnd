@@ -46,12 +46,12 @@ public final class SearchResultsScreen extends BaseSearchScreen implements Defau
 
 		this.loading = getApp().isApplicationInitializing();
 		getLifecycle().addObserver(this);
-		getApp().getAppInitializer().addListener(this);
 	}
 
 	@Override
 	protected void onFirstGetTemplate() {
 		super.onFirstGetTemplate();
+		getApp().getAppInitializer().addListener(this);
 		if (!loading) {
 			if (!Algorithms.isEmpty(searchText)) {
 				getSearchHelper().runSearch(searchText);

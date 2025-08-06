@@ -254,4 +254,8 @@
     <string name="gps_not_available">Παρακαλούμε ενεργοποιήστε την \"Τοποθεσία\" στις ρυθμίσεις συστήματος</string>
     <string name="location_service_no_gps_available">Επιλέξτε έναν από τους παρόχους τοποθεσίας για να μοιραστείτε την τοποθεσία σας.</string>
     <string name="install_osmand_dialog_message">Πρέπει να εγκαταστήσετε την ελεύθερη ή πληρωμένη έκδοση του OsmAnd πρώτα</string>
+    <string name="logcat_buffer">Ενδιάμεση μνήμη του Logcat</string>
+    <string name="buffer_time_descr">Μέγιστος χρόνος για την αποθήκευση σημείων στην ενδιάμεση μνήμη</string>
+    <string name="buffer_time">Χρόνος λήξης ενδιάμεσης μνήμης</string>
+    <string name="gps_points_in_buffer">απεστάλησαν (%1$d στην ενδιάμεση μνήμη)</string>
 </resources>

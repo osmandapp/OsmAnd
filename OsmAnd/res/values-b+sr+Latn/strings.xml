@@ -5044,7 +5044,7 @@
     <string name="coordinates_widget_current_location_desc">Prikazuje geografske koordinate trenutnog zemaljske lokacije</string>
     <string name="coordinates_widget_current_location">Koordinate: trenutna lokacija</string>
     <string name="quick_action_map_center_widget_descr">Prekidač za prikaz ili skrivanje vidžeta na centru mape.</string>
-    <string name="shared_string_large">Uvećano</string>
+    <string name="shared_string_large">Veliko</string>
     <string name="how_to_use">Kako da koristiš:</string>
     <string name="display_position">Prikazati lokaciju</string>
     <string name="download_heightmap_maps">Visinska mapa</string>
