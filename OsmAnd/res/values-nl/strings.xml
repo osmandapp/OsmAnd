@@ -1049,7 +1049,7 @@
     <string name="routing_attr_avoid_unpaved_name">Geen onverharde wegen</string>
     <string name="routing_attr_avoid_unpaved_description">Vermijdt onverharde wegen</string>
     <string name="routing_attr_avoid_ferries_name">Geen veerboten</string>
-    <string name="routing_attr_avoid_ferries_description">Vermijdt veerboten</string>
+    <string name="routing_attr_avoid_ferries_description">Vermijd veerboten</string>
     <string name="routing_attr_avoid_motorway_name">Geen autowegen</string>
     <string name="routing_attr_avoid_motorway_description">Vermijdt autowegen</string>
     <string name="routing_attr_weight_description">Geef het gewicht dat minimaal toegestaan moet zijn op de route.</string>
@@ -3402,7 +3402,7 @@
     <string name="monitoring_min_speed_descr_remark">Opmerking: snelheid &gt; 0 controle: De meeste GPS-chipsets melden alleen een snelheid als het algoritme bepaalt dat je in beweging bent, en geen als je dat niet bent. Vandaar dat het gebruik van de ‘&gt; 0’-instelling in dit filter in zekere zin gebruikmaakt van de bewegingsdetectie van de GPS-chipset. Maar zelfs als niet hier gefilterd wordt tijdens de opname, maken we nog steeds gebruik van deze functie in onze GPX-analyse om de afgelegde afstand te bepalen, dat wil zeggen dat de waarde die wordt weergegeven in dat veld, de afstand is die is opgenomen tijdens beweging.</string>
     <string name="shared_string_terrain">Terrein</string>
     <string name="slope_description">Helling gebruikt kleuren om de steilheid van het terrein te visualiseren.</string>
-    <string name="terrain_slider_description">Stel de minimale en maximale zoomniveaus in waarbij de laag wordt weergegeven.</string>
+    <string name="terrain_slider_description">Stel het minimum- en maximumzoomniveau in waarop de laag wordt weergegeven.</string>
     <string name="slope_download_description">Om helling te tonen zijn extra kaarten nodig.</string>
     <string name="slope_read_more">Meer over Hellingen in %1$s.</string>
     <string name="shared_string_transparency">Transparantie</string>
@@ -4628,7 +4628,7 @@
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="ant_heart_rate_write_gpx_desc">Hartslag meenemen in opname</string>
     <string name="send_uuid_preference_desc">Willekeurig UUID wordt gebruikt om kaarten van de OsmAnd servers lokaal op te slaan, om gematigd gebruik van servercapaciteit te monitoren, verkeer te voorspellen, en anonieme maandelijkse kaart rapporten te maken.</string>
-    <string name="map_widget_zoom_level_desc">Toont hoever de kaart is ingezoemd.</string>
+    <string name="map_widget_zoom_level_desc">Toont het huidige zoomniveau van de kaart.</string>
     <string name="rendering_attr_weatherTempContours_name">Temperatuur hoogtelijnen</string>
     <string name="co2_mission">CO2 uitstoot</string>
     <string name="track_file_description">Hierop drukken toont de beschikbare paden.</string>
@@ -5657,9 +5657,9 @@
     <string name="app_mode_suv">SUV</string>
     <string name="battery_saving_mode">Batterij-spaarstand</string>
     <string name="quick_action_previous_screen_title">Vorig scherm</string>
-    <string name="corner_radius">Hoekstraal</string>
+    <string name="corner_radius">Hoekafronding</string>
     <string name="quick_action_verb_navigate">Navigeren</string>
-    <string name="background_opacity">Achtergrond-transparantie</string>
+    <string name="background_opacity">Achtergrondopaciteit</string>
     <string name="shared_string_setup">Instelling</string>
     <string name="rendering_attr_padusDisplayMode_name">Openbaar gebied weergavemodus</string>
     <string name="glide_ratio_to_target">Zweefhoek tot bestemming</string>
@@ -6017,4 +6017,16 @@
     <string name="rendering_attr_padusHideBoundaries_description">Verberg de grenzen van openbare ruimtes maar behoud delen</string>
     <string name="custom_buttons">Eigen knoppen</string>
     <string name="shared_string_additional">Extra</string>
+    <string name="quick_action_verb_start_pause">Start-Pauzeer/Hervat</string>
+    <string name="help_article_personal_color_palette_schemes_name">Kleurenschema\'s</string>
+    <string name="delete_widget">Widget verwijderen?</string>
+    <string name="delete_widget_description">Deze widget zal verwijderd worden. Je kunt deze later herstellen via Configureer Scherm.</string>
+    <string name="configure_map_description">Verander de: kaartstijl, kaartlagen of andere instellingen.</string>
+    <string name="movies_list">Filmlijst</string>
+    <string name="reset_average_speed">Reset gemiddelde snelheid</string>
+    <string name="unknown_bt_device">Onbekend apparaat</string>
+    <string name="shared_string_no_internet_connection">Geen internetverbinding</string>
+    <string name="no_internet_descr">Controleer je internetverbinding en probeer opnieuw.</string>
+    <string name="no_photos_available_descr">Er zijn nog geen gebruikersafbeeldingen toegevoegd voor deze locatie</string>
+    <string name="no_photos_available">Geen foto\'s beschikbaar</string>
 </resources>
