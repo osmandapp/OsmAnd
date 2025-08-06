@@ -5807,9 +5807,10 @@
     <string name="reverse_mode_original_track_desc">Segui esattamente lo stesso track fino al punto di partenza.\nAttenzione: questa operazione può essere pericolosa poiché ignora il senso unico sulle strade.</string>
     <string name="reverse_mode">Modalità inversa</string>
     <string name="n_a">N/A</string>
-    <string name="next_turn_information">Informazioni sul prossimo turn</string>
+    <string name="next_turn_information">Informazioni sulla prossima svolta</string>
     <string name="description_purchases_fastspring">Puoi gestire i tuoi acquisti tramite il portale di gestione dell\'account FastSpring.</string>
     <string name="description_subscription_fastspring">Puoi gestire o cancellare il tuo abbonamento tramite il portale di gestione dell\'account FastSpring.</string>
     <string name="manage_purchases">Gestisci gli acquisti</string>
     <string name="failed_to_connect">Impossibile connettersi a %1s</string>
+    <string name="next_turn_information_desc">Mostra la direzione della prossima svolta e il nome della strada.</string>
 </resources>
