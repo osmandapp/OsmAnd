@@ -411,14 +411,6 @@ public class BinaryMapPoiReaderAdapter {
 		List<TIntArrayList> listOffsets = null;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 		long offset = 0;
-		SearchRequest<Amenity> overlapedReq = new SearchRequest<>();
-		QuadRect overlappedBBox = MapUtils.roundBoundingBox31(new QuadRect(req.left, req.top, req.right, req.bottom), req.getZoom() + 1);
-		overlapedReq.left = (int) overlappedBBox.left;
-		overlapedReq.top = (int) overlappedBBox.top;
-		overlapedReq.right = (int) overlappedBBox.right;
-		overlapedReq.bottom = (int) overlappedBBox.bottom;
-		overlapedReq.x = req.x;
-		overlapedReq.y = req.y;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -450,7 +442,7 @@ public class BinaryMapPoiReaderAdapter {
 							codedIS.seek(dataOffsets.get(i) + offset);
 							int len = codedIS.readRawVarint32();
 							long oldLim = codedIS.pushLimitLong((long) len);
-							readPoiNameIndexData(offsetMap, overlapedReq, region, nameIndexCoordinates);
+							readPoiNameIndexData(offsetMap, req, region, nameIndexCoordinates);
 							codedIS.popLimit(oldLim);
 							if (req.isCancelled()) {
 								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -530,12 +522,15 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER:
 				int x31 = (x << (31 - zoom));
 				int y31 = (y << (31 - zoom));
+				int x31r = ((x + 1) << (31 - zoom));
+				int y31b = ((y + 1) << (31 - zoom));
 				long l = readInt();
 				if(l > Integer.MAX_VALUE) {
 					throw new IllegalStateException();
 				}
 				int shift = (int) l;
-				if (req.contains(x31, y31, x31, y31)) {
+				QuadRect r = new QuadRect(x31, y31, x31r, y31b);
+				if (req.contains(x31, y31, x31, y31) || r.contains(req.x, req.y, req.x, req.y)) {
 					long d = Math.abs(req.x - x31) + Math.abs(req.y - y31);
 					offsets.put(shift, d);
 				}
