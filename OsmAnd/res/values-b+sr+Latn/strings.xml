@@ -5785,4 +5785,6 @@
     <string name="reverse_mode_original_track_desc">Pratite tačno trasu pre početka.\nNapomena: To može biti opasno, jer ignoriše jedan od načina saobraćaj na putevima.</string>
     <string name="reverse_mode">Obrnut mod</string>
     <string name="n_a">N/A</string>
+    <string name="write_location_provider_description">Sačuvajte provajdera lokacije za svaku tačku putanje tokom snimanja</string>
+    <string name="write_location_provider">Napišite provajdera lokacije</string>
 </resources>
