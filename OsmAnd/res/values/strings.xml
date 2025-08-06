@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="altitude_metrics_description">Sets the display unit for altitude in widgets and statistics.</string>
     <string name="map_orientation_portrait_inverted">Portrait (inverted)</string>
     <string name="map_orientation_landscape_inverted">Landscape (inverted)</string>
     <string name="reverse_mode_calculate_route">Calculate route</string>
