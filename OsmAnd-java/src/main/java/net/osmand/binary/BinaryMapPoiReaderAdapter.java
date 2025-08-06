@@ -42,7 +42,6 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int BASE_POI_ZOOM = 31 - BASE_POI_SHIFT;// 24 zoom
 	private static final int FINAL_POI_ZOOM = 31 - FINAL_POI_SHIFT;// 26 zoom
 
-	private static final int MAX_POI_NAME_INDEX_ZOOM = 16;
 
 	public static class PoiSubType {
 		public boolean text;
@@ -413,8 +412,7 @@ public class BinaryMapPoiReaderAdapter {
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
 		long offset = 0;
 		SearchRequest<Amenity> overlapedReq = new SearchRequest<>();
-		QuadRect overlappedBBox = MapUtils.roundBoundingBox31(new QuadRect(req.left, req.top, req.right, req.bottom), MAX_POI_NAME_INDEX_ZOOM);
-		// max POI name index zoom of box equal 16
+		QuadRect overlappedBBox = MapUtils.roundBoundingBox31(new QuadRect(req.left, req.top, req.right, req.bottom), req.getZoom() + 1);
 		overlapedReq.left = (int) overlappedBBox.left;
 		overlapedReq.top = (int) overlappedBBox.top;
 		overlapedReq.right = (int) overlappedBBox.right;
