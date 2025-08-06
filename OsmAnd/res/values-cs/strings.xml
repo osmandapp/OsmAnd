@@ -5803,4 +5803,6 @@
     <string name="reverse_mode_original_track_desc">Vraťte se přesně po stejné stopě zpět na start.\nUpozornění: To může být nebezpečné, protože se tím ignoruje jednosměrný provoz na silnicích.</string>
     <string name="reverse_mode">Obrácený režim</string>
     <string name="n_a">N/A</string>
+    <string name="write_location_provider_description">Uložit poskytovatele polohy pro každý bod stopy během nahrávání</string>
+    <string name="write_location_provider">Zapsat poskytovatele polohy</string>
 </resources>
