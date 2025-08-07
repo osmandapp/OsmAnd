@@ -5783,4 +5783,6 @@
     <string name="reverse_mode_original_track_desc">沿著確切的路徑回到起點。\n警告：這可能會很危險，因為其會忽略單行道。</string>
     <string name="reverse_mode">反向模式</string>
     <string name="n_a">N/A</string>
+    <string name="write_location_provider_description">錄製時將位置提供者儲存至每個軌跡點</string>
+    <string name="write_location_provider">寫入位置提供者</string>
 </resources>
