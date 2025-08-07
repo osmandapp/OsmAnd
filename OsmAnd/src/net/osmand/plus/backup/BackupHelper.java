@@ -497,6 +497,10 @@ public class BackupHelper {
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
 	}
 
+	public void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles) throws UserNotRegisteredException {
+		deleteFilesSync(remoteFiles, false, AsyncTask.THREAD_POOL_EXECUTOR, new OnDeleteFilesListener() {});
+	}
+
 	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
 			@Nullable Executor executor,
 			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {

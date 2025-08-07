@@ -148,6 +148,19 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 	}
 
 	@NonNull
+	public List<RemoteFile> collectRemoteFilesForTypes(@NonNull Collection<ExportType> types) {
+		List<RemoteFile> result = new ArrayList<>();
+		for (ExportType exportType : types) {
+			for (Object item : getItemsForType(exportType)) {
+				if (item instanceof RemoteFile remoteFile) {
+					result.add(remoteFile);
+				}
+			}
+		}
+		return result;
+	}
+
+	@NonNull
 	public List<?> getItemsForType(@NonNull ExportType exportType) {
 		for (SettingsCategoryItems categoryItems : data.values()) {
 			if (categoryItems.getTypes().contains(exportType)) {

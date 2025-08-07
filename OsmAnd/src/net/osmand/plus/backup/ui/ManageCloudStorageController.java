@@ -16,6 +16,8 @@ import net.osmand.OnCompleteCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
+import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -90,14 +92,14 @@ public class ManageCloudStorageController extends BaseBackupTypesController {
 
 	@Override
 	public void onClearTypesConfirmed(@NonNull List<ExportType> types) {
-		// TODO: implement in correct way
-//		try {
-//			screen.updateProgressVisibility(true);
-//			backupHelper.deleteAllFiles(types);
-//		} catch (UserNotRegisteredException e) {
-//			screen.updateProgressVisibility(false);
-//			LOG.error(e);
-//		}
+		try {
+			screen.updateProgressVisibility(true);
+			List<RemoteFile> remoteFiles = collectRemoteFilesForTypes(types);
+			backupHelper.deleteFilesSync(remoteFiles);
+		} catch (UserNotRegisteredException e) {
+			screen.updateProgressVisibility(false);
+			LOG.error(e);
+		}
 	}
 
 	@Nullable
