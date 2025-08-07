@@ -140,11 +140,11 @@
     <string name="ais_ship_lost_timeout">Ship visibility timeout - remove if no AIS signal received within set duration.</string>
     <string name="ais_ship_lost_timeout_description">Set timeout for ship visibility: After this time without signal reception, the ship symbol will change its state on screen: It will be crossed out.</string>
     <string name="ais_cpa_settings">Settings related to CPA</string>
-    <string name="ais_cpa_settings_description">These values determine how AIS objects are displayed when they approach the vessel's own position.</string>
+    <string name="ais_cpa_settings_description">These values determine how AIS objects are displayed when they approach the vessel\'s own position.</string>
     <string name="ais_cpa_warning_time">Warning time before the Closest Point of Approach (CPA)</string>
     <string name="ais_cpa_warning_time_description">If the TCPA (Time to Closest Point of Approach) with another vessel falls below the defined threshold, the vessel is highlighted in red.</string>
     <string name="ais_cpa_warning_distance">Warning distance for the Closes Point of Approach (CPA)</string>
-    <string name="ais_cpa_warning_distance_description">Vessels are highlighted in red if the CPA (Closest Point of Approach) is below the defined threshold and the TCPA (Time to CPA) falls within the warning time set in the 'Warning time to reach the CPA' setting.</string>
+    <string name="ais_cpa_warning_distance_description">Vessels are highlighted in red if the CPA (Closest Point of Approach) is below the defined threshold and the TCPA (Time to CPA) falls within the warning time set in the \'Warning time to reach the CPA\' setting.</string>
     <string name="plugin_ais_tracker_name">AIS vessel tracker</string>
     <string name="plugin_ais_tracker_description">Displays AIS positions and information about nearby vessels. AIS data is received over the network from an external AIS receiver.</string>
     <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nThis plugin is a hobby project and is not intended for use in critical applications. It does not guarantee reliability or accuracy. Do not rely on this software for navigation, safety of life, or any other essential operations.</string>
