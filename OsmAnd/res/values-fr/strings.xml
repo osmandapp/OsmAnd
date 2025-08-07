@@ -4533,7 +4533,7 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
-    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est un moteur de rendu de carte plus rapide, offrant également une vue en 2,5D. Le rendu version 1 était le mode par défaut avant OsmAnd 4.3 et reste recommandé pour les appareils plus anciens.</string>
+    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est un moteur de rendu cartographique plus puissant, offrant également une vue 2,5D. La version 1 était la version par défaut avant OsmAnd 4.3 et reste préférable pour les appareils plus anciens.</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolignes de vitesse de vent</string>
     <string name="rendering_engine_failed_descr">OsmAnd est repassé au mode de rendu de carte « Version 1 ». Vous pouvez tenter de réactiver le nouveau moteur « Version 2 (OpenGL) » dans les paramètres.\n\nMerci de contribuer aux améliorations en transmettant votre journal d’erreurs.</string>
     <string name="mtb_imba">IMBA</string>
@@ -5541,7 +5541,7 @@
     <string name="rendering_attr_showClimbingRoutes_name">Voies d\'escalade</string>
     <string name="rendering_attr_showClimbingRoutes_description">Afficher les voies d\'escalade</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Utiliser les unités sélectionnées dans le nom.</string>
-    <string name="display_distance_to_first_intermediate_summary">Affiche la durée restante et la distance jusqu\'à la prochaine étape. Désactiver pour toujours afficher ces informations pour la destination finale.</string>
+    <string name="display_distance_to_first_intermediate_summary">Affiche le temps et la distance jusqu\'au prochain arrêt. Désactivez cette option pour afficher uniquement les détails de la destination finale.</string>
     <string name="display_distance_to_first_intermediate">Affiche les détails de l\'itinéraire jusqu\'à la prochaine étape</string>
     <string name="popular_places_nearby">Lieux populaires proches</string>
     <string name="recently_visited">Dernières visites</string>
@@ -5549,7 +5549,7 @@
     <string name="shared_string_avg_speed">Vitesse min.</string>
     <string name="shared_string_length">Longueur</string>
     <string name="map_widget_route_information">Informations sur l\'itinéraire</string>
-    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, la durée de trajet restante et la distance à parcourir pour l\'itinéraire de navigation en cours.</string>
+    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps de trajet restant et la distance pour l\'itinéraire de navigation actif.</string>
     <string name="shared_string_default_view">Vue par défaut</string>
     <string name="ais_address_settings">Paramètres de l\'adresse IP</string>
     <string name="ais_address_settings_description">Choisissez le protocole NMEA (UDP/TCP) et spécifiez les adresses et ports correspondants</string>
@@ -5572,11 +5572,11 @@
     <string name="ais_object_lost_timeout">Délai avant masquage d\'un objet perdu</string>
     <string name="plugin_ais_tracker_name">Suivi AIS du navire</string>
     <string name="no_places_available">Aucun lieu dans la zone visible</string>
-    <string name="no_photo_for_location_desc">Aucune photo d\'utilisateur n\'a encore été ajoutée pour ce lieu</string>
+    <string name="no_photo_for_location_desc">Aucune photo d\'utilisateur n\'a encore été ajoutée pour cet emplacement</string>
     <string name="ais_object_lost_timeout_description">Définissez un délai d\'expiration pour la visibilité de l\'objet AIS : si aucun signal n\'est reçu dans le délai spécifié, l\'objet sera automatiquement supprimé de l\'écran.</string>
     <string name="ais_cpa_warning_time">Délai d\'avertissement avant le point d\'approche le plus proche (CPA)</string>
     <string name="ais_cpa_warning_distance_description">Les navires sont surlignés en rouge si le CPA (point d\'approche le plus proche) est inférieur au seuil défini et que le TCPA (temps jusqu\'au CPA) se situe dans le délai d\'avertissement défini dans le paramètre « Délai d\'avertissement pour atteindre le CPA ».</string>
-    <string name="plugin_ais_tracker_disclaimer">CLAUSE DE NON-RESPONSABILITÉ\n\nCette extension est un projet de loisir et n\'est pas conçu pour la fiabilité et l\'intégrité. NE VOUS FIEZ PAS à ce logiciel de quelque manière que ce soit, y compris le guidage et/ou votre sécurité.</string>
+    <string name="plugin_ais_tracker_disclaimer">AVERTISSEMENT\n\nCe plugin est un projet amateur et n\'est pas destiné à être utilisé dans des applications critiques. Sa fiabilité et sa précision ne sont pas garanties. Ne comptez pas sur ce logiciel pour la navigation, la sécurité des personnes ou toute autre opération essentielle.</string>
     <string name="ais_ship_lost_timeout_description">Définir le délai pour la visibilité des bateaux : après ce délai sans réception de signal, le symbole du bateau changera sur l\'écran : il sera barré.</string>
     <string name="ais_cpa_settings">Paramètres liés au CPA</string>
     <string name="ais_cpa_settings_description">Ces valeurs déterminent la manière dont les objets AIS s\'affichent lorsqu\'ils s\'approchent de la position du navire.</string>
