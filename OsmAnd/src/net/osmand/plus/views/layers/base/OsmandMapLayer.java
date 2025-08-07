@@ -24,6 +24,7 @@ import androidx.annotation.StringRes;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererView.MapRendererViewListener;
+import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapMarker;
@@ -35,6 +36,8 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.utils.ColorUtilities;
@@ -42,6 +45,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -63,6 +67,9 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected boolean mapActivityInvalidated;
 	protected boolean mapRendererChanged;
 	protected boolean invalidated;
+
+	protected boolean debugRenderingInfo;
+	protected static float lastSymbolsLoadingTime;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -164,11 +171,14 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		this.mapActivity = mapActivity;
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapActivity != null) {
+			debugRenderingInfo = getApplication().getSettings().DEBUG_RENDERING_INFO.get() &&
+					PluginsHelper.isActive(OsmandDevelopmentPlugin.class);
 			if (mapRenderer != null) {
 				mapRenderer.addListener(this);
 			}
 			mapActivityInvalidated = true;
 		} else {
+			debugRenderingInfo = false;
 			if (mapRenderer != null) {
 				mapRenderer.removeListener(this);
 			}
@@ -251,6 +261,16 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	@Override
 	public void onUpdateFrame(MapRendererView mapRenderer) {
+		if (debugRenderingInfo) {
+			float symbolsLoadingTime = mapRenderer.getSymbolsLoadingTime();
+			if (symbolsLoadingTime > 0 && lastSymbolsLoadingTime != symbolsLoadingTime) {
+				String performanceMetricsResult = NativeCore.getLastPerformanceMetricsResult();
+				if (!Algorithms.isEmpty(performanceMetricsResult)) {
+					getApplication().showToastMessage(performanceMetricsResult + " at " + getMapView().getZoom() + "z");
+				}
+			}
+			lastSymbolsLoadingTime = symbolsLoadingTime;
+		}
 	}
 
 	@Override

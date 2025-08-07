@@ -129,7 +129,7 @@ public class GradientUiHelper {
 					typeValue = "°";
 					break;
 				case HEIGHT:
-					FormattedValue formattedValue = OsmAndFormatter.getFormattedAltitudeValue(value, app, app.getSettings().METRIC_SYSTEM.get());
+					FormattedValue formattedValue = OsmAndFormatter.getFormattedAltitudeValue(value, app, app.getSettings().ALTITUDE_METRIC.get());
 					stringValue = formattedValue.value;
 					typeValue = formattedValue.unit;
 					break;
@@ -165,7 +165,7 @@ public class GradientUiHelper {
 						} else {
 							break;
 						}
-						formattedValue = OsmAndFormatter.getFormattedAltitudeValue(calculatedValue, app, app.getSettings().METRIC_SYSTEM.get());
+						formattedValue = OsmAndFormatter.getFormattedAltitudeValue(calculatedValue, app, app.getSettings().ALTITUDE_METRIC.get());
 						stringValue = formattedValue.value;
 						type = formattedValue.unit;
 					}

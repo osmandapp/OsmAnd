@@ -34,6 +34,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
@@ -470,20 +471,20 @@ public class OsmAndFormatter {
 	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
-		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		return getFormattedAlt(alt, ctx, mc);
+		AltitudeMetrics altitudeMetrics = settings.ALTITUDE_METRIC.get();
+		return getFormattedAlt(alt, ctx, altitudeMetrics);
 	}
 
 	@NonNull
-	public static String getFormattedAlt(double alt, OsmandApplication ctx, MetricsConstants mc) {
-		return getFormattedAltitudeValue(alt, ctx, mc).format(ctx);
+	public static String getFormattedAlt(double alt, OsmandApplication ctx, AltitudeMetrics altitudeMetrics) {
+		return getFormattedAltitudeValue(alt, ctx, altitudeMetrics).format(ctx);
 	}
 
 	@NonNull
 	public static FormattedValue getFormattedAltitudeValue(double altitude,
 	                                                       @NonNull OsmandApplication ctx,
-	                                                       @NonNull MetricsConstants mc) {
-		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET;
+	                                                       @NonNull AltitudeMetrics am) {
+		boolean useFeet = am.shouldUseFeet();
 		FormattedValue formattedValue;
 		if (useFeet) {
 			int feet = (int) (altitude * FEET_IN_ONE_METER + 0.5);

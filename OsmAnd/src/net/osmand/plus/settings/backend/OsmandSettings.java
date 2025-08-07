@@ -107,6 +107,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
@@ -1123,6 +1124,16 @@ public class OsmandSettings {
 		@Override
 		public MetricsConstants getProfileDefaultValue(ApplicationMode mode) {
 			return DRIVING_REGION.getModeValue(mode).defMetrics;
+		}
+	}.makeProfile();
+
+	public final EnumStringPreference<AltitudeMetrics> ALTITUDE_METRIC = (EnumStringPreference<AltitudeMetrics>) new EnumStringPreference<AltitudeMetrics>(this,
+			"altitude_metrics", AltitudeMetrics.METERS, AltitudeMetrics.values()) {
+
+		@Override
+		public AltitudeMetrics getProfileDefaultValue(ApplicationMode mode) {
+			MetricsConstants mc = METRIC_SYSTEM.getModeValue(mode);
+			return AltitudeMetrics.Companion.fromMetricsConstant(mc);
 		}
 	}.makeProfile();
 

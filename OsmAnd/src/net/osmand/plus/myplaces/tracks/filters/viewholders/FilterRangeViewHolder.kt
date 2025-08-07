@@ -11,7 +11,6 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.utils.FormattedValue
-import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.OsmAndFormatterParams
 import net.osmand.plus.utils.UiUtilities
@@ -20,6 +19,7 @@ import net.osmand.plus.widgets.TextViewEx
 import net.osmand.plus.widgets.tools.SimpleTextWatcher
 import net.osmand.shared.gpx.filters.MeasureUnitType
 import net.osmand.shared.gpx.filters.RangeTrackFilter
+import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.util.Algorithms
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import java.text.DecimalFormat
@@ -151,11 +151,17 @@ open class FilterRangeViewHolder(
 		title.text = filter.trackFilterType.getName()
 		valueFromInputContainer.labelText =
 			"${app.getString(R.string.shared_string_from)}, ${
-				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
+				getMeasureUnitType().getFilterUnitText(
+					app.settings.METRIC_SYSTEM.get(),
+					app.settings.ALTITUDE_METRIC.get()
+				)
 			}"
 		valueToInputContainer.labelText =
 			"${app.getString(R.string.shared_string_to)}, ${
-				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
+				getMeasureUnitType().getFilterUnitText(
+					app.settings.METRIC_SYSTEM.get(),
+					app.settings.ALTITUDE_METRIC.get()
+				)
 			}"
 		updateExpandState()
 		updateValues()
@@ -193,11 +199,17 @@ open class FilterRangeViewHolder(
 		valueToInput.setSelection(valueToInput.length())
 		val minValuePrompt =
 			"${decimalFormat.format(minValue.toFloat())} ${
-				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
+				getMeasureUnitType().getFilterUnitText(
+					app.settings.METRIC_SYSTEM.get(),
+					app.settings.ALTITUDE_METRIC.get()
+				)
 			}"
 		val maxValuePrompt =
 			"${decimalFormat.format(maxValue.toFloat())} ${
-				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
+				getMeasureUnitType().getFilterUnitText(
+					app.settings.METRIC_SYSTEM.get(),
+					app.settings.ALTITUDE_METRIC.get()
+				)
 			}"
 		minFilterValue.text = minValuePrompt
 		maxFilterValue.text = maxValuePrompt
@@ -232,7 +244,7 @@ open class FilterRangeViewHolder(
 	fun getFormattedValue(
 		measureUnitType: MeasureUnitType,
 		value: String): FormattedValue {
-		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
+		val altitudeMetrics: AltitudeMetrics = app.settings.ALTITUDE_METRIC.get()
 		val params = OsmAndFormatterParams()
 		params.setExtraDecimalPrecision(3)
 		params.setForcePreciseValue(true)
@@ -241,7 +253,7 @@ open class FilterRangeViewHolder(
 			MeasureUnitType.ALTITUDE -> OsmAndFormatter.getFormattedAltitudeValue(
 				value.toDouble(),
 				app,
-				metricsConstants)
+				altitudeMetrics)
 
 			MeasureUnitType.DISTANCE -> OsmAndFormatter.getFormattedDistanceValue(
 				value.toFloat(),
@@ -275,7 +287,7 @@ open class FilterRangeViewHolder(
 				app.getString(R.string.track_filter_range_selected_format),
 				fromTxt,
 				toTxt,
-				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get()))
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get(), app.settings.ALTITUDE_METRIC.get()))
 		}
 	}
 

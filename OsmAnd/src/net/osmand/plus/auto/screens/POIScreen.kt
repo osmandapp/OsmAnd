@@ -109,14 +109,14 @@ class POIScreen(
         val mapPoint = ArrayList<Amenity>()
         val mapRect = QuadRect()
         searchResults?.let {
-            val searchResultsSize = searchResults.size
-            val limitedSearchResults =
-                searchResults.subList(0, searchResultsSize.coerceAtMost(contentLimit - 1))
-            if (!Algorithms.isEmpty(limitedSearchResults)) {
-                initialCompassMode = app.settings.compassMode
-                app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
-            }
-            for (point in limitedSearchResults) {
+            var counter = 0
+            for (point in searchResults) {
+                if (point.location == null) {
+                    continue
+                }
+                if (counter >= contentLimit) {
+                    break
+                }
                 if (point.`object` is Amenity) {
                     val amenity = point.`object` as Amenity
                     mapPoint.add(amenity)
@@ -152,6 +152,11 @@ class POIScreen(
                                     point.location.longitude)).build()).build())
                 icon?.let { rowBuilder.setImage(it) }
                 listBuilder.addItem(rowBuilder.build())
+                counter++
+            }
+            if (counter > 0) {
+                initialCompassMode = app.settings.compassMode
+                app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
             }
         }
         adjustMapToRect(location, mapRect)
@@ -160,7 +165,7 @@ class POIScreen(
 
     private fun loadPOI() {
         categoryResult.priorityDistance = searchRadius
-        searchHelper.completeQueryWithObject(categoryResult)
+        searchHelper?.completeQueryWithObject(categoryResult)
         loading = true
     }
 

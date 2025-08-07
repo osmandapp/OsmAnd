@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.utils.FileUtils;
@@ -36,7 +37,8 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 	public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 	                           @Nullable String entryName) throws IOException, IllegalArgumentException {
 		FileSettingsItem item = getItem();
-		String fileName = item.getFileName();
+		entryName = BackupUtils.removeLeadingSlash(entryName);
+		String fileName = BackupUtils.removeLeadingSlash(item.getFileName());
 		if (fileName == null || entryName == null) {
 			throw new IllegalArgumentException("Item fileName or entryName is null");
 		}

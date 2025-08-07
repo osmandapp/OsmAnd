@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -120,8 +121,9 @@ public abstract class SettingsItem {
 		// Case: this.fileName could be a folder so all remote files will be collected for it ?
 		// + Subfolder check correct
 		// - Where is type prefix ? filename same for different types
-		String n = getFileName();
-		return n != null && (n.endsWith(fileName) || fileName.startsWith(n + File.separator));
+		fileName = BackupUtils.removeLeadingSlash(fileName);
+		String name = BackupUtils.removeLeadingSlash(getFileName());
+		return name != null && (name.endsWith(fileName) || fileName.startsWith(name + File.separator));
 	}
 
 	public boolean shouldReadOnCollecting() {

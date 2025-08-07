@@ -111,7 +111,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 				this.duplicates = getDuplicatesData(selectedItems);
 				return selectedItems;
 			case IMPORT:
-				if (items != null && items.size() > 0) {
+				if (!Algorithms.isEmpty(items)) {
 					for (SettingsItem item : items) {
 						item.apply();
 					}

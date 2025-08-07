@@ -62,6 +62,7 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -88,6 +89,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private static final String WIKI_DATA_BASE_URL = "https://www.wikidata.org/wiki/";
 
 	private final MetricsConstants metricSystem;
+	private final AltitudeMetrics altitudeMetrics;
 	private final AdditionalInfoBundle additionalInfo;
 
 	private String preferredLang;
@@ -108,6 +110,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		this.preferredLang = preferredLang;
 		this.additionalInfo = infoBundle;
 		this.metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
+		this.altitudeMetrics = mapActivity.getMyApplication().getSettings().ALTITUDE_METRIC.get();
 	}
 
 	public void setPreferredLang(String lang) {
@@ -527,13 +530,15 @@ public class AmenityUIHelper extends MenuBuilder {
 		if ("ele".equals(key)) {
 			try {
 				float distance = Float.parseFloat(vl);
-				vl = OsmAndFormatter.getFormattedAlt(distance, app, metricSystem);
+				vl = OsmAndFormatter.getFormattedAlt(distance, app, altitudeMetrics);
 				String collapsibleVal;
-				if (metricSystem == MILES_AND_FEET || metricSystem == MILES_AND_YARDS || metricSystem == NAUTICAL_MILES_AND_FEET) {
-					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, KILOMETERS_AND_METERS);
+
+				if (altitudeMetrics == AltitudeMetrics.FEET) {
+					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, AltitudeMetrics.METERS);
 				} else {
-					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MILES_AND_FEET);
+					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, AltitudeMetrics.FEET);
 				}
+
 				Set<String> elevationData = new HashSet<>();
 				elevationData.add(collapsibleVal);
 				collapsableView = getDistanceCollapsableView(elevationData);

@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.audionotes.Recording;
@@ -102,10 +103,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 		@NonNull
 		public static FileSubtype getSubtypeByFileName(@NonNull String fileName) {
-			String name = fileName;
-			if (fileName.startsWith(File.separator)) {
-				name = fileName.substring(1);
-			}
+			String name = BackupUtils.removeLeadingSlash(fileName);
 			for (FileSubtype subtype : values()) {
 				switch (subtype) {
 					case UNKNOWN:

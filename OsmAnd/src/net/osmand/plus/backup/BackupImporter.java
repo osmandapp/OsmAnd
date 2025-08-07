@@ -379,8 +379,7 @@ class BackupImporter {
 			if (fileName.charAt(0) != '/') {
 				fileName = "/" + fileName;
 			}
-			if (item instanceof GpxSettingsItem) {
-				GpxSettingsItem gpxItem = (GpxSettingsItem) item;
+			if (item instanceof GpxSettingsItem gpxItem) {
 				String folder = gpxItem.getSubtype().getSubtypeFolder();
 				if (!Algorithms.isEmpty(folder) && folder.charAt(0) != '/') {
 					folder = "/" + folder;

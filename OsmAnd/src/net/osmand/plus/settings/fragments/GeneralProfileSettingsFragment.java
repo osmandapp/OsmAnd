@@ -41,11 +41,13 @@ import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,6 +66,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 		setupDrivingRegionPref();
 		setupUnitsOfLengthPref();
+		setupUnitsOfAltitudePref();
 		setupCoordinatesFormatPref();
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
@@ -177,7 +180,24 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		ListPreferenceEx unitsOfLength = findPreference(settings.METRIC_SYSTEM.getId());
 		unitsOfLength.setEntries(entries);
 		unitsOfLength.setEntryValues(entryValues);
-		unitsOfLength.setIcon(getActiveIcon(R.drawable.ic_action_ruler_unit));
+		unitsOfLength.setIcon(getActiveIcon(R.drawable.ic_action_units_length));
+	}
+
+	private void setupUnitsOfAltitudePref() {
+		AltitudeMetrics[] altitudeMetrics = AltitudeMetrics.values();
+		String[] entries = new String[altitudeMetrics.length];
+		Integer[] entryValues = new Integer[altitudeMetrics.length];
+
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = Algorithms.capitalizeFirstLetter(altitudeMetrics[i].toHumanString());
+			entryValues[i] = altitudeMetrics[i].ordinal();
+		}
+
+		ListPreferenceEx unitsOfAltitude = findPreference(settings.ALTITUDE_METRIC.getId());
+		unitsOfAltitude.setEntries(entries);
+		unitsOfAltitude.setEntryValues(entryValues);
+		unitsOfAltitude.setDescription(R.string.altitude_metrics_description);
+		unitsOfAltitude.setIcon(getActiveIcon(R.drawable.ic_action_units_altitude));
 	}
 
 	private void setupCoordinatesFormatPref() {
