@@ -11,7 +11,8 @@ abstract class BaseSearchScreen(carContext: CarContext) : BaseAndroidAutoScreen(
 	SearchHelperListener {
 
 	protected var loading = false
-	protected val searchHelper: SearchHelper by lazy(::createSearchHelper)
+	protected var searchHelper: SearchHelper? = null
+		get() = field ?: createSearchHelper().also { field = it }
 
 	override fun getConstraintLimitType(): Int {
 		return ConstraintManager.CONTENT_LIMIT_TYPE_PLACE_LIST
@@ -29,11 +30,12 @@ abstract class BaseSearchScreen(carContext: CarContext) : BaseAndroidAutoScreen(
 
 	override fun onFirstGetTemplate() {
 		super.onFirstGetTemplate()
-		searchHelper.contentLimit = contentLimit
+		searchHelper?.contentLimit = contentLimit
 	}
 
 	override fun onDestroy(owner: LifecycleOwner) {
 		super.onDestroy(owner)
-		searchHelper.listener = null
+		searchHelper?.listener = null
+		searchHelper = null
 	}
 }

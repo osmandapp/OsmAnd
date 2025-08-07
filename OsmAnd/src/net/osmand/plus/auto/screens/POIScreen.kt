@@ -165,7 +165,7 @@ class POIScreen(
 
     private fun loadPOI() {
         categoryResult.priorityDistance = searchRadius
-        searchHelper.completeQueryWithObject(categoryResult)
+        searchHelper?.completeQueryWithObject(categoryResult)
         loading = true
     }
 
