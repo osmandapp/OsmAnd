@@ -228,7 +228,7 @@
     <string name="fuel_tank_capacity_description">Enter your tank capacity to accurately track fuel levels and consumption</string>
     <string name="fuel_tank_capacity">Fuel tank capacity</string>
     <string name="shared_strings_dimensions">Dimensions</string>
-    <string name="litres">Litres</string>
+    <string name="litres">Liters</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Imperial gallons</string>
     <string name="us_gallons">US gallons</string>
