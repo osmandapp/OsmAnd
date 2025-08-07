@@ -522,12 +522,15 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER:
 				int x31 = (x << (31 - zoom));
 				int y31 = (y << (31 - zoom));
+				int x31r = ((x + 1) << (31 - zoom));
+				int y31b = ((y + 1) << (31 - zoom));
 				long l = readInt();
 				if(l > Integer.MAX_VALUE) {
 					throw new IllegalStateException();
 				}
 				int shift = (int) l;
-				if (req.contains(x31, y31, x31, y31)) {
+				QuadRect r = new QuadRect(x31, y31, x31r, y31b);
+				if (req.contains(x31, y31, x31, y31) || r.contains(req.x, req.y, req.x, req.y)) {
 					long d = Math.abs(req.x - x31) + Math.abs(req.y - y31);
 					offsets.put(shift, d);
 				}
