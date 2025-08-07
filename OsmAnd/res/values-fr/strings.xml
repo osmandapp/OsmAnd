@@ -5532,16 +5532,16 @@
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Pourcentage d\'interpolation de la position</string>
     <string name="location_interpolation_percent_desc">Définit le pourcentage d\'interpolation de la position lors du guidage. Ce paramètre rend l\'animation de votre position sur la carte plus fluide.</string>
-    <string name="default_buttons_corners_original_description">Chaque bouton conservera son apparence originale.</string>
-    <string name="default_buttons_opacity_original_description">Chaque bouton conservera sa propre opacité d’arrière-plan.</string>
-    <string name="default_buttons_size_original_description">Chaque bouton conservera sa propre taille.</string>
+    <string name="default_buttons_corners_original_description">Chaque bouton conserve ses propres coins.</string>
+    <string name="default_buttons_opacity_original_description">Chaque bouton conserve sa propre opacité d’arrière-plan.</string>
+    <string name="default_buttons_size_original_description">Chaque bouton conserve sa propre taille.</string>
     <string name="auto_zoom_3d_angle">Angle du zoom 3D automatique</string>
     <string name="calculate_size">Calculer la taille</string>
     <string name="calculating_indication_message">Calcul en cours …</string>
     <string name="rendering_attr_showClimbingRoutes_name">Voies d\'escalade</string>
     <string name="rendering_attr_showClimbingRoutes_description">Afficher les voies d\'escalade</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Utiliser les unités sélectionnées dans le nom.</string>
-    <string name="display_distance_to_first_intermediate_summary">Affiche en premier la durée et la distance restantes jusqu\'à la prochaine étape. Désactiver pour toujours afficher ces informations pour la destination.</string>
+    <string name="display_distance_to_first_intermediate_summary">Affiche la durée restante et la distance jusqu\'à la prochaine étape. Désactiver pour toujours afficher ces informations pour la destination finale.</string>
     <string name="display_distance_to_first_intermediate">Affiche les détails de l\'itinéraire jusqu\'à la prochaine étape</string>
     <string name="popular_places_nearby">Lieux populaires proches</string>
     <string name="recently_visited">Dernières visites</string>
@@ -5549,7 +5549,7 @@
     <string name="shared_string_avg_speed">Vitesse min.</string>
     <string name="shared_string_length">Longueur</string>
     <string name="map_widget_route_information">Informations sur l\'itinéraire</string>
-    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps de trajet restant et la distance pour l\'itinéraire de navigation actuel.</string>
+    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, la durée de trajet restante et la distance à parcourir pour l\'itinéraire de navigation en cours.</string>
     <string name="shared_string_default_view">Vue par défaut</string>
     <string name="ais_address_settings">Paramètres de l\'adresse IP</string>
     <string name="ais_address_settings_description">Choisissez le protocole NMEA (UDP/TCP) et spécifiez les adresses et ports correspondants</string>
@@ -5590,7 +5590,7 @@
     <string name="original_color_description">Chaque point conservera sa propre couleur.</string>
     <string name="apply_to_all_points">Appliquer à tous les points</string>
     <string name="original_icon_description">Chaque point conservera sa propre icône.</string>
-    <string name="original_shape_description">Chaque point conservera sa propre forme.</string>
+    <string name="original_shape_description">Chaque point conserve sa propre forme.</string>
     <string name="save_favorite_default_appearance">Appliquer les modifications à tous les points existants dans le dossier ou uniquement à ceux nouvellement ajoutés ?</string>
     <string name="show_dms_grids">Utilisez la notation DMS au lieu de degrés</string>
     <string name="show_mercator_grids_description">Affiche la grille en km Mercator au lieu de WGS84 ou UTM</string>
@@ -5698,6 +5698,6 @@
     <string name="reverse_mode">Mode inversé</string>
     <string name="n_a">N/A</string>
     <string name="altitude_metrics_description">Définit l\'unité d\'affichage de l\'altitude dans les widgets et les statistiques.</string>
-    <string name="write_location_provider_description">Enregistrer le fournisseur de localisation pour chaque point de suivi pendant l\'enregistrement</string>
-    <string name="write_location_provider">Fournisseur de localisation d\'écriture</string>
+    <string name="write_location_provider_description">Enregistrer le fournisseur de localisation pour chaque point de suivi pendant l\'enregistrement d\'un itinéraire</string>
+    <string name="write_location_provider">Enregistrer le fournisseur de localisation</string>
 </resources>
