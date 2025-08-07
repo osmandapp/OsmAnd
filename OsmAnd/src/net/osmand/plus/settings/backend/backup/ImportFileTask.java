@@ -15,6 +15,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.IOException;
@@ -109,7 +110,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 				this.duplicates = getDuplicatesData(selectedItems);
 				return selectedItems;
 			case IMPORT:
-				if (items != null && items.size() > 0) {
+				if (!Algorithms.isEmpty(items)) {
 					for (SettingsItem item : items) {
 						item.apply();
 					}
