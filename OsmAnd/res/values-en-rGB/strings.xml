@@ -4,6 +4,7 @@
 		Our app defaults to American English with default strings in res/values
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
 	-->
+	<string name="litres">Litres</string>
     <string name="colour_of_circles">Colour of circles</string>
     <string name="add_edit_favorite">Add / Edit Favourite</string>
     <string name="favorites_item">Favourites</string>
