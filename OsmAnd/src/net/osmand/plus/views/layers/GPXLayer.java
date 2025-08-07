@@ -63,7 +63,6 @@ import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
@@ -90,7 +89,6 @@ import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.*;
 import net.osmand.shared.gpx.primitives.TrkSegment;
-import net.osmand.shared.gpx.primitives.TrkSegment.SegmentSlopeType;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.routing.ColoringType;
@@ -533,7 +531,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					paintOuterRect.setColor(contrastColor);
 
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
-					drawSplitItems(canvas, tileBox, items);
+					drawSplitItems(canvas, tileBox, items, selectedGpxFile);
 				}
 			}
 		}
@@ -584,7 +582,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (!Algorithms.isEmpty(groups)) {
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
-						if (item.splitName != null) {
+						if (item.getLabelName(app) != null) {
 							splitLabelsCount++;
 						}
 					}
@@ -609,7 +607,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				Gpx3DLinePositionType trackLinePosition = track3DStyle.getLinePositionType();
 				Gpx3DVisualizationType visualizationType = track3DStyle.getVisualizationType();
 
-				boolean shouldHideStartPoint = shouldHideStartPoint(gpxFile);
 				if (isShowStartFinishForTrack(gpxFile)) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 					for (TrkSegment segment : segments) {
@@ -620,9 +617,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(start, track3DStyle, heightmapsActive));
 								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(finish, track3DStyle, heightmapsActive));
 							}
-							if (!shouldHideStartPoint) {
-								startFinishPoints.add(new PointI(Utilities.get31TileNumberX(start.getLon()), Utilities.get31TileNumberY(start.getLat())));
-							}
+							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(start.getLon()), Utilities.get31TileNumberY(start.getLat())));
 							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(finish.getLon()), Utilities.get31TileNumberY(finish.getLat())));
 						}
 					}
@@ -632,14 +627,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					int trackColor = getTrackColor(gpxFile, cachedColor);
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
-						WptPt point;
-						if(shouldHideStartPoint){
-							point = item.locationStart;
-						} else {
-							point = item.locationEnd;
-						}
-						String name = getLabelName(item);
-						int color = getSplitColor(item, trackColor);
+						WptPt point = item.getLabelPoint(gpxFile, gpxAppearanceHelper);
+						String name = item.getLabelName(app);
+						int color = item.getLabelColor(trackColor, altitudeAscColor, altitudeDescColor);
 
 						if (name != null) {
 							SplitLabel splitLabel;
@@ -671,66 +661,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			splitLabelsCountCached = 0;
 			clearSelectedFilesSplits();
 		}
-	}
-
-	private boolean shouldHideStartPoint(@NonNull GpxFile gpxFile) {
-		return gpxAppearanceHelper.isUphillDownhillSplit(gpxFile);
-	}
-
-	private String getLabelName(@NonNull GpxDisplayItem item) {
-		GpxTrackAnalysis analysis = item.analysis;
-		if (analysis == null) {
-			return getSplitName(item);
-		}
-
-		SegmentSlopeType slopeType = analysis.getSegmentSlopeType();
-		Integer slopeCount = analysis.getSlopeCount();
-		Double slopeValue = analysis.getSlopeValue();
-
-		if (slopeType == null || slopeCount == null || slopeValue == null)
-			return getSplitName(item);
-
-		String icon = slopeType.getSymbol();
-
-
-		if (slopeType == SegmentSlopeType.FLAT) {
-			return getString(R.string.ltr_or_rtl_combine_via_space, icon, OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app) );
-		} else {
-			String slopeCountText = slopeCount + ".";
-			String slopePercentText = Math.round(slopeValue) + "%";
-			return getString(R.string.ltr_or_rtl_triple_combine_via_space, icon, slopeCountText, slopePercentText);
-		}
-	}
-
-	@Nullable
-	private String getSplitName(@NonNull GpxDisplayItem item) {
-		String name = item.splitName;
-		if (name != null) {
-			int ind = name.indexOf(' ');
-			if (ind > 0) {
-				name = name.substring(0, ind);
-			}
-		}
-		return name;
-	}
-
-	@ColorInt
-	private int getSplitColor(@NonNull GpxDisplayItem item, int trackColor) {
-		int color = trackColor;
-
-		if (item.analysis == null) {
-			return color;
-		}
-
-		SegmentSlopeType slopeType = item.analysis.getSegmentSlopeType();
-		if (slopeType != null) {
-			if (slopeType == SegmentSlopeType.UPHILL) {
-				color = altitudeAscColor;
-			} else if (slopeType == SegmentSlopeType.DOWNHILL) {
-				color = altitudeDescColor;
-			}
-		}
-		return color;
 	}
 
 	private boolean updateBitmaps() {
@@ -777,7 +707,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void drawSplitItems(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
-	                            @NonNull List<GpxDisplayItem> items) {
+	                            @NonNull List<GpxDisplayItem> items, @NonNull SelectedGpxFile selectedGpxFile) {
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
 		int r = (int) (12 * tileBox.getDensity());
 		paintTextIcon.setTextSize(r);
@@ -786,7 +716,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		float py = -1;
 		for (int k = 0; k < items.size(); k++) {
 			GpxDisplayItem i = items.get(k);
-			WptPt point = i.locationEnd;
+			WptPt point = i.getLabelPoint(selectedGpxFile.getGpxFile(), gpxAppearanceHelper);
 			if (point != null && point.getLat() >= latLonBounds.bottom && point.getLat() <= latLonBounds.top
 					&& point.getLon() >= latLonBounds.left && point.getLon() <= latLonBounds.right) {
 				float x = tileBox.getPixXFromLatLon(point.getLat(), point.getLon());
@@ -798,12 +728,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				px = x;
 				py = y;
-				String name = i.splitName;
+				String name = i.getLabelName(app);
 				if (name != null) {
-					int ind = name.indexOf(' ');
-					if (ind > 0) {
-						name = name.substring(0, ind);
-					}
 					Rect bounds = new Rect();
 					paintTextIcon.getTextBounds(name, 0, name.length(), bounds);
 
