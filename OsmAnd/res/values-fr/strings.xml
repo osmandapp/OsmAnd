@@ -5549,7 +5549,7 @@
     <string name="shared_string_avg_speed">Vitesse min.</string>
     <string name="shared_string_length">Longueur</string>
     <string name="map_widget_route_information">Informations sur l\'itinéraire</string>
-    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps de trajet restant et la distance pour l\'itinéraire de navigation actif.</string>
+    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, la durée de trajet restante et la distance à parcourir pour le guidage en cours.</string>
     <string name="shared_string_default_view">Vue par défaut</string>
     <string name="ais_address_settings">Paramètres de l\'adresse IP</string>
     <string name="ais_address_settings_description">Choisissez le protocole NMEA (UDP/TCP) et spécifiez les adresses et ports correspondants</string>
@@ -5587,11 +5587,11 @@
     <string name="hmd_promo_description">Accès gratuit aux fonctionnalités comme le téléchargement illimité de cartes, le relief 3D, etc. pour %1$s mois</string>
     <string name="shared_string_road_exit">Sortie</string>
     <string name="hmd_promo">Promotion HMD pour %1$s mois</string>
-    <string name="original_color_description">Chaque point conservera sa propre couleur.</string>
+    <string name="original_color_description">Chaque point conserve sa propre couleur.</string>
     <string name="apply_to_all_points">Appliquer à tous les points</string>
-    <string name="original_icon_description">Chaque point conservera sa propre icône.</string>
+    <string name="original_icon_description">Chaque point conserve sa propre icône.</string>
     <string name="original_shape_description">Chaque point conserve sa propre forme.</string>
-    <string name="save_favorite_default_appearance">Appliquer les modifications à tous les points existants dans le dossier ou uniquement à ceux nouvellement ajoutés ?</string>
+    <string name="save_favorite_default_appearance">Appliquer les modifications à tous les points du dossier ou uniquement aux nouveaux points ?</string>
     <string name="show_dms_grids">Utilisez la notation DMS au lieu de degrés</string>
     <string name="show_mercator_grids_description">Affiche la grille en km Mercator au lieu de WGS84 ou UTM</string>
     <string name="show_mercator_grids">Utiliser Mercator au lieu de WGS84 ou UTM</string>
@@ -5670,7 +5670,7 @@
     <string name="shared_string_switch">Interrupteur</string>
     <string name="release_5_1">• Ajout du support des achats en ligne et multiplateformes\n\n• Déplacement des unités de température dans les paramètres généraux pour un accès facilité\n\n• Ajout d’un indicateur de niveau de batterie pour les capteurs BLE\n\n• Nouvelle interface plus intuitive pour la sélection de points dans Navigation\n\n• Amélioration de la visibilité des widgets grâce à un nouveau contour\n\n• Ajout d’un analyseur de Montées/Descentes\n\n• Extension de l’intégration Wikipedia &amp; Wikivoyage pour davantage de POI.</string>
     <string name="osm_live_payment_renews_3_years">Renouvellement tous les trois ans</string>
-    <string name="three_years_subscription">Abonnement de trois ans</string>
+    <string name="three_years_subscription">Abonnement pour trois ans</string>
     <string name="years_3">Trois ans</string>
     <string name="osm_live_payment_3_years_title">Tous les trois ans</string>
     <string name="deleting">Suppression…</string>
@@ -5681,7 +5681,7 @@
     <string name="shared_string_threads">Threads</string>
     <string name="threads_allocated_for_rendering">Threads alloués au rendu</string>
     <string name="threads_allocated_for_rendering_desc">L\'allocation d\'un faible nombre de threads peut, dans certains cas, accélérer le rendu de la carte.</string>
-    <string name="turn_by_turn_directions">Itinéraire étape par étape</string>
+    <string name="turn_by_turn_directions">Indications de guidage pas à pas</string>
     <string name="failed_to_connect">Échec de connexion à %1s</string>
     <string name="enable_msaa">Activer MSAA</string>
     <string name="next_turn_information">Prochaine bifurcation</string>
@@ -5698,6 +5698,6 @@
     <string name="reverse_mode">Mode inversé</string>
     <string name="n_a">N/A</string>
     <string name="altitude_metrics_description">Définit l\'unité d\'affichage de l\'altitude dans les widgets et les statistiques.</string>
-    <string name="write_location_provider_description">Enregistrer le fournisseur de localisation pour chaque point de suivi pendant l\'enregistrement d\'un itinéraire</string>
+    <string name="write_location_provider_description">Enregistrer le fournisseur de localisation dans chaque point de la trace pendant l\'enregistrement d\'un itinéraire</string>
     <string name="write_location_provider">Enregistrer le fournisseur de localisation</string>
 </resources>
