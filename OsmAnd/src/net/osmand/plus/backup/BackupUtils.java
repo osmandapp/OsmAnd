@@ -25,6 +25,7 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -104,7 +105,7 @@ public class BackupUtils {
 			// https://github.com/osmandapp/OsmAnd/commit/bf93162bd13ef7ab16622bb662c953e931c34a21
 			if (item instanceof FileSettingsItem fileItem) {
 				String subtypeFolder = fileItem.getSubtype().getSubtypeFolder();
-				if (subtypeFolder != null && fileItem.getFile().isDirectory()) {
+				if (subtypeFolder != null && FileUtils.isProbablyDir(fileItem.getFile())) {
 					subtypeFolders.add(fileItem);
 				}
 			}

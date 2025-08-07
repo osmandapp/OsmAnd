@@ -15,6 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
@@ -174,7 +175,7 @@ class BackupImporter {
 						}
 						item.apply();
 					}
-					updateFileM5Digest(remoteFile, item);
+					updateFileM5Digest(remoteFile, item, reader);
 					updateFileUploadTime(remoteFile, item);
 					if (PluginsHelper.isDevelopment()) {
 						UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
@@ -199,20 +200,19 @@ class BackupImporter {
 		}
 	}
 
-	private void updateFileM5Digest(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item) {
-		if (!(item instanceof FileSettingsItem)) {
-			return;
-		}
-		FileSettingsItem settingsItem = (FileSettingsItem) item;
-		if (settingsItem.needMd5Digest()) {
+	private void updateFileM5Digest(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item,
+									SettingsItemReader<? extends SettingsItem> reader) {
+		if (item instanceof FileSettingsItem fileItem && fileItem.needMd5Digest()
+				&& reader instanceof FileSettingsItemReader fileReader) {
+			File file = fileReader.getSavedFile();
 			BackupDbHelper dbHelper = backupHelper.getDbHelper();
 			UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 			String lastMd5 = fileInfo != null ? fileInfo.getMd5Digest() : null;
 
-			if (Algorithms.isEmpty(lastMd5)) {
+			if (Algorithms.isEmpty(lastMd5) && file != null) {
 				FileInputStream is = null;
 				try {
-					is = new FileInputStream(settingsItem.getFile());
+					is = new FileInputStream(file);
 					String md5Digest = new String(Hex.encodeHex(DigestUtils.md5(is)));
 					if (!Algorithms.isEmpty(md5Digest)) {
 						backupHelper.updateFileMd5Digest(item.getType().name(), remoteFile.getName(), md5Digest);
