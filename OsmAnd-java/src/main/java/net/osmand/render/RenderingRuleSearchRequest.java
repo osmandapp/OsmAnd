@@ -29,6 +29,7 @@ public class RenderingRuleSearchRequest {
 	private float[] savedFvalues;
 
 	private boolean searchResult = false;
+	private Map<String, String> classProperties = new HashMap<>();
 
 	public RenderingRuleSearchRequest(RenderingRulesStorage storage) {
 		this.storage = storage;
@@ -428,5 +429,9 @@ public class RenderingRuleSearchRequest {
 		}
 
 		return null;
+	}
+
+	public void setClassProperty(String tag, String value) {
+		classProperties.put(tag, value);
 	}
 }
