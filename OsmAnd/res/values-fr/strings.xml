@@ -5591,7 +5591,7 @@
     <string name="apply_to_all_points">Appliquer à tous les points</string>
     <string name="original_icon_description">Chaque point conservera sa propre icône.</string>
     <string name="original_shape_description">Chaque point conservera sa propre forme.</string>
-    <string name="save_favorite_default_appearance">Appliquer les modifications aux points existants dans le dossier ou uniquement aux nouveaux points ?</string>
+    <string name="save_favorite_default_appearance">Appliquer les modifications aux points existants dans le dossier ou uniquement aux nouveaux points ?</string>
     <string name="show_dms_grids">Utilisez la notation DMS au lieu de degrés</string>
     <string name="show_mercator_grids_description">Affiche la grille en km Mercator au lieu de WGS84 ou UTM</string>
     <string name="show_mercator_grids">Utiliser Mercator au lieu de WGS84 ou UTM</string>
