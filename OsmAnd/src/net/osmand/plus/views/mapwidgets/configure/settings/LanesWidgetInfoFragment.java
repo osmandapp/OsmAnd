@@ -58,6 +58,8 @@ public class LanesWidgetInfoFragment extends WidgetInfoBaseFragment {
 	@Override
 	protected void applySettings() {
 		settings.SHOW_MINOR_TURNS.setModeValue(appMode, showMinorTurns);
+
+		// Required for routing recalculation — omit if routing isn't affected
 		app.getRoutingHelper().onSettingsChanged(appMode);
 	}
 

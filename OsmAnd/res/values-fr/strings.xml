@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routing_attr_motor_type_name">Carburant utilisé</string>
+    <string name="routing_attr_motor_type_name">Énergie utilisée par le moteur</string>
     <string name="routing_attr_motor_type_description">Sélectionner le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
@@ -237,7 +237,7 @@
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Le format de la carte \'\'{0}\'\' n\'est pas supporté</string>
     <string name="poi_filter_car_aid">Pour conducteurs</string>
-    <string name="poi_filter_closest_poi">POI les plus proches</string>
+    <string name="poi_filter_closest_poi">Points d\'intérêt les plus proches</string>
     <string name="poi_filter_custom_filter">Filtre personnalisé</string>
     <string name="poi_filter_food_shop">Alimentation</string>
     <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -1240,7 +1240,7 @@
     <string name="shared_string_waypoints">Points de passage</string>
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Favoris à proximité</string>
-    <string name="speak_poi">POI à proximité</string>
+    <string name="speak_poi">Point d\'intérêt à proximité</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Enregistrez vos trajets ou entraînements et analysez les données : vitesse, dénivelés, altitude, etc. Les traces enregistrées peuvent être archivées, partagées avec des amis, modifiées et retravaillées.
@@ -2245,7 +2245,7 @@
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
     <string name="waypoint_one">Point de passage 1</string>
     <string name="save_route_point">Enregistrer le point d\'itinéraire</string>
-    <string name="add_waypoint">Ajouter un point de passage</string>
+    <string name="add_waypoint">Ajouter une étape</string>
     <string name="save_gpx_waypoint">Enregistrer le point de passage GPX</string>
     <string name="live_monitoring_max_interval_to_send">Tampon temporel pour le suivi en ligne</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Indiquer la durée pendant laquelle les positions sont conservées sans connexion</string>
@@ -3361,7 +3361,7 @@
     <string name="screen_timeout">Délai de veille de l’écran</string>
     <string name="height_limit_description">Indiquer la hauteur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules hauts.</string>
     <string name="weight_limit_description">Indiquer le poids de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules lourds.</string>
-    <string name="width_limit_description">Indiquer la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
+    <string name="width_limit_description">Indiquez la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
     <string name="shared_string_tones">tonnes</string>
     <string name="shared_string_meters">mètres</string>
     <string name="details_dialog_decr">Afficher ou masquer les autres détails sur la carte</string>
@@ -3417,7 +3417,7 @@
     <string name="plan_route_last_edited">Modifiés récemment</string>
     <string name="plan_route_import_track">Importer une trace</string>
     <string name="plan_route_open_existing_track">Ouvrir une trace existante</string>
-    <string name="plan_route_create_new_route">Créer un nouvel itinéraire</string>
+    <string name="plan_route_create_new_route">Créer une nouvelle trace</string>
     <string name="plan_route_select_track_file_for_open">Sélectionner un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
     <string name="overwrite_track">Remplacer la trace</string>
@@ -5647,7 +5647,7 @@
     <string name="save_to_device">Enregistrer sur l\'appareil</string>
     <string name="travel_guides">Guides</string>
     <string name="show_debug_tile_description">Afficher les informations à propos des symboles de la carte sur chaque tuile</string>
-    <string name="show_debug_tile">Afficher les informations des tuiles</string>
+    <string name="show_debug_tile">Afficher les informations de la tuile</string>
     <string name="show_symbols_debug_info">Afficher les symboles pour déboguer</string>
     <string name="deactivated_map">Carte désactivée</string>
     <string name="suggest_activate_map_msg">La carte %1$s est désactivée,\nactivez-la pour consulter cette zone.</string>
@@ -5675,7 +5675,7 @@
     <string name="osm_live_payment_3_years_title">Tous les trois ans</string>
     <string name="deleting">Suppression…</string>
     <string name="deleting_history">Suppression de l’historique…</string>
-    <string name="show_rasterization_debug_tile">Afficher les informations de rasterisation des tuiles</string>
+    <string name="show_rasterization_debug_tile">Afficher les informations de rasterisation de la tuile</string>
     <string name="show_symbols_bboxes">Afficher les boîtes englobantes des symboles</string>
     <string name="release_5_2">• En cours ...</string>
     <string name="shared_string_threads">Threads</string>
@@ -5683,4 +5683,18 @@
     <string name="threads_allocated_for_rendering_desc">L\'allocation d\'un faible nombre de threads peut, dans certains cas, accélérer le rendu de la carte.</string>
     <string name="turn_by_turn_directions">Indications de guidage pas à pas</string>
     <string name="failed_to_connect">Échec de connexion à %1s</string>
+    <string name="enable_msaa">Activer MSAA</string>
+    <string name="next_turn_information">Prochaine bifurcation</string>
+    <string name="next_turn_information_desc">Afficher la prochaine bifurcation et le nom de rue.</string>
+    <string name="description_purchases_fastspring">Vous pouvez gérer vos achats via le portail FastSpring.</string>
+    <string name="description_subscription_fastspring">Vous pouvez gérer et annuler votre abonnement via le portail FastSpring.</string>
+    <string name="manage_purchases">Gérer vos achats</string>
+    <string name="map_orientation_portrait_inverted">Portrait (inversé)</string>
+    <string name="map_orientation_landscape_inverted">Paysage (inversé)</string>
+    <string name="reverse_mode_calculate_route">Calculer l\'itinéraire</string>
+    <string name="reverse_mode_calculate_route_desc">Calculer un nouvel itinéraire optimisé jusqu\'au point de départ.</string>
+    <string name="reverse_mode_original_track">Trace originale</string>
+    <string name="reverse_mode_original_track_desc">Suivez précisément la trace pour revenir au point de départ.\nAttention : les voies à sens unique ne sont pas prises en compte !</string>
+    <string name="reverse_mode">Mode inversé</string>
+    <string name="n_a">N/A</string>
 </resources>

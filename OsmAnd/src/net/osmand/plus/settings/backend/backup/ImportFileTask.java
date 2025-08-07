@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
@@ -15,6 +16,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.IOException;
@@ -109,7 +111,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 				this.duplicates = getDuplicatesData(selectedItems);
 				return selectedItems;
 			case IMPORT:
-				if (items != null && items.size() > 0) {
+				if (!Algorithms.isEmpty(items)) {
 					for (SettingsItem item : items) {
 						item.apply();
 					}
@@ -138,9 +140,8 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 				}
 				break;
 			case IMPORT:
-				if (items != null && items.size() > 0) {
-					new ImportFileItemsTask(helper, file, importListener, items)
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				if (!Algorithms.isEmpty(items)) {
+					OsmAndTaskManager.executeTask(new ImportFileItemsTask(helper, file, importListener, items));
 				}
 				break;
 		}

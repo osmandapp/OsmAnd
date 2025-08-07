@@ -6,7 +6,6 @@ import net.osmand.shared.gpx.GpxUtilities.loadGpxFile
 import net.osmand.shared.gpx.helper.ImportGpx.errorImport
 import net.osmand.shared.gpx.helper.ImportGpx.loadGPXFileFromKml
 import net.osmand.shared.io.SourceInputStream
-
 import okio.Source
 import okio.source
 import java.io.IOException

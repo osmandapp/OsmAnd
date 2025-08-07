@@ -9,7 +9,6 @@ import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
 
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Pair;
 
@@ -17,21 +16,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
-import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
@@ -49,19 +49,8 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.set.TLongSet;
@@ -71,7 +60,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.travel.obf";
-	private static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
+	private static final int ARTICLE_SEARCH_RADIUS = 500 * 1000;
 	private static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
 	private static final int MAX_SEARCH_RADIUS = 800 * 1000;
 	private static final int TRAVEL_GPX_SEARCH_RADIUS = 10 * 1000; // Ref: POI_SEARCH_POINTS_INTERVAL_M in tools
@@ -741,8 +730,7 @@ public class TravelObfHelper implements TravelHelper {
 			if (!app.isApplicationInitializing()) {
 				MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
 				if (mapActivity != null) {
-					new TravelObfGpxFileReader(mapActivity, article, callback, getTravelGpxRepositories())
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					OsmAndTaskManager.executeTask(new TravelObfGpxFileReader(mapActivity, article, callback, getTravelGpxRepositories()));
 				}
 			}
 		} else if (callback != null) {

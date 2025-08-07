@@ -5786,7 +5786,7 @@
     <string name="show_symbols_debug_info">Vis symboler fejlfindinginfo</string>
     <string name="deactivated_map">Deaktiveret kort</string>
     <string name="suggest_activate_map_msg">%1$s kort er deaktiveret,\naktiver for at se dette område.</string>
-    <string name="unit_of_temperature_description">De valgte enheder vil blive anvendt på alle temperaturrelaterede data i den aktuelle profil.</string>
+    <string name="unit_of_temperature_description">De valgte enheder anvendes på alle temperaturrelaterede data i den aktuelle profil.</string>
     <string name="hmd_promo_years">HMD-kampagne i %1$s år</string>
     <string name="hmd_promo_description_years">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief etc. i %1$s år</string>
     <string name="shared_string_flat">Flad</string>
@@ -5817,4 +5817,18 @@
     <string name="threads_allocated_for_rendering_desc">Lavere trådallokering kan i nogle tilfælde gøre kortgengivelsen hurtigere.</string>
     <string name="turn_by_turn_directions">Sving-for-sving-vejledning</string>
     <string name="failed_to_connect">Kunne ikke forbinde til %1s</string>
+    <string name="enable_msaa">Aktiver MSAA</string>
+    <string name="next_turn_information">Information om næste sving</string>
+    <string name="next_turn_information_desc">Viser den kommende svingretning og gadenavn.</string>
+    <string name="description_purchases_fastspring">Du kan administrere dine køb via FastSprings portal for kontoadministration.</string>
+    <string name="description_subscription_fastspring">Du kan administrere eller opsige dit abonnement via FastSprings portal for kontoadministration.</string>
+    <string name="manage_purchases">Administrer køb</string>
+    <string name="map_orientation_portrait_inverted">Portræt (omvendt)</string>
+    <string name="map_orientation_landscape_inverted">Landskab (omvendt)</string>
+    <string name="reverse_mode_calculate_route">Beregn rute</string>
+    <string name="reverse_mode_calculate_route_desc">Beregn en ny, optimeret rute til starten.</string>
+    <string name="reverse_mode_original_track">Originalt spor</string>
+    <string name="reverse_mode_original_track_desc">Følg det nøjagtige spor tilbage til starten.\nAdvarsel: Dette kan være farligt, da det ignorerer envejs trafik på veje.</string>
+    <string name="reverse_mode">Omvendt tilstand</string>
+    <string name="n_a">Ikke relevant</string>
 </resources>

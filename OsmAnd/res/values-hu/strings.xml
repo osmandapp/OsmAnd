@@ -4339,7 +4339,7 @@
     <string name="routing_attr_motor_type_diesel_name">Gázolaj</string>
     <string name="routing_attr_motor_type_petrol_name">Benzin</string>
     <string name="routing_attr_motor_type_lpg_name">LPG (cseppfolyósított földgáz)</string>
-    <string name="routing_attr_motor_type_electric_name">Elektromos áram</string>
+    <string name="routing_attr_motor_type_electric_name">Elektromos</string>
     <string name="routing_attr_motor_type_gas_name">CNG (sűrített földgáz)</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
     <string name="routing_attr_motor_type_description">A CO₂-kibocsátás megbecsüléséhez válassza ki a motor által használt üzemanyag típusát.</string>
@@ -5736,4 +5736,18 @@
     <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép renderelését.</string>
     <string name="turn_by_turn_directions">Részletes navigáció</string>
     <string name="failed_to_connect">Sikertelen csatlakozás ehhez: %1s</string>
+    <string name="enable_msaa">MSAA engedélyezése</string>
+    <string name="next_turn_information">Következő kanyarodás információ</string>
+    <string name="next_turn_information_desc">Mutatja a következő kanyarodás irányát és az utca nevét.</string>
+    <string name="description_purchases_fastspring">Vásárlásait a FastSpring fiókkezelő portálon keresztül kezelheti.</string>
+    <string name="description_subscription_fastspring">Előfizetését a FastSpring fiókkezelési portálon keresztül kezelheti, illetve mondhatja le.</string>
+    <string name="manage_purchases">Vásárlások kezelése</string>
+    <string name="map_orientation_portrait_inverted">Álló (fordított)</string>
+    <string name="map_orientation_landscape_inverted">Fekvő(fordított)</string>
+    <string name="reverse_mode_calculate_route">Útvonal kiszámítása</string>
+    <string name="reverse_mode_calculate_route_desc">Számítson ki egy új, optimalizált útvonalat a kiindulóponthoz.</string>
+    <string name="reverse_mode_original_track">Eredeti nyomvonal</string>
+    <string name="reverse_mode_original_track_desc">Kövesse pontosan a nyomvonalat vissza a kiindulópontig.\nFigyelmeztetés: Ez veszélyes lehet, mivel figyelmen kívül hagyja az egyirányú forgalmat az utakon.</string>
+    <string name="reverse_mode">Fordított mód</string>
+    <string name="n_a">n.a</string>
 </resources>

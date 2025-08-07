@@ -24,6 +24,7 @@ import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -240,9 +241,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 				}
 			}
-
-			if (imageRequests.size() > 0) {
-				executeTaskInBackground(new PointImageReaderTask(this), imageRequests.toArray(new String[0]));
+			if (!imageRequests.isEmpty()) {
+				OsmAndTaskManager.executeTask(new PointImageReaderTask(this), imageRequests.toArray(new String[0]));
 			}
 		}
 		mapTextLayer.putData(this, displayedPoints);
@@ -563,8 +563,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 		aidlMapLayerProvider.drawSymbols(mapRenderer);
 		mapRenderer.addSymbolsProvider(mapMarkersCollection);
-		if (imageRequests.size() > 0) {
-			executeTaskInBackground(new PointImageReaderTask(this), imageRequests.toArray(new String[0]));
+		if (!imageRequests.isEmpty()) {
+			OsmAndTaskManager.executeTask(new PointImageReaderTask(this), imageRequests.toArray(new String[0]));
 		}
 	}
 

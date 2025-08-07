@@ -3959,4 +3959,12 @@
     <string name="poi_us_maps_recreation_area_activity">Recreatiegebied activiteit</string>
     <string name="poi_us_maps_recreation_area_open_status">Recreatiegebied open</string>
     <string name="poi_socket_type2_cable_output_filter">Type 2 vermogen</string>
+    <string name="poi_agrarian_agricultural_machinery">Landbouwmachines</string>
+    <string name="poi_agrarian_fertilizer">Mest</string>
+    <string name="poi_agrarian_machine_parts">Machineonderdelen</string>
+    <string name="poi_agrarian_pesticide">Bestrijdingsmiddel</string>
+    <string name="poi_agrarian_seed">Zaaizaad</string>
+    <string name="poi_agrarian_tools">Gereedschap</string>
+    <string name="poi_agrarian_yes">Ja;Landbouwwinkel</string>
+    <string name="poi_agrarian_feed">Dierenvoer</string>
 </resources>

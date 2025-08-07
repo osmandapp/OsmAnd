@@ -1623,7 +1623,6 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_MINOR_TURNS = new BooleanPreference(this, "show_minor_turns", true).makeProfile();
-	public final CommonPreference<Boolean> SHOW_NEXT_TURN_INFO = new BooleanPreference(this, "show_next_turn_info", false).makeProfile();
 
 	public boolean simulateNavigation;
 	public boolean simulateNavigationStartedFromAdb;
@@ -1713,6 +1712,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> GPX_SEGMENT_INDEX = new IntPreference(this, "gpx_route_segment", -1).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> GPX_ROUTE_INDEX = new IntPreference(this, "gpx_route_index", -1).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_PASS_WHOLE_ROUTE = new BooleanPreference(this, "gpx_pass_whole_route", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<ReverseTrackStrategy> GPX_REVERSE_STRATEGY =
+			new EnumStringPreference<>(this, "gpx_reverse_strategy", ReverseTrackStrategy.RECALCULATE_ALL_ROUTE_POINTS, ReverseTrackStrategy.values()).makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference(this, "avoid_toll_roads", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> AVOID_MOTORWAY = new BooleanPreference(this, "avoid_motorway", false).makeProfile().cache();

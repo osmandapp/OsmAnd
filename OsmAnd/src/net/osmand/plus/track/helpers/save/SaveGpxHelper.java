@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.tasks.SaveCurrentTrackTask;
@@ -23,15 +24,12 @@ public class SaveGpxHelper {
 
 	public static void saveGpx(@NonNull File file, @NonNull GpxFile gpx,
 	                           @Nullable SaveGpxListener listener) {
-		new SaveGpxAsyncTask(file, gpx, listener)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new SaveGpxAsyncTask(file, gpx, listener));
 	}
 
 	// TODO Do we need this? OsmandMonitoringPlugin.saveCurrentTrack() should be enough
 	public static void saveCurrentTrack(@NonNull OsmandApplication app, @NonNull GpxFile gpx,
 	                                    @NonNull SaveGpxListener listener) {
-		new SaveCurrentTrackTask(app, gpx, listener)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new SaveCurrentTrackTask(app, gpx, listener));
 	}
-
 }

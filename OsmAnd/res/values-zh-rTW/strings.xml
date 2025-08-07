@@ -5769,4 +5769,18 @@
     <string name="threads_allocated_for_rendering_desc">在某些情況下，較低的執行緒分配可能會加速地圖繪製的速度。</string>
     <string name="turn_by_turn_directions">轉向指示</string>
     <string name="failed_to_connect">無法連線至 %1s</string>
+    <string name="enable_msaa">啟用 MSAA</string>
+    <string name="next_turn_information">下個轉彎的資訊</string>
+    <string name="next_turn_information_desc">顯示即將到來的轉彎方向與街道名稱。</string>
+    <string name="description_purchases_fastspring">您可以透過 FastSpring 帳號管理入口網站管理您的購買。</string>
+    <string name="description_subscription_fastspring">您可以透過 FastSpring 帳號管理入口網站管理或取消訂閱。</string>
+    <string name="manage_purchases">管理購買</string>
+    <string name="map_orientation_portrait_inverted">縱向（翻轉）</string>
+    <string name="map_orientation_landscape_inverted">橫向（翻轉）</string>
+    <string name="reverse_mode_calculate_route">計算路線</string>
+    <string name="reverse_mode_calculate_route_desc">計算前往起點的最佳化新路線。</string>
+    <string name="reverse_mode_original_track">原始軌跡</string>
+    <string name="reverse_mode_original_track_desc">沿著確切的路徑回到起點。\n警告：這可能會很危險，因為其會忽略單行道。</string>
+    <string name="reverse_mode">反向模式</string>
+    <string name="n_a">N/A</string>
 </resources>

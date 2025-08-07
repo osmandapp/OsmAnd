@@ -59,7 +59,7 @@
     <string name="poi_mobile_phone">Butega de telefonia mòbile</string>
     <string name="poi_motorcycle">Butega de mototzicletas</string>
     <string name="poi_musical_instrument">Istrumentos musicales</string>
-    <string name="poi_newsagent">Agentzia de imprenta</string>
+    <string name="poi_newsagent">Edìcola</string>
     <string name="poi_optician">Optometrista</string>
     <string name="poi_organic">Produtos biològicos</string>
     <string name="poi_outdoor">Artìculos pro s\'atividade a s\'abertu</string>
@@ -834,7 +834,7 @@
     <string name="poi_recycling_waste_oil">Ògiu impreadu</string>
     <string name="poi_recycling_bottles">Ampullas</string>
     <string name="poi_recycling_cork">Corticru/suèrgiu</string>
-    <string name="poi_recycling_printer_cartridges">Cartùcias pro imprentadoras</string>
+    <string name="poi_recycling_printer_cartridges">Cartutzas pro imprentadoras</string>
     <string name="poi_recycling_sheet_metal">Lamiera</string>
     <string name="poi_recycling_foil">Follu de allumìniu</string>
     <string name="poi_recycling_paint">Vernitze</string>

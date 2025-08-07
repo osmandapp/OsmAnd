@@ -208,10 +208,10 @@
     <string name="traffic_warning_stop">Señal de detención</string>
     <string name="traffic_warning_calming">Reductor de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
-    <string name="traffic_warning">Aviso de tráfico</string>
+    <string name="traffic_warning">Advertencia vial</string>
     <string name="speak_favorites">Favoritos cercanos</string>
     <string name="speak_poi">PDI cercanos</string>
-    <string name="way_alarms">Advertencias de tráfico</string>
+    <string name="way_alarms">Advertencias del camino</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Preguntar siempre</string>
     <string name="enable_sleep_mode">Activar modo reposo del GPS</string>
@@ -220,7 +220,7 @@
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="voice_provider">Indicaciones por voz</string>
     <string name="enable_proxy_title">Activar proxy HTTP</string>
-    <string name="proxy_port_title">Puerto Proxy</string>
+    <string name="proxy_port_title">Puerto del proxy</string>
     <string name="monitoring_settings">Grabación de viaje</string>
     <string name="monitoring_settings_descr">Configura como se grabarán tus viajes.</string>
     <string name="int_hour">h</string>
@@ -484,9 +484,9 @@
     <string name="animate_routing_route">Simular, usando la ruta calculada</string>
     <string name="animate_routing_gpx">Simular, usando la traza GPX</string>
     <string name="auto_zoom_none">Sin zum automático</string>
-    <string name="auto_zoom_close">Para corto alcance</string>
-    <string name="auto_zoom_far">Para mediano alcance</string>
-    <string name="auto_zoom_farthest">Para largo alcance</string>
+    <string name="auto_zoom_close">Vista cercana</string>
+    <string name="auto_zoom_far">Vista amplia</string>
+    <string name="auto_zoom_farthest">Vista muy amplia</string>
     <string name="map_magnifier">Lupa del mapa</string>
     <string name="base_world_map">Mapa base mundial</string>
     <string name="about_version">Versión:</string>
@@ -513,11 +513,11 @@
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europa, Asia, Latinoamérica y similares</string>
     <string name="speak_title">Anunciar…</string>
-    <string name="speak_descr">Configurá los anuncios para nombres de calles, advertencias de tráfico (paradas, lomadas), radares y límites de velocidad.</string>
+    <string name="speak_descr">Configurá los anuncios para nombres de calles, advertencias viales (paradas, lomadas), radares y límites de velocidad.</string>
     <string name="speak_street_names">Nombres de calles (TTS)</string>
     <string name="speak_speed_limit">Límite de velocidad</string>
     <string name="speak_cameras">Radares de velocidad</string>
-    <string name="speak_traffic_warnings">Avisos de tráfico</string>
+    <string name="speak_traffic_warnings">Advertencias viales</string>
     <string name="osb_author_or_password_not_specified">Indicá el usuario y contraseña de OSM en «Ajustes»</string>
     <string name="clear_intermediate_points">Limpiar destinos intermedios</string>
     <string name="keep_intermediate_points">Mantener destinos intermedios</string>
@@ -694,12 +694,12 @@
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustible</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configurá advertencias de tráfico (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
+    <string name="show_warnings_descr">Configurá advertencias viales (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
     <string name="use_compass_navigation_descr">Usá la brújula si no se detecta el rumbo.</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Sin autopistas</string>
     <string name="auto_zoom_map_descr">Nivel de zum según la velocidad (mientras el mapa se sincroniza con la ubicación actual).</string>
-    <string name="auto_zoom_map">Zum automático del mapa</string>
+    <string name="auto_zoom_map">Ajuste automático del zum</string>
     <string name="snap_to_road">Ajustar al camino</string>
     <string name="interrupt_music_descr">Las indicaciones por voz pausan la reproducción de música.</string>
     <string name="interrupt_music">Pausar música</string>
@@ -768,7 +768,7 @@
     <string name="bg_service_screen_lock_toast">Pantalla bloqueada</string>
     <string name="bg_service_interval">Definir intervalo de activación:</string>
     <string name="show_cameras">Radares de velocidad</string>
-    <string name="show_traffic_warnings">Avisos de tráfico</string>
+    <string name="show_traffic_warnings">Advertencias viales</string>
     <string name="avoid_toll_roads">Sin peajes</string>
     <string name="continue_follow_previous_route_auto">¿Reanudar la navegación anterior no finalizada? (%1$s segundos)</string>
     <string name="route_updated_loc_found">Esperando la ubicación para calcular la ruta</string>
@@ -2451,7 +2451,7 @@
     <string name="clear_all_intermediates">Limpiar todos los destinos intermedios</string>
     <string name="select_waypoints_category_description">Agregá todos los puntos de referencia de la traza o elegí categorías separadas.</string>
     <string name="shared_string_total">Total</string>
-    <string name="nothing_found_in_radius">No se pudo encontrar nada:</string>
+    <string name="nothing_found_in_radius">No se encontró nada:</string>
     <string name="shared_string_travel_guides">Guías turísticas</string>
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
@@ -2553,7 +2553,7 @@
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
     <string name="increase_search_radius_to">Ampliar el radio de búsqueda a %1$s</string>
     <string name="thank_you_for_feedback">Gracias por tus comentarios</string>
-    <string name="poi_cannot_be_found">No se pudo encontrar el nodo o la vía.</string>
+    <string name="poi_cannot_be_found">No se encontró el nodo o la vía.</string>
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDanos tu opinión</string>
     <string name="test_voice_desrc">Pulsá un botón y escuchá su correspondiente aviso por voz para saber si falta o está defectuoso</string>
@@ -3100,7 +3100,7 @@
     <string name="monitoring_min_speed_descr_remark">• Observación: comprobar velocidad &gt; 0: La mayoría de los chipsets de GPS informan un valor de velocidad sólo si el algoritmo determina que está en movimiento. Por lo tanto, el uso del ajuste &gt; 0 en este filtro, en cierto sentido usa la detección de movimiento del conjunto de chips del GPS. Pero incluso si no se filtra aquí en el momento de la grabación, seguimos usando esta función en nuestro análisis GPX para determinar la distancia corregida, es decir, el valor que se muestra en ese campo es la distancia grabada en movimiento.</string>
     <string name="monitoring_min_accuracy_descr">Esto registrará sólo los puntos medidos con una indicación de precisión mínima (en metros o pies, según lo informado por Android para su conjunto de chips). La precisión es la proximidad de las mediciones a la ubicación real y no está directamente relacionada con la precisión, que es la dispersión de las mediciones repetidas.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">• Efecto secundario: Como resultado del filtrado por precisión, pueden faltar puntos por ejemplo debajo de puentes, bajo árboles, entre edificios altos o con ciertas condiciones atmosféricas.</string>
-    <string name="monitoring_min_accuracy_descr_recommendation">• Recomendación: Es difícil predecir qué se grabará y qué no, puede ser mejor apagar este filtro.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">• Recomendación: Es difícil predecir lo qué se grabará y lo qué no, puede ser mejor apagar este filtro.</string>
     <string name="monitoring_min_accuracy_descr_remark">• Observación: Si el GPS se hubiera apagado de inmediato antes de una grabación, el primer punto medido podría tener una menor precisión, entonces en nuestro código puede que queramos esperar un segundo más o menos antes de grabar un punto (o grabar el mejor de 3 puntos consecutivos, etc.), pero esto todavía no se implementó.</string>
     <string name="monitoring_min_distance_descr">Evita grabar datos adicionales al no detectar movimiento. También mejora el aspecto espacial de las trazas sin necesidad de procesarlas.</string>
     <string name="monitoring_min_distance_descr_side_effect">• Efectos secundarios: Los períodos de descanso no se registran en absoluto o sólo en un punto cada uno. Pueden filtrarse los pequeños movimientos (por ejemplo, hacia los lados del camino para marcar un posible desvío en el viaje). Nótese que el archivo contendrá menos información para el post-procesamiento y, al mismo tiempo, podría guardar errores del GPS causados por una mala recepción o por efectos del chipset.</string>
@@ -3303,7 +3303,7 @@
     <string name="quick_action_switch_profile_descr">El botón de acción alterna entre los perfiles elegidos.</string>
     <string name="shared_string_add_profile">Agregar perfil</string>
     <string name="change_application_profile">Cambiar perfil de la aplicación</string>
-    <string name="profiles_for_action_not_found">No se pudo encontrar ninguno de estos perfiles.</string>
+    <string name="profiles_for_action_not_found">No se encontró ninguno de estos perfiles.</string>
     <string name="index_item_world_basemap_detailed">Mapa mundial general (detallado)</string>
     <string name="unsupported_type_error">Tipo no admitido</string>
     <string name="gpx_parse_error">Se encontraron problemas con un archivo GPX. \n \nContactá con la asistencia de OsmAnd para investigar.</string>
@@ -5148,7 +5148,7 @@
     <string name="title_3d_track">Traza 3D</string>
     <string name="track_line">Línea de la traza</string>
     <string name="downward_gradient">Gradiente descendente</string>
-    <string name="explore_3d_track_description">¡Explorá la traza en 3D interactivo! Visualizá la altura, la velocidad y más, directamente en el mapa.</string>
+    <string name="explore_3d_track_description">¡Explorá la traza en un 3D interactivo! Visualizá la altura, la velocidad y más, directamente en el mapa.</string>
     <string name="track_vertical_exaggeration_description">Cambiando el valor de la escala, podés cambiar la altura de la traza 3D.</string>
     <string name="gpx_approximation_geo_cpp">Basado en la geometría (C++, rápido)</string>
     <string name="allow_display_on_top_description">Permite mostrar los textos del mapa encima del otro</string>
@@ -5464,7 +5464,7 @@
     <string name="unit_of_volume">Unidad de volumen</string>
     <string name="record_obd_data">Grabar estadísticas del vehículo</string>
     <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registrá los datos esenciales del vehículo mediante el protocolo OBD-II. Supervisá métricas clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Registrá los datos esenciales del vehículo usando el protocolo OBD-II. Supervisá valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
     <string name="vehicle_metrics_obd_ii">Estadísticas del vehículo (OBD-II)</string>
     <string name="shared_string_volume">Volumen</string>
     <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
@@ -5655,4 +5655,18 @@
     <string name="threads_allocated_for_rendering_desc">La asignación de hilos inferiores podría acelerar la representación del mapa en algunos casos.</string>
     <string name="turn_by_turn_directions">Indicaciones de giros</string>
     <string name="failed_to_connect">Falló al conectar con %1s</string>
+    <string name="enable_msaa">Activar MSAA</string>
+    <string name="next_turn_information">Información del siguiente giro</string>
+    <string name="next_turn_information_desc">Indica la dirección del siguiente giro y el nombre de la calle.</string>
+    <string name="description_purchases_fastspring">Podés gestionar tus compras a través del portal de gestión de cuentas FastSpring.</string>
+    <string name="description_subscription_fastspring">Podés gestionar o cancelar tu suscripción a través del portal de gestión de cuentas FastSpring.</string>
+    <string name="manage_purchases">Gestionar compras</string>
+    <string name="reverse_mode_original_track_desc">Sigue el recorrido exacto hasta el inicio.\nAdvertencia: Esto puede ser peligroso, ya que ignora el sentido unidireccional de los caminos.</string>
+    <string name="map_orientation_portrait_inverted">Vertical (invertido)</string>
+    <string name="map_orientation_landscape_inverted">Horizontal (invertido)</string>
+    <string name="reverse_mode_calculate_route">Calcular ruta</string>
+    <string name="reverse_mode_calculate_route_desc">Calcular una nueva ruta optimizada hasta el inicio.</string>
+    <string name="reverse_mode_original_track">Traza original</string>
+    <string name="reverse_mode">Modo inverso</string>
+    <string name="n_a">N/C</string>
 </resources>

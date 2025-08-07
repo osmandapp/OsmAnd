@@ -492,7 +492,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public PoiFilterUtils.AmenityNameFilter getKeyNameFilter(String key, String value) {
 		return amenity -> {
 			String val = amenity.getAdditionalInfo(key);
-			return val != null && val.equals(value);
+			return val != null && val.equalsIgnoreCase(value);
 		};
 	}
 

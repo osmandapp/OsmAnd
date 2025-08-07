@@ -5850,4 +5850,5 @@
     <string name="show_rasterization_debug_tile">إظهار معلومات تنقيط البلاط</string>
     <string name="show_symbols_bboxes">إظهار الرموز bboxes</string>
     <string name="release_5_2">• جارِ العمل...</string>
+    <string name="map_orientation_portrait_inverted">عمودي (مقلوب)</string>
 </resources>

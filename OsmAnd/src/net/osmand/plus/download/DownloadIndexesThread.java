@@ -10,11 +10,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.TrafficStats;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
@@ -25,6 +23,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -240,14 +239,14 @@ public class DownloadIndexesThread {
 		if (checkRunning(true)) {
 			return;
 		}
-		execute(new ReloadIndexesTask());
+		OsmAndTaskManager.executeTask(new ReloadIndexesTask());
 	}
 
 	public void runReloadIndexFiles() {
 		if (checkRunning(false)) {
 			return;
 		}
-		execute(new ReloadIndexesTask());
+		OsmAndTaskManager.executeTask(new ReloadIndexesTask());
 	}
 
 	public void runDownloadFiles(IndexItem... items) {
@@ -265,7 +264,7 @@ public class DownloadIndexesThread {
 			}
 		}
 		if (currentDownloadingItem == null) {
-			execute(new DownloadIndexesAsyncTask());
+			OsmAndTaskManager.executeTask(new DownloadIndexesAsyncTask());
 		} else {
 			downloadInProgress();
 		}
@@ -360,11 +359,6 @@ public class DownloadIndexesThread {
 			return true;
 		}
 		return false;
-	}
-
-	@SuppressWarnings("unchecked")
-	private <P> void execute(BasicProgressAsyncTask<?, P, ?, ?> task, P... indexItems) {
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, indexItems);
 	}
 
 	private void updateNotification() {

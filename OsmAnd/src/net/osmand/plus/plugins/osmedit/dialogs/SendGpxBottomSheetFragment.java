@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -194,7 +195,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			OsmandApplication app = getMyApplication();
 			UploadGpxListener listener = getUploadListener(activity);
 			UploadGPXFilesTask task = new UploadGPXFilesTask(app, tags, description, defaultActivity, uploadVisibility, listener);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, files);
+			OsmAndTaskManager.executeTask(task, files);
 		}
 		dismiss();
 	}

@@ -219,16 +219,16 @@ public class MapRenderRepositories {
 			return false;
 		}
 		if (requestedBox == null) {
-			log.info("RENDER MAP: update due to start");
+//			log.info("RENDER MAP: update due to start");
 			return true;
 		}
 		if (drawSettings.isUpdateVectorRendering()) {
-			log.info("RENDER MAP: update due to request");
+//			log.info("RENDER MAP: update due to request");
 			return true;
 		}
 		if (requestedBox.getZoom() != box.getZoom() ||
 				requestedBox.getMapDensity() != box.getMapDensity()) {
-			log.info("RENDER MAP: update due zoom/map density");
+//			log.info("RENDER MAP: update due zoom/map density");
 			return true;
 		}
 
@@ -239,12 +239,12 @@ public class MapRenderRepositories {
 			deltaRotate += 360;
 		}
 		if (Math.abs(deltaRotate) > 25) {
-			log.info("RENDER MAP: update due to rotation");
+//			log.info("RENDER MAP: update due to rotation");
 			return true;
 		}
 		boolean upd = !requestedBox.containsTileBox(box);
-		if(upd) {
-			log.info("RENDER MAP: update due to tile box");
+		if (upd) {
+//			log.info("RENDER MAP: update due to tile box");
 		}
 		return upd;
 	}
@@ -261,7 +261,7 @@ public class MapRenderRepositories {
 		if (searchRequest != null) {
 			searchRequest.setInterrupted(true);
 		}
-		log.info("RENDER MAP: Interrupt rendering map");
+//		log.info("RENDER MAP: Interrupt rendering map");
 	}
 	
 	public boolean wasInterrupted() {
@@ -301,7 +301,7 @@ public class MapRenderRepositories {
 			resultHandler.deleteNativeResult();
 			return false;
 		}
-		if(cNativeObjects != null) {
+		if (cNativeObjects != null) {
 			cNativeObjects.deleteNativeResult();
 		}
 		cNativeObjects = resultHandler;
@@ -453,7 +453,6 @@ public class MapRenderRepositories {
 					readRouteDataAsMapObjects(searchRequest, c, tempResult, ids);
 				}
 			}
-			log.info(String.format("Route objects %s", tempResult.size() +""));
 		}
 
 		String coastlineTime = "";
@@ -503,8 +502,6 @@ public class MapRenderRepositories {
 
 
 		if (count[0] > 0) {
-			log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
-					cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
 			log.info(String.format("Searching: %s ms  %s (%s results found)", System.currentTimeMillis() - now, coastlineTime, count[0])); //$NON-NLS-1$
 		}
 
@@ -646,7 +643,7 @@ public class MapRenderRepositories {
 		tileRect.setZoomAndAnimation(tileRect.getZoom(), 0);
 		// prevent editing
 		requestedBox = new RotatedTileBox(tileRect);
-		log.info("RENDER MAP: new request " + tileRect ); 
+		log.info("RENDER MAP: new request " + tileRect );
 		if (currentRenderingContext != null) {
 			currentRenderingContext = null;
 		}
@@ -683,7 +680,7 @@ public class MapRenderRepositories {
 				validateLatLonBox(dataBox);
 				renderedState = 0;
 				boolean loaded;
-				if(nativeLib != null) {
+				if (nativeLib != null) {
 					cObjects = new LinkedList<>();
 					loaded = loadVectorDataNative(dataBox, requestedBox.getZoom(), renderingReq, nativeLib);
 				} else {
@@ -695,21 +692,20 @@ public class MapRenderRepositories {
 					return;
 				}
 			}
-			long searchTime = System.currentTimeMillis() - now;
-
 			currentRenderingContext = new OsmandRenderer.RenderingContext(app);
+			currentRenderingContext.searchTime = System.currentTimeMillis() - now;
 			renderingReq.clearState();
 			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
-			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
+			if (renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
 				currentRenderingContext.defaultColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_COLOR_VALUE);
 			}
 			renderingReq.clearState();
 			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
-			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_SHADOW_RENDERING)) {
+			if (renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_SHADOW_RENDERING)) {
 				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 				currentRenderingContext.shadowRenderingColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_SHADOW_COLOR);
 			}
-			if(renderingReq.searchRenderingAttribute("polygonMinSizeToDisplay")) {
+			if (renderingReq.searchRenderingAttribute("polygonMinSizeToDisplay")) {
 				currentRenderingContext.polygonMinSizeToDisplay = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 			}
 			QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
@@ -730,9 +726,9 @@ public class MapRenderRepositories {
 			currentRenderingContext.transliterate = transliterateMapNames(app, requestedBox.getZoom());
 			float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
-			//Text/icon scales according to mapDensity (so text is size of road)
+			// Text/icon scales according to mapDensity (so text is size of road)
 //			currentRenderingContext.textScale = (requestedBox.getDensity()*app.getSettings().TEXT_SCALE.get()); 
-			//Text/icon stays same for all sizes 
+			// Text/icon stays same for all sizes
 			currentRenderingContext.textScale = (requestedBox.getDensity() * app.getOsmandMap().getTextScale())
 					/ mapDensity;
 			
@@ -757,7 +753,7 @@ public class MapRenderRepositories {
 				bmp = reuse;
 				bmp.eraseColor(currentRenderingContext.defaultColor);
 			} else {
-				if(reuse != null){
+				if (reuse != null) {
 					log.warn(String.format("Create new image ? %d != %d (w) %d != %d (h) ", currentRenderingContext.width, reuse.getWidth(), currentRenderingContext.height, reuse.getHeight()));
 				}
 				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, cfg);
@@ -767,21 +763,20 @@ public class MapRenderRepositories {
 			}
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
-			if(nativeLib != null) {
+			if (nativeLib != null) {
 				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, mapTileDownloader);
 			} else {
 				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, renderingReq, mapTileDownloader);
 			}
 			// Force to use rendering request in order to prevent Garbage Collector when it is used in C++
-			if(renderingReq != null){
-				log.info("Debug :" + renderingReq != null);				
+			if (renderingReq != null) {
+				log.info("Debug :" + renderingReq != null);
 			}
-			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;
 			if (checkWhetherInterrupted()) {
 				// revert if it was interrupted 
 				// (be smart a bit do not revert if road already drawn) 
-				if(currentRenderingContext.lastRenderedKey < OsmandRenderer.DEFAULT_LINE_MAX) {
+				if (currentRenderingContext.lastRenderedKey < OsmandRenderer.DEFAULT_LINE_MAX) {
 					reuse = this.bmp;
 					this.bmp = this.prevBmp;
 					this.bmpLocation = this.prevBmpLocation;
@@ -795,19 +790,14 @@ public class MapRenderRepositories {
 				this.checkedRenderedState = renderedState;
 				this.checkedBox = this.bmpLocation;
 			}
+			String msg = currentRenderingContext.getRenderingMessage();
 			currentRenderingContext = null;
 
 			// 2. replace whole image
-			// keep cache
-			// this.prevBmp = null;
+			// keep cache // this.prevBmp = null;
 			this.prevBmpLocation = null;
+			log.info("> " + msg);
 			if (settings.DEBUG_RENDERING_INFO.get() && PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
-				String timeInfo = "Searching: " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-				if (renderingDebugInfo != null) {
-					timeInfo += "\n" + renderingDebugInfo;
-				}
-				String msg = timeInfo;
-				log.info(msg);
 				app.showToastMessage(msg);
 			}
 		} catch (RuntimeException e) {
@@ -828,7 +818,7 @@ public class MapRenderRepositories {
 				app.showShortToastMessage(app.getString(R.string.rendering_out_of_memory) + s);
 			});
 		} finally {
-			if(currentRenderingContext != null) {
+			if (currentRenderingContext != null) {
 				currentRenderingContext.ended = true;
 			}
 		}
