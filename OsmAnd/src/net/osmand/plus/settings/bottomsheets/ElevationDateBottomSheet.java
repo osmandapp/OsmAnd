@@ -9,18 +9,17 @@ import static net.osmand.plus.settings.fragments.RouteParametersFragment.updateS
 import static net.osmand.plus.utils.AndroidUtils.createColorStateList;
 import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -34,13 +33,11 @@ import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParamete
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 
@@ -55,8 +52,6 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = ElevationDateBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(ElevationDateBottomSheet.class);
 
-	private OsmandApplication app;
-	private ApplicationMode appMode;
 	private List<RoutingParameter> parameters;
 	private CommonPreference<Boolean> useHeightPref;
 	private LocalRoutingParameter heightObstacleParameter;
@@ -68,32 +63,27 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private String on;
 	private String off;
-	private int activeColor;
-	private int checkedColor;
-	private int uncheckedColor;
-	private int disabledColor;
-	@ColorInt
-	private int appModeColor;
+	@ColorRes private int activeColorId;
+	@ColorRes private int disabledColorId;
+	@ColorInt private int checkedColor;
+	@ColorInt private int uncheckedColor;
+	@ColorInt private int appModeColor;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
-		}
 		super.onCreate(savedInstanceState);
 
 		GeneralRouter router = app.getRouter(appMode);
 		Map<String, RoutingParameter> routingParameterMap = RoutingHelperUtils.getParametersForDerivedProfile(appMode, router);
 		RoutingParameter parameter = routingParameterMap.get(USE_HEIGHT_OBSTACLES);
 		if (parameter != null) {
-			useHeightPref = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+			useHeightPref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 		} else {
-			useHeightPref = app.getSettings().getCustomRoutingBooleanProperty(USE_HEIGHT_OBSTACLES, false);
+			useHeightPref = settings.getCustomRoutingBooleanProperty(USE_HEIGHT_OBSTACLES, false);
 		}
 		parameters = getReliefParametersForMode(routingParameterMap);
 		for (int i = 0; i < parameters.size(); i++) {
-			if (isRoutingParameterSelected(app.getSettings(), appMode, parameters.get(i))) {
+			if (isRoutingParameterSelected(settings, appMode, parameters.get(i))) {
 				selectedEntryIndex = i;
 			}
 		}
@@ -106,13 +96,11 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-
 		on = getString(R.string.shared_string_enabled);
 		off = getString(R.string.shared_string_disabled);
 		appModeColor = appMode.getProfileColor(nightMode);
-		activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
-		disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
+		activeColorId = ColorUtilities.getActiveColorId(nightMode);
+		disabledColorId = ColorUtilities.getSecondaryTextColorId(nightMode);
 		checkedColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		uncheckedColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
 
@@ -120,13 +108,13 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(new TitleItem(getString(R.string.routing_attr_height_obstacles_name)));
 
 		heightObstacleParameter = getHeightObstacleParameter();
-		createUseHeightButton(themedCtx);
+		createUseHeightButton();
 
-		int contentPaddingSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int contentPaddingSmall = getDimensionPixelSize(R.dimen.content_padding_small);
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 		items.add(new ShortDescriptionItem((getString(R.string.routing_attr_height_obstacles_description))));
 
-		createReliefFactorButtons(themedCtx);
+		createReliefFactorButtons();
 	}
 
 	private LocalRoutingParameter getHeightObstacleParameter(){
@@ -142,19 +130,18 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		return null;
 	}
 
-	private void createUseHeightButton(@NonNull Context context) {
+	private void createUseHeightButton() {
 		boolean checked = useHeightPref.getModeValue(appMode);
 		useHeightButton = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColor(appModeColor)
 				.setChecked(checked)
 				.setTitle(checked ? on : off)
-				.setTitleColorId(checked ? activeColor : disabledColor)
-				.setCustomView(getCustomButtonView(context, appMode, checked, nightMode))
+				.setTitleColorId(checked ? activeColorId : disabledColorId)
+				.setCustomView(getCustomButtonView(requireContext(), appMode, checked, nightMode))
 				.setOnClickListener(v -> {
 					boolean newValue = !useHeightPref.getModeValue(appMode);
 					Fragment target = getTargetFragment();
-					if (target instanceof OnConfirmPreferenceChange) {
-						OnConfirmPreferenceChange confirmInterface = (OnConfirmPreferenceChange) target;
+					if (target instanceof OnConfirmPreferenceChange confirmInterface) {
 						if (confirmInterface.onConfirmPreferenceChange(useHeightPref.getId(), newValue, ApplyQueryType.NONE)) {
 							updateUseHeightButton(useHeightButton, newValue);
 
@@ -185,17 +172,17 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		enableDisableReliefButtons(newValue);
 		button.setTitle(newValue ? on : off);
 		button.setChecked(newValue);
-		button.setTitleColorId(newValue ? activeColor : disabledColor);
+		button.setTitleColorId(newValue ? activeColorId : disabledColorId);
 		updateCustomButtonView(requireContext(), appMode, button.getView(), newValue, nightMode);
 	}
 
-	private void createReliefFactorButtons(Context context) {
+	private void createReliefFactorButtons() {
 		for (int i = 0; i < parameters.size(); i++) {
 			RoutingParameter parameter = parameters.get(i);
 			BottomSheetItemWithCompoundButton[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
 			preferenceItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(i == selectedEntryIndex)
-					.setButtonTintList(createColorStateList(context, nightMode))
+					.setButtonTintList(createColorStateList(getThemedContext(), nightMode))
 					.setTitle(getRoutingParameterTitle(app, parameter))
 					.setLayoutId(R.layout.bottom_sheet_item_with_radio_btn_left)
 					.setTag(i)
@@ -233,11 +220,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		enableDisableReliefButtons(useHeightButton.isChecked());
 	}
 
-	@Override
-	public boolean isNightMode(@NonNull OsmandApplication app) {
-		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
-	}
-
+	@NonNull
 	private List<RoutingParameter> getReliefParametersForMode(Map<String, RoutingParameter> parameters) {
 		List<RoutingParameter> reliefParameters = new ArrayList<>();
 		for (RoutingParameter routingParameter : parameters.values()) {
@@ -265,17 +248,14 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	public static void showInstance(FragmentManager fm, ApplicationMode appMode, Fragment target, boolean usedOnMap) {
-		try {
-			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
-				ElevationDateBottomSheet fragment = new ElevationDateBottomSheet();
-				fragment.appMode = appMode;
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull ApplicationMode appMode, Fragment target, boolean usedOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
+			ElevationDateBottomSheet fragment = new ElevationDateBottomSheet();
+			fragment.setAppMode(appMode);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }

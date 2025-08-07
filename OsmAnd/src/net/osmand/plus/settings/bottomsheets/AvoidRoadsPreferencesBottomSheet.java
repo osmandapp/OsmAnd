@@ -4,7 +4,6 @@ import static net.osmand.IndexConstants.AVOID_ROADS_FILE_EXT;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
@@ -22,7 +20,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.avoidroads.DirectionPointsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -33,7 +30,6 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 
 	private static final String ENABLED_FILES_IDS = "enabled_files_ids";
 
-	private OsmandApplication app;
 	private DirectionPointsHelper pointsHelper;
 
 	private final List<String> enabledFiles = new ArrayList<>();
@@ -41,7 +37,6 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 		pointsHelper = app.getAvoidSpecificRoads().getPointsHelper();
 
 		List<String> selectedFileNames;
@@ -67,14 +62,12 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 			items.add(new SubtitleDividerItem(app));
 			items.add(new TitleItem(getString(R.string.files_with_route_restrictions)));
 
-			LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-
 			for (File file : avoidRoadsFiles) {
 				String fileName = file.getName();
 				String name = capitalizeFirstLetter(fileName.replace(AVOID_ROADS_FILE_EXT, ""));
 				boolean enabled = enabledFiles.contains(fileName);
 
-				View itemView = inflater.inflate(R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
+				View itemView = inflate(R.layout.bottom_sheet_item_with_switch_and_dialog);
 				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.divider), false);
 
 				BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
@@ -121,12 +114,9 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 		pointsHelper.setSelectedFilesForMode(getAppMode(), enabledFiles);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager manager,
-	                                   @NonNull String prefId,
-	                                   @Nullable Fragment target,
-	                                   @Nullable ApplicationMode appMode,
-	                                   boolean usedOnMap,
-	                                   boolean profileDependent) {
+	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull String prefId,
+	                                   @Nullable Fragment target, @Nullable ApplicationMode appMode,
+	                                   boolean usedOnMap, boolean profileDependent) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, prefId);

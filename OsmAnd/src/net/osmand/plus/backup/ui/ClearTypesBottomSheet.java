@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -95,7 +96,7 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull List<ExportType> types,
 									@NonNull BackupClearType clearType, @NonNull Fragment target) {
-		if (!manager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ClearTypesBottomSheet fragment = new ClearTypesBottomSheet();
 			fragment.types.addAll(types);
 			fragment.clearType = clearType;

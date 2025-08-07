@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
@@ -33,7 +34,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 				.setTitle(getString(R.string.exit_without_saving))
 				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create());
-		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
+		items.add(new DividerSpaceItem(getContext(), getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 
 	@Override
 	public int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
+		return getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
 	}
 
 	@Override
@@ -80,7 +81,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment, @NonNull String description) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ExitBottomSheetDialogFragment fragment = new ExitBottomSheetDialogFragment();
 			Bundle bundle = new Bundle();
 			bundle.putString(DESCRIPTION, description);

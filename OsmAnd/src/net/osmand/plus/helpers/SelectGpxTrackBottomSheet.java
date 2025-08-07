@@ -2,7 +2,6 @@ package net.osmand.plus.helpers;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,7 +21,6 @@ import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
 import java.util.List;
@@ -37,8 +35,7 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View mainView = inflater.inflate(R.layout.gpx_track_select_dialog, null);
+		View mainView = inflate(R.layout.gpx_track_select_dialog);
 
 		RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

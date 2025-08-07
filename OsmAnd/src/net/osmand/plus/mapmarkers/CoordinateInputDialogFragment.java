@@ -190,13 +190,8 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 
 	private void showSaveDialog() {
 		hasUnsavedChanges = false;
-		SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
-		Bundle args = new Bundle();
-		args.putInt(ADDED_POINTS_NUMBER_KEY, getGpx().getPointsSize());
-		args.putBoolean(SaveAsTrackBottomSheetDialogFragment.COORDINATE_INPUT_MODE_KEY, true);
-		fragment.setArguments(args);
-		fragment.setListener(createSaveAsTrackFragmentListener());
-		fragment.show(getChildFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
+		SaveAsTrackBottomSheetDialogFragment.showInstance(
+				getChildFragmentManager(), getGpx().getPointsSize(), createSaveAsTrackFragmentListener());
 	}
 
 	@NonNull
@@ -313,9 +308,9 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 			boolean rightHand = settings.COORDS_INPUT_USE_RIGHT_SIDE.get();
 			LinearLayout handContainer = mainView.findViewById(R.id.hand_container);
 
-			View dataAreaView = inflate(R.layout.coordinate_input_land_data_area, null);
-			View keyboardAndListView = inflate(R.layout.coordinate_input_land_keyboard_and_list, null);
-			setBackgroundColor(dataAreaView, !nightMode ? R.color.card_and_list_background_light : R.color.card_and_list_background_dark);
+			View dataAreaView = inflate(R.layout.coordinate_input_land_data_area);
+			View keyboardAndListView = inflate(R.layout.coordinate_input_land_keyboard_and_list);
+			setBackgroundColor(dataAreaView, ColorUtilities.getCardAndListBackgroundColorId(nightMode));
 			setBackgroundColor(keyboardAndListView, ColorUtilities.getActivityBgColorId(nightMode));
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(rightHand ? dataAreaView : keyboardAndListView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightHand ? keyboardAndListView : dataAreaView, 0);
@@ -395,8 +390,9 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 		setBackgroundColor(R.id.bottom_controls_container, !nightMode
 				? R.color.activity_background_color_light : R.color.card_and_list_background_dark);
 		TextView addButton = mainView.findViewById(R.id.add_marker_button);
-		@ColorRes int colorId = !nightMode ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
-		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, getIcon(R.drawable.ic_action_type_add, colorId), null);
+		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
+		Drawable icType = getIcon(R.drawable.ic_action_type_add, activeColorId);
+		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, icType, null);
 		addButton.setText(R.string.shared_string_add);
 		addButton.setOnClickListener(view -> {
 			addWptPt();
@@ -415,14 +411,14 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 
 		View keyboardView = mainView.findViewById(R.id.keyboard_view);
 
-		int dividersColorResId = !nightMode ? R.color.divider_color_light : R.color.divider_color_dark;
+		int dividersColorResId = ColorUtilities.getDividerColorId(nightMode);
 		setBackgroundColor(keyboardView, dividersColorResId);
 		setBackgroundColor(R.id.keyboard_divider, dividersColorResId);
 
 		View.OnClickListener onClickListener = v -> {
 			if (isOsmandKeyboardOn()) {
 				View focusedView = getDialog().getCurrentFocus();
-				if (focusedView != null && focusedView instanceof EditText focusedEditText) {
+				if (focusedView instanceof EditText focusedEditText) {
 					int id = v.getId();
 					if (id == R.id.keyboard_item_clear) {
 						focusedEditText.setText("");
@@ -573,7 +569,7 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 				boolean clearItem = id == R.id.keyboard_item_clear;
 				if (clearItem) {
 					TextViewCompat.setAutoSizeTextTypeWithDefaults(itemTv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
-					itemTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_list_text_size));
+					itemTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getDimension(R.dimen.default_list_text_size));
 				} else {
 					TextViewCompat.setAutoSizeTextTypeWithDefaults(itemTv, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
 				}
@@ -594,8 +590,7 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 				itemBottomSpace.setVisibility(View.GONE);
 				Drawable icon = DrawableCompat.wrap((Drawable) item);
 				if (nightMode) {
-					int color = ContextCompat.getColor(ctx, R.color.icon_color_default_dark);
-					DrawableCompat.setTint(icon, color);
+					DrawableCompat.setTint(icon, getColor(R.color.icon_color_default_dark));
 				} else {
 					DrawableCompat.setTintList(icon, numberColorStateList);
 				}

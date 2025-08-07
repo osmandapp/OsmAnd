@@ -18,9 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -64,7 +62,6 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 	private static final String TAG = EditTrackGroupDialogFragment.class.getSimpleName();
 
-	private OsmandApplication app;
 	private MapMarkersHelper mapMarkersHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 
@@ -77,7 +74,6 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		app = requiredMyApplication();
 		mapMarkersHelper = app.getMapMarkersHelper();
 		selectedGpxHelper = app.getSelectedGpxHelper();
 
@@ -90,9 +86,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		if (displayGroup == null) {
-			return;
-		}
+		if (displayGroup == null) return;
 
 		items.add(new TitleItem(getCategoryName(app, displayGroup.getName())));
 
@@ -129,20 +123,20 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	private BaseBottomSheetItem createShowOnMapItem(@NonNull SelectedGpxFile selectedGpxFile) {
 		Context context = requireContext();
 		boolean checked = !selectedGpxFile.isGroupHidden(displayGroup.getName());
-		ApplicationMode mode = app.getSettings().getApplicationMode();
+		ApplicationMode appMode = getAppMode();
 		BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCompoundButtonColor(mode.getProfileColor(nightMode))
+				.setCompoundButtonColor(appMode.getProfileColor(nightMode))
 				.setChecked(checked)
 				.setTitle(getString(R.string.shared_string_show_on_map))
-				.setCustomView(getCustomButtonView(context, mode, checked, nightMode))
+				.setCustomView(getCustomButtonView(context, appMode, checked, nightMode))
 				.setOnClickListener(v -> {
 					boolean visible = !showOnMapItem[0].isChecked();
 					if (pointsGroup != null) {
 						pointsGroup.setHidden(!visible);
 					}
 					showOnMapItem[0].setChecked(visible);
-					updateCustomButtonView(context, mode, v, visible, nightMode);
+					updateCustomButtonView(context, appMode, v, visible, nightMode);
 
 					Fragment fragment = getTargetFragment();
 					if (fragment instanceof DisplayPointGroupsCallback) {
@@ -154,12 +148,13 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private void updateGroupVisibility() {
-		MapActivity activity = (MapActivity) getActivity();
-		if (activity != null && pointsGroup != null && groupHidden != pointsGroup.isHidden()) {
-			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.getName(), pointsGroup);
-			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(activity, gpxFile, groups, null);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		}
+		callMapActivity(mapActivity -> {
+			if (pointsGroup != null && groupHidden != pointsGroup.isHidden()) {
+				Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.getName(), pointsGroup);
+				UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, null);
+				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
+		});
 	}
 
 	@NonNull
@@ -168,13 +163,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setIcon(getContentIcon(R.drawable.ic_action_name_field))
 				.setTitle(getString(R.string.shared_string_rename))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FragmentManager manager = activity.getSupportFragmentManager();
-						RenameTrackGroupBottomSheet.showInstance(manager, EditTrackGroupDialogFragment.this, displayGroup);
-					}
-				})
+				.setOnClickListener(v -> callActivity(activity -> {
+					FragmentManager manager = activity.getSupportFragmentManager();
+					RenameTrackGroupBottomSheet.showInstance(manager, EditTrackGroupDialogFragment.this, displayGroup);
+				}))
 				.create();
 	}
 
@@ -234,13 +226,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setIcon(getContentIcon(R.drawable.ic_action_copy))
 				.setTitle(getString(R.string.copy_to_map_favorites))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FragmentManager manager = activity.getSupportFragmentManager();
-						CopyTrackGroupToFavoritesBottomSheet.showInstance(manager, EditTrackGroupDialogFragment.this, displayGroup);
-					}
-				})
+				.setOnClickListener(v -> callActivity(activity -> {
+					FragmentManager manager = activity.getSupportFragmentManager();
+					CopyTrackGroupToFavoritesBottomSheet.showInstance(manager, EditTrackGroupDialogFragment.this, displayGroup);
+				}))
 				.create();
 	}
 
@@ -252,19 +241,13 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
 				.setTitle(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), delete, delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						showDeleteConfirmationDialog(activity);
-					}
-				})
+				.setOnClickListener(v -> callActivity(this::showDeleteConfirmationDialog))
 				.create();
 	}
 
 	private void showDeleteConfirmationDialog(@NonNull FragmentActivity activity) {
-		Context context = UiUtilities.getThemedContext(activity, nightMode);
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setTitle(app.getString(R.string.are_you_sure));
+		AlertDialog.Builder builder = new AlertDialog.Builder(getThemedContext());
+		builder.setTitle(getString(R.string.are_you_sure));
 		builder.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> deleteGroupItems());
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.show();
@@ -282,11 +265,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setTitle(getString(R.string.change_default_appearance))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
+					callActivity(activity -> {
 						FragmentManager manager = activity.getSupportFragmentManager();
 						GpxGroupEditorFragment.showInstance(manager, gpxFile, pointsGroup, null);
-					}
+					});
 					dismiss();
 				}).create();
 	}
@@ -332,9 +314,8 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private void dismissAll() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof TrackMenuFragment) {
-			((TrackMenuFragment) fragment).dismiss();
+		if (getTargetFragment() instanceof TrackMenuFragment fragment) {
+			fragment.dismiss();
 		}
 		dismiss();
 	}
@@ -358,9 +339,8 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 	@Override
 	public void onPointsDeleted() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof TrackMenuFragment) {
-			((TrackMenuFragment) fragment).updateContent();
+		if (getTargetFragment() instanceof TrackMenuFragment fragment) {
+			fragment.updateContent();
 		}
 		dismiss();
 	}
@@ -376,7 +356,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
-			@NonNull GpxDisplayGroup group, @Nullable Fragment target) {
+	                                @NonNull GpxDisplayGroup group, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			EditTrackGroupDialogFragment fragment = new EditTrackGroupDialogFragment();
 			fragment.displayGroup = group;

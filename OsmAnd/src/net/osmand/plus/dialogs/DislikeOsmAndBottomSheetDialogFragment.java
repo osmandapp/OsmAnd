@@ -1,6 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,13 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -32,18 +29,9 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = getContext();
-		if (context == null) {
-			return;
-		}
-
 		rateUsHelper = new RateUsHelper();
-
-		View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.dislike_title, null);
-		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(titleView)
-				.create();
-		items.add(titleItem);
+		View titleView = inflate(R.layout.dislike_title);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(titleView).create());
 	}
 
 	@Override
@@ -53,10 +41,7 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			rateUsHelper.updateState(RateUsState.DISLIKED_WITHOUT_MESSAGE);
-		}
+		rateUsHelper.updateState(RateUsState.DISLIKED_WITHOUT_MESSAGE);
 	}
 
 	@Override
@@ -82,18 +67,13 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@Override
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
-		FragmentActivity activity = getActivity();
-		rateUsHelper.storeRateResult(activity);
+		rateUsHelper.storeRateResult(getActivity());
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm) {
-		try {
-			if (fm.findFragmentByTag(TAG) == null) {
-				DislikeOsmAndBottomSheetDialogFragment fragment = new DislikeOsmAndBottomSheetDialogFragment();
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
+			DislikeOsmAndBottomSheetDialogFragment fragment = new DislikeOsmAndBottomSheetDialogFragment();
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }

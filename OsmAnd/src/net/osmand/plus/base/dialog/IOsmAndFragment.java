@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.OnResultCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -72,19 +73,24 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 
 	// === Activity access ===
 
+	default void callActivity(@NonNull OnResultCallback<FragmentActivity> callback) {
+		FragmentActivity activity = getActivity();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			callback.onResult(activity);
+		}
+	}
+
+	default void callMapActivity(@NonNull OnResultCallback<MapActivity> callback) {
+		MapActivity mapActivity = getMapActivity();
+		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+			callback.onResult(mapActivity);
+		}
+	}
+
 	@Nullable
 	default MapActivity getMapActivity() {
 		FragmentActivity activity = getActivity();
 		if (activity instanceof MapActivity mapActivity) {
-			return mapActivity;
-		}
-		return null;
-	}
-
-	@Nullable
-	default MapActivity getNotDestroyedMapActivity() {
-		MapActivity mapActivity = getMapActivity();
-		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			return mapActivity;
 		}
 		return null;
@@ -143,6 +149,11 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 
 	default int dpToPx(float dp) {
 		return AndroidUtils.dpToPx(getApp(), dp);
+	}
+
+	@Dimension
+	default float getDimension(@DimenRes int resId) {
+		return getApp().getResources().getDimension(resId);
 	}
 
 	@Dimension

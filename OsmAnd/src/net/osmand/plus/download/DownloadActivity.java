@@ -14,9 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.ActionBar;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.IProgress;
@@ -402,10 +400,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (SUGGEST_TO_DOWNLOAD_BASEMAP && !SUGGESTED_TO_DOWNLOAD_BASEMAP && item != null
 				&& item.isDownloaded() && item.isOutdated() && !downloadThread.isDownloading(item)) {
 			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
-
-			AskMapDownloadFragment fragment = new AskMapDownloadFragment();
-			fragment.setIndexItem(item);
-			fragment.show(getSupportFragmentManager(), AskMapDownloadFragment.TAG);
+			AskMapDownloadFragment.showInstance(this, item);
 		}
 	}
 

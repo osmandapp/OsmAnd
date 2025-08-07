@@ -11,7 +11,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
@@ -210,12 +209,8 @@ public class StreetNameWidget extends MapWidget {
 				ImageView closeButton = waypointInfoBar.findViewById(R.id.waypoint_close);
 				moreButton.setOnClickListener(view -> {
 					mapActivity.hideContextAndRouteInfoMenues();
-					ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
-					Bundle args = new Bundle();
-					args.putInt(ShowAlongTheRouteBottomSheet.EXPAND_TYPE_KEY, point.type);
-					fragment.setArguments(args);
-					fragment.setUsedOnMap(true);
-					fragment.show(mapActivity.getSupportFragmentManager(), ShowAlongTheRouteBottomSheet.TAG);
+					ShowAlongTheRouteBottomSheet.showInstance(
+							mapActivity.getSupportFragmentManager(), null, point.type);
 				});
 				closeButton.setOnClickListener(view -> {
 					waypointHelper.removeVisibleLocationPoint(point);

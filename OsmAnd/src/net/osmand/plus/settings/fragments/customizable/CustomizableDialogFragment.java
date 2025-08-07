@@ -88,11 +88,6 @@ public abstract class CustomizableDialogFragment extends BaseFullScreenDialogFra
 		displayData = manager.getDisplayData(processId);
 	}
 
-	@Override
-	public boolean isNightMode() {
-		return nightMode;
-	}
-
 	protected void onItemClicked(@NonNull DisplayItem item) {
 		manager.onDialogItemClick(processId, item);
 	}
