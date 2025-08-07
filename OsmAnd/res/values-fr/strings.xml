@@ -4368,7 +4368,7 @@
     <string name="favorite_confirm_delete_group">Supprimer le groupe « %1$s » et ses points (%2$d) ?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
     <string name="display_position">Afficher la position</string>
-    <string name="shared_string_normal">Normal</string>
+    <string name="shared_string_normal">Normale</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Orientation manuelle</string>
     <string name="shared_string_large">Grand</string>
@@ -5697,4 +5697,7 @@
     <string name="reverse_mode_original_track_desc">Suivez précisément la trace pour revenir au point de départ.\nAttention : les voies à sens unique ne sont pas prises en compte !</string>
     <string name="reverse_mode">Mode inversé</string>
     <string name="n_a">N/A</string>
+    <string name="altitude_metrics_description">Définit l\'unité d\'affichage de l\'altitude dans les widgets et les statistiques.</string>
+    <string name="write_location_provider_description">Enregistrer le fournisseur de localisation pour chaque point de suivi pendant l\'enregistrement</string>
+    <string name="write_location_provider">Fournisseur de localisation d\'écriture</string>
 </resources>
