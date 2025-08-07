@@ -5573,7 +5573,7 @@
     <string name="plugin_ais_tracker_name">Suivi AIS du navire</string>
     <string name="no_places_available">Aucun lieu dans la zone visible</string>
     <string name="no_photo_for_location_desc">Aucune photo d\'utilisateur n\'a encore été ajoutée pour ce lieu</string>
-    <string name="ais_object_lost_timeout_description">Définir le délai d\'expiration pour la visibilité des objets AIS : après ce délai sans réception de signal, l\'objet sera retiré de l\'écran.</string>
+    <string name="ais_object_lost_timeout_description">Définir le délai d\'expiration pour la visibilité des objets AIS : après ce délai sans réception de signal, l\'objet sera retiré de l\'écran.</string>
     <string name="ais_cpa_warning_time">Délai d\'avertissement pour atteindre le Point d\'Approche le plus proche (CPA)</string>
     <string name="ais_cpa_warning_distance_description">Les navires sont marqués en rouge si le CPA est inférieur à cette valeur et s\'il est atteint dans un futur proche (voir « Délai d\'avertissement pour atteindre le Point d\'Approche le plus proche (CPA) »).</string>
     <string name="plugin_ais_tracker_disclaimer">CLAUSE DE NON-RESPONSABILITÉ\n\nCette extension est un projet de loisir et n\'est pas conçu pour la fiabilité et l\'intégrité. NE VOUS FIEZ PAS à ce logiciel de quelque manière que ce soit, y compris le guidage et/ou votre sécurité.</string>
