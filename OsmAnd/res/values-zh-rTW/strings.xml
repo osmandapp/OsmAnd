@@ -2497,11 +2497,11 @@
     <string name="enter_lon">輸入經度</string>
     <string name="enter_lat">輸入緯度</string>
     <string name="enter_lat_and_lon">輸入緯度和經度</string>
-    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+    <string name="dd_mm_ss_format">度度°分分′秒秒″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
-    <string name="dd_ddddd_format">DD.DDDDD°</string>
+    <string name="dd_ddddd_format">度度.度度度度度°</string>
     <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
-    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+    <string name="dd_mm_mmm_format">度度°分分.分分分\'</string>
     <string name="east_abbreviation">東</string>
     <string name="west_abbreviation">西</string>
     <string name="south_abbreviation">南</string>
@@ -5443,7 +5443,7 @@
     <string name="no_internet_descr">請檢查您的連線並再試一次。</string>
     <string name="no_photos_available_descr">尚未將使用者照片新增至此處</string>
     <string name="no_photos_available">沒有可用的照片</string>
-    <string name="unit_volt">V</string>
+    <string name="unit_volt">伏特</string>
     <string name="obd_fuel_type_not_provided">未提供燃料類型</string>
     <string name="obd_fuel_type_gasoline">汽油</string>
     <string name="obd_fuel_type_methanol">甲醇</string>
@@ -5474,7 +5474,7 @@
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">車輛指標</string>
     <string name="percent_unit">%</string>
-    <string name="rpm_unit">rpm</string>
+    <string name="rpm_unit">每分轉圈</string>
     <string name="obd_rpm_desc">透過 OBD 感測器顯示車輛轉速表 RPM</string>
     <string name="obd_fuel_level_desc">透過 OBD 感測器顯示車輛油量</string>
     <string name="obd_fuel_left_distance_desc">透過 OBD 感測器顯示車輛剩餘油量的行駛距離</string>
@@ -5783,4 +5783,6 @@
     <string name="reverse_mode_original_track_desc">沿著確切的路徑回到起點。\n警告：這可能會很危險，因為其會忽略單行道。</string>
     <string name="reverse_mode">反向模式</string>
     <string name="n_a">N/A</string>
+    <string name="write_location_provider_description">錄製時將位置提供者儲存至每個軌跡點</string>
+    <string name="write_location_provider">寫入位置提供者</string>
 </resources>

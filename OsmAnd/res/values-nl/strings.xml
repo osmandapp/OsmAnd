@@ -2915,7 +2915,7 @@
     <string name="select_base_profile_dialog_title">Selecteer een profiel om mee te starten</string>
     <string name="select_nav_profile_dialog_title">Navigatietype selecteren</string>
     <string name="base_profile_descr_car">Auto, vrachtauto, motor</string>
-    <string name="base_profile_descr_bicycle">Mountainbike, brommer, paard</string>
+    <string name="base_profile_descr_bicycle">Mountainbike, bromfiets, paard</string>
     <string name="base_profile_descr_pedestrian">Wandelen, trektocht, joggen</string>
     <string name="base_profile_descr_public_transport">Types openbaar vervoer</string>
     <string name="base_profile_descr_boat">Boot, roeien, zeilen</string>
@@ -3958,7 +3958,7 @@
     <string name="empty_purchases_description">Als je aankopen hier niet verschijnen, tik dan op “%1$s”, of neem contact op met ons ondersteuningsteam.</string>
     <string name="contact_support">Contacteer de support</string>
     <string name="troubleshooting">Probleemoplosser</string>
-    <string name="troubleshooting_description">Volg a.u.b. deze link als je problemen hebt met aankopen maken.</string>
+    <string name="troubleshooting_description">Volg deze link als je problemen hebt met aankopen.</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Jaarlijks abonnement</string>
     <string name="monthly_subscription">Maandelijks abonnement</string>
@@ -4059,7 +4059,7 @@
     <string name="map_updates_are_unavailable_yet">Kaart updates zijn nog niet beschikbaar. :-(</string>
     <string name="connect_track_points_as">Routepunten verbinden</string>
     <string name="pro_features">Pro functies</string>
-    <string name="purchases_restored">Aankoop hersteld</string>
+    <string name="purchases_restored">Aankopen hersteld</string>
     <string name="grey_color_undefined">Delen zonder gegevens zijn grijs gekleurd.</string>
     <string name="backup_deleting_all_data">Verwijderen van alle gegevens…</string>
     <string name="backup_deleted_all_data">Verwijder alle gegevens.</string>
@@ -4173,7 +4173,7 @@
     <string name="internal_app_storage_description">Interne opslag, verborgen voor gebruikers en andere apps, dus niemand buiten OsmAnd heeft toegang tot jouw gegevens.</string>
     <string name="shared_string_articles">Artikelen</string>
     <string name="shared_storage_warning_title">Veranderingen in de opslag gebruik regels</string>
-    <string name="purchases_feature_desc_android_auto">Brengt OsmAnd offline kaarten en navigatie op het scherm van je wagen en integreert met de bedieningselementen van je wagen.</string>
+    <string name="purchases_feature_desc_android_auto">Brengt OsmAnd offline kaarten en navigatie op het scherm van je voertuig en integreert met de bedieningselementen van je voertuig.</string>
     <string name="included_categories">Inbegrepen categorieën</string>
     <string name="release_4_1">• Initiële ondersteuning voor Android Auto
 \n
@@ -4345,7 +4345,7 @@
     <string name="purchases_feature_desc_osmand_cloud">Neem OsmAnd Cloud om alle je OsmAnd gegevens online op te slaan. Je verliest geen gegevens na herinstallatie, want je kan alle gegevens gemakkelijk back-uppen en herstellen.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Krijg onbeperkte offline kaart downloads voor alle continenten en regio\'s.</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Lage emissiezones vermijden</string>
-    <string name="purchases_feature_desc_terrain">Hoogtelijnen van het terrein, volledige reliëfschaduwkaarten met donkere tinten en hellingskaarten waarin kleuren worden gebruikt om toppen en laaglanden te onderscheiden.</string>
+    <string name="purchases_feature_desc_terrain">Hoogtelijnen, grijswaarden-schaduwwerking en kleurenschema voor hellingsindicatie, om toppen en laaggelegen gebieden te kunnen onderscheiden.</string>
     <string name="failed_loading_predefined_engines">Kon de lijst van voorgedefinieerde profielen niet laden.
 \nGelieve uw internetverbinding te controleren.</string>
     <string name="osmand_cloud_login_descr">Vul het e-mailadres in waarmee u heeft geregistreerd. Er zal een éénmalig wachtwoord naartoe worden gestuurd.</string>
@@ -5043,37 +5043,7 @@
     <string name="external_device_details_disconnect">Verbreek verbinding</string>
     <string name="external_device_ble">BLE</string>
     <string name="ant_plus_searching_text">Sensoren zoeken</string>
-    <string name="release_4_4">- Verbeterd \"Tracks\" menu in \"Kaart configureren\".
-\n
-\n - Contextmenu toont nu gelokaliseerde namen voor POI\'s
-\n
-\n - Optie toegevoegd om route via link te delen
-\n
-\n - Lengte-eenheid \"Nautische mijlen/voeten\" toegevoegd
-\n
-\n - Kaartoriëntatie nieuwe vaste modus toegevoegd
-\n
-\n - Startscherm vereenvoudigd
-\n
-\n - Vaste locatiepositie in gesplitste schermmodus in Android Auto
-\n
-\n - Snelheids-/hellinggrafiek toegevoegd voor trackanalyse
-\n
-\n - Android 13 verplaatst app taalselectie naar systeeminstellingen
-\n
-\n - Problemen met de weergave van Vegan-plaatsen opgelost
-\n
-\n - Mogelijkheid toegevoegd om online tegels te downloaden die worden gebruikt als \"Overlay\" of \"Underlay\" kaarten
-\n
-\n - Ondersteuning toegevoegd van imperiale eenheden voor \"Voertuigparameters\".
-\n
-\n - Nieuw brommerprofiel
-\n
-\n - Nieuwe \"Automatisch\" weergavepositie optie toegevoegd
-\n
-\n - Kaartbewegingen voor kantelen, zoomen en draaien opgelost
-\n
-\n</string>
+    <string name="release_4_4">- Verbeterd \"Tracks\" menu in \"Kaart configureren\". \n \n - Contextmenu toont nu gelokaliseerde namen voor POI\'s \n \n - Optie toegevoegd om route via link te delen \n \n - Lengte-eenheid \"Nautische mijlen/voeten\" toegevoegd \n \n - Kaartoriëntatie nieuwe vaste modus toegevoegd \n \n - Startscherm vereenvoudigd \n \n - Vaste locatiepositie in gesplitste schermmodus in Android Auto \n \n - Snelheids-/hellinggrafiek toegevoegd voor trackanalyse \n \n - Android 13 verplaatst app taalselectie naar systeeminstellingen \n \n - Problemen met de weergave van Vegan-plaatsen opgelost \n \n - Mogelijkheid toegevoegd om online tegels te downloaden die worden gebruikt als \"Overlay\" of \"Underlay\" kaarten \n \n - Ondersteuning toegevoegd van imperiale eenheden voor \"Voertuigparameters\". \n \n - Nieuw bromfietsprofiel \n \n - Nieuwe \"Automatisch\" weergavepositie optie toegevoegd \n \n - Kaartbewegingen voor kantelen, zoomen en draaien opgelost</string>
     <string name="sort_duration_ascending">Kortste duur eerst</string>
     <string name="selected_value">Geselecteerde waarde</string>
     <string name="common_weight_limit_error">De minimumwaarde is \"%1$s\" %2$s. Gebruik het \"%3$s\" profiel indien het gewicht van het voertuig lager is dan de minimumwaarde.</string>
@@ -5422,7 +5392,7 @@
     <string name="unchanged_parameter_summary">Elke track behoudt zijn eigen parameters.</string>
     <string name="avg_sensor_cadence">Fietscadans, gemiddeld</string>
     <string name="key_bindings">Toetstoewijzingen</string>
-    <string name="help_article_navigation_routing_moped_routing_name">Moped-routes</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Bromfietsroutes</string>
     <string name="help_article_plan_route_name">Routeplannen</string>
     <string name="track_not_recorded">Niet opgenomen</string>
     <string name="shared_string_all_tracks">Alle tracks</string>
@@ -5528,7 +5498,7 @@
     <string name="map_2d_mode_action">2D-modus</string>
     <string name="any_connected">Alle verbonden</string>
     <string name="app_mode_paragliding">Paragliden</string>
-    <string name="help_article_navigation_routing_boat_navigation_name">Botenroutes</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Bootroutes</string>
     <string name="see_all_plans">Alle prijspakketten bekijken</string>
     <string name="max_sensor_bycicle_power">Fietsvermogen, maximaal</string>
     <string name="avg_sensor_temperature">Temperatuur, gemiddeld</string>
@@ -5684,7 +5654,7 @@
     <string name="help_article_search_search_poi_name">Zoek interessepunt (POI)</string>
     <string name="free_versions_descr">Download en installeer gratis OsmAnd-versie</string>
     <string name="telegram_chats_descr">Doe mee aan een van onze lokale Telegram-groepen.</string>
-    <string name="help_article_troubleshooting_crash_logs_name">Vastloper-logs</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Crashlogboeken</string>
     <string name="help_article_purchases_giveaway_name">Weggevertje</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="cloud_item_restored">%1$s is teruggezet in Cloud.</string>
@@ -6029,4 +5999,28 @@
     <string name="no_internet_descr">Controleer je internetverbinding en probeer opnieuw.</string>
     <string name="no_photos_available_descr">Er zijn nog geen gebruikersafbeeldingen toegevoegd voor deze locatie</string>
     <string name="no_photos_available">Geen foto\'s beschikbaar</string>
+    <string name="add_widget_to_the_right">Widget rechts toevoegen</string>
+    <string name="add_widget_to_the_left">Widget links toevoegen</string>
+    <string name="obd_fuel_type_gasoline">Benzine</string>
+    <string name="change_zoom_action_descr">Zoomniveau van de kaart aanpassen.</string>
+    <string name="drawer_button_description">Opent het hoofdmenu.</string>
+    <string name="obd_fuel_type_propane">Propaan</string>
+    <string name="obd_fuel_type_electric">Elektrisch</string>
+    <string name="obd_fuel_type_hydrogen">Waterstof</string>
+    <string name="obd_fuel_type_unknown">Type brandstof onbekend</string>
+    <string name="obd_widget_group">Voertuigmetingen</string>
+    <string name="vehicle_metrics_plugin_settings">Instellingen voor voertuigmetingen</string>
+    <string name="write_location_provider">Locatie-aanbieder opschrijven</string>
+    <string name="write_location_provider_description">Sla de locatie-aanbieder op bij elk trackpunt tijdens het opnemen</string>
+    <string name="third_links">Links van derden</string>
+    <string name="shared_string_source">Bron</string>
+    <string name="shared_string_decrease">Verlaag</string>
+    <string name="shared_string_increase">Verhoog</string>
+    <string name="search_action_descr">Opent zoeken.</string>
+    <string name="navigation_action_descr">Opent Navigatie.</string>
+    <string name="my_location_action_descr">Centreert de kaart op je huidige locatie.</string>
+    <string name="map_3d_mode_action_descr">Wijzig de kanteling van de kaart.</string>
+    <string name="type_of_activity">Soort activiteit</string>
+    <string name="change_activity">Verander activiteit</string>
+    <string name="obd_fuel_type_not_provided">Geen brandstof-type aangegeven</string>
 </resources>
