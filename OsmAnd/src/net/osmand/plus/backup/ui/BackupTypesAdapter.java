@@ -1,6 +1,7 @@
 package net.osmand.plus.backup.ui;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.CollectionUtils;
@@ -68,6 +70,14 @@ public abstract class BackupTypesAdapter extends OsmandBaseExpandableListAdapter
 		}
 		ImageView icon = view.findViewById(R.id.explicit_indicator);
 		icon.setImageDrawable(iconsCache.getIcon(iconRes, colorRes));
+	}
+
+	protected void setupSelectableBackground(@NonNull View view) {
+		View selectableView = view.findViewById(R.id.selectable_list_item);
+		if (selectableView.getBackground() == null) {
+			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
+			AndroidUtils.setBackground(selectableView, drawable);
+		}
 	}
 
 	@Override

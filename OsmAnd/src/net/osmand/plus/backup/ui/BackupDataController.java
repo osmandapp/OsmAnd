@@ -11,19 +11,17 @@ import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class BackupTypesController extends SwitchBackupTypesController {
+public class BackupDataController extends SwitchBackupTypesController {
 
 	private static final String PROCESS_ID = "select_cloud_backup_types";
 
-	public BackupTypesController(@NonNull OsmandApplication app) {
+	public BackupDataController(@NonNull OsmandApplication app) {
 		super(app, BackupClearType.ALL, RemoteFilesType.UNIQUE);
 	}
 
@@ -66,9 +64,9 @@ public class BackupTypesController extends SwitchBackupTypesController {
 	public static void showScreen(@NonNull FragmentActivity activity) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(PROCESS_ID, new BackupTypesController(app));
+		dialogManager.register(PROCESS_ID, new BackupDataController(app));
 
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		BackupTypesFragment.showInstance(fragmentManager, PROCESS_ID);
+		BackupDataFragment.showInstance(fragmentManager, PROCESS_ID);
 	}
 }

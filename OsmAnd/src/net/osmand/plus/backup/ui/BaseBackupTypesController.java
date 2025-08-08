@@ -169,4 +169,8 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 		}
 		return Collections.emptyList();
 	}
+
+	public long getAvailableStorageSize() {
+		return backupHelper.getMaximumAccountSize();
+	}
 }

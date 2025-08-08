@@ -126,14 +126,6 @@ public class SwitchBackupTypesAdapter extends BackupTypesAdapter {
 		return view;
 	}
 
-	private void setupSelectableBackground(@NonNull View view) {
-		View selectableView = view.findViewById(R.id.selectable_list_item);
-		if (selectableView.getBackground() == null) {
-			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
-			AndroidUtils.setBackground(selectableView, drawable);
-		}
-	}
-
 	@NonNull
 	private String getGroupSummary(@NonNull ExportCategory category) {
 		long itemsSize = 0;

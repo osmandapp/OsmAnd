@@ -136,7 +136,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				BackupTypesController.showScreen(activity);
+				BackupDataController.showScreen(activity);
 			}
 		});
 		setupSelectableBackground(container);
