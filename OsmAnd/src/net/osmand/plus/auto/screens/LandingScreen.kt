@@ -32,7 +32,7 @@ class LandingScreen(
         })
     }
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val app = app
         for (category in PlaceCategory.entries) {

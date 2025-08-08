@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -44,7 +45,7 @@ public class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploade
 		};
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 				showProgressDialog(), listener, plugin, points.length, closeChangeSet, anonymously);
-		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
+		OsmAndTaskManager.executeTask(uploadTask, points);
 	}
 
 	@NonNull

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListVectorLine;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
@@ -326,7 +327,8 @@ public class RouteGeometryWay extends
 			if (actionLinesCollection == null) {
 				actionLinesCollection = new VectorLinesCollection();
 			}
-			long initialLinesCount = actionLinesCollection.getLines().size();
+			QListVectorLine lines = actionLinesCollection.getLines();
+			long initialLinesCount = lines.size();
 			for (List<RouteActionPoint> line : actionArrows) {
 				int arrowColor = getContrastArrowColor(line, customTurnArrowColor);
 				QVectorPointI points = new QVectorPointI();
@@ -337,7 +339,7 @@ public class RouteGeometryWay extends
 				}
 				float vectorLineScale = GeometryWayDrawer.getVectorLineScale(getContext().getApp()) / 2.0f;
 				if (lineIdx < initialLinesCount) {
-					VectorLine vectorLine = actionLinesCollection.getLines().get(lineIdx);
+					VectorLine vectorLine = lines.get(lineIdx);
 					vectorLine.setPoints(points);
 					vectorLine.setIsHidden(false);
 					vectorLine.setLineWidth(customWidth * vectorLineScale);
@@ -347,7 +349,7 @@ public class RouteGeometryWay extends
 					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
 					vectorLineBuilder.setBaseOrder(baseOrder--)
 							.setIsHidden(false)
-							.setLineId((int) actionLinesCollection.getLines().size())
+							.setLineId(actionLinesCollection.getLinesCount())
 							.setLineWidth(customWidth * vectorLineScale)
 							.setPoints(points)
 							.setEndCapStyle(VectorLine.EndCapStyle.ARROW.ordinal())
@@ -356,7 +358,7 @@ public class RouteGeometryWay extends
 				}
 			}
 			while (lineIdx < initialLinesCount) {
-				actionLinesCollection.getLines().get(lineIdx).setIsHidden(true);
+				lines.get(lineIdx).setIsHidden(true);
 				lineIdx++;
 			}
 			mapRenderer.addSymbolsProvider(actionLinesCollection);

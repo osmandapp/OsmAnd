@@ -2,8 +2,7 @@ package net.osmand.search;
 
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
-import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.search.core.ObjectType.ONLINE_SEARCH;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
@@ -1137,12 +1136,11 @@ public class SearchUICore {
 				}
 				break;
 			case OBF_RESOURCE:
-				if (o1.isFullPhraseEqualLocaleName() || o2.isFullPhraseEqualLocaleName()) {
-					return 0;
-				}
+				boolean fp1 = o1.isFullPhraseEqualLocaleName();
+				boolean fp2 = o2.isFullPhraseEqualLocaleName();
 				// sort order: DETAILED, WIKIPEDIA, BASEMAP, TRAVEL
-				int ord1 = o1.getResourceType().ordinal();
-				int ord2 = o2.getResourceType().ordinal();
+				int ord1 = fp1 ? 0 : o1.getResourceType().ordinal();
+				int ord2 = fp2 ? 0 : o2.getResourceType().ordinal();
 				if (ord1 != ord2) {
 					return ord2 > ord1 ? -1 : 1;
 				}
@@ -1232,6 +1230,10 @@ public class SearchUICore {
 			}
 		}
 		return retName;
+	}
+
+	public boolean isOnlineSearch() {
+		return searchSettings.hasCustomSearchType(ONLINE_SEARCH);
 	}
 
 	public static class SearchResultComparator implements Comparator<SearchResult> {

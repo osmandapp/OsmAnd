@@ -3,6 +3,7 @@ package net.osmand.plus.configmap.routes.actions;
 import static net.osmand.plus.configmap.routes.RouteUtils.showRendererSnackbarForAttr;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public abstract class BaseRouteQuickAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		String attrName = getAttrName();
 		OsmandApplication app = mapActivity.getMyApplication();
 		RenderingRuleProperty property = getProperty(app);

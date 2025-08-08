@@ -48,6 +48,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -824,7 +825,6 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		});
 	}
 
-	@Deprecated
 	private void calculateSrtmTrack() {
 		if (isCalculateSrtmMode() && calculateSrtmTask == null) {
 			try {
@@ -869,7 +869,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 				updateInfoView();
 			});
-			calculateHeightmapTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(calculateHeightmapTask);
 		}
 	}
 
@@ -1551,9 +1551,11 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		WptPt oldPoint = editingCtx.getOriginalPointToMove();
 		WptPt newPoint = measurementLayer.getMovedPointToApply();
-		int position = editingCtx.getSelectedPointPosition();
-		editingCtx.getCommandManager().execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
-		editingCtx.addPoint(newPoint);
+		if (oldPoint != null && newPoint != null) {
+			int position = editingCtx.getSelectedPointPosition();
+			editingCtx.getCommandManager().execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
+			editingCtx.addPoint(newPoint);
+		}
 		exitMovePointMode(false);
 		doAddOrMovePointCommonStuff();
 		measurementLayer.refreshMap();
@@ -1568,7 +1570,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	void exitMovePointMode(boolean cancelled) {
 		if (cancelled) {
 			WptPt pt = editingCtx.getOriginalPointToMove();
-			editingCtx.addPoint(pt);
+			if (pt != null) {
+				editingCtx.addPoint(pt);
+			}
 		}
 		editingCtx.setOriginalPointToMove(null);
 		editingCtx.setSelectedPointPosition(-1);
@@ -1720,7 +1724,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	@Override
 	public MapPosition getMapDisplayPosition() {
 		if (infoExpanded) {
-			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_RIGHT;
+			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_END;
 		}
 		return MapPosition.CENTER;
 	}
@@ -1790,7 +1794,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		SaveGpxRouteListener listener = (warning, savedGpxFile, backupFile) -> onGpxSaved(warning, savedGpxFile, outFile, backupFile, finalSaveAction, showOnMap);
 		SaveGpxRouteAsyncTask saveTask = new SaveGpxRouteAsyncTask(this, outFile, gpxFile, simplified,
 				addToTrack, showOnMap, listener);
-		saveTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(saveTask);
 	}
 
 	private void onGpxSaved(Exception warning, GpxFile savedGpxFile, File outFile, File backupFile,

@@ -96,7 +96,7 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 				continue;
 			}
 			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app,
-					holder.linkedSubscription, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
+					holder.linkedSubscription, null, null, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
 			if (purchaseData != null) {
 				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 				PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchaseData);
@@ -109,7 +109,8 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 		List<InAppStateHolder> externalInApps = purchaseHelper.getExternalInApps();
 		for (InAppStateHolder holder : externalInApps) {
 			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app,
-					holder.linkedPurchase, holder.purchaseTime, UNDEFINED_TIME, holder.origin, null);
+					holder.linkedPurchase, holder.name, holder.icon, holder.purchaseTime, holder.expireTime == 0
+							? UNDEFINED_TIME : holder.expireTime, holder.origin, null);
 			if (purchaseData != null) {
 				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 				PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchaseData);
@@ -139,7 +140,8 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 		setupPromoCard(activity);
 
 		boolean hasMainPurchases = !Algorithms.isEmpty(mainPurchases);
-		if (!needToShowFreeAccountSubscriptionCard && (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription))) {
+		boolean hasExternalPurchases = !Algorithms.isEmpty(externalInApps) || !Algorithms.isEmpty(externalSubscriptions);
+		if (!needToShowFreeAccountSubscriptionCard && (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription && !hasExternalPurchases))) {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			cardsContainer.addView(new NoPurchasesCard(activity, this).build(activity));
 		} else {

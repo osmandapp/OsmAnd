@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseNestedListFragment;
@@ -195,7 +196,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	private void startLoadLiveMapsAsyncTask() {
 		loadLiveMapsTask = new LoadLiveMapsTask(listAdapter, app);
-		loadLiveMapsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(loadLiveMapsTask);
 	}
 
 	private void stopLoadLiveMapsAsyncTask() {

@@ -46,20 +46,16 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.MapHudLayout.ViewChangeListener;
-import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
+import net.osmand.plus.views.controls.ViewChangeProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
+import net.osmand.plus.widgets.FrameLayoutEx;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-public abstract class MapButton extends FrameLayout implements OnAttachStateChangeListener, ViewChangeProvider {
+public abstract class MapButton extends FrameLayoutEx implements OnAttachStateChangeListener, ViewChangeProvider {
 
 	protected final OsmandApplication app;
 	protected final OsmandSettings settings;
@@ -94,8 +90,6 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	protected int backgroundColor;
 	@ColorInt
 	protected int backgroundPressedColor;
-
-	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
 
 	public MapButton(@NonNull Context context) {
 		this(context, null);
@@ -456,24 +450,6 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	@NonNull
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		return new ButtonAppearanceParams("ic_quick_action", BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
-	}
-
-	@NonNull
-	@Override
-	public Collection<ViewChangeListener> getViewChangeListeners() {
-		return viewChangeListeners;
-	}
-
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		super.onSizeChanged(w, h, oldw, oldh);
-		notifySizeChanged(this, w, h, oldw, oldh);
-	}
-
-	@Override
-	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-		super.onVisibilityChanged(changedView, visibility);
-		notifyVisibilityChanged(changedView, visibility);
 	}
 
 	public int getSize() {

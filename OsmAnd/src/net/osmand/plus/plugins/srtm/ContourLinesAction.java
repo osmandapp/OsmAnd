@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VAL
 import static net.osmand.plus.quickaction.QuickActionIds.CONTOUR_LINES_ACTION_ID;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class ContourLinesAction extends QuickAction {
 
@@ -39,7 +41,7 @@ public class ContourLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			boolean enabled = SRTMPlugin.isContourLinesLayerEnabled(mapActivity.getMyApplication());

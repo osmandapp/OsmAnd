@@ -3,10 +3,12 @@ package net.osmand.plus.plugins.rastermaps;
 import static net.osmand.plus.quickaction.QuickActionIds.MAP_UNDERLAY_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
@@ -100,7 +102,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();

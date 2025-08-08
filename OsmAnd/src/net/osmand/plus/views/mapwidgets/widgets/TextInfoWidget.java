@@ -43,6 +43,7 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	private int nightIconId;
 
 	private Integer cachedMetricSystem;
+	private Integer cachedAltitudeMetric;
 	private Integer cachedAngularUnits;
 
 
@@ -159,6 +160,11 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 			updateNeeded = cachedMetricSystem == null || cachedMetricSystem != metricSystem;
 			cachedMetricSystem = metricSystem;
 		}
+		if (isAltitudeMetricDepended()) {
+			int altitudeMetric = app.getSettings().ALTITUDE_METRIC.get().ordinal();
+			updateNeeded = cachedAltitudeMetric == null || cachedAltitudeMetric != altitudeMetric;
+			cachedAltitudeMetric = altitudeMetric;
+		}
 		if (isAngularUnitsDepended()) {
 			int angularUnits = app.getSettings().ANGULAR_UNITS.get().ordinal();
 			updateNeeded |= cachedAngularUnits == null || cachedAngularUnits != angularUnits;
@@ -168,6 +174,10 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	}
 
 	public boolean isMetricSystemDepended() {
+		return false;
+	}
+
+	public boolean isAltitudeMetricDepended() {
 		return false;
 	}
 
@@ -238,5 +248,10 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	@DrawableRes
 	public int getIconId(boolean nightMode) {
 		return nightMode ? nightIconId : dayIconId;
+	}
+
+	@DrawableRes
+	public int getMapIconId(boolean nightMode) {
+		return getIconId(nightMode);
 	}
 }

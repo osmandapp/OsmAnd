@@ -19,15 +19,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ProgressItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
@@ -85,7 +86,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 		if (navigationMap == null) {
 			items.add(new ProgressItem());
-			new BuildNavigationTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(new BuildNavigationTask(app));
 		} else {
 			ExpandableListAdapter listAdapter = createNavigationListView(navigationMap);
 			LinearLayout container = new LinearLayout(ctx);

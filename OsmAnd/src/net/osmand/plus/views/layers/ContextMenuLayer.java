@@ -925,6 +925,10 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 				return true;
 			}
 		}
+		if(menu != null && menu.isActive()) {
+			menu.close();
+			return true;
+		}
 		return false;
 	}
 

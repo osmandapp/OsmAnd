@@ -231,7 +231,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		NavigationTemplate.Builder builder = new NavigationTemplate.Builder();
 		builder.setBackgroundColor(CarColor.SECONDARY);
 

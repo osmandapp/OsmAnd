@@ -51,6 +51,7 @@ import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.ValueHolder;
@@ -74,7 +75,6 @@ import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.OsmandBackupAgent;
-import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
@@ -101,13 +101,13 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
-import net.osmand.data.DataSourceType;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
@@ -195,10 +195,27 @@ public class OsmandSettings {
 		ApplicationMode appMode = APPLICATION_MODE.get();
 		ApplicationMode parentAppMode = APPLICATION_MODE.get().getParent();
 
-		getCustomRenderProperty(A_APP_MODE).setModeValue(appMode, appMode.getStringKey());
-		getCustomRenderProperty(A_BASE_APP_MODE).setModeValue(appMode, parentAppMode != null
-				? parentAppMode.getStringKey()
-				: appMode.getStringKey());
+		executePreservingPrefTimestamp(appMode, () -> {
+			CommonPreference<String> appModePref = getCustomRenderProperty(A_APP_MODE);
+			CommonPreference<String> baseAppModePref = getCustomRenderProperty(A_BASE_APP_MODE);
+
+			appModePref.setModeValue(appMode, appMode.getStringKey());
+			baseAppModePref.setModeValue(appMode, parentAppMode != null
+					? parentAppMode.getStringKey() : appMode.getStringKey());
+		});
+	}
+
+	public void executePreservingPrefTimestamp(@NonNull Runnable action) {
+		executePreservingPrefTimestamp(getApplicationMode(), action);
+	}
+
+	public void executePreservingPrefTimestamp(@NonNull ApplicationMode mode, @NonNull Runnable action) {
+		long time = getLastModePreferencesEditTime(mode);
+		try {
+			action.run();
+		} finally {
+			setLastModePreferencesEditTime(mode, time);
+		}
 	}
 
 	@NonNull
@@ -708,16 +725,16 @@ public class OsmandSettings {
 		updateLastPreferencesEditTime(globalPreferences, lastModifiedTime);
 	}
 
-	private long getLastPreferencesEditTime(Object preferences) {
+	private long getLastPreferencesEditTime(@NonNull Object preferences) {
 		return settingsAPI.getLong(preferences, LAST_PREFERENCES_EDIT_TIME, 0);
 	}
 
-	public void updateLastPreferencesEditTime(Object preferences) {
+	public void updateLastPreferencesEditTime(@NonNull Object preferences) {
 		long time = System.currentTimeMillis();
 		updateLastPreferencesEditTime(preferences, time);
 	}
 
-	protected void updateLastPreferencesEditTime(Object preferences, long time) {
+	protected void updateLastPreferencesEditTime(@NonNull Object preferences, long time) {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
@@ -1110,6 +1127,16 @@ public class OsmandSettings {
 		}
 	}.makeProfile();
 
+	public final EnumStringPreference<AltitudeMetrics> ALTITUDE_METRIC = (EnumStringPreference<AltitudeMetrics>) new EnumStringPreference<AltitudeMetrics>(this,
+			"altitude_metrics", AltitudeMetrics.METERS, AltitudeMetrics.values()) {
+
+		@Override
+		public AltitudeMetrics getProfileDefaultValue(ApplicationMode mode) {
+			MetricsConstants mc = METRIC_SYSTEM.getModeValue(mode);
+			return AltitudeMetrics.Companion.fromMetricsConstant(mc);
+		}
+	}.makeProfile();
+
 	//public final OsmandPreference<Integer> COORDINATES_FORMAT = new IntPreference("coordinates_format", PointDescription.FORMAT_DEGREES).makeGlobal();
 
 	public final OsmandPreference<AngularConstants> ANGULAR_UNITS = new EnumStringPreference<AngularConstants>(this,
@@ -1192,11 +1219,16 @@ public class OsmandSettings {
 	public TemperatureUnit getTemperatureUnit(@NonNull ApplicationMode appMode) {
 		TemperatureUnitsMode unitsMode = UNIT_OF_TEMPERATURE.getModeValue(appMode);
 		if (unitsMode == TemperatureUnitsMode.SYSTEM_DEFAULT) {
-			String unit = LocalePreferences.getTemperatureUnit();
-			boolean fahrenheit = Objects.equals(unit, LocalePreferences.TemperatureUnit.FAHRENHEIT);
-			return fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
+			try {
+				String unit = LocalePreferences.getTemperatureUnit();
+				boolean fahrenheit = Algorithms.stringsEqual(unit, LocalePreferences.TemperatureUnit.FAHRENHEIT);
+				return fahrenheit ? TemperatureUnit.FAHRENHEIT : TemperatureUnit.CELSIUS;
+			} catch (IllegalArgumentException e) {
+				LOG.error(e);
+				return TemperatureUnit.CELSIUS;
+			}
 		}
-		return Objects.requireNonNull(unitsMode.getTemperatureUnit());
+		return unitsMode.getTemperatureUnit();
 	}
 
 	// fuel tank capacity stored in litres
@@ -1651,6 +1683,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_NEARBY_FAVORITES = new BooleanPreference(this, "show_nearby_favorites", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SHOW_NEARBY_POI = new BooleanPreference(this, "show_nearby_poi", false).makeProfile().cache();
 
+	public final OsmandPreference<Boolean> TURN_BY_TURN_DIRECTIONS = new BooleanPreference(this, "turn_by_turn_directions", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference(this, "speak_street_names", true).makeProfile().cache();
 	public final CommonPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference(this, "speak_traffic_warnings", true).makeProfile().cache();
 	public final CommonPreference<Boolean> SPEAK_PEDESTRIAN = new BooleanPreference(this, "speak_pedestrian", false).makeProfile().cache();
@@ -1690,6 +1723,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> GPX_SEGMENT_INDEX = new IntPreference(this, "gpx_route_segment", -1).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> GPX_ROUTE_INDEX = new IntPreference(this, "gpx_route_index", -1).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_PASS_WHOLE_ROUTE = new BooleanPreference(this, "gpx_pass_whole_route", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<ReverseTrackStrategy> GPX_REVERSE_STRATEGY =
+			new EnumStringPreference<>(this, "gpx_reverse_strategy", ReverseTrackStrategy.RECALCULATE_ALL_ROUTE_POINTS, ReverseTrackStrategy.values()).makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference(this, "avoid_toll_roads", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> AVOID_MOTORWAY = new BooleanPreference(this, "avoid_motorway", false).makeProfile().cache();
@@ -1800,6 +1835,8 @@ public class OsmandSettings {
 	{
 		SHOW_ZOOM_BUTTONS_NAVIGATION.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
+
+	public final CommonPreference<Integer> MAX_RENDERING_THREADS = new IntPreference(this, "max_rendering_threads", 0).makeGlobal();
 
 	// Json
 	public final OsmandPreference<String> SELECTED_GPX = new StringPreference(this, "selected_gpx", "").makeGlobal().makeShared();
@@ -2487,7 +2524,7 @@ public class OsmandSettings {
 		edit.commit();
 		objectToShow = toShow;
 		if (addToHistory && pointDescription != null) {
-			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription, HistorySource.SEARCH);
+			ctx.getSearchHistoryHelper().addNewItemToHistory(latitude, longitude, pointDescription, HistorySource.SEARCH);
 		}
 	}
 
@@ -2815,7 +2852,7 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 		if (add && NAVIGATION_HISTORY.get()) {
 			if (p != null && !p.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, p, HistorySource.NAVIGATION);
+				ctx.getSearchHistoryHelper().addNewItemToHistory(latitude, longitude, p, HistorySource.NAVIGATION);
 			}
 		}
 		backupTargetPoints();
@@ -3437,4 +3474,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> HMD_PROMO_SHOWED = new BooleanPreference(this, "hmd_promo_showed", false).makeGlobal().makeShared();
 	public final CommonPreference<Integer> CONTEXT_GALLERY_SPAN_GRID_COUNT = new IntPreference(this, "context_gallery_span_grid_count", 3).makeProfile();
 	public final CommonPreference<Integer> CONTEXT_GALLERY_SPAN_GRID_COUNT_LANDSCAPE = new IntPreference(this, "context_gallery_span_grid_count_landscape", 7).makeProfile();
+
+	public final CommonPreference<Boolean> ENABLE_MSAA = new BooleanPreference(this, "enable_msaa", false).makeGlobal().makeShared().cache();
 }

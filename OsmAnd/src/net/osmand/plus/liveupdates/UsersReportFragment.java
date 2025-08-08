@@ -2,7 +2,6 @@ package net.osmand.plus.liveupdates;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.liveupdates.Protocol.RankingUserByMonthResponse;
@@ -48,7 +48,7 @@ public class UsersReportFragment extends BaseFullScreenDialogFragment {
 				}
 				view.findViewById(R.id.progress).setVisibility(View.GONE);
 			});
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
+			OsmAndTaskManager.executeTask(task, url);
 		} else if (getTag().equals(ReportsFragment.RECIPIENTS_FRAGMENT)) {
 			((TextView) view.findViewById(R.id.titleTextView)).setText(R.string.osm_recipients_label);
 			GetJsonAsyncTask<Protocol.RecipientsByMonth> task = new GetJsonAsyncTask<>(Protocol.RecipientsByMonth.class);
@@ -62,7 +62,7 @@ public class UsersReportFragment extends BaseFullScreenDialogFragment {
 				}
 				view.findViewById(R.id.progress).setVisibility(View.GONE);
 			});
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
+			OsmAndTaskManager.executeTask(task, url);
 		}
 		listView.setAdapter(adapter);
 		ImageButton clearButton = view.findViewById(R.id.closeButton);

@@ -38,6 +38,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
@@ -359,7 +360,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					CityItem item = (CityItem) obj;
 					viewHolder.bindDownloadItem(item);
 					if (item.getIndexItem() == null) {
-						new IndexItemResolverTask(viewHolder, item).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+						OsmAndTaskManager.executeTask(new IndexItemResolverTask(viewHolder, item));
 					}
 				}
 			} else {

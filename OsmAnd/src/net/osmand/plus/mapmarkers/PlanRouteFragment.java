@@ -1,7 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,14 +31,15 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
@@ -831,7 +831,7 @@ public class PlanRouteFragment extends BaseFullScreenFragment
 			planRouteContext.recreateSnapTrkSegment(false);
 			return false;
 		});
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	private void updateMapDisplayPosition() {
@@ -844,7 +844,7 @@ public class PlanRouteFragment extends BaseFullScreenFragment
 	@Override
 	public MapPosition getMapDisplayPosition() {
 		if (isInPlanRouteMode) {
-			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_RIGHT;
+			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_END;
 		}
 		return null;
 	}

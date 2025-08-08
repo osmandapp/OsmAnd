@@ -4,8 +4,10 @@ import static net.osmand.plus.quickaction.QuickActionIds.OPEN_WUNDERLINQ_DATAGRI
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -34,7 +36,7 @@ public class OpenWunderLINQDatagridAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(APP_PATH));
 		AndroidUtils.startActivityIfSafe(mapActivity, intent);

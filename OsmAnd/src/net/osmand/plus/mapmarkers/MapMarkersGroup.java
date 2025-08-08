@@ -142,25 +142,26 @@ public class MapMarkersGroup {
 		return null;
 	}
 
+	@NonNull
 	public List<MapMarker> getActiveMarkers() {
-		List<MapMarker> markers = new ArrayList<>(this.markers);
-		List<MapMarker> activeMarkers = new ArrayList<>(markers.size());
-		for (MapMarker marker : markers) {
-			if (!marker.history) {
-				activeMarkers.add(marker);
-			}
-		}
-		return activeMarkers;
+		return getMarkersByHistory(false);
 	}
 
+	@NonNull
 	public List<MapMarker> getHistoryMarkers() {
-		List<MapMarker> historyMarkers = new ArrayList<>();
+		return getMarkersByHistory(true);
+	}
+
+	@NonNull
+	public List<MapMarker> getMarkersByHistory(boolean history) {
+		List<MapMarker> list = new ArrayList<>();
+		List<MapMarker> markers = new ArrayList<>(this.markers);
 		for (MapMarker marker : markers) {
-			if (marker.history) {
-				historyMarkers.add(marker);
+			if (marker.history == history) {
+				list.add(marker);
 			}
 		}
-		return historyMarkers;
+		return list;
 	}
 
 	@Override

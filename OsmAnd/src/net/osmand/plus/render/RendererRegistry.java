@@ -1,6 +1,7 @@
 package net.osmand.plus.render;
 
 import static net.osmand.IndexConstants.ADDON_RENDERER_INDEX_EXT;
+import static net.osmand.IndexConstants.RENDERERS_DIR;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 
 import android.content.Context;
@@ -8,7 +9,6 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -111,28 +111,37 @@ public class RendererRegistry {
 
 	@Nullable
 	public RenderingRulesStorage getRenderer(String name) {
+		return getRenderer(name, null);
+	}
+
+	@Nullable
+	public RenderingRulesStorage getRenderer(@NonNull String name, @Nullable List<String> warnings) {
 		if (loadedRenderers.containsKey(name)) {
 			return loadedRenderers.get(name);
 		}
-
 		if (!hasRender(name)) {
+			String message = "Renderer not available " + name;
+			log.warn(message);
+			if (warnings != null) warnings.add(message);
 			return null;
 		}
-
 		try {
 			Map<String, String> renderingConstants = new LinkedHashMap<>();
 			RenderingRulesStorage renderer = loadRenderer(null, name, new LinkedHashMap<>(), renderingConstants);
 			if (renderer != null) {
 				for (String addonName : getRendererAddons().keySet()) {
 					loadRenderer(renderer, addonName, loadedRenderers, renderingConstants);
-//					renderer.mergeDependsOrAddon(storage);
 				}
 				loadedRenderers.put(name, renderer);
+			} else {
+				String message = "Cannot load renderer " + name;
+				log.warn(message);
+				if (warnings != null) warnings.add(message);
 			}
-
 			return renderer;
-		} catch (IOException | XmlPullParserException e) {
+		} catch (Exception e) {
 			log.error("Error loading renderer", e);
+			if (warnings != null) warnings.add(e.getMessage());
 		}
 		return null;
 	}
@@ -239,29 +248,52 @@ public class RendererRegistry {
 	}
 
 	@Nullable
-	public InputStream getInputStream(String name) throws FileNotFoundException {
+	public InputStream getInputStream(String name) {
 		InputStream is = null;
-		if ("default".equalsIgnoreCase(name)) {
-			name = DEFAULT_RENDER;
-		}
-		if (externalRenderers.containsKey(name)) {
-			is = new FileInputStream(externalRenderers.get(name));
-		} else {
-			if (getInternalRender(name) == null) {
-				log.error("Rendering style not found: " + name);
+		try {
+			if ("default".equalsIgnoreCase(name)) {
 				name = DEFAULT_RENDER;
 			}
-			File fl = getFileForInternalStyle(name);
-			if (fl.exists() && !IGNORE_CACHED_STYLES) {
-				is = new FileInputStream(fl);
+
+			if (externalRenderers.containsKey(name)) {
+				File externalFile = externalRenderers.get(name);
+				if (externalFile != null && externalFile.exists()) {
+					is = new FileInputStream(externalFile);
+				} else {
+					log.warn("External renderer file is missing: " + name);
+				}
 			} else {
-				copyFileForInternalStyle(name);
-				String internalRender = getInternalRender(name);
-				if (!Algorithms.isEmpty(internalRender)) {
-					is = RenderingRulesStorage.class.getResourceAsStream(internalRender);
+				if (getInternalRender(name) == null) {
+					log.error("Rendering style not found: " + name);
+					name = DEFAULT_RENDER;
+				}
+
+				File internalFile = getFileForInternalStyle(name);
+				if (internalFile.exists() && !IGNORE_CACHED_STYLES) {
+					is = new FileInputStream(internalFile);
+				} else {
+					copyFileForInternalStyle(name);
+					String internalRender = getInternalRender(name);
+					if (!Algorithms.isEmpty(internalRender)) {
+						is = RenderingRulesStorage.class.getResourceAsStream(internalRender);
+						if (is == null) {
+							log.warn("Resource not found in classpath: " + internalRender);
+						}
+					} else {
+						log.warn("Internal render path is empty after copy: " + name);
+					}
 				}
 			}
+		} catch (FileNotFoundException e) {
+			log.error("File not found while retrieving InputStream for: " + name, e);
+		} catch (Exception e) {
+			log.error("Unexpected error while getting InputStream for: " + name, e);
 		}
+
+		if (is == null) {
+			log.warn("Returning null InputStream for render style: " + name);
+		}
+
 		return is;
 	}
 
@@ -287,24 +319,24 @@ public class RendererRegistry {
 
 	public File getFileForInternalStyle(String name) {
 		String file = getInternalRender(name);
-		return file == null
-				? new File(app.getAppPath(IndexConstants.RENDERERS_DIR), "default.render.xml")
-				: new File(app.getAppPath(IndexConstants.RENDERERS_DIR), file);
+		File dir = app.getAppPath(RENDERERS_DIR);
+		return file == null ? new File(dir, DEFAULT_RENDER_FILE_PATH) : new File(dir, file);
 	}
 
-	public void initRenderers() {
+	public void initRenderers(@NonNull List<String> warnings) {
 		updateExternalRenderers();
-		String r = app.getSettings().RENDERER.get();
-		if (r != null) {
-			RenderingRulesStorage obj = getRenderer(r);
-			if (obj != null) {
-				setCurrentSelectedRender(obj);
+
+		String name = app.getSettings().RENDERER.get();
+		if (name != null) {
+			RenderingRulesStorage renderer = getRenderer(name, warnings);
+			if (renderer != null) {
+				setCurrentSelectedRender(renderer);
 			}
 		}
 	}
 
 	public void updateExternalRenderers() {
-		File file = app.getAppPath(IndexConstants.RENDERERS_DIR);
+		File file = app.getAppPath(RENDERERS_DIR);
 		file.mkdirs();
 		Map<String, File> externalRenderers = new LinkedHashMap<>();
 		if (file.exists() && file.canRead()) {

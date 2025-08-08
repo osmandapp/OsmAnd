@@ -334,6 +334,10 @@ public class WidgetsVisibilityHelper {
 		return fragment != null && (fragment.isListHidden() || fragment.isHidden());
 	}
 
+	private boolean isSelectMapLocationMode() {
+		return fragmentsHelper.getSelectMapLocationFragment() != null;
+	}
+
 	public boolean isInConfigureMapOptionMode() {
 		return fragmentsHelper.getConfigureMapOptionFragment() != null;
 	}
@@ -393,7 +397,7 @@ public class WidgetsVisibilityHelper {
 	private boolean shouldShowElementOnActiveScreen(VisibleElements element) {
 		for (VisibilityScreens screen : VisibilityScreens.values()) {
 			if (screen.isVisibleInMode(this)) {
-				return screen.elements.contains(element);
+				return screen.visibleElements.contains(element);
 			}
 		}
 		return true;
@@ -416,20 +420,19 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public enum VisibilityScreens {
-
 		EXPLORE_PLACES(),
 		WEATHER_FORECAST(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON),
 		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, SUGGEST_MAP_BANNER, TOP_BUTTONS, COMPASS),
 		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, SUGGEST_MAP_BANNER),
 		TRACK_APPEARANCE_MODE(SUGGEST_MAP_BANNER),
 		SELECTING_TILES_ZONE_MODE(),
-		GPS_FILTERING_MODE();
+		GPS_FILTERING_MODE(),
+		SELECT_MAP_LOCATION(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON);
 
+		public final List<VisibleElements> visibleElements = new ArrayList<>();
 
-		public final List<VisibleElements> elements = new ArrayList<>();
-
-		VisibilityScreens(VisibleElements... elements) {
-			this.elements.addAll(Arrays.asList(elements));
+		VisibilityScreens(@NonNull VisibleElements... visibleElements) {
+			this.visibleElements.addAll(Arrays.asList(visibleElements));
 		}
 
 		boolean isVisibleInMode(@NonNull WidgetsVisibilityHelper helper) {
@@ -441,6 +444,7 @@ public class WidgetsVisibilityHelper {
 				case SELECTING_TILES_ZONE_MODE -> helper.isSelectingTilesZone();
 				case GPS_FILTERING_MODE -> helper.isInGpsFilteringMode();
 				case EXPLORE_PLACES -> helper.isExplorePlacesMode();
+				case SELECT_MAP_LOCATION -> helper.isSelectMapLocationMode();
 			};
 		}
 	}

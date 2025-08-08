@@ -564,6 +564,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		importHelper.setUiActivity(this);
+		app.getLocationProvider().ensureLatestLocation();
 
 		long time = System.currentTimeMillis();
 		FragmentManager fragmentManager = getSupportFragmentManager();
@@ -624,8 +625,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
-				settings.setLastKnownMapRotation(prevAppMode, getMapRotateTarget());
-				settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+				settings.executePreservingPrefTimestamp(prevAppMode, () -> {
+					settings.setLastKnownMapRotation(prevAppMode, getMapRotateTarget());
+					settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
+				});
 				updateApplicationModeSettings();
 			}
 		});
@@ -946,6 +949,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		stopped = true;
 		lockHelper.onStop(this);
 		extendedMapActivity.onStop(this);
+		fragmentsHelper.onStop();
+
 		super.onStop();
 	}
 

@@ -326,6 +326,8 @@ public class TravelArticle {
 		@Nullable String routeId;
 		@Nullable String routeSource;
 
+		@Nullable String wikidata;
+
 		public static final Creator<TravelArticleIdentifier> CREATOR = new Creator<TravelArticleIdentifier>() {
 			@Override
 			public TravelArticleIdentifier createFromParcel(Parcel in) {

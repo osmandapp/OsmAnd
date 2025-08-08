@@ -26,6 +26,7 @@ import net.osmand.plus.AppInitializer
 import net.osmand.plus.OsmAndConstants.EXPLORE_PLACES_UPDATE
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
+import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
@@ -281,7 +282,9 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 					poiUIFilter?.isTopImagesFilter == true,
 					app.locationProvider,
 					callback)
-			convertAmenitiesTask?.executeOnExecutor(singleThreadExecutor)
+			convertAmenitiesTask?.let {
+				OsmAndTaskManager.executeTask(it, singleThreadExecutor, null)
+			}
 		}
 	}
 

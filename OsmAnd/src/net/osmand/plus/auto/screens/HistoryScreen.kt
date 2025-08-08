@@ -3,6 +3,7 @@ package net.osmand.plus.auto.screens
 import android.os.AsyncTask
 import android.text.SpannableString
 import android.text.Spanned
+import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.Action
@@ -21,10 +22,11 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.shared.SharedUtil
 import net.osmand.data.LatLon
+import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripUtils
-import net.osmand.plus.helpers.SearchHistoryHelper
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry
+import net.osmand.plus.search.history.SearchHistoryHelper
+import net.osmand.plus.search.history.HistoryEntry
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.track.data.GPXInfo
@@ -44,14 +46,10 @@ class HistoryScreen(
 	private lateinit var searchItems: ArrayList<QuickSearchListItem>
 	val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
 
-	init {
-		lifecycle.addObserver(object : DefaultLifecycleObserver {
-			override fun onCreate(owner: LifecycleOwner) {
-				super.onCreate(owner)
-				updateItemsTask = UpdateHistoryItemsTask()
-				updateItemsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-			}
-		})
+	override fun onFirstGetTemplate() {
+		super.onFirstGetTemplate()
+		updateItemsTask = UpdateHistoryItemsTask()
+		OsmAndTaskManager.executeTask(updateItemsTask)
 	}
 
 	private inner class UpdateHistoryItemsTask : AsyncTask<Unit, Unit, Unit>() {
@@ -65,7 +63,7 @@ class HistoryScreen(
 	}
 
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val templateBuilder = ListTemplate.Builder()
         val app = app
 	    val isLoading = updateItemsTask.status != AsyncTask.Status.FINISHED
@@ -90,7 +88,7 @@ class HistoryScreen(
     }
 
 	private fun prepareHistoryItems() {
-		val historyHelper = SearchHistoryHelper.getInstance(app)
+		val historyHelper = app.getSearchHistoryHelper()
 		val results = historyHelper.getHistoryEntries(true)
 		val resultsSize = results.size
 		searchItems = ArrayList()

@@ -97,6 +97,8 @@ public class AdditionalInfoBundle {
 	}
 
 	public void setCustomHiddenExtensions(List<String> customHiddenExtensions) {
+		this.filteredAdditionalInfo = null;
+		this.localizedAdditionalInfo = null;
 		this.customHiddenExtensions = customHiddenExtensions;
 	}
 }

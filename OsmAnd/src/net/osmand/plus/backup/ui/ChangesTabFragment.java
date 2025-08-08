@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,6 +85,11 @@ public abstract class ChangesTabFragment extends BaseFullScreenFragment implemen
 		backupHelper.addPrepareBackupListener(this);
 		settingsHelper.addBackupSyncListener(this);
 		updateAdapter();
+
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ChangesFragment changesFragment) {
+			changesFragment.setupBottomButtons();
+		}
 	}
 
 	@Override
@@ -135,16 +141,19 @@ public abstract class ChangesTabFragment extends BaseFullScreenFragment implemen
 
 	public void uploadLocalVersions() {
 		for (CloudChangeItem item : items) {
-			if (item.operation != SYNC_OPERATION_DELETE && item.localFile != null && !settingsHelper.isSyncing(item.fileName)) {
-				settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, SYNC_OPERATION_UPLOAD);
+			LocalFile file = item.localFile;
+			if (item.operation != SYNC_OPERATION_DELETE && file != null && !settingsHelper.isSyncing(item.fileName)) {
+				settingsHelper.syncSettingsItems(item.fileName, file, item.remoteFile, UNIQUE, SYNC_OPERATION_UPLOAD);
 			}
 		}
 	}
 
 	public void downloadCloudVersions() {
 		for (CloudChangeItem item : items) {
-			if (item.operation != SYNC_OPERATION_DELETE && item.remoteFile != null && !settingsHelper.isSyncing(item.fileName)) {
-				settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, SYNC_OPERATION_DOWNLOAD);
+			RemoteFile file = item.remoteFile;
+			if (file != null && !settingsHelper.isSyncing(item.fileName)
+					&& (item.operation != SYNC_OPERATION_DELETE || !file.isDeleted())) {
+				settingsHelper.syncSettingsItems(item.fileName, item.localFile, file, UNIQUE, SYNC_OPERATION_DOWNLOAD);
 			}
 		}
 	}

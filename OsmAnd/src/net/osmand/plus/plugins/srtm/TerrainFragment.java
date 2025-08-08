@@ -167,7 +167,7 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 	}
 
 	private void updateChart() {
-		int labelsColor = ContextCompat.getColor(app, R.color.text_color_secondary_light);
+		int labelsColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
 
 		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);

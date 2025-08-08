@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -135,10 +136,10 @@ public class AddPOIAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
-			super.execute(mapActivity);
+			super.execute(mapActivity, params);
 		}
 	}
 

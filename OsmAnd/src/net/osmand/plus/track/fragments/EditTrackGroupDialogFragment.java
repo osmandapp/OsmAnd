@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -152,7 +153,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 			if (pointsGroup != null && groupHidden != pointsGroup.isHidden()) {
 				Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.getName(), pointsGroup);
 				UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, null);
-				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				OsmAndTaskManager.executeTask(task);
 			}
 		});
 	}
@@ -255,7 +256,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 	private void deleteGroupItems() {
 		Set<GpxDisplayItem> items = new HashSet<>(displayGroup.getDisplayItems());
-		new DeletePointsTask(app, gpxFile, items, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new DeletePointsTask(app, gpxFile, items, this));
 	}
 
 	@NonNull

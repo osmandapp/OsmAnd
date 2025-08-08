@@ -63,6 +63,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -1178,7 +1179,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			} else if (buttonIndex == ANALYZE_ON_MAP_BUTTON_INDEX) {
 				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, null);
-				detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				OsmAndTaskManager.executeTask(detailsTask);
 				hide();
 			} else if (buttonIndex == ANALYZE_BY_INTERVALS_BUTTON_INDEX) {
 				TrkSegment segment = gpxFile.getGeneralSegment();
@@ -1218,9 +1219,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						? this.analysis
 						: selectedGpxFile.getTrackAnalysis(app);
 				if (analysis.hasElevationData()) {
-					SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+					SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
 					if (plugin != null && plugin.is3DReliefAllowed()) {
 						calculateOfflineSelected(-1);
+					} else {
+						calculateOnlineSelected(-1);
 					}
 				} else {
 					showTrackAltitudeDialog(-1);

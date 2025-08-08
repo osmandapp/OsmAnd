@@ -41,6 +41,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
@@ -213,7 +214,7 @@ public class LiveUpdatesFragment extends BaseFullScreenDialogFragment implements
 
 	private void startUpdateDateAsyncTask() {
 		getLastUpdateDateTask = new GetLastUpdateDateTask(this);
-		getLastUpdateDateTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(getLastUpdateDateTask);
 	}
 
 	private void stopUpdateDateAsyncTask() {
@@ -225,7 +226,7 @@ public class LiveUpdatesFragment extends BaseFullScreenDialogFragment implements
 	private void startLoadLiveMapsAsyncTask() {
 		if (loadLiveMapsTask == null) {
 			loadLiveMapsTask = new LoadLiveMapsTask(adapter, app);
-			loadLiveMapsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(loadLiveMapsTask);
 		}
 	}
 

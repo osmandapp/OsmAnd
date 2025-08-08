@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu;
 import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
@@ -25,6 +24,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.data.*;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -36,7 +36,6 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.*;
@@ -58,6 +57,7 @@ import net.osmand.plus.plugins.osmedit.menu.OsmBugMenuController;
 import net.osmand.plus.plugins.parking.ParkingPositionMenuController;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.resources.SearchOsmandRegionTask;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.track.clickable.ClickableWay;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -186,8 +186,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				} else {
 					menuController = new FavouritePointMenuController(mapActivity, pointDescription, (FavouritePoint) object);
 				}
-			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
-				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
+			} else if (object instanceof HistoryEntry) {
+				menuController = new HistoryMenuController(mapActivity, pointDescription, (HistoryEntry) object);
 			} else if (object instanceof TargetPoint) {
 				menuController = new TargetPointMenuController(mapActivity, pointDescription, (TargetPoint) object);
 			} else if (object instanceof Recording) {
@@ -779,7 +779,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		OsmandMapTileView mapView = mapActivity != null ? mapActivity.getMapView() : null;
 		if (mapView != null) {
 			int zoom = mapView.getCurrentRotatedTileBox().getZoom();
-			new SearchOsmandRegionTask(this, latLon, zoom).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(new SearchOsmandRegionTask(this, latLon, zoom));
 		}
 	}
 

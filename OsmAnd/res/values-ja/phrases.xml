@@ -3392,7 +3392,7 @@
     <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
     <string name="poi_flooring">床用品店</string>
     <string name="poi_pottery">陶芸工房・窯場</string>
-    <string name="poi_whitewater_rapid_name">激流・急流箇所の名前</string>
+    <string name="poi_rapids_name">激流・急流箇所の名前</string>
     <string name="poi_outpost">通販用集配所</string>
     <string name="poi_barbecue_grill">バーベキュー用グリル:有り</string>
     <string name="poi_water_utility">水道事業所</string>

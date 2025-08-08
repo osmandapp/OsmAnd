@@ -101,6 +101,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
@@ -350,6 +351,7 @@ public class AppInitializer implements IProgress {
 		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
+		app.searchHistoryHelper = startupInit(new SearchHistoryHelper(app), SearchHistoryHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
 		app.osmandMap = startupInit(new OsmandMap(app), OsmandMap.class);
 
@@ -439,7 +441,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	public static void loadRoutingFiles(@NonNull OsmandApplication app, @Nullable LoadRoutingFilesCallback callback) {
-		new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
 
 			@Override
 			protected Map<String, RoutingConfiguration.Builder> doInBackground(Void... voids) {
@@ -492,7 +494,7 @@ public class AppInitializer implements IProgress {
 				return defaultAttributes;
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 
@@ -536,7 +538,7 @@ public class AppInitializer implements IProgress {
 				importBundledSettingsSync();
 				notifyEvent(BUNDLED_OSF_IMPORTED);
 			}
-			app.getRendererRegistry().initRenderers();
+			app.getRendererRegistry().initRenderers(warnings);
 			notifyEvent(INIT_RENDERERS);
 			// native depends on renderers
 			initOpenGl();
@@ -567,7 +569,7 @@ public class AppInitializer implements IProgress {
 			checkLiveUpdatesAlerts();
 			connectToBRouter();
 		} catch (RuntimeException e) {
-			e.printStackTrace();
+			LOG.error(e);
 			warnings.add(e.getMessage());
 		} finally {
 			appInitializing = false;
@@ -633,7 +635,7 @@ public class AppInitializer implements IProgress {
 
 	@SuppressLint("StaticFieldLeak")
 	public void initOpenglAsync(@Nullable InitOpenglListener listener) {
-		new AsyncTask<Void, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Void>() {
 
 			@Override
 			protected Void doInBackground(Void... voids) {
@@ -647,7 +649,7 @@ public class AppInitializer implements IProgress {
 					listener.onOpenglInitialized();
 				}
 			}
-		}.executeOnExecutor(initOpenglSingleThreadExecutor);
+		}, initOpenglSingleThreadExecutor);
 	}
 
 	private void initOpenGl() {

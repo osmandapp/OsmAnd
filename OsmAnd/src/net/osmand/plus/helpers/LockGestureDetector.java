@@ -2,6 +2,7 @@ package net.osmand.plus.helpers;
 
 import android.util.Pair;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
@@ -69,7 +70,7 @@ public class LockGestureDetector extends GestureDetector {
 					QuickAction lockAction = pressedLockAction.first;
 					QuickActionButtonState buttonState = pressedLockAction.second.getButtonState();
 					if (buttonState != null) {
-						mapActivity.getMapLayers().getMapQuickActionLayer().onActionSelected(buttonState, lockAction);
+						mapActivity.getMapLayers().getMapQuickActionLayer().onActionSelected(lockAction, null, false);
 						return true;
 					}
 				}

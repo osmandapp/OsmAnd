@@ -14,7 +14,7 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.SearchVisibilityListener;
 import net.osmand.plus.search.listitems.NearbyPlacesCard;

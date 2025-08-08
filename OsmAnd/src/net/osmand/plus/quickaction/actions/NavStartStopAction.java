@@ -3,11 +3,13 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.NAV_START_STOP_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.plus.OsmandApplication;
@@ -37,7 +39,7 @@ public class NavStartStopAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		RoutingHelper helper = mapActivity.getRoutingHelper();
 		if (helper.isPauseNavigation() || helper.isFollowingMode()) {
 			if (Boolean.parseBoolean(getParams().get(KEY_DIALOG))) {

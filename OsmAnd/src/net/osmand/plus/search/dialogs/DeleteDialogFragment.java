@@ -29,9 +29,9 @@ public class DeleteDialogFragment extends BaseAlertDialogFragment {
 		builder.setTitle(R.string.confirmation_to_delete_history_items)
 				.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 					if (getParentFragment() instanceof QuickSearchDialogFragment fragment) {
-						SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+						SearchHistoryHelper helper = app.getSearchHistoryHelper();
 						for (QuickSearchListItem searchListItem : selectedItems) {
-							helper.remove(searchListItem.getSearchResult().object);
+							helper.remove(searchListItem.getSearchResult());
 						}
 						fragment.reloadHistory();
 						fragment.enableSelectionMode(false, -1);

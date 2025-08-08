@@ -28,6 +28,7 @@ import com.android.billingclient.api.QueryProductDetailsParams;
 import com.android.billingclient.api.QueryPurchasesParams;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -241,7 +242,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 		// Generating Consume Response listener
 		ConsumeResponseListener onConsumeListener = new ConsumeResponseListener() {
 			@Override
-			public void onConsumeResponse(BillingResult billingResult, String purchaseToken) {
+			public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String purchaseToken) {
 				// If billing service was disconnected, we try to reconnect 1 time
 				// (feel free to introduce your retry policy here).
 				mBillingUpdatesListener.onConsumeFinished(purchaseToken, billingResult);
@@ -300,7 +301,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 						.build();
 				mBillingClient.acknowledgePurchase(acknowledgePurchaseParams, new AcknowledgePurchaseResponseListener() {
 					@Override
-					public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
+					public void onAcknowledgePurchaseResponse(@NonNull BillingResult billingResult) {
 						if (billingResult.getResponseCode() != BillingResponseCode.OK) {
 							LOG.info("Acknowledge a purchase: " + purchase + " failed (" + billingResult.getResponseCode() + "). " + billingResult.getDebugMessage());
 						}
@@ -405,10 +406,10 @@ public class BillingManager implements PurchasesUpdatedListener {
 		});
 	}
 
-	public void startServiceConnection(Runnable executeOnSuccess) {
+	public void startServiceConnection(@Nullable Runnable executeOnSuccess) {
 		mBillingClient.startConnection(new BillingClientStateListener() {
 			@Override
-			public void onBillingSetupFinished(BillingResult billingResult) {
+			public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
 
 				int billingResponseCode = billingResult.getResponseCode();
 				LOG.debug("Setup finished. Response code: " + billingResponseCode);
@@ -416,19 +417,25 @@ public class BillingManager implements PurchasesUpdatedListener {
 				mIsServiceConnected = billingResponseCode == BillingResponseCode.OK;
 				mBillingClientResponseCode = billingResponseCode;
 				mBillingClientResponseMessage = billingResult.getDebugMessage();
-				mBillingUpdatesListener.onBillingClientSetupFinished();
-
-				if (mIsServiceConnected) {
-					if (executeOnSuccess != null) {
-						executeOnSuccess.run();
+				OsmandApplication app = (OsmandApplication) getContext().getApplicationContext();
+				app.runInUIThread(() -> {
+					mBillingUpdatesListener.onBillingClientSetupFinished();
+					if (mIsServiceConnected) {
+						if (executeOnSuccess != null) {
+							executeOnSuccess.run();
+						}
 					}
-				}
+				});
+
 			}
 
 			@Override
 			public void onBillingServiceDisconnected() {
-				mIsServiceConnected = false;
-				mBillingUpdatesListener.onBillingClientSetupFinished();
+				OsmandApplication app = (OsmandApplication) getContext().getApplicationContext();
+				app.runInUIThread(() -> {
+					mIsServiceConnected = false;
+					mBillingUpdatesListener.onBillingClientSetupFinished();
+				});
 			}
 		});
 	}

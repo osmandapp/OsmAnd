@@ -1,6 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -250,7 +250,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (activity != null) {
 			Map<String, PointsGroup> groups = new HashMap<>(gpxFile.getPointsGroups());
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(activity, gpxFile, groups, null);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(task);
 		}
 	}
 

@@ -26,6 +26,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -139,9 +140,11 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 	}
 
 	protected void addRenderingClassCard(@NonNull String attrName) {
-		BaseCard card = createRenderingClassCard(attrName);
-		if (card != null) {
-			addCard(card);
+		if (PluginsHelper.isDevelopment()) {
+			BaseCard card = createRenderingClassCard(attrName);
+			if (card != null) {
+				addCard(card);
+			}
 		}
 	}
 

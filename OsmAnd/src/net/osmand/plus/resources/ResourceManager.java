@@ -34,6 +34,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -141,6 +142,8 @@ public class ResourceManager {
 	protected final Map<String, File> indexFiles = new ConcurrentHashMap<>();
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<>();
 	private final Map<String, String> backupedFileNames = new ConcurrentHashMap<>();
+
+	private Set<String> standardPoiTypesKeyNames = null;
 
 	protected final IncrementalChangesManager changesManager = new IncrementalChangesManager(this);
 
@@ -404,14 +407,14 @@ public class ResourceManager {
 	public void reloadIndexesAsync(@Nullable IProgress progress,
 			@Nullable ReloadIndexesListener listener) {
 		reloadIndexesTask = new ReloadIndexesTask(app, progress, listener);
-		reloadIndexesTask.executeOnExecutor(reloadIndexesSingleThreadExecutor);
+		OsmAndTaskManager.executeTask(reloadIndexesTask, reloadIndexesSingleThreadExecutor);
 	}
 
 	public List<String> reloadIndexes(@Nullable IProgress progress,
 			@NonNull List<String> warnings) {
 		reloadIndexesTask = new ReloadIndexesTask(app, progress, null);
 		try {
-			warnings.addAll(reloadIndexesTask.executeOnExecutor(reloadIndexesSingleThreadExecutor).get());
+			warnings.addAll(OsmAndTaskManager.executeTask(reloadIndexesTask, reloadIndexesSingleThreadExecutor).get());
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}
@@ -473,7 +476,7 @@ public class ResourceManager {
 	public void checkAssetsAsync(@Nullable IProgress progress, boolean forceUpdate,
 			boolean forceCheck, @Nullable CheckAssetsListener listener) {
 		CheckAssetsTask task = new CheckAssetsTask(app, progress, forceUpdate, forceCheck, listener);
-		task.executeOnExecutor(checkAssetsSingleThreadExecutor);
+		OsmAndTaskManager.executeTask(task, checkAssetsSingleThreadExecutor);
 	}
 
 	public List<String> checkAssets(@Nullable IProgress progress, boolean forceUpdate,
@@ -481,7 +484,7 @@ public class ResourceManager {
 		List<String> warnings = new ArrayList<>();
 		CheckAssetsTask task = new CheckAssetsTask(app, progress, forceUpdate, forceCheck, null);
 		try {
-			warnings.addAll(task.executeOnExecutor(checkAssetsSingleThreadExecutor).get());
+			warnings.addAll(OsmAndTaskManager.executeTask(task, checkAssetsSingleThreadExecutor).get());
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}
@@ -585,7 +588,7 @@ public class ResourceManager {
 					if (mapReader.getVersion() != BINARY_MAP_VERSION) {
 						mapReader = null;
 					}
-				} catch (IOException e) {
+				} catch (Exception e) {
 					log.error(String.format("File %s could not be read", fileName), e);
 				}
 				boolean wikiMap = WikipediaPlugin.containsWikipediaExtension(fileName);
@@ -605,7 +608,7 @@ public class ResourceManager {
 						if (!toUse) {
 							try {
 								mapReader.close();
-							} catch (IOException e) {
+							} catch (Exception e) {
 								log.error(e.getMessage(), e);
 							}
 							continue;
@@ -690,7 +693,9 @@ public class ResourceManager {
 		while (it.hasNext()) {
 			Entry<PoiCategory, Map<String, PoiType>> next = it.next();
 			PoiCategory category = next.getKey();
-			category.addExtraPoiTypes(next.getValue());
+			Map<String, PoiType> categoryDeltaPoiTypes = next.getValue();
+			categoryDeltaPoiTypes.keySet().removeAll(getStandardPoiTypesKeyNames());
+			category.addExtraPoiTypes(categoryDeltaPoiTypes);
 		}
 		log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
 		if (files.size() > 0 && (!indCache.exists() || indCache.canWrite())) {
@@ -706,6 +711,20 @@ public class ResourceManager {
 			l.onMapsIndexed();
 		}
 		return warnings;
+	}
+
+	private Set<String> getStandardPoiTypesKeyNames() {
+		if (standardPoiTypesKeyNames == null) {
+			MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
+			Set<String> allPoiTypesKeyNames = new HashSet<>();
+			for (PoiCategory poiCategory : mapPoiTypes.getCategories()) {
+				for (PoiType poiType : poiCategory.getPoiTypes()) {
+					allPoiTypesKeyNames.add(poiType.getKeyName());
+				}
+			}
+			standardPoiTypesKeyNames = allPoiTypesKeyNames;
+		}
+		return standardPoiTypesKeyNames;
 	}
 
 	public List<String> getTravelRepositoryNames() {
@@ -1049,6 +1068,8 @@ public class ResourceManager {
 	@NonNull
 	private AssetsCollection readBundledAssets() throws IOException {
 		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+		DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+
 		AssetManager assetManager = app.getAssets();
 		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.json");
 		AssetEntryList lst = new Gson().fromJson(new InputStreamReader(isBundledAssetsXml), AssetEntryList.class);

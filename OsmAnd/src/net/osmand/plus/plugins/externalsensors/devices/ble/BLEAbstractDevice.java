@@ -135,6 +135,8 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
 			LOG.debug("status: " + status);
 			LOG.debug("newState: " + newState);
+			LOG.debug("currentState: " + getCurrentState());
+
 			if (status == GATT_SUCCESS) {
 				if (newState == BluetoothProfile.STATE_CONNECTED) {
 					int bondState = device.getBondState();

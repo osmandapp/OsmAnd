@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarker.PinIconHorisontalAlignment;
@@ -293,6 +294,11 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		TextRasterizer.Style style = MapTextLayer.getTextStyle(getContext(), nightMode,
 				getApplication().getOsmandMap().getMapDensity(), view.getDensity());
 
+		DistanceByTapTextSize textSize = app.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get();
+		float lineTextSize = app.getResources().getDimension(textSize.getTextSizeId());
+
+		style.setSize(lineTextSize);
+
 		MapMarkerBuilder markerBuilder = new MapMarkerBuilder();
 		markerBuilder.setIsHidden(false);
 		markerBuilder.setCaption(text);
@@ -386,6 +392,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 					drawTextOnCenterOfPathOpenGl(formattedDistance, nightMode);
 				}
 			}
+
+			mapRenderer.updateSubsection(MapRendererContext.RULER_MARKERS_SECTION);
 		} else if (showTwoFingersDistance) {
 			if (vectorLinesCollection == null) {
 				drawLineBetweenLocationsOpenGl(mapRenderer, cachedFirstTouchLatLon, cachedSecondTouchLatLon);
@@ -401,6 +409,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 					drawTextOnCenterOfPathOpenGl(formattedDistance, nightMode);
 				}
 			}
+
+			mapRenderer.updateSubsection(MapRendererContext.RULER_MARKERS_SECTION);
 		}
 	}
 
@@ -462,7 +472,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		builder.buildAndAddToCollection(mapMarkersCollection);
 
 		if (!mapRenderer.hasSymbolsProvider(mapMarkersCollection)) {
-			mapRenderer.addSymbolsProvider(mapMarkersCollection);
+			mapRenderer.addSymbolsProvider(MapRendererContext.RULER_MARKERS_SECTION, mapMarkersCollection);
 		}
 	}
 

@@ -27,6 +27,7 @@ import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.XMasDialogFragment;
+import net.osmand.plus.dialogs.selectlocation.SelectLocationFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -147,6 +148,13 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 		}
 	}
 
+	public void onStop() {
+		QuickSearchDialogFragment quickSearchFragment = getQuickSearchDialogFragment();
+		if (quickSearchFragment != null && quickSearchFragment.isSearchHidden()) {
+			quickSearchFragment.closeSearch();
+		}
+	}
+
 	@Nullable
 	public QuickSearchDialogFragment getQuickSearchDialogFragment() {
 		return getFragment(QuickSearchDialogFragment.TAG);
@@ -200,6 +208,14 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	@Nullable
 	public DownloadTilesFragment getDownloadTilesFragment() {
 		return getFragment(DownloadTilesFragment.TAG);
+	}
+
+	@Nullable
+	public SelectLocationFragment getSelectMapLocationFragment() {
+		if (getConfigureMapOptionFragment() instanceof SelectLocationFragment fragment) {
+			return fragment;
+		}
+		return null;
 	}
 
 	@Nullable

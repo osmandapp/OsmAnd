@@ -61,6 +61,7 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 	private static final String ESTIMATED_SIZE_KEY = "estimated_size";
 	private static final String EXISTING_FILES_KEY = "existing_files";
 	private static final String SELECTED_STORAGE_KEY = "selected_storage";
+	private static final String CURRENT_STORAGE_KEY = "current_storage";
 
 	private StorageItem selectedStorage;
 	private StorageItem currentStorage;
@@ -90,6 +91,7 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		if (savedInstanceState != null && filesSize == null) {
 			filesCount = savedInstanceState.getInt(FILES_COUNT_KEY);
 			remainingSize = savedInstanceState.getLong(REMAINING_SIZE_KEY);
@@ -98,6 +100,7 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 			copyFinished = savedInstanceState.getBoolean(COPY_FINISHED_KEY);
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 			selectedStorage = savedInstanceState.getParcelable(SELECTED_STORAGE_KEY);
+			currentStorage = savedInstanceState.getParcelable(CURRENT_STORAGE_KEY);
 
 			long size = savedInstanceState.getLong(FILES_SIZE_KEY);
 			long estimatedSize = savedInstanceState.getLong(ESTIMATED_SIZE_KEY);
@@ -141,6 +144,7 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 		outState.putLong(FILES_SIZE_KEY, filesSize.first);
 		outState.putLong(ESTIMATED_SIZE_KEY, filesSize.second);
 		outState.putParcelable(SELECTED_STORAGE_KEY, selectedStorage);
+		outState.putParcelable(CURRENT_STORAGE_KEY, currentStorage);
 
 		ArrayList<String> filePaths = new ArrayList<>();
 		for (File file : existingFiles) {

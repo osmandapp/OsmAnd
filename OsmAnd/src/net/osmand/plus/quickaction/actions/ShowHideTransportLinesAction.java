@@ -2,12 +2,14 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_TRANSPORT_LINES_ACTION_ID;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -35,7 +37,7 @@ public class ShowHideTransportLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		TransportLinesMenu transportLinesMenu = new TransportLinesMenu(app);
 		boolean selected = transportLinesMenu.isShowAnyTransport();

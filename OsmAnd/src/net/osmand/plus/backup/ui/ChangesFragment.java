@@ -35,7 +35,6 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupInfo;
-import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -51,6 +50,7 @@ import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -201,7 +201,7 @@ public class ChangesFragment extends BaseFullScreenFragment implements OnPrepare
 		pagerSlidingTabStrip.setViewPager(viewPager);
 	}
 
-	private void setupBottomButtons() {
+	public void setupBottomButtons() {
 		boolean syncing = settingsHelper.isBackupSyncing();
 		boolean preparing = backupHelper.isBackupPreparing();
 
@@ -222,7 +222,7 @@ public class ChangesFragment extends BaseFullScreenFragment implements OnPrepare
 				}
 				setupBottomButtons();
 			});
-			boolean enabled = !syncing && !preparing && hasItems();
+			boolean enabled = !syncing && !preparing && syncAvailable();
 			button.setEnabled(enabled);
 			button.setTitleId(tabType.buttonTextId);
 
@@ -250,18 +250,12 @@ public class ChangesFragment extends BaseFullScreenFragment implements OnPrepare
 		AndroidUiHelper.updateVisibility(button, syncing);
 	}
 
-	private boolean hasItems() {
+	private boolean syncAvailable() {
 		PrepareBackupResult backup = backupHelper.getBackup();
 		BackupInfo info = backup.getBackupInfo();
-		if (info != null) {
-			switch (tabType) {
-				case RECENT_CHANGES_REMOTE:
-					return BackupUtils.getItemsMapForRestore(info, backup.getSettingsItems()).size() > 0;
-				case RECENT_CHANGES_LOCAL:
-					return info.filteredFilesToDelete.size() + info.filteredFilesToUpload.size() > 0;
-				default:
-					return false;
-			}
+		if (info != null && CollectionUtils.equalsToAny(tabType, RECENT_CHANGES_REMOTE, RECENT_CHANGES_LOCAL)) {
+			ChangesTabFragment fragment = getSelectedFragment();
+			return fragment != null && !Algorithms.isEmpty(fragment.items);
 		}
 		return false;
 	}

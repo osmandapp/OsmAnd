@@ -26,8 +26,8 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.SearchHistoryHelper;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -88,7 +88,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 		View mainView = getView();
 		if (mainView == null) return;
 
-		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper helper = app.getSearchHistoryHelper();
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(true);
 
 		if (!settings.SEARCH_HISTORY.get() || Algorithms.isEmpty(historyEntries)) {
@@ -191,7 +191,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			String relativeGpxPath = pointDescription.getName();
 			File gpxFile = new File(tracksDir, relativeGpxPath);
 			if (gpxFile.isFile()) {
-				SearchHistoryHelper.getInstance(app).addNewItemToHistory(0, 0, pointDescription, HistorySource.SEARCH);
+				app.getSearchHistoryHelper().addNewItemToHistory(0, 0, pointDescription, HistorySource.SEARCH);
 				TrackMenuFragment.openTrack(activity, gpxFile, null);
 				closeDashboard();
 			}

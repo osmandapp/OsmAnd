@@ -90,7 +90,7 @@ public class VoiceRouter {
 
 	private VoiceCommandPending pendingCommand;
 	private RouteDirectionInfo nextRouteDirection;
-
+	private StateChangedListener<Boolean> stateChangedListener;
 
 	public interface VoiceMessageListener {
 		void onVoiceMessage(List<String> listCommands, List<String> played);
@@ -115,16 +115,21 @@ public class VoiceRouter {
 		if (!isMute()) {
 			loadCameraSound();
 		}
-		settings.VOICE_MUTE.addListener(new StateChangedListener<Boolean>() {
-			@Override
-			public void stateChanged(Boolean change) {
-				app.runInUIThread(() -> {
-					if (!isMute() && soundPool == null) {
-						loadCameraSound();
-					}
-				});
+		stateChangedListener = change -> app.runInUIThread(() -> {
+			if (!isMute() && soundPool == null) {
+				loadCameraSound();
+			}
+			if (isMute()) {
+				stopPlayer();
 			}
 		});
+		settings.VOICE_MUTE.addListener(stateChangedListener);
+	}
+
+	private void stopPlayer(){
+		if (player != null) {
+			player.stop();
+		}
 	}
 
 	private void loadCameraSound() {
@@ -549,11 +554,13 @@ public class VoiceRouter {
 	}
 
 	void playThen() {
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
-			p.then();
+		if (router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
+			CommandBuilder p = getNewCommandPlayerToPlay();
+			if (p != null) {
+				p.then();
+			}
+			play(p);
 		}
-		play(p);
 	}
 
 	private void playGoAhead(int dist, RouteDirectionInfo next, StreetName streetName) {
@@ -673,18 +680,20 @@ public class VoiceRouter {
 	}
 
 	private void playPrepareTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
-			String tParam = getTurnType(next.getTurnType());
-			if (tParam != null) {
-				p.prepareTurn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
-			} else if (next.getTurnType().isRoundAbout()) {
-				p.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
-			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
-				p.prepareMakeUT(dist, getSpeakableStreetName(currentSegment, next, true));
+		if(router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
+			CommandBuilder p = getNewCommandPlayerToPlay();
+			if (p != null) {
+				String tParam = getTurnType(next.getTurnType());
+				if (tParam != null) {
+					p.prepareTurn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
+				} else if (next.getTurnType().isRoundAbout()) {
+					p.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
+				} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
+					p.prepareMakeUT(dist, getSpeakableStreetName(currentSegment, next, true));
+				}
 			}
+			play(p);
 		}
-		play(p);
 	}
 
 	private String getSpeakableExitRef(String exit) {
@@ -720,7 +729,7 @@ public class VoiceRouter {
 
 	private void playMakeTurnIn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
+		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
 			ExitInfo exitInfo = next.getExitInfo();
@@ -795,7 +804,7 @@ public class VoiceRouter {
 
 	private void playMakeTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, NextDirectionInfo nextNextInfo) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
+		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
 			String tParam = getTurnType(next.getTurnType());
 			ExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;

@@ -946,15 +946,20 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		return null;
 	}
 
+	@Nullable
 	WptPt getMovedPointToApply() {
-		RotatedTileBox tb = view.getCurrentRotatedTileBox();
-		LatLon latLon = tb.getCenterLatLon();
 		WptPt originalPoint = editingCtx.getOriginalPointToMove();
-		WptPt point = new WptPt(originalPoint);
-		point.setLat(latLon.getLatitude());
-		point.setLon(latLon.getLongitude());
-		point.copyExtensions(originalPoint);
-		return point;
+		if (originalPoint != null) {
+			RotatedTileBox tb = view.getCurrentRotatedTileBox();
+			LatLon latLon = tb.getCenterLatLon();
+			WptPt point = new WptPt(originalPoint);
+			point.setLat(latLon.getLatitude());
+			point.setLon(latLon.getLongitude());
+			point.copyExtensions(originalPoint);
+
+			return point;
+		}
+		return null;
 	}
 
 	public void exitMovePointMode() {

@@ -68,7 +68,7 @@ import net.osmand.plus.avoidroads.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -624,7 +624,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 				// History card
 				if (historyEnabled) {
-					SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+					SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 					List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, false);
 					if (!Algorithms.isEmpty(results)) {
 						HistoryCard historyCard = new HistoryCard(mapActivity, results);

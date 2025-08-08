@@ -59,8 +59,12 @@ public class SensorTextWidget extends SimpleWidget {
 		if (isDeviceConnected()) {
 			super.setImageDrawable(res);
 		} else {
-			setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
-			setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
+			if (shouldShowIcon()) {
+				setImageDrawable(app.getUIUtilities().getIcon(res, nightMode));
+				imageView.setVisibility(View.VISIBLE);
+			} else {
+				imageView.setVisibility(View.GONE);
+			}
 		}
 	}
 
@@ -111,6 +115,9 @@ public class SensorTextWidget extends SimpleWidget {
 			updateInfo(null);
 			setImageDrawable(getIconId());
 			updateWidgetName();
+			if (this.sensor != null && this.sensor.device.isDisconnected()) {
+				plugin.connectDevice(mapActivity, this.sensor.device);
+			}
 		};
 	}
 
@@ -171,7 +178,11 @@ public class SensorTextWidget extends SimpleWidget {
 				}
 			} else {
 				AbstractDevice<?> device = sensor.getDevice();
-				setText(String.valueOf(device.getBatteryLevel()), "%");
+				if(device.hasBatteryLevel()) {
+					setText(String.valueOf(device.getBatteryLevel()), "%");
+				} else {
+					setText(app.getString(R.string.n_a), null);
+				}
 			}
 		} else {
 			setText(NO_VALUE, null);
@@ -285,5 +296,11 @@ public class SensorTextWidget extends SimpleWidget {
 		} else {
 			return isShowSensorData() ? fieldType.disconnectedIconId : fieldType.disconnectedBatteryIconId;
 		}
+	}
+
+	@DrawableRes
+	@Override
+	public int getMapIconId(boolean nightMode) {
+		return isShowSensorData() ? nightMode ? fieldType.nightIconId : fieldType.dayIconId : nightMode ? fieldType.nightBatteryIconId : fieldType.dayBatteryIconId;
 	}
 }

@@ -148,8 +148,7 @@ public class BackupUtils {
 	@NonNull
 	public static String getItemFileName(@NonNull SettingsItem item) {
 		String fileName;
-		if (item instanceof FileSettingsItem) {
-			FileSettingsItem fileItem = (FileSettingsItem) item;
+		if (item instanceof FileSettingsItem fileItem) {
 			fileName = getFileItemName(fileItem);
 		} else {
 			fileName = item.getFileName();
@@ -157,10 +156,7 @@ public class BackupUtils {
 				fileName = item.getDefaultFileName();
 			}
 		}
-		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
-			fileName = fileName.substring(1);
-		}
-		return fileName;
+		return removeLeadingSlash(fileName);
 	}
 
 	@NonNull
@@ -182,6 +178,10 @@ public class BackupUtils {
 		} else {
 			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
 		}
+		return removeLeadingSlash(fileName);
+	}
+
+	public static String removeLeadingSlash(@Nullable String fileName) {
 		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
 			fileName = fileName.substring(1);
 		}
@@ -242,6 +242,9 @@ public class BackupUtils {
 	}
 
 	public static void updateCacheForItems(@NonNull OsmandApplication app, @NonNull List<SettingsItem> items) {
+		if (Algorithms.isEmpty(items)) {
+			return;
+		}
 		boolean updateIndexes = false;
 		boolean updateRouting = false;
 		boolean updateRenderers = false;

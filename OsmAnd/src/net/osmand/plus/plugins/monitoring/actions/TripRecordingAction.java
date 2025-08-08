@@ -3,12 +3,14 @@ package net.osmand.plus.plugins.monitoring.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.TRIP_RECORDING_ACTION;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,7 +39,7 @@ public class TripRecordingAction extends BaseMonitoringAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandMonitoringPlugin plugin = getPlugin();
 		if (plugin != null) {
 			if (hasDataToSave()) {

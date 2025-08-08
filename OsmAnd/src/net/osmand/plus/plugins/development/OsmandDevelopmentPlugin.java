@@ -14,6 +14,10 @@ import com.squareup.picasso.Picasso;
 
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.NativeCore;
+import net.osmand.core.android.MapRendererContext;
+import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
@@ -77,11 +81,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
-	public final OsmandPreference<Boolean> SHOW_TILES_DEBUG_INFO;
-	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
+	public final OsmandPreference<Boolean> SAVE_LOCATION_PROVIDER_TO_GPX;
+	public final OsmandPreference<Boolean> SHOW_PRIMITIVES_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
+	private final StateChangedListener<Boolean> debugRenderingInfoListener;
+	private final StateChangedListener<Boolean> msaaListener;
 	private final StateChangedListener<Boolean> batterySavingModeListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
@@ -107,8 +113,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
 		SAVE_BEARING_TO_GPX = registerBooleanPreference("save_bearing_to_gpx", false).makeGlobal().makeShared().cache();
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
-		SHOW_TILES_DEBUG_INFO = registerBooleanPreference("show_tiles_debug_info", false).makeGlobal().makeShared().cache();
-		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
+		SAVE_LOCATION_PROVIDER_TO_GPX = registerBooleanPreference("save_location_provider_to_gpx", true).makeGlobal().makeShared().cache();
+		SHOW_PRIMITIVES_DEBUG_INFO = registerBooleanPreference("show_primitives_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
@@ -126,9 +132,18 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				mapView.applyDebugSettings(mapRenderer);
 			}
 		};
-		SHOW_TILES_DEBUG_INFO.addListener(symbolsDebugInfoListener);
-		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
+		SHOW_PRIMITIVES_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
+		settings.DEBUG_RENDERING_INFO.addListener(symbolsDebugInfoListener);
+
+		debugRenderingInfoListener = NativeCore::enablePerformanceLogs;
+		settings.DEBUG_RENDERING_INFO.addListener(debugRenderingInfoListener);
+
+		msaaListener = change -> {
+			recreateRenderer();
+			recreateAndroidAutoRenderer();
+		};
+		settings.ENABLE_MSAA.addListener(msaaListener);
 
 		batterySavingModeListener = change -> {
 			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
@@ -410,5 +425,35 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	protected AvgStatsEntry getAvgStats(int periodMinutes) {
 		return new AvgStatsEntry(avgStats, periodMinutes);
+	}
+
+	private void recreateRenderer() {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		MapRendererView currentMapRenderer = mapView.getMapRenderer();
+		if (currentMapRenderer != null) {
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				MapRendererView oldMapRendererView = mapRendererContext.getMapRendererView();
+				mapView.setMapRenderer(null, true);
+				mapRendererContext.setMapRendererView(null);
+				mapRendererContext.presetMapRendererOptions(currentMapRenderer, settings.ENABLE_MSAA.get());
+				currentMapRenderer.setupRenderer(app, 0, 0, oldMapRendererView);
+				mapRendererContext.setMapRendererView(currentMapRenderer);
+				mapView.setMapRenderer(currentMapRenderer, false);
+			}
+		}
+	}
+
+	private void recreateAndroidAutoRenderer() {
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession != null && carNavigationSession.hasStarted()) {
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				mapRendererContext.setMapRendererView(null);
+			}
+
+			NativeCoreContext.setMapRendererContext(app, 1.0f);
+			app.getOsmandMap().setupRenderingView();
+		}
 	}
 }

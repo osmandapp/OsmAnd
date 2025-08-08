@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -33,6 +32,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.LockableScrollView;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -140,7 +140,7 @@ public class DownloadTilesFragment extends BaseFullScreenFragment implements IMa
 					latLon = savedLatLon;
 				}
 			}
-		} else {
+		} else if (tileSource != null) {
 			selectedMaxZoom = tileSource.getMaximumZoomSupported();
 			selectedMinZoom = Math.min(mapView.getZoom(), selectedMaxZoom);
 			if (args != null) {
@@ -160,6 +160,10 @@ public class DownloadTilesFragment extends BaseFullScreenFragment implements IMa
 		portraitMode = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
 		view = themedInflater.inflate(R.layout.download_tiles_fragment, container, false);
 
+		if (tileSource == null) {
+			dismiss();
+			return view;
+		}
 		mapWindow = view.findViewById(R.id.map_window);
 
 		View minZoomPreviewContainer = view.findViewById(R.id.min_zoom_tile_preview);
@@ -242,7 +246,7 @@ public class DownloadTilesFragment extends BaseFullScreenFragment implements IMa
 		return (v, v1, o) -> updateLatLon();
 	}
 
-	private void updateLatLon(){
+	private void updateLatLon() {
 		QuadRect rect = getLatLonRectOfMapWindow();
 		LatLon mapWindowCenter = new LatLon(rect.centerY(), rect.centerX());
 		latLon = mapWindowCenter;
@@ -677,7 +681,7 @@ public class DownloadTilesFragment extends BaseFullScreenFragment implements IMa
 			}
 			return true;
 		});
-		calculateMissingTilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(calculateMissingTilesTask);
 	}
 
 	private long getAllTilesCount() {
@@ -709,7 +713,8 @@ public class DownloadTilesFragment extends BaseFullScreenFragment implements IMa
 		return false;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles, @NonNull MapLayerType layerType) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles,
+			@NonNull MapLayerType layerType) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			DownloadType downloadType = updateTiles ? DownloadType.ONLY_MISSING : DownloadType.ALL;

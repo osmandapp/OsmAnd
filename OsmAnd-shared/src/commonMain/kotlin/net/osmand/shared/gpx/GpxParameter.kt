@@ -70,7 +70,8 @@ enum class GpxParameter(
 	AVG_SENSOR_CADENCE("avgSensorCadence", "double", Double::class, 0.0, true),
 	MAX_SENSOR_HEART_RATE("maxSensorHr", "int", Int::class, 0, true),
 	AVG_SENSOR_HEART_RATE("avgSensorHr", "double", Double::class, 0.0, true),
-	DATA_VERSION("dataVersion", "int", Int::class, 0, false);
+	DATA_VERSION("dataVersion", "int", Int::class, 0, false),
+	APPEARANCE_LAST_MODIFIED_TIME("appearanceLastModifiedTime", "bigint", Long::class, 0L, false);
 
 	fun isNullSupported(): Boolean = defaultValue == null
 

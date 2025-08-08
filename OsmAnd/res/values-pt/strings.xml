@@ -3545,7 +3545,7 @@
     <string name="street_level_imagery">Imagens das ruas</string>
     <string name="plan_route_exit_dialog_descr">Descartar todas as alterações na rota planeada\?</string>
     <string name="in_case_of_reverse_direction">Em caso de inversão de direção</string>
-    <string name="shared_string_gpx_route">Rota de trilho</string>
+    <string name="shared_string_gpx_route">Guardar a rota</string>
     <string name="shared_string_gpx_files">Trilhos</string>
     <string name="marker_save_as_track">Guardar como ficheiro de trilho</string>
     <string name="add_segment_to_the_track">Adicionar a um ficheiro de trilho</string>
@@ -4111,8 +4111,8 @@
     <string name="display_route_tracks">Mostrar trilhos</string>
     <string name="shared_string_travelbooks">Livros de viagem</string>
     <string name="display_route_tracks_as_poi">Mostrar trilhos como POI</string>
-    <string name="delete_history_items_descr">Eliminar os itens selecionados do histórico\?</string>
-    <string name="delete_history_items">Eliminar %1$s itens do histórico\?</string>
+    <string name="delete_history_items_descr">As entradas selecionadas são removidas da lista.</string>
+    <string name="delete_history_items">Eliminar %1$s itens do histórico?</string>
     <string name="quick_action_toggle_preference">Um selector para alterar a preferência.</string>
     <string name="copying_file">A copiar o ficheiro %1$s…</string>
     <string name="from_to_with_params">De %1$s para %2$s</string>
@@ -5071,7 +5071,7 @@
     <string name="help_article_map_legend_nautical_map_name">Estilo de mapa náutico</string>
     <string name="discard_filter_changes">Descartar alterações do filtro</string>
     <string name="map_widget_group_glide_ratio">Rácio de deslizamento</string>
-    <string name="app_mode_hang_gliding">Asa-delta</string>
+    <string name="app_mode_hang_gliding">Asa Delta</string>
     <string name="key_event_action_zoom_out">Afastar</string>
     <string name="key_event_action_toggle_drower">Mostrar / ocultar menu lateral</string>
     <string name="help_article_plan_route_name">Planear rota</string>
@@ -5771,4 +5771,12 @@
     <string name="show_dm_grids">Use DM em vez de graus ou DMS</string>
     <string name="show_symbols_debug_info">Mostrar símbolos de info de depuração</string>
     <string name="cant_load_map_styles">Não é possível carregar estilos de mapa.</string>
+    <string name="osm_live_payment_renews_3_years">Renova a cada três anos</string>
+    <string name="years_3">Três anos</string>
+    <string name="osm_live_payment_3_years_title">A cada três anos</string>
+    <string name="map_orientation_portrait_inverted">Retrato (invertido)</string>
+    <string name="map_orientation_landscape_inverted">Paisagem (invertido)</string>
+    <string name="reverse_mode_calculate_route">Calcular a rota</string>
+    <string name="reverse_mode_calculate_route_desc">Calcular uma rota nova, otimizada para o início.</string>
+    <string name="reverse_mode_original_track">Trilho original</string>
 </resources>

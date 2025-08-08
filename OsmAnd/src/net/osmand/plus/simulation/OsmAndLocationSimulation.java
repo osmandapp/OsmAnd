@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -136,7 +137,7 @@ public class OsmAndLocationSimulation {
 
 	private void startLoadLocationsTask(@Nullable Runnable runnable) {
 		loadLocationsTask = new LoadSimulatedLocationsTask(app.getRoutingHelper().getRoute(), getLoadLocationsListener(runnable));
-		loadLocationsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(loadLocationsTask);
 	}
 
 	private void stopLoadLocationsTask() {

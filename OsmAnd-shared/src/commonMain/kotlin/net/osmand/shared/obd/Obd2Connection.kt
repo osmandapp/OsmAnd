@@ -1,7 +1,6 @@
 package net.osmand.shared.obd
 
 import net.osmand.shared.util.LoggerFactory
-import okio.IOException
 
 class Obd2Connection(
 	private val connection: UnderlyingTransport,
@@ -14,9 +13,11 @@ class Obd2Connection(
 	private var initialized = false
 	private var finished = false
 
-	init {
-		runInitCommands()
-		initialized = true
+	suspend fun initialize() {
+		if (!initialized) {
+			runInitCommands()
+			initialized = true
+		}
 	}
 
 	fun isFinished() = finished
@@ -25,29 +26,45 @@ class Obd2Connection(
 		finished = true
 	}
 
-	private fun runInitCommands() {
+	private suspend fun runInitCommands() {
 		for (command in initCommands) {
 			runImpl(command)
 		}
 	}
 
-	private fun runImpl(command: String): String {
-		val response = StringBuilder()
+	private suspend fun runImpl(command: String): String {
+		var response = StringBuilder()
 		connection.write((command + "\r").encodeToByteArray())
 		while (!finished) {
-			val value = connection.readByte() ?: continue
-			val c = value.toChar()
-			// this is the prompt, stop here
-			if (c == '>') break
-			if (c == '\r' || c == '\n' || c == ' ' || c == '\t' || c == '.') continue
-			response.append(c)
+			var responseRead = connection.read()
+			when (responseRead) {
+				UnderlyingTransport.TIMEOUT,
+				UnderlyingTransport.CONTEXTINACTIVE,
+				UnderlyingTransport.UNABLETOREAD -> {
+					response = StringBuilder(responseRead)
+					return response.toString()
+				}
+			}
+			responseRead = responseRead.replace("\r", "")
+				.replace("\n","")
+				.replace(" ", "")
+				.replace("\t", "")
+				.replace(".", "")
+			val endFlagPosition = responseRead.indexOf(">")
+			if(endFlagPosition != -1) {
+				responseRead = responseRead.substring(0, endFlagPosition)
+			}
+			response.append(responseRead)
+			if(endFlagPosition != -1) {
+				break
+			}
 		}
 		val responseValue = response.toString()
 		log("runImpl($command) returned $responseValue")
 		return responseValue
 	}
 
-	fun run(
+	suspend fun run(
 		fullCommand: String,
 		command: Int,
 		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
@@ -77,6 +94,23 @@ class Obd2Connection(
 			"UNABLETOCONNECT" -> {
 				finished = true
 				log.error("connection failure")
+				return OBDResponse.ERROR
+			}
+
+			UnderlyingTransport.CONTEXTINACTIVE -> {
+				finished = true
+				log.error("context inactive")
+				return OBDResponse.ERROR
+			}
+
+			UnderlyingTransport.UNABLETOREAD -> {
+				finished = true
+				log.error("unable to read from stream")
+				return OBDResponse.ERROR
+			}
+
+			UnderlyingTransport.TIMEOUT -> {
+				log.error("reading timeout")
 				return OBDResponse.ERROR
 			}
 
@@ -190,6 +224,12 @@ class Obd2Connection(
 }
 
 interface UnderlyingTransport {
-	fun write(bytes: ByteArray)
-	fun readByte(): Byte?
+	companion object {
+		val UNABLETOREAD = "UNABLETOREAD"
+		val CONTEXTINACTIVE = "CONTEXTINACTIVE"
+		val TIMEOUT = "TIMEOUT"
+	}
+
+	suspend fun write(bytes: ByteArray)
+	suspend fun read(): String
 }
