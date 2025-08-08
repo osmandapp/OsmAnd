@@ -6,17 +6,20 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.List;
 
-public class ReviewJsonCodec {
+/**
+ * Encodes/Decodes a collection of {@link Review}s as JSON.
+ */
+public final class ReviewJsonCodec {
     private final Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
             .create();
+
     public String toJson(Iterable<Review> reviews) {
         return gson.toJson(reviews);
     }
 
-    public List<Review> fromJson(String json) {
+    public Iterable<Review> fromJson(String json) {
         Review[] reviews = gson.fromJson(json, Review[].class);
         return Arrays.asList(reviews);
     }
