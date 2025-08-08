@@ -48,17 +48,16 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 			setTileStorageFormat(savedInstanceState.getBoolean(SQLITE_DB_KEY));
 			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE_KEY);
 		}
-		Context context = requireContext();
+		Context themedContext = getThemedContext();
 		TitleItem titleItem = new TitleItem(getString(R.string.storage_format));
 		items.add(titleItem);
-		NestedScrollView nestedScrollView = new NestedScrollView(context);
-		valuesContainer = new LinearLayout(context);
+		NestedScrollView nestedScrollView = new NestedScrollView(themedContext);
+		valuesContainer = new LinearLayout(themedContext);
 		valuesContainer.setLayoutParams((new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)));
 		valuesContainer.setOrientation(LinearLayout.VERTICAL);
-		valuesContainer.setPadding(0, getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small), 0, 0);
+		valuesContainer.setPadding(0, getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small), 0, 0);
 		for (int i = 0; i < TileStorageFormat.values().length; i++) {
-			LayoutInflater.from(new ContextThemeWrapper(context, themeRes))
-					.inflate(R.layout.bottom_sheet_item_with_radio_btn_left, valuesContainer, true);
+			inflate(R.layout.bottom_sheet_item_with_radio_btn_left, valuesContainer, true);
 		}
 		nestedScrollView.addView(valuesContainer);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(nestedScrollView).create());

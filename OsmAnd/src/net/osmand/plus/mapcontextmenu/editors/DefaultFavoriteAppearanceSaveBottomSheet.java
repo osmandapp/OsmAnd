@@ -33,7 +33,7 @@ public class DefaultFavoriteAppearanceSaveBottomSheet extends SaveGroupConfirmat
 				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create());
 
-		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
+		items.add(new DividerSpaceItem(getContext(), getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
 
 		String applyExisting = getString(R.string.apply_to_existing);
 		String text = getString(R.string.ltr_or_rtl_combine_via_space, applyExisting, "(" + pointsSize + ")");
@@ -50,7 +50,7 @@ public class DefaultFavoriteAppearanceSaveBottomSheet extends SaveGroupConfirmat
 				})
 				.create());
 
-		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.context_menu_buttons_padding_bottom)));
+		items.add(new DividerSpaceItem(getContext(), getDimensionPixelSize(R.dimen.context_menu_buttons_padding_bottom)));
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class DefaultFavoriteAppearanceSaveBottomSheet extends SaveGroupConfirmat
 
 	@Override
 	public int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.horizontal_divider_height);
+		return getDimensionPixelSize(R.dimen.horizontal_divider_height);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target, int pointsSize) {

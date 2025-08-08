@@ -14,6 +14,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -36,13 +37,10 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesClearBottomSheet.class);
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private String fileName;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, String fileName) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			LiveUpdatesClearBottomSheet fragment = new LiveUpdatesClearBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.usedOnMap = false;
@@ -53,9 +51,6 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = getMyApplication();
-		settings = app.getSettings();
-
 		if (savedInstanceState != null && savedInstanceState.containsKey(LOCAL_INDEX_FILE_NAME)) {
 			fileName = savedInstanceState.getString(LOCAL_INDEX_FILE_NAME);
 		}
@@ -77,7 +72,7 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 				.setLayoutId(R.layout.bottom_sheet_item_description_long)
 				.create());
 
-		items.add(new DividerSpaceItem(app, getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
+		items.add(new DividerSpaceItem(app, getDimensionPixelSize(R.dimen.content_padding_small)));
 	}
 
 	@Override
@@ -125,5 +120,4 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 	protected DialogButtonType getRightBottomButtonType() {
 		return DialogButtonType.SECONDARY_HARMFUL;
 	}
-
 }

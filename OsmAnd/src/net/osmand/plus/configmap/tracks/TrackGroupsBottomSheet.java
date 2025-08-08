@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseBottomSheetDialogFragment;
 import net.osmand.plus.configmap.tracks.TrackGroupsBottomSheet.TrackGroupsAdapter.TrackGroupViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -34,15 +35,10 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 	private TrackTab selectedTab;
 	private List<TrackTab> trackTabs = new ArrayList<>();
 
-	private boolean nightMode;
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
-
-		Fragment target = getTargetFragment();
-		if (target instanceof TracksTabsFragment fragment) {
+		if (getTargetFragment() instanceof TracksTabsFragment fragment) {
 			trackTabs = fragment.getSortedTrackTabs(true);
 			selectedTab = fragment.getSelectedTab();
 		}
@@ -52,8 +48,8 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_track_group_list, null);
+		updateNightMode();
+		View view = inflate(R.layout.bottom_sheet_track_group_list);
 
 		TextViewEx title = view.findViewById(R.id.title);
 		title.setText(R.string.switch_folder);
@@ -63,6 +59,12 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 		recyclerView.setAdapter(new TrackGroupsAdapter());
 
 		return view;
+	}
+
+	@NonNull
+	@Override
+	public ThemeUsageContext getThemeUsageContext() {
+		return ThemeUsageContext.OVER_MAP;
 	}
 
 	public class TrackGroupsAdapter extends RecyclerView.Adapter<TrackGroupViewHolder> {
@@ -90,9 +92,9 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 
 			boolean selected = trackTab == selectedTab;
 			int colorId = selected ? activeColorId : defaultColorId;
-			holder.groupTypeIcon.setImageDrawable(uiUtilities.getIcon(trackTab.type.iconId, colorId));
+			holder.groupTypeIcon.setImageDrawable(getIcon(trackTab.type.iconId, colorId));
 
-			Drawable drawable = selected ? uiUtilities.getIcon(R.drawable.ic_action_done, activeColorId) : null;
+			Drawable drawable = selected ? getIcon(R.drawable.ic_action_done, activeColorId) : null;
 			holder.selectedIcon.setImageDrawable(drawable);
 
 			holder.itemView.setOnClickListener(view -> {
