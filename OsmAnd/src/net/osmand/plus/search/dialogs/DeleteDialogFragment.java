@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseAlertDialogFragment;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 
 import java.util.List;

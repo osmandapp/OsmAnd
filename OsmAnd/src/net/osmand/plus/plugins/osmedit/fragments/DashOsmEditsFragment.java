@@ -178,7 +178,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 				R.string.uploading, R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
 				listener, plugin, points.length, closeChangeSet, anonymously);
-		OsmAndTaskManager.executeTask(uploadTask, toUpload);
+		OsmAndTaskManager.executeTask(uploadTask, points);
 	}
 
 	private void getOsmPoints(@NonNull ArrayList<OsmPoint> dataPoints) {
