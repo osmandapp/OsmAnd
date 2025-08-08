@@ -6072,4 +6072,5 @@
     <string name="obd_fuel_left_liters">Resterende brandstof (liters)</string>
     <string name="obd_fuel_type">Brandstofsoort</string>
     <string name="obd_plugin_name">Voertuigmetingen</string>
+    <string name="obd_plugin_description">Monitor belangrijke voertuigmetingen met het OBD-II-protocol. Bekijk gegevens zoals:\n • Motorsnelheid, motordraaitijd, berekende motorbelasting \n • Brandstofverbruik, brandstofdruk, resterende brandstof\n • Inlaattemperatuur, omgevingstemperatuur, koelvloeistoftemperatuur, motorolietemperatuur\n • Voertuigsnelheid, gaskleppositie, batterijspanning\n</string>
 </resources>
