@@ -5806,4 +5806,6 @@
     <string name="reverse_mode_original_track_desc">Слідкуйте за точним маршрутом назад до початку.\nПопередження: Це може бути небезпечно, оскільки ігнорується односторонній рух на дорогах.</string>
     <string name="reverse_mode">Режим зворотного руху</string>
     <string name="n_a">N/A</string>
+    <string name="write_location_provider_description">Збереження постачальника місцезнаходження для кожної точки треку під час запису</string>
+    <string name="write_location_provider">Постачальник місцезнаходження для запису</string>
 </resources>

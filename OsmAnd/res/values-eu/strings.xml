@@ -5935,4 +5935,16 @@
     <string name="point_location">Puntuaren kokapena</string>
     <string name="shared_string_map_center">Maparen erdigunea</string>
     <string name="choose_location_on_map">Aukeratu kokapen bat mapan.</string>
+    <string name="map_orientation_portrait_inverted">Bertikala (alderantzikatua)</string>
+    <string name="map_orientation_landscape_inverted">Horizontala (alderantzikatua)</string>
+    <string name="reverse_mode_calculate_route">Ibilbidea kalkulatu</string>
+    <string name="reverse_mode_calculate_route_desc">Kalkulatu abiapuntu horretarako ibilbide berri optimizatua.</string>
+    <string name="reverse_mode_original_track">Jatorrizko arrastoa</string>
+    <string name="reverse_mode_original_track_desc">Jarraitu zehazki arrastoa atzeraka abiapuntura.\nKontuz: arriskutsua izan daiteke ez badu kontuan hartzen norabide bakarreko bideak.</string>
+    <string name="reverse_mode">Alderantzizko modua</string>
+    <string name="next_turn_information">Hurrengo txandaren informazioa</string>
+    <string name="next_turn_information_desc">Hurrengo biraren norabidea eta kalearen izena erakusten ditu.</string>
+    <string name="manage_purchases">Kudeatu erosketak</string>
+    <string name="failed_to_connect">Huts egin du %1s-rekin konektatzen</string>
+    <string name="turn_by_turn_directions">Urratsez urratseko norabideak</string>
 </resources>

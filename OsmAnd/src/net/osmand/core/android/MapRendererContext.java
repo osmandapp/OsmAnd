@@ -67,8 +67,6 @@ public class MapRendererContext {
 	public static final int TOP_PLACES_POI_SECTION = 1001;
 	public static final int SELECTED_POI_SECTION = 1002;
 	public static final int FAVORITES_SECTION = 1003;
-	public static final int RULER_MARKERS_SECTION = 1004;
-	public static final int MAP_MARKERS_SECTION = 1005;
 	public static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;

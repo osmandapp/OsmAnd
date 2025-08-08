@@ -5669,4 +5669,6 @@
     <string name="reverse_mode_original_track">Traza original</string>
     <string name="reverse_mode">Modo inverso</string>
     <string name="n_a">N/C</string>
+    <string name="write_location_provider_description">Guardá el proveedor de ubicación en cada punto de la traza, mientras se graba</string>
+    <string name="write_location_provider">Escribir proveedor de ubicación</string>
 </resources>
