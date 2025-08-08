@@ -94,6 +94,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.RequiredMapsFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RouteService;
@@ -146,6 +147,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		OnDrawMapListener, OsmAndAppCustomizationListener, LockUIAdapter,
 		OnPreferenceStartFragmentCallback {
 
+	public static final String INTENT_SHOW_FRAGMENT = "net.osmand.CAR_ACTION_SHOW_FRAGMENT";
+	public static final String INTENT_KEY_SHOW_FRAGMENT_NAME = "INTENT_KEY_SHOW_FRAGMENT_NAME";
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
 
@@ -211,6 +214,22 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private RouteCalculationProgressListener routeCalculationProgressCallback;
 	private TransportRouteCalculationProgressCallback transportRouteCalculationProgressCallback;
 	private LoadSimulatedLocationsListener simulatedLocationsListener;
+
+	private final BroadcastReceiver carActionReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (INTENT_SHOW_FRAGMENT.equals(intent.getAction())) {
+				if (intent.hasExtra(INTENT_KEY_SHOW_FRAGMENT_NAME)) {
+					String fragmentName = intent.getStringExtra(INTENT_KEY_SHOW_FRAGMENT_NAME);
+					if (fragmentName != null) {
+						if (fragmentName.equals(RequiredMapsFragment.class.getSimpleName())) {
+							RequiredMapsFragment.showInstance(getSupportFragmentManager());
+						}
+					}
+				}
+			}
+		}
+	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -555,7 +574,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+		AndroidUtils.registerBroadCastReceiver(this, INTENT_SHOW_FRAGMENT, carActionReceiver, true);
 		MapActivity mapViewMapActivity = getMapView().getMapActivity();
 		if (activityRestartNeeded || !getMapLayers().hasMapActivity()
 				|| (mapViewMapActivity != null && mapViewMapActivity != this)) {
@@ -1021,6 +1040,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onPause() {
 		super.onPause();
+		unregisterReceiver(carActionReceiver);
 		settings.LAST_MAP_ACTIVITY_PAUSED_TIME.set(System.currentTimeMillis());
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && isInMultiWindowMode()) {
 			pendingPause = true;
