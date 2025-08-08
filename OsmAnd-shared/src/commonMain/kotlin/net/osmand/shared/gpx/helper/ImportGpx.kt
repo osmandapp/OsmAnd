@@ -4,7 +4,6 @@ import net.osmand.shared.IndexConstants
 import net.osmand.shared.KException
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxUtilities.loadGpxFile
-import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.xml.XmlPullParser
 import net.osmand.shared.xml.XmlSerializer
 import okio.Buffer
@@ -17,7 +16,6 @@ object ImportGpx {
 	private val folderNameStack = ArrayDeque<String>()
 	private val placemarks = mutableListOf<Placemark>()
 	private var documentName: String? = null
-	val LOG = LoggerFactory.getLogger(this::class.simpleName!!)
 
 	@Throws(IOException::class)
 	fun loadGpxWithFileSize(source: Source, fileName: String): Pair<GpxFile, Long> {
@@ -84,8 +82,8 @@ object ImportGpx {
 			when (eventType) {
 				XmlPullParser.START_TAG -> {
 					when (parser.getName()) {
-						"Folder" -> folderNameStack.addLast("") // Placeholder
-						"Document" -> documentName = "" // Start listening for doc name
+						"Folder" -> folderNameStack.addLast("")
+						"Document" -> documentName = ""
 						"Placemark" -> {
 							currentPlacemarkName = null
 							currentPlacemarkDesc = null
@@ -166,9 +164,9 @@ object ImportGpx {
 	}
 
 	private fun parseCoordinates(coords: String): List<PointData> {
-		val pointStrings = coords.trim().split("\\s+".toRegex())
+		val pointStrings = coords.trim().split(" ")
 		return pointStrings.mapNotNull { pointString ->
-			val parts = pointString.split(",")
+			val parts = pointString.trim().split(",")
 			if (parts.size >= 2) {
 				PointData(lon = parts[0], lat = parts[1], ele = if (parts.size > 2) parts[2] else null)
 			} else {
@@ -195,14 +193,16 @@ object ImportGpx {
 
 
 		placemarks.filter { it.point != null }.forEach { p ->
-			serializer.startTag(null, "wpt").apply {
-				attribute(null, "lat", p.point!!.lat)
-				attribute(null, "lon", p.point.lon)
+			p.point?.let { point ->
+				serializer.startTag(null, "wpt").apply {
+					attribute(null, "lat", point.lat)
+					attribute(null, "lon", point.lon)
+				}
+				point.ele?.let { serializer.startTag(null, "ele").text(it).endTag(null, "ele") }
 			}
-			p.point!!.ele?.let { serializer.startTag(null, "ele").text(it).endTag(null, "ele") }
 			p.name?.let { serializer.startTag(null, "name").text(it).endTag(null, "name") }
 			p.description?.let { serializer.startTag(null, "desc").text(it).endTag(null, "desc") }
-			p.type?.let { serializer.startTag(null, "type").text(it).endTag(null, "type") }
+			p.parentName?.let { serializer.startTag(null, "type").text(it).endTag(null, "type") }
 			serializer.endTag(null, "wpt")
 		}
 
@@ -210,14 +210,16 @@ object ImportGpx {
 			serializer.startTag(null, "trk")
 			p.name?.let { serializer.startTag(null, "name").text(it).endTag(null, "name") }
 			serializer.startTag(null, "trkseg")
-			p.track!!.forEach { point ->
-				serializer.startTag(null, "trkpt").apply {
-					attribute(null, "lat", point.lat)
-					attribute(null, "lon", point.lon)
+			p.track?.let { track ->
+				track.forEach { point ->
+					serializer.startTag(null, "trkpt").apply {
+						attribute(null, "lat", point.lat)
+						attribute(null, "lon", point.lon)
+					}
+					point.ele?.let { serializer.startTag(null, "ele").text(it).endTag(null, "ele") }
+					point.time?.let { serializer.startTag(null, "time").text(it).endTag(null, "time") }
+					serializer.endTag(null, "trkpt")
 				}
-				point.ele?.let { serializer.startTag(null, "ele").text(it).endTag(null, "ele") }
-				point.time?.let { serializer.startTag(null, "time").text(it).endTag(null, "time") }
-				serializer.endTag(null, "trkpt")
 			}
 			serializer.endTag(null, "trkseg")
 			serializer.endTag(null, "trk")
@@ -239,7 +241,7 @@ object ImportGpx {
 	data class Placemark(
 		val name: String?,
 		val description: String?,
-		val type: String?, // Derived from the parent folder's name
+		val parentName: String?,
 		val point: PointData? = null,
 		val track: List<PointData>? = null
 	)
