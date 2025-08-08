@@ -27,7 +27,6 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.Location;
-import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -809,7 +808,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 		mapMarkersCollection = new MapMarkersCollection();
-		mapRenderer.addSymbolsProvider(MapRendererContext.MAP_MARKERS_SECTION, mapMarkersCollection);
+		mapRenderer.addSymbolsProvider(mapMarkersCollection);
 		OsmandApplication app = getApplication();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		updateBitmaps(false);
@@ -831,7 +830,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 						.setPinIconHorisontalAlignment(net.osmand.core.jni.MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 						.setPinIconOffset(new PointI(bmp.getWidth() / 3, 0))
 						.setAccuracyCircleBaseColor(NativeUtilities.createFColorRGB(color))
-						.buildAndAddToCollection(mapMarkersCollection);
+						.buildAndAddToCollection(mapMarkersCollection)
+						.setUpdateAfterCreated(true);
 			}
 		}
 	}
@@ -846,8 +846,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (mapRenderer == null) {
 			return;
 		}
-
-		mapRenderer.updateSubsection(MapRendererContext.MAP_MARKERS_SECTION);
 
 		if (!needDrawLines) {
 			return;
@@ -866,13 +864,25 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (isLast) {
 			mapRenderer.addSymbolsProvider(vectorLinesCollection);
-			mapRenderer.addSymbolsProvider(MapRendererContext.MAP_MARKERS_SECTION, distanceMarkersCollection);
+			mapRenderer.addSymbolsProvider(distanceMarkersCollection);
 			needDrawLines = false;
 		}
 
 		QVectorPointI points = new QVectorPointI();
 		points.add(start);
 		points.add(end);
+
+		TextRasterizer.Style style = MapTextLayer.getTextStyle(getContext(), nightMode, getTextScale(), view.getDensity());
+
+		MapMarkerBuilder distanceMarkerBuilder = new MapMarkerBuilder();
+		distanceMarkerBuilder.setBaseOrder(getBaseOrder());
+		distanceMarkerBuilder.setIsHidden(false);
+		distanceMarkerBuilder.setCaption(distance);
+		distanceMarkerBuilder.setCaptionStyle(style);
+		distanceMarkerBuilder.setUpdateAfterCreated(true);
+
+		net.osmand.core.jni.MapMarker distanceMarker = distanceMarkerBuilder.buildAndAddToCollection(distanceMarkersCollection);
+		distanceMarker.setOffsetFromLine(LABEL_OFFSET);
 
 		VectorLineBuilder outlineBuilder = new VectorLineBuilder();
 		VectorDouble outlinePattern = new VectorDouble();
@@ -888,8 +898,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				.setLineWidth(strokeWidth * 1.5)
 				.setLineDash(outlinePattern)
 				.setPoints(points)
-				.setFillColor(outlineColor);
-		VectorLine outline = outlineBuilder.buildAndAddToCollection(vectorLinesCollection);
+				.setFillColor(outlineColor)
+				.attachMarker(distanceMarker);
+		outlineBuilder.buildAndAddToCollection(vectorLinesCollection);
 
 		VectorLineBuilder inlineBuilder = new VectorLineBuilder();
 		VectorDouble inlinePattern = new VectorDouble();
@@ -904,18 +915,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				.setPoints(points)
 				.setFillColor(NativeUtilities.createFColorARGB(color));
 		inlineBuilder.buildAndAddToCollection(vectorLinesCollection);
-
-		TextRasterizer.Style style = MapTextLayer.getTextStyle(getContext(), nightMode, getTextScale(), view.getDensity());
-
-		MapMarkerBuilder distanceMarkerBuilder = new MapMarkerBuilder();
-		distanceMarkerBuilder.setBaseOrder(getBaseOrder());
-		distanceMarkerBuilder.setIsHidden(false);
-		distanceMarkerBuilder.setCaption(distance);
-		distanceMarkerBuilder.setCaptionStyle(style);
-
-		net.osmand.core.jni.MapMarker distanceMarker = distanceMarkerBuilder.buildAndAddToCollection(distanceMarkersCollection);
-		distanceMarker.setOffsetFromLine(LABEL_OFFSET);
-		outline.attachMarker(distanceMarker);
 	}
 
 	/**

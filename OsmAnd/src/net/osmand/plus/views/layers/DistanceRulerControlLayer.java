@@ -96,6 +96,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private boolean rotateText;
 	private VectorLinesCollection vectorLinesCollection;
 	private VectorLine rulerLine;
+	private MapMarker distanceMarker;
 
 	private StateChangedListener<DistanceByTapTextSize> textSizeListener;
 
@@ -304,9 +305,9 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		markerBuilder.setCaption(text);
 		markerBuilder.setBaseOrder(getBaseOrder() - 1);
 		markerBuilder.setCaptionStyle(style);
-		MapMarker marker = markerBuilder.buildAndAddToCollection(mapMarkersCollection);
-		marker.setOffsetFromLine(LABEL_OFFSET);
-		rulerLine.attachMarker(marker);
+		markerBuilder.setUpdateAfterCreated(true);
+		distanceMarker = markerBuilder.buildAndAddToCollection(mapMarkersCollection);
+		distanceMarker.setOffsetFromLine(LABEL_OFFSET);
 	}
 
 	private void drawFingerTouchIcon(Canvas canvas, float x, float y, boolean nightMode) {
@@ -380,8 +381,13 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		double distance = Double.NaN;
 		if (showDistBetweenFingerAndLocation && myLocation != null) {
 			if (vectorLinesCollection == null) {
-				drawLineBetweenLocationsOpenGl(mapRenderer, touchPointLatLon, myLocation);
-				drawFingerTouchIconsOpenGl(mapRenderer, touchPointLatLon, nightMode);
+				if (mapMarkersCollection == null) {
+					mapMarkersCollection = new MapMarkersCollection();
+				}
+
+				if (!mapRenderer.hasSymbolsProvider(mapMarkersCollection)) {
+					mapRenderer.addSymbolsProvider(mapMarkersCollection);
+				}
 
 				if (calculateTextPathOpenGl(mapRenderer, tileBox, touchPointLatLon, myLocation)) {
 					distance = MapUtils.getDistance(touchPointLatLon, myLocation);
@@ -391,14 +397,20 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 					String formattedDistance = OsmAndFormatter.getFormattedDistance((float) distance, app);
 					drawTextOnCenterOfPathOpenGl(formattedDistance, nightMode);
 				}
+
+				drawLineBetweenLocationsOpenGl(mapRenderer, touchPointLatLon, myLocation);
+				drawFingerTouchIconsOpenGl(mapRenderer, touchPointLatLon, nightMode);
 			}
 
-			mapRenderer.updateSubsection(MapRendererContext.RULER_MARKERS_SECTION);
 		} else if (showTwoFingersDistance) {
 			if (vectorLinesCollection == null) {
-				drawLineBetweenLocationsOpenGl(mapRenderer, cachedFirstTouchLatLon, cachedSecondTouchLatLon);
-				drawFingerTouchIconsOpenGl(mapRenderer, cachedFirstTouchLatLon, nightMode);
-				drawFingerTouchIconsOpenGl(mapRenderer, cachedSecondTouchLatLon, nightMode);
+				if (mapMarkersCollection == null) {
+					mapMarkersCollection = new MapMarkersCollection();
+				}
+
+				if (!mapRenderer.hasSymbolsProvider(mapMarkersCollection)) {
+					mapRenderer.addSymbolsProvider(mapMarkersCollection);
+				}
 
 				if (calculateTextPathOpenGl(mapRenderer, tileBox, cachedFirstTouchLatLon, cachedSecondTouchLatLon)) {
 					distance = MapUtils.getDistance(cachedFirstTouchLatLon, cachedSecondTouchLatLon);
@@ -408,9 +420,11 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 					String formattedDistance = OsmAndFormatter.getFormattedDistance((float) distance, app);
 					drawTextOnCenterOfPathOpenGl(formattedDistance, nightMode);
 				}
-			}
 
-			mapRenderer.updateSubsection(MapRendererContext.RULER_MARKERS_SECTION);
+				drawLineBetweenLocationsOpenGl(mapRenderer, cachedFirstTouchLatLon, cachedSecondTouchLatLon);
+				drawFingerTouchIconsOpenGl(mapRenderer, cachedFirstTouchLatLon, nightMode);
+				drawFingerTouchIconsOpenGl(mapRenderer, cachedSecondTouchLatLon, nightMode);
+			}
 		}
 	}
 
@@ -443,6 +457,9 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 			vectorLineBuilder.setLineDash(lineDash);
 		}
 
+		// Marker should be created before as vectorLine.attachMarker() call recreates primitive
+		vectorLineBuilder.attachMarker(distanceMarker);
+
 		vectorLinesCollection = new VectorLinesCollection();
 		rulerLine = vectorLineBuilder.buildAndAddToCollection(vectorLinesCollection);
 		mapRenderer.addSymbolsProvider(vectorLinesCollection);
@@ -451,10 +468,6 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private void drawFingerTouchIconsOpenGl(@NonNull MapRendererView mapRenderer,
 	                                        @NonNull LatLon touchPoint,
 	                                        boolean night) {
-		if (mapMarkersCollection == null) {
-			mapMarkersCollection = new MapMarkersCollection();
-		}
-
 		int x31 = MapUtils.get31TileNumberX(touchPoint.getLongitude());
 		int y31 = MapUtils.get31TileNumberY(touchPoint.getLatitude());
 
@@ -467,13 +480,10 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				.setIsAccuracyCircleSupported(false)
 				.setPinIconHorisontalAlignment(PinIconHorisontalAlignment.CenterHorizontal)
 				.setPinIconVerticalAlignment(PinIconVerticalAlignment.CenterVertical)
-				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), NativeUtilities.createSkImageFromBitmap(icon));
+				.setPinIcon(NativeUtilities.createSkImageFromBitmap(icon))
+				.setUpdateAfterCreated(true);
 
 		builder.buildAndAddToCollection(mapMarkersCollection);
-
-		if (!mapRenderer.hasSymbolsProvider(mapMarkersCollection)) {
-			mapRenderer.addSymbolsProvider(MapRendererContext.RULER_MARKERS_SECTION, mapMarkersCollection);
-		}
 	}
 
 	private boolean calculateTextPathOpenGl(@NonNull MapRendererView mapRenderer,
