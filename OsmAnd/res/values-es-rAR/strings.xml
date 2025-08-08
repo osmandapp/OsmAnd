@@ -5526,7 +5526,7 @@
     <string name="map_widget_route_information">Información sobre la ruta</string>
     <string name="ais_load_data">Cargar datos AIS desde un archivo</string>
     <string name="ais_address_settings">Ajustes de la dirección IP</string>
-    <string name="ais_address_settings_description">Elegí el protocolo NMEA (UDP/TCP) y definí las direcciones</string>
+    <string name="ais_address_settings_description">Elegí el protocolo NMEA (UDP/TCP), definiendo las direcciones y puertos correspondientes</string>
     <string name="ais_nmea_protocol">Protocolo de recepción de datos NMEA</string>
     <string name="ais_nmea_protocol_description">Elegí el protocolo para la recepción de datos NMEA</string>
     <string name="ais_address_nmea_server">Dirección IP del orígen de datos NMEA</string>
@@ -5561,7 +5561,7 @@
     <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
     <string name="hmd_promo">Oferta de HMD por %1$s meses</string>
     <string name="original_shape_description">Cada punto mantendría su propia forma.</string>
-    <string name="save_favorite_default_appearance">¿Aplicar cambios a los puntos existentes en la carpeta o sólo a los nuevos?</string>
+    <string name="save_favorite_default_appearance">¿Aplicar cambios a todos los puntos existentes en la carpeta, o sólo a los nuevos?</string>
     <string name="original_color_description">Cada punto mantendría su propio color.</string>
     <string name="apply_to_all_points">Aplicar a todos los puntos</string>
     <string name="original_icon_description">Cada punto mantendría su propio ícono.</string>
@@ -5578,7 +5578,7 @@
     <string name="choose_location_on_map">Elegí una ubicación en el mapa.</string>
     <string name="popular_places">Lugares populares</string>
     <string name="choose_location">Elegí una ubicación</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Acción para controlar la visibilidad de la red de coordenadas en el mapa.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Alterna la visibilidad de la red de coordenadas en el mapa.</string>
     <string name="show_image_previews">Mostrar vistas previas de las imágenes</string>
     <string name="layer_coordinates_grid">Cuadrícula de coordenadas</string>
     <string name="prime_meridian">Meridiano cero</string>
@@ -5593,7 +5593,7 @@
     <string name="destination_first">Destino primero</string>
     <string name="display_priority">Prioridad de visualización</string>
     <string name="poi_source">Origen del PDI</string>
-    <string name="position_animation_empty_banner_description">El ícono de ubicación se mueve a cada nueva ubicación recibida sin animación.</string>
+    <string name="position_animation_empty_banner_description">El ícono de la ubicación se actualiza con cada nueva ubicación recibida sin ninguna animación de transición.</string>
     <string name="wiki_around">Sitios populares cerca</string>
     <string name="read_on">Leer en %1$s</string>
     <string name="prediction_time_advanced_description">Ajustá el tiempo de predicción para minimizar el retraso.</string>
@@ -5601,12 +5601,12 @@
     <string name="shared_string_no_animation">Sin animación</string>
     <string name="position_animation">Animación de ubicación</string>
     <string name="wikidata">Wikidata</string>
-    <string name="prediction_time_description">El ícono de ubicación en OsmAnd se anima con cada punto de datos GPS recibido (una vez por segundo). Podrías notar un ligero retraso en el movimiento, especialmente cuando te mueves rápidamente o la señal GPS fluctúa.</string>
+    <string name="prediction_time_description">El ícono de ubicación en OsmAnd se anima con cada actualización del GPS (una vez por segundo). Podrías notar un ligero retraso en el movimiento, especialmente cuando te mueves rápidamente o la señal GPS fluctúa.</string>
     <string name="routing_attr_allow_ferries_name">Permitir transbordadores</string>
     <string name="grid_color">Color de la cuadrícula</string>
     <string name="shared_string_edges">Bordes</string>
     <string name="labels_position">Ubicación de las etiquetas</string>
-    <string name="routing_attr_allow_ferries_description">Permite navegar por rutas de transbordadores (ferris)</string>
+    <string name="routing_attr_allow_ferries_description">Permite la navegación con transbordadores (ferris)</string>
     <string name="customize_grid_color">Personalizar el color de la cuadrícula</string>
     <string name="multipoligon_related">Relacionado</string>
     <string name="route_part_of">Parte de</string>
@@ -5671,4 +5671,5 @@
     <string name="n_a">N/C</string>
     <string name="write_location_provider_description">Guardá el proveedor de ubicación en cada punto de la traza, mientras se graba</string>
     <string name="write_location_provider">Escribir proveedor de ubicación</string>
+    <string name="altitude_metrics_description">Define la unidad de medida para la altitud en los widgets y las estadísticas.</string>
 </resources>
