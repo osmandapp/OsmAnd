@@ -5603,9 +5603,9 @@
     <string name="shared_string_length">Távolság</string>
     <string name="map_widget_route_information">Útvonalinformációk</string>
     <string name="shared_string_default_view">Alapértelmezett nézet</string>
-    <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktuális navigációs útvonal távolságát.</string>
+    <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktív navigációs útvonal távolságát.</string>
     <string name="ais_cpa_warning_distance_description">A hajók piros színnel vannak jelölve, ha a CPA kisebb, mint ez az érték, és a CPA-t a közeljövőben elérik (lásd a figyelmeztetési idő beállítása a CPA eléréséhez).</string>
-    <string name="ais_object_lost_timeout_description">Állítsa be az AIS objektumok láthatóságának időtúllépését: a jel vétele nélkül ennyi idő után kerül az AIS objektum eltávolításra a képernyőről.</string>
+    <string name="ais_object_lost_timeout_description">Állítsa be az AIS objektumok láthatóságának időtkorlátját: a jel vétele nélkül ennyi idő után kerül az AIS objektum automatikusan eltávolításra a képernyőről.</string>
     <string name="ais_load_data">AIS adatok betöltése fájlból</string>
     <string name="ais_port_nmea_local_description">Határozza meg azt az UPD portot, amelyen az OsmAnd NMEA adatokat kaphat</string>
     <string name="ais_object_lost_timeouts_description">Állítsa be az időtúllépési értékeket az elveszett AIS objektumok azonosításához, ha egy adott ideig nem érkezett jel.</string>
@@ -5613,7 +5613,7 @@
     <string name="ais_ship_lost_timeout_description">Állítsa be a hajó láthatóságának időtúllépését: a jel vétele nélkül ennyi idő után kerül megváltozásra a hajó szimbólum állapota a képernyőn, kihúzásra kerül.</string>
     <string name="plugin_ais_tracker_disclaimer">FIGYELMEZTETÉS\n\nEz a plugin egy hobbiprojekt, nem garantálható a tökéletes megbízhatósága és pontossága. Semmiképp NE hagyatkozzon erre a szoftverre, beleértve a navigációt és/vagy az életbiztonságot.</string>
     <string name="ais_address_settings">IP-cím beállításai</string>
-    <string name="ais_address_settings_description">Válasszon NMEA protokollt (UDP/TCP) és határozza meg a címeket</string>
+    <string name="ais_address_settings_description">Válassza az NMEA protokollt (UDP/TCP) és és adja meg a megfelelő címeket és portokat</string>
     <string name="ais_nmea_protocol">Protokoll az NMEA adatfogadáshoz</string>
     <string name="ais_nmea_protocol_description">Válasszon protokollt az NMEA adatfogadáshoz</string>
     <string name="ais_address_nmea_server">Az NMEA adatforrás IP -címe</string>
@@ -5622,11 +5622,11 @@
     <string name="ais_port_nmea_server_description">Határozza meg az NMEA adatforrás TCP portszámát</string>
     <string name="ais_port_nmea_local">Helyi NMEA adatfogadó UDP portja</string>
     <string name="ais_object_lost_timeouts">Időtúllépési beállítások az AIS jel fogadásához</string>
-    <string name="ais_ship_lost_timeout">A hajó láthatóságának időtúllépése, ha nem érkezik jel</string>
+    <string name="ais_ship_lost_timeout">A hajó láthatóságának időtúllépése, törlődik, ha a beállított időtartamon belül nem érkezik AIS-jel.</string>
     <string name="ais_cpa_settings">A CPA-val kapcsolatos beállítások</string>
-    <string name="ais_cpa_settings_description">Ezek az értékek határozzák meg azon AIS-objektumok megjelenítését, amelyek túl közel kerülhetnek a saját pozícióhoz.</string>
-    <string name="ais_cpa_warning_time">Figyelmeztetési idő a legközelebbi megközelítési pont eléréséhez (CPA)</string>
-    <string name="ais_cpa_warning_time_description">Ha a TCPA (a másik hajóval a CPA eléréséhez szükséges idő) kevesebb, mint ez az érték, a hajó piros színnel jelölt.</string>
+    <string name="ais_cpa_settings_description">Ezek az értékek határozzák meg, hogyan jelennek meg az AIS-objektumok, amikor megközelítik a hajó saját pozícióját.</string>
+    <string name="ais_cpa_warning_time">Figyelmeztetési idő a legközelebbi megközelítési pont (CPA) előtt</string>
+    <string name="ais_cpa_warning_time_description">Ha a TCPA (a másik hajóval a CPA eléréséhez szükséges idő) kevesebb, mint a megadott érték, a hajó piros színnel lesz kiemelt.</string>
     <string name="ais_cpa_warning_distance">Figyelmeztetési távolság a legközelebbi megközelítési pont eléréséhez (CPA)</string>
     <string name="plugin_ais_tracker_name">AIS hajókövető</string>
     <string name="plugin_ais_tracker_description">Jelenítse meg az AIS pozíciókat és információkat a környező hajókról. Az AIS-adatok hálózaton keresztül érkeznek egy külső AIS-vevőtől.</string>
@@ -5660,7 +5660,7 @@
     <string name="shared_string_map_center">Térkép közepe</string>
     <string name="layer_coordinates_grid">Koordinátarács</string>
     <string name="show_image_previews">Képelőnézetek megjelenítése</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">A koordinátarács láthatóságának beállítása a térképen.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">A koordinátarács láthatóságának átváltása a térképen.</string>
     <string name="prime_meridian">Kezdő délkör (0°)</string>
     <string name="equator">Egyenlítő</string>
     <string name="meridian_180">180° délkör</string>
@@ -5674,8 +5674,8 @@
     <string name="destination_first">Úti cél először</string>
     <string name="poi_source">POI-forrás</string>
     <string name="wikidata">Wikidata</string>
-    <string name="prediction_time_description">Az OsmAnd pozícióikonja minden egyes fogadott GPS-adatponttal elmozdul (másodpercenként egyszer). A mozgása enyhén késhet, különösen ha a felhasználó gyorsan mozog, vagy a GPS jel ingadozik.</string>
-    <string name="position_animation_empty_banner_description">A pozícióikon animáció nélkül ugrik az újonnan megkapott helyre.</string>
+    <string name="prediction_time_description">Az OsmAnd pozícióikonja minden egyes fogadott GPS-adatfrissítéskor elmozdul (másodpercenként egyszer). Enyhe késés léphet fel, különösen gyors mozgás vagy a GPS jelerősség ingadozása esetén.</string>
+    <string name="position_animation_empty_banner_description">A pozícióikon animáció nélkül mozog az újonnan megkapott helyre.</string>
     <string name="prediction_time">Előrejelzési idő</string>
     <string name="prediction_time_advanced_description">Előrejelzési idő beállítása a késés minimalizálásához.</string>
     <string name="read_on_wiki">Megtekintés a Wikipédián</string>
@@ -5752,4 +5752,5 @@
     <string name="n_a">n.a</string>
     <string name="write_location_provider_description">Mentse el a helymeghatározó szolgáltatót minden egyes útvonalponthoz rögzítés közben</string>
     <string name="write_location_provider">Helymeghatározó szolgáltató tárolása</string>
+    <string name="altitude_metrics_description">Beállítja a magasság mértékegységét a widgetekben és a statisztikákban.</string>
 </resources>
