@@ -444,12 +444,9 @@ class GpxTrackAnalysis {
 				}
 
 				if (attribute.heartRate > 0) {
-					maxSensorHr = maxOf(attribute.heartRate.toInt(), maxSensorHr)
-					minSensorHr = if (minSensorHr == 0) {
-						attribute.heartRate.toInt()
-					} else {
-						minOf(attribute.heartRate.toInt(), minSensorHr)
-					}
+					val hr = attribute.heartRate.toInt()
+					maxSensorHr = maxOf(hr, maxSensorHr)
+					minSensorHr = if (minSensorHr == 0) hr else minOf(hr, minSensorHr)
 					sensorHrCount++
 					totalSensorHrSum += attribute.heartRate
 				}
