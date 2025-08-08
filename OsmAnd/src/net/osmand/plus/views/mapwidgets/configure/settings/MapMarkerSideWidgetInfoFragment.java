@@ -179,7 +179,7 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
 
 		Drawable icon = showTintedIcon
-				? getPaintedContentIcon(iconId, selectedAppMode.getProfileColor(nightMode))
+				? getPaintedIcon(iconId, selectedAppMode.getProfileColor(nightMode))
 				: getIcon(iconId);
 
 		ImageView ivIcon = view.findViewById(R.id.icon);

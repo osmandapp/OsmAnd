@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
@@ -30,7 +30,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-public class ContextMenuCardDialogFragment extends BaseOsmAndFragment implements ICoveredScreenRectProvider {
+public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implements ICoveredScreenRectProvider {
 
 	public static final String TAG = "ContextMenuCardDialogFragment";
 

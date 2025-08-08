@@ -25,7 +25,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
@@ -35,7 +35,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class DistanceByTapFragment extends BaseOsmAndFragment {
+public class DistanceByTapFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
 
@@ -148,7 +148,7 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	                                   OnClickListener listener) {
 		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
 
-		Drawable icon = getPaintedContentIcon(iconId, enabled
+		Drawable icon = getPaintedIcon(iconId, enabled
 				? ColorUtilities.getDefaultIconColor(app, nightMode)
 				: ColorUtilities.getSecondaryIconColor(app, nightMode));
 		ImageView ivIcon = view.findViewById(R.id.icon);
@@ -214,17 +214,19 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMapActivity().disableDrawer();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMapActivity().enableDrawer();
-	}
-
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {

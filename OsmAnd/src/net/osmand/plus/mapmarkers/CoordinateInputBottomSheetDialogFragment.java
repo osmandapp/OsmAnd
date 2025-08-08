@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -33,8 +32,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = getContext();
-		OsmandSettings settings = getMyApplication().getSettings();
+		Context context = getThemedContext();
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 		BaseBottomSheetItem editItem = new SimpleBottomSheetItem.Builder()
@@ -85,7 +83,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 				.create();
 		items.add(twoDigitsLongtitudeItem);
 
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+		if (!AndroidUiHelper.isOrientationPortrait(requireActivity())) {
 			boolean rightHand = settings.COORDS_INPUT_USE_RIGHT_SIDE.get();
 
 			BaseBottomSheetItem showNumberPadItem = new BottomSheetItemWithDescription.Builder()
@@ -129,7 +127,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			BaseBottomSheetItem formatItem = new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(selectedItem)
 					.setButtonTintList(selectedItem
-							? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
+							? ColorStateList.valueOf(getColor(getActiveColorId()))
 							: null)
 					.setIcon(selectedItem ? getActiveIcon(R.drawable.ic_action_coordinates_latitude) : formatIcon)
 					.setTitle(format.toHumanString(context))

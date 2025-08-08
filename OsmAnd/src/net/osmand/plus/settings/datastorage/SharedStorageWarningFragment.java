@@ -26,7 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageFragment.StorageSelectionListener;
@@ -53,7 +53,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SharedStorageWarningFragment extends BaseOsmAndFragment implements OnConfirmMigrationSkipListener, DocumentFilesCollectListener, StorageSelectionListener {
+public class SharedStorageWarningFragment extends BaseFullScreenFragment implements OnConfirmMigrationSkipListener, DocumentFilesCollectListener, StorageSelectionListener {
 
 	public static final String TAG = SharedStorageWarningFragment.class.getSimpleName();
 

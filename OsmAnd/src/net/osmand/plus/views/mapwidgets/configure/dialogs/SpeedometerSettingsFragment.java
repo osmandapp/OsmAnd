@@ -21,11 +21,9 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SpeedLimitWarningState;
@@ -39,7 +37,7 @@ import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
 
-public class SpeedometerSettingsFragment extends BaseOsmAndFragment {
+public class SpeedometerSettingsFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = SpeedometerSettingsFragment.class.getSimpleName();
 
@@ -219,11 +217,6 @@ public class SpeedometerSettingsFragment extends BaseOsmAndFragment {
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {

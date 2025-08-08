@@ -37,7 +37,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsContainer;
@@ -70,7 +70,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener,
+public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, TrackItemsContainer, TrackSelectionListener, SortTracksListener, EmptyTracksViewHolder.EmptyTracksListener {
 
 	public static final String TAG = SelectTrackFolderFragment.class.getSimpleName();

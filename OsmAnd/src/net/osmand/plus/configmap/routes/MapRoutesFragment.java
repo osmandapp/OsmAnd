@@ -23,7 +23,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -40,7 +40,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MapRoutesFragment extends BaseOsmAndFragment implements CardListener {
+public abstract class MapRoutesFragment extends BaseFullScreenFragment implements CardListener {
 
 	private static final Log log = PlatformUtil.getLog(MapRoutesFragment.class);
 
@@ -182,24 +182,6 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 			mapActivity.refreshMapComplete();
 			mapActivity.updateLayers();
 		}
-	}
-
-	@Nullable
-	protected MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
 	}
 
 	public static boolean shouldShow(@NonNull OsmandApplication app, @NonNull String attrName) {

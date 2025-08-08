@@ -28,7 +28,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.base.multistate.IMultiStateCardController;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
@@ -49,7 +49,7 @@ import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
 import java.util.Collections;
 
-public class FavoriteAppearanceFragment extends BaseOsmAndDialogFragment {
+public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = FavoriteAppearanceFragment.class.getName();
 

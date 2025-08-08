@@ -41,7 +41,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -73,7 +73,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.*;
 
-public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
+public class FirstUsageWizardFragment extends BaseFullScreenFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents, StorageSelectionListener, FirstUsageActionsListener {
 
 	public static final String TAG = FirstUsageWizardFragment.class.getSimpleName();
@@ -806,15 +806,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			args.putBoolean(FIRST_USAGE, true);
 			BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
 		}
-	}
-
-	@Nullable
-	protected MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 
 	private void logError(String msg, Throwable e) {

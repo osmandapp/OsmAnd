@@ -30,6 +30,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.FavouritesLayer;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
@@ -125,9 +126,8 @@ public class FavoriteAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View root = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_add_favorite, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View root = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_add_favorite, parent, false);
 		setupPointLocationView(root.findViewById(R.id.point_location_container), mapActivity);
 		parent.addView(root);
 

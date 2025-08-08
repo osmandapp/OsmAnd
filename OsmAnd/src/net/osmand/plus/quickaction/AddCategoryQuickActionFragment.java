@@ -21,14 +21,14 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class AddCategoryQuickActionFragment extends BaseOsmAndFragment
+public class AddCategoryQuickActionFragment extends BaseFullScreenFragment
 		implements AddQuickActionsAdapter.ItemClickListener, IAskDismissDialog {
 
 	public static final String TAG = AddCategoryQuickActionFragment.class.getSimpleName();

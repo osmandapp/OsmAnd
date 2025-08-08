@@ -34,7 +34,7 @@ import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteAccountListener;
 import net.osmand.plus.backup.UserNotRegisteredException;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -47,7 +47,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDeleteAccountListener {
+public class DeleteAccountFragment extends BaseFullScreenFragment implements OnDeleteAccountListener {
 
 	public static final String TAG = DeleteAccountFragment.class.getSimpleName();
 

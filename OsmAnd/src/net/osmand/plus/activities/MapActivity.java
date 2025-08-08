@@ -581,7 +581,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		dashboardOnMap.updateLocation(true, true, false);
 
 		if (!dashboardOnMap.isVisible()) {
-			if (RenderInitErrorBottomSheet.shouldShow(settings, this)) {
+			if (RenderInitErrorBottomSheet.shouldShow(app)) {
 				SecondSplashScreenFragment.SHOW = false;
 				RenderInitErrorBottomSheet.showInstance(fragmentManager);
 			} else if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {

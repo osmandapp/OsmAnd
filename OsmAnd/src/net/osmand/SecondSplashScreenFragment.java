@@ -17,14 +17,13 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class SecondSplashScreenFragment extends BaseOsmAndFragment {
+public class SecondSplashScreenFragment extends BaseFullScreenFragment {
 
 	private static final int LOGO_ID = 1001;
 	private static final int TEXT_ID = 1002;
@@ -34,10 +33,6 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	public static boolean SHOW = true;
 	public static boolean VISIBLE;
 
-	public MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
 	private int getNavigationBarWidth() {
 		if (!AndroidUtils.hasNavBar(getContext()) && !AndroidUtils.isNavBarVisible(getMapActivity()))
 			return 0;
@@ -45,7 +40,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		if (orientation == Configuration.ORIENTATION_LANDSCAPE && !AndroidUiHelper.isTablet(getContext())) {
 			int id = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
 			if (id > 0)
-				return getResources().getDimensionPixelSize(id);
+				return (id);
 		}
 		return 0;
 	}
@@ -116,9 +111,9 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		osmTextLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
-		int defaultLogoMarginTop = getResources().getDimensionPixelSize(R.dimen.splash_screen_logo_top);
-		int textMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_text_bottom);
-		int osmTextMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_osm_text_bottom);
+		int defaultLogoMarginTop = getDimensionPixelSize(R.dimen.splash_screen_logo_top);
+		int textMarginBottom = getDimensionPixelSize(R.dimen.splash_screen_text_bottom);
+		int osmTextMarginBottom = getDimensionPixelSize(R.dimen.splash_screen_osm_text_bottom);
 		int elementsPaddingLeft = 0;
 		int elementsPaddingRight = 0;
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {

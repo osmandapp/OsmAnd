@@ -26,7 +26,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.utils.ColorUtilities;
@@ -35,7 +35,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.util.List;
 
-public abstract class PromoCompanyFragment extends BaseOsmAndDialogFragment {
+public abstract class PromoCompanyFragment extends BaseFullScreenDialogFragment {
 
 	@ColorRes
 	protected int getStatusBarColorId() {

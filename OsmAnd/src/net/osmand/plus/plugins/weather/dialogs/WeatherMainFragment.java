@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -37,7 +37,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 import java.util.Iterator;
 
-public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadEvents, RemoveLocalForecastListener {
+public class WeatherMainFragment extends BaseFullScreenFragment implements DownloadEvents, RemoveLocalForecastListener {
 
 	public static final String TAG = WeatherMainFragment.class.getSimpleName();
 
@@ -156,7 +156,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
+		Drawable icon = getPaintedIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(icon);
 		ivIcon.setColorFilter(enabled ? activeColor : defColor);

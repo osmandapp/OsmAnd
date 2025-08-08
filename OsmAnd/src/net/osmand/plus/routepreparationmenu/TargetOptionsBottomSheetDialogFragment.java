@@ -1,11 +1,9 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -25,17 +23,13 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
-		OsmandApplication app = requiredMyApplication();
 		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 		BaseBottomSheetItem sortDoorToDoorItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_sort_door_to_door))
 				.setTitle(getString(R.string.intermediate_items_sort_by_distance))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						WaypointDialogHelper.sortAllTargets(mapActivity);
-					}
+					callMapActivity(WaypointDialogHelper::sortAllTargets);
 					dismiss();
 				})
 				.create();
@@ -46,10 +40,7 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setTitle(getString(R.string.switch_start_finish))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
-					MapActivity activity = getMapActivity();
-					if (activity != null) {
-						WaypointDialogHelper.switchStartAndFinish(activity, true);
-					}
+					callMapActivity(mapActivity -> WaypointDialogHelper.switchStartAndFinish(mapActivity, true));
 					dismiss();
 				})
 				.create();
@@ -61,10 +52,7 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 					.setTitle(getString(R.string.reverse_all_points))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(v -> {
-						MapActivity mapActivity = getMapActivity();
-						if (mapActivity != null) {
-							WaypointDialogHelper.reverseAllPoints(mapActivity);
-						}
+						callMapActivity(WaypointDialogHelper::reverseAllPoints);
 						dismiss();
 					})
 					.create();
@@ -88,10 +76,7 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setDisabled(app.getTargetPointsHelper().getIntermediatePoints().isEmpty())
 				.setOnClickListener(v -> {
-					MapActivity activity = getMapActivity();
-					if (activity != null) {
-						WaypointDialogHelper.clearAllIntermediatePoints(activity);
-					}
+					callMapActivity(WaypointDialogHelper::clearAllIntermediatePoints);
 					dismiss();
 				})
 				.create();
@@ -103,28 +88,11 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		return R.string.shared_string_close;
 	}
 
-	private void openAddPointDialog(MapActivity mapActivity) {
-		Bundle args = new Bundle();
-		args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, PointType.INTERMEDIATE.name());
-		AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
-		fragment.setArguments(args);
-		fragment.setUsedOnMap(false);
-		fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
-	}
-
 	private void onWaypointItemClick() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			openAddPointDialog(mapActivity);
-		}
+		callMapActivity(this::openAddPointDialog);
 	}
 
-	@Nullable
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
+	private void openAddPointDialog(@NonNull MapActivity mapActivity) {
+		AddPointBottomSheetDialog.showInstance(mapActivity, PointType.INTERMEDIATE, false);
 	}
 }

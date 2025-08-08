@@ -16,14 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
@@ -40,7 +39,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implements OnItemSelectedListener {
+public abstract class BaseSettingsListFragment extends BaseFullScreenFragment implements OnItemSelectedListener {
 
 	public static final String SETTINGS_LIST_TAG = "settings_list_tag";
 
@@ -167,7 +166,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 
 	private void setupToolbar(Toolbar toolbar) {
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
+		toolbar.setNavigationIcon(getPaintedIcon(R.drawable.ic_action_close, color));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
 			if (hasSelectedData()) {
@@ -233,16 +232,6 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 			expandableList.removeHeaderView(availableSpaceContainer);
 			AndroidUiHelper.updateVisibility(headerShadow, true);
 			AndroidUiHelper.updateVisibility(headerDivider, false);
-		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
 		}
 	}
 

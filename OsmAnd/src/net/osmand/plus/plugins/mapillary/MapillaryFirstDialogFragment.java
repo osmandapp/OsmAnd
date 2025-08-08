@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -24,11 +23,12 @@ public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		updateNightMode();
 		if (savedInstanceState != null) {
 			showWidget = savedInstanceState.getBoolean(KEY_SHOW_WIDGET, true);
 		}
 
-		View view = inflater.inflate(R.layout.mapillary_first_dialog, container, false);
+		View view = inflate(R.layout.mapillary_first_dialog, container, false);
 		SwitchCompat widgetSwitch = view.findViewById(R.id.widget_switch);
 		widgetSwitch.setChecked(showWidget);
 		widgetSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> showWidget(isChecked));
@@ -41,10 +41,10 @@ public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 	}
 
 	private void showWidget(boolean show) {
-		FragmentActivity activity = getActivity();
+		MapActivity activity = getMapActivity();
 		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
-		if (plugin != null && activity instanceof MapActivity) {
-			plugin.setWidgetVisible((MapActivity) activity, show);
+		if (activity != null && plugin != null) {
+			plugin.setWidgetVisible(activity, show);
 		}
 	}
 

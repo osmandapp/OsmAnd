@@ -21,7 +21,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.chooseplan.ExploreOsmAndPlansCard;
 import net.osmand.plus.chooseplan.NoPurchasesCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
@@ -40,7 +40,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class PurchasesFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener, CardListener {
+public class PurchasesFragment extends BaseFullScreenDialogFragment implements InAppPurchaseListener, CardListener {
 
 	public static final String TAG = PurchasesFragment.class.getName();
 

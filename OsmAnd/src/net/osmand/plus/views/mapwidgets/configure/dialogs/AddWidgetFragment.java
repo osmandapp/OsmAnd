@@ -183,7 +183,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		String title = aidlWidgetData.getMenuTitle();
 		String iconName = aidlWidgetData.getMenuIconName();
 		int iconId = AndroidUtils.getDrawableId(app, iconName);
-		Drawable icon = iconId != 0 ? getPaintedContentIcon(iconId, appMode.getProfileColor(nightMode)) : null;
+		Drawable icon = iconId != 0 ? getPaintedIcon(iconId, appMode.getProfileColor(nightMode)) : null;
 		setupWidgetItemView(view, widgetId, title, null, icon, false);
 
 		container.addView(view);

@@ -30,7 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -47,7 +47,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IAskRefreshDialogCompletely, DownloadEvents {
+public class RequiredMapsFragment extends BaseFullScreenDialogFragment implements IAskRefreshDialogCompletely, DownloadEvents {
 
 	private static final String TAG = RequiredMapsFragment.class.getSimpleName();
 

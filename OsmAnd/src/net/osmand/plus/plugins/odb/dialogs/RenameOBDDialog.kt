@@ -9,22 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseOsmAndDialogFragment
+import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
+import net.osmand.plus.widgets.alert.AlertDialogData
+import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.util.Algorithms
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
-class RenameOBDDialog : BaseOsmAndDialogFragment() {
+class RenameOBDDialog : BaseFullScreenDialogFragment() {
 	private var textInput: ExtendedEditText? = null
 	private var propertyOldValueValue: String? = null
 	private var deviceAddress: String? = null
@@ -123,13 +123,11 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 	}
 
 	private fun showDismissDialog() {
-		val themedContext = UiUtilities.getThemedContext(requireContext(), isNightMode(false))
-		val dismissDialog = AlertDialog.Builder(themedContext)
-		dismissDialog.setTitle(getString(R.string.shared_string_dismiss))
-		dismissDialog.setMessage(getString(R.string.exit_without_saving))
-		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null)
-		dismissDialog.setPositiveButton(R.string.shared_string_exit) { dialog: DialogInterface?, which: Int -> dismiss() }
-		dismissDialog.show()
+		val dialogData = AlertDialogData(requireContext(), nightMode)
+			.setTitle(R.string.shared_string_dismiss)
+			.setNegativeButton(R.string.shared_string_cancel, null)
+			.setPositiveButton(R.string.shared_string_exit) { _: DialogInterface?, _: Int -> dismiss() }
+		CustomAlert.showSimpleMessage(dialogData, R.string.exit_without_saving)
 	}
 
 	private fun onSaveEditedText(newName: String) {

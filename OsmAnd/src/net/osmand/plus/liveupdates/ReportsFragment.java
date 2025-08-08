@@ -22,7 +22,7 @@ import androidx.annotation.NonNull;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
 import net.osmand.plus.liveupdates.GetJsonAsyncTask.OnErrorListener;
@@ -33,7 +33,7 @@ import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
-public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInteractionListener {
+public class ReportsFragment extends BaseFullScreenFragment implements OnFragmentInteractionListener {
 
 	public static final String DOMAIN = "https://osmand.net/";
 	public static final String TOTAL_CHANGES_BY_MONTH_URL_PATTERN = DOMAIN +
@@ -274,11 +274,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInt
 	}
 
 	private void enableProgress() {
-		numberOfContributorsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
-		numberOfEditsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_map, inactiveColor));
-		numberOfRecipientsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
-		donationsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bitcoin, inactiveColor));
-		donationsTotalIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bitcoin, inactiveColor));
+		numberOfContributorsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_group, inactiveColor));
+		numberOfEditsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_map, inactiveColor));
+		numberOfRecipientsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_group, inactiveColor));
+		donationsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_bitcoin, inactiveColor));
+		donationsTotalIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_bitcoin, inactiveColor));
 
 		numberOfContributorsTitle.setTextColor(inactiveColor);
 		numberOfEditsTitle.setTextColor(inactiveColor);

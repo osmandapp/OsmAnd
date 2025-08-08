@@ -44,7 +44,7 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.mapsource.ExpireTimeBottomSheet.OnExpireValueSetListener;
 import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
 import net.osmand.plus.mapsource.MercatorProjectionBottomSheet.OnMercatorSelectedListener;
@@ -63,7 +63,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
-public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
+public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		implements OnZoomSetListener, OnExpireValueSetListener, OnMercatorSelectedListener,
 		OnTileStorageFormatSelectedListener {
 

@@ -17,12 +17,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.DimenRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
@@ -31,15 +28,15 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCal
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseNestedFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MultiSelectionArrayAdapter.OnClickListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 
-public class MapMultiSelectionMenuFragment extends Fragment
+public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		implements OnClickListener, OnGlobalLayoutListener, ObservableScrollViewCallbacks {
 
 	public static final String TAG = "MapMultiSelectionMenuFragment";
@@ -54,16 +51,20 @@ public class MapMultiSelectionMenuFragment extends Fragment
 	private boolean dismissing;
 	private boolean wasDrawerDisabled;
 
-	private LayoutInflater themedInflater;
-	private boolean nightMode;
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		MapActivity mapActivity = (MapActivity) requireActivity();
+		menu = mapActivity.getContextMenu().getMultiSelectionMenu();
+		super.onCreate(savedInstanceState);
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) requireActivity();
-		menu = mapActivity.getContextMenu().getMultiSelectionMenu();
 		updateNightMode();
+		MapActivity mapActivity = (MapActivity) requireActivity();
+
 		view = inflate(R.layout.menu_obj_selection_fragment, container);
 		Context context = view.getContext();
 
@@ -87,7 +88,7 @@ public class MapMultiSelectionMenuFragment extends Fragment
 		if (!menu.isLandscapeLayout()) {
 			FrameLayout paddingView = new FrameLayout(context);
 			int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
-			int cancelButtonHeight = getDimension(R.dimen.bottom_sheet_cancel_button_height);
+			int cancelButtonHeight = getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 			int padding = screenHeight - cancelButtonHeight;
 			paddingView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, padding));
 			paddingView.setClickable(true);
@@ -155,8 +156,8 @@ public class MapMultiSelectionMenuFragment extends Fragment
 	@Override
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
 		if (minHeight == 0) {
-			int headerHeight = getDimension(R.dimen.multi_selection_header_height);
-			int listItemHeight = getDimension(R.dimen.list_item_height);
+			int headerHeight = getDimensionPixelSize(R.dimen.multi_selection_header_height);
+			int listItemHeight = getDimensionPixelSize(R.dimen.list_item_height);
 			minHeight = headerHeight + listItemHeight;
 		}
 		if (scrollY <= minHeight && !initialScroll) {
@@ -183,31 +184,31 @@ public class MapMultiSelectionMenuFragment extends Fragment
 		}
 	}
 
-	private void updateNightMode() {
+	@Override
+	public void updateNightMode() {
 		menu.updateNightMode();
-		nightMode = !menu.isLight();
-		themedInflater = UiUtilities.getInflater(menu.getMapActivity(), nightMode);
+		super.updateNightMode();
 	}
 
-	private View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
-		return themedInflater.inflate(layoutId, container, false);
+	@Override
+	public boolean resolveNightMode() {
+		return !menu.isLight();
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		MapActivity mapActivity = menu.getMapActivity();
-		if (mapActivity == null) {
-			return;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getMapControlsLayer().setControlsClickable(false);
+			mapActivity.getContextMenu().setBaseFragmentVisibility(false);
 		}
-		mapActivity.getMapLayers().getMapControlsLayer().setControlsClickable(false);
-		mapActivity.getContextMenu().setBaseFragmentVisibility(false);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		MapActivity mapActivity = menu.getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
 		}
@@ -218,14 +219,14 @@ public class MapMultiSelectionMenuFragment extends Fragment
 		}
 		wasDrawerDisabled = mapActivity.isDrawerDisabled();
 		if (!wasDrawerDisabled) {
-			menu.getMapActivity().disableDrawer();
+			mapActivity.disableDrawer();
 		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		MapActivity mapActivity = menu.getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && !wasDrawerDisabled) {
 			mapActivity.enableDrawer();
 		}
@@ -237,7 +238,7 @@ public class MapMultiSelectionMenuFragment extends Fragment
 		if (!dismissing) {
 			menu.onStop();
 		}
-		MapActivity mapActivity = menu.getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getContextMenu().setBaseFragmentVisibility(true);
 			mapActivity.getMapLayers().getMapControlsLayer().setControlsClickable(true);
@@ -246,7 +247,7 @@ public class MapMultiSelectionMenuFragment extends Fragment
 
 	public void dismiss() {
 		dismissing = true;
-		MapActivity mapActivity = menu.getMapActivity();
+		MapActivity mapActivity = getMapActivity();
 		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			MapContextMenu contextMenu = mapActivity.getContextMenu();
 			if (contextMenu.isVisible()) {
@@ -260,8 +261,10 @@ public class MapMultiSelectionMenuFragment extends Fragment
 		}
 	}
 
-	private int getDimension(@DimenRes int dimensionResId) {
-		return requireContext().getResources().getDimensionPixelSize(dimensionResId);
+	@Nullable
+	@Override
+	public MapActivity getMapActivity() {
+		return menu != null ? menu.getMapActivity() : super.getMapActivity();
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {

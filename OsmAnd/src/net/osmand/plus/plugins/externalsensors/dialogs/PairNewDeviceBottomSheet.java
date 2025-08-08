@@ -3,7 +3,7 @@ package net.osmand.plus.plugins.externalsensors.dialogs;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
@@ -15,7 +15,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
@@ -34,11 +33,9 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
 					dismiss();
-					MapActivity mapActivity = (MapActivity) getActivity();
-					if (mapActivity != null) {
-						ExternalDevicesSearchFragment.Companion.showInstance(
-								mapActivity.getSupportFragmentManager(), true, false);
-					}
+					callMapActivity(mapActivity ->
+							ExternalDevicesSearchFragment.Companion.showInstance(
+							mapActivity.getSupportFragmentManager(), true, false));
 				})
 				.create();
 		items.add(pairBluetooth);
@@ -49,11 +46,10 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
 					dismiss();
-					MapActivity mapActivity = (MapActivity) getActivity();
-					if (mapActivity != null) {
-						ExternalDevicesSearchFragment.Companion.showInstance(
-								mapActivity.getSupportFragmentManager(), false, true);
-					}
+					callMapActivity(mapActivity ->
+							ExternalDevicesSearchFragment.Companion.showInstance(
+							mapActivity.getSupportFragmentManager(), false, true)
+					);
 				})
 				.create();
 		items.add(pairAntItem);
@@ -66,9 +62,9 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
 					dismiss();
-					FragmentActivity activity = getActivity();
-					boolean nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-					AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
+					callActivity(activity -> {
+						AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
+					});
 				})
 				.create();
 		items.add(helpItem);
@@ -79,22 +75,13 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 				.setOnClickListener(v -> dismiss())
 				.create();
 		items.add(cancelItem);
-		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int padding = getDimensionPixelSize(R.dimen.content_padding_small);
 		items.add(new DividerSpaceItem(getContext(), padding));
 	}
 
 	@Override
 	protected int getPeekHeight() {
-		return AndroidUtils.dpToPx(requiredMyApplication(), BOTTOM_SHEET_HEIGHT_DP);
-	}
-
-
-	public static void showInstance(FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
-			PairNewDeviceBottomSheet fragment = new PairNewDeviceBottomSheet();
-			fragment.setRetainInstance(true);
-			fragment.show(fragmentManager, TAG);
-		}
+		return dpToPx(BOTTOM_SHEET_HEIGHT_DP);
 	}
 
 	protected void hideBottomSheet() {
@@ -111,4 +98,12 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 		return true;
 	}
 
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			PairNewDeviceBottomSheet fragment = new PairNewDeviceBottomSheet();
+			fragment.setUsedOnMap(false);
+			fragment.setRetainInstance(true);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
 }

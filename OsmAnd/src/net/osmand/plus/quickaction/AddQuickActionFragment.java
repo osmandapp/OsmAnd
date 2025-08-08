@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.AddQuickActionsAdapter.ItemClickListener;
@@ -34,7 +34,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
-public class AddQuickActionFragment extends BaseOsmAndFragment implements ItemClickListener, IAskDismissDialog {
+public class AddQuickActionFragment extends BaseFullScreenFragment implements ItemClickListener, IAskDismissDialog {
 
 	public static final String TAG = AddQuickActionFragment.class.getSimpleName();
 
