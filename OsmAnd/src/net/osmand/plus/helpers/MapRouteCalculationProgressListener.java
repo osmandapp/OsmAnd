@@ -63,21 +63,21 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 	public void onRequestPrivateAccessRouting() {
 		app.runInUIThread(() -> {
 			ApplicationMode routingProfile = routingHelper.getAppMode();
-			if (AndroidUtils.isActivityNotDestroyed(activity)
+			if (AndroidUtils.isActivityNotDestroyed(activity) && !app.getOsmandMap().getMapView().isCarView()
 					&& !settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
 				List<ApplicationMode> modes = ApplicationMode.values(app);
 				for (ApplicationMode mode : modes) {
-					if (!getAllowPrivatePreference(mode).getModeValue(mode)) {
+					if (!settings.getAllowPrivatePreference(mode).getModeValue(mode)) {
 						settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
 					}
 				}
-				OsmandPreference<Boolean> allowPrivate = getAllowPrivatePreference(routingProfile);
+				OsmandPreference<Boolean> allowPrivate = settings.getAllowPrivatePreference(routingProfile);
 				if (!allowPrivate.getModeValue(routingProfile)) {
 					AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
 					dlg.setMessage(R.string.private_access_routing_req);
 					dlg.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 						for (ApplicationMode mode : modes) {
-							OsmandPreference<Boolean> preference = getAllowPrivatePreference(mode);
+							OsmandPreference<Boolean> preference = settings.getAllowPrivatePreference(mode);
 							if (!preference.getModeValue(mode)) {
 								preference.setModeValue(mode, true);
 							}
@@ -89,16 +89,6 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 				}
 			}
 		});
-	}
-
-	@NonNull
-	private OsmandPreference<Boolean> getAllowPrivatePreference(@NonNull ApplicationMode appMode) {
-		String derivedProfile = appMode.getDerivedProfile();
-		CommonPreference<Boolean> allowPrivate =
-				settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false);
-		CommonPreference<Boolean> allowPrivateForTruck =
-				settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK, false);
-		return Algorithms.objectEquals(derivedProfile, "truck") ? allowPrivateForTruck : allowPrivate;
 	}
 
 	@Override

@@ -51,6 +51,7 @@ import net.osmand.plus.auto.screens.RequestPermissionScreen.LocationPermissionCh
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
+import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -58,6 +59,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
@@ -79,7 +81,7 @@ import java.util.List;
  * Session class for the Navigation sample app.
  */
 public class NavigationSession extends Session implements NavigationListener, OsmAndLocationListener,
-		DefaultLifecycleObserver, IRouteInformationListener {
+		DefaultLifecycleObserver, IRouteInformationListener, RouteCalculationProgressListener {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(NavigationSession.class);
 
@@ -124,6 +126,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private NavigationManager navigationManager;
 	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
+	private boolean privateAccessScreenShown;
+	private boolean pendingShowPreviewScreen;
 
 	NavigationSession() {
 		getLifecycle().addObserver(this);
@@ -203,6 +207,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (!app.isAppInForegroundOnRootDevice()) {
 			checkAppInitialization(new RestoreNavigationHelper(app, null));
 		}
+		app.getRoutingHelper().addCalculationProgressListener(this);
 	}
 
 	@Override
@@ -230,6 +235,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 		app.getOsmandMap().getMapView().setupRenderingView();
 		app.onCarNavigationSessionStop(this);
+		app.getRoutingHelper().removeCalculationProgressListener(this);
 	}
 
 	@Override
@@ -483,6 +489,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void showRoutePreview() {
+		if (privateAccessScreenShown) {
+			pendingShowPreviewScreen = true;
+			return;
+		}
 		OsmandApplication app = getApp();
 		CarContext context = getCarContext();
 		ScreenManager screenManager = context.getCarService(ScreenManager.class);
@@ -734,5 +744,59 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		} else {
 			restoreNavigationHelper.checkRestoreRoutingMode();
 		}
+	}
+
+	public void showMissingMapsScreen() {
+		CarContext carContext = getCarContext();
+		if (carContext != null) {
+			carContext.getCarService(ScreenManager.class).push(new MissingMapsScreen(carContext));
+		}
+	}
+
+	@Override
+	public void onCalculationStart() {
+
+	}
+
+	@Override
+	public void onUpdateCalculationProgress(int progress) {
+
+	}
+
+	@Override
+	public void onRequestPrivateAccessRouting() {
+		if (routingHelper.isRouteCalculated()) {
+			RoutingHelper routingHelper = getApp().getRoutingHelper();
+			ApplicationMode routingProfile = routingHelper.getAppMode();
+			OsmandSettings settings = getApp().getSettings();
+			if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
+				List<ApplicationMode> modes = ApplicationMode.values(getApp());
+				for (ApplicationMode mode : modes) {
+					if (!settings.getAllowPrivatePreference(mode).getModeValue(mode)) {
+						settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
+					}
+				}
+			}
+			OsmandPreference<Boolean> allowPrivate = settings.getAllowPrivatePreference(routingProfile);
+			if (!allowPrivate.getModeValue(routingProfile)) {
+				privateAccessScreenShown = true;
+				getCarContext().getCarService(ScreenManager.class).pushForResult(new PrivateAccessScreen(getCarContext()), result -> {
+					privateAccessScreenShown = false;
+					if(result != null && !((boolean) result)) {
+						pendingShowPreviewScreen = false;
+						getApp().stopNavigation();
+					}
+					if (pendingShowPreviewScreen) {
+						pendingShowPreviewScreen = false;
+						showRoutePreview();
+					}
+				});
+			}
+		}
+	}
+
+	@Override
+	public void onCalculationFinish() {
+
 	}
 }

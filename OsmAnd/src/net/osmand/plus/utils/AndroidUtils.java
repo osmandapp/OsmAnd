@@ -18,8 +18,10 @@ import android.app.KeyguardManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -1502,5 +1504,19 @@ public class AndroidUtils {
 	@NonNull
 	public static OsmandApplication getApp(@NonNull Context context) {
 		return ((OsmandApplication) context.getApplicationContext());
+	}
+
+	public static void registerBroadCastReceiver(@NonNull Activity activity, @NonNull String action, @NonNull BroadcastReceiver receiver) {
+		registerBroadCastReceiver(activity, action, receiver, false);
+	}
+
+	public static void registerBroadCastReceiver(@NonNull Activity activity, @NonNull String action, @NonNull BroadcastReceiver receiver, boolean export) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			// For API level 33 and above
+			activity.registerReceiver(receiver, new IntentFilter(action), export ? Context.RECEIVER_EXPORTED : Context.RECEIVER_NOT_EXPORTED);
+		} else {
+			// For older API levels
+			activity.registerReceiver(receiver, new IntentFilter(action));
+		}
 	}
 }

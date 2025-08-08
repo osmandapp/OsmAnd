@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="private_access">Private access</string>
+    <string name="private_access_routing_req_short">Your destination is in a private area. Allow using private roads?</string>
+    <string name="view_on_phone">View on Phone</string>
     <string name="altitude_metrics_description">Sets the display unit for altitude in widgets and statistics.</string>
     <string name="write_location_provider_description">Save location provider to each track point while recording</string>
     <string name="write_location_provider">Write Location Provider</string>
