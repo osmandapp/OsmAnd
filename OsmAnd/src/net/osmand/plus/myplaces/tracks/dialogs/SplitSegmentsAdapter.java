@@ -345,27 +345,27 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 					speedSection.setVisibility(View.GONE);
 				}
 
-
-				View hrDivider = convertView.findViewById(R.id.hr_divider);
-				View hrSection = convertView.findViewById(R.id.hr_container);
+				ViewGroup hrBlock = convertView.findViewById(R.id.hr_block);
+				View hrDivider = hrBlock.findViewById(R.id.divider);
+				View hrSection = hrBlock.findViewById(R.id.container);
 				if (analysis.getAvgSensorHr() > 0 || analysis.getMaxSensorHr() > 0 || analysis.getMinSensorHr() > 0) {
 					String avgHr = getString(R.string.ltr_or_rtl_combine_via_space, Math.round(analysis.getAvgSensorHr()), getString(R.string.beats_per_minute_short));
-					((TextView) convertView.findViewById(R.id.hr_average_value))
+					((TextView) hrBlock.findViewById(R.id.first_value))
 							.setText(avgHr);
 
 					String maxHr = getString(R.string.ltr_or_rtl_combine_via_space, analysis.getMaxSensorHr(), getString(R.string.beats_per_minute_short));
-					((TextView) convertView.findViewById(R.id.hr_max_value))
+					((TextView) hrBlock.findViewById(R.id.second_value))
 							.setText(maxHr);
 
 					String minHr = getString(R.string.ltr_or_rtl_combine_via_space, analysis.getMinSensorHr(), getString(R.string.beats_per_minute_short));
-					((TextView) convertView.findViewById(R.id.hr_min_value))
+					((TextView) hrBlock.findViewById(R.id.third_value))
 							.setText(minHr);
 
-					((ImageView) convertView.findViewById(R.id.hr_average_icon))
+					((ImageView) hrBlock.findViewById(R.id.first_icon))
 							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
-					((ImageView) convertView.findViewById(R.id.hr_max_icon))
+					((ImageView) hrBlock.findViewById(R.id.second_icon))
 							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
-					((ImageView) convertView.findViewById(R.id.hr_min_icon))
+					((ImageView) hrBlock.findViewById(R.id.third_icon))
 							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 
 					hrDivider.setVisibility(View.VISIBLE);

@@ -123,7 +123,9 @@ class GpxTrackAnalysis {
 		get() = getGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE) as Int
 		set(value) = setGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE, value)
 
-	var minSensorHr: Int = 0
+	var minSensorHr: Int
+		get() = getGpxParameter(GpxParameter.MIN_SENSOR_HEART_RATE) as Int
+		set(value) = setGpxParameter(GpxParameter.MIN_SENSOR_HEART_RATE, value)
 
 	var points: Int
 		get() = getGpxParameter(GpxParameter.POINTS) as Int
