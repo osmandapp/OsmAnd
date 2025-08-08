@@ -152,6 +152,7 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_CADENCE);
 			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_CADENCE);
 			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_HEART_RATE);
+			addIfMissingGpxTableColumn(columnNames, db, MIN_SENSOR_HEART_RATE);
 			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_HEART_RATE);
 			addIfMissingGpxTableColumn(columnNames, db, DATA_VERSION);
 			addIfMissingGpxTableColumn(columnNames, db, APPEARANCE_LAST_MODIFIED_TIME);

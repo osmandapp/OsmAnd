@@ -558,6 +558,9 @@
 
 			</LinearLayout>
 
+			<include android:id="@+id/hr_block"
+				layout="@layout/gpx_split_segment_block"/>
+
 		</LinearLayout>
 
 	</LinearLayout>

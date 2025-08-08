@@ -163,27 +163,36 @@ class TrkSegment : GpxExtensions() {
 		}
 	}
 
-	fun splitByUpDownHills(): List<GpxTrackAnalysis> {
-		return GpxUtilities.convert(splitBySlopeTypeUsingExtremums())
+	fun splitByUpDownHills(pointsAnalyser: GpxTrackAnalysis.TrackPointsAnalyser): List<GpxTrackAnalysis> {
+		return GpxUtilities.convert(splitBySlopeTypeUsingExtremums(), pointsAnalyser)
 	}
 
-	fun splitByDistance(meters: Double, joinSegments: Boolean): List<GpxTrackAnalysis> {
+	fun splitByDistance(
+		meters: Double,
+		joinSegments: Boolean,
+		pointsAnalyser: GpxTrackAnalysis.TrackPointsAnalyser
+	): List<GpxTrackAnalysis> {
 		return split(
 			SplitMetric.DistanceSplitMetric(),
-			SplitMetric.TimeSplitMetric(), meters, joinSegments)
+			SplitMetric.TimeSplitMetric(), meters, joinSegments, pointsAnalyser)
 	}
 
-	fun splitByTime(seconds: Int, joinSegments: Boolean): List<GpxTrackAnalysis> {
+	fun splitByTime(
+		seconds: Int,
+		joinSegments: Boolean,
+		pointsAnalyser: GpxTrackAnalysis.TrackPointsAnalyser
+	): List<GpxTrackAnalysis> {
 		return split(
 			SplitMetric.TimeSplitMetric(),
-			SplitMetric.DistanceSplitMetric(), seconds.toDouble(), joinSegments)
+			SplitMetric.DistanceSplitMetric(), seconds.toDouble(), joinSegments, pointsAnalyser)
 	}
 
 	private fun split(
 		metric: SplitMetric,
 		secondaryMetric: SplitMetric,
 		metricLimit: Double,
-		joinSegments: Boolean
+		joinSegments: Boolean,
+		pointsAnalyser: GpxTrackAnalysis.TrackPointsAnalyser
 	): List<GpxTrackAnalysis> {
 		val splitSegments = mutableListOf<SplitSegment>()
 		SplitMetric.splitSegment(
@@ -194,6 +203,6 @@ class TrkSegment : GpxExtensions() {
 			this,
 			joinSegments
 		)
-		return GpxUtilities.convert(splitSegments)
+		return GpxUtilities.convert(splitSegments, pointsAnalyser)
 	}
 }
