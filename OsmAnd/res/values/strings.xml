@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="backup_delete_data_warning_extended">This action will permanently remove all selected data from the cloud. It will not be possible to restore it later.</string>
     <string name="amount_of_total_used">%1$s of %2$s used</string>
     <string name="delete_data">Delete data</string>
     <string name="manage_storage_delete_data_dialog_summary">Are you sure you want to delete %1$s from OsmAnd Cloud?\n\nYou can restore them from the Trash within 30 days.</string>

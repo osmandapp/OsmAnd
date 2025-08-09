@@ -60,8 +60,10 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 				.setLayoutId(R.layout.bottom_sheet_item_title)
 				.create());
 
+		String baseDescription = getString(clearType.descriptionId);
+		String extendedDescription = getString(R.string.backup_delete_data_warning_extended);
 		items.add(new LongDescriptionItem.Builder()
-				.setDescription(getString(clearType.descriptionId))
+				.setDescription(baseDescription + "\n\n" + extendedDescription)
 				.setLayoutId(R.layout.bottom_sheet_item_description_long)
 				.create());
 
