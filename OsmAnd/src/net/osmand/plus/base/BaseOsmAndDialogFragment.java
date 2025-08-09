@@ -1,29 +1,24 @@
 package net.osmand.plus.base;
 
-import android.graphics.drawable.Drawable;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public abstract class BaseOsmAndDialogFragment extends DialogFragment implements AppModeDependentComponent {
+public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -39,10 +34,12 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment implements
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
 		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
-
 		updateNightMode();
-		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
-		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+	}
+
+	protected void updateNightMode() {
+		nightMode = resolveNightMode();
+		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 	}
 
 	@Override
@@ -51,65 +48,54 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment implements
 		saveAppModeToBundle(appMode, outState);
 	}
 
-	protected void updateNightMode() {
-		nightMode = isNightMode(isUsedOnMap());
-		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+	@NonNull
+	public Context getThemedContext() {
+		return new ContextThemeWrapper(requireActivity(), getDialogThemeId());
 	}
 
-	public void setAppMode(@NonNull ApplicationMode appMode) {
-		this.appMode = appMode;
+	@StyleRes
+	protected int getDialogThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	@NonNull
-	public ApplicationMode getAppMode() {
-		return appMode;
+	@Override
+	public OsmandApplication getApp() {
+		return app;
+	}
+
+	@NonNull
+	@Override
+	public LayoutInflater getThemedInflater() {
+		return themedInflater;
+	}
+
+	@NonNull
+	@Override
+	public ThemeUsageContext getThemeUsageContext() {
+		return ThemeUsageContext.valueOf(isUsedOnMap());
 	}
 
 	protected boolean isUsedOnMap() {
 		return false;
 	}
 
-	@NonNull
-	protected View inflate(@LayoutRes int layoutRedId) {
-		return inflate(layoutRedId, null);
+	public final void setAppMode(@Nullable ApplicationMode appMode) {
+		this.appMode = appMode;
 	}
 
 	@NonNull
-	protected View inflate(@LayoutRes int layoutResId, @Nullable ViewGroup root) {
-		return inflate(layoutResId, root, false);
+	public final ApplicationMode getAppMode() {
+		return appMode;
 	}
 
 	@NonNull
-	protected View inflate(@LayoutRes int layoutResId, @Nullable ViewGroup root, boolean attachToRoot) {
-		return themedInflater.inflate(layoutResId, root, attachToRoot);
+	@Override
+	public UiUtilities getIconsCache() {
+		return iconsCache;
 	}
 
-	protected int getDimension(int id) {
-		return app.getResources().getDimensionPixelSize(id);
-	}
-
-	@ColorInt
-	protected int getColor(@ColorRes int colorId) {
-		return ColorUtilities.getColor(app, colorId);
-	}
-
-	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
-		return iconsCache.getPaintedIcon(id, color);
-	}
-
-	protected Drawable getIcon(@DrawableRes int id) {
-		return iconsCache.getIcon(id);
-	}
-
-	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
-		return iconsCache.getIcon(id, colorId);
-	}
-
-	protected Drawable getContentIcon(@DrawableRes int id) {
-		return iconsCache.getThemedIcon(id);
-	}
-
-	protected boolean isNightMode(boolean usedOnMap) {
-		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
+	public boolean isNightMode() {
+		return nightMode;
 	}
 }

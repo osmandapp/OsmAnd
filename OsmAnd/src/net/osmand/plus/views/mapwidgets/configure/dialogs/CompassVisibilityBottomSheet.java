@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -14,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -31,32 +29,25 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 
 	public static final String TAG = CompassVisibilityBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
 	private CompassButtonState buttonState;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 		buttonState = app.getMapButtonsHelper().getCompassButtonState();
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(createView())
-				.create());
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(createView()).create());
 	}
 
 	@NonNull
 	private View createView() {
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.fragment_compass_visibility_bottom_sheet_dialog, null);
-
+		View view = inflate(R.layout.fragment_compass_visibility_bottom_sheet_dialog);
 		setupVisibilityItem(CompassVisibility.ALWAYS_VISIBLE, view);
 		setupVisibilityItem(CompassVisibility.ALWAYS_HIDDEN, view);
 		setupVisibilityItem(CompassVisibility.VISIBLE_IF_MAP_ROTATED, view);
-
 		return view;
 	}
 
@@ -81,13 +72,13 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 
 		container.setOnClickListener(v -> {
 			buttonState.setVisibility(visibility, appMode);
-			Fragment target = getTargetFragment();
-			if (target instanceof CompassVisibilityUpdateListener) {
-				((CompassVisibilityUpdateListener) target).onCompassVisibilityUpdated(visibility);
+			if (getTargetFragment() instanceof CompassVisibilityUpdateListener listener) {
+				listener.onCompassVisibilityUpdated(visibility);
 			}
 			dismiss();
 		});
-		container.setBackground(UiUtilities.getColoredSelectableDrawable(app, ColorUtilities.getActiveColor(app, nightMode)));
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		container.setBackground(UiUtilities.getColoredSelectableDrawable(app, activeColor));
 	}
 
 	@Nullable
@@ -105,8 +96,7 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @Nullable Fragment target,
-	                                @NonNull ApplicationMode appMode) {
+	                                @Nullable Fragment target, @NonNull ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(APP_MODE_KEY, appMode.getStringKey());

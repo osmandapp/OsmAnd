@@ -28,7 +28,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.chooseplan.PromoCompanyFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -48,7 +48,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
-public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
+public class PurchaseItemFragment extends BaseFullScreenDialogFragment implements InAppPurchaseListener {
 
 	public static final String TAG = PurchaseItemFragment.class.getName();
 

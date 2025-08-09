@@ -42,7 +42,7 @@ public class CycleRoutesFragment extends MapRoutesFragment {
 		int appModeColor = ColorUtilities.getAppModeColor(app, nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
 		ImageView icon = container.findViewById(R.id.icon);
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bicycle_dark, enabled ? appModeColor : disabledColor));
+		icon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_bicycle_dark, enabled ? appModeColor : disabledColor));
 	}
 
 	@Override

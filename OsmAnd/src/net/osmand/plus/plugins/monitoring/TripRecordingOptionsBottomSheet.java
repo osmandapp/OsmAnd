@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_DYNAMIC_ITEMS;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,11 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -25,11 +22,10 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.DismissTargetFragment;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.ItemType;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
@@ -40,8 +36,6 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 	public static final String ACTION_CLEAR_DATA = "action_clear_data";
 	private static final int SAVE_UPDATE_INTERVAL = 1000;
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private SavingTrackHelper helper;
 
 	private View buttonClear;
@@ -68,7 +62,7 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			TripRecordingOptionsBottomSheet fragment = new TripRecordingOptionsBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
@@ -77,21 +71,18 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		settings = app.getSettings();
 		helper = app.getSavingTrackHelper();
 		selectedGpxFile = helper.getCurrentTrack();
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		FragmentManager fragmentManager = getFragmentManager();
-		int dp16 = getResources().getDimensionPixelSize(R.dimen.content_padding);
-		int dp36 = getResources().getDimensionPixelSize(R.dimen.context_menu_controller_height);
+		int dp16 = getDimensionPixelSize(R.dimen.content_padding);
+		int dp36 = getDimensionPixelSize(R.dimen.context_menu_controller_height);
 
-		buttonClear = createItem(inflater, ItemType.CLEAR_DATA, hasDataToSave());
-		View buttonDiscard = createItem(inflater, ItemType.STOP_AND_DISCARD);
-		View buttonOnline = createItem(inflater, settings.LIVE_MONITORING.get()
+		buttonClear = createItem(themedInflater, ItemType.CLEAR_DATA, hasDataToSave());
+		View buttonDiscard = createItem(themedInflater, ItemType.STOP_AND_DISCARD);
+		View buttonOnline = createItem(themedInflater, settings.LIVE_MONITORING.get()
 				? ItemType.STOP_ONLINE : ItemType.START_ONLINE);
-		buttonSave = createItem(inflater, ItemType.SAVE, hasDataToSave());
-		View buttonSegment = createItem(inflater, ItemType.START_NEW_SEGMENT, wasTrackMonitored());
+		buttonSave = createItem(themedInflater, ItemType.SAVE, hasDataToSave());
+		View buttonSegment = createItem(themedInflater, ItemType.START_NEW_SEGMENT, wasTrackMonitored());
 
 		items.add(new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.shared_string_options))
@@ -99,7 +90,7 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 				.setLayoutId(R.layout.bottom_sheet_item_title)
 				.create());
 
-		items.add(new DividerSpaceItem(app, getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
+		items.add(new DividerSpaceItem(app, getDimensionPixelSize(R.dimen.content_padding_small)));
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonClear)
@@ -156,7 +147,7 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 				})
 				.create());
 
-		items.add(new DividerSpaceItem(app, getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
+		items.add(new DividerSpaceItem(app, getDimensionPixelSize(R.dimen.content_padding_small)));
 	}
 
 	@Override
@@ -277,18 +268,9 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 		}
 	}
 
-	@Nullable
-	public MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
-	}
-
 	@Override
 	protected int getDismissButtonHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+		return getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
 	@Override

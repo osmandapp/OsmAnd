@@ -9,15 +9,14 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.base.BaseOsmAndFragment
+import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 
-abstract class OBDDevicesBaseFragment : BaseOsmAndFragment() {
+abstract class OBDDevicesBaseFragment : BaseFullScreenFragment() {
 
 	protected val vehicleMetricsPlugin =
 		PluginsHelper.requirePlugin(VehicleMetricsPlugin::class.java)
@@ -61,10 +60,6 @@ abstract class OBDDevicesBaseFragment : BaseOsmAndFragment() {
 
 	protected val elevation: Float
 		get() = 5.0f
-
-	protected fun requireMapActivity(): MapActivity {
-		return requireActivity() as MapActivity
-	}
 
 	companion object {
 		val TAG: String = OBDDevicesBaseFragment::class.java.simpleName

@@ -178,9 +178,8 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View root = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_add_gpx, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View root = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_add_gpx, parent, false);
 		setupPointLocationView(root.findViewById(R.id.point_location_container), mapActivity);
 		parent.addView(root);
 

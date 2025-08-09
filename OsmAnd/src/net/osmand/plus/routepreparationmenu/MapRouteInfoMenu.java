@@ -699,9 +699,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			} else if (card instanceof PublicTransportNotFoundWarningCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
 			} else if (card instanceof PublicTransportNotFoundSettingsWarningCard) {
-				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
-				avoidRoadsFragment.setHideImpassableRoads(true);
-				avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
+				AvoidRoadsBottomSheetDialogFragment.showInstance(mapActivity, null, null, true, null);
 			} else if (card instanceof PedestrianRouteCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
 			} else if (card instanceof AttachTrackToRoadsBannerCard) {
@@ -1984,8 +1982,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				selectNavPointController.selectMapMarker(mapActivity, marker, pointType);
 				updateMenu();
 			} else {
-				MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);
-				selectionFragment.show(mapActivity.getSupportFragmentManager(), MapMarkerSelectionFragment.TAG);
+				MapMarkerSelectionFragment.showInstance(mapActivity, pointType);
 			}
 		}
 	}

@@ -99,12 +99,7 @@ public class UploadOpenstreetmapPointAsyncTask
 	protected void onPreExecute() {
 		interruptUploading = false;
 
-		progress.setOnDismissListener(new DialogInterface.OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				UploadOpenstreetmapPointAsyncTask.this.setInterruptUploading(true);
-			}
-		});
+		progress.setOnDismissListener(dialog -> UploadOpenstreetmapPointAsyncTask.this.setInterruptUploading(true));
 		progress.setMax(listSize);
 		progress.setRetainInstance(true);
 	}

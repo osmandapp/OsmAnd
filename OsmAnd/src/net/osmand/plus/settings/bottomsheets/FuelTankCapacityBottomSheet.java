@@ -19,6 +19,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -39,6 +40,7 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 
 	private VolumeUnit volumeUnit;
 
+	@NonNull
 	@SuppressLint("ClickableViewAccessibility")
 	protected BaseBottomSheetItem createBottomSheetItem(@NonNull OsmandApplication app, @NonNull View mainView) {
 		volumeUnit = app.getSettings().UNIT_OF_VOLUME.getModeValue(getAppMode());
@@ -79,7 +81,7 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 	public List<ChipItem> collectChipItems(@NonNull OsmandApplication app,
 	                                       @NonNull VolumeUnit volumeUnit) {
 		List<ChipItem> chips = new ArrayList<>();
-		String none = app.getString(R.string.shared_string_none);
+		String none = getString(R.string.shared_string_none);
 		ChipItem chip = new ChipItem(none);
 		chip.title = none;
 		chip.contentDescription = none;
@@ -89,7 +91,7 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 		DecimalFormat formatter = new DecimalFormat("0.#", new DecimalFormatSymbols(Locale.US));
 		for (int i = 1; i <= 11; i++) {
 			float value = 10 * i;
-			String pattern = app.getString(R.string.ltr_or_rtl_combine_via_space);
+			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
 			String valueStr = formatter.format(value);
 			String title = String.format(pattern, valueStr, volumeUnit.getUnitSymbol(app));
 			chip = new ChipItem(title);
@@ -131,19 +133,15 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 
 	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
 	                                boolean usedOnMap, @Nullable ApplicationMode appMode) {
-		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, key);
-				FuelTankCapacityBottomSheet fragment = new FuelTankCapacityBottomSheet();
-				fragment.setArguments(args);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PREFERENCE_ID, key);
+			FuelTankCapacityBottomSheet fragment = new FuelTankCapacityBottomSheet();
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fm, TAG);
 		}
 	}
 }

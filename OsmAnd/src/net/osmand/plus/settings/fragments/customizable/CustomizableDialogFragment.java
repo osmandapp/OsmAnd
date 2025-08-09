@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.data.DisplayData;
@@ -23,7 +23,7 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
 import net.osmand.plus.utils.ColorUtilities;
 
-public abstract class CustomizableDialogFragment extends BaseOsmAndDialogFragment
+public abstract class CustomizableDialogFragment extends BaseFullScreenDialogFragment
 		implements IDialog, IAskDismissDialog, IAskRefreshDialogCompletely, IDialogNightModeInfoProvider {
 
 	private static final String PROCESS_ID_ATTR = "process_id";
@@ -86,11 +86,6 @@ public abstract class CustomizableDialogFragment extends BaseOsmAndDialogFragmen
 
 	private void refreshDisplayData() {
 		displayData = manager.getDisplayData(processId);
-	}
-
-	@Override
-	public boolean isNightMode() {
-		return nightMode;
 	}
 
 	protected void onItemClicked(@NonNull DisplayItem item) {

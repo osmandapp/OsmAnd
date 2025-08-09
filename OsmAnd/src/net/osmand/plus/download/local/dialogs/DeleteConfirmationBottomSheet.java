@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
@@ -36,9 +34,8 @@ public class DeleteConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Fragment target = getTargetFragment();
-		if (target instanceof ConfirmDeletionListener) {
-			((ConfirmDeletionListener) target).onDeletionConfirmed(localItem);
+		if (getTargetFragment() instanceof ConfirmDeletionListener listener) {
+			listener.onDeletionConfirmed(localItem);
 		}
 		dismiss();
 	}
@@ -56,9 +53,8 @@ public class DeleteConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 	@Override
 	protected void setupRightButton() {
 		super.setupRightButton();
-		OsmandApplication app = requiredMyApplication();
 		TextView textView = rightButton.findViewById(R.id.button_text);
-		textView.setTextColor(ContextCompat.getColor(app, R.color.deletion_color_warning));
+		textView.setTextColor(getColor(R.color.deletion_color_warning));
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package net.osmand.plus.base;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,11 +18,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -41,7 +36,6 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 	protected List<BaseBottomSheetItem> items = new ArrayList<>();
 
 	protected boolean usedOnMap = true;
-	protected boolean nightMode;
 	protected boolean portrait;
 
 	protected DialogButton dismissButton;
@@ -54,20 +48,24 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 	}
 
 	@Override
+	public boolean isUsedOnMap() {
+		return usedOnMap;
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 		}
-		nightMode = isNightMode(requiredMyApplication());
+		super.onCreate(savedInstanceState);
 		portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View mainView = themedInflater.inflate(R.layout.bottom_sheet_behaviour_base, parent, false);
+		updateNightMode();
+		View mainView = inflate(R.layout.bottom_sheet_behaviour_base, parent, false);
 		itemsContainer = mainView.findViewById(R.id.items_container);
 
 		View scrollView = mainView.findViewById(R.id.bottom_sheet_scroll_view);
@@ -121,7 +119,7 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 			Window window = dialog != null ? dialog.getWindow() : null;
 			if (window != null) {
 				WindowManager.LayoutParams params = window.getAttributes();
-				params.width = activity.getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+				params.width = getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 				window.setAttributes(params);
 			}
 		}
@@ -149,16 +147,6 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 		for (BaseBottomSheetItem item : items) {
 			item.inflate(activity, itemsContainer, nightMode);
 		}
-	}
-
-	@Override
-	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
-	}
-
-	@ColorRes
-	protected int getActiveColorId() {
-		return nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
 	}
 
 	private void updateBackground() {
@@ -239,9 +227,5 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 			return ColorUtilities.getListBgColorId(nightMode);
 		}
 		return nightMode ? R.drawable.bottom_sheet_buttons_bg_dark : R.drawable.bottom_sheet_buttons_bg_light;
-	}
-
-	protected boolean isNightMode(@NonNull OsmandApplication app) {
-		return app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 	}
 }

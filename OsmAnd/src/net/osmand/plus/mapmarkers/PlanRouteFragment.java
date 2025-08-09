@@ -32,10 +32,9 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmAndTaskManager;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
@@ -48,7 +47,6 @@ import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -62,7 +60,7 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanRouteFragment extends BaseOsmAndFragment
+public class PlanRouteFragment extends BaseFullScreenFragment
 		implements OsmAndLocationListener, IMapDisplayPositionProvider {
 
 	public static final String TAG = "PlanRouteFragment";
@@ -112,7 +110,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = getMapActivity();
-		markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		markersHelper = app.getMapMarkersHelper();
 		planRouteContext = markersHelper.getPlanRouteContext();
 		planRouteContext.setListener(new MarkersPlanRouteContext.PlanRouteProgressListener() {
 			@Override
@@ -311,7 +309,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			public void onDragEnded(RecyclerView.ViewHolder holder) {
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0) {
-					mapActivity.getMyApplication().getMapMarkersHelper().saveGroups(false);
+					app.getMapMarkersHelper().saveGroups(false);
 					mapActivity.refreshMap();
 					adapter.reloadData();
 					try {
@@ -341,7 +339,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	public void onResume() {
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
-		mapActivity.getMyApplication().getLocationProvider().addLocationListener(this);
+		app.getLocationProvider().addLocationListener(this);
 		mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 	}
 
@@ -350,7 +348,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 		super.onPause();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMyApplication().getLocationProvider().removeLocationListener(this);
+			app.getLocationProvider().removeLocationListener(this);
 		}
 	}
 
@@ -377,7 +375,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	public void updateLocation(Location loc) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			Location location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			Location location = app.getLocationProvider().getLastStaleKnownLocation();
 			boolean newLocation = this.location == null || location == null;
 			boolean locationChanged = this.location != null && location != null
 					&& this.location.getLatitude() != location.getLatitude()
@@ -385,7 +383,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			boolean farEnough = locationChanged && MapUtils.getDistance(this.location.getLatitude(), this.location.getLongitude(),
 					location.getLatitude(), location.getLongitude()) >= MIN_DISTANCE_FOR_RECALCULATE;
 			if (newLocation || farEnough) {
-				mapActivity.getMyApplication().runInUIThread(() -> {
+				app.runInUIThread(() -> {
 					PlanRouteFragment.this.location = location;
 					adapter.reloadData();
 					try {
@@ -399,21 +397,12 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 		}
 	}
 
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
 	private MapMarkersLayer getMapMarkersLayer() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			return mapActivity.getMapLayers().getMapMarkersLayer();
 		}
 		return null;
-	}
-
-	@Override
-	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int id) {
@@ -473,9 +462,9 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			public void navigateOnClick() {
 				if (mapActivity != null) {
 					boolean hasTargets = false;
-					TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
+					TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 					List<MapMarker> markers = markersHelper.getSelectedMarkers();
-					if (markers.size() > 0) {
+					if (!markers.isEmpty()) {
 						int i = 0;
 						if (markersHelper.isStartFromMyLocation()) {
 							targetPointsHelper.clearStartPoint(false);
@@ -491,10 +480,10 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 									m.getPointDescription(mapActivity));
 							targetPoints.add(t);
 						}
-						if (mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get()) {
+						if (settings.ROUTE_MAP_MARKERS_ROUND_TRIP.get()) {
 							TargetPoint end = targetPointsHelper.getPointToStart();
 							if (end == null) {
-								Location loc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+								Location loc = app.getLocationProvider().getLastKnownLocation();
 								if (loc != null) {
 									end = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
 											new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
@@ -527,7 +516,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			@Override
 			public void doorToDoorOnClick() {
 				if (mapActivity != null) {
-					OsmandApplication app = mapActivity.getMyApplication();
 					Location myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 					boolean startFromLocation = app.getMapMarkersHelper().isStartFromMyLocation() && myLoc != null;
 					if (selectedCount > (startFromLocation ? 0 : 1)) {
@@ -551,7 +539,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	private void roundTripOnClick() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 			settings.ROUTE_MAP_MARKERS_ROUND_TRIP.set(!settings.ROUTE_MAP_MARKERS_ROUND_TRIP.get());
 			adapter.reloadData();
 			adapter.notifyDataSetChanged();
@@ -615,7 +602,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			setupAppModesBtn();
 			updateMapDisplayPosition();
 
-			selectedCount = mapActivity.getMyApplication().getMapMarkersHelper().getSelectedMarkersCount();
+			selectedCount = app.getMapMarkersHelper().getSelectedMarkersCount();
 			planRouteContext.recreateSnapTrkSegment(planRouteContext.isAdjustMapOnStart());
 			planRouteContext.setAdjustMapOnStart(true);
 			mapActivity.refreshMap();
@@ -704,13 +691,13 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 				WptPt pt2 = snapTrkSegment.getPoints().get(i);
 				dist += MapUtils.getDistance(pt1.getLat(), pt1.getLon(), pt2.getLat(), pt2.getLon());
 			}
-			distanceTv.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()) + (defaultMode ? "" : ","));
+			distanceTv.setText(OsmAndFormatter.getFormattedDistance(dist, app) + (defaultMode ? "" : ","));
 
 			if (defaultMode) {
 				timeTv.setText("");
 			} else {
 				int seconds = (int) (dist / appMode.getDefaultSpeed());
-				timeTv.setText("~ " + OsmAndFormatter.getFormattedDuration(seconds, mapActivity.getMyApplication()));
+				timeTv.setText("~ " + OsmAndFormatter.getFormattedDuration(seconds, app));
 			}
 
 			countTv.setText(mapActivity.getString(R.string.shared_string_markers) + ": " + selectedCount);
@@ -757,12 +744,12 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 
 	private void showRouteOnMap(List<WptPt> points) {
 		MapActivity mapActivity = getMapActivity();
-		if (points.size() > 0 && mapActivity != null) {
+		if (!points.isEmpty() && mapActivity != null) {
 			OsmandMapTileView mapView = mapActivity.getMapView();
 			double left = 0, right = 0;
 			double top = 0, bottom = 0;
-			Location myLocation = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-			if (mapActivity.getMyApplication().getMapMarkersHelper().isStartFromMyLocation() && myLocation != null) {
+			Location myLocation = app.getLocationProvider().getLastStaleKnownLocation();
+			if (app.getMapMarkersHelper().isStartFromMyLocation() && myLocation != null) {
 				left = myLocation.getLongitude();
 				right = myLocation.getLongitude();
 				top = myLocation.getLatitude();

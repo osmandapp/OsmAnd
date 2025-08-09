@@ -26,7 +26,7 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherContour;
@@ -56,7 +56,7 @@ import org.apache.commons.logging.Log;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class WeatherForecastFragment extends BaseOsmAndFragment implements WeatherWebClientListener {
+public class WeatherForecastFragment extends BaseFullScreenFragment implements WeatherWebClientListener {
 
 	public static final String TAG = WeatherForecastFragment.class.getSimpleName();
 	private final Log log = PlatformUtil.getLog(WeatherForecastFragment.class);
@@ -527,21 +527,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			plugin.setSelectedContoursType(previousWeatherContour);
 		}
 		super.onDestroy();
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return ((MapActivity) requireActivity());
 	}
 
 	@NonNull

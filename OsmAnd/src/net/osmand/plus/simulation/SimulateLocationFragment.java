@@ -21,7 +21,7 @@ import net.osmand.IndexConstants;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.GpxDialogs;
 import net.osmand.plus.track.SelectTrackTabsFragment;
@@ -31,7 +31,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class SimulateLocationFragment extends BaseOsmAndFragment implements SelectTrackTabsFragment.GpxFileSelectionListener {
+public class SimulateLocationFragment extends BaseFullScreenFragment implements SelectTrackTabsFragment.GpxFileSelectionListener {
 
 	public static final String TAG = SimulateLocationFragment.class.getSimpleName();
 

@@ -16,14 +16,14 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.track.BaseTracksTabsFragment;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.util.MapUtils;
 
 import java.util.Set;
 
-public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer {
+public class TrackItemsFragment extends BaseFullScreenFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer {
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 

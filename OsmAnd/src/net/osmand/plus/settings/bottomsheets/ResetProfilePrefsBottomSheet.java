@@ -79,8 +79,7 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	protected void onRightBottomButtonClick() {
 		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof ResetAppModePrefsListener) {
-			ResetAppModePrefsListener listener = (ResetAppModePrefsListener) targetFragment;
+		if (targetFragment instanceof ResetAppModePrefsListener listener) {
 			listener.resetAppModePrefs(getAppMode());
 		}
 		dismiss();

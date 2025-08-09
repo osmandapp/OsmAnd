@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -30,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -51,7 +49,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PrintDialogActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
@@ -92,7 +90,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
+public class ChooseRouteFragment extends BaseFullScreenFragment implements ContextMenuFragmentListener,
 		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
 
 	public static final String TAG = "ChooseRouteFragment";
@@ -305,16 +303,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return -1;
 	}
 
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
-	@Override
-	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
-	}
-
 	public boolean isPaused() {
 		return paused;
 	}
@@ -327,7 +315,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				gpxItem);
 
 		dismiss();
-		MapActivity.launchMapActivityMoveToTop(getMapActivity());
+		MapActivity.launchMapActivityMoveToTop(requireMapActivity());
 	}
 
 	public void dismiss() {

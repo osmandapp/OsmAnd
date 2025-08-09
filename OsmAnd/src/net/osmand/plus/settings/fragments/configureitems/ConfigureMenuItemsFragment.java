@@ -26,7 +26,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -41,7 +41,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.List;
 
-public class ConfigureMenuItemsFragment extends BaseOsmAndFragment implements CopyAppModePrefsListener, OnChangeSettingListener {
+public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implements CopyAppModePrefsListener, OnChangeSettingListener {
 
 	public static final String TAG = ConfigureMenuItemsFragment.class.getName();
 
@@ -167,21 +167,13 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment implements Co
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).disableDrawer();
-		}
+		callMapActivity(MapActivity::disableDrawer);
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).enableDrawer();
-		}
+		callMapActivity(MapActivity::enableDrawer);
 	}
 
 	@Override
