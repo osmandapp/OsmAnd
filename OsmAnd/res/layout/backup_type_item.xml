@@ -89,7 +89,7 @@
 				android:id="@+id/pro_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:src="@drawable/img_button_pro_day"
+				app:srcCompat="@drawable/img_button_pro_day"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:visibility="gone"/>
 

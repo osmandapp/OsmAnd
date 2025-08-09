@@ -104,6 +104,7 @@ public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 	                               @NonNull OnCompleteCallback callback) {
 		View container = view.findViewById(R.id.action_button_container);
 		container.setOnClickListener(enabled ? v -> callback.onComplete() : null);
+		container.setContentDescription(getString(R.string.shared_string_delete));
 
 		ImageView ivIcon = view.findViewById(R.id.action_button);
 		int color = enabled ? primaryIconColor : secondaryIconColor;

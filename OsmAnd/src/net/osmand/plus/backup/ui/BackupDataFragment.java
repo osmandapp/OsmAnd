@@ -84,14 +84,21 @@ public class BackupDataFragment extends BackupTypesFragment {
 			}
 		}
 		if (totalUsed > 0) {
-			long totalAvailable = controller.getMaximumAccountSize();
-			String summary = getString(R.string.amount_of_total_used,
-					AndroidUtils.formatSize(app, totalUsed),
-					AndroidUtils.formatSize(app, totalAvailable));
-			tvSummary.setText(summary);
+			long maximumAccountSize = controller.getMaximumAccountSize();
+			if (maximumAccountSize > 0) {
+				String summary = getString(R.string.amount_of_total_used,
+						formatSize(totalUsed), formatSize(maximumAccountSize));
+				tvSummary.setText(summary);
+			} else {
+				tvSummary.setText(formatSize(totalUsed));
+			}
 		} else {
 			tvSummary.setText(R.string.shared_string_none);
 		}
+	}
+
+	private String formatSize(long size) {
+		return AndroidUtils.formatSize(app, size);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull String processId) {
