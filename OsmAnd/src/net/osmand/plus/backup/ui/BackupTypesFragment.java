@@ -96,8 +96,8 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
-			controller.updateListeners(true);
 		}
+		controller.updateListeners(true);
 	}
 
 	@Override
@@ -129,6 +129,10 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
+		updateContent();
+	}
+
+	public void updateContent() {
 		controller.updateData();
 		if (isResumed() && adapter != null) {
 			adapter.notifyDataSetChanged();

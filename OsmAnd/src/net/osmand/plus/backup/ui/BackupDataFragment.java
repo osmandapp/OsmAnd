@@ -32,6 +32,23 @@ public class BackupDataFragment extends BackupTypesFragment {
 		return view;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (!controller.isBackupPreparing()) {
+			updateContent();
+		}
+	}
+
+	@Override
+	public void updateContent() {
+		super.updateContent();
+		View view = getView();
+		if (view != null) {
+			updateManageStorageSummary(view);
+		}
+	}
+
 	@NonNull
 	private View createManageStorageItem() {
 		View view = inflate(R.layout.preference_with_descr, null);
@@ -67,7 +84,7 @@ public class BackupDataFragment extends BackupTypesFragment {
 			}
 		}
 		if (totalUsed > 0) {
-			long totalAvailable = controller.getAvailableStorageSize();
+			long totalAvailable = controller.getMaximumAccountSize();
 			String summary = getString(R.string.amount_of_total_used,
 					AndroidUtils.formatSize(app, totalUsed),
 					AndroidUtils.formatSize(app, totalAvailable));

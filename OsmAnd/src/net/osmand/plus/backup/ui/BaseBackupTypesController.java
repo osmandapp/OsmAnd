@@ -3,13 +3,16 @@ package net.osmand.plus.backup.ui;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
+import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
+import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ui.BackupTypesAdapter.OnItemSelectedListener;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
@@ -34,7 +37,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public abstract class BaseBackupTypesController extends BaseDialogController
-		implements OnItemSelectedListener, OnClearTypesListener, OnDeleteFilesListener {
+		implements OnItemSelectedListener, OnClearTypesListener, OnDeleteFilesListener, OnPrepareBackupListener {
 
 	protected static final Log LOG = PlatformUtil.getLog(BaseBackupTypesController.class);
 
@@ -78,8 +81,10 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 	public void updateListeners(boolean register) {
 		if (register) {
 			backupHelper.getBackupListeners().addDeleteFilesListener(this);
+			backupHelper.addPrepareBackupListener(this);
 		} else {
 			backupHelper.getBackupListeners().removeDeleteFilesListener(this);
+			backupHelper.removePrepareBackupListener(this);
 		}
 	}
 
@@ -139,12 +144,25 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 		backupHelper.prepareBackup();
 	}
 
+	@Override
+	public void onBackupPreparing() {
+	}
+
+	@Override
+	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
+		screen.updateContent();
+	}
+
 	protected boolean isExportTypeAvailable(@NonNull ExportType exportType) {
 		return InAppPurchaseUtils.isExportTypeAvailable(app, exportType) || cloudRestore;
 	}
 
 	protected boolean isBackupAvailable() {
 		return InAppPurchaseUtils.isBackupAvailable(app) || cloudRestore;
+	}
+
+	protected boolean isBackupPreparing() {
+		return backupHelper.isBackupPreparing();
 	}
 
 	@NonNull
@@ -170,7 +188,7 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 		return Collections.emptyList();
 	}
 
-	public long getAvailableStorageSize() {
+	public long getMaximumAccountSize() {
 		return backupHelper.getMaximumAccountSize();
 	}
 }
