@@ -442,7 +442,7 @@
     <string name="poi_gymnastics">Turnen</string>
     <string name="poi_handball">Handbal</string>
     <string name="poi_horse_racing">Paardenrennen</string>
-    <string name="poi_ice_skating">Ijsschaatsen</string>
+    <string name="poi_ice_skating">IJsschaatsen</string>
     <string name="poi_telephone_exchange">Telefooncentrale</string>
     <string name="poi_waste_disposal">Afvalcontainer</string>
     <string name="poi_waste_basket">Afvalbak</string>
@@ -2351,7 +2351,7 @@
     <string name="poi_cuisine_bagel">Bagel</string>
     <string name="poi_cuisine_diner">Eethuis</string>
     <string name="poi_cuisine_sausage">Worst</string>
-    <string name="poi_cuisine_cake">Taart</string>
+    <string name="poi_cuisine_cake">Cake</string>
     <string name="poi_cuisine_pancake">Pannenkoeken</string>
     <string name="poi_cuisine_pasta">Pasta</string>
     <string name="poi_cuisine_fast_food">Fastfood</string>
@@ -2373,7 +2373,7 @@
     <string name="poi_cuisine_fried_chicken">Gefrituurde kip</string>
     <string name="poi_cuisine_dessert">Dessert</string>
     <string name="poi_cuisine_canteen">Kantine</string>
-    <string name="poi_cuisine_tacos">Taco\\\'s</string>
+    <string name="poi_cuisine_tacos">Taco\'s</string>
     <string name="poi_cuisine_piadina">Piadina</string>
     <string name="poi_cuisine_falafel">Falafel</string>
     <string name="poi_cuisine_smoothie">Smoothie</string>
@@ -3561,9 +3561,9 @@
     <string name="poi_changing_table_location_female_toilet">Locatie verschoontafel: damestoilet</string>
     <string name="poi_changing_table_location_male_toilet">Locatie verschoontafel: herentoilet</string>
     <string name="poi_changing_table_location_room">Locatie verschoontafel: kamer</string>
-    <string name="poi_changing_table_limited">Verschoontafel: beperkt</string>
-    <string name="poi_changing_table_no">Verschoontafel: nee</string>
-    <string name="poi_changing_table_yes">Verschoontafel: ja</string>
+    <string name="poi_changing_table_limited">Beperkt;Verschoontafel: beperkt</string>
+    <string name="poi_changing_table_no">Nee;Verschoontafel: nee</string>
+    <string name="poi_changing_table_yes">Ja;Verschoontafel: ja</string>
     <string name="poi_defibrillator_location">Locatie</string>
     <string name="poi_hazard_additional_contamination">Gevaar: verontreiniging</string>
     <string name="poi_hazard_additional_minefield">Gevaar: mijnenveld</string>
@@ -3906,7 +3906,7 @@
     <string name="poi_tobacco_filter">Tabak</string>
     <string name="poi_medical_supply_filter">Categorie medische benodigdheden</string>
     <string name="poi_fridge_filter">Frigo</string>
-    <string name="poi_ice_cream_filter">Ijs</string>
+    <string name="poi_ice_cream_filter">IJs</string>
     <string name="poi_membership_filter">Lidmaatschap vereist</string>
     <string name="poi_furniture_filter">Meubels</string>
     <string name="poi_heating_filter">Verwarming</string>
@@ -3967,4 +3967,6 @@
     <string name="poi_agrarian_tools">Gereedschap</string>
     <string name="poi_agrarian_yes">Ja;Landbouwwinkel</string>
     <string name="poi_agrarian_feed">Dierenvoer</string>
+    <string name="poi_changing_table_filter">Verschoontafel</string>
+    <string name="poi_cafe_filter">Café</string>
 </resources>
