@@ -24,7 +24,7 @@ import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ui.BackupTypesAdapter.OnItemSelectedListener;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.OnClearTypesListener;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -45,7 +45,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment implements OnItemSelectedListener,
+public abstract class BaseBackupTypesFragment extends BaseFullScreenFragment implements OnItemSelectedListener,
 		OnClearTypesListener, OnDeleteFilesListener, InAppPurchaseListener {
 
 	protected BackupHelper backupHelper;
@@ -242,20 +242,5 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment impleme
 
 	protected void updateProgressVisibility(boolean visible) {
 		AndroidUiHelper.updateVisibility(progressBar, visible);
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return ((MapActivity) requireActivity());
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
 	}
 }

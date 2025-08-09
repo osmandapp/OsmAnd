@@ -29,7 +29,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -40,7 +40,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
 
-public class SnapTrackWarningFragment extends BaseOsmAndFragment {
+public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 
 	public static final int REQUEST_CODE = 1000;
 	public static final int CANCEL_RESULT_CODE = 2;
@@ -214,15 +214,6 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 
 	private void refreshControlsButtons() {
 		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
-	}
-
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {

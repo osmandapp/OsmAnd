@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
@@ -40,7 +39,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelpMainFragment extends BaseOsmAndFragment implements OnItemClickListener, OnItemLongClickListener {
+public class HelpMainFragment extends BaseFullScreenFragment implements OnItemClickListener, OnItemLongClickListener {
 
 	public static final String TAG = HelpMainFragment.class.getSimpleName();
 

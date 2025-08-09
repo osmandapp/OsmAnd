@@ -45,7 +45,6 @@ import net.osmand.plus.charts.ChartModeBottomSheet;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.TrkSegment;
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -89,8 +88,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	public static final GPXTabItemType[] INIT_TAB_ITEMS =
 			{GPX_TAB_ITEM_GENERAL, GPX_TAB_ITEM_ALTITUDE, GPX_TAB_ITEM_SPEED};
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private SavingTrackHelper helper;
 	private OsmandMonitoringPlugin plugin;
 
@@ -133,8 +130,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		settings = app.getSettings();
 		helper = app.getSavingTrackHelper();
 		plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 		selectedGpxFile = helper.getCurrentTrack();
@@ -157,9 +152,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-
-		View itemView = inflater.inflate(R.layout.trip_recording_fragment, null, false);
+		View itemView = inflate(R.layout.trip_recording_fragment, null, false);
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(itemView)
 				.create());
@@ -181,15 +174,14 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		blockStatisticsBuilder.setBlocksView(statBlocks, false);
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
-		blockStatisticsBuilder.initStatBlocks(null,
-				ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode)), null);
+		blockStatisticsBuilder.initStatBlocks(
+				null, ColorUtilities.getActiveColor(app, nightMode), null);
 	}
 
 	@Override
 	protected void setupBottomButtons(ViewGroup view) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		int contentPadding = getDimen(R.dimen.content_padding);
-		View buttonsContainer = themedInflater.inflate(R.layout.preference_button_with_icon_quadruple, null);
+		int contentPadding = getDimensionPixelSize(R.dimen.content_padding);
+		View buttonsContainer = inflate(R.layout.preference_button_with_icon_quadruple, null);
 		buttonsContainer.setPadding(contentPadding, contentPadding, contentPadding, contentPadding);
 		view.addView(buttonsContainer);
 

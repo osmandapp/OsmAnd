@@ -1,22 +1,18 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 
-import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.base.BaseAlertDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-public class ValueExceedLimitDialogFragment extends DialogFragment {
+public class ValueExceedLimitDialogFragment extends BaseAlertDialogFragment {
 
 	private static final String TAG = ValueExceedLimitDialogFragment.class.getSimpleName();
 
@@ -25,8 +21,8 @@ public class ValueExceedLimitDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());
-		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+		updateNightMode();
+		AlertDialog.Builder builder = createDialogBuilder();
 		String tagName = getTagName();
 
 		String title = Algorithms.isEmpty(tagName)
@@ -41,11 +37,6 @@ public class ValueExceedLimitDialogFragment extends DialogFragment {
 				.setMessage(message)
 				.setNegativeButton(R.string.shared_string_ok, null);
 		return builder.create();
-	}
-
-	private boolean isNightMode() {
-		OsmandApplication app = ((OsmandApplication) requireActivity().getApplication());
-		return app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 	}
 
 	private String getTagName() {

@@ -20,10 +20,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.ExportBackupTask;
@@ -36,7 +34,6 @@ import net.osmand.plus.backup.ui.status.ItemViewHolder;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -45,26 +42,22 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
 	public static final String TAG = ChangeItemActionsBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
 	private NetworkSettingsHelper settingsHelper;
 
 	public CloudChangeItem item;
 	public RecentChangesType recentChangesType;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.change_item_bottom_sheet, container, false);
+		updateNightMode();
+		View view = inflate(R.layout.change_item_bottom_sheet, container, false);
 
 		TextView title = view.findViewById(R.id.title);
 		title.setText(getTitleForOperation());
@@ -82,8 +75,8 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		itemViewHolder.bindView(item, null, false);
 
 		TextView descriptionView = container.findViewById(R.id.description);
-		descriptionView.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon,
-				app.getString(R.string.last_synchronized), BackupUiUtils.getTimeString(app, item.time)));
+		descriptionView.setText(getString(R.string.ltr_or_rtl_combine_via_colon,
+				getString(R.string.last_synchronized), BackupUiUtils.getTimeString(app, item.time)));
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.second_icon), false);
 	}
 
@@ -162,7 +155,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		Drawable icon;
 		if (item.localFile == null) {
 			icon = getIcon(R.drawable.ic_action_cloud_delete, enabled ? R.color.color_osm_edit_delete : ColorUtilities.getSecondaryIconColorId(nightMode));
-			titleTv.setTextColor(enabled ? ContextCompat.getColor(app, R.color.backup_warning) : ColorUtilities.getSecondaryTextColorId(nightMode));
+			titleTv.setTextColor(enabled ? getColor(R.color.backup_warning) : ColorUtilities.getSecondaryTextColor(app, nightMode));
 		} else {
 			icon = getIcon(R.drawable.ic_action_cloud_upload_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryIconColorId(nightMode));
 			titleTv.setTextColor(enabled ? ColorUtilities.getActiveColor(app, nightMode) : ColorUtilities.getSecondaryTextColor(app, nightMode));
@@ -171,14 +164,14 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		uploadItem.setOnClickListener(v -> {
 			SyncOperationType operationType = deleteOperation || item.localFile == null ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD;
 			if (operationType == SYNC_OPERATION_DELETE) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode));
-				builder.setTitle(app.getString(R.string.shared_string_delete_file));
+				AlertDialog.Builder builder = new AlertDialog.Builder(getThemedContext());
+				builder.setTitle(getString(R.string.shared_string_delete_file));
 				builder.setMessage(getString(R.string.cloud_version_confirm_delete, item.title));
-				builder.setNeutralButton(R.string.shared_string_cancel, null)
-						.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-							syncItem(operationType);
-							dismiss();
-						});
+				builder.setNeutralButton(R.string.shared_string_cancel, null);
+				builder.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
+					syncItem(operationType);
+					dismiss();
+				});
 				builder.show();
 			} else {
 				syncItem(operationType);

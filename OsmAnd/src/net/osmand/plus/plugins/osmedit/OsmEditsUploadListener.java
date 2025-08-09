@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.osmedit;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 
 import java.util.Map;
@@ -10,7 +12,7 @@ import java.util.Map;
  */
 public interface OsmEditsUploadListener {
 	
-	void uploadUpdated(OsmPoint point);
+	void uploadUpdated(@NonNull OsmPoint point);
 	
-	void uploadEnded(Map<OsmPoint, String> loadErrorsMap);
+	void uploadEnded(@NonNull Map<OsmPoint, String> loadErrorsMap);
 }

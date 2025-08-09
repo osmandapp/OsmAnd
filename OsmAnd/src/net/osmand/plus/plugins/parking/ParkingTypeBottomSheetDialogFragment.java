@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.parking;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.View;
 
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;

@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
+public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = ConfigureMapOptionFragment.class.getSimpleName();
 
@@ -225,20 +225,5 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 	private void refreshControlsButtons() {
 		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return ((MapActivity) requireActivity());
 	}
 }

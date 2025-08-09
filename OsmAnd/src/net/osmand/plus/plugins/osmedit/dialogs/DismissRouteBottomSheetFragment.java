@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -35,7 +35,7 @@ public class DismissRouteBottomSheetFragment extends MenuBottomSheetDialogFragme
 
 		items.add(descriptionItem);
 
-		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int padding = getDimensionPixelSize(R.dimen.content_padding_small);
 		items.add(new DividerSpaceItem(requireContext(), padding));
 	}
 
@@ -61,7 +61,7 @@ public class DismissRouteBottomSheetFragment extends MenuBottomSheetDialogFragme
 
 	@Override
 	public int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
+		return getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
 	}
 
 	@Override
@@ -85,17 +85,8 @@ public class DismissRouteBottomSheetFragment extends MenuBottomSheetDialogFragme
 		}
 	}
 
-	@Nullable
-	public MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
-	}
-
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable OnDismissListener listener, @Nullable Runnable onStopAction) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			DismissRouteBottomSheetFragment fragment = new DismissRouteBottomSheetFragment();
 			fragment.dismissListener = listener;
 			fragment.onStopAction = onStopAction;

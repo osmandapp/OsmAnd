@@ -51,8 +51,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 	}
 
 	public void updateAllWidgets() {
-		OsmandApplication app = getMyApplication();
-		if (app == null || dashboard == null) {
+		if (dashboard == null) {
 			return;
 		}
 		UpdateLocationViewCache cache = UpdateLocationUtils.getUpdateLocationViewCache(requireContext());

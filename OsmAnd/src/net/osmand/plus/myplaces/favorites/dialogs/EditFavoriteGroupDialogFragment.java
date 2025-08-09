@@ -1,8 +1,5 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
-import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,12 +8,11 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -41,7 +37,6 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	public static final String TAG = EditFavoriteGroupDialogFragment.class.getSimpleName();
 	public static final String GROUP_NAME_KEY = "group_name_key";
 
-	private OsmandApplication app;
 	private FavouritesHelper helper;
 
 	private FavoriteGroup group;
@@ -49,8 +44,6 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		app = requiredMyApplication();
 		helper = app.getFavoritesHelper();
 	}
 
@@ -66,7 +59,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		if (group == null) {
 			return;
 		}
-		items.add(new TitleItem(Algorithms.isEmpty(group.getName()) ? app.getString(R.string.shared_string_favorites) : group.getName()));
+		items.add(new TitleItem(Algorithms.isEmpty(group.getName()) ? getString(R.string.shared_string_favorites) : group.getName()));
 
 		BaseBottomSheetItem editNameItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
@@ -75,15 +68,15 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.setOnClickListener(v -> {
 					Activity activity = getActivity();
 					if (activity != null) {
-						Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+						Context themedContext = getThemedContext();
 						AlertDialog.Builder b = new AlertDialog.Builder(themedContext);
 						b.setTitle(R.string.favorite_category_name);
 						EditText nameEditText = new EditText(themedContext);
 						nameEditText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 						nameEditText.setText(group.getName());
 						LinearLayout container = new LinearLayout(themedContext);
-						int sidePadding = AndroidUtils.dpToPx(activity, 24f);
-						int topPadding = AndroidUtils.dpToPx(activity, 4f);
+						int sidePadding = dpToPx(24f);
+						int topPadding = dpToPx(4f);
 						container.setPadding(sidePadding, topPadding, sidePadding, topPadding);
 						container.addView(nameEditText);
 						b.setView(container);
@@ -107,20 +100,17 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
 				.setTitle(getString(R.string.change_default_appearance))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						PointsGroup pointsGroup = group != null ? group.toPointsGroup(app) : null;
-						FragmentManager manager = activity.getSupportFragmentManager();
-						if (pointsGroup != null) {
-							Fragment fragment = getParentFragment();
-							if (fragment instanceof FavoritesTreeFragment) {
-								FavoriteAppearanceFragment.showInstance(manager, pointsGroup, fragment);
-								dismiss();
-							}
+				.setOnClickListener(v -> callActivity(activity -> {
+					PointsGroup pointsGroup = group != null ? group.toPointsGroup(app) : null;
+					FragmentManager manager = activity.getSupportFragmentManager();
+					if (pointsGroup != null) {
+						Fragment fragment = getParentFragment();
+						if (fragment instanceof FavoritesTreeFragment) {
+							FavoriteAppearanceFragment.showInstance(manager, pointsGroup, fragment);
+							dismiss();
 						}
 					}
-				})
+				}))
 				.create();
 		items.add(changeColorItem);
 
@@ -138,7 +128,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.create();
 		items.add(showOnMapItem);
 
-		if (group.getPoints().size() > 0) {
+		if (!group.getPoints().isEmpty()) {
 			items.add(new DividerHalfItem(getContext()));
 
 			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
@@ -182,16 +172,14 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		}
 		items.add(new DividerHalfItem(getContext()));
 
-		String delete = app.getString(R.string.shared_string_delete);
+		String delete = getString(R.string.shared_string_delete);
 		BaseBottomSheetItem deleteItem = new SimpleBottomSheetItem.Builder()
 				.setTitleColorId(R.color.color_osm_edit_delete)
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
 				.setTitle(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), delete, delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
-					Activity activity = getActivity();
-					Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
-					AlertDialog.Builder b = new AlertDialog.Builder(themedContext);
+					AlertDialog.Builder b = new AlertDialog.Builder(getThemedContext());
 					b.setTitle(R.string.favorite_delete_group);
 					String groupName = Algorithms.isEmpty(group.getName()) ? getString(R.string.shared_string_favorites) : group.getName();
 					b.setMessage(getString(R.string.favorite_confirm_delete_group, groupName, group.getPoints().size()));
@@ -216,6 +204,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		}
 	}
 
+	@Nullable
 	private FavoritesTreeFragment getFavoritesTreeFragment() {
 		Fragment fragment = getParentFragment();
 		if (fragment instanceof FavoritesTreeFragment) {
@@ -232,10 +221,12 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, String groupName) {
-		EditFavoriteGroupDialogFragment f = new EditFavoriteGroupDialogFragment();
-		Bundle args = new Bundle();
-		args.putString(GROUP_NAME_KEY, groupName);
-		f.setArguments(args);
-		f.show(fragmentManager, TAG);
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			EditFavoriteGroupDialogFragment fragment = new EditFavoriteGroupDialogFragment();
+			Bundle args = new Bundle();
+			args.putString(GROUP_NAME_KEY, groupName);
+			fragment.setArguments(args);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

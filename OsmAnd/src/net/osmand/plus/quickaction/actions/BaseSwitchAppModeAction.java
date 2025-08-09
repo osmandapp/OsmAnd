@@ -19,6 +19,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseSwitchAppModeAction extends QuickAction {
 	private static final long CHANGE_PROFILE_DELAY = 3500;
@@ -79,9 +80,8 @@ public abstract class BaseSwitchAppModeAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text)).setText(mapActivity.getString(getQuickActionDescription()));
 		parent.addView(view);
 	}

@@ -28,7 +28,7 @@ import net.osmand.aidl.AidlMapWidgetWrapper;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -61,7 +61,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
+public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 	public static final String KEY_APP_MODE = "app_mode";
 	public static final String KEY_WIDGET_ID = "widget_id";
@@ -394,13 +394,7 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 		return UiUtilities.getColoredSelectableDrawable(app, activeColor);
 	}
 
-	@Nullable
-	protected MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		return activity != null ? ((MapActivity) activity) : null;
-	}
-
-	private static void showFragment(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
+	private static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                 @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel, boolean addNewWidgetMode) {
 		String tag = fragment.getClass().getSimpleName();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, tag, true)) {
@@ -420,15 +414,15 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public static void showFragment(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel) {
-		showFragment(manager, fragment, target, appMode, widgetId, widgetsPanel, false);
+		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, false);
 
 	}
 
 	public static void showAddWidgetFragment(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                         @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel) {
-		showFragment(manager, fragment, target, appMode, widgetId, widgetsPanel, true);
+		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, true);
 	}
 
 

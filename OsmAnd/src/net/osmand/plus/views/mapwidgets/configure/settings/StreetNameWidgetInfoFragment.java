@@ -71,7 +71,7 @@ public class StreetNameWidgetInfoFragment extends WidgetInfoBaseFragment {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = showNextTurn ? activeColor : defaultColor;
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_next_turn, iconColor));
+		icon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_next_turn, iconColor));
 		icon.setVisibility(View.VISIBLE);
 	}
 

@@ -20,7 +20,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
@@ -32,7 +32,7 @@ import net.osmand.util.Algorithms;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TelegramChatsFragment extends BaseOsmAndFragment implements OnItemClickListener {
+public class TelegramChatsFragment extends BaseFullScreenFragment implements OnItemClickListener {
 
 	private static final String TAG = TelegramChatsFragment.class.getSimpleName();
 

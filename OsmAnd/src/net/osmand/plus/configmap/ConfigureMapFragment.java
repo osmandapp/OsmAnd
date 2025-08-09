@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter,
+public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDataChangeUiAdapter,
 		InAppPurchaseListener, SelectGpxTaskListener {
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();

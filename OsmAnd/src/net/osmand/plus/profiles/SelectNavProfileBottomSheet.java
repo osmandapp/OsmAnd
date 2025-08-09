@@ -3,10 +3,8 @@ package net.osmand.plus.profiles;
 import static net.osmand.plus.importfiles.ImportType.ROUTING;
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -42,6 +40,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.NavigationFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.plus.widgets.popup.OnPopUpMenuItemClickListener;
 import net.osmand.plus.widgets.popup.PopUpMenu;
@@ -76,27 +75,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 			this.titleId = titleId;
 		}
 
-		int titleId;
-	}
-
-	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @Nullable Fragment target,
-	                                ApplicationMode appMode,
-	                                String selectedItemKey,
-	                                boolean usedOnMap) {
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
-			SelectNavProfileBottomSheet fragment = new SelectNavProfileBottomSheet();
-			Bundle args = new Bundle();
-			args.putString(SELECTED_KEY, selectedItemKey);
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setAppMode(appMode);
-			fragment.setTargetFragment(target, 0);
-			boolean isOnline = OnlineRoutingEngine.isOnlineEngineKey(selectedItemKey);
-			fragment.setDialogMode(isOnline ? DialogMode.ONLINE : DialogMode.OFFLINE);
-			fragment.show(fragmentManager, TAG);
-		}
+		final int titleId;
 	}
 
 	@Override
@@ -118,7 +97,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 			createProfilesList();
 			createOfflineFooter();
 		}
-		addSpaceItem(getDimen(R.dimen.empty_state_text_button_padding_top));
+		addSpaceItem(getDimensionPixelSize(R.dimen.empty_state_text_button_padding_top));
 	}
 
 	public void readFromBundle(Bundle savedState) {
@@ -166,7 +145,8 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		addToggleButton(selectedItem, offline, online);
 	}
 
-	private TextRadioItem createRadioButton(DialogMode mode) {
+	@NonNull
+	private TextRadioItem createRadioButton(@NonNull DialogMode mode) {
 		String title = getString(mode.titleId);
 		TextRadioItem item = new TextRadioItem(title);
 		item.setOnClickListener((radioItem, view) -> {
@@ -208,10 +188,8 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 	}
 
 	private void addNonePredefinedView() {
-		int padding = getDimen(R.dimen.content_padding_half);
 		addGroupHeader(getString(R.string.shared_string_predefined));
-		addMessageWithRoundedBackground(
-				getString(R.string.failed_loading_predefined_engines), 0, padding);
+		addMessageWithRoundedBackground(getString(R.string.failed_loading_predefined_engines));
 
 		if (OnlineRoutingEngine.isPredefinedEngineKey(selectedItemKey)) {
 			ProfileDataObject selectedProfile = getDataUtils().getOnlineEngineByKey(selectedItemKey);
@@ -254,9 +232,8 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 	private void addGroupHeader(ProfilesGroup group) {
 		CharSequence title = group.getTitle();
 		CharSequence description = group.getDescription(app, nightMode);
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
-		View view = inflater.inflate(R.layout.group_title_with_desription_and_option, null);
+
+		View view = inflate(R.layout.group_title_with_desription_and_option);
 		View container = view.findViewById(R.id.container);
 		container.setPadding(container.getPaddingLeft(), 0, container.getPaddingRight(), 0);
 
@@ -276,11 +253,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		} else {
 			tvDescription.setVisibility(View.GONE);
 		}
-
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create()
-		);
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
 	}
 
 	private void openPopUpMenu(View view, ProfilesGroup group) {
@@ -321,27 +294,27 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		return null;
 	}
 
+	@NonNull
 	protected OnPopUpMenuItemClickListener getOptionDeleteClickListener(@NonNull ProfilesGroup group) {
 		String fileName = String.valueOf(group.getTitle());
 		return menuItem -> {
-			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
+			AlertDialog.Builder builder = new AlertDialog.Builder(getThemedContext());
 			builder.setTitle(getString(R.string.shared_string_delete_file));
 			builder.setMessage(getString(R.string.nav_profile_confirm_delete, fileName));
-			builder.setNeutralButton(R.string.shared_string_cancel, null)
-					.setPositiveButton(R.string.shared_string_ok, (dialogInterface, i) -> {
-						File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-						File routingFile = new File(dir, fileName);
-						if (routingFile.exists() && routingFile.delete()) {
-							updateRouteProfileInAppModes(group.getProfiles());
-							ProfileDataObject selectedProfile = getSelectedRoutingProfile(group);
-							if (selectedProfile != null) {
-								setDefaultRouteProfile(getAppMode());
-							}
-							app.getCustomRoutingConfigs().remove(fileName);
-							updateMenuItems();
-						}
-					});
-
+			builder.setNeutralButton(R.string.shared_string_cancel, null);
+			builder.setPositiveButton(R.string.shared_string_ok, (dialogInterface, i) -> {
+				File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+				File routingFile = new File(dir, fileName);
+				if (routingFile.exists() && routingFile.delete()) {
+					updateRouteProfileInAppModes(group.getProfiles());
+					ProfileDataObject selectedProfile = getSelectedRoutingProfile(group);
+					if (selectedProfile != null) {
+						setDefaultRouteProfile(getAppMode());
+					}
+					app.getCustomRoutingConfigs().remove(fileName);
+					updateMenuItems();
+				}
+			});
 			builder.show();
 		};
 	}
@@ -349,8 +322,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 	@Override
 	protected void addProfileItem(ProfileDataObject profileDataObject) {
 		RoutingDataObject profile = (RoutingDataObject) profileDataObject;
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View itemView = inflater.inflate(getItemLayoutId(profile), null);
+		View itemView = inflate(getItemLayoutId(profile));
 
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		tvTitle.setText(profile.getName());
@@ -361,7 +333,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 
 		CompoundButton compoundButton = itemView.findViewById(R.id.compound_button);
 		compoundButton.setChecked(isSelected(profile));
-		UiUtilities.setupCompoundButton(compoundButton, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
+		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
 		BaseBottomSheetItem.Builder builder = new BaseBottomSheetItem.Builder().setCustomView(itemView);
 
@@ -383,9 +355,9 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 
 			basePart.setOnClickListener(getItemClickListener(profile));
 			endBtn.setOnClickListener(v -> {
-				if (getActivity() != null) {
-					OnlineRoutingEngineFragment.showInstance(getActivity(), getAppMode(), profile.getStringKey());
-				}
+				callActivity(activity -> {
+					OnlineRoutingEngineFragment.showInstance(activity, getAppMode(), profile.getStringKey());
+				});
 				dismiss();
 			});
 		}
@@ -429,8 +401,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 
 	@Override
 	protected int getItemLayoutId(ProfileDataObject profile) {
-		if (profile instanceof RoutingDataObject) {
-			RoutingDataObject routingProfile = (RoutingDataObject) profile;
+		if (profile instanceof RoutingDataObject routingProfile) {
 			if (routingProfile.isOnline() && !routingProfile.isPredefined()) {
 				return R.layout.bottom_sheet_item_with_descr_radio_and_icon_btn;
 			}
@@ -447,8 +418,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 	protected boolean isSelected(ProfileDataObject profile) {
 		boolean isSelected = super.isSelected(profile);
 		String derivedProfile = getAppMode().getDerivedProfile();
-		if (isSelected && profile instanceof RoutingDataObject) {
-			RoutingDataObject data = (RoutingDataObject) profile;
+		if (isSelected && profile instanceof RoutingDataObject data) {
 			boolean checkForDerived = !Algorithms.objectEquals(derivedProfile, "default");
 			if (checkForDerived) {
 				isSelected = Algorithms.objectEquals(derivedProfile, data.getDerivedProfile());
@@ -504,6 +474,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		return null;
 	}
 
+	@NonNull
 	private RoutingDataUtils getDataUtils() {
 		if (dataUtils == null) {
 			dataUtils = new RoutingDataUtils(app);
@@ -511,8 +482,25 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		return dataUtils;
 	}
 
-	public void setDialogMode(DialogMode dialogMode) {
+	public void setDialogMode(@NonNull DialogMode dialogMode) {
 		this.dialogMode = dialogMode;
 	}
 
+	public static void showInstance(@NonNull FragmentActivity activity, @Nullable Fragment target,
+	                                @NonNull ApplicationMode appMode, @NonNull String selectedItemKey,
+	                                boolean usedOnMap) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SelectNavProfileBottomSheet fragment = new SelectNavProfileBottomSheet();
+			Bundle args = new Bundle();
+			args.putString(SELECTED_KEY, selectedItemKey);
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
+			boolean isOnline = OnlineRoutingEngine.isOnlineEngineKey(selectedItemKey);
+			fragment.setDialogMode(isOnline ? DialogMode.ONLINE : DialogMode.OFFLINE);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
 }

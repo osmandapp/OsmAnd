@@ -17,11 +17,11 @@ import androidx.annotation.DrawableRes;
 
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.liveupdates.Protocol.RankingUserByMonthResponse;
 import net.osmand.plus.liveupdates.Protocol.UserRankingByMonth;
 
-public class UsersReportFragment extends BaseOsmAndDialogFragment {
+public class UsersReportFragment extends BaseFullScreenDialogFragment {
 
 	public static final String URL_REQUEST = "URL_REQUEST";
 	public static final String REGION_NAME = "REGION_NAME";

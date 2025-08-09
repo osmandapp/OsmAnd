@@ -2,7 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -20,16 +19,16 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public static final String TAG = "OptionsBottomSheetDialogFragment";
-	public static final String GROUPS_MARKERS_MENU = "groups_markers_menu";
-	public static final String HISTORY_MARKERS_MENU = "history_markers_menu";
+	public static final String TAG = OptionsBottomSheetDialogFragment.class.getSimpleName();
+	private static final String GROUPS_MARKERS_MENU = "groups_markers_menu";
+	private static final String HISTORY_MARKERS_MENU = "history_markers_menu";
 
 	private MarkerOptionsFragmentListener listener;
 	private boolean disableSortBy;
 	private boolean disableSaveAsTrack;
 	private boolean disableMoveAllToHistory;
 
-	public void setListener(MarkerOptionsFragmentListener listener) {
+	public void setListener(@NonNull MarkerOptionsFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -46,19 +45,17 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		boolean nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		int themeRes = !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-
-		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, null);
+		updateNightMode();
+		View view = inflate(R.layout.fragment_marker_options_bottom_sheet_dialog);
 		view.setOnClickListener(v -> dismiss());
 
 		View mainView = view.findViewById(R.id.main_view);
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			mainView.getLayoutParams().width = getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+		if (!AndroidUiHelper.isOrientationPortrait(requireActivity())) {
+			mainView.getLayoutParams().width = getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 		}
 
 		((ImageView) mainView.findViewById(R.id.sort_by_icon)).setImageDrawable(getContentIcon(R.drawable.ic_sort_waypoint_dark));
-		int displayedCount = getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+		int displayedCount = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 		ImageView showDirectionIcon = mainView.findViewById(R.id.show_direction_icon);
 		int imageResId = displayedCount == 1
 				? R.drawable.ic_action_device_topbar
@@ -126,15 +123,15 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			@Override
 			public void onGlobalLayout() {
 				Activity activity = getActivity();
-				boolean nightMode = requiredMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-				int allowedHeight = getAllowedHeight();
+				if (activity == null) return;
 
+				int allowedHeight = getAllowedHeight();
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
-					if (allowedHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
+					if (allowedHeight - mainView.getHeight() >= getDimension(R.dimen.bottom_sheet_content_padding_small)) {
 						AndroidUtils.setBackground(activity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 					}
 				} else {
-					if (allowedHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
+					if (allowedHeight - mainView.getHeight() >= getDimension(R.dimen.bottom_sheet_content_padding_small)) {
 						AndroidUtils.setBackground(activity, mainView, nightMode,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {
@@ -154,13 +151,13 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Override
 	public void onResume() {
 		super.onResume();
-		((MapMarkersDialogFragment) getParentFragment()).blurStatusBar();
+		((MapMarkersDialogFragment) getParentFragment()).setupBlurStatusBar();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		((MapMarkersDialogFragment) getParentFragment()).clearStatusBar();
+		((MapMarkersDialogFragment) getParentFragment()).restoreStatusBarColor();
 	}
 
 	@Override
@@ -177,28 +174,27 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	}
 
 	private int getAllowedHeight() {
-		Activity activity = getActivity();
+		Activity activity = requireActivity();
 		int scrH = AndroidUtils.getScreenHeight(activity);
 		int stBarH = AndroidUtils.getStatusBarHeight(activity);
 		int nBarH = AndroidUtils.getNavBarHeight(activity);
 		// 56dp below is height of the bottom navigation view
-		return scrH - stBarH - nBarH - AndroidUtils.dpToPx(activity, 56);
+		return scrH - stBarH - nBarH - dpToPx(56);
 	}
 
-	interface MarkerOptionsFragmentListener {
+	public static void showInstance(@NonNull FragmentManager fm, boolean group, boolean history,
+	                                @NonNull MarkerOptionsFragmentListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			Bundle args = new Bundle();
+			args.putBoolean(GROUPS_MARKERS_MENU, group);
+			args.putBoolean(HISTORY_MARKERS_MENU, history);
 
-		void sortByOnClick();
-
-		void showDirectionOnClick();
-
-		void coordinateInputOnClick();
-
-		void buildRouteOnClick();
-
-		void saveAsNewTrackOnClick();
-
-		void moveAllToHistoryOnClick();
-
-		void dismiss();
+			OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.setListener(listener);
+			fm.beginTransaction()
+					.add(R.id.menu_container, fragment, OptionsBottomSheetDialogFragment.TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

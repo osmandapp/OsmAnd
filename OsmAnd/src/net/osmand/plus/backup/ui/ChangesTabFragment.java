@@ -30,7 +30,7 @@ import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
+public abstract class ChangesTabFragment extends BaseFullScreenFragment implements OnPrepareBackupListener,
 		OnBackupSyncListener {
 
 	protected BackupHelper backupHelper;

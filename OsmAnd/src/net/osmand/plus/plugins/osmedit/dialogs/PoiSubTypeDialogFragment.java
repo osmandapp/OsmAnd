@@ -1,31 +1,34 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.base.BaseAlertDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.Set;
 import java.util.TreeSet;
 
-public class PoiSubTypeDialogFragment extends DialogFragment {
+public class PoiSubTypeDialogFragment extends BaseAlertDialogFragment {
+
+	private static final String TAG = PoiSubTypeDialogFragment.class.getSimpleName();
 	private static final String KEY_POI_CATEGORY = "amenity";
 	private OnItemSelectListener onItemSelectListener;
 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		MapPoiTypes poiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		PoiCategory a = poiTypes.getPoiCategoryByName(getArguments().getString(KEY_POI_CATEGORY));
+		updateNightMode();
+		MapPoiTypes poiTypes = app.getPoiTypes();
+		AlertDialog.Builder builder = createDialogBuilder();
+		PoiCategory a = poiTypes.getPoiCategoryByName(requireArguments().getString(KEY_POI_CATEGORY));
 		Set<String> strings = new TreeSet<>();
 		if(a == poiTypes.getOtherPoiCategory()) {
 			for (PoiCategory category : poiTypes.getCategories(false)) {
@@ -37,12 +40,9 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 			addCategory(a, strings);
 		}
 		String[] subCats = strings.toArray(new String[0]);
-		builder.setItems(subCats, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				onItemSelectListener.select(subCats[which]);
-				dismiss();
-			}
+		builder.setItems(subCats, (dialog, which) -> {
+			onItemSelectListener.select(subCats[which]);
+			dismiss();
 		});
 		return builder.create();
 	}
@@ -55,16 +55,21 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		}
 	}
 
-	public static PoiSubTypeDialogFragment createInstance(PoiCategory cat) {
-		PoiSubTypeDialogFragment fragment = new PoiSubTypeDialogFragment();
-		Bundle args = new Bundle();
-		args.putString(KEY_POI_CATEGORY, cat.getKeyName());
-		fragment.setArguments(args);
-		return fragment;
-	}
-
 	public void setOnItemSelectListener(OnItemSelectListener onItemSelectListener) {
 		this.onItemSelectListener = onItemSelectListener;
+	}
+
+	public static void showInstance(@NonNull FragmentManager childFragmentManager,
+	                                @NonNull PoiCategory category,
+	                                @NonNull OnItemSelectListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			PoiSubTypeDialogFragment fragment = new PoiSubTypeDialogFragment();
+			Bundle args = new Bundle();
+			args.putString(KEY_POI_CATEGORY, category.getKeyName());
+			fragment.setArguments(args);
+			fragment.setOnItemSelectListener(listener);
+			fragment.show(childFragmentManager, TAG);
+		}
 	}
 
 	public interface OnItemSelectListener {
