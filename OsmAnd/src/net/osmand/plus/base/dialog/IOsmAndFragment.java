@@ -174,11 +174,6 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 		return ColorUtilities.getColor(getApp(), colorId);
 	}
 
-	@Nullable
-	default ColorStateList getColorStateList(int colorId) {
-		return ContextCompat.getColorStateList(getApp(), colorId);
-	}
-
 	// === Icon access and customization ===
 
 	@NonNull
