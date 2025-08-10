@@ -87,8 +87,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected OsmandSettings settings;
 	protected ApplicationMode appMode;
 	protected UiUtilities iconsCache;
-	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
+
+	private LayoutInflater themedInflater;
 	protected OsmAndAppCustomization appCustomization;
 
 	private SettingsScreenType currentScreenType;

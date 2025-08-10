@@ -88,7 +88,7 @@ public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implement
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
+		View view = inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
@@ -100,7 +100,7 @@ public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implement
 
 	private void setupToolbar(@NonNull View view) {
 		AppBarLayout appbar = view.findViewById(R.id.appbar);
-		View toolbar = themedInflater.inflate(R.layout.global_preference_toolbar, appbar, false);
+		View toolbar = inflate(R.layout.global_preference_toolbar, appbar, false);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 		appbar.addView(toolbar);
 

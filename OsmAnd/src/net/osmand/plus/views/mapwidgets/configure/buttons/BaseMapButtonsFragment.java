@@ -45,7 +45,7 @@ public abstract class BaseMapButtonsFragment extends BaseFullScreenFragment impl
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_configure_map_buttons, container, false);
+		View view = inflate(R.layout.fragment_configure_map_buttons, container, false);
 
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);

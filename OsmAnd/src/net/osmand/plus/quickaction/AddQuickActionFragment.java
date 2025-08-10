@@ -82,7 +82,7 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_add_quick_action, container, false);
+		View view = inflate(R.layout.fragment_add_quick_action, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}

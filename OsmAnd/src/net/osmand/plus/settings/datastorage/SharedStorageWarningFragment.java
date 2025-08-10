@@ -107,7 +107,7 @@ public class SharedStorageWarningFragment extends BaseFullScreenFragment impleme
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		mainView = themedInflater.inflate(R.layout.shared_storage_warning, container, false);
+		mainView = inflate(R.layout.shared_storage_warning, container, false);
 
 		stepsContainer = mainView.findViewById(R.id.steps_container);
 		foldersContainer = mainView.findViewById(R.id.migration_folders);

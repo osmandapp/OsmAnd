@@ -57,7 +57,7 @@ public class DistanceByTapFragment extends BaseFullScreenFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.distance_by_tap_fragment, container, false);
+		View view = inflate(R.layout.distance_by_tap_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		toolbar = view.findViewById(R.id.toolbar);
@@ -146,7 +146,7 @@ public class DistanceByTapFragment extends BaseFullScreenFragment {
 	                                   boolean enabled,
 	                                   boolean showShortDivider,
 	                                   OnClickListener listener) {
-		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
+		View view = inflate(R.layout.configure_screen_list_item);
 
 		Drawable icon = getPaintedIcon(iconId, enabled
 				? ColorUtilities.getDefaultIconColor(app, nightMode)
@@ -166,7 +166,7 @@ public class DistanceByTapFragment extends BaseFullScreenFragment {
 
 		TextView stateContainer = view.findViewById(R.id.items_count_descr);
 		stateContainer.setText(settings.DISTANCE_BY_TAP_TEXT_SIZE.get().toHumanString(app));
-		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
+		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getDimensionPixelSize(R.dimen.default_sub_text_size));
 
 		AndroidUiHelper.updateVisibility(stateContainer, true);
 

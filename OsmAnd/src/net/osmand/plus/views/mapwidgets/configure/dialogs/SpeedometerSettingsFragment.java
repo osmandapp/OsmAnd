@@ -65,7 +65,7 @@ public class SpeedometerSettingsFragment extends BaseFullScreenFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.speedometer_settings_fragment, container, false);
+		View view = inflate(R.layout.speedometer_settings_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		View speedometerView = view.findViewById(R.id.speedometer_widget);

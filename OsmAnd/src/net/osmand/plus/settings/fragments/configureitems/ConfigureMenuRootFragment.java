@@ -46,7 +46,7 @@ public class ConfigureMenuRootFragment extends BaseFullScreenFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_ui_customization, container, false);
+		View view = inflate(R.layout.fragment_ui_customization, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireActivity(), view);
 
 		setupToolbar(view);

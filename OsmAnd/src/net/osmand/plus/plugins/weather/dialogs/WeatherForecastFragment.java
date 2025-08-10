@@ -172,7 +172,7 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity activity = requireMapActivity();
-		View view = themedInflater.inflate(R.layout.fragment_weather_forecast, container, false);
+		View view = inflate(R.layout.fragment_weather_forecast, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
 
 		widgetsPanel = view.findViewById(R.id.weather_widgets_panel);

@@ -87,7 +87,7 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 	                         Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = requireMapActivity();
-		View view = themedInflater.inflate(R.layout.track_details, container, false);
+		View view = inflate(R.layout.track_details, container, false);
 		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		}

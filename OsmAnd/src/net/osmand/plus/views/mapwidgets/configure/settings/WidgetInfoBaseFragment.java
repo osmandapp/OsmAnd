@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -219,7 +218,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		}
 
 		updateNightMode();
-		view = themedInflater.inflate(R.layout.widget_settings_info_fragment, container, false);
+		view = inflate(R.layout.widget_settings_info_fragment, container, false);
 		if (widgetInfo == null) {
 			return view;
 		}
@@ -231,8 +230,8 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 		setupToolbar();
 		setupInfo();
-		setupTopContent(themedInflater, view.findViewById(R.id.top_settings_container));
-		setupMainContent(themedInflater, view.findViewById(R.id.main_settings_container));
+		setupTopContent(view.findViewById(R.id.top_settings_container));
+		setupMainContent(view.findViewById(R.id.main_settings_container));
 		setupApplyButton();
 		updateStatusBar();
 
@@ -312,11 +311,10 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		}
 	}
 
-	protected void setupTopContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-
+	protected void setupTopContent(@NonNull ViewGroup container) {
 	}
 
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull ViewGroup container) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.main_container), false);
 	}
 

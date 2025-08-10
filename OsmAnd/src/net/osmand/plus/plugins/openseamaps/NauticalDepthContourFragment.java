@@ -68,7 +68,7 @@ public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_nautical_depth_contours, container, false);
+		View view = inflate(R.layout.fragment_nautical_depth_contours, container, false);
 
 		setupHeader(view);
 		setupPropertyPreferences(view);

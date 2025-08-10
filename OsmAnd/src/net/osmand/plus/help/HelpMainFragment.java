@@ -56,7 +56,7 @@ public class HelpMainFragment extends BaseFullScreenFragment implements OnItemCl
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.help_main_screen, container, false);
+		View view = inflate(R.layout.help_main_screen, container, false);
 
 		listView = view.findViewById(R.id.list_view);
 		listView.setOnItemClickListener(this);

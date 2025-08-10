@@ -66,7 +66,7 @@ public abstract class ChangesTabFragment extends BaseFullScreenFragment implemen
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		FragmentActivity activity = requireActivity();
-		View view = themedInflater.inflate(R.layout.fragment_changes_tab, container, false);
+		View view = inflate(R.layout.fragment_changes_tab, container, false);
 
 		adapter = new ChangesAdapter(app, this, nightMode);
 

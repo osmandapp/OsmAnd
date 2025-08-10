@@ -86,7 +86,7 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View rootView = themedInflater.inflate(R.layout.fragment_plan_route_warning, container, false);
+		View rootView = inflate(R.layout.fragment_plan_route_warning, container, false);
 
 		applyButton = rootView.findViewById(R.id.right_bottom_button);
 		cancelButton = rootView.findViewById(R.id.dismiss_button);
@@ -105,13 +105,13 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 			mapControlsContainer.setVisibility(View.GONE);
 			TypedValue typedValueAttr = new TypedValue();
 			int bgAttrId = AndroidUtils.isLayoutRtl(app) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
-			getMapActivity().getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
+			getThemedContext().getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			rootView.setBackgroundResource(typedValueAttr.resourceId);
 			LinearLayout mainView = rootView.findViewById(R.id.main_view);
 			FrameLayout.LayoutParams params;
 			params = (FrameLayout.LayoutParams) mainView.getLayoutParams();
 			params.gravity = TOP;
-			int landscapeWidth = getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
+			int landscapeWidth = getDimensionPixelSize(R.dimen.dashboard_land_width);
 			rootView.setLayoutParams(new FrameLayout.LayoutParams(landscapeWidth, MATCH_PARENT));
 		}
 		refreshControlsButtons();
@@ -119,7 +119,7 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 	}
 
 	private void setupControlButtons(@NonNull View view) {
-		MapActivity activity = getMapActivity();
+		MapActivity activity = requireMapActivity();
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer controlsLayer = mapLayers.getMapControlsLayer();
 

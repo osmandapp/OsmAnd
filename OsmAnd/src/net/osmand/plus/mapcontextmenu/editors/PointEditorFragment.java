@@ -78,7 +78,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 		Context context = requireContext();
 		PointEditor editor = getEditor();
 		if (editor == null) {
-			view = themedInflater.inflate(getLayoutId(), container, false);
+			view = inflate(getLayoutId(), container, false);
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 			return view;
 		}

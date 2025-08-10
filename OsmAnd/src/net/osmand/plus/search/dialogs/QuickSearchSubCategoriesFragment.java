@@ -126,10 +126,10 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_subcategories, container, false);
+		View root = inflate(R.layout.fragment_subcategories, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, color);
+		Drawable icClose = getIcon(R.drawable.ic_arrow_back, color);
 		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> dismissFragment());
@@ -137,12 +137,7 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 		title.setText(poiCategory.getTranslation());
 		addButton = root.findViewById(R.id.add_button);
 		updateAddBtnVisibility();
-		addButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismissFragment();
-			}
-		});
+		addButton.setOnClickListener(v -> dismissFragment());
 		listView = root.findViewById(R.id.list);
 		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			@Override

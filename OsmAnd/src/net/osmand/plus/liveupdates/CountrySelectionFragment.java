@@ -58,14 +58,14 @@ public class CountrySelectionFragment extends BaseFullScreenDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		updateNightMode();
-		if (countryItems.size() == 0) {
+		if (countryItems.isEmpty()) {
 			initCountries(app);
 		}
 
-		View view = themedInflater.inflate(R.layout.fragment_search_list, container, false);
+		View view = inflate(R.layout.fragment_search_list, container, false);
 		ListView listView = view.findViewById(android.R.id.list);
 		ArrayAdapter<CountryItem> adapter = new ListAdapter(getListItemIcon());
-		if (countryItems.size() > 0) {
+		if (!countryItems.isEmpty()) {
 			for (CountryItem item : countryItems) {
 				adapter.add(item);
 			}

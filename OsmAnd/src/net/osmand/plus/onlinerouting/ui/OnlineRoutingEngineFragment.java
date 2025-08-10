@@ -122,8 +122,7 @@ public class OnlineRoutingEngineFragment extends BaseFullScreenFragment implemen
 	                         @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = themedInflater.inflate(
-				R.layout.online_routing_engine_fragment, container, false);
+		view = inflate(R.layout.online_routing_engine_fragment, container, false);
 		segmentsContainer = view.findViewById(R.id.segments_container);
 		scrollView = view.findViewById(R.id.segments_scroll);
 		buttonsShadow = view.findViewById(R.id.buttons_shadow);
@@ -368,8 +367,7 @@ public class OnlineRoutingEngineFragment extends BaseFullScreenFragment implemen
 	}
 
 	private void setupResultsContainer() {
-		testResultsContainer = themedInflater.inflate(
-				R.layout.bottom_sheet_item_with_descr_64dp, segmentsContainer, false);
+		testResultsContainer = inflate(R.layout.bottom_sheet_item_with_descr_64dp, segmentsContainer, false);
 		testResultsContainer.setVisibility(View.GONE);
 		segmentsContainer.addView(testResultsContainer);
 	}

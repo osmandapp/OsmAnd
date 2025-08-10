@@ -51,7 +51,7 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_purchases, container, false);
+		View view = inflate(R.layout.fragment_purchases, container, false);
 		createToolbar(view, nightMode);
 		cardsContainer = view.findViewById(R.id.cards_container);
 		return view;
@@ -82,7 +82,7 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 		for (int i = 0; i < mainPurchases.size(); i++) {
 			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app, mainPurchases.get(i));
 			if (purchaseData != null) {
-				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+				inflate(R.layout.list_item_divider, cardsContainer);
 				PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchaseData);
 				purchaseCard.setListener(PurchasesFragment.this);
 				cardsContainer.addView(purchaseCard.build(activity));
@@ -98,7 +98,7 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 			PurchaseUiData purchaseData = PurchaseUiDataUtils.createUiData(app,
 					holder.linkedSubscription, null, null, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
 			if (purchaseData != null) {
-				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+				inflate(R.layout.list_item_divider, cardsContainer);
 				PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchaseData);
 				purchaseCard.setListener(PurchasesFragment.this);
 				cardsContainer.addView(purchaseCard.build(activity));
@@ -112,7 +112,7 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 					holder.linkedPurchase, holder.name, holder.icon, holder.purchaseTime, holder.expireTime == 0
 							? UNDEFINED_TIME : holder.expireTime, holder.origin, null);
 			if (purchaseData != null) {
-				themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+				inflate(R.layout.list_item_divider, cardsContainer);
 				PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchaseData);
 				purchaseCard.setListener(PurchasesFragment.this);
 				cardsContainer.addView(purchaseCard.build(activity));
@@ -121,7 +121,7 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 
 		// Backup subscription
 		if (showBackupSubscription) {
-			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createBackupSubscriptionUiData(app);
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
 			purchaseCard.setListener(PurchasesFragment.this);
@@ -130,7 +130,7 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 
 		boolean needToShowFreeAccountSubscriptionCard = PurchaseUiDataUtils.shouldShowFreeAccRegistration(app);
 		if (needToShowFreeAccountSubscriptionCard) {
-			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createFreeAccPurchaseUiData(app);
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
 			purchaseCard.setListener(PurchasesFragment.this);
@@ -142,10 +142,10 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 		boolean hasMainPurchases = !Algorithms.isEmpty(mainPurchases);
 		boolean hasExternalPurchases = !Algorithms.isEmpty(externalInApps) || !Algorithms.isEmpty(externalSubscriptions);
 		if (!needToShowFreeAccountSubscriptionCard && (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription && !hasExternalPurchases))) {
-			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			inflate(R.layout.list_item_divider, cardsContainer);
 			cardsContainer.addView(new NoPurchasesCard(activity, this).build(activity));
 		} else {
-			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			inflate(R.layout.list_item_divider, cardsContainer);
 			cardsContainer.addView(new ExploreOsmAndPlansCard(activity, this).build(activity));
 		}
 		cardsContainer.addView(new TroubleshootingCard(activity, purchaseHelper, false).build(activity));
@@ -153,19 +153,19 @@ public class PurchasesFragment extends BaseFullScreenDialogFragment implements I
 
 	private void setupPromoCard(@NonNull FragmentActivity activity) {
 		if (Version.isTripltekBuild()) {
-			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createTripltekPurchaseUiData(app);
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
 			purchaseCard.setListener(PurchasesFragment.this);
 			cardsContainer.addView(purchaseCard.build(activity));
 		} else if (Version.isHugerockBuild()) {
-			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createHugerockPurchaseUiData(app);
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
 			purchaseCard.setListener(PurchasesFragment.this);
 			cardsContainer.addView(purchaseCard.build(activity));
 		} else if (Version.isHMDBuild()) {
-			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createHMDPurchaseUiData(app);
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
 			purchaseCard.setListener(PurchasesFragment.this);

@@ -54,13 +54,13 @@ public class DirectionIndicationDialogFragment extends BaseFullScreenDialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
+		helpImgHeight = getDimensionPixelSize(R.dimen.action_bar_image_height);
 
 		updateNightMode();
-		mainView = themedInflater.inflate(R.layout.fragment_direction_indication_dialog, container);
+		mainView = inflate(R.layout.fragment_direction_indication_dialog, container);
 
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(getContext())));
+		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(requireContext())));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(view -> dismiss());
 
@@ -69,7 +69,7 @@ public class DirectionIndicationDialogFragment extends BaseFullScreenDialogFragm
 		appModeTv.setText(appMode.toHumanString());
 		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIcon(appMode.getIconRes()), null);
 
-		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
+		if (AndroidUiHelper.isOrientationPortrait(requireActivity())) {
 			((ObservableScrollView) mainView.findViewById(R.id.scroll_view)).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
 				@Override
 				public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {

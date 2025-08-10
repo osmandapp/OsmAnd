@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -72,8 +71,8 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.sensor_widget_settings_fragment, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.sensor_widget_settings_fragment, container);
 		deviceIcon = view.findViewById(R.id.device_icon);
 		showIcon = view.findViewById(R.id.show_icon);
 		showModeDescription = container.findViewById(R.id.show);

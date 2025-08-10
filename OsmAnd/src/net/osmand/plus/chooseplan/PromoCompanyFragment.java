@@ -72,7 +72,7 @@ public abstract class PromoCompanyFragment extends BaseFullScreenDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = themedInflater.inflate(R.layout.fragment_company_promo, container, false);
+		View view = inflate(R.layout.fragment_company_promo, container, false);
 
 		setupToolbar(view);
 		setupContent(view);
@@ -100,7 +100,7 @@ public abstract class PromoCompanyFragment extends BaseFullScreenDialogFragment 
 
 	@NonNull
 	private View createFeatureView(@NonNull OsmAndFeature feature, @NonNull ViewGroup container) {
-		View view = themedInflater.inflate(R.layout.purchase_dialog_list_item, container, false);
+		View view = inflate(R.layout.purchase_dialog_list_item, container, false);
 
 		ImageView icon = view.findViewById(R.id.icon);
 		icon.setImageResource(feature.getIconId(nightMode));

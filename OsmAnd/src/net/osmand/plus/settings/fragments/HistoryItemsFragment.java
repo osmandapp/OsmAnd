@@ -82,7 +82,7 @@ public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment 
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
-		View view = themedInflater.inflate(R.layout.history_preferences_fragment, container, false);
+		View view = inflate(R.layout.history_preferences_fragment, container, false);
 
 		appbar = view.findViewById(R.id.appbar);
 		recyclerView = view.findViewById(R.id.list);

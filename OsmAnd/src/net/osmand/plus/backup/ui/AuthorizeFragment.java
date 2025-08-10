@@ -134,7 +134,7 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_cloud_authorize, container, false);
+		View view = inflate(R.layout.fragment_cloud_authorize, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		space = view.findViewById(R.id.space);

@@ -4,7 +4,6 @@ import static net.osmand.plus.firstusage.FirstUsageAction.RESTORE_FROM_CLOUD;
 import static net.osmand.plus.firstusage.FirstUsageAction.RESTORE_FROM_FILE;
 import static net.osmand.plus.firstusage.FirstUsageAction.SELECT_STORAGE_FOLDER;
 
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -20,7 +19,7 @@ public class FirstUsageActionsBottomSheet extends BaseFirstUsageBottomSheet {
 	}
 
 	@Override
-	protected void setupItems(@NonNull ViewGroup container, @NonNull LayoutInflater inflater) {
+	protected void setupItems(@NonNull ViewGroup container) {
 		container.addView(createItemView(getString(R.string.restore_from_osmand_cloud), R.drawable.ic_action_restore, view -> {
 			processActionClick(RESTORE_FROM_CLOUD);
 			dismiss();

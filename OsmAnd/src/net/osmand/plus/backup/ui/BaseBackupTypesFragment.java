@@ -87,7 +87,7 @@ public abstract class BaseBackupTypesFragment extends BaseFullScreenFragment imp
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_backup_types, container, false);
+		View view = inflate(R.layout.fragment_backup_types, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 

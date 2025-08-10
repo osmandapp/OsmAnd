@@ -63,7 +63,7 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.dialog_read_description, container, false);
+		View view = inflate(R.layout.dialog_read_description, container, false);
 		setupToolbar(view);
 		AppCompatImageView imageView = view.findViewById(R.id.main_image);
 		PicassoUtils.setupImageViewByUrl(app, imageView, getImageUrl(), true);

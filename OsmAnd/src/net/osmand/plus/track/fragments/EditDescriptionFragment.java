@@ -37,7 +37,7 @@ public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.dialog_edit_gpx_description, container, false);
+		View view = inflate(R.layout.dialog_edit_gpx_description, container, false);
 
 		etText = view.findViewById(R.id.description);
 		etText.requestFocus();

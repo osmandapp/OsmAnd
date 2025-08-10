@@ -121,7 +121,7 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_search_widgets, container, false);
+		View view = inflate(R.layout.fragment_search_widgets, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMapActivity(), view);
 		actionButton = view.findViewById(R.id.clearButton);
 		backButton = view.findViewById(R.id.back_button);

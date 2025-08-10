@@ -69,10 +69,10 @@ public class EditProfilesFragment extends BaseFullScreenFragment {
 				appModesOrders.put(mode.getStringKey(), mode.getOrder());
 			}
 		}
-		View mainView = themedInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
+		View mainView = inflate(R.layout.edit_arrangement_list_fragment, container, false);
 
 		AppBarLayout appbar = mainView.findViewById(R.id.appbar);
-		View toolbar = themedInflater.inflate(R.layout.global_preference_toolbar, container, false);
+		View toolbar = inflate(R.layout.global_preference_toolbar, container, false);
 		appbar.addView(toolbar);
 
 		ImageButton closeButton = mainView.findViewById(R.id.close_button);

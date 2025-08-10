@@ -89,7 +89,7 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull ViewGroup container) {
 		this.themedInflater = themedInflater;
 		themedInflater.inflate(R.layout.map_marker_side_widget_settings_fragment, container);
 		buttonsCard = view.findViewById(R.id.items_container);

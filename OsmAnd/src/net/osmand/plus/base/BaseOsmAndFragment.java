@@ -37,8 +37,9 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 	protected ApplicationMode appMode;
 	protected OsmandSettings settings;
 	protected UiUtilities uiUtilities;
-	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
+
+	private LayoutInflater themedInflater;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {

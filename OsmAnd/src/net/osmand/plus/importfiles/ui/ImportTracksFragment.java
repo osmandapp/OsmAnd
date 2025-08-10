@@ -141,7 +141,7 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_import_tracks, container, false);
+		View view = inflate(R.layout.fragment_import_tracks, container, false);
 
 		setupToolbar(view);
 		setupButtons(view);

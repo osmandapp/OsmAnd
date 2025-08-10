@@ -43,7 +43,7 @@ public class SavedArticlesTabFragment extends BaseFullScreenFragment implements 
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		dataHelper = app.getTravelHelper().getBookmarksHelper();
-		View mainView = themedInflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
+		View mainView = inflate(R.layout.fragment_saved_articles_tab, container, false);
 
 		adapter = new SavedArticlesRvAdapter(app);
 		adapter.setListener(article -> {

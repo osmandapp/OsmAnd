@@ -86,7 +86,7 @@ public class DefaultButtonsAppearanceFragment extends BaseFullScreenFragment imp
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.map_button_appearance_fragment, container, false);
+		View view = inflate(R.layout.map_button_appearance_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
@@ -132,9 +132,9 @@ public class DefaultButtonsAppearanceFragment extends BaseFullScreenFragment imp
 		mapHudCard = new MapHudCard(activity, appearanceParams);
 		addCard(container, mapHudCard);
 		addCard(container, new CornerRadiusCard(activity, appearanceParams, true));
-		container.addView(themedInflater.inflate(R.layout.list_item_divider, container, false));
+		container.addView(inflate(R.layout.list_item_divider, container, false));
 		addCard(container, new ButtonSizeCard(activity, appearanceParams, true));
-		container.addView(themedInflater.inflate(R.layout.list_item_divider, container, false));
+		container.addView(inflate(R.layout.list_item_divider, container, false));
 		addCard(container, new OpacitySliderCard(activity, appearanceParams, true));
 	}
 

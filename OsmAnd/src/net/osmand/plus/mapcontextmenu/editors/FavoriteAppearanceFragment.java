@@ -140,13 +140,10 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = themedInflater.inflate(R.layout.favorite_default_appearance_fragment, container, false);
-
+		view = inflate(R.layout.favorite_default_appearance_fragment, container, false);
 		setupToolbar();
 		setupButtons();
-
 		setupCards();
-
 		return view;
 	}
 

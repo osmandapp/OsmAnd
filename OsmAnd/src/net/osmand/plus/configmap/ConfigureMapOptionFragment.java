@@ -64,7 +64,7 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity activity = requireMapActivity();
-		View view = themedInflater.inflate(R.layout.configure_map_option_fragment, container, false);
+		View view = inflate(R.layout.configure_map_option_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
 
 		mapButtons = new ArrayList<>();
@@ -168,7 +168,7 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			ViewGroup container = view.findViewById(R.id.hud_button_container);
-			MapButton map3DButton = (Map3DButton) themedInflater.inflate(R.layout.map_3d_button, container, false);
+			MapButton map3DButton = (Map3DButton) inflate(R.layout.map_3d_button, container, false);
 			activity.getMapLayers().getMapControlsLayer().addCustomMapButton(map3DButton);
 			container.addView(map3DButton);
 			mapButtons.add(map3DButton);

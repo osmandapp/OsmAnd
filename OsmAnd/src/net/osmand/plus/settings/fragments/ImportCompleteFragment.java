@@ -94,7 +94,7 @@ public class ImportCompleteFragment extends BaseFullScreenFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_import_complete, container, false);
+		View root = inflate(R.layout.fragment_import_complete, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 
 		TextView description = root.findViewById(R.id.description);

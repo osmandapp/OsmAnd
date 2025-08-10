@@ -47,7 +47,7 @@ public class HelpArticlesFragment extends BaseFullScreenFragment implements OnIt
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.help_articles_fragment, container, false);
+		View view = inflate(R.layout.help_articles_fragment, container, false);
 
 		ContextMenuAdapter menuAdapter = new ContextMenuAdapter(app);
 		List<ContextMenuItem> items = createItems();

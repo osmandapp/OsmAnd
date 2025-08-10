@@ -88,7 +88,7 @@ public class MapButtonAppearanceFragment extends BaseFullScreenFragment implemen
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.map_button_appearance_fragment, container, false);
+		View view = inflate(R.layout.map_button_appearance_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
@@ -134,9 +134,9 @@ public class MapButtonAppearanceFragment extends BaseFullScreenFragment implemen
 		addCard(container, mapButtonCard);
 		addCard(container, new ButtonIconsCard(activity, iconController));
 		addCard(container, new CornerRadiusCard(activity, appearanceParams, false));
-		container.addView(themedInflater.inflate(R.layout.simple_divider_item, container, false));
+		container.addView(inflate(R.layout.simple_divider_item, container, false));
 		addCard(container, new ButtonSizeCard(activity, appearanceParams, false));
-		container.addView(themedInflater.inflate(R.layout.simple_divider_item, container, false));
+		container.addView(inflate(R.layout.simple_divider_item, container, false));
 		addCard(container, new OpacitySliderCard(activity, appearanceParams, false));
 	}
 

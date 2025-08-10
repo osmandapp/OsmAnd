@@ -146,7 +146,7 @@ public class TilesDownloadProgressFragment extends BaseFullScreenFragment implem
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = themedInflater.inflate(R.layout.tiles_download_progress_fragment, container, false);
+		view = inflate(R.layout.tiles_download_progress_fragment, container, false);
 
 		setupToolbar();
 		updateProgress();
