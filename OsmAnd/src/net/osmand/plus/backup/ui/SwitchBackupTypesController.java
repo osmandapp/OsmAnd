@@ -16,6 +16,7 @@ import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
@@ -51,8 +52,15 @@ public abstract class SwitchBackupTypesController extends BaseBackupTypesControl
 		return selectedItemsMap;
 	}
 
-	public boolean hasSelectedItemsOfType(@NonNull ExportType exportType) {
-		return getSelectedItemsOfType(exportType) != null;
+	@NonNull
+	public List<ExportType> getSelectedTypes(@NonNull List<ExportType> exportTypes) {
+		List<ExportType> result = new ArrayList<>();
+		for (ExportType exportType : exportTypes) {
+			if (getSelectedItemsOfType(exportType) != null) {
+				result.add(exportType);
+			}
+		}
+		return result;
 	}
 
 	@Nullable

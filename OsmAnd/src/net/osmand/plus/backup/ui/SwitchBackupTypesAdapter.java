@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -52,15 +51,10 @@ public class SwitchBackupTypesAdapter extends BackupTypesAdapter {
 		TextView description = view.findViewById(R.id.description);
 		description.setText(getGroupSummary(category));
 
-		int selectedTypes = 0;
-		for (ExportType exportType : items.getTypes()) {
-			if (controller.hasSelectedItemsOfType(exportType)) {
-				selectedTypes++;
-			}
-		}
+		List<ExportType> selectedTypes = controller.getSelectedTypes(items.getTypes());
 		CompoundButton compoundButton = view.findViewById(R.id.switch_widget);
 		boolean available = controller.isBackupAvailable();
-		compoundButton.setChecked(available && selectedTypes == items.getTypes().size());
+		compoundButton.setChecked(available && selectedTypes.size() == items.getTypes().size());
 		compoundButton.setEnabled(available);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 		View switchContainer = view.findViewById(R.id.switch_container);
@@ -127,22 +121,17 @@ public class SwitchBackupTypesAdapter extends BackupTypesAdapter {
 
 	@NonNull
 	private String getGroupSummary(@NonNull ExportCategory category) {
-		long itemsSize = 0;
-		int selectedTypes = 0;
 		SettingsCategoryItems items = controller.getCategoryItems(category);
-		for (ExportType exportType : items.getTypes()) {
-			if (controller.hasSelectedItemsOfType(exportType)) {
-				selectedTypes++;
-				itemsSize += BackupUtils.calculateItemsSize(items.getItemsForType(exportType));
-			}
-		}
+		List<ExportType> selectedTypes = controller.getSelectedTypes(items.getTypes());
+		long itemsSize = items.calculateSize(selectedTypes);
+
 		String description;
-		if (selectedTypes == 0) {
+		if (selectedTypes.isEmpty()) {
 			description = getString(R.string.shared_string_none);
-		} else if (selectedTypes == items.getTypes().size()) {
+		} else if (selectedTypes.size() == items.getTypes().size()) {
 			description = getString(R.string.shared_string_all);
 		} else {
-			description = getString(R.string.ltr_or_rtl_combine_via_slash, String.valueOf(selectedTypes), String.valueOf(items.getTypes().size()));
+			description = getString(R.string.ltr_or_rtl_combine_via_slash, String.valueOf(selectedTypes.size()), String.valueOf(items.getTypes().size()));
 		}
 		String formattedSize = AndroidUtils.formatSize(app, itemsSize);
 		return itemsSize == 0 ? description : getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);
