@@ -607,7 +607,7 @@
     <string name="monitoring_settings_descr">Agordi kiel registri spurojn.</string>
     <string name="duration">Daŭro</string>
     <string name="distance">Distanco</string>
-    <string name="download_additional_maps">Ĉu elŝuti mankajn mapojn de %1$s (%2$d MB)?</string>
+    <string name="download_additional_maps">Ĉu elŝuti mankantajn mapojn de %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Foliumi mapon</string>
     <string name="rendering_value_car_name">Aŭto</string>
     <string name="rendering_value_bicycle_name">Biciklo</string>
@@ -4414,7 +4414,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Montri dediĉitajn montbiciklajn kursojn laŭ la skalo de IMBA.</string>
     <string name="attach_roads_warning">Nur registrita spuro povas esti alproksimigita al vojoj.</string>
     <string name="without_profiles_changing">Sen ŝanĝi profilon</string>
-    <string name="shared_string_only_missing">Nur mankajn</string>
+    <string name="shared_string_only_missing">Nur mankantajn</string>
     <string name="download_tiles">Elŝuti kahelojn</string>
     <string name="auto_25_chars_route_tl_kl">Maldekstren kaj veturu ĉe maldekstra flanko</string>
     <string name="auto_25_chars_route_tr_kl">Dekstren kaj veturu ĉe maldekstra flanko</string>
@@ -5259,7 +5259,7 @@
     <string name="explore_3d_track_description">Vidu la spuron interage en 3D! Bildigi altitudon, rapidon kaj pli senpere sur la mapo.</string>
     <string name="maps_that_also_be_used">Aliaj uzotaj mapoj: %1$s</string>
     <string name="getting_list_of_required_maps">Akirado de listo de necesaj mapoj…</string>
-    <string name="required_maps_calculate_online_summary">La listo de mankaj mapoj baziĝas sur kurso en rekta linio. Por akiri la precizan liston de mapoj, OsmAnd povas antaŭkalkuli vian kurson enrete.</string>
+    <string name="required_maps_calculate_online_summary">La listo de mankantaj mapoj baziĝas sur kurso en rekta linio. Por akiri la precizan liston de mapoj, OsmAnd povas antaŭkalkuli vian kurson enrete.</string>
     <string name="required_maps">Necesaj mapoj</string>
     <string name="missing_maps_description">Kelkaj malkonektaj mapoj necesaj por kalkuli tiun ĉi kurson mankas aŭ estas neĝisdataj. Elŝutu aŭ ĝisdatigu tiujn ĉi mapojn.</string>
     <string name="missing_maps_header">Mankaj aŭ neĝisdataj mapoj</string>
@@ -5596,7 +5596,7 @@
     <string name="obd_ambient_air_temp_desc">Montras temperaturon ekster la veturilo.</string>
     <string name="learn_more_about_obd_sensors">Pliaj informoj pri sentiloj.</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spuru bazajn datumojn via veturilo per la protokolo OBD-II. Observu bazajn parametrojn: rapidon, rivoluan rapidon de motoro, konsumon de brulaĵo kaj pli.</string>
-    <string name="release_4_9">• nova plenekrana galeria vidigilo por Vikimediaj fotoj\n\n• nova kromprogramo “Statistikoj pri veturilo” por observi parametrojn de aŭtomobilo per la protokolo OBD-II\n\n• eblo asigni aktivecojn al spuroj kaj filtri ilin\n\n• novaj rapidaj agoj por registri kurson kaj por ŝlosi ekranon\n\n• alĝustigeblaj kaj moveblaj butonoj sur la mapo\n\n• aldonis kuntekstan menuon kaj la agon “Nuligi mezuman rapidon” al fenestraĵoj\n\n• nova tavolo de kursoj: “Teren-motorciklaj kursoj”\n\n• riparis problemon pri “Aŭtomate registri spuron dum navigi”\n\n• riparis problemon pri inversaj koordinatoj en lingvoj skribataj maldekstren\n\n• riparis mankajn sentilajn datumojn por nune registrata spuro\n\n• aldonis informojn pri proksimaj areoj de la elektita punkto\n\n• butono de rapida ago por alĝustigi videblon de OSM-redaktoj\n\n• apartaj videblaj parametroj por kolorigi terenon\n\n• aldonis premeblan bildsimbolon por vidigi aliron kaj aliajn atributojn de vojoj</string>
+    <string name="release_4_9">• nova plenekrana galeria vidigilo por Vikimediaj fotoj\n\n• nova kromprogramo “Statistikoj pri veturilo” por observi parametrojn de aŭtomobilo per la protokolo OBD-II\n\n• eblo asigni aktivecojn al spuroj kaj filtri ilin\n\n• novaj rapidaj agoj por registri kurson kaj por ŝlosi ekranon\n\n• alĝustigeblaj kaj moveblaj butonoj sur la mapo\n\n• aldonis kuntekstan menuon kaj la agon “Nuligi mezuman rapidon” al fenestraĵoj\n\n• nova tavolo de kursoj: “Teren-motorciklaj kursoj”\n\n• riparis problemon pri “Aŭtomate registri spuron dum navigi”\n\n• riparis problemon pri inversaj koordinatoj en lingvoj skribataj maldekstren\n\n• riparis mankantajn sentilajn datumojn por nune registrata spuro\n\n• aldonis informojn pri proksimaj areoj de la elektita punkto\n\n• butono de rapida ago por alĝustigi videblon de OSM-redaktoj\n\n• apartaj videblaj parametroj por kolorigi terenon\n\n• aldonis premeblan bildsimbolon por vidigi aliron kaj aliajn atributojn de vojoj</string>
     <string name="obd_fuel_consumption_desc">Montras kiel rapide brulaĵo estas uzata de la motoro, kalkulita konsiderante restantan brulaĵon, enhavecon de brulaĵujo kaj distancon determinitan per GPS.</string>
     <string name="average_temperature_slider_description">Elekti tempdaŭron por mezuri la mezuman temperaturon.</string>
     <string name="obd_speed_desc">Montras rapidon de la veturilo mezuratan de aŭtomobila rapidmezurilo.</string>
