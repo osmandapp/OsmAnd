@@ -111,10 +111,18 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 
 	@Nullable
 	default OsmandActionBarActivity getActionBarActivity() {
-		if (getActivity() instanceof OsmandActionBarActivity) {
-			return (OsmandActionBarActivity) getActivity();
+		if (getActivity() instanceof OsmandActionBarActivity activity) {
+			return activity;
 		}
 		return null;
+	}
+
+	@NonNull
+	default OsmandActionBarActivity requireActionBarActivity() {
+		if (getActivity() instanceof OsmandActionBarActivity activity) {
+			return activity;
+		}
+		throw new IllegalStateException("Fragment " + this + " not attached to OsmandActionBarActivity.");
 	}
 
 	// === Theme and night mode resolution ===

@@ -1,5 +1,6 @@
 package net.osmand.plus.base;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,20 +38,17 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		updateNightMode();
 	}
 
+	@SuppressLint("UseGetLayoutInflater")
 	protected void updateNightMode() {
 		nightMode = resolveNightMode();
-		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		Context themedCtx = new ContextThemeWrapper(requireActivity(), getDialogThemeId());
+		themedInflater = LayoutInflater.from(themedCtx);
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		saveAppModeToBundle(appMode, outState);
-	}
-
-	@NonNull
-	public Context getThemedContext() {
-		return new ContextThemeWrapper(requireActivity(), getDialogThemeId());
 	}
 
 	@StyleRes

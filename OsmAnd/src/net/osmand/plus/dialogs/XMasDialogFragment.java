@@ -103,11 +103,6 @@ public class XMasDialogFragment extends BaseAlertDialogFragment {
 	}
 
 	@Override
-	protected void updateNightMode() {
-		this.themedInflater = LayoutInflater.from(getThemedContext());
-	}
-
-	@Override
 	protected int getDialogThemeId() {
 		return R.style.XmasDialogTheme;
 	}

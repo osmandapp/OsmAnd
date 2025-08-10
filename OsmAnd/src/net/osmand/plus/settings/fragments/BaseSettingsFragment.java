@@ -41,9 +41,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.base.AppModeDependentComponent;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
@@ -73,8 +72,8 @@ import org.apache.commons.logging.Log;
 import java.io.Serializable;
 import java.util.Set;
 
-public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
-		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged, AppModeDependentComponent {
+public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements IOsmAndFragment,
+		OnPreferenceChangeListener, OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
 
@@ -86,22 +85,22 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
-	protected OsmAndAppCustomization appCustomization;
+	protected ApplicationMode appMode;
 	protected UiUtilities iconsCache;
+	protected LayoutInflater themedInflater;
+	protected boolean nightMode;
+	protected OsmAndAppCustomization appCustomization;
 
-	protected int themeRes;
-
-	private ApplicationMode appMode;
 	private SettingsScreenType currentScreenType;
 
 	private int statusBarColor = -1;
-	private boolean nightMode;
 	private boolean wasDrawerDisabled;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		app = requireMyApplication();
+		app = (OsmandApplication) requireActivity().getApplication();
 		settings = app.getSettings();
+		iconsCache = app.getUIUtilities();
 		appCustomization = app.getAppCustomization();
 		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
 		super.onCreate(savedInstanceState);
@@ -132,7 +131,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			createToolbar(inflater, view);
 			setDivider(null);
 			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
-			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+			AndroidUtils.addStatusBarPadding21v(requireActionBarActivity(), view);
 		}
 		return view;
 	}
@@ -142,7 +141,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		boolean nightMode = app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.APP);
 		boolean changed = this.nightMode != nightMode;
 		this.nightMode = nightMode;
-		this.themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		this.themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		return changed;
 	}
 
@@ -241,6 +240,24 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 			}
 		}
+	}
+
+	@NonNull
+	@Override
+	public OsmandApplication getApp() {
+		return app;
+	}
+
+	@NonNull
+	@Override
+	public LayoutInflater getThemedInflater() {
+		return themedInflater;
+	}
+
+	@NonNull
+	@Override
+	public ThemeUsageContext getThemeUsageContext() {
+		return ThemeUsageContext.APP;
 	}
 
 	@ColorRes
@@ -614,13 +631,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			if (!fragmentManager.isStateSaved()) {
 				fragmentManager.popBackStack();
 			}
-		}
+		});
 	}
 
 	protected void enableDisablePreferences(boolean enable) {
@@ -686,8 +702,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				boolean featureEnabled = appCustomization.isFeatureEnabled(SETTINGS_ID + prefId);
 				preference.setVisible(featureEnabled && preference.isVisible());
 			}
-			if (preference instanceof ListPreference) {
-				ListPreference listPreference = (ListPreference) preference;
+			if (preference instanceof ListPreference listPreference) {
 				assert listPreference.getEntryValues().length == listPreference.getEntries().length;
 			}
 		}
@@ -701,90 +716,14 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return nightMode;
 	}
 
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
-	}
-
-	@Nullable
-	protected OsmandApplication getMyApplication() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			return (OsmandApplication) activity.getApplication();
-		} else {
-			return null;
-		}
-	}
-
 	@NonNull
-	protected OsmandApplication requireMyApplication() {
-		FragmentActivity activity = requireActivity();
-		return (OsmandApplication) activity.getApplication();
-	}
-
-	@Nullable
-	protected OsmandActionBarActivity getMyActivity() {
-		return (OsmandActionBarActivity) getActivity();
-	}
-
-	@NonNull
-	protected OsmandActionBarActivity requireMyActivity() {
-		return (OsmandActionBarActivity) requireActivity();
-	}
-
-	@Nullable
-	protected UiUtilities getIconsCache() {
-		OsmandApplication app = getMyApplication();
-		if (iconsCache == null && app != null) {
-			iconsCache = app.getUIUtilities();
-		}
+	@Override
+	public UiUtilities getIconsCache() {
 		return iconsCache;
 	}
 
-	@Nullable
-	protected OsmandSettings getSettings() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			return app.getSettings();
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	protected OsmandSettings requireSettings() {
-		OsmandApplication app = requireMyApplication();
-		return app.getSettings();
-	}
-
-	protected Drawable getIcon(@DrawableRes int id) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getIcon(id) : null;
-	}
-
 	protected Drawable getActiveIcon(@DrawableRes int id) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getPaintedIcon(id, getActiveProfileColor()) : null;
-	}
-
-	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getIcon(id, colorId) : null;
-	}
-
-	protected Drawable getContentIcon(@DrawableRes int id) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getThemedIcon(id) : null;
-	}
-
-	protected Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getPaintedIcon(id, color) : null;
+		return getPaintedIcon(id, getActiveProfileColor());
 	}
 
 	protected Drawable getPersistentPrefIcon(@DrawableRes int iconId) {
@@ -799,14 +738,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected void showSingleSelectionDialog(@NonNull String processId,
 	                                         @NonNull IDialogController controller) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			DialogManager dialogManager = app.getDialogManager();
 			dialogManager.register(processId, controller);
 			ApplicationMode appMode = getSelectedAppMode();
 			FragmentManager fm = activity.getSupportFragmentManager();
 			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, appMode, false);
-		}
+		});
 	}
 
 	public SwitchPreferenceCompat createSwitchPreference(OsmandPreference<Boolean> b, int title, int summary, int layoutId) {
@@ -878,7 +816,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		preference.setSelectable(false);
 		preference.setPersistent(false);
 		preference.setLayoutResource(R.layout.simple_divider_item);
-
 		return preference;
 	}
 
