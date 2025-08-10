@@ -4349,7 +4349,7 @@
     <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo a medir con la velocidad media para calcular la hora de llegada estimada.</string>
     <string name="shared_string_large">Grande</string>
     <string name="how_to_use">Cómo usar:</string>
-    <string name="distance_by_tap_use_description">Pulsá en el mapa para ver la distancia entre tu posición actual y el punto pulsado.\nPulsá con 2 dedos en el mapa para ver la distancia entre los dos puntos tocados</string>
+    <string name="distance_by_tap_use_description">Pulsá en el mapa para ver la distancia entre tu ubicación actual y el punto pulsado.\nPulsá con 2 dedos en el mapa para ver la distancia entre los dos puntos pulsados</string>
     <string name="rotate_map_manual_opt">Rotación manual</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
