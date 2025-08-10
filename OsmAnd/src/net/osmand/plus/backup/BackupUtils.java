@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import net.osmand.OperationLog;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
@@ -26,6 +27,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -280,5 +282,29 @@ public class BackupUtils {
 				plugin.indexingFiles(true, true);
 			}
 		}
+	}
+
+	public static long calculateItemsSize(@NonNull List<?> items) {
+		long size = 0;
+		for (Object item : items) {
+			size += getItemSize(item);
+		}
+		return size;
+	}
+
+	public static long getItemSize(@NonNull Object object) {
+		if (object instanceof FileSettingsItem fileSettingsItem) {
+			return fileSettingsItem.getSize();
+		} else if (object instanceof File file) {
+			return file.length();
+		} else if (object instanceof RemoteFile remoteFile) {
+			return  remoteFile.getZipSize();
+		} else if (object instanceof MapMarkersGroup markersGroup) {
+			if (CollectionUtils.equalsToAny(markersGroup.getId(),
+					ExportType.ACTIVE_MARKERS.name(), ExportType.HISTORY_MARKERS.name())) {
+				return  markersGroup.getMarkers().size();
+			}
+		}
+		return 0;
 	}
 }

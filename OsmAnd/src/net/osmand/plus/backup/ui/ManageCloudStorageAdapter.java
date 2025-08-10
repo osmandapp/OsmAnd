@@ -1,7 +1,6 @@
 package net.osmand.plus.backup.ui;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,7 +13,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.fragments.ExportSettingsAdapter;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -112,12 +110,7 @@ public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 	}
 
 	private long calculateExportCategorySize(@NonNull ExportCategory category) {
-		long size = 0;
-		SettingsCategoryItems items = controller.getCategoryItems(category);
-		for (ExportType exportType : items.getTypes()) {
-			size += ExportSettingsAdapter.calculateItemsSize(items.getItemsForType(exportType));
-		}
-		return size;
+		return controller.getCategoryItems(category).calculateSize();
 	}
 
 	private long calculateExportTypeSize(@NonNull ExportType exportType) {

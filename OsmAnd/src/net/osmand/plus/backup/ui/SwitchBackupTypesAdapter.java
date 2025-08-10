@@ -1,7 +1,6 @@
 package net.osmand.plus.backup.ui;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -13,11 +12,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.fragments.ExportSettingsAdapter;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
@@ -134,7 +133,7 @@ public class SwitchBackupTypesAdapter extends BackupTypesAdapter {
 		for (ExportType exportType : items.getTypes()) {
 			if (controller.hasSelectedItemsOfType(exportType)) {
 				selectedTypes++;
-				itemsSize += ExportSettingsAdapter.calculateItemsSize(items.getItemsForType(exportType));
+				itemsSize += BackupUtils.calculateItemsSize(items.getItemsForType(exportType));
 			}
 		}
 		String description;

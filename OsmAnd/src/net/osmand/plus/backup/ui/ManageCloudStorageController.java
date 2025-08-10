@@ -95,7 +95,7 @@ public class ManageCloudStorageController extends BaseBackupTypesController {
 		try {
 			screen.updateProgressVisibility(true);
 			List<RemoteFile> remoteFiles = collectRemoteFilesForTypes(types);
-			backupHelper.deleteFilesSync(remoteFiles);
+			backupHelper.deleteFiles(remoteFiles, false, null);
 		} catch (UserNotRegisteredException e) {
 			screen.updateProgressVisibility(false);
 			LOG.error(e);

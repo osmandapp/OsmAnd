@@ -14,9 +14,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.fragments.ExportSettingsAdapter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -80,7 +80,7 @@ public class BackupDataFragment extends BackupTypesFragment {
 		long totalUsed = 0;
 		for (ExportCategory category : ExportCategory.values()) {
 			for (ExportType exportType : controller.getCategoryItems(category).getTypes()) {
-				totalUsed += ExportSettingsAdapter.calculateItemsSize(controller.getItemsForType(exportType));
+				totalUsed += BackupUtils.calculateItemsSize(controller.getItemsForType(exportType));
 			}
 		}
 		if (totalUsed > 0) {
