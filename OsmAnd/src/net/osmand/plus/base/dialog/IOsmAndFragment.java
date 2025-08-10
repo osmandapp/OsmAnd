@@ -140,12 +140,12 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 
 	@NonNull
 	default View inflate(@LayoutRes int layoutResId) {
-		return inflate(layoutResId, null);
+		return inflate(layoutResId);
 	}
 
 	@NonNull
 	default View inflate(@LayoutRes int layoutResId, @Nullable ViewGroup parent) {
-		return inflate(layoutResId, parent, false);
+		return getThemedInflater().inflate(layoutResId, parent);
 	}
 
 	@NonNull

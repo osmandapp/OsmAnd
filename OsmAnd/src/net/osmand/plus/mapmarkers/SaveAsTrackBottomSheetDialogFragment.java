@@ -64,7 +64,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		portrait = AndroidUiHelper.isOrientationPortrait(activity);
 		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 
-		View mainView = inflate(R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
+		View mainView = inflate(R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container, false);
 		LinearLayout contentLayout = mainView.findViewById(R.id.content_linear_layout);
 		TextView titleTv = mainView.findViewById(R.id.save_as_track_title);
 		titleTv.setText(openFromCoordinateInput ? R.string.coord_input_save_as_track : R.string.marker_save_as_track);

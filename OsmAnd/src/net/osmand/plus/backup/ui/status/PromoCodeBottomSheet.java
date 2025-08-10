@@ -34,7 +34,7 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 		} else {
 			promoCode = savedInstanceState.getString(PROMOCODE_KEY);
 		}
-		View view = inflate(R.layout.preference_edit_text_box, null);
+		View view = inflate(R.layout.preference_edit_text_box);
 		editText = view.findViewById(R.id.edit_text);
 		editText.setText(promoCode);
 

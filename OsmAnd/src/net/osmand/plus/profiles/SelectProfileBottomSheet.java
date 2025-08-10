@@ -94,7 +94,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 
 	protected void addToggleButton(TextRadioItem selectedItem, TextRadioItem... radioItems) {
 		int padding = getDimensionPixelSize(R.dimen.content_padding_small);
-		LinearLayout container = (LinearLayout) inflate(R.layout.custom_radio_buttons, null);
+		LinearLayout container = (LinearLayout) inflate(R.layout.custom_radio_buttons);
 		LinearLayout.MarginLayoutParams params = new LinearLayout.MarginLayoutParams(
 				LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(params, padding, padding, padding, 0);

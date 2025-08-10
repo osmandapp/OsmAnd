@@ -137,7 +137,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		tracks.removeAllViews();
 
 		if (PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			View view = inflate(R.layout.dash_gpx_track_item, null, false);
+			View view = inflate(R.layout.dash_gpx_track_item);
 
 			createCurrentTrackView(view);
 			((TextView) view.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
@@ -149,7 +149,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 
 		for (String filename : list) {
-			View itemView = inflate(R.layout.dash_gpx_track_item, null, false);
+			View itemView = inflate(R.layout.dash_gpx_track_item);
 
 			File file = new File(filename);
 			TrackItem trackItem = new TrackItem(SharedUtil.kFile(file));

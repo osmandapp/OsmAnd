@@ -38,7 +38,7 @@ public class CustomizableQuestionBottomSheet extends CustomizableBottomSheet {
 			return;
 		}
 
-		View contentView = inflate(R.layout.bottom_sheet_icon_title_description, (ViewGroup) getView());
+		View contentView = inflate(R.layout.bottom_sheet_icon_title_description, (ViewGroup) getView(), false);
 		ImageView ivIcon = contentView.findViewById(R.id.icon);
 		TextView tvTitle = contentView.findViewById(R.id.title);
 		TextView tvDescription = contentView.findViewById(R.id.description);

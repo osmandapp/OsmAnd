@@ -175,7 +175,7 @@ public abstract class SelectionBottomSheet<T> extends MenuBottomSheetDialogFragm
 		listViews.clear();
 		listContainer.removeAllViews();
 		for (SelectableItem<T> item : allItems) {
-			setupItemView(item, inflate(getItemLayoutId(), null));
+			setupItemView(item, inflate(getItemLayoutId()));
 		}
 	}
 

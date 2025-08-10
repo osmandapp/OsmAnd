@@ -64,7 +64,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 				.create();
 		items.add(titleItem);
 
-		View addNewFolderView = inflate(R.layout.bottom_sheet_item_with_descr_64dp, null);
+		View addNewFolderView = inflate(R.layout.bottom_sheet_item_with_descr_64dp);
 		addNewFolderView.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
 		AndroidUiHelper.updateVisibility(addNewFolderView.findViewById(R.id.description), false);
 		BaseBottomSheetItem addNewFolderItem = new SimpleBottomSheetItem.Builder()

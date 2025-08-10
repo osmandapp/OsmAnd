@@ -81,7 +81,7 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_tracks_default_appearance, container);
+		View view = inflate(R.layout.fragment_tracks_default_appearance, container, false);
 
 		setupToolbar(view);
 		setupCards(view);

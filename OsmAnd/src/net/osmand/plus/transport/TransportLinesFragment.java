@@ -53,7 +53,7 @@ public class TransportLinesFragment extends BaseFullScreenFragment {
 		isShowAnyTransport = menu.isShowAnyTransport();
 
 		updateNightMode();
-		view = inflate(R.layout.fragment_transport_lines, container);
+		view = inflate(R.layout.fragment_transport_lines, container, false);
 
 		setupMainToggle();
 		setupTransportStopsToggle();

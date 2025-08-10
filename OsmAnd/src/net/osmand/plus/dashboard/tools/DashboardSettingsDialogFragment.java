@@ -183,7 +183,7 @@ public class DashboardSettingsDialogFragment extends BaseAlertDialogFragment imp
 		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			DashViewHolder viewHolder;
 			if (convertView == null) {
-				convertView = inflate(R.layout.dashboard_settings_dialog_item, parent);
+				convertView = inflate(R.layout.dashboard_settings_dialog_item, parent, false);
 				viewHolder = new DashViewHolder(this, convertView);
 			} else {
 				viewHolder = (DashViewHolder) convertView.getTag();

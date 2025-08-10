@@ -336,11 +336,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			int viewType = getItemViewType(position);
 			if (view == null) {
 				if (viewType == INDEX_ITEM) {
-					view = inflate(R.layout.two_line_with_images_list_item, parent);
+					view = inflate(R.layout.two_line_with_images_list_item, parent, false);
 					view.setTag(new ItemViewHolder(view, getMyActivity()));
 				} else if (viewType == OSM_LIVE_BANNER) {
 					if (showSubscriptionPurchaseBanner) {
-						view = inflate(R.layout.osm_subscription_banner_list_item, parent);
+						view = inflate(R.layout.osm_subscription_banner_list_item, parent, false);
 						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
 								R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
 								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);
@@ -353,7 +353,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 							}
 						});
 					} else {
-						view = inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent);
+						view = inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent, false);
 						view.setBackground(null);
 						AndroidUiHelper.setVisibility(View.GONE, view.findViewById(R.id.compound_button));
 						((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_action_subscription_osmand_live);

@@ -55,7 +55,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 
 	@Override
 	public View initView(@Nullable ViewGroup container, @Nullable Bundle savedState) {
-		View view = inflate(R.layout.dash_common_fragment, container);
+		View view = inflate(R.layout.dash_common_fragment, container, false);
 		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
 			startMyPlacesActivity(MyPlacesActivity.FAV_TAB);
 			closeDashboard();

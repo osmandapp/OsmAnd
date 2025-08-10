@@ -68,7 +68,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		updateNightMode();
-		View mainView = inflate(R.layout.bottom_sheet_menu_base, null);
+		View mainView = inflate(R.layout.bottom_sheet_menu_base);
 		if (useScrollableItemsContainer()) {
 			itemsContainer = mainView.findViewById(R.id.scrollable_items_container);
 		} else {

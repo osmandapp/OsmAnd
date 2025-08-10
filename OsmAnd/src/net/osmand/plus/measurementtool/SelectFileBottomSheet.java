@@ -92,7 +92,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = requireContext();
-		mainView = inflate(R.layout.bottom_sheet_plan_route_select_file, null);
+		mainView = inflate(R.layout.bottom_sheet_plan_route_select_file);
 		TextView titleView = mainView.findViewById(R.id.title);
 		titleView.setText(fragmentMode.title);
 		TextView descriptionView = mainView.findViewById(R.id.description);

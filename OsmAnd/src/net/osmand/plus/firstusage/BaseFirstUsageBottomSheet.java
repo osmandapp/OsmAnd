@@ -50,7 +50,7 @@ public abstract class BaseFirstUsageBottomSheet extends BottomSheetDialogFragmen
 	@NonNull
 	protected View createItemView(@Nullable String title,
 	                              @DrawableRes int iconId, @Nullable OnClickListener listener) {
-		View item = inflate(R.layout.item_with_left_icon, null);
+		View item = inflate(R.layout.item_with_left_icon);
 		TextView titleView = item.findViewById(R.id.title);
 		ImageView iconView = item.findViewById(R.id.icon);
 

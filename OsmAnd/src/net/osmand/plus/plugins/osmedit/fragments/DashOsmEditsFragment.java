@@ -110,7 +110,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		osmLayout.removeAllViews();
 
 		for (OsmPoint point : dataPoints) {
-			View view = inflate(R.layout.note, null, false);
+			View view = inflate(R.layout.note);
 
 			OsmEditsFragment.getOsmEditView(view, point, app);
 			ImageButton send = view.findViewById(R.id.play);

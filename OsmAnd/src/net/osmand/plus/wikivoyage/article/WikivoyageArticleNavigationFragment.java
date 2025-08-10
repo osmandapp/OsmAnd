@@ -204,7 +204,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			boolean selected = childTitle.equals(article.getTitle()) || parentsList.contains(childTitle);
 
 			if (convertView == null) {
-				convertView = inflate(R.layout.wikivoyage_contents_list_item, parent);
+				convertView = inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			TextView txtListChild = convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childTitle);
@@ -228,7 +228,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			String groupTitle = ((WikivoyageSearchResult) getGroup(groupPosition)).getArticleTitle();
 			boolean selected = parentsList.contains(groupTitle) || article.getTitle().equals(groupTitle);
 			if (convertView == null) {
-				convertView = inflate(R.layout.wikivoyage_contents_list_item, parent);
+				convertView = inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			TextView lblListHeader = convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(groupTitle);

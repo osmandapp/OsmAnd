@@ -185,7 +185,7 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
-				convertView = inflate(R.layout.wikivoyage_contents_list_item, parent);
+				convertView = inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			TextView lblListHeader = convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);

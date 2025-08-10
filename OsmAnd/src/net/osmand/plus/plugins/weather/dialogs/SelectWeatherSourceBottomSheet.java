@@ -40,7 +40,7 @@ public class SelectWeatherSourceBottomSheet extends BaseBottomSheetDialogFragmen
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.bottom_sheet_select_weather_source, null);
+		View view = inflate(R.layout.bottom_sheet_select_weather_source);
 
 		((TextView) view.findViewById(R.id.title)).setText(R.string.data_source);
 		((TextView) view.findViewById(R.id.description)).setText(R.string.weather_data_sources_prompt);

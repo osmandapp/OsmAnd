@@ -122,7 +122,7 @@ public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment imple
 			((CoordinateInputDialogFragment) coordinateInputDialog).setListener(this::updateAdapters);
 		}
 
-		View mainView = inflate(R.layout.fragment_map_markers_dialog, container);
+		View mainView = inflate(R.layout.fragment_map_markers_dialog, container, false);
 
 		Toolbar toolbar = mainView.findViewById(R.id.map_markers_toolbar);
 		int icArrowBackId = AndroidUtils.getNavigationIconResId(app);

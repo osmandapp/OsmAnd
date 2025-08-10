@@ -61,7 +61,7 @@ public class EditKeyAssignmentFragment extends BaseFullScreenFragment
 	                         @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_edit_key_assignment, container);
+		View view = inflate(R.layout.fragment_edit_key_assignment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		if (!settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode)) {
 			AndroidUiHelper.setSharedElementTransition(this, view, TRANSITION_NAME);

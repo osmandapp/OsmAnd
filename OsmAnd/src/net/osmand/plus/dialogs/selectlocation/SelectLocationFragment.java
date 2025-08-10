@@ -77,7 +77,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = inflate(R.layout.fragment_select_location, container);
+		View view = inflate(R.layout.fragment_select_location, container, false);
 		updateContent(view);
 		container.addView(view);
 	}

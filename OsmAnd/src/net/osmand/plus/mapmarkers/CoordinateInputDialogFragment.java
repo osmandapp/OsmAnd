@@ -242,7 +242,7 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 			((CoordinateInputBottomSheetDialogFragment) optionsFragment).setListener(createCoordinateInputFormatChangeListener());
 		}
 
-		mainView = inflate(R.layout.fragment_coordinate_input_dialog, container);
+		mainView = inflate(R.layout.fragment_coordinate_input_dialog, container, false);
 
 		ImageButton backBtn = mainView.findViewById(R.id.back_button);
 		backBtn.setOnClickListener(view -> quit());

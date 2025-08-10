@@ -146,7 +146,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 
 	private void addSubscribeEmailRow() {
 		if (DownloadActivity.shouldShowFreeVersionBanner(app) && !settings.EMAIL_SUBSCRIBED.get()) {
-			subscribeEmailView = inflate(R.layout.subscribe_email_header, null, false);
+			subscribeEmailView = inflate(R.layout.subscribe_email_header);
 			subscribeEmailView.findViewById(R.id.subscribe_btn).setOnClickListener(v -> subscribe());
 			listView.addHeaderView(subscribeEmailView);
 			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
@@ -159,7 +159,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 
 	private void addRestorePurchasesRow() {
 		if (!openAsDialog() && purchaseHelper != null && !purchaseHelper.hasInventory()) {
-			restorePurchasesView = inflate(R.layout.restore_purchases_list_footer, null);
+			restorePurchasesView = inflate(R.layout.restore_purchases_list_footer);
 			((ImageView) restorePurchasesView.findViewById(R.id.icon))
 					.setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
 			restorePurchasesView.findViewById(R.id.button).setOnClickListener(v -> {
@@ -182,7 +182,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 
 	private void addSearchRow() {
 		if (!openAsDialog()) {
-			searchView = inflate(R.layout.simple_list_menu_item, null);
+			searchView = inflate(R.layout.simple_list_menu_item);
 			searchView.setBackgroundResource(android.R.drawable.list_selector_background);
 			TextView title = searchView.findViewById(R.id.title);
 			title.setCompoundDrawablesWithIntrinsicBounds(getContentIcon(R.drawable.ic_action_search_dark), null, null, null);
@@ -251,7 +251,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 	private void updateFreeMapsView() {
 		if (shouldDisplayFreeMapsMessage()) {
 			if (freeMapsView == null) {
-				freeMapsView = inflate(R.layout.free_maps_header, null, false);
+				freeMapsView = inflate(R.layout.free_maps_header);
 				listView.addHeaderView(freeMapsView);
 			}
 			TextView description = freeMapsView.findViewById(R.id.description);

@@ -104,7 +104,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			removedImpassableRoads = new ArrayList<>();
 		}
 
-		View titleView = inflate(R.layout.bottom_sheet_item_toolbar_title, null);
+		View titleView = inflate(R.layout.bottom_sheet_item_toolbar_title);
 		TextView textView = titleView.findViewById(R.id.title);
 		textView.setText(!hideImpassableRoads ? R.string.impassable_road : R.string.avoid_pt_types);
 
@@ -141,7 +141,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			}
 			populateImpassableRoadsObjects();
 
-			View buttonView = inflate(R.layout.bottom_sheet_item_btn, null);
+			View buttonView = inflate(R.layout.bottom_sheet_item_btn);
 			TextView buttonDescription = buttonView.findViewById(R.id.button_descr);
 			buttonDescription.setText(R.string.shared_string_select_on_map);
 			buttonDescription.setTextColor(ColorUtilities.getActiveColor(app, nightMode));

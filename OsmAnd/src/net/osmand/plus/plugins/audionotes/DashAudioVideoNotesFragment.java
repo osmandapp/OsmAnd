@@ -90,7 +90,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		DashboardOnMap.handleNumberOfRows(notes, settings, ROW_NUMBER_TAG);
 
 		for (Recording recording : notes) {
-			View view = inflate(R.layout.note, null, false);
+			View view = inflate(R.layout.note);
 
 			setupNoteView(recording, view);
 			((ImageView) view.findViewById(R.id.play)).setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_play_dark));

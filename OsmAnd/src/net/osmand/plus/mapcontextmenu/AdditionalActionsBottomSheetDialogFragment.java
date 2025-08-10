@@ -78,12 +78,12 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 
 		if (adapter != null) {
 			LinearLayout itemsLinearLayout = mainView.findViewById(R.id.context_menu_items_container);
-			LinearLayout row = (LinearLayout) inflate(R.layout.grid_menu_row, null);
+			LinearLayout row = (LinearLayout) inflate(R.layout.grid_menu_row);
 			int itemsAdded = 0;
 			for (int i = 0; i < adapter.length(); i++) {
 				ContextMenuItem item = adapter.getItem(i);
 
-				View menuItem = inflate(R.layout.grid_menu_item, null);
+				View menuItem = inflate(R.layout.grid_menu_item);
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
 					((ImageView) menuItem.findViewById(R.id.icon)).setImageDrawable(getContentIcon(item.getIcon()));
 				}
@@ -100,7 +100,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 
 				if (itemsAdded == 3 || (i == adapter.length() - 1 && itemsAdded > 0)) {
 					itemsLinearLayout.addView(row);
-					row = (LinearLayout) inflate(R.layout.grid_menu_row, null);
+					row = (LinearLayout) inflate(R.layout.grid_menu_row);
 					itemsAdded = 0;
 				}
 			}

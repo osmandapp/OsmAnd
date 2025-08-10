@@ -63,7 +63,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 		editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
 
-		View titleView = inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp, null, false);
+		View titleView = inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp);
 		TextView title = titleView.findViewById(R.id.title);
 		title.setTypeface(FontCache.getMediumFont());
 

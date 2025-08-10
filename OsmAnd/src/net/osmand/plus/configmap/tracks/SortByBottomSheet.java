@@ -82,7 +82,7 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 		@NonNull
 		@Override
 		public SortModeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			return new SortModeViewHolder(inflate(R.layout.list_item_two_icons, parent));
+			return new SortModeViewHolder(inflate(R.layout.list_item_two_icons, parent, false));
 		}
 
 		@Override

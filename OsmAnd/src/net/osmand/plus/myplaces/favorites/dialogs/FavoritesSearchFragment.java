@@ -391,7 +391,7 @@ public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 			LinearLayout view;
 			if (type == HEADER_TYPE) {
 				if (convertView == null) {
-					view = (LinearLayout) inflate(R.layout.search_favs_list_header, null);
+					view = (LinearLayout) inflate(R.layout.search_favs_list_header);
 				} else {
 					view = (LinearLayout) convertView;
 				}
@@ -399,19 +399,19 @@ public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 				((TextView) view.findViewById(R.id.title)).setText(app.getString(R.string.sorted_by_distance));
 			} else if (type == HEADER_SHADOW_TYPE) {
 				if (convertView == null) {
-					view = (LinearLayout) inflate(R.layout.list_shadow_header, null);
+					view = (LinearLayout) inflate(R.layout.list_shadow_header);
 				} else {
 					view = (LinearLayout) convertView;
 				}
 			} else if (type == FOOTER_SHADOW_TYPE) {
 				if (convertView == null) {
-					view = (LinearLayout) inflate(R.layout.list_shadow_footer, null);
+					view = (LinearLayout) inflate(R.layout.list_shadow_footer);
 				} else {
 					view = (LinearLayout) convertView;
 				}
 			} else {
 				if (convertView == null) {
-					view = (LinearLayout) inflate(R.layout.search_favs_list_item, null);
+					view = (LinearLayout) inflate(R.layout.search_favs_list_item);
 				} else {
 					view = (LinearLayout) convertView;
 				}

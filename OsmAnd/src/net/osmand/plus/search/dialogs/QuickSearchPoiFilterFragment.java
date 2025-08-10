@@ -716,9 +716,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			View view;
 			if (convertView == null) {
 				if (viewType == 0) {
-					view = inflate(R.layout.poi_filter_list_item, null);
+					view = inflate(R.layout.poi_filter_list_item);
 				} else {
-					view = inflate(R.layout.list_item_divider, null);
+					view = inflate(R.layout.list_item_divider);
 					view.setOnClickListener(null);
 				}
 			} else {

@@ -94,7 +94,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		List<DashLocationView> distances = new ArrayList<>();
 
 		for (TargetPoint point : targetPoints) {
-			View view = inflate(R.layout.favorites_list_item, null, false);
+			View view = inflate(R.layout.favorites_list_item);
 			TextView name = view.findViewById(R.id.favourite_label);
 			TextView label = view.findViewById(R.id.distance);
 			ImageView direction = view.findViewById(R.id.direction);

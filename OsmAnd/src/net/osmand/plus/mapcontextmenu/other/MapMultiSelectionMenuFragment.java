@@ -65,7 +65,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
 
-		view = inflate(R.layout.menu_obj_selection_fragment, container);
+		view = inflate(R.layout.menu_obj_selection_fragment, container, false);
 		Context context = view.getContext();
 
 		if (menu.isLandscapeLayout()) {
@@ -114,7 +114,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			((ObservableListView) listView).setScrollViewCallbacks(this);
 		}
 
-		View headerView = inflate(R.layout.menu_obj_selection_header, listView);
+		View headerView = inflate(R.layout.menu_obj_selection_header, listView, false);
 		if (!menu.isLandscapeLayout()) {
 			AndroidUtils.setBackground(context, headerView, getListBgColorId(nightMode));
 		}

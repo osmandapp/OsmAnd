@@ -45,7 +45,7 @@ public class DashSimulateFragment extends DashBaseFragment {
 		view.findViewById(R.id.show_all).setVisibility(View.GONE);
 
 		LinearLayout llTracks = view.findViewById(R.id.items);
-		View item = inflate(R.layout.dash_simulate_item, null, false);
+		View item = inflate(R.layout.dash_simulate_item);
 		llTracks.addView(item);
 		item.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();

@@ -66,7 +66,7 @@ public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomShe
 
 	@NonNull
 	private View createRadioButton(@NonNull DistanceDuringNavigationMode mode, @Nullable ViewGroup container, boolean hasDivider) {
-		View view = inflate(R.layout.bottom_sheet_item_with_descr_radio_and_icon_btn, container);
+		View view = inflate(R.layout.bottom_sheet_item_with_descr_radio_and_icon_btn, container, false);
 		TextView title = view.findViewById(R.id.title);
 		ImageView iconView = view.findViewById(R.id.icon);
 		RadioButton radioButton = view.findViewById(R.id.compound_button);

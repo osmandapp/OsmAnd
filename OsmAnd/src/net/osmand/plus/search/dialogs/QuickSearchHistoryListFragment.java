@@ -149,7 +149,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		QuickSearchDialogFragment dialogFragment = (QuickSearchDialogFragment) getParentFragment();
 		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this, nightMode, !dialogFragment.isSearchHidden());
 		getListView().addHeaderView(nearbyPlacesCard, null, false);
-		getListView().addHeaderView(inflate(R.layout.recently_visited_header, getListView()));
+		getListView().addHeaderView(inflate(R.layout.recently_visited_header, getListView(), false));
 	}
 
 	@Override

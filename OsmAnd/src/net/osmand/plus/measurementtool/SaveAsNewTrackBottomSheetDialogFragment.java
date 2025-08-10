@@ -81,7 +81,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new TitleItem(getString(R.string.save_as_new_track)));
 
-		View editNameView = inflate(R.layout.track_name_edit_text, null);
+		View editNameView = inflate(R.layout.track_name_edit_text);
 		nameTextBox = editNameView.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(highlightColorId);
 		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_file_name));
@@ -107,7 +107,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
-		View selectFolderView = inflate(R.layout.select_folder_row, null);
+		View selectFolderView = inflate(R.layout.select_folder_row);
 		selectFolderView.findViewById(R.id.select_folder_button).setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -126,7 +126,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		adapter.setItems(getAdapterItems());
 		if (adapter.getItemCount() > 0) {
 			adapter.setListener(createFolderSelectListener());
-			View view = inflate(R.layout.bottom_sheet_item_recyclerview, null);
+			View view = inflate(R.layout.bottom_sheet_item_recyclerview);
 			recyclerView = view.findViewById(R.id.recycler_view);
 			recyclerView.setPadding(contentPaddingHalf, 0, contentPaddingHalf, 0);
 			BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()

@@ -49,7 +49,7 @@ public class InputDevicesFragment extends BaseFullScreenFragment implements Inpu
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_external_input_device_type, container);
+		View view = inflate(R.layout.fragment_external_input_device_type, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 

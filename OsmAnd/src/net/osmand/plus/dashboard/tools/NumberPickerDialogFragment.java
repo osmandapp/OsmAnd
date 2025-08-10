@@ -55,7 +55,7 @@ public class NumberPickerDialogFragment extends BaseAlertDialogFragment {
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
 		if (subHeaderText != null) {
-			View titleView = inflate(R.layout.number_picker_dialog_title, null);
+			View titleView = inflate(R.layout.number_picker_dialog_title);
 			TextView titleTextView = titleView.findViewById(R.id.titleTextView);
 			titleTextView.setText(headerText);
 			TextView subtitleTextView = titleView.findViewById(R.id.subtitleTextView);

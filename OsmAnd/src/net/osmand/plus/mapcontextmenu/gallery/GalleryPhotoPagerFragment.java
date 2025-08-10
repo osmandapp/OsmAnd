@@ -105,7 +105,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		ViewGroup view = (ViewGroup) inflate(R.layout.gallery_photo_fragment, container);
+		ViewGroup view = (ViewGroup) inflate(R.layout.gallery_photo_fragment, container, false);
 
 		setupToolbar(view);
 		setupOnBackPressedCallback();

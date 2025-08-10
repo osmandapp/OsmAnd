@@ -92,7 +92,7 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = inflate(R.layout.fragment_required_maps, container);
+		view = inflate(R.layout.fragment_required_maps, container, false);
 		view.setBackgroundColor(getActivityBgColor(app, nightMode));
 		setupToolbar();
 		updateContent();

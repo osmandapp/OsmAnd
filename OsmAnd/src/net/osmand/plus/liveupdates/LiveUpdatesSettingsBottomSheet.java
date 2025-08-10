@@ -113,7 +113,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		items.add(itemTitle);
 
 		itemUpdateTimeInfo = new BaseBottomSheetItem.Builder()
-				.setCustomView(inflate(R.layout.live_update_time_info, null))
+				.setCustomView(inflate(R.layout.live_update_time_info))
 				.create();
 		items.add(itemUpdateTimeInfo);
 		refreshUpdateTimeInfo();
@@ -154,7 +154,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 				.create();
 		items.add(itemSwitchLiveUpdate);
 
-		TextViewEx frequencyTitle = (TextViewEx) inflate(R.layout.bottom_sheet_item_title, null);
+		TextViewEx frequencyTitle = (TextViewEx) inflate(R.layout.bottom_sheet_item_title);
 		frequencyTitle.setMinHeight(dp24);
 		frequencyTitle.setMinimumHeight(dp24);
 		frequencyTitle.setText(R.string.update_frequency);
@@ -165,7 +165,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 				.setCustomView(frequencyTitle)
 				.create());
 
-		LinearLayout itemFrequencyButtons = (LinearLayout) inflate(R.layout.custom_radio_buttons, null);
+		LinearLayout itemFrequencyButtons = (LinearLayout) inflate(R.layout.custom_radio_buttons);
 		LinearLayout.MarginLayoutParams itemFrequencyParams = new LinearLayout.MarginLayoutParams(
 				LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(itemFrequencyParams, dp16, 0, dp16, 0);
@@ -186,7 +186,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 				.setCustomView(itemFrequencyButtons)
 				.create());
 
-		TextViewEx timeOfDayTitle = (TextViewEx) inflate(R.layout.bottom_sheet_item_title, null);
+		TextViewEx timeOfDayTitle = (TextViewEx) inflate(R.layout.bottom_sheet_item_title);
 		timeOfDayTitle.setMinHeight(dp24);
 		timeOfDayTitle.setMinimumHeight(dp24);
 		timeOfDayTitle.setText(R.string.update_time);
@@ -197,7 +197,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 				.setCustomView(timeOfDayTitle)
 				.create());
 
-		LinearLayout itemTimeOfDayButtons = (LinearLayout) inflate(R.layout.custom_radio_buttons, null);
+		LinearLayout itemTimeOfDayButtons = (LinearLayout) inflate(R.layout.custom_radio_buttons);
 		LinearLayout.MarginLayoutParams itemTimeOfDayParams = new LinearLayout.MarginLayoutParams(
 				LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(itemTimeOfDayParams, dp16, 0, dp16, 0);
@@ -233,7 +233,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		items.add(itemFrequencyHelpMessage);
 
 		LinearLayout itemUpdateNowButton =
-				(LinearLayout) inflate(R.layout.bottom_sheet_button_with_icon_center, null);
+				(LinearLayout) inflate(R.layout.bottom_sheet_button_with_icon_center);
 		LinearLayout.MarginLayoutParams itemUpdateNowParams = new LinearLayout.MarginLayoutParams(
 				LinearLayout.MarginLayoutParams.MATCH_PARENT, dp36);
 		AndroidUtils.setMargins(itemUpdateNowParams, dp12, dp16, dp16, dp12);

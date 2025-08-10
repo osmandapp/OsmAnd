@@ -77,7 +77,7 @@ public class ChangeAppearanceFragment extends BaseFullScreenDialogFragment imple
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_tracks_change_appearance, container);
+		View view = inflate(R.layout.fragment_tracks_change_appearance, container, false);
 		view.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 
 		setupToolbar(view);

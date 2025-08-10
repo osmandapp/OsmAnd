@@ -127,7 +127,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		listContainer.removeAllViews();
 		listViews.clear();
 		for (SelectableItem<GpxDisplayGroup> item : uiItems) {
-			View view = inflate(R.layout.bottom_sheet_item_with_descr_and_switch_56dp, listContainer);
+			View view = inflate(R.layout.bottom_sheet_item_with_descr_and_switch_56dp, listContainer, false);
 			TextView title = view.findViewById(R.id.title);
 			title.setText(item.getTitle());
 

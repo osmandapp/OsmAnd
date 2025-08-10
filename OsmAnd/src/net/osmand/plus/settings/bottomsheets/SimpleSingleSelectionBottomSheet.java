@@ -65,7 +65,7 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 		LinearLayout llItems = view.findViewById(R.id.items);
 
 		for (int i = 0; i < names.length; i++) {
-			View v = inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems);
+			View v = inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems, false);
 			v.setTag(i);
 
 			TextView tvTitle = v.findViewById(R.id.title);

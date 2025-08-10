@@ -543,9 +543,8 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 	                                    ArrayAdapter<Object> adapter, boolean nightMode,
 	                                    boolean flat, int position) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		WaypointDialogHelper helper = mapActivity.getDashboard().getWaypointDialogHelper();
 		if (v == null || v.findViewById(R.id.info_close) == null) {
-			v = inflate(R.layout.route_waypoint_item, null);
+			v = inflate(R.layout.route_waypoint_item);
 		}
 		v.setBackgroundColor(ColorUtilities.getCardAndListBackgroundColor(mapActivity, nightMode));
 		updatePointInfoView(mapActivity, v, point, true, nightMode, edit, false);

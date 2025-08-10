@@ -152,7 +152,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		View itemView = inflate(R.layout.trip_recording_fragment, null, false);
+		View itemView = inflate(R.layout.trip_recording_fragment);
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(itemView)
 				.create());
@@ -181,7 +181,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	@Override
 	protected void setupBottomButtons(ViewGroup view) {
 		int contentPadding = getDimensionPixelSize(R.dimen.content_padding);
-		View buttonsContainer = inflate(R.layout.preference_button_with_icon_quadruple, null);
+		View buttonsContainer = inflate(R.layout.preference_button_with_icon_quadruple);
 		buttonsContainer.setPadding(contentPadding, contentPadding, contentPadding, contentPadding);
 		view.addView(buttonsContainer);
 

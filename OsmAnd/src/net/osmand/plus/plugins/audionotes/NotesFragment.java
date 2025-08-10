@@ -90,7 +90,7 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 		setHasOptionsMenu(true);
 
-		View view = inflate(R.layout.update_index, container);
+		View view = inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		ViewStub emptyStub = view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
@@ -487,7 +487,7 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 	private void editNote(Recording recording) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getThemedContext());
 		builder.setTitle(R.string.shared_string_rename);
-		View v = inflate(R.layout.note_edit_dialog, getListView());
+		View v = inflate(R.layout.note_edit_dialog, getListView(), false);
 		EditText editText = v.findViewById(R.id.name);
 		builder.setView(v);
 		editText.setText(recording.getName(getActivity(), true));

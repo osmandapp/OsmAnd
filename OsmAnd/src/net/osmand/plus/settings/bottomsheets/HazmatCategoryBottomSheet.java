@@ -55,7 +55,7 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		View view = inflate(R.layout.bottom_sheet_hazmat_category, null);
+		View view = inflate(R.layout.bottom_sheet_hazmat_category);
 		setupToggleButtons(view);
 		updateView(view);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
@@ -107,7 +107,7 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 		}
 
 		for (int i = 0; i < names.length; i++) {
-			View v = inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems);
+			View v = inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems, false);
 			v.setTag(i);
 
 			TextView tvTitle = v.findViewById(R.id.title);

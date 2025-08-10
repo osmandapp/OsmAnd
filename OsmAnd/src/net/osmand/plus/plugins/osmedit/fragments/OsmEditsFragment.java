@@ -148,7 +148,7 @@ public class OsmEditsFragment extends BaseNestedListFragment implements Progress
 		}
 		setHasOptionsMenu(true);
 
-		View view = inflate(R.layout.update_index, container);
+		View view = inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		ViewStub emptyStub = view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_osm_edits);
@@ -426,7 +426,7 @@ public class OsmEditsFragment extends BaseNestedListFragment implements Progress
 		listView.setEmptyView(emptyView);
 
 		if (!osmEdits.isEmpty() && footerView == null && portrait) {
-			footerView = inflate(R.layout.list_shadow_footer, listView);
+			footerView = inflate(R.layout.list_shadow_footer, listView, false);
 			listView.addFooterView(footerView);
 		}
 		List<Object> items = createItemsList();
@@ -477,7 +477,7 @@ public class OsmEditsFragment extends BaseNestedListFragment implements Progress
 	}
 
 	private void showBugDialog(OsmNotesPoint point) {
-		View view = inflate(R.layout.open_bug, null);
+		View view = inflate(R.layout.open_bug);
 		view.findViewById(R.id.user_name_field).setVisibility(View.GONE);
 		view.findViewById(R.id.userNameEditTextLabel).setVisibility(View.GONE);
 		view.findViewById(R.id.password_field).setVisibility(View.GONE);

@@ -105,7 +105,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 
 		LatLon loc = getDefaultLocation();
 		for (HistoryEntry historyEntry : historyEntries) {
-			View itemView = inflate(R.layout.search_history_list_item, null, false);
+			View itemView = inflate(R.layout.search_history_list_item);
 			updateHistoryItem(historyEntry, itemView, loc);
 			itemView.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			itemView.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);

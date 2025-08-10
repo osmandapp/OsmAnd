@@ -131,7 +131,7 @@ public class MapMarkerSelectionFragment extends BaseFullScreenDialogFragment {
 		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			MapMarker marker = getItem(position);
 			if (convertView == null) {
-				convertView = inflate(R.layout.map_marker_item, null);
+				convertView = inflate(R.layout.map_marker_item);
 			}
 			MapMarkerDialogHelper.updateMapMarkerInfo(getContext(),
 					convertView, loc, heading, useCenter, nightMode, screenOrientation, marker);

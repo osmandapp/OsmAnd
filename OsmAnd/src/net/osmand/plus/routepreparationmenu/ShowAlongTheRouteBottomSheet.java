@@ -231,7 +231,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			} else if (child instanceof InfoItem) {
 				convertView = createInfoItem();
 			} else if (child instanceof PointItem item) {
-				convertView = inflate(R.layout.along_the_route_point_item, parent);
+				convertView = inflate(R.layout.along_the_route_point_item, parent, false);
 				WaypointDialogHelper.updatePointInfoView(mapActivity, convertView, item.point, true, nightMode, true, false);
 
 				convertView.findViewById(R.id.waypoint_container).setOnClickListener(v -> {
@@ -292,7 +292,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			boolean enabled = waypointHelper.isTypeEnabled(type);
 
 			if (convertView == null) {
-				convertView = inflate(R.layout.along_the_route_category_item, parent);
+				convertView = inflate(R.layout.along_the_route_category_item, parent, false);
 			}
 			TextView lblListHeader = convertView.findViewById(R.id.title);
 			lblListHeader.setText(getHeader(group.type));

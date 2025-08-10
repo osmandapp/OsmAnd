@@ -52,7 +52,7 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 	                         @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = inflate(R.layout.fragment_coordinates_grid, container);
+		view = inflate(R.layout.fragment_coordinates_grid, container, false);
 		if (controller != null) {
 			profileColor = settings.getApplicationMode().getProfileColor(nightMode);
 			showHideTopShadow();

@@ -88,7 +88,7 @@ public class SelectKeyCodeFragment extends BaseFullScreenFragment implements Key
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_select_key_code, container);
+		View view = inflate(R.layout.fragment_select_key_code, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 		setupDescription(view);

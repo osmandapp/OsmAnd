@@ -123,7 +123,7 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 		}
 		editMode = !Objects.equals(filterId, helper.getCustomPOIFilter().getFilterId());
 
-		View view = inflate(R.layout.search_custom_poi, container);
+		View view = inflate(R.layout.search_custom_poi, container, false);
 		searchProgressBar = view.findViewById(R.id.searchProgressBar);
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
@@ -147,8 +147,8 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 		listView = view.findViewById(android.R.id.list);
 		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 
-		headerShadow = inflate(R.layout.list_shadow_header, null);
-		headerDescription = inflate(R.layout.list_item_description, null);
+		headerShadow = inflate(R.layout.list_shadow_header);
+		headerDescription = inflate(R.layout.list_item_description);
 		((TextView) headerDescription.findViewById(R.id.description)).setText(R.string.search_poi_types_descr);
 		listView.addHeaderView(headerDescription, null, false);
 		View footerShadow = inflate(R.layout.list_shadow_footer, listView, false);
@@ -433,7 +433,7 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				row = inflate(R.layout.list_item_icon24_and_menu, parent);
+				row = inflate(R.layout.list_item_icon24_and_menu, parent, false);
 			}
 			PoiCategory category = getItem(position);
 			if (category != null) {

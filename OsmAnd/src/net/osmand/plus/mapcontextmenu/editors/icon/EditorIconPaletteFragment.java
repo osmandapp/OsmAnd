@@ -99,7 +99,7 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_icon_categories, container);
+		View view = inflate(R.layout.fragment_icon_categories, container, false);
 		progressBar = view.findViewById(R.id.progress_bar);
 		setupToolbar(view);
 		setupSearch(view);
