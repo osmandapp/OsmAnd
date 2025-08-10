@@ -2800,7 +2800,7 @@
     <string name="precision_hdop_and_vdop">Οριζόντια ακρίβεια: %1$s, κατακόρυφη: %2$s</string>
     <string name="precision_hdop">Οριζόντια ακρίβεια: %s</string>
     <string name="app_mode_offroad">Εκτός δρόμου</string>
-    <string name="edit_profile_setup_title">Δημιουργία προφίλ</string>
+    <string name="edit_profile_setup_title">Διαμόρφωση προφίλ</string>
     <string name="edit_profile_setup_subtitle">Το προφίλ διατηρεί τις ρυθμίσεις του</string>
     <string name="edit_profile_setup_map_subtitle">Επιλογές χάρτη για το προφίλ</string>
     <string name="edit_profile_screen_options_subtitle">Επιλογές οθόνης για το προφίλ</string>
@@ -5438,4 +5438,7 @@
     <string name="missing_maps_description">Κάποιοι χάρτες εκτός σύνδεσης που απαιτούνται για αυτή την διαδρομή λείπουν ή δεν είναι ενημερωμένοι. Παρακαλούμε κατεβάστε ή ενημερώστε αυτούς τους χάρτες.</string>
     <string name="route_line_use_coloring_speed">Η γραμμή της διαδρομής χρωματίζεται βάσει της ταχύτητας κίνησης.</string>
     <string name="route_line_use_coloring_altitude">Η γραμμή της διαδρομής χρωματίζεται βάσει της υψομετρικής διαφοράς.</string>
+    <string name="troubleshooting_description">Παρακαλούμε ακολουθήστε τον ακόλουθο σύνδεσμο εάν έχετε ζητήματα με τις αγορές.</string>
+    <string name="help_article_setup_a_route_name">Διαμορφώστε μια διαδρομή</string>
+    <string name="shared_string_setup">Διαμόρφωση</string>
 </resources>
