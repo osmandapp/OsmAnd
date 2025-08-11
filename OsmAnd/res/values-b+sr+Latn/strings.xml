@@ -5788,4 +5788,12 @@
     <string name="write_location_provider_description">Sačuvajte provajdera lokacije za svaku tačku putanje tokom snimanja</string>
     <string name="write_location_provider">Napišite provajdera lokacije</string>
     <string name="altitude_metrics_description">Postavlja jedinicu za prikaz nadmorske visine u vidžeta i statistike.</string>
+    <string name="descent">Dole</string>
+    <string name="map_orientations_choose_description">Ostavite prazno da biste se prebacivali između svih dostupnih režima ili dodajte samo željene.</string>
+    <string name="map_orientations">Orijentacije mape</string>
+    <string name="average_elevation">Prosečna nadmorska visina</string>
+    <string name="ascent">Gore</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Odgovor</string>
+    <string name="ble_prefix_pattern">%s •</string>
 </resources>
