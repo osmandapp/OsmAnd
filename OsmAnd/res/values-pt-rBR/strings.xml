@@ -184,7 +184,7 @@
     <string name="notes">Notas A/V</string>
     <string name="online_map">Mapa on-line</string>
     <string name="roads_only">Apenas estradas</string>
-    <string name="rendering_attr_pisteRoutes_name">Pistas de esqui</string>
+    <string name="rendering_attr_pisteRoutes_name">Rotas de esqui</string>
     <string name="free">Livre %1$s</string>
     <string name="device_memory">Memória do aparelho</string>
     <string name="world_ski_missing">Faça o download do mapa off-line especial para exibir as instalações de esqui.</string>
@@ -1969,8 +1969,8 @@
     <string name="move_all_to_history">Mover tudo para o histórico</string>
     <string name="show_direction">Indicação de distância</string>
     <string name="sort_by">Classificar por</string>
-    <string name="do_not_use_animations">Sem animações</string>
-    <string name="do_not_use_animations_descr">Desativar as animações de mapa.</string>
+    <string name="do_not_use_animations">Remover animações</string>
+    <string name="do_not_use_animations_descr">Desativa as animações do mapa e da interface do usuário.</string>
     <string name="keep_showing_on_map">Manter mostrando no aplicativo</string>
     <string name="exit_without_saving">Sair sem salvar?</string>
     <string name="line">Linha</string>
@@ -2531,7 +2531,7 @@
     <string name="make_as_start_point">Converter em ponto de partida</string>
     <string name="select_waypoints_category_description">Adicione todos os pontos da trilha, ou selecione categorias separadas.</string>
     <string name="shared_string_total">Total</string>
-    <string name="clear_all_intermediates">Limpar todos os pontos intermédios</string>
+    <string name="clear_all_intermediates">Limpar todos os destinos intermédios</string>
     <string name="group_deleted">Grupo excluído</string>
     <string name="nothing_found_in_radius">Nada encontrado:</string>
     <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres, mundiais e de alta qualidade do OSM.
@@ -2746,9 +2746,9 @@
     <string name="shared_string_launch">Iniciar</string>
     <string name="run_full_osmand_header">Iniciar OsmAnd\?</string>
     <string name="add_destination_point">Defina destino</string>
-    <string name="add_intermediate_point">Adicionar intermediário</string>
+    <string name="add_intermediate_point">Adicionar destino intermediário</string>
     <string name="add_start_point">Defina o ponto de partida</string>
-    <string name="intermediate_waypoint">Ponto intermediário</string>
+    <string name="intermediate_waypoint">Destino intermediário</string>
     <string name="transfers">Transferências</string>
     <string name="on_foot">A pé</string>
     <string name="route_way">Via</string>
@@ -2843,7 +2843,7 @@
     <string name="rendering_attr_highway_class_bridleway_name">Estrada equestre</string>
     <string name="public_transport_warning_descr_blog">Leia mais sobre o roteamento OsmAnd em nosso blog.</string>
     <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, espere erros e imprecisões.</string>
-    <string name="add_intermediate">Adicionar ponto intermediário</string>
+    <string name="add_intermediate">Adicionar destino intermediário</string>
     <string name="shared_string_walk">A pé</string>
     <string name="save_poi_value_exceed_length">Reduza o comprimento da tag \"%s\" para menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Comprimento do valor \"%s\"</string>
@@ -3705,7 +3705,7 @@
     <string name="shared_string_is_saved">está salvo</string>
     <string name="one_point_error">Adicione pelo menos dois pontos.</string>
     <string name="shared_string_redo">Refazer</string>
-    <string name="release_3_8">"• Função de planejamento de rota atualizada: permite o uso de diferentes tipos de navegação por segmento e a inclusão de trilhas\n\n\n\n • Novo menu de aparência para trilhas: selecione cor, espessura, setas de direção de exibição, ícones de início e término\n\n\n\n  • Melhor visibilidade dos nós da bicicleta.\n\n\n\n  • As trilhas agora podem ser tocadas, têm menu de contexto com informações básicas.\n\n\n\n  • Algoritmos de pesquisa aprimorados\n\n\n\n  • Opções de acompanhamento de trilha aprimoradas na navegação\n\n\n\n  • Problemas corrigidos com importação/exportação de configurações de perfil\n\n\n\n"</string>
+    <string name="release_3_8">• Função Planear uma rota atualizada: permite utilizar diferentes tipos de navegação por segmento e a inclusão de trilhos.\n\n • Novo menu Aparência para trilhos: selecione a cor, a espessura, as setas de direção, os ícones de início e fim.\n\n • Visibilidade melhorada dos nós de bicicleta.\n\n • Os trilhos agora são selecionáveis e têm um menu de contexto com informações básicas.\n\n • Algoritmos de pesquisa aprimorados\n\n • Opções de seguir trilha aprimoradas na navegação\n\n • Problemas corrigidos com importação/exportação de configurações de perfil</string>
     <string name="sort_last_modified">Última modificação</string>
     <string name="sort_name_descending">Nome: Z – A</string>
     <string name="sort_name_ascending">Nome: A – Z</string>
@@ -3796,7 +3796,7 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemão (casual)</string>
     <string name="app_mode_light_aircraft">Avião leve</string>
-    <string name="release_3_9">"• Adicionada opção para exportar e importar todos os dados, incluindo configurações, recursos, meus lugares\n\n\n\n  • Plano de rota: gráficos para segmentos de trilha com rota, e adicionou a capacidade de criar e editar vários segmentos de trilha\n\n\n\n  • Método de autenticação OAuth adicionado para OpenStreetMap, interface de usuário aprimorada de caixas de diálogo OSM\n\n\n\n  • Suporta cores personalizadas para favoritos e rastreia pontos de referência\n\n\n\n"</string>
+    <string name="release_3_9">• Adicionada opção para exportar e importar todos os dados, incluindo configurações, recursos e meus locais\n\n • Planejar rota: gráficos para segmentos de trilha com rota e adicionado a capacidade de criar e editar vários segmentos de trilha\n\n • Adicionado método de autenticação OAuth para OpenStreetMap, melhorada a interface do usuário das caixas de diálogo OSM\n\n • Suporte a cores personalizadas para favoritos e pontos de referência da trilha</string>
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir depois</string>
     <string name="plan_route_add_new_segment">Adicionar novo segmento</string>
@@ -4297,7 +4297,7 @@
     <string name="display_route_tracks">Exibir trilhas</string>
     <string name="display_route_tracks_as_poi">Exibir trilhas como POI</string>
     <string name="quick_action_toggle_preference">Um botão de alternância para alterar a preferência.</string>
-    <string name="delete_history_items_descr">Excluir itens de histórico selecionados?</string>
+    <string name="delete_history_items_descr">As entradas selecionadas são removidas da lista.</string>
     <string name="delete_history_items">Apagar itens do histórico %1$s?</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Toque em \"%1$s\" para copiar %2$s arquivos de \"%3$s\" para \"%4$s\". Pode levar algum tempo.</string>
@@ -5823,7 +5823,7 @@
     <string name="type_of_activity">Tipo de atividade</string>
     <string name="change_activity">Alterar atividade</string>
     <string name="shared_string_increase">Aumentar</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para motos fora de estrada</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas para bicicletas sujas</string>
     <string name="shared_string_decrease">Diminuir</string>
     <string name="unit_volt">V</string>
     <string name="wikimedia">Wikimedia</string>
@@ -5877,7 +5877,7 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="obd_support">Suporte a OBD</string>
     <string name="quick_action_showhide_osm_edits_descr">Botão para mostrar ou ocultar as edições locais do OSM no mapa.</string>
-    <string name="obd_plugin_description">Monitore as principais métricas do veículo usando o protocolo OBD-II. Acesse dados que incluem: * Velocidade do motor * Consumo de combustível * Combustível restante * Distância desde a partida do motor * Temperatura de admissão * Temperatura ambiente * Temperatura do líquido de arrefecimento * Velocidade do veículo * Porcentagem da bateria</string>
+    <string name="obd_plugin_description">Monitore as principais métricas do veículo usando o protocolo OBD-II. Acesse dados incluindo:\n • Velocidade do motor, tempo de funcionamento do motor, carga calculada do motor \n • Consumo de combustível, pressão do combustível, combustível restante\n • Temperatura de admissão, temperatura ambiente, temperatura do líquido de arrefecimento, temperatura do óleo do motor\n • Velocidade do veículo, posição do acelerador, tensão da bateria\n</string>
     <string name="quick_action_save_recorded_trip_and_continue">Viagem gravada &amp; Continuar</string>
     <string name="obd_fuel_type_bifuel_gasoline">Funcionamento bicombustível a gasolina</string>
     <string name="obd_fuel_type_bifuel_cng">Funcionamento bicombustível a GNV</string>
@@ -5897,7 +5897,7 @@
     <string name="connect_obd_instructions_step3">Ative o Bluetooth no seu dispositivo</string>
     <string name="learn_more_about_obd_sensors">Saiba mais sobre sensores.</string>
     <string name="screen_is_locked_by_action_button">A tela sensível ao toque está bloqueada. Toque no botão para desbloquear.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para motos fora de estrada</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas para bicicletas de terra</string>
     <string name="obd_fuel_type_bifuel_ethanol">Funcionamento bicombustível a etanol</string>
     <string name="liter_per_hour">L/h</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido elétrico e motor a combustão</string>
@@ -6088,7 +6088,7 @@
     <string name="show_dms_grids">Use DMS em vez de graus</string>
     <string name="plugin_ais_tracker_name">Rastreador de embarcações AIS</string>
     <string name="plugin_ais_tracker_description">Exibe posições AIS e informações sobre embarcações próximas. Os dados AIS são recebidos via rede a partir de um receptor AIS externo.</string>
-    <string name="no_places_available">Não há lugares disponíveis</string>
+    <string name="no_places_available">Nenhum lugar na região visível</string>
     <string name="selected_delayed_profile">Perfil selecionado \"%s\"</string>
     <string name="preview_next_turn">Prévia da próxima curva</string>
     <string name="obd_fuel_consumption">Consumo de combustível</string>
@@ -6135,7 +6135,7 @@
     <string name="set_home">Definir casa</string>
     <string name="set_work">Definir trabalho</string>
     <string name="sensor_data">Dados do sensor</string>
-    <string name="set_intermediate_point">Definir ponto intermediário</string>
+    <string name="set_intermediate_point">Definir destino intermediário</string>
     <string name="set_start_point">Definir ponto de início</string>
     <string name="battery_level">Nível da bateria</string>
     <string name="set_parking_position">Definir posição de estacionamento</string>
@@ -6148,4 +6148,21 @@
     <string name="ski_route_switch_style_description">Explore as pistas de esqui, os teleféricos e muito mais com o estilo de mapa Inverno e esqui.</string>
     <string name="show_rasterization_debug_tile">Mostrar informações de rasterização de ladrilhos</string>
     <string name="show_symbols_bboxes">Mostrar símbolos bboxes</string>
+    <string name="release_5_2">• Trabalho em andamento...</string>
+    <string name="next_turn_information">Informações sobre a próxima volta</string>
+    <string name="next_turn_information_desc">Mostra a direção da próxima curva e o nome da rua.</string>
+    <string name="description_purchases_fastspring">Você pode gerenciar suas compras através do portal de gerenciamento de contas FastSpring.</string>
+    <string name="description_subscription_fastspring">Você pode gerenciar ou cancelar sua assinatura através do portal de gerenciamento de contas FastSpring.</string>
+    <string name="manage_purchases">Gerenciar compras</string>
+    <string name="failed_to_connect">Falha ao conectar-se a %1s</string>
+    <string name="release_5_1">• Adicionado suporte para compras na web e em várias plataformas.\n\n • Mudança das unidades de temperatura para as configurações gerais, para facilitar o acesso.\n\n • Adicionado indicador do nível da bateria para sensores BLE.\n\n • Nova interface de usuário mais intuitiva para seleção de pontos na navegação.\n\n • Melhoria da visibilidade do widget com um novo contorno.\n\n • Adicionado analisador de subidas/descidas.\n\n • Expansão da integração com a Wikipédia e o Wikivoyage para mais pontos de interesse.</string>
+    <string name="shared_string_threads">Threads</string>
+    <string name="threads_allocated_for_rendering_desc">Uma alocação menor de linhas pode acelerar a renderização do mapa em alguns casos.</string>
+    <string name="turn_by_turn_directions">Instruções passo a passo</string>
+    <string name="release_5_0">• Descubra os POIs mais bem classificados com o novo modo Explorar.\n\n • Todas as rotas OSM agora podem ser pesquisadas! Caminhadas, ciclismo, MTB e muito mais.\n\n • O novo widget de navegação combina setas de direção e instruções de navegação.\n\n • Widget de informações da rota atual: exibe a hora prevista de chegada, a hora de chegada e a distância.\n\n • Selecione pistas de esqui e trilhas de MTB no mapa para obter informações detalhadas.\n\n • Possibilidade de selecionar o tamanho do widget para os painéis esquerdo e direito.\n\n • Adicionada grade de coordenadas com coordenadas geográficas\n\n • Adicionada a possibilidade de personalizar a aparência padrão dos grupos favoritos\n\n • Android Auto: visualize a hora prevista de chegada e a distância até o próximo ponto de referência; os nomes das cidades agora aparecem nos resultados da pesquisa\n • Os picos proeminentes agora podem ser encontrados através do mapa e da pesquisa\n\n • Alturas dos picos das montanhas em pés\n\n • Adicionado: penhascos e áreas de escalada no mapa\n\n • A pesquisa de endereços nos EUA foi melhorada\n\n • Adicionado TTS em hebraico para navegação</string>
+    <string name="release_4_9">• Adicionado um visualizador de galeria em tela cheia para imagens da Wikimedia\n\n• Introduzido um novo plugin “Vehicle Metrics” para monitorar o desempenho do veículo usando o protocolo OBD-II\n\n • Adicionada a capacidade de atribuir atividades a trilhas e filtrá-las de acordo\n\n • Implementadas novas ações rápidas para registro de viagens e bloqueio da tela sensível ao toque\n\n • Introduzida aparência personalizável do botão do mapa e uma grade precisa\n\n • Adicionado um menu de contexto e uma ação “Redefinir velocidade média” aos widgets\n\n • Adicionada nova camada de rota “Trilhas de moto off-road”\n\n • Corrigido o problema “Gravar trajetória automaticamente durante a navegação”\n\n • Corrigido o problema com coordenadas invertidas em RTL\n\n • Corrigido o problema de dados de sensor perdidos para a trajetória atualmente gravada\n\n • Adicionadas informações sobre as áreas circundantes para o ponto selecionado\n\n • Adicionada ação rápida para controlar a visibilidade das edições OSM\n\n • Separados os parâmetros de visibilidade para as opções de colorização do terreno\n\n • Adicionado um ícone clicável para exibir o acesso ou outros atributos de estradas ou caminhos</string>
+    <string name="enable_msaa">Ativar MSAA</string>
+    <string name="threads_allocated_for_rendering">Linhas alocadas para renderização</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Pontos de rota GPX (%1$d) copiados para os favoritos.</string>
+    <string name="msg_favorites_skipped_as_existing">Os pontos favoritos (%1$d) foram ignorados como já existentes.</string>
 </resources>

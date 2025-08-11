@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.os.AsyncTask;
 import android.util.Pair;
 import android.view.View;
 import android.widget.TextView;
@@ -10,10 +9,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
-import net.osmand.plus.search.history.SearchHistoryHelper;
-import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
+import net.osmand.plus.search.history.HistoryEntry;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.search.core.SearchResult;
@@ -112,7 +112,7 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 			}
 		}
 		ShareHistoryAsyncTask exportTask = new ShareHistoryAsyncTask(app, historyEntries, null);
-		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(exportTask);
 	}
 
 	@Override

@@ -128,6 +128,13 @@
 		android:summaryOn="@string/shared_string_yes"
 		android:title="@string/write_heading" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="save_location_provider_to_gpx"
+		android:layout="@layout/preference_with_descr"
+		android:summaryOff="@string/shared_string_no"
+		android:summaryOn="@string/shared_string_yes"
+		android:title="@string/write_location_provider" />
+
 	<PreferenceCategory
 		android:key="texts"
 		android:layout="@layout/preference_category_with_descr"
@@ -141,11 +148,11 @@
 		android:title="@string/disable_map_layers" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="show_tiles_rasterization_debug_info"
+		android:key="show_primitives_debug_info"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/show_rasterization_debug_tile" />
+		android:title="@string/show_debug_tile" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="enable_msaa"
@@ -153,13 +160,6 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/enable_msaa" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="show_symbols_debug_info"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/show_symbols_debug_info" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="allow_symbols_display_on_top"
@@ -174,6 +174,13 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/trace_rendering" />
+
+	<Preference
+		android:key="max_rendering_threads"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/threads_allocated_for_rendering"
+		tools:summary="8 threads" />
 
 	<PreferenceCategory
 		android:key="aistracker"

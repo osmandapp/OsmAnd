@@ -20,7 +20,6 @@ import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
 import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.MapPrimitivesProvider.Mode;
-import net.osmand.core.jni.MapRasterMetricsLayerProvider;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
@@ -68,8 +67,6 @@ public class MapRendererContext {
 	public static final int TOP_PLACES_POI_SECTION = 1001;
 	public static final int SELECTED_POI_SECTION = 1002;
 	public static final int FAVORITES_SECTION = 1003;
-	public static final int RULER_MARKERS_SECTION = 1004;
-	public static final int MAP_MARKERS_SECTION = 1005;
 	public static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;
@@ -101,7 +98,6 @@ public class MapRendererContext {
 	private boolean heightmapsActive;
 
 	public boolean showDebugPrimivitisationTiles = false;
-	public boolean showDebugRasterizationTiles = false;
 
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
@@ -313,11 +309,7 @@ public class MapRendererContext {
 			String name = addonEntry.getKey();
 			String fileName = addonEntry.getValue();
 			if (mapStylesCollection.getStyleByName(fileName) == null) {
-				try {
-					loadStyleFromStream(fileName, app.getRendererRegistry().getInputStream(name));
-				} catch (IOException e) {
-					Log.e(TAG, "Failed to load '" + fileName + "'", e);
-				}
+				loadStyleFromStream(fileName, app.getRendererRegistry().getInputStream(name));
 			}
 		}
 	}
@@ -325,13 +317,9 @@ public class MapRendererContext {
 	private void loadRenderer(String rendName) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getRenderer(rendName);
 		if ((mapStylesCollection.getStyleByName(rendName) == null || IGNORE_CORE_PRELOADED_STYLES) && renderer != null) {
-			try {
-				loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
-				if (renderer.getDependsName() != null) {
-					loadRenderer(renderer.getDependsName());
-				}
-			} catch (IOException e) {
-				Log.e(TAG, "Failed to load '" + rendName + "'", e);
+			loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
+			if (renderer.getDependsName() != null) {
+				loadRenderer(renderer.getDependsName());
 			}
 		}
 	}
@@ -420,9 +408,11 @@ public class MapRendererContext {
 		if (obfsCollection == null) {
 			return false;
 		}
-
+		int renderingThreadsLimit = app.getSettings().MAX_RENDERING_THREADS.get();
 		mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
-		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection);
+		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection,
+				ObfMapObjectsProvider.Mode.BinaryMapObjectsAndRoads,
+				renderingThreadsLimit > 3 || renderingThreadsLimit == 0 ? 2 : 1);
 		mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider,
 				mapPrimitiviser, getRasterTileSize(), providerType.surfaceMode);
 		return true;
@@ -455,11 +445,7 @@ public class MapRendererContext {
 	private void updateObfMapRasterLayerProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
 												 @NonNull ProviderType providerType) {
 		// Create new OBF map raster layer provider
-		if (showDebugRasterizationTiles) {
-			obfMapRasterLayerProvider = new MapRasterMetricsLayerProvider(
-				new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground));
-		}
-		else if (showDebugPrimivitisationTiles) {
+		if (showDebugPrimivitisationTiles) {
 			obfMapRasterLayerProvider = new MapPrimitivesMetricsLayerProvider(mapPrimitivesProvider);
 		} else {
 			obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground);
@@ -492,7 +478,7 @@ public class MapRendererContext {
 
 	private void updateOrRemoveObfMapSymbolsProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
 											 @NonNull ProviderType providerType) {
-		if (showDebugPrimivitisationTiles || showDebugRasterizationTiles) {
+		if (showDebugPrimivitisationTiles) {
 			if (obfMapSymbolsProvider != null && mapRendererView != null && this.providerType == providerType) {
 				mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 			}

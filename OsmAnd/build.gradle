@@ -48,9 +48,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion 24
-		versionCode 5199
+		versionCode 5299
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "5.1.0"
+		versionName "5.2.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -270,7 +270,7 @@ dependencies {
 }
 
 afterEvaluate {
-	def remoteAarSnapshot = "5.1"
+	def remoteAarSnapshot = "master-snapshot"
 	def localAarFile = file("../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar")
 
 	def requestedTasks = gradle.startParameter.taskNames.join(",").toLowerCase()

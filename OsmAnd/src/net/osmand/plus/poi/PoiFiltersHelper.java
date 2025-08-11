@@ -1,6 +1,7 @@
 package net.osmand.plus.poi;
 
 import static net.osmand.plus.poi.PoiUIFilter.TOP_WIKI_FILTER_ID;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
 
 import android.util.ArraySet;
 
@@ -18,7 +19,10 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.TopIndexFilter;
+import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
@@ -639,5 +643,50 @@ public class PoiFiltersHelper {
 			filters.add(filter.filterId);
 		}
 		settings.setSelectedPoiFilters(filters);
+	}
+
+	public PoiUIFilter getShowOnMapFilter(@NonNull SearchPhrase searchPhrase) {
+		PoiUIFilter filter = null;
+		if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
+			SearchUICore searchUICore = app.getSearchUICore().getCore();
+			if (searchPhrase.isNoSelectedType()) {
+				AbstractPoiType unselectedPoiType = searchUICore.getUnselectedPoiType();
+				if (searchUICore.isOnlineSearch() && !Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+					app.getPoiFilters().resetNominatimFilters();
+					filter = app.getPoiFilters().getNominatimAddressFilter();
+					filter.setFilterByName(searchPhrase.getUnknownSearchPhrase());
+					filter.clearCurrentResults();
+				} else if (unselectedPoiType != null) {
+					filter = new PoiUIFilter(unselectedPoiType, app, "");
+					String customName = searchUICore.getCustomNameFilter();
+					if (!Algorithms.isEmpty(customName)) {
+						filter.setFilterByName(customName);
+					}
+				} else {
+					filter = app.getPoiFilters().getSearchByNamePOIFilter();
+					String searchWord = searchPhrase.getUnknownWordToSearch();
+					if (!Algorithms.isEmpty(searchWord)) {
+						filter.setFilterByName(searchWord);
+						filter.clearCurrentResults();
+					}
+				}
+			} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
+				if (searchPhrase.isNoSelectedType()) {
+					filter = new PoiUIFilter(null, app, "");
+				} else {
+					AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord().getResult().object;
+					filter = new PoiUIFilter(abstractPoiType, app, "");
+				}
+				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
+				}
+			} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof PoiUIFilter) {
+				filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
+				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
+				}
+			}
+		}
+		return filter;
 	}
 }

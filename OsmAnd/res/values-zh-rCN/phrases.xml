@@ -930,7 +930,7 @@
     <string name="poi_dairy">乳品店</string>
     <string name="poi_ship_chandler">船舶供给商</string>
     <string name="poi_fire_flapper">灭火拍把</string>
-    <string name="poi_disaster_response">（澳洲）国家紧急服务站</string>
+    <string name="poi_disaster_response">灾难紧急服务站</string>
     <string name="poi_allotments">市民农园</string>
     <string name="poi_craft_beekeeper">养蜂人</string>
     <string name="poi_animal_shelter_wildlife">野生动物</string>
@@ -1709,7 +1709,7 @@
     <string name="poi_socket_tesla_standard_output">插座：特斯拉普通：输出</string>
     <string name="poi_socket_tesla_supercharger">插座：特斯拉超级快充</string>
     <string name="poi_pottery">陶器</string>
-    <string name="poi_whitewater_rapid_name">急流河的名称</string>
+    <string name="poi_rapids_name">急流河的名称</string>
     <string name="poi_outpost">店铺的配送点</string>
     <string name="poi_barbecue_grill">烧烤架: 有</string>
     <string name="poi_water_utility">自来水公司办公室</string>
@@ -1782,8 +1782,8 @@
     <string name="poi_social_facility_ambulatory_care">门诊护理</string>
     <string name="poi_social_facility_food_bank">食物银行</string>
     <string name="poi_refugee_no">难民： 否</string>
-    <string name="poi_impromptu_no">即兴：否</string>
-    <string name="poi_impromptu_yes">即兴：是</string>
+    <string name="poi_impromptu_no">否</string>
+    <string name="poi_impromptu_yes">是</string>
     <string name="poi_shower_no">淋浴：否</string>
     <string name="poi_shower_yes">淋浴：是</string>
     <string name="poi_payment_cash_yes">现金</string>
@@ -2019,7 +2019,7 @@
     <string name="poi_guide">导游办公室</string>
     <string name="poi_historic_milestone">历史里程碑</string>
     <string name="poi_historic_manor">历史性庄园</string>
-    <string name="poi_defibrillator">心脏除颤器</string>
+    <string name="poi_defibrillator">自动体外除颤器</string>
     <string name="poi_historic_civilization_ancient_roman">文明：古罗马（公元前 753 年-公元 284 年）</string>
     <string name="poi_historic_civilization_mycenaean">文明：迈锡尼</string>
     <string name="poi_animal_training">动物训练</string>
@@ -2596,7 +2596,7 @@
     <string name="poi_toilets_access_customers">卫生间进入：顾客</string>
     <string name="poi_diaper_no">无尿布更换台</string>
     <string name="poi_vending_toys">玩具</string>
-    <string name="poi_vending_public_transport_plans">公共交通计划（意义不清）</string>
+    <string name="poi_vending_public_transport_plans">公共交通路线图</string>
     <string name="poi_resource_dimension_stone">规格石料</string>
     <string name="poi_shelter_type_basic_hut">简易小屋</string>
     <string name="poi_internet_access_type_wired">有线网</string>
@@ -2708,7 +2708,7 @@
     <string name="poi_religion_taoist">道教</string>
     <string name="poi_denomination_united_methodist">联合卫理公会</string>
     <string name="poi_denomination_congregational">公理会</string>
-    <string name="poi_denomination_new_apostolic">新使徒</string>
+    <string name="poi_denomination_new_apostolic">新使徒教派</string>
     <string name="poi_denomination_united_church_of_christ">基督教联合教会</string>
     <string name="poi_denomination_romanian_orthodox">罗马尼亚东正教</string>
     <string name="poi_icao">ICAO 国际民航组织机场代码</string>

@@ -87,7 +87,7 @@ afterEvaluate {
 	}
 }
 
-version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "5.1"
+version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "master-snapshot"
 project.afterEvaluate {
 	publishing {
 		repositories {

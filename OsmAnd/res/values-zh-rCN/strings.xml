@@ -636,7 +636,7 @@
     <string name="filter_existing_indexes">已下载</string>
     <string name="shared_string_select_all">全部选中</string>
     <string name="fast_route_mode">最快路线</string>
-    <string name="fast_route_mode_descr">打开则规划最快路线，关闭则计算最短路线。</string>
+    <string name="fast_route_mode_descr">启用则计算最快路线，禁用则计算最短路线。</string>
     <string name="shared_string_download_map">下载地图</string>
     <string name="maps_could_not_be_downloaded">此地图无法下载</string>
     <string name="rendering_exception">无法绘制所选区域。</string>
@@ -1152,7 +1152,7 @@
     <string name="map_preferred_locale">首选地图语言</string>
     <string name="map_preferred_locale_descr">地图上标签的首选语言（如果不可用，将使用英文或当地名称）。</string>
     <string name="wake_on_voice">点亮屏幕</string>
-    <string name="impassable_road_desc">选择您在导航时想要避开的道路。</string>
+    <string name="impassable_road_desc">选择您在导航期间想要避开的道路。</string>
     <string name="routing_attr_avoid_shuttle_train_name">无区间列车</string>
     <string name="routing_attr_avoid_shuttle_train_description">避开汽车接驳列车</string>
     <string name="impassable_road">避开道路…</string>
@@ -1199,7 +1199,7 @@
     <string name="map_widget_top">状态栏</string>
     <string name="anonymous_user">匿名用户</string>
     <string name="logged_as">以 %1$s 身份登录</string>
-    <string name="speed_limit_exceed">速度限制容忍程度</string>
+    <string name="speed_limit_exceed">速度限制宽容度</string>
     <string name="rendering_category_others">其他地图属性</string>
     <string name="print_route">打印路线</string>
     <string name="search_osm_offline">按地理位置搜索</string>
@@ -1232,7 +1232,7 @@
     <string name="shared_string_my_location">我的位置</string>
     <string name="select_destination_and_intermediate_points">设置目的地</string>
     <string name="route_descr_select_destination">设置目的地</string>
-    <string name="wake_on_voice_descr">（如果屏幕未点亮）在接近转弯地点时点亮屏幕。</string>
+    <string name="wake_on_voice_descr">在接近转弯地点时点亮屏幕 (如果屏幕未点亮)。</string>
     <string name="change_markers_position">改变记号位置</string>
     <string name="private_access_routing_req">你的目的地位于一个有私人通道的区域。允许使用私人道路进行此次旅行吗？</string>
     <string name="restart_search">重新开始搜索</string>
@@ -1372,7 +1372,7 @@
     <string name="rendering_attr_depthContours_description">显示等深线和标记。</string>
     <string name="rendering_attr_depthContours_name">航海等深线</string>
     <string name="auto_split_recording_title">自动拆分录制之后的间隔</string>
-    <string name="auto_split_recording_descr">间隔 6 分钟后开始新片段，间隔 2 小时后开始新轨迹。或间隔更长时间后，如在日期发生变化时，建立新文件。</string>
+    <string name="auto_split_recording_descr">在间隔 6 分钟后开始新的轨迹段，在间隔 2 小时后开始新的轨迹，在更长时间间隔且日期发生变化时则生成新文件。</string>
     <string name="rendering_attr_contourDensity_description">等高线密度</string>
     <string name="rendering_attr_contourDensity_name">等高线密度</string>
     <string name="rendering_value_high_name">高</string>
@@ -1581,7 +1581,7 @@
     <string name="shared_string_video">视频</string>
     <string name="shared_string_photo">图片</string>
     <string name="route_points">路线点</string>
-    <string name="track_segments">轨迹区段</string>
+    <string name="track_segments">轨迹分段</string>
     <string name="track_points">轨迹点</string>
     <string name="osmand_rastermaps_plugin_description">可访问多种类型的在线（所谓的瓦片或光栅）地图，如预先渲染的 OSM 瓦片、卫星图像和特殊用途图层，如天气地图、气候地图、地质地图、山体阴影图层等。
 \n
@@ -1656,7 +1656,7 @@
     <string name="rendering_category_transport">公共交通</string>
     <string name="map_widget_appearance_rem">剩余的元素</string>
     <string name="search_radius_proximity">在此之内</string>
-    <string name="speed_limit_exceed_message">选择限速容许幅度，超过限速容许幅度将收到语音警告。</string>
+    <string name="speed_limit_exceed_message">选择限速的容许范围，超过该范围时将收到语音警告。</string>
     <string name="fav_point_emoticons_message">收藏已重命名为\"%1$s\"，以将包含表情符号的字符串保存到文件中。</string>
     <string name="fav_point_dublicate">指定的收藏名称重复</string>
     <string name="fav_point_dublicate_message">收藏重命名为%1$s，以避免重复。</string>
@@ -1668,16 +1668,16 @@
     <string name="traffic_warning_speed_camera">测速摄像机</string>
     <string name="traffic_warning">交通警告</string>
     <string name="speak_favorites">附近的收藏</string>
-    <string name="speak_poi">附近的 POI</string>
+    <string name="speak_poi">附近的兴趣点</string>
     <string name="way_alarms">交通警告</string>
     <string name="sleep_mode_stop_dialog">停止 GPS 后台模式？</string>
     <string name="stop_navigation_service">停止</string>
     <string name="confirm_every_run">总是询问</string>
     <string name="save_global_track_interval">通用记录间隔</string>
-    <string name="background_service_int">GPS 唤醒时间间隔</string>
+    <string name="background_service_int">GPS 唤醒间隔</string>
     <string name="enable_sleep_mode">启用 GPS 后台模式</string>
-    <string name="save_track_to_gpx_globally_headline">需求轨迹日志记录</string>
-    <string name="save_track_to_gpx_globally_descr">可以使用地图上的 GPX 记录小工具打开或关闭记录到 GPX 文件的一般位置记录。</string>
+    <string name="save_track_to_gpx_globally_headline">按需记录轨迹</string>
+    <string name="save_track_to_gpx_globally_descr">可通过地图上的 GPX 记录小工具启用或停用常规位置记录至 GPX 文件的功能。</string>
     <string name="save_track_interval_globally">记录间隔</string>
     <string name="int_hour">小时</string>
     <string name="duration">持续时间</string>
@@ -1710,16 +1710,16 @@
     <string name="lang_sw">斯瓦希里语</string>
     <string name="lang_he">希伯来语</string>
     <string name="forward">前行</string>
-    <string name="live_monitoring_m_descr">如果开启了 GPX 记录功能，则将跟踪数据发送到指定的网络服务。</string>
-    <string name="live_monitoring_m">在线跟踪 (需要 GPX)</string>
-    <string name="live_monitoring_start">开始在线跟踪</string>
-    <string name="live_monitoring_stop">停止在线跟踪</string>
-    <string name="gpx_start_new_segment">开始新区段</string>
+    <string name="live_monitoring_m_descr">如果 GPX 记录已开启，则将追踪数据发送到指定的web服务。</string>
+    <string name="live_monitoring_m">在线追踪 (需要 GPX)</string>
+    <string name="live_monitoring_start">开始在线追踪</string>
+    <string name="live_monitoring_stop">停止在线追踪</string>
+    <string name="gpx_start_new_segment">开始新的分段轨迹</string>
     <string name="rendering_attr_hideBuildings_name">建筑</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">非车辆公路</string>
     <string name="rendering_attr_hideText_name">文本</string>
     <string name="rendering_attr_hideWoodScrubs_name">树木和灌木丛</string>
-    <string name="rendering_attr_buildings15zoom_name">15 级缩放建筑物</string>
+    <string name="rendering_attr_buildings15zoom_name">在 15 级缩放时显示建筑物</string>
     <string name="rendering_attr_moreDetailed_name">更多细节</string>
     <string name="rendering_attr_lessDetailed_name">较少细节</string>
     <string name="rendering_attr_showAccess_name">显示访问限制</string>
@@ -1749,9 +1749,9 @@
     <string name="gpx_info_diff_altitude">高度范围：%1$s</string>
     <string name="gpx_info_asc_altitude">下坡/上坡：%1$s</string>
     <string name="gpx_timespan">时间跨度：%1$s</string>
-    <string name="gpx_timemoving">时间移动：%1$s</string>
-    <string name="gpx_selection_segment_title">区段</string>
-    <string name="gpx_selection_number_of_points">%1$s 的标点</string>
+    <string name="gpx_timemoving">移动时间：%1$s</string>
+    <string name="gpx_selection_segment_title">轨迹段</string>
+    <string name="gpx_selection_number_of_points">%1$s 个标点</string>
     <string name="gpx_selection_point">标点 %1$s</string>
     <string name="gpx_selection_route_points">%1$s 
 \n路线标点 %2$s</string>
@@ -1830,7 +1830,7 @@
     <string name="index_name_italy">欧洲 - 意大利</string>
     <string name="index_name_gb">欧洲 - 英国</string>
     <string name="calculate_osmand_route_without_internet">离线计算 OsmAnd 路线区段</string>
-    <string name="gpx_option_calculate_first_last_segment">计算第一和最后一个路段间的 OsmAnd 路线</string>
+    <string name="gpx_option_calculate_first_last_segment">为首段和末段路线段计算 OsmAnd 路线</string>
     <string name="use_displayed_track_for_navigation">使用显示的轨迹进行导航？</string>
     <string name="keep_and_add_destination_point">请添加作为随后的目的地</string>
     <string name="select_gpx">选择 GPX…</string>
@@ -2043,7 +2043,7 @@
     <string name="index_name_netherlands">欧洲 - 荷兰</string>
     <string name="choose_auto_follow_route_descr">与当前位置的地图视图同步时间。</string>
     <string name="keep_informing_never">只有手动（轻触箭头）</string>
-    <string name="keep_informing_descr">定期重新通报导航指令。</string>
+    <string name="keep_informing_descr">定期重复播报导航指令。</string>
     <string name="keep_informing">重复导航指令</string>
     <string name="auto_follow_route_navigation_descr">仅在导航时地图视图自动居中。</string>
     <string name="auto_follow_location_enabled">自动将使用中的地图视图置中。</string>
@@ -2301,10 +2301,10 @@
     <string name="mapillary_menu_descr_tile_cache">重新加载地图瓦片以查看最新的数据。</string>
     <string name="mapillary_menu_title_tile_cache">区片缓存</string>
     <string name="average">平均</string>
-    <string name="ascent_descent">升序/降序</string>
+    <string name="ascent_descent">上升/下降</string>
     <string name="max_min">最大/最小</string>
     <string name="of">%2$d 中的 %1$d</string>
-    <string name="moving_time">运动时间</string>
+    <string name="moving_time">移动时间</string>
     <string name="min_max">最小/最大</string>
     <string name="quick_action_resume_pause_navigation">暂停/继续导航</string>
     <string name="quick_action_resume_pause_navigation_descr">暂停或恢复导航的按钮。</string>
@@ -2388,7 +2388,7 @@
     <string name="show_on_map_after_saving">保存后在地图上显示</string>
     <string name="measurement_tool_action_bar">浏览地图并添加点</string>
     <string name="measurement_tool">测量距离</string>
-    <string name="will_open_tomorrow_at">明日开始营业时间</string>
+    <string name="will_open_tomorrow_at">明日开始营业于</string>
     <string name="rendering_attr_hidePOILabels_name">兴趣点（POI）标签</string>
     <string name="show_number_pad">显示数字盘</string>
     <string name="switch_osm_notes_visibility_desc">在地图上显示或隐藏 OSM 注记。</string>
@@ -3048,7 +3048,7 @@
     <string name="add_hidden_group_info">添加的点可以在\"%s\"中被找到。解除指定组的隐藏以在地图上展示它。</string>
     <string name="gpx_split_interval_descr">选择显示轨迹上带有距离或时间标记的间隔。</string>
     <string name="gpx_split_interval_none_descr">选择所需的拆分选项：“按时间”或“按距离”。</string>
-    <string name="route_between_points_next_segment_button_desc">只有下一个区段将使用所选择的配置文件重新计算。</string>
+    <string name="route_between_points_next_segment_button_desc">只有下一个分段将使用所选的配置文件重新计算。</string>
     <string name="whole_track">整个轨迹</string>
     <string name="plan_route_last_edited">最后编辑</string>
     <string name="plan_route_import_track">导入轨迹</string>
@@ -3062,10 +3062,10 @@
     <string name="reverse_route">反转路线</string>
     <string name="route_between_points_whole_track_button_desc">整条轨迹都将以所选择的配置文件进行重新计算。</string>
     <string name="route_between_points_desc">选择连接各点的方式，是用直线连接，还是计算出它们之间的路线，如下所示。</string>
-    <string name="next_segment">下一段</string>
+    <string name="next_segment">下一分段</string>
     <string name="threshold_distance">起始距离</string>
     <string name="navigation_profile">导航文件</string>
-    <string name="route_between_points_add_track_desc">选择一个要添加新片段的轨迹文件。</string>
+    <string name="route_between_points_add_track_desc">请选择一个轨迹文件以添加新的轨迹段。</string>
     <string name="street_level_imagery">街道等级图像</string>
     <string name="in_case_of_reverse_direction">防止相反的方向</string>
     <string name="delete_address">删除地址</string>
@@ -3073,8 +3073,8 @@
     <string name="access_hint_enter_address">输入地址</string>
     <string name="monitoring_control_start">REC</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd将为选中的配置文件连接路线点。</string>
-    <string name="add_point_before">在之前添加点</string>
-    <string name="add_point_after">在之后添加点</string>
+    <string name="add_point_before">在此之前新增点</string>
+    <string name="add_point_after">在此之后新增点</string>
     <string name="route_point">路线标点</string>
     <string name="save_as_route_point">保存为路线标点</string>
     <string name="route_point_one">路线点1</string>
@@ -3159,10 +3159,10 @@
     <string name="marker_save_as_track">保存为轨迹文件</string>
     <string name="number_of_gpx_files_selected_pattern">%s 个轨迹文件已选择</string>
     <string name="save_global_track_interval_descr">指定一般轨迹记录的记录间隔（通过地图上的“行程记录”小组件开启）。</string>
-    <string name="only_selected_segment_recalc">只有已选中的区段将使用所选择的配置文件重新计算。</string>
-    <string name="all_next_segments_will_be_recalc">所有后续的区段将使用所选择的配置文件重新计算。</string>
-    <string name="all_previous_segments_will_be_recalc">所有之前的区段都将使用所选择的配置文件重新计算。</string>
-    <string name="open_saved_track">打开保存的轨迹</string>
+    <string name="only_selected_segment_recalc">只有已选中的轨迹段将使用所选的配置文件重新计算。</string>
+    <string name="all_next_segments_will_be_recalc">所有在此之后的轨迹段都将使用所选的配置文件重新计算。</string>
+    <string name="all_previous_segments_will_be_recalc">所有在此之前的轨迹段都将使用所选的配置文件重新计算。</string>
+    <string name="open_saved_track">打开已保存的轨迹</string>
     <string name="shared_string_is_saved">已保存</string>
     <string name="one_point_error">请至少添加两个点。</string>
     <string name="sort_last_modified">上次修改</string>
@@ -3261,7 +3261,7 @@
 \n关闭未使用的插件以隐藏其所有控件。%1$s.</string>
     <string name="ui_customization_short_descr">抽屉项目，上下文菜单</string>
     <string name="ui_customization">用户界面自定义</string>
-    <string name="select_wikipedia_article_langs">选择地图上维基百科文章的语言，在阅读文章时切换到任何可用的语言。</string>
+    <string name="select_wikipedia_article_langs">选择地图上维基百科文章显示的语言，可以在阅读文章时切换到任何可用语言。</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types_descr">合并不同类别的兴趣点类型。点击开关全选，点击左侧选择类别。</string>
     <string name="extra_maps_menu_group">额外地图</string>
@@ -3294,10 +3294,10 @@
     <string name="simplified_track_description">只有路线线条会被保存，路径点将被删除。</string>
     <string name="shared_string_file_name">文件名</string>
     <string name="months_3">三个月</string>
-    <string name="not_support_file_type_with_ext">选择一个支持的 %1$s 扩展文件。</string>
+    <string name="not_support_file_type_with_ext">请选择一个受支持的 %1$s 扩展名文件。</string>
     <string name="logcat_buffer_descr">检查并共享应用程序的详细日志</string>
     <string name="import_profile_dialog_description">导入的配置文件包含附加数据。单击 \"导入\"，只导入配置文件数据，或选择其他数据。</string>
-    <string name="shared_string_include_data">包括补充数据</string>
+    <string name="shared_string_include_data">包括额外数据</string>
     <string name="access_intermediate_arrival_time">中转点到达时间</string>
     <string name="transport_nearby_routes_within">附近的路线</string>
     <string name="updated">已更新：%s</string>
@@ -3310,7 +3310,7 @@
     <string name="attach_to_the_roads">依附于道路</string>
     <string name="simplified_track">简化轨迹</string>
     <string name="system_default_theme">系统默认值</string>
-    <string name="all_previous_segments">之前的所有部分</string>
+    <string name="all_previous_segments">所有在此之前的轨迹段</string>
     <string name="release_3_8">• 更新计划路线功能：允许每个航段使用不同的导航类型和包含轨迹 \n \n• 新增轨迹外观菜单：选择颜色、厚度、显示方向箭头、开始和完成图标 \n \n•提高自行车节点的能见度。 \n \n•轨迹现在可点击，拥有上下文菜单与基本信息。 \n \n• 改进搜索算法 \n \n• 改进导航中的 “跟随轨迹 ”选项 \n \n• 修正导入/导出配置文件设置的问题</string>
     <string name="osm_live_payment_subscription_management_hw">购买确认时，将向您的 AppGallery 帐户收费。
 \n
@@ -3478,11 +3478,11 @@
     <string name="sit_on_the_stop">此站上车</string>
     <string name="shared_string_relation">关系</string>
     <string name="use_login_and_password">使用用户名和密码</string>
-    <string name="available_until">在 %1$s 前可用</string>
+    <string name="available_until">可使用至 %1$s</string>
     <string name="enough_contributions_descr">恭喜，你已经提供了足够多的 OpenStreetMap 贡献，现在可以享受无限制的 OsmAnd 地图更新了！</string>
     <string name="shared_string_contributions">贡献</string>
     <string name="purchases_restored">购买已恢复</string>
-    <string name="grey_color_undefined">没有数据的部分是灰色的。</string>
+    <string name="grey_color_undefined">缺少数据的部分是灰色的。</string>
     <string name="empty_category_name">类别名为空</string>
     <string name="no_activity_for_intent">安装一个可以执行此操作的应用。</string>
     <string name="gpx_monitoring_stop">暂停旅程记录</string>
@@ -3851,7 +3851,7 @@
     <string name="three_months_subscription">季度订阅</string>
     <string name="show_start_dialog">显示“开始”对话框</string>
     <string name="track_recording_title">已停止录制轨迹</string>
-    <string name="backup_and_restore">备份和恢复</string>
+    <string name="backup_and_restore">备份与恢复</string>
     <string name="poi_routes">路线</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="shared_string_itinerary">旅行路线</string>
@@ -3860,8 +3860,8 @@
     <string name="activity_type_water_name">水</string>
     <string name="in_grace_period">在宽限期内</string>
     <string name="select_segments">选择路段</string>
-    <string name="segments_count">路段 %1$d</string>
-    <string name="select_segments_description">%1$s 包含超过一个路段，你需要指定导航的部分。</string>
+    <string name="segments_count">路段共计 %1$d</string>
+    <string name="select_segments_description">%1$s 包含多个分段，你需要指定用于导航的部分。</string>
     <string name="osm_live_payment_subscription_management">购买确认时，将向您的 Google Play 帐户收费。
 \n
 \n除非在指定续订周期之前取消订阅，否则订阅将自动延长。
@@ -3883,7 +3883,7 @@
     <string name="group_will_be_removed_after_restart">在你下次启动应用程序时，该组将会消失。</string>
     <string name="save_track_to_gpx_descrp">导航开始时自动记录轨迹，并在导航结束后自动保存。</string>
     <string name="reset_to_default_category_button_promo">“重置为默认值”会将排序顺序恢复为安装时的默认值。</string>
-    <string name="import_complete_description">已从%1$s导入所有数据。使用下面的按钮，打开应用程序的任何部分来管理它。</string>
+    <string name="import_complete_description">已从%1$s导入所有数据。请使用下方按钮打开应用的各个部分进行管理。</string>
     <string name="release_3_6">- 配置文件：现在可以更改顺序、设置地图图标、更改基础配置文件的所有设置并将其恢复为默认值\n \n - 在导航中增加出口号 \n \n - 重做插件设置 \n \n - 重新设计 “设置 ”屏幕，以便快速访问所有配置文件 \n \n - 增加了从其他配置文件复制设置的选项 \n \n - 增加了在搜索中改变顺序或隐藏兴趣点类别的能力 \n \n - 正确对齐地图上的兴趣点图标 \n \n - 在“配置地图”中增加日落/日出数据 \n \n - 在地图上添加 “家”/“工作 ” 图标 \n \n - 在设置中增加了对多行描述的支持 \n \n - 为日本地图添加正确的音译 \n \n - 添加南极洲地图</string>
     <string name="export_profile_dialog_description">选择要与配置文件一起导出的其它数据。</string>
     <string name="monitoring_min_speed_descr_side_effect">副作用：你的轨迹将缺少所有不符合最低速度标准的部分（例如，你推着自行车上陡坡的部分）。另外，也不会有关于休息时间的信息，比如休息时间。这对任何分析或后续处理都有影响，比如在试图确定你的行程总长度、运动时间或你的平均速度时。</string>
@@ -3891,7 +3891,7 @@
     <string name="monitoring_min_accuracy_descr_remark">备注:如果在记录之前GPS已经关闭，那么第一个测量点的精度可能会下降，所以在我们的代码中，我们可能希望在记录一个点之前等待一秒钟左右（或者记录连续3个点中最好的一个，等等），但这还没有实现。</string>
     <string name="icon_group_service">服务</string>
     <string name="slope_read_more">在%1$s中阅读更多关于坡度的信息。</string>
-    <string name="recalc_angle_dialog_descr">将显示我的位置和计算的路径之间的额外直线段，直到重新计算路径</string>
+    <string name="recalc_angle_dialog_descr">在路线重新计算之前，会显示一段从我的位置到已计算路线之间的额外直线线段</string>
     <string name="import_duplicates_title">有些项目已经存在</string>
     <string name="listed_exist">列出的%1$s，已存在于OsmAnd中。</string>
     <string name="plugin_disabled_descr">此插件是一个单独的应用程序，禁用并不会删除它。
@@ -3920,7 +3920,7 @@
     <string name="profile_prefs_reset_successful">所有的配置文件设置都已恢复为默认值。</string>
     <string name="shared_string_rendering_style">渲染样式</string>
     <string name="sunrise_at">在 %1$s 日出</string>
-    <string name="monitoring_min_speed_descr_remark">备注：速度 &gt; 0 检查：大多数 GPS 芯片组仅在算法确定您在运动时才报告速度值，如果不是，则不报告。因此，在某种意义上使用此过滤器中的 &gt; 0 设置会使用 GPS 芯片组的运动检测。但即使在记录时未在此处过滤，我们仍然会在 GPX 分析中使用此功能来确定校正的距离，即该字段中显示的值是运动时记录的距离。</string>
+    <string name="monitoring_min_speed_descr_remark">关于“速度 &gt; 0”检查功能的说明：大多数 GPS 芯片，只有在其内部算法判断你正在移动时，才会报告速度值；如果你是静止的，它就不会报告任何速度。因此，在这个筛选器里启用“速度 &gt; 0”这项设置，实际上就等于利用了 GPS 芯片本身自带的“移动侦测”功能。即使你在记录轨迹的时候没有启用这个筛选器，我们后续在分析你的 GPX 文件时，也同样会利用 GPS 的这个特性，来计算出“校正后的距离”。最终显示在字段里的数值其实是在整个记录过程中只处于“移动”状态下所走过的距离总和。</string>
     <string name="monitoring_min_accuracy_descr">这将仅记录以最小准确度显示测量的点（以米/英尺为单位，如Android为您的芯片组报告的那样）。准确度是测量值与真实位置的接近程度，与精度没有直接关系，精确度是重复测量的散布。</string>
     <string name="routeInfo_horse_scale_description">根据马道的难度级别渲染路径</string>
     <string name="rendering_attr_horse_scale_common_name">普通</string>
@@ -3986,7 +3986,7 @@
     <string name="select_nav_icon_descr">在导航或移动时显示的图标。</string>
     <string name="tracks_view_descr">你录制的轨迹位于%1$s，或OsmAnd文件夹中。</string>
     <string name="select_map_icon_descr">静止时显示的图标。</string>
-    <string name="join_segments">加入分段</string>
+    <string name="join_segments">连接所有轨迹段</string>
     <string name="osm_editing">OSM编辑</string>
     <string name="live_monitoring_adress">网址</string>
     <string name="live_monitoring_descr">允许使用行程记录分享当前位置。</string>
@@ -4009,8 +4009,8 @@
     <string name="rendering_attr_showFitnessTrails_description">显示健身步道</string>
     <string name="stop_and_exit">停止并退出</string>
     <string name="shared_string_complete">完成</string>
-    <string name="zoom_levels_difference_description">缩放级别之间的巨大差异可能会增加下载数据的大小。</string>
-    <string name="estimated_download_size">估计的下载大小</string>
+    <string name="zoom_levels_difference_description">缩放级别之间的巨大差异会增加下载数据的大小。</string>
+    <string name="estimated_download_size">预计下载大小</string>
     <string name="number_of_tiles">瓦片数量</string>
     <string name="rendering_attr_showRunningRoutes_name">跑步路线</string>
     <string name="simulation_constant_mode_title">固定速度</string>
@@ -4063,7 +4063,7 @@
     <string name="compass_on_circles">圆圈上的指南针</string>
     <string name="distance_circles">距离-圆圈</string>
     <string name="elevation_profile_widget_desc">显示当前路线的海拔和坡度剖面。</string>
-    <string name="average_speed_skip_stops">考虑停留时间</string>
+    <string name="average_speed_skip_stops">考虑停止时间</string>
     <string name="average_speed_time_interval_desc">指定速度平均的时间间隔。</string>
     <string name="average_speed_widget_desc">显示当前行程的平均速度。</string>
     <string name="map_widget_time_to_intermediate">到达中继点的时间</string>
@@ -4098,7 +4098,7 @@
     <string name="list_of_groups">群组列表</string>
     <string name="routing_attr_difficulty_preference_advanced_name">高级</string>
     <string name="location_source_descr">默认情况下，从Google Play安装的OsmAnd使用%1$s来确定位置。 \n \n如果您获得不准确的位置信息或使用没有 %2$s 的设备，请尝试切换到“%3$s”</string>
-    <string name="quick_action_add_route_descr">一个可以从屏幕中间启动路线的按钮。</string>
+    <string name="quick_action_add_route_descr">从屏幕中央启动路线的按钮。</string>
     <string name="routing_attr_difficulty_preference_beginner_name">初学者</string>
     <string name="routing_attr_freeride_policy_allow_name">允许</string>
     <string name="shared_string_item">项目</string>
@@ -4205,7 +4205,7 @@
     <string name="shared_string_widget">小工具</string>
     <string name="current_time_widget_desc">显示从您设备获取的当前时间。</string>
     <string name="gps_info_widget_desc">显示当前可见和使用的卫星数量。</string>
-    <string name="av_def_action_choose">根据要求</string>
+    <string name="av_def_action_choose">根据需要</string>
     <string name="lanes_widgets_desc">显示当前的道路车道布局，并突出显示导航时要走的车道。</string>
     <string name="battery_widget_desc">显示您设备的电池电量。</string>
     <string name="time_to_go_desc">到达目的地所需的时间（以分钟或小时为单位）。</string>
@@ -4256,7 +4256,7 @@
     <string name="routing_attr_allow_classic_only_name">只允许经典路线</string>
     <string name="wikivoyage_travel_guide_descr">在 OsmAnd 内无需连接互联网，即可获得地球上最有趣地方的指南。</string>
     <string name="all_markers_moved_to_history">所有地图标记都已移至历史记录</string>
-    <string name="osmand_routing_promo">在osmand/routing中添加你自己修改的routing.xml文件</string>
+    <string name="osmand_routing_promo">在 ../osmand/routing 中添加你自己修改的 routing.xml 文件</string>
     <string name="save_as_line">另存为线路</string>
     <string name="marker_show_distance_descr">选择如何在地图上表示与地图标记的距离和方向：</string>
     <string name="optional_point_name">可选的点名称</string>
@@ -4389,12 +4389,12 @@
     <string name="coordinates_widget_current_location_desc">显示当前地理位置的地理坐标</string>
     <string name="coordinates_widget_map_center">坐标：地图中心</string>
     <string name="coordinates_widget_current_location">坐标：当前位置</string>
-    <string name="import_tracks_descr">%1$s，包含%2$s 分开的轨迹。选择要导入的轨迹。</string>
+    <string name="import_tracks_descr">%1$s，包含%2$s 条分开的轨迹。选择要导入哪些轨迹。</string>
     <string name="developer_widgets">开发者小工具</string>
     <string name="map_marker_interval_dialog_desc">指定测量平均速度的时间间隔，计算预估的到达时间。</string>
     <string name="calculate_online">在线计算</string>
     <string name="no_altitude_data">没有海拔数据</string>
-    <string name="turn_on_public_transport_description">打开以在地图上查看公共交通路线。</string>
+    <string name="turn_on_public_transport_description">开启以在地图上查看公共交通路线。</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低缩放层级的图标</string>
     <string name="rendering_value_all_name">全部</string>
     <string name="available_as_part_of_subscription_plan">作为 %1$s 订阅的一部分提供。</string>
@@ -4430,14 +4430,14 @@
     <string name="plan_route_change_route_type_after">修改之后的路线规划类型</string>
     <string name="shared_string_redo">重做</string>
     <string name="always_ask_waypoint_appearance_description">点击此操作将打开“添加路径点”屏幕，您可以在其中更改名称和外观。</string>
-    <string name="all_next_segments">所有后续段</string>
-    <string name="plan_route_trim_after">修剪之后</string>
+    <string name="all_next_segments">所有在此之后的轨迹段</string>
+    <string name="plan_route_trim_after">裁剪此后轨迹</string>
     <string name="plan_route_change_route_type_before">修改之前的路线规划类型</string>
     <string name="use_two_phase_routing">使用两阶段 A* 路径规划算法</string>
-    <string name="plan_route_trim_before">修剪之前</string>
+    <string name="plan_route_trim_before">裁剪此前轨迹</string>
     <string name="track_file">轨迹文件</string>
     <string name="turn_arrows">转向箭头</string>
-    <string name="routing_attr_allow_gate_description">允许使用大门</string>
+    <string name="routing_attr_allow_gate_description">允许使用门禁系统</string>
     <string name="continue_with">继续 %1$s</string>
     <string name="navigate_to_track_descr">从我的位置导航到轨迹</string>
     <string name="routing_attr_allow_streams_description">允许溪流和水沟</string>
@@ -4445,7 +4445,7 @@
     <string name="import_track_descr">选择要跟随的轨迹文件或从您的设备中导入。</string>
     <string name="complex_routing_descr">汽车导航的两阶段路径规划。</string>
     <string name="not_available_with">不适用于 %1$s</string>
-    <string name="previous_segment">上一段</string>
+    <string name="previous_segment">在此之前的分段</string>
     <string name="map_source_zoom_levels_descr">用作地图或覆盖层/衬底层时会影响屏幕。
 \n
 \n%1$s：地图仅限于所选的缩放级别范围。
@@ -4485,7 +4485,7 @@
     <string name="reorder_or_hide_from">重新排序或隐藏 %1$s 中的项目。</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">偏好未铺设道路</string>
     <string name="track_storage_directory">轨迹存储文件夹</string>
-    <string name="data_storage_space_description">剩余 %1$sGB 可用（总共 %2$s GB）</string>
+    <string name="data_storage_space_description">剩余 %1$s GB （共 %2$s GB）</string>
     <string name="change_osmand_data_folder_question">更改 OsmAnd 数据文件夹？</string>
     <string name="rendering_attr_piste_type_sled_name">雪橇</string>
     <string name="utm_format_descr">OsmAnd使用 通用横轴墨卡托投影（UTM）标准，该标准与UTM NATO格式相似但不完全相同。</string>
@@ -4555,7 +4555,7 @@
 \n - 修复RTL的错误
 \n
 \n</string>
-    <string name="store_tracks_in_daily_directories_descrp">在每个记录日（如2018-01-01）的子文件夹中记录轨迹。</string>
+    <string name="store_tracks_in_daily_directories_descrp">将轨迹文件记录在记录日期的子文件夹中 (如 2018-01-01)。</string>
     <string name="rendering_attr_piste_type_snow_park_name">地形公园</string>
     <string name="mgrs_format_descr">OsmAnd使用MGRS，类似于UTM NATO格式。</string>
     <string name="pref_selected_by_default_for_profiles">默认情况下为配置文件选择此设置：%s</string>
@@ -4573,7 +4573,7 @@
     <string name="routing_attr_max_num_changes_description">指定换乘的次数上限</string>
     <string name="shared_string_by_default">按预设值</string>
     <string name="coordinates_format_info">所选格式将应用于整个应用程序。</string>
-    <string name="turn_screen_on_power_button_disabled">已禁用。需要“唤醒后超时”下的“保持屏幕开启”。</string>
+    <string name="turn_screen_on_power_button_disabled">已禁用。需在“唤醒后超时”中启用“保持屏幕常亮”选项。</string>
     <string name="rendering_attr_piste_difficulty_connection_name">连接</string>
     <string name="change_data_storage_full_description">将 OsmAnd 数据文件移动到新目的地？
 \n%1$s &gt; %2$s</string>
@@ -4585,7 +4585,7 @@
     <string name="turn_screen_on_time_descr">调整屏幕应开启多长时间。</string>
     <string name="route_parameters_descr">配置路线参数</string>
     <string name="application_profile_changed">应用配置文件更改为“%s”</string>
-    <string name="last_launch_crashed">OsmAnd 上一次运行崩溃了。请通过分享错误信息帮助我们改进OsmAnd。</string>
+    <string name="last_launch_crashed">OsmAnd 在上次运行时崩溃了。请通过分享错误信息来协助我们改进 OsmAnd。</string>
     <string name="default_speed_setting_descr">更改默认速度设置</string>
     <string name="changes_applied_to_profile">更改已应用于“%1$s”的配置文件。</string>
     <string name="turn_screen_on_router">轮流唤醒</string>
@@ -4618,7 +4618,7 @@
     <string name="cloud_version_will_be_removed">云端版本将被删除</string>
     <string name="y_axis">Y 轴</string>
     <string name="x_axis">X 轴</string>
-    <string name="import_export">导入／导出</string>
+    <string name="import_export">导入 / 导出</string>
     <string name="share_as_file">分享为文件</string>
     <string name="skip_download">跳过下载</string>
     <string name="determine_location">允许我们确定您的位置</string>
@@ -5003,7 +5003,7 @@
 \n设备上的所有数据仍保持不变。</string>
     <string name="shared_string_close_the_dialog">关闭对话框</string>
     <string name="no_visible_tracks_description">选择轨迹以在地图上显示。</string>
-    <string name="display_position_automatic_descr">取决于地图方向：底部为移动方向，中心为所有其他方向。</string>
+    <string name="display_position_automatic_descr">取决于地图朝向：若按移动方向显示，则定位图标在底部；否则居中显示。</string>
     <string name="sound_beep_complex">蜂鸣：复杂</string>
     <string name="sound_beep_complex_loud">蜂鸣：复杂响亮</string>
     <string name="sound_beep_simple">蜂鸣：简单</string>
@@ -5310,7 +5310,7 @@
     <string name="key_event_action_open_wunderlinq_datagrid">开启 WunderLINQ 数据网格</string>
     <string name="rendering_value_name_only_name">仅名称</string>
     <string name="external_device_ant">ANT</string>
-    <string name="mtb_segment_classification">细分分类</string>
+    <string name="mtb_segment_classification">路径难度分类</string>
     <string name="lang_zh_hans">简体中文</string>
     <string name="battery_saving_mode">省电模式</string>
     <string name="app_mode_suv">SUV</string>
@@ -5472,8 +5472,8 @@
     <string name="no_photos_available">无可用照片</string>
     <string name="change_zoom_action_descr">变更地图缩放。</string>
     <string name="lock_screen_description">启用或禁用触摸屏功能以防止意外点击</string>
-    <string name="new_trip_segment">新的行程段</string>
-    <string name="quick_action_new_trip_segment">按钮用于在记录中的 GPX 轨迹开始一个新片段。</string>
+    <string name="new_trip_segment">新的行程分段</string>
+    <string name="quick_action_new_trip_segment">按钮用于在进行中的GPX 轨迹记录时开始一个新的分段。</string>
     <string name="rendering_attr_showDirtbikeTrails_name">越野摩托车路径</string>
     <string name="obd_fuel_type_ethanol">乙醇</string>
     <string name="obd_fuel_type_hybrid_gasoline">混合动力汽油</string>
@@ -5674,7 +5674,7 @@
     <string name="key_event_action_continuous_zoom_out">连续缩小</string>
     <string name="clear_key_assignment_summary">所选操作的按键分配将被清除。</string>
     <string name="clear_all_key_shortcuts_summary">将删除所选类型的所有按键分配。</string>
-    <string name="shared_string_manual">手册</string>
+    <string name="shared_string_manual">手动</string>
     <string name="rendering_attr_showClimbingRoutes_name">攀岩路线</string>
     <string name="ais_object_lost_timeout_description">设置 AIS 对象的可见性超时： 在这段时间内未接收到信号，屏幕上的 AIS 对象将被删除。</string>
     <string name="shared_string_map_center">地图中心</string>
@@ -5795,4 +5795,5 @@
     <string name="delete_actions_button_confirmation">您确定要删除“%1$s ”和所有已添加的操作吗？</string>
     <string name="gpx_approximation_geo_cpp">基于几何（C++，快速）</string>
     <string name="gpx_approximation_geo_java">基于几何（Java，快速）</string>
+    <string name="release_5_2">• 正在进行中...</string>
 </resources>

@@ -2342,8 +2342,8 @@
     <string name="import_track">Importovať súbor GPX</string>
     <string name="import_track_desc">Súbor %1$s neobsahuje body trasy, naimportovať ako stopu?</string>
     <string name="move_point">Presunúť bod</string>
-    <string name="do_not_use_animations">Žiadne animácie</string>
-    <string name="do_not_use_animations_descr">Vypne animácie mapy.</string>
+    <string name="do_not_use_animations">Odstrániť animácie</string>
+    <string name="do_not_use_animations_descr">Vypne animácie mapy používateľského rozhrania.</string>
     <string name="keep_showing_on_map">Zobrazovať ďalej na mape</string>
     <string name="exit_without_saving">Ukončiť bez uloženia?</string>
     <string name="move_all_to_history">Presunúť všetko do histórie</string>
@@ -5802,4 +5802,11 @@
     <string name="suggest_activate_map_msg">Mapa %1$s je vypnutá,\nzapnite (obnovte) ju pre zobrazenie tejto oblasti.</string>
     <string name="show_rasterization_debug_tile">Zobraziť informácie o rastrovaní dlaždíc</string>
     <string name="show_symbols_bboxes">Zobraziť ohraničujúce rámce symbolov</string>
+    <string name="release_5_2">• V príprave…</string>
+    <string name="failed_to_connect">Nepodarilo sa pripojiť k %1s</string>
+    <string name="shared_string_threads">Vlákna</string>
+    <string name="threads_allocated_for_rendering">Vlákna pridelené vykresľovaniu</string>
+    <string name="threads_allocated_for_rendering_desc">Menší počet vlákien môže niekedy zrýchliť vykresľovanie mapy.</string>
+    <string name="turn_by_turn_directions">Podrobné navigačné pokyny</string>
+    <string name="enable_msaa">Povoliť MSAA</string>
 </resources>

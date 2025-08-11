@@ -16,14 +16,22 @@ import java.util.List;
 public class MultipleDownloadItem extends DownloadItem {
 
 	private final List<DownloadItem> items;
+	private final WorldRegion region;
 
 	public MultipleDownloadItem(@NonNull WorldRegion region,
 	                            @NonNull List<DownloadItem> items,
 	                            @NonNull DownloadActivityType type) {
 		super(type);
+		this.region = region;
 		this.items = items;
 	}
 
+	@NonNull
+	public WorldRegion getRelatedRegion() {
+		return region;
+	}
+
+	@NonNull
 	public List<IndexItem> getAllIndexes() {
 		List<IndexItem> indexes = new ArrayList<>();
 		for (DownloadItem item : items) {
@@ -35,6 +43,7 @@ public class MultipleDownloadItem extends DownloadItem {
 		return indexes;
 	}
 
+	@NonNull
 	public List<DownloadItem> getAllItems() {
 		return items;
 	}

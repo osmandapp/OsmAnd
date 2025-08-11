@@ -1,9 +1,9 @@
 package net.osmand.shared.gpx.filters
 
+import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.util.Localization
 import net.osmand.shared.util.OsmAndFormatter
-import net.osmand.shared.util.PlatformUtil
 
 enum class MeasureUnitType {
 	TIME_DURATION,
@@ -17,11 +17,11 @@ enum class MeasureUnitType {
 	BPM,
 	NONE;
 
-	fun getFilterUnitText(mc: MetricsConstants): String {
+	fun getFilterUnitText(mc: MetricsConstants, am: AltitudeMetrics): String {
 		val unitResId = when (this) {
 			TIME_DURATION -> Localization.getString("shared_string_minute_lowercase")
 			DISTANCE -> getDistanceUnits(mc)
-			ALTITUDE -> getAltitudeUnits(mc)
+			ALTITUDE -> getAltitudeUnits(am)
 			SPEED -> getSpeedUnits(mc)
 			TEMPERATURE -> getTemperatureUnits()
 			ROTATIONS -> getRotationUnits()
@@ -75,9 +75,8 @@ enum class MeasureUnitType {
 		}
 	}
 
-	private fun getAltitudeUnits(mc: MetricsConstants): String {
-		val useFeet =
-			mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET
+	private fun getAltitudeUnits(am: AltitudeMetrics): String {
+		val useFeet = am.shouldUseFeet()
 		return if (useFeet) {
 			Localization.getString("foot")
 		} else {

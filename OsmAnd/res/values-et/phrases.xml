@@ -1169,12 +1169,12 @@
     <string name="poi_denomination_episcopal">Piiskoplik</string>
     <string name="poi_denomination_shia">Šiism</string>
     <string name="poi_denomination_united">Ühine</string>
-    <string name="poi_denomination_greek_catholic">Kreeka katoliku</string>
+    <string name="poi_denomination_greek_catholic">Kreekakatoliku</string>
     <string name="poi_denomination_tibetan">Tiibeti</string>
-    <string name="poi_denomination_united_reformed">Ühendatud reformitud</string>
+    <string name="poi_denomination_united_reformed">Ühendatud reformikiriku</string>
     <string name="poi_denomination_church_of_scotland">Šotimaa kirik</string>
     <string name="poi_denomination_salvation_army">Päästearmee</string>
-    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
     <string name="poi_denomination_uniting">Ühendav</string>
     <string name="poi_denomination_mennonite">Mennoniit</string>
     <string name="poi_denomination_quaker">Kveeker</string>
@@ -1340,7 +1340,7 @@
     <string name="poi_toll_yes">Teemaks</string>
     <string name="poi_toll_no">Teemaks puudub</string>
     <string name="poi_tactile_paving_yes">Jah;kombatav sillutis</string>
-    <string name="poi_tactile_paving_no">Ilma kombatava sillutiseta</string>
+    <string name="poi_tactile_paving_no">Ilma kompesillutiseta</string>
     <string name="poi_traffic_signals_sound_yes">Jah;Heliga foorid</string>
     <string name="poi_traffic_signals_sound_no">Heli: ei</string>
     <string name="poi_traffic_signals_sound_walk">Ainult kui kõndimine on lubatud</string>
@@ -1759,7 +1759,7 @@
     <string name="poi_wetland_reedbed">Roostik</string>
     <string name="poi_wetland_swamp">Soo</string>
     <string name="poi_wetland_saltern">Soolaväli</string>
-    <string name="poi_wetland_tidalflat">Tõusuveetasandik</string>
+    <string name="poi_wetland_tidalflat">Loodeline tasandik</string>
     <string name="poi_wetland_saltmarsh">Soolaraba</string>
     <string name="poi_wetland_mangrove">Mangroov</string>
     <string name="poi_wetland_string_bog">Madalsoo</string>
@@ -2738,7 +2738,7 @@
     <string name="poi_wheelchair_designated">Määratud</string>
     <string name="poi_spoil_heap">Rämpsuhunnik</string>
     <string name="poi_bin_yes">Korviga</string>
-    <string name="poi_bin_no">Korv puudub</string>
+    <string name="poi_bin_no">Prügikast puudub</string>
     <string name="poi_summer_camp">Suvelaager</string>
     <string name="poi_recreation_center">Puhkekeskus</string>
     <string name="poi_crossing_activation_automatic">Ristumiskoha aktiveerimine: automaatne</string>
@@ -3431,7 +3431,7 @@
     <string name="poi_socket_schuko_output_low">Madal</string>
     <string name="poi_flooring">Põrandapood</string>
     <string name="poi_pottery">Keraamika</string>
-    <string name="poi_whitewater_rapid_name">Jõekärestike nimi</string>
+    <string name="poi_rapids_name">Jõekärestike nimi</string>
     <string name="poi_outpost">Kaupluse tarnepunkt</string>
     <string name="poi_barbecue_grill">Grill: jah</string>
     <string name="poi_water_utility">Vee-kommunaalamet</string>
@@ -5062,4 +5062,6 @@
     <string name="poi_iglesia_ni_cristo_church">Iglesia ni cristo kirik</string>
     <string name="poi_neo_pentecostal_church">Uusnelipühilaste kirik</string>
     <string name="poi_route_point_category">Reisikategooria</string>
+    <string name="poi_denomination_ukrainian_orthodox">Ukraina õigeusu</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Ukraina kreekakatoliku</string>
 </resources>

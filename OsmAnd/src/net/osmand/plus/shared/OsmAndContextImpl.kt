@@ -18,6 +18,7 @@ import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.io.KFile
+import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.settings.enums.SpeedConstants
 import net.osmand.shared.util.KStringMatcher
@@ -46,6 +47,8 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	override fun getSpeedSystem(): SpeedConstants? = app.settings.SPEED_SYSTEM.get()
 
 	override fun getMetricSystem(): MetricsConstants? = app.settings.METRIC_SYSTEM.get()
+
+	override fun getAltitudeMetric(): AltitudeMetrics? = app.settings.ALTITUDE_METRIC.get()
 
 	override fun isGpxFileVisible(path: String): Boolean =
 		app.selectedGpxHelper.getSelectedFileByPath(path) != null

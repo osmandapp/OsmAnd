@@ -8,6 +8,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -39,7 +40,7 @@ public class ResourcesImporter {
 				if (error == null) {
 					GpxFile gpxFile = SharedUtil.loadGpxFile(file);
 					String[] errors = {""};
-					new SaveGpxAsyncTask(app, gpxFile, gpxDestinationDir, fileName, new SaveImportedGpxListener() {
+					OsmAndTaskManager.executeTask(new SaveGpxAsyncTask(app, gpxFile, gpxDestinationDir, fileName, new SaveImportedGpxListener() {
 						@Override
 						public void onGpxSaved(@Nullable String error, @NonNull GpxFile gpxFile) {
 							errors[0] = error;
@@ -48,7 +49,7 @@ public class ResourcesImporter {
 								listener.onGpxSaved(error, gpxFile);
 							}
 						}
-					}, true).execute().get();
+					}, true)).get();
 					if (!Algorithms.isEmpty(errors[0])) {
 						throw new IOException("Import gpx error: " + errors[0]);
 					}
