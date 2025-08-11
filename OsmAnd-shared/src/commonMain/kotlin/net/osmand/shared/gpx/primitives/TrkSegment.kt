@@ -94,11 +94,16 @@ class TrkSegment : GpxExtensions() {
 	}
 
 	private fun getSlopeValue(sp: SplitSegment, point: WptPt): Double {
-		val segmentStartPoint = points[sp.startPointInd]
-		val segmentDistance = point.distance - segmentStartPoint.distance
-		val segmentElevDiff = point.ele - segmentStartPoint.ele
-		val segmentSlope = segmentElevDiff / segmentDistance * 100
-		return segmentSlope
+		val startPoint = points[sp.startPointInd]
+		if (startPoint.ele.isNaN() || point.ele.isNaN()) {
+			return 0.0
+		}
+		val distance = point.distance - startPoint.distance
+		if (distance == 0.0) {
+			return 0.0
+		}
+		val elevationDiff = point.ele - startPoint.ele
+		return elevationDiff / distance * 100
 	}
 
 	private fun getExtremums(): List<Extremum>{
