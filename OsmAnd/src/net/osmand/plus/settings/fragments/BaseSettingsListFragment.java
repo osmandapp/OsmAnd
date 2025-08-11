@@ -85,7 +85,7 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_import, container, false);
+		View root = inflate(R.layout.fragment_import, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 
 		selectedItemsSize = root.findViewById(R.id.file_size);
@@ -97,12 +97,12 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 		setupToolbar(toolbar);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
 
-		header = themedInflater.inflate(R.layout.list_item_description_header, null);
+		header = inflate(R.layout.list_item_description_header);
 		headerDivider = header.findViewById(R.id.divider);
 		headerShadow = header.findViewById(R.id.card_bottom_divider);
 		expandableList.addHeaderView(header);
 
-		availableSpaceContainer = themedInflater.inflate(R.layout.enough_space_warning_card, null);
+		availableSpaceContainer = inflate(R.layout.enough_space_warning_card);
 		availableSpaceDescr = availableSpaceContainer.findViewById(R.id.warning_descr);
 
 		continueBtn = root.findViewById(R.id.continue_button);

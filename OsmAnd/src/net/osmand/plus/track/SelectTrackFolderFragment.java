@@ -123,7 +123,7 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		importHelper = app.getImportHelper();
 		updateNightMode();
-		view = themedInflater.inflate(R.layout.select_track_folder_fragment, container, false);
+		view = inflate(R.layout.select_track_folder_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		toolbarTitle = view.findViewById(R.id.toolbar_title);

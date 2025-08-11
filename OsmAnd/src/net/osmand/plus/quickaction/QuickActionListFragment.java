@@ -144,7 +144,7 @@ public class QuickActionListFragment extends BaseFullScreenFragment implements Q
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.quick_action_list, container, false);
+		View view = inflate(R.layout.quick_action_list, container, false);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		fab = view.findViewById(R.id.fabButton);

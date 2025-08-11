@@ -70,7 +70,7 @@ public class IconsPaletteFragment<IconData> extends BaseFullScreenDialogFragment
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		this.paletteElements = controller.getPaletteElements(requireContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.fragment_palette, container, false);
+		View view = inflate(R.layout.fragment_palette, container, false);
 		setupToolbar(view);
 		setupIconsPalette(view);
 		return view;

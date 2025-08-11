@@ -68,7 +68,7 @@ public abstract class ImportDuplicatesFragment extends BaseFullScreenFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_import_duplicates, container, false);
+		View root = inflate(R.layout.fragment_import_duplicates, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
 		ComplexButton replaceAllBtn = root.findViewById(R.id.replace_all_btn);

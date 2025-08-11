@@ -220,7 +220,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
 		zoomPaddingTop = getDimensionPixelSize(R.dimen.map_button_margin);
 
-		view = themedInflater.inflate(R.layout.fragment_map_context_menu, container, false);
+		view = inflate(R.layout.fragment_map_context_menu, container, false);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		mainView = view.findViewById(R.id.context_menu_main);
 

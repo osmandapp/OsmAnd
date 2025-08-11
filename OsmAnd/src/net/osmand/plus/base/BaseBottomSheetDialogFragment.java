@@ -25,8 +25,9 @@ public abstract class BaseBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected OsmandSettings settings;
 	protected ApplicationMode appMode;
 	protected UiUtilities iconsCache;
-	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
+
+	private LayoutInflater themedInflater;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {

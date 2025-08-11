@@ -95,7 +95,7 @@ public class SelectPointsFragment extends BaseFullScreenDialogFragment implement
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.select_track_points_fragment, container, false);
+		View view = inflate(R.layout.select_track_points_fragment, container, false);
 
 		setupToolbar(view);
 		setupButtons(view);

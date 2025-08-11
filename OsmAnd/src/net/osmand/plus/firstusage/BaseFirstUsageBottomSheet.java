@@ -37,7 +37,7 @@ public abstract class BaseFirstUsageBottomSheet extends BottomSheetDialogFragmen
 		TextView titleTv = view.findViewById(R.id.title);
 		ViewGroup itemsContainer = view.findViewById(R.id.container);
 
-		setupItems(itemsContainer, themedInflater);
+		setupItems(itemsContainer);
 		titleTv.setText(getTitle());
 
 		return view;
@@ -45,7 +45,7 @@ public abstract class BaseFirstUsageBottomSheet extends BottomSheetDialogFragmen
 
 	protected abstract String getTitle();
 
-	protected abstract void setupItems(@NonNull ViewGroup container, @NonNull LayoutInflater inflater);
+	protected abstract void setupItems(@NonNull ViewGroup container);
 
 	@NonNull
 	protected View createItemView(@Nullable String title,

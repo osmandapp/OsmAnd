@@ -83,11 +83,11 @@ public class ReportsFragment extends BaseFullScreenFragment implements OnFragmen
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_reports, container, false);
+		View view = inflate(R.layout.fragment_reports, container, false);
 		monthReportsSpinner = view.findViewById(R.id.monthReportsSpinner);
 		View monthButton = view.findViewById(R.id.monthButton);
 		monthReportsSpinner.setOnTouchListener((v, event) -> {
-			event.offsetLocation(AndroidUtils.dpToPx(app, 48f), 0);
+			event.offsetLocation(dpToPx(48f), 0);
 			monthButton.onTouchEvent(event);
 			return true;
 		});

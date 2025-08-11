@@ -127,7 +127,7 @@ public class LiveUpdatesFragment extends BaseFullScreenDialogFragment implements
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_live_updates, container, false);
+		View view = inflate(R.layout.fragment_live_updates, container, false);
 		createToolbar(view.findViewById(R.id.app_bar));
 
 		listView = view.findViewById(android.R.id.list);

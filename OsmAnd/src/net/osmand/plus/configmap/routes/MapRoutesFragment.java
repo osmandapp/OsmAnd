@@ -72,7 +72,7 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.map_routes_fragment, container, false);
+		View view = inflate(R.layout.map_routes_fragment, container, false);
 
 		setupHeader(view);
 		setupContent(view);
@@ -159,7 +159,7 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 
 	@NonNull
 	protected View createDivider(@NonNull ViewGroup group, boolean showTop, boolean showBottom) {
-		View divider = themedInflater.inflate(R.layout.list_item_divider, group, false);
+		View divider = inflate(R.layout.list_item_divider, group, false);
 		AndroidUiHelper.updateVisibility(divider.findViewById(R.id.topShadowView), showTop);
 		AndroidUiHelper.updateVisibility(divider.findViewById(R.id.bottomShadowView), showBottom);
 		return divider;

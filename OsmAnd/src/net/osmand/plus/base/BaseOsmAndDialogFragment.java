@@ -25,8 +25,9 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	protected OsmandSettings settings;
 	protected ApplicationMode appMode;
 	protected UiUtilities iconsCache;
-	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
+
+	private LayoutInflater themedInflater;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

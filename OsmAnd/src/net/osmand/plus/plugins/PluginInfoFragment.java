@@ -75,7 +75,7 @@ public class PluginInfoFragment extends BaseFullScreenFragment implements Plugin
 		}
 
 		updateNightMode();
-		mainView = themedInflater.inflate(R.layout.plugin, container, false);
+		mainView = inflate(R.layout.plugin, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 
 		TextView toolbarTitle = mainView.findViewById(R.id.toolbar_title);

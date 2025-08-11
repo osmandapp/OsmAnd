@@ -103,7 +103,7 @@ public class MappersFragment extends BaseFullScreenFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		mainView = themedInflater.inflate(R.layout.fragment_mappers_osm, container, false);
+		mainView = inflate(R.layout.fragment_mappers_osm, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 
 		setupToolbar();

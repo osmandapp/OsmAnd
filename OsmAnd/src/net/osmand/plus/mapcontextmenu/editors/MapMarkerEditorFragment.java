@@ -45,7 +45,7 @@ public class MapMarkerEditorFragment extends BaseFullScreenFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		Context context = requireContext();
-		View view = themedInflater.inflate(R.layout.map_marker_editor_fragment, container, false);
+		View view = inflate(R.layout.map_marker_editor_fragment, container, false);
 
 		MapMarkerEditor editor = this.editor;
 		if (editor == null) {

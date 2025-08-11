@@ -72,7 +72,7 @@ public class WeatherLayerFragment extends BaseFullScreenFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_weather_layer, container, false);
+		View view = inflate(R.layout.fragment_weather_layer, container, false);
 
 		if (weatherBand != null) {
 			setupHeader(view);

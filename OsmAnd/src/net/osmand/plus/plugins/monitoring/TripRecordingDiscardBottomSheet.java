@@ -30,8 +30,8 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 		int verticalBig = getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalNormal = getDimensionPixelSize(R.dimen.content_padding);
-		View buttonDiscard = createItem(themedInflater, ItemType.STOP);
-		View buttonCancel = createItem(themedInflater, ItemType.CANCEL);
+		View buttonDiscard = createItem(ItemType.STOP);
+		View buttonCancel = createItem(ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.track_recording_description))
@@ -75,8 +75,8 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 		items.add(new DividerSpaceItem(app, verticalNormal));
 	}
 
-	private View createItem(LayoutInflater inflater, ItemType type) {
-		return TripRecordingBottomSheet.createItem(app, nightMode, inflater, type);
+	private View createItem(ItemType type) {
+		return TripRecordingBottomSheet.createItem(app, nightMode, getThemedInflater(), type);
 	}
 
 	@Override

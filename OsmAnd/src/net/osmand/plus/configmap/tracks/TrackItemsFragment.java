@@ -48,7 +48,7 @@ public class TrackItemsFragment extends BaseFullScreenFragment implements OsmAnd
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.recycler_view_fragment, container, false);
+		View view = inflate(R.layout.recycler_view_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		recyclerView = view.findViewById(R.id.recycler_view);

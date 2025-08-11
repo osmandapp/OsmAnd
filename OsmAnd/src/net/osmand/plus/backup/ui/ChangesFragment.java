@@ -83,7 +83,7 @@ public class ChangesFragment extends BaseFullScreenFragment implements OnPrepare
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_osmand_cloud_changes, container, false);
+		View view = inflate(R.layout.fragment_osmand_cloud_changes, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		buttonsContainer = view.findViewById(R.id.buttons_container);

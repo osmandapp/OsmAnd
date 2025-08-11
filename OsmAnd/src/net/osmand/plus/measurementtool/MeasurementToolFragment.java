@@ -318,7 +318,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
 
-		View view = themedInflater.inflate(R.layout.fragment_measurement_tool, container, false);
+		View view = inflate(R.layout.fragment_measurement_tool, container, false);
 
 		mainView = view.findViewById(R.id.main_view);
 		detailsMenu = new GraphDetailsMenu(mainView);

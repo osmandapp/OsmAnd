@@ -56,7 +56,7 @@ public class TelegramChatsFragment extends BaseFullScreenFragment implements OnI
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.help_articles_fragment, container, false);
+		View view = inflate(R.layout.help_articles_fragment, container, false);
 
 		ContextMenuAdapter menuAdapter = new ContextMenuAdapter(app);
 

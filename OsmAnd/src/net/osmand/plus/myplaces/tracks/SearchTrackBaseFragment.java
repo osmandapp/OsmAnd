@@ -83,7 +83,7 @@ public abstract class SearchTrackBaseFragment extends BaseFullScreenDialogFragme
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(getLayoutId(), container, false);
+		View view = inflate(getLayoutId(), container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		Fragment fragment = getTargetFragment();

@@ -108,7 +108,7 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		mainView = themedInflater.inflate(getLayoutId(), container, false);
+		mainView = inflate(getLayoutId(), container, false);
 		appBar = mainView.findViewById(R.id.appbar);
 		scrollView = mainView.findViewById(R.id.scroll_view);
 

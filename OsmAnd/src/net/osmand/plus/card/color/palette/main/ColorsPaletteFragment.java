@@ -72,7 +72,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_palette, container, false);
+		View view = inflate(R.layout.fragment_palette, container, false);
 		setupToolbar(view);
 		setupColorsPalette(view);
 		return view;

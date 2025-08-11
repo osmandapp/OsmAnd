@@ -101,7 +101,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.local_search_fragment, container, false);
+		View view = inflate(R.layout.local_search_fragment, container, false);
 
 		setupToolbar(view);
 		setupSearchView(view);

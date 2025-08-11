@@ -38,7 +38,7 @@ public abstract class ExternalDevicesBaseFragment extends BaseFullScreenFragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(getLayoutId(), container, false);
+		View view = inflate(getLayoutId(), container, false);
 		setupToolbar(view);
 		setupUI(view);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);

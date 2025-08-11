@@ -35,8 +35,9 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 	protected ApplicationMode appMode;
 	protected OsmandSettings settings;
 	protected UiUtilities iconsCache;
-	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
+
+	private LayoutInflater themedInflater;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {

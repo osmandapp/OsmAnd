@@ -65,7 +65,7 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment implements Do
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.gallery_details_fragment, container, false);
+		View view = inflate(R.layout.gallery_details_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
@@ -148,7 +148,7 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment implements Do
 
 	private void buildItem(@NonNull ViewGroup container, @NonNull String title, @NonNull String description,
 	                       int iconId, boolean defaultColor, boolean isUrl) {
-		View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_descr_72dp, container, false);
+		View view = inflate(R.layout.bottom_sheet_item_with_descr_72dp, container, false);
 
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		ImageView iconView = view.findViewById(R.id.icon);

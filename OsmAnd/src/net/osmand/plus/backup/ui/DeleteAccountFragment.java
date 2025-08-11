@@ -95,7 +95,7 @@ public class DeleteAccountFragment extends BaseFullScreenFragment implements OnD
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_delete_backup_account, container, false);
+		View view = inflate(R.layout.fragment_delete_backup_account, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireActivity(), view);
 
 		setupToolbar(view);

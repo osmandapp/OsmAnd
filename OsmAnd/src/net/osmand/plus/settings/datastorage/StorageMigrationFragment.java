@@ -124,11 +124,9 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		mainView = themedInflater.inflate(R.layout.copy_files_fragment, container, false);
+		mainView = inflate(R.layout.copy_files_fragment, container, false);
 		ViewCompat.setNestedScrollingEnabled(mainView.findViewById(R.id.list), true);
-
 		updateContent();
-
 		return mainView;
 	}
 

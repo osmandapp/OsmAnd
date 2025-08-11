@@ -99,7 +99,7 @@ public class SimulateLocationFragment extends BaseFullScreenFragment implements 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.simulate_location_fragment, container, false);
+		View view = inflate(R.layout.simulate_location_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		if (gpxFile == null && savedInstanceState != null) {

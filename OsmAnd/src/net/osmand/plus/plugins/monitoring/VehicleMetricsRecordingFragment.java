@@ -81,7 +81,7 @@ public class VehicleMetricsRecordingFragment extends BaseFullScreenFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.vehicle_metrics_recording_fragment, container, false);
+		View view = inflate(R.layout.vehicle_metrics_recording_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		Window window = requireMapActivity().getWindow();
 		if (window != null) {

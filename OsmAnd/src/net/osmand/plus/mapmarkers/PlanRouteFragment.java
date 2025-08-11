@@ -162,14 +162,14 @@ public class PlanRouteFragment extends BaseFullScreenFragment
 			((PlanRouteOptionsBottomSheetDialogFragment) optionsFragment).setListener(createOptionsFragmentListener());
 		}
 
-		toolbarHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
+		toolbarHeight = getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
 		int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		fullScreen = portrait && planRouteContext.isMarkersListOpened();
 		int layoutRes = fullScreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
 
-		View view = themedInflater.inflate(layoutRes, null);
+		View view = inflate(layoutRes);
 
 		mainView = fullScreen ? view : view.findViewById(R.id.main_view);
 

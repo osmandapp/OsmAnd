@@ -71,7 +71,7 @@ public class DetailedTrackGuidanceFragment extends BaseFullScreenFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.detailed_track_guidance, container, false);
+		View view = inflate(R.layout.detailed_track_guidance, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		AppBarLayout appBarLayout = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
@@ -136,7 +136,7 @@ public class DetailedTrackGuidanceFragment extends BaseFullScreenFragment {
 
 		for (int i = 0; i < TrackApproximationType.values().length; i++) {
 			TrackApproximationType type = TrackApproximationType.values()[i];
-			View button = themedInflater.inflate(R.layout.bottom_sheet_item_with_descr_and_left_radio_btn, buttonsContainer, false);
+			View button = inflate(R.layout.bottom_sheet_item_with_descr_and_left_radio_btn, buttonsContainer, false);
 			boolean isSelected = changedTrackGuidance == type;
 			boolean shouldShowDivider = i != TrackApproximationType.values().length - 1;
 			setupRadioButton(button, type.getNameRes(), isSelected, shouldShowDivider, v -> {

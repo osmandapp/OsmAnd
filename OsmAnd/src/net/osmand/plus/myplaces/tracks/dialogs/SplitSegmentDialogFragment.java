@@ -149,8 +149,8 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 		ImageView splitImage = headerView.findViewById(R.id.header_split_image);
 		splitImage.setImageDrawable(getIcon(R.drawable.ic_action_split_interval, nightMode ? 0 : R.color.icon_color_default_light));
 
-		listView.addHeaderView(themedInflater.inflate(R.layout.gpx_split_segments_empty_header, listView, false));
-		listView.addFooterView(themedInflater.inflate(R.layout.list_shadow_footer, listView, false));
+		listView.addHeaderView(inflate(R.layout.gpx_split_segments_empty_header, listView, false));
+		listView.addFooterView(inflate(R.layout.list_shadow_footer, listView, false));
 
 		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			int previousYPos = -1;

@@ -134,7 +134,7 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
+		view = inflate(R.layout.fragment_edit_poi, container, false);
 		if (savedInstanceState != null) {
 			Map<String, String> map = (Map<String, String>) AndroidUtils.getSerializable(savedInstanceState, TAGS_LIST, LinkedHashMap.class);
 			if (!Algorithms.isEmpty(map)) {

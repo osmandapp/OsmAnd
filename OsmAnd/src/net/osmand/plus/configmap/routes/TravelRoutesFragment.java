@@ -99,7 +99,7 @@ public class TravelRoutesFragment extends BaseFullScreenFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.travel_routes_fragment, container, false);
+		View view = inflate(R.layout.travel_routes_fragment, container, false);
 
 		showHideTopShadow(view);
 		setupHeader(view);

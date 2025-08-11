@@ -64,7 +64,7 @@ public abstract class MapOptionSliderFragment extends ConfigureMapOptionFragment
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = themedInflater.inflate(R.layout.map_option_slider_fragment, container);
+		View view = inflate(R.layout.map_option_slider_fragment, container);
 		setupSlider(view);
 		updateContent();
 	}

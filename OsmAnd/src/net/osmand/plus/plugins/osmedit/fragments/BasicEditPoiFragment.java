@@ -48,7 +48,7 @@ public class BasicEditPoiFragment extends BaseFullScreenFragment implements OnFr
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_edit_poi_advanced_new, container, false);
+		View view = inflate(R.layout.fragment_edit_poi_advanced_new, container, false);
 
 		RecyclerView recyclerView = view.findViewById(R.id.content_recycler_view);
 		InputFilter[] lengthLimit = {

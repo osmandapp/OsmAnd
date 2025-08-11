@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -77,12 +76,12 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 		int dp16 = getDimensionPixelSize(R.dimen.content_padding);
 		int dp36 = getDimensionPixelSize(R.dimen.context_menu_controller_height);
 
-		buttonClear = createItem(themedInflater, ItemType.CLEAR_DATA, hasDataToSave());
-		View buttonDiscard = createItem(themedInflater, ItemType.STOP_AND_DISCARD);
-		View buttonOnline = createItem(themedInflater, settings.LIVE_MONITORING.get()
+		buttonClear = createItem(ItemType.CLEAR_DATA, hasDataToSave());
+		View buttonDiscard = createItem(ItemType.STOP_AND_DISCARD);
+		View buttonOnline = createItem(settings.LIVE_MONITORING.get()
 				? ItemType.STOP_ONLINE : ItemType.START_ONLINE);
-		buttonSave = createItem(themedInflater, ItemType.SAVE, hasDataToSave());
-		View buttonSegment = createItem(themedInflater, ItemType.START_NEW_SEGMENT, wasTrackMonitored());
+		buttonSave = createItem(ItemType.SAVE, hasDataToSave());
+		View buttonSegment = createItem(ItemType.START_NEW_SEGMENT, wasTrackMonitored());
 
 		items.add(new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.shared_string_options))
@@ -211,12 +210,12 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 		TripRecordingBottomSheet.createItem(app, nightMode, view, type, true, null);
 	}
 
-	private View createItem(LayoutInflater inflater, ItemType type, boolean enabled) {
-		return TripRecordingBottomSheet.createItem(app, nightMode, inflater, type, enabled, null);
+	private View createItem(ItemType type, boolean enabled) {
+		return TripRecordingBottomSheet.createItem(app, nightMode, getThemedInflater(), type, enabled, null);
 	}
 
-	private View createItem(LayoutInflater inflater, ItemType type) {
-		return TripRecordingBottomSheet.createItem(app, nightMode, inflater, type);
+	private View createItem(ItemType type) {
+		return TripRecordingBottomSheet.createItem(app, nightMode, getThemedInflater(), type);
 	}
 
 	private void onGpxSaved() {

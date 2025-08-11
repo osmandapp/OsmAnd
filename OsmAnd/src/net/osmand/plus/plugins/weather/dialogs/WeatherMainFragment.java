@@ -64,10 +64,10 @@ public class WeatherMainFragment extends BaseFullScreenFragment implements Downl
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_weather_main, container, false);
+		View view = inflate(R.layout.fragment_weather_main, container, false);
 
 		setupHeader(view);
-		setupWeatherLayers(view, themedInflater);
+		setupWeatherLayers(view);
 		setupWeatherContours(view);
 		setupOfflineForecastCard(view);
 
@@ -108,12 +108,12 @@ public class WeatherMainFragment extends BaseFullScreenFragment implements Downl
 		app.runInUIThread(mapActivity::refreshMap);
 	}
 
-	private void setupWeatherLayers(@NonNull View view, @NonNull LayoutInflater inflater) {
+	private void setupWeatherLayers(@NonNull View view) {
 		ViewGroup container = view.findViewById(R.id.weather_layers_list);
 		Iterator<WeatherBand> iterator = weatherHelper.getWeatherBands().iterator();
 		while (iterator.hasNext()) {
 			WeatherBand weatherBand = iterator.next();
-			View itemView = inflater.inflate(R.layout.bottom_sheet_item_with_additional_right_desc, container, false);
+			View itemView = inflate(R.layout.bottom_sheet_item_with_additional_right_desc, container, false);
 			setupOnOffButton(itemView, weatherBand.getIconId(), weatherBand.getMeasurementName(),
 					null, weatherBand.isBandVisible(), iterator.hasNext(), v -> {
 						MapActivity mapActivity = (MapActivity) getMyActivity();

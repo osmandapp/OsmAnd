@@ -104,7 +104,7 @@ public class TransportLinesFragment extends BaseFullScreenFragment {
 			RenderingRuleProperty property = rules.get(i);
 			String attrName = property.getAttrName();
 			if (!TransportType.TRANSPORT_STOPS.getAttrName().equals(attrName)) {
-				View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_switch, list, false);
+				View view = inflate(R.layout.bottom_sheet_item_with_switch, list, false);
 				boolean showDivider = i < rules.size() - 1;
 				setupButton(
 						view,

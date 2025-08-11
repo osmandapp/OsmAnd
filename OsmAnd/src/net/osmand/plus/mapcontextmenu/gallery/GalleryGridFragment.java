@@ -67,7 +67,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.gallery_grid_fragment, container, false);
+		View view = inflate(R.layout.gallery_grid_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupScaleDetector();

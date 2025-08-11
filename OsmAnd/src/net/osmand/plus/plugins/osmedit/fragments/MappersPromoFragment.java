@@ -99,7 +99,7 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 	}
 
 	private View createFeatureItemView(@NonNull OsmAndFeature feature) {
-		View view = themedInflater.inflate(R.layout.purchase_dialog_list_item, listContainer, false);
+		View view = inflate(R.layout.purchase_dialog_list_item, listContainer, false);
 		view.setTag(feature);
 		bindFeatureItem(view, feature, false);
 		return view;

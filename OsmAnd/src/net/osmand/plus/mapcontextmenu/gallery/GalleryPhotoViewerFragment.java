@@ -58,7 +58,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		ViewGroup view = (ViewGroup) themedInflater.inflate(R.layout.gallery_photo_item, container, false);
+		ViewGroup view = (ViewGroup) inflate(R.layout.gallery_photo_item, container, false);
 
 		setupImageView(view);
 

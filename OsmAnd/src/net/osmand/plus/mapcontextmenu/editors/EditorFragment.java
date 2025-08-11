@@ -136,7 +136,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		view = themedInflater.inflate(getLayoutId(), container, false);
+		view = inflate(getLayoutId(), container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar();

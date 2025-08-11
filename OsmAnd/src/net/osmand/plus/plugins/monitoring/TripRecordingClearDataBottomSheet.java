@@ -30,8 +30,8 @@ public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFrag
 		int verticalNormal = getDimensionPixelSize(R.dimen.content_padding);
 		String description = getString(R.string.clear_recorded_data_warning)
 				.concat("\n").concat(getString(R.string.lost_data_warning));
-		View buttonClear = createItem(themedInflater, ItemType.CLEAR_DATA);
-		View buttonCancel = createItem(themedInflater, ItemType.CANCEL);
+		View buttonClear = createItem(ItemType.CLEAR_DATA);
+		View buttonCancel = createItem(ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(description)
@@ -61,8 +61,8 @@ public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFrag
 		items.add(new DividerSpaceItem(app, verticalNormal));
 	}
 
-	private View createItem(LayoutInflater inflater, ItemType type) {
-		return TripRecordingBottomSheet.createItem(app, nightMode, inflater, type);
+	private View createItem(ItemType type) {
+		return TripRecordingBottomSheet.createItem(app, nightMode, getThemedInflater(), type);
 	}
 
 	@Override

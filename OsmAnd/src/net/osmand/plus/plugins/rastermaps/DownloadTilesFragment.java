@@ -158,7 +158,7 @@ public class DownloadTilesFragment extends BaseFullScreenFragment implements IMa
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
-		view = themedInflater.inflate(R.layout.download_tiles_fragment, container, false);
+		view = inflate(R.layout.download_tiles_fragment, container, false);
 
 		if (tileSource == null) {
 			dismiss();

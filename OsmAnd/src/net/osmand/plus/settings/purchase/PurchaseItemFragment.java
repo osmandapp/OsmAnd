@@ -92,7 +92,7 @@ public class PurchaseItemFragment extends BaseFullScreenDialogFragment implement
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = themedInflater.inflate(R.layout.fragment_purchase_item, container, false);
+		view = inflate(R.layout.fragment_purchase_item, container, false);
 		return view;
 	}
 
@@ -228,7 +228,7 @@ public class PurchaseItemFragment extends BaseFullScreenDialogFragment implement
 
 	private void createToolbar() {
 		AppBarLayout appbar = view.findViewById(R.id.appbar);
-		View toolbar = themedInflater.inflate(R.layout.global_preference_toolbar, appbar, false);
+		View toolbar = inflate(R.layout.global_preference_toolbar, appbar, false);
 
 		ImageButton ivBackButton = toolbar.findViewById(R.id.close_button);
 		UiUtilities.rotateImageByLayoutDirection(ivBackButton);
