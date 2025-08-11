@@ -500,7 +500,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment impleme
 		if (selectedGpxFile != null) {
 			dismiss();
 			MapLayers mapLayers = app.getOsmandMap().getMapLayers();
-			WptPt wptPt = currentGpxDisplayItem.locationEnd;
+			WptPt wptPt = currentGpxDisplayItem.getLabelPoint();
 
 			SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wptPt);
 			LatLon latLon = new LatLon(wptPt.getLatitude(), wptPt.getLongitude());

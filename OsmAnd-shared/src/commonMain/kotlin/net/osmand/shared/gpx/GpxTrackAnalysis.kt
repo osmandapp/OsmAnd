@@ -47,6 +47,8 @@ class GpxTrackAnalysis {
 	var bottom = 0.0
 
 	var segmentSlopeType: TrkSegment.SegmentSlopeType? = null
+	var slopeCount: Int? = null
+	var slopeValue: Double? = null
 
 	var pointAttributes = mutableListOf<PointAttributes>()
 	var availableAttributes = mutableSetOf<String>()
