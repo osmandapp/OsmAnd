@@ -100,7 +100,7 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 
 		Iterator<String> it = list.iterator();
 		while (it.hasNext()) {
-			CompassMode compassMode = getModeForKey(it.next());
+			CompassMode compassMode = CompassMode.getModeForKey(it.next());
 			if (compassMode == null) {
 				it.remove();
 			}
@@ -109,19 +109,9 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 		return list;
 	}
 
-	@Nullable
-	public CompassMode getModeForKey(String key) {
-		for (CompassMode mode : CompassMode.values()) {
-			if (mode.getKey().equals(key)) {
-				return mode;
-			}
-		}
-		return null;
-	}
-
 	@Override
 	public void executeWithParams(@NonNull MapActivity activity, String params) {
-		CompassMode compassMode = getModeForKey(params);
+		CompassMode compassMode = CompassMode.getModeForKey(params);
 		if (compassMode != null) {
 			OsmandApplication app = activity.getMyApplication();
 			MapViewTrackingUtilities trackingUtilities = app.getMapViewTrackingUtilities();
@@ -137,11 +127,8 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 
 	@Override
 	public String getTranslatedItemName(Context context, String item) {
-		CompassMode compassMode = getModeForKey(item);
-		if (compassMode != null) {
-			return compassMode.getTitle(context);
-		}
-		return null;
+		CompassMode compassMode = CompassMode.valueOf(item);
+		return compassMode.getTitle(context);
 	}
 
 	@Override
@@ -181,10 +168,8 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 	protected String getTitle(List<String> filters, @NonNull Context ctx) {
 		List<String> profileNames = new ArrayList<>();
 		for (String key : filters) {
-			CompassMode compassMode = getModeForKey(key);
-			if (compassMode != null) {
-				profileNames.add(compassMode.getTitle(ctx));
-			}
+			CompassMode compassMode = CompassMode.valueOf(key);
+			profileNames.add(compassMode.getTitle(ctx));
 		}
 		return TextUtils.join(", ", profileNames);
 	}
@@ -196,11 +181,8 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 
 	@Override
 	protected String getItemName(Context context, String item) {
-		CompassMode mode = getModeForKey(item);
-		if (mode != null) {
-			return mode.getTitle(context);
-		}
-		return "";
+		CompassMode mode = CompassMode.valueOf(item);
+		return mode.getTitle(context);
 	}
 
 	@Override
@@ -247,13 +229,10 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 
 	@Override
 	protected int getItemIconRes(Context context, String item) {
-		CompassMode compassMode = getModeForKey(item);
-		if (compassMode != null) {
-			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-			return compassMode.getIconId(nightMode);
-		}
-		return super.getItemIconRes(context, item);
+		CompassMode compassMode = CompassMode.valueOf(item);
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return compassMode.getIconId(nightMode);
 	}
 
 	@Override
@@ -263,10 +242,7 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 			return;
 		}
 		for (String key : selectedItems) {
-			CompassMode compassMode = getModeForKey(key);
-			if (compassMode != null) {
-				adapter.addItem(key, ctx);
-			}
+			adapter.addItem(key, ctx);
 		}
 	}
 }

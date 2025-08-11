@@ -212,17 +212,15 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 				}
 			}
 		} else if (action instanceof ChangeMapOrientationAction mapOrientationAction) {
-			List<String> profilesModes = mapOrientationAction.loadListFromParams();
-			for (String key : profilesModes) {
-				CompassMode compassMode = mapOrientationAction.getModeForKey(key);
-				if (compassMode != null) {
-					boolean selected = key.equals(selectedItem);
-					int iconId = compassMode.getIconId(nightMode);
-					Drawable icon = getIcon(iconId);
-					String translatedName = compassMode.getTitle(context);
-					createItemRow(selected, counter, icon, translatedName, key);
-					counter++;
-				}
+			List<String> compassModes = mapOrientationAction.loadListFromParams();
+			for (String key : compassModes) {
+				CompassMode compassMode = CompassMode.valueOf(key);
+				boolean selected = key.equals(selectedItem);
+				int iconId = compassMode.getIconId(nightMode);
+				Drawable icon = getIcon(iconId);
+				String translatedName = compassMode.getTitle(context);
+				createItemRow(selected, counter, icon, translatedName, key);
+				counter++;
 			}
 		} else if (action instanceof SwitchableAction switchableAction) {
 			List<Pair<String, String>> sources = (List<Pair<String, String>>) switchableAction.loadListFromParams();

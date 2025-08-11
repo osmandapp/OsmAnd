@@ -20,7 +20,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.profiles.SelectMultipleProfilesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.ColorUtilities;
@@ -31,7 +30,7 @@ import java.util.List;
 
 public class SelectMultipleOrientationsBottomSheet extends BasePreferenceBottomSheet {
 
-	public static final String TAG = SelectMultipleProfilesBottomSheet.class.getSimpleName();
+	public static final String TAG = SelectMultipleOrientationsBottomSheet.class.getSimpleName();
 	public static final String SELECTED_KEYS = "selected_keys";
 	public static final String DISABLED_KEYS = "disabled_keys";
 
@@ -59,11 +58,11 @@ public class SelectMultipleOrientationsBottomSheet extends BasePreferenceBottomS
 		items.add(new TitleItem(getString(R.string.rotate_map_to)));
 
 		for (CompassMode compassMode : CompassMode.values()){
-			addProfileItem(compassMode);
+			adCompassButton(compassMode);
 		}
 	}
 
-	private void addProfileItem(CompassMode compassMode) {
+	private void adCompassButton(@NonNull CompassMode compassMode) {
 		Context context = requireContext();
 		OsmandApplication app = requiredMyApplication();
 		View itemView = UiUtilities.getInflater(requireContext(), nightMode)
@@ -138,9 +137,9 @@ public class SelectMultipleOrientationsBottomSheet extends BasePreferenceBottomS
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof CallbackWithObject) {
 			List<String> newSelected = new ArrayList<>();
-			for (String profile : selectedModes) {
-				if (!disabledModes.contains(profile)) {
-					newSelected.add(profile);
+			for (String mode : selectedModes) {
+				if (!disabledModes.contains(mode)) {
+					newSelected.add(mode);
 				}
 			}
 			((CallbackWithObject) targetFragment).processResult(newSelected);
@@ -149,15 +148,15 @@ public class SelectMultipleOrientationsBottomSheet extends BasePreferenceBottomS
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity, Fragment targetFragment,
-	                                @Nullable List<String> selectedProfiles,
-	                                @Nullable List<String> disabledProfiles,
+	                                @Nullable List<String> selectedModes,
+	                                @Nullable List<String> disabledModes,
 	                                boolean usedOnMap) {
 		SelectMultipleOrientationsBottomSheet fragment = new SelectMultipleOrientationsBottomSheet();
 		Bundle args = new Bundle();
-		args.putStringArrayList(SELECTED_KEYS, selectedProfiles != null ?
-				new ArrayList<>(selectedProfiles) : new ArrayList<>());
-		args.putStringArrayList(DISABLED_KEYS, disabledProfiles != null ?
-				new ArrayList<>(disabledProfiles) : new ArrayList<>());
+		args.putStringArrayList(SELECTED_KEYS, selectedModes != null ?
+				new ArrayList<>(selectedModes) : new ArrayList<>());
+		args.putStringArrayList(DISABLED_KEYS, disabledModes != null ?
+				new ArrayList<>(disabledModes) : new ArrayList<>());
 		fragment.setArguments(args);
 		fragment.setTargetFragment(targetFragment, 0);
 		fragment.setUsedOnMap(usedOnMap);

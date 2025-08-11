@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -14,42 +15,36 @@ public enum CompassMode {
 	MANUALLY_ROTATED(
 			OsmandSettings.ROTATE_MAP_MANUAL,
 			R.string.rotate_map_manual_opt,
-			new ThemedIconId(R.drawable.ic_compass_manual, R.drawable.ic_compass_manual_white),
-			"manually_rotated"
+			new ThemedIconId(R.drawable.ic_compass_manual, R.drawable.ic_compass_manual_white)
 	),
 
 	MOVEMENT_DIRECTION(
 			OsmandSettings.ROTATE_MAP_BEARING,
 			R.string.rotate_map_bearing_opt,
-			new ThemedIconId(R.drawable.ic_compass_bearing, R.drawable.ic_compass_bearing_white),
-			"movement_direction"
+			new ThemedIconId(R.drawable.ic_compass_bearing, R.drawable.ic_compass_bearing_white)
 	),
 
 	COMPASS_DIRECTION(
 			OsmandSettings.ROTATE_MAP_COMPASS,
 			R.string.rotate_map_compass_opt,
-			new ThemedIconId(R.drawable.ic_compass, R.drawable.ic_compass_white),
-			"compass_direction"
+			new ThemedIconId(R.drawable.ic_compass, R.drawable.ic_compass_white)
 	),
 
 	NORTH_IS_UP(
 			OsmandSettings.ROTATE_MAP_NONE,
 			R.string.rotate_map_north_opt,
-			new ThemedIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white),
-			"north_is_up"
+			new ThemedIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white)
 	);
 
 	@StringRes
 	private final int titleId;
 	private final ThemedIconId themedIconId;
 	private final int value;
-	private final String key;
 
-	CompassMode(int value, @StringRes int titleId, @NonNull ThemedIconId themedIconId, @NonNull String key) {
+	CompassMode(int value, @StringRes int titleId, @NonNull ThemedIconId themedIconId) {
 		this.value = value;
 		this.titleId = titleId;
 		this.themedIconId = themedIconId;
-		this.key = key;
 	}
 
 	@StringRes
@@ -77,8 +72,8 @@ public enum CompassMode {
 
 	@NonNull
 	public String getKey() {
-		return key;
-	}
+		return name();
+	};
 
 	@NonNull
 	public CompassMode next() {
@@ -105,5 +100,15 @@ public enum CompassMode {
 			}
 		}
 		return false;
+	}
+
+	@Nullable
+	public static CompassMode getModeForKey(@Nullable String key) {
+		for (CompassMode mode : CompassMode.values()) {
+			if (mode.getKey().equals(key)) {
+				return mode;
+			}
+		}
+		return null;
 	}
 }
