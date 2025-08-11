@@ -13,6 +13,8 @@
     <string name="average_elevation">Average elevation</string>
     <string name="ascent">Ascent</string>
     <string name="descent">Descent</string>
+    <string name="map_orientations_choose_description">Leave empty to switch between all available modes, or add only your preferred ones.</string>
+    <string name="map_orientations">Map orientations</string>
     <string name="altitude_metrics_description">Sets the display unit for altitude in widgets and statistics.</string>
     <string name="write_location_provider_description">Save location provider to each track point while recording</string>
     <string name="write_location_provider">Write Location Provider</string>
@@ -26,6 +28,10 @@
     <string name="release_5_2">
         • Work in progress...
     </string>
+
+    <string name="ble_prefix_pattern">%s • </string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Response</string>
     <string name="deleting_history">Deleting history…</string>
 	<string name="n_a">N/A</string>
     <string name="next_turn_information">Next turn information</string>

@@ -154,7 +154,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 		return new SettingsItemReader<ItinerarySettingsItem>(this) {
 
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+			public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 			                           @Nullable String entryName) throws IllegalArgumentException {
 				List<ItineraryGroupInfo> groupInfos = new ArrayList<>();
 				GpxExtensionsReader gpxExtensionsReader = ItineraryDataHelperKt.getGpxExtensionsReader(groupInfos);
@@ -168,6 +168,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 					dataHelper.collectMarkersGroups(gpxFile, groups, groupInfos, markers);
 					items.addAll(groups.values());
 				}
+				return null;
 			}
 		};
 	}

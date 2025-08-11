@@ -351,6 +351,36 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 					speedDivider.setVisibility(View.GONE);
 					speedSection.setVisibility(View.GONE);
 				}
+
+				ViewGroup hrBlock = convertView.findViewById(R.id.hr_block);
+				View hrDivider = hrBlock.findViewById(R.id.divider);
+				View hrSection = hrBlock.findViewById(R.id.container);
+				if (analysis.getAvgSensorHr() > 0 || analysis.getMaxSensorHr() > 0 || analysis.getMinSensorHr() > 0) {
+					String avgHr = getString(R.string.ltr_or_rtl_combine_via_space, Math.round(analysis.getAvgSensorHr()), getString(R.string.beats_per_minute_short));
+					((TextView) hrBlock.findViewById(R.id.first_value))
+							.setText(avgHr);
+
+					String maxHr = getString(R.string.ltr_or_rtl_combine_via_space, analysis.getMaxSensorHr(), getString(R.string.beats_per_minute_short));
+					((TextView) hrBlock.findViewById(R.id.second_value))
+							.setText(maxHr);
+
+					String minHr = getString(R.string.ltr_or_rtl_combine_via_space, analysis.getMinSensorHr(), getString(R.string.beats_per_minute_short));
+					((TextView) hrBlock.findViewById(R.id.third_value))
+							.setText(minHr);
+
+					((ImageView) hrBlock.findViewById(R.id.first_icon))
+							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
+					((ImageView) hrBlock.findViewById(R.id.second_icon))
+							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
+					((ImageView) hrBlock.findViewById(R.id.third_icon))
+							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
+
+					hrDivider.setVisibility(View.VISIBLE);
+					hrSection.setVisibility(View.VISIBLE);
+				} else{
+					hrDivider.setVisibility(View.GONE);
+					hrSection.setVisibility(View.GONE);
+				}
 			}
 		}
 		return convertView;
