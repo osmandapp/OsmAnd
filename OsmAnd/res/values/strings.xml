@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="map_orientations_choose_description">Leave empty to switch between all available modes, or add only your preferred ones.</string>
+    <string name="map_orientations">Map orientations</string>
     <string name="altitude_metrics_description">Sets the display unit for altitude in widgets and statistics.</string>
     <string name="write_location_provider_description">Save location provider to each track point while recording</string>
     <string name="write_location_provider">Write Location Provider</string>

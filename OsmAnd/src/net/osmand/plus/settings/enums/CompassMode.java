@@ -1,7 +1,10 @@
 package net.osmand.plus.settings.enums;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -49,6 +52,10 @@ public enum CompassMode {
 		return titleId;
 	}
 
+	public String getTitle(@NonNull Context ctx) {
+		return ctx.getString(titleId);
+	}
+
 	@NonNull
 	public ThemedIconId getIconId() {
 		return themedIconId;
@@ -62,6 +69,11 @@ public enum CompassMode {
 	public int getValue() {
 		return value;
 	}
+
+	@NonNull
+	public String getKey() {
+		return name();
+	};
 
 	@NonNull
 	public CompassMode next() {
@@ -88,5 +100,15 @@ public enum CompassMode {
 			}
 		}
 		return false;
+	}
+
+	@Nullable
+	public static CompassMode getModeForKey(@Nullable String key) {
+		for (CompassMode mode : CompassMode.values()) {
+			if (mode.getKey().equals(key)) {
+				return mode;
+			}
+		}
+		return null;
 	}
 }
