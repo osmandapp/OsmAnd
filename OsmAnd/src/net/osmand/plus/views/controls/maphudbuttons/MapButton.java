@@ -51,6 +51,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.widgets.FrameLayoutEx;
+import net.osmand.shared.grid.ButtonPositionSize;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
