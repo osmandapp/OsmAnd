@@ -29,11 +29,10 @@ abstract class ForgetDeviceBaseDialog : BottomSheetDialogFragment() {
 		val context = requireContext()
 		app = context.applicationContext as OsmandApplication
 		nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.OVER_MAP)
-		val deviceId = arguments?.getString(DEVICE_ID_KEY)
-		deviceId?.let { initDevice(it) }
+		arguments?.let { initDevice(it) }
 	}
 
-	abstract fun initDevice(deviceId: String)
+	abstract fun initDevice(arguments: Bundle)
 	abstract fun onForgetSensorConfirmed()
 
 	override fun onCreateView(

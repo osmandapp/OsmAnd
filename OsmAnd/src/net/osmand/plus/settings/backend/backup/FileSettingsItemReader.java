@@ -34,7 +34,7 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 	}
 
 	@Override
-	public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+	public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 	                           @Nullable String entryName) throws IOException, IllegalArgumentException {
 		FileSettingsItem item = getItem();
 		entryName = BackupUtils.removeLeadingSlash(entryName);
@@ -57,7 +57,7 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 
 		if (inputFile != null && inputStream instanceof FileInputStream) {
 			writeTargetFile(inputFile, savedFile, item);
-			return;
+			return savedFile;
 		}
 
 		File tempFile = FileUtils.getFileWithDownloadExtension(savedFile);
@@ -78,6 +78,8 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 			}
 		}
 		writeTargetFile(tempFile, savedFile, item);
+
+		return savedFile;
 	}
 
 	private void writeTargetFile(@NonNull File tempFile, @NonNull File targetFile, @NonNull FileSettingsItem item) {

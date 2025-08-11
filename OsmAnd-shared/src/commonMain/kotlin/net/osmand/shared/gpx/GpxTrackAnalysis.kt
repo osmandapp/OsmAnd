@@ -47,6 +47,8 @@ class GpxTrackAnalysis {
 	var bottom = 0.0
 
 	var segmentSlopeType: TrkSegment.SegmentSlopeType? = null
+	var slopeCount: Int? = null
+	var slopeValue: Double? = null
 
 	var pointAttributes = mutableListOf<PointAttributes>()
 	var availableAttributes = mutableSetOf<String>()
@@ -122,6 +124,10 @@ class GpxTrackAnalysis {
 	var maxSensorHr: Int
 		get() = getGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE) as Int
 		set(value) = setGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE, value)
+
+	var minSensorHr: Int
+		get() = getGpxParameter(GpxParameter.MIN_SENSOR_HEART_RATE) as Int
+		set(value) = setGpxParameter(GpxParameter.MIN_SENSOR_HEART_RATE, value)
 
 	var points: Int
 		get() = getGpxParameter(GpxParameter.POINTS) as Int
@@ -440,7 +446,9 @@ class GpxTrackAnalysis {
 				}
 
 				if (attribute.heartRate > 0) {
-					maxSensorHr = maxOf(attribute.heartRate.toInt(), maxSensorHr)
+					val hr = attribute.heartRate.toInt()
+					maxSensorHr = maxOf(hr, maxSensorHr)
+					minSensorHr = if (minSensorHr == 0) hr else minOf(hr, minSensorHr)
 					sensorHrCount++
 					totalSensorHrSum += attribute.heartRate
 				}

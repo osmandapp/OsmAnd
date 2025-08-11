@@ -23,7 +23,7 @@ class GpxDatabase {
 	companion object {
 		val log = LoggerFactory.getLogger("GpxDatabase")
 
-		const val DB_VERSION = 31
+		const val DB_VERSION = 32
 		const val DB_NAME = "gpx_database"
 		const val GPX_TABLE_NAME = "gpxTable"
 		const val GPX_DIR_TABLE_NAME = "gpxDirTable"

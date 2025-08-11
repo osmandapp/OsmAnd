@@ -21,6 +21,6 @@ public abstract class SettingsItemReader<T extends SettingsItem> {
 		return item;
 	}
 
-	public abstract void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+	public abstract File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 	                                    @Nullable String entryName) throws IOException, IllegalArgumentException;
 }

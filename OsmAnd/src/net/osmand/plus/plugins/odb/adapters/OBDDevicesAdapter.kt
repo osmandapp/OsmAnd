@@ -46,9 +46,14 @@ open class OBDDevicesAdapter(
 		val isConnected = connectedDevice?.address == device.address
 
 		holder.name.text = device.name
+		val blePrefix = if(device.isBLE) {
+			String.format(app.getString(R.string.ble_prefix_pattern), app.getString(R.string.external_device_ble))
+		} else {
+			""
+		}
 		holder.icon.setImageResource(if (isConnected) R.drawable.ic_action_car_obd2 else if (nightMode) R.drawable.widget_obd_car_day else R.drawable.widget_obd_car_night)
 		holder.description.visibility = View.VISIBLE
-		holder.description.text = device.address
+		holder.description.text = String.format(app.getString(R.string.device_address_with_prefix), blePrefix, device.address)
 		holder.description.gravity = Gravity.CENTER_VERTICAL
 		holder.itemView.setOnClickListener { _: View? ->
 			deviceClickListener?.onDeviceClicked(device)
