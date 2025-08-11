@@ -136,7 +136,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">泊車地點</string>
-    <string name="osmand_parking_plugin_description">標記車輛停泊位置，並在停車計時器到期時通知行事曆。要設置旗標，請在地圖上選擇地點，點選「動作」，然後選擇「新增泊車位」。</string>
+    <string name="osmand_parking_plugin_description">標記車輛停泊位置，並在停車計時器到期時通知行事曆。要設置旗標，請在地圖上選擇地點，點選「選項」，然後選擇「新增泊車位」。</string>
     <string name="osmand_parking_plugin_name">泊車地點</string>
     <string name="context_menu_item_add_parking_point">新增泊車位</string>
     <string name="context_menu_item_delete_parking_point">刪除泊車旗標</string>
@@ -793,9 +793,9 @@
     <string name="poi_remove_success">已刪除</string>
     <string name="poi_action_add">新增</string>
     <string name="poi_action_change">更改</string>
-    <string name="poi_action_succeded_template">動作 {0} 已完成。</string>
-    <string name="poi_error_unexpected_template">無法執行 {0} 動作。</string>
-    <string name="poi_error_io_error_template">當執行 {0} 動作時出現 I/O 錯誤。</string>
+    <string name="poi_action_succeded_template">快速動作 {0} 已完成。</string>
+    <string name="poi_error_unexpected_template">無法執行 {0} 快速動作。</string>
+    <string name="poi_error_io_error_template">當執行 {0} 快速動作時出現 I/O 錯誤。</string>
     <string name="poi_error_info_not_loaded">節點的資訊未載入</string>
     <string name="poi_dialog_opening_hours">營業</string>
     <string name="poi_dialog_comment">評論</string>
@@ -876,7 +876,7 @@
     <string name="srtm_paid_version_title">地形外掛程式</string>
     <string name="av_def_action_video">錄取視訊</string>
     <string name="av_def_action_audio">錄取音訊</string>
-    <string name="av_widget_action_descr">預設小工具動作：</string>
+    <string name="av_widget_action_descr">預設小工具選項：</string>
     <string name="av_widget_action">預設小工具作用</string>
     <string name="av_video_format_descr">影片輸出格式：</string>
     <string name="av_video_format">影片輸出格式</string>
@@ -1405,13 +1405,13 @@
     <string name="shared_string_downloading">正在下載……</string>
     <string name="shared_string_download_successful">已下載</string>
     <string name="shared_string_unexpected_error">意外的錯誤</string>
-    <string name="shared_string_action_template">動作 {0}</string>
+    <string name="shared_string_action_template">快速動作 {0}</string>
     <string name="shared_string_close">關閉</string>
     <string name="shared_string_exit">離開</string>
     <string name="shared_string_show">顯示</string>
     <string name="shared_string_show_all">全部顯示</string>
     <string name="shared_string_show_on_map">在地圖上顯示</string>
-    <string name="shared_string_more_actions">更多的動作</string>
+    <string name="shared_string_more_actions">更多的選項</string>
     <string name="shared_string_map">地圖</string>
     <string name="shared_string_favorites">我的收藏</string>
     <string name="shared_string_add_to_favorites">新增至「收藏」</string>
@@ -1440,9 +1440,9 @@
     <string name="osmand_parking_time_left">左</string>
     <string name="parking_place_limited">停車場時限到</string>
     <string name="your_edits">您的編輯</string>
-    <string name="action_create">建立動作</string>
-    <string name="action_modify">修改動作</string>
-    <string name="action_delete">刪除動作</string>
+    <string name="action_create">建立快速動作</string>
+    <string name="action_modify">修改快速動作</string>
+    <string name="action_delete">刪除快速動作</string>
     <string name="osmand_parking_overdue">已逾期</string>
     <string name="delay_to_start_navigation_descr">在路線規劃畫面上顯示剩餘等候時間。</string>
     <string name="delay_to_start_navigation">指引後開始路線建議…</string>
@@ -2062,13 +2062,13 @@
     <string name="quick_action_fav_name_descr">保留為空白以使用地址或地點名稱。</string>
     <string name="quick_action_bug_descr">此訊息將包含在註解欄中。</string>
     <string name="quick_action_interim_dialog">顯示臨時對話框</string>
-    <string name="configure_screen_quick_action">快速動作</string>
-    <string name="quick_action_item_action">動作 %d</string>
-    <string name="quick_action_new_action">新增動作</string>
-    <string name="quick_action_edit_action">編輯動作</string>
-    <string name="dialog_add_action_title">新增動作</string>
-    <string name="quick_actions_delete">刪除動作</string>
-    <string name="quick_actions_delete_text">刪除動作「%s」？</string>
+    <string name="configure_screen_quick_action">快速選項</string>
+    <string name="quick_action_item_action">快速動作 %d</string>
+    <string name="quick_action_new_action">新增快速動作</string>
+    <string name="quick_action_edit_action">編輯快速動作</string>
+    <string name="dialog_add_action_title">新增快速動作</string>
+    <string name="quick_actions_delete">刪除快速動作</string>
+    <string name="quick_actions_delete_text">刪除快速動作「%s」？</string>
     <string name="quick_action_add_marker_descr">在畫面中央新增地圖標記的按鈕。</string>
     <string name="quick_action_add_gpx_descr">在畫面中央新增 GPX 路徑點的按鈕。</string>
     <string name="quick_action_take_audio_note_descr">在畫面中央新增音訊註記的按鈕。</string>
@@ -2087,7 +2087,7 @@
     <string name="quick_action_showhide_poi_descr">在地圖上顯示或隱藏 POI 的開關。</string>
     <string name="quick_action_map_overlay_switch">地圖覆蓋層更改為「%s」。</string>
     <string name="quick_action_map_underlay_switch">地圖底層更改為「%s」。</string>
-    <string name="shared_string_action_name">動作名稱</string>
+    <string name="shared_string_action_name">快速動作名稱</string>
     <string name="navigate_point_olc_info_short">OLC 編碼不完整
 \n請輸入完整的編碼</string>
     <string name="navigate_point_olc_info_area">有效完整的 OLC
@@ -2281,7 +2281,7 @@
     <string name="mapillary_menu_edit_text_hint">輸入使用者名稱</string>
     <string name="mapillary_menu_descr_username">僅檢視增加的圖片由</string>
     <string name="mapillary_menu_title_username">使用者名稱</string>
-    <string name="mapillary_menu_filter_description">按照提供者、日期或類型篩選圖片。僅動作於特寫的縮放才有效。</string>
+    <string name="mapillary_menu_filter_description">按照提供者、日期或類型篩選圖片。僅選項於特寫的縮放才有效。</string>
     <string name="shared_string_reload">重新載入</string>
     <string name="mapillary_menu_descr_tile_cache">請重新載入圖磚，以查看最新的資料。</string>
     <string name="mapillary_menu_title_tile_cache">圖磚快取</string>
@@ -2604,7 +2604,7 @@
     <string name="map_widget_intermediate_time">中途站時間</string>
     <string name="unirs_render_descr">修改預設樣式以增加行人和單車道的對比度，並使用傳統的 Mapnik 配色。</string>
     <string name="get_osmand_live">獲得 OsmAnd Live 以解鎖全部功能：每日地圖更新與無限下載、所有付費和免費的外掛元件、維基百科、維基導遊等更多內容。</string>
-    <string name="quick_action_edit_actions">編輯動作</string>
+    <string name="quick_action_edit_actions">編輯快速動作</string>
     <string name="error_notification_desc">請將此通知的螢幕快照發送至 support@osmand.net</string>
     <string name="coord_input_edit_point">編輯標點</string>
     <string name="coord_input_add_point">新增標點</string>
@@ -3237,7 +3237,7 @@
     <string name="keep_both_desc">匯入的項目將會加入前綴</string>
     <string name="import_duplicates_description">OsmAnd 已有與匯入的名稱相同的元素。
 \n
-\n選擇動作。</string>
+\n選擇選項：</string>
     <string name="import_duplicates_title">一些項目已存在</string>
     <string name="select_data_to_import">選擇要匯入的資料。</string>
     <string name="shared_string_rendering_style">算繪樣式</string>
@@ -3298,7 +3298,7 @@
     <string name="ui_customization_short_descr">抽屜項目，情境選單</string>
     <string name="ui_customization">自訂使用者介面</string>
     <string name="shared_string_drawer">抽屜</string>
-    <string name="context_menu_actions">情境選單動作</string>
+    <string name="context_menu_actions">快捷選單選項</string>
     <string name="reorder_or_hide_from">重新排列或從 %1$s 隱藏項目。</string>
     <string name="shared_string_divider">分隔符</string>
     <string name="divider_descr">低於此點的元素將由分隔符分離。</string>
@@ -3306,7 +3306,7 @@
     <string name="hidden_items_descr">這些項目已從選單中隱藏，但對應的選項或外掛程式仍將繼續運作。</string>
     <string name="reset_items_descr">隱藏設定將會把它們重設回原始狀態。</string>
     <string name="main_actions_descr">僅有四個按鈕。</string>
-    <string name="main_actions">主要動作</string>
+    <string name="main_actions">主要選項</string>
     <string name="move_inside_category">項目只能在此分類中移動。</string>
     <string name="developer_plugin">開發者外掛程式</string>
     <string name="shared_string_items">項目</string>
@@ -3341,7 +3341,7 @@
     <string name="lang_lmo">倫巴底文</string>
     <string name="custom_color">自訂顏色</string>
     <string name="extra_maps_menu_group">額外地圖</string>
-    <string name="download_unsupported_action">不支援的動作 %1$s</string>
+    <string name="download_unsupported_action">不支援的選項 %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">確認購買後，將從您的 Google Play 帳號中收取費用。
     \n
@@ -3362,7 +3362,7 @@
     <string name="legend_item_description">地圖符號系統指南。</string>
     <string name="navigation_profiles_item">導航設定檔</string>
     <string name="release_3_7">• 新的離線坡度圖 \n \n • 對收藏與 GPX 路徑點的完整自訂能力 — 自訂顏色、圖示、形狀 \n \n • 自訂情境選單、設定地圖與抽屜中的項目順序 \n \n • 設定地圖中可將維基百科選擇為單獨的圖層，並僅選擇需要的語言 \n \n • 在超強的彈性下建立您自己的 POI 過濾器／地圖 \n \n • 新增選項以還原自訂設定檔中的選項 \n \n • 對 GPX 路徑導航完整支援車道與轉彎提示 \n \n • 修復平板電腦上的使用者介面大小 \n \n • 修復 RTL 的臭蟲 \n \n</string>
-    <string name="additional_actions_descr">透過點選「%1$s」按鈕來存取這些動作。</string>
+    <string name="additional_actions_descr">透過點選「%1$s」按鈕來存取這些快速動作。</string>
     <string name="quick_action_transport_descr">在地圖上顯示或隱藏公共交通的按鈕。</string>
     <string name="create_edit_poi">建立或編輯 POI</string>
     <string name="parking_positions">停車位置</string>
@@ -3370,7 +3370,7 @@
     <string name="reset_deafult_order">還原預設項目排序</string>
     <string name="back_to_editing">返回編輯</string>
     <string name="shared_string_resume">還原</string>
-    <string name="quick_action_switch_profile_descr">點擊動作按鈕將在選擇的設定檔之間切換。</string>
+    <string name="quick_action_switch_profile_descr">點擊快速動作按鈕將在選擇的設定檔之間切換。</string>
     <string name="shared_string_add_profile">新增設定檔</string>
     <string name="change_application_profile">更改應用程式設定檔</string>
     <string name="profiles_for_action_not_found">找不到任何這類的設定檔。</string>
@@ -4007,7 +4007,7 @@
     <string name="cancel_anytime_in_amazon_app">您可以隨時透過 Amazon 應用程式取消訂閱。</string>
     <string name="amz_manage_subscription_descr">使用 Amazon 應用程式或 Amazon 網站管理您的訂閱。</string>
     <string name="empty_category_name">空的分類名稱</string>
-    <string name="no_activity_for_intent">安裝應用程式以執行此動作。</string>
+    <string name="no_activity_for_intent">安裝應用程式以執行此選項。</string>
     <string name="no_items_of_type_message">您沒有此類型的項目</string>
     <string name="routeInfo_tracktype_description">根據表面組成為路線或軌跡著色。這通常適用於路網中大部分未鋪設的情況。</string>
     <string name="routeInfo_winter_ice_road_description">按冬季道路分類為路線或軌跡著色。</string>
@@ -4153,7 +4153,7 @@
     <string name="storage_migration_wrong_folder_warning">在選定的資料夾中找不到 OsmAnd 資料。請再試一次。</string>
     <string name="shared_string_precision">精確</string>
     <string name="shared_string_statistics">統計</string>
-    <string name="shared_string_size">大小</string>
+    <string name="shared_string_size">大小</string選項>
     <string name="use_routing_fallback">離線路線規劃備用</string>
     <string name="use_routing_fallback_description">當無法使用線上路線規劃時，則使用離線路線規劃。</string>
     <string name="created_on">建立於</string>
@@ -4164,10 +4164,10 @@
     <string name="navigate_point_format_swiss_grid">瑞士地理坐標系統 (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">瑞士地理坐標系統 (CH1903+)</string>
     <string name="track_file">軌跡檔案</string>
-    <string name="predefined_waypoint_appearance_description">點擊此動作會使用預先定義好的參數自動儲存航點。</string>
-    <string name="track_file_description">點擊此動作會顯示可用的軌跡。</string>
+    <string name="predefined_waypoint_appearance_description">點擊此選項會使用預先定義好的參數自動儲存航點。</string>
+    <string name="track_file_description">點擊此選項會顯示可用的軌跡。</string>
     <string name="files_with_route_restrictions">有路徑限制的檔案</string>
-    <string name="always_ask_waypoint_appearance_description">點擊此動作會開啟「新增航點」畫面，您可以在其中更改名稱與外觀。</string>
+    <string name="always_ask_waypoint_appearance_description">點擊此選項會開啟「新增航點」畫面，您可以在其中更改名稱與外觀。</string>
     <string name="waypoint_appearance">航點外觀</string>
     <string name="waypoint_template">航點範本</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">顯示 fixme 標籤</string>
@@ -4287,7 +4287,7 @@
     <string name="elevation_profile_widget_desc">顯示目前路線的海拔和坡度資訊。</string>
     <string name="parking_widget_desc">顯示從螢幕中心到您的停車位的距離。</string>
     <string name="mapillary_widget_desc">提供快速存取 Mapillary 應用程式以新增街道級別的圖像。</string>
-    <string name="av_notes_choose_action_widget_desc">選擇動作。</string>
+    <string name="av_notes_choose_action_widget_desc">選擇選項。</string>
     <string name="radius_rules_widget_desc">半徑規則工具在地圖上選定的點周圍顯示距離圓圈。</string>
     <string name="current_time_widget_desc">顯示來自您裝置的當前時間</string>
     <string name="gps_info_widget_desc">顯示目前可見和使用的衛星數量。</string>
@@ -4585,7 +4585,7 @@
     <string name="weather_pressure_hectopascals">百帕</string>
     <string name="weather_pressure_inhg">英寸汞柱</string>
     <string name="weather_pressure_mmhg">毫米汞柱</string>
-    <string name="action_not_supported_with_map_style">此動作不被選定的地圖模式支援。</string>
+    <string name="action_not_supported_with_map_style">此快速動作不被選定的地圖模式支援。</string>
     <string name="weather_pressure_inches_of_mercury">英吋汞柱</string>
     <string name="weather_temperature_celsius">攝氏</string>
     <string name="weather_temperature_fahrenheit">華氏</string>
@@ -4871,9 +4871,9 @@
 \n裝置上的所有資料均保持不變。</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">刪除 OsmAnd Cloud 帳號嗎？
 \n
-\n此動作無法還原。</string>
+\n執行後不可撤銷。</string>
     <string name="osmand_cloud_delete_account_confirmation">刪除帳號？</string>
-    <string name="action_cannot_be_undone">此動作無法還原。</string>
+    <string name="action_cannot_be_undone">無法還原。</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">次要裝置將從 OsmAnd Cloud 登出並失去對付費功能的存取權限。</string>
     <string name="osmand_cloud_deletion_account_warning">您的帳號與所有帳號詳細資訊都將會 %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">所有來自 OsmAnd Cloud 的資料都將會 %1$s。裝置上的資料會維持不變。</string>
@@ -5091,7 +5091,7 @@
     <string name="key_event_action_previous_app_profile">上一個應用程式設定檔</string>
     <string name="show_toast_about_key_pressed">顯示關於按下鍵的浮動式訊息</string>
     <string name="key_event_action_move_left">向左移動</string>
-    <string name="press_button_to_link_with_action">在您的裝置上按下按鈕以將其分配給動作：%1$s</string>
+    <string name="press_button_to_link_with_action">在您的裝置上按下按鈕以將其分配給快速動作：%1$s</string>
     <string name="key_event_action_move_right">向右移動</string>
     <string name="shared_string_button">按鈕</string>
     <string name="key_event_action_next_app_profile">下一個應用程式設定檔</string>
@@ -5100,13 +5100,13 @@
     <string name="key_event_action_activity_back_pressed">按下返回活動</string>
     <string name="key_event_action_emit_navigation_hint">發出導航提示</string>
     <string name="remove_type_q">移除「%1$s」類型嗎？</string>
-    <string name="shared_string_action">動作</string>
+    <string name="shared_string_action">快速動作</string>
     <string name="add_new_type">新增類型</string>
     <string name="key_event_action_move_up">向上移動</string>
     <string name="key_event_action_open_search_view">開啟搜尋視圖<</string>
     <string name="key_event_action_zoom_out">縮小</string>
     <string name="key_event_action_toggle_drower">顯示/隱藏側邊選單</string>
-    <string name="key_is_already_assigned_error">「%1$s」鍵已被分配給動作：「%2$s」</string>
+    <string name="key_is_already_assigned_error">「%1$s」鍵已被分配給快速動作：「%2$s」</string>
     <string name="key_event_action_open_navigation_view">開啟導航視圖</string>
     <string name="external_input_device_title">外部輸入裝置</string>
     <string name="key_bindings">按鍵綁定</string>
@@ -5114,7 +5114,7 @@
     <string name="key_event_category_map_interactions">地圖互動</string>
     <string name="key_event_action_move_down">向下移動</string>
     <string name="key_event_action_open_wunderlinq_datagrid">開啟 WunderLINQ Datagrid</string>
-    <string name="key_event_category_actions">動作</string>
+    <string name="key_event_category_actions">快速動作</string>
     <string name="deletion_error">刪除錯誤</string>
     <string name="change_button">更改按鈕</string>
     <string name="download_to_device">下載到裝置</string>
@@ -5140,7 +5140,7 @@
     <string name="lang_zh_hant">正體中文</string>
     <string name="zoom_non_animated">直接縮放</string>
     <string name="zoom_animated">平滑縮放</string>
-    <string name="button_already_assigned_to_this_action">按鈕已分配給此動作。</string>
+    <string name="button_already_assigned_to_this_action">按鈕已分配給此快速動作。</string>
     <string name="key_assignments_already_cleared_message">所有按鍵分配都已移除</string>
     <string name="add_new_button">新增按鈕</string>
     <string name="use_v1_auto_zoom">單獨自動縮放（舊版本）</string>
@@ -5209,7 +5209,7 @@
     <string name="routing_type_a_star_2_phase">A* 2-相</string>
     <string name="shared_sting_all_colors">所有顏色</string>
     <string name="lang_ta_in">印度泰米爾文</string>
-    <string name="release_4_7">• 與 Android Auto 相容的新「速度計」小工具 \n \n • 透過新增多個「快速操作」按鈕來設定地圖畫面 \n \n • 改善圖表中資料的可讀性 \n \n • 新增了按軌跡的感應器資料過濾功能 \n \n • 改善的軌跡群組外觀自訂 \n \n • 新增了對其他 GPX 標籤的支援 \n \n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇 \n \n • 用於軌跡選擇的統一使用者介面 \n \n • OpenStreetMap 登入已切換至 OAuth 2.0</string>
+    <string name="release_4_7">• 與 Android Auto 相容的新「速度計」小工具 \n \n • 透過新增多個「快速動作」按鈕來設定地圖畫面 \n \n • 改善圖表中資料的可讀性 \n \n • 新增了按軌跡的感應器資料過濾功能 \n \n • 改善的軌跡群組外觀自訂 \n \n • 新增了對其他 GPX 標籤的支援 \n \n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇 \n \n • 用於軌跡選擇的統一使用者介面 \n \n • OpenStreetMap 登入已切換至 OAuth 2.0</string>
     <string name="precise">精確</string>
     <string name="distance_during_navigation_description">在導航小工具中，您可以選擇距離資訊的顯示方式，包括到達目的地的距離、下一個轉彎以及車道資訊。
 \n
@@ -5239,8 +5239,8 @@
     <string name="use_terrain_maps">使用地形圖</string>
     <string name="use_nearby_roads_summary">利用離線地圖尋找鄰近道路及相對海拔資料。可調整路線軌跡的幾何形狀。</string>
     <string name="use_nearby_roads">使用鄰近道路</string>
-    <string name="delete_actions_button_confirmation">你確定要刪除「%1$s」及其所有已新增的動作？</string>
-    <string name="delete_actions_button">刪除按鈕</string>
+    <string name="delete_actions_button_confirmation">你確定要刪除「%1$s」及其所有已新增的快速動作？</string>
+    <string name="delete_actions_button">刪除快速動作</string>
     <string name="use_terrain_maps_summary">使用地形圖取得相對高度資訊。軌跡的幾何形狀將保持不變。</string>
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="retrieve_elevation_data_summary">OsmAnd 可以從附近的道路或地形圖擷取相對高度資料。</string>
@@ -5287,12 +5287,12 @@
     <string name="clear_all_key_shortcuts">移除所有快捷鍵</string>
     <string name="no_assigned_keys_desc">選擇一個操作並透過點擊「新增」按鈕分配一個鍵。</string>
     <string name="new_key_assignment">分配新按鍵</string>
-    <string name="key_assignment_add_action">新增動作</string>
-    <string name="clear_key_assignment_summary">將會移除所選動作的按鍵分配。</string>
+    <string name="key_assignment_add_action">新增快速動作</string>
+    <string name="clear_key_assignment_summary">將會移除所選快速動作的按鍵分配。</string>
     <string name="no_assigned_keys">沒有分配的按鍵</string>
     <string name="key_name_pattern">按鈕「%1$s」</string>
     <string name="key_assignment_add_key">新增鍵</string>
-    <string name="action_icon">動作圖示</string>
+    <string name="action_icon">快速動作圖示</string>
     <string name="user_palette">使用者調色板</string>
     <string name="shared_string_colors">顏色</string>
     <string name="backup_error_failed_to_transfer_file">無法傳輸檔案。</string>
@@ -5306,7 +5306,7 @@
     <string name="daynight_mode_app_theme">應用程式佈景主題</string>
     <string name="key_event_action_continuous_zoom_out">持續縮細</string>
     <string name="key_event_action_continuous_zoom_in">持續放大</string>
-    <string name="remove_key_assignment_summary">將移除已選定動作的按鍵設定。。</string>
+    <string name="remove_key_assignment_summary">將移除已選定快速動作的按鍵設定。。</string>
     <string name="remove_key_assignment">刪除按鍵設定</string>
     <string name="map_settings_weather_wind_animation">風向動畫</string>
     <string name="tomorrow">明天</string>
@@ -5691,7 +5691,7 @@
     <string name="point_location">點位置</string>
     <string name="show_image_previews">顯示影像預覽</string>
     <string name="layer_coordinates_grid">坐標網格</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">動作可控制地圖上坐標網格的能見度。</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">快速動作可控制地圖上坐標網格的能見度。</string>
     <string name="shared_string_manual">手動</string>
     <string name="shared_string_map_center">地圖中心</string>
     <string name="choose_location_on_map">選擇地圖上的位置。</string>

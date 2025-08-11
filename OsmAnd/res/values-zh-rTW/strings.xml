@@ -1411,7 +1411,7 @@
     <string name="shared_string_show">顯示</string>
     <string name="shared_string_show_all">全部顯示</string>
     <string name="shared_string_show_on_map">在地圖上顯示</string>
-    <string name="shared_string_more_actions">更多的動作</string>
+    <string name="shared_string_more_actions">更多的選項</string>
     <string name="shared_string_map">地圖</string>
     <string name="shared_string_favorites">我的最愛</string>
     <string name="shared_string_add_to_favorites">新增至「收藏」</string>
@@ -2460,7 +2460,7 @@
     <string name="what_is_here">此地資訊：</string>
     <string name="pick_up_till">取件截止時間</string>
     <string name="additional_actions">其他選項</string>
-    <string name="shared_string_actions">操作</string>
+    <string name="shared_string_actions">動作</string>
     <string name="shared_string_marker">標記</string>
     <string name="shared_string_without_name">沒有名稱</string>
     <string name="lang_lo">寮語</string>
@@ -3237,7 +3237,7 @@
     <string name="keep_both_desc">匯入的項目將會加入前綴</string>
     <string name="import_duplicates_description">OsmAnd 已有與匯入的名稱相同的元素。
 \n
-\n選取動作。</string>
+\n選擇選項：</string>
     <string name="import_duplicates_title">一些項目已存在</string>
     <string name="select_data_to_import">選取要匯入的資料。</string>
     <string name="shared_string_rendering_style">算繪樣式</string>
@@ -3298,7 +3298,7 @@
     <string name="ui_customization_short_descr">抽屜項目，情境選單</string>
     <string name="ui_customization">自訂使用者介面</string>
     <string name="shared_string_drawer">抽屜</string>
-    <string name="context_menu_actions">情境選單動作</string>
+    <string name="context_menu_actions">快速動作選單</string>
     <string name="reorder_or_hide_from">重新排列或從 %1$s 隱藏項目。</string>
     <string name="shared_string_divider">分隔符</string>
     <string name="divider_descr">低於此點的元素將由分隔符分離。</string>
@@ -3306,7 +3306,7 @@
     <string name="hidden_items_descr">這些項目已從選單中隱藏，但對應的選項或外掛程式仍將繼續運作。</string>
     <string name="reset_items_descr">隱藏設定將會把它們重設回原始狀態。</string>
     <string name="main_actions_descr">僅有四個按鈕。</string>
-    <string name="main_actions">主要動作</string>
+    <string name="main_actions">主要選項</string>
     <string name="move_inside_category">項目只能在此分類中移動。</string>
     <string name="developer_plugin">開發者外掛程式</string>
     <string name="shared_string_items">項目</string>
@@ -3341,7 +3341,7 @@
     <string name="lang_lmo">倫巴底語</string>
     <string name="custom_color">自訂顏色</string>
     <string name="extra_maps_menu_group">額外地圖</string>
-    <string name="download_unsupported_action">不支援的動作 %1$s</string>
+    <string name="download_unsupported_action">不支援的選項 %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">確認購買後，將從您的 Google Play 帳戶中收取費用。
 \n
@@ -4007,7 +4007,7 @@
     <string name="cancel_anytime_in_amazon_app">您可以隨時透過 Amazon 應用程式取消訂閱。</string>
     <string name="amz_manage_subscription_descr">使用 Amazon 應用程式或 Amazon 網站管理您的訂閱。</string>
     <string name="empty_category_name">空的分類名稱</string>
-    <string name="no_activity_for_intent">安裝應用程式以執行此動作。</string>
+    <string name="no_activity_for_intent">安裝應用程式以執行此操作。</string>
     <string name="no_items_of_type_message">您沒有此類型的項目</string>
     <string name="routeInfo_tracktype_description">根據表面組成為路徑或軌跡上色。這通常適用於路網中大部分未鋪設的情況。</string>
     <string name="routeInfo_winter_ice_road_description">按冬季道路分類為路徑或軌跡上色。</string>
@@ -4164,10 +4164,10 @@
     <string name="navigate_point_format_swiss_grid">瑞士座標系統 (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">瑞士座標系統 (CH1903+)</string>
     <string name="track_file">軌跡檔案</string>
-    <string name="predefined_waypoint_appearance_description">點擊此動作會使用預先定義好的參數自動儲存航點。</string>
-    <string name="track_file_description">點擊此動作會顯示可用的軌跡。</string>
+    <string name="predefined_waypoint_appearance_description">點擊此選項會使用預先定義好的參數自動儲存航點。</string>
+    <string name="track_file_description">點擊此選項會顯示可用的軌跡。</string>
     <string name="files_with_route_restrictions">有路徑限制的檔案</string>
-    <string name="always_ask_waypoint_appearance_description">點擊此動作會開啟「新增航點」畫面，您可以在其中變更名稱與外觀。</string>
+    <string name="always_ask_waypoint_appearance_description">點擊此選項會開啟「新增航點」畫面，您可以在其中變更名稱與外觀。</string>
     <string name="waypoint_appearance">航點外觀</string>
     <string name="waypoint_template">航點範本</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">顯示 fixme 標籤</string>
@@ -4871,9 +4871,9 @@
 \n裝置上的所有資料均保持不變。</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">刪除 OsmAnd Cloud 帳戶嗎？
 \n
-\n此動作無法還原。</string>
+\n此操作無法還原。</string>
     <string name="osmand_cloud_delete_account_confirmation">刪除帳戶？</string>
-    <string name="action_cannot_be_undone">此動作無法還原。</string>
+    <string name="action_cannot_be_undone">此操作無法還原。</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">次要裝置將從 OsmAnd Cloud 登出並失去對付費功能的存取權限。</string>
     <string name="osmand_cloud_deletion_account_warning">您的帳戶與所有帳戶詳細資訊都將會 %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">所有來自 OsmAnd Cloud 的資料都將會 %1$s。裝置上的資料會維持不變。</string>
@@ -5209,7 +5209,7 @@
     <string name="routing_type_a_star_2_phase">A* 2-相</string>
     <string name="shared_sting_all_colors">所有顏色</string>
     <string name="lang_ta_in">泰米爾語（印度）</string>
-    <string name="release_4_7">• 與 Android Auto 相容的新「速度計」小工具 \n \n • 透過新增多個「快速操作」按鈕來設定地圖畫面 \n \n • 改善圖表中資料的可讀性 \n \n • 新增了按軌跡的感測器資料過濾功能 \n \n • 改善的軌跡群組外觀自訂 \n \n • 新增了對其他 GPX 標籤的支援 \n \n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇 \n \n • 用於軌跡選擇的統一使用者介面 \n \n • OpenStreetMap 登入已切換至 OAuth 2.0</string>
+    <string name="release_4_7">• 與 Android Auto 相容的新「速度計」小工具 \n \n • 透過新增多個「快速動作」按鈕來設定地圖畫面 \n \n • 改善圖表中資料的可讀性 \n \n • 新增了按軌跡的感測器資料過濾功能 \n \n • 改善的軌跡群組外觀自訂 \n \n • 新增了對其他 GPX 標籤的支援 \n \n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇 \n \n • 用於軌跡選擇的統一使用者介面 \n \n • OpenStreetMap 登入已切換至 OAuth 2.0</string>
     <string name="precise">精確</string>
     <string name="distance_during_navigation_description">在導航小工具中，您可以選擇距離資訊的顯示方式，包括到達目的地的距離、下一個轉彎以及車道資訊。
 \n
@@ -5240,7 +5240,7 @@
     <string name="use_nearby_roads_summary">使用離線地圖尋找附近的道路與相對高度資料。可以調整軌跡幾何形狀。</string>
     <string name="use_nearby_roads">使用附近的道路</string>
     <string name="delete_actions_button_confirmation">您確定要刪除「%1$s」以及所有新增的動作嗎？</string>
-    <string name="delete_actions_button">刪除按鈕</string>
+    <string name="delete_actions_button">刪除動作</string>
     <string name="use_terrain_maps_summary">使用地形圖取得相對高度資訊。軌跡的幾何形狀將保持不變。</string>
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="retrieve_elevation_data_summary">OsmAnd 可以從附近的道路或地形圖擷取相對高度資料。</string>
@@ -5285,7 +5285,7 @@
     <string name="shared_string_key">按鍵</string>
     <string name="assigned_keys">分配按鍵</string>
     <string name="clear_all_key_shortcuts">移除所有快捷鍵</string>
-    <string name="no_assigned_keys_desc">選擇一個操作並透過點擊「新增」按鈕分配一個鍵。</string>
+    <string name="no_assigned_keys_desc">選擇一個動作並透過點擊「新增」按鈕分配一個鍵。</string>
     <string name="new_key_assignment">分配新按鍵</string>
     <string name="key_assignment_add_action">新增動作</string>
     <string name="clear_key_assignment_summary">將會移除所選動作的按鍵分配。</string>
