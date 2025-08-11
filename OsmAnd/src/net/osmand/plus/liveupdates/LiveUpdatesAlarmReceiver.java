@@ -7,9 +7,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
@@ -33,8 +33,7 @@ public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
 		OsmandSettings settings = application.getSettings();
 
 		if (!preferenceDownloadViaWiFi(localIndexInfoFile, settings).get() || wifi.isWifiEnabled()) {
-			new PerformLiveUpdateAsyncTask(context, localIndexInfoFile, false)
-					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fileName);
+			OsmAndTaskManager.executeTask(new PerformLiveUpdateAsyncTask(context, localIndexInfoFile, false), fileName);
 		} else {
 			PerformLiveUpdateAsyncTask.tryRescheduleDownload(context, settings, localIndexInfoFile);
 		}

@@ -12,6 +12,7 @@
         android:layout_height="@dimen/standard_icon_size"
         android:src="@drawable/ic_action_arrow_up"
         android:tint="?attr/active_color_basic"
+        android:contentDescription="@string/shared_string_navigation"
         android:layout_gravity="center" />
 
 </FrameLayout>

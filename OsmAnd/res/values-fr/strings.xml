@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routing_attr_motor_type_name">Carburant utilisé</string>
+    <string name="routing_attr_motor_type_name">Énergie utilisée par le moteur</string>
     <string name="routing_attr_motor_type_description">Sélectionner le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
@@ -237,7 +237,7 @@
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Le format de la carte \'\'{0}\'\' n\'est pas supporté</string>
     <string name="poi_filter_car_aid">Pour conducteurs</string>
-    <string name="poi_filter_closest_poi">POI les plus proches</string>
+    <string name="poi_filter_closest_poi">Points d\'intérêt les plus proches</string>
     <string name="poi_filter_custom_filter">Filtre personnalisé</string>
     <string name="poi_filter_food_shop">Alimentation</string>
     <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -1240,7 +1240,7 @@
     <string name="shared_string_waypoints">Points de passage</string>
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Favoris à proximité</string>
-    <string name="speak_poi">POI à proximité</string>
+    <string name="speak_poi">Point d\'intérêt à proximité</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Enregistrez vos trajets ou entraînements et analysez les données : vitesse, dénivelés, altitude, etc. Les traces enregistrées peuvent être archivées, partagées avec des amis, modifiées et retravaillées.
@@ -3830,7 +3830,7 @@
     <string name="nautical_depth">Profondeur nautique</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
     <string name="purchases_feature_desc_terrain">Courbes de niveau, ombrage du relief, pentes colorées mettant en valeur sommets et plaines.</string>
-    <string name="purchases_feature_desc_nautical">Accéder aux informations de profondeur des fonds marins</string>
+    <string name="purchases_feature_desc_nautical">Indique la profondeur des fonds marins</string>
     <string name="shared_string_includes">Inclus</string>
     <string name="complete_purchase">Finaliser l\'achat</string>
     <string name="purchases_feature_desc_monthly_map_updates">Bénéficiez des mises à jour mensuelles pour les cartes hors ligne.</string>
@@ -4368,7 +4368,7 @@
     <string name="favorite_confirm_delete_group">Supprimer le groupe « %1$s » et ses points (%2$d) ?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
     <string name="display_position">Afficher la position</string>
-    <string name="shared_string_normal">Normal</string>
+    <string name="shared_string_normal">Normale</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Orientation manuelle</string>
     <string name="shared_string_large">Grand</string>
@@ -4533,7 +4533,7 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
-    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est un moteur de rendu de carte plus rapide, offrant également une vue en 2,5D. Le rendu version 1 était le mode par défaut avant OsmAnd 4.3 et reste recommandé pour les appareils plus anciens.</string>
+    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est un moteur de rendu cartographique plus puissant, offrant également une vue 2,5D. La version 1 était la version par défaut avant OsmAnd 4.3 et reste préférable pour les appareils plus anciens.</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolignes de vitesse de vent</string>
     <string name="rendering_engine_failed_descr">OsmAnd est repassé au mode de rendu de carte « Version 1 ». Vous pouvez tenter de réactiver le nouveau moteur « Version 2 (OpenGL) » dans les paramètres.\n\nMerci de contribuer aux améliorations en transmettant votre journal d’erreurs.</string>
     <string name="mtb_imba">IMBA</string>
@@ -5532,16 +5532,16 @@
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Pourcentage d\'interpolation de la position</string>
     <string name="location_interpolation_percent_desc">Définit le pourcentage d\'interpolation de la position lors du guidage. Ce paramètre rend l\'animation de votre position sur la carte plus fluide.</string>
-    <string name="default_buttons_corners_original_description">Chaque bouton conservera son apparence originale.</string>
-    <string name="default_buttons_opacity_original_description">Chaque bouton conservera sa propre opacité d’arrière-plan.</string>
-    <string name="default_buttons_size_original_description">Chaque bouton conservera sa propre taille.</string>
+    <string name="default_buttons_corners_original_description">Chaque bouton conserve ses propres coins.</string>
+    <string name="default_buttons_opacity_original_description">Chaque bouton conserve sa propre opacité d’arrière-plan.</string>
+    <string name="default_buttons_size_original_description">Chaque bouton conserve sa propre taille.</string>
     <string name="auto_zoom_3d_angle">Angle du zoom 3D automatique</string>
     <string name="calculate_size">Calculer la taille</string>
     <string name="calculating_indication_message">Calcul en cours …</string>
     <string name="rendering_attr_showClimbingRoutes_name">Voies d\'escalade</string>
     <string name="rendering_attr_showClimbingRoutes_description">Afficher les voies d\'escalade</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Utiliser les unités sélectionnées dans le nom.</string>
-    <string name="display_distance_to_first_intermediate_summary">Affiche en premier la durée et la distance restantes jusqu\'à la prochaine étape. Désactiver pour toujours afficher ces informations pour la destination.</string>
+    <string name="display_distance_to_first_intermediate_summary">Affiche le temps et la distance jusqu\'au prochain arrêt. Désactivez cette option pour afficher uniquement les détails de la destination finale.</string>
     <string name="display_distance_to_first_intermediate">Affiche les détails de l\'itinéraire jusqu\'à la prochaine étape</string>
     <string name="popular_places_nearby">Lieux populaires proches</string>
     <string name="recently_visited">Dernières visites</string>
@@ -5549,10 +5549,10 @@
     <string name="shared_string_avg_speed">Vitesse min.</string>
     <string name="shared_string_length">Longueur</string>
     <string name="map_widget_route_information">Informations sur l\'itinéraire</string>
-    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps de trajet restant et la distance pour l\'itinéraire de navigation actuel.</string>
+    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, la durée de trajet restante et la distance à parcourir pour le guidage en cours.</string>
     <string name="shared_string_default_view">Vue par défaut</string>
     <string name="ais_address_settings">Paramètres de l\'adresse IP</string>
-    <string name="ais_address_settings_description">Choisir un protocole NMEA (UDP/TCP) et définir les adresses</string>
+    <string name="ais_address_settings_description">Choisissez le protocole NMEA (UDP/TCP) et spécifiez les adresses et ports correspondants</string>
     <string name="ais_nmea_protocol">Protocole pour la réception de données NMEA</string>
     <string name="ais_nmea_protocol_description">Choisir le protocole de réception des données NMEA</string>
     <string name="ais_port_nmea_server">Port TCP de la source des données NMEA</string>
@@ -5572,26 +5572,26 @@
     <string name="ais_object_lost_timeout">Délai avant masquage d\'un objet perdu</string>
     <string name="plugin_ais_tracker_name">Suivi AIS du navire</string>
     <string name="no_places_available">Aucun lieu dans la zone visible</string>
-    <string name="no_photo_for_location_desc">Aucune photo d\'utilisateur n\'a encore été ajoutée pour ce lieu</string>
-    <string name="ais_object_lost_timeout_description">Définir le délai d\'expiration pour la visibilité des objets AIS : après ce délai sans réception de signal, l\'objet sera retiré de l\'écran.</string>
-    <string name="ais_cpa_warning_time">Délai d\'avertissement pour atteindre le Point d\'Approche le plus proche (CPA)</string>
-    <string name="ais_cpa_warning_distance_description">Les navires sont marqués en rouge si le CPA est inférieur à cette valeur et s\'il est atteint dans un futur proche (voir « Délai d\'avertissement pour atteindre le Point d\'Approche le plus proche (CPA) »).</string>
-    <string name="plugin_ais_tracker_disclaimer">CLAUSE DE NON-RESPONSABILITÉ\n\nCette extension est un projet de loisir et n\'est pas conçu pour la fiabilité et l\'intégrité. NE VOUS FIEZ PAS à ce logiciel de quelque manière que ce soit, y compris le guidage et/ou votre sécurité.</string>
+    <string name="no_photo_for_location_desc">Aucune photo d\'utilisateur n\'a encore été ajoutée pour cet emplacement</string>
+    <string name="ais_object_lost_timeout_description">Définissez un délai d\'expiration pour la visibilité de l\'objet AIS : si aucun signal n\'est reçu dans le délai spécifié, l\'objet sera automatiquement supprimé de l\'écran.</string>
+    <string name="ais_cpa_warning_time">Délai d\'avertissement avant le point d\'approche le plus proche (CPA)</string>
+    <string name="ais_cpa_warning_distance_description">Les navires sont surlignés en rouge si le CPA (point d\'approche le plus proche) est inférieur au seuil défini et que le TCPA (temps jusqu\'au CPA) se situe dans le délai d\'avertissement défini dans le paramètre « Délai d\'avertissement pour atteindre le CPA ».</string>
+    <string name="plugin_ais_tracker_disclaimer">AVERTISSEMENT\n\nCe plugin est un projet amateur et n\'est pas destiné à être utilisé dans des applications critiques. Sa fiabilité et sa précision ne sont pas garanties. Ne comptez pas sur ce logiciel pour la navigation, la sécurité des personnes ou toute autre opération essentielle.</string>
     <string name="ais_ship_lost_timeout_description">Définir le délai pour la visibilité des bateaux : après ce délai sans réception de signal, le symbole du bateau changera sur l\'écran : il sera barré.</string>
     <string name="ais_cpa_settings">Paramètres liés au CPA</string>
-    <string name="ais_cpa_settings_description">Ces valeurs définissent l\'apparence des objets AIS qui pourraient devenir trop proches de votre position.</string>
+    <string name="ais_cpa_settings_description">Ces valeurs déterminent la manière dont les objets AIS s\'affichent lorsqu\'ils s\'approchent de la position du navire.</string>
     <string name="ais_cpa_warning_distance">Distance d\'avertissement pour le Point d\'Approche le plus proche (CPA)</string>
-    <string name="ais_cpa_warning_time_description">Si le TCPA (temps pour atteindre le CPA avec un autre navire) est inférieur à cette valeur, le navire sera marqué en rouge.</string>
-    <string name="ais_ship_lost_timeout">Délai d\'expiration pour la visibilité des bateaux lorsque aucun signal n\'est reçu</string>
-    <string name="plugin_ais_tracker_description">Affiche les positions AIS et des informations à propos des navires à proximité. Les données AIS sont reçues via le réseau à partir d\'un récepteur AIS externe.</string>
+    <string name="ais_cpa_warning_time_description">Si le TCPA (temps jusqu\'au point d\'approche le plus proche) avec un autre navire tombe en dessous du seuil défini, le navire est surligné en rouge.</string>
+    <string name="ais_ship_lost_timeout">Délai d\'expiration de la visibilité du navire - supprimer si aucun signal AIS n\'est reçu dans le délai défini.</string>
+    <string name="plugin_ais_tracker_description">Affiche les positions AIS et les informations sur les navires à proximité. Les données AIS sont reçues via le réseau depuis un récepteur AIS externe.</string>
     <string name="hmd_promo_description">Accès gratuit aux fonctionnalités comme le téléchargement illimité de cartes, le relief 3D, etc. pour %1$s mois</string>
     <string name="shared_string_road_exit">Sortie</string>
     <string name="hmd_promo">Promotion HMD pour %1$s mois</string>
-    <string name="original_color_description">Chaque point conservera sa propre couleur.</string>
+    <string name="original_color_description">Chaque point conserve sa propre couleur.</string>
     <string name="apply_to_all_points">Appliquer à tous les points</string>
-    <string name="original_icon_description">Chaque point conservera sa propre icône.</string>
-    <string name="original_shape_description">Chaque point conservera sa propre forme.</string>
-    <string name="save_favorite_default_appearance">Appliquer les modifications aux points existants dans le dossier ou uniquement aux nouveaux points ?</string>
+    <string name="original_icon_description">Chaque point conserve sa propre icône.</string>
+    <string name="original_shape_description">Chaque point conserve sa propre forme.</string>
+    <string name="save_favorite_default_appearance">Appliquer les modifications à tous les points du dossier ou uniquement aux nouveaux points ?</string>
     <string name="show_dms_grids">Utilisez la notation DMS au lieu de degrés</string>
     <string name="show_mercator_grids_description">Affiche la grille en km Mercator au lieu de WGS84 ou UTM</string>
     <string name="show_mercator_grids">Utiliser Mercator au lieu de WGS84 ou UTM</string>
@@ -5606,7 +5606,7 @@
     <string name="choose_location">Choisir un emplacement</string>
     <string name="shared_string_manual">Manuel</string>
     <string name="show_image_previews">Afficher les aperçus des images</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Action permettant de contrôler la visibilité de la grille de coordonnées sur la carte.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Basculer la visibilité de la grille de coordonnées sur la carte.</string>
     <string name="layer_coordinates_grid">Grille de coordonnées</string>
     <string name="prime_meridian">Premier méridien</string>
     <string name="equator">Équateur</string>
@@ -5627,7 +5627,7 @@
     <string name="prediction_time_advanced_description">Ajuster le temps de prédiction pour minimiser le retard.</string>
     <string name="prediction_time">Temps de prédiction</string>
     <string name="shared_string_no_animation">Aucune animation</string>
-    <string name="position_animation_empty_banner_description">L\'icône de la position actuelle se déplace à chaque nouveau point GPS reçu sans animation.</string>
+    <string name="position_animation_empty_banner_description">L\'icône de position est mise à jour à chaque nouvel emplacement reçu sans aucune animation de transition.</string>
     <string name="position_animation">Animation de la position</string>
     <string name="routing_attr_allow_ferries_description">Autoriser les trajets en ferry</string>
     <string name="routing_attr_allow_ferries_name">Autoriser les ferries</string>
@@ -5670,7 +5670,7 @@
     <string name="shared_string_switch">Interrupteur</string>
     <string name="release_5_1">• Ajout du support des achats en ligne et multiplateformes\n\n• Déplacement des unités de température dans les paramètres généraux pour un accès facilité\n\n• Ajout d’un indicateur de niveau de batterie pour les capteurs BLE\n\n• Nouvelle interface plus intuitive pour la sélection de points dans Navigation\n\n• Amélioration de la visibilité des widgets grâce à un nouveau contour\n\n• Ajout d’un analyseur de Montées/Descentes\n\n• Extension de l’intégration Wikipedia &amp; Wikivoyage pour davantage de POI.</string>
     <string name="osm_live_payment_renews_3_years">Renouvellement tous les trois ans</string>
-    <string name="three_years_subscription">Abonnement de trois ans</string>
+    <string name="three_years_subscription">Abonnement pour trois ans</string>
     <string name="years_3">Trois ans</string>
     <string name="osm_live_payment_3_years_title">Tous les trois ans</string>
     <string name="deleting">Suppression…</string>
@@ -5696,4 +5696,8 @@
     <string name="reverse_mode_original_track">Trace originale</string>
     <string name="reverse_mode_original_track_desc">Suivez précisément la trace pour revenir au point de départ.\nAttention : les voies à sens unique ne sont pas prises en compte !</string>
     <string name="reverse_mode">Mode inversé</string>
+    <string name="n_a">N/A</string>
+    <string name="altitude_metrics_description">Définit l\'unité d\'affichage de l\'altitude dans les widgets et les statistiques.</string>
+    <string name="write_location_provider_description">Enregistrer le fournisseur de localisation dans chaque point de la trace pendant l\'enregistrement d\'un itinéraire</string>
+    <string name="write_location_provider">Enregistrer le fournisseur de localisation</string>
 </resources>

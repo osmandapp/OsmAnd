@@ -46,6 +46,7 @@ import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.LockableViewPager;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -911,7 +912,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			boolean showOnMap, boolean simplifiedTrack) {
 		File fileDir = new File(folderPath);
 		File toSave = new File(fileDir, fileName + GPX_FILE_EXT);
-		new SaveDirectionsAsyncTask(app, showOnMap).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
+		OsmAndTaskManager.executeTask(new SaveDirectionsAsyncTask(app, showOnMap), toSave);
 	}
 
 	@Override

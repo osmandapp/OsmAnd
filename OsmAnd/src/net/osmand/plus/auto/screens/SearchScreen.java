@@ -68,7 +68,6 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 		this.settingsAction = settingsAction;
 
 		getLifecycle().addObserver(this);
-		getApp().getAppInitializer().addListener(this);
 	}
 
 	@NonNull
@@ -87,6 +86,7 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 	@Override
 	protected void onFirstGetTemplate() {
 		super.onFirstGetTemplate();
+		getApp().getAppInitializer().addListener(this);
 		reloadHistory();
 	}
 

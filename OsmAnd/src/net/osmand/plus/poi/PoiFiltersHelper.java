@@ -664,8 +664,9 @@ public class PoiFiltersHelper {
 					}
 				} else {
 					filter = app.getPoiFilters().getSearchByNamePOIFilter();
-					if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
-						filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
+					String searchWord = searchPhrase.getUnknownWordToSearch();
+					if (!Algorithms.isEmpty(searchWord)) {
+						filter.setFilterByName(searchWord);
 						filter.clearCurrentResults();
 					}
 				}

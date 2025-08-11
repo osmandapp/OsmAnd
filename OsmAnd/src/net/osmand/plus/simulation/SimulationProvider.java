@@ -21,7 +21,7 @@ public class SimulationProvider {
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
 	public static final String SIMULATED_PROVIDER_GPX = "GPX";
 	public static final String SIMULATED_PROVIDER_TUNNEL = "TUNNEL";
-	private static final float MAX_SPEED_TUNNELS = 25.0f; // 25 m/s, 90 kmh, 56 mph
+	private static final float MAX_SPEED_TUNNELS = 27.0f; // 27 m/s, 97.2 kmh, 60.4 mph
 
 	private final Location startLocation;
 	private final List<RouteSegmentResult> roads;

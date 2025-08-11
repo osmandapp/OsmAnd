@@ -5,8 +5,6 @@ import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 
-import android.os.AsyncTask;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -252,7 +251,7 @@ public class OfflineWeatherForecastCard extends MapBaseCard implements DownloadE
 			params[i] = new LocalItem(file, WEATHER_DATA);
 		}
 		LocalOperationTask removeTask = new LocalOperationTask(app, DELETE_OPERATION, this);
-		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+		OsmAndTaskManager.executeTask(removeTask, params);
 	}
 
 	@Override

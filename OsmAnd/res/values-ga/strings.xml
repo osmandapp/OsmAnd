@@ -5609,4 +5609,12 @@
     <string name="manage_purchases">Bainistigh ceannacháin</string>
     <string name="failed_to_connect">Theip ar cheangal le %1s</string>
     <string name="enable_msaa">Cumasaigh MSAA</string>
+    <string name="map_orientation_portrait_inverted">Portráid (inbhéartaithe)</string>
+    <string name="map_orientation_landscape_inverted">Tírdhreach (inbhéartaithe)</string>
+    <string name="reverse_mode_calculate_route">Ríomh an bealach</string>
+    <string name="reverse_mode_calculate_route_desc">Ríomh bealach nua, optamaithe chuig an tús.</string>
+    <string name="reverse_mode_original_track">An rian bunaidh</string>
+    <string name="reverse_mode_original_track_desc">Lean an cosán cruinn ar ais go dtí an tús.\nRabhadh: Is féidir leis seo a bheith contúirteach mar go ndéanann sé neamhaird ar thrácht aontreo ar bhóithre.</string>
+    <string name="reverse_mode">Mód droim ar ais</string>
+    <string name="n_a">N/B</string>
 </resources>
