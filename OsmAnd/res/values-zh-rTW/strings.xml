@@ -526,8 +526,8 @@
     <string name="continuous_rendering_descr">顯示連續繪製代替立即圖像。</string>
     <string name="rendering_exception">無法繪製選定的地區。</string>
     <string name="show_point_options">使用位置 …</string>
-    <string name="renderer_load_sucess">著色演算器已載入</string>
-    <string name="renderer_load_exception">無法載入著色演算器。</string>
+    <string name="renderer_load_sucess">著色器已載入</string>
+    <string name="renderer_load_exception">無法載入著色器。</string>
     <string name="renderers">向量著色演算器</string>
     <string name="renderers_descr">選擇繪製外觀</string>
     <string name="poi_context_menu_website">顯示 POI 網站</string>
@@ -3965,13 +3965,13 @@
     <string name="track_has_no_needed_data">軌跡遺失對應的資料。</string>
     <string name="option_available_only_in_osmand_pro">僅限 OsmAnd Pro 訂閱用戶使用</string>
     <string name="purchases_feature_desc_pro_widgets">解鎖 OsmAnd Pro 專屬功能：路線客製化等進階工具</string>
-    <string name="explore_osmnad_plans_to_find_suitable">瀏覽 OsmAnd 方案，找到最適合您的選/purchases_feature_desc_android_auto擇</string>
-    <string name="routes_color_by_type">使用……為路徑著色</string>
+    <string name="explore_osmnad_plans_to_find_suitable">瀏覽 OsmAnd 方案，找到最適合您的選擇</string>
+    <string name="routes_color_by_type">使用……為路徑上色</string>
     <string name="shared_string_relation">關係</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">根據各自的當地顏色（如果在 OpenStreetMap 上存在）和健行盾牌符號為路徑著色。</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">根據各自的當地顏色（如果在 OpenStreetMap 上存在）和健行盾牌符號為路徑上色。</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">按網路關係分配著色。</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_description">根據其節點網路類型（國際、區域、當地）為路徑著色。</string>
-    <string name="walking_route_osmc_description">按其各自的當地顏色（如果存在於 OpenStreetMap 之上的話）與類型（國際、區域、當地）為路徑著色。</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">根據其節點網路類型（國際、區域、當地）為路徑上色。</string>
+    <string name="walking_route_osmc_description">按其各自的當地顏色（如果存在於 OpenStreetMap 之上的話）與類型（國際、區域、當地）為路徑上色。</string>
     <string name="travel_routes">旅行路線</string>
     <string name="setting_supported_by_style">地圖樣式「%1$s」提供此設定</string>
     <string name="direct_line_maps_required_descr">路徑計算需要比平常還要久的時間。
@@ -4009,11 +4009,11 @@
     <string name="empty_category_name">空的分類名稱</string>
     <string name="no_activity_for_intent">安裝應用程式以執行此動作。</string>
     <string name="no_items_of_type_message">您沒有此類型的項目</string>
-    <string name="routeInfo_tracktype_description">根據表面組成為路徑或軌跡著色。這通常適用於路網中大部分未鋪設的情況。</string>
-    <string name="routeInfo_winter_ice_road_description">按冬季道路分類為路徑或軌跡著色。</string>
+    <string name="routeInfo_tracktype_description">根據表面組成為路徑或軌跡上色。這通常適用於路網中大部分未鋪設的情況。</string>
+    <string name="routeInfo_winter_ice_road_description">按冬季道路分類為路徑或軌跡上色。</string>
     <string name="routeInfo_smoothness_description">輪式車輛的道路和人行道機動性分類，特別針對表面的規則性和平整度進行評估。</string>
     <string name="routeInfo_surface_description">提供道路／人行道的鋪面資訊。</string>
-    <string name="routeInfo_roadClass_description">按道路分類為路徑或軌跡線著色。</string>
+    <string name="routeInfo_roadClass_description">按道路分類為路徑或軌跡線上色。</string>
     <string name="add_group_to_markers">將群組新增至標記清單</string>
     <string name="remove_group_from_markers">從標記清單中移除群組</string>
     <string name="start_point">開始</string>
@@ -4326,8 +4326,8 @@
     <string name="circle_settings">圓圈設定</string>
     <string name="routing_attr_allow_private_for_truck_description">允許卡車進入私人區域。</string>
     <string name="routing_attr_allow_private_for_truck_name">允許私人進入（卡車）</string>
-    <string name="rendering_attr_weatherTempContours_name">溫度等值線</string>
-    <string name="rendering_attr_weatherPressureContours_name">氣壓等值線</string>
+    <string name="rendering_attr_weatherTempContours_name">等溫線</string>
+    <string name="rendering_attr_weatherPressureContours_name">等壓線</string>
     <string name="rendering_attr_horseScale_name">馬術路線難度</string>
     <string name="routing_attr_avoid_highway_name">避開高速公路</string>
     <string name="routing_attr_avoid_highway_description">避開高速公路</string>
@@ -5014,7 +5014,7 @@
     <string name="help_article_navigation_routing_train_routing_name">火車導航</string>
     <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}。</string>
     <string name="shared_string_temperature">溫度</string>
-    <string name="release_4_6">• Android Auto：新增 3D 模式 \n \n • 軌跡：引入了篩選條件與智慧型資料夾，改善了較大檔案的記憶體使用量 \n \n • 強化的頂部與底部小工具面板以容納所有小工具 \n \n • 改善的本機資源管理 \n \n • 外部控制器的可自訂按鈕對應 \n \n • 新的小工具：「滑翔比」與「太陽位置」 \n \n • OsmAnd Cloud：現在可以存取已刪除的檔案 \n \n • 使用新的對稱漸層強化坡度模式下的軌跡著色 \n \n • 解決了透明狀態列的問題 \n \n • 新增了對 ANT+ 溫度小工具的支援 \n \n • 引入了「可用記憶體」小工具</string>
+    <string name="release_4_6">• Android Auto：新增 3D 模式 \n \n • 軌跡：引入了篩選條件與智慧型資料夾，改善了較大檔案的記憶體使用量 \n \n • 強化的頂部與底部小工具面板以容納所有小工具 \n \n • 改善的本機資源管理 \n \n • 外部控制器的可自訂按鈕對應 \n \n • 新的小工具：「滑翔比」與「太陽位置」 \n \n • OsmAnd Cloud：現在可以存取已刪除的檔案 \n \n • 使用新的對稱漸層強化坡度模式下的軌跡上色 \n \n • 解決了透明狀態列的問題 \n \n • 新增了對 ANT+ 溫度小工具的支援 \n \n • 引入了「可用記憶體」小工具</string>
     <string name="sensor_temperature_desc">顯示來自偵測器的溫度</string>
     <string name="app_mode_baby_transport">嬰兒車</string>
     <string name="with_waypoints">有路徑節點</string>
@@ -5250,8 +5250,8 @@
     <string name="getting_list_of_required_maps">正在擷取所需地圖清單……</string>
     <string name="required_maps_calculate_online_summary">目前的地圖缺失清單是根據直線路徑產生。為獲取更精確的地圖清單，OsmAnd 可以線上預先計算您的路線。</string>
     <string name="missing_maps_description">此路徑所需的部分離線地圖遺失或未更新至最新版本。建議下載或更新這些地圖。</string>
-    <string name="route_line_use_coloring_speed">路徑根據移動速度著色。</string>
-    <string name="route_line_use_coloring_altitude">路徑根據海拔高度著色。</string>
+    <string name="route_line_use_coloring_speed">路徑根據移動速度上色。</string>
+    <string name="route_line_use_coloring_altitude">路徑根據海拔高度上色。</string>
     <string name="visualized_by">視覺化方式</string>
     <string name="wall_color">牆壁顏色</string>
     <string name="track_line">軌跡線</string>

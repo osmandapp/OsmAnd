@@ -4326,8 +4326,8 @@
     <string name="circle_settings">圓圈設定</string>
     <string name="routing_attr_allow_private_for_truck_description">允許貨車駛入私人區域。。</string>
     <string name="routing_attr_allow_private_for_truck_name">容許貨車進入私人區域</string>
-    <string name="rendering_attr_weatherTempContours_name">溫度等值線</string>
-    <string name="rendering_attr_weatherPressureContours_name">氣壓等值線</string>
+    <string name="rendering_attr_weatherTempContours_name">等溫線</string>
+    <string name="rendering_attr_weatherPressureContours_name">等壓線</string>
     <string name="rendering_attr_horseScale_name">馬術路線難度</string>
     <string name="routing_attr_avoid_highway_name">避開高速公路</string>
     <string name="routing_attr_avoid_highway_description">避開高速公路</string>
