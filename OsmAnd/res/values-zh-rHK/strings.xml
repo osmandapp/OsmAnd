@@ -2485,8 +2485,8 @@
     <string name="tunnel_warning">前方有隧道</string>
     <string name="show_tunnels">隧道</string>
     <string name="shared_string_current">目前</string>
-    <string name="last_intermediate_dest_description">插入到中途站前</string>
-    <string name="first_intermediate_dest_description">插入到中途站後</string>
+    <string name="last_intermediate_dest_description">插入到中途站後</string>
+    <string name="first_intermediate_dest_description">插入到中途站前</string>
     <string name="subsequent_dest_description">將目的地向上移動並取代為新的目的地</string>
     <string name="make_as_start_point">設定起點</string>
     <string name="map_import_error">地圖匯入錯誤</string>
