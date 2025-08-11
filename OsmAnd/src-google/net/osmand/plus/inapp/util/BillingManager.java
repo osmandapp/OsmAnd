@@ -19,6 +19,7 @@ import com.android.billingclient.api.BillingFlowParams.SubscriptionUpdateParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.ConsumeResponseListener;
+import com.android.billingclient.api.PendingPurchasesParams;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
@@ -108,7 +109,8 @@ public class BillingManager implements PurchasesUpdatedListener {
 		mSignatureBase64 = base64PublicKey;
 		mBillingUpdatesListener = updatesListener;
 		mBillingClient = BillingClient.newBuilder(mContext)
-				.enablePendingPurchases()
+				.enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build())
+				.enableAutoServiceReconnection()
 				.setListener(this)
 				.build();
 
