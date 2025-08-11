@@ -532,7 +532,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					paintOuterRect.setColor(contrastColor);
 
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
-					drawSplitItems(canvas, tileBox, items, selectedGpxFile);
+					drawSplitItems(canvas, tileBox, items);
 				}
 			}
 		}
@@ -708,7 +708,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void drawSplitItems(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
-	                            @NonNull List<GpxDisplayItem> items, @NonNull SelectedGpxFile selectedGpxFile) {
+	                            @NonNull List<GpxDisplayItem> items) {
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
 		int r = (int) (12 * tileBox.getDensity());
 		paintTextIcon.setTextSize(r);
