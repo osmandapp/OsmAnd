@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.externalsensors.DeviceType
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
+import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
@@ -162,15 +165,15 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	private fun updatePairedSensorsList() {
 		if (view != null) {
 			vehicleMetricsPlugin.let { plugin ->
-				val connectedDevice = plugin.getConnectedDeviceInfo()
-				val connectedDevices: List<BTDeviceInfo> =
-					if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
+				var connectedDevice = plugin.getConnectedDeviceInfo()
+				val connectedDevices: MutableList<BTDeviceInfo> =
+					if (connectedDevice == null) ArrayList() else mutableListOf(connectedDevice)
 				val usedDevices = plugin.getUsedOBDDevicesList().toMutableList()
 				if (settings.SIMULATE_OBD_DATA.get()) {
 					usedDevices.add(BTDeviceInfo("Simulation Device", ""))
 				}
 				val disconnectedDevices =
-					usedDevices.filter { it.address != connectedDevice?.address }
+					usedDevices.filter { !(it.address == connectedDevice?.address && it.isBLE == connectedDevice?.isBLE) }
 						.toMutableList()
 				if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
 					emptyView?.visibility = View.VISIBLE
@@ -220,11 +223,11 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		ForgetOBDDeviceDialog.showInstance(
 			requireActivity().supportFragmentManager,
 			this,
-			device.address)
+			device.address, device.isBLE)
 	}
 
-	override fun onForgetSensorConfirmed(deviceId: String) {
-		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId)
+	override fun onForgetSensorConfirmed(deviceId: String, isBLE: Boolean) {
+		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId, isBLE)
 		updatePairedSensorsList()
 	}
 

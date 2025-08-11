@@ -28,6 +28,7 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 	private var textInput: ExtendedEditText? = null
 	private var propertyOldValueValue: String? = null
 	private var deviceAddress: String? = null
+	private var isBLE: Boolean = false
 	private var device: BTDeviceInfo? = null
 	val plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
 
@@ -56,6 +57,7 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 		val args = arguments
 		if (args != null) {
 			deviceAddress = args.getString(DEVICE_ADDRESS_KEY)
+			isBLE = args.getBoolean(BLE_KEY)
 			textInput?.inputType = EditorInfo.TYPE_CLASS_TEXT
 			propertyName.setText(R.string.shared_string_name)
 			propertyValueView.hasClearButton = true
@@ -137,7 +139,7 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 		if (target is OnDeviceNameChangedCallback) {
 			plugin?.let {
 				deviceAddress?.let { address ->
-					it.setDeviceName(address, newName)
+					it.setDeviceName(address, newName, isBLE)
 					target.onNameChanged()
 				}
 			}
@@ -151,6 +153,7 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 	companion object {
 		const val TAG = "RenameOBDDialog"
 		private const val DEVICE_ADDRESS_KEY = "device_address"
+		private const val BLE_KEY = "BLE_KEY"
 		fun showInstance(
 			activity: FragmentActivity,
 			target: Fragment?,
@@ -161,6 +164,7 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 				val fragment = RenameOBDDialog()
 				val args = Bundle()
 				args.putString(DEVICE_ADDRESS_KEY, device.address)
+				args.putBoolean(BLE_KEY, device.isBLE)
 				fragment.arguments = args
 				fragment.setTargetFragment(target, 0)
 				fragment.show(fragmentManager, TAG)

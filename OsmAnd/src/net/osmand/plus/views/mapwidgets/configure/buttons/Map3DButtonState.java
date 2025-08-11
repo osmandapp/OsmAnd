@@ -6,8 +6,8 @@ import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALP
 import static net.osmand.plus.settings.enums.Map3DModeVisibility.HIDDEN;
 import static net.osmand.plus.settings.enums.Map3DModeVisibility.VISIBLE;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_RIGHT;
 
 import androidx.annotation.NonNull;
 
@@ -17,7 +17,7 @@ import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.Map3DModeVisibility;
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
+import net.osmand.shared.grid.ButtonPositionSize;
 
 public class Map3DButtonState extends MapButtonState {
 

@@ -218,7 +218,7 @@ public abstract class SettingsItem {
 	protected SettingsItemReader<? extends SettingsItem> getJsonReader(boolean allowEmptyJson) {
 		return new SettingsItemReader<>(this) {
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+			public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 					@Nullable String entryName) throws IOException, IllegalArgumentException {
 				StringBuilder buf = new StringBuilder();
 				try {
@@ -233,7 +233,7 @@ public abstract class SettingsItem {
 				String json = buf.toString();
 				if (json.isEmpty()) {
 					if (allowEmptyJson) {
-						return;
+						return null;
 					} else {
 						throw new IllegalArgumentException("Json body is empty");
 					}
@@ -243,6 +243,7 @@ public abstract class SettingsItem {
 				} catch (JSONException e) {
 					throw new IllegalArgumentException("Json parsing error", e);
 				}
+				return null;
 			}
 		};
 	}

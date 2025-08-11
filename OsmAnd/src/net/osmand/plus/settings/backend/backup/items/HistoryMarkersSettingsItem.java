@@ -163,7 +163,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 		return new SettingsItemReader<HistoryMarkersSettingsItem>(this) {
 
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+			public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 			                           @Nullable String entryName) throws IllegalArgumentException {
 				GpxFile gpxFile = SharedUtil.loadGpxFile(inputStream);
 				if (gpxFile.getError() != null) {
@@ -173,6 +173,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 					List<MapMarker> mapMarkers = markersHelper.getDataHelper().readMarkersFromGpx(gpxFile, true);
 					items.addAll(mapMarkers);
 				}
+				return null;
 			}
 		};
 	}

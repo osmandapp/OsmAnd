@@ -311,7 +311,8 @@ class OBDMainFragmentAdapter(
 				ForgetOBDDeviceDialog.showInstance(
 					mapActivity.supportFragmentManager,
 					obdMainFragment,
-					device.address
+					device.address,
+					device.isBLE
 				)
 			}
 		}

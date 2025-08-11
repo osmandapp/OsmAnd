@@ -169,7 +169,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return new FileSettingsItemReader(this) {
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile, @Nullable String entryName) throws IOException, IllegalArgumentException {
+			public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile, @Nullable String entryName) throws IOException, IllegalArgumentException {
 				super.readFromStream(inputStream, inputFile, entryName);
 
 				GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
@@ -185,6 +185,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 				if (!gpxDbHelper.hasGpxDataItem(kFile)) {
 					gpxDbHelper.add(new GpxDataItem(kFile));
 				}
+				return file;
 			}
 		};
 	}

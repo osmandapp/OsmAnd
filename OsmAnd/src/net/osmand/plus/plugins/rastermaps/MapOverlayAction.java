@@ -54,7 +54,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected String getTitle(List<Pair<String, String>> filters) {
+	protected String getTitle(List<Pair<String, String>> filters, @NonNull Context ctx) {
 
 		if (filters.isEmpty()) return "";
 

@@ -2256,20 +2256,7 @@
     <string name="hillshade_purchase_header">Zainstaluj wtyczkę „Topografia”, aby wyświetlić stopniowane obszary pionowe.</string>
     <string name="hillshade_menu_download_descr">Pobierz nakładkę mapy „Mapa cieniowana”, aby wyświetlić cieniowanie pionowe.</string>
     <string name="srtm_purchase_header">Kup i zainstaluj wtyczkę „Topografia”, aby wyświetlić stopniowane obszary pionowe.</string>
-    <string name="osmand_plus_extended_description_part8">Przybliżony zasięg i jakość mapy: 
-\n • Europa Zachodnia: **** 
-\n • Europa Wschodnia: *** 
-\n • Rosja: *** 
-\n • Ameryka Północna: *** 
-\n • Ameryka Południowa: ** 
-\n • Azja: ** 
-\n • Japonia i Korea: *** 
-\n • Bliski Wschód: ** 
-\n • Afryka: ** 
-\n • Antarktyda: * 
-\n Jest możliwe pobranie map większości krajów na świecie! 
-\n Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania, …
-\n</string>
+    <string name="osmand_plus_extended_description_part8">Przybliżony zasięg i jakość mapy: \n • Europa Zachodnia: **** \n • Europa Wschodnia: *** \n • Rosja: *** \n • Ameryka Północna: *** \n • Ameryka Południowa: ** \n • Azja: ** \n • Japonia i Korea: *** \n • Bliski Wschód: ** \n • Afryka: ** \n • Antarktyda: * \n Jest możliwe pobranie map większości krajów na świecie! \n Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania, …</string>
     <string name="sorted_by_distance">Posortowane wg odległości</string>
     <string name="quick_action_showhide_osmbugs_descr">Przycisk do wyświetlania lub ukrywania uwag OSM na mapie.</string>
     <string name="restart_search">Rozpocznij ponownie wyszukiwanie</string>
@@ -4313,7 +4300,7 @@
     <string name="use_external_timestamps">Użyj zewnętrznych znaczników czasu</string>
     <string name="use_external_timestamps_description">Użyj znaczników czasu routera online, aby dostosować szacowany czas i średnią prędkość</string>
     <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę dostępnych wtyczek znajdziesz w \'Menu\' → \'Wtyczki\'.</string>
-    <string name="delete_history_items_descr">Usunąć wybrane elementy historii?</string>
+    <string name="delete_history_items_descr">Wybrane wpisy zostaną usunięte z listy.</string>
     <string name="delete_history_items">Liczba elementów historii do usunięcia %1$s. Usunąć?</string>
     <string name="display_route_tracks">Wyświetlanie ścieżek</string>
     <string name="display_route_tracks_as_poi">Wyświetl ścieżki jako punkty POI</string>
@@ -5821,7 +5808,7 @@
     <string name="prediction_time_advanced_description">Dostosuj czas przewidywania, aby zminimalizować opóźnienie.</string>
     <string name="prediction_time">Czas przewidywania</string>
     <string name="poi_source">Źródło POI</string>
-    <string name="routing_attr_allow_ferries_description">Zezwalaj na wyznaczanie tras według tras promów</string>
+    <string name="routing_attr_allow_ferries_description">Zezwalaj na wyznaczanie tras promami</string>
     <string name="equator">Równik</string>
     <string name="shared_string_manual">Ręczny</string>
     <string name="saved_to_device">Zapisano na urządzeniu</string>
@@ -6075,4 +6062,21 @@
     </plurals>
     <string name="release_5_2">• Praca w trakcie...</string>
     <string name="quick_action_first_intermediate">Pierwszy od dołu</string>
+    <string name="altitude_metrics_description">Ustawia jednostkę wyświetlania wysokości w widżetach i statystykach.</string>
+    <string name="write_location_provider_description">Zapisz dostawcę lokalizacji dla każdego punktu śledzenia podczas nagrywania</string>
+    <string name="write_location_provider">Napisz dostawcę lokalizacji</string>
+    <string name="map_orientation_portrait_inverted">Portret (odwrócony)</string>
+    <string name="map_orientation_landscape_inverted">Krajobraz (odwrócony)</string>
+    <string name="reverse_mode_calculate_route">Oblicz trasę</string>
+    <string name="reverse_mode_calculate_route_desc">Oblicz nową, zoptymalizowaną trasę do punktu startowego.</string>
+    <string name="reverse_mode_original_track">Oryginalna ścieżka</string>
+    <string name="reverse_mode_original_track_desc">Podążaj dokładnie tą samą trasą, aż do startu.\nUwaga: Może to być niebezpieczne, ponieważ ignoruje ruch jednokierunkowy na drogach.</string>
+    <string name="reverse_mode">Tryb odwrotny</string>
+    <string name="n_a">N/D</string>
+    <string name="next_turn_information">Informacje o następnym zakręcie</string>
+    <string name="next_turn_information_desc">Pokazuje kierunek nadchodzącego skrętu i nazwę ulicy.</string>
+    <string name="description_purchases_fastspring">Zakupami możesz zarządzać poprzez portal zarządzania kontem FastSpring.</string>
+    <string name="description_subscription_fastspring">Możesz zarządzać swoją subskrypcją i ją anulować za pośrednictwem portalu zarządzania kontem FastSpring.</string>
+    <string name="manage_purchases">Zarządzaj zakupami</string>
+    <string name="wiki_around">Popularne miejsca w pobliżu</string>
 </resources>

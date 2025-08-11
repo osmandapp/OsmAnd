@@ -1,6 +1,6 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.DEF_MARGIN_DP;
+import static net.osmand.shared.grid.ButtonPositionSize.DEF_MARGIN_DP;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,6 +17,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
+import net.osmand.shared.grid.ButtonPositionSize;
 
 import org.apache.commons.logging.Log;
 

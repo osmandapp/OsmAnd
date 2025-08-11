@@ -13,17 +13,19 @@ import androidx.recyclerview.widget.RecyclerView
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
-import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.ScanBLEDevicesListener
 import net.osmand.plus.plugins.odb.adapters.PairedDevicesAdapter
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY
 import net.osmand.plus.widgets.dialogbutton.DialogButton
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY
 import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.util.CollectionUtils
 
 class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	VehicleMetricsPlugin.ScanOBDDevicesListener,
+	ScanBLEDevicesListener,
 	PairedDevicesAdapter.PairedDevicesMenuListener {
 
 	private var currentState = SearchStates.NOTHING_FOUND
@@ -111,7 +113,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 			val usedDevices = plugin.getUsedOBDDevicesList()
 			pairedDevicesAdapter.items = plugin.getPairedOBDDevicesList(requireActivity())
 				.filterNot { pairedDevice ->
-					usedDevices.any { usedDevice -> usedDevice.address == pairedDevice.address }
+					usedDevices.any { usedDevice -> usedDevice.address == pairedDevice.address && usedDevice.isBLE == pairedDevice.isBLE}
 				}
 			updateCurrentStateView()
 		}
@@ -136,8 +138,10 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	private fun startSearch() {
 		activity?.let {
 			vehicleMetricsPlugin.setScanDevicesListener(this)
+			vehicleMetricsPlugin.setScanBLEDevicesListener(this)
 			if (AndroidUtils.hasBLEPermission(it)) {
 				vehicleMetricsPlugin.searchUnboundDevices(it)
+				vehicleMetricsPlugin.searchBLEDevices()
 			} else {
 				AndroidUtils.requestBLEPermissions(
 					it,
@@ -148,6 +152,8 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 
 	override fun onPause() {
 		super.onPause()
+		vehicleMetricsPlugin.finishBLEDevicesSearch()
+		vehicleMetricsPlugin.setScanBLEDevicesListener(null)
 		vehicleMetricsPlugin.setScanDevicesListener(null)
 	}
 
@@ -188,7 +194,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onDeviceFound(foundDevice: BTDeviceInfo) {
-		if (pairedDevicesAdapter.items.find { it.address == foundDevice.address } == null) {
+		if (pairedDevicesAdapter.items.find { it.address == foundDevice.address && it.isBLE == foundDevice.isBLE } == null) {
 			val newItems = CollectionUtils.addToList(pairedDevicesAdapter.items, foundDevice)
 			pairedDevicesAdapter.items = newItems.sortedBy { item -> item.name }
 			updateCurrentStateView()
@@ -213,7 +219,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	override fun onConnect(device: BTDeviceInfo) {
 		activity?.let {
 			vehicleMetricsPlugin.let { plugin ->
-				if (plugin.isPaired(it, device)) {
+				if (plugin.isPaired(it, device) || device.isBLE) {
 					plugin.connectToObd(requireActivity(), device)
 					it.onBackPressed()
 				} else {
@@ -224,5 +230,16 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 				}
 			}
 		}
+	}
+
+	override fun onScanFinished(foundDevices: List<BLEOBDDevice>) {
+		foundDevices.forEach {
+			onDeviceFound(it)
+		}
+	}
+
+	override fun onDeviceFound(foundDevice: BLEOBDDevice) {
+		val obdDevice = BTDeviceInfo(foundDevice.name, foundDevice.deviceId, true)
+		onDeviceFound(obdDevice)
 	}
 }

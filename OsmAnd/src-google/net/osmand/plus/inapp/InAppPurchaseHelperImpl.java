@@ -16,6 +16,7 @@ import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.QueryProductDetailsResult;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -173,7 +174,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							skuInApps.add(sku);
 						}
 					});
-					billingManager.queryProductDetailsAsync(BillingClient.ProductType.INAPP, skuInApps, (billingResult, productDetailsListInApps) -> {
+					billingManager.queryProductDetailsAsync(BillingClient.ProductType.INAPP, skuInApps, (billingResult, queryProductDetailsResultInApps) -> {
 						// Is it a failure?
 						if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
 							logError("Failed to query inapps product details: " + billingResult.getResponseCode());
@@ -202,7 +203,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							return;
 						}
 						manager.queryProductDetailsAsync(BillingClient.ProductType.SUBS, skuSubscriptions,
-								(result, productDetailsListSubs) -> {
+								(result, queryProductDetailsResult) -> {
 									// Is it a failure?
 									if (result.getResponseCode() != BillingClient.BillingResponseCode.OK) {
 										logError("Failed to query subscriptipons sku details: " + result.getResponseCode());
@@ -211,10 +212,10 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 										return;
 									}
 
-									List<ProductDetails> productDetailsList = new ArrayList<>(productDetailsListInApps);
-									productDetailsList.addAll(productDetailsListSubs);
+									List<ProductDetails> productDetailsList = new ArrayList<>(queryProductDetailsResultInApps.getProductDetailsList());
+									productDetailsList.addAll(queryProductDetailsResult.getProductDetailsList());
 									InAppPurchaseHelperImpl.this.productDetailsList = productDetailsList;
-									getProductDetailsResponseListener(runnable.userRequested()).onProductDetailsResponse(result, productDetailsList);
+									getProductDetailsResponseListener(runnable.userRequested()).onProductDetailsResponse(result, queryProductDetailsResult);
 									processIncompletePurchases(purchases);
 								});
 					});
@@ -387,7 +388,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			}
 
 			@Override
-			public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsList) {
+			public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull QueryProductDetailsResult queryProductDetailsResult) {
 
 				logDebug("Query product details finished.");
 
