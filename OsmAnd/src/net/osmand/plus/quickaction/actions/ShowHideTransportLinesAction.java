@@ -17,6 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.transport.TransportLinesMenu;
+import net.osmand.plus.utils.UiUtilities;
 
 public class ShowHideTransportLinesAction extends QuickAction {
 
@@ -44,10 +45,9 @@ public class ShowHideTransportLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
 
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 
 		((TextView) view.findViewById(R.id.text)).setText(
 				R.string.quick_action_transport_descr);

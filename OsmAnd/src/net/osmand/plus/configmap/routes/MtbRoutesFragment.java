@@ -38,7 +38,7 @@ public class MtbRoutesFragment extends MapRoutesFragment {
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
 		ImageView icon = container.findViewById(R.id.icon);
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_mountain_bike, enabled ? selectedColor : disabledColor));
+		icon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_mountain_bike, enabled ? selectedColor : disabledColor));
 
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.description), false);
 	}

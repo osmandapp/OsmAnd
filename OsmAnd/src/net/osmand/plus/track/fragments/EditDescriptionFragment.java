@@ -12,19 +12,19 @@ import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.EditTextEx;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
+public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = EditDescriptionFragment.class.getSimpleName();
 
@@ -111,19 +111,16 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void showDismissDialog() {
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode(false));
-		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
-		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
-		dismissDialog.setMessage(getString(R.string.exit_without_saving));
-		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
-		dismissDialog.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> dismiss());
-		dismissDialog.show();
+		AlertDialogData dialogData = new AlertDialogData(requireActivity(), nightMode)
+				.setTitle(R.string.shared_string_dismiss)
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> dismiss());
+		CustomAlert.showSimpleMessage(dialogData, R.string.exit_without_saving);
 	}
 
 	private boolean onSaveEditedText(@NonNull String editedText) {
 		Fragment target = getTargetFragment();
-		if (target instanceof OnSaveDescriptionCallback) {
-			OnSaveDescriptionCallback callback = (OnSaveDescriptionCallback) target;
+		if (target instanceof OnSaveDescriptionCallback callback) {
 			return callback.onSaveEditedDescription(editedText, this::dismiss);
 		}
 		return false;

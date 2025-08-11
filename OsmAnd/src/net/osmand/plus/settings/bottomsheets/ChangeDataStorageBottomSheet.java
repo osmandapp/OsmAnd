@@ -92,7 +92,7 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		items.add(description);
 
 		//buttons
-		View mainView = View.inflate(ctx, R.layout.bottom_sheet_change_data_storage, null);
+		View mainView = inflate(R.layout.bottom_sheet_change_data_storage);
 
 		View btnDontMoveView = mainView.findViewById(R.id.btnDontMove);
 		btnDontMoveView.setOnClickListener(v -> positiveButtonsClick(false));

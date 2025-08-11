@@ -324,6 +324,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		return contourLinesEnabled;
 	}
 
+	public void updateLayers(@NonNull MapActivity mapActivity) {
+		updateLayers(mapActivity, mapActivity);
+	}
+
 	@Override
 	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();

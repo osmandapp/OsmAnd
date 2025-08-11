@@ -76,7 +76,7 @@ public class WidgetsContextMenu {
 							args.putString(KEY_WIDGET_ID, widgetInfo.key);
 							args.putString(KEY_APP_MODE, appMode.getStringKey());
 							FragmentManager manager = mapActivity.getSupportFragmentManager();
-							WidgetInfoBaseFragment.showFragment(manager, fragment, null, appMode, widgetInfo.key, widgetsPanel);
+							WidgetInfoBaseFragment.showInstance(manager, fragment, null, appMode, widgetInfo.key, widgetsPanel);
 						})
 						.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_settings_outlined, iconColor))
 						.showTopDivider(Algorithms.isEmpty(widgetActions) && !items.isEmpty())

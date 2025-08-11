@@ -308,11 +308,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_create_poi) {
-				EditPoiDialogFragment editPoiDialogFragment =
-						EditPoiDialogFragment.createAddPoiInstance(latitude, longitude,
-								mapActivity.getMyApplication());
-				editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
-						EditPoiDialogFragment.TAG);
+				EditPoiDialogFragment.showAddPoiInstance(mapActivity, latitude, longitude);
 			} else if (resId == R.string.context_menu_item_open_note) {
 				openOsmNote(mapActivity, latitude, longitude, "", false);
 			} else if (resId == R.string.context_menu_item_modify_note) {
@@ -326,8 +322,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				}
 			} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 				Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();
-				EditPoiDialogFragment.createInstance(entity, false)
-						.show(mapActivity.getSupportFragmentManager(), EditPoiDialogFragment.TAG);
+				EditPoiDialogFragment.showInstance(mapActivity, entity, false);
 			}
 			return true;
 		};

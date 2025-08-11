@@ -19,6 +19,7 @@ import net.osmand.plus.mapcontextmenu.other.DestinationReachedFragment;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.UiUtilities;
 
 public class NavStartStopAction extends QuickAction {
 
@@ -52,9 +53,8 @@ public class NavStartStopAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_start_stop_navigation, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_start_stop_navigation, parent, false);
 
 		SwitchCompat showDialogSwitch = view.findViewById(R.id.show_dialog_switch);
 
@@ -62,12 +62,8 @@ public class NavStartStopAction extends QuickAction {
 			showDialogSwitch.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 		}
 
-		view.findViewById(R.id.show_dialog_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				showDialogSwitch.setChecked(!showDialogSwitch.isChecked());
-			}
-		});
+		view.findViewById(R.id.show_dialog_row).setOnClickListener(v ->
+				showDialogSwitch.setChecked(!showDialogSwitch.isChecked()));
 
 		parent.addView(view);
 	}

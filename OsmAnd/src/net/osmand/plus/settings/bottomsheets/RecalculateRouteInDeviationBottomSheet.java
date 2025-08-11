@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -26,12 +25,12 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
@@ -43,9 +42,6 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 
 	private static final String CURRENT_VALUE = "current_value";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-	private ApplicationMode appMode;
 	private CommonPreference<Float> preference;
 
 	private Slider slider;
@@ -59,11 +55,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		settings = app.getSettings();
-		appMode = getAppMode();
 		preference = settings.ROUTE_RECALCULATION_DISTANCE;
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		getPreferenceStateAndValue();
 
 		SwitchPreferenceEx switchPref = (SwitchPreferenceEx) getPreference();
@@ -75,8 +67,8 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 			currentValue = savedInstanceState.getFloat(CURRENT_VALUE);
 		}
 
-		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int contentPaddingSmall = getDimensionPixelSize(R.dimen.content_padding_small);
+		int contentPadding = getDimensionPixelSize(R.dimen.content_padding);
 
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
@@ -86,14 +78,13 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		}
 
 		int appModeColor = appMode.getProfileColor(nightMode);
-		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
-		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
+		int activeColor = ColorUtilities.getActiveColorId(nightMode);
+		int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);
 
 		String title = getString(R.string.recalculate_route_in_deviation);
 		items.add(new TitleItem(title));
 
-		View sliderView = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.bottom_sheet_item_slider_with_two_text, null);
+		View sliderView = inflate(R.layout.bottom_sheet_item_slider_with_two_text);
 		slider = sliderView.findViewById(R.id.slider);
 		tvSliderTitle = sliderView.findViewById(android.R.id.title);
 		tvSliderTitle.setText(getString(R.string.distance));
@@ -113,23 +104,20 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 				.setTitle(enabled ? on : off)
 				.setTitleColorId(enabled ? activeColor : disabledColor)
 				.setCustomView(getCustomButtonView(context, getAppMode(), enabled, nightMode))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						enabled = !enabled;
-						sliderPositionChanged = false;
-						switchPref.setChecked(enabled);
-						preferenceBtn[0].setTitle(enabled ? on : off);
-						preferenceBtn[0].setTitleColorId(enabled ? activeColor : disabledColor);
-						preferenceBtn[0].setChecked(enabled);
-						getDefaultValue();
-						updateSliderView();
-						updateCustomButtonView(context, getAppMode(), v, enabled, nightMode);
-						Fragment target = getTargetFragment();
-						float newValue = enabled ? DEFAULT_MODE : DISABLE_MODE;
-						if (target instanceof OnConfirmPreferenceChange) {
-							((OnConfirmPreferenceChange) target).onConfirmPreferenceChange(switchPref.getKey(), newValue, ApplyQueryType.NONE);
-						}
+				.setOnClickListener(v -> {
+					enabled = !enabled;
+					sliderPositionChanged = false;
+					switchPref.setChecked(enabled);
+					preferenceBtn[0].setTitle(enabled ? on : off);
+					preferenceBtn[0].setTitleColorId(enabled ? activeColor : disabledColor);
+					preferenceBtn[0].setChecked(enabled);
+					getDefaultValue();
+					updateSliderView();
+					updateCustomButtonView(context, getAppMode(), v, enabled, nightMode);
+					Fragment target = getTargetFragment();
+					float newValue = enabled ? DEFAULT_MODE : DISABLE_MODE;
+					if (target instanceof OnConfirmPreferenceChange) {
+						((OnConfirmPreferenceChange) target).onConfirmPreferenceChange(switchPref.getKey(), newValue, ApplyQueryType.NONE);
 					}
 				})
 				.create();
@@ -138,20 +126,15 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		items.add(new LongDescriptionItem(getString(R.string.select_distance_route_will_recalc)));
 		items.add(new DividerSpaceItem(app, contentPadding));
 
-		slider.addOnChangeListener(new Slider.OnChangeListener() {
-			@Override
-			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-				sliderPositionChanged = true;
-				if (fromUser) {
-					currentValue = entryValues[(int) slider.getValue()];
-					tvSliderSummary.setText(getFormattedDistance(app, currentValue));
-				}
+		slider.addOnChangeListener((slider, value, fromUser) -> {
+			sliderPositionChanged = true;
+			if (fromUser) {
+				currentValue = entryValues[(int) slider.getValue()];
+				tvSliderSummary.setText(getFormattedDistance(app, currentValue));
 			}
 		});
 		UiUtilities.setupSlider(slider, nightMode, appModeColor, true);
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(sliderView)
-				.create());
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(sliderView).create());
 		items.add(new SubtitmeListDividerItem(getContext()));
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 		items.add(new LongDescriptionItem(getString(R.string.recalculate_route_distance_promo)));
@@ -181,12 +164,11 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private void updateSliderView() {
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
-		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
-		int textColorPrimary = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorPrimary);
-		tvSliderTitle.setTextColor(ContextCompat.getColor(themedCtx, enabled ? textColorPrimary : disabledColor));
-		tvSliderSummary.setTextColor(ContextCompat.getColor(themedCtx, enabled ? activeColor : disabledColor));
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int disabledColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
+		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
+		tvSliderTitle.setTextColor(enabled ? textColorPrimary : disabledColor);
+		tvSliderSummary.setTextColor(enabled ? activeColor : disabledColor);
 		tvSliderSummary.setText(getFormattedDistance(app, currentValue));
 		slider.setValue(findIndexOfValue(currentValue));
 		slider.setEnabled(enabled);
@@ -223,13 +205,14 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		return 0;
 	}
 
+	@NonNull
 	private static String getFormattedDistance(@NonNull OsmandApplication app, float value) {
 		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
 	                                   boolean usedOnMap, @Nullable ApplicationMode appMode) {
-		try {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
 
@@ -240,8 +223,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

@@ -27,7 +27,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListener;
 import net.osmand.plus.importfiles.ui.TrackPointsAdapter.OnItemSelectedListener;
@@ -51,7 +51,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SelectPointsFragment extends BaseOsmAndDialogFragment implements OnExitConfirmedListener,
+public class SelectPointsFragment extends BaseFullScreenDialogFragment implements OnExitConfirmedListener,
 		OnItemSelectedListener, OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = ImportTracksFragment.class.getSimpleName();

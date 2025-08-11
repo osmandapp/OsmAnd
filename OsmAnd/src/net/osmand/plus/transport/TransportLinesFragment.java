@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
@@ -30,7 +30,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class TransportLinesFragment extends BaseOsmAndFragment {
+public class TransportLinesFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = TransportLinesFragment.class.getSimpleName();
 

@@ -4,9 +4,7 @@ import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listLocalRecordedVoiceIndexes;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listTtsVoiceIndexes;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -17,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.download.DownloadActivityType;
@@ -28,14 +25,12 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.fragments.voice.VoiceItemsAdapter.VoiceItemsListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -45,8 +40,6 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	private static final String TAG = TrackSelectSegmentBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager validationManager;
 
@@ -75,8 +68,6 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		settings = app.getSettings();
 		downloadThread = app.getDownloadThread();
 		validationManager = new DownloadValidationManager(app);
 		selectedVoiceType = defineSelectedVoiceType();
@@ -93,8 +84,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.recyclerview, null);
+		View view = inflate(R.layout.recyclerview);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
 
 		adapter = new VoiceItemsAdapter(this, nightMode);
@@ -111,8 +101,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void updateVoiceProvider(IndexItem indexItem, boolean forceDismiss) {
-		Activity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			ApplicationMode appMode = getAppMode();
 			if (settings.isVoiceProviderNotSelected(appMode)) {
 				app.getRoutingHelper().getVoiceRouter().setMuteForMode(appMode, false);
@@ -120,7 +109,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 			settings.VOICE_PROVIDER.setModeValue(appMode, indexItem.getBasename());
 			onVoiceProviderChanged();
 			app.initVoiceCommandPlayer(activity, appMode, null, false, false, false, false);
-		}
+		});
 		if (DownloadActivityType.isVoiceTTS(indexItem) || forceDismiss) {
 			dismiss();
 		}
@@ -128,9 +117,8 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void onVoiceProviderChanged() {
-		Fragment target = getTargetFragment();
-		if (target instanceof OnPreferenceChanged) {
-			((OnPreferenceChanged) target).onPreferenceChanged(settings.VOICE_PROVIDER.getId());
+		if (getTargetFragment() instanceof OnPreferenceChanged listener) {
+			listener.onPreferenceChanged(settings.VOICE_PROVIDER.getId());
 		}
 	}
 
