@@ -3,6 +3,7 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
@@ -177,7 +178,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		if (!importAsyncTasks.containsKey(key)) {
 			ImportBackupTask importTask = new ImportBackupTask(key, this, listener, readData);
 			importAsyncTasks.put(key, importTask);
-			importTask.executeOnExecutor(getBackupHelper().getExecutor());
+			OsmAndTaskManager.executeTask(importTask, getBackupHelper().getExecutor());
 		} else {
 			throw new IllegalStateException("Already importing " + key);
 		}
@@ -190,7 +191,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		if (!importAsyncTasks.containsKey(key)) {
 			ImportBackupTask importTask = new ImportBackupTask(key, this, items, selectedItems, listener);
 			importAsyncTasks.put(key, importTask);
-			importTask.executeOnExecutor(getBackupHelper().getExecutor());
+			OsmAndTaskManager.executeTask(importTask, getBackupHelper().getExecutor());
 		} else {
 			throw new IllegalStateException("Already importing " + key);
 		}
@@ -215,7 +216,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 			ImportBackupTask importTask = new ImportBackupTask(key, this, items, filesType,
 					listener, forceReadData, shouldReplace, restoreDeleted);
 			importAsyncTasks.put(key, importTask);
-			importTask.executeOnExecutor(getBackupHelper().getExecutor());
+			OsmAndTaskManager.executeTask(importTask, getBackupHelper().getExecutor());
 		} else {
 			throw new IllegalStateException("Already importing " + key);
 		}
@@ -229,7 +230,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		if (!exportAsyncTasks.containsKey(key)) {
 			ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, itemsToLocalDelete, listener);
 			exportAsyncTasks.put(key, exportTask);
-			exportTask.executeOnExecutor(getBackupHelper().getExecutor());
+			OsmAndTaskManager.executeTask(exportTask, getBackupHelper().getExecutor());
 		} else {
 			throw new IllegalStateException("Already exporting " + key);
 		}
@@ -239,7 +240,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
 			registerSyncBackupTask(key, syncTask);
-			syncTask.executeOnExecutor(getBackupHelper().getExecutor());
+			OsmAndTaskManager.executeTask(syncTask, getBackupHelper().getExecutor());
 		} else {
 			throw new IllegalStateException("Already syncing " + key);
 		}

@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -40,14 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public abstract class InAppPurchaseHelper {
 
@@ -408,21 +402,21 @@ public abstract class InAppPurchaseHelper {
 
 	public void requestInventory(boolean userRequested) {
 		notifyShowProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
-		new RequestInventoryTask(userRequested).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		OsmAndTaskManager.executeTask(new RequestInventoryTask(userRequested));
 	}
 
 	public abstract void purchaseFullVersion(@NonNull Activity activity) throws UnsupportedOperationException;
 
 	public void purchaseSubscription(@NonNull Activity activity, String sku) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
-		new SubscriptionPurchaseTask(activity, sku).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		OsmAndTaskManager.executeTask(new SubscriptionPurchaseTask(activity, sku));
 	}
 
 	public abstract void purchaseDepthContours(@NonNull Activity activity) throws UnsupportedOperationException;
 
 	public abstract void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException;
 
-	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku);
+	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable PurchaseOrigin origin);
 
 	protected boolean isUserInfoSupported() {
 		return true;
@@ -776,8 +770,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public void checkPromoAsync(@Nullable CallbackWithObject<Boolean> listener) {
-		CheckBackupSubscriptionTask task = new CheckBackupSubscriptionTask(listener);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		OsmAndTaskManager.executeTask(new CheckBackupSubscriptionTask(listener));
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -1228,7 +1221,7 @@ public abstract class InAppPurchaseHelper {
 	protected void notifyDismissProgress(InAppPurchaseTaskType taskType) {
 		ctx.runInUIThread(() -> {
 			if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
-				new CheckBackupSubscriptionTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+				OsmAndTaskManager.executeTask(new CheckBackupSubscriptionTask(null));
 			}
 			if (uiActivity != null) {
 				uiActivity.dismissProgress(taskType);

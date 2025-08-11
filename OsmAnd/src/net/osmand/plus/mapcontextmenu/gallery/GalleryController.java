@@ -1,11 +1,10 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
@@ -17,13 +16,7 @@ import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class GalleryController implements IDialogController {
 
@@ -79,7 +72,7 @@ public class GalleryController implements IDialogController {
 		}
 		downloadingMetadata.addAll(cards);
 		LoadImagesMetadataTask task = new LoadImagesMetadataTask(app, cards);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	public void notifyMetaDataUpdated(@NonNull Set<String> updatedMediaTagImages) {

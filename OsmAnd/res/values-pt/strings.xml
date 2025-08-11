@@ -5774,4 +5774,9 @@
     <string name="osm_live_payment_renews_3_years">Renova a cada três anos</string>
     <string name="years_3">Três anos</string>
     <string name="osm_live_payment_3_years_title">A cada três anos</string>
+    <string name="map_orientation_portrait_inverted">Retrato (invertido)</string>
+    <string name="map_orientation_landscape_inverted">Paisagem (invertido)</string>
+    <string name="reverse_mode_calculate_route">Calcular a rota</string>
+    <string name="reverse_mode_calculate_route_desc">Calcular uma rota nova, otimizada para o início.</string>
+    <string name="reverse_mode_original_track">Trilho original</string>
 </resources>

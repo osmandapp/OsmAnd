@@ -23,7 +23,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DevicesSettingsCollection {
 
-	private static final String DEVICES_SETTINGS_PREF_ID = "external_devices_settings";
 	public static final float DEFAULT_WHEEL_CIRCUMFERENCE = 2.086f;
 
 	private final CommonPreference<String> preference;

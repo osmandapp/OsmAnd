@@ -342,8 +342,8 @@
     <string name="add_route_points">Lisa teekonnapunkte</string>
     <string name="keep_showing_on_map">Jätka kaardil kuvamist</string>
     <string name="exit_without_saving">Välju ilma salvestamata\?</string>
-    <string name="do_not_use_animations">Animatsioonideta</string>
-    <string name="do_not_use_animations_descr">Lülitab kaardianimatsioonid välja.</string>
+    <string name="do_not_use_animations">Eemalda animatsioonid</string>
+    <string name="do_not_use_animations_descr">Lülitab kaardi- ja kasutajaliidese animatsioonid välja.</string>
     <string name="move_all_to_history">Teisalda kõik ajalukku</string>
     <string name="sort_by">Sorteerimisalus</string>
     <string name="all_markers_moved_to_history">Kõik kaardimarkerid ajalukku teisaldatud</string>
@@ -485,7 +485,7 @@
     <string name="distance_nearest">Lähim kõigepealt</string>
     <string name="rendering_attr_whiteWaterSports_name">Kärestikusport</string>
     <string name="group_deleted">Grupp kustutatud</string>
-    <string name="clear_all_intermediates">Eemalda kõik vahepunktid</string>
+    <string name="clear_all_intermediates">Eemalda kõik vahepealsed sihtpunktid</string>
     <string name="select_waypoints_category_description">Lisa kõik raja teekonnapunktid või vali eraldi kategooriad.</string>
     <string name="shared_string_total">Kokku</string>
     <string name="nothing_found_in_radius">Ei suutnud midagi leida:</string>
@@ -560,9 +560,9 @@
     <string name="osm_live_subscriptions">Tellimused</string>
     <string name="mapillary_menu_title_pano">Kuva ainult 360° pildid</string>
     <string name="add_destination_point">Määra sihtkoht</string>
-    <string name="add_intermediate_point">Lisa vahepealne</string>
+    <string name="add_intermediate_point">Lisa vahepealne sihtpunkt</string>
     <string name="add_start_point">Määra lähtekoht</string>
-    <string name="intermediate_waypoint">Vahepealne punkt</string>
+    <string name="intermediate_waypoint">Vahepealne sihtpunkt</string>
     <string name="transfers">Ümberistumised</string>
     <string name="on_foot">Jalgsi</string>
     <string name="route_way">Tee</string>
@@ -646,7 +646,7 @@
     <string name="rendering_attr_undefined_name">Määratlemata</string>
     <string name="public_transport_warning_descr_blog">OsmAnd teekonna arvutamise kohta loe lähemalt meie blogist.</string>
     <string name="public_transport_warning_title">Ühistranspordiga liikumine on praegu beetatestimisel, arvesta vigade ja ebatäpsusega.</string>
-    <string name="add_intermediate">Lisa vahepunkt</string>
+    <string name="add_intermediate">Lisa vahepealne sihtpunkt</string>
     <string name="shared_string_walk">Kõndimine</string>
     <string name="save_poi_value_exceed_length">Lühenda \"%s\" sildi pikkust vähemale kui 255 tähemärgile.</string>
     <string name="save_poi_value_exceed_length_title">\"%s\" väärtuse pikkus</string>
@@ -4375,7 +4375,7 @@
     <string name="shared_string_show_icon">Näita ikooni</string>
     <string name="maps_and_resources">Kaardid ja andmed</string>
     <string name="release_4_8">• Koostamisel versiooni 4.8 jaoks</string>
-    <string name="delete_history_items">Kas kustutame %1$s ajalookirjet?</string>
+    <string name="delete_history_items">Kas kustutame %1$s ajalookirje(t)?</string>
     <string name="delete_history_items_descr">Valitud kirjed eemaldatakse loendist.</string>
     <string name="quick_action_toggle_preference">Võimalus eelistust sisse/välja lülitada.</string>
     <string name="rendering_attr_alpineHiking_description">Radade keerukuse klassifikatsioonitüübid.</string>
@@ -5339,4 +5339,11 @@
     <string name="default_appearance_desc">Vaikimisi värv, ikoon ja kuju, mis kehtib sellesse gruppi lisatud lemmikpunktidele.</string>
     <string name="default_appearance">Vaikimisi välimus</string>
     <string name="apply_to_all_points">Rakenda kõikidele punktidele</string>
+    <string name="attach_roads_descr">Seo oma rada teedega ja muuda sellega saadavaks üksikasjalik teekonna teave koos tee juhatamise ja teede omadustega.</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Sõjaväealad</string>
+    <string name="years_3">Kolm aastat</string>
+    <string name="unit_of_temperature_description">Valitud ühikuid kasutatakse antud profiilis kõikide temperatuuriga seotud andete jaoks.</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_fuel_level">Kütusesäästlikkus (%)</string>
+    <string name="routing_attr_allow_ferries_name">Kaasa praamid</string>
 </resources>

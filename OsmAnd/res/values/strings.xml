@@ -10,6 +10,16 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="altitude_metrics_description">Sets the display unit for altitude in widgets and statistics.</string>
+    <string name="write_location_provider_description">Save location provider to each track point while recording</string>
+    <string name="write_location_provider">Write Location Provider</string>
+    <string name="map_orientation_portrait_inverted">Portrait (inverted)</string>
+    <string name="map_orientation_landscape_inverted">Landscape (inverted)</string>
+    <string name="reverse_mode_calculate_route">Calculate route</string>
+    <string name="reverse_mode_calculate_route_desc">Calculate a new, optimized route to the start.</string>
+    <string name="reverse_mode_original_track">Original track</string>
+    <string name="reverse_mode_original_track_desc">Follow the exact track back to the start.\nWarning: This can be dangerous as it ignores one-way traffic on roads.</string>
+    <string name="reverse_mode">Reverse mode</string>
     <string name="release_5_2">
         • Work in progress...
     </string>
@@ -18,7 +28,14 @@
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Response</string>
     <string name="deleting_history">Deleting history…</string>
-	<string name="deleting">Deleting…</string>
+	<string name="n_a">N/A</string>
+    <string name="next_turn_information">Next turn information</string>
+    <string name="next_turn_information_desc">Shows the upcoming turn direction and street name.</string>
+	<string name="description_purchases_fastspring">You can manage your purchases through the FastSpring account management portal.</string>
+	<string name="description_subscription_fastspring">You can manage or cancel your subscription through the FastSpring account management portal.</string>
+	<string name="manage_purchases">Manage purchases</string>
+    <string name="failed_to_connect">Failed to connect to %1s</string>
+    <string name="deleting">Deleting…</string>
     <string name="release_5_1">
         • Added support for web and cross-platform purchases\n\n
         • Moved Temperature units to General settings for easier access\n\n
@@ -31,11 +48,11 @@
     <string name="shared_string_threads">Threads</string>
     <string name="threads_allocated_for_rendering">Threads allocated for rendering</string>
     <string name="threads_allocated_for_rendering_desc">Lower thread allocation may speed up the map rendering in some cases.</string>
-    <string name="turn_by_turn_directions">Turn-by-Turn directions</string>
+    <string name="turn_by_turn_directions">Turn-by-turn directions</string>
     <string name="osm_live_payment_renews_3_years">Renews every three years</string>
     <string name="years_3">Three years</string>
     <string name="osm_live_payment_3_years_title">Every three years</string>
-    <string name="three_years_subscription">Three years subscription</string>
+    <string name="three_years_subscription">Three year subscription</string>
     <string name="shared_string_switch">Switch</string>
 	<string name="ski_route_switch_style_description">Explore ski slopes, lifts, and more with the "Winter and Ski" map style.</string>
     <string name="battery">battery</string>
@@ -65,16 +82,16 @@
     <string name="shared_string_edges">Edges</string>
     <string name="labels_position">Labels position</string>
     <string name="routing_attr_allow_ferries_name">Allow ferries</string>
-    <string name="routing_attr_allow_ferries_description">Allow routing by ferry routes</string>
+    <string name="routing_attr_allow_ferries_description">Allow routing via ferries</string>
     <string name="route_members">Members</string>
     <string name="multipoligon_related">Related</string>
     <string name="route_part_of">Part of</string>
     <string name="wikidata">Wikidata</string>
-    <string name="prediction_time_description">Position icon in OsmAnd animates with each received GPS data point (once per second). A slight delay in its movement may be noticeable, especially when the user is moving quickly or the GPS signal fluctuates.</string>
+    <string name="prediction_time_description">Position icon in OsmAnd animates with each GPS update (once per second). A slight delay may occur, particularly during rapid movement or when the GPS signal is unstable.</string>
     <string name="prediction_time_advanced_description">Adjust the prediction time to minimize delay.</string>
     <string name="prediction_time">Prediction time</string>
     <string name="shared_string_no_animation">No animation</string>
-    <string name="position_animation_empty_banner_description">Position icon moves to each new received location without animation.</string>
+    <string name="position_animation_empty_banner_description">The position icon updates to each newly received location without any transition animation.</string>
     <string name="position_animation">Position animation</string>
     <string name="poi_source">POI Source</string>
     <string name="intermediate_first">Intermediate first</string>
@@ -88,8 +105,8 @@
     <string name="prime_meridian">Prime meridian</string>
     <string name="equator">Equator</string>
     <string name="show_image_previews">Show image previews</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Action to control the visibility of the Coordinates grid on the map.</string>
-    <string name="layer_coordinates_grid">Coordinates grid</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Toggle coordinate grid visibility on the map.</string>
+    <string name="layer_coordinates_grid">Coordinate grid</string>
     <string name="choose_location">Choose a location</string>
     <string name="point_location">Point location</string>
     <string name="shared_string_manual">Manual</string>
@@ -97,10 +114,10 @@
     <string name="choose_location_on_map">Choose a location on the map.</string>
     <string name="popular_places">Popular places</string>
     <string name="show_list">Show list</string>
-    <string name="save_favorite_default_appearance">Apply changes to the existing points in the folder or only to new ones?</string>
-    <string name="original_color_description">Each point would keep its own color.</string>
-    <string name="original_icon_description">Each point would keep its own icon.</string>
-    <string name="original_shape_description">Each point would keep its own shape.</string>
+    <string name="save_favorite_default_appearance">Apply changes to all existing points in the folder, or only to newly added ones?</string>
+    <string name="original_color_description">Each point retains its individual color.</string>
+    <string name="original_icon_description">Each point retains its individual icon.</string>
+    <string name="original_shape_description">Each point retains its individual shape.</string>
     <string name="apply_to_all_points">Apply to all points</string>
     <string name="hmd_promo">HMD Promo for %1$s months</string>
     <string name="hmd_promo_years">HMD Promo for %1$s years</string>
@@ -111,7 +128,7 @@
     <string name="recently_visited">Recently visited</string>
     <string name="ais_load_data">Load AIS data from file</string>
     <string name="ais_address_settings">IP address settings</string>
-    <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>
+    <string name="ais_address_settings_description">Choose the NMEA protocol (UDP/TCP) and specify the corresponding addresses and ports</string>
     <string name="ais_nmea_protocol">Protocol for NMEA data reception</string>
     <string name="ais_nmea_protocol_description">Choose protocol for NMEA data reception</string>
     <string name="ais_address_nmea_server">IP address of NMEA data source</string>
@@ -123,35 +140,35 @@
     <string name="ais_object_lost_timeouts">Timeout settings for AIS signal reception</string>
     <string name="ais_object_lost_timeouts_description">Set timeout values to identify lost AIS objects if no signal was received for a specific time.</string>
     <string name="ais_object_lost_timeout">Timeout for visibility when object is lost</string>
-    <string name="ais_object_lost_timeout_description">Set Timeout for visibility of AIS objects: After this time without signal reception, the AIS object will be removed from screen.</string>
-    <string name="ais_ship_lost_timeout">Timeout for ship visibility when no signal received</string>
+    <string name="ais_object_lost_timeout_description">Set a timeout for AIS object visibility: If no signal is received within the specified duration, the object will be automatically removed from the display.</string>
+    <string name="ais_ship_lost_timeout">Ship visibility timeout - remove if no AIS signal received within set duration.</string>
     <string name="ais_ship_lost_timeout_description">Set timeout for ship visibility: After this time without signal reception, the ship symbol will change its state on screen: It will be crossed out.</string>
     <string name="ais_cpa_settings">Settings related to CPA</string>
-    <string name="ais_cpa_settings_description">These values define the presentation of AIS objects that may come too close to the own position.</string>
-    <string name="ais_cpa_warning_time">Warning time to reach the Closest Point of Approach (CPA)</string>
-    <string name="ais_cpa_warning_time_description">If the TCPA (time to reach the CPA with another vessel) is less than this value, the vessel is marked with red color.</string>
+    <string name="ais_cpa_settings_description">These values determine how AIS objects are displayed when they approach the vessel\'s own position.</string>
+    <string name="ais_cpa_warning_time">Warning time before the Closest Point of Approach (CPA)</string>
+    <string name="ais_cpa_warning_time_description">If the TCPA (Time to Closest Point of Approach) with another vessel falls below the defined threshold, the vessel is highlighted in red.</string>
     <string name="ais_cpa_warning_distance">Warning distance for the Closes Point of Approach (CPA)</string>
-    <string name="ais_cpa_warning_distance_description">Vessels are marked with red color if the CPA is less than this value and the CPA is reached in the near future (see setting "Warning time to reach the CPA").</string>
+    <string name="ais_cpa_warning_distance_description">Vessels are highlighted in red if the CPA (Closest Point of Approach) is below the defined threshold and the TCPA (Time to CPA) falls within the warning time set in the \'Warning time to reach the CPA\' setting.</string>
     <string name="plugin_ais_tracker_name">AIS vessel tracker</string>
-    <string name="plugin_ais_tracker_description">Display AIS positions and information about surrounding vessels. The AIS data is received via network from an external AIS receiver.</string>
-    <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nThis plugin is a hobby project and not designed for reliability and correctness. DO NOT rely upon this software in any way including for navigation and/or safety of life.</string>
+    <string name="plugin_ais_tracker_description">Displays AIS positions and information about nearby vessels. AIS data is received over the network from an external AIS receiver.</string>
+    <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nThis plugin is a hobby project and is not intended for use in critical applications. It does not guarantee reliability or accuracy. Do not rely on this software for navigation, safety of life, or any other essential operations.</string>
     <string name="shared_string_length">Length</string>
     <string name="shared_string_avg_altitude">Avg. altitude</string>
     <string name="shared_string_avg_speed">Min. speed</string>
     <string name="no_places_available">No places in visible region</string>
-    <string name="no_photo_for_location_desc">No user photos have been added to this location yet</string>
+    <string name="no_photo_for_location_desc">No user photos have been added for this location yet</string>
     <string name="shared_string_default_view">Default view</string>
     <string name="map_widget_route_information">Route information</string>
-    <string name="map_widget_route_information_desc">Displays the estimated arrival time, remaining travel time, and distance for the current navigation route.</string>
+    <string name="map_widget_route_information_desc">Displays the estimated arrival time, remaining travel time, and distance for the active navigation route.</string>
     <string name="display_distance_to_first_intermediate">Show route details for the next stop</string>
-    <string name="display_distance_to_first_intermediate_summary">Shows time and distance for the next stop first. Turn off to always show details for the destination.</string>
+    <string name="display_distance_to_first_intermediate_summary">Displays time and distance to the next stop. Disable this option to always show details for the final destination instead.</string>
     <string name="rendering_attr_showClimbingRoutes_name">Climbing routes</string>
     <string name="rendering_attr_showClimbingRoutes_description">Show climbing routes</string>
     <string name="calculating_indication_message">Calculating…</string>
     <string name="calculate_size">Calculate size</string>
-    <string name="default_buttons_size_original_description">Each button would keep its own size.</string>
-    <string name="default_buttons_corners_original_description">Each button would keep its own corner radius.</string>
-    <string name="default_buttons_opacity_original_description">Each button would keep its own background opacity.</string>
+    <string name="default_buttons_size_original_description">Each button retains its individual size.</string>
+    <string name="default_buttons_corners_original_description">Each button retains its individual corner radius.</string>
+    <string name="default_buttons_opacity_original_description">Each button retains its individual background opacity.</string>
     <string name="selected_delayed_profile">Selected profile \"%s\"</string>
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Location interpolation percentage</string>
@@ -215,7 +232,7 @@
     <string name="fuel_tank_capacity_description">Enter your tank capacity to accurately track fuel levels and consumption</string>
     <string name="fuel_tank_capacity">Fuel tank capacity</string>
     <string name="shared_strings_dimensions">Dimensions</string>
-    <string name="litres">Litres</string>
+    <string name="litres">Liters</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Imperial gallons</string>
     <string name="us_gallons">US gallons</string>
@@ -542,8 +559,10 @@ You will be able to pair this scanner again at any time.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
+    <string name="show_debug_tile">Show tile information</string>
     <string name="show_rasterization_debug_tile">Show tile rasterization information</string>
     <string name="show_debug_tile_description">Display information about map symbols of each tile</string>
+    <string name="enable_msaa">Enable MSAA</string>
     <string name="show_debug_info">Show debug information</string>
     <string name="show_debug_info_description">Display graphical info about placement of each map text</string>
     <string name="map_text">Map Rendering</string>
@@ -1348,7 +1367,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="restart_now">Restart now</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) is a faster map rendering engine, also featuring 2.5D view. Version 1 rendering was the default before OsmAnd 4.3, and is still preferable for older devices.</string>
+    <string name="map_rendering_engine_descr">Version 2 (OpenGL) is a more powerful map rendering engine, also featuring 2.5D view. Version 1 was the default prior to OsmAnd 4.3 and is still preferable for older devices.</string>
     <string name="map_rendering_engine">Map rendering engine</string>
     <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
@@ -6153,5 +6172,4 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
-    <string name="show_symbols_debug_info">Show symbols debug info</string>
 </resources>

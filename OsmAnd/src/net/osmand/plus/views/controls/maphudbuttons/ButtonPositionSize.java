@@ -1,11 +1,22 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
 
+import net.osmand.PlatformUtil;
+import net.osmand.data.QuadRect;
+
+import org.apache.commons.logging.Log;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class ButtonPositionSize {
 
+	private static final Log LOG = PlatformUtil.getLog(ButtonPositionSize.class);
+
+	private static final int MAX_ITERATIONS = 1000;
+	private static final int MAX_STUCK_ATTEMPTS = 20;
 
 	public static final int CELL_SIZE_DP = 8;
 	public static final int DEF_MARGIN_DP = 4;
@@ -34,6 +45,8 @@ public class ButtonPositionSize {
 	public int moveDescendants = MOVE_DESCENDANTS_ANY;
 	public String id;
 
+	private final QuadRect bounds = new QuadRect();
+
 	public ButtonPositionSize(String id) {
 		this(id, 7, true, true);
 	}
@@ -55,6 +68,11 @@ public class ButtonPositionSize {
 
 	public ButtonPositionSize setMoveVertical() {
 		this.yMove = true;
+		return this;
+	}
+
+	public ButtonPositionSize setMoveDescendantsAny() {
+		this.moveDescendants = MOVE_DESCENDANTS_ANY;
 		return this;
 	}
 
@@ -111,6 +129,14 @@ public class ButtonPositionSize {
 
 	public boolean isBottom() {
 		return posV == POS_BOTTOM;
+	}
+
+	public boolean isFullWidth() {
+		return posH == POS_FULL_WIDTH;
+	}
+
+	public boolean isFullHeight() {
+		return posV == POS_FULL_HEIGHT;
 	}
 
 	public long toLongValue() {
@@ -205,28 +231,19 @@ public class ButtonPositionSize {
 				posV == POS_FULL_HEIGHT ? "full_h" : posV == POS_TOP ? "top " : "bott", marginY, yMove ? "+" : " ", width, height);
 	}
 
-	public boolean overlap(ButtonPositionSize b) {
-		boolean intersectHorizontal = false;
-		boolean intersectVertical = false;
-		if (this.posV == POS_FULL_HEIGHT || b.posV == POS_FULL_HEIGHT) {
-			intersectVertical = true;
-		} else if (this.posV == b.posV) {
-			intersectVertical = this.marginY < b.marginY + b.height && this.marginY + this.height > b.marginY;
-		}
-		if (this.posH == POS_FULL_WIDTH || b.posH == POS_FULL_WIDTH) {
-			intersectHorizontal = true;
-		} else if (this.posH == b.posH) {
-			intersectHorizontal = this.marginX < b.marginX + b.width && this.marginX + this.width > b.marginX;
-		}
-		return intersectHorizontal && intersectVertical;
+	public boolean overlap(ButtonPositionSize position) {
+		return QuadRect.intersects(this.bounds, position.bounds);
 	}
 
-
-	public static boolean computeNonOverlap(int space, List<ButtonPositionSize> buttons) {
-		int MAX_ITERATIONS = 1000, iter = 0;
+	public static boolean computeNonOverlap(int space, List<ButtonPositionSize> buttons, int totalWidth, int totalHeight) {
+		for (ButtonPositionSize button : buttons) {
+			button.updateBounds(totalWidth, totalHeight);
+		}
+		int iteration = 0;
+		Map<ButtonPositionSize, Integer> moveAttempts = new HashMap<>();
 		for (int fixedPos = buttons.size() - 1; fixedPos >= 0; ) {
-			if (iter++ > MAX_ITERATIONS) {
-				System.err.println("Relayout is broken");
+			if (iteration++ > MAX_ITERATIONS) {
+				LOG.error("Relayout is broken");
 				return false;
 			}
 			boolean overlap = false;
@@ -234,10 +251,16 @@ public class ButtonPositionSize {
 			for (int i = fixedPos + 1; i < buttons.size(); i++) {
 				ButtonPositionSize check = buttons.get(i);
 				if (button.overlap(check)) {
-					overlap = true;
-					moveButton(space, check, button);
-					fixedPos = i;
-					break;
+					int attempts = moveAttempts.getOrDefault(check, 0);
+					if (attempts >= MAX_STUCK_ATTEMPTS) {
+						LOG.warn("Skipping move for " + check + " (max attempts reached)");
+					} else if (moveButton(space, check, button, totalWidth, totalHeight)) {
+						overlap = true;
+						check.updateBounds(totalWidth, totalHeight);
+						moveAttempts.put(check, attempts + 1);
+						fixedPos = i;
+						break;
+					}
 				}
 			}
 			if (!overlap) {
@@ -247,7 +270,38 @@ public class ButtonPositionSize {
 		return true;
 	}
 
-	private static void moveButton(int space, ButtonPositionSize toMove, ButtonPositionSize overlap) {
+	private void updateBounds(int totalWidth, int totalHeight) {
+		double left, right, top, bottom;
+
+		if (posH == POS_FULL_WIDTH) {
+			left = 0;
+			right = totalWidth;
+		} else if (posH == POS_LEFT) {
+			left = marginX;
+			right = left + width;
+		} else {
+			right = totalWidth - marginX;
+			left = right - width;
+		}
+
+		if (posV == POS_FULL_HEIGHT) {
+			top = 0;
+			bottom = totalHeight;
+		} else if (posV == POS_TOP) {
+			top = marginY;
+			bottom = top + height;
+		} else {
+			bottom = totalHeight - marginY;
+			top = bottom - height;
+		}
+		bounds.left = left;
+		bounds.right = right;
+		bounds.top = top;
+		bounds.bottom = bottom;
+	}
+
+	private static boolean moveButton(int space, ButtonPositionSize toMove,
+			ButtonPositionSize overlap, int totalWidth, int totalHeight) {
 		boolean xMove = false;
 		boolean yMove = false;
 		if (overlap.moveDescendants == MOVE_DESCENDANTS_ANY) {
@@ -269,11 +323,30 @@ public class ButtonPositionSize {
 			xMove = true;
 		}
 
-		if (xMove) {
-			toMove.marginX = space + overlap.marginX + overlap.width;
+		int newX = xMove ? space + overlap.marginX + overlap.width : toMove.marginX;
+		int newY = yMove ? space + overlap.marginY + overlap.height : toMove.marginY;
+
+		if (newX + toMove.width > totalWidth) {
+			newX = Math.max(0, totalWidth - toMove.width);
+			if (!yMove) {
+				int desired = space + overlap.marginY + overlap.height;
+				newY = Math.max(0, Math.min(desired, totalHeight - toMove.height));
+			}
 		}
-		if (yMove) {
-			toMove.marginY = space + overlap.marginY + overlap.height;
+		if (newY + toMove.height > totalHeight) {
+			newY = Math.max(0, totalHeight - toMove.height);
+			if (!xMove) {
+				int desired = space + overlap.marginX + overlap.width;
+				newX = Math.max(0, Math.min(desired, totalWidth - toMove.width));
+			}
 		}
+		boolean moved = (newX != toMove.marginX) || (newY != toMove.marginY);
+//		LOG.debug("moveButton toMove " + toMove + " overlap " + overlap + " newX " + newX + " newY " + newY
+//				+ " toMove.marginX " + toMove.marginX + " toMove.marginY " + toMove.marginY
+//				+ " totalWidth " + totalWidth + " totalHeight " + totalHeight);
+		toMove.marginX = newX;
+		toMove.marginY = newY;
+
+		return moved;
 	}
 }

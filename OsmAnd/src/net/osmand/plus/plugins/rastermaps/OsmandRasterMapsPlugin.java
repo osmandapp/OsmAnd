@@ -27,6 +27,7 @@ import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -529,7 +530,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			app.showToastMessage(R.string.internet_not_available);
 			return;
 		}
-		AsyncTask<Void, Void, List<TileSourceTemplate>> t = new AsyncTask<Void, Void, List<TileSourceTemplate>>() {
+		AsyncTask<Void, Void, List<TileSourceTemplate>> task = new AsyncTask<Void, Void, List<TileSourceTemplate>>() {
 			@Override
 			protected List<TileSourceTemplate> doInBackground(Void... params) {
 				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app), true);
@@ -592,7 +593,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				});
 			}
 		};
-		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	public static void defineNewEditLayer(@NonNull FragmentActivity activity, @Nullable Fragment targetFragment, @Nullable String editedFileName) {

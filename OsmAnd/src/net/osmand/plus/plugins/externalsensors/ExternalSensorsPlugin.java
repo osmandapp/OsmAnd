@@ -59,6 +59,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 
 public class ExternalSensorsPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(ExternalSensorsPlugin.class);
@@ -73,13 +78,20 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public final CommonPreference<String> POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
+	private static final String DEVICES_SETTINGS_PREF_ID = "external_devices_settings";
+	public static final int RECONNECT_DEVICE_TIMEOUT = 30;
+	public static final int RECONNECT_DEVICE_DELAY = 5;
+//	private final ExternalSensorsPlugin externalSensorsPlugin;
+	private ScheduledExecutorService reconnectToDeviceScheduler;
+	private final Map<String, ScheduledFuture<?>> reconnectingDevices = new ConcurrentHashMap<>();
+
 
 	private ScanDevicesListener scanDevicesListener;
 	private CommonPreferenceProvider<String> deviceSettingsPreferenceProvider = new CommonPreferenceProvider<>() {
 		@NonNull
 		@Override
 		public CommonPreference<String> getPreference() {
-			return registerStringPref(DevicesHelper.DEVICES_SETTINGS_PREF_ID, "");
+			return registerStringPref(DEVICES_SETTINGS_PREF_ID, "");
 		}
 	};
 
@@ -256,6 +268,8 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		devicesHelper.setActivity(activity);
+		shutdownScheduler();
+		reconnectToDeviceScheduler = Executors.newSingleThreadScheduledExecutor();
 		return true;
 	}
 
@@ -264,6 +278,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		super.disable(app);
 		devicesHelper.disconnectDevices();
 		devicesHelper.deinitBLE();
+		shutdownScheduler();
 	}
 
 	@Override
@@ -479,5 +494,13 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	public String getFormattedDevicePropertyValue(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperty property) {
 		return devicesHelper.getFormattedDevicePropertyValue(device, property);
+	}
+
+	private void shutdownScheduler() {
+		ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
+		reconnectToDeviceScheduler = null;
+		if (scheduler != null) {
+			scheduler.shutdownNow();
+		}
 	}
 }

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -77,7 +78,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		lookingForTracksText = mainView.findViewById(R.id.looking_for_tracks_text);
 
 		asyncProcessor = new ProcessGpxTask();
-		asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(asyncProcessor);
 	}
 
 	@Override

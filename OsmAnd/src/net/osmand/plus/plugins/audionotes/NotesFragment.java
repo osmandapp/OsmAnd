@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
@@ -447,7 +448,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 				shareRecordingsTask.cancel(false);
 			}
 			shareRecordingsTask = new ShareRecordingsTask(activity, plugin, selected);
-			shareRecordingsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(shareRecordingsTask);
 		}
 	}
 

@@ -111,6 +111,10 @@ public class OsmandRenderer {
 		Paint[] reverseOneWay ;
 		final Context ctx;
 
+		long searchTime;
+
+		long renderingTime;
+
 		public RenderingContext(Context ctx) {
 			this.ctx = ctx;
 		}
@@ -125,6 +129,13 @@ public class OsmandRenderer {
 
 		boolean ended;
 
+
+		public String getRenderingMessage() {
+			return String.format("%.2f / %.2f (%.2f)s - search / render (text) "
+							+ "(%d points, %d points inside, %d of %d objects visible)",//$NON-NLS-1$
+					searchTime / 1000.0f, renderingTime / 1000.0f, textRenderingTime / 1000.0f,
+					pointCount, pointInsideCount, visible, allObjects);
+		}
 		
 		@Override
 		protected byte[] getIconRawData(String data) {
@@ -202,15 +213,11 @@ public class OsmandRenderer {
 					rc, searchResultHandler, bmp, bmp.hasAlpha(), render);
 				rc.ended = true;
 				notifyListeners(mapTileDownloader);
-				long time = System.currentTimeMillis() - now;
-				rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
-						+ "(%s points, %s points inside, %s of %s objects visible)\n",//$NON-NLS-1$
-						time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
-				
 				// See upper note
-				if(res.bitmapBuffer != null) {
+				if (res.bitmapBuffer != null) {
 					bmp.copyPixelsFromBuffer(res.bitmapBuffer);
 				}
+				rc.renderingTime = System.currentTimeMillis() - now;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -275,21 +282,15 @@ public class OsmandRenderer {
 
 			drawObject(rc, cv, render, pointsArray, 3);
 			rc.lastRenderedKey = DEFAULT_POINTS_MAX;
-
-
 			long beforeIconTextTime = System.currentTimeMillis() - now;
-			notifyListeners(mapTileDownloader);
+			// notifyListeners(mapTileDownloader);
 			drawIconsOverCanvas(rc, cv);
-
-			notifyListeners(mapTileDownloader);
+			// notifyListeners(mapTileDownloader);
 			textRenderer.drawTextOverCanvas(rc, cv, rc.preferredLocale);
+			notifyListeners(mapTileDownloader);
 
-			long time = System.currentTimeMillis() - now;
-			rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
-					+ "(%s points, %s points inside, %s of %s objects visible)",//$NON-NLS-1$
-					time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
-			log.info(rc.renderingDebugInfo);
-
+			rc.renderingTime = System.currentTimeMillis() - now;
+			rc.textRenderingTime = (int) (rc.renderingTime - beforeIconTextTime);
 		}
 	}
 

@@ -2915,7 +2915,7 @@
     <string name="move_inside_category">Objekt kan flyttas endast inom den här kategorin.</string>
     <string name="developer_plugin">Utvecklar-plugin</string>
     <string name="replace_point_descr">Ersätt en annan punkt med den här.</string>
-    <string name="app_mode_ski_touring">Skid-touring</string>
+    <string name="app_mode_ski_touring">Turskidor/Randonee</string>
     <string name="app_mode_ski_snowmobile">Snöskoter</string>
     <string name="custom_osmand_plugin">Anpassad OsmAnd-plugin</string>
     <string name="shared_string_items">Objekt</string>
@@ -3199,7 +3199,7 @@
     <string name="routing_engine_vehicle_type_cycling_mountain">Bergscykling</string>
     <string name="routing_engine_vehicle_type_cycling_road">Vägcyckling</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Vanlig cyckling</string>
-    <string name="routing_engine_vehicle_type_hgv">Lastbil</string>
+    <string name="routing_engine_vehicle_type_hgv">Tung lastbil</string>
     <string name="routing_engine_vehicle_type_small_truck">Liten lastbil</string>
     <string name="routing_engine_vehicle_type_truck">Lastbil</string>
     <string name="routing_engine_vehicle_type_scooter">Skoter</string>
@@ -3701,7 +3701,7 @@
     <string name="routing_attr_difficulty_preference_name">Föredragen svårighetsgrad</string>
     <string name="routing_attr_difficulty_preference_description">Prioritera rutter av denna svårighetsgrad, även om rutter över svårare eller lättare pister är tillåtna om de är kortare.</string>
     <string name="routing_attr_freeride_policy_name">Offpist</string>
-    <string name="quick_action_need_to_add_item_to_list">Lägg till minst ett objekt i listan bland inställningarna för \'Snabbhandlingar\'</string>
+    <string name="quick_action_need_to_add_item_to_list">Lägg till minst ett objekt i listan i inställningarna för \'Snabbåtgärder\'</string>
     <string name="clear_all_history_warning">Rensa alla poster i appens historik, inklusive sök-, navigerings- och markeringshistorik\?</string>
     <string name="clear_all_history">Radera all historik</string>
     <string name="history_actions_descr">Du kan exportera historiken till en fil.</string>
@@ -5669,7 +5669,7 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Visa leder för off-road motorcykel (cross, enduro)</string>
     <string name="type_of_activity">Aktivitetstyp</string>
     <string name="change_activity">Byt aktivitet</string>
-    <string name="obd_searching_text_description">Vänliga ha din enhet nära skannern. Försäkra dig om att fordonets motor är igång.</string>
+    <string name="obd_searching_text_description">Håll din enhet nära skannern. Försäkra dig om att fordonets motor är igång.</string>
     <string name="liter">l</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Visar fordents bränsleförbrukningstakt baserat på beräkningar (l/100 km)</string>
     <string name="obd_fuel_left_km">Återstående bränsle (km)</string>
@@ -5736,7 +5736,7 @@
     <string name="obd_not_connected_to_device">Bortkopplad från %s</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Bränsleförbrukningstakt</string>
     <string name="obd_nothing_found_text">Inga skannrar hittade</string>
-    <string name="obd_device_forget_sensor_description">Skannern kommer att tas bort från listan. Du kommer när som helst att kunna parkoppla denna skanner på nytt.</string>
+    <string name="obd_device_forget_sensor_description">Skannern kommer att tas bort från listan. Du kan när som helst parkoppla denna skanner på nytt.</string>
     <string name="connect_obd_instructions_step1">Anslut skannern till ditt fordons OBD-II-port.</string>
     <string name="connect_obd_instructions_step2">Starta ditt fordons motor</string>
     <string name="key_event_action_continuous_zoom_in">Kontinuerlig inzoomning</string>
@@ -5885,7 +5885,7 @@
     <string name="default_buttons_opacity_original_description">Varje knapp behåller sin egen bakgrundsgenomskinlighet.</string>
     <string name="selected_delayed_profile">Vald profil \"%s\"</string>
     <string name="location_interpolation_percent">Platsinterpolation i procent</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spåra viktiga fordonsdata, genom användning av OBD-II-protokollet. Övervaka nyckeltal som hastighet, motorvarvtal, bränsleförbrukning, med mera.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Håll koll på viktiga fordonsdata genom användning av OBD-II-protokollet. Övervaka nyckeltal som hastighet, motorvarvtal, bränsleförbrukning, med mera.</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
     <string name="obd_throttle_position">Gaspedalens läge</string>
     <string name="obd_calculated_engine_load_desc">Visar hur många procent av motorns tillgängliga effekt som används vid en given tidpunkt.</string>
@@ -5979,7 +5979,7 @@
     <string name="obd_ambient_air_temp">Omgivningstemperatur</string>
     <string name="obd_engine_coolant_temp">Kylvätsketemperatur</string>
     <string name="obd_fuel_consumption_rate_desc">Visar fordons bränsleförbrukningshastighet baserat på OBD en plats</string>
-    <string name="obd_plugin_description">Övervaka viktiga fordonsmätningar med OBD-II-protokollet. Access-data inklusive:\nMotorhastighet, motor Runtime, beräknad motor last\n• Bränsleförbrukning, bränsletryck, återstående bränsle\n• Intagstemperatur, omgivningstemperatur,kyltemperatur, motoroljetemperatur\n• Fordonshastighet, gasposition, batterispänning\n</string>
+    <string name="obd_plugin_description">Övervaka viktiga fordonsdata med OBD-II-protokollet. Få tillgång till information som:\n• Motorhastighet, motorns körtid, beräknad motorbelastning\n• Bränsleförbrukning, bränsletryck, återstående bränsle\n• Intagstemperatur, omgivningstemperatur, kylartemperatur, motoroljetemperatur\n• Fordonshastighet, gasposition, batterispänning\n</string>
     <string name="obd_support">OBD stöd</string>
     <string name="app_mode_suv">suv</string>
     <string name="weather_source_GFS_description">Globala prognossystemet från National Centers for Environmental Prediction</string>
@@ -6029,4 +6029,12 @@
     <string name="release_3_5">• Uppdaterade app- och profilinställningar: Inställningar är nu ordnade efter typ. Varje profil kan anpassas separat.\n\n• Ny karta nedladdning dialog föreslår en karta för att ladda ner medan du surfar\n\n• Mörka temafixar\n\n• Fast flera routingproblem runt om i världen\n\nUppdaterad baskarta med mer detaljerat vägnät\n\n• Fasta översvämmade områden runt om i världen\n\nSki Routing: Tillagd höjdprofil och ruttkomplexitet till ruttens detaljer\n\n• Andra bugfix</string>
     <string name="release_3_4">• Appprofiler: Skapa en anpassad profil för dina egna behov, med en anpassad ikon och färg\n\n• Nu anpassa någon profils standard och min/max hastigheter\n\n• Lägg till en widget för de aktuella koordinaterna\n\n• Lägga till alternativ för att visa kompassen och en radie härskare på kartan\n\n• Fix bakgrund track logging\n\n• Förbättrad bakgrundskarta nedladdningar\n\n• Returnerad \"Turn screen on\" -alternativ\n\n• Fast Wikipedia språkval\n\n• Fast kompassknapp beteende under navigering\n\n• Andra buggfixar</string>
     <string name="show_symbols_debug_info">Visa felsökningsinformation för symboler</string>
+    <string name="shared_string_threads">Trådar</string>
+    <string name="threads_allocated_for_rendering">Trådar allokerade för rendering</string>
+    <string name="threads_allocated_for_rendering_desc">Lägre tråd-allokering kan i vissa fall snabba upp kartrenderingen.</string>
+    <string name="turn_by_turn_directions">Sväng för sväng vägbeskrivning</string>
+    <string name="failed_to_connect">Kunde inte ansluta till %1s</string>
+    <string name="next_turn_information">Information om nästa sväng</string>
+    <string name="next_turn_information_desc">Visar nästkommande svängriktning och gatunamn.</string>
+    <string name="manage_purchases">Hantera köp</string>
 </resources>

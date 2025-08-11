@@ -71,6 +71,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 
 public abstract class DevicesHelper implements DeviceListener, DevicePreferencesListener {
@@ -98,7 +102,6 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	private boolean installAntPluginAsked;
 	private BluetoothAdapter bluetoothAdapter;
 	private BluetoothLeScanner bleScanner;
-	public static final String DEVICES_SETTINGS_PREF_ID = "external_devices_settings";
 
 	protected DevicesHelper(@NonNull OsmandApplication app, @NonNull CommonPreferenceProvider<String> preferenceProvider) {
 		init(app, preferenceProvider);
@@ -122,7 +125,8 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 			devicesSettingsCollection.addListener(this);
 		}
 	}
-
+/*
+*/
 	void initBLE() {
 		BluetoothManager bluetoothManager = (BluetoothManager) activity.getSystemService(Context.BLUETOOTH_SERVICE);
 		bluetoothAdapter = bluetoothManager.getAdapter();
@@ -433,6 +437,12 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 		}
 		switch (result) {
 			case SUCCESS:
+				/*
+				ScheduledFuture<?> reconnectingFuture = reconnectingDevices.remove(device.getDeviceId());
+				if (reconnectingFuture != null) {
+					reconnectingFuture.cancel(true);
+				}
+				*/
 				LOG.debug(device + " sensor connected");
 				if (antScanning && isAntDevice(device)) {
 					devices.put(device.getDeviceId(), device);
@@ -475,8 +485,38 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	public void onDeviceDisconnect(@NonNull AbstractDevice<?> device) {
 		LOG.debug(device + " disconnected");
 		app.showShortToastMessage(R.string.device_disconnected, getFormattedDevicePropertyValue(device, NAME));
+		/*
+		if (!device.isDisconnected() && !reconnectingDevices.containsKey(device.getDeviceId())) {
+			tryToReconnectToDevice(device);
+		}
+		*/
+	}
+/*
+	private void tryToReconnectToDevice(@NonNull AbstractDevice<?> device) {
+		ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
+		if (!device.isDisconnected() && !reconnectingDevices.containsKey(device.getDeviceId()) && scheduler != null) {
+			ScheduledFuture<?> future = scheduler.schedule(() -> {
+				if(activity != null && device.connect(app, activity)) {
+					ScheduledFuture<?> checkFuture = scheduler.schedule(() -> {
+						checkReconnectDeviceResult(device.getDeviceId());
+					}, RECONNECT_DEVICE_TIMEOUT, TimeUnit.SECONDS);
+					reconnectingDevices.put(device.getDeviceId(), checkFuture);
+				}
+			}, RECONNECT_DEVICE_DELAY, TimeUnit.SECONDS);
+			reconnectingDevices.put(device.getDeviceId(), future);
+		}
 	}
 
+	private void checkReconnectDeviceResult(@NonNull String deviceId) {
+		Activity activity = this.activity;
+		if (reconnectingDevices.remove(deviceId) != null && activity != null) {
+			AbstractDevice<?> device = getAnyDevice(deviceId);
+			if (device != null) {
+				app.showShortToastMessage(R.string.failed_to_connect, device.getName());
+			}
+		}
+	}
+*/
 	@Override
 	public void onSensorData(@NonNull AbstractSensor sensor, @NonNull SensorData data) {
 		for (SensorDataField dataField : data.getDataFields()) {
