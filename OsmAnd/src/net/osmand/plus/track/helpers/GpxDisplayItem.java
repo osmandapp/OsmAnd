@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -59,8 +60,8 @@ public class GpxDisplayItem {
 	}
 
 	@NonNull
-	public WptPt getLabelPoint(@NonNull GpxFile gpxFile, @NonNull GpxAppearanceHelper gpxAppearanceHelper) {
-		if (gpxAppearanceHelper.isUphillDownhillSplit(gpxFile)) {
+	public WptPt getLabelPoint() {
+		if (group instanceof TrackDisplayGroup trackDisplayGroup && trackDisplayGroup.isSplitUphillDownhill()) {
 			return locationStart;
 		} else {
 			return locationEnd;

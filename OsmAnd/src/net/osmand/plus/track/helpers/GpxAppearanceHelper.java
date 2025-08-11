@@ -1,6 +1,5 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.GpxSplitType.UPHILL_DOWNHILL;
 import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
@@ -197,22 +196,6 @@ public class GpxAppearanceHelper {
 			gradientPalette = getAppearanceParameter(new File(gpxFile.getPath()), COLOR_PALETTE);
 		}
 		return gradientPalette != null ? gradientPalette : gpxFile.getGradientColorPalette();
-	}
-
-	public boolean isUphillDownhillSplit(@NonNull GpxFile gpxFile) {
-		Boolean uphillDownhillSplit = null;
-		if (hasTrackDrawInfoForTrack(gpxFile)) {
-			uphillDownhillSplit = UPHILL_DOWNHILL.getType() == trackDrawInfo.getSplitType();
-		}
-		if (uphillDownhillSplit == null) {
-			Integer splitType = getAppearanceParameter(new File(gpxFile.getPath()), SPLIT_TYPE);
-			if (splitType != null) {
-				uphillDownhillSplit = UPHILL_DOWNHILL.getType() == splitType;
-			}
-		}
-		return uphillDownhillSplit != null
-				? uphillDownhillSplit
-				: UPHILL_DOWNHILL.getType() == GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
 	}
 
 	@Nullable

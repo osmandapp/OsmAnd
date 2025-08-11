@@ -627,7 +627,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					int trackColor = getTrackColor(gpxFile, cachedColor);
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
-						WptPt point = item.getLabelPoint(gpxFile, gpxAppearanceHelper);
+						WptPt point = item.getLabelPoint();
 						String name = item.getLabelName(app);
 						int color = item.getLabelColor(trackColor, altitudeAscColor, altitudeDescColor);
 
@@ -716,7 +716,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		float py = -1;
 		for (int k = 0; k < items.size(); k++) {
 			GpxDisplayItem i = items.get(k);
-			WptPt point = i.getLabelPoint(selectedGpxFile.getGpxFile(), gpxAppearanceHelper);
+			WptPt point = i.getLabelPoint();
 			if (point != null && point.getLat() >= latLonBounds.bottom && point.getLat() <= latLonBounds.top
 					&& point.getLon() >= latLonBounds.left && point.getLon() <= latLonBounds.right) {
 				float x = tileBox.getPixXFromLatLon(point.getLat(), point.getLon());
