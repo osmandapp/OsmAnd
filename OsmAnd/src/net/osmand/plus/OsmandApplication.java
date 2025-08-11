@@ -1148,4 +1148,8 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 	}
+
+	public void reInitPoiTypes() {
+		appInitializer.reInitPoiTypes();
+	}
 }

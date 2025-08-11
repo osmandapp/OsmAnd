@@ -14,6 +14,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.lang.reflect.Field;
+import java.util.Locale;
 
 public class MapPoiTypesTranslator implements PoiTranslator {
 
@@ -23,8 +24,12 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 	private final Resources resources;
 
 	public MapPoiTypesTranslator(@NonNull OsmandApplication app) {
+		this(app, Locale.getDefault().getLanguage());
+	}
+
+	public MapPoiTypesTranslator(@NonNull OsmandApplication app, String lang) {
 		this.app = app;
-		resources = app.getLocaleHelper().getLocalizedResources("en");
+		resources = app.getLocaleHelper().getLocalizedResources(lang);
 	}
 
 	@Override
@@ -48,7 +53,7 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 			Field f = R.string.class.getField("poi_" + keyName);
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
-				String val = app.getString(in);
+				String val = resources.getString(in);
 				if (val != null) {
 					int ind = val.indexOf(';');
 					if (ind > 0) {
