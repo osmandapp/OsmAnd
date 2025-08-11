@@ -5643,7 +5643,7 @@
     <string name="plugin_ais_tracker_disclaimer">免責聲明\n\n本軟體外掛為業餘開發專案，並未經過專業可靠性與精確度驗證。使用者務必謹慎，切勿在任何情況下（尤其是導航或可能涉及生命安全的場合）完全依賴本軟體。</string>
     <string name="ais_port_nmea_server_description">定義 NMEA 資料來源的 TCP 連接埠編號</string>
     <string name="ais_object_lost_timeouts_description">設定逾時值，以便在特定時間內未收到訊號時識別遺失的 AIS 物件。</string>
-    <string name="ais_object_lost_timeout_description">設定 AIS 物件能見度的逾時時間： 如果在指定的時間內沒有收到訊號，該物件會自動從螢幕上移除。</string>
+    <string name="ais_object_lost_timeout_description">設定 AIS 物件訊號遺失後顯示逾時時間： 移除指定時間內未接收訊號的 AIS 物件</string>
     <string name="ais_nmea_protocol">NMEA 資料接收通訊協定</string>
     <string name="ais_nmea_protocol_description">選擇 NMEA 資料接收通訊協定</string>
     <string name="ais_address_nmea_server">NMEA 資料來源的 IP 位址</string>
@@ -5651,10 +5651,10 @@
     <string name="ais_port_nmea_server">NMEA 資料來源的 TCP 連接埠</string>
     <string name="ais_port_nmea_local">本機 NMEA 資料接收器的 UDP 連接埠</string>
     <string name="ais_port_nmea_local_description">定義 OsmAnd 接收 NMEA 資料的 UDP 連接埠</string>
-    <string name="ais_object_lost_timeouts">AIS 訊號接收的逾時設定</string>
-    <string name="ais_object_lost_timeout">物件遺失時的能見度逾時</string>
-    <string name="ais_ship_lost_timeout">船舶能見度逾時 - 如果在設定的持續時間內未收到 AIS 訊號，則移除。</string>
-    <string name="ais_ship_lost_timeout_description">設定船隻可見度的逾時時間： 在這段時間內沒有接收到訊號，螢幕上的船隻符號就會改變狀態：它會被劃掉。</string>
+    <string name="ais_object_lost_timeouts">AIS 物件顯示逾時時設定</string>
+    <string name="ais_object_lost_timeout">物件遺失後顯示逾時時間</string>
+    <string name="ais_ship_lost_timeout">船舶訊號遺失後顯示逾時時間</string>
+    <string name="ais_ship_lost_timeout_description">設定船隻符號顯示逾時時間：劃掉指定時間內未接收到訊號的船隻。</string>
     <string name="ais_cpa_settings">與 CPA 相關的設定</string>
     <string name="ais_cpa_settings_description">這些值決定 AIS 物件接近船隻本身位置時的顯示方式。</string>
     <string name="ais_cpa_warning_time">最短距離 (CPA) 前的警告時間</string>
@@ -5679,7 +5679,7 @@
     <string name="original_icon_description">每個點都保留各自的圖示。</string>
     <string name="original_color_description">每個點都保留各自的顏色。</string>
     <string name="apply_to_all_points">套用至所有點</string>
-    <string name="show_mercator_grids">使用麥卡托取代 WGS84 或 UTM</string>
+    <string name="show_mercator_grids">使用麥卡托坐標系取代 WGS84 或 UTM</string>
     <string name="show_mercator_grids_description">以麥卡托公里為單位顯示網格，而非 WGS84 或 UTM</string>
     <string name="show_dms_grids">使用 DMS 代替度數</string>
     <string name="show_dms_grids_description">以度、分、秒而不是度為單位顯示網格</string>
