@@ -6046,4 +6046,5 @@
     <string name="reverse_mode_calculate_route">Calculează ruta</string>
     <string name="reverse_mode_calculate_route_desc">Calculează o nouă rută optimizată până la pornire.</string>
     <string name="reverse_mode_original_track">Ruta originală</string>
+    <string name="altitude_metrics_description">Setează unitatea de afișare pentru altitudine în widget-uri și statistici.</string>
 </resources>
