@@ -4153,7 +4153,7 @@
     <string name="storage_migration_wrong_folder_warning">在選定的資料夾中找不到 OsmAnd 資料。請再試一次。</string>
     <string name="shared_string_precision">精確</string>
     <string name="shared_string_statistics">統計</string>
-    <string name="shared_string_size">大小</string選項>
+    <string name="shared_string_size">大小</string>
     <string name="use_routing_fallback">離線路線規劃備用</string>
     <string name="use_routing_fallback_description">當無法使用線上路線規劃時，則使用離線路線規劃。</string>
     <string name="created_on">建立於</string>
@@ -5306,7 +5306,7 @@
     <string name="daynight_mode_app_theme">應用程式佈景主題</string>
     <string name="key_event_action_continuous_zoom_out">持續縮細</string>
     <string name="key_event_action_continuous_zoom_in">持續放大</string>
-    <string name="remove_key_assignment_summary">將移除已選定快速動作的按鍵設定。。</string>
+    <string name="remove_key_assignment_summary">將移除已選定快速動作的按鍵設定。</string>
     <string name="remove_key_assignment">刪除按鍵設定</string>
     <string name="map_settings_weather_wind_animation">風向動畫</string>
     <string name="tomorrow">明天</string>
