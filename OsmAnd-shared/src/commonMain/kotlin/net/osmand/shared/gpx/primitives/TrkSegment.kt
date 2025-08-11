@@ -4,6 +4,7 @@ import net.osmand.shared.gpx.ElevationApproximator
 import net.osmand.shared.gpx.ElevationDiffsCalculator
 import net.osmand.shared.gpx.ElevationDiffsCalculator.*
 import net.osmand.shared.gpx.GpxTrackAnalysis
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.gpx.SplitMetric
 import net.osmand.shared.gpx.SplitSegment
@@ -163,28 +164,42 @@ class TrkSegment : GpxExtensions() {
 		}
 	}
 
-	fun splitByUpDownHills(pointsAnalyser: GpxTrackAnalysis.TrackPointsAnalyser): List<GpxTrackAnalysis> {
+	fun splitByUpDownHills(): List<GpxTrackAnalysis> {
+		return splitByUpDownHills(null)
+	}
+
+	fun splitByUpDownHills(pointsAnalyser: TrackPointsAnalyser?): List<GpxTrackAnalysis> {
 		return GpxUtilities.convert(splitBySlopeTypeUsingExtremums(), pointsAnalyser)
+	}
+
+	fun splitByDistance(meters: Double, joinSegments: Boolean): List<GpxTrackAnalysis> {
+		return splitByDistance(meters, joinSegments, null)
 	}
 
 	fun splitByDistance(
 		meters: Double,
 		joinSegments: Boolean,
-		pointsAnalyser: GpxTrackAnalysis.TrackPointsAnalyser
+		pointsAnalyser: TrackPointsAnalyser?
 	): List<GpxTrackAnalysis> {
 		return split(
 			SplitMetric.DistanceSplitMetric(),
-			SplitMetric.TimeSplitMetric(), meters, joinSegments, pointsAnalyser)
+			SplitMetric.TimeSplitMetric(), meters, joinSegments, pointsAnalyser
+		)
+	}
+
+	fun splitByTime(seconds: Int, joinSegments: Boolean): List<GpxTrackAnalysis> {
+		return splitByTime(seconds, joinSegments, null)
 	}
 
 	fun splitByTime(
 		seconds: Int,
 		joinSegments: Boolean,
-		pointsAnalyser: GpxTrackAnalysis.TrackPointsAnalyser
+		pointsAnalyser: TrackPointsAnalyser?
 	): List<GpxTrackAnalysis> {
 		return split(
 			SplitMetric.TimeSplitMetric(),
-			SplitMetric.DistanceSplitMetric(), seconds.toDouble(), joinSegments, pointsAnalyser)
+			SplitMetric.DistanceSplitMetric(), seconds.toDouble(), joinSegments, pointsAnalyser
+		)
 	}
 
 	private fun split(
@@ -192,7 +207,7 @@ class TrkSegment : GpxExtensions() {
 		secondaryMetric: SplitMetric,
 		metricLimit: Double,
 		joinSegments: Boolean,
-		pointsAnalyser: GpxTrackAnalysis.TrackPointsAnalyser
+		pointsAnalyser: TrackPointsAnalyser?
 	): List<GpxTrackAnalysis> {
 		val splitSegments = mutableListOf<SplitSegment>()
 		SplitMetric.splitSegment(
