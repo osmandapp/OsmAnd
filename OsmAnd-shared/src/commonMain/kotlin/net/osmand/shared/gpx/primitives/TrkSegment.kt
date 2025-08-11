@@ -4,6 +4,7 @@ import net.osmand.shared.gpx.ElevationApproximator
 import net.osmand.shared.gpx.ElevationDiffsCalculator
 import net.osmand.shared.gpx.ElevationDiffsCalculator.*
 import net.osmand.shared.gpx.GpxTrackAnalysis
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.gpx.SplitMetric
 import net.osmand.shared.gpx.SplitSegment
@@ -164,26 +165,49 @@ class TrkSegment : GpxExtensions() {
 	}
 
 	fun splitByUpDownHills(): List<GpxTrackAnalysis> {
-		return GpxUtilities.convert(splitBySlopeTypeUsingExtremums())
+		return splitByUpDownHills(null)
+	}
+
+	fun splitByUpDownHills(pointsAnalyser: TrackPointsAnalyser?): List<GpxTrackAnalysis> {
+		return GpxUtilities.convert(splitBySlopeTypeUsingExtremums(), pointsAnalyser)
 	}
 
 	fun splitByDistance(meters: Double, joinSegments: Boolean): List<GpxTrackAnalysis> {
+		return splitByDistance(meters, joinSegments, null)
+	}
+
+	fun splitByDistance(
+		meters: Double,
+		joinSegments: Boolean,
+		pointsAnalyser: TrackPointsAnalyser?
+	): List<GpxTrackAnalysis> {
 		return split(
 			SplitMetric.DistanceSplitMetric(),
-			SplitMetric.TimeSplitMetric(), meters, joinSegments)
+			SplitMetric.TimeSplitMetric(), meters, joinSegments, pointsAnalyser
+		)
 	}
 
 	fun splitByTime(seconds: Int, joinSegments: Boolean): List<GpxTrackAnalysis> {
+		return splitByTime(seconds, joinSegments, null)
+	}
+
+	fun splitByTime(
+		seconds: Int,
+		joinSegments: Boolean,
+		pointsAnalyser: TrackPointsAnalyser?
+	): List<GpxTrackAnalysis> {
 		return split(
 			SplitMetric.TimeSplitMetric(),
-			SplitMetric.DistanceSplitMetric(), seconds.toDouble(), joinSegments)
+			SplitMetric.DistanceSplitMetric(), seconds.toDouble(), joinSegments, pointsAnalyser
+		)
 	}
 
 	private fun split(
 		metric: SplitMetric,
 		secondaryMetric: SplitMetric,
 		metricLimit: Double,
-		joinSegments: Boolean
+		joinSegments: Boolean,
+		pointsAnalyser: TrackPointsAnalyser?
 	): List<GpxTrackAnalysis> {
 		val splitSegments = mutableListOf<SplitSegment>()
 		SplitMetric.splitSegment(
@@ -194,6 +218,6 @@ class TrkSegment : GpxExtensions() {
 			this,
 			joinSegments
 		)
-		return GpxUtilities.convert(splitSegments)
+		return GpxUtilities.convert(splitSegments, pointsAnalyser)
 	}
 }
