@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="average_elevation">Average elevation</string>
+    <string name="ascent">Ascent</string>
+    <string name="descent">Descent</string>
     <string name="map_orientations_choose_description">Leave empty to switch between all available modes, or add only your preferred ones.</string>
     <string name="map_orientations">Map orientations</string>
     <string name="altitude_metrics_description">Sets the display unit for altitude in widgets and statistics.</string>

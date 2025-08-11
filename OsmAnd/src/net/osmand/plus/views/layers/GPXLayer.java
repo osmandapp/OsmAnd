@@ -90,7 +90,6 @@ import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.*;
 import net.osmand.shared.gpx.primitives.TrkSegment;
-import net.osmand.shared.gpx.primitives.TrkSegment.SegmentSlopeType;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.routing.ColoringType;
@@ -584,7 +583,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (!Algorithms.isEmpty(groups)) {
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
-						if (item.splitName != null) {
+						if (item.getLabelName(app) != null) {
 							splitLabelsCount++;
 						}
 					}
@@ -629,9 +628,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					int trackColor = getTrackColor(gpxFile, cachedColor);
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
-						WptPt point = item.locationEnd;
-						String name = getSplitName(item);
-						int color = getSplitColor(item, trackColor);
+						WptPt point = item.getLabelPoint();
+						String name = item.getLabelName(app);
+						int color = item.getLabelColor(trackColor, altitudeAscColor, altitudeDescColor);
 
 						if (name != null) {
 							SplitLabel splitLabel;
@@ -663,50 +662,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			splitLabelsCountCached = 0;
 			clearSelectedFilesSplits();
 		}
-	}
-
-	@Nullable
-	private String getSplitName(@NonNull GpxDisplayItem item) {
-		String name = item.splitName;
-		if (name != null) {
-			int ind = name.indexOf(' ');
-			if (ind > 0) {
-				name = name.substring(0, ind);
-			}
-
-			if (item.analysis == null) {
-				return name;
-			}
-
-			SegmentSlopeType slopeType = item.analysis.getSegmentSlopeType();
-			if (slopeType != null) {
-				if (slopeType == SegmentSlopeType.UPHILL) {
-					name = getString(R.string.ltr_or_rtl_combine_via_space, "↗", name);
-				} else if (slopeType == SegmentSlopeType.DOWNHILL) {
-					name = getString(R.string.ltr_or_rtl_combine_via_space, "↘", name);
-				}
-			}
-		}
-		return name;
-	}
-
-	@ColorInt
-	private int getSplitColor(@NonNull GpxDisplayItem item, int trackColor) {
-		int color = trackColor;
-
-		if (item.analysis == null) {
-			return color;
-		}
-
-		SegmentSlopeType slopeType = item.analysis.getSegmentSlopeType();
-		if (slopeType != null) {
-			if (slopeType == SegmentSlopeType.UPHILL) {
-				color = altitudeAscColor;
-			} else if (slopeType == SegmentSlopeType.DOWNHILL) {
-				color = altitudeDescColor;
-			}
-		}
-		return color;
 	}
 
 	private boolean updateBitmaps() {
@@ -762,7 +717,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		float py = -1;
 		for (int k = 0; k < items.size(); k++) {
 			GpxDisplayItem i = items.get(k);
-			WptPt point = i.locationEnd;
+			WptPt point = i.getLabelPoint();
 			if (point != null && point.getLat() >= latLonBounds.bottom && point.getLat() <= latLonBounds.top
 					&& point.getLon() >= latLonBounds.left && point.getLon() <= latLonBounds.right) {
 				float x = tileBox.getPixXFromLatLon(point.getLat(), point.getLon());
@@ -774,12 +729,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				px = x;
 				py = y;
-				String name = i.splitName;
+				String name = i.getLabelName(app);
 				if (name != null) {
-					int ind = name.indexOf(' ');
-					if (ind > 0) {
-						name = name.substring(0, ind);
-					}
 					Rect bounds = new Rect();
 					paintTextIcon.getTextBounds(name, 0, name.length(), bounds);
 
