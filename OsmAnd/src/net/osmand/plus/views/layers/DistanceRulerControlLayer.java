@@ -153,7 +153,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
-		if (rulerModeOn() && !showTwoFingersDistance && !showDistBetweenFingerAndLocation) {
+		if (rulerModeOn() && !showTwoFingersDistance) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				touched = true;
 				touchOutside = false;
