@@ -894,7 +894,7 @@
     <string name="item_unchecked">μη επιλεγμένο</string>
     <string name="map_widget_gps_info">Πληροφορίες GPS</string>
     <string name="download_hillshade_maps">Ανάγλυφο</string>
-    <string name="osmand_play_title_30_chars">OsmAnd Χάρτες &amp; Δρομολόγηση</string>
+    <string name="osmand_play_title_30_chars">Χάρτες OsmAnd &amp; Δρομολόγηση</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Χάρτες &amp; Πλοήγηση</string>
     <string name="street_name">Όνομα οδού</string>
     <string name="hno">Αριθμός σπιτιού</string>
@@ -5441,4 +5441,12 @@
     <string name="troubleshooting_description">Παρακαλούμε ακολουθήστε τον ακόλουθο σύνδεσμο εάν έχετε ζητήματα με τις αγορές.</string>
     <string name="help_article_setup_a_route_name">Διαμορφώστε μια διαδρομή</string>
     <string name="shared_string_setup">Διαμόρφωση</string>
+    <string name="ascent">Ανάβαση</string>
+    <string name="descent">Κατάβαση</string>
+    <string name="map_orientations">Προσανατολισμοί χάρτη</string>
+    <string name="altitude_metrics_description">Ορίζει την μονάδα μέτρησης του υψομέτρου στα γραφικά στοιχεία και στα στατιστικά.</string>
+    <string name="map_orientations_choose_description">Αφήστε το κενό για να κάνετε εναλλαγή σε όλες τις διαθέσιμες λειτουργίες ή προσθέστε μόνο αυτές που προτιμάτε.</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Ανταπόκριση</string>
 </resources>
