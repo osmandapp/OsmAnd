@@ -4114,7 +4114,7 @@
     <string name="save_as_copy">Mentés másolatként</string>
     <string name="shared_string_gps_filter">GPS szűrő</string>
     <string name="gps_filter_speed_altitude_desc">Csak a megadott intervallumba eső nyomvonalpontok fognak megjelenni a diagramon és a térképen, a többi el lesz rejtve.</string>
-    <string name="shared_string_uphill">Emelkedés</string>
+    <string name="shared_string_uphill">Dombnak fel</string>
     <string name="shared_string_downhill">Lejtő</string>
     <string name="shared_string_show_slope">Lejtés megjelenítése</string>
     <string name="shared_string_hide_slope">Lejtés elrejtése</string>
@@ -5598,7 +5598,7 @@
     <string name="display_distance_to_first_intermediate">A következő megállásig tartó útvonal részleteinek megjelenítése</string>
     <string name="popular_places_nearby">Népszerű helyek a közelben</string>
     <string name="recently_visited">Nemrég meglátogatott</string>
-    <string name="shared_string_avg_altitude">Átlagos magasság</string>
+    <string name="shared_string_avg_altitude">Átl. magasság</string>
     <string name="shared_string_avg_speed">Legkisebb sebesség</string>
     <string name="shared_string_length">Távolság</string>
     <string name="map_widget_route_information">Útvonalinformációk</string>
@@ -5753,4 +5753,12 @@
     <string name="write_location_provider_description">Mentse el a helymeghatározó szolgáltatót minden egyes útvonalponthoz rögzítés közben</string>
     <string name="write_location_provider">Helymeghatározó szolgáltató tárolása</string>
     <string name="altitude_metrics_description">Beállítja a magasság mértékegységét a widgetekben és a statisztikákban.</string>
+    <string name="average_elevation">Átlagos magasság</string>
+    <string name="ascent">Emelkedés</string>
+    <string name="descent">Ereszkedés</string>
+    <string name="map_orientations_choose_description">Hagyja üresen, ha az összes elérhető mód között szeretne váltani, vagy pedig adja hozzá a kívánt módot.</string>
+    <string name="map_orientations">Térkép tájolása</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Válasz</string>
 </resources>
