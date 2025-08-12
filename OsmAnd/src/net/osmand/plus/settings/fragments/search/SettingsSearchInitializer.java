@@ -31,6 +31,9 @@ public class SettingsSearchInitializer {
 	}
 
 	private void rebuildSearchDatabase() {
-		DatabaseResetter.resetDatabase(DAOProviderFactory.getDAOProvider(app));
+		DatabaseResetter.resetDatabase(
+				DAOProviderFactory.getDAOProvider(
+						SettingsSearchButtonHelper.getAppDatabaseConfig(),
+						app));
 	}
 }

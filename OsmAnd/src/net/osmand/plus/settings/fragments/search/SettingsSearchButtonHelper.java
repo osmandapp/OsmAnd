@@ -8,6 +8,7 @@ import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,6 +38,7 @@ import de.KnollFrank.lib.settingssearch.client.SearchConfig;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
+import de.KnollFrank.lib.settingssearch.db.preference.db.AppDatabaseConfig;
 import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
 import de.KnollFrank.lib.settingssearch.graph.ComputePreferencesListener;
 import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
@@ -102,7 +104,9 @@ public class SettingsSearchButtonHelper {
 		return SearchPreferenceFragments
 				.builder(
 						SearchDatabaseConfig
-								.builder(rootPreferenceFragment)
+								.builder(
+										rootPreferenceFragment,
+										getAppDatabaseConfig())
 								.withFragmentFactory(new FragmentFactory())
 								.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
 								.withActivityInitializerByActivity(getActivityInitializerByActivity(fragmentManager))
@@ -111,6 +115,7 @@ public class SettingsSearchButtonHelper {
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 								.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
 								.withComputePreferencesListener(enableCacheForDownloadedTileSourceTemplatesWhileBuildingSearchDatabase(tileSourceTemplatesProvider))
+								.withPreferenceFragmentIdProvider(createPreferenceFragmentIdProvider())
 								.build(),
 						SearchConfig
 								.builder(fragmentContainerViewId, fragmentActivity)
@@ -127,6 +132,10 @@ public class SettingsSearchButtonHelper {
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.withOnMergedPreferenceScreenAvailable(onMergedPreferenceScreenAvailable)
 				.build();
+	}
+
+	public static AppDatabaseConfig getAppDatabaseConfig() {
+		return AppDatabaseConfigFactory.createAppDatabaseConfigUsingPrepackagedDatabaseAssetFile();
 	}
 
 	private static ActivitySearchDatabaseConfigs createActivitySearchDatabaseConfigs() {
@@ -189,6 +198,22 @@ public class SettingsSearchButtonHelper {
 			@Override
 			public void onFinishComputePreferences() {
 				tileSourceTemplatesProvider.disableCache();
+			}
+		};
+	}
+
+	private static PreferenceFragmentIdProvider createPreferenceFragmentIdProvider() {
+		return new PreferenceFragmentIdProvider() {
+
+			private final DefaultPreferenceFragmentIdProvider delegate = new DefaultPreferenceFragmentIdProvider();
+			private int preferenceFragmentCounter = 1;
+
+			@Override
+			public String getId(final PreferenceFragmentCompat preferenceFragment) {
+				return String.join(
+						" ",
+						delegate.getId(preferenceFragment),
+						String.valueOf(preferenceFragmentCounter++));
 			}
 		};
 	}
