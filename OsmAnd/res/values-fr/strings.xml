@@ -5700,4 +5700,12 @@
     <string name="altitude_metrics_description">Définit l\'unité d\'affichage de l\'altitude dans les widgets et les statistiques.</string>
     <string name="write_location_provider_description">Enregistrer le fournisseur de localisation dans chaque point de la trace pendant l\'enregistrement d\'un itinéraire</string>
     <string name="write_location_provider">Enregistrer le fournisseur de localisation</string>
+    <string name="average_elevation">Altitude moyenne</string>
+    <string name="ascent">Montée</string>
+    <string name="descent">Descente</string>
+    <string name="map_orientations">Orientations de la carte</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Réponse</string>
+    <string name="map_orientations_choose_description">Laissez vide pour basculer entre tous les modes existants ou sélectionnez vos modes préférés.</string>
 </resources>
