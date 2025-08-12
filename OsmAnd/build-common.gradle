@@ -174,14 +174,14 @@ tasks.register('validateTranslations') {
 }
 
 tasks.register('downloadWorldMiniBasemap', Download) {
-	src 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf'
+	src 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf'
 	dest 'assets/World_basemap_mini.obf'
 	onlyIfModified true
 }
 
 tasks.register('downloadWorldMiniBasemapAnt') {
 	doLast {
-		ant.get(src: 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
+		ant.get(src: 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
 	}
 }
 
