@@ -321,7 +321,7 @@
     <string name="use_transparent_map_theme">透明主題</string>
     <string name="native_library_not_supported">此裝置不支援原生函式庫。</string>
     <string name="init_native_library">正在初始化原生函式庫…</string>
-    <string name="choose_auto_follow_route">地圖視角視角自動置中</string>
+    <string name="choose_auto_follow_route">地圖視角自動置中</string>
     <string name="choose_auto_follow_route_descr">>設定地圖自動置中，直到與目前位置同步。</string>
     <string name="auto_follow_route_navigation">只有導航時自動置中</string>
     <string name="auto_follow_route_navigation_descr">只有在導航時，地圖視圖自動置中。</string>
@@ -1271,7 +1271,7 @@
     <string name="rendering_attr_busRoutes_name">公車路線</string>
     <string name="impassable_road">避開的道路…</string>
     <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車路線</string>
-    <string name="rendering_category_hide">隱藏細節</string>
+    <string name="rendering_category_hide">細節隱藏</string>
     <string name="wake_on_voice">將螢幕開啟</string>
     <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (如果螢幕關閉)。</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>

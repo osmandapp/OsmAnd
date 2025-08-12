@@ -1254,7 +1254,7 @@
     <string name="anonymous_user_hint">匿名使用者不能：\n- 建立群組；\n- 以伺服器同步群組和裝置；\n- 在網站上的個人儀表板管理群組和裝置。</string>
     <string name="anonymous_user">匿名使用者</string>
     <string name="logged_as">已登入為 %1$s</string>
-    <string name="rendering_category_details">細節顯示</string>
+    <string name="rendering_category_details">顯示細節</string>
     <string name="rendering_category_transport">公共交通工具路線</string>
     <string name="rendering_category_others">其他地圖屬性</string>
     <string name="map_widget_appearance_rem">剩餘元件</string>
@@ -2077,7 +2077,7 @@
     <string name="quick_action_add_osm_bug_descr">在畫面中央新增 OSM 註記的按鈕。</string>
     <string name="quick_action_add_poi_descr">在畫面中央新增 POI 的按鈕。</string>
     <string name="navigate_point_olc">開放位置編碼 (OLC)</string>
-    <string name="navigate_point_"lc_info_invalidlc_info_invalid>無效的 OLC
+    <string name="navigate_point_olc_info_invalidlc_info_invalid">OLC 不正確
 \n</string>
     <string name="quick_action_navigation_voice_descr">停用或啟用導航時的語音導引開關。</string>
     <string name="quick_action_add_parking_descr">在畫面中央新增停車位置的按鈕。</string>
