@@ -14,7 +14,6 @@ import static net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.*;
 
@@ -110,10 +109,7 @@ class InstallMapLayersDialogFragmentFactory {
 
 							private void resetSearchDatabase() {
 								// FK-TODO: nur den Teil der Suchdatenbank neu berechnen, der sich geändert hat.
-								DatabaseResetter.resetDatabase(
-										DAOProviderFactory.getDAOProvider(
-												SettingsSearchButtonHelper.getAppDatabaseConfig(),
-												activity));
+								DatabaseResetter.resetDatabase(DAOProviderFactory.getDAOProvider(activity));
 							}
 						});
 	}
