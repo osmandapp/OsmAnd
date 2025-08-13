@@ -3217,11 +3217,11 @@
     <string name="settings_item_import_error">Sikertelen importálás innen: \'%1$s\'.</string>
     <string name="ui_customization">Felhasználói felület testreszabása</string>
     <string name="shared_string_drawer">Menü</string>
-    <string name="reorder_or_hide_from">%1$s után az elemek átrendezése vagy elrejtése.</string>
+    <string name="reorder_or_hide_from">Az elemek átrendezése vagy elrejtése ebben: %1$s.</string>
     <string name="shared_string_divider">Elválasztó</string>
     <string name="divider_descr">Az e pont alatti elemek el vannak különítve egy elválasztóval.</string>
     <string name="hidden_items_descr">Ezek az elemek a menüből elrejtésre kerültek, azonban az általuk képviselt beállítások vagy bővítmények továbbra is érvényben maradnak.</string>
-    <string name="main_actions_descr">Csak 4 gomb lehet.</string>
+    <string name="main_actions_descr">Maximum 4 gomb.</string>
     <string name="multimedia_use_system_camera">Rendszeralkalmazás használata</string>
     <string name="multimedia_photo_play_sound">Fényképező zárhang</string>
     <string name="osm_authorization_success">Hitelesítés sikeres</string>
@@ -3969,7 +3969,7 @@
     <string name="online_maps_searching_descr">Online keresés…</string>
     <string name="reset_to_original">Visszaállítás az eredetire</string>
     <string name="backup_error_no_subscription">Nincs előfizetés</string>
-    <string name="map_updates_for_mappers">Térképfrissítések térképészeknek</string>
+    <string name="map_updates_for_mappers">Térképfrissítések térképszerkesztőknek</string>
     <string name="use_login_and_password">Felhasználónév és jelszó használata</string>
     <string name="available_until">Elérhető eddig: %1$s</string>
     <string name="purchases_restored">Visszaállított vásárlások</string>
@@ -4133,7 +4133,7 @@
     <string name="turn_arrows_descr">Adja meg, hogy a kanyarodást jelző nyilak látszódjanak-e az útvonalon.</string>
     <string name="turn_arrows">Bekanyarodást jelző nyilak</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Fixme címkék (javítandó objektumok) megjelenítése</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Note (térképészeknek szóló megjegyzés) címkék megjelenítése</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Note (térképszerkesztői megjegyzés) címkék megjelenítése</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonok kis nagyításnál</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonok sematikus megjelenítése kis nagyításnál</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Vízi alagutak láthatóságának fokozása</string>
