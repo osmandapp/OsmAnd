@@ -1296,7 +1296,7 @@
     <string name="distance_by_tap_use_description">點擊地圖以檢視您目前位置與點擊點之間的距離。 \n用兩根手指在地圖上點擊以檢視與點擊點之間的距離</string>
     <string name="display_position">顯示位置</string>
     <string name="download_heightmap_maps">高度圖</string>
-    <string name="favorite_confirm_delete_group">是否刪除「%1s」群組與其中所有包含的點 (%2$d) 嗎？</string>
+    <string name="favorite_confirm_delete_group">是否刪除「%1$s」群組與其中所有包含的點 (%2$d) 嗎？</string>
     <string name="favorite_delete_group">刪除群組</string>
     <string name="available_as_part_of_subscription_plan">作為 %1$s 訂閱的一部分提供。</string>
     <string name="included_in_your_current_plan">已包含在您目前的「%1$s」方案中</string>

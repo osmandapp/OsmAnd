@@ -4299,7 +4299,7 @@
     <string name="download_tiles">下載圖磚</string>
     <string name="available_as_part_of_subscription_plan">作為 %1$s 訂閱的一部分提供。</string>
     <string name="included_in_your_current_plan">已包含在您目前的「%1$s」方案中</string>
-    <string name="favorite_confirm_delete_group">是否刪除「%1s」群組與其中所有包含的點 (%2$d) 嗎？</string>
+    <string name="favorite_confirm_delete_group">是否刪除「%1$s」群組與其中所有包含的點 (%2$d) 嗎？</string>
     <string name="favorite_delete_group">刪除群組</string>
     <string name="download_heightmap_maps">高度圖</string>
     <string name="shared_string_normal">正常</string>
